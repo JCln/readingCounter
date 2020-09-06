@@ -1,0 +1,43 @@
+@import '../../../assets/variable.scss';
+
+.clock {
+  position: absolute;
+  right: 1vw;
+  top: 13vh;
+}
+
+.analog-clock {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  background-color: $blue_d;
+  border-radius: 50%;
+}
+
+.hand {
+  position: absolute;
+  left: 50%;
+  width: 4px;
+  height: 50%;
+  transform-origin: 100% 100%;
+}
+
+.hour, .minute {
+  background: $white;
+}
+.hour {
+  height: 48%;
+}
+
+.center-circle {
+  vertical-align: center;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: $white;
+  border-radius: 50%;
+  vertical-align: center;
+}
