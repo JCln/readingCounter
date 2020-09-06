@@ -12,9 +12,7 @@ html {
   margin: 0;
   height: 100%;
   position: relative;
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
   scroll-behavior: smooth;
-
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -22,6 +20,18 @@ html {
 *::before,
 *::after {
   box-sizing: border-box;
+  outline: none;
+  font-family: BLotus;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
 
 img {

@@ -1,0 +1,56 @@
+@import '../../../assets/variable.scss';
+@import '../../../assets/input.scss';
+@import '../../../assets/button.scss';
+
+main {
+  min-width: 20rem;
+  max-width: 25rem;
+  width: calc(100% - 10vw);
+  margin: auto;
+  height: calc(100% - 25vw);
+  padding: 2rem 2rem 1rem;
+  background: $gray_l;
+  text-align: center;
+  box-shadow: 2px 2px 5px 0px $gray_d;
+
+  transform: translateY(-50%) translateX(-50%);
+  top: 50%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-weight: 600;
+  color: $blue_dr;
+  font-size: 2.87rem;
+}
+
+._inputs {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  border: $blue_dr;
+
+  input::placeholder {
+    color: $blue_l;
+  }
+}
+
+._inputs,
+.version {
+  margin-top: auto;
+}
+
+.btn_1 {
+  color: $white;
+}
+
+.version {
+  color: $blue_dr;
+  font-size: 1.3rem;
+  font-weight: 600;
+}

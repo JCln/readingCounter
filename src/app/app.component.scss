@@ -1,7 +1,13 @@
-svg#clouds {
+@import '../assets/variable';
+
+.polygon::after {
+  content: '';
   position: fixed;
-  bottom: -160px;
-  left: -230px;
-  z-index: -10;
-  width: 1920px;
+  background: $blue_d;
+  clip-path: polygon(0 0, calc(100% - 20vw) 0%, calc(100% - 70vw) 100%, 0 100%);
+  top: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
 }

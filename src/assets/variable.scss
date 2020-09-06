@@ -1,0 +1,32 @@
+$white: #fff;
+$blue_l:#116FFF;
+$blue_d: #002CA8;
+$blue_dr: #111166;
+$gray_l: #F2F3F4;
+$gray_d: #CBCBCB;
+
+$medium_slate_blue: #7d83ff;
+
+.hr_1 {
+  width: 70%;
+  margin-bottom: 1.5rem;
+  height: .4rem;
+  border-radius: 30px;
+  // background: $c_light_gray;
+}
+
+.hr_2 {
+  opacity: .7;
+  width: 70%;
+  margin: 2.5rem auto;
+  height: .2rem;
+  border-radius: 30px;
+  // background: $c_light_gray;
+}
+
+// unique shape on hover and focus
+a:hover,
+a:focus,
+a:active {
+  outline: none;
+}
