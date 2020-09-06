@@ -4,11 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { GuardService } from './auth/guard.service';
 import { LoginComponent } from './auth/login/login.component';
+import { LayoutComponent } from './core/_layouts/layout/layout.component';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', component: AppComponent, canActivate: [GuardService] }
+  {
+    path: '', component: LayoutComponent, children: [
+      { path: '', component: AppComponent, canActivate: [GuardService] },
+      { path: 'login', component: LoginComponent }
+    ]
+  }
 ];
 
 @NgModule({
