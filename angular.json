@@ -25,10 +25,17 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/web.config",
+              "src/.htaccess",
+              {
+                "glob": "**/*",
+                "input": "src/assets/",
+                "output": "/assets"
+              }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": []
           },
@@ -123,6 +130,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "readingcounter"
+    }
+  },
+  "defaultProject": "readingcounter",
+  "cli": {
+    "analytics": false
+  }
 }
