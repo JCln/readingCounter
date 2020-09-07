@@ -23,9 +23,9 @@ export class ClockComponent implements AfterViewInit {
 
   animateAnalogClock() {
     this.hourHand.nativeElement.style.transform
-      = `translate3d(-50%, 0, 0) rotate(${(this.hour * 30) + (this.minute * 0.5) + (this.second * (0.5 / 60))}deg)`;
+      = `translateY(-100%) rotate(${(this.hour * 30) + (this.minute * 0.5) + (this.second * (0.5 / 60))}deg)`;
     this.minuteHand.nativeElement.style.transform
-      = `translate3d(-50%, 0, 0) rotate(${(this.minute * 6) + (this.second * 0.1)}deg)`;
+      = `translateY(-100%) rotate(${(this.minute * 6) + (this.second * 0.1)}deg)`;
   }
 
   getTime() {
