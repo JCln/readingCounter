@@ -3,6 +3,10 @@
 
 ul {
   display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  background: lightslategray;
+  border-radius: 15px;
 }
 
 li {

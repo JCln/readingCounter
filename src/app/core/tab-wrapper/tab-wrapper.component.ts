@@ -41,7 +41,13 @@ export class TabWrapperComponent implements OnInit {
     })
   }
 
-  
+  closeButtonClicked = (routerUrl: string) => {
+    const a = this.tabs.filter(item => {
+      return item.routerUrl !== routerUrl;
+    })
+    this.tabs = a;
+  }
+
   ngOnInit(): void {
 
 

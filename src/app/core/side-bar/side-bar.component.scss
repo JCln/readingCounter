@@ -1,0 +1,63 @@
+@import '../../../assets/variable.scss';
+
+ul {
+  direction: rtl;
+  list-style-type: none;
+  padding: $font_xs 0 $font_xs $font_xs;
+
+  li {
+    display: flex;
+    align-items: center;
+    text-align: right;
+    padding-right: $font_xs;
+    width: 100%;
+    border-radius: $font_2 0 0 $font_2;
+    height: $font_3;
+    background: $gray_l;
+    margin-bottom: 0.5rem;
+    font-size: $font_m;
+    color: $gray_dr;
+    font-weight: 600;
+
+    &::before {
+      content: '';
+      width: 2rem;
+      height: 2rem;
+      background: blue;
+      margin-left: .3rem;
+    }
+
+    .mr-auto {
+      background: $gray_l;
+      color: $blue-d;
+      border-radius: $border_50;
+      font-size: $font_m;
+      margin-right: auto;
+      margin-left: .4rem;
+    }
+  }
+}
+
+ul::after {
+  content: '';
+  position: absolute;
+  background: $gray_dr;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
+  top: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+ul::before {
+  content: '';
+  position: absolute;
+  background: $gray_d;
+  clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
+  top: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}

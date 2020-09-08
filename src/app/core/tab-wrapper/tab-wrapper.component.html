@@ -3,14 +3,7 @@
         <li *ngFor="let tab of tabs" [routerLink]="['/'+ tab.routerUrl]" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">
             {{tab.name}}
-            <i class="fa fa-window-close"></i>
+            <i (click)="closeButtonClicked(tab.routerUrl)" class="fa fa-window-close"></i>
         </li>
-        <!-- <li [routerLink]="['/wr']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            مدیریت کاربران
-            <i class="fa fa-window-close"></i>
-        </li>
-        <li [routerLink]="['/wr/foo']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            گزارشگیری
-        </li> -->
     </ul>
 </section>
