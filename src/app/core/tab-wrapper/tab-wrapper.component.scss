@@ -1,0 +1,64 @@
+@import '../../../assets/variable.scss';
+
+
+ul {
+  display: flex;
+}
+
+li {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: .5rem;
+  min-width: 10rem;
+  height: 3.87rem;
+  border-radius: $border_s;
+  color: $gray_dr;
+  background: $gray_l;
+  list-style-type: none;
+  font-size: $font_m;
+  font-weight: 600;
+  
+  &:hover,
+  &:focus {
+    .fa {
+      display: block;
+    }
+  }
+
+  .fa {
+    display: none;
+    position: absolute;
+    right: .5rem;
+    transform: translateY(-50%);
+    top: 50%;
+    width: $font_xs;
+    height: $font_xs;
+    margin-left: auto;
+    color: red;
+    border-radius: 2rem;
+  }
+}
+
+li::before {
+  content: '';
+  display: none;
+  position: absolute;
+  top: 0;
+  border-radius: 15px;
+  height: .3rem;
+  width: 90%;
+  background: $blue_l;  
+}
+
+li.active,
+li:active {
+  color: $blue_l;
+  background: $white;
+}
+
+li.active::before,
+li:active::before {
+  display: inline-block;
+}
