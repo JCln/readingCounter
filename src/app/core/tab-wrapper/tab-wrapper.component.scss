@@ -19,9 +19,11 @@ li {
   list-style-type: none;
   font-size: $font_m;
   font-weight: 600;
-  
-  &:hover,
-  &:focus {
+  cursor: pointer;
+
+  &:hover {
+    background: $gray_l;
+
     .fa {
       display: block;
     }
@@ -49,7 +51,7 @@ li::before {
   border-radius: 15px;
   height: .3rem;
   width: 90%;
-  background: $blue_l;  
+  background: $blue_l;
 }
 
 li.active,
