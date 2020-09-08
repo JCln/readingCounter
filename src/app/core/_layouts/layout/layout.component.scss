@@ -1,0 +1,17 @@
+.left {
+  width: 80%;
+}
+
+app-clock {
+  position: absolute;
+  right: 1vw;
+  top: 2vh;
+}
+
+app-side-bar {
+  position: absolute;
+  right: 1vw;
+  top: 20vh;
+  width: 15rem;
+  min-height: 70vh;
+}

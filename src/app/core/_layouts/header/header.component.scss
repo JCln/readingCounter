@@ -1,16 +1,9 @@
 .header {
   overflow: hidden;
   background-color: #f1f1f1;
-  height: 4.5rem;
-}
-
-.header a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 25px;
-  border-radius: 4px;
+  
+  ._logo_content {
+    width: 3rem;
+    height: 3rem;    
+  }
 }

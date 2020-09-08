@@ -26,24 +26,41 @@
 
 .hour {
   width: $font_xxs;
-  height: 1.5rem;
-  z-index: 2;
+  height: $font_l;
 }
 
 .minute {
   width: $font_xxs;
-  height: 3rem;
-  z-index: 3;
+  height: $font_3;
 }
 
 .center-circle {
+  z-index: 1;
   position: absolute;
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
-  width: 1rem;
-  height: 1rem;
+  width: $font_xxs;
+  height: $font_xxs;
   background-color: $white;
   border-radius: 50%;
   vertical-align: middle;
+}
+
+.analog-clock::before,
+.analog-clock::after {
+  content: '';
+  position: absolute;
+  height: .5rem;
+  width: .2rem;
+  background: $white;
+  left: 50%;
+}
+
+.analog-clock::before {
+  top: 0;
+}
+
+.analog-clock::after {
+  bottom: 0;
 }
