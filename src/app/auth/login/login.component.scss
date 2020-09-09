@@ -16,7 +16,6 @@ main {
   left: 50%;
   border-radius: $border_s;
   background: $gray_l;
-  text-align: center;
   box-shadow: 2px 2px 5px 0px $gray_d;
 }
 
@@ -61,12 +60,15 @@ main {
   color: $blue_l;
 
   i {
+    position: absolute;
+    transform: translateY(50%);
     vertical-align: middle;
     margin-left: -2.5rem;
     font-size: $font_l;
+
+    &.fa-key {
+      transform: rotate(180deg) translateY(-50%);
+    }
   }
 
-  i.fa-key {
-    transform: rotate(180deg);
-  }
 }
