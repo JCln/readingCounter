@@ -2,6 +2,7 @@
     <ul>
         <li *ngFor="let tab of tabs" [routerLink]="['/'+ tab.routerUrl]" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">
+            <i class="fa fa-circle-notch" aria-hidden="true"></i>
             {{tab.name}}
             <i (click)="closeButtonClicked(tab.routerUrl)" class="fa fa-window-close"></i>
         </li>

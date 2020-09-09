@@ -25,16 +25,26 @@ li {
   font-weight: 600;
   cursor: pointer;
 
-  &:hover {
-    background: $gray_l;
+  .fa-circle-notch {
+    position: absolute;
+    left: .5rem;
+    transform: translateY(-50%);
+    top: 50%;
+    width: $font_xs;
+    height: $font_xs;
+    margin-left: auto;
+    border-radius: 2rem;
+    color: $gray_d;
+    opacity: 0;
+    transition: opacity 50ms ease-in-out;
 
-    .fa {
-      display: block;
+    &:hover {
+      color: $gray_dr;
+      opacity: 1;
     }
   }
 
-  .fa {
-    display: none;
+  .fa-window-close {
     position: absolute;
     right: .5rem;
     transform: translateY(-50%);
@@ -42,14 +52,29 @@ li {
     width: $font_xs;
     height: $font_xs;
     margin-left: auto;
-    color: red;
     border-radius: 2rem;
+    color: $gray_d;
+    opacity: 0;
+    transition: opacity 50ms ease-in-out;
+
+    &:hover {
+      color: $gray_dr;
+    }
   }
+
+  &:hover {
+    background: $gray_d5;
+
+    .fa {
+      opacity: 1;
+    }
+  }
+
 }
 
 li::before {
   content: '';
-  display: none;
+  visibility: hidden;
   position: absolute;
   top: 0;
   border-radius: 15px;
@@ -66,5 +91,5 @@ li:active {
 
 li.active::before,
 li:active::before {
-  display: inline-block;
+  visibility: visible;
 }

@@ -45,6 +45,7 @@ ul::after {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
   bottom: 0;
+  border-radius: 15px;
   min-width: 100%;
   min-height: 100%;
   z-index: -1;
@@ -57,6 +58,7 @@ ul::before {
   clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
   top: 0;
   bottom: 0;
+  border-radius: 15px;
   min-width: 100%;
   min-height: 100%;
   z-index: -1;
