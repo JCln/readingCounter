@@ -1,5 +1,11 @@
 @import '../assets/variable';
 
+app-clock {
+  display: flex;
+  justify-content: flex-end;
+  margin: .2rem;
+}
+
 .polygon::after {
   content: '';
   position: fixed;

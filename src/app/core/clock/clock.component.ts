@@ -40,12 +40,4 @@ export class ClockComponent implements AfterViewInit {
 
   }
 
-  toggle() {
-    if (this.isRunning) {
-      clearInterval(this.timerId);
-    } else { this.getTime(); }
-
-    this.isRunning = !this.isRunning;
-  }
-
 }

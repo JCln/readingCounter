@@ -1,17 +1,17 @@
-.left {
-  width: 80%;
-}
-
-app-clock {
+app-tab-wrapper {
   position: absolute;
-  right: 1vw;
-  top: 2vh;
+  background: #F2F3F4;
+  top: 3rem;
+  width: 78%;
+  left: 0;
+  right: 15rem;
+  border-radius: 0 0 15px 15px;  
 }
 
 app-side-bar {
   position: absolute;
   right: 1vw;
-  top: 20vh;
+  margin-top: 1rem;
   width: 15rem;
   min-height: 70vh;
 }
