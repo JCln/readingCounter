@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { WrapperRoutingModule } from './wrapper-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FrameWorkComponent } from './frame-work/frame-work.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, FrameWorkComponent],
   imports: [
     CommonModule,
     WrapperRoutingModule

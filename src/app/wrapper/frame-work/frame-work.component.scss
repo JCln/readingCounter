@@ -1,0 +1,30 @@
+@import '../../../assets/variable.scss';
+
+main {
+  width: 75vw;
+  min-height: 70vh;
+  border-radius: $border_s;
+  background: $gray_l;
+  border-top: .2rem solid $orange;
+  box-shadow: 2px 2px 5px 0px $gray_d;
+  margin: 0 $font_05;
+  padding: $font_05;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  border-radius: $border_s;
+  padding: .2rem $font_xs;
+  margin-bottom: .2rem;
+  background: $white;
+
+  .title {
+    color: $blue_d;
+  }
+}
+
+._logo_content {
+  width: $font_3;
+  height: $font_3;
+}

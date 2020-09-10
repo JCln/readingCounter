@@ -15,7 +15,7 @@ li {
   justify-content: center;
   align-items: center;
   margin: 0.15rem;
-  min-width: 10rem;
+  min-width: 11rem;
   height: 3.87rem;
   border-radius: $border_s;
   color: $gray_dr;
@@ -34,12 +34,12 @@ li {
     height: $font_xs;
     margin-left: auto;
     border-radius: 2rem;
-    color: $gray_d;
+    color: $gray_dr;
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $gray_dr;
+      color: $gray_dr2;
       opacity: 1;
     }
   }
@@ -53,12 +53,12 @@ li {
     height: $font_xs;
     margin-left: auto;
     border-radius: 2rem;
-    color: $gray_d;
+    color: $gray_dr;
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $gray_dr;
+      color: $gray_dr2;
     }
   }
 
