@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
@@ -13,7 +14,7 @@ export class TabWrapperComponent implements OnInit {
   tabs: ISidebarItems[] = [];
   currentRoute: ISidebarItems[];
 
-  constructor(private router: Router, private sidebarItems: SidebarItemsService) {
+  constructor(private router: Router, private sidebarItems: SidebarItemsService, private _location: Location) {
     this.currentRoute = this.sidebarItems.getSideBarItems();
   }
 
@@ -40,17 +41,41 @@ export class TabWrapperComponent implements OnInit {
       }
     })
   }
+  isNull = (value: any) => typeof value === 'undefined' || !value || value.length === 0;
+
+  // isLatestTab = () => {
+  //   const a = this.tabs.map(item => {
+  //     return item;
+  //   })
+
+  //   if (this.isNull(a[0]))
+  //     this.router.navigateByUrl('/wr');
+  //   else {
+  //     this.backToPreviousPage();
+  //   }
+  // }
+
+  backToPreviousPage = () => this._location.back();
 
   closeButtonClicked = (routerUrl: string) => {
+    console.log(routerUrl);
+    
     const a = this.tabs.filter(item => {
+      console.log(item.routerUrl);
+      
       return item.routerUrl !== routerUrl;
     })
     this.tabs = a;
+    this.backToPreviousPage();
+    // this.isLatestTab();
+  }
+  addDashboardTab = () => {
+    const a = { routerUrl: '/wr', name: 'مدیریت کاربران', isClosable: false, isRefreshable: false };
+    this.tabs.push(a);
   }
 
   ngOnInit(): void {
-
-
+    this.addDashboardTab();
     this.checkRouteStatus();
   }
 

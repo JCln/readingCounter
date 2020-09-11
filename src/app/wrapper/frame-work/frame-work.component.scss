@@ -1,8 +1,9 @@
 @import '../../../assets/variable.scss';
+@import '../../../assets/mixins.scss';
 
 main {
   width: 75vw;
-  min-height: 70vh;
+  min-height: 75vh;
   border-radius: $border_s;
   background: $gray_l;
   border-top: .2rem solid $orange;
@@ -27,4 +28,19 @@ main {
 ._logo_content {
   width: $font_3;
   height: $font_3;
+}
+
+.btn_1 {
+  background-color: $gray_l;
+  margin-left: $font_xs;
+  width: 4rem;
+  height: $font_2;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  
+  .fa-question {
+    color: $orange;
+    font-size: 1.2rem;
+  }
 }

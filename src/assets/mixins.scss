@@ -4,3 +4,20 @@
   justify-content: center;
   align-items: center;
 }
+
+.d_flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.d_grid_center {
+  display: grid;
+  place-items: center;
+}
+
+// mixin for d_grid_center
+@mixin d_grid_center {
+  display: grid;
+  place-items: center;
+}
