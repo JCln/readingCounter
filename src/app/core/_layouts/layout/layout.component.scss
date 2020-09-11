@@ -11,8 +11,9 @@ app-tab-wrapper {
 }
 
 app-side-bar {
-  position: absolute;
+  position: fixed;
   right: 1vw;
   width: 15rem;
-  min-height: 70vh;
+  min-height: 75vh;
+  overflow-y: auto;
 }
