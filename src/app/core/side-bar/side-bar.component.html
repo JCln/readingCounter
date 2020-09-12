@@ -1,8 +1,10 @@
 <div class="" id="mySidebar">
     <!-- <button class="" onclick="w3_close()">Close &times;</button> -->
     <ul>
-        <li *ngFor="let item of currentRoute" [routerLink]="['/'+ item.routerUrl]">
-            <i class="fa fa-bar-chart"></i>
+        <li *ngFor="let item of currentRoute" [routerLink]="[item.routerUrl]">
+            <div class="_right_chart">
+                <i class="fa fa-bar-chart"></i>
+            </div>
             {{item.name}}
             <i class="fa fa-arrow-circle-down mr-auto"></i>
         </li>

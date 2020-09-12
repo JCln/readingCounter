@@ -2,9 +2,9 @@
     <ul>
         <li *ngFor="let tab of tabs" [routerLink]="['/'+ tab.routerUrl]" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">
-            <i *ngIf="tab.isRefreshable" class="fa fa-circle-notch" aria-hidden="true"></i>
+            <i *ngIf="tab.isRefreshable" class="fa fa-refresh" aria-hidden="true"></i>
             {{tab.name}}
-            <i *ngIf="tab.isClosable" (click)="closeButtonClicked(tab.routerUrl)" class="fa fa-window-close"></i>
+            <i *ngIf="tab.isClosable" (click)="closeButtonClicked(tab.routerUrl)" class="fa fa-close"></i>
         </li>
     </ul>
 </section>

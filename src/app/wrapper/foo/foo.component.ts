@@ -12,7 +12,7 @@ export class FooComponent implements OnInit {
   constructor(private readonly interactionService: InteractionService) { }
 
   ngOnInit(): void {
-    this.interactionService.setPageTitle('foo');
+    this.interactionService.setPageTitle('گزارش گیری');
   }
 
 }

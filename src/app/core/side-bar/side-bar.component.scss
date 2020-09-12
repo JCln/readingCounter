@@ -19,11 +19,7 @@ ul {
     color: $gray_dr;
     font-weight: 600;
 
-    &::before {
-      content: '';
-      width: 2rem;
-      height: 2rem;
-      background: blue;
+    ._right_chart {
       margin-left: .3rem;
     }
 
@@ -34,6 +30,9 @@ ul {
       font-size: $font_m;
       margin-right: auto;
       margin-left: .4rem;
+    }
+    i {
+      vertical-align: middle;
     }
   }
 }

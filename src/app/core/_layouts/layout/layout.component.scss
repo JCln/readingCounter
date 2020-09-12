@@ -1,8 +1,9 @@
 app-tab-wrapper {
+  background: url(/assets/imgs/tabWrapper/9.jpg) no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background: #F2F3F4;
   top: 3rem;
   min-height: 7rem;
   margin-bottom: 0.5rem;

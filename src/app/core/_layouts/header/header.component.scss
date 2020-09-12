@@ -1,10 +1,42 @@
+@import '../../../../assets/variable.scss';
+@import '../../../../assets/mixins.scss';
+@import './hamburger';
+
 .header {
+  display: flex;
+  align-items: center;
   overflow: hidden;
   background-color: #fff;
-  height: 3rem;
+  height: 3.5rem;
+}
 
-  ._logo_content {
-    width: 3rem;
-    height: 3rem;
-  }
+ul {
+  margin-right: auto;
+  display: flex;
+}
+
+li {
+  @include d_grid_center();
+  margin: 0 .5rem;
+  border-radius: 15px;
+  max-width: 11rem;
+  width: 11rem;
+  height: 2.87rem;
+  background: $gray_e3;
+  color: $gray_dr2;
+  text-align: center;
+  list-style-type: none;
+  cursor: pointer;
+
+  font-size: $font_m;
+  font-weight: 600;
+}
+._user {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.menu_toggle {
+  margin-right: 20%;
 }

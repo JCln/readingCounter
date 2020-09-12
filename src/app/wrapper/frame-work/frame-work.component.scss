@@ -5,7 +5,7 @@ main {
   width: 75vw;
   min-height: 75vh;
   border-radius: $border_s;
-  background: $gray_l;
+  background: url('/assets/imgs/framework/1.svg') $gray_l;
   border-top: .2rem solid $orange;
   box-shadow: 2px 2px 5px 0px $gray_d;
   margin: 0 $font_05;
@@ -17,8 +17,9 @@ main {
   justify-content: space-between;
   border-radius: $border_s;
   padding: .2rem $font_xs;
-  margin-bottom: .2rem;
+  margin-bottom: $font_05;
   background: $white;
+  border-bottom: .2rem solid $blue_dr;
 
   .title {
     color: $blue_d;
@@ -26,8 +27,8 @@ main {
 }
 
 ._logo_content {
-  width: $font_3;
-  height: $font_3;
+  width: 4.5rem;
+  height: 3.2rem;
 }
 
 .btn_1 {
@@ -38,7 +39,7 @@ main {
   border-radius: 15px;
   border: none;
   cursor: pointer;
-  
+
   .fa-question {
     color: $orange;
     font-size: 1.2rem;

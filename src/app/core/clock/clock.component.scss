@@ -5,31 +5,32 @@
   position: relative;
   width: 7rem;
   height: 7rem;
-  background-color: $blue_d;
+  background:url(/assets/imgs/clock/2.jpg);
+  background-size: cover;
   border-radius: 50%;
 }
 
 .hand {
   @include d_grid_center();
-  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  border-radius: 3px 3px 0 0;
   position: absolute;
   top: 50%;
   transform-origin: 50% 100%;
 }
 
-.hour,
-.minute {
-  background: $white;
-}
-
 .hour {
-  width: $font_xxs;
-  height: $font_l;
+  --font_xs: 1rem;
+  width: .35rem;
+  height: calc(var(--font_xs) + .8rem);
+  // background: $white;
+  background: $blue_l;
 }
 
 .minute {
-  width: $font_xxs;
+  width: .3rem;
   height: $font_3;
+  // background: $gray_l;
+  background: $blue_d;
 }
 
 .center-circle {
@@ -40,25 +41,26 @@
   transform: translate(50%, -50%);
   width: $font_xxs;
   height: $font_xxs;
-  background-color: $white;
+  // background-color: $white;
+  background-color: $blue_l;
   border-radius: 50%;
   vertical-align: middle;
 }
 
-.analog-clock::before,
-.analog-clock::after {
-  content: '';
-  position: absolute;
-  height: .5rem;
-  width: .2rem;
-  background: $white;
-  left: 50%;
-}
+// .analog-clock::before,
+// .analog-clock::after {
+//   content: '';
+//   position: absolute;
+//   height: .5rem;
+//   width: .2rem;
+//   background: $white;
+//   left: 50%;
+// }
 
-.analog-clock::before {
-  top: 0;
-}
+// .analog-clock::before {
+//   top: 0;
+// }
 
-.analog-clock::after {
-  bottom: 0;
-}
+// .analog-clock::after {
+//   bottom: 0;
+// }

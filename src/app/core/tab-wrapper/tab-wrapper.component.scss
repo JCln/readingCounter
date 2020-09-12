@@ -1,15 +1,15 @@
 @import '../../../assets/variable.scss';
-
+@import '../../../assets/mixins.scss';
 
 ul {
   display: flex;
-  justify-content: flex-end;
   flex-wrap: wrap;
+  direction: rtl;
   border-radius: 15px;
   margin: .2rem;
 }
 
-li {
+li {  
   position: relative;
   display: flex;
   justify-content: center;
@@ -19,38 +19,40 @@ li {
   height: 3.87rem;
   border-radius: $border_s;
   color: $gray_dr;
-  background: $gray_d;
   list-style-type: none;
   font-size: $font_m;
   font-weight: 600;
+  background: $gray_d;
   cursor: pointer;
 
-  .fa-circle-notch {
+  .fa-refresh {
+    @include d_flex_center();
     position: absolute;
-    left: .5rem;
+    left: 0;
     transform: translateY(-50%);
     top: 50%;
-    width: $font_xs;
-    height: $font_xs;
-    margin-left: auto;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-right: auto;
     border-radius: 2rem;
     color: $gray_dr;
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $gray_dr2;
-      opacity: 1;
+      color: $blue_l;
+      background: $gray_d5;
     }
   }
 
-  .fa-window-close {
+  .fa-close {
+    @include d_flex_center();
     position: absolute;
-    right: .5rem;
+    right: 0;
     transform: translateY(-50%);
     top: 50%;
-    width: $font_xs;
-    height: $font_xs;
+    width: 2.2rem;
+    height: 2.2rem;
     margin-left: auto;
     border-radius: 2rem;
     color: $gray_dr;
@@ -58,15 +60,17 @@ li {
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $gray_dr2;
+      color: $red;
+      background: $gray_d5;
     }
   }
 
   &:hover {
-    background: $gray_d5;
 
+    background: $gray_d5;
     .fa {
       opacity: 1;
+
     }
   }
 
@@ -74,7 +78,7 @@ li {
 
 li::before {
   content: '';
-  visibility: hidden;
+  opacity: 0;
   position: absolute;
   top: 0;
   border-radius: 15px;
@@ -83,13 +87,11 @@ li::before {
   background: $blue_l;
 }
 
-li.active,
-li:active {
+li.active {
   color: $blue_l;
-  background: $white;
+  background: $gray_e3;
 }
 
-li.active::before,
-li:active::before {
-  visibility: visible;
+li.active::before {
+  opacity: 1;
 }

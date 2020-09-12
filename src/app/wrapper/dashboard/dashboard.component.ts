@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
   constructor(private readonly interactionService: InteractionService) { }
 
   ngOnInit(): void {
-    this.interactionService.setPageTitle('داشبورد');
+    this.interactionService.setPageTitle('مدیریت کاربران');
   }
 
 }
