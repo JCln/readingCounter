@@ -39,7 +39,13 @@ img {
   height: 100%;
 }
 
-button, input,li {
+a {
+  text-decoration: none;
+}
+
+button,
+input,
+li {
   outline: none;
   font-family: inherit;
 }

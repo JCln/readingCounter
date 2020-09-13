@@ -10,6 +10,7 @@ import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
 })
 export class SideBarComponent implements OnInit {
   currentRoute: ISidebarItems[];
+  // subItems: HTMLElement;
 
   constructor(private sideBarItemsService: SidebarItemsService) {
     this.currentRoute = this.sideBarItemsService.getSideBarItems();
@@ -18,17 +19,19 @@ export class SideBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  w3_open() {
-    document.getElementById("main").style.marginLeft = "25%";
-    document.getElementById("mySidebar").style.width = "25%";
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("openNav").style.display = 'none';
+  openDialog(val: string) {
+    location.hash = val;
+    event.preventDefault();
   }
-
-  w3_close() {
-    document.getElementById("main").style.marginLeft = "0%";
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("openNav").style.display = "inline-block";
+  toggleSubItems = (item: ISidebarItems): void => {
+    this.currentRoute.filter(aItem => {
+      if (item.isOpenItems !== aItem.isOpenItems)
+        aItem.isOpenItems = false
+    })
+    if (item.isOpenItems)
+      item.isOpenItems = false;
+    else
+      item.isOpenItems = true;
   }
 
 }
