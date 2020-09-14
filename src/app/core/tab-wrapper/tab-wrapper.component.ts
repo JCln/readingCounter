@@ -70,7 +70,7 @@ export class TabWrapperComponent implements OnInit {
     // this.isLatestTab();
   }
   addDashboardTab = () => {
-    const a = { routerUrl: '/wr', name: 'مدیریت کاربران', isClosable: false, isRefreshable: false, isOpenItems: false };
+    const a = { routerUrl: '/wr', name: 'مدیریت کاربران', isClosable: false, isRefreshable: false, sid_isOpenItems: false, sid_isSmall: false };
     this.tabs.push(a);
   }
 

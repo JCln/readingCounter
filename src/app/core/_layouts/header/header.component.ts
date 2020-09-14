@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  private sideBar: boolean = true;
+  @Output() sidebarEvent = new EventEmitter<boolean>();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  setSidebar = () => {
+    this.sideBar = !this.sideBar;
+    this.sidebarEvent.emit(this.sideBar);
   }
-
 }

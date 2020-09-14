@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ISidebarItems } from 'src/app/Interfaces/isidebar-items';
 
 import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
@@ -9,9 +9,9 @@ import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
   styleUrls: ['./side-bar.component.scss']
 })
 export class SideBarComponent implements OnInit {
+  @Input() sid_isSmall: boolean;
   currentRoute: ISidebarItems[];
-  // subItems: HTMLElement;
-
+  
   constructor(private sideBarItemsService: SidebarItemsService) {
     this.currentRoute = this.sideBarItemsService.getSideBarItems();
   }
@@ -25,13 +25,16 @@ export class SideBarComponent implements OnInit {
   }
   toggleSubItems = (item: ISidebarItems): void => {
     this.currentRoute.filter(aItem => {
-      if (item.isOpenItems !== aItem.isOpenItems)
-        aItem.isOpenItems = false
+      if (item.sid_isOpenItems !== aItem.sid_isOpenItems)
+        aItem.sid_isOpenItems = false
     })
-    if (item.isOpenItems)
-      item.isOpenItems = false;
+    if (item.sid_isOpenItems)
+      item.sid_isOpenItems = false;
     else
-      item.isOpenItems = true;
+      item.sid_isOpenItems = true;
+  }
+  sid_isSmallStatus = () => {
+    this.sid_isSmall = !this.sid_isSmall;
   }
 
 }
