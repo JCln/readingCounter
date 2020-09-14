@@ -1,5 +1,5 @@
-<app-header></app-header>
+<app-header (sidebarEvent)=changeSidebarStatus($event)></app-header>
 <app-tab-wrapper></app-tab-wrapper>
 <router-outlet>
-    <app-side-bar></app-side-bar>
+    <app-side-bar [sid_isSmall]="sidebarStatus"></app-side-bar>
 </router-outlet>

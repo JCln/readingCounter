@@ -1,12 +1,40 @@
-<div class="" id="mySidebar">
-    <!-- <button class="" onclick="w3_close()">Close &times;</button> -->
-    <ul>
-        <li *ngFor="let item of currentRoute" [routerLink]="[item.routerUrl]">
-            <div class="_right_chart">
-                <i class="fa fa-bar-chart"></i>
+<div class="side_bar">
+    <ul class="ul" *ngIf="sid_isSmall">
+        <li *ngFor="let item of currentRoute; index as i" [routerLink]="[item.routerUrl]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" (click)="toggleSubItems(item)">
+            <a class="btn">
+                <div class="ul_items">
+                    <i class="fa fa-bar-chart"></i>
+                    {{item.name}}
+                    <i class="fa fa-arrow-circle-down"></i>
+
+                </div>
+            </a>
+            <div class="sub_item" [hidden]="!item.sid_isOpenItems">
+                <a href="#">sub_1</a>
+                <a href="#">sub_2</a>
+                <a href="#">sub_3 </a>
             </div>
-            {{item.name}}
-            <i class="fa fa-arrow-circle-down mr-auto"></i>
+        </li>
+    </ul>
+
+    <ul class="ul_2" *ngIf="!sid_isSmall">
+        <li *ngFor="let item of currentRoute; index as i" [routerLink]="[item.routerUrl]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" (click)="toggleSubItems(item)">
+            <div class="btn_2">
+                <div class="ul_items_2">
+                    <i class="fa fa-bar-chart"></i>
+                </div>
+            </div>
+            <div class="_show" [hidden]="!item.sid_isOpenItems">
+                <h3>{{item.name}}</h3>
+                <div class="sub_item_2" [hidden]="!item.sid_isOpenItems">
+                    <a href="#">sub_1</a>
+                    <a href="#">sub_2</a>
+                    <a href="#">sub_3 </a>
+                </div>
+
+            </div>
         </li>
     </ul>
 </div>

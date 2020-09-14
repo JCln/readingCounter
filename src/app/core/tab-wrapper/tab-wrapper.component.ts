@@ -59,10 +59,10 @@ export class TabWrapperComponent implements OnInit {
 
   closeButtonClicked = (routerUrl: string) => {
     console.log(routerUrl);
-    
+
     const a = this.tabs.filter(item => {
       console.log(item.routerUrl);
-      
+
       return item.routerUrl !== routerUrl;
     })
     this.tabs = a;
@@ -70,7 +70,7 @@ export class TabWrapperComponent implements OnInit {
     // this.isLatestTab();
   }
   addDashboardTab = () => {
-    const a = { routerUrl: '/wr', name: 'مدیریت کاربران', isClosable: false, isRefreshable: false };
+    const a = { routerUrl: '/wr', name: 'مدیریت کاربران', isClosable: false, isRefreshable: false, sid_isOpenItems: false, sid_isSmall: false };
     this.tabs.push(a);
   }
 

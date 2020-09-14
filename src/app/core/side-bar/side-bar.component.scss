@@ -3,44 +3,78 @@
 ul {
   direction: rtl;
   list-style-type: none;
-  padding: $font_xs 0 $font_xs $font_xs;
+  padding: $font_xs 0 $font_xs 0;
+  margin-left: .2rem;
+}
 
-  li {
-    display: flex;
-    align-items: center;
-    text-align: right;
-    padding-right: $font_xs;
-    width: 100%;
-    border-radius: $font_2 0 0 $font_2;
-    height: $font_3;
-    background: $gray_l;
-    margin-bottom: 0.5rem;
+
+ul li {
+  padding: $font_05 0 $font_05 $font_05;
+  width: 100%;
+  border-radius: $font_2 0 0 $font_2;
+  background: $gray_d;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+
+  .btn {
     font-size: $font_m;
-    color: $gray_dr;
     font-weight: 600;
+    color: $gray_dr;
 
-    ._right_chart {
-      margin-left: .3rem;
+    .fa-bar-chart {
+      margin-right: $font_05;
     }
 
-    .mr-auto {
-      background: $gray_l;
-      color: $blue-d;
-      border-radius: $border_50;
+    .fa-arrow-circle-down {
+      transform: rotate(0);
+      transition: transform ease-in-out 150ms;
+      color: $blue_d;
+    }
+  }
+
+  .sub_item {
+    background: $white;
+    padding: .3rem 0.87rem;
+    margin: 0.4rem;
+
+    height: auto;
+    border-radius: 0 $border_s $border_s 0;
+    overflow: visible;
+    transition: all ease-in-out 250ms;
+
+    & a {
+      display: block;
+      position: relative;
+      color: $gray_dr;
       font-size: $font_m;
-      margin-right: auto;
-      margin-left: .4rem;
+      font-weight: 600;
     }
-    i {
-      vertical-align: middle;
+  }
+
+  &.active {
+    background: $gray_l;
+
+    .btn {
+
+      .fa-arrow-circle-down {
+        transform: rotate(180deg);
+        color: $blue_l;
+      }
     }
+
   }
 }
 
-ul::after {
+.ul_items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ul::after {
   content: '';
   position: absolute;
-  background: $gray_dr;
+  background: $gray_96;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
   bottom: 0;
@@ -50,10 +84,10 @@ ul::after {
   z-index: -1;
 }
 
-ul::before {
+.ul::before {
   content: '';
   position: absolute;
-  background: $gray_d;
+  background: $gray_e3;
   clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
   top: 0;
   bottom: 0;
@@ -61,4 +95,78 @@ ul::before {
   min-width: 100%;
   min-height: 100%;
   z-index: -1;
+}
+
+
+// for small sidebar we added ngIf and separate scss
+.ul_2 {
+  transition: all ease-in-out 250ms;
+}
+
+.ul_2 li {
+  width: 4rem;
+  position: relative;
+}
+
+.btn_2 {
+  font-size: $font_m;
+  font-weight: 600;
+  color: $gray_dr;
+
+  .fa-bar-chart {
+    margin-right: $font_05;
+  }
+}
+
+._show {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  right: 4.5rem;
+  background: $gray_d5;
+  top: 0;
+  width: 100%;
+  min-width: 11rem;
+  height: 100%;
+  padding: .5rem;
+  min-height: 13rem;
+  height: auto;
+  border-radius: 15px;
+
+  .sub_item_2 {
+    background: $white;
+    padding: .3rem 0.87rem;
+    margin: 0.4rem;
+
+    height: auto;
+    border-radius: 0 $border_s $border_s 0;
+    overflow: visible;
+    transition: all ease-in-out 250ms;
+
+    & a {
+      display: block;
+      position: relative;
+      color: $gray_dr;
+      font-size: $font_m;
+      font-weight: 600;
+    }
+  }
+}
+
+
+.ul_2:hover {
+  li {
+
+    // &.active {
+    //   background: $blue_l;
+    // }
+
+  }
+
+  .btn_2 {}
+
+  ._show {
+    visibility: visible;
+    opacity: 1;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ISidebarItems } from 'src/app/Interfaces/isidebar-items';
 
 import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
@@ -9,8 +9,9 @@ import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
   styleUrls: ['./side-bar.component.scss']
 })
 export class SideBarComponent implements OnInit {
+  @Input() sid_isSmall: boolean;
   currentRoute: ISidebarItems[];
-
+  
   constructor(private sideBarItemsService: SidebarItemsService) {
     this.currentRoute = this.sideBarItemsService.getSideBarItems();
   }
@@ -18,17 +19,22 @@ export class SideBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  w3_open() {
-    document.getElementById("main").style.marginLeft = "25%";
-    document.getElementById("mySidebar").style.width = "25%";
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("openNav").style.display = 'none';
+  openDialog(val: string) {
+    location.hash = val;
+    event.preventDefault();
   }
-
-  w3_close() {
-    document.getElementById("main").style.marginLeft = "0%";
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("openNav").style.display = "inline-block";
+  toggleSubItems = (item: ISidebarItems): void => {
+    this.currentRoute.filter(aItem => {
+      if (item.sid_isOpenItems !== aItem.sid_isOpenItems)
+        aItem.sid_isOpenItems = false
+    })
+    if (item.sid_isOpenItems)
+      item.sid_isOpenItems = false;
+    else
+      item.sid_isOpenItems = true;
+  }
+  sid_isSmallStatus = () => {
+    this.sid_isSmall = !this.sid_isSmall;
   }
 
 }
