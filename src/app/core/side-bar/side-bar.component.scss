@@ -52,6 +52,8 @@ ul li {
   }
 
   &.active {
+    background: $gray_l;
+
     .btn {
 
       .fa-arrow-circle-down {
@@ -69,7 +71,7 @@ ul li {
   justify-content: space-between;
 }
 
-ul::after {
+.ul::after {
   content: '';
   position: absolute;
   background: $gray_96;
@@ -82,7 +84,7 @@ ul::after {
   z-index: -1;
 }
 
-ul::before {
+.ul::before {
   content: '';
   position: absolute;
   background: $gray_e3;
@@ -93,4 +95,78 @@ ul::before {
   min-width: 100%;
   min-height: 100%;
   z-index: -1;
+}
+
+
+// for small sidebar we added ngIf and separate scss
+.ul_2 {
+  transition: all ease-in-out 250ms;
+}
+
+.ul_2 li {
+  width: 4rem;
+  position: relative;
+}
+
+.btn_2 {
+  font-size: $font_m;
+  font-weight: 600;
+  color: $gray_dr;
+
+  .fa-bar-chart {
+    margin-right: $font_05;
+  }
+}
+
+._show {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  right: 4.5rem;
+  background: $gray_d5;
+  top: 0;
+  width: 100%;
+  min-width: 11rem;
+  height: 100%;
+  padding: .5rem;
+  min-height: 13rem;
+  height: auto;
+  border-radius: 15px;
+
+  .sub_item_2 {
+    background: $white;
+    padding: .3rem 0.87rem;
+    margin: 0.4rem;
+
+    height: auto;
+    border-radius: 0 $border_s $border_s 0;
+    overflow: visible;
+    transition: all ease-in-out 250ms;
+
+    & a {
+      display: block;
+      position: relative;
+      color: $gray_dr;
+      font-size: $font_m;
+      font-weight: 600;
+    }
+  }
+}
+
+
+.ul_2:hover {
+  li {
+
+    // &.active {
+    //   background: $blue_l;
+    // }
+
+  }
+
+  .btn_2 {}
+
+  ._show {
+    visibility: visible;
+    opacity: 1;
+  }
 }
