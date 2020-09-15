@@ -9,7 +9,7 @@ ul {
   margin: .2rem;
 }
 
-li {  
+li {
   position: relative;
   display: flex;
   justify-content: center;
@@ -66,8 +66,8 @@ li {
   }
 
   &:hover {
-
     background: $gray_d5;
+
     .fa {
       opacity: 1;
 
@@ -94,4 +94,10 @@ li.active {
 
 li.active::before {
   opacity: 1;
+}
+
+._remove_all {
+  width: $font_2;
+  height: $font_2;
+  margin: 0 auto 0 .3rem;
 }

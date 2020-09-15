@@ -1,3 +1,6 @@
+<div class="_remove_all">
+    <img src="assets/imgs/tabWrapper/removeAll.png" alt="close_all" (click)="closeAllTabs()">
+</div>
 <section>
     <ul>
         <li *ngFor="let tab of tabs" [routerLink]="['/'+ tab.routerUrl]" routerLinkActive="active"
