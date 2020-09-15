@@ -56,7 +56,8 @@ export class TabWrapperComponent implements OnInit {
   // }
 
   backToPreviousPage = () => {
-   this._location.back();
+    const b = this.tabs.slice(-1).map(item => item.routerUrl);
+    this.router.navigate(b);
   }
 
   closeAllTabs = () => {
