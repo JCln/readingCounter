@@ -100,4 +100,10 @@ li.active::before {
   width: $font_2;
   height: $font_2;
   margin: 0 auto 0 .3rem;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 1px 0px 2px 1px $red;
+  }
 }

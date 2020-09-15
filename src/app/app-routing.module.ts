@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: '', component: LayoutComponent, children: [
-      { path: 'wr', loadChildren: () => import('./wrapper/wrapper.module').then(wr => wr.WrapperModule) },
+      { path: 'wr', loadChildren: () => import('./wrapper/wrapper.module').then(wr => wr.WrapperModule) }
     ]
   }
 

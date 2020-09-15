@@ -5,6 +5,7 @@ ul {
   list-style-type: none;
   padding: $font_xs 0 $font_xs 0;
   margin-left: .2rem;
+  padding: 0;
 }
 
 
@@ -155,16 +156,6 @@ ul li {
 
 
 .ul_2:hover {
-  li {
-
-    // &.active {
-    //   background: $blue_l;
-    // }
-
-  }
-
-  .btn_2 {}
-
   ._show {
     visibility: visible;
     opacity: 1;

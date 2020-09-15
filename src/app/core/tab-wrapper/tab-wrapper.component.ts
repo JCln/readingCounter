@@ -55,10 +55,13 @@ export class TabWrapperComponent implements OnInit {
   //   }
   // }
 
-  backToPreviousPage = () => this._location.back();
+  backToPreviousPage = () => {
+   this._location.back();
+  }
 
   closeAllTabs = () => {
     this.tabs.length = 1;
+    this.router.navigateByUrl('/wr');
   }
 
   closeButtonClicked = (routerUrl: string) => {

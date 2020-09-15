@@ -6,7 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  private sideBar: boolean = true;
+  private sideBar: boolean;
   @Output() sidebarEvent = new EventEmitter<boolean>();
 
   setSidebar = () => {
