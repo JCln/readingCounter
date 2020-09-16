@@ -19,10 +19,6 @@ export class SideBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDialog(val: string) {
-    location.hash = val;
-    event.preventDefault();
-  }
   toggleSubItems = (item: ISidebarItems): void => {
     this.currentRoute.filter(aItem => {
       if (item.sid_isOpenItems !== aItem.sid_isOpenItems)
