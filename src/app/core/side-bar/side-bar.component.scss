@@ -1,21 +1,30 @@
 @import '../../../assets/variable.scss';
 
-ul {
+nav {
   direction: rtl;
+}
+
+ul {
   list-style-type: none;
   padding: $font_xs 0 $font_xs 0;
   margin-left: .2rem;
   padding: 0;
+  overflow: hidden;
+  height: 73vh;
+  transition: all ease-in-out 150ms;
 }
 
-
 ul li {
-  padding: $font_05 0 $font_05 $font_05;
-  width: 100%;
+  cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
   background: $gray_d;
   margin-bottom: 0.5rem;
-  cursor: pointer;
+  padding: $font_05 0 $font_05 $font_05;
+}
+
+.ul li {
+  width: 100%;
+  direction: rtl;
 
   .btn {
     font-size: $font_m;
@@ -36,12 +45,12 @@ ul li {
   .sub_item {
     background: $white;
     padding: .3rem 0.87rem;
-    margin: 0.4rem;
+    margin: 0.4rem 0.2rem;
+    text-align: right;
 
     height: auto;
     border-radius: 0 $border_s $border_s 0;
-    overflow: visible;
-    transition: all ease-in-out 250ms;
+    overflow: visible;    
 
     & a {
       display: block;
@@ -49,11 +58,17 @@ ul li {
       color: $gray_dr;
       font-size: $font_m;
       font-weight: 600;
+      border-radius: 0 $border_s $border_s 0;
+      padding: 0 .3rem;
+
+      &:hover {
+        background: $gray_l;
+      }
     }
   }
 
   &.active {
-    background: $gray_l;
+    background: $gray_e3;
 
     .btn {
 
@@ -63,6 +78,10 @@ ul li {
       }
     }
 
+  }
+
+  &:hover {
+    background: $gray_l;
   }
 }
 
@@ -101,12 +120,17 @@ ul li {
 
 // for small sidebar we added ngIf and separate scss
 .ul_2 {
-  transition: all ease-in-out 250ms;
+  position: fixed;
+  transition: all ease-in-out 150ms;
 }
 
 .ul_2 li {
   width: 4rem;
   position: relative;
+
+  &.active {
+    background: $gray_e3;
+  }
 }
 
 .btn_2 {
@@ -120,44 +144,53 @@ ul li {
 }
 
 ._show {
+
   visibility: hidden;
-  opacity: 0;
+  display: block;
+  z-index: 2;
   position: absolute;
-  right: 4.5rem;
+  right: 3rem;
   background: $gray_d5;
-  top: 0;
+  top: .5rem;
   width: 100%;
-  min-width: 11rem;
+  min-width: 15rem;
   height: 100%;
   padding: .5rem;
   min-height: 13rem;
   height: auto;
   border-radius: 15px;
+  transition: all ease-in-out 150ms;
 
-  .sub_item_2 {
-    background: $white;
-    padding: .3rem 0.87rem;
-    margin: 0.4rem;
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
 
-    height: auto;
-    border-radius: 0 $border_s $border_s 0;
-    overflow: visible;
-    transition: all ease-in-out 250ms;
-
-    & a {
-      display: block;
-      position: relative;
-      color: $gray_dr;
-      font-size: $font_m;
-      font-weight: 600;
-    }
+  & a {
+    display: block;
+    padding-right: .3rem;
+    margin-bottom: .3rem;
+    color: $gray_dr;
+    font-size: $font_m;
+    font-weight: 600;
+    border-radius: $border_s;
   }
 }
 
+.ul_2 li:hover {
+  background: $gray_l;
+  min-width: 12rem;
+  width: auto;
 
-.ul_2:hover {
   ._show {
     visibility: visible;
-    opacity: 1;
+
+    a:active {
+      background: $gray_e3;
+    }
+
+    a:hover {
+      background: $gray_l;
+    }
   }
 }

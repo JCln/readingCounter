@@ -9,6 +9,7 @@ import { AnonyHeaderComponent } from './anony-header/anony-header.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
+import { DropdownComponent } from './_layouts/dropdown/dropdown.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     HfcComponent,
     HeaderComponent,
     AnonyHeaderComponent,
-    FrameWorkComponent
+    FrameWorkComponent,
+    DropdownComponent
   ]
   ,
   imports: [

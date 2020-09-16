@@ -1,0 +1,49 @@
+@import "../../../../assets/variable.scss";
+
+// ._user {
+//   border-radius: 50%;
+//   width: 3rem;
+//   height: 3rem;
+//   position: relative;
+
+//   &:hover {
+//     background: $gray_l;
+//   }
+// }
+
+.dropdown {
+  place-items: center;
+  display: grid;
+  width: $font_3;
+  height: $font_3;
+  //   border-radius: 50%;
+  color: $gray_96;
+  background: $gray_d;
+  font-size: 1.5rem;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 3.2rem;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: $gray_dr;
+  padding: .3rem 1rem;
+  text-decoration: none;
+  display: block;
+
+  &:hover {
+    background: $gray_d5;
+
+  }
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

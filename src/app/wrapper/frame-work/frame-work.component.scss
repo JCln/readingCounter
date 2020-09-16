@@ -2,7 +2,7 @@
 @import '../../../assets/mixins.scss';
 
 main {
-  width: 85vw;
+  width: 90vw;
   min-height: 75vh;
   border-radius: $border_s;
   background: url('/assets/imgs/framework/bb.jpg') no-repeat $gray_l;
@@ -11,6 +11,7 @@ main {
   box-shadow: 2px 2px 5px 0px $gray_d;
   margin: 0 $font_05;
   padding: $font_05;
+  transition: all ease-in-out 150ms;
 }
 
 .header {

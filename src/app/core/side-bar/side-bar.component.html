@@ -1,42 +1,38 @@
-<div class="side_bar">
-    <ul class="ul" *ngIf="sid_isSmall">
-        <li *ngFor="let item of currentRoute; index as i" [routerLink]="[item.routerUrl]" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }" (click)="toggleSubItems(item)">
-            <a class="btn">
-                <div class="ul_items">
-                    <i class="fa fa-bar-chart"></i>
-                    {{item.name}}
-                    <i class="fa fa-arrow-circle-down"></i>
+<ul class="ul" [hidden]="sid_isSmall">
+    <li *ngFor="let item of currentRoute; index as i" [routerLink]="[item.routerUrl]" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }" (click)="toggleSubItems(item)">
+        <a class="btn">
+            <div class="ul_items">
+                <i class="fa fa-bar-chart"></i>
+                {{item.name}}
+                <i class="fa fa-arrow-circle-down"></i>
 
+            </div>
+        </a>
+        <div class="sub_item" [hidden]="!item.sid_isOpenItems">
+            <a href="#">sub_1</a>
+            <a href="#">sub_2</a>
+            <a href="#">sub_3 </a>
+        </div>
+    </li>
+</ul>
+
+<nav>
+    <ul class="ul_2" [hidden]="!sid_isSmall">
+        <li *ngFor="let item of currentRoute; index as i" [routerLink]="[item.routerUrl]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <div class="btn_2">
+                <div class="ul_items_2">
+                    <i class="fa fa-bar-chart"></i>
                 </div>
-            </a>
-            <div class="sub_item" [hidden]="!item.sid_isOpenItems">
-                <a href="#">sub_1</a>
-                <a href="#">sub_2</a>
-                <a href="#">sub_3 </a>
+            </div>
+            <div class="_show">
+                <h3>{{item.name}}</h3>
+                <hr>
+                <a href="#">تست 1</a>
+                <a href="#">تست 2</a>
+                <a href="#">تست 3 </a>
             </div>
         </li>
     </ul>
-
-    <nav>
-        <ul class="ul_2" *ngIf="!sid_isSmall">
-            <li *ngFor="let item of currentRoute; index as i" [routerLink]="[item.routerUrl]" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }" (mouseenter)="toggleSubItems(item)">
-                <div class="btn_2">
-                    <div class="ul_items_2">
-                        <i class="fa fa-bar-chart"></i>
-                    </div>
-                </div>
-                <div class="_show">
-                    <h3>{{item.name}}</h3>
-                    <div class="sub_item_2" [hidden]="!item.sid_isOpenItems">
-                        <a href="#">sub_1</a>
-                        <a href="#">sub_2</a>
-                        <a href="#">sub_3 </a>
-                    </div>
-
-                </div>
-            </li>
-        </ul>
-    </nav>
-</div>
+</nav>
