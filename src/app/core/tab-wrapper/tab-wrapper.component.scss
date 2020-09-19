@@ -1,5 +1,6 @@
 @import '../../../assets/variable.scss';
 @import '../../../assets/mixins.scss';
+@import '../../../assets/tooltip.scss';
 
 ul {
   display: flex;
@@ -107,4 +108,10 @@ li.active::before {
   &:hover {
     box-shadow: 1px 0px 2px 1px $red;
   }
+}
+
+// edit tooltips
+.tooltip_text {
+  bottom: 150% !important;
+  left: 4rem !important;
 }
