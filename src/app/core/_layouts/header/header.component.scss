@@ -16,13 +16,10 @@ ul {
 }
 
 li {
-  @include d_grid_center();
+  display: flex;
+  width: 9rem;
   margin: 0 .5rem;
-  border-radius: 15px;
-  max-width: 11rem;
-  width: 11rem;
-  height: 2.87rem;
-  background: $gray_e3;
+  border-radius: 15px;  
   color: $gray_dr2;
   text-align: center;
   list-style-type: none;
