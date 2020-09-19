@@ -21,6 +21,8 @@
     "@angular/router": "~9.1.0",
     "@fortawesome/fontawesome-free": "^5.14.0",
     "font-awesome": "^4.7.0",
+    "jalali-moment": "^3.3.8",
+    "ng2-jalali-date-picker": "^2.4.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

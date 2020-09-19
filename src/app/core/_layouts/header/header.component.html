@@ -1,9 +1,11 @@
 <div class="header">
     <ul>
-        <li>98/21/10</li>
-        
+        <li>
+            <ng-container *ngComponentOutlet="DateJalaliComponent"></ng-container>
+        </li>
+        <li>
             <app-dropdown></app-dropdown>
-        
+        </li>
     </ul>
     <div class="menu_toggle" (click)="setSidebar()">
         <span></span>

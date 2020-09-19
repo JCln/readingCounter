@@ -1,25 +1,34 @@
 @import "../../../../assets/variable.scss";
 
-// ._user {
-//   border-radius: 50%;
-//   width: 3rem;
-//   height: 3rem;
-//   position: relative;
-
-//   &:hover {
-//     background: $gray_l;
-//   }
-// }
-
 .dropdown {
   place-items: center;
   display: grid;
   width: $font_3;
   height: $font_3;
-  //   border-radius: 50%;
+  border-radius: 50%;
   color: $gray_96;
   background: $gray_d;
   font-size: 1.5rem;
+}
+
+.dropbtn {
+  place-items: center;
+  display: grid;
+  position: relative;
+  background: none;
+  border: none;
+  font-size: $font_l;
+  color: $gray_dr;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    top: 0;
+    left: -1rem;
+  }
 }
 
 .dropdown-content {
