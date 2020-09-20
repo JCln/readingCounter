@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
 import { FrameWorkComponent } from './../wrapper/frame-work/frame-work.component';
@@ -27,7 +26,6 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
   ,
   imports: [
     CommonModule,
-    FormsModule,
     DpDatePickerModule,
     CoreRoutingModule
   ]
