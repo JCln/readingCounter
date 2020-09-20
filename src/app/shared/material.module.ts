@@ -2,6 +2,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -17,7 +18,8 @@ import { MatTableModule } from '@angular/material/table';
         MatSortModule,
         MatTableModule,
         MatFormFieldModule,
-        CdkTableModule
+        CdkTableModule,
+        MatInputModule
     ],
     exports: [
         MatGridListModule,
@@ -27,7 +29,8 @@ import { MatTableModule } from '@angular/material/table';
         MatSortModule,
         MatTableModule,
         MatFormFieldModule,
-        CdkTableModule
+        CdkTableModule,
+        MatInputModule
     ]
 })
 export class MaterialModule {

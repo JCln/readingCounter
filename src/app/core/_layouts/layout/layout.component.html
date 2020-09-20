@@ -1,4 +1,6 @@
 <app-header (sidebarEvent)=changeSidebarStatus($event)></app-header>
 <app-tab-wrapper></app-tab-wrapper>
-<app-side-bar [sid_isSmall]="sidebarStatus"></app-side-bar>
-<app-frame-work></app-frame-work>
+<div class="ma">
+    <app-frame-work></app-frame-work>
+    <app-side-bar [sid_isSmall]="sidebarStatus"></app-side-bar>
+</div>

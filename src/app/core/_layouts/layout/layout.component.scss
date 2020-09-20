@@ -1,3 +1,7 @@
+.ma {
+  display: flex;
+}
+
 app-tab-wrapper {
   background: url(/assets/imgs/tabWrapper/5.jpg) no-repeat;
   background-size: cover;
@@ -12,16 +16,19 @@ app-tab-wrapper {
 }
 
 app-side-bar {
-  position: fixed;
-  right: 0;
-  width: 15rem;
+  width: 17%;
   min-height: 75vh;
-  overflow-y: auto;
-  margin-left: .5rem;
   transition: all ease-in-out 150ms;
 }
 
 app-frame-work {
-  margin-right: 1rem;
   width: 100%;
+}
+
+//ts config
+.page_conf {
+  width: 5%;
+}
+.tabWrapper_conf {
+  width: 90%;
 }

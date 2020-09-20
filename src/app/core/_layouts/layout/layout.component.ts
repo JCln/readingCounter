@@ -7,9 +7,16 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
   sidebarStatus: boolean;
- 
-  changeSidebarStatus($event: boolean) {
-    this.sidebarStatus = $event;
+
+  sideBarPageSize = () => {
+    const a = document.querySelector('app-side-bar') as HTMLElement;
+    const b = document.querySelector('app-tab-wrapper') as HTMLElement;
+    a.classList.toggle('page_conf');
+    b.classList.toggle('tabWrapper_conf');
   }
 
+  changeSidebarStatus($event: boolean) {
+    this.sidebarStatus = $event;
+    this.sideBarPageSize();
+  }
 }
