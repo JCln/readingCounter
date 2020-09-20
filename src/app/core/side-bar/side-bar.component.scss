@@ -32,6 +32,15 @@ ul li {
 
     .fa-bar-chart {
       margin-right: $font_05;
+      margin-left: $font_xxs;
+    }
+
+    .on_show {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      animation: toggle_side 250ms;
     }
 
     .fa-arrow-circle-down {
@@ -191,5 +200,19 @@ ul li {
     a:hover {
       background: $gray_l;
     }
+  }
+}
+
+@keyframes toggle_side {
+  0% {
+    visibility: hidden;
+  }
+
+  50% {
+    visibility: hidden;
+  }
+
+  80% {
+    visibility: visible;
   }
 }
