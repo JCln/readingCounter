@@ -9,7 +9,6 @@ app-tab-wrapper {
   justify-content: flex-end;
   align-items: center;
   top: 3rem;
-  min-height: 7rem;
   margin-bottom: 0.5rem;
   width: 85%;
   border-radius: 0 0 15px 15px;
@@ -22,7 +21,7 @@ app-side-bar {
 }
 
 app-frame-work {
-  width: 100%;
+  width: 95%;
 }
 
 //ts config

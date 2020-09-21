@@ -1,14 +1,16 @@
-import { AfterViewInit, Component, EventEmitter, Output, Type } from '@angular/core';
+import { Component, EventEmitter, Output, Type } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent {
   private sideBar: boolean;
   @Output() sidebarEvent = new EventEmitter<boolean>();
   DateJalaliComponent?: Type<any>
+
+  isDateJalaliLoaded: boolean = false;
 
   setSidebar = () => {
     this.sideBar = !this.sideBar;
@@ -19,9 +21,6 @@ export class HeaderComponent implements AfterViewInit {
     import('./date-jalali/date-jalali.module').then(jd => jd.DateJalaliModule).then(DateJalaliModule => {
       this.DateJalaliComponent = DateJalaliModule.components['lazy'];
     })
+    this.isDateJalaliLoaded = true;
   }
-  ngAfterViewInit(): void {
-    this.loadDateJalali();
-  }
-
 }

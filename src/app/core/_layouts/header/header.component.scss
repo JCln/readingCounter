@@ -19,7 +19,7 @@ li {
   display: flex;
   width: 9rem;
   margin: 0 .5rem;
-  border-radius: 15px;  
+  border-radius: 15px;
   color: $gray_dr2;
   text-align: center;
   list-style-type: none;
@@ -29,8 +29,15 @@ li {
   font-weight: 600;
 }
 
+p {
+  background: $gray_d;
+  font-weight: 600;
+  width: 100%;
+  border-radius: 15px;
+}
+
 .menu_toggle {
-  margin-right: 4%;
+  margin-right: 15%;
   padding: .5rem;
   cursor: pointer;
 }

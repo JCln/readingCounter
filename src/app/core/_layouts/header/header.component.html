@@ -1,6 +1,7 @@
 <div class="header">
     <ul>
-        <li>
+        <li (click)="loadDateJalali()">
+            <p class="d_grid_center" *ngIf="!isDateJalaliLoaded">تاریخ</p>
             <ng-container *ngComponentOutlet="DateJalaliComponent"></ng-container>
         </li>
         <li>

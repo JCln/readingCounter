@@ -9,7 +9,8 @@ import * as moment from 'jalali-moment';
 export class DateJalaliComponent implements OnInit {
   dateObject = moment('1399-6-22', 'jYYYY,jMM,jDD');
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
