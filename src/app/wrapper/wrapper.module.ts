@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { MapComponent } from './map/map.component';
 import { WrapperRoutingModule } from './wrapper-routing.module';
 
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [MapComponent],
   imports: [
     CommonModule,
     WrapperRoutingModule

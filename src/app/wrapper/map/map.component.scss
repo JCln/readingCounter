@@ -1,0 +1,22 @@
+@import '../../../assets/variable.scss';
+@import '../../../assets/button.scss';
+
+.map-frame {
+  box-shadow: -1px 2px 5px 5px $gray_d;
+  margin: 1rem .2rem;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+  min-height: 30rem;
+}
+
+.option {
+  column-gap: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.btn_2 {
+  background: $gray_d5;
+}
