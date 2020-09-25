@@ -1,23 +1,27 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import mapboxgl from 'mapbox-gl';
+
+import { MapService } from './../../services/map.service';
 
 export interface mapBox {
-  mapBoxUrl: URL;
-  maxZoom: string;
-  minZoom: string;
-  tileSize: string;
-  zoomOffset: string;
+  maxZoom: number;
+  minZoom: number;
+  tileSize: number;
+  zoomOffset: number;
   attribution: string;
+  mapBoxUrl?: URL;
+  accessToken?: string;
+  id?: string;
 }
 const MapBoxUrl = {
   OSM: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  // Satellite: 'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'
-  Satellite: 'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'
+  Satellite: 'https://api.mapbox.com/styles/v1/mapbox/streets_v11/tiles/{z}/{x}/{y}?access_token='
 }
 const Attributions = {
   attr: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }
-const DefaultTileLayerOptions = {
+const DefaultTileLayerOptions: mapBox = {
   id: 'mapID',
   maxZoom: 19,
   minZoom: 7,
@@ -33,45 +37,9 @@ const DefaultTileLayerOptions = {
 })
 export class MapComponent implements OnInit, AfterViewInit {
   map: L.Map;
-  private readonly mapBoxUrl = MapBoxUrl;
-  private readonly defaultTileLayerOptions = DefaultTileLayerOptions;
-
-  constructor() { }
-
-  private initMap(): void {
-    const
-      streets = L.tileLayer(this.mapBoxUrl.OSM, this.defaultTileLayerOptions),
-      satellite = L.tileLayer(this.mapBoxUrl.Satellite, { subdomains: ['otile1', 'otile2', 'otile3', 'otile4'] });
-
-    const baseMaps = {
-      "Satellite": satellite,
-      "OSM": streets
-    };
-
-    // const overlayMaps = {
-    //   "Cities": cities
-    // };
-
-    this.map = L.map('map', {
-      center: [32.603461, 51.567615],
-      zoom: 9,
-      layers: [satellite, streets]
-    })
-
-    // tiles.addTo(this.map);
-    this.map.locate({ setView: true, maxZoom: 16 });
-    L.control.layers(baseMaps).addTo(this.map);
-  }
-
-  private overlays = () => {
-    const littleton =
-      L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
-      denver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
-      aurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
-      golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
-
-    const cities = L.layerGroup([littleton, denver, aurora, golden]);
-  }
+  map2: mapboxgl.Map;
+  
+  constructor(private mapService: MapService) { }
 
   setLocation = () => {
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmRxMzZkZDFzNW4zMW84NGlsdzNzeW0ifQ.K9Pozcn_shXxdNfFdUrlXA}', {
@@ -83,12 +51,22 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.map.locate({ setView: true, maxZoom: 16 });
   }
+  mapBoxGl = () => {
+    this.map2 = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/satellite-v9',
+      maxZoom: 18,
+      zoom: 11,
+      center: [32.603461, 51.567615],
+      accessToken: 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmRxMzZkZDFzNW4zMW84NGlsdzNzeW0ifQ.K9Pozcn_shXxdNfFdUrlXA'
+    });
+    this.map2.addControl(new mapboxgl.NavigationControl());
+  }
   ngOnInit(): void {
-    // this.overlays();
+
   }
   ngAfterViewInit(): void {
-    this.initMap();
-    // this.setLocation();
+    this.mapService.initMap();
   }
 
 }

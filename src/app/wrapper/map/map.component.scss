@@ -1,6 +1,7 @@
 @import '../../../assets/variable.scss';
 @import '../../../assets/button.scss';
 
+
 .map-frame {
   box-shadow: -1px 2px 5px 5px $gray_d;
   margin: 1rem .2rem;
@@ -17,6 +18,7 @@
   display: flex;
   justify-content: center;
 }
+
 .btn_2 {
   background: $gray_d5;
 }
