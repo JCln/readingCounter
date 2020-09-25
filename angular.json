@@ -31,12 +31,19 @@
                 "glob": "**/*",
                 "input": "src/assets/",
                 "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "/assets"
               }
             ],
             "styles": [
               "src/styles.scss",
               "node_modules/font-awesome/css/font-awesome.min.css",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"              
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/leaflet-easybutton/src/easy-button.css",
+              "node_modules/leaflet-easybutton"
             ],
             "scripts": []
           },
