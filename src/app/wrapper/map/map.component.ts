@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
+import { test1 } from '../../../test1';
 import { MapService } from './../../services/map.service';
 
 @Component({
@@ -9,7 +10,10 @@ import { MapService } from './../../services/map.service';
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService) { 
+    console.log(test1());
+    
+  }
 
   ngOnInit(): void { }
   ngAfterViewInit(): void {

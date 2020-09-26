@@ -43,7 +43,9 @@
               "node_modules/font-awesome/css/font-awesome.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"              
             ],
-            "scripts": []
+            "scripts": [
+              "./src/test1.js"
+            ]
           },
           "configurations": {
             "production": {
