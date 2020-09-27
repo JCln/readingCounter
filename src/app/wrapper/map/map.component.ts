@@ -27,6 +27,9 @@ export class MapComponent implements OnInit, AfterViewInit {
         L.latLng(57.6792, 11.949)
       ]
     }).addTo(map);
+
+
+    map.addControl(new L.Control.Fullscreen());
   }
   ngAfterViewInit(): void {
     // this.mapService.initMap();
