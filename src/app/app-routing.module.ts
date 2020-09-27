@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: '', component: LayoutComponent, children: [
       {
-        path: 'fr', component: FrameWorkComponent
+        path: 'wr', component: FrameWorkComponent
                 
       }
     ]

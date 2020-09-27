@@ -34,7 +34,12 @@
               },
               {
                 "glob": "**/*",
-                "input": "src/assets/leaflet/images",
+                "input": "src/assets/leaflet/images/",                
+                "output": "/assets"
+              },       
+              {
+                "glob": "**/*",
+                "input": "src/assets/leaflet/images/marker-icon.png",                
                 "output": "/assets"
               }       
             ],

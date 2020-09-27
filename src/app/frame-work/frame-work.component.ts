@@ -11,6 +11,15 @@ declare let L;
   styleUrls: ['./frame-work.component.scss']
 })
 export class FrameWorkComponent implements OnInit {
+  icon = {
+    icon: L.icon({
+      iconSize: [25, 41],
+      iconAnchor: [13, 0],
+      iconUrl: './src/assets/leaflet/images/marker-icon.png',
+      shadowUrl: './src/assets/leaflet/images/marker-shadow.png'
+    })
+  };
+
   title: string = '';
 
   constructor(private interactionService: InteractionService) { }
