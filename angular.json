@@ -31,17 +31,7 @@
                 "glob": "**/*",
                 "input": "src/assets/",
                 "output": "/assets"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets/leaflet/images/",                
-                "output": "/assets"
-              },       
-              {
-                "glob": "**/*",
-                "input": "src/assets/leaflet/images/marker-icon.png",                
-                "output": "/assets"
-              }       
+              }              
             ],
             "styles": [
               "src/styles.scss",

@@ -11,14 +11,14 @@ declare let L;
   styleUrls: ['./frame-work.component.scss']
 })
 export class FrameWorkComponent implements OnInit {
-  icon = {
-    icon: L.icon({
-      iconSize: [25, 41],
-      iconAnchor: [13, 0],
-      iconUrl: './src/assets/leaflet/images/marker-icon.png',
-      shadowUrl: './src/assets/leaflet/images/marker-shadow.png'
-    })
-  };
+  // icon = {
+  //   icon: L.icon({
+  //     iconSize: [25, 41],
+  //     iconAnchor: [13, 0],
+  //     iconUrl: './src/assets/leaflet/images/marker-icon.png',
+  //     shadowUrl: './src/assets/leaflet/images/marker-shadow.png'
+  //   })
+  // };
 
   title: string = '';
 
@@ -29,9 +29,20 @@ export class FrameWorkComponent implements OnInit {
 
     const map = L.map('map').setView([51.505, -0.09], 13);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    const
+      satellite =
+        L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg', {
+          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }),
+      streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      });
+
+    const baseMaps = {
+      "Satellite": satellite,
+      "OSM": streets
+    };
+    L.control.layers(baseMaps).addTo(map);
 
     L.Routing.control({
       waypoints: [
