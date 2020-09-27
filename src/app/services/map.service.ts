@@ -4,7 +4,7 @@ import * as LL from 'leaflet';
 import { Imap } from './../Interfaces/imap';
 import { MapItemsService } from './DI/map-items.service';
 
-
+declare let L;
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,7 @@ export class MapService {
     };
 
     LL.control.layers(baseMaps).addTo(map);
-
+    
     // const msap = new L.Map('map', {
     //   fullscreenControl: true,
     // OR
@@ -59,9 +59,8 @@ export class MapService {
     // L.easyButton('fa-star', function () {
     //   alert('you just clicked a font awesome icon');
     // }).addTo(faStar);
-
-
-    // LL.easyButton('fa-star', function(){alert('button works')}).addTo(map);
+    
+    map.addControl(new L.Control.Fullscreen());
   }
 
   private overlays = () => {

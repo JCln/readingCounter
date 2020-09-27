@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { HfcComponent } from './core/_layouts/hfc/hfc.component';
 import { LayoutComponent } from './core/_layouts/layout/layout.component';
+import { FrameWorkComponent } from './frame-work/frame-work.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,10 @@ const routes: Routes = [
   },
   {
     path: '', component: LayoutComponent, children: [
-      { path: 'wr', loadChildren: () => import('./wrapper/wrapper.module').then(wr => wr.WrapperModule) }
+      {
+        path: 'fr', component: FrameWorkComponent
+                
+      }
     ]
   }
 

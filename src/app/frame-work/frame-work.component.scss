@@ -1,5 +1,10 @@
-@import '../../../assets/variable.scss';
-@import '../../../assets/mixins.scss';
+@import '../../assets/variable.scss';
+@import '../../assets/mixins.scss';
+
+#map {
+  height: 100%;
+  min-height: 30rem;
+}
 
 main {
   width: auto;

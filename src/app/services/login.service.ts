@@ -12,6 +12,6 @@ export class LoginService {
 
   logging = () => {
     // this.userService.logginIn(true);
-    this.router.navigate(['/wr']);
+    this.router.navigate(['fr']);
   }
 }
