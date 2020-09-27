@@ -7,14 +7,12 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ClockComponent } from './core/clock/clock.component';
 import { CoreModule } from './core/core.module';
-import { FrameWorkComponent } from './frame-work/frame-work.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClockComponent,
-    FrameWorkComponent,
     LoginComponent    
   ],
   imports: [

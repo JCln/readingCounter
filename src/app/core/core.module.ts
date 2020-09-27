@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
+import { FrameWorkComponent } from './../frame-work/frame-work.component';
 import { DropdownComponent } from './_layouts/dropdown/dropdown.component';
 import { HeaderComponent } from './_layouts/header/header.component';
 import { HfcComponent } from './_layouts/hfc/hfc.component';
@@ -19,7 +20,8 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     HfcComponent,
     HeaderComponent,
     AnonyHeaderComponent,
-    DropdownComponent,    
+    DropdownComponent,
+    FrameWorkComponent
   ]
   ,
   imports: [

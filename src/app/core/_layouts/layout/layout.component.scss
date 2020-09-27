@@ -1,5 +1,9 @@
 .ma {
   display: flex;
+
+  &router-outlet {
+    width: 95%;
+  }
 }
 
 app-tab-wrapper {
@@ -18,6 +22,7 @@ app-side-bar {
   width: 17%;
   min-height: 75vh;
   transition: all ease-in-out 150ms;
+  z-index: 2;
 }
 
 app-frame-work {
@@ -28,6 +33,7 @@ app-frame-work {
 .page_conf {
   width: 5%;
 }
+
 .tabWrapper_conf {
   width: 90%;
 }
