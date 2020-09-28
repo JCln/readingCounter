@@ -1,33 +1,30 @@
+import '../../../node_modules/leaflet-easyprint';
 import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
+import '../../../src/assets/L.EasyButton/src/easy-button.js';
 
 import { Component, OnInit } from '@angular/core';
 
 import { InteractionService } from '../services/interaction.service';
 
+// import 'leaflet-easyprint';
 declare let L;
+
 @Component({
   selector: 'app-frame-work',
   templateUrl: './frame-work.component.html',
   styleUrls: ['./frame-work.component.scss']
 })
 export class FrameWorkComponent implements OnInit {
-  // icon = {
-  //   icon: L.icon({
-  //     iconSize: [25, 41],
-  //     iconAnchor: [13, 0],
-  //     iconUrl: './src/assets/leaflet/images/marker-icon.png',
-  //     shadowUrl: './src/assets/leaflet/images/marker-shadow.png'
-  //   })
-  // };
+
 
   title: string = '';
 
   constructor(private interactionService: InteractionService) { }
 
   ngOnInit(): void {
+    const map = L.map('map').setView([51.505, -0.09], 13);
     this.interactionService.getPageTitle().subscribe(title => this.title = title);
 
-    const map = L.map('map').setView([51.505, -0.09], 13);
 
     const
       satellite =
@@ -52,6 +49,38 @@ export class FrameWorkComponent implements OnInit {
     }).addTo(map);
 
     map.addControl(new L.Control.Fullscreen());
+
+    L.easyButton('fa-globe', function (btn, map) {
+      this.helloPopup.setLatLng(map.getCenter()).openOn(map);
+    }).addTo(map);
+
+    L.easyPrint({
+      position: 'bottomleft',
+      sizeModes: ['A4Portrait', 'A4Landscape']
+    }).addTo(map);
+
+    const onLocationFound = (e) => {
+      console.log(e);
+      var radius = e.accuracy;
+
+      L.circle([e.latlng, 1000], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 1000
+      }).addTo(map);
+
+
+      L.marker(e.latlng).addTo(map)
+        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+    }
+
+    L.easyButton('fa-map-marker', function (btn, map) {
+      map.locate({ setView: true, maxZoom: 16 })
+      map.on('locationfound', onLocationFound(map));
+    }).addTo(map);
+
   }
 
 }
+// git ac 'working: {easy-button, printer, location}
