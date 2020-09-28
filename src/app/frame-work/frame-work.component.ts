@@ -83,4 +83,3 @@ export class FrameWorkComponent implements OnInit {
   }
 
 }
-// git ac 'working: {easy-button, printer, location}
