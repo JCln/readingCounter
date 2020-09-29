@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as LL from 'leaflet';
 
 import { Imap } from './../Interfaces/imap';
 import { MapItemsService } from './DI/map-items.service';
@@ -11,21 +10,20 @@ declare let L;
 })
 export class MapService {
   private readonly mapItems: Imap[];
-
+  
   constructor(private readonly mapItemsService: MapItemsService) {
     this.mapItems = mapItemsService.getMapItems();
   }
 
-
   initMap(): void {
     const
-      satellite = LL.tileLayer(
+      satellite = L.tileLayer(
         this.mapItems[1].style + this.mapItems[1].accessToken, {
         tileSize: this.mapItems[1].tileSize,
         zoomOffset: this.mapItems[1].zoomOffset,
         attribution: this.mapItems[1].attribution
       }),
-      streets = LL.tileLayer(
+      streets = L.tileLayer(
         this.mapItems[0].mapBoxUrl, {
         id: this.mapItems[0].id,
         maxZoom: this.mapItems[0].maxZoom,
@@ -35,15 +33,15 @@ export class MapService {
         attribution: this.mapItems[0].attribution
       })
 
-    const map = LL.map('map').setView([32.603461, 51.567615], 11);
+    const map = L.map('map').setView([32.603461, 51.567615], 11);
 
     const baseMaps = {
-      "Satellite": satellite,
+      "Satelite": satellite,
       "OSM": streets
     };
 
-    LL.control.layers(baseMaps).addTo(map);
-    
+    L.control.layers(baseMaps).addTo(map);
+
     // const msap = new L.Map('map', {
     //   fullscreenControl: true,
     // OR
@@ -59,18 +57,18 @@ export class MapService {
     // L.easyButton('fa-star', function () {
     //   alert('you just clicked a font awesome icon');
     // }).addTo(faStar);
-    
+
     map.addControl(new L.Control.Fullscreen());
   }
 
   private overlays = () => {
     const littleton =
-      LL.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
-      denver = LL.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
-      aurora = LL.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
-      golden = LL.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
+      L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
+      denver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
+      aurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
+      golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
 
-    const cities = LL.layerGroup([littleton, denver, aurora, golden]);
+    const cities = L.layerGroup([littleton, denver, aurora, golden]);
   }
   // locateTheUser = (e) => {
   //   var radius = e.accuracy;

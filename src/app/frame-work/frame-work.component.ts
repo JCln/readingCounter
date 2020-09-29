@@ -5,8 +5,8 @@ import '../../../src/assets/L.EasyButton/src/easy-button.js';
 import { Component, OnInit } from '@angular/core';
 
 import { InteractionService } from '../services/interaction.service';
+import { MapService } from './../services/map.service';
 
-// import 'leaflet-easyprint';
 declare let L;
 
 @Component({
@@ -16,49 +16,53 @@ declare let L;
 })
 export class FrameWorkComponent implements OnInit {
 
-
   title: string = '';
 
-  constructor(private interactionService: InteractionService) { }
+  constructor(private interactionService: InteractionService, private mapService: MapService) { }
 
+  // overlays = (map: L.Map, overlays: string) => {
+  //   var overlayMaps = {
+  //     "Cities": cities
+  //   };
+  // }
   ngOnInit(): void {
-    const map = L.map('map').setView([51.505, -0.09], 13);
     this.interactionService.getPageTitle().subscribe(title => this.title = title);
-
 
     const
       satellite =
         L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg', {
-          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          minZoom: 4
         }),
       streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        minZoom: 4
       });
+
+    // only one of base layers should be added to the map at instantiation
+    const map = L.map('map', {
+      center: [51.505, -0.09],
+      zoom: 13,
+      minZoom: 4,
+      collapsible: true,
+      layers: [streets]
+    });
 
     const baseMaps = {
       "Satellite": satellite,
       "OSM": streets
     };
+
     L.control.layers(baseMaps).addTo(map);
 
     L.Routing.control({
       waypoints: [
         L.latLng(57.74, 11.94),
-        L.latLng(57.6792, 11.949)
+        L.latLng(57.6792, 11.949),
       ]
     }).addTo(map);
 
     map.addControl(new L.Control.Fullscreen());
 
-    L.easyButton('fa-globe', function (btn, map) {
-      this.helloPopup.setLatLng(map.getCenter()).openOn(map);
-    }).addTo(map);
-
-    L.easyPrint({
-      position: 'bottomleft',
-      sizeModes: ['A4Portrait', 'A4Landscape']
-    }).addTo(map);
-
+    // buttons
     const onLocationFound = (e) => {
       console.log(e);
       var radius = e.accuracy;
@@ -75,9 +79,32 @@ export class FrameWorkComponent implements OnInit {
         .bindPopup("You are within " + radius + " meters from this point").openPopup();
     }
 
+    const addInvalidateMap = () => {
+      map.invalidateSize();
+    }
+
+    const removeAllLayers = (map, window) => {
+      map.eachLayer(function (layer) {
+        map.removeLayer(layer);
+      }, window)
+    }
+
+    L.easyPrint({
+      position: 'bottomleft',
+      sizeModes: ['A4Portrait', 'A4Landscape']
+    }).addTo(map);
+
+    L.easyButton('fa-refresh', function (btn, map) {
+      addInvalidateMap();
+    }).addTo(map);
+
     L.easyButton('fa-map-marker', function (btn, map) {
       map.locate({ setView: true, maxZoom: 16 })
       map.on('locationfound', onLocationFound(map));
+    }).addTo(map);
+
+    L.easyButton('fa-close', function (btn, map) {
+      removeAllLayers(map, window);
     }).addTo(map);
 
   }
