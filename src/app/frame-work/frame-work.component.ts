@@ -110,16 +110,16 @@ export class FrameWorkComponent implements OnInit {
 
     L.easyButton('fa-refresh', function (btn, map) {
       addInvalidateMap();
-    }).addTo(map);
+    },'بارگزاری مجدد نقشه').addTo(map);
 
     L.easyButton('fa-map-marker', function (btn, map) {
       map.locate({ setView: true, maxZoom: 16 })
       map.on('locationfound', onLocationFound(map));
-    }).addTo(map);
+    },'مکان من').addTo(map);
 
     L.easyButton('fa-close', function (btn, map) {
       removeAllLayers(map, window);
-    }).addTo(map);
+    },'بستن تمامی لایه ها').addTo(map);
 
     //////////////////    
 
