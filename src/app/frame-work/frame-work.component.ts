@@ -9,13 +9,28 @@ import { MapService } from './../services/map.service';
 
 declare let L;
 
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
+
+const defaultIcon = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+})
+L.Marker.prototype.options.icon = defaultIcon;
+
 @Component({
   selector: 'app-frame-work',
   templateUrl: './frame-work.component.html',
   styleUrls: ['./frame-work.component.scss']
 })
 export class FrameWorkComponent implements OnInit {
-
   title: string = '';
 
   constructor(private interactionService: InteractionService, private mapService: MapService) { }
@@ -42,7 +57,6 @@ export class FrameWorkComponent implements OnInit {
       center: [51.505, -0.09],
       zoom: 13,
       minZoom: 4,
-      collapsible: true,
       layers: [streets]
     });
 
@@ -62,7 +76,7 @@ export class FrameWorkComponent implements OnInit {
 
     map.addControl(new L.Control.Fullscreen());
 
-    // buttons
+    ///////// buttons
     const onLocationFound = (e) => {
       console.log(e);
       var radius = e.accuracy;
@@ -106,6 +120,8 @@ export class FrameWorkComponent implements OnInit {
     L.easyButton('fa-close', function (btn, map) {
       removeAllLayers(map, window);
     }).addTo(map);
+
+    //////////////////    
 
   }
 

@@ -31,7 +31,12 @@
                 "glob": "**/*",
                 "input": "src/assets/",
                 "output": "/assets"
-              }              
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/leaflet/images/",
+                "output": "./assets"
+              }
             ],
             "styles": [
               "src/styles.scss",
