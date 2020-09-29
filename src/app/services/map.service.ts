@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 
-import { Imap } from './../Interfaces/imap';
-import { MapItemsService } from './DI/map-items.service';
+import { Injectable } from '@angular/core';
 
 declare let L;
 
@@ -9,57 +8,7 @@ declare let L;
   providedIn: 'root'
 })
 export class MapService {
-  private readonly mapItems: Imap[];
-  
-  constructor(private readonly mapItemsService: MapItemsService) {
-    this.mapItems = mapItemsService.getMapItems();
-  }
-
-  initMap(): void {
-    const
-      satellite = L.tileLayer(
-        this.mapItems[1].style + this.mapItems[1].accessToken, {
-        tileSize: this.mapItems[1].tileSize,
-        zoomOffset: this.mapItems[1].zoomOffset,
-        attribution: this.mapItems[1].attribution
-      }),
-      streets = L.tileLayer(
-        this.mapItems[0].mapBoxUrl, {
-        id: this.mapItems[0].id,
-        maxZoom: this.mapItems[0].maxZoom,
-        minZoom: this.mapItems[0].minZoom,
-        tileSize: this.mapItems[0].tileSize,
-        zoomOffset: this.mapItems[0].zoomOffset,
-        attribution: this.mapItems[0].attribution
-      })
-
-    const map = L.map('map').setView([32.603461, 51.567615], 11);
-
-    const baseMaps = {
-      "Satelite": satellite,
-      "OSM": streets
-    };
-
-    L.control.layers(baseMaps).addTo(map);
-
-    // const msap = new L.Map('map', {
-    //   fullscreenControl: true,
-    // OR
-    // fullscreenControl: {
-    //     pseudoFullscreen: false // if true, fullscreen to page width and height
-    // }
-    // });
-    // map.addControl(new L.Control.FullScreen());
-    // L.control.fullscreen().addTo(map);
-
-    // L.map('fa fa-user').setView([32.603461, 51.567615], 10);
-
-    // L.easyButton('fa-star', function () {
-    //   alert('you just clicked a font awesome icon');
-    // }).addTo(faStar);
-
-    map.addControl(new L.Control.Fullscreen());
-  }
+  constructor() { }
 
   private overlays = () => {
     const littleton =
@@ -70,27 +19,65 @@ export class MapService {
 
     const cities = L.layerGroup([littleton, denver, aurora, golden]);
   }
-  // locateTheUser = (e) => {
-  //   var radius = e.accuracy;
 
-  //   L.marker(e.latlng).addTo(map)
-  //     .bindPopup("You are within " + radius + " meters from this point").openPopup();
+  routingControl = (map: L.Map) => {
+    L.Routing.control({
+      waypoints: [
+        L.latLng(57.74, 11.94),
+        L.latLng(57.6792, 11.949),
+      ]
+    }).addTo(map);
+  }
 
-  //   L.circle(e.latlng, radius).addTo(map);
-  // }
+  fullScreen = (map: L.Map) => {
+    map.addControl(new L.Control.Fullscreen());
+  }
 
 
+  ///////// buttons
+  buttons = (map: L.Map) => {
+    const onLocationFound = (e) => {
+      console.log(e);
+      var radius = e.accuracy;
+
+      L.circle([e.latlng, 1000], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 1000
+      }).addTo(map);
+
+
+      L.marker(e.latlng).addTo(map)
+        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+    }
+
+    const addInvalidateMap = (map: L.Map) => {
+      map.invalidateSize();
+    }
+    const removeAllLayers = (map, window) => {
+      map.eachLayer(function (layer) {
+        map.removeLayer(layer);
+      }, window)
+    }
+    L.easyPrint({
+      position: 'bottomleft',
+      sizeModes: ['A4Portrait', 'A4Landscape']
+    }).addTo(map);
+
+    L.easyButton('fa-refresh', function (btn, map) {
+      addInvalidateMap;
+    }, 'بارگزاری مجدد نقشه').addTo(map);
+
+    L.easyButton('fa-map-marker', function (btn, map) {
+      map.locate({ setView: true, maxZoom: 16 })
+      map.on('locationfound', onLocationFound(map));
+    }, 'مکان من').addTo(map);
+
+    L.easyButton('fa-close', function (btn) {
+      removeAllLayers(map, window);
+    }, 'بستن تمامی لایه ها').addTo(map);
+
+  }
+  ///////////
 }
-
-
-// function onLocationFound(e) {
-//   const map = L.map('map').setView([32.603461, 51.567615], 11);
-//   var radius = e.accuracy;
-
-//   L.marker(e.latlng).addTo(map)
-//     .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-//   L.circle(e.latlng, radius).addTo(map);
-// }
-
-// map.on('locationfound', onLocationFound);
