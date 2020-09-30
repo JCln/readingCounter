@@ -13,6 +13,7 @@ declare let L;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit {
+  isShowMap: boolean = true;
   private map;
   title: string = '';
   private readonly mapItems: Imap[];
@@ -52,6 +53,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     L.control.layers(baseMaps).addTo(this.map);
   }
+  
   ngOnInit(): void {
     this.initMap();
   }

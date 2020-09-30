@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  toggleMap = () => {
+    // this.router.navigateByUrl('/wr', { state: { isShowMap: true } })
+    this.router.navigate(['/wr', { isShowMap: true }]);
+  }
 }

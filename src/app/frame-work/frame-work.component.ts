@@ -2,10 +2,10 @@ import '../../../node_modules/leaflet-easyprint';
 import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import '../../../src/assets/L.EasyButton/src/easy-button.js';
 
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { InteractionService } from '../services/interaction.service';
-import { MapService } from './../services/map.service';
 
 declare let L;
 
@@ -30,10 +30,11 @@ L.Marker.prototype.options.icon = defaultIcon;
   templateUrl: './frame-work.component.html',
   styleUrls: ['./frame-work.component.scss']
 })
-export class FrameWorkComponent implements OnInit, AfterViewInit {
+export class FrameWorkComponent implements OnInit, AfterViewInit, OnChanges {
   title: string = '';
+  orderId;
 
-  constructor(private interactionService: InteractionService, private mapService: MapService) {
+  constructor(private interactionService: InteractionService, private route: ActivatedRoute) {
 
   }
   private initMap = () => {
@@ -42,9 +43,22 @@ export class FrameWorkComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     this.initMap();
+    this.orderId = this.route.snapshot.paramMap.get('isShowMap');
+    console.log(this.orderId);
   }
+  ngOnChanges(): void {
 
+
+  }
   ngAfterViewInit(): void {
+    console.log(window.history.state);
+
+    // const navigation = this.router.getCurrentNavigation();
+    // console.log(navigation);
+
+    // this.orderId = navigation.extras.state ? navigation.extras.state.orderId : 0;
+
+    console.log(this.orderId);
   }
 
 }

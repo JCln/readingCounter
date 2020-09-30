@@ -55,8 +55,11 @@
   label {
     display: flex;
     font-size: $font_m;
-    margin: $font_05;
+    margin: 0 $font_05;
     color: $blue_l;
+    background: $gray_d5;
+    border-radius: $border_50;
+    padding: $font_05;
     cursor: pointer;
   }
 }
