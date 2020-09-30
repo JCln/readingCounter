@@ -1,6 +1,8 @@
 import '../../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Imap } from 'src/app/Interfaces/imap.js';
+import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
 
 import { MapService } from './../../services/map.service';
 
@@ -11,28 +13,53 @@ declare let L;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit {
-  constructor(private mapService: MapService) {
-  }
+  private map;
+  title: string = '';
+  private readonly mapItems: Imap[];
 
+  constructor(private mapService: MapService, readonly mapItemsService: MapItemsService) {
+    this.mapItems = mapItemsService.getMapItems();
+  }
+  private initMap = () => {
+
+    const
+      streets = L.tileLayer(
+        this.mapItems[0].mapBoxUrl, {
+        id: this.mapItems[0].id,
+        maxZoom: this.mapItems[0].maxZoom,
+        minZoom: this.mapItems[0].minZoom,
+        tileSize: this.mapItems[0].tileSize,
+        zoomOffset: this.mapItems[0].zoomOffset
+      }),
+      satellite = L.tileLayer(
+        this.mapItems[1].style + this.mapItems[1].accessToken, {
+        tileSize: this.mapItems[1].tileSize,
+        zoomOffset: this.mapItems[1].zoomOffset
+      })
+
+    // only one of base layers should be added to the map at instantiation
+    this.map = L.map('map', {
+      center: [51.505, -0.09],
+      zoom: 13,
+      minZoom: 4,
+      layers: [streets]
+    });
+
+    const baseMaps = {
+      "Satellite": satellite,
+      "OSM": streets
+    };
+
+    L.control.layers(baseMaps).addTo(this.map);
+  }
   ngOnInit(): void {
-    // const map = L.map('map').setView([51.505, -0.09], 13);
-
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //   attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    // }).addTo(map);
-
-    // L.Routing.control({
-    //   waypoints: [
-    //     L.latLng(57.74, 11.94),
-    //     L.latLng(57.6792, 11.949)
-    //   ]
-    // }).addTo(map);
-
-
-    // map.addControl(new L.Control.Fullscreen());
+    this.initMap();
   }
+
   ngAfterViewInit(): void {
-    // this.mapService.initMap();
+    this.mapService.routingControl(this.map);
+    this.mapService.fullScreen(this.map);
+    this.mapService.buttons(this.map);
   }
 
 }
