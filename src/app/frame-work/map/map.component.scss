@@ -1,6 +1,5 @@
 @import '../../../assets/variable.scss';
-@import '../../../assets/button.scss';
-
+@import '../../../assets/mixins.scss';
 
 .map-frame {
   box-shadow: -1px 2px 5px 5px $gray_d;
@@ -11,14 +10,53 @@
 #map {
   height: 100%;
   min-height: 30rem;
+  z-index: 1;
 }
 
-.option {
-  column-gap: 1rem;
+.unit {
   display: flex;
-  justify-content: center;
-}
+  align-items: center;
+  justify-content: flex-end;
 
-.btn_2 {
-  background: $gray_d5;
+  .unit_toggle {
+    cursor: pointer;
+    border: 2px solid $orange;
+    border-radius: 100vmax;
+    width: 5rem;
+    transition: all ease-in-out 250ms;
+
+    &::after {
+      content: '';
+      display: block;
+      margin-left: auto;
+      height: $font_s;
+      width: $font_s;
+      border-radius: $border_50;
+      background: $orange;
+      transition: all ease-in-out 250ms;
+
+    }
+  }
+
+  input:checked~.unit_toggle::after {
+    margin-left: 0;
+  }
+
+  input {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    height: 1px;
+    width: 1px;
+  }
+
+  label {
+    display: flex;
+    font-size: $font_m;
+    margin: $font_05;
+    color: $blue_l;
+    cursor: pointer;
+  }
 }
