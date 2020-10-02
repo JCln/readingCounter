@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { SharedModule } from './../../shared/shared.module';
 import { FooRoutingModule } from './foo-routing.module';
 import { FooComponent } from './foo.component';
 
@@ -8,7 +8,7 @@ import { FooComponent } from './foo.component';
 @NgModule({
   declarations: [FooComponent],
   imports: [
-    CommonModule,
+    SharedModule,
     FooRoutingModule
   ]
 })

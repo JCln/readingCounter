@@ -1,5 +1,6 @@
 import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +20,8 @@ import { MatTableModule } from '@angular/material/table';
         MatTableModule,
         MatFormFieldModule,
         CdkTableModule,
-        MatInputModule
+        MatInputModule,
+        MatCheckboxModule
     ],
     exports: [
         MatGridListModule,
@@ -30,7 +32,8 @@ import { MatTableModule } from '@angular/material/table';
         MatTableModule,
         MatFormFieldModule,
         CdkTableModule,
-        MatInputModule
+        MatInputModule,
+        MatCheckboxModule
     ]
 })
 export class MaterialModule {

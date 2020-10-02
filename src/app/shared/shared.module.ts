@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { MaterialModule } from './material.module';
 import { SharedRoutingModule } from './shared-routing.module';
+import { MatCheckboxComponent } from './mat-checkbox/mat-checkbox.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [MatCheckboxComponent],
   imports: [
     FormsModule,
     CommonModule,
