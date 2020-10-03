@@ -83,7 +83,7 @@ export class FooComponent implements OnInit {
 
   constructor(private readonly interactionService: InteractionService) { }
 
-  updateAllComplete() {
+  getL2Status = (): boolean => {
     const a: Array<IMulti> = [];
     a.push(this.datas);
 
@@ -94,15 +94,41 @@ export class FooComponent implements OnInit {
         })
       })
     })
-    
-    this.allComplete = this.datas.subCollection != null && this.datas.subCollection.every(t => t.isChecked) && b.pop();
+    return b.pop();
+  }
+
+  updateAllComplete() {
+    this.allComplete = this.datas.subCollection != null && this.datas.subCollection.every(t => t.isChecked) && this.getL2Status();
   }
 
   someComplete(): boolean {
+    const a: Array<IMulti> = [];
+    a.push(this.datas);
+
+    // const b = a.map(item => {
+    //   return item.subCollection.map(sub_item => {
+    //     return sub_item.subCollection.filter(sub_2 => {
+    //       sub_2.isChecked.length > 0
+    //     })
+    //   })
+    // })
+
     if (this.datas.subCollection == null) {
       return false;
     }
-    return this.datas.subCollection.filter(t => t.isChecked).length > 0 && !this.allComplete;
+    // const b = a.map(s => {
+    //   s.subCollection.filter(item1 => {
+    //     return item1.subCollection.filter(item2 => {
+    //       return item2.subCollection.filter(item3 => {
+    //         return item3.isChecked
+    //       })
+    //     })
+    //   })
+    // })
+    // console.log(b);
+
+    return this.datas.subCollection.filter(t => t.isChecked).length > 0 && !this.allComplete
+
   }
 
   setAll(completed: boolean) {
@@ -110,9 +136,19 @@ export class FooComponent implements OnInit {
     if (this.datas.subCollection == null) {
       return;
     }
-    this.datas.subCollection.forEach(t => t.isChecked = completed);
+    this.datas.subCollection.forEach(t => {
+      t.isChecked = completed,
+        t.subCollection.forEach(y => {
+          y.isChecked = completed
+        })
+    });
   }
 
+  setAllL2(completed: boolean, subtask: IMulti) {
+    subtask.subCollection.forEach(t => {
+      t.isChecked = completed
+    });
+  }
   ngOnInit(): void {
     this.interactionService.setPageTitle('گزارش گیری');
   }

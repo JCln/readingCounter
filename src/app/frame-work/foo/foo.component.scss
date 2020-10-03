@@ -37,13 +37,25 @@ main {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: .1rem;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: .5rem;
+      border-style: solid;
+      border-color: $blue_l transparent transparent transparent;
+    }
   }
 }
 
 .l_2 {
   .l_2_c {
     background: $white;
-    color: $gray_dr;    
+    color: $gray_dr;
     margin-bottom: .2rem;
     font-size: 1.5rem;
     font-weight: 600;

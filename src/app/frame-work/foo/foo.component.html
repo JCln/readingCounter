@@ -8,24 +8,25 @@
         </div>
     </section>
     <!-- <section class="container"> -->
-        <section class="_content">
-            <div class="l_2" *ngFor="let subtask of datas.subCollection">
+    <section class="_content">
+        <div class="l_2" *ngFor="let subtask of datas.subCollection">
 
-                <div class="l_2_c">
-                    <mat-checkbox [(ngModel)]="subtask.isChecked" (ngModelChange)="updateAllComplete()">
-                        {{subtask.title}}
+            <div class="l_2_c">
+                <mat-checkbox [(ngModel)]="subtask.isChecked" (ngModelChange)="updateAllComplete()"
+                    (change)="setAllL2($event.checked , subtask)">
+                    {{subtask.title}}
+                </mat-checkbox>
+            </div>
+
+            <div class="l_3_c">
+                <div class="l_3" *ngFor="let subCollection of subtask.subCollection">
+                    <mat-checkbox [(ngModel)]="subCollection.isChecked" (ngModelChange)="updateAllComplete()">
+                        {{subCollection.title}}
                     </mat-checkbox>
                 </div>
-
-                <div class="l_3_c">
-                    <div class="l_3" *ngFor="let subCollection of subtask.subCollection">
-                        <mat-checkbox [(ngModel)]="subCollection.isChecked" (ngModelChange)="updateAllComplete()">
-                            {{subCollection.title}}
-                        </mat-checkbox>
-                    </div>
-                </div>
-
             </div>
-        </section>
+
+        </div>
+    </section>
     <!-- </section> -->
 </main>
