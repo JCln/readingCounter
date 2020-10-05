@@ -45,11 +45,12 @@
               "./node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css",
               "src/assets/L.fullscreenGH/dist/leaflet.fullscreen.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/assets/L.EasyButton/src/easy-button.css"
+              "src/assets/L.EasyButton/src/easy-button.css",
+              "./node_modules/leaflet.markercluster/dist/MarkerCluster.css"
             ],
             "scripts": [
               "src/assets/leaflet/leaflet.js",
-              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"              
+              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"
             ]
           },
           "configurations": {

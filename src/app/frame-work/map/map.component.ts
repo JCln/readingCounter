@@ -1,5 +1,3 @@
-import '../../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
-
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Imap } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
@@ -53,7 +51,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     L.control.layers(baseMaps).addTo(this.map);
   }
-  
+
   ngOnInit(): void {
     this.initMap();
   }
@@ -61,6 +59,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.mapService.routingControl(this.map);
     this.mapService.fullScreen(this.map);
+    this.mapService.addMarkerCluster(this.map);
     this.mapService.buttons(this.map);
   }
 

@@ -1,4 +1,5 @@
 import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
+import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
 import { Injectable } from '@angular/core';
 
@@ -18,6 +19,22 @@ export class MapService {
       golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
 
     const cities = L.layerGroup([littleton, denver, aurora, golden]);
+  }
+
+  getRandomLatLng(map) {
+    const bounds = map.getBounds(),
+      southWest = bounds.getSouthWest(),
+      northEast = bounds.getNorthEast(),
+      lngSpan = northEast.lng - southWest.lng,
+      latSpan = northEast.lat - southWest.lat;
+    return new L.LatLng(
+      southWest.lat + latSpan * Math.random(),
+      southWest.lng + lngSpan * Math.random());
+  }
+  addMarkerCluster = (map: L.Map) => {
+    const markers = L.markerClusterGroup();
+    markers.addLayer(L.marker(this.getRandomLatLng(map)));
+    map.addLayer(markers);
   }
 
   routingControl = (map: L.Map) => {
