@@ -1,0 +1,33 @@
+<div class="over_all">
+    <main>
+        <h1 class="title">مشخصات کاربری</h1>
+        <div class="content">
+            <div class="_profile_img">
+                <div class="fa fa-user"></div>
+            </div>
+            <div class="_desc">
+                <input class="input_1" type="text" placeholder=" نام کاربری :">
+                <input class="input_1" type="text" placeholder="رمز عبور :">
+            </div>
+            <div class="change_pass">
+                <button class="btn_2" (click)="_isShow = !_isShow">تغییر رمز عبور</button>
+            </div>
+        </div>
+    </main>
+
+    <section [hidden]="_isShow">
+
+        <h1 class="title">تغییر رمز عبور</h1>
+        <div class="content">
+            <div class="_desc">
+                <input class="input_1" type="text" placeholder="رمز عبور فعلی :">
+                <input class="input_1" type="text" placeholder="رمز عبور جدید :">
+                <input class="input_1" type="text" placeholder="تکرار رمز عبور جدید :">
+            </div>
+            <div class="change_pass">
+                <button class="btn_2">ذخیره</button>
+            </div>
+        </div>
+
+    </section>
+</div>

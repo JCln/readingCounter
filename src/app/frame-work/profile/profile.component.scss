@@ -1,0 +1,73 @@
+@import '../../../assets/variable';
+@import '../../../assets/button.scss';
+@import '../../../assets/input.scss';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 27rem));
+  direction: rtl;
+  gap: .5rem;
+}
+
+main {
+
+  ._profile_img {
+    margin-bottom: $font_2;
+  }
+
+  .fa-user {
+    font-size: 4rem;
+    color: $gray_d;
+    background: $white;
+    border-radius: $border_50;
+    height: 7rem;
+    width: 7rem;
+    padding: $font_2;
+    margin: auto;
+
+    display: grid;
+    place-content: center;
+  }
+
+}
+
+.content {
+  background: $gray_l;
+  box-shadow: 1px 1px 8px 4px $gray_d;
+  text-align: center;
+  padding: $font_2 0;
+  justify-content: space-around;
+  border-radius: $border_s;
+}
+
+._desc {
+  display: grid;
+  margin: auto;
+  padding: $font_xs 0;
+  width: 90%;
+  justify-content: space-around;
+  border-radius: $border_s;
+}
+
+.title {
+  color: $blue_l;
+  text-align: right;
+  margin: $font_xs $font_05;
+  font-size: 1.6rem;
+}
+
+.change_pass {
+  text-align: right;
+
+  button {
+    background: $blue_l;
+    margin: $font_2;
+    color: $white;
+  }
+}
+
+input {
+  color: $gray_96;
+  margin: 0 auto;
+  box-shadow: 1px 1px 8px 1px $gray_d;
+}
