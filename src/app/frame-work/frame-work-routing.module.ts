@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'test', loadChildren: () => import('./test/test.module').then(t => t.TestModule) },
   { path: 'table', loadChildren: () => import('./table/table.module').then(tb => tb.TableModule) },
   { path: 'ms', loadChildren: () => import('./manage-server/manage-server.module').then(ms => ms.ManageServerModule) },
-  { path: 'profile', loadChildren: () => import('./profile/profile.module').then(profile => profile.ProfileModule) }
+  { path: 'profile', loadChildren: () => import('./profile/profile.module').then(profile => profile.ProfileModule) },
+  { path: 'apk', loadChildren: () => import('./apk/apk.module').then(apk => apk.ApkModule) }
 ];
 
 @NgModule({

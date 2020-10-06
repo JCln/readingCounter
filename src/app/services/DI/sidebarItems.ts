@@ -6,5 +6,6 @@ export const sidebarItems: ISidebarItems[] = [
     { routerUrl: '/wr/test', name: 'تست', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/table', name: 'جدول', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/ms', name: 'مدیریت سرور', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/profile', name: 'پروفایل', isClosable: true, isRefreshable: true, sid_isOpenItems: false }
+    { routerUrl: '/wr/profile', name: 'پروفایل', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/apk', name: 'apk', isClosable: true, isRefreshable: true, sid_isOpenItems: false }
 ]
