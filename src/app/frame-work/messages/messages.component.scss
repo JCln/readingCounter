@@ -1,0 +1,53 @@
+@import '../../../assets/variable';
+@import '../../../assets/button.scss';
+
+main {
+  margin: auto;
+}
+
+h1,
+h3 {
+  text-align: right;
+  color: $blue_d;
+}
+
+.content {
+  background: $gray_d5;
+  border-radius: $border_s;
+  width: 50%;
+  margin: auto;
+  padding: 1rem;
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+textarea {
+  background: $white;
+  font-size: 1.2rem;
+  color: $gray_96;
+  font-weight: 600;
+  text-align: right;
+  direction: rtl;
+  border: none;
+  border-radius: $border_s;
+}
+
+.t_separator {
+  display: grid;
+  grid-template-rows: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(3rem, 5rem));
+  gap: .3rem;
+}
+
+.c_separator {
+    display: grid;
+    grid-template-rows: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(3rem, 5rem));
+    gap: .3rem;
+}
+
+.send {}
