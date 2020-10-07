@@ -2,7 +2,6 @@
     <div class="items" *ngFor="let tasks of manageTasks" [ngStyle]="{'background': tasks.background}">
 
         <div *ngIf="tasks.icon" class="icons {{tasks.icon}}"></div>
-        <div *ngIf="!tasks.icon"><img src="../../../assets/imgs/ms/stop.svg" alt=""></div>
         <h2>{{tasks.name}}</h2>
     </div>
 </section>
