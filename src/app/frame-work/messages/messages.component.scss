@@ -1,12 +1,13 @@
 @import '../../../assets/variable';
 @import '../../../assets/button.scss';
+@import '../../../assets/mixins.scss';
 
 main {
   margin: auto;
 }
 
 h1,
-h3 {
+h2 {
   text-align: right;
   color: $blue_d;
 }
@@ -27,13 +28,17 @@ h3 {
 
 textarea {
   background: $white;
-  font-size: 1.2rem;
+  font-size: $font_m;
   color: $gray_96;
   font-weight: 600;
   text-align: right;
   direction: rtl;
   border: none;
+  outline: none;
+  padding: $font_xxs;
+  height: 8rem;
   border-radius: $border_s;
+  font-family: inherit;
 }
 
 .t_separator {
@@ -41,13 +46,54 @@ textarea {
   grid-template-rows: 4rem;
   grid-template-columns: repeat(auto-fit, minmax(3rem, 5rem));
   gap: .3rem;
+  direction: rtl;
+
+  .btn_2 {
+    width: 5rem;
+  }
 }
 
 .c_separator {
-    display: grid;
-    grid-template-rows: 4rem;
-    grid-template-columns: repeat(auto-fit, minmax(3rem, 5rem));
-    gap: .3rem;
+  display: grid;
+  grid-template-rows: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(3rem, 5rem));
+  gap: .3rem;
+  direction: rtl;
+
+  .btn_2 {
+    width: 5rem;
+    color: $gray_l;
+  }
+
+  :nth-child(1) {
+    background: $blue-l;
+  }
+
+  :nth-child(2) {
+    background: green;
+  }
+
+  :nth-child(3) {
+    background: $orange;
+  }
+
+  :nth-child(4) {
+    background: $red;
+  }
 }
 
-.send {}
+.send {
+  text-align: center;
+  margin: $font_2 0 $font_05;
+
+  .btn_2 {
+    color: $blue_l;
+    width: 11rem;
+  }
+}
+
+.text,
+.time,
+.color {
+  margin-bottom: 1rem;
+}
