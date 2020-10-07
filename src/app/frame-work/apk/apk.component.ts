@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-const ELEMENT_DATA = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079 },
-  { position: 2, name: 'Helium', weight: 4.0026 },
-  { position: 3, name: 'Lithium', weight: 6.941 },
-  { position: 4, name: 'Beryllium', weight: 9.0122 }
+import { IAPK } from './../../Interfaces/iapk';
+
+const ELEMENT_DATA: IAPK[] = [
+  { name: 'اول', version: 'v.0.0.1', file: '' },
+  { name: 'دوم', version: 'V.0.0.2', file: '' },
+  { name: 'سوم', version: 'v.0.0.3', file: '' },
+  { name: 'چهارم', version: 'v.0.0.4', file: '' }
 ];
 @Component({
   selector: 'app-apk',
@@ -12,7 +14,7 @@ const ELEMENT_DATA = [
   styleUrls: ['./apk.component.scss']
 })
 export class ApkComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight'];
+  displayedColumns: string[] = ['name', 'version'];
   dataSource = ELEMENT_DATA;
 
   constructor() { }

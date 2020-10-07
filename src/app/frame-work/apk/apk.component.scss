@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 27rem));
   direction: rtl;
-  gap: .5rem;
+  gap: 4rem;
 }
 
 .content {
@@ -56,4 +56,20 @@ input {
   text-align: center;
   border-radius: 100vmax;
   margin-bottom: 1rem;
+}
+
+th.mat-header-cell {
+  text-align: center;
+  font-size: $font_s;
+  font-weight: 600;
+}
+
+td.mat-cell {
+  font-size: $font_s;
+  font-weight: 600;
+  color: $gray_96;
+}
+
+.mat-table {
+  font-family: inherit;
 }

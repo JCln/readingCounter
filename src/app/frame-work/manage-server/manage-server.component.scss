@@ -4,12 +4,14 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
   text-align: center;
-  gap: .3rem;
+  direction: rtl;
+  gap: $font_xxs;
 }
 
 .items {
   border-radius: $border_s;
   padding: $font_s;
+  cursor: pointer;
 }
 
 .icons {
