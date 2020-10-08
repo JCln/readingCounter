@@ -11,7 +11,9 @@ const routes: Routes = [
   { path: 'ms', loadChildren: () => import('./manage-server/manage-server.module').then(ms => ms.ManageServerModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(profile => profile.ProfileModule) },
   { path: 'apk', loadChildren: () => import('./apk/apk.module').then(apk => apk.ApkModule) },
-  { path: 'msge', loadChildren: () => import('./messages/messages.module').then(msge => msge.MessagesModule) }
+  { path: 'msge', loadChildren: () => import('./messages/messages.module').then(msge => msge.MessagesModule) },
+  { path: 'bi', loadChildren: () => import('./base-info/base-info.module').then(bi => bi.BaseInfoModule) },
+  { path: 'privacy', loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) }
 ];
 
 @NgModule({
