@@ -9,6 +9,6 @@ export const sidebarItems: ISidebarItems[] = [
     { routerUrl: '/wr/profile', name: 'پروفایل', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/apk', name: 'apk', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/bi', name: 'اطلاعات پایه', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/privacy', name: 'شخصی سازی', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/privacy', name: 'تنظیمات کلمه عبور', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/msge', name: 'پیام سیستمی', isClosable: true, isRefreshable: true, sid_isOpenItems: false }
 ]
