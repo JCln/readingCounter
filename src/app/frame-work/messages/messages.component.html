@@ -3,28 +3,24 @@
     <div class="content">
         <div class="text">
             <h2>متن</h2>
-            <textarea name="text" id="text" cols="30" rows="10"></textarea>
+            <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="messageService.message.text"></textarea>
         </div>
         <div class="time">
             <h2>زمان</h2>
             <div class="t_separator">
-                <button class="btn_2">5</button>
-                <button class="btn_2">10</button>
-                <button class="btn_2">15</button>
-                <button class="btn_2">20</button>
+                <button class="btn_2" (click)="messageService.setTime(item)"
+                    *ngFor="let item of times">{{item}}</button>
             </div>
         </div>
         <div class="color">
             <h2>رنگ</h2>
             <div class="c_separator">
-                <button class="btn_2">آبی</button>
-                <button class="btn_2">سبز</button>
-                <button class="btn_2">نارنجی</button>
-                <button class="btn_2">قرمز</button>
+                <button class="btn_2" (click)="messageService.setColor(item)"
+                    *ngFor="let item of colors">{{item}}</button>
             </div>
         </div>
         <div class="send">
-            <button class="btn_2">ارسال و مشاهده</button>
+            <button (click)="logTheMessage()" class="btn_2">ارسال و مشاهده</button>
         </div>
     </div>
 </main>
