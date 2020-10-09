@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
@@ -21,7 +22,8 @@ import { MatTableModule } from '@angular/material/table';
         MatFormFieldModule,
         CdkTableModule,
         MatInputModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatRadioModule
     ],
     exports: [
         MatGridListModule,
@@ -33,7 +35,8 @@ import { MatTableModule } from '@angular/material/table';
         MatFormFieldModule,
         CdkTableModule,
         MatInputModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatRadioModule
     ]
 })
 export class MaterialModule {

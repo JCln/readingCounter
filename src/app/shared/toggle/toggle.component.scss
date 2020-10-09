@@ -1,0 +1,60 @@
+@import '../../../assets/variable';
+
+.unit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .unit_toggle {
+    cursor: pointer;
+    border: 2px solid $orange;
+    border-radius: 100vmax;
+    width: 5rem;
+    transition: all ease-in-out 250ms;
+
+
+  }
+
+  .unit_toggle::after {
+    content: '';
+    display: block;
+    margin-left: auto;
+    height: $font_s;
+    width: $font_s;
+    border-radius: $border_50;
+    background: $orange;
+    transition: all ease-in-out 250ms;
+
+  }
+
+  input:checked~.unit_toggle::after {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+
+  input {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    height: 1px;
+    width: 1px;
+
+    &:checked~.unit_toggle::after {
+      margin-left: 0;
+    }
+  }
+
+  label {
+    display: flex;
+    font-size: $font_m;
+    margin: 0 $font_05;
+    color: $blue_l;
+    background: $gray_d5;
+    border-radius: $border_50;
+    padding: $font_05;
+    cursor: pointer;
+  }
+}

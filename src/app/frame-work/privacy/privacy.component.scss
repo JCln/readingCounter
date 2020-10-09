@@ -1,0 +1,51 @@
+@import '../../../assets/variable';
+@import '../../../assets/button.scss';
+@import '../../../assets/input.scss';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 27rem));
+  direction: rtl;
+  gap: 4rem;
+}
+
+.content {
+  background: $gray_d5;
+  box-shadow: 1px 1px 8px 4px $gray_d;
+  text-align: center;
+  padding: $font_2 0;
+  justify-content: space-around;
+  border-radius: $border_s;
+}
+
+._desc {
+  display: grid;
+  margin: auto;
+  padding: $font_xs 0;
+  width: 90%;
+  border-radius: $border_s;
+}
+
+.title {
+  color: $gray_96;
+  text-align: center;
+  margin: $font_xs $font_05;
+  font-size: 1.6rem;
+}
+
+input {
+  color: $gray_96;
+  margin: 0 auto;
+  box-shadow: 1px 1px 8px 1px $gray_d;
+}
+
+// radio buttons
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
