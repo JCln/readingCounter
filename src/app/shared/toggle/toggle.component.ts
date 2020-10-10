@@ -19,15 +19,11 @@ export class ToggleComponent implements OnInit {
   constructor() { }
 
   sendMessage() {
-    if (!this.firstClick)
-      this.firstClick = false;
     this.firstClick = !this.firstClick;
     this.messageEvent.emit(this.firstClick);
   }
   secondClicked = () => {
-    if (!this.secondClick)
-      this.secondClick = false;
-    this.secondClick = !this.secondClick;
+    this.firstClick = false;  
     this.messageEvent.emit(this.secondClick);
   }
 

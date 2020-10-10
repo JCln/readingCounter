@@ -11,6 +11,7 @@
                     </mat-radio-button>
                 </mat-radio-group>
             </div>
+            <p class="over_all_result">کلمه عبور حداقل {{selectedCapacity}} ای باشد</p>
         </div>
     </section>
 
@@ -18,18 +19,34 @@
 
         <h1 class="title">حداقل یک نویسه با مشخصات !</h1>
         <div class="content">
-            <div class="_desc">
+            <div class="_desc" *ngFor="let privacy of privacyToggle;index as i ">
 
-                <app-toggle [rightText]="haveBigTextRight" [leftText]="haveBigTextLeft"
-                    (messageEvent)="receiveMessage($event)"></app-toggle>
-                
-                <app-toggle [rightIcon]="haveSmallTextRight" [leftIcon]="haveSmallTextLeft"
-                    (secondClickEvent)="($event)"></app-toggle>
+                <div class="unit">
+                    <label for="_map">
+                        <div class="__text_options">{{privacy.rightToggle}}</div>
+                    </label>
+                    <input type="radio" id="_map" name="radio">
+
+                    <button (click)="privacy.selected = !privacy.selected" (click)="updateText()"
+                        [ngClass]="{'toggle': privacy.selected}" class="unit_toggle"></button>
+
+                    <label for="_dash">
+                        <div class="__text_options">{{privacy.leftToggle}}</div>
+                    </label>
+                    <input type="radio" id="_dash" name="radio">
+                </div>
 
             </div>
+            <p class="over_all_result">
+                کلمه عبور دارای حداقل یک نویسه با
+                {{_updatedSelectedToggles[0]}}
+                ،
+                {{_updatedSelectedToggles[1]}}
+                و
+                {{_updatedSelectedToggles[2]}}
+                باشد
+            </p>
         </div>
     </section>
 
 </div>
-
-<p>متن تستی برابر است با :: {{selectedCapacity}}</p>

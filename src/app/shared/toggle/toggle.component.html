@@ -1,15 +1,13 @@
 <div class="unit">
     <label for="_map">
-        <i *ngIf="leftIcon" class="fa fa-map-o"></i>
-        <i *ngIf="leftText">{{leftText}}</i>
+        <i class="fa fa-map-o"></i>
     </label>
-    <input (click)="sendMessage()" type="radio" id="_map" name="radio">
+    <input type="radio" id="_map" name="radio">
 
-    <button class="unit_toggle"></button>
+    <button (click)="sendMessage()" class="unit_toggle"></button>
 
     <label for="_dash">
-        <i *ngIf="rightIcon" class="fa fa-dashboard"></i>
-        <i *ngIf="rightText">{{rightText}}</i>
+        <i class="fa fa-dashboard"></i>
     </label>
-    <input (click)="secondClicked()" type="radio" id="_dash" name="radio">
+    <input type="radio" id="_dash" name="radio">
 </div>
