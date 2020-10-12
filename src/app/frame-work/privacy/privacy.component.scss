@@ -16,6 +16,7 @@
   padding: $font_2 0;
   justify-content: space-around;
   border-radius: $border_s;
+  min-height: 28rem;
 }
 
 ._desc {
@@ -83,6 +84,10 @@ input {
       font-size: $font_s;
       font-weight: 600;
       color: $gray_dr;
+      background: $white;
+      padding: $font_05;
+      line-height: 2;
+      border-radius: $border_s;
       font-family: BLotus, "Blotus", tahoma, Sans-Serif;
     }
   }

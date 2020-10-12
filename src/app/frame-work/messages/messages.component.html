@@ -6,10 +6,11 @@
             <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="messageService.message.text"></textarea>
         </div>
         <div class="time">
-            <h2>زمان</h2>
+            <h2>زمان (ثانیه)</h2>
             <div class="t_separator">
-                <button class="btn_2" (click)="messageService.setTime(item)"
-                    *ngFor="let item of times">{{item}}</button>
+                <button class="btn_2" (click)="messageService.setTime(item.value)"
+                    (click)="item.isClicked = !item.isClicked" *ngFor="let item of times"
+                    [ngClass]="{'visited': item.isClicked}">{{item.value}}</button>
             </div>
         </div>
         <div class="color">

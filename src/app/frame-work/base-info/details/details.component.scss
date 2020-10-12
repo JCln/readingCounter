@@ -1,37 +1,9 @@
 @import '../../../../assets/variable';
+@import '../../../../assets/input.scss';
 
 main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 18rem));
   gap: .5rem 1rem;
   direction: rtl;
-}
-
-.content {
-  border-radius: $border_s;
-  background: $gray_e3;
-  display: flex;
-  align-items: center;
-}
-
-._key {
-  text-align: left;
-  width: 40%;
-}
-
-._value {
-  border-radius: inherit;
-  margin: .2em;
-  width: 60%;
-  text-align: right;
-  background: $gray_d;
-
-}
-
-._key,
-._value {
-  padding: $font_05 0.3rem;
-  color: $gray_dr2;
-  font-size: $font_s;
-  font-weight: 600;
 }

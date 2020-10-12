@@ -6,16 +6,19 @@
                 <div class="fa fa-user"></div>
             </div>
             <div class="_desc">
-                <input class="input_1" type="text" placeholder=" نام کاربری :">
-                <input class="input_1" type="text" placeholder="رمز عبور :">
-            </div>
-            <div class="change_pass">
-                <button class="btn_2" (click)="_isShow = !_isShow">تغییر رمز عبور</button>
-            </div>
+                <div class="input_2">
+                    <div class="_key">نام کاربری :</div>
+                    <div class="_value">مقدار 1</div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">رمز عبور :</div>
+                    <div class="_value">مقدار2</div>
+                </div>
+            </div>            
         </div>
     </main>
 
-    <section [hidden]="_isShow">
+    <section>
 
         <h1 class="title">تغییر رمز عبور</h1>
         <div class="content">

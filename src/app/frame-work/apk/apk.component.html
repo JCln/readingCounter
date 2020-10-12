@@ -1,11 +1,11 @@
 <div class="over_all">
     <section>
 
-        <h1 class="title">ایجاد ورژن جدید</h1>
+        <h1 class="title">ایجاد نسخه جدید</h1>
         <div class="content">
             <div class="_desc">
-                <input class="input_1" type="text" placeholder="نام ورژن : ">
-                <input class="input_1" type="text" placeholder="کد ورژن :">
+                <input class="input_1" type="text" placeholder="نام نسخه : ">
+                <input class="input_1" type="text" placeholder="کد نسخه :">
             </div>
             <button class="btn_2 _choose_file" type="text">انتخاب فایل</button>
             <div class="change_pass">
@@ -20,7 +20,7 @@
 
     <section>
 
-        <h1 class="title">ورژن های گذشته</h1>
+        <h1 class="title">نسخه های گذشته</h1>
         <div class="content">
             <div class="_desc">
 
@@ -31,14 +31,23 @@
 
                     <!-- Name Column -->
                     <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef>نام ورژن</th>
+                        <th mat-header-cell *matHeaderCellDef>نام نسخه</th>
                         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                     </ng-container>
 
                     <!-- Position Column -->
                     <ng-container matColumnDef="version">
-                        <th mat-header-cell *matHeaderCellDef>ورژن</th>
+                        <th mat-header-cell *matHeaderCellDef>نسخه</th>
                         <td mat-cell *matCellDef="let element"> {{element.version}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="file">
+                        <th mat-header-cell *matHeaderCellDef>فایل</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button class="btn_2 __custom">
+                                {{element.file}}
+                            </button>
+                        </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

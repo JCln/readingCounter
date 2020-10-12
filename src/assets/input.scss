@@ -11,3 +11,35 @@
   border: 1px solid;
   font-family: inherit;
 }
+
+// key value input
+.input_2 {
+  border-radius: $border_s;
+  background: $gray_e3;
+  display: flex;
+  align-items: center;
+}
+
+._key {
+  text-align: left;
+  width: 40%;
+}
+
+._value {
+  border-radius: inherit;
+  margin: .2em;
+  width: 60%;
+  text-align: right;
+  background: $gray_d;
+
+}
+
+._key,
+._value {
+  padding: $font_05 0.3rem;
+  color: $gray_dr2;
+  font-size: $font_s;
+  font-weight: 600;
+}
+
+// ////////

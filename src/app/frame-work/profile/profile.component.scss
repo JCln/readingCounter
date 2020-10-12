@@ -38,6 +38,7 @@ main {
   padding: $font_2 0;
   justify-content: space-around;
   border-radius: $border_s;
+  min-height: 25rem;
 }
 
 ._desc {
@@ -66,8 +67,9 @@ main {
   }
 }
 
-input {
+.input_2 {
+  min-width: 19rem;
   color: $gray_96;
-  margin: 0 auto;
+  margin-bottom: $font_05;
   box-shadow: 1px 1px 8px 1px $gray_d;
 }

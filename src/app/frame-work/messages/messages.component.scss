@@ -67,6 +67,11 @@ textarea {
 
   :nth-child(1) {
     background: $blue-l;
+
+    &:active , :focus {
+      box-shadow: 2px 2px 2px 2px $gray_d5;
+      outline: 2px dotted $blue_d;
+    }
   }
 
   :nth-child(2) {
@@ -96,4 +101,10 @@ textarea {
 .time,
 .color {
   margin-bottom: 1rem;
+}
+
+// for ts visited button
+.visited {
+  box-shadow: 2px 2px 2px 2px $gray_d5;
+  outline: 2px dotted $blue_d;
 }

@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { IAPK } from './../../Interfaces/iapk';
 
 const ELEMENT_DATA: IAPK[] = [
-  { name: 'اول', version: 'v.0.0.1', file: '' },
-  { name: 'دوم', version: 'V.0.0.2', file: '' },
-  { name: 'سوم', version: 'v.0.0.3', file: '' },
-  { name: 'چهارم', version: 'v.0.0.4', file: '' }
+  { name: 'اول', version: 'v.0.0.1', file: 'f' },
+  { name: 'دوم', version: 'V.0.0.2', file: 's' },
+  { name: 'سوم', version: 'v.0.0.3', file: 'long name' },
+  { name: 'چهارم', version: 'v.0.0.4', file: 'another long name' }
 ];
 @Component({
   selector: 'app-apk',
@@ -14,7 +14,7 @@ const ELEMENT_DATA: IAPK[] = [
   styleUrls: ['./apk.component.scss']
 })
 export class ApkComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'version'];
+  displayedColumns: string[] = ['name', 'version', 'file'];
   dataSource = ELEMENT_DATA;
 
   constructor() { }
