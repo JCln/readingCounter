@@ -19,34 +19,25 @@
 
         <h1 class="title">حداقل یک نویسه با مشخصات !</h1>
         <div class="content">
-            <div class="_desc" *ngFor="let privacy of privacyToggle;index as i ">
-
-                <div class="unit">
-                    <label for="_map">
-                        <div class="__text_options">{{privacy.rightToggle}}</div>
-                    </label>
-                    <input type="radio" id="_map" name="radio">
-
-                    <button (click)="privacy.selected = !privacy.selected" (click)="updateText()"
-                        [ngClass]="{'toggle': privacy.selected}" class="unit_toggle"></button>
-
-                    <label for="_dash">
-                        <div class="__text_options">{{privacy.leftToggle}}</div>
-                    </label>
-                    <input type="radio" id="_dash" name="radio">
-                </div>
-
-            </div>
-            <p class="over_all_result">
-                کلمه عبور دارای حداقل یک نویسه با
-                {{_updatedSelectedToggles[0]}}
-                ،
-                {{_updatedSelectedToggles[1]}}
-                و
-                {{_updatedSelectedToggles[2]}}
-                باشد
-            </p>
+            <section class="_checkbox">
+                <span>
+                    <mat-checkbox class="example-margin" [checked]="isAllCompleted" [indeterminate]="someComplete()"
+                        (change)="setAll($event.checked)">
+                        {{privacyOptions.title}}
+                    </mat-checkbox>
+                </span>
+                <span>
+                    <ul>
+                        <li *ngFor="let subtask of privacyOptions.task">
+                            <mat-checkbox [(ngModel)]="subtask.isChecked" (ngModelChange)="updateAllComplete()">
+                                {{subtask.title}}
+                            </mat-checkbox>
+                        </li>
+                    </ul>
+                </span>
+            </section>
         </div>
+
     </section>
 
 </div>

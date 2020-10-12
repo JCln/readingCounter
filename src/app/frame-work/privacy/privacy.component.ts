@@ -9,37 +9,36 @@ import { PrivacyService } from './../../services/privacy.service';
   styleUrls: ['./privacy.component.scss']
 })
 export class PrivacyComponent implements OnInit {
-  privacyToggle: IPrivacy[] = [];
+  privacyOptions: IPrivacy;
   selectedCapacity: string = '';
   leastTextCapacity: string[] = ['4 نویسه', '6 نویسه', '8 نویسه', '10 نویسه'];
 
   _updatedSelectedToggles: string[] = [];
+  isAllCompleted: boolean = false;
+
   constructor(private privacyService: PrivacyService) { }
 
-  toggledItem = () => {
-
-  }
-
   ngOnInit(): void {
-    this.privacyToggle = this.privacyService.getPrivacyToggle();
-    this.updateText();
-
-  }
-  updateText = () => {
-    if (this._updatedSelectedToggles != null)
-      this._updatedSelectedToggles = [];
-      
-    this.privacyToggle.map(selectedItems => {
-      if (selectedItems.selected) {
-        this._updatedSelectedToggles.push(selectedItems.leftToggle)
-      }
-      if (!selectedItems.selected) {
-        this._updatedSelectedToggles.push(selectedItems.rightToggle)
-      }
-    })
-
-    console.log(this._updatedSelectedToggles);
-
+    this.privacyOptions = this.privacyService.getPrivacyToggle();
   }
 
+  updateAllComplete() {
+    this.isAllCompleted = this.privacyOptions.task != null && this.privacyOptions.task.every(t => t.isChecked);
+  }
+
+  someComplete(): boolean {
+    if (this.privacyOptions.task == null) {
+      return false;
+    }
+    return this.privacyOptions.task.filter(t => t.isChecked).length > 0 && !this.isAllCompleted;
+  }
+
+  setAll(completed: boolean) {
+    this.isAllCompleted = completed;
+    if (this.privacyOptions.task == null) {
+      return;
+    }
+    this.privacyOptions.task.forEach(t => t.isChecked = completed);
+  }
 }
+

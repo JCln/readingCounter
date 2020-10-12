@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { IPrivacy } from './../Interfaces/iprivacy';
 import { privacies } from './DI/privacies';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { privacies } from './DI/privacies';
 export class PrivacyService {
 
   constructor() { }
-  getPrivacyToggle = () => {
+  getPrivacyToggle = (): IPrivacy => {
     return privacies;
   }
 }

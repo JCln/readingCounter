@@ -49,75 +49,6 @@ input {
   margin: 5px;
 }
 
-// ///// toggle
-.unit {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  .unit_toggle {
-    cursor: pointer;
-    border: 2px solid $blue_l;
-    border-radius: 100vmax;
-    width: 5rem;
-    transition: all ease-in-out 250ms;
-
-
-  }
-
-  .unit_toggle::after {
-    content: '';
-    display: block;
-    margin-left: auto;
-    height: $font_s;
-    width: $font_s;
-    border-radius: $border_50;
-    background: $blue_l;
-    transition: all ease-in-out 250ms;
-
-  }
-
-  // toggle by ts
-  .toggle::after {
-    margin-left: 0;
-    margin-right: auto;
-  }
-
-  // 
-
-
-  input {
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    height: 1px;
-    width: 1px;
-
-    &:checked~.unit_toggle::after {
-      margin-left: 0;
-    }
-  }
-
-  label {
-    display: flex;
-    font-size: $font_m;
-    margin: 0 $font_05;
-    color: $blue_l;
-    background: $gray_d5;
-    border-radius: $border_50;
-    padding: $font_05;
-    cursor: pointer;
-  }
-
-  .__text_options {
-    color: $gray_dr;
-
-  }
-
-}
-
 .over_all_result {
   color: $blue_l;
   font-size: $font_s;
@@ -128,16 +59,41 @@ input {
 ////////
 
 ::ng-deep {
+
   .mat-radio-label-content {
     color: $gray_dr;
     font-size: $font_s;
     font-weight: 600;
     margin-right: 1rem;
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
   }
+
   .example-radio-button {
     margin: 4px;
     background: $white;
     padding: $font_xxs;
     border-radius: $border_s;
   }
+
+  .mat-checkbox-layout {
+    margin-bottom: $font_05;
+
+    .mat-checkbox-label {
+      margin: 0 $font_05;
+      font-size: $font_s;
+      font-weight: 600;
+      color: $gray_dr;
+      font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    }
+  }
+
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+._checkbox {
+  text-align: right;
 }

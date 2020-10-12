@@ -1,5 +1,6 @@
 export interface IPrivacy {
-    leftToggle: string;
-    rightToggle: string;
-    selected: boolean;
+    id: number;
+    title: string;
+    isChecked: boolean;
+    task?: IPrivacy[];
 }
