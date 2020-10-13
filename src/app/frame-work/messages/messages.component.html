@@ -8,16 +8,23 @@
         <div class="time">
             <h2>زمان (ثانیه)</h2>
             <div class="t_separator">
-                <button class="btn_2" (click)="messageService.setTime(item.value)"
-                    (click)="item.isClicked = !item.isClicked" *ngFor="let item of times"
-                    [ngClass]="{'visited': item.isClicked}">{{item.value}}</button>
+                <mat-button-toggle-group>
+                    <mat-button-toggle class="btn_2" *ngFor="let item of times"
+                        (click)="messageService.setTime(item.value)">{{item.value}}</mat-button-toggle>
+                </mat-button-toggle-group>
             </div>
         </div>
         <div class="color">
             <h2>رنگ</h2>
             <div class="c_separator">
-                <button class="btn_2" (click)="messageService.setColor(item)"
-                    *ngFor="let item of colors">{{item}}</button>
+
+                <mat-button-toggle-group>
+                    <mat-button-toggle class="btn_2" *ngFor="let item of colors"
+                        [ngStyle]="{'background': item.background}" (click)="messageService.setColor(item.value)">
+                        {{item.value}}
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+
             </div>
         </div>
         <div class="send">

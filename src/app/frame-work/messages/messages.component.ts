@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { IColor, ITime } from './../../Interfaces/imessage';
 import { MessageService } from './../../services/message.service';
 
 @Component({
@@ -8,16 +9,14 @@ import { MessageService } from './../../services/message.service';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
-  colors: string[] = ['آبی', 'سبز', 'نارنجی', 'قرمز'];
-  times: any[] = [
-    { value: 5, isClicked: false },
-    { value: 10, isClicked: false },
-    { value: 15, isClicked: false }
-  ];
+  colors: IColor[] = [];
+  times: ITime[] = [];
 
   constructor(readonly messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.times = this.messageService.getTimes();
+    this.colors = this.messageService.getColors();
   }
 
   // checkMessageText = () => {

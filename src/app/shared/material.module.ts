@@ -1,5 +1,6 @@
 import { CdkTableModule } from '@angular/cdk/table';
 import { NgModule } from '@angular/core';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -23,7 +24,8 @@ import { MatTableModule } from '@angular/material/table';
         CdkTableModule,
         MatInputModule,
         MatCheckboxModule,
-        MatRadioModule
+        MatRadioModule,
+        MatButtonToggleModule
     ],
     exports: [
         MatGridListModule,
@@ -36,7 +38,8 @@ import { MatTableModule } from '@angular/material/table';
         CdkTableModule,
         MatInputModule,
         MatCheckboxModule,
-        MatRadioModule
+        MatRadioModule,
+        MatButtonToggleModule
     ]
 })
 export class MaterialModule {

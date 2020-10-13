@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { IMessage } from '../Interfaces/imessage';
+import { colors, times } from './DI/messages';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ export class MessageService {
   };
 
   constructor() { }
+
+  getTimes = () => { return times };
+  getColors = () => { return colors };
 
   setColor = (color: string) => {
     this.message.color = color;

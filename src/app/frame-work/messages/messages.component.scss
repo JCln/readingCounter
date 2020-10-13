@@ -42,48 +42,25 @@ textarea {
 }
 
 .t_separator {
-  display: grid;
-  grid-template-rows: 4rem;
-  grid-template-columns: repeat(auto-fit, minmax(3rem, 5rem));
-  gap: .3rem;
-  direction: rtl;
-
   .btn_2 {
-    width: 5rem;
+    color: $blue_d;
   }
 }
 
 .c_separator {
-  display: grid;
-  grid-template-rows: 4rem;
-  grid-template-columns: repeat(auto-fit, minmax(3rem, 5rem));
-  gap: .3rem;
+  .btn_2 {
+    color: $gray_l;
+  }
+
+}
+
+.t_separator,
+.c_separator {
   direction: rtl;
 
   .btn_2 {
     width: 5rem;
-    color: $gray_l;
-  }
-
-  :nth-child(1) {
-    background: $blue-l;
-
-    &:active , :focus {
-      box-shadow: 2px 2px 2px 2px $gray_d5;
-      outline: 2px dotted $blue_d;
-    }
-  }
-
-  :nth-child(2) {
-    background: green;
-  }
-
-  :nth-child(3) {
-    background: $orange;
-  }
-
-  :nth-child(4) {
-    background: $red;
+    font-family: inherit;
   }
 }
 
@@ -103,8 +80,15 @@ textarea {
   margin-bottom: 1rem;
 }
 
-// for ts visited button
-.visited {
+.mat-button-toggle-group-appearance-standard {
+  border: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(3rem, 5rem));
+  gap: .3rem;
+}
+
+.mat-button-toggle-checked {
+  color: $gray-dr2 !important;
+  border-bottom: .3rem solid $gray-dr2;
   box-shadow: 2px 2px 2px 2px $gray_d5;
-  outline: 2px dotted $blue_d;
 }
