@@ -1,7 +1,9 @@
 export interface IMessage {
+    title: string;
     text: string;
     color: string;
     showTime: number;
+    canSave: boolean;
 }
 
 export interface IColor {

@@ -8,15 +8,18 @@ import { colors, times } from './DI/messages';
 })
 export class MessageService {
   message: IMessage = {
+    title: '',
     text: '',
     color: '',
-    showTime: 0
+    showTime: 0,
+    canSave: true
   };
 
   constructor() { }
 
-  getTimes = () => { return times };
-  getColors = () => { return colors };
+  getTimes = () => { return times }
+
+  getColors = () => { return colors }
 
   setColor = (color: string) => {
     this.message.color = color;
@@ -26,6 +29,6 @@ export class MessageService {
   }
   setText = (text: string) => {
     this.message.text = text;
-  }
+  }  
 
 }

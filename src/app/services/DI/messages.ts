@@ -1,7 +1,7 @@
 import { IColor, IMessage, ITime } from './../../Interfaces/imessage';
 
 export const messages: IMessage[] = [
-    { text: '', color: '', showTime: 0 }
+    { title: '', text: '', color: '', showTime: 0, canSave: true }
 ]
 
 export const times: ITime[] = [

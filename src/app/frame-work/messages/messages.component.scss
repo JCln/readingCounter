@@ -2,6 +2,13 @@
 @import '../../../assets/button.scss';
 @import '../../../assets/mixins.scss';
 
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 27rem));
+  direction: rtl;
+  gap: 4rem;
+}
+
 main {
   margin: auto;
 }
@@ -15,7 +22,6 @@ h2 {
 .content {
   background: $gray_d5;
   border-radius: $border_s;
-  width: 50%;
   margin: auto;
   padding: 1rem;
 }
@@ -77,8 +83,66 @@ textarea {
 .text,
 .time,
 .color {
-  margin-bottom: 1rem;
+  margin-bottom: $font_xs;
 }
+
+// ///// local storage content
+.static_height {
+  height: 70vh;
+  overflow: auto;
+
+  #btn {
+    width: auto;
+    color: $gray_d;
+    
+  }
+}
+
+section {
+  .main_content {
+    background: $red;
+    border-radius: $border_s;
+    padding: $font_xs;
+    margin-bottom: $font_05;
+  }
+
+  ._text {
+    text-align: right;
+    font-size: $font_s;
+    font-weight: 600;
+    color: $gray_l;
+  }
+
+  ._details {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    .__time {
+      font-weight: 600;
+      font-size: $font_s;
+      padding: .2rem 1.5rem;
+      text-align: center;
+
+      margin: .3rem;
+      background-color: $white;
+      border-radius: 5px;
+    }
+
+    .__copy {
+      font-weight: 600;
+      font-size: $font_s;
+      padding: .2rem 1.5rem;
+      text-align: center;
+
+      margin: .3rem;
+      background-color: $white;
+      border-radius: 5px;
+    }
+  }
+}
+
+// //////////
 
 .mat-button-toggle-group-appearance-standard {
   border: none;
@@ -91,4 +155,12 @@ textarea {
   color: $gray-dr2 !important;
   border-bottom: .3rem solid $gray-dr2;
   box-shadow: 2px 2px 2px 2px $gray_d5;
+}
+
+::ng-deep {
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 .5rem;
+    font-family: BLotus, "Blotus", tahoma;
+    font-size: $font_s;
+  }
 }
