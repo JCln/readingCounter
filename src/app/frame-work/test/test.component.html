@@ -1,7 +1,7 @@
 <p>test works!</p>
 <h5 (click)="toggleMap()">
-    send data to toggle map    
+    send data to toggle map
 </h5>
 <h5>
-    <a [routerLink]="[ '/wr', { isShowMap: true } ]">name</a>
+    <a [routerLink]="[ '/wr', { isShowMap: true , skipLocationChange: true} ]">name</a>
 </h5>

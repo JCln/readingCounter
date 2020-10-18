@@ -6,17 +6,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 27rem));
   direction: rtl;
+  justify-content: center;
   gap: 4rem;
-}
-
-main {
-  margin: auto;
-}
-
-h1,
-h2 {
-  text-align: right;
-  color: $blue_d;
 }
 
 .content {
@@ -93,74 +84,87 @@ textarea {
 
   #btn {
     width: auto;
-    color: $gray_d;
-
+    color: $gray_96;
   }
 }
 
-section {
-  .main_content {
-    position: relative;
-    background: $red;
-    border-radius: $border_s;
-    padding: $font_xs $font_xs 0;
-    margin-bottom: $font_05;
-  }
+.main_content {
+  position: relative;
+  background: $gray_d5;
+  border-radius: $border_s;
+  padding: $font_xs $font_xs 0;
+  margin-bottom: $font_05;
+}
 
-  ._text {
-    text-align: right;
-    font-size: $font_s;
+._text {
+  text-align: right;
+  font-size: $font_s;
+  font-weight: 600;
+  color: $gray_dr;
+}
+
+._details {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+
+  .__time {
     font-weight: 600;
-    color: $gray_l;
-  }
-
-  ._details {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-
-    .__time {
-      font-weight: 600;
-      font-size: $font_s;
-      padding: .2rem 1.5rem;
-      text-align: center;
-
-      margin: .3rem;
-      background-color: $white;
-      border-radius: 5px;
-    }
-
-    .__copy {
-      font-weight: 600;
-      font-size: $font_s;
-      padding: .2rem 1.5rem;
-      text-align: center;
-
-      margin: .3rem;
-      background-color: $white;
-      border-radius: 5px;
-    }
-  }
-
-  .remove_a_item {
-    position: absolute;
-    left: 0;
-    top: 0;
+    font-size: $font_s;
+    padding: .2rem 1.5rem;
+    text-align: center;
     color: $gray_d;
-    opacity: .5;
-    padding: $font_05;
-    margin: .15rem;
-    border: 1px solid $gray_d;
-    border-radius: $font_2;
-    width: 1.5rem;
-    height: 1.5rem;
 
-    &:hover {
-      background-color: rgba(213, 213, 213, .7);
-      opacity: 1;
-      color: $red;
-    }
+    margin: .3rem;
+    background-color: $white;
+    border-radius: 5px;
   }
+
+  .__copy {
+    font-weight: 600;
+    font-size: $font_s;
+    padding: .2rem 1.5rem;
+    text-align: center;
+
+    margin: .3rem;
+    background-color: $white;
+    border-radius: 5px;
+  }
+}
+
+.remove_a_item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: $gray_96;
+  opacity: .5;
+  padding: $font_05;
+  margin: .15rem;
+  border: 1px solid $gray_96;
+  border-radius: $font_2;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  &:hover {
+    background-color: rgba(213, 213, 213, .7);
+    opacity: 1;
+    color: $red;
+  }
+}
+
+h1 {
+  text-align: center;
+  color: $blue_d;
+  margin-bottom: $font_l;
+}
+
+h2 {
+  color: $blue_d;
+}
+
+._delete_pres {
+  text-align: center;
+  margin-top: $font_2;
 }
 
 // //////////

@@ -1,5 +1,5 @@
 <div class="over_all">
-    <main class="d_flex_center_column">
+    <main>
         <h1>جزئیات پیام</h1>
         <div class="content">
             <div class="text">
@@ -22,7 +22,8 @@
 
                     <mat-button-toggle-group #group="matButtonToggleGroup" value="message.color">
                         <mat-button-toggle class="btn_2" *ngFor="let item of colors"
-                            [ngStyle]="{'background': item.background}" value="item.background" (click)="message.color = item.background">
+                            [ngStyle]="{'background': item.background}" value="item.background"
+                            (click)="message.color = item.background">
                             {{item.value}}
                         </mat-button-toggle>
                     </mat-button-toggle-group>
@@ -41,11 +42,11 @@
             </div>
         </div>
     </main>
-    <section>
+    <main>
         <h1>استفاده از پیام های پیشفرض</h1>
         <div class="static_height">
             <div class="main_content" *ngFor="let localStorage of allMessages"
-                [ngStyle]="{'background': localStorage.color}">
+                [ngStyle]="{'border': '.15rem solid'+localStorage.color}">
                 <div class="_text">{{localStorage.text}}</div>
                 <div class="fa fa-close remove_a_item d_flex_center" (click)="removeItem(localStorage)"></div>
                 <div class="_details">
@@ -58,8 +59,9 @@
                     </div>
                 </div>
             </div>
-            <div class=""></div>
-            <button id="btn" class="btn_2" (click)="clearAllStorage()">حذف همه ی پیام های پیشفرض</button>
+            <div class="_delete_pres">
+                <button id="btn" class="btn_2" (click)="clearAllStorage()">حذف همه ی پیام های پیشفرض</button>
+            </div>
         </div>
-    </section>
+    </main>
 </div>

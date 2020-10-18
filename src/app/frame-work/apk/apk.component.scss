@@ -4,9 +4,10 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 27rem));
+  grid-template-columns: repeat(auto-fit, minmax(27rem, 29rem));
   direction: rtl;
-  gap: 4rem;
+  justify-content: center;
+  gap: 3rem;
 }
 
 .content {
@@ -79,6 +80,10 @@ td.mat-cell {
   height: 2.5rem;
   border: 1px solid $blue_l;
   width: auto;
-  min-width: 8rem;
   color: $blue_l;
+  min-width: 4rem;
+}
+
+tr.mat-row {
+  height: 60px;
 }

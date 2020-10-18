@@ -4,9 +4,10 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 27rem));
+  grid-template-columns: repeat(auto-fit, minmax(27rem, 29rem));
   direction: rtl;
-  gap: .5rem;
+  justify-content: center;
+  gap: 3rem;
 }
 
 main {

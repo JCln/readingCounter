@@ -4,9 +4,10 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 27rem));
+  grid-template-columns: repeat(auto-fit, minmax(27rem, 29rem));
   direction: rtl;
-  gap: 4rem;
+  justify-content: center;
+  gap: 3rem;
 }
 
 .content {
@@ -71,7 +72,7 @@ input {
 
   .example-radio-button {
     margin: 4px;
-    background: $white;
+    background: $gray_l;
     padding: $font_xxs;
     border-radius: $border_s;
   }
@@ -80,11 +81,12 @@ input {
     margin-bottom: $font_05;
 
     .mat-checkbox-label {
+      min-width: 18rem;
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
       color: $gray_dr;
-      background: $white;
+      background: $gray_l;
       padding: $font_05;
       line-height: 2;
       border-radius: $border_s;
