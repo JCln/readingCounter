@@ -22,6 +22,7 @@ export class MessagesComponent implements OnInit {
 
   testNamesStorage: any;
   allMessages: IMessage[];
+  getedDataFromLocalStorage: any;
 
   constructor(readonly messageService: MessageService, private browserStorageService: BrowserStorageService) { }
 
@@ -46,7 +47,9 @@ export class MessagesComponent implements OnInit {
     console.log(this.allMessages);
 
   }
-
+  getMessages = (name: string) => {
+    this.getedDataFromLocalStorage = this.browserStorageService.get(name);
+  }
   removeItem = (localStorageItem: IMessage) => {
     console.log(localStorageItem);
     this.browserStorageService.remove(localStorageItem.title);
@@ -62,6 +65,10 @@ export class MessagesComponent implements OnInit {
     this.message.canSave = localStorageItem.canSave;
 
   }
+  // copyPreMessageToCurrent = (name: string) => {
+  //   // console.log(this.browserStorageService.get(name));
+  //   this.message = this.browserStorageService.get(name);
+  // }
 
 
 }

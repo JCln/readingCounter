@@ -189,3 +189,11 @@ h2 {
     font-size: $font_s;
   }
 }
+
+::ng-deep {
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 .5rem;
+    font-family: BLotus, "Blotus", tahoma;
+    font-size: $font_s;
+  }
+}
