@@ -31,6 +31,7 @@ export class MapService {
       southWest.lat + latSpan * Math.random(),
       southWest.lng + lngSpan * Math.random());
   }
+  
   addMarkerCluster = (map: L.Map) => {
     const markers = L.markerClusterGroup();
     markers.addLayer(L.marker(this.getRandomLatLng(map)));
@@ -49,7 +50,6 @@ export class MapService {
   fullScreen = (map: L.Map) => {
     map.addControl(new L.Control.Fullscreen());
   }
-
 
   ///////// buttons
   buttons = (map: L.Map) => {

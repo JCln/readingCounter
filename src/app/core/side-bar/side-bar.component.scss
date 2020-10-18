@@ -9,7 +9,8 @@ ul {
   list-style-type: none;
   padding: $font_xs 0 $font_xs 0;
   margin-left: .2rem;
-  height: 77vh;
+  height: 80vh;
+  overflow: auto;
   transition: all ease-in-out 250ms;
 }
 

@@ -1,27 +1,65 @@
-<main class="d_flex_center_column">
-    <h1>جزئیات پیام</h1>
-    <div class="content">
-        <div class="text">
-            <h2>متن</h2>
-            <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="messageService.message.text"></textarea>
-        </div>
-        <div class="time">
-            <h2>زمان (ثانیه)</h2>
-            <div class="t_separator">
-                <button class="btn_2" (click)="messageService.setTime(item.value)"
-                    (click)="item.isClicked = !item.isClicked" *ngFor="let item of times"
-                    [ngClass]="{'visited': item.isClicked}">{{item.value}}</button>
+<div class="over_all">
+    <main class="d_flex_center_column">
+        <h1>جزئیات پیام</h1>
+        <div class="content">
+            <div class="text">
+                <h2>متن</h2>
+                <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="message.text"></textarea>
+            </div>
+            <div class="time">
+                <h2>زمان (ثانیه)</h2>
+                <div class="t_separator">
+                    <mat-button-toggle-group>
+                        <mat-button-toggle class="btn_2" *ngFor="let item of times"
+                            (click)="message.showTime = item.value">
+                            {{item.value}}</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+            <div class="color">
+                <h2>رنگ</h2>
+                <div class="c_separator">
+
+                    <mat-button-toggle-group #group="matButtonToggleGroup" value="message.color">
+                        <mat-button-toggle class="btn_2" *ngFor="let item of colors"
+                            [ngStyle]="{'background': item.background}" value="item.background" (click)="message.color = item.background">
+                            {{item.value}}
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+
+                </div>
+            </div>
+            <div class="can_save">
+                <mat-checkbox [(ngModel)]="message.canSave">این پیام و تنظیمات آن ذخیره شود؟</mat-checkbox>
+                <div class="_save_this" *ngIf="message.canSave">
+                    <p>عنوانی برای پیام وارد کنید: </p>
+                    <input type="text" class="input_1" [(ngModel)]="message.title">
+                </div>
+            </div>
+            <div class="send">
+                <button (click)="saveNewMessageForm(message.title , message)" class="btn_2">ارسال و مشاهده</button>
             </div>
         </div>
-        <div class="color">
-            <h2>رنگ</h2>
-            <div class="c_separator">
-                <button class="btn_2" (click)="messageService.setColor(item)"
-                    *ngFor="let item of colors">{{item}}</button>
+    </main>
+    <section>
+        <h1>استفاده از پیام های پیشفرض</h1>
+        <div class="static_height">
+            <div class="main_content" *ngFor="let localStorage of allMessages"
+                [ngStyle]="{'background': localStorage.color}">
+                <div class="_text">{{localStorage.text}}</div>
+                <div class="fa fa-close remove_a_item d_flex_center" (click)="removeItem(localStorage)"></div>
+                <div class="_details">
+                    <div class="__time">
+                        {{localStorage.showTime}}
+                        ثانیه
+                    </div>
+                    <div class="__copy" (click)="copyPreMessageToCurrent(localStorage)">
+                        <i class="fa fa-copy" [ngStyle]="{'color': localStorage.color}"></i>
+                    </div>
+                </div>
             </div>
+            <div class=""></div>
+            <button id="btn" class="btn_2" (click)="clearAllStorage()">حذف همه ی پیام های پیشفرض</button>
         </div>
-        <div class="send">
-            <button (click)="logTheMessage()" class="btn_2">ارسال و مشاهده</button>
-        </div>
-    </div>
-</main>
+    </section>
+</div>
