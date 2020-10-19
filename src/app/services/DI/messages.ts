@@ -13,7 +13,7 @@ export const times: ITime[] = [
 
 export const colors: IColor[] = [
     { value: 'آبی', isClicked: false, background: ' #116FFF' },
-    { value: 'سبز', isClicked: false, background: 'green' },
+    { value: 'سبز', isClicked: false, background: '#069D51' },
     { value: 'نارنجی', isClicked: false, background: '#F68038' },
     { value: 'قرمز', isClicked: false, background: '#f63e38' }
 ]

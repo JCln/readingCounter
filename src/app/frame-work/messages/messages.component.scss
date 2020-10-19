@@ -1,6 +1,7 @@
 @import '../../../assets/variable';
 @import '../../../assets/button.scss';
 @import '../../../assets/mixins.scss';
+@import '../../../assets/input.scss';
 
 .over_all {
   display: grid;
@@ -79,8 +80,11 @@ textarea {
 
 // ///// local storage content
 .static_height {
-  height: 70vh;
+  height: 80vh;
   overflow: auto;
+  padding: 1rem;
+  background: $gray_d5;
+  border-radius: 15px;
 
   #btn {
     width: auto;
@@ -90,7 +94,7 @@ textarea {
 
 .main_content {
   position: relative;
-  background: $gray_d5;
+  background: $gray_l;
   border-radius: $border_s;
   padding: $font_xs $font_xs 0;
   margin-bottom: $font_05;
@@ -167,6 +171,28 @@ h2 {
   margin-top: $font_2;
 }
 
+.can_save {
+  margin: $font_xs 0;
+}
+
+._save_this {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+
+  .input_1 {
+    min-width: auto;
+    border: none;
+    color: $gray_96;
+  }
+
+  p {
+    color: $gray_96;
+    font-size: $font_s;
+    margin-left: $font_05;
+  }
+}
+
 // //////////
 
 .mat-button-toggle-group-appearance-standard {
@@ -178,8 +204,8 @@ h2 {
 
 .mat-button-toggle-checked {
   color: $gray-dr2 !important;
-  border-bottom: .3rem solid $gray-dr2;
-  box-shadow: 2px 2px 2px 2px $gray_d5;
+  border-bottom: .3rem solid $gray-dr2 !important;
+  box-shadow: 2px 2px 2px 2px $gray_d5 !important;
 }
 
 ::ng-deep {
@@ -195,5 +221,7 @@ h2 {
     margin: 0 .5rem;
     font-family: BLotus, "Blotus", tahoma;
     font-size: $font_s;
+    font-weight: 600;
+    color: $gray_dr;
   }
 }

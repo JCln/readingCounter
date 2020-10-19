@@ -22,8 +22,8 @@
 
                     <mat-button-toggle-group #group="matButtonToggleGroup" value="message.color">
                         <mat-button-toggle class="btn_2" *ngFor="let item of colors"
-                            [ngStyle]="{'background': item.background}" value="item.background"
-                            (click)="message.color = item.background">
+                            [ngStyle]="{'border': '.1rem solid'+ item.background , 'color':item.background}"
+                            value="item.background" (click)="message.color = item.background">
                             {{item.value}}
                         </mat-button-toggle>
                     </mat-button-toggle-group>
@@ -43,20 +43,20 @@
         </div>
     </main>
     <main>
-        <h1>استفاده از پیام های پیشفرض</h1>
+        <h1>استفاده از پیام های پیش‌فرض</h1>
         <div class="static_height">
             <div class="main_content" *ngFor="let localStorage of allMessages"
                 [ngStyle]="{'border': '.15rem solid'+localStorage.color}">
-                <div class="_text">{{localStorage.text}}</div>
+                <div class="_text" [ngStyle]="{'color': localStorage.color}">{{localStorage.text}}</div>
                 <div class="fa fa-close remove_a_item d_flex_center" (click)="removeItem(localStorage)"></div>
                 <div class="_details">
                     <div class="__time">
                         {{localStorage.showTime}}
                         ثانیه
                     </div>
-                    <div class="__copy" (click)="copyPreMessageToCurrent(localStorage)">
+                    <!-- <div class="__copy" (click)="copyPreMessageToCurrent(localStorage)">
                         <i class="fa fa-copy" [ngStyle]="{'color': localStorage.color}"></i>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="_delete_pres">
