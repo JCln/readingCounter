@@ -25,7 +25,7 @@
 }
 
 textarea {
-  background: $white;
+  background: $gray_l;
   font-size: $font_m;
   color: $gray_96;
   font-weight: 600;
@@ -68,7 +68,7 @@ textarea {
 
   .btn_2 {
     color: $blue_l;
-    width: 11rem;
+    width: 10.5rem;
   }
 }
 
@@ -87,8 +87,9 @@ textarea {
   border-radius: 15px;
 
   #btn {
-    width: auto;
-    color: $gray_96;
+    width: 10.5rem;
+    color: $blue_l;
+    
   }
 }
 
@@ -117,21 +118,10 @@ textarea {
     font-size: $font_s;
     padding: .2rem 1.5rem;
     text-align: center;
-    color: $gray_d;
+    color: $gray_96;
 
     margin: .3rem;
-    background-color: $white;
-    border-radius: 5px;
-  }
-
-  .__copy {
-    font-weight: 600;
-    font-size: $font_s;
-    padding: .2rem 1.5rem;
-    text-align: center;
-
-    margin: .3rem;
-    background-color: $white;
+    background-color: $gray_d5;
     border-radius: 5px;
   }
 }
@@ -172,7 +162,7 @@ h2 {
 }
 
 .can_save {
-  margin: $font_xs 0;
+  margin: $font_2 0;
 }
 
 ._save_this {
@@ -184,6 +174,7 @@ h2 {
     min-width: auto;
     border: none;
     color: $gray_96;
+    background: $gray_l;
   }
 
   p {
@@ -208,12 +199,8 @@ h2 {
   box-shadow: 2px 2px 2px 2px $gray_d5 !important;
 }
 
-::ng-deep {
-  .mat-checkbox-layout .mat-checkbox-label {
-    margin: 0 .5rem;
-    font-family: BLotus, "Blotus", tahoma;
-    font-size: $font_s;
-  }
+.mat-button-toggle-appearance-standard {
+  background: $gray_l;
 }
 
 ::ng-deep {
@@ -221,7 +208,13 @@ h2 {
     margin: 0 .5rem;
     font-family: BLotus, "Blotus", tahoma;
     font-size: $font_s;
+  }
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 .5rem;
+    font-family: BLotus, "Blotus", tahoma;
+    font-size: $font_s;
     font-weight: 600;
-    color: $gray_dr;
+    color: $gray_96;
   }
 }
