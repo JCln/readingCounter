@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'apk', loadChildren: () => import('./apk/apk.module').then(apk => apk.ApkModule) },
   { path: 'msge', loadChildren: () => import('./messages/messages.module').then(msge => msge.MessagesModule) },
   { path: 'bi', loadChildren: () => import('./base-info/base-info.module').then(bi => bi.BaseInfoModule) },
-  { path: 'privacy', loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) }
+  { path: 'privacy', loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) },
+  { path: 'rm', loadChildren: () => import('./role-manager/role-manager.module').then(rm => rm.RoleManagerModule) }
 ];
 
 @NgModule({
