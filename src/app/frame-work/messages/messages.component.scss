@@ -89,7 +89,6 @@ textarea {
   #btn {
     width: 10.5rem;
     color: $blue_l;
-    
   }
 }
 
@@ -139,7 +138,9 @@ textarea {
   width: 1.5rem;
   height: 1.5rem;
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     background-color: rgba(213, 213, 213, .7);
     opacity: 1;
     color: $red;
@@ -191,6 +192,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(3rem, 5rem));
   gap: .3rem;
+  padding: .2rem;
 }
 
 .mat-button-toggle-checked {
