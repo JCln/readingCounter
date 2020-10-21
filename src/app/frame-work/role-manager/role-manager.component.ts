@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { IRoleManager } from './../../Interfaces/irole-manager';
+import { ConfirmDialogService } from './../../services/confirm-dialog.service';
 import { InterfaceService } from './../../services/interface.service';
 
 @Component({
@@ -22,13 +23,12 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
   id;
   isActive;
 
-  constructor(public dialog: MatDialog, private interfaceService: InterfaceService) { }
+  constructor(public dialog: MatDialog, private interfaceService: InterfaceService, private confirmDialogService: ConfirmDialogService) { }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
   // addRowData(row_obj) {
   //   var d = new Date();
   //   this.dataSource.push({
@@ -51,8 +51,6 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
   //     return value.id != row_obj.id;
   //   });
   // }
-
-
   getRole = (): any => {
     return new Promise((resolve) => {
       this.interfaceService.getRole().subscribe(res => {
@@ -63,8 +61,6 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
       });
     });
   }
-
-
   openDialog = () => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(DialogContentExampleDialog);
@@ -73,7 +69,6 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
       });
     });
   }
-
   deleteSingleRow = async (row: IRoleManager) => {
     const dialogResult = await this.openDialog();
     if (dialogResult) {
@@ -111,7 +106,30 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
   }
+
+
+  handleClick() {
+    const options = {
+      title: 'Leave page?',
+      message: 'By leaving this page you will permanently lose your form changes.',
+      cancelText: 'CANCEL',
+      confirmText: 'YES, LEAVE PAGE'
+    };
+
+    this.confirmDialogService.open(options);
+
+    this.confirmDialogService.confirmed().subscribe(confirmed => {
+      if (confirmed) {
+        console.log(confirmed);
+        
+        // this.saveData();
+      }
+    });
+  }
 }
+
+
+
 @Component({
   selector: 'dialog-content-example-dialog',
   templateUrl: 'dialog-content-example-dialog.html',

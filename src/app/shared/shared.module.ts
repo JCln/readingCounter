@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { ConfirmDialogService } from './../services/confirm-dialog.service';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatCheckboxComponent } from './mat-checkbox/mat-checkbox.component';
 import { MaterialModule } from './material.module';
 import { SharedRoutingModule } from './shared-routing.module';
@@ -9,7 +11,7 @@ import { ToggleComponent } from './toggle/toggle.component';
 
 
 @NgModule({
-  declarations: [MatCheckboxComponent, ToggleComponent],
+  declarations: [MatCheckboxComponent, ToggleComponent, ConfirmDialogComponent],
   imports: [
     FormsModule,
     CommonModule,
@@ -17,8 +19,9 @@ import { ToggleComponent } from './toggle/toggle.component';
     SharedRoutingModule
   ],
   exports: [
-    CommonModule, FormsModule, MaterialModule, ToggleComponent
-  ]
+    CommonModule, FormsModule, MaterialModule, ToggleComponent, ConfirmDialogComponent
+  ],
+  providers: [ConfirmDialogService]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
