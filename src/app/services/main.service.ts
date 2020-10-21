@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { retry } from 'rxjs/operators';
 
 import { environment } from './../../environments/environment';
@@ -19,7 +20,7 @@ export class MainService {
   constructor(private http: HttpClient) { }
 
 
-  GET = (URL: string, base64?: string) => {
+  GET = (URL: string, base64?: string): Observable<any> => {
     if (base64) {
       this.http.get(environment.API_URL + '/' + URL + '/' + base64, this.httpOptions).pipe(
         retry(1)
@@ -33,7 +34,6 @@ export class MainService {
 
 
   }
-
   GETID = (ID: string, URL: string, base64?: string) => {
     if (base64) {
       this.http.get(environment.API_URL + '/' + URL + '/' + base64 + '/' + ID, this.httpOptions).pipe(
@@ -48,11 +48,22 @@ export class MainService {
 
 
   }
-
-
-  POST = (URL: string, body?: object): any => {
+  POST = (URL: string, ID?: number): any => {
+    return this.http.post(environment.API_URL + '/' + URL + '/' + ID, this.httpOptions).pipe(
+      retry(1)
+    );
   }
+  POSTBODY = (URL: string, body: object): any => {
+    return this.http.post(environment.API_URL + '/' + URL, body, this.httpOptions).pipe(
+      retry(1)
+    );
 
+  }
   PUT = (URL: string, body: object): any => {
+  }
+  DELETE = (URL: string, id: number): Observable<any> => {
+    return this.http.delete(environment.API_URL + '/' + URL + '/' + id, this.httpOptions).pipe(
+      retry(1)
+    );
   }
 }

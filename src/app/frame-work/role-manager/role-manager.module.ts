@@ -1,13 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { SharedModule } from './../../shared/shared.module';
 import { RoleManagerRoutingModule } from './role-manager-routing.module';
+import { DialogContentExampleDialog, DialogEdit, RoleManagerComponent } from './role-manager.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [RoleManagerComponent, DialogContentExampleDialog, DialogEdit],
   imports: [
-    CommonModule,
+    SharedModule,
     RoleManagerRoutingModule
   ]
 })

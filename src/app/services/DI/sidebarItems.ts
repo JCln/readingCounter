@@ -2,7 +2,7 @@ import { ISidebarItems } from './../../Interfaces/isidebar-items';
 
 export const sidebarItems: ISidebarItems[] = [
     { routerUrl: '/wr', name: 'مدیریت کاربران', isClosable: false, isRefreshable: false, sid_isOpenItems: false },
-    { routerUrl: '/rm', name: 'مدیریت نقش ها', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/rm', name: 'مدیریت نقش ها', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/foo', name: 'گزارش گیری', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/test', name: 'تست', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/table', name: 'جدول', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
