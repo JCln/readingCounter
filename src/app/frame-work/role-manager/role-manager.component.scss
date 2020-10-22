@@ -35,3 +35,43 @@ th {
 ._value {
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
 }
+
+.add_new {
+  padding: 1rem;
+  direction: rtl;
+}
+
+.mat-dialog-actions,
+.mat-dialog-content,
+td,
+th {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-size: 1.2rem;
+}
+
+
+::ng-deep {
+  .mat-dialog-container {
+    direction: rtl;
+  }
+
+  .mat-elevation-z8 {
+    border-spacing: 0;
+    direction: rtl;
+  }
+
+  table {
+    padding: 1rem;
+  }
+
+}
+
+.mat-form-field {
+  display: flex;
+  justify-content: center;
+  text-align: right;
+}
+
+.filter {
+  display: block;
+}
