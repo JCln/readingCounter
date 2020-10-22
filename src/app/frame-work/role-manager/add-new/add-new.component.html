@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>توضیحات</h2>
+
+    <mat-dialog-content [formGroup]="form">
+
+        <mat-form-field appearance="fill">
+            <mat-label>نقش</mat-label>
+            <mat-select [(ngModel)]="selectedValue" name="role">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{food.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field>
+            <mat-label>عنوان</mat-label>
+            <input matInput placeholder="عنوان" formControlName="description" [(ngModel)]="addNew.title">
+        </mat-form-field><br>
+
+        <mat-checkbox [(ngModel)]="addNew.needDeviceIdLogin">is Admin</mat-checkbox>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="btn_2" (click)="close()">بازگشت</button>
+        <button class="btn_2 _custom" (click)="save()">ذخیره</button>
+    </mat-dialog-actions>

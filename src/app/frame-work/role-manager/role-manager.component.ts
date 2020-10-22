@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IRoleManager } from 'src/app/Interfaces/irole-manager';
 
 import { InterfaceService } from './../../services/interface.service';
+import { AddNewComponent } from './add-new/add-new.component';
 
 @Component({
   selector: 'app-role-manager',
@@ -27,27 +28,27 @@ export class RoleManagerComponent implements OnInit {
     needDeviceIdLogin: ''
   };
 
-  constructor(private interfaceService: InterfaceService, private dialog: MatDialog) {
-
-  }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-  }
-
-
-
+  constructor(private interfaceService: InterfaceService, private dialog: MatDialog) { }
 
   openDialog = () => {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      title: 'Angular For Beginners'
+    };
+
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(DialogContentExampleDialog);
+      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+
         resolve(result)
       });
     });
   }
-
   deleteSingleRow = async (row: IRoleManager) => {
     const dialogResult = await this.openDialog();
     if (dialogResult) {
@@ -72,9 +73,6 @@ export class RoleManagerComponent implements OnInit {
     //   });
     // });
   }
-
-
-
   getRole = (): any => {
     return new Promise((resolve) => {
       this.interfaceService.getRole().subscribe(res => {

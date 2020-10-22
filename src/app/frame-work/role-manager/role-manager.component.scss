@@ -5,7 +5,6 @@
 table {
   width: 100%;
 }
-
 .mat-form-field {
   font-size: 14px;
   width: 100%;
@@ -14,6 +13,9 @@ table {
 td,
 th {
   width: 25%;
+}
+th.mat-header-cell {
+  text-align: center;
 }
 
 ._actions {
@@ -37,7 +39,7 @@ th {
 }
 
 .add_new {
-  padding: 1rem;
+  padding: $font_xs;
   direction: rtl;
 }
 
@@ -46,7 +48,7 @@ th {
 td,
 th {
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-  font-size: 1.2rem;
+  font-size: $font_s;
 }
 
 
@@ -55,13 +57,9 @@ th {
     direction: rtl;
   }
 
-  .mat-elevation-z8 {
-    border-spacing: 0;
-    direction: rtl;
-  }
-
   table {
-    padding: 1rem;
+    padding: $font_xs;
+    direction: rtl;
   }
 
 }
@@ -74,4 +72,27 @@ th {
 
 .filter {
   display: block;
+  width: 10rem;
+  margin-bottom: $font_xs;
+}
+
+// header options //
+.operation {
+  display: flex;
+  background: $white;
+  border-radius: $border_s $border_s 0 0;
+}
+
+.operation_btn {
+  cursor: pointer;
+  margin: $font_xs;
+  padding: $font_xs;
+  border-radius: 50%;
+  border: 1px solid;
+  font-size: 1.3rem;
+  height: 3rem;
+  width: 3rem;
+  display: grid;
+  place-content: center;
+  color: $blue_l;
 }

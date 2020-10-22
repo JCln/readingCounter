@@ -1,14 +1,18 @@
-<mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="فیلتر جدول" #input>
-</mat-form-field>
+<div class="operation">
+    <button class="operation_btn">
+        <i class="fa fa-filter"></i>
+    </button>
+    <button (click)="openDialog()" class="operation_btn">
+        <i class="fa fa-plus"></i>
+    </button>
+</div>
 
 <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="title">
         <th class="header" mat-header-cell *matHeaderCellDef>
-            Tenant Name
+            title
             <mat-form-field class="filter" floatLabel="never">
-                <mat-label>Search</mat-label>
+                <mat-label>جستجو</mat-label>
                 <input matInput [formControl]="titleFilter">
             </mat-form-field>
         </th>
@@ -16,8 +20,10 @@
     </ng-container>
     <ng-container matColumnDef="titleUnicode">
         <th class="header" mat-header-cell *matHeaderCellDef>
-            Favourite titleUnicode
+            titleUnicode
             <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <mat-label></mat-label>
                 <input matInput [formControl]="titleUnicodeFilter">
             </mat-form-field>
         </th>
@@ -27,7 +33,7 @@
         <th class="header" mat-header-cell *matHeaderCellDef>
             needDeviceIdLogin
             <mat-form-field class="filter" floatLabel="never">
-                <mat-label>Search</mat-label>
+                <mat-label>جستجو</mat-label>
                 <input matInput [formControl]="needDeviceIdLoginFilter">
             </mat-form-field>
         </th>
@@ -36,7 +42,7 @@
         </td>
     </ng-container>
     <ng-container cdkColumnDef="actions">
-        <th md-header-cell *matHeaderCellDef> Actions </th>
+        <th class="header" md-header-cell *matHeaderCellDef> Actions </th>
         <td md-cell *matCellDef="let row" class="_actions">
             <button class="btn_2 __custom" (click)="editDialog(row)"><i class="fa fa-edit"></i></button>|
             <button class="btn_2 __custom" (click)="deleteSingleRow(row)"><i class="fa fa-trash"></i></button>
