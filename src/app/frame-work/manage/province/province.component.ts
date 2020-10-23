@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { IRoleManager } from 'src/app/Interfaces/irole-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { AddNewComponent } from '../../role-manager/add-new/add-new.component';
 import { DeleteDialogComponent } from '../../role-manager/delete-dialog/delete-dialog.component';
+import { IProvinceManager } from './../../../Interfaces/iprovince-manager';
 
 @Component({
   selector: 'app-province',
@@ -14,7 +14,6 @@ import { DeleteDialogComponent } from '../../role-manager/delete-dialog/delete-d
   styleUrls: ['./province.component.scss']
 })
 export class ProvinceComponent implements OnInit {
-  idFilter = new FormControl('');
   titleFilter = new FormControl('');
   countryIdFilter = new FormControl('');
   logicalOrderFilter = new FormControl('');
@@ -23,7 +22,6 @@ export class ProvinceComponent implements OnInit {
   columnsToDisplay = ['title', 'countryId', 'logicalOrder', 'actions'];
   filterValues = {
     title: '',
-    id: '',
     countryId: '',
     logicalOrder: ''
   };
@@ -54,7 +52,7 @@ export class ProvinceComponent implements OnInit {
       });
     });
   }
-  deleteSingleRow = async (row: IRoleManager) => {
+  deleteSingleRow = async (row: IProvinceManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
@@ -91,24 +89,17 @@ export class ProvinceComponent implements OnInit {
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.idFilter.valueChanges
-        .subscribe(
-          id => {
-            this.filterValues.id = id;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
       this.countryIdFilter.valueChanges
         .subscribe(
-          id => {
-            this.filterValues.id = id;
+          countryId => {
+            this.filterValues.countryId = countryId;
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
       this.logicalOrderFilter.valueChanges
         .subscribe(
-          id => {
-            this.filterValues.id = id;
+          logicalOrder => {
+            this.filterValues.logicalOrder = logicalOrder;
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
@@ -122,9 +113,8 @@ export class ProvinceComponent implements OnInit {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.id.toString().toLowerCase().indexOf(searchTerms.id) !== -1
-        && data.countryId.toLowerCase().indexOf(searchTerms.id) !== -1
-        && data.logicalOrder.toLowerCase().indexOf(searchTerms.id) !== -1
+        && data.countryId.toString().toLowerCase().indexOf(searchTerms.countryId) !== -1
+        && data.logicalOrder.toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
     }
     return filterFunction;
   }
