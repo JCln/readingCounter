@@ -33,7 +33,7 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
   //////
 
   constructor(public dialog: MatDialog, private interfaceService: InterfaceService) {
-    this.dataSource.filterPredicate = this.createFilter();
+    // this.dataSource.filterPredicate = this.createFilter();
   }
 
   applyFilter(event: any) {
