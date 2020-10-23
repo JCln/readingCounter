@@ -4,4 +4,5 @@ export interface ISidebarItems {
     isRefreshable: boolean;
     isClosable: boolean;
     sid_isOpenItems?: boolean;   
+    subItems?: Array<ISidebarItems>
 }
