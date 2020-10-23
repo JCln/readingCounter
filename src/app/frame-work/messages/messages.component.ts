@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BrowserStorageService } from 'src/app/sevices/browser-storage.service';
+import { BrowserStorageService } from 'src/app/services/browser-storage.service';
 
 import { IColor, IMessage, ITime } from './../../Interfaces/imessage';
 import { MessageService } from './../../services/message.service';
