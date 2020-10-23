@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { AddNewComponent } from '../frame-work/role-manager/add-new/add-new.component';
+import { DeleteDialogComponent } from '../frame-work/role-manager/delete-dialog/delete-dialog.component';
 import { MatCheckboxComponent } from './mat-checkbox/mat-checkbox.component';
 import { MaterialModule } from './material.module';
 import { SharedRoutingModule } from './shared-routing.module';
@@ -9,7 +11,7 @@ import { ToggleComponent } from './toggle/toggle.component';
 
 
 @NgModule({
-  declarations: [MatCheckboxComponent, ToggleComponent],
+  declarations: [MatCheckboxComponent, ToggleComponent, AddNewComponent, DeleteDialogComponent],
   imports: [
     FormsModule,
     CommonModule,
@@ -17,7 +19,7 @@ import { ToggleComponent } from './toggle/toggle.component';
     SharedRoutingModule
   ],
   exports: [
-    CommonModule, FormsModule, MaterialModule, ToggleComponent
+    CommonModule, FormsModule, MaterialModule, ToggleComponent, AddNewComponent, DeleteDialogComponent
   ]
 })
 export class SharedModule {
