@@ -4,8 +4,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from '../../role-manager/add-new/add-new.component';
-import { DeleteDialogComponent } from '../../role-manager/delete-dialog/delete-dialog.component';
+import { AddNewComponent } from '../add-new/add-new.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IZoneBoundManager } from './../../../Interfaces/izone-bound-manager';
 
 @Component({
@@ -26,7 +26,7 @@ export class ZoneBoundComponent implements OnInit {
 
   dataSource = new MatTableDataSource();
 
-  columnsToDisplay = ['title', 'zoneId', 'logicalOrder', 'govermentalCode', 'fromEshterak', 'toEshterak', 'fromRadif', 'toRadif', 'dbInitialCatalog', 'actions'];
+  columnsToDisplay = ['title', 'zoneId', 'fromEshterak', 'toEshterak', 'actions'];
   filterValues = {
     title: '',
     zoneId: '',
@@ -156,7 +156,6 @@ export class ZoneBoundComponent implements OnInit {
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.zoneId.toLowerCase().indexOf(searchTerms.zoneId) !== -1
         && data.govermentalCode.toLowerCase().indexOf(searchTerms.govermentalCode) !== -1
-        && data.zoneId.toLowerCase().indexOf(searchTerms.zoneId) !== -1
         && data.fromEshterak.toLowerCase().indexOf(searchTerms.fromEshterak) !== -1
         && data.toEshterak.toLowerCase().indexOf(searchTerms.toEshterak) !== -1
         && data.fromRadif.toString().toLowerCase().indexOf(searchTerms.fromRadif) !== -1

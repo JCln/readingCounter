@@ -1,19 +1,19 @@
 <h2 mat-dialog-title>نقشی اضافه کنید</h2>
 
-<mat-dialog-content [formGroup]="form">
+<mat-dialog-content>
 
     <mat-form-field appearance="fill">
         <mat-label>نقش</mat-label>
-        <input matInput placeholder="" formControlName="addNew.titleUnicode" formControl="addNew.titleUnicode">
+        <input matInput placeholder="">
         <!-- <i class="fa fa-edit"></i> should be mat icon -->        
     </mat-form-field><br>
 
     <mat-form-field appearance="fill">
         <mat-label>عنوان</mat-label>
-        <input matInput placeholder="عنوان" formControlName="addNew.title" formControl="addNew.title">
+        <input matInput placeholder="عنوان">
     </mat-form-field><br>
 
-    <mat-checkbox formControl="addNew.needDeviceIdLogin">needDeviceIdLogin</mat-checkbox>
+    <mat-checkbox>needDeviceIdLogin</mat-checkbox>
 
 </mat-dialog-content>
 

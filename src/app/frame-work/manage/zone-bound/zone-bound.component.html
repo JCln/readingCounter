@@ -15,26 +15,6 @@
         </th>
         <td mat-cell *matCellDef="let person">{{person.title}}</td>
     </ng-container>
-    <ng-container matColumnDef="zoneId">
-        <th class="header" mat-header-cell *matHeaderCellDef>
-            شناسه ناحیه
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="zoneIdFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.zoneId}}</td>
-    </ng-container>
-    <ng-container matColumnDef="govermentalCode">
-        <th class="header" mat-header-cell *matHeaderCellDef>
-            کد دولتی
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="govermentalCodeFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.govermentalCode}}</td>
-    </ng-container>
     <ng-container matColumnDef="fromEshterak">
         <th class="header" mat-header-cell *matHeaderCellDef>
             از اشتراک
@@ -54,6 +34,26 @@
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.toEshterak}}</td>
+    </ng-container>
+    <ng-container matColumnDef="zoneId">
+        <th class="header" mat-header-cell *matHeaderCellDef>
+            شناسه ناحیه
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <input matInput [formControl]="zoneIdFilter">
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">{{person.zoneId}}</td>
+    </ng-container>
+    <!-- <ng-container matColumnDef="govermentalCode">
+        <th class="header" mat-header-cell *matHeaderCellDef>
+            کد دولتی
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <input matInput [formControl]="govermentalCodeFilter">
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">{{person.govermentalCode}}</td>
     </ng-container>
     <ng-container matColumnDef="fromRadif">
         <th class="header" mat-header-cell *matHeaderCellDef>
@@ -84,7 +84,7 @@
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.dbInitialCatalog}}</td>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container cdkColumnDef="actions">
         <th class="header" md-header-cell *matHeaderCellDef></th>

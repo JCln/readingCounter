@@ -3,8 +3,8 @@ import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 
-import { AddNewComponent } from '../../role-manager/add-new/add-new.component';
-import { DeleteDialogComponent } from '../../role-manager/delete-dialog/delete-dialog.component';
+import { AddNewComponent } from '../add-new/add-new.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ICountryManager } from './../../../Interfaces/icountry-manager';
 import { InterfaceManagerService } from './../../../services/interface-manager.service';
 

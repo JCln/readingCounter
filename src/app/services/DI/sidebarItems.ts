@@ -15,5 +15,9 @@ export const sidebarItems: ISidebarItems[] = [
     { routerUrl: '/wr/apk', name: 'apk', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/bi', name: 'اطلاعات پایه', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/privacy', name: 'تنظیمات کلمه عبور', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/msge', name: 'پیام سیستمی', isClosable: true, isRefreshable: true, sid_isOpenItems: false }
+    { routerUrl: '/wr/m/mc', name: 'مدیریت کشور', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/m/mp', name: 'مدیریت استان', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/m/mr', name: 'مدیریت منطقه', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/m/mz', name: 'مدیریت ناحیه', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/m/mzd', name: 'مدیریت محدوده', isClosable: true, isRefreshable: true, sid_isOpenItems: false }
 ]

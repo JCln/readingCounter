@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { SharedModule } from './../../shared/shared.module';
+import { AddNewComponent } from './add-new/add-new.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { ManageRoutingModule } from './manage-routing.module';
-import { ZoneBoundComponent } from './zone-bound/zone-bound.component';
 
 
 @NgModule({
-  declarations: [ZoneBoundComponent],
+  declarations: [AddNewComponent, DeleteDialogComponent],
   imports: [
-    CommonModule,
+    SharedModule,
     ManageRoutingModule
   ]
 })

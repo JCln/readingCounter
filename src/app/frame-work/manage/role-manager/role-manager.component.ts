@@ -5,8 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IRoleManager } from 'src/app/Interfaces/irole-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from './add-new/add-new.component';
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { AddNewComponent } from '../add-new/add-new.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+
 
 @Component({
   selector: 'app-role-manager',
@@ -140,17 +141,3 @@ export class RoleManagerComponent implements OnInit {
     return filterFunction;
   }
 }
-@Component({
-  selector: 'dialog-content-example-dialog',
-  styleUrls: ['role-manager.component.scss'],
-  templateUrl: 'dialog-content-example-dialog.html'
-})
-export class DialogContentExampleDialog { }
-
-@Component({
-  selector: 'dialog-edit',
-  styleUrls: ['role-manager.component.scss'],
-  templateUrl: 'dialog-edit.html'
-})
-export class DialogEdit { }
-
