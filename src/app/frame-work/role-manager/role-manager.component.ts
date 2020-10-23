@@ -1,91 +1,62 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSort } from '@angular/material/sort';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { IRoleManager } from 'src/app/Interfaces/irole-manager';
+import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { IRoleManager } from './../../Interfaces/irole-manager';
-import { InterfaceManagerService } from './../../services/interface-manager.service';
+import { AddNewComponent } from './add-new/add-new.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-role-manager',
   templateUrl: './role-manager.component.html',
   styleUrls: ['./role-manager.component.scss']
 })
-export class RoleManagerComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'title', 'titleUnicode', 'needDeviceIdLogin', 'actions'];
-  dataSource: MatTableDataSource<IRoleManager>;
-
-  @ViewChild(MatSort) sort: MatSort;
-
-  titleUnicodeFilter = new FormControl();
-  titleFilter = new FormControl();
+export class RoleManagerComponent implements OnInit {
 
 
-  filteredValues = {
-    title: ''
+  idFilter = new FormControl('');
+  titleFilter = new FormControl('');
+  titleUnicodeFilter = new FormControl('');
+  needDeviceIdLoginFilter = new FormControl('');
+  dataSource = new MatTableDataSource();
+  columnsToDisplay = ['title', 'titleUnicode', 'needDeviceIdLogin', 'actions'];
+  filterValues = {
+    title: '',
+    id: '',
+    titleUnicode: '',
+    needDeviceIdLogin: ''
   };
 
-  // forDialog///
-  title;
-  id;
-  isActive;
-  //////
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
 
-  constructor(public dialog: MatDialog, private interfaceManagerService: InterfaceManagerService) {
-    // this.dataSource.filterPredicate = this.createFilter();
-  }
+  openDialog = () => {
+    const dialogConfig = new MatDialogConfig();
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.addRole(result).subscribe(res => {
+            if (res) {
+              console.log(res);
 
-  applyFilter(event: any) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-  }
-  filterTest(filterValue: string, column: string) {
-    let filter = {
-      title: filterValue.trim().toLowerCase(),
-      [column]: column
-    };
-    if (!filterValue) delete filter[column];
-
-    this.dataSource.filter = JSON.stringify(filter);
-  }
-
-  filterTitle(event: Event) {
-    console.log(this.dataSource.filteredData);
-    const titleFilter = this.dataSource.filteredData;
-    // const titleFilter = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = titleFilter.toString();
-  }
-  filterTitleUnicode(event: Event) {
-    console.log((event.target as HTMLInputElement).value);
-
-    const titleUnicodeFilter = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = titleUnicodeFilter.trim().toLocaleLowerCase();
-  }
-  getRole = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getRole().subscribe(res => {
-        if (res) {
-          resolve(res);
-
+            }
+          })
         }
       });
     });
   }
-
-
-  openDialog = () => {
+  deleteDialog = () => {
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(DialogContentExampleDialog);
+      const dialogRef = this.dialog.open(DeleteDialogComponent);
       dialogRef.afterClosed().subscribe(result => {
         resolve(result)
       });
     });
   }
-
   deleteSingleRow = async (row: IRoleManager) => {
-    const dialogResult = await this.openDialog();
+    const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
         this.interfaceManagerService.deleteRole(row.id).subscribe(res => {
@@ -97,72 +68,77 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
     }
   }
   editDialog = (row: IRoleManager) => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(DialogEdit, {
-        data: { id: this.id, title: this.title, isActive: this.isActive }
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
+    // return new Promise(resolve => {
+    //   const dialogRef = this.dialog.open(DialogEdit, {
+    //     data: { id: this.id, title: this.title, isActive: this.isActive }
+    //   });
+    //   dialogRef.afterClosed().subscribe(result => {
+    //     console.log(result);
 
-        resolve(result)
-      });
-    });
+    //     resolve(result)
+    //   });
+    // });
   }
-  // connectToServer = (): any => {
-
-  // }
+  getRole = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getRole().subscribe(res => {
+        if (res) {
+          resolve(res);
+        }
+      })
+    })
+  }
   classWrapper = async () => {
-    const a = await this.getRole();
-    this.dataSource = new MatTableDataSource(a);
+    const rolesData = await this.getRole();
+    console.log(rolesData);
 
-    this.dataSource.sort = this.sort;
+    if (rolesData) {
+      this.dataSource.data = rolesData;
+      this.dataSource.filterPredicate = this.createFilter();
+
+      this.titleFilter.valueChanges
+        .subscribe(
+          title => {
+            this.filterValues.title = title;
+            this.dataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.idFilter.valueChanges
+        .subscribe(
+          id => {
+            this.filterValues.id = id;
+            this.dataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.titleUnicodeFilter.valueChanges
+        .subscribe(
+          titleUnicode => {
+            this.filterValues.titleUnicode = titleUnicode;
+            this.dataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.needDeviceIdLoginFilter.valueChanges
+        .subscribe(
+          needDeviceIdLogin => {
+            this.filterValues.needDeviceIdLogin = needDeviceIdLogin;
+            this.dataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+    }
   }
-  ngOnInit(): void {
+  ngOnInit() {
     this.classWrapper();
   }
+
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
-      return data.name.toLowerCase().indexOf(searchTerms.name) !== -1
+      return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.id.toString().toLowerCase().indexOf(searchTerms.id) !== -1
-        && data.colour.toLowerCase().indexOf(searchTerms.colour) !== -1
-        && data.pet.toLowerCase().indexOf(searchTerms.pet) !== -1;
+        && data.titleUnicode.toLowerCase().indexOf(searchTerms.titleUnicode) !== -1
     }
     return filterFunction;
   }
-
-  // customFilterPredicate() {
-  //   const myFilterPredicate = function (
-  //     data: IRoleManager,
-  //     filter: string
-  //   ): boolean {
-  //     let searchString = JSON.parse(filter);
-  //     let titleFound =
-  //       data.title
-
-  //         .indexOf(searchString.title.toLowerCase()) !== -1;
-  //     let titleUnicodeFound =
-  //       data.titleUnicode
-
-  //         .indexOf(searchString.position) !== -1;
-  //     if (searchString.topFilter) {
-  //       return titleFound || titleUnicodeFound;
-  //     } else {
-  //       return titleFound && titleUnicodeFound;
-  //     }
-  //   };
-  //   return myFilterPredicate;
-  // }
-  ngAfterViewInit(): void {
-    this.titleFilter.valueChanges
-      .subscribe(
-        title => {
-          this.filteredValues.title = title;
-          this.dataSource.filter = JSON.stringify(this.filteredValues);
-        }
-      )
-  }
-
 }
 @Component({
   selector: 'dialog-content-example-dialog',
@@ -177,3 +153,4 @@ export class DialogContentExampleDialog { }
   templateUrl: 'dialog-edit.html'
 })
 export class DialogEdit { }
+

@@ -16,19 +16,20 @@ th {
   width: 25%;
 }
 
+th.mat-header-cell {
+  text-align: center;
+}
+
 ._actions {
   display: flex;
   align-items: center;
 }
 
-.__custom {
-  height: 2.5rem;
-  border: 1px solid $blue_l;
-  width: auto;
+._custom {
   color: $blue_l;
-  min-width: 4rem;
-  font-size: $font_xs;
-  margin: 0 0.2rem;
+  border-radius: $border_50;
+  padding: $font_xs;
+  font-size: $font_l;
 }
 
 ._key,
@@ -37,7 +38,7 @@ th {
 }
 
 .add_new {
-  padding: 1rem;
+  padding: $font_xs;
   direction: rtl;
 }
 
@@ -46,7 +47,7 @@ th {
 td,
 th {
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-  font-size: 1.2rem;
+  font-size: $font_s;
 }
 
 
@@ -55,13 +56,14 @@ th {
     direction: rtl;
   }
 
-  .mat-elevation-z8 {
-    border-spacing: 0;
+  table {
+    padding: $font_xs;
     direction: rtl;
   }
 
-  table {
-    padding: 1rem;
+  .mat-form-field-infix {
+    font-size: 1.2rem;
+    font-weight: 600;
   }
 
 }
@@ -74,4 +76,27 @@ th {
 
 .filter {
   display: block;
+  width: 10rem;
+  margin-bottom: $font_xs;
+}
+
+// header options //
+.operation {
+  display: flex;
+  background: $white;
+  border-radius: $border_s $border_s 0 0;
+}
+
+.operation_btn {
+  cursor: pointer;
+  margin: $font_xs;
+  padding: $font_xs;
+  border-radius: 50%;
+  border: 1px solid;
+  font-size: 1.3rem;
+  height: 3rem;
+  width: 3rem;
+  display: grid;
+  place-content: center;
+  color: $blue_l;
 }

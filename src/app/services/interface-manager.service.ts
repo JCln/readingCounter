@@ -19,6 +19,9 @@ export class InterfaceManagerService {
   editRole = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('Role/Edit', body);
   }
+  addRole = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1.Test/Role/Add', body);
+  }
 
   getCountryManager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/Country/All');
