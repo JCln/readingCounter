@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { path: 'ms', loadChildren: () => import('./manage-server/manage-server.module').then(ms => ms.ManageServerModule) },
   { path: 'mc', loadChildren: () => import('./country/country.module').then(mc => mc.CountryModule) },
   { path: 'mp', loadChildren: () => import('./province/province.module').then(mp => mp.ProvinceModule) },
   { path: 'mr', loadChildren: () => import('./region/region.module').then(mr => mr.RegionModule) },

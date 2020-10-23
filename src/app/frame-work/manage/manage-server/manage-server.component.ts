@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IManageServer } from 'src/app/Interfaces/imanage-server';
+import { ManageServerService } from 'src/app/services/manage-server.service';
 
-import { IManageServer } from './../../Interfaces/imanage-server';
-import { ManageServerService } from './../../services/manage-server.service';
 
 @Component({
   selector: 'app-manage-server',
