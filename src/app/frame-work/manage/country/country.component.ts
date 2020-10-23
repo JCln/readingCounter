@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { IRoleManager } from 'src/app/Interfaces/irole-manager';
 
 import { AddNewComponent } from '../../role-manager/add-new/add-new.component';
 import { DeleteDialogComponent } from '../../role-manager/delete-dialog/delete-dialog.component';
+import { ICountryManager } from './../../../Interfaces/icountry-manager';
 import { InterfaceManagerService } from './../../../services/interface-manager.service';
 
 @Component({
@@ -15,13 +15,11 @@ import { InterfaceManagerService } from './../../../services/interface-manager.s
 })
 export class CountryComponent implements OnInit {
 
-  idFilter = new FormControl('');
   titleFilter = new FormControl('');
   dataSource = new MatTableDataSource();
-  columnsToDisplay = ['id', 'title', 'actions'];
+  columnsToDisplay = ['title', 'actions'];
   filterValues = {
-    title: '',
-    id: ''
+    title: ''
   };
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
@@ -50,7 +48,7 @@ export class CountryComponent implements OnInit {
       });
     });
   }
-  deleteSingleRow = async (row: IRoleManager) => {
+  deleteSingleRow = async (row: ICountryManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
@@ -63,7 +61,7 @@ export class CountryComponent implements OnInit {
     }
   }
 
-  getRole = (): any => {
+  getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getCountryManager().subscribe(res => {
         if (res) {
@@ -73,7 +71,7 @@ export class CountryComponent implements OnInit {
     })
   }
   classWrapper = async () => {
-    const rolesData = await this.getRole();
+    const rolesData = await this.getDataSource();
     console.log(rolesData);
 
     if (rolesData) {
@@ -87,13 +85,6 @@ export class CountryComponent implements OnInit {
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.idFilter.valueChanges
-        .subscribe(
-          id => {
-            this.filterValues.id = id;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
     }
   }
   ngOnInit() {
@@ -104,7 +95,6 @@ export class CountryComponent implements OnInit {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.id.toString().toLowerCase().indexOf(searchTerms.id) !== -1
     }
     return filterFunction;
   }
