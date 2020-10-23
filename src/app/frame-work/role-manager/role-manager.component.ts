@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { IRoleManager } from './../../Interfaces/irole-manager';
-import { InterfaceService } from './../../services/interface.service';
+import { InterfaceManagerService } from './../../services/interface-manager.service';
 
 @Component({
   selector: 'app-role-manager',
@@ -32,7 +32,7 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
   isActive;
   //////
 
-  constructor(public dialog: MatDialog, private interfaceService: InterfaceService) {
+  constructor(public dialog: MatDialog, private interfaceManagerService: InterfaceManagerService) {
     // this.dataSource.filterPredicate = this.createFilter();
   }
 
@@ -65,7 +65,7 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
   }
   getRole = (): any => {
     return new Promise((resolve) => {
-      this.interfaceService.getRole().subscribe(res => {
+      this.interfaceManagerService.getRole().subscribe(res => {
         if (res) {
           resolve(res);
 
@@ -88,7 +88,7 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
     const dialogResult = await this.openDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
-        this.interfaceService.deleteRole(row.id).subscribe(res => {
+        this.interfaceManagerService.deleteRole(row.id).subscribe(res => {
           if (res) {
             resolve(res);
           }
@@ -114,8 +114,8 @@ export class RoleManagerComponent implements OnInit, AfterViewInit {
   classWrapper = async () => {
     const a = await this.getRole();
     this.dataSource = new MatTableDataSource(a);
-    
-    this.dataSource.sort = this.sort;    
+
+    this.dataSource.sort = this.sort;
   }
   ngOnInit(): void {
     this.classWrapper();
