@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ZoneRoutingModule } from './zone-routing.module';
 import { ZoneComponent } from './zone.component';
@@ -8,7 +9,8 @@ import { ZoneComponent } from './zone.component';
 @NgModule({
   declarations: [ZoneComponent],
   imports: [
-    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
     ZoneRoutingModule
   ]
 })
