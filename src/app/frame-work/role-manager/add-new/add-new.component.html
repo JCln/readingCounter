@@ -1,26 +1,24 @@
-<h2 mat-dialog-title>توضیحات</h2>
+<h2 mat-dialog-title>نقشی اضافه کنید</h2>
 
-    <mat-dialog-content [formGroup]="form">
+<mat-dialog-content [formGroup]="form">
 
-        <mat-form-field appearance="fill">
-            <mat-label>نقش</mat-label>
-            <mat-select [(ngModel)]="selectedValue" name="role">
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                    {{food.viewValue}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field><br>
+    <mat-form-field appearance="fill">
+        <mat-label>نقش</mat-label>
+        <input matInput placeholder="" formControlName="addNew.titleUnicode" formControl="addNew.titleUnicode">
+        <!-- <i class="fa fa-edit"></i> should be mat icon -->
+        <mat-hint>Hint</mat-hint>
+    </mat-form-field><br>
 
-        <mat-form-field>
-            <mat-label>عنوان</mat-label>
-            <input matInput placeholder="عنوان" formControlName="description" [(ngModel)]="addNew.title">
-        </mat-form-field><br>
+    <mat-form-field appearance="fill">
+        <mat-label>عنوان</mat-label>
+        <input matInput placeholder="عنوان" formControlName="addNew.title" formControl="addNew.title">
+    </mat-form-field><br>
 
-        <mat-checkbox [(ngModel)]="addNew.needDeviceIdLogin">is Admin</mat-checkbox>
+    <mat-checkbox formControl="addNew.needDeviceIdLogin">needDeviceIdLogin</mat-checkbox>
 
-    </mat-dialog-content>
+</mat-dialog-content>
 
-    <mat-dialog-actions>
-        <button class="btn_2" (click)="close()">بازگشت</button>
-        <button class="btn_2 _custom" (click)="save()">ذخیره</button>
-    </mat-dialog-actions>
+<mat-dialog-actions>
+    <button class="btn_2" (click)="close()">بازگشت</button>
+    <button class="btn_2 _custom" [mat-dialog-close]="addNew" (click)="save()">ذخیره</button>
+</mat-dialog-actions>

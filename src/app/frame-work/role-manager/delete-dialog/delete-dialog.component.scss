@@ -1,10 +1,6 @@
 @import '../../../../assets/variable.scss';
 @import '../../../../assets/button.scss';
 
-// ::ng-deep {
-//     mat-dialog-content,
-//     <mat-form-field
-// }
 .mat-form-field {
   text-align: right;
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
@@ -13,7 +9,7 @@
 .mat-dialog-content {
   display: grid;
   justify-content: center;
-  min-height: 13rem;
+  min-height: auto;
   min-width: 20rem;
   overflow: hidden;
 }
@@ -40,9 +36,10 @@
 }
 
 ._custom {
-  background: $blue_l;
+  background: $red;
   color: $gray_l;
 }
+
 h2 {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
 }

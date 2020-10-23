@@ -19,5 +19,8 @@ export class InterfaceService {
   editRole = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('Role/Edit', body);
   }
+  addRole = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('Role/Add', body);
+  }
 
 }

@@ -19,23 +19,17 @@ export class AddNewComponent implements OnInit {
   }
   selectedValue: string;
   form: FormGroup;
-  description: string;
-
-
-  foods = [
-    { value: 'steak-0', viewValue: '1' },
-    { value: 'pizza-1', viewValue: '2' },
-    { value: 'tacos-2', viewValue: '3' }
-  ];
+  // description: string;
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddNewComponent>,
-    @Inject(MAT_DIALOG_DATA) data) {
-    this.description = data.description;
+    @Inject(MAT_DIALOG_DATA) data: any) {
+    // this.description = data.description;
   }
   save() {
     this.dialogRef.close(this.form.value);
-    console.log(this.form.value);
+    // console.log(data);
+    
     
   }
 
@@ -43,11 +37,11 @@ export class AddNewComponent implements OnInit {
     this.dialogRef.close();
   }
   ngOnInit(): void {
-    console.log(this.description, '', this.fb, this.dialogRef);
+    // console.log(this.description, '', this.fb, this.dialogRef);
 
-    this.form = this.fb.group({
-      description: [this.description, []]
-    });
+    // this.form = this.fb.group({
+    //   description: [this.description, []]
+    // });
   }
 
 }

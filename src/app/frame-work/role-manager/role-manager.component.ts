@@ -6,6 +6,7 @@ import { IRoleManager } from 'src/app/Interfaces/irole-manager';
 
 import { InterfaceService } from './../../services/interface.service';
 import { AddNewComponent } from './add-new/add-new.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-role-manager',
@@ -20,7 +21,7 @@ export class RoleManagerComponent implements OnInit {
   titleUnicodeFilter = new FormControl('');
   needDeviceIdLoginFilter = new FormControl('');
   dataSource = new MatTableDataSource();
-  columnsToDisplay = ['title', 'titleUnicode', 'needDeviceIdLogin', 'actions'];
+  columnsToDisplay = ['title', 'titleUnicode', 'needDeviceIdLogin', 'actions', 'cost'];
   filterValues = {
     title: '',
     id: '',
@@ -32,25 +33,30 @@ export class RoleManagerComponent implements OnInit {
 
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = {
-      title: 'Angular For Beginners'
-    };
-
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
+        if (result) {
+          this.interfaceService.addRole(result).subscribe(res => {
+            if (res) {
+              console.log(res);
 
+            }
+          })
+        }
+      });
+    });
+  }
+  deleteDialog = () => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(DeleteDialogComponent);
+      dialogRef.afterClosed().subscribe(result => {
         resolve(result)
       });
     });
   }
   deleteSingleRow = async (row: IRoleManager) => {
-    const dialogResult = await this.openDialog();
+    const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
         this.interfaceService.deleteRole(row.id).subscribe(res => {
