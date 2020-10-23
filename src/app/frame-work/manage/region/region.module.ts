@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { RegionRoutingModule } from './region-routing.module';
 import { RegionComponent } from './region.component';
@@ -8,7 +9,8 @@ import { RegionComponent } from './region.component';
 @NgModule({
   declarations: [RegionComponent],
   imports: [
-    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
     RegionRoutingModule
   ]
 })
