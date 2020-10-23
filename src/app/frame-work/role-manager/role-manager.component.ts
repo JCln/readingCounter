@@ -21,7 +21,7 @@ export class RoleManagerComponent implements OnInit {
   titleUnicodeFilter = new FormControl('');
   needDeviceIdLoginFilter = new FormControl('');
   dataSource = new MatTableDataSource();
-  columnsToDisplay = ['title', 'titleUnicode', 'needDeviceIdLogin', 'actions', 'cost'];
+  columnsToDisplay = ['title', 'titleUnicode', 'needDeviceIdLogin', 'actions'];
   filterValues = {
     title: '',
     id: '',

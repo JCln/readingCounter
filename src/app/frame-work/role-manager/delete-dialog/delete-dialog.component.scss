@@ -12,6 +12,7 @@
   min-height: auto;
   min-width: 20rem;
   overflow: hidden;
+  padding: $font_2 0;
 }
 
 .mat-dialog-actions {
@@ -42,4 +43,13 @@
 
 h2 {
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $gray_l;
+  background: $red;
+  border-radius: 15px;
+  padding: 1rem;
+}
+.mat-dialog-container {
+  border: 1px solid $red;
 }

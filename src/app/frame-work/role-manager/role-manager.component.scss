@@ -26,19 +26,10 @@ th.mat-header-cell {
 }
 
 ._custom {
-  // height: 2.5rem;
-  // border: 1px solid $blue_l;
-  // width: auto;
-  // color: $blue_l;
-  // min-width: 4rem;
-  // font-size: $font_xs;
-  // margin: 0 0.2rem;
   color: $blue_l;
-  // color: $gray_l;
-  border-radius: 50%;
-  padding: 1rem;
-  border: 1px solid $blue_l;
-
+  border-radius: $border_50;
+  padding: $font_xs;
+  font-size: $font_l;
 }
 
 ._key,
@@ -68,6 +59,11 @@ th {
   table {
     padding: $font_xs;
     direction: rtl;
+  }
+
+  .mat-form-field-infix {
+    font-size: 1.2rem;
+    font-weight: 600;
   }
 
 }

@@ -1,7 +1,4 @@
 <div class="operation">
-    <button class="operation_btn">
-        <i class="fa fa-filter"></i>
-    </button>
     <button (click)="openDialog()" class="operation_btn">
         <i class="fa fa-plus"></i>
     </button>
@@ -10,7 +7,7 @@
 <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="title">
         <th class="header" mat-header-cell *matHeaderCellDef>
-            title
+            عنوان به لاتین
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <input matInput [formControl]="titleFilter">
@@ -20,7 +17,7 @@
     </ng-container>
     <ng-container matColumnDef="titleUnicode">
         <th class="header" mat-header-cell *matHeaderCellDef>
-            titleUnicode
+            عنوان
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <mat-label></mat-label>
@@ -31,7 +28,7 @@
     </ng-container>
     <ng-container matColumnDef="needDeviceIdLogin">
         <th class="header" mat-header-cell *matHeaderCellDef>
-            needDeviceIdLogin
+            آیا به شناسه دستگاه نیاز است؟
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <input matInput [formControl]="needDeviceIdLoginFilter">
@@ -49,13 +46,7 @@
         </td>
     </ng-container>
 
-    <ng-container matColumnDef="cost">
-        <th class="header" mat-header-cell *matHeaderCellDef> Cost </th>
-        <td mat-cell *matCellDef="let person"> 5 </td>
-        <td mat-footer-cell *matFooterCellDef> 3</td>
-    </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let person; columns: columnsToDisplay"></tr>
-    <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+
 </table>

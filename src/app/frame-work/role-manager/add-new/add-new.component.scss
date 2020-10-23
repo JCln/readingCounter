@@ -1,10 +1,6 @@
 @import '../../../../assets/variable.scss';
 @import '../../../../assets/button.scss';
 
-// ::ng-deep {
-//     mat-dialog-content,
-//     <mat-form-field
-// }
 .mat-form-field {
   text-align: right;
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
@@ -43,6 +39,17 @@
   background: $blue_l;
   color: $gray_l;
 }
+
 h2 {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $gray_l;
+  background: $blue_l;
+  border-radius: 15px;
+  padding: 1rem;
+}
+
+.mat-dialog-container {
+  border: 1px solid $blue_l;
 }
