@@ -13,6 +13,9 @@ export class InterfaceManagerService {
   getRole = (): Observable<any> => {
     return this.mainService.GET('V1.Test/Role/All');
   }
+  getRoleDictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/Role/Dictionary');
+  }
   deleteRole = (id: number): Observable<any> => {
     return this.mainService.POST('Role/Remove', id);
   }
@@ -25,6 +28,9 @@ export class InterfaceManagerService {
 
   getCountryManager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/Country/All');
+  }
+  getCountryDictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/Country/Dictionary');
   }
   deleteCountryManager = (id: number): Observable<any> => {
     return this.mainService.POST('Role/Country/Remove', id);
@@ -39,6 +45,9 @@ export class InterfaceManagerService {
   getProvinceManager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/Province/All');
   }
+  getProvinceDictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/Province/Dictionary');
+  }
   deleteProvinceManager = (id: number): Observable<any> => {
     return this.mainService.POST('Role/Province/Remove', id);
   }
@@ -51,6 +60,9 @@ export class InterfaceManagerService {
 
   getRegionManager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/Region/All');
+  }
+  getRegionDictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/Region/Dictionary');
   }
   deleteRegionManager = (id: number): Observable<any> => {
     return this.mainService.POST('Role/Region/Remove', id);
@@ -65,6 +77,9 @@ export class InterfaceManagerService {
   getZoneManager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/Zone/All');
   }
+  getZoneDictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/Zone/Dictionary');
+  }
   deleteZoneManager = (id: number): Observable<any> => {
     return this.mainService.POST('Role/Zone/Remove', id);
   }
@@ -77,6 +92,9 @@ export class InterfaceManagerService {
 
   getZoneBoundManager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/ZoneBound/All');
+  }
+  getZoneBoundDictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/ZoneBound/Dictionary');
   }
   deleteZoneBoundManager = (id: number): Observable<any> => {
     return this.mainService.POST('Role/ZoneBound/Remove', id);

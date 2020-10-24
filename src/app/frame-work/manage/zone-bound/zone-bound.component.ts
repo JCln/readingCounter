@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { AddNewComponent } from '../add-new/add-new.component';
@@ -24,6 +25,7 @@ export class ZoneBoundComponent implements OnInit {
   toRadifFilter = new FormControl('');
   dbInitialCatalogFilter = new FormControl('');
 
+  zoneBoundDictionary: IDictionaryManager[] = [];
   dataSource = new MatTableDataSource();
 
   columnsToDisplay = ['title', 'zoneId', 'fromEshterak', 'toEshterak', 'actions'];
@@ -76,7 +78,22 @@ export class ZoneBoundComponent implements OnInit {
       });
     }
   }
-
+  convertIdToTitle = (dataSource: IZoneBoundManager[], zoneDictionary: IDictionaryManager[]) => {
+    zoneDictionary.map(zoneDic => {
+      dataSource.map(dataSource => {
+        if (zoneDic.id === dataSource.id)
+          dataSource.zoneId = zoneDic.title;
+      })
+    });
+  }
+  getZoneBoundDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getZoneBoundManager().subscribe(res => {
@@ -145,6 +162,9 @@ export class ZoneBoundComponent implements OnInit {
           }
         )
     }
+    const zoneBoundDictionary = await this.getZoneBoundDictionary();
+    this.zoneBoundDictionary = zoneBoundDictionary;
+    this.convertIdToTitle(rolesData, zoneBoundDictionary);
   }
   ngOnInit() {
     this.classWrapper();
@@ -154,7 +174,7 @@ export class ZoneBoundComponent implements OnInit {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.zoneId.toLowerCase().indexOf(searchTerms.zoneId) !== -1
+        && data.zoneId.toString().toLowerCase().indexOf(searchTerms.zoneId) !== -1
         && data.govermentalCode.toLowerCase().indexOf(searchTerms.govermentalCode) !== -1
         && data.fromEshterak.toLowerCase().indexOf(searchTerms.fromEshterak) !== -1
         && data.toEshterak.toLowerCase().indexOf(searchTerms.toEshterak) !== -1

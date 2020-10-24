@@ -1,7 +1,7 @@
 export interface IZoneBoundManager {
     id: number;
     title: string;
-    zoneId: number;
+    zoneId: number | string;
     govermentalCode: string;
     fromEshterak: string;
     toEshterak: string;

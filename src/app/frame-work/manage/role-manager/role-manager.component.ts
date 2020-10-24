@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IRoleManager } from 'src/app/Interfaces/irole-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
@@ -22,6 +23,8 @@ export class RoleManagerComponent implements OnInit {
   titleUnicodeFilter = new FormControl('');
   needDeviceIdLoginFilter = new FormControl('');
   dataSource = new MatTableDataSource();
+
+  roleManagerDictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'titleUnicode', 'needDeviceIdLogin', 'actions'];
   filterValues = {
     title: '',
@@ -89,6 +92,14 @@ export class RoleManagerComponent implements OnInit {
       })
     })
   }
+  getRoleManagerDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getRoleDictionaryManager().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
   classWrapper = async () => {
     const rolesData = await this.getRole();
     console.log(rolesData);
@@ -126,6 +137,8 @@ export class RoleManagerComponent implements OnInit {
           }
         )
     }
+    const roleManagerDictionary = await this.getRoleManagerDictionary();
+    this.roleManagerDictionary = roleManagerDictionary;
   }
   ngOnInit() {
     this.classWrapper();

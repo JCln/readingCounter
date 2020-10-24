@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AddNewComponent } from '../add-new/add-new.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ICountryManager } from './../../../Interfaces/icountry-manager';
+import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { InterfaceManagerService } from './../../../services/interface-manager.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class CountryComponent implements OnInit {
 
   titleFilter = new FormControl('');
   dataSource = new MatTableDataSource();
+  countryDictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'actions'];
   filterValues = {
     title: ''
@@ -60,7 +62,14 @@ export class CountryComponent implements OnInit {
       });
     }
   }
-
+  getCountryDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getCountryDictionaryManager().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getCountryManager().subscribe(res => {

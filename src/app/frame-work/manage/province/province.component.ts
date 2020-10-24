@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { AddNewComponent } from '../add-new/add-new.component';
@@ -19,6 +20,7 @@ export class ProvinceComponent implements OnInit {
   logicalOrderFilter = new FormControl('');
   dataSource = new MatTableDataSource();
 
+  provinceDictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'countryId', 'logicalOrder', 'actions'];
   filterValues = {
     title: '',
@@ -64,7 +66,22 @@ export class ProvinceComponent implements OnInit {
       });
     }
   }
-
+  convertIdToTitle = (dataSource: IProvinceManager[], zoneDictionary: IDictionaryManager[]) => {
+    zoneDictionary.map(zoneDic => {
+      dataSource.map(dataSource => {
+        if (zoneDic.id === dataSource.id)
+          dataSource.countryId = zoneDic.title;
+      })
+    });
+  }
+  getProvinceDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getCountryDictionaryManager().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getProvinceManager().subscribe(res => {
@@ -104,6 +121,9 @@ export class ProvinceComponent implements OnInit {
           }
         )
     }
+    const provinceDictionary = await this.getProvinceDictionary();
+    this.provinceDictionary = provinceDictionary;
+    this.convertIdToTitle(rolesData, provinceDictionary);
   }
   ngOnInit() {
     this.classWrapper();

@@ -6,6 +6,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { AddNewComponent } from '../add-new/add-new.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { IZoneManager } from './../../../Interfaces/izone-manager';
 
 @Component({
@@ -19,6 +20,11 @@ export class ZoneComponent implements OnInit {
   logicalOrderFilter = new FormControl('');
   isMetroFilter = new FormControl('');
   dataSource = new MatTableDataSource();
+
+  selectedValue;
+  items: string[] = ['شهری', 'غیرشهری'];
+  zoneId: any[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
 
   columnsToDisplay = ['title', 'regionId', 'logicalOrder', 'isMetro', 'actions'];
   filterValues = {
@@ -66,7 +72,22 @@ export class ZoneComponent implements OnInit {
       });
     }
   }
-
+  convertIdToTitle = (dataSource: IZoneManager[], zoneDictionary: IDictionaryManager[]) => {
+    zoneDictionary.map(zoneDic => {
+      dataSource.map(dataSource => {
+        if (zoneDic.id === dataSource.id)
+          dataSource.regionId = zoneDic.title;
+      })
+    });
+  }
+  getZoneDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getRegionDictionaryManager().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getZoneManager().subscribe(res => {
@@ -98,13 +119,6 @@ export class ZoneComponent implements OnInit {
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.regionIdFilter.valueChanges
-        .subscribe(
-          regionId => {
-            this.filterValues.regionId = regionId;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
       this.isMetroFilter.valueChanges
         .subscribe(
           isMetro => {
@@ -120,6 +134,14 @@ export class ZoneComponent implements OnInit {
           }
         )
     }
+
+    const zoneDictionary = await this.getZoneDictionary();
+    console.log(zoneDictionary);
+
+    this.zoneDictionary = zoneDictionary;
+
+    this.convertIdToTitle(rolesData, zoneDictionary);
+
   }
   ngOnInit() {
     this.classWrapper();
@@ -128,9 +150,13 @@ export class ZoneComponent implements OnInit {
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
+      console.log(data.isMetro.toString().indexOf(searchTerms.isMetro) !== -1);
+      console.log(data.isMetro.toString());
+
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.regionId.toString().toLowerCase().indexOf(searchTerms.regionId) !== -1
-        && data.logicalOrder.toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
+        && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
+        && data.isMetro.toString().indexOf(searchTerms.isMetro) !== -1
     }
     return filterFunction;
   }

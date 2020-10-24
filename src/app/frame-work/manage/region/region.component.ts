@@ -6,6 +6,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { AddNewComponent } from '../add-new/add-new.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { IRegionManager } from './../../../Interfaces/iregion-manager';
 
 @Component({
@@ -19,6 +20,8 @@ export class RegionComponent implements OnInit {
   provinceIdFilter = new FormControl('');
   logicalOrderFilter = new FormControl('');
   dataSource = new MatTableDataSource();
+
+  regionDictionary: IDictionaryManager[] = [];
 
   columnsToDisplay = ['title', 'provinceId', 'logicalOrder', 'actions'];
   filterValues = {
@@ -65,7 +68,22 @@ export class RegionComponent implements OnInit {
       });
     }
   }
-
+  convertIdToTitle = (dataSource: IRegionManager[], zoneDictionary: IDictionaryManager[]) => {
+    zoneDictionary.map(zoneDic => {
+      dataSource.map(dataSource => {
+        if (zoneDic.id === dataSource.id)
+          dataSource.provinceId = zoneDic.title;
+      })
+    });
+  }
+  getRegionDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getProvinceDictionaryManager().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getRegionManager().subscribe(res => {
@@ -77,7 +95,6 @@ export class RegionComponent implements OnInit {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-    console.log(rolesData);
 
     if (rolesData) {
       this.dataSource.data = rolesData;
@@ -105,6 +122,9 @@ export class RegionComponent implements OnInit {
           }
         )
     }
+    const regionDictionary = await this.getRegionDictionary();
+    this.regionDictionary = regionDictionary;
+    this.convertIdToTitle(rolesData, regionDictionary);
   }
   ngOnInit() {
     this.classWrapper();
