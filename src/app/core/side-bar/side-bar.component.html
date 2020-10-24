@@ -14,7 +14,10 @@
         <div class="sub_item" *ngFor="let subItem of item.subItems">
             <!-- [hidden]="!item.sid_isOpenItems"-->
             <!-- <a [routerLink]="[subItem.routerUrl ]">{{subItem.name}}</a> -->
-            <a routerLink="{{subItem.routerUrl}}">{{subItem.name}}</a>
+            <!-- <a routerLink="{{subItem.routerUrl}}">{{subItem.name}}</a> -->
+            <!-- <a [routerLink]="[ '/'+ subItem.routerUrl ]">{{subItem.name}}</a> -->
+            <a [href]="subItem.routerUrl">{{subItem.name}}</a>
+
         </div>
     </li>
 </ul>

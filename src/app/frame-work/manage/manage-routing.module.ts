@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'mp', loadChildren: () => import('./province/province.module').then(mp => mp.ProvinceModule) },
   { path: 'mr', loadChildren: () => import('./region/region.module').then(mr => mr.RegionModule) },
   { path: 'mz', loadChildren: () => import('./zone/zone.module').then(mz => mz.ZoneModule) },
+  { path: 'mrm', loadChildren: () => import('./role-manager/role-manager.module').then(mrm => mrm.RoleManagerModule) },
   { path: 'mzd', loadChildren: () => import('./zone-bound/zone-bound.module').then(mzd => mzd.ZoneBoundModule) }
 ];
 
