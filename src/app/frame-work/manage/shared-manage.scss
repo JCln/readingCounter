@@ -1,0 +1,121 @@
+@import '../../../assets/variable.scss';
+@import '../../../assets/button.scss';
+@import '../../../assets/input.scss';
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+th.mat-header-cell {
+  text-align: right;
+}
+
+td.mat-cell {
+  padding: .5rem;
+}
+
+._actions {
+  display: flex;
+  align-items: center;
+}
+
+._custom {
+  color: $blue_l;
+  border-radius: $border_50;
+  padding: $font_xs;
+  font-size: $font_l;
+  cursor: pointer;
+}
+
+._key,
+._value {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+}
+
+.add_new {
+  padding: $font_xs;
+  direction: rtl;
+}
+
+.mat-dialog-actions,
+.mat-dialog-content,
+td,
+th {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-size: $font_s;
+}
+
+
+::ng-deep {
+  .mat-option-text {
+    text-align: right;
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  }
+
+  .mat-dialog-container {
+    direction: rtl;
+  }
+
+  table {
+    direction: rtl;
+  }
+
+  .mat-form-field-infix {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+}
+
+.mat-form-field {
+  display: flex;
+  justify-content: center;
+  text-align: right;
+}
+
+.filter {
+  display: block;
+  width: 10rem;
+  margin-bottom: $font_xs;
+}
+
+// header options //
+.operation {
+  display: flex;
+  justify-content: flex-end;
+  background: $white;
+  border-radius: $border_s $border_s 0 0;
+}
+
+.operation_btn {
+  cursor: pointer;
+  margin: $font_xs;
+  padding: $font_xs;
+  border-radius: 50%;
+  border: 1px solid;
+  font-size: 1.3rem;
+  height: 3rem;
+  width: 3rem;
+  display: grid;
+  place-content: center;
+  color: $blue_l;
+}
+
+.mat-row:nth-child(even) {
+  background-color: $gray_l;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: $gray_d;
+}
