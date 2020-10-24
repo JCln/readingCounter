@@ -41,6 +41,9 @@
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <input matInput [formControl]="zoneIdFilter">
+                <!-- <mat-option *ngFor="let zoneBoundDictionary of zoneBoundDictionary" [value]="zoneBoundDictionary">
+                    {{zoneBoundDictionary.title}}
+                </mat-option> -->
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.zoneId}}</td>

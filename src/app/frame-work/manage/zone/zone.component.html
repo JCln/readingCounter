@@ -20,7 +20,11 @@
             شناسه منطقه
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="regionIdFilter">
+                <mat-select name="item">
+                    <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="isMetroFilter">
+                        {{zoneDictionary.title}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.regionId}}</td>
@@ -30,10 +34,22 @@
             شهری
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="isMetroFilter">
+                <mat-select name="item">
+                    <mat-option *ngFor="let item of items" [value]="isMetroFilter">
+                        {{item}}
+                    </mat-option>
+                </mat-select>
+                <!-- <select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
+                    (change)="filterChange(filter,$event)">
+                    <option value="">-- Select {{filter.name}} --</option>
+                    <option [value]="item" *ngFor="let item of filter.options">{{item}}</option>
+                </select> -->
+                <!-- <input matInput [formControl]="isMetroFilter"> -->
             </mat-form-field>
         </th>
-        <td mat-cell *matCellDef="let person">{{person.isMetro}}</td>
+        <td mat-cell *matCellDef="let person">
+            <mat-checkbox [(ngModel)]="person.isMetro"></mat-checkbox>
+        </td>
     </ng-container>
     <ng-container matColumnDef="logicalOrder">
         <th class="header" mat-header-cell *matHeaderCellDef>
