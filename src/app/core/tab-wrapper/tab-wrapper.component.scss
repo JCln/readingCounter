@@ -99,14 +99,17 @@ li.active::before {
 }
 
 ._remove_all {
-  width: $font_2;
-  height: $font_2;
   margin: 0 auto 0 .3rem;
-  border-radius: 50%;
   cursor: pointer;
+  max-width: $font_2;
+  max-height: $font_2;
 
-  &:hover {
-    box-shadow: 1px 0px 2px 1px $red;
+  img {
+    border-radius: 50%;
+
+    &:hover {
+      box-shadow: 1px 0px 2px 1px $red;
+    }
   }
 }
 
