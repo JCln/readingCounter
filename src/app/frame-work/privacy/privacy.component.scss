@@ -1,10 +1,11 @@
 @import '../../../assets/variable';
 @import '../../../assets/button.scss';
 @import '../../../assets/input.scss';
+@import './plus-minus';
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(27rem, 29rem));
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 34rem));
   direction: rtl;
   justify-content: center;
   gap: 3rem;
@@ -17,7 +18,7 @@
   padding: $font_2 0;
   justify-content: space-around;
   border-radius: $border_s;
-  min-height: 28rem;
+  min-height: 38rem;
 }
 
 ._desc {
@@ -98,6 +99,25 @@ ul {
   margin-top: 4px;
 }
 
+.number_vals {
+  display: flex;
+  align-items: center;
+  font-size: $font_s;
+  font-weight: 600;
+  color: $gray_dr;
+}
+
 ._checkbox {
   text-align: right;
+}
+
+.btns {
+  margin: $font_xs;
+  display: flex;
+  justify-content: center;
+}
+
+.btn_1 {
+  color: $gray_l;
+  margin: $font_05;
 }
