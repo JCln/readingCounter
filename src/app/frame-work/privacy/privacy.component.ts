@@ -88,8 +88,5 @@ export class PrivacyComponent implements OnInit {
   addPolicy = () => {
     this.interfaceService.addPolicies(this.policies);
   }
-  editPolicy = () => {
-    this.interfaceService.editPolicies(this.policies);
-  }
 }
 
