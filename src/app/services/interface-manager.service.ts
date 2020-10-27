@@ -106,4 +106,31 @@ export class InterfaceManagerService {
     return this.mainService.POSTBODY('Role/ZoneBound/Add', body);
   }
 
+  // auth Levels 
+  getAuthLevel1Manager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel1/all');
+  }
+  getAuthLevel1DictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel1/Dictionary');
+  }
+  deleteAuthLevel1Manager = (id: number): Observable<any> => {
+    return this.mainService.POST('V1.Test/AuthLevel1/Remove', id);
+  }
+
+  getAuthLevel2Manager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel2/all');
+  }
+  deleteAuthLevel2Manager = (id: number): Observable<any> => {
+    return this.mainService.POST('V1.Test/AuthLevel2/Remove', id);
+  }
+
+  getAuthLevel3Manager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel3/all');
+  }
+
+  getAuthLevel4Manager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel4/all');
+  }
+  // 
+
 }
