@@ -2,28 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ICountryManager } from 'src/app/Interfaces/icountry-manager';
+import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
+import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from '../add-new/add-new.component';
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { IAuthLevel2, IAuthLevel3, IAuthLevels } from './../../../Interfaces/iauth-levels';
+import { AddNewComponent } from '../../add-new/add-new.component';
+import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+
 
 @Component({
-  selector: 'app-auth-levels',
-  templateUrl: './auth-levels.component.html',
-  styleUrls: ['./auth-levels.component.scss']
+  selector: 'app-auth4',
+  templateUrl: './auth4.component.html',
+  styleUrls: ['./auth4.component.scss']
 })
-export class AuthLevelsComponent implements OnInit {
-  authLevel1All: IAuthLevels[] = [];
-  authLevel2All: IAuthLevel2[] = [];
-  authLevel3All: IAuthLevel3[] = [];
-
+export class Auth4Component implements OnInit {
   titleFilter = new FormControl('');
+  countryIdFilter = new FormControl('');
+  logicalOrderFilter = new FormControl('');
   dataSource = new MatTableDataSource();
-  columnsToDisplay = ['title', 'authLevel1All', 'actions'];
+
+  provinceDictionary: IDictionaryManager[] = [];
+  columnsToDisplay = ['title', 'countryId', 'logicalOrder', 'actions'];
   filterValues = {
-    title: ''
+    title: '',
+    countryId: '',
+    logicalOrder: ''
   };
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
@@ -34,7 +37,7 @@ export class AuthLevelsComponent implements OnInit {
       const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addCountryManager(result).subscribe(res => {
+          this.interfaceManagerService.addProvinceManager(result).subscribe(res => {
             if (res) {
               console.log(res);
 
@@ -52,11 +55,11 @@ export class AuthLevelsComponent implements OnInit {
       });
     });
   }
-  deleteSingleRow = async (row: ICountryManager) => {
+  deleteSingleRow = async (row: IProvinceManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.deleteCountryManager(row.id).subscribe(res => {
+        this.interfaceManagerService.deleteProvinceManager(row.id).subscribe(res => {
           if (res) {
             resolve(res);
           }
@@ -64,41 +67,25 @@ export class AuthLevelsComponent implements OnInit {
       });
     }
   }
-  getAuthLevel1 = (): Promise<IAuthLevels> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getAuthLevel1Manager().subscribe(res => {
-        if (res) {
-          this.authLevel1All = res;
-          resolve(res);
-        }
+  convertIdToTitle = (dataSource: IProvinceManager[], zoneDictionary: IDictionaryManager[]) => {
+    zoneDictionary.map(zoneDic => {
+      dataSource.map(dataSource => {
+        if (zoneDic.id === dataSource.id)
+          dataSource.countryId = zoneDic.title;
       })
     });
   }
-  getAuthLevel2 = (): Promise<IAuthLevel2> => {
+  getProvinceDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getAuthLevel2Manager().subscribe(res => {
+      this.interfaceManagerService.getCountryDictionaryManager().subscribe(res => {
         if (res)
           resolve(res);
       })
     });
-  }
-  getAuthLevel3 = (): Promise<IAuthLevel3> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getAuthLevel3Manager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
-    });
-  }
-  authLevelsWrapper = async () => {
-    const a = await this.getAuthLevel1();
-    this.dataSource.data.push(a);
-    console.log(this.dataSource);
-    
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getCountryManager().subscribe(res => {
+      this.interfaceManagerService.getProvinceManager().subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -120,8 +107,24 @@ export class AuthLevelsComponent implements OnInit {
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      }
-      this.authLevelsWrapper();
+      this.countryIdFilter.valueChanges
+        .subscribe(
+          countryId => {
+            this.filterValues.countryId = countryId;
+            this.dataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.logicalOrderFilter.valueChanges
+        .subscribe(
+          logicalOrder => {
+            this.filterValues.logicalOrder = logicalOrder;
+            this.dataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+    }
+    const provinceDictionary = await this.getProvinceDictionary();
+    this.provinceDictionary = provinceDictionary;
+    this.convertIdToTitle(rolesData, provinceDictionary);
   }
   ngOnInit() {
     this.classWrapper();
@@ -131,6 +134,8 @@ export class AuthLevelsComponent implements OnInit {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
+        && data.countryId.toString().toLowerCase().indexOf(searchTerms.countryId) !== -1
+        && data.logicalOrder.toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
     }
     return filterFunction;
   }

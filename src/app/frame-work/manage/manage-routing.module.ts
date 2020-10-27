@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'mz', loadChildren: () => import('./zone/zone.module').then(mz => mz.ZoneModule) },
   { path: 'mrm', loadChildren: () => import('./role-manager/role-manager.module').then(mrm => mrm.RoleManagerModule) },
   { path: 'mzd', loadChildren: () => import('./zone-bound/zone-bound.module').then(mzd => mzd.ZoneBoundModule) },
-  { path: 'al', loadChildren: () => import('./auth-levels/auth-levels.module').then(authLevels => authLevels.AuthLevelsModule) }
+  { path: 'al', loadChildren: () => import('./authLevels/authlevels.module').then(authLevels => authLevels.AuthlevelsModule) }
 ];
 
 @NgModule({

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthLevelsComponent } from './auth-levels.component';
+import { Auth3Component } from './auth3.component';
 
 const routes: Routes = [
-  { path: '', component: AuthLevelsComponent }
+  { path: '', component: Auth3Component }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AuthLevelsRoutingModule { }
+export class Auth3RoutingModule { }

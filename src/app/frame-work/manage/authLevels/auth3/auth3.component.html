@@ -5,7 +5,6 @@
 </div>
 
 <table mat-table [dataSource]="dataSource">
-
     <ng-container matColumnDef="title">
         <th class="header" mat-header-cell *matHeaderCellDef>
             عنوان
@@ -14,17 +13,29 @@
                 <input matInput [formControl]="titleFilter">
             </mat-form-field>
         </th>
-        <td mat-cell *matCellDef="let element">{{element.title}}</td>
+        <td mat-cell *matCellDef="let person">{{person.title}}</td>
     </ng-container>
-    <ng-container matColumnDef="authLevel1All">
+    <ng-container matColumnDef="countryId">
         <th class="header" mat-header-cell *matHeaderCellDef>
-            auth 1
-            <!-- <mat-form-field class="filter" floatLabel="never">            
-                <input matInput [formControl]="titleFilter">
-            </mat-form-field> -->
+            شناسه کشور
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <input matInput [formControl]="countryIdFilter">
+            </mat-form-field>
         </th>
-        <td mat-cell *matCellDef="let element">{{element.title}}</td>
+        <td mat-cell *matCellDef="let person">{{person.countryId}}</td>
     </ng-container>
+    <ng-container matColumnDef="logicalOrder">
+        <th class="header" mat-header-cell *matHeaderCellDef>
+            ترتیب نمایش
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <input matInput [formControl]="logicalOrderFilter">
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">{{person.logicalOrder}}</td>
+    </ng-container>
+
     <ng-container cdkColumnDef="actions">
         <th class="header" md-header-cell *matHeaderCellDef></th>
         <td md-cell *matCellDef="let row" class="_actions">

@@ -1,4 +1,6 @@
 .header {
+  display: flex;
+  align-items: center;
   overflow: hidden;
   background-color: #fff;
   height: 3rem;
@@ -7,4 +9,15 @@
     width: 4.5rem;
     height: 3rem;
   }
+}
+
+ul {
+  margin-left: auto;
+  list-style-type: none;
+}
+
+li {
+  padding-right: 6rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
