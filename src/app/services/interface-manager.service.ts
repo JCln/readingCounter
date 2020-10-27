@@ -106,4 +106,18 @@ export class InterfaceManagerService {
     return this.mainService.POSTBODY('Role/ZoneBound/Add', body);
   }
 
+  // auth Levels 
+  getAuthLevel1Manager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel1/all');
+  }
+
+  getAuthLevel2Manager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel2/all');
+  }
+
+  getAuthLevel3Manager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel3/all');
+  }
+  // 
+
 }
