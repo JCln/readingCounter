@@ -118,6 +118,10 @@ export class InterfaceManagerService {
   getAuthLevel3Manager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/AuthLevel3/all');
   }
+
+  getAuthLevel4Manager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel4/all');
+  }
   // 
 
 }
