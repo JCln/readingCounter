@@ -6,8 +6,10 @@
 
 <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="title">
-        <th class="header" mat-header-cell *matHeaderCellDef>
-            عنوان
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                عنوان
+            </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <input matInput [formControl]="titleFilter">
@@ -17,7 +19,7 @@
     </ng-container>
 
     <ng-container cdkColumnDef="actions">
-        <th class="header" md-header-cell *matHeaderCellDef></th>
+        <th md-header-cell *matHeaderCellDef></th>
         <td md-cell *matCellDef="let row" class="_actions">
             <i class="_custom fa fa-edit"></i>|
             <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash"></i>

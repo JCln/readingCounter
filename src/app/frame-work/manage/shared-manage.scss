@@ -4,6 +4,7 @@
 
 table {
   width: 100%;
+  border: 2px solid $blue_l;
 }
 
 .mat-form-field {
@@ -15,20 +16,36 @@ table {
 td,
 th {
   width: 25%;
+  border: 1px solid $gray_e3;
 }
 
 th.mat-header-cell {
   text-align: right;
-  padding: .87rem;
+  padding: .2rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #002CA8;
+}
+
+.header {
+  background: $blue_l;
+  border-radius: $border_s;
+  text-align: center;
+  padding: .5rem;
+  color: $gray_l;
 }
 
 td.mat-cell {
   padding: .87rem;
+  font-size: $font_m;
+  color: $gray_dr2;
+  font-weight: 600;
 }
 
 ._actions {
   display: flex;
   align-items: center;
+  border: none;
 }
 
 ._custom {
@@ -87,8 +104,7 @@ th {
 
 .filter {
   display: block;
-  width: 10rem;
-  margin-bottom: $font_xs;
+  width: 60%;
 }
 
 // header options //
@@ -97,6 +113,8 @@ th {
   justify-content: flex-end;
   background: $white;
   border-radius: $border_s $border_s 0 0;
+  border: 2px solid $blue_l;
+  border-bottom: 0;
 }
 
 .operation_btn {
@@ -110,13 +128,26 @@ th {
   width: 3rem;
   display: grid;
   place-content: center;
+  box-shadow: 0px 0px 3px 1px $blue_l;
   color: $blue_l;
 }
 
 .mat-row:nth-child(even) {
   background-color: $gray_l;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $gray_d5;
+  }
 }
 
 .mat-row:nth-child(odd) {
-  background-color: $gray_d;
+  background-color: $blue_ll;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $gray_d5;
+  }
 }

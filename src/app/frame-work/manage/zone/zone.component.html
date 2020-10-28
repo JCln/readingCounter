@@ -6,8 +6,10 @@
 
 <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="title">
-        <th class="header" mat-header-cell *matHeaderCellDef>
-            عنوان
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                عنوان
+            </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <input matInput [formControl]="titleFilter">
@@ -16,8 +18,10 @@
         <td mat-cell *matCellDef="let person">{{person.title}}</td>
     </ng-container>
     <ng-container matColumnDef="regionId">
-        <th class="header" mat-header-cell *matHeaderCellDef>
-            شناسه منطقه
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                شناسه منطقه
+            </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <mat-select name="item">
@@ -30,8 +34,10 @@
         <td mat-cell *matCellDef="let person">{{person.regionId}}</td>
     </ng-container>
     <ng-container matColumnDef="isMetro">
-        <th class="header" mat-header-cell *matHeaderCellDef>
-            شهری
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                شهری
+            </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <mat-select name="item">
@@ -52,8 +58,10 @@
         </td>
     </ng-container>
     <ng-container matColumnDef="logicalOrder">
-        <th class="header" mat-header-cell *matHeaderCellDef>
-            ترتیب نمایش
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                ترتیب نمایش
+            </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <input matInput [formControl]="logicalOrderFilter">
@@ -63,7 +71,8 @@
     </ng-container>
 
     <ng-container cdkColumnDef="actions">
-        <th class="header" md-header-cell *matHeaderCellDef></th>
+        <th md-header-cell *matHeaderCellDef></th>
+
         <td md-cell *matCellDef="let row" class="_actions">
             <i class="_custom fa fa-edit"></i>|
             <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash"></i>
