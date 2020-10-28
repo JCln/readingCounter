@@ -8,6 +8,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { AddNewComponent } from '../../add-new/add-new.component';
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { IAuthLevel4 } from './../../../../Interfaces/iauth-levels';
 
 
 @Component({
@@ -17,20 +18,19 @@ import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.compone
 })
 export class Auth4Component implements OnInit {
   titleFilter = new FormControl('');
-  countryIdFilter = new FormControl('');
-  logicalOrderFilter = new FormControl('');
+  authLevel3IdFilter = new FormControl('');
   dataSource = new MatTableDataSource();
 
-  provinceDictionary: IDictionaryManager[] = [];
-  columnsToDisplay = ['title', 'countryId', 'logicalOrder', 'actions'];
+  auth3Dictionary: IDictionaryManager[] = [];
+  columnsToDisplay = ['title', 'authLevel3Id', 'actions'];
   filterValues = {
     title: '',
-    countryId: '',
-    logicalOrder: ''
+    authLevel3Id: ''
   };
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
 
+  // add auth 2 not working
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
@@ -59,7 +59,7 @@ export class Auth4Component implements OnInit {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.deleteProvinceManager(row.id).subscribe(res => {
+        this.interfaceManagerService.deleteAuthLevel4Manager(row.id).subscribe(res => {
           if (res) {
             resolve(res);
           }
@@ -67,17 +67,17 @@ export class Auth4Component implements OnInit {
       });
     }
   }
-  convertIdToTitle = (dataSource: IProvinceManager[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
+  convertIdToTitle = (dataSource: IAuthLevel4[], dictionary: IDictionaryManager[]) => {
+    dictionary.map(dic => {
       dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.id)
-          dataSource.countryId = zoneDic.title;
+        if (dic.id === dataSource.id)
+          dataSource.authLevel3Id = dic.title;
       })
     });
   }
-  getProvinceDictionary = (): any => {
+  getAuthLevel4IdDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getCountryDictionaryManager().subscribe(res => {
+      this.interfaceManagerService.getAuthLevel3DictionaryManager().subscribe(res => {
         if (res)
           resolve(res);
       })
@@ -85,46 +85,37 @@ export class Auth4Component implements OnInit {
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getProvinceManager().subscribe(res => {
+      this.interfaceManagerService.getAuthLevel4Manager().subscribe(res => {
         if (res) {
           resolve(res);
         }
       })
     })
   }
+  filter = () => {
+    this.dataSource.filterPredicate = this.createFilter();
+
+    this.titleFilter.valueChanges
+      .subscribe(
+        title => {
+          this.filterValues.title = title;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.authLevel3IdFilter.valueChanges
+      .subscribe(
+        authLevel3Id => {
+          this.filterValues.authLevel3Id = authLevel3Id;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+  }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-    console.log(rolesData);
-
-    if (rolesData) {
-      this.dataSource.data = rolesData;
-      this.dataSource.filterPredicate = this.createFilter();
-
-      this.titleFilter.valueChanges
-        .subscribe(
-          title => {
-            this.filterValues.title = title;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.countryIdFilter.valueChanges
-        .subscribe(
-          countryId => {
-            this.filterValues.countryId = countryId;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.logicalOrderFilter.valueChanges
-        .subscribe(
-          logicalOrder => {
-            this.filterValues.logicalOrder = logicalOrder;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-    }
-    const provinceDictionary = await this.getProvinceDictionary();
-    this.provinceDictionary = provinceDictionary;
-    this.convertIdToTitle(rolesData, provinceDictionary);
+    this.dataSource.data = rolesData;
+    this.auth3Dictionary = await this.getAuthLevel4IdDictionary();
+    this.convertIdToTitle(rolesData, this.auth3Dictionary);
+    this.filter();
   }
   ngOnInit() {
     this.classWrapper();
@@ -134,8 +125,7 @@ export class Auth4Component implements OnInit {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.countryId.toString().toLowerCase().indexOf(searchTerms.countryId) !== -1
-        && data.logicalOrder.toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
+        && data.authLevel3Id.toString().toLowerCase().indexOf(searchTerms.authLevel3Id) !== -1
     }
     return filterFunction;
   }

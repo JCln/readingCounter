@@ -6,16 +6,18 @@ export interface IAuthLevels {
 }
 export interface IAuthLevel2 {
     id: number;
-    authlevel1Id: number | string;
+    authLevel1Id: number | string;
     title: string;
-    logicalorder: number;
+    cssClass: string;
     inSidebar: boolean;
+    logicalorder: number;
 }
 
 export interface IAuthLevel3 {
     id: number;
-    authlevel2Id: number | string;
+    authLevel2Id: number | string;
     title: string;
+    cssClass: string;
     route: string;
     logicalorder: number;
     inSidebar: boolean;
@@ -23,10 +25,9 @@ export interface IAuthLevel3 {
     isRefreshable: boolean;
     logicalOrder: number;
 }
-
 export interface IAuthLevel4 {
     id: number;
-    authlevel3Id: number | string;
+    authLevel3Id: number | string;
     title: string;
     value: string;
     cssClass: string;

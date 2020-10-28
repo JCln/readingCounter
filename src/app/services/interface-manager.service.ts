@@ -120,6 +120,9 @@ export class InterfaceManagerService {
   getAuthLevel2Manager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/AuthLevel2/all');
   }
+  getAuthLevel2DictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel2/Dictionary');
+  }
   deleteAuthLevel2Manager = (id: number): Observable<any> => {
     return this.mainService.POST('V1.Test/AuthLevel2/Remove', id);
   }
@@ -127,10 +130,20 @@ export class InterfaceManagerService {
   getAuthLevel3Manager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/AuthLevel3/all');
   }
+  getAuthLevel3DictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/AuthLevel3/Dictionary');
+  }
+  deleteAuthLevel3Manager = (id: number): Observable<any> => {
+    return this.mainService.POST('V1.Test/AuthLevel3/Remove', id);
+  }
 
   getAuthLevel4Manager = (): Observable<any> => {
     return this.mainService.GET('V1.Test/AuthLevel4/all');
   }
+  deleteAuthLevel4Manager = (id: number): Observable<any> => {
+    return this.mainService.POST('V1.Test/AuthLevel3/Remove', id);
+  }
+
   // 
 
 }

@@ -15,25 +15,11 @@
         </th>
         <td mat-cell *matCellDef="let person">{{person.title}}</td>
     </ng-container>
-    <ng-container matColumnDef="countryId">
+    <ng-container matColumnDef="authLevel3Id">
         <th class="header" mat-header-cell *matHeaderCellDef>
-            شناسه کشور
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="countryIdFilter">
-            </mat-form-field>
+           auth 3
         </th>
-        <td mat-cell *matCellDef="let person">{{person.countryId}}</td>
-    </ng-container>
-    <ng-container matColumnDef="logicalOrder">
-        <th class="header" mat-header-cell *matHeaderCellDef>
-            ترتیب نمایش
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="logicalOrderFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.logicalOrder}}</td>
+        <td mat-cell *matCellDef="let person">{{person.authLevel3Id}}</td>
     </ng-container>
 
     <ng-container cdkColumnDef="actions">

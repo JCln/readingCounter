@@ -68,7 +68,7 @@ export class Auth2Component implements OnInit {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
         if (zoneDic.id === dataSource.id)
-          dataSource.authlevel1Id = zoneDic.title;
+          dataSource.authLevel1Id = zoneDic.title;
       })
     });
   }
@@ -103,10 +103,12 @@ export class Auth2Component implements OnInit {
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
     this.dataSource.data = rolesData;
-    const auth1Dictionary = await this.getAuthLevel1Id();
-    this.auth1Dictionary = auth1Dictionary;
-
-    this.convertIdToTitle(rolesData, auth1Dictionary);
+    this.auth1Dictionary = await this.getAuthLevel1Id();
+    console.log(this.auth1Dictionary);
+    console.log(this.dataSource.data);
+    
+    this.convertIdToTitle(rolesData, this.auth1Dictionary);
+    this.filter();
   }
   ngOnInit() {
     this.classWrapper();
