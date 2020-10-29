@@ -28,11 +28,13 @@ th.mat-header-cell {
 }
 
 .header {
-  background: $blue_l;
+  color: $blue_l;
+  border: 1px solid $blue_l;
+  margin: auto;
   border-radius: $border_s;
   text-align: center;
-  padding: .5rem;
-  color: $gray_l;
+  padding: .2rem;
+  max-width: 13rem;
 }
 
 td.mat-cell {

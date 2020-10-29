@@ -9,7 +9,7 @@ ul {
   list-style-type: none;
   padding: $font_xs 0 $font_xs 0;
   margin-left: .2rem;
-  height: 80vh;
+  min-height: 80vh;
   overflow-y: auto;
   transition: all ease-in-out 250ms;
 }
@@ -17,7 +17,7 @@ ul {
 ul li {
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
-  background: $gray_d;
+  background: $gray_e3;
   margin-bottom: 0.5rem;
   padding: $font_05 0 $font_05 $font_05;
 }
@@ -49,7 +49,7 @@ ul li {
     .fa-arrow-circle-down {
       transform: rotate(0);
       transition: transform ease-in-out 250ms;
-      color: $blue_d;
+      color: $blue_l;
     }
   }
 
@@ -85,14 +85,14 @@ ul li {
 
       .fa-arrow-circle-down {
         transform: rotate(180deg);
-        color: $blue_l;
+        color: $pink;
       }
     }
 
   }
 
   &:hover {
-    background: $gray_l;
+    background: $gray_d5;
   }
 }
 
@@ -105,7 +105,7 @@ ul li {
 .ul::after {
   content: '';
   position: absolute;
-  background: $gray_96;
+  background: $gray_dr;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
   bottom: 0;
@@ -119,7 +119,7 @@ ul li {
 .ul::before {
   content: '';
   position: absolute;
-  background: $gray_e3;
+  background: $blue_d;
   clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
   top: 0;
   bottom: 0;
