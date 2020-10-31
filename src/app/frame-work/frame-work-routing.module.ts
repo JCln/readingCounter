@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'msge', loadChildren: () => import('./messages/messages.module').then(msge => msge.MessagesModule) },
   { path: 'bi', loadChildren: () => import('./base-info/base-info.module').then(bi => bi.BaseInfoModule) },
   { path: 'privacy', loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) },
-  { path: 'm', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) }
+  { path: 'm', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) },
+  { path: 'mu', loadChildren: () => import('./user-manager/user-manager.module').then(userManager => userManager.UserManagerModule) }
 ];
 
 @NgModule({
