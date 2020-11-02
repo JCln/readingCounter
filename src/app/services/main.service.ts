@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { retry } from 'rxjs/operators';
@@ -10,13 +10,6 @@ import { environment } from './../../environments/environment';
 })
 export class MainService {
 
-  httpOptions = {
-    headers: new HttpHeaders(
-      {
-        'Content-Type': 'application/json'
-      }
-    )
-  };
   constructor(private http: HttpClient) { }
 
 
@@ -45,12 +38,12 @@ export class MainService {
     }
   }
   POST = (URL: string, ID?: number): Observable<any> => {
-    return this.http.post(environment.API_URL + '/' + URL + '/' + ID, this.httpOptions).pipe(
+    return this.http.post(environment.API_URL + '/' + URL + '/' + ID, '').pipe(
       retry(1)
     );
   }
   POSTBODY = (URL: string, body: object): Observable<any> => {
-    return this.http.post(environment.API_URL + '/' + URL, body, this.httpOptions).pipe(
+    return this.http.post(environment.API_URL + '/' + URL, body).pipe(
       retry(1)
     );
   }

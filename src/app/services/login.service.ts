@@ -33,7 +33,6 @@ export class LoginService {
   getAuthorizationToken = (): string => {
     if (this.accessToken.length === 0)
       return null;
-    console.log(this.accessToken);
     return this.accessToken;
   }
 }

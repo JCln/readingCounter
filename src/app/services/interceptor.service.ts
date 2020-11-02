@@ -1,5 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -8,18 +9,19 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.loginService.getAuthorizationToken();
 
     if (authToken) {
       req = req.clone({
-        headers: req.headers.set('Authorization', authToken)
+        headers: req.headers.set('Authorization', `Bearer ` + authToken),
+        withCredentials: true
       });
-      req = req.clone({
-        headers: req.headers.set('X-XSRF-TOKEN', '123')
-      })
+    }
+    else {
+      this.router.navigateByUrl('login');
     }
 
     return next.handle(req);
