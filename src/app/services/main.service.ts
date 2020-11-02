@@ -13,7 +13,7 @@ export class MainService {
   httpOptions = {
     headers: new HttpHeaders(
       {
-        'Content-Type': 'application/xml; charset=utf-8'
+        'Content-Type': 'application/json'
       }
     )
   };
@@ -44,12 +44,12 @@ export class MainService {
       )
     }
   }
-  POST = (URL: string, ID?: number): any => {
+  POST = (URL: string, ID?: number): Observable<any> => {
     return this.http.post(environment.API_URL + '/' + URL + '/' + ID, this.httpOptions).pipe(
       retry(1)
     );
   }
-  POSTBODY = (URL: string, body: object): any => {
+  POSTBODY = (URL: string, body: object): Observable<any> => {
     return this.http.post(environment.API_URL + '/' + URL, body, this.httpOptions).pipe(
       retry(1)
     );
