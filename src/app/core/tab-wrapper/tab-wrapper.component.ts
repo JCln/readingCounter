@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { ISidebarItems } from 'src/app/Interfaces/isidebar-items';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
+
+import { ITabs } from './../../Interfaces/isidebar-items';
 
 
 @Component({
@@ -11,14 +12,18 @@ import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
   styleUrls: ['./tab-wrapper.component.scss']
 })
 export class TabWrapperComponent implements OnInit {
-  tabs: any[] = [];
-  currentRoute: ISidebarItems[];
+  tabs: ITabs[] = [];
+  currentRoute: any[] = [];
 
   constructor(private router: Router, private sideBarItemsService: SidebarItemsService, private _location: Location) {
     this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
       if (sidebars) {
-        console.log(sidebars);
         this.currentRoute = sidebars.items;
+        this.currentRoute.map((items: any) => {
+          items.subItems.map((subItems: any) => {
+            this.currentRoute.push(subItems);
+          })
+        })
       }
     })
   }
@@ -30,6 +35,8 @@ export class TabWrapperComponent implements OnInit {
         const currentRouteFound = this.currentRoute.find((items: any) => {
           return items.route === this.router.url
         })
+        console.log(currentRouteFound);
+
         if (currentRouteFound) {
           //////    //  
           const found = this.tabs.find((item: any) => {
@@ -78,8 +85,10 @@ export class TabWrapperComponent implements OnInit {
     this.backToPreviousPage();
   }
   addDashboardTab = () => {
-    const a: any = { route: '/wr', title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0 };
-    this.tabs[0].items = a;
+    const a = {
+      route: '/wr', title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
+    };
+    this.tabs.push(a);
   }
 
   ngOnInit(): void {

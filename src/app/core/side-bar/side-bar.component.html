@@ -20,19 +20,20 @@
 
 <nav>
     <ul class="ul_2" [hidden]="!sid_isSmall">
-        <li *ngFor="let item of currentRoute; index as i" [routerLink]="[item.route]" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">
+        <li *ngFor="let item of currentRoute; index as i">
             <div class="btn_2">
                 <div class="ul_items_2">
                     <i class="fa fa-bar-chart"></i>
                 </div>
             </div>
+            <!-- [routerLink]="[item.route]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"       -->
             <div class="_show">
                 <h3>{{item.title}}</h3>
                 <hr>
-                <a href="#">تست 1</a>
-                <a href="#">تست 2</a>
-                <a href="#">تست 3 </a>
+                <div class="sub_item" *ngFor="let subItem of item.subItems">
+                    <a [routerLink]="subItem.route">{{subItem.title}}</a>
+                </div>
             </div>
         </li>
     </ul>

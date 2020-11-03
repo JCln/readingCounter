@@ -18,3 +18,11 @@ export interface ISidebarItems {
         }
     ]
 }
+export interface ITabs {
+    title: string;
+    isClosable: boolean;
+    isRefreshable: boolean;
+    route: string;
+    cssClass: string;
+    logicalOrder: number;
+}
