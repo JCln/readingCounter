@@ -21,4 +21,9 @@ export class InterfaceService {
     return this.mainService.POSTBODY('V1.Test/Policy/Add', body);
   }
   // 
+  // get sidebar ////
+  getSideBar = (): Observable<any> => {
+    return this.mainService.GET('V1/User/SideBar');
+  }
+  // ///// ///
 }

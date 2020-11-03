@@ -44,21 +44,17 @@ export class FrameWorkComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit(): void {
     this.initMap();
     this.orderId = this.route.snapshot.paramMap.get('isShowMap');
-    console.log(this.orderId);
   }
   ngOnChanges(): void {
 
 
   }
   ngAfterViewInit(): void {
-    console.log(window.history.state);
-
     // const navigation = this.router.getCurrentNavigation();
     // console.log(navigation);
 
     // this.orderId = navigation.extras.state ? navigation.extras.state.orderId : 0;
 
-    console.log(this.orderId);
   }
 
 }

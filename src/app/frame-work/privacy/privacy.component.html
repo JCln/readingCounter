@@ -1,61 +1,29 @@
 <div class="over_all">
 
     <section>
-        <h1 class="title">حداقل تعداد حروف چند نویسه ای باشد؟</h1>
+        <!-- <h1 class="title">حداقل تعداد حروف چند نویسه ای باشد؟</h1> -->
         <div class="content">
             <div class="_desc">
-                <mat-radio-group class="example-radio-group" [(ngModel)]="policies.minPasswordLength">
-                    <mat-radio-button class="example-radio-button" *ngFor="let capacity of leastTextCapacity"
-                        [value]="capacity">
-                        {{capacity}}
-                    </mat-radio-button>
-                </mat-radio-group>
+                <li class="number_vals">
+                    تعداد دفعات ورود با Captcha
+                    <div class="plus_minus">
+                        <div class="plus" (click)="plusOrMinus(policies.minPasswordLength + 1)">
+                            <i class="fa fa-plus"></i></div>
+                        <div class="val"> {{policies.minPasswordLength}}</div>
+                        <div class="minus" (click)="plusOrMinus(policies.minPasswordLength - 1)">
+                            <i class="fa fa-minus"></i></div>
+                    </div>
             </div>
-            <p class="over_all_result">کلمه عبور حداقل {{policies.minPasswordLength}} کلمه‌ای باشد</p>
         </div>
     </section>
 
     <section>
 
-        <h1 class="title">حداقل یک نویسه با مشخصات !</h1>
+        <!-- <h1 class="title">حداقل یک نویسه با مشخصات !</h1> -->
         <div class="content">
             <section class="_checkbox">
                 <span>
                     <ul>
-                        <li>
-                            <mat-checkbox [(ngModel)]="policies.enableValidIpCaptcha">
-                                فعال سازی captcha
-                            </mat-checkbox>
-                        </li>
-                        <li class="number_vals">
-                            تعداد دفعات ورود با Captcha
-                            <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts + 1">
-                                    <i class="fa fa-plus"></i></div>
-                                <div class="val"> {{policies.requireCaptchaInvalidAttempts}}</div>
-                                <div class="minus"
-                                    (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts - 1">
-                                    <i class="fa fa-minus"></i></div>
-                            </div>
-                        </li>
-                        <li>
-                            <mat-checkbox [(ngModel)]="policies.enableValidIpRecaptcha">
-                                ip مناسب در Recaptcha
-                            </mat-checkbox>
-                        </li>
-                        <li class="number_vals">
-                            requireRecaptchaInvalidAttempts"
-                            <div class="plus_minus">
-                                <div class="plus"
-                                    (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts + 1">
-                                    <i class="fa fa-plus"></i></div>
-                                <div class="val"> {{policies.requireRecaptchaInvalidAttempts}}</div>
-                                <div class="minus"
-                                    (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts - 1">
-                                    <i class="fa fa-minus"></i></div>
-                            </div>
-                        </li>
                         <li class="number_vals">
                             lockInvalidAttempts"
                             <div class="plus_minus">
@@ -103,6 +71,55 @@
                                 شناسه قابل بروز رسانی باشد
                             </mat-checkbox>
                         </li>
+                    </ul>
+                </span>
+            </section>
+        </div>
+
+    </section>
+
+    <section>
+
+        <!-- <h1 class="title">حداقل یک نویسه با مشخصات !</h1> -->
+        <div class="content">
+            <section class="_checkbox">
+                <span>
+                    <ul>
+                        <li>
+                            <mat-checkbox [(ngModel)]="policies.enableValidIpCaptcha">
+                                فعال سازی captcha
+                            </mat-checkbox>
+                        </li>
+                        <li class="number_vals">
+                            تعداد دفعات ورود با Captcha
+                            <div class="plus_minus">
+                                <div class="plus"
+                                    (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts + 1">
+                                    <i class="fa fa-plus"></i></div>
+                                <div class="val"> {{policies.requireCaptchaInvalidAttempts}}</div>
+                                <div class="minus"
+                                    (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts - 1">
+                                    <i class="fa fa-minus"></i></div>
+                            </div>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="policies.enableValidIpRecaptcha">
+                                ip مناسب در Recaptcha
+                            </mat-checkbox>
+                        </li>
+                        <li class="number_vals">
+                            reacaptcha
+                            <div class="plus_minus">
+                                <div class="plus"
+                                    (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts + 1">
+                                    <i class="fa fa-plus"></i></div>
+                                <div class="val"> {{policies.requireRecaptchaInvalidAttempts}}</div>
+                                <div class="minus"
+                                    (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts - 1">
+                                    <i class="fa fa-minus"></i></div>
+                            </div>
+                        </li>
+
                     </ul>
                 </span>
             </section>

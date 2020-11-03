@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 
 import { IPolicies, IPrivacy } from './../../Interfaces/iprivacy';
 import { InterfaceService } from './../../services/interface.service';
@@ -11,8 +12,8 @@ import { PrivacyService } from './../../services/privacy.service';
 })
 export class PrivacyComponent implements OnInit {
   privacyOptions: IPrivacy;
-  selectedCapacity: string = '';
-  leastTextCapacity: string[] = ['4', '6', '8', '10'];
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+
   policies: IPolicies = {
     id: 0,
     enableValidIpCaptcha: false,
@@ -29,10 +30,7 @@ export class PrivacyComponent implements OnInit {
     canUpdateDeviceId: false
   };
 
-  _updatedSelectedToggles: string[] = [];
-  isAllCompleted: boolean = false;
-
-  constructor(private privacyService: PrivacyService, private interfaceService: InterfaceService) { }
+  constructor(private privacyService: PrivacyService, private interfaceService: InterfaceService, private _snackBar: MatSnackBar) { }
 
   getPolicies = (): Promise<IPolicies> => {
     return new Promise((resolve) => {
@@ -66,27 +64,27 @@ export class PrivacyComponent implements OnInit {
     this.privacyOptions = this.privacyService.getPrivacyToggle();
     this.classWrapper();
   }
-
-  updateAllComplete() {
-    this.isAllCompleted = this.privacyOptions.task != null && this.privacyOptions.task.every(t => t.isChecked);
-  }
-
-  someComplete(): boolean {
-    if (this.privacyOptions.task == null) {
-      return false;
-    }
-    return this.privacyOptions.task.filter(t => t.isChecked).length > 0 && !this.isAllCompleted;
-  }
-
-  setAll(completed: boolean) {
-    this.isAllCompleted = completed;
-    if (this.privacyOptions.task == null) {
+  plusOrMinus = (value: number) => {
+    if (value > this.privacyOptions.maxLength) {
+      this.openSnackBar('حداکثر تعداد 16 می‌باشد', 2000);
       return;
     }
-    this.privacyOptions.task.forEach(t => t.isChecked = completed);
+
+    if (value < this.privacyOptions.minLength) {
+      this.openSnackBar('حداقل تعداد 4 حرف می‌باشد', 2000);
+      return;
+    }
+    this.policies.minPasswordLength = value;
+
   }
   addPolicy = () => {
     this.interfaceService.addPolicies(this.policies);
+  }
+  openSnackBar(message: string, duration: number) {
+    this._snackBar.open(message, 'بازگشت', {
+      duration: duration,
+      horizontalPosition: this.horizontalPosition
+    });
   }
 }
 

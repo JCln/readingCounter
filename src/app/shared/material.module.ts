@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
@@ -29,7 +30,8 @@ import { MatTableModule } from '@angular/material/table';
         MatRadioModule,
         MatButtonToggleModule,
         MatDialogModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSnackBarModule
     ],
     exports: [
         MatGridListModule,
@@ -45,7 +47,8 @@ import { MatTableModule } from '@angular/material/table';
         MatRadioModule,
         MatButtonToggleModule,
         MatDialogModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSnackBarModule
     ]
 })
 export class MaterialModule {

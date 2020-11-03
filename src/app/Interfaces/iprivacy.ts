@@ -1,9 +1,3 @@
-export interface IPrivacy {
-    id: number;
-    title: string;
-    isChecked: boolean;
-    task?: IPrivacy[];
-}
 export interface IPolicies {
     id: number,
     enableValidIpCaptcha: boolean,
@@ -18,4 +12,9 @@ export interface IPolicies {
     passwordContainsUppercase: boolean,
     passwordContainsNonAlphaNumeric: boolean,
     canUpdateDeviceId: boolean
+}
+export interface IPrivacy {
+    minLength: number;
+    maxLength: number;
+    minPasswordLength: number;
 }

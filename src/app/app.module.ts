@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -16,7 +15,6 @@ import { SharedTwoModule } from './shared/shared-two.module';
     LoginComponent
   ],
   imports: [
-    HttpClientModule,
     CoreModule,
     SharedTwoModule.forRoot(),
     BrowserAnimationsModule,

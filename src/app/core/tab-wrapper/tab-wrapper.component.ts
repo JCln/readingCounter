@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 
-import { ISidebarItems } from './../../Interfaces/isidebar-items';
+import { ITabs } from './../../Interfaces/isidebar-items';
+
 
 @Component({
   selector: 'app-tab-wrapper',
@@ -11,24 +12,35 @@ import { ISidebarItems } from './../../Interfaces/isidebar-items';
   styleUrls: ['./tab-wrapper.component.scss']
 })
 export class TabWrapperComponent implements OnInit {
-  tabs: ISidebarItems[] = [];
-  currentRoute: ISidebarItems[];
+  tabs: ITabs[] = [];
+  currentRoute: any[] = [];
 
-  constructor(private router: Router, private sidebarItems: SidebarItemsService, private _location: Location) {
-    this.currentRoute = this.sidebarItems.getSideBarItems();
+  constructor(private router: Router, private sideBarItemsService: SidebarItemsService, private _location: Location) {
+    this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
+      if (sidebars) {
+        this.currentRoute = sidebars.items;
+        this.currentRoute.map((items: any) => {
+          items.subItems.map((subItems: any) => {
+            this.currentRoute.push(subItems);
+          })
+        })
+      }
+    })
   }
 
   checkRouteStatus = () => {
     this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
         ////// just check correct route
-        const currentRouteFound = this.currentRoute.find(items => {
-          return items.routerUrl === this.router.url
+        const currentRouteFound = this.currentRoute.find((items: any) => {
+          return items.route === this.router.url
         })
+        console.log(currentRouteFound);
+
         if (currentRouteFound) {
           //////    //  
-          const found = this.tabs.find(item => {
-            return item.routerUrl === this.router.url
+          const found = this.tabs.find((item: any) => {
+            return item.route === this.router.url
           })
           if (found) {
             console.log('we have this route now !');
@@ -43,20 +55,20 @@ export class TabWrapperComponent implements OnInit {
   }
   isNull = (value: any) => typeof value === 'undefined' || !value || value.length === 0;
 
-  // isLatestTab = () => {
-  //   const a = this.tabs.map(item => {
-  //     return item;
-  //   })
+  isLatestTab = () => {
+    const a = this.tabs.map(item => {
+      return item;
+    })
 
-  //   if (this.isNull(a[0]))
-  //     this.router.navigateByUrl('/wr');
-  //   else {
-  //     this.backToPreviousPage();
-  //   }
-  // }
+    if (this.isNull(a[0]))
+      this.router.navigateByUrl('/wr');
+    else {
+      this.backToPreviousPage();
+    }
+  }
 
   backToPreviousPage = () => {
-    const b = this.tabs.slice(-1).map(item => item.routerUrl);
+    const b = this.tabs.slice(-1).map((item: any) => item.route);
     this.router.navigate(b);
   }
 
@@ -66,15 +78,16 @@ export class TabWrapperComponent implements OnInit {
   }
 
   closeButtonClicked = (routerUrl: string) => {
-    const a = this.tabs.filter(item => {
-      return item.routerUrl !== routerUrl;
+    const a = this.tabs.filter((item: any) => {
+      return item.route !== routerUrl;
     })
     this.tabs = a;
     this.backToPreviousPage();
-    // this.isLatestTab();
   }
   addDashboardTab = () => {
-    const a = { routerUrl: '/wr', name: 'مدیریت کاربران', isClosable: false, isRefreshable: false, sid_isOpenItems: false, sid_isSmall: false };
+    const a = {
+      route: '/wr', title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
+    };
     this.tabs.push(a);
   }
 

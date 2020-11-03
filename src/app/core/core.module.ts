@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
 import { FrameWorkComponent } from './../frame-work/frame-work.component';
+import { InterceptorService } from './../services/interceptor.service';
 import { DropdownComponent } from './_layouts/dropdown/dropdown.component';
 import { HeaderComponent } from './_layouts/header/header.component';
 import { HfcComponent } from './_layouts/hfc/hfc.component';
@@ -28,8 +30,14 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
   imports: [
     BrowserModule,
     CommonModule,
+    BrowserModule,
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({ cookieName: 'X-XSRF-TOKEN', headerName: 'X-XSRF-TOKEN' }),
     DpDatePickerModule,
     CoreRoutingModule
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ]
 })
 export class CoreModule {
