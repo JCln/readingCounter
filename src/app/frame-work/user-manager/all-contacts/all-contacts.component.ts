@@ -1,7 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { IUserManager } from './../../../Interfaces/iuser-manager';
-import { InterfaceManagerService } from './../../../services/interface-manager.service';
 
 @Component({
   selector: 'app-all-contacts',
@@ -10,7 +10,7 @@ import { InterfaceManagerService } from './../../../services/interface-manager.s
 })
 export class AllContactsComponent implements OnInit {
   columnDefs = [
-    { field: 'id', sortable: true, filter: true },
+    // { field: 'id', sortable: true, filter: true },
     { field: 'userCode', sortable: true, filter: true },
     { field: 'username', sortable: true, filter: true },
     { field: 'mobile', sortable: true, filter: true },
@@ -19,13 +19,14 @@ export class AllContactsComponent implements OnInit {
     { field: 'isLocked', sortable: true, filter: true }
 
   ];
-  rowData: IUserManager[];
+  rowData: any;
 
-  constructor(private interfaceManagerService: InterfaceManagerService) { }
+  constructor(private httpClient: HttpClient) { }//private interfaceManagerService: InterfaceManagerService
 
   getDataSource = (): Promise<IUserManager> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getAllUserContactsManager().subscribe(res => {
+      // this.interfaceManagerService.getAllUserContactsManager().subscribe(res => {
+      this.httpClient.get('//37.191.92.130/kontoriNew/v1/user/all').subscribe((res: any) => {
         if (res) {
           resolve(res);
         }
@@ -35,7 +36,7 @@ export class AllContactsComponent implements OnInit {
   classWrapper = async () => {
     const a = await this.getDataSource();
     console.log(a);
-    this.rowData.push(a);
+    this.rowData = a;
   }
 
   ngOnInit(): void {
