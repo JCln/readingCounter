@@ -10,6 +10,12 @@ export class InterfaceManagerService {
 
   constructor(private mainService: MainService) { }
 
+  // //// User manager
+  getAllUserContactsManager = (): Observable<any> => {
+    return this.mainService.GET('​V1​/User​/All');
+  }
+  // /////
+
   getRole = (): Observable<any> => {
     return this.mainService.GET('V1.Test/Role/All');
   }

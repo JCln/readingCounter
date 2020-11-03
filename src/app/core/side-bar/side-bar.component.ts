@@ -15,7 +15,6 @@ export class SideBarComponent implements OnInit {
 
     this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
       if (sidebars) {
-        console.log(sidebars.items);
         this.currentRoute = sidebars.items;
       }
     })

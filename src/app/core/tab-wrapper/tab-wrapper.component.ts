@@ -35,8 +35,7 @@ export class TabWrapperComponent implements OnInit {
         const currentRouteFound = this.currentRoute.find((items: any) => {
           return items.route === this.router.url
         })
-        console.log(currentRouteFound);
-
+        
         if (currentRouteFound) {
           //////    //  
           const found = this.tabs.find((item: any) => {
