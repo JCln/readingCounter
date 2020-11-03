@@ -1,0 +1,43 @@
+import { Injectable } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
+
+import { AuthTokenType } from './../Interfaces/auth-token-type.enum';
+import { BrowserStorageService } from './browser-storage.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class JwtService {
+  constructor(
+    private browserStorageService: BrowserStorageService,
+  ) { }
+
+  getDecodedAccessToken(): any {
+    return jwt_decode(this.browserStorageService.get(AuthTokenType[0]));
+  }
+  getAccessTokenExpirationDateUtc(): Date {
+    const decoded = this.getDecodedAccessToken();
+    if (decoded.exp === undefined) {
+      return null;
+    }
+    const date = new Date(0); // The 0 sets the date to the epoch
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+  isAccessTokenTokenExpired(): boolean {
+    const expirationDateUtc = this.getAccessTokenExpirationDateUtc();
+    if (!expirationDateUtc) {
+      return true;
+    }
+    return !(expirationDateUtc.valueOf() > new Date().valueOf());
+  }
+  saveToLocalStorage = (accessToken: string): void => {
+    this.browserStorageService.set(AuthTokenType[0], accessToken);
+  }
+  getAuthorizationToken = (): string => {
+    const a = this.browserStorageService.get(AuthTokenType[0]);
+    if (a.length === 0)
+      return null;
+    return a;
+  }
+}

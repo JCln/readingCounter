@@ -2,18 +2,18 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { LoginService } from 'src/app/services/login.service';
+
+import { JwtService } from './jwt.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private jwtService: JwtService, private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken = this.loginService.getAuthorizationToken();
-
+    const authToken = this.jwtService.getAuthorizationToken();
     if (authToken) {
       req = req.clone({
         headers: req.headers.set('Authorization', `Bearer ` + authToken),
