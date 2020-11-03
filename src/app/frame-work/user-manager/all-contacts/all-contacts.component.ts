@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IUserManager } from './../../../Interfaces/iuser-manager';
 import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
@@ -33,19 +34,22 @@ export class AllContactsComponent implements OnInit {
   ];
   rowData: any;
 
-
-  onBtnClick1(e) {
-    this.rowDataClicked1 = e.rowData;
-    console.log(this.rowDataClicked1);
-    
-  }
-  
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.frameworkComponents = {
       BtnCellRendererComponent: BtnCellRendererComponent,
     }
   }//private interfaceManagerService: InterfaceManagerService
 
+
+  onBtnClick1(e) {
+    this.rowDataClicked1 = e.rowData;
+    console.log(e.rowData.id);
+
+    this.router.navigate(['../edit', e.rowData.id], { relativeTo: this.route.parent })
+  }
 
   getDataSource = (): Promise<IUserManager> => {
     return new Promise((resolve) => {
