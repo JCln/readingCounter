@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { IUserManager } from './../../../Interfaces/iuser-manager';
+import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
 
 @Component({
   selector: 'app-all-contacts',
@@ -9,6 +10,9 @@ import { IUserManager } from './../../../Interfaces/iuser-manager';
   styleUrls: ['./all-contacts.component.scss']
 })
 export class AllContactsComponent implements OnInit {
+  frameworkComponents: any;
+  rowDataClicked1 = {};
+
   columnDefs = [
     // { field: 'id', sortable: true, filter: true },
     { field: 'userCode', sortable: true, filter: true },
@@ -16,12 +20,32 @@ export class AllContactsComponent implements OnInit {
     { field: 'mobile', sortable: true, filter: true },
     { field: 'displayName', sortable: true, filter: true },
     { field: 'isActive', sortable: true, filter: true },
-    { field: 'isLocked', sortable: true, filter: true }
+    { field: 'isLocked', sortable: true, filter: true },
+    {
+      field: 'ویرایش',
+      cellRenderer: 'BtnCellRendererComponent',
+      cellRendererParams: {
+        onClick: this.onBtnClick1.bind(this)
+      },
+      minWidth: 150,
+    }
 
   ];
   rowData: any;
 
-  constructor(private httpClient: HttpClient) { }//private interfaceManagerService: InterfaceManagerService
+
+  onBtnClick1(e) {
+    this.rowDataClicked1 = e.rowData;
+    console.log(this.rowDataClicked1);
+    
+  }
+  
+  constructor(private httpClient: HttpClient) {
+    this.frameworkComponents = {
+      BtnCellRendererComponent: BtnCellRendererComponent,
+    }
+  }//private interfaceManagerService: InterfaceManagerService
+
 
   getDataSource = (): Promise<IUserManager> => {
     return new Promise((resolve) => {
@@ -35,7 +59,6 @@ export class AllContactsComponent implements OnInit {
   }
   classWrapper = async () => {
     const a = await this.getDataSource();
-    console.log(a);
     this.rowData = a;
   }
 
