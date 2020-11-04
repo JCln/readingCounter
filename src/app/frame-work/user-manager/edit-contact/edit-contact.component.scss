@@ -1,0 +1,87 @@
+@import '../../../../assets/variable.scss';
+
+$blue_darker: #000A63;
+$blue_dark: #193E77;
+$blue_medium: #002A69;
+$blue_lovely: #0045CB;
+
+.auth_1 {
+  display: flex;
+  flex-direction: column;
+  // grid-template-columns: repeat(auto-fit, minmax(8rem, 10rem));
+  // gap: .3rem;
+  margin-bottom: $font_xs;
+  direction: rtl;
+
+  .auth_1_item {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $blue_lovely;
+    padding: .5rem;
+    height: 4rem;
+    border-radius: 5px;
+    font-size: $font_l;
+    color: $blue_lovely;
+    background-color: $white;
+    box-shadow: 1px 1px 3px 0px $gray_e3;
+
+    // &:hover,
+    // &:focus,
+    // &:active {
+    //   background-color: $blue_d;
+    //   color: $gray_l;
+    // }
+  }
+
+}
+
+.auth_2 {
+  padding: $font_xs;
+  margin-bottom: $font_s;
+  // background-color: $blue_darker;
+  border-radius: $border_s;
+  min-height: 25rem;
+
+  &:nth-child(odd) {
+    background-color: $blue_darker;
+  }
+
+  &:nth-child(even) {
+    background-color: $blue_medium;
+  }
+}
+
+.auth_3 {
+  margin: .5rem;
+  margin-top: 2rem;
+  // background-color: $blue_dark;
+  border-radius: $border_s;
+  min-height: 10rem;
+
+  &:nth-child(odd) {
+    background-color: $blue_dark;
+  }
+
+  &:nth-child(even) {
+    background-color: $blue_darker;
+  }
+}
+
+.auth_4 {
+  display: grid;
+  grid-template-columns: repeat(fit-content, minmax(8rem, 10rem));
+  gap: .3rem;
+}
+
+.text {
+  padding: 0 .5rem;
+  color: $gray_l;
+  font-size: $font_m;
+}
+
+.hr {
+  width: 7rem;
+  height: .2rem;
+  background-color: $gray_l;
+}

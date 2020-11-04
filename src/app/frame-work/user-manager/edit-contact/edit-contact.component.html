@@ -1,1 +1,18 @@
-<p>edit-contact works!</p>
+<section class="auth_1" *ngFor="let item of editContactData">
+    <div class="auth_1_item">
+        مدیریت یک
+    </div>
+
+    <section class="auth_2" *ngFor="let moduleIt of item.moduleItems">
+        <div class="text">{{moduleIt.title}}</div>
+        <div class="hr"></div>
+
+        <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
+            <div class="text">{{controllerIt.title}}</div>
+            <div class="hr"></div>
+
+            <section class="auth_4"></section>
+        </section>
+    </section>
+
+</section>

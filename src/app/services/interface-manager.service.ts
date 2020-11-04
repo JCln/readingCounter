@@ -14,6 +14,9 @@ export class InterfaceManagerService {
   getAllUserContactsManager = (): Observable<any> => {
     return this.mainService.GET('​V1​/User​/All');
   }
+  getUserContactManager = (uuid: string): Observable<any> => {
+    return this.mainService.GETID(uuid, 'V1/user/Edit')
+  }
   // /////
 
   getRole = (): Observable<any> => {
