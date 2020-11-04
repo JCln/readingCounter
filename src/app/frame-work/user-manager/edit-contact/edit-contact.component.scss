@@ -6,11 +6,10 @@ $blue_medium: #002A69;
 $blue_lovely: #0045CB;
 
 .auth_1 {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   // grid-template-columns: repeat(auto-fit, minmax(8rem, 10rem));
   // gap: .3rem;
-  margin-bottom: $font_xs;
   direction: rtl;
 
   .auth_1_item {
@@ -18,10 +17,12 @@ $blue_lovely: #0045CB;
     justify-content: center;
     align-items: center;
     border: 1px solid $blue_lovely;
-    padding: .5rem;
-    height: 4rem;
+    padding: $font_05;
+    margin-bottom: $font_xs;
+    max-width: 13rem;
     border-radius: 5px;
     font-size: $font_l;
+    font-weight: 600;
     color: $blue_lovely;
     background-color: $white;
     box-shadow: 1px 1px 3px 0px $gray_e3;
@@ -39,49 +40,82 @@ $blue_lovely: #0045CB;
 .auth_2 {
   padding: $font_xs;
   margin-bottom: $font_s;
-  // background-color: $blue_darker;
   border-radius: $border_s;
   min-height: 25rem;
 
   &:nth-child(odd) {
     background-color: $blue_darker;
+
+    .auth_3 {
+      background-color: $blue_medium;
+    }
   }
 
   &:nth-child(even) {
     background-color: $blue_medium;
+
+    .auth_3 {
+      background-color: $blue_darker;
+    }
   }
+
 }
 
 .auth_3 {
-  margin: .5rem;
+  margin: $font_05;
   margin-top: 2rem;
-  // background-color: $blue_dark;
+  padding: $font_xxs;
   border-radius: $border_s;
   min-height: 10rem;
-
-  &:nth-child(odd) {
-    background-color: $blue_dark;
-  }
-
-  &:nth-child(even) {
-    background-color: $blue_darker;
-  }
 }
 
 .auth_4 {
   display: grid;
-  grid-template-columns: repeat(fit-content, minmax(8rem, 10rem));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 11rem));
   gap: .3rem;
+
+  .checkboxes {
+    display: flex;
+    background: whitesmoke;
+    border-radius: 15px;
+    padding: .25rem;
+  }
 }
 
 .text {
-  padding: 0 .5rem;
+  padding: 0 $font_05;
   color: $gray_l;
   font-size: $font_m;
+}
+
+.text_btn {
+  width: 8rem;
+  padding: $font_05;
+  margin-bottom: $font_05;
+  font-size: $font_m;
+  color: $gray_l;
+  border: 2px solid $gray_l;
+  box-shadow: 1px 1px 3px 0px $gray_d5;
 }
 
 .hr {
   width: 7rem;
   height: .2rem;
   background-color: $gray_l;
+}
+
+
+// materials 
+::ng-deep {
+  .mat-checkbox-layout {
+    .mat-checkbox-label {
+      margin: 0 $font_05;
+      font-size: $font_s;
+      font-weight: 600;
+      color: $blue_d;
+      line-height: 2;
+      border-radius: $border_s;
+      font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    }
+  }
 }

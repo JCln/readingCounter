@@ -4,7 +4,7 @@
         [routerLinkActiveOptions]="{ exact: true }"-->
         <a class="btn">
             <div class="ul_items">
-                <i class="fa fa-bar-chart"></i>
+                <i class="{{item.cssClass}} icons"></i>
                 <div class="on_show">
                     {{item.title}}
                     <i class="fa fa-arrow-circle-down"></i>
@@ -23,7 +23,7 @@
         <li *ngFor="let item of currentRoute; index as i">
             <div class="btn_2">
                 <div class="ul_items_2">
-                    <i class="fa fa-bar-chart"></i>
+                    <i class="{{item.cssClass}} icons"></i>
                 </div>
             </div>
             <!-- [routerLink]="[item.route]" routerLinkActive="active"
