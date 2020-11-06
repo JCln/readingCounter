@@ -24,7 +24,15 @@ export class InterceptorService implements HttpInterceptor {
       this.router.navigateByUrl('login');
     }
 
-    return next.handle(req);
+    return next.handle(req)
+    // .pipe(
+    //     tap((event: HttpEvent<any>) => {
+    //       if (event instanceof HttpResponse) {
+    //         console.log(event.headers.keys);
+    //       }
+    //     })
+    //   )
   }
+
 
 }

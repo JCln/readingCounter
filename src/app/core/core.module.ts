@@ -31,7 +31,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     BrowserModule,
     CommonModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions({ cookieName: 'X-XSRF-TOKEN', headerName: 'X-XSRF-TOKEN' }),
+    HttpClientXsrfModule.withOptions({ cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN' }),
     DpDatePickerModule,
     CoreRoutingModule
   ],

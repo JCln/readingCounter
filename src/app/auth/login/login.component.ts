@@ -17,8 +17,6 @@ export class LoginComponent implements OnInit {
   }
 
   logging = () => {
-    console.log(this.userData);
-    
     this.loginService.logging(this.userData);
   }
 }

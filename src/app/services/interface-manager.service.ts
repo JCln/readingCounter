@@ -15,7 +15,10 @@ export class InterfaceManagerService {
     return this.mainService.GET('​V1​/User​/All');
   }
   getUserContactManager = (uuid: string): Observable<any> => {
-    return this.mainService.GETID(uuid, 'V1/user/Edit')
+    return this.mainService.GETID(uuid, 'V1/user/Edit');
+  }
+  postUserContactManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/user/Edit', body);
   }
   // /////
 

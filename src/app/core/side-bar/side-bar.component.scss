@@ -10,7 +10,8 @@ ul {
   padding: $font_xs 0 $font_xs 0;
   margin-left: .2rem;
   min-height: 80vh;
-  overflow-y: auto;
+  overflow-x: auto;
+  overflow-y: unset;
   transition: all ease-in-out 250ms;
 }
 

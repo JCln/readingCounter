@@ -1,4 +1,5 @@
 @import '../../../../assets/variable.scss';
+@import '../../../../assets/button.scss';
 
 $blue_darker: #000A63;
 $blue_dark: #193E77;
@@ -96,6 +97,10 @@ $blue_lovely: #0045CB;
   color: $gray_l;
   border: 2px solid $gray_l;
   box-shadow: 1px 1px 3px 0px $gray_d5;
+}
+
+.btn_1 {
+  color: $gray_l;
 }
 
 .hr {

@@ -79,9 +79,63 @@ export interface IUserEditManager {
         deviceId: string
     }
 }
-export interface IUserEditappItemsManager {
+
+export interface IAUserEditSave {
+    selectedRoles: number[],
+    selectedZones: number[],
+    selectedActions: string[],
+    id: string,
+    firstName: string,
+    sureName: string,
+    email: string,
+    mobile: string,
+    displayMobile: boolean,
+    displayName: string,
+    deviceId: string
+}
+export interface IUserInfo {
+    userCode?: number,
+    username?: string,
+    isActive?: boolean,
+    displayMobile?: boolean,
+    id: string,
+    firstName: string,
+    sureName: string,
+    email: string,
+    mobile: string,
+    displayName: string,
+    deviceId: string
+}
+export interface IRoleItems {
+    id: number;
+    title: string;
+    isSelected: boolean;
+}
+export interface appItems {
     title: string,
     cssClass: string,
     logicalOrder: number,
-    moduleItems: []
+    moduleItems: [
+        {
+            title: string,
+            cssClass: string,
+            logicalOrder: number,
+            controllerItems: [
+                {
+                    title: string,
+                    cssClass: string,
+                    logicalOrder: number,
+                    actionItems: [
+                        {
+                            title: string,
+                            cssClass: string,
+                            logicalOrder: number,
+                            value: string,
+                            isSelected: boolean
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }

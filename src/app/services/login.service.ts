@@ -14,7 +14,7 @@ export class LoginService {
   constructor(
     private mainService: MainService,
     private jwtService: JwtService,
-    private router: Router,
+    private router: Router
   ) { }
 
   logging = (userData: ICredentials) => {
@@ -29,5 +29,10 @@ export class LoginService {
       }
 
     })
+    // (error: HttpErrorResponse) => {
+    //   if (error.status === 401) {
+    //     this.router.navigateByUrl('login');
+    //   }
+    // }
   }
 }
