@@ -16,9 +16,9 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 })
 export class KarbariComponent implements OnInit {
   titleFilter = new FormControl('');
-  regionIdFilter = new FormControl('');
+  authLevel3IdFilter = new FormControl('');
   logicalOrderFilter = new FormControl('');
-  isMetroFilter = new FormControl('');
+  valueFilter = new FormControl('');
   dataSource = new MatTableDataSource();
 
   selectedValue;
@@ -26,12 +26,14 @@ export class KarbariComponent implements OnInit {
   zoneId: any[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 
-  columnsToDisplay = ['title', 'regionId', 'logicalOrder', 'isMetro', 'actions'];
+  columnsToDisplay = ['title', 'authLevel3Id', 'logicalOrder', 'value', 'actions'];
   filterValues = {
     title: '',
-    regionId: '',
+    // regionId: '',
+    authLevel3Id: '',
     logicalOrder: '',
-    isMetro: ''
+    // isMetro: ''
+    value: ''
   };
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
@@ -42,7 +44,7 @@ export class KarbariComponent implements OnInit {
       const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addZoneManager(result).subscribe(res => {
+          this.interfaceManagerService.addKarbari(result).subscribe(res => {
             if (res) {
               console.log(res);
 
@@ -64,7 +66,7 @@ export class KarbariComponent implements OnInit {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.deleteZoneManager(row.id).subscribe(res => {
+        this.interfaceManagerService.deleteKarbari(row.id).subscribe(res => {
           if (res) {
             resolve(res);
           }
@@ -72,25 +74,25 @@ export class KarbariComponent implements OnInit {
       });
     }
   }
-  convertIdToTitle = (dataSource: IZoneManager[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.id)
-          dataSource.regionId = zoneDic.title;
-      })
-    });
-  }
-  getZoneDictionary = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getRegionDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
-    });
-  }
+  // convertIdToTitle = (dataSource: IZoneManager[], zoneDictionary: IDictionaryManager[]) => {
+  //   zoneDictionary.map(zoneDic => {
+  //     dataSource.map(dataSource => {
+  //       if (zoneDic.id === dataSource.id)
+  //         dataSource.regionId = zoneDic.title;
+  //     })
+  //   });
+  // }
+  // getZoneDictionary = (): any => {
+  //   return new Promise((resolve) => {
+  //     this.interfaceManagerService.getRegionDictionaryManager().subscribe(res => {
+  //       if (res)
+  //         resolve(res);
+  //     })
+  //   });
+  // }
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneManager().subscribe(res => {
+      this.interfaceManagerService.getKarbari().subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -112,17 +114,17 @@ export class KarbariComponent implements OnInit {
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.regionIdFilter.valueChanges
+      this.authLevel3IdFilter.valueChanges
         .subscribe(
-          regionId => {
-            this.filterValues.regionId = regionId;
+          authLevel3Id => {
+            this.filterValues.authLevel3Id = authLevel3Id;
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.isMetroFilter.valueChanges
+      this.valueFilter.valueChanges
         .subscribe(
-          isMetro => {
-            this.filterValues.isMetro = isMetro;
+          value => {
+            this.filterValues.value = value;
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
@@ -135,12 +137,12 @@ export class KarbariComponent implements OnInit {
         )
     }
 
-    const zoneDictionary = await this.getZoneDictionary();
-    console.log(zoneDictionary);
+    // const zoneDictionary = await this.getZoneDictionary();
+    // console.log(zoneDictionary);
 
-    this.zoneDictionary = zoneDictionary;
+    // this.zoneDictionary = zoneDictionary;
 
-    this.convertIdToTitle(rolesData, zoneDictionary);
+    // this.convertIdToTitle(rolesData, zoneDictionary);
 
   }
   ngOnInit() {
@@ -150,13 +152,10 @@ export class KarbariComponent implements OnInit {
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
-      console.log(data.isMetro.toString().indexOf(searchTerms.isMetro) !== -1);
-      console.log(data.isMetro.toString());
-
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.regionId.toString().toLowerCase().indexOf(searchTerms.regionId) !== -1
+        && data.authLevel3Id.toString().toLowerCase().indexOf(searchTerms.authLevel3Id) !== -1
         && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
-        && data.isMetro.toString().indexOf(searchTerms.isMetro) !== -1
+        && data.value.toString().indexOf(searchTerms.value) !== -1
     }
     return filterFunction;
   }

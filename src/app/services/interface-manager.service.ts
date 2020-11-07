@@ -22,6 +22,44 @@ export class InterfaceManagerService {
   }
   // /////
 
+  // karbar ///
+  getKarbari = (): Observable<any> => {
+    return this.mainService.GET('V1/Karbari/All');
+  }
+  getKarbariDictionary = (): Observable<any> => {
+    return this.mainService.GET('V1/Karbari/Dictionary');
+  }
+  deleteKarbari = (id: number): Observable<any> => {
+    return this.mainService.POST('V1/Karbari/Remove', id);
+  }
+  editKarbari = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Karbari/Edit', body);
+  }
+  addKarbari = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Karbari/Add', body);
+  }
+
+  // ////
+
+  // counter state ///
+  getCounterState = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/CounterState/All');
+  }
+  getCounterStateDictionary = (): Observable<any> => {
+    return this.mainService.GET('V1.Test/CounterState/Dictionary');
+  }
+  deleteCounterState = (id: number): Observable<any> => {
+    return this.mainService.POST('V1.Test/CounterState/Remove', id);
+  }
+  editCounterState = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1.Test/CounterState/Edit', body);
+  }
+  addCounterState = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1.Test/CounterState/Add', body);
+  }
+
+  // ////
+
   getRole = (): Observable<any> => {
     return this.mainService.GET('V1.Test/Role/All');
   }
