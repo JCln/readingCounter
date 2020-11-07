@@ -3,9 +3,9 @@ import { ITestSidebar } from './../../Interfaces/isidebar-items';
 export const sidebarItemsTest: ITestSidebar[] = [
     { routerUrl: 'wr', name: 'مدیریت', isClosable: false, isRefreshable: false, sid_isOpenItems: false },
     { routerUrl: '/wr/m/al/auth1', name: 'auth1', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: 'k', name: 'karbari', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: 'rcf', name: 'readingConfig', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: 'cst', name: 'counterState', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/m/k', name: 'karbari', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/m/rcf', name: 'readingConfig', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/m/cst', name: 'counterState', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/m/al/auth2', name: 'auth2', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/m/al/auth3', name: 'auth3', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/m/al/auth4', name: 'auth4', isClosable: true, isRefreshable: true, sid_isOpenItems: false },

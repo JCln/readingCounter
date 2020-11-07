@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { ITestSidebar } from './../../Interfaces/isidebar-items';
 import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
 })
 export class SideBarComponent implements OnInit {
   @Input() sid_isSmall: boolean;
-  currentRoute: any;
+  // currentRoute: any;
+  currentRoute: ITestSidebar[] = [];
+  
 
   constructor(private sideBarItemsService: SidebarItemsService, private testSidebarService: SidebarItemsService) {
 
@@ -18,7 +21,7 @@ export class SideBarComponent implements OnInit {
     //     this.currentRoute = sidebars.items;
     //   }
     // })
-    this.testSidebarService.getSideBarItems();
+    this.currentRoute = this.testSidebarService.getTestSideTest();
   }
 
   ngOnInit(): void {

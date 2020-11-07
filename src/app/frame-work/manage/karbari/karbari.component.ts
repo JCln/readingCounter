@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
-import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
+import { IZoneManager } from 'src/app/Interfaces/izone-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { AddNewComponent } from '../add-new/add-new.component';
@@ -15,18 +15,23 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
   styleUrls: ['./karbari.component.scss']
 })
 export class KarbariComponent implements OnInit {
-
   titleFilter = new FormControl('');
-  countryIdFilter = new FormControl('');
+  regionIdFilter = new FormControl('');
   logicalOrderFilter = new FormControl('');
+  isMetroFilter = new FormControl('');
   dataSource = new MatTableDataSource();
 
-  provinceDictionary: IDictionaryManager[] = [];
-  columnsToDisplay = ['title', 'countryId', 'logicalOrder', 'actions'];
+  selectedValue;
+  items: string[] = ['شهری', 'غیرشهری'];
+  zoneId: any[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
+
+  columnsToDisplay = ['title', 'regionId', 'logicalOrder', 'isMetro', 'actions'];
   filterValues = {
     title: '',
-    countryId: '',
-    logicalOrder: ''
+    regionId: '',
+    logicalOrder: '',
+    isMetro: ''
   };
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
@@ -37,7 +42,7 @@ export class KarbariComponent implements OnInit {
       const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addProvinceManager(result).subscribe(res => {
+          this.interfaceManagerService.addZoneManager(result).subscribe(res => {
             if (res) {
               console.log(res);
 
@@ -55,11 +60,11 @@ export class KarbariComponent implements OnInit {
       });
     });
   }
-  deleteSingleRow = async (row: IProvinceManager) => {
+  deleteSingleRow = async (row: IZoneManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.deleteProvinceManager(row.id).subscribe(res => {
+        this.interfaceManagerService.deleteZoneManager(row.id).subscribe(res => {
           if (res) {
             resolve(res);
           }
@@ -67,17 +72,17 @@ export class KarbariComponent implements OnInit {
       });
     }
   }
-  convertIdToTitle = (dataSource: IProvinceManager[], zoneDictionary: IDictionaryManager[]) => {
+  convertIdToTitle = (dataSource: IZoneManager[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
         if (zoneDic.id === dataSource.id)
-          dataSource.countryId = zoneDic.title;
+          dataSource.regionId = zoneDic.title;
       })
     });
   }
-  getProvinceDictionary = (): any => {
+  getZoneDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getCountryDictionaryManager().subscribe(res => {
+      this.interfaceManagerService.getRegionDictionaryManager().subscribe(res => {
         if (res)
           resolve(res);
       })
@@ -85,7 +90,7 @@ export class KarbariComponent implements OnInit {
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getProvinceManager().subscribe(res => {
+      this.interfaceManagerService.getZoneManager().subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -107,10 +112,17 @@ export class KarbariComponent implements OnInit {
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.countryIdFilter.valueChanges
+      this.regionIdFilter.valueChanges
         .subscribe(
-          countryId => {
-            this.filterValues.countryId = countryId;
+          regionId => {
+            this.filterValues.regionId = regionId;
+            this.dataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.isMetroFilter.valueChanges
+        .subscribe(
+          isMetro => {
+            this.filterValues.isMetro = isMetro;
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
@@ -122,9 +134,14 @@ export class KarbariComponent implements OnInit {
           }
         )
     }
-    const provinceDictionary = await this.getProvinceDictionary();
-    this.provinceDictionary = provinceDictionary;
-    this.convertIdToTitle(rolesData, provinceDictionary);
+
+    const zoneDictionary = await this.getZoneDictionary();
+    console.log(zoneDictionary);
+
+    this.zoneDictionary = zoneDictionary;
+
+    this.convertIdToTitle(rolesData, zoneDictionary);
+
   }
   ngOnInit() {
     this.classWrapper();
@@ -133,10 +150,15 @@ export class KarbariComponent implements OnInit {
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
+      console.log(data.isMetro.toString().indexOf(searchTerms.isMetro) !== -1);
+      console.log(data.isMetro.toString());
+
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.countryId.toString().toLowerCase().indexOf(searchTerms.countryId) !== -1
-        && data.logicalOrder.toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
+        && data.regionId.toString().toLowerCase().indexOf(searchTerms.regionId) !== -1
+        && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
+        && data.isMetro.toString().indexOf(searchTerms.isMetro) !== -1
     }
     return filterFunction;
   }
 }
+
