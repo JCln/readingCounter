@@ -11,13 +11,14 @@ export class SideBarComponent implements OnInit {
   @Input() sid_isSmall: boolean;
   currentRoute: any;
 
-  constructor(private sideBarItemsService: SidebarItemsService) {
+  constructor(private sideBarItemsService: SidebarItemsService, private testSidebarService: SidebarItemsService) {
 
-    this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
-      if (sidebars) {
-        this.currentRoute = sidebars.items;
-      }
-    })
+    // this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
+    //   if (sidebars) {
+    //     this.currentRoute = sidebars.items;
+    //   }
+    // })
+    this.testSidebarService.getSideBarItems();
   }
 
   ngOnInit(): void {

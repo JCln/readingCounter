@@ -26,3 +26,10 @@ export interface ITabs {
     cssClass: string;
     logicalOrder: number;
 }
+export interface ITestSidebar {
+    routerUrl: string;
+    name: string;
+    isClosable: boolean;
+    isRefreshable: boolean;
+    sid_isOpenItems: boolean;
+}
