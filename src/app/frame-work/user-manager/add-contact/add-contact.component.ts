@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AddUserManagerService } from './../../../services/add-user-manager.service';
+
 @Component({
   selector: 'app-add-contact',
   templateUrl: './add-contact.component.html',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddContactComponent implements OnInit {
 
-  constructor() { }
+  dataSource: any;
+
+  constructor(private addUserManagerService: AddUserManagerService) {
+    this.dataSource = this.addUserManagerService.addUserManagerConfig();
+  }
+
+  addAContact = () => {
+    this.addUserManagerService.addAContact(this.dataSource);
+  }
 
   ngOnInit(): void {
+    console.log(this.dataSource);
+
   }
 
 }

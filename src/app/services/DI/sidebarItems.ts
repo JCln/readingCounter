@@ -10,6 +10,7 @@ export const sidebarItemsTest: ITestSidebar[] = [
     { routerUrl: '/wr/m/al/auth3', name: 'auth3', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/m/al/auth4', name: 'auth4', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/mu/all', name: 'agGrid', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
+    { routerUrl: '/wr/mu/add', name: 'add Contact mg', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/m/ms', name: 'مدیریت سرور', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/m/al', name: 'auth', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
     { routerUrl: '/wr/m/mrm', name: 'مدیریت نقش ها', isClosable: true, isRefreshable: true, sid_isOpenItems: false },

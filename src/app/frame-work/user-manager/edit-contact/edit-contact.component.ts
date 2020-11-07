@@ -25,6 +25,8 @@ export class EditContactComponent implements OnInit {
   getContactSource = () => {
     this.interfaceManagerService.getUserContactManager(this.UUid).subscribe((res: IUserEditManager) => {
       if (res) {
+        console.log(res);
+        
         this.allUserData = res;
         this.editContactData = res.appItems;
       }

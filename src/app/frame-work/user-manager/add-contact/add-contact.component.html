@@ -1,1 +1,25 @@
-<p>add-contact works!</p>
+<section class="auth_1" *ngFor="let item of dataSource.appItems">
+    <div class="auth_1_item">
+        {{item.title}}
+    </div>
+
+    <section class="auth_2" *ngFor="let moduleIt of item.moduleItems">
+        <div class="text">{{moduleIt.title}}</div>
+        <div class="hr"></div>
+
+        <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
+            <div class="text_btn">{{controllerIt.title}}</div>
+
+            <section class="auth_4">
+                <div class="checkboxes" *ngFor="let actionIt of controllerIt.actionItems">
+                    <mat-checkbox [(ngModel)]="actionIt.isSelected">
+                        <!-- (ngModelChange)="updateAllComplete()" -->
+                        {{actionIt.title}}
+                    </mat-checkbox>
+                </div>
+            </section>
+        </section>
+    </section>
+
+</section>
+<button class="btn_1" (click)="addAContact()">ذخیره تغییرات</button>
