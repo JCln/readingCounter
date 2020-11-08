@@ -9,6 +9,7 @@ export class EditContactManagerService {
   editContactData: appItems[] = [];
   roleItems: IRoleItems[] = [];
   allUserData: IUserEditManager;
+  provinceItemsData: any; //for now is any instead of interface
 
   constructor() { }
 
@@ -36,6 +37,16 @@ export class EditContactManagerService {
     })
   }
   getSelectedZones = (): number[] => {
+    // can this done without map or less map?
+    let a: number[];
+    this.allUserData.provinceItems.map(regionIt => {
+      regionIt.regionItems.map(zoneIt => {
+        zoneIt.zoneItems.map(val => {
+          a.push(val.id)
+        })
+      })
+    })
+    console.log(a);
     return [0];
   }
   getUserInfos = (): IUserInfo => {
@@ -44,6 +55,7 @@ export class EditContactManagerService {
   editAUserContact = (editContactData: appItems[], allUserData: IUserEditManager): Promise<IAUserEditSave> => {
     this.editContactData = editContactData;
     this.allUserData = allUserData;
+    this.provinceItemsData = this.allUserData.provinceItems;
     return new Promise((resolve) => {
       const userInfo = this.getUserInfos();
       const vals = {

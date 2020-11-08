@@ -10,7 +10,7 @@ export class InterfaceManagerService {
 
   constructor(private mainService: MainService) { }
 
-  // //// User manager
+  // ////edit User manager
   getAllUserContactsManager = (): Observable<any> => {
     return this.mainService.GET('​V1​/User​/All');
   }
@@ -22,7 +22,7 @@ export class InterfaceManagerService {
   }
   // /////
 
-  // karbar ///
+  // karbari ///
   getKarbari = (): Observable<any> => {
     return this.mainService.GET('V1/Karbari/All');
   }
@@ -112,7 +112,7 @@ export class InterfaceManagerService {
     return this.mainService.GET('V1.Test/Region/All');
   }
   getRegionDictionaryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Region/Dictionary');
+    return this.mainService.GET('V1/Region/Dictionary');
   }
   deleteRegionManager = (id: number): Observable<any> => {
     return this.mainService.POST('Role/Region/Remove', id);
@@ -125,35 +125,35 @@ export class InterfaceManagerService {
   }
 
   getZoneManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Zone/All');
+    return this.mainService.GET('V1/Zone/All');
   }
   getZoneDictionaryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Zone/Dictionary');
+    return this.mainService.GET('V1/Zone/Dictionary');
   }
   deleteZoneManager = (id: number): Observable<any> => {
-    return this.mainService.POST('Role/Zone/Remove', id);
+    return this.mainService.POST('V1/Zone/Remove', id);
   }
   editZoneManager = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('Role/Zone/Edit', body);
+    return this.mainService.POSTBODY('V1/Zone/Edit', body);
   }
   addZoneManager = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('Role/Zone/Add', body);
+    return this.mainService.POSTBODY('V1/Zone/Add', body);
   }
 
   getZoneBoundManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/ZoneBound/All');
+    return this.mainService.GET('V1/ZoneBound/All');
   }
   getZoneBoundDictionaryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/ZoneBound/Dictionary');
+    return this.mainService.GET('V1/ZoneBound/Dictionary');
   }
   deleteZoneBoundManager = (id: number): Observable<any> => {
-    return this.mainService.POST('Role/ZoneBound/Remove', id);
+    return this.mainService.POST('V1/ZoneBound/Remove', id);
   }
   editZoneBoundManager = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('Role/ZoneBound/Edit', body);
+    return this.mainService.POSTBODY('V1/ZoneBound/Edit', body);
   }
   addZoneBoundManager = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('Role/ZoneBound/Add', body);
+    return this.mainService.POSTBODY('V1/ZoneBound/Add', body);
   }
 
   // auth Levels 
