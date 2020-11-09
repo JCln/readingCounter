@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IZoneBoundManager } from 'src/app/Interfaces/izone-bound-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
@@ -120,28 +119,19 @@ export class ReadingConfigComponent implements OnInit {
   expandedElement: PeriodicElement | null;
 
 
-  titleFilter = new FormControl('');
   zoneIdFilter = new FormControl('');
-  govermentalCodeFilter = new FormControl('');
-  fromEshterakFilter = new FormControl('');
-  toEshterakFilter = new FormControl('');
-  fromRadifFilter = new FormControl('');
-  toRadifFilter = new FormControl('');
-  dbInitialCatalogFilter = new FormControl('');
-
-  zoneBoundDictionary: IDictionaryManager[] = [];
+  defaultAlalHesabFilter = new FormControl('');
+  defaultImagePercentFilter = new FormControl('');
+  defaultHasPreNumberFilter = new FormControl('');
+  
   readingConfigdataSource = new MatTableDataSource();
 
-  readingConfigColumnsToDisplay = ['title', 'zoneId', 'fromEshterak', 'toEshterak', 'actions'];
+  readingConfigColumnsToDisplay = ['zoneId', 'defaultAlalHesab', 'defaultImagePercent', 'defaultHasPreNumber', 'actions'];
   filterValues = {
-    title: '',
     zoneId: '',
-    govermentalCode: '',
-    fromEshterak: '',
-    toEshterak: '',
-    fromRadif: '',
-    toRadif: '',
-    dbInitialCatalog: '',
+    defaultAlalHesab: '',
+    defaultImagePercent: '',
+    defaultHasPreNumber: ''
   };
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
 
@@ -152,7 +142,7 @@ export class ReadingConfigComponent implements OnInit {
       const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addZoneBoundManager(result).subscribe(res => {
+          this.interfaceManagerService.addReadingConfig(result).subscribe(res => {
             if (res) {
               console.log(res);
 
@@ -174,7 +164,7 @@ export class ReadingConfigComponent implements OnInit {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.deleteZoneBoundManager(row.id).subscribe(res => {
+        this.interfaceManagerService.deleteReadingConfig(row.id).subscribe(res => {
           if (res) {
             resolve(res);
           }
@@ -182,25 +172,9 @@ export class ReadingConfigComponent implements OnInit {
       });
     }
   }
-  convertIdToTitle = (dataSource: IZoneBoundManager[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.id)
-          dataSource.zoneId = zoneDic.title;
-      })
-    });
-  }
-  getZoneBoundDictionary = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
-    });
-  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneBoundManager().subscribe(res => {
+      this.interfaceManagerService.getReadingConfig().subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -215,13 +189,6 @@ export class ReadingConfigComponent implements OnInit {
       this.readingConfigdataSource.data = rolesData;
       this.readingConfigdataSource.filterPredicate = this.createFilter();
 
-      this.titleFilter.valueChanges
-        .subscribe(
-          title => {
-            this.filterValues.title = title;
-            this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
       this.zoneIdFilter.valueChanges
         .subscribe(
           zoneId => {
@@ -229,46 +196,28 @@ export class ReadingConfigComponent implements OnInit {
             this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.govermentalCodeFilter.valueChanges
+      this.defaultAlalHesabFilter.valueChanges
         .subscribe(
-          govermentalCode => {
-            this.filterValues.govermentalCode = govermentalCode;
+          defaultAlalHesab => {
+            this.filterValues.defaultAlalHesab = defaultAlalHesab;
             this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.fromEshterakFilter.valueChanges
+      this.defaultImagePercentFilter.valueChanges
         .subscribe(
-          fromEshterak => {
-            this.filterValues.fromEshterak = fromEshterak;
+          defaultImagePercent => {
+            this.filterValues.defaultImagePercent = defaultImagePercent;
             this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.toEshterakFilter.valueChanges
+      this.defaultHasPreNumberFilter.valueChanges
         .subscribe(
-          toEshterak => {
-            this.filterValues.toEshterak = toEshterak;
-            this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-
-      this.toRadifFilter.valueChanges
-        .subscribe(
-          toRadif => {
-            this.filterValues.toRadif = toRadif;
-            this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.dbInitialCatalogFilter.valueChanges
-        .subscribe(
-          dbInitialCatalog => {
-            this.filterValues.dbInitialCatalog = dbInitialCatalog;
+          defaultHasPreNumber => {
+            this.filterValues.defaultHasPreNumber = defaultHasPreNumber;
             this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
           }
         )
     }
-    const zoneBoundDictionary = await this.getZoneBoundDictionary();
-    this.zoneBoundDictionary = zoneBoundDictionary;
-    this.convertIdToTitle(rolesData, zoneBoundDictionary);
   }
   ngOnInit() {
     this.classWrapper();
@@ -279,12 +228,9 @@ export class ReadingConfigComponent implements OnInit {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.zoneId.toString().toLowerCase().indexOf(searchTerms.zoneId) !== -1
-        && data.govermentalCode.toLowerCase().indexOf(searchTerms.govermentalCode) !== -1
-        && data.fromEshterak.toLowerCase().indexOf(searchTerms.fromEshterak) !== -1
-        && data.toEshterak.toLowerCase().indexOf(searchTerms.toEshterak) !== -1
-        && data.fromRadif.toString().toLowerCase().indexOf(searchTerms.fromRadif) !== -1
-        && data.toRadif.toString().toLowerCase().indexOf(searchTerms.toRadif) !== -1
-        && data.dbInitialCatalog.toLowerCase().indexOf(searchTerms.dbInitialCatalog) !== -1
+        && data.defaultAlalHesab.toLowerCase().indexOf(searchTerms.defaultAlalHesab) !== -1
+        && data.defaultImagePercent.toLowerCase().indexOf(searchTerms.defaultImagePercent) !== -1
+        && data.defaultHasPreNumber.toLowerCase().indexOf(searchTerms.defaultHasPreNumber) !== -1
     }
     return filterFunction;
   }
