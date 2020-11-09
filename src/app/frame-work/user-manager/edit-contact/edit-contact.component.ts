@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { appItems, IUserEditManager } from 'src/app/Interfaces/iuser-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
+import { IRoleItems } from './../../../Interfaces/iuser-manager';
 import { EditContactManagerService } from './../../../services/edit-contact-manager.service';
 
 @Component({
@@ -18,6 +19,9 @@ export class EditContactComponent implements OnInit {
   // province config
   title: string = '';
   allComplete: boolean = false;
+  // 
+  // edit config
+  roleItemsData: IRoleItems[] = [];
   // 
 
   constructor(
@@ -35,6 +39,7 @@ export class EditContactComponent implements OnInit {
         this.allUserData = res;
         this.editContactData = res.appItems;
         this.provinceItemsData = res.provinceItems;
+        this.roleItemsData = res.roleItems;
       }
     })
   }
@@ -49,7 +54,6 @@ export class EditContactComponent implements OnInit {
     //   }
     // })
   }
-
   someComplete(): boolean {
     const a: Array<any> = [];
     a.push(this.provinceItemsData);
@@ -96,6 +100,11 @@ export class EditContactComponent implements OnInit {
     this.UUid = this.route.snapshot.paramMap.get('id');
     this.getContactSource();
   }
-
+  provinceDisplayType = () => {
+    let a = document.querySelector('._content') as HTMLElement;
+    let b = document.querySelector('.l_3_c') as HTMLElement;
+    a.classList.toggle('toggle_content');
+    b.classList.toggle('toggle');
+  }
 
 }

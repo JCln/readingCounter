@@ -188,7 +188,7 @@ main {
 .l_3_c {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   background: $gray_l;
 
   .l_3 {
@@ -203,3 +203,37 @@ main {
     margin: 0 .5rem;
   }
 }
+
+// role section
+.roles {
+  background: whitesmoke;
+  border-radius: 5px;
+  padding: .5rem;
+}
+
+.role_items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: $gray_d;
+  padding: 1rem;
+  margin: .2rem;
+  border-radius: $border_s;
+  margin-bottom: 2rem;
+
+  h2 {
+    color: $gray_dr2;
+  }
+}
+
+// ts config
+.toggle {
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 8rem));
+  grid-template-rows: auto;
+}
+
+.toggle_content {
+  grid-template-columns: auto;
+}
+
+// 
