@@ -136,7 +136,8 @@ main {
   background: $gray_d;
   padding: .2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, auto));
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: dense;
 }
 
 .l_1_c,
@@ -184,8 +185,9 @@ main {
 
 .l_3_c {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(7rem, auto));
+  grid-template-columns: repeat(2, 1fr);
   background: $gray_l;
+  min-height: 13rem;
 
   .l_3 {
     font-size: 1.2rem;

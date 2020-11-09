@@ -50,51 +50,46 @@ export class EditContactComponent implements OnInit {
     // })
   }
 
-  getL2Status = (): boolean => {
+  someComplete(): boolean {
     const a: Array<any> = [];
     a.push(this.provinceItemsData);
-
-    const b = a.map(item => {
-      return item.regionItems.every(sub_item => {
-        return sub_item.zoneItems.every(sub_2 => {
-          return sub_2.isSelected
-        })
-      })
-    })
-    return b.pop();
-  }
-
-  updateAllComplete() {
-    this.allComplete = this.provinceItemsData.regionItems != null && this.provinceItemsData.regionItems.every(t => t.isChecked) && this.getL2Status();
-  }
-
-  someComplete(): boolean {
-    return false;
-    // const a: Array<any> = [];
-    // a.push(this.provinceItemsData);
-    // if (this.provinceItemsData.subCollection == null) {
-    //   return false;
-    // }
-    // return this.provinceItemsData.subCollection.filter(t => t.isChecked).length > 0 && !this.allComplete
-
-  }
-
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.provinceItemsData.subCollection == null) {
-      return;
+    if (this.provinceItemsData.regionItems == null) {
+      return false;
     }
-    this.provinceItemsData.subCollection.forEach(t => {
-      t.isChecked = completed,
-        t.subCollection.forEach(y => {
-          y.isChecked = completed
-        })
-    });
+    return this.provinceItemsData.regionItem.filter(t => t.isSelected).length > 0 && !this.allComplete
   }
+  setAll(completed: boolean) {
 
+    this.allComplete = completed;
+    // if (this.provinceItemsData.regionItems == null) {
+    //   return;
+    // }
+    // console.log(completed);
+    this.provinceItemsData.forEach(l1 => {
+      l1.isSelected = completed,
+        l1.regionItems.forEach(l2 => {
+          l2.isSelected = completed,
+            l2.zoneItems.forEach(l3 => {
+              l3.isSelected = completed
+            })
+        });
+    })
+  }
+  updateAll = (provinceIt: any) => {
+    const a = provinceIt.regionItems.every(l1 => {
+      return l1.isSelected
+    })
+    provinceIt.isSelected = a;
+  }
+  updateAllL2Complete(regionIt: any) {
+    const a = regionIt.zoneItems.every(zoneIt => {
+      return zoneIt.isSelected && this.updateAll
+    })
+    regionIt.isSelected = a;
+  }
   setAllL2(completed: boolean, subtask: any) {
-    subtask.subCollection.forEach(t => {
-      t.isChecked = completed
+    subtask.zoneItems.forEach(t => {
+      t.isSelected = completed
     });
   }
   ngOnInit(): void {
