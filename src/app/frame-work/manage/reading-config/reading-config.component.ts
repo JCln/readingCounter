@@ -1,5 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { IZoneBoundManager } from 'src/app/Interfaces/izone-bound-manager';
+import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+
+import { AddNewComponent } from '../add-new/add-new.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 
 
@@ -110,10 +118,120 @@ export class ReadingConfigComponent implements OnInit {
   columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   expandedElement: PeriodicElement | null;
 
-  constructor() { }
+
+  zoneIdFilter = new FormControl('');
+  defaultAlalHesabFilter = new FormControl('');
+  defaultImagePercentFilter = new FormControl('');
+  defaultHasPreNumberFilter = new FormControl('');
+  
+  readingConfigdataSource = new MatTableDataSource();
+
+  readingConfigColumnsToDisplay = ['zoneId', 'defaultAlalHesab', 'defaultImagePercent', 'defaultHasPreNumber', 'actions'];
+  filterValues = {
+    zoneId: '',
+    defaultAlalHesab: '',
+    defaultImagePercent: '',
+    defaultHasPreNumber: ''
+  };
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
 
 
-  ngOnInit(): void {
+  openDialog = () => {
+    const dialogConfig = new MatDialogConfig();
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.addReadingConfig(result).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  deleteDialog = () => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(DeleteDialogComponent);
+      dialogRef.afterClosed().subscribe(result => {
+        resolve(result)
+      });
+    });
+  }
+  deleteSingleRow = async (row: IZoneBoundManager) => {
+    const dialogResult = await this.deleteDialog();
+    if (dialogResult) {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.deleteReadingConfig(row.id).subscribe(res => {
+          if (res) {
+            resolve(res);
+          }
+        });
+      });
+    }
+  }
+  getDataSource = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getReadingConfig().subscribe(res => {
+        if (res) {
+          resolve(res);
+        }
+      })
+    })
+  }
+  classWrapper = async () => {
+    const rolesData = await this.getDataSource();
+    console.log(rolesData);
+
+    if (rolesData) {
+      this.readingConfigdataSource.data = rolesData;
+      this.readingConfigdataSource.filterPredicate = this.createFilter();
+
+      this.zoneIdFilter.valueChanges
+        .subscribe(
+          zoneId => {
+            this.filterValues.zoneId = zoneId;
+            this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.defaultAlalHesabFilter.valueChanges
+        .subscribe(
+          defaultAlalHesab => {
+            this.filterValues.defaultAlalHesab = defaultAlalHesab;
+            this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.defaultImagePercentFilter.valueChanges
+        .subscribe(
+          defaultImagePercent => {
+            this.filterValues.defaultImagePercent = defaultImagePercent;
+            this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.defaultHasPreNumberFilter.valueChanges
+        .subscribe(
+          defaultHasPreNumber => {
+            this.filterValues.defaultHasPreNumber = defaultHasPreNumber;
+            this.readingConfigdataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+    }
+  }
+  ngOnInit() {
+    this.classWrapper();
   }
 
+  createFilter(): (data: any, filter: string) => boolean {
+    let filterFunction = function (data, filter): boolean {
+      let searchTerms = JSON.parse(filter);
+      return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
+        && data.zoneId.toString().toLowerCase().indexOf(searchTerms.zoneId) !== -1
+        && data.defaultAlalHesab.toLowerCase().indexOf(searchTerms.defaultAlalHesab) !== -1
+        && data.defaultImagePercent.toLowerCase().indexOf(searchTerms.defaultImagePercent) !== -1
+        && data.defaultHasPreNumber.toLowerCase().indexOf(searchTerms.defaultHasPreNumber) !== -1
+    }
+    return filterFunction;
+  }
 }

@@ -1,3 +1,5 @@
+@import '../../../../assets/variable';
+
 table {
   width: 100%;
 }
@@ -23,15 +25,6 @@ tr.example-element-row:not(.example-expanded-row):active {
   display: flex;
 }
 
-.example-element-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
-}
-
 .example-element-symbol {
   font-weight: bold;
   font-size: 40px;
@@ -44,4 +37,37 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-description-attribution {
   opacity: 0.5;
+}
+
+.inner_table {
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  tr,
+  th {
+    border: 1px solid gray;
+
+  }
+
+  th,
+  td {
+    padding: 15px;
+  }
+
+  tbody {
+    text-align: center;
+  }
+
+}
+
+mat-row:nth-child(even) {
+  background-color: $gray_l;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $gray_d5;
+  }
 }

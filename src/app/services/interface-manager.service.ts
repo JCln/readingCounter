@@ -60,6 +60,21 @@ export class InterfaceManagerService {
 
   // ////
 
+  // reading config default//
+  getReadingConfig = (): Observable<any> => {
+    return this.mainService.GET('V1/ReadingConfigDefault/All');
+  }
+  deleteReadingConfig = (id: number): Observable<any> => {
+    return this.mainService.POST('V1/ReadingConfigDefault/Remove', id);
+  }
+  editReadingConfig = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/ReadingConfigDefault/Edit', body);
+  }
+  addReadingConfig = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/ReadingConfigDefault/Add', body);
+  }
+  //  ///
+
   getRole = (): Observable<any> => {
     return this.mainService.GET('V1.Test/Role/All');
   }
