@@ -17,23 +17,23 @@
         </th>
         <td mat-cell *matCellDef="let person">{{person.title}}</td>
     </ng-container>
-    <ng-container matColumnDef="authLevel3Id">
+    <ng-container matColumnDef="moshtarakinId">
         <th mat-header-cell *matHeaderCellDef>
             <div class="header">
-                auth level 3
+                moshtarakinId
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <mat-select name="item">
-                    <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="authLevel3IdFilter">
+                    <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="moshtarakinIdFilter">
                         {{zoneDictionary.title}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </th>
-        <td mat-cell *matCellDef="let person">{{person.authLevel3Id}}</td>
+        <td mat-cell *matCellDef="let person">{{person.moshtarakinId}}</td>
     </ng-container>
-    <ng-container matColumnDef="value">
+    <ng-container matColumnDef="provinceId">
         <th mat-header-cell *matHeaderCellDef>
             <div class="header">
                 مقدار
@@ -41,27 +41,69 @@
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <mat-select name="item">
-                    <mat-option *ngFor="let item of items" [value]="valueFilter">
-                        {{item}}
+                    <mat-option *ngFor="let item of isTrueF" [value]="item.name">
+                        {{item.value}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.value"></mat-checkbox>
+            <mat-checkbox [(ngModel)]="person.provinceId"></mat-checkbox>
         </td>
     </ng-container>
-    <ng-container matColumnDef="logicalOrder">
+    <ng-container matColumnDef="isMaskooni">
         <th mat-header-cell *matHeaderCellDef>
             <div class="header">
-                ترتیب نمایش
+                isMaskooni
+            </div>
+            <mat-form-field>
+                <mat-label>جستجو</mat-label>
+                <mat-select [formControl]="isMaskooniFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
+                        {{truefalse.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">
+            <mat-checkbox [(ngModel)]="person.isMaskooni"></mat-checkbox>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="hasReadingVibrate">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                hasReadingVibrate
+            </div>
+            <mat-form-field>
+                <mat-label>جستجو</mat-label>
+                <mat-select [formControl]="hasReadingVibrateFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
+                        {{truefalse.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">
+            <mat-checkbox [(ngModel)]="person.hasReadingVibrate"></mat-checkbox>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="isSaxt">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                isSaxt
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="logicalOrderFilter">
+                <mat-select [formControl]="isSaxtFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
+                        {{truefalse.name}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </th>
-        <td mat-cell *matCellDef="let person">{{person.logicalOrder}}</td>
+        <td mat-cell *matCellDef="let person">
+            <mat-checkbox [(ngModel)]="person.isSaxt"></mat-checkbox>
+        </td>
     </ng-container>
 
     <ng-container cdkColumnDef="actions">

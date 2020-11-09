@@ -9,6 +9,11 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { AddNewComponent } from '../add-new/add-new.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
+interface trueFalse {
+  name: string;
+  value: string | boolean;
+
+}
 @Component({
   selector: 'app-karbari',
   templateUrl: './karbari.component.html',
@@ -16,24 +21,30 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 })
 export class KarbariComponent implements OnInit {
   titleFilter = new FormControl('');
-  authLevel3IdFilter = new FormControl('');
-  logicalOrderFilter = new FormControl('');
-  valueFilter = new FormControl('');
+  moshtarakinIdFilter = new FormControl('');
+  provinceIdFilter = new FormControl('');
+  hasReadingVibrateFilter = new FormControl('');
+  isMaskooniFilter = new FormControl('');
+  isSaxtFilter = new FormControl('');
+
   dataSource = new MatTableDataSource();
 
-  selectedValue;
-  items: string[] = ['شهری', 'غیرشهری'];
+  isTrueF: trueFalse[] = [
+    { name: 'نباشد', value: false },
+    { name: 'باشد', value: true },
+    { name: 'هیچکدام', value: '' }
+  ]
   zoneId: any[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 
-  columnsToDisplay = ['title', 'authLevel3Id', 'logicalOrder', 'value', 'actions'];
+  columnsToDisplay = ['title', 'moshtarakinId', 'provinceId', 'hasReadingVibrate', 'isMaskooni', 'isSaxt', 'actions'];
   filterValues = {
     title: '',
-    // regionId: '',
-    authLevel3Id: '',
-    logicalOrder: '',
-    // isMetro: ''
-    value: ''
+    moshtarakinId: '',
+    provinceId: '',
+    hasReadingVibrate: '',
+    isMaskooni: '',
+    isSaxt: ''
   };
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
@@ -114,24 +125,38 @@ export class KarbariComponent implements OnInit {
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.authLevel3IdFilter.valueChanges
+      this.moshtarakinIdFilter.valueChanges
         .subscribe(
-          authLevel3Id => {
-            this.filterValues.authLevel3Id = authLevel3Id;
+          moshtarakinId => {
+            this.filterValues.moshtarakinId = moshtarakinId;
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.valueFilter.valueChanges
+      this.provinceIdFilter.valueChanges
         .subscribe(
-          value => {
-            this.filterValues.value = value;
+          provinceId => {
+            this.filterValues.provinceId = provinceId;
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
-      this.logicalOrderFilter.valueChanges
+      this.hasReadingVibrateFilter.valueChanges
         .subscribe(
-          logicalOrder => {
-            this.filterValues.logicalOrder = logicalOrder;
+          hasReadingVibrate => {
+            this.filterValues.hasReadingVibrate = hasReadingVibrate;
+            this.dataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.isMaskooniFilter.valueChanges
+        .subscribe(
+          isMaskooni => {
+            this.filterValues.isMaskooni = isMaskooni;
+            this.dataSource.filter = JSON.stringify(this.filterValues);
+          }
+        )
+      this.isSaxtFilter.valueChanges
+        .subscribe(
+          isSaxt => {
+            this.filterValues.isSaxt = isSaxt;
             this.dataSource.filter = JSON.stringify(this.filterValues);
           }
         )
@@ -153,11 +178,12 @@ export class KarbariComponent implements OnInit {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.authLevel3Id.toString().toLowerCase().indexOf(searchTerms.authLevel3Id) !== -1
-        && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
-        && data.value.toString().indexOf(searchTerms.value) !== -1
+        && data.moshtarakinId.toString().toLowerCase().indexOf(searchTerms.moshtarakinId) !== -1
+        && data.provinceId.toString().toLowerCase().indexOf(searchTerms.provinceId) !== -1
+        && data.hasReadingVibrate.toString().indexOf(searchTerms.hasReadingVibrate) !== -1
+        && data.isMaskooni.toString().indexOf(searchTerms.isMaskooni) !== -1
+        && data.isSaxt.toString().indexOf(searchTerms.isSaxt) !== -1
     }
     return filterFunction;
   }
 }
-
