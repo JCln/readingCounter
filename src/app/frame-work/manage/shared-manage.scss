@@ -3,6 +3,8 @@
 @import '../../../assets/input.scss';
 
 table {
+  display: block;
+  overflow: auto;
   width: 100%;
   border: 2px solid $blue_l;
 }

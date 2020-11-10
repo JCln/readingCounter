@@ -6,6 +6,7 @@ import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
 import { FrameWorkComponent } from './../frame-work/frame-work.component';
 import { InterceptorService } from './../services/interceptor.service';
+import { SpinnerInterceptorService } from './../services/spinner-interceptor.service';
 import { DropdownComponent } from './_layouts/dropdown/dropdown.component';
 import { HeaderComponent } from './_layouts/header/header.component';
 import { HfcComponent } from './_layouts/hfc/hfc.component';
@@ -36,7 +37,8 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     CoreRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true },
   ]
 })
 export class CoreModule {
