@@ -43,19 +43,19 @@ export class InterfaceManagerService {
 
   // counter state ///
   getCounterState = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/CounterState/All');
+    return this.mainService.GET('V1/CounterState/All');
   }
   getCounterStateDictionary = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/CounterState/Dictionary');
+    return this.mainService.GET('V1/CounterState/Dictionary');
   }
   deleteCounterState = (id: number): Observable<any> => {
-    return this.mainService.POST('V1.Test/CounterState/Remove', id);
+    return this.mainService.POST('V1/CounterState/Remove', id);
   }
   editCounterState = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1.Test/CounterState/Edit', body);
+    return this.mainService.POSTBODY('V1/CounterState/Edit', body);
   }
   addCounterState = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1.Test/CounterState/Add', body);
+    return this.mainService.POSTBODY('V1/CounterState/Add', body);
   }
 
   // ////

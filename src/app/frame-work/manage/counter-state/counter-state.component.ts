@@ -66,22 +66,6 @@ export class CounterStateComponent implements OnInit {
       });
     }
   }
-  // convertIdToTitle = (dataSource: IZoneManager[], zoneDictionary: IDictionaryManager[]) => {
-  //   zoneDictionary.map(zoneDic => {
-  //     dataSource.map(dataSource => {
-  //       if (zoneDic.id === dataSource.id)
-  //         dataSource.regionId = zoneDic.title;
-  //     })
-  //   });
-  // }
-  // getZoneDictionary = (): any => {
-  //   return new Promise((resolve) => {
-  //     this.interfaceManagerService.getRegionDictionaryManager().subscribe(res => {
-  //       if (res)
-  //         resolve(res);
-  //     })
-  //   });
-  // }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getCounterState().subscribe(res => {
@@ -107,14 +91,6 @@ export class CounterStateComponent implements OnInit {
           }
         )
     }
-
-    // const zoneDictionary = await this.getZoneDictionary();
-    // console.log(zoneDictionary);
-
-    // this.zoneDictionary = zoneDictionary;
-
-    // this.convertIdToTitle(rolesData, zoneDictionary);
-
   }
   ngOnInit() {
     this.classWrapper();
