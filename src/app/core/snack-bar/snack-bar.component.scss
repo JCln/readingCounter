@@ -1,0 +1,22 @@
+::ng-deep {
+  .snack_danger {
+    background-color: #f63e38;
+    font-size: 1.2rem;
+    color: #F2F3F4;
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  }
+
+  .snack_warn {
+    background-color: lightgoldenrodyellow;
+    font-size: 1.2rem;
+    color: #F2F3F4;
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  }
+
+  .snack_success {
+    background-color: green;
+    font-size: 1.2rem;
+    color: #F2F3F4;
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  }
+}

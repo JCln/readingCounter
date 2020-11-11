@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
@@ -12,8 +13,11 @@ import { HeaderComponent } from './_layouts/header/header.component';
 import { HfcComponent } from './_layouts/hfc/hfc.component';
 import { LayoutComponent } from './_layouts/layout/layout.component';
 import { AnonyHeaderComponent } from './anony-header/anony-header.component';
+import { ClockComponent } from './clock/clock.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
 
 @NgModule({
@@ -25,7 +29,10 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     HeaderComponent,
     AnonyHeaderComponent,
     DropdownComponent,
-    FrameWorkComponent
+    FrameWorkComponent,
+    SpinnerComponent,
+    SnackBarComponent,
+    ClockComponent
   ]
   ,
   imports: [
@@ -34,7 +41,14 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     HttpClientModule,
     HttpClientXsrfModule.withOptions({ cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN' }),
     DpDatePickerModule,
+    MatSnackBarModule,
     CoreRoutingModule
+  ],
+  exports: [
+    MatSnackBarModule,
+    SpinnerComponent,
+    SnackBarComponent,
+    ClockComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
