@@ -56,15 +56,17 @@ $blue_lovely: #0045CB;
     color: $blue_lovely;
     background-color: $white;
     box-shadow: 1px 1px 3px 0px $gray_e3;
-
-    // &:hover,
-    // &:focus,
-    // &:active {
-    //   background-color: $blue_d;
-    //   color: $gray_l;
-    // }
+    cursor: pointer;
   }
 }
+
+// active auth1 tab
+.active_tab {
+  background-color: $blue_d !important;
+  color: $gray_l !important;
+}
+
+// 
 
 .auth_2 {
   padding: $font_xs;
@@ -255,8 +257,10 @@ main {
 
 // ts config
 .toggle {
-  grid-template-columns: repeat(auto-fit, minmax(7rem, 8rem));
-  grid-template-rows: auto;
+  display: flex;
+  flex-wrap: wrap;
+  // grid-template-columns: repeat(auto-fit, minmax(7rem, 8rem));
+  // grid-template-rows: repeat(6, 1fr);
 }
 
 .toggle_content {

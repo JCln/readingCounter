@@ -203,11 +203,49 @@ export interface IAddUserManager {
         }
     ]
 }
-
+export interface IAddProvinceItems {
+    provinceItems: [
+        {
+            title: string,
+            logicalOrder: number,
+            regionItems: [
+                {
+                    title: string,
+                    logicalOrder: number,
+                    zoneItems: [
+                        {
+                            title: string,
+                            logicalOrder: number,
+                            id: number,
+                            isMetro: boolean,
+                            isSelected: boolean
+                        }
+                    ],
+                    isSelected: boolean
+                }
+            ],
+            isSelected: boolean
+        }
+    ],
+}
 export interface IAddAUserManager {
     selectedRoles: number[],
     selectedZones: number[],
     selectedActions: string[],
+    userCode: number,
+    username: string,
+    password: string,
+    confirmPassword: string,
+    firstName: string,
+    sureName: string,
+    email: string,
+    mobile: string,
+    displayMobile: boolean,
+    displayName: string,
+    isActive: boolean,
+    deviceId: string
+}
+export interface IAddUserInfos {
     userCode: number,
     username: string,
     password: string,

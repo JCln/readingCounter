@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { appItems, IAddAUserManager, IAddUserManager, IRoleItems } from './../../../Interfaces/iuser-manager';
+import { appItems, IAddAUserManager, IAddUserInfos, IRoleItems } from './../../../Interfaces/iuser-manager';
 import { AddUserManagerService } from './../../../services/add-user-manager.service';
 
 @Component({
@@ -10,9 +10,27 @@ import { AddUserManagerService } from './../../../services/add-user-manager.serv
   styleUrls: ['./add-contact.component.scss']
 })
 export class AddContactComponent implements OnInit {
+  userDetails: IAddUserInfos = {
+    userCode: 0,
+    username: '',
+    password: '',
+    confirmPassword: '',
+    firstName: '',
+    sureName: '',
+    email: '',
+    mobile: '',
+    displayMobile: false,
+    displayName: '',
+    isActive: true,
+    deviceId: ''
+  }
   personalizeInfo: IAddAUserManager;
   provinceItemsData: any;
   dataSource: any;
+
+  // swtich case title
+  switchCaseName: string = '';
+  // 
 
   addContactData: appItems[] = [];
   // province config
@@ -28,22 +46,14 @@ export class AddContactComponent implements OnInit {
     private interfaceManagerService: InterfaceManagerService
   ) {
   }
-  getProvinceItems = () => {
-    this.provinceItemsData = this.dataSource.provinceItems;
-    this.provinceItemsData.map(regionIt => {
-      regionIt.regionItems.map(zoneIt => {
-        zoneIt.zoneItems.map(val => {
-          console.log(val.id);
-
-        })
-      })
-    })
+  changeSwitchCase = (item: string) => {
+    this.switchCaseName = item;
   }
   addAContact = () => {
     this.addUserManagerService.addAContact(this.dataSource);
   }
   getContactSource = () => {
-    this.interfaceManagerService.getAddUserContactManager().subscribe((res: IAddUserManager) => {
+    this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {
       if (res) {
         this.dataSource = res;
         this.provinceItemsData = res.provinceItems;
@@ -56,8 +66,6 @@ export class AddContactComponent implements OnInit {
   ngOnInit(): void {
     // this.dataSource = this.addUserManagerService.addUserManagerConfig();
     this.getContactSource();
-
-    this.getProvinceItems();
   }
   // province checkbox items ////////////////
   someComplete(): boolean {

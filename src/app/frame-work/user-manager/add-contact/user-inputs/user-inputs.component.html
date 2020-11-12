@@ -1,0 +1,55 @@
+<form [formGroup]="userInputForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="fill">
+        <mat-label>نام کاربری</mat-label>
+        <input matInput formControlName="username" placeholder="نام کاربری را وارد نمایید">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>رمز عبور</mat-label>
+        <input matInput formControlName="password" placeholder="رمز عبور را وارد نمایید">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>تکرار رمز عبور</mat-label>
+        <input matInput formControlName="confirmPassword" placeholder="رمز عبور را مجددا وارد نمایید">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>نام</mat-label>
+        <input matInput formControlName="firstName" placeholder="نام را وارد نمایید">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>نام خانوادگی</mat-label>
+        <input matInput formControlName="sureName" placeholder="نام خانوادگی را وارد نمایید">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>ایمیل</mat-label>
+        <input matInput formControlName="email" placeholder="ایمیل را وارد نمایید">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>شماره موبایل</mat-label>
+        <input matInput formControlName="mobile" placeholder="شماره موبایل را وارد نمایید">
+    </mat-form-field>
+
+    <!-- <mat-form-field>
+        <mat-label>نمایش شماره موبایل</mat-label>
+        <mat-checkbox>شماره موبایل نمایش داده شود</mat-checkbox>
+    </mat-form-field> -->
+
+    <mat-form-field appearance="fill">
+        <mat-label>نام نمایشی</mat-label>
+        <input matInput formControlName="displayName" placeholder="نامی که نمایش داده شود را وارد نمایید">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>شناسه دستگاه</mat-label>
+        <input matInput formControlName="deviceId" placeholder="شناسه دستگاه را وارد نمایید">
+    </mat-form-field>
+
+    <!-- <mat-label>کاربر فعال</mat-label>
+    <mat-checkbox>کاربر فعال باشد؟</mat-checkbox> -->
+    <button type="submit">تایید</button>
+</form>

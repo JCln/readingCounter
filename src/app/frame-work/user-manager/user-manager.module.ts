@@ -1,14 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { UserManagerRoutingModule } from './user-manager-routing.module';
 import { ProvinceItemsComponent } from './province-items/province-items.component';
-
+import { UserManagerRoutingModule } from './user-manager-routing.module';
 
 @NgModule({
   declarations: [ProvinceItemsComponent],
   imports: [
-    CommonModule,    
+    CommonModule,
     UserManagerRoutingModule
   ]
 })

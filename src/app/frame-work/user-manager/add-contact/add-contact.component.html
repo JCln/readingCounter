@@ -8,6 +8,7 @@
             </mat-checkbox>
         </div>
     </section>
+    <app-user-inputs></app-user-inputs>
     <section class="_content" *ngFor="let provinceIt of provinceItemsData">
         <div class="l_2" *ngFor="let regionIt of provinceIt.regionItems">
 
@@ -18,7 +19,7 @@
                 </mat-checkbox>
             </div>
 
-            <div class="l_3_c" (click)="this.status = !this.status" [ngClass]="status ? 'l_3_c' : 'toggle'">
+            <div class="l_3_c" (click)="this.status = !this.status" [ngClass]="status ? 'toggle' : 'l_3_c'">
                 <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
                     <mat-checkbox [(ngModel)]="zoneIt.isSelected" (ngModelChange)="updateAllL2Complete(regionIt)">
                         {{zoneIt.title}}
@@ -31,31 +32,31 @@
 </main>
 
 <section class="auth_1_container">
-    <div class="auth_1_item" *ngFor="let item of addContactData">
+    <div [ngClass]="{'active_tab': item.title === switchCaseName}" class="auth_1_item"
+        *ngFor="let item of addContactData" (click)="changeSwitchCase(item.title)">
         {{item.title}}
     </div>
 </section>
-<section class="auth_1" *ngFor="let item of addContactData">
-    <!-- <div class="auth_1_item">
-        {{item.title}}
-    </div> -->
-    <section class="auth_2" *ngFor="let moduleIt of item.moduleItems">
-        <div class="text">{{moduleIt.title}}</div>
-        <div class="hr"></div>
+<section class="auth_1" *ngFor="let item of addContactData" [ngSwitch]="item.title">
+    <div *ngSwitchCase="switchCaseName">
+        <section class=" auth_2" *ngFor="let moduleIt of item.moduleItems">
+            <div class="text">{{moduleIt.title}}</div>
+            <div class="hr"></div>
 
-        <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
-            <div class="text_btn">{{controllerIt.title}}</div>
+            <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
+                <div class="text_btn">{{controllerIt.title}}</div>
 
-            <section class="auth_4">
-                <div class="checkboxes" *ngFor="let actionIt of controllerIt.actionItems">
-                    <mat-checkbox [(ngModel)]="actionIt.isSelected">
-                        <!-- (ngModelChange)="updateAllComplete()" -->
-                        {{actionIt.title}}
-                    </mat-checkbox>
-                </div>
+                <section class="auth_4">
+                    <div class="checkboxes" *ngFor="let actionIt of controllerIt.actionItems">
+                        <mat-checkbox [(ngModel)]="actionIt.isSelected">
+                            <!-- (ngModelChange)="updateAllComplete()" -->
+                            {{actionIt.title}}
+                        </mat-checkbox>
+                    </div>
+                </section>
             </section>
         </section>
-    </section>
+    </div>
 </section>
 
 <section class="role_items">

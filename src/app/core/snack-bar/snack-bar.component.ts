@@ -29,8 +29,6 @@ export class SnackBarComponent implements OnInit {
   ngOnInit(): void {
     this.snackWrapperService.snackStatus.subscribe(res => {
       if (res) {
-        console.log(res);
-
         this.openSnackBar(res);
       }
     })

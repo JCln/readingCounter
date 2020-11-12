@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { IAddUserManager } from './../Interfaces/iuser-manager';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,9 +27,6 @@ export class AddUserManagerService {
       return ids.id
     });
   }
-  // private getAUserPersonalize = () => {
-  //   return this.dataSource.userInfo;
-  // }
   getSelectedActions = (): string[] => {
     const selectedActions: string[] = [];
     this.dataSource.appItems.map(vals1 => {
@@ -44,9 +43,8 @@ export class AddUserManagerService {
     })
     return selectedActions;
   }
-  addAContact = (dataSource: any) => {
+  addAContact = (dataSource: IAddUserManager) => {
     this.dataSource = dataSource;
-    // const aUserInfo = this.getAUserPersonalize();
     const vals = {
       selectedRoles: this.getAUserRoleItems(),
       selectedZones: this.getAUserProvince(),
