@@ -24,11 +24,7 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select name="item">
-                    <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="moshtarakinIdFilter">
-                        {{zoneDictionary.title}}
-                    </mat-option>
-                </mat-select>
+                <input matInput [formControl]="moshtarakinIdFilter">
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.moshtarakinId}}</td>
@@ -36,13 +32,13 @@
     <ng-container matColumnDef="provinceId">
         <th mat-header-cell *matHeaderCellDef>
             <div class="header">
-                مقدار
+                provinceId
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select name="item">
-                    <mat-option *ngFor="let item of isTrueF" [value]="item.name">
-                        {{item.value}}
+                <mat-select [formControl]="provinceIdFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
+                        {{truefalse.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

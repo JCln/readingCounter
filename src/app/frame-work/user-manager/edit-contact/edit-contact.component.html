@@ -18,7 +18,7 @@
                 </mat-checkbox>
             </div>
 
-            <div class="l_3_c">
+            <div class="l_3_c" (click)="this.status = !this.status" [ngClass]="status ? 'l_3_c' : 'toggle'">
                 <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
                     <mat-checkbox [(ngModel)]="zoneIt.isSelected" (ngModelChange)="updateAllL2Complete(regionIt)">
                         {{zoneIt.title}}

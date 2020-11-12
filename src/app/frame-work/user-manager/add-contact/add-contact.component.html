@@ -1,8 +1,44 @@
-<section class="auth_1" *ngFor="let item of dataSource.appItems">
-    <div class="auth_1_item">
+<main>
+    <button (click)="provinceDisplayType()">changeStyle</button>
+    <section class="l_1">
+        <div class="l_1_c" *ngFor="let provinceIt of provinceItemsData">
+            <mat-checkbox class="example-margin" [checked]="allComplete" [indeterminate]="someComplete()"
+                (change)="setAll($event.checked)" [(ngModel)]="provinceIt.isSelected">
+                {{provinceIt.title}}
+            </mat-checkbox>
+        </div>
+    </section>
+    <section class="_content" *ngFor="let provinceIt of provinceItemsData">
+        <div class="l_2" *ngFor="let regionIt of provinceIt.regionItems">
+
+            <div class="l_2_c">
+                <mat-checkbox (change)="setAllL2($event.checked , regionIt)" [(ngModel)]="regionIt.isSelected"
+                    (ngModelChange)="updateAll(provinceIt)">
+                    {{regionIt.title}}
+                </mat-checkbox>
+            </div>
+
+            <div class="l_3_c" (click)="this.status = !this.status" [ngClass]="status ? 'l_3_c' : 'toggle'">
+                <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
+                    <mat-checkbox [(ngModel)]="zoneIt.isSelected" (ngModelChange)="updateAllL2Complete(regionIt)">
+                        {{zoneIt.title}}
+                    </mat-checkbox>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<section class="auth_1_container">
+    <div class="auth_1_item" *ngFor="let item of addContactData">
         {{item.title}}
     </div>
-
+</section>
+<section class="auth_1" *ngFor="let item of addContactData">
+    <!-- <div class="auth_1_item">
+        {{item.title}}
+    </div> -->
     <section class="auth_2" *ngFor="let moduleIt of item.moduleItems">
         <div class="text">{{moduleIt.title}}</div>
         <div class="hr"></div>
@@ -20,6 +56,17 @@
             </section>
         </section>
     </section>
-
 </section>
-<button class="btn_1" (click)="addAContact()">ذخیره تغییرات</button>
+
+<section class="role_items">
+    <h2>نقش ها</h2>
+    <div class="roles" *ngFor="let roleItems of roleItemsData">
+        <mat-checkbox>
+            {{roleItems.title}}
+        </mat-checkbox>
+    </div>
+</section>
+
+<section class="accept">
+    <button class="btn_1" (click)="addAContact()">ذخیره تغییرات</button>
+</section>

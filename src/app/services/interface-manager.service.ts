@@ -10,7 +10,7 @@ export class InterfaceManagerService {
 
   constructor(private mainService: MainService) { }
 
-  // ////edit User manager
+  // //// User manager
   getAllUserContactsManager = (): Observable<any> => {
     return this.mainService.GET('​V1​/User​/All');
   }
@@ -19,6 +19,9 @@ export class InterfaceManagerService {
   }
   postUserContactManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/user/Edit', body);
+  }
+  getAddUserContactManager = (): Observable<any> => {
+    return this.mainService.GET('V1/user/Add');
   }
   // /////
 

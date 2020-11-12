@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { addUserManager } from './DI/add-user-manager';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -10,9 +8,13 @@ export class AddUserManagerService {
 
   constructor() { }
 
-  addUserManagerConfig = () => {
-    return addUserManager;
-  }
+  // addUserManagerConfig = () => {
+  //   this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {
+  //     if (res) {
+  //       return res;
+  //     }
+  //   })
+  // }
   private getAUserProvince = (): number[] => {
     return this.dataSource.provinceItems.map(ids => {
       return ids.id
@@ -23,9 +25,9 @@ export class AddUserManagerService {
       return ids.id
     });
   }
-  private getAUserPersonalize = () => {
-    return this.dataSource.userInfo;
-  }
+  // private getAUserPersonalize = () => {
+  //   return this.dataSource.userInfo;
+  // }
   getSelectedActions = (): string[] => {
     const selectedActions: string[] = [];
     this.dataSource.appItems.map(vals1 => {
@@ -44,20 +46,20 @@ export class AddUserManagerService {
   }
   addAContact = (dataSource: any) => {
     this.dataSource = dataSource;
-    const aUserInfo = this.getAUserPersonalize();
+    // const aUserInfo = this.getAUserPersonalize();
     const vals = {
       selectedRoles: this.getAUserRoleItems(),
       selectedZones: this.getAUserProvince(),
       selectedActions: this.getSelectedActions(),
-      deviceId: aUserInfo.deviceId,
-      displayName: aUserInfo.displayName,
-      email: aUserInfo.email,
-      firstName: aUserInfo.firstName,
-      mobile: aUserInfo.mobile,
-      displayMobile: aUserInfo.displayMobile,
-      sureName: aUserInfo.sureName,
-      userCode: aUserInfo.userCode,
-      isActive: aUserInfo.isActive
+      // deviceId: aUserInfo.deviceId,
+      // displayName: aUserInfo.displayName,
+      // email: aUserInfo.email,
+      // firstName: aUserInfo.firstName,
+      // mobile: aUserInfo.mobile,
+      // displayMobile: aUserInfo.displayMobile,
+      // sureName: aUserInfo.sureName,
+      // userCode: aUserInfo.userCode,
+      // isActive: aUserInfo.isActive
     }
     console.log(vals);
   }

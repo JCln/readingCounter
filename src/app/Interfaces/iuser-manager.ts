@@ -158,9 +158,11 @@ export interface IAddUserManager {
                             isMetro: boolean,
                             isSelected: boolean
                         }
-                    ]
+                    ],
+                    isSelected: boolean
                 }
-            ]
+            ],
+            isSelected: boolean
         }
     ],
     appItems: [
@@ -199,19 +201,7 @@ export interface IAddUserManager {
             title: string,
             isSelected: boolean
         }
-    ],
-    userInfo: {
-        id: string;
-        userCode: number,
-        username: string,
-        firstName: string,
-        sureName: string,
-        email: string,
-        mobile: string,
-        displayName: string,
-        isActive: boolean,
-        deviceId: string
-    }
+    ]
 }
 
 export interface IAddAUserManager {

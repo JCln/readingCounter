@@ -19,6 +19,7 @@ export class EditContactComponent implements OnInit {
   // province config
   title: string = '';
   allComplete: boolean = false;
+  status: boolean = false;
   // 
   // edit config
   roleItemsData: IRoleItems[] = [];
