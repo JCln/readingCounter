@@ -7,20 +7,20 @@ import { IAddUserManager } from './../Interfaces/iuser-manager';
 })
 export class AddUserManagerService {
   dataSource: any;
+  selectedZones: number[] = [];
+  selectedActions: string[] = [];
 
   constructor() { }
 
-  // addUserManagerConfig = () => {
-  //   this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {
-  //     if (res) {
-  //       return res;
-  //     }
-  //   })
-  // }
-  private getAUserProvince = (): number[] => {
-    return this.dataSource.provinceItems.map(ids => {
-      return ids.id
-    });
+  getAUserProvince = (zoneItems: any) => {
+    zoneItems.map(proIt => {
+      proIt.regionItems.map(regionIt => {
+        regionIt.zoneItems.map(zoneIt => {
+          if (zoneIt.isSelected)
+            this.selectedZones.push(zoneIt.id)
+        })
+      })
+    })
   }
   private getAUserRoleItems = (): number[] => {
     return this.dataSource.roleItems.map(ids => {
@@ -43,11 +43,28 @@ export class AddUserManagerService {
     })
     return selectedActions;
   }
+  addAUserActions = (actionItems: any) => {
+    const selectedActions: string[] = [];
+    console.log(actionItems);
+    
+    actionItems.map(appIt => {
+      appIt.moduleItems.map(moduleIt => {
+        moduleIt.controllerItems.map(ctrlIt => {
+          ctrlIt.actionItems.map(actionIt => {
+            if (actionIt.isSelected) {
+              console.log(actionIt.value);
+              selectedActions.push(actionIt.value)
+            }
+          })
+        })
+      })
+    })
+  }
   addAContact = (dataSource: IAddUserManager) => {
     this.dataSource = dataSource;
     const vals = {
       selectedRoles: this.getAUserRoleItems(),
-      selectedZones: this.getAUserProvince(),
+      selectedZones: this.selectedZones,
       selectedActions: this.getSelectedActions(),
       // deviceId: aUserInfo.deviceId,
       // displayName: aUserInfo.displayName,

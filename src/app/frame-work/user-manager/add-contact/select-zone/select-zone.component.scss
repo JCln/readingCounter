@@ -1,0 +1,94 @@
+@import '../../../../../assets/variable';
+
+main {
+  direction: rtl;
+}
+
+._content {
+  background: $gray_d;
+  padding: .2rem;
+  margin: .2rem;
+  border-radius: $border_s;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 17rem));
+  grid-auto-flow: dense;
+}
+
+.l_1_c,
+.l_2,
+.l_3 {
+  border-radius: $border_s;
+  padding: 0.3rem .2rem;
+}
+
+.l_1 {
+  display: grid;
+  gap: .2rem;
+  grid-template-columns: repeat(6, 1fr);
+
+  .l_1_c {
+    background: $blue_ll;
+    color: $gray_dr;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .1rem;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: .5rem;
+      border-style: solid;
+      border-color: $blue_l transparent transparent transparent;
+    }
+  }
+}
+
+.l_2 {
+  .l_2_c {
+    background: $white;
+    color: $gray_dr;
+    margin-bottom: .2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+}
+
+.l_3_c {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  background: $gray_l;
+
+  .l_3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+}
+
+::ng-deep {
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 .5rem;
+  }
+}
+
+// ts config
+.toggle {
+  display: flex;
+  flex-wrap: wrap;
+  // grid-template-columns: repeat(auto-fit, minmax(7rem, 8rem));
+  // grid-template-rows: repeat(6, 1fr);
+}
+
+.toggle_content {
+  grid-template-columns: auto;
+}
+
+// 
+.mat-horizontal-stepper-header-container {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+}

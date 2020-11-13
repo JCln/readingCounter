@@ -1,73 +1,86 @@
-<main>
-    <button (click)="provinceDisplayType()">changeStyle</button>
-    <section class="l_1">
-        <div class="l_1_c" *ngFor="let provinceIt of provinceItemsData">
-            <mat-checkbox class="example-margin" [checked]="allComplete" [indeterminate]="someComplete()"
-                (change)="setAll($event.checked)" [(ngModel)]="provinceIt.isSelected">
-                {{provinceIt.title}}
-            </mat-checkbox>
-        </div>
-    </section>
-    <app-user-inputs></app-user-inputs>
-    <section class="_content" *ngFor="let provinceIt of provinceItemsData">
-        <div class="l_2" *ngFor="let regionIt of provinceIt.regionItems">
+<mat-horizontal-stepper #stepper>
 
-            <div class="l_2_c">
-                <mat-checkbox (change)="setAllL2($event.checked , regionIt)" [(ngModel)]="regionIt.isSelected"
-                    (ngModelChange)="updateAll(provinceIt)">
-                    {{regionIt.title}}
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>مشخصات کاربر</ng-template>
+            <app-user-inputs></app-user-inputs>
+            <div>
+                <button mat-button matStepperNext>صفحه بعد</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>دسترسی به مناطق</ng-template>
+            <app-select-zone></app-select-zone>
+            <div>
+                <button mat-button matStepperPrevious>صفحه قبل</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>سطح دسترسی به خدمات</ng-template>
+            <section class="auth_1_container">
+                <div [ngClass]="{'active_tab': item.title === switchCaseName}" class="auth_1_item"
+                    *ngFor="let item of addContactData" (click)="changeSwitchCase(item.title)">
+                    {{item.title}}
+                </div>
+            </section>
+            <section class="auth_1" *ngFor="let item of addContactData" [ngSwitch]="item.title">
+                <div *ngSwitchCase="switchCaseName">
+                    <section class=" auth_2" *ngFor="let moduleIt of item.moduleItems">
+                        <div class="text">{{moduleIt.title}}</div>
+                        <div class="hr"></div>
+
+                        <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
+                            <div class="text_btn">{{controllerIt.title}}</div>
+
+                            <section class="auth_4">
+                                <div class="checkboxes" *ngFor="let actionIt of controllerIt.actionItems">
+                                    <mat-checkbox [(ngModel)]="actionIt.isSelected">
+                                        <!-- (ngModelChange)="updateAllComplete()" -->
+                                        {{actionIt.title}}
+                                    </mat-checkbox>
+                                </div>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+            </section>
+
+            <div>
+                <button mat-button matStepperPrevious>صفحه قبل</button>
+                <button mat-button matStepperNext (click)="addAContact()">صفحه بعد</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step errorMessage="Address is required.">
+        <ng-template matStepLabel>گروه دسترسی</ng-template>
+        <section class="role_items">
+            <h2>گروه دسترسی</h2>
+            <div class="roles" *ngFor="let roleItems of roleItemsData">
+                <mat-checkbox>
+                    {{roleItems.title}}
                 </mat-checkbox>
             </div>
-
-            <div class="l_3_c" (click)="this.status = !this.status" [ngClass]="status ? 'toggle' : 'l_3_c'">
-                <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
-                    <mat-checkbox [(ngModel)]="zoneIt.isSelected" (ngModelChange)="updateAllL2Complete(regionIt)">
-                        {{zoneIt.title}}
-                    </mat-checkbox>
-                </div>
-            </div>
-
-        </div>
-    </section>
-</main>
-
-<section class="auth_1_container">
-    <div [ngClass]="{'active_tab': item.title === switchCaseName}" class="auth_1_item"
-        *ngFor="let item of addContactData" (click)="changeSwitchCase(item.title)">
-        {{item.title}}
-    </div>
-</section>
-<section class="auth_1" *ngFor="let item of addContactData" [ngSwitch]="item.title">
-    <div *ngSwitchCase="switchCaseName">
-        <section class=" auth_2" *ngFor="let moduleIt of item.moduleItems">
-            <div class="text">{{moduleIt.title}}</div>
-            <div class="hr"></div>
-
-            <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
-                <div class="text_btn">{{controllerIt.title}}</div>
-
-                <section class="auth_4">
-                    <div class="checkboxes" *ngFor="let actionIt of controllerIt.actionItems">
-                        <mat-checkbox [(ngModel)]="actionIt.isSelected">
-                            <!-- (ngModelChange)="updateAllComplete()" -->
-                            {{actionIt.title}}
-                        </mat-checkbox>
-                    </div>
-                </section>
-            </section>
         </section>
-    </div>
-</section>
+        <div>
+            <button mat-button matStepperPrevious>صفحه قبل</button>
+            <button mat-button matStepperNext>صفحه بعد</button>
+        </div>
+    </mat-step>
 
-<section class="role_items">
-    <h2>نقش ها</h2>
-    <div class="roles" *ngFor="let roleItems of roleItemsData">
-        <mat-checkbox>
-            {{roleItems.title}}
-        </mat-checkbox>
-    </div>
-</section>
+    <mat-step>
+        <ng-template matStepLabel>ذخیره</ng-template>
+        <section class="accept">
+            <button class="btn_1" (click)="addAContact()">ذخیره تغییرات</button>
+            <button mat-button matStepperPrevious>صفحه قبل</button>
+        </section>
 
-<section class="accept">
-    <button class="btn_1" (click)="addAContact()">ذخیره تغییرات</button>
-</section>
+    </mat-step>
+
+</mat-horizontal-stepper>
