@@ -45,14 +45,11 @@ export class AddUserManagerService {
   }
   addAUserActions = (actionItems: any) => {
     const selectedActions: string[] = [];
-    console.log(actionItems);
-    
     actionItems.map(appIt => {
       appIt.moduleItems.map(moduleIt => {
         moduleIt.controllerItems.map(ctrlIt => {
           ctrlIt.actionItems.map(actionIt => {
             if (actionIt.isSelected) {
-              console.log(actionIt.value);
               selectedActions.push(actionIt.value)
             }
           })
@@ -65,7 +62,7 @@ export class AddUserManagerService {
     const vals = {
       selectedRoles: this.getAUserRoleItems(),
       selectedZones: this.selectedZones,
-      selectedActions: this.getSelectedActions(),
+      selectedActions: this.selectedActions,
       // deviceId: aUserInfo.deviceId,
       // displayName: aUserInfo.displayName,
       // email: aUserInfo.email,

@@ -54,7 +54,7 @@ export class AddContactComponent implements OnInit {
     this.switchCaseName = item;
   }
   addAContact = () => {
-    this.addUserManagerService.addAUserActions(this.addContactData);
+    this.addUserManagerService.addAUserActions(this.addContactData);    
   }
   getContactSource = () => {
     this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {
