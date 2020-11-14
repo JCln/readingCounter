@@ -1,144 +1,9 @@
-@import '../../../../assets/variable.scss';
+@import '../../../../assets/variable';
 @import '../../../../assets/button.scss';
-
-$blue_darker: #000A63;
-$blue_dark: #193E77;
-$blue_medium: #002A69;
-$blue_lovely: #0045CB;
-
-.auth_1 {
-  // display: flex;
-  // flex-direction: column;
-  // grid-template-columns: repeat(auto-fit, minmax(8rem, 10rem));
-  // gap: .3rem;
-  direction: rtl;
-
-  // .auth_1_item {
-  //   display: grid;
-  //   justify-content: center;
-  //   align-items: center;
-  //   border: 1px solid $blue_lovely;
-  //   padding: $font_05;
-  //   margin-bottom: $font_xs;
-  //   max-width: 13rem;
-  //   border-radius: 5px;
-  //   font-size: $font_l;
-  //   font-weight: 600;
-  //   color: $blue_lovely;
-  //   background-color: $white;
-  //   box-shadow: 1px 1px 3px 0px $gray_e3;
-
-  // &:hover,
-  // &:focus,
-  // &:active {
-  //   background-color: $blue_d;
-  //   color: $gray_l;
-  // }
-  // }
-
-}
-
-.auth_1_container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
-  gap: .25rem;
-  direction: rtl;
-
-  .auth_1_item {
-    display: grid;
-    place-content: center;
-    border: 1px solid $blue_lovely;
-    padding: $font_05;
-    margin: $font_s 0;
-    border-radius: 5px;
-    font-size: $font_l;
-    font-weight: 600;
-    color: $blue_lovely;
-    background-color: $white;
-    box-shadow: 1px 1px 3px 0px $gray_e3;
-    cursor: pointer;
-  }
-}
-
-// active auth1 tab
-.active_tab {
-  background-color: $blue_d !important;
-  color: $gray_l !important;
-}
-
-// 
-
-.auth_2 {
-  padding: $font_xs;
-  margin-bottom: $font_s;
-  border-radius: $border_s;
-  min-height: 25rem;
-
-  &:nth-child(odd) {
-    background-color: $blue_darker;
-
-    .auth_3 {
-      background-color: $blue_medium;
-    }
-  }
-
-  &:nth-child(even) {
-    background-color: $blue_medium;
-
-    .auth_3 {
-      background-color: $blue_darker;
-    }
-  }
-
-}
-
-.auth_3 {
-  margin: $font_05;
-  margin-top: 2rem;
-  padding: $font_xxs;
-  border-radius: $border_s;
-  min-height: 10rem;
-}
-
-.auth_4 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 11rem));
-  gap: .3rem;
-
-  .checkboxes {
-    display: flex;
-    background: whitesmoke;
-    border-radius: 15px;
-    padding: .25rem;
-  }
-}
-
-.text {
-  padding: 0 $font_05;
-  color: $gray_l;
-  font-size: $font_m;
-}
-
-.text_btn {
-  width: 8rem;
-  padding: $font_05;
-  margin-bottom: $font_05;
-  font-size: $font_m;
-  color: $gray_l;
-  border: 2px solid $gray_l;
-  box-shadow: 1px 1px 3px 0px $gray_d5;
-}
 
 .btn_1 {
   color: $gray_l;
 }
-
-.hr {
-  width: 7rem;
-  height: .2rem;
-  background-color: $gray_l;
-}
-
 
 // materials 
 ::ng-deep {
@@ -153,6 +18,50 @@ $blue_lovely: #0045CB;
       font-family: BLotus, "Blotus", tahoma, Sans-Serif;
     }
   }
+
+  .mat-horizontal-stepper-header-container {
+    direction: rtl;
+    border: 2px solid $blue_d;
+    border-radius: 6rem;
+    padding: $font_05;
+    margin-bottom: 1rem;
+  }
+
+  .mat-step-text-label {
+    font-size: 1.2rem;
+    padding-right: $font_05;
+  }
+
+  .mat-horizontal-stepper-header .mat-step-icon {
+    font-size: $font_s;
+    font-weight: 600;
+  }
+
+  .mat-horizontal-stepper-header {
+    pointer-events: none !important;
+  }
+}
+
+.mat-stepper-horizontal {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  padding: $font_05;
+}
+
+// 
+._special {
+  background-color: $blue_l;
+  color: $gray_l;
+}
+
+.accept {
+  display: flex;
+}
+
+.btn_2 {
+  margin: .25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 

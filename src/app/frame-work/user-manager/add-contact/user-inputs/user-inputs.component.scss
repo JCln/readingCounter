@@ -1,0 +1,27 @@
+@import '../../../../../assets/variable.scss';
+@import '../../../../../assets/button.scss';
+
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
+  gap: .87rem;
+}
+
+// .mat-stepper-horizontal {
+//   font-family: $font_family;
+// }
+
+// .mat-horizontal-content-container {
+//   direction: rtl;
+// }
+
+.btn_2 {
+  margin: .25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-form-field {
+  text-align: right;
+}

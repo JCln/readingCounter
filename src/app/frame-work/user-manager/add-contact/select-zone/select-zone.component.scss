@@ -1,4 +1,5 @@
 @import '../../../../../assets/variable';
+@import '../../../../../assets/button.scss';
 
 main {
   direction: rtl;
@@ -74,6 +75,17 @@ main {
   .mat-checkbox-layout .mat-checkbox-label {
     margin: 0 .5rem;
   }
+}
+
+.accept {
+  display: flex;
+}
+
+.btn_2 {
+  margin: .25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // ts config

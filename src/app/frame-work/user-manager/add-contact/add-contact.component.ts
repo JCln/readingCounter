@@ -26,11 +26,9 @@ export class AddContactComponent implements OnInit {
     deviceId: ''
   }
   personalizeInfo: IAddAUserManager;
+  provinceItemsData: any;
   dataSource: any;
 
-  // swtich case title
-  switchCaseName: string = '';
-  // 
   // stepper
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -49,13 +47,6 @@ export class AddContactComponent implements OnInit {
 
   ) {
   }
-
-  changeSwitchCase = (item: string) => {
-    this.switchCaseName = item;
-  }
-  addActionItems = () => {
-    this.addUserManagerService.addAUserActions(this.addContactData);
-  }
   addAContact = () => {
     this.addUserManagerService.addAContact(this.dataSource);
   }
@@ -65,6 +56,7 @@ export class AddContactComponent implements OnInit {
         this.dataSource = res;
         this.roleItemsData = res.roleItems;
         this.addContactData = res.appItems;
+        this.provinceItemsData = res.provinceItems;
       }
     })
   }

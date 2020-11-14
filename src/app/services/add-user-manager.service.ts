@@ -9,9 +9,11 @@ export class AddUserManagerService {
   dataSource: any;
   selectedZones: number[] = [];
   selectedActions: string[] = [];
+  selectedPersonalInfos: any;
 
-  constructor() { }
-
+  addAUserPersonalInfo = (personalItems: any) => {
+    this.selectedPersonalInfos = personalItems.value;
+  }
   getAUserProvince = (zoneItems: any) => {
     zoneItems.map(proIt => {
       proIt.regionItems.map(regionIt => {
@@ -26,22 +28,6 @@ export class AddUserManagerService {
     return this.dataSource.roleItems.map(ids => {
       return ids.id
     });
-  }
-  getSelectedActions = (): string[] => {
-    const selectedActions: string[] = [];
-    this.dataSource.appItems.map(vals1 => {
-      vals1.moduleItems.map(vals2 => {
-        vals2.controllerItems.map(vals3 => {
-          vals3.actionItems.map(vals4 => {
-            if (vals4.isSelected === true)
-              selectedActions.push(vals4.value);
-            if (vals4.isSelected === false)
-              vals4.value = ''
-          })
-        })
-      })
-    })
-    return selectedActions;
   }
   addAUserActions = (actionItems: any) => {
     actionItems.map(appIt => {
@@ -62,15 +48,15 @@ export class AddUserManagerService {
       selectedRoles: this.getAUserRoleItems(),
       selectedZones: this.selectedZones,
       selectedActions: this.selectedActions,
-      // deviceId: aUserInfo.deviceId,
-      // displayName: aUserInfo.displayName,
-      // email: aUserInfo.email,
-      // firstName: aUserInfo.firstName,
-      // mobile: aUserInfo.mobile,
-      // displayMobile: aUserInfo.displayMobile,
-      // sureName: aUserInfo.sureName,
-      // userCode: aUserInfo.userCode,
-      // isActive: aUserInfo.isActive
+      deviceId: this.selectedPersonalInfos.deviceId,
+      displayName: this.selectedPersonalInfos.displayName,
+      email: this.selectedPersonalInfos.email,
+      firstName: this.selectedPersonalInfos.firstName,
+      mobile: this.selectedPersonalInfos.mobile,
+      displayMobile: this.selectedPersonalInfos.displayMobile,
+      sureName: this.selectedPersonalInfos.sureName,
+      userCode: this.selectedPersonalInfos.userCode,
+      isActive: this.selectedPersonalInfos.isActive
     }
     console.log(vals);
   }

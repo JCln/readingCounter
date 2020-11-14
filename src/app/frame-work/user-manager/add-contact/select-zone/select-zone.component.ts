@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { AddUserManagerService } from './../../../../services/add-user-manager.service';
 
@@ -11,24 +10,15 @@ import { AddUserManagerService } from './../../../../services/add-user-manager.s
 export class SelectZoneComponent implements OnInit {
   switchDisplay: boolean = false;
   // province config
-  provinceItemsData: any;
+  @Input() provinceItemsData: any;
   title: string = '';
   allComplete: boolean = false;
-  
+
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
     private addUserManagerService: AddUserManagerService
   ) { }
 
-  getContactSource = () => {
-    this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {
-      if (res) {
-        this.provinceItemsData = res.provinceItems;        
-      }
-    })
-  }
   ngOnInit(): void {
-    this.getContactSource();
   }
   someComplete(): boolean {
     const a: Array<any> = [];

@@ -6,10 +6,11 @@ import { AddContactRoutingModule } from './add-contact-routing.module';
 import { AddContactComponent } from './add-contact.component';
 import { UserInputsComponent } from './user-inputs/user-inputs.component';
 import { SelectZoneComponent } from './select-zone/select-zone.component';
+import { SelectActionComponent } from './select-action/select-action.component';
 
 
 @NgModule({
-  declarations: [AddContactComponent, UserInputsComponent, SelectZoneComponent],
+  declarations: [AddContactComponent, UserInputsComponent, SelectZoneComponent, SelectActionComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,
