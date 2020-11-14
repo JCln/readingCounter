@@ -12,7 +12,7 @@ table {
 .mat-form-field {
   font-size: 14px;
   width: 100%;
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: $font_family;
 }
 
 td,
@@ -63,7 +63,7 @@ td.mat-cell {
 
 ._key,
 ._value {
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: $font_family;
 }
 
 .add_new {
@@ -75,7 +75,7 @@ td.mat-cell {
 .mat-dialog-content,
 td,
 th {
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: $font_family;
   font-size: $font_s;
 }
 
@@ -83,7 +83,7 @@ th {
 ::ng-deep {
   .mat-option-text {
     text-align: right;
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-family: $font_family;
   }
 
   .mat-dialog-container {
@@ -100,7 +100,7 @@ th {
   }
 
   .mat-select {
-    font-family: inherit;
+    font-family: $font_family;
   }
 
 }

@@ -3,7 +3,7 @@
 
 .mat-form-field {
   text-align: right;
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: $font_family;
 }
 
 .mat-dialog-content {
@@ -42,7 +42,7 @@
 }
 
 h2 {
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family: $font_family;
   font-size: 1.5rem;
   font-weight: 600;
   color: $gray_l;
@@ -50,6 +50,7 @@ h2 {
   border-radius: 15px;
   padding: 1rem;
 }
+
 .mat-dialog-container {
   border: 1px solid $red;
 }

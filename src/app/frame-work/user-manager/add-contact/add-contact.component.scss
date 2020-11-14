@@ -15,7 +15,7 @@
       color: $blue_d;
       line-height: 2;
       border-radius: $border_s;
-      font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+      font-family:$font_family;
     }
   }
 
@@ -43,7 +43,7 @@
 }
 
 .mat-stepper-horizontal {
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-family:$font_family;
   padding: $font_05;
 }
 

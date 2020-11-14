@@ -1,22 +1,24 @@
+@import '../../../assets/variable.scss';
+
 ::ng-deep {
   .snack_danger {
     background-color: #f63e38;
-    font-size: 1.2rem;
+    font-size: $font_s;
     color: #F2F3F4;
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-family:$font_family;
   }
 
   .snack_warn {
     background-color: lightgoldenrodyellow;
-    font-size: 1.2rem;
+    font-size: $font_s;
     color: #F2F3F4;
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-family:$font_family;
   }
 
   .snack_success {
     background-color: green;
-    font-size: 1.2rem;
+    font-size: $font_s;
     color: #F2F3F4;
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-family:$font_family;
   }
 }
