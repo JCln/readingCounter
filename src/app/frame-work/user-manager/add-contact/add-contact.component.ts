@@ -53,8 +53,11 @@ export class AddContactComponent implements OnInit {
   changeSwitchCase = (item: string) => {
     this.switchCaseName = item;
   }
+  addActionItems = () => {
+    this.addUserManagerService.addAUserActions(this.addContactData);
+  }
   addAContact = () => {
-    this.addUserManagerService.addAUserActions(this.addContactData);    
+    this.addUserManagerService.addAContact(this.dataSource);
   }
   getContactSource = () => {
     this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {

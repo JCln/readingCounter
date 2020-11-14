@@ -44,13 +44,12 @@ export class AddUserManagerService {
     return selectedActions;
   }
   addAUserActions = (actionItems: any) => {
-    const selectedActions: string[] = [];
     actionItems.map(appIt => {
       appIt.moduleItems.map(moduleIt => {
         moduleIt.controllerItems.map(ctrlIt => {
           ctrlIt.actionItems.map(actionIt => {
             if (actionIt.isSelected) {
-              selectedActions.push(actionIt.value)
+              this.selectedActions.push(actionIt.value)
             }
           })
         })
