@@ -4,10 +4,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { RegionRoutingModule } from './region-routing.module';
 import { RegionComponent } from './region.component';
+import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 
 
 @NgModule({
-  declarations: [RegionComponent],
+  declarations: [RegionComponent, RegionAddDgComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,

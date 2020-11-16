@@ -6,8 +6,8 @@ import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IZoneManager } from 'src/app/Interfaces/izone-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from '../add-new/add-new.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';
 
 interface trueFalse {
   name: string;
@@ -52,10 +52,10 @@ export class KarbariComponent implements OnInit {
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      const dialogRef = this.dialog.open(KarbariAddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addKarbari(result).subscribe(res => {
+          this.interfaceManagerService.addKarbari(result.value).subscribe(res => {
             if (res) {
               console.log(res);
 

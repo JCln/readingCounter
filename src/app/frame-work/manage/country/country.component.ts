@@ -3,11 +3,11 @@ import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 
-import { AddNewComponent } from '../add-new/add-new.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ICountryManager } from './../../../Interfaces/icountry-manager';
 import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { InterfaceManagerService } from './../../../services/interface-manager.service';
+import { CountryAddDgComponent } from './country-add-dg/country-add-dg.component';
 
 @Component({
   selector: 'app-country',
@@ -29,7 +29,7 @@ export class CountryComponent implements OnInit {
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      const dialogRef = this.dialog.open(CountryAddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addCountryManager(result).subscribe(res => {

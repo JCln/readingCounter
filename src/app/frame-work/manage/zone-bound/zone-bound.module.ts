@@ -4,10 +4,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ZoneBoundRoutingModule } from './zone-bound-routing.module';
 import { ZoneBoundComponent } from './zone-bound.component';
+import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.component';
 
 
 @NgModule({
-  declarations: [ZoneBoundComponent],
+  declarations: [ZoneBoundComponent, ZoneBoundAddDgComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,

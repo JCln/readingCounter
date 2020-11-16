@@ -4,10 +4,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from '../add-new/add-new.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ICounterState } from './../../../Interfaces/icounter-state';
 import { ITrueFalseFilter, TrueFalseFilter } from './../../../Interfaces/itrue-false-filter';
+import { CounterStateAddDgComponent } from './counter-state-add-dg/counter-state-add-dg.component';
 
 @Component({
   selector: 'app-counter-state',
@@ -64,16 +64,18 @@ export class CounterStateComponent implements OnInit {
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      const dialogRef = this.dialog.open(CounterStateAddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.interfaceManagerService.addCounterState(result).subscribe(res => {
-            if (res) {
-              console.log(res);
+        console.log(result);
+        
+        // if (result) {
+        //   this.interfaceManagerService.addCounterState(result).subscribe(res => {
+        //     if (res) {
+        //       console.log(res);
 
-            }
-          })
-        }
+        //     }
+        //   })
+        // }
       });
     });
   }

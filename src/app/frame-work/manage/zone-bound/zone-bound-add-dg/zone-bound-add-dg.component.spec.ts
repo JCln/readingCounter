@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProvinceItemsComponent } from './province-items.component';
+import { ZoneBoundAddDgComponent } from './zone-bound-add-dg.component';
 
-describe('ProvinceItemsComponent', () => {
-  let component: ProvinceItemsComponent;
-  let fixture: ComponentFixture<ProvinceItemsComponent>;
+describe('ZoneBoundAddDgComponent', () => {
+  let component: ZoneBoundAddDgComponent;
+  let fixture: ComponentFixture<ZoneBoundAddDgComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProvinceItemsComponent ]
+      declarations: [ ZoneBoundAddDgComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProvinceItemsComponent);
+    fixture = TestBed.createComponent(ZoneBoundAddDgComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

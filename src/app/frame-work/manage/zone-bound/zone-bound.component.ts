@@ -5,9 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from '../add-new/add-new.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IZoneBoundManager } from './../../../Interfaces/izone-bound-manager';
+import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.component';
 
 @Component({
   selector: 'app-zone-bound',
@@ -45,10 +45,10 @@ export class ZoneBoundComponent implements OnInit {
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      const dialogRef = this.dialog.open(ZoneBoundAddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addZoneBoundManager(result).subscribe(res => {
+          this.interfaceManagerService.addZoneBoundManager(result.value).subscribe(res => {
             if (res) {
               console.log(res);
 

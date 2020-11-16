@@ -4,10 +4,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { CounterStateRoutingModule } from './counter-state-routing.module';
 import { CounterStateComponent } from './counter-state.component';
+import { CounterStateAddDgComponent } from './counter-state-add-dg/counter-state-add-dg.component';
 
 
 @NgModule({
-  declarations: [CounterStateComponent],
+  declarations: [CounterStateComponent, CounterStateAddDgComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,

@@ -4,10 +4,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from '../add-new/add-new.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { IZoneManager } from './../../../Interfaces/izone-manager';
+import { ZoneAddDgComponent } from './zone-add-dg/zone-add-dg.component';
 
 @Component({
   selector: 'app-zone',
@@ -39,10 +39,10 @@ export class ZoneComponent implements OnInit {
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      const dialogRef = this.dialog.open(ZoneAddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addZoneManager(result).subscribe(res => {
+          this.interfaceManagerService.addZoneManager(result.value).subscribe(res => {
             if (res) {
               console.log(res);
 
