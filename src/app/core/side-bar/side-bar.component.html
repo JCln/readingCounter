@@ -1,4 +1,4 @@
-<!-- <ul class="ul" [hidden]="sid_isSmall">
+<ul class="ul" [hidden]="sid_isSmall">
     <li *ngFor="let item of currentRoute; index as i">
         <a class="btn">
             <div class="ul_items">
@@ -34,10 +34,12 @@
             </div>
         </li>
     </ul>
-</nav> -->
-<ul class="ul" [hidden]="sid_isSmall">
+</nav>
+
+
+<!-- <ul class="ul" [hidden]="sid_isSmall">
     <li *ngFor="let item of currentRoute; index as i" [routerLink]="[item.routerUrl]" routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }" >
+        [routerLinkActiveOptions]="{ exact: true }">
         <a class="btn">
             <div class="ul_items">
                 <i class="fa fa-bar-chart"></i>
@@ -49,12 +51,7 @@
             </div>
         </a>
         <div class="sub_item" *ngFor="let subItem of item.subItems">
-            <!-- [hidden]="!item.sid_isOpenItems"-->
-            <!-- <a [routerLink]="[subItem.routerUrl ]">{{subItem.name}}</a> -->
-            <!-- <a routerLink="{{subItem.routerUrl}}">{{subItem.name}}</a> -->
-            <!-- <a [routerLink]="[ '/'+ subItem.routerUrl ]">{{subItem.name}}</a> -->
             <a [href]="subItem.routerUrl">{{subItem.name}}</a>
-
         </div>
     </li>
 </ul>
@@ -77,6 +74,6 @@
             </div>
         </li>
     </ul>
-</nav>
+</nav> -->
 <!-- [routerLink]="[item.route]" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"       -->
