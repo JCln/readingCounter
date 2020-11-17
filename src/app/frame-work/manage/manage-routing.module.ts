@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'mz', loadChildren: () => import('./zone/zone.module').then(mz => mz.ZoneModule) },
   { path: 'mrm', loadChildren: () => import('./role-manager/role-manager.module').then(mrm => mrm.RoleManagerModule) },
   { path: 'mzd', loadChildren: () => import('./zone-bound/zone-bound.module').then(mzd => mzd.ZoneBoundModule) },
-  { path: 'k', loadChildren: () => import('./karbari/karbari.module').then(karbari => karbari.KarbariModule) },
+  { path: 'kar', loadChildren: () => import('./karbari/karbari.module').then(karbari => karbari.KarbariModule) },
   { path: 'cst', loadChildren: () => import('./counter-state/counter-state.module').then(counterState => counterState.CounterStateModule) },
   { path: 'rcf', loadChildren: () => import('./reading-config/reading-config.module').then(readingConfig => readingConfig.ReadingConfigModule) },
   { path: 'al', loadChildren: () => import('./authLevels/authlevels.module').then(authLevels => authLevels.AuthlevelsModule) }
