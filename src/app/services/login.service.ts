@@ -18,21 +18,13 @@ export class LoginService {
   ) { }
 
   logging = (userData: ICredentials) => {
-    const isExpired: boolean = this.jwtService.isAccessTokenTokenExpired();
-    if (!isExpired) {
-      console.log('could send data without new token');
-    }
     this.mainService.POSTBODY('v1/account/login', userData).subscribe((res: IAuthTokenType) => {
       if (res) {
         this.jwtService.saveToLocalStorage(res.access_token);
+        this.jwtService.saveToLocalStorageRefresh(res.refresh_token);
         this.router.navigate(['wr']);
       }
 
     })
-    // (error: HttpErrorResponse) => {
-    //   if (error.status === 401) {
-    //     this.router.navigateByUrl('login');
-    //   }
-    // }
   }
 }

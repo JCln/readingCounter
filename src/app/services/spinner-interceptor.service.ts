@@ -4,6 +4,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
 
+import { AuthService } from './auth.service';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { SpinnerWrapperService } from './spinner-wrapper.service';
 
@@ -12,7 +13,7 @@ import { SpinnerWrapperService } from './spinner-wrapper.service';
 })
 export class SpinnerInterceptorService implements HttpInterceptor {
 
-  constructor(private spinnerWrapperService: SpinnerWrapperService, private snackWrapperService: SnackWrapperService) { }
+  constructor(private spinnerWrapperService: SpinnerWrapperService, private snackWrapperService: SnackWrapperService, private authService: AuthService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     this.spinnerWrapperService.startLoading();
     return next.handle(req)
@@ -30,6 +31,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             }
             if (error.status === 500 || error.status === 502 || error.status === 504) {
               this.snackWrapperService.openSnackBar('با عرض پوزش، سرور در حال بروزرسانی است، لطفا دقایقی دیگر امتحان نمایید', 8000, 'snack_danger');
+            }
+            if (error.status === 401) {
+              this.authService.routeToLogin();
             }
           }
 

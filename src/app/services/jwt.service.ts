@@ -34,10 +34,16 @@ export class JwtService {
   saveToLocalStorage = (accessToken: string): void => {
     this.browserStorageService.set(AuthTokenType[0], accessToken);
   }
+  saveToLocalStorageRefresh = (refreshToken: string): void => {
+    this.browserStorageService.set(AuthTokenType[1], refreshToken);
+  }
   getAuthorizationToken = (): string => {
     const a = this.browserStorageService.get(AuthTokenType[0]);
-    if (a.length === 0)
+    if (!a)
       return null;
     return a;
+  }
+  getRefreshToken = (): string => {
+    return this.browserStorageService.get(AuthTokenType[1]);
   }
 }
