@@ -24,6 +24,10 @@ main {
   padding: 0 $font_3 0 $font_s;
 }
 
+form {
+  margin: auto;
+}
+
 .title {
   font-weight: 600;
   color: $blue_dr;
@@ -32,8 +36,6 @@ main {
 
 ._inputs {
   margin-bottom: $font_2;
-  display: flex;
-  flex-direction: column;
   border: $blue_dr;
 
   input::placeholder {
