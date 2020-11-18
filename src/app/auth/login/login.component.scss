@@ -19,9 +19,17 @@ main {
   box-shadow: 2px 2px 5px 0px $gray_d;
 }
 
-.input_1 {
-  max-width: 19rem;
-  padding: 0 $font_3 0 $font_s;
+.input__icons {
+  color: $blue_l;
+
+  i {
+    position: absolute;
+    transform: translateY(50%);
+    vertical-align: middle;
+    margin-left: -2.5rem;
+    font-size: $font_l;
+  }
+
 }
 
 form {
@@ -41,6 +49,12 @@ form {
   input::placeholder {
     color: $blue_l;
   }
+
+  .input_1 {
+    max-width: 19rem;
+    padding: 0 $font_3 0 $font_s;
+    color: $blue_l !important;
+  }
 }
 
 ._inputs,
@@ -56,21 +70,4 @@ form {
   color: $blue_dr;
   font-size: $font_m;
   font-weight: 600;
-}
-
-.input__icons {
-  color: $blue_l;
-
-  i {
-    position: absolute;
-    transform: translateY(50%);
-    vertical-align: middle;
-    margin-left: -2.5rem;
-    font-size: $font_l;
-
-    &.fa-key {
-      transform: rotate(180deg) translateY(-50%);
-    }
-  }
-
 }
