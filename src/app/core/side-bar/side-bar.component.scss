@@ -10,7 +10,6 @@ ul {
   padding: $font_xs 0 $font_xs 0;
   margin-left: .2rem;
   min-height: 80vh;
-  overflow-x: auto;
   overflow-y: unset;
   transition: all ease-in-out 250ms;
 }
@@ -50,48 +49,39 @@ ul li {
     }
   }
 
-  .sub_item {
-    background: $white;
-    padding: .3rem 0.87rem;
-    margin: 0.4rem 0.2rem;
-    text-align: right;
-
-    height: auto;
-    border-radius: $border_s 0 0 $border_s;
-    overflow: visible;
-
-    & a {
-      display: block;
-      position: relative;
-      color: $gray_dr;
-      font-size: $font_m;
-      font-weight: 600;
-      border-radius: 0 $border_s $border_s 0;
-      padding: 0 .3rem;
-
-      &:hover {
-        background: $gray_l;
-      }
-    }
-  }
 
   &.active {
     background: $gray_e3;
+    border: .5rem solid $pink;
 
-    .btn {
-
-      .fa-arrow-circle-down {
-        transform: rotate(180deg);
-        color: $pink;
-      }
+    .fa-arrow-circle-down {
+      transform: rotate(180deg);
+      color: $pink;
     }
 
   }
+}
+
+.sub_item_1,
+.sub_item_2 {
+  background: $white;
+  padding: .3rem 0.87rem;
+  margin: 0.4rem 0.2rem;
+  text-align: right;
+
+  height: auto;
+  border-radius: $border_s;
+  overflow: visible;
+
+  color: $gray_dr;
+  font-size: $font_m;
+  font-weight: 600;
 
   &:hover {
-    background: $gray_d5;
+    background: $gray_l;
   }
 }
+
 
 .ul_items {
   display: flex;
@@ -154,7 +144,6 @@ i.icons {
 }
 
 ._show {
-
   visibility: hidden;
   display: block;
   z-index: 2;
@@ -166,7 +155,7 @@ i.icons {
   min-width: 15rem;
   height: 100%;
   padding: .5rem;
-  min-height: 13rem;
+  min-height: 10rem;
   height: auto;
   border-radius: 15px;
 
@@ -215,5 +204,30 @@ i.icons {
 
   80% {
     visibility: visible;
+  }
+}
+
+// toggle sub_items 
+.toggle_items {
+  .sub_item_1 {
+    display: block !important;
+  }
+}
+
+.sub_item_1 {
+  // display: none;  
+}
+
+// 
+
+.active {
+  background: blue;
+  display: block;
+}
+
+:not(.active) {
+  .sub_item_1 {
+    display: none;
+
   }
 }
