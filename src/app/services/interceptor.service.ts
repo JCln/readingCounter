@@ -50,7 +50,7 @@ export class InterceptorService implements HttpInterceptor {
       .pipe(
         tap((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-            console.log(event.headers.keys);
+            // console.log(event.headers.keys);
           }
         })
       )

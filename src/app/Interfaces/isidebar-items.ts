@@ -5,6 +5,7 @@ export interface ISidebarItems {
             cssClass: string;
             logicalOrder: number;
             route: string;
+            isOpen: boolean;
             subItems?: [
                 {
                     title: string;

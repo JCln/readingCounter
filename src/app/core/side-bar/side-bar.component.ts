@@ -11,9 +11,14 @@ export class SideBarComponent implements OnInit {
   @Input() sid_isSmall: boolean;
   currentRoute: any;
   // currentRoute: ITestSidebar[] = [];
-  
+  // test shows and !show
+  testBoolean: boolean = false;
+  // 
+
 
   constructor(private sideBarItemsService: SidebarItemsService, private testSidebarService: SidebarItemsService) {
+    // let myTag = this.el.nativeElement.getElementByClassName("toggle_items");
+
 
     this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
       if (sidebars) {
@@ -23,20 +28,32 @@ export class SideBarComponent implements OnInit {
     // this.currentRoute = this.testSidebarService.getTestSideTest();
   }
 
+  toggleTest = (i: any) => {
+    const testClass = document.querySelector('.test')[i] as HTMLElement;
+    testClass.classList.toggle('test-item')
+    // if (!testClass.classList.contains('.test-item'))
+    //   testClass.classList.add('test-item');
+    // else {
+    //   testClass.classList.remove('test-item');
+
+    // }
+    // if (item.cssClass.contains(''))
+    // const a = document.querySelector('.sub_item_1'[i]) as HTMLElement;
+    // console.log(a);
+
+    // a[i].classList.toggle('toggle_items');
+  }
   ngOnInit(): void {
   }
 
-  // toggleSubItems = (item: ISidebarItems): void => {
-  //   this.currentRoute.items.subItems = this.currentRoute;
-  //   this.currentRoute.filter(aItem => {
-  //     if (item.sid_isOpenItems !== aItem.sid_isOpenItems)
-  //       aItem.sid_isOpenItems = false
-  //   })
-  //   if (item.sid_isOpenItems)
-  //     item.sid_isOpenItems = false;
-  //   else
-  //     item.sid_isOpenItems = true;
-  // }
+  toggleSubItems = (item: any): void => {
+
+    this.currentRoute.filter(aItem => {
+      aItem.isOpen = false
+      //  if (item.isOpen !== aItem.isOpen)
+    })
+    item.isOpen = true;
+  }
   sid_isSmallStatus = () => {
     this.sid_isSmall = !this.sid_isSmall;
   }

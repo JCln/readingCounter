@@ -1,5 +1,5 @@
 <ul class="ul" [hidden]="sid_isSmall">
-    <li *ngFor="let item of currentRoute; index as i">
+    <li *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)">
         <a class="btn">
             <div class="ul_items">
                 <i class="{{item.cssClass}} icons"></i>
@@ -10,8 +10,9 @@
 
             </div>
         </a>
-        <div class="sub_item" *ngFor="let subItem of item.subItems">
-            <a [routerLink]="subItem.route">{{subItem.title}}</a>
+        <div class="sub_item_1" *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"
+            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [hidden]="!item.isOpen">
+            {{subItem.title}}
         </div>
     </li>
 </ul>
@@ -28,8 +29,9 @@
             <div class="_show">
                 <h3>{{item.title}}</h3>
                 <hr>
-                <div class="sub_item" *ngFor="let subItem of item.subItems">
-                    <a [routerLink]="subItem.route">{{subItem.title}}</a>
+                <div class="sub_item_2" *ngFor="let subItem of item.subItems" [routerLink]="subItem.route"
+                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    {{subItem.title}}
                 </div>
             </div>
         </li>
@@ -75,5 +77,3 @@
         </li>
     </ul>
 </nav> -->
-<!-- [routerLink]="[item.route]" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"       -->
