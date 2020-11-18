@@ -38,7 +38,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     // only one of base layers should be added to the map at instantiation
     this.map = L.map('map', {
-      center: [51.505, -0.09],
+      center: [32.669, 51.664],
       zoom: 13,
       minZoom: 4,
       layers: [streets]
