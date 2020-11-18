@@ -79,10 +79,10 @@ export class InterfaceManagerService {
   //  ///
 
   getRole = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Role/All');
+    return this.mainService.GET('V1/Role/All');
   }
   getRoleDictionaryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Role/Dictionary');
+    return this.mainService.GET('V1/Role/Dictionary');
   }
   deleteRole = (id: number): Observable<any> => {
     return this.mainService.POST('Role/Remove', id);
@@ -91,14 +91,14 @@ export class InterfaceManagerService {
     return this.mainService.POSTBODY('Role/Edit', body);
   }
   addRole = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1.Test/Role/Add', body);
+    return this.mainService.POSTBODY('V1/Role/Add', body);
   }
 
   getCountryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Country/All');
+    return this.mainService.GET('V1/Country/All');
   }
   getCountryDictionaryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Country/Dictionary');
+    return this.mainService.GET('V1/Country/Dictionary');
   }
   deleteCountryManager = (id: number): Observable<any> => {
     return this.mainService.POST('Role/Country/Remove', id);
@@ -111,10 +111,10 @@ export class InterfaceManagerService {
   }
 
   getProvinceManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Province/All');
+    return this.mainService.GET('V1/Province/All');
   }
   getProvinceDictionaryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Province/Dictionary');
+    return this.mainService.GET('V1/Province/Dictionary');
   }
   deleteProvinceManager = (id: number): Observable<any> => {
     return this.mainService.POST('Role/Province/Remove', id);
@@ -127,7 +127,7 @@ export class InterfaceManagerService {
   }
 
   getRegionManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Region/All');
+    return this.mainService.GET('V1/Region/All');
   }
   getRegionDictionaryManager = (): Observable<any> => {
     return this.mainService.GET('V1/Region/Dictionary');
@@ -176,40 +176,40 @@ export class InterfaceManagerService {
 
   // auth Levels 
   getAuthLevel1Manager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/AuthLevel1/all');
+    return this.mainService.GET('V1/AuthLevel1/all');
   }
   getAuthLevel1DictionaryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/AuthLevel1/Dictionary');
+    return this.mainService.GET('V1/AuthLevel1/Dictionary');
   }
   deleteAuthLevel1Manager = (id: number): Observable<any> => {
-    return this.mainService.POST('V1.Test/AuthLevel1/Remove', id);
+    return this.mainService.POST('V1/AuthLevel1/Remove', id);
   }
 
   getAuthLevel2Manager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/AuthLevel2/all');
+    return this.mainService.GET('V1/AuthLevel2/all');
   }
   getAuthLevel2DictionaryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/AuthLevel2/Dictionary');
+    return this.mainService.GET('V1/AuthLevel2/Dictionary');
   }
   deleteAuthLevel2Manager = (id: number): Observable<any> => {
-    return this.mainService.POST('V1.Test/AuthLevel2/Remove', id);
+    return this.mainService.POST('V1/AuthLevel2/Remove', id);
   }
 
   getAuthLevel3Manager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/AuthLevel3/all');
+    return this.mainService.GET('V1/AuthLevel3/all');
   }
   getAuthLevel3DictionaryManager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/AuthLevel3/Dictionary');
+    return this.mainService.GET('V1/AuthLevel3/Dictionary');
   }
   deleteAuthLevel3Manager = (id: number): Observable<any> => {
-    return this.mainService.POST('V1.Test/AuthLevel3/Remove', id);
+    return this.mainService.POST('V1/AuthLevel3/Remove', id);
   }
 
   getAuthLevel4Manager = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/AuthLevel4/all');
+    return this.mainService.GET('V1/AuthLevel4/all');
   }
   deleteAuthLevel4Manager = (id: number): Observable<any> => {
-    return this.mainService.POST('V1.Test/AuthLevel3/Remove', id);
+    return this.mainService.POST('V1/AuthLevel3/Remove', id);
   }
 
   // 
