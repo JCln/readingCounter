@@ -57,7 +57,6 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.mapService.routingControl(this.map);
     this.mapService.fullScreen(this.map);
     this.mapService.addMarkerCluster(this.map);
     this.mapService.buttons(this.map);

@@ -1,4 +1,3 @@
-import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
 import { Injectable } from '@angular/core';
@@ -36,15 +35,6 @@ export class MapService {
     const markers = L.markerClusterGroup();
     markers.addLayer(L.marker(this.getRandomLatLng(map)));
     map.addLayer(markers);
-  }
-
-  routingControl = (map: L.Map) => {
-    L.Routing.control({
-      waypoints: [
-        L.latLng(57.74, 11.94),
-        L.latLng(57.6792, 11.949),
-      ]
-    }).addTo(map);
   }
 
   fullScreen = (map: L.Map) => {
