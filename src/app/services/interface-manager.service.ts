@@ -184,6 +184,9 @@ export class InterfaceManagerService {
   deleteAuthLevel1Manager = (id: number): Observable<any> => {
     return this.mainService.POST('V1/AuthLevel1/Remove', id);
   }
+  addAuthLevel1Manager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/AuthLevel1/Add', body);
+  }
 
   getAuthLevel2Manager = (): Observable<any> => {
     return this.mainService.GET('V1/AuthLevel2/all');
@@ -194,6 +197,10 @@ export class InterfaceManagerService {
   deleteAuthLevel2Manager = (id: number): Observable<any> => {
     return this.mainService.POST('V1/AuthLevel2/Remove', id);
   }
+  addAuthLevel2Manager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/AuthLevel2/Add', body);
+  }
+
 
   getAuthLevel3Manager = (): Observable<any> => {
     return this.mainService.GET('V1/AuthLevel3/all');
@@ -204,6 +211,10 @@ export class InterfaceManagerService {
   deleteAuthLevel3Manager = (id: number): Observable<any> => {
     return this.mainService.POST('V1/AuthLevel3/Remove', id);
   }
+  addAuthLevel3Manager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/AuthLevel3/Add', body);
+  }
+
 
   getAuthLevel4Manager = (): Observable<any> => {
     return this.mainService.GET('V1/AuthLevel4/all');
@@ -211,6 +222,10 @@ export class InterfaceManagerService {
   deleteAuthLevel4Manager = (id: number): Observable<any> => {
     return this.mainService.POST('V1/AuthLevel3/Remove', id);
   }
+  addAuthLevel4Manager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/AuthLevel4/Add', body);
+  }
+
 
   // 
 

@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>افزودن auth 3</h2>
+
+<form [formGroup]="form">
+    <mat-dialog-content>
+
+        <mat-form-field appearance="fill">
+            <mat-label>عنوان</mat-label>
+            <input matInput formControlName="title" placeholder="عنوان">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="fill">
+            <mat-label>کد</mat-label>
+            <input matInput formControlName="id" placeholder="کد">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="fill">
+            <mat-label>authL 2</mat-label>
+            <input matInput formControlName="authLevel2Id" placeholder="authL 2">
+        </mat-form-field><br>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="btn_2" (click)="close()">بازگشت</button>
+        <button class="btn_2 _custom" [mat-dialog-close]="form" (click)="save()">ذخیره</button>
+    </mat-dialog-actions>
+</form>

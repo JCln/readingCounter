@@ -6,9 +6,9 @@ import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from '../../add-new/add-new.component';
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { IAuthLevel4 } from './../../../../Interfaces/iauth-levels';
+import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
 
 
 @Component({
@@ -35,10 +35,10 @@ export class Auth4Component implements OnInit {
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      const dialogRef = this.dialog.open(Auth4AddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addProvinceManager(result).subscribe(res => {
+          this.interfaceManagerService.addAuthLevel4Manager(result).subscribe(res => {
             if (res) {
               console.log(res);
 

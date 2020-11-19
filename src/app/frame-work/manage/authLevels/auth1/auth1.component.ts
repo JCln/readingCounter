@@ -6,8 +6,8 @@ import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from '../../add-new/add-new.component';
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';
 
 
 @Component({
@@ -27,14 +27,13 @@ export class Auth1Component implements OnInit {
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
 
-  // add new to auth not working !!!!
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      const dialogRef = this.dialog.open(Auth1AddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addProvinceManager(result).subscribe(res => {
+          this.interfaceManagerService.addAuthLevel1Manager(result).subscribe(res => {
             if (res) {
               console.log(res);
 

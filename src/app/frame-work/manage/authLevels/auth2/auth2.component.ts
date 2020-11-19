@@ -6,9 +6,9 @@ import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { AddNewComponent } from '../../add-new/add-new.component';
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { IAuthLevel2 } from './../../../../Interfaces/iauth-levels';
+import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
 
 @Component({
   selector: 'app-auth2',
@@ -34,10 +34,10 @@ export class Auth2Component implements OnInit {
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      const dialogRef = this.dialog.open(Auth2AddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addProvinceManager(result).subscribe(res => {
+          this.interfaceManagerService.addAuthLevel2Manager(result).subscribe(res => {
             if (res) {
               console.log(res);
 
