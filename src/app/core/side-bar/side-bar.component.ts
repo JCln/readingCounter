@@ -28,21 +28,6 @@ export class SideBarComponent implements OnInit {
     // this.currentRoute = this.testSidebarService.getTestSideTest();
   }
 
-  toggleTest = (i: any) => {
-    const testClass = document.querySelector('.test')[i] as HTMLElement;
-    testClass.classList.toggle('test-item')
-    // if (!testClass.classList.contains('.test-item'))
-    //   testClass.classList.add('test-item');
-    // else {
-    //   testClass.classList.remove('test-item');
-
-    // }
-    // if (item.cssClass.contains(''))
-    // const a = document.querySelector('.sub_item_1'[i]) as HTMLElement;
-    // console.log(a);
-
-    // a[i].classList.toggle('toggle_items');
-  }
   ngOnInit(): void {
   }
 
