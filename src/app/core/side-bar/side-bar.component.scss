@@ -76,6 +76,7 @@ ul li {
   color: $gray_dr;
   font-size: $font_m;
   font-weight: 600;
+  outline: none;
 
   &:hover {
     background: $gray_l;
@@ -206,37 +207,3 @@ i.icons {
     visibility: visible;
   }
 }
-
-// toggle sub_items 
-.toggle_items {
-  .sub_item_1 {
-    display: block !important;
-  }
-}
-
-.sub_item_1 {
-  // display: none;  
-}
-
-// 
-
-.display-none {
-  display: none;
-}
-.display-block {
-  display: block;
-}
-
-.active {
-  background: blue;
-  display: block;
-}
-.test-item {
-  border: 2px solid red;
-}
-// :not(.active) {
-//   .sub_item_1 {
-//     display: none;
-
-//   }
-// }

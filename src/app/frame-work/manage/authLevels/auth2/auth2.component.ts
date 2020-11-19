@@ -17,12 +17,15 @@ import { IAuthLevel2 } from './../../../../Interfaces/iauth-levels';
 })
 export class Auth2Component implements OnInit {
   titleFilter = new FormControl('');
+  authLevel1IdFilter = new FormControl('');
+
   dataSource = new MatTableDataSource();
 
   auth1Dictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'authLevel1Id', 'actions'];
   filterValues = {
     title: '',
+    authLevel1Id: ''
   };
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
@@ -99,6 +102,13 @@ export class Auth2Component implements OnInit {
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       )
+    this.authLevel1IdFilter.valueChanges
+      .subscribe(
+        authLevel1Id => {
+          this.filterValues.authLevel1Id = authLevel1Id;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
@@ -106,7 +116,7 @@ export class Auth2Component implements OnInit {
     this.auth1Dictionary = await this.getAuthLevel1Id();
     console.log(this.auth1Dictionary);
     console.log(this.dataSource.data);
-    
+
     this.convertIdToTitle(rolesData, this.auth1Dictionary);
     this.filter();
   }
@@ -118,6 +128,7 @@ export class Auth2Component implements OnInit {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
+        && data.authLevel1Id.toLowerCase().indexOf(searchTerms.authLevel1Id) !== -1
     }
     return filterFunction;
   }

@@ -18,12 +18,15 @@ import { IAuthLevel3 } from './../../../../Interfaces/iauth-levels';
 })
 export class Auth3Component implements OnInit {
   titleFilter = new FormControl('');
+  authLevel2IdFilter = new FormControl('');
+
   dataSource = new MatTableDataSource();
 
   auth2Dictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'authLevel2Id', 'actions'];
   filterValues = {
     title: '',
+    authLevel2Id: ''
   };
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
@@ -100,6 +103,13 @@ export class Auth3Component implements OnInit {
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       )
+    this.authLevel2IdFilter.valueChanges
+      .subscribe(
+        authLevel2Id => {
+          this.filterValues.authLevel2Id = authLevel2Id;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
@@ -119,6 +129,7 @@ export class Auth3Component implements OnInit {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
+        && data.authLevel2Id.toLowerCase().indexOf(searchTerms.authLevel2Id) !== -1
     }
     return filterFunction;
   }

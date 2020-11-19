@@ -19,6 +19,7 @@ import { IAuthLevel4 } from './../../../../Interfaces/iauth-levels';
 export class Auth4Component implements OnInit {
   titleFilter = new FormControl('');
   authLevel3IdFilter = new FormControl('');
+
   dataSource = new MatTableDataSource();
 
   auth3Dictionary: IDictionaryManager[] = [];
