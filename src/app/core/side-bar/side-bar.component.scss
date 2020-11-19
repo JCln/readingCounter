@@ -207,3 +207,28 @@ i.icons {
     visibility: visible;
   }
 }
+
+// toggle sub_items 
+.toggle_items {
+  .sub_item_1 {
+    display: block !important;
+  }
+}
+
+.sub_item_1 {
+  // display: none;  
+}
+
+// 
+
+.active {
+  background: blue;
+  display: block;
+}
+
+:not(.active) {
+  .sub_item_1 {
+    display: none;
+
+  }
+}
