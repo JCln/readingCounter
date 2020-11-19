@@ -58,7 +58,7 @@ export class Auth3Component implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel3Manager(result).subscribe(res => {
+          this.interfaceManagerService.editAuthLevel3Manager(result).subscribe(res => {
             if (res) {
               console.log(res);
 

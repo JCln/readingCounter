@@ -5,10 +5,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProvinceRoutingModule } from './province-routing.module';
 import { ProvinceComponent } from './province.component';
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
+import { ProvinceEditDgComponent } from './province-edit-dg/province-edit-dg.component';
 
 
 @NgModule({
-  declarations: [ProvinceComponent, ProvinceAddDgComponent],
+  declarations: [ProvinceComponent, ProvinceAddDgComponent, ProvinceEditDgComponent],
   imports: [
     SharedModule,
     ReactiveFormsModule,

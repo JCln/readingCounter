@@ -8,6 +8,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { ICounterState } from './../../../Interfaces/icounter-state';
 import { ITrueFalseFilter, TrueFalseFilter } from './../../../Interfaces/itrue-false-filter';
 import { CounterStateAddDgComponent } from './counter-state-add-dg/counter-state-add-dg.component';
+import { CounterStateEditDgComponent } from './counter-state-edit-dg/counter-state-edit-dg.component';
 
 @Component({
   selector: 'app-counter-state',
@@ -84,6 +85,25 @@ export class CounterStateComponent implements OnInit {
       const dialogRef = this.dialog.open(DeleteDialogComponent);
       dialogRef.afterClosed().subscribe(result => {
         resolve(result)
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(CounterStateEditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.editCounterState(result).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
       });
     });
   }

@@ -8,6 +8,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { IRegionManager } from './../../../Interfaces/iregion-manager';
 import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
+import { RegionEditDgComponent } from './region-edit-dg/region-edit-dg.component';
 
 @Component({
   selector: 'app-region',
@@ -39,6 +40,25 @@ export class RegionComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addRegionManager(result.value).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(RegionEditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.editRegionManager(result).subscribe(res => {
             if (res) {
               console.log(res);
 

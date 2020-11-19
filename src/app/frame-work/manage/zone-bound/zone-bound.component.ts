@@ -8,6 +8,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IZoneBoundManager } from './../../../Interfaces/izone-bound-manager';
 import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.component';
+import { ZoneBoundEditDgComponent } from './zone-bound-edit-dg/zone-bound-edit-dg.component';
 
 @Component({
   selector: 'app-zone-bound',
@@ -63,6 +64,25 @@ export class ZoneBoundComponent implements OnInit {
       const dialogRef = this.dialog.open(DeleteDialogComponent);
       dialogRef.afterClosed().subscribe(result => {
         resolve(result)
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ZoneBoundEditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.editZoneBoundManager(result).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
       });
     });
   }

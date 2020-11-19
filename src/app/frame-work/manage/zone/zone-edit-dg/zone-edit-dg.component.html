@@ -1,0 +1,29 @@
+<h2 mat-dialog-title class="_blue_dark">ویرایش ناحیه</h2>
+
+<form [formGroup]="form">
+    <mat-dialog-content>
+
+        <mat-form-field appearance="fill">
+            <mat-label>عنوان</mat-label>
+            <input matInput formGroupName="title" placeholder="عنوان">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>کد منطقه</mat-label>
+            <input matInput formGroupName="regionId" placeholder="کد منطقه">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>ترتیب</mat-label>
+            <input matInput formGroupName="logicalOrder" placeholder="ترتیب">
+        </mat-form-field>
+
+        <mat-checkbox formGroupName="isMetro">isMetro</mat-checkbox>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="btn_2" (click)="close()">بازگشت</button>
+        <button class="btn_2 _custom _blue_dark" [mat-dialog-close]="form" (click)="save()">ذخیره</button>
+    </mat-dialog-actions>
+</form>

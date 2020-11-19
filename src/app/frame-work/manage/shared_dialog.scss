@@ -8,10 +8,10 @@
 
 .mat-dialog-content {
   display: grid;
-  justify-content: center;
   min-height: 13rem;
-  min-width: 20rem;
-  overflow: hidden;
+  min-width: 28rem;
+  gap: .2rem;
+  overflow: auto;
 }
 
 .mat-dialog-actions {

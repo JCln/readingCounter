@@ -8,6 +8,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';
+import { KarbariEditDgComponent } from './karbari-edit-dg/karbari-edit-dg.component';
 
 interface trueFalse {
   name: string;
@@ -56,6 +57,25 @@ export class KarbariComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addKarbari(result.value).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(KarbariEditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.editKarbari(result).subscribe(res => {
             if (res) {
               console.log(res);
 

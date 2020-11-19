@@ -57,7 +57,7 @@ export class Auth2Component implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel2Manager(result).subscribe(res => {
+          this.interfaceManagerService.editAuthLevel2Manager(result).subscribe(res => {
             if (res) {
               console.log(res);
 

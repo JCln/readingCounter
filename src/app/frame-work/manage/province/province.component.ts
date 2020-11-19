@@ -8,6 +8,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IProvinceManager } from './../../../Interfaces/iprovince-manager';
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
+import { ProvinceEditDgComponent } from './province-edit-dg/province-edit-dg.component';
 
 @Component({
   selector: 'app-province',
@@ -37,6 +38,25 @@ export class ProvinceComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addProvinceManager(result.value).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ProvinceEditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.editProvinceManager(result).subscribe(res => {
             if (res) {
               console.log(res);
 

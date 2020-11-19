@@ -53,7 +53,7 @@ export class Auth1Component implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel1Manager(result).subscribe(res => {
+          this.interfaceManagerService.editAuthLevel1Manager(result).subscribe(res => {
             if (res) {
               console.log(res);
 

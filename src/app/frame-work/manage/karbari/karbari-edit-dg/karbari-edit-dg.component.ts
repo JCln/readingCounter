@@ -1,0 +1,35 @@
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+@Component({
+  selector: 'app-karbari-edit-dg',
+  templateUrl: './karbari-edit-dg.component.html',
+  styleUrls: ['./karbari-edit-dg.component.scss']
+})
+export class KarbariEditDgComponent {
+  form: FormGroup;
+
+  constructor(
+    fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<KarbariEditDgComponent>) {
+    this.form = fb.group({
+      id: 0,
+      moshtarakinId: data.moshtarakinId,
+      title: data.title,
+      provinceId: data.provinceId,
+      isMaskooni: data.isMaskooni,
+      isSaxt: data.isSaxt,
+      hasReadingVibrate: data.hasReadingVibrate
+    })
+
+  }
+  save() {
+    this.dialogRef.close(this.form.value);
+  }
+  close() {
+    this.dialogRef.close();
+  }
+
+}

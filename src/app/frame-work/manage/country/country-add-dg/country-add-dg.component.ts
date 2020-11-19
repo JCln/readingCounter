@@ -1,6 +1,6 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-country-add-dg',
@@ -15,9 +15,9 @@ export class CountryAddDgComponent {
   selectedValue: string;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder,
-    private dialogRef: MatDialogRef<CountryAddDgComponent>,
-    @Inject(MAT_DIALOG_DATA) data: any) {
+  constructor(
+    private dialogRef: MatDialogRef<CountryAddDgComponent>
+  ) {
   }
   save() {
     this.dialogRef.close(this.form.value);

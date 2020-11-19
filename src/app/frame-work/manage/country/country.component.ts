@@ -8,6 +8,7 @@ import { ICountryManager } from './../../../Interfaces/icountry-manager';
 import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { InterfaceManagerService } from './../../../services/interface-manager.service';
 import { CountryAddDgComponent } from './country-add-dg/country-add-dg.component';
+import { CountryEditDgComponent } from './country-edit-dg/country-edit-dg.component';
 
 @Component({
   selector: 'app-country',
@@ -33,6 +34,25 @@ export class CountryComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addCountryManager(result).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(CountryEditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.editCountryManager(result).subscribe(res => {
             if (res) {
               console.log(res);
 

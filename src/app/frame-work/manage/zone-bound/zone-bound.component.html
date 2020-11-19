@@ -56,51 +56,11 @@
         </th>
         <td mat-cell *matCellDef="let person">{{person.zoneId}}</td>
     </ng-container>
-    <!-- <ng-container matColumnDef="govermentalCode">
-        <th  mat-header-cell *matHeaderCellDef>
-            کد دولتی
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="govermentalCodeFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.govermentalCode}}</td>
-    </ng-container>
-    <ng-container matColumnDef="fromRadif">
-        <th  mat-header-cell *matHeaderCellDef>
-            از ردیف
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="fromRadifFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.fromRadif}}</td>
-    </ng-container>
-    <ng-container matColumnDef="toRadif">
-        <th  mat-header-cell *matHeaderCellDef>
-            تا ردیف
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="toRadifFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.toRadif}}</td>
-    </ng-container>
-    <ng-container matColumnDef="dbInitialCatalog">
-        <th  mat-header-cell *matHeaderCellDef>
-            کاتالوگ اولیه
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="dbInitialCatalogFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.dbInitialCatalog}}</td>
-    </ng-container> -->
 
     <ng-container cdkColumnDef="actions">
         <th md-header-cell *matHeaderCellDef></th>
         <td md-cell *matCellDef="let row" class="_actions">
-            <i class="_custom fa fa-edit"></i>|
+            <i (click)="editDialog(row)" class="_custom fa fa-edit"></i>|
             <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash"></i>
         </td>
     </ng-container>

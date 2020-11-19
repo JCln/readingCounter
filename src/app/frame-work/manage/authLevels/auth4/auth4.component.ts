@@ -57,7 +57,7 @@ export class Auth4Component implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel4Manager(result).subscribe(res => {
+          this.interfaceManagerService.editAuthLevel4Manager(result).subscribe(res => {
             if (res) {
               console.log(res);
 

@@ -8,6 +8,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { IZoneManager } from './../../../Interfaces/izone-manager';
 import { ZoneAddDgComponent } from './zone-add-dg/zone-add-dg.component';
+import { ZoneEditDgComponent } from './zone-edit-dg/zone-edit-dg.component';
 
 @Component({
   selector: 'app-zone',
@@ -43,6 +44,25 @@ export class ZoneComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addZoneManager(result.value).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ZoneEditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.editZoneManager(result).subscribe(res => {
             if (res) {
               console.log(res);
 
@@ -99,8 +119,7 @@ export class ZoneComponent implements OnInit {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-    console.log(rolesData);
-
+    
     if (rolesData) {
       this.dataSource.data = rolesData;
       this.dataSource.filterPredicate = this.createFilter();
@@ -136,8 +155,7 @@ export class ZoneComponent implements OnInit {
     }
 
     const zoneDictionary = await this.getZoneDictionary();
-    console.log(zoneDictionary);
-
+    
     this.zoneDictionary = zoneDictionary;
 
     this.convertIdToTitle(rolesData, zoneDictionary);
@@ -150,9 +168,7 @@ export class ZoneComponent implements OnInit {
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
-      console.log(data.isMetro.toString().indexOf(searchTerms.isMetro) !== -1);
-      console.log(data.isMetro.toString());
-
+      
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.regionId.toString().toLowerCase().indexOf(searchTerms.regionId) !== -1
         && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
