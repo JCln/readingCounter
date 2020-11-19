@@ -32,12 +32,14 @@ export class SideBarComponent implements OnInit {
   }
 
   toggleSubItems = (item: any): void => {
+    this.currentRoute.forEach(aItem => {
+      if (item.title !== aItem.title)
+        aItem.isOpen = false
+      else
+        // aItem.isOpen = !aItem.isOpen
+        item.isOpen = true;
 
-    this.currentRoute.filter(aItem => {
-      aItem.isOpen = false
-      //  if (item.isOpen !== aItem.isOpen)
     })
-    item.isOpen = true;
   }
   sid_isSmallStatus = () => {
     this.sid_isSmall = !this.sid_isSmall;

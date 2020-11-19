@@ -9,6 +9,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { IAuthLevel4 } from './../../../../Interfaces/iauth-levels';
 import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
+import { Auth4EditDgComponent } from './auth4-edit-dg/auth4-edit-dg.component';
 
 
 @Component({
@@ -31,11 +32,29 @@ export class Auth4Component implements OnInit {
 
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
 
-  // add auth 2 not working
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth4AddDgComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.addAuthLevel4Manager(result).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(Auth4EditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addAuthLevel4Manager(result).subscribe(res => {

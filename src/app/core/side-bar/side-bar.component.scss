@@ -30,7 +30,7 @@ ul li {
   .btn {
     font-size: $font_m;
     font-weight: 600;
-    color: $gray_dr2;
+    color: $blue_dr;
 
     .on_show {
       display: flex;
@@ -73,7 +73,7 @@ ul li {
   border-radius: $border_s;
   overflow: visible;
 
-  color: $gray_dr;
+  color: $blue_d;
   font-size: $font_m;
   font-weight: 600;
   outline: none;
@@ -82,7 +82,6 @@ ul li {
     background: $gray_l;
   }
 }
-
 
 .ul_items {
   display: flex;
@@ -136,12 +135,13 @@ ul li {
 .btn_2 {
   font-size: $font_m;
   font-weight: 600;
-  color: $gray_dr;
+  color: $blue_dr;
 }
 
 i.icons {
   margin: 0 .5rem;
   font-size: 2rem;
+  color: $blue_d;
 }
 
 ._show {
@@ -205,30 +205,5 @@ i.icons {
 
   80% {
     visibility: visible;
-  }
-}
-
-// toggle sub_items 
-.toggle_items {
-  .sub_item_1 {
-    display: block !important;
-  }
-}
-
-.sub_item_1 {
-  // display: none;  
-}
-
-// 
-
-.active {
-  background: blue;
-  display: block;
-}
-
-:not(.active) {
-  .sub_item_1 {
-    display: none;
-
   }
 }
