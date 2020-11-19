@@ -8,6 +8,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';
+import { Auth1EditDgComponent } from './auth1-edit-dg/auth1-edit-dg.component';
 
 
 @Component({
@@ -31,6 +32,25 @@ export class Auth1Component implements OnInit {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth1AddDgComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.addAuthLevel1Manager(result).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(Auth1EditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addAuthLevel1Manager(result).subscribe(res => {

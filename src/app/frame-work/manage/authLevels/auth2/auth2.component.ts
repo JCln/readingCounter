@@ -9,6 +9,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { IAuthLevel2 } from './../../../../Interfaces/iauth-levels';
 import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
+import { Auth2EditDgComponent } from './auth2-edit-dg/auth2-edit-dg.component';
 
 @Component({
   selector: 'app-auth2',
@@ -35,6 +36,25 @@ export class Auth2Component implements OnInit {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth2AddDgComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.addAuthLevel2Manager(result).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(Auth2EditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addAuthLevel2Manager(result).subscribe(res => {

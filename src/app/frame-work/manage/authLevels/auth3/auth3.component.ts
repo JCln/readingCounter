@@ -9,6 +9,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { IAuthLevel3 } from './../../../../Interfaces/iauth-levels';
 import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
+import { Auth3EditDgComponent } from './auth3-edit-dg/auth3-edit-dg.component';
 
 
 @Component({
@@ -36,6 +37,25 @@ export class Auth3Component implements OnInit {
     const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth3AddDgComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.interfaceManagerService.addAuthLevel3Manager(result).subscribe(res => {
+            if (res) {
+              console.log(res);
+
+            }
+          })
+        }
+      });
+    });
+  }
+  editDialog = (row: any) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(Auth3EditDgComponent, {
+        width: '50%',
+        data: row
+
+      });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addAuthLevel3Manager(result).subscribe(res => {

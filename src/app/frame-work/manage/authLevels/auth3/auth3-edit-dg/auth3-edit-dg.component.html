@@ -1,1 +1,41 @@
-<p>auth3-edit-dg works!</p>
+<h2 mat-dialog-title class="_blue_dark">ویرایش auth 3</h2>
+
+<form [formGroup]="form">
+    <mat-dialog-content>
+
+        <mat-form-field appearance="fill">
+            <mat-label>عنوان</mat-label>
+            <input matInput formControlName="title" placeholder="عنوان">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>کلاس css</mat-label>
+            <input matInput formControlName="cssClass" placeholder="کلاس css">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>authL 2</mat-label>
+            <input matInput formControlName="authLevel2Id" placeholder="authL 2">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>ترتیب</mat-label>
+            <input matInput formControlName="logicalOrder" placeholder="ترتیب">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>مسیر</mat-label>
+            <input matInput formControlName="route" placeholder="مسیر">
+        </mat-form-field>
+
+        <mat-checkbox formControlName="inSidebar">سایدبار</mat-checkbox>
+        <mat-checkbox formControlName="isRefreshable">قابل refresh</mat-checkbox>
+        <mat-checkbox formControlName="isClosable">قابل بستن</mat-checkbox>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="btn_2" (click)="close()">بازگشت</button>
+        <button class="btn_2 _custom _blue_dark" [mat-dialog-close]="form" (click)="save()">ذخیره</button>
+    </mat-dialog-actions>
+</form>

@@ -21,7 +21,7 @@
     <ng-container cdkColumnDef="actions">
         <th md-header-cell *matHeaderCellDef></th>
         <td md-cell *matCellDef="let row" class="_actions">
-            <i class="_custom fa fa-edit"></i>|
+            <i (click)="editDialog(row)" class="_custom fa fa-edit"></i>|
             <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash"></i>
         </td>
     </ng-container>
