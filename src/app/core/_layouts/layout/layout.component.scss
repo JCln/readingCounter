@@ -1,6 +1,6 @@
 .ma {
   display: flex;
-  min-width: 71.87rem;
+  width: 99%;
 
   &router-outlet {
     width: 95%;
@@ -15,9 +15,8 @@ app-tab-wrapper {
   align-items: center;
   top: 3rem;
   margin-bottom: 0.5rem;
-  width: 85%;
+  width: 80%;
   min-height: 4rem;
-  min-width: 55rem;
   border-radius: 0 0 15px 15px;
 }
 
