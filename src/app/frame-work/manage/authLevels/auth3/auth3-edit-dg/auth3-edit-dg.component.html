@@ -1,4 +1,4 @@
-<h2 mat-dialog-title class="_blue_dark">ویرایش auth 3</h2>
+<h2 mat-dialog-title class="_blue_dark">ویرایش کنترلر</h2>
 
 <form [formGroup]="form">
     <mat-dialog-content>
@@ -14,8 +14,12 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>authL 2</mat-label>
-            <input matInput formControlName="authLevel2Id" placeholder="authL 2">
+            <mat-label>ماژول</mat-label>
+            <mat-select name="authLevel2Id">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.value">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill">

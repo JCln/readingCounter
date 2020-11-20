@@ -21,7 +21,7 @@ export class ProvinceComponent implements OnInit {
   logicalOrderFilter = new FormControl('');
   dataSource = new MatTableDataSource();
 
-  provinceDictionary: IDictionaryManager[] = [];
+  countryDictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'countryId', 'logicalOrder', 'actions'];
   filterValues = {
     title: '',
@@ -51,7 +51,7 @@ export class ProvinceComponent implements OnInit {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ProvinceEditDgComponent, {
         width: '50%',
-        data: row
+        data: { row, di: this.countryDictionary }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -87,10 +87,12 @@ export class ProvinceComponent implements OnInit {
     }
   }
   convertIdToTitle = (dataSource: IProvinceManager[], zoneDictionary: IDictionaryManager[]) => {
+
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.id)
+        if (dataSource.countryId == zoneDic.id) {
           dataSource.countryId = zoneDic.title;
+        }
       })
     });
   }
@@ -142,7 +144,7 @@ export class ProvinceComponent implements OnInit {
         )
     }
     const provinceDictionary = await this.getProvinceDictionary();
-    this.provinceDictionary = provinceDictionary;
+    this.countryDictionary = provinceDictionary;
     this.convertIdToTitle(rolesData, provinceDictionary);
   }
   ngOnInit() {

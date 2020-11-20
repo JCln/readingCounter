@@ -37,15 +37,13 @@
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="provinceIdFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
-                        {{truefalse.name}}
+                    <mat-option *ngFor="let truefalse of provinceDictionary" [value]="truefalse">
+                        {{truefalse.title}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </th>
-        <td mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.provinceId"></mat-checkbox>
-        </td>
+        <td mat-cell *matCellDef="let person">{{person.provinceId}}</td>
     </ng-container>
     <ng-container matColumnDef="isMaskooni">
         <th mat-header-cell *matHeaderCellDef>

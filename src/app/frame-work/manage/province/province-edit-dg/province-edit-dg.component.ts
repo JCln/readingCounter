@@ -14,6 +14,7 @@ export class ProvinceEditDgComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ProvinceEditDgComponent>
   ) {
+    data = data.row;
     this.form = fb.group({
       id: data.id,
       title: data.title,

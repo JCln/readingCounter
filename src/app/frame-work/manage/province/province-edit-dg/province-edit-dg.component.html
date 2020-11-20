@@ -9,8 +9,13 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>کد کشور</mat-label>
-            <input matInput formControlName="countryId" placeholder="کد کشور">
+            <mat-label>کشور</mat-label>
+            <mat-select name="countryId">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.value">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+
         </mat-form-field>
 
         <mat-form-field appearance="fill">

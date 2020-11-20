@@ -53,7 +53,9 @@ export class RegionComponent implements OnInit {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(RegionEditDgComponent, {
         width: '50%',
-        data: row
+        data: {
+          row, di: this.regionDictionary
+        }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -91,7 +93,7 @@ export class RegionComponent implements OnInit {
   convertIdToTitle = (dataSource: IRegionManager[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.id)
+        if (zoneDic.id === dataSource.provinceId)
           dataSource.provinceId = zoneDic.title;
       })
     });

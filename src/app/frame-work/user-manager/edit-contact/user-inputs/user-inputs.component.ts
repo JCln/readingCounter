@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
 import { EditContactManagerService } from 'src/app/services/edit-contact-manager.service';
 
 @Component({
@@ -8,26 +7,13 @@ import { EditContactManagerService } from 'src/app/services/edit-contact-manager
   styleUrls: ['./user-inputs.component.scss']
 })
 export class UserInputsComponent implements OnInit {
-  userInputForm: FormGroup;
+  @Input() editInfo: any;
 
-  constructor(fb: FormBuilder, private editUserManagerService: EditContactManagerService) {
-    this.userInputForm = fb.group({
-      userCode: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      firstName: ['', Validators.required],
-      sureName: ['', Validators.required],
-      email: [''],
-      mobile: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern("^[0-9]*$")]],
-      displayMobile: ['', Validators.required],
-      displayName: ['', Validators.required],
-      isActive: [''],
-      deviceId: [''],//, forbiddenNameValidator(/bob/i)   
-    });
+  constructor(private editUserManagerService: EditContactManagerService) {
+
   }
   submit = () => {
-    this.editUserManagerService.addAUserPersonalInfo(this.userInputForm);
+    this.editUserManagerService.addAUserPersonalInfo(this.editInfo);
   }
   ngOnInit(): void {
   }

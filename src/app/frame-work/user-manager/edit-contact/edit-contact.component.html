@@ -1,9 +1,9 @@
 <mat-horizontal-stepper #stepper>
 
-    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+    <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>مشخصات کاربر</ng-template>
-            <app-user-inputs></app-user-inputs>
+            <app-user-inputs [editInfo]="personalizeInfo"></app-user-inputs>
         </form>
     </mat-step>
 

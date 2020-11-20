@@ -36,7 +36,7 @@ export class KarbariComponent implements OnInit {
     { name: 'هیچکدام', value: '' }
   ]
   zoneId: any[] = [];
-  zoneDictionary: IDictionaryManager[] = [];
+  provinceDictionary: IDictionaryManager[] = [];
 
   columnsToDisplay = ['title', 'moshtarakinId', 'provinceId', 'hasReadingVibrate', 'isMaskooni', 'isSaxt', 'actions'];
   filterValues = {
@@ -70,7 +70,10 @@ export class KarbariComponent implements OnInit {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(KarbariEditDgComponent, {
         width: '50%',
-        data: row
+        data: {
+          row,
+          di: this.provinceDictionary
+        }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -105,22 +108,22 @@ export class KarbariComponent implements OnInit {
       });
     }
   }
-  // convertIdToTitle = (dataSource: IZoneManager[], zoneDictionary: IDictionaryManager[]) => {
-  //   zoneDictionary.map(zoneDic => {
-  //     dataSource.map(dataSource => {
-  //       if (zoneDic.id === dataSource.id)
-  //         dataSource.regionId = zoneDic.title;
-  //     })
-  //   });
-  // }
-  // getZoneDictionary = (): any => {
-  //   return new Promise((resolve) => {
-  //     this.interfaceManagerService.getRegionDictionaryManager().subscribe(res => {
-  //       if (res)
-  //         resolve(res);
-  //     })
-  //   });
-  // }
+  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
+    dataSource.map(dataSource => {
+      zoneDictionary.map(zoneDic => {
+        if (zoneDic.title === dataSource.provinceId)
+          dataSource.provinceId = zoneDic.title;
+      })
+    });
+  }
+  getProvinceDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getProvinceDictionaryManager().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getKarbari().subscribe(res => {
@@ -132,7 +135,6 @@ export class KarbariComponent implements OnInit {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-    console.log(rolesData);
 
     if (rolesData) {
       this.dataSource.data = rolesData;
@@ -182,12 +184,11 @@ export class KarbariComponent implements OnInit {
         )
     }
 
-    // const zoneDictionary = await this.getZoneDictionary();
-    // console.log(zoneDictionary);
+    const zoneDictionary = await this.getProvinceDictionary();
 
-    // this.zoneDictionary = zoneDictionary;
+    this.provinceDictionary = zoneDictionary;
 
-    // this.convertIdToTitle(rolesData, zoneDictionary);
+    this.convertIdToTitle(rolesData, zoneDictionary);
 
   }
   ngOnInit() {
@@ -199,7 +200,7 @@ export class KarbariComponent implements OnInit {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.moshtarakinId.toString().toLowerCase().indexOf(searchTerms.moshtarakinId) !== -1
-        && data.provinceId.toString().toLowerCase().indexOf(searchTerms.provinceId) !== -1
+        && data.provinceId.toLowerCase().indexOf(searchTerms.provinceId) !== -1
         && data.hasReadingVibrate.toString().indexOf(searchTerms.hasReadingVibrate) !== -1
         && data.isMaskooni.toString().indexOf(searchTerms.isMaskooni) !== -1
         && data.isSaxt.toString().indexOf(searchTerms.isSaxt) !== -1

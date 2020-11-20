@@ -28,7 +28,7 @@ export class AllContactsComponent implements OnInit {
       cellRendererParams: {
         onClick: this.onBtnClick1.bind(this)
       },
-      minWidth: 150,
+      minWidth: 85,
     }
 
   ];

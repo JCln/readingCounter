@@ -53,7 +53,7 @@ export class Auth3Component implements OnInit {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth3EditDgComponent, {
         width: '50%',
-        data: row
+        data: { row, di: this.auth2Dictionary }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -91,7 +91,7 @@ export class Auth3Component implements OnInit {
   convertIdToTitle = (dataSource: IAuthLevel3[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.id)
+        if (zoneDic.id === dataSource.authLevel2Id)
           dataSource.authLevel2Id = zoneDic.title;
       })
     });

@@ -1,3 +1,10 @@
+<div class="accept">
+    <button class="btn_2" matStepperNext (click)="getAZoneItems()">
+        <i class="fa fa-long-arrow-left"></i>صفحه بعد
+    </button>
+    <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+</div>
+
 <main>
     <button class="fa_icons" (click)="this.switchDisplay = !this.switchDisplay">
         <i *ngIf="!switchDisplay" class="fa fa-list"></i>

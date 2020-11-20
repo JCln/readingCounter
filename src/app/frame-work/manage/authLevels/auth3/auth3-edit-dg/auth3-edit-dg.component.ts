@@ -15,6 +15,7 @@ export class Auth3EditDgComponent {
     private dialogRef: MatDialogRef<Auth3EditDgComponent>,
     fb: FormBuilder
   ) {
+    data = data.row;
     this.form = fb.group({
       id: data.id,
       title: data.title,

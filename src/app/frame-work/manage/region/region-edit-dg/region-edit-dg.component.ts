@@ -13,6 +13,7 @@ export class RegionEditDgComponent {
   constructor(fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<RegionEditDgComponent>) {
+    data = data.row;
     this.form = fb.group({
       id: data.id,
       title: data.title,

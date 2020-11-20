@@ -52,7 +52,7 @@ export class Auth2Component implements OnInit {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth2EditDgComponent, {
         width: '50%',
-        data: row
+        data: { row, di: this.auth1Dictionary }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -134,9 +134,7 @@ export class Auth2Component implements OnInit {
     const rolesData = await this.getDataSource();
     this.dataSource.data = rolesData;
     this.auth1Dictionary = await this.getAuthLevel1Id();
-    console.log(this.auth1Dictionary);
-    console.log(this.dataSource.data);
-
+    
     this.convertIdToTitle(rolesData, this.auth1Dictionary);
     this.filter();
   }

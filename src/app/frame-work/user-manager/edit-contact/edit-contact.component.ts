@@ -14,19 +14,6 @@ import { EditContactManagerService } from './../../../services/edit-contact-mana
 })
 export class EditContactComponent implements OnInit {
   UUid: string = '';
-  userDetails: IUserInfo = {
-    id: '',
-    userCode: 0,
-    username: '',
-    firstName: '',
-    sureName: '',
-    email: '',
-    mobile: '',
-    displayMobile: false,
-    displayName: '',
-    isActive: true,
-    deviceId: ''
-  }
   personalizeInfo: IUserInfo;
   provinceItemsData: any;
   dataSource: any;
@@ -60,10 +47,13 @@ export class EditContactComponent implements OnInit {
         this.roleItemsData = res.roleItems;
         this.addContactData = res.appItems;
         this.provinceItemsData = res.provinceItems;
+        this.personalizeInfo = res.userInfo;        
+        console.log(this.personalizeInfo);
+        
       }
     })
   }
-
+  
   ngOnInit(): void {
     this.UUid = this.route.snapshot.paramMap.get('id');
     this.getContactSource();

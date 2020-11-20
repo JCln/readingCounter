@@ -14,6 +14,7 @@ export class KarbariEditDgComponent {
     fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<KarbariEditDgComponent>) {
+    data = data.row;
     this.form = fb.group({
       id: 0,
       moshtarakinId: data.moshtarakinId,

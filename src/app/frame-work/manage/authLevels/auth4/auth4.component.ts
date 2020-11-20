@@ -52,7 +52,7 @@ export class Auth4Component implements OnInit {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth4EditDgComponent, {
         width: '50%',
-        data: row
+        data: { row, di: this.auth3Dictionary }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -90,7 +90,7 @@ export class Auth4Component implements OnInit {
   convertIdToTitle = (dataSource: IAuthLevel4[], dictionary: IDictionaryManager[]) => {
     dictionary.map(dic => {
       dataSource.map(dataSource => {
-        if (dic.id === dataSource.id)
+        if (dic.id === dataSource.authLevel3Id)
           dataSource.authLevel3Id = dic.title;
       })
     });

@@ -20,12 +20,12 @@
     <ng-container matColumnDef="regionId">
         <th mat-header-cell *matHeaderCellDef>
             <div class="header">
-                شناسه منطقه
+                منطقه
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <mat-select name="item">
-                    <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="isMetroFilter">
+                    <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="regionIdFilter">
                         {{zoneDictionary.title}}
                     </mat-option>
                 </mat-select>

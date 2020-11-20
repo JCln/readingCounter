@@ -71,8 +71,10 @@ export class ZoneBoundComponent implements OnInit {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ZoneBoundEditDgComponent, {
         width: '50%',
-        data: row
-
+        data: {
+          row,
+          di: this.zoneBoundDictionary
+        }
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
@@ -101,7 +103,7 @@ export class ZoneBoundComponent implements OnInit {
   convertIdToTitle = (dataSource: IZoneBoundManager[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.id)
+        if (zoneDic.id === dataSource.zoneId)
           dataSource.zoneId = zoneDic.title;
       })
     });

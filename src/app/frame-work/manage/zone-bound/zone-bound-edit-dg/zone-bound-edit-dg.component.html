@@ -8,8 +8,12 @@
             <input matInput formControlName="title" placeholder="عنوان">
         </mat-form-field>
         <mat-form-field appearance="fill">
-            <mat-label>کد منطقه</mat-label>
-            <input matInput formControlName="zoneId" placeholder="کد منطقه">
+            <mat-label>ناحیه</mat-label>
+            <mat-select name="zoneId">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.value">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>کد دولتی</mat-label>

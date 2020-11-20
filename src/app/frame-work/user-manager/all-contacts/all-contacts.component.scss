@@ -1,0 +1,20 @@
+$blue_l:#116FFF;
+
+.ag-header-group-cell-label,
+.ag-header-cell-label {
+
+  justify-content: center;
+  margin: .2rem 0;
+  text-align: center;
+  border: 2px solid $blue_l;
+  border-radius: 15px;
+}
+
+.ag-theme-alpine .ag-root-wrapper {
+  border-radius: 15px;
+  border: 2px solid $blue_l;
+}
+
+.ag-theme-alpine .ag-header {
+  border-bottom: 1px solid $blue_l;
+}

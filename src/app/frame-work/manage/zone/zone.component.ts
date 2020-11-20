@@ -57,7 +57,10 @@ export class ZoneComponent implements OnInit {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ZoneEditDgComponent, {
         width: '50%',
-        data: row
+        data: {
+          row,
+          di: this.zoneDictionary
+        }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -93,9 +96,9 @@ export class ZoneComponent implements OnInit {
     }
   }
   convertIdToTitle = (dataSource: IZoneManager[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.id)
+    dataSource.map(dataSource => {
+      zoneDictionary.map(zoneDic => {
+        if (zoneDic.id === dataSource.regionId)
           dataSource.regionId = zoneDic.title;
       })
     });
@@ -119,7 +122,7 @@ export class ZoneComponent implements OnInit {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-    
+
     if (rolesData) {
       this.dataSource.data = rolesData;
       this.dataSource.filterPredicate = this.createFilter();
@@ -155,7 +158,7 @@ export class ZoneComponent implements OnInit {
     }
 
     const zoneDictionary = await this.getZoneDictionary();
-    
+
     this.zoneDictionary = zoneDictionary;
 
     this.convertIdToTitle(rolesData, zoneDictionary);
@@ -168,7 +171,7 @@ export class ZoneComponent implements OnInit {
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
-      
+
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.regionId.toString().toLowerCase().indexOf(searchTerms.regionId) !== -1
         && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
