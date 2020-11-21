@@ -71,3 +71,8 @@ form {
   font-size: $font_m;
   font-weight: 600;
 }
+input ,
+input:-internal-autofill-selected {
+  background-color: $white !important;
+  color: $blue_l !important;
+}

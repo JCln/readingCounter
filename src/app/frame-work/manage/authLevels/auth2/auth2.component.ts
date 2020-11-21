@@ -51,7 +51,7 @@ export class Auth2Component implements OnInit {
   editDialog = (row: any) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth2EditDgComponent, {
-        width: '50%',
+        width: '30rem',
         data: { row, di: this.auth1Dictionary }
 
       });

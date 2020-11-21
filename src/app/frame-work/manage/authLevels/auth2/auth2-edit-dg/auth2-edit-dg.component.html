@@ -9,8 +9,8 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>App</mat-label>
-            <mat-select name="authLevel1Id">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.value">
+            <mat-select [(value)]="selected" name="authLevel1Id">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>

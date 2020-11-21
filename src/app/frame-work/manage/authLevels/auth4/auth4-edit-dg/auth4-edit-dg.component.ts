@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -9,21 +9,24 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class Auth4EditDgComponent {
   form: FormGroup;
-
+  selected: any;
+  diValue: any;
+  dataTest: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<Auth4EditDgComponent>,
-    fb: FormBuilder
   ) {
+    this.diValue = data.di;
     data = data.row;
-    this.form = fb.group({
+
+    this.dataTest = {
       id: data.id,
       title: data.title,
       authLevel3Id: data.authLevel3Id,
       value: data.value,
       cssClass: data.cssClass,
       logicalOrder: data.logicalOrder
-    })
+    }
   }
 
   save() {

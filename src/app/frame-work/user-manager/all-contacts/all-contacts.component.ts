@@ -54,7 +54,7 @@ export class AllContactsComponent implements OnInit {
   getDataSource = (): Promise<IUserManager> => {
     return new Promise((resolve) => {
       // this.interfaceManagerService.getAllUserContactsManager().subscribe(res => {
-      this.httpClient.get('//37.191.92.130/kontoriNew/v1/user/all').subscribe((res: any) => {
+      this.httpClient.get('http://37.191.92.130/kontoriNew/v1/user/all').subscribe((res: any) => {
         if (res) {
           resolve(res);
         }

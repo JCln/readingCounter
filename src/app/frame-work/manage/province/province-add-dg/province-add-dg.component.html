@@ -6,17 +6,21 @@
         <mat-form-field appearance="fill">
             <mat-label>عنوان</mat-label>
             <input matInput formControlName="title" placeholder="عنوان">
-        </mat-form-field> 
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>کد کشور</mat-label>
-            <input matInput formControlName="countryId" placeholder="کد کشور">
-        </mat-form-field> 
+            <mat-label>کشور</mat-label>
+            <mat-select formControlName="countryId">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>ترتیب</mat-label>
             <input matInput formControlName="logicalOrder" placeholder="ترتیب">
-        </mat-form-field> 
+        </mat-form-field>
 
     </mat-dialog-content>
 

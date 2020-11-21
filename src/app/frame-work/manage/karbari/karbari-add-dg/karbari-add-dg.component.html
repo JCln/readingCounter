@@ -5,16 +5,20 @@
         <mat-form-field appearance="fill">
             <mat-label>کد</mat-label>
             <input matInput formControlName="moshtarakinId" placeholder="کد">
-        </mat-form-field> 
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>عنوان</mat-label>
             <input matInput formControlName="title" placeholder="عنوان">
-        </mat-form-field> 
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>کد استان</mat-label>
-            <input matInput formControlName="provinceId" placeholder="کد استان">
+            <mat-label>استان</mat-label>
+            <mat-select formControlName="provinceId">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
 
         <mat-checkbox formControlName="isMaskooni">مسکونی</mat-checkbox>

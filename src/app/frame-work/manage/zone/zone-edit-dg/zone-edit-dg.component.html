@@ -10,8 +10,8 @@
 
         <mat-form-field appearance="fill">
             <mat-label>منطقه</mat-label>
-            <mat-select name="regionId">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.value">
+            <mat-select [(value)]="selected" formControlName="regionId">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>

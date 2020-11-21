@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class ZoneBoundEditDgComponent {
   form: FormGroup;
+  selected: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -16,6 +17,7 @@ export class ZoneBoundEditDgComponent {
     fb: FormBuilder
   ) {
     data = data.row;
+    this.selected = data.zoneId;
     this.form = fb.group({
       id: data.id,
       title: data.title,

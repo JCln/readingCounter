@@ -46,7 +46,7 @@ export class CountryComponent implements OnInit {
   editDialog = (row: any) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(CountryEditDgComponent, {
-        width: '50%',
+        width: '30rem',
         data: row
 
       });

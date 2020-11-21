@@ -9,12 +9,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class ZoneEditDgComponent {
   form: FormGroup;
+  selected: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ZoneEditDgComponent>,
     fb: FormBuilder) {
     data = data.row;
+    this.selected = data.regionId;
     this.form = fb.group({
       id: data.id,
       title: data.title,

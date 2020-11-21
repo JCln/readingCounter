@@ -9,8 +9,8 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>ناحیه</mat-label>
-            <mat-select name="zoneId">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.value">
+            <mat-select [(value)]="selected" name="zoneId">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>

@@ -49,9 +49,11 @@ export class Auth4Component implements OnInit {
     });
   }
   editDialog = (row: any) => {
+    console.log(this.auth3Dictionary);
+
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth4EditDgComponent, {
-        width: '50%',
+        width: '30rem',
         data: { row, di: this.auth3Dictionary }
 
       });

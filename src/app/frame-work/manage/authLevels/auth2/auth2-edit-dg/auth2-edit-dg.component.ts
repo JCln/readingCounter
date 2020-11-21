@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class Auth2EditDgComponent {
   form: FormGroup;
+  selected: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -16,6 +17,7 @@ export class Auth2EditDgComponent {
     fb: FormBuilder
   ) {
     data = data.row;
+    this.selected = data.authLevel1Id;
     this.form = fb.group({
       id: data.id,
       authLevel1Id: data.authLevel1Id,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -32,10 +32,18 @@ export class ProvinceComponent implements OnInit {
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
 
   openDialog = () => {
-    const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(ProvinceAddDgComponent, dialogConfig);
+      const dialogRef = this.dialog.open(ProvinceAddDgComponent,
+        {
+          width: '30rem',
+          data: {
+            di: this.countryDictionary
+          }
+
+        });
       dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+
         if (result) {
           this.interfaceManagerService.addProvinceManager(result.value).subscribe(res => {
             if (res) {
@@ -50,8 +58,11 @@ export class ProvinceComponent implements OnInit {
   editDialog = (row: any) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ProvinceEditDgComponent, {
-        width: '50%',
-        data: { row, di: this.countryDictionary }
+        width: '30rem',
+        data: {
+          row,
+          di: this.countryDictionary
+        }
 
       });
       dialogRef.afterClosed().subscribe(result => {

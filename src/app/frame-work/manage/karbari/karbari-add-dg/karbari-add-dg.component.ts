@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-karbari-add-dg',
@@ -13,12 +13,15 @@ export class KarbariAddDgComponent {
 
   constructor(
     fb: FormBuilder,
-    private dialogRef: MatDialogRef<KarbariAddDgComponent>) {
+    private dialogRef: MatDialogRef<KarbariAddDgComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+    data = data.di;
     this.form = fb.group({
       id: 0,
       moshtarakinId: ['', Validators.required],
       title: ['', Validators.required],
-      provinceId: ['', Validators.required],
+      provinceId: data.provinceId,
       isMaskooni: ['', Validators.required],
       isSaxt: ['', Validators.required],
       hasReadingVibrate: ['', Validators.required]
@@ -26,6 +29,8 @@ export class KarbariAddDgComponent {
 
   }
   save() {
+    console.log(this.form.value);
+
     this.dialogRef.close(this.form.value);
   }
   close() {

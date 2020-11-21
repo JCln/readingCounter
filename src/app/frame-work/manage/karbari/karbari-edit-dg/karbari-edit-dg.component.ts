@@ -9,14 +9,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class KarbariEditDgComponent {
   form: FormGroup;
+  selected: any;
 
   constructor(
     fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<KarbariEditDgComponent>) {
     data = data.row;
+    this.selected = data.provinceId;
     this.form = fb.group({
-      id: 0,
+      id: data.id,
       moshtarakinId: data.moshtarakinId,
       title: data.title,
       provinceId: data.provinceId,

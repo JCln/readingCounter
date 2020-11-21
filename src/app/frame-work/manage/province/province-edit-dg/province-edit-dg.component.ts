@@ -9,11 +9,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class ProvinceEditDgComponent {
   form: FormGroup;
+  selected: any;
 
   constructor(fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ProvinceEditDgComponent>
   ) {
+    this.selected = data.countryId;
     data = data.row;
     this.form = fb.group({
       id: data.id,

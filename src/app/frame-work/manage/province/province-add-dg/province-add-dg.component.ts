@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-province-add-dg',
@@ -12,12 +12,14 @@ export class ProvinceAddDgComponent {
   form: FormGroup;
 
   constructor(fb: FormBuilder,
-    private dialogRef: MatDialogRef<ProvinceAddDgComponent>
+    private dialogRef: MatDialogRef<ProvinceAddDgComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
+    data = data.di;
     this.form = fb.group({
       id: 0,
       title: '',
-      countryId: 0,
+      countryId: data.countryId,
       logicalOrder: 0
     })
   }

@@ -1,22 +1,22 @@
 <h2 mat-dialog-title class="_blue_dark">ویرایش اکشن</h2>
 
-<form [formGroup]="form">
+<form #form="ngForm" (ngSubmit)="save()">
     <mat-dialog-content>
 
         <mat-form-field appearance="fill">
             <mat-label>عنوان</mat-label>
-            <input matInput formControlName="title" placeholder="عنوان">
+            <input matInput name="data.title" [(ngModel)]="dataTest.title" placeholder="عنوان">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>مقدار</mat-label>
-            <input matInput formControlName="value" placeholder="مقدار">
+            <input matInput name="data.value" [(ngModel)]="dataTest.value" placeholder="مقدار">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>کنترلر</mat-label>
-            <mat-select name="authLevel3Id">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.value">
+            <mat-select [(value)]="selected" name="truefalse">
+                <mat-option *ngFor="let truefalse of diValue" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
@@ -24,18 +24,18 @@
 
         <mat-form-field appearance="fill">
             <mat-label>کلاس css</mat-label>
-            <input matInput formControlName="cssClass" placeholder="کلاس css">
+            <input matInput name="data.cssClass" [(ngModel)]="dataTest.cssClass" placeholder="کلاس css">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>ترتیب</mat-label>
-            <input matInput formControlName="logicalOrder" placeholder="ترتیب">
+            <input matInput name="data.logicalOrder" [(ngModel)]="dataTest.logicalOrder" placeholder="ترتیب">
         </mat-form-field>
 
     </mat-dialog-content>
 
     <mat-dialog-actions>
         <button class="btn_2" (click)="close()">بازگشت</button>
-        <button class="btn_2 _custom _blue_dark" [mat-dialog-close]="form" (click)="save()">ذخیره</button>
+        <button class="btn_2 _custom _blue_dark" type="submit" [mat-dialog-close]="form">ذخیره</button>
     </mat-dialog-actions>
 </form>

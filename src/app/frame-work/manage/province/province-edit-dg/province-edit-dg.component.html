@@ -10,12 +10,11 @@
 
         <mat-form-field appearance="fill">
             <mat-label>کشور</mat-label>
-            <mat-select name="countryId">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.value">
+            <mat-select [(value)]="selected">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
-
         </mat-form-field>
 
         <mat-form-field appearance="fill">

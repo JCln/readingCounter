@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
@@ -38,9 +38,13 @@ export class ZoneComponent implements OnInit {
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
 
   openDialog = () => {
-    const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(ZoneAddDgComponent, dialogConfig);
+      const dialogRef = this.dialog.open(ZoneAddDgComponent, {
+        minWidth: '30rem',
+        data: {
+          di: this.zoneDictionary
+        }
+      });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addZoneManager(result.value).subscribe(res => {
@@ -56,7 +60,7 @@ export class ZoneComponent implements OnInit {
   editDialog = (row: any) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ZoneEditDgComponent, {
-        width: '50%',
+        minWidth: '30rem',
         data: {
           row,
           di: this.zoneDictionary

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-zone-add-dg',
@@ -11,11 +11,14 @@ export class ZoneAddDgComponent {
   selectedValue: string;
   form: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<ZoneAddDgComponent>, fb: FormBuilder) {
+  constructor(private dialogRef: MatDialogRef<ZoneAddDgComponent>, fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    data = data.di;
     this.form = fb.group({
       id: 0,
       title: '',
-      regionId: 0,
+      regionId: data.regionId,
       isMetro: true,
       logicalOrder: 0
     })

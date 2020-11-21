@@ -69,14 +69,14 @@ export class CounterStateComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         console.log(result);
         
-        // if (result) {
-        //   this.interfaceManagerService.addCounterState(result).subscribe(res => {
-        //     if (res) {
-        //       console.log(res);
+        if (result) {
+          this.interfaceManagerService.addCounterState(result).subscribe(res => {
+            if (res) {
+              console.log(res);
 
-        //     }
-        //   })
-        // }
+            }
+          })
+        }
       });
     });
   }
@@ -91,7 +91,7 @@ export class CounterStateComponent implements OnInit {
   editDialog = (row: any) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(CounterStateEditDgComponent, {
-        width: '50%',
+        width: '30rem',
         data: row
 
       });
