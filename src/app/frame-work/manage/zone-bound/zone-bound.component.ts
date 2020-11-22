@@ -3,10 +3,12 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
+import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IZoneBoundManager } from './../../../Interfaces/izone-bound-manager';
+import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.component';
 import { ZoneBoundEditDgComponent } from './zone-bound-edit-dg/zone-bound-edit-dg.component';
 
@@ -41,7 +43,7 @@ export class ZoneBoundComponent implements OnInit {
     dbInitialCatalog: '',
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   openDialog = () => {
     return new Promise(resolve => {
@@ -52,10 +54,9 @@ export class ZoneBoundComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addZoneBoundManager(result.value).subscribe(res => {
+          this.interfaceManagerService.addZoneBoundManager(result.value).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -81,10 +82,9 @@ export class ZoneBoundComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editZoneBoundManager(result).subscribe(res => {
+          this.interfaceManagerService.editZoneBoundManager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }

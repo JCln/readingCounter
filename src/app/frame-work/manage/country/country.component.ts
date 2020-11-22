@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { IResponses } from 'src/app/Interfaces/iresponses';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ICountryManager } from './../../../Interfaces/icountry-manager';
 import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { InterfaceManagerService } from './../../../services/interface-manager.service';
+import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { CountryAddDgComponent } from './country-add-dg/country-add-dg.component';
 import { CountryEditDgComponent } from './country-edit-dg/country-edit-dg.component';
 
@@ -25,7 +27,7 @@ export class CountryComponent implements OnInit {
     title: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
@@ -33,10 +35,9 @@ export class CountryComponent implements OnInit {
       const dialogRef = this.dialog.open(CountryAddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addCountryManager(result).subscribe(res => {
+          this.interfaceManagerService.addCountryManager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -52,10 +53,9 @@ export class CountryComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editCountryManager(result).subscribe(res => {
+          this.interfaceManagerService.editCountryManager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }

@@ -4,10 +4,12 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
+import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { IAuthLevel3 } from './../../../../Interfaces/iauth-levels';
+import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
 import { Auth3EditDgComponent } from './auth3-edit-dg/auth3-edit-dg.component';
 
@@ -30,7 +32,7 @@ export class Auth3Component implements OnInit {
     authLevel2Id: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   // add auth 2 not working
   openDialog = () => {
@@ -39,10 +41,9 @@ export class Auth3Component implements OnInit {
       const dialogRef = this.dialog.open(Auth3AddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel3Manager(result).subscribe(res => {
+          this.interfaceManagerService.addAuthLevel3Manager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -58,10 +59,9 @@ export class Auth3Component implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editAuthLevel3Manager(result).subscribe(res => {
+          this.interfaceManagerService.editAuthLevel3Manager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }

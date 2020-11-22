@@ -4,10 +4,12 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
+import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { IAuthLevel4 } from './../../../../Interfaces/iauth-levels';
+import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
 import { Auth4EditDgComponent } from './auth4-edit-dg/auth4-edit-dg.component';
 
@@ -30,7 +32,7 @@ export class Auth4Component implements OnInit {
     authLevel3Id: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
@@ -38,10 +40,9 @@ export class Auth4Component implements OnInit {
       const dialogRef = this.dialog.open(Auth4AddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel4Manager(result).subscribe(res => {
+          this.interfaceManagerService.addAuthLevel4Manager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }

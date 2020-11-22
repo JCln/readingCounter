@@ -3,10 +3,12 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
+import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IProvinceManager } from './../../../Interfaces/iprovince-manager';
+import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
 import { ProvinceEditDgComponent } from './province-edit-dg/province-edit-dg.component';
 
@@ -29,7 +31,7 @@ export class ProvinceComponent implements OnInit {
     logicalOrder: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   openDialog = () => {
     return new Promise(resolve => {
@@ -45,10 +47,9 @@ export class ProvinceComponent implements OnInit {
         console.log(result);
 
         if (result) {
-          this.interfaceManagerService.addProvinceManager(result.value).subscribe(res => {
+          this.interfaceManagerService.addProvinceManager(result.value).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -67,10 +68,9 @@ export class ProvinceComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editProvinceManager(result).subscribe(res => {
+          this.interfaceManagerService.editProvinceManager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }

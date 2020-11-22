@@ -1,24 +1,22 @@
 @import '../../../assets/variable.scss';
 
 ::ng-deep {
+  .mat-simple-snackbar {
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: #F2F3F4;
+  }
+
   .snack_danger {
     background-color: #f63e38;
-    font-size: $font_s;
-    color: #F2F3F4;
-    font-family:$font_family;
   }
 
   .snack_warn {
     background-color: lightgoldenrodyellow;
-    font-size: $font_s;
-    color: #F2F3F4;
-    font-family:$font_family;
   }
 
   .snack_success {
     background-color: green;
-    font-size: $font_s;
-    color: #F2F3F4;
-    font-family:$font_family;
   }
 }

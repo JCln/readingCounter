@@ -7,6 +7,8 @@ import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { IResponses } from './../../../../Interfaces/iresponses';
+import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';
 import { Auth1EditDgComponent } from './auth1-edit-dg/auth1-edit-dg.component';
 
@@ -26,7 +28,7 @@ export class Auth1Component implements OnInit {
     title: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
@@ -34,10 +36,9 @@ export class Auth1Component implements OnInit {
       const dialogRef = this.dialog.open(Auth1AddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel1Manager(result).subscribe(res => {
+          this.interfaceManagerService.addAuthLevel1Manager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -53,10 +54,9 @@ export class Auth1Component implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editAuthLevel1Manager(result).subscribe(res => {
+          this.interfaceManagerService.editAuthLevel1Manager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }

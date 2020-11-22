@@ -4,10 +4,12 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
+import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { IAuthLevel2 } from './../../../../Interfaces/iauth-levels';
+import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
 import { Auth2EditDgComponent } from './auth2-edit-dg/auth2-edit-dg.component';
 
@@ -29,7 +31,7 @@ export class Auth2Component implements OnInit {
     authLevel1Id: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   // add auth 2 not working
   openDialog = () => {
@@ -38,10 +40,9 @@ export class Auth2Component implements OnInit {
       const dialogRef = this.dialog.open(Auth2AddDgComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel2Manager(result).subscribe(res => {
+          this.interfaceManagerService.addAuthLevel2Manager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -57,10 +58,9 @@ export class Auth2Component implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editAuthLevel2Manager(result).subscribe(res => {
+          this.interfaceManagerService.editAuthLevel2Manager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -134,7 +134,7 @@ export class Auth2Component implements OnInit {
     const rolesData = await this.getDataSource();
     this.dataSource.data = rolesData;
     this.auth1Dictionary = await this.getAuthLevel1Id();
-    
+
     this.convertIdToTitle(rolesData, this.auth1Dictionary);
     this.filter();
   }

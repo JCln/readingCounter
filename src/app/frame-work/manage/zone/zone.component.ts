@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { IZoneManager } from './../../../Interfaces/izone-manager';
+import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { ZoneAddDgComponent } from './zone-add-dg/zone-add-dg.component';
 import { ZoneEditDgComponent } from './zone-edit-dg/zone-edit-dg.component';
 
@@ -35,7 +37,7 @@ export class ZoneComponent implements OnInit {
     isMetro: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   openDialog = () => {
     return new Promise(resolve => {
@@ -47,10 +49,9 @@ export class ZoneComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addZoneManager(result.value).subscribe(res => {
+          this.interfaceManagerService.addZoneManager(result.value).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -69,10 +70,9 @@ export class ZoneComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editZoneManager(result).subscribe(res => {
+          this.interfaceManagerService.editZoneManager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }

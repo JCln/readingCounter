@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
 import { IRegionManager } from './../../../Interfaces/iregion-manager';
+import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 import { RegionEditDgComponent } from './region-edit-dg/region-edit-dg.component';
 
@@ -31,7 +33,7 @@ export class RegionComponent implements OnInit {
     logicalOrder: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   openDialog = () => {
     return new Promise(resolve => {
@@ -44,10 +46,9 @@ export class RegionComponent implements OnInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addRegionManager(result.value).subscribe(res => {
+          this.interfaceManagerService.addRegionManager(result.value).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -65,10 +66,9 @@ export class RegionComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editRegionManager(result).subscribe(res => {
+          this.interfaceManagerService.editRegionManager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }

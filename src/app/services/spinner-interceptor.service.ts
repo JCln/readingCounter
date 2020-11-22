@@ -21,7 +21,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
         catchError((error) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 404) {
-              this.snackWrapperService.openSnackBar('اطلاعاتی پیدا نشد، لطفا داده ورودی را بدقت وارد فرمایید', 3000, 'snack_danger');
+              this.snackWrapperService.openSnackBar('اطلاعاتی پیدا نشد، لطفا داده ورودی را بدقت وارد نمایید', 3000, 'snack_danger');
             }
             if (error.status === 403) {
               this.snackWrapperService.openSnackBar('شما به این قسمت دسترسی ندارید', 3000, 'snack_danger');
@@ -34,6 +34,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             }
             if (error.status === 401) {
               this.authService.routeToLogin();
+            }
+            if (error.status === 400) {
+              this.snackWrapperService.openSnackBar('لطفا داده ورودی را بدقت وارد نمایید', 8000, 'snack_danger');
             }
           }
 
