@@ -21,7 +21,7 @@ export class KarbariEditDgComponent {
       id: data.id,
       moshtarakinId: data.moshtarakinId,
       title: data.title,
-      provinceId: data.provinceId,
+      provinceId: data.id,
       isMaskooni: data.isMaskooni,
       isSaxt: data.isSaxt,
       hasReadingVibrate: data.hasReadingVibrate

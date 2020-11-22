@@ -19,7 +19,7 @@ export class RegionEditDgComponent {
     this.form = fb.group({
       id: data.id,
       title: data.title,
-      provinceId: data.provinceId,
+      provinceId: data.id,
       logicalOrder: data.logicalOrder
     })
   }

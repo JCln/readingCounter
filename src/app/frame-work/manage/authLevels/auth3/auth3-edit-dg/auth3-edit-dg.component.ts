@@ -21,7 +21,7 @@ export class Auth3EditDgComponent {
     this.form = fb.group({
       id: data.id,
       title: data.title,
-      authLevel2Id: data.authLevel2Id,
+      authLevel2Id: data.id,
       value: data.value,
       cssClass: data.cssClass,
       route: data.route,

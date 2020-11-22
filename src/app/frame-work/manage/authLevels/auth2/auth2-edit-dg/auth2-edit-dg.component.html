@@ -10,7 +10,7 @@
         <mat-form-field appearance="fill">
             <mat-label>App</mat-label>
             <mat-select [(value)]="selected" name="authLevel1Id">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.title">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>

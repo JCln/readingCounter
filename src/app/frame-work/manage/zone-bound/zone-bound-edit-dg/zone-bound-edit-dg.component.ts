@@ -21,7 +21,7 @@ export class ZoneBoundEditDgComponent {
     this.form = fb.group({
       id: data.id,
       title: data.title,
-      zoneId: data.zoneId,
+      zoneId: data.id,
       govermentalCode: data.govermentalCode,
       fromEshterak: data.fromEshterak,
       toEshterak: data.toEshterak,

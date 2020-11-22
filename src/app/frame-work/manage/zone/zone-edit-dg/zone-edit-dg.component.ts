@@ -15,12 +15,13 @@ export class ZoneEditDgComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ZoneEditDgComponent>,
     fb: FormBuilder) {
-    data = data.row;
+    data = data.row;    
     this.selected = data.regionId;
+    
     this.form = fb.group({
       id: data.id,
       title: data.title,
-      regionId: data.regionId,
+      regionId: data.id,
       isMetro: data.isMetro,
       logicalOrder: data.logicalOrder
     })

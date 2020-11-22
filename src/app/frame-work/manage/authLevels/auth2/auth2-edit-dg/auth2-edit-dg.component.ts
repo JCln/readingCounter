@@ -20,7 +20,7 @@ export class Auth2EditDgComponent {
     this.selected = data.authLevel1Id;
     this.form = fb.group({
       id: data.id,
-      authLevel1Id: data.authLevel1Id,
+      authLevel1Id: data.id,
       title: data.title,
       cssClass: data.cssClass,
       route: data.route,

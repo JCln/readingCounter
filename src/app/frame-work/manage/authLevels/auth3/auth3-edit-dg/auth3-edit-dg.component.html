@@ -16,7 +16,7 @@
         <mat-form-field appearance="fill">
             <mat-label>ماژول</mat-label>
             <mat-select [(value)]="selected" name="authLevel2Id">
-                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.value">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.title">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
