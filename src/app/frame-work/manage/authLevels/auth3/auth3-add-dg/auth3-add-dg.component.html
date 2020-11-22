@@ -15,6 +15,11 @@
 
         <mat-form-field appearance="fill">
             <mat-label>ماژول</mat-label>
+            <mat-select formControlName="countryId">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
             <input matInput formControlName="authLevel2Id" placeholder="ماژول">
         </mat-form-field>
 

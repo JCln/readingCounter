@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
@@ -35,9 +35,13 @@ export class Auth4Component implements OnInit {
   constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
 
   openDialog = () => {
-    const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(Auth4AddDgComponent, dialogConfig);
+      const dialogRef = this.dialog.open(Auth4AddDgComponent, {
+        minWidth: '30rem',
+        data: {
+          di: this.auth3Dictionary
+        }
+      });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addAuthLevel4Manager(result).subscribe((res: IResponses) => {

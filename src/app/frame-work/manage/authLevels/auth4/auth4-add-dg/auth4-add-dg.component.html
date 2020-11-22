@@ -6,27 +6,31 @@
         <mat-form-field appearance="fill">
             <mat-label>عنوان</mat-label>
             <input matInput formControlName="title" placeholder="عنوان">
-        </mat-form-field> 
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>مقدار</mat-label>
             <input matInput formControlName="value" placeholder="مقدار">
-        </mat-form-field> 
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>کنترلر</mat-label>
-            <input matInput formControlName="authLevel3Id" placeholder="کنترلر">
-        </mat-form-field> 
+            <mat-select formControlName="authLevel3Id">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>کلاس css</mat-label>
             <input matInput formControlName="cssClass" placeholder="کلاس css">
-        </mat-form-field> 
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>ترتیب</mat-label>
             <input matInput formControlName="logicalOrder" placeholder="ترتیب">
-        </mat-form-field> 
+        </mat-form-field>
 
     </mat-dialog-content>
 

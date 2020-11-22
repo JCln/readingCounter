@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-auth4-add-dg',
@@ -12,14 +12,16 @@ export class Auth4AddDgComponent {
 
   constructor(
     fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<Auth4AddDgComponent>) {
+    data = data.di;
     this.form = fb.group({
       id: 0,
       title: ['', Validators.required],
-      authLevel3Id: ['', Validators.required],
+      authLevel3Id: data.authLevel3Id,
       value: ['', Validators.required],
-      cssClass: [''],
-      logicalOrder: ['']
+      cssClass: ['', Validators.required],
+      logicalOrder: ['', Validators.required]
     })
   }
   save() {

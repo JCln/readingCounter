@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-auth2-add-dg',
@@ -12,11 +12,13 @@ export class Auth2AddDgComponent {
 
   constructor(
     fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<Auth2AddDgComponent>) {
+    data = data.di;
     this.form = fb.group({
       id: 0,
       title: ['', Validators.required],
-      authLevel1Id: ['', Validators.required],
+      authLevel1Id: data.authLevel1Id,
       cssClass: [''],
       logicalOrder: [''],
       route: [''],

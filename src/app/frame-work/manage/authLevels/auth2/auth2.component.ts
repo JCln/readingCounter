@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
@@ -35,9 +35,13 @@ export class Auth2Component implements OnInit {
 
   // add auth 2 not working
   openDialog = () => {
-    const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(Auth2AddDgComponent, dialogConfig);
+      const dialogRef = this.dialog.open(Auth2AddDgComponent, {
+        minWidth: '30rem',
+        data: {
+          di: this.auth1Dictionary
+        }
+      });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addAuthLevel2Manager(result).subscribe((res: IResponses) => {

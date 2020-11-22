@@ -6,23 +6,27 @@
         <mat-form-field appearance="fill">
             <mat-label>عنوان</mat-label>
             <input matInput formControlName="title" placeholder="عنوان">
-        </mat-form-field> 
+        </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>ماژول</mat-label>
-            <input matInput formControlName="authLevel1Id" placeholder="ماژول">
-        </mat-form-field> 
+            <mat-select formControlName="authLevel1Id">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>کلاس css</mat-label>
             <input matInput formControlName="cssClass" placeholder="کلاس css">
-        </mat-form-field> 
+        </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>ترتیب</mat-label>
             <input matInput formControlName="logicalOrder" placeholder="ترتیب">
-        </mat-form-field> 
+        </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>مسیر</mat-label>
             <input matInput formControlName="route" placeholder="مسیر">
-        </mat-form-field> 
+        </mat-form-field>
 
         <mat-checkbox formControlName="inSidebar">سایدبار</mat-checkbox>
 
