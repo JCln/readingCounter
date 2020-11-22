@@ -11,6 +11,8 @@ export class LayoutComponent {
   sideBarPageSize = () => {
     const a = document.querySelector('app-side-bar') as HTMLElement;
     const b = document.querySelector('app-tab-wrapper') as HTMLElement;
+    const framework = document.querySelector('app-frame-work') as HTMLElement;
+    framework.classList.toggle('framework_conf');
     a.classList.toggle('page_conf');
     b.classList.toggle('tabWrapper_conf');
   }
