@@ -23,6 +23,9 @@ export class InterfaceManagerService {
   getAddUserContactManager = (): Observable<any> => {
     return this.mainService.GET('V1/user/Add');
   }
+  postAddContact = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/User/Add', body);
+  }
   // /////
 
   // karbari ///

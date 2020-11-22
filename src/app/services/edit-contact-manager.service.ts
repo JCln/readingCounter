@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 
+import { IResponses } from '../Interfaces/iresponses';
 import { IUserEditManager } from '../Interfaces/iuser-manager';
+import { IAUserEditSave } from './../Interfaces/iuser-manager';
+import { InterfaceManagerService } from './interface-manager.service';
+import { SnackWrapperService } from './snack-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +14,8 @@ export class EditContactManagerService {
   selectedZones: number[] = [];
   selectedActions: string[] = [];
   selectedPersonalInfos: any;
+
+  constructor(private snackWrapperService: SnackWrapperService, private interfaceManagerService: InterfaceManagerService) { }
 
   addAUserPersonalInfo = (personalItems: any) => {
     this.selectedPersonalInfos = personalItems.value;
@@ -42,6 +48,13 @@ export class EditContactManagerService {
       })
     })
   }
+  connectToServer = (vals: IAUserEditSave) => {
+    this.interfaceManagerService.postUserContactManager(vals).subscribe((res: IResponses) => {
+      if (res) {
+        this.snackWrapperService.openSnackBar(res.message, 5000, 'snack_success');
+      }
+    });
+  }
   editAUserContact = (dataSource: IUserEditManager, UUid: string) => {
     this.editContactData = dataSource;
     const vals = {
@@ -57,6 +70,6 @@ export class EditContactManagerService {
       displayName: this.selectedPersonalInfos.displayName,
       deviceId: this.selectedPersonalInfos.deviceId
     }
-    console.log(vals);
+    this.connectToServer(vals)
   }
 }
