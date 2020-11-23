@@ -1,8 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
-import { IRoleManager } from './../../../Interfaces/irole-manager';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-new',
@@ -10,27 +8,19 @@ import { IRoleManager } from './../../../Interfaces/irole-manager';
   styleUrls: ['./add-new.component.scss']
 })
 export class AddNewComponent implements OnInit {
-  addNew: IRoleManager = {
-    id: 0,
-    title: '',
-    titleUnicode: '',
-    isActive: false,
-    needDeviceIdLogin: false
-  }
   selectedValue: string;
   form: FormGroup;
   // description: string;
 
-  constructor(private fb: FormBuilder,
-    private dialogRef: MatDialogRef<AddNewComponent>,
-    @Inject(MAT_DIALOG_DATA) data: any) {
-    // this.description = data.description;
+  constructor(
+
+    private dialogRef: MatDialogRef<AddNewComponent>) {
   }
   save() {
     this.dialogRef.close(this.form.value);
     // console.log(data);
-    
-    
+
+
   }
 
   close() {

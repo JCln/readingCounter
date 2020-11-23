@@ -1,30 +1,13 @@
 @import '../../../../assets/variable.scss';
 @import '../../../../assets/button.scss';
 
-.mat-form-field {
-  text-align: right;
-  font-family: $font_family;
-}
-
 .mat-dialog-content {
   display: grid;
   justify-content: center;
   min-height: 13rem;
   min-width: 20rem;
   overflow: hidden;
-}
-
-.mat-dialog-actions {
-  display: flex;
-  justify-content: space-between;
-}
-
-.mat-checkbox {
   direction: rtl;
-  margin-bottom: 1rem;
-}
-
-.mat-option {
   text-align: right;
 }
 
@@ -35,12 +18,8 @@
   font-size: 1.2rem;
 }
 
-._custom {
-  background: $blue_l;
-  color: $gray_l;
-}
-
 h2 {
+  text-align: right;
   font-family: $font_family;
   font-size: 1.5rem;
   font-weight: 600;
@@ -50,6 +29,10 @@ h2 {
   padding: 1rem;
 }
 
-.mat-dialog-container {
-  border: 1px solid $blue_l;
+p {
+  max-width: 25rem;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+  font-weight: 600;
 }

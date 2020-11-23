@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
 import { FrameWorkComponent } from './../frame-work/frame-work.component';
+import { AddNewComponent } from './../frame-work/manage/add-new/add-new.component';
 import { InterceptorService } from './../services/interceptor.service';
 import { SpinnerInterceptorService } from './../services/spinner-interceptor.service';
 import { DropdownComponent } from './_layouts/dropdown/dropdown.component';
@@ -29,6 +31,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     HeaderComponent,
     AnonyHeaderComponent,
     DropdownComponent,
+    AddNewComponent,
     FrameWorkComponent,
     SpinnerComponent,
     SnackBarComponent,
@@ -42,6 +45,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     HttpClientXsrfModule.withOptions({ cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN' }),
     DpDatePickerModule,
     MatSnackBarModule,
+    MatDialogModule,
     CoreRoutingModule
   ],
   exports: [
