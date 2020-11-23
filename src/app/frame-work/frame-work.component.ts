@@ -2,7 +2,7 @@ import '../../../node_modules/leaflet-easyprint';
 import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import '../../../src/assets/L.EasyButton/src/easy-button.js';
 
-import { AfterViewInit, Component, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { InteractionService } from '../services/interaction.service';
@@ -30,19 +30,14 @@ L.Marker.prototype.options.icon = defaultIcon;
   templateUrl: './frame-work.component.html',
   styleUrls: ['./frame-work.component.scss']
 })
-export class FrameWorkComponent implements OnInit, AfterViewInit, OnChanges {
-  title: string = '';
+export class FrameWorkComponent implements OnInit {
+  @Input() pageTitle: string = '';
   orderId;
 
   constructor(private interactionService: InteractionService, private route: ActivatedRoute) {
 
   }
-  private initMap = () => {
-    this.interactionService.getPageTitle().subscribe(title => this.title = title);
-
-  }
   ngOnInit(): void {
-    this.initMap();
     this.orderId = this.route.snapshot.paramMap.get('isShowMap');
   }
   ngOnChanges(): void {

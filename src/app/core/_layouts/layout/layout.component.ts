@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
+import { TabWrapperComponent } from './../../tab-wrapper/tab-wrapper.component';
 
 @Component({
   selector: 'app-layout',
@@ -7,6 +9,8 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
   sidebarStatus: boolean;
+  @ViewChild(TabWrapperComponent) childPageTitle;
+  pageTitle: string = 'نقشه/ داشبورد';
 
   sideBarPageSize = () => {
     const a = document.querySelector('app-side-bar') as HTMLElement;
@@ -20,5 +24,8 @@ export class LayoutComponent {
   changeSidebarStatus($event: boolean) {
     this.sidebarStatus = $event;
     this.sideBarPageSize();
+  }
+  changePageTitle($vent: string) {
+    this.pageTitle = $vent;
   }
 }
