@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 import { IUserManager } from './../../../Interfaces/iuser-manager';
 import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
@@ -10,7 +11,7 @@ import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.
   templateUrl: './all-contacts.component.html',
   styleUrls: ['./all-contacts.component.scss']
 })
-export class AllContactsComponent implements OnInit {
+export class AllContactsComponent implements OnInit, AfterViewInit {
   frameworkComponents: any;
   rowDataClicked1 = {};
 
@@ -36,12 +37,10 @@ export class AllContactsComponent implements OnInit {
 
   constructor(private httpClient: HttpClient,
     private route: ActivatedRoute,
+    private interactionService: InteractionService,
     private router: Router
   ) {
-    this.frameworkComponents = {
-      BtnCellRendererComponent: BtnCellRendererComponent,
-    }
-  }//private interfaceManagerService: InterfaceManagerService
+  }
 
 
   onBtnClick1(e) {
@@ -67,7 +66,18 @@ export class AllContactsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.frameworkComponents = {
+      BtnCellRendererComponent: BtnCellRendererComponent,
+    }
     this.classWrapper();
+  }
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
   }
 
 }

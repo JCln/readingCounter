@@ -150,7 +150,6 @@ export class FooComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.interactionService.setPageTitle('گزارش گیری');
   }
 
 }

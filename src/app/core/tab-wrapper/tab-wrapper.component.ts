@@ -1,7 +1,7 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 import { ITabs } from './../../Interfaces/isidebar-items';
 
@@ -15,10 +15,8 @@ export class TabWrapperComponent implements OnInit {
   tabs: ITabs[] = [];
   currentRoute: any[] = [];
   @Output() childPageTitle = new EventEmitter<string>();
-  @Output() childRefresh = new EventEmitter<boolean>();
-  handleRefresh: boolean = false;
-
-  constructor(private router: Router, private sideBarItemsService: SidebarItemsService, private route: ActivatedRoute, @Inject(DOCUMENT) private _document: Document) {
+    
+  constructor(private router: Router, private sideBarItemsService: SidebarItemsService, private interactionService: InteractionService) {
     this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
       if (sidebars) {
         this.currentRoute = sidebars.items;
@@ -103,8 +101,7 @@ export class TabWrapperComponent implements OnInit {
     this.checkRouteStatus();
   }
   refreshCurrentPage = () => {
-    this.handleRefresh = !this.handleRefresh;
-    this.childRefresh.emit(this.handleRefresh);
+    this.interactionService.setRefresh(this.router.url);
   }
 
 }

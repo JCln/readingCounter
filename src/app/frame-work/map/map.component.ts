@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Imap } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 import { MapService } from './../../services/map.service';
 
@@ -14,10 +16,17 @@ export class MapComponent implements OnInit, AfterViewInit {
   isShowMap: boolean = true;
   private map;
   title: string = '';
-  private readonly mapItems: Imap[];
+  private mapItems: Imap[];
 
-  constructor(private mapService: MapService, readonly mapItemsService: MapItemsService) {
-    this.mapItems = mapItemsService.getMapItems();
+  constructor(
+    private mapService: MapService,
+    readonly mapItemsService: MapItemsService,
+    private router: Router,
+    private readonly interactionService: InteractionService
+  ) {
+  }
+  private getMapItems = () => {
+    this.mapItems = this.mapItemsService.getMapItems();
   }
   private initMap = () => {
 
@@ -53,6 +62,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.getMapItems();
     this.initMap();
   }
 
@@ -60,6 +70,12 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.mapService.fullScreen(this.map);
     this.mapService.addMarkerCluster(this.map);
     this.mapService.buttons(this.map);
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
   }
 
 }

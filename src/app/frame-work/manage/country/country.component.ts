@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { IResponses } from 'src/app/Interfaces/iresponses';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ICountryManager } from './../../../Interfaces/icountry-manager';
@@ -17,7 +19,7 @@ import { CountryEditDgComponent } from './country-edit-dg/country-edit-dg.compon
   templateUrl: './country.component.html',
   styleUrls: ['./country.component.scss']
 })
-export class CountryComponent implements OnInit {
+export class CountryComponent implements OnInit, AfterViewInit {
 
   titleFilter = new FormControl('');
   dataSource = new MatTableDataSource();
@@ -27,7 +29,13 @@ export class CountryComponent implements OnInit {
     title: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
+  constructor(
+    private interfaceManagerService: InterfaceManagerService,
+    private dialog: MatDialog,
+    private snackWrapperService: SnackWrapperService,
+    private interactionService: InteractionService,
+    private router: Router
+  ) { }
 
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
@@ -119,7 +127,14 @@ export class CountryComponent implements OnInit {
   ngOnInit() {
     this.classWrapper();
   }
-
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
+  }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);

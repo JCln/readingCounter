@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 import { IPolicies, IPrivacy } from './../../Interfaces/iprivacy';
 import { InterfaceService } from './../../services/interface.service';
@@ -10,7 +12,7 @@ import { PrivacyService } from './../../services/privacy.service';
   templateUrl: './privacy.component.html',
   styleUrls: ['./privacy.component.scss']
 })
-export class PrivacyComponent implements OnInit {
+export class PrivacyComponent implements OnInit, AfterViewInit {
   privacyOptions: IPrivacy;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
 
@@ -30,7 +32,8 @@ export class PrivacyComponent implements OnInit {
     canUpdateDeviceId: false
   };
 
-  constructor(private privacyService: PrivacyService, private interfaceService: InterfaceService, private _snackBar: MatSnackBar) { }
+  constructor(private interactionService: InteractionService,
+    private router: Router, private privacyService: PrivacyService, private interfaceService: InterfaceService, private _snackBar: MatSnackBar) { }
 
   getPolicies = (): Promise<IPolicies> => {
     return new Promise((resolve) => {
@@ -85,6 +88,14 @@ export class PrivacyComponent implements OnInit {
       duration: duration,
       horizontalPosition: this.horizontalPosition
     });
+  }
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
   }
 }
 

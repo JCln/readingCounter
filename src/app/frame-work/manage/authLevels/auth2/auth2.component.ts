@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
@@ -18,7 +20,7 @@ import { Auth2EditDgComponent } from './auth2-edit-dg/auth2-edit-dg.component';
   templateUrl: './auth2.component.html',
   styleUrls: ['./auth2.component.scss']
 })
-export class Auth2Component implements OnInit {
+export class Auth2Component implements OnInit, AfterViewInit {
   titleFilter = new FormControl('');
   authLevel1IdFilter = new FormControl('');
 
@@ -31,7 +33,13 @@ export class Auth2Component implements OnInit {
     authLevel1Id: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
+  constructor(
+    private interfaceManagerService: InterfaceManagerService,
+    private dialog: MatDialog,
+    private snackWrapperService: SnackWrapperService,
+    private interactionService: InteractionService,
+    private router: Router
+  ) { }
 
   // add auth 2 not working
   openDialog = () => {
@@ -144,6 +152,14 @@ export class Auth2Component implements OnInit {
   }
   ngOnInit() {
     this.classWrapper();
+  }
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
   }
 
   createFilter(): (data: any, filter: string) => boolean {

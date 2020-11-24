@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
 import { IZoneManager } from 'src/app/Interfaces/izone-manager';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -22,7 +24,7 @@ interface trueFalse {
   templateUrl: './karbari.component.html',
   styleUrls: ['./karbari.component.scss']
 })
-export class KarbariComponent implements OnInit {
+export class KarbariComponent implements OnInit, AfterViewInit {
   titleFilter = new FormControl('');
   moshtarakinIdFilter = new FormControl('');
   provinceIdFilter = new FormControl('');
@@ -50,7 +52,13 @@ export class KarbariComponent implements OnInit {
     isSaxt: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
+  constructor(
+    private interfaceManagerService: InterfaceManagerService,
+    private dialog: MatDialog,
+    private snackWrapperService: SnackWrapperService,
+    private interactionService: InteractionService,
+    private router: Router
+  ) { }
 
   openDialog = () => {
     return new Promise(resolve => {
@@ -198,6 +206,14 @@ export class KarbariComponent implements OnInit {
   }
   ngOnInit() {
     this.classWrapper();
+  }
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
   }
 
   createFilter(): (data: any, filter: string) => boolean {

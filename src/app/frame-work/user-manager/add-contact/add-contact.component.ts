@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { appItems, IAddAUserManager, IAddUserInfos, IRoleItems } from './../../../Interfaces/iuser-manager';
@@ -10,7 +12,7 @@ import { AddUserManagerService } from './../../../services/add-user-manager.serv
   templateUrl: './add-contact.component.html',
   styleUrls: ['./add-contact.component.scss']
 })
-export class AddContactComponent implements OnInit {
+export class AddContactComponent implements OnInit, AfterViewInit {
   userDetails: IAddUserInfos = {
     userCode: 0,
     username: '',
@@ -43,8 +45,9 @@ export class AddContactComponent implements OnInit {
 
   constructor(
     private addUserManagerService: AddUserManagerService,
-    private interfaceManagerService: InterfaceManagerService
-
+    private interfaceManagerService: InterfaceManagerService,
+    private interactionService: InteractionService,
+    private router: Router
   ) {
   }
   addAContact = () => {
@@ -60,10 +63,17 @@ export class AddContactComponent implements OnInit {
       }
     })
   }
-
   ngOnInit(): void {
     this.getContactSource();
 
+  }
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
   }
 
 

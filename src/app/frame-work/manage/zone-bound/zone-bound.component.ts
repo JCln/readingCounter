@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -17,7 +19,7 @@ import { ZoneBoundEditDgComponent } from './zone-bound-edit-dg/zone-bound-edit-d
   templateUrl: './zone-bound.component.html',
   styleUrls: ['./zone-bound.component.scss']
 })
-export class ZoneBoundComponent implements OnInit {
+export class ZoneBoundComponent implements OnInit, AfterViewInit {
 
   titleFilter = new FormControl('');
   zoneIdFilter = new FormControl('');
@@ -43,7 +45,13 @@ export class ZoneBoundComponent implements OnInit {
     dbInitialCatalog: '',
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
+  constructor(
+    private interfaceManagerService: InterfaceManagerService,
+    private dialog: MatDialog,
+    private snackWrapperService: SnackWrapperService,
+    private interactionService: InteractionService,
+    private router: Router
+  ) { }
 
   openDialog = () => {
     return new Promise(resolve => {
@@ -194,7 +202,14 @@ export class ZoneBoundComponent implements OnInit {
   ngOnInit() {
     this.classWrapper();
   }
-
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
+  }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);

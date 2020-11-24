@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { IResponses } from 'src/app/Interfaces/iresponses';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -17,7 +19,7 @@ import { RegionEditDgComponent } from './region-edit-dg/region-edit-dg.component
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.scss']
 })
-export class RegionComponent implements OnInit {
+export class RegionComponent implements OnInit, AfterViewInit {
   idFilter = new FormControl('');
   titleFilter = new FormControl('');
   provinceIdFilter = new FormControl('');
@@ -33,7 +35,13 @@ export class RegionComponent implements OnInit {
     logicalOrder: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
+  constructor(
+    private interfaceManagerService: InterfaceManagerService,
+    private dialog: MatDialog,
+    private snackWrapperService: SnackWrapperService,
+    private interactionService: InteractionService,
+    private router: Router
+  ) { }
 
   openDialog = () => {
     return new Promise(resolve => {
@@ -156,7 +164,14 @@ export class RegionComponent implements OnInit {
   ngOnInit() {
     this.classWrapper();
   }
-
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
+  }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);

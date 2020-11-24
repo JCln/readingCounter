@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BrowserStorageService } from 'src/app/services/browser-storage.service';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 import { IColor, IMessage, ITime } from './../../Interfaces/imessage';
 import { MessageService } from './../../services/message.service';
@@ -9,7 +11,7 @@ import { MessageService } from './../../services/message.service';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit {
+export class MessagesComponent implements OnInit, AfterViewInit {
   message: IMessage = {
     title: '',
     text: '',
@@ -24,7 +26,12 @@ export class MessagesComponent implements OnInit {
   allMessages: IMessage[];
   getedDataFromLocalStorage: any;
 
-  constructor(readonly messageService: MessageService, private browserStorageService: BrowserStorageService) { }
+  constructor(
+    private interactionService: InteractionService,
+    private router: Router,
+    readonly messageService: MessageService,
+    private browserStorageService: BrowserStorageService
+  ) { }
 
   ngOnInit(): void {
     this.times = this.messageService.getTimes();
@@ -65,10 +72,13 @@ export class MessagesComponent implements OnInit {
     this.message.canSave = localStorageItem.canSave;
 
   }
-  // copyPreMessageToCurrent = (name: string) => {
-  //   // console.log(this.browserStorageService.get(name));
-  //   this.message = this.browserStorageService.get(name);
-  // }
-
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
+  }
 
 }

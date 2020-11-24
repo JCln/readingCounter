@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
@@ -18,7 +20,7 @@ import { Auth1EditDgComponent } from './auth1-edit-dg/auth1-edit-dg.component';
   templateUrl: './auth1.component.html',
   styleUrls: ['./auth1.component.scss']
 })
-export class Auth1Component implements OnInit {
+export class Auth1Component implements OnInit, AfterViewInit {
   titleFilter = new FormControl('');
   dataSource = new MatTableDataSource();
 
@@ -28,7 +30,13 @@ export class Auth1Component implements OnInit {
     title: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private snackWrapperService: SnackWrapperService) { }
+  constructor(
+    private interfaceManagerService: InterfaceManagerService,
+    private dialog: MatDialog,
+    private snackWrapperService: SnackWrapperService,
+    private interactionService: InteractionService,
+    private router: Router
+  ) { }
 
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
@@ -110,6 +118,14 @@ export class Auth1Component implements OnInit {
   }
   ngOnInit() {
     this.classWrapper();
+  }
+  ngAfterViewInit(): void {
+    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
   }
 
   createFilter(): (data: any, filter: string) => boolean {
