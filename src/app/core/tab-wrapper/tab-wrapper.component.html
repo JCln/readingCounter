@@ -6,7 +6,7 @@
     <ul>
         <li *ngFor="let tab of tabs" [routerLink]="['/'+ tab.route]" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">
-            <i *ngIf="tab.isRefreshable" class="fa fa-refresh" aria-hidden="true"></i>
+            <i *ngIf="tab.isRefreshable" (click)="refreshCurrentPage()" class="fa fa-refresh" aria-hidden="true"></i>
             {{tab.title}}
             <i *ngIf="tab.isClosable" (click)="closeButtonClicked(tab.route)" class="fa fa-close"></i>
         </li>

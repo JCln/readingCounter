@@ -1,6 +1,6 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 
 import { ITabs } from './../../Interfaces/isidebar-items';
@@ -14,8 +14,11 @@ import { ITabs } from './../../Interfaces/isidebar-items';
 export class TabWrapperComponent implements OnInit {
   tabs: ITabs[] = [];
   currentRoute: any[] = [];
+  @Output() childPageTitle = new EventEmitter<string>();
+  @Output() childRefresh = new EventEmitter<boolean>();
+  handleRefresh: boolean = false;
 
-  constructor(private router: Router, private sideBarItemsService: SidebarItemsService, private _location: Location) {
+  constructor(private router: Router, private sideBarItemsService: SidebarItemsService, private route: ActivatedRoute, @Inject(DOCUMENT) private _document: Document) {
     this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
       if (sidebars) {
         this.currentRoute = sidebars.items;
@@ -35,7 +38,7 @@ export class TabWrapperComponent implements OnInit {
         const currentRouteFound = this.currentRoute.find((items: any) => {
           return items.route === this.router.url
         })
-        
+
         if (currentRouteFound) {
           //////    //  
           const found = this.tabs.find((item: any) => {
@@ -43,10 +46,12 @@ export class TabWrapperComponent implements OnInit {
           })
           if (found) {
             console.log('we have this route now !');
+            this.childPageTitle.emit(Object.values(this.tabs).pop().title);
             return;
           }
           else {
             this.tabs.push(currentRouteFound);
+            this.childPageTitle.emit(Object.values(this.tabs).pop().title);
           }
         }
       }
@@ -69,11 +74,13 @@ export class TabWrapperComponent implements OnInit {
   backToPreviousPage = () => {
     const b = this.tabs.slice(-1).map((item: any) => item.route);
     this.router.navigate(b);
+    this.childPageTitle.emit(Object.values(this.tabs).pop().title);
   }
 
   closeAllTabs = () => {
     this.tabs.length = 1;
     this.router.navigateByUrl('/wr');
+    this.childPageTitle.emit(Object.values(this.tabs).pop().title);
   }
 
   closeButtonClicked = (routerUrl: string) => {
@@ -88,11 +95,16 @@ export class TabWrapperComponent implements OnInit {
       route: '/wr', title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
     };
     this.tabs.push(a);
+    this.childPageTitle.emit('نقشه/داشبورد');
   }
 
   ngOnInit(): void {
     this.addDashboardTab();
     this.checkRouteStatus();
+  }
+  refreshCurrentPage = () => {
+    this.handleRefresh = !this.handleRefresh;
+    this.childRefresh.emit(this.handleRefresh);
   }
 
 }

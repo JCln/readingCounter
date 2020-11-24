@@ -1,6 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-
-import { TabWrapperComponent } from './../../tab-wrapper/tab-wrapper.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-layout',
@@ -9,8 +7,8 @@ import { TabWrapperComponent } from './../../tab-wrapper/tab-wrapper.component';
 })
 export class LayoutComponent {
   sidebarStatus: boolean;
-  @ViewChild(TabWrapperComponent) childPageTitle;
   pageTitle: string = 'نقشه/ داشبورد';
+  refreshPage: boolean;
 
   sideBarPageSize = () => {
     const a = document.querySelector('app-side-bar') as HTMLElement;
@@ -28,4 +26,8 @@ export class LayoutComponent {
   changePageTitle($vent: string) {
     this.pageTitle = $vent;
   }
+  refreshCurrentPage($event: boolean) {
+    this.refreshPage = $event;
+  }
+  
 }
