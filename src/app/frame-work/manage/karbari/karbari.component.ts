@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
@@ -33,6 +34,7 @@ export class KarbariComponent implements OnInit, AfterViewInit {
   isSaxtFilter = new FormControl('');
 
   dataSource = new MatTableDataSource();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   isTrueF: trueFalse[] = [
     { name: 'نباشد', value: false },
@@ -151,6 +153,9 @@ export class KarbariComponent implements OnInit, AfterViewInit {
 
     if (rolesData) {
       this.dataSource.data = rolesData;
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
       this.dataSource.filterPredicate = this.createFilter();
 
       this.titleFilter.valueChanges
@@ -208,6 +213,7 @@ export class KarbariComponent implements OnInit, AfterViewInit {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
