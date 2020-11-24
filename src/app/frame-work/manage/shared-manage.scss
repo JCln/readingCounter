@@ -168,6 +168,31 @@ td.mat-footer-cell:first-of-type {
   padding-left: 0;
 }
 
+// paginator config ///////////////
+::ng-deep {
+  .mat-paginator-outer-container {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: $font_family;
+  }
+
+  .mat-paginator-page-size {
+    direction: rtl;
+  }
+
+  .mat-option-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .mat-select-value {
+    font-family: $font_family;
+    font-size: 1.2rem;
+  }
+}
+
+///////////////
+
 @mixin mat-table-columns($columns) {
 
   .mat-column- {

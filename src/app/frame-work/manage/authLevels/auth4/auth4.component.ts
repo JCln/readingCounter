@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
@@ -26,6 +27,7 @@ export class Auth4Component implements OnInit, AfterViewInit {
   authLevel3IdFilter = new FormControl('');
 
   dataSource = new MatTableDataSource();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   auth3Dictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'authLevel3Id', 'actions'];
@@ -128,6 +130,10 @@ export class Auth4Component implements OnInit, AfterViewInit {
     })
   }
   filter = () => {
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+
     this.dataSource.filterPredicate = this.createFilter();
 
     this.titleFilter.valueChanges
@@ -156,6 +162,7 @@ export class Auth4Component implements OnInit, AfterViewInit {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
