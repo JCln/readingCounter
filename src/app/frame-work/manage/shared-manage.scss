@@ -17,7 +17,6 @@ table {
 
 td,
 th {
-  width: 15%;
   border: 1px solid $gray_e3;
 }
 
@@ -147,7 +146,7 @@ th {
   &:hover,
   &:focus,
   &:active {
-    background-color: $gray_d5;
+    background-color: rgb(161, 193, 255);
   }
 }
 
@@ -157,7 +156,7 @@ th {
   &:hover,
   &:focus,
   &:active {
-    background-color: $gray_d5;
+    background-color: rgb(161, 193, 255);
   }
 }
 
@@ -167,3 +166,37 @@ td.mat-footer-cell:first-of-type {
   padding-right: 12px;
   padding-left: 0;
 }
+
+@mixin mat-table-columns($columns) {
+  .mat-column- {
+
+    @each $colName,
+    $props in $columns {
+
+      $width: map-get($props, 'width');
+
+      &#{$colName} {
+        flex: $width;
+        min-width: $width;
+      }
+    }
+  }
+}
+
+@include mat-table-columns((
+    title: (width: 10rem),
+    isMaskooni: (width: 6rem),
+    hasReadingVibrate: (width: 6rem),
+    isSaxt: (width: 6rem),
+    clientOrder: (width: 6rem),
+    canEnterNumber: (width: 6rem),
+    isMane: (width: 6rem),
+    canNumberBeLessThanPre: (width: 6rem),
+    isTavizi: (width: 6rem),
+    shouldEnterNumber: (width: 6rem),
+    isXarab: (width: 6rem),
+    isFaqed: (width: 6rem),
+    isMetro: (width: 6rem),
+    moshtarakinId: (width: 6rem),
+    logicalOrder: (width: 6rem)
+    ));
