@@ -5,6 +5,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 
 import { IUserManager } from './../../../Interfaces/iuser-manager';
 import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
+import { CheckboxRenderer } from './checkbox-renderer.componenet';
 
 @Component({
   selector: 'app-all-contacts',
@@ -17,12 +18,12 @@ export class AllContactsComponent implements OnInit, AfterViewInit {
 
   columnDefs = [
     // { field: 'id', sortable: true, filter: true },
-    { field: 'userCode', sortable: true, filter: true },
-    { field: 'username', sortable: true, filter: true },
-    { field: 'mobile', sortable: true, filter: true },
-    { field: 'displayName', sortable: true, filter: true },
-    { field: 'isActive', sortable: true, filter: true },
-    { field: 'isLocked', sortable: true, filter: true },
+    { field: 'userCode', headerName: 'کد', sortable: true, filter: true, cellClass: 'cell_conf' },
+    { field: 'username', headerName: 'نام کاربری', sortable: true, filter: true, cellClass: 'cell_conf' },
+    { field: 'mobile', headerName: 'موبایل', sortable: true, filter: true, cellClass: 'cell_conf  dir_ltr' },
+    { field: 'displayName', headerName: 'نام نمایشی', sortable: true, filter: true, cellClass: 'cell_conf' },
+    { field: 'isActive', headerName: 'فعال', sortable: true, filter: true, cellClass: 'cell_conf',cellRenderer: 'checkboxRenderer' },
+    { field: 'isLocked', headerName: 'قفل', sortable: true, filter: true, cellClass: 'cell_conf', cellRenderer: 'checkboxRenderer' },
     {
       field: 'ویرایش',
       cellRenderer: 'BtnCellRendererComponent',
@@ -68,12 +69,13 @@ export class AllContactsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.frameworkComponents = {
       BtnCellRendererComponent: BtnCellRendererComponent,
+      checkboxRenderer: CheckboxRenderer
     }
     this.classWrapper();
   }
   ngAfterViewInit(): void {
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
+      if (res && res.length !== 0) {
         if (res === this.router.url)
           this.ngOnInit();
       }
