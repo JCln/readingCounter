@@ -13,10 +13,10 @@ declare let L;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit {
-  isShowMap: boolean = true;
   private map;
-  title: string = '';
   private mapItems: Imap[];
+  isShowMap: boolean = true;
+  title: string = '';
 
   constructor(
     private mapService: MapService,
@@ -59,6 +59,15 @@ export class MapComponent implements OnInit, AfterViewInit {
     };
 
     L.control.layers(baseMaps).addTo(this.map);
+  }
+  showDashboard = (isShowMap: boolean) => {
+    this.isShowMap = isShowMap;
+    if (isShowMap) {
+      this.router.navigateByUrl('/wr/db');
+    }
+    else {
+      this.router.navigateByUrl('/db');
+    }
   }
 
   ngOnInit(): void {
