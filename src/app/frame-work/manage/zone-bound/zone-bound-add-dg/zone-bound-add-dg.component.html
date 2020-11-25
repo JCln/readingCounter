@@ -4,9 +4,15 @@
     <mat-dialog-content>
 
         <mat-form-field appearance="fill">
+            <mat-label>کد</mat-label>
+            <input matInput type="number" formControlName="id" placeholder="کد">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
             <mat-label>عنوان</mat-label>
             <input matInput formControlName="title" placeholder="عنوان">
         </mat-form-field>
+
         <mat-form-field appearance="fill">
             <mat-label>ناحیه</mat-label>
             <mat-select formControlName="zoneId">
@@ -29,11 +35,11 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>از ردیف</mat-label>
-            <input matInput formControlName="fromRadif" placeholder="از ردیف">
+            <input matInput type="number" formControlName="fromRadif" placeholder="از ردیف">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>تا ردیف</mat-label>
-            <input matInput formControlName="toRadif" placeholder="تا ردیف">
+            <input matInput type="number" formControlName="toRadif" placeholder="تا ردیف">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>هاست</mat-label>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -8,16 +8,16 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./country-add-dg.component.scss']
 })
 export class CountryAddDgComponent {
-  addNew: any = {
-    id: 0,
-    title: ''
-  }
-  selectedValue: string;
   form: FormGroup;
 
   constructor(
+    fb: FormBuilder,
     private dialogRef: MatDialogRef<CountryAddDgComponent>
   ) {
+    this.form = fb.group({
+      id: [''],
+      title: '',
+    })
   }
   save() {
     this.dialogRef.close(this.form.value);

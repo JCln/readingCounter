@@ -17,10 +17,10 @@ export class ProvinceAddDgComponent {
   ) {
     data = data.di;
     this.form = fb.group({
-      id: 0,
+      id: [''],
       title: '',
       countryId: data.countryId,
-      logicalOrder: 0
+      logicalOrder: ['']
     })
   }
   save() {

@@ -14,7 +14,7 @@ export class Auth1AddDgComponent {
     fb: FormBuilder,
     private dialogRef: MatDialogRef<Auth1AddDgComponent>) {
     this.form = fb.group({
-      id: 0,
+      id: [''],
       title: ['', Validators.required],
       cssClass: [''],
       inSidebar: ['', Validators.required],

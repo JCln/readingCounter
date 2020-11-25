@@ -20,11 +20,23 @@ export class SpinnerInterceptorService implements HttpInterceptor {
       .pipe(
         catchError((error) => {
           if (error instanceof HttpErrorResponse) {
-            if (error.status === 404) {
-              this.snackWrapperService.openSnackBar('اطلاعاتی پیدا نشد، لطفا داده ورودی را بدقت وارد نمایید', 3000, 'snack_danger');
+            if (error.status === 400) {
+              this.snackWrapperService.openSnackBar('لطفا داده ورودی را بدقت وارد نمایید', 8000, 'snack_danger');
+            }
+            if (error.status === 401) {
+              this.authService.routeToLogin();
             }
             if (error.status === 403) {
               this.snackWrapperService.openSnackBar('شما به این قسمت دسترسی ندارید', 3000, 'snack_danger');
+            }
+            if (error.status === 404) {
+              this.snackWrapperService.openSnackBar('اطلاعاتی پیدا نشد، لطفا داده ورودی را بدقت وارد نمایید', 3000, 'snack_danger');
+            }
+            if (error.status === 408) {
+              this.snackWrapperService.openSnackBar('زمان ارسال درخواست به سرویس به اتمام رسید، احتمالا شبکه کٌند و یا قطع است، لطفا دقایقی دیگر امتحان نمایید', 10000, 'snack_danger');
+            }
+            if (error.status === 410) {
+              this.snackWrapperService.openSnackBar('چنین آیتمی پیدا نشد، یا قبلاً حذف شده است', 3000, 'snack_danger');
             }
             if (error.status === 0) {
               this.snackWrapperService.openSnackBar('ارتباط با سرویس دهنده برقرار نشد، احتمالا شما به شبکه دسترسی ندارید یا موقعیت مکانی شما در ایران نیست لطفا دقایقی دیگر امتحان نمایید', 8000, 'snack_danger');
@@ -32,17 +44,8 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             if (error.status === 500 || error.status === 502) {
               this.snackWrapperService.openSnackBar('با عرض پوزش، سرور در حال بروزرسانی است، لطفا دقایقی دیگر امتحان نمایید', 8000, 'snack_danger');
             }
-            if ( error.status === 504) {
+            if (error.status === 504) {
               this.snackWrapperService.openSnackBar('زمان پاسخ دهی سرویس دهنده به اتمام رسید، لطفا دقایقی دیگر امتحان نمایید', 8000, 'snack_danger');
-            }
-            if (error.status === 401) {
-              this.authService.routeToLogin();
-            }
-            if (error.status === 408) {
-              this.snackWrapperService.openSnackBar('زمان ارسال درخواست به سرویس به اتمام رسید، احتمالا شبکه کٌند و یا قطع است، لطفا دقایقی دیگر امتحان نمایید', 10000, 'snack_danger');
-            }
-            if (error.status === 400) {
-              this.snackWrapperService.openSnackBar('لطفا داده ورودی را بدقت وارد نمایید', 8000, 'snack_danger');
             }
           }
 

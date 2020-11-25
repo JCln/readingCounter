@@ -55,7 +55,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit {
         console.log(result);
 
         if (result) {
-          this.interfaceManagerService.addProvinceManager(result.value).subscribe((res: IResponses) => {
+          this.interfaceManagerService.addProvinceManager(result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
@@ -96,12 +96,10 @@ export class ProvinceComponent implements OnInit, AfterViewInit {
   deleteSingleRow = async (row: IProvinceManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.deleteProvinceManager(row.id).subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        });
+      this.interfaceManagerService.deleteProvinceManager(row.id).subscribe(res => {
+        if (res) {
+          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+        }
       });
     }
   }
@@ -171,7 +169,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
+      if (res && res.length !== 0) {
         if (res === this.router.url)
           this.ngOnInit();
       }

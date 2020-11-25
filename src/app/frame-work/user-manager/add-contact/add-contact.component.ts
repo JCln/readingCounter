@@ -69,7 +69,7 @@ export class AddContactComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
+      if (res && res.length !== 0) {
         if (res === this.router.url)
           this.ngOnInit();
       }

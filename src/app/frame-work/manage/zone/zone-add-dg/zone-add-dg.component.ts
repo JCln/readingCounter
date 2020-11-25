@@ -11,16 +11,18 @@ export class ZoneAddDgComponent {
   selectedValue: string;
   form: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<ZoneAddDgComponent>, fb: FormBuilder,
+  constructor(
+    fb: FormBuilder,
+    private dialogRef: MatDialogRef<ZoneAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     data = data.di;
     this.form = fb.group({
-      id: 0,
-      title: '',
+      id: [''],
+      title: [''],
       regionId: data.regionId,
       isMetro: true,
-      logicalOrder: 0
+      logicalOrder: ['']
     })
   }
   save() {

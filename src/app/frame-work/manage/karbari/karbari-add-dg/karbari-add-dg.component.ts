@@ -18,13 +18,13 @@ export class KarbariAddDgComponent {
   ) {
     data = data.di;
     this.form = fb.group({
-      id: 0,
+      id: [''],
       moshtarakinId: ['', Validators.required],
       title: ['', Validators.required],
       provinceId: data.provinceId,
-      isMaskooni: ['', Validators.required],
-      isSaxt: ['', Validators.required],
-      hasReadingVibrate: ['', Validators.required]
+      isMaskooni: [false, Validators.required],
+      isSaxt: [false, Validators.required],
+      hasReadingVibrate: [false, Validators.required]
     })
 
   }

@@ -114,12 +114,10 @@ export class KarbariComponent implements OnInit, AfterViewInit {
   deleteSingleRow = async (row: IZoneManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.deleteKarbari(row.id).subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        });
+      this.interfaceManagerService.deleteKarbari(row.id).subscribe(res => {
+        if (res) {
+          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+        }
       });
     }
   }
@@ -215,7 +213,7 @@ export class KarbariComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
+      if (res && res.length !== 0) {
         if (res === this.router.url)
           this.ngOnInit();
       }

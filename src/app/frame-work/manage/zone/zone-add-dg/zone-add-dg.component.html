@@ -4,6 +4,11 @@
     <mat-dialog-content>
 
         <mat-form-field appearance="fill">
+            <mat-label>کد</mat-label>
+            <input matInput type="number" formGroupName="id" placeholder="کد">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
             <mat-label>عنوان</mat-label>
             <input matInput formGroupName="title" placeholder="عنوان">
         </mat-form-field>
@@ -19,7 +24,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>ترتیب</mat-label>
-            <input matInput formGroupName="logicalOrder" placeholder="ترتیب">
+            <input matInput type="number" formGroupName="logicalOrder" placeholder="ترتیب">
         </mat-form-field>
 
         <mat-checkbox formGroupName="isMetro">شهری</mat-checkbox>

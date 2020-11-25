@@ -104,13 +104,13 @@ export class InterfaceManagerService {
     return this.mainService.GET('V1/Country/Dictionary');
   }
   deleteCountryManager = (id: number): Observable<any> => {
-    return this.mainService.POST('Role/Country/Remove', id);
+    return this.mainService.POST('V1/Country/Remove', id);
   }
   editCountryManager = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('Role/Country/Edit', body);
+    return this.mainService.POSTBODY('V1/Country/Edit', body);
   }
   addCountryManager = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('Role/Country/Add', body);
+    return this.mainService.POSTBODY('V1/Country/Add', body);
   }
 
   getProvinceManager = (): Observable<any> => {

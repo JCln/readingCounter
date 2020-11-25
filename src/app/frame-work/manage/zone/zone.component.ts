@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { IResponses } from 'src/app/Interfaces/iresponses';
@@ -24,7 +25,9 @@ export class ZoneComponent implements OnInit, AfterViewInit {
   regionIdFilter = new FormControl('');
   logicalOrderFilter = new FormControl('');
   isMetroFilter = new FormControl('');
+
   dataSource = new MatTableDataSource();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   selectedValue;
   items: string[] = ['شهری', 'غیرشهری'];
@@ -57,7 +60,9 @@ export class ZoneComponent implements OnInit, AfterViewInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addZoneManager(result.value).subscribe((res: IResponses) => {
+          console.log(result);
+
+          this.interfaceManagerService.addZoneManager(result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
@@ -98,12 +103,10 @@ export class ZoneComponent implements OnInit, AfterViewInit {
   deleteSingleRow = async (row: IZoneManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.deleteZoneManager(row.id).subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        });
+      this.interfaceManagerService.deleteZoneManager(row.id).subscribe(res => {
+        if (res) {
+          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+        }
       });
     }
   }
@@ -136,6 +139,10 @@ export class ZoneComponent implements OnInit, AfterViewInit {
     const rolesData = await this.getDataSource();
 
     if (rolesData) {
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+
       this.dataSource.data = rolesData;
       this.dataSource.filterPredicate = this.createFilter();
 
@@ -180,8 +187,9 @@ export class ZoneComponent implements OnInit, AfterViewInit {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
+      if (res && res.length !== 0) {
         if (res === this.router.url)
           this.ngOnInit();
       }

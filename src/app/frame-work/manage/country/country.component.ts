@@ -81,12 +81,10 @@ export class CountryComponent implements OnInit, AfterViewInit {
   deleteSingleRow = async (row: ICountryManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.deleteCountryManager(row.id).subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        });
+      this.interfaceManagerService.deleteCountryManager(row.id).subscribe(res => {
+        if (res) {
+          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+        }
       });
     }
   }
@@ -129,7 +127,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
+      if (res && res.length !== 0) {
         if (res === this.router.url)
           this.ngOnInit();
       }

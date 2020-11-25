@@ -15,10 +15,10 @@ export class RegionAddDgComponent {
     private dialogRef: MatDialogRef<RegionAddDgComponent>) {
     data = data.di;
     this.form = fb.group({
-      id: 0,
+      id: [''],
       title: '',
       provinceId: data.provinceId,
-      logicalOrder: 0
+      logicalOrder: ['']
     })
   }
   save() {

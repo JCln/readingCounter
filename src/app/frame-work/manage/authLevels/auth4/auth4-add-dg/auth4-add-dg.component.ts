@@ -16,7 +16,7 @@ export class Auth4AddDgComponent {
     private dialogRef: MatDialogRef<Auth4AddDgComponent>) {
     data = data.di;
     this.form = fb.group({
-      id: 0,
+      id: [''],
       title: ['', Validators.required],
       authLevel3Id: data.authLevel3Id,
       value: ['', Validators.required],

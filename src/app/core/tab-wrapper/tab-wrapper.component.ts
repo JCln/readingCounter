@@ -15,7 +15,7 @@ export class TabWrapperComponent implements OnInit {
   tabs: ITabs[] = [];
   currentRoute: any[] = [];
   @Output() childPageTitle = new EventEmitter<string>();
-    
+
   constructor(private router: Router, private sideBarItemsService: SidebarItemsService, private interactionService: InteractionService) {
     this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
       if (sidebars) {
@@ -44,7 +44,6 @@ export class TabWrapperComponent implements OnInit {
           })
           if (found) {
             console.log('we have this route now !');
-            this.childPageTitle.emit(Object.values(this.tabs).pop().title);
             return;
           }
           else {
@@ -93,15 +92,14 @@ export class TabWrapperComponent implements OnInit {
       route: '/wr', title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
     };
     this.tabs.push(a);
-    this.childPageTitle.emit('نقشه/داشبورد');
   }
 
   ngOnInit(): void {
     this.addDashboardTab();
     this.checkRouteStatus();
   }
-  refreshCurrentPage = () => {
-    this.interactionService.setRefresh(this.router.url);
+  refreshCurrentPage = (tabRoute: string) => {
+    this.interactionService.setRefresh(tabRoute);
   }
 
 }

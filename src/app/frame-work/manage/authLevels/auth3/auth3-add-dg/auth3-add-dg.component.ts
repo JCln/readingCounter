@@ -16,14 +16,14 @@ export class Auth3AddDgComponent {
     private dialogRef: MatDialogRef<Auth3AddDgComponent>) {
     data = data.di;
     this.form = fb.group({
-      id: 0,
+      id: ['', Validators.required],
       title: ['', Validators.required],
       authLevel2Id: data.authLevel2Id,
       cssClass: [''],
       route: [''],
-      inSidebar: [''],
-      isClosable: [''],
-      isRefreshable: [''],
+      inSidebar: [false],
+      isClosable: [false],
+      isRefreshable: [false],
       logicalOrder: ['']
     })
   }

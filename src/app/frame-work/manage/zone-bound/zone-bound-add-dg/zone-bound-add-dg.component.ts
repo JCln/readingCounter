@@ -18,14 +18,14 @@ export class ZoneBoundAddDgComponent {
   ) {
     data = data.di
     this.form = fb.group({
-      id: 0,
+      id: [''],
       title: '',
       zoneId: data.zoneId,
       govermentalCode: '',
       fromEshterak: '',
       toEshterak: '',
-      fromRadif: 0,
-      toRadif: 0,
+      fromRadif: [''],
+      toRadif: [''],
       host: '',
       dbUserName: '',
       dbPassword: '',

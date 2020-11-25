@@ -54,7 +54,7 @@ export class RegionComponent implements OnInit, AfterViewInit {
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addRegionManager(result.value).subscribe((res: IResponses) => {
+          this.interfaceManagerService.addRegionManager(result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
@@ -94,12 +94,10 @@ export class RegionComponent implements OnInit, AfterViewInit {
   deleteSingleRow = async (row: IRegionManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.deleteRegionManager(row.id).subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        });
+      this.interfaceManagerService.deleteRegionManager(row.id).subscribe(res => {
+        if (res) {
+          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+        }
       });
     }
   }
@@ -166,7 +164,7 @@ export class RegionComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
+      if (res && res.length !== 0) {
         if (res === this.router.url)
           this.ngOnInit();
       }
