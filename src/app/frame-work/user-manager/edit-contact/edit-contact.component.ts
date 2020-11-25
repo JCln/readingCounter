@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { appItems } from 'src/app/Interfaces/iuser-manager';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -13,11 +14,12 @@ import { EditContactManagerService } from './../../../services/edit-contact-mana
   templateUrl: './edit-contact.component.html',
   styleUrls: ['./edit-contact.component.scss']
 })
-export class EditContactComponent implements OnInit, AfterViewInit {
+export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
   UUid: string = '';
   personalizeInfo: IUserInfo;
   provinceItemsData: any;
   dataSource: any;
+  subscription: Subscription;
 
   // stepper
   firstFormGroup: FormGroup;
@@ -61,12 +63,17 @@ export class EditContactComponent implements OnInit, AfterViewInit {
     this.getContactSource();
   }
   ngAfterViewInit(): void {
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
     })
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.unsubscribe();
   }
 
 }

@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -19,7 +20,7 @@ import { ZoneBoundEditDgComponent } from './zone-bound-edit-dg/zone-bound-edit-d
   templateUrl: './zone-bound.component.html',
   styleUrls: ['./zone-bound.component.scss']
 })
-export class ZoneBoundComponent implements OnInit, AfterViewInit {
+export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
 
   titleFilter = new FormControl('');
   zoneIdFilter = new FormControl('');
@@ -32,6 +33,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit {
 
   zoneBoundDictionary: IDictionaryManager[] = [];
   dataSource = new MatTableDataSource();
+  subscription: Subscription
 
   columnsToDisplay = ['title', 'zoneId', 'fromEshterak', 'toEshterak', 'actions'];
   filterValues = {
@@ -201,12 +203,17 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
     })
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.unsubscribe();
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {

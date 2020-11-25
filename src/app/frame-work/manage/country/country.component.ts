@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InteractionService } from 'src/app/services/interaction.service';
 
@@ -19,11 +20,12 @@ import { CountryEditDgComponent } from './country-edit-dg/country-edit-dg.compon
   templateUrl: './country.component.html',
   styleUrls: ['./country.component.scss']
 })
-export class CountryComponent implements OnInit, AfterViewInit {
+export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   titleFilter = new FormControl('');
   dataSource = new MatTableDataSource();
   countryDictionary: IDictionaryManager[] = [];
+  subscription: Subscription;
   columnsToDisplay = ['title', 'actions'];
   filterValues = {
     title: ''
@@ -126,8 +128,8 @@ export class CountryComponent implements OnInit, AfterViewInit {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
@@ -139,5 +141,10 @@ export class CountryComponent implements OnInit, AfterViewInit {
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
     }
     return filterFunction;
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.unsubscribe();
   }
 }

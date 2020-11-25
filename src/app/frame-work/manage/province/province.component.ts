@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -19,12 +20,13 @@ import { ProvinceEditDgComponent } from './province-edit-dg/province-edit-dg.com
   templateUrl: './province.component.html',
   styleUrls: ['./province.component.scss']
 })
-export class ProvinceComponent implements OnInit, AfterViewInit {
+export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   titleFilter = new FormControl('');
   countryIdFilter = new FormControl('');
   logicalOrderFilter = new FormControl('');
   dataSource = new MatTableDataSource();
 
+  subscription: Subscription;
   countryDictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'countryId', 'logicalOrder', 'actions'];
   filterValues = {
@@ -168,8 +170,8 @@ export class ProvinceComponent implements OnInit, AfterViewInit {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
@@ -183,5 +185,10 @@ export class ProvinceComponent implements OnInit, AfterViewInit {
         && data.logicalOrder.toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
     }
     return filterFunction;
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.unsubscribe();
   }
 }

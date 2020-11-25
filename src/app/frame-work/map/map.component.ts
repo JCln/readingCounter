@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { Imap } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -12,11 +13,12 @@ declare let L;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private map;
   private mapItems: Imap[];
   isShowMap: boolean = true;
   title: string = '';
+  subscription: Subscription;
 
   constructor(
     private mapService: MapService,
@@ -79,12 +81,17 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.mapService.fullScreen(this.map);
     this.mapService.addMarkerCluster(this.map);
     this.mapService.buttons(this.map);
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
     })
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.unsubscribe();
   }
 
 }

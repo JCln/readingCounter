@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -19,7 +20,7 @@ import { RegionEditDgComponent } from './region-edit-dg/region-edit-dg.component
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.scss']
 })
-export class RegionComponent implements OnInit, AfterViewInit {
+export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   idFilter = new FormControl('');
   titleFilter = new FormControl('');
   provinceIdFilter = new FormControl('');
@@ -27,6 +28,7 @@ export class RegionComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
 
   regionDictionary: IDictionaryManager[] = [];
+  subscription: Subscription
 
   columnsToDisplay = ['title', 'provinceId', 'logicalOrder', 'actions'];
   filterValues = {
@@ -163,12 +165,17 @@ export class RegionComponent implements OnInit, AfterViewInit {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
     })
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.unsubscribe();
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {

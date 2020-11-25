@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
 import { IZoneManager } from 'src/app/Interfaces/izone-manager';
@@ -25,7 +26,7 @@ interface trueFalse {
   templateUrl: './karbari.component.html',
   styleUrls: ['./karbari.component.scss']
 })
-export class KarbariComponent implements OnInit, AfterViewInit {
+export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   titleFilter = new FormControl('');
   moshtarakinIdFilter = new FormControl('');
   provinceIdFilter = new FormControl('');
@@ -33,6 +34,7 @@ export class KarbariComponent implements OnInit, AfterViewInit {
   isMaskooniFilter = new FormControl('');
   isSaxtFilter = new FormControl('');
 
+  subscription: Subscription;
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -212,14 +214,18 @@ export class KarbariComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
     })
   }
-
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.unsubscribe();
+  }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
