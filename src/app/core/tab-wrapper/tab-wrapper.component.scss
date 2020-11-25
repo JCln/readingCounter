@@ -17,7 +17,7 @@ li {
   justify-content: center;
   align-items: center;
   margin: 0.15rem;
-  min-width: 11rem;
+  min-width: 8.5rem;
   height: 3.3rem;
   border-radius: $border_s;
   color: $blue_d;
@@ -26,6 +26,10 @@ li {
   font-weight: 600;
   background: $gray_d;
   cursor: pointer;
+
+  @media (min-width: 700px) {
+    min-width: 11rem;
+  }
 
   .fa-refresh {
     @include d_flex_center();

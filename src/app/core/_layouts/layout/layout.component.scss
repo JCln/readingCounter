@@ -15,16 +15,32 @@ app-tab-wrapper {
   align-items: center;
   top: 3rem;
   margin-bottom: 0.5rem;
-  width: 86%;
+  width: 67%;
   min-height: 4rem;
   border-radius: 0 0 15px 15px;
+
+  @media (min-width: 700px) {
+    width: 73%;
+  }
+
+  @media (min-width: 1000px) {
+    width: 84%;
+  }
 }
 
 app-side-bar {
-  width: 17%;
+  width: 43%;
   min-height: 75vh;
   transition: all ease-in-out 150ms;
   z-index: 2;
+
+  @media (min-width: 700px) {
+    width: 25%;
+  }
+
+  @media (min-width: 1000px) {
+    width: 17%;
+  }
 }
 
 app-frame-work {

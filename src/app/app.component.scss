@@ -29,4 +29,8 @@ app-clock {
   right: 0;
   top: $font_2;
   margin: 0.2rem;
+
+  @media (min-width:700px) {
+    top: 2.6rem;
+  }
 }

@@ -3,12 +3,18 @@
 
 .analog-clock {
   position: relative;
-  width: 7rem;
-  height: 7rem;
-  background:url(/assets/imgs/clock/2.jpg);
+  width: 5rem;
+  height: 5rem;
+  background: url(/assets/imgs/clock/2.jpg);
   background-size: cover;
   border-radius: 50%;
   z-index: 1;
+
+  @media (min-width: 700px) {
+    width: 6.2rem;
+    height: 6.2rem;
+  }
+
 }
 
 .hand {
@@ -28,8 +34,12 @@
 
 .minute {
   width: .3rem;
-  height: $font_3;
+  height: $font_2;
   background: $blue_d;
+
+  @media (min-width: 700px) {
+    height: 2.5rem;
+  }
 }
 
 .center-circle {
