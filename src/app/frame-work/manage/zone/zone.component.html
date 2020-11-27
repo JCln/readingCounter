@@ -24,8 +24,8 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select name="item">
-                    <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="regionIdFilter">
+                <mat-select [formControl]="regionIdFilter" name="zoneDictionary">
+                    <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="zoneDictionary.title">
                         {{zoneDictionary.title}}
                     </mat-option>
                 </mat-select>

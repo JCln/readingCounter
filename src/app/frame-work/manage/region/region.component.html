@@ -24,7 +24,11 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="provinceIdFilter">
+                <mat-select [formControl]="provinceIdFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of regionDictionary" [value]="truefalse.title">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.provinceId}}</td>
