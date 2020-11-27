@@ -5,16 +5,16 @@
 
         <mat-form-field appearance="fill">
             <mat-label>کد</mat-label>
-            <input matInput type="number" formGroupName="id" placeholder="کد">
+            <input matInput type="number" formControlName="id" placeholder="کد">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>عنوان</mat-label>
-            <input matInput formGroupName="title" placeholder="عنوان">
+            <input matInput formControlName="title" placeholder="عنوان">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>منطقه</mat-label>        
+            <mat-label>منطقه</mat-label>
             <mat-select formControlName="regionId">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
@@ -24,10 +24,10 @@
 
         <mat-form-field appearance="fill">
             <mat-label>ترتیب</mat-label>
-            <input matInput type="number" formGroupName="logicalOrder" placeholder="ترتیب">
+            <input matInput type="number" formControlName="logicalOrder" placeholder="ترتیب">
         </mat-form-field>
 
-        <mat-checkbox formGroupName="isMetro">شهری</mat-checkbox>
+        <mat-checkbox formControlName="isMetro">شهری</mat-checkbox>
 
     </mat-dialog-content>
 

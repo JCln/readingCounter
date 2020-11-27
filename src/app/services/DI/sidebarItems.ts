@@ -1,30 +1,45 @@
-import { ITestSidebar } from './../../Interfaces/isidebar-items';
+export const sidebarItemsTest = {
 
-export const sidebarItemsTest: ITestSidebar[] = [
-    { routerUrl: 'wr', name: 'مدیریت', isClosable: false, isRefreshable: false, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/al/auth1', name: 'auth1', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/k', name: 'karbari', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/rcf', name: 'readingConfig', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/cst', name: 'counterState', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/al/auth2', name: 'auth2', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/al/auth3', name: 'auth3', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/al/auth4', name: 'auth4', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/mu/all', name: 'agGrid', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/mu/add', name: 'add Contact mg', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/ms', name: 'مدیریت سرور', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/al', name: 'auth', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/mrm', name: 'مدیریت نقش ها', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/mc', name: 'مدیریت کشور', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/mp', name: 'مدیریت استان', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/mr', name: 'مدیریت منطقه', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/mz', name: 'مدیریت ناحیه', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/m/mzd', name: 'مدیریت محدوده', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/foo', name: 'گزارش گیری', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/test', name: 'تست', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/table', name: 'جدول', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/profile', name: 'پروفایل', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/apk', name: 'apk', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/bi', name: 'اطلاعات پایه', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/msge', name: 'پیام زمان‌دار', isClosable: true, isRefreshable: true, sid_isOpenItems: false },
-    { routerUrl: '/wr/privacy', name: 'تنظیمات کلمه عبور', isClosable: true, isRefreshable: true, sid_isOpenItems: false }
-]
+    items: [
+        {
+            route: '', title: ' مدیریت قرائت', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
+                { route: '/wr/m/kar', title: 'karbari', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 1 },
+                { route: '/wr/m/rcf', title: 'readingConfig', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/cst', title: 'counterState', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/mu/all', title: 'agGrid', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/mu/add', title: 'add Contact mg', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/ms', title: 'مدیریت سرور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/mrm', title: 'مدیریت نقش ها', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+            ]
+        },
+        {
+            route: '', title: 'درخت دسترسی', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
+                { route: '/wr/m/al/ap', title: 'apps', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/m/al/me', title: 'modules', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/m/al/cr', title: 'controllers', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/m/al/ac', title: 'actions', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+            ]
+        },
+        {
+            route: '', title: 'مدیریت نواحی', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
+                { route: '/wr/m/mc', title: 'مدیریت کشور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/m/mp', title: 'مدیریت استان', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/m/mr', title: 'مدیریت منطقه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/m/mz', title: 'مدیریت ناحیه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/m/mzd', title: 'مدیریت محدوده', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+            ]
+        },
+        {
+            route: '', title: 'سایر', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
+                { route: '/wr/foo', title: 'گزارش گیری', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/test', title: 'تست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/table', title: 'جدول', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/profile', title: 'پروفایل', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/apk', title: 'apk', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/bi', title: 'اطلاعات پایه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/msge', title: 'پیام زمان‌دار', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+                { route: '/wr/privacy', title: 'تنظیمات کلمه عبور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 }
+            ]
+        }
+    ]
+}
