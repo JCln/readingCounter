@@ -3,9 +3,9 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InteractionService } from 'src/app/services/interaction.service';
 
+import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
 import { IUserManager } from './../../../Interfaces/iuser-manager';
 import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
-import { CheckboxRenderer } from './checkbox-renderer.componenet';
 
 @Component({
   selector: 'app-all-contacts',

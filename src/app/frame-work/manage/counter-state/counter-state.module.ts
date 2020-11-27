@@ -1,18 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { AgGridModule } from 'ag-grid-angular';
 
+import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
+import { BtnCellRendererComponent } from '../../user-manager/all-contacts/btn-cell-renderer/btn-cell-renderer.component';
 import { CounterStateRoutingModule } from './counter-state-routing.module';
 import { CounterStateComponent } from './counter-state.component';
-import { CounterStateAddDgComponent } from './counter-state-add-dg/counter-state-add-dg.component';
-import { CounterStateEditDgComponent } from './counter-state-edit-dg/counter-state-edit-dg.component';
 
 
 @NgModule({
-  declarations: [CounterStateComponent, CounterStateAddDgComponent, CounterStateEditDgComponent],
+  declarations: [CounterStateComponent],
   imports: [
-    SharedModule,
-    ReactiveFormsModule,
+    CommonModule,
+    AgGridModule.withComponents([CheckboxRenderer, BtnCellRendererComponent]),
     CounterStateRoutingModule
   ]
 })
