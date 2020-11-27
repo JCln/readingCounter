@@ -13,20 +13,28 @@ import { ITabs } from './../../Interfaces/isidebar-items';
 })
 export class TabWrapperComponent implements OnInit {
   tabs: ITabs[] = [];
-  currentRoute: any[] = [];
+  // currentRoute: any[] = [];
+  currentRoute: any;
   @Output() childPageTitle = new EventEmitter<string>();
 
   constructor(private router: Router, private sideBarItemsService: SidebarItemsService, private interactionService: InteractionService) {
-    this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
-      if (sidebars) {
-        this.currentRoute = sidebars.items;
-        this.currentRoute.map((items: any) => {
-          items.subItems.map((subItems: any) => {
-            this.currentRoute.push(subItems);
-          })
-        })
-      }
-    })
+    // this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
+    //   if (sidebars) {
+    //     this.currentRoute = sidebars.items;
+    //     this.currentRoute.map((items: any) => {
+    //       items.subItems.map((subItems: any) => {
+    //         this.currentRoute.push(subItems);
+    //       })
+    //     })
+    //   }
+    // })
+    this.currentRoute = this.sideBarItemsService.getTestSideTest();
+    this.currentRoute = this.currentRoute.items;
+    // this.currentRoute.map((items: any) => {
+    //   items.subItems.map((subItems: any) => {
+    //     this.currentRoute.push(subItems);
+    //   })
+    // })
   }
 
   checkRouteStatus = () => {
