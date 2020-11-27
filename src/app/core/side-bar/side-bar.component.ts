@@ -10,11 +10,6 @@ import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
 export class SideBarComponent implements OnInit {
   @Input() sid_isSmall: boolean;
   currentRoute: any;
-  // currentRoute: ISidebarItems[] = [];
-  // test shows and !show
-  // testBoolean: boolean = false;
-  // 
-
 
   constructor(private sideBarItemsService: SidebarItemsService, private testSidebarService: SidebarItemsService) {
     // let myTag = this.el.nativeElement.getElementByClassName("toggle_items");
@@ -26,21 +21,18 @@ export class SideBarComponent implements OnInit {
     //   }
     // })
     this.currentRoute = this.testSidebarService.getTestSideTest();
-    this.currentRoute = this.currentRoute.items;    
-    
+    this.currentRoute = this.currentRoute.items;
+
   }
 
   ngOnInit(): void {
   }
-
   toggleSubItems = (item: any): void => {
     this.currentRoute.forEach(aItem => {
       if (item.title !== aItem.title)
         aItem.isOpen = false
       else
-        // aItem.isOpen = !aItem.isOpen
-        item.isOpen = true;
-
+        aItem.isOpen = !aItem.isOpen
     })
   }
   sid_isSmallStatus = () => {
