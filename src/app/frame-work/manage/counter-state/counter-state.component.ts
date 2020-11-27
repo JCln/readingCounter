@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ICounterState } from './../../../Interfaces/icounter-state';
 import { ITrueFalseFilter, TrueFalseFilter } from './../../../Interfaces/itrue-false-filter';
+import { InteractionService } from './../../../services/interaction.service';
 import { CounterStateAddDgComponent } from './counter-state-add-dg/counter-state-add-dg.component';
 import { CounterStateEditDgComponent } from './counter-state-edit-dg/counter-state-edit-dg.component';
 
@@ -15,7 +20,7 @@ import { CounterStateEditDgComponent } from './counter-state-edit-dg/counter-sta
   templateUrl: './counter-state.component.html',
   styleUrls: ['./counter-state.component.scss']
 })
-export class CounterStateComponent implements OnInit {
+export class CounterStateComponent implements OnInit, AfterViewInit {
   trueFalseFilter: ITrueFalseFilter[] = TrueFalseFilter;
 
   titleFilter = new FormControl('');
@@ -30,7 +35,11 @@ export class CounterStateComponent implements OnInit {
   isXarabFilter = new FormControl('');
   isFaqedFilter = new FormControl('');
 
+  zoneDictionary: IDictionaryManager[] = []
+
+  subscription: Subscription
   dataSource = new MatTableDataSource();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   columnsToDisplay = [
     'title',
@@ -60,24 +69,26 @@ export class CounterStateComponent implements OnInit {
     isFaqed: '',
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog, private interactionService: InteractionService, private router: Router) { }
 
   openDialog = () => {
-    const dialogConfig = new MatDialogConfig();
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(CounterStateAddDgComponent, dialogConfig);
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-        
-        if (result) {
-          this.interfaceManagerService.addCounterState(result).subscribe(res => {
-            if (res) {
-              console.log(res);
+    const dialogRef = this.dialog.open(CounterStateAddDgComponent, {
+      width: '30rem',
+      data: {
+        di: this.zoneDictionary
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
 
-            }
-          })
-        }
-      });
+      if (result) {
+        this.interfaceManagerService.addCounterState(result).subscribe(res => {
+          if (res) {
+            console.log(res);
+
+          }
+        })
+      }
     });
   }
   deleteDialog = () => {
@@ -89,22 +100,23 @@ export class CounterStateComponent implements OnInit {
     });
   }
   editDialog = (row: any) => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(CounterStateEditDgComponent, {
-        width: '30rem',
-        data: row
+    const dialogRef = this.dialog.open(CounterStateEditDgComponent, {
+      width: '30rem',
+      data: {
+        row,
+        di: this.zoneDictionary
+      }
 
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.interfaceManagerService.editCounterState(result).subscribe(res => {
-            if (res) {
-              console.log(res);
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.interfaceManagerService.editCounterState(result).subscribe(res => {
+          if (res) {
+            console.log(res);
 
-            }
-          })
-        }
-      });
+          }
+        })
+      }
     });
   }
   deleteSingleRow = async (row: ICounterState) => {
@@ -119,6 +131,23 @@ export class CounterStateComponent implements OnInit {
       });
     }
   }
+  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
+    dataSource.map(dataSource => {
+      zoneDictionary.map(zoneDic => {
+        if (zoneDic.id === dataSource.zoneId)
+          dataSource.zoneId = zoneDic.title;
+      })
+    });
+  }
+  getZoneDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
+
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getCounterState().subscribe((res: ICounterState[]) => {
@@ -129,6 +158,9 @@ export class CounterStateComponent implements OnInit {
     })
   }
   filterSearchs = () => {
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
     this.titleFilter.valueChanges
       .subscribe(
         title => {
@@ -209,10 +241,14 @@ export class CounterStateComponent implements OnInit {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-    console.log(rolesData);
 
     if (rolesData) {
       this.dataSource.data = rolesData;
+      const zoneDictionary = await this.getZoneDictionary();
+
+      this.zoneDictionary = zoneDictionary;
+      this.convertIdToTitle(rolesData, zoneDictionary);
+
       this.dataSource.filterPredicate = this.createFilter();
       this.filterSearchs();
     }
@@ -220,7 +256,15 @@ export class CounterStateComponent implements OnInit {
   ngOnInit() {
     this.classWrapper();
   }
-
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
+  }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
