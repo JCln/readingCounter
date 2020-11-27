@@ -12,15 +12,11 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { ITrueFalse } from './../../../Interfaces/IDictionaryManager';
 import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';
 import { KarbariEditDgComponent } from './karbari-edit-dg/karbari-edit-dg.component';
 
-interface trueFalse {
-  name: string;
-  value: string | boolean;
-
-}
 @Component({
   selector: 'app-karbari',
   templateUrl: './karbari.component.html',
@@ -38,7 +34,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  isTrueF: trueFalse[] = [
+  isTrueF: ITrueFalse[] = [
     { name: 'نباشد', value: false },
     { name: 'باشد', value: true },
     { name: 'هیچکدام', value: '' }

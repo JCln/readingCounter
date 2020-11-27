@@ -10,7 +10,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ICounterState } from './../../../Interfaces/icounter-state';
-import { ITrueFalseFilter, TrueFalseFilter } from './../../../Interfaces/itrue-false-filter';
+import { ITrueFalse } from './../../../Interfaces/IDictionaryManager';
 import { InteractionService } from './../../../services/interaction.service';
 import { CounterStateAddDgComponent } from './counter-state-add-dg/counter-state-add-dg.component';
 import { CounterStateEditDgComponent } from './counter-state-edit-dg/counter-state-edit-dg.component';
@@ -21,8 +21,6 @@ import { CounterStateEditDgComponent } from './counter-state-edit-dg/counter-sta
   styleUrls: ['./counter-state.component.scss']
 })
 export class CounterStateComponent implements OnInit, AfterViewInit {
-  trueFalseFilter: ITrueFalseFilter[] = TrueFalseFilter;
-
   titleFilter = new FormControl('');
   moshtarakinIdFilter = new FormControl('');
   zoneIdFilter = new FormControl('');
@@ -40,6 +38,12 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
   subscription: Subscription
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  isTrueF: ITrueFalse[] = [
+    { name: 'نباشد', value: false },
+    { name: 'باشد', value: true },
+    { name: 'هیچکدام', value: '' }
+  ]
 
   columnsToDisplay = [
     'title',
@@ -269,16 +273,16 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.moshtarakinId.toLowerCase().indexOf(searchTerms.moshtarakinId) !== -1
+        && data.moshtarakinId.toString().toLowerCase().indexOf(searchTerms.moshtarakinId) !== -1
         && data.zoneId.toLowerCase().indexOf(searchTerms.zoneId) !== -1
-        && data.clientOrder.toLowerCase().indexOf(searchTerms.clientOrder) !== -1
-        && data.canEnterNumber.toLowerCase().indexOf(searchTerms.canEnterNumber) !== -1
-        && data.isMane.toLowerCase().indexOf(searchTerms.isMane) !== -1
-        && data.canNumberBeLessThanPre.toLowerCase().indexOf(searchTerms.canNumberBeLessThanPre) !== -1
-        && data.isTavizi.toLowerCase().indexOf(searchTerms.isTavizi) !== -1
-        && data.shouldEnterNumber.toLowerCase().indexOf(searchTerms.shouldEnterNumber) !== -1
-        && data.isXarab.toLowerCase().indexOf(searchTerms.isXarab) !== -1
-        && data.isFaqed.toLowerCase().indexOf(searchTerms.isFaqed) !== -1
+        && data.clientOrder.toString().toLowerCase().indexOf(searchTerms.clientOrder) !== -1
+        && data.canEnterNumber.toString().toLowerCase().indexOf(searchTerms.canEnterNumber) !== -1
+        && data.isMane.toString().toLowerCase().indexOf(searchTerms.isMane) !== -1
+        && data.canNumberBeLessThanPre.toString().toLowerCase().indexOf(searchTerms.canNumberBeLessThanPre) !== -1
+        && data.isTavizi.toString().toLowerCase().indexOf(searchTerms.isTavizi) !== -1
+        && data.shouldEnterNumber.toString().toLowerCase().indexOf(searchTerms.shouldEnterNumber) !== -1
+        && data.isXarab.toString().toLowerCase().indexOf(searchTerms.isXarab) !== -1
+        && data.isFaqed.toString().toLowerCase().indexOf(searchTerms.isFaqed) !== -1
     }
     return filterFunction;
   }

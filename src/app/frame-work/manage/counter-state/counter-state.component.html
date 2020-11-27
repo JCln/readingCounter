@@ -37,7 +37,11 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="zoneIdFilter">
+                <mat-select [formControl]="zoneIdFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.title">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.zoneId}}</td>
@@ -62,7 +66,7 @@
             <mat-form-field>
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="canEnterNumberFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of trueFalseFilter" [value]="truefalse.value">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
                         {{truefalse.name}}
                     </mat-option>
                 </mat-select>
@@ -80,7 +84,7 @@
             <mat-form-field>
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="isManeFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of trueFalseFilter" [value]="truefalse.value">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
                         {{truefalse.name}}
                     </mat-option>
                 </mat-select>
@@ -98,7 +102,7 @@
             <mat-form-field>
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="canNumberBeLessThanPreFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of trueFalseFilter" [value]="truefalse.value">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
                         {{truefalse.name}}
                     </mat-option>
                 </mat-select>
@@ -116,7 +120,7 @@
             <mat-form-field>
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="isTaviziFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of trueFalseFilter" [value]="truefalse.value">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
                         {{truefalse.name}}
                     </mat-option>
                 </mat-select>
@@ -134,7 +138,7 @@
             <mat-form-field>
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="shouldEnterNumberFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of trueFalseFilter" [value]="truefalse.value">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
                         {{truefalse.name}}
                     </mat-option>
                 </mat-select>
@@ -152,7 +156,7 @@
             <mat-form-field>
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="isXarabFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of trueFalseFilter" [value]="truefalse.value">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
                         {{truefalse.name}}
                     </mat-option>
                 </mat-select>
@@ -170,7 +174,7 @@
             <mat-form-field>
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="isFaqedFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of trueFalseFilter" [value]="truefalse.value">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
                         {{truefalse.name}}
                     </mat-option>
                 </mat-select>

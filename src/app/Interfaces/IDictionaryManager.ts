@@ -4,3 +4,7 @@ export interface IDictionaryManager {
     title: string;
     isSelected: boolean;
 }
+export interface ITrueFalse {
+    name: string;
+    value: string | boolean;
+}
