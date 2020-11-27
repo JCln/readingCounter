@@ -22,7 +22,7 @@ export class Auth2AddDgComponent {
       cssClass: [''],
       logicalOrder: [''],
       route: [''],
-      inSidebar: ['', Validators.required]
+      inSidebar: [false, Validators.required]
     })
   }
   save() {

@@ -24,7 +24,9 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   titleFilter = new FormControl('');
   countryIdFilter = new FormControl('');
   logicalOrderFilter = new FormControl('');
+
   dataSource = new MatTableDataSource();
+  editableDataSource = [];
 
   subscription: Subscription;
   countryDictionary: IDictionaryManager[] = [];
@@ -66,12 +68,22 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
+  getEditableSource = (row: any) => {
+    const a = this.editableDataSource.find(dataSource => {
+      if (dataSource.id == row.id) {
+        return dataSource.id;
+      }
+    })
+    return a;
+  }
   editDialog = (row: any) => {
+    const editable = this.getEditableSource(row).countryId;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ProvinceEditDgComponent, {
         width: '30rem',
         data: {
           row,
+          editable,
           di: this.countryDictionary
         }
 
@@ -134,7 +146,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-    console.log(rolesData);
+    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));    
 
     if (rolesData) {
       this.dataSource.data = rolesData;
@@ -182,7 +194,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.countryId.toString().toLowerCase().indexOf(searchTerms.countryId) !== -1
-        && data.logicalOrder.toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
+        && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
     }
     return filterFunction;
   }

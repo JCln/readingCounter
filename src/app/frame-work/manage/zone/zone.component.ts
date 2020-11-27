@@ -29,6 +29,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
 
   subscription: Subscription
   dataSource = new MatTableDataSource();
+  editableDataSource = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   selectedValue;
@@ -73,12 +74,22 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
+  getEditableSource = (row: any) => {
+    const a = this.editableDataSource.find(dataSource => {
+      if (dataSource.id == row.id) {
+        return dataSource.id;
+      }
+    })
+    return a;
+  }
   editDialog = (row: any) => {
+    const editable = this.getEditableSource(row).regionId;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ZoneEditDgComponent, {
         minWidth: '30rem',
         data: {
           row,
+          editable,
           di: this.zoneDictionary
         }
 
@@ -139,6 +150,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
+    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
 
     if (rolesData) {
       if (this.dataSource.paginator) {

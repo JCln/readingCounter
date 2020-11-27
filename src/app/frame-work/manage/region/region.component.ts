@@ -21,11 +21,12 @@ import { RegionEditDgComponent } from './region-edit-dg/region-edit-dg.component
   styleUrls: ['./region.component.scss']
 })
 export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
-  idFilter = new FormControl('');
   titleFilter = new FormControl('');
   provinceIdFilter = new FormControl('');
   logicalOrderFilter = new FormControl('');
+
   dataSource = new MatTableDataSource();
+  editableDataSource = [];
 
   regionDictionary: IDictionaryManager[] = [];
   subscription: Subscription
@@ -65,12 +66,21 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
+  getEditableSource = (row: any) => {
+    const a = this.editableDataSource.find(dataSource => {
+      if (dataSource.id == row.id) {
+        return dataSource.id;
+      }
+    })
+    return a;
+  }
   editDialog = (row: any) => {
+    const editable = this.getEditableSource(row).provinceId;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(RegionEditDgComponent, {
         width: '30rem',
         data: {
-          row, di: this.regionDictionary
+          row, di: this.regionDictionary, editable
         }
 
       });
@@ -128,38 +138,42 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  filterSearchs = () => {
+    this.dataSource.filterPredicate = this.createFilter();
+
+    this.titleFilter.valueChanges
+      .subscribe(
+        title => {
+          this.filterValues.title = title;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.provinceIdFilter.valueChanges
+      .subscribe(
+        provinceId => {
+          this.filterValues.provinceId = provinceId;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.logicalOrderFilter.valueChanges
+      .subscribe(
+        logicalOrder => {
+          this.filterValues.logicalOrder = logicalOrder;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+  }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
+    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
 
     if (rolesData) {
       this.dataSource.data = rolesData;
-      this.dataSource.filterPredicate = this.createFilter();
-
-      this.titleFilter.valueChanges
-        .subscribe(
-          title => {
-            this.filterValues.title = title;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.provinceIdFilter.valueChanges
-        .subscribe(
-          provinceId => {
-            this.filterValues.provinceId = provinceId;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.logicalOrderFilter.valueChanges
-        .subscribe(
-          logicalOrder => {
-            this.filterValues.logicalOrder = logicalOrder;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
+      this.filterSearchs();
+      const regionDictionary = await this.getRegionDictionary();
+      this.regionDictionary = regionDictionary;
+      this.convertIdToTitle(rolesData, regionDictionary);
     }
-    const regionDictionary = await this.getRegionDictionary();
-    this.regionDictionary = regionDictionary;
-    this.convertIdToTitle(rolesData, regionDictionary);
   }
   ngOnInit() {
     this.classWrapper();
@@ -182,7 +196,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.provinceId.toLowerCase().indexOf(searchTerms.provinceId) !== -1
-        && data.logicalOrder.toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
+        && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
     }
     return filterFunction;
   }

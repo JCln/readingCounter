@@ -14,12 +14,13 @@ export class RegionEditDgComponent {
   constructor(fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<RegionEditDgComponent>) {
+    const editable = data.editable
     data = data.row;
     this.selected = data.provinceId;
     this.form = fb.group({
       id: data.id,
       title: data.title,
-      provinceId: data.id,
+      provinceId: editable,
       logicalOrder: data.logicalOrder
     })
   }

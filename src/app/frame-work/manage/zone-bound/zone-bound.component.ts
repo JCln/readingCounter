@@ -33,7 +33,8 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
 
   zoneBoundDictionary: IDictionaryManager[] = [];
   dataSource = new MatTableDataSource();
-  subscription: Subscription
+  editableDataSource = [];
+  subscription: Subscription;
 
   columnsToDisplay = ['title', 'zoneId', 'fromEshterak', 'toEshterak', 'actions'];
   filterValues = {
@@ -81,12 +82,22 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
+  getEditableSource = (row: any) => {
+    const a = this.editableDataSource.find(dataSource => {
+      if (dataSource.id == row.id) {
+        return dataSource.id;
+      }
+    })
+    return a;
+  }
   editDialog = (row: any) => {
+    const editable = this.getEditableSource(row).zoneId;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ZoneBoundEditDgComponent, {
         width: '30rem',
         data: {
           row,
+          editable,
           di: this.zoneBoundDictionary
         }
       });
@@ -138,7 +149,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-    console.log(rolesData);
+    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
 
     if (rolesData) {
       this.dataSource.data = rolesData;

@@ -16,12 +16,13 @@ export class ZoneBoundEditDgComponent {
     private dialogRef: MatDialogRef<ZoneBoundEditDgComponent>,
     fb: FormBuilder
   ) {
+    const editable = data.editable;
     data = data.row;
     this.selected = data.zoneId;
     this.form = fb.group({
       id: data.id,
       title: data.title,
-      zoneId: data.id,
+      zoneId: editable,
       govermentalCode: data.govermentalCode,
       fromEshterak: data.fromEshterak,
       toEshterak: data.toEshterak,

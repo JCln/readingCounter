@@ -15,12 +15,14 @@ export class ProvinceEditDgComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ProvinceEditDgComponent>
   ) {
+    const editable = data.editable;
     data = data.row;
     this.selected = data.countryId;
+
     this.form = fb.group({
       id: data.id,
       title: data.title,
-      countryId: data.id,
+      countryId: editable,
       logicalOrder: data.logicalOrder
     })
   }

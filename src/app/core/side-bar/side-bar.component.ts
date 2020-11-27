@@ -15,13 +15,13 @@ export class SideBarComponent implements OnInit {
     // let myTag = this.el.nativeElement.getElementByClassName("toggle_items");
 
 
-    // this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
-    //   if (sidebars) {
-    //     this.currentRoute = sidebars.items;
-    //   }
-    // })
-    this.currentRoute = this.testSidebarService.getTestSideTest();
-    this.currentRoute = this.currentRoute.items;
+    this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
+      if (sidebars) {
+        this.currentRoute = sidebars.items;
+      }
+    })
+    // this.currentRoute = this.testSidebarService.getTestSideTest();
+    // this.currentRoute = this.currentRoute.items;
 
   }
 
