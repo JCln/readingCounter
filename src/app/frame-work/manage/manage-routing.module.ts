@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'mzd', loadChildren: () => import('./zone-bound/zone-bound.module').then(mzd => mzd.ZoneBoundModule) },
   { path: 'kar', loadChildren: () => import('./karbari/karbari.module').then(karbari => karbari.KarbariModule) },
   { path: 'cs', loadChildren: () => import('./counter-state/counter-state.module').then(counterState => counterState.CounterStateModule) },
-  { path: 'rcf', loadChildren: () => import('./reading-config/reading-config.module').then(readingConfig => readingConfig.ReadingConfigModule) },
+  { path: 'rc', loadChildren: () => import('./reading-config/reading-config.module').then(readingConfig => readingConfig.ReadingConfigModule) },
   { path: 'al', loadChildren: () => import('./authLevels/authlevels.module').then(authLevels => authLevels.AuthlevelsModule) }
 ];
 
