@@ -50,7 +50,7 @@
             <div class="header">
                 مسکونی
             </div>
-            <mat-form-field>
+            <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="isMaskooniFilter" name="truefalse">
                     <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
@@ -68,7 +68,7 @@
             <div class="header">
                 لرزش
             </div>
-            <mat-form-field>
+            <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
                 <mat-select [formControl]="hasReadingVibrateFilter" name="truefalse">
                     <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">

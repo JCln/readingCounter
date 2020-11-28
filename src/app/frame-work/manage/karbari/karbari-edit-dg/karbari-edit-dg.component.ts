@@ -15,6 +15,7 @@ export class KarbariEditDgComponent {
     fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<KarbariEditDgComponent>) {
+
     const editable = data.editable;
     data = data.row;
     this.selected = data.provinceId;

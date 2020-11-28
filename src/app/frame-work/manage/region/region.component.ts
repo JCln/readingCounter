@@ -195,7 +195,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.provinceId.toLowerCase().indexOf(searchTerms.provinceId) !== -1
+        && data.provinceId.toString().toLowerCase().indexOf(searchTerms.provinceId) !== -1
         && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
     }
     return filterFunction;

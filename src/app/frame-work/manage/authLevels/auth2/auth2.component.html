@@ -24,7 +24,11 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="authLevel1IdFilter">
+                <mat-select [formControl]="authLevel1IdFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of auth1Dictionary" [value]="truefalse.title">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.authLevel1Id}}</td>

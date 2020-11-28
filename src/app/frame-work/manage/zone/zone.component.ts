@@ -10,7 +10,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
+import { IDictionaryManager, ITrueFalse } from './../../../Interfaces/IDictionaryManager';
 import { IZoneManager } from './../../../Interfaces/izone-manager';
 import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { ZoneAddDgComponent } from './zone-add-dg/zone-add-dg.component';
@@ -33,7 +33,11 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   selectedValue;
-  items: string[] = ['شهری', 'غیرشهری'];
+  isTrueF: ITrueFalse[] = [
+    { name: 'نباشد', value: false },
+    { name: 'باشد', value: true },
+    { name: 'هیچکدام', value: '' }
+  ]
   zoneId: any[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 

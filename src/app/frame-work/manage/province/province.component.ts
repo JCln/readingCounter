@@ -146,9 +146,8 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));    
-
     if (rolesData) {
+      this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
       this.dataSource.data = rolesData;
       this.dataSource.filterPredicate = this.createFilter();
 

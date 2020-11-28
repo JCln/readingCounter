@@ -90,7 +90,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     return a;
   }
   editDialog = (row: any) => {
-    const editable = this.getEditableSource(row).countryId;
+    const editable = this.getEditableSource(row).provinceId;
     const dialogRef = this.dialog.open(KarbariEditDgComponent, {
       width: '30rem',
       data: {
