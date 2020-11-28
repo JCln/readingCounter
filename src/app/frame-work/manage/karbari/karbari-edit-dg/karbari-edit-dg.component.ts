@@ -15,13 +15,15 @@ export class KarbariEditDgComponent {
     fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<KarbariEditDgComponent>) {
+    const editable = data.editable;
     data = data.row;
     this.selected = data.provinceId;
+
     this.form = fb.group({
       id: data.id,
       moshtarakinId: data.moshtarakinId,
       title: data.title,
-      provinceId: data.id,
+      provinceId: editable,
       isMaskooni: data.isMaskooni,
       isSaxt: data.isSaxt,
       hasReadingVibrate: data.hasReadingVibrate

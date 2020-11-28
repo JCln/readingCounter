@@ -32,6 +32,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
 
   subscription: Subscription;
   dataSource = new MatTableDataSource();
+  editableDataSource = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   isTrueF: ITrueFalse[] = [
@@ -80,25 +81,33 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
+  getEditableSource = (row: any) => {
+    const a = this.editableDataSource.find(dataSource => {
+      if (dataSource.id == row.id) {
+        return dataSource.id;
+      }
+    })
+    return a;
+  }
   editDialog = (row: any) => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(KarbariEditDgComponent, {
-        width: '30rem',
-        data: {
-          row,
-          di: this.provinceDictionary
-        }
+    const editable = this.getEditableSource(row).countryId;
+    const dialogRef = this.dialog.open(KarbariEditDgComponent, {
+      width: '30rem',
+      data: {
+        row,
+        editable,
+        di: this.provinceDictionary
+      }
 
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.interfaceManagerService.editKarbari(result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
-            }
-          })
-        }
-      });
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.interfaceManagerService.editKarbari(result).subscribe((res: IResponses) => {
+          if (res) {
+            this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+          }
+        })
+      }
     });
   }
   deleteDialog = () => {
@@ -122,7 +131,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
     dataSource.map(dataSource => {
       zoneDictionary.map(zoneDic => {
-        if (zoneDic.title === dataSource.provinceId)
+        if (zoneDic.id === dataSource.provinceId)
           dataSource.provinceId = zoneDic.title;
       })
     });
@@ -146,57 +155,55 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async () => {
     const rolesData = await this.getDataSource();
-
-    if (rolesData) {
-      this.dataSource.data = rolesData;
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
-      this.dataSource.filterPredicate = this.createFilter();
-
-      this.titleFilter.valueChanges
-        .subscribe(
-          title => {
-            this.filterValues.title = title;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.moshtarakinIdFilter.valueChanges
-        .subscribe(
-          moshtarakinId => {
-            this.filterValues.moshtarakinId = moshtarakinId;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.provinceIdFilter.valueChanges
-        .subscribe(
-          provinceId => {
-            this.filterValues.provinceId = provinceId;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.hasReadingVibrateFilter.valueChanges
-        .subscribe(
-          hasReadingVibrate => {
-            this.filterValues.hasReadingVibrate = hasReadingVibrate;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.isMaskooniFilter.valueChanges
-        .subscribe(
-          isMaskooni => {
-            this.filterValues.isMaskooni = isMaskooni;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.isSaxtFilter.valueChanges
-        .subscribe(
-          isSaxt => {
-            this.filterValues.isSaxt = isSaxt;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
+    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
+    this.dataSource.data = rolesData;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
+    this.dataSource.filterPredicate = this.createFilter();
+
+    this.titleFilter.valueChanges
+      .subscribe(
+        title => {
+          this.filterValues.title = title;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.moshtarakinIdFilter.valueChanges
+      .subscribe(
+        moshtarakinId => {
+          this.filterValues.moshtarakinId = moshtarakinId;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.provinceIdFilter.valueChanges
+      .subscribe(
+        provinceId => {
+          this.filterValues.provinceId = provinceId;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.hasReadingVibrateFilter.valueChanges
+      .subscribe(
+        hasReadingVibrate => {
+          this.filterValues.hasReadingVibrate = hasReadingVibrate;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.isMaskooniFilter.valueChanges
+      .subscribe(
+        isMaskooni => {
+          this.filterValues.isMaskooni = isMaskooni;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.isSaxtFilter.valueChanges
+      .subscribe(
+        isSaxt => {
+          this.filterValues.isSaxt = isSaxt;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
 
     const zoneDictionary = await this.getProvinceDictionary();
 
