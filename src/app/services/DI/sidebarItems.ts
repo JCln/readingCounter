@@ -5,7 +5,7 @@ export const sidebarItemsTest = {
             route: '', title: ' مدیریت قرائت', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
                 { route: '/wr/m/kar', title: 'karbari', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 1 },
                 { route: '/wr/m/rcf', title: 'readingConfig', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: '/wr/m/cst', title: 'counterState', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/cs', title: 'counterState', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/mu/all', title: 'agGrid', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/mu/add', title: 'add Contact mg', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/ms', title: 'مدیریت سرور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
