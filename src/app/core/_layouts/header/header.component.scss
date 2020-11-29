@@ -5,9 +5,9 @@
 .header {
   display: flex;
   align-items: center;
-  overflow: hidden;
   background-color: #fff;
   height: 3.5rem;
+  width: 100%;
 }
 
 ul {
@@ -30,14 +30,17 @@ li {
 }
 
 p {
-  background: $gray_d;
+  background: $blue_d;
+  color: $gray_l;
   font-weight: 600;
   width: 100%;
   border-radius: 15px;
 }
 
 .menu_toggle {
-  margin-right: 15%;
+  position: absolute;
+  right: 0;
+  margin-right: .5rem;
   padding: .5rem;
   cursor: pointer;
 }

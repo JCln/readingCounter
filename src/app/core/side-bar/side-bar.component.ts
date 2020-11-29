@@ -9,6 +9,7 @@ import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
 })
 export class SideBarComponent implements OnInit {
   @Input() sid_isSmall: boolean;
+  smallScreen: boolean = false;
   currentRoute: any;
 
   constructor(private sideBarItemsService: SidebarItemsService, private testSidebarService: SidebarItemsService) {
@@ -26,6 +27,9 @@ export class SideBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (screen.width <= 520) {
+      this.smallScreen = true;
+    }
   }
   toggleSubItems = (item: any): void => {
     this.currentRoute.forEach(aItem => {

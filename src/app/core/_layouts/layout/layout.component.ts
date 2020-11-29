@@ -21,9 +21,9 @@ export class LayoutComponent {
       a.classList.toggle('page_conf_13');
     }
     else {
+      framework.classList.toggle('framework_conf');
       a.classList.toggle('page_conf');
     }
-    framework.classList.toggle('framework_conf');
     b.classList.toggle('tabWrapper_conf');
   }
 

@@ -1,4 +1,4 @@
-<ul class="ul" [hidden]="sid_isSmall">
+<ul class="ul" [hidden]="sid_isSmall || smallScreen">
     <li *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)">
         <a class="btn">
             <div class="ul_items">
