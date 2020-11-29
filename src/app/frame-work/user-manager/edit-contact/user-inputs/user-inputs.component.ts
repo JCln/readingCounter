@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IUserInfo } from 'src/app/Interfaces/iuser-manager';
 import { EditContactManagerService } from 'src/app/services/edit-contact-manager.service';
+
 
 @Component({
   selector: 'app-user-inputs',
@@ -7,7 +9,7 @@ import { EditContactManagerService } from 'src/app/services/edit-contact-manager
   styleUrls: ['./user-inputs.component.scss']
 })
 export class UserInputsComponent implements OnInit {
-  @Input() editInfo: any;
+  @Input() editInfo: IUserInfo;
 
   constructor(private editUserManagerService: EditContactManagerService) {
 

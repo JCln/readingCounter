@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { IResponses } from '../Interfaces/iresponses';
 import { IUserEditManager } from '../Interfaces/iuser-manager';
-import { IAUserEditSave } from './../Interfaces/iuser-manager';
+import { IAUserEditSave, IUserInfo } from './../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
 
@@ -17,8 +17,8 @@ export class EditContactManagerService {
 
   constructor(private snackWrapperService: SnackWrapperService, private interfaceManagerService: InterfaceManagerService) { }
 
-  addAUserPersonalInfo = (personalItems: any) => {
-    this.selectedPersonalInfos = personalItems.value;
+  addAUserPersonalInfo = (personalItems: IUserInfo) => {
+    this.selectedPersonalInfos = personalItems;
   }
   getAUserProvince = (zoneItems: any) => {
     zoneItems.map(proIt => {
@@ -70,6 +70,6 @@ export class EditContactManagerService {
       displayName: this.selectedPersonalInfos.displayName,
       deviceId: this.selectedPersonalInfos.deviceId
     }
-    this.connectToServer(vals)
+    this.connectToServer(vals);
   }
 }
