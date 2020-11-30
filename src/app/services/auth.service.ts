@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
 
-import { IAuthTokenType } from './../Interfaces/auth-token-type.enum';
 import { JwtService } from './jwt.service';
 import { MainService } from './main.service';
 
@@ -16,14 +16,8 @@ export class AuthService {
     return this.jwtService.getRefreshToken();
   }
 
-  refreshToken = () => {
-    this.mainService.POSTBODY('V1/Account/Refresh', { 'refreshToken': this.getRefreshToken() }).subscribe((res: IAuthTokenType) => {
-      if (res) {
-        this.jwtService.saveToLocalStorage(res.access_token);
-        this.jwtService.saveToLocalStorageRefresh(res.refresh_token);
-      }
-
-    })
+  refreshToken = (): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Account/Refresh', { 'refreshToken': this.getRefreshToken() })
   }
   routeToLogin = () => {
     this.router.navigateByUrl('/login');

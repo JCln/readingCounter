@@ -1,20 +1,26 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
-import { tap } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { take } from 'rxjs/operators';
 
+import { IAuthTokenType } from '../Interfaces/auth-token-type.enum';
+import { AuthService } from './auth.service';
 import { JwtService } from './jwt.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
-  // private numberOfRetries = 1;
-  // private delayBetweenRetriesMs = 2000;
-  // private isRefreshing = false;
-  // private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private refreshTokenInProgress = false;
+  private refreshTokenSource: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private jwtService: JwtService) { }
+  constructor(
+    private jwtService: JwtService,
+    private authService: AuthService
+  ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.jwtService.getAuthorizationToken();
@@ -48,11 +54,41 @@ export class InterceptorService implements HttpInterceptor {
       //   ))
       // )
       .pipe(
-        tap((event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            // console.log(event.headers.keys);
+        // tap((event: HttpEvent<any>) => {
+        //   if (event instanceof HttpResponse) {
+        //     // console.log(event.headers.keys);
+        //   }
+        // }),
+        catchError((error => {
+          if (
+            req.url.includes('login')
+          ) {
+            return throwError(error)
           }
-        })
+          if (error instanceof HttpErrorResponse) {
+            if (error.status === 401) {
+              if (!this.refreshTokenInProgress) {
+                this.refreshTokenInProgress = true;
+                this.refreshTokenSource.next(null);
+                this.authService.refreshToken()
+                  .pipe(
+                    catchError((err: any) => {
+                      this.refreshTokenInProgress = false;
+                      return throwError(err);
+                    }),
+                    take(1)
+                  )
+                  .subscribe((res: IAuthTokenType) => {
+                    console.log(res);
+                    
+                    this.jwtService.saveToLocalStorage(res.access_token);
+                    this.jwtService.saveToLocalStorageRefresh(res.refresh_token);
+                  })
+              }
+            }
+          }
+          return throwError(error)
+        }))
       )
   }
   // private handle401Error(request: HttpRequest<any>, next: HttpHandler) {

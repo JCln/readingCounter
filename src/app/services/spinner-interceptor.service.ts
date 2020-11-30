@@ -24,7 +24,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
               this.snackWrapperService.openSnackBar('لطفا داده ورودی را بدقت وارد نمایید', 8000, 'snack_danger');
             }
             if (error.status === 401) {
-              this.authService.routeToLogin();
+              console.log(401);
             }
             if (error.status === 403) {
               this.snackWrapperService.openSnackBar('شما به این قسمت دسترسی ندارید', 3000, 'snack_danger');
@@ -46,6 +46,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             }
             if (error.status === 504) {
               this.snackWrapperService.openSnackBar('زمان پاسخ دهی سرویس دهنده به اتمام رسید، لطفا دقایقی دیگر امتحان نمایید', 8000, 'snack_danger');
+            }
+            else {
+              this.snackWrapperService.openSnackBar(error.message, 5000, 'snack_danger');
             }
           }
 
