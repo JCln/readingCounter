@@ -47,9 +47,6 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             if (error.status === 504) {
               this.snackWrapperService.openSnackBar('زمان پاسخ دهی سرویس دهنده به اتمام رسید، لطفا دقایقی دیگر امتحان نمایید', 8000, 'snack_danger');
             }
-            else {
-              this.snackWrapperService.openSnackBar(error.message, 5000, 'snack_danger');
-            }
           }
 
           this.spinnerWrapperService.stopLoading();

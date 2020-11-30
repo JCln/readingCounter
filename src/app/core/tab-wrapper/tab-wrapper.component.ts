@@ -17,7 +17,11 @@ export class TabWrapperComponent implements OnInit {
   currentRoute: any;
   @Output() childPageTitle = new EventEmitter<string>();
 
-  constructor(private router: Router, private sideBarItemsService: SidebarItemsService, private interactionService: InteractionService) {
+  constructor(
+    private router: Router,
+    private sideBarItemsService: SidebarItemsService,
+    private interactionService: InteractionService
+  ) {
     this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
       if (sidebars) {
         this.currentRoute = sidebars.items;
@@ -38,8 +42,11 @@ export class TabWrapperComponent implements OnInit {
   }
 
   checkRouteStatus = () => {
+    const refreshPage = window.location.pathname;
+
     this.router.events.subscribe(res => {
-      if (res instanceof NavigationEnd) {
+      if (res instanceof NavigationEnd || refreshPage !== '/wr') {
+
         ////// just check correct route
         const currentRouteFound = this.currentRoute.find((items: any) => {
           return items.route === this.router.url
@@ -63,7 +70,6 @@ export class TabWrapperComponent implements OnInit {
     })
   }
   isNull = (value: any) => typeof value === 'undefined' || !value || value.length === 0;
-
   isLatestTab = () => {
     const a = this.tabs.map(item => {
       return item;
@@ -75,19 +81,16 @@ export class TabWrapperComponent implements OnInit {
       this.backToPreviousPage();
     }
   }
-
   backToPreviousPage = () => {
     const b = this.tabs.slice(-1).map((item: any) => item.route);
     this.router.navigate(b);
     this.childPageTitle.emit(Object.values(this.tabs).pop().title);
   }
-
   closeAllTabs = () => {
     this.tabs.length = 1;
     this.router.navigateByUrl('/wr');
     this.childPageTitle.emit(Object.values(this.tabs).pop().title);
   }
-
   closeButtonClicked = (routerUrl: string) => {
     const a = this.tabs.filter((item: any) => {
       return item.route !== routerUrl;
@@ -101,7 +104,6 @@ export class TabWrapperComponent implements OnInit {
     };
     this.tabs.push(a);
   }
-
   ngOnInit(): void {
     this.addDashboardTab();
     this.checkRouteStatus();

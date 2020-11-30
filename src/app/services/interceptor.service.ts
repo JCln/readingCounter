@@ -79,8 +79,6 @@ export class InterceptorService implements HttpInterceptor {
                     take(1)
                   )
                   .subscribe((res: IAuthTokenType) => {
-                    console.log(res);
-                    
                     this.jwtService.saveToLocalStorage(res.access_token);
                     this.jwtService.saveToLocalStorageRefresh(res.refresh_token);
                   })
