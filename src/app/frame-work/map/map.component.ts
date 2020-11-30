@@ -65,10 +65,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   showDashboard = (isShowMap: boolean) => {
     this.isShowMap = isShowMap;
     if (isShowMap) {
-      this.router.navigate(['./db']);
+      this.router.navigate(['../wr']);
     }
     else {
-      this.router.navigate(['../wr']);
+      this.router.navigate(['../wr/db']);
     }
   }
 
