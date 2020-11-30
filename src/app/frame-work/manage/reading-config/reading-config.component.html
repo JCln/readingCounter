@@ -9,7 +9,7 @@
     <ng-container matColumnDef="defaultHasPreNumber">
         <th mat-header-cell *matHeaderCellDef>
             <div class="header">
-                پیش شماره
+                پیشفرض پیش شماره
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -43,7 +43,7 @@
     <ng-container matColumnDef="defaultAlalHesab">
         <th mat-header-cell *matHeaderCellDef>
             <div class="header">
-                علی حساب
+                علی الحساب
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -55,7 +55,7 @@
     <ng-container matColumnDef="defaultImagePercent">
         <th mat-header-cell *matHeaderCellDef>
             <div class="header">
-                درصد تصویر
+                درصد پیشفرض عکس
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -91,7 +91,7 @@
     <ng-container matColumnDef="maxImagePercent">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                بیشینه تصویر
+                بیشینه درصد عکس
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -103,7 +103,7 @@
     <ng-container matColumnDef="minImagePercent">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                کمینه تصویر
+                کمینه درصد عکس
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -115,7 +115,7 @@
     <ng-container matColumnDef="lowConstBoundMaskooni">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                ثابت مسکونی
+                ثابت کمینه مسکونی
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -127,7 +127,7 @@
     <ng-container matColumnDef="lowPercentBoundMaskooni">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                درصد مسکونی
+                درصد کمینه مسکونی
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -139,7 +139,7 @@
     <ng-container matColumnDef="highConstBoundMaskooni">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                بیشینه مسکونی
+                ثابت بیشینه مسکونی
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -151,7 +151,7 @@
     <ng-container matColumnDef="highPercentBoundMaskooni">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                درصد مسکونی
+                درصد بیشینه مسکونی
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -163,7 +163,7 @@
     <ng-container matColumnDef="lowConstBoundSaxt">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                ثابت ساخت
+                ثابت کمینه ساخت
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -175,7 +175,7 @@
     <ng-container matColumnDef="lowPercentBoundSaxt">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                درصد ساخت
+                درصد کمینه ساخت
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -187,7 +187,7 @@
     <ng-container matColumnDef="highConstBoundSaxt">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                بیشینه محدوده
+                ثابت بیشینه ساخت
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -199,7 +199,7 @@
     <ng-container matColumnDef="highPercentBoundSaxt">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                درصد محدوده
+                درصد بیشینه ساخت
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -211,7 +211,7 @@
     <ng-container matColumnDef="lowConstZarfiatBound">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                ظرفیت کمینه
+                ثابت کمینه ظرفیت
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -223,7 +223,7 @@
     <ng-container matColumnDef="lowPercentZarfiatBound">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                درصد ظرفیت
+                درصد کمینه ظرفیت
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -235,7 +235,7 @@
     <ng-container matColumnDef="highConstZarfiatBound">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                بیشینه ظرفیت
+                ثابت بیشینه ظرفیت
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -247,7 +247,7 @@
     <ng-container matColumnDef="highPercentZarfiatBound">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                بیشنه درصد ظرفیت
+                درصد بیشنه ظرفیت
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -259,7 +259,7 @@
     <ng-container matColumnDef="lowPercentRateBoundNonMaskooni">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                مسکونی درصد ..
+                درصد low غیر مسکونی
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -271,7 +271,7 @@
     <ng-container matColumnDef="highPercentRateBoundNonMaskooni">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                درصد مسکونی بیشنه
+                درصد high غیر مسکونی
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
@@ -283,7 +283,7 @@
     <ng-container matColumnDef="isOnQeraatCode">
         <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
             <div class="header">
-                کد قرائت
+                کد قرائت باشد
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
