@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
@@ -12,9 +13,10 @@ import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.
   templateUrl: './all-contacts.component.html',
   styleUrls: ['./all-contacts.component.scss']
 })
-export class AllContactsComponent implements OnInit, AfterViewInit {
+export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   frameworkComponents: any;
   rowDataClicked1 = {};
+  subscription: Subscription;
 
   columnDefs = [
     // { field: 'id', sortable: true, filter: true },
@@ -22,7 +24,7 @@ export class AllContactsComponent implements OnInit, AfterViewInit {
     { field: 'username', headerName: 'نام کاربری', sortable: true, filter: true, cellClass: 'cell_conf' },
     { field: 'mobile', headerName: 'موبایل', sortable: true, filter: true, cellClass: 'cell_conf  dir_ltr' },
     { field: 'displayName', headerName: 'نام نمایشی', sortable: true, filter: true, cellClass: 'cell_conf' },
-    { field: 'isActive', headerName: 'فعال', sortable: true, filter: true, cellClass: 'cell_conf',cellRenderer: 'checkboxRenderer' },
+    { field: 'isActive', headerName: 'فعال', sortable: true, filter: true, cellClass: 'cell_conf', cellRenderer: 'checkboxRenderer' },
     { field: 'isLocked', headerName: 'قفل', sortable: true, filter: true, cellClass: 'cell_conf', cellRenderer: 'checkboxRenderer' },
     {
       field: 'ویرایش',
@@ -74,12 +76,14 @@ export class AllContactsComponent implements OnInit, AfterViewInit {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
     })
   }
-
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

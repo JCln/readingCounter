@@ -7,13 +7,11 @@ form {
   gap: .87rem;
 }
 
-// .mat-stepper-horizontal {
-//   font-family: $font_family;
-// }
-
-// .mat-horizontal-content-container {
-//   direction: rtl;
-// }
+.mat-form-field {
+  font-family: $font_family;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
 
 .btn_2 {
   margin: .25rem;
