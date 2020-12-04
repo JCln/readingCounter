@@ -117,7 +117,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: IProvinceManager[], zoneDictionary: IDictionaryManager[]) => {
+  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
 
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
@@ -144,38 +144,45 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  classWrapper = async () => {
-    const rolesData = await this.getDataSource();
-    if (rolesData) {
-      this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
-      this.dataSource.data = rolesData;
-      this.dataSource.filterPredicate = this.createFilter();
+  filterSearchs = () => {
+    this.dataSource.filterPredicate = this.createFilter();
 
-      this.titleFilter.valueChanges
-        .subscribe(
-          title => {
-            this.filterValues.title = title;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.countryIdFilter.valueChanges
-        .subscribe(
-          countryId => {
-            this.filterValues.countryId = countryId;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.logicalOrderFilter.valueChanges
-        .subscribe(
-          logicalOrder => {
-            this.filterValues.logicalOrder = logicalOrder;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
+    this.titleFilter.valueChanges
+      .subscribe(
+        title => {
+          this.filterValues.title = title;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.countryIdFilter.valueChanges
+      .subscribe(
+        countryId => {
+          this.filterValues.countryId = countryId;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.logicalOrderFilter.valueChanges
+      .subscribe(
+        logicalOrder => {
+          this.filterValues.logicalOrder = logicalOrder;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+  }
+  classWrapper = async () => {
+    if (this.interactionService.saveDataForProvince) {
+      this.dataSource.data = this.interactionService.saveDataForProvince;
+      this.countryDictionary = this.interactionService.saveDictionaryForProvince;
     }
-    const provinceDictionary = await this.getProvinceDictionary();
-    this.countryDictionary = provinceDictionary;
-    this.convertIdToTitle(rolesData, provinceDictionary);
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.countryDictionary = await this.getProvinceDictionary();
+      this.interactionService.saveDataForProvince = this.dataSource.data;
+      this.interactionService.saveDictionaryForProvince = this.countryDictionary;
+    }
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
+
+    this.convertIdToTitle(this.dataSource.data, this.countryDictionary);
   }
   ngOnInit() {
     this.classWrapper();

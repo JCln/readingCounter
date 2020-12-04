@@ -122,7 +122,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: IZoneBoundManager[], zoneDictionary: IDictionaryManager[]) => {
+  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
         if (zoneDic.id === dataSource.zoneId)
@@ -147,68 +147,75 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  filterSearchs = () => {
+    this.dataSource.filterPredicate = this.createFilter();
+
+    this.titleFilter.valueChanges
+      .subscribe(
+        title => {
+          this.filterValues.title = title;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.zoneIdFilter.valueChanges
+      .subscribe(
+        zoneId => {
+          this.filterValues.zoneId = zoneId;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.govermentalCodeFilter.valueChanges
+      .subscribe(
+        govermentalCode => {
+          this.filterValues.govermentalCode = govermentalCode;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.fromEshterakFilter.valueChanges
+      .subscribe(
+        fromEshterak => {
+          this.filterValues.fromEshterak = fromEshterak;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.toEshterakFilter.valueChanges
+      .subscribe(
+        toEshterak => {
+          this.filterValues.toEshterak = toEshterak;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+
+    this.toRadifFilter.valueChanges
+      .subscribe(
+        toRadif => {
+          this.filterValues.toRadif = toRadif;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.dbInitialCatalogFilter.valueChanges
+      .subscribe(
+        dbInitialCatalog => {
+          this.filterValues.dbInitialCatalog = dbInitialCatalog;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+  }
   classWrapper = async () => {
-    const rolesData = await this.getDataSource();
-    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
-
-    if (rolesData) {
-      this.dataSource.data = rolesData;
-      this.dataSource.filterPredicate = this.createFilter();
-
-      this.titleFilter.valueChanges
-        .subscribe(
-          title => {
-            this.filterValues.title = title;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.zoneIdFilter.valueChanges
-        .subscribe(
-          zoneId => {
-            this.filterValues.zoneId = zoneId;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.govermentalCodeFilter.valueChanges
-        .subscribe(
-          govermentalCode => {
-            this.filterValues.govermentalCode = govermentalCode;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.fromEshterakFilter.valueChanges
-        .subscribe(
-          fromEshterak => {
-            this.filterValues.fromEshterak = fromEshterak;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.toEshterakFilter.valueChanges
-        .subscribe(
-          toEshterak => {
-            this.filterValues.toEshterak = toEshterak;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-
-      this.toRadifFilter.valueChanges
-        .subscribe(
-          toRadif => {
-            this.filterValues.toRadif = toRadif;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.dbInitialCatalogFilter.valueChanges
-        .subscribe(
-          dbInitialCatalog => {
-            this.filterValues.dbInitialCatalog = dbInitialCatalog;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
+    if (this.interactionService.saveDataForZoneBound) {
+      this.dataSource.data = this.interactionService.saveDataForZoneBound;
+      this.zoneBoundDictionary = this.interactionService.saveDictionaryForZoneBound;
     }
-    const zoneBoundDictionary = await this.getZoneBoundDictionary();
-    this.zoneBoundDictionary = zoneBoundDictionary;
-    this.convertIdToTitle(rolesData, zoneBoundDictionary);
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.zoneBoundDictionary = await this.getZoneBoundDictionary();
+      this.interactionService.saveDataForZoneBound = this.dataSource.data;
+      this.interactionService.saveDictionaryForZoneBound = this.zoneBoundDictionary;
+    }
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
+
+
+    this.convertIdToTitle(this.zoneBoundDictionary, this.zoneBoundDictionary);
   }
   ngOnInit() {
     this.classWrapper();

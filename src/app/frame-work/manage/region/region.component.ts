@@ -113,7 +113,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: IRegionManager[], zoneDictionary: IDictionaryManager[]) => {
+  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
         if (zoneDic.id === dataSource.provinceId)
@@ -164,16 +164,21 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       )
   }
   classWrapper = async () => {
-    const rolesData = await this.getDataSource();
-    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
-
-    if (rolesData) {
-      this.dataSource.data = rolesData;
-      this.filterSearchs();
-      const regionDictionary = await this.getRegionDictionary();
-      this.regionDictionary = regionDictionary;
-      this.convertIdToTitle(rolesData, regionDictionary);
+    if (this.interactionService.saveDataForRegion) {
+      this.dataSource.data = this.interactionService.saveDataForRegion;
+      this.regionDictionary = this.interactionService.saveDictionaryForRegion;
     }
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.regionDictionary = await this.getRegionDictionary();
+      this.interactionService.saveDataForRegion = this.dataSource.data;
+      this.interactionService.saveDictionaryForRegion = this.regionDictionary;
+    }
+
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
+
+    this.convertIdToTitle(this.dataSource.data, this.regionDictionary);
+    this.filterSearchs();
   }
   ngOnInit() {
     this.classWrapper();

@@ -127,7 +127,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: IZoneManager[], zoneDictionary: IDictionaryManager[]) => {
+  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
     dataSource.map(dataSource => {
       zoneDictionary.map(zoneDic => {
         if (zoneDic.id === dataSource.regionId)
@@ -152,53 +152,58 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  classWrapper = async () => {
-    const rolesData = await this.getDataSource();
-    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
+  filterSearchs = () => {
 
-    if (rolesData) {
-      if (this.dataSource.paginator) {
-        this.dataSource.paginator.firstPage();
-      }
-
-      this.dataSource.data = rolesData;
-      this.dataSource.filterPredicate = this.createFilter();
-
-      this.titleFilter.valueChanges
-        .subscribe(
-          title => {
-            this.filterValues.title = title;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.regionIdFilter.valueChanges
-        .subscribe(
-          regionId => {
-            this.filterValues.regionId = regionId;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.isMetroFilter.valueChanges
-        .subscribe(
-          isMetro => {
-            this.filterValues.isMetro = isMetro;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
-      this.logicalOrderFilter.valueChanges
-        .subscribe(
-          logicalOrder => {
-            this.filterValues.logicalOrder = logicalOrder;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
 
-    const zoneDictionary = await this.getZoneDictionary();
+    this.dataSource.filterPredicate = this.createFilter();
 
-    this.zoneDictionary = zoneDictionary;
+    this.titleFilter.valueChanges
+      .subscribe(
+        title => {
+          this.filterValues.title = title;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.regionIdFilter.valueChanges
+      .subscribe(
+        regionId => {
+          this.filterValues.regionId = regionId;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.isMetroFilter.valueChanges
+      .subscribe(
+        isMetro => {
+          this.filterValues.isMetro = isMetro;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.logicalOrderFilter.valueChanges
+      .subscribe(
+        logicalOrder => {
+          this.filterValues.logicalOrder = logicalOrder;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+  }
+  classWrapper = async () => {
+    if (this.interactionService.saveDataForZone) {
+      this.dataSource.data = this.interactionService.saveDataForZone;
+      this.zoneDictionary = this.interactionService.saveDictionaryForZone;
+    }
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.zoneDictionary = await this.getZoneDictionary();
+      this.interactionService.saveDataForZone = this.dataSource.data;
+      this.interactionService.saveDictionaryForZone = this.zoneDictionary;
+    }
 
-    this.convertIdToTitle(rolesData, zoneDictionary);
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
+
+    this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);
 
   }
   ngOnInit() {

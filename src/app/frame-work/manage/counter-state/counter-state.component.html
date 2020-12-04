@@ -2,7 +2,7 @@
 <ag-grid-angular
     style="width: 100%; height: 500px;"
     class="ag-theme-alpine"
-    [rowData]="rowData"
+    [rowData]="dataSource"
     [minColWidth]=100
     [maxColWidth]=140
     [enableRtl]="true"
@@ -10,8 +10,7 @@
     [frameworkComponents]="frameworkComponents"
     [defaultColDef]="defaultColDef"
     [editType]="editType"
-    [pagination]="true"
-    (gridReady)="onGridReady()"
+    [pagination]="true"    
     >
 </ag-grid-angular>
     <!-- [minColWidth]=60 -->

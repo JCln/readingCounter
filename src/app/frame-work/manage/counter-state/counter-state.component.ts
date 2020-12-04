@@ -137,7 +137,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
     }
 
   ];
-  rowData: any;
+  dataSource: IUserManager;
   private gridApi;
   defaultColDef;
   editType;
@@ -150,7 +150,9 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
   ) {
   }
 
-
+  scrambleAndRefreshAll() {
+    this.gridApi.refreshCells('zoneId');
+  }
   onBtnClick1(e) {
     this.rowDataClicked1 = e.rowData;
     console.log(e.rowData.id);
@@ -187,6 +189,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
           dataSource.zoneId = zoneDic.title;
       })
     });
+    this.scrambleAndRefreshAll();
   }
   getZoneDictionary = (): any => {
     return new Promise((resolve) => {
@@ -196,18 +199,21 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
       })
     });
   }
-
   classWrapper = async () => {
-    const dataSource = await this.getDataSource();
-    this.rowData = dataSource;
-    this.zoneDictionary = await this.getZoneDictionary();
-    this.convertIdToTitle(this.rowData, this.zoneDictionary);
+    if (this.interactionService.saveDataForCounterState) {
+      this.dataSource = this.interactionService.saveDataForCounterState;
+      this.zoneDictionary = this.interactionService.saveDictionaryForCounterState;
+    }
+    else {
+      this.dataSource = await this.getDataSource();
+      this.zoneDictionary = await this.getZoneDictionary();
+      this.interactionService.saveDataForCounterState = this.dataSource;
+      this.interactionService.saveDictionaryForCounterState = this.zoneDictionary;
+    }
+    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
   }
-  onGridReady() {
-    this.classWrapper();
-  }
-
   ngOnInit(): void {
+    this.classWrapper();
     this.frameworkComponents = {
       BtnCellRendererComponent: BtnCellRendererComponent,
       numericCellEditor: getNumericCellEditor(),

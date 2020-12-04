@@ -113,8 +113,12 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
       )
   }
   classWrapper = async () => {
-    const rolesData = await this.getDataSource();
-    this.dataSource.data = rolesData;
+    if (this.interactionService.saveDataForAppLevel1)
+      this.dataSource.data = this.interactionService.saveDataForAppLevel1;
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.interactionService.saveDataForAppLevel1 = this.dataSource.data;
+    }
     this.filter();
   }
   ngOnInit() {

@@ -12,7 +12,6 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
-import { IAuthLevel4 } from './../../../../Interfaces/iauth-levels';
 import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
 import { Auth4EditDgComponent } from './auth4-edit-dg/auth4-edit-dg.component';
@@ -104,7 +103,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: IAuthLevel4[], dictionary: IDictionaryManager[]) => {
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[]) => {
     dictionary.map(dic => {
       dataSource.map(dataSource => {
         if (dic.id === dataSource.authLevel3Id)
@@ -152,10 +151,17 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       )
   }
   classWrapper = async () => {
-    const rolesData = await this.getDataSource();
-    this.dataSource.data = rolesData;
-    this.auth3Dictionary = await this.getAuthLevel4IdDictionary();
-    this.convertIdToTitle(rolesData, this.auth3Dictionary);
+    if (this.interactionService.saveDataForAppLevel4) {
+      this.dataSource.data = this.interactionService.saveDataForAppLevel4;
+      this.auth3Dictionary = this.interactionService.saveDictionaryForAppLevel4;
+    }
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.auth3Dictionary = await this.getAuthLevel4IdDictionary();
+      this.interactionService.saveDataForAppLevel4 = this.dataSource.data;
+      this.interactionService.saveDictionaryForAppLevel4 = this.auth3Dictionary;
+    }
+    this.convertIdToTitle(this.dataSource.data, this.auth3Dictionary);
     this.filter();
   }
   ngOnInit() {

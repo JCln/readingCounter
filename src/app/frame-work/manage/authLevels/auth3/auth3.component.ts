@@ -11,7 +11,6 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
-import { IAuthLevel3 } from './../../../../Interfaces/iauth-levels';
 import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
 import { Auth3EditDgComponent } from './auth3-edit-dg/auth3-edit-dg.component';
@@ -99,7 +98,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: IAuthLevel3[], zoneDictionary: IDictionaryManager[]) => {
+  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
         if (zoneDic.id === dataSource.authLevel2Id)
@@ -143,13 +142,18 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
       )
   }
   classWrapper = async () => {
-    const rolesData = await this.getDataSource();
-    this.dataSource.data = rolesData;
-    this.auth2Dictionary = await this.getAuthLevel2Id();
-    console.log(this.auth2Dictionary);
-    console.log(this.dataSource.data);
+    if (this.interactionService.saveDataForAppLevel3) {
+      this.dataSource.data = this.interactionService.saveDataForAppLevel3;
+      this.auth2Dictionary = this.interactionService.saveDictionaryForAppLevel3;
+    }
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.auth2Dictionary = await this.getAuthLevel2Id();
+      this.interactionService.saveDataForAppLevel3 = this.dataSource.data;
+      this.interactionService.saveDictionaryForAppLevel3 = this.auth2Dictionary;
+    }
 
-    this.convertIdToTitle(rolesData, this.auth2Dictionary);
+    this.convertIdToTitle(this.dataSource.data, this.auth2Dictionary);
     this.filter();
   }
   ngOnInit() {

@@ -107,22 +107,27 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  filterSearchs = () => {
+    this.dataSource.filterPredicate = this.createFilter();
+
+    this.titleFilter.valueChanges
+      .subscribe(
+        title => {
+          this.filterValues.title = title;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+  }
   classWrapper = async () => {
-    const rolesData = await this.getDataSource();
-    console.log(rolesData);
-
-    if (rolesData) {
-      this.dataSource.data = rolesData;
-      this.dataSource.filterPredicate = this.createFilter();
-
-      this.titleFilter.valueChanges
-        .subscribe(
-          title => {
-            this.filterValues.title = title;
-            this.dataSource.filter = JSON.stringify(this.filterValues);
-          }
-        )
+    if (this.interactionService.saveDataForCountry) {
+      this.dataSource.data = this.interactionService.saveDataForCountry;
     }
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.interactionService.saveDataForCountry = this.dataSource.data;
+    }
+
+    this.filterSearchs();
   }
   ngOnInit() {
     this.classWrapper();
