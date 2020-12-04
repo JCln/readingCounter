@@ -1,5 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { ISidebarItems, ITabs } from 'src/app/Interfaces/isidebar-items';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -14,42 +14,43 @@ import { InteractionService } from 'src/app/services/interaction.service';
 export class TabWrapperComponent implements OnInit, AfterViewInit {
   tabs: ITabs[] = [];
   currentRoute: ITabs[] = [];
-  // currentRoute: any;
   @Output() childPageTitle = new EventEmitter<string>();
 
   constructor(
     private router: Router,
     private sideBarItemsService: SidebarItemsService,
-    private interactionService: InteractionService,
-    private cdr: ChangeDetectorRef
+    private interactionService: InteractionService
   ) {
   }
 
   testCheck = () => {
-    ////// just check correct route
-    this.router.events.subscribe(res => {
-      console.log(this.currentRoute);
-
+    if (this.router.url !== '/wr') {
       const currentRouteFound = this.currentRoute.find((item: any) => {
         return item.route === this.router.url
       })
+      this.tabs.push(currentRouteFound);
+      this.childPageTitle.emit(Object.values(this.tabs).pop().title);
+    }
+    ////// just check correct route
+    this.router.events.subscribe(res => {
+      if (res instanceof NavigationEnd) {
 
-      console.log(currentRouteFound);
-      if (currentRouteFound) {
-        //////    //  
-        const found = this.tabs.find((item: any) => {
-          console.log(item.route);
-
+        const currentRouteFound = this.currentRoute.find((item: any) => {
           return item.route === this.router.url
         })
-        if (found) {
-          console.log('we have this route now !');
-          return;
-        }
-        else {
-          this.tabs.push(currentRouteFound);
-          this.childPageTitle.emit(Object.values(this.tabs).pop().title);
-          this.cdr.detectChanges();
+
+        if (currentRouteFound) {
+          const found = this.tabs.find((item: any) => {
+            return item.route === this.router.url
+          })
+          if (found) {
+            console.log('we have this route now !');
+            return;
+          }
+          else {
+            this.tabs.push(currentRouteFound);
+            this.childPageTitle.emit(Object.values(this.tabs).pop().title);
+          }
         }
       }
     })
@@ -69,12 +70,10 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
   backToPreviousPage = () => {
     const b = this.tabs.slice(-1).map((item: any) => item.route);
     this.router.navigate(b);
-    this.childPageTitle.emit(Object.values(this.tabs).pop().title);
   }
   closeAllTabs = () => {
     this.tabs.length = 1;
     this.router.navigateByUrl('/wr');
-    this.childPageTitle.emit(Object.values(this.tabs).pop().title);
   }
   closeButtonClicked = (routerUrl: string) => {
     const a = this.tabs.filter((item: any) => {
