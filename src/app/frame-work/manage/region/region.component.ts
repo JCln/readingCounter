@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -25,6 +26,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   provinceIdFilter = new FormControl('');
   logicalOrderFilter = new FormControl('');
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource = new MatTableDataSource();
   editableDataSource = [];
 
@@ -139,6 +141,10 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   filterSearchs = () => {
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+
     this.dataSource.filterPredicate = this.createFilter();
 
     this.titleFilter.valueChanges
@@ -184,6 +190,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
