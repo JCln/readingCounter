@@ -1,9 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { ISidebarItems, ITabs } from 'src/app/Interfaces/isidebar-items';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
-import { ITabs } from './../../Interfaces/isidebar-items';
 
 
 @Component({
@@ -11,60 +11,45 @@ import { ITabs } from './../../Interfaces/isidebar-items';
   templateUrl: './tab-wrapper.component.html',
   styleUrls: ['./tab-wrapper.component.scss']
 })
-export class TabWrapperComponent implements OnInit {
+export class TabWrapperComponent implements OnInit, AfterViewInit {
   tabs: ITabs[] = [];
-  // currentRoute: any[] = [];
-  currentRoute: any;
+  currentRoute: ITabs[] = [];
+  // currentRoute: any;
   @Output() childPageTitle = new EventEmitter<string>();
 
   constructor(
     private router: Router,
     private sideBarItemsService: SidebarItemsService,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private cdr: ChangeDetectorRef
   ) {
-    this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
-      if (sidebars) {
-        this.currentRoute = sidebars.items;
-        this.currentRoute.map((items: any) => {
-          items.subItems.map((subItems: any) => {
-            this.currentRoute.push(subItems);
-          })
-        })
-      }
-    })
-    // this.currentRoute = this.sideBarItemsService.getTestSideTest();
-    // this.currentRoute = this.currentRoute.items;
-    // this.currentRoute.map((items: any) => {
-    //   items.subItems.map((subItems: any) => {
-    //     this.currentRoute.push(subItems);
-    //   })
-    // })
   }
 
-  checkRouteStatus = () => {
-    const refreshPage = window.location.pathname;
-
+  testCheck = () => {
+    ////// just check correct route
     this.router.events.subscribe(res => {
-      if (res instanceof NavigationEnd || refreshPage !== '/wr') {
+      console.log(this.currentRoute);
 
-        ////// just check correct route
-        const currentRouteFound = this.currentRoute.find((items: any) => {
-          return items.route === this.router.url
+      const currentRouteFound = this.currentRoute.find((item: any) => {
+        return item.route === this.router.url
+      })
+
+      console.log(currentRouteFound);
+      if (currentRouteFound) {
+        //////    //  
+        const found = this.tabs.find((item: any) => {
+          console.log(item.route);
+
+          return item.route === this.router.url
         })
-
-        if (currentRouteFound) {
-          //////    //  
-          const found = this.tabs.find((item: any) => {
-            return item.route === this.router.url
-          })
-          if (found) {
-            console.log('we have this route now !');
-            return;
-          }
-          else {
-            this.tabs.push(currentRouteFound);
-            this.childPageTitle.emit(Object.values(this.tabs).pop().title);
-          }
+        if (found) {
+          console.log('we have this route now !');
+          return;
+        }
+        else {
+          this.tabs.push(currentRouteFound);
+          this.childPageTitle.emit(Object.values(this.tabs).pop().title);
+          this.cdr.detectChanges();
         }
       }
     })
@@ -104,9 +89,41 @@ export class TabWrapperComponent implements OnInit {
     };
     this.tabs.push(a);
   }
+
+  getTabItems = (): Promise<ISidebarItems> => {
+    return new Promise((resolve) => {
+      this.sideBarItemsService.getLatestItems().subscribe((sidebars: ISidebarItems) => {
+        if (sidebars) {
+          resolve(sidebars);
+        }
+      })
+    });
+  }
+  getTabWrapper = async () => {
+    const a = await this.getTabItems();
+    if (a) {
+      const temp = a.items;
+      temp.map((items: any) => {
+        items.subItems.map((subItems: any) => {
+          this.currentRoute.push(subItems);
+        })
+      })
+      this.testCheck();
+    }
+
+  }
   ngOnInit(): void {
     this.addDashboardTab();
-    this.checkRouteStatus();
+    this.getTabWrapper();
+    // this.currentRoute = this.sideBarItemsService.getTestSideTest();
+    // this.currentRoute = this.currentRoute.items;
+    // this.currentRoute.map((items: any) => {
+    //   items.subItems.map((subItems: any) => {
+    //     this.currentRoute.push(subItems);
+    //   })
+    // })
+  }
+  ngAfterViewInit(): void {
   }
   refreshCurrentPage = (tabRoute: string) => {
     this.interactionService.setRefresh(tabRoute);
