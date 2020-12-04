@@ -11,8 +11,17 @@ ul {
   margin-left: .2rem;
   margin-top: 0;
   min-height: 82vh;
-  overflow-y: unset;
+  height: 82vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   transition: all ease-in-out 250ms;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+ul::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
 }
 
 ul li {
