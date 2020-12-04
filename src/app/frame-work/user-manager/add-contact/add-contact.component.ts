@@ -55,15 +55,26 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   addAContact = () => {
     this.addUserManagerService.addAContact(this.dataSource);
   }
-  getContactSource = () => {
-    this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {
-      if (res) {
-        this.dataSource = res;
-        this.roleItemsData = res.roleItems;
-        this.addContactData = res.appItems;
-        this.provinceItemsData = res.provinceItems;
-      }
-    })
+  getContactSource = (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.interactionService.saveDataForForAddContacts = null;
+    }
+    if (this.interactionService.saveDataForForAddContacts) {
+      this.dataSource = this.interactionService.saveDataForForAddContacts;
+    }
+    else {
+      this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {
+        if (res) {
+          this.dataSource = res;
+          this.interactionService.saveDataForForAddContacts = res;
+        }
+      })
+    }
+    this.roleItemsData = this.dataSource.roleItems;
+    this.addContactData = this.dataSource.appItems;
+    this.provinceItemsData = this.dataSource.provinceItems;
+
+
   }
   ngOnInit(): void {
     this.getContactSource();
@@ -73,7 +84,7 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
-          this.ngOnInit();
+          this.getContactSource(true);
       }
     })
   }

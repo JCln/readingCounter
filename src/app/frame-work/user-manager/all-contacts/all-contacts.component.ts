@@ -55,7 +55,6 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getDataSource = (): Promise<IUserManager> => {
     return new Promise((resolve) => {
-      // this.interfaceManagerService.getAllUserContactsManager().subscribe(res => {
       this.httpClient.get('http://37.191.92.130/kontoriNew/v1/user/all').subscribe((res: any) => {
         if (res) {
           resolve(res);
@@ -63,9 +62,18 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  classWrapper = async () => {
-    const a = await this.getDataSource();
-    this.rowData = a;
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.interactionService.saveDataForAllContacts = null;
+    }
+    if (this.interactionService.saveDataForAllContacts) {
+      this.rowData = this.interactionService.saveDataForAllContacts;
+    }
+    else {
+      this.rowData = await this.getDataSource();
+      this.interactionService.saveDataForAllContacts = this.rowData;
+    }
+
   }
 
   ngOnInit(): void {
@@ -79,7 +87,7 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
-          this.ngOnInit();
+          this.classWrapper(true);
       }
     })
   }
