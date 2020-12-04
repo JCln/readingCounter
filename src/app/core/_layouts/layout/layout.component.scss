@@ -8,8 +8,8 @@
 }
 
 app-tab-wrapper {
-  background: url(/assets/imgs/tabWrapper/5.jpg) no-repeat;
-  background-size: cover;
+  background: url(/assets/imgs/tabWrapper/7.jpg) no-repeat;
+  object-fit: cover;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -20,11 +20,11 @@ app-tab-wrapper {
   border-radius: 0 0 15px 15px;
 
   @media (min-width: 700px) {
-    width: 73%;
+    width: 79%;
   }
 
   @media (min-width: 1000px) {
-    width: 84%;
+    width: 90%;
   }
 }
 
@@ -69,5 +69,5 @@ app-frame-work {
 }
 
 .tabWrapper_conf {
-  width: 87%;
+  width: 92%;
 }

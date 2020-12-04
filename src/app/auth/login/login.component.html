@@ -1,19 +1,22 @@
-<main class="d_flex_center_column" role="main">
-    <h1 class="title">ورود</h1>
-    <form #form="ngForm" (ngSubmit)="logging()">
-        <section class="_inputs">
-            <div class="input__icons">
-                <input type="text" class="input_1" placeholder="نام کاربری" title="لطفا نام کاربری را وارد نمایید"
-                    minlength="3" maxlength="13" name="userData.username" [(ngModel)]="userData.username" required>
-                <i class="fa fa-user"></i>
-            </div>
-            <div class="input__icons">
-                <input type="password" class="input_1" placeholder="رمزعبور" title="لطفا رمزعبور را وارد نمایید"
-                    minlength="3" maxlength="13" name="userData.password" [(ngModel)]="userData.password" required>
-                <i class="fa fa-lock"></i>
-            </div>
-        </section>
-        <button class="btn_1" type="submit">ورود</button>
-    </form>
-    <div class="version"> 0.0.0.1 نسخه نرم افزار</div>
-</main>
+<section class="content">
+    <main role="main">
+        <h1 class="title">ورود</h1>
+        <form #form="ngForm" (ngSubmit)="logging()">
+            <section class="_inputs">
+                <div class="input__icons">
+                    <input type="text" class="input_1" placeholder="نام کاربری" title="لطفا نام کاربری را وارد نمایید"
+                        minlength="3" maxlength="13" name="userData.username" [(ngModel)]="userData.username" autofocus
+                        required>
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="input__icons">
+                    <input type="password" class="input_1" placeholder="رمزعبور" title="لطفا رمزعبور را وارد نمایید"
+                        minlength="3" maxlength="13" name="userData.password" [(ngModel)]="userData.password" required>
+                    <i class="fa fa-lock"></i>
+                </div>
+            </section>
+            <button class="btn_1" type="submit">ورود</button>
+        </form>
+        <div class="version"> 0.0.0.1 نسخه نرم افزار</div>
+    </main>
+</section>

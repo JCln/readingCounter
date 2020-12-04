@@ -1,12 +1,18 @@
 @import '../../../assets/variable.scss';
 @import '../../../assets/input.scss';
 @import '../../../assets/button.scss';
-@import '../../../assets/mixins.scss';
+
+.content {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 75vh;
+}
 
 main {
   max-width: 23rem;
-  min-height: 27rem;
-  margin: 7rem auto;
+  text-align: center;
   padding: 2rem 2rem 1rem;
   border-radius: $border_s;
   background: $gray_l;
@@ -26,14 +32,11 @@ main {
 
 }
 
-form {
-  margin: auto;
-}
-
 .title {
   font-weight: 600;
   color: $blue_dr;
-  font-size: 2.87rem;
+  font-size: 2.5rem;
+  margin-bottom: $font_s;
 }
 
 ._inputs {
@@ -64,8 +67,10 @@ form {
   color: $blue_dr;
   font-size: $font_m;
   font-weight: 600;
+  margin-top: $font_2;
 }
-input ,
+
+input,
 input:-internal-autofill-selected {
   background-color: $white !important;
   color: $blue_l !important;

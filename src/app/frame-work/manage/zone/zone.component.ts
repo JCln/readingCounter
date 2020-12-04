@@ -191,7 +191,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForKarbari = null;
+      this.interactionService.saveDataForZone = null;
     }
     if (this.interactionService.saveDataForZone) {
       this.dataSource.data = this.interactionService.saveDataForZone;

@@ -27,10 +27,10 @@
 app-clock {
   position: absolute;
   right: 0;
-  top: $font_2;
+  top: $font_3;
   margin: 0.2rem;
 
   @media (min-width:700px) {
-    top: 2.6rem;
+    top: .5rem;
   }
 }

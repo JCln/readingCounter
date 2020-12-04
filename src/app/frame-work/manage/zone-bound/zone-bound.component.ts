@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -34,6 +35,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
   zoneBoundDictionary: IDictionaryManager[] = [];
   dataSource = new MatTableDataSource();
   editableDataSource = [];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   subscription: Subscription;
 
   columnsToDisplay = ['title', 'zoneId', 'fromEshterak', 'toEshterak', 'actions'];
@@ -148,6 +150,12 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   filterSearchs = () => {
+    this.dataSource.paginator = this.paginator;
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+
     this.dataSource.filterPredicate = this.createFilter();
 
     this.titleFilter.valueChanges
