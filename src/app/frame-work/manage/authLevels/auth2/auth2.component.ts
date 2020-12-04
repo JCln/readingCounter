@@ -143,7 +143,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForKarbari = null;
+      this.interactionService.saveDataForAppLevel2 = null;
     }
     if (this.interactionService.saveDataForAppLevel2) {
       this.dataSource.data = this.interactionService.saveDataForAppLevel2;

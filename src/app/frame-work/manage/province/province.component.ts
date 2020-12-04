@@ -171,7 +171,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForKarbari = null;
+      this.interactionService.saveDataForProvince = null;
     }
     if (this.interactionService.saveDataForProvince) {
       this.dataSource.data = this.interactionService.saveDataForProvince;

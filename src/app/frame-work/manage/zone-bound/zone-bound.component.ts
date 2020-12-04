@@ -203,7 +203,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForKarbari = null;
+      this.interactionService.saveDataForZoneBound = null;
     }
     if (this.interactionService.saveDataForZoneBound) {
       this.dataSource.data = this.interactionService.saveDataForZoneBound;

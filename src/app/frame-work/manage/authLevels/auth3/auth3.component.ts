@@ -143,7 +143,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForKarbari = null;
+      this.interactionService.saveDataForAppLevel3 = null;
     }
     if (this.interactionService.saveDataForAppLevel3) {
       this.dataSource.data = this.interactionService.saveDataForAppLevel3;

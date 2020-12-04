@@ -406,12 +406,21 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
   classWrapper = async (canRefresh?: boolean) => {
-    const rolesData = await this.getDataSource();
-    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
-    const zoneBoundDictionary = await this.getZoneDictionary();
-    this.dataSource.data = rolesData;
-    this.zoneDictionary = zoneBoundDictionary;
-    this.convertIdToTitle(rolesData, zoneBoundDictionary);
+    if (canRefresh) {
+      this.interactionService.saveDataForCounterState = null;
+    }
+    if (this.interactionService.saveDataForReadingConfig) {
+      this.dataSource.data = this.interactionService.saveDataForReadingConfig;
+      this.zoneDictionary = this.interactionService.saveDictionaryForReadingConfig;
+    }
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.zoneDictionary = await this.getZoneDictionary()();
+      this.interactionService.saveDataForReadingConfig = this.dataSource.data;
+      this.interactionService.saveDictionaryForReadingConfig = this.zoneDictionary;
+    }
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
+    this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);
     this.filterSearchs();
   }
   ngOnInit() {

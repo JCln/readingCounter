@@ -200,6 +200,9 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
     });
   }
   classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.interactionService.saveDataForCounterState = null;
+    }
     if (this.interactionService.saveDataForCounterState) {
       this.dataSource = this.interactionService.saveDataForCounterState;
       this.zoneDictionary = this.interactionService.saveDictionaryForCounterState;

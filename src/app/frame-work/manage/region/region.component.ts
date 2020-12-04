@@ -171,7 +171,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForKarbari = null;
+      this.interactionService.saveDataForRegion = null;
     }
     if (this.interactionService.saveDataForRegion) {
       this.dataSource.data = this.interactionService.saveDataForRegion;

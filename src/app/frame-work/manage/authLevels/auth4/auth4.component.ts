@@ -152,7 +152,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForKarbari = null;
+      this.interactionService.saveDataForAppLevel4 = null;
     }
     if (this.interactionService.saveDataForAppLevel4) {
       this.dataSource.data = this.interactionService.saveDataForAppLevel4;
