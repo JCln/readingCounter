@@ -153,10 +153,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  classWrapper = async () => {
-    const rolesData = await this.getDataSource();
-    this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
-    this.dataSource.data = rolesData;
+  filterSearchs = () => {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -204,13 +201,22 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       )
+  }
+  classWrapper = async () => {
+    if (this.interactionService.saveDataForKarbari) {
+      this.dataSource.data = this.interactionService.saveDataForKarbari;
+      this.provinceDictionary = this.interactionService.saveDictionaryForKarbari;
+    }
+    else {
+      this.dataSource.data = await this.getDataSource();
+      this.provinceDictionary = await this.getProvinceDictionary();
+      this.interactionService.saveDataForKarbari = this.dataSource.data;
+      this.interactionService.saveDictionaryForKarbari = this.provinceDictionary;
+    }
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
-    const zoneDictionary = await this.getProvinceDictionary();
-
-    this.provinceDictionary = zoneDictionary;
-
-    this.convertIdToTitle(rolesData, zoneDictionary);
-
+    this.convertIdToTitle(this.dataSource.data, this.provinceDictionary);
+    this.filterSearchs();
   }
   ngOnInit() {
     this.classWrapper();
@@ -234,7 +240,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
       let searchTerms = JSON.parse(filter);
       return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
         && data.moshtarakinId.toString().toLowerCase().indexOf(searchTerms.moshtarakinId) !== -1
-        && data.provinceId.toLowerCase().indexOf(searchTerms.provinceId) !== -1
+        && data.provinceId.toString().toLowerCase().indexOf(searchTerms.provinceId) !== -1
         && data.hasReadingVibrate.toString().indexOf(searchTerms.hasReadingVibrate) !== -1
         && data.isMaskooni.toString().indexOf(searchTerms.isMaskooni) !== -1
         && data.isSaxt.toString().indexOf(searchTerms.isSaxt) !== -1

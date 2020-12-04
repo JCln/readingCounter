@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class InteractionService {
-  testDataForKarbari: any;
   saveDataForAppLevel1: any;
   saveDataForAppLevel2: any;
   saveDictionaryForAppLevel2: any;
@@ -17,6 +16,9 @@ export class InteractionService {
 
   saveDataForCounterState: any;
   saveDictionaryForCounterState: any;
+
+  saveDataForKarbari: any;
+  saveDictionaryForKarbari: any;
 
   saveDataForReadingConfig: any;
   saveDictionaryForReadingConfig: any;
