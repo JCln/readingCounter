@@ -201,7 +201,10 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.interactionService.saveDataForKarbari = null;
+    }
     if (this.interactionService.saveDataForZoneBound) {
       this.dataSource.data = this.interactionService.saveDataForZoneBound;
       this.zoneBoundDictionary = this.interactionService.saveDictionaryForZoneBound;
@@ -224,7 +227,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
-          this.ngOnInit();
+          this.classWrapper(true);
       }
     })
   }

@@ -405,7 +405,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
       })
     });
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
     const rolesData = await this.getDataSource();
     this.editableDataSource = JSON.parse(JSON.stringify(rolesData));
     const zoneBoundDictionary = await this.getZoneDictionary();
@@ -422,7 +422,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
-          this.ngOnInit();
+          this.classWrapper(true);
       }
     })
   }

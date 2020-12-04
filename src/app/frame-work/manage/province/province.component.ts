@@ -169,7 +169,10 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.interactionService.saveDataForKarbari = null;
+    }
     if (this.interactionService.saveDataForProvince) {
       this.dataSource.data = this.interactionService.saveDataForProvince;
       this.countryDictionary = this.interactionService.saveDictionaryForProvince;
@@ -191,7 +194,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
-          this.ngOnInit();
+          this.classWrapper(true);
       }
     })
   }

@@ -150,7 +150,10 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.interactionService.saveDataForKarbari = null;
+    }
     if (this.interactionService.saveDataForAppLevel4) {
       this.dataSource.data = this.interactionService.saveDataForAppLevel4;
       this.auth3Dictionary = this.interactionService.saveDictionaryForAppLevel4;
@@ -172,7 +175,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
-          this.ngOnInit();
+          this.classWrapper(true);
       }
     })
   }

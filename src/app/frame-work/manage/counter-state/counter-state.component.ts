@@ -199,7 +199,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
       })
     });
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
     if (this.interactionService.saveDataForCounterState) {
       this.dataSource = this.interactionService.saveDataForCounterState;
       this.zoneDictionary = this.interactionService.saveDictionaryForCounterState;
@@ -229,7 +229,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
-          this.ngOnInit();
+          this.classWrapper(true);
       }
     })
   }

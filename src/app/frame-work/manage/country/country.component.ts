@@ -118,7 +118,10 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.interactionService.saveDataForKarbari = null;
+    }
     if (this.interactionService.saveDataForCountry) {
       this.dataSource.data = this.interactionService.saveDataForCountry;
     }
@@ -136,7 +139,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
-          this.ngOnInit();
+          this.classWrapper(true);
       }
     })
   }

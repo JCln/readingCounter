@@ -91,7 +91,7 @@ export class PrivacyComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
