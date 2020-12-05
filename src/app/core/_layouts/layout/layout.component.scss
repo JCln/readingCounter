@@ -11,6 +11,7 @@ app-header {
   position: sticky;
   top: 0;
   display: block;
+  z-index: 2;
 }
 
 app-tab-wrapper {
@@ -49,7 +50,11 @@ app-side-bar {
   }
 
   @media (min-width: 1000px) {
-    width: 17%;
+    width: 22%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 14%;
   }
 }
 
