@@ -3,6 +3,7 @@
 
 main {
   width: auto;
+  min-height: 85vh;
   border-radius: $border_s;
   background: url('/assets/imgs/framework/bb.jpg') no-repeat $gray_l;
   background-size: cover;

@@ -28,7 +28,7 @@
 .hour {
   --font_xs: 1rem;
   width: .35rem;
-  height: calc(var(--font_xs) + .8rem);
+  height: calc(var(--font_xs) + .5rem);
   background: $blue_l;
 }
 
@@ -38,7 +38,7 @@
   background: $blue_d;
 
   @media (min-width: 700px) {
-    height: 2.5rem;
+    height: 2.1rem;
   }
 }
 
