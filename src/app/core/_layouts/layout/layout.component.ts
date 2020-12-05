@@ -14,15 +14,18 @@ export class LayoutComponent {
     const a = document.querySelector('app-side-bar') as HTMLElement;
     const b = document.querySelector('app-tab-wrapper') as HTMLElement;
     const framework = document.querySelector('app-frame-work') as HTMLElement;
-    if (screen.width <= 1200) {
+    if (screen.width >= 1000) {
       a.classList.toggle('page_conf_8');
     }
-    if (screen.width <= 520) {
+    else if (screen.width >= 700) {
+      a.classList.toggle('page_conf_8');
+    }
+    else if (screen.width >= 520) {
       a.classList.toggle('page_conf_13');
     }
     else {
       framework.classList.toggle('framework_conf');
-      a.classList.toggle('page_conf');
+      a.classList.toggle('page_conf_13');
     }
     b.classList.toggle('tabWrapper_conf');
   }

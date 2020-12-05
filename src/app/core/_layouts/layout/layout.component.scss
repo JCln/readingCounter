@@ -7,6 +7,12 @@
   }
 }
 
+app-header {
+  position: sticky;
+  top: 0;
+  display: block;
+}
+
 app-tab-wrapper {
   background: url(/assets/imgs/tabWrapper/7.jpg) no-repeat;
   object-fit: cover;
@@ -34,6 +40,10 @@ app-side-bar {
   transition: all ease-in-out 150ms;
   z-index: 2;
 
+  @media (min-width: 520px) {
+    width: 38%;
+  }
+
   @media (min-width: 700px) {
     width: 25%;
   }
@@ -48,9 +58,9 @@ app-frame-work {
 }
 
 //ts config
-.page_conf {
-  width: 5%;
-}
+// .page_conf {
+//   width: 5%;
+// }
 
 .page_conf_8 {
   width: 8%;

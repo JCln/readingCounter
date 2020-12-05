@@ -5,16 +5,17 @@ nav {
 }
 
 ul {
-  position: relative;
+  position: fixed;
+  right: 0;
   list-style-type: none;
-  padding: $font_xs 0 $font_xs 0;
+  padding: $font_xs 0;
   margin-left: .2rem;
   margin-top: 0;
-  min-height: 82vh;
-  height: 82vh;
+  height: 85vh;
+  width: 15rem;
   overflow-y: auto;
   overflow-x: hidden;
-  transition: all ease-in-out 250ms;
+  transition: all ease-in-out 150ms;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -49,12 +50,12 @@ ul li {
       width: 100%;
       white-space: nowrap;
       z-index: 500;
-      animation: toggle_side 250ms;
+      animation: toggle_side 150ms;
     }
 
     .fa-arrow-circle-down {
       transform: rotate(0);
-      transition: transform ease-in-out 250ms;
+      transition: transform ease-in-out 150ms;
       color: $blue_l;
     }
   }
@@ -91,6 +92,10 @@ ul li {
   &:hover {
     background: $gray_l;
   }
+}
+
+.sub_item_2 {
+  width: 10rem;
 }
 
 .ul_items {
@@ -162,8 +167,6 @@ i.icons {
   right: 3rem;
   background: $gray_d5;
   top: .5rem;
-  width: 100%;
-  min-width: 15rem;
   height: 100%;
   padding: .5rem;
   min-height: 10rem;

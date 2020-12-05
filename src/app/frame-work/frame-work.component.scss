@@ -3,7 +3,6 @@
 
 main {
   width: auto;
-  height: 82vh;
   border-radius: $border_s;
   background: url('/assets/imgs/framework/bb.jpg') no-repeat $gray_l;
   background-size: cover;
@@ -11,7 +10,6 @@ main {
   box-shadow: 2px 2px 5px 0px $gray_d;
   margin: 0 $font_05;
   padding: $font_05;
-  overflow-x: auto;
   transition: all ease-in-out 150ms;
 }
 
