@@ -407,7 +407,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForCounterState = null;
+      this.interactionService.saveDataForReadingConfig = null;
     }
     if (this.interactionService.saveDataForReadingConfig) {
       this.dataSource.data = this.interactionService.saveDataForReadingConfig;
