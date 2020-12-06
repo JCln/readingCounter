@@ -61,18 +61,22 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.interactionService.saveDataForForAddContacts) {
       this.dataSource = this.interactionService.saveDataForForAddContacts;
+      this.roleItemsData = this.dataSource.roleItems;
+      this.addContactData = this.dataSource.appItems;
+      this.provinceItemsData = this.dataSource.provinceItems;
     }
     else {
       this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {
         if (res) {
           this.dataSource = res;
           this.interactionService.saveDataForForAddContacts = res;
+
+          this.roleItemsData = this.dataSource.roleItems;
+          this.addContactData = this.dataSource.appItems;
+          this.provinceItemsData = this.dataSource.provinceItems;
         }
       })
     }
-    this.roleItemsData = this.dataSource.roleItems;
-    this.addContactData = this.dataSource.appItems;
-    this.provinceItemsData = this.dataSource.provinceItems;
 
 
   }

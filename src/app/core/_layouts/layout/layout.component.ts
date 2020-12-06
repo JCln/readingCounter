@@ -24,9 +24,12 @@ export class LayoutComponent {
       a.classList.toggle('page_conf_13');
     }
     else {
-      framework.classList.toggle('framework_conf');
       a.classList.toggle('page_conf_13');
     }
+    if (screen.width >= 1200) {
+      framework.classList.toggle('framework_conf_s');
+    }
+    framework.classList.toggle('framework_conf_xs');
     b.classList.toggle('tabWrapper_conf');
   }
 

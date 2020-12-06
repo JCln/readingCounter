@@ -13,9 +13,6 @@ export class SideBarComponent implements OnInit {
   currentRoute: any;
 
   constructor(private sideBarItemsService: SidebarItemsService, private testSidebarService: SidebarItemsService) {
-    // let myTag = this.el.nativeElement.getElementByClassName("toggle_items");
-
-
     this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
       if (sidebars) {
         this.currentRoute = sidebars.items;

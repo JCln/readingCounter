@@ -5,14 +5,13 @@ nav {
 }
 
 ul {
-  position: fixed;
+  position: relative;
   right: 0;
   list-style-type: none;
   padding: $font_xs 0;
   margin-left: .2rem;
   margin-top: 0;
   height: 85vh;
-  // width: 15rem;
   overflow-y: auto;
   overflow-x: hidden;
   transition: all ease-in-out 150ms;
@@ -134,6 +133,9 @@ ul li {
 
 
 // for small sidebar we added ngIf and separate scss
+.ul_2 {
+  width: 15rem;
+}
 
 .ul_2 li {
   width: 4rem;

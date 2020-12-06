@@ -36,10 +36,13 @@ app-tab-wrapper {
 }
 
 app-side-bar {
+  position: fixed;
+  right: 0;
   width: 0%;
   min-height: 75vh;
-  transition: all ease-in-out 150ms;
+  height: 85vh;
   z-index: 2;
+  transition: all ease-in-out 150ms;
 
   @media (min-width: 520px) {
     width: 38%;
@@ -60,12 +63,25 @@ app-side-bar {
 
 app-frame-work {
   width: 100%;
+
+  @media (min-width: 520px) {
+    width: 62%;
+  }
+
+  @media (min-width: 700px) {
+    width: 75%;
+  }
+
+  @media (min-width: 1000px) {
+    width: 78%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 86%;
+  }
 }
 
 //ts config
-// .page_conf {
-//   width: 5%;
-// }
 
 .page_conf_8 {
   width: 8%;
@@ -75,12 +91,12 @@ app-frame-work {
   width: 13%;
 }
 
-.framework_conf {
-  width: 95%;
+.framework_conf_xs {
+  width: 93%;
 }
 
-.framework_conf_big {
-  width: 99%;
+.framework_conf_s {
+  width: 95%;
 }
 
 .tabWrapper_conf {

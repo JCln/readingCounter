@@ -2,7 +2,7 @@ export const sidebarItemsTest = {
 
     items: [
         {
-            route: '', title: ' مدیریت قرائت', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
+            route: '', title: ' مدیریت قرائت', logicalOrder: 1, cssClass: 'fab fa-deviantart', isOpen: false, subItems: [
                 { route: '/wr/m/kar', title: 'karbari', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 1 },
                 { route: '/wr/m/rc', title: 'readingConfig', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/cs', title: 'counterState', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
@@ -13,7 +13,7 @@ export const sidebarItemsTest = {
             ]
         },
         {
-            route: '', title: 'درخت دسترسی', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
+            route: '', title: 'درخت دسترسی', logicalOrder: 1, cssClass: 'fas fa-users-cog ', isOpen: false, subItems: [
                 { route: '/wr/m/al/ap', title: 'apps', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/m/al/me', title: 'modules', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/m/al/cr', title: 'controllers', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
@@ -21,7 +21,7 @@ export const sidebarItemsTest = {
             ]
         },
         {
-            route: '', title: 'مدیریت نواحی', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
+            route: '', title: 'مدیریت نواحی', logicalOrder: 1, cssClass: 'fas fa-bezier-curve', isOpen: false, subItems: [
                 { route: '/wr/m/mc', title: 'مدیریت کشور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/m/mp', title: 'مدیریت استان', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/m/mr', title: 'مدیریت منطقه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
@@ -30,7 +30,7 @@ export const sidebarItemsTest = {
             ]
         },
         {
-            route: '', title: 'سایر', logicalOrder: 1, cssClass: '', isOpen: false, subItems: [
+            route: '', title: 'سایر', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
                 { route: '/wr/foo', title: 'گزارش گیری', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/test', title: 'تست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/table', title: 'جدول', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },

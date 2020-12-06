@@ -24,7 +24,7 @@ export class InterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.jwtService.getAuthorizationToken();
-    if (authToken) {
+    if (authToken && !this.refreshTokenInProgress) {
       req = req.clone({
         headers: req.headers.set('Authorization', `Bearer ` + authToken),
         withCredentials: true
@@ -76,9 +76,10 @@ export class InterceptorService implements HttpInterceptor {
                       this.refreshTokenInProgress = false;
                       return throwError(err);
                     }),
-                    take(1)
+                    take(2)
                   )
                   .subscribe((res: IAuthTokenType) => {
+                    this.refreshTokenInProgress = false;
                     this.jwtService.saveToLocalStorage(res.access_token);
                     this.jwtService.saveToLocalStorageRefresh(res.refresh_token);
                   })

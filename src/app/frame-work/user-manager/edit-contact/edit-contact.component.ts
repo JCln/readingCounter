@@ -44,18 +44,29 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
   addAContact = () => {
     this.editUserManagerService.editAUserContact(this.dataSource, this.UUid);
   }
-  getContactSource = () => {
-    this.interfaceManagerService.getUserContactManager(this.UUid).subscribe((res: any) => {
-      if (res) {
-        this.dataSource = res;
-        this.roleItemsData = res.roleItems;
-        this.addContactData = res.appItems;
-        this.provinceItemsData = res.provinceItems;
-        this.personalizeInfo = res.userInfo;
-        console.log(this.personalizeInfo);
+  getContactSource = (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.interactionService.saveDataForEditContacts = null;
+    }
+    if (this.interactionService.saveDataForEditContacts) {
+      this.dataSource = this.interactionService.saveDataForEditContacts;
+      this.roleItemsData = this.dataSource.roleItems;
+      this.addContactData = this.dataSource.appItems;
+      this.provinceItemsData = this.dataSource.provinceItems;
+    }
+    else {
+      this.interfaceManagerService.getUserContactManager(this.UUid).subscribe((res: any) => {
+        if (res) {
+          this.dataSource = res;
+          this.interactionService.saveDataForEditContacts = res;
 
-      }
-    })
+          this.roleItemsData = this.dataSource.roleItems;
+          this.addContactData = this.dataSource.appItems;
+          this.provinceItemsData = this.dataSource.provinceItems;
+          this.personalizeInfo = this.dataSource.userInfo;
+        }
+      })
+    }
   }
 
   ngOnInit(): void {
@@ -66,7 +77,7 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
-          this.ngOnInit();
+          this.getContactSource(true);
       }
     })
   }
