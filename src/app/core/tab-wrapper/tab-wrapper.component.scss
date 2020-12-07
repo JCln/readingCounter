@@ -118,7 +118,13 @@ li.active::before {
 }
 
 // edit tooltips
+.tooltip .tooltip_text::after {
+  top: auto;
+  bottom: 100%;
+  border-color: transparent transparent black transparent;
+}
+
 .tooltip_text {
-  bottom: 150% !important;
+  bottom: -150% !important;
   left: 4rem !important;
 }
