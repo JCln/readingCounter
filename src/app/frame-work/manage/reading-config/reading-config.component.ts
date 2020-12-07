@@ -389,7 +389,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       )
   }
-  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
+  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
         if (zoneDic.id === dataSource.zoneId)
@@ -415,7 +415,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.zoneDictionary = await this.getZoneDictionary()();
+      this.zoneDictionary = await this.getZoneDictionary();
       this.interactionService.saveDataForReadingConfig = this.dataSource.data;
       this.interactionService.saveDictionaryForReadingConfig = this.zoneDictionary;
     }
