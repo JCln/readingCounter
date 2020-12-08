@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 @font-face {
   font-family: BLotus;
@@ -50,3 +52,20 @@ li {
   outline: none;
   font-family: inherit;
 }
+
+.ag-theme-alpine {
+
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+// ts config
+.cell_conf {
+  color: #5c5c5c;
+  font-size: 1.2rem;
+}
+
+.dir_ltr {
+  direction: ltr;
+}
+// 

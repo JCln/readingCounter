@@ -1,0 +1,38 @@
+@import '../../../../assets/variable.scss';
+@import '../../../../assets/button.scss';
+
+.mat-dialog-content {
+  display: grid;
+  justify-content: center;
+  min-height: 13rem;
+  min-width: 20rem;
+  overflow: hidden;
+  direction: rtl;
+  text-align: right;
+}
+
+.btn_1,
+.btn_2 {
+  width: 50%;
+  max-width: 8rem;
+  font-size: 1.2rem;
+}
+
+h2 {
+  text-align: right;
+  font-family: $font_family;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $gray_l;
+  background: $blue_l;
+  border-radius: 15px;
+  padding: 1rem;
+}
+
+p {
+  max-width: 25rem;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+  font-weight: 600;
+}

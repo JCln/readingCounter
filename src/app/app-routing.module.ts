@@ -17,12 +17,13 @@ const routes: Routes = [
     path: '', component: LayoutComponent, children: [
       { path: 'wr', loadChildren: () => import('./frame-work/frame-work.module').then(fr => fr.FrameWorkModule) }
     ]
-  }
+  },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

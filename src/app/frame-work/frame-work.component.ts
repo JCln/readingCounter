@@ -2,10 +2,11 @@ import '../../../node_modules/leaflet-easyprint';
 import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import '../../../src/assets/L.EasyButton/src/easy-button.js';
 
-import { AfterViewInit, Component, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
-import { InteractionService } from '../services/interaction.service';
+import { AddNewComponent } from './manage/add-new/add-new.component';
 
 declare let L;
 
@@ -30,35 +31,29 @@ L.Marker.prototype.options.icon = defaultIcon;
   templateUrl: './frame-work.component.html',
   styleUrls: ['./frame-work.component.scss']
 })
-export class FrameWorkComponent implements OnInit, AfterViewInit, OnChanges {
-  title: string = '';
+export class FrameWorkComponent implements OnInit, AfterViewInit {
+  @Input() pageTitle: string = '';
+  @Input() refreshPage: boolean;
   orderId;
 
-  constructor(private interactionService: InteractionService, private route: ActivatedRoute) {
-
-  }
-  private initMap = () => {
-    this.interactionService.getPageTitle().subscribe(title => this.title = title);
+  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
 
   }
   ngOnInit(): void {
-    this.initMap();
     this.orderId = this.route.snapshot.paramMap.get('isShowMap');
-    console.log(this.orderId);
-  }
-  ngOnChanges(): void {
-
-
   }
   ngAfterViewInit(): void {
-    console.log(window.history.state);
-
-    // const navigation = this.router.getCurrentNavigation();
-    // console.log(navigation);
-
     // this.orderId = navigation.extras.state ? navigation.extras.state.orderId : 0;
 
-    console.log(this.orderId);
   }
+
+  // question on each section ////////////
+  openDialog = () => {
+    const dialogRef = this.dialog.open(AddNewComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+  // ///////
 
 }

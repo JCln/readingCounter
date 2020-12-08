@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
-import { ConfirmDialogService } from './../services/confirm-dialog.service';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { MatCheckboxComponent } from './mat-checkbox/mat-checkbox.component';
+import { getPersianPaginatorIntl } from './getPersianPaginatorIntl';
 import { MaterialModule } from './material.module';
 import { SharedRoutingModule } from './shared-routing.module';
-import { ToggleComponent } from './toggle/toggle.component';
 
 
 @NgModule({
-  declarations: [MatCheckboxComponent, ToggleComponent, ConfirmDialogComponent],
+  declarations: [],
   imports: [
     FormsModule,
     CommonModule,
@@ -19,9 +17,12 @@ import { ToggleComponent } from './toggle/toggle.component';
     SharedRoutingModule
   ],
   exports: [
-    CommonModule, FormsModule, MaterialModule, ToggleComponent, ConfirmDialogComponent
+    CommonModule, FormsModule, MaterialModule
   ],
-  providers: [ConfirmDialogService]
+  providers: [
+    { provide: MatPaginatorIntl, useValue: getPersianPaginatorIntl() }
+  ]
+
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {

@@ -1,4 +1,3 @@
-import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
 import { Injectable } from '@angular/core';
@@ -9,73 +8,35 @@ declare let L;
   providedIn: 'root'
 })
 export class MapService {
+  private map;
+  
   constructor() { }
 
-  private overlays = () => {
-    const littleton =
-      L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
-      denver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
-      aurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
-      golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
-
-    const cities = L.layerGroup([littleton, denver, aurora, golden]);
+  private overlays = (lat: any, lan: any, map: L.Map): any => {
+    L.marker([lat, lan]).addTo(map);
   }
 
-  getRandomLatLng(map) {
-    const bounds = map.getBounds(),
-      southWest = bounds.getSouthWest(),
-      northEast = bounds.getNorthEast(),
-      lngSpan = northEast.lng - southWest.lng,
-      latSpan = northEast.lat - southWest.lat;
-    return new L.LatLng(
-      southWest.lat + latSpan * Math.random(),
-      southWest.lng + lngSpan * Math.random());
-  }
-  
   addMarkerCluster = (map: L.Map) => {
     const markers = L.markerClusterGroup();
-    markers.addLayer(L.marker(this.getRandomLatLng(map)));
     map.addLayer(markers);
-  }
-
-  routingControl = (map: L.Map) => {
-    L.Routing.control({
-      waypoints: [
-        L.latLng(57.74, 11.94),
-        L.latLng(57.6792, 11.949),
-      ]
-    }).addTo(map);
   }
 
   fullScreen = (map: L.Map) => {
     map.addControl(new L.Control.Fullscreen());
   }
-
+  removeAllLayers = (map, window) => {
+    map.eachLayer(function (layer) {
+      map.removeLayer(layer);
+    }, window)
+  }
   ///////// buttons
   buttons = (map: L.Map) => {
     const onLocationFound = (e) => {
-      console.log(e);
-      var radius = e.accuracy;
-
-      L.circle([e.latlng, 1000], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 1000
-      }).addTo(map);
-
-
-      L.marker(e.latlng).addTo(map)
-        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+      this.overlays(e._lastCenter.lat, e._lastCenter.lng, map);
     }
 
     const addInvalidateMap = (map: L.Map) => {
       map.invalidateSize();
-    }
-    const removeAllLayers = (map, window) => {
-      map.eachLayer(function (layer) {
-        map.removeLayer(layer);
-      }, window)
     }
     L.easyPrint({
       position: 'bottomleft',
@@ -92,7 +53,7 @@ export class MapService {
     }, 'مکان من').addTo(map);
 
     L.easyButton('fa-close', function (btn) {
-      removeAllLayers(map, window);
+      this.removeAllLayers(map, window);
     }, 'بستن تمامی لایه ها').addTo(map);
 
   }

@@ -11,16 +11,12 @@ $gray_96: #969696;
 $gray_dr: #707070;
 $gray_dr2: #5c5c5c;
 $medium_slate_blue: #7d83ff;
+$green1: rgb(7, 48, 7);
+$green2: rgb(2, 43, 2);
+$green3: rgb(23, 46, 23);
 $orange: #F68038;
 $red: #f63e38;
-// $test1: #0c3d81;
-// $test2: #0b2758;
-// $test3: #0b2758;
-// $test4: #001c4d;
-// $test5: #061f49;
-// $green1: #073007;
-// $green2: #022b02;
-// $green3: #172e17;
+$pink: #ff4081;
 
 $border_s: 15px;
 $border_50: 50%;
@@ -34,6 +30,7 @@ $font_l: 1.5rem;
 $font_2: 2rem;
 $font_3: 3rem;
 
+$font_family: BLotus, "Blotus", tahoma, Sans-Serif;
 
 .hr_1 {
   width: 70%;
@@ -58,3 +55,11 @@ a:focus,
 a:active {
   outline: none;
 }
+// $test1: #0c3d81;
+// $test2: #0b2758;
+// $test3: #0b2758;
+// $test4: #001c4d;
+// $test5: #061f49;
+// $green1: #073007;
+// $green2: #022b02;
+// $green3: #172e17;

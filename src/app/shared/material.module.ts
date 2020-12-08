@@ -10,7 +10,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
@@ -27,7 +29,9 @@ import { MatTableModule } from '@angular/material/table';
         MatCheckboxModule,
         MatRadioModule,
         MatButtonToggleModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSelectModule,
+        MatStepperModule
     ],
     exports: [
         MatGridListModule,
@@ -42,7 +46,9 @@ import { MatTableModule } from '@angular/material/table';
         MatCheckboxModule,
         MatRadioModule,
         MatButtonToggleModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSelectModule,
+        MatStepperModule
     ]
 })
 export class MaterialModule {

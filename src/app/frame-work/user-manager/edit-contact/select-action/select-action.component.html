@@ -1,0 +1,40 @@
+<div class="accept">
+    <button class="btn_2" matStepperNext (click)="addActionItems()">
+        <i class="fa fa-long-arrow-left"></i>
+        صفحه بعد</button>
+    <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+</div>
+
+<section class="auth_1_container">
+    <div [ngClass]="{'active_tab': item.title === switchCaseName}" class="auth_1_item"
+        *ngFor="let item of addContactData" (click)="changeSwitchCase(item.title)">
+        {{item.title}}
+    </div>
+</section>
+<section class="auth_1" *ngFor="let item of addContactData" [ngSwitch]="item.title">
+    <div *ngSwitchCase="switchCaseName">
+        <section class=" auth_2" *ngFor="let moduleIt of item.moduleItems">
+            <div class="text">{{moduleIt.title}}</div>
+            <div class="hr"></div>
+
+            <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
+                <div class="text_btn">{{controllerIt.title}}</div>
+
+                <section class="auth_4">
+                    <div class="checkboxes" *ngFor="let actionIt of controllerIt.actionItems">
+                        <mat-checkbox [(ngModel)]="actionIt.isSelected">
+                            <!-- (ngModelChange)="updateAllComplete()" -->
+                            {{actionIt.title}}
+                        </mat-checkbox>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </div>
+</section>
+<div class="accept">
+    <button class="btn_2" matStepperNext (click)="addActionItems()">
+        <i class="fa fa-long-arrow-left"></i>
+        صفحه بعد</button>
+    <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+</div>

@@ -1,0 +1,60 @@
+@import '../shared-manage';
+
+.header {
+  max-width: 7rem;
+  font-size: 1.1rem;
+}
+
+.filter {
+  display: block;
+  width: 100%;
+}
+
+// @mixin mat-table-columns($columns) {
+//   .mat-column- {
+
+//     @each $colName,
+//     $props in $columns {
+
+//       $width: map-get($props, 'width');
+
+//       &#{$colName} {
+//         flex: $width;
+//         max-width: $width;
+
+//         @if map-has-key($props, 'color') {
+//           color: map-get($props, 'color');
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @include mat-table-columns((
+//     zoneId: (width: 7rem),
+//     defaultAlalHesab: (width: 6rem),
+//     maxAlalHesab: (width: 5rem),
+//     minAlalHesab: (width: 5rem),
+//     defaultImagePercent: (width: 6rem),
+//     maxImagePercent: (width: 5rem),
+//     minImagePercent: (width: 5rem),
+//     defaultHasPreNumber: (width: 6rem),
+//     isOnQeraatCode: (width: 5rem),
+//     displayBillId: (width: 5rem),
+//     displayRadif: (width: 5rem),
+//     lowConstBoundMaskooni: (width: 5rem),
+//     lowPercentBoundMaskooni: (width: 5rem),
+//     highConstBoundMaskooni: (width: 5rem),
+//     highPercentBoundMaskooni: (width: 5rem),
+//     lowConstBoundSaxt: (width: 5rem),
+//     lowPercentBoundSaxt: (width: 5rem),
+//     highConstBoundSaxt: (width: 5rem),
+//     highPercentBoundSaxt: (width: 5rem),
+//     lowConstZarfiatBound: (width: 5rem),
+//     lowPercentZarfiatBound: (width: 5rem),
+//     highConstZarfiatBound: (width: 5rem),
+//     highPercentZarfiatBound: (width: 5rem),
+//     lowPercentRateBoundNonMaskooni: (width: 5rem),
+//     highPercentRateBoundNonMaskooni: (width: 5rem)
+
+//   ));

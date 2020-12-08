@@ -4,20 +4,31 @@ nav {
   direction: rtl;
 }
 
-ul {
+.ul {
   position: relative;
+  right: 0;
   list-style-type: none;
-  padding: $font_xs 0 $font_xs 0;
+  padding: $font_xs 0;
   margin-left: .2rem;
-  height: 80vh;
+  margin-top: 0;
+  height: 85vh;
   overflow-y: auto;
-  transition: all ease-in-out 250ms;
+  overflow-x: hidden;
+  transition: all ease-in-out 150ms;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-ul li {
+ul::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
+}
+
+.ul li {
+  margin-left: .2rem;
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
-  background: $gray_d;
+  background: $gray_e3;
   margin-bottom: 0.5rem;
   padding: $font_05 0 $font_05 $font_05;
 }
@@ -29,12 +40,7 @@ ul li {
   .btn {
     font-size: $font_m;
     font-weight: 600;
-    color: $gray_dr;
-
-    .fa-bar-chart {
-      margin-right: $font_05;
-      margin-left: $font_xxs;
-    }
+    color: $blue_dr;
 
     .on_show {
       display: flex;
@@ -43,53 +49,44 @@ ul li {
       width: 100%;
       white-space: nowrap;
       z-index: 500;
-      animation: toggle_side 250ms;
+      animation: toggle_side 150ms;
     }
 
     .fa-arrow-circle-down {
       transform: rotate(0);
-      transition: transform ease-in-out 250ms;
-      color: $blue_d;
+      transition: transform ease-in-out 150ms;
+      color: $blue_l;
     }
   }
 
-  .sub_item {
-    background: $white;
-    padding: .3rem 0.87rem;
-    margin: 0.4rem 0.2rem;
-    text-align: right;
-
-    height: auto;
-    border-radius: 0 $border_s $border_s 0;
-    overflow: visible;
-
-    & a {
-      display: block;
-      position: relative;
-      color: $gray_dr;
-      font-size: $font_m;
-      font-weight: 600;
-      border-radius: 0 $border_s $border_s 0;
-      padding: 0 .3rem;
-
-      &:hover {
-        background: $gray_l;
-      }
-    }
-  }
 
   &.active {
     background: $gray_e3;
+    border: .5rem solid $pink;
 
-    .btn {
-
-      .fa-arrow-circle-down {
-        transform: rotate(180deg);
-        color: $blue_l;
-      }
+    .fa-arrow-circle-down {
+      transform: rotate(180deg);
+      color: $pink;
     }
 
   }
+}
+
+.sub_item_1,
+.sub_item_2 {
+  background: $white;
+  padding: .3rem 0.87rem;
+  margin: 0.4rem 0.2rem;
+  text-align: right;
+
+  height: auto;
+  border-radius: $border_s;
+  overflow: visible;
+
+  color: $blue_d;
+  font-size: $font_m;
+  font-weight: 600;
+  outline: none;
 
   &:hover {
     background: $gray_l;
@@ -105,7 +102,7 @@ ul li {
 .ul::after {
   content: '';
   position: absolute;
-  background: $gray_96;
+  background: $gray_dr;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
   bottom: 0;
@@ -119,7 +116,7 @@ ul li {
 .ul::before {
   content: '';
   position: absolute;
-  background: $gray_e3;
+  background: $blue_d;
   clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
   top: 0;
   bottom: 0;
@@ -133,42 +130,52 @@ ul li {
 
 // for small sidebar we added ngIf and separate scss
 .ul_2 {
-  position: relative;
-}
-
-.ul_2 li {
-  width: 4rem;
-  position: relative;
-
-  &.active {
-    background: $gray_e3;
-  }
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
 }
 
 .btn_2 {
-  font-size: $font_m;
-  font-weight: 600;
-  color: $gray_dr;
+  cursor: pointer;
+  border-radius: $font_2 0 0 $font_2;
+  background: $gray_e3;
+  margin-bottom: 0.5rem;
+  padding: $font_05 0 $font_05 $font_05;
+}
 
-  .fa-bar-chart {
-    margin-right: $font_05;
+.li_2 {
+  position: relative;
+
+  &:hover {
+    ._show {
+      visibility: visible;
+    }
   }
 }
 
-._show {
+.sub_item_2 {
+  cursor: pointer;
+}
 
+
+i.icons {
+  margin: 0 .5rem;
+  font-size: 2rem;
+  color: $blue_d;
+}
+
+._show {
   visibility: hidden;
   display: block;
-  z-index: 2;
+  z-index: 4;
   position: absolute;
+  width: 15rem;
   right: 3rem;
   background: $gray_d5;
   top: .5rem;
-  width: 100%;
-  min-width: 15rem;
   height: 100%;
   padding: .5rem;
-  min-height: 13rem;
+  min-height: 10rem;
   height: auto;
   border-radius: 15px;
 
@@ -188,23 +195,6 @@ ul li {
   }
 }
 
-.ul_2 li:hover {
-  background: $gray_l;
-  min-width: 12rem;
-  width: auto;
-
-  ._show {
-    visibility: visible;
-
-    a:active {
-      background: $gray_e3;
-    }
-
-    a:hover {
-      background: $gray_l;
-    }
-  }
-}
 
 @keyframes toggle_side {
   0% {

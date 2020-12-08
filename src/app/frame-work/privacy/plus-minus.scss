@@ -1,0 +1,38 @@
+@import '../../../assets/variable.scss';
+
+.plus_minus {
+  display: flex;
+  align-items: center;
+}
+
+.plus {
+
+  justify-content: flex-end;
+}
+
+.val {
+  justify-content: center;
+  padding: $font_05 $font_xs;
+  background: $gray_l;
+  color: $blue_d;
+  border-radius: 5px;
+  font-size: $font_s;
+  font-weight: 600;
+}
+
+.minus {
+  justify-content: flex-start;
+}
+
+.plus,
+.minus {
+  display: grid;
+  padding: $font_05;
+  margin: .3rem;
+  border: 1px solid $gray_e3;
+  background: $gray_l;
+  color: $gray_96;
+  border-radius: 5px;
+  font-size: $font_s;
+  cursor: pointer;
+}

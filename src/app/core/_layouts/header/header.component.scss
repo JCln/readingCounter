@@ -5,14 +5,15 @@
 .header {
   display: flex;
   align-items: center;
-  overflow: hidden;
   background-color: #fff;
-  height: 3.5rem;
+  height: 2.25rem;
+  width: 100%;
 }
 
 ul {
-  margin-right: auto;
   display: flex;
+  margin: 0;
+  height: 100%;
 }
 
 li {
@@ -30,14 +31,21 @@ li {
 }
 
 p {
-  background: $gray_d;
+  background: $blue_d;
+  color: $gray_l;
   font-weight: 600;
   width: 100%;
   border-radius: 15px;
 }
 
 .menu_toggle {
-  margin-right: 15%;
+  position: absolute;
+  right: 0;
+  margin-right: .5rem;
   padding: .5rem;
   cursor: pointer;
+
+  @media (min-width: 700px) {
+    margin-right: 12rem;
+  }
 }

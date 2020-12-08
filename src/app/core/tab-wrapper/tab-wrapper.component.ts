@@ -1,34 +1,47 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ISidebarItems, ITabs } from 'src/app/Interfaces/isidebar-items';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
+import { InteractionService } from 'src/app/services/interaction.service';
 
-import { ISidebarItems } from './../../Interfaces/isidebar-items';
+
 
 @Component({
   selector: 'app-tab-wrapper',
   templateUrl: './tab-wrapper.component.html',
   styleUrls: ['./tab-wrapper.component.scss']
 })
-export class TabWrapperComponent implements OnInit {
-  tabs: ISidebarItems[] = [];
-  currentRoute: ISidebarItems[];
+export class TabWrapperComponent implements OnInit, AfterViewInit {
+  tabs: ITabs[] = [];
+  currentRoute: ITabs[] = [];
+  @Output() childPageTitle = new EventEmitter<string>();
 
-  constructor(private router: Router, private sidebarItems: SidebarItemsService, private _location: Location) {
-    this.currentRoute = this.sidebarItems.getSideBarItems();
+  constructor(
+    private router: Router,
+    private sideBarItemsService: SidebarItemsService,
+    private interactionService: InteractionService
+  ) {
   }
 
-  checkRouteStatus = () => {
+  testCheck = () => {
+    if (this.router.url !== '/wr') {
+      const currentRouteFound = this.currentRoute.find((item: any) => {
+        return item.route === this.router.url
+      })
+      this.tabs.push(currentRouteFound);
+      this.childPageTitle.emit(Object.values(this.tabs).pop().title);
+    }
+    ////// just check correct route
     this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
-        ////// just check correct route
-        const currentRouteFound = this.currentRoute.find(items => {
-          return items.routerUrl === this.router.url
+
+        const currentRouteFound = this.currentRoute.find((item: any) => {
+          return item.route === this.router.url
         })
+
         if (currentRouteFound) {
-          //////    //  
-          const found = this.tabs.find(item => {
-            return item.routerUrl === this.router.url
+          const found = this.tabs.find((item: any) => {
+            return item.route === this.router.url
           })
           if (found) {
             console.log('we have this route now !');
@@ -36,51 +49,83 @@ export class TabWrapperComponent implements OnInit {
           }
           else {
             this.tabs.push(currentRouteFound);
+            this.childPageTitle.emit(Object.values(this.tabs).pop().title);
           }
         }
       }
     })
   }
   isNull = (value: any) => typeof value === 'undefined' || !value || value.length === 0;
+  isLatestTab = () => {
+    const a = this.tabs.map(item => {
+      return item;
+    })
 
-  // isLatestTab = () => {
-  //   const a = this.tabs.map(item => {
-  //     return item;
-  //   })
-
-  //   if (this.isNull(a[0]))
-  //     this.router.navigateByUrl('/wr');
-  //   else {
-  //     this.backToPreviousPage();
-  //   }
-  // }
-
+    if (this.isNull(a[0]))
+      this.router.navigateByUrl('/wr');
+    else {
+      this.backToPreviousPage();
+    }
+  }
   backToPreviousPage = () => {
-    const b = this.tabs.slice(-1).map(item => item.routerUrl);
+    const b = this.tabs.slice(-1).map((item: any) => item.route);
     this.router.navigate(b);
   }
-
   closeAllTabs = () => {
     this.tabs.length = 1;
     this.router.navigateByUrl('/wr');
   }
-
   closeButtonClicked = (routerUrl: string) => {
-    const a = this.tabs.filter(item => {
-      return item.routerUrl !== routerUrl;
+    const a = this.tabs.filter((item: any) => {
+      return item.route !== routerUrl;
     })
     this.tabs = a;
     this.backToPreviousPage();
-    // this.isLatestTab();
   }
   addDashboardTab = () => {
-    const a = { routerUrl: '/wr', name: 'مدیریت کاربران', isClosable: false, isRefreshable: false, sid_isOpenItems: false, sid_isSmall: false };
+    const a = {
+      route: '/wr', title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
+    };
     this.tabs.push(a);
   }
 
+  getTabItems = (): Promise<ISidebarItems> => {
+    return new Promise((resolve) => {
+      this.sideBarItemsService.getLatestItems().subscribe((sidebars: ISidebarItems) => {
+        if (sidebars) {
+          resolve(sidebars);
+        }
+      })
+    });
+  }
+  getTabWrapper = async () => {
+    const a = await this.getTabItems();
+    if (a) {
+      const temp = a.items;
+      temp.map((items: any) => {
+        items.subItems.map((subItems: any) => {
+          this.currentRoute.push(subItems);
+        })
+      })
+      this.testCheck();
+    }
+
+  }
   ngOnInit(): void {
     this.addDashboardTab();
-    this.checkRouteStatus();
+    this.getTabWrapper();
+    // this.currentRoute = this.sideBarItemsService.getTestSideTest();
+    // this.currentRoute = this.currentRoute.items;
+    // this.currentRoute.map((items: any) => {
+    //   items.subItems.map((subItems: any) => {
+    //     this.currentRoute.push(subItems);
+    //   })
+    // })
+  }
+  ngAfterViewInit(): void {
+  }
+  refreshCurrentPage = (tabRoute: string) => {
+    this.interactionService.setRefresh(tabRoute);
   }
 
 }

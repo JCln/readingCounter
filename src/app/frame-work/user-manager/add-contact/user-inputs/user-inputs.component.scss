@@ -1,0 +1,25 @@
+@import '../../../../../assets/variable.scss';
+@import '../../../../../assets/button.scss';
+
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
+  gap: .87rem;
+}
+
+.mat-form-field {
+  font-family: $font_family;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.btn_2 {
+  margin: .25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-form-field {
+  text-align: right;
+}

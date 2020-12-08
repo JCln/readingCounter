@@ -10,14 +10,20 @@ export class InterfaceService {
 
   constructor(private mainService: MainService) { }
 
-  getRole = (): Observable<any> => {
-    return this.mainService.GET('V1.Test/Role/All');
+  // policy manager 
+  getPolicies = (hasRow: boolean): Observable<any> => {
+    return this.mainService.GET('V1.Test/Policy/Active/' + `${hasRow}`);
   }
-  deleteRole = (id: number): Observable<any> => {
-    return this.mainService.POST('Role/Remove', id);
+  editPolicies = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1.Test/Policy/Edit', body);
   }
-  editRole = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('Role/Edit', body);
+  addPolicies = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1.Test/Policy/Add', body);
   }
-
+  // 
+  // get sidebar ////
+  getSideBar = (): Observable<any> => {
+    return this.mainService.GET('V1/User/SideBar');
+  }
+  // ///// ///
 }

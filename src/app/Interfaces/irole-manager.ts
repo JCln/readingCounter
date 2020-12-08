@@ -3,4 +3,5 @@ export interface IRoleManager {
     title: string;
     isActive: boolean
     needDeviceIdLogin: boolean;
+    titleUnicode: string;
 }

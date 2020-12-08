@@ -1,0 +1,76 @@
+@import '../../../assets/variable.scss';
+@import '../../../assets/button.scss';
+
+.mat-form-field {
+  text-align: right;
+  font-family: $font_family;
+}
+
+.mat-dialog-content {
+  display: grid;
+  min-height: 13rem;
+  min-width: 28rem;
+  gap: .2rem;
+  overflow: auto;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-checkbox {
+  direction: rtl;
+  margin-bottom: 1rem;
+}
+
+.mat-option {
+  text-align: right;
+}
+
+.btn_1,
+.btn_2 {
+  width: 50%;
+  max-width: 8rem;
+  font-size: 1.2rem;
+}
+
+._custom {
+  background: $blue_l;
+  color: $gray_l;
+}
+
+h2 {
+  font-family: $font_family;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $blue_l;
+  border: 2px solid $blue_l;
+  border-radius: 15px;
+  padding: 1rem;
+}
+
+.mat-dialog-container {
+  border: 1px solid $blue_l;
+}
+
+._blue_dark {
+  color: $blue_d;
+  border: 2px solid $blue_d;
+}
+
+button._blue_dark {
+  background-color: $blue_d;
+  color: $gray_l;
+}
+
+::ng-deep {
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 .5rem;
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: $gray_dr;
+  }
+}

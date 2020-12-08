@@ -54,6 +54,7 @@
 
   label {
     display: flex;
+    position: relative;
     font-size: $font_m;
     margin: 0 $font_05;
     color: $blue_l;
@@ -61,5 +62,29 @@
     border-radius: $border_50;
     padding: $font_05;
     cursor: pointer;
+  }
+}
+
+.clickable_dash {
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 5.2rem;
+    height: 3rem;
+    top: -.25rem;
+    right: 0;
+  }
+}
+
+.clickable_map {
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 5.5rem;
+    height: 3rem;
+    top: -.25rem;
+    left: 0;
   }
 }

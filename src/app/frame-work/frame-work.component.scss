@@ -3,7 +3,7 @@
 
 main {
   width: auto;
-  min-height: 80vh;
+  min-height: 85vh;
   border-radius: $border_s;
   background: url('/assets/imgs/framework/bb.jpg') no-repeat $gray_l;
   background-size: cover;
@@ -18,7 +18,7 @@ main {
   display: flex;
   justify-content: space-between;
   border-radius: $border_s;
-  padding: .2rem $font_xs;
+  padding: 0 $font_xs;
   margin-bottom: $font_05;
   background: $white;
   border-bottom: .2rem solid $blue_dr;
@@ -29,8 +29,8 @@ main {
 }
 
 ._logo_content {
-  width: 4.5rem;
-  height: 3.2rem;
+  width: 4.3rem;
+  height: 3rem;
 }
 
 .btn_1 {
@@ -38,7 +38,7 @@ main {
   margin-left: $font_xs;
   width: 4rem;
   height: $font_2;
-  border-radius: 15px;
+  border-radius: $border_s;
   border: none;
   cursor: pointer;
 

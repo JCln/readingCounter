@@ -1,0 +1,225 @@
+@import '../../../assets/variable.scss';
+@import '../../../assets/button.scss';
+@import '../../../assets/input.scss';
+
+table {
+  display: block;
+  overflow: auto;
+  width: 100%;
+  border: 2px solid $blue_l;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+  font-family: $font_family;
+}
+
+td,
+th {
+  border: 1px solid $gray_e3;
+}
+
+th.mat-header-cell {
+  text-align: right;
+  padding: .2rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #002CA8;
+}
+
+.header {
+  color: $blue_l;
+  border: 1px solid $blue_l;
+  margin: auto;
+  border-radius: $border_s;
+  text-align: center;
+  padding: .2rem;
+  max-width: 13rem;
+  font-size: $font_m;
+}
+
+td.mat-cell {
+  padding: .87rem;
+  font-size: $font_m;
+  color: $gray_dr2;
+  font-weight: 600;
+}
+
+._actions {
+  display: flex;
+  align-items: center;
+  border: none;
+}
+
+._custom {
+  color: $blue_l;
+  border-radius: $border_50;
+  padding: $font_xs;
+  font-size: $font_l;
+  cursor: pointer;
+}
+
+._key,
+._value {
+  font-family: $font_family;
+}
+
+.add_new {
+  padding: $font_xs;
+  direction: rtl;
+}
+
+.mat-dialog-actions,
+.mat-dialog-content,
+td,
+th {
+  font-family: $font_family;
+  font-size: $font_s;
+}
+
+
+::ng-deep {
+  .mat-option-text {
+    text-align: right;
+    font-family: $font_family;
+  }
+
+  .mat-dialog-container {
+    direction: rtl;
+  }
+
+  table {
+    direction: rtl;
+  }
+
+  .mat-form-field-infix {
+    font-size: 1.2rem;
+    font-weight: 600;
+    width: 8rem !important;
+  }
+
+  .mat-select {
+    font-family: $font_family;
+  }
+
+}
+
+.mat-form-field {
+  display: flex;
+  justify-content: center;
+  text-align: right;
+}
+
+.filter {
+  display: block;
+  width: 60%;
+}
+
+// header options //
+.operation {
+  display: flex;
+  justify-content: flex-end;
+  background: $white;
+  border-radius: $border_s $border_s 0 0;
+  border: 2px solid $blue_l;
+  border-bottom: 0;
+}
+
+.operation_btn {
+  cursor: pointer;
+  margin: $font_xs;
+  padding: $font_xs;
+  border-radius: 50%;
+  border: 1px solid;
+  font-size: 1.3rem;
+  height: 3rem;
+  width: 3rem;
+  display: grid;
+  place-content: center;
+  box-shadow: 0px 0px 3px 1px $blue_l;
+  color: $blue_l;
+}
+
+.mat-row:nth-child(even) {
+  background-color: $gray_l;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: rgb(161, 193, 255);
+  }
+}
+
+.mat-row:nth-child(odd) {
+  background-color: $blue_ll;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: rgb(161, 193, 255);
+  }
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding-right: 12px;
+  padding-left: 0;
+}
+
+// paginator config ///////////////
+::ng-deep {
+  .mat-paginator-outer-container {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: $font_family;
+  }
+
+  .mat-paginator-page-size {
+    direction: rtl;
+  }
+
+  .mat-option-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .mat-select-value {
+    font-family: $font_family;
+    font-size: 1.2rem;
+  }
+}
+
+///////////////
+
+@mixin mat-table-columns($columns) {
+
+  .mat-column- {
+
+    @each $colName,
+    $props in $columns {
+
+      $width: map-get($props, 'max-width');
+
+      &#{$colName} {
+        flex: $width;
+        max-width: $width;
+      }
+    }
+  }
+}
+
+@include mat-table-columns((title: (width: 12rem),
+    isMaskooni: (max-width: 10rem),
+    hasReadingVibrate: (max-width: 10rem),
+    isSaxt: (max-width: 10rem),
+    canEnterNumber: (max-width: 10rem),
+    isMane: (max-width: 10rem),
+    canNumberBeLessThanPre: (max-width: 10rem),
+    isTavizi: (max-width: 10rem),
+    shouldEnterNumber: (max-width: 10rem),
+    isXarab: (max-width: 10rem),
+    isFaqed: (max-width: 10rem),
+    isMetro: (max-width: 10rem),
+    logicalOrder: (max-width: 10rem)));

@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { BaseInfoComponent } from './base-info/base-info.component';
 import { FrameWorkRoutingModule } from './frame-work-routing.module';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
-  declarations: [BaseInfoComponent],
+  declarations: [BaseInfoComponent, MapComponent],
   imports: [
     CommonModule,
     FrameWorkRoutingModule

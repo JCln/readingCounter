@@ -1,0 +1,50 @@
+<mat-horizontal-stepper #stepper>
+
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>مشخصات کاربر</ng-template>
+            <app-user-inputs style="direction: rtl;"></app-user-inputs>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>دسترسی به مناطق</ng-template>
+            <app-select-zone [provinceItemsData]="provinceItemsData"></app-select-zone>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirdFormGroup">
+        <ng-template matStepLabel>سطح دسترسی به خدمات</ng-template>
+        <app-select-action [addContactData]="addContactData"></app-select-action>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>گروه دسترسی</ng-template>
+        <section class="role_items">
+            <h2>گروه دسترسی</h2>
+            <div class="roles" *ngFor="let roleItems of roleItemsData">
+                <mat-checkbox>
+                    {{roleItems.title}}
+                </mat-checkbox>
+            </div>
+        </section>
+        <div class="accept">
+            <button class="btn_2" matStepperNext>
+                <i class="fa fa-long-arrow-left"></i>
+                صفحه بعد
+            </button>
+            <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+        </div>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>ذخیره</ng-template>
+        <section class="accept">
+            <button class="btn_2 _special" (click)="addAContact()">ذخیره تغییرات</button>
+            <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+        </section>
+
+    </mat-step>
+
+</mat-horizontal-stepper>

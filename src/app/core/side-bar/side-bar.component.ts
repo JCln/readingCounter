@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ISidebarItems } from 'src/app/Interfaces/isidebar-items';
 
 import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
 
@@ -10,24 +9,32 @@ import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
 })
 export class SideBarComponent implements OnInit {
   @Input() sid_isSmall: boolean;
-  currentRoute: ISidebarItems[];
-  
-  constructor(private sideBarItemsService: SidebarItemsService) {
-    this.currentRoute = this.sideBarItemsService.getSideBarItems();
+  smallScreen: boolean = false;
+  currentRoute: any;
+
+  constructor(private sideBarItemsService: SidebarItemsService, private testSidebarService: SidebarItemsService) {
+    this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
+      if (sidebars) {
+        this.currentRoute = sidebars.items;
+      }
+    })
+    // this.currentRoute = this.testSidebarService.getTestSideTest();
+    // this.currentRoute = this.currentRoute.items;
+
   }
 
   ngOnInit(): void {
+    if (screen.width <= 520) {
+      this.smallScreen = true;
+    }
   }
-
-  toggleSubItems = (item: ISidebarItems): void => {
-    this.currentRoute.filter(aItem => {
-      if (item.sid_isOpenItems !== aItem.sid_isOpenItems)
-        aItem.sid_isOpenItems = false
+  toggleSubItems = (item: any): void => {
+    this.currentRoute.forEach(aItem => {
+      if (item.title !== aItem.title)
+        aItem.isOpen = false
+      else
+        aItem.isOpen = !aItem.isOpen
     })
-    if (item.sid_isOpenItems)
-      item.sid_isOpenItems = false;
-    else
-      item.sid_isOpenItems = true;
   }
   sid_isSmallStatus = () => {
     this.sid_isSmall = !this.sid_isSmall;

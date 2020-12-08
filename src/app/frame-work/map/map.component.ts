@@ -1,6 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { Imap } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 import { MapService } from './../../services/map.service';
 
@@ -10,14 +13,22 @@ declare let L;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, AfterViewInit {
-  isShowMap: boolean = true;
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private map;
+  private mapItems: Imap[];
+  isShowMap: boolean = true;
   title: string = '';
-  private readonly mapItems: Imap[];
+  subscription: Subscription;
 
-  constructor(private mapService: MapService, readonly mapItemsService: MapItemsService) {
-    this.mapItems = mapItemsService.getMapItems();
+  constructor(
+    private mapService: MapService,
+    readonly mapItemsService: MapItemsService,
+    private router: Router,
+    private readonly interactionService: InteractionService
+  ) {
+  }
+  private getMapItems = () => {
+    this.mapItems = this.mapItemsService.getMapItems();
   }
   private initMap = () => {
 
@@ -38,7 +49,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     // only one of base layers should be added to the map at instantiation
     this.map = L.map('map', {
-      center: [51.505, -0.09],
+      center: [32.669, 51.664],
       zoom: 13,
       minZoom: 4,
       layers: [streets]
@@ -51,16 +62,35 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     L.control.layers(baseMaps).addTo(this.map);
   }
+  showDashboard = (isShowMap: boolean) => {
+    this.isShowMap = isShowMap;
+    if (isShowMap) {
+      this.router.navigate(['../wr']);
+    }
+    else {
+      this.router.navigate(['../wr/db']);
+    }
+  }
 
   ngOnInit(): void {
+    this.getMapItems();
     this.initMap();
   }
 
   ngAfterViewInit(): void {
-    this.mapService.routingControl(this.map);
     this.mapService.fullScreen(this.map);
-    this.mapService.addMarkerCluster(this.map);
     this.mapService.buttons(this.map);
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url)
+          this.ngOnInit();
+      }
+    })
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.unsubscribe();
   }
 
 }
