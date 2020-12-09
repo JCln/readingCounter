@@ -22,6 +22,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     private interactionService: InteractionService
   ) {
   }
+  reFetchPageTitle = () => this.childPageTitle.emit(Object.values(this.tabs).pop().title);
 
   testCheck = () => {
     if (this.router.url !== '/wr') {
@@ -29,7 +30,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
         return item.route === this.router.url
       })
       this.tabs.push(currentRouteFound);
-      this.childPageTitle.emit(Object.values(this.tabs).pop().title);
+      this.reFetchPageTitle();
     }
     ////// just check correct route
     this.router.events.subscribe(res => {
@@ -49,7 +50,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
           }
           else {
             this.tabs.push(currentRouteFound);
-            this.childPageTitle.emit(Object.values(this.tabs).pop().title);
+            this.reFetchPageTitle();
           }
         }
       }
@@ -67,13 +68,16 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
       this.backToPreviousPage();
     }
   }
+
   backToPreviousPage = () => {
     const b = this.tabs.slice(-1).map((item: any) => item.route);
     this.router.navigate(b);
+    this.reFetchPageTitle();
   }
   closeAllTabs = () => {
     this.tabs.length = 1;
     this.router.navigateByUrl('/wr');
+    this.reFetchPageTitle();
   }
   closeButtonClicked = (routerUrl: string) => {
     const a = this.tabs.filter((item: any) => {
