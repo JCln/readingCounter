@@ -31,7 +31,7 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   personalizeInfo: IAddAUserManager;
   provinceItemsData: any;
   dataSource: any;
-  subscription: Subscription;
+  subscription: Subscription[] = [];
 
   // stepper
   firstFormGroup: FormGroup;
@@ -55,9 +55,11 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   addAContact = () => {
     this.addUserManagerService.addAContact(this.dataSource);
   }
+  nullSavedSource = () => this.interactionService.saveDataForForAddContacts = null;
+
   getContactSource = (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForForAddContacts = null;
+      this.nullSavedSource();
     }
     if (this.interactionService.saveDataForForAddContacts) {
       this.dataSource = this.interactionService.saveDataForForAddContacts;
@@ -84,18 +86,33 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getContactSource();
 
   }
-  ngAfterViewInit(): void {
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          this.nullSavedSource();
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.getContactSource(true);
       }
     })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.closeTabStatus();
+    this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
+    this.subscription.forEach(subscription => subscription.unsubscribe);
   }
 
 }

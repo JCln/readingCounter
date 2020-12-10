@@ -16,7 +16,7 @@ import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.
 export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   frameworkComponents: any;
   rowDataClicked1 = {};
-  subscription: Subscription;
+  subscription: Subscription[] = [];
 
   columnDefs = [
     // { field: 'id', sortable: true, filter: true },
@@ -62,9 +62,11 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  nullSavedSource = () => this.interactionService.saveDataForAllContacts = null;
+
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForAllContacts = null;
+      this.nullSavedSource();
     }
     if (this.interactionService.saveDataForAllContacts) {
       this.rowData = this.interactionService.saveDataForAllContacts;
@@ -83,15 +85,32 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.classWrapper();
   }
-  ngAfterViewInit(): void {
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          this.nullSavedSource();
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.classWrapper(true);
       }
     })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.closeTabStatus();
+    this.refreshTabStatus();
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.forEach(subscription => subscription.unsubscribe);
   }
 }

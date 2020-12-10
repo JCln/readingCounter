@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IUserManager } from 'src/app/Interfaces/iuser-manager';
 
@@ -14,10 +15,12 @@ import { InterfaceManagerService } from './../../../services/interface-manager.s
   templateUrl: './counter-state.component.html',
   styleUrls: ['./counter-state.component.scss']
 })
-export class CounterStateComponent implements OnInit, AfterViewInit {
+export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
   frameworkComponents: any;
   rowDataClicked1 = {};
+
   zoneDictionary: IDictionaryManager[] = [];
+  subscription: Subscription[] = [];
 
   columnDefs = [
     {
@@ -199,9 +202,10 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
       })
     });
   }
+  nullSavedSource = () => this.interactionService.saveDataForCounterState = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForCounterState = null;
+      this.nullSavedSource();
     }
     if (this.interactionService.saveDataForCounterState) {
       this.dataSource = this.interactionService.saveDataForCounterState;
@@ -228,16 +232,34 @@ export class CounterStateComponent implements OnInit, AfterViewInit {
     };
     this.editType = 'fullRow';
   }
-  ngAfterViewInit(): void {
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          this.nullSavedSource();
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.classWrapper(true);
       }
     })
+    )
   }
-}
+  ngAfterViewInit(): void {
+    this.closeTabStatus();
+    this.refreshTabStatus();
+  }
+  ngOnDestroy(): void {
+    this.subscription.forEach(subscription => subscription.unsubscribe)
+  }
 
+}
 function getNumericCellEditor() {
   function isCharNumeric(charStr) {
     return !!/\d/.test(charStr);

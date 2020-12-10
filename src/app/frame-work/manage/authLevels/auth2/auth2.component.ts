@@ -25,7 +25,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   authLevel1IdFilter = new FormControl('');
 
   dataSource = new MatTableDataSource();
-  subscription: Subscription;
+  subscription: Subscription[] = [];
 
   auth1Dictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'authLevel1Id', 'actions'];
@@ -141,9 +141,10 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
+  nullSavedSource = () => this.interactionService.saveDataForAppLevel2 = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForAppLevel2 = null;
+      this.nullSavedSource();
     }
     if (this.interactionService.saveDataForAppLevel2) {
       this.dataSource.data = this.interactionService.saveDataForAppLevel2;
@@ -162,18 +163,33 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.classWrapper();
   }
-  ngAfterViewInit(): void {
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          this.nullSavedSource();
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.classWrapper(true);
       }
     })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.refreshTabStatus();
+    this.closeTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
+    this.subscription.forEach(subscription => subscription.unsubscribe);
   }
 
   createFilter(): (data: any, filter: string) => boolean {

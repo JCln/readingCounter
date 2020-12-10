@@ -26,7 +26,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
   authLevel2IdFilter = new FormControl('');
 
   dataSource = new MatTableDataSource();
-  subscription: Subscription;
+  subscription: Subscription[] = [];
 
   auth2Dictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'authLevel2Id', 'actions'];
@@ -141,9 +141,10 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
+  nullSavedSource = () => this.interactionService.saveDataForAppLevel3 = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForAppLevel3 = null;
+      this.nullSavedSource();
     }
     if (this.interactionService.saveDataForAppLevel3) {
       this.dataSource.data = this.interactionService.saveDataForAppLevel3;
@@ -162,18 +163,33 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.classWrapper();
   }
-  ngAfterViewInit(): void {
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          this.nullSavedSource();
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.classWrapper(true);
       }
     })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.refreshTabStatus();
+    this.closeTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
+    this.subscription.forEach(subscription => subscription.unsubscribe);
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {

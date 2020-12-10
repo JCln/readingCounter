@@ -85,6 +85,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     })
     this.tabs = a;
     this.backToPreviousPage();
+    this.closeCurrentPage(routerUrl);
   }
   addDashboardTab = () => {
     const a = {
@@ -130,6 +131,9 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
   }
   refreshCurrentPage = (tabRoute: string) => {
     this.interactionService.setRefresh(tabRoute);
+  }
+  closeCurrentPage = (tabRoute: string) => {
+    this.interactionService.setClose(tabRoute);
   }
 
 }

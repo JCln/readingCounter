@@ -25,7 +25,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   titleFilter = new FormControl('');
   dataSource = new MatTableDataSource();
   countryDictionary: IDictionaryManager[] = [];
-  subscription: Subscription;
+  subscription: Subscription[] = [];
   columnsToDisplay = ['title', 'actions'];
   filterValues = {
     title: ''
@@ -118,9 +118,20 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
+  nullSavedSource = () => this.interactionService.saveDataForCountry = null;
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          this.nullSavedSource();
+        }
+      }
+    })
+    )
+  }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForCountry = null;
+      this.nullSavedSource();
     }
     if (this.interactionService.saveDataForCountry) {
       this.dataSource.data = this.interactionService.saveDataForCountry;
@@ -135,13 +146,18 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.classWrapper();
   }
-  ngAfterViewInit(): void {
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.classWrapper(true);
       }
     })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.refreshTabStatus();
+    this.closeTabStatus();
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
@@ -153,6 +169,6 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
+    this.subscription.forEach(subscription => subscription.unsubscribe);
   }
 }

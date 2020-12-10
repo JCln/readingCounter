@@ -24,7 +24,7 @@ export class InteractionService {
   saveDictionaryForReadingConfig: any;
 
   saveDataForCountry: any;
-  
+
   saveDataForProvince: any;
   saveDictionaryForProvince: any;
 
@@ -47,9 +47,11 @@ export class InteractionService {
   saveDictionaryForAddContacts: any;
 
   private refreshSource = new BehaviorSubject<string>('');
+  private closeSource = new BehaviorSubject<string>('');
 
   constructor() { }
 
+  // refrsh config
   getRefreshedPage = (): Observable<string> => {
     return this.refreshSource.asObservable();
   }
@@ -59,4 +61,13 @@ export class InteractionService {
       this.refreshSource.next('');
     }, 500);
   }
+  // 
+  // close config
+  setClose = (url: string) => {
+    this.closeSource.next(url);
+  }
+  getClosedPage = (): Observable<string> => {
+    return this.closeSource.asObservable();
+  }
+  // 
 }

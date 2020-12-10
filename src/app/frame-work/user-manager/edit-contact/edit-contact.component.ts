@@ -19,7 +19,7 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
   personalizeInfo: IUserInfo;
   provinceItemsData: any;
   dataSource: any;
-  subscription: Subscription;
+  subscription: Subscription[] = [];
 
   // stepper
   firstFormGroup: FormGroup;
@@ -44,15 +44,17 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
   addAContact = () => {
     this.editUserManagerService.editAUserContact(this.dataSource, this.UUid);
   }
+  nullSavedSource = () => this.interactionService.saveDataForEditContacts = null;
   getContactSource = (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForEditContacts = null;
+      this.nullSavedSource();
     }
     if (this.interactionService.saveDataForEditContacts) {
       this.dataSource = this.interactionService.saveDataForEditContacts;
       this.roleItemsData = this.dataSource.roleItems;
       this.addContactData = this.dataSource.appItems;
       this.provinceItemsData = this.dataSource.provinceItems;
+      this.personalizeInfo = this.dataSource.userInfo;
     }
     else {
       this.interfaceManagerService.getUserContactManager(this.UUid).subscribe((res: any) => {
@@ -68,23 +70,37 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     }
   }
-
   ngOnInit(): void {
     this.UUid = this.route.snapshot.paramMap.get('id');
     this.getContactSource();
   }
-  ngAfterViewInit(): void {
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          this.nullSavedSource();
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.getContactSource(true);
       }
     })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.closeTabStatus();
+    this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
+    this.subscription.forEach(subscription => subscription.unsubscribe);
   }
 
 }

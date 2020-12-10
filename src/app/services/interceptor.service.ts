@@ -36,9 +36,9 @@ export class InterceptorService implements HttpInterceptor {
           }
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
-              return this.handle401Error(req , next);
-            } else 
-            return throwError(error)
+              return this.handle401Error(req, next);
+            } else
+              return throwError(error)
           }
         }))
       )
@@ -58,7 +58,9 @@ export class InterceptorService implements HttpInterceptor {
         switchMap((token: any) => {
           this.isRefreshing = false;
           console.log(token);
-          
+
+          this.jwtService.saveToLocalStorage(token.accessToken);
+          this.jwtService.saveToLocalStorageRefresh(token.refreshToken);
           this.refreshTokenSubject.next(token);
           return next.handle(this.addToken(request, token));
         }));

@@ -28,7 +28,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource();
   editableDataSource = [];
 
-  subscription: Subscription;
+  subscription: Subscription[] = [];
   countryDictionary: IDictionaryManager[] = [];
   columnsToDisplay = ['title', 'countryId', 'logicalOrder', 'actions'];
   filterValues = {
@@ -169,9 +169,10 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
+  nullSavedSource = () => this.interactionService.saveDataForProvince = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForProvince = null;
+      this.nullSavedSource();
     }
     if (this.interactionService.saveDataForProvince) {
       this.dataSource.data = this.interactionService.saveDataForProvince;
@@ -190,13 +191,28 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.classWrapper();
   }
-  ngAfterViewInit(): void {
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          this.nullSavedSource();
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.classWrapper(true);
       }
     })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.refreshTabStatus();
+    this.closeTabStatus();
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
@@ -210,6 +226,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
+    this.subscription.forEach(subscription => subscription.unsubscribe)
   }
 }

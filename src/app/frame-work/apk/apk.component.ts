@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 import { IAPK } from './../../Interfaces/iapk';
@@ -15,7 +16,9 @@ const ELEMENT_DATA: IAPK[] = [
   templateUrl: './apk.component.html',
   styleUrls: ['./apk.component.scss']
 })
-export class ApkComponent implements OnInit, AfterViewInit {
+export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
+  subscription: Subscription[] = [];
+
   displayedColumns: string[] = ['name', 'version', 'file'];
   dataSource = ELEMENT_DATA;
 
@@ -26,13 +29,33 @@ export class ApkComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
   }
-  ngAfterViewInit(): void {
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res && res.length !== 0) {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          console.log('there is nothing to clear on close page !!');
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
     })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.closeTabStatus();
+    this.refreshTabStatus();
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.forEach(subscription => subscription.unsubscribe);
   }
 
 }

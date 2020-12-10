@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { BrowserStorageService } from 'src/app/services/browser-storage.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
@@ -11,7 +12,7 @@ import { MessageService } from './../../services/message.service';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit, AfterViewInit {
+export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
   message: IMessage = {
     title: '',
     text: '',
@@ -21,6 +22,7 @@ export class MessagesComponent implements OnInit, AfterViewInit {
   };
   colors: IColor[] = [];
   times: ITime[] = [];
+  subscription: Subscription[] = [];
 
   testNamesStorage: any;
   allMessages: IMessage[];
@@ -72,13 +74,33 @@ export class MessagesComponent implements OnInit, AfterViewInit {
     this.message.canSave = localStorageItem.canSave;
 
   }
-  ngAfterViewInit(): void {
-    this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          console.log('there is nothing to clear on close page !!');
+          
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.ngOnInit();
       }
     })
+    )
   }
-
+  ngAfterViewInit(): void {
+    this.refreshTabStatus();
+    this.closeTabStatus();
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.forEach(subscription => subscription.unsubscribe);
+  }
 }

@@ -31,7 +31,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   editableDataSource = [];
 
   regionDictionary: IDictionaryManager[] = [];
-  subscription: Subscription
+  subscription: Subscription[] = [];
 
   columnsToDisplay = ['title', 'provinceId', 'logicalOrder', 'actions'];
   filterValues = {
@@ -169,9 +169,10 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
+  nullSavedSource = () => this.interactionService.saveDataForRegion = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.interactionService.saveDataForRegion = null;
+      this.nullSavedSource();
     }
     if (this.interactionService.saveDataForRegion) {
       this.dataSource.data = this.interactionService.saveDataForRegion;
@@ -192,19 +193,34 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.classWrapper();
   }
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  closeTabStatus = () => {
+    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === this.router.url) {
+          this.nullSavedSource();
+        }
+      }
+    })
+    )
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === this.router.url)
           this.classWrapper(true);
       }
     })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.refreshTabStatus();
+    this.closeTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
+    this.subscription.forEach(subscription => subscription.unsubscribe);
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
