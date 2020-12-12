@@ -26,4 +26,9 @@ export class InterfaceService {
     return this.mainService.GET('V1/User/SideBar');
   }
   // ///// ///
+  // import Data
+  postImportData = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Import/Dynamic', body);
+  }
+  // 
 }

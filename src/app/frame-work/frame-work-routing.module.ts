@@ -10,6 +10,7 @@ const routes: Routes = [
       { path: 'db', component: DashboardComponent }
     ]
   },
+  { path: 'imd', loadChildren: () => import('./import-dynamic/import-dynamic.module').then(importDynamicDto => importDynamicDto.ImportDynamicModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(profile => profile.ProfileModule) },
   { path: 'apk', loadChildren: () => import('./apk/apk.module').then(apk => apk.ApkModule) },
   { path: 'msge', loadChildren: () => import('./messages/messages.module').then(msge => msge.MessagesModule) },

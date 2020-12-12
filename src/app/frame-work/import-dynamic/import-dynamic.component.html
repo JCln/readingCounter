@@ -1,0 +1,51 @@
+<main class="main">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+
+        <div class="input_2">
+            <div class="_key">از اشتراک :</div>
+            <input class="_value" name="importDynamic.fromEshterak" [(ngModel)]="importDynamic.fromEshterak">            
+        </div>
+
+        <div class="input_2">
+            <div class="_key">تا اشتراک :</div>
+            <input class="_value" name="importDynamic.toEshterak" [(ngModel)]="importDynamic.toEshterak">
+        </div>
+        <div class="input_2">
+            <div class="_key">تا اشتراک :</div>
+            app
+        </div>
+        <div class="input_2">
+            <div class="_key">تا اشتراک :</div>
+            app
+        </div>
+        <div class="input_2">
+            <div class="_key">درصد علی الحساب :</div>
+            <input class="_value" type="number" name="importDynamic.alalHesabPercent"
+                [(ngModel)]="importDynamic.alalHesabPercent">
+        </div>
+        <div class="input_2">
+            <div class="_key">درصد تصویر :</div>
+            <input class="_value" type="number" name="importDynamic.imagePercent"
+                [(ngModel)]="importDynamic.imagePercent">
+        </div>
+        <div class="input_2">
+            <div class="_key">منطقه :</div>
+            <mat-select name="importDynamic.zoneId">
+                <mat-option *ngFor="let truefalse of importDynamic.zoneId" [value]="truefalse.title">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </div>
+
+
+        <mat-checkbox name="importDynamic.hasPreNumber" [(ngModel)]="importDynamic.hasPreNumber">شماره قبلی
+        </mat-checkbox>
+        <mat-checkbox name="importDynamic.displayBillId" [(ngModel)]="importDynamic.displayBillId">نمایش شناسه قبض
+        </mat-checkbox>
+        <mat-checkbox name="importDynamic.displayRadif" [(ngModel)]="importDynamic.displayRadif">نمایش ردیف
+        </mat-checkbox>
+        <br>
+
+        <button type="submit" class="btn_1">تایید</button>
+    </form>
+</main>
