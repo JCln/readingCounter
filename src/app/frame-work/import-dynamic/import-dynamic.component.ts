@@ -105,11 +105,9 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   receiveFromDateJalali = ($event: string) => {
     this.importDynamic.fromDate = $event;
-    console.log($event);
   }
   receiveToDateJalali = ($event: string) => {
     this.importDynamic.toDate = $event;
-    console.log($event);
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
