@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
 import { SharedModule } from './../../shared/shared.module';
+import { SharedThreeModule } from './../../shared/shared_three.module';
 import { ImportDynamicRoutingModule } from './import-dynamic-routing.module';
 import { ImportDynamicComponent } from './import-dynamic.component';
 
@@ -10,7 +10,7 @@ import { ImportDynamicComponent } from './import-dynamic.component';
   declarations: [ImportDynamicComponent],
   imports: [
     SharedModule,
-    DpDatePickerModule,
+    SharedThreeModule,
     ImportDynamicRoutingModule
   ]
 })

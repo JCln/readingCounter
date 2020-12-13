@@ -10,20 +10,20 @@ export class HeaderComponent implements AfterViewInit {
   @Output() sidebarEvent = new EventEmitter<boolean>();
   DateJalaliComponent?: Type<any>
 
-  isDateJalaliLoaded: boolean = false;
+  // isDateJalaliLoaded: boolean = false;
 
   setSidebar = () => {
     this.sideBar = !this.sideBar;
     this.sidebarEvent.emit(this.sideBar);
   }
 
-  loadDateJalali = () => {
-    import('./date-jalali/date-jalali.module').then(jd => jd.DateJalaliModule).then(DateJalaliModule => {
-      this.DateJalaliComponent = DateJalaliModule.components['lazy'];
-    })
-    this.isDateJalaliLoaded = true;
-  }
+  // loadDateJalali = () => {
+  //   import('./date-jalali/date-jalali.module').then(jd => jd.DateJalaliModule).then(DateJalaliModule => {
+  //     this.DateJalaliComponent = DateJalaliModule.components['lazy'];
+  //   })
+  //   this.isDateJalaliLoaded = true;
+  // }
   ngAfterViewInit(): void {
-    this.loadDateJalali();
+    // this.loadDateJalali();
   }
 }

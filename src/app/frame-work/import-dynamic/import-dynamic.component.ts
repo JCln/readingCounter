@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ITrueFalse } from 'src/app/Interfaces/IDictionaryManager';
@@ -7,6 +7,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
+import { DateJalaliComponent } from './../../core/_layouts/header/date-jalali/date-jalali.component';
 import { IImportDynamic } from './../../Interfaces/iimport-dynamic';
 import { InterfaceService } from './../../services/interface.service';
 
@@ -15,7 +16,9 @@ import { InterfaceService } from './../../services/interface.service';
   templateUrl: './import-dynamic.component.html',
   styleUrls: ['./import-dynamic.component.scss']
 })
-export class ImportDynamicComponent implements OnInit, OnDestroy {
+export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild(DateJalaliComponent) date;
+
   importDynamic: IImportDynamic = {
     fromEshterak: '',
     toEshterak: '',
@@ -47,7 +50,7 @@ export class ImportDynamicComponent implements OnInit, OnDestroy {
   ) { }
   connectToServer = () => {
     console.log(this.importDynamic);
-    
+
   }
   getZoneDictionary = (): Promise<any> => {
     try {
@@ -99,6 +102,14 @@ export class ImportDynamicComponent implements OnInit, OnDestroy {
       }
     })
     )
+  }
+  receiveFromDateJalali = ($event: string) => {
+    this.importDynamic.fromDate = $event;
+    console.log($event);
+  }
+  receiveToDateJalali = ($event: string) => {
+    this.importDynamic.toDate = $event;
+    console.log($event);
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();

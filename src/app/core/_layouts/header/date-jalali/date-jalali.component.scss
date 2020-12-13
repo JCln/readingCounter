@@ -2,7 +2,6 @@
 
 ::ng-deep {
   .dp-picker-input {
-
     font-weight: 600;
     font-size: 1.2rem !important;
     border: none;
@@ -11,13 +10,11 @@
     box-sizing: border-box;
     height: 30px;
     width: auto !important;
-    font-size: 13px;
     outline: none;
-    background: $gray_e3;
     text-align: center;
     padding: 1.1rem 0;
     background-color: $blue_d;
-    color: $gray_l;
+    color: $gray_l !important;
     cursor: pointer;
   }
 

@@ -10,6 +10,7 @@ form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 17rem));
   gap: .5rem;
+  align-items: center;
 }
 
 ._key,
