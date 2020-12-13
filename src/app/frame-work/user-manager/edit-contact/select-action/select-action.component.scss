@@ -92,11 +92,14 @@ $blue_lovely: #0045CB;
 }
 
 .text_btn {
-  width: 8rem;
+  text-align: center;
+  max-width: 11rem;
+  width: auto;
   padding: $font_05;
   margin-bottom: $font_05;
   font-size: $font_m;
   color: $gray_l;
+  border-radius: $border_s;
   border: 2px solid $gray_l;
   box-shadow: 1px 1px 3px 0px $gray_d5;
 }
