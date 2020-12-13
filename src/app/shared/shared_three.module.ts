@@ -1,23 +1,29 @@
-import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { DpDatePickerModule } from 'ng2-jalali-date-picker';
+
+import { DateJalaliComponent } from './../core/_layouts/header/date-jalali/date-jalali.component';
+import { DateJalaliModule } from './../core/_layouts/header/date-jalali/date-jalali.module';
 
 
 @NgModule({
-    declarations: [],
+    declarations: [
+        DateJalaliComponent
+    ],
     imports: [
-        FormsModule,
-        CommonModule
+        DateJalaliModule,
+        DpDatePickerModule
     ],
     exports: [
-        CommonModule, FormsModule
+        DateJalaliModule,
+        DpDatePickerModule,
+        DateJalaliComponent
     ]
 })
-export class SharedTwoModule {
-    static forRoot(): ModuleWithProviders<SharedTwoModule> {
+export class SharedThreeModule {
+    static forRoot(): ModuleWithProviders<SharedThreeModule> {
         // Forcing the whole app to use the returned providers from the AppModule only.
         return {
-            ngModule: SharedTwoModule,
+            ngModule: SharedThreeModule,
             providers: [ /* All of your services here. It will hold the services needed by `itself`. */]
         };
     }
