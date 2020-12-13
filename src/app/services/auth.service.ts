@@ -22,5 +22,9 @@ export class AuthService {
   routeToLogin = () => {
     this.router.navigateByUrl('/login');
   }
+  isAuthUserLoggedIn(): boolean {
+    return this.jwtService.hasStoredAccessAndRefreshTokens() &&
+      !this.jwtService.isAccessTokenTokenExpired();
+  }
 
 }

@@ -3,6 +3,7 @@ import * as jwt_decode from 'jwt-decode';
 
 import { AuthTokenType } from './../Interfaces/auth-token-type.enum';
 import { BrowserStorageService } from './browser-storage.service';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { BrowserStorageService } from './browser-storage.service';
 export class JwtService {
   constructor(
     private browserStorageService: BrowserStorageService,
+    private utilsService: UtilsService
   ) { }
 
   getDecodedAccessToken(): any {
@@ -44,6 +46,14 @@ export class JwtService {
     return a;
   }
   getRefreshToken = (): string => {
-    return this.browserStorageService.get(AuthTokenType[1]);
+    const a = this.browserStorageService.get(AuthTokenType[1]);
+    if (!a)
+      return null;
+    return a;
+  }
+  hasStoredAccessAndRefreshTokens(): boolean {
+    const accessToken = this.getAuthorizationToken();
+    const refreshToken = this.getRefreshToken();
+    return !this.utilsService.isEmptyString(accessToken) && !this.utilsService.isEmptyString(refreshToken);
   }
 }
