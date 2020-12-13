@@ -36,8 +36,8 @@
         </div>
         <div class="input_2">
             <div class="_key">منطقه :</div>
-            <mat-select name="importDynamic.zoneId">
-                <mat-option *ngFor="let truefalse of importDynamic.zoneId" [value]="truefalse.title">
+            <mat-select [(ngModel)]="importDynamic.zoneId" name="importDynamic.zoneId">
+                <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>

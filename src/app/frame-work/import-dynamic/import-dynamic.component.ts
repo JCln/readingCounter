@@ -75,7 +75,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   // }
   classWrapper = async () => {
     // this.dataSource = await this.getDataSource();
-    // this.zoneDictionary = await this.getZoneDictionary();
+    this.zoneDictionary = await this.getZoneDictionary();
 
     // this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);
 
