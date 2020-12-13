@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
 
+import { BrowserStorageService } from '../services/browser-storage.service';
+import { UtilsService } from '../services/utils.service';
 import { AuthTokenType } from './../Interfaces/auth-token-type.enum';
-import { BrowserStorageService } from './browser-storage.service';
-import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'

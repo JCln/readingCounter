@@ -4,16 +4,20 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
 
-import { AuthService } from './auth.service';
-import { SnackWrapperService } from './snack-wrapper.service';
-import { SpinnerWrapperService } from './spinner-wrapper.service';
+import { AuthService } from '../auth/auth.service';
+import { SnackWrapperService } from '../services/snack-wrapper.service';
+import { SpinnerWrapperService } from '../services/spinner-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpinnerInterceptorService implements HttpInterceptor {
 
-  constructor(private spinnerWrapperService: SpinnerWrapperService, private snackWrapperService: SnackWrapperService, private authService: AuthService) { }
+  constructor(
+    private spinnerWrapperService: SpinnerWrapperService,
+    private snackWrapperService: SnackWrapperService,
+    private authService: AuthService
+  ) { }
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     this.spinnerWrapperService.startLoading();
     return next.handle(req)

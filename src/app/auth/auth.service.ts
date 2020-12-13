@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 
+import { MainService } from '../services/main.service';
 import { JwtService } from './jwt.service';
-import { MainService } from './main.service';
 
 @Injectable({
   providedIn: 'root'

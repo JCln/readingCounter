@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/internal/operators/catchError';
 
+import { MainService } from '../services/main.service';
+import { SnackWrapperService } from '../services/snack-wrapper.service';
 import { IAuthTokenType } from './../Interfaces/auth-token-type.enum';
 import { ICredentials } from './../Interfaces/icredentials';
 import { JwtService } from './jwt.service';
-import { MainService } from './main.service';
-import { SnackWrapperService } from './snack-wrapper.service';
 
 @Injectable({
   providedIn: 'root'

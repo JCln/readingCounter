@@ -5,10 +5,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { InterceptorService } from '../auth/interceptor.service';
+import { SpinnerInterceptorService } from '../auth/spinner-interceptor.service';
 import { FrameWorkComponent } from './../frame-work/frame-work.component';
 import { AddNewComponent } from './../frame-work/manage/add-new/add-new.component';
-import { InterceptorService } from './../services/interceptor.service';
-import { SpinnerInterceptorService } from './../services/spinner-interceptor.service';
 import { SharedThreeModule } from './../shared/shared_three.module';
 import { DropdownComponent } from './_layouts/dropdown/dropdown.component';
 import { HeaderComponent } from './_layouts/header/header.component';
