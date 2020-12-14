@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 
 import { MainService } from '../services/main.service';
@@ -30,7 +31,7 @@ export class LoginService {
               this.snackWrapperService.openSnackBar('نام کاربری یا رمز عبور اشتباه است', 3000, 'snack_danger');
             }
           }
-          throw new Error(error)
+          return throwError(error)
         })
       )
       .subscribe((res: IAuthTokenType) => {
