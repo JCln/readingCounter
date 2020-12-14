@@ -4,12 +4,17 @@
 
 main.main {
   direction: rtl;
+  background: $gray_l;
+  box-shadow: 1px 1px 8px 4px $gray_d;
+  padding: $font_s;
+  border-radius: $border_s;
+  min-height: 25rem;
 }
 
-form {
+section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 17rem));
-  gap: .5rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 20rem));
+  gap: $font_05;
   align-items: center;
 }
 
@@ -17,7 +22,11 @@ form {
 ._value {
   font-size: $font_m;
   font-weight: 800;
-  height: 3rem;
+  height: $font_3;
+}
+
+._key {
+  white-space: nowrap;
 }
 
 ._value {
@@ -28,10 +37,28 @@ form {
   color: $white;
 }
 
+footer {
+  margin-top: $font_2;
+  text-align: center;
+}
+
 ::ng-deep {
+  .mat-select-value {
+    font-family: $font_family;
+    font-size: $font_s;
+  }
+
+  .mat-select-panel .mat-option {
+    font-size: 1.2rem;
+    line-height: 3em;
+    height: 3em;
+    text-align: right;
+    font-family: inherit;
+    font-weight: 600;
+  }
 
   .mat-checkbox-layout .mat-checkbox-label {
-    margin: 0 .5rem;
+    margin: 0 $font_05;
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;

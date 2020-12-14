@@ -1,57 +1,61 @@
 <main class="main">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
 
-        <div class="input_2">
-            <div class="_key">از اشتراک :</div>
-            <input class="_value" name="importDynamic.fromEshterak" [(ngModel)]="importDynamic.fromEshterak">
-        </div>
-
-        <div class="input_2">
-            <div class="_key">تا اشتراک :</div>
-            <input class="_value" name="importDynamic.toEshterak" [(ngModel)]="importDynamic.toEshterak">
-        </div>
-        <div class="input_2">
-            <div class="_key">از تاریخ :</div>
-            <div class="_value">
-                <app-date-jalali name="importDynamic.fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
-                </app-date-jalali>
+        <section class="content">
+            <div class="input_2">
+                <div class="_key">از اشتراک :</div>
+                <input class="_value" name="importDynamic.fromEshterak" [(ngModel)]="importDynamic.fromEshterak">
             </div>
-        </div>
-        <div class="input_2">
-            <div class="_key">تا تاریخ :</div>
-            <div class="_value">
-                <app-date-jalali name="importDynamic.toDate" (dateJalEvent)="receiveToDateJalali($event)">
-                </app-date-jalali>
+
+            <div class="input_2">
+                <div class="_key">تا اشتراک :</div>
+                <input class="_value" name="importDynamic.toEshterak" [(ngModel)]="importDynamic.toEshterak">
             </div>
-        </div>
-        <div class="input_2">
-            <div class="_key">درصد علی الحساب :</div>
-            <input class="_value" type="number" name="importDynamic.alalHesabPercent"
-                [(ngModel)]="importDynamic.alalHesabPercent">
-        </div>
-        <div class="input_2">
-            <div class="_key">درصد تصویر :</div>
-            <input class="_value" type="number" name="importDynamic.imagePercent"
-                [(ngModel)]="importDynamic.imagePercent">
-        </div>
-        <div class="input_2">
-            <div class="_key">منطقه :</div>
-            <mat-select [(ngModel)]="importDynamic.zoneId" name="importDynamic.zoneId">
-                <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                    {{truefalse.title}}
-                </mat-option>
-            </mat-select>
-        </div>
+            <div class="input_2">
+                <div class="_key">از تاریخ :</div>
+                <div class="_value">
+                    <app-date-jalali name="importDynamic.fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                    </app-date-jalali>
+                </div>
+            </div>
+            <div class="input_2">
+                <div class="_key">تا تاریخ :</div>
+                <div class="_value">
+                    <app-date-jalali name="importDynamic.toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                    </app-date-jalali>
+                </div>
+            </div>
+            <div class="input_2">
+                <div class="_key">درصد علی الحساب :</div>
+                <input class="_value" type="number" name="importDynamic.alalHesabPercent"
+                    [(ngModel)]="importDynamic.alalHesabPercent">
+            </div>
+            <div class="input_2">
+                <div class="_key">درصد تصویر :</div>
+                <input class="_value" type="number" name="importDynamic.imagePercent"
+                    [(ngModel)]="importDynamic.imagePercent">
+            </div>
+            <div class="input_2">
+                <div class="_key">منطقه :</div>
+                <mat-select [(ngModel)]="importDynamic.zoneId" name="importDynamic.zoneId">
+                    <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
 
+            <mat-checkbox name="importDynamic.hasPreNumber" [(ngModel)]="importDynamic.hasPreNumber">شماره قبلی
+            </mat-checkbox>
+            <mat-checkbox name="importDynamic.displayBillId" [(ngModel)]="importDynamic.displayBillId">نمایش شناسه
+                قبض
+            </mat-checkbox>
+            <mat-checkbox name="importDynamic.displayRadif" [(ngModel)]="importDynamic.displayRadif">نمایش ردیف
+            </mat-checkbox>
 
-        <mat-checkbox name="importDynamic.hasPreNumber" [(ngModel)]="importDynamic.hasPreNumber">شماره قبلی
-        </mat-checkbox>
-        <mat-checkbox name="importDynamic.displayBillId" [(ngModel)]="importDynamic.displayBillId">نمایش شناسه قبض
-        </mat-checkbox>
-        <mat-checkbox name="importDynamic.displayRadif" [(ngModel)]="importDynamic.displayRadif">نمایش ردیف
-        </mat-checkbox>
-        <br>
+        </section>
 
-        <button type="submit" class="btn_1">تایید</button>
+        <footer>
+            <button type="submit" class="btn_1">تایید</button>
+        </footer>
     </form>
 </main>
