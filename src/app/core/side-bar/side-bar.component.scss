@@ -29,7 +29,7 @@ ul::-webkit-scrollbar {
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
   background: $gray_e3;
-  margin-bottom: 0.5rem;
+  margin-bottom: $font_05;
   padding: $font_05 0 $font_05 $font_05;
 }
 
@@ -62,7 +62,7 @@ ul::-webkit-scrollbar {
 
   &.active {
     background: $gray_e3;
-    border: .5rem solid $pink;
+    border: $font_05 solid $pink;
 
     .fa-arrow-circle-down {
       transform: rotate(180deg);
@@ -106,7 +106,7 @@ ul::-webkit-scrollbar {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
   bottom: 0;
-  border-radius: 15px;
+  border-radius: $border_s;
   min-width: 100%;
   min-height: 100%;
   height: 100%;
@@ -120,7 +120,7 @@ ul::-webkit-scrollbar {
   clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
   top: 0;
   bottom: 0;
-  border-radius: 15px;
+  border-radius: $border_s;
   min-width: 100%;
   min-height: 100%;
   height: 100%;
@@ -139,7 +139,7 @@ ul::-webkit-scrollbar {
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
   background: $gray_e3;
-  margin-bottom: 0.5rem;
+  margin-bottom: $font_05;
   padding: $font_05 0 $font_05 $font_05;
 }
 
@@ -159,7 +159,7 @@ ul::-webkit-scrollbar {
 
 
 i.icons {
-  margin: 0 .5rem;
+  margin: 0 $font_05;
   font-size: 2rem;
   color: $blue_d;
 }
@@ -170,17 +170,17 @@ i.icons {
   z-index: 4;
   position: absolute;
   width: 15rem;
-  right: 3rem;
+  right: 4rem;
   background: $gray_d5;
-  top: .5rem;
+  top: $font_05;
   height: 100%;
-  padding: .5rem;
+  padding: $font_05;
   min-height: 10rem;
   height: auto;
-  border-radius: 15px;
+  border-radius: $border_s;
 
   h3 {
-    font-size: 1.3rem;
+    font-size: $font_m;
     font-weight: 600;
   }
 
