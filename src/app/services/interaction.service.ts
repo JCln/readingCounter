@@ -6,11 +6,36 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class InteractionService {
+  private refreshSource = new BehaviorSubject<string>('');
+  private closeSource = new BehaviorSubject<string>('');
+
+  constructor() { }
+
+  // refrsh config
+  getRefreshedPage = (): Observable<string> => {
+    return this.refreshSource.asObservable();
+  }
+  setRefresh = (url: string) => {
+    this.refreshSource.next(url);
+  }
+  // 
+  // close config
+  setClose = (url: string) => {
+    this.closeSource.next(url);
+  }
+  getClosedPage = (): Observable<string> => {
+    return this.closeSource.asObservable();
+  }
+  // 
+  // save data when route change 
   saveDataForAppLevel1: any;
+
   saveDataForAppLevel2: any;
   saveDictionaryForAppLevel2: any;
+
   saveDataForAppLevel3: any;
   saveDictionaryForAppLevel3: any;
+
   saveDataForAppLevel4: any;
   saveDictionaryForAppLevel4: any;
 
@@ -45,26 +70,5 @@ export class InteractionService {
 
   saveDataForForAddContacts: any;
   saveDictionaryForAddContacts: any;
-
-  private refreshSource = new BehaviorSubject<string>('');
-  private closeSource = new BehaviorSubject<string>('');
-
-  constructor() { }
-
-  // refrsh config
-  getRefreshedPage = (): Observable<string> => {
-    return this.refreshSource.asObservable();
-  }
-  setRefresh = (url: string) => {
-    this.refreshSource.next(url);
-  }
-  // 
-  // close config
-  setClose = (url: string) => {
-    this.closeSource.next(url);
-  }
-  getClosedPage = (): Observable<string> => {
-    return this.closeSource.asObservable();
-  }
   // 
 }

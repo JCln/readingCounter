@@ -15,11 +15,16 @@ export class JwtService {
   ) { }
 
   getDecodedAccessToken(): any {
-    return jwt_decode(this.browserStorageService.get(AuthTokenType[0]));
+    try {
+      return jwt_decode(this.browserStorageService.get(AuthTokenType[0]));
+    } catch (error) {
+      // this.removeAllLocalStorage();
+      console.error(error);
+    }
   }
   getAccessTokenExpirationDateUtc(): Date {
     const decoded = this.getDecodedAccessToken();
-    if (decoded.exp === undefined) {
+    if (this.utilsService.isEmptyString(decoded)) {
       return null;
     }
     const date = new Date(0); // The 0 sets the date to the epoch
@@ -40,20 +45,33 @@ export class JwtService {
     this.browserStorageService.set(AuthTokenType[1], refreshToken);
   }
   getAuthorizationToken = (): string => {
-    const a = this.browserStorageService.get(AuthTokenType[0]);
-    if (!a)
-      return null;
-    return a;
+    try {
+      const a = this.browserStorageService.get(AuthTokenType[0]);
+      if (!a) {
+        return null;
+      }
+      return a;
+    } catch (error) {
+      // this.removeAllLocalStorage();
+      console.error(error);
+
+    }
   }
   getRefreshToken = (): string => {
-    const a = this.browserStorageService.get(AuthTokenType[1]);
-    if (!a)
-      return null;
-    return a;
+    try {
+      const a = this.browserStorageService.get(AuthTokenType[1]);
+      if (!a)
+        return null;
+      return a;
+    } catch (error) {
+      // this.removeAllLocalStorage();
+      console.error(error);
+    }
   }
   hasStoredAccessAndRefreshTokens(): boolean {
     const accessToken = this.getAuthorizationToken();
     const refreshToken = this.getRefreshToken();
     return !this.utilsService.isEmptyString(accessToken) && !this.utilsService.isEmptyString(refreshToken);
   }
+  removeAllLocalStorage = () => this.browserStorageService.removeAll();
 }

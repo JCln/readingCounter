@@ -4,6 +4,8 @@ import { ISidebarItems, ITabs } from 'src/app/Interfaces/isidebar-items';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
+import { UtilsService } from './../../services/utils.service';
+
 
 
 @Component({
@@ -18,6 +20,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
+    private utilsService: UtilsService,
     private sideBarItemsService: SidebarItemsService,
     private interactionService: InteractionService
   ) {
@@ -55,13 +58,12 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
       }
     })
   }
-  isNull = (value: any) => typeof value === 'undefined' || !value || value.length === 0;
   isLatestTab = () => {
     const a = this.tabs.map(item => {
       return item;
     })
 
-    if (this.isNull(a[0]))
+    if (this.utilsService.isNull(a[0]))
       this.router.navigateByUrl('/wr');
     else {
       this.backToPreviousPage();
@@ -72,10 +74,11 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     this.router.navigate(b);
     this.reFetchPageTitle();
   }
-  closeAllTabs = () => {
-    this.tabs.length = 1;
+  closeAllTabs = async () => {
     this.router.navigateByUrl('/wr');
+    await this.setCloseAllTabs();
     this.reFetchPageTitle();
+    this.closeAllExeptOne();
   }
   closeButtonClicked = (routerUrl: string) => {
     const a = this.tabs.filter((item: any) => {
@@ -132,5 +135,19 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
   closeCurrentPage = (tabRoute: string) => {
     this.interactionService.setClose(tabRoute);
   }
+  closeAllExeptOne = () => this.tabs.length = 1;
+  setCloseAllTabs = (): Promise<boolean> => {
+    try {
+      return new Promise((resolve) => {
+        this.tabs.forEach(val => {
+          console.log(val.route);
+          return this.interactionService.setClose(val.route)
+        })
+        resolve(true)
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 }

@@ -23,7 +23,7 @@ export class InterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.jwtService.getAuthorizationToken();
-    if (authToken && !this.jwtService.isAccessTokenTokenExpired()) {
+    if (authToken) {
       req = this.addToken(req, authToken);
     }
     return next.handle(req)
