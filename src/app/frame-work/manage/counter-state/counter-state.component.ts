@@ -256,7 +256,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {
-    this.subscription.forEach(subscription => subscription.unsubscribe)
+    this.subscription.forEach(subscription => subscription.unsubscribe())
   }
 
 }

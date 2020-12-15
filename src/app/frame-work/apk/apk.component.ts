@@ -55,7 +55,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe);
+    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
 
 }

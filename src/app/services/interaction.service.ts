@@ -57,9 +57,6 @@ export class InteractionService {
   }
   setRefresh = (url: string) => {
     this.refreshSource.next(url);
-    setTimeout(() => {
-      this.refreshSource.next('');
-    }, 500);
   }
   // 
   // close config

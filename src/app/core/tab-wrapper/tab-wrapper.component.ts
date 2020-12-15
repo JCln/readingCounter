@@ -23,7 +23,6 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
   ) {
   }
   reFetchPageTitle = () => this.childPageTitle.emit(Object.values(this.tabs).pop().title);
-
   testCheck = () => {
     if (this.router.url !== '/wr') {
       const currentRouteFound = this.currentRoute.find((item: any) => {
@@ -68,7 +67,6 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
       this.backToPreviousPage();
     }
   }
-
   backToPreviousPage = () => {
     const b = this.tabs.slice(-1).map((item: any) => item.route);
     this.router.navigate(b);
@@ -93,7 +91,6 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     };
     this.tabs.push(a);
   }
-
   getTabItems = (): Promise<ISidebarItems> => {
     return new Promise((resolve) => {
       this.sideBarItemsService.getLatestItems().subscribe((sidebars: ISidebarItems) => {
