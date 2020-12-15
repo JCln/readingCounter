@@ -13,14 +13,7 @@ export class AddNewComponent implements OnInit {
   // description: string;
 
   constructor(
-
     private dialogRef: MatDialogRef<AddNewComponent>) {
-  }
-  save() {
-    this.dialogRef.close(this.form.value);
-    // console.log(data);
-
-
   }
 
   close() {

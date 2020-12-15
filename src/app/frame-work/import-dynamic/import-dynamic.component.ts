@@ -30,7 +30,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     displayRadif: true,
     fromDate: '',
     toDate: '',
-    counterReaderId: ''
+    counterReaderId: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
   }
   isTrueF: ITrueFalse[] = [
     { name: 'نباشد', value: false },
@@ -49,8 +49,10 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     private router: Router
   ) { }
   connectToServer = () => {
-    console.log(this.importDynamic);
+    this.interfaceService.postImportData(this.importDynamic).subscribe(res => {
+      console.log(res);
 
+    })
   }
   getZoneDictionary = (): Promise<any> => {
     try {
