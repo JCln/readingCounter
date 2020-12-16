@@ -75,10 +75,10 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     this.reFetchPageTitle();
   }
   closeAllTabs = async () => {
-    this.router.navigateByUrl('/wr');
     await this.setCloseAllTabs();
-    this.reFetchPageTitle();
+    this.router.navigateByUrl('/wr');
     this.closeAllExeptOne();
+    this.reFetchPageTitle();
   }
   closeButtonClicked = (routerUrl: string) => {
     const a = this.tabs.filter((item: any) => {
@@ -140,7 +140,6 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     try {
       return new Promise((resolve) => {
         this.tabs.forEach(val => {
-          console.log(val.route);
           return this.interactionService.setClose(val.route)
         })
         resolve(true)
