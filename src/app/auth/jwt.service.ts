@@ -38,6 +38,19 @@ export class JwtService {
     }
     return !(expirationDateUtc.valueOf() > new Date().valueOf());
   }
+  getDecodedTokenRoles(): string[] | null {
+    const decodedToken = this.getDecodedAccessToken();
+    const roles = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    if (!roles) {
+      return null;
+    }
+
+    if (Array.isArray(roles)) {
+      return roles.map(role => role.toLowerCase());
+    } else {
+      return [roles.toLowerCase()];
+    }
+  }
   saveToLocalStorage = (accessToken: string): void => {
     this.browserStorageService.set(AuthTokenType[0], accessToken);
   }

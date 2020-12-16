@@ -25,6 +25,7 @@ export class InterceptorService implements HttpInterceptor {
     const authToken = this.jwtService.getAuthorizationToken();
     if (authToken) {
       req = this.addToken(req, authToken);
+      this.authService.savedStatusFromToken();
     }
     return next.handle(req)
       .pipe(
@@ -57,10 +58,7 @@ export class InterceptorService implements HttpInterceptor {
       return this.authService.refreshToken().pipe(
         switchMap((token: any) => {
           this.isRefreshing = false;
-          console.log(token);
-
-          this.jwtService.saveToLocalStorage(token.accessToken);
-          this.jwtService.saveToLocalStorageRefresh(token.refreshToken);
+          this.authService.saveTolStorage(token);
           this.refreshTokenSubject.next(token);
           return next.handle(this.addToken(request, token));
         }));
@@ -75,3 +73,4 @@ export class InterceptorService implements HttpInterceptor {
     }
   }
 }
+

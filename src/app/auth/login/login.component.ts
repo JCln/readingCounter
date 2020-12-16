@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoginService } from '../login.service';
 import { ICredentials } from './../../Interfaces/icredentials';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +11,12 @@ import { ICredentials } from './../../Interfaces/icredentials';
 export class LoginComponent implements OnInit {
   userData: ICredentials = { username: '', password: '' };
 
-  constructor(private loginService: LoginService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
-
   logging = () => {
-    this.loginService.logging(this.userData);
+    this.authService.logging(this.userData);
   }
+  
 }
