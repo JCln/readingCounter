@@ -178,7 +178,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getDataSource = (): Promise<IUserManager> => {
     return new Promise((resolve) => {
-      this.httpClient.get('http://37.191.92.130/kontoriNew/v1/counterState/all').subscribe((res: any) => {
+      this.httpClient.get('https://37.191.92.157/kontoriNew/v1/counterState/all').subscribe((res: any) => {
         if (res) {
           resolve(res);
         }
