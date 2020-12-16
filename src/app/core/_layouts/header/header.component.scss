@@ -18,7 +18,6 @@ ul {
 
 li {
   display: flex;
-  width: 9rem;
   margin: 0 .5rem;
   border-radius: 15px;
   color: $gray_dr2;
@@ -36,6 +35,10 @@ p {
   font-weight: 600;
   width: 100%;
   border-radius: 15px;
+}
+
+._date {
+  width: 9rem;
 }
 
 .menu_toggle {
