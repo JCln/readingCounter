@@ -45,14 +45,12 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-
   onBtnClick1(e) {
     this.rowDataClicked1 = e.rowData;
     console.log(e.rowData.id);
 
     this.router.navigate(['../edit', e.rowData.id], { relativeTo: this.route.parent })
   }
-
   getDataSource = (): Promise<IUserManager> => {
     return new Promise((resolve) => {
       this.httpClient.get('https://37.191.92.157/kontoriNew/v1/user/all').subscribe((res: any) => {
@@ -63,7 +61,6 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   nullSavedSource = () => this.interactionService.saveDataForAllContacts = null;
-
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
@@ -77,7 +74,6 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
   }
-
   ngOnInit(): void {
     this.frameworkComponents = {
       BtnCellRendererComponent: BtnCellRendererComponent,
@@ -113,4 +109,5 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+  
 }
