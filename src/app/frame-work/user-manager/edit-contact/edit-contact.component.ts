@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { appItems } from 'src/app/Interfaces/iuser-manager';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -21,13 +20,6 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: any;
   subscription: Subscription[] = [];
 
-  // stepper
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  forthFormGroup: FormGroup;
-  // 
-
   addContactData: appItems[] = [];
   // add role config
   roleItemsData: IRoleItems[] = [];
@@ -37,8 +29,7 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
     private editUserManagerService: EditContactManagerService,
     private interfaceManagerService: InterfaceManagerService,
     private route: ActivatedRoute,
-    private interactionService: InteractionService,
-    private router: Router
+    private interactionService: InteractionService
   ) {
   }
   addAContact = () => {

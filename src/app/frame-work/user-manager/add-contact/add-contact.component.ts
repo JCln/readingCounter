@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -35,9 +34,6 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // stepper
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  forthFormGroup: FormGroup;
   // 
 
   addContactData: appItems[] = [];
@@ -48,8 +44,7 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private addUserManagerService: AddUserManagerService,
     private interfaceManagerService: InterfaceManagerService,
-    private interactionService: InteractionService,
-    private router: Router
+    private interactionService: InteractionService
   ) {
   }
   addAContact = () => {
