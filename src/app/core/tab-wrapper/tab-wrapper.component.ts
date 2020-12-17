@@ -26,27 +26,46 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
   ) {
   }
   reFetchPageTitle = () => this.childPageTitle.emit(Object.values(this.tabs).pop().title);
+  DoesCurrentRouteFound = (): ITabs => {
+    const currentRouteFound = this.currentRoute.find((item: any) => {
+      return item.route === this.router.url
+    })
+    return currentRouteFound;
+  }
+  DoesTabsHaveThisRouteNow = (): ITabs => {
+    const found = this.tabs.find((item: any) => {
+      return item.route === this.router.url
+    })
+    return found;
+  }
+  doSth = () => {
+    if (!this.router.url.includes('/wr/mu/edit/')) {
+      return;
+    }
+    const completeRoutePart = this.router.url.split('/').pop();
+    const lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
+    const a = {
+      route: `/wr/mu/edit/${completeRoutePart}`, title: `ویرایش${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
+    };
+    if (!this.DoesTabsHaveThisRouteNow())
+      this.tabs.push(a);
+  }
   testCheck = () => {
     if (this.router.url !== '/wr') {
       const currentRouteFound = this.currentRoute.find((item: any) => {
         return item.route === this.router.url
       })
-      this.tabs.push(currentRouteFound);
+      if (currentRouteFound)
+        this.tabs.push(currentRouteFound);
+      this.doSth();
       this.reFetchPageTitle();
     }
     ////// just check correct route
     this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
-
-        const currentRouteFound = this.currentRoute.find((item: any) => {
-          return item.route === this.router.url
-        })
-
+        const currentRouteFound = this.DoesCurrentRouteFound();
         if (currentRouteFound) {
-          const found = this.tabs.find((item: any) => {
-            return item.route === this.router.url
-          })
-          if (found) {
+          if (this.DoesTabsHaveThisRouteNow()) {
             console.log('we have this route now !');
             return;
           }
@@ -54,6 +73,8 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
             this.tabs.push(currentRouteFound);
             this.reFetchPageTitle();
           }
+        } else {
+          this.doSth();
         }
       }
     })
@@ -76,9 +97,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
   }
   closeAllTabs = async () => {
     await this.setCloseAllTabs();
-    console.log(1);
     this.router.navigateByUrl('/wr');
-    
     this.closeAllExeptOne();
     this.reFetchPageTitle();
   }
