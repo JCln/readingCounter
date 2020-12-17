@@ -6,12 +6,11 @@
   justify-content: center;
   min-height: 13rem;
   min-width: 20rem;
-  overflow: hidden;
+  overflow: auto;
   direction: rtl;
   text-align: right;
 }
 
-.btn_1,
 .btn_2 {
   width: 50%;
   max-width: 8rem;
@@ -35,4 +34,14 @@ p {
   flex-wrap: wrap;
   font-size: 1.2rem;
   font-weight: 600;
+}
+
+._img_content {
+  width: auto;
+  height: auto;
+}
+
+img {
+  width: 100%;
+  height: 100%;
 }

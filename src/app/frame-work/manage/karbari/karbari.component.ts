@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
@@ -57,8 +56,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
-    private interactionService: InteractionService,
-    private router: Router
+    private interactionService: InteractionService
   ) { }
 
   openDialog = () => {

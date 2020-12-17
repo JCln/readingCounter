@@ -1,8 +1,19 @@
-<h2 mat-dialog-title> متن تست</h2>
+<h2 mat-dialog-title>{{data.title}}</h2>
 
 <mat-dialog-content>
+    <main>
+        <p *ngIf="data.messageOne">{{data.messageOne}}</p>
+        <div class="_img_content">
+            <img *ngIf="data.imgOne" src="{{data.imgOne}}" alt="">
+        </div>
+        <p *ngIf="data.messageTwo">{{data.messageTwo}}</p>
 
-    <p>متن تستی متن تستی متن تستی متن تستی متن تستیمتن تستی متن تستی</p>
+        <div class="_img_content">
+            <img *ngIf="data.imgTwo" src="{{data.imgTwo}}" alt="">
+        </div>
+        <p *ngIf="data.messageThree">{{data.messageThree}}</p>
+
+    </main>
 
 </mat-dialog-content>
 

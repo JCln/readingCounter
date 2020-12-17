@@ -3,10 +3,9 @@ import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machi
 import '../../../src/assets/L.EasyButton/src/easy-button.js';
 
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
-import { AddNewComponent } from './manage/add-new/add-new.component';
+import { HelpWrapperService } from './../services/help-wrapper.service';
 
 declare let L;
 
@@ -36,8 +35,7 @@ export class FrameWorkComponent implements OnInit, AfterViewInit {
   @Input() refreshPage: boolean;
   orderId;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
-
+  constructor(private route: ActivatedRoute, private helpWrapperService: HelpWrapperService) {
   }
   ngOnInit(): void {
     this.orderId = this.route.snapshot.paramMap.get('isShowMap');
@@ -49,10 +47,7 @@ export class FrameWorkComponent implements OnInit, AfterViewInit {
 
   // question on each section ////////////
   openDialog = () => {
-    const dialogRef = this.dialog.open(AddNewComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+    this.helpWrapperService.openDialog();
   }
   // ///////
 

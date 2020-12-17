@@ -1,30 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-new',
   templateUrl: './add-new.component.html',
   styleUrls: ['./add-new.component.scss']
 })
-export class AddNewComponent implements OnInit {
-  selectedValue: string;
-  form: FormGroup;
-  // description: string;
+export class AddNewComponent {
+  private messageToShow = {
+    title: '',
+    messageOne: '',
+    messageTwo: '',
+    messageThree: '',
+    imgOne: '',
+    imgTwo: ''
+  }
 
   constructor(
-    private dialogRef: MatDialogRef<AddNewComponent>) {
+    private dialogRef: MatDialogRef<AddNewComponent>,
+    @Inject(MAT_DIALOG_DATA) public readonly data: any
+  ) {
+    this.messageToShow.title = data.title;
+    this.messageToShow.messageOne = data.messageOne;
+    this.messageToShow.messageTwo = data.messageTwo;
+    this.messageToShow.messageThree = data.messageThree;
+    this.messageToShow.imgOne = data.imgOne;
+    this.messageToShow.imgTwo = data.imgTwo;
   }
 
   close() {
     this.dialogRef.close();
-  }
-  ngOnInit(): void {
-    // console.log(this.description, '', this.fb, this.dialogRef);
-
-    // this.form = this.fb.group({
-    //   description: [this.description, []]
-    // });
   }
 
 }
