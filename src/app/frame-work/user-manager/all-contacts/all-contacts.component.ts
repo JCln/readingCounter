@@ -81,28 +81,28 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.classWrapper();
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === this.router.url) {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === this.router.url)
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
+  // closeTabStatus = () => {
+  //   this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
+  //     if (res) {
+  //       if (res === '/wr/mu/all') {
+  //         this.nullSavedSource();
+  //       }
+  //     }
+  //   })
+  //   )
+  // }
+  // refreshTabStatus = () => {
+  //   this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  //     if (res) {
+  //       if (res === '/wr/mu/all')
+  //         this.classWrapper(true);
+  //     }
+  //   })
+  //   )
+  // }
   ngAfterViewInit(): void {
-    this.closeTabStatus();
-    this.refreshTabStatus();
+    // this.closeTabStatus();
+    // this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

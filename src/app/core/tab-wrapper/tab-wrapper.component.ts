@@ -76,7 +76,9 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
   }
   closeAllTabs = async () => {
     await this.setCloseAllTabs();
+    console.log(1);
     this.router.navigateByUrl('/wr');
+    
     this.closeAllExeptOne();
     this.reFetchPageTitle();
   }

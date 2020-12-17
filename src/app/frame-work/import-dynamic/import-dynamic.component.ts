@@ -88,7 +88,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   closeTabStatus = () => {
     this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
       if (res) {
-        if (res === this.router.url) {
+        if (res === '/wr/imd') {
           console.log('close this page please');
 
         }
@@ -99,7 +99,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === this.router.url)
+        if (res === '/wr/imd')
           this.ngOnInit();
       }
     })

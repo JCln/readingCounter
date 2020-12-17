@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IResponses } from 'src/app/Interfaces/iresponses';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -35,8 +34,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
-    private interactionService: InteractionService,
-    private router: Router
+    private interactionService: InteractionService
   ) { }
 
   openDialog = () => {
@@ -122,7 +120,10 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   closeTabStatus = () => {
     this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
       if (res) {
-        if (res === this.router.url) {
+        if (res === '/wr/m/mc') {
+          console.log(res);
+          
+          
           this.nullSavedSource();
         }
       }
@@ -149,7 +150,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === this.router.url)
+        if (res === '/wr/m/mc')
           this.classWrapper(true);
       }
     })

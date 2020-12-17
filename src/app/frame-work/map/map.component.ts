@@ -82,7 +82,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mapService.buttons(this.map);
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === this.router.url)
+        if (res === '/wr')
           this.ngOnInit();
       }
     })

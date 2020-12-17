@@ -94,7 +94,7 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
   closeTabStatus = () => {
     this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
       if (res) {
-        if (res === this.router.url) {
+        if (res === '/wr/privacy') {
           console.log('there is nothing to clear on close page !!');
 
         }
@@ -105,7 +105,7 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === this.router.url)
+        if (res === '/wr/privacy')
           this.ngOnInit();
       }
     })

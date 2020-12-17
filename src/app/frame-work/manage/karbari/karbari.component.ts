@@ -228,7 +228,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   closeTabStatus = () => {
     this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
       if (res) {
-        if (res === this.router.url) {
+        if (res === '/wr/m/kar') {
           this.nullSavedSource();
         }
       }
@@ -238,7 +238,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === this.router.url)
+        if (res === '/wr/m/kar')
           this.classWrapper(true);
       }
     })
