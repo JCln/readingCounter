@@ -228,6 +228,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     this.convertIdToTitle(this.zoneBoundDictionary, this.zoneBoundDictionary);
+    this.filterSearchs();
   }
   ngOnInit() {
     this.classWrapper();

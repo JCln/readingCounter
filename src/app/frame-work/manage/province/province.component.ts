@@ -185,6 +185,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
     this.convertIdToTitle(this.dataSource.data, this.countryDictionary);
+    this.filterSearchs();
   }
   ngOnInit() {
     this.classWrapper();

@@ -208,6 +208,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
     this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);
+    this.filterSearchs();
 
   }
   ngOnInit() {
