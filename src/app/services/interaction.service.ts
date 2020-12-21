@@ -70,5 +70,10 @@ export class InteractionService {
 
   saveDataForForAddContacts: any;
   saveDictionaryForAddContacts: any;
+
+  saveDataForReadingPeriodManager: any;
+  saveDictionaryReadingPeriodManager: any;
+  
+  saveDataForReadingPeriodKindManager: any;
   // 
 }

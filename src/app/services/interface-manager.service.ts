@@ -27,6 +27,40 @@ export class InterfaceManagerService {
     return this.mainService.POSTBODY('V1/User/Add', body);
   }
   // /////
+  // reading period manager
+  getReadingPeriodManager = (): Observable<any> => {
+    return this.mainService.GET('V1/readingPeriod/All');
+  }
+  getReadingPeriodManagerDictionary = (zoneId: number): Observable<any> => {
+    return this.mainService.GETIDNumber(zoneId, 'V1/readingPeriod/Dictionary');
+  }
+  editReadingPeriodManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/readingPeriod/Edit', body);
+  }
+  AddReadingPeriodManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/readingPeriod/Add', body);
+  }
+  deleteReadingPeriodManager = (id: number): Observable<any> => {
+    return this.mainService.POST('V1/readingPeriod/Remove', id);
+  }
+  // 
+  // reading period Kind manager
+  getReadingPeriodKindManager = (): Observable<any> => {
+    return this.mainService.GET('V1/readingPeriodKind/All');
+  }
+  getReadingPeriodKindManagerDictionary = (): Observable<any> => {
+    return this.mainService.GET('V1/readingPeriodKind/Dictionary');
+  }
+  editReadingPeriodKindManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/readingPeriodKind/Edit', body);
+  }
+  AddReadingPeriodKindManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/readingPeriodKind/Add', body);
+  }
+  deleteReadingPeriodKindManager = (id: number): Observable<any> => {
+    return this.mainService.POST('V1/readingPeriodKind/Remove', id);
+  }
+  // 
 
   // karbari ///
   getKarbari = (): Observable<any> => {

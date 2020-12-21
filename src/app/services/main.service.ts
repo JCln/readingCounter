@@ -19,13 +19,25 @@ export class MainService {
         retry(1)
       )
     } else {
-      return this.http.get<any>(environment.API_URL + '/' + URL).pipe(
+      return this.http.get(environment.API_URL + '/' + URL).pipe(
         retry(1), // retry failed request up to 1
         // catchError(err => this.errorHandler.errorHandler(err))
       )
     }
   }
   GETID = (ID: string, URL: string, base64?: string) => {
+    if (base64) {
+      this.http.get(environment.API_URL + '/' + URL + '/' + base64 + '/' + ID).pipe(
+        retry(1)
+      )
+    } else {
+      return this.http.get<any>(environment.API_URL + '/' + URL + '/' + ID).pipe(
+        retry(1), // retry failed request up to 1
+        // catchError(err => this.errorHandler.errorHandler(err))
+      )
+    }
+  }
+  GETIDNumber = (ID: number, URL: string, base64?: string) => {
     if (base64) {
       this.http.get(environment.API_URL + '/' + URL + '/' + base64 + '/' + ID).pipe(
         retry(1)
