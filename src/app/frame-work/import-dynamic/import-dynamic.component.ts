@@ -1,14 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ITrueFalse } from 'src/app/Interfaces/IDictionaryManager';
 import { IZoneManager } from 'src/app/Interfaces/izone-manager';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DateJalaliComponent } from './../../core/_layouts/header/date-jalali/date-jalali.component';
 import { IImportDynamic } from './../../Interfaces/iimport-dynamic';
+import { ImportDynamicService } from './../../services/import-dynamic.service';
 import { InterfaceService } from './../../services/interface.service';
 
 @Component({
@@ -44,11 +43,13 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   constructor(
     private interfaceService: InterfaceService,
     private interactionService: InteractionService,
-    private snackWrapperService: SnackWrapperService,
     private interfaceManagerService: InterfaceManagerService,
-    private router: Router
+    private importDynamicService: ImportDynamicService
   ) { }
   connectToServer = () => {
+    const validation = this.importDynamicService.checkVertification(this.importDynamic);
+    if (!validation)
+      return;
     this.interfaceService.postImportData(this.importDynamic).subscribe(res => {
       console.log(res);
 
@@ -66,21 +67,8 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       console.error(e => e);
     }
   }
-  // getDataSource = (): Promise<any> => {
-  //   return new Promise((resolve) => {
-  //     this.interfaceManagerService.getZoneManager().subscribe(res => {
-  //       if (res) {
-  //         resolve(res);
-  //       }
-  //     })
-  //   })
-  // }
   classWrapper = async () => {
-    // this.dataSource = await this.getDataSource();
     this.zoneDictionary = await this.getZoneDictionary();
-
-    // this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);
-
   }
   ngOnInit() {
     this.classWrapper();
