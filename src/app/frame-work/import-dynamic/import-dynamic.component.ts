@@ -73,17 +73,6 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnInit() {
     this.classWrapper();
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/imd') {
-          console.log('close this page please');
-
-        }
-      }
-    })
-    )
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -101,7 +90,6 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
-    this.closeTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

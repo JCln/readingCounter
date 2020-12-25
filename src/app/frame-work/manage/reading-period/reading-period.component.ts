@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -44,7 +45,8 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private closeTabService: CloseTabService
   ) { }
 
   openDialog = () => {
@@ -189,20 +191,20 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       )
   }
-  nullSavedSource = () => this.interactionService.saveDataForReadingPeriodManager = null;
+  nullSavedSource = () => this.closeTabService.saveDataForReadingPeriodManager = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForReadingPeriodManager) {
-      this.dataSource.data = this.interactionService.saveDataForReadingPeriodManager;
-      this.zoneDictionary = this.interactionService.saveDictionaryReadingPeriodManager;
+    if (this.closeTabService.saveDataForReadingPeriodManager) {
+      this.dataSource.data = this.closeTabService.saveDataForReadingPeriodManager;
+      this.zoneDictionary = this.closeTabService.saveDictionaryReadingPeriodManager;
     }
     else {
       this.dataSource.data = await this.getDataSource();
       this.zoneDictionary = await this.getZoneDictionary();
-      this.interactionService.saveDataForReadingPeriodManager = this.dataSource.data;
-      this.interactionService.saveDictionaryReadingPeriodManager = this.zoneDictionary;
+      this.closeTabService.saveDataForReadingPeriodManager = this.dataSource.data;
+      this.closeTabService.saveDictionaryReadingPeriodManager = this.zoneDictionary;
     }
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
@@ -211,16 +213,6 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/rpm') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -232,8 +224,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     )
   }
   ngAfterViewInit(): void {
-    this.refreshTabStatus();
-    this.closeTabStatus();
+    this.refreshTabStatus(); 
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {

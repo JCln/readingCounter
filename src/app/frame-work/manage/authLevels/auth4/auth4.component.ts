@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
@@ -12,6 +11,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { CloseTabService } from './../../../../services/close-tab.service';
 import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
 import { Auth4EditDgComponent } from './auth4-edit-dg/auth4-edit-dg.component';
@@ -42,7 +42,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private router: Router
+    private closeTabService: CloseTabService
   ) { }
 
   openDialog = () => {
@@ -150,36 +150,26 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  nullSavedSource = () => this.interactionService.saveDataForAppLevel4 = null;
+  nullSavedSource = () => this.closeTabService.saveDataForAppLevel4 = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForAppLevel4) {
-      this.dataSource.data = this.interactionService.saveDataForAppLevel4;
-      this.auth3Dictionary = this.interactionService.saveDictionaryForAppLevel4;
+    if (this.closeTabService.saveDataForAppLevel4) {
+      this.dataSource.data = this.closeTabService.saveDataForAppLevel4;
+      this.auth3Dictionary = this.closeTabService.saveDictionaryForAppLevel4;
     }
     else {
       this.dataSource.data = await this.getDataSource();
       this.auth3Dictionary = await this.getAuthLevel4IdDictionary();
-      this.interactionService.saveDataForAppLevel4 = this.dataSource.data;
-      this.interactionService.saveDictionaryForAppLevel4 = this.auth3Dictionary;
+      this.closeTabService.saveDataForAppLevel4 = this.dataSource.data;
+      this.closeTabService.saveDictionaryForAppLevel4 = this.auth3Dictionary;
     }
     this.convertIdToTitle(this.dataSource.data, this.auth3Dictionary);
     this.filter();
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/al/ac') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -193,7 +183,6 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.refreshTabStatus();
-    this.closeTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

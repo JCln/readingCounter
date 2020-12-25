@@ -18,17 +18,6 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/profile') {
-          console.log('there is nothing to clear on close page !!');
-
-        }
-      }
-    })
-    )
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -39,7 +28,6 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
   ngAfterViewInit(): void {
-    this.closeTabStatus();
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {

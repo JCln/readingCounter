@@ -91,17 +91,6 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
       horizontalPosition: this.horizontalPosition
     });
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/privacy') {
-          console.log('there is nothing to clear on close page !!');
-
-        }
-      }
-    })
-    )
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -112,7 +101,6 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
   ngAfterViewInit(): void {
-    this.closeTabStatus();
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {

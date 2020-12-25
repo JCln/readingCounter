@@ -6,9 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { ITrueFalse } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { RpkmAddDgComponent } from './rpkm-add-dg/rpkm-add-dg.component';
@@ -45,8 +45,8 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private closeTabService: CloseTabService
   ) { }
 
   openDialog = () => {
@@ -158,32 +158,22 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
         }
       )
   }
-  nullSavedSource = () => this.interactionService.saveDataForReadingPeriodKindManager = null;
+  nullSavedSource = () => this.closeTabService.saveDataForReadingPeriodKindManager = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForReadingPeriodKindManager) {
-      this.dataSource.data = this.interactionService.saveDataForReadingPeriodKindManager;
+    if (this.closeTabService.saveDataForReadingPeriodKindManager) {
+      this.dataSource.data = this.closeTabService.saveDataForReadingPeriodKindManager;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.interactionService.saveDataForReadingPeriodKindManager = this.dataSource.data;
+      this.closeTabService.saveDataForReadingPeriodKindManager = this.dataSource.data;
     }
     this.filterSearchs();
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/rpkm') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -196,7 +186,6 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
-    this.closeTabStatus();
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {

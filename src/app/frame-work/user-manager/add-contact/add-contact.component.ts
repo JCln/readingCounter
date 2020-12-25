@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
@@ -44,20 +45,21 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private addUserManagerService: AddUserManagerService,
     private interfaceManagerService: InterfaceManagerService,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private closeTabService: CloseTabService
   ) {
   }
   addAContact = () => {
     this.addUserManagerService.addAContact(this.dataSource);
   }
-  nullSavedSource = () => this.interactionService.saveDataForForAddContacts = null;
+  nullSavedSource = () => this.closeTabService.saveDataForForAddContacts = null;
 
   getContactSource = (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForForAddContacts) {
-      this.dataSource = this.interactionService.saveDataForForAddContacts;
+    if (this.closeTabService.saveDataForForAddContacts) {
+      this.dataSource = this.closeTabService.saveDataForForAddContacts;
       this.roleItemsData = this.dataSource.roleItems;
       this.addContactData = this.dataSource.appItems;
       this.provinceItemsData = this.dataSource.provinceItems;
@@ -66,7 +68,7 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
       this.interfaceManagerService.getAddUserContactManager().subscribe((res: any) => {
         if (res) {
           this.dataSource = res;
-          this.interactionService.saveDataForForAddContacts = res;
+          this.closeTabService.saveDataForForAddContacts = res;
 
           this.roleItemsData = this.dataSource.roleItems;
           this.addContactData = this.dataSource.appItems;
@@ -80,16 +82,6 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getContactSource();
 
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/mu/add') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -100,7 +92,6 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
   ngAfterViewInit(): void {
-    this.closeTabStatus();
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {

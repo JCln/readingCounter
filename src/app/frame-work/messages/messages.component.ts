@@ -74,17 +74,6 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.message.canSave = localStorageItem.canSave;
 
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/msge') {
-          console.log('there is nothing to clear on close page !!');
-
-        }
-      }
-    })
-    )
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -96,7 +85,6 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
-    this.closeTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

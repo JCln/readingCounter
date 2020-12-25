@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
@@ -11,6 +10,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { CloseTabService } from './../../../../services/close-tab.service';
 import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
 import { Auth3EditDgComponent } from './auth3-edit-dg/auth3-edit-dg.component';
@@ -37,7 +37,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private interactionService: InteractionService,
-    private router: Router,
+    private closeTabService: CloseTabService,
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService
@@ -141,20 +141,20 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  nullSavedSource = () => this.interactionService.saveDataForAppLevel3 = null;
+  nullSavedSource = () => this.closeTabService.saveDataForAppLevel3 = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForAppLevel3) {
-      this.dataSource.data = this.interactionService.saveDataForAppLevel3;
-      this.auth2Dictionary = this.interactionService.saveDictionaryForAppLevel3;
+    if (this.closeTabService.saveDataForAppLevel3) {
+      this.dataSource.data = this.closeTabService.saveDataForAppLevel3;
+      this.auth2Dictionary = this.closeTabService.saveDictionaryForAppLevel3;
     }
     else {
       this.dataSource.data = await this.getDataSource();
       this.auth2Dictionary = await this.getAuthLevel2Id();
-      this.interactionService.saveDataForAppLevel3 = this.dataSource.data;
-      this.interactionService.saveDictionaryForAppLevel3 = this.auth2Dictionary;
+      this.closeTabService.saveDataForAppLevel3 = this.dataSource.data;
+      this.closeTabService.saveDictionaryForAppLevel3 = this.auth2Dictionary;
     }
 
     this.convertIdToTitle(this.dataSource.data, this.auth2Dictionary);
@@ -163,16 +163,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.classWrapper();
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/al/cr') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
-  }
+ 
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -183,8 +174,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     )
   }
   ngAfterViewInit(): void {
-    this.refreshTabStatus();
-    this.closeTabStatus();
+    this.refreshTabStatus();    
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

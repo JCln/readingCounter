@@ -12,6 +12,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ITrueFalse } from './../../../Interfaces/IDictionaryManager';
+import { CloseTabService } from './../../../services/close-tab.service';
 import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';
 import { KarbariEditDgComponent } from './karbari-edit-dg/karbari-edit-dg.component';
@@ -56,7 +57,8 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private closeTabService: CloseTabService
   ) { }
 
   openDialog = () => {
@@ -200,20 +202,20 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  nullSavedSource = () => this.interactionService.saveDataForKarbari = null;
+  nullSavedSource = () => this.closeTabService.saveDataForKarbari = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForKarbari) {
-      this.dataSource.data = this.interactionService.saveDataForKarbari;
-      this.provinceDictionary = this.interactionService.saveDictionaryForKarbari;
+    if (this.closeTabService.saveDataForKarbari) {
+      this.dataSource.data = this.closeTabService.saveDataForKarbari;
+      this.provinceDictionary = this.closeTabService.saveDictionaryForKarbari;
     }
     else {
       this.dataSource.data = await this.getDataSource();
       this.provinceDictionary = await this.getProvinceDictionary();
-      this.interactionService.saveDataForKarbari = this.dataSource.data;
-      this.interactionService.saveDictionaryForKarbari = this.provinceDictionary;
+      this.closeTabService.saveDataForKarbari = this.dataSource.data;
+      this.closeTabService.saveDictionaryForKarbari = this.provinceDictionary;
     }
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
@@ -222,16 +224,6 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/kar') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -245,7 +237,6 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.refreshTabStatus();
-    this.closeTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

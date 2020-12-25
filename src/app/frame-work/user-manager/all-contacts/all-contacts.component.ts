@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
@@ -41,7 +42,8 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private httpClient: HttpClient,
     private route: ActivatedRoute,
     private interactionService: InteractionService,
-    private router: Router
+    private router: Router,
+    private closeTabService: CloseTabService
   ) {
   }
 
@@ -60,17 +62,17 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  nullSavedSource = () => this.interactionService.saveDataForAllContacts = null;
+  nullSavedSource = () => this.closeTabService.saveDataForAllContacts = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForAllContacts) {
-      this.rowData = this.interactionService.saveDataForAllContacts;
+    if (this.closeTabService.saveDataForAllContacts) {
+      this.rowData = this.closeTabService.saveDataForAllContacts;
     }
     else {
       this.rowData = await this.getDataSource();
-      this.interactionService.saveDataForAllContacts = this.rowData;
+      this.closeTabService.saveDataForAllContacts = this.rowData;
     }
 
   }
@@ -81,16 +83,6 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.classWrapper();
   }
-  // closeTabStatus = () => {
-  //   this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-  //     if (res) {
-  //       if (res === '/wr/mu/all') {
-  //         this.nullSavedSource();
-  //       }
-  //     }
-  //   })
-  //   )
-  // }
   // refreshTabStatus = () => {
   //   this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
   //     if (res) {
@@ -101,7 +93,6 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   //   )
   // }
   ngAfterViewInit(): void {
-    // this.closeTabStatus();
     // this.refreshTabStatus();
   }
   ngOnDestroy(): void {
@@ -109,5 +100,5 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  
+
 }

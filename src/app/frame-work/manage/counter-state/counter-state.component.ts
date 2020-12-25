@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IUserManager } from 'src/app/Interfaces/iuser-manager';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 
 import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
 import { BtnCellRendererComponent } from '../../user-manager/all-contacts/btn-cell-renderer/btn-cell-renderer.component';
@@ -149,7 +149,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     private httpClient: HttpClient,
     private interactionService: InteractionService,
     private interfaceManagerService: InterfaceManagerService,
-    private router: Router
+    private closeTabService: CloseTabService
   ) {
   }
 
@@ -202,20 +202,20 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  nullSavedSource = () => this.interactionService.saveDataForCounterState = null;
+  nullSavedSource = () => this.closeTabService.saveDataForCounterState = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForCounterState) {
-      this.dataSource = this.interactionService.saveDataForCounterState;
-      this.zoneDictionary = this.interactionService.saveDictionaryForCounterState;
+    if (this.closeTabService.saveDataForCounterState) {
+      this.dataSource = this.closeTabService.saveDataForCounterState;
+      this.zoneDictionary = this.closeTabService.saveDictionaryForCounterState;
     }
     else {
       this.dataSource = await this.getDataSource();
       this.zoneDictionary = await this.getZoneDictionary();
-      this.interactionService.saveDataForCounterState = this.dataSource;
-      this.interactionService.saveDictionaryForCounterState = this.zoneDictionary;
+      this.closeTabService.saveDataForCounterState = this.dataSource;
+      this.closeTabService.saveDictionaryForCounterState = this.zoneDictionary;
     }
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
   }
@@ -232,16 +232,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     };
     this.editType = 'fullRow';
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/cs') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
-  }
+
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -252,7 +243,6 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
   ngAfterViewInit(): void {
-    this.closeTabStatus();
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {

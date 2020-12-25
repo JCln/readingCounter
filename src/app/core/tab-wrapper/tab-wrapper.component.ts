@@ -4,6 +4,7 @@ import { ISidebarItems, ITabs } from 'src/app/Interfaces/isidebar-items';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
+import { CloseTabService } from './../../services/close-tab.service';
 import { UtilsService } from './../../services/utils.service';
 
 
@@ -22,7 +23,8 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     private router: Router,
     private utilsService: UtilsService,
     private sideBarItemsService: SidebarItemsService,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private closeTabService: CloseTabService
   ) {
   }
   reFetchPageTitle = () => this.childPageTitle.emit(Object.values(this.tabs).pop().title);
@@ -154,14 +156,14 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     this.interactionService.setRefresh(tabRoute);
   }
   closeCurrentPage = (tabRoute: string) => {
-    this.interactionService.setClose(tabRoute);
+    this.closeTabService.setClose(tabRoute);
   }
   closeAllExeptOne = () => this.tabs.length = 1;
   setCloseAllTabs = (): Promise<boolean> => {
     try {
       return new Promise((resolve) => {
         this.tabs.forEach(val => {
-          return this.interactionService.setClose(val.route)
+          return this.closeTabService.setClose(val.route)
         })
         resolve(true)
       });

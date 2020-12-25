@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { appItems } from 'src/app/Interfaces/iuser-manager';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
@@ -29,19 +30,20 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
     private editUserManagerService: EditContactManagerService,
     private interfaceManagerService: InterfaceManagerService,
     private route: ActivatedRoute,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private closeTabService: CloseTabService
   ) {
   }
   addAContact = () => {
     this.editUserManagerService.editAUserContact(this.dataSource, this.UUid);
   }
-  nullSavedSource = () => this.interactionService.saveDataForEditContacts = null;
+  nullSavedSource = () => this.closeTabService.saveDataForEditContacts = null;
   getContactSource = (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForEditContacts) {
-      this.dataSource = this.interactionService.saveDataForEditContacts;
+    if (this.closeTabService.saveDataForEditContacts) {
+      this.dataSource = this.closeTabService.saveDataForEditContacts;
       this.roleItemsData = this.dataSource.roleItems;
       this.addContactData = this.dataSource.appItems;
       this.provinceItemsData = this.dataSource.provinceItems;
@@ -51,7 +53,7 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
       this.interfaceManagerService.getUserContactManager(this.UUid).subscribe((res: any) => {
         if (res) {
           this.dataSource = res;
-          this.interactionService.saveDataForEditContacts = res;
+          this.closeTabService.saveDataForEditContacts = res;
 
           this.roleItemsData = this.dataSource.roleItems;
           this.addContactData = this.dataSource.appItems;
@@ -65,16 +67,6 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
     this.UUid = this.route.snapshot.paramMap.get('id');
     this.getContactSource();
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/mu/all') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -85,7 +77,6 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
   ngAfterViewInit(): void {
-    this.closeTabStatus();
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {

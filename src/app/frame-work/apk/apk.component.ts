@@ -29,16 +29,6 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
   }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/apk') {
-          console.log('there is nothing to clear on close page !!');
-        }
-      }
-    })
-    )
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -48,8 +38,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     )
   }
-  ngAfterViewInit(): void {
-    this.closeTabStatus();
+  ngAfterViewInit(): void {  
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {

@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
@@ -11,6 +10,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { CloseTabService } from './../../../../services/close-tab.service';
 import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
 import { Auth2EditDgComponent } from './auth2-edit-dg/auth2-edit-dg.component';
@@ -39,7 +39,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private router: Router
+    private closeTabService: CloseTabService
   ) { }
 
   // add auth 2 not working
@@ -141,20 +141,20 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  nullSavedSource = () => this.interactionService.saveDataForAppLevel2 = null;
+  nullSavedSource = () => this.closeTabService.saveDataForAppLevel2 = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForAppLevel2) {
-      this.dataSource.data = this.interactionService.saveDataForAppLevel2;
-      this.auth1Dictionary = this.interactionService.saveDictionaryForAppLevel2;
+    if (this.closeTabService.saveDataForAppLevel2) {
+      this.dataSource.data = this.closeTabService.saveDataForAppLevel2;
+      this.auth1Dictionary = this.closeTabService.saveDictionaryForAppLevel2;
     }
     else {
       this.dataSource.data = await this.getDataSource();
       this.auth1Dictionary = await this.getAuthLevel1Id();
-      this.interactionService.saveDataForAppLevel2 = this.dataSource.data;
-      this.interactionService.saveDictionaryForAppLevel2 = this.auth1Dictionary;
+      this.closeTabService.saveDataForAppLevel2 = this.dataSource.data;
+      this.closeTabService.saveDictionaryForAppLevel2 = this.auth1Dictionary;
     }
 
     this.convertIdToTitle(this.dataSource.data, this.auth1Dictionary);
@@ -162,16 +162,6 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/al/me') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -184,7 +174,6 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
-    this.closeTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

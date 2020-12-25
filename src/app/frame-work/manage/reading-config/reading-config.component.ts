@@ -3,10 +3,10 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IDictionaryManager, ITrueFalse } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -124,7 +124,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private router: Router
+    private closeTabService: CloseTabService
   ) { }
 
   openDialog = () => {
@@ -405,20 +405,20 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
       })
     });
   }
-  nullSavedSource = () => this.interactionService.saveDataForReadingConfig = null;
+  nullSavedSource = () => this.closeTabService.saveDataForReadingConfig = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForReadingConfig) {
-      this.dataSource.data = this.interactionService.saveDataForReadingConfig;
-      this.zoneDictionary = this.interactionService.saveDictionaryForReadingConfig;
+    if (this.closeTabService.saveDataForReadingConfig) {
+      this.dataSource.data = this.closeTabService.saveDataForReadingConfig;
+      this.zoneDictionary = this.closeTabService.saveDictionaryForReadingConfig;
     }
     else {
       this.dataSource.data = await this.getDataSource();
       this.zoneDictionary = await this.getZoneDictionary();
-      this.interactionService.saveDataForReadingConfig = this.dataSource.data;
-      this.interactionService.saveDictionaryForReadingConfig = this.zoneDictionary;
+      this.closeTabService.saveDataForReadingConfig = this.dataSource.data;
+      this.closeTabService.saveDictionaryForReadingConfig = this.zoneDictionary;
     }
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
     this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);
@@ -426,16 +426,6 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/rc') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -448,8 +438,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.refreshTabStatus();
-    this.closeTabStatus();
+    this.refreshTabStatus();    
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

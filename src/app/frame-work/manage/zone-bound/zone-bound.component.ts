@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
@@ -12,6 +11,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { IZoneBoundManager } from './../../../Interfaces/izone-bound-manager';
+import { CloseTabService } from './../../../services/close-tab.service';
 import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.component';
 import { ZoneBoundEditDgComponent } from './zone-bound-edit-dg/zone-bound-edit-dg.component';
@@ -55,7 +55,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private router: Router
+    private closeTabService: CloseTabService
   ) { }
 
   openDialog = () => {
@@ -209,20 +209,20 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  nullSavedSource = () => this.interactionService.saveDataForZoneBound = null;
+  nullSavedSource = () => this.closeTabService.saveDataForZoneBound = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForZoneBound) {
-      this.dataSource.data = this.interactionService.saveDataForZoneBound;
-      this.zoneBoundDictionary = this.interactionService.saveDictionaryForZoneBound;
+    if (this.closeTabService.saveDataForZoneBound) {
+      this.dataSource.data = this.closeTabService.saveDataForZoneBound;
+      this.zoneBoundDictionary = this.closeTabService.saveDictionaryForZoneBound;
     }
     else {
       this.dataSource.data = await this.getDataSource();
       this.zoneBoundDictionary = await this.getZoneBoundDictionary();
-      this.interactionService.saveDataForZoneBound = this.dataSource.data;
-      this.interactionService.saveDictionaryForZoneBound = this.zoneBoundDictionary;
+      this.closeTabService.saveDataForZoneBound = this.dataSource.data;
+      this.closeTabService.saveDictionaryForZoneBound = this.zoneBoundDictionary;
     }
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
@@ -232,16 +232,6 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/mzd') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -254,7 +244,6 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
-    this.closeTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

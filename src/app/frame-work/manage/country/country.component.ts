@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IResponses } from 'src/app/Interfaces/iresponses';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -34,7 +35,8 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private closeTabService: CloseTabService
   ) { }
 
   openDialog = () => {
@@ -116,30 +118,17 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  nullSavedSource = () => this.interactionService.saveDataForCountry = null;
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/mc') {
-          console.log(res);
-          
-          
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
-  }
+  nullSavedSource = () => this.closeTabService.saveDataForCountry = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForCountry) {
-      this.dataSource.data = this.interactionService.saveDataForCountry;
+    if (this.closeTabService.saveDataForCountry) {
+      this.dataSource.data = this.closeTabService.saveDataForCountry;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.interactionService.saveDataForCountry = this.dataSource.data;
+      this.closeTabService.saveDataForCountry = this.dataSource.data;
     }
 
     this.filterSearchs();
@@ -158,7 +147,6 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
-    this.closeTabStatus();
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IResponses } from 'src/app/Interfaces/iresponses';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
@@ -40,7 +41,8 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
-    private interactionService: InteractionService    
+    private interactionService: InteractionService,
+    private closeTabService: CloseTabService
   ) { }
 
   openDialog = () => {
@@ -167,20 +169,20 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       )
   }
-  nullSavedSource = () => this.interactionService.saveDataForProvince = null;
+  nullSavedSource = () => this.closeTabService.saveDataForProvince = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.interactionService.saveDataForProvince) {
-      this.dataSource.data = this.interactionService.saveDataForProvince;
-      this.countryDictionary = this.interactionService.saveDictionaryForProvince;
+    if (this.closeTabService.saveDataForProvince) {
+      this.dataSource.data = this.closeTabService.saveDataForProvince;
+      this.countryDictionary = this.closeTabService.saveDictionaryForProvince;
     }
     else {
       this.dataSource.data = await this.getDataSource();
       this.countryDictionary = await this.getProvinceDictionary();
-      this.interactionService.saveDataForProvince = this.dataSource.data;
-      this.interactionService.saveDictionaryForProvince = this.countryDictionary;
+      this.closeTabService.saveDataForProvince = this.dataSource.data;
+      this.closeTabService.saveDictionaryForProvince = this.countryDictionary;
     }
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
@@ -189,16 +191,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  closeTabStatus = () => {
-    this.subscription.push(this.interactionService.getClosedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/mp') {
-          this.nullSavedSource();
-        }
-      }
-    })
-    )
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -211,7 +203,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
-    this.closeTabStatus();
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
