@@ -11,6 +11,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { RpkmAddDgComponent } from './rpkm-add-dg/rpkm-add-dg.component';
 import { RpkmEditDgComponent } from './rpkm-edit-dg/rpkm-edit-dg.component';
 
@@ -46,6 +47,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private interactionService: InteractionService,
+    private snackWrapperService: SnackWrapperService,
     private closeTabService: CloseTabService
   ) { }
 
@@ -56,14 +58,10 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
           width: '30rem'
         });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-
         if (result) {
           this.interfaceManagerService.AddReadingPeriodKindManager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
-              // this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }
@@ -83,9 +81,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
         if (result) {
           this.interfaceManagerService.editReadingPeriodKindManager(result).subscribe((res: IResponses) => {
             if (res) {
-              console.log(res);
-
-              // this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
             }
           })
         }

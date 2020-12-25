@@ -16,7 +16,6 @@ export class RpkmAddDgComponent {
     private dialogRef: MatDialogRef<RpkmAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    data = data.di;
     this.form = fb.group({
       id: [''],
       title: [''],

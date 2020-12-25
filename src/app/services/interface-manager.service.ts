@@ -32,7 +32,7 @@ export class InterfaceManagerService {
     return this.mainService.GET('V1/readingPeriod/All');
   }
   getReadingPeriodManagerDictionary = (zoneId: number): Observable<any> => {
-    return this.mainService.GETIDNumber(zoneId, 'V1/readingPeriod/Dictionary');
+    return this.mainService.GET(`V1/readingPeriod/Dictionary/${zoneId}`);
   }
   editReadingPeriodManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/readingPeriod/Edit', body);
