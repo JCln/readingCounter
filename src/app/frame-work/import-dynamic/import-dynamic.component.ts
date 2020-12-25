@@ -36,6 +36,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     { name: 'باشد', value: true },
     { name: 'هیچکدام', value: '' }
   ]
+  userCounterReader: any;
   zoneDictionary: IZoneManager[] = [];
   dataSource: any;
   subscription: Subscription[] = [];
@@ -67,8 +68,22 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       console.error(e => e);
     }
   }
+  getUserCounterReaders = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceService.getUserCounterReaders(this.importDynamic.zoneId).subscribe(res => {
+          if (res)
+            resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
   classWrapper = async () => {
     this.zoneDictionary = await this.getZoneDictionary();
+    this.userCounterReader = await this.getUserCounterReaders();
+    console.log(this.userCounterReader);
   }
   ngOnInit() {
     this.classWrapper();
