@@ -59,8 +59,6 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
           }
         });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-
         if (result) {
           this.interfaceManagerService.AddReadingPeriodManager(result).subscribe((res: IResponses) => {
             if (res) {
@@ -129,9 +127,8 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
   getZoneDictionary = (): any => {
-    const zoneId = 10018315
     return new Promise((resolve) => {
-      this.interfaceManagerService.getReadingPeriodManagerDictionary(zoneId).subscribe(res => {
+      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
         if (res)
           resolve(res);
       })
@@ -224,7 +221,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     )
   }
   ngAfterViewInit(): void {
-    this.refreshTabStatus(); 
+    this.refreshTabStatus();
   }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
