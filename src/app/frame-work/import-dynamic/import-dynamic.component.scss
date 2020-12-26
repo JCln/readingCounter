@@ -66,3 +66,29 @@ footer {
     color: $gray_dr;
   }
 }
+
+.order_by {
+  margin: $font_s;
+}
+
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: $gray_dr;
+}
+
+::ng-deep {
+  .mat-radio-label-content {
+    padding-right: $font_05 !important;
+  }
+}
+
+[hidden] {
+  display: none;
+}

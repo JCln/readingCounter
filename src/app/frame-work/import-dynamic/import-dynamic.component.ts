@@ -10,6 +10,10 @@ import { IImportDynamic } from './../../Interfaces/iimport-dynamic';
 import { ImportDynamicService } from './../../services/import-dynamic.service';
 import { InterfaceService } from './../../services/interface.service';
 
+interface ISearchInOrderTo {
+  title: string;
+  isSelected: boolean;
+}
 @Component({
   selector: 'app-import-dynamic',
   templateUrl: './import-dynamic.component.html',
@@ -36,6 +40,19 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     { name: 'باشد', value: true },
     { name: 'هیچکدام', value: '' }
   ]
+
+  _isOrderByDate: boolean = false;
+  searchInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'جستجو بر اساس تاریخ :',
+      isSelected: true
+    },
+    {
+      title: 'جستجو بر اساس دوره :',
+      isSelected: false
+    }
+  ]
+  readingPeriodKindsDictionary: string[] = [];
   userCounterReader: any;
   zoneDictionary: IZoneManager[] = [];
   dataSource: any;
@@ -68,10 +85,22 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       console.error(e => e);
     }
   }
+  getReadingPeriodsKindDictionary = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getReadingPeriodKindManagerDictionary().subscribe(res => {
+          if (res)
+            resolve(res);
+        })
+      });
+    } catch {
+      console.error(e => e);
+    }
+  }
   getUserCounterReaders = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getUserCounterReaders(this.importDynamic.zoneId).subscribe(res => {
+        this.interfaceManagerService.getCounterReadersByZoneId(this.importDynamic.zoneId).subscribe(res => {
           if (res)
             resolve(res);
         })
@@ -80,10 +109,15 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       console.error(e => e);
     }
   }
-  classWrapper = async () => {
-    this.zoneDictionary = await this.getZoneDictionary();
+  verificationACounterReaderId = async () => {
+    if (!this.readingPeriodKindsDictionary || !this.zoneDictionary)
+      return;
     this.userCounterReader = await this.getUserCounterReaders();
     console.log(this.userCounterReader);
+  }
+  classWrapper = async () => {
+    this.readingPeriodKindsDictionary = await this.getReadingPeriodsKindDictionary();
+    this.zoneDictionary = await this.getZoneDictionary();    
   }
   ngOnInit() {
     this.classWrapper();

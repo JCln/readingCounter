@@ -1,6 +1,15 @@
 <main class="main">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
-
+        <section class="order_by">
+            <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
+                name="_isOrderByDate">
+                <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"
+                    [value]="orderType.isSelected">
+                    {{orderType.title}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </section>
+        <hr>
         <section class="content">
             <div class="input_2">
                 <div class="_key">از اشتراک :</div>
@@ -11,14 +20,14 @@
                 <div class="_key">تا اشتراک :</div>
                 <input class="_value" name="importDynamic.toEshterak" [(ngModel)]="importDynamic.toEshterak">
             </div>
-            <div class="input_2">
+            <div class="input_2" [hidden]="!_isOrderByDate">
                 <div class="_key">از تاریخ :</div>
                 <div class="_value">
                     <app-date-jalali name="importDynamic.fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
                     </app-date-jalali>
                 </div>
             </div>
-            <div class="input_2">
+            <div class="input_2" [hidden]="!_isOrderByDate">
                 <div class="_key">تا تاریخ :</div>
                 <div class="_value">
                     <app-date-jalali name="importDynamic.toDate" (dateJalEvent)="receiveToDateJalali($event)">
@@ -35,14 +44,17 @@
                 <input class="_value" type="number" name="importDynamic.imagePercent"
                     [(ngModel)]="importDynamic.imagePercent">
             </div>
-            <div class="input_2">
-                <div class="_key">منطقه :</div>
+            <div class="input_2" [hidden]="_isOrderByDate">
+                <div class="_key">ناحیه :</div>
                 <mat-select [(ngModel)]="importDynamic.zoneId" name="importDynamic.zoneId">
                     <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
-                        (click)="getUserCounterReaders()">
+                        (click)="verificationACounterReaderId()">
                         {{truefalse.title}}
                     </mat-option>
                 </mat-select>
+            </div>
+            <div *ngIf="userCounterReader">
+                {{userCounterReader}}
             </div>
 
             <mat-checkbox name="importDynamic.hasPreNumber" [(ngModel)]="importDynamic.hasPreNumber">شماره قبلی
