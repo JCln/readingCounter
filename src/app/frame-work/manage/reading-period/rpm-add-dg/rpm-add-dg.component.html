@@ -34,7 +34,11 @@
 
         <mat-form-field appearance="fill">
             <mat-label>قرائت نوع دوره</mat-label>
-            <input matInput type="number" formControlName="readingPeriodKindId" placeholder="ترتیب">
+            <mat-select formControlName="readingPeriodKindId">
+                <mat-option *ngFor="let truefalse of readingPeriodKindId" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
 
     </mat-dialog-content>

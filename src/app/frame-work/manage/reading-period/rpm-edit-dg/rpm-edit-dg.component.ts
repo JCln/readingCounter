@@ -10,6 +10,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class RpmEditDgComponent {
   form: FormGroup;
   selected: any;
+  readingPeriodKindId: any;
+  selectedRPKId: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -19,6 +21,7 @@ export class RpmEditDgComponent {
     const editable = data.editable;
     data = data.row;
     this.selected = data.zoneId;
+    this.selectedRPKId = data.readingPeriodKindId;
 
     this.form = fb.group({
       id: data.id,

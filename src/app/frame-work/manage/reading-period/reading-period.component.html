@@ -24,7 +24,12 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <input type="number" matInput [formControl]="readingPeriodKindIdFilter">
+                <mat-select [formControl]="readingPeriodKindIdFilter" name="readingPeriodKindId">
+                    <mat-option *ngFor="let readingPeriodKindId of readingPeriodKindId"
+                        [value]="readingPeriodKindId.title">
+                        {{readingPeriodKindId.title}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.readingPeriodKindId}}</td>

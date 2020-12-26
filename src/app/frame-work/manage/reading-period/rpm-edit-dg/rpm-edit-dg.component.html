@@ -19,9 +19,18 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>منطقه</mat-label>
+            <mat-label>ناحیه</mat-label>
             <mat-select [(value)]="selected" name="zoneId">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.title">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>قرائت نوع دوره</mat-label>
+            <mat-select [(value)]="selectedRPKId" name="readingPeriodKindId">
+                <mat-option *ngFor="let truefalse of data.rpkmId" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
@@ -31,12 +40,7 @@
             <mat-label>ترتیب</mat-label>
             <input matInput type="number" formControlName="clientOrder" placeholder="ترتیب">
         </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>قرائت نوع دوره</mat-label>
-            <input matInput type="number" formControlName="readingPeriodKindId" placeholder="ترتیب">
-        </mat-form-field>
-
+    
     </mat-dialog-content>
 
     <mat-dialog-actions>

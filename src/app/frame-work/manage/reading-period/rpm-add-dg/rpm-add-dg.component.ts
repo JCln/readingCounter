@@ -9,20 +9,21 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class RpmAddDgComponent {
   selectedValue: string;
+  readingPeriodKindId: any;
   form: FormGroup;
-
   constructor(
     fb: FormBuilder,
     private dialogRef: MatDialogRef<RpmAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    this.readingPeriodKindId = data.rpkmId;
     data = data.di;
     this.form = fb.group({
       id: [''],
       title: [''],
       zoneId: data.zoneId,
       moshtarakinId: [''],
-      readingPeriodKindId: [''],
+      readingPeriodKindId: this.readingPeriodKindId,
       clientOrder: ['']
     })
   }

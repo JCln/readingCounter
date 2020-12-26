@@ -31,6 +31,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
 
   subscription: Subscription[] = [];
   editableDataSource = [];
+  readingPeriodKindId: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columnsToDisplay = ['title', 'moshtarakinId', 'readingPeriodKindId', 'zoneId', 'clientOrder', 'actions'];
   zoneDictionary: IDictionaryManager[] = [];
@@ -55,7 +56,8 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
         {
           width: '30rem',
           data: {
-            di: this.zoneDictionary
+            di: this.zoneDictionary,
+            rpkmId: this.readingPeriodKindId
           }
         });
       dialogRef.afterClosed().subscribe(result => {
@@ -85,7 +87,8 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
         data: {
           row,
           editable,
-          di: this.zoneDictionary
+          di: this.zoneDictionary,
+          rpkmId: this.readingPeriodKindId
         }
 
       });
@@ -134,7 +137,18 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
       })
     });
   }
-
+  getReadingPeriodKindId = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getReadingPeriodKindManagerDictionary().subscribe(res => {
+          if (res)
+            resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getReadingPeriodManager().subscribe(res => {
@@ -200,6 +214,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     else {
       this.dataSource.data = await this.getDataSource();
       this.zoneDictionary = await this.getZoneDictionary();
+      this.readingPeriodKindId = await this.getReadingPeriodKindId();
       this.closeTabService.saveDataForReadingPeriodManager = this.dataSource.data;
       this.closeTabService.saveDictionaryReadingPeriodManager = this.zoneDictionary;
     }
