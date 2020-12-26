@@ -1,5 +1,4 @@
 import '../../../node_modules/leaflet-easyprint';
-import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import '../../../src/assets/L.EasyButton/src/easy-button.js';
 
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
