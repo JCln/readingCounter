@@ -54,6 +54,7 @@ export class CloseTabService {
 
   saveDataForReadingPeriodKindManager: any;
   // 
+  saveDataForAPKManager:any;
 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {

@@ -17,6 +17,13 @@ export class InterfaceManagerService {
   getUserContactManager = (uuid: string): Observable<any> => {
     return this.mainService.GETID(uuid, 'V1/user/Edit');
   }
+  /*
+  also useful for get select options counter readers
+  with zoneId parameter
+  */
+  getCounterReadersByZoneId = (zoneId: number): Observable<any> => {
+    return this.mainService.GET(`V1/User/CounterReaders/${zoneId}`);
+  }
   postUserContactManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/user/Edit', body);
   }
@@ -25,6 +32,16 @@ export class InterfaceManagerService {
   }
   postAddContact = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/User/Add', body);
+  }
+  // apk file manager
+  getAPKPreList = (): Observable<any> => {
+    return this.mainService.GET('V1/APK/PreList');
+  }
+  getAPKLast = (): Observable<any> => {
+    return this.mainService.GET('V1/APK/Last');
+  }
+  postAPK = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/APK/Upload', body);
   }
   // /////
   // reading period manager

@@ -1,44 +1,72 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { IAPK } from './../../Interfaces/iapk';
+import { ApkService } from './../../services/apk.service';
+import { CloseTabService } from './../../services/close-tab.service';
 
-const ELEMENT_DATA: IAPK[] = [
-  { name: 'اول', version: 'v.0.0.1', file: 'f' },
-  { name: 'دوم', version: 'V.0.0.2', file: 's' },
-  { name: 'سوم', version: 'v.0.0.3', file: 'long name' },
-  { name: 'چهارم', version: 'v.0.0.4', file: 'another long name' }
-];
 @Component({
   selector: 'app-apk',
   templateUrl: './apk.component.html',
   styleUrls: ['./apk.component.scss']
 })
 export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
+  uploadForm: IAPK = {
+    versionCode: 0,
+    versionName: '',
+    file: null
+  }
   subscription: Subscription[] = [];
-
-  displayedColumns: string[] = ['name', 'version', 'file'];
-  dataSource = ELEMENT_DATA;
+  dataSource: IAPK[] = [];
+  displayedColumns: string[] = ['versionName', 'versionCode', 'file'];
 
   constructor(
     private interactionService: InteractionService,
-    private router: Router
+    private closeTabService: CloseTabService,
+    private interfaceManagerService: InterfaceManagerService,
+    private apkService: ApkService
   ) { }
+  // On file Select 
+  onChange(event) {
+    this.uploadForm.file = event.target.files[0];    
+  }
+  uploadFile = () => {
+    this.apkService.upload(this.uploadForm);
+  }  
+  getDataSource = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getAPKPreList().subscribe(res => {
+        if (res) {
+          resolve(res);
+        }
+      })
+    })
+  }
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh)
+      this.closeTabService.saveDataForAPKManager = '';
+    if (this.closeTabService.saveDataForAPKManager)
+      this.dataSource = this.closeTabService.saveDataForAPKManager;
+    else
+      this.dataSource = await this.getDataSource();
+    console.log(this.dataSource);
 
+  }
   ngOnInit(): void {
+    this.classWrapper();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === '/wr/apk')
-          this.ngOnInit();
+          this.classWrapper(true);
       }
     })
     )
   }
-  ngAfterViewInit(): void {  
+  ngAfterViewInit(): void {
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {

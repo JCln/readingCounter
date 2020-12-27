@@ -2,19 +2,21 @@
     <section>
 
         <h1 class="title">ایجاد نسخه جدید</h1>
-        <div class="content">
+        <form #form="ngForm" (ngSubmit)="uploadFile()" class="content">
             <div class="_desc">
-                <input class="input_1" type="text" placeholder="نام نسخه : ">
-                <input class="input_1" type="text" placeholder="کد نسخه :">
+                <input class="input_1" type="text" placeholder="نام نسخه : " name="versionName"
+                    [(ngModel)]="uploadForm.versionName">
+                <input class="input_1" type="number" placeholder="کد نسخه :" name="versionCode"
+                    [(ngModel)]="uploadForm.versionCode">
             </div>
-            <button class="btn_2 _choose_file" type="text">انتخاب فایل</button>
+            <input class="btn_2 _choose_file" type="file" name="file" (change)="onChange($event)" required>
             <div class="change_pass">
-                <button class="btn_2">
+                <button class="btn_2" type="submit">
                     <div class="fa fa-upload"></div>
                     ارسال
                 </button>
             </div>
-        </div>
+        </form>
 
     </section>
 
@@ -26,19 +28,16 @@
 
                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-                    <!--- Note that these columns can be defined in any order.
-                          The actual rendered columns are set as a property on the row definition" -->
-
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
+                    <!-- version name -->
+                    <ng-container matColumnDef="versionName">
                         <th mat-header-cell *matHeaderCellDef>نام نسخه</th>
-                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.versionName}} </td>
                     </ng-container>
 
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="version">
+                    <!-- version code -->
+                    <ng-container matColumnDef="versionCode">
                         <th mat-header-cell *matHeaderCellDef>نسخه</th>
-                        <td mat-cell *matCellDef="let element"> {{element.version}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.versionCode}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="file">
