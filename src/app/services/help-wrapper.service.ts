@@ -71,6 +71,14 @@ export class HelpWrapperService {
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
     }
+    else if (currentRoute === '/wr/apk') {
+      this.messageToShow.title = 'مدیریت apk';
+      this.messageToShow.messageOne = 'این بخش به دو بخش نسخه های گذشته و جدید تقسیم میشود. درصورتی که نیاز به استفاده از apk قبلی بود میتوان برروی فایل مربوط به همان سطر کلیک تا به عنوان نسخه جدید درنظر گرفته شود. برای ایجاد نسخه جدید با وارد کردن نام، شماره و فایل نسخه میتوان به ایجاد نسخه جدید اقدام نمود. ';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
+    }
     else {
       this.messageToShow.title = 'test message';
       this.messageToShow.imgOne = 'assets/imgs/help/ARE.PNG';

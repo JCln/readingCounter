@@ -8,3 +8,8 @@ export interface ITrueFalse {
     name: string;
     value: string | boolean;
 }
+export interface ISearchInOrderTo {
+    title: string;
+    isSelected: boolean;
+
+}
