@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
 
 import { IResponses } from '../Interfaces/iresponses';
-import { IUserEditManager } from '../Interfaces/iuser-manager';
-import { IAUserEditSave, IUserInfo } from './../Interfaces/iuser-manager';
+import { IAUserEditSave, IRoleItems, IUserInfo } from './../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditContactManagerService {
-  editContactData: any;
-  selectedZones: number[] = [];
-  selectedActions: string[] = [];
-  selectedPersonalInfos: any;
+  private selectedZones: number[] = [0];
+  private selectedActions: string[] = [];
+  private selectedPersonalInfos: any;
+  private selectedRoles: IRoleItems[] = [];
 
-  constructor(private snackWrapperService: SnackWrapperService, private interfaceManagerService: InterfaceManagerService) { }
+  constructor(
+    private snackWrapperService: SnackWrapperService,
+    private interfaceManagerService: InterfaceManagerService,
+    private utilsService: UtilsService
+  ) { }
 
   addAUserPersonalInfo = (personalItems: IUserInfo) => {
     this.selectedPersonalInfos = personalItems;
@@ -30,10 +34,18 @@ export class EditContactManagerService {
       })
     })
   }
+  addAUserRoles = (roleItems: IRoleItems[]) => {
+    this.selectedRoles = roleItems;
+  }
   private getAUserRoleItems = (): number[] => {
-    return this.editContactData.roleItems.map(ids => {
-      return ids.id
+    const a: number[] = [];
+    this.selectedRoles.filter(ids => {
+      if (ids.isSelected)
+        a.push(ids.id);
     });
+    if (this.utilsService.isNull(a))
+      return [0];
+    return a;
   }
   addAUserActions = (actionItems: any) => {
     actionItems.map(appIt => {
@@ -48,15 +60,15 @@ export class EditContactManagerService {
       })
     })
   }
-  connectToServer = (vals: IAUserEditSave) => {
+  private connectToServer = (vals: IAUserEditSave) => {
     this.interfaceManagerService.postUserContactManager(vals).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, 5000, 'snack_success');
+        this.utilsService.routeTo('/wr/mu/all');
       }
     });
   }
-  editAUserContact = (dataSource: IUserEditManager, UUid: string) => {
-    this.editContactData = dataSource;
+  editAUserContact = (UUid: string) => {
     const vals = {
       selectedRoles: this.getAUserRoleItems(),
       selectedZones: this.selectedZones,

@@ -34,34 +34,24 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService
   ) {
   }
+  addRoleItems = () => {
+    this.editUserManagerService.addAUserRoles(this.roleItemsData);
+  }
   addAContact = () => {
-    this.editUserManagerService.editAUserContact(this.dataSource, this.UUid);
+    this.editUserManagerService.editAUserContact(this.UUid);
   }
   nullSavedSource = () => this.closeTabService.saveDataForEditContacts = null;
-  getContactSource = (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (this.closeTabService.saveDataForEditContacts) {
-      this.dataSource = this.closeTabService.saveDataForEditContacts;
-      this.roleItemsData = this.dataSource.roleItems;
-      this.addContactData = this.dataSource.appItems;
-      this.provinceItemsData = this.dataSource.provinceItems;
-      this.personalizeInfo = this.dataSource.userInfo;
-    }
-    else {
-      this.interfaceManagerService.getUserContactManager(this.UUid).subscribe((res: any) => {
-        if (res) {
-          this.dataSource = res;
-          this.closeTabService.saveDataForEditContacts = res;
-
-          this.roleItemsData = this.dataSource.roleItems;
-          this.addContactData = this.dataSource.appItems;
-          this.provinceItemsData = this.dataSource.provinceItems;
-          this.personalizeInfo = this.dataSource.userInfo;
-        }
-      })
-    }
+  getContactSource = () => {
+    this.interfaceManagerService.getUserContactManager(this.UUid).subscribe((res: any) => {
+      if (res) {
+        this.dataSource = res;
+        this.closeTabService.saveDataForEditContacts = res;
+        this.roleItemsData = this.dataSource.roleItems;
+        this.addContactData = this.dataSource.appItems;
+        this.provinceItemsData = this.dataSource.provinceItems;
+        this.personalizeInfo = this.dataSource.userInfo;        
+      }
+    })
   }
   ngOnInit(): void {
     this.UUid = this.route.snapshot.paramMap.get('id');
@@ -70,8 +60,8 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/mu/all')
-          this.getContactSource(true);
+        if (res.includes('/wr/mu/edit/'))
+          this.getContactSource();
       }
     })
     )

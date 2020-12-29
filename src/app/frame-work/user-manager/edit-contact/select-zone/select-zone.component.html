@@ -13,7 +13,7 @@
     <section class="l_1">
         <div class="l_1_c" *ngFor="let provinceIt of provinceItemsData">
             <mat-checkbox class="example-margin" [checked]="allComplete" [indeterminate]="someComplete()"
-                (change)="setAll($event.checked)" [(ngModel)]="provinceIt.isSelected">
+                (change)="setAll($event.checked)" [(ngModel)]="provinceIt.isSelected" name="provinceIt">
                 {{provinceIt.title}}
             </mat-checkbox>
         </div>
@@ -24,14 +24,15 @@
 
             <div class="l_2_c">
                 <mat-checkbox (change)="setAllL2($event.checked , regionIt)" [(ngModel)]="regionIt.isSelected"
-                    (ngModelChange)="updateAll(provinceIt)">
+                    (ngModelChange)="updateAll(provinceIt)" name="regionIt">
                     {{regionIt.title}}
                 </mat-checkbox>
             </div>
 
             <div class="l_3_c" [ngClass]="switchDisplay ? 'toggle' : 'l_3_c'">
                 <div class="l_3" *ngFor="let zoneIt of regionIt.zoneItems">
-                    <mat-checkbox [(ngModel)]="zoneIt.isSelected" (ngModelChange)="updateAllL2Complete(regionIt)">
+                    <mat-checkbox [(ngModel)]="zoneIt.isSelected" (ngModelChange)="updateAllL2Complete(regionIt)"
+                        name="zoneIt">
                         {{zoneIt.title}}
                     </mat-checkbox>
                 </div>

@@ -51,6 +51,9 @@ export class InterfaceManagerService {
   getReadingPeriodManagerDictionary = (zoneId: number): Observable<any> => {
     return this.mainService.GET(`V1/readingPeriod/Dictionary/${zoneId}`);
   }
+  getReadingPeriodManagerDictionaryByZoneIdAndKindId = (zoneId: number, kindId: number): Observable<any> => {
+    return this.mainService.GET(`V1/readingPeriod/Dictionary/${zoneId}/${kindId}`);
+  }
   editReadingPeriodManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/readingPeriod/Edit', body);
   }
@@ -120,6 +123,9 @@ export class InterfaceManagerService {
   // reading config default//
   getReadingConfig = (): Observable<any> => {
     return this.mainService.GET('V1/ReadingConfigDefault/All');
+  }
+  getReadingConfigDefaultByZoneId = (zoneId: number): Observable<any> => {
+    return this.mainService.GET(`V1/ReadingConfigDefault/Get/${zoneId}`);
   }
   deleteReadingConfig = (id: number): Observable<any> => {
     return this.mainService.POST('V1/ReadingConfigDefault/Remove', id);
