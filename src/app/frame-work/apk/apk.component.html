@@ -2,14 +2,19 @@
     <section>
 
         <h1 class="title">ایجاد نسخه جدید</h1>
-        <form #form="ngForm" (ngSubmit)="uploadFile()" class="content">
+        <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
             <div class="_desc">
                 <input class="input_1" type="text" placeholder="نام نسخه : " name="versionName"
                     [(ngModel)]="uploadForm.versionName">
                 <input class="input_1" type="number" placeholder="کد نسخه :" name="versionCode"
                     [(ngModel)]="uploadForm.versionCode">
             </div>
-            <input class="btn_2 _choose_file" type="file" name="file" (change)="onChange($event)" required>
+            <input #screenshotInput name="فایلی انتخاب کنید" title="فایلی انتخاب نشده است" class="btn_2 _choose_file hidden"
+                type="file" name="screenshot" (change)="onChange($event)" id="files">
+            <!-- <label class="btn_2" for="files">
+                فایل apk انتخاب نمایید                
+            </label> -->
+
             <div class="change_pass">
                 <button class="btn_2" type="submit">
                     <div class="fa fa-upload"></div>
@@ -26,7 +31,7 @@
         <div class="content">
             <div class="_desc">
 
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
 
                     <!-- version name -->
                     <ng-container matColumnDef="versionName">
@@ -40,10 +45,10 @@
                         <td mat-cell *matCellDef="let element"> {{element.versionCode}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="file">
+                    <ng-container matColumnDef="fileRepositoryId">
                         <th mat-header-cell *matHeaderCellDef>فایل</th>
                         <td mat-cell *matCellDef="let element">
-                            <button class="btn_2 __custom">
+                            <button class="btn_2 __custom" (click)="downloadAPK(element.fileRepositoryId)">
                                 <div class="fa fa-inbox"></div>
                             </button>
                         </td>
@@ -52,6 +57,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
 
             </div>
         </div>

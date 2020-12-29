@@ -1,7 +1,11 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { IAPK } from './../../Interfaces/iapk';
 import { ApkService } from './../../services/apk.service';
@@ -13,28 +17,57 @@ import { CloseTabService } from './../../services/close-tab.service';
   styleUrls: ['./apk.component.scss']
 })
 export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
-  uploadForm: IAPK = {
+  @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
+
+  uploadForm: any = {
     versionCode: 0,
     versionName: '',
-    file: null
+    file: File
   }
+  fileNameAfterChoose: string = '';
   subscription: Subscription[] = [];
-  dataSource: IAPK[] = [];
-  displayedColumns: string[] = ['versionName', 'versionCode', 'file'];
+  dataSource = new MatTableDataSource<IAPK>();
+  displayedColumns: string[] = ['versionName', 'versionCode', 'fileRepositoryId'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private interfaceManagerService: InterfaceManagerService,
-    private apkService: ApkService
+    private apkService: ApkService,
+    private snackWrapperService: SnackWrapperService
   ) { }
-  // On file Select 
-  onChange(event) {
-    this.uploadForm.file = event.target.files[0];    
+
+  downloadAPK = (fileRepositoryId: string) => {
+    console.log(fileRepositoryId);
+
+    // this.interfaceManagerService.getAPKFile(fileRepositoryId).subscribe(res => {
+    //   console.log(res);
+
+    // })
   }
-  uploadFile = () => {
-    this.apkService.upload(this.uploadForm);
-  }  
+  onChange(event) {
+    FileList = event.target.files;
+    console.log(HTMLInputElement = this.screenshotInput.nativeElement);
+
+  }
+  uploadFile = (form: NgForm) => {
+    if (!this.screenshotInput) {
+      throw new Error("this.screenshotInput is null.");
+    }
+
+    const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
+    if (!fileInput.files) {
+      return;
+    }
+
+    if (!this.apkService.checkVertitication(fileInput.files, form.value))
+      return;
+
+    this.apkService.postTicket().subscribe((res: any) => {
+      this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+    });
+  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getAPKPreList().subscribe(res => {
@@ -44,6 +77,12 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  paginatorTable = () => {
+    this.dataSource.paginator = this.paginator;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh)
       this.closeTabService.saveDataForAPKManager = '';
@@ -51,7 +90,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForAPKManager;
     else
       this.dataSource = await this.getDataSource();
-    console.log(this.dataSource);
+    this.paginatorTable();
 
   }
   ngOnInit(): void {
@@ -76,3 +115,93 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 }
+
+
+
+
+// @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef; files = [];
+// subscription: Subscription[] = [];
+// dataSource: IAPK[] = [];
+// displayedColumns: string[] = ['versionName', 'versionCode', 'file'];
+
+// progress: number = 0;
+// selectedFiles: FileList;
+// currentFile: File;
+// message = '';
+
+// fileInfos: Observable<any>;
+
+// constructor(
+//   private interactionService: InteractionService,
+//   private closeTabService: CloseTabService,
+//   private interfaceManagerService: InterfaceManagerService,
+//   private apkService: ApkService
+// ) { }
+// uploadFile() {
+//   this.progress = 0;
+
+//   this.currentFile = this.selectedFiles.item(0);
+//   this.apkService.upload(this.currentFile).pipe(
+//     map(event => {
+//       if (event.type === HttpEventType.UploadProgress) {
+//         this.progress = Math.round(event.loaded * 100 / event.total);
+//       }
+//       else if (HttpEventType.Response) {
+//         console.log('response');
+//       }
+
+//     }),
+//     catchError((error: HttpErrorResponse) => {
+//       this.progress = 0;
+//       this.message = 'Could not upload the file!';
+//       this.currentFile = undefined;
+//       return of(`${this.currentFile} upload failed.`);
+//     })).subscribe((event: any) => {
+//       if (typeof (event) === 'object') {
+//         console.log(event.body);
+//       }
+//     });
+//   this.selectedFiles = undefined;
+// }
+// selectFile(event): void {
+//   this.selectedFiles = event.target.files;
+// }
+// getDataSource = (): any => {
+//   return new Promise((resolve) => {
+//     this.interfaceManagerService.getAPKPreList().subscribe(res => {
+//       if (res) {
+//         resolve(res);
+//       }
+//     })
+//   })
+// }
+// classWrapper = async (canRefresh?: boolean) => {
+//   if (canRefresh)
+//     this.closeTabService.saveDataForAPKManager = '';
+//   if (this.closeTabService.saveDataForAPKManager)
+//     this.dataSource = this.closeTabService.saveDataForAPKManager;
+//   else
+//     this.dataSource = await this.getDataSource();
+//   console.log(this.dataSource);
+
+// }
+// ngOnInit(): void {
+//   this.classWrapper();
+// }
+// refreshTabStatus = () => {
+//   this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
+//     if (res) {
+//       if (res === '/wr/apk')
+//         this.classWrapper(true);
+//     }
+//   })
+//   )
+// }
+// ngAfterViewInit(): void {
+//   this.refreshTabStatus();
+// }
+// ngOnDestroy(): void {
+//   //  for purpose of refresh any time even without new event emiteds
+//   // we use subscription and not use take or takeUntil
+//   this.subscription.forEach(subscription => subscription.unsubscribe());
+// }
