@@ -42,6 +42,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             if (error.status === 410) {
               this.snackWrapperService.openSnackBar('چنین آیتمی پیدا نشد، یا قبلاً حذف شده است', 3000, 'snack_danger');
             }
+            if (error.status === 422) {
+              this.snackWrapperService.openSnackBar(error.error.message, 3000, 'snack_danger');
+            }
             if (error.status === 0) {
               this.snackWrapperService.openSnackBar('ارتباط با سرویس دهنده برقرار نشد، احتمالا شما به شبکه دسترسی ندارید یا موقعیت مکانی شما در ایران نیست لطفا دقایقی دیگر امتحان نمایید', 8000, 'snack_danger');
             }
