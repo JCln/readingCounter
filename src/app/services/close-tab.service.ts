@@ -54,7 +54,11 @@ export class CloseTabService {
 
   saveDataForReadingPeriodKindManager: any;
   // 
-  saveDataForAPKManager:any;
+  saveDataForAPKManager: any;
+
+  saveDataForCounterReport: any;
+
+  saveDataForQotrManager: any;
 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
@@ -86,37 +90,51 @@ export class CloseTabService {
         break;
       case '/wr/m/al/me':
         this.saveDataForAppLevel2 = '';
+        this.saveDictionaryForAppLevel2 = '';
         break;
       case '/wr/m/al/cr':
         this.saveDataForAppLevel3 = '';
+        this.saveDictionaryForAppLevel3 = '';
         break;
       case '/wr/m/al/ac':
         this.saveDataForAppLevel4 = '';
+        this.saveDictionaryForAppLevel4 = '';
         break;
       case '/wr/m/mc':
         this.saveDataForCountry = '';
         break;
       case '/wr/m/mp':
         this.saveDataForProvince = '';
+        this.saveDictionaryForProvince = '';
         break;
       case '/wr/m/mr':
         this.saveDataForRegion = '';
+        this.saveDictionaryForRegion = '';
         break;
       case '/wr/m/mz':
         this.saveDataForZone = '';
+        this.saveDictionaryForZone = '';
         break;
       case '/wr/m/mzd':
         this.saveDataForZoneBound = '';
+        this.saveDictionaryForZoneBound = '';
         break;
       case '/wr/imd':
         break;
       case '/wr/profile':
         break;
       case '/wr/apk':
+        this.saveDataForAPKManager = '';
         break;
       case '/wr/bi':
         break;
+      case '/wr/qr':
+        this.saveDataForQotrManager = '';
+        break;
       case '/wr/msge':
+        break;
+      case '/wr/m/cr':
+        this.saveDataForCounterReport = '';
         break;
       case '/wr/privacy':
         break;
