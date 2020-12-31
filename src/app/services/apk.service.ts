@@ -51,7 +51,6 @@ export class ApkService {
       return false;
     return true;
   }
-
   checkVertitication = (filesList: FileList, data: any): boolean => {
     this.fileForm = filesList;
     this.desc = data;
@@ -65,6 +64,7 @@ export class ApkService {
     formData.append('file', this.fileForm[0]);
     formData.append('versionCode', this.desc.versionCode);
     formData.append('versionName', this.desc.versionName);
+    formData.append('description', this.desc.description);
 
     return this.interfaceManagerService.postAPK(formData)
       .pipe(

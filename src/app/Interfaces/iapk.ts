@@ -9,5 +9,6 @@ export interface IAPK {
 export interface IUploadAPK {
     versionName: string;
     versionCode: number;
+    description?: string;    
     file?: File;    
 }

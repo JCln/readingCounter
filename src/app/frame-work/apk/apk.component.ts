@@ -20,8 +20,9 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
 
   uploadForm: any = {
-    versionCode: 0,
+    versionCode: null,
     versionName: '',
+    description: '',
     file: File
   }
   fileNameAfterChoose: string = '';
@@ -115,93 +116,3 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 }
-
-
-
-
-// @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef; files = [];
-// subscription: Subscription[] = [];
-// dataSource: IAPK[] = [];
-// displayedColumns: string[] = ['versionName', 'versionCode', 'file'];
-
-// progress: number = 0;
-// selectedFiles: FileList;
-// currentFile: File;
-// message = '';
-
-// fileInfos: Observable<any>;
-
-// constructor(
-//   private interactionService: InteractionService,
-//   private closeTabService: CloseTabService,
-//   private interfaceManagerService: InterfaceManagerService,
-//   private apkService: ApkService
-// ) { }
-// uploadFile() {
-//   this.progress = 0;
-
-//   this.currentFile = this.selectedFiles.item(0);
-//   this.apkService.upload(this.currentFile).pipe(
-//     map(event => {
-//       if (event.type === HttpEventType.UploadProgress) {
-//         this.progress = Math.round(event.loaded * 100 / event.total);
-//       }
-//       else if (HttpEventType.Response) {
-//         console.log('response');
-//       }
-
-//     }),
-//     catchError((error: HttpErrorResponse) => {
-//       this.progress = 0;
-//       this.message = 'Could not upload the file!';
-//       this.currentFile = undefined;
-//       return of(`${this.currentFile} upload failed.`);
-//     })).subscribe((event: any) => {
-//       if (typeof (event) === 'object') {
-//         console.log(event.body);
-//       }
-//     });
-//   this.selectedFiles = undefined;
-// }
-// selectFile(event): void {
-//   this.selectedFiles = event.target.files;
-// }
-// getDataSource = (): any => {
-//   return new Promise((resolve) => {
-//     this.interfaceManagerService.getAPKPreList().subscribe(res => {
-//       if (res) {
-//         resolve(res);
-//       }
-//     })
-//   })
-// }
-// classWrapper = async (canRefresh?: boolean) => {
-//   if (canRefresh)
-//     this.closeTabService.saveDataForAPKManager = '';
-//   if (this.closeTabService.saveDataForAPKManager)
-//     this.dataSource = this.closeTabService.saveDataForAPKManager;
-//   else
-//     this.dataSource = await this.getDataSource();
-//   console.log(this.dataSource);
-
-// }
-// ngOnInit(): void {
-//   this.classWrapper();
-// }
-// refreshTabStatus = () => {
-//   this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-//     if (res) {
-//       if (res === '/wr/apk')
-//         this.classWrapper(true);
-//     }
-//   })
-//   )
-// }
-// ngAfterViewInit(): void {
-//   this.refreshTabStatus();
-// }
-// ngOnDestroy(): void {
-//   //  for purpose of refresh any time even without new event emiteds
-//   // we use subscription and not use take or takeUntil
-//   this.subscription.forEach(subscription => subscription.unsubscribe());
-// }
