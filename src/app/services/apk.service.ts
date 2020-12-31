@@ -37,6 +37,13 @@ export class ApkService {
     }
     return true;
   }
+  isInteger = (): boolean => {
+    if (this.desc.versionCode.toString().includes('.')) {
+      this.snackWrapperService.openSnackBar('شماره نسخه را بدون اعشار وارد نمایید', 3000, 'snack_danger');
+      return false;
+    }
+    return true;
+  }
   isAPK = (): boolean => {
     if (this.fileForm[0].name.split('.').pop() !== 'apk') {
       this.snackWrapperService.openSnackBar('فرمت ارسالی باید فایل apk باشد', 3000, 'snack_danger');
@@ -46,6 +53,8 @@ export class ApkService {
   }
   vertification = (): boolean => {
     if (!this.isNull())
+      return false;
+    if (!this.isInteger())
       return false;
     if (!this.isAPK())
       return false;
