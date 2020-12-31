@@ -1,0 +1,147 @@
+<div class="operation">
+    <button (click)="openDialog()" class="operation_btn">
+        <i class="fa fa-plus"></i>
+    </button>
+</div>
+
+<table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="moshtarakinId">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                مشترکین
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <input matInput [formControl]="moshtarakinIdFilter">
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">{{person.moshtarakinId}}</td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                عنوان
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <input matInput [formControl]="titleFilter">
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">{{person.title}}</td>
+    </ng-container>
+    <ng-container matColumnDef="zoneId">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                ناحیه
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <mat-select [formControl]="zoneIdFilter" name="zoneDictionary">
+                    <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="zoneDictionary.title">
+                        {{zoneDictionary.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">{{person.zoneId}}</td>
+    </ng-container>
+    <ng-container matColumnDef="isAhad">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                آحاد
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <mat-select [formControl]="isAhadFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
+                        {{truefalse.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">
+            <mat-checkbox [(ngModel)]="person.isAhad"></mat-checkbox>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="isKarbari">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                کاربری
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <mat-select [formControl]="isKarbariFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
+                        {{truefalse.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">
+            <mat-checkbox [(ngModel)]="person.isKarbari"></mat-checkbox>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="canNumberBeLessThanPre">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                شماره کمتر از قبلی
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <mat-select [formControl]="canNumberBeLessThanPreFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
+                        {{truefalse.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">
+            <mat-checkbox [(ngModel)]="person.canNumberBeLessThanPre"></mat-checkbox>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="isTavizi">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                تعویضی
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <mat-select [formControl]="isTaviziFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
+                        {{truefalse.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">
+            <mat-checkbox [(ngModel)]="person.isTavizi"></mat-checkbox>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="clientOrder">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                ترتیب
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <input matInput [formControl]="clientOrderFilter">
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">{{person.clientOrder}}</td>
+    </ng-container>
+
+    <ng-container cdkColumnDef="actions">
+        <th md-header-cell *matHeaderCellDef></th>
+
+        <td md-cell *matCellDef="let row" class="_actions">
+            <i (click)="editDialog(row)" class="_custom fa fa-edit"></i>|
+            <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash"></i>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let person; columns: columnsToDisplay"></tr>
+
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

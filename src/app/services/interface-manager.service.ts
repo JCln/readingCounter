@@ -120,6 +120,41 @@ export class InterfaceManagerService {
 
   // ////
 
+  // counter report manager
+  // reading config default//
+  getCounterReport = (): Observable<any> => {
+    return this.mainService.GET('V1/CounterReport/All');
+  }
+  getCounterReportDictionary = (): Observable<any> => {
+    return this.mainService.GET('V1/CounterReport/Get');
+  }
+  deleteCounterReport = (id: number): Observable<any> => {
+    return this.mainService.POST('V1/CounterReport/Remove', id);
+  }
+  editCounterReport = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/CounterReport/Edit', body);
+  }
+  addCounterReport = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/CounterReport/Add', body);
+  }
+  //  ///
+
+  // qort manager
+  getQotr = (): Observable<any> => {
+    return this.mainService.GET('/V1/Qotr/All');
+  }
+  deleteQotr = (id: number): Observable<any> => {
+    return this.mainService.POST('V1/Qotr/Remove', id);
+  }
+  editQotr = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Qotr/Edit', body);
+  }
+  addQotr = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Qotr/Add', body);
+  }
+
+  // 
+
   // reading config default//
   getReadingConfig = (): Observable<any> => {
     return this.mainService.GET('V1/ReadingConfigDefault/All');

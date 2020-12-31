@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'rp', loadChildren: () => import('./reading-period/reading-period.module').then(readingPeriodManager => readingPeriodManager.ReadingPeriodModule) },
   { path: 'rpk', loadChildren: () => import('./reading-period-kind/reading-period-kind.module').then(readingPeriodKindManager => readingPeriodKindManager.ReadingPeriodKindModule) },
   { path: 'qr', loadChildren: () => import('./qotr/qotr.module').then(qotr => qotr.QotrModule) },
+  { path: 'cr', loadChildren: () => import('./counter-report/counter-report.module').then(counterReport => counterReport.CounterReportModule) },
   { path: 'mrm', loadChildren: () => import('./role-manager/role-manager.module').then(mrm => mrm.RoleManagerModule) },
   { path: 'mzd', loadChildren: () => import('./zone-bound/zone-bound.module').then(mzd => mzd.ZoneBoundModule) },
   { path: 'kar', loadChildren: () => import('./karbari/karbari.module').then(karbari => karbari.KarbariModule) },
