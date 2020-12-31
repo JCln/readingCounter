@@ -8,6 +8,7 @@ export const sidebarItemsTest = {
                 { route: '/wr/mu/all', title: 'agGrid', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/mu/add', title: 'add Contact mg', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/ms', title: 'مدیریت سرور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/qr', title: 'قطر', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/rp', title: 'مدیریت دوره قرائت', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/rpk', title: 'مدیریت نوع دوره', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/mrm', title: 'مدیریت نقش ها', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
