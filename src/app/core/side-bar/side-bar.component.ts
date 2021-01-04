@@ -13,13 +13,13 @@ export class SideBarComponent implements OnInit {
   currentRoute: any;
 
   constructor(private sideBarItemsService: SidebarItemsService, private testSidebarService: SidebarItemsService) {
-    this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
-      if (sidebars) {
-        this.currentRoute = sidebars.items;
-      }
-    })
-    // this.currentRoute = this.testSidebarService.getTestSideTest();
-    // this.currentRoute = this.currentRoute.items;
+    // this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
+    //   if (sidebars) {
+    //     this.currentRoute = sidebars.items;
+    //   }
+    // })
+    this.currentRoute = this.testSidebarService.getTestSideTest();
+    this.currentRoute = this.currentRoute.items;
 
   }
 

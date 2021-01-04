@@ -12,7 +12,7 @@ export class InterfaceManagerService {
 
   // //// User manager
   getAllUserContactsManager = (): Observable<any> => {
-    return this.mainService.GET('​V1​/User​/All');
+    return this.mainService.GET('V1/User/All');
   }
   getUserContactManager = (uuid: string): Observable<any> => {
     return this.mainService.GETID(uuid, 'V1/user/Edit');

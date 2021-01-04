@@ -1,30 +1,29 @@
 @import '../../../../assets/variable';
 
-.ag-header-group-cell-label,
-.ag-header-cell-label {
+:host ::ng-deep {
 
-  justify-content: center;
-  margin: .2rem 0;
-  text-align: center;
-  border: 2px solid $blue_l;
-  border-radius: $border_s;
+  .p-datatable table {
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-size: 1.2rem;
+  }
+
+  tr:nth-child(even) {
+    background: #e9ecef;
+  }
+
+  .p-datatable .p-datatable-thead>tr>th,
+  .p-datatable .p-datatable-tbody>tr>td {
+    text-align: center;
+  }
 }
 
-.ag-theme-alpine .ag-root-wrapper {
-  border-radius: $border_s;
-  border: 2px solid $blue_l;
-}
+.edit_button {
+  display: grid;
+  place-content: center;
+  color: #116FFF;
+  cursor: pointer;
 
-.ag-theme-alpine {
-
-  font-size: $font_s;
-  font-weight: 600;
-  font-family: $font_family;
+  i {
+    font-size: 1.5rem;
+  }
 }
-// ts config
-.cell-conf {
-  color: $blue_l;
-  // color: $gray_dr;
-  font-size: 1.2rem;
-}
-// 

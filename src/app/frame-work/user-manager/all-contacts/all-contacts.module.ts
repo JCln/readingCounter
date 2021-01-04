@@ -1,17 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AgGridModule } from 'ag-grid-angular';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TableModule } from 'primeng/table';
 
-import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
 import { AllContactsRoutingModule } from './all-contacts-routing.module';
 import { AllContactsComponent } from './all-contacts.component';
-import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
 
 @NgModule({
-  declarations: [AllContactsComponent, BtnCellRendererComponent],
+  declarations: [AllContactsComponent],
   imports: [
     CommonModule,
-    AgGridModule.withComponents([BtnCellRendererComponent, CheckboxRenderer]),
+    TableModule,
+    FormsModule,
+    MatCheckboxModule,
+    MultiSelectModule,
     AllContactsRoutingModule
   ]
 })
