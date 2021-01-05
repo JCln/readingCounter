@@ -47,7 +47,8 @@
               "src/assets/L.EasyButton/src/easy-button.css",
               "./node_modules/leaflet.markercluster/dist/MarkerCluster.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeng/resources/themes/saga-blue/theme.css"
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeicons/primeicons.css"
             ],
             "scripts": [
               "src/assets/leaflet/leaflet.js",

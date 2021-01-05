@@ -60,7 +60,6 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   reset = () => this._firstPage = 0;
   isLastPage = (): boolean => { return this.dataSource ? this._firstPage === (this.dataSource.length - this._rowsNumberPage) : true; }
   isFirstPage = (): boolean => { return this.dataSource ? this._firstPage === 0 : true; }
-
   ngOnInit(): void {
     this.classWrapper();
   }

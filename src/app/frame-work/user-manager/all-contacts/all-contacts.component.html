@@ -1,16 +1,33 @@
 <p-table [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر
-    " [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0"
-    [globalFilterFields]="['isActive','isLocked','mobile','displayName','username','userCode']">
+    " [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0"
+    [globalFilterFields]="['isActive','isLocked','mobile','displayName','username','userCode']" sortMode="multiple">
     <ng-template pTemplate="header">
         <tr>
             <th>ویرایش</th>
-            <th>قفل</th>
-            <th>فعال</th>
-            <th>موبایل</th>
-            <th>نام نمایشی</th>
-            <th>نام کاربری</th>
-            <th>کد</th>
+            <th pSortableColumn="isActive">
+                <p-sortIcon field="isActive"></p-sortIcon>
+                قفل
+            </th>
+            <th pSortableColumn="isLocked">
+                <p-sortIcon field="isLocked"></p-sortIcon>
+                فعال
+            </th>
+            <th pSortableColumn="mobile">
+                <p-sortIcon field="mobile"></p-sortIcon>
+                موبایل
+            </th>
+            <th pSortableColumn="displayName">
+                <p-sortIcon field="displayName"></p-sortIcon>
+                نام نمایشی
+            </th>
+            <th pSortableColumn="username">
+                <p-sortIcon field="username"></p-sortIcon>
+                نام کاربری
+            </th>
+            <th pSortableColumn="userCode">
+                <p-sortIcon field="userCode"></p-sortIcon>
+                کد
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-dataSource>
