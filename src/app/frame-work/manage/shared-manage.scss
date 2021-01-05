@@ -79,7 +79,7 @@ th {
 }
 
 
-::ng-deep {
+:host::ng-deep {
   .mat-option-text {
     text-align: right;
     font-family: $font_family;
@@ -169,7 +169,7 @@ td.mat-footer-cell:first-of-type {
 }
 
 // paginator config ///////////////
-::ng-deep {
+:host::ng-deep {
   .mat-paginator-outer-container {
     font-size: 1.2rem;
     font-weight: 600;
