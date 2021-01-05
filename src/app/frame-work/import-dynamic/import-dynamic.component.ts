@@ -80,8 +80,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
-          if (res)
-            resolve(res);
+          resolve(res);
         })
       });
     } catch {
@@ -92,8 +91,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.getReadingPeriodKindManagerDictionary().subscribe(res => {
-          if (res)
-            resolve(res);
+          resolve(res);
         })
       });
     } catch {
@@ -104,8 +102,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.getReadingPeriodManagerDictionaryByZoneIdAndKindId(this.importDynamic.zoneId, this.kindId).subscribe(res => {
-          if (res)
-            resolve(res);
+          resolve(res);
         })
       });
     } catch {
@@ -116,8 +113,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.getReadingConfigDefaultByZoneId(this.importDynamic.zoneId).subscribe(res => {
-          if (res)
-            resolve(res);
+          resolve(res);
         })
       });
     } catch {
@@ -128,8 +124,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.getCounterReadersByZoneId(this.importDynamic.zoneId).subscribe(res => {
-          if (res)
-            resolve(res);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -145,13 +140,13 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }
-  private showEditButton = () => {
-    if (!this.readingConfigDefault)
-      return;
-    this.canShowEditButton = true;
-  }
+  // private showEditButton = () => {
+  //   if (!this.readingConfigDefault)
+  //     return;
+  //   this.canShowEditButton = true;
+  // }
   private insertCounterReaderId = (cri: string) => {
-    this.importDynamic.counterReaderId = cri;    
+    this.importDynamic.counterReaderId = cri;
   }
   verificationACounterReaderId = async () => {
     if (!this.importDynamic.zoneId || !this.zoneDictionary)
@@ -159,7 +154,6 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this.readingConfigDefault = await this.getReadingConfigDefaults();
     this.userCounterReader = await this.getUserCounterReaders();
     this.insertReadingConfigDefaults(this.readingConfigDefault);
-    this.showEditButton();
     this.insertCounterReaderId(this.userCounterReader);
   }
   verificationReadingPeriod = async () => {

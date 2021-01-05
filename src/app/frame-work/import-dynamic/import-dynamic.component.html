@@ -15,7 +15,7 @@
 
             <div class="input_2">
                 <div class="_key">ناحیه :</div>
-                <mat-select [(ngModel)]="importDynamic.zoneId" name="importDynamic.zoneId">
+                <mat-select [(ngModel)]="importDynamic.zoneId" name="zoneId">
                     <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
                         (click)="verificationACounterReaderId()">
                         {{truefalse.title}}
@@ -24,34 +24,34 @@
             </div>
             <div class="input_2">
                 <div class="_key">از اشتراک :</div>
-                <input class="_value" name="importDynamic.fromEshterak" [(ngModel)]="importDynamic.fromEshterak">
+                <input class="_value" name="fromEshterak" [(ngModel)]="importDynamic.fromEshterak">
             </div>
             <div class="input_2">
                 <div class="_key">تا اشتراک :</div>
-                <input class="_value" name="importDynamic.toEshterak" [(ngModel)]="importDynamic.toEshterak">
+                <input class="_value" name="toEshterak" [(ngModel)]="importDynamic.toEshterak">
             </div>
             <div class="input_2" [hidden]="!_isOrderByDate">
                 <div class="_key">از تاریخ :</div>
                 <div class="_value">
-                    <app-date-jalali name="importDynamic.fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
                     </app-date-jalali>
                 </div>
             </div>
             <div class="input_2" [hidden]="!_isOrderByDate">
                 <div class="_key">تا تاریخ :</div>
                 <div class="_value">
-                    <app-date-jalali name="importDynamic.toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
                     </app-date-jalali>
                 </div>
             </div>
             <div class="input_2" [hidden]="!_showAlalHesabPercent">
                 <div class="_key">درصد علی الحساب :</div>
-                <input class="_value" type="number" name="importDynamic.alalHesabPercent"
+                <input class="_value" type="number" name="alalHesabPercent"
                     [(ngModel)]="importDynamic.alalHesabPercent">
             </div>
             <div class="input_2" [hidden]="!_showimagePercent">
                 <div class="_key">درصد تصویر :</div>
-                <input class="_value" type="number" name="importDynamic.imagePercent"
+                <input class="_value" type="number" name="imagePercent"
                     [(ngModel)]="importDynamic.imagePercent">
             </div>
 
@@ -65,9 +65,9 @@
                     </mat-option>
                 </mat-select>
             </div>
-            <div class="input_2" [hidden]="_isOrderByDate || readingPeriodDictionary">
+            <div class="input_2" [hidden]="!readingPeriodDictionary.length">
                 <div class="_key">مدت قرائت :</div>
-                <mat-select [(ngModel)]="importDynamic.readingPeriodId" name="importDynamic.readingPeriodId">
+                <mat-select [(ngModel)]="importDynamic.readingPeriodId" name="readingPeriodId">
                     <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                         {{truefalse.title}}
                     </mat-option>
@@ -75,7 +75,7 @@
             </div>
             <div class="input_2" *ngIf="userCounterReader">
                 <div class="_key">قرائت خوان :</div>
-                <mat-select [(ngModel)]="importDynamic.counterReaderId" name="importDynamic.counterReaderId">
+                <mat-select [(ngModel)]="importDynamic.counterReaderId" name="counterReaderId">
                     <mat-option *ngFor="let truefalse of userCounterReader" [value]="truefalse.id"
                         (click)="verificationACounterReaderId()">
                         {{truefalse.title}}
