@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { TableModule } from 'primeng/table';
 
+import { SharedPrimeNgModule } from './../../../shared/shared-prime-ng.module';
 import { AllContactsRoutingModule } from './all-contacts-routing.module';
 import { AllContactsComponent } from './all-contacts.component';
 
@@ -12,10 +9,7 @@ import { AllContactsComponent } from './all-contacts.component';
   declarations: [AllContactsComponent],
   imports: [
     CommonModule,
-    TableModule,
-    FormsModule,
-    MatCheckboxModule,
-    MultiSelectModule,
+    SharedPrimeNgModule,
     AllContactsRoutingModule
   ]
 })
