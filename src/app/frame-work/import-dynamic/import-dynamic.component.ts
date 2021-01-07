@@ -30,7 +30,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     fromDate: '',
     toDate: '',
     counterReaderId: '',
-    readingPeriodId: 0
+    readingPeriodId: null
   }
   isTrueF: ITrueFalse[] = [
     { name: 'نباشد', value: false },
@@ -152,7 +152,11 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     if (!this.importDynamic.zoneId || !this.zoneDictionary)
       return;
     this.readingConfigDefault = await this.getReadingConfigDefaults();
+    if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault))
+      return;
     this.userCounterReader = await this.getUserCounterReaders();
+    if (!this.importDynamicService.validationInvalid(this.userCounterReader))
+      return;
     this.insertReadingConfigDefaults(this.readingConfigDefault);
     this.insertCounterReaderId(this.userCounterReader);
   }
@@ -160,7 +164,6 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     if (!this.importDynamic.zoneId || !this.zoneDictionary || !this.kindId)
       return;
     this.readingPeriodDictionary = await this.getReadingPeriod();
-    console.log(this.readingPeriodDictionary);
   }
 
   classWrapper = async () => {
