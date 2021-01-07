@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { OffloadedRoutingModule } from './offloaded-routing.module';
+import { OffloadedComponent } from './offloaded.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [OffloadedComponent],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
     OffloadedRoutingModule
   ]
 })

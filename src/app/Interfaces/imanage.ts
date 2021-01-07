@@ -63,3 +63,24 @@ export interface ICounterStateGridFriendlyResp {
     groups: null;
     total: number;
 }
+export interface ITracking {
+    id: string,
+    trackNumber: number,
+    listNumber: null,
+    insertDateJalali: string,
+    zoneId: number,
+    zoneTitle: string,
+    isBazdid: boolean,
+    year: number,
+    isRoosta: boolean,
+    fromEshterak: string,
+    toEshterak: string,
+    fromDate: string,
+    toDate: string,
+    itemQuantity: number,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean
+}

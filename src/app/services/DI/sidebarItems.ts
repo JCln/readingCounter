@@ -34,6 +34,12 @@ export const sidebarItemsTest = {
         },
         {
             route: '', title: 'سایر', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
+                { route: '/wr/m/track/imported', title: 'imported', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/track/loaded', title: 'loaded', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/track/reading', title: 'reading', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/track/offloaded', title: 'offloaded', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/track/finished', title: 'finished', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+
                 { route: '/wr/imd', title: 'import dynamic', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/profile', title: 'پروفایل', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/apk', title: 'apk', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },

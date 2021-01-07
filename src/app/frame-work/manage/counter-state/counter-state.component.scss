@@ -28,22 +28,3 @@
   // color: $gray_dr;
   font-size: 1.2rem;
 }
-
-// 
-
-:host ::ng-deep {
-
-  .p-datatable table {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: 1.2rem;
-  }
-
-  tr:nth-child(even) {
-    background: #e9ecef;
-  }
-
-  .p-datatable .p-datatable-thead>tr>th,
-  .p-datatable .p-datatable-tbody>tr>td {
-    text-align: center;
-  }
-}

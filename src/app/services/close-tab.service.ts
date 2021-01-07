@@ -60,6 +60,18 @@ export class CloseTabService {
 
   saveDataForQotrManager: any;
 
+  // track manager
+  saveDataForTrackImported: any;
+
+  saveDataForTrackLoaded: any;
+
+  saveDataForTrackReading: any;
+
+  saveDataForTrackOffloaded: any;
+
+  saveDataForTrackFinished: any;
+  // 
+
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
     switch (url) {
@@ -135,6 +147,21 @@ export class CloseTabService {
         break;
       case '/wr/m/cr':
         this.saveDataForCounterReport = '';
+        break;
+      case '/wr/track/imported':
+        this.saveDataForTrackImported = '';
+        break;
+      case '/wr/track/loaded':
+        this.saveDataForTrackLoaded = '';
+        break;
+      case '/wr/track/reading':
+        this.saveDataForTrackReading = '';
+        break;
+      case '/wr/track/offloaded':
+        this.saveDataForTrackOffloaded = '';
+        break;
+      case '/wr/track/finished':
+        this.saveDataForTrackFinished = '';
         break;
       case '/wr/privacy':
         break;

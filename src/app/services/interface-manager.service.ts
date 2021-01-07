@@ -44,6 +44,25 @@ export class InterfaceManagerService {
     return this.mainService.POSTBODY('V1/APK/Upload', body);
   }
   // /////
+
+  // Tracking manager
+  getTrackImported = (): Observable<any> => {
+    return this.mainService.GET('V1/Tracking/Imported');
+  }
+  getTrackLoaded = (): Observable<any> => {
+    return this.mainService.GET('V1/Tracking/Loaded');
+  }
+  getTrackReading = (): Observable<any> => {
+    return this.mainService.GET('V1/Tracking/Reading');
+  }
+  getTrackOffloaded = (): Observable<any> => {
+    return this.mainService.GET('V1/Tracking/Offloaded');
+  }
+  getTrackFinished = (): Observable<any> => {
+    return this.mainService.GET('V1/Tracking/Finished');
+  }
+  // 
+
   // reading period manager
   getReadingPeriodManager = (): Observable<any> => {
     return this.mainService.GET('V1/readingPeriod/All');

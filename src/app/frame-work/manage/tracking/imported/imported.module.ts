@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { ImportedRoutingModule } from './imported-routing.module';
+import { ImportedComponent } from './imported.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ImportedComponent],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
     ImportedRoutingModule
   ]
 })

@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { ReadingRoutingModule } from './reading-routing.module';
+import { ReadingComponent } from './reading.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ReadingComponent],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
     ReadingRoutingModule
   ]
 })
