@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { LazyLoadEvent } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
+import { ICounterStateGridFriendlyReq } from 'src/app/Interfaces/imanage';
 import { IUserManager } from 'src/app/Interfaces/iuser-manager';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 
@@ -41,21 +42,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService
   ) {
   }
-  loadCustomers(event: LazyLoadEvent) {
-    console.log(event);
-    console.log(event.sortField);
 
-
-    // this.innerLoading = true;
-    // this.interfaceManagerService.postCounterStatGridFriendly(event).subscribe(res => {
-    //   if (res)
-    //     console.log(res);
-
-    //   this.dataSourceSlice = res;
-    //   this.innerLoading = false;
-    // })
-
-  }
   columnSelectedMenuDefault = () => {
     this._selectCols = [
       { field: 'moshtarakinId', header: 'مشترکین' },
@@ -78,13 +65,41 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
   set selectedColumns(val: any[]) {
     this._selectedColumns = this.dataSourceSlice.filter(col => val.includes(col));
   }
-  // getGridFriendlyDataSource = (event: LazyLoadEvent): any => {
-  //   let counterStateReq: ICounterStateGridFriendlyReq = {
-  //     take: event.rows,
-  //     skip: event.first,
-  //     sort: event
-  //   }
-  // }
+  loadCustomers(event: LazyLoadEvent) {
+    this.innerLoading = true;
+    this.interfaceManagerService.postCounterStatGridFriendly(event).subscribe(res => {
+      if (res)
+        console.log(res);
+
+      this.dataSourceSlice = res;
+      this.innerLoading = false;
+    })
+  }
+  getGridFriendlyDataSource = (event: LazyLoadEvent): any => {
+    console.log(event);
+    const counterStateReq: ICounterStateGridFriendlyReq = {
+      take: event.rows,
+      skip: event.first,
+      sort: [
+        {
+          field: event.sortField,
+          dir: event.sortOrder === 1 ? 'asc' : 'desc'
+        }
+      ],
+      filter: null,
+      group: null,
+      aggregate: null
+    }
+    console.log(counterStateReq);
+    this.innerLoading = true;
+    this.interfaceManagerService.postCounterStatGridFriendly(counterStateReq).subscribe(res => {
+      if (res)
+        console.log(res);
+
+      this.dataSourceSlice.data = res;
+      this.innerLoading = false;
+    })
+  }
   getGridFriendlyDataSourceDefault = (): any => {
     return new Promise(resolve => {
       this.interfaceManagerService.postCounterStatGridFriendly(this.gridFriendlyData).subscribe(res => {

@@ -1,11 +1,11 @@
-<p-table [columns]="_selectedColumns" [value]="dataSourceSlice" [lazy]="true" (onLazyLoad)="loadCustomers($event)"
+<p-table [columns]="_selectedColumns" [value]="dataSourceSlice" [lazy]="true" (onLazyLoad)="getGridFriendlyDataSource($event)"
     [paginator]="true" [rows]="20" [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر
 " [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" [loading]="innerLoading">
     [globalFilterFields]="['moshtarakinId','title','zoneId','clientOrder','canEnterNumber','isMane','canNumberBeLessThanPre','isTavizi','shouldEnterNumber','isXarab','isFaqed']"
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
-            selectedItemsLabel=" انتخاب شده {0}" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+            selectedItemsLabel=" ستون انتخاب شده{0}" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
