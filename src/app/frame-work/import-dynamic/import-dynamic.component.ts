@@ -27,8 +27,8 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     hasPreNumber: false,
     displayBillId: false,
     displayRadif: false,
-    fromDate: '',
-    toDate: '',
+    fromDate: null,
+    toDate: null,
     counterReaderId: '',
     readingPeriodId: null
   }
