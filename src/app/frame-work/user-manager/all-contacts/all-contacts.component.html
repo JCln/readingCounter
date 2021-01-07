@@ -1,11 +1,50 @@
-<ag-grid-angular
-    style="width: 100%; height: 500px;"
-    class="ag-theme-alpine"
-    [rowData]="rowData"
-    [minColWidth]=60
-    [maxColWidth]=140
-    [enableRtl]="true"
-    [columnDefs]="columnDefs"
-    [frameworkComponents]="frameworkComponents"
->
-</ag-grid-angular>
+<p-table [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر
+    " [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0"
+    [globalFilterFields]="['isActive','isLocked','mobile','displayName','username','userCode']" sortMode="multiple">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ویرایش</th>
+            <th pSortableColumn="isActive">
+                <p-sortIcon field="isActive"></p-sortIcon>
+                قفل
+            </th>
+            <th pSortableColumn="isLocked">
+                <p-sortIcon field="isLocked"></p-sortIcon>
+                فعال
+            </th>
+            <th pSortableColumn="mobile">
+                <p-sortIcon field="mobile"></p-sortIcon>
+                موبایل
+            </th>
+            <th pSortableColumn="displayName">
+                <p-sortIcon field="displayName"></p-sortIcon>
+                نام نمایشی
+            </th>
+            <th pSortableColumn="username">
+                <p-sortIcon field="username"></p-sortIcon>
+                نام کاربری
+            </th>
+            <th pSortableColumn="userCode">
+                <p-sortIcon field="userCode"></p-sortIcon>
+                کد
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dataSource>
+        <tr>
+            <td class="edit_button" (click)="routeToEditPage(dataSource.id)">
+                <i class="fa fa-edit"></i>
+            </td>
+            <td>
+                <mat-checkbox [(ngModel)]="!dataSource.isActive"></mat-checkbox>
+            </td>
+            <td>
+                <mat-checkbox [(ngModel)]="!dataSource.isLocked"></mat-checkbox>
+            </td>
+            <td>{{dataSource.mobile}}</td>
+            <td>{{dataSource.displayName}}</td>
+            <td>{{dataSource.username}}</td>
+            <td>{{dataSource.userCode}}</td>
+        </tr>
+    </ng-template>
+</p-table>

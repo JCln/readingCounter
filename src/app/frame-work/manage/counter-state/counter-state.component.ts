@@ -1,189 +1,111 @@
-import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { LazyLoadEvent } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
+import { ICounterStateGridFriendlyReq } from 'src/app/Interfaces/imanage';
 import { IUserManager } from 'src/app/Interfaces/iuser-manager';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 
-import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
-import { BtnCellRendererComponent } from '../../user-manager/all-contacts/btn-cell-renderer/btn-cell-renderer.component';
 import { InteractionService } from './../../../services/interaction.service';
 import { InterfaceManagerService } from './../../../services/interface-manager.service';
 
+
+const gridFriendly = {
+  take: 20,
+  skip: 0,
+  sort: [],
+  filter: {},
+  group: [],
+  aggregate: []
+}
 @Component({
   selector: 'app-counter-state',
   templateUrl: './counter-state.component.html',
   styleUrls: ['./counter-state.component.scss']
 })
 export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
-  frameworkComponents: any;
-  rowDataClicked1 = {};
-
+  gridFriendlyData = gridFriendly;
   zoneDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
 
-  columnDefs = [
-    {
-      field: 'id',
-      headerName: 'کد',
-      editable: true,
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf'
-    },
-    {
-      field: 'moshtarakinId',
-      headerName: 'مشترکین',
-      editable: true,
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf'
-    },
-    {
-      field: 'title',
-      headerName: 'عنوان',
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf  dir_ltr'
-    },
-    {
-      field: 'zoneId',
-      headerName: 'منطقه',
-      editable: true,
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf'
-    },
-    {
-      field: 'clientOrder',
-      headerName: 'ترتیب',
-      editable: true,
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf'
-    },
-    {
-      field: 'canEnterNumber',
-      headerName: 'ثبت رقم',
-      editable: true,
-      cellEditorParams: {
-        values: ['true', 'false'],
-      },
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf',
-      cellRenderer: 'checkboxRenderer'
-    },
-    {
-      field: 'isMane',
-      headerName: 'مانع',
-      editable: true,
-      cellEditorParams: {
-        values: ['true', 'false'],
-      },
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf', cellRenderer: 'checkboxRenderer'
-    },
-    {
-      field: 'canNumberBeLessThanPre',
-      headerName: 'فعلی کمتر از قبلی',
-      editable: true,
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf',
-      cellRenderer: 'checkboxRenderer'
-    },
-    {
-      field: 'isTavizi',
-      headerName: 'تعویض',
-      editable: true,
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf',
-      cellRenderer: 'checkboxRenderer'
-    },
-    {
-      field: 'shouldEnterNumber',
-      headerName: 'اجبار رقم',
-      editable: true,
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf',
-      cellRenderer: 'checkboxRenderer'
-    },
-    {
-      field: 'isXarab',
-      headerName: 'خراب',
-      editable: true,
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf', cellRenderer: 'checkboxRenderer'
-    },
-    {
-      field: 'isFaqed',
-      headerName: 'فاقد',
-      sortable: true,
-      filter: true,
-      cellClass: 'cell_conf'
-      , cellRenderer: 'checkboxRenderer'
-    },
-    {
-      field: 'edit',
-      headerName: 'ویرایش',
-      cellRenderer: 'BtnCellRendererComponent',
-      cellRendererParams: {
-        onClick: this.onBtStartEditing.bind(this)
-      },
-      minWidth: 85,
-      editable: false
-    }
-
-  ];
   dataSource: IUserManager;
-  private gridApi;
-  defaultColDef;
-  editType;
+  dataSourceSlice: any; // grid friendly data for lazyloading
+
+  _selectCols: any[];
+  _selectedColumns: any[];
+
+  innerLoading: boolean = false;
 
   constructor(
-    private httpClient: HttpClient,
     private interactionService: InteractionService,
     private interfaceManagerService: InterfaceManagerService,
     private closeTabService: CloseTabService
   ) {
   }
 
-  scrambleAndRefreshAll() {
-    this.gridApi.refreshCells('zoneId');
+  columnSelectedMenuDefault = () => {
+    this._selectCols = [
+      { field: 'moshtarakinId', header: 'مشترکین' },
+      { field: 'title', header: 'عنوان' },
+      { field: 'zoneId', header: 'ناحیه' },
+      { field: 'clientOrder', header: 'ترتیب' },
+      { field: 'canEnterNumber', header: 'ثبت رقم' },
+      { field: 'isMane', header: 'مانع' },
+      { field: 'canNumberBeLessThanPre', header: 'رقم فعلی کمتر از قبلی' },
+      { field: 'isTavizi', header: 'تعویضی' },
+      { field: 'shouldEnterNumber', header: 'اجبار رقم' },
+      { field: 'isXarab', header: 'خراب' },
+      { field: 'isFaqed', header: 'فاقد' }
+    ];
+    this._selectedColumns = this._selectCols;
   }
-  onBtnClick1(e) {
-    this.rowDataClicked1 = e.rowData;
-    console.log(e.rowData.id);
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
   }
-  onBtStartEditing(index: any) {
-    console.log(index.rowData.id);
-    index = index.rowData.id;
-    this.gridApi.setFocusedCell(index, 'edit');
-    this.gridApi.startEditingCell({
-      rowIndex: index,
-      colKey: 'edit',
-    });
+  set selectedColumns(val: any[]) {
+    this._selectedColumns = this.dataSourceSlice.filter(col => val.includes(col));
   }
-  onBtStartEditingLine2() {
-    this.gridApi.setFocusedCell(2, 'id');
-    this.gridApi.startEditingCell({
-      rowIndex: 2,
-      colKey: 'id',
-    });
-  }
-  getDataSource = (): Promise<IUserManager> => {
-    return new Promise((resolve) => {
-      this.httpClient.get('https://37.191.92.157/kontoriNew/v1/counterState/all').subscribe((res: any) => {
-        if (res) {
-          resolve(res);
-        }
-      })
+  loadCustomers(event: LazyLoadEvent) {
+    this.innerLoading = true;
+    this.interfaceManagerService.postCounterStatGridFriendly(event).subscribe(res => {
+      if (res)
+        console.log(res);
+
+      this.dataSourceSlice = res;
+      this.innerLoading = false;
     })
+  }
+  getGridFriendlyDataSource = (event: LazyLoadEvent): any => {
+    console.log(event);
+    const counterStateReq: ICounterStateGridFriendlyReq = {
+      take: event.rows,
+      skip: event.first,
+      sort: [
+        {
+          field: event.sortField,
+          dir: event.sortOrder === 1 ? 'asc' : 'desc'
+        }
+      ],
+      filter: null,
+      group: null,
+      aggregate: null
+    }
+    console.log(counterStateReq);
+    this.innerLoading = true;
+    this.interfaceManagerService.postCounterStatGridFriendly(counterStateReq).subscribe(res => {
+      if (res)
+        console.log(res);
+
+      this.dataSourceSlice.data = res;
+      this.innerLoading = false;
+    })
+  }
+  getGridFriendlyDataSourceDefault = (): any => {
+    return new Promise(resolve => {
+      this.interfaceManagerService.postCounterStatGridFriendly(this.gridFriendlyData).subscribe(res => {
+        resolve(res);
+      })
+    });
   }
   convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
     dataSource.map(dataSource => {
@@ -192,7 +114,6 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
           dataSource.zoneId = zoneDic.title;
       })
     });
-    this.scrambleAndRefreshAll();
   }
   getZoneDictionary = (): any => {
     return new Promise((resolve) => {
@@ -208,31 +129,23 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForCounterState) {
-      this.dataSource = this.closeTabService.saveDataForCounterState;
+      this.dataSourceSlice.data = this.closeTabService.saveDataForCounterState;
       this.zoneDictionary = this.closeTabService.saveDictionaryForCounterState;
     }
     else {
-      this.dataSource = await this.getDataSource();
+      this.dataSourceSlice = await this.getGridFriendlyDataSourceDefault();
+      this.dataSourceSlice = this.dataSourceSlice.data;
+      console.log(this.dataSourceSlice);
+
       this.zoneDictionary = await this.getZoneDictionary();
-      this.closeTabService.saveDataForCounterState = this.dataSource;
+      this.closeTabService.saveDataForCounterState = this.dataSourceSlice;
       this.closeTabService.saveDictionaryForCounterState = this.zoneDictionary;
     }
-    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    this.convertIdToTitle(this.dataSourceSlice, this.zoneDictionary);
   }
   ngOnInit(): void {
     this.classWrapper();
-    this.frameworkComponents = {
-      BtnCellRendererComponent: BtnCellRendererComponent,
-      numericCellEditor: getNumericCellEditor(),
-      checkboxRenderer: CheckboxRenderer
-    }
-    this.defaultColDef = {
-      flex: 1,
-      editable: true,
-    };
-    this.editType = 'fullRow';
   }
-
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -244,66 +157,10 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
+    this.columnSelectedMenuDefault();
   }
   ngOnDestroy(): void {
     this.subscription.forEach(subscription => subscription.unsubscribe())
   }
 
-}
-function getNumericCellEditor() {
-  function isCharNumeric(charStr) {
-    return !!/\d/.test(charStr);
-  }
-  function isKeyPressedNumeric(event) {
-    var charCode = getCharCodeFromEvent(event);
-    var charStr = String.fromCharCode(charCode);
-    return isCharNumeric(charStr);
-  }
-  function getCharCodeFromEvent(event) {
-    event = event || window.event;
-    return typeof event.which === 'undefined' ? event.keyCode : event.which;
-  }
-  function NumericCellEditor() { }
-  NumericCellEditor.prototype.init = function (params) {
-    this.focusAfterAttached = params.cellStartedEdit;
-    this.eInput = document.createElement('input');
-    this.eInput.style.width = '100%';
-    this.eInput.style.height = '100%';
-    this.eInput.value = isCharNumeric(params.charPress)
-      ? params.charPress
-      : params.value;
-    var that = this;
-    this.eInput.addEventListener('keypress', function (event) {
-      if (!isKeyPressedNumeric(event)) {
-        that.eInput.focus();
-        if (event.preventDefault) event.preventDefault();
-      }
-    });
-  };
-  NumericCellEditor.prototype.getGui = function () {
-    return this.eInput;
-  };
-  NumericCellEditor.prototype.afterGuiAttached = function () {
-    if (this.focusAfterAttached) {
-      this.eInput.focus();
-      this.eInput.select();
-    }
-  };
-  NumericCellEditor.prototype.isCancelBeforeStart = function () {
-    return this.cancelBeforeStart;
-  };
-  NumericCellEditor.prototype.isCancelAfterEnd = function () { };
-  NumericCellEditor.prototype.getValue = function () {
-    return this.eInput.value;
-  };
-  NumericCellEditor.prototype.focusIn = function () {
-    var eInput = this.getGui();
-    eInput.focus();
-    eInput.select();
-    console.log('NumericCellEditor.focusIn()');
-  };
-  NumericCellEditor.prototype.focusOut = function () {
-    console.log('NumericCellEditor.focusOut()');
-  };
-  return NumericCellEditor;
 }

@@ -1,13 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
-import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
 import { IUserManager } from './../../../Interfaces/iuser-manager';
-import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
+import { AllContactsService } from './../../../services/all-contacts.service';
 
 @Component({
   selector: 'app-all-contacts',
@@ -15,47 +13,27 @@ import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.
   styleUrls: ['./all-contacts.component.scss']
 })
 export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
-  frameworkComponents: any;
-  rowDataClicked1 = {};
   subscription: Subscription[] = [];
 
-  columnDefs = [
-    // { field: 'id', sortable: true, filter: true },
-    { field: 'userCode', headerName: 'کد', sortable: true, filter: true, cellClass: 'cell_conf' },
-    { field: 'username', headerName: 'نام کاربری', sortable: true, filter: true, cellClass: 'cell_conf' },
-    { field: 'mobile', headerName: 'موبایل', sortable: true, filter: true, cellClass: 'cell_conf  dir_ltr' },
-    { field: 'displayName', headerName: 'نام نمایشی', sortable: true, filter: true, cellClass: 'cell_conf' },
-    { field: 'isActive', headerName: 'فعال', sortable: true, filter: true, cellClass: 'cell_conf', cellRenderer: 'checkboxRenderer' },
-    { field: 'isLocked', headerName: 'قفل', sortable: true, filter: true, cellClass: 'cell_conf', cellRenderer: 'checkboxRenderer' },
-    {
-      field: 'ویرایش',
-      cellRenderer: 'BtnCellRendererComponent',
-      cellRendererParams: {
-        onClick: this.onBtnClick1.bind(this)
-      },
-      minWidth: 85,
-    }
+  dataSource: IUserManager[] = [];
+  _firstPage: number = 0;
+  _rowsNumberPage: number = 10;
 
-  ];
-  rowData: any;
-
-  constructor(private httpClient: HttpClient,
+  constructor(
     private route: ActivatedRoute,
     private interactionService: InteractionService,
     private router: Router,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private allContactsService: AllContactsService
   ) {
   }
 
-  onBtnClick1(e) {
-    this.rowDataClicked1 = e.rowData;
-    console.log(e.rowData.id);
-
-    this.router.navigate(['../edit', e.rowData.id], { relativeTo: this.route.parent })
+  routeToEditPage(e) {
+    this.router.navigate(['../edit', e], { relativeTo: this.route.parent })
   }
-  getDataSource = (): Promise<IUserManager> => {
+  getDataSource = (): Promise<IUserManager[]> => {
     return new Promise((resolve) => {
-      this.httpClient.get('https://37.191.92.157/kontoriNew/v1/user/all').subscribe((res: any) => {
+      this.allContactsService.connectToServer().subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -68,19 +46,21 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForAllContacts) {
-      this.rowData = this.closeTabService.saveDataForAllContacts;
+      this.dataSource = this.closeTabService.saveDataForAllContacts;
     }
     else {
-      this.rowData = await this.getDataSource();
-      this.closeTabService.saveDataForAllContacts = this.rowData;
-    }
+      this.dataSource = await this.getDataSource();
+      console.log(this.dataSource);
 
-  }
-  ngOnInit(): void {
-    this.frameworkComponents = {
-      BtnCellRendererComponent: BtnCellRendererComponent,
-      checkboxRenderer: CheckboxRenderer
+      this.closeTabService.saveDataForAllContacts = this.dataSource;
     }
+  }
+  next = () => this._firstPage = this._firstPage + this._rowsNumberPage;
+  prev = () => this._firstPage = this._firstPage - this._rowsNumberPage;
+  reset = () => this._firstPage = 0;
+  isLastPage = (): boolean => { return this.dataSource ? this._firstPage === (this.dataSource.length - this._rowsNumberPage) : true; }
+  isFirstPage = (): boolean => { return this.dataSource ? this._firstPage === 0 : true; }
+  ngOnInit(): void {
     this.classWrapper();
   }
   refreshTabStatus = () => {

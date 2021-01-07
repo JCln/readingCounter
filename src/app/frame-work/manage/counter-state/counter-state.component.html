@@ -1,16 +1,33 @@
+<p-table [columns]="_selectedColumns" [value]="dataSourceSlice" [lazy]="true" (onLazyLoad)="getGridFriendlyDataSource($event)"
+    [paginator]="true" [rows]="20" [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر
+" [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" [loading]="innerLoading">
+    [globalFilterFields]="['moshtarakinId','title','zoneId','clientOrder','canEnterNumber','isMane','canNumberBeLessThanPre','isTavizi','shouldEnterNumber','isXarab','isFaqed']"
 
-<ag-grid-angular
-    style="width: 100%; height: 500px;"
-    class="ag-theme-alpine"
-    [rowData]="dataSource"
-    [minColWidth]=100
-    [maxColWidth]=140
-    [enableRtl]="true"
-    [columnDefs]="columnDefs"
-    [frameworkComponents]="frameworkComponents"
-    [defaultColDef]="defaultColDef"
-    [editType]="editType"
-    [pagination]="true"    
-    >
-</ag-grid-angular>
-    <!-- [minColWidth]=60 -->
+    <ng-template pTemplate="caption">
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
+            selectedItemsLabel=" ستون انتخاب شده{0}" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSourceSlice let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                <ng-container
+                    *ngIf="dataSourceSlice[col.field] === true || dataSourceSlice[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="dataSourceSlice[col.field]"></mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{dataSourceSlice[col.field]}}
+                </ng-template>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

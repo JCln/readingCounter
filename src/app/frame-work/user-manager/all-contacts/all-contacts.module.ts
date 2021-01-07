@@ -1,17 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AgGridModule } from 'ag-grid-angular';
 
-import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
+import { SharedPrimeNgModule } from './../../../shared/shared-prime-ng.module';
 import { AllContactsRoutingModule } from './all-contacts-routing.module';
 import { AllContactsComponent } from './all-contacts.component';
-import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
 
 @NgModule({
-  declarations: [AllContactsComponent, BtnCellRendererComponent],
+  declarations: [AllContactsComponent],
   imports: [
-    CommonModule,
-    AgGridModule.withComponents([BtnCellRendererComponent, CheckboxRenderer]),
+    SharedPrimeNgModule,
     AllContactsRoutingModule
   ]
 })

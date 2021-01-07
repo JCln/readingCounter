@@ -12,7 +12,7 @@ export class InterfaceManagerService {
 
   // //// User manager
   getAllUserContactsManager = (): Observable<any> => {
-    return this.mainService.GET('​V1​/User​/All');
+    return this.mainService.GET('V1/User/All');
   }
   getUserContactManager = (uuid: string): Observable<any> => {
     return this.mainService.GETID(uuid, 'V1/user/Edit');
@@ -105,8 +105,11 @@ export class InterfaceManagerService {
   getCounterState = (): Observable<any> => {
     return this.mainService.GET('V1/CounterState/All');
   }
-  getCounterStateDictionary = (): Observable<any> => {
+  CounterStateDictionary = (): Observable<any> => {
     return this.mainService.GET('V1/CounterState/Dictionary');
+  }
+  postCounterStatGridFriendly = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/CounterState/GridFriendly', body);
   }
   deleteCounterState = (id: number): Observable<any> => {
     return this.mainService.POST('V1/CounterState/Remove', id);

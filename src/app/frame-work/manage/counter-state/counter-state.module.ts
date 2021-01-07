@@ -1,9 +1,6 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AgGridModule } from 'ag-grid-angular';
 
-import { CheckboxRenderer } from '../../checkbox-renderer.componenet';
-import { BtnCellRendererComponent } from '../../user-manager/all-contacts/btn-cell-renderer/btn-cell-renderer.component';
+import { SharedPrimeNgModule } from './../../../shared/shared-prime-ng.module';
 import { CounterStateRoutingModule } from './counter-state-routing.module';
 import { CounterStateComponent } from './counter-state.component';
 
@@ -11,8 +8,7 @@ import { CounterStateComponent } from './counter-state.component';
 @NgModule({
   declarations: [CounterStateComponent],
   imports: [
-    CommonModule,
-    AgGridModule.withComponents([CheckboxRenderer, BtnCellRendererComponent]),
+    SharedPrimeNgModule,
     CounterStateRoutingModule
   ]
 })
