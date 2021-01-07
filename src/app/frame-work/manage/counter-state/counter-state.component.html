@@ -1,82 +1,32 @@
-<p-table [value]="dataSource" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [paginator]="true" [rows]="20"
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر
+<p-table [columns]="_selectedColumns" [value]="dataSourceSlice" [lazy]="true" (onLazyLoad)="loadCustomers($event)"
+    [paginator]="true" [rows]="20" [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر
 " [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" [loading]="innerLoading">
     [globalFilterFields]="['moshtarakinId','title','zoneId','clientOrder','canEnterNumber','isMane','canNumberBeLessThanPre','isTavizi','shouldEnterNumber','isXarab','isFaqed']"
-    <ng-template pTemplate="header">
+
+    <ng-template pTemplate="caption">
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
+            selectedItemsLabel=" انتخاب شده {0}" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
         <tr>
-            <th pSortableColumn="moshtarakinId">
-                <p-sortIcon field="moshtarakinId"></p-sortIcon>
-                مشترکین
-            </th>
-            <th pSortableColumn="title">
-                <p-sortIcon field="title"></p-sortIcon>
-                عنوان
-            </th>
-            <th pSortableColumn="zoneId">
-                <p-sortIcon field="zoneId"></p-sortIcon>
-                ناحیه
-            </th>
-            <th pSortableColumn="clientOrder">
-                <p-sortIcon field="clientOrder"></p-sortIcon>
-                ترتیب
-            </th>
-            <th pSortableColumn="canEnterNumber">
-                <p-sortIcon field="canEnterNumber"></p-sortIcon>
-                ثبت رقم
-            </th>
-            <th pSortableColumn="isMane">
-                <p-sortIcon field="isMane"></p-sortIcon>
-                مانع
-            </th>
-            <th pSortableColumn="canNumberBeLessThanPre">
-                <p-sortIcon field="canNumberBeLessThanPre"></p-sortIcon>
-                رقم فعلی کمتر از قبلی
-            </th>
-            <th pSortableColumn="isTavizi">
-                <p-sortIcon field="isTavizi"></p-sortIcon>
-                تعویضی
-            </th>
-            <th pSortableColumn="shouldEnterNumber">
-                <p-sortIcon field="shouldEnterNumber"></p-sortIcon>
-                اجبار رقم
-            </th>
-            <th pSortableColumn="isXarab">
-                <p-sortIcon field="isXarab"></p-sortIcon>
-                خراب
-            </th>
-            <th pSortableColumn="isFaqed">
-                <p-sortIcon field="isFaqed"></p-sortIcon>
-                فاقد
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
             </th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource>
+    <ng-template pTemplate="body" let-dataSourceSlice let-columns="columns">
         <tr>
-            <td>{{dataSource.moshtarakinId}}</td>
-            <td>{{dataSource.title}}</td>
-            <td>{{dataSource.zoneId}}</td>
-            <td>{{dataSource.clientOrder}}</td>
-            <td>
-                <mat-checkbox [(ngModel)]="dataSource.canEnterNumber"></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox [(ngModel)]="dataSource.isMane"></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox [(ngModel)]="dataSource.canNumberBeLessThanPre"></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox [(ngModel)]="dataSource.isTavizi"></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox [(ngModel)]="dataSource.shouldEnterNumber"></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox [(ngModel)]="dataSource.isXarab"></mat-checkbox>
-            </td>
-            <td>
-                <mat-checkbox [(ngModel)]="dataSource.isFaqed"></mat-checkbox>
+            <td *ngFor="let col of columns">
+                <ng-container
+                    *ngIf="dataSourceSlice[col.field] === true || dataSourceSlice[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="dataSourceSlice[col.field]"></mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{dataSourceSlice[col.field]}}
+                </ng-template>
             </td>
         </tr>
     </ng-template>

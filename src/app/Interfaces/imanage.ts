@@ -20,7 +20,7 @@ export interface ICounterState {
     isXarab: boolean,
     isFaqed: boolean
 }
-export interface ICounterStateGridFriendly {
+export interface ICounterStateGridFriendlyReq {
     take: number,
     skip: number,
     sort: [
@@ -55,4 +55,11 @@ export interface ICounterStateGridFriendly {
             aggregate: string
         }
     ]
+}
+export interface ICounterStateGridFriendlyResp {
+    aggregates: null;
+    data: any;
+    errors: null;
+    groups: null;
+    total: number;
 }
