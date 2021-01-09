@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule } from 'primeng/table';
 
@@ -14,14 +15,16 @@ import { TableModule } from 'primeng/table';
     FormsModule,
     TableModule,
     MatCheckboxModule,
-    MultiSelectModule
+    MultiSelectModule,
+    DropdownModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     TableModule,
     MatCheckboxModule,
-    MultiSelectModule
+    MultiSelectModule,
+    DropdownModule
   ]
 })
 export class SharedPrimeNgModule {

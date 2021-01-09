@@ -34,11 +34,8 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService
   ) {
   }
-  addRoleItems = () => {
-    this.editUserManagerService.addAUserRoles(this.roleItemsData);
-  }
   addAContact = () => {
-    this.editUserManagerService.editAUserContact(this.UUid);
+    this.editUserManagerService.editAUserContact(this.UUid, this.dataSource);
   }
   nullSavedSource = () => this.closeTabService.saveDataForEditContacts = null;
   getContactSource = () => {
@@ -49,7 +46,7 @@ export class EditContactComponent implements OnInit, AfterViewInit, OnDestroy {
         this.roleItemsData = this.dataSource.roleItems;
         this.addContactData = this.dataSource.appItems;
         this.provinceItemsData = this.dataSource.provinceItems;
-        this.personalizeInfo = this.dataSource.userInfo;        
+        this.personalizeInfo = this.dataSource.userInfo;
       }
     })
   }

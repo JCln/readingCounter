@@ -1,25 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-
-import { EditContactManagerService } from './../../../../services/edit-contact-manager.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-select-zone',
   templateUrl: './select-zone.component.html',
   styleUrls: ['./select-zone.component.scss']
 })
-export class SelectZoneComponent implements OnInit {
+export class SelectZoneComponent {
   switchDisplay: boolean = false;
   // province config
   @Input() provinceItemsData: any;
   title: string = '';
   allComplete: boolean = false;
-
-  constructor(
-    private editUserManagerService: EditContactManagerService
-  ) { }
-
-  ngOnInit(): void {
-  }
 
   someComplete(): boolean {
     const a: Array<any> = [];
@@ -57,8 +48,5 @@ export class SelectZoneComponent implements OnInit {
     subtask.zoneItems.forEach(t => {
       t.isSelected = completed
     });
-  }
-  getAZoneItems = () => {
-    this.editUserManagerService.getAUserProvince(this.provinceItemsData);
   }
 }

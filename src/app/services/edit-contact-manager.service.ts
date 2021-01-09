@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { IResponses } from '../Interfaces/iresponses';
-import { IAUserEditSave, IRoleItems, IUserInfo } from './../Interfaces/iuser-manager';
+import { IResponses } from './../Interfaces/iresponses';
+import { IAUserEditSave, IUserEditManager } from './../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
@@ -10,36 +10,27 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class EditContactManagerService {
-  private selectedZones: number[] = [0];
-  private selectedActions: string[] = [];
-  private selectedPersonalInfos: any;
-  private selectedRoles: IRoleItems[] = [];
-
   constructor(
     private snackWrapperService: SnackWrapperService,
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService
   ) { }
 
-  addAUserPersonalInfo = (personalItems: IUserInfo) => {
-    this.selectedPersonalInfos = personalItems;
-  }
-  getAUserProvince = (zoneItems: any) => {
+  private getAUserProvince = (zoneItems: any): number[] => {
+    let selectedZones = [0];
     zoneItems.map(proIt => {
       proIt.regionItems.map(regionIt => {
         regionIt.zoneItems.map(zoneIt => {
           if (zoneIt.isSelected)
-            this.selectedZones.push(zoneIt.id)
+            selectedZones.push(zoneIt.id)
         })
       })
     })
+    return selectedZones;
   }
-  addAUserRoles = (roleItems: IRoleItems[]) => {
-    this.selectedRoles = roleItems;
-  }
-  private getAUserRoleItems = (): number[] => {
+  private getAUserRoleItems = (val: any): number[] => {
     const a: number[] = [];
-    this.selectedRoles.filter(ids => {
+    val.filter(ids => {
       if (ids.isSelected)
         a.push(ids.id);
     });
@@ -47,20 +38,22 @@ export class EditContactManagerService {
       return [0];
     return a;
   }
-  addAUserActions = (actionItems: any) => {
+  private addAUserActions = (actionItems: any): string[] => {
+    let selectedActions: string[] = [];
     actionItems.map(appIt => {
       appIt.moduleItems.map(moduleIt => {
         moduleIt.controllerItems.map(ctrlIt => {
           ctrlIt.actionItems.map(actionIt => {
             if (actionIt.isSelected) {
-              this.selectedActions.push(actionIt.value)
+              selectedActions.push(actionIt.value)
             }
           })
         })
       })
     })
+    return selectedActions;
   }
-  private connectToServer = (vals: IAUserEditSave) => {
+  private connectToServer = (vals: any) => {
     this.interfaceManagerService.postUserContactManager(vals).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, 5000, 'snack_success');
@@ -68,19 +61,19 @@ export class EditContactManagerService {
       }
     });
   }
-  editAUserContact = (UUid: string) => {
-    const vals = {
-      selectedRoles: this.getAUserRoleItems(),
-      selectedZones: this.selectedZones,
-      selectedActions: this.selectedActions,
+  editAUserContact = (UUid: string, dataSource: IUserEditManager) => {
+    const vals: IAUserEditSave = {
+      selectedRoles: this.getAUserRoleItems(dataSource.roleItems),
+      selectedZones: this.getAUserProvince(dataSource.provinceItems),
+      selectedActions: this.addAUserActions(dataSource.appItems),
       id: UUid,
-      firstName: this.selectedPersonalInfos.firstName,
-      sureName: this.selectedPersonalInfos.sureName,
-      email: this.selectedPersonalInfos.email,
-      mobile: this.selectedPersonalInfos.mobile,
-      displayMobile: this.selectedPersonalInfos.displayMobile,
-      displayName: this.selectedPersonalInfos.displayName,
-      deviceId: this.selectedPersonalInfos.deviceId
+      firstName: dataSource.userInfo.firstName,
+      sureName: dataSource.userInfo.sureName,
+      email: dataSource.userInfo.email,
+      mobile: dataSource.userInfo.mobile,
+      displayMobile: dataSource.userInfo.displayMobile,
+      displayName: dataSource.userInfo.displayName,
+      deviceId: dataSource.userInfo.deviceId
     }
     this.connectToServer(vals);
   }

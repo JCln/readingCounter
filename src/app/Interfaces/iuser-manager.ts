@@ -75,6 +75,7 @@ export interface IUserEditManager {
         email: string,
         mobile: string,
         displayName: string,
+        displayMobile: boolean;
         isActive: boolean,
         deviceId: string
     }

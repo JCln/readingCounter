@@ -1,50 +1,50 @@
-<form #form="ngForm" (ngSubmit)="submit()">
+<form #form="ngForm">
     <mat-form-field appearance="fill">
         <mat-label>نام کاربری</mat-label>
-        <input matInput name="editInfo.username" [(ngModel)]="editInfo.username" placeholder="نام کاربری را وارد نمایید"
+        <input matInput name="username" [(ngModel)]="editInfo.username" placeholder="نام کاربری را وارد نمایید"
             required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>نام</mat-label>
-        <input matInput name="editInfo.firstName" [(ngModel)]="editInfo.firstName" placeholder="نام را وارد نمایید"
+        <input matInput name="firstName" [(ngModel)]="editInfo.firstName" placeholder="نام را وارد نمایید"
             required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>نام خانوادگی</mat-label>
-        <input matInput name="editInfo.sureName" [(ngModel)]="editInfo.sureName"
+        <input matInput name="sureName" [(ngModel)]="editInfo.sureName"
             placeholder="نام خانوادگی را وارد نمایید" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>ایمیل</mat-label>
-        <input matInput name="editInfo.email" [(ngModel)]="editInfo.email" placeholder="ایمیل را وارد نمایید">
+        <input matInput name="email" [(ngModel)]="editInfo.email" placeholder="ایمیل را وارد نمایید">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>شماره موبایل</mat-label>
-        <input matInput name="editInfo.mobile" [(ngModel)]="editInfo.mobile" maxlength=11 minlength=11
+        <input matInput name="mobile" [(ngModel)]="editInfo.mobile" maxlength=11 minlength=11
             placeholder="شماره موبایل را وارد نمایید" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>نام نمایشی</mat-label>
-        <input matInput name="editInfo.displayName" [(ngModel)]="editInfo.displayName"
+        <input matInput name="displayName" [(ngModel)]="editInfo.displayName"
             placeholder="نامی که نمایش داده شود را وارد نمایید؟" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>شناسه دستگاه</mat-label>
-        <input matInput name="editInfo.deviceId" [(ngModel)]="editInfo.deviceId"
+        <input matInput name="deviceId" [(ngModel)]="editInfo.deviceId"
             placeholder="شناسه دستگاه را وارد نمایید" required>
     </mat-form-field>
 
     <div class="checkbox_s">
-        <mat-checkbox name="editInfo.displayMobile" [(ngModel)]="editInfo.displayMobile">شماره موبایل نمایش داده شود؟
+        <mat-checkbox name="displayMobile" [(ngModel)]="editInfo.displayMobile">شماره موبایل نمایش داده شود؟
         </mat-checkbox>
     </div>
 
 </form>
-<button type="submit" class="btn_2" (click)="submit()" matStepperNext>
+<button type="submit" class="btn_2" matStepperNext>
     <i class="fa fa-long-arrow-left"></i>صفحه بعد</button>

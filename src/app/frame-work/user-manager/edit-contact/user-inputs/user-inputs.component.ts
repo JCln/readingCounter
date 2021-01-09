@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IUserInfo } from 'src/app/Interfaces/iuser-manager';
-import { EditContactManagerService } from 'src/app/services/edit-contact-manager.service';
 
 
 @Component({
@@ -8,15 +7,6 @@ import { EditContactManagerService } from 'src/app/services/edit-contact-manager
   templateUrl: './user-inputs.component.html',
   styleUrls: ['./user-inputs.component.scss']
 })
-export class UserInputsComponent implements OnInit {
+export class UserInputsComponent {
   @Input() editInfo: IUserInfo;
-
-  constructor(private editUserManagerService: EditContactManagerService) {
-
-  }
-  submit = () => {
-    this.editUserManagerService.addAUserPersonalInfo(this.editInfo);
-  }
-  ngOnInit(): void {
-  }
 }
