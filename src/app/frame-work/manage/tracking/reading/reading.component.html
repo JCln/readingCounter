@@ -14,20 +14,29 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
+            <th style="width: 4rem"></th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+            </th>
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSourceSlice let-columns="columns">
+    <ng-template pTemplate="body" let-dataSourceRES let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
                 <ng-container
-                    *ngIf="dataSourceSlice[col.field] === true || dataSourceSlice[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSourceSlice[col.field]"></mat-checkbox>
+                    *ngIf="dataSourceRES[col.field] === true || dataSourceRES[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="dataSourceRES[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    {{dataSourceSlice[col.field]}}
+                    {{dataSourceRES[col.field]}}
                 </ng-template>
             </td>
+            <td><i class="pi pi-download"></i></td>
+            <td><i class="pi pi-map"></i></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>

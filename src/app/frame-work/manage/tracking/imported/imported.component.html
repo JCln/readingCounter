@@ -14,6 +14,13 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
+            <th style="width: 4rem"></th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+            </th>
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
@@ -27,6 +34,9 @@
                 <ng-template #elseTemplate>
                     {{dataSource[col.field]}}
                 </ng-template>
+            </td>
+            <td>
+                <i class="pi pi-map"></i>
             </td>
         </tr>
     </ng-template>

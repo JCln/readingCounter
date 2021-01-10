@@ -64,9 +64,6 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    console.log(this.customizeSelectedColumns());
-
-
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {
