@@ -1,32 +1,54 @@
-<p-table [columns]="_selectedColumns" [value]="dataSourceSlice" [lazy]="true"
-    (onLazyLoad)="getGridFriendlyDataSource($event)" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
+<p-table #dt2 [columns]="_selectedColumns" [value]="dataSource" [lazy]="true"
+    (onLazyLoad)="sendGridFriendlyDataSource($event)" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر
-" [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" [loading]="innerLoading">
+" [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0"
     [globalFilterFields]="['moshtarakinId','title','zoneId','clientOrder','canEnterNumber','isMane','canNumberBeLessThanPre','isTavizi','shouldEnterNumber','isXarab','isFaqed']"
+    dir="rtl">
+    <!--[loading]="innerLoading"-->
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
             selectedItemsLabel=" {0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
     </ng-template>
+
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
+
+                <!-- <p-columnFilter *ngIf="col.field === 'title'" type="text" field="title" display="menu">
+                </p-columnFilter>
+
+                <p-columnFilter *ngIf="col.field === 'moshtarakinId'" type="numeric" field="moshtarakinId"
+                    display="menu"></p-columnFilter>
+
+                <p-columnFilter *ngIf="col.field === 'clientOrder'" type="numeric" field="clientOrder" display="menu">
+                </p-columnFilter>
+
+                <p-columnFilter *ngIf="col.field === 'canEnterNumber'" type="boolean" field="canEnterNumber">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col.field === 'isMane'" type="boolean" field="isMane"></p-columnFilter>
+                <p-columnFilter *ngIf="col.field === 'canNumberBeLessThanPre'" type="boolean"
+                    field="canNumberBeLessThanPre"></p-columnFilter>
+                <p-columnFilter *ngIf="col.field === 'isTavizi'" type="boolean" field="isTavizi"></p-columnFilter>
+                <p-columnFilter *ngIf="col.field === 'shouldEnterNumber'" type="boolean" field="shouldEnterNumber">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col.field === 'isXarab'" type="boolean" field="isXarab"></p-columnFilter>
+                <p-columnFilter *ngIf="col.field === 'isFaqed'" type="boolean" field="isFaqed"></p-columnFilter> -->
             </th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSourceSlice let-columns="columns">
+    <ng-template pTemplate="body" let-dataSource let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
                 <ng-container
-                    *ngIf="dataSourceSlice[col.field] === true || dataSourceSlice[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSourceSlice[col.field]"></mat-checkbox>
+                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    {{dataSourceSlice[col.field]}}
+                    {{dataSource[col.field]}}
                 </ng-template>
             </td>
         </tr>

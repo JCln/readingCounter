@@ -58,7 +58,7 @@ export interface ICounterStateGridFriendlyReq {
 }
 export interface ICounterStateGridFriendlyResp {
     aggregates: null;
-    data: any;
+    data: ICounterState[];
     errors: null;
     groups: null;
     total: number;
