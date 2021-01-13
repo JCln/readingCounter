@@ -1,7 +1,7 @@
 <mat-horizontal-stepper #stepper>
 
-    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-        <form>
+    <mat-step [stepControl]="userDetails" errorMessage="Name is required.">
+        <form [formGroup]="userDetails">
             <ng-template matStepLabel>مشخصات کاربر</ng-template>
             <app-user-inputs style="direction: rtl;"></app-user-inputs>
         </form>
@@ -14,28 +14,16 @@
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="addContactData">
-        <ng-template matStepLabel>سطح دسترسی به خدمات</ng-template>
-        <app-select-action [addContactData]="addContactData"></app-select-action>
+    <mat-step [stepControl]="contactAppItems">
+        <ng-template *ngIf="contactAppItems" matStepLabel>سطح دسترسی به خدمات</ng-template>
+        <app-select-action [addContactData]="contactAppItems"></app-select-action>
     </mat-step>
 
-    <mat-step>
-        <ng-template matStepLabel>گروه دسترسی</ng-template>
-        <h2>گروه دسترسی</h2>
-        <section class="role_items">
-            <div class="roles" *ngFor="let roleItems of roleItemsData">
-                <mat-checkbox>
-                    {{roleItems.title}}
-                </mat-checkbox>
-            </div>
-        </section>
-        <div class="accept">
-            <button class="btn_2" matStepperNext>
-                <i class="fa fa-long-arrow-left"></i>
-                صفحه بعد
-            </button>
-            <button class="btn_2" matStepperPrevious>صفحه قبل</button>
-        </div>
+    <mat-step [stepControl]="roleItemsData">
+        <form *ngIf="roleItemsData" formGroup="roleItemsData">
+            <ng-template matStepLabel>گروه دسترسی</ng-template>
+            <app-select-roles [roleItems]="roleItemsData"></app-select-roles>
+        </form>
     </mat-step>
 
     <mat-step>

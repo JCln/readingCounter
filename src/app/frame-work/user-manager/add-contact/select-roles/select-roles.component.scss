@@ -1,0 +1,24 @@
+@import '../../../../../assets/variable';
+@import '../../../../../assets/button.scss';
+
+.roles {
+  background: whitesmoke;
+  border-radius: 5px;
+  padding: .5rem;
+}
+
+.role_items {
+  direction: rtl;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 12rem));
+  gap: .5rem;
+  padding: 1rem;
+  border-radius: $border_s;
+  margin-bottom: $font_2;
+  background: $gray_d;
+}
+
+h2 {
+  color: $gray_dr2;
+  text-align: right;
+}

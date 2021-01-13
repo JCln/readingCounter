@@ -16,7 +16,6 @@
                 <section class="auth_4">
                     <div class="checkboxes" *ngFor="let actionIt of controllerIt.actionItems">
                         <mat-checkbox [(ngModel)]="actionIt.isSelected">
-                            <!-- (ngModelChange)="updateAllComplete()" -->
                             {{actionIt.title}}
                         </mat-checkbox>
                     </div>
@@ -26,7 +25,7 @@
     </div>
 </section>
 <div class="accept">
-    <button class="btn_2" matStepperNext (click)="addActionItems()">
+    <button class="btn_2" matStepperNext>
         <i class="fa fa-long-arrow-left"></i>
         صفحه بعد</button>
     <button class="btn_2" matStepperPrevious>صفحه قبل</button>

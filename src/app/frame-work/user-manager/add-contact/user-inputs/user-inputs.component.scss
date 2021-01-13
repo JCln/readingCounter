@@ -1,7 +1,7 @@
 @import '../../../../../assets/variable.scss';
 @import '../../../../../assets/button.scss';
 
-form {
+main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
   gap: .87rem;
@@ -22,4 +22,8 @@ form {
 
 .mat-form-field {
   text-align: right;
+}
+
+.text_left {
+  text-align: left;
 }

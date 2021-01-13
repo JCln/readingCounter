@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -7,6 +6,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { appItems, IAddAUserManager, IAddUserInfos, IRoleItems } from './../../../Interfaces/iuser-manager';
 import { AddUserManagerService } from './../../../services/add-user-manager.service';
+import { UserInputsComponent } from './user-inputs/user-inputs.component';
 
 @Component({
   selector: 'app-add-contact',
@@ -14,6 +14,19 @@ import { AddUserManagerService } from './../../../services/add-user-manager.serv
   styleUrls: ['./add-contact.component.scss']
 })
 export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
+  dataSource: any;
+  subscription: Subscription[] = [];
+
+  personalizeInfo: IAddAUserManager;
+  provinceItemsData: any;
+
+  contactAppItems: appItems[] = [];
+  // add role config
+  roleItemsData: IRoleItems[] = [];
+  // 
+  // user input component
+  @ViewChild(UserInputsComponent) userInfos: any;
+  userInputWrapper: IAddUserInfos;
   userDetails: IAddUserInfos = {
     userCode: 0,
     username: '',
@@ -28,19 +41,8 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     isActive: true,
     deviceId: ''
   }
-  personalizeInfo: IAddAUserManager;
-  provinceItemsData: any;
-  dataSource: any;
-  subscription: Subscription[] = [];
 
-  // stepper
-  firstFormGroup: FormGroup;
-  // 
 
-  addContactData: appItems[] = [];
-  // add role config
-  roleItemsData: IRoleItems[] = [];
-  // 
 
   constructor(
     private addUserManagerService: AddUserManagerService,
@@ -50,7 +52,13 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
   addAContact = () => {
-    this.addUserManagerService.addAContact(this.dataSource);
+    this.addUserManagerService.addAContact(this.dataSource, this.userInputWrapper);
+  }
+  userInputVals = () => {
+    this.userInputWrapper = this.userInfos.userInputForm;
+  }
+  userRolesVals = () => {
+    this.roleItemsData = this.userInfos.userInputForm;
   }
   nullSavedSource = () => this.closeTabService.saveDataForForAddContacts = null;
 
@@ -61,7 +69,7 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.closeTabService.saveDataForForAddContacts) {
       this.dataSource = this.closeTabService.saveDataForForAddContacts;
       this.roleItemsData = this.dataSource.roleItems;
-      this.addContactData = this.dataSource.appItems;
+      this.contactAppItems = this.dataSource.appItems;
       this.provinceItemsData = this.dataSource.provinceItems;
     }
     else {
@@ -71,7 +79,7 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
           this.closeTabService.saveDataForForAddContacts = res;
 
           this.roleItemsData = this.dataSource.roleItems;
-          this.addContactData = this.dataSource.appItems;
+          this.contactAppItems = this.dataSource.appItems;
           this.provinceItemsData = this.dataSource.provinceItems;
         }
       })
@@ -93,6 +101,7 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
+    this.userInputVals();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
