@@ -18,6 +18,13 @@ section.content {
   align-items: center;
 }
 
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
+  gap: $font_05;
+  margin: $font_05;
+}
+
 ._key,
 ._value {
   font-size: $font_m;
