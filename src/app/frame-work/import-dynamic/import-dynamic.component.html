@@ -73,7 +73,7 @@
                 </mat-select>
             </div>
             <div class="input_2" *ngIf="userCounterReader">
-                <div class="_key">قرائت خوان :</div>
+                <div class="_key">مامور قرائت :</div>
                 <mat-select [(ngModel)]="importDynamic.counterReaderId" name="counterReaderId">
                     <mat-option *ngFor="let truefalse of userCounterReader" [value]="truefalse.id">
                         {{truefalse.title}}
@@ -81,6 +81,7 @@
                 </mat-select>
             </div>
 
+            <br>
             <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamic.hasPreNumber">شماره قبلی
             </mat-checkbox>
             <mat-checkbox name="displayBillId" [(ngModel)]="importDynamic.displayBillId">نمایش شناسه

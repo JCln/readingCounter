@@ -15,11 +15,14 @@
                 {{col.header}}
             </th>
             <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
+
         <tr>
             <th *ngFor="let col of columns">
                 <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
             </th>
+            <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
         </tr>
     </ng-template>
@@ -35,7 +38,8 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td><i class="pi pi-download"></i></td>
+            <td><i class="p_icons pi pi-step-backward"></i></td>
+            <td><i class="p_icons pi pi-user-minus"></i></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>

@@ -33,9 +33,11 @@ li {
   font-size: $font_m;
   font-weight: 600;
 }
+
 ._name {
   color: $blue_d;
 }
+
 ._date {
   width: 9rem;
 }
@@ -46,6 +48,13 @@ li {
   margin-right: .5rem;
   padding: .5rem;
   cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: $blue_ll;
+    border-radius: $border_50;
+  }
 
   @media (min-width: 700px) {
     margin-right: 12rem;
