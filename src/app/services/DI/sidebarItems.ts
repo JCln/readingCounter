@@ -5,8 +5,6 @@ export const sidebarItemsTest = {
             route: '', title: ' مدیریت قرائت', logicalOrder: 1, cssClass: 'fab fa-deviantart', isOpen: false, subItems: [
                 { route: '/wr/m/kar', title: 'karbari', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 1 },
                 { route: '/wr/m/cs', title: 'counterState', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: '/wr/mu/all', title: 'agGrid', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: '/wr/mu/add', title: 'add Contact mg', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/ms', title: 'مدیریت سرور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/qr', title: 'قطر', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/cr', title: 'گزارش قرائت', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
@@ -30,6 +28,12 @@ export const sidebarItemsTest = {
                 { route: '/wr/m/mr', title: 'مدیریت منطقه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/m/mz', title: 'مدیریت ناحیه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/m/mzd', title: 'مدیریت محدوده', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
+            ]
+        },
+        {
+            route: '', title: 'مدیریت کاربران', logicalOrder: 1, cssClass: 'fab fa-deviantart', isOpen: false, subItems: [
+                { route: '/wr/mu/all', title: 'agGrid', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/mu/add', title: 'add Contact mg', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 1 }    
             ]
         },
         {
