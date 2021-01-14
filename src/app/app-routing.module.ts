@@ -14,7 +14,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: '', component: LayoutComponent, children: [
+    path: '', component: LayoutComponent, children: [ // canActivate: [GuardService],
       { path: 'wr', loadChildren: () => import('./frame-work/frame-work.module').then(fr => fr.FrameWorkModule) }
     ]
   },

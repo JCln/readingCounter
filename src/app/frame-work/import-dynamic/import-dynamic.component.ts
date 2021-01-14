@@ -55,7 +55,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   readingConfigDefault: string[] = [];
-  userCounterReader: any;
+  userCounterReader: IDictionaryManager[] = [];
   canShowEditButton: boolean = false;
   zoneDictionary: IZoneManager[] = [];
   dataSource: any;
@@ -145,30 +145,38 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   //     return;
   //   this.canShowEditButton = true;
   // }
-  private insertCounterReaderId = (cri: string) => {
-    this.importDynamic.counterReaderId = cri;
-  }
   verificationACounterReaderId = async () => {
     if (!this.importDynamic.zoneId || !this.zoneDictionary)
       return;
     this.readingConfigDefault = await this.getReadingConfigDefaults();
-    if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault))
+    if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault)) {
+      this.readingConfigDefault = [];
       return;
+    }
     this.userCounterReader = await this.getUserCounterReaders();
-    if (!this.importDynamicService.validationInvalid(this.userCounterReader))
+    if (!this.importDynamicService.validationInvalid(this.userCounterReader)) {
+      this.userCounterReader = [];
       return;
+    }
     this.insertReadingConfigDefaults(this.readingConfigDefault);
-    this.insertCounterReaderId(this.userCounterReader);
   }
   verificationReadingPeriod = async () => {
-    if (!this.importDynamic.zoneId || !this.zoneDictionary || !this.kindId)
+    if (!this.importDynamic.zoneId || !this.zoneDictionary || !this.kindId) {
+      this.readingPeriodDictionary = [];
       return;
+    }
     this.readingPeriodDictionary = await this.getReadingPeriod();
+    this.importDynamicService.validationReadingPeriod(this.readingPeriodDictionary);
+
   }
 
   classWrapper = async () => {
     this.readingPeriodKindsDictionary = await this.getReadingPeriodsKindDictionary();
+    if (!this.importDynamicService.validationPeriodKind(this.readingPeriodKindsDictionary))
+      this.readingPeriodKindsDictionary = [];
     this.zoneDictionary = await this.getZoneDictionary();
+    if (!this.importDynamicService.validationZoneDictionary(this.zoneDictionary))
+      this.zoneDictionary = [];
   }
   ngOnInit() {
     this.classWrapper();

@@ -54,21 +54,42 @@ export class ImportDynamicService {
       return false;
     }
     if (!this.validationOnNull(this.importDynamicValue.counterReaderId)) {
-      this.snackWrapperService.openSnackBar('یک قرائت خوان انتخاب نمایید', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('یک مامور قرائت انتخاب نمایید', 3000, 'snack_danger');
       return false;
     }
     return true;
   }
   validationInvalid = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('قرائت خوانی در این ناحیه انتخاب نشده است', 6000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('مامور قرائتی در این ناحیه انتخاب نشده است', 6000, 'snack_danger');
+      return false;
+    }
+    return true;
+  }
+  validationReadingPeriod = (val: any): boolean => {
+    if (!this.validationOnNull(val)) {
+      this.snackWrapperService.openSnackBar('مدت دوره‌ای پیدا نشد', 6000, 'snack_warn');
       return false;
     }
     return true;
   }
   validationReadingConfigDefault = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('تنظیمات قرائت پیشفرضی دریافت نشده است و یا وجود ندارد', 6000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('تنظیمات قرائت پیشفرضی وجود ندارد', 6000, 'snack_danger');
+      return false;
+    }
+    return true;
+  }
+  validationPeriodKind = (val: any): boolean => {
+    if (!this.validationOnNull(val)) {
+      this.snackWrapperService.openSnackBar('نوع دوره ای وجود ندارد', 6000, 'snack_danger');
+      return false;
+    }
+    return true;
+  }
+  validationZoneDictionary = (val: any): boolean => {
+    if (!this.validationOnNull(val)) {
+      this.snackWrapperService.openSnackBar('ناحیه ای تعریف نشده است', 6000, 'snack_danger');
       return false;
     }
     return true;

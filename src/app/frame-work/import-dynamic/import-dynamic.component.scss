@@ -37,8 +37,12 @@ section.content {
 }
 
 ._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   color: $blue_d;
+  text-align: center;
 }
 
 .btn_1 {
@@ -51,6 +55,11 @@ footer {
 }
 
 ::ng-deep {
+
+  .mat-select {
+    text-align: center;
+  }
+
   .mat-select-value {
     font-family: $font_family;
     font-size: $font_s;
@@ -98,4 +107,23 @@ footer {
 
 [hidden] {
   display: none;
+}
+
+.this {
+  border: 1px solid $blue_l;
+  animation: pulse-new-button 500ms;
+}
+
+@keyframes pulse-new-button {
+  0% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: 0px 0px 3px 0px $blue_l;
+  }
+
+  100% {
+    box-shadow: 0px 0px 5px 1px $blue_l;
+  }
 }

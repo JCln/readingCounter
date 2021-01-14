@@ -13,7 +13,7 @@
 
         <section class="content">
 
-            <div class="input_2">
+            <div class="input_2" [hidden]="!zoneDictionary.length">
                 <div class="_key">ناحیه :</div>
                 <mat-select [(ngModel)]="importDynamic.zoneId" name="zoneId">
                     <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
@@ -44,18 +44,9 @@
                     </app-date-jalali>
                 </div>
             </div>
-            <div class="input_2" [hidden]="!_showAlalHesabPercent">
-                <div class="_key">درصد علی الحساب :</div>
-                <input class="_value" type="number" name="alalHesabPercent"
-                    [(ngModel)]="importDynamic.alalHesabPercent">
-            </div>
-            <div class="input_2" [hidden]="!_showimagePercent">
-                <div class="_key">درصد تصویر :</div>
-                <input class="_value" type="number" name="imagePercent" [(ngModel)]="importDynamic.imagePercent">
-            </div>
 
             <!-- when zone id and kind id get -->
-            <div class="input_2" [hidden]="_isOrderByDate || !readingPeriodKindsDictionary">
+            <div class="input_2" [hidden]="_isOrderByDate || !readingPeriodKindsDictionary.length">
                 <div class="_key">نوع دوره قرائت :</div>
                 <mat-select [(ngModel)]="kindId" name="kindId">
                     <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
@@ -64,18 +55,30 @@
                     </mat-option>
                 </mat-select>
             </div>
-            <div class="input_2" [hidden]="!readingPeriodDictionary.length">
-                <div class="_key">مدت قرائت :</div>
-                <mat-select [(ngModel)]="importDynamic.readingPeriodId" name="readingPeriodId">
-                    <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+
+            <div class="input_2 this" [hidden]="!_showAlalHesabPercent">
+                <div class="_key">درصد علی الحساب :</div>
+                <input class="_value" type="number" name="alalHesabPercent"
+                    [(ngModel)]="importDynamic.alalHesabPercent">
+            </div>
+            <div class="input_2 this" [hidden]="!_showimagePercent">
+                <div class="_key">درصد تصویر :</div>
+                <input class="_value" type="number" name="imagePercent" [(ngModel)]="importDynamic.imagePercent">
+            </div>
+
+            <div class="input_2 this" *ngIf="userCounterReader.length">
+                <div class="_key">مامور قرائت :</div>
+                <mat-select [(ngModel)]="importDynamic.counterReaderId" name="counterReaderId">
+                    <mat-option *ngFor="let truefalse of userCounterReader" [value]="truefalse.id">
                         {{truefalse.title}}
                     </mat-option>
                 </mat-select>
             </div>
-            <div class="input_2" *ngIf="userCounterReader">
-                <div class="_key">مامور قرائت :</div>
-                <mat-select [(ngModel)]="importDynamic.counterReaderId" name="counterReaderId">
-                    <mat-option *ngFor="let truefalse of userCounterReader" [value]="truefalse.id">
+
+            <div class="input_2 this" [hidden]="!readingPeriodDictionary.length">
+                <div class="_key">مدت قرائت :</div>
+                <mat-select [(ngModel)]="importDynamic.readingPeriodId" name="readingPeriodId">
+                    <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                         {{truefalse.title}}
                     </mat-option>
                 </mat-select>

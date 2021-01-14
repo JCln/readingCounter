@@ -1,6 +1,6 @@
 
 export interface IDictionaryManager {
-    readonly id: number;
+    readonly id: number | string;
     title: string;
     isSelected: boolean;
 }
