@@ -39,7 +39,7 @@
                     {{dataSourceRES[col.field]}}
                 </ng-template>
             </td>
-            <td><i class="p_icons pi pi-fast-backward"></i></td>
+            <td (click)="rowToImported(dataSourceRES)"><i class="p_icons pi pi-fast-backward"></i></td>
             <td><i class="p_icons pi pi-folder-open"></i></td>
             <td><i class="p_icons pi pi-map-marker"></i></td>
         </tr>

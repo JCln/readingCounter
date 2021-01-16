@@ -36,6 +36,9 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  rowToImported = (row: ITracking) => {
+    this.trackingManagerService.migrateDataRowToImported(row.id);
+  }
   nullSavedSource = () => this.closeTabService.saveDataForTrackLoaded = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {

@@ -1,15 +1,30 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
+import { IResponses } from './../../../../Interfaces/iresponses';
 import { TrackingManagerService } from './../../../../services/tracking-manager.service';
 
 @Component({
   selector: 'app-imported',
   templateUrl: './imported.component.html',
-  styleUrls: ['./imported.component.scss']
+  styleUrls: ['./imported.component.scss'],
+  animations: [
+    trigger('rowExpansionTrigger', [
+      state('void', style({
+        transform: 'translateX(-10%)',
+        opacity: 0
+      })),
+      state('active', style({
+        transform: 'translateX(0)',
+        opacity: 1
+      })),
+      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+    ])
+  ]
 })
 export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
@@ -17,6 +32,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: ITracking[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
+  _selectedInnerColumns: any[];
 
   _firstPage: number = 0;
   _rowsNumberPage: number = 10;
@@ -52,6 +68,23 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForTrackImported = this.dataSource;
     }
   }
+  onRowEditInit(product: any) {
+    console.log(product);
+  }
+  onRowEditSave(rowData: any) {
+    this.trackingManagerService.postEditingTrack(rowData).subscribe((res: IResponses) => {
+      if (res) {
+        this.trackingManagerService.successSnackMessage(res.message);
+      }
+    });
+
+  }
+  onRowEditCancel(product: any, index: number) {
+    console.log(product + '   ' + index);
+
+    // this.products2[index] = this.clonedProducts[product.id];
+    // delete this.clonedProducts[product.id];
+  }
   next = () => this._firstPage = this._firstPage + this._rowsNumberPage;
   prev = () => this._firstPage = this._firstPage - this._rowsNumberPage;
   reset = () => this._firstPage = 0;
@@ -65,7 +98,6 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    console.log(this.customizeSelectedColumns());
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {

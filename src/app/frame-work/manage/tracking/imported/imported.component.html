@@ -1,6 +1,6 @@
 <p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecord} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl">
+    [filterDelay]="0" dir="rtl" dataKey="innerTable">
     [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
 
     <ng-template pTemplate="caption">
@@ -15,18 +15,20 @@
                 {{col.header}}
             </th>
             <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>            
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
                 <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>            
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns">
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-expanded="expanded" let-index="rowIndex">
         <tr>
             <td *ngFor="let col of columns">
                 <ng-container
@@ -38,18 +40,148 @@
                 </ng-template>
             </td>
             <td>
-                <i class="p_icons pi pi-user-edit"></i>
+                <i class="p_icons pi pi-user-edit" [pRowToggler]="dataSource"></i>
             </td>
             <td>
                 <i class="p_icons pi pi-user-minus"></i>
             </td>
+            <!-- <td>
+                <button type="button" pButton pRipple 
+                    [ngClass]="columns ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            </td> -->
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" let-columns>
+    <ng-template pTemplate="rowexpansion">
         <tr>
-            <td [attr.colspan]="columns.length">
-                موردی پیدا نشد
+
+
+
+            <td colspan="7">
+                <div>
+                    <p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="7"
+                        [rowsPerPageOptions]="[10,25,50]" dir="rtl" dataKey="innerTable" editMode="row">
+
+                        <!-- [globalFilterFields]="['alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif','counterReaderId']"
+                        [filterDelay]="0" -->
+
+                        <ng-template pTemplate="header" let-columns>
+
+        <tr>
+            <th pSortableColumn="imagePercent">درصد تصویر
+                <p-sortIcon field="imagePercent"></p-sortIcon>
+            </th>
+            <th pSortableColumn="alalHesabPercent">درصد علی الحساب
+                <p-sortIcon field="alalHesabPercent"></p-sortIcon>
+            </th>
+            <th pSortableColumn="hasPreNumber">شماره پیشین
+                <p-sortIcon field="hasPreNumber"></p-sortIcon>
+            </th>
+            <th pSortableColumn="displayBillId">نمایش شناسه قبض
+                <p-sortIcon field="displayBillId"></p-sortIcon>
+            </th>
+            <th pSortableColumn="displayRadif">نمایش ردیف
+                <p-sortIcon field="displayRadif"></p-sortIcon>
+            </th>
+            <th pSortableColumn="counterReaderName">مامور قرائت پیشین
+                <p-sortIcon field="counterReaderName"></p-sortIcon>
+            </th>
+            <th style="width: 3rem"></th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSource let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="dataSource">
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.alalHesabPercent">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.alalHesabPercent}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.imagePercent">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.imagePercent}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.hasPreNumber">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.hasPreNumber}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.displayBillId">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.displayBillId}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.displayRadif">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.displayRadif}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.counterReaderName">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.counterReaderName}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td>
+                <button *ngIf="!editing" type="button" pInitEditableRow (click)="onRowEditInit(dataSource[ri])">
+                    <i class="pi pi-pencil"></i>
+                </button>
+                <button *ngIf="editing" type="button" pSaveEditableRow (click)="onRowEditSave(dataSource)"
+                    class=" p-button-success p-mr-2">
+                    <i class="pi pi-check"></i>
+                </button>
+                <button *ngIf="editing" type="button" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
+                    class=" p-button-danger">
+                    <i class="pi pi-times"></i>
+                </button>
             </td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td>موردی پیدا نشد</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+</td>
+</tr>
+</ng-template>
+
+<ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+        <td [attr.colspan]="columns.length">
+            موردی پیدا نشد
+        </td>
+    </tr>
+</ng-template>
 </p-table>

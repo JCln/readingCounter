@@ -26,7 +26,7 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
     private trackingManagerService: TrackingManagerService
   ) {
   }
-
+  rowToOffloaded = (row: ITracking) => this.trackingManagerService.migrateDataRowToOffloaded(row.id);
   getDataSource = (): Promise<ITracking[]> => {
     return new Promise((resolve) => {
       this.trackingManagerService.getFinishedDataSource().subscribe(res => {

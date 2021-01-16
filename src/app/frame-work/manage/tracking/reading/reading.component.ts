@@ -27,6 +27,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
+  rowToImported = (row: ITracking) => this.trackingManagerService.migrateDataRowToImported(row.id);
   getDataSource = (): Promise<ITracking[]> => {
     return new Promise((resolve) => {
       this.trackingManagerService.getReadingDataSource().subscribe(res => {

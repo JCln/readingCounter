@@ -61,6 +61,18 @@ export class InterfaceManagerService {
   getTrackFinished = (): Observable<any> => {
     return this.mainService.GET('V1/Tracking/Finished');
   }
+  postTrackingEdit = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tracking/Edit', body);
+  }
+  toImported = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tracking/ToImported', body);
+  }
+  toReading = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1​/Tracking​/ToReading', body);
+  }
+  toOffloaded = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1​/Tracking​/ToOffloaded', body);
+  }
   // 
 
   // reading period manager

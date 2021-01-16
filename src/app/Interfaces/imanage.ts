@@ -82,5 +82,16 @@ export interface ITracking {
     imagePercent: number,
     hasPreNumber: boolean,
     displayBillId: boolean,
-    displayRadif: boolean
+    displayRadif: boolean,
+    counterReaderId: string,
+    counterReaderName: string
+}
+export interface IEditTracking {
+    id: string,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    counterReaderId: string;
 }

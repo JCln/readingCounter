@@ -38,7 +38,7 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td><i class="p_icons pi pi-step-backward"></i></td>
+            <td (click)="rowToImported(dataSource)"><i class="p_icons pi pi-step-backward"></i></td>
             <td><i class="p_icons pi pi-user-minus"></i></td>
         </tr>
     </ng-template>

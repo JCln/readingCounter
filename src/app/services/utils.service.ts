@@ -69,9 +69,19 @@ export class UtilsService {
     return true;
   }
 
+  // snack bar
+  snackBarMessageSuccess = (message: string) => {
+    this.snackWrapperService.openSnackBar(message, 4000, 'snack_success');
+  }
+  snackBarMessageFailed = (message: string) => {
+    console.log('nothing yet');
+    
+  }
+
   // routing
   routeTo = (router: string) => {
     this.router.navigateByUrl(router);
   }
+  // 
 
 }
