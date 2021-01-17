@@ -5,8 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TableModule } from 'primeng/table';
-
-
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [],
@@ -16,7 +15,8 @@ import { TableModule } from 'primeng/table';
     TableModule,
     MatCheckboxModule,
     MultiSelectModule,
-    DropdownModule
+    DropdownModule,
+    TooltipModule
   ],
   exports: [
     CommonModule,
@@ -24,7 +24,8 @@ import { TableModule } from 'primeng/table';
     TableModule,
     MatCheckboxModule,
     MultiSelectModule,
-    DropdownModule
+    DropdownModule,
+    TooltipModule
   ]
 })
 export class SharedPrimeNgModule {
