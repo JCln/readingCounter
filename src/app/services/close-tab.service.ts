@@ -70,6 +70,8 @@ export class CloseTabService {
   saveDataForTrackOffloaded: any;
 
   saveDataForTrackFinished: any;
+
+  saveDataForFollowUp: any;
   // 
 
   // close config and remove data for specific page(component)
@@ -162,6 +164,9 @@ export class CloseTabService {
         break;
       case '/wr/track/finished':
         this.saveDataForTrackFinished = '';
+        break;
+      case '/wr/track/fwu':
+        this.saveDataForFollowUp = '';
         break;
       case '/wr/privacy':
         break;
