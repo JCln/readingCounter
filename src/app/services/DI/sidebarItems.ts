@@ -38,7 +38,7 @@ export const sidebarItemsTest = {
         },
         {
             route: '', title: 'tracking', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
-                { route: '/wr/m/track/fwu', title: 'followUP', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/track/fwu', title: 'پیگیری درخواست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/track/imported', title: 'imported', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/track/loaded', title: 'loaded', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/track/reading', title: 'reading', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },

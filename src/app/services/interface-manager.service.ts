@@ -64,6 +64,9 @@ export class InterfaceManagerService {
   postTrackingEdit = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tracking/Edit', body);
   }
+  getTrackFollowUp = (trackNumber: number): Observable<any> => {
+    return this.mainService.GET(`V1/Tracking/FollowUp/?trackNumber=${trackNumber}`);
+  }
   toImported = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tracking/ToImported', body);
   }
@@ -80,10 +83,10 @@ export class InterfaceManagerService {
     return this.mainService.GET('V1/readingPeriod/All');
   }
   getReadingPeriodManagerDictionary = (zoneId: number): Observable<any> => {
-    return this.mainService.GET(`V1/readingPeriod/Dictionary/${zoneId}`);
+    return this.mainService.GET(`V1 / readingPeriod / Dictionary / ${zoneId} `);
   }
   getReadingPeriodManagerDictionaryByZoneIdAndKindId = (zoneId: number, kindId: number): Observable<any> => {
-    return this.mainService.GET(`V1/readingPeriod/Dictionary/${zoneId}/${kindId}`);
+    return this.mainService.GET(`V1 / readingPeriod / Dictionary / ${zoneId} /${kindId}`);
   }
   editReadingPeriodManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/readingPeriod/Edit', body);

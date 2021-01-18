@@ -1,0 +1,43 @@
+@import '../../../../../assets/variable.scss';
+@import '../../../../../assets/button.scss';
+@import '../../../../../assets/input.scss';
+@import '../../shared-manage.scss';
+
+main {
+  width: 25rem;
+  margin: 2rem auto;
+}
+
+.contain {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 14rem));
+}
+
+.content {
+  background: $gray_l;
+  box-shadow: 1px 1px 8px 4px $gray_d;
+  text-align: center;
+  padding: $font_2 0;
+  display: grid;
+  justify-content: center;
+  border-radius: $border_s;
+  min-height: 15rem;
+}
+
+._desc {
+  display: grid;
+  margin: auto;
+  border-radius: $border_s;
+}
+
+input {
+  color: $gray_96;
+  margin: 0 auto;
+  box-shadow: 1px 1px 8px 1px $gray_d;
+  text-align: center;
+}
+
+.btn_1 {
+  color: $white;
+  margin-top: 1rem;
+}
