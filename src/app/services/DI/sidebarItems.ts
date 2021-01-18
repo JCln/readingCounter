@@ -37,6 +37,13 @@ export const sidebarItemsTest = {
             ]
         },
         {
+            route: '', title: 'مدیریت لیست', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
+                { route: '/wr/m/l/pd', title: 'pd', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/l/pdxy', title: 'pdxy', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/l/all', title: 'all', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 }                
+            ]
+        },
+        {
             route: '', title: 'tracking', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
                 { route: '/wr/m/track/imported', title: 'imported', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/track/loaded', title: 'loaded', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },

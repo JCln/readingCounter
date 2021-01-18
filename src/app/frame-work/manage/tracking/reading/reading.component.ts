@@ -4,6 +4,8 @@ import { ITracking } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
+import { UtilsService } from 'src/app/services/utils.service';
+
 
 @Component({
   selector: 'app-reading',
@@ -23,10 +25,14 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService
+    private trackingManagerService: TrackingManagerService,
+    private utilsService: UtilsService
   ) {
   }
 
+  routeToLMpayDay = (row: ITracking) => {
+    this.utilsService.routeToByParams('../../l/pd', row.trackNumber);
+  }
   rowToImported = (row: ITracking) => this.trackingManagerService.migrateDataRowToImported(row.id);
   getDataSource = (): Promise<ITracking[]> => {
     return new Promise((resolve) => {
@@ -37,19 +43,19 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  nullSavedSource = () => this.closeTabService.saveDataForAllContacts = null;
+  nullSavedSource = () => this.closeTabService.saveDataForTrackReading = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForAllContacts) {
-      this.dataSource = this.closeTabService.saveDataForAllContacts;
+    if (this.closeTabService.saveDataForTrackReading) {
+      this.dataSource = this.closeTabService.saveDataForTrackReading;
     }
     else {
       this.dataSource = await this.getDataSource();
       console.log(this.dataSource);
 
-      this.closeTabService.saveDataForAllContacts = this.dataSource;
+      this.closeTabService.saveDataForTrackReading = this.dataSource;
     }
   }
   next = () => this._firstPage = this._firstPage + this._rowsNumberPage;

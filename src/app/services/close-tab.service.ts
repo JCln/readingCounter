@@ -71,6 +71,11 @@ export class CloseTabService {
 
   saveDataForTrackFinished: any;
   // 
+  // list manager
+  saveDataForLMPD: any;
+  saveDataForLMPDXY: any;
+  saveDataForLMAll: any;
+  // 
 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
@@ -164,6 +169,15 @@ export class CloseTabService {
         this.saveDataForTrackFinished = '';
         break;
       case '/wr/privacy':
+        break;
+      case '/wr/m/l/pd':
+        this.saveDataForLMPD = '';
+        break;
+      case '/wr/m/l/pdxy':
+        this.saveDataForLMPDXY = '';
+        break;
+      case '/wr/m/l/all':
+        this.saveDataForLMAll = '';
         break;
 
     }

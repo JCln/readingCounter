@@ -75,6 +75,19 @@ export class InterfaceManagerService {
   }
   // 
 
+  // List Manager 
+
+  getLMAll = (trackingId: number): Observable<any> => {
+    return this.mainService.GET(`V1/List/OffLoaded/All/${trackingId}`);
+  }
+  getLMPD = (trackNumber: string): Observable<any> => {
+    return this.mainService.GET(`V1/List/OffLoaded/PerDay/${trackNumber}`);
+  }
+  getLMPDXY = (trackNumber: number, day: string): Observable<any> => {
+    return this.mainService.GET(`V1/List/OffLoaded/PerDayXY/${trackNumber}/${day}`);
+  }
+  // 
+
   // reading period manager
   getReadingPeriodManager = (): Observable<any> => {
     return this.mainService.GET('V1/readingPeriod/All');

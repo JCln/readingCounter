@@ -16,7 +16,7 @@ export class UtilsService {
     return !value || 0 === value.length;
   }
   isNull(value: any): boolean {
-    return typeof value === 'undefined' || !value || value.length === 0;
+    return typeof value === 'undefined' || !value || value.length === 0 || value === null;
   }
   isNullWithText = (value: string | number, text: string): boolean => {
     if (typeof value === 'undefined' || !value || value.toString().length === 0) {
@@ -75,13 +75,19 @@ export class UtilsService {
   }
   snackBarMessageFailed = (message: string) => {
     console.log('nothing yet');
-    
+
   }
 
   // routing
-  routeTo = (router: string) => {
+  routeToByUrl = (router: string) => {
     this.router.navigateByUrl(router);
   }
+  routeTo = (router: string) => {
+    this.router.navigate([router]);
+  }
+  routeToByParams = (router: string, params: any) => {
+    this.router.navigate([router, params]);
+  }  
   // 
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IImportDynamic } from '../Interfaces/iimport-dynamic';
+import { IImportDynamic, IImportDynamicDefault } from '../Interfaces/iimport-dynamic';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
 
@@ -36,10 +36,10 @@ export class ImportDynamicService {
   }
   validationOnNull = (val: any): boolean => {
     if (this.utilsService.isNull(val))
-      return false
+      return false;
     return true;
   }
-  checkVertification = (val: IImportDynamic): boolean => {
+  checkVertification = (val: IImportDynamicDefault): boolean => {
     this.importDynamicValue = val;
     if (!this.checkLengthFromToEshterak(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
       this.snackWrapperService.openSnackBar('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد', 3000, 'snack_danger');
@@ -51,6 +51,10 @@ export class ImportDynamicService {
     }
     if (!this.persentOfalalHesab()) {
       this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', 3000, 'snack_danger');
+      return false;
+    }
+    if (!this.validationOnNull(val.readingPeriodId)) {
+      this.snackWrapperService.openSnackBar('مدت دوره ای ایجاد و سپس امتحان نمایید', 3000, 'snack_danger');
       return false;
     }
     if (!this.validationOnNull(this.importDynamicValue.counterReaderId)) {

@@ -57,7 +57,7 @@ export class EditContactManagerService {
     this.interfaceManagerService.postUserContactManager(vals).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, 5000, 'snack_success');
-        this.utilsService.routeTo('/wr/mu/all');
+        this.utilsService.routeToByUrl('/wr/mu/all');
       }
     });
   }

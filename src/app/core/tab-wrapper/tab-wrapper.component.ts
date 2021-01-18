@@ -41,7 +41,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     return found;
   }
   doSth = () => {
-    if (!this.router.url.includes('/wr/mu/edit/')) {
+    if (!this.router.url.includes('/wr/mu/edit/') || !this.router.url.includes('/wr/m/l/')) {
       return;
     }
     const completeRoutePart = this.router.url.split('/').pop();

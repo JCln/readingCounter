@@ -23,23 +23,21 @@
                 <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSourceRES let-columns="columns">
+    <ng-template pTemplate="body" let-dataSource let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
                 <ng-container
-                    *ngIf="dataSourceRES[col.field] === true || dataSourceRES[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSourceRES[col.field]"></mat-checkbox>
+                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    {{dataSourceRES[col.field]}}
+                    {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="rowToImported(dataSourceRES)"><i class="p_icons pi pi-fast-backward"></i></td>
-            <td (click)="routeToLMpayDay(dataSourceRES)"><i class="p_icons pi pi-folder-open"></i></td>
+            <td><i class="p_icons pi pi-download"></i></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
