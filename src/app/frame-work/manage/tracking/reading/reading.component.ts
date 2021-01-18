@@ -30,8 +30,11 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  routeToLMpayDay = (row: ITracking) => {
-    this.utilsService.routeToByParams('../../l/pd', row.trackNumber);
+  routeToLMPayDay = (row: ITracking) => {
+    this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
+  }
+  routeToLMAll = (row: ITracking) => {
+    this.utilsService.routeToByParams('wr/m/l/all', row.id);
   }
   rowToImported = (row: ITracking) => this.trackingManagerService.migrateDataRowToImported(row.id);
   getDataSource = (): Promise<ITracking[]> => {

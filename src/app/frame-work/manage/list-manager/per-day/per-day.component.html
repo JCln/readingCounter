@@ -1,6 +1,6 @@
-<p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecord} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl">
+<p-table [columns]="_selectedColumns" [value]="offLoadPerDayHistory" [paginator]="true" [rows]="20"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecord} مورد"
+    [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl">
     [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
 
     <ng-template pTemplate="caption">
@@ -27,19 +27,19 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource="dataSource.offLoadPerDayHistory" let-columns="columns">
+    <ng-template pTemplate="body" let-dataSource let-offLoadPerDayHistory let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
                 <ng-container
-                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                    *ngIf="offLoadPerDayHistory[col.field] === true || offLoadPerDayHistory[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="offLoadPerDayHistory[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    {{dataSource[col.field]}}
+                    {{offLoadPerDayHistory[col.field]}}
                 </ng-template>
             </td>
             <td><i class="p_icons pi pi-download"></i></td>
-            <td (click)="routeToLMPDXY(dataSource)"><i class="p_icons pi pi-map-marker"></i></td>
+            <td (click)="routeToLMPDXY(offLoadPerDayHistory, dataSource)"><i class="p_icons pi pi-map-marker"></i></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>

@@ -77,7 +77,7 @@ export class InterfaceManagerService {
 
   // List Manager 
 
-  getLMAll = (trackingId: number): Observable<any> => {
+  getLMAll = (trackingId: string): Observable<any> => {
     return this.mainService.GET(`V1/List/OffLoaded/All/${trackingId}`);
   }
   getLMPD = (trackNumber: string): Observable<any> => {

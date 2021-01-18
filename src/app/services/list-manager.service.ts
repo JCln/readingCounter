@@ -104,7 +104,7 @@ export class ListManagerService {
   ) { }
 
   
-  getLMAll = (trackingId: number): Observable<any> => {
+  getLMAll = (trackingId: string): Observable<any> => {
     return this.interfaceManagerService.getLMAll(trackingId);
   }
   getLMPD = (trackNumber: string): Observable<any> => {

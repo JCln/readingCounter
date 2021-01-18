@@ -19,6 +19,7 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   dataSource: IListManagerPD;
+  offLoadPerDayHistory: any[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
@@ -31,9 +32,11 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  routeToLMPDXY = (row: IListManagerPD) => {
+  routeToLMPDXY = (row: any, col: any) => {
+    console.log(col);
     console.log(row);
-    console.log(row.trackNumber + '    ' + row.offLoadPerDayHistory[0].day);
+    console.log(row.day);
+    console.log(row.trackNumber + '    ' + row.day);
 
     // this.utilsService.routeToByParams('../../l/pdxy', { trackNumber: row.trackNumber, day: row.offLoadPerDayHistory[0].day });
   }
@@ -58,6 +61,7 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.getDataSource();
       this.closeTabService.saveDataForLMPD = this.dataSource;
     }
+    this.offLoadPerDayHistory = this.dataSource.offLoadPerDayHistory;
     console.log(this.dataSource);
   }
   customizeSelectedColumns = () => {

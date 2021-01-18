@@ -24,6 +24,7 @@
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
@@ -39,7 +40,8 @@
                 </ng-template>
             </td>
             <td (click)="rowToImported(dataSourceRES)"><i class="p_icons pi pi-fast-backward"></i></td>
-            <td (click)="routeToLMpayDay(dataSourceRES)"><i class="p_icons pi pi-folder-open"></i></td>
+            <td (click)="routeToLMPayDay(dataSourceRES)"><i class="p_icons pi pi-folder-open"></i></td>
+            <td (click)="routeToLMAll(dataSourceRES)"><i class="p_icons pi pi-folder-open"></i></td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
