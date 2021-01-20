@@ -72,37 +72,20 @@ export class ListManagerService {
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true },
       { field: 'readCount', header: 'تعداد قرائت', isSelected: true },
-      { field: 'maneCount', header: 'تعداد مانع', isSelected: true },
-      { field: 'manePercent', header: 'درصد مانع', isSelected: true },
-      { field: 'xarabFaqedCount', header: 'تعداد فاقد و خراب', isSelected: true },
-      { field: 'xarabFaqedPercent', header: 'درصد فاقد و خراب', isSelected: true },
+      { field: 'maneCount', header: 'تعداد مانع', isSelected: false },
+      { field: 'manePercent', header: 'درصد مانع', isSelected: false },
+      { field: 'xarabFaqedCount', header: 'تعداد فاقد و خراب', isSelected: false },
+      { field: 'xarabFaqedPercent', header: 'درصد فاقد و خراب', isSelected: false },
       { field: 'fromTime', header: 'از زمان', isSelected: true },
       { field: 'toTime', header: 'تا زمان', isSelected: true },
       { field: 'duration', header: 'مدت', isSelected: true },
       { field: 'distance', header: 'فاصله', isSelected: true },
     ];
   }
-  columnSelectedLMPerDayXY = () => {
-    return [
-      { field: 'x', header: 'X', isSelected: true },
-      { field: 'y', header: 'Y', isSelected: true },
-      { field: 'gisAccuracy', header: 'GIS', isSelected: true },
-      { field: 'firstName', header: 'نام', isSelected: false },
-      { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
-      { field: 'time', header: 'زمان', isSelected: true },
-      { field: 'day', header: 'روز', isSelected: true },
-      { field: 'eshterak', header: 'اشتراک', isSelected: true },
-      { field: 'radif', header: 'ردیف', isSelected: true },
-      { field: 'counterStateId', header: 'عنوان ناحیه', isSelected: true },
-      { field: 'counterStateTitle', header: 'عنوان ناحیه', isSelected: true },
-      { field: 'hasAlert', header: 'عنوان ناحیه', isSelected: true }
-    ];
-  }
-
+ 
   constructor(
     private interfaceManagerService: InterfaceManagerService
   ) { }
-
   
   getLMAll = (trackingId: string): Observable<any> => {
     return this.interfaceManagerService.getLMAll(trackingId);

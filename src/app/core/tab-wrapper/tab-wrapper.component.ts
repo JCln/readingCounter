@@ -1,13 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ISidebarItems, ITabs } from 'src/app/Interfaces/isidebar-items';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-
-import { CloseTabService } from './../../services/close-tab.service';
-import { UtilsService } from './../../services/utils.service';
-
-
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-tab-wrapper',
@@ -40,14 +37,33 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     })
     return found;
   }
+  getCurrentDynamicRoute = (route: string): string => {
+    if (this.router.url.includes(route))
+      return route;
+    return null;
+  }
   doSth = () => {
-    if (!this.router.url.includes('/wr/mu/edit/') || !this.router.url.includes('/wr/m/l/')) {
-      return;
+    let title: string = 'ویرایش'
+    let _dynamicRoute = this.getCurrentDynamicRoute('/wr/mu/edit/');
+    if (this.utilsService.isNull(_dynamicRoute)) {
+      _dynamicRoute = this.getCurrentDynamicRoute('/wr/m/l/pd/');
+      title = 'مامور';
+      if (this.utilsService.isNull(_dynamicRoute)) {
+        _dynamicRoute = this.getCurrentDynamicRoute('/wr/m/l/all/');
+        title = 'قرائت';
+        if (this.utilsService.isNull(_dynamicRoute)) {
+          return;
+        }
+      }
     }
     const completeRoutePart = this.router.url.split('/').pop();
     const lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
+    console.log(completeRoutePart);
+    console.log(lastUrlPart);
+
+
     const a = {
-      route: `/wr/mu/edit/${completeRoutePart}`, title: `ویرایش${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
+      route: `${_dynamicRoute}${completeRoutePart}`, title: `${title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };
     if (!this.DoesTabsHaveThisRouteNow())
       this.tabs.push(a);

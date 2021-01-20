@@ -1,3 +1,50 @@
+<section>
+
+    <h1 class="title">اطلاعات مکانی</h1>
+    <form #form="ngForm" class="content">
+        <div class="_desc">
+            <div class="input_2">
+                <div class="_key">شماره پیگیری :</div>
+                <input class="_value" name="trackNumber" [(ngModel)]="dataSource.trackNumber">
+            </div>
+            <div class="input_2">
+                <div class="_key">لیست :</div>
+                <input class="_value" name="listNumber" [(ngModel)]="dataSource.listNumber">
+            </div>
+            <div class="input_2">
+                <div class="_key">ماموران قرائت :</div>
+                <input class="_value" name="counterReaders" [(ngModel)]="dataSource.counterReaders">
+            </div>
+            <div class="input_2">
+                <div class="_key">از اشتراک :</div>
+                <input class="_value" name="fromEshterak" [(ngModel)]="dataSource.fromEshterak">
+            </div>
+            <div class="input_2">
+                <div class="_key">تا اشتراک :</div>
+                <input class="_value" name="toEshterak" [(ngModel)]="dataSource.toEshterak">
+            </div>
+            <div class="input_2">
+                <div class="_key">کل شمارش :</div>
+                <input class="_value" name="overalCount" [(ngModel)]="dataSource.overalCount">
+            </div>
+            <div class="input_2">
+                <div class="_key">تعداد قرائت :</div>
+                <input class="_value" name="readCount" [(ngModel)]="dataSource.readCount">
+            </div>
+            <div class="input_2">
+                <div class="_key">کل مسافت :</div>
+                <input class="_value" name="overalDistance" [(ngModel)]="dataSource.overalDistance">
+            </div>
+            <div class="input_2">
+                <div class="_key">کل زمان :</div>
+                <input class="_value" name="overalDuration" [(ngModel)]="dataSource.overalDuration">
+            </div>
+
+        </div>
+    </form>
+
+</section>
+
 <p-table [columns]="_selectedColumns" [value]="offLoadPerDayHistory" [paginator]="true" [rows]="20"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecord} مورد"
     [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl">
@@ -23,11 +70,10 @@
                 <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-offLoadPerDayHistory let-columns="columns">
+    <ng-template pTemplate="body" let-offLoadPerDayHistory let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
                 <ng-container
@@ -38,8 +84,12 @@
                     {{offLoadPerDayHistory[col.field]}}
                 </ng-template>
             </td>
-            <td><i class="p_icons pi pi-download"></i></td>
-            <td (click)="routeToLMPDXY(offLoadPerDayHistory, dataSource)"><i class="p_icons pi pi-map-marker"></i></td>
+            <td (click)="routeToLMPDXY(offLoadPerDayHistory.day)">
+                <i class="p_icons pi pi-map-marker"></i>
+            </td>
+            <!-- <td [routerLink]="['wr/m/l/pdxy']"
+                [queryParams]="{trackNumber: dataSource.trackNumber, day: offLoadPerDayHistory.day}"><i
+                    class="p_icons pi pi-map-marker"></i></td> -->
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>

@@ -33,14 +33,13 @@ export const sidebarItemsTest = {
         {
             route: '', title: 'مدیریت کاربران', logicalOrder: 1, cssClass: 'fab fa-deviantart', isOpen: false, subItems: [
                 { route: '/wr/mu/all', title: 'agGrid', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: '/wr/mu/add', title: 'add Contact mg', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 1 }    
+                { route: '/wr/mu/add', title: 'add Contact mg', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 1 }
             ]
         },
         {
             route: '', title: 'مدیریت لیست', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
                 { route: '/wr/m/l/pd', title: 'pd', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: '/wr/m/l/pdxy', title: 'pdxy', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: '/wr/m/l/all', title: 'all', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 }                
+                { route: '/wr/m/l/all', title: 'all', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 }
             ]
         },
         {

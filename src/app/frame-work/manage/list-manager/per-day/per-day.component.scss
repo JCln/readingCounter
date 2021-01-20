@@ -1,1 +1,40 @@
+@import '../../../../../assets/variable.scss';
+@import '../../../../../assets/input.scss';
 @import '../../../../../assets/primeNG';
+
+
+.content {
+  background: $gray_l;
+  box-shadow: 1px 1px 8px 4px $gray_d;
+  text-align: center;
+  padding: $font_2 $font_05;
+  justify-content: space-around;
+  border-radius: $border_s;
+  min-height: 25rem;
+}
+
+._desc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 17rem));
+  direction: rtl;
+  gap: $font_05;
+  padding: 1rem 0;
+  border-radius: $border_s;
+}
+
+._value {
+  border: 0;
+}
+
+.title {
+  color: $blue_l;
+  text-align: center;
+  margin: $font_xs $font_05;
+  font-size: 1.6rem;
+}
+
+input {
+  color: $gray_96;
+  margin: 0 auto;
+  box-shadow: 1px 1px 8px 1px $gray_d;
+}

@@ -5,8 +5,7 @@ import { IListManagerPD } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ListManagerService } from 'src/app/services/list-manager.service';
-
-import { UtilsService } from './../../../../services/utils.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
@@ -32,13 +31,12 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  routeToLMPDXY = (row: any, col: any) => {
-    console.log(col);
-    console.log(row);
-    console.log(row.day);
-    console.log(row.trackNumber + '    ' + row.day);
-
-    // this.utilsService.routeToByParams('../../l/pdxy', { trackNumber: row.trackNumber, day: row.offLoadPerDayHistory[0].day });
+  routeToLMPDXY = (day: string) => {
+    // this.listManagerService.getLMPDXY(this.dataSource.trackNumber, day).subscribe(res => {
+    //   if (res)
+    //     console.log(res);
+    // })
+    this.utilsService.routeToByParams('wr', { trackNumber: this.dataSource.trackNumber, day: day });
   }
   getDataSource = (): Promise<IListManagerPD> => {
     return new Promise((resolve) => {
@@ -54,13 +52,7 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForLMPD) {
-      this.dataSource = this.closeTabService.saveDataForLMPD;
-    }
-    else {
-      this.dataSource = await this.getDataSource();
-      this.closeTabService.saveDataForLMPD = this.dataSource;
-    }
+    this.dataSource = await this.getDataSource();
     this.offLoadPerDayHistory = this.dataSource.offLoadPerDayHistory;
     console.log(this.dataSource);
   }
@@ -72,9 +64,6 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.listManagerService.columnSelectedLMPerDay();
-    console.log(this.customizeSelectedColumns());
-
-
     this._selectedColumns = this.customizeSelectedColumns();
   }
   getRouteParams = () => {

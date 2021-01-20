@@ -43,9 +43,7 @@ export class MainService {
     );
   }
   POSTBODY = (URL: string, body: object): Observable<any> => {
-    return this.http.post(environment.API_URL + '/' + URL, body).pipe(
-      retry(1)
-    );
+    return this.http.post(environment.API_URL + '/' + URL, body);
   }
   PUT = (URL: string, body: object): any => {
   }

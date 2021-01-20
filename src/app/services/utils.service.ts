@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 @Injectable({
@@ -9,6 +9,7 @@ export class UtilsService {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private snackWrapperService: SnackWrapperService
   ) { }
 
@@ -86,8 +87,8 @@ export class UtilsService {
     this.router.navigate([router]);
   }
   routeToByParams = (router: string, params: any) => {
-    this.router.navigate([router, params]);
-  }  
+    this.router.navigate([router, params], { relativeTo: this.route.parent });
+  }
   // 
 
 }

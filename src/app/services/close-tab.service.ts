@@ -73,7 +73,6 @@ export class CloseTabService {
   // 
   // list manager
   saveDataForLMPD: any;
-  saveDataForLMPDXY: any;
   saveDataForLMAll: any;
   // 
 
@@ -172,9 +171,6 @@ export class CloseTabService {
         break;
       case '/wr/m/l/pd':
         this.saveDataForLMPD = '';
-        break;
-      case '/wr/m/l/pdxy':
-        this.saveDataForLMPDXY = '';
         break;
       case '/wr/m/l/all':
         this.saveDataForLMAll = '';

@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerAll } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -11,7 +12,7 @@ import { ListManagerService } from 'src/app/services/list-manager.service';
   styleUrls: ['./all.component.scss']
 })
 export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() trackId: number;
+  trackId: string;
   subscription: Subscription[] = [];
 
   dataSource: IListManagerAll[] = [];
@@ -19,6 +20,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedColumns: any[];
 
   constructor(
+    private route: ActivatedRoute,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private listManagerService: ListManagerService
@@ -39,15 +41,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForLMAll) {
-      this.dataSource = this.closeTabService.saveDataForLMAll;
-    }
-    else {
-      this.dataSource = await this.getDataSource();
-      console.log(this.dataSource);
-
-      this.closeTabService.saveDataForLMAll = this.dataSource;
-    }
+    this.dataSource = await this.getDataSource();    
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -62,7 +56,11 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this._selectedColumns = this.customizeSelectedColumns();
   }
+  getRouteParams = () => {
+    this.trackId = this.route.snapshot.paramMap.get('trackingId');
+  }
   ngOnInit(): void {
+    this.getRouteParams();
     this.classWrapper();
     this.insertSelectedColumns();
   }
