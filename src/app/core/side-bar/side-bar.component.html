@@ -1,5 +1,5 @@
 <ul class="ul" [hidden]="sid_isSmall || smallScreen">
-    <li *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)">
+    <li *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)" routerLinkActive="active">
         <a class="btn">
             <div class="ul_items">
                 <i class="{{item.cssClass}} icons"></i>
@@ -20,7 +20,7 @@
 
 <nav>
     <ul class="ul_2" [hidden]="!sid_isSmall">
-        <li class="li_2" *ngFor="let item of currentRoute; index as i">
+        <li class="li_2" *ngFor="let item of currentRoute; index as i" routerLinkActive="active_2">
             <div class="btn_2">
                 <div class="ul_items_2">
                     <i class="{{item.cssClass}} icons"></i>

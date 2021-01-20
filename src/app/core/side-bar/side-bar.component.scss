@@ -31,6 +31,7 @@ ul::-webkit-scrollbar {
   background: $gray_e3;
   margin-bottom: $font_05;
   padding: $font_05 0 $font_05 $font_05;
+  border: 1px solid;
 }
 
 .ul li {
@@ -55,18 +56,22 @@ ul::-webkit-scrollbar {
     .fa-arrow-circle-down {
       transform: rotate(0);
       transition: transform ease-in-out 150ms;
-      color: $blue_l;
+      color: $blue_d;
     }
   }
 
 
   &.active {
-    background: $gray_e3;
-    border: $font_05 solid $pink;
+    border: 2px solid $blue_c;
 
-    .fa-arrow-circle-down {
-      transform: rotate(180deg);
-      color: $pink;
+    .btn .ul_items .on_show .fa {
+      transform: rotate(180deg) !important;
+      color: $blue_c;
+    }
+
+    .on_show,
+    .icons {
+      color: $blue_c;
     }
 
   }
@@ -74,7 +79,8 @@ ul::-webkit-scrollbar {
 
 .sub_item_1,
 .sub_item_2 {
-  background: $white;
+  background: #e9ecef;
+  border: 1px solid;
   padding: .3rem 0.87rem;
   margin: 0.4rem 0.2rem;
   text-align: right;
@@ -89,7 +95,21 @@ ul::-webkit-scrollbar {
   outline: none;
 
   &:hover {
-    background: $gray_l;
+    background: linear-gradient(to left, $blue_c, rgba(255, 0, 0, 0));
+  }
+}
+
+.active {
+  background: linear-gradient(to left, rgba(255, 0, 0, 0), $blue_c);
+}
+
+.active_2 {
+  .btn_2 {
+    border: 2px solid $blue_c;
+  }
+
+  .icons {
+    color: $blue_c;
   }
 }
 
@@ -102,7 +122,7 @@ ul::-webkit-scrollbar {
 .ul::after {
   content: '';
   position: absolute;
-  background: $gray_dr;
+  background: #e9ecef;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
   bottom: 0;
@@ -141,10 +161,15 @@ ul::-webkit-scrollbar {
   background: $gray_e3;
   margin-bottom: $font_05;
   padding: $font_05 0 $font_05 $font_05;
+  border: 1px solid;
 }
 
 .li_2 {
   position: relative;
+
+  h3 {
+    color: $blue_d;
+  }
 
   &:hover {
     ._show {
@@ -182,6 +207,7 @@ i.icons {
   h3 {
     font-size: $font_m;
     font-weight: 600;
+    color: $blue_dr;
   }
 
   & a {

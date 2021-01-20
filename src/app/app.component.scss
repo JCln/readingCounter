@@ -3,7 +3,7 @@
 .polygon::after {
   content: '';
   position: fixed;
-  background: $blue_d;
+  background: url('../assets/imgs/framework/bbd.jpg') #365475;
   clip-path: polygon(0 0, calc(100% - 20vw) 0%, calc(100% - 70vw) 100%, 0 100%);
   top: 0;
   bottom: 0;
@@ -15,7 +15,7 @@
 .polygon::before {
   content: '';
   position: fixed;
-  background: $gray_l;
+  background: url('../assets/imgs/framework/bb.jpg') $gray_l;
   clip-path: polygon(calc(100% - 20vw) 0, 100% 0, 100% 100%, calc(100% - 70vw) 100%);
   top: 0;
   bottom: 0;
