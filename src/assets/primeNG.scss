@@ -1,8 +1,10 @@
+@import '../assets/variable.scss';
+
 :host ::ng-deep {
 
   .p-datatable table {
     font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: 1.2rem;
+    font-size: $font_s;
   }
 
   tr:nth-child(even) {
@@ -12,13 +14,13 @@
   .p-datatable .p-datatable-thead>tr>th,
   .p-datatable .p-datatable-tbody>tr>td {
     text-align: center;
-    font-size: 1.3rem;
+    font-size: $font_m;
     font-weight: 600;
   }
 
   .p_icons {
-    color: #116FFF;
-    font-size: 1.2rem;
+    color: $dark_ddd;
+    font-size: $font_s;
     cursor: pointer;
   }
 
