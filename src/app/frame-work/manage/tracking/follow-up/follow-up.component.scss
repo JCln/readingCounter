@@ -1,9 +1,19 @@
 @import '../../../../../assets/variable.scss';
 @import '../../../../../assets/button.scss';
+@import '../../../../../assets/input.scss';
+@import '../../../../../assets/mixins.scss';
 
-main {
+section {
+  display: grid;
+  margin: auto;
+  padding: 2rem;
+  background: $gray_d5;
+  border-radius: $border_s;
   width: 25rem;
-  margin: 2rem auto;
+}
+
+.input_1 {
+  text-align: center;
 }
 
 .btn_1 {

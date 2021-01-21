@@ -29,7 +29,6 @@ section.content {
 ._value {
   font-size: $font_m;
   font-weight: 800;
-  height: $font_3;
 }
 
 ._key {
@@ -56,6 +55,9 @@ footer {
 }
 
 ::ng-deep {
+  .mat-select-arrow {
+    color: $gray_l;
+  }
 
   .mat-select {
     text-align: center;

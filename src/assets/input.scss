@@ -1,3 +1,5 @@
+$border_s: 10px;
+
 .input_1 {
   min-width: 19rem;
   height: 3rem;
@@ -15,15 +17,22 @@
 // key value input
 .input_2 {
   border-radius: $border_s;
-  background: rgba(0, 0, 0, 0.2);
+  background: $blue_c;
+  color: $blue_d;
   display: flex;
   align-items: center;
   margin: .25rem 0;
+  height: 3rem;
 }
 
 ._key {
+  color: $gray_l;
   text-align: left;
+  padding-right: .5rem;
   width: 40%;
+  display: flex;
+  align-items: center;
+  margin: auto;
 }
 
 ._value {
@@ -32,15 +41,15 @@
   width: 60%;
   text-align: right;
   background: $white;
-
+  color: $blue_d;
 }
 
 ._key,
 ._value {
   padding: $font_05 0.3rem;
-  color: $gray_dr2;
   font-size: $font_s;
   font-weight: 600;
+  height: 2.6rem;
 }
 
 // ////////
