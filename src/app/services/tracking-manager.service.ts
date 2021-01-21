@@ -54,6 +54,9 @@ export class TrackingManagerService {
   getFinishedDataSource = (): Observable<any> => {
     return this.interfaceManagerService.getTrackFinished();
   }
+  getFollowUpSource = (trackNumber: string): Observable<any> => {
+    return this.interfaceManagerService.getTrackFollowUp(trackNumber);
+  }
   postEditingTrack = (rowData: ITracking): Observable<any> => {
     return this.interfaceManagerService.postTrackingEdit(this.selectSpecialParameters(rowData));
   }
@@ -78,6 +81,7 @@ export class TrackingManagerService {
         this.utilsService.snackBarMessageSuccess(res.message);
     });
   }
+  // follow up
 
   // imported service control
   private selectSpecialParameters = (rowData: ITracking): IEditTracking => {

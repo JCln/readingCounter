@@ -70,6 +70,8 @@ export class CloseTabService {
   saveDataForTrackOffloaded: any;
 
   saveDataForTrackFinished: any;
+
+  saveDataForFollowUp: any;
   // 
   // list manager
   saveDataForLMPD: any;
@@ -166,6 +168,9 @@ export class CloseTabService {
         break;
       case '/wr/track/finished':
         this.saveDataForTrackFinished = '';
+        break;
+      case '/wr/track/fwu':
+        this.saveDataForFollowUp = '';
         break;
       case '/wr/privacy':
         break;
