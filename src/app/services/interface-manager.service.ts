@@ -64,7 +64,7 @@ export class InterfaceManagerService {
   postTrackingEdit = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tracking/Edit', body);
   }
-  getTrackFollowUp = (trackNumber: number): Observable<any> => {
+  getTrackFollowUp = (trackNumber: string): Observable<any> => {
     return this.mainService.GET(`V1/Tracking/FollowUp/?trackNumber=${trackNumber}`);
   }
   toImported = (body: object): Observable<any> => {

@@ -1,158 +1,97 @@
-<form #form="ngForm">
-    <section class="content">
+<section *ngIf="dataSource">
+    <form #form="ngForm">
+        <section class="contain">
 
-        <div class="input_2">
-            <div class="_key">از اشتراک :</div>
-            <input class="_value" name="trackNumber" [(ngModel)]="desc.trackNumber">
-        </div>
-        <div class="input_2">
-            <div class="_key">تا اشتراک :</div>
-            <input class="_value" name="listNumber" [(ngModel)]="desc.listNumber">
-        </div>
-
-        <div class="input_2">
-            <div class="_key">از اشتراک :</div>
-            <input class="_value" name="zoneTitle" [(ngModel)]="desc.zoneTitle">
-        </div>
-        <div class="input_2">
-            <div class="_key">تا اشتراک :</div>
-            <input class="_value" name="fromEshterak" [(ngModel)]="desc.fromEshterak">
-        </div>
-
-        <div class="input_2">
-            <div class="_key">از اشتراک :</div>
-            <input class="_value" name="toEshterak" [(ngModel)]="desc.toEshterak">
-        </div>
-        <div class="input_2">
-            <div class="_key">تا اشتراک :</div>
-            <input class="_value" name="fromDate" [(ngModel)]="desc.fromDate">
-        </div>
-
-        <div class="input_2">
-            <div class="_key">از اشتراک :</div>
-            <input class="_value" name="toDate" [(ngModel)]="desc.toDate">
-        </div>
-        <div class="input_2">
-            <div class="_key">تا اشتراک :</div>
-            <input class="_value" name="overallQuantity" [(ngModel)]="desc.overallQuantity">
-        </div>
-
-        <div class="input_2">
-            <div class="_key">از اشتراک :</div>
-            <input class="_value" name="itemQuantity" [(ngModel)]="desc.itemQuantity">
-        </div>
-        <div class="input_2">
-            <div class="_key">تا اشتراک :</div>
-            <input class="_value" name="readingPeriodTitle" [(ngModel)]="desc.readingPeriodTitle">
-        </div>
-        <div class="input_2">
-            <div class="_key">تا اشتراک :</div>
-            <input class="_value" name="year" [(ngModel)]="desc.year">
-        </div>
-
-    </section>
-
-    <div class="check_boxes">
-        <mat-checkbox name="hasPreNumber" [(ngModel)]="desc.isBazdid">شماره قبلی
-        </mat-checkbox>
-
-        <mat-checkbox name="displayBillId" [(ngModel)]="desc.isRoosta">نمایش شناسه
-            قبض
-        </mat-checkbox>
-    </div>
-
-</form>
-
-
-<table mat-table [dataSource]="dataSource">
-
-    <ng-container matColumnDef="trackStatusTitle">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                trackStatusTitle
+            <div class="input_2">
+                <div class="_key">شماره پیگیری :</div>
+                <input class="_value" name="trackNumber" [(ngModel)]="dataSource.trackNumber">
             </div>
-            <!-- <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="trackStatusTitleFilter">
-            </mat-form-field> -->
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.trackStatusTitle}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="insertDateJalali">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                insertDateJalali
+            <div class="input_2">
+                <div class="_key">لیست :</div>
+                <input class="_value" name="listNumber" [(ngModel)]="dataSource.listNumber">
             </div>
-            <!-- <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="insertDateJalaliFilter">
-            </mat-form-field> -->
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.insertDateJalali}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="counterReaderName">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                counterReaderName
+            <div class="input_2">
+                <div class="_key">ناحیه :</div>
+                <input class="_value" name="zoneTitle" [(ngModel)]="dataSource.zoneTitle">
             </div>
-            <!-- <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="counterReaderNameFilter">
-            </mat-form-field> -->
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.counterReaderName}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="userDisplayName">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                عنوان
+            <div class="input_2">
+                <div class="_key">از اشتراک :</div>
+                <input class="_value" name="fromEshterak" [(ngModel)]="dataSource.fromEshterak">
             </div>
-            <!-- <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="userDisplayNameFilter">
-            </mat-form-field> -->
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.userDisplayName}}</td>
-    </ng-container>
 
-    <ng-container matColumnDef="seen">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                عنوان
+            <div class="input_2">
+                <div class="_key">تا اشتراک :</div>
+                <input class="_value" name="toEshterak" [(ngModel)]="dataSource.toEshterak">
             </div>
-            <!-- <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="seenFilter">
-            </mat-form-field> -->
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.seen}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="hasDetails">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                hasDetails
+            <div class="input_2">
+                <div class="_key">از تاریخ :</div>
+                <input class="_value" name="fromDate" [(ngModel)]="dataSource.fromDate">
             </div>
-            <!-- <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="hasDetailsFilter">
-            </mat-form-field> -->
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.hasDetails}}</td>
-    </ng-container>
 
-    <ng-container cdkColumnDef="actions">
-        <th md-header-cell *matHeaderCellDef></th>
-        <td md-cell *matCellDef="let row" class="_actions">
-            <i class="_custom fa fa-edit"></i>|
-            <i class="_custom fa fa-trash"></i>
-        </td>
-    </ng-container>
+            <div class="input_2">
+                <div class="_key">تا تاریخ :</div>
+                <input class="_value" name="toDate" [(ngModel)]="dataSource.toDate">
+            </div>
+            <div class="input_2">
+                <div class="_key">کل تعداد :</div>
+                <input class="_value" name="overallQuantity" [(ngModel)]="dataSource.overallQuantity">
+            </div>
+            <div class="input_2">
+                <div class="_key">تعداد :</div>
+                <input class="_value" name="itemQuantity" [(ngModel)]="dataSource.itemQuantity">
+            </div>
+            <div class="input_2">
+                <div class="_key">دوره قرائت :</div>
+                <input class="_value" name="readingPeriodTitle" [(ngModel)]="dataSource.readingPeriodTitle">
+            </div>
+            <div class="input_2">
+                <div class="_key">سال :</div>
+                <input class="_value" name="year" [(ngModel)]="dataSource.year">
+            </div>
 
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let person; columns: columnsToDisplay"></tr>
+            <div class="check_boxes">
+                <mat-checkbox name="isBazdid" [(ngModel)]="dataSource.isBazdid">بازدید
+                </mat-checkbox>
 
-</table>
+                <mat-checkbox name="isRoosta" [(ngModel)]="dataSource.isRoosta">روستا
+                </mat-checkbox>
+            </div>
+
+        </section>
+
+    </form>
+</section>
+
+<p-table [columns]="defColumns" [value]="changeHsty" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecord} مورد" [rowsPerPageOptions]="[10,25,50]"
+    [filterDelay]="0" dir="rtl">
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-changeHsty let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                <ng-container
+                    *ngIf="changeHsty[col.field] === true || changeHsty[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{changeHsty[col.field]}}
+                </ng-template>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+            <td [attr.colspan]="columns.length">
+                موردی پیدا نشد
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

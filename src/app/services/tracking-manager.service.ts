@@ -54,7 +54,7 @@ export class TrackingManagerService {
   getFinishedDataSource = (): Observable<any> => {
     return this.interfaceManagerService.getTrackFinished();
   }
-  getFollowUpSource = (trackNumber: number): Observable<any> => {
+  getFollowUpSource = (trackNumber: string): Observable<any> => {
     return this.interfaceManagerService.getTrackFollowUp(trackNumber);
   }
   postEditingTrack = (rowData: ITracking): Observable<any> => {

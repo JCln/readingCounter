@@ -122,3 +122,13 @@ export interface IFollowUp {
         }
     ]
 }
+export interface IFollowUpHistory {
+    id: string,
+    insertDateJalali: string,
+    inserterCode: number,
+    userDisplayName: string,
+    seen: boolean,
+    counterReaderName: string,
+    trackStatusTitle: string,
+    hasDetails: boolean
+}
