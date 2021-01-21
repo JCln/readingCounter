@@ -32,10 +32,6 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   routeToLMPDXY = (day: string) => {
-    // this.listManagerService.getLMPDXY(this.dataSource.trackNumber, day).subscribe(res => {
-    //   if (res)
-    //     console.log(res);
-    // })
     this.utilsService.routeToByParams('wr', { trackNumber: this.dataSource.trackNumber, day: day });
   }
   getDataSource = (): Promise<IListManagerPD> => {

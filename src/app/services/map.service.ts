@@ -1,6 +1,7 @@
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
 import { Injectable } from '@angular/core';
+import { ListManagerService } from 'src/app/services/list-manager.service';
 
 declare let L;
 
@@ -9,10 +10,12 @@ declare let L;
 })
 export class MapService {
   private map;
-  
-  constructor() { }
 
-  private overlays = (lat: any, lan: any, map: L.Map): any => {
+  constructor(
+    private listManagerService: ListManagerService
+  ) { }
+
+  overlays = (lat: any, lan: any, map: L.Map): any => {
     L.marker([lat, lan]).addTo(map);
   }
 
@@ -45,7 +48,7 @@ export class MapService {
 
     L.easyButton('fa-refresh', function (btn, map) {
       addInvalidateMap;
-    }, 'بارگزاری مجدد نقشه').addTo(map);
+    }, 'بارگیری مجدد نقشه').addTo(map);
 
     L.easyButton('fa-map-marker', function (btn, map) {
       map.locate({ setView: true, maxZoom: 16 })
@@ -58,4 +61,7 @@ export class MapService {
 
   }
   ///////////
+  callPointerMarks = (data: object) => {
+    return this.listManagerService.postLMPDXY(data);
+  }
 }

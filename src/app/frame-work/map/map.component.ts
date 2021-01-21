@@ -1,35 +1,40 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Imap } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
 import { InteractionService } from 'src/app/services/interaction.service';
 
+import { IListManagerPDXY } from './../../Interfaces/imanage';
 import { MapService } from './../../services/map.service';
 
 declare let L;
+// import {Map} from 'leaflet'
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+  private markersDataSourceXY: IListManagerPDXY[] = [];
   private map;
   private mapItems: Imap[];
+  markerPlaces: any;
   isShowMap: boolean = true;
-  title: string = '';
   subscription: Subscription;
 
   constructor(
     private mapService: MapService,
     readonly mapItemsService: MapItemsService,
     private router: Router,
+    private route: ActivatedRoute,
     private readonly interactionService: InteractionService
   ) {
   }
   private getMapItems = () => {
     this.mapItems = this.mapItemsService.getMapItems();
   }
+
   private initMap = () => {
 
     const
@@ -50,7 +55,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     // only one of base layers should be added to the map at instantiation
     this.map = L.map('map', {
       center: [32.669, 51.664],
-      zoom: 13,
+      zoom: 12,
       minZoom: 4,
       layers: [streets]
     });
@@ -59,6 +64,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       "Satellite": satellite,
       "OSM": streets
     };
+    const overlayMaps = {
+      "places": this.markerPlaces
+    }
 
     L.control.layers(baseMaps).addTo(this.map);
   }
@@ -71,10 +79,35 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate(['../wr/db']);
     }
   }
-
-  ngOnInit(): void {
+  getXYPosition = () => {
+    this.markersDataSourceXY.map(items => {
+      L.marker([parseFloat(items.y), parseFloat(items.x)]).addTo(this.map);
+    })
+  }
+  getRouteParams = (): object => {
+    const a = this.route.snapshot.paramMap.get('trackNumber');
+    const b = this.route.snapshot.paramMap.get('day');
+    return { trackNumber: a, day: b };
+  }
+  getPointerMarks = (a: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.mapService.callPointerMarks(a).subscribe(res => {
+        resolve(res);
+      });
+    });
+  }
+  classWrapper = async () => {
+    const a = this.getRouteParams();
     this.getMapItems();
     this.initMap();
+    if (a === null)
+      return;
+    this.markersDataSourceXY = await this.getPointerMarks(a);
+    this.getXYPosition();
+
+  }
+  ngOnInit(): void {
+    this.classWrapper();
   }
 
   ngAfterViewInit(): void {

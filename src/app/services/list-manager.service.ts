@@ -82,19 +82,19 @@ export class ListManagerService {
       { field: 'distance', header: 'فاصله', isSelected: true },
     ];
   }
- 
+
   constructor(
     private interfaceManagerService: InterfaceManagerService
   ) { }
-  
+
   getLMAll = (trackingId: string): Observable<any> => {
     return this.interfaceManagerService.getLMAll(trackingId);
   }
   getLMPD = (trackNumber: string): Observable<any> => {
     return this.interfaceManagerService.getLMPD(trackNumber);
   }
-  getLMPDXY = (trackNumber: number, day: string): Observable<any> => {
-    return this.interfaceManagerService.getLMPDXY(trackNumber, day);
+  postLMPDXY = (body: object): Observable<any> => {
+    return this.interfaceManagerService.postLMPDXY(body);
   }
 
 }
