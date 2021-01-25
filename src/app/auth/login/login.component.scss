@@ -20,7 +20,7 @@ main {
 }
 
 .input__icons {
-  color: $blue_l;
+  color: $blue_d;
 
   i {
     position: absolute;
@@ -44,14 +44,14 @@ main {
   border: $blue_dr;
 
   input::placeholder {
-    color: $blue_l;
+    color: $blue_d;
   }
 
   .input_1 {
     text-align: left;
     max-width: 19rem;
     padding: 0 $font_3 0 $font_s;
-    color: $blue_l !important;
+    color: $blue_d !important;
   }
 }
 
@@ -62,6 +62,7 @@ main {
 
 .btn_1 {
   color: $white;
+  background: $blue_d;
 }
 
 .version {
@@ -74,5 +75,5 @@ main {
 input,
 input:-internal-autofill-selected {
   background-color: $white !important;
-  color: $blue_l !important;
+  color: $blue_d !important;
 }
