@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IListManagerAll } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -16,6 +17,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   dataSource: IListManagerAll[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
@@ -25,6 +27,23 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     private listManagerService: ListManagerService
   ) {
+  }
+  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
+    zoneDictionary.map(zoneDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.zoneId == zoneDic.id) {
+          dataSource.zoneId = zoneDic.title;
+        }
+      })
+    });
+  }
+  getZoneDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.listManagerService.getLMAllZoneDictionary().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
   }
 
   getDataSource = (): Promise<IListManagerAll[]> => {
@@ -41,7 +60,10 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.getDataSource();    
+    this.dataSource = await this.getDataSource();
+    this.zoneDictionary = await this.getZoneDictionary();
+    console.log(this.zoneDictionary);
+    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -51,9 +73,6 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.listManagerService.columnSelectedLMAll();
-    console.log(this.customizeSelectedColumns());
-
-
     this._selectedColumns = this.customizeSelectedColumns();
   }
   getRouteParams = () => {

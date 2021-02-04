@@ -3,100 +3,30 @@
     <h1 class="title">اطلاعات مکانی</h1>
     <form #form="ngForm" class="content">
         <div class="_desc">
-            <div class="input_2">
-                <div class="_key">شماره پیگیری :</div>
-                <input class="_value" name="trackNumber" [(ngModel)]="dataSource.trackNumber">
+            <div class="input_2" *ngFor="let mainDatas of _selectMainDatas">
+                <div class="_key">{{mainDatas.header}}</div>
+                <input class="_value" name="{{mainDatas.field}}" [(ngModel)]="dataSource[mainDatas.field]">
             </div>
-            <div class="input_2">
-                <div class="_key">لیست :</div>
-                <input class="_value" name="listNumber" [(ngModel)]="dataSource.listNumber">
-            </div>
-            <div class="input_2">
-                <div class="_key">ماموران قرائت :</div>
-                <input class="_value" name="counterReaders" [(ngModel)]="dataSource.counterReaders">
-            </div>
-            <div class="input_2">
-                <div class="_key">از اشتراک :</div>
-                <input class="_value" name="fromEshterak" [(ngModel)]="dataSource.fromEshterak">
-            </div>
-            <div class="input_2">
-                <div class="_key">تا اشتراک :</div>
-                <input class="_value" name="toEshterak" [(ngModel)]="dataSource.toEshterak">
-            </div>
-            <div class="input_2">
-                <div class="_key">کل شمارش :</div>
-                <input class="_value" name="overalCount" [(ngModel)]="dataSource.overalCount">
-            </div>
-            <div class="input_2">
-                <div class="_key">تعداد قرائت :</div>
-                <input class="_value" name="readCount" [(ngModel)]="dataSource.readCount">
-            </div>
-            <div class="input_2">
-                <div class="_key">کل مسافت :</div>
-                <input class="_value" name="overalDistance" [(ngModel)]="dataSource.overalDistance">
-            </div>
-            <div class="input_2">
-                <div class="_key">کل زمان :</div>
-                <input class="_value" name="overalDuration" [(ngModel)]="dataSource.overalDuration">
-            </div>
-
         </div>
     </form>
 
 </section>
 
-<p-table [columns]="_selectedColumns" [value]="offLoadPerDayHistory" [paginator]="true" [rows]="20"
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecord} مورد"
-    [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl">
-    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
-
-    <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
-            selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
-            </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-        <tr>
-            <th *ngFor="let col of columns">
-                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
-            </th>
-            <th style="width: 4rem"></th>
-        </tr>
-    </ng-template>
-
-    <ng-template pTemplate="body" let-offLoadPerDayHistory let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns">
-                <ng-container
-                    *ngIf="offLoadPerDayHistory[col.field] === true || offLoadPerDayHistory[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="offLoadPerDayHistory[col.field]"></mat-checkbox>
-                </ng-container>
-                <ng-template #elseTemplate>
-                    {{offLoadPerDayHistory[col.field]}}
-                </ng-template>
-            </td>
-            <td (click)="routeToLMPDXY(offLoadPerDayHistory.day)">
+<h1 class="title">اطلاعات قرائت</h1>
+<section class="position_section">
+    <main *ngFor="let history of offLoadPerDayHistory" class="card_wrapper">
+        <div class="card__content" *ngFor="let item of _selectCols">
+            <div class="input_2">
+                <div class="_key">{{item.header}} :</div>
+                <input class="_value" name="{{item.field}}" [(ngModel)]="history[item.field]">
+            </div>
+        </div>
+        <br><br>
+        <div class="disable_grid_temp">
+            <button class="btn_1" (click)="routeToLMPDXY(history.day)">
                 <i class="p_icons pi pi-map-marker"></i>
-            </td>
-            <!-- <td [routerLink]="['wr/m/l/pdxy']"
-                [queryParams]="{trackNumber: dataSource.trackNumber, day: offLoadPerDayHistory.day}"><i
-                    class="p_icons pi pi-map-marker"></i></td> -->
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage" let-columns>
-        <tr>
-            <td [attr.colspan]="columns.length">
-                موردی پیدا نشد
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+                مشاهده برروی نقشه
+            </button>
+        </div>
+    </main>
+</section>

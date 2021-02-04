@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IListManagerPD } from 'src/app/Interfaces/imanage';
+import { IListManagerPD, IListManagerPDHistory } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ListManagerService } from 'src/app/services/list-manager.service';
@@ -18,17 +18,19 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   dataSource: IListManagerPD;
-  offLoadPerDayHistory: any[] = [];
+  offLoadPerDayHistory: IListManagerPDHistory[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
+  _selectMainDatas: any[];
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private listManagerService: ListManagerService,
-    private utilsService: UtilsService,
-    private route: ActivatedRoute
+    private utilsService: UtilsService,    
+    private router: Router
   ) {
+    this.detectRouteChange();
   }
 
   routeToLMPDXY = (day: string) => {
@@ -44,7 +46,7 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   nullSavedSource = () => this.closeTabService.saveDataForLMPD = null;
-  classWrapper = async (canRefresh?: boolean) => {
+  private classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
@@ -58,22 +60,29 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
         return items
     })
   }
-  insertSelectedColumns = () => {
+  private insertSelectedColumns = () => {
+    this._selectMainDatas = this.listManagerService.columnSelectedLMPerDayPositions();
     this._selectCols = this.listManagerService.columnSelectedLMPerDay();
     this._selectedColumns = this.customizeSelectedColumns();
   }
-  getRouteParams = () => {
-    this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+  private getRouteParams = () => {
+    this.trackNumber = window.location.href.split('/').pop();
+  }
+  detectRouteChange = () => {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.getRouteParams();
+        this.classWrapper();
+        this.insertSelectedColumns();
+      }
+    });
   }
   ngOnInit(): void {
-    this.getRouteParams();
-    this.classWrapper();
-    this.insertSelectedColumns();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/l/pd')
+        if (res.includes('/wr/m/l/pd/'))
           this.classWrapper(true);
       }
     })

@@ -58,10 +58,6 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
     }
     const completeRoutePart = this.router.url.split('/').pop();
     const lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
-    console.log(completeRoutePart);
-    console.log(lastUrlPart);
-
-
     const a = {
       route: `${_dynamicRoute}${completeRoutePart}`, title: `${title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };

@@ -1,16 +1,16 @@
 @import '../../../../../assets/variable.scss';
 @import '../../../../../assets/input.scss';
+@import '../../../../../assets/button.scss';
 @import '../../../../../assets/primeNG';
 
 
 .content {
-  background: $gray_l;
-  box-shadow: 1px 1px 8px 4px $gray_d;
+  background: $gray_d;
+  box-shadow: 1px 1px 8px 4px $blue_d;
   text-align: center;
   padding: $font_2 $font_05;
   justify-content: space-around;
   border-radius: $border_s;
-  min-height: 25rem;
 }
 
 ._desc {
@@ -37,4 +37,55 @@ input {
   color: $gray_96;
   margin: 0 auto;
   box-shadow: 1px 1px 8px 1px $gray_d;
+}
+
+/* card content */
+.position_section {
+  direction: rtl;
+}
+
+.card_wrapper {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(46%, 47%));
+  gap: $font_05;
+  background: $gray_d;
+  place-content: center;
+  padding: $font_xs 0;
+  margin: $font_s;
+
+  width: 50%;
+  border-radius: $border_s;
+
+  box-shadow: 1px 2px 3px 1px $blue_d;
+}
+
+.card__content {
+  white-space: nowrap;
+  direction: inherit;
+}
+
+.disable_grid_temp {
+  text-align: center;
+
+  &.card_wrapper {
+    display: inline !important;
+    grid-template-columns: none !important;
+  }
+
+  .btn_1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: $orange;
+    color: $white;
+
+    i {
+      color: $white;
+    }
+  }
+}
+
+.input_2 {
+  margin: 0;
 }
