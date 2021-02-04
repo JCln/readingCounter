@@ -11,5 +11,9 @@ export interface ITrueFalse {
 export interface ISearchInOrderTo {
     title: string;
     isSelected: boolean;
-
+}
+export interface IObjectIteratation {
+    field: string;
+    header: string;
+    isSelected: boolean;
 }

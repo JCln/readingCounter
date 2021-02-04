@@ -9,7 +9,6 @@ declare let L;
   providedIn: 'root'
 })
 export class MapService {
-  private map;
 
   constructor(
     private listManagerService: ListManagerService
@@ -18,7 +17,6 @@ export class MapService {
   overlays = (lat: any, lan: any, map: L.Map): any => {
     L.marker([lat, lan]).addTo(map);
   }
-
   addMarkerCluster = (map: L.Map) => {
     const markers = L.markerClusterGroup();
     map.addLayer(markers);

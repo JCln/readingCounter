@@ -1,12 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { ITracking } from 'src/app/Interfaces/imanage';
+import { IResponses } from 'src/app/Interfaces/iresponses';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
-import { IResponses } from './../../../../Interfaces/iresponses';
-import { TrackingManagerService } from './../../../../services/tracking-manager.service';
 
 @Component({
   selector: 'app-imported',
@@ -30,6 +31,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   dataSource: ITracking[] = [];
+  filterZoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
   _selectedInnerColumns: any[];
@@ -43,7 +45,13 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     private trackingManagerService: TrackingManagerService
   ) {
   }
-
+  getZoneDictionary = (): Promise<any> => {
+    return new Promise((resolve) => {
+      this.trackingManagerService.getAllZoneTitles().subscribe(res => {
+        resolve(res);
+      })
+    });
+  }
   getDataSource = (): Promise<ITracking[]> => {
     return new Promise((resolve) => {
       this.trackingManagerService.getImportedDataSource().subscribe(res => {
@@ -63,7 +71,10 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else {
       this.dataSource = await this.getDataSource();
-      console.log(this.dataSource);
+      // this.filterZoneDictionary = this.trackingManagerService.getAllZoneTitles(this.dataSource);
+      this.filterZoneDictionary = await this.getZoneDictionary();
+      console.log(this.filterZoneDictionary);
+
 
       this.closeTabService.saveDataForTrackImported = this.dataSource;
     }

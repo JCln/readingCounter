@@ -10,3 +10,7 @@ export interface Imap {
     readonly id?: string;
     readonly style?: string;
 }
+export interface IMapTrackDesc {
+    readonly day: string;
+    readonly trackNumber: string;
+}

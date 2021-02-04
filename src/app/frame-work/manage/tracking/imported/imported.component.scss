@@ -1,1 +1,8 @@
 @import '../../../../../assets/primeNG';
+
+/deep/.mat-select-value-text,
+.mat-select-value,
+.not-empty-select.mat-selected {
+  color: $gray_l !important;
+  font-weight: 600;
+}

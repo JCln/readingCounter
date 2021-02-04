@@ -182,6 +182,20 @@ export interface IListManagerPD {
         }
     ]
 }
+export interface IListManagerPDHistory {
+    day: string,
+    fromEshterak: string,
+    toEshterak: string,
+    readCount: number,
+    maneCount: number,
+    manePercent: number,
+    xarabFaqedCount: number,
+    xarabFaqedPercent: number,
+    fromTime: string,
+    toTime: string,
+    duration: number,
+    distance: number
+}
 export interface IListManagerPDXY {
     x: string,
     y: string,

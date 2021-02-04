@@ -1,12 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { Imap } from 'src/app/Interfaces/imap.js';
+import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 import { IListManagerPDXY } from './../../Interfaces/imanage';
 import { MapService } from './../../services/map.service';
+import { UtilsService } from './../../services/utils.service';
 
 declare let L;
 // import {Map} from 'leaflet'
@@ -28,7 +29,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     readonly mapItemsService: MapItemsService,
     private router: Router,
     private route: ActivatedRoute,
-    private readonly interactionService: InteractionService
+    private readonly interactionService: InteractionService,
+    private utilsService: UtilsService
   ) {
   }
   private getMapItems = () => {
@@ -79,12 +81,23 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate(['../wr/db']);
     }
   }
-  getXYPosition = () => {
+  private leafletDrawPolylines = () => {
+    let lines = [];
+    this.markersDataSourceXY.map(items => {
+      lines.push([parseFloat(items.y), parseFloat(items.x)]);
+    })
+    L.polyline(lines, {
+      color: 'red',
+      weight: 3,
+      smoothFactor: 1
+    }).addTo(this.map);
+  }
+  private getXYPosition = () => {
     this.markersDataSourceXY.map(items => {
       L.marker([parseFloat(items.y), parseFloat(items.x)]).addTo(this.map);
     })
   }
-  getRouteParams = (): object => {
+  getRouteParams = (): IMapTrackDesc => {
     const a = this.route.snapshot.paramMap.get('trackNumber');
     const b = this.route.snapshot.paramMap.get('day');
     return { trackNumber: a, day: b };
@@ -97,13 +110,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   classWrapper = async () => {
-    const a = this.getRouteParams();
+    const a: IMapTrackDesc = this.getRouteParams();
     this.getMapItems();
     this.initMap();
-    if (a === null)
+    if (this.utilsService.isNull(a.trackNumber))
       return;
     this.markersDataSourceXY = await this.getPointerMarks(a);
     this.getXYPosition();
+    this.leafletDrawPolylines();
 
   }
   ngOnInit(): void {

@@ -74,6 +74,9 @@ export class UtilsService {
   snackBarMessageSuccess = (message: string) => {
     this.snackWrapperService.openSnackBar(message, 4000, 'snack_success');
   }
+  snackBarMessageWarn = (message: string) => {
+    this.snackWrapperService.openSnackBar(message, 4000, 'snack_warn');
+  }
   snackBarMessageFailed = (message: string) => {
     console.log('nothing yet');
 

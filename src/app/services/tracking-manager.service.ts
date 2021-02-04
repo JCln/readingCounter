@@ -81,6 +81,9 @@ export class TrackingManagerService {
         this.utilsService.snackBarMessageSuccess(res.message);
     });
   }
+  getAllZoneTitles = (): Observable<any> => { // convert to idictionarymanger interface
+    return this.interfaceManagerService.getZoneDictionaryManager();
+  }
   // follow up
 
   // imported service control

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
+import { IObjectIteratation } from '../Interfaces/IDictionaryManager';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -82,6 +85,20 @@ export class ListManagerService {
       { field: 'distance', header: 'فاصله', isSelected: true },
     ];
   }
+  columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
+    return [
+      { field: 'trackNumber', header: 'شماره پیگیری :', isSelected: true },
+      { field: 'listNumber', header: 'شماره لیست :', isSelected: true },
+      { field: 'counterReaders', header: 'مامور(ها) :', isSelected: true },
+      { field: 'fromEshterak', header: 'از اشتراک :', isSelected: true },
+      { field: 'toEshterak', header: 'تا اشتراک :', isSelected: true },
+      { field: 'overalCount', header: 'کل شمارش :', isSelected: true },
+      { field: 'readCount', header: 'قرائت شده :', isSelected: true },
+      { field: 'overalDistance', header: 'مسافت کل :', isSelected: true },
+      { field: 'overalDuration', header: 'زمان کل :', isSelected: true }
+
+    ];
+  }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService
@@ -89,6 +106,9 @@ export class ListManagerService {
 
   getLMAll = (trackingId: string): Observable<any> => {
     return this.interfaceManagerService.getLMAll(trackingId);
+  }
+  getLMAllZoneDictionary = (): Observable<any> => {
+    return this.interfaceManagerService.getZoneDictionaryManager();
   }
   getLMPD = (trackNumber: string): Observable<any> => {
     return this.interfaceManagerService.getLMPD(trackNumber);

@@ -14,17 +14,36 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 4rem"></th>
+
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="col.field !== 'zoneTitle'" type="text" field="{{col.field}}"></p-columnFilter>
+
+                <p-columnFilter field="zoneTitle" *ngIf="col.field === 'zoneTitle'" matchMode="in" display="menu"
+                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+
+                    <ng-template pTemplate="filter" let-value
+                        let-filter="filterCallback">
+                        <p-multiSelect [options]="filterZoneDictionary" [(ngModel)]="col.field"
+                            (onChange)="filter($event.value)" optionLabel="{{col.field}}">
+                            {{col.field}}
+                            <ng-template let-option pTemplate="item">
+                                <div class="p-multiselect-representative-option">
+                                    <span class="p-ml-1">{{option.title}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+
+                    </ng-template>
+                </p-columnFilter>
+
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
+            <!-- <th style="width: 4rem"></th> -->
         </tr>
     </ng-template>
 

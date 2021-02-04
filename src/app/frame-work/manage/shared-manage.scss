@@ -3,10 +3,10 @@
 @import '../../../assets/input.scss';
 
 table {
-  display: block;
+  border: 2px solid $blue_c;
   overflow: auto;
   width: 100%;
-  border: 2px solid $blue_l;
+  direction: rtl;
 }
 
 .mat-form-field {
@@ -29,13 +29,13 @@ th.mat-header-cell {
 }
 
 .header {
-  color: $blue_l;
-  border: 1px solid $blue_l;
+  color: $blue_c;
+  border: 1px solid $blue_c;
   margin: auto;
   border-radius: $border_s;
   text-align: center;
   padding: .2rem;
-  max-width: 13rem;
+  // max-width: 13rem;
   font-size: $font_m;
 }
 
@@ -89,14 +89,10 @@ th {
     direction: rtl;
   }
 
-  table {
-    direction: rtl;
-  }
-
   .mat-form-field-infix {
     font-size: 1.2rem;
     font-weight: 600;
-    width: 8rem !important;
+    // width: 8rem !important;
   }
 
   .mat-select {
@@ -117,7 +113,7 @@ th {
 
 .filter {
   display: block;
-  width: 60%;
+  width: 80%;
 }
 
 // header options //
@@ -126,7 +122,7 @@ th {
   justify-content: flex-end;
   background: $white;
   border-radius: $border_s $border_s 0 0;
-  border: 2px solid $blue_l;
+  border: 2px solid $blue_c;
   border-bottom: 0;
 }
 
@@ -196,34 +192,3 @@ td.mat-footer-cell:first-of-type {
 }
 
 ///////////////
-
-@mixin mat-table-columns($columns) {
-
-  .mat-column- {
-
-    @each $colName,
-    $props in $columns {
-
-      $width: map-get($props, 'max-width');
-
-      &#{$colName} {
-        flex: $width;
-        max-width: $width;
-      }
-    }
-  }
-}
-
-@include mat-table-columns((title: (width: 12rem),
-    isMaskooni: (max-width: 10rem),
-    hasReadingVibrate: (max-width: 10rem),
-    isSaxt: (max-width: 10rem),
-    canEnterNumber: (max-width: 10rem),
-    isMane: (max-width: 10rem),
-    canNumberBeLessThanPre: (max-width: 10rem),
-    isTavizi: (max-width: 10rem),
-    shouldEnterNumber: (max-width: 10rem),
-    isXarab: (max-width: 10rem),
-    isFaqed: (max-width: 10rem),
-    isMetro: (max-width: 10rem),
-    logicalOrder: (max-width: 10rem)));
