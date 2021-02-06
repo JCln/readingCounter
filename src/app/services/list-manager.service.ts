@@ -110,7 +110,7 @@ export class ListManagerService {
   getLMAllZoneDictionary = (): Observable<any> => {
     return this.interfaceManagerService.getZoneDictionaryManager();
   }
-  getLMPD = (trackNumber: string): Observable<any> => {
+  getLMPD = (trackNumber: number): Observable<any> => {
     return this.interfaceManagerService.getLMPD(trackNumber);
   }
   postLMPDXY = (body: object): Observable<any> => {

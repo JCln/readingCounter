@@ -95,6 +95,14 @@ export interface IEditTracking {
     displayRadif: boolean,
     counterReaderId: string;
 }
+// Output manager
+export interface IOutputManager {
+    zoneId: number,
+    fromDate: string,
+    toDate: string
+}
+// 
+
 // List Manager
 export interface IListManagerAll {
     id: string,
