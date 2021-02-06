@@ -26,7 +26,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private mapService: MapService,
-    readonly mapItemsService: MapItemsService,
+    private mapItemsService: MapItemsService,
     private router: Router,
     private route: ActivatedRoute,
     private readonly interactionService: InteractionService,
@@ -38,27 +38,30 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private initMap = () => {
+    const OSM = this.mapItems[0];
+    const SatelliteMap = this.mapItems[1];
 
     const
       streets = L.tileLayer(
-        this.mapItems[0].mapBoxUrl, {
-        id: this.mapItems[0].id,
-        maxZoom: this.mapItems[0].maxZoom,
-        minZoom: this.mapItems[0].minZoom,
-        tileSize: this.mapItems[0].tileSize,
-        zoomOffset: this.mapItems[0].zoomOffset
+        OSM.mapBoxUrl, {
+        id: OSM.id,
+        maxZoom: OSM.maxZoom,
+        minZoom: OSM.minZoom,
+        tileSize: OSM.tileSize,
+        zoomOffset: OSM.zoomOffset,
+        attribution: OSM.attribution
       }),
       satellite = L.tileLayer(
-        this.mapItems[1].style + this.mapItems[1].accessToken, {
-        tileSize: this.mapItems[1].tileSize,
-        zoomOffset: this.mapItems[1].zoomOffset
+        SatelliteMap.mapBoxUrl + SatelliteMap.accessToken, {
+        tileSize: SatelliteMap.tileSize,
+        zoomOffset: SatelliteMap.zoomOffset
       })
 
     // only one of base layers should be added to the map at instantiation
     this.map = L.map('map', {
       center: [32.669, 51.664],
-      zoom: 12,
-      minZoom: 4,
+      zoom: OSM.zoom,
+      minZoom: OSM.minZoom,
       layers: [streets]
     });
 
@@ -129,7 +132,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mapService.buttons(this.map);
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr')
+        if (res.includes('/wr'))
           this.ngOnInit();
       }
     })
