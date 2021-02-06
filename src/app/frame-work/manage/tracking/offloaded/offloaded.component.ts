@@ -64,10 +64,12 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    console.log(this.customizeSelectedColumns());
-
-
     this._selectedColumns = this.customizeSelectedColumns();
+  }
+  downloadDbfOutput = (row: ITracking) => {
+    this.trackingManagerService.downloadOutputDBF(row).subscribe(res => {
+      console.log(res);
+    })
   }
   ngOnInit(): void {
     this.classWrapper();

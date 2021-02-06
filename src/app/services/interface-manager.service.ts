@@ -45,6 +45,12 @@ export class InterfaceManagerService {
   }
   // /////
 
+  // Output manager DBF 
+  postOutputManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Output/Dbf', body);
+  }
+  // 
+
   // Tracking manager
   getTrackImported = (): Observable<any> => {
     return this.mainService.GET('V1/Tracking/Imported');
@@ -83,7 +89,7 @@ export class InterfaceManagerService {
   getLMAll = (trackingId: string): Observable<any> => {
     return this.mainService.GET(`V1/List/OffLoaded/All/${trackingId}`);
   }
-  getLMPD = (trackNumber: string): Observable<any> => {
+  getLMPD = (trackNumber: number): Observable<any> => {
     return this.mainService.GET(`V1/List/OffLoaded/PerDay/${trackNumber}`);
   }
   postLMPDXY = (body: object): Observable<any> => {

@@ -71,7 +71,11 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper();
     this.insertSelectedColumns();
   }
-
+  downloadDbfOutput = (row: ITracking) => {
+    this.trackingManagerService.downloadOutputDBF(row).subscribe(res => {
+      console.log(res);
+    })
+  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {

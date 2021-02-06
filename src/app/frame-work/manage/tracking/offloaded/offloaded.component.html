@@ -39,7 +39,7 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td><i class="p_icons pi pi-download"></i></td>
+            <td (click)="downloadDbfOutput(dataSource)"><i class="p_icons pi pi-download"></i></td>
             <td><i class="p_icons pi pi-pencil"></i></td>
             <td><i class="p_icons pi pi-user-minus"></i></td>
         </tr>

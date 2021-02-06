@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { IEditTracking, ITracking } from './../Interfaces/imanage';
+import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
 import { IResponses } from './../Interfaces/iresponses';
 import { UtilsService } from './utils.service';
 
@@ -60,6 +60,17 @@ export class TrackingManagerService {
   postEditingTrack = (rowData: ITracking): Observable<any> => {
     return this.interfaceManagerService.postTrackingEdit(this.selectSpecialParameters(rowData));
   }
+  // Output manager 
+  downloadOutputDBF = (dbfData: ITracking): Observable<any> => {
+    const a: IOutputManager = {
+      zoneId: dbfData.zoneId,
+      fromDate: dbfData.fromDate,
+      toDate: dbfData.toDate
+    }
+    console.log(a);
+    return this.interfaceManagerService.postOutputManager(a);
+  }
+  // 
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
   }
@@ -84,7 +95,6 @@ export class TrackingManagerService {
   getAllZoneTitles = (): Observable<any> => { // convert to idictionarymanger interface
     return this.interfaceManagerService.getZoneDictionaryManager();
   }
-  // follow up
 
   // imported service control
   private selectSpecialParameters = (rowData: ITracking): IEditTracking => {
