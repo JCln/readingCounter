@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerPD, IListManagerPDHistory } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -14,7 +15,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./per-day.component.scss']
 })
 export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
-  trackNumber: string;
+  trackNumber: number;
   subscription: Subscription[] = [];
 
   dataSource: IListManagerPD;
@@ -27,10 +28,10 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private listManagerService: ListManagerService,
-    private utilsService: UtilsService,    
-    private router: Router
+    private utilsService: UtilsService,
+    private router: Router,
+    private location: Location
   ) {
-    this.detectRouteChange();
   }
 
   routeToLMPDXY = (day: string) => {
@@ -45,6 +46,11 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  private insertSelectedColumns = () => {
+    this._selectMainDatas = this.listManagerService.columnSelectedLMPerDayPositions();
+    this._selectCols = this.listManagerService.columnSelectedLMPerDay();
+    this._selectedColumns = this.customizeSelectedColumns();
+  }
   nullSavedSource = () => this.closeTabService.saveDataForLMPD = null;
   private classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -52,6 +58,7 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.dataSource = await this.getDataSource();
     this.offLoadPerDayHistory = this.dataSource.offLoadPerDayHistory;
+    this.insertSelectedColumns();
     console.log(this.dataSource);
   }
   customizeSelectedColumns = () => {
@@ -60,24 +67,19 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
         return items
     })
   }
-  private insertSelectedColumns = () => {
-    this._selectMainDatas = this.listManagerService.columnSelectedLMPerDayPositions();
-    this._selectCols = this.listManagerService.columnSelectedLMPerDay();
-    this._selectedColumns = this.customizeSelectedColumns();
-  }
-  private getRouteParams = () => {
-    this.trackNumber = window.location.href.split('/').pop();
-  }
-  detectRouteChange = () => {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.getRouteParams();
-        this.classWrapper();
-        this.insertSelectedColumns();
-      }
+  private getRouteParams = (): Promise<number> => {
+    return new Promise((resolve) => {
+      resolve(parseInt(this.location.path().split('/').pop()))
     });
   }
+  detectRouteChange = async () => {
+    this.trackNumber = await this.getRouteParams();
+    if (this.trackNumber) {
+      this.classWrapper();
+    }
+  }
   ngOnInit(): void {
+    this.detectRouteChange();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
