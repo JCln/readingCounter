@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IListManagerAll } from 'src/app/Interfaces/imanage';
@@ -25,8 +25,10 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private listManagerService: ListManagerService
+    private listManagerService: ListManagerService,
+    private router: Router
   ) {
+    this.getRouteParams();
   }
   convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
@@ -76,17 +78,20 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.customizeSelectedColumns();
   }
   getRouteParams = () => {
-    this.trackId = this.route.snapshot.paramMap.get('trackingId');
+    this.router.events.subscribe(res => {
+      if (res instanceof NavigationEnd) {
+        this.trackId = this.route.snapshot.paramMap.get('trackingId');
+        this.classWrapper();
+        this.insertSelectedColumns();
+      }
+    })
   }
   ngOnInit(): void {
-    this.getRouteParams();
-    this.classWrapper();
-    this.insertSelectedColumns();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/l/all')
+        if (res.includes('/wr/m/l/all/'))
           this.classWrapper(true);
       }
     })

@@ -182,6 +182,16 @@ export class CloseTabService {
         break;
 
     }
+    // listed all of the dynamic routes
+    if (url.includes('/wr/m/l/pd/')) {
+      this.saveDataForLMPD = '';
+    }
+    if (url.includes('/wr/m/l/all/')) {
+      this.saveDataForLMAll = '';
+    }
+    if (url.includes('/wr/mu/edit/')) {
+      this.saveDataForEditContacts = '';
+    }
   }
   // 
 

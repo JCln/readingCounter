@@ -1,6 +1,5 @@
-import { Location } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerPD, IListManagerPDHistory } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -15,7 +14,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./per-day.component.scss']
 })
 export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
-  trackNumber: number;
+  trackNumber: string;
   subscription: Subscription[] = [];
 
   dataSource: IListManagerPD;
@@ -30,8 +29,9 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     private listManagerService: ListManagerService,
     private utilsService: UtilsService,
     private router: Router,
-    private location: Location
+    private route: ActivatedRoute,
   ) {
+    this.getRouteParams();
   }
 
   routeToLMPDXY = (day: string) => {
@@ -39,7 +39,7 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getDataSource = (): Promise<IListManagerPD> => {
     return new Promise((resolve) => {
-      this.listManagerService.getLMPD(this.trackNumber).subscribe(res => {
+      this.listManagerService.getLMPD(parseInt(this.trackNumber)).subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -67,19 +67,16 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
         return items
     })
   }
-  private getRouteParams = (): Promise<number> => {
-    return new Promise((resolve) => {
-      resolve(parseInt(this.location.path().split('/').pop()))
+  private getRouteParams = () => {
+    this.router.events.subscribe(res => {
+      if (res instanceof NavigationEnd) {
+        this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+        this.classWrapper();
+      }
     });
   }
-  detectRouteChange = async () => {
-    this.trackNumber = await this.getRouteParams();
-    if (this.trackNumber) {
-      this.classWrapper();
-    }
-  }
   ngOnInit(): void {
-    this.detectRouteChange();
+
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
