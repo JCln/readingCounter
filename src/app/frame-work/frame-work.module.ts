@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NgxLeafletFullscreenModule } from '@runette/ngx-leaflet-fullscreen';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { BaseInfoComponent } from './base-info/base-info.component';
@@ -12,6 +13,7 @@ import { MapComponent } from './map/map.component';
   imports: [
     CommonModule,
     SharedPrimeNgModule,
+    NgxLeafletFullscreenModule,
     FrameWorkRoutingModule
   ]
 })
