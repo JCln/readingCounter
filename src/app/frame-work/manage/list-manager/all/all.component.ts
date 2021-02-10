@@ -78,13 +78,14 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.customizeSelectedColumns();
   }
   getRouteParams = () => {
-    this.router.events.subscribe(res => {
+    this.subscription.push(this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
         this.trackId = this.route.snapshot.paramMap.get('trackingId');
         this.classWrapper();
         this.insertSelectedColumns();
       }
     })
+    )
   }
   ngOnInit(): void {
   }

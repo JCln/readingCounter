@@ -68,12 +68,15 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   private getRouteParams = () => {
-    this.router.events.subscribe(res => {
+    this.subscription.push(this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
-        this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
-        this.classWrapper();
+        if (res) {
+          this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+          this.classWrapper();
+        }
       }
-    });
+    })
+    )
   }
   ngOnInit(): void {
 
