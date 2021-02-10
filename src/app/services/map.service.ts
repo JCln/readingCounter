@@ -14,6 +14,9 @@ export class MapService {
     private listManagerService: ListManagerService
   ) { }
 
+  addToMapWrapper = (val: any) => {
+    Leaflet.control.layers(val).addTo(this.map);
+  }
   overlays = (lat: any, lan: any): any => {
     Leaflet.marker([lat, lan]).addTo(this.map);
   }
