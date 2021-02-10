@@ -1,5 +1,6 @@
 @import '../../../assets/variable.scss';
 @import '../../../assets/mixins.scss';
+@import '../../../assets/button.scss';
 
 .map-frame {
   margin: 1rem .2rem;
@@ -89,3 +90,28 @@
     left: 0;
   }
 }
+
+// map option configs
+.polyline_config {
+  background: $white;
+  width: 20rem;
+  margin: $font_xs;
+  padding: $font_xs;
+  text-align: right;
+  direction: rtl;
+  border-radius: $border_s;
+  box-shadow: 0px 2px 3px 1px $blue_c;
+}
+
+h2 {
+  color: $gray_dr;
+  margin-bottom: $font_05;
+}
+
+.btn_2 {
+  height: 2.5rem;
+  color: $gray_dr;
+  margin-top: $font_xs;
+}
+
+// 

@@ -13,12 +13,14 @@
         <input type="radio" id="_dash" name="radio">
     </div>
 
-    <div class="polyline_config">
-        <p-slider [(ngModel)]="polyline_configs" [step]="1000"></p-slider>
+    <div [hidden]="!canShowOptions" class="polyline_config">
+        <h2>زمان نمایش (ثانیه) : {{polyline_configs}}</h2>
+        <p-slider [(ngModel)]="polyline_configs" [max]=20></p-slider>
+        <button class="btn_2" (click)="mapConfigOptions(polyline_configs)">ثبت</button>
     </div>
 </section>
 
 <div class="map-frame" [hidden]="!isShowMap">
     <div id="map"></div>
 </div>
-<leaflet-fullscreen-control [map]="map"></leaflet-fullscreen-control>
+<!-- <leaflet-fullscreen-control [map]="map"></leaflet-fullscreen-control> -->

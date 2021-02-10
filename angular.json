@@ -53,7 +53,7 @@
             ],
             "scripts": [
               "src/assets/leaflet/leaflet.js",
-              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"
+              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"            
             ]
           },
           "configurations": {
