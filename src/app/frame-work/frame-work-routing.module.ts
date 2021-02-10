@@ -1,15 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardComponent } from './map/dashboard/dashboard.component';
-import { MapComponent } from './map/map.component';
-
 const routes: Routes = [
-  {
-    path: '', component: MapComponent, children: [
-      { path: 'db', component: DashboardComponent }
-    ]
-  },
+  { path: '', loadChildren: () => import('./map/map.module').then(mapComponent => mapComponent.MapModule) },
   { path: 'imd', loadChildren: () => import('./import-dynamic/import-dynamic.module').then(importDynamicDto => importDynamicDto.ImportDynamicModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(profile => profile.ProfileModule) },
   { path: 'apk', loadChildren: () => import('./apk/apk.module').then(apk => apk.ApkModule) },

@@ -95,7 +95,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.mapService.fullScreen();
     // this.mapService.buttons(this.map);
   }
   ngOnDestroy(): void {

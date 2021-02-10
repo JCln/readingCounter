@@ -22,13 +22,6 @@ export class MapService {
   //   map.addLayer(markers);
   // }
 
-  fullScreen = () => {
-    // new Leaflet.Map('map', {
-    //   fullscreenControl: true
-    // })
-    // map.addControl(new Leaflet.Control.Fullscreen());
-    this.map.addControl(Leaflet.Control.Fullscreen());
-  }
   removeAllLayers = (map, window) => {
     map.eachLayer(function (layer) {
       map.removeLayer(layer);

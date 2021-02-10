@@ -1,14 +1,16 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NgxLeafletFullscreenModule } from '@runette/ngx-leaflet-fullscreen';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { MapRoutingModule } from './map-routing.module';
+import { MapComponent } from './map.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [MapComponent],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
+    NgxLeafletFullscreenModule,
     MapRoutingModule
   ]
 })
