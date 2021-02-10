@@ -49,7 +49,8 @@ export const sidebarItemsTest = {
                 { route: '/wr/m/track/loaded', title: 'loaded', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/track/reading', title: 'reading', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/track/offloaded', title: 'offloaded', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: '/wr/m/track/finished', title: 'finished', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 }
+                { route: '/wr/m/track/finished', title: 'finished', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/m/track/woui', title: 'WOUI', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 }
             ]
         },
         {

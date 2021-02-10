@@ -1,0 +1,33 @@
+@import '../../../../../assets/variable';
+
+.control_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(27rem, 29rem));
+  direction: rtl;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.content {
+  background: $gray_l;
+  box-shadow: 1px 1px 8px 4px $gray_d;
+  text-align: center;
+  padding: $font_2 0;
+  border-radius: $border_s;
+  min-height: 30rem;
+}
+
+.title {
+  color: $blue_l;
+  text-align: center;
+  margin: 0 0 $font_xs;
+  font-size: 1.6rem;
+}
+
+._img_title {
+  margin-bottom: $font_2;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  background: white;
+}

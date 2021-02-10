@@ -77,6 +77,9 @@ export class CloseTabService {
   saveDataForLMPD: any;
   saveDataForLMAll: any;
   // 
+  // WOUI manager
+  saveDataForWOUI: any;
+  // 
 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
@@ -105,6 +108,9 @@ export class CloseTabService {
         break;
       case '/wr/m/al/ap':
         this.saveDataForAppLevel1 = '';
+        break;
+      case '/wr/m/track/woui':
+        this.saveDataForWOUI = '';
         break;
       case '/wr/m/al/me':
         this.saveDataForAppLevel2 = '';
