@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 
@@ -16,7 +17,8 @@ import { TooltipModule } from 'primeng/tooltip';
     MatCheckboxModule,
     MultiSelectModule,
     DropdownModule,
-    TooltipModule
+    TooltipModule,
+    SliderModule
   ],
   exports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { TooltipModule } from 'primeng/tooltip';
     MatCheckboxModule,
     MultiSelectModule,
     DropdownModule,
-    TooltipModule
+    TooltipModule,
+    SliderModule
   ]
 })
 export class SharedPrimeNgModule {

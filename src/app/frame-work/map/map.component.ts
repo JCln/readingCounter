@@ -1,16 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/internal/Subscription';
+import * as Leaflet from 'leaflet';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
-import { InteractionService } from 'src/app/services/interaction.service';
 
 import { IListManagerPDXY } from './../../Interfaces/imanage';
 import { MapService } from './../../services/map.service';
 import { UtilsService } from './../../services/utils.service';
 
-declare let L;
-// import {Map} from 'leaflet'
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -18,18 +15,18 @@ declare let L;
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private markersDataSourceXY: IListManagerPDXY[] = [];
-  private map;
+  map: Leaflet.Map;
   private mapItems: Imap[];
+
+  polyline_configs: number;
   markerPlaces: any;
   isShowMap: boolean = true;
-  subscription: Subscription;
 
   constructor(
     private mapService: MapService,
     private mapItemsService: MapItemsService,
     private router: Router,
     private route: ActivatedRoute,
-    private readonly interactionService: InteractionService,
     private utilsService: UtilsService
   ) {
   }
@@ -39,41 +36,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private initMap = () => {
     const OSM = this.mapItems[0];
-    const SatelliteMap = this.mapItems[1];
 
-    const
-      streets = L.tileLayer(
-        OSM.mapBoxUrl, {
-        id: OSM.id,
-        maxZoom: OSM.maxZoom,
-        minZoom: OSM.minZoom,
-        tileSize: OSM.tileSize,
-        zoomOffset: OSM.zoomOffset,
-        attribution: OSM.attribution
-      }),
-      satellite = L.tileLayer(
-        SatelliteMap.mapBoxUrl + SatelliteMap.accessToken, {
-        tileSize: SatelliteMap.tileSize,
-        zoomOffset: SatelliteMap.zoomOffset
-      })
-
-    // only one of base layers should be added to the map at instantiation
-    this.map = L.map('map', {
-      center: [32.669, 51.664],
-      zoom: OSM.zoom,
-      minZoom: OSM.minZoom,
-      layers: [streets]
-    });
-
-    const baseMaps = {
-      "Satellite": satellite,
-      "OSM": streets
-    };
-    const overlayMaps = {
-      "places": this.markerPlaces
-    }
-
-    L.control.layers(baseMaps).addTo(this.map);
+    this.map = Leaflet.map('map').setView([32.669, 51.664], 9);
+    Leaflet.tileLayer(OSM.mapBoxUrl, {
+      attribution: OSM.attribution,
+    }).addTo(this.map);
   }
   showDashboard = (isShowMap: boolean) => {
     this.isShowMap = isShowMap;
@@ -89,7 +56,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.markersDataSourceXY.map(items => {
       lines.push([parseFloat(items.y), parseFloat(items.x)]);
     })
-    L.polyline(lines, {
+    Leaflet.polyline(lines, {
       color: 'red',
       weight: 3,
       smoothFactor: 1
@@ -97,7 +64,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   private getXYPosition = () => {
     this.markersDataSourceXY.map(items => {
-      L.marker([parseFloat(items.y), parseFloat(items.x)]).addTo(this.map);
+      Leaflet.marker([parseFloat(items.y), parseFloat(items.x)]).addTo(this.map);
     })
   }
   getRouteParams = (): IMapTrackDesc => {
@@ -128,19 +95,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.mapService.fullScreen(this.map);
-    this.mapService.buttons(this.map);
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr'))
-          this.ngOnInit();
-      }
-    })
+    this.mapService.fullScreen();
+    // this.mapService.buttons(this.map);
   }
   ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
   }
 
 }
