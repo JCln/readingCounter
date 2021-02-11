@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -14,8 +15,10 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   dataSource: ITracking[] = [];
+  filterZoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
+  selectedFuckingTest: any[] = [];
 
   _firstPage: number = 0;
   _rowsNumberPage: number = 10;
@@ -26,15 +29,29 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     private trackingManagerService: TrackingManagerService
   ) {
   }
-
-  getDataSource = (): Promise<ITracking[]> => {
-    return new Promise((resolve) => {
-      this.trackingManagerService.getLoadedDataSource().subscribe(res => {
-        if (res) {
+  getZoneDictionary = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.trackingManagerService.getAllZoneTitles().subscribe(res => {
           resolve(res);
-        }
+        })
+      });
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
+  getDataSource = (): Promise<ITracking[]> => {
+    try {
+      return new Promise((resolve) => {
+        this.trackingManagerService.getLoadedDataSource().subscribe(res => {
+          if (res) {
+            resolve(res);
+          }
+        })
       })
-    })
+    } catch (error) {
+      console.error(e => e);
+    }
   }
   rowToImported = (row: ITracking) => {
     this.trackingManagerService.migrateDataRowToImported(row.id);
@@ -49,6 +66,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else {
       this.dataSource = await this.getDataSource();
+      this.filterZoneDictionary = await this.getZoneDictionary();
       console.log(this.dataSource);
 
       this.closeTabService.saveDataForTrackLoaded = this.dataSource;

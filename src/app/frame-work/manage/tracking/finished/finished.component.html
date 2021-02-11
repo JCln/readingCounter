@@ -35,8 +35,14 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="downloadDbfOutput(dataSource)"><i class="p_icons pi pi-download"></i></td>
-            <td (click)="rowToOffloaded(dataSource)"><i class="p_icons pi pi-step-backward"></i></td>
+            <td (click)="downloadDbfOutput(dataSource)"><i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">بارگیری</div>
+                </i>
+            </td>
+            <td (click)="rowToOffloaded(dataSource)"><i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text">بازگشت به صادر شده</div>
+                </i>
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>

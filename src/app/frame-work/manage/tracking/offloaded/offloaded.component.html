@@ -39,9 +39,21 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="downloadDbfOutput(dataSource)"><i class="p_icons pi pi-download"></i></td>
-            <td><i class="p_icons pi pi-pencil"></i></td>
-            <td><i class="p_icons pi pi-user-minus"></i></td>
+            <td (click)="downloadDbfOutput(dataSource)">
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">بارگیری</div>
+                </i>
+            </td>
+            <td>
+                <i class="tooltip p_icons pi pi-pencil">
+                    <div class="tooltip_text">اصلاح لیست</div>
+                </i>
+            </td>
+            <td>
+                <i class="tooltip p_icons pi pi-user-minus">
+                    <div class="tooltip_text">حذف مسیر</div>
+                </i>
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>

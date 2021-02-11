@@ -32,6 +32,8 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dataSource: ITracking[] = [];
   filterZoneDictionary: IDictionaryManager[] = [];
+
+  selectedFuckingTest: any[] = []
   _selectCols: any[] = [];
   _selectedColumns: any[];
   _selectedInnerColumns: any[];

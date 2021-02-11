@@ -39,9 +39,18 @@
                     {{dataSourceRES[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="rowToImported(dataSourceRES)"><i class="p_icons pi pi-fast-backward"></i></td>
-            <td (click)="routeToLMPayDay(dataSourceRES)"><i class="p_icons pi pi-folder-open"></i></td>
-            <td (click)="routeToLMAll(dataSourceRES)"><i class="p_icons pi pi-list"></i></td>
+            <td (click)="rowToImported(dataSourceRES)"><i class="tooltip p_icons pi pi-fast-backward">
+                    <div class="tooltip_text">بازگشت به صادر شده</div>
+                </i>
+            </td>
+            <td (click)="routeToLMPayDay(dataSourceRES)"><i class="tooltip p_icons pi pi-folder-open">
+                    <div class="tooltip_text">مشاهده مامور(ها)</div>
+                </i>
+            </td>
+            <td (click)="routeToLMAll(dataSourceRES)"><i class="tooltip p_icons pi pi-list">
+                    <div class="tooltip_text">مشاهده لیست قرائت شده</div>
+                </i>
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>

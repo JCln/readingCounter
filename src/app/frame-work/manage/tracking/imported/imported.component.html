@@ -25,10 +25,9 @@
                 <p-columnFilter field="zoneTitle" *ngIf="col.field === 'zoneTitle'" matchMode="in" display="menu"
                     [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
 
-                    <ng-template pTemplate="filter" let-value
-                        let-filter="filterCallback">
-                        <p-multiSelect [options]="filterZoneDictionary" [(ngModel)]="col.field"
-                            (onChange)="filter($event.value)" optionLabel="{{col.field}}">
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [options]="filterZoneDictionary" [(ngModel)]="selectedFuckingTest"
+                            (onChange)="filter($event.value)" optionLabel="zoneTitle">
                             {{col.field}}
                             <ng-template let-option pTemplate="item">
                                 <div class="p-multiselect-representative-option">
@@ -59,10 +58,14 @@
                 </ng-template>
             </td>
             <td>
-                <i class="p_icons pi pi-user-edit" [pRowToggler]="dataSource"></i>
+                <i class="tooltip p_icons pi pi-plus" [pRowToggler]="dataSource">
+                    <div class="tooltip_text">مشاهده جزئیات</div>
+                </i>
             </td>
             <td>
-                <i class="p_icons pi pi-user-minus"></i>
+                <i class="tooltip p_icons pi pi-user-minus">
+                    <div class="tooltip_text">حذف مسیر</div>
+                </i>
             </td>
             <!-- <td>
                 <button type="button" pButton pRipple 
