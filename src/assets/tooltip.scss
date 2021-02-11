@@ -1,6 +1,6 @@
 .tooltip {
   position: relative;
-  display: inline-block;  
+  display: inline-block;
 }
 
 .tooltip .tooltip_text {
@@ -17,7 +17,7 @@
   left: 150%;
   margin-left: -60px;
   font-weight: 600;
-  font-family: inherit;
+  font-family: $font_family;
 }
 
 .tooltip .tooltip_text::after {

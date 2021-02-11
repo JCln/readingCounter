@@ -1,19 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IFollowUp, IFollowUpHistory } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
-import { IFollowUp, IFollowUpHistory } from './../../../../../Interfaces/imanage';
+import { ITracking } from './../../../../../Interfaces/imanage';
 
 @Component({
   selector: 'app-desc',
   templateUrl: './desc.component.html',
   styleUrls: ['./desc.component.scss']
 })
-export class DescComponent implements OnInit, OnDestroy {
+export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   trackNumber: string;
   defColumns = [
     { field: 'insertDateJalali', header: 'شماره لیست' },
@@ -34,7 +34,6 @@ export class DescComponent implements OnInit, OnDestroy {
     private trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService,
     private route: ActivatedRoute,
-    private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService
   ) { }
 
@@ -51,6 +50,9 @@ export class DescComponent implements OnInit, OnDestroy {
       console.error(e => e);
     }
   }
+  toPreStatus = (rowData: ITracking) => {
+    this.trackingManagerService.migrateToPreState(rowData.id);
+  }
   nullSavedSource = () => this.closeTabService.saveDataForFollowUp = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -58,13 +60,23 @@ export class DescComponent implements OnInit, OnDestroy {
     }
     this.dataSource = await this.getDataSource();
     this.changeHsty = this.dataSource.changeHistory;
-    console.log(this.changeHsty);
-
-    this.closeTabService.saveDataForTrackOffloaded = this.dataSource;
+    this.closeTabService.saveDataForFollowUp = this.dataSource;
   }
   ngOnInit() {
     this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
     this.classWrapper();
+  }
+  refreshTabStatus = () => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res.includes('/wr/m/fwu/:'))
+          this.classWrapper(true);
+      }
+    })
+    )
+  }
+  ngAfterViewInit(): void {
+    this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

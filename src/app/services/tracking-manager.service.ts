@@ -60,6 +60,12 @@ export class TrackingManagerService {
   postEditingTrack = (rowData: ITracking): Observable<any> => {
     return this.interfaceManagerService.postTrackingEdit(this.selectSpecialParameters(rowData));
   }
+  removeTrackingId = (trackNumber: string) => {
+    this.interfaceManagerService.removeTrackingId({ trackNumber }).subscribe((res: IResponses) => {
+      if (res)
+        this.successSnackMessage(res.message);
+    })
+  }
   // Output manager 
   downloadOutputDBF = (dbfData: ITracking): Observable<any> => {
     const a: IOutputManager = {
@@ -77,7 +83,7 @@ export class TrackingManagerService {
   migrateDataRowToImported = (trackingId: string) => {
     this.interfaceManagerService.toImported({ trackingId }).subscribe((res: IResponses) => {
       if (res)
-        this.utilsService.snackBarMessageSuccess(res.message);
+        this.successSnackMessage(res.message);
     });
   }
   migrateDataRowToReading = (trackingId: string) => {
@@ -91,6 +97,12 @@ export class TrackingManagerService {
       if (res)
         this.utilsService.snackBarMessageSuccess(res.message);
     });
+  }
+  migrateToPreState = (trackingId: string) => {
+    return this.interfaceManagerService.toPre({ trackingId }).subscribe((res: IResponses) => {
+      if (res)
+        this.utilsService.snackBarMessageSuccess(res.message);
+    })
   }
   getAllZoneTitles = (): Observable<any> => { // convert to idictionarymanger interface
     return this.interfaceManagerService.getZoneDictionaryManager();

@@ -29,6 +29,10 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     private trackingManagerService: TrackingManagerService
   ) {
   }
+  
+  removeRow = (rowData: ITracking) => {
+    this.trackingManagerService.removeTrackingId(rowData.id);
+  }
   getZoneDictionary = (): Promise<any> => {
     try {
       return new Promise((resolve) => {

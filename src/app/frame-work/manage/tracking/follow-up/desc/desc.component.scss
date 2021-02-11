@@ -1,6 +1,7 @@
 @import '../../../../../../assets/variable.scss';
 @import '../../../../../../assets/primeNG';
 @import '../../../../../../assets/input.scss';
+@import '../../../../../../assets/tooltip.scss';
 
 
 .contain {
@@ -31,4 +32,12 @@ input {
 
 ._value {
   border: 0;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+  margin: 0 $font_05;
+  font-family: $font_family;
+  font-size: $font_s;
+  font-weight: 600;
+  color: $gray_dr;
 }

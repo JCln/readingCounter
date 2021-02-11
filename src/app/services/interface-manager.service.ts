@@ -82,6 +82,12 @@ export class InterfaceManagerService {
   toOffloaded = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1​/Tracking​/ToOffloaded', body);
   }
+  toPre = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tracking/Pre', body);
+  }
+  removeTrackingId = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tracking/Remove', body);
+  }
   // 
 
   // List Manager 

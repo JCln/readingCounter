@@ -20,7 +20,7 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="col.field === 'zoneTitle'" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="col.field !== 'zoneTitle'" type="text" field="{{col.field}}"></p-columnFilter>
                 <p-columnFilter field="zoneTitle" *ngIf="col.field === 'zoneTitle'" matchMode="in" display="menu"
                     [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
 
@@ -60,7 +60,7 @@
                     <div class="tooltip_text">برگشت به صادر شده</div>
                 </i>
             </td>
-            <td>
+            <td (click)="removeRow(dataSource)">
                 <i class="tooltip p_icons pi pi-user-minus">
                     <div class="tooltip_text">حذف مسیر</div>
                 </i>

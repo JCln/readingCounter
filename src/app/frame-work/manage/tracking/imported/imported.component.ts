@@ -47,6 +47,10 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     private trackingManagerService: TrackingManagerService
   ) {
   }
+
+  removeRow = (rowData: ITracking) => {
+    this.trackingManagerService.removeTrackingId(rowData.id);
+  }
   getZoneDictionary = (): Promise<any> => {
     return new Promise((resolve) => {
       this.trackingManagerService.getAllZoneTitles().subscribe(res => {

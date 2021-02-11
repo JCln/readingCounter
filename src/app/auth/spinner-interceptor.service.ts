@@ -25,7 +25,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
         catchError((error) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 400) {
-              this.snackWrapperService.openSnackBar('منبع بدرستی استفاده نشده است', 8000, 'snack_danger');
+              this.snackWrapperService.openSnackBar(error.error.message, 8000, 'snack_danger');
             }
             if (error.status === 401) {
               console.log(401);
