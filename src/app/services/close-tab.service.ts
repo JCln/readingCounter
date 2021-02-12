@@ -80,6 +80,9 @@ export class CloseTabService {
   // WOUI manager
   saveDataForWOUI: any;
   // 
+  // Forbidden manager
+  saveDataForForbidden: any;
+  // 
 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
@@ -184,6 +187,9 @@ export class CloseTabService {
         this.saveDataForLMPD = '';
         break;
       case '/wr/m/l/all':
+        this.saveDataForLMAll = '';
+        break;
+      case '/wr/m/fbn':
         this.saveDataForLMAll = '';
         break;
 

@@ -60,6 +60,11 @@ export const sidebarItemsTest = {
             ]
         },
         {
+            route: '', title: 'Forbidden', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
+                { route: '/wr/m/fbn', title: 'غیر مجاز', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 1 }
+            ]
+        },
+        {
             route: '', title: 'سایر', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
                 { route: '/wr/profile', title: 'پروفایل', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/apk', title: 'apk', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
