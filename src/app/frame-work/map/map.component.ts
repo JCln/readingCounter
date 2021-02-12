@@ -1,3 +1,5 @@
+import 'src/assets/L.EasyButton/src/easy-button';
+
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Leaflet from 'leaflet';
@@ -7,7 +9,6 @@ import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
 import { IListManagerPDXY } from './../../Interfaces/imanage';
 import { MapService } from './../../services/map.service';
 import { UtilsService } from './../../services/utils.service';
-
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -52,26 +53,21 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private getMapItems = () => {
     this.mapItems = this.mapItemsService.getMapItems();
   }
+  addToMapWrapper = (val: any) => {
+    Leaflet.control.layers(val).addTo(this.map);
+  }
+  leafletRefresh = () => {
+    Leaflet.easyButton('fa fa-refresh', function (btn) {
+      this.addInvalidateMap();
+    }, 'بارگیری مجدد نقشه').addTo(this.map);
+  }
+  leafletMyPosition = () => {
+    Leaflet.easyButton('fa-map-marker', function (btn, map) {
+      map.locate({ setView: true, maxZoom: 16 })
+      map.on('locationfound', this.onLocationFound(map));
+    }, 'مکان من').addTo(this.map);
+  }
 
-  // private otherLayers = () => {
-  //   const satellite = this.mapItems[1];
-  //   const OSM = this.mapItems[0];
-
-  //   const OSMVW = Leaflet.tileLayer(
-  //     OSM.mapBoxUrl, {
-  //     id: OSM.id,
-  //     maxZoom: OSM.maxZoom,
-  //     minZoom: OSM.minZoom,
-  //     tileSize: OSM.tileSize,
-  //     zoomOffset: OSM.zoomOffset
-  //   }),
-  //     satelliteVW = Leaflet.tileLayer(
-  //       satellite.mapBoxUrl + satellite.accessToken, {
-  //       tileSize: satellite.tileSize,
-  //       zoomOffset: satellite.zoomOffset
-  //     });
-  //   return [OSMVW, satellite]
-  // }
   private initMap = () => {
 
     const satellite = this.mapItems[1];
@@ -90,17 +86,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       "OSM": OSMVW,
       "Satellite": satelliteVW
     };
-    
+
     this.map = Leaflet.map('map', {
       center: [32.669, 51.664],
       zoom: 9,
       layers: [OSMVW]
     });
 
-    // Leaflet.tileLayer(OSM.mapBoxUrl, {
-    //   attribution: OSM.attribution,
-    // }).addTo(this.map);
-    Leaflet.control.layers(baseMaps).addTo(this.map);
+    this.addToMapWrapper(baseMaps);
 
   }
   private leafletDrawPolylines = (delay: number) => {
@@ -161,6 +154,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this.leafletMyPosition();
+    this.leafletRefresh();
     // this.mapService.buttons(this.map);
   }
   ngOnDestroy(): void {
@@ -168,6 +163,28 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
 }
 
+
+
+// private otherLayers = () => {
+  //   const satellite = this.mapItems[1];
+  //   const OSM = this.mapItems[0];
+
+  //   const OSMVW = Leaflet.tileLayer(
+  //     OSM.mapBoxUrl, {
+  //     id: OSM.id,
+  //     maxZoom: OSM.maxZoom,
+  //     minZoom: OSM.minZoom,
+  //     tileSize: OSM.tileSize,
+  //     zoomOffset: OSM.zoomOffset
+  //   }),
+  //     satelliteVW = Leaflet.tileLayer(
+  //       satellite.mapBoxUrl + satellite.accessToken, {
+  //       tileSize: satellite.tileSize,
+  //       zoomOffset: satellite.zoomOffset
+  //     });
+  //   return [OSMVW, satellite]
+  // }
+  
 
 
 // const satellite = this.mapItems[1];
