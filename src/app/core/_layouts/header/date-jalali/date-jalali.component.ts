@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DateJalaliService } from 'src/app/services/date-jalali.service';
 
-import { DateJalaliService } from './../../../../services/date-jalali.service';
 
 @Component({
   selector: 'app-date-jalali',
@@ -10,7 +10,7 @@ import { DateJalaliService } from './../../../../services/date-jalali.service';
 export class DateJalaliComponent implements OnInit {
   dateObject: any;
   datePickerConfig = {
-    format: 'YY/M/D'
+    format: 'YYYY/M/D'
   }
 
   @Output() dateJalEvent = new EventEmitter<any>();

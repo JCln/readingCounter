@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 
-import { SidebarItemsService } from './../../services/DI/sidebar-items.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -12,7 +12,10 @@ export class SideBarComponent implements OnInit {
   smallScreen: boolean = false;
   currentRoute: any;
 
-  constructor(private sideBarItemsService: SidebarItemsService, private testSidebarService: SidebarItemsService) {
+  constructor(
+    private sideBarItemsService: SidebarItemsService,
+    private testSidebarService: SidebarItemsService 
+  ) {
     // this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
     //   if (sidebars) {
     //     this.currentRoute = sidebars.items;

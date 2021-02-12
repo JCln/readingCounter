@@ -67,7 +67,7 @@ export class TrackingManagerService {
     })
   }
   // Output manager 
-  downloadOutputDBF = (dbfData: ITracking): Observable<any> => {
+  downloadOutputDBF = (dbfData: ITracking | IOutputManager): Observable<any> => {
     const a: IOutputManager = {
       zoneId: dbfData.zoneId,
       fromDate: dbfData.fromDate,

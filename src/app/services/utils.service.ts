@@ -19,6 +19,9 @@ export class UtilsService {
   isNull(value: any): boolean {
     return typeof value === 'undefined' || !value || value.length === 0 || value === null;
   }
+  isNullTextValidation(value: string): boolean {
+    return typeof value.trim() === 'undefined' || !value || value.trim().length === 0 || value.trim() === null;
+  }
   isNullWithText = (value: string | number, text: string): boolean => {
     if (typeof value === 'undefined' || !value || value.toString().length === 0) {
       this.snackWrapperService.openSnackBar(text, 3000, 'snack_danger');

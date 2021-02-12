@@ -5,16 +5,13 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import { getPersianPaginatorIntl } from './getPersianPaginatorIntl';
 import { MaterialModule } from './material.module';
-import { SharedRoutingModule } from './shared-routing.module';
-
 
 @NgModule({
   declarations: [],
   imports: [
     FormsModule,
     CommonModule,
-    MaterialModule,
-    SharedRoutingModule
+    MaterialModule
   ],
   exports: [
     CommonModule, FormsModule, MaterialModule
