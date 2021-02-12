@@ -73,20 +73,35 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   //   return [OSMVW, satellite]
   // }
   private initMap = () => {
+
+    const satellite = this.mapItems[1];
     const OSM = this.mapItems[0];
-    this.map = Leaflet.map('map').setView([32.669, 51.664], 9);
-    Leaflet.tileLayer(OSM.mapBoxUrl, {
-      attribution: OSM.attribution,
-    }).addTo(this.map);
-  }
-  showDashboard = (isShowMap: boolean) => {
-    this.isShowMap = isShowMap;
-    if (isShowMap) {
-      this.router.navigate(['../wr']);
-    }
-    else {
-      this.router.navigate(['../wr/db']);
-    }
+
+    const OSMVW = Leaflet.tileLayer(
+      OSM.mapBoxUrl, {
+      attribution: OSM.attribution
+    }),
+      satelliteVW = Leaflet.tileLayer(
+        satellite.mapBoxUrl + satellite.accessToken, {
+        attribution: satellite.attribution
+      });
+
+    const baseMaps = {
+      "OSM": OSMVW,
+      "Satellite": satelliteVW
+    };
+    
+    this.map = Leaflet.map('map', {
+      center: [32.669, 51.664],
+      zoom: 9,
+      layers: [OSMVW]
+    });
+
+    // Leaflet.tileLayer(OSM.mapBoxUrl, {
+    //   attribution: OSM.attribution,
+    // }).addTo(this.map);
+    Leaflet.control.layers(baseMaps).addTo(this.map);
+
   }
   private leafletDrawPolylines = (delay: number) => {
     let lines = [];
@@ -132,6 +147,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.canShowOptions = true;
     this.markersDataSourceXY = await this.getPointerMarks(a);
   }
+  showDashboard = (isShowMap: boolean) => {
+    this.isShowMap = isShowMap;
+    if (isShowMap) {
+      this.router.navigate(['../wr']);
+    }
+    else {
+      this.router.navigate(['../wr/db']);
+    }
+  }
   ngOnInit(): void {
     this.classWrapper();
   }
@@ -143,3 +167,41 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 }
+
+
+
+// const satellite = this.mapItems[1];
+// const OSM = this.mapItems[0];
+
+// const OSMVW = Leaflet.tileLayer(
+//   OSM.mapBoxUrl, {
+//   id: OSM.id,
+//   maxZoom: OSM.maxZoom,
+//   minZoom: OSM.minZoom,
+//   tileSize: OSM.tileSize,
+//   zoomOffset: OSM.zoomOffset,
+//   attribution: OSM.attribution
+// }),
+//   satelliteVW = Leaflet.tileLayer(
+//     satellite.mapBoxUrl + satellite.accessToken, {
+//     tileSize: satellite.tileSize,
+//     zoomOffset: satellite.zoomOffset,
+//     attribution: satellite.attribution
+//   });
+
+// const baseMaps = {
+//   "OSM": OSMVW,
+//   // "Satellite": satelliteVW
+// };
+// this.map = Leaflet.map('map').setView([32.669, 51.664], 9);
+
+// this.map = Leaflet.map('map', {
+//   center: [32.669, 51.664],
+//   zoom: 9,
+//   // layers: [OSMVW]
+// });
+
+// // Leaflet.tileLayer(OSM.mapBoxUrl, {
+// //   attribution: OSM.attribution,
+// // }).addTo(this.map);
+// Leaflet.control.layers(baseMaps).addTo(this.map);
