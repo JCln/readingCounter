@@ -24,4 +24,19 @@
     cursor: pointer;
   }
 
+  th {
+    p-sorticon {
+      opacity: 0;
+      transition: opacity ease-in-out 80ms;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      p-sorticon {
+        opacity: 1;
+      }
+    }
+  }
+
 }
