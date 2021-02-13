@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IForbiddenManager, IForbiddenManagerGridFriendlyRes } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { ForbiddenService } from 'src/app/services/forbidden.service';
@@ -16,6 +17,7 @@ export class ForbiddenComponent implements OnInit {
 
   dataSource: IForbiddenManager[] = [];
   dataSourceRES: IForbiddenManagerGridFriendlyRes;
+  zoneDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -37,6 +39,7 @@ export class ForbiddenComponent implements OnInit {
     }
     else {
       this.dataSourceRES = await this.forbiddenService.getGridFriendlyDataSourceDefault();
+      this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
       this.closeTabService.saveDataForForbidden = this.dataSourceRES;
     }
     this.dataSource = this.dataSourceRES.data;
