@@ -1,3 +1,5 @@
+import 'rxjs';
+
 import { Injectable } from '@angular/core';
 
 import { IOutputManager } from './../Interfaces/imanage';
@@ -35,5 +37,13 @@ export class OutputManagerService {
       return false;
     }
     return true;
+  }
+  downloadFile(data: any) {
+    console.log(data);
+
+    const blob = new Blob([data], { type: 'text/json; charset=utf-8' });
+    const url = window.URL.createObjectURL(blob);
+    window.open(url);
+
   }
 }
