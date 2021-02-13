@@ -39,8 +39,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   polyline_configs: number;
   isShowMap: boolean = true;
-  canShowOptions: boolean = false;
-
+  canShowOptionsButton: boolean = false;
+  isShowMapConfig: boolean = false;
 
   constructor(
     private mapService: MapService,
@@ -128,8 +128,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   mapConfigOptions = (delay: number) => {
-    this.getXYPosition(delay * 1000 + 20);
-    this.leafletDrawPolylines(delay * 1000);
+    this.getXYPosition(delay + 20);
+    this.leafletDrawPolylines(delay);
   }
   classWrapper = async () => {
     const a: IMapTrackDesc = this.getRouteParams();
@@ -137,7 +137,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initMap();
     if (this.utilsService.isNull(a.trackNumber))
       return;
-    this.canShowOptions = true;
+    this.canShowOptionsButton = true;
     this.markersDataSourceXY = await this.getPointerMarks(a);
   }
   showDashboard = (isShowMap: boolean) => {
@@ -160,7 +160,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnDestroy(): void {
   }
-
 }
 
 
@@ -184,7 +183,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   //     });
   //   return [OSMVW, satellite]
   // }
-  
+
 
 
 // const satellite = this.mapItems[1];

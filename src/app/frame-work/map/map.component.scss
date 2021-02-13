@@ -1,18 +1,27 @@
 @import '../../../assets/variable.scss';
 @import '../../../assets/mixins.scss';
 @import '../../../assets/button.scss';
+@import '../../../assets/tooltip.scss';
 
 .map-frame {
   margin: 1rem .2rem;
   height: 100%;
   min-height: 30rem;
   box-shadow: -1px 2px 5px 5px $gray_d;
+  position: relative;
 }
 
 #map {
   height: 30rem;
   width: 100%;
   z-index: 1;
+}
+
+.top_info {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 0 2rem;
 }
 
 .unit {
@@ -92,7 +101,28 @@
 }
 
 // map option configs
+.polyline_switch {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100vmax;
+  width: 4rem;
+  padding: 0rem;
+  border: 0;
+  background-color: $gray_d5;
+  color: $dark_ddd;
+  i {
+    font-size: $font_m;
+    font-weight: 600;
+  }
+}
+
 .polyline_config {
+  position: absolute;
+  left: 4rem;
+  top: -3rem;
+  z-index: 2;
   background: $white;
   width: 20rem;
   margin: $font_xs;
@@ -103,7 +133,7 @@
   box-shadow: 0px 2px 3px 1px $blue_c;
 }
 
-h2 {
+h3 {
   color: $gray_dr;
   margin-bottom: $font_05;
 }
