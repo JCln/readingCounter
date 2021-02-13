@@ -51,6 +51,12 @@ export class InterfaceManagerService {
   }
   // 
 
+  // forbidden manager DBF 
+  postForbiddenGridFriendlyManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Forbidden/GridFriendly', body);
+  }
+  // 
+
   // Tracking manager
   getTrackImported = (): Observable<any> => {
     return this.mainService.GET('V1/Tracking/Imported');

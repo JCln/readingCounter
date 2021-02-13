@@ -9,7 +9,7 @@ import { IObjectIteratation } from '../Interfaces/IDictionaryManager';
   providedIn: 'root'
 })
 export class ListManagerService {
-  columnSelectedLMAll = () => {
+  columnSelectedLMAll = (): IObjectIteratation[] => {
     return [
       { field: 'billId', header: 'شناسه قبض', isSelected: true },
       { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true },
@@ -69,7 +69,7 @@ export class ListManagerService {
       { field: 'description', header: 'متن تست', isSelected: false },
     ];
   }
-  columnSelectedLMPerDay = () => {
+  columnSelectedLMPerDay = (): IObjectIteratation[] => {
     return [
       { field: 'day', header: 'روز', isSelected: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true },

@@ -218,6 +218,33 @@ export interface IListManagerPDXY {
     counterStateTitle: string,
     hasAlert: boolean
 }
+
+// 
+
+// Forbidden Manager
+export interface IForbiddenManager {
+    gisAccuracy: string,
+    id: string,
+    imageCount: number
+    insertDateJalali: string,
+    insertDateTime: string,
+    insertTime: string,
+    nextEshterak: string,
+    postalCode: string,
+    preEshterak: string,
+    tedadVahed: number
+    userId: string,
+    x: string
+    y: string
+    zoneId: string
+}
+export interface IForbiddenManagerGridFriendlyRes {
+    aggregates: null,
+    data: IForbiddenManager[],
+    errors: null,
+    groups: null,
+    total: number
+}
 export interface IFollowUp {
     trackNumber: number,
     listNumber: string,

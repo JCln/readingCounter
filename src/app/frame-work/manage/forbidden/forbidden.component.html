@@ -1,0 +1,34 @@
+<p-table [columns]="_selectedColumns" [value]="dataSource" [lazy]="true"
+    (onLazyLoad)="sendGridFriendlyDataSource($event)" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر" [rowsPerPageOptions]="[10,25,50]"
+    dir="rtl"
+    [globalFilterFields]="['isAccuracy','imageCount','insertDateJalali','insertDateTime','insertTime','nextEshterak','postalCode','preEshterak','tedadVahed','userId','x','y','zoneId']">
+
+    <ng-template pTemplate="caption">
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
+            selectedItemsLabel=" {0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of _selectedColumns" pSortableColumn="{{col.field}}">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSourceRes>
+        <tr>
+            <td *ngFor="let col of _selectedColumns">
+                <ng-container
+                    *ngIf="dataSourceRes[col.field] === true || dataSourceRes[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="dataSourceRes[col.field]"></mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{dataSourceRes[col.field]}}
+                </ng-template>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
