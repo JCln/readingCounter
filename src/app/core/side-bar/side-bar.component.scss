@@ -62,16 +62,16 @@ ul::-webkit-scrollbar {
 
 
   &.active {
-    border: 2px solid $blue_c;
+    border: 2px solid $dark_ddd;
 
     .btn .ul_items .on_show .fa {
       transform: rotate(180deg) !important;
-      color: $blue_c;
+      color: $dark_ddd;
     }
 
     .on_show,
     .icons {
-      color: $blue_c;
+      color: $dark_ddd;
     }
 
   }
@@ -95,21 +95,21 @@ ul::-webkit-scrollbar {
   outline: none;
 
   &:hover {
-    background: linear-gradient(to left, $blue_c, rgba(255, 0, 0, 0));
+    background: linear-gradient(to left, $dark_ddd, rgba(255, 0, 0, 0));
   }
 }
 
 .active {
-  background: linear-gradient(to left, rgba(255, 0, 0, 0), $blue_c);
+  background: linear-gradient(to left, rgba(255, 0, 0, 0), $dark_ddd);
 }
 
 .active_2 {
   .btn_2 {
-    border: 2px solid $blue_c;
+    border: 2px solid $dark_ddd;
   }
 
   .icons {
-    color: $blue_c;
+    color: $dark_ddd;
   }
 }
 
