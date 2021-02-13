@@ -20,8 +20,16 @@
 
   .p_icons {
     color: $dark_ddd;
-    font-size: $font_s;
+    font-size: $font_m;
     cursor: pointer;
+  }
+
+  .p-column-filter-row {
+    direction: ltr;
+  }
+
+  .p-column-filter-row p-columnfilterformelement {
+    width: 100%;
   }
 
   th {
@@ -37,6 +45,10 @@
         opacity: 1;
       }
     }
+  }
+
+  .fa-trash-o {
+    color: $red_d;
   }
 
 }

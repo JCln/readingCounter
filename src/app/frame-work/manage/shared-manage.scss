@@ -78,6 +78,9 @@ th {
   font-size: $font_s;
 }
 
+.fa-trash {
+  color: $red_d;
+}
 
 :host::ng-deep {
   .mat-option-text {

@@ -29,7 +29,6 @@ $border_s: 10px;
   color: $gray_l;
   text-align: left;
   padding-right: .5rem;
-  width: 40%;
   display: flex;
   align-items: center;
   margin: auto;
@@ -38,7 +37,8 @@ $border_s: 10px;
 ._value {
   border-radius: inherit;
   margin: .2em;
-  width: 60%;
+  max-width: 52%;
+  flex: 1;
   text-align: center;
   background: $white;
   color: $blue_d;

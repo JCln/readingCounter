@@ -20,6 +20,7 @@ li {
   min-width: 8.5rem;
   height: 3rem;
   border-radius: $border_s;
+  border: 1.5px solid;
   color: $blue_d;
   list-style-type: none;
   font-size: $font_m;
@@ -46,7 +47,7 @@ li {
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $blue_l;
+      color: $dark_ddd;
       background: $gray_d;
     }
   }
@@ -90,12 +91,14 @@ li::before {
   border-radius: 15px;
   height: .3rem;
   width: 90%;
-  background: $blue_l;
+  background: $dark_ddd;
 }
 
 li.active {
-  color: $blue_l;
+  color: $dark_ddd;
   background: $gray_e3;
+  border: 1.5px solid;
+  border-top: none;
 }
 
 li.active::before {
