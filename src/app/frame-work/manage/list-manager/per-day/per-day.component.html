@@ -17,15 +17,15 @@
     <main *ngFor="let history of offLoadPerDayHistory" class="card_wrapper">
         <div class="card__content" *ngFor="let item of _selectCols">
             <div class="input_2">
-                <div class="_key">{{item.header}} :</div>
+                <div class="_key">{{item.header}}</div>
                 <input class="_value" name="{{item.field}}" [(ngModel)]="history[item.field]">
             </div>
         </div>
         <br><br>
         <div class="disable_grid_temp">
-            <button class="btn_1" (click)="routeToLMPDXY(history.day)">
-                <i class="p_icons pi pi-map-marker"></i>
+            <button class="btn_1 d_rtl" (click)="routeToLMPDXY(history.day)">
                 مشاهده برروی نقشه
+                <i class="p_icons pi pi-map-marker"></i>
             </button>
         </div>
     </main>

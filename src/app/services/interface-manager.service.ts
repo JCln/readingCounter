@@ -46,8 +46,8 @@ export class InterfaceManagerService {
   // /////
 
   // Output manager DBF 
-  postOutputManager = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1/Output/Dbf', body);
+  postOutputManager = (body: object): any => {
+    return this.mainService.POSTBLOB('V1/Output/Dbf', body);
   }
   // 
 

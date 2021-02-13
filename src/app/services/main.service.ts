@@ -39,6 +39,9 @@ export class MainService {
       // )
     }
   }
+  POSTBLOB = (URL: string, body: object): Observable<any> => {
+    return this.http.post(environment.API_URL + '/' + URL, body, { responseType: 'blob' });
+  }
   POST = (URL: string, ID?: number): Observable<any> => {
     return this.http.post(environment.API_URL + '/' + URL + '/' + ID, '').pipe(
       // retry(1)

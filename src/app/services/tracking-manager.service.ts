@@ -16,8 +16,8 @@ export class TrackingManagerService {
       { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true },
       { field: 'listNumber', header: 'شماره لیست', isSelected: true },
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: false },
-      { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true },
+      // { field: 'zoneId', header: 'ناحیه', isSelected: false },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
       { field: 'isBazdid', header: 'بازدید', isSelected: false },
       { field: 'year', header: 'سال', isSelected: false },
       { field: 'isRoosta', header: 'روستایی', isSelected: false },
@@ -68,13 +68,12 @@ export class TrackingManagerService {
     })
   }
   // Output manager 
-  downloadOutputDBF = (dbfData: ITracking | IOutputManager): Observable<any> => {
+  downloadOutputDBF = (dbfData: ITracking | IOutputManager): any => {
     const a: IOutputManager = {
       zoneId: dbfData.zoneId,
       fromDate: dbfData.fromDate,
       toDate: dbfData.toDate
     }
-    console.log(a);
     return this.interfaceManagerService.postOutputManager(a);
   }
   // 
