@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { LazyLoadEvent } from 'primeng/api';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { ICounterStateGridFriendlyResp } from 'src/app/Interfaces/imanage';
+import { IForbiddenManager, IForbiddenManagerGridFriendlyRes } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { ForbiddenService } from 'src/app/services/forbidden.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 @Component({
@@ -12,47 +14,43 @@ import { InteractionService } from 'src/app/services/interaction.service';
 export class ForbiddenComponent implements OnInit {
   subscription: Subscription[] = [];
 
-  dataSource: ICounterStateGridFriendlyResp[] = [];
+  dataSource: IForbiddenManager[] = [];
+  dataSourceRES: IForbiddenManagerGridFriendlyRes;
+
   _selectCols: any[] = [];
   _selectedColumns: any[];
-  selectedFuckingTest: any[] = [];
-
-  _firstPage: number = 0;
-  _rowsNumberPage: number = 10;
 
   constructor(
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private forbiddenService: ForbiddenService
   ) {
   }
 
-  getDataSource = (): Promise<ICounterStateGridFriendlyResp[]> => {
-    try {
-      return new Promise((resolve) => {
-        // ....
-      })
-    } catch (error) {
-      console.error(e => e);
-    }
-  }
   nullSavedSource = () => this.closeTabService.saveDataForForbidden = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForForbidden) {
-      this.dataSource = this.closeTabService.saveDataForForbidden;
+      this.dataSourceRES = this.closeTabService.saveDataForForbidden;
     }
     else {
-      this.dataSource = await this.getDataSource();
-      console.log(this.dataSource);
-
-      this.closeTabService.saveDataForForbidden = this.dataSource;
+      this.dataSourceRES = await this.forbiddenService.getGridFriendlyDataSourceDefault();
+      this.closeTabService.saveDataForForbidden = this.dataSourceRES;
     }
+    this.dataSource = this.dataSourceRES.data;
+    console.log(this.dataSource);
+  }
+  sendGridFriendlyDataSource = async (event: LazyLoadEvent) => {
+    const req = this.forbiddenService.setGridFriendlyDataSource(event);
+    console.log(req);
+
+    // this.dataSource = await this.forbiddenService.getDataSource(req);
   }
   insertSelectedColumns = () => {
-    // this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    // this._selectedColumns = this.customizeSelectedColumns();
+    this._selectCols = this.forbiddenService.columnSelectedMenuDefault();
+    this._selectedColumns = this.forbiddenService.customizeSelectedColumns();
   }
   ngOnInit(): void {
     this.classWrapper();

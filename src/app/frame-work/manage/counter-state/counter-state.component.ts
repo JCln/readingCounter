@@ -4,9 +4,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { ICounterState, ICounterStateGridFriendlyResp } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
-
-import { CounterStateService } from './../../../services/counter-state.service';
-import { InteractionService } from './../../../services/interaction.service';
+import { CounterStateService } from 'src/app/services/counter-state.service';
+import { InteractionService } from 'src/app/services/interaction.service';
 
 @Component({
   selector: 'app-counter-state',

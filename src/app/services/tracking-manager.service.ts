@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
+import { IObjectIteratation } from './../Interfaces/IDictionaryManager';
 import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
 import { IResponses } from './../Interfaces/iresponses';
 import { UtilsService } from './utils.service';
@@ -10,7 +11,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class TrackingManagerService {
-  columnSelectedMenuDefault = () => {
+  columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
       { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true },
       { field: 'listNumber', header: 'شماره لیست', isSelected: true },
