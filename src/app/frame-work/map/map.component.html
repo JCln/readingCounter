@@ -1,16 +1,16 @@
 <section class="top_info">
     <div class="unit">
         <label (click)="showDashboard(false)" class="clickable_map tooltip" for="_map">
-            <i class="fa fa-map-o"></i>
-            <div class="tooltip_text">نقشه</div>
-        </label>
-        <input type="radio" id="_map" name="radio">
-
-        <button class="unit_toggle"></button>
-
-        <label (click)="showDashboard(true)" class="clickable_dash tooltip" for="_dash">
             <i class="fa fa-dashboard"></i>
             <div class="tooltip_text">داشبورد</div>
+        </label>
+        <input type="radio" id="_map" name="radio">
+        
+        <button class="unit_toggle"></button>
+        
+        <label (click)="showDashboard(true)" class="clickable_dash tooltip" for="_dash">
+            <i class="fa fa-map-o"></i>
+            <div class="tooltip_text">نقشه</div>
         </label>
         <input type="radio" id="_dash" name="radio">
     </div>
