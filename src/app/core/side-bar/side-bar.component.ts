@@ -14,7 +14,7 @@ export class SideBarComponent implements OnInit {
 
   constructor(
     private sideBarItemsService: SidebarItemsService,
-    private testSidebarService: SidebarItemsService 
+    private testSidebarService: SidebarItemsService
   ) {
     // this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
     //   if (sidebars) {
@@ -32,11 +32,16 @@ export class SideBarComponent implements OnInit {
     }
   }
   toggleSubItems = (item: any): void => {
-    this.currentRoute.forEach(aItem => {
-      if (item.title !== aItem.title)
-        aItem.isOpen = false
-      else
-        aItem.isOpen = !aItem.isOpen
+    let a = document.querySelectorAll('.fa-arrow-circle-down');
+    this.currentRoute.forEach((aItem, i) => {
+      if (item.title !== aItem.title) {
+        aItem.isOpen = false;
+        a[i].classList.remove('tsConfig');
+      }
+      else {
+        aItem.isOpen = !aItem.isOpen;
+        a[i].classList.add('tsConfig');
+      }
     })
   }
   sid_isSmallStatus = () => {

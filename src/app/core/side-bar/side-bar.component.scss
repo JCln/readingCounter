@@ -52,22 +52,26 @@ ul::-webkit-scrollbar {
       z-index: 500;
       animation: toggle_side 150ms;
     }
-
-    .fa-arrow-circle-down {
-      transform: rotate(0);
-      transition: transform ease-in-out 150ms;
-      color: $blue_d;
-    }
   }
+
+  .fa-arrow-circle-down {
+    transform: rotate(0);
+    transition: transform ease-in-out 150ms;
+    color: $blue_d;
+  }
+
+  // ts config for on close/open lists
+  .tsConfig {
+    transform: rotate(180deg);
+    color: $dark_ddd;
+  }
+
+  // 
+
 
 
   &.active {
     border: 2px solid $dark_ddd;
-
-    .btn .ul_items .on_show .fa {
-      transform: rotate(180deg) !important;
-      color: $dark_ddd;
-    }
 
     .on_show,
     .icons {
