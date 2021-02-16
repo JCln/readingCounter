@@ -4,6 +4,9 @@
 .mat-form-field {
   text-align: right;
   font-family: $font_family;
+  font-size: $font_s;
+  font-weight: 600;
+  color: $gray_dr;
 }
 
 .mat-dialog-content {
@@ -74,4 +77,11 @@ button._blue_dark {
     font-weight: 600;
     color: $gray_dr;
   }
+
+  .mat-select {
+    font-family: $font_family;
+    font-weight: 600;
+    direction: rtl;
+  }
+
 }

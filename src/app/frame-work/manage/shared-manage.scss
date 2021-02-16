@@ -10,12 +10,6 @@ table {
   direction: rtl;
 }
 
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-  font-family: $font_family;
-}
-
 td,
 th {
   border: 1px solid $gray_e3;
@@ -100,7 +94,7 @@ th {
   }
 
   .mat-select-arrow {
-    color: $gray_l;
+    color: $gray_96;
   }
 
 }
@@ -109,6 +103,9 @@ th {
   display: flex;
   justify-content: center;
   text-align: right;
+  font-size: 14px;
+  width: 100%;
+  font-family: $font_family;
 }
 
 .filter {
@@ -168,6 +165,18 @@ td.mat-footer-cell:first-of-type {
   padding-left: 0;
 }
 
+::ng-deep {
+  .mat-option-text {
+    text-align: right;
+    font-family: $font_family;
+    font-size: 1.2rem;
+    font-weight: 600;
+    overflow: hidden;
+    flex-grow: 1;
+    color: $gray_dr;
+  }
+}
+
 // paginator config ///////////////
 :host::ng-deep {
   .mat-paginator-outer-container {
@@ -178,15 +187,6 @@ td.mat-footer-cell:first-of-type {
 
   .mat-paginator-page-size {
     direction: rtl;
-  }
-
-  .mat-option-text {
-    text-align: right;
-    font-family: $font_family;
-    font-size: 1.2rem;
-    font-weight: 500;
-    overflow: hidden;
-    flex-grow: 1;
   }
 
   .mat-select-value {
