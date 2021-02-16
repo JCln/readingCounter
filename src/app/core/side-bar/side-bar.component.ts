@@ -32,7 +32,7 @@ export class SideBarComponent implements OnInit {
     }
   }
   toggleSubItems = (item: any): void => {
-    let a = document.querySelectorAll('.fa-arrow-circle-down');
+    let a = document.querySelectorAll('.fa-arrow-circle-up');
     this.currentRoute.forEach((aItem, i) => {
       if (item.title !== aItem.title) {
         aItem.isOpen = false;
@@ -40,7 +40,7 @@ export class SideBarComponent implements OnInit {
       }
       else {
         aItem.isOpen = !aItem.isOpen;
-        a[i].classList.add('tsConfig');
+        a[i].classList.toggle('tsConfig');
       }
     })
   }
