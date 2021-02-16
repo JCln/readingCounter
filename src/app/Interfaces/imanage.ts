@@ -20,6 +20,14 @@ export interface ICounterState {
     isXarab: boolean,
     isFaqed: boolean
 }
+// export interface IGridFriendlyFilter {
+//     field: string,
+//     operator: string,
+//     logic: string,
+//     filter: [
+//         IGridFriendlyFilter
+//     ] | null
+// }
 export interface ICounterStateGridFriendlyReq {
     take: number,
     skip: number,
@@ -30,13 +38,12 @@ export interface ICounterStateGridFriendlyReq {
         }
     ],
     filter: {
-        field: string,
-        operator: string,
+        // field: string,
+        // operator: string,
         logic: string,
-        filters: [
-            null
-        ]
-    },
+        filters: any | null
+    }
+    ,
     group: [
         {
             field: string,

@@ -31,10 +31,15 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     private counterStateService: CounterStateService
   ) {
   }
-
+  customizeSelectedColumns = () => {
+    return this._selectCols.filter(items => {
+      if (items.isSelected)
+        return items
+    })
+  }
   columnSelectedMenuDefault = () => {
     this._selectCols = this.counterStateService.columnSelectedMenuDefault();
-    this._selectedColumns = this._selectCols;
+    this._selectedColumns = this.customizeSelectedColumns();
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
