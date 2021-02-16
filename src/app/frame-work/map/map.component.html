@@ -5,9 +5,9 @@
             <div class="tooltip_text">داشبورد</div>
         </label>
         <input type="radio" id="_map" name="radio">
-        
+
         <button class="unit_toggle"></button>
-        
+
         <label (click)="showDashboard(true)" class="clickable_dash tooltip" for="_dash">
             <i class="fa fa-map-o"></i>
             <div class="tooltip_text">نقشه</div>
@@ -15,19 +15,19 @@
         <input type="radio" id="_dash" name="radio">
     </div>
 
-    <button class="polyline_switch tooltip" (click)="isShowMapConfig = !isShowMapConfig"
-        [hidden]="!canShowOptionsButton || !isShowMap">
-        <i class="pi pi-cog"></i>
-        <div class="tooltip_text">تنظیمات نقشه</div>
-    </button>
+    <div [hidden]="!canShowOptionsButton || !isShowMap">
+        <button class="polyline_switch tooltip" (click)="isShowMapConfig = !isShowMapConfig">
+            <i class="pi pi-cog"></i>
+            <div class="tooltip_text">تنظیمات نقشه</div>
+        </button>
+    </div>
 </section>
 
 <div class="map-frame" [hidden]="!isShowMap">
-    <div *ngIf="isShowMapConfig" [hidden]="!canShowOptionsButton || !isShowMap" class="polyline_config">
+    <div *ngIf="isShowMapConfig" [hidden]="!canShowOptionsButton" class="polyline_config">
         <h3>زمان نمایش (ms) : {{polyline_configs}}</h3>
         <p-slider [(ngModel)]="polyline_configs" [max]=3000></p-slider>
         <button class="btn_2" (click)="mapConfigOptions(polyline_configs)">نمایش</button>
     </div>
     <div id="map"></div>
 </div>
-<!-- <leaflet-fullscreen-control [map]="map"></leaflet-fullscreen-control> -->

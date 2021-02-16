@@ -9,7 +9,6 @@ import { MapComponent } from './map.component';
   declarations: [MapComponent],
   imports: [
     SharedPrimeNgModule,
-    // NgxLeafletFullscreenModule,
     MapRoutingModule
   ]
 })

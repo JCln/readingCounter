@@ -1,20 +1,20 @@
-import 'src/assets/L.EasyButton/src/easy-button';
-
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as Leaflet from 'leaflet';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { IListManagerPDXY } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
+import { InteractionService } from 'src/app/services/interaction.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
-import { IListManagerPDXY } from './../../Interfaces/imanage';
 import { MapService } from './../../services/map.service';
-import { UtilsService } from './../../services/utils.service';
+
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
 
-const defaultIcon = Leaflet.icon({
+const defaultIcon = L.icon({
   iconRetinaUrl,
   iconUrl,
   shadowUrl,
@@ -24,84 +24,78 @@ const defaultIcon = Leaflet.icon({
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]
 })
-Leaflet.Marker.prototype.options.icon = defaultIcon;
+L.Marker.prototype.options.icon = defaultIcon;
 
-
+declare let L;
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
-  private markersDataSourceXY: IListManagerPDXY[] = [];
-  map: Leaflet.Map;
+  private map;
   private mapItems: Imap[];
 
+  private markersDataSourceXY: IListManagerPDXY[] = [];
   polyline_configs: number;
   isShowMap: boolean = true;
   canShowOptionsButton: boolean = false;
   isShowMapConfig: boolean = false;
 
+  title: string = '';
+  subscription: Subscription;
+
   constructor(
-    private mapService: MapService,
-    private mapItemsService: MapItemsService,
-    private router: Router,
     private route: ActivatedRoute,
+    private mapService: MapService,
+    readonly mapItemsService: MapItemsService,
+    private router: Router,
+    private readonly interactionService: InteractionService,
     private utilsService: UtilsService
   ) {
   }
   private getMapItems = () => {
     this.mapItems = this.mapItemsService.getMapItems();
   }
-  addToMapWrapper = (val: any) => {
-    Leaflet.control.layers(val).addTo(this.map);
-  }
-  leafletRefresh = () => {
-    Leaflet.easyButton('fa fa-refresh', function (btn) {
-      this.addInvalidateMap();
-    }, 'بارگیری مجدد نقشه').addTo(this.map);
-  }
-  leafletMyPosition = () => {
-    Leaflet.easyButton('fa-map-marker', function (btn, map) {
-      map.locate({ setView: true, maxZoom: 16 })
-      map.on('locationfound', this.onLocationFound(map));
-    }, 'مکان من').addTo(this.map);
-  }
-
   private initMap = () => {
-
-    const satellite = this.mapItems[1];
     const OSM = this.mapItems[0];
+    const SATELLITE = this.mapItems[1];
+    const
+      streets = L.tileLayer(
+        OSM.mapBoxUrl),
+      satellite = L.tileLayer(
+        SATELLITE.mapBoxUrl + SATELLITE.accessToken)
 
-    const OSMVW = Leaflet.tileLayer(
-      OSM.mapBoxUrl, {
-      attribution: OSM.attribution
-    }),
-      satelliteVW = Leaflet.tileLayer(
-        satellite.mapBoxUrl + satellite.accessToken, {
-        attribution: satellite.attribution
-      });
-
-    const baseMaps = {
-      "OSM": OSMVW,
-      "Satellite": satelliteVW
-    };
-
-    this.map = Leaflet.map('map', {
+    // only one of base layers should be added to the map at instantiation
+    this.map = L.map('map', {
       center: [32.669, 51.664],
-      zoom: 9,
-      layers: [OSMVW]
+      zoom: 13,
+      minZoom: 4,
+      layers: [streets]
     });
 
-    this.addToMapWrapper(baseMaps);
+    const baseMaps = {
+      "Satellite": satellite,
+      "OSM": streets
+    };
 
+    L.control.layers(baseMaps).addTo(this.map);
   }
+
+  getPointerMarks = (a: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.mapService.callPointerMarks(a).subscribe(res => {
+        resolve(res);
+      });
+    });
+  }
+
   private leafletDrawPolylines = (delay: number) => {
     let lines = [];
     this.markersDataSourceXY.forEach((items, i) => {
       setTimeout(() => {
         lines.push([parseFloat(items.y), parseFloat(items.x)]);
-        Leaflet.polyline(lines, {
+        L.polyline(lines, {
           color: 'red',
           weight: 3
         }).addTo(this.map);
@@ -111,34 +105,48 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private getXYPosition = (delay: number) => {
     this.markersDataSourceXY.map((items, i) => {
       setTimeout(() => {
-        Leaflet.marker([parseFloat(items.y), parseFloat(items.x)]).addTo(this.map);
+        L.marker([parseFloat(items.y), parseFloat(items.x)]).addTo(this.map);
       }, i * delay);
     })
   }
-  getRouteParams = (): IMapTrackDesc => {
+
+  private getRouteParams = (): IMapTrackDesc => {
     const a = this.route.snapshot.paramMap.get('trackNumber');
     const b = this.route.snapshot.paramMap.get('day');
     return { trackNumber: a, day: b };
   }
-  getPointerMarks = (a: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.mapService.callPointerMarks(a).subscribe(res => {
-        resolve(res);
-      });
-    });
+  private classWrapper = async () => {
+    const a: IMapTrackDesc = this.getRouteParams();
+    if (this.utilsService.isNull(a.trackNumber))
+      return;
+    console.log(1);
+
+    this.canShowOptionsButton = true;
+    this.markersDataSourceXY = await this.getPointerMarks(a);
+  }
+  ngOnInit(): void {
+    this.getMapItems();
+    this.initMap();
+    this.classWrapper();
+  }
+  ngAfterViewInit(): void {
+    this.mapService.fullScreen(this.map);
+    this.mapService.buttons(this.map);
+    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+      if (res) {
+        if (res === '/wr')
+          this.ngOnInit();
+      }
+    })
+  }
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.unsubscribe();
   }
   mapConfigOptions = (delay: number) => {
     this.getXYPosition(delay + 20);
     this.leafletDrawPolylines(delay);
-  }
-  classWrapper = async () => {
-    const a: IMapTrackDesc = this.getRouteParams();
-    this.getMapItems();
-    this.initMap();
-    if (this.utilsService.isNull(a.trackNumber))
-      return;
-    this.canShowOptionsButton = true;
-    this.markersDataSourceXY = await this.getPointerMarks(a);
   }
   showDashboard = (isShowMap: boolean) => {
     this.isShowMap = isShowMap;
@@ -149,75 +157,5 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate(['../wr/db']);
     }
   }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
 
-  ngAfterViewInit(): void {
-    this.leafletMyPosition();
-    this.leafletRefresh();
-    // this.mapService.buttons(this.map);
-  }
-  ngOnDestroy(): void {
-  }
 }
-
-
-
-// private otherLayers = () => {
-  //   const satellite = this.mapItems[1];
-  //   const OSM = this.mapItems[0];
-
-  //   const OSMVW = Leaflet.tileLayer(
-  //     OSM.mapBoxUrl, {
-  //     id: OSM.id,
-  //     maxZoom: OSM.maxZoom,
-  //     minZoom: OSM.minZoom,
-  //     tileSize: OSM.tileSize,
-  //     zoomOffset: OSM.zoomOffset
-  //   }),
-  //     satelliteVW = Leaflet.tileLayer(
-  //       satellite.mapBoxUrl + satellite.accessToken, {
-  //       tileSize: satellite.tileSize,
-  //       zoomOffset: satellite.zoomOffset
-  //     });
-  //   return [OSMVW, satellite]
-  // }
-
-
-
-// const satellite = this.mapItems[1];
-// const OSM = this.mapItems[0];
-
-// const OSMVW = Leaflet.tileLayer(
-//   OSM.mapBoxUrl, {
-//   id: OSM.id,
-//   maxZoom: OSM.maxZoom,
-//   minZoom: OSM.minZoom,
-//   tileSize: OSM.tileSize,
-//   zoomOffset: OSM.zoomOffset,
-//   attribution: OSM.attribution
-// }),
-//   satelliteVW = Leaflet.tileLayer(
-//     satellite.mapBoxUrl + satellite.accessToken, {
-//     tileSize: satellite.tileSize,
-//     zoomOffset: satellite.zoomOffset,
-//     attribution: satellite.attribution
-//   });
-
-// const baseMaps = {
-//   "OSM": OSMVW,
-//   // "Satellite": satelliteVW
-// };
-// this.map = Leaflet.map('map').setView([32.669, 51.664], 9);
-
-// this.map = Leaflet.map('map', {
-//   center: [32.669, 51.664],
-//   zoom: 9,
-//   // layers: [OSMVW]
-// });
-
-// // Leaflet.tileLayer(OSM.mapBoxUrl, {
-// //   attribution: OSM.attribution,
-// // }).addTo(this.map);
-// Leaflet.control.layers(baseMaps).addTo(this.map);

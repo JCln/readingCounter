@@ -107,11 +107,13 @@
   justify-content: center;
   align-items: center;
   border-radius: 100vmax;
-  width: 4rem;
+  width: 2.5rem;
+  height: 2.5rem;
   padding: 0rem;
   border: 0;
   background-color: $gray_d5;
   color: $dark_ddd;
+
   i {
     font-size: $font_m;
     font-weight: 600;

@@ -1,69 +1,67 @@
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
-import 'leaflet-easyprint';
 
 import { Injectable } from '@angular/core';
-import * as Leaflet from 'leaflet';
 import { ListManagerService } from 'src/app/services/list-manager.service';
+
+declare let L;
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
-  map: Leaflet.Map;
+  private map;
 
   constructor(
     private listManagerService: ListManagerService
   ) { }
 
-  addToMapWrapper = (val: any) => {
-    Leaflet.control.layers(val).addTo(this.map);
+  private overlays = (lat: any, lan: any, map: L.Map): any => {
+    L.marker([lat, lan]).addTo(map);
   }
-  overlays = (lat: any, lan: any): any => {
-    Leaflet.marker([lat, lan]).addTo(this.map);
-  }
-  // addMarkerCluster = (map: L.Map) => {
-  //   const markers = Leaflet.markerClusterGroup();
-  //   map.addLayer(markers);
-  // }
 
-  removeAllLayers = (window) => {
-    this.map.eachLayer(function (layer) {
-      this.map.removeLayer(layer);
+  addMarkerCluster = (map: L.Map) => {
+    const markers = L.markerClusterGroup();
+    map.addLayer(markers);
+  }
+
+  fullScreen = (map: L.Map) => {
+    map.addControl(new L.Control.Fullscreen());
+  }
+  removeAllLayers = (map, window) => {
+    map.eachLayer(function (layer) {
+      map.removeLayer(layer);
     }, window)
   }
-  onLocationFound = (e) => {
-    this.overlays(e._lastCenter.lat, e._lastCenter.lng);
-  }
-  addInvalidateMap = () => {
-    this.map.invalidateSize();
-  }
-  ///////////
   callPointerMarks = (data: object) => {
     return this.listManagerService.postLMPDXY(data);
   }
-  // LeafletPrinter = () => {
-  //   Leaflet.easyPrint({
-  //     position: 'bottomleft',
-  //     sizeModes: ['A4Portrait', 'A4Landscape']
-  //   }).addTo(this.map);
-  // }
+  ///////// buttons
+  buttons = (map: L.Map) => {
+    const onLocationFound = (e) => {
+      this.overlays(e._lastCenter.lat, e._lastCenter.lng, map);
+    }
 
-  leafletRefresh = () => {
-    Leaflet.easyButton('fa-refresh', function (btn, map) {
-      this.addInvalidateMap();
-    }, 'بارگیری مجدد نقشه').addTo(this.map);
-  }
-  leafletMyPosition = () => {
-    Leaflet.easyButton('fa-map-marker', function (btn, map) {
+    const addInvalidateMap = (map: L.Map) => {
+      map.invalidateSize();
+    }
+    L.easyPrint({
+      position: 'bottomleft',
+      sizeModes: ['A4Portrait', 'A4Landscape']
+    }).addTo(map);
+
+    L.easyButton('fa-refresh', function (btn, map) {
+      addInvalidateMap;
+    }, 'بارگزاری مجدد نقشه').addTo(map);
+
+    L.easyButton('fa-map-marker', function (btn, map) {
       map.locate({ setView: true, maxZoom: 16 })
-      map.on('locationfound', this.onLocationFound(map));
-    }, 'مکان من').addTo(this.map);
-  }
+      map.on('locationfound', onLocationFound(map));
+    }, 'مکان من').addTo(map);
 
-  leafletCloseAllOverlays = () => {
-    Leaflet.easyButton('fa-close', function (btn) {
-      this.removeAllLayers(window);
-    }, 'بستن تمامی لایه ها').addTo(this.map);
-  }
+    L.easyButton('fa-close', function (btn) {
+      this.removeAllLayers(map, window);
+    }, 'بستن تمامی لایه ها').addTo(map);
 
+  }
+  ///////////
 }
