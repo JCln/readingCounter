@@ -59,7 +59,7 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource = await this.getDataSource();
     this.offLoadPerDayHistory = this.dataSource.offLoadPerDayHistory;
     this.insertSelectedColumns();
-    console.log(this.dataSource);
+    this.dataSource.overalDuration = parseFloat(this.utilsService.getRange(this.dataSource.overalDuration));
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {

@@ -42,6 +42,9 @@ export class UtilsService {
       return true;
     return false;
   }
+  getRange = (val: number): string => {
+    return val.toString().substring(0, 6);
+  }
   isExactEqual = (first: string, second: string): boolean => {
     if (first.trim() === second.trim())
       return true;
