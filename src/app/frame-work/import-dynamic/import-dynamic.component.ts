@@ -41,11 +41,11 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   _isOrderByDate: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
-      title: 'صدور بر اساس تاریخ :',
+      title: 'تاریخ',
       isSelected: true
     },
     {
-      title: 'صدور بر اساس دوره :',
+      title: 'دوره',
       isSelected: false
     }
   ]
@@ -140,11 +140,11 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }
-  // private showEditButton = () => {
-  //   if (!this.readingConfigDefault)
-  //     return;
-  //   this.canShowEditButton = true;
-  // }
+  private showEditButton = () => {
+    if (!this.readingConfigDefault)
+      return;
+    this.canShowEditButton = true;
+  }
   verificationACounterReaderId = async () => {
     if (!this.importDynamic.zoneId || !this.zoneDictionary)
       return;
@@ -159,6 +159,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       return;
     }
     this.insertReadingConfigDefaults(this.readingConfigDefault);
+    this.showEditButton();
   }
   verificationReadingPeriod = async () => {
     if (!this.importDynamic.zoneId || !this.zoneDictionary || !this.kindId) {

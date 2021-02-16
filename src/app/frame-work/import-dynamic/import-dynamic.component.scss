@@ -13,9 +13,26 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 20rem));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 17rem));
   gap: $font_05;
   align-items: center;
+}
+
+section.dynamic_content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
+  gap: $font_05;
+  align-items: center;
+  border: .2rem solid $blue_d;
+  border-radius: $border_s;
+  padding: $font_xxs;
+  margin: 1rem 0;
+}
+
+.static_part {
+  border: .2rem solid $blue_d;
+  border-radius: $border_s;
+  padding: $font_xxs;
 }
 
 .check_boxes {
@@ -47,6 +64,11 @@ section.content {
 
 .btn_1 {
   color: $white;
+  background-color: $orange_d;
+}
+
+h2 {
+  color: $gray_dr;
 }
 
 footer {
@@ -90,12 +112,23 @@ footer {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $gray_dr;
+    color: $blue_c;
   }
 }
 
 .order_by {
-  margin: $font_s;
+  display: flex;
+}
+
+._order_inner {
+  display: inherit;
+  justify-content: space-evenly;
+}
+
+hr {
+  margin: 0 7rem;
+  background-color: $blue_d;
+  height: .2rem;
 }
 
 .radio_group {
@@ -113,6 +146,7 @@ footer {
 ::ng-deep {
   .mat-radio-label-content {
     padding-right: $font_05 !important;
+    color: $dark_ddd;
   }
 }
 
@@ -121,7 +155,7 @@ footer {
 }
 
 .this {
-  border: 1px solid $blue_l;
+  border: 1px solid $orange_d;
   animation: pulse-new-button 500ms;
 }
 
@@ -131,10 +165,10 @@ footer {
   }
 
   50% {
-    box-shadow: 0px 0px 3px 0px $blue_l;
+    box-shadow: 0px 0px 3px 0px $orange_d;
   }
 
   100% {
-    box-shadow: 0px 0px 5px 1px $blue_l;
+    box-shadow: 0px 0px 5px 1px $orange_d;
   }
 }
