@@ -3,6 +3,7 @@
 @import '../../../assets/input.scss';
 
 table {
+  display: block;
   border: 2px solid $blue_c;
   overflow: auto;
   width: 100%;
@@ -83,10 +84,6 @@ th {
 }
 
 :host::ng-deep {
-  .mat-option-text {
-    text-align: right;
-    font-family: $font_family;
-  }
 
   .mat-dialog-container {
     direction: rtl;
@@ -184,8 +181,12 @@ td.mat-footer-cell:first-of-type {
   }
 
   .mat-option-text {
+    text-align: right;
+    font-family: $font_family;
     font-size: 1.2rem;
     font-weight: 500;
+    overflow: hidden;
+    flex-grow: 1;
   }
 
   .mat-select-value {
