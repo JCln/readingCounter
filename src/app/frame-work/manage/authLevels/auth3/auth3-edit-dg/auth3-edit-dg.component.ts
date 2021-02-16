@@ -22,13 +22,12 @@ export class Auth3EditDgComponent {
       id: data.id,
       title: data.title,
       authLevel2Id: data.id,
-      value: data.value,
       cssClass: data.cssClass,
       route: data.route,
-      logicalOrder: data.logicalOrder,
       inSidebar: data.inSidebar,
       isClosable: data.isClosable,
-      isRefreshable: data.isRefreshable
+      isRefreshable: data.isRefreshable,
+      logicalOrder: data.logicalOrder
     })
   }
 
