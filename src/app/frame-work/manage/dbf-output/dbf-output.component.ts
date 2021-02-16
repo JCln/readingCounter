@@ -25,8 +25,10 @@ export class DbfOutputComponent implements OnInit {
   connectToServer = () => {
     if (!this.outputManagerService.checkVertification(this.dbfOutput))
       return;
-    this.trackingManagerService.downloadOutputDBF(this.dbfOutput).subscribe(res => {
+    this.trackingManagerService.downloadOutputDBF(this.dbfOutput).subscribe((res: Blob) => {
       this.outputManagerService.downloadFile(res);
+      console.log(res);
+      
     })
   }
   getZoneDictionary = (): Promise<any> => {

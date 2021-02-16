@@ -9,6 +9,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class OutputManagerService {
+  fileUrl;
   dbfOutput: IOutputManager = {
     zoneId: 0,
     fromDate: null,
@@ -39,11 +40,10 @@ export class OutputManagerService {
     return true;
   }
   downloadFile(data: any) {
-    console.log(data);
-
-    const blob = new Blob([data], { type: 'text/json; charset=utf-8' });
-    const url = window.URL.createObjectURL(blob);
-    window.open(url);
-
+    var downloadURL = window.URL.createObjectURL(data);
+    var link = document.createElement('a');
+    link.href = downloadURL;
+    link.download = `${new Date().toLocaleDateString()}.dbf`;
+    link.click();
   }
 }
