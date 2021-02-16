@@ -3,8 +3,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { IObjectIteratation } from '../Interfaces/IDictionaryManager';
-import { ICounterStateGridFriendlyReq } from '../Interfaces/imanage';
-import { IForbiddenManagerGridFriendlyRes } from './../Interfaces/imanage';
+import { ICounterStateGridFriendlyReq, IForbiddenManagerGridFriendlyRes } from '../Interfaces/imanage';
 
 @Injectable({
   providedIn: 'root'

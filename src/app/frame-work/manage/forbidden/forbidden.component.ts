@@ -29,6 +29,14 @@ export class ForbiddenComponent implements OnInit {
   ) {
   }
 
+  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
+    dataSource.map(dataSource => {
+      zoneDictionary.map(zoneDic => {
+        if (zoneDic.id === dataSource.zoneId)
+          dataSource.zoneId = zoneDic.title;
+      })
+    });
+  }
   nullSavedSource = () => this.closeTabService.saveDataForForbidden = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -43,6 +51,7 @@ export class ForbiddenComponent implements OnInit {
       this.closeTabService.saveDataForForbidden = this.dataSourceRES;
     }
     this.dataSource = this.dataSourceRES.data;
+    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
     console.log(this.dataSource);
   }
   sendGridFriendlyDataSource = async (event: LazyLoadEvent) => {
