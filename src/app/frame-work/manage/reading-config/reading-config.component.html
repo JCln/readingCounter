@@ -340,7 +340,7 @@
 
         <td md-cell *matCellDef="let row" class="_actions">
             <i (click)="editDialog(row)" class="_custom fa fa-edit"></i>|
-            <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash"></i>
+            <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash-o"></i>
             <i *ngIf="isHide" (click)="isHide = !isHide" class="_custom fa fa-eye"></i>
             <i *ngIf="!isHide" (click)="isHide = !isHide" class="_custom fa fa-eye-slash"></i>
         </td>
