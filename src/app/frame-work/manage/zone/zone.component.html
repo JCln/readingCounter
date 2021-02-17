@@ -24,7 +24,7 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select [formControl]="regionIdFilter" name="zoneDictionary">
+                <mat-select placeholder="انتخاب مورد" [formControl]="regionIdFilter" name="zoneDictionary">
                     <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="zoneDictionary.title">
                         {{zoneDictionary.title}}
                     </mat-option>
@@ -40,7 +40,7 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select [formControl]="isMetroFilter" name="truefalse">
+                <mat-select placeholder="انتخاب مورد" [formControl]="isMetroFilter" name="truefalse">
                     <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
                         {{truefalse.name}}
                     </mat-option>

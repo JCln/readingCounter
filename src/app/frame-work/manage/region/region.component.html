@@ -24,7 +24,7 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select [formControl]="provinceIdFilter" name="truefalse">
+                <mat-select placeholder="انتخاب مورد" [formControl]="provinceIdFilter" name="truefalse">
                     <mat-option *ngFor="let truefalse of regionDictionary" [value]="truefalse.title">
                         {{truefalse.title}}
                     </mat-option>

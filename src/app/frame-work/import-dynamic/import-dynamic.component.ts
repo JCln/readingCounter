@@ -38,7 +38,6 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     { name: 'هیچکدام', value: '' }
   ]
 
-  _isOrderByDate: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -49,14 +48,16 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       isSelected: false
     }
   ]
+  _isOrderByDate: boolean = false;
   _showAlalHesabPercent: boolean = false;
   _showimagePercent: boolean = false;
+  canShowEditButton: boolean = false;
+
   kindId: number = 0;
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   readingConfigDefault: string[] = [];
   userCounterReader: IDictionaryManager[] = [];
-  canShowEditButton: boolean = false;
   zoneDictionary: IZoneManager[] = [];
   dataSource: any;
   subscription: Subscription[] = [];
@@ -68,7 +69,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     private importDynamicService: ImportDynamicService
   ) { }
   connectToServer = () => {
-    const validation = this.importDynamicService.checkVertification(this.importDynamic);
+    const validation = this.importDynamicService.checkVertification(this.importDynamic, this._isOrderByDate);
     if (!validation)
       return;
     this.interfaceService.postImportData(this.importDynamic).subscribe(res => {
@@ -162,6 +163,8 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this.showEditButton();
   }
   verificationReadingPeriod = async () => {
+    if (this._isOrderByDate)
+      return;
     if (!this.importDynamic.zoneId || !this.zoneDictionary || !this.kindId) {
       this.readingPeriodDictionary = [];
       return;

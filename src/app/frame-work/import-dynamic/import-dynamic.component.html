@@ -19,7 +19,7 @@
             <section class="content">
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>
-                    <mat-select [(ngModel)]="importDynamic.zoneId" name="zoneId">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.zoneId" name="zoneId">
                         <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
                             (click)="verificationACounterReaderId()">
                             {{truefalse.title}}
@@ -29,7 +29,7 @@
                 <!-- when zone id and kind id get -->
                 <div class="input_2" [hidden]="_isOrderByDate || !readingPeriodKindsDictionary.length">
                     <div class="_key">نوع دوره قرائت</div>
-                    <mat-select [(ngModel)]="kindId" name="kindId">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
                         <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
                             (click)="verificationReadingPeriod()">
                             {{truefalse.title}}
@@ -46,7 +46,8 @@
                     <input class="_value" name="toEshterak" [(ngModel)]="importDynamic.toEshterak">
                 </div>
 
-                <br><br>
+            </section>
+            <section class="content">
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از تاریخ</div>
                     <div class="_value">
@@ -61,21 +62,21 @@
                         </app-date-jalali>
                     </div>
                 </div>
-
-                <div class="check_boxes">
-                    <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamic.hasPreNumber">شماره قبلی
-                    </mat-checkbox>
-
-                    <mat-checkbox name="displayBillId" [(ngModel)]="importDynamic.displayBillId">نمایش شناسه
-                        قبض
-                    </mat-checkbox>
-
-                    <mat-checkbox name="displayRadif" [(ngModel)]="importDynamic.displayRadif">نمایش ردیف
-                    </mat-checkbox>
-                </div>
             </section>
+
+            <div class="check_boxes">
+                <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamic.hasPreNumber">شماره قبلی
+                </mat-checkbox>
+
+                <mat-checkbox name="displayBillId" [(ngModel)]="importDynamic.displayBillId">نمایش شناسه
+                    قبض
+                </mat-checkbox>
+
+                <mat-checkbox name="displayRadif" [(ngModel)]="importDynamic.displayRadif">نمایش ردیف
+                </mat-checkbox>
+            </div>
         </section>
-        <section [hidden]="!canShowEditButton" class="dynamic_content">
+        <section *ngIf="canShowEditButton" class="dynamic_content">
             <div class="input_2 this" [hidden]="!_showAlalHesabPercent">
                 <div class="_key">درصد علی الحساب</div>
                 <input class="_value" type="number" name="alalHesabPercent"
@@ -88,7 +89,8 @@
 
             <div class="input_2 this" *ngIf="userCounterReader.length">
                 <div class="_key">مامور قرائت</div>
-                <mat-select [(ngModel)]="importDynamic.counterReaderId" name="counterReaderId">
+                <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.counterReaderId"
+                    name="counterReaderId">
                     <mat-option *ngFor="let truefalse of userCounterReader" [value]="truefalse.id">
                         {{truefalse.title}}
                     </mat-option>
@@ -97,7 +99,8 @@
 
             <div class="input_2 this" [hidden]="!readingPeriodDictionary.length">
                 <div class="_key">مدت قرائت</div>
-                <mat-select [(ngModel)]="importDynamic.readingPeriodId" name="readingPeriodId">
+                <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.readingPeriodId"
+                    name="readingPeriodId">
                     <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                         {{truefalse.title}}
                     </mat-option>

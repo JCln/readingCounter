@@ -29,6 +29,16 @@ export class UtilsService {
     }
     return true;
   }
+  plusOrMinus = (value: number, maxLength: number, minLength: number) => {
+    if (value > maxLength) {
+      this.snackWrapperService.openSnackBar(`حداکثر تعداد ${maxLength} می‌باشد`, 3000, 'snack_warn');
+      return;
+    }
+    if (value < minLength) {
+      this.snackWrapperService.openSnackBar(`حداقل تعداد ${minLength} می‌باشد`, 3000, 'snack_warn');
+      return;
+    }
+  }
   isEmailValid = (email: string): boolean => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(email)) {

@@ -47,7 +47,7 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select [formControl]="isEnabledFilter" name="truefalse">
+                <mat-select placeholder="انتخاب مورد" [formControl]="isEnabledFilter" name="truefalse">
                     <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
                         {{truefalse.name}}
                     </mat-option>

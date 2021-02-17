@@ -24,7 +24,7 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select [formControl]="readingPeriodKindIdFilter" name="readingPeriodKindId">
+                <mat-select placeholder="انتخاب مورد" [formControl]="readingPeriodKindIdFilter" name="readingPeriodKindId">
                     <mat-option *ngFor="let readingPeriodKindId of readingPeriodKindId"
                         [value]="readingPeriodKindId.title">
                         {{readingPeriodKindId.title}}
@@ -65,7 +65,7 @@
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select [formControl]="zoneIdFilter" name="zoneDictionary">
+                <mat-select placeholder="انتخاب مورد" [formControl]="zoneIdFilter" name="zoneDictionary">
                     <mat-option *ngFor="let zoneDictionary of zoneDictionary" [value]="zoneDictionary.title">
                         {{zoneDictionary.title}}
                     </mat-option>

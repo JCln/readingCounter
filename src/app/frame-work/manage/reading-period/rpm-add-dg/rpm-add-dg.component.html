@@ -20,7 +20,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>ناحیه</mat-label>
-            <mat-select formControlName="zoneId">
+            <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
@@ -34,7 +34,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>قرائت نوع دوره</mat-label>
-            <mat-select formControlName="readingPeriodKindId">
+            <mat-select placeholder="انتخاب مورد" formControlName="readingPeriodKindId">
                 <mat-option *ngFor="let truefalse of readingPeriodKindId" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>

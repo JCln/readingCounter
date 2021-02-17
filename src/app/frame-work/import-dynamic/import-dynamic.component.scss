@@ -8,7 +8,7 @@
   box-shadow: 1px 1px 8px 4px $gray_d;
   padding: $font_s;
   border-radius: $border_s;
-  min-height: 25rem;
+  min-height: 35rem;
 }
 
 section.content {
@@ -23,14 +23,16 @@ section.dynamic_content {
   grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
   gap: $font_05;
   align-items: center;
-  border: .2rem solid $blue_d;
+  border: .15rem solid $blue_c;
+  box-shadow: 1px 1px 5px 1px $blue_c;
   border-radius: $border_s;
   padding: $font_xxs;
   margin: 1rem 0;
 }
 
 .static_part {
-  border: .2rem solid $blue_d;
+  border: .15rem solid $blue_d;
+  box-shadow: 1px 1px 5px 1px $blue_d;
   border-radius: $border_s;
   padding: $font_xxs;
 }
@@ -39,7 +41,7 @@ section.dynamic_content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
   gap: $font_05;
-  margin: $font_05;
+  margin: $font_xxs;
 }
 
 ._key,
@@ -60,6 +62,7 @@ section.dynamic_content {
   border: none;
   color: $blue_d;
   text-align: center;
+  width: 100%;
 }
 
 .btn_1 {
@@ -69,6 +72,7 @@ section.dynamic_content {
 
 h2 {
   color: $gray_dr;
+  margin-left: 5rem;
 }
 
 footer {
@@ -126,9 +130,10 @@ footer {
 }
 
 hr {
-  margin: 0 7rem;
+  margin: 0 4rem;
   background-color: $blue_d;
   height: .2rem;
+  margin-bottom: $font_xxs;
 }
 
 .radio_group {
@@ -141,6 +146,7 @@ hr {
   font-weight: 700;
   font-family: inherit;
   color: $gray_dr;
+  margin: 0 2rem;
 }
 
 ::ng-deep {
@@ -155,7 +161,7 @@ hr {
 }
 
 .this {
-  border: 1px solid $orange_d;
+  border: 1.5px solid $orange_d;
   animation: pulse-new-button 500ms;
 }
 

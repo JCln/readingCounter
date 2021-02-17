@@ -70,3 +70,10 @@ a:focus,
 a:active {
   outline: none;
 }
+
+::ng-deep {
+  .mat-select-placeholder {
+    color: $gray_d;
+    font-size: 1rem;
+  }
+}

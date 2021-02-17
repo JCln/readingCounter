@@ -3,8 +3,7 @@
 
         <div class="input_2">
             <div class="_key">ناحیه</div>
-            <mat-label>انتخاب کنید</mat-label>
-            <mat-select [(ngModel)]="dbfOutput.zoneId" name="zoneId">
+            <mat-select placeholder="انتخاب مورد" [(ngModel)]="dbfOutput.zoneId" name="zoneId">
                 <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
