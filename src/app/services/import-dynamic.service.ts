@@ -39,7 +39,7 @@ export class ImportDynamicService {
       return false;
     return true;
   }
-  checkVertification = (val: IImportDynamicDefault): boolean => {
+  checkVertification = (val: IImportDynamicDefault, _isOrderByDate: boolean): boolean => {
     this.importDynamicValue = val;
     if (!this.checkLengthFromToEshterak(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
       this.snackWrapperService.openSnackBar('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد', 3000, 'snack_danger');
@@ -53,9 +53,11 @@ export class ImportDynamicService {
       this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', 3000, 'snack_danger');
       return false;
     }
-    if (!this.validationOnNull(val.readingPeriodId)) {
-      this.snackWrapperService.openSnackBar('مدت دوره ای ایجاد و سپس امتحان نمایید', 3000, 'snack_danger');
-      return false;
+    if (!_isOrderByDate) {
+      if (!this.validationOnNull(val.readingPeriodId)) {
+        this.snackWrapperService.openSnackBar('مدت دوره ای ایجاد و سپس امتحان نمایید', 3000, 'snack_danger');
+        return false;
+      }
     }
     if (!this.validationOnNull(this.importDynamicValue.counterReaderId)) {
       this.snackWrapperService.openSnackBar('یک مامور قرائت انتخاب نمایید', 3000, 'snack_danger');
