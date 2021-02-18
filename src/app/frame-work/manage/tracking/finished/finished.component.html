@@ -1,12 +1,15 @@
 <p-table [columns]="_selectedColumns" [value]="dataSource" [lazy]="true" [paginator]="true" [rows]="20"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر
-" [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl">
-    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
+" [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl"
+    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
             selectedItemsLabel=" ستون انتخاب شده{0}" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
+        <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+            <div class="tooltip_text">بارگیری مجدد جدول</div>
+        </i>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>

@@ -6,7 +6,7 @@
 .tooltip .tooltip_text {
   visibility: hidden;
   width: 120px;
-  background-color: black;
+  background-color: #F68038;
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -28,7 +28,7 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: black transparent transparent transparent;
+  border-color: #F68038 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltip_text {

@@ -32,6 +32,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dataSource: ITracking[] = [];
   filterZoneDictionary: IDictionaryManager[] = [];
+  visibility: boolean = true;
 
   selectedFuckingTest: any[] = []
   _selectCols: any[] = [];
@@ -137,6 +138,9 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
+  }
+  refreshTable = () => {
+    this.classWrapper(true);
   }
 
 }

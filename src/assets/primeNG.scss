@@ -52,4 +52,23 @@
     color: $red_d;
   }
 
+  .p-datatable .p-datatable-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  ._circle_border {
+    display: grid !important;
+    place-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 2px solid;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0px 0px 1px 1px;
+    }
+  }
+
 }

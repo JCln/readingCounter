@@ -20,6 +20,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedColumns: any[];
   selectedFuckingTest: any[] = [];
 
+  visibility: boolean = true;
   _firstPage: number = 0;
   _rowsNumberPage: number = 10;
 
@@ -29,9 +30,10 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     private trackingManagerService: TrackingManagerService
   ) {
   }
-  
+
   removeRow = (rowData: ITracking) => {
     this.trackingManagerService.removeTrackingId(rowData.id);
+    this.updateVisibility();
   }
   getZoneDictionary = (): Promise<any> => {
     try {
@@ -59,6 +61,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   rowToImported = (row: ITracking) => {
     this.trackingManagerService.migrateDataRowToImported(row.id);
+    this.updateVisibility();
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackLoaded = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -111,6 +114,13 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
+  }
+  refreshTable = () => {
+    this.classWrapper(true);
+  }
+  updateVisibility = () => {
+    this.visibility = false;
+    setTimeout(() => this.visibility = true, 0);
   }
 
 }

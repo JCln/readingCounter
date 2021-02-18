@@ -93,5 +93,8 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+  refreshTable = () => {
+    this.classWrapper(true);
+  }
 
 }
