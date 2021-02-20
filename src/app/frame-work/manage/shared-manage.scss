@@ -48,7 +48,7 @@ td.mat-cell {
 }
 
 ._custom {
-  color: $blue_l;
+  color: $dark_ddd;
   border-radius: $border_50;
   padding: $font_xs;
   font-size: $font_l;
@@ -134,27 +134,27 @@ th {
   width: 3rem;
   display: grid;
   place-content: center;
-  box-shadow: 0px 0px 3px 1px $blue_l;
-  color: $blue_l;
+  box-shadow: 0px 0px 3px 1px $dark_ddd;
+  color: $dark_ddd;
 }
 
 .mat-row:nth-child(even) {
-  background-color: $gray_l;
+  background-color: $white;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: rgb(161, 193, 255);
+    background-color: $gray_d;
   }
 }
 
 .mat-row:nth-child(odd) {
-  background-color: $blue_ll;
+  background-color: #e9ecef;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: rgb(161, 193, 255);
+    background-color: $gray_d;
   }
 }
 
@@ -166,6 +166,11 @@ td.mat-footer-cell:first-of-type {
 }
 
 ::ng-deep {
+  mat-option {
+    direction: rtl;
+    text-align: right;
+  }
+
   .mat-option-text {
     text-align: right;
     font-family: $font_family;
@@ -192,6 +197,12 @@ td.mat-footer-cell:first-of-type {
   .mat-select-value {
     font-family: $font_family;
     font-size: 1.2rem;
+  }
+
+  .mat-select-value-text {
+    font-family: $font_family;
+    font-size: 1.2rem;
+    color: $gray_dr;
   }
 }
 
