@@ -4,20 +4,21 @@
 }
 
 .tooltip .tooltip_text {
+  position: absolute;
   visibility: hidden;
-  width: 120px;
   background-color: #F68038;
   color: #fff;
   text-align: center;
   border-radius: 6px;
+  width: 120px;
   padding: 5px 0;
-  position: absolute;
   z-index: 4;
   bottom: 150%;
   left: 150%;
   margin-left: -60px;
   font-weight: 600;
   font-family: $font_family;
+  font-size: 1.2rem;
 }
 
 .tooltip .tooltip_text::after {
