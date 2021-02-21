@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { ITracking } from 'src/app/Interfaces/imanage';
@@ -7,6 +8,8 @@ import { IResponses } from 'src/app/Interfaces/iresponses';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
+
+import { ImportListDgComponent } from './import-list-dg/import-list-dg.component';
 
 
 @Component({
@@ -39,13 +42,15 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedColumns: any[];
   _selectedInnerColumns: any[];
 
+  ref: DynamicDialogRef;
   _firstPage: number = 0;
   _rowsNumberPage: number = 10;
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService
+    private trackingManagerService: TrackingManagerService,
+    private dialogService: DialogService
   ) {
   }
 
@@ -138,9 +143,27 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
+
+    if (this.ref) {
+      this.ref.close();
+    }
   }
   refreshTable = () => {
     this.classWrapper(true);
+  }
+  showMoreDetails = (data: ITracking) => {
+    this.ref = this.dialogService.open(ImportListDgComponent, {
+      data: data,
+      rtl: true,
+      width: '70%',
+      header: 'مشاهده/ویرایش مسیر'
+    })
+    this.ref.onClose.subscribe((car: ITracking) => {
+      if (car) {
+        console.log(car);
+
+      }
+    });
   }
 
 }

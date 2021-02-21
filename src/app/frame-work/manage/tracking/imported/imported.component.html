@@ -61,7 +61,7 @@
                 </ng-template>
             </td>
             <td>
-                <i class="tooltip p_icons pi pi-info-circle" [pRowToggler]="dataSource">
+                <i class="tooltip p_icons pi pi-info-circle" (click)="showMoreDetails(dataSource)">
                     <div class="tooltip_text">مشاهده جزئیات</div>
                 </i>
             </td>
@@ -76,134 +76,12 @@
             </td> -->
         </tr>
     </ng-template>
-    <ng-template pTemplate="rowexpansion" let-dataSource>
+
+    <ng-template pTemplate="emptymessage" let-columns>
         <tr>
-            <td colspan="7">
-                <div>
-                    <p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="7"
-                        [rowsPerPageOptions]="[10,25,50]" dir="rtl" dataKey="id" editMode="row">
-
-                        <!-- [globalFilterFields]="['alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif','counterReaderId']"
-                        [filterDelay]="0" -->
-
-                        <ng-template pTemplate="header" let-columns>
-
-        <tr>
-            <th pSortableColumn="imagePercent">درصد تصویر
-                <p-sortIcon field="imagePercent"></p-sortIcon>
-            </th>
-            <th pSortableColumn="alalHesabPercent">درصد علی الحساب
-                <p-sortIcon field="alalHesabPercent"></p-sortIcon>
-            </th>
-            <th pSortableColumn="hasPreNumber">شماره پیشین
-                <p-sortIcon field="hasPreNumber"></p-sortIcon>
-            </th>
-            <th pSortableColumn="displayBillId">نمایش شناسه قبض
-                <p-sortIcon field="displayBillId"></p-sortIcon>
-            </th>
-            <th pSortableColumn="displayRadif">نمایش ردیف
-                <p-sortIcon field="displayRadif"></p-sortIcon>
-            </th>
-            <th pSortableColumn="counterReaderName">مامور قرائت پیشین
-                <p-sortIcon field="counterReaderName"></p-sortIcon>
-            </th>
-            <th style="width: 3rem"></th>
-        </tr>
-    </ng-template>
-
-    <ng-template pTemplate="body" let-dataSource let-editing="editing" let-ri="rowIndex">
-        <tr [pEditableRow]="dataSource">
-            <td>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="dataSource.alalHesabPercent">
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{dataSource.alalHesabPercent}}
-                    </ng-template>
-                </p-cellEditor>
-            </td>
-            <td>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="dataSource.imagePercent">
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{dataSource.imagePercent}}
-                    </ng-template>
-                </p-cellEditor>
-            </td>
-            <td>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="dataSource.hasPreNumber">
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{dataSource.hasPreNumber}}
-                    </ng-template>
-                </p-cellEditor>
-            </td>
-            <td>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="dataSource.displayBillId">
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{dataSource.displayBillId}}
-                    </ng-template>
-                </p-cellEditor>
-            </td>
-            <td>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="dataSource.displayRadif">
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{dataSource.displayRadif}}
-                    </ng-template>
-                </p-cellEditor>
-            </td>
-            <td>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="dataSource.counterReaderName">
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{dataSource.counterReaderName}}
-                    </ng-template>
-                </p-cellEditor>
-            </td>
-            <td>
-                <button *ngIf="!editing" type="button" pInitEditableRow (click)="onRowEditInit(dataSource[ri])">
-                    <i class="pi pi-pencil"></i>
-                </button>
-                <button *ngIf="editing" type="button" pSaveEditableRow (click)="onRowEditSave(dataSource)"
-                    class="p-button-success">
-                    <i class="pi pi-check"></i>
-                </button>
-                <button *ngIf="editing" type="button" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
-                    class="p-button-danger">
-                    <i class="pi pi-times"></i>
-                </button>
+            <td [attr.colspan]="columns.length">
+                موردی پیدا نشد
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage">
-        <tr>
-            <td>موردی پیدا نشد</td>
-        </tr>
-    </ng-template>
-</p-table>
-</div>
-</td>
-</tr>
-</ng-template>
-
-<ng-template pTemplate="emptymessage" let-columns>
-    <tr>
-        <td [attr.colspan]="columns.length">
-            موردی پیدا نشد
-        </td>
-    </tr>
-</ng-template>
 </p-table>

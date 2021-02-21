@@ -1,0 +1,65 @@
+@import '../../../../../../assets/variable';
+@import '../../../../../../assets/input.scss';
+
+.content {
+  background: $gray_d;
+  box-shadow: 1px 1px 8px 4px $blue_d;
+  text-align: center;
+  padding: $font_2 $font_05;
+  justify-content: space-around;
+  border-radius: $border_s;
+  font-family: $font_family;
+}
+
+._desc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
+  direction: rtl;
+  gap: $font_05;
+  align-items: center;
+  padding: 1rem 0;
+  border-radius: $border_s;
+  text-align: right;
+}
+
+._value {
+  border: 0;
+}
+
+.title {
+  color: $blue_l;
+  text-align: center;
+  margin: $font_xs $font_05;
+  font-size: 1.6rem;
+}
+
+input {
+  color: $gray_96;
+  margin: 0 auto;
+  box-shadow: 1px 1px 8px 1px $gray_d;
+}
+
+// dialog conf
+:host ::ng-deep {
+  .p-dialog .p-dialog-header {
+    background-color: $dark_ddd;
+    direction: rtl;
+  }
+}
+
+// 
+
+// materials 
+::ng-deep {
+  .mat-checkbox-layout {
+    .mat-checkbox-label {
+      margin: 0 $font_05;
+      font-size: $font_s;
+      font-weight: 600;
+      color: $blue_d;
+      line-height: 2;
+      border-radius: $border_s;
+      font-family: $font_family;
+    }
+  }
+}

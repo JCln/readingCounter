@@ -34,6 +34,28 @@ export class TrackingManagerService {
       { field: 'counterReaderName', header: 'مامور قرائت پیشین', isSelected: false }
     ];
   }
+  columnSelectedImportedList = (): IObjectIteratation[] => {
+    return [
+      { field: 'trackNumber', header: 'شماره پیگیری', isSelected: false },
+      { field: 'listNumber', header: 'شماره لیست', isSelected: false },
+      { field: 'insertDateJalali', header: 'تاریخ', isSelected: false },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
+      { field: 'isBazdid', header: 'بازدید', isSelected: false },
+      { field: 'year', header: 'سال', isSelected: false },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
+      { field: 'fromDate', header: 'از تاریخ', isSelected: false },
+      { field: 'toDate', header: 'تا تاریخ', isSelected: false },
+      { field: 'itemQuantity', header: 'تعداد', isSelected: false },
+      { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true },
+      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true },
+      { field: 'hasPreNumber', header: 'شماره پیشین', isSelected: true },
+      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true },
+      { field: 'displayRadif', header: 'ردیف', isSelected: true },
+      { field: 'counterReaderName', header: 'مامور قرائت پیشین', isSelected: true }
+    ];
+  }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
