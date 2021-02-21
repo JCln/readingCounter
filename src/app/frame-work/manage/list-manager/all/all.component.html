@@ -48,7 +48,11 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td><i class="p_icons pi pi-download"></i></td>
+            <td (click)="downloadOutputDBF(dataSource)">
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">بارگیری</div>
+                </i>
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>

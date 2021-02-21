@@ -106,5 +106,16 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+  downloadOutputDBF = (row: any) => {
+    console.log(row);
 
+    // if (!this.outputManagerService.checkVertification(row))
+    //   return;
+    // this.trackingManagerService.downloadOutputDBF(row).subscribe((res: Blob) => {
+    //   this.outputManagerService.downloadFile(res);
+    //   console.log(res);
+
+    // })
+
+  }
 }
