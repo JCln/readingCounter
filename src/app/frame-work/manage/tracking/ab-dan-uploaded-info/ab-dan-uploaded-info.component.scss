@@ -1,11 +1,12 @@
 @import '../../../../../assets/variable';
+@import '../../../../../assets/input.scss';
 
 .control_wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(27rem, 29rem));
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 23rem));
   direction: rtl;
   justify-content: center;
-  gap: 3rem;
+  gap: 1rem;
 }
 
 .content {
@@ -15,6 +16,27 @@
   padding: $font_2 0;
   border-radius: $border_s;
   min-height: 30rem;
+}
+
+._main_audio {
+  display: grid;
+  direction: rtl;
+  gap: .2rem;
+}
+
+._main_img {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(46%, 48%));
+  justify-content: center;
+  direction: rtl;
+  gap: .2rem;
+}
+
+.__img_bound {
+  width: 6rem;
+  height: 6rem;
+  padding: $font_05;
+  margin: auto;
 }
 
 .title {

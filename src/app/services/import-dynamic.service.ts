@@ -55,7 +55,7 @@ export class ImportDynamicService {
     }
     if (!_isOrderByDate) {
       if (!this.validationOnNull(val.readingPeriodId)) {
-        this.snackWrapperService.openSnackBar('مدت دوره ای ایجاد و سپس امتحان نمایید', 3000, 'snack_danger');
+        this.snackWrapperService.openSnackBar('مدت قرائتی ایجاد و سپس امتحان نمایید', 3000, 'snack_danger');
         return false;
       }
     }

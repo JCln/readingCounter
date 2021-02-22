@@ -1,17 +1,29 @@
+<section>
+    <div class="">
+        <div class="input_2" *ngFor="let item of interationOnOverallInfo">
+            <div class="_key">{{item.header}}</div>
+            <input class="_value" name="{{item.field}}" [(ngModel)]="overAllInfo[item.field]">
+        </div>
+    </div>
+</section>
+
+
 <main class="control_wrapper">
     <section class="content">
         <h1 class="title">صدای ضبط شده</h1>
         <div class="_img_title">
-            <div>
-                <img src="assets/imgs/soundvid/sd.png" alt="">
+            <img src="assets/imgs/soundvid/sd.png" alt="">
+        </div>
+
+        <div class="_main_audio">
+            <div (click)="getExactImg(item.fileRepositoryId)" *ngFor="let item of audioFiles">
+                <audio controls>
+                    <source src="{{testAudio}}" type="audio/ogg">
+                    <p>مرورگر شما از پخش صوت پشتیبانی نمی کند</p>
+                </audio>
             </div>
         </div>
 
-        <audio controls>
-            <source src="horse.ogg" type="audio/ogg">
-            <source src="horse.mp3" type="audio/mpeg">
-            <p>مرورگر شما از پخش صوت پشتیبانی نمی کند</p>
-        </audio>
     </section>
 
     <section class="content">
@@ -19,6 +31,15 @@
         <div class="_img_title">
             <div>
                 <img src="assets/imgs/soundvid/ci.png" alt="">
+            </div>
+        </div>
+
+        <div class="_main_img">
+            <div *ngFor="let item of imageFiles; index as i">
+                <div>{{i+1}}</div>
+                <div (click)="getExactImg(item.fileRepositoryId)" class="__img_bound">
+                    <img src="{{testLoadImage}}" alt="whatever">
+                </div>
             </div>
         </div>
 

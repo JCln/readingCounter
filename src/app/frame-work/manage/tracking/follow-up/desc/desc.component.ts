@@ -16,13 +16,13 @@ import { ITracking } from './../../../../../Interfaces/imanage';
 export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   trackNumber: string;
   defColumns = [
-    { field: 'insertDateJalali', header: 'شماره لیست' },
-    { field: 'inserterCode', header: 'تاریخ' },
-    { field: 'userDisplayName', header: 'ناحیه' },
-    { field: 'seen', header: 'عنوان ناحیه' },
-    { field: 'counterReaderName', header: 'بازدید' },
-    { field: 'trackStatusTitle', header: 'سال' },
-    { field: 'hasDetails', header: 'روستایی' },
+    { field: 'insertDateJalali', header: 'تاریخ ثبت' },
+    { field: 'inserterCode', header: 'کد ؟' },
+    { field: 'userDisplayName', header: 'نام مختصار' },
+    { field: 'seen', header: 'دیده شده' },
+    { field: 'counterReaderName', header: 'مامور قرائت' },
+    { field: 'trackStatusTitle', header: 'وضعیت' },
+    { field: 'hasDetails', header: 'جزئیات' },
   ]
 
 

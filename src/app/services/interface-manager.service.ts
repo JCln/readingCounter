@@ -242,9 +242,13 @@ export class InterfaceManagerService {
   //  ///
 
   // downlaod manager
-  getAPKFile = (fileRepositoryId: string): Observable<any> => {
-    return this.mainService.GETID(fileRepositoryId, 'V1/Download/File');
+  downloadFile = (fileRepositoryId: string): Observable<any> => {
+    return this.mainService.GETBLOB(fileRepositoryId, 'V1/Download/File');
   }
+  downloadFileInfo = (onOffLoadId: string): Observable<any> => {
+    return this.mainService.GETID(onOffLoadId, 'V1/Download/File/info');
+  }
+
   // 
 
   getRole = (): Observable<any> => {

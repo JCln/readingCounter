@@ -289,3 +289,18 @@ export interface IFollowUpHistory {
     trackStatusTitle: string,
     hasDetails: boolean
 }
+
+export interface IOnOffLoad {
+    fileRepositoryId: string,
+    onOffLoadId: string,
+    name: string,
+    extention: string,
+    sizeInByte: number,
+    contentType: string
+}
+export interface IOverAllWOUIInfo {
+    sizeInKB: number,
+    numbers: number,
+    imageNumbers: number,
+    audioNumbers: number
+}

@@ -42,7 +42,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   downloadAPK = (fileRepositoryId: string) => {
     console.log(fileRepositoryId);
 
-    // this.interfaceManagerService.getAPKFile(fileRepositoryId).subscribe(res => {
+    // this.interfaceManagerService.downloadFile(fileRepositoryId).subscribe(res => {
     //   console.log(res);
 
     // })

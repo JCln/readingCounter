@@ -112,9 +112,6 @@ export class CloseTabService {
       case '/wr/m/al/ap':
         this.saveDataForAppLevel1 = '';
         break;
-      case '/wr/m/track/woui':
-        this.saveDataForWOUI = '';
-        break;
       case '/wr/m/al/me':
         this.saveDataForAppLevel2 = '';
         this.saveDictionaryForAppLevel2 = '';
@@ -203,6 +200,9 @@ export class CloseTabService {
     }
     if (url.includes('/wr/mu/edit/')) {
       this.saveDataForEditContacts = '';
+    }
+    if (url.includes('/wr/m/track/woui/')) {
+      this.saveDataForWOUI = '';
     }
   }
   // 
