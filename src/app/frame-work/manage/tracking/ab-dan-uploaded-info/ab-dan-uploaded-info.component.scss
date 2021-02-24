@@ -32,6 +32,11 @@
   gap: .2rem;
 }
 
+.img_wrapper {
+  border-radius: $border_s;
+  border: 2px solid $dark_ddd;
+}
+
 .__img_bound {
   width: 6rem;
   height: 6rem;
@@ -52,4 +57,14 @@
   height: 9rem;
   border-radius: 50%;
   background: white;
+}
+
+.overall-info {
+  direction: rtl;
+  margin: auto;
+  width: 26rem;
+}
+
+._value {
+  border: 0;
 }

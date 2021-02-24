@@ -1,5 +1,5 @@
 <section>
-    <div class="">
+    <div class="overall-info">
         <div class="input_2" *ngFor="let item of interationOnOverallInfo">
             <div class="_key">{{item.header}}</div>
             <input class="_value" name="{{item.field}}" [(ngModel)]="overAllInfo[item.field]">
@@ -16,9 +16,12 @@
         </div>
 
         <div class="_main_audio">
-            <div (click)="getExactImg(item.fileRepositoryId)" *ngFor="let item of audioFiles">
-                <audio controls>
-                    <source src="{{testAudio}}" type="audio/ogg">
+            <div *ngFor="let item of audioFiles">
+                <button (click)="getExactAudio(item.fileRepositoryId)">دریافت صوت</button>
+                <button (click)="pauseAudio()">pause</button>
+                <button (click)="playAudio()">play</button>
+                <audio>
+                    <source src="testAudio" type="audio/ogg">
                     <p>مرورگر شما از پخش صوت پشتیبانی نمی کند</p>
                 </audio>
             </div>
@@ -35,10 +38,13 @@
         </div>
 
         <div class="_main_img">
-            <div *ngFor="let item of imageFiles; index as i">
+            <div *ngFor="let item of imageFiles; index as i" class="img_wrapper">
                 <div>{{i+1}}</div>
-                <div (click)="getExactImg(item.fileRepositoryId)" class="__img_bound">
+                <div *ngIf="item" (click)="getExactImg(item.fileRepositoryId)" class="__img_bound">
                     <img src="{{testLoadImage}}" alt="whatever">
+                </div>
+                <div *ngIf="item === 'unknown'" (click)="getExactImg(item.fileRepositoryId)" class="__img_bound">
+                    <img src="assets/imgs/soundvid/ci.png" alt="whatever">
                 </div>
             </div>
         </div>

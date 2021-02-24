@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -22,7 +23,7 @@ export class AbDanUploadedInfoComponent implements OnInit {
   interationOnOverallInfo: any[] = [];
 
   testLoadImage: any;
-  testAudio: any;
+  testAudio = new Audio();
 
   subscription: Subscription[] = [];
 
@@ -30,7 +31,8 @@ export class AbDanUploadedInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private sanitization: DomSanitizer
   ) { }
 
   private getRouteParams = () => {
@@ -68,7 +70,7 @@ export class AbDanUploadedInfoComponent implements OnInit {
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
     console.log(this.overAllInfo);
     this.getDownloadListInfo();
-  } 
+  }
   ngOnInit(): void {
     this.getRouteParams();
     this.classWrapper();
@@ -110,12 +112,36 @@ export class AbDanUploadedInfoComponent implements OnInit {
   }
   getExactAudio = (id: string) => {
     this.downloadManagerService.downloadFile(id).subscribe(res => {
-      if (res) {   
-        this.audioFiles = res;     
-      let audio = new Audio();
-      // audio.u
+      if (res) {
+        const downloadURL = window.URL.createObjectURL(res);
+        // var link = document.createElement('a');
+        this.testAudio.src = downloadURL;
+
+        // this.testAudio.play();
+
+        // link.href = downloadURL;
+        // link.download = `${new Date().toLocaleDateString()}.ogg`;
+        // link.click();
+
+        // this.testAudio = res;
+
+        // const audio = new Audio(this.testAudio);
+        // audio.load();
+        // audio.play();
+
+        // const file = new File([res], "voice.ogg")
+        // this.testAudio = URL.createObjectURL(file)
+
       }
+
     })
+  }
+  playAudio = () => {
+    this.testAudio.load();
+    this.testAudio.play();
+  }
+  pauseAudio = () => {
+    this.testAudio.pause();
   }
 
 }
