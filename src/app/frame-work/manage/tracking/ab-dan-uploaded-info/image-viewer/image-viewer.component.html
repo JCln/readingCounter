@@ -1,0 +1,5 @@
+<div *ngIf="open" class="viewer-container" (click)="close.emit()">
+    <div class="viewer-content">
+        <img class="main-img" src="{{imageURL}}" alt="">
+    </div>
+</div>

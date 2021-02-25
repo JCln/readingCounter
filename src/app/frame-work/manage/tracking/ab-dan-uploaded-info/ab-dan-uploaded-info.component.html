@@ -59,13 +59,18 @@
         <div class="_main_img">
             <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
                 <div class="__img_counter">{{i+1}}</div>
-                <div class="tooltip_text">بارگیری تصویر {{i+1}}</div>
+
+                <div *ngIf="!testLoadImage[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
+                <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
+                
                 <div *ngIf="testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
-                    <img src="{{testLoadImage[i]}}" alt="whatever">
+                    <img (click)="viewerOpen = true" src="{{testLoadImage[i]}}" alt="whatever">
                 </div>
                 <div *ngIf="!testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
                     <img src="assets/imgs/soundvid/ci.png" alt="whatever">
                 </div>
+                <app-image-viewer [imageURL]="testLoadImage[i]" [open]="viewerOpen" (close)="viewerOpen = false">
+                </app-image-viewer>
             </div>
         </div>
 

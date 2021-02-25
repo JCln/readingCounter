@@ -41,12 +41,13 @@
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0px 0px 2px 3px $dark_ddd;
+    box-shadow: 0px 0px 1px 2px $dark_ddd;
   }
 }
 
 .__img_bound {
-  height: 8.5rem;
+  height: 9.5rem;
+  width: 9.5rem;
   padding: $font_05;
   margin: auto;
 }

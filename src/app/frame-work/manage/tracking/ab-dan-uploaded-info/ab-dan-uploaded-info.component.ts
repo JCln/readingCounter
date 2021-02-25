@@ -25,6 +25,7 @@ export class AbDanUploadedInfoComponent implements OnInit {
   showAudioControllers: boolean = false;
   isPlaying: boolean = false;
   downloadURL: string = '';
+  viewerOpen: boolean = false;
 
   subscription: Subscription[] = [];
 
@@ -69,7 +70,6 @@ export class AbDanUploadedInfoComponent implements OnInit {
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
-    console.log(this.overAllInfo);
     this.getDownloadListInfo();
   }
   ngOnInit(): void {
@@ -94,6 +94,8 @@ export class AbDanUploadedInfoComponent implements OnInit {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   getExactImg = (id: string, index: number) => {
+    if (this.testLoadImage[index])
+      return;
     this.downloadManagerService.downloadFile(id)
       // .pipe(map(
       //   e => this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e))
