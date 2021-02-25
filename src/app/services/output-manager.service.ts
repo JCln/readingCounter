@@ -39,11 +39,11 @@ export class OutputManagerService {
     }
     return true;
   }
-  downloadFile(data: any) {
-    var downloadURL = window.URL.createObjectURL(data);
-    var link = document.createElement('a');
+  downloadFile(data: any, type: string) {
+    const downloadURL = window.URL.createObjectURL(data);
+    const link = document.createElement('a');
     link.href = downloadURL;
-    link.download = `${new Date().toLocaleDateString()}.dbf`;
+    link.download = `${new Date().toLocaleDateString() + type}`;
     link.click();
   }
 }

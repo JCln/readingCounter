@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IOnOffLoad, IOverAllWOUIInfo } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DownloadManagerService } from 'src/app/services/download-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-
-import { IOnOffLoad, IOverAllWOUIInfo } from './../../../../Interfaces/imanage';
+import { OutputManagerService } from 'src/app/services/output-manager.service';
 
 @Component({
   selector: 'app-ab-dan-uploaded-info',
@@ -24,6 +23,9 @@ export class AbDanUploadedInfoComponent implements OnInit {
 
   testLoadImage: any;
   testAudio = new Audio();
+  showAudioControllers: boolean = false;
+  isPlaying: boolean = false;
+  downloadURL: string = '';
 
   subscription: Subscription[] = [];
 
@@ -32,7 +34,7 @@ export class AbDanUploadedInfoComponent implements OnInit {
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
     private interactionService: InteractionService,
-    private sanitization: DomSanitizer
+    private outputManagerService: OutputManagerService
   ) { }
 
   private getRouteParams = () => {
@@ -105,43 +107,37 @@ export class AbDanUploadedInfoComponent implements OnInit {
         if (this.testLoadImage) {
           reader.readAsDataURL(this.testLoadImage);
         }
-
       }
-
     })
   }
   getExactAudio = (id: string) => {
     this.downloadManagerService.downloadFile(id).subscribe(res => {
       if (res) {
-        const downloadURL = window.URL.createObjectURL(res);
-        // var link = document.createElement('a');
-        this.testAudio.src = downloadURL;
-
-        // this.testAudio.play();
-
-        // link.href = downloadURL;
-        // link.download = `${new Date().toLocaleDateString()}.ogg`;
-        // link.click();
-
-        // this.testAudio = res;
-
-        // const audio = new Audio(this.testAudio);
-        // audio.load();
-        // audio.play();
-
-        // const file = new File([res], "voice.ogg")
-        // this.testAudio = URL.createObjectURL(file)
-
+        this.downloadURL = window.URL.createObjectURL(res);
+        this.testAudio.src = this.downloadURL;
+        this.isShowAudioControllers();
       }
 
     })
   }
   playAudio = () => {
-    this.testAudio.load();
     this.testAudio.play();
   }
   pauseAudio = () => {
     this.testAudio.pause();
+  }
+  rePlayAudio = () => {
+    this.testAudio.load();
+    this.testAudio.play();
+  }
+  isShowAudioControllers = () => {
+    this.showAudioControllers = true;
+  }
+  downloadAudio = () => {
+    const link = document.createElement('a');
+    link.href = this.downloadURL;
+    link.download = `${new Date().toLocaleDateString()}.ogg`;
+    link.click();
   }
 
 }

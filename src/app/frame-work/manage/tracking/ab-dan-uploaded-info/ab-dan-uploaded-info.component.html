@@ -17,13 +17,29 @@
 
         <div class="_main_audio">
             <div *ngFor="let item of audioFiles">
-                <button (click)="getExactAudio(item.fileRepositoryId)">دریافت صوت</button>
-                <button (click)="pauseAudio()">pause</button>
-                <button (click)="playAudio()">play</button>
-                <audio>
-                    <source src="testAudio" type="audio/ogg">
-                    <p>مرورگر شما از پخش صوت پشتیبانی نمی کند</p>
-                </audio>
+                <button [hidden]="showAudioControllers" (click)="getExactAudio(item.fileRepositoryId)">
+                    <i class="tooltip pi pi-cloud-download">
+                        <div class="tooltip_text">بارگیری</div>
+                    </i>
+                </button>
+                <button [hidden]="!showAudioControllers" (click)="downloadAudio()">
+                    <i class="tooltip pi pi-download">
+                        <div class="tooltip_text">ذخیره صوت</div>
+                    </i>
+                </button>
+                <button [hidden]="!showAudioControllers" (click)="isPlaying = !isPlaying">
+                    <i *ngIf="isPlaying" (click)="pauseAudio()" class="tooltip pi pi-pause">
+                        <div class="tooltip_text">توقف صوت</div>
+                    </i>
+                    <i *ngIf="!isPlaying" (click)="playAudio()" class="tooltip pi pi-play">
+                        <div class="tooltip_text">پخش صوت</div>
+                    </i>
+                </button>
+                <button [hidden]="!showAudioControllers" (click)="rePlayAudio()">
+                    <i class="tooltip pi pi-replay">
+                        <div class="tooltip_text">پخش مجدد</div>
+                    </i>
+                </button>
             </div>
         </div>
 
@@ -39,7 +55,7 @@
 
         <div class="_main_img">
             <div *ngFor="let item of imageFiles; index as i" class="img_wrapper">
-                <div>{{i+1}}</div>
+                <div class="__img_counter">{{i+1}}</div>
                 <div *ngIf="item" (click)="getExactImg(item.fileRepositoryId)" class="__img_bound">
                     <img src="{{testLoadImage}}" alt="whatever">
                 </div>

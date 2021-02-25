@@ -4,7 +4,6 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
 
-import { AuthService } from '../auth/auth.service';
 import { SnackWrapperService } from '../services/snack-wrapper.service';
 import { SpinnerWrapperService } from '../services/spinner-wrapper.service';
 
@@ -15,8 +14,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
   constructor(
     private spinnerWrapperService: SpinnerWrapperService,
-    private snackWrapperService: SnackWrapperService,
-    private authService: AuthService
+    private snackWrapperService: SnackWrapperService    
   ) { }
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     this.spinnerWrapperService.startLoading();
@@ -25,7 +23,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
         catchError((error) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 400) {
-              this.snackWrapperService.openSnackBar(error.error.message, 8000, 'snack_danger');
+              this.snackWrapperService.openSnackBar(error.message, 8000, 'snack_danger');
             }
             if (error.status === 401) {
               console.log(401);

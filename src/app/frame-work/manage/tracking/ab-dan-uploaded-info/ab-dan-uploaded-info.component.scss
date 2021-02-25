@@ -1,5 +1,6 @@
 @import '../../../../../assets/variable';
 @import '../../../../../assets/input.scss';
+@import '../../../../../assets/tooltip.scss';
 
 .control_wrapper {
   display: grid;
@@ -35,11 +36,11 @@
 .img_wrapper {
   border-radius: $border_s;
   border: 2px solid $dark_ddd;
+  position: relative;
 }
 
 .__img_bound {
-  width: 6rem;
-  height: 6rem;
+  height: 8.5rem;
   padding: $font_05;
   margin: auto;
 }
@@ -67,4 +68,38 @@
 
 ._value {
   border: 0;
+}
+
+button {
+  background: none;
+  border: 0;
+}
+
+.__img_counter {
+  position: absolute;
+  top: -$font_xs;
+  right: $font_05;
+  background-color: $blue_d2;
+  color: $white;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+i {
+  border-radius: $border_50;
+  padding: $font_s;
+  font-size: $font_m;
+  border: 1px solid $dark_ddd;
+  color: $dark_ddd;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 0px 2px 3px $dark_ddd;
+  }
+}
+
+.tooltip .tooltip_text {
+  left: 50%;
 }
