@@ -27,7 +27,7 @@
 
 ._main_img {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(46%, 48%));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
   justify-content: center;
   direction: rtl;
   gap: .2rem;
@@ -37,6 +37,12 @@
   border-radius: $border_s;
   border: 2px solid $dark_ddd;
   position: relative;
+  margin: .4rem 0;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 0px 2px 3px $dark_ddd;
+  }
 }
 
 .__img_bound {
@@ -54,16 +60,19 @@
 
 ._img_title {
   margin: 0 auto $font_2;
-  width: 9rem;
-  height: 9rem;
+  width: 6rem;
+  height: 6rem;
   border-radius: 50%;
   background: white;
 }
 
 .overall-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 24rem));
+  gap: .5rem;
+  justify-content: center;
   direction: rtl;
-  margin: auto;
-  width: 26rem;
+  margin-bottom: $font_xs;
 }
 
 ._value {
@@ -77,7 +86,7 @@ button {
 
 .__img_counter {
   position: absolute;
-  top: -$font_xs;
+  top: -$font_s;
   right: $font_05;
   background-color: $blue_d2;
   color: $white;
@@ -100,6 +109,15 @@ i {
   }
 }
 
+img {
+  border-radius: 5px;
+}
+
+hr {
+  margin-bottom: $font_xs;
+}
+
 .tooltip .tooltip_text {
   left: 50%;
+  bottom: 123%;
 }

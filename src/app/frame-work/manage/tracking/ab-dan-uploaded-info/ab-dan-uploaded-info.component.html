@@ -1,4 +1,5 @@
 <section>
+    <h1 class="title">اطلاعات کلی دریافتی</h1>
     <div class="overall-info">
         <div class="input_2" *ngFor="let item of interationOnOverallInfo">
             <div class="_key">{{item.header}}</div>
@@ -14,6 +15,7 @@
         <div class="_img_title">
             <img src="assets/imgs/soundvid/sd.png" alt="">
         </div>
+        <hr>
 
         <div class="_main_audio">
             <div *ngFor="let item of audioFiles">
@@ -46,20 +48,22 @@
     </section>
 
     <section class="content">
-        <h1 class="title">تصاویر ارسالی مامور</h1>
+        <h1 class="title">تصاویر ارسالی</h1>
         <div class="_img_title">
             <div>
                 <img src="assets/imgs/soundvid/ci.png" alt="">
             </div>
         </div>
+        <hr>
 
         <div class="_main_img">
-            <div *ngFor="let item of imageFiles; index as i" class="img_wrapper">
+            <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
                 <div class="__img_counter">{{i+1}}</div>
-                <div *ngIf="item" (click)="getExactImg(item.fileRepositoryId)" class="__img_bound">
-                    <img src="{{testLoadImage}}" alt="whatever">
+                <div class="tooltip_text">بارگیری تصویر {{i+1}}</div>
+                <div *ngIf="testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
+                    <img src="{{testLoadImage[i]}}" alt="whatever">
                 </div>
-                <div *ngIf="item === 'unknown'" (click)="getExactImg(item.fileRepositoryId)" class="__img_bound">
+                <div *ngIf="!testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
                     <img src="assets/imgs/soundvid/ci.png" alt="whatever">
                 </div>
             </div>

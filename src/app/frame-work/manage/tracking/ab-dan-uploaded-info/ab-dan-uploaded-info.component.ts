@@ -5,7 +5,6 @@ import { IOnOffLoad, IOverAllWOUIInfo } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DownloadManagerService } from 'src/app/services/download-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { OutputManagerService } from 'src/app/services/output-manager.service';
 
 @Component({
   selector: 'app-ab-dan-uploaded-info',
@@ -21,7 +20,7 @@ export class AbDanUploadedInfoComponent implements OnInit {
   overAllInfo: IOverAllWOUIInfo;
   interationOnOverallInfo: any[] = [];
 
-  testLoadImage: any;
+  testLoadImage: any[] = [];
   testAudio = new Audio();
   showAudioControllers: boolean = false;
   isPlaying: boolean = false;
@@ -34,7 +33,7 @@ export class AbDanUploadedInfoComponent implements OnInit {
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
     private interactionService: InteractionService,
-    private outputManagerService: OutputManagerService
+    // private domSanitizer: DomSanitizer
   ) { }
 
   private getRouteParams = () => {
@@ -94,21 +93,24 @@ export class AbDanUploadedInfoComponent implements OnInit {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  getExactImg = (id: string) => {
-    this.downloadManagerService.downloadFile(id).subscribe(res => {
-      if (res) {
-        console.log(res);
-        this.testLoadImage = res;
-        let reader = new FileReader();
-        reader.addEventListener("load", () => {
-          this.testLoadImage = reader.result;
-        }, false);
+  getExactImg = (id: string, index: number) => {
+    this.downloadManagerService.downloadFile(id)
+      // .pipe(map(
+      //   e => this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e))
+      // ))
+      .subscribe(res => {
+        if (res) {
+          this.testLoadImage[index] = res;
+          let reader = new FileReader();
+          reader.addEventListener("load", () => {
+            this.testLoadImage[index] = reader.result;
+          }, false);
 
-        if (this.testLoadImage) {
-          reader.readAsDataURL(this.testLoadImage);
+          if (this.testLoadImage[index]) {
+            reader.readAsDataURL(this.testLoadImage[index]);
+          }
         }
-      }
-    })
+      })
   }
   getExactAudio = (id: string) => {
     this.downloadManagerService.downloadFile(id).subscribe(res => {
