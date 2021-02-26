@@ -43,6 +43,9 @@
                     </i>
                 </button>
             </div>
+            <div class="not_found_header" *ngIf="!audioFiles.length">
+                <h2>صوتی پیدا نشد</h2>
+            </div>
         </div>
 
     </section>
@@ -62,7 +65,7 @@
 
                 <div *ngIf="!testLoadImage[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
                 <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
-                
+
                 <div *ngIf="testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
                     <img (click)="viewerOpen = true" src="{{testLoadImage[i]}}" alt="whatever">
                 </div>
@@ -71,6 +74,9 @@
                 </div>
                 <app-image-viewer [imageURL]="testLoadImage[i]" [open]="viewerOpen" (close)="viewerOpen = false">
                 </app-image-viewer>
+            </div>
+            <div class="not_found_header" *ngIf="!imageFiles.length">
+                <h2>تصویری پیدا نشد</h2>
             </div>
         </div>
 

@@ -59,13 +59,7 @@ export class AbDanUploadedInfoComponent implements OnInit {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForWOUI) {
-      this.dataSource = this.closeTabService.saveDataForWOUI;
-    }
-    else {
-      this.dataSource = await this.getOnOffLoadData();
-      this.closeTabService.saveDataForWOUI = this.dataSource;
-    }
+    this.dataSource = await this.getOnOffLoadData();
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
