@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IResponses } from './../Interfaces/iresponses';
+import { IResponses } from '../Interfaces/ioverall-config';
 import { IAUserEditSave, IUserEditManager } from './../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';

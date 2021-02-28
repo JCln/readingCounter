@@ -2,11 +2,11 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IPolicies, IPrivacy } from 'src/app/Interfaces/inon-manage';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { InterfaceService } from 'src/app/services/interface.service';
+import { PrivacyService } from 'src/app/services/privacy.service';
 
-import { IPolicies, IPrivacy } from './../../Interfaces/iprivacy';
-import { InterfaceService } from './../../services/interface.service';
-import { PrivacyService } from './../../services/privacy.service';
 
 @Component({
   selector: 'app-privacy',

@@ -3,13 +3,12 @@ import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
-import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
+import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
+import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
-import { IResponses } from './../../../../Interfaces/iresponses';
 import { CloseTabService } from './../../../../services/close-tab.service';
 import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';

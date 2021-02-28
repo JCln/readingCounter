@@ -3,11 +3,11 @@ import { NgForm } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IAPK } from 'src/app/Interfaces/inon-manage';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
-import { IAPK } from './../../Interfaces/iapk';
 import { ApkService } from './../../services/apk.service';
 import { CloseTabService } from './../../services/close-tab.service';
 

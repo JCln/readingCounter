@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { ISidebarItems } from 'src/app/Interfaces/isidebar-items';
+import { ISidebarItems } from 'src/app/Interfaces/ioverall-config';
 
 import { InterfaceService } from '../interface.service';
 import { sidebarItemsTest } from './sidebarItems';

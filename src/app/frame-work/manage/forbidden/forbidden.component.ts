@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
 import { IForbiddenManager, IForbiddenManagerGridFriendlyRes } from 'src/app/Interfaces/imanage';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { ForbiddenService } from 'src/app/services/forbidden.service';
 import { InteractionService } from 'src/app/services/interaction.service';

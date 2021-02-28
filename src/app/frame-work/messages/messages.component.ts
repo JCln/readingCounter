@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IColor, IMessage, ITime } from 'src/app/Interfaces/inon-manage';
 import { BrowserStorageService } from 'src/app/services/browser-storage.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
-import { IColor, IMessage, ITime } from './../../Interfaces/imessage';
 import { MessageService } from './../../services/message.service';
 
 @Component({

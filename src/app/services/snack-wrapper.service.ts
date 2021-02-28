@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 
-import { ISnackBar } from './../Interfaces/isnack-bar';
+import { ISnackBar } from '../Interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'

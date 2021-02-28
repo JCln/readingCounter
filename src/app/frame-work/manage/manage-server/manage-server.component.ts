@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IManageServer } from 'src/app/Interfaces/imanage-server';
+import { IManageServer } from 'src/app/Interfaces/imanage';
 import { ManageServerService } from 'src/app/services/manage-server.service';
 
 

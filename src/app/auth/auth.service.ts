@@ -6,10 +6,8 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
 
-import { IAuthTokenType } from '../Interfaces/auth-token-type.enum';
-import { ICredentials } from '../Interfaces/icredentials';
+import { IAuthTokenType, IAuthUser, ICredentials } from '../Interfaces/iauth-guard-permission';
 import { MainService } from '../services/main.service';
-import { IAuthUser } from './../Interfaces/iauth-user';
 import { SnackWrapperService } from './../services/snack-wrapper.service';
 import { JwtService } from './jwt.service';
 

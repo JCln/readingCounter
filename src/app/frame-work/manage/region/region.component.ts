@@ -4,15 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IResponses } from 'src/app/Interfaces/iresponses';
+import { IRegionManager } from 'src/app/Interfaces/inon-manage';
+import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { IDictionaryManager } from './../../../Interfaces/IDictionaryManager';
-import { IRegionManager } from './../../../Interfaces/iregion-manager';
-import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 import { RegionEditDgComponent } from './region-edit-dg/region-edit-dg.component';
 

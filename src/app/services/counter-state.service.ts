@@ -3,7 +3,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { ICounterStateGridFriendlyReq } from '../Interfaces/imanage';
-import { IObjectIteratation } from './../Interfaces/IDictionaryManager';
+import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { InterfaceManagerService } from './interface-manager.service';
 
 @Injectable({

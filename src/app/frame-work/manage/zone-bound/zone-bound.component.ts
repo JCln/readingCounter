@@ -4,15 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
-import { IResponses } from 'src/app/Interfaces/iresponses';
+import { IZoneBoundManager } from 'src/app/Interfaces/imanage';
+import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { IZoneBoundManager } from './../../../Interfaces/izone-bound-manager';
-import { CloseTabService } from './../../../services/close-tab.service';
-import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.component';
 import { ZoneBoundEditDgComponent } from './zone-bound-edit-dg/zone-bound-edit-dg.component';
 

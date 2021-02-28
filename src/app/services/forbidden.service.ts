@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { IObjectIteratation } from '../Interfaces/IDictionaryManager';
 import { ICounterStateGridFriendlyReq, IForbiddenManagerGridFriendlyRes } from '../Interfaces/imanage';
+import { IObjectIteratation } from '../Interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'

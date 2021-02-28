@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { IObjectIteratation } from './../Interfaces/IDictionaryManager';
+import { IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
 import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
-import { IResponses } from './../Interfaces/iresponses';
 import { UtilsService } from './utils.service';
 
 @Injectable({

@@ -4,14 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
-import { IResponses } from 'src/app/Interfaces/iresponses';
-import { IZoneManager } from 'src/app/Interfaces/izone-manager';
+import { IZoneManager } from 'src/app/Interfaces/imanage';
+import { IDictionaryManager, IResponses, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { ITrueFalse } from './../../../Interfaces/IDictionaryManager';
 import { CloseTabService } from './../../../services/close-tab.service';
 import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IImportDynamic, IImportDynamicDefault } from '../Interfaces/iimport-dynamic';
+import { IImportDynamic, IImportDynamicDefault } from '../Interfaces/inon-manage';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
 

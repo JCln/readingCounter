@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'src/app/Interfaces/IDictionaryManager';
-import { IImportDynamicDefault } from 'src/app/Interfaces/iimport-dynamic';
-import { IZoneManager } from 'src/app/Interfaces/izone-manager';
+import { IZoneManager } from 'src/app/Interfaces/imanage';
+import { IImportDynamicDefault } from 'src/app/Interfaces/inon-manage';
+import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 

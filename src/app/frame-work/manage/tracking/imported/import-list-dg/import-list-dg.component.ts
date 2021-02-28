@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ITracking } from 'src/app/Interfaces/imanage';
+import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
-import { IObjectIteratation } from './../../../../../Interfaces/IDictionaryManager';
 
 @Component({
   selector: 'app-import-list-dg',

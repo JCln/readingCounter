@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
-import { IRoleManager } from 'src/app/Interfaces/irole-manager';
+import { IRoleManager } from 'src/app/Interfaces/inon-manage';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { AddNewComponent } from '../add-new/add-new.component';

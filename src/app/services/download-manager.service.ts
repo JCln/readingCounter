@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { IObjectIteratation } from '../Interfaces/IDictionaryManager';
+import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { IOnOffLoad, IOverAllWOUIInfo } from './../Interfaces/imanage';
 
 @Injectable({

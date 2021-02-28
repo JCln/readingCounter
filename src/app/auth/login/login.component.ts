@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ICredentials } from 'src/app/Interfaces/iauth-guard-permission';
 
-import { ICredentials } from './../../Interfaces/icredentials';
 import { UtilsService } from './../../services/utils.service';
 import { AuthService } from './../auth.service';
 

@@ -3,9 +3,8 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
-import { IProvinceManager } from 'src/app/Interfaces/iprovince-manager';
-import { IResponses } from 'src/app/Interfaces/iresponses';
+import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
+import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
-import { IOutputManager } from 'src/app/Interfaces/imanage';
-import { IZoneManager } from 'src/app/Interfaces/izone-manager';
+import { IOutputManager, IZoneManager } from 'src/app/Interfaces/imanage';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 

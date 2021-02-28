@@ -3,15 +3,14 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IDictionaryManager } from 'src/app/Interfaces/IDictionaryManager';
-import { IResponses } from 'src/app/Interfaces/iresponses';
+import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
+import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { IProvinceManager } from './../../../Interfaces/iprovince-manager';
-import { SnackWrapperService } from './../../../services/snack-wrapper.service';
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
 import { ProvinceEditDgComponent } from './province-edit-dg/province-edit-dg.component';
 

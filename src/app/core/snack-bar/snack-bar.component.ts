@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { ISnackBar } from 'src/app/Interfaces/ioverall-config';
 
-import { ISnackBar } from './../../Interfaces/isnack-bar';
 import { SnackWrapperService } from './../../services/snack-wrapper.service';
 
 @Component({
