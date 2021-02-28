@@ -54,12 +54,13 @@ export class EditContactComponent implements AfterViewInit, OnDestroy {
     })
   }
   detectRouteChange = () => {
-    this.router.events.subscribe((event) => {
+    this.subscription.push(this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.UUid = this.route.snapshot.paramMap.get('id');
         this.classWrapper();
       }
-    });
+    })
+    )
   }
 
   refreshTabStatus = () => {
