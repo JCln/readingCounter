@@ -67,7 +67,9 @@
     border: 2px solid;
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus,
+    &:active {
       box-shadow: 0px 0px 1px 1px;
     }
   }
