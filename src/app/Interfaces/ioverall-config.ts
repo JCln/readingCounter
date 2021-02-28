@@ -72,3 +72,7 @@ export interface IObjectIteratation {
     header: string;
     isSelected: boolean;
 }
+export interface ITabWrapperDetectDynamicRoute {
+    _title: string,
+    _dynamicRoute: string
+}

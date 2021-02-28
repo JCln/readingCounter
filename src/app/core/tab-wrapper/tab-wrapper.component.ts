@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { ISidebarItems, ITabs } from 'src/app/Interfaces/isidebar-items';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { ISidebarItems, ITabs, ITabWrapperDetectDynamicRoute } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -11,7 +12,8 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './tab-wrapper.component.html',
   styleUrls: ['./tab-wrapper.component.scss']
 })
-export class TabWrapperComponent implements OnInit, AfterViewInit {
+export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
+  subscription: Subscription[] = []
   tabs: ITabs[] = [];
   currentRoute: ITabs[] = [];
   @Output() childPageTitle = new EventEmitter<string>();
@@ -42,24 +44,37 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
       return route;
     return null;
   }
-  doSth = () => {
-    let title: string = 'ویرایش'
-    let _dynamicRoute = this.getCurrentDynamicRoute('/wr/mu/edit/');
-    if (this.utilsService.isNull(_dynamicRoute)) {
-      _dynamicRoute = this.getCurrentDynamicRoute('/wr/m/l/pd/');
-      title = 'مامور';
-      if (this.utilsService.isNull(_dynamicRoute)) {
-        _dynamicRoute = this.getCurrentDynamicRoute('/wr/m/l/all/');
-        title = 'قرائت';
-        if (this.utilsService.isNull(_dynamicRoute)) {
-          return;
-        }
+  findDynamicRouteStatus = (): ITabWrapperDetectDynamicRoute => {
+    if (this.getCurrentDynamicRoute('/wr/m/l/pd/'))
+      return {
+        _title: 'مامور', _dynamicRoute: '/wr/m/l/pd/'
       }
+    if (this.getCurrentDynamicRoute('/wr/m/l/all/'))
+      return {
+        _title: 'قرائت', _dynamicRoute: '/wr/m/l/all/'
+      }
+    if (this.getCurrentDynamicRoute('/wr/mu/edit/'))
+      return {
+        _title: 'ویرایش', _dynamicRoute: '/wr/mu/edit/'
+      }
+    if (this.getCurrentDynamicRoute('/wr/m/track/woui/'))
+      return {
+        _title: 'صوت/تصویر', _dynamicRoute: '/wr/m/track/woui/'
+      }
+    return null;
+  }
+  addDynamicRoute = () => {
+    let dRoute: ITabWrapperDetectDynamicRoute = {
+      _title: '',
+      _dynamicRoute: ''
     }
+    dRoute = this.findDynamicRouteStatus();
+    if (this.utilsService.isNull(dRoute))
+      return;
     const completeRoutePart = this.router.url.split('/').pop();
     const lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
     const a = {
-      route: `${_dynamicRoute}${completeRoutePart}`, title: `${title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
+      route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };
     if (!this.DoesTabsHaveThisRouteNow())
       this.tabs.push(a);
@@ -71,11 +86,11 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
       })
       if (currentRouteFound)
         this.tabs.push(currentRouteFound);
-      this.doSth();
+      this.addDynamicRoute();
       this.reFetchPageTitle();
     }
     ////// just check correct route
-    this.router.events.subscribe(res => {
+    this.subscription.push(this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
         const currentRouteFound = this.DoesCurrentRouteFound();
         if (currentRouteFound) {
@@ -88,10 +103,10 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
             this.reFetchPageTitle();
           }
         } else {
-          this.doSth();
+          this.addDynamicRoute();
         }
       }
-    })
+    }))
   }
   isLatestTab = () => {
     const a = this.tabs.map(item => {
@@ -183,5 +198,9 @@ export class TabWrapperComponent implements OnInit, AfterViewInit {
       console.error(error);
     }
   };
-
+  ngOnDestroy(): void {
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.forEach(subscription => subscription.unsubscribe());
+  }
 }
