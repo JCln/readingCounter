@@ -12,9 +12,6 @@
 <main class="control_wrapper">
     <section class="content">
         <h1 class="title">صدای ضبط شده</h1>
-        <div class="_img_title">
-            <img src="assets/imgs/soundvid/sd.png" alt="">
-        </div>
         <hr>
 
         <div class="_main_audio">
@@ -52,11 +49,6 @@
 
     <section class="content">
         <h1 class="title">تصاویر ارسالی</h1>
-        <div class="_img_title">
-            <div>
-                <img src="assets/imgs/soundvid/ci.png" alt="">
-            </div>
-        </div>
         <hr>
 
         <div class="_main_img">
@@ -70,7 +62,7 @@
                     <img (click)="viewerOpen = true" src="{{testLoadImage[i]}}" alt="whatever">
                 </div>
                 <div *ngIf="!testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
-                    <img src="assets/imgs/soundvid/ci.png" alt="whatever">
+                    <img src="assets/imgs/soundvid/2.png" alt="whatever">
                 </div>
                 <app-image-viewer [imageURL]="testLoadImage[i]" [open]="viewerOpen" (close)="viewerOpen = false">
                 </app-image-viewer>

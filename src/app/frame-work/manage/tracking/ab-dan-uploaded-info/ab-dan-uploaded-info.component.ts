@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'src/app/Interfaces/imanage';
@@ -11,7 +11,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
   templateUrl: './ab-dan-uploaded-info.component.html',
   styleUrls: ['./ab-dan-uploaded-info.component.scss']
 })
-export class AbDanUploadedInfoComponent implements OnInit {
+export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   private onOffLoadId: string = '';
 
   dataSource: IOnOffLoad[] = [];
