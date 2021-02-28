@@ -1,11 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IUserManager } from 'src/app/Interfaces/iuser-manager';
+import { AllContactsService } from 'src/app/services/all-contacts.service';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-
-import { IUserManager } from './../../../Interfaces/iuser-manager';
-import { AllContactsService } from './../../../services/all-contacts.service';
 
 @Component({
   selector: 'app-all-contacts',
@@ -16,8 +15,7 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   dataSource: IUserManager[] = [];
-  _firstPage: number = 0;
-  _rowsNumberPage: number = 10;
+  _selectedColumns: any[];
 
   constructor(
     private route: ActivatedRoute,
@@ -55,13 +53,12 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForAllContacts = this.dataSource;
     }
   }
-  next = () => this._firstPage = this._firstPage + this._rowsNumberPage;
-  prev = () => this._firstPage = this._firstPage - this._rowsNumberPage;
-  reset = () => this._firstPage = 0;
-  isLastPage = (): boolean => { return this.dataSource ? this._firstPage === (this.dataSource.length - this._rowsNumberPage) : true; }
-  isFirstPage = (): boolean => { return this.dataSource ? this._firstPage === 0 : true; }
+  insertSelectedColumns = () => {
+    this._selectedColumns = this.allContactsService.columnSelectedUserAllContacts();
+  }
   ngOnInit(): void {
     this.classWrapper();
+    this.insertSelectedColumns();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
