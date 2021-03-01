@@ -24,6 +24,7 @@
 
 ._value {
   border: 0;
+  width: 100%;
 }
 
 .title {
@@ -42,6 +43,8 @@ input {
 /* card content */
 .position_section {
   direction: rtl;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(23rem, auto));
 }
 
 .card_wrapper {
@@ -54,7 +57,6 @@ input {
   padding: $font_xs 0;
   margin: $font_s;
 
-  width: 50%;
   border-radius: $border_s;
 
   box-shadow: 1px 2px 3px 1px $blue_d;

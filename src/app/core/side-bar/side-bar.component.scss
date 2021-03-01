@@ -85,7 +85,7 @@ ul::-webkit-scrollbar {
 .sub_item_1,
 .sub_item_2 {
   background: #e9ecef;
-  border: 1px solid;
+  border: 1px solid $blue_d;
   padding: .3rem 0.87rem;
   margin: 0.4rem 0.2rem;
   text-align: right;
@@ -99,8 +99,10 @@ ul::-webkit-scrollbar {
   font-weight: 600;
   outline: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: linear-gradient(to left, $dark_ddd, rgba(255, 0, 0, 0));
+    color: $white;
   }
 }
 
