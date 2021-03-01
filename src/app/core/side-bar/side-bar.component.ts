@@ -16,13 +16,13 @@ export class SideBarComponent implements OnInit {
     private sideBarItemsService: SidebarItemsService,
     private testSidebarService: SidebarItemsService
   ) {
-    this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
-      if (sidebars) {
-        this.currentRoute = sidebars.items;
-      }
-    })
-    // this.currentRoute = this.testSidebarService.getTestSideTest();
-    // this.currentRoute = this.currentRoute.items;
+    // this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
+    //   if (sidebars) {
+    //     this.currentRoute = sidebars.items;
+    //   }
+    // })
+    this.currentRoute = this.testSidebarService.getTestSideTest();
+    this.currentRoute = this.currentRoute.items;
 
   }
 
@@ -32,7 +32,7 @@ export class SideBarComponent implements OnInit {
     }
   }
   toggleSubItems = (item: any): void => {
-    let a = document.querySelectorAll('.fa-arrow-circle-up');
+    let a = document.querySelectorAll('.pi-angle-up');
     this.currentRoute.forEach((aItem, i) => {
       if (item.title !== aItem.title) {
         aItem.isOpen = false;
