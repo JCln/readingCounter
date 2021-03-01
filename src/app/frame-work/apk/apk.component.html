@@ -11,11 +11,16 @@
                 <input class="input_1" type="text" placeholder="توضیحات :" name="description"
                     [(ngModel)]="uploadForm.description">
             </div>
-            <input #screenshotInput name="فایلی انتخاب کنید" title="فایلی انتخاب نشده است"
-                class="btn_2 _choose_file hidden" type="file" name="screenshot" (change)="onChange($event)" id="files">
-            <!-- <label class="btn_2" for="files">
-                فایل apk انتخاب نمایید                
-            </label> -->
+            <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
+                <span class="fa fa-android"></span>
+                فایل <small>apk</small> انتخاب نمایید
+            </label>
+            <label *ngIf="choosenFileName" class="label_choose_file" for="files">
+                {{choosenFileName}}
+            </label>
+            <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file"
+                name="screenshot" (change)="onChange($event)" id="files">
+
 
             <div class="change_pass">
                 <button class="btn_2" type="submit">

@@ -18,6 +18,7 @@ import { CloseTabService } from './../../services/close-tab.service';
 })
 export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
+  choosenFileName: string = '';
 
   uploadForm: any = {
     versionCode: null,
@@ -48,9 +49,9 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     // })
   }
   onChange(event) {
+    const a = document.getElementById('files') as any;
+    this.choosenFileName = a.files.item(0).name;
     FileList = event.target.files;
-    console.log(HTMLInputElement = this.screenshotInput.nativeElement);
-
   }
   uploadFile = (form: NgForm) => {
     if (!this.screenshotInput) {
