@@ -1,6 +1,6 @@
 <p-table [value]="dataSource" [columns]="_selectedColumns" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} سطر
-    " [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl"
+    " [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive"
     [globalFilterFields]="['isActive','isLocked','mobile','displayName','username','userCode']" sortMode="multiple">
 
     <ng-template pTemplate="header" let-columns>

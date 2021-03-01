@@ -64,7 +64,7 @@
 
 <p-table [columns]="defColumns" [value]="changeHsty" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl">
+    [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
 
     <ng-template pTemplate="header" let-columns>
         <tr>

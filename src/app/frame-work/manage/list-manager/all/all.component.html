@@ -1,7 +1,7 @@
 <p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl">
-    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
+    [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive"
+    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"

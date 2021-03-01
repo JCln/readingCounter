@@ -429,7 +429,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/rc')
+        if (res === '/wr/m/rcd')
           this.classWrapper(true);
       }
     })

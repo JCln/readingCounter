@@ -23,6 +23,7 @@ export class KarbariAddDgComponent {
       title: ['', Validators.required],
       provinceId: data.provinceId,
       isMaskooni: [false, Validators.required],
+      isTejari: false,
       isSaxt: [false, Validators.required],
       hasReadingVibrate: [false, Validators.required]
     })
