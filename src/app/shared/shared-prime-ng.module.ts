@@ -7,7 +7,6 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
-import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [],
@@ -18,7 +17,6 @@ import { TooltipModule } from 'primeng/tooltip';
     MatCheckboxModule,
     MultiSelectModule,
     DropdownModule,
-    TooltipModule,
     SliderModule,
     DynamicDialogModule
   ],
@@ -29,7 +27,7 @@ import { TooltipModule } from 'primeng/tooltip';
     MatCheckboxModule,
     MultiSelectModule,
     DropdownModule,
-    TooltipModule,
+
     SliderModule,
     DynamicDialogModule
   ]
