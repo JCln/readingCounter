@@ -11,9 +11,9 @@ import { MapService } from './../../services/map.service';
 
 declare let L;
 
-const iconRetinaUrl = 'assets/marker-icon-2x.png';
-const iconUrl = 'assets/marker-icon.png';
-const shadowUrl = 'assets/marker-shadow.png';
+const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
+const iconUrl = 'assets/leaflet/images/marker-icon.png';
+const shadowUrl = 'assets/leaflet/images/marker-shadow.png';
 
 const defaultIcon = L.icon({
   iconRetinaUrl,
@@ -46,8 +46,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   title: string = '';
   subscription: Subscription;
 
-  lines = [];
-
   constructor(
     private route: ActivatedRoute,
     private mapService: MapService,
@@ -74,7 +72,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       center: [32.669, 51.664],
       zoom: 13,
       minZoom: 4,
-      layers: [streets]
+      layers: [streets, this.layerGroup]
     });
 
     const baseMaps = {
@@ -82,7 +80,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       "OSM": streets
     };
     const overlays = {
-      "ov1": this.layerGroup
+      "لایه ها": this.layerGroup
     };
 
     L.control.layers(baseMaps, overlays).addTo(this.map);
@@ -113,7 +111,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       }, i * delay);
     })
   }
-
   private getRouteParams = (): IMapTrackDesc => {
     const a = this.route.snapshot.paramMap.get('trackNumber');
     const b = this.route.snapshot.paramMap.get('day');
@@ -127,6 +124,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mapService.serviceInstantiate(this.map);
     this.mapService.addButtonsToLeaflet();
     this.removeLayerButtonLeaflet();
+    this.myLocationButtonLeaflet();
     this.markersDataSourceXY = await this.getPointerMarks(a);
   }
   ngOnInit(): void {
@@ -168,5 +166,23 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     L.easyButton('fa-close', () => {
       this.removeAllLayers();
     }, 'بستن تمامی لایه ها').addTo(this.map);
+  }
+  findMyLocationLeaflet = (e) => {
+    const radius = e.accuracy;
+    L.marker(e.latlng).addTo(this.layerGroup)
+      .bindPopup("شما در حدود تقریبی " + radius + " متر از این مکان قرار دارید").openPopup();
+
+    L.circle(e.latlng, radius).addTo(this.layerGroup);
+  }
+  onLocationError = (e) => {
+    alert(e.message);
+  }
+  myLocationButtonLeaflet = () => {
+    L.easyButton('fa-map-marker', () => {
+      this.map.locate({ setView: true, maxZoom: 16 });
+      this.removeAllLayers();
+      this.map.on('locationfound', this.findMyLocationLeaflet);
+      this.map.on('locationerror', this.onLocationError);
+    }, 'مکان من').addTo(this.map);
   }
 }

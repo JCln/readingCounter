@@ -2,6 +2,7 @@
 @import '../../../assets/mixins.scss';
 @import '../../../assets/button.scss';
 @import '../../../assets/tooltip.scss';
+@import '../../../assets/mixins.scss';
 
 .map-frame {
   margin: 1rem .2rem;
@@ -100,6 +101,11 @@
   }
 }
 
+.tooltip .tooltip_text {
+  left: 50%;
+  bottom: 130%;
+}
+
 // map option configs
 .polyline_switch {
   cursor: pointer;
@@ -144,6 +150,12 @@ h3 {
   height: 2.5rem;
   color: $gray_dr;
   margin-top: $font_xs;
+}
+
+._flex_dr_ric p {
+  font-size: $font_s;
+  color: $blue_d;
+  margin: 0 $font_xs;
 }
 
 // 

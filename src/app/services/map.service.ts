@@ -25,7 +25,6 @@ L.Marker.prototype.options.icon = defaultIcon;
 })
 export class MapService {
   private map: L.Map;
-  private layerGroup = new L.FeatureGroup();
 
   constructor(
     private listManagerService: ListManagerService
@@ -46,23 +45,7 @@ export class MapService {
       this.addInvalidateMap();
     }, 'بارگزاری مجدد نقشه').addTo(this.map);
   }
-  findMyLocationLeaflet = (e) => {
-    const radius = e.accuracy;
-    L.marker(e.latlng).addTo(this.map)
-      .bindPopup("شما در حدود تقریبی " + radius + " متر از این مکان قرار دارید").openPopup();
 
-    L.circle(e.latlng, radius).addTo(this.map);
-  }
-  onLocationError = (e) => {
-    alert(e.message);
-  }
-  myLocationButtonLeaflet = () => {
-    L.easyButton('fa-map-marker', () => {
-      this.map.locate({ setView: true, maxZoom: 16 });
-      this.map.on('locationfound', this.findMyLocationLeaflet);
-      this.map.on('locationerror', this.onLocationError);
-    }, 'مکان من').addTo(this.map);
-  }
   easyprintButtonLeaflet = () => {
     L.easyPrint({
       position: 'bottomleft',
@@ -72,7 +55,6 @@ export class MapService {
   addButtonsToLeaflet = () => {
     this.fullScreen();
     this.refreshMapButtonLeaflet();
-    this.myLocationButtonLeaflet();
     this.easyprintButtonLeaflet();
   }
   callPointerMarks = (data: object) => {

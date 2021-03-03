@@ -15,11 +15,12 @@
         <input type="radio" id="_dash" name="radio">
     </div>
 
-    <div [hidden]="!canShowOptionsButton || !isShowMap">
+    <div class="_flex_dr_ric" [hidden]="!canShowOptionsButton || !isShowMap">
         <button class="polyline_switch tooltip" (click)="isShowMapConfig = !isShowMapConfig">
             <i class="pi pi-cog"></i>
             <div class="tooltip_text">تنظیمات نقشه</div>
         </button>
+        <p>زمان نمایش؟</p>
     </div>
 </section>
 
