@@ -9,6 +9,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 import { MapService } from './../../services/map.service';
 
+declare let L;
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -26,17 +27,17 @@ const defaultIcon = L.icon({
 })
 L.Marker.prototype.options.icon = defaultIcon;
 
-declare let L;
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
-  private map;
+  private map: L.Map;
   private mapItems: Imap[];
-
+  private layerGroup = new L.FeatureGroup();
   private markersDataSourceXY: IListManagerPDXY[] = [];
+
   polyline_configs: number;
   isShowMap: boolean = true;
   canShowOptionsButton: boolean = false;
@@ -44,6 +45,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   title: string = '';
   subscription: Subscription;
+
+  lines = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -78,10 +81,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       "Satellite": satellite,
       "OSM": streets
     };
+    const overlays = {
+      "ov1": this.layerGroup
+    };
 
-    L.control.layers(baseMaps).addTo(this.map);
+    L.control.layers(baseMaps, overlays).addTo(this.map);
   }
-
   getPointerMarks = (a: object): Promise<any> => {
     return new Promise((resolve) => {
       this.mapService.callPointerMarks(a).subscribe(res => {
@@ -89,23 +94,22 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
-
   private leafletDrawPolylines = (delay: number) => {
-    let lines = [];
+    const lines = [];
     this.markersDataSourceXY.forEach((items, i) => {
       setTimeout(() => {
         lines.push([parseFloat(items.y), parseFloat(items.x)]);
         L.polyline(lines, {
-          color: 'red',
+          color: '#0e4c92',
           weight: 3
-        }).addTo(this.map);
+        }).addTo(this.layerGroup);
       }, i * delay);
     })
   }
   private getXYPosition = (delay: number) => {
     this.markersDataSourceXY.map((items, i) => {
       setTimeout(() => {
-        L.marker([parseFloat(items.y), parseFloat(items.x)]).addTo(this.map);
+        L.marker([parseFloat(items.y), parseFloat(items.x)]).addTo(this.layerGroup);
       }, i * delay);
     })
   }
@@ -119,9 +123,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     const a: IMapTrackDesc = this.getRouteParams();
     if (this.utilsService.isNull(a.trackNumber))
       return;
-    console.log(1);
-
     this.canShowOptionsButton = true;
+    this.mapService.serviceInstantiate(this.map);
+    this.mapService.addButtonsToLeaflet();
+    this.removeLayerButtonLeaflet();
     this.markersDataSourceXY = await this.getPointerMarks(a);
   }
   ngOnInit(): void {
@@ -130,8 +135,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper();
   }
   ngAfterViewInit(): void {
-    this.mapService.fullScreen(this.map);
-    this.mapService.buttons(this.map);
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === '/wr')
@@ -145,6 +148,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
   mapConfigOptions = (delay: number) => {
+    this.removeAllLayers();
     this.getXYPosition(delay + 20);
     this.leafletDrawPolylines(delay);
   }
@@ -157,5 +161,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate(['../wr/db']);
     }
   }
-
+  removeAllLayers = () => {
+    this.layerGroup.clearLayers();
+  }
+  removeLayerButtonLeaflet = () => {
+    L.easyButton('fa-close', () => {
+      this.removeAllLayers();
+    }, 'بستن تمامی لایه ها').addTo(this.map);
+  }
 }
