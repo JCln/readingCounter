@@ -26,7 +26,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   editableDataSource = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  defaultHasPreNumberFilter = new FormControl('');
+  // defaultHasPreNumberFilter = new FormControl('');
   isOnQeraatCodeFilter = new FormControl('');
   displayBillIdFilter = new FormControl('');
   displayRadifFilter = new FormControl('');
@@ -63,7 +63,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   zoneDictionary: IDictionaryManager[] = [];
 
   columnsToDisplay = [
-    'defaultHasPreNumber',
+    // 'defaultHasPreNumber',
     'isOnQeraatCode',
     'displayBillId',
     'displayRadif',
@@ -112,7 +112,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     highPercentZarfiatBound: '',
     lowPercentRateBoundNonMaskooni: '',
     highPercentRateBoundNonMaskooni: '',
-    defaultHasPreNumber: '',
+    // defaultHasPreNumber: '',
     isOnQeraatCode: '',
     displayBillId: '',
     displayRadif: ''
@@ -359,13 +359,13 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
           this.dataSource.filter = JSON.stringify(this.filterValues);
         }
       )
-    this.defaultHasPreNumberFilter.valueChanges
-      .subscribe(
-        defaultHasPreNumber => {
-          this.filterValues.defaultHasPreNumber = defaultHasPreNumber;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
+    // this.defaultHasPreNumberFilter.valueChanges
+    //   .subscribe(
+    //     defaultHasPreNumber => {
+    //       this.filterValues.defaultHasPreNumber = defaultHasPreNumber;
+    //       this.dataSource.filter = JSON.stringify(this.filterValues);
+    //     }
+    //   )
     this.isOnQeraatCodeFilter.valueChanges
       .subscribe(
         isOnQeraatCode => {
@@ -469,7 +469,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
         && data.highPercentZarfiatBound.toString().toLowerCase().indexOf(searchTerms.highPercentZarfiatBound) !== -1
         && data.lowPercentRateBoundNonMaskooni.toString().toLowerCase().indexOf(searchTerms.lowPercentRateBoundNonMaskooni) !== -1
         && data.highPercentRateBoundNonMaskooni.toString().toLowerCase().indexOf(searchTerms.highPercentRateBoundNonMaskooni) !== -1
-        && data.defaultHasPreNumber.toString().indexOf(searchTerms.defaultHasPreNumber) !== -1
+        // && data.defaultHasPreNumber.toString().indexOf(searchTerms.defaultHasPreNumber) !== -1
         && data.isOnQeraatCode.toString().indexOf(searchTerms.isOnQeraatCode) !== -1
         && data.displayBillId.toString().indexOf(searchTerms.displayBillId) !== -1
         && data.displayRadif.toString().indexOf(searchTerms.displayRadif) !== -1

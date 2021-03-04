@@ -12,8 +12,8 @@ export class DownloadManagerService {
   getDownloadListInfo = (): IObjectIteratation[] => {
     return [
       { field: 'sizeInKB', header: 'حجم کل موارد(KB)', isSelected: true },
-      { field: 'imageNumbers', header: 'تعداد تصویر ها', isSelected: true },
-      { field: 'audioNumbers', header: 'تعداد صوت ها', isSelected: true }
+      { field: 'imageNumbers', header: 'تعداد تصویر', isSelected: true },
+      { field: 'audioNumbers', header: 'تعداد صوت', isSelected: true }
     ];
   }
   dataSource: IOnOffLoad[] = [];

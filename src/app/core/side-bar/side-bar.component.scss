@@ -11,7 +11,7 @@ nav {
   padding: $font_xs 0;
   margin-left: .2rem;
   margin-top: 0;
-  height: 85vh;
+  height: 84vh;
   overflow-y: auto;
   overflow-x: hidden;
   transition: all ease-in-out 150ms;
@@ -167,7 +167,7 @@ ul::-webkit-scrollbar {
   border-radius: $font_2 0 0 $font_2;
   background: $gray_e3;
   margin-bottom: $font_05;
-  padding: $font_05 0 $font_05 $font_05;
+  padding: $font_xxs 0 $font_xxs $font_05;
   border: 1px solid;
 }
 

@@ -74,6 +74,10 @@
     }
   }
 
+  .p-paginator-pages {
+    display: flex;
+    flex-direction: row-reverse;
+  }
 }
 
 :host ::ng-deep {

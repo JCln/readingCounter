@@ -51,6 +51,12 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectCols = this.listManagerService.columnSelectedLMPerDay();
     this._selectedColumns = this.customizeSelectedColumns();
   }
+  private setGetRanges = () => {
+    this.dataSource.overalDuration = parseFloat(this.utilsService.getRange(this.dataSource.overalDuration));
+    this.dataSource.overalDistance = parseFloat(this.utilsService.getRange(this.dataSource.overalDistance));
+    // this.dataSource.overalDuration = parseFloat(this.utilsService.getRange(this.dataSource.overalDuration));
+
+  }
   nullSavedSource = () => this.closeTabService.saveDataForLMPD = null;
   private classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -59,7 +65,7 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource = await this.getDataSource();
     this.offLoadPerDayHistory = this.dataSource.offLoadPerDayHistory;
     this.insertSelectedColumns();
-    this.dataSource.overalDuration = parseFloat(this.utilsService.getRange(this.dataSource.overalDuration));
+    this.setGetRanges();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {

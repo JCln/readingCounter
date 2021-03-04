@@ -170,7 +170,7 @@ export class InterfaceManagerService {
   getCounterState = (): Observable<any> => {
     return this.mainService.GET('V1/CounterState/All');
   }
-  CounterStateDictionary = (): Observable<any> => {
+  getCounterStateDictionary = (): Observable<any> => {
     return this.mainService.GET('V1/CounterState/Dictionary');
   }
   postCounterStatGridFriendly = (body: object): Observable<any> => {
@@ -209,7 +209,10 @@ export class InterfaceManagerService {
 
   // qort manager
   getQotr = (): Observable<any> => {
-    return this.mainService.GET('/V1/Qotr/All');
+    return this.mainService.GET('V1/Qotr/All');
+  }
+  getQotrDictionary = (): Observable<any> => {
+    return this.mainService.GET('V1/Qotr/Dictionary');
   }
   deleteQotr = (id: number): Observable<any> => {
     return this.mainService.POST('V1/Qotr/Remove', id);

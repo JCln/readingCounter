@@ -26,9 +26,7 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     private trackingManagerService: TrackingManagerService
   ) {
   }
-  removeRow = (rowData: ITracking) => {
-    this.trackingManagerService.removeTrackingId(rowData.id);
-  }
+  
   getDataSource = (): Promise<ITracking[]> => {
     return new Promise((resolve) => {
       this.trackingManagerService.getOffloadedDataSource().subscribe(res => {

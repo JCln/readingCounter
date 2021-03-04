@@ -18,7 +18,7 @@ export class RdAddDgComponent {
   ) {
     data = data.di;
     this.form = fb.group({
-      defaultHasPreNumber: false,
+      // defaultHasPreNumber: false,
       isOnQeraatCode: false,
       displayBillId: false,
       displayRadif: false,

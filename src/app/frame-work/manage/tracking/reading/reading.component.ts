@@ -27,8 +27,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     private trackingManagerService: TrackingManagerService,
     private utilsService: UtilsService
-  ) {
-  }
+  ) { }
 
   routeToLMPayDay = (row: ITracking) => {
     this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);

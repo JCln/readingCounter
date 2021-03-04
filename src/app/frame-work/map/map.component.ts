@@ -101,13 +101,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           color: '#0e4c92',
           weight: 3
         }).addTo(this.layerGroup);
+        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 14);
       }, i * delay);
     })
   }
   private getXYPosition = (delay: number) => {
     this.markersDataSourceXY.map((items, i) => {
       setTimeout(() => {
-        L.marker([parseFloat(items.y), parseFloat(items.x)]).addTo(this.layerGroup);
+        this.circleToLeaflet(parseFloat(items.y), parseFloat(items.x), items);
+        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 14);
       }, i * delay);
     })
   }
@@ -121,16 +123,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.utilsService.isNull(a.trackNumber))
       return;
     this.canShowOptionsButton = true;
-    this.mapService.serviceInstantiate(this.map);
-    this.mapService.addButtonsToLeaflet();
-    this.removeLayerButtonLeaflet();
-    this.myLocationButtonLeaflet();
     this.markersDataSourceXY = await this.getPointerMarks(a);
+    console.log(this.markersDataSourceXY);
+
+    this.mapConfigOptions(0);
   }
   ngOnInit(): void {
     this.getMapItems();
     this.initMap();
     this.classWrapper();
+    this.addButtonsToLeaflet();
   }
   ngAfterViewInit(): void {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -139,6 +141,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           this.ngOnInit();
       }
     })
+  }
+  private flyToDes = (lat: number, lag: number, zoom: number) => {
+    this.map.flyTo([(lat), (lag)], zoom);
+  }
+  addButtonsToLeaflet = () => {
+    this.mapService.serviceInstantiate(this.map);
+    this.mapService.addButtonsToLeaflet();
+    this.removeLayerButtonLeaflet();
+    this.myLocationButtonLeaflet();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
@@ -159,27 +170,33 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate(['../wr/db']);
     }
   }
-  removeAllLayers = () => {
+  private removeAllLayers = () => {
     this.layerGroup.clearLayers();
   }
-  removeLayerButtonLeaflet = () => {
+  private removeLayerButtonLeaflet = () => {
     L.easyButton('fa-close', () => {
       this.removeAllLayers();
     }, 'بستن تمامی لایه ها').addTo(this.map);
   }
-  findMyLocationLeaflet = (e) => {
+  private circleToLeaflet = (lat: number, lng: number, items) => {
+    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: "#0e4c92" }).addTo(this.layerGroup)
+      .bindPopup(
+        `${items.firstName}` + `${items.sureName} <br> ${items.eshterak}`
+      );
+  }
+  private findMyLocationLeaflet = (e) => {
     const radius = e.accuracy;
     L.marker(e.latlng).addTo(this.layerGroup)
       .bindPopup("شما در حدود تقریبی " + radius + " متر از این مکان قرار دارید").openPopup();
 
-    L.circle(e.latlng, radius).addTo(this.layerGroup);
+    this.flyToDes(e.latlng.lat, e.latlng.lng, 14);
   }
-  onLocationError = (e) => {
+  private onLocationError = (e) => {
     alert(e.message);
   }
-  myLocationButtonLeaflet = () => {
+  private myLocationButtonLeaflet = () => {
     L.easyButton('fa-map-marker', () => {
-      this.map.locate({ setView: true, maxZoom: 16 });
+      this.map.locate({ setView: true, maxZoom: 14 });
       this.removeAllLayers();
       this.map.on('locationfound', this.findMyLocationLeaflet);
       this.map.on('locationerror', this.onLocationError);

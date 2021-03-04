@@ -31,11 +31,12 @@
 
     <mat-form-field appearance="fill">
         <mat-label>ایمیل</mat-label>
-        <input matInput [(ngModel)]="userInputForm.email" name="email" class="text_left" placeholder="ایمیل را وارد نمایید">
+        <input matInput [(ngModel)]="userInputForm.email" name="email" class="text_left"
+            placeholder="ایمیل را وارد نمایید">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-        <mat-label>شماره موبایل</mat-label>
+        <mat-label>موبایل</mat-label>
         <input matInput [(ngModel)]="userInputForm.mobile" class="text_left" name="mobile" maxlength=11 minlength=11
             placeholder="شماره موبایل را وارد نمایید" required>
     </mat-form-field>
@@ -53,7 +54,7 @@
     </mat-form-field>
 
     <div class="checkbox_s">
-        <mat-checkbox [(ngModel)]="userInputForm.displayMobile" name="displayMobile">شماره موبایل نمایش داده شود؟
+        <mat-checkbox [(ngModel)]="userInputForm.displayMobile" name="displayMobile">موبایل نمایش داده شود؟
         </mat-checkbox>
         <mat-checkbox [(ngModel)]="userInputForm.isActive" name="isActive">کاربر فعال باشد؟</mat-checkbox>
     </div>

@@ -12,8 +12,8 @@ import { UtilsService } from './utils.service';
 export class TrackingManagerService {
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
-      { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true },
-      { field: 'listNumber', header: 'شماره لیست', isSelected: true },
+      { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
+      { field: 'listNumber', header: 'ش لیست', isSelected: true },
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
       // { field: 'zoneId', header: 'ناحیه', isSelected: false },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
@@ -27,16 +27,15 @@ export class TrackingManagerService {
       { field: 'itemQuantity', header: 'تعداد', isSelected: true },
       { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-      { field: 'hasPreNumber', header: 'شماره پیشین', isSelected: false },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
       { field: 'displayRadif', header: 'ردیف', isSelected: false },
-      { field: 'counterReaderName', header: 'مامور قرائت پیشین', isSelected: false }
+      { field: 'counterReaderName', header: 'مامور قرائت', isSelected: false }
     ];
   }
   columnSelectedImportedList = (): IObjectIteratation[] => {
     return [
-      { field: 'trackNumber', header: 'شماره پیگیری', isSelected: false },
-      { field: 'listNumber', header: 'شماره لیست', isSelected: false },
+      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
+      { field: 'listNumber', header: 'ش لیست', isSelected: false },
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: false },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
       { field: 'isBazdid', header: 'بازدید', isSelected: false },
@@ -49,10 +48,9 @@ export class TrackingManagerService {
       { field: 'itemQuantity', header: 'تعداد', isSelected: false },
       { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: true },
-      { field: 'hasPreNumber', header: 'شماره پیشین', isSelected: true },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true },
       { field: 'displayRadif', header: 'ردیف', isSelected: true },
-      { field: 'counterReaderName', header: 'مامور قرائت پیشین', isSelected: true }
+      { field: 'counterReaderName', header: 'مامور قرائت', isSelected: true }
     ];
   }
 

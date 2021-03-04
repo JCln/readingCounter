@@ -18,6 +18,10 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dataSource: IListManagerAll[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  karbariDictionary: IDictionaryManager[] = [];
+  qotrDictionary: IDictionaryManager[] = [];
+  counterStateDictionary: IDictionaryManager[] = [];
+
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
@@ -30,11 +34,55 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
     this.getRouteParams();
   }
+
+  convertQotrIdToTitle = (dataSource: any[], qotrDictionary: IDictionaryManager[]) => {
+    qotrDictionary.map(qotrDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.qotrCode == qotrDic.id) {
+          dataSource.qotrCode = qotrDic.title;
+        }
+      })
+    });
+  }
+  getQotrDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.listManagerService.getQotrDictionary().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
+  convertCounterStateIdToTitle = (dataSource: any[], CounterStateDictionary: IDictionaryManager[]) => {
+    CounterStateDictionary.map(CounterStateDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.preCounterStateCode == CounterStateDic.id) {
+          dataSource.preCounterStateCode = CounterStateDic.title;
+        }
+      })
+    });
+  }
+  getCounterStateDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.listManagerService.getCounterStateDictionary().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
   convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
       dataSource.map(dataSource => {
         if (dataSource.zoneId == zoneDic.id) {
           dataSource.zoneId = zoneDic.title;
+        }
+      })
+    });
+  }
+  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
+    karbariDictionary.map(karbariDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.karbariCode == karbariDic.id) {
+          dataSource.karbariCode = karbariDic.title;
         }
       })
     });
@@ -47,7 +95,14 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-
+  getKarbariDictionary = (): any => {
+    return new Promise((resolve) => {
+      this.listManagerService.getKarbariDictionary().subscribe(res => {
+        if (res)
+          resolve(res);
+      })
+    });
+  }
   getDataSource = (): Promise<IListManagerAll[]> => {
     return new Promise((resolve) => {
       this.listManagerService.getLMAll(this.trackId).subscribe(res => {
@@ -64,8 +119,14 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.dataSource = await this.getDataSource();
     this.zoneDictionary = await this.getZoneDictionary();
-    console.log(this.zoneDictionary);
+    this.karbariDictionary = await this.getKarbariDictionary();
+    this.qotrDictionary = await this.getQotrDictionary();
+    this.counterStateDictionary = await this.getCounterStateDictionary();
+
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+    this.convertQotrIdToTitle(this.dataSource, this.qotrDictionary);
+    this.convertCounterStateIdToTitle(this.dataSource, this.counterStateDictionary);
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {

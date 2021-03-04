@@ -18,6 +18,10 @@ section.content {
   align-items: center;
 }
 
+.date_section {
+  margin: $font_05 0;
+}
+
 section.dynamic_content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));

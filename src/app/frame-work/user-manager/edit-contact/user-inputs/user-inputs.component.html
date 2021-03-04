@@ -7,14 +7,13 @@
 
     <mat-form-field appearance="fill">
         <mat-label>نام</mat-label>
-        <input matInput name="firstName" [(ngModel)]="editInfo.firstName" placeholder="نام را وارد نمایید"
-            required>
+        <input matInput name="firstName" [(ngModel)]="editInfo.firstName" placeholder="نام را وارد نمایید" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>نام خانوادگی</mat-label>
-        <input matInput name="sureName" [(ngModel)]="editInfo.sureName"
-            placeholder="نام خانوادگی را وارد نمایید" required>
+        <input matInput name="sureName" [(ngModel)]="editInfo.sureName" placeholder="نام خانوادگی را وارد نمایید"
+            required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -25,7 +24,7 @@
     <mat-form-field appearance="fill">
         <mat-label>شماره موبایل</mat-label>
         <input matInput name="mobile" [(ngModel)]="editInfo.mobile" maxlength=11 minlength=11
-            placeholder="شماره موبایل را وارد نمایید" required>
+            placeholder="موبایل را وارد نمایید" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -36,12 +35,12 @@
 
     <mat-form-field appearance="fill">
         <mat-label>شناسه دستگاه</mat-label>
-        <input matInput name="deviceId" [(ngModel)]="editInfo.deviceId"
-            placeholder="شناسه دستگاه را وارد نمایید" required>
+        <input matInput name="deviceId" [(ngModel)]="editInfo.deviceId" placeholder="شناسه دستگاه را وارد نمایید"
+            required>
     </mat-form-field>
 
     <div class="checkbox_s">
-        <mat-checkbox name="displayMobile" [(ngModel)]="editInfo.displayMobile">شماره موبایل نمایش داده شود؟
+        <mat-checkbox name="displayMobile" [(ngModel)]="editInfo.displayMobile">موبایل نمایش داده شود؟
         </mat-checkbox>
     </div>
 
