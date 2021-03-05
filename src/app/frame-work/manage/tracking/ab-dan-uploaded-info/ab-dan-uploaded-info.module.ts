@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 
 import { AbDanUploadedInfoRoutingModule } from './ab-dan-uploaded-info-routing.module';
@@ -7,10 +8,14 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 
 
 @NgModule({
-  declarations: [AbDanUploadedInfoComponent, ImageViewerComponent],
+  declarations: [AbDanUploadedInfoComponent],
   imports: [
     SharedTwoModule,
     AbDanUploadedInfoRoutingModule
-  ]
+  ],
+  entryComponents: [
+    ImageViewerComponent
+  ],
+  providers: [DialogService]
 })
 export class AbDanUploadedInfoModule { }

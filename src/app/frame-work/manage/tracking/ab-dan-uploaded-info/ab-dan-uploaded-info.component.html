@@ -55,17 +55,16 @@
             <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
                 <div class="__img_counter">{{i+1}}</div>
 
+                <!-- tooltip -->
                 <div *ngIf="!testLoadImage[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
                 <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
-
-                <div *ngIf="testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
-                    <img (click)="viewerOpen = true" src="{{testLoadImage[i]}}" alt="whatever">
+                <!--   -->
+                <div *ngIf="testLoadImage[i]" class="__img_bound">
+                    <img (click)="showBigImage(testLoadImage[i])" src="{{testLoadImage[i]}}" alt="whatever">
                 </div>
                 <div *ngIf="!testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
                     <img src="assets/imgs/soundvid/2.png" alt="whatever">
                 </div>
-                <app-image-viewer [imageURL]="testLoadImage[i]" [open]="viewerOpen" (close)="viewerOpen = false">
-                </app-image-viewer>
             </div>
             <div class="not_found_header" *ngIf="!imageFiles.length">
                 <h2>تصویری پیدا نشد</h2>

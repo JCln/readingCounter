@@ -1,10 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DownloadManagerService } from 'src/app/services/download-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+
+import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-ab-dan-uploaded-info',
@@ -25,7 +28,8 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
   showAudioControllers: boolean = false;
   isPlaying: boolean = false;
   downloadURL: string = '';
-  viewerOpen: boolean = false;
+  viewerOpen: boolean[] = [false];
+  ref: DynamicDialogRef;
 
   subscription: Subscription[] = [];
 
@@ -34,6 +38,7 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
     private interactionService: InteractionService,
+    private dialogService: DialogService
     // private domSanitizer: DomSanitizer
   ) { }
 
@@ -101,7 +106,6 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
           reader.addEventListener("load", () => {
             this.testLoadImage[index] = reader.result;
           }, false);
-
           if (this.testLoadImage[index]) {
             reader.readAsDataURL(this.testLoadImage[index]);
           }
@@ -136,6 +140,15 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
     link.href = this.downloadURL;
     link.download = `${new Date().toLocaleDateString()}.ogg`;
     link.click();
+  }
+  showBigImage = (data: any) => {
+    this.ref = this.dialogService.open(ImageViewerComponent, {
+      data: data,
+      rtl: true,
+      width: '80%',
+      height: '100%',
+      closable: true
+    })
   }
 
 }
