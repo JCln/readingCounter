@@ -1,7 +1,7 @@
 <section>
 
     <h1 class="title">اطلاعات مکانی</h1>
-    <form #form="ngForm" class="content">
+    <form #form="ngForm" (ngSubmit)="editCloseData()" class="content">
         <div class="_desc">
             <div *ngFor="let mainDatas of _selectedDatas">
                 <ng-container
@@ -17,6 +17,6 @@
                 </ng-template>
             </div>
         </div>
-        <button class="btn_2_o" (click)="editCloseData()">ویرایش مسیر</button>
+        <button class="btn_2_o" type="submit">ویرایش مسیر</button>
     </form>
 </section>

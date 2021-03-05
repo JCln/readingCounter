@@ -34,7 +34,6 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dataSource: ITracking[] = [];
   filterZoneDictionary: IDictionaryManager[] = [];
-  visibility: boolean = true;
 
   selectedFuckingTest: any[] = []
   _selectCols: any[] = [];
@@ -95,6 +94,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   onRowEditSave(rowData: any) {
     this.trackingManagerService.postEditingTrack(rowData);
+    this.refreshTable();
   }
   onRowEditCancel(product: any, index: number) {
     console.log(product + '   ' + index);
@@ -153,7 +153,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     this.ref.onClose.subscribe((res: ITracking) => {
       if (res)
-        this.trackingManagerService.postEditingTrack(res);
+        this.onRowEditSave(res);
     });
   }
 

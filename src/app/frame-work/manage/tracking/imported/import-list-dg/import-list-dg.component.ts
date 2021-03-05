@@ -20,7 +20,6 @@ export class ImportListDgComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.config);
     this.dataSource = this.config.data;
     this._selectedDatas = this.trackingManagerService.columnSelectedImportedList();
   }

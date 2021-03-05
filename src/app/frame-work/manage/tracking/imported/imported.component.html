@@ -1,6 +1,6 @@
-<p-table *ngIf="visibility" [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl" dataKey="innerTable"
+<p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
+    [filterDelay]="0" dir="rtl" dataKey="innerTable"
     [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
     styleClass="p-datatable-responsive">
 
