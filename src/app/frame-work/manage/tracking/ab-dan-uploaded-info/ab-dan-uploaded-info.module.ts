@@ -8,7 +8,7 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 
 
 @NgModule({
-  declarations: [AbDanUploadedInfoComponent],
+  declarations: [AbDanUploadedInfoComponent, ImageViewerComponent],
   imports: [
     SharedTwoModule,
     AbDanUploadedInfoRoutingModule

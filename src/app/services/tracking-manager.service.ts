@@ -38,9 +38,7 @@ export class TrackingManagerService {
       { field: 'listNumber', header: 'ش لیست', isSelected: false },
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: false },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false },
       { field: 'year', header: 'سال', isSelected: false },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
       { field: 'fromDate', header: 'از تاریخ', isSelected: false },
@@ -48,9 +46,11 @@ export class TrackingManagerService {
       { field: 'itemQuantity', header: 'تعداد', isSelected: false },
       { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: true },
+      { field: 'counterReaderName', header: 'مامور قرائت', isSelected: true },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true },
       { field: 'displayRadif', header: 'ردیف', isSelected: true },
-      { field: 'counterReaderName', header: 'مامور قرائت', isSelected: true }
+      { field: 'isBazdid', header: 'بازدید', isSelected: false },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false }
     ];
   }
 
@@ -77,8 +77,11 @@ export class TrackingManagerService {
   getFollowUpSource = (trackNumber: string): Observable<any> => {
     return this.interfaceManagerService.getTrackFollowUp(trackNumber);
   }
-  postEditingTrack = (rowData: ITracking): Observable<any> => {
-    return this.interfaceManagerService.postTrackingEdit(this.selectSpecialParameters(rowData));
+  postEditingTrack = (rowData: ITracking) => {
+    this.interfaceManagerService.postTrackingEdit(this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {
+      if (res)
+        this.utilsService.snackBarMessageSuccess(res.message);
+    });
   }
   removeTrackingId = (trackNumber: string) => {
     this.interfaceManagerService.removeTrackingId({ trackNumber }).subscribe((res: IResponses) => {

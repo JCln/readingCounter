@@ -1,14 +1,18 @@
 @import '../../../../../../assets/variable';
 @import '../../../../../../assets/input.scss';
+@import '../../../../../../assets/button.scss';
+
+section {
+  font-family: $font_family;
+}
 
 .content {
-  background: $gray_d;
-  box-shadow: 1px 1px 8px 4px $blue_d;
+  background: $gray_l;
+  box-shadow: 1px 1px 8px 4px $gray_e3;
   text-align: center;
   padding: $font_2 $font_05;
   justify-content: space-around;
   border-radius: $border_s;
-  font-family: $font_family;
 }
 
 ._desc {
@@ -27,7 +31,7 @@
 }
 
 .title {
-  color: $blue_l;
+  color: $dark_ddd;
   text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
@@ -36,7 +40,7 @@
 input {
   color: $gray_96;
   margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px $gray_d;
+  // box-shadow: 1px 1px 8px 1px $gray_e3;
 }
 
 // dialog conf

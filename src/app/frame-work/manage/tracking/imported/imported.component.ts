@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
@@ -94,12 +94,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(product);
   }
   onRowEditSave(rowData: any) {
-    this.trackingManagerService.postEditingTrack(rowData).subscribe((res: IResponses) => {
-      if (res) {
-        this.trackingManagerService.successSnackMessage(res.message);
-      }
-    });
-
+    this.trackingManagerService.postEditingTrack(rowData);
   }
   onRowEditCancel(product: any, index: number) {
     console.log(product + '   ' + index);
@@ -139,13 +134,12 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-
     if (this.ref) {
       this.ref.close();
     }
+    //  for purpose of refresh any time even without new event emiteds
+    // we use subscription and not use take or takeUntil
+    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   refreshTable = () => {
     this.classWrapper(true);
@@ -157,11 +151,9 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
       width: '70%',
       header: 'مشاهده/ویرایش مسیر'
     })
-    this.ref.onClose.subscribe((car: ITracking) => {
-      if (car) {
-        console.log(car);
-
-      }
+    this.ref.onClose.subscribe((res: ITracking) => {
+      if (res)
+        this.trackingManagerService.postEditingTrack(res);
     });
   }
 

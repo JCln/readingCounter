@@ -24,10 +24,8 @@ export class ImportListDgComponent implements OnInit {
     this.dataSource = this.config.data;
     this._selectedDatas = this.trackingManagerService.columnSelectedImportedList();
   }
-  editClose(data: ITracking) {
-    console.log(data);
-
-    this.ref.close(data);
+  editCloseData() {
+    this.ref.close(this.dataSource);
   }
 
 }
