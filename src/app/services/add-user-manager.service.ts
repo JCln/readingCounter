@@ -74,12 +74,10 @@ export class AddUserManagerService {
       return false;
     if (!this.utilsService.isNullWithText(vals.displayName, 'نام  نمایشی را وارد نمایید'))
       return false;
-    if (!this.utilsService.isNullWithText(vals.deviceId, 'شناسه دستگاه را وارد نمایید'))
-      return false;
     return true;
   }
   passAndConfirmPass = (vals: IAddAUserManager) => {
-    if (!this.utilsService.isStringSameLength(vals.password, vals.confirmPassword)) {
+    if (!this.utilsService.isSameLength(vals.password, vals.confirmPassword)) {
       this.snackWrapperService.openSnackBar('تعداد ارقام رمز عبور با تایید آن برابر نیست', 5000, 'snack_danger');
       return false;
     }

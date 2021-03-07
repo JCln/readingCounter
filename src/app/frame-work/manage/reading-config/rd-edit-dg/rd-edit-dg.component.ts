@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-rd-edit-dg',
@@ -14,8 +15,10 @@ export class RdEditDgComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<RdEditDgComponent>,
-    fb: FormBuilder) {
-    const editable = data.editable;    
+    fb: FormBuilder,
+    private utilsService: UtilsService
+  ) {
+    const editable = data.editable;
     data = data.row;
     this.selected = data.zoneId;
 
@@ -48,7 +51,63 @@ export class RdEditDgComponent {
       highPercentRateBoundNonMaskooni: data.highPercentRateBoundNonMaskooni
     })
   }
+  private percentValidate = (): boolean => {
+    if (!this.utilsService.persentCheck(this.form.value.defaultAlalHesab))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.maxAlalHesab))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.minAlalHesab))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.defaultImagePercent))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.maxImagePercent))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.minImagePercent))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.lowConstBoundMaskooni))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.lowPercentBoundMaskooni))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.highConstBoundMaskooni))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.highPercentBoundMaskooni))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.lowConstBoundSaxt))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.lowPercentBoundSaxt))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.highConstBoundSaxt))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.highPercentBoundSaxt))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.lowConstZarfiatBound))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.lowPercentZarfiatBound))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.highConstZarfiatBound))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.highPercentZarfiatBound))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.lowPercentRateBoundNonMaskooni))
+      return false;
+    if (!this.utilsService.persentCheck(this.form.value.highPercentRateBoundNonMaskooni))
+      return false;
+    return true;
+  }
+  private zoneValidate = (): boolean => {
+    if (this.utilsService.isNull(this.form.value.zoneId))
+      return false;
+    return true;
+  }
   save() {
+    if (!this.percentValidate()) {
+      this.utilsService.snackBarMessageWarn('مقدار نمیتواند بیش تر از 100 و کمتر از 0 باشد');
+      return;
+    }
+    if (!this.zoneValidate()) {
+      this.utilsService.snackBarMessageWarn('ناحیه انتخاب نشده است');
+      return;
+    }
     this.dialogRef.close(this.form.value);
   }
   close() {

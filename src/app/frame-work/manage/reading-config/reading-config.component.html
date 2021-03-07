@@ -1,6 +1,8 @@
 <div class="operation">
-    <button (click)="openDialog()" class="operation_btn">
-        <i class="fa fa-plus"></i>
+    <button (click)="openDialog()" class="tooltip operation_btn">
+        <i class="fa fa-plus">
+            <div class="tooltip_text">افزودن تنظیمات قرائت</div>
+        </i>
     </button>
 </div>
 
@@ -339,13 +341,20 @@
         <th md-header-cell *matHeaderCellDef></th>
 
         <td md-cell *matCellDef="let row" class="_actions">
-            <i (click)="editDialog(row)" class="_custom fa fa-edit"></i>|
-            <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash-o"></i>
-            <i *ngIf="isHide" (click)="isHide = !isHide" class="_custom fa fa-eye"></i>
-            <i *ngIf="!isHide" (click)="isHide = !isHide" class="_custom fa fa-eye-slash"></i>
+            <i (click)="editDialog(row)" class="tooltip _custom fa fa-edit">
+                <div class="tooltip_text">ویرایش</div>
+            </i>|
+            <i (click)="deleteSingleRow(row)" class="tooltip _custom fa fa-trash-o">
+                <div class="tooltip_text">حذف</div>
+            </i>
+            <i *ngIf="isHide" (click)="isHide = !isHide" class="tooltip _custom fa fa-eye">
+                <div class="tooltip_text">جزئیات</div>
+            </i>
+            <i *ngIf="!isHide" (click)="isHide = !isHide" class="tooltip _custom fa fa-eye-slash">
+                <div class="tooltip_text">عدم نمایش جزئیات</div>
+            </i>
         </td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let person; columns: columnsToDisplay"></tr>
 

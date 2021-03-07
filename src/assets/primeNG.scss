@@ -64,7 +64,7 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    border: 2px solid;
+    border: 1.5px solid;
     cursor: pointer;
 
     &:hover,
@@ -77,6 +77,14 @@
   .p-paginator-pages {
     display: flex;
     flex-direction: row-reverse;
+  }
+
+  .p-paginator {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 

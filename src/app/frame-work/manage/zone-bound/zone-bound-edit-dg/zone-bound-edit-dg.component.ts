@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SectionsService } from 'src/app/services/sections.service';
 
 @Component({
   selector: 'app-zone-bound-edit-dg',
@@ -14,7 +15,8 @@ export class ZoneBoundEditDgComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ZoneBoundEditDgComponent>,
-    fb: FormBuilder
+    fb: FormBuilder,
+    private sectionsService: SectionsService
   ) {
     const editable = data.editable;
     data = data.row;
@@ -35,6 +37,10 @@ export class ZoneBoundEditDgComponent {
     })
   }
   save() {
+    this.sectionsService.setSectionsValue(this.form.value);
+    if (!this.sectionsService.sectionVertification()) {
+      return;
+    }
     this.dialogRef.close(this.form.value);
   }
   close() {

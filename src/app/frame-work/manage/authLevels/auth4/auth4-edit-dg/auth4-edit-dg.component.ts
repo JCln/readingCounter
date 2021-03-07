@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SectionsService } from 'src/app/services/sections.service';
 
 @Component({
   selector: 'app-auth4-edit-dg',
@@ -15,6 +16,7 @@ export class Auth4EditDgComponent {
     fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<Auth4EditDgComponent>,
+    private sectionsService: SectionsService
   ) {
     data = data.row;
     this.selected = data.authLevel3Id;
@@ -29,6 +31,10 @@ export class Auth4EditDgComponent {
   }
 
   save() {
+    this.sectionsService.setSectionsValue(this.form.value);
+    if (!this.sectionsService.sectionVertification()) {
+      return;
+    }
     this.dialogRef.close(this.form.value);
   }
   close() {

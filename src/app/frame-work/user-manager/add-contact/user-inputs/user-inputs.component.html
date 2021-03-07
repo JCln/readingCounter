@@ -1,23 +1,5 @@
 <main>
     <mat-form-field appearance="fill">
-        <mat-label>نام کاربری</mat-label>
-        <input matInput [(ngModel)]="userInputForm.username" name="username" placeholder="نام کاربری را وارد نمایید"
-            required>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>رمز عبور</mat-label>
-        <input matInput [(ngModel)]="userInputForm.password" name="password" placeholder="رمز عبور را وارد نمایید"
-            required>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>تکرار رمز عبور</mat-label>
-        <input matInput [(ngModel)]="userInputForm.confirmPassword" name="confirmPassword"
-            placeholder="رمز عبور را مجددا وارد نمایید" required>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
         <mat-label>نام</mat-label>
         <input matInput [(ngModel)]="userInputForm.firstName" name="firstName" placeholder="نام را وارد نمایید"
             required>
@@ -28,7 +10,23 @@
         <input matInput [(ngModel)]="userInputForm.sureName" name="sureName" placeholder="نام خانوادگی را وارد نمایید"
             required>
     </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>نام کاربری</mat-label>
+        <input matInput [(ngModel)]="userInputForm.username" name="username" placeholder="نام کاربری را وارد نمایید"
+            required>
+    </mat-form-field>
 
+    <mat-form-field appearance="fill">
+        <mat-label>رمز عبور</mat-label>
+        <input matInput [(ngModel)]="userInputForm.password" type="password" name="password"
+            placeholder="رمز عبور را وارد نمایید" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>تکرار رمز عبور</mat-label>
+        <input matInput [(ngModel)]="userInputForm.confirmPassword" type="password" name="confirmPassword"
+            placeholder="رمز عبور را مجددا وارد نمایید" required>
+    </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>ایمیل</mat-label>
         <input matInput [(ngModel)]="userInputForm.email" name="email" class="text_left"
@@ -42,15 +40,14 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-        <mat-label>نام مختصار</mat-label>
+        <mat-label>نام مستعار</mat-label>
         <input matInput [(ngModel)]="userInputForm.displayName" name="displayName"
             placeholder="نامی که نمایش داده شود را وارد نمایید؟" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>شناسه دستگاه</mat-label>
-        <input matInput [(ngModel)]="userInputForm.deviceId" name="deviceId" placeholder="شناسه دستگاه را وارد نمایید"
-            required>
+        <input matInput [(ngModel)]="userInputForm.deviceId" name="deviceId" placeholder="شناسه دستگاه را وارد نمایید">
     </mat-form-field>
 
     <div class="checkbox_s">

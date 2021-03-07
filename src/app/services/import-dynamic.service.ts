@@ -29,11 +29,6 @@ export class ImportDynamicService {
       return true;
     return false;
   }
-  checkLengthFromToEshterak = (from: string, to: string): boolean => {
-    if (from.toString().trim().length === to.toString().trim().length)
-      return true;
-    return false;
-  }
   validationOnNull = (val: any): boolean => {
     if (this.utilsService.isNull(val))
       return false;
@@ -41,26 +36,34 @@ export class ImportDynamicService {
   }
   checkVertification = (val: IImportDynamicDefault, _isOrderByDate: boolean): boolean => {
     this.importDynamicValue = val;
-    if (!this.checkLengthFromToEshterak(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
-      this.snackWrapperService.openSnackBar('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد', 3000, 'snack_danger');
+    if (!this.utilsService.isSameLength(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
+      this.snackWrapperService.openSnackBar('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد', 3000, 'snack_warn');
+      return false;
+    }
+    if (!this.utilsService.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 15)) {
+      this.snackWrapperService.openSnackBar('فرمت اشتراک ناصحیح است', 3000, 'snack_warn');
+      return false;
+    }
+    if (!this.utilsService.isFromLowerThanToByString(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
+      this.snackWrapperService.openSnackBar('از اشتراک کمتر از تا اشتراک است!', 3000, 'snack_warn');
       return false;
     }
     if (!this.persentOfImage()) {
-      this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', 3000, 'snack_warn');
       return false;
     }
     if (!this.persentOfalalHesab()) {
-      this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', 3000, 'snack_warn');
       return false;
     }
     if (!_isOrderByDate) {
       if (!this.validationOnNull(val.readingPeriodId)) {
-        this.snackWrapperService.openSnackBar('مدت قرائتی ایجاد و سپس امتحان نمایید', 3000, 'snack_danger');
+        this.snackWrapperService.openSnackBar('مدت قرائتی ایجاد و سپس امتحان نمایید', 3000, 'snack_warn');
         return false;
       }
     }
     if (!this.validationOnNull(this.importDynamicValue.counterReaderId)) {
-      this.snackWrapperService.openSnackBar('یک مامور قرائت انتخاب نمایید', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('یک مامور قرائت انتخاب نمایید', 3000, 'snack_warn');
       return false;
     }
     return true;
@@ -74,7 +77,7 @@ export class ImportDynamicService {
   }
   validationReadingPeriod = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('مدت دوره‌ای پیدا نشد', 6000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('مدت دوره‌ای پیدا نشد', 6000, 'snack_danger');
       return false;
     }
     return true;
@@ -88,14 +91,14 @@ export class ImportDynamicService {
   }
   validationPeriodKind = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('نوع دوره ای وجود ندارد', 6000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('نوع دوره ای وجود ندارد', 6000, 'snack_warn');
       return false;
     }
     return true;
   }
   validationZoneDictionary = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('ناحیه ای تعریف نشده است', 6000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('ناحیه ای تعریف نشده است', 6000, 'snack_warn');
       return false;
     }
     return true;
