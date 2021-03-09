@@ -101,7 +101,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           color: '#0e4c92',
           weight: 3
         }).addTo(this.layerGroup);
-        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 14);
       }, i * delay);
     })
   }
@@ -109,7 +108,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.markersDataSourceXY.map((items, i) => {
       setTimeout(() => {
         this.circleToLeaflet(parseFloat(items.y), parseFloat(items.x), items);
-        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 14);
+        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
       }, i * delay);
     })
   }
@@ -145,7 +144,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private flyToDes = (lat: number, lag: number, zoom: number) => {
     this.map.flyTo([(lat), (lag)], zoom);
   }
-  addButtonsToLeaflet = () => {
+  private addButtonsToLeaflet = () => {
     this.mapService.serviceInstantiate(this.map);
     this.mapService.addButtonsToLeaflet();
     this.removeLayerButtonLeaflet();
@@ -179,7 +178,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 'بستن تمامی لایه ها').addTo(this.map);
   }
   private circleToLeaflet = (lat: number, lng: number, items) => {
-    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: "#0e4c92" }).addTo(this.layerGroup)
+    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: "#3686c9" }).addTo(this.layerGroup)
       .bindPopup(
         `${items.firstName}` + `${items.sureName} <br> ${items.eshterak}`
       );
@@ -189,7 +188,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     L.marker(e.latlng).addTo(this.layerGroup)
       .bindPopup("شما در حدود تقریبی " + radius + " متر از این مکان قرار دارید").openPopup();
 
-    this.flyToDes(e.latlng.lat, e.latlng.lng, 14);
+    this.flyToDes(e.latlng.lat, e.latlng.lng, 16);
   }
   private onLocationError = (e) => {
     alert(e.message);

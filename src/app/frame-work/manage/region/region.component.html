@@ -1,6 +1,7 @@
 <div class="operation">
-    <button (click)="openDialog()" class="operation_btn">
+    <button (click)="openDialog()" class="tooltip operation_btn">
         <i class="fa fa-plus"></i>
+        <div class="tooltip_text">افزودن منطقه</div>
     </button>
 </div>
 
@@ -49,8 +50,12 @@
     <ng-container cdkColumnDef="actions">
         <th md-header-cell *matHeaderCellDef></th>
         <td md-cell *matCellDef="let row" class="_actions">
-            <i (click)="editDialog(row)" class="_custom fa fa-edit"></i>|
-            <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash-o"></i>
+            <i (click)="editDialog(row)" class="tooltip _custom fa fa-edit">
+                <div class="tooltip_text">ویرایش</div>
+            </i>|
+            <i (click)="deleteSingleRow(row)" class="tooltip _custom fa fa-trash-o">
+                <div class="tooltip_text">حذف</div>
+            </i>
         </td>
     </ng-container>
 

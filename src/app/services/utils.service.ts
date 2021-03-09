@@ -53,17 +53,32 @@ export class UtilsService {
     return false;
   }
   getRange = (val: number): string => {
-    return val.toString().substring(0, 6);
+    return val.toString().substring(0, 5);
   }
   isExactEqual = (first: string, second: string): boolean => {
     if (first.trim() === second.trim())
       return true;
     return false;
   }
-  isStringSameLength = (from: string, to: string): boolean => {
-    if (from.trim().length === to.trim().length)
+  isSameLength = (from: string, to: string): boolean => {
+    if (from.toString().trim().length === to.toString().trim().length)
       return true;
     return false;
+  }
+  lengthControl = (from: string | number, to: string | number, min: number, max: number): boolean => {
+    if (from.toString().trim().length < min || to.toString().trim().length > max)
+      return false;
+    return true;
+  }
+  isFromLowerThanTo = (from: number, to: number) => {
+    if (from > to)
+      return false;
+    return true;
+  }
+  isFromLowerThanToByString = (from: string, to: string) => {
+    if (parseFloat(from) > parseFloat(to))
+      return false;
+    return true;
   }
   // private pushOrPopFromMobileNumber = (mobileNum: string | number) => {
   //   // unshift to array just allowed so => string to array and then to string should converted

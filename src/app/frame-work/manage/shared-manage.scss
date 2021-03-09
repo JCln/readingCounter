@@ -1,6 +1,4 @@
-@import '../../../assets/variable.scss';
-@import '../../../assets/button.scss';
-@import '../../../assets/input.scss';
+@import '../../../assets/_indexes/vbit';
 
 table {
   display: block;
@@ -128,14 +126,19 @@ th {
   margin: $font_xs;
   padding: $font_xs;
   border-radius: 50%;
-  border: 1px solid;
+  border: 1.5px solid;
   font-size: 1.3rem;
   height: 3rem;
   width: 3rem;
   display: grid;
   place-content: center;
-  box-shadow: 0px 0px 3px 1px $dark_ddd;
   color: $dark_ddd;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0px 0px 1px 1px;
+  }
 }
 
 .mat-row:nth-child(even) {
@@ -206,4 +209,23 @@ td.mat-footer-cell:first-of-type {
   }
 }
 
+// tooltip
+.tooltip .tooltip_text {
+  left: 50%;
+  bottom: 130%;
+}
+
+// 
+
 ///////////////
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

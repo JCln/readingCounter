@@ -1,5 +1,4 @@
-@import '../../../assets/variable.scss';
-@import '../../../assets/button.scss';
+@import '../../../assets/_indexes/vb.scss';
 
 .mat-form-field {
   text-align: right;
@@ -85,4 +84,15 @@ button._blue_dark {
     direction: rtl;
   }
 
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SectionsService } from 'src/app/services/sections.service';
 
 @Component({
   selector: 'app-rpm-add-dg',
@@ -14,7 +15,8 @@ export class RpmAddDgComponent {
   constructor(
     fb: FormBuilder,
     private dialogRef: MatDialogRef<RpmAddDgComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private sectionsService: SectionsService
   ) {
     this.readingPeriodKindId = data.rpkmId;
     data = data.di;
@@ -23,11 +25,15 @@ export class RpmAddDgComponent {
       title: [''],
       zoneId: data.zoneId,
       moshtarakinId: [''],
-      readingPeriodKindId: this.readingPeriodKindId,
+      readingPeriodKindId: [0],
       clientOrder: ['']
     })
   }
   save() {
+    this.sectionsService.setSectionsValue(this.form.value);
+    if (!this.sectionsService.sectionVertification()) {
+      return;
+    }
     this.dialogRef.close(this.form.value);
   }
   close() {

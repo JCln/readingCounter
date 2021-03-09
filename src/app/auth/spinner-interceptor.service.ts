@@ -34,6 +34,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             if (error.status === 404) {
               this.snackWrapperService.openSnackBar('اطلاعاتی پیدا نشد، لطفا داده ورودی را بدقت وارد نمایید', 3000, 'snack_danger');
             }
+            if (error.status === 405) {
+              this.snackWrapperService.openSnackBar(error.message, 3000, 'snack_danger');
+            }
             if (error.status === 408) {
               this.snackWrapperService.openSnackBar('زمان ارسال درخواست به سرویس به اتمام رسید، احتمالا شبکه کٌند و یا قطع است، لطفا دقایقی دیگر امتحان نمایید', 10000, 'snack_danger');
             }
