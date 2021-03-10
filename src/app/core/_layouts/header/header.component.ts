@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, EventEmitter, OnDestroy, Output, Type } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
-import { AuthService } from './../../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -34,5 +34,8 @@ export class HeaderComponent implements AfterContentInit, OnDestroy {
     console.log('header destroyed');
 
     this.subscription.unsubscribe();
+  }
+  logout = () => {
+    this.authService.logout();
   }
 }

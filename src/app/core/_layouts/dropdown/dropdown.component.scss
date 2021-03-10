@@ -42,10 +42,15 @@
 }
 
 .dropdown-content a {
-  color: $gray_dr;
+  color: $blue_d2;
   padding: .3rem 1rem;
   text-decoration: none;
   display: block;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
 
   &:hover {
     background: $gray_d5;

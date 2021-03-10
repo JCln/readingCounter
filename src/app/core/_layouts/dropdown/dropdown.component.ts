@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
@@ -6,14 +6,14 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent {
-  myFunction = () => {
-    document.getElementById("myDropdown").classList.toggle("show");
-  }
+  @Output() isLogout = new EventEmitter<boolean>();
   // close drop down if clicks outside of it
   closeDropDown = () => {
 
   }
-
+  logout = () => {
+    this.isLogout.emit(true);
+  }
 
   @HostListener('click', ['$event.target'])
   toggleDropdown(event) {
