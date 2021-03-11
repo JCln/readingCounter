@@ -1,7 +1,3 @@
-export interface IAuthGuardPermission {
-    permittedRoles?: string[];
-    deniedRoles?: string[];
-}
 export interface ICredentials {
     username: string;
     password: string;
