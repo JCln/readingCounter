@@ -1,6 +1,6 @@
 <mat-horizontal-stepper #stepper>
 
-    <mat-step [stepControl]="userDetails" errorMessage="Name is required.">
+    <mat-step [stepControl]="userDetails">
         <form [formGroup]="userDetails">
             <ng-template matStepLabel>مشخصات کاربر</ng-template>
             <app-user-inputs style="direction: rtl;"></app-user-inputs>
@@ -9,7 +9,7 @@
 
     <mat-step [stepControl]="provinceItemsData">
         <form *ngIf="provinceItemsData" [formGroup]="provinceItemsData">
-            <ng-template matStepLabel>دسترسی به مناطق</ng-template>
+            <ng-template matStepLabel>دسترسی به ناحیه</ng-template>
             <app-select-zone [provinceItemsData]="provinceItemsData"></app-select-zone>
         </form>
     </mat-step>

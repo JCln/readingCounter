@@ -41,7 +41,7 @@ export class AddUserManagerService {
         a.push(ids.id);
     });
     if (this.utilsService.isNull(a))
-      return [0];
+      return [];
     return a;
   }
   private addAUserActions = (actionItems: any): string[] => {
@@ -60,34 +60,40 @@ export class AddUserManagerService {
     return selectedActions;
   }
   checkEmptyUserInfos = (vals: IAddAUserManager) => {
-    if (!this.utilsService.isNullWithText(vals.username, 'نام کاربری را وارد نمایید'))
+    if (!this.utilsService.isNullWithText(vals.username, 'نام کاربری را وارد نمایید', 'snack_warn'))
       return false;
-    if (!this.utilsService.isNullWithText(vals.password, 'رمز عبور را وارد نمایید'))
+    if (!this.utilsService.isNullWithText(vals.password, 'رمز عبور را وارد نمایید', 'snack_warn'))
       return false;
-    if (!this.utilsService.isNullWithText(vals.confirmPassword, 'تکرار رمز عبور را وارد نمایید'))
+    if (!this.utilsService.isNullWithText(vals.confirmPassword, 'تکرار رمز عبور را وارد نمایید', 'snack_warn'))
       return false;
-    if (!this.utilsService.isNullWithText(vals.firstName, 'نام را وارد نمایید'))
+    if (!this.utilsService.isNullWithText(vals.firstName, 'نام را وارد نمایید', 'snack_warn'))
       return false;
-    if (!this.utilsService.isNullWithText(vals.sureName, 'نام خانوادگی را وارد نمایید'))
+    if (!this.utilsService.isNullWithText(vals.sureName, 'نام خانوادگی را وارد نمایید', 'snack_warn'))
       return false;
-    if (!this.utilsService.isNullWithText(vals.mobile, 'شماره موبایل را وارد نمایید'))
+    if (!this.utilsService.isNullWithText(vals.mobile, 'شماره موبایل را وارد نمایید', 'snack_warn'))
       return false;
-    if (!this.utilsService.isNullWithText(vals.displayName, 'نام  نمایشی را وارد نمایید'))
+    if (!this.utilsService.isNullWithText(vals.displayName, 'نام  مستعار(نمایشی) را وارد نمایید', 'snack_warn'))
+      return false;
+    if (!this.utilsService.isNullWithText(vals.selectedRoles[0], 'گروه دسترسی را مشخص نمایید', 'snack_warn'))
+      return false;
+    if (!this.utilsService.isNullWithText(vals.selectedActions[0], 'خدمتی را مشخص نمایید', 'snack_warn'))
+      return false;
+    if (!this.utilsService.isNullWithText(vals.selectedZones[0], 'سطح دسترسی به ناحیه ای را انتخاب نمایید', 'snack_warn'))
       return false;
     return true;
   }
   passAndConfirmPass = (vals: IAddAUserManager) => {
     if (!this.utilsService.isSameLength(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('تعداد ارقام رمز عبور با تایید آن برابر نیست', 5000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('تعداد ارقام رمز عبور با تایید آن برابر نیست', 5000, 'snack_warn');
       return false;
     }
     if (!this.utilsService.isExactEqual(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('رمز عبور با تایید آن یکی باید باشد', 5000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('رمز عبور با تایید آن یکی باید باشد', 5000, 'snack_warn');
       return false;
     }
     return true;
   }
-  CheckVertification = (vals: IAddAUserManager) => {
+  vertification = (vals: IAddAUserManager) => {
     if (!this.passAndConfirmPass(vals))
       return false;
     if (!this.checkEmptyUserInfos(vals))
@@ -100,7 +106,7 @@ export class AddUserManagerService {
     return true;
   }
   connectToServer = (vals: IAddAUserManager) => {
-    if (!this.CheckVertification(vals))
+    if (!this.vertification(vals))
       return false;
     this.interfaceManagerService.postAddContact(vals).subscribe((res: IResponses) => {
       if (res) {

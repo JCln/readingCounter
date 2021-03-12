@@ -22,9 +22,9 @@ export class UtilsService {
   isNullTextValidation(value: string): boolean {
     return typeof value.trim() === 'undefined' || !value || value.trim().length === 0 || value.trim() === null;
   }
-  isNullWithText = (value: string | number, text: string): boolean => {
-    if (typeof value === 'undefined' || !value || value.toString().length === 0) {
-      this.snackWrapperService.openSnackBar(text, 3000, 'snack_danger');
+  isNullWithText = (value: string | number, text: string, color: string): boolean => {
+    if (typeof value === 'undefined' || !value || value.toString().trim().length === 0) {
+      this.snackWrapperService.openSnackBar(text, 3000, color);
       return false
     }
     return true;
@@ -48,9 +48,9 @@ export class UtilsService {
     return true;
   }
   persentCheck = (val: number): boolean => {
-    if (val >= 0 && val <= 100)
-      return true;
-    return false;
+    if (val < 0 || val > 100)
+      return false;
+    return true;
   }
   getRange = (val: number): string => {
     return val.toString().substring(0, 5);

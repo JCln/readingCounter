@@ -48,8 +48,8 @@ export interface IAPK {
 export interface IUploadAPK {
     versionName: string;
     versionCode: number;
-    description?: string;    
-    file?: File;    
+    description?: string;
+    file?: File;
 }
 export interface IMessage {
     title: string;
@@ -97,4 +97,9 @@ export interface IImportDynamic {
     counterReaderId: string,
     kindId?: number,
     period?: number
+}
+export interface IImportDynamicRes {
+    trackNumber: number,
+    count: number,
+    errorCount: number
 }

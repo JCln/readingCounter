@@ -48,8 +48,6 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else {
       this.dataSource = await this.getDataSource();
-      console.log(this.dataSource);
-
       this.closeTabService.saveDataForAllContacts = this.dataSource;
     }
   }

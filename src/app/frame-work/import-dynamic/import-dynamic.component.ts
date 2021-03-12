@@ -1,14 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
 import { IZoneManager } from 'src/app/Interfaces/imanage';
 import { IImportDynamicDefault } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
+import { ImportDynamicService } from 'src/app/services/import-dynamic.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-
-import { DateJalaliComponent } from './../../core/_layouts/header/date-jalali/date-jalali.component';
-import { ImportDynamicService } from './../../services/import-dynamic.service';
-import { InterfaceService } from './../../services/interface.service';
+import { InterfaceService } from 'src/app/services/interface.service';
 
 @Component({
   selector: 'app-import-dynamic',
@@ -68,13 +67,13 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     private interfaceManagerService: InterfaceManagerService,
     private importDynamicService: ImportDynamicService
   ) { }
+
   connectToServer = () => {
     const validation = this.importDynamicService.checkVertification(this.importDynamic, this._isOrderByDate);
     if (!validation)
       return;
     this.interfaceService.postImportData(this.importDynamic).subscribe(res => {
-      console.log(res);
-
+      this.importDynamicService.showResDialog(res);
     })
   }
   getZoneDictionary = (): Promise<any> => {

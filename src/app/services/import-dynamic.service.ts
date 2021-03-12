@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { IImportDynamic, IImportDynamicDefault } from '../Interfaces/inon-manage';
+import { IImportDynamicRes } from './../Interfaces/inon-manage';
+import { ConfirmDialogComponent } from './../shared/confirm-dialog/confirm-dialog.component';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
 
@@ -12,12 +15,12 @@ export class ImportDynamicService {
 
   constructor(
     private snackWrapperService: SnackWrapperService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private dialog: MatDialog
   ) { }
+
   persentCheck = (val: number): boolean => {
-    if (val >= 0 && val <= 100)
-      return true;
-    return false;
+    return this.utilsService.persentCheck(val);
   }
   persentOfalalHesab = (): boolean => {
     if (this.persentCheck(this.importDynamicValue.alalHesabPercent))
@@ -103,4 +106,12 @@ export class ImportDynamicService {
     }
     return true;
   }
+  showResDialog = (res: IImportDynamicRes) => {
+    return new Promise(resolve => {
+      this.dialog.open(ConfirmDialogComponent, {
+        data: res
+      })
+    })
+  }
+
 }

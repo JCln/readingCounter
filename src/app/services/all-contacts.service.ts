@@ -15,12 +15,12 @@ export class AllContactsService {
 
   columnSelectedUserAllContacts = (): IObjectIteratation[] => {
     return [
-      { field: 'isActive', header: 'قفل', isSelected: true },
-      { field: 'isLocked', header: 'فعال', isSelected: true },
-      { field: 'mobile', header: 'موبایل', isSelected: true },
-      { field: 'displayName', header: 'نام مستعار', isSelected: true },
-      { field: 'username', header: 'نام کاربری', isSelected: true },
-      { field: 'userCode', header: 'کد', isSelected: true }
+      { field: 'isActive', header: 'قفل', isSelected: true, ltr: false },
+      { field: 'isLocked', header: 'فعال', isSelected: true, ltr: false },
+      { field: 'mobile', header: 'موبایل', isSelected: true, ltr: true },
+      { field: 'displayName', header: 'نام مستعار', isSelected: true, ltr: false },
+      { field: 'username', header: 'نام کاربری', isSelected: true, ltr: false },
+      { field: 'userCode', header: 'کد', isSelected: true, ltr: false }
     ];
   }
   connectToServer = (): Observable<any> => {

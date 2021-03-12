@@ -15,7 +15,11 @@
         <input matInput [(ngModel)]="userInputForm.username" name="username" placeholder="نام کاربری را وارد نمایید"
             required>
     </mat-form-field>
-
+    <mat-form-field appearance="fill">
+        <mat-label>کد کاربری</mat-label>
+        <input type="number" matInput [(ngModel)]="userInputForm.userCode" class="text_left" name="userCode"
+            placeholder="کد کاربری را وارد نمایید" required>
+    </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>رمز عبور</mat-label>
         <input matInput [(ngModel)]="userInputForm.password" type="password" name="password"
@@ -35,8 +39,8 @@
 
     <mat-form-field appearance="fill">
         <mat-label>موبایل</mat-label>
-        <input matInput [(ngModel)]="userInputForm.mobile" class="text_left" name="mobile" maxlength=11 minlength=11
-            placeholder="شماره موبایل را وارد نمایید" required>
+        <input matInput [(ngModel)]="userInputForm.mobile" class="text_left dir_left" name="mobile" maxlength=11
+            minlength=11 placeholder="شماره موبایل را وارد نمایید" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">

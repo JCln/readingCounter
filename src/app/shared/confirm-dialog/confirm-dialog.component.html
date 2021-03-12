@@ -1,1 +1,11 @@
-<p>confirm-dialog works!</p>
+<h2 mat-dialog-title>مسیر اضافه شده</h2>
+
+<mat-dialog-content>
+    <p>شماره پیگیری {{data.trackNumber}}</p>
+    <p>تعداد {{data.count}}</p>
+    <p>تعداد خطا {{data.errorCount}}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="btn_2" (click)="confirm()">بازگشت</button>
+</mat-dialog-actions>
