@@ -17,7 +17,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   trackNumber: string;
   defColumns = [
     { field: 'insertDateJalali', header: 'تاریخ ثبت' },
-    { field: 'inserterCode', header: 'کد ؟' },
+    { field: 'inserterCode', header: 'کد کاربر' },
     { field: 'userDisplayName', header: 'نام مستعار' },
     { field: 'seen', header: 'دیده شده' },
     { field: 'counterReaderName', header: 'مامور قرائت' },

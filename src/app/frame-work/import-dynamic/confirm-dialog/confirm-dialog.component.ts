@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
-import { IImportDynamicRes } from './../../Interfaces/inon-manage';
+import { IImportDynamicRes } from 'src/app/Interfaces/inon-manage';
 
 @Component({
   selector: 'app-confirm-dialog',

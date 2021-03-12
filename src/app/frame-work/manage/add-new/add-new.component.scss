@@ -37,9 +37,10 @@ p {
 }
 
 ._img_content {
-  width: 23rem;
-  height: 23rem;
+  max-width: 23rem;
+  max-height: 23rem;
   text-align: center;
+  margin: 0 auto;
 }
 
 img {

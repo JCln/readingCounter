@@ -36,12 +36,12 @@ export const sidebarItemsTest = {
                 { route: '/wr/mu/add', title: 'add Contact mg', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 1 }
             ]
         },
-        {
-            route: '', title: 'مدیریت لیست', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
-                { route: '/wr/m/l/pd', title: 'pd', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: '/wr/m/l/all', title: 'all', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 }
-            ]
-        },
+        // {
+        //     route: '', title: 'مدیریت لیست', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
+        //         { route: '/wr/m/l/pd', title: 'pd', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+        //         { route: '/wr/m/l/all', title: 'all', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 }
+        //     ]
+        // },
         {
             route: '', title: 'tracking', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
                 { route: '/wr/imd', title: 'import dynamic', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },

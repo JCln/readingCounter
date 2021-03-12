@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
+import { ConfirmDialogComponent } from '../frame-work/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { IImportDynamic, IImportDynamicDefault } from '../Interfaces/inon-manage';
 import { IImportDynamicRes } from './../Interfaces/inon-manage';
-import { ConfirmDialogComponent } from './../shared/confirm-dialog/confirm-dialog.component';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
 
