@@ -57,6 +57,10 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
       return {
         _title: 'ویرایش', _dynamicRoute: '/wr/mu/edit/'
       }
+    if (this.getCurrentDynamicRoute('/wr/m/track/fwu/'))
+      return {
+        _title: 'پیگیری', _dynamicRoute: '/wr/m/track/fwu/'
+      }
     if (this.getCurrentDynamicRoute('/wr/m/track/woui/'))
       return {
         _title: 'صوت/تصویر', _dynamicRoute: '/wr/m/track/woui/'

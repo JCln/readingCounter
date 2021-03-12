@@ -69,7 +69,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res.includes('/wr/m/fwu/:'))
+        if (res.includes('/wr/m/fwu/'))
           this.classWrapper(true);
       }
     })

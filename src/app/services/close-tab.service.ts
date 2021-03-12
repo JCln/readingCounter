@@ -83,6 +83,9 @@ export class CloseTabService {
   // Forbidden manager
   saveDataForForbidden: any;
   // 
+  // dbf output manager
+  saveDataForOutputDBF: any;
+  // 
 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
@@ -188,6 +191,9 @@ export class CloseTabService {
         break;
       case '/wr/m/fbn':
         this.saveDataForLMAll = '';
+        break;
+      case '/wr/m/dbf':
+        this.saveDataForOutputDBF = '';
         break;
 
     }
