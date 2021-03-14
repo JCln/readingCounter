@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IZoneBoundManager } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -54,7 +55,8 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -133,10 +135,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getZoneBoundDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getZoneDictionary());
     });
   }
   getDataSource = (): any => {
@@ -215,16 +214,13 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.closeTabService.saveDataForZoneBound) {
       this.dataSource.data = this.closeTabService.saveDataForZoneBound;
-      this.zoneBoundDictionary = this.closeTabService.saveDictionaryForZoneBound;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.zoneBoundDictionary = await this.getZoneBoundDictionary();
       this.closeTabService.saveDataForZoneBound = this.dataSource.data;
-      this.closeTabService.saveDictionaryForZoneBound = this.zoneBoundDictionary;
     }
+    this.zoneBoundDictionary = await this.getZoneBoundDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
-
 
     this.convertIdToTitle(this.zoneBoundDictionary, this.zoneBoundDictionary);
     this.filterSearchs();

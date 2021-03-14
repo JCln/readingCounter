@@ -57,9 +57,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getZoneDictionary = (): Promise<any> => {
     return new Promise((resolve) => {
-      this.trackingManagerService.getAllZoneTitles().subscribe(res => {
-        resolve(res);
-      })
+      resolve(this.trackingManagerService.getAllZoneTitles());
     });
   }
   getDataSource = (): Promise<ITracking[]> => {

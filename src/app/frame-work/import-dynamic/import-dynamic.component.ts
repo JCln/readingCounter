@@ -4,10 +4,13 @@ import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/da
 import { IZoneManager } from 'src/app/Interfaces/imanage';
 import { IImportDynamicDefault } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { ImportDynamicService } from 'src/app/services/import-dynamic.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { InterfaceService } from 'src/app/services/interface.service';
+
+import { DictionaryWrapperService } from './../../services/dictionary-wrapper.service';
 
 @Component({
   selector: 'app-import-dynamic',
@@ -65,7 +68,9 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     private interfaceService: InterfaceService,
     private interactionService: InteractionService,
     private interfaceManagerService: InterfaceManagerService,
-    private importDynamicService: ImportDynamicService
+    private importDynamicService: ImportDynamicService,
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   connectToServer = () => {
@@ -79,9 +84,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   getZoneDictionary = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
-          resolve(res);
-        })
+        resolve(this.dictionaryWrapperService.getZoneDictionary());
       });
     } catch {
       console.error(e => e);
@@ -90,9 +93,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   getReadingPeriodsKindDictionary = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getReadingPeriodKindManagerDictionary().subscribe(res => {
-          resolve(res);
-        })
+        resolve(this.dictionaryWrapperService.getPeriodKindDictionary());
       });
     } catch {
       console.error(e => e);
@@ -172,8 +173,10 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this.importDynamicService.validationReadingPeriod(this.readingPeriodDictionary);
 
   }
-
-  classWrapper = async () => {
+  nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh)
+      this.nullSavedSource();
     this.readingPeriodKindsDictionary = await this.getReadingPeriodsKindDictionary();
     if (!this.importDynamicService.validationPeriodKind(this.readingPeriodKindsDictionary))
       this.readingPeriodKindsDictionary = [];
@@ -188,7 +191,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === '/wr/imd')
-          this.ngOnInit();
+          this.classWrapper(true);
       }
     })
     )

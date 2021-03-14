@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager, IResponses, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -60,7 +61,8 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -143,10 +145,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   getZoneDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getZoneDictionary());
     });
   }
   getDataSource = (): any => {

@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IZoneManager } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, IResponses, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -53,7 +54,8 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -136,10 +138,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getZoneDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getRegionDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getRegionDictionary());
     });
   }
   getDataSource = (): any => {
@@ -195,15 +194,12 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.closeTabService.saveDataForZone) {
       this.dataSource.data = this.closeTabService.saveDataForZone;
-      this.zoneDictionary = this.closeTabService.saveDictionaryForZone;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.zoneDictionary = await this.getZoneDictionary();
       this.closeTabService.saveDataForZone = this.dataSource.data;
-      this.closeTabService.saveDictionaryForZone = this.zoneDictionary;
     }
-
+    this.zoneDictionary = await this.getZoneDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
     this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);

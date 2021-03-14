@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { IDictionaryManager, IResponses, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -123,7 +124,8 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -398,10 +400,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   getZoneDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getZoneDictionary());
     });
   }
   nullSavedSource = () => this.closeTabService.saveDataForReadingConfig = null;
@@ -437,7 +436,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.refreshTabStatus();    
+    this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

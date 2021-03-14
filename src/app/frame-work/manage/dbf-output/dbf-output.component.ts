@@ -38,9 +38,7 @@ export class DbfOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   getZoneDictionary = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.trackingManagerService.getAllZoneTitles().subscribe(res => {
-          resolve(res);
-        })
+        resolve(this.trackingManagerService.getAllZoneTitles());
       });
     } catch {
       console.error(e => e);

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 
 
@@ -96,23 +97,24 @@ export class ListManagerService {
   }
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService
+    private interfaceManagerService: InterfaceManagerService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   getLMAll = (trackingId: string): Observable<any> => {
     return this.interfaceManagerService.getLMAll(trackingId);
   }
-  getLMAllZoneDictionary = (): Observable<any> => {
-    return this.interfaceManagerService.getZoneDictionaryManager();
+  getLMAllZoneDictionary = () => {
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
-  getKarbariDictionary = (): Observable<any> => {
-    return this.interfaceManagerService.getKarbariDictionary();
+  getKarbariDictionary = () => {
+    return this.dictionaryWrapperService.getKarbariDictionary();
   }
-  getQotrDictionary = (): Observable<any> => {
-    return this.interfaceManagerService.getQotrDictionary();
+  getQotrDictionary = () => {
+    return this.dictionaryWrapperService.getQotrDictionary();
   }
-  getCounterStateDictionary = (): Observable<any> => {
-    return this.interfaceManagerService.getCounterStateDictionary();
+  getCounterStateDictionary = () => {
+    return this.dictionaryWrapperService.getCounterStateDictionary();
   }
   getLMPD = (trackNumber: number): Observable<any> => {
     return this.interfaceManagerService.getLMPD(trackNumber);

@@ -4,6 +4,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
 import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -56,7 +57,8 @@ export class TrackingManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   getImportedDataSource = (): Observable<any> => {
@@ -126,8 +128,8 @@ export class TrackingManagerService {
         this.utilsService.snackBarMessageSuccess(res.message);
     })
   }
-  getAllZoneTitles = (): Observable<any> => { // convert to idictionarymanger interface
-    return this.interfaceManagerService.getZoneDictionaryManager();
+  getAllZoneTitles = () => { // convert to idictionarymanger interface
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
 
   // imported service control

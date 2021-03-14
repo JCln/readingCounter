@@ -404,6 +404,9 @@ export class InterfaceManagerService {
   getAuthLevel4Manager = (): Observable<any> => {
     return this.mainService.GET('V1/AuthLevel4/all');
   }
+  getAuthLevel4DictionaryManager = (): Observable<any> => {
+    return this.mainService.GET('V1/AuthLevel4/Dictionary');
+  }
   deleteAuthLevel4Manager = (id: number): Observable<any> => {
     return this.mainService.POST('V1/AuthLevel3/Remove', id);
   }

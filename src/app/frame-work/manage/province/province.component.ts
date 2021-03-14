@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -41,7 +42,8 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -128,10 +130,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getProvinceDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getCountryDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getCountryDictionary());
     });
   }
   getDataSource = (): any => {
@@ -175,14 +174,12 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.closeTabService.saveDataForProvince) {
       this.dataSource.data = this.closeTabService.saveDataForProvince;
-      this.countryDictionary = this.closeTabService.saveDictionaryForProvince;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.countryDictionary = await this.getProvinceDictionary();
       this.closeTabService.saveDataForProvince = this.dataSource.data;
-      this.closeTabService.saveDictionaryForProvince = this.countryDictionary;
     }
+    this.countryDictionary = await this.getProvinceDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
     this.convertIdToTitle(this.dataSource.data, this.countryDictionary);

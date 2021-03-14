@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 
 import { ICounterStateGridFriendlyReq } from '../Interfaces/imanage';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 
 @Injectable({
@@ -12,7 +13,8 @@ import { InterfaceManagerService } from './interface-manager.service';
 export class CounterStateService {
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService
+    private interfaceManagerService: InterfaceManagerService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
@@ -142,10 +144,7 @@ export class CounterStateService {
   }
   getZoneDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getZoneDictionary());
     });
   }
 

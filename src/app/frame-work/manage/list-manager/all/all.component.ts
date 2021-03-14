@@ -46,10 +46,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getQotrDictionary = (): any => {
     return new Promise((resolve) => {
-      this.listManagerService.getQotrDictionary().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.listManagerService.getQotrDictionary());
     });
   }
   convertCounterStateIdToTitle = (dataSource: any[], CounterStateDictionary: IDictionaryManager[]) => {
@@ -63,10 +60,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getCounterStateDictionary = (): any => {
     return new Promise((resolve) => {
-      this.listManagerService.getCounterStateDictionary().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.listManagerService.getCounterStateDictionary());
     });
   }
   convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
@@ -89,18 +83,12 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getZoneDictionary = (): any => {
     return new Promise((resolve) => {
-      this.listManagerService.getLMAllZoneDictionary().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.listManagerService.getLMAllZoneDictionary());
     });
   }
   getKarbariDictionary = (): any => {
     return new Promise((resolve) => {
-      this.listManagerService.getKarbariDictionary().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.listManagerService.getKarbariDictionary());
     });
   }
   getDataSource = (): Promise<IListManagerAll[]> => {

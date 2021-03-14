@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -38,7 +39,8 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   // add auth 2 not working
@@ -107,10 +109,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   }
   getAuthLevel1Id = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getAuthLevel1DictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getAuthLev1Dictionary());
     });
   }
   getDataSource = (): any => {
@@ -142,20 +141,16 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   }
   nullSavedSource = () => this.closeTabService.saveDataForAppLevel2 = null;
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
+    if (canRefresh)
       this.nullSavedSource();
-    }
     if (this.closeTabService.saveDataForAppLevel2) {
       this.dataSource.data = this.closeTabService.saveDataForAppLevel2;
-      this.auth1Dictionary = this.closeTabService.saveDictionaryForAppLevel2;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.auth1Dictionary = await this.getAuthLevel1Id();
       this.closeTabService.saveDataForAppLevel2 = this.dataSource.data;
-      this.closeTabService.saveDictionaryForAppLevel2 = this.auth1Dictionary;
     }
-
+    this.auth1Dictionary = await this.getAuthLevel1Id();
     this.convertIdToTitle(this.dataSource.data, this.auth1Dictionary);
     this.filter();
   }

@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -30,7 +31,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
 
   subscription: Subscription[] = [];
   editableDataSource = [];
-  readingPeriodKindId: any;
+  readingPeriodKindDictionary: IDictionaryManager[] = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columnsToDisplay = ['title', 'moshtarakinId', 'readingPeriodKindId', 'zoneId', 'clientOrder', 'actions'];
   zoneDictionary: IDictionaryManager[] = [];
@@ -46,7 +47,8 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -56,7 +58,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
           width: '30rem',
           data: {
             di: this.zoneDictionary,
-            rpkmId: this.readingPeriodKindId
+            rpkmId: this.readingPeriodKindDictionary
           }
         });
       dialogRef.afterClosed().subscribe(result => {
@@ -87,7 +89,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
           row,
           editable,
           di: this.zoneDictionary,
-          rpkmId: this.readingPeriodKindId
+          rpkmId: this.readingPeriodKindDictionary
         }
 
       });
@@ -128,21 +130,23 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
       })
     });
   }
+  convertIdToTitlePeriodKind = (dataSource: any[], periodKind: IDictionaryManager[]) => {
+    dataSource.map(dataSource => {
+      periodKind.map(periodKind => {
+        if (periodKind.id === dataSource.readingPeriodKindId)
+          dataSource.readingPeriodKindId = periodKind.title;
+      })
+    });
+  }
   getZoneDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getZoneDictionary());
     });
   }
   getReadingPeriodKindId = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getReadingPeriodKindManagerDictionary().subscribe(res => {
-          if (res)
-            resolve(res);
-        })
+        resolve(this.dictionaryWrapperService.getPeriodKindDictionary());
       });
     } catch (error) {
       console.error(e => e);
@@ -208,18 +212,17 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     if (this.closeTabService.saveDataForReadingPeriodManager) {
       this.dataSource.data = this.closeTabService.saveDataForReadingPeriodManager;
-      this.zoneDictionary = this.closeTabService.saveDictionaryReadingPeriodManager;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.zoneDictionary = await this.getZoneDictionary();
-      this.readingPeriodKindId = await this.getReadingPeriodKindId();
       this.closeTabService.saveDataForReadingPeriodManager = this.dataSource.data;
-      this.closeTabService.saveDictionaryReadingPeriodManager = this.zoneDictionary;
     }
+    this.zoneDictionary = await this.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.getReadingPeriodKindId();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
     this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);
+    this.convertIdToTitlePeriodKind(this.dataSource.data, this.readingPeriodKindDictionary);
     this.filterSearchs();
   }
   ngOnInit() {

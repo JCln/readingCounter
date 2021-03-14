@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IRoleManager } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { AddNewComponent } from '../add-new/add-new.component';
@@ -33,7 +34,11 @@ export class RoleManagerComponent implements OnInit {
     needDeviceIdLogin: ''
   };
 
-  constructor(private interfaceManagerService: InterfaceManagerService, private dialog: MatDialog) { }
+  constructor(
+    private interfaceManagerService: InterfaceManagerService,
+    private dialog: MatDialog,
+    private dictionaryWrapperService: DictionaryWrapperService
+  ) { }
 
   openDialog = () => {
     const dialogConfig = new MatDialogConfig();
@@ -94,10 +99,7 @@ export class RoleManagerComponent implements OnInit {
   }
   getRoleManagerDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getRoleDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getRoleDictionary());
     });
   }
   classWrapper = async () => {

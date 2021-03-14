@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { UtilsService } from 'src/app/services/utils.service';
 
 import { AuthService } from './auth.service';
 import { JwtService } from './jwt.service';
@@ -15,10 +15,12 @@ import { JwtService } from './jwt.service';
 export class InterceptorService implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private authorizationHeader = "Authorization";
 
   constructor(
     private jwtService: JwtService,
-    private authService: AuthService
+    private authService: AuthService,
+    private utilsService: UtilsService
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -37,40 +39,42 @@ export class InterceptorService implements HttpInterceptor {
           }
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
-              return this.handle401Error(req, next);
-            } else
-              return throwError(error)
+              const newRequest = this.handle401Error(req);
+              if (!this.utilsService.isNull(newRequest)) {
+                console.log("Try new AuthRequest ...");
+                return next.handle(newRequest);
+
+              }
+              this.authService.logout();
+              return next.handle(newRequest);
+            }
+            return throwError(error)
           }
         }))
       )
   }
   private addToken(req: HttpRequest<any>, token: string) {
     return req.clone({
-      headers: req.headers.set('Authorization', `Bearer ` + token),
+      headers: req.headers.set(this.authorizationHeader, `Bearer ` + token),
       withCredentials: true
     });
   }
-  private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (!this.isRefreshing) {
-      this.isRefreshing = true;
-      this.refreshTokenSubject.next(null);
-
-      return this.authService.refreshToken().pipe(
-        switchMap((token: any) => {
-          this.authService.saveTolStorage(token);
-          this.refreshTokenSubject.next(token);
-          this.isRefreshing = false;
-          return next.handle(this.addToken(request, token));
-        }));
-
-    } else {
-      return this.refreshTokenSubject.pipe(
-        filter(token => token != null),
-        take(1),
-        switchMap(jwt => {
-          return next.handle(this.addToken(request, jwt));
-        }));
+  private handle401Error(request: HttpRequest<any>): HttpRequest<any> | null {
+    let newStoredToken: any;
+    const requestAccessTokenHeader = request.headers.get(this.authorizationHeader);
+    this.authService.refreshToken().subscribe(res => {
+      newStoredToken = res;
+    });
+    if (!newStoredToken) {
+      console.log("There is no new AccessToken.", { requestAccessTokenHeader: requestAccessTokenHeader, newStoredToken: newStoredToken });
+      return null;
     }
+    const newAccessTokenHeader = `Bearer ${newStoredToken}`;
+    if (requestAccessTokenHeader === newAccessTokenHeader) {
+      console.log("There is no new AccessToken.", { requestAccessTokenHeader: requestAccessTokenHeader, newAccessTokenHeader: newAccessTokenHeader });
+      return null;
+    }
+    return request.clone({ headers: request.headers.set(this.authorizationHeader, newAccessTokenHeader) });
   }
 }
 

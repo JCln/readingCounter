@@ -38,9 +38,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   getZoneDictionary = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.trackingManagerService.getAllZoneTitles().subscribe(res => {
-          resolve(res);
-        })
+        resolve(this.trackingManagerService.getAllZoneTitles());
       });
     } catch (error) {
       console.error(e => e);

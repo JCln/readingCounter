@@ -64,15 +64,13 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForCounterState) {
-      this.dataSourceRES = this.closeTabService.saveDataForCounterState;
-      this.zoneDictionary = this.closeTabService.saveDictionaryForCounterState;
+      this.dataSourceRES = this.closeTabService.saveDataForCounterState;      
     }
     else {
       this.dataSourceRES = await this.counterStateService.getGridFriendlyDataSourceDefault();
-      this.zoneDictionary = await this.counterStateService.getZoneDictionary();
-      this.closeTabService.saveDataForCounterState = this.dataSourceRES;
-      this.closeTabService.saveDictionaryForCounterState = this.zoneDictionary;
+      this.closeTabService.saveDataForCounterState = this.dataSourceRES;      
     }
+    this.zoneDictionary = await this.counterStateService.getZoneDictionary();
     this.dataSource = this.dataSourceRES.data;
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
   }

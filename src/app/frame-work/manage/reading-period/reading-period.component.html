@@ -22,15 +22,13 @@
     <ng-container matColumnDef="readingPeriodKindId">
         <th mat-header-cell *matHeaderCellDef>
             <div class="header">
-                مشترکین
+                نوع دوره
             </div>
             <mat-form-field class="filter" floatLabel="never">
                 <mat-label>جستجو</mat-label>
-                <mat-select placeholder="انتخاب مورد" [formControl]="readingPeriodKindIdFilter"
-                    name="readingPeriodKindId">
-                    <mat-option *ngFor="let readingPeriodKindId of readingPeriodKindId"
-                        [value]="readingPeriodKindId.title">
-                        {{readingPeriodKindId.title}}
+                <mat-select placeholder="انتخاب مورد" [formControl]="readingPeriodKindIdFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.title">
+                        {{truefalse.title}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

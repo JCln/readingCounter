@@ -4,6 +4,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { ICounterStateGridFriendlyReq, IForbiddenManagerGridFriendlyRes } from '../Interfaces/imanage';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -42,14 +43,13 @@ export class ForbiddenService {
   }
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService
+    private interfaceManagerService: InterfaceManagerService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   getZoneDictionary = (): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
-        resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getZoneDictionary());
     });
   }
   setGridFriendlyDataSource = (event: LazyLoadEvent): ICounterStateGridFriendlyReq => {

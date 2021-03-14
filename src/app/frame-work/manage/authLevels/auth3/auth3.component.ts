@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
@@ -39,7 +40,8 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   // add auth 2 not working
@@ -107,10 +109,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
   }
   getAuthLevel2Id = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getAuthLevel2DictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getAuthLev2Dictionary());
     });
   }
   getDataSource = (): any => {
@@ -147,22 +146,19 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.closeTabService.saveDataForAppLevel3) {
       this.dataSource.data = this.closeTabService.saveDataForAppLevel3;
-      this.auth2Dictionary = this.closeTabService.saveDictionaryForAppLevel3;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.auth2Dictionary = await this.getAuthLevel2Id();
       this.closeTabService.saveDataForAppLevel3 = this.dataSource.data;
-      this.closeTabService.saveDictionaryForAppLevel3 = this.auth2Dictionary;
     }
-
+    this.auth2Dictionary = await this.getAuthLevel2Id();
     this.convertIdToTitle(this.dataSource.data, this.auth2Dictionary);
     this.filter();
   }
   ngOnInit() {
     this.classWrapper();
   }
- 
+
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -173,7 +169,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     )
   }
   ngAfterViewInit(): void {
-    this.refreshTabStatus();    
+    this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

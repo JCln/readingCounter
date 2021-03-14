@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -41,7 +42,8 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -112,10 +114,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
   }
   getAuthLevel4IdDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getAuthLevel3DictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getAuthLev3Dictionary());
     });
   }
   getDataSource = (): any => {
@@ -156,14 +155,12 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.closeTabService.saveDataForAppLevel4) {
       this.dataSource.data = this.closeTabService.saveDataForAppLevel4;
-      this.auth3Dictionary = this.closeTabService.saveDictionaryForAppLevel4;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.auth3Dictionary = await this.getAuthLevel4IdDictionary();
       this.closeTabService.saveDataForAppLevel4 = this.dataSource.data;
-      this.closeTabService.saveDictionaryForAppLevel4 = this.auth3Dictionary;
     }
+    this.auth3Dictionary = await this.getAuthLevel4IdDictionary();
     this.convertIdToTitle(this.dataSource.data, this.auth3Dictionary);
     this.filter();
   }

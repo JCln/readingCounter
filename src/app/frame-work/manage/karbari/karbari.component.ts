@@ -6,12 +6,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IZoneManager } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, IResponses, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { CloseTabService } from './../../../services/close-tab.service';
-import { SnackWrapperService } from './../../../services/snack-wrapper.service';
+import { DictionaryWrapperService } from './../../../services/dictionary-wrapper.service';
 import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';
 import { KarbariEditDgComponent } from './karbari-edit-dg/karbari-edit-dg.component';
 
@@ -56,7 +57,8 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -136,10 +138,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getProvinceDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getProvinceDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getProvinceDictionary());
     });
   }
   getDataSource = (): any => {
@@ -207,14 +206,12 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.closeTabService.saveDataForKarbari) {
       this.dataSource.data = this.closeTabService.saveDataForKarbari;
-      this.provinceDictionary = this.closeTabService.saveDictionaryForKarbari;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.provinceDictionary = await this.getProvinceDictionary();
       this.closeTabService.saveDataForKarbari = this.dataSource.data;
-      this.closeTabService.saveDictionaryForKarbari = this.provinceDictionary;
     }
+    this.provinceDictionary = await this.getProvinceDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
     this.convertIdToTitle(this.dataSource.data, this.provinceDictionary);

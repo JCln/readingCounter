@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IRegionManager } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -44,7 +45,8 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -124,10 +126,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getRegionDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getProvinceDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getProvinceDictionary());
     });
   }
   getDataSource = (): any => {
@@ -175,15 +174,12 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.closeTabService.saveDataForRegion) {
       this.dataSource.data = this.closeTabService.saveDataForRegion;
-      this.regionDictionary = this.closeTabService.saveDictionaryForRegion;
     }
     else {
       this.dataSource.data = await this.getDataSource();
-      this.regionDictionary = await this.getRegionDictionary();
       this.closeTabService.saveDataForRegion = this.dataSource.data;
-      this.closeTabService.saveDictionaryForRegion = this.regionDictionary;
     }
-
+    this.regionDictionary = await this.getRegionDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
     this.convertIdToTitle(this.dataSource.data, this.regionDictionary);

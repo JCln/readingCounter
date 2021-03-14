@@ -9,19 +9,14 @@ export class CloseTabService {
   saveDataForAppLevel1: any;
 
   saveDataForAppLevel2: any;
-  saveDictionaryForAppLevel2: any;
 
   saveDataForAppLevel3: any;
-  saveDictionaryForAppLevel3: any;
 
   saveDataForAppLevel4: any;
-  saveDictionaryForAppLevel4: any;
 
   saveDataForCounterState: any;
-  saveDictionaryForCounterState: any;
 
   saveDataForKarbari: any;
-  saveDictionaryForKarbari: any;
 
   saveDataForReadingConfig: any;
   saveDictionaryForReadingConfig: any;
@@ -29,16 +24,12 @@ export class CloseTabService {
   saveDataForCountry: any;
 
   saveDataForProvince: any;
-  saveDictionaryForProvince: any;
 
   saveDataForRegion: any;
-  saveDictionaryForRegion: any;
 
   saveDataForZone: any;
-  saveDictionaryForZone: any;
 
   saveDataForZoneBound: any;
-  saveDictionaryForZoneBound: any;
 
   saveDataForAllContacts: any;
   saveDictionaryForAllContacts: any;
@@ -50,7 +41,6 @@ export class CloseTabService {
   saveDictionaryForAddContacts: any;
 
   saveDataForReadingPeriodManager: any;
-  saveDictionaryReadingPeriodManager: any;
 
   saveDataForReadingPeriodKindManager: any;
   // 
@@ -73,6 +63,9 @@ export class CloseTabService {
 
   saveDataForFollowUp: any;
   // 
+  // import dynamic
+  saveDataForImportDynamic: any;
+  // 
   // list manager
   saveDataForLMPD: any;
   saveDataForLMAll: any;
@@ -92,11 +85,9 @@ export class CloseTabService {
     switch (url) {
       case '/wr/m/kar':
         this.saveDataForKarbari = '';
-        this.saveDictionaryForKarbari = '';
         break;
       case '/wr/m/cs':
         this.saveDataForCounterState = '';
-        this.saveDictionaryForCounterState = '';
         break;
       case '/wr/mu/all':
         this.saveDataForAllContacts = '';
@@ -107,8 +98,10 @@ export class CloseTabService {
       case '/wr/m/ms':
         break;
       case '/wr/m/rpm':
+        this.saveDataForReadingPeriodManager = '';
         break;
       case '/wr/m/rpkm':
+        this.saveDataForReadingPeriodKindManager = '';
         break;
       case '/wr/m/mrm':
         break;
@@ -117,36 +110,30 @@ export class CloseTabService {
         break;
       case '/wr/m/al/me':
         this.saveDataForAppLevel2 = '';
-        this.saveDictionaryForAppLevel2 = '';
         break;
       case '/wr/m/al/cr':
         this.saveDataForAppLevel3 = '';
-        this.saveDictionaryForAppLevel3 = '';
         break;
       case '/wr/m/al/ac':
         this.saveDataForAppLevel4 = '';
-        this.saveDictionaryForAppLevel4 = '';
         break;
       case '/wr/m/mc':
         this.saveDataForCountry = '';
         break;
       case '/wr/m/mp':
         this.saveDataForProvince = '';
-        this.saveDictionaryForProvince = '';
         break;
       case '/wr/m/mr':
         this.saveDataForRegion = '';
-        this.saveDictionaryForRegion = '';
         break;
       case '/wr/m/mz':
         this.saveDataForZone = '';
-        this.saveDictionaryForZone = '';
         break;
       case '/wr/m/mzd':
         this.saveDataForZoneBound = '';
-        this.saveDictionaryForZoneBound = '';
         break;
       case '/wr/imd':
+        this.saveDataForImportDynamic = '';
         break;
       case '/wr/profile':
         break;

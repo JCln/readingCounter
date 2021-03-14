@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { ICountryManager } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -35,7 +36,8 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   openDialog = () => {
@@ -91,10 +93,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getCountryDictionary = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getCountryDictionaryManager().subscribe(res => {
-        if (res)
-          resolve(res);
-      })
+      resolve(this.dictionaryWrapperService.getCountryDictionary());
     });
   }
   getDataSource = (): any => {
