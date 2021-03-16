@@ -55,8 +55,8 @@ export class InterceptorService implements HttpInterceptor {
   }
   private addToken(req: HttpRequest<any>, token: string) {
     return req.clone({
-      headers: req.headers.set(this.authorizationHeader, `Bearer ` + token),
-      withCredentials: true
+      headers: req.headers.set(this.authorizationHeader, `Bearer ` + token)
+      // withCredentials: true
     });
   }
   private handle401Error(request: HttpRequest<any>): HttpRequest<any> | null {
@@ -74,7 +74,7 @@ export class InterceptorService implements HttpInterceptor {
       console.log("There is no new AccessToken.", { requestAccessTokenHeader: requestAccessTokenHeader, newAccessTokenHeader: newAccessTokenHeader });
       return null;
     }
-    return request.clone({ headers: request.headers.set(this.authorizationHeader, newAccessTokenHeader) });
+    return this.addToken(request, newStoredToken);
   }
 }
 
