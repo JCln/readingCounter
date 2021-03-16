@@ -15,7 +15,7 @@ export class LayoutComponent {
     const b = document.querySelector('app-tab-wrapper') as HTMLElement;
     const framework = document.querySelector('app-frame-work') as HTMLElement;
     if (screen.width >= 1000) {
-      a.classList.toggle('page_conf_8');
+      a.classList.toggle('page_conf_6');
     }
     else if (screen.width >= 700) {
       a.classList.toggle('page_conf_8');
