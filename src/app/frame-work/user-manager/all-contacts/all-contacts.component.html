@@ -3,6 +3,13 @@
     " [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive"
     [globalFilterFields]="['isActive','isLocked','mobile','displayName','username','userCode']" sortMode="multiple">
 
+    <ng-template pTemplate="caption">
+        <i></i>
+        <!--refresh button position on left-->
+        <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+            <div class="tooltip_text">بارگیری مجدد جدول</div>
+        </i>
+    </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
@@ -11,11 +18,17 @@
             </th>
             <th style="width: 4rem"></th>
         </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+            </th>
+            <th style="width: 4rem"></th>
+        </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-dataSource let-columns="columns">
         <tr>
-            <td *ngFor="let col of columns">
+            <td *ngFor="let col of columns" class="d_ltr">
                 <ng-container
                     *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
                     <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
