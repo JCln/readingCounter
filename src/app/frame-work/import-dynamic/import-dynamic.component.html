@@ -3,19 +3,16 @@
         <section class="static_part">
             <section class="order_by">
                 <h2>صدور بر اساس :</h2>
-                <!-- <div class="_order_inner"> -->
                 <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
                     name="_isOrderByDate">
                     <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"
                         [value]="orderType.isSelected">
                         {{orderType.title}}
                     </mat-radio-button>
-                </mat-radio-group>
-                <!-- </div> -->
+                </mat-radio-group>                
             </section>
             <hr>
 
-            <!-- <h2>موارد را تکمیل نمایید</h2> -->
             <section class="content">
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>

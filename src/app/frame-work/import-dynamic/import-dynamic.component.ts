@@ -79,6 +79,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       return;
     this.interfaceService.postImportData(this.importDynamic).subscribe(res => {
       this.importDynamicService.showResDialog(res);
+      this.resetToDefaultFormStatus();
     })
   }
   getZoneDictionary = (): Promise<any> => {
@@ -147,9 +148,12 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this.canShowEditButton = true;
   }
   verificationACounterReaderId = async () => {
+    if (this.importDynamic.zoneId || this.zoneDictionary) {
+      this.verificationReadingPeriod();
+      this.readingConfigDefault = await this.getReadingConfigDefaults();
+    }
     if (!this.importDynamic.zoneId || !this.zoneDictionary)
       return;
-    this.readingConfigDefault = await this.getReadingConfigDefaults();
     if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault)) {
       this.readingConfigDefault = [];
       return;
@@ -175,8 +179,10 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh)
+    if (canRefresh) {
+      console.log(1);
       this.nullSavedSource();
+    }
     this.readingPeriodKindsDictionary = await this.getReadingPeriodsKindDictionary();
     if (!this.importDynamicService.validationPeriodKind(this.readingPeriodKindsDictionary))
       this.readingPeriodKindsDictionary = [];
@@ -190,8 +196,10 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/imd')
+        if (res === '/wr/imd') {
+          this.resetToDefaultFormStatus();
           this.classWrapper(true);
+        }
       }
     })
     )
@@ -209,6 +217,33 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
+  }
+  private resetToDefaultFormStatus = () => {
+    this._showAlalHesabPercent = false;
+    this._showimagePercent = false;
+    this.canShowEditButton = false;
+
+    this.kindId = 0;
+    this.readingPeriodKindsDictionary = [];
+    this.readingPeriodDictionary = [];
+    this.readingConfigDefault = [];
+    this.userCounterReader = [];
+    this.zoneDictionary = [];
+
+    this.importDynamic = {
+      fromEshterak: '',
+      toEshterak: '',
+      zoneId: 0,
+      alalHesabPercent: 0,
+      imagePercent: 0,
+      hasPreNumber: false,
+      displayBillId: false,
+      displayRadif: false,
+      fromDate: null,
+      toDate: null,
+      counterReaderId: '',
+      readingPeriodId: null
+    }
   }
 
 }
