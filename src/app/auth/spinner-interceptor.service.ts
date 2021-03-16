@@ -38,7 +38,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
               this.snackWrapperService.openSnackBar(error.message, 3000, 'snack_danger');
             }
             if (error.status === 408) {
-              this.snackWrapperService.openSnackBar('زمان ارسال درخواست به سرویس به اتمام رسید، احتمالا شبکه کٌند و یا قطع است، لطفا دقایقی دیگر امتحان نمایید', 10000, 'snack_danger');
+              this.snackWrapperService.openSnackBar('زمان ارسال درخواست به سرویس دهنده به اتمام رسید، احتمالا شبکه کٌند و یا قطع است، لطفا دقایقی دیگر امتحان نمایید', 10000, 'snack_danger');
             }
             if (error.status === 409) {
               this.snackWrapperService.openSnackBar(error.error.message, 10000, 'snack_danger');
@@ -50,13 +50,13 @@ export class SpinnerInterceptorService implements HttpInterceptor {
               this.snackWrapperService.openSnackBar(error.error.message, 3000, 'snack_danger');
             }
             if (error.status === 0) {
-              this.snackWrapperService.openSnackBar('ارتباط با سرویس دهنده برقرار نشد، احتمالا شما به شبکه دسترسی ندارید یا موقعیت مکانی شما در ایران نیست لطفا دقایقی دیگر امتحان نمایید', 8000, 'snack_danger');
+              this.snackWrapperService.openSnackBar('خطای سرویس دهنده، احتمالا شما به شبکه دسترسی ندارید یا موقعیت مکانی شما در ایران نیست', 8000, 'snack_danger');
             }
             if (error.status === 500 || error.status === 502) {
               this.snackWrapperService.openSnackBar('خطای سرویس دهنده', 8000, 'snack_danger');
             }
             if (error.status === 504) {
-              this.snackWrapperService.openSnackBar('خطای سرویس دهنده', 8000, 'snack_danger');
+              this.snackWrapperService.openSnackBar('پاسخی دریافت نشد', 8000, 'snack_danger');
             }
           }
 
