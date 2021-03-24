@@ -39,6 +39,18 @@ export interface ISnackBar {
     duration: number;
     backColor?: string;
 }
+export enum ENSnackBarColors {
+    warn = 'snack_warn',
+    danger = 'snack_danger',
+    success = 'snack_success',
+}
+export enum ENSnackBarTimes {
+    threeMili = 3000,
+    fourMili = 4000,
+    fiveMili = 5000,
+    sevenMili = 7000,
+    tenMili = 10000
+}
 export interface IResponses {
     isValid: boolean
     message: string;
@@ -72,6 +84,7 @@ export interface IObjectIteratation {
     header: string;
     isSelected: boolean;
     ltr?: boolean;
+    readonly?: boolean;
 }
 export interface ITabWrapperDetectDynamicRoute {
     _title: string,

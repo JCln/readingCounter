@@ -103,3 +103,9 @@ export interface IImportDynamicRes {
     count: number,
     errorCount: number
 }
+
+export interface IChangePassword {
+    oldPassword: string,
+    newPassword: string,
+    confirmPassword: string
+}

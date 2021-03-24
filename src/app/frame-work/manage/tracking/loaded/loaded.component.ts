@@ -1,10 +1,14 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
+
+import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 
 @Component({
   selector: 'app-loaded',
@@ -20,19 +24,15 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedColumns: any[];
   selectedFuckingTest: any[] = [];
 
-  _firstPage: number = 0;
-  _rowsNumberPage: number = 10;
-
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService
+    private trackingManagerService: TrackingManagerService,
+    private dialog: MatDialog,
+    private snackWrapperService: SnackWrapperService
   ) {
   }
 
-  removeRow = (rowData: ITracking) => {
-    this.trackingManagerService.removeTrackingId(rowData.id);
-  }
   getZoneDictionary = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
@@ -55,9 +55,6 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       console.error(e => e);
     }
   }
-  rowToImported = (row: ITracking) => {
-    this.trackingManagerService.migrateDataRowToImported(row.id);
-  }
   nullSavedSource = () => this.closeTabService.saveDataForTrackLoaded = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -74,11 +71,6 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForTrackLoaded = this.dataSource;
     }
   }
-  next = () => this._firstPage = this._firstPage + this._rowsNumberPage;
-  prev = () => this._firstPage = this._firstPage - this._rowsNumberPage;
-  reset = () => this._firstPage = 0;
-  isLastPage = (): boolean => { return this.dataSource ? this._firstPage === (this.dataSource.length - this._rowsNumberPage) : true; }
-  isFirstPage = (): boolean => { return this.dataSource ? this._firstPage === 0 : true; }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
       if (items.isSelected)
@@ -112,6 +104,46 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refreshTable = () => {
     this.classWrapper(true);
+  }
+  rowToImported = (row: ITracking, desc: string) => {
+    this.trackingManagerService.migrateDataRowToImported(row.id, desc).subscribe((res: IResponses) => {
+      if (res) {
+        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+        this.refreshTable();
+      }
+    });
+  }
+  removeRow = (rowData: ITracking, desc: string) => {
+    this.trackingManagerService.removeTrackingId(rowData.id, desc).subscribe((res: IResponses) => {
+      if (res) {
+        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+        this.refreshTable();
+      }
+    })
+  }
+  firstConfirmDialog = (rowData: ITracking) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        data: 'علت حذف مسیر را بیان نمایید'
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          this.removeRow(rowData, desc)
+        }
+      })
+    })
+  }
+  backToImportedConfirmDialog = (rowData: ITracking) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        data: 'علت بازگشت به صادر شده'
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          this.rowToImported(rowData, desc)
+        }
+      })
+    })
   }
 
 }

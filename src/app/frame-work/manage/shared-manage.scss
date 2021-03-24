@@ -2,6 +2,7 @@
 @import '../../../assets/button.scss';
 @import '../../../assets/input.scss';
 @import '../../../assets/tooltip.scss';
+@import '../../../assets/mat';
 
 table {
   display: block;
@@ -76,28 +77,6 @@ th {
 
 .fa-trash-o {
   color: $red_d;
-}
-
-:host::ng-deep {
-
-  .mat-dialog-container {
-    direction: rtl;
-  }
-
-  .mat-form-field-infix {
-    font-size: 1.2rem;
-    font-weight: 600;
-    // width: 8rem !important;
-  }
-
-  .mat-select {
-    font-family: $font_family;
-  }
-
-  .mat-select-arrow {
-    color: $gray_96;
-  }
-
 }
 
 .mat-form-field {
@@ -201,16 +180,6 @@ td.mat-footer-cell:first-of-type {
     direction: rtl;
   }
 
-  .mat-select-value {
-    font-family: $font_family;
-    font-size: 1.2rem;
-  }
-
-  .mat-select-value-text {
-    font-family: $font_family;
-    font-size: 1.2rem;
-    color: $gray_dr;
-  }
 }
 
 // tooltip

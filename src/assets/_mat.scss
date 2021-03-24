@@ -1,0 +1,29 @@
+:host::ng-deep {
+  .mat-select-value {
+    font-family: $font_family;
+    font-size: 1.2rem;
+  }
+
+  .mat-select-value-text {
+    font-family: $font_family;
+    font-size: 1.2rem;
+    color: $gray_dr;
+  }
+
+  .mat-dialog-container {
+    direction: rtl;
+  }
+
+  .mat-form-field-infix {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .mat-select {
+    font-family: $font_family;
+  }
+
+  .mat-select-arrow {
+    color: $gray_96;
+  }
+}

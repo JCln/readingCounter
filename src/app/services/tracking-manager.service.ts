@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
@@ -35,23 +35,24 @@ export class TrackingManagerService {
   }
   columnSelectedImportedList = (): IObjectIteratation[] => {
     return [
-      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
-      { field: 'listNumber', header: 'ش لیست', isSelected: false },
-      { field: 'insertDateJalali', header: 'تاریخ', isSelected: false },
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
-      { field: 'year', header: 'سال', isSelected: false },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
-      { field: 'fromDate', header: 'از تاریخ', isSelected: false },
-      { field: 'toDate', header: 'تا تاریخ', isSelected: false },
-      { field: 'itemQuantity', header: 'تعداد', isSelected: false },
-      { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true },
-      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true },
-      { field: 'counterReaderName', header: 'مامور قرائت', isSelected: true },
-      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true },
-      { field: 'displayRadif', header: 'ردیف', isSelected: true },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false }
+      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
+      { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true },
+      { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, readonly: true },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
+      { field: 'year', header: 'سال', isSelected: false, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
+      { field: 'fromDate', header: 'از تاریخ', isSelected: false, readonly: true },
+      { field: 'toDate', header: 'تا تاریخ', isSelected: false, readonly: true },
+      { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
+      { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true, readonly: false },
+      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false },
+      { field: 'counterReaderName', header: 'مامور قرائت فعلی', isSelected: true, readonly: true },
+      { field: 'newCounterReaderName', header: 'مامور قرائت جدید', isSelected: false, readonly: false },
+      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false },
+      { field: 'displayRadif', header: 'ردیف', isSelected: true, readonly: false },
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true }
     ];
   }
 
@@ -79,17 +80,17 @@ export class TrackingManagerService {
   getFollowUpSource = (trackNumber: string): Observable<any> => {
     return this.interfaceManagerService.getTrackFollowUp(trackNumber);
   }
+  getCounterReaders = (zoneId: number): Observable<any> => {
+    return this.interfaceManagerService.getCounterReadersByZoneId(zoneId);
+  }
   postEditingTrack = (rowData: ITracking) => {
     this.interfaceManagerService.postTrackingEdit(this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {
       if (res)
         this.utilsService.snackBarMessageSuccess(res.message);
     });
   }
-  removeTrackingId = (trackNumber: string) => {
-    this.interfaceManagerService.removeTrackingId({ trackNumber }).subscribe((res: IResponses) => {
-      if (res)
-        this.successSnackMessage(res.message);
-    })
+  removeTrackingId = (trackNumber: string, desc: string): Observable<any> => {
+    return this.interfaceManagerService.removeTrackingId({ trackingId: trackNumber, description: desc });
   }
   // Output manager 
   downloadOutputDBF = (dbfData: ITracking | IOutputManager): any => {
@@ -104,11 +105,8 @@ export class TrackingManagerService {
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
   }
-  migrateDataRowToImported = (trackingId: string) => {
-    this.interfaceManagerService.toImported({ trackingId }).subscribe((res: IResponses) => {
-      if (res)
-        this.successSnackMessage(res.message);
-    });
+  migrateDataRowToImported = (trackingId: string, desc: string): Observable<any> => {
+    return this.interfaceManagerService.toImported({ trackingId: trackingId, description: desc });
   }
   migrateDataRowToReading = (trackingId: string) => {
     this.interfaceManagerService.toReading({ trackingId }).subscribe((res: IResponses) => {
@@ -116,11 +114,8 @@ export class TrackingManagerService {
         this.utilsService.snackBarMessageSuccess(res.message);
     });
   }
-  migrateDataRowToOffloaded = (trackingId: string) => {
-    this.interfaceManagerService.toOffloaded({ trackingId }).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message);
-    });
+  migrateDataRowToOffloaded = (trackingId: string, desc: string): Observable<any> => {
+    return this.interfaceManagerService.toOffloaded({ trackingId: trackingId, description: desc });
   }
   migrateToPreState = (trackingId: string) => {
     return this.interfaceManagerService.toPre({ trackingId }).subscribe((res: IResponses) => {
@@ -145,6 +140,6 @@ export class TrackingManagerService {
     }
     return a;
   }
-  // 
+  //
 
 }

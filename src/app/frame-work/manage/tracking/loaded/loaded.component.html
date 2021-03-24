@@ -59,12 +59,12 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="rowToImported(dataSource)">
+            <td (click)="backToImportedConfirmDialog(dataSource)">
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text">برگشت به صادر شده</div>
                 </i>
             </td>
-            <td (click)="removeRow(dataSource)">
+            <td (click)="firstConfirmDialog(dataSource)">
                 <i class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text">حذف مسیر</div>
                 </i>

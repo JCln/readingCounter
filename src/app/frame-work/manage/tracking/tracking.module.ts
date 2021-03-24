@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
+import { ConfirmTextDialogComponent } from './confirm-text-dialog/confirm-text-dialog.component';
 import { TrackingRoutingModule } from './tracking-routing.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ConfirmTextDialogComponent],
   imports: [
-    TrackingRoutingModule
+    TrackingRoutingModule,
+    SharedModule
   ]
 })
 export class TrackingModule { }

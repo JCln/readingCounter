@@ -2,35 +2,34 @@
     <main>
         <h1 class="title">مشخصات کاربری</h1>
         <div class="content">
-            <div class="_profile_img">
+            <!-- <div class="_profile_img">
                 <div class="fa fa-user"></div>
-            </div>
+            </div> -->
             <div class="_desc">
-                <div class="input_2">
-                    <div class="_key">نام کاربری :</div>
-                    <div class="_value">مقدار 1</div>
+                <div *ngFor="let item of _selectCols" class="input_2">
+                    <div class="_key">{{item.header}}</div>
+                    <div class="_value">{{myInfoDataSource[item.field]}}</div>
                 </div>
-                <div class="input_2">
-                    <div class="_key">رمز عبور :</div>
-                    <div class="_value">مقدار2</div>
-                </div>
-            </div>            
+            </div>
         </div>
     </main>
 
     <section>
 
         <h1 class="title">تغییر رمز عبور</h1>
-        <div class="content">
+        <form #form="ngForm" (ngSubmit)="changePassword()" class="content">
             <div class="_desc">
-                <input class="input_1" type="text" placeholder="رمز عبور فعلی :">
-                <input class="input_1" type="text" placeholder="رمز عبور جدید :">
-                <input class="input_1" type="text" placeholder="تکرار رمز عبور جدید :">
+                <input type="password" name="oldPassword" [(ngModel)]="password.oldPassword" class="input_1" type="text"
+                    placeholder="رمز عبور فعلی :">
+                <input type="password" name="newPassword" [(ngModel)]="password.newPassword" class="input_1" type="text"
+                    placeholder="رمز عبور جدید :">
+                <input type="password" name="confirmPassword" [(ngModel)]="password.confirmPassword" class="input_1"
+                    type="text" placeholder="تکرار رمز عبور جدید :">
             </div>
             <div class="change_pass">
-                <button class="btn_2">ذخیره</button>
+                <button type="submit" class="btn_2">ذخیره</button>
             </div>
-        </div>
+        </form>
 
     </section>
 </div>

@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
-import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -56,7 +56,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
         if (result) {
           this.interfaceManagerService.addAuthLevel3Manager(result).subscribe((res: IResponses) => {
             if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
           })
         }
@@ -74,7 +74,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
         if (result) {
           this.interfaceManagerService.editAuthLevel3Manager(result).subscribe((res: IResponses) => {
             if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
           })
         }
@@ -94,7 +94,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     if (dialogResult) {
       this.interfaceManagerService.deleteAuthLevel3Manager(row.id).subscribe(res => {
         if (res) {
-          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }
       });
     }

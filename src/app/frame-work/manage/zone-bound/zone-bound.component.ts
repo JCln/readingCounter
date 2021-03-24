@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IZoneBoundManager } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -70,7 +70,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
         if (result) {
           this.interfaceManagerService.addZoneBoundManager(result.value).subscribe((res: IResponses) => {
             if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
           })
         }
@@ -108,7 +108,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
         if (result) {
           this.interfaceManagerService.editZoneBoundManager(result).subscribe((res: IResponses) => {
             if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
           })
         }
@@ -120,7 +120,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     if (dialogResult) {
       this.interfaceManagerService.deleteZoneBoundManager(row.id).subscribe(res => {
         if (res) {
-          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }
       });
     }

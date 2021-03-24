@@ -17,11 +17,13 @@
                 {{col.header}}
             </th>
             <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
                 <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
             </th>
+            <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
         </tr>
     </ng-template>
@@ -40,6 +42,11 @@
             <td class="edit_button" (click)="routeToEditPage(dataSource.id)">
                 <i class="tooltip p_icons pi pi-user-edit">
                     <div class="tooltip_text">مشاهده/ویرایش کاربر</div>
+                </i>
+            </td>
+            <td class="edit_button" (click)="routeToLoggs(dataSource.id)">
+                <i class="tooltip p_icons pi pi-sign-in">
+                    <div class="tooltip_text">مشاهده ورودها</div>
                 </i>
             </td>
         </tr>

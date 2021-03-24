@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -65,7 +65,7 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
         if (result) {
           this.interfaceManagerService.addQotr(result).subscribe((res: IResponses) => {
             if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
           })
         }
@@ -96,7 +96,7 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
         if (result) {
           this.interfaceManagerService.editQotr(result).subscribe((res: IResponses) => {
             if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
           })
         }
@@ -116,7 +116,7 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
     if (dialogResult) {
       this.interfaceManagerService.deleteQotr(row.id).subscribe(res => {
         if (res) {
-          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }
       });
     }

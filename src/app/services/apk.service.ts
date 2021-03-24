@@ -7,6 +7,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
+import { ENSnackBarColors, ENSnackBarTimes } from '../Interfaces/ioverall-config';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -24,29 +25,29 @@ export class ApkService {
 
   isNull = (): boolean => {
     if (this.utilsService.isNull(this.desc.versionName)) {
-      this.snackWrapperService.openSnackBar('نام نسخه را وارد نمایید', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('نام نسخه را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
       return false;
     }
     if (this.utilsService.isNull(this.desc.versionCode)) {
-      this.snackWrapperService.openSnackBar('شماره نسخه را وارد نمایید', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('شماره نسخه را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
       return false;
     }
     if (this.utilsService.isNull(this.fileForm)) {
-      this.snackWrapperService.openSnackBar('لطفا یک فایل apk انتخاب نمایید', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('لطفا یک فایل apk انتخاب نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
       return false;
     }
     return true;
   }
   isInteger = (): boolean => {
     if (this.desc.versionCode.toString().includes('.')) {
-      this.snackWrapperService.openSnackBar('شماره نسخه را بدون اعشار وارد نمایید', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('شماره نسخه را بدون اعشار وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
       return false;
     }
     return true;
   }
   isAPK = (): boolean => {
     if (this.fileForm[0].name.split('.').pop() !== 'apk') {
-      this.snackWrapperService.openSnackBar('فرمت ارسالی باید فایل apk باشد', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('فرمت ارسالی باید فایل apk باشد', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
       return false;
     }
     return true;

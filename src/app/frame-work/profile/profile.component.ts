@@ -1,7 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
+import { IProfile } from 'src/app/Interfaces/iuser-manager';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { ProfileService } from 'src/app/services/profile.service';
+
+import { IChangePassword } from './../../Interfaces/inon-manage';
 
 @Component({
   selector: 'app-profile',
@@ -10,13 +14,21 @@ import { InteractionService } from 'src/app/services/interaction.service';
 })
 export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
+  password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
+  myInfoDataSource: IProfile;
+  _selectCols: IObjectIteratation[] = [];
 
   constructor(
     private interactionService: InteractionService,
-    private router: Router
+    private profileService: ProfileService
   ) { }
 
+  classWrapper = () => {
+    this.getDataSource();
+    this.getSelectedColumns();
+  }
   ngOnInit(): void {
+    this.classWrapper();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -34,6 +46,15 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
+  }
+  changePassword = () => {
+    this.profileService.changePassword(this.password);
+  }
+  getSelectedColumns = () => {
+    this._selectCols = this.profileService.columnSelectedProfile();
+  }
+  getDataSource = async () => {
+    this.myInfoDataSource = await this.profileService.getMyInfoDataSource();
   }
 
 }

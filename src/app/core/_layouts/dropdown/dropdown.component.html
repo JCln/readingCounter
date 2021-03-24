@@ -1,6 +1,10 @@
 <div class="dropdown">
     <button class="dropbtn"><i class="fa fa-user"></i></button>
     <div class="dropdown-content">
+        <a [routerLink]="['/wr/profile']">
+            تنظیمات کاربری
+            <i class="pi pi-user"></i>
+        </a>
         <a (click)="logout()">
             خروج
             <i class="pi pi-sign-out"></i>

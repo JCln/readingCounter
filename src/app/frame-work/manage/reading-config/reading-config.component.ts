@@ -4,7 +4,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { IDictionaryManager, IResponses, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
+import {
+  ENSnackBarColors,
+  ENSnackBarTimes,
+  IDictionaryManager,
+  IResponses,
+  ITrueFalse,
+} from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -142,7 +148,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
 
           this.interfaceManagerService.addReadingConfig(result).subscribe((res: IResponses) => {
             if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
           })
         }
@@ -171,9 +177,9 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editZoneBoundManager(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.editReadingConfig(result).subscribe((res: IResponses) => {
             if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
           })
         }
@@ -193,7 +199,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     if (dialogResult) {
       this.interfaceManagerService.deleteReadingConfig(row.id).subscribe(res => {
         if (res) {
-          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }
       });
     }

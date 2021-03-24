@@ -180,7 +180,6 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      console.log(1);
       this.nullSavedSource();
     }
     this.readingPeriodKindsDictionary = await this.getReadingPeriodsKindDictionary();

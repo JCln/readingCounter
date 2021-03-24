@@ -1,13 +1,16 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
+import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 import { ImportListDgComponent } from './import-list-dg/import-list-dg.component';
 
 
@@ -41,20 +44,17 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedInnerColumns: any[];
 
   ref: DynamicDialogRef;
-  _firstPage: number = 0;
-  _rowsNumberPage: number = 10;
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private trackingManagerService: TrackingManagerService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private dialog: MatDialog,
+    private snackWrapperService: SnackWrapperService
   ) {
   }
 
-  removeRow = (rowData: ITracking) => {
-    this.trackingManagerService.removeTrackingId(rowData.id);
-  }
   getZoneDictionary = (): Promise<any> => {
     return new Promise((resolve) => {
       resolve(this.trackingManagerService.getAllZoneTitles());
@@ -94,17 +94,6 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.trackingManagerService.postEditingTrack(rowData);
     this.refreshTable();
   }
-  onRowEditCancel(product: any, index: number) {
-    console.log(product + '   ' + index);
-
-    // this.products2[index] = this.clonedProducts[product.id];
-    // delete this.clonedProducts[product.id];
-  }
-  next = () => this._firstPage = this._firstPage + this._rowsNumberPage;
-  prev = () => this._firstPage = this._firstPage - this._rowsNumberPage;
-  reset = () => this._firstPage = 0;
-  isLastPage = (): boolean => { return this.dataSource ? this._firstPage === (this.dataSource.length - this._rowsNumberPage) : true; }
-  isFirstPage = (): boolean => { return this.dataSource ? this._firstPage === 0 : true; }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
       if (items.isSelected)
@@ -151,8 +140,29 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     this.ref.onClose.subscribe((res: ITracking) => {
       if (res)
-        this.onRowEditSave(res);
+        console.log(res);
+
+      // this.onRowEditSave(res);
     });
   }
-
+  removeRow = (rowData: ITracking, desc: string) => {
+    this.trackingManagerService.removeTrackingId(rowData.id, desc).subscribe((res: IResponses) => {
+      if (res) {
+        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+        this.refreshTable();
+      }
+    })
+  }
+  firstConfirmDialog = (rowData: ITracking) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        data: 'علت حذف مسیر را بیان نمایید'
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          this.removeRow(rowData, desc)
+        }
+      })
+    })
+  }
 }

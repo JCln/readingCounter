@@ -17,6 +17,9 @@ export class InterfaceManagerService {
   getUserContactManager = (uuid: string): Observable<any> => {
     return this.mainService.GETID(uuid, 'V1/user/Edit');
   }
+  getUserLoggins = (UUID: string): Observable<any> => {
+    return this.mainService.GETID(UUID, 'V1/User/Logins');
+  }
   /*
   also useful for get select options counter readers
   with zoneId parameter

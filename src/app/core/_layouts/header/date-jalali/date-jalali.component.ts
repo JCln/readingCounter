@@ -10,7 +10,7 @@ import { DateJalaliService } from 'src/app/services/date-jalali.service';
 export class DateJalaliComponent implements OnInit {
   dateObject: any;
   datePickerConfig = {
-    format: 'YYYY/M/D'
+    format: 'YYYY/MM/DD'
   }
 
   @Output() dateJalEvent = new EventEmitter<any>();

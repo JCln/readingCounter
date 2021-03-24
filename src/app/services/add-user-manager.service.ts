@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IResponses } from '../Interfaces/ioverall-config';
+import { ENSnackBarColors, IResponses } from './../Interfaces/ioverall-config';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems } from './../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
@@ -10,6 +10,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class AddUserManagerService {
+  private _m_timeLength: number = 5000;
   dataSource: any;
   selectedPersonalInfos: IAddUserInfos;
 
@@ -60,35 +61,35 @@ export class AddUserManagerService {
     return selectedActions;
   }
   checkEmptyUserInfos = (vals: IAddAUserManager) => {
-    if (!this.utilsService.isNullWithText(vals.username, 'نام کاربری را وارد نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.username, 'نام کاربری را وارد نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.password, 'رمز عبور را وارد نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.password, 'رمز عبور را وارد نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.confirmPassword, 'تکرار رمز عبور را وارد نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.confirmPassword, 'تکرار رمز عبور را وارد نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.firstName, 'نام را وارد نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.firstName, 'نام را وارد نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.sureName, 'نام خانوادگی را وارد نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.sureName, 'نام خانوادگی را وارد نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.mobile, 'شماره موبایل را وارد نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.mobile, 'شماره موبایل را وارد نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.displayName, 'نام  مستعار(نمایشی) را وارد نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.displayName, 'نام نمایش را وارد نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.selectedRoles[0], 'گروه دسترسی را مشخص نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.selectedRoles[0], 'گروه دسترسی را مشخص نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.selectedActions[0], 'خدمتی را مشخص نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.selectedActions[0], 'خدمتی را مشخص نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.selectedZones[0], 'سطح دسترسی به ناحیه ای را انتخاب نمایید', 'snack_warn'))
+    if (!this.utilsService.isNullWithText(vals.selectedZones[0], 'سطح دسترسی به ناحیه ای را انتخاب نمایید', ENSnackBarColors.warn))
       return false;
     return true;
   }
   passAndConfirmPass = (vals: IAddAUserManager) => {
     if (!this.utilsService.isSameLength(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('تعداد ارقام رمز عبور با تایید آن برابر نیست', 5000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('تعداد ارقام رمز عبور با تایید آن برابر نیست', this._m_timeLength, ENSnackBarColors.warn);
       return false;
     }
     if (!this.utilsService.isExactEqual(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('رمز عبور با تایید آن یکی باید باشد', 5000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('رمز عبور با تایید آن یکی باید باشد', this._m_timeLength, ENSnackBarColors.warn);
       return false;
     }
     return true;
@@ -110,7 +111,7 @@ export class AddUserManagerService {
       return false;
     this.interfaceManagerService.postAddContact(vals).subscribe((res: IResponses) => {
       if (res) {
-        this.snackWrapperService.openSnackBar(res.message, 5000, 'snack_success');
+        this.snackWrapperService.openSnackBar(res.message, this._m_timeLength, ENSnackBarColors.success);
       }
     });
   }

@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 
 import { IAuthTokenType, IAuthUser, ICredentials } from '../Interfaces/iauth-guard-permission';
 import { MainService } from '../services/main.service';
+import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-config';
 import { SnackWrapperService } from './../services/snack-wrapper.service';
 import { UtilsService } from './../services/utils.service';
 import { JwtService } from './jwt.service';
@@ -42,7 +43,7 @@ export class AuthService {
         catchError((error: any) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
-              this.snackWrapperService.openSnackBar('نام کاربری یا رمز عبور اشتباه است', 3000, 'snack_danger');
+              this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
             }
           }
           return throwError(error)
@@ -62,8 +63,11 @@ export class AuthService {
       })
   }
   logout = () => {
-    this.jwtService.removeAllLocalStorage();
-    this.routeTo('/login');
+    const refreshToken = this.jwtService.getRefreshToken();
+    this.mainService.POSTBODY('V1/Account/Logout', { refreshToken }).subscribe(() => {
+      this.jwtService.removeAllLocalStorage();
+      this.routeTo('/login');
+    })
   }
   saveTolStorage = (token: IAuthTokenType) => {
     this.jwtService.saveToLocalStorage(token.access_token);

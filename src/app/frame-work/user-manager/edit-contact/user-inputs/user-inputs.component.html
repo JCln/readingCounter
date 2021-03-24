@@ -28,15 +28,19 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-        <mat-label>نام مستعار</mat-label>
+        <mat-label>نام نمایش</mat-label>
         <input matInput name="displayName" [(ngModel)]="editInfo.displayName"
             placeholder="نامی که نمایش داده شود را وارد نمایید؟" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>شناسه دستگاه</mat-label>
-        <input matInput name="deviceId" [(ngModel)]="editInfo.deviceId" placeholder="شناسه دستگاه را وارد نمایید"
-            required>
+        <input matInput name="deviceId" [(ngModel)]="editInfo.deviceId" placeholder="شناسه دستگاه را وارد نمایید">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>کد</mat-label>
+        <input matInput name="userCode" [(ngModel)]="editInfo.userCode" placeholder="کد" readonly>
     </mat-form-field>
 
     <div class="checkbox_s">

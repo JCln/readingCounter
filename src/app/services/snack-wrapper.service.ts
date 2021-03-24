@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
+import { ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
 
-import { ISnackBar } from '../Interfaces/ioverall-config';
+import { ENSnackBarColors, ISnackBar } from '../Interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class SnackWrapperService {
   private snack(snack: ISnackBar) {
     this.snackBar.next(snack);
   }
-  openSnackBar(message: string, duration: number, backColor?: string) {
+  openSnackBar(message: string, duration: ENSnackBarTimes, backColor?: ENSnackBarColors) {
     const a: ISnackBar = {
       message,
       duration,

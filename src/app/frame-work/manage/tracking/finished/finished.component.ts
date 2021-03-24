@@ -1,9 +1,14 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
+import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
+
+import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 
 @Component({
   selector: 'app-finished',
@@ -23,10 +28,19 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService
+    private trackingManagerService: TrackingManagerService,
+    private dialog: MatDialog,
+    private snackWrapperService: SnackWrapperService
   ) {
   }
-  rowToOffloaded = (row: ITracking) => this.trackingManagerService.migrateDataRowToOffloaded(row.id);
+  rowToOffloaded = (row: ITracking, desc: string) => {
+    this.trackingManagerService.migrateDataRowToOffloaded(row.id, desc).subscribe((res: IResponses) => {
+      if (res) {
+        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+        this.refreshTable();
+      }
+    });
+  }
   getDataSource = (): Promise<ITracking[]> => {
     return new Promise((resolve) => {
       this.trackingManagerService.getFinishedDataSource().subscribe(res => {
@@ -96,5 +110,16 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-
+  backToImportedConfirmDialog = (rowData: ITracking) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        data: 'علت بازگشت به صادر شده'
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          this.rowToOffloaded(rowData, desc)
+        }
+      })
+    })
+  }
 }

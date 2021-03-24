@@ -23,6 +23,7 @@ export class RdEditDgComponent {
     this.selected = data.zoneId;
 
     this.form = fb.group({
+      id: data.id,
       defaultHasPreNumber: data.defaultHasPreNumber,
       isOnQeraatCode: data.isOnQeraatCode,
       displayBillId: data.displayBillId,

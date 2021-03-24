@@ -5,7 +5,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IZoneManager } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager, IResponses, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
+import {
+  ENSnackBarColors,
+  ENSnackBarTimes,
+  IDictionaryManager,
+  IResponses,
+  ITrueFalse,
+} from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -74,7 +80,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
         if (result) {
           this.interfaceManagerService.addKarbari(result.value).subscribe((res: IResponses) => {
             if (res) {
-              this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
           })
         }
@@ -104,7 +110,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
       if (result) {
         this.interfaceManagerService.editKarbari(result).subscribe((res: IResponses) => {
           if (res) {
-            this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+            this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
           }
         })
       }
@@ -123,7 +129,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     if (dialogResult) {
       this.interfaceManagerService.deleteKarbari(row.id).subscribe(res => {
         if (res) {
-          this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }
       });
     }

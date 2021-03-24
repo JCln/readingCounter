@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IAPK } from 'src/app/Interfaces/inon-manage';
+import { ENSnackBarColors, ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -67,7 +68,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
 
     this.apkService.postTicket().subscribe((res: any) => {
-      this.snackWrapperService.openSnackBar(res.message, 3000, 'snack_success');
+      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
     });
   }
   getDataSource = (): any => {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IResponses } from '../Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IResponses } from '../Interfaces/ioverall-config';
 import { IAUserEditSave, IUserEditManager } from './../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
@@ -10,6 +10,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class EditContactManagerService {
+  dataSource: IAUserEditSave;
   constructor(
     private snackWrapperService: SnackWrapperService,
     private interfaceManagerService: InterfaceManagerService,
@@ -53,10 +54,40 @@ export class EditContactManagerService {
     })
     return selectedActions;
   }
-  private connectToServer = (vals: any) => {
+  checkEmptyUserInfos = () => {
+    if (!this.utilsService.isNullWithText(this.dataSource.firstName, 'نام را وارد نمایید', ENSnackBarColors.warn))
+      return false;
+    if (!this.utilsService.isNullWithText(this.dataSource.sureName, 'نام خانوادگی را وارد نمایید', ENSnackBarColors.warn))
+      return false;
+    if (!this.utilsService.isNullWithText(this.dataSource.mobile, 'شماره موبایل را وارد نمایید', ENSnackBarColors.warn))
+      return false;
+    if (!this.utilsService.isNullWithText(this.dataSource.displayName, 'نام  نمایش(نمایشی) را وارد نمایید', ENSnackBarColors.warn))
+      return false;
+    if (!this.utilsService.isNullWithText(this.dataSource.selectedRoles[0], 'گروه دسترسی را مشخص نمایید', ENSnackBarColors.warn))
+      return false;
+    if (!this.utilsService.isNullWithText(this.dataSource.selectedActions[0], 'خدمتی را مشخص نمایید', ENSnackBarColors.warn))
+      return false;
+    if (!this.utilsService.isNullWithText(this.dataSource.selectedZones[0], 'سطح دسترسی به ناحیه ای را انتخاب نمایید', ENSnackBarColors.warn))
+      return false;
+    return true;
+  }
+  vertification = () => {
+    if (!this.checkEmptyUserInfos())
+      return false;
+    if (!this.utilsService.mobileValidation(this.dataSource.mobile))
+      return false;
+    if (this.dataSource.email)
+      if (!this.utilsService.isEmailValid(this.dataSource.email))
+        return false;
+    return true;
+  }
+  private connectToServer = (vals: IAUserEditSave) => {
+    this.dataSource = vals;
+    // if (!this.vertification())
+    //   return false;
     this.interfaceManagerService.postUserContactManager(vals).subscribe((res: IResponses) => {
       if (res) {
-        this.snackWrapperService.openSnackBar(res.message, 5000, 'snack_success');
+        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
         this.utilsService.routeToByUrl('/wr/mu/all');
       }
     });

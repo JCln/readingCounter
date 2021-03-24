@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllContactsComponent } from './all-contacts.component';
 
 const routes: Routes = [
-  { path: '', component: AllContactsComponent }
+  { path: '', component: AllContactsComponent },
+  { path: 'loggins/:UUID', loadChildren: () => import('./user-loggins/user-loggins.module').then(userLoggins => userLoggins.UserLogginsModule) }
 ];
 
 @NgModule({

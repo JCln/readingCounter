@@ -33,4 +33,13 @@ export class InterfaceService {
   }
 
   // 
+  // change password
+  changePassword = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Account/ChangePassword', body);
+  }
+  // my info profile
+  getMyProfile = (): Observable<any> => {
+    return this.mainService.GET('V1/Account/MyInfo');
+  }
+  // 
 }

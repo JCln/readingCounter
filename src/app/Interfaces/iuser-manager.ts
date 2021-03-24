@@ -261,3 +261,30 @@ export interface IAddUserInfos {
     deviceId: string
 }
 //
+// my info (profile)
+export interface IProfile {
+    firstName: string,
+    sureName: string,
+    username: string,
+    email: string,
+    displayName: string,
+    userCode: number
+}
+export interface IUserLoggins {
+    id: string,
+    userId: string,
+    loginDateTime: string,
+    loginIp: string,
+    wasSuccessful: boolean,
+    browserVersion: string,
+    browserTitle: string,
+    browserShortTitle: string,
+    browserEngine: string,
+    browserType: string,
+    osVersion: string,
+    osTitle: string,
+    osPlatform: string,
+    osShortTitle: string,
+    userAgent: string
+}
+//

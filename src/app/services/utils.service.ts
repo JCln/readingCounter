@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
+import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-config';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +24,7 @@ export class UtilsService {
   isNullTextValidation(value: string): boolean {
     return typeof value.trim() === 'undefined' || !value || value.trim().length === 0 || value.trim() === null;
   }
-  isNullWithText = (value: string | number, text: string, color: string): boolean => {
+  isNullWithText = (value: string | number, text: string, color: ENSnackBarColors): boolean => {
     if (typeof value === 'undefined' || !value || value.toString().trim().length === 0) {
       this.snackWrapperService.openSnackBar(text, 3000, color);
       return false
@@ -31,18 +33,18 @@ export class UtilsService {
   }
   plusOrMinus = (value: number, maxLength: number, minLength: number) => {
     if (value > maxLength) {
-      this.snackWrapperService.openSnackBar(`حداکثر تعداد ${maxLength} می‌باشد`, 3000, 'snack_warn');
+      this.snackWrapperService.openSnackBar(`حداکثر تعداد ${maxLength} می‌باشد`, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return;
     }
     if (value < minLength) {
-      this.snackWrapperService.openSnackBar(`حداقل تعداد ${minLength} می‌باشد`, 3000, 'snack_warn');
+      this.snackWrapperService.openSnackBar(`حداقل تعداد ${minLength} می‌باشد`, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return;
     }
   }
   isEmailValid = (email: string): boolean => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(email)) {
-      this.snackWrapperService.openSnackBar('ایمیل نادرست است', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('ایمیل نادرست است', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
       return false;
     }
     return true;
@@ -95,7 +97,7 @@ export class UtilsService {
   // }
   mobileValidation = (mobile: string | number): boolean => {
     if (!(mobile.toString().length === 11)) {
-      this.snackWrapperService.openSnackBar('شماره موبایل نادرست است', 3000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('شماره موبایل نادرست است', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
       return false;
     }
     return true;
@@ -103,10 +105,10 @@ export class UtilsService {
 
   // snack bar
   snackBarMessageSuccess = (message: string) => {
-    this.snackWrapperService.openSnackBar(message, 4000, 'snack_success');
+    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
   }
   snackBarMessageWarn = (message: string) => {
-    this.snackWrapperService.openSnackBar(message, 4000, 'snack_warn');
+    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
   }
   snackBarMessageFailed = (message: string) => {
     console.log('nothing yet');

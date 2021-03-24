@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ConfirmDialogComponent } from '../frame-work/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { IImportDynamic, IImportDynamicDefault } from '../Interfaces/inon-manage';
+import { ENSnackBarColors, ENSnackBarTimes } from '../Interfaces/ioverall-config';
 import { IImportDynamicRes } from './../Interfaces/inon-manage';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
@@ -40,68 +41,68 @@ export class ImportDynamicService {
   checkVertification = (val: IImportDynamicDefault, _isOrderByDate: boolean): boolean => {
     this.importDynamicValue = val;
     if (!this.utilsService.isSameLength(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
-      this.snackWrapperService.openSnackBar('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد', 3000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
-    if (!this.utilsService.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 15)) {
-      this.snackWrapperService.openSnackBar('فرمت اشتراک ناصحیح است', 3000, 'snack_warn');
+    if (!this.utilsService.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 10)) {
+      this.snackWrapperService.openSnackBar('فرمت اشتراک ناصحیح است', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (!this.utilsService.isFromLowerThanToByString(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
-      this.snackWrapperService.openSnackBar('از اشتراک کمتر از تا اشتراک است!', 3000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('از اشتراک کمتر از تا اشتراک است!', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (!this.persentOfImage()) {
-      this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', 3000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (!this.persentOfalalHesab()) {
-      this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', 3000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (!_isOrderByDate) {
       if (!this.validationOnNull(val.readingPeriodId)) {
-        this.snackWrapperService.openSnackBar('مدت قرائتی ایجاد و سپس امتحان نمایید', 3000, 'snack_warn');
+        this.snackWrapperService.openSnackBar('مدت قرائتی ایجاد و سپس امتحان نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (!this.validationOnNull(this.importDynamicValue.counterReaderId)) {
-      this.snackWrapperService.openSnackBar('یک مامور قرائت انتخاب نمایید', 3000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('یک مامور قرائت انتخاب نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
   }
   validationInvalid = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('مامور قرائتی در این ناحیه انتخاب نشده است', 6000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('مامور قرائتی در این ناحیه انتخاب نشده است', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
       return false;
     }
     return true;
   }
   validationReadingPeriod = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('مدت دوره‌ای پیدا نشد', 6000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('مدت دوره‌ای پیدا نشد', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
       return false;
     }
     return true;
   }
   validationReadingConfigDefault = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('تنظیمات قرائت پیشفرضی وجود ندارد', 6000, 'snack_danger');
+      this.snackWrapperService.openSnackBar('تنظیمات قرائت پیشفرضی وجود ندارد', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
       return false;
     }
     return true;
   }
   validationPeriodKind = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('نوع دوره ای وجود ندارد', 6000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('نوع دوره ای وجود ندارد', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
   }
   validationZoneDictionary = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('ناحیه ای تعریف نشده است', 6000, 'snack_warn');
+      this.snackWrapperService.openSnackBar('ناحیه ای تعریف نشده است', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
     return true;

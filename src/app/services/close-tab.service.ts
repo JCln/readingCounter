@@ -79,6 +79,9 @@ export class CloseTabService {
   // dbf output manager
   saveDataForOutputDBF: any;
   // 
+  // number of Logs
+  saveDataForUserLoggins: any;
+  // 
 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
@@ -196,6 +199,9 @@ export class CloseTabService {
     }
     if (url.includes('/wr/m/track/woui/')) {
       this.saveDataForWOUI = '';
+    }
+    if (url.includes('/wr/mu/loggins/')) {
+      this.saveDataForUserLoggins = '';
     }
   }
   // 
