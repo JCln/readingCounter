@@ -85,4 +85,7 @@ export class ForbiddenComponent implements OnInit {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+  showPictures = (forbiddenId: string) => {
+    this.forbiddenService.routeToWOUI(forbiddenId);
+  }
 }

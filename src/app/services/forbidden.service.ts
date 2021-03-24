@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { LazyLoadEvent } from 'primeng/api';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
@@ -44,7 +45,8 @@ export class ForbiddenService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    private router: Router
   ) { }
 
   getZoneDictionary = (): Promise<any> => {
@@ -88,4 +90,8 @@ export class ForbiddenService {
       })
     });
   }
+  routeToWOUI = (forbiddenId: string) => {
+    this.router.navigate(['wr/m/track/woui', forbiddenId]);
+  }
+
 }

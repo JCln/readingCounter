@@ -15,10 +15,11 @@
             <th *ngFor="let col of _selectedColumns" pSortableColumn="{{col.field}}">
                 {{col.header}}
             </th>
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSourceRes>
+    <ng-template pTemplate="body" let-dataSourceRes let-i="rowIndex">
         <tr>
             <td *ngFor="let col of _selectedColumns">
                 <ng-container
@@ -28,6 +29,11 @@
                 <ng-template #elseTemplate>
                     {{dataSourceRes[col.field]}}
                 </ng-template>
+            </td>
+            <td (click)="showPictures(dataSourceRES.data[i].id)">
+                <i class="tooltip p_icons fas fa-camera">
+                    <div class="tooltip_text">بررسی عکس/صوت</div>
+                </i>
             </td>
         </tr>
     </ng-template>

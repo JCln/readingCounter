@@ -17,16 +17,13 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
-  _firstPage: number = 0;
-  _rowsNumberPage: number = 10;
-
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private trackingManagerService: TrackingManagerService
   ) {
   }
-  
+
   getDataSource = (): Promise<ITracking[]> => {
     return new Promise((resolve) => {
       this.trackingManagerService.getOffloadedDataSource().subscribe(res => {
@@ -51,11 +48,6 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForTrackOffloaded = this.dataSource;
     }
   }
-  next = () => this._firstPage = this._firstPage + this._rowsNumberPage;
-  prev = () => this._firstPage = this._firstPage - this._rowsNumberPage;
-  reset = () => this._firstPage = 0;
-  isLastPage = (): boolean => { return this.dataSource ? this._firstPage === (this.dataSource.length - this._rowsNumberPage) : true; }
-  isFirstPage = (): boolean => { return this.dataSource ? this._firstPage === 0 : true; }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
       if (items.isSelected)
