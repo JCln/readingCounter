@@ -197,10 +197,10 @@ export class CloseTabService {
     if (url.includes('/wr/mu/edit/')) {
       this.saveDataForEditContacts = '';
     }
-    if (url.includes('/wr/m/track/woui/')) {
+    if (url.includes('/wr/m/track/woui?')) {
       this.saveDataForWOUI = '';
     }
-    if (url.includes('/wr/mu/loggins/')) {
+    if (url.includes('/wr/mu/all/loggins/')) {
       this.saveDataForUserLoggins = '';
     }
   }

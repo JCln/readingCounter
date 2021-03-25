@@ -20,6 +20,15 @@ export class InterfaceManagerService {
   getUserLoggins = (UUID: string): Observable<any> => {
     return this.mainService.GETID(UUID, 'V1/User/Logins');
   }
+  postUserManagerResetPassword = (UUID: string): Observable<any> => {
+    return this.mainService.GETID(UUID, 'V1/User/ResetPassword');
+  }
+  postUserManagerActivate = (UUID: string): Observable<any> => {
+    return this.mainService.GETID(UUID, 'V1/User/Activate');
+  }
+  postUserManagerDeActivate = (UUID: string): Observable<any> => {
+    return this.mainService.GETID(UUID, 'V1/User/Deactivate');
+  }
   /*
   also useful for get select options counter readers
   with zoneId parameter
@@ -251,8 +260,11 @@ export class InterfaceManagerService {
   downloadFile = (fileRepositoryId: string): Observable<any> => {
     return this.mainService.GETBLOB(fileRepositoryId, 'V1/Download/File');
   }
-  downloadFileInfo = (onOffLoadId: string): Observable<any> => {
-    return this.mainService.GETID(onOffLoadId, 'V1/Download/File/info');
+  downloadFileInfo = (targetId: string): Observable<any> => {
+    return this.mainService.GETID(targetId, 'V1/Download/File/info');
+  }
+  downloadForbiddenFileInfo = (targetId: string): Observable<any> => {
+    return this.mainService.GETID(targetId, 'V1/Download/File/forbidden');
   }
 
   // 

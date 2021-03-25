@@ -35,13 +35,17 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate(['./loggins', e], { relativeTo: this.route.parent })
   }
   getDataSource = (): Promise<IUserManager[]> => {
-    return new Promise((resolve) => {
-      this.allContactsService.connectToServer().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
+    try {
+      return new Promise((resolve) => {
+        this.allContactsService.connectToServer().subscribe(res => {
+          if (res) {
+            resolve(res);
+          }
+        })
       })
-    })
+    } catch (error) {
+      console.error(error);
+    }
   }
   nullSavedSource = () => this.closeTabService.saveDataForAllContacts = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -82,5 +86,18 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refreshTable = () => {
     this.classWrapper(true);
+  }
+  ActivateUser = (dataSource: IUserManager) => {
+    this.allContactsService.Activate(dataSource.id);
+  }
+  DeActivateUser = (dataSource: IUserManager) => {
+    this.allContactsService.DeActivate(dataSource.id);
+  }
+  resetPasswordUser = (dataSource: IUserManager) => {
+    this.allContactsService.resetPassword(dataSource.id);
+  }
+  showExactConfig = (index: number) => {
+    let a = document.querySelectorAll('.more_configs');
+    a[index].classList.toggle('showConfigs');
   }
 }

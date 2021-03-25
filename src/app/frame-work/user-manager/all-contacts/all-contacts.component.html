@@ -18,6 +18,7 @@
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
@@ -25,10 +26,11 @@
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns">
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-i="rowIndex">
         <tr>
             <td *ngFor="let col of columns" class="d_ltr">
                 <ng-container
@@ -49,13 +51,32 @@
                     <div class="tooltip_text">مشاهده ورودها</div>
                 </i>
             </td>
+            <td class="edit_button">
+                <i class="tooltip _map_frame_show p_icons pi pi-ellipsis-h" (click)="showExactConfig(i)">
+                    <div class="tooltip_text">تغییر وضعیت</div>
+                </i>
+                <div class="map-frame">
+                    <div class="more_configs">
+                        <i class="tooltip p_icons pi pi-lock-open" (click)="ActivateUser(dataSource)">
+                            <div class="tooltip_text">فعال</div>
+                        </i>
+                        <i class="tooltip p_icons pi pi-unlock" (click)="DeActivateUser(dataSource)">
+                            <div class="tooltip_text">غیر فعال</div>
+                        </i>
+                        <i class="tooltip p_icons pi pi-lock" (click)="resetPasswordUser(dataSource)">
+                            <div class="tooltip_text">بازگشت به رمز پیشفرض</div>
+                        </i>
+                    </div>
+                </div>
+            </td>
         </tr>
+
     </ng-template>
-    <ng-template pTemplate="emptymessage" let-columns>
+    <!-- <ng-template pTemplate="footer" let-columns>
         <tr>
             <td [attr.colspan]="columns.length">
                 موردی پیدا نشد
             </td>
         </tr>
-    </ng-template>
+    </ng-template> -->
 </p-table>

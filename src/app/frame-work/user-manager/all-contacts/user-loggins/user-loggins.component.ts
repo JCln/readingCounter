@@ -68,7 +68,7 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res.includes('/wr/mu/loggins/'))
+        if (res.includes('/wr/mu/all/loggins/'))
           this.classWrapper(true);
       }
     })

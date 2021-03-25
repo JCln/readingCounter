@@ -223,11 +223,9 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this.canShowEditButton = false;
 
     this.kindId = 0;
-    this.readingPeriodKindsDictionary = [];
     this.readingPeriodDictionary = [];
     this.readingConfigDefault = [];
     this.userCounterReader = [];
-    this.zoneDictionary = [];
 
     this.importDynamic = {
       fromEshterak: '',

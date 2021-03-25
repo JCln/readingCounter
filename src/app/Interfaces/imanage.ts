@@ -252,6 +252,10 @@ export interface IForbiddenManagerGridFriendlyRes {
     groups: null,
     total: number
 }
+export interface IWOUIQueryParams {
+    id: string,
+    isForbidden: boolean
+}
 export interface IFollowUp {
     trackNumber: number,
     listNumber: string,
@@ -292,7 +296,7 @@ export interface IFollowUpHistory {
 
 export interface IOnOffLoad {
     fileRepositoryId: string,
-    onOffLoadId: string,
+    targetId: string,
     name: string,
     extention: string,
     sizeInByte: number,

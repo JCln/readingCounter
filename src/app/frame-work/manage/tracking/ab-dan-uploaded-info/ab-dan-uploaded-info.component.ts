@@ -15,7 +15,10 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
   styleUrls: ['./ab-dan-uploaded-info.component.scss']
 })
 export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDestroy {
-  private onOffLoadId: string = '';
+  private targetFile = {
+    id: '',
+    isForbidden: false
+  }
 
   dataSource: IOnOffLoad[] = [];
   audioFiles: IOnOffLoad[] = [];
@@ -43,18 +46,38 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
   ) { }
 
   private getRouteParams = () => {
-    this.onOffLoadId = this.route.snapshot.paramMap.get('id');
+    this.targetFile.id = this.route.snapshot.queryParamMap.get('id');
+    const checkBoolean = this.route.snapshot.queryParamMap.get('isForbidden');
+    this.targetFile.isForbidden = checkBoolean ? checkBoolean.toLocaleLowerCase() === 'true' : false;
   }
   private getOnOffLoadData = (): Promise<IOnOffLoad[]> => {
     try {
       return new Promise((resolve) => {
-        this.downloadManagerService.downloadFileInfo(this.onOffLoadId).subscribe(res =>
+        this.downloadManagerService.downloadFileInfo(this.targetFile.id).subscribe(res =>
           resolve(res)
         );
       });
     } catch (error) {
       console.error(error);
     }
+  }
+  private getForbiddenData = (): Promise<IOnOffLoad[]> => {
+    try {
+      return new Promise((resolve) => {
+        this.downloadManagerService.downloadForbiddenFileInfo(this.targetFile.id).subscribe(res =>
+          resolve(res)
+        );
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  private useAPI = (): Promise<any> => {
+    return new Promise((resolve) => {
+      this.targetFile.isForbidden ?
+        resolve(this.getForbiddenData()) :
+        resolve(this.getOnOffLoadData());
+    });
   }
   getDownloadListInfo = () => {
     this.interationOnOverallInfo = this.downloadManagerService.getDownloadListInfo();
@@ -64,10 +87,11 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.getOnOffLoadData();
+    this.dataSource = await this.useAPI();
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
+    console.log(this.imageFiles);
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
     this.getDownloadListInfo();
   }
@@ -78,7 +102,7 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res.includes('/wr/m/track/woui/'))
+        if (res.includes('/wr/m/track/woui'))
           this.classWrapper(true);
       }
     })

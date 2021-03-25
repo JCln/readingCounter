@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { ENSnackBarColors, ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -10,7 +12,8 @@ import { InterfaceManagerService } from './interface-manager.service';
 export class AllContactsService {
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService
+    private interfaceManagerService: InterfaceManagerService,
+    private snackWrapperService: SnackWrapperService
   ) { }
 
   columnSelectedUserAllContacts = (): IObjectIteratation[] => {
@@ -25,5 +28,20 @@ export class AllContactsService {
   }
   connectToServer = (): Observable<any> => {
     return this.interfaceManagerService.getAllUserContactsManager();
+  }
+  Activate = (UUID: string) => {
+    this.interfaceManagerService.postUserManagerActivate(UUID).subscribe(res => {
+      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+    });
+  }
+  DeActivate = (UUID: string) => {
+    this.interfaceManagerService.postUserManagerDeActivate(UUID).subscribe(res => {
+      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+    });
+  }
+  resetPassword = (UUID: string) => {
+    return this.interfaceManagerService.postUserManagerResetPassword(UUID).subscribe(res => {
+      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+    });
   }
 }

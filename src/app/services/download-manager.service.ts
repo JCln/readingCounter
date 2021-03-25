@@ -28,8 +28,11 @@ export class DownloadManagerService {
   ) { }
 
   // calls
-  downloadFileInfo = (onOffLoadId: string): Observable<any> => {
-    return this.interfaceManagerService.downloadFileInfo(onOffLoadId);
+  downloadFileInfo = (targetId: string): Observable<any> => {
+    return this.interfaceManagerService.downloadFileInfo(targetId);
+  }
+  downloadForbiddenFileInfo = (targetId: string): Observable<any> => {
+    return this.interfaceManagerService.downloadForbiddenFileInfo(targetId);
   }
   downloadFile = (fileRepositoryId: string): Observable<any> => {
     return this.interfaceManagerService.downloadFile(fileRepositoryId);

@@ -155,16 +155,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  downloadOutputDBF = (row: IListManagerAll) => {
-    this.router.navigate(['wr/m/track/woui', row.id]);
-
-    // if (!this.outputManagerService.checkVertification(row))
-    //   return;
-    // this.trackingManagerService.downloadOutputDBF(row).subscribe((res: Blob) => {
-    //   this.outputManagerService.downloadFile(res);
-    //   console.log(res);
-
-    // })
-
+  downloadOutputDBF = (object: IListManagerAll) => {
+    this.router.navigate(['wr/m/track/woui'], { queryParams: { id: object.id, isForbidden: false } });
   }
 }

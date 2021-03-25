@@ -15,8 +15,8 @@
                     <ng-container *ngIf="mainDatas.field === 'newCounterReaderName';else selectOption">
                         <div class="input_2">
                             <div class="_key">مامور قرائت جدید</div>
-                            <mat-select placeholder="انتخاب مورد" [(ngModel)]="dataSource['counterReaderName']"
-                                name="allCounterReaders">
+                            <!--[(ngModel)]="dataSource['counterReaderName']"-->
+                            <mat-select placeholder="انتخاب مورد" name="allCounterReaders">
                                 <mat-option *ngFor="let truefalse of allCounterReaders" [value]="truefalse.id">
                                     {{truefalse.title}}
                                 </mat-option>

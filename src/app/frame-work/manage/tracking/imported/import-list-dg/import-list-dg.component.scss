@@ -11,7 +11,7 @@ section {
   background: $gray_l;
   box-shadow: 1px 1px 8px 4px $gray_e3;
   text-align: center;
-  padding: $font_2 $font_05;
+  padding: $font_05;
   justify-content: space-around;
   border-radius: $border_s;
 }
@@ -20,9 +20,9 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
   direction: rtl;
+  justify-content: center;
   gap: $font_05;
   align-items: center;
-  padding: 1rem 0;
   border-radius: $border_s;
   text-align: right;
 }
