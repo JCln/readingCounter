@@ -8,11 +8,10 @@
     <div *ngSwitchCase="switchCaseName">
         <section class=" auth_2" *ngFor="let moduleIt of item.moduleItems">
             <div class="text">{{moduleIt.title}}</div>
-            <div class="hr"></div>
-
+            
             <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
                 <div class="text_btn">{{controllerIt.title}}</div>
-                <mat-checkbox (change)="toggleSubItems($event.checked , controllerIt.actionItems)">
+                <mat-checkbox class="checkbox_btn" (change)="toggleSubItems($event.checked , controllerIt.actionItems)">
                     انتخاب همه
                 </mat-checkbox>
 
