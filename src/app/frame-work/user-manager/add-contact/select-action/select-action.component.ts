@@ -11,9 +11,13 @@ export class SelectActionComponent {
   // swtich case title
   switchCaseName: string = '';
   // 
-
   changeSwitchCase = (item: string) => {
     this.switchCaseName = item;
+  }
+  toggleSubItems(completed: boolean, subTask: any) {
+    subTask.forEach(t => {
+      t.isSelected = completed
+    });
   }
 
 }

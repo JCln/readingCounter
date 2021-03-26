@@ -32,7 +32,6 @@ export class AuthService {
   private getRefreshToken = (): string => {
     return this.jwtService.getRefreshToken();
   }
-
   refreshToken = (): Observable<any> => {
     return this.mainService.POSTBODY('V1/Account/Refresh', { 'refreshToken': this.getRefreshToken() })
   }
@@ -102,6 +101,9 @@ export class AuthService {
       displayName: decodedToken["DisplayName"],
       roles: roles
     });
+  }
+  noAccessMessage = () => {
+    this.snackWrapperService.openSnackBar('شما به این بخش دسترسی ندارید', ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
   }
 
 }

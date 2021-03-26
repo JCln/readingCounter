@@ -21,13 +21,13 @@ export class InterfaceManagerService {
     return this.mainService.GETID(UUID, 'V1/User/Logins');
   }
   postUserManagerResetPassword = (UUID: string): Observable<any> => {
-    return this.mainService.GETID(UUID, 'V1/User/ResetPassword');
+    return this.mainService.POSTSG('V1/User/ResetPassword', UUID);
   }
   postUserManagerActivate = (UUID: string): Observable<any> => {
-    return this.mainService.GETID(UUID, 'V1/User/Activate');
+    return this.mainService.POSTSG('V1/User/Activate', UUID);
   }
   postUserManagerDeActivate = (UUID: string): Observable<any> => {
-    return this.mainService.GETID(UUID, 'V1/User/Deactivate');
+    return this.mainService.POSTSG('V1/User/Deactivate', UUID);
   }
   /*
   also useful for get select options counter readers

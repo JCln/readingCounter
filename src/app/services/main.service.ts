@@ -40,7 +40,10 @@ export class MainService {
   }
   POST = (URL: string, ID?: number): Observable<any> => {
     return this.http.post(environment.API_URL + '/' + URL + '/' + ID, '').pipe(
-      // retry(1)
+    );
+  }
+  POSTSG = (URL: string, ID?: string): Observable<any> => {
+    return this.http.post(environment.API_URL + '/' + URL + '/' + ID, '').pipe(
     );
   }
   POSTBODY = (URL: string, body: object): Observable<any> => {

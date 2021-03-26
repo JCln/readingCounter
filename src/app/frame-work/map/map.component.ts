@@ -70,7 +70,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     // only one of base layers should be added to the map at instantiation
     this.map = L.map('map', {
       center: [32.669, 51.664],
-      zoom: 13,
+      zoom: 15,
       minZoom: 4,
       layers: [streets, this.layerGroup]
     });

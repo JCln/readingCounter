@@ -3,14 +3,15 @@
     <div class="overall-info">
         <div class="input_2" *ngFor="let item of interationOnOverallInfo">
             <div class="_key">{{item.header}}</div>
-            <input class="_value" name="{{item.field}}" [(ngModel)]="overAllInfo[item.field]">
+            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                [(ngModel)]="overAllInfo[item.field]">
         </div>
     </div>
 </section>
 
 
 <main class="control_wrapper">
-    <section class="content">
+    <section class="content" *ngIf="!targetFile.isForbidden">
         <h1 class="title">صدای ضبط شده</h1>
         <hr>
 

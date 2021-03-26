@@ -80,8 +80,16 @@ export class TrackingManagerService {
   getFollowUpSource = (trackNumber: string): Observable<any> => {
     return this.interfaceManagerService.getTrackFollowUp(trackNumber);
   }
-  getCounterReaders = (zoneId: number): Observable<any> => {
-    return this.interfaceManagerService.getCounterReadersByZoneId(zoneId);
+  getCounterReaders = (zoneId: number): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getCounterReadersByZoneId(zoneId).subscribe(res => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   postEditingTrack = (rowData: ITracking) => {
     this.interfaceManagerService.postTrackingEdit(this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {

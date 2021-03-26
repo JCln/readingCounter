@@ -15,7 +15,7 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
   styleUrls: ['./ab-dan-uploaded-info.component.scss']
 })
 export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDestroy {
-  private targetFile = {
+  targetFile = {
     id: '',
     isForbidden: false
   }
@@ -102,7 +102,7 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res.includes('/wr/m/track/woui'))
+        if (res.includes('/wr/m/track/woui?id='))
           this.classWrapper(true);
       }
     })

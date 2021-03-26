@@ -63,9 +63,9 @@ export class AddUserManagerService {
   checkEmptyUserInfos = (vals: IAddAUserManager) => {
     if (!this.utilsService.isNullWithText(vals.username, 'نام کاربری را وارد نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.password, 'رمز عبور را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.password, 'گذرواژه را وارد نمایید', ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.confirmPassword, 'تکرار رمز عبور را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.confirmPassword, 'تکرار گذرواژه را وارد نمایید', ENSnackBarColors.warn))
       return false;
     if (!this.utilsService.isNullWithText(vals.firstName, 'نام را وارد نمایید', ENSnackBarColors.warn))
       return false;
@@ -85,11 +85,11 @@ export class AddUserManagerService {
   }
   passAndConfirmPass = (vals: IAddAUserManager) => {
     if (!this.utilsService.isSameLength(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('تعداد ارقام رمز عبور با تایید آن برابر نیست', this._m_timeLength, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar('تعداد ارقام گذرواژه با تایید آن برابر نیست', this._m_timeLength, ENSnackBarColors.warn);
       return false;
     }
     if (!this.utilsService.isExactEqual(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('رمز عبور با تایید آن یکی باید باشد', this._m_timeLength, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar('گذرواژه با تایید آن یکی باید باشد', this._m_timeLength, ENSnackBarColors.warn);
       return false;
     }
     return true;

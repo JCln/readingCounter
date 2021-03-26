@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
   logging = () => {
     if (this.utilsService.isNull(this.userData.password) || this.utilsService.isNull(this.userData.username)) {
-      this.utilsService.snackBarMessageWarn('نام کاربری یا رمز عبور نمیتواند خالی باشد');
+      this.utilsService.snackBarMessageWarn('نام کاربری یا گذرواژه نمیتواند خالی باشد');
       return;
     }
     this.authService.logging(this.userData);

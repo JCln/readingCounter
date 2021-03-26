@@ -12,6 +12,9 @@
 
             <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
                 <div class="text_btn">{{controllerIt.title}}</div>
+                <mat-checkbox (change)="toggleSubItems($event.checked , controllerIt.actionItems)">
+                    انتخاب همه
+                </mat-checkbox>
 
                 <section class="auth_4">
                     <div class="checkboxes" *ngFor="let actionIt of controllerIt.actionItems">

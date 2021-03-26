@@ -16,15 +16,15 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
   myInfoDataSource: IProfile;
-  _selectCols: IObjectIteratation[] = [];
+  _selectCols: IObjectIteratation[];
 
   constructor(
     private interactionService: InteractionService,
     private profileService: ProfileService
   ) { }
 
-  classWrapper = () => {
-    this.getDataSource();
+  classWrapper = async () => {
+    this.myInfoDataSource = await this.profileService.getMyInfoDataSource();
     this.getSelectedColumns();
   }
   ngOnInit(): void {
@@ -52,9 +52,6 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnSelectedProfile();
-  }
-  getDataSource = async () => {
-    this.myInfoDataSource = await this.profileService.getMyInfoDataSource();
   }
 
 }

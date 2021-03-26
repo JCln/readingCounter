@@ -1,6 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -13,8 +12,6 @@ import { JwtService } from './jwt.service';
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
-  private isRefreshing = false;
-  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private authorizationHeader = "Authorization";
 
   constructor(
@@ -45,8 +42,9 @@ export class InterceptorService implements HttpInterceptor {
                 return next.handle(newRequest);
 
               }
-              this.authService.logout();
-              return next.handle(newRequest);
+              // this.authService.logout();
+              this.authService.noAccessMessage();
+              return;
             }
             return throwError(error)
           }

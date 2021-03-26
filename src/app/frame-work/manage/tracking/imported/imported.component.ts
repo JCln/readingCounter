@@ -81,9 +81,6 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.getDataSource();
       // this.filterZoneDictionary = this.trackingManagerService.getAllZoneTitles(this.dataSource);
       this.filterZoneDictionary = await this.getZoneDictionary();
-      console.log(this.filterZoneDictionary);
-
-
       this.closeTabService.saveDataForTrackImported = this.dataSource;
     }
   }
@@ -140,9 +137,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     this.ref.onClose.subscribe((res: ITracking) => {
       if (res)
-        console.log(res);
-
-      // this.onRowEditSave(res);
+        this.onRowEditSave(res);
     });
   }
   removeRow = (rowData: ITracking, desc: string) => {

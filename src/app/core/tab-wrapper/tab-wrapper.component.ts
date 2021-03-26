@@ -72,6 +72,9 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
     return null;
   }
   addDynamicRoute = () => {
+    let lastUrlPart: string = '';
+    let completeRoutePart: string = '';
+
     let dRoute: ITabWrapperDetectDynamicRoute = {
       _title: '',
       _dynamicRoute: ''
@@ -79,8 +82,19 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
     dRoute = this.findDynamicRouteStatus();
     if (this.utilsService.isNull(dRoute))
       return;
-    const completeRoutePart = this.router.url.split('/').pop();
-    const lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
+    // route query params maps
+    if (dRoute._dynamicRoute.includes('/wr/m/track/woui')) {
+      lastUrlPart = this.router.url.split('?id=').pop().substring(0, 5);
+      completeRoutePart = '?id=' + this.router.url.split('?id=').pop();
+    }
+    // route param
+    else {
+      lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
+      completeRoutePart = this.router.url.split('/').pop();
+    }
+    // console.log(`${dRoute._dynamicRoute}${completeRoutePart}`, `${dRoute._title}${lastUrlPart}`);
+
+
     const a = {
       route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };

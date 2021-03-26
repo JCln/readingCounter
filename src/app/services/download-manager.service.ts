@@ -11,9 +11,9 @@ import { IOnOffLoad, IOverAllWOUIInfo } from './../Interfaces/imanage';
 export class DownloadManagerService {
   getDownloadListInfo = (): IObjectIteratation[] => {
     return [
-      { field: 'sizeInKB', header: 'حجم کل موارد(KB)', isSelected: true },
-      { field: 'imageNumbers', header: 'تعداد تصویر', isSelected: true },
-      { field: 'audioNumbers', header: 'تعداد صوت', isSelected: true }
+      { field: 'sizeInKB', header: 'حجم کل موارد(KB)', isSelected: true, readonly: true },
+      { field: 'imageNumbers', header: 'تعداد تصویر', isSelected: true, readonly: true },
+      { field: 'audioNumbers', header: 'تعداد صوت', isSelected: true, readonly: true }
     ];
   }
   dataSource: IOnOffLoad[] = [];

@@ -18,7 +18,7 @@ section {
 
 ._desc {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, auto));
   direction: rtl;
   justify-content: center;
   gap: $font_05;

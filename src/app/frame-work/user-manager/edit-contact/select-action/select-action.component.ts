@@ -14,4 +14,17 @@ export class SelectActionComponent {
   changeSwitchCase = (item: string) => {
     this.switchCaseName = item;
   }
+  toggleSubItems(completed: boolean, subTask: any) {
+    subTask.forEach(t => {
+      t.isSelected = completed
+    });
+  }
+  // updateAll = (subTask: any[], index: number) => {
+  //   const a = subTask.every(l1 => {
+  //     return l1.isSelected
+  //   })
+  //   // subTask.isSelected = a;
+  //   console.log(a);
+
+  // }
 }
