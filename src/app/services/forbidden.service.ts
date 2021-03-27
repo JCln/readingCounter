@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { LazyLoadEvent } from 'primeng/api';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { ICounterStateGridFriendlyReq, IForbiddenManagerGridFriendlyRes, IWOUIQueryParams } from '../Interfaces/imanage';
+import { ICounterStateGridFriendlyReq, IForbiddenManagerGridFriendlyRes } from '../Interfaces/imanage';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
@@ -90,8 +90,8 @@ export class ForbiddenService {
       })
     });
   }
-  routeToWOUI = (object: IWOUIQueryParams) => {
-    this.router.navigate(['wr/m/track/woui'], { queryParams: object });
+  routeToWOUI = (UUID: string, isForbidden: boolean) => {
+    this.router.navigate(['wr/m/track/woui', UUID, isForbidden]);
   }
 
 }

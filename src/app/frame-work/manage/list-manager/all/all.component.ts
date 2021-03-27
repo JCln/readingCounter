@@ -156,6 +156,6 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   downloadOutputDBF = (object: IListManagerAll) => {
-    this.router.navigate(['wr/m/track/woui'], { queryParams: { id: object.id, isForbidden: false } });
+    this.router.navigate(['wr/m/track/woui', object.id, false]);
   }
 }

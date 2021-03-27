@@ -252,10 +252,6 @@ export interface IForbiddenManagerGridFriendlyRes {
     groups: null,
     total: number
 }
-export interface IWOUIQueryParams {
-    id: string,
-    isForbidden: boolean
-}
 export interface IFollowUp {
     trackNumber: number,
     listNumber: string,

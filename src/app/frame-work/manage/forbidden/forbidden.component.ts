@@ -86,6 +86,6 @@ export class ForbiddenComponent implements OnInit {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   showPictures = (forbiddenId: string) => {
-    this.forbiddenService.routeToWOUI({ id: forbiddenId, isForbidden: true });
+    this.forbiddenService.routeToWOUI(forbiddenId, true);
   }
 }

@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'reading', loadChildren: () => import('./reading/reading.module').then(reading => reading.ReadingModule) },
   { path: 'offloaded', loadChildren: () => import('./offloaded/offloaded.module').then(offloaded => offloaded.OffloadedModule) },
   { path: 'finished', loadChildren: () => import('./finished/finished.module').then(finished => finished.FinishedModule) },
-  { path: 'woui', loadChildren: () => import('./ab-dan-uploaded-info/ab-dan-uploaded-info.module').then(waterOfficerUploadedInfo => waterOfficerUploadedInfo.AbDanUploadedInfoModule) }
+  { path: 'woui/:UUID/:isForbidden', loadChildren: () => import('./ab-dan-uploaded-info/ab-dan-uploaded-info.module').then(waterOfficerUploadedInfo => waterOfficerUploadedInfo.AbDanUploadedInfoModule) }
 ];
 
 @NgModule({

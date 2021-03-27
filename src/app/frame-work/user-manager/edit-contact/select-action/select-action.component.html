@@ -9,7 +9,6 @@
         <div *ngSwitchCase="switchCaseName">
             <section class=" auth_2" *ngFor="let moduleIt of item.moduleItems">
                 <div class="text">{{moduleIt.title}}</div>
-                <div class="hr"></div>
 
                 <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
                     <div class="text_btn">{{controllerIt.title}}</div>

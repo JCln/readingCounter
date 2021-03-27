@@ -37,7 +37,9 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
     const found = this.tabs.find((item: any) => {
       return item.route === this.router.url
     })
-    return found;
+    if (found)
+      return found;
+    return null;
   }
   getCurrentDynamicRoute = (route: string): string => {
     if (this.router.url.includes(route))
@@ -65,9 +67,9 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
       return {
         _title: 'ورود', _dynamicRoute: '/wr/mu/all/loggins/'
       }
-    if (this.getCurrentDynamicRoute('/wr/m/track/woui'))
+    if (this.getCurrentDynamicRoute('/wr/m/track/woui/'))
       return {
-        _title: 'صوت/تصویر', _dynamicRoute: '/wr/m/track/woui'
+        _title: 'صوت/تصویر', _dynamicRoute: '/wr/m/track/woui/'
       }
     return null;
   }
@@ -84,21 +86,23 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     // route query params maps
     if (dRoute._dynamicRoute.includes('/wr/m/track/woui')) {
-      lastUrlPart = this.router.url.split('?id=').pop().substring(0, 5);
-      completeRoutePart = '?id=' + this.router.url.split('?id=').pop();
+      lastUrlPart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop().substring(0, 5);
+      completeRoutePart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop();
     }
     // route param
     else {
       lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
       completeRoutePart = this.router.url.split('/').pop();
     }
-    // console.log(`${dRoute._dynamicRoute}${completeRoutePart}`, `${dRoute._title}${lastUrlPart}`);
+    // console.log(completeRoutePart);
+    // console.log(dRoute._dynamicRoute);
 
-
+    console.log(`${dRoute._dynamicRoute}${completeRoutePart}`, `   ${dRoute._title}${lastUrlPart}`);
     const a = {
       route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };
-    if (!this.DoesTabsHaveThisRouteNow())
+    
+    if (this.utilsService.isNull(this.DoesTabsHaveThisRouteNow()))
       this.tabs.push(a);
   }
   testCheck = () => {
@@ -117,7 +121,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
         const currentRouteFound = this.DoesCurrentRouteFound();
         if (currentRouteFound) {
           if (this.DoesTabsHaveThisRouteNow()) {
-            console.log('we have this route now !');
+            // console.log('we have this route now !');
             return;
           }
           else {

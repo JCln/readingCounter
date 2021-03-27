@@ -46,8 +46,8 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
   ) { }
 
   private getRouteParams = () => {
-    this.targetFile.id = this.route.snapshot.queryParamMap.get('id');
-    const checkBoolean = this.route.snapshot.queryParamMap.get('isForbidden');
+    this.targetFile.id = this.route.snapshot.paramMap.get('UUID');
+    const checkBoolean = this.route.snapshot.paramMap.get('isForbidden');
     this.targetFile.isForbidden = checkBoolean ? checkBoolean.toLocaleLowerCase() === 'true' : false;
   }
   private getOnOffLoadData = (): Promise<IOnOffLoad[]> => {

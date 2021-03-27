@@ -1,10 +1,8 @@
 @import '../../../../../assets/variable.scss';
 @import '../../../../../assets/button.scss';
 
-$blue_darker: #000A63;
-$blue_dark: #193E77;
-$blue_medium: #002A69;
 $blue_lovely: #0045CB;
+$half_gray: #b0bdd1;
 
 .auth_1 {
   direction: rtl;
@@ -12,29 +10,28 @@ $blue_lovely: #0045CB;
 
 .auth_1_container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
   gap: .25rem;
   direction: rtl;
 
   .auth_1_item {
     display: grid;
     place-content: center;
-    border: 1px solid $blue_lovely;
     padding: $font_05;
     margin: $font_s 0;
     border-radius: 5px;
     font-size: $font_l;
     font-weight: 600;
-    color: $blue_lovely;
-    background-color: $white;
-    box-shadow: 1px 1px 3px 0px $gray_e3;
+    background: $half_gray;
+    color: $blue_d;
+    box-shadow: 1px 1px 3px 0px $half_gray;
     cursor: pointer;
   }
 }
 
 // active auth1 tab
 .active_tab {
-  background-color: $blue_d !important;
+  background: $blue_lovely !important;
   color: $gray_l !important;
 }
 
@@ -47,27 +44,28 @@ $blue_lovely: #0045CB;
   min-height: 18rem;
 
   &:nth-child(odd) {
-    background-color: $blue_darker;
+    background-color: $gray_l;
 
     .auth_3 {
-      background-color: $blue_medium;
+      background-color: $half_gray;
+      box-shadow: 0px 2px 3px 1.5px $gray_96;
     }
   }
 
   &:nth-child(even) {
-    background-color: $blue_medium;
+    background-color: $half_gray;
 
     .auth_3 {
-      background-color: $blue_darker;
+      background-color: $gray_l;
+      box-shadow: 0px 2px 3px 1.5px $blue_d2;
     }
   }
 
 }
 
 .auth_3 {
-  margin: $font_05;
-  margin-top: 2rem;
-  padding: $font_xxs;
+  margin: $font_xxs;
+  padding: $font_05;
   border-radius: $border_s;
   min-height: 10rem;
 }
@@ -87,27 +85,21 @@ $blue_lovely: #0045CB;
 
 .text {
   padding: 0 $font_05;
-  color: $gray_l;
-  font-size: $font_m;
+  color: $blue_d2;
+  font-size: $font_l;
+  font-weight: 600;
 }
 
 .text_btn {
   text-align: center;
   max-width: 11rem;
+  border-radius: $border_s;
   width: auto;
-  padding: $font_05;
   margin-bottom: $font_05;
   font-size: $font_m;
-  color: $gray_l;
-  border-radius: $border_s;
-  border: 2px solid $gray_l;
-  box-shadow: 1px 1px 3px 0px $gray_d5;
-}
-
-.hr {
-  width: 7rem;
-  height: .2rem;
-  background-color: $gray_l;
+  font-weight: 600;
+  color: $blue_d;
+  background: $half_gray;
 }
 
 .accept {
@@ -128,7 +120,7 @@ $blue_lovely: #0045CB;
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: $blue_d;
+      color: $blue_lovely;
       line-height: 2;
       border-radius: $border_s;
       font-family: $font_family;
