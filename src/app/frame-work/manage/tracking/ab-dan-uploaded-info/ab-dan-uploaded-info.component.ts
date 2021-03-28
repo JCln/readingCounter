@@ -91,7 +91,6 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
-    console.log(this.imageFiles);
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
     this.getDownloadListInfo();
   }
@@ -102,7 +101,7 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res.includes('/wr/m/track/woui?id='))
+        if (res.includes('/wr/m/track/woui'))
           this.classWrapper(true);
       }
     })
