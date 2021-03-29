@@ -3,7 +3,7 @@ import { Imap } from './../../Interfaces/imap';
 export const map: Imap[] = [
     {
         id: 'OSM',
-        mapBoxUrl: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        mapBoxUrl: 'http://172.18.12.242/osm_tiles/{z}/{x}/{y}.png',
         maxZoom: 18,
         minZoom: 6,
         zoom: 11,

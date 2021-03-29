@@ -100,7 +100,8 @@ ul::-webkit-scrollbar {
   font-weight: 600;
   outline: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: linear-gradient(to left, $dark_ddd, rgba(255, 0, 0, 0));
     color: $white;
   }
@@ -108,16 +109,6 @@ ul::-webkit-scrollbar {
 
 .active {
   background: linear-gradient(to left, rgba(255, 0, 0, 0), $dark_ddd);
-}
-
-.active_2 {
-  .btn_2 {
-    border: 2px solid $dark_ddd;
-  }
-
-  .icons {
-    color: $dark_ddd;
-  }
 }
 
 .ul_items {
@@ -154,14 +145,6 @@ ul::-webkit-scrollbar {
   z-index: -1;
 }
 
-
-// for small sidebar we added ngIf and separate scss
-.ul_2 {
-  list-style-type: none;
-  padding: 0;
-  text-align: center;
-}
-
 .btn_2 {
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
@@ -171,31 +154,88 @@ ul::-webkit-scrollbar {
   border: 1px solid;
 }
 
-.li_2 {
-  position: relative;
+// small sidebar
+// for small sidebar we added ngIf and separate scss
+.ul_2 {
+  list-style-type: none;
+  padding: 0;
+  height: 84vh;
+  overflow-y: auto;
 
-  h3 {
-    color: $blue_d;
-  }
+  .li_2 {
+    // position: relative;
 
-  &:hover {
-    ._show {
-      visibility: visible;
+    h3 {
+      color: $blue_d;
     }
 
-    // ._show:nth-last-child(1) {
-    //   top: -10rem;
+    // &:hover,
+    // &:focus {
+    //   nav.ul_2 {
+    //     overflow-x: unset !important;
+    //     overflow-y: unset !important;
+    //   }
+
+    //   ._show {
+    //     visibility: visible;
+    //     top: 25%;
+    //   }
     // }
-    ._show:last-child {
-      top: -5rem;
+  }
+
+  .active_2 {
+    .btn_2 {
+      border: 2px solid $dark_ddd;
+    }
+
+    .icons {
+      color: $dark_ddd;
     }
   }
-}
 
-.sub_item_2 {
-  cursor: pointer;
-}
 
+  .sub_item_2 {
+    cursor: pointer;
+    direction: rtl;
+  }
+
+  ._show {
+    visibility: visible;
+    display: block;
+    z-index: 4;
+    position: absolute;
+    width: 15rem;
+    right: 4rem;
+    background: $gray_d5;
+    top: $font_05;
+    height: 100%;
+    padding: $font_05;
+    min-height: 10rem;
+    height: auto;
+    border-radius: $border_s;
+
+    h3 {
+      font-size: $font_m;
+      font-weight: 600;
+      color: $blue_dr;
+      text-align: center;
+      color: $blue_dr;
+    }
+
+    & a {
+      display: block;
+      padding-right: .3rem;
+      margin-bottom: .3rem;
+      color: $gray_dr;
+      font-size: $font_m;
+      font-weight: 600;
+      border-radius: $border_s;
+    }
+  }
+
+
+
+}
 
 i.icons {
   display: flex;
@@ -206,39 +246,6 @@ i.icons {
   width: 1.87rem;
   color: $blue_d;
 }
-
-._show {
-  visibility: hidden;
-  display: block;
-  z-index: 4;
-  position: absolute;
-  width: 15rem;
-  right: 4rem;
-  background: $gray_d5;
-  top: $font_05;
-  height: 100%;
-  padding: $font_05;
-  min-height: 10rem;
-  height: auto;
-  border-radius: $border_s;
-
-  h3 {
-    font-size: $font_m;
-    font-weight: 600;
-    color: $blue_dr;
-  }
-
-  & a {
-    display: block;
-    padding-right: .3rem;
-    margin-bottom: .3rem;
-    color: $gray_dr;
-    font-size: $font_m;
-    font-weight: 600;
-    border-radius: $border_s;
-  }
-}
-
 
 @keyframes toggle_side {
   0% {
