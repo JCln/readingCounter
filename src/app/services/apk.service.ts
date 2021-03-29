@@ -25,29 +25,29 @@ export class ApkService {
 
   isNull = (): boolean => {
     if (this.utilsService.isNull(this.desc.versionName)) {
-      this.snackWrapperService.openSnackBar('نام نسخه را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
+      this.snackWrapperService.openSnackBar('نام نسخه را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (this.utilsService.isNull(this.desc.versionCode)) {
-      this.snackWrapperService.openSnackBar('شماره نسخه را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
+      this.snackWrapperService.openSnackBar('شماره نسخه را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (this.utilsService.isNull(this.fileForm)) {
-      this.snackWrapperService.openSnackBar('لطفا یک فایل apk انتخاب نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
+      this.snackWrapperService.openSnackBar('لطفا یک فایل apk انتخاب نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
   }
   isInteger = (): boolean => {
     if (this.desc.versionCode.toString().includes('.')) {
-      this.snackWrapperService.openSnackBar('شماره نسخه را بدون اعشار وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
+      this.snackWrapperService.openSnackBar('شماره نسخه را بدون اعشار وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
   }
   isAPK = (): boolean => {
     if (this.fileForm[0].name.split('.').pop() !== 'apk') {
-      this.snackWrapperService.openSnackBar('فرمت ارسالی باید فایل apk باشد', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
+      this.snackWrapperService.openSnackBar('فرمت ارسالی باید فایل apk باشد', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
