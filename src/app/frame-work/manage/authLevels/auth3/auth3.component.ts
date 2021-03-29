@@ -5,13 +5,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
-import { CloseTabService } from './../../../../services/close-tab.service';
-import { SnackWrapperService } from './../../../../services/snack-wrapper.service';
 import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
 import { Auth3EditDgComponent } from './auth3-edit-dg/auth3-edit-dg.component';
 

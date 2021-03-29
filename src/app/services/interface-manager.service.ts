@@ -423,7 +423,7 @@ export class InterfaceManagerService {
     return this.mainService.GET('V1/AuthLevel4/Dictionary');
   }
   deleteAuthLevel4Manager = (id: number): Observable<any> => {
-    return this.mainService.POST('V1/AuthLevel3/Remove', id);
+    return this.mainService.POST('V1/AuthLevel4/Remove', id);
   }
   editAuthLevel4Manager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/AuthLevel4/Edit', body);
