@@ -43,6 +43,12 @@ export const sidebarItemsTest = {
         //     ]
         // },
         {
+            route: '', title: 'گزارشات', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
+                { route: '/wr/rpts/exm/master', title: 'بازرسی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: '/wr/rpts/exm/details', title: 'جزئیات ', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 }
+            ]
+        },
+        {
             route: '', title: 'tracking', logicalOrder: 1, cssClass: 'fas fa-chalkboard-teacher', isOpen: false, subItems: [
                 { route: '/wr/imd', title: 'import dynamic', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: '/wr/m/track/fwu', title: 'پیگیری درخواست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },

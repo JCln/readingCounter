@@ -44,6 +44,7 @@ export class InterceptorService implements HttpInterceptor {
               }
               // this.authService.logout();
               this.authService.noAccessMessage();
+              this.authService.routeTo('/wr');
               return;
             }
             return throwError(error)
