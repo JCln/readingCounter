@@ -1,0 +1,71 @@
+<main class="main" *ngIf="route.children.length === 0">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+            <section class="order_by">
+                <h2>صدور بر اساس :</h2>
+                <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
+                    name="_isOrderByDate">
+                    <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"
+                        [value]="orderType.isSelected">
+                        {{orderType.title}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </section>
+            <section class="content" [hidden]="_isOrderByDate">
+                <!-- <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.zoneId" name="zoneId">
+                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
+                            (click)="verificationACounterReaderId()">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div> -->
+                <div class="input_2">
+                    <div class="_key">نوع دوره قرائت</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                        <mat-option *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                        <!-- (click)="getReadingPeriod()"-->
+                    </mat-select>
+                </div>
+            </section>
+
+            <section class="content date_section" [hidden]="!_isOrderByDate">
+                <div class="input_2">
+                    <div class="_key">از تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">تا تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+        <section [hidden]="canShowEditButton || !_isOrderByDate" class="dynamic_content">
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">نوع دوره قرائت</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.readingPeriodId"
+                        name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </section>
+        </section>
+        <footer>
+            <button *ngIf="canShowEditButton" type="submit" class="btn_1">افزودن</button>
+
+        </footer>
+    </form>
+</main>

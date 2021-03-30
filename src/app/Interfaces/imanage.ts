@@ -335,3 +335,41 @@ export interface IManageServer {
     background: string;
     color?: string;
 }
+// reading report manager
+export interface IReadingReportReq {
+    zoneId: number,
+    fromDate: string,
+    toDate: string,
+    counterReaderId: string,
+    readingPeriodId: string,
+    reportCode: number,
+    year: number
+}
+export interface IReadingReportMaster {
+    zoneId: number,
+    zoneTitle: string,
+    reportId: number,
+    reportTitle: string,
+    itemCount: number
+}
+export interface IReadingReportDetails {
+    billId: number,
+    radif: number,
+    eshterak: number,
+    fulName: string,
+    address: string,
+    karbariCode: number,
+    possibleKarbariCode: number,
+    ahadMaskooniOrAsli: number,
+    possibleAhadMaskooniOrAsli: number,
+    ahadTejariOrFari: number,
+    possibleAhadTejariOrFari: number,
+    ahadSaierOrAbBaha: number,
+    possibleSaierOrAbBaha: number,
+    reportTitle: string,
+    counterReaderName: string,
+    offloadDateJalali: string,
+    counterSerial: string,
+    possibleCounterSerial: string
+}
+//

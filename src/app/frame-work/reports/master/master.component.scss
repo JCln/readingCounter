@@ -1,0 +1,153 @@
+@import '../../../../assets/variable';
+@import '../../../../assets/input.scss';
+@import '../../../../assets/button.scss';
+
+
+.main {
+  direction: rtl;
+  background: $gray_l;
+  box-shadow: 1px 1px 8px 4px $gray_d;
+  padding: $font_s;
+  border-radius: $border_s;
+  min-height: 35rem;
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 17rem));
+  gap: $font_05;
+  align-items: center;
+}
+
+section.dynamic_content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
+  gap: $font_05;
+  align-items: center;
+  border: .15rem solid $blue_c;
+  box-shadow: 1px 1px 5px 1px $blue_c;
+  border-radius: $border_s;
+  padding: $font_xxs;
+  margin: 1rem 0;
+}
+
+.static_part {
+  border: .15rem solid $blue_d;
+  box-shadow: 1px 1px 5px 1px $blue_d;
+  border-radius: $border_s;
+  padding: $font_xxs;
+}
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
+  gap: $font_05;
+  margin: $font_xxs;
+}
+
+._key,
+._value {
+  font-size: $font_m;
+  font-weight: 800;
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: $blue_d;
+  text-align: center;
+  width: 100%;
+}
+
+.btn_1 {
+  color: $white;
+  background-color: $orange_d;
+}
+
+h2 {
+  color: $gray_dr;
+  margin-left: 5rem;
+}
+
+footer {
+  margin-top: $font_2;
+  text-align: center;
+}
+
+::ng-deep {
+  .mat-select-arrow {
+    color: $gray_l;
+  }
+
+  .mat-select {
+    text-align: center;
+  }
+
+  .mat-select-value {
+    font-family: $font_family;
+    font-size: $font_s;
+    color: $gray_l;
+    font-weight: 600;
+  }
+
+  .mat-select-panel .mat-option {
+    font-size: 1.2rem;
+    line-height: 3em;
+    height: 3em;
+    text-align: right;
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .mat-option-text {
+    font-size: $font_s;
+    font-weight: 600;
+    color: $dark_blue;
+  }
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 $font_05;
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: $blue_c;
+  }
+}
+
+.order_by {
+  display: flex;
+}
+
+hr {
+  margin: 0 4rem;
+  background-color: $blue_d;
+  height: .2rem;
+  margin-bottom: $font_xxs;
+}
+
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: $gray_dr;
+  margin: 0 2rem;
+}
+
+::ng-deep {
+  .mat-radio-label-content {
+    padding-right: $font_05 !important;
+    color: $dark_ddd;
+  }
+}
+
+[hidden] {
+  display: none;
+}

@@ -107,7 +107,15 @@ export class InterfaceManagerService {
     return this.mainService.POSTBODY('V1/Tracking/Remove', body);
   }
   // 
+  // reading report manager
 
+  postRRMasterManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/ReadingReport/Master/WithParam', body);
+  }
+  postRRDetailsManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/ReadingReport/Details/WithParam', body);
+  }
+  // 
   // List Manager 
 
   getLMAll = (trackingId: string): Observable<any> => {
@@ -127,6 +135,9 @@ export class InterfaceManagerService {
   }
   getReadingPeriodManagerDictionary = (zoneId: number): Observable<any> => {
     return this.mainService.GET(`V1/readingPeriod/Dictionary/${zoneId}`);
+  }
+  getReadingPeriodByKindManagerDictionary = (kindId: string): Observable<any> => {
+    return this.mainService.GET(`V1/ReadingPeriod/DictionaryByKind/${kindId}`);
   }
   getReadingPeriodManagerDictionaryByZoneIdAndKindId = (zoneId: number, kindId: number): Observable<any> => {
     return this.mainService.GET(`V1/readingPeriod/Dictionary/${zoneId}/${kindId}`);
