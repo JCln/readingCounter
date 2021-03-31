@@ -115,6 +115,12 @@ export class InterfaceManagerService {
   postRRDetailsManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/ReadingReport/Details/WithParam', body);
   }
+  postRRTraverseManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/List/Offloaded/Traverse', body);
+  }
+  postRRKarkardManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/List/Offloaded/Karkard', body);
+  }
   // 
   // List Manager 
 

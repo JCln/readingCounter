@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { IReadingReportReq } from 'src/app/Interfaces/imanage';
+import { Subscription } from 'rxjs';
+import { IReadingReportDetails, IReadingReportReq } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
-import { IReadingReportDetails } from './../../../Interfaces/imanage';
-
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  selector: 'app-karkard',
+  templateUrl: './karkard.component.html',
+  styleUrls: ['./karkard.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class KarkardComponent implements OnInit {
   readingReportReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',
@@ -99,4 +97,5 @@ export class DetailsComponent implements OnInit {
     if (temp)
       this.connectToServer();
   }
+
 }

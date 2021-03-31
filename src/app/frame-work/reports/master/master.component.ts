@@ -71,7 +71,7 @@ export class MasterComponent implements OnInit {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   connectToServer = async () => {
-    this.readingReportMaster.push(await this.readingReportManagerService.postRRMasterManager());
+    this.readingReportMaster = await this.readingReportManagerService.postRRMasterManager();
     console.log(this.readingReportMaster);
 
   }
@@ -85,14 +85,14 @@ export class MasterComponent implements OnInit {
     this.readingReportReq.year = parseInt($event.substring(0, 4));
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary.push(await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId));
+    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
     this.ShowDynamics();
   }
   ShowDynamics = () => {
     this.canShowEditButton = true;
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verification(this.readingReportReq);
+    const temp = this.readingReportManagerService.verificationRRMaster(this.readingReportReq);
     if (temp)
       this.connectToServer();
   }

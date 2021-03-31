@@ -5,7 +5,8 @@
         <div class="_desc">
             <div class="input_2" *ngFor="let mainDatas of _selectMainDatas">
                 <div class="_key">{{mainDatas.header}}</div>
-                <input class="_value" name="{{mainDatas.field}}" [(ngModel)]="dataSource[mainDatas.field]">
+                <input [readOnly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"
+                    [(ngModel)]="dataSource[mainDatas.field]">
             </div>
         </div>
     </form>
@@ -18,7 +19,8 @@
         <div class="card__content" *ngFor="let item of _selectCols">
             <div class="input_2">
                 <div class="_key">{{item.header}}</div>
-                <input class="_value" name="{{item.field}}" [(ngModel)]="history[item.field]">
+                <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                    [(ngModel)]="history[item.field]">
             </div>
         </div>
         <br><br>

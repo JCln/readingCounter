@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
 
 import { ENSnackBarColors, IResponses } from './../Interfaces/ioverall-config';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems } from './../Interfaces/iuser-manager';
@@ -10,7 +11,6 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class AddUserManagerService {
-  private _m_timeLength: number = 5000;
   dataSource: any;
   selectedPersonalInfos: IAddUserInfos;
 
@@ -61,6 +61,8 @@ export class AddUserManagerService {
     return selectedActions;
   }
   checkEmptyUserInfos = (vals: IAddAUserManager) => {
+    if (!this.utilsService.isNullWithText(vals.userCode, 'کد کاربری را وارد نمایید', ENSnackBarColors.warn))
+      return false;
     if (!this.utilsService.isNullWithText(vals.username, 'نام کاربری را وارد نمایید', ENSnackBarColors.warn))
       return false;
     if (!this.utilsService.isNullWithText(vals.password, 'گذرواژه را وارد نمایید', ENSnackBarColors.warn))
@@ -85,11 +87,11 @@ export class AddUserManagerService {
   }
   passAndConfirmPass = (vals: IAddAUserManager) => {
     if (!this.utilsService.isSameLength(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('تعداد ارقام گذرواژه با تایید آن برابر نیست', this._m_timeLength, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar('تعداد ارقام گذرواژه با تایید آن برابر نیست', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
     if (!this.utilsService.isExactEqual(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('گذرواژه با تایید آن یکی باید باشد', this._m_timeLength, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar('گذرواژه با تایید آن یکی باید باشد', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
@@ -111,7 +113,7 @@ export class AddUserManagerService {
       return false;
     this.interfaceManagerService.postAddContact(vals).subscribe((res: IResponses) => {
       if (res) {
-        this.snackWrapperService.openSnackBar(res.message, this._m_timeLength, ENSnackBarColors.success);
+        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
       }
     });
   }

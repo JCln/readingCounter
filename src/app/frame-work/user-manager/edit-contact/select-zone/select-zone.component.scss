@@ -1,5 +1,6 @@
 @import '../../../../../assets/variable';
 @import '../../../../../assets/button.scss';
+@import '../../../../../assets/tooltip.scss';
 
 main {
   direction: rtl;
@@ -121,4 +122,17 @@ main {
   &:active {
     opacity: 1;
   }
+}
+
+
+// edit tooltips
+.tooltip .tooltip_text::after {
+  top: auto;
+  bottom: 100%;
+  border-color: transparent transparent #F68038 transparent;
+}
+
+.tooltip_text {
+  bottom: -260% !important;
+  left: 3rem !important;
 }

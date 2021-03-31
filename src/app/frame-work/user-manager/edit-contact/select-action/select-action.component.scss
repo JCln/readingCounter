@@ -47,17 +47,17 @@ $half_gray: #b0bdd1;
     background-color: $gray_l;
 
     .auth_3 {
-      background-color: $half_gray;
-      box-shadow: 0px 2px 3px 1.5px $gray_96;
+      box-shadow: 0px 2px 3px 1.5px $gray_d;
     }
   }
 
   &:nth-child(even) {
     background-color: $half_gray;
+    box-shadow: 0 0 2px 2px rgba($half_gray, .5);
 
     .auth_3 {
       background-color: $gray_l;
-      box-shadow: 0px 2px 3px 1.5px $blue_d2;
+      box-shadow: 0px 2px 3px 1.5px rgba($blue_d2, .4);
     }
   }
 

@@ -1,7 +1,11 @@
 <main>
     <button class="fa_icons" (click)="this.switchDisplay = !this.switchDisplay">
-        <i *ngIf="!switchDisplay" class="fa fa-list"></i>
-        <i *ngIf="switchDisplay" class="fa fa-th-large"></i>
+        <i *ngIf="!switchDisplay" class="tooltip fa fa-list">
+            <div class="tooltip_text">نمایش خطی</div>
+        </i>
+        <i *ngIf="switchDisplay" class="tooltip fa fa-th-large">
+            <div class="tooltip_text">نمایش ستونی</div>
+        </i>
     </button>
     <section class="l_1">
         <div class="l_1_c" *ngFor="let provinceIt of provinceItemsData">

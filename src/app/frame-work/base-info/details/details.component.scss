@@ -1,9 +1,0 @@
-@import '../../../../assets/variable';
-@import '../../../../assets/input.scss';
-
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 18rem));
-  gap: .5rem 1rem;
-  direction: rtl;
-}

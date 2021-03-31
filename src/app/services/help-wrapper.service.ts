@@ -41,16 +41,24 @@ export class HelpWrapperService {
     }
     else if (currentRoute === '/wr/mu/edit' || currentRoute === '/wr/mu/all') {
       this.messageToShow.title = 'مشاهده و ویرایش کاربران';
-      this.messageToShow.messageOne = 'این قسمت شامل بخش های مشاهده همه کاربران و افزودن کاربر جدید می‌باشد. با وارد شدن به بخش مشاهده کاربران';
-      this.messageToShow.imgOne = 'assets/imgs/help/editContacts.PNG';
-      this.messageToShow.messageTwo = 'اطلاعات کلی کاربران مشخص میباشد. قفل به معنای دسترسی یا عدم دسترسی کاربر به برنامه میباشد. درصورتی که کاربری به دفعات متعدد به اشتباه نام کاربری و گذرواژه را وارد کند درمدت زمان مشخصی قفل میشود و قادر به وارد شدن ندارد. مدت زمان آن نیز در قسمت سطح دسترسی قابل تنظیم می باشد.فعال یا غیر فعال بودن به معنای دسترسی کاربر به برنامه است و مدت مشخصی ندارد.اطلاعات هر کاربری میتواند ویرایش شود. ';
+      this.messageToShow.messageOne = 'این قسمت شامل بخش های مشاهده همه کاربران و افزودن کاربر جدید می‌باشد.';
+      this.messageToShow.imgOne = 'assets/imgs/help/edit/editContacts.PNG';
+      this.messageToShow.messageTwo = ' بخش مشاهده کاربران، اطلاعات کلی و ویرایش کاربران در دسترس میباشد. سه آیکن سمت چپ مربوط به ویرایش اطلاعات کاربر، جزئیات ورود های قبلی و تنظیمات بیشتر کاربر میباشد. تنظیمات بیشتر برای فعال سازی، غیرفعال سازی و بازنشانی رمز عبور میباشد.';
       this.messageToShow.imgTwo = 'assets/imgs/help/editContacts2.PNG';
-      this.messageToShow.messageThree = 'ویرایش شامل:  مشخصات کاربر، دسترسی به مناطق، دسترسی به خدمات و انتخاب گروه دسترسی می‌باشد ';
+      this.messageToShow.messageThree = 'بازنشانی بمعنای تغییر رمز عبور به شماره موبایل کابر است.قفل به معنای دسترسی یا عدم دسترسی کاربر به برنامه میباشد. درصورتی که کاربری به دفعات متعدد به اشتباه نام کاربری و گذرواژه را وارد کند در مدت زمان مشخصی قفل میشود و قادر به ورود نخواهد بود. مدت زمان آن نیز در قسمت سطح دسترسی قابل تنظیم می باشد.فعال یا غیر فعال بودن به معنای دسترسی کاربر به برنامه است و مدت مشخصی ندارد.اطلاعات هر کاربری میتواند ویرایش شود';
+    }
+    else if (currentRoute.includes('/wr/mu/edit')) {
+      this.messageToShow.title = 'ویرایش کاربر';
+      this.messageToShow.messageOne = 'این قسمت به ویرایش اطلاعات شخصی کاربر مانند نام کاربری یا کد کاربری، نواحی قابل دسترس کاربر، سطح دسترسی ها و نقش کاربر تقسیم میشود. دسترسی به خدمات کاربر در این قسمت مشخص میشود. زیر بخش نواحی برای دسترسی به ناحیه مدنظر کاربر درنظر گرفته شده است.';
+      this.messageToShow.imgOne = 'assets/imgs/help/edit/edit1.JPG';
+      this.messageToShow.messageTwo = 'زیر بخش سطح دسترسی به خدمات شامل اپلیکیشن قرائت ، مدیریت سامانه و سامانه قرائت کنتور است که محدود کننده سطح دسترسی به کاربر است';
+      this.messageToShow.imgTwo = 'assets/imgs/help/edit/edit2.JPG';
+      this.messageToShow.messageThree = '';
     }
     else if (currentRoute === '/wr/mu/add') {
       this.messageToShow.title = 'افزودن کاربر';
       this.messageToShow.messageOne = 'افزودن کاربر : برای افزودن کاربر جدید لازم است مشخصات کاربر، دسترسی به مناطق، دسترسی به خدمات و انتخاب گروه دسترسی کامل شوند.';
-      this.messageToShow.imgOne = 'assets/imgs/help/editContacts.png';
+      this.messageToShow.imgOne = 'assets/imgs/help/edit/editContacts.png';
       this.messageToShow.messageThree = '';
       this.messageToShow.messageTwo = '';
       this.messageToShow.imgTwo = '';

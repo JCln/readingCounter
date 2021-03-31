@@ -28,9 +28,9 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(UserInputsComponent) userInfos: any;
   userInputWrapper: IAddUserInfos;
   userDetails: IAddUserInfos = {
-    userCode: 0,
-    username: '',
-    password: '',
+    userCode: null,
+    username: null,
+    password: null,
     confirmPassword: '',
     firstName: '',
     sureName: '',

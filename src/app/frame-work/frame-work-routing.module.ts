@@ -7,7 +7,6 @@ const routes: Routes = [
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(profile => profile.ProfileModule) },
   { path: 'apk', loadChildren: () => import('./apk/apk.module').then(apk => apk.ApkModule) },
   { path: 'msge', loadChildren: () => import('./messages/messages.module').then(msge => msge.MessagesModule) },
-  { path: 'bi', loadChildren: () => import('./base-info/base-info.module').then(bi => bi.BaseInfoModule) },
   { path: 'privacy', loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) },
   { path: 'rpts/exm', loadChildren: () => import('./reports/reports.module').then(reports => reports.ReportsModule) },
   { path: 'm', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) },

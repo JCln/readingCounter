@@ -8,10 +8,10 @@ import { IAddUserInfos } from 'src/app/Interfaces/iuser-manager';
 })
 export class UserInputsComponent {
   userInputForm: IAddUserInfos = {
-    userCode: 0,
-    username: '',
-    password: '',
-    confirmPassword: '',
+    userCode: null,
+    username: null,
+    password: null,
+    confirmPassword: null,
     firstName: '',
     sureName: '',
     email: '',
@@ -21,5 +21,5 @@ export class UserInputsComponent {
     isActive: false,
     deviceId: ''
   };
-  
+
 }

@@ -1,5 +1,7 @@
 <p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    dir="rtl" styleClass="p-datatable-responsive">
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
+    [filterDelay]="0" dir="rtl" [globalFilterFields]="['zoneId','zoneTitle','reportId','reportTitle','itemCount']"
+    styleClass="p-datatable-responsive">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
@@ -15,17 +17,6 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-
-        <tr>
-            <th *ngFor="let col of columns">
-
-            </th>
-
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 

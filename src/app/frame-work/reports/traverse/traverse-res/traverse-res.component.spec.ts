@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BaseInfoComponent } from './base-info.component';
+import { TraverseResComponent } from './traverse-res.component';
 
-describe('BaseInfoComponent', () => {
-  let component: BaseInfoComponent;
-  let fixture: ComponentFixture<BaseInfoComponent>;
+describe('TraverseResComponent', () => {
+  let component: TraverseResComponent;
+  let fixture: ComponentFixture<TraverseResComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BaseInfoComponent ]
+      declarations: [ TraverseResComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BaseInfoComponent);
+    fixture = TestBed.createComponent(TraverseResComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

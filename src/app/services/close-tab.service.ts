@@ -153,22 +153,22 @@ export class CloseTabService {
       case '/wr/m/cr':
         this.saveDataForCounterReport = '';
         break;
-      case '/wr/track/imported':
+      case '/wr/m/track/imported':
         this.saveDataForTrackImported = '';
         break;
-      case '/wr/track/loaded':
+      case '/wr/m/track/loaded':
         this.saveDataForTrackLoaded = '';
         break;
-      case '/wr/track/reading':
+      case '/wr/m/track/reading':
         this.saveDataForTrackReading = '';
         break;
-      case '/wr/track/offloaded':
+      case '/wr/m/track/offloaded':
         this.saveDataForTrackOffloaded = '';
         break;
-      case '/wr/track/finished':
+      case '/wr/m/track/finished':
         this.saveDataForTrackFinished = '';
         break;
-      case '/wr/track/fwu':
+      case '/wr/m/track/fwu':
         this.saveDataForFollowUp = '';
         break;
       case '/wr/privacy':

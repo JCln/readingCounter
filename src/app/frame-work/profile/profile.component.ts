@@ -47,8 +47,14 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+  toDefaultPassword = () => {
+    this.password.confirmPassword = '';
+    this.password.newPassword = '';
+    this.password.oldPassword = '';
+  }
   changePassword = () => {
     this.profileService.changePassword(this.password);
+    this.toDefaultPassword();
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnSelectedProfile();

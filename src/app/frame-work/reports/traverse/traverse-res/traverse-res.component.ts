@@ -5,11 +5,11 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
 @Component({
-  selector: 'app-master-res',
-  templateUrl: './master-res.component.html',
-  styleUrls: ['./master-res.component.scss']
+  selector: 'app-traverse-res',
+  templateUrl: './traverse-res.component.html',
+  styleUrls: ['./traverse-res.component.scss']
 })
-export class MasterResComponent implements OnInit {
+export class TraverseResComponent implements OnInit {
   @Input() dataSource: any;
   subscription: Subscription[] = [];
 
@@ -56,5 +56,4 @@ export class MasterResComponent implements OnInit {
   refreshTable = () => {
     this.ngOnInit();
   }
-
 }

@@ -64,8 +64,6 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else {
       this.dataSource = await this.getDataSource();
-      console.log(this.dataSource);
-
       this.closeTabService.saveDataForTrackReading = this.dataSource;
     }
   }
