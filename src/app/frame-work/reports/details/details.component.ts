@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IReadingReportReq } from 'src/app/Interfaces/imanage';
+import { IReadingReportDetails, IReadingReportReq } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
-
-import { IReadingReportDetails } from './../../../Interfaces/imanage';
 
 @Component({
   selector: 'app-details',
@@ -34,9 +32,9 @@ export class DetailsComponent implements OnInit {
     }
   ]
   _isOrderByDate: boolean = false;
-  canShowEditButton: boolean = false;
   _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
+  karbariDictionary: IDictionaryManager[] = [];
   readingReportMaster: IReadingReportDetails[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -75,8 +73,11 @@ export class DetailsComponent implements OnInit {
   }
   connectToServer = async () => {
     this.readingReportMaster = await this.readingReportManagerService.postRRDetailsManager();
-    this.zoneDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.getCounterStateDictionary();
+    if (!this.readingReportMaster.length) {
+      this.readingReportManagerService.emptyMessage();
+      return;
+    }
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
   }
   receiveFromDateJalali = ($event: string) => {
     this.readingReportReq.fromDate = $event;
@@ -89,13 +90,9 @@ export class DetailsComponent implements OnInit {
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
-    this.ShowDynamics();
-  }
-  ShowDynamics = () => {
-    this.canShowEditButton = true;
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRDetails(this.readingReportReq);
+    const temp = this.readingReportManagerService.verificationRRDetails(this.readingReportReq, this._isOrderByDate);
     if (temp)
       this.connectToServer();
   }

@@ -341,7 +341,7 @@ export interface IReadingReportReq {
     fromDate: string,
     toDate: string,
     counterReaderId: string,
-    readingPeriodId: string,
+    readingPeriodId: number,
     reportCode: number,
     year: number
 }
@@ -371,5 +371,28 @@ export interface IReadingReportDetails {
     offloadDateJalali: string,
     counterSerial: string,
     possibleCounterSerial: string
+}
+export interface IReadingReportTraverse {
+    billId: string,
+    radif: number,
+    eshterak: string,
+    fulName: string,
+    address: string,
+    karbariCode: number,
+    possibleKarbariCode: number,
+    ahadMaskooniOrAsli: number,
+    possibleAhadMaskooniOrAsli: number,
+    ahadTejariOrFari: number,
+    possibleAhadTejariOrFari: number,
+    ahadSaierOrAbBaha: number,
+    possibleSaierOrAbBaha: number,
+    counterReaderName: string,
+    offloadDateJalali: string,
+    counterSerial: string,
+    possibleCounterSerial: string,
+    possibleAddress: string,
+    mobile: string,
+    possibleMobile: string,
+    possibleEmpty: number
 }
 //

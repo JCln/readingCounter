@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -19,7 +20,8 @@ export class MasterResComponent implements OnInit {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private readingReportManagerService: ReadingReportManagerService
+    private readingReportManagerService: ReadingReportManagerService,
+    private _location: Location
   ) {
   }
 
@@ -39,8 +41,8 @@ export class MasterResComponent implements OnInit {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/track/loaded')
-          this.ngOnInit();
+        if (res === '/wr/rpts/exm/master')
+          this._location.back();
       }
     })
     )

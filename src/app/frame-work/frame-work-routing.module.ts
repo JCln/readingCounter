@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'apk', loadChildren: () => import('./apk/apk.module').then(apk => apk.ApkModule) },
   { path: 'msge', loadChildren: () => import('./messages/messages.module').then(msge => msge.MessagesModule) },
   { path: 'privacy', loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) },
-  { path: 'rpts/exm', loadChildren: () => import('./reports/reports.module').then(reports => reports.ReportsModule) },
+  { path: 'rpts', loadChildren: () => import('./reports/reports.module').then(reports => reports.ReportsModule) },
   { path: 'm', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) },
   { path: 'mu', loadChildren: () => import('./user-manager/user-manager.module').then(userManager => userManager.UserManagerModule) }
 ];

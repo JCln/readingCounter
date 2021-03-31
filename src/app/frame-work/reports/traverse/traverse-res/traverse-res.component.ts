@@ -30,7 +30,7 @@ export class TraverseResComponent implements OnInit {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRMaster();
+    this._selectCols = this.readingReportManagerService.columnSelectedRRTraverse();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class TraverseResComponent implements OnInit {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/track/loaded')
+        if (res === '/wr/rpts/mam/trv')
           this.ngOnInit();
       }
     })

@@ -39,7 +39,7 @@ export class DetailsResComponent implements OnInit {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/track/loaded')
+        if (res === '/wr/rpts/exm/details')
           this.ngOnInit();
       }
     })

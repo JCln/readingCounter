@@ -30,7 +30,7 @@ export class KarkardResComponent implements OnInit {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRMaster();
+    this._selectCols = this.readingReportManagerService.columnSelectedRRKarkard();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class KarkardResComponent implements OnInit {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/track/loaded')
+        if (res === '/wr/rpts/mam/karkard')
           this.ngOnInit();
       }
     })
@@ -56,4 +56,5 @@ export class KarkardResComponent implements OnInit {
   refreshTable = () => {
     this.ngOnInit();
   }
+
 }

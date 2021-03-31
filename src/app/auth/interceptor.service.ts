@@ -31,13 +31,13 @@ export class InterceptorService implements HttpInterceptor {
       .pipe(
         retryWhen(errors => errors.pipe(
           mergeMap((error: HttpErrorResponse, retryAttempt: number) => {
-            if (retryAttempt === 1) {
+            if (retryAttempt === 0) {
               return throwError(error); // no retry
             }
             return of(error); // retry
           }),
           delay(ENSnackBarTimes.fourMili),
-          take(1)
+          take(0)
         )),
         catchError((error => {
           if (

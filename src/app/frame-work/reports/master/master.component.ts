@@ -33,7 +33,6 @@ export class MasterComponent implements OnInit {
     }
   ]
   _isOrderByDate: boolean = false;
-  canShowEditButton: boolean = false;
   _selectedKindId: string = '';
   readingReportMaster: IReadingReportMaster[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -72,8 +71,8 @@ export class MasterComponent implements OnInit {
   }
   connectToServer = async () => {
     this.readingReportMaster = await this.readingReportManagerService.postRRMasterManager();
-    console.log(this.readingReportMaster);
-
+    if (!this.readingReportMaster)
+      this.readingReportManagerService.emptyMessage();
   }
   receiveFromDateJalali = ($event: string) => {
     this.readingReportReq.fromDate = $event;
@@ -86,13 +85,9 @@ export class MasterComponent implements OnInit {
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
-    this.ShowDynamics();
-  }
-  ShowDynamics = () => {
-    this.canShowEditButton = true;
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRMaster(this.readingReportReq);
+    const temp = this.readingReportManagerService.verificationRRMaster(this.readingReportReq, this._isOrderByDate);
     if (temp)
       this.connectToServer();
   }

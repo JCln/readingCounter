@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IReadingReportDetails, IReadingReportReq } from 'src/app/Interfaces/imanage';
+import { IReadingReportReq } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
@@ -32,10 +32,10 @@ export class KarkardComponent implements OnInit {
     }
   ]
   _isOrderByDate: boolean = false;
-  canShowEditButton: boolean = false;
   _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
-  readingReportMaster: IReadingReportDetails[] = [];
+  karbariDictionary: IDictionaryManager[] = [];
+  readingReportMaster: any[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
@@ -56,7 +56,7 @@ export class KarkardComponent implements OnInit {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/rpts/exm/details') {
+        if (res === '/wr/rpts/mam/karkard') {
           this.classWrapper();
         }
       }
@@ -72,9 +72,12 @@ export class KarkardComponent implements OnInit {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   connectToServer = async () => {
-    this.readingReportMaster = await this.readingReportManagerService.postRRDetailsManager();
-    this.zoneDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.getCounterStateDictionary();
+    this.readingReportMaster = await this.readingReportManagerService.postRRKarkardManager();
+    if (!this.readingReportMaster.length) {
+      this.readingReportManagerService.emptyMessage();
+      return;
+    }
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
   }
   receiveFromDateJalali = ($event: string) => {
     this.readingReportReq.fromDate = $event;
@@ -87,15 +90,10 @@ export class KarkardComponent implements OnInit {
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
-    this.ShowDynamics();
-  }
-  ShowDynamics = () => {
-    this.canShowEditButton = true;
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRDetails(this.readingReportReq);
+    const temp = this.readingReportManagerService.verificationRRKarkard(this.readingReportReq, this._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
-
 }

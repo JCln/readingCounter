@@ -111,8 +111,7 @@ export class UtilsService {
     this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
   }
   snackBarMessageFailed = (message: string) => {
-    console.log('nothing yet');
-
+    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
   }
 
   // routing
