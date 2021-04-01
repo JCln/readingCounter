@@ -395,4 +395,34 @@ export interface IReadingReportTraverse {
     possibleMobile: string,
     possibleEmpty: number
 }
+
+export interface IReadingReportKarkard {
+    offloadDayalali: string,
+    fromEshterak: string,
+    toEshterak: string,
+    counterReaderName: string,
+    fromTime: string,
+    toTime: string,
+    duration: number,
+    overalCount: number,
+    adiCount: number,
+    faqedCount: number,
+    maneCount: number,
+    xarabCount: number,
+    tavizCount: number,
+    saierCount: number
+}
+export interface IReadingReportDisposalHours {
+    dayJalali: string,
+    fromEshterak: string,
+    toEshterak: string,
+    counterReaderName: string,
+    overalCount: number,
+    _8To10: number,
+    _10To12: number,
+    _12To14: number,
+    _14To16: number,
+    _16To18: number,
+    saierCount: number
+}
 //

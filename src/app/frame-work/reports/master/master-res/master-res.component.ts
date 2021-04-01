@@ -1,5 +1,4 @@
-import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -10,7 +9,7 @@ import { ReadingReportManagerService } from 'src/app/services/reading-report-man
   templateUrl: './master-res.component.html',
   styleUrls: ['./master-res.component.scss']
 })
-export class MasterResComponent implements OnInit {
+export class MasterResComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() dataSource: any;
   subscription: Subscription[] = [];
 
@@ -20,8 +19,7 @@ export class MasterResComponent implements OnInit {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private readingReportManagerService: ReadingReportManagerService,
-    private _location: Location
+    private readingReportManagerService: ReadingReportManagerService
   ) {
   }
 
@@ -42,7 +40,7 @@ export class MasterResComponent implements OnInit {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === '/wr/rpts/exm/master')
-          this._location.back();
+          this.ngOnInit();
       }
     })
     )

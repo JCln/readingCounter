@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -41,8 +40,7 @@ export class MasterComponent implements OnInit {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
-    public route: ActivatedRoute
+    private interactionService: InteractionService
   ) { }
 
   classWrapper = async () => {
@@ -71,7 +69,7 @@ export class MasterComponent implements OnInit {
   }
   connectToServer = async () => {
     this.readingReportMaster = await this.readingReportManagerService.postRRMasterManager();
-    if (!this.readingReportMaster)
+    if (!this.readingReportMaster.length)
       this.readingReportManagerService.emptyMessage();
   }
   receiveFromDateJalali = ($event: string) => {
@@ -87,6 +85,7 @@ export class MasterComponent implements OnInit {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
+    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '')
     const temp = this.readingReportManagerService.verificationRRMaster(this.readingReportReq, this._isOrderByDate);
     if (temp)
       this.connectToServer();

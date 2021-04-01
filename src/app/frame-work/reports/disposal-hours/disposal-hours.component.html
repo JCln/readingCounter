@@ -1,0 +1,41 @@
+<main class="main" *ngIf="!readingReportMaster.length">
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <section class="static_part">
+
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.zoneId" name="zoneId">
+                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </section>
+
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">از تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">تا تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+        <footer>
+            <button *ngIf="readingReportReq.zoneId" type="submit" class="btn_1">مشاهده</button>
+        </footer>
+    </form>
+</main>
+<div *ngIf="readingReportMaster.length">
+    <app-disposal-hours-res [dataSource]="readingReportMaster"></app-disposal-hours-res>
+</div>

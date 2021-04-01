@@ -25,11 +25,10 @@ export class SpinnerInterceptorService implements HttpInterceptor {
         catchError((error) => {
           // let errorDesc = error.json();
           if (error.status === 400) {
-            // this.snackWrapperService.openSnackBar('داده های ورودی را کنترل نمایید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
             this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }
           if (error.status === 401) {
-            console.log(401);
+            this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }
           if (error.status === 403) {
             this.snackWrapperService.openSnackBar('شما به این قسمت دسترسی ندارید', ENSnackBarTimes.fourMili, ENSnackBarColors.danger);

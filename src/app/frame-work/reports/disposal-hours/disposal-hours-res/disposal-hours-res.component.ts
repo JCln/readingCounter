@@ -1,15 +1,14 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
 @Component({
-  selector: 'app-traverse-res',
-  templateUrl: './traverse-res.component.html',
-  styleUrls: ['./traverse-res.component.scss']
+  selector: 'app-disposal-hours-res',
+  templateUrl: './disposal-hours-res.component.html',
+  styleUrls: ['./disposal-hours-res.component.scss']
 })
-export class TraverseResComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DisposalHoursResComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() dataSource: any;
   subscription: Subscription[] = [];
 
@@ -18,7 +17,6 @@ export class TraverseResComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService,
     private readingReportManagerService: ReadingReportManagerService
   ) {
   }
@@ -30,7 +28,7 @@ export class TraverseResComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRTraverse();
+    this._selectCols = this.readingReportManagerService.columnSelectedRRKarkard();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {
@@ -39,7 +37,7 @@ export class TraverseResComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/rpts/mam/trv')
+        if (res === '/wr/rpts/mam/dh')
           this.ngOnInit();
       }
     })
@@ -56,4 +54,5 @@ export class TraverseResComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.ngOnInit();
   }
+
 }

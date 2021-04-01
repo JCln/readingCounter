@@ -48,7 +48,7 @@ export class ReadingReportManagerService {
       { field: 'billId', header: 'شناسه قبض', isSelected: true, readonly: true },
       { field: 'radif', header: 'ردیف', isSelected: true, readonly: true },
       { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: false },
-      { field: 'fulName', header: 'نام نام خانوادگی', isSelected: true, readonly: true },
+      { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
       { field: 'address', header: 'نشانی', isSelected: true, readonly: true },
       { field: 'possibleAddress', header: 'نشانی پیمایش', isSelected: false, readonly: true },
       { field: 'karbariCode', header: 'کد کاربری', isSelected: false, readonly: false },
@@ -70,24 +70,35 @@ export class ReadingReportManagerService {
   }
   columnSelectedRRKarkard = (): IObjectIteratation[] => {
     return [
-      { field: '', header: 'ش قبض', isSelected: true, readonly: true },
-      { field: '', header: 'ردیف', isSelected: false, readonly: true },
-      { field: '', header: 'اشتراک', isSelected: false, readonly: true },
-      { field: '', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
-      { field: '', header: 'نشانی', isSelected: false, readonly: true },
-      { field: '', header: 'کاربری', isSelected: false, readonly: true },
-      { field: '', header: 'کاربری پیمایش', isSelected: false, readonly: true },
-      { field: '', header: 'آحاد مسکونی/اصلی', isSelected: true, readonly: true },
-      { field: '', header: 'مسکونی/اصلی پیمایش', isSelected: false, readonly: true },
-      { field: '', header: 'آحاد تجاری/فصلی', isSelected: false, readonly: true },
-      { field: '', header: 'تجاری/فصلی پیمایش', isSelected: false, readonly: true },
-      { field: '', header: 'آحاد سایر/آبها', isSelected: false, readonly: true },
-      { field: '', header: 'سایر/آبها پیمایش', isSelected: false, readonly: true },
-      { field: '', header: 'گزارش', isSelected: true, readonly: true },
-      { field: '', header: 'مامور قرائت', isSelected: true, readonly: true },
-      { field: '', header: 'تاریخ بارگذاری', isSelected: true, readonly: true },
-      { field: '', header: 'سریال کنتور', isSelected: false, readonly: true },
-      { field: '', header: 'سریال پیمایش', isSelected: false, readonly: true }
+      { field: 'offloadDayalali', header: 'تاریخ بارگذاری', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
+      { field: 'counterReaderName', header: 'مامور قرائت', isSelected: true, readonly: true },
+      { field: 'fromTime', header: 'از تاریخ', isSelected: true, readonly: true },
+      { field: 'toTime', header: 'تا تاریخ', isSelected: true, readonly: true },
+      { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
+      { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
+      { field: 'adiCount', header: 'تعداد', isSelected: true, readonly: true },
+      { field: 'faqedCount', header: 'فاقد', isSelected: true, readonly: true },
+      { field: 'maneCount', header: 'مانع', isSelected: true, readonly: true },
+      { field: 'xarabCount', header: 'خراب', isSelected: true, readonly: true },
+      { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
+      { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true }
+    ];
+  }
+  columnSelectedRRDisposalHours = (): IObjectIteratation[] => {
+    return [
+      { field: 'dayJalali', header: 'روز', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
+      { field: 'counterReaderName', header: 'مامور قرائت', isSelected: true, readonly: true },
+      { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
+      { field: '_8To10', header: '8 - 10', isSelected: true, readonly: true },
+      { field: '_10To12', header: '10 - 12', isSelected: true, readonly: true },
+      { field: '_12To14', header: '12 - 14', isSelected: true, readonly: true },
+      { field: '_14To16', header: '14 - 16', isSelected: true, readonly: true },
+      { field: '_16To18', header: '16 - 18', isSelected: true, readonly: true },
+      { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
     ];
   }
 
@@ -132,6 +143,17 @@ export class ReadingReportManagerService {
       console.error(error);
     }
   }
+  postRRDisposalHoursManager = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.postRRDisposalHoursanager(this.readingReportReq).subscribe((res: any) => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   postRRDetailsManager = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
@@ -169,22 +191,12 @@ export class ReadingReportManagerService {
       resolve(this.dictionaryWrapperService.getKarbariDictionary());
     });
   }
-  getCounterStateDictionary = (): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getCounterStateDictionary());
-    });
-  }
+  // getCounterStateDictionary = (): Promise<any> => {
+  //   return new Promise((resolve) => {
+  //     resolve(this.dictionaryWrapperService.getCounterStateDictionary());
+  //   });
+  // }
   //
-  private nullTheDates = (): boolean => {
-    this.readingReportReq.fromDate = '';
-    this.readingReportReq.toDate = '';
-    return;
-  }
-  private nullTheReadingPeriodId = (): boolean => {
-    this.readingReportReq.readingPeriodId = null;
-    this.readingReportReq.year = 0;
-    return;
-  }
 
   private datesValidationMaster = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
@@ -302,27 +314,51 @@ export class ReadingReportManagerService {
     return true;
   }
 
+  private datesValidationDisposalHours = (): boolean => {
+    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
+      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
+      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportReq.toDate)) {
+      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      return false;
+    }
+    return true;
+  }
+
   // VerificationS
   verificationRRTraverse = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
-    return (isValidateByDate ? (this.datesValidationTraverse() || this.nullTheReadingPeriodId()) : (this.periodValidationTraverse() || this.nullTheDates()))
+    return isValidateByDate ? this.datesValidationTraverse() : this.periodValidationTraverse()
   }
   verificationRRKarkard = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
-    return (isValidateByDate ? (this.datesValidationKarkard() || this.nullTheReadingPeriodId()) : (this.periodValidationKarkard() || this.nullTheDates()))
+    return isValidateByDate ? this.datesValidationKarkard() : this.periodValidationKarkard()
   }
   verificationRRMaster = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
-    return (isValidateByDate ? (this.datesValidationMaster() || this.nullTheReadingPeriodId()) : (this.periodValidationMaster() || this.nullTheDates()))
+    return isValidateByDate ? this.datesValidationMaster() : this.periodValidationMaster()
   }
   verificationRRDetails = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
-    return (isValidateByDate ? (this.datesValidationDetails() || this.nullTheReadingPeriodId()) : (this.periodValidationDetails() || this.nullTheDates()))
+    return isValidateByDate ? this.datesValidationDetails() : this.periodValidationDetails()
+  }
+  verificationRRDisposalHours = (readingReportReq: IReadingReportReq): boolean => {
+    this.readingReportReq = readingReportReq;
+    return this.datesValidationDisposalHours();
   }
   // 
   // snack bar
   emptyMessage = () => {
     this.utilsService.snackBarMessageFailed('موردی یافت نشد');
   }
+  // toDefaultVals = () => {
+  //   this.nullTheDates();
+  //   this.nullTheReadingPeriodId();
+  // }
   // 
 }

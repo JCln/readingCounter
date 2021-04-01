@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -9,7 +9,7 @@ import { ReadingReportManagerService } from 'src/app/services/reading-report-man
   templateUrl: './karkard-res.component.html',
   styleUrls: ['./karkard-res.component.scss']
 })
-export class KarkardResComponent implements OnInit {
+export class KarkardResComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() dataSource: any;
   subscription: Subscription[] = [];
 

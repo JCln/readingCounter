@@ -18,6 +18,11 @@
                 {{col.header}}
             </th>
         </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+            </th>
+        </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-dataSource let-columns="columns">

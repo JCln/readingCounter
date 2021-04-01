@@ -6,6 +6,8 @@ import { IDictionaryManager, ISearchInOrderTo } from 'src/app/Interfaces/ioveral
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
+import { IReadingReportKarkard } from './../../../Interfaces/imanage';
+
 @Component({
   selector: 'app-karkard',
   templateUrl: './karkard.component.html',
@@ -35,7 +37,7 @@ export class KarkardComponent implements OnInit {
   _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
-  readingReportMaster: any[] = [];
+  readingReportMaster: IReadingReportKarkard[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
@@ -92,6 +94,7 @@ export class KarkardComponent implements OnInit {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
+    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
     const temp = this.readingReportManagerService.verificationRRKarkard(this.readingReportReq, this._isOrderByDate);
     if (temp)
       this.connectToServer();

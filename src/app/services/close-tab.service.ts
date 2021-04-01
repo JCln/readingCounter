@@ -82,6 +82,13 @@ export class CloseTabService {
   // number of Logs
   saveDataForUserLoggins: any;
   // 
+  // reading reports 
+  saveDataForRRTraverse: any;
+  saveDataForRRKarkard: any;
+  saveDataForRRMaster: any;
+  saveDataForRRDetails: any;
+  saveDataForRRDisposalHours: any;
+  // 
 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
@@ -184,6 +191,21 @@ export class CloseTabService {
         break;
       case '/wr/m/dbf':
         this.saveDataForOutputDBF = '';
+        break;
+      case '/wr/rpts/mam/trv':
+        this.saveDataForRRTraverse = '';
+        break;
+      case '/wr/rpts/mam/dh':
+        this.saveDataForRRDisposalHours = '';
+        break;
+      case '/wr/rpts/mam/karkard':
+        this.saveDataForRRKarkard = '';
+        break;
+      case '/wr/rpts/exm/master':
+        this.saveDataForRRMaster = '';
+        break;
+      case '/wr/rpts/exm/details':
+        this.saveDataForRRDetails = '';
         break;
 
     }

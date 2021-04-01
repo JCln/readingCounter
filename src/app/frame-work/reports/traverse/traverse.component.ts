@@ -94,6 +94,7 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
+    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
     const temp = this.readingReportManagerService.verificationRRTraverse(this.readingReportReq, this._isOrderByDate);
     if (temp)
       this.connectToServer();

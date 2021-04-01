@@ -121,6 +121,9 @@ export class InterfaceManagerService {
   postRRKarkardManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/List/Offloaded/Karkard', body);
   }
+  postRRDisposalHoursanager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/List/Offloaded/DispersalHours', body);
+  }
   // 
   // List Manager 
 
