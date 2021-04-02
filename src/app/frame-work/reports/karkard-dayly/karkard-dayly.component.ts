@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IReadingReportReq } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
 
 @Component({
-  selector: 'app-disposal-hours',
-  templateUrl: './disposal-hours.component.html',
-  styleUrls: ['./disposal-hours.component.scss']
+  selector: 'app-karkard-dayly',
+  templateUrl: './karkard-dayly.component.html',
+  styleUrls: ['./karkard-dayly.component.scss']
 })
-export class DisposalHoursComponent implements OnInit {
+export class KarkardDaylyComponent implements OnInit {
   readingReportReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',
@@ -22,9 +22,23 @@ export class DisposalHoursComponent implements OnInit {
     reportCode: 0,
     year: 1400
   }
+  searchInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: true
+    },
+    {
+      title: 'دوره',
+      isSelected: false
+    }
+  ]
   _isOrderByDate: boolean = false;
   _selectedKindId: string = '';
+  _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  karbariDictionary: IDictionaryManager[] = [];
+  readingPeriodKindDictionary: IDictionaryManager[] = [];
+  readingPeriodDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
 
   constructor(
@@ -34,18 +48,17 @@ export class DisposalHoursComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
+    this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.receiveYear();
   }
   ngOnInit() {
     this.classWrapper();
   }
-  routeToChild = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/dh/res');
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/rpts/mam/dh') {
+        if (res === '/wr/rpts/mam/karkardDaily') {
           this.classWrapper();
         }
       }
@@ -60,14 +73,24 @@ export class DisposalHoursComponent implements OnInit {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+  routeToChild = () => {
+    this.readingReportManagerService.routeTo('/wr/rpts/mam/karkardDaily/res');
+  }
   receiveFromDateJalali = ($event: string) => {
     this.readingReportReq.fromDate = $event;
   }
   receiveToDateJalali = ($event: string) => {
     this.readingReportReq.toDate = $event;
   }
+  receiveYear = () => {
+    this._years = this.readingReportManagerService.getYears();
+  }
+  getReadingPeriod = async () => {
+    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+  }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRDisposalHours(this.readingReportReq);
+    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
+    const temp = this.readingReportManagerService.verificationRRKarkard(this.readingReportReq, this._isOrderByDate);
     if (temp)
       this.routeToChild();
   }

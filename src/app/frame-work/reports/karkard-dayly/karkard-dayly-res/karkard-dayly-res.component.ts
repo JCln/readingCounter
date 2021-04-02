@@ -1,19 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IReadingReportTraverse } from 'src/app/Interfaces/imanage';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { IReadingReportKarkard } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
-
 @Component({
-  selector: 'app-traverse-res',
-  templateUrl: './traverse-res.component.html',
-  styleUrls: ['./traverse-res.component.scss']
+  selector: 'app-karkard-dayly-res',
+  templateUrl: './karkard-dayly-res.component.html',
+  styleUrls: ['./karkard-dayly-res.component.scss']
 })
-export class TraverseResComponent implements OnInit {
-  @Input() dataSource: IReadingReportTraverse[] = [];
+export class KarkardDaylyResComponent implements OnInit {
+  @Input() dataSource: IReadingReportKarkard[];
+  readingReportKarkardDaily: IReadingReportKarkard[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  subscription: Subscription[] = [];
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -32,12 +34,12 @@ export class TraverseResComponent implements OnInit {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRTraverse();
+    this._selectCols = this.readingReportManagerService.columnSelectedRRKarkardDaly();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.postRRTraverseManager();
-    if (!this.dataSource.length) {
+    this.readingReportKarkardDaily = await this.readingReportManagerService.postRRKarkardManager();
+    if (!this.readingReportKarkardDaily.length) {
       this.readingReportManagerService.emptyMessage();
       return;
     }
@@ -47,10 +49,10 @@ export class TraverseResComponent implements OnInit {
     this.connectToServer();
     this.insertSelectedColumns();
   }
-  backToPrevious = () => {
-    this.readingReportManagerService.backToPreviousPage();
-  }
   refreshTable = () => {
     this.ngOnInit();
+  }
+  backToPrevious = () => {
+    this.readingReportManagerService.backToPreviousPage();
   }
 }

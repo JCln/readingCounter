@@ -1,12 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IFollowUp, IFollowUpHistory } from 'src/app/Interfaces/imanage';
+import { IFollowUp, IFollowUpHistory, ITracking } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
-
-import { ITracking } from './../../../../../Interfaces/imanage';
 
 @Component({
   selector: 'app-desc',
@@ -20,7 +18,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     { field: 'inserterCode', header: 'کد کاربر' },
     { field: 'userDisplayName', header: 'نام نمایش' },
     { field: 'seen', header: 'دیده شده' },
-    { field: 'counterReaderName', header: 'مامور قرائت' },
+    { field: 'counterReaderName', header: 'مامور' },
     { field: 'trackStatusTitle', header: 'وضعیت' },
     { field: 'hasDetails', header: 'جزئیات' },
   ]

@@ -1,14 +1,19 @@
 <p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
     [filterDelay]="0" dir="rtl" [globalFilterFields]="['zoneId','zoneTitle','reportId','reportTitle','itemCount']"
-    styleClass="p-datatable-responsive">
+    styleClass="p-datatable-responsive" #tdv>
 
     <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
-            selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
+        <th>
+            <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
+                selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+            </p-multiSelect>
+        </th>
         <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
             <div class="tooltip_text">بارگیری مجدد جدول</div>
+        </i>
+        <i (click)="backToPrevious()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+            <div class="tooltip_text">بازگشت به ایجاد پیمایش</div>
         </i>
     </ng-template>
     <ng-template pTemplate="header" let-columns>

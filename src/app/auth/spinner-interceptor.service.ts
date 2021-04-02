@@ -28,7 +28,8 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }
           if (error.status === 401) {
-            this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+            console.log(401);
+            // this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }
           if (error.status === 403) {
             this.snackWrapperService.openSnackBar('شما به این قسمت دسترسی ندارید', ENSnackBarTimes.fourMili, ENSnackBarColors.danger);

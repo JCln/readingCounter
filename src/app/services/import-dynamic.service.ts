@@ -67,14 +67,14 @@ export class ImportDynamicService {
       }
     }
     if (!this.validationOnNull(this.importDynamicValue.counterReaderId)) {
-      this.snackWrapperService.openSnackBar('یک مامور قرائت انتخاب نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar('یک مامور انتخاب نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
   }
   validationInvalid = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
-      this.snackWrapperService.openSnackBar('مامور قرائتی در این ناحیه انتخاب نشده است', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+      this.snackWrapperService.openSnackBar('ماموری در این ناحیه انتخاب نشده است', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
       return false;
     }
     return true;

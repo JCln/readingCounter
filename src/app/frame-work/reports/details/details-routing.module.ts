@@ -7,7 +7,7 @@ import { DetailsComponent } from './details.component';
 const routes: Routes = [
   {
     path: '', component: DetailsComponent, children: [
-      { path: '', component: MasterResComponent }
+      { path: 'res', component: MasterResComponent }
     ]
   }
 ];

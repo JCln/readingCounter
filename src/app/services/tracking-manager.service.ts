@@ -21,8 +21,8 @@ export class TrackingManagerService {
       { field: 'isBazdid', header: 'بازدید', isSelected: false },
       { field: 'year', header: 'سال', isSelected: false },
       { field: 'isRoosta', header: 'روستایی', isSelected: false },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
       { field: 'fromDate', header: 'از تاریخ', isSelected: false },
       { field: 'toDate', header: 'تا تاریخ', isSelected: false },
       { field: 'itemQuantity', header: 'تعداد', isSelected: true },
@@ -30,7 +30,7 @@ export class TrackingManagerService {
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
       { field: 'displayRadif', header: 'ردیف', isSelected: false },
-      { field: 'counterReaderName', header: 'مامور قرائت', isSelected: false }
+      { field: 'counterReaderName', header: 'مامور', isSelected: false }
     ];
   }
   columnSelectedImportedList = (): IObjectIteratation[] => {
@@ -47,8 +47,8 @@ export class TrackingManagerService {
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
       { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true, readonly: false },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false },
-      { field: 'counterReaderName', header: 'مامور قرائت فعلی', isSelected: true, readonly: true },
-      { field: 'newCounterReaderName', header: 'مامور قرائت جدید', isSelected: false, readonly: false },
+      { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
+      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false },
       { field: 'displayRadif', header: 'ردیف', isSelected: true, readonly: false },
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true },

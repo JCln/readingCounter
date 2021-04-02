@@ -1,7 +1,8 @@
+import { Location } from '@angular/common';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { delay, mergeMap, retryWhen, take } from 'rxjs/operators';
@@ -18,7 +19,8 @@ export class InterceptorService implements HttpInterceptor {
 
   constructor(
     private jwtService: JwtService,
-    private authService: AuthService
+    private authService: AuthService,
+    private _location: Location
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -34,6 +36,8 @@ export class InterceptorService implements HttpInterceptor {
             if (retryAttempt === 0) {
               return throwError(error); // no retry
             }
+            this.authService.noAccessMessage();
+            this._location.back();
             return of(error); // retry
           }),
           delay(ENSnackBarTimes.fourMili),

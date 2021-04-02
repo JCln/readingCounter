@@ -1,4 +1,4 @@
-<main class="main" *ngIf="!readingReportMaster.length">
+<main class="main" *ngIf="route.children.length === 0">
     <form #form="ngForm" (ngSubmit)="verification()">
         <section class="static_part">
             <section class="order_by">
@@ -42,8 +42,12 @@
                 <div class="input_2" [hidden]="_isOrderByDate">
                     <div class="_key">سال</div>
                     <div class="_value">
-                        <app-date-jalali name="year" (dateJalEvent)="receiveYear($event)">
-                        </app-date-jalali>
+                        <mat-select style="color: blue" class=" _custom_option" placeholder="انتخاب مورد"
+                            [(ngModel)]="readingReportReq.year" [(value)]="readingReportReq.year" name="year">
+                            <mat-option style="color: blue" *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
                     </div>
                 </div>
             </section>
@@ -72,6 +76,4 @@
         </footer>
     </form>
 </main>
-<div *ngIf="readingReportMaster.length">
-    <app-traverse-res [dataSource]="readingReportMaster"></app-traverse-res>
-</div>
+<router-outlet></router-outlet>

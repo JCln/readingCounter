@@ -1,4 +1,4 @@
-<main class="main" *ngIf="!readingReportMaster.length">
+<main class="main" *ngIf="route.children.length === 0">
     <form #form="ngForm" (ngSubmit)="verification()">
         <section class="static_part">
 
@@ -36,6 +36,4 @@
         </footer>
     </form>
 </main>
-<div *ngIf="readingReportMaster.length">
-    <app-disposal-hours-res [dataSource]="readingReportMaster"></app-disposal-hours-res>
-</div>
+<router-outlet></router-outlet>

@@ -79,6 +79,10 @@ export interface ISearchInOrderTo {
     title: string;
     isSelected: boolean;
 }
+export interface ITitleValue {
+    title: string;
+    value: number;
+}
 export interface IObjectIteratation {
     field: string;
     header: string;

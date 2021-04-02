@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="input_2 this" *ngIf="userCounterReader.length">
-                    <div class="_key">مامور قرائت</div>
+                    <div class="_key">مامور</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.counterReaderId"
                         name="counterReaderId">
                         <mat-option *ngFor="let truefalse of userCounterReader" [value]="truefalse.id">

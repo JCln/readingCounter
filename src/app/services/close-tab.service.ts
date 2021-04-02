@@ -85,9 +85,12 @@ export class CloseTabService {
   // reading reports 
   saveDataForRRTraverse: any;
   saveDataForRRKarkard: any;
+  saveDataForRRkarkardDaily: any;
   saveDataForRRMaster: any;
   saveDataForRRDetails: any;
   saveDataForRRDisposalHours: any;
+  saveDataForRRGIS: any;
+
   // 
 
   // close config and remove data for specific page(component)
@@ -207,7 +210,12 @@ export class CloseTabService {
       case '/wr/rpts/exm/details':
         this.saveDataForRRDetails = '';
         break;
-
+      case '/wr/rpts/exm/karkardDaily':
+        this.saveDataForRRkarkardDaily = '';
+        break;
+      case '/wr/rpts/exm/gis':
+        this.saveDataForRRGIS = '';
+        break;
     }
     // listed all of the dynamic routes
     if (url.includes('/wr/m/l/pd/')) {

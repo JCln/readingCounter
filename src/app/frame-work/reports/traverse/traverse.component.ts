@@ -6,7 +6,7 @@ import { IDictionaryManager, ISearchInOrderTo } from 'src/app/Interfaces/ioveral
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
-import { IReadingReportTraverse } from './../../../Interfaces/imanage';
+import { ITitleValue } from './../../../Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-traverse',
@@ -21,7 +21,7 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 0
+    year: 1400
   }
   searchInOrderTo: ISearchInOrderTo[] = [
     {
@@ -35,9 +35,9 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
   ]
   _isOrderByDate: boolean = false;
   _selectedKindId: string = '';
+  _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
-  readingReportMaster: IReadingReportTraverse[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
@@ -51,6 +51,7 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
   classWrapper = async () => {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.receiveYear();
   }
   ngOnInit() {
     this.classWrapper();
@@ -73,13 +74,8 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  connectToServer = async () => {
-    this.readingReportMaster = await this.readingReportManagerService.postRRTraverseManager();
-    if (!this.readingReportMaster.length) {
-      this.readingReportManagerService.emptyMessage();
-      return;
-    }
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+  routeToChild = () => {
+    this.readingReportManagerService.routeTo('/wr/rpts/mam/trv/res');
   }
   receiveFromDateJalali = ($event: string) => {
     this.readingReportReq.fromDate = $event;
@@ -87,8 +83,8 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
   receiveToDateJalali = ($event: string) => {
     this.readingReportReq.toDate = $event;
   }
-  receiveYear = ($event: string) => {
-    this.readingReportReq.year = parseInt($event.substring(0, 4));
+  receiveYear = () => {
+    this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
@@ -97,7 +93,7 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
     const temp = this.readingReportManagerService.verificationRRTraverse(this.readingReportReq, this._isOrderByDate);
     if (temp)
-      this.connectToServer();
+      this.routeToChild();
   }
 
 }

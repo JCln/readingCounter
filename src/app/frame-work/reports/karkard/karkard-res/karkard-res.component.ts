@@ -1,5 +1,7 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IReadingReportKarkard } from 'src/app/Interfaces/imanage';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
@@ -9,9 +11,11 @@ import { ReadingReportManagerService } from 'src/app/services/reading-report-man
   templateUrl: './karkard-res.component.html',
   styleUrls: ['./karkard-res.component.scss']
 })
-export class KarkardResComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() dataSource: any;
+export class KarkardResComponent implements OnInit, OnDestroy {
+  dataSource: IReadingReportKarkard[] = [];
+
   subscription: Subscription[] = [];
+  karbariDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -33,20 +37,17 @@ export class KarkardResComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectCols = this.readingReportManagerService.columnSelectedRRKarkard();
     this._selectedColumns = this.customizeSelectedColumns();
   }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.postRRKarkardManager();
+    if (!this.dataSource.length) {
+      this.readingReportManagerService.emptyMessage();
+      return;
+    }
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+  }
   ngOnInit(): void {
+    this.connectToServer();
     this.insertSelectedColumns();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/karkard')
-          this.ngOnInit();
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
@@ -56,5 +57,7 @@ export class KarkardResComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.ngOnInit();
   }
-
+  backToPrevious = () => {
+    this.readingReportManagerService.backToPreviousPage();
+  }
 }
