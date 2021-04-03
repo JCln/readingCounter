@@ -105,5 +105,8 @@ export class AuthService {
   noAccessMessage = () => {
     this.snackWrapperService.openSnackBar('شما به این بخش دسترسی ندارید', ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
   }
+  goOutIn = () => {
+    this.snackWrapperService.openSnackBar('یکبار دیگر وارد شوید', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+  }
 
 }

@@ -1,12 +1,15 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/internal/operators/map';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerPDXY } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { IReadingReportGISReq, IReadingReportGISResponse } from './../../Interfaces/imanage';
 import { MapService } from './../../services/map.service';
 
 declare let L;
@@ -33,6 +36,9 @@ L.Marker.prototype.options.icon = defaultIcon;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+  private extrasNavigation: IReadingReportGISReq;
+  extraDataSourceRes: IReadingReportGISResponse[] = [];
+
   private map: L.Map;
   private mapItems: Imap[];
   private layerGroup = new L.FeatureGroup();
@@ -47,13 +53,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription;
 
   constructor(
-    private route: ActivatedRoute,
     private mapService: MapService,
     readonly mapItemsService: MapItemsService,
-    private router: Router,
     private readonly interactionService: InteractionService,
+    private readingReportManagerService: ReadingReportManagerService,
+    private route: ActivatedRoute,
+    private router: Router,
     private utilsService: UtilsService
   ) {
+    try {
+      this.extrasNavigation = this.getRouterExtras();
+    } catch (error) {
+      console.error(error);
+    }
   }
   private getMapItems = () => {
     this.mapItems = this.mapItemsService.getMapItems();
@@ -108,10 +120,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       }, i * delay);
     })
   }
-  private getXYPosition = (delay: number) => {
-    this.markersDataSourceXY.map((items, i) => {
+  private getXYPosition = (xyData: any, delay: number) => {
+    xyData.map((items, i) => {
       setTimeout(() => {
         this.circleToLeaflet(parseFloat(items.y), parseFloat(items.x), items);
+        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
+      }, i * delay);
+    })
+  }
+  private getXYPositionExtras = (xyData: any, delay: number) => {
+    xyData.map((items, i) => {
+      setTimeout(() => {
+        this.circleToExtrasLeaflet(parseFloat(items.y), parseFloat(items.x), items);
         this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
       }, i * delay);
     })
@@ -127,15 +147,29 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     this.canShowOptionsButton = true;
     this.markersDataSourceXY = await this.getPointerMarks(a);
-    console.log(this.markersDataSourceXY);
-
     this.mapConfigOptions(0);
+  }
+  private classWrapperWithExtras = async () => {
+    this.extraDataSourceRes = await this.readingReportManagerService.postRRGISManager();
+    if (!this.extraDataSourceRes.length) {
+      this.utilsService.snackBarMessageFailed('مقداری وجود ندارد');
+      return;
+    }
+    this.extrasConfigOptions(this.extraDataSourceRes, 0);
   }
   ngOnInit(): void {
     this.getMapItems();
     this.initMap();
-    this.classWrapper();
+    if (this.extrasNavigation) {
+      this.classWrapperWithExtras();
+    }
+    else {
+      this.classWrapper();
+    }
     this.addButtonsToLeaflet();
+  }
+  getRouterExtras = (): any => {
+    return this.router.getCurrentNavigation().extras.state.test;
   }
   ngAfterViewInit(): void {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -161,8 +195,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   mapConfigOptions = (delay: number) => {
     this.removeAllLayers();
-    this.getXYPosition(delay + 20);
+    this.getXYPosition(this.markersDataSourceXY, delay + 20);
     this.leafletDrawPolylines(delay);
+  }
+  extrasConfigOptions = (xyData: any, delay: number) => {
+    this.removeAllLayers();
+    this.getXYPositionExtras(xyData, delay + 20);
   }
   showDashboard = (isShowMap: boolean) => {
     this.isShowMap = isShowMap;
@@ -185,6 +223,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     L.circleMarker([lat, lng], { weight: 4, radius: 3, color: "#3686c9" }).addTo(this.layerGroup)
       .bindPopup(
         `${items.firstName}` + `${items.sureName} <br> ${items.eshterak}`
+      );
+  }
+  private circleToExtrasLeaflet = (lat: number, lng: number, items) => {
+    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: "#3686c9" }).addTo(this.layerGroup)
+      .bindPopup(
+        `${items.info1}` + `${items.info2} <br> ${items.info3}`
       );
   }
   private findMyLocationLeaflet = (e) => {

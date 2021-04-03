@@ -124,6 +124,9 @@ export class UtilsService {
   routeToByParams = (router: string, params: any) => {
     this.router.navigate([router, params], { relativeTo: this.route.parent });
   }
+  routeToByExtras = (router: string, body: object) => {
+    this.router.navigate([router], body);
+  }
   // 
 
 }

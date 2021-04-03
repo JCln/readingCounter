@@ -24,9 +24,11 @@ export class UserLogginsService {
       { field: 'browserEngine', header: 'موتور مرورگر', isSelected: true },
       { field: 'browserType', header: 'نوع مرورگر', isSelected: true },
       { field: 'osVersion', header: 'نسخه سیستم عامل', isSelected: true },
+      // { field: 'userId', header: 'کد کاربر', isSelected: true },
       { field: 'osTitle', header: 'عنوان سیستم عامل', isSelected: true },
       { field: 'osPlatform', header: 'پلتفرم', isSelected: true },
       // { field: 'osShortTitle', header: 'عنوان سیستم عامل', isSelected: false },
+      // { field: 'id', header: 'کد', isSelected: false },
       { field: 'userAgent', header: 'userAgent', isSelected: false }
     ];
   }

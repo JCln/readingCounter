@@ -38,7 +38,7 @@ export class KarkardDaylyResComponent implements OnInit {
     this._selectedColumns = this.customizeSelectedColumns();
   }
   connectToServer = async () => {
-    this.readingReportKarkardDaily = await this.readingReportManagerService.postRRKarkardManager();
+    this.readingReportKarkardDaily = await this.readingReportManagerService.postRRKarkardDailyManager();
     if (!this.readingReportKarkardDaily.length) {
       this.readingReportManagerService.emptyMessage();
       return;

@@ -5,7 +5,7 @@ import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.se
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
-import { IReadingReportReq } from './../Interfaces/imanage';
+import { IReadingReportGISReq, IReadingReportReq } from './../Interfaces/imanage';
 import { ITitleValue } from './../Interfaces/ioverall-config';
 
 @Injectable({
@@ -13,6 +13,7 @@ import { ITitleValue } from './../Interfaces/ioverall-config';
 })
 export class ReadingReportManagerService {
   private readingReportReq: IReadingReportReq;
+  private readingReportGISReq: IReadingReportGISReq;
 
   columnSelectedRRMaster = (): IObjectIteratation[] => {
     return [
@@ -164,6 +165,28 @@ export class ReadingReportManagerService {
       console.error(error);
     }
   }
+  postRRKarkardDailyManager = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.postRRKarkardDailyManager(this.readingReportReq).subscribe((res: any) => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  postRRGISManager = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.postRRGISManager(this.readingReportGISReq).subscribe((res: any) => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   postRRDisposalHoursManager = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
@@ -212,12 +235,12 @@ export class ReadingReportManagerService {
       resolve(this.dictionaryWrapperService.getKarbariDictionary());
     });
   }
-  // getCounterStateDictionary = (): Promise<any> => {
-  //   return new Promise((resolve) => {
-  //     resolve(this.dictionaryWrapperService.getCounterStateDictionary());
-  //   });
-  // }
-  //
+  getCounterStateDictionary = (): Promise<any> => {
+    return new Promise((resolve) => {
+      resolve(this.dictionaryWrapperService.getCounterStateDictionary());
+    });
+  }
+
 
   private datesValidationMaster = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
@@ -335,6 +358,37 @@ export class ReadingReportManagerService {
     return true;
   }
 
+  private datesValidationKarkardDaily = (): boolean => {
+    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
+      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
+      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportReq.toDate)) {
+      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      return false;
+    }
+    return true;
+  }
+  private periodValidationKarkardDaily = (): boolean => {
+    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
+      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportReq.year)) {
+      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      return false;
+    }
+    return true;
+  }
+
   private datesValidationDisposalHours = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
       this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
@@ -351,6 +405,41 @@ export class ReadingReportManagerService {
     return true;
   }
 
+  private datesValidationGIS = (): boolean => {
+    if (this.utilsService.isNull(this.readingReportGISReq.zoneId)) {
+      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportGISReq.fromDate)) {
+      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportGISReq.toDate)) {
+      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      return false;
+    }
+    return true;
+  }
+  private periodValidationGIS = (): boolean => {
+    if (this.readingReportGISReq.isForbidden === true) {
+      this.utilsService.snackBarMessageWarn('مشاهده غیر مجاز تنها با تاریخ امکان پذیر است');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportGISReq.zoneId)) {
+      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportGISReq.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.readingReportGISReq.year)) {
+      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      return false;
+    }
+    return true;
+  }
+
   // VerificationS
   verificationRRTraverse = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
@@ -359,6 +448,10 @@ export class ReadingReportManagerService {
   verificationRRKarkard = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
     return isValidateByDate ? this.datesValidationKarkard() : this.periodValidationKarkard()
+  }
+  verificationRRKarkardDaily = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
+    this.readingReportReq = readingReportReq;
+    return isValidateByDate ? this.datesValidationKarkardDaily() : this.periodValidationKarkardDaily()
   }
   verificationRRMaster = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
@@ -372,16 +465,15 @@ export class ReadingReportManagerService {
     this.readingReportReq = readingReportReq;
     return this.datesValidationDisposalHours();
   }
+  verificationRRGIS = (readingReportGISReq: IReadingReportGISReq, isValidateByDate: boolean): boolean => {
+    this.readingReportGISReq = readingReportGISReq;
+    return isValidateByDate ? this.datesValidationGIS() : this.periodValidationGIS()
+  }
   // 
   // snack bar
   emptyMessage = () => {
     this.utilsService.snackBarMessageFailed('موردی یافت نشد');
   }
-  // toDefaultVals = () => {
-  //   this.nullTheDates();
-  //   this.nullTheReadingPeriodId();
-  // }
-  //
   getYears = (): ITitleValue[] => {
     return [
       { title: '1400', value: 1400 },
@@ -397,5 +489,8 @@ export class ReadingReportManagerService {
   }
   backToPreviousPage = () => {
     this._location.back();
+  }
+  routeToMapGIS = () => {
+    this.utilsService.routeToByExtras('/wr', { state: { test: this.readingReportGISReq } });
   }
 }

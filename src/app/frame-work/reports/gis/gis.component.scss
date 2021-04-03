@@ -1,0 +1,65 @@
+@import '../shared_reports';
+
+
+.btn_1 {
+  color: $gray_l;
+}
+
+// materials 
+::ng-deep {
+  .mat-checkbox-layout {
+    .mat-checkbox-label {
+      margin: 0 $font_05;
+      font-size: $font_s;
+      font-weight: 600;
+      color: $blue_d;
+      line-height: 2;
+      border-radius: $border_s;
+      font-family: $font_family;
+    }
+  }
+
+  .mat-horizontal-stepper-header-container {
+    direction: rtl;
+    border: 2px solid $blue_d;
+    border-radius: 6rem;
+    padding: $font_05;
+    margin-bottom: 1rem;
+  }
+
+  .mat-step-text-label {
+    font-size: 1.2rem;
+    padding-right: $font_05;
+  }
+
+  .mat-horizontal-stepper-header .mat-step-icon {
+    font-size: $font_s;
+    font-weight: 600;
+  }
+}
+
+.mat-stepper-horizontal {
+  font-family: $font_family;
+  padding: $font_05;
+}
+
+.mat-horizontal-content-container {
+  min-height: 15rem;
+}
+
+// 
+._special {
+  background-color: $blue_l;
+  color: $gray_l;
+}
+
+.accept {
+  display: flex;
+}
+
+.btn_2 {
+  margin: .25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

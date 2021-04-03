@@ -345,6 +345,26 @@ export interface IReadingReportReq {
     reportCode: number,
     year: number
 }
+export interface IReadingReportGISReq {
+    zoneId: number,
+    isCounterState: boolean,
+    counterStateId: number,
+    isKarbariChange: boolean,
+    isAhadChange: boolean,
+    isForbidden: boolean,
+    readingPeriodId: number,
+    year: number,
+    fromDate: string,
+    toDate: string
+}
+export interface IReadingReportGISResponse {
+    x: string,
+    y: string,
+    gisAccuracy: string,
+    info1: string,
+    info2: string,
+    info3: string
+}
 export interface IReadingReportMaster {
     zoneId: number,
     zoneTitle: string,

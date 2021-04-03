@@ -33,7 +33,7 @@ export class InterceptorService implements HttpInterceptor {
       .pipe(
         retryWhen(errors => errors.pipe(
           mergeMap((error: HttpErrorResponse, retryAttempt: number) => {
-            if (retryAttempt === 0) {
+            if (retryAttempt === 1) {
               return throwError(error); // no retry
             }
             this.authService.noAccessMessage();
@@ -41,7 +41,7 @@ export class InterceptorService implements HttpInterceptor {
             return of(error); // retry
           }),
           delay(ENSnackBarTimes.fourMili),
-          take(0)
+          take(1)
         )),
         catchError((error => {
           if (
@@ -57,9 +57,9 @@ export class InterceptorService implements HttpInterceptor {
                 return next.handle(newRequest);
               }
               else {
-                // this.authService.logout();
-                this.authService.noAccessMessage();
-                this.authService.routeTo('/wr');
+                this.authService.goOutIn();
+                // this.authService.routeTo('/wr');
+                this.authService.logout();
                 return;
               }
             }
