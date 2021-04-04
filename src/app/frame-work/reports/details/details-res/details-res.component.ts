@@ -55,4 +55,7 @@ export class DetailsResComponent implements OnInit {
     const exportColumns = this._selectCols.map(col => ({title: col.header, dataKey: col.field}));
     this.outputManagerService.exportPdf(this.dataSource, exportColumns);
   }
+  exportXLSX = () => {
+    this.outputManagerService.exportExcel(this.dataSource);
+  }
 }
