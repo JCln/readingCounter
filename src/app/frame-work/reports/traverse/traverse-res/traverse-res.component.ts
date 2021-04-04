@@ -58,4 +58,7 @@ export class TraverseResComponent implements OnInit {
   exportPDF = () => {
     this.outputManagerService.exportPdf(this.dataSource);
   }
+  exportXLSX = () => {
+    this.outputManagerService.exportExcel(this.dataSource);
+  }
 }

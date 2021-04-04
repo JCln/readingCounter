@@ -65,4 +65,7 @@ export class KarkardResComponent implements OnInit, OnDestroy {
   exportPDF = () => {
     this.outputManagerService.exportPdf(this.dataSource);
   }
+  exportXLSX = () => {
+    this.outputManagerService.exportExcel(this.dataSource);
+  }
 }
