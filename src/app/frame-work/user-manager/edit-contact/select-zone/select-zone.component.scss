@@ -2,12 +2,14 @@
 @import '../../../../../assets/button.scss';
 @import '../../../../../assets/tooltip.scss';
 
+$half_gray: #b0bdd1;
+
 main {
   direction: rtl;
 }
 
 ._content {
-  background: $gray_d;
+  background: $gray_l;
   padding: .2rem;
   margin: .2rem;
   border-radius: $border_s;
@@ -63,7 +65,7 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  background: $gray_l;
+  background: $half_gray;
 
   .l_3 {
     font-size: 1.2rem;

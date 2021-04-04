@@ -20,6 +20,7 @@
   }
 
   .mat-horizontal-stepper-header-container {
+    height: 4rem;
     direction: rtl;
     border: 2px solid $blue_d;
     border-radius: 6rem;
@@ -30,21 +31,23 @@
   .mat-step-text-label {
     font-size: 1.2rem;
     padding-right: $font_05;
+    font-weight: 600;
   }
 
   .mat-horizontal-stepper-header .mat-step-icon {
     font-size: $font_s;
     font-weight: 600;
   }
+
+  .mat-horizontal-content-container {
+    min-height: 15rem;
+    padding: $font_xxs 0 !important;
+  }
 }
 
 .mat-stepper-horizontal {
   font-family: $font_family;
   padding: $font_05;
-}
-
-.mat-horizontal-content-container {
-  min-height: 15rem;
 }
 
 // 

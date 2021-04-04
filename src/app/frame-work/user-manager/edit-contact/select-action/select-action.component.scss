@@ -4,6 +4,11 @@
 $blue_lovely: #0045CB;
 $half_gray: #b0bdd1;
 
+form {
+  height: 63vh;
+  overflow: auto;
+}
+
 .auth_1 {
   direction: rtl;
 }
@@ -13,12 +18,14 @@ $half_gray: #b0bdd1;
   grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
   gap: .25rem;
   direction: rtl;
+  position: sticky;
+  top: 0;
 
   .auth_1_item {
     display: grid;
     place-content: center;
-    padding: $font_05;
-    margin: $font_s 0;
+    padding: 0.25rem;
+    margin: 0;
     border-radius: 5px;
     font-size: $font_l;
     font-weight: 600;
@@ -111,6 +118,9 @@ $half_gray: #b0bdd1;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: $blue_d;
+  color: $white;
+  box-shadow: 1px 2px 2px 1px $blue_c;
 }
 
 // materials 
