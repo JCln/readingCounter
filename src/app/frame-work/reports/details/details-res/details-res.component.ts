@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IReadingReportDetails } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
+import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class DetailsResComponent implements OnInit {
   _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService
+    private readingReportManagerService: ReadingReportManagerService,
+    private outputManagerService: OutputManagerService
   ) {
   }
 
@@ -49,5 +51,8 @@ export class DetailsResComponent implements OnInit {
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }
-
+  exportPDF = () => {
+    const exportColumns = this._selectCols.map(col => ({title: col.header, dataKey: col.field}));
+    this.outputManagerService.exportPdf(this.dataSource, exportColumns);
+  }
 }

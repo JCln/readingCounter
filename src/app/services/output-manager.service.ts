@@ -1,6 +1,6 @@
-import 'rxjs';
-
 import { Injectable } from '@angular/core';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 import { IOutputManager } from './../Interfaces/imanage';
 import { UtilsService } from './utils.service';
@@ -39,6 +39,8 @@ export class OutputManagerService {
     }
     return true;
   }
+  // Exports
+
   downloadFile(data: any, type: string) {
     const downloadURL = window.URL.createObjectURL(data);
     const link = document.createElement('a');
@@ -46,16 +48,27 @@ export class OutputManagerService {
     link.download = `${new Date().toLocaleDateString() + type}`;
     link.click();
   }
-  // Exports
-  // exportPdf() {
-  //   import('jspdf').then(jsPDF => {
-  //     import("jspdf-autotable").then(x => {
-  //       const doc = new jsPDF.default(0, 0);
-  //       doc.autoTable(this.exportColumns, this.products);
-  //       doc.save('products.pdf');
-  //     })
-  //   })
-  // }
+  exportPdf(data: any, column?: any) {
+    const doc = new jsPDF();
+    console.log(column);
+    const finalY = 10;
+    autoTable(doc, { startY: finalY, head: column, body: data });
+    doc.save('product.pdf');
+
+
+  }
+  downloadTestFile = (data: any[], contentType: string) => {
+    const doc = new jsPDF();
+    // doc.text(20, 20, data,);
+
+    const blob = new Blob(data, { type: contentType });
+    console.log(1);
+
+    this.downloadFile(blob, contentType);
+    console.log(2);
+    console.log(blob);
+
+  }
 
   // exportExcel() {
   //   import("xlsx").then(xlsx => {

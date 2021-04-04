@@ -7,12 +7,24 @@
         <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
             selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
-        <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-            <div class="tooltip_text">بارگیری مجدد جدول</div>
-        </i>
-        <i (click)="backToPrevious()" class="tooltip _circle_border p_icons pi pi-arrow-left">
-            <div class="tooltip_text">بازگشت به جستجو پراکندگی ساعت</div>
-        </i>
+        <div class="header_icons_wrap">
+            <div class="left_side">
+                <i (click)="exportPDF()" class="tooltip _circle_border p_icons pi pi-file-pdf">
+                    <div class="tooltip_text">دریافت pdf</div>
+                </i>
+                <i (click)="exportPDF()" class="tooltip _circle_border p_icons pi pi-file-excel">
+                    <div class="tooltip_text">دریافت Excel</div>
+                </i>
+            </div>
+            <div class="left_side">
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                </i>
+                <i (click)="backToPrevious()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+                    <div class="tooltip_text">بازگشت به جستجو پراکندگی ساعت</div>
+                </i>
+            </div>
+        </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>

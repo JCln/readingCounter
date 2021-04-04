@@ -58,6 +58,22 @@
     justify-content: space-between;
   }
 
+  .header_icons_wrap {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 $font_05;
+    width: 100%;
+
+    .left_side,
+    .right_side {
+      display: flex;
+
+      i {
+        margin: 0 .25rem;
+      }
+    }
+  }
+
   ._circle_border {
     display: grid !important;
     place-content: center;

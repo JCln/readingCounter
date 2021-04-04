@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MasterResComponent } from './../master/master-res/master-res.component';
+import { DetailsResComponent } from './details-res/details-res.component';
 import { DetailsComponent } from './details.component';
 
 const routes: Routes = [
   {
     path: '', component: DetailsComponent, children: [
-      { path: 'res', component: MasterResComponent }
+      { path: 'res', component: DetailsResComponent }
     ]
   }
 ];

@@ -25,6 +25,8 @@
     "@types/leaflet": "^1.5.21",
     "font-awesome": "^4.7.0",
     "jalali-moment": "^3.3.8",
+    "jspdf": "^2.3.1",
+    "jspdf-autotable": "^3.5.14",
     "jwt-decode": "^2.2.0",
     "leaflet": "^1.7.1",
     "leaflet-easybutton": "^2.4.0",

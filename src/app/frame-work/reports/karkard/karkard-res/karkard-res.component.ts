@@ -4,6 +4,7 @@ import { IReadingReportKarkard } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class KarkardResComponent implements OnInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private readingReportManagerService: ReadingReportManagerService
+    private readingReportManagerService: ReadingReportManagerService,
+    private outputManagerService: OutputManagerService
   ) {
   }
 
@@ -59,5 +61,8 @@ export class KarkardResComponent implements OnInit, OnDestroy {
   }
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
+  }
+  exportPDF = () => {
+    this.outputManagerService.exportPdf(this.dataSource);
   }
 }
