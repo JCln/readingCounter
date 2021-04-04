@@ -355,7 +355,8 @@ export interface IReadingReportGISReq {
     readingPeriodId: number,
     year: number,
     fromDate: string,
-    toDate: string
+    toDate: string,
+    isCluster: boolean
 }
 export interface IReadingReportGISResponse {
     x: string,

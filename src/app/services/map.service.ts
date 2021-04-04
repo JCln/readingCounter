@@ -3,6 +3,8 @@ import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.j
 import { Injectable } from '@angular/core';
 import { ListManagerService } from 'src/app/services/list-manager.service';
 
+import { IReadingReportGISReq } from '../Interfaces/imanage.js';
+
 declare let L;
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -30,9 +32,10 @@ export class MapService {
     private listManagerService: ListManagerService
   ) { }
 
-  addMarkerCluster = () => {
+  addMarkerCluster = (map: L.Map, latlng: any) => {
     const markers = L.markerClusterGroup();
-    this.map.addLayer(markers);
+    markers.addLayer(L.marker(latlng));
+    map.addLayer(markers);
   }
   addInvalidateMap = () => {
     this.map.invalidateSize();
@@ -62,5 +65,8 @@ export class MapService {
   }
   serviceInstantiate = (map: L.Map) => {
     this.map = map;
+  }
+  hasMarkerCluster = (body: IReadingReportGISReq): boolean => {
+    return body.isCluster;
   }
 }

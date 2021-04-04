@@ -23,7 +23,8 @@ export class GisComponent implements OnInit {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1400
+    year: 1400,
+    isCluster: true
   }
   searchInOrderTo: IDictionaryManager[] = [
     {
