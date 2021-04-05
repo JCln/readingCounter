@@ -1,7 +1,5 @@
-// import 'node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/internal/operators/map';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerPDXY } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
@@ -15,7 +13,6 @@ import { MapService } from './../../services/map.service';
 
 
 declare let L;
-declare let MarkerClusterer: any;
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -41,7 +38,6 @@ L.Marker.prototype.options.icon = defaultIcon;
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private extrasNavigation: IReadingReportGISReq;
   extraDataSourceRes: IReadingReportGISResponse[] = [];
-  testArrayFucking = [];
 
   private map: L.Map;
   private mapItems: Imap[];
@@ -193,11 +189,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   private getXYMarkerClusterPosition = (xyData: any) => {
+    const markers = new L.markerClusterGroup();
     xyData.map((items) => {
-      this.circleToExtrasMarkerClusterLeaflet(parseFloat(items.y), parseFloat(items.x));
+      markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)]));
     })
-    // this.testArrayFucking.push([lat, lng]);
-    // console.log(this.testArrayFucking);
+    this.map.addLayer(markers);
   }
   // 
 
@@ -242,14 +238,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       .bindPopup(
         `${items.info1}` + `${items.info2} <br> ${items.info3}`
       );
-  }
-  private circleToExtrasMarkerClusterLeaflet = (lat: number, lng: number) => {
-    // this.mapService.addMarkerCluster(this.map, [lat, lng])
-    const markers = new L.markerClusterGroup();
-    console.log(markers);
-
-    markers.addLayer(L.marker([lat, lng]).addTo(this.layerGroup));
-    this.map.addLayer(markers);
   }
   private findMyLocationLeaflet = (e) => {
     const radius = e.accuracy;
