@@ -50,12 +50,18 @@ export class OutputManagerService {
     link.click();
   }
   exportPdf(data: any, column?: any) {
-    const doc = new jsPDF();
     console.log(column);
+
+    const doc = new jsPDF('landscape', 'em', 'a4');
     const finalY = 10;
+
+    // doc.addFileToVFS('assets/fonts/BLotus.woff', 'BLotus');
+    // doc.addFont('assets/fonts/BLotus.woff', 'BLotus', 'normal');
+
+    doc.setFont('BLotus');
+    doc.setLanguage('fa-IR');
     autoTable(doc, { startY: finalY, head: column, body: data });
     doc.save('product.pdf');
-
 
   }
   downloadTestFile = (data: any[], contentType: string) => {

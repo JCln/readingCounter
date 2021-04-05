@@ -28,8 +28,9 @@ export class UserLogginsService {
       { field: 'osTitle', header: 'عنوان سیستم عامل', isSelected: true },
       { field: 'osPlatform', header: 'پلتفرم', isSelected: true },
       // { field: 'osShortTitle', header: 'عنوان سیستم عامل', isSelected: false },
+      { field: 'wrongPassword', header: 'گذرواژه', isSelected: true },
       // { field: 'id', header: 'کد', isSelected: false },
-      { field: 'userAgent', header: 'userAgent', isSelected: false }
+      { field: 'userAgent', header: 'userAgent', isSelected: false },
     ];
   }
   getLogsDataSource = (UUID: string): Promise<any> => {

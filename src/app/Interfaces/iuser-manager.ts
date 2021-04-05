@@ -285,6 +285,7 @@ export interface IUserLoggins {
     osTitle: string,
     osPlatform: string,
     osShortTitle: string,
-    userAgent: string
+    userAgent: string,
+    wrongPassword: string
 }
 //
