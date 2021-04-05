@@ -1,5 +1,4 @@
-@import '../../../../../assets/variable.scss';
-@import '../../../../../assets/button.scss';
+@import '../../add-edit.scss';
 
 main {
   display: grid;
@@ -11,13 +10,6 @@ main {
   font-family: $font_family;
   font-size: 1.2rem;
   font-weight: 600;
-}
-
-.btn_2 {
-  margin: .25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .mat-form-field {

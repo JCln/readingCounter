@@ -1,5 +1,4 @@
-@import '../../../../../assets/variable';
-@import '../../../../../assets/button.scss';
+@import '../../add-edit.scss';
 @import '../../../../../assets/tooltip.scss';
 
 main {
@@ -7,7 +6,7 @@ main {
 }
 
 ._content {
-  background: $gray_d;
+  background: $half_gray;
   padding: .2rem;
   margin: .2rem;
   border-radius: $border_s;
@@ -51,8 +50,7 @@ main {
 
 .l_2 {
   .l_2_c {
-    background: $white;
-    color: $gray_dr;
+    background: $gray_l;
     margin-bottom: .2rem;
     font-size: 1.5rem;
     font-weight: 600;
@@ -63,7 +61,7 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  background: $gray_l;
+  background: $white;
 
   .l_3 {
     font-size: 1.2rem;

@@ -1,5 +1,5 @@
-@import '../../../../../assets/variable';
-@import '../../../../../assets/button.scss';
+@import '../../add-edit.scss';
+
 
 .roles {
   background: $half_gray;
@@ -25,10 +25,4 @@ h2 {
 
 .mat-checkbox-layout .mat-checkbox-label {
   color: $blue_d;
-}
-
-.btn_2 {
-  background: $blue_d;
-  color: $white;
-  box-shadow: 1px 2px 2px 1px $blue_c;
 }

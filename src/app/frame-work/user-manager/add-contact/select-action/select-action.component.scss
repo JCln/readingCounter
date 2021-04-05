@@ -1,8 +1,4 @@
-@import '../../../../../assets/variable.scss';
-@import '../../../../../assets/button.scss';
-
-$blue_lovely: #0045CB;
-$half_gray: #b0bdd1;
+@import '../../add-edit.scss';
 
 .auth_1 {
   direction: rtl;
@@ -104,27 +100,4 @@ $half_gray: #b0bdd1;
 
 .accept {
   display: flex;
-}
-
-.btn_2 {
-  margin: .25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-// materials 
-::ng-deep {
-  .mat-checkbox-layout {
-    .mat-checkbox-label {
-      margin: 0 $font_05;
-      font-size: $font_s;
-      font-weight: 600;
-      color: $blue_lovely;
-      line-height: 2;
-      border-radius: $border_s;
-      font-family: $font_family;
-    }
-
-  }
 }

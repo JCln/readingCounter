@@ -12,12 +12,14 @@
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: $blue_d;
+      color: $blue_lovely;
+      // color: $blue_d2;
       line-height: 2;
       border-radius: $border_s;
       font-family: $font_family;
     }
   }
+
 
   .mat-horizontal-stepper-header-container {
     height: 4rem;
@@ -51,11 +53,6 @@
 }
 
 // 
-._special {
-  background-color: $blue_l;
-  color: $gray_l;
-}
-
 .accept {
   display: flex;
 }
@@ -65,4 +62,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: $half_gray;
+  color: $blue_d;
+}
+
+._special {
+  background-color: $blue_l;
+  color: $gray_l;
 }
