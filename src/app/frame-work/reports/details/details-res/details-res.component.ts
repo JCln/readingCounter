@@ -52,10 +52,13 @@ export class DetailsResComponent implements OnInit {
     this.readingReportManagerService.backToPreviousPage();
   }
   exportPDF = () => {
-    const exportColumns = this._selectCols.map(col => ({title: col.header, dataKey: col.field}));
+    const exportColumns = this._selectCols.map(col => ({ title: col.header, dataKey: col.field }));
     this.outputManagerService.exportPdf(this.dataSource, exportColumns);
   }
   exportXLSX = () => {
     this.outputManagerService.exportExcel(this.dataSource);
+  }
+  exportCSV = () => {
+    this.outputManagerService.exportCSV(this.dataSource);
   }
 }

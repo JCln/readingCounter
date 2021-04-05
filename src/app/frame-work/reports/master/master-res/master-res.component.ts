@@ -55,4 +55,7 @@ export class MasterResComponent implements OnInit {
   exportXLSX = () => {
     this.outputManagerService.exportExcel(this.dataSource);
   }
+  exportCSV = () => {
+    this.outputManagerService.exportCSV(this.dataSource);
+  }
 }

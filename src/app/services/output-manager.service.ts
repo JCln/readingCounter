@@ -75,12 +75,17 @@ export class OutputManagerService {
     const worksheet = XLSX.utils.json_to_sheet(dataSource);
     const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, "products");
+    this.saveAsExcelFile(excelBuffer, "products", '.xlsx');
   }
-  saveAsExcelFile(buffer: any, fileName: string): void {
+  exportCSV(dataSource: any) {
+    const worksheet = XLSX.utils.json_to_sheet(dataSource);
+    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, "products", '.csv');
+  }
+  saveAsExcelFile(buffer: any, fileName: string, EXCEL_EXTENSION: string): void {
     import("file-saver").then(FileSaver => {
       let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-      let EXCEL_EXTENSION = '.xlsx';
       const data: Blob = new Blob([buffer], {
         type: EXCEL_TYPE
       });
