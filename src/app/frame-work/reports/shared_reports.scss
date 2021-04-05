@@ -50,7 +50,6 @@ section.content {
 
 h2 {
   color: $gray_dr;
-  margin-left: 5rem;
 }
 
 footer {
@@ -100,6 +99,7 @@ footer {
 
 .order_by {
   display: flex;
+  margin: $font_xs;
 }
 
 hr {

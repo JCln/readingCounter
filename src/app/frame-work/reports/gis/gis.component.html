@@ -1,15 +1,16 @@
 <form #form="ngForm" (ngSubmit)="verification()">
-    <section class="order_by">
-        <h2>نمایش بر اساس :</h2>
-        <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_orderBy" name="_orderBy">
-            <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo" [value]="orderType.id"
-                (change)="changeRadio($event)">
-                {{orderType.title}}
-            </mat-radio-button>
-        </mat-radio-group>
-    </section>
-
     <main class="main">
+
+        <section class="order_by">
+            <h2>نمایش بر اساس :</h2>
+            <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_orderBy" name="_orderBy">
+                <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo" [value]="orderType.id"
+                    (change)="changeRadio($event)">
+                    {{orderType.title}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </section>
+
         <section class="static_part">
             <section class="order_by">
                 <!-- <h2>نمایش بر اساس :</h2> -->
@@ -31,7 +32,7 @@
                     </mat-select>
                 </div>
                 <div class="input_2" [hidden]="_isOrderByDate">
-                    <div class="_key">نوع دوره قرائت</div>
+                    <div class="_key">نوع دوره</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
                         <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
                             [value]="truefalse.id">
@@ -50,15 +51,15 @@
                 </div>
                 <div class="input_2" [hidden]="_isOrderByDate">
                     <div class="_key">سال</div>
-                    <div class="_value">
-                        <mat-select style="color: blue" class=" _custom_option" placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportGISReq.year" [(value)]="readingReportGISReq.year" name="year">
-                            <mat-option style="color: blue" *ngFor="let truefalse of _years" [value]="truefalse.value">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
-                    </div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.year"
+                        [(value)]="readingReportGISReq.year" name="year">
+                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
                 </div>
+                <mat-checkbox name="isCluster" [(ngModel)]="readingReportGISReq.isCluster">خوشه بندی
+                </mat-checkbox>
             </section>
 
             <section class="content">

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService
+    private trackingManagerService: TrackingManagerService,
+    public outputManagerService: OutputManagerService
   ) {
   }
 

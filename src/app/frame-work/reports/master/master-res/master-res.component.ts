@@ -20,7 +20,7 @@ export class MasterResComponent implements OnInit {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private readingReportManagerService: ReadingReportManagerService,
-    private outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService
   ) {
   }
 
@@ -49,7 +49,5 @@ export class MasterResComponent implements OnInit {
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }
-  exportPDF = () => {
-    this.outputManagerService.exportPdf(this.dataSource);
-  }
+  
 }

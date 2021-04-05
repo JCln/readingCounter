@@ -23,7 +23,8 @@ export class GisComponent implements OnInit {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1400
+    year: 1400,
+    isCluster: true
   }
   searchInOrderTo: IDictionaryManager[] = [
     {
@@ -33,7 +34,7 @@ export class GisComponent implements OnInit {
     },
     {
       id: 'isForbidden',
-      title: 'مجاز',
+      title: 'غیر مجاز',
       isSelected: false
     },
     {
@@ -114,17 +115,6 @@ export class GisComponent implements OnInit {
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
-  // connectToServer = async () => {
-  // this.gisResponse = await this.readingReportManagerService.postRRGISManager();
-  // if (!this.gisResponse.length) {
-  //   this.readingReportManagerService.emptyMessage();
-  //   return;
-  // }
-  // console.log(this.gisResponse);
-
-  // this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
-  // }
-
 
   changeRadio = (event: any) => {
     this.searchInOrderTo.forEach(item => {

@@ -25,7 +25,7 @@ export class KarkardResComponent implements OnInit, OnDestroy {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private readingReportManagerService: ReadingReportManagerService,
-    private outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService
   ) {
   }
 
@@ -34,6 +34,15 @@ export class KarkardResComponent implements OnInit, OnDestroy {
       if (items.isSelected)
         return items
     })
+  }
+  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
+    karbariDictionary.map(karbariDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.karbariCode == karbariDic.id) {
+          dataSource.karbariCode = karbariDic.title;
+        }
+      })
+    });
   }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnSelectedRRKarkard();
@@ -46,6 +55,7 @@ export class KarkardResComponent implements OnInit, OnDestroy {
       return;
     }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
   }
   ngOnInit(): void {
     this.connectToServer();
@@ -62,7 +72,5 @@ export class KarkardResComponent implements OnInit, OnDestroy {
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }
-  exportPDF = () => {
-    this.outputManagerService.exportPdf(this.dataSource);
-  }
+
 }

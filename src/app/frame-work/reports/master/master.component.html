@@ -14,7 +14,7 @@
             <hr>
             <section class="content">
                 <div class="input_2" [hidden]="_isOrderByDate">
-                    <div class="_key">نوع دوره قرائت</div>
+                    <div class="_key">نوع دوره</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
                         <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
                             [value]="truefalse.id">
@@ -33,13 +33,11 @@
                 </div>
                 <div class="input_2" [hidden]="_isOrderByDate">
                     <div class="_key">سال</div>
-                    <div class="_value">
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.year" name="year">
-                            <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
-                    </div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.year" name="year">
+                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
                 </div>
             </section>
 

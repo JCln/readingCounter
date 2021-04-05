@@ -18,7 +18,7 @@ export class DisposalHoursResComponent implements OnInit {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService
   ) {
   }
 
@@ -49,7 +49,5 @@ export class DisposalHoursResComponent implements OnInit {
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }
-  exportPDF = () => {
-    this.outputManagerService.exportPdf(this.dataSource);
-  }
+  
 }

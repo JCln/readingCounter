@@ -23,7 +23,7 @@ export class TraverseResComponent implements OnInit {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private readingReportManagerService: ReadingReportManagerService,
-    private outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService
   ) {
   }
 
@@ -37,6 +37,15 @@ export class TraverseResComponent implements OnInit {
     this._selectCols = this.readingReportManagerService.columnSelectedRRTraverse();
     this._selectedColumns = this.customizeSelectedColumns();
   }
+  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
+    karbariDictionary.map(karbariDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.karbariCode == karbariDic.id) {
+          dataSource.karbariCode = karbariDic.title;
+        }
+      })
+    });
+  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRTraverseManager();
     if (!this.dataSource.length) {
@@ -44,6 +53,7 @@ export class TraverseResComponent implements OnInit {
       return;
     }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
   }
   ngOnInit(): void {
     this.connectToServer();
@@ -55,7 +65,5 @@ export class TraverseResComponent implements OnInit {
   refreshTable = () => {
     this.ngOnInit();
   }
-  exportPDF = () => {
-    this.outputManagerService.exportPdf(this.dataSource);
-  }
+
 }

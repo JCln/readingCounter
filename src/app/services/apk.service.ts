@@ -23,6 +23,15 @@ export class ApkService {
     private utilsService: UtilsService
   ) { }
 
+  getDataSource = (): any => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getAPKPreList().subscribe(res => {
+        if (res) {
+          resolve(res);
+        }
+      })
+    })
+  }
   isNull = (): boolean => {
     if (this.utilsService.isNull(this.desc.versionName)) {
       this.snackWrapperService.openSnackBar('نام نسخه را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);

@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { throwError } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
+import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 
 import { IAuthTokenType, IAuthUser, ICredentials } from '../Interfaces/iauth-guard-permission';

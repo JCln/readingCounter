@@ -25,7 +25,7 @@
                 </div>
                 <!-- when zone id and kind id get -->
                 <div class="input_2" [hidden]="_isOrderByDate || !readingPeriodKindsDictionary.length">
-                    <div class="_key">نوع دوره قرائت</div>
+                    <div class="_key">نوع دوره</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
                         <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
                             (click)="verificationReadingPeriod()">
