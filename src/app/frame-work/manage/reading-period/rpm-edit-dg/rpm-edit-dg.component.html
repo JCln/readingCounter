@@ -28,7 +28,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>قرائت نوع دوره</mat-label>
+            <mat-label>نوع دوره</mat-label>
             <mat-select placeholder="انتخاب مورد" [(value)]="selectedRPKId" name="readingPeriodKindId">
                 <mat-option *ngFor="let truefalse of data.rpkmId" [value]="truefalse.id">
                     {{truefalse.title}}

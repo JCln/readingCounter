@@ -35,7 +35,7 @@ main {
 }
 
 .btn_1 {
-  background-color: $gray_l;
+  background: linear-gradient(142deg, $orange, $orange, transparent);
   margin-left: $font_xs;
   width: 4rem;
   height: $font_2;
@@ -43,8 +43,9 @@ main {
   border: none;
   cursor: pointer;
 
-  .fa-question {
-    color: $orange;
+  .pi-question {
+    color: $white;
     font-size: $font_s;
+    font-weight: 600;
   }
 }

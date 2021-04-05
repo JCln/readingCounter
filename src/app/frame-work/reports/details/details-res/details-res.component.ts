@@ -18,7 +18,7 @@ export class DetailsResComponent implements OnInit {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService
   ) {
   }
 
@@ -28,6 +28,15 @@ export class DetailsResComponent implements OnInit {
         return items
     })
   }
+  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
+    karbariDictionary.map(karbariDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.karbariCode == karbariDic.id) {
+          dataSource.karbariCode = karbariDic.title;
+        }
+      })
+    });
+  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRDetailsManager();
     if (!this.dataSource.length) {
@@ -35,6 +44,7 @@ export class DetailsResComponent implements OnInit {
       return;
     }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
   }
 
   insertSelectedColumns = () => {
@@ -51,14 +61,8 @@ export class DetailsResComponent implements OnInit {
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }
-  exportPDF = () => {
-    const exportColumns = this._selectCols.map(col => ({ title: col.header, dataKey: col.field }));
-    this.outputManagerService.exportPdf(this.dataSource, exportColumns);
-  }
-  exportXLSX = () => {
-    this.outputManagerService.exportExcel(this.dataSource);
-  }
-  exportCSV = () => {
-    this.outputManagerService.exportCSV(this.dataSource);
-  }
+  // exportPDF = () => {
+  //   const exportColumns = this._selectCols.map(col => ({ title: col.header, dataKey: col.field }));
+  //   this.outputManagerService.exportPdf(this.dataSource, exportColumns);
+  // } 
 }

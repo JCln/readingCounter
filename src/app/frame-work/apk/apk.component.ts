@@ -71,15 +71,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
       this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
     });
   }
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getAPKPreList().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
+
   paginatorTable = () => {
     this.dataSource.paginator = this.paginator;
     if (this.dataSource.paginator) {
@@ -92,7 +84,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.closeTabService.saveDataForAPKManager)
       this.dataSource = this.closeTabService.saveDataForAPKManager;
     else
-      this.dataSource = await this.getDataSource();
+      this.dataSource = await this.apkService.getDataSource();
     this.paginatorTable();
 
   }

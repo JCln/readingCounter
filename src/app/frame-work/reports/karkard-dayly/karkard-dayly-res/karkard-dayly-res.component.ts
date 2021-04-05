@@ -25,7 +25,7 @@ export class KarkardDaylyResComponent implements OnInit {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private readingReportManagerService: ReadingReportManagerService,
-    private outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService
   ) {
   }
 
@@ -39,6 +39,15 @@ export class KarkardDaylyResComponent implements OnInit {
     this._selectCols = this.readingReportManagerService.columnSelectedRRKarkardDaly();
     this._selectedColumns = this.customizeSelectedColumns();
   }
+  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
+    karbariDictionary.map(karbariDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.karbariCode == karbariDic.id) {
+          dataSource.karbariCode = karbariDic.title;
+        }
+      })
+    });
+  }
   connectToServer = async () => {
     this.readingReportKarkardDaily = await this.readingReportManagerService.postRRKarkardDailyManager();
     if (!this.readingReportKarkardDaily.length) {
@@ -46,6 +55,7 @@ export class KarkardDaylyResComponent implements OnInit {
       return;
     }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
   }
   ngOnInit(): void {
     this.connectToServer();
@@ -57,13 +67,5 @@ export class KarkardDaylyResComponent implements OnInit {
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }
-  exportPDF = () => {
-    this.outputManagerService.exportPdf(this.dataSource);
-  }
-  exportXLSX = () => {
-    this.outputManagerService.exportExcel(this.dataSource);
-  }
-  exportCSV = () => {
-    this.outputManagerService.exportCSV(this.dataSource);
-  }
+
 }

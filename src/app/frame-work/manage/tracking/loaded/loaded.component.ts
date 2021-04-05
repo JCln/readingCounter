@@ -5,6 +5,7 @@ import { ITracking } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
@@ -29,7 +30,8 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     private trackingManagerService: TrackingManagerService,
     private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    public outputManagerService: OutputManagerService
   ) {
   }
 

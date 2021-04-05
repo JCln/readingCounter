@@ -8,14 +8,17 @@
             selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
-            <div class="left_side">
-                <i (click)="exportPDF()" class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
+            <div class="left_side">`
+                <i (click)="outputManagerService.exportPdf(dataSource)"
+                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>
-                <i (click)="exportXLSX()" class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
+                <i (click)="outputManagerService.exportExcel(dataSource)"
+                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>
-                <i (click)="exportCSV()" class="tooltip _circle_border p_icons fas fa-file-csv _csv">
+                <i (click)="outputManagerService.exportCSV(dataSource)"
+                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
             </div>

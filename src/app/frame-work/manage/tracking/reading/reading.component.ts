@@ -5,6 +5,7 @@ import { ITracking } from 'src/app/Interfaces/imanage';
 import { IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -28,7 +29,8 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     private trackingManagerService: TrackingManagerService,
     private utilsService: UtilsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public outputManagerService: OutputManagerService
   ) { }
 
   routeToLMPayDay = (row: ITracking) => {

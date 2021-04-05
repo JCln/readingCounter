@@ -191,9 +191,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private getXYMarkerClusterPosition = (xyData: any) => {
     const markers = new L.markerClusterGroup();
     xyData.map((items) => {
-      markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)]));
+      markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)]).bindPopup(
+        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+      ));
     })
-    this.map.addLayer(markers);
+    this.layerGroup.addLayer(markers);
   }
   // 
 
@@ -230,13 +232,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private circleToLeaflet = (lat: number, lng: number, items) => {
     L.circleMarker([lat, lng], { weight: 4, radius: 3, color: "#3686c9" }).addTo(this.layerGroup)
       .bindPopup(
-        `${items.firstName}` + `${items.sureName} <br> ${items.eshterak}`
+        `${items.firstName}` + `${items.sureName} <br> ${items.eshterak}`,
       );
   }
   private circleToExtrasLeaflet = (lat: number, lng: number, items) => {
     L.circleMarker([lat, lng], { weight: 4, radius: 3, color: "#3686c9" }).addTo(this.layerGroup)
       .bindPopup(
-        `${items.info1}` + `${items.info2} <br> ${items.info3}`
+        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );
   }
   private findMyLocationLeaflet = (e) => {
