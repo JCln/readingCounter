@@ -30,10 +30,11 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     public fragmentManagerService: FragmentManagerService
   ) {
   }
-
   nullSavedSource = () => this.closeTabService.saveDataForFragmentNOBDetails = null;
 
   classWrapper = async (canRefresh?: boolean) => {
+    console.log(this._masterId);
+
     if (canRefresh) {
       this.nullSavedSource();
     }
@@ -42,7 +43,6 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
     else {
       this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
-
       this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
     }
   }
@@ -57,7 +57,7 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {
-    this.fragmentManagerService.getRouteParams();
+    this._masterId = this.fragmentManagerService.getRouteParams();
     this.classWrapper();
     this.insertSelectedColumns();
   }
@@ -88,17 +88,18 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
 
-  onRowEditSave(dataSource: IFragmentDetails) {
-    this.fragmentManagerService.addFragmentDetails(dataSource);
+  onRowEditSave(dataSource: IFragmentDetails, index: number) {
+    dataSource.fragmentMasterId = this._masterId;
+    this.fragmentManagerService.addFragmentDetails(this.dataSource[index]);
     // this.table.initRowEdit(dataSource); // add to table automatically
   }
 
   onRowEditCancel(dataSource: any, index: number) {
-    console.log('edit cancel' + dataSource);
+    console.log('edit cancel   ' + dataSource);
     console.log(this.dataSource[index]);
 
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
+    // this.dataSource[index] = this.clonedProducts[dataSource.id];
+    // delete this.dataSource[dataSource.id];
   }
   removeRow = (dataSource: IFragmentMaster) => {
     this.fragmentManagerService.removeFragmentMaster(dataSource);

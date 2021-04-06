@@ -36,8 +36,6 @@ export class InterceptorService implements HttpInterceptor {
             if (retryAttempt === 1) {
               return throwError(error); // no retry
             }
-            this.authService.noAccessMessage();
-            this._location.back();
             return of(error); // retry
           }),
           delay(ENSnackBarTimes.fourMili),
@@ -63,6 +61,8 @@ export class InterceptorService implements HttpInterceptor {
                 return;
               }
             }
+            this.authService.noAccessMessage();
+            this._location.back();
             return throwError(error)
           }
         }))

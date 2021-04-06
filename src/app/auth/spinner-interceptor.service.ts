@@ -25,7 +25,10 @@ export class SpinnerInterceptorService implements HttpInterceptor {
         catchError((error) => {
           // let errorDesc = error.json();
           if (error.status === 400) {
-            this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+            if (error.error.message)
+              this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+            else
+              this.snackWrapperService.openSnackBar('موردی وجود ندارد', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }
           if (error.status === 401) {
             console.log(401);

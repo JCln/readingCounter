@@ -130,5 +130,8 @@ export class UtilsService {
   getRouteParams = (paramName: string): string => {
     return this.route.snapshot.paramMap.get(paramName);
   }
+  getRouteBySplit = (spliter: string): string => {
+    return this.router.url.split(spliter).pop();
+  }
   //   
 }

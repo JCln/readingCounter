@@ -104,11 +104,12 @@
 }
 
 input {
-  font-size: $font_xxs;
+  font-size: $font_xs;
   font-weight: 600;
   width: 100%;
-  border: 1px solid $gray_e3;
+  border: 1px solid $gray_96;
   border-radius: 10px;
+  padding: .3rem;
   color: $gray_96;
 }
 

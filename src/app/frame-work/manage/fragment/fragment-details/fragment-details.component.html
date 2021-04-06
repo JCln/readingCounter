@@ -1,8 +1,8 @@
-<p-table #dt [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+<p-table #dtableDetails [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl"
     [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
-    styleClass="p-datatable-responsive">
+    styleClass="p-datatable-responsive" dataKey="id" editMode="row">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
@@ -10,7 +10,8 @@
         </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="left_side">
-                <i appAddRow [table]="dt" [newRow]="newRow()" class="tooltip _circle_border p_icons fa fa-plus">
+                <i appAddRow [table]="dtableDetails" [newRow]="newRow()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن</div>
                 </i>
             </div>
@@ -34,12 +35,21 @@
 
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri="rowIndex">
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-editing="editing" let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns" pEditableColumn>
                 <ng-container
                     *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <mat-checkbox [(ngModel)]="dataSource[col.field]">
+                            </mat-checkbox>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <mat-checkbox [(ngModel)]="dataSource[col.field]">
+                            </mat-checkbox>
+                        </ng-template>
+                    </p-cellEditor>
                 </ng-container>
                 <ng-template #elseTemplate>
                     <p-cellEditor>
@@ -53,12 +63,13 @@
                 </ng-template>
             </td>
             <td style="text-align: center;">
-                <i *ngIf="!columns" pInitEditableRow (click)="onRowEditInit(dataSource)" class="pi pi-pencil"></i>
-                <i *ngIf="columns" pSaveEditableRow (click)="onRowEditSave(dataSource)" class="pi pi-check"></i>
-                <i *ngIf="columns" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)" class="pi pi-times"></i>
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)" class="_edit pi pi-pencil"></i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)" class="_save pi pi-check"></i>
+                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
+                    class="_cancel pi pi-times"></i>
             </td>
             <td>
-                <i *ngIf="!columns" (click)="removeRow(dataSource)" class="tooltip p_icons fa fa-trash-o">
+                <i *ngIf="!editing" (click)="removeRow(dataSource)" class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text">حذف</div>
                 </i>
             </td>

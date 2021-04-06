@@ -106,9 +106,9 @@
                 </p-cellEditor>
             </td>
             <td style="text-align: center;">
-                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)" class="pi pi-pencil"></i>
-                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource)" class="pi pi-check"></i>
-                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)" class="pi pi-times"></i>
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)" class="_edit pi pi-pencil"></i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource)" class="_save pi pi-check"></i>
+                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)" class="_cancel pi pi-times"></i>
             </td>
             <td>
                 <i *ngIf="!editing" (click)="fragmentManagerService.removeFragmentMaster(dataSource)"

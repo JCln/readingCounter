@@ -102,12 +102,10 @@ export class FragmentManagerService {
     })
   }
   getRouteParams = () => {
-    return this.utilsService.getRouteParams('masterId');
+    return this.utilsService.getRouteBySplit('/');
   }
   routeToFragmentDetails = (route: string) => {
-    console.log('/wr/m/nob/' + route);
-
-    this.utilsService.routeTo('/wr/m/nob/' + route);
+    this.utilsService.routeToByParams('/wr/m/nob/', route);
   }
   /**/
   getZoneDictionary = (): Promise<any> => {
