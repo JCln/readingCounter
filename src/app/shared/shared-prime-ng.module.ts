@@ -8,8 +8,10 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 
+import { AddRowDirective } from './../directives/add-row.directive';
+
 @NgModule({
-  declarations: [],
+  declarations: [AddRowDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -29,7 +31,9 @@ import { TableModule } from 'primeng/table';
     DropdownModule,
 
     SliderModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+
+    AddRowDirective
   ]
 })
 export class SharedPrimeNgModule {

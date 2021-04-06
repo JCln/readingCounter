@@ -95,6 +95,7 @@ export class CloseTabService {
 
   // managers
   saveDataForFragmentNOB: any;
+  saveDataForFragmentNOBDetails: any;
   // 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
@@ -238,6 +239,9 @@ export class CloseTabService {
     }
     if (url.includes('/wr/mu/all/loggins/')) {
       this.saveDataForUserLoggins = '';
+    }
+    if (url.includes('/wr/m/nob/')) {
+      this.saveDataForFragmentNOBDetails = '';
     }
   }
   // 

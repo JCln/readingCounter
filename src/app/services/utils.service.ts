@@ -127,6 +127,8 @@ export class UtilsService {
   routeToByExtras = (router: string, body: object) => {
     this.router.navigate([router], body);
   }
-  // 
-
+  getRouteParams = (paramName: string): string => {
+    return this.route.snapshot.paramMap.get(paramName);
+  }
+  //   
 }

@@ -1,25 +1,28 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IFragmentMaster } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { FragmentManagerService } from 'src/app/services/fragment-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
+import { IFragmentDetails, IFragmentMaster } from './../../../../Interfaces/imanage';
 
 @Component({
-  selector: 'app-fragment',
-  templateUrl: './fragment.component.html',
-  styleUrls: ['./fragment.component.scss']
+  selector: 'app-fragment-details',
+  templateUrl: './fragment-details.component.html',
+  styleUrls: ['./fragment-details.component.scss']
 })
-export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
-  dataSource: IFragmentMaster[] = [];
+  dataSource: IFragmentDetails[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
-  clonedProducts: { [s: string]: IFragmentMaster; } = {};
+  _masterId: string = '';
+  table: Table;
+  clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
     private interactionService: InteractionService,
@@ -28,21 +31,19 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForFragmentNOB = null;
+  nullSavedSource = () => this.closeTabService.saveDataForFragmentNOBDetails = null;
+
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForFragmentNOB) {
-      this.dataSource = this.closeTabService.saveDataForFragmentNOB;
+    if (this.closeTabService.saveDataForFragmentNOBDetails) {
+      this.dataSource = this.closeTabService.saveDataForFragmentNOBDetails;
     }
     else {
-      this.dataSource = await this.fragmentManagerService.getDataSource();
-      this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
-      console.log(this.zoneDictionary);
+      this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
 
-
-      this.closeTabService.saveDataForFragmentNOB = this.dataSource;
+      this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
     }
   }
   customizeSelectedColumns = () => {
@@ -52,17 +53,18 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.fragmentManagerService.columnSelectedFragmentMaster();
+    this._selectCols = this.fragmentManagerService.columnSelectedFragmentDetails();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {
+    this.fragmentManagerService.getRouteParams();
     this.classWrapper();
     this.insertSelectedColumns();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/nob')
+        if (res.includes('/wr/m/nob/'))
           this.classWrapper(true);
       }
     })
@@ -79,22 +81,26 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-  newRow() {
-    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isValidated: false };
+  newRow(): IFragmentDetails {
+    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: '', orderDigit: null, orderPersian: '' };
   }
   onRowEditInit(dataSource: any) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
 
-  onRowEditSave(dataSource: IFragmentMaster) {
-    dataSource.zoneId = dataSource.zoneId['id'];
-    this.fragmentManagerService.addFragmentMaster(dataSource);
+  onRowEditSave(dataSource: IFragmentDetails) {
+    this.fragmentManagerService.addFragmentDetails(dataSource);
+    // this.table.initRowEdit(dataSource); // add to table automatically
   }
 
   onRowEditCancel(dataSource: any, index: number) {
     console.log('edit cancel' + dataSource);
+    console.log(this.dataSource[index]);
 
     this.dataSource[index] = this.clonedProducts[dataSource.id];
     delete this.dataSource[dataSource.id];
+  }
+  removeRow = (dataSource: IFragmentMaster) => {
+    this.fragmentManagerService.removeFragmentMaster(dataSource);
   }
 }

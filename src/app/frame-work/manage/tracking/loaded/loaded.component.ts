@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
@@ -19,6 +20,7 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
 export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
+  table: Table;
   dataSource: ITracking[] = [];
   filterZoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
@@ -119,7 +121,8 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.trackingManagerService.removeTrackingId(rowData.id, desc).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        this.refreshTable();
+        // this.refreshTable();
+        this.table.initRowEdit(rowData);
       }
     })
   }

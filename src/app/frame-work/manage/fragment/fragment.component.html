@@ -116,6 +116,12 @@
                     <div class="tooltip_text">حذف</div>
                 </i>
             </td>
+            <td>
+                <i *ngIf="!editing" (click)="fragmentManagerService.routeToFragmentDetails(dataSource.id)"
+                    class="tooltip p_icons fa fa-eject">
+                    <div class="tooltip_text">تایید شده</div>
+                </i>
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>

@@ -456,7 +456,7 @@ export interface IFragmentMaster {
     isValidated: boolean
 }
 export interface IFragmentDetails {
-    id: string,
+    id?: string,
     fragmentMasterId: string,
     routeTitle: string,
     fromEshterak: string,

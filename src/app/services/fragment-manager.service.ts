@@ -11,13 +11,22 @@ import { IFragmentDetails, IFragmentMaster } from './../Interfaces/imanage';
 })
 export class FragmentManagerService {
 
-  columnSelectedMenuDefault = (): IObjectIteratation[] => {
+  columnSelectedFragmentMaster = (): IObjectIteratation[] => {
     return [
       { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
       { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
       { field: 'isValidated', header: 'تایید شده', isSelected: true, readonly: true },
+    ];
+  }
+  columnSelectedFragmentDetails = (): IObjectIteratation[] => {
+    return [
+      { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
+      { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
+      { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true }
     ];
   }
   constructor(
@@ -27,6 +36,17 @@ export class FragmentManagerService {
   ) { }
 
   /* Master */
+  getDataSource = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getFragmentMaster().subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
   addFragmentMaster = (body: IFragmentMaster) => {
     this.interfaceManagerService.addFragmentMaster(body).subscribe((res: IResponses) => {
       if (res)
@@ -52,6 +72,17 @@ export class FragmentManagerService {
     })
   }
   /* Details */
+  getFragmentDetails = (masterId: string): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getFragmentDetails(masterId).subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
   addFragmentDetails = (body: IFragmentDetails) => {
     this.interfaceManagerService.addFragmentDetails(body).subscribe((res: IResponses) => {
       if (res)
@@ -70,18 +101,15 @@ export class FragmentManagerService {
         this.utilsService.snackBarMessageSuccess(res.message)
     })
   }
-  /**/
-  getDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.getFragmentMaster().subscribe(res => {
-          resolve(res);
-        })
-      })
-    } catch (error) {
-      console.error(e => e);
-    }
+  getRouteParams = () => {
+    return this.utilsService.getRouteParams('masterId');
   }
+  routeToFragmentDetails = (route: string) => {
+    console.log('/wr/m/nob/' + route);
+
+    this.utilsService.routeTo('/wr/m/nob/' + route);
+  }
+  /**/
   getZoneDictionary = (): Promise<any> => {
     return new Promise((resolve) => {
       resolve(this.dictionaryWrapperService.getZoneDictionary());
