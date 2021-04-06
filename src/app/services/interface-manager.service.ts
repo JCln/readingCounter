@@ -33,6 +33,41 @@ export class InterfaceManagerService {
   also useful for get select options counter readers
   with zoneId parameter
   */
+
+  /* fragment manager 
+  contains master and details
+  */
+  //  master
+  getFragmentMaster = (): Observable<any> => {
+    return this.mainService.GET('V1/Fragment/Master/All');
+  }
+  deleteFragmentMaster = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Fragment/Master/Remove', body);
+  }
+  editFragmentMaster = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Fragment/Master/Edit', body);
+  }
+  addFragmentMaster = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Fragment/Master/Add', body);
+  }
+  validateFragmentMaster = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1​/Fragment​/Master​/Validate', body);
+  }
+  // details
+  getFragmentDetails = (masterId: string): Observable<any> => {
+    return this.mainService.GETID(masterId, 'V1/Fragment/Details');
+  }
+  deleteFragmentDetails = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Fragment/details/Remove', body);
+  }
+  editFragmentDetails = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Fragment/details/Edit', body);
+  }
+  addFragmentDetails = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Fragment/details/Add', body);
+  }
+  // 
+
   getCounterReadersByZoneId = (zoneId: number): Observable<any> => {
     return this.mainService.GET(`V1/User/CounterReaders/${zoneId}`);
   }

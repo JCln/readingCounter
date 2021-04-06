@@ -1,0 +1,128 @@
+<p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
+    [filterDelay]="0" dir="rtl"
+    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
+    styleClass="p-datatable-responsive" #dt dataKey="id" editMode="row">
+
+    <ng-template pTemplate="caption">
+        <!-- <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
+            selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect> -->
+        <div class="header_icons_wrap">
+            <div class="left_side">
+                <i appAddRow [table]="dt" [newRow]="newRow()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن</div>
+                </i>
+                <!-- <i (click)="fragmentManagerService.addFragmentDetails(dataSource)"
+                    class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن</div>
+                </i> -->
+            </div>
+            <div class="left_side">
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                </i>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th pSortableColumn="zoneId">
+                <p-sortIcon field="zoneId"></p-sortIcon>
+                منطقه
+            </th>
+            <th pSortableColumn="routeTitle">
+                <p-sortIcon field="routeTitle"></p-sortIcon>
+                عنوان
+            </th>
+            <th pSortableColumn="fromEshterak">
+                <p-sortIcon field="fromEshterak"></p-sortIcon>
+                از اشتراک
+            </th>
+            <th pSortableColumn="toEshterak">
+                <p-sortIcon field="toEshterak"></p-sortIcon>
+                تا اشتراک
+            </th>
+            <th pSortableColumn="isValidated">
+                <p-sortIcon field="isValidated"></p-sortIcon>
+                تایید
+            </th>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="dataSource">
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
+                            placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title"></p-dropdown>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.zoneId}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.routeTitle">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.routeTitle}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.fromEshterak">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.fromEshterak}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.toEshterak">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.toEshterak}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource.isValidated">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource.isValidated}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td style="text-align: center;">
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)" class="pi pi-pencil"></i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource)" class="pi pi-check"></i>
+                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)" class="pi pi-times"></i>
+            </td>
+            <td>
+                <i *ngIf="!editing" (click)="fragmentManagerService.removeFragmentMaster(dataSource)"
+                    class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text">حذف</div>
+                </i>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+            <td [attr.colspan]="columns.length">
+                موردی پیدا نشد
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

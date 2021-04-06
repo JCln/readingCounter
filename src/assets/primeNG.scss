@@ -64,8 +64,7 @@
     margin: 0 $font_05;
     width: 100%;
 
-    .left_side,
-    .right_side {
+    .left_side {
       display: flex;
 
       i {
@@ -102,6 +101,15 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+}
+
+input {
+  font-size: $font_xxs;
+  font-weight: 600;
+  width: 100%;
+  border: 1px solid $gray_e3;
+  border-radius: 10px;
+  color: $gray_96;
 }
 
 :host ::ng-deep {

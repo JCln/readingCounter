@@ -447,3 +447,22 @@ export interface IReadingReportDisposalHours {
     saierCount: number
 }
 //
+// fragment manager 
+export interface IFragmentMaster {
+    zoneId: number,
+    routeTitle: string,
+    fromEshterak: string,
+    toEshterak: string,
+    isValidated: boolean
+}
+export interface IFragmentDetails {
+    id: string,
+    fragmentMasterId: string,
+    routeTitle: string,
+    fromEshterak: string,
+    toEshterak: string,
+    orderDigit: number,
+    orderPersian: string
+}
+
+//

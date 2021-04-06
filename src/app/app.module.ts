@@ -10,7 +10,7 @@ import { SharedTwoModule } from './shared/shared-two.module';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent    
+    LoginComponent
   ],
   imports: [
     CoreModule,
