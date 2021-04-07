@@ -59,11 +59,19 @@ export class FragmentManagerService {
         this.utilsService.snackBarMessageSuccess(res.message)
     })
   }
-  removeFragmentMaster = (body: IFragmentMaster) => {
-    this.interfaceManagerService.deleteFragmentMaster(body).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message)
-    })
+  removeFragmentMaster = (body: IFragmentMaster): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.deleteFragmentMaster(body).subscribe((res: IResponses) => {
+          if (res) {
+            this.utilsService.snackBarMessageSuccess(res.message);
+            resolve(true);
+          }
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   isValidateMaster = (body: IFragmentMaster) => {
     this.interfaceManagerService.validateFragmentMaster(body).subscribe((res: IResponses) => {

@@ -28,11 +28,13 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             if (error.error.message)
               this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
             else
-              this.snackWrapperService.openSnackBar('موردی وجود ندارد', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+              this.snackWrapperService.openSnackBar('دسترسی شما باطل شده است. از برنامه خارج و سپس وارد شوید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }
           if (error.status === 401) {
-            console.log(401);
-            // this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+            if (error.error.message)
+              this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+            else
+              this.snackWrapperService.openSnackBar('', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }
           if (error.status === 403) {
             this.snackWrapperService.openSnackBar('شما به این قسمت دسترسی ندارید', ENSnackBarTimes.fourMili, ENSnackBarColors.danger);

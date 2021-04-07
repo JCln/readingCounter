@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IFragmentMaster } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
@@ -16,6 +17,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   dataSource: IFragmentMaster[] = [];
+  table: Table;
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -77,7 +79,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   refreshTable = () => {
-    this.classWrapper(true);
+    this.table.initRowEdit(this.dataSource);
   }
   newRow() {
     return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isValidated: false };
@@ -85,16 +87,29 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   onRowEditInit(dataSource: any) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
-
   onRowEditSave(dataSource: IFragmentMaster) {
     dataSource.zoneId = dataSource.zoneId['id'];
+    if (!dataSource.id) {
+      this.onRowAdd(dataSource);
+    }
+    else {
+      this.fragmentManagerService.editFragmentMaster(dataSource);
+    }
+    console.log(1);
+    
+    this.refreshTable();
+  }
+  onRowAdd(dataSource: IFragmentMaster) {
     this.fragmentManagerService.addFragmentMaster(dataSource);
   }
-
   onRowEditCancel(dataSource: any, index: number) {
     console.log('edit cancel' + dataSource);
 
     this.dataSource[index] = this.clonedProducts[dataSource.id];
     delete this.dataSource[dataSource.id];
+  }
+  removeFragmentMaster = async (dataSource: IFragmentMaster) => {
+    await this.fragmentManagerService.removeFragmentMaster(dataSource);
+    this.refreshTable();
   }
 }

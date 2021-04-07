@@ -449,6 +449,7 @@ export interface IReadingReportDisposalHours {
 //
 // fragment manager 
 export interface IFragmentMaster {
+    id: string,
     zoneId: number,
     routeTitle: string,
     fromEshterak: string,

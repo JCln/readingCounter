@@ -67,6 +67,10 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
       return {
         _title: 'ورود', _dynamicRoute: '/wr/mu/all/loggins/'
       }
+    if (this.getCurrentDynamicRoute('/wr/m/nob/'))
+      return {
+        _title: 'نوبتی', _dynamicRoute: '/wr/m/nob/'
+      }
     if (this.getCurrentDynamicRoute('/wr/m/track/woui/'))
       return {
         _title: 'صوت/تصویر', _dynamicRoute: '/wr/m/track/woui/'
@@ -101,7 +105,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
     const a = {
       route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };
-    
+
     if (this.utilsService.isNull(this.DoesTabsHaveThisRouteNow()))
       this.tabs.push(a);
   }

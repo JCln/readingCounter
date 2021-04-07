@@ -37,7 +37,7 @@
 
     <ng-template pTemplate="body" let-dataSource let-columns="columns" let-editing="editing" let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
-            <td *ngFor="let col of columns" pEditableColumn>
+            <td *ngFor="let col of columns">
                 <ng-container
                     *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
                     <p-cellEditor>
@@ -57,19 +57,21 @@
                             <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
                         </ng-template>
                         <ng-template pTemplate="output">
-                            {{dataSource[col.header]}}
+                            {{dataSource[col.field]}}
                         </ng-template>
                     </p-cellEditor>
                 </ng-template>
             </td>
             <td style="text-align: center;">
-                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)" class="_edit pi pi-pencil"></i>
-                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)" class="_save pi pi-check"></i>
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)" class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource)" class="_save pi pi-check"></i>
                 <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
                     class="_cancel pi pi-times"></i>
             </td>
             <td>
-                <i *ngIf="!editing" (click)="removeRow(dataSource)" class="tooltip p_icons fa fa-trash-o">
+                <i *ngIf="!editing" (click)="removeRow(dataSource, ri)" class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text">حذف</div>
                 </i>
             </td>

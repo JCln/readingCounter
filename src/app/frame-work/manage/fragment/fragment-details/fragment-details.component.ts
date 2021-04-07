@@ -6,7 +6,7 @@ import { CloseTabService } from 'src/app/services/close-tab.service';
 import { FragmentManagerService } from 'src/app/services/fragment-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
-import { IFragmentDetails, IFragmentMaster } from './../../../../Interfaces/imanage';
+import { IFragmentDetails } from './../../../../Interfaces/imanage';
 
 @Component({
   selector: 'app-fragment-details',
@@ -45,6 +45,7 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
       this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
       this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
     }
+    this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -59,7 +60,6 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
   ngOnInit(): void {
     this._masterId = this.fragmentManagerService.getRouteParams();
     this.classWrapper();
-    this.insertSelectedColumns();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -88,20 +88,35 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
 
-  onRowEditSave(dataSource: IFragmentDetails, index: number) {
-    dataSource.fragmentMasterId = this._masterId;
-    this.fragmentManagerService.addFragmentDetails(this.dataSource[index]);
-    // this.table.initRowEdit(dataSource); // add to table automatically
-  }
 
   onRowEditCancel(dataSource: any, index: number) {
     console.log('edit cancel   ' + dataSource);
     console.log(this.dataSource[index]);
 
-    // this.dataSource[index] = this.clonedProducts[dataSource.id];
-    // delete this.dataSource[dataSource.id];
   }
-  removeRow = (dataSource: IFragmentMaster) => {
-    this.fragmentManagerService.removeFragmentMaster(dataSource);
+  removeRow = (dataSource: IFragmentDetails, index: number) => {
+    this.fragmentManagerService.removeFragmentDetails(dataSource);
+    this.dataSource[index] = this.clonedProducts[dataSource.id];
+    delete this.dataSource[dataSource.id];
+    this.refreshTable();
   }
+
+  // onRowEditSave(dataSource: IFragmentDetails, index: number) {
+  //   dataSource.fragmentMasterId = this._masterId;
+  //   this.fragmentManagerService.addFragmentDetails(this.dataSource[index]);
+  // }
+  onRowEditSave(dataSource: IFragmentDetails) {
+    if (!dataSource.id) {
+      this.onRowAdd(dataSource);
+    }
+    else {
+      this.fragmentManagerService.editFragmentDetails(dataSource);
+    }
+    this.table.initRowEdit(dataSource); // add to table automatically
+    this.refreshTable();
+  }
+  onRowAdd(dataSource: IFragmentDetails) {
+    this.fragmentManagerService.addFragmentDetails(dataSource);
+  }
+
 }
