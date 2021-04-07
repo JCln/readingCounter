@@ -30,6 +30,14 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
+  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
+    dataSource.map(dataSource => {
+      zoneDictionary.map(zoneDic => {
+        if (zoneDic.id === dataSource.zoneId)
+          dataSource.zoneId = zoneDic.title;
+      })
+    });
+  }
   nullSavedSource = () => this.closeTabService.saveDataForFragmentNOB = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -43,7 +51,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
       this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
       console.log(this.zoneDictionary);
 
-
+      this.convertIdToTitle(this.dataSource, this.zoneDictionary);
       this.closeTabService.saveDataForFragmentNOB = this.dataSource;
     }
   }
@@ -78,6 +86,9 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+  reFetchTable = () => {
+    this.classWrapper(true);
+  }
   refreshTable = () => {
     this.table.initRowEdit(this.dataSource);
   }
@@ -89,17 +100,19 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   onRowEditSave(dataSource: IFragmentMaster) {
     dataSource.zoneId = dataSource.zoneId['id'];
+    if (!this.fragmentManagerService.verificationMaster(dataSource))
+      return;
     if (!dataSource.id) {
       this.onRowAdd(dataSource);
     }
     else {
       this.fragmentManagerService.editFragmentMaster(dataSource);
     }
-    console.log(1);
-    
     this.refreshTable();
   }
   onRowAdd(dataSource: IFragmentMaster) {
+    if (!this.fragmentManagerService.verificationMaster(dataSource))
+      return;
     this.fragmentManagerService.addFragmentMaster(dataSource);
   }
   onRowEditCancel(dataSource: any, index: number) {
@@ -109,7 +122,10 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     delete this.dataSource[dataSource.id];
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster) => {
-    await this.fragmentManagerService.removeFragmentMaster(dataSource);
-    this.refreshTable();
+    if (!this.fragmentManagerService.verificationMaster(dataSource))
+      return;
+    const a = await this.fragmentManagerService.removeFragmentMaster(dataSource);
+    if (a)
+      this.refreshTable();
   }
 }

@@ -58,13 +58,13 @@ export class InterfaceManagerService {
     return this.mainService.GETID(masterId, 'V1/Fragment/Details');
   }
   deleteFragmentDetails = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1/Fragment/details/Remove', body);
+    return this.mainService.POSTBODY('V1/Fragment/Detials/Remove', body);
   }
   editFragmentDetails = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1/Fragment/details/Edit', body);
+    return this.mainService.POSTBODY('V1/Fragment/Details/Edit', body);
   }
   addFragmentDetails = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1/Fragment/details/Add', body);
+    return this.mainService.POSTBODY('V1/Fragment/Details/Add', body);
   }
   // 
 

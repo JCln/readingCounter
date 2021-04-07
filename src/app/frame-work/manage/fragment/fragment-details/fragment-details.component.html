@@ -38,18 +38,8 @@
     <ng-template pTemplate="body" let-dataSource let-columns="columns" let-editing="editing" let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
-                <ng-container
-                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <mat-checkbox [(ngModel)]="dataSource[col.field]">
-                            </mat-checkbox>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            <mat-checkbox [(ngModel)]="dataSource[col.field]">
-                            </mat-checkbox>
-                        </ng-template>
-                    </p-cellEditor>
+                <ng-container *ngIf="col.field === 'orderDigit'|| col.field === 'orderPersian'; else elseTemplate">
+                    {{dataSource[col.field]}}
                 </ng-container>
                 <ng-template #elseTemplate>
                     <p-cellEditor>
@@ -63,7 +53,8 @@
                 </ng-template>
             </td>
             <td style="text-align: center;">
-                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)" class="tooltip _edit pi pi-pencil">
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
+                    class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
                 </i>
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource)" class="_save pi pi-check"></i>
@@ -77,11 +68,11 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" let-columns>
+    <!-- <ng-template pTemplate="emptymessage" let-columns>
         <tr>
             <td [attr.colspan]="columns.length">
                 موردی پیدا نشد
             </td>
         </tr>
-    </ng-template>
+    </ng-template> -->
 </p-table>

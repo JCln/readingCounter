@@ -15,6 +15,9 @@ export class UtilsService {
     private snackWrapperService: SnackWrapperService
   ) { }
 
+  isNaN = (value: any): boolean => {
+    return isNaN(value);
+  }
   isEmptyString(value: string): boolean {
     return !value || 0 === value.length;
   }

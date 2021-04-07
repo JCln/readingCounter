@@ -10,6 +10,8 @@ import { IFragmentDetails, IFragmentMaster } from './../Interfaces/imanage';
   providedIn: 'root'
 })
 export class FragmentManagerService {
+  fragmentMaster: IFragmentMaster;
+  fragmentDetails: IFragmentDetails;
 
   columnSelectedFragmentMaster = (): IObjectIteratation[] => {
     return [
@@ -59,7 +61,7 @@ export class FragmentManagerService {
         this.utilsService.snackBarMessageSuccess(res.message)
     })
   }
-  removeFragmentMaster = (body: IFragmentMaster): Promise<any> => {
+  removeFragmentMaster = (body: IFragmentMaster): Promise<boolean> => {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.deleteFragmentMaster(body).subscribe((res: IResponses) => {
@@ -103,11 +105,14 @@ export class FragmentManagerService {
         this.utilsService.snackBarMessageSuccess(res.message)
     })
   }
-  removeFragmentDetails = (body: IFragmentDetails) => {
+  removeFragmentDetails = (body: IFragmentDetails): boolean => {
     this.interfaceManagerService.deleteFragmentDetails(body).subscribe((res: IResponses) => {
-      if (res)
+      if (res) {
         this.utilsService.snackBarMessageSuccess(res.message)
+        return true;
+      }
     })
+    return false;
   }
   getRouteParams = () => {
     return this.utilsService.getRouteBySplit('/');
@@ -120,6 +125,93 @@ export class FragmentManagerService {
     return new Promise((resolve) => {
       resolve(this.dictionaryWrapperService.getZoneDictionary());
     });
+  }
+
+  /* VERIFICATION */
+  private masterValidation = (): boolean => {
+    if (this.utilsService.isNull(this.fragmentMaster.zoneId)) {
+      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.fragmentMaster.fromEshterak)) {
+      this.utilsService.snackBarMessageWarn('از اشتراک را وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.fragmentMaster.toEshterak)) {
+      this.utilsService.snackBarMessageWarn('تا اشتراک را وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.fragmentMaster.routeTitle)) {
+      this.utilsService.snackBarMessageWarn('عنوان مسیر را وارد نمایید');
+      return false;
+    }
+    if (!this.utilsService.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
+      this.utilsService.snackBarMessageWarn('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد');
+      return false;
+    }
+
+    if (this.utilsService.isNaN(this.fragmentMaster.fromEshterak)) {
+      this.utilsService.snackBarMessageWarn('فرمت از اشتراک ناصحیح است');
+      return false;
+    }
+
+    if (this.utilsService.isNaN(this.fragmentMaster.fromEshterak)) {
+      this.utilsService.snackBarMessageWarn('فرمت  تا اشتراک ناصحیح است');
+      return false;
+    }
+
+    if (!this.utilsService.lengthControl(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak, 5, 10)) {
+      this.utilsService.snackBarMessageWarn('فرمت اشتراک ناصحیح است');
+      return false;
+    }
+    return true;
+  }
+  private detailsValidation = (): boolean => {
+    if (this.utilsService.isNull(this.fragmentDetails.fromEshterak)) {
+      this.utilsService.snackBarMessageWarn('از اشتراک را وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.fragmentDetails.toEshterak)) {
+      this.utilsService.snackBarMessageWarn('تا اشتراک را وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.fragmentDetails.routeTitle)) {
+      this.utilsService.snackBarMessageWarn('عنوان مسیر را وارد نمایید');
+      return false;
+    }
+
+    if (this.utilsService.isNaN(this.fragmentDetails.fromEshterak)) {
+      this.utilsService.snackBarMessageWarn('فرمت از اشتراک ناصحیح است');
+      return false;
+    }
+
+    if (this.utilsService.isNaN(this.fragmentDetails.fromEshterak)) {
+      this.utilsService.snackBarMessageWarn('فرمت  تا اشتراک ناصحیح است');
+      return false;
+    }
+
+    if (!this.utilsService.isSameLength(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
+      this.utilsService.snackBarMessageWarn('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد');
+      return false;
+    }
+
+    if (this.utilsService.isNaN(this.fragmentDetails))
+      return false;
+
+    if (!this.utilsService.lengthControl(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak, 5, 10)) {
+      this.utilsService.snackBarMessageWarn('فرمت اشتراک ناصحیح است');
+      return false;
+    }
+    return true;
+  }
+
+  verificationMaster = (fragmentMaster: IFragmentMaster): boolean => {
+    this.fragmentMaster = fragmentMaster;
+    return this.masterValidation();
+  }
+  verificationDetails = (fragmentDetails: IFragmentDetails): boolean => {
+    this.fragmentDetails = fragmentDetails;
+    return this.detailsValidation();
   }
 
 }

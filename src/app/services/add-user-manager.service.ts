@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
 
-import { ENSnackBarColors, IResponses } from './../Interfaces/ioverall-config';
+import { ENSnackBarColors } from './../Interfaces/ioverall-config';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems } from './../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
@@ -114,6 +114,7 @@ export class AddUserManagerService {
     this.interfaceManagerService.postAddContact(vals).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+        this.utilsService.routeTo('/wr/mu/all');
       }
     });
   }

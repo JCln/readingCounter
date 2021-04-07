@@ -101,7 +101,7 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
     // console.log(completeRoutePart);
     // console.log(dRoute._dynamicRoute);
 
-    console.log(`${dRoute._dynamicRoute}${completeRoutePart}`, `   ${dRoute._title}${lastUrlPart}`);
+    // console.log(`${dRoute._dynamicRoute}${completeRoutePart}`, `   ${dRoute._title}${lastUrlPart}`);
     const a = {
       route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };

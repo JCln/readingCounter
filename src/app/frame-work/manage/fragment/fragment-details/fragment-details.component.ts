@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
@@ -27,24 +28,19 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public fragmentManagerService: FragmentManagerService
+    public fragmentManagerService: FragmentManagerService,
+    private router: Router
   ) {
+    this.getRouteParams();
   }
   nullSavedSource = () => this.closeTabService.saveDataForFragmentNOBDetails = null;
 
   classWrapper = async (canRefresh?: boolean) => {
-    console.log(this._masterId);
-
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForFragmentNOBDetails) {
-      this.dataSource = this.closeTabService.saveDataForFragmentNOBDetails;
-    }
-    else {
-      this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
-      this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
-    }
+    this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
+    this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
     this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
@@ -57,9 +53,19 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this._selectCols = this.fragmentManagerService.columnSelectedFragmentDetails();
     this._selectedColumns = this.customizeSelectedColumns();
   }
+  private getRouteParams = () => {
+    this.subscription.push(this.router.events.subscribe(res => {
+      if (res instanceof NavigationEnd) {
+        if (res) {
+          this._masterId = this.fragmentManagerService.getRouteParams();
+          this.classWrapper();
+        }
+      }
+    })
+    )
+  }
   ngOnInit(): void {
-    this._masterId = this.fragmentManagerService.getRouteParams();
-    this.classWrapper();
+
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -87,25 +93,22 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
   onRowEditInit(dataSource: any) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
-
-
   onRowEditCancel(dataSource: any, index: number) {
     console.log('edit cancel   ' + dataSource);
-    console.log(this.dataSource[index]);
-
   }
   removeRow = (dataSource: IFragmentDetails, index: number) => {
-    this.fragmentManagerService.removeFragmentDetails(dataSource);
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
-    this.refreshTable();
+    if (!this.fragmentManagerService.verificationDetails(dataSource))
+      return;
+    const a = this.fragmentManagerService.removeFragmentDetails(dataSource);
+    if (a) {
+      this.dataSource[index] = this.clonedProducts[dataSource.id];
+      delete this.dataSource[dataSource.id];
+      this.refreshTable();
+    }
   }
-
-  // onRowEditSave(dataSource: IFragmentDetails, index: number) {
-  //   dataSource.fragmentMasterId = this._masterId;
-  //   this.fragmentManagerService.addFragmentDetails(this.dataSource[index]);
-  // }
   onRowEditSave(dataSource: IFragmentDetails) {
+    if (!this.fragmentManagerService.verificationDetails(dataSource))
+      return;
     if (!dataSource.id) {
       this.onRowAdd(dataSource);
     }

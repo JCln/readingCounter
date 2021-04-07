@@ -13,13 +13,9 @@
                 <i appAddRow [table]="dt" [newRow]="newRow()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن</div>
                 </i>
-                <!-- <i (click)="fragmentManagerService.addFragmentDetails(dataSource)"
-                    class="tooltip _circle_border p_icons fa fa-plus">
-                    <div class="tooltip_text">افزودن</div>
-                </i> -->
             </div>
             <div class="left_side">
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                <i (click)="reFetchTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
                 </i>
             </div>
@@ -59,7 +55,8 @@
                 <p-cellEditor>
                     <ng-template pTemplate="input">
                         <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
-                            placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title"></p-dropdown>
+                            placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title"
+                            optionValue="{{dataSource.zoneId}}"></p-dropdown>
                     </ng-template>
                     <ng-template pTemplate="output">
                         {{dataSource.zoneId}}
@@ -97,17 +94,13 @@
                 </p-cellEditor>
             </td>
             <td>
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="dataSource.isValidated">
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{dataSource.isValidated}}
-                    </ng-template>
-                </p-cellEditor>
+                <mat-checkbox disabled="true" [(ngModel)]="dataSource.isValidated"></mat-checkbox>
             </td>
             <td style="text-align: center;">
-                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)" class="_edit pi pi-pencil"></i>
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
+                    class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource)" class="_save pi pi-check"></i>
                 <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
                     class="_cancel pi pi-times"></i>
@@ -119,7 +112,7 @@
             </td>
             <td>
                 <i *ngIf="!editing" (click)="fragmentManagerService.routeToFragmentDetails(dataSource.id)"
-                    class="tooltip p_icons fa fa-eject">
+                    class="tooltip p_icons pi pi-info-circle">
                     <div class="tooltip_text">تایید شده</div>
                 </i>
             </td>
