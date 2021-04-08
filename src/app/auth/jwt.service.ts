@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
 
-import { AuthTokenType } from '../Interfaces/iauth-guard-permission';
 import { BrowserStorageService } from '../services/browser-storage.service';
 import { UtilsService } from '../services/utils.service';
+import { ENAuthTokenType } from './../Interfaces/iauth-guard-permission';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class JwtService {
 
   getDecodedAccessToken(): any {
     try {
-      return jwt_decode(this.browserStorageService.get(AuthTokenType[0]));
+      return jwt_decode(this.browserStorageService.get(ENAuthTokenType.access_token));
     } catch (error) {
       // this.removeAllLocalStorage();
       console.error(error);
@@ -52,14 +52,14 @@ export class JwtService {
     }
   }
   saveToLocalStorage = (accessToken: string): void => {
-    this.browserStorageService.set(AuthTokenType[0], accessToken);
+    this.browserStorageService.set(ENAuthTokenType.access_token, accessToken);
   }
   saveToLocalStorageRefresh = (refreshToken: string): void => {
-    this.browserStorageService.set(AuthTokenType[1], refreshToken);
+    this.browserStorageService.set(ENAuthTokenType.refresh_token, refreshToken);
   }
   getAuthorizationToken = (): string => {
     try {
-      const a = this.browserStorageService.get(AuthTokenType[0]);
+      const a = this.browserStorageService.get(ENAuthTokenType.access_token);
       if (!a) {
         return null;
       }
@@ -72,7 +72,7 @@ export class JwtService {
   }
   getRefreshToken = (): string => {
     try {
-      const a = this.browserStorageService.get(AuthTokenType[1]);
+      const a = this.browserStorageService.get(ENAuthTokenType.refresh_token);
       if (!a)
         return null;
       return a;

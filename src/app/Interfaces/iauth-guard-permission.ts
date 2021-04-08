@@ -2,9 +2,9 @@ export interface ICredentials {
     username: string;
     password: string;
 }
-export enum AuthTokenType {
-    access_token,
-    refresh_token
+export enum ENAuthTokenType {
+    access_token = 'access_token',
+    refresh_token = 'refresh_token'
 }
 export interface IAuthTokenType {
     access_token: string;

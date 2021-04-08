@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IReadingReportReq } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
@@ -45,10 +46,15 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
     private interactionService: InteractionService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private closeTabService: CloseTabService
   ) { }
 
-  classWrapper = async () => {
+  nullSavedSource = () => this.closeTabService.saveDataForRRTraverse = null;
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.nullSavedSource();
+    }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
@@ -60,7 +66,7 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === '/wr/rpts/mam/trv') {
-          this.classWrapper();
+          this.classWrapper(true);
         }
       }
     })

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
+import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-config';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -10,7 +12,11 @@ import { AuthService } from './auth.service';
 
 export class GuardService implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackWrapperService: SnackWrapperService
+  ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -25,6 +31,7 @@ export class GuardService implements CanActivate {
   }
   private hasAuthUserAccessToThisRoute(returnUrl: string): boolean {
     if (!this.authService.isAuthUserLoggedIn()) {
+      this.snackWrapperService.openSnackBar('دسترسی شما باطل شده است. مجددا وارد شوید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
       this.routeToLogin(returnUrl);
       return false;
     }

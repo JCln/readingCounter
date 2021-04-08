@@ -2,11 +2,9 @@ import { Location } from '@angular/common';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs/internal/observable/of';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { delay, mergeMap, retryWhen, take } from 'rxjs/operators';
-import { ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
+import { retryWhen, take } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
 import { JwtService } from './jwt.service';
@@ -32,13 +30,13 @@ export class InterceptorService implements HttpInterceptor {
     return next.handle(req)
       .pipe(
         retryWhen(errors => errors.pipe(
-          mergeMap((error: HttpErrorResponse, retryAttempt: number) => {
-            if (retryAttempt === 1) {
-              return throwError(error); // no retry
-            }
-            return of(error); // retry
-          }),
-          delay(ENSnackBarTimes.fourMili),
+          // mergeMap((error: HttpErrorResponse, retryAttempt: number) => {
+          //   if (retryAttempt === 1) {
+          //     return throwError(error); // no retry
+          //   }
+          //   return of(error); // retry
+          // }),
+          // delay(ENSnackBarTimes.fourMili),
           take(1)
         )),
         catchError((error => {
@@ -52,6 +50,7 @@ export class InterceptorService implements HttpInterceptor {
               const newRequest = this.handle401Error(req);
               if (newRequest) {
                 console.log("Try new AuthRequest ...");
+                this.authService.savedStatusFromToken();
                 return next.handle(newRequest);
               }
               else {

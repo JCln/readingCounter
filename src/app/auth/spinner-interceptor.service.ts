@@ -28,7 +28,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             if (error.error.message)
               this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
             else
-              this.snackWrapperService.openSnackBar('دسترسی شما باطل شده است. از برنامه خارج و سپس وارد شوید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+              this.snackWrapperService.openSnackBar('مقادیر را بررسی و مجددا امتحان نمایید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }
           if (error.status === 401) {
             if (error.error.message)
