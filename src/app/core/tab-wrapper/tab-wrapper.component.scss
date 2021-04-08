@@ -115,7 +115,7 @@ li.active::before {
     border-radius: 50%;
 
     &:hover {
-      box-shadow: 1px 0px 2px 1px $red;
+      box-shadow: 0px 0px 4px 1px $red;
     }
   }
 }

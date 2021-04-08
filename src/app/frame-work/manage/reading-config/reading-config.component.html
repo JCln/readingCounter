@@ -345,13 +345,13 @@
                 <div class="tooltip_text">ویرایش</div>
             </i>|
             <i (click)="deleteSingleRow(row)" class="tooltip _custom fa fa-trash-o">
-                <div class="tooltip_text">حذف</div>
+                <div class="tooltip_text_right">حذف</div>
             </i>
             <i *ngIf="isHide" (click)="isHide = !isHide" class="tooltip _custom fa fa-eye">
                 <div class="tooltip_text">جزئیات</div>
             </i>
             <i *ngIf="!isHide" (click)="isHide = !isHide" class="tooltip _custom fa fa-eye-slash">
-                <div class="tooltip_text">عدم نمایش جزئیات</div>
+                <div class="tooltip_text_right">عدم نمایش جزئیات</div>
             </i>
         </td>
     </ng-container>
