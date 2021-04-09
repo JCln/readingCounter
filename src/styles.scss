@@ -32,6 +32,7 @@ h5,
 h6,
 p {
   margin: 0;
+  font-weight: 600;
 }
 
 img {
@@ -48,4 +49,49 @@ input,
 li {
   outline: none;
   font-family: inherit;
+}
+
+.ag-theme-alpine {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.p-dialog,
+.p-dialog-header,
+.p-dialog-title {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+}
+
+// ts config
+.cell_conf {
+  color: #5c5c5c;
+  font-size: 1.2rem;
+}
+
+// 
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.leaflet-popup-content {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.leaflet-popup-content {
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
 }

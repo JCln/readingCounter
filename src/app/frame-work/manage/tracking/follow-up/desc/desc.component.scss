@@ -1,0 +1,43 @@
+@import '../../../../../../assets/variable.scss';
+@import '../../../../../../assets/primeNG';
+@import '../../../../../../assets/input.scss';
+@import '../../../../../../assets/tooltip.scss';
+
+
+.contain {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 14rem));
+  direction: rtl;
+  gap: .5rem;
+  margin: $font_xs 0;
+  background: $gray_l;
+  box-shadow: 1px 1px 8px 4px $gray_d;
+  text-align: center;
+  padding: $font_2 $font_05;
+  justify-content: center;
+  border-radius: $border_s;
+  min-height: 15rem;
+}
+
+input {
+  color: $gray_96;
+  margin: 0 auto;
+  box-shadow: 1px 1px 8px 1px $gray_d;
+  text-align: center;
+}
+
+.input_2 {
+  margin: 0;
+}
+
+._value {
+  border: 0;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+  margin: 0 $font_05;
+  font-family: $font_family;
+  font-size: $font_s;
+  font-weight: 600;
+  color: $gray_dr;
+}

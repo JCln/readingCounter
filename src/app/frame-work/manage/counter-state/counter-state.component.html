@@ -1,0 +1,42 @@
+<p-table #dt2 [columns]="_selectedColumns" [value]="dataSource" [lazy]="true"
+    (onLazyLoad)="sendGridFriendlyDataSource($event)" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
+" [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0"
+    [globalFilterFields]="['moshtarakinId','title','zoneId','clientOrder','canEnterNumber','isMane','canNumberBeLessThanPre','isTavizi','shouldEnterNumber','isXarab','isFaqed']"
+    dir="rtl" styleClass="p-datatable-responsive">
+    <!--[loading]="innerLoading"-->
+
+    <ng-template pTemplate="caption">
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
+            selectedItemsLabel=" {0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSource let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                <ng-container
+                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{dataSource[col.field]}}
+                </ng-template>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

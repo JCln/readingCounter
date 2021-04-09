@@ -1,0 +1,129 @@
+@mixin sixColumns($value) {
+  $xs: repeat(2, 1fr);
+  $s: repeat(3, 1fr);
+  $m: repeat(4, 1fr);
+  $l: repeat(5, 1fr);
+  $xl: repeat(6, 1fr);
+
+  @media (max-width: 549px) {
+    #{$value} {
+      grid-template-columns: $xs;
+    }
+  }
+
+  @media (min-width: 550px) {
+    #{$value} {
+      grid-template-columns: $s;
+    }
+  }
+
+  @media (min-width: 780px) {
+    #{$value} {
+      grid-template-columns: $m;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    #{$value} {
+      grid-template-columns: $l;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    #{$value} {
+      grid-template-columns: $xl;
+    }
+  }
+}
+
+@mixin fourColumns($value) {
+  $xs: repeat(1, 1fr);
+  $s: repeat(2, 1fr);
+  $m: repeat(3, 1fr);
+  $l: repeat(4, 1fr);
+
+  @media (max-width: 549px) {
+    #{$value} {
+      grid-template-columns: $xs;
+    }
+  }
+
+  @media (min-width: 550px) {
+    #{$value} {
+      grid-template-columns: $s;
+    }
+  }
+
+  @media (min-width: 780px) {
+    #{$value} {
+      grid-template-columns: $m;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    #{$value} {
+      grid-template-columns: $l;
+    }
+  }
+
+}
+
+@mixin threeColumns($value) {
+  $xs: repeat(1, 1fr);
+  $s: repeat(2, 1fr);
+  $m: repeat(3, 1fr);
+
+  @media (max-width: 549px) {
+    #{$value} {
+      grid-template-columns: $xs;
+    }
+  }
+
+  @media (min-width: 550px) {
+    #{$value} {
+      grid-template-columns: $s;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    #{$value} {
+      grid-template-columns: $m;
+    }
+  }
+
+}
+
+@mixin threeColumnsWithVals($value, $val, $val2) {
+  $s: repeat(2, 1fr);
+  $m: repeat(3, 1fr);
+
+  @media (min-width: $val) {
+    #{$value} {
+      grid-template-columns: $s;
+    }
+  }
+
+  @media (min-width: $val2) {
+    #{$value} {
+      grid-template-columns: $m;
+    }
+  }
+
+}
+
+@mixin media_wrapper($width_size, $attribute, $element, $element_param) {
+  @media (min-width: $width_size) {
+    #{$attribute} {
+      #{$element}: $element_param;
+    }
+  }
+}
+
+@mixin media_wrapper_two_params($width_size, $attribute, $element, $element_param, $sec_elem, $sec_elem_param) {
+  @media (min-width: $width_size) {
+    #{$attribute} {
+      #{$element}: $element_param;
+      #{$sec_elem}: $sec_elem_param;
+    }
+  }
+}

@@ -6,13 +6,22 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class InteractionService {
-  private titleSubject = new BehaviorSubject<string>('');
+  private refreshSource = new BehaviorSubject<string>('');
+  private closeSource = new BehaviorSubject<string>('');
 
-  getPageTitle = (): Observable<string> => {
-    return this.titleSubject.asObservable();
-  }
-  setPageTitle = (title: string) => {
-    this.titleSubject.next(title);
-  }
   constructor() { }
+
+  // refrsh config
+  getRefreshedPage = (): Observable<string> => {
+    return this.refreshSource.asObservable();
+  }
+  setRefresh = (url: string) => {
+    this.refreshSource.next(url);
+  }
+  // 
+  // close config
+  getClosedPage = (): Observable<string> => {
+    return this.closeSource.asObservable();
+  }
+  // 
 }

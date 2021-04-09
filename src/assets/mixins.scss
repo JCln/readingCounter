@@ -5,6 +5,16 @@
   align-items: center;
 }
 
+._flex_dr_ric {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+._flex_drr_ric {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
 .d_flex_center {
   display: flex;
   justify-content: center;

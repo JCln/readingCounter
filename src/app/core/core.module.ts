@@ -1,15 +1,25 @@
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { DpDatePickerModule } from 'ng2-jalali-date-picker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserModule } from '@angular/platform-browser';
 
+import { InterceptorService } from '../auth/interceptor.service';
+import { SpinnerInterceptorService } from '../auth/spinner-interceptor.service';
 import { FrameWorkComponent } from './../frame-work/frame-work.component';
+import { AddNewComponent } from './../frame-work/manage/add-new/add-new.component';
+import { SharedThreeModule } from './../shared/shared_three.module';
 import { DropdownComponent } from './_layouts/dropdown/dropdown.component';
 import { HeaderComponent } from './_layouts/header/header.component';
 import { HfcComponent } from './_layouts/hfc/hfc.component';
 import { LayoutComponent } from './_layouts/layout/layout.component';
 import { AnonyHeaderComponent } from './anony-header/anony-header.component';
+import { ClockComponent } from './clock/clock.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
 
 @NgModule({
@@ -21,13 +31,32 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     HeaderComponent,
     AnonyHeaderComponent,
     DropdownComponent,
-    FrameWorkComponent
+    AddNewComponent,
+    FrameWorkComponent,
+    SpinnerComponent,
+    SnackBarComponent,
+    ClockComponent
   ]
   ,
   imports: [
+    BrowserModule,
     CommonModule,
-    DpDatePickerModule,
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({ cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN' }),
+    MatSnackBarModule,
+    MatDialogModule,
+    SharedThreeModule,
     CoreRoutingModule
+  ],
+  exports: [
+    MatSnackBarModule,
+    SpinnerComponent,
+    SnackBarComponent,
+    ClockComponent
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true },
   ]
 })
 export class CoreModule {

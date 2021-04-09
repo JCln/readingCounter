@@ -1,32 +1,36 @@
 @import "../../../../assets/variable.scss";
 
 .dropdown {
+  position: relative;
   place-items: center;
   display: grid;
-  width: $font_3;
-  height: $font_3;
+  width: 2.3rem;
+  height: 2.3rem;
   border-radius: 50%;
-  color: $gray_96;
-  background: $gray_d;
-  font-size: 1.5rem;
+  background: $gray_l;
+  font-size: $font_m;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 0px 1px 1px $dark_ddd;
+  }
 }
 
 .dropbtn {
   place-items: center;
   display: grid;
-  position: relative;
   background: none;
   border: none;
   font-size: $font_l;
-  color: $gray_dr;
+  color: $blue_d;
   cursor: pointer;
 
-  &::after {
+  &:hover::after {
     content: '';
-    width: 5rem;
-    height: 5rem;
     position: absolute;
-    top: 0;
+    width: 5rem;
+    height: 2.3rem;
+    top: 1rem;
     left: -1rem;
   }
 }
@@ -34,7 +38,8 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 3.2rem;
+  top: 2.4rem;
+  left: 0;
   background-color: #f1f1f1;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -42,10 +47,15 @@
 }
 
 .dropdown-content a {
-  color: $gray_dr;
+  color: $blue_d2;
   padding: .3rem 1rem;
   text-decoration: none;
   display: block;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
 
   &:hover {
     background: $gray_d5;

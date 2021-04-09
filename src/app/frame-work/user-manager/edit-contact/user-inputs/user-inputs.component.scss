@@ -1,0 +1,21 @@
+@import '../../add-edit.scss';
+
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
+  gap: .87rem;
+}
+
+.mat-form-field {
+  font-family: $font_family;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.mat-form-field {
+  text-align: right;
+}
+
+.text_left {
+  text-align: left;
+}

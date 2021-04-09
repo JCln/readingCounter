@@ -1,0 +1,104 @@
+<section *ngIf="dataSource">
+    <form #form="ngForm">
+        <section class="contain">
+
+            <div class="input_2">
+                <div class="_key">شماره پیگیری :</div>
+                <input class="_value" name="trackNumber" [(ngModel)]="dataSource.trackNumber">
+            </div>
+            <div class="input_2">
+                <div class="_key">لیست :</div>
+                <input class="_value" name="listNumber" [(ngModel)]="dataSource.listNumber">
+            </div>
+            <div class="input_2">
+                <div class="_key">ناحیه :</div>
+                <input class="_value" name="zoneTitle" [(ngModel)]="dataSource.zoneTitle">
+            </div>
+            <div class="input_2">
+                <div class="_key">از اشتراک :</div>
+                <input class="_value" name="fromEshterak" [(ngModel)]="dataSource.fromEshterak">
+            </div>
+
+            <div class="input_2">
+                <div class="_key">تا اشتراک :</div>
+                <input class="_value" name="toEshterak" [(ngModel)]="dataSource.toEshterak">
+            </div>
+            <div class="input_2">
+                <div class="_key">از :</div>
+                <input class="_value" name="fromDate" [(ngModel)]="dataSource.fromDate">
+            </div>
+
+            <div class="input_2">
+                <div class="_key">تا :</div>
+                <input class="_value" name="toDate" [(ngModel)]="dataSource.toDate">
+            </div>
+            <div class="input_2">
+                <div class="_key">کل تعداد :</div>
+                <input class="_value" name="overallQuantity" [(ngModel)]="dataSource.overallQuantity">
+            </div>
+            <div class="input_2">
+                <div class="_key">تعداد :</div>
+                <input class="_value" name="itemQuantity" [(ngModel)]="dataSource.itemQuantity">
+            </div>
+            <div class="input_2">
+                <div class="_key">دوره قرائت :</div>
+                <input class="_value" name="readingPeriodTitle" [(ngModel)]="dataSource.readingPeriodTitle">
+            </div>
+            <div class="input_2">
+                <div class="_key">سال :</div>
+                <input class="_value" name="year" [(ngModel)]="dataSource.year">
+            </div>
+
+            <div class="check_boxes">
+                <mat-checkbox name="isBazdid" [(ngModel)]="dataSource.isBazdid">بازدید
+                </mat-checkbox>
+
+                <mat-checkbox name="isRoosta" [(ngModel)]="dataSource.isRoosta">روستا
+                </mat-checkbox>
+            </div>
+
+        </section>
+
+    </form>
+</section>
+
+<p-table [columns]="defColumns" [value]="changeHsty" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
+    [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+            <th style="width: 4rem"></th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-changeHsty let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                <ng-container
+                    *ngIf="changeHsty[col.field] === true || changeHsty[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{changeHsty[col.field]}}
+                </ng-template>
+            </td>
+            <td (click)="toPreStatus(changeHsty)">
+                <i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به قبلی</div>
+                </i>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+            <td [attr.colspan]="columns.length">
+                موردی پیدا نشد
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

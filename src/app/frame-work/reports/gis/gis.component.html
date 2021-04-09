@@ -1,0 +1,96 @@
+<form #form="ngForm" (ngSubmit)="verification()">
+    <main class="main">
+
+        <section class="order_by">
+            <h2>نمایش بر اساس :</h2>
+            <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_orderBy" name="_orderBy">
+                <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo" [value]="orderType.id"
+                    (change)="changeRadio($event)">
+                    {{orderType.title}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </section>
+
+        <section class="static_part">
+            <section class="order_by">
+                <!-- <h2>نمایش بر اساس :</h2> -->
+                <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
+                    name="isOrderByDate">
+                    <mat-radio-button class="radio_button" *ngFor="let orderType of dateEvaluate"
+                        [value]="orderType.isSelected">
+                        {{orderType.title}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </section>
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.zoneId" name="zoneId">
+                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
+                            (click)="getCounterStateByZoneId()">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2" [hidden]="_isOrderByDate">
+                    <div class="_key">نوع دوره</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                        <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
+                            [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
+                    <div class="_key">دوره قرائت</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.readingPeriodId"
+                        name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2" [hidden]="!readingReportGISReq.isCounterState">
+                    <div class="_key">وضعیت کنتور</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.counterStateId"
+                        name="counterStateId">
+                        <mat-option *ngFor="let truefalse of counterStateDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2" [hidden]="_isOrderByDate">
+                    <div class="_key">سال</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.year"
+                        [(value)]="readingReportGISReq.year" name="year">
+                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <mat-checkbox name="isCluster" [(ngModel)]="readingReportGISReq.isCluster">خوشه بندی
+                </mat-checkbox>
+            </section>
+
+            <section class="content">
+                <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="_key">تا</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <button *ngIf="readingReportGISReq.zoneId" type="submit" class="btn_1">مشاهده</button>
+            </footer>
+        </section>
+    </main>
+</form>

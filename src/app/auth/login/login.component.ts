@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
+import { ICredentials } from 'src/app/Interfaces/iauth-guard-permission';
+
+import { UtilsService } from './../../services/utils.service';
+import { AuthService } from './../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +10,21 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  userData: ICredentials = { username: '', password: '' };
 
-  constructor(private loginService: LoginService) { }
+  constructor(
+    private authService: AuthService,
+    private utilsService: UtilsService
+  ) { }
 
   ngOnInit(): void {
   }
-
   logging = () => {
-    this.loginService.logging();
+    if (this.utilsService.isNull(this.userData.password) || this.utilsService.isNull(this.userData.username)) {
+      this.utilsService.snackBarMessageWarn('نام کاربری یا گذرواژه نمیتواند خالی باشد');
+      return;
+    }
+    this.authService.logging(this.userData);
   }
+
 }

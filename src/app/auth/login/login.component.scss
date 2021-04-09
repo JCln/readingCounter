@@ -1,43 +1,57 @@
 @import '../../../assets/variable.scss';
 @import '../../../assets/input.scss';
 @import '../../../assets/button.scss';
-@import '../../../assets/mixins.scss';
+
+.content {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 75vh;
+}
 
 main {
-  min-width: 20rem;
-  max-width: 25rem;
-  width: calc(100% - 10vw);
-  margin: auto;
-  height: calc(100% - 25vh);
+  max-width: 23rem;
+  text-align: center;
   padding: 2rem 2rem 1rem;
-  transform: translateY(-50%) translateX(-50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
   border-radius: $border_s;
   background: $gray_l;
   box-shadow: 2px 2px 5px 0px $gray_d;
 }
 
-.input_1 {
-  max-width: 19rem;
-  padding: 0 $font_3 0 $font_s;
+.input__icons {
+  color: $blue_d;
+
+  i {
+    position: absolute;
+    transform: translateY(50%);
+    vertical-align: middle;
+    margin-left: -2.5rem;
+    font-size: $font_l;
+  }
+
 }
 
 .title {
   font-weight: 600;
   color: $blue_dr;
-  font-size: 2.87rem;
+  font-size: 2.5rem;
+  margin-bottom: $font_s;
 }
 
 ._inputs {
   margin-bottom: $font_2;
-  display: flex;
-  flex-direction: column;
   border: $blue_dr;
 
   input::placeholder {
-    color: $blue_l;
+    color: $blue_d;
+  }
+
+  .input_1 {
+    text-align: left;
+    max-width: 19rem;
+    padding: 0 $font_3 0 $font_s;
+    color: $blue_d !important;
   }
 }
 
@@ -48,27 +62,18 @@ main {
 
 .btn_1 {
   color: $white;
+  background: $blue_d;
 }
 
 .version {
   color: $blue_dr;
   font-size: $font_m;
   font-weight: 600;
+  margin-top: $font_2;
 }
 
-.input__icons {
-  color: $blue_l;
-
-  i {
-    position: absolute;
-    transform: translateY(50%);
-    vertical-align: middle;
-    margin-left: -2.5rem;
-    font-size: $font_l;
-
-    &.fa-key {
-      transform: rotate(180deg) translateY(-50%);
-    }
-  }
-
+input,
+input:-internal-autofill-selected {
+  background-color: $white !important;
+  color: $blue_d !important;
 }

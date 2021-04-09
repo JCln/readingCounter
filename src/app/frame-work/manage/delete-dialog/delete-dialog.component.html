@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>حذف مورد</h2>
+
+<mat-dialog-content>
+    <h3> آیا میخواهید این مورد را حذف کنید؟ </h3>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="btn_2" (click)="close()">خیر</button>
+    <button class="btn_2 _custom" [mat-dialog-close]="true" (click)="save()">بله</button>
+</mat-dialog-actions>

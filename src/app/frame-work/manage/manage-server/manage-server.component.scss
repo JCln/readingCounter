@@ -1,0 +1,32 @@
+@import '../../../../assets/variable';
+
+section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
+  text-align: center;
+  direction: rtl;
+  gap: $font_xxs;
+}
+
+.items {
+  border-radius: $border_s;
+  padding: $font_s;
+  cursor: pointer;
+}
+
+.icons {
+  font-size: 3rem;
+  white-space: nowrap;
+  color: $gray_l;
+}
+
+h2 {
+  margin-top: $font_s;
+  font-weight: 600;
+  color: $gray_l;
+}
+
+img {
+  width: 4rem;
+  height: 4rem;
+}

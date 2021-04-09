@@ -1,39 +1,111 @@
 .ma {
   display: flex;
+  // width: 99%;
 
   &router-outlet {
     width: 95%;
   }
 }
 
+app-header {
+  position: sticky;
+  top: 0;
+  display: block;
+  z-index: 2;
+}
+
 app-tab-wrapper {
-  background: url(/assets/imgs/tabWrapper/5.jpg) no-repeat;
-  background-size: cover;
+  object-fit: cover;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   top: 3rem;
   margin-bottom: 0.5rem;
-  width: 85%;
+  width: 67%;
+  min-height: 4rem;
   border-radius: 0 0 15px 15px;
+
+  @media (min-width: 700px) {
+    width: 79%;
+  }
+
+  @media (min-width: 1000px) {
+    width: 90%;
+  }
 }
 
 app-side-bar {
-  width: 17%;
+  position: fixed;
+  right: 0;
+  width: 0%;
   min-height: 75vh;
-  transition: all ease-in-out 150ms;
+  height: 85vh;
   z-index: 2;
+  transition: all ease-in-out 150ms;
+
+  @media (min-width: 520px) {
+    width: 38%;
+  }
+
+  @media (min-width: 700px) {
+    width: 25%;
+  }
+
+  @media (min-width: 1000px) {
+    width: 22%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 14%;
+  }
+
 }
 
 app-frame-work {
-  width: 95%;
+  width: 100%;
+
+  @media (min-width: 520px) {
+    width: 62%;
+  }
+
+  @media (min-width: 700px) {
+    width: 75%;
+  }
+
+  @media (min-width: 1000px) {
+    width: 78%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 86%;
+  }
 }
 
 //ts config
-.page_conf {
-  width: 5%;
+// .page_conf_4 {
+//   width: 4.5%;
+// }
+
+.page_conf_6 {
+  width: 6.5%;
+}
+
+.page_conf_8 {
+  width: 8%;
+}
+
+.page_conf_13 {
+  width: 13%;
+}
+
+.framework_conf_xs {
+  width: 93%;
+}
+
+.framework_conf_s {
+  width: 95%;
 }
 
 .tabWrapper_conf {
-  width: 90%;
+  width: 92%;
 }

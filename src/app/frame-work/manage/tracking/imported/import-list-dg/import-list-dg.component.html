@@ -1,0 +1,42 @@
+<section>
+
+    <h1 class="title">اطلاعات مکانی</h1>
+    <form #form="ngForm" (ngSubmit)="editCloseData()" class="content">
+        <div class="_desc">
+            <div *ngFor="let mainDatas of _selectedDatas">
+                <ng-container
+                    *ngIf="dataSource[mainDatas.field] === true || dataSource[mainDatas.field] === false; else elseTemplate">
+                    <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
+                        [(ngModel)]="dataSource[mainDatas.field]">
+                        {{mainDatas.header}}
+                    </mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <ng-container *ngIf="mainDatas.field === 'newCounterReaderName';else selectOption">
+                        <div class="input_2">
+                            <div class="_key">مامور جدید</div>
+                            <!-- <mat-select placeholder="انتخاب مورد" name="allCounterReaders"
+                                [(ngModel)]="dataSource['counterReaderId']">
+                                <mat-option *ngFor="let truefalse of allCounterReaders" [value]="truefalse.id">
+                                    {{truefalse.title}}
+                                </mat-option>
+                            </mat-select> -->
+                            <p-dropdown [options]="allCounterReaders" name="newCounterReaderName"
+                                [(ngModel)]="selectedCounterReader" placeholder="انتخاب مورد"
+                                optionLabel="title" [showClear]="true"></p-dropdown>
+
+                        </div>
+                    </ng-container>
+                    <ng-template #selectOption>
+                        <div class="input_2">
+                            <div class="_key">{{mainDatas.header}}</div>
+                            <input [readonly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"
+                                [(ngModel)]="dataSource[mainDatas.field]">
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </div>
+        <button class="btn_2_o" type="submit">ویرایش مسیر</button>
+    </form>
+</section>

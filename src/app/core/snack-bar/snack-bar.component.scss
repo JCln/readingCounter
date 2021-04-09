@@ -1,0 +1,22 @@
+@import '../../../assets/variable.scss';
+
+::ng-deep {
+  .mat-simple-snackbar {
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: #F2F3F4;
+  }
+
+  .snack_danger {
+    background-color: $red_d;
+  }
+
+  .snack_warn {
+    background-color: $orange_d;
+  }
+
+  .snack_success {
+    background-color: $green;
+  }
+}

@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="_blue_dark">ویرایش منطقه</h2>
+<form [formGroup]="form">
+    <mat-dialog-content>
+
+        <mat-form-field appearance="fill">
+            <mat-label>عنوان</mat-label>
+            <input matInput formControlName="title" placeholder="عنوان">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+
+            <mat-label>شهر</mat-label>
+            <mat-select placeholder="انتخاب مورد" [(value)]="selected" name="provinceId">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.title">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>ترتیب</mat-label>
+            <input matInput type="number" formControlName="logicalOrder" placeholder="ترتیب">
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="btn_2" (click)="close()">بازگشت</button>
+        <button class="btn_2 _custom _blue_dark" (click)="save()">ذخیره</button>
+    </mat-dialog-actions>
+</form>

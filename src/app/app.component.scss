@@ -1,20 +1,37 @@
 @import '../assets/variable';
 
-app-clock {
-  position: absolute;
-  right: 0;
-  top: $font_2;
-  margin: 0.2rem; 
-}
-
 .polygon::after {
   content: '';
   position: fixed;
-  background: $blue_d;
+  background: url('../assets/imgs/framework/bbd.jpg') #365475;
   clip-path: polygon(0 0, calc(100% - 20vw) 0%, calc(100% - 70vw) 100%, 0 100%);
   top: 0;
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
   z-index: -1;
+}
+
+.polygon::before {
+  content: '';
+  position: fixed;
+  background: url('../assets/imgs/framework/bb.jpg') $gray_l;
+  clip-path: polygon(calc(100% - 20vw) 0, 100% 0, 100% 100%, calc(100% - 70vw) 100%);
+  top: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+app-clock {
+  position: fixed;
+  right: 0;
+  top: $font_2;
+  margin: 0.2rem;
+  z-index: 3;
+
+  @media (min-width:700px) {
+    top: .5rem;
+  }
 }

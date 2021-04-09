@@ -1,17 +1,19 @@
 <div class="header">
     <ul>
-        <li (click)="loadDateJalali()">
-            <p class="d_grid_center" *ngIf="!isDateJalaliLoaded">تاریخ</p>
-            <ng-container *ngComponentOutlet="DateJalaliComponent"></ng-container>
+        <li class="_date">
+            <app-date-jalali></app-date-jalali>
         </li>
         <li>
-            <app-dropdown></app-dropdown>
+            <app-dropdown (isLogout)=logout()></app-dropdown>
         </li>
+        <li class="_name">
+            {{displayName}}
+        </li>
+        <div class="menu_toggle" (click)="setSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </ul>
-    <div class="menu_toggle" (click)="setSidebar()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
 
 </div>

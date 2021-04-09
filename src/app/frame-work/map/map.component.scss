@@ -1,16 +1,28 @@
 @import '../../../assets/variable.scss';
 @import '../../../assets/mixins.scss';
+@import '../../../assets/button.scss';
+@import '../../../assets/tooltip.scss';
+@import '../../../assets/mixins.scss';
 
 .map-frame {
-  box-shadow: -1px 2px 5px 5px $gray_d;
   margin: 1rem .2rem;
   height: 100%;
+  min-height: 31rem;
+  box-shadow: -1px 2px 5px 5px $gray_d;
+  position: relative;
 }
 
 #map {
-  height: 100%;
-  min-height: 30rem;
+  height: 31rem;
+  width: 100%;
   z-index: 1;
+}
+
+.top_info {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 0 2rem;
 }
 
 .unit {
@@ -54,12 +66,94 @@
 
   label {
     display: flex;
+    position: relative;
     font-size: $font_m;
     margin: 0 $font_05;
-    color: $blue_l;
+    color: $blue_d;
     background: $gray_d5;
     border-radius: $border_50;
     padding: $font_05;
     cursor: pointer;
   }
+}
+
+.clickable_dash {
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 5.2rem;
+    height: 3rem;
+    top: -.25rem;
+    right: 0;
+  }
+}
+
+.clickable_map {
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 5.5rem;
+    height: 3rem;
+    top: -.25rem;
+    left: 0;
+  }
+}
+
+// map option configs
+.polyline_switch {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100vmax;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0rem;
+  border: 0;
+  background-color: $gray_d5;
+  color: $dark_ddd;
+
+  i {
+    font-size: $font_m;
+    font-weight: 600;
+  }
+}
+
+.polyline_config {
+  position: absolute;
+  left: 4rem;
+  top: -3rem;
+  z-index: 2;
+  background: $white;
+  width: 20rem;
+  margin: $font_xs;
+  padding: $font_xs;
+  text-align: right;
+  direction: rtl;
+  border-radius: $border_s;
+  box-shadow: 0px 2px 3px 1px $blue_c;
+}
+
+h3 {
+  color: $gray_dr;
+  margin-bottom: $font_05;
+}
+
+.btn_2 {
+  height: 2.5rem;
+  color: $gray_dr;
+  margin-top: $font_xs;
+}
+
+._flex_dr_ric p {
+  font-size: $font_s;
+  color: $blue_d;
+  margin: 0 $font_xs;
+}
+
+// 
+[hidden] {
+  display: none;
 }

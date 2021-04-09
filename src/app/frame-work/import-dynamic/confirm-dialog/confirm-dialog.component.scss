@@ -1,0 +1,13 @@
+@import '../../../frame-work/manage/shared_dialog';
+@import '../../../../assets/button.scss';
+
+.mat-dialog-content {
+  color: $gray_dr2;
+  font-size: $font_s;
+  text-align: right;
+  word-spacing: .3rem;
+}
+
+strong {
+  color: $blue_d2;
+}

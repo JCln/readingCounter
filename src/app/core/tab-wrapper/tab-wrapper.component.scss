@@ -17,15 +17,20 @@ li {
   justify-content: center;
   align-items: center;
   margin: 0.15rem;
-  min-width: 11rem;
-  height: 3.87rem;
+  min-width: 8.5rem;
+  height: 3rem;
   border-radius: $border_s;
-  color: $gray_dr;
+  border: 1.5px solid;
+  color: $blue_d;
   list-style-type: none;
   font-size: $font_m;
   font-weight: 600;
   background: $gray_d;
   cursor: pointer;
+
+  @media (min-width: 700px) {
+    min-width: 11rem;
+  }
 
   .fa-refresh {
     @include d_flex_center();
@@ -42,8 +47,8 @@ li {
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $blue_l;
-      background: $gray_d5;
+      color: $dark_ddd;
+      background: $gray_d;
     }
   }
 
@@ -63,7 +68,7 @@ li {
 
     &:hover {
       color: $red;
-      background: $gray_d5;
+      background: $gray_d;
     }
   }
 
@@ -86,12 +91,14 @@ li::before {
   border-radius: 15px;
   height: .3rem;
   width: 90%;
-  background: $blue_l;
+  background: $dark_ddd;
 }
 
 li.active {
-  color: $blue_l;
+  color: $dark_ddd;
   background: $gray_e3;
+  border: 1.5px solid;
+  border-top: none;
 }
 
 li.active::before {
@@ -99,19 +106,28 @@ li.active::before {
 }
 
 ._remove_all {
-  width: $font_2;
-  height: $font_2;
   margin: 0 auto 0 .3rem;
-  border-radius: 50%;
   cursor: pointer;
+  max-width: $font_2;
+  max-height: $font_2;
 
-  &:hover {
-    box-shadow: 1px 0px 2px 1px $red;
+  img {
+    border-radius: 50%;
+
+    &:hover {
+      box-shadow: 0px 0px 4px 1px $red;
+    }
   }
 }
 
 // edit tooltips
+.tooltip .tooltip_text::after {
+  top: auto;
+  bottom: 100%;
+  border-color: transparent transparent #F68038 transparent;
+}
+
 .tooltip_text {
-  bottom: 150% !important;
+  bottom: -150% !important;
   left: 4rem !important;
 }

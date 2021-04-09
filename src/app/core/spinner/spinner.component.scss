@@ -1,0 +1,63 @@
+@import "../../../assets/mixins.scss";
+@import "../../../assets/variable.scss";
+
+$white: white;
+$medium_slate_blue: #365475;
+
+.spinner {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: radial-gradient(rgba(54, 84, 117, .8), rgba(54, 84, 117, .8));
+  min-height: 20rem;
+  transform: scaleX(1) scaleY(1);
+  transform-origin: center;
+
+  .loader {
+    position: absolute;
+    left: auto;
+    bottom: auto;
+    height: 5rem;
+    width: .8rem;
+  }
+
+  h2 {
+    margin-top: 10rem;
+    color: $white;
+
+    .fa-spin,
+    .fa-circle-notch {
+      animation: around2 400ms infinite linear;
+    }
+  }
+
+}
+
+
+.loader {
+  position: relative;
+  height: 1rem;
+  width: 2rem;
+  display: block;
+  z-index: 10;
+  border-radius: 30%;
+  left: 25px;
+  bottom: 25px;
+  background: $medium_slate_blue;
+  animation: around2 .8s infinite;
+}
+
+@keyframes around2 {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

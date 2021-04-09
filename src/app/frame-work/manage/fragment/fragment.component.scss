@@ -1,0 +1,35 @@
+@import '../../../../assets/primeNG.scss';
+@import '../../../../assets/tooltip.scss';
+
+._edit {
+  color: $dark_ddd;
+
+  &:hover {
+    background-color: rgba($dark_ddd, 0.3);
+  }
+}
+
+._save {
+  color: $green_android;
+
+  &:hover {
+    background-color: rgba($green_android, 0.3);
+  }
+}
+
+._cancel {
+  color: $red_d;
+
+  &:hover {
+    background-color: rgba($red_d, 0.3);
+  }
+}
+
+._edit,
+._save,
+._cancel {
+  padding: 0.3rem;
+  border-radius: $border_50;
+  border: 0;
+  cursor: pointer;
+}

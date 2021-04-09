@@ -1,0 +1,113 @@
+<main class="main">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+            <section class="order_by">
+                <h2>صدور بر اساس :</h2>
+                <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
+                    name="_isOrderByDate">
+                    <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"
+                        [value]="orderType.isSelected">
+                        {{orderType.title}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </section>
+            <hr>
+
+            <section class="content">
+                <div class="input_2" [hidden]="!zoneDictionary.length">
+                    <div class="_key">ناحیه</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.zoneId" name="zoneId">
+                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
+                            (click)="verificationACounterReaderId()">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <!-- when zone id and kind id get -->
+                <div class="input_2" [hidden]="_isOrderByDate || !readingPeriodKindsDictionary.length">
+                    <div class="_key">نوع دوره</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
+                        <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
+                            (click)="verificationReadingPeriod()">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2 this" [hidden]="!readingPeriodDictionary.length">
+                    <div class="_key">دوره قرائت</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.readingPeriodId"
+                        name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+
+                <div class="input_2">
+                    <div class="_key">از اشتراک</div>
+                    <input class="_value" name="fromEshterak" [(ngModel)]="importDynamic.fromEshterak">
+                </div>
+                <div class="input_2">
+                    <div class="_key">تا اشتراک</div>
+                    <input class="_value" name="toEshterak" [(ngModel)]="importDynamic.toEshterak">
+                </div>
+
+                <div class="input_2 this" *ngIf="userCounterReader.length">
+                    <div class="_key">مامور</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.counterReaderId"
+                        name="counterReaderId">
+                        <mat-option *ngFor="let truefalse of userCounterReader" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+
+            </section>
+            <section class="content date_section">
+                <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="_key">تا</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+            </section>
+
+            <div class="check_boxes">
+                <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamic.hasPreNumber">شماره قبلی
+                </mat-checkbox>
+
+                <mat-checkbox name="displayBillId" [(ngModel)]="importDynamic.displayBillId">نمایش شناسه
+                    قبض
+                </mat-checkbox>
+
+                <mat-checkbox name="displayRadif" [(ngModel)]="importDynamic.displayRadif">نمایش ردیف
+                </mat-checkbox>
+            </div>
+        </section>
+        <section *ngIf="canShowEditButton" class="dynamic_content">
+            <div class="input_2 this" [hidden]="!_showAlalHesabPercent">
+                <div class="_key">درصد علی الحساب</div>
+                <input class="_value" type="number" name="alalHesabPercent"
+                    [(ngModel)]="importDynamic.alalHesabPercent">
+            </div>
+            <div class="input_2 this" [hidden]="!_showimagePercent">
+                <div class="_key">درصد تصویر</div>
+                <input class="_value" type="number" name="imagePercent" [(ngModel)]="importDynamic.imagePercent">
+            </div>
+
+        </section>
+
+        <footer>
+            <button *ngIf="canShowEditButton" type="submit" class="btn_1">افزودن</button>
+
+        </footer>
+    </form>
+</main>

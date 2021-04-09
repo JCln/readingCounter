@@ -3,11 +3,24 @@
 
 .analog-clock {
   position: relative;
-  width: 7rem;
-  height: 7rem;
-  background:url(/assets/imgs/clock/2.jpg);
+  width: 10vh;
+  height: 10vh;
+  background: url(/assets/imgs/clock/2.jpg);
   background-size: cover;
   border-radius: 50%;
+  z-index: 1;
+  top: .5rem;
+
+  @media (min-width: 500px) {
+    width: 11vh;
+    height: 11vh;
+  }
+  
+  @media (min-width: 700px) {
+    width: 13vh;
+    height: 13vh;
+    top: 0;
+  }
 }
 
 .hand {
@@ -21,14 +34,26 @@
 .hour {
   --font_xs: 1rem;
   width: .35rem;
-  height: calc(var(--font_xs) + .8rem);
-  background: $blue_l;
+  height: $font_xs;
+  background: $blue_d;
+
+  @media (min-width: 500px) {
+    height: calc(var(--font_xs) + .5rem);
+  }
 }
 
 .minute {
   width: .3rem;
-  height: $font_3;
+  height: 1.5rem;
   background: $blue_d;
+
+  @media (min-width: 500px) {
+    height: $font_2;
+  }
+
+  @media (min-width: 700px) {
+    height: 2.1rem;
+  }
 }
 
 .center-circle {
@@ -39,7 +64,7 @@
   transform: translate(50%, -50%);
   width: $font_xxs;
   height: $font_xxs;
-  background-color: $blue_l;
+  background-color: $blue_d;
   border-radius: 50%;
   vertical-align: middle;
 }

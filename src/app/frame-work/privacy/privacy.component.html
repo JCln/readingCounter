@@ -1,0 +1,134 @@
+<div class="over_all">
+
+    <section>
+        <!-- <h1 class="title">حداقل تعداد حروف چند نویسه ای باشد؟</h1> -->
+        <div class="content">
+            <div class="_desc">
+                <li class="number_vals">
+                    تعداد دفعات ورود با Captcha
+                    <div class="plus_minus">
+                        <div class="plus" (click)="plusOrMinus(policies.minPasswordLength + 1)">
+                            <i class="fa fa-plus"></i></div>
+                        <div class="val"> {{policies.minPasswordLength}}</div>
+                        <div class="minus" (click)="plusOrMinus(policies.minPasswordLength - 1)">
+                            <i class="fa fa-minus"></i></div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+
+        <!-- <h1 class="title">حداقل یک نویسه با مشخصات !</h1> -->
+        <div class="content">
+            <section class="_checkbox">
+                <span>
+                    <ul>
+                        <li class="number_vals">
+                            lockInvalidAttempts"
+                            <div class="plus_minus">
+                                <div class="plus"
+                                    (click)="policies.lockInvalidAttempts = policies.lockInvalidAttempts + 1">
+                                    <i class="fa fa-plus"></i></div>
+                                <div class="val"> {{policies.lockInvalidAttempts}}</div>
+                                <div class="minus"
+                                    (click)="policies.lockInvalidAttempts = policies.lockInvalidAttempts - 1">
+                                    <i class="fa fa-minus"></i></div>
+                            </div>
+                        </li>
+                        <li class="number_vals">
+                            lockMin
+                            <div class="plus_minus">
+                                <div class="plus" (click)="policies.lockMin = policies.lockMin + 1"><i
+                                        class="fa fa-plus"></i></div>
+                                <div class="val"> {{policies.lockMin}}</div>
+                                <div class="minus" (click)="policies.lockMin = policies.lockMin - 1"><i
+                                        class="fa fa-minus"></i></div>
+                            </div>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="policies.passwordContainsNumber">
+                                گذرواژه شامل حداقل یک عدد باشد
+                            </mat-checkbox>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="policies.passwordContainsLowercase">
+                                گذرواژه شامل حداقل یک حرف کوچک انگلیسی باشد
+                            </mat-checkbox>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="policies.passwordContainsUppercase">
+                                گذرواژه شامل حداقل یک حرف بزرگ انگلیسی باشد
+                            </mat-checkbox>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="policies.passwordContainsNonAlphaNumeric">
+                                گذرواژه شامل حداقل یک حرف غیرالفبایی باشد
+                            </mat-checkbox>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="policies.canUpdateDeviceId">
+                                شناسه قابل بروز رسانی باشد
+                            </mat-checkbox>
+                        </li>
+                    </ul>
+                </span>
+            </section>
+        </div>
+
+    </section>
+
+    <section class="item_3">
+
+        <!-- <h1 class="title">حداقل یک نویسه با مشخصات !</h1> -->
+        <div class="content">
+            <section class="_checkbox">
+                <span>
+                    <ul>
+                        <li>
+                            <mat-checkbox [(ngModel)]="policies.enableValidIpCaptcha">
+                                فعال سازی captcha
+                            </mat-checkbox>
+                        </li>
+                        <li class="number_vals">
+                            تعداد دفعات ورود با Captcha
+                            <div class="plus_minus">
+                                <div class="plus"
+                                    (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts + 1">
+                                    <i class="fa fa-plus"></i></div>
+                                <div class="val"> {{policies.requireCaptchaInvalidAttempts}}</div>
+                                <div class="minus"
+                                    (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts - 1">
+                                    <i class="fa fa-minus"></i></div>
+                            </div>
+                        </li>
+                        <li>
+                            <mat-checkbox [(ngModel)]="policies.enableValidIpRecaptcha">
+                                ip مناسب در Recaptcha
+                            </mat-checkbox>
+                        </li>
+                        <li class="number_vals">
+                            reacaptcha
+                            <div class="plus_minus">
+                                <div class="plus"
+                                    (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts + 1">
+                                    <i class="fa fa-plus"></i></div>
+                                <div class="val"> {{policies.requireRecaptchaInvalidAttempts}}</div>
+                                <div class="minus"
+                                    (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts - 1">
+                                    <i class="fa fa-minus"></i></div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </span>
+            </section>
+        </div>
+
+    </section>
+
+</div>
+
+<section class="btns">
+    <button (click)="addPolicy()" class="btn_1">ذخیره تغییرات</button>
+</section>

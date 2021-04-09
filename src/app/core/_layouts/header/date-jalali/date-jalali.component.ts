@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import * as moment from 'jalali-moment';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DateJalaliService } from 'src/app/services/date-jalali.service';
+
 
 @Component({
   selector: 'app-date-jalali',
@@ -7,12 +8,20 @@ import * as moment from 'jalali-moment';
   styleUrls: ['./date-jalali.component.scss']
 })
 export class DateJalaliComponent implements OnInit {
-  dateObject = moment('1399-6-22', 'jYYYY,jMM,jDD');
-
-  constructor() {
+  dateObject: any;
+  datePickerConfig = {
+    format: 'YYYY/MM/DD'
   }
 
+  @Output() dateJalEvent = new EventEmitter<any>();
+
+  constructor(private dateJalaliService: DateJalaliService) {
+  }
+
+  sendDateJal = ($event) => this.dateJalEvent.emit($event.inputElementValue);
   ngOnInit(): void {
+    this.dateObject = this.dateJalaliService.getCurrentDate();
+    this.dateJalEvent.emit(this.dateObject);
   }
 
 }

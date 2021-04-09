@@ -1,0 +1,24 @@
+@import '../../shared_dialog';
+@import '../../../../../assets/button.scss';
+@import '../../../../../assets/input.scss';
+
+.mat-dialog-content {
+  color: $gray_dr2;
+  font-size: $font_s;
+  text-align: right;
+  word-spacing: .3rem;
+}
+
+.mat-dialog-container {
+  padding: $font_2;
+}
+
+._custom {
+  background: $blue_l;
+  color: $gray_l;
+}
+
+h2 {
+  font-size: $font_m;
+  padding: $font_05;
+}

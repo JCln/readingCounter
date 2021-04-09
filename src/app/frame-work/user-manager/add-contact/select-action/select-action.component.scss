@@ -1,0 +1,103 @@
+@import '../../add-edit.scss';
+
+.auth_1 {
+  direction: rtl;
+}
+
+.auth_1_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
+  gap: .25rem;
+  direction: rtl;
+
+  .auth_1_item {
+    display: grid;
+    place-content: center;
+    padding: $font_05;
+    margin: $font_s 0;
+    border-radius: 5px;
+    font-size: $font_l;
+    font-weight: 600;
+    background: $half_gray;
+    color: $blue_d;
+    box-shadow: 1px 1px 3px 0px $half_gray;
+    cursor: pointer;
+  }
+}
+
+// active auth1 tab
+.active_tab {
+  background-color: $blue_d2 !important;
+  color: $gray_l !important;
+}
+
+// 
+
+.auth_2 {
+  padding: $font_xs;
+  margin-bottom: $font_s;
+  border-radius: $border_s;
+  min-height: 18rem;
+
+  &:nth-child(odd) {
+    background-color: $gray_l;
+
+    .auth_3 {
+      box-shadow: 0px 2px 3px 1.5px $gray_d;
+    }
+  }
+
+  &:nth-child(even) {
+    background-color: $half_gray;
+    box-shadow: 0 0 2px 2px rgba($half_gray, .5);
+
+    .auth_3 {
+      background-color: $gray_l;
+      box-shadow: 0px 2px 3px 1.5px rgba($blue_d2, .4);
+    }
+  }
+
+}
+
+.auth_3 {
+  margin: $font_xxs;
+  padding: $font_05;
+  border-radius: $border_s;
+  min-height: 10rem;
+}
+
+.auth_4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  gap: .3rem;
+
+  .checkboxes {
+    display: flex;
+    background: whitesmoke;
+    border-radius: 15px;
+    padding: .25rem;
+  }
+}
+
+.text {
+  padding: 0 $font_05;
+  color: $blue_d2;
+  font-size: $font_l;
+  font-weight: 600;
+}
+
+.text_btn {
+  text-align: center;
+  max-width: 11rem;
+  border-radius: $border_s;
+  width: auto;
+  margin-bottom: $font_05;
+  font-size: $font_m;
+  font-weight: 600;
+  color: $blue_d2;
+  background: $half_gray;
+}
+
+.accept {
+  display: flex;
+}

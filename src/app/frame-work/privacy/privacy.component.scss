@@ -1,0 +1,125 @@
+@import '../../../assets/variable';
+@import '../../../assets/button.scss';
+@import '../../../assets/input.scss';
+@import './plus-minus';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, auto));
+  direction: rtl;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.item_3 {
+  grid-row: 1 / 3;
+  grid-column: 2;
+}
+
+.content {
+  padding: $font_2 0.2rem;
+  background: $gray_l;
+  border-radius: 10px;
+  box-shadow: 1px 1px 8px 4px $gray_d;
+}
+
+._desc {
+  display: grid;
+  margin: auto;
+  width: 90%;
+  border-radius: $border_s;
+}
+
+.title {
+  color: $gray_96;
+  text-align: center;
+  margin: $font_xs $font_05;
+  font-size: 1.6rem;
+}
+
+input {
+  color: $gray_96;
+  margin: 0 auto;
+  box-shadow: 1px 1px 8px 1px $gray_d;
+}
+
+// radio buttons
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.over_all_result {
+  color: $blue_l;
+  font-size: $font_s;
+  font-weight: 600;
+  margin-top: $font_2;
+}
+
+////////
+
+::ng-deep {
+
+  .mat-radio-label-content {
+    color: $gray_dr;
+    font-size: $font_s;
+    font-weight: 600;
+    margin-right: 1rem;
+    font-family: $font_family;
+  }
+
+  .example-radio-button {
+    margin: 4px;
+    background: $gray_l;
+    padding: $font_xxs;
+    border-radius: $border_s;
+  }
+
+  .mat-checkbox-layout {
+    margin-bottom: $font_05;
+
+    .mat-checkbox-label {
+      margin: 0 $font_05;
+      font-size: $font_s;
+      font-weight: 600;
+      color: $gray_dr;
+      line-height: 2;
+      border-radius: $border_s;
+      font-family: $font_family;
+    }
+  }
+
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+.number_vals {
+  display: flex;
+  align-items: center;
+  font-size: $font_s;
+  font-weight: 600;
+  color: $gray_dr;
+}
+
+._checkbox {
+  text-align: right;
+}
+
+.btns {
+  margin: $font_xs;
+  display: flex;
+  justify-content: center;
+}
+
+.btn_1 {
+  color: $gray_l;
+  margin: $font_05;
+}

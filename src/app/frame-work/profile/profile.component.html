@@ -1,0 +1,35 @@
+<div class="over_all">
+    <main>
+        <h1 class="title">مشخصات کاربری</h1>
+        <div class="content">
+            <!-- <div class="_profile_img">
+                <div class="fa fa-user"></div>
+            </div> -->
+            <div class="_desc">
+                <div *ngFor="let item of _selectCols" class="input_2">
+                    <div class="_key">{{item.header}}</div>
+                    <div class="_value">{{myInfoDataSource[item.field]}}</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section>
+
+        <h1 class="title">تغییر گذرواژه</h1>
+        <form #form="ngForm" (ngSubmit)="changePassword()" class="content">
+            <div class="_desc">
+                <input type="password" name="oldPassword" [(ngModel)]="password.oldPassword" class="input_1"
+                    placeholder="گذرواژه فعلی :">
+                <input type="password" name="newPassword" [(ngModel)]="password.newPassword" class="input_1"
+                    placeholder="گذرواژه جدید :">
+                <input type="password" name="confirmPassword" [(ngModel)]="password.confirmPassword" class="input_1"
+                    placeholder="تکرار گذرواژه جدید :">
+            </div>
+            <div class="change_pass">
+                <button type="submit" class="btn_2">ذخیره</button>
+            </div>
+        </form>
+
+    </section>
+</div>

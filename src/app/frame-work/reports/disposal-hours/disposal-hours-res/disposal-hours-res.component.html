@@ -1,0 +1,63 @@
+<p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
+    [filterDelay]="0" dir="rtl" [globalFilterFields]="['zoneId','zoneTitle','reportId','reportTitle','itemCount']"
+    styleClass="p-datatable-responsive">
+
+    <ng-template pTemplate="caption">
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
+            selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <div class="header_icons_wrap">
+            <div class="left_side">
+                <i (click)="outputManagerService.exportPdf(dataSource)"
+                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
+                    <div class="tooltip_text">دریافت pdf</div>
+                </i>
+                <i (click)="outputManagerService.exportExcel(dataSource)"
+                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
+                    <div class="tooltip_text">دریافت Excel</div>
+                </i>
+                <i (click)="outputManagerService.exportCSV(dataSource)"
+                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
+                    <div class="tooltip_text">دریافت CSV</div>
+                </i>
+            </div>
+            <div class="left_side">
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                </i>
+                <i (click)="backToPrevious()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+                    <div class="tooltip_text_right">بازگشت به جستجو پراکندگی ساعت</div>
+                </i>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSource let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{dataSource[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+    <!-- <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+            <td [attr.colspan]="columns.length">
+                موردی پیدا نشد
+            </td>
+        </tr>
+    </ng-template> -->
+</p-table>

@@ -1,0 +1,53 @@
+<div class="operation">
+    <button (click)="openDialog()" class="tooltip operation_btn">
+        <i class="fa fa-plus"></i>
+        <div class="tooltip_text">افزودن ماژول</div>
+    </button>
+</div>
+
+<table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                عنوان
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <input matInput [formControl]="titleFilter">
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">{{person.title}}</td>
+    </ng-container>
+    <ng-container matColumnDef="authLevel1Id">
+        <th mat-header-cell *matHeaderCellDef>
+            <div class="header">
+                App
+            </div>
+            <mat-form-field class="filter" floatLabel="never">
+                <mat-label>جستجو</mat-label>
+                <mat-select placeholder="انتخاب مورد" [formControl]="authLevel1IdFilter" name="truefalse">
+                    <mat-option *ngFor="let truefalse of auth1Dictionary" [value]="truefalse.title">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </th>
+        <td mat-cell *matCellDef="let person">{{person.authLevel1Id}}</td>
+    </ng-container>
+
+    <ng-container cdkColumnDef="actions">
+        <th md-header-cell *matHeaderCellDef></th>
+        <td md-cell *matCellDef="let row" class="_actions">
+            <i (click)="editDialog(row)" class="tooltip _custom fa fa-edit">
+                <div class="tooltip_text">ویرایش</div>
+            </i>|
+            <i (click)="deleteSingleRow(row)" class="tooltip _custom fa fa-trash-o">
+                <div class="tooltip_text_right">حذف</div>
+            </i>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let person; columns: columnsToDisplay"></tr>
+
+</table>

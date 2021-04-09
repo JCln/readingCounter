@@ -1,17 +1,13 @@
-<!-- <li class="_user">
-    <button class="dropbtn"><i class="fa fa-user"></i></button>
-    <div class="dropdown-content">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </div>
-</li> -->
-
 <div class="dropdown">
     <button class="dropbtn"><i class="fa fa-user"></i></button>
     <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
+        <a [routerLink]="['/wr/profile']">
+            تنظیمات کاربری
+            <i class="pi pi-user"></i>
+        </a>
+        <a (click)="logout()">
+            خروج
+            <i class="pi pi-sign-out"></i>
+        </a>
     </div>
 </div>

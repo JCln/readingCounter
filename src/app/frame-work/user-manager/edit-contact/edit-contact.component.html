@@ -1,0 +1,50 @@
+<mat-horizontal-stepper #stepper>
+
+    <mat-step [stepControl]="personalizeInfo">
+        <form *ngIf="personalizeInfo">
+            <ng-template matStepLabel>مشخصات کاربر</ng-template>
+            <app-user-inputs [editInfo]="personalizeInfo" style="direction: rtl;"></app-user-inputs>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="provinceItemsData">
+        <form *ngIf="provinceItemsData">
+            <ng-template matStepLabel>دسترسی به ناحیه</ng-template>
+            <app-select-zone [provinceItemsData]="provinceItemsData"></app-select-zone>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="addContactData">
+        <ng-template matStepLabel>سطح دسترسی به خدمات</ng-template>
+        <app-select-action [addContactData]="addContactData"></app-select-action>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>گروه دسترسی</ng-template>
+        <h2>گروه دسترسی</h2>
+        <section class="role_items">
+            <div class="roles" *ngFor="let roleItems of roleItemsData">
+                <mat-checkbox [(ngModel)]="roleItems.isSelected" name="roleItems.title">
+                    {{roleItems.title}}
+                </mat-checkbox>
+            </div>
+        </section>
+        <div class="accept">
+            <button class="btn_2" matStepperNext>
+                <i class="fa fa-long-arrow-left"></i>
+                صفحه بعد
+            </button>
+            <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+        </div>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>ذخیره</ng-template>
+        <section class="accept">
+            <button class="btn_2 _special" (click)="addAContact()">ذخیره تغییرات</button>
+            <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+        </section>
+
+    </mat-step>
+
+</mat-horizontal-stepper>

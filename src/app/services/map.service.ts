@@ -1,100 +1,72 @@
-import '../../../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
 import { Injectable } from '@angular/core';
+import { ListManagerService } from 'src/app/services/list-manager.service';
+
+import { IReadingReportGISReq } from '../Interfaces/imanage.js';
 
 declare let L;
 
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
+
+const defaultIcon = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+})
+L.Marker.prototype.options.icon = defaultIcon;
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
-  constructor() { }
+  private map: L.Map;
 
-  private overlays = () => {
-    const littleton =
-      L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
-      denver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
-      aurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
-      golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
+  constructor(
+    private listManagerService: ListManagerService
+  ) { }
 
-    const cities = L.layerGroup([littleton, denver, aurora, golden]);
-  }
-
-  getRandomLatLng(map) {
-    const bounds = map.getBounds(),
-      southWest = bounds.getSouthWest(),
-      northEast = bounds.getNorthEast(),
-      lngSpan = northEast.lng - southWest.lng,
-      latSpan = northEast.lat - southWest.lat;
-    return new L.LatLng(
-      southWest.lat + latSpan * Math.random(),
-      southWest.lng + lngSpan * Math.random());
-  }
-  addMarkerCluster = (map: L.Map) => {
+  addMarkerCluster = (map: L.Map, latlng: any) => {
     const markers = L.markerClusterGroup();
-    markers.addLayer(L.marker(this.getRandomLatLng(map)));
+    markers.addLayer(L.marker(latlng));
     map.addLayer(markers);
   }
-
-  routingControl = (map: L.Map) => {
-    L.Routing.control({
-      waypoints: [
-        L.latLng(57.74, 11.94),
-        L.latLng(57.6792, 11.949),
-      ]
-    }).addTo(map);
+  addInvalidateMap = () => {
+    this.map.invalidateSize();
+  }
+  fullScreen = () => {
+    this.map.addControl(new L.Control.Fullscreen());
+  }
+  refreshMapButtonLeaflet = () => {
+    L.easyButton('fa-refresh', () => {
+      this.addInvalidateMap();
+    }, 'بارگزاری مجدد نقشه').addTo(this.map);
   }
 
-  fullScreen = (map: L.Map) => {
-    map.addControl(new L.Control.Fullscreen());
-  }
-
-
-  ///////// buttons
-  buttons = (map: L.Map) => {
-    const onLocationFound = (e) => {
-      console.log(e);
-      var radius = e.accuracy;
-
-      L.circle([e.latlng, 1000], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 1000
-      }).addTo(map);
-
-
-      L.marker(e.latlng).addTo(map)
-        .bindPopup("You are within " + radius + " meters from this point").openPopup();
-    }
-
-    const addInvalidateMap = (map: L.Map) => {
-      map.invalidateSize();
-    }
-    const removeAllLayers = (map, window) => {
-      map.eachLayer(function (layer) {
-        map.removeLayer(layer);
-      }, window)
-    }
+  easyprintButtonLeaflet = () => {
     L.easyPrint({
       position: 'bottomleft',
       sizeModes: ['A4Portrait', 'A4Landscape']
-    }).addTo(map);
-
-    L.easyButton('fa-refresh', function (btn, map) {
-      addInvalidateMap;
-    }, 'بارگزاری مجدد نقشه').addTo(map);
-
-    L.easyButton('fa-map-marker', function (btn, map) {
-      map.locate({ setView: true, maxZoom: 16 })
-      map.on('locationfound', onLocationFound(map));
-    }, 'مکان من').addTo(map);
-
-    L.easyButton('fa-close', function (btn) {
-      removeAllLayers(map, window);
-    }, 'بستن تمامی لایه ها').addTo(map);
-
+    }).addTo(this.map);
   }
-  ///////////
+  addButtonsToLeaflet = () => {
+    this.fullScreen();
+    this.refreshMapButtonLeaflet();
+    this.easyprintButtonLeaflet();
+  }
+  callPointerMarks = (data: object) => {
+    return this.listManagerService.postLMPDXY(data);
+  }
+  serviceInstantiate = (map: L.Map) => {
+    this.map = map;
+  }
+  hasMarkerCluster = (body: IReadingReportGISReq): boolean => {
+    return body.isCluster;
+  }
 }

@@ -1,0 +1,34 @@
+<section>
+
+    <h1 class="title">اطلاعات مکانی</h1>
+    <form #form="ngForm" class="content">
+        <div class="_desc">
+            <div class="input_2" *ngFor="let mainDatas of _selectMainDatas">
+                <div class="_key">{{mainDatas.header}}</div>
+                <input [readOnly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"
+                    [(ngModel)]="dataSource[mainDatas.field]">
+            </div>
+        </div>
+    </form>
+
+</section>
+
+<h1 class="title">اطلاعات قرائت</h1>
+<section class="position_section">
+    <main *ngFor="let history of offLoadPerDayHistory" class="card_wrapper">
+        <div class="card__content" *ngFor="let item of _selectCols">
+            <div class="input_2">
+                <div class="_key">{{item.header}}</div>
+                <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                    [(ngModel)]="history[item.field]">
+            </div>
+        </div>
+        <br><br>
+        <div class="disable_grid_temp">
+            <button class="btn_1 d_rtl" (click)="routeToLMPDXY(history.day)">
+                مشاهده روی نقشه
+                <i class="p_icons pi pi-map-marker"></i>
+            </button>
+        </div>
+    </main>
+</section>

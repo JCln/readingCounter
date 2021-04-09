@@ -1,0 +1,101 @@
+<p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
+    [filterDelay]="0" dir="rtl" dataKey="innerTable"
+    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
+    styleClass="p-datatable-responsive">
+
+    <ng-template pTemplate="caption">
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
+            selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <div class="header_icons_wrap">
+            <div class="left_side">
+                <i (click)="outputManagerService.exportPdf(dataSource)"
+                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
+                    <div class="tooltip_text">دریافت pdf</div>
+                </i>
+                <i (click)="outputManagerService.exportExcel(dataSource)"
+                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
+                    <div class="tooltip_text">دریافت Excel</div>
+                </i>
+                <i (click)="outputManagerService.exportCSV(dataSource)"
+                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
+                    <div class="tooltip_text">دریافت CSV</div>
+                </i>
+            </div>
+            <div class="left_side">
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                </i>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter *ngIf="col.field !== 'zoneTitle'" type="text" field="{{col.field}}"></p-columnFilter>
+
+                <p-columnFilter field="zoneTitle" *ngIf="col.field === 'zoneTitle'" matchMode="in" display="menu"
+                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [options]="filterZoneDictionary" [(ngModel)]="selectedFuckingTest"
+                            (onChange)="filter($event.value)" optionLabel="zoneTitle">
+                            {{col.field}}
+                            <ng-template let-option pTemplate="item">
+                                <div class="p-multiselect-representative-option">
+                                    <span class="p-ml-1">{{option.title}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+
+                    </ng-template>
+                </p-columnFilter>
+
+            </th>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-expanded="expanded" let-index="rowIndex">
+        <tr>
+            <td *ngFor="let col of columns">
+                <ng-container
+                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
+                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{dataSource[col.field]}}
+                </ng-template>
+            </td>
+            <td>
+                <i class="tooltip p_icons pi pi-info-circle" (click)="showMoreDetails(dataSource)">
+                    <div class="tooltip_text">مشاهده جزئیات</div>
+                </i>
+            </td>
+            <td (click)="firstConfirmDialog(dataSource)">
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف مسیر</div>
+                </i>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+            <td [attr.colspan]="columns.length">
+                موردی پیدا نشد
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

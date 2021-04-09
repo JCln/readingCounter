@@ -1,8 +1,14 @@
 $white: #fff;
 $blue_ll: #DCE8FF;
+$dark_ddd: #3686c9;
+$blue_c: #5981b1;
+$blue_d2:#0e4c92;
 $blue_l:#116FFF;
-$blue_d: #002CA8;
-$blue_dr: #111166;
+$blue_lovely: #0045CB;
+$blue_d: #365475;
+$dark_blue: #1f4762;
+$blue_dr: #15273c;
+$half_gray: #b0bdd1;
 $gray_l: #F2F3F4;
 $gray_e3: #e6e6e6;
 $gray_d5: #D5D5D5;
@@ -12,7 +18,12 @@ $gray_dr: #707070;
 $gray_dr2: #5c5c5c;
 $medium_slate_blue: #7d83ff;
 $orange: #F68038;
+$orange_d: #F57F17;
+$green_android: #75BC54;
+$green: #4B8C38;
 $red: #f63e38;
+$red_d: #B71C1C;
+$pink: #ff4081;
 
 $border_s: 15px;
 $border_50: 50%;
@@ -26,13 +37,23 @@ $font_l: 1.5rem;
 $font_2: 2rem;
 $font_3: 3rem;
 
+$font_family: BLotus,
+"Blotus",
+tahoma,
+Sans-Serif;
+
+hr {
+  width: 80%;
+  border: 0;
+  height: .14rem;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), $blue_d2, rgba(0, 0, 0, 0));
+}
 
 .hr_1 {
   width: 70%;
   margin-bottom: 1.5rem;
   height: .4rem;
   border-radius: 30px;
-  // background: $c_light_gray;
 }
 
 .hr_2 {
@@ -41,7 +62,14 @@ $font_3: 3rem;
   margin: 2.5rem auto;
   height: .2rem;
   border-radius: 30px;
-  // background: $c_light_gray;
+}
+
+.d_rtl {
+  direction: rtl;
+}
+
+.d_ltr {
+  direction: ltr;
 }
 
 // unique shape on hover and focus
@@ -50,3 +78,32 @@ a:focus,
 a:active {
   outline: none;
 }
+
+::ng-deep {
+  .mat-select-placeholder {
+    color: $gray_d;
+    font-size: 1rem;
+  }
+}
+
+
+// header icon coloring
+._xlsx,
+._csv,
+._pdf {
+  color: $gray_l !important;
+}
+
+._xlsx {
+  background: $green;
+}
+
+._csv {
+  background: $green;
+}
+
+._pdf {
+  background: $red;
+}
+
+// 

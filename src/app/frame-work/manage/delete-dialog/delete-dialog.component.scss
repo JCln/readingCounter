@@ -1,0 +1,58 @@
+@import '../../../../assets/variable.scss';
+@import '../../../../assets/button.scss';
+
+.mat-form-field {
+  text-align: right;
+  font-family: $font_family;
+}
+
+.mat-dialog-content {
+  display: grid;
+  justify-content: center;
+  min-height: auto;
+  min-width: 20rem;
+  overflow: hidden;
+  padding: $font_2 0;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-checkbox {
+  direction: rtl;
+  margin-bottom: 1rem;
+}
+
+.mat-option {
+  text-align: right;
+  direction: rtl;
+}
+
+.btn_1,
+.btn_2 {
+  width: 50%;
+  max-width: 8rem;
+  font-size: 1.2rem;
+}
+
+._custom {
+  background: $red;
+  color: $gray_l;
+}
+
+h2 {
+  font-family: $font_family;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $gray_l;
+  background: $red;
+  border-radius: 15px;
+  padding: 1rem;
+  text-align: right;
+}
+
+.mat-dialog-container {
+  border: 1px solid $red;
+}

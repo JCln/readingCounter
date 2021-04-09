@@ -5,19 +5,25 @@
 .header {
   display: flex;
   align-items: center;
-  overflow: hidden;
   background-color: #fff;
-  height: 3.5rem;
+  width: 100%;
+  padding: 0.1rem;
 }
 
 ul {
-  margin-right: auto;
   display: flex;
+  margin: 0;
+  height: 100%;
+  padding: 0;
+
+  @media (min-width:549px) {
+    padding: 0 2rem;
+  }
 }
 
 li {
   display: flex;
-  width: 9rem;
+  align-items: center;
   margin: 0 .5rem;
   border-radius: 15px;
   color: $gray_dr2;
@@ -29,15 +35,30 @@ li {
   font-weight: 600;
 }
 
-p {
-  background: $gray_d;
-  font-weight: 600;
-  width: 100%;
-  border-radius: 15px;
+._name {
+  color: $blue_d;
+}
+
+._date {
+  border: 1px solid $blue_d;
 }
 
 .menu_toggle {
-  margin-right: 15%;
-  padding: .5rem;
+  position: absolute;
+  right: 0;
+  margin-right: $font_05;
+  padding: $font_05;
   cursor: pointer;
+  border-radius: $border_50;
+  background-color: $gray_l;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0px 0px 1px 1px $dark_ddd;
+  }
+
+  @media (min-width: 700px) {
+    margin-right: 12rem;
+  }
 }

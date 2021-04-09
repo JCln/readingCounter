@@ -1,0 +1,23 @@
+@import '../../../../../assets/variable.scss';
+@import '../../../../../assets/button.scss';
+@import '../../../../../assets/input.scss';
+@import '../../../../../assets/mixins.scss';
+
+section {
+  display: grid;
+  margin: auto;
+  padding: 2rem;
+  background: $gray_d5;
+  border-radius: $border_s;
+  width: 25rem;
+}
+
+.input_1 {
+  text-align: center;
+}
+
+.btn_1 {
+  color: $white;
+  margin-top: 1rem;
+  background-color: $orange;
+}
