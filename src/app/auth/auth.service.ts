@@ -106,7 +106,7 @@ export class AuthService {
     this.snackWrapperService.openSnackBar('شما به این بخش دسترسی ندارید', ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
   }
   goOutIn = () => {
-    this.snackWrapperService.openSnackBar('یکبار دیگر وارد شوید', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+    this.snackWrapperService.openSnackBar('دسترسی شما باطل شده است. مجددا وارد شوید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
   }
 
 }

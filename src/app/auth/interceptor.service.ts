@@ -40,13 +40,20 @@ export class InterceptorService implements HttpInterceptor {
           take(1)
         )),
         catchError((error => {
+          console.log(req.url);
+
           if (
             req.url.includes('login')
           ) {
+            console.log(req.url);
             return throwError(error)
           }
+          console.log(req.url);
           if (error instanceof HttpErrorResponse) {
+            console.log(error.status);
             if (error.status === 401) {
+              console.log(1);
+
               const newRequest = this.handle401Error(req);
               if (newRequest) {
                 console.log("Try new AuthRequest ...");
@@ -74,6 +81,8 @@ export class InterceptorService implements HttpInterceptor {
     });
   }
   private handle401Error(request: HttpRequest<any>): HttpRequest<any> | null {
+    console.log(1);
+
     let newStoredToken: any;
     const requestAccessTokenHeader = request.headers.get(this.authorizationHeader);
     this.authService.refreshToken().subscribe(res => {
@@ -81,13 +90,16 @@ export class InterceptorService implements HttpInterceptor {
     });
     if (!newStoredToken) {
       console.log("There is no new AccessToken.", { requestAccessTokenHeader: requestAccessTokenHeader, newStoredToken: newStoredToken });
+      console.log(2);
       return null;
     }
     const newAccessTokenHeader = newStoredToken;
     if (requestAccessTokenHeader === newAccessTokenHeader) {
       console.log("There is no new AccessToken.", { requestAccessTokenHeader: requestAccessTokenHeader, newAccessTokenHeader: newAccessTokenHeader });
+      console.log(3);
       return null;
     }
+    console.log(4);
     return this.addToken(request, newAccessTokenHeader);
   }
 }

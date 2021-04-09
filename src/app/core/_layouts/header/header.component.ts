@@ -31,8 +31,6 @@ export class HeaderComponent implements AfterContentInit, OnDestroy {
     })
   }
   ngOnDestroy(): void {
-    console.log('header destroyed');
-
     this.subscription.unsubscribe();
   }
   logout = () => {
