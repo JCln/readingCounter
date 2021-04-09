@@ -30,7 +30,7 @@ export class GisComponent implements OnInit {
     {
       id: 'isCounterState',
       title: 'وضعیت کنتور',
-      isSelected: true
+      isSelected: false
     },
     {
       id: 'isForbidden',
@@ -39,12 +39,12 @@ export class GisComponent implements OnInit {
     },
     {
       id: 'isAhadChange',
-      title: 'آحاد',
+      title: 'تغییر آحاد',
       isSelected: false
     },
     {
       id: 'isKarbariChange',
-      title: 'کاربری',
+      title: 'تغییر کاربری',
       isSelected: false
     }
   ]
@@ -69,6 +69,7 @@ export class GisComponent implements OnInit {
   karbariDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
+  counterStateDictionary: IDictionaryManager[] = [];
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
@@ -76,6 +77,9 @@ export class GisComponent implements OnInit {
     // public route: ActivatedRoute
   ) { }
 
+  getCounterStateByZoneId = async () => {
+    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportGISReq.zoneId);
+  }
   classWrapper = async () => {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getKarbariDictionary();
@@ -88,7 +92,7 @@ export class GisComponent implements OnInit {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/rpts/mam/Gis') {
+        if (res === '/wr/rpts/mam/gis') {
           this.classWrapper();
         }
       }
@@ -123,7 +127,10 @@ export class GisComponent implements OnInit {
       else
         this.readingReportGISReq[item.id] = true;
     })
+    console.log(event.value);
+
     event.value === 'isForbidden' ? this._isOrderByDate = true : ''
+    event.value === 'isCounterState' ? this.readingReportGISReq.isCounterState = true : ''
   }
   makeObject = () => {
     this._isOrderByDate ? (this.readingReportGISReq.readingPeriodId = null, this.readingReportGISReq.year = 0) : (this.readingReportGISReq.fromDate = '', this.readingReportGISReq.toDate = '');

@@ -48,12 +48,11 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else {
       this.dataSource = await this.fragmentManagerService.getDataSource();
-      this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
-      console.log(this.zoneDictionary);
-
-      this.convertIdToTitle(this.dataSource, this.zoneDictionary);
-      this.closeTabService.saveDataForFragmentNOB = this.dataSource;
     }
+    this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
+    console.log(this.zoneDictionary);
+    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    this.closeTabService.saveDataForFragmentNOB = this.dataSource;
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -122,10 +121,34 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     delete this.dataSource[dataSource.id];
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster) => {
-    if (!this.fragmentManagerService.verificationMaster(dataSource))
+    // this.fragmentManagerService.setZoneDictionary(this.zoneDictionary);
+    // const validZoneIdNumber = this.fragmentManagerService.findIDFromTitleZoneDictionary(dataSource.zoneId)
+    // // to not spoil(distract) row object use temp    
+    // this.tempDataSource = dataSource;
+    // this.tempDataSource.zoneId = validZoneIdNumber;
+    const obj2 = { ...dataSource };
+    obj2.zoneId = 1;
+    console.log(obj2);
+
+    if (!this.fragmentManagerService.verificationMaster(obj2))
       return;
-    const a = await this.fragmentManagerService.removeFragmentMaster(dataSource);
+    const a = await this.fragmentManagerService.removeFragmentMaster(obj2);
     if (a)
-      this.refreshTable();
+      this.reFetchTable();
+  }
+  getIsValidateRow = async (dataSource: IFragmentMaster) => {
+    // this.fragmentManagerService.setZoneDictionary(this.zoneDictionary);
+    // const validZoneIdNumber = this.fragmentManagerService.findIDFromTitleZoneDictionary(dataSource.zoneId)
+    // // to not spoil(distract) row object use temp
+    // let tempDataSource: IFragmentMaster;
+    // tempDataSource = dataSource;
+    // tempDataSource.zoneId = validZoneIdNumber;
+    const obj2 = { ...dataSource };
+    obj2.zoneId = 1;
+    console.log(obj2);
+
+    if (!this.fragmentManagerService.verificationMaster(obj2))
+      return;
+    this.fragmentManagerService.isValidateMaster(obj2);
   }
 }

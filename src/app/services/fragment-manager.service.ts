@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IObjectIteratation, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -12,6 +12,8 @@ import { IFragmentDetails, IFragmentMaster } from './../Interfaces/imanage';
 export class FragmentManagerService {
   fragmentMaster: IFragmentMaster;
   fragmentDetails: IFragmentDetails;
+
+  zoneDictionary: IDictionaryManager[] = [];
 
   columnSelectedFragmentMaster = (): IObjectIteratation[] => {
     return [
@@ -75,11 +77,19 @@ export class FragmentManagerService {
       console.error(error);
     }
   }
-  isValidateMaster = (body: IFragmentMaster) => {
-    this.interfaceManagerService.validateFragmentMaster(body).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message)
-    })
+  isValidateMaster = (body: IFragmentMaster): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.validateFragmentMaster(body).subscribe((res: IResponses) => {
+          if (res) {
+            this.utilsService.snackBarMessageSuccess(res.message);
+            resolve(res);
+          }
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   /* Details */
   getFragmentDetails = (masterId: string): Promise<any> => {
@@ -145,18 +155,23 @@ export class FragmentManagerService {
       this.utilsService.snackBarMessageWarn('عنوان مسیر را وارد نمایید');
       return false;
     }
-    if (!this.utilsService.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
-      this.utilsService.snackBarMessageWarn('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد');
-      return false;
-    }
 
     if (this.utilsService.isNaN(this.fragmentMaster.fromEshterak)) {
       this.utilsService.snackBarMessageWarn('فرمت از اشتراک ناصحیح است');
       return false;
     }
-
     if (this.utilsService.isNaN(this.fragmentMaster.fromEshterak)) {
       this.utilsService.snackBarMessageWarn('فرمت  تا اشتراک ناصحیح است');
+      return false;
+    }
+
+    if (!this.utilsService.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
+      this.utilsService.snackBarMessageWarn('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد');
+      return false;
+    }
+
+    if (!this.utilsService.isFromLowerThanToByString(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
+      this.utilsService.snackBarMessageWarn('از اشتراک کمتر از تا اشتراک است!');
       return false;
     }
 
@@ -189,15 +204,16 @@ export class FragmentManagerService {
       this.utilsService.snackBarMessageWarn('فرمت  تا اشتراک ناصحیح است');
       return false;
     }
+    if (!this.utilsService.isFromLowerThanToByString(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
+      this.utilsService.snackBarMessageWarn('از اشتراک کمتر از تا اشتراک است!');
+      return false;
+    }
 
     if (!this.utilsService.isSameLength(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
       this.utilsService.snackBarMessageWarn('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد');
       return false;
     }
-
-    if (this.utilsService.isNaN(this.fragmentDetails))
-      return false;
-
+    
     if (!this.utilsService.lengthControl(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak, 5, 10)) {
       this.utilsService.snackBarMessageWarn('فرمت اشتراک ناصحیح است');
       return false;
@@ -212,6 +228,19 @@ export class FragmentManagerService {
   verificationDetails = (fragmentDetails: IFragmentDetails): boolean => {
     this.fragmentDetails = fragmentDetails;
     return this.detailsValidation();
+  }
+
+  findIDFromTitleZoneDictionary = (title: number | string): number => {
+    let a = null;
+    this.zoneDictionary.find(item => {
+      if (item.title === title)
+        a = item.id
+    })
+    return a;
+  }
+  setZoneDictionary = (zoneDic: IDictionaryManager[]) => {
+    if (!this.zoneDictionary)
+      this.zoneDictionary = zoneDic;
   }
 
 }

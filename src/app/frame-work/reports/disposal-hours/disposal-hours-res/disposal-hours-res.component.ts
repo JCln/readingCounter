@@ -36,7 +36,7 @@ export class DisposalHoursResComponent implements OnInit {
     }
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRKarkard();
+    this._selectCols = this.readingReportManagerService.columnSelectedRRDisposalHours();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {
@@ -49,5 +49,5 @@ export class DisposalHoursResComponent implements OnInit {
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }
-  
+
 }

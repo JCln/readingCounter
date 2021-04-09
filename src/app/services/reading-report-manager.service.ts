@@ -77,8 +77,8 @@ export class ReadingReportManagerService {
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
       { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
-      { field: 'fromTime', header: 'از تاریخ', isSelected: true, readonly: true },
-      { field: 'toTime', header: 'تا تاریخ', isSelected: true, readonly: true },
+      { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
+      { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
       { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
       { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
@@ -235,9 +235,9 @@ export class ReadingReportManagerService {
       resolve(this.dictionaryWrapperService.getKarbariDictionary());
     });
   }
-  getCounterStateDictionary = (): Promise<any> => {
+  getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
     return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getCounterStateDictionary());
+      resolve(this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId));
     });
   }
 
@@ -406,6 +406,12 @@ export class ReadingReportManagerService {
   }
 
   private datesValidationGIS = (): boolean => {
+    if (this.readingReportGISReq.isCounterState === true) {
+      if (this.utilsService.isNull(this.readingReportGISReq.counterStateId)) {
+        this.utilsService.snackBarMessageWarn('وضعیت کنتور را مشخص نمایید');
+        return false;
+      }
+    }
     if (this.utilsService.isNull(this.readingReportGISReq.zoneId)) {
       this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
       return false;
@@ -424,6 +430,12 @@ export class ReadingReportManagerService {
     if (this.readingReportGISReq.isForbidden === true) {
       this.utilsService.snackBarMessageWarn('مشاهده غیر مجاز تنها با تاریخ امکان پذیر است');
       return false;
+    }
+    if (this.readingReportGISReq.isCounterState === true) {
+      if (this.utilsService.isNull(this.readingReportGISReq.counterStateId)) {
+        this.utilsService.snackBarMessageWarn('وضعیت کنتور را مشخص نمایید');
+        return false;
+      }
     }
     if (this.utilsService.isNull(this.readingReportGISReq.zoneId)) {
       this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');

@@ -26,7 +26,8 @@
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.zoneId" name="zoneId">
-                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
+                            (click)="getCounterStateByZoneId()">
                             {{truefalse.title}}
                         </mat-option>
                     </mat-select>
@@ -49,6 +50,15 @@
                         </mat-option>
                     </mat-select>
                 </div>
+                <div class="input_2" [hidden]="!readingReportGISReq.isCounterState">
+                    <div class="_key">وضعیت کنتور</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.counterStateId"
+                        name="counterStateId">
+                        <mat-option *ngFor="let truefalse of counterStateDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
                 <div class="input_2" [hidden]="_isOrderByDate">
                     <div class="_key">سال</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.year"
@@ -64,14 +74,14 @@
 
             <section class="content">
                 <div class="input_2" [hidden]="!_isOrderByDate">
-                    <div class="_key">از تاریخ</div>
+                    <div class="_key">از</div>
                     <div class="_value">
                         <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
                         </app-date-jalali>
                     </div>
                 </div>
                 <div class="input_2" [hidden]="!_isOrderByDate">
-                    <div class="_key">تا تاریخ</div>
+                    <div class="_key">تا</div>
                     <div class="_value">
                         <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
                         </app-date-jalali>

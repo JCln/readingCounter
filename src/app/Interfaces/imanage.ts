@@ -451,6 +451,7 @@ export interface IReadingReportDisposalHours {
 export interface IFragmentMaster {
     id: string,
     zoneId: number,
+    zoneTempId: number,
     routeTitle: string,
     fromEshterak: string,
     toEshterak: string,

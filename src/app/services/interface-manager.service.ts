@@ -51,7 +51,7 @@ export class InterfaceManagerService {
     return this.mainService.POSTBODY('V1/Fragment/Master/Add', body);
   }
   validateFragmentMaster = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1​/Fragment​/Master​/Validate', body);
+    return this.mainService.POSTBODY('V1/Fragment/Master/Validate', body);
   }
   // details
   getFragmentDetails = (masterId: string): Observable<any> => {
@@ -245,6 +245,9 @@ export class InterfaceManagerService {
   }
   getCounterStateDictionary = (): Observable<any> => {
     return this.mainService.GET('V1/CounterState/Dictionary');
+  }
+  getCounterStateByZoneIdDictionary = (zoneId: number): Observable<any> => {
+    return this.mainService.GET(`V1/CounterState/DictionaryByZoneId/${zoneId}`);
   }
   postCounterStatGridFriendly = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/CounterState/GridFriendly', body);
