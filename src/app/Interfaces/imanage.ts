@@ -417,6 +417,23 @@ export interface IReadingReportTraverse {
     possibleEmpty: number
 }
 
+export interface IReadingReportChartKarkard {
+    offloadDayalali: string,
+    fromEshterak: string,
+    toEshterak: string,
+    counterReaderName: string,
+    fromTime: string,
+    toTime: string,
+    duration: number,
+    overalCount: number,
+    adiCount: number,
+    faqedCount: number,
+    maneCount: number,
+    xarabCount: number,
+    tavizCount: number,
+    saierCount: number,
+    areaTitle: string
+}
 export interface IReadingReportKarkard {
     offloadDayalali: string,
     fromEshterak: string,
@@ -433,6 +450,7 @@ export interface IReadingReportKarkard {
     tavizCount: number,
     saierCount: number
 }
+
 export interface IReadingReportDisposalHours {
     dayJalali: string,
     fromEshterak: string,

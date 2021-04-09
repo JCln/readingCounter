@@ -165,6 +165,17 @@ export class ReadingReportManagerService {
       console.error(error);
     }
   }
+  postRRKarkardChartManager = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.postRRKarkardChartManager(this.readingReportReq).subscribe((res: any) => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   postRRKarkardDailyManager = (): Promise<any> => {
     try {
       return new Promise((resolve) => {

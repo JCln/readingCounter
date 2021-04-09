@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IReadingReportReq } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'src/app/Interfaces/ioverall-config';
-import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
 
@@ -44,12 +43,15 @@ export class KarkardComponent implements OnInit {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
+    // private interactionService: InteractionService,
     public route: ActivatedRoute
   ) { }
 
-  routeToChild = () => {
+  routeToGridView = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/karkard/res');
+  }
+  routeToChartView = () => {
+    this.readingReportManagerService.routeTo('/wr/rpts/mam/karkard/chart');
   }
   classWrapper = async () => {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
@@ -59,24 +61,24 @@ export class KarkardComponent implements OnInit {
   ngOnInit() {
     this.classWrapper();
   }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/karkard') {
-          this.classWrapper();
-        }
-      }
-    })
-    )
-  }
+  // refreshTabStatus = () => {
+  //   this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
+  //     if (res) {
+  //       if (res === '/wr/rpts/mam/karkard') {
+  //         this.classWrapper();
+  //       }
+  //     }
+  //   })
+  //   )
+  // }
   ngAfterViewInit(): void {
-    this.refreshTabStatus();
+    // this.refreshTabStatus();
   }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
+  // ngOnDestroy(): void {
+  //   //  for purpose of refresh any time even without new event emiteds
+  //   // we use subscription and not use take or takeUntil
+  //   this.subscription.forEach(subscription => subscription.unsubscribe());
+  // }
   receiveFromDateJalali = ($event: string) => {
     this.readingReportReq.fromDate = $event;
   }
@@ -94,6 +96,6 @@ export class KarkardComponent implements OnInit {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
     const temp = this.readingReportManagerService.verificationRRKarkard(this.readingReportReq, this._isOrderByDate);
     if (temp)
-      this.routeToChild();
+      document.activeElement.id == 'grid_view' ? this.routeToGridView() : this.routeToChartView();
   }
 }
