@@ -69,14 +69,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private initMap = () => {
     const OSM = this.mapItems[0];
     const SATELLITE = this.mapItems[1];
-    const Esri = this.mapItems[2];
+    // const Esri = this.mapItems[2];
     const
       streets = L.tileLayer(
         OSM.mapBoxUrl),
       satellite = L.tileLayer(
-        SATELLITE.mapBoxUrl + SATELLITE.accessToken),
-      esri = L.tileLayer(
-        Esri.mapBoxUrl)
+        SATELLITE.mapBoxUrl + SATELLITE.accessToken)
+    // esri = L.tileLayer(
+    //   Esri.mapBoxUrl)
 
     // only one of base layers should be added to the map at instantiation
     this.map = L.map('map', {
@@ -89,7 +89,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     const baseMaps = {
       "Satellite": satellite,
       "OSM": streets,
-      "ESRI": esri
+      // "ESRI": esri
     };
     const overlays = {
       "لایه ها": this.layerGroup

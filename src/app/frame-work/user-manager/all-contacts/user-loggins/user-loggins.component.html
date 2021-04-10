@@ -1,7 +1,7 @@
 <p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
     [filterDelay]="0" dir="rtl"
-    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
+    [globalFilterFields]="['loginDateTime','loginIp','wasSuccessful','browserVersion','browserTitle','browserShortTitle','browserEngine','browserType','osVersion','osTitle','osPlatform','wrongPassword','userAgent']"
     styleClass="p-datatable-responsive">
 
     <ng-template pTemplate="caption">
