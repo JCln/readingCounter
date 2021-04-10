@@ -153,18 +153,28 @@ export class InterfaceManagerService {
   postRRTraverseManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/List/Offloaded/Traverse', body);
   }
+
   postRRKarkardManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/List/Offloaded/Karkard', body);
   }
+  postRRKarkardChartManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/List/Offloaded/KarkardChart', body);
+  }
+
   postRRKarkardDailyManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/List/Offloaded/KarkardDaily', body);
   }
   postRRGISManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/List/Offloaded/Gis', body);
   }
+
   postRRDisposalHoursanager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/List/Offloaded/DispersalHours', body);
   }
+  postRRDispersalChartManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/List/Offloaded/DispersalChart', body);
+  }
+
   // 
   // List Manager 
 

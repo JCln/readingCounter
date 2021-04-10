@@ -39,8 +39,11 @@ export class DisposalHoursComponent implements OnInit {
   ngOnInit() {
     this.classWrapper();
   }
-  routeToChild = () => {
+  routeToGridView = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/dh/res');
+  }
+  routeToChartView = () => {
+    this.readingReportManagerService.routeTo('/wr/rpts/mam/dh/chart');
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -69,6 +72,6 @@ export class DisposalHoursComponent implements OnInit {
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRDisposalHours(this.readingReportReq);
     if (temp)
-      this.routeToChild();
+      document.activeElement.id == 'grid_view' ? this.routeToGridView() : this.routeToChartView();
   }
 }

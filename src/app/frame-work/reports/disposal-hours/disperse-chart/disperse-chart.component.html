@@ -1,0 +1,17 @@
+<main class="container_wrapper">
+    <div class="charts">
+        <canvas baseChart [data]="pieChartDataProvince" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <div class="charts">
+        <canvas baseChart [data]="pieChartDataZone" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <div class="charts">
+        <canvas baseChart [data]="pieChartDataRegion" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+</main>

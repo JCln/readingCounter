@@ -67,9 +67,15 @@
             </section>
 
         </section>
-        <footer>
-            <button *ngIf="readingReportReq.zoneId" type="submit" class="btn_1">مشاهده</button>
-
+        <footer class="d_flex_s_around">
+            <button *ngIf="readingReportReq.zoneId" id="grid_view" type="submit" class="btn_1">
+                مشاهده لیست
+                <i class="pi pi-list"></i>
+            </button>
+            <button *ngIf="readingReportReq.zoneId" id="chart_view" type="submit" class="btn_1">
+                مشاهده نمودار
+                <i class="fa fa-pie-chart"></i>
+            </button>
         </footer>
     </form>
 </main>
