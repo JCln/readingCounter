@@ -10,6 +10,12 @@ export class InterfaceManagerService {
 
   constructor(private mainService: MainService) { }
 
+  /* text output manager */
+  getTextOutputManager = (): Observable<any> => {
+    return this.mainService.GET('V1/TextOutputField/All');
+  }
+  /* */
+
   // //// User manager
   getAllUserContactsManager = (): Observable<any> => {
     return this.mainService.GET('V1/User/All');

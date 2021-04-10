@@ -24,7 +24,7 @@ export class ReadingReportManagerService {
     return this.readingReportGISReq;
   }
 
-  /* */
+  /* COLUMNS*/  
 
   columnSelectedRRMaster = (): IObjectIteratation[] => {
     return [

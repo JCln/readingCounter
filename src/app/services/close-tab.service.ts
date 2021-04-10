@@ -96,6 +96,7 @@ export class CloseTabService {
   // managers
   saveDataForFragmentNOB: any;
   saveDataForFragmentNOBDetails: any;
+  saveDataForTextOutput: any;
   // 
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
@@ -139,6 +140,9 @@ export class CloseTabService {
         break;
       case '/wr/m/mp':
         this.saveDataForProvince = '';
+        break;
+      case '/wr/m/txt/out':
+        this.saveDataForTextOutput = '';
         break;
       case '/wr/m/mr':
         this.saveDataForRegion = '';

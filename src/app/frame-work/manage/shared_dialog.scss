@@ -2,7 +2,7 @@
 @import '../../../assets/button.scss';
 
 .mat-form-field {
-  text-align: right;
+  text-align: center;
   font-family: $font_family;
   font-size: $font_s;
   font-weight: 600;
@@ -83,6 +83,10 @@ button._blue_dark {
     font-family: $font_family;
     font-weight: 600;
     direction: rtl;
+  }
+
+  .mat-select-value-text {
+    color: $gray_dr;
   }
 
 }

@@ -335,6 +335,15 @@ export interface IManageServer {
     background: string;
     color?: string;
 }
+
+export interface ITextOutput {
+    id: number,
+    zoneId: number,
+    itemTitle: string,
+    startIndex: number,
+    endIndex: number,
+    length: number
+}
 // reading report manager
 export interface IReadingReportReq {
     zoneId: number,

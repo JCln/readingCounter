@@ -13,9 +13,30 @@ import { ReadingReportManagerService } from 'src/app/services/reading-report-man
 export class DisperseChartComponent implements OnInit, OnDestroy {
   dataSource: IReadingReportChartDisposeRes;
 
+  private defaultOptions = {
+    fontFamily: 'Blotus',
+    fontSize: 18,
+    fontStyle: 'bold',
+    fontColor: 'rgb(112, 112, 112)'
+  }
   // Pie
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      position: 'right',
+      labels: this.defaultOptions
+    },
+    tooltips: {
+      footerFontFamily: 'Blotus',
+      bodyFontFamily: 'Blotus',
+      titleFontFamily: 'Blotus',
+      bodyFontSize: 18,
+      titleFontSize: 18,
+      footerFontSize: 18,
+      bodyFontStyle: 'bold',
+
+    }
   };
   public pieChartLabels: Label[] = [['8 - 10'], ['10 - 12'], ['12 - 14'], ['14 - 16'], ['16 - 18']];
   public pieChartDataProvince: SingleDataSet = [];

@@ -17,21 +17,16 @@ export class KarkardChartComponent implements OnInit {
   private defaultOptions = {
     fontFamily: 'Blotus',
     fontSize: 18,
-    fontStyle: 'bold'
+    fontStyle: 'bold',
+    fontColor: 'rgb(112, 112, 112)'
   }
-
   // Pie
   public pieChartOptions: ChartOptions = {
     responsive: true,
-    legend: { labels: this.defaultOptions },
-    plugins: {
-      Option: {
-        title: {
-          display: true,
-          text: 'hello'
-        }
-      }
-
+    legend: {
+      display: true,
+      position: 'right',
+      labels: this.defaultOptions
     },
     tooltips: {
       footerFontFamily: 'Blotus',
@@ -40,7 +35,17 @@ export class KarkardChartComponent implements OnInit {
       bodyFontSize: 18,
       titleFontSize: 18,
       footerFontSize: 18,
-      bodyFontStyle: 'bold'
+      bodyFontStyle: 'bold',
+      enabled: true,
+      callbacks: {
+        label: function (tooltipItem, data) {
+          let label = '%' + data.labels[tooltipItem.index];
+          let count = data
+            .datasets[tooltipItem.datasetIndex]
+            .data[tooltipItem.index];
+          return label + " : " + count;
+        }
+      }
     }
   };
   public pieChartLabels: Label[] = [['عادی'], ['فاقد'], ['مانع'], ['سایر'], ['تعویض'], ['خراب']];
@@ -73,28 +78,28 @@ export class KarkardChartComponent implements OnInit {
     monkeyPatchChartJsLegend();
   }
   insertToPieChartProvince = () => {
-    this.pieChartDataProvince.push(this.dataSource['inProvince'].adiCount);
-    this.pieChartDataProvince.push(this.dataSource['inProvince'].faqedCount);
-    this.pieChartDataProvince.push(this.dataSource['inProvince'].maneCount);
-    this.pieChartDataProvince.push(this.dataSource['inProvince'].saierCount);
-    this.pieChartDataProvince.push(this.dataSource['inProvince'].tavizCount);
-    this.pieChartDataProvince.push(this.dataSource['inProvince'].xarabCount);
+    this.pieChartDataProvince.push(this.dataSource.inProvince.adiCount);
+    this.pieChartDataProvince.push(this.dataSource.inProvince.faqedCount);
+    this.pieChartDataProvince.push(this.dataSource.inProvince.maneCount);
+    this.pieChartDataProvince.push(this.dataSource.inProvince.saierCount);
+    this.pieChartDataProvince.push(this.dataSource.inProvince.tavizCount);
+    this.pieChartDataProvince.push(this.dataSource.inProvince.xarabCount);
   }
   insertToPieChartZone = () => {
-    this.pieChartDataZone.push(this.dataSource['inProvince'].adiCount);
-    this.pieChartDataZone.push(this.dataSource['inProvince'].faqedCount);
-    this.pieChartDataZone.push(this.dataSource['inProvince'].maneCount);
-    this.pieChartDataZone.push(this.dataSource['inProvince'].saierCount);
-    this.pieChartDataZone.push(this.dataSource['inProvince'].tavizCount);
-    this.pieChartDataZone.push(this.dataSource['inProvince'].xarabCount);
+    this.pieChartDataZone.push(this.dataSource.inZone.adiCount);
+    this.pieChartDataZone.push(this.dataSource.inZone.faqedCount);
+    this.pieChartDataZone.push(this.dataSource.inZone.maneCount);
+    this.pieChartDataZone.push(this.dataSource.inZone.saierCount);
+    this.pieChartDataZone.push(this.dataSource.inZone.tavizCount);
+    this.pieChartDataZone.push(this.dataSource.inZone.xarabCount);
   }
   insertToPieChartRegion = () => {
-    this.pieChartDataRegion.push(this.dataSource['inProvince'].adiCount);
-    this.pieChartDataRegion.push(this.dataSource['inProvince'].faqedCount);
-    this.pieChartDataRegion.push(this.dataSource['inProvince'].maneCount);
-    this.pieChartDataRegion.push(this.dataSource['inProvince'].saierCount);
-    this.pieChartDataRegion.push(this.dataSource['inProvince'].tavizCount);
-    this.pieChartDataRegion.push(this.dataSource['inProvince'].xarabCount);
+    this.pieChartDataRegion.push(this.dataSource.inRegion.adiCount);
+    this.pieChartDataRegion.push(this.dataSource.inRegion.faqedCount);
+    this.pieChartDataRegion.push(this.dataSource.inRegion.maneCount);
+    this.pieChartDataRegion.push(this.dataSource.inRegion.saierCount);
+    this.pieChartDataRegion.push(this.dataSource.inRegion.tavizCount);
+    this.pieChartDataRegion.push(this.dataSource.inRegion.xarabCount);
   }
   connectToServer = async () => {
     if (!this.readingReportManagerService.getRRReq()) {
@@ -106,7 +111,14 @@ export class KarkardChartComponent implements OnInit {
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();
+
+    // this.addPieChartOptions();
   }
+  // addPieChartOptions = () => {
+  //   this.pieChartOptions.plugins.datalabels.formatter = function (value, context) {
+  //     return context.dataset.labels[context.dataIndex];
+  //   }
+  // }  
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }
