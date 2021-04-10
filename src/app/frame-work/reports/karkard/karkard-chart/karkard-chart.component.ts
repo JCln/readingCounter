@@ -4,30 +4,59 @@ import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataS
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
+import { IReadingReportChartKarkard } from './../../../../Interfaces/imanage';
+
 @Component({
   selector: 'app-karkard-chart',
   templateUrl: './karkard-chart.component.html',
   styleUrls: ['./karkard-chart.component.scss']
 })
 export class KarkardChartComponent implements OnInit {
-  dataSource: any;
+  dataSource: IReadingReportChartKarkard;
+
+  private defaultOptions = {
+    fontFamily: 'Blotus',
+    fontSize: 18,
+    fontStyle: 'bold'
+  }
 
   // Pie
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    legend: { labels: this.defaultOptions },
+    plugins: {
+      Option: {
+        title: {
+          display: true,
+          text: 'hello'
+        }
+      }
+
+    },
+    tooltips: {
+      footerFontFamily: 'Blotus',
+      bodyFontFamily: 'Blotus',
+      titleFontFamily: 'Blotus',
+      bodyFontSize: 18,
+      titleFontSize: 18,
+      footerFontSize: 18,
+      bodyFontStyle: 'bold'
+    }
   };
-  public pieChartLabels: Label[] = [['adiCount'], ['faqedCount'], ['maneCount'], ['saierCount'], ['tavizCount'], ['xarabCount']];
+  public pieChartLabels: Label[] = [['عادی'], ['فاقد'], ['مانع'], ['سایر'], ['تعویض'], ['خراب']];
   public pieChartDataProvince: SingleDataSet = [];
   public pieChartDataRegion: SingleDataSet = [];
   public pieChartDataZone: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   pieChartColor: any = [
     {
-      backgroundColor: ['rgba(30, 169, 224, 0.8)',
-        'rgba(255,165,0,0.9)',
+      backgroundColor: [
+        'rgb(0, 69, 203)',
+        'rgb(246, 62, 56)',
         'rgba(139, 136, 136, 0.9)',
+        'rgb(213, 213, 213)',
         'rgba(255, 161, 181, 0.9)',
-        'rgba(255, 102, 0, 0.9)'
+        'rgb(183, 28, 28)'
       ]
     }
   ]
@@ -68,7 +97,12 @@ export class KarkardChartComponent implements OnInit {
     this.pieChartDataRegion.push(this.dataSource['inProvince'].xarabCount);
   }
   connectToServer = async () => {
+    if (!this.readingReportManagerService.getRRReq()) {
+      this.backToPrevious();
+      return;
+    }
     this.dataSource = await this.readingReportManagerService.postRRKarkardChartManager();
+
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();

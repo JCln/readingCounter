@@ -20,6 +20,11 @@
   justify-content: center;
   align-items: center;
 }
+.d_flex_s_around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
 .d_grid_center {
   display: grid;

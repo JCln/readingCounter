@@ -1,38 +1,21 @@
-<div style="display: block;">
-    <canvas baseChart 
-      [data]="pieChartDataProvince" 
-      [labels]="pieChartLabels" 
-      [chartType]="pieChartType"
-      [options]="pieChartOptions"
-      [plugins]="pieChartPlugins"
-       [colors]="pieChartColor"
-      [legend]="pieChartLegend">
-    </canvas>
-  </div>
-  <hr>
-  
-  <div style="display: block;">
-    <canvas baseChart 
-    [data]="pieChartDataZone" 
-    [labels]="pieChartLabels" 
-    [chartType]="pieChartType"
-    [options]="pieChartOptions"
-    [plugins]="pieChartPlugins"
-     [colors]="pieChartColor"
-    [legend]="pieChartLegend">
-  </canvas>
-</div>
+<i (click)="backToPrevious()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+  <div class="tooltip_text_right">بازگشت به ایجاد پیمایش</div>
+</i>
 
-<hr>
-  <div style="display: block;">
-    <canvas baseChart 
-      [data]="pieChartDataRegion" 
-      [labels]="pieChartLabels" 
-      [chartType]="pieChartType"
-      [options]="pieChartOptions"
-      [plugins]="pieChartPlugins"
-       [colors]="pieChartColor"
-      [legend]="pieChartLegend">
+<main class="container_wrapper">
+  <div class="charts">
+    <canvas baseChart [data]="pieChartDataProvince" [labels]="pieChartLabels" [chartType]="pieChartType"
+      [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
     </canvas>
   </div>
-  
+  <div class="charts">
+    <canvas baseChart [data]="pieChartDataZone" [labels]="pieChartLabels" [chartType]="pieChartType"
+      [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+    </canvas>
+  </div>
+  <div class="charts">
+    <canvas baseChart [data]="pieChartDataRegion" [labels]="pieChartLabels" [chartType]="pieChartType"
+      [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+    </canvas>
+  </div>
+</main>

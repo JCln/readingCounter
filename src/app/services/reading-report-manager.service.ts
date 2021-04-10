@@ -15,6 +15,17 @@ export class ReadingReportManagerService {
   private readingReportReq: IReadingReportReq;
   private readingReportGISReq: IReadingReportGISReq;
 
+  /* GET*/
+
+  getRRReq(): IReadingReportReq {
+    return this.readingReportReq;
+  }
+  getRRGISReq(): IReadingReportGISReq {
+    return this.readingReportGISReq;
+  }
+
+  /* */
+
   columnSelectedRRMaster = (): IObjectIteratation[] => {
     return [
       { field: 'zoneId', header: 'کد ناحیه', isSelected: true, readonly: false },
@@ -169,6 +180,17 @@ export class ReadingReportManagerService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRKarkardChartManager(this.readingReportReq).subscribe((res: any) => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  postRRDisposalChartManager = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.postRRDispersalChartManager(this.readingReportReq).subscribe((res: any) => {
           resolve(res)
         })
       });
