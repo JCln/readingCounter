@@ -228,7 +228,7 @@ export class CloseTabService {
       case '/wr/rpts/exm/karkardDaily':
         this.saveDataForRRkarkardDaily = '';
         break;
-      case '/wr/rpts/exm/gis':
+      case '/wr/rpts/mam/gis':
         this.saveDataForRRGIS = '';
         break;
     }

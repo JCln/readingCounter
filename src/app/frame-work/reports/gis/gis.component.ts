@@ -73,7 +73,7 @@ export class GisComponent implements OnInit {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
+    private interactionService: InteractionService
     // public route: ActivatedRoute
   ) { }
 
@@ -82,7 +82,7 @@ export class GisComponent implements OnInit {
   }
   classWrapper = async () => {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
-    this.readingPeriodKindDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
   }
