@@ -1,0 +1,93 @@
+<main class="main" *ngIf="route.children.length === 0">
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <section class="static_part">
+            <section class="order_by">
+                <h2>جستجو بر اساس :</h2>
+                <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
+                    name="_isOrderByDate">
+                    <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"
+                        [value]="orderType.isSelected">
+                        {{orderType.title}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </section>
+
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.zoneId" name="zoneId">
+                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2">
+                    <div class="_key">نوع پیمایش</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.traverseType" name="traverseID">
+                        <mat-option *ngFor="let truefalse of traverseDiffrentialDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2" [hidden]="_isOrderByDate">
+                    <div class="_key">نوع دوره</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                        <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
+                            [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
+                    <div class="_key">دوره قرائت</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.readingPeriodId"
+                        name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2" [hidden]="_isOrderByDate">
+                    <div class="_key">سال</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.year" name="year">
+                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </section>
+
+            <section class="content">
+                <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" [(ngModel)]="readingReportReq.fromDate"
+                            (dateJalEvent)="receiveFromDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="_key">تا</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+        <footer class="d_flex_s_around">
+            <button *ngIf="readingReportReq.zoneId" id="grid_view" type="submit" class="btn_1">
+                مشاهده لیست
+                <i class="pi pi-list"></i>
+            </button>
+            <button *ngIf="readingReportReq.zoneId" id="chart_view" type="submit" class="btn_1">
+                مشاهده نمودار
+                <i class="fa fa-pie-chart"></i>
+            </button>
+        </footer>
+    </form>
+</main>
+<div>
+    <router-outlet></router-outlet>
+</div>

@@ -1,13 +1,13 @@
 <p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl"
-    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
-    styleClass="p-datatable-responsive">
+    [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
 
     <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
-            selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
+        <th>
+            <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
+                selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+            </p-multiSelect>
+        </th>
         <div class="header_icons_wrap">
             <div class="left_side">
                 <i (click)="outputManagerService.exportPdf(dataSource)"
@@ -27,6 +27,9 @@
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
                 </i>
+                <i (click)="backToPrevious()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+                    <div class="tooltip_text_right">بازگشت به ایجاد پیمایش</div>
+                </i>
             </div>
         </div>
     </ng-template>
@@ -36,36 +39,20 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
                 <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-dataSource let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
-                <ng-container
-                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
-                </ng-container>
-                <ng-template #elseTemplate>
-                    {{dataSource[col.field]}}
-                </ng-template>
+                {{dataSource[col.field]}}
             </td>
-            <td>
-                <i class="tooltip p_icons pi pi-pencil">
-                    <div class="tooltip_text_right">اصلاح لیست</div>
-                </i>
-            </td>
+
         </tr>
     </ng-template>
     <!-- <ng-template pTemplate="emptymessage" let-columns>
