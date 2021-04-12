@@ -344,7 +344,7 @@ export interface ITextOutput {
     endIndex: number,
     length: number
 }
-// reading report manager
+// reading report manager(reports)
 export interface IReadingReportReq {
     zoneId: number,
     fromDate: string,
@@ -426,6 +426,32 @@ export interface IReadingReportTraverse {
     possibleEmpty: number
 }
 
+export interface IReadingReportChartTraverseDifferential {
+    inProvince: {
+        ahadCount: number,
+        karbariCount: number,
+        mobileCount: number,
+        counterSerialCount: number,
+        emptyCount: number,
+        areaTitle: string
+    }
+    inRegion: {
+        ahadCount: number,
+        karbariCount: number,
+        mobileCount: number,
+        counterSerialCount: number,
+        emptyCount: number,
+        areaTitle: string
+    }
+    inZone: {
+        ahadCount: number,
+        karbariCount: number,
+        mobileCount: number,
+        counterSerialCount: number,
+        emptyCount: number,
+        areaTitle: string
+    }
+}
 export interface IReadingReportChartKarkard {
     inProvince: {
         offloadDayalali: string,
@@ -491,14 +517,36 @@ export interface IReadingReportChartReq {
         number
     ]
 }
-export interface IReadingReportChartReq {
+export interface IReadingReportTraverseDifferentialRes {
+    billId: string,
+    radif: number,
+    eshterak: string,
+    fulName: string,
+    address: string,
+    karbariCode: number,
+    possibleKarbariCode: number,
+    ahadMaskooniOrAsli: number,
+    possibleAhadMaskooniOrAsli: number,
+    ahadTejariOrFari: number,
+    possibleAhadTejariOrFari: number,
+    ahadSaierOrAbBaha: number,
+    possibleSaierOrAbBaha: number,
+    counterReaderName: string,
+    offloadDateJalali: string,
+    counterSerial: string,
+    possibleCounterSerial: string,
+    possibleAddress: string,
+    mobile: string,
+    possibleMobile: string,
+    possibleEmpty: number
+}
+export interface IReadingReportTraverseDifferentialReq {
     zoneId: number,
     fromDate: string,
     toDate: string,
-    counterReaderId: string,
     readingPeriodId: number,
     year: number,
-    reportCode: number,
+    traverseType: number,
     zoneIds: [
         number
     ]
@@ -510,8 +558,8 @@ export interface IReadingReportChartReq {
 //         toEshterak: string,
 //         counterReaderName: string,
 //         overalCount: number,
-//         _8To10: number,
-//         _10To12: number,
+//         _8To1number: number,
+//         _1numberTo12: number,
 //         _12To14: number,
 //         _14To16: number,
 //         _16To18: number,
@@ -585,8 +633,8 @@ export interface IReadingReportDisposalHours {
     toEshterak: string,
     counterReaderName: string,
     overalCount: number,
-    _8To10: number,
-    _10To12: number,
+    _8To1number: number,
+    _1numberTo12: number,
     _12To14: number,
     _14To16: number,
     _16To18: number,

@@ -31,6 +31,8 @@ export class DictionaryWrapperService {
   private qotrDictionary: any = [];
   private roleDictionary: any = [];
 
+  private traverseDifferentialDictionary: any = [];
+
   getProvinceDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.provinceDictionary)) {
       return new Promise((resolve) => {
@@ -118,6 +120,17 @@ export class DictionaryWrapperService {
       });
     }
     return this.authLev4Dictionary;
+  }
+  getTraverseDifferentialDictionary(): Promise<any> {
+    if (this.utilsService.isNull(this.traverseDifferentialDictionary)) {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getRRTraverseDifferentialDictionary().subscribe(res => {
+          this.setTraverseDiffDictionary(res);
+          resolve(this.traverseDifferentialDictionary);
+        })
+      });
+    }
+    return this.counterReportDictionary;
   }
   getCounterReportDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.counterReportDictionary)) {
@@ -256,6 +269,9 @@ export class DictionaryWrapperService {
   }
   private setRoleDictionary(v: any) {
     this.roleDictionary = v;
+  }
+  private setTraverseDiffDictionary(v: any) {
+    this.traverseDifferentialDictionary = v;
   }
 
 

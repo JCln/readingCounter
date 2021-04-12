@@ -159,12 +159,21 @@ export class InterfaceManagerService {
   postRRTraverseManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/List/Offloaded/Traverse', body);
   }
+  postRRTraverseDifferentialManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/List/Offloaded/TraverseDifferential', body);
+  }
+  getRRTraverseDifferentialDictionary = (): Observable<any> => {
+    return this.mainService.GET('V1/List/TraverseDifferential/Dictionary');
+  }
 
   postRRKarkardManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/List/Offloaded/Karkard', body);
   }
   postRRKarkardChartManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/List/Offloaded/KarkardChart', body);
+  }
+  postRRTraverseDifferentialChartManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/List/Offloaded/TraverseDifferntialChart', body);
   }
 
   postRRKarkardDailyManager = (body: object): Observable<any> => {

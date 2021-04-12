@@ -38,17 +38,17 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForTrackLoaded = null;
+  nullSavedSource = () => this.closeTabService.saveDataForTextOutput = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTrackLoaded) {
-      this.dataSource = this.closeTabService.saveDataForTrackLoaded;
+    if (this.closeTabService.saveDataForTextOutput) {
+      this.dataSource = this.closeTabService.saveDataForTextOutput;
     }
     else {
       this.dataSource = await this.textOutputFieldManagerService.getOutputTextField();
-      this.closeTabService.saveDataForTrackLoaded = this.dataSource;
+      this.closeTabService.saveDataForTextOutput = this.dataSource;
     }
     this.zoneDictionary = await this.textOutputFieldManagerService.getZoneDictionary();
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);

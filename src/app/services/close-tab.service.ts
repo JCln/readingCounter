@@ -84,6 +84,7 @@ export class CloseTabService {
   // 
   // reading reports 
   saveDataForRRTraverse: any;
+  saveDataForRRTraverseDifferential: any;
   saveDataForRRKarkard: any;
   saveDataForRRkarkardDaily: any;
   saveDataForRRMaster: any;
@@ -208,6 +209,9 @@ export class CloseTabService {
         break;
       case '/wr/rpts/mam/trv':
         this.saveDataForRRTraverse = '';
+        break;
+      case '/wr/rpts/mam/trvch':
+        this.saveDataForRRTraverseDifferential = '';
         break;
       case '/wr/rpts/mam/dh':
         this.saveDataForRRDisposalHours = '';
