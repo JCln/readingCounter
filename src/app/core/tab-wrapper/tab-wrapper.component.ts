@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ISidebarItems, ITabs, ITabWrapperDetectDynamicRoute } from 'src/app/Interfaces/ioverall-config';
@@ -12,7 +12,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './tab-wrapper.component.html',
   styleUrls: ['./tab-wrapper.component.scss']
 })
-export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TabWrapperComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = []
   tabs: ITabs[] = [];
   currentRoute: ITabs[] = [];
@@ -174,6 +174,12 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
     };
     this.tabs.push(a);
   }
+  addProfileTab = () => {
+    const profileTab = {
+      route: '/wr/profile', title: 'تنظیمات کاربری', cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
+    }
+    this.tabs.push(profileTab);
+  }
   getTabItems = (): Promise<ISidebarItems> => {
     return new Promise((resolve) => {
       this.sideBarItemsService.getLatestItems().subscribe((sidebars: ISidebarItems) => {
@@ -193,12 +199,16 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
         })
       })
       this.testCheck();
+      if (!this.DoesTabsHaveThisRouteNow()) {
+        this.addProfileTab();
+        this.reFetchPageTitle();
+      }
     }
-
   }
   ngOnInit(): void {
     this.addDashboardTab();
     this.getTabWrapper();
+
     // this.currentRoute = this.sideBarItemsService.getTestSideTest();
     // this.currentRoute = this.currentRoute.items;
     // this.currentRoute.map((items: any) => {
@@ -206,8 +216,6 @@ export class TabWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
     //     this.currentRoute.push(subItems);
     //   })
     // })
-  }
-  ngAfterViewInit(): void {
   }
   refreshCurrentPage = (tabRoute: string) => {
     this.interactionService.setRefresh(tabRoute);
