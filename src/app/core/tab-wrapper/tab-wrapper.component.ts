@@ -116,6 +116,10 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       })
       if (currentRouteFound)
         this.tabs.push(currentRouteFound);
+      if (this.router.url === '/wr/profile') {
+        if (!this.DoesTabsHaveThisRouteNow())
+          this.addProfileTab();
+      }
       this.addDynamicRoute();
       this.reFetchPageTitle();
     }
@@ -133,6 +137,8 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
             this.reFetchPageTitle();
           }
         } else {
+          if (!this.DoesTabsHaveThisRouteNow())
+            this.addProfileTab();
           this.addDynamicRoute();
         }
       }
@@ -179,6 +185,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       route: '/wr/profile', title: 'تنظیمات کاربری', cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     }
     this.tabs.push(profileTab);
+    this.reFetchPageTitle();
   }
   getTabItems = (): Promise<ISidebarItems> => {
     return new Promise((resolve) => {
@@ -199,10 +206,6 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
         })
       })
       this.testCheck();
-      if (!this.DoesTabsHaveThisRouteNow()) {
-        this.addProfileTab();
-        this.reFetchPageTitle();
-      }
     }
   }
   ngOnInit(): void {
