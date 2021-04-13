@@ -3,6 +3,8 @@ import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
 import { InterfaceService } from 'src/app/services/interface.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { IDashboardReadDaily } from '../Interfaces/inon-manage';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -66,10 +68,30 @@ export class DashboardService {
       console.error(e => e);
     }
   }
+  getDashboardReadDaily = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceService.getDashboardReadDaily().subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
 
   /* CONFIGS */
   getObjectParameters = (sth: object): [] => {
     let a: any = Object.values(sth);
+    return a;
+  }
+  getElementOfArrOfObjects = (sth: IDashboardReadDaily[]): any[] => {
+    console.log(sth);
+    
+    let a = [];
+    sth.forEach((item: IDashboardReadDaily) => {
+      a.push(item.count);      
+    })
     return a;
   }
 }

@@ -19,7 +19,14 @@
             <div class="val">{{media[item.field]}}</div>
         </div>
     </section>
-    
+    <div class="chart_0 charts">
+        <div style="display: block;">
+            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
+                [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                [chartType]="lineChartType" [plugins]="lineChartPlugins">
+            </canvas>
+        </div>
+    </div>
     <div class="chart_1 charts">
         <div class="title"></div>
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
@@ -44,5 +51,5 @@
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
-    
+
 </main>

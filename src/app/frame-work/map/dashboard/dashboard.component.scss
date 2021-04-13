@@ -53,6 +53,11 @@
   padding: $font_xs 0;
 }
 
+.chart_0 {
+  grid-column: auto / span 3;
+  grid-row: auto/ 2;
+}
+
 .chart_1 {
   grid-column: auto / span 2;
 }

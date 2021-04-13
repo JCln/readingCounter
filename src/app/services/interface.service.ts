@@ -53,5 +53,8 @@ export class InterfaceService {
   getDashboardForbiddenTimed = (): Observable<any> => {
     return this.mainService.GET('V1/Forbidden/Dashboard/Timed');
   }
+  getDashboardReadDaily = (): Observable<any> => {
+    return this.mainService.GET('V1/List/Dashboard/Read/Daily');
+  }
 
 }

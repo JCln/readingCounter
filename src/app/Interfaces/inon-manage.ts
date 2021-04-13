@@ -131,3 +131,8 @@ export interface IDashboardForbiddenTimed {
     inMonthCount: number,
     inYearCount: number
 }
+export interface IDashboardReadDaily {
+    count: number,
+    period: string,
+    hint: string
+}
