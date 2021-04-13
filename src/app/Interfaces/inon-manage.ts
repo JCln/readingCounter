@@ -109,3 +109,25 @@ export interface IChangePassword {
     newPassword: string,
     confirmPassword: string
 }
+/* DASHBOARD */
+export interface IDashboardKarkardTimed {
+    adiCount: number,
+    faqedCount: number,
+    maneCount: number,
+    xarabCount: number,
+    tavizCount: number,
+    saierCount: number,
+    caption: string
+}
+export interface IDashboardMediaTimed {
+    inDayCount: number,
+    inWeekCont: number,
+    inMonthCount: number,
+    inYearCount: number
+}
+export interface IDashboardForbiddenTimed {
+    inDayCount: number,
+    inWeekCont: number,
+    inMonthCount: number,
+    inYearCount: number
+}

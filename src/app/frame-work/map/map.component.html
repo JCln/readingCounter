@@ -24,7 +24,7 @@
     </div>
 </section>
 
-<div class="map-frame" [hidden]="!isShowMap">
+<div class="map-frame" [hidden]="!isShowMap || route.children.length !== 0">
     <div *ngIf="isShowMapConfig" [hidden]="!canShowOptionsButton" class="polyline_config">
         <h3>زمان نمایش (ms) : {{polyline_configs}}</h3>
         <p-slider [(ngModel)]="polyline_configs" [max]=3000></p-slider>
@@ -32,3 +32,4 @@
     </div>
     <div id="map"></div>
 </div>
+<router-outlet></router-outlet>

@@ -1,0 +1,70 @@
+@import '../../../../assets/variable';
+
+.container {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
+  gap: $font_xs;
+  margin-top: $font_xs;
+  background: $gray_l;
+  padding: $font_xs 0.25rem;
+}
+
+.forbidden,
+.media {
+  background: $white;
+  text-align: center;
+  border-radius: $border_s;
+  box-shadow: 0 0 3px 2px $gray_e3;
+  padding: $font_xxs 0;
+}
+
+.forbidden {}
+
+.title {
+  font-size: $font_m;
+  color: $blue_d;
+  font-weight: 800;
+}
+
+._key_value {
+  columns: 2;
+}
+
+.key {
+  font-size: $font_s;
+  font-weight: 600;
+  color: $blue_d;
+}
+
+.val {
+  font-size: $font_l;
+  font-weight: 600;
+  color: $blue_d;
+}
+
+/* CHARTS CONFIG*/
+
+.charts {
+  box-shadow: 0px 1px 2px 2px $gray_e3;
+  border-radius: $border_s;
+  background: $white;
+  min-height: 15rem;
+  padding: $font_xs 0;
+}
+
+.chart_1 {
+  grid-column: auto / span 2;
+}
+
+.chart_2 {
+  grid-column: auto / span 2;
+}
+
+.chart_3 {
+  grid-column: auto / span 2;
+}
+
+.chart_4 {
+  grid-column: auto / span 2;
+}

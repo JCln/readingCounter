@@ -42,4 +42,16 @@ export class InterfaceService {
     return this.mainService.GET('V1/Account/MyInfo');
   }
   // 
+  /* DASHBOARD */
+
+  getDashboardKarkardTimed = (): Observable<any> => {
+    return this.mainService.GET('V1/List/Dashboard/Karkard/Timed');
+  }
+  getDashboardMediaTimed = (): Observable<any> => {
+    return this.mainService.GET('V1/List/Dashboard/Media/Timed');
+  }
+  getDashboardForbiddenTimed = (): Observable<any> => {
+    return this.mainService.GET('V1/Forbidden/Dashboard/Timed');
+  }
+
 }

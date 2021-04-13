@@ -1,1 +1,48 @@
-<p>dashboard works!!!</p>
+<main class="container">
+
+    <section class="forbidden">
+        <div class="title">غیر مجاز</div>
+        <div>تعداد غیر مجاز</div>
+
+        <div class="_key_value" *ngFor="let item of _col_forbidden">
+            <div class="key">{{item.header}}</div>
+            <div class="val">{{forbidden[item.field]}}</div>
+        </div>
+    </section>
+
+    <section class="media">
+        <div class="title">تصاویر</div>
+        <div>تصاویر ارسال شده</div>
+
+        <div class="_key_value" *ngFor="let item of _col_Media">
+            <div class="key">{{item.header}}</div>
+            <div class="val">{{media[item.field]}}</div>
+        </div>
+    </section>
+    
+    <div class="chart_1 charts">
+        <div class="title"></div>
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <div class="chart_2 charts">
+        <div class="title"></div>
+        <canvas baseChart [data]="pieChartDataOne" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <div class="chart_3 charts">
+        <div class="title"></div>
+        <canvas baseChart [data]="pieChartDataTwo" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <div class="chart_4 charts">
+        <div class="title"></div>
+        <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    
+</main>

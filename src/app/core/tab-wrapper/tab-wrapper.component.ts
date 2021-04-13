@@ -137,8 +137,10 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
             this.reFetchPageTitle();
           }
         } else {
-          if (!this.DoesTabsHaveThisRouteNow())
+          if (this.router.url === '/wr/profile') {
+            if (!this.DoesTabsHaveThisRouteNow())
             this.addProfileTab();
+          }
           this.addDynamicRoute();
         }
       }

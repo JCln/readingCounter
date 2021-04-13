@@ -57,7 +57,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     readonly mapItemsService: MapItemsService,
     private readonly interactionService: InteractionService,
     private readingReportManagerService: ReadingReportManagerService,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private router: Router,
     private utilsService: UtilsService
   ) {
@@ -218,7 +218,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate(['../wr']);
     }
     else {
-      this.router.navigate(['../wr/db']);
+      this.router.navigate(['wr/db']);
     }
   }
   private removeAllLayers = () => {
