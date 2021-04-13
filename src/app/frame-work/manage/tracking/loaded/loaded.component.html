@@ -1,8 +1,8 @@
-<p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl"
+<p-table #td [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl"
     [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
-    styleClass="p-datatable-responsive" stateStorage="session" stateKey="all-users-session">
+    styleClass="p-datatable-responsive">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="_selectedColumns" optionLabel="header"
@@ -10,7 +10,7 @@
         </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="left_side">
-                <i (click)="outputManagerService.exportPdf(dataSource)"
+                <i (click)="outputManagerService.exportPdf(dataSource, td)"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>

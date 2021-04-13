@@ -51,7 +51,6 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
-      this.allContactsService.cleanColumnFromStorage();
     }
     if (this.utilsService.isNull(this.closeTabService.saveDataForAllContacts)) {
       this.dataSource = await this.getDataSource();
@@ -82,8 +81,7 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    // this.allContactsService.cleanColumnFromStorage();
+    // we use subscription and not use take or takeUntil    
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   refreshTable = () => {

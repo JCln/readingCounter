@@ -643,13 +643,13 @@ export interface IReadingReportDisposalHours {
 //
 // fragment manager 
 export interface IFragmentMaster {
-    id: string,
+    id?: string,
     zoneId: number,
-    zoneTempId: number,
+    zoneTempId?: number,
     routeTitle: string,
     fromEshterak: string,
     toEshterak: string,
-    isValidated: boolean
+    isValidated?: boolean
 }
 export interface IFragmentDetails {
     id?: string,
@@ -657,8 +657,8 @@ export interface IFragmentDetails {
     routeTitle: string,
     fromEshterak: string,
     toEshterak: string,
-    orderDigit: number,
-    orderPersian: string
+    orderDigit?: number,
+    orderPersian?: string
 }
 
 //

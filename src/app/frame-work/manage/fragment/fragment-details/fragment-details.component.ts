@@ -6,6 +6,7 @@ import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { FragmentManagerService } from 'src/app/services/fragment-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 import { IFragmentDetails } from './../../../../Interfaces/imanage';
 
@@ -29,7 +30,8 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
-    private router: Router
+    private router: Router,
+    private utilsService: UtilsService
   ) {
     this.getRouteParams();
   }
@@ -88,13 +90,18 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this.classWrapper(true);
   }
   newRow(): IFragmentDetails {
-    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId, orderDigit: 0, orderPersian: '' };
+    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId };
   }
   onRowEditInit(dataSource: IFragmentDetails) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   onRowEditCancel(dataSource: any, index: number) {
-    console.log('edit cancel   ' + dataSource);
+    this.dataSource[index] = this.clonedProducts[dataSource.id];
+    delete this.dataSource[dataSource.id];
+    if (!this.fragmentManagerService.verificationDetails(dataSource)) {
+      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak))
+        this.dataSource.shift();
+    }
   }
   removeRow = (dataSource: IFragmentDetails, index: number) => {
     if (!this.fragmentManagerService.verificationDetails(dataSource))
@@ -107,8 +114,11 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
   onRowEditSave(dataSource: IFragmentDetails) {
-    if (!this.fragmentManagerService.verificationDetails(dataSource))
+    if (!this.fragmentManagerService.verificationDetails(dataSource)) {
+      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak))
+        this.dataSource.shift();
       return;
+    }
     if (!dataSource.id) {
       this.onRowAdd(dataSource);
     }
@@ -119,7 +129,10 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this.refreshTable();
   }
   onRowAdd(dataSource: IFragmentDetails) {
+    if (!this.fragmentManagerService.verificationDetails(dataSource)) {
+      this.dataSource.shift();
+      return;
+    }
     this.fragmentManagerService.addFragmentDetails(dataSource);
   }
-
 }

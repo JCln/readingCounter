@@ -6,6 +6,7 @@ import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { FragmentManagerService } from 'src/app/services/fragment-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
@@ -21,12 +22,14 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
+  isAddingNewRow: boolean = false;
   clonedProducts: { [s: string]: IFragmentMaster; } = {};
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public fragmentManagerService: FragmentManagerService
+    public fragmentManagerService: FragmentManagerService,
+    private utilsService: UtilsService
   ) {
   }
 
@@ -91,16 +94,24 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.table.initRowEdit(this.dataSource);
   }
-  newRow() {
-    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isValidated: false };
+  newRow(): IFragmentMaster {
+    // if (this.isAddingNewRow) {
+
+    //   return;
+    // }
+    // this.isAddingNewRow = true;
+    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isValidated: false, };
   }
   onRowEditInit(dataSource: any) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   onRowEditSave(dataSource: IFragmentMaster) {
-    dataSource.zoneId = dataSource.zoneId['id'];
-    if (!this.fragmentManagerService.verificationMaster(dataSource))
+    if (!this.fragmentManagerService.verificationMaster(dataSource)) {
+      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak) || this.utilsService.isNull(dataSource.routeTitle))
+        this.dataSource.shift();
       return;
+    }
+    dataSource.zoneId = dataSource.zoneId['id'];
     if (!dataSource.id) {
       this.onRowAdd(dataSource);
     }
@@ -115,10 +126,10 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     this.fragmentManagerService.addFragmentMaster(dataSource);
   }
   onRowEditCancel(dataSource: any, index: number) {
-    console.log('edit cancel' + dataSource);
-
     this.dataSource[index] = this.clonedProducts[dataSource.id];
     delete this.dataSource[dataSource.id];
+    if (!this.fragmentManagerService.verificationMaster(dataSource))
+      this.dataSource.shift();
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster) => {
     // this.fragmentManagerService.setZoneDictionary(this.zoneDictionary);
@@ -145,8 +156,6 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     // tempDataSource.zoneId = validZoneIdNumber;
     const obj2 = { ...dataSource };
     obj2.zoneId = 1;
-    console.log(obj2);
-
     if (!this.fragmentManagerService.verificationMaster(obj2))
       return;
     this.fragmentManagerService.isValidateMaster(obj2);

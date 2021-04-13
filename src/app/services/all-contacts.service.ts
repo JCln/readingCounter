@@ -5,7 +5,6 @@ import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
-import { ENStorageColumnKey } from './../Interfaces/ioverall-config';
 import { InterfaceManagerService } from './interface-manager.service';
 
 @Injectable({
@@ -46,8 +45,5 @@ export class AllContactsService {
     return this.interfaceManagerService.postUserManagerResetPassword(UUID).subscribe(res => {
       this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
     });
-  }
-  cleanColumnFromStorage = () => {
-    this.utilsService.cleanColumnStorage(ENStorageColumnKey.all_users_session);
   }
 }
