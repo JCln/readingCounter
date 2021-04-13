@@ -88,9 +88,9 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this.classWrapper(true);
   }
   newRow(): IFragmentDetails {
-    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: '', orderDigit: null, orderPersian: '' };
+    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId, orderDigit: 0, orderPersian: '' };
   }
-  onRowEditInit(dataSource: any) {
+  onRowEditInit(dataSource: IFragmentDetails) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   onRowEditCancel(dataSource: any, index: number) {

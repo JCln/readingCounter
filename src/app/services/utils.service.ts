@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-config';
+import { BrowserStorageService } from './browser-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class UtilsService {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private browserStorageService: BrowserStorageService
   ) { }
 
   isNaN = (value: any): boolean => {
@@ -137,4 +139,10 @@ export class UtilsService {
     return this.router.url.split(spliter).pop();
   }
   //   
+  /* STORAGE CONFIGS*/
+  cleanColumnStorage = (key: string) => {
+    this.browserStorageService.removeSession(key);
+  }
+  /**/
+
 }

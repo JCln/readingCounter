@@ -30,9 +30,17 @@ export class BrowserStorageService {
     }
     return false;
   }
-  remove(key: string) {
+  removeLocal(key: string) {
     if (this.isLocalStorageSupported) {
       this.localStorage.removeItem(key);
+      return true;
+    }
+    return false;
+  }
+  removeSession = (key: string) => {
+    if (this.isSessionStorageSupported) {
+      sessionStorage.removeItem(key);
+      sessionStorage.clear();
       return true;
     }
     return false;
@@ -40,11 +48,14 @@ export class BrowserStorageService {
   removeAll = () => {
     for (const key in this.localStorage) {
       if (this.localStorage.hasOwnProperty(key))
-        this.remove(key);
+        this.removeLocal(key);
     }
   }
   // is local storage supported by the browser
   get isLocalStorageSupported(): boolean {
+    return !!this.localStorage;
+  }
+  get isSessionStorageSupported(): boolean {
     return !!this.localStorage;
   }
 }

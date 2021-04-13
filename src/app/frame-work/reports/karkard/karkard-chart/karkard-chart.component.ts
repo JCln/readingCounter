@@ -28,6 +28,27 @@ export class KarkardChartComponent implements OnInit {
       position: 'right',
       labels: this.defaultOptions
     },
+    plugins: {
+      labels: {
+        render: 'percentage',
+        fontColor: ['green', 'white', 'red'],
+        precision: 2
+      },
+      datalabels: {
+        formatter: (value, ctx) => {
+          let sum = 0;
+          let dataArr = ctx.chart.data.datasets[0].data;
+          dataArr.map(data => {
+            sum += data;
+          });
+          console.log(sum);
+
+          let percentage = (value * 100 / sum).toFixed(2) + "%";
+          return percentage;
+        },
+        color: '#fff',
+      }
+    },
     tooltips: {
       footerFontFamily: 'Blotus',
       bodyFontFamily: 'Blotus',
@@ -39,11 +60,16 @@ export class KarkardChartComponent implements OnInit {
       enabled: true,
       callbacks: {
         label: function (tooltipItem, data) {
-          let label = '%' + data.labels[tooltipItem.index];
-          let count = data
-            .datasets[tooltipItem.datasetIndex]
-            .data[tooltipItem.index];
-          return label + " : " + count;
+          let allData: any = data.datasets[tooltipItem.datasetIndex].data;
+          let tooltipLabel = data.labels[tooltipItem.index];
+          let tooltipData = allData[tooltipItem.index];
+          let total = 0;
+          for (let i in allData) {
+            total += parseFloat(allData[i]);
+          }
+          let tooltipPercentage = Math.round((tooltipData / total) * 100);
+          // return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+          return ' (  %' + tooltipPercentage + '  ) ' + tooltipData + ' :  ' + tooltipLabel;
         }
       }
     }
@@ -106,19 +132,14 @@ export class KarkardChartComponent implements OnInit {
       this.backToPrevious();
       return;
     }
+    console.log(1);
     this.dataSource = await this.readingReportManagerService.postRRKarkardChartManager();
+    console.log(2);
 
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();
-
-    // this.addPieChartOptions();
   }
-  // addPieChartOptions = () => {
-  //   this.pieChartOptions.plugins.datalabels.formatter = function (value, context) {
-  //     return context.dataset.labels[context.dataIndex];
-  //   }
-  // }  
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }

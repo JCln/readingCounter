@@ -51,6 +51,9 @@ export enum ENSnackBarTimes {
     sevenMili = 7000,
     tenMili = 10000
 }
+export enum ENStorageColumnKey {
+    all_users_session = 'all_users_session'
+}
 export interface IResponses {
     isValid: boolean
     message: string;

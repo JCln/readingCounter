@@ -182,6 +182,10 @@ export class FragmentManagerService {
     return true;
   }
   private detailsValidation = (): boolean => {
+    if (this.utilsService.isNull(this.fragmentDetails.fragmentMasterId)) {
+      this.utilsService.snackBarMessageWarn('خطا در ارسال مقادیر');
+      return false;
+    }
     if (this.utilsService.isNull(this.fragmentDetails.fromEshterak)) {
       this.utilsService.snackBarMessageWarn('از اشتراک را وارد نمایید');
       return false;
@@ -213,7 +217,7 @@ export class FragmentManagerService {
       this.utilsService.snackBarMessageWarn('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد');
       return false;
     }
-    
+
     if (!this.utilsService.lengthControl(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak, 5, 10)) {
       this.utilsService.snackBarMessageWarn('فرمت اشتراک ناصحیح است');
       return false;

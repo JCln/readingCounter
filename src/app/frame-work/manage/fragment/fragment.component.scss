@@ -25,6 +25,17 @@
   }
 }
 
+input {
+  font-size: $font_xs;
+  font-weight: 600;
+  width: 100%;
+  border: 1px solid $orange;
+  box-shadow: 0 0 3px 0 $orange;
+  border-radius: 10px;
+  padding: .3rem;
+  color: $blue_d;
+}
+
 ._edit,
 ._save,
 ._cancel {

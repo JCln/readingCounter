@@ -35,9 +35,22 @@ export class DisperseChartComponent implements OnInit, OnDestroy {
       titleFontSize: 18,
       footerFontSize: 18,
       bodyFontStyle: 'bold',
-
+      enabled: true,
+      callbacks: {
+        label: function (tooltipItem, data) {
+          let allData: any = data.datasets[tooltipItem.datasetIndex].data;
+          let tooltipLabel = data.labels[tooltipItem.index];
+          let tooltipData = allData[tooltipItem.index];
+          let total = 0;
+          for (let i in allData) {
+            total += parseFloat(allData[i]);
+          }
+          let tooltipPercentage = Math.round((tooltipData / total) * 100);
+          return ' (  %' + tooltipPercentage + '  ) ' + tooltipData + ' :  ' + tooltipLabel;
+        }
+      }
     }
-  };
+  }
   public pieChartLabels: Label[] = [['8 - 10'], ['10 - 12'], ['12 - 14'], ['14 - 16'], ['16 - 18']];
   public pieChartDataProvince: SingleDataSet = [];
   public pieChartDataRegion: SingleDataSet = [];

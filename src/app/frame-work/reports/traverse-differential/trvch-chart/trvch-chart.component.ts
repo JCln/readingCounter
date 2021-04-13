@@ -38,11 +38,15 @@ export class TrvchChartComponent implements OnInit {
       enabled: true,
       callbacks: {
         label: function (tooltipItem, data) {
-          let label = '%' + data.labels[tooltipItem.index];
-          let count = data
-            .datasets[tooltipItem.datasetIndex]
-            .data[tooltipItem.index];
-          return label + " : " + count;
+          let allData: any = data.datasets[tooltipItem.datasetIndex].data;
+          let tooltipLabel = data.labels[tooltipItem.index];
+          let tooltipData = allData[tooltipItem.index];
+          let total = 0;
+          for (let i in allData) {
+            total += parseFloat(allData[i]);
+          }
+          let tooltipPercentage = Math.round((tooltipData / total) * 100);
+          return ' (  %' + tooltipPercentage + '  ) ' + tooltipData + ' :  ' + tooltipLabel;
         }
       }
     }

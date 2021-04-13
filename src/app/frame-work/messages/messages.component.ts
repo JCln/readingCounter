@@ -61,7 +61,7 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   removeItem = (localStorageItem: IMessage) => {
     console.log(localStorageItem);
-    this.browserStorageService.remove(localStorageItem.title);
+    this.browserStorageService.removeLocal(localStorageItem.title);
   }
   clearAllStorage = () => {
     this.browserStorageService.removeAll();
