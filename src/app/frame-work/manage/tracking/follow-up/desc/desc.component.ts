@@ -31,7 +31,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     public trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private interactionService: InteractionService
   ) { }
 

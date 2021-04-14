@@ -1,0 +1,55 @@
+@import '../../../../../../../assets/variable';
+
+.container {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
+  gap: $font_xs;
+  margin-top: $font_xs;
+  background: $gray_l;
+  padding: $font_xs 0.25rem;
+}
+
+.card {
+  background: $white;
+  text-align: center;
+  border-radius: $border_s;
+  box-shadow: 0 0 3px 2px $gray_e3;
+  padding: $font_l;
+  position: relative;
+}
+
+._number {
+  position: absolute;
+  right: $font_xs;
+  top: -$font_xs;
+  background: $blue_l;
+  color: $white;
+  padding: $font_xxs;
+  border-radius: 5px;
+  font-size: $font_m;
+  font-weight: 600;
+}
+
+.title {
+  font-size: $font_m;
+  color: $blue_d;
+  font-weight: 800;
+}
+
+._key_value {
+  columns: 2;
+  margin-bottom: $font_05;
+}
+
+.key {
+  font-size: $font_s;
+  font-weight: 600;
+  color: $blue_d;
+}
+
+.val {
+  font-size: $font_m;
+  font-weight: 600;
+  color: $blue_dr;
+}

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -74,6 +74,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.closeTabService.saveDataForTrackLoaded = this.dataSource;
     }
+    this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -87,7 +88,6 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit(): void {
     this.classWrapper();
-    this.insertSelectedColumns();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -150,5 +150,11 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
 }

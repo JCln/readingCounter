@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
+import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 
-import { DescComponent } from './desc/desc.component';
 import { FollowUpRoutingModule } from './follow-up-routing.module';
 import { FollowUpComponent } from './follow-up.component';
 
 
 @NgModule({
-  declarations: [FollowUpComponent, DescComponent],
+  declarations: [FollowUpComponent],
   imports: [
-    SharedPrimeNgModule,
-    ReactiveFormsModule,
+    SharedTwoModule,
     FollowUpRoutingModule
   ]
 })

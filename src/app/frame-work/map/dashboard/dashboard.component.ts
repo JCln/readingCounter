@@ -118,10 +118,10 @@ export class DashboardComponent implements OnInit {
           id: 'y-axis-1',
           position: 'right',
           gridLines: {
-            color: 'rgba(255,0,0,0.3)',
+            color: 'rgb(14, 76, 146)',
           },
           ticks: {
-            fontColor: 'red',
+            fontColor: 'rgb(14, 76, 146)',
           }
         }
       ]
@@ -133,11 +133,11 @@ export class DashboardComponent implements OnInit {
           mode: 'vertical',
           scaleID: 'x-axis-0',
           value: 'March',
-          borderColor: 'orange',
+          // borderColor: 'orange',
           borderWidth: 2,
           label: {
             enabled: true,
-            fontColor: 'orange',
+            // fontColor: 'orange',
             content: 'LineAnno'
           }
         },
@@ -145,14 +145,14 @@ export class DashboardComponent implements OnInit {
     },
   };
   public lineChartColors: Color[] = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
+    // { // grey
+    //   backgroundColor: 'rgba(148,159,177,0.2)',
+    //   borderColor: 'rgba(148,159,177,1)',
+    //   pointBackgroundColor: 'rgba(148,159,177,1)',
+    //   pointBorderColor: '#fff',
+    //   pointHoverBackgroundColor: '#fff',
+    //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    // },
     { // dark grey
       backgroundColor: 'rgba(77,83,96,0.2)',
       borderColor: 'rgba(77,83,96,1)',
@@ -160,14 +160,6 @@ export class DashboardComponent implements OnInit {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // red
-      backgroundColor: 'rgba(255,0,0,0.3)',
-      borderColor: 'red',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
   public lineChartLegend = true;
@@ -202,6 +194,61 @@ export class DashboardComponent implements OnInit {
   addToLineChart = () => {
     const temp = this.dashboardService.getElementOfArrOfObjects(this.readDaily);
     this.lineChartData = [{ data: temp }];
+    this.progressiveLineChart();
+  }
+  progressiveLineChart = () => {
+    const totalDuration = 10000;
+    const delayBetweenPoints = totalDuration / this.lineChartData.length;
+    const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
+    const animation = {
+      x: {
+        type: 'number',
+        easing: 'linear',
+        duration: delayBetweenPoints,
+        from: NaN, // the point is initially skipped
+        delay(ctx) {
+          if (ctx.type !== 'data' || ctx.xStarted) {
+            return 0;
+          }
+          ctx.xStarted = true;
+          return ctx.index * delayBetweenPoints;
+        }
+      },
+      y: {
+        type: 'number',
+        easing: 'linear',
+        duration: delayBetweenPoints,
+        from: previousY,
+        delay(ctx) {
+          if (ctx.type !== 'data' || ctx.yStarted) {
+            return 0;
+          }
+          ctx.yStarted = true;
+          return ctx.index * delayBetweenPoints;
+        }
+      }
+    };
+    const config = {
+      type: 'line',
+      options: {
+        animation,
+        interaction: {
+          intersect: false
+        },
+        plugins: {
+          legend: false
+        },
+        scales: {
+          x: {
+            type: 'linear'
+          }
+        }
+      }
+    }
+
+    // module.exports = {
+    //   config
+    // };
   }
 
   ngOnInit(): void {

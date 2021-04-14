@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
@@ -68,6 +68,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.getDataSource();
       this.closeTabService.saveDataForTrackReading = this.dataSource;
     }
+    this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -81,7 +82,6 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit(): void {
     this.classWrapper();
-    this.insertSelectedColumns();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -115,4 +115,12 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+
 }

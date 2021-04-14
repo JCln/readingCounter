@@ -1,5 +1,5 @@
-<form #form="ngForm">
-    <section *ngIf="route.children.length === 0" class="d_grid_center">
+<form #form="ngForm" *ngIf="route.children.length === 0">
+    <section class="d_grid_center">
         <input class="input_1" placeholder="شماره پیگیری" type="text" name="trackNumber" [(ngModel)]="trackNumber">
         <button type="submit" class="btn_1" (click)="routeToChild()">مشاهده </button>
     </section>

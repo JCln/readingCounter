@@ -154,4 +154,7 @@ export class TrackingManagerService {
   backToPreviousPage = () => {
     this._location.back();
   }
+  backToParent = () => {
+    this.utilsService.routeTo('/wr/m/track/fwu');
+  }
 }

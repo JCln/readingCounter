@@ -58,9 +58,10 @@ export class OutputManagerService {
     // doc.addFileToVFS('assets/fonts/BLotus.woff', 'BLotus');
     // doc.addFont('assets/fonts/BLotus.woff', 'BLotus', 'normal');
 
-    doc.setFont('BLotus');
-    doc.setLanguage('fa-IR');
-    autoTable(doc, { startY: finalY, head: column, body: data });
+    // doc.setFont('BLotus');
+    // doc.setLanguage('fa-IR');
+    // autoTable(column._value, {})
+    autoTable(doc, { startY: finalY, head: column, body: column._value });
     doc.save('product.pdf');
 
   }
@@ -72,9 +73,10 @@ export class OutputManagerService {
     console.log(1);
 
     this.downloadFile(blob, contentType);
-    console.log(2);
+    console.log(blob.text());
+    console.log(blob.arrayBuffer);
     console.log(blob);
-
+    doc.save('product.pdf');
   }
 
   exportExcel(dataSource: any) {

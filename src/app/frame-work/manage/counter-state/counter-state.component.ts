@@ -41,12 +41,6 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectCols = this.counterStateService.columnSelectedMenuDefault();
     this._selectedColumns = this.customizeSelectedColumns();
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    this._selectedColumns = this.dataSource.filter(col => val.includes(col));
-  }
   sendGridFriendlyDataSource = (event: LazyLoadEvent): any => {
     this.counterStateService.getGridFriendlyDataSource(event);
   }
@@ -64,11 +58,11 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForCounterState) {
-      this.dataSourceRES = this.closeTabService.saveDataForCounterState;      
+      this.dataSourceRES = this.closeTabService.saveDataForCounterState;
     }
     else {
       this.dataSourceRES = await this.counterStateService.getGridFriendlyDataSourceDefault();
-      this.closeTabService.saveDataForCounterState = this.dataSourceRES;      
+      this.closeTabService.saveDataForCounterState = this.dataSourceRES;
     }
     this.zoneDictionary = await this.counterStateService.getZoneDictionary();
     this.dataSource = this.dataSourceRES.data;
@@ -93,5 +87,11 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.forEach(subscription => subscription.unsubscribe())
   }
-
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
 }

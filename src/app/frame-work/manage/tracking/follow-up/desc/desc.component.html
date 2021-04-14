@@ -1,4 +1,4 @@
-<section *ngIf="dataSource">
+<section *ngIf="dataSource && route.children.length === 0">
     <form #form="ngForm">
         <section class="contain">
 
@@ -62,9 +62,9 @@
     </form>
 </section>
 
-<p-table [columns]="defColumns" [value]="changeHsty" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
+<p-table *ngIf="route.children.length === 0" [columns]="defColumns" [value]="changeHsty" [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
 
     <ng-template pTemplate="caption">
         <th>
@@ -76,11 +76,11 @@
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
                 </i>
-                <i (click)="trackingManagerService.backToPreviousPage()"
+                <i (click)="trackingManagerService.backToParent()"
                     class="tooltip _circle_border p_icons pi pi-arrow-left">
                     <div class="tooltip_text">بازگشت به پیگیری</div>
                 </i>
-                <i class="tooltip _circle_border p_icons pi pi-chart-bar">
+                <i [routerLink]="['tele']" class="tooltip _circle_border p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">مشاهده گراف</div>
                 </i>
             </div>
@@ -123,3 +123,4 @@
         </tr>
     </ng-template>
 </p-table>
+<app-time-line *ngIf="route.children.length !== 0" [dataSource]="dataSource"></app-time-line>

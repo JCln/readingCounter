@@ -65,4 +65,11 @@ export class DetailsResComponent implements OnInit {
   //   const exportColumns = this._selectCols.map(col => ({ title: col.header, dataKey: col.field }));
   //   this.outputManagerService.exportPdf(this.dataSource, exportColumns);
   // } 
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
 }

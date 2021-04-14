@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -18,7 +18,7 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dataSource: IUserLoggins[];
   _selectedColumns: any[];
-  _selectMainDatas: any[];
+  _selectCols: any[];
 
   constructor(
     private interactionService: InteractionService,
@@ -35,7 +35,7 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.insertSelectedColumns();
   }
   private insertSelectedColumns = () => {
-    this._selectMainDatas = this.userLogginsService.columnSelectedUserLogs();
+    this._selectCols = this.userLogginsService.columnSelectedUserLogs();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   nullSavedSource = () => this.closeTabService.saveDataForUserLoggins = null;
@@ -46,7 +46,7 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getDataSource();
   }
   customizeSelectedColumns = () => {
-    return this._selectMainDatas.filter(items => {
+    return this._selectCols.filter(items => {
       if (items.isSelected)
         return items
     })
@@ -84,5 +84,12 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refreshTable = () => {
     this.classWrapper(true);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 }
