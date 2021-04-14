@@ -50,7 +50,14 @@ export class OutputManagerService {
     link.click();
   }
   exportPdf(data: any, column?: any) {
-    console.log(column);
+    let someTest;
+    column = column._columns;
+    column.forEach(element => {
+      someTest += element.header
+    });
+    console.log(data.value);
+    console.log(someTest);
+
 
     const doc = new jsPDF('landscape', 'em', 'a4');
     const finalY = 10;
@@ -58,9 +65,14 @@ export class OutputManagerService {
     // doc.addFileToVFS('assets/fonts/BLotus.woff', 'BLotus');
     // doc.addFont('assets/fonts/BLotus.woff', 'BLotus', 'normal');
 
-    doc.setFont('BLotus');
-    doc.setLanguage('fa-IR');
-    autoTable(doc, { startY: finalY, head: column, body: data });
+    // doc.setFont('BLotus');
+    // doc.setLanguage('fa-IR');
+    // autoTable(doc, { startY: finalY, head: column, body: data });
+    // doc.save('product.pdf');
+
+    doc.setFont('tahoma');
+    doc.setLanguage('ar-AE');
+    autoTable(data.value, someTest);
     doc.save('product.pdf');
 
   }
