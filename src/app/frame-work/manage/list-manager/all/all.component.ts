@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerAll } from 'src/app/Interfaces/imanage';
@@ -157,5 +157,12 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   downloadOutputDBF = (object: IListManagerAll) => {
     this.router.navigate(['wr/m/track/woui', object.id, false]);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 }

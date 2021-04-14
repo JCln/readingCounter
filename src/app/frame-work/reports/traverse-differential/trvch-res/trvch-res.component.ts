@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -45,7 +45,7 @@ export class TrvchResComponent implements OnInit, OnDestroy {
       })
     });
   }
- 
+
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnSelectedRRTraverseDifferential();
     this._selectedColumns = this.customizeSelectedColumns();
@@ -56,7 +56,7 @@ export class TrvchResComponent implements OnInit, OnDestroy {
       this.readingReportManagerService.emptyMessage();
       return;
     }
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();      
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.insertSelectedColumns();
   }
   ngOnInit(): void {
@@ -72,6 +72,13 @@ export class TrvchResComponent implements OnInit, OnDestroy {
   }
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

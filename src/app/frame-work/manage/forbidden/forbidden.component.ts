@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IForbiddenManager, IForbiddenManagerGridFriendlyRes } from 'src/app/Interfaces/imanage';
@@ -87,5 +87,12 @@ export class ForbiddenComponent implements OnInit {
   }
   showPictures = (forbiddenId: string) => {
     this.forbiddenService.routeToWOUI(forbiddenId, true);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 }

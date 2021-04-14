@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -137,5 +137,12 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
       return;
     }
     this.fragmentManagerService.addFragmentDetails(dataSource);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IFragmentMaster } from 'src/app/Interfaces/imanage';
@@ -160,5 +160,12 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.fragmentManagerService.verificationMaster(obj2))
       return;
     this.fragmentManagerService.isValidateMaster(obj2);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 }

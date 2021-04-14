@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
@@ -64,12 +64,8 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.getDataSource();
       this.closeTabService.saveDataForTrackFinished = this.dataSource;
     }
+    this.insertSelectedColumns();
   }
-  next = () => this._firstPage = this._firstPage + this._rowsNumberPage;
-  prev = () => this._firstPage = this._firstPage - this._rowsNumberPage;
-  reset = () => this._firstPage = 0;
-  isLastPage = (): boolean => { return this.dataSource ? this._firstPage === (this.dataSource.length - this._rowsNumberPage) : true; }
-  isFirstPage = (): boolean => { return this.dataSource ? this._firstPage === 0 : true; }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
       if (items.isSelected)
@@ -85,7 +81,6 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit(): void {
     this.classWrapper();
-    this.insertSelectedColumns();
   }
   downloadDbfOutput = (row: ITracking) => {
     this.trackingManagerService.downloadOutputDBF(row).subscribe(res => {
@@ -124,4 +119,12 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+
 }

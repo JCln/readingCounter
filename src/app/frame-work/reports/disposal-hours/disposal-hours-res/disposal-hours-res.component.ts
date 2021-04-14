@@ -49,5 +49,11 @@ export class DisposalHoursResComponent implements OnInit {
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();
   }
-
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
 }

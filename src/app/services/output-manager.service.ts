@@ -73,6 +73,8 @@ export class OutputManagerService {
     doc.setFont('tahoma');
     doc.setLanguage('ar-AE');
     autoTable(data.value, someTest);
+    // autoTable(column._value, {})
+    autoTable(doc, { startY: finalY, head: column, body: column._value });
     doc.save('product.pdf');
 
   }
@@ -84,9 +86,10 @@ export class OutputManagerService {
     console.log(1);
 
     this.downloadFile(blob, contentType);
-    console.log(2);
+    console.log(blob.text());
+    console.log(blob.arrayBuffer);
     console.log(blob);
-
+    doc.save('product.pdf');
   }
 
   exportExcel(dataSource: any) {

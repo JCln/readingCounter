@@ -197,22 +197,8 @@ export class DashboardComponent implements OnInit {
     this.progressiveLineChart();
   }
   progressiveLineChart = () => {
-    // <block:data:2>
-    const data = [];
-    const data2 = [];
-    let prev = 100;
-    let prev2 = 80;
-    for (let i = 0; i < 1000; i++) {
-      prev += 5 - Math.random() * 10;
-      data.push({ x: i, y: prev });
-      prev2 += 5 - Math.random() * 10;
-      data2.push({ x: i, y: prev2 });
-    }
-    // </block:data>
-
-    // <block:animation:1>
     const totalDuration = 10000;
-    const delayBetweenPoints = totalDuration / data.length;
+    const delayBetweenPoints = totalDuration / this.lineChartData.length;
     const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
     const animation = {
       x: {
@@ -242,23 +228,8 @@ export class DashboardComponent implements OnInit {
         }
       }
     };
-    // </block:animation>
-
-    // <block:config:0>
     const config = {
       type: 'line',
-      data: {
-        datasets: [{
-          borderWidth: 1,
-          radius: 0,
-          data: data,
-        },
-        {
-          borderWidth: 1,
-          radius: 0,
-          data: data2,
-        }]
-      },
       options: {
         animation,
         interaction: {
@@ -273,9 +244,11 @@ export class DashboardComponent implements OnInit {
           }
         }
       }
-    };
-    // </block:config>
+    }
 
+    // module.exports = {
+    //   config
+    // };
   }
 
   ngOnInit(): void {

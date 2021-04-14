@@ -1,11 +1,11 @@
-<p-table [columns]="_selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
     [filterDelay]="0" dir="rtl"
     [globalFilterFields]="['loginDateTime','loginIp','wasSuccessful','browserVersion','browserTitle','browserShortTitle','browserEngine','browserType','osVersion','osTitle','osPlatform','wrongPassword','userAgent']"
     styleClass="p-datatable-responsive">
 
     <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectMainDatas" [(ngModel)]="_selectedColumns" optionLabel="header"
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
             selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">

@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -81,10 +81,10 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else {
       this.dataSource = await this.getDataSource();
-      // this.filterZoneDictionary = this.trackingManagerService.getAllZoneTitles(this.dataSource);
       this.filterZoneDictionary = await this.getZoneDictionary();
       this.closeTabService.saveDataForTrackImported = this.dataSource;
     }
+    this.insertSelectedColumns();
   }
   onRowEditInit(product: any) {
     console.log(product);
@@ -105,7 +105,6 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit(): void {
     this.classWrapper();
-    this.insertSelectedColumns();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -162,4 +161,12 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+
 }
