@@ -1,5 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
@@ -16,10 +17,12 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
   constructor(
     private spinnerWrapperService: SpinnerWrapperService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private router: Router
   ) { }
+
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    this.spinnerWrapperService.startLoading();
+    this.showSpinnerConsiderExceptions();
     return next.handle(req)
       .pipe(
         catchError((error) => {
@@ -80,5 +83,11 @@ export class SpinnerInterceptorService implements HttpInterceptor {
           return evt;
         })
       )
+  }
+  showSpinnerConsiderExceptions = () => {
+    const url = this.router.url;
+    if (url === '/wr/db')
+      return;
+    this.spinnerWrapperService.startLoading();
   }
 }

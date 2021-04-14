@@ -19,10 +19,7 @@ app-tab-wrapper {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  top: 3rem;
-  margin-bottom: 0.5rem;
   width: 67%;
-  min-height: 4rem;
   border-radius: 0 0 15px 15px;
 
   @media (min-width: 700px) {

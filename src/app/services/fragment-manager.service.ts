@@ -137,33 +137,41 @@ export class FragmentManagerService {
     });
   }
 
-  /* VERIFICATION */
-  private masterValidation = (): boolean => {
-    if (this.utilsService.isNull(this.fragmentMaster.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+  /* VALIDATION */
+  private nullValidation = (sth: string | number, message?: string): boolean => {
+    if (this.utilsService.isNull(sth)) {
+      if (message)
+        this.utilsService.snackBarMessageWarn(message);
       return false;
     }
-    if (this.utilsService.isNull(this.fragmentMaster.fromEshterak)) {
-      this.utilsService.snackBarMessageWarn('از اشتراک را وارد نمایید');
+    return true;
+  }
+  private NANValidation = (sth: string, message?: string): boolean => {
+    if (this.utilsService.isNaN(sth)) {
+      if (message)
+        this.utilsService.snackBarMessageWarn(message);
       return false;
     }
-    if (this.utilsService.isNull(this.fragmentMaster.toEshterak)) {
-      this.utilsService.snackBarMessageWarn('تا اشتراک را وارد نمایید');
-      return false;
-    }
-    if (this.utilsService.isNull(this.fragmentMaster.routeTitle)) {
-      this.utilsService.snackBarMessageWarn('عنوان مسیر را وارد نمایید');
-      return false;
-    }
+    return true;
+  }
 
-    if (this.utilsService.isNaN(this.fragmentMaster.fromEshterak)) {
-      this.utilsService.snackBarMessageWarn('فرمت از اشتراک ناصحیح است');
+  /* VERIFICATION */
+
+
+  private masterValidation = (): boolean => {
+    if (!this.nullValidation(this.fragmentMaster.zoneId, 'ناحیه ای وارد نمایید'))
       return false;
-    }
-    if (this.utilsService.isNaN(this.fragmentMaster.fromEshterak)) {
-      this.utilsService.snackBarMessageWarn('فرمت  تا اشتراک ناصحیح است');
+    if (!this.nullValidation(this.fragmentMaster.fromEshterak, 'از اشتراک را وارد نمایید'))
       return false;
-    }
+    if (!this.nullValidation(this.fragmentMaster.toEshterak, 'تا اشتراک را وارد نمایید'))
+      return false;
+    if (!this.nullValidation(this.fragmentMaster.routeTitle, 'عنوان مسیر را وارد نمایید'))
+      return false;
+
+    if (!this.NANValidation(this.fragmentMaster.fromEshterak, 'فرمت از اشتراک ناصحیح است'))
+      return false;
+    if (!this.NANValidation(this.fragmentMaster.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
+      return false;
 
     if (!this.utilsService.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
       this.utilsService.snackBarMessageWarn('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد');
@@ -181,33 +189,48 @@ export class FragmentManagerService {
     }
     return true;
   }
+  ValidationMasterNoMessage = (fragmentMaster: IFragmentMaster): boolean => {
+    if (!this.nullValidation(fragmentMaster.zoneId))
+      return false;
+    if (!this.nullValidation(fragmentMaster.fromEshterak))
+      return false;
+    if (!this.nullValidation(fragmentMaster.toEshterak))
+      return false;
+    if (!this.nullValidation(fragmentMaster.routeTitle))
+      return false;
+
+    if (!this.NANValidation(fragmentMaster.fromEshterak))
+      return false;
+    if (!this.NANValidation(fragmentMaster.fromEshterak))
+      return false;
+
+    if (!this.utilsService.isSameLength(fragmentMaster.fromEshterak, fragmentMaster.toEshterak)) {
+      return false;
+    }
+
+    if (!this.utilsService.isFromLowerThanToByString(fragmentMaster.fromEshterak, fragmentMaster.toEshterak)) {
+      return false;
+    }
+
+    if (!this.utilsService.lengthControl(fragmentMaster.fromEshterak, fragmentMaster.toEshterak, 5, 10)) {
+      return false;
+    }
+  }
   private detailsValidation = (): boolean => {
-    if (this.utilsService.isNull(this.fragmentDetails.fragmentMasterId)) {
-      this.utilsService.snackBarMessageWarn('خطا در ارسال مقادیر');
+    if (!this.nullValidation(this.fragmentDetails.fragmentMasterId, ('خطا در ارسال مقادیر')))
       return false;
-    }
-    if (this.utilsService.isNull(this.fragmentDetails.fromEshterak)) {
-      this.utilsService.snackBarMessageWarn('از اشتراک را وارد نمایید');
+    if (!this.nullValidation(this.fragmentDetails.fromEshterak, 'از اشتراک را وارد نمایید'))
       return false;
-    }
-    if (this.utilsService.isNull(this.fragmentDetails.toEshterak)) {
-      this.utilsService.snackBarMessageWarn('تا اشتراک را وارد نمایید');
+    if (!this.nullValidation(this.fragmentDetails.toEshterak, 'تا اشتراک را وارد نمایید'))
       return false;
-    }
-    if (this.utilsService.isNull(this.fragmentDetails.routeTitle)) {
-      this.utilsService.snackBarMessageWarn('عنوان مسیر را وارد نمایید');
+    if (!this.nullValidation(this.fragmentDetails.routeTitle, 'عنوان مسیر را وارد نمایید'))
       return false;
-    }
 
-    if (this.utilsService.isNaN(this.fragmentDetails.fromEshterak)) {
-      this.utilsService.snackBarMessageWarn('فرمت از اشتراک ناصحیح است');
+    if (!this.NANValidation(this.fragmentDetails.fromEshterak, 'فرمت از اشتراک ناصحیح است'))
       return false;
-    }
 
-    if (this.utilsService.isNaN(this.fragmentDetails.fromEshterak)) {
-      this.utilsService.snackBarMessageWarn('فرمت  تا اشتراک ناصحیح است');
+    if (!this.NANValidation(this.fragmentDetails.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
       return false;
-    }
     if (!this.utilsService.isFromLowerThanToByString(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
       this.utilsService.snackBarMessageWarn('از اشتراک کمتر از تا اشتراک است!');
       return false;
@@ -223,6 +246,28 @@ export class FragmentManagerService {
       return false;
     }
     return true;
+  }
+  ValidationDetailsNoMessage = (fragmentDetails: IFragmentDetails): boolean => {
+    if (!this.nullValidation(fragmentDetails.fragmentMasterId))
+      return false;
+    if (!this.nullValidation(fragmentDetails.fromEshterak))
+      return false;
+    if (!this.nullValidation(fragmentDetails.toEshterak))
+      return false;
+    if (!this.nullValidation(fragmentDetails.routeTitle))
+      return false;
+
+    if (!this.NANValidation(fragmentDetails.fromEshterak))
+      return false;
+    if (!this.NANValidation(fragmentDetails.fromEshterak))
+      return false;
+
+    if (!this.utilsService.isFromLowerThanToByString(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
+      return false;
+    if (!this.utilsService.isSameLength(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
+      return false;
+    if (!this.utilsService.lengthControl(fragmentDetails.fromEshterak, fragmentDetails.toEshterak, 5, 10))
+      return true;
   }
 
   verificationMaster = (fragmentMaster: IFragmentMaster): boolean => {

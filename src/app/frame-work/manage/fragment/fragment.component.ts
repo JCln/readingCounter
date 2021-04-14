@@ -128,8 +128,9 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   onRowEditCancel(dataSource: any, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];
     delete this.dataSource[dataSource.id];
-    if (!this.fragmentManagerService.verificationMaster(dataSource))
-      this.dataSource.shift();
+    if (!this.fragmentManagerService.ValidationMasterNoMessage(dataSource))
+      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak) || this.utilsService.isNull(dataSource.routeTitle))
+        this.dataSource.shift();
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster) => {
     // this.fragmentManagerService.setZoneDictionary(this.zoneDictionary);

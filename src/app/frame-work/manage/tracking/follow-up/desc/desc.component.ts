@@ -29,7 +29,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   changeHsty: IFollowUpHistory[] = [];
 
   constructor(
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService,
     private route: ActivatedRoute,
     private interactionService: InteractionService
@@ -80,5 +80,8 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
+  }
+  refreshTable = () => {
+    this.classWrapper(true);
   }
 }

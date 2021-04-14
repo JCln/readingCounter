@@ -7,14 +7,15 @@
 .contain {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 14rem));
+  align-items: center;
+  justify-content: center;
   direction: rtl;
+  text-align: center;
   gap: .5rem;
   margin: $font_xs 0;
   background: $gray_l;
   box-shadow: 1px 1px 8px 4px $gray_d;
-  text-align: center;
-  padding: $font_2 $font_05;
-  justify-content: center;
+  padding: $font_xxs $font_05;
   border-radius: $border_s;
   min-height: 15rem;
 }
@@ -34,10 +35,13 @@ input {
   border: 0;
 }
 
-.mat-checkbox-layout .mat-checkbox-label {
-  margin: 0 $font_05;
-  font-family: $font_family;
-  font-size: $font_s;
-  font-weight: 600;
-  color: $gray_dr;
+
+::ng-deep {
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 $font_05;
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: $gray_dr;
+  }
 }

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -59,7 +60,8 @@ export class TrackingManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    private _location: Location
   ) { }
 
   getImportedDataSource = (): Observable<any> => {
@@ -149,5 +151,7 @@ export class TrackingManagerService {
     return a;
   }
   //
-
+  backToPreviousPage = () => {
+    this._location.back();
+  }
 }

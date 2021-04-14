@@ -95,10 +95,13 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
   onRowEditInit(dataSource: IFragmentDetails) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
-  onRowEditCancel(dataSource: any, index: number) {
+  onRowEditCancel(dataSource: IFragmentDetails, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];
     delete this.dataSource[dataSource.id];
-    if (!this.fragmentManagerService.verificationDetails(dataSource)) {
+    // execption when exiting row edited false
+    if (!this.fragmentManagerService.ValidationDetailsNoMessage(dataSource)) {
+      if (dataSource.id)
+        return;
       if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak))
         this.dataSource.shift();
     }
