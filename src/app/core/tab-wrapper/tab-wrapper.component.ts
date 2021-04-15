@@ -89,7 +89,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     if (this.utilsService.isNull(dRoute))
       return;
     // route query params maps
-    if (dRoute._dynamicRoute.includes('/wr/m/track/woui')) {
+    if (dRoute._dynamicRoute.includes('/wr/m/track/woui') || dRoute._dynamicRoute.includes('/wr/m/fwu/')) {
       lastUrlPart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop().substring(0, 5);
       completeRoutePart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop();
     }

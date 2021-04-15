@@ -14,6 +14,9 @@ export class TimeLineComponent implements OnInit, AfterViewInit {
   _colsTimeLine: any[] = [];
   _selectCols: any[] = [];
 
+  
+  constructor() { }
+
   columnTimeLine = (): IObjectIteratation[] => {
     return [
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
@@ -46,8 +49,6 @@ export class TimeLineComponent implements OnInit, AfterViewInit {
     this._colsTimeLine = this.columnTimeLine();
     this._selectCols = this.customizeSelectedColumns();
   }
-
-  constructor() { }
 
   ngOnInit(): void {
   }
