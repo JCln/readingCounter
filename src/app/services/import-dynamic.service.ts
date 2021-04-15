@@ -38,12 +38,27 @@ export class ImportDynamicService {
       return false;
     return true;
   }
+  private NANValidation = (sth: string, message?: string): boolean => {
+    if (this.utilsService.isNaN(sth)) {
+      if (message)
+        this.utilsService.snackBarMessageWarn(message);
+      return false;
+    }
+    return true;
+  }
+
   checkVertification = (val: IImportDynamicDefault, _isOrderByDate: boolean): boolean => {
     this.importDynamicValue = val;
     if (!this.utilsService.isSameLength(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
       this.snackWrapperService.openSnackBar('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
+
+    if (!this.NANValidation(this.importDynamicValue.fromEshterak, 'فرمت از اشتراک ناصحیح است'))
+      return false;
+    if (!this.NANValidation(this.importDynamicValue.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
+      return false;
+
     if (!this.utilsService.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 10)) {
       this.snackWrapperService.openSnackBar('فرمت اشتراک ناصحیح است', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
