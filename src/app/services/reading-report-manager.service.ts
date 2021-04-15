@@ -611,14 +611,7 @@ export class ReadingReportManagerService {
     this.utilsService.snackBarMessageFailed('موردی یافت نشد');
   }
   getYears = (): ITitleValue[] => {
-    return [
-      { title: '1400', value: 1400 },
-      { title: '1399', value: 1399 },
-      { title: '1398', value: 1398 },
-      { title: '1397', value: 1397 },
-      { title: '1396', value: 1396 },
-      { title: '1395', value: 1395 }
-    ];
+    return this.utilsService.getYears();
   }
   routeTo = (route: string) => {
     this.utilsService.routeTo(route);

@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { LazyLoadEvent } from 'primeng/api';
+import { ITitleValue } from 'src/app/Interfaces/ioverall-config';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
-import { ICounterStateGridFriendlyReq, IForbiddenManagerGridFriendlyRes } from '../Interfaces/imanage';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
+import { IForbiddenReq } from './../Interfaces/imanage';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForbiddenService {
+  forbiddenReq: IForbiddenReq;
 
+  /* COLUMNS */
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
       { field: 'zoneId', header: 'ناحیه', isSelected: true },
@@ -28,54 +31,31 @@ export class ForbiddenService {
       { field: 'gisAccuracy', header: 'دقت مکان یابی', isSelected: false }
     ];
   }
-  customizeSelectedColumns = () => {
-    return this.columnSelectedMenuDefault().filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
-  gridFriendlyDefaultReq = {
-    take: 20,
-    skip: 0,
-    sort: [],
-    filter: {},
-    group: [],
-    aggregate: []
-  }
+  // later  usage
+  // customizeSelectedColumns = () => {
+  //   return this.columnSelectedMenuDefault().filter(items => {
+  //     if (items.isSelected)
+  //       return items
+  //   })
+  // }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private router: Router
+    private router: Router,
+    private utilsService: UtilsService
   ) { }
 
-  getZoneDictionary = (): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
-  }
-  setGridFriendlyDataSource = (event: LazyLoadEvent): ICounterStateGridFriendlyReq => {
-    console.log(event);
-    const counterStateReq: ICounterStateGridFriendlyReq = {
-      take: event.rows,
-      skip: event.first,
-      sort: [
-        {
-          field: event.sortField,
-          dir: event.sortOrder === 1 ? 'asc' : 'desc'
-        }
-      ],
-      filter: null,
-      group: null,
-      aggregate: null
+  /* API CALL */
+  getDataSource = (): Promise<any> => {
+    if (!this.forbiddenReq) {
+      this.emptyMessage();
+      this.backToParent();
+      return;
     }
-    console.log(counterStateReq);
-    return counterStateReq;
-  }
-  getDataSource = (gridData: ICounterStateGridFriendlyReq): Promise<IForbiddenManagerGridFriendlyRes[]> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postForbiddenGridFriendlyManager(gridData).subscribe(res => {
+        this.interfaceManagerService.postForbiddenByParamManager(this.forbiddenReq).subscribe(res => {
           resolve(res);
         })
       })
@@ -83,15 +63,97 @@ export class ForbiddenService {
       console.error(e => e);
     }
   }
-  getGridFriendlyDataSourceDefault = (): Promise<IForbiddenManagerGridFriendlyRes> => {
-    return new Promise(resolve => {
-      this.interfaceManagerService.postForbiddenGridFriendlyManager(this.gridFriendlyDefaultReq).subscribe(res => {
-        resolve(res);
-      })
+  getZoneDictionary = (): Promise<any> => {
+    return new Promise((resolve) => {
+      resolve(this.dictionaryWrapperService.getZoneDictionary());
     });
+  }
+  getYears = (): ITitleValue[] => {
+    return this.utilsService.getYears();
   }
   routeToWOUI = (UUID: string, isForbidden: boolean) => {
     this.router.navigate(['wr/m/track/woui', UUID, isForbidden]);
   }
+  routeToChild = () => {
+    this.utilsService.routeTo('wr/m/fbn/res');
+  }
+  backToParent = () => {
+    this.utilsService.routeTo('wr/m/fbn');
+  }
+  emptyMessage = () => {
+    this.utilsService.snackBarMessageWarn('یکبار دیگر مقادیر را وارد نمایید');
+  }
+  /* VALIDATION */
+  private datesValidationForbidden = (): boolean => {
+    if (this.utilsService.isNull(this.forbiddenReq.zoneId)) {
+      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.forbiddenReq.fromDate)) {
+      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      return false;
+    }
+    if (this.utilsService.isNull(this.forbiddenReq.toDate)) {
+      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      return false;
+    }
+    return true;
+  }
+
+  /* VERIFICATION */
+  verificationForbidden = (forbidden: IForbiddenReq) => {
+    this.forbiddenReq = forbidden;
+    return this.datesValidationForbidden();
+  }
 
 }
+
+
+
+
+// unUsed for now
+  // gridFriendlyDefaultReq = {
+  //   take: 20,
+  //   skip: 0,
+  //   sort: [],
+  //   filter: {},
+  //   group: [],
+  //   aggregate: []
+  // }
+
+ // setGridFriendlyDataSource = (event: LazyLoadEvent): ICounterStateGridFriendlyReq => {
+  //   console.log(event);
+  //   const counterStateReq: ICounterStateGridFriendlyReq = {
+  //     take: event.rows,
+  //     skip: event.first,
+  //     sort: [
+  //       {
+  //         field: event.sortField,
+  //         dir: event.sortOrder === 1 ? 'asc' : 'desc'
+  //       }
+  //     ],
+  //     filter: null,
+  //     group: null,
+  //     aggregate: null
+  //   }
+  //   console.log(counterStateReq);
+  //   return counterStateReq;
+  // }
+  // getDataSource = (gridData: ICounterStateGridFriendlyReq): Promise<IForbiddenManagerGridFriendlyRes[]> => {
+  //   try {
+  //     return new Promise((resolve) => {
+  //       this.interfaceManagerService.postForbiddenGridFriendlyManager(gridData).subscribe(res => {
+  //         resolve(res);
+  //       })
+  //     })
+  //   } catch (error) {
+  //     console.error(e => e);
+  //   }
+  // }
+  // getGridFriendlyDataSourceDefault = (): Promise<IForbiddenManagerGridFriendlyRes> => {
+  //   return new Promise(resolve => {
+  //     this.interfaceManagerService.postForbiddenGridFriendlyManager(this.gridFriendlyDefaultReq).subscribe(res => {
+  //       resolve(res);
+  //     })
+  //   });
+  // }

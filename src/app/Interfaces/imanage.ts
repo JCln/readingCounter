@@ -245,13 +245,25 @@ export interface IForbiddenManager {
     y: string
     zoneId: string
 }
-export interface IForbiddenManagerGridFriendlyRes {
-    aggregates: null,
-    data: IForbiddenManager[],
-    errors: null,
-    groups: null,
-    total: number
+export interface IForbiddenReq {
+    zoneId: number,
+    fromDate: string,
+    toDate: string,
+    counterReaderId: string,
+    readingPeriodId: number,
+    year: number,
+    reportCode: number,
+    zoneIds: [
+        number
+    ]
 }
+// export interface IForbiddenManagerGridFriendlyRes {
+//     aggregates: null,
+//     data: IForbiddenManager[],
+//     errors: null,
+//     groups: null,
+//     total: number
+// }
 export interface IFollowUp {
     trackNumber: number,
     listNumber: string,

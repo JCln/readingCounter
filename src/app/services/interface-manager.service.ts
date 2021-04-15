@@ -105,7 +105,7 @@ export class InterfaceManagerService {
   // 
 
   // forbidden manager DBF 
-  postForbiddenGridFriendlyManager = (body: object): Observable<any> => {
+  postForbiddenByParamManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Forbidden/ByParam', body);
   }
   // 
