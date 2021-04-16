@@ -26,7 +26,7 @@ li {
   align-items: center;
   margin: 0 .5rem;
   border-radius: 15px;
-  color: $gray_dr2;
+  color: $gray_700;
   text-align: center;
   list-style-type: none;
   cursor: pointer;
@@ -36,11 +36,11 @@ li {
 }
 
 ._name {
-  color: $blue_d;
+  color: $blue_700;
 }
 
 ._date {
-  border: 1px solid $blue_d;
+  border: 1px solid $blue_700;
 }
 
 .menu_toggle {
@@ -50,12 +50,12 @@ li {
   padding: $font_05;
   cursor: pointer;
   border-radius: $border_50;
-  background-color: $gray_l;
+  background-color: $gray_100;
 
   &:hover,
   &:focus,
   &:active {
-    box-shadow: 0px 0px 1px 1px $dark_ddd;
+    box-shadow: 0px 0px 1px 1px $blue_gray_300;
   }
 
   @media (min-width: 700px) {

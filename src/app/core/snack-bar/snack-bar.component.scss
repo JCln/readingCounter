@@ -5,18 +5,18 @@
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $gray_l;
+    color: $gray_100;
   }
 
   .snack_danger {
-    background-color: $red_d;
+    background-color: $red_600;
   }
 
   .snack_warn {
-    background-color: $orange_d;
+    background-color: $orange_500;
   }
 
   .snack_success {
-    background-color: $green;
+    background-color: $green_600;
   }
 }

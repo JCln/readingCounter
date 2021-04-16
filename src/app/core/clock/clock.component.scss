@@ -35,7 +35,7 @@
   --font_xs: 1rem;
   width: .35rem;
   height: $font_xs;
-  background: $blue_d;
+  background: $blue_700;
 
   @media (min-width: 500px) {
     height: calc(var(--font_xs) + .5rem);
@@ -45,7 +45,7 @@
 .minute {
   width: .3rem;
   height: 1.5rem;
-  background: $blue_d;
+  background: $blue_700;
 
   @media (min-width: 500px) {
     height: $font_2;
@@ -64,7 +64,7 @@
   transform: translate(50%, -50%);
   width: $font_xxs;
   height: $font_xxs;
-  background-color: $blue_d;
+  background-color: $blue_700;
   border-radius: 50%;
   vertical-align: middle;
 }

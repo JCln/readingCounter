@@ -6,10 +6,10 @@ main {
 }
 
 ._content {
-  background: $half_gray;
+  background: $blue_gray_400;
   padding: .2rem;
   margin: .2rem;
-  border-radius: $border_s;
+  border-radius: $border_15;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 17rem));
   grid-auto-flow: dense;
@@ -18,7 +18,7 @@ main {
 .l_1_c,
 .l_2,
 .l_3 {
-  border-radius: $border_s;
+  border-radius: $border_15;
   padding: 0.3rem .2rem;
 }
 
@@ -28,8 +28,8 @@ main {
   grid-template-columns: repeat(6, 1fr);
 
   .l_1_c {
-    background: $blue_ll;
-    color: $gray_dr;
+    background: $blue_200;
+    color: $gray_600;
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: .1rem;
@@ -43,14 +43,14 @@ main {
       margin-left: -5px;
       border-width: .5rem;
       border-style: solid;
-      border-color: $blue_l transparent transparent transparent;
+      border-color: $blue_400 transparent transparent transparent;
     }
   }
 }
 
 .l_2 {
   .l_2_c {
-    background: $gray_l;
+    background: $gray_100;
     margin-bottom: .2rem;
     font-size: 1.5rem;
     font-weight: 600;
@@ -106,7 +106,7 @@ main {
 
 // switch buttons
 .fa_icons {
-  color: $pink;
+  color: $pink_500;
   display: grid;
   place-content: center;
   padding: .87rem;

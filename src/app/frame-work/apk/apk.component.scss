@@ -11,12 +11,12 @@
 }
 
 .content {
-  background: $gray_l;
-  box-shadow: 1px 1px 8px 4px $gray_d;
+  background: $gray_100;
+  box-shadow: 1px 1px 8px 4px $gray_400;
   text-align: center;
   padding: $font_2 0;
   justify-content: space-around;
-  border-radius: $border_s;
+  border-radius: $border_15;
   min-height: 25rem;
 }
 
@@ -25,11 +25,11 @@
   margin: auto;
   padding: $font_xs 0;
   width: 90%;
-  border-radius: $border_s;
+  border-radius: $border_15;
 }
 
 .title {
-  color: $blue_l;
+  color: $blue_400;
   text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
@@ -38,7 +38,7 @@
 .change_pass {
 
   button {
-    background: $blue_l;
+    background: $blue_400;
     margin: $font_2;
     color: $white;
     width: 100%;
@@ -46,15 +46,15 @@
 }
 
 input {
-  color: $gray_96;
+  color: $gray_500;
   margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px $gray_d;
+  box-shadow: 1px 1px 8px 1px $gray_400;
 }
 
 ._choose_file {
   width: 100%;
-  border: 2px solid $blue_l;
-  color: $blue_l;
+  border: 2px solid $blue_400;
+  color: $blue_400;
   text-align: center;
   border-radius: 100vmax;
   margin-bottom: 1rem;
@@ -69,7 +69,7 @@ th.mat-header-cell {
 td.mat-cell {
   font-size: $font_s;
   font-weight: 600;
-  color: $gray_96;
+  color: $gray_500;
 }
 
 .mat-table {
@@ -78,9 +78,9 @@ td.mat-cell {
 
 .__custom {
   height: 2.5rem;
-  border: 1px solid $blue_l;
+  border: 1px solid $blue_400;
   width: auto;
-  color: $blue_l;
+  color: $blue_400;
   min-width: 4rem;
 }
 
@@ -97,17 +97,17 @@ tr.mat-row {
   width: 100%;
   padding: .5rem;
   background-color: $white;
-  color: $gray_dr;
+  color: $gray_600;
   font-size: 1.3rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 1px 1px 2px 0px $gray_d;
-  border: 1px solid $gray_96;
+  box-shadow: 1px 1px 2px 0px $gray_400;
+  border: 1px solid $gray_500;
 }
 
 span,
 small {
-  color: $green_android;
+  color: $green_500;
   margin: 0 .4rem;
 }
 
@@ -126,13 +126,13 @@ span {
   width: 100%;
   max-width: 19rem;
   background-color: $white;
-  color: $gray_dr;
+  color: $gray_600;
   text-align: center;
-  border-radius: $border_s;
+  border-radius: $border_15;
   font-size: 1.3rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 1px 1px 2px 0px $gray_d;
+  box-shadow: 1px 1px 2px 0px $gray_400;
   border: 1px solid;
 }
 

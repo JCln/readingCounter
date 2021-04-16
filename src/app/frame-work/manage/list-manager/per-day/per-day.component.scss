@@ -5,11 +5,11 @@
 
 
 .content {
-  background: $gray_d;
-  box-shadow: 1px 1px 8px 4px $blue_d;
+  background: $gray_400;
+  box-shadow: 1px 1px 8px 4px $blue_700;
   text-align: center;
   justify-content: space-around;
-  border-radius: $border_s;
+  border-radius: $border_15;
 }
 
 ._desc {
@@ -18,7 +18,7 @@
   direction: rtl;
   gap: $font_05;
   padding: $font_xs $font_05;
-  border-radius: $border_s;
+  border-radius: $border_15;
 }
 
 ._value {
@@ -27,16 +27,16 @@
 }
 
 .title {
-  color: $blue_l;
+  color: $blue_400;
   text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
 }
 
 input {
-  color: $gray_96;
+  color: $gray_500;
   margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px $gray_d;
+  box-shadow: 1px 1px 8px 1px $gray_400;
 }
 
 /* card content */
@@ -52,12 +52,12 @@ input {
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(46%, 47%));
   gap: $font_05;
-  background: $gray_d;
+  background: $gray_400;
   place-content: center;
   padding: $font_xs 0;
-  border-radius: $border_s;
+  border-radius: $border_15;
 
-  box-shadow: 1px 2px 3px 1px $blue_d;
+  box-shadow: 1px 2px 3px 1px $blue_700;
 }
 
 .card__content {
@@ -78,7 +78,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background: $orange;
+    background: $orange_500;
     color: $white;
     width: 100%;
     max-width: 100%;

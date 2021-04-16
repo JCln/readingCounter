@@ -7,12 +7,12 @@
   width: 2.3rem;
   height: 2.3rem;
   border-radius: 50%;
-  background: $gray_l;
+  background: $gray_100;
   font-size: $font_m;
 
   &:hover,
   &:focus {
-    box-shadow: 0px 0px 1px 1px $dark_ddd;
+    box-shadow: 0px 0px 1px 1px $blue_gray_300;
   }
 }
 
@@ -22,7 +22,7 @@
   background: none;
   border: none;
   font-size: $font_l;
-  color: $blue_d;
+  color: $blue_700;
   cursor: pointer;
 
   &:hover::after {
@@ -47,7 +47,7 @@
 }
 
 .dropdown-content a {
-  color: $blue_d2;
+  color: $blue_600;
   padding: .3rem 1rem;
   text-decoration: none;
   display: block;
@@ -58,7 +58,7 @@
   flex-direction: row-reverse;
 
   &:hover {
-    background: $gray_d5;
+    background: $gray_300;
 
   }
 }

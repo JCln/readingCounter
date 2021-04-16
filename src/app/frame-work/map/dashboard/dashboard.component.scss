@@ -6,7 +6,7 @@
   grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
   gap: $font_xs;
   margin-top: $font_xs;
-  background: $gray_l;
+  background: $gray_100;
   padding: $font_xs 0.25rem;
 }
 
@@ -14,8 +14,8 @@
 .media {
   background: $white;
   text-align: center;
-  border-radius: $border_s;
-  box-shadow: 0 0 3px 2px $gray_e3;
+  border-radius: $border_15;
+  box-shadow: 0 0 3px 2px $gray_200;
   padding: $font_xxs 0;
 }
 
@@ -23,7 +23,7 @@
 
 .title {
   font-size: $font_m;
-  color: $blue_d;
+  color: $blue_700;
   font-weight: 800;
 }
 
@@ -34,20 +34,20 @@
 .key {
   font-size: $font_s;
   font-weight: 600;
-  color: $blue_d;
+  color: $blue_700;
 }
 
 .val {
   font-size: $font_l;
   font-weight: 600;
-  color: $blue_d;
+  color: $blue_700;
 }
 
 /* CHARTS CONFIG*/
 
 .charts {
-  box-shadow: 0px 1px 2px 2px $gray_e3;
-  border-radius: $border_s;
+  box-shadow: 0px 1px 2px 2px $gray_200;
+  border-radius: $border_15;
   background: $white;
   min-height: 15rem;
   padding: $font_xs 0;

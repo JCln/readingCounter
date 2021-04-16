@@ -13,9 +13,9 @@
   justify-content: center;
   padding: $font_05 $font_xs;
   background: $white;
-  border: 2px solid $blue_d2;
-  color: $blue_d;
-  border-radius: 5px;
+  border: 2px solid $blue_600;
+  color: $blue_700;
+  border-radius: $border_5;
   font-size: $font_s;
   font-weight: 600;
 }
@@ -29,10 +29,10 @@
   display: grid;
   padding: $font_05;
   margin: .3rem;
-  border: 1px solid $gray_d5;
+  border: 1px solid $gray_300;
   background: $white;
-  color: $gray_96;
-  border-radius: 5px;
+  color: $gray_500;
+  border-radius: $border_5;
   font-size: $font_s;
   cursor: pointer;
 }

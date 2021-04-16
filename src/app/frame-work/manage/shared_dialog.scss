@@ -6,7 +6,7 @@
   font-family: $font_family;
   font-size: $font_s;
   font-weight: 600;
-  color: $gray_dr;
+  color: $gray_600;
 }
 
 .mat-dialog-content {
@@ -40,8 +40,8 @@
 }
 
 ._custom {
-  background: $blue_l;
-  color: $gray_l;
+  background: $blue_400;
+  color: $gray_100;
 }
 
 h2 {
@@ -49,24 +49,24 @@ h2 {
   font-family: $font_family;
   font-size: 1.5rem;
   font-weight: 600;
-  color: $blue_l;
-  border: 2px solid $blue_l;
+  color: $blue_400;
+  border: 2px solid $blue_400;
   border-radius: 15px;
   padding: 1rem;
 }
 
 .mat-dialog-container {
-  border: 1px solid $blue_l;
+  border: 1px solid $blue_400;
 }
 
 ._blue_dark {
-  color: $blue_d;
-  border: 2px solid $blue_d;
+  color: $blue_700;
+  border: 2px solid $blue_700;
 }
 
 button._blue_dark {
-  background-color: $blue_d;
-  color: $gray_l;
+  background-color: $blue_700;
+  color: $gray_100;
 }
 
 ::ng-deep {
@@ -76,7 +76,7 @@ button._blue_dark {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $gray_dr;
+    color: $gray_600;
   }
 
   .mat-select {
@@ -86,7 +86,7 @@ button._blue_dark {
   }
 
   .mat-select-value-text {
-    color: $gray_dr;
+    color: $gray_600;
   }
 
 }

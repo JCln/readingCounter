@@ -18,7 +18,7 @@ main {
 
   .fa-user {
     font-size: 4rem;
-    color: $gray_d;
+    color: $gray_400;
     background: $white;
     border-radius: $border_50;
     height: 7rem;
@@ -41,12 +41,12 @@ main {
 }
 
 .content {
-  background: $gray_l;
-  box-shadow: 1px 1px 8px 4px $gray_d;
+  background: $gray_100;
+  box-shadow: 1px 1px 8px 4px $gray_400;
   text-align: center;
   padding: $font_2 0;
   justify-content: space-around;
-  border-radius: $border_s;
+  border-radius: $border_15;
   min-height: 25rem;
 }
 
@@ -56,11 +56,11 @@ main {
   padding: $font_xs 0;
   width: 90%;
   justify-content: space-around;
-  border-radius: $border_s;
+  border-radius: $border_15;
 }
 
 .title {
-  color: $blue_l;
+  color: $blue_400;
   text-align: right;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
@@ -70,7 +70,7 @@ main {
   text-align: right;
 
   button {
-    background: $blue_l;
+    background: $blue_400;
     margin: $font_2;
     color: $white;
   }
@@ -78,7 +78,7 @@ main {
 
 .input_2 {
   min-width: 23rem;
-  color: $gray_96;
+  color: $gray_500;
   margin-bottom: $font_05;
-  box-shadow: 1px 1px 8px 1px $gray_d;
+  box-shadow: 1px 1px 8px 1px $gray_400;
 }

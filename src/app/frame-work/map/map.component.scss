@@ -8,7 +8,7 @@
   margin: 1rem .2rem;
   height: 100%;
   min-height: 31rem;
-  box-shadow: -1px 2px 5px 5px $gray_d;
+  box-shadow: -1px 2px 5px 5px $gray_400;
   position: relative;
 }
 
@@ -32,7 +32,7 @@
 
   .unit_toggle {
     cursor: pointer;
-    border: 2px solid $orange;
+    border: 2px solid $orange_500;
     border-radius: 100vmax;
     width: 5rem;
     transition: all ease-in-out 250ms;
@@ -44,7 +44,7 @@
       height: $font_s;
       width: $font_s;
       border-radius: $border_50;
-      background: $orange;
+      background: $orange_500;
       transition: all ease-in-out 250ms;
 
     }
@@ -69,8 +69,8 @@
     position: relative;
     font-size: $font_m;
     margin: 0 $font_05;
-    color: $blue_d;
-    background: $gray_d5;
+    color: $blue_700;
+    background: $gray_300;
     border-radius: $border_50;
     padding: $font_05;
     cursor: pointer;
@@ -112,8 +112,8 @@
   height: 2.5rem;
   padding: 0rem;
   border: 0;
-  background-color: $gray_d5;
-  color: $dark_ddd;
+  background-color: $gray_300;
+  color: $blue_gray_300;
 
   i {
     font-size: $font_m;
@@ -132,24 +132,24 @@
   padding: $font_xs;
   text-align: right;
   direction: rtl;
-  border-radius: $border_s;
-  box-shadow: 0px 2px 3px 1px $blue_c;
+  border-radius: $border_15;
+  box-shadow: 0px 2px 3px 1px $blue_gray_700;
 }
 
 h3 {
-  color: $gray_dr;
+  color: $gray_600;
   margin-bottom: $font_05;
 }
 
 .btn_2 {
   height: 2.5rem;
-  color: $gray_dr;
+  color: $gray_600;
   margin-top: $font_xs;
 }
 
 ._flex_dr_ric p {
   font-size: $font_s;
-  color: $blue_d;
+  color: $blue_700;
   margin: 0 $font_xs;
 }
 

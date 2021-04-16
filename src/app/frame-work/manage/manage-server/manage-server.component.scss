@@ -9,7 +9,7 @@ section {
 }
 
 .items {
-  border-radius: $border_s;
+  border-radius: $border_15;
   padding: $font_s;
   cursor: pointer;
 }
@@ -17,13 +17,13 @@ section {
 .icons {
   font-size: 3rem;
   white-space: nowrap;
-  color: $gray_l;
+  color: $gray_100;
 }
 
 h2 {
   margin-top: $font_s;
   font-weight: 600;
-  color: $gray_l;
+  color: $gray_100;
 }
 
 img {

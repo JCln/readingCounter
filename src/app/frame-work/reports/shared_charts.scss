@@ -9,9 +9,9 @@
 
 .charts {
   position: relative;
-  box-shadow: 0px 1px 2px 2px $gray_d;
-  border-radius: $border_s;
-  background: $gray_l;
+  box-shadow: 0px 1px 2px 2px $gray_400;
+  border-radius: $border_15;
+  background: $gray_100;
   min-height: 15rem;
   padding: $font_xs;
 }
@@ -22,7 +22,7 @@ canvas {
 }
 
 .p_icons {
-  color: $dark_ddd;
+  color: $blue_gray_300;
   font-size: $font_m;
   cursor: pointer;
 }
@@ -45,9 +45,9 @@ canvas {
 
 //  header options 
 .header_options {
-  background-color: $gray_l;
+  background-color: $gray_100;
   padding: $font_05 $font_s;
-  border-radius: $border_s;
+  border-radius: $border_15;
   margin-bottom: $font_05;
 }
 
@@ -55,7 +55,7 @@ canvas {
   position: absolute;
   right: $font_xs;
   font-family: inherit;
-  color: $gray_dr;
+  color: $gray_600;
   font-size: $font_s;
   font-weight: 600;
 

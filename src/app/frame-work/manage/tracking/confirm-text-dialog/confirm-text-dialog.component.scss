@@ -3,7 +3,7 @@
 @import '../../../../../assets/input.scss';
 
 .mat-dialog-content {
-  color: $gray_dr2;
+  color: $gray_700;
   font-size: $font_s;
   text-align: right;
   word-spacing: .3rem;
@@ -14,8 +14,8 @@
 }
 
 ._custom {
-  background: $blue_l;
-  color: $gray_l;
+  background: $blue_400;
+  color: $gray_100;
 }
 
 h2 {

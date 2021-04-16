@@ -15,20 +15,20 @@
     place-content: center;
     padding: $font_05;
     margin: $font_s 0;
-    border-radius: 5px;
+    border-radius: $border_5;
     font-size: $font_l;
     font-weight: 600;
-    background: $half_gray;
-    color: $blue_d;
-    box-shadow: 1px 1px 3px 0px $half_gray;
+    background: $blue_gray_400;
+    color: $blue_700;
+    box-shadow: 1px 1px 3px 0px $blue_gray_400;
     cursor: pointer;
   }
 }
 
 // active auth1 tab
 .active_tab {
-  background-color: $blue_d2 !important;
-  color: $gray_l !important;
+  background-color: $blue_600 !important;
+  color: $gray_100 !important;
 }
 
 // 
@@ -36,24 +36,24 @@
 .auth_2 {
   padding: $font_xs;
   margin-bottom: $font_s;
-  border-radius: $border_s;
+  border-radius: $border_15;
   min-height: 18rem;
 
   &:nth-child(odd) {
-    background-color: $gray_l;
+    background-color: $gray_100;
 
     .auth_3 {
-      box-shadow: 0px 2px 3px 1.5px $gray_d;
+      box-shadow: 0px 2px 3px 1.5px $gray_400;
     }
   }
 
   &:nth-child(even) {
-    background-color: $half_gray;
-    box-shadow: 0 0 2px 2px rgba($half_gray, .5);
+    background-color: $blue_gray_400;
+    box-shadow: 0 0 2px 2px rgba($blue_gray_400, .5);
 
     .auth_3 {
-      background-color: $gray_l;
-      box-shadow: 0px 2px 3px 1.5px rgba($blue_d2, .4);
+      background-color: $gray_100;
+      box-shadow: 0px 2px 3px 1.5px rgba($blue_600, .4);
     }
   }
 
@@ -62,7 +62,7 @@
 .auth_3 {
   margin: $font_xxs;
   padding: $font_05;
-  border-radius: $border_s;
+  border-radius: $border_15;
   min-height: 10rem;
 }
 
@@ -81,7 +81,7 @@
 
 .text {
   padding: 0 $font_05;
-  color: $blue_d2;
+  color: $blue_600;
   font-size: $font_l;
   font-weight: 600;
 }
@@ -89,13 +89,13 @@
 .text_btn {
   text-align: center;
   max-width: 11rem;
-  border-radius: $border_s;
+  border-radius: $border_15;
   width: auto;
   margin-bottom: $font_05;
   font-size: $font_m;
   font-weight: 600;
-  color: $blue_d2;
-  background: $half_gray;
+  color: $blue_600;
+  background: $blue_gray_400;
 }
 
 .accept {

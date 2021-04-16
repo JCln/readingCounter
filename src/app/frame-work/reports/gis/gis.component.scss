@@ -2,7 +2,7 @@
 
 
 .btn_1 {
-  color: $gray_l;
+  color: $gray_100;
 }
 
 // materials 
@@ -12,16 +12,16 @@
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: $blue_d;
+      color: $blue_700;
       line-height: 2;
-      border-radius: $border_s;
+      border-radius: $border_15;
       font-family: $font_family;
     }
   }
 
   .mat-horizontal-stepper-header-container {
     direction: rtl;
-    border: 2px solid $blue_d;
+    border: 2px solid $blue_700;
     border-radius: 6rem;
     padding: $font_05;
     margin-bottom: 1rem;
@@ -49,8 +49,8 @@
 
 // 
 ._special {
-  background-color: $blue_l;
-  color: $gray_l;
+  background-color: $blue_400;
+  color: $gray_100;
 }
 
 .accept {

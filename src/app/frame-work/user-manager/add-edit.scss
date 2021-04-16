@@ -2,7 +2,7 @@
 @import '../../../assets/button.scss';
 
 .btn_1 {
-  color: $gray_l;
+  color: $gray_100;
 }
 
 // materials 
@@ -12,10 +12,10 @@
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: $blue_lovely;
-      // color: $blue_d2;
+      color: $blue_500;
+      // color: $blue_600;
       line-height: 2;
-      border-radius: $border_s;
+      border-radius: $border_15;
       font-family: $font_family;
     }
   }
@@ -24,7 +24,7 @@
   .mat-horizontal-stepper-header-container {
     height: 4rem;
     direction: rtl;
-    border: 2px solid $blue_d;
+    border: 2px solid $blue_700;
     border-radius: 6rem;
     padding: $font_05;
     margin-bottom: 1rem;
@@ -62,11 +62,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $half_gray;
-  color: $blue_d;
+  background-color: $blue_gray_400;
+  color: $blue_700;
 }
 
 ._special {
-  background-color: $blue_l;
-  color: $gray_l;
+  background-color: $blue_400;
+  color: $gray_100;
 }

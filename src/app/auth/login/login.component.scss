@@ -14,13 +14,13 @@ main {
   max-width: 23rem;
   text-align: center;
   padding: 2rem 2rem 1rem;
-  border-radius: $border_s;
-  background: $gray_l;
-  box-shadow: 2px 2px 5px 0px $gray_d;
+  border-radius: $border_15;
+  background: $gray_100;
+  box-shadow: 2px 2px 5px 0px $gray_400;
 }
 
 .input__icons {
-  color: $blue_d;
+  color: $blue_700;
 
   i {
     position: absolute;
@@ -34,24 +34,24 @@ main {
 
 .title {
   font-weight: 600;
-  color: $blue_dr;
+  color: $blue_900;
   font-size: 2.5rem;
   margin-bottom: $font_s;
 }
 
 ._inputs {
   margin-bottom: $font_2;
-  border: $blue_dr;
+  border: $blue_900;
 
   input::placeholder {
-    color: $blue_d;
+    color: $blue_700;
   }
 
   .input_1 {
     text-align: left;
     max-width: 19rem;
     padding: 0 $font_3 0 $font_s;
-    color: $blue_d !important;
+    color: $blue_700 !important;
   }
 }
 
@@ -62,11 +62,11 @@ main {
 
 .btn_1 {
   color: $white;
-  background: $blue_d;
+  background: $blue_700;
 }
 
 .version {
-  color: $blue_dr;
+  color: $blue_900;
   font-size: $font_m;
   font-weight: 600;
   margin-top: $font_2;
@@ -75,5 +75,5 @@ main {
 input,
 input:-internal-autofill-selected {
   background-color: $white !important;
-  color: $blue_d !important;
+  color: $blue_700 !important;
 }

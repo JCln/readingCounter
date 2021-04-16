@@ -4,11 +4,11 @@
 main {
   width: auto;
   min-height: 84vh;
-  border-radius: $border_s;
-  background: url('/assets/imgs/framework/bb.jpg') no-repeat $gray_l;
+  border-radius: $border_15;
+  background: url('/assets/imgs/framework/bb.jpg') no-repeat $gray_100;
   background-size: cover;
-  border-top: .2rem solid $orange;
-  box-shadow: 2px 2px 5px 0px $gray_d;
+  border-top: .2rem solid $orange_500;
+  box-shadow: 2px 2px 5px 0px $gray_400;
   margin: 0 $font_05;
   padding: $font_05;
   transition: all ease-in-out 150ms;
@@ -17,14 +17,14 @@ main {
 .header {
   display: flex;
   justify-content: space-between;
-  border-radius: $border_s;
+  border-radius: $border_15;
   padding: 0 $font_xs;
   margin-bottom: $font_05;
   background: $white;
-  border-bottom: .2rem solid $blue_dr;
+  border-bottom: .2rem solid $blue_900;
 
   .title {
-    color: $blue_d;
+    color: $blue_700;
     direction: rtl;
   }
 }
@@ -35,11 +35,11 @@ main {
 }
 
 .btn_1 {
-  background: linear-gradient(142deg, $orange, $orange, transparent);
+  background: linear-gradient(142deg, $orange_500, $orange_500, transparent);
   margin-left: $font_xs;
   width: 4rem;
   height: $font_2;
-  border-radius: $border_s;
+  border-radius: $border_15;
   border: none;
   cursor: pointer;
 

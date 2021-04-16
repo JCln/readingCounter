@@ -11,11 +11,11 @@
 }
 
 .content {
-  background: $gray_l;
-  box-shadow: 1px 1px 8px 4px $gray_d;
+  background: $gray_100;
+  box-shadow: 1px 1px 8px 4px $gray_400;
   text-align: center;
   padding: $font_2 0;
-  border-radius: $border_s;
+  border-radius: $border_15;
   min-height: 30rem;
 }
 
@@ -34,8 +34,8 @@
 }
 
 .img_wrapper {
-  border-radius: $border_s;
-  border: 2px solid $dark_ddd;
+  border-radius: $border_15;
+  border: 2px solid $blue_gray_300;
   position: relative;
   margin: .4rem 0;
   cursor: pointer;
@@ -43,7 +43,7 @@
   &:hover,
   &:active,
   &:focus {
-    box-shadow: 0px 0px 1px 2px $dark_ddd;
+    box-shadow: 0px 0px 1px 2px $blue_gray_300;
   }
 }
 
@@ -55,7 +55,7 @@
 }
 
 .title {
-  color: $blue_c;
+  color: $blue_gray_700;
   text-align: center;
   margin: 0 0 $font_xs;
   font-size: 1.6rem;
@@ -91,11 +91,11 @@ button {
   position: absolute;
   top: -$font_s;
   right: $font_05;
-  background-color: $blue_d2;
+  background-color: $blue_600;
   color: $white;
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: 5px;
+  border-radius: $border_5;
   font-weight: 600;
 }
 
@@ -103,19 +103,19 @@ i {
   border-radius: $border_50;
   padding: $font_s;
   font-size: $font_m;
-  border: 1px solid $dark_ddd;
-  color: $dark_ddd;
+  border: 1px solid $blue_gray_300;
+  color: $blue_gray_300;
   cursor: pointer;
 
   &:hover,
   &:active,
   &:focus {
-    box-shadow: 0px 0px 2px 3px $dark_ddd;
+    box-shadow: 0px 0px 2px 3px $blue_gray_300;
   }
 }
 
 img {
-  border-radius: 5px;
+  border-radius: $border_5;
 }
 
 hr {
@@ -123,5 +123,5 @@ hr {
 }
 
 .not_found_header {
-  color: $blue_d2;
+  color: $blue_600;
 }

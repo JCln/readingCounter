@@ -17,11 +17,11 @@
     font-size: $font_m;
     font-weight: 600;
     padding: $font_xs .2rem;
-    border: 1px solid $gray_e3;
+    border: 1px solid $gray_200;
   }
 
   .p_icons {
-    color: $dark_ddd;
+    color: $blue_gray_300;
     font-size: $font_m;
     cursor: pointer;
   }
@@ -50,7 +50,7 @@
   }
 
   .fa-trash-o {
-    color: $red_d;
+    color: $red_600;
   }
 
   .p-datatable .p-datatable-header {

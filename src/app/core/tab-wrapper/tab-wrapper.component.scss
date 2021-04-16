@@ -19,13 +19,13 @@ li {
   margin: 0.15rem;
   min-width: 8.5rem;
   height: 3rem;
-  border-radius: $border_s;
+  border-radius: $border_15;
   border: 1.5px solid;
-  color: $blue_d;
+  color: $blue_700;
   list-style-type: none;
   font-size: $font_m;
   font-weight: 600;
-  background: $gray_d;
+  background: $gray_400;
   cursor: pointer;
 
   @media (min-width: 700px) {
@@ -42,13 +42,13 @@ li {
     height: 2.2rem;
     margin-right: auto;
     border-radius: 2rem;
-    color: $gray_dr;
+    color: $gray_600;
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $dark_ddd;
-      background: $gray_d;
+      color: $blue_gray_300;
+      background: $gray_400;
     }
   }
 
@@ -62,18 +62,18 @@ li {
     height: 2.2rem;
     margin-left: auto;
     border-radius: 2rem;
-    color: $gray_dr;
+    color: $gray_600;
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $red;
-      background: $gray_d;
+      color: $red_500;
+      background: $gray_400;
     }
   }
 
   &:hover {
-    background: $gray_d5;
+    background: $gray_300;
 
     .fa {
       opacity: 1;
@@ -91,12 +91,12 @@ li::before {
   border-radius: 15px;
   height: .3rem;
   width: 90%;
-  background: $dark_ddd;
+  background: $blue_gray_300;
 }
 
 li.active {
-  color: $dark_ddd;
-  background: $gray_e3;
+  color: $blue_gray_300;
+  background: $gray_200;
   border: 1.5px solid;
   border-top: none;
 }
@@ -115,7 +115,7 @@ li.active::before {
     border-radius: 50%;
 
     &:hover {
-      box-shadow: 0px 0px 4px 1px $red;
+      box-shadow: 0px 0px 4px 1px $red_500;
     }
   }
 }

@@ -7,8 +7,8 @@ section {
   display: grid;
   margin: auto;
   padding: 2rem;
-  background: $gray_d5;
-  border-radius: $border_s;
+  background: $gray_300;
+  border-radius: $border_15;
   width: 25rem;
 }
 
@@ -19,5 +19,5 @@ section {
 .btn_1 {
   color: $white;
   margin-top: 1rem;
-  background-color: $orange;
+  background-color: $orange_500;
 }

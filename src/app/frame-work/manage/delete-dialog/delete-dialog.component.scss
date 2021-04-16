@@ -38,21 +38,21 @@
 }
 
 ._custom {
-  background: $red;
-  color: $gray_l;
+  background: $red_500;
+  color: $gray_100;
 }
 
 h2 {
   font-family: $font_family;
   font-size: 1.5rem;
   font-weight: 600;
-  color: $gray_l;
-  background: $red;
+  color: $gray_100;
+  background: $red_500;
   border-radius: 15px;
   padding: 1rem;
   text-align: right;
 }
 
 .mat-dialog-container {
-  border: 1px solid $red;
+  border: 1px solid $red_500;
 }

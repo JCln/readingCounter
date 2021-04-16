@@ -13,17 +13,17 @@
   text-align: center;
   gap: .5rem;
   margin: $font_xs 0;
-  background: $gray_l;
-  box-shadow: 1px 1px 8px 4px $gray_d;
+  background: $gray_100;
+  box-shadow: 1px 1px 8px 4px $gray_400;
   padding: $font_xxs $font_05;
-  border-radius: $border_s;
+  border-radius: $border_15;
   min-height: 15rem;
 }
 
 input {
-  color: $gray_96;
+  color: $gray_500;
   margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px $gray_d;
+  box-shadow: 1px 1px 8px 1px $gray_400;
   text-align: center;
 }
 
@@ -42,6 +42,6 @@ input {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $gray_dr;
+    color: $gray_600;
   }
 }
