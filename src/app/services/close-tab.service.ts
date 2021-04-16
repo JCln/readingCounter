@@ -190,9 +190,6 @@ export class CloseTabService {
       case '/wr/m/track/finished':
         this.saveDataForTrackFinished = '';
         break;
-      case '/wr/m/track/fwu':
-        this.saveDataForFollowUp = '';
-        break;
       case '/wr/privacy':
         break;
       case '/wr/m/l/pd':
@@ -233,23 +230,32 @@ export class CloseTabService {
         break;
     }
     // listed all of the dynamic routes
+    if (url.includes('/wr/m/track/fwu')) {
+      this.saveDataForFollowUp = '';
+      return;
+    }
     if (url.includes('/wr/m/l/pd/')) {
       this.saveDataForLMPD = '';
+      return;
     }
     if (url.includes('/wr/m/l/all/')) {
       this.saveDataForLMAll = '';
     }
     if (url.includes('/wr/mu/edit/')) {
       this.saveDataForEditContacts = '';
+      return;
     }
     if (url.includes('/wr/m/track/woui?')) {
       this.saveDataForWOUI = '';
+      return;
     }
     if (url.includes('/wr/mu/all/loggins/')) {
       this.saveDataForUserLoggins = '';
+      return;
     }
     if (url.includes('/wr/m/nob/')) {
       this.saveDataForFragmentNOBDetails = '';
+      return;
     }
   }
   // 

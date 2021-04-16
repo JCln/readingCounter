@@ -49,7 +49,9 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   toPreStatus = (rowData: ITracking) => {
-    this.trackingManagerService.migrateToPreState(rowData.id);
+    console.log(rowData.id);
+    
+    // this.trackingManagerService.migrateToPreState(rowData.id);
   }
   nullSavedSource = () => this.closeTabService.saveDataForFollowUp = null;
   classWrapper = async (canRefresh?: boolean) => {

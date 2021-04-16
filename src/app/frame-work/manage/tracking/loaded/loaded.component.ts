@@ -69,11 +69,9 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else {
       this.dataSource = await this.getDataSource();
-      this.filterZoneDictionary = await this.getZoneDictionary();
-      console.log(this.dataSource);
-
       this.closeTabService.saveDataForTrackLoaded = this.dataSource;
     }
+    this.filterZoneDictionary = await this.getZoneDictionary();
     this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {

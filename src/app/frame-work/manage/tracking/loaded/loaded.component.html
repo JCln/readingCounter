@@ -89,7 +89,7 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" let-columns>
+    <ng-template *ngIf="dataSource" pTemplate="emptymessage" let-columns>
         <tr>
             <td [attr.colspan]="columns.length">
                 موردی پیدا نشد

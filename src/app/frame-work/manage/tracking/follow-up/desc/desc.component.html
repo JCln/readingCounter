@@ -83,6 +83,11 @@
                 <i [routerLink]="['tele']" class="tooltip _circle_border p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">مشاهده گراف</div>
                 </i>
+                <td (click)="toPreStatus(changeHsty)">
+                    <i class="tooltip p_icons pi pi-step-backward">
+                        <div class="tooltip_text_right">بازگشت به قبلی</div>
+                    </i>
+                </td>
             </div>
         </div>
     </ng-template>
@@ -107,12 +112,7 @@
                 <ng-template #elseTemplate>
                     {{changeHsty[col.field]}}
                 </ng-template>
-            </td>
-            <td (click)="toPreStatus(changeHsty)">
-                <i class="tooltip p_icons pi pi-step-backward">
-                    <div class="tooltip_text_right">بازگشت به قبلی</div>
-                </i>
-            </td>
+            </td>            
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
