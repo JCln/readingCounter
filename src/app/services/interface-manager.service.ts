@@ -126,6 +126,9 @@ export class InterfaceManagerService {
   getTrackFinished = (): Observable<any> => {
     return this.mainService.GET('V1/Tracking/Finished');
   }
+  getTrackLastStates = (): Observable<any> => {
+    return this.mainService.GET('V1/Tracking/LastStates');
+  }
   postTrackingEdit = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tracking/Edit', body);
   }

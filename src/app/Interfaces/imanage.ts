@@ -91,7 +91,8 @@ export interface ITracking {
     displayBillId: boolean,
     displayRadif: boolean,
     counterReaderId: string,
-    counterReaderName: string
+    counterReaderName: string,
+    stateTitle?: string
 }
 export interface IEditTracking {
     id: string,

@@ -58,6 +58,29 @@ export class TrackingManagerService {
       { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true }
     ];
   }
+  columnlastStates = (): IObjectIteratation[] => {
+    return [
+      { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
+      { field: 'listNumber', header: 'ش لیست', isSelected: true },
+      { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+      // { field: 'zoneId', header: 'ناحیه', isSelected: false },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
+      { field: 'stateTitle', header: 'منطقه', isSelected: true },
+      { field: 'isBazdid', header: 'بازدید', isSelected: false },
+      { field: 'year', header: 'سال', isSelected: false },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
+      { field: 'fromDate', header: 'از', isSelected: false },
+      { field: 'toDate', header: 'تا', isSelected: false },
+      { field: 'itemQuantity', header: 'تعداد', isSelected: true },
+      { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
+      { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
+      { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
+      { field: 'displayRadif', header: 'ردیف', isSelected: false },
+      { field: 'counterReaderName', header: 'مامور', isSelected: false }
+    ];
+  }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -81,6 +104,17 @@ export class TrackingManagerService {
   }
   getFinishedDataSource = (): Observable<any> => {
     return this.interfaceManagerService.getTrackFinished();
+  }
+  getLastStatesDataSource = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getTrackLastStates().subscribe((res: any) => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   getFollowUpSource = (trackNumber: string): Observable<any> => {
     return this.interfaceManagerService.getTrackFollowUp(trackNumber);

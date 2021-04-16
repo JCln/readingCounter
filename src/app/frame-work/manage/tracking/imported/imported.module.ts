@@ -12,8 +12,8 @@ import { ImportedComponent } from './imported.component';
   declarations: [ImportedComponent, ImportListDgComponent],
   imports: [
     SharedPrimeNgModule,
-    ImportedRoutingModule,
-    MatSelectModule
+    MatSelectModule,
+    ImportedRoutingModule
   ],
   entryComponents: [
     ImportListDgComponent

@@ -52,16 +52,12 @@ export class CloseTabService {
 
   // track manager
   saveDataForTrackImported: any;
-
   saveDataForTrackLoaded: any;
-
   saveDataForTrackReading: any;
-
   saveDataForTrackOffloaded: any;
-
   saveDataForTrackFinished: any;
-
   saveDataForFollowUp: any;
+  saveDataForLastStates: any;
   // 
   // import dynamic
   saveDataForImportDynamic: any;
@@ -183,6 +179,9 @@ export class CloseTabService {
         break;
       case '/wr/m/track/reading':
         this.saveDataForTrackReading = '';
+        break;
+      case '/wr/m/track/latest':
+        this.saveDataForLastStates = '';
         break;
       case '/wr/m/track/offloaded':
         this.saveDataForTrackOffloaded = '';
