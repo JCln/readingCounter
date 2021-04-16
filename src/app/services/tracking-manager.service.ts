@@ -1,8 +1,10 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
 import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -61,7 +63,8 @@ export class TrackingManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private _location: Location
+    private _location: Location,
+    private dialog: MatDialog
   ) { }
 
   getImportedDataSource = (): Observable<any> => {
@@ -127,8 +130,20 @@ export class TrackingManagerService {
   migrateDataRowToOffloaded = (trackingId: string, desc: string): Observable<any> => {
     return this.interfaceManagerService.toOffloaded({ trackingId: trackingId, description: desc });
   }
-  migrateToPreState = (trackingId: string) => {
-    return this.interfaceManagerService.toPre({ trackingId }).subscribe((res: IResponses) => {
+  backToConfirmDialog = (trackNumber: string) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        data: 'علت بازگشت به مرحله قبلی'
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          this.migrateToPreState(trackNumber, desc);
+        }
+      })
+    })
+  }
+  private migrateToPreState = (trackingId: string, desc: string) => {
+    return this.interfaceManagerService.toPre({ trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
       if (res)
         this.utilsService.snackBarMessageSuccess(res.message);
     })

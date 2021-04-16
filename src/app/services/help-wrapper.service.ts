@@ -31,14 +31,16 @@ export class HelpWrapperService {
       this.messageToShow.messageThree = '';
       this.messageToShow.messageTwo = '';
       this.messageToShow.imgTwo = '';
+      return;
     }
     else if (currentRoute === '/wr/mu/edit' || currentRoute === '/wr/mu/all') {
       this.messageToShow.title = 'مشاهده و ویرایش کاربران';
       this.messageToShow.messageOne = 'این قسمت شامل بخش های مشاهده همه کاربران و افزودن کاربر جدید می‌باشد.';
       this.messageToShow.imgOne = 'assets/imgs/help/edit/editContacts.PNG';
       this.messageToShow.messageTwo = ' بخش مشاهده کاربران، اطلاعات کلی و ویرایش کاربران در دسترس میباشد. سه آیکن سمت چپ مربوط به ویرایش اطلاعات کاربر، جزئیات ورود های قبلی و تنظیمات بیشتر کاربر میباشد. تنظیمات بیشتر برای فعال سازی، غیرفعال سازی و بازنشانی رمز عبور میباشد.';
-      this.messageToShow.imgTwo = 'assets/imgs/help/editContacts2.PNG';
       this.messageToShow.messageThree = 'بازنشانی بمعنای تغییر رمز عبور به شماره موبایل کابر است.قفل به معنای دسترسی یا عدم دسترسی کاربر به برنامه میباشد. درصورتی که کاربری به دفعات متعدد به اشتباه نام کاربری و گذرواژه را وارد کند در مدت زمان مشخصی قفل میشود و قادر به ورود نخواهد بود. مدت زمان آن نیز در قسمت سطح دسترسی قابل تنظیم می باشد.فعال یا غیر فعال بودن به معنای دسترسی کاربر به برنامه است و مدت مشخصی ندارد.اطلاعات هر کاربری میتواند ویرایش شود';
+      this.messageToShow.imgTwo = 'assets/imgs/help/editContacts2.PNG';
+      return;
     }
 
     else if (currentRoute === '/wr/mu/add') {
@@ -48,6 +50,7 @@ export class HelpWrapperService {
       this.messageToShow.messageThree = '';
       this.messageToShow.messageTwo = '';
       this.messageToShow.imgTwo = '';
+      return;
     }
     else if (currentRoute === '/wr/m/mr' || currentRoute === '/wr/m/mp' || currentRoute === '/wr/m/mzd' || currentRoute === '/wr/m/mz' || currentRoute === '/wr/m/mc') {
       this.messageToShow.title = 'مدیریت کاربران';
@@ -56,6 +59,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'امکان جستجو، ویرایش، حذف و افزودن مطابق تصویر می‌باشد.';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
+      return;
     }
     else if (currentRoute === '/wr/apk') {
       this.messageToShow.title = 'مدیریت apk';
@@ -64,6 +68,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = '';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
+      return;
     }
     else if (currentRoute === '/wr/imd') {
       this.messageToShow.title = 'ایجاد مسیر';
@@ -72,6 +77,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'نکته: امکان ویرایش مقادیر مانند درصد علی الحساب و درصد تصویر وجود دارد';
       this.messageToShow.messageThree = 'نکته: تا زمانی که پیامی به شکل زیر نمایش داده نشده، مسیری ایجاد نشده است.';
       this.messageToShow.imgTwo = '';
+      return;
     }
     else if (currentRoute === '/wr/m/dbf') {
       this.messageToShow.title = 'دانلود خروجی';
@@ -80,6 +86,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'کافی است پس از وارد کردن بازه زمانی مدنظر فایل بارگیری را داشت.';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
+      return;
     }
     else if (currentRoute === '/wr/m/fbn') {
       this.messageToShow.title = 'اطلاعات غیرمجاز';
@@ -88,6 +95,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'اطلاعاتی که توسط مامور(ها) قرائت ثبت شده قابل پیگیری می باشد';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
+      return;
     }
     else if (currentRoute === '/wr/m/track/fwu') {
       this.messageToShow.title = 'پیگیری درخواست ها';
@@ -96,6 +104,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'جزئیات نمایشی بیشتر مانند تاریخ ثبت، نام مامور و وضعیت پیگیری قابل مشاهده هستند.';
       this.messageToShow.messageThree = 'همچنین میتوان مسیر را به قسمت قبلی بازگشت داد. برای مثال اگر مسیر در وضعیت درحال قرائت باشد میتواند به وضعیت بارگیری شده بازگشت داده شود.';
       this.messageToShow.imgTwo = '';
+      return;
     }
 
 
@@ -108,14 +117,16 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'امکان جستجو، ویرایش، حذف و افزودن مطابق تصویر می‌باشد.';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
+      return;
     }
     else if (currentRoute.includes('/wr/mu/edit')) {
       this.messageToShow.title = 'ویرایش کاربر';
       this.messageToShow.messageOne = 'این قسمت به ویرایش اطلاعات شخصی کاربر مانند نام کاربری یا کد کاربری، نواحی قابل دسترس کاربر، سطح دسترسی ها و نقش کاربر تقسیم میشود. دسترسی به خدمات کاربر در این قسمت مشخص میشود. زیر بخش نواحی برای دسترسی به ناحیه مدنظر کاربر درنظر گرفته شده است.';
       this.messageToShow.imgOne = 'assets/imgs/help/edit/edit1.JPG';
       this.messageToShow.messageTwo = 'زیر بخش سطح دسترسی به خدمات شامل اپلیکیشن قرائت ، مدیریت سامانه و سامانه قرائت کنتور است که محدود کننده سطح دسترسی به کاربر است';
-      this.messageToShow.imgTwo = 'assets/imgs/help/edit/edit2.JPG';
       this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = 'assets/imgs/help/edit/edit2.JPG';
+      return;
     }
     else if (currentRoute.includes('/wr/m/track')) {
       this.messageToShow.title = 'مدیریت پیگیری ها';
@@ -124,6 +135,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'از زمانی که مسیری ایجاد میشود، مسیر ایجاد شده در قسمت صادر شده قرار میگیرد. به محض آنکه از طریق اپلیکیشن قرائت بارگیری انجام گیرد، مسیر به قسمت دریافت شده منتقل میشود. پس از آن با ثبت اولین اشتراک توسط مامور به قسمت در حال قرارئت منتقل و قابل پیگیری همزمان خواهد شد. و پس از پایان قرائت و بارگذاری عملیات به بارگذاری شده و درصورت بارگیری به مرحله آخر یعنی دانلود شده منتقل خواهد شد';
       this.messageToShow.messageThree = 'در هر قسمت امکان مشاهده و ویرایش مراحل درنظر گرفته شده است. برای مثال در قسمت در حال قرائت امکان پیگیری لیست درحال قرائت و مشاهده درلحظه آنها برروی نقشه، مشاهده مامور ها و جزئیات اطلاعات بیشتر آنها و همچنین مشاهده و بررسی تصویر و صوت های ارسال شده توسط مامور وجود دارد';
       this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading2.JPG';
+      return;
     }
     else if (currentRoute.includes('exm/details' || 'mam/trv' || 'mam/trvch' || 'mam/karkard' || 'mam/karkardDaily' || 'mam/dh' || 'mam/gis')) {
       this.messageToShow.title = 'گزارشات';
@@ -132,6 +144,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'در هر قسمت با وارد کردن مقادیر خواسته شده براساس تاریخ و یا دوره میتوان گزارش ها و گاهی نمودار مناسب آن بخش را مشاهده کرد';
       this.messageToShow.messageThree = 'در صورت اشتباه در وارد کردن مقادیر، سیستم بطور خودکار پیامی برای اصلاح موارد لازم نمایش خواهد داد.';
       this.messageToShow.imgTwo = 'assets/imgs/help/rr/rr2.JPG';
+      return;
     }
     else if (currentRoute.includes('/m/nob')) {
       this.messageToShow.title = 'نوبتی';
@@ -140,6 +153,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'امکان افزودن، ویرایش، مشاهده جزئیات و حذف هر مورد نیز وجود دارد.';
       this.messageToShow.messageThree = 'ستون تایید شده به معنای تایید تمامی زیر مجوعه هایی که در قسمت مسیر های هر کدام وجود دارد می باشد. درصورتی که مشکلی در ایجاد و ویرایش وجود داشته باشد سیستم بطور خودکار  پیامی برای اصلاح موارد لازم نمایش خواهد داد. ';
       this.messageToShow.imgTwo = 'assets/imgs/help/fragment/nob2.JPG';
+      return;
     }
     else {
       this.messageToShow.title = 'راهنمایی';
@@ -148,6 +162,7 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'راهنمایی وجود ندارد';
       this.messageToShow.messageOne = '';
       this.messageToShow.imgTwo = '';
+      return;
     }
   }
   openDialog = () => {

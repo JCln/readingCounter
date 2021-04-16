@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IFollowUp, IFollowUpHistory, ITracking } from 'src/app/Interfaces/imanage';
+import { IFollowUp, IFollowUpHistory } from 'src/app/Interfaces/imanage';
+import { ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
@@ -23,7 +24,17 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     { field: 'hasDetails', header: 'جزئیات' },
   ]
 
-
+  canShowGraph: boolean = false;
+  showInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'جدول',
+      isSelected: true
+    },
+    {
+      title: 'گراف',
+      isSelected: false
+    }
+  ]
   subscription: Subscription[] = [];
   dataSource: IFollowUp;
   changeHsty: IFollowUpHistory[] = [];
@@ -48,10 +59,8 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
       console.error(e => e);
     }
   }
-  toPreStatus = (rowData: ITracking) => {
-    console.log(rowData.id);
-    
-    // this.trackingManagerService.migrateToPreState(rowData.id);
+  toPreStatus = () => {
+    this.trackingManagerService.backToConfirmDialog(this.trackNumber);
   }
   nullSavedSource = () => this.closeTabService.saveDataForFollowUp = null;
   classWrapper = async (canRefresh?: boolean) => {

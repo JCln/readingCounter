@@ -62,9 +62,17 @@
     </form>
 </section>
 
-<p-table *ngIf="route.children.length === 0" [columns]="defColumns" [value]="changeHsty" [paginator]="true" [rows]="10"
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
+<section class="order_by">
+    <h2>نمایش :</h2>
+    <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="canShowGraph" name="_isOrderByDate">
+        <mat-radio-button class="radio_button" *ngFor="let orderType of showInOrderTo" [value]="orderType.isSelected">
+            {{orderType.title}}
+        </mat-radio-button>
+    </mat-radio-group>
+</section>
+
+<p-table *ngIf="!canShowGraph" [columns]="defColumns" [value]="changeHsty" dir="rtl"
+    styleClass="p-datatable-responsive">
 
     <ng-template pTemplate="caption">
         <th>
@@ -80,14 +88,9 @@
                     class="tooltip _circle_border p_icons pi pi-arrow-left">
                     <div class="tooltip_text">بازگشت به پیگیری</div>
                 </i>
-                <i [routerLink]="['tele']" class="tooltip _circle_border p_icons pi pi-chart-bar">
-                    <div class="tooltip_text_right">مشاهده گراف</div>
+                <i (click)="toPreStatus()" class="tooltip _circle_border p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به قبلی</div>
                 </i>
-                <td (click)="toPreStatus(changeHsty)">
-                    <i class="tooltip p_icons pi pi-step-backward">
-                        <div class="tooltip_text_right">بازگشت به قبلی</div>
-                    </i>
-                </td>
             </div>
         </div>
     </ng-template>
@@ -98,7 +101,6 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
@@ -112,7 +114,7 @@
                 <ng-template #elseTemplate>
                     {{changeHsty[col.field]}}
                 </ng-template>
-            </td>            
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
@@ -124,4 +126,4 @@
     </ng-template>
 </p-table>
 <!-- could implement by lazy load route -->
-<app-time-line *ngIf="route.children.length !== 0" [dataSource]="dataSource"></app-time-line>
+<app-time-line *ngIf="canShowGraph" [dataSource]="dataSource"></app-time-line>
