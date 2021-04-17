@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
+import { IReadingReportWithZoneIDsReq } from 'src/app/Interfaces/imanage';
+import { IObjectIteratation, ITitleValue } from 'src/app/Interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from './../Interfaces/imanage';
-import { ITitleValue } from './../Interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,7 @@ export class ReadingReportManagerService {
   private readingReportReq: IReadingReportReq;
   private readingReportGISReq: IReadingReportGISReq;
   private rRTraverseDiffrential: IReadingReportTraverseDifferentialReq;
+  private rRAnalyzeReq: IReadingReportWithZoneIDsReq;
 
   /* GET*/
 
@@ -27,9 +28,27 @@ export class ReadingReportManagerService {
   getRRGISReq(): IReadingReportGISReq {
     return this.readingReportGISReq;
   }
+  getRRAnalyzeReq(): IReadingReportWithZoneIDsReq {
+    return this.rRAnalyzeReq;
+  }
 
   /* COLUMNS*/
-
+  columnRRAnalyzeByParam = (): IObjectIteratation[] => {
+    return [
+      { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: false },
+      { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true, readonly: false },
+      { field: 'khodgardanTitle', header: 'خودگردان', isSelected: true, readonly: false },
+      { field: 'statusTitle', header: 'وضعیت', isSelected: true, readonly: false },
+      { field: 'min', header: 'min', isSelected: true, readonly: false },
+      { field: 'max', header: 'max', isSelected: true, readonly: false },
+      { field: 'average', header: 'میانگین', isSelected: true, readonly: false },
+      { field: 'variance', header: 'واریانش', isSelected: true, readonly: false },
+      { field: 'standardDeviation', header: 'انحراف معیار', isSelected: true, readonly: false },
+      { field: 'median', header: 'میانه', isSelected: true, readonly: false },
+      { field: 'mode', header: 'mode', isSelected: true, readonly: false },
+      { field: 'duration', header: 'مدت', isSelected: false, readonly: false }
+    ];
+  }
   columnSelectedRRMaster = (): IObjectIteratation[] => {
     return [
       { field: 'zoneId', header: 'کد ناحیه', isSelected: true, readonly: false },
@@ -171,6 +190,23 @@ export class ReadingReportManagerService {
   ) { }
 
   // CALL APIs
+  postRRAnalyzeByParamManager = (): Promise<any> => {
+    if (!this.rRAnalyzeReq) {
+      this.emptyMessage();
+      this.routeTo('../anlz/prfm');
+      return;
+    }
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.postRRAnalyzeByParam(this.rRAnalyzeReq).subscribe((res) => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
   postRRMasterManager = (): Promise<any> => {
     try {
       return new Promise((resolve) => {

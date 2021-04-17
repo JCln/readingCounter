@@ -5,14 +5,14 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
-import { IForbiddenReq } from './../Interfaces/imanage';
+import { IReadingReportWithZoneIDsReq } from './../Interfaces/imanage';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForbiddenService {
-  forbiddenReq: IForbiddenReq;
+  forbiddenReq: IReadingReportWithZoneIDsReq;
 
   /* COLUMNS */
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
@@ -101,7 +101,7 @@ export class ForbiddenService {
   }
 
   /* VERIFICATION */
-  verificationForbidden = (forbidden: IForbiddenReq) => {
+  verificationForbidden = (forbidden: IReadingReportWithZoneIDsReq) => {
     this.forbiddenReq = forbidden;
     return this.datesValidationForbidden();
   }

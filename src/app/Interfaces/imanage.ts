@@ -246,7 +246,35 @@ export interface IForbiddenManager {
     y: string
     zoneId: string
 }
-export interface IForbiddenReq {
+export interface IReadingReportAnalyzeRes {
+    zoneId: number,
+    khodgardanTitle: string,
+    zoneTitle: string,
+    caption: string,
+    statusTitle: string,
+    min: number,
+    max: number,
+    average: number,
+    variance: number,
+    standardDeviation: number,
+    median: number,
+    mode: number,
+    duration: string,
+    timeSpan: {
+        ticks: number,
+        days: number,
+        hours: number,
+        milliseconds: number,
+        minutes: number,
+        seconds: number,
+        totalDays: number,
+        totalHours: number,
+        totalMilliseconds: number,
+        totalMinutes: number,
+        totalSeconds: number
+    }
+}
+export interface IReadingReportWithZoneIDsReq {
     zoneId: number,
     fromDate: string,
     toDate: string,
@@ -587,8 +615,8 @@ export interface IReadingReportChartDisposeRes {
         toEshterak: string,
         counterReaderName: string,
         overalCount: number,
-        _8To10: number,
-        _10To12: number,
+        _8To1number: number,
+        _1numberTo12: number,
         _12To14: number,
         _14To16: number,
         _16To18: number,
@@ -601,8 +629,8 @@ export interface IReadingReportChartDisposeRes {
         toEshterak: string,
         counterReaderName: string,
         overalCount: number,
-        _8To10: number,
-        _10To12: number,
+        _8To1number: number,
+        _1numberTo12: number,
         _12To14: number,
         _14To16: number,
         _16To18: number,
@@ -615,8 +643,8 @@ export interface IReadingReportChartDisposeRes {
         toEshterak: string,
         counterReaderName: string,
         overalCount: number,
-        _8To10: number,
-        _10To12: number,
+        _8To1number: number,
+        _1numberTo12: number,
         _12To14: number,
         _14To16: number,
         _16To18: number,
