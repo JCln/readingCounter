@@ -37,7 +37,7 @@ export class ReadingReportManagerService {
     return [
       { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: false },
       { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true, readonly: false },
-      { field: 'khodgardanTitle', header: 'خودگردان', isSelected: true, readonly: false },
+      { field: 'regionTitle', header: 'منطقه', isSelected: true, readonly: false },
       { field: 'statusTitle', header: 'وضعیت', isSelected: true, readonly: false },
       { field: 'min', header: 'min', isSelected: true, readonly: false },
       { field: 'max', header: 'max', isSelected: true, readonly: false },
@@ -192,13 +192,15 @@ export class ReadingReportManagerService {
   // CALL APIs
   postRRAnalyzeByParamManager = (): Promise<any> => {
     if (!this.rRAnalyzeReq) {
-      this.emptyMessage();
-      this.routeTo('../anlz/prfm');
+      this.routeTo('wr/rpts/anlz/prfm');
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
       return;
     }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRAnalyzeByParam(this.rRAnalyzeReq).subscribe((res) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -545,6 +547,37 @@ export class ReadingReportManagerService {
     return true;
   }
 
+  private datesValidationAnalyzePerformance = (): boolean => {
+    if (this.utilsService.isNull(this.rRAnalyzeReq.zoneId)) {
+      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.rRAnalyzeReq.fromDate)) {
+      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      return false;
+    }
+    if (this.utilsService.isNull(this.rRAnalyzeReq.toDate)) {
+      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      return false;
+    }
+    return true;
+  }
+  private periodValidationAnalyzePerformance = (): boolean => {
+    if (this.utilsService.isNull(this.rRAnalyzeReq.zoneId)) {
+      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.rRAnalyzeReq.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      return false;
+    }
+    if (this.utilsService.isNull(this.rRAnalyzeReq.year)) {
+      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      return false;
+    }
+    return true;
+  }
+
   private datesValidationDisposalHours = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
       this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
@@ -641,6 +674,11 @@ export class ReadingReportManagerService {
     this.readingReportGISReq = readingReportGISReq;
     return isValidateByDate ? this.datesValidationGIS() : this.periodValidationGIS()
   }
+  verificationRRAnalyzePerformance = (readingReportReq: IReadingReportWithZoneIDsReq, isValidateByDate: boolean): boolean => {
+    this.rRAnalyzeReq = readingReportReq;
+    return isValidateByDate ? this.datesValidationAnalyzePerformance() : this.periodValidationAnalyzePerformance()
+  }
+
   // 
   // snack bar
   emptyMessage = () => {

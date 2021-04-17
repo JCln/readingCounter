@@ -3,7 +3,7 @@
 .container {
   display: grid;
   direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
   gap: $font_xs;
   margin-top: $font_xs;
   background: $gray_100;
@@ -55,7 +55,8 @@
   padding: $font_xs 0;
 }
 
-.pie {
+.pie,
+.relative_pos {
   position: relative;
 }
 

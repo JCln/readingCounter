@@ -13,6 +13,14 @@
             </section>
             <hr>
             <section class="content">
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.zoneId" name="zoneId">
+                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
                 <div class="input_2" [hidden]="_isOrderByDate">
                     <div class="_key">نوع دوره</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
@@ -60,7 +68,10 @@
 
         </section>
         <footer>
-            <button type="submit" class="btn_1">مشاهده</button>
+            <button type="submit" class="btn_1">
+                مشاهده لیست
+                <i class="pi pi-list"></i>
+            </button>
 
         </footer>
     </form>

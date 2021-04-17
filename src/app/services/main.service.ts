@@ -27,24 +27,25 @@ export class MainService {
   }
   GETID = (ID: string, URL: string, base64?: string) => {
     if (base64) {
-      this.http.get(environment.API_URL + '/' + URL + '/' + base64 + '/' + ID)
+      this.http.get(environment.API_URL + '/' + URL + '/' + base64 + '/' + ID);
     } else {
-      return this.http.get<any>(environment.API_URL + '/' + URL + '/' + ID)
+      return this.http.get<any>(environment.API_URL + '/' + URL + '/' + ID);
     }
   }
   POSTBLOB = (URL: string, body: object): Observable<any> => {
     return this.http.post(environment.API_URL + '/' + URL, body, { responseType: 'blob' });
   }
   GETBLOB = (ID: string, URL: string): Observable<any> => {
-    return this.http.get(environment.API_URL + '/' + URL + '/' + ID, { responseType: 'blob' })
+    return this.http.get(environment.API_URL + '/' + URL + '/' + ID, { responseType: 'blob' });
   }
   POST = (URL: string, ID?: number): Observable<any> => {
-    return this.http.post(environment.API_URL + '/' + URL + '/' + ID, '').pipe(
-    );
+    if (ID)
+      return this.http.post(environment.API_URL + '/' + URL + '/' + ID, '');
+    else
+      return this.http.post(environment.API_URL + '/' + URL, '');
   }
   POSTSG = (URL: string, ID?: string): Observable<any> => {
-    return this.http.post(environment.API_URL + '/' + URL + '/' + ID, '').pipe(
-    );
+    return this.http.post(environment.API_URL + '/' + URL + '/' + ID, '');
   }
   POSTBODY = (URL: string, body: object): Observable<any> => {
     return this.http.post(environment.API_URL + '/' + URL, body);

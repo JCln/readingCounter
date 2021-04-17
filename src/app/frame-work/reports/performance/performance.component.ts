@@ -37,6 +37,7 @@ export class PerformanceComponent implements OnInit, AfterViewInit, OnDestroy {
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
 
   constructor(
@@ -46,6 +47,7 @@ export class PerformanceComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   classWrapper = async () => {
+    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
   }
@@ -87,7 +89,7 @@ export class PerformanceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   verification = async () => {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '')
-    const temp = this.readingReportManagerService.verificationRRMaster(this.readingReportReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRAnalyzePerformance(this.readingReportReq, this._isOrderByDate);
     if (temp)
       this.routeToChild();
   }

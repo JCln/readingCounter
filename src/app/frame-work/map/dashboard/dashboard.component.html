@@ -1,7 +1,7 @@
 <main class="container">
 
     <section class="forbidden">
-        <div class="title">غیر مجاز</div>
+        <div class="title relative_pos">غیر مجاز</div>
         <div>تعداد غیر مجاز</div>
 
         <div class="_key_value" *ngFor="let item of _col_forbidden">
@@ -11,7 +11,7 @@
     </section>
 
     <section class="media">
-        <div class="title">تصاویر</div>
+        <div class="title relative_pos">تصاویر</div>
         <div>تصاویر ارسال شده</div>
 
         <div class="_key_value" *ngFor="let item of _col_Media">
@@ -28,6 +28,11 @@
             </canvas>
         </div>
     </div>
+
+    <div class="chart_1 charts">
+        <app-analyze></app-analyze>
+    </div>
+
     <div class="chart_1 charts pie">
         <div class="title">سالانه</div>
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"

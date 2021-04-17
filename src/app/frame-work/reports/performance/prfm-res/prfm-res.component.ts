@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IReadingReportAnalyzeRes } from 'src/app/Interfaces/imanage';
+import { IAnalyzeRes } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
@@ -11,7 +11,7 @@ import { ReadingReportManagerService } from 'src/app/services/reading-report-man
   styleUrls: ['./prfm-res.component.scss']
 })
 export class PrfmResComponent implements OnInit {
-  dataSource: IReadingReportAnalyzeRes[] = [];
+  dataSource: IAnalyzeRes[] = [];
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -36,10 +36,12 @@ export class PrfmResComponent implements OnInit {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRAnalyzeByParamManager();
+    console.log(this.dataSource);
+    
+    this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.connectToServer();
-    this.insertSelectedColumns();
   }
   refreshTable = () => {
     this.ngOnInit();

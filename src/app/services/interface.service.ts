@@ -56,5 +56,8 @@ export class InterfaceService {
   getDashboardReadDaily = (): Observable<any> => {
     return this.mainService.GET('V1/List/Dashboard/Read/Daily');
   }
+  postDashboardAnalyzePerformance = (): Observable<any> => {
+    return this.mainService.POST('V1/Tracking/Dashboard/Analyze/Performance');
+  }
 
 }

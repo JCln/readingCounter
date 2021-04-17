@@ -175,7 +175,7 @@ export class InterfaceManagerService {
     return this.mainService.POSTBODY('V1/List/Offloaded/TraverseDifferntialChart', body);
   }
   postRRAnalyzeByParam = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1​/Tracking​/Analyze​/ByParam', body);
+    return this.mainService.POSTBODY('V1/Tracking/Analyze/ByParam', body);
   }
 
 
