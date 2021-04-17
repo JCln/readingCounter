@@ -22,9 +22,11 @@
 .forbidden {}
 
 .title {
+  position: absolute;
   font-size: $font_m;
   color: $blue_700;
   font-weight: 800;
+  padding: 0 $font_xs;
 }
 
 ._key_value {
@@ -51,6 +53,10 @@
   background: $white;
   min-height: 15rem;
   padding: $font_xs 0;
+}
+
+.pie {
+  position: relative;
 }
 
 .chart_0 {

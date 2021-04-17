@@ -19,34 +19,35 @@
             <div class="val">{{media[item.field]}}</div>
         </div>
     </section>
-    <div class="chart_0 charts">
+    <div class="chart_0 charts line">
         <div style="display: block;">
+            <div class="title">قرائت</div>
             <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
                 [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
                 [chartType]="lineChartType" [plugins]="lineChartPlugins">
             </canvas>
         </div>
     </div>
-    <div class="chart_1 charts">
-        <div class="title"></div>
+    <div class="chart_1 charts pie">
+        <div class="title">سالانه</div>
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
-    <div class="chart_2 charts">
-        <div class="title"></div>
+    <div class="chart_2 charts pie">
+        <div class="title">ماهانه</div>
         <canvas baseChart [data]="pieChartDataOne" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
-    <div class="chart_3 charts">
-        <div class="title"></div>
+    <div class="chart_3 charts pie">
+        <div class="title">هفتگی</div>
         <canvas baseChart [data]="pieChartDataTwo" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
-    <div class="chart_4 charts">
-        <div class="title"></div>
+    <div class="chart_4 charts pie">
+        <div class="title">روزانه</div>
         <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
