@@ -116,8 +116,19 @@ export class TrackingManagerService {
       console.error(error);
     }
   }
-  getFollowUpSource = (trackNumber: string): Observable<any> => {
-    return this.interfaceManagerService.getTrackFollowUp(trackNumber);
+  getFollowUpSource = (trackNumber: string): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getTrackFollowUp(trackNumber).subscribe(res => {
+          if (res) {
+            resolve(res);
+          }
+        })
+      })
+    } catch {
+      console.error(e => e);
+    }
+
   }
   getCounterReaders = (zoneId: number): Promise<any> => {
     try {

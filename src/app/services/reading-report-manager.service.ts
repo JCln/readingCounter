@@ -66,11 +66,11 @@ export class ReadingReportManagerService {
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
       { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
       { field: 'karbariCode', header: 'کاربری', isSelected: false, readonly: true },
-      { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, readonly: true },
+      { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false, readonly: true },
       { field: 'ahadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی', isSelected: true, readonly: true },
       { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, readonly: true },
-      { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فصلی', isSelected: false, readonly: true },
-      { field: 'possibleAhadTejariOrFari', header: 'تجاری/فصلی پیمایش', isSelected: false, readonly: true },
+      { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فرعی', isSelected: false, readonly: true },
+      { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, readonly: true },
       { field: 'ahadSaierOrAbBaha', header: 'آحاد سایر/آبها', isSelected: false, readonly: true },
       { field: 'possibleSaierOrAbBaha', header: 'سایر/آبها پیمایش', isSelected: false, readonly: true },
       { field: 'reportTitle', header: 'گزارش', isSelected: true, readonly: true },
@@ -88,12 +88,12 @@ export class ReadingReportManagerService {
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
       { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
       { field: 'possibleAddress', header: 'نشانی پیمایش', isSelected: false, readonly: true },
-      { field: 'karbariCode', header: 'کد کاربری', isSelected: false, readonly: false },
+      { field: 'karbariCode', header: 'کاربری', isSelected: false, readonly: false },
       { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: true, readonly: true },
       { field: 'ahadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی', isSelected: false, readonly: true },
       { field: 'possibleAhadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی پیمایش', isSelected: false, readonly: true },
-      { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فصلی', isSelected: false, readonly: false },
-      { field: 'possibleAhadTejariOrFari', header: 'آحاد تجاری/فصلی پیمایش', isSelected: false, readonly: true },
+      { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فرعی', isSelected: false, readonly: false },
+      { field: 'possibleAhadTejariOrFari', header: 'آحاد تجاری/فرعی پیمایش', isSelected: false, readonly: true },
       { field: 'ahadSaierOrAbBaha', header: 'آحاد سایر/آبها', isSelected: false, readonly: true },
       { field: 'possibleSaierOrAbBaha', header: 'سایر/آبها پیمایش', isSelected: false, readonly: false },
       { field: 'counterReaderName', header: 'مامور', isSelected: false, readonly: true },
@@ -113,12 +113,12 @@ export class ReadingReportManagerService {
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
       { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
       { field: 'possibleAddress', header: 'نشانی پیمایش', isSelected: false, readonly: true },
-      { field: 'karbariCode', header: 'کد کاربری', isSelected: false, readonly: false },
+      { field: 'karbariCode', header: 'کاربری', isSelected: false, readonly: false },
       { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: true, readonly: true },
       { field: 'ahadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی', isSelected: false, readonly: true },
       { field: 'possibleAhadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی پیمایش', isSelected: false, readonly: true },
-      { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فصلی', isSelected: false, readonly: false },
-      { field: 'possibleAhadTejariOrFari', header: 'آحاد تجاری/فصلی پیمایش', isSelected: false, readonly: true },
+      { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فرعی', isSelected: false, readonly: false },
+      { field: 'possibleAhadTejariOrFari', header: 'آحاد تجاری/فرعی پیمایش', isSelected: false, readonly: true },
       { field: 'ahadSaierOrAbBaha', header: 'آحاد سایر/آبها', isSelected: false, readonly: true },
       { field: 'possibleSaierOrAbBaha', header: 'سایر/آبها پیمایش', isSelected: false, readonly: false },
       { field: 'counterReaderName', header: 'مامور', isSelected: false, readonly: true },
@@ -394,7 +394,7 @@ export class ReadingReportManagerService {
     console.log(this.readingReportReq);
     if (!this.readingReportReq) {
       console.log(1);
-      
+
       this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
       this.routeTo('wr/rpts/exm/details');
       console.log(2);

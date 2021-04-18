@@ -22,7 +22,7 @@ export class ProfileService {
       { field: 'username', header: 'نام کاربری', isSelected: false, readonly: true },
       { field: 'email', header: 'ایمیل', isSelected: false, readonly: true },
       { field: 'displayName', header: 'نام نمایش', isSelected: false, readonly: true },
-      { field: 'userCode', header: 'کد', isSelected: false, readonly: true }
+      { field: 'userCode', header: 'کد کاربری', isSelected: false, readonly: true }
     ];
   }
   changePassword = (password: IChangePassword) => {

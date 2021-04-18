@@ -107,6 +107,12 @@
   .p-datatable-responsive .p-datatable-tbody>tr>td .p-column-title {
     display: none;
   }
+
+  .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: $pink_500;
+  }
+
 }
 
 @media screen and (max-width: 40rem) {

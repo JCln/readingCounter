@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IFollowUp, IFollowUpHistory } from 'src/app/Interfaces/imanage';
-import { ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
+import { IObjectIteratation, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
@@ -23,15 +23,31 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     { field: 'trackStatusTitle', header: 'وضعیت' },
     { field: 'hasDetails', header: 'جزئیات' },
   ]
+  _descView = (): IObjectIteratation[] => {
+    return [
+      { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, readonly: true },
+      { field: 'listNumber', header: 'لیست ', isSelected: true, readonly: true },
+      { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, readonly: true },
+      { field: 'fromDate', header: 'از ', isSelected: true, readonly: true },
+      { field: 'toDate', header: 'تا ', isSelected: true, readonly: true },
+      { field: 'overallQuantity', header: 'کل تعداد ', isSelected: true, readonly: true },
+      { field: 'itemQuantity', header: 'تعداد ', isSelected: true, readonly: true },
+      { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, readonly: true },
+      { field: 'year', header: 'سال', isSelected: true, readonly: true }
+    ];
+  }
 
+  _showDesc: IObjectIteratation[] = [];
   canShowGraph: boolean = false;
   showInOrderTo: ISearchInOrderTo[] = [
     {
-      title: 'جدول',
+      title: 'گراف',
       isSelected: true
     },
     {
-      title: 'گراف',
+      title: 'جدول',
       isSelected: false
     }
   ]
@@ -46,19 +62,6 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     private interactionService: InteractionService
   ) { }
 
-  getDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.trackingManagerService.getFollowUpSource(this.trackNumber).subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        })
-      })
-    } catch {
-      console.error(e => e);
-    }
-  }
   toPreStatus = () => {
     this.trackingManagerService.backToConfirmDialog(this.trackNumber);
   }
@@ -67,9 +70,10 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.getDataSource();
+    this.dataSource = await this.trackingManagerService.getFollowUpSource(this.trackNumber);
     this.changeHsty = this.dataSource.changeHistory;
     this.closeTabService.saveDataForFollowUp = this.dataSource;
+    this.insertToDesc();
   }
   ngOnInit() {
     this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
@@ -94,5 +98,8 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refreshTable = () => {
     this.classWrapper(true);
+  }
+  insertToDesc = () => {
+    this._showDesc = this._descView();
   }
 }
