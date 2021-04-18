@@ -4,6 +4,7 @@ import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-prfm-res',
@@ -20,7 +21,8 @@ export class PrfmResComponent implements OnInit {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private readingReportManagerService: ReadingReportManagerService,
-    public outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService,
+    private utilsService: UtilsService
   ) {
   }
 
@@ -37,7 +39,7 @@ export class PrfmResComponent implements OnInit {
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRAnalyzeByParamManager();
     console.log(this.dataSource);
-    
+    this.setGetRanges();
     this.insertSelectedColumns();
   }
   ngOnInit(): void {
@@ -56,6 +58,16 @@ export class PrfmResComponent implements OnInit {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-
+  private setGetRanges = () => {
+    this.dataSource.forEach(item => {
+      item.average = parseFloat(this.utilsService.getRange(item.average));
+      item.max = parseFloat(this.utilsService.getRange(item.max));
+      item.median = parseFloat(this.utilsService.getRange(item.median));
+      item.min = parseFloat(this.utilsService.getRange(item.min));
+      item.mode = parseFloat(this.utilsService.getRange(item.mode));
+      item.variance = parseFloat(this.utilsService.getRange(item.variance));
+      item.standardDeviation = parseFloat(this.utilsService.getRange(item.standardDeviation));
+    })
+  }
 
 }

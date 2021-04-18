@@ -102,7 +102,7 @@ export class DashboardService {
     a.push(item.min);
     a.push(item.max);
     a.push(item.average);
-    a.push(item.variance);
+    // a.push(item.variance);
     a.push(item.standardDeviation);
     a.push(item.median);
     a.push(item.mode);
@@ -110,12 +110,13 @@ export class DashboardService {
     return a;
   }
   getElementOfArrOfObjects = (sth: IDashboardReadDaily[]): any[] => {
-    console.log(sth);
-
     let a = [];
     sth.forEach((item: IDashboardReadDaily) => {
-      a.push(item.count);
+      a.push(item.count, item.hint, item.period);
     })
+    // a.push({ label: [item.hint, item.period] })
+    // console.log(a);
+
     return a;
   }
 }

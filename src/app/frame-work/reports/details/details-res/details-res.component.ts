@@ -39,10 +39,7 @@ export class DetailsResComponent implements OnInit {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRDetailsManager();
-    if (!this.dataSource.length) {
-      this.readingReportManagerService.emptyMessage();
-      return;
-    }
+    this.insertSelectedColumns();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
   }
@@ -53,7 +50,6 @@ export class DetailsResComponent implements OnInit {
   }
   ngOnInit(): void {
     this.connectToServer();
-    this.insertSelectedColumns();
   }
   refreshTable = () => {
     this.ngOnInit();

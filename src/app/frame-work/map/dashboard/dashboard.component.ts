@@ -103,47 +103,7 @@ export class DashboardComponent implements OnInit {
     '41', '42', '43', '44', '45', '46', '47', '48', '49', '50',
     '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'
   ];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      xAxes: [{}],
-      yAxes: [
-        {
-          id: 'y-axis-0',
-          position: 'left',
-        },
-        {
-          id: 'y-axis-1',
-          position: 'right',
-          gridLines: {
-            color: 'rgb(14, 76, 146)',
-          },
-          ticks: {
-            fontColor: 'rgb(14, 76, 146)',
-          }
-        }
-      ]
-    },
-    annotation: {
-      annotations: [
-        {
-          type: 'line',
-          mode: 'vertical',
-          scaleID: 'x-axis-0',
-          value: 'March',
-          // borderColor: 'orange',
-          borderWidth: 2,
-          label: {
-            enabled: true,
-            // fontColor: 'orange',
-            content: 'LineAnno'
-          }
-        },
-      ],
-    },
-  };
+  public lineChartOptions: (ChartOptions & { annotation: any });
   public lineChartColors: Color[] = [
     // { // grey
     //   backgroundColor: 'rgba(148,159,177,0.2)',
@@ -193,7 +153,58 @@ export class DashboardComponent implements OnInit {
   }
   addToLineChart = () => {
     const temp = this.dashboardService.getElementOfArrOfObjects(this.readDaily);
-    this.lineChartData = [{ data: temp }];
+    console.log(temp);
+    this.lineChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        // We use this empty structure as a placeholder for dynamic theming.
+        xAxes: [{}],
+        yAxes: [
+          {
+            id: 'y-axis-0',
+            position: 'left',
+          },
+          {
+            id: 'y-axis-1',
+            position: 'right',
+            gridLines: {
+              color: 'rgb(14, 76, 146)',
+            },
+            ticks: {
+              fontColor: 'rgb(14, 76, 146)',
+            }
+          }
+        ]
+      },
+      annotation: {
+        annotations: [
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-0',
+            value: 'March',
+            // borderColor: 'orange',
+            borderWidth: 2,
+            label: {
+              enabled: true,
+              // fontColor: 'orange',
+              content: 'LineAnno'
+            }
+          },
+        ],
+      },
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem, data) {
+            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label;
+            return datasetLabel;
+          }
+        }
+
+      }
+    }
+    this.lineChartData = [{ data: temp, label: 'کارکرد' }];//label: this.readDaily.hint
     this.progressiveLineChart();
   }
   progressiveLineChart = () => {

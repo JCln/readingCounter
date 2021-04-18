@@ -92,17 +92,17 @@ export class OutputManagerService {
     doc.save('product.pdf');
   }
 
-  exportExcel(dataSource: any) {
+  exportExcel(dataSource: any, fileName: string) {
     const worksheet = XLSX.utils.json_to_sheet(dataSource);
     const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, "products", '.xlsx');
+    this.saveAsExcelFile(excelBuffer, fileName, '.xlsx');
   }
-  exportCSV(dataSource: any) {
+  exportCSV(dataSource: any, fileName: string) {
     const worksheet = XLSX.utils.json_to_sheet(dataSource);
     const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, "products", '.csv');
+    this.saveAsExcelFile(excelBuffer, fileName, '.csv');
   }
   saveAsExcelFile(buffer: any, fileName: string, EXCEL_EXTENSION: string): void {
     import("file-saver").then(FileSaver => {

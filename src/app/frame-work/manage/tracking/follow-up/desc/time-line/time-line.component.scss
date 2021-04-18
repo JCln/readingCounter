@@ -8,6 +8,7 @@
   margin-top: $font_xs;
   background: $gray_100;
   padding: $font_xs 0.25rem;
+  border-radius: $border_5;
 }
 
 .card {
@@ -21,13 +22,13 @@
 
 ._number {
   position: absolute;
-  right: $font_xs;
+  left: $font_xs;
   top: -$font_xs;
   background: $blue_400;
   color: $white;
-  padding: $font_xxs;
+  padding: $font_05;
   border-radius: $border_5;
-  font-size: $font_m;
+  font-size: $font_l;
   font-weight: 600;
 }
 

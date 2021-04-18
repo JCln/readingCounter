@@ -1,7 +1,7 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
     [filterDelay]="0" dir="rtl"
-    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']"
+   
     styleClass="p-datatable-responsive" #dt dataKey="id" editMode="row">
 
     <ng-template pTemplate="caption">
@@ -125,9 +125,9 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" let-columns>
+    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
         <tr>
-            <td [attr.colspan]="columns.length">
+            <td [attr.colspan]="dataSource.length">
                 موردی پیدا نشد
             </td>
         </tr>

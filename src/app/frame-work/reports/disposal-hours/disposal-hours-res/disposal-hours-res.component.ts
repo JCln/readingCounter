@@ -30,10 +30,6 @@ export class DisposalHoursResComponent implements OnInit {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRDisposalHoursManager();
-    if (!this.dataSource.length) {
-      this.readingReportManagerService.emptyMessage();
-      return;
-    }
   }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnSelectedRRDisposalHours();

@@ -36,8 +36,8 @@ export class ReadingReportManagerService {
   columnRRAnalyzeByParam = (): IObjectIteratation[] => {
     return [
       { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: false },
-      { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true, readonly: false },
-      { field: 'regionTitle', header: 'منطقه', isSelected: true, readonly: false },
+      { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: false, readonly: false },
+      { field: 'regionTitle', header: 'منطقه', isSelected: false, readonly: false },
       { field: 'statusTitle', header: 'وضعیت', isSelected: true, readonly: false },
       { field: 'min', header: 'min', isSelected: true, readonly: false },
       { field: 'max', header: 'max', isSelected: true, readonly: false },
@@ -86,7 +86,7 @@ export class ReadingReportManagerService {
       { field: 'radif', header: 'ردیف', isSelected: true, readonly: true },
       { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: false },
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
-      { field: 'address', header: 'نشانی', isSelected: true, readonly: true },
+      { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
       { field: 'possibleAddress', header: 'نشانی پیمایش', isSelected: false, readonly: true },
       { field: 'karbariCode', header: 'کد کاربری', isSelected: false, readonly: false },
       { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: true, readonly: true },
@@ -111,7 +111,7 @@ export class ReadingReportManagerService {
       { field: 'radif', header: 'ردیف', isSelected: true, readonly: true },
       { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: false },
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
-      { field: 'address', header: 'نشانی', isSelected: true, readonly: true },
+      { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
       { field: 'possibleAddress', header: 'نشانی پیمایش', isSelected: false, readonly: true },
       { field: 'karbariCode', header: 'کد کاربری', isSelected: false, readonly: false },
       { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: true, readonly: true },
@@ -192,8 +192,8 @@ export class ReadingReportManagerService {
   // CALL APIs
   postRRAnalyzeByParamManager = (): Promise<any> => {
     if (!this.rRAnalyzeReq) {
-      this.routeTo('wr/rpts/anlz/prfm');
       this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/anlz/prfm');
       return;
     }
     try {
@@ -210,9 +210,16 @@ export class ReadingReportManagerService {
 
   }
   postRRMasterManager = (): Promise<any> => {
+    if (!this.readingReportReq) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/exm/master');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRMasterManager(this.readingReportReq).subscribe((res) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -222,9 +229,16 @@ export class ReadingReportManagerService {
 
   }
   postRRTraverseDiffrentialManager = (): Promise<any> => {
+    if (!this.rRTraverseDiffrential) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/mam/trvch');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRTraverseDifferentialManager(this.rRTraverseDiffrential).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -233,9 +247,16 @@ export class ReadingReportManagerService {
     }
   }
   postRRTraverseManager = (): Promise<any> => {
+    if (!this.readingReportReq) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/mam/trv');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRTraverseManager(this.readingReportReq).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -244,9 +265,16 @@ export class ReadingReportManagerService {
     }
   }
   postRRKarkardManager = (): Promise<any> => {
+    if (!this.readingReportReq) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/mam/karkard');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRKarkardManager(this.readingReportReq).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -255,9 +283,16 @@ export class ReadingReportManagerService {
     }
   }
   postRRTraverseDifferentialChartManager = (): Promise<any> => {
+    if (!this.rRTraverseDiffrential) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/mam/trvch');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRTraverseDifferentialChartManager(this.rRTraverseDiffrential).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -266,9 +301,16 @@ export class ReadingReportManagerService {
     }
   }
   postRRKarkardChartManager = (): Promise<any> => {
+    if (!this.readingReportReq) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/mam/karkard');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRKarkardChartManager(this.readingReportReq).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -277,9 +319,16 @@ export class ReadingReportManagerService {
     }
   }
   postRRDisposalChartManager = (): Promise<any> => {
+    if (!this.readingReportReq) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/mam/dh');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRDispersalChartManager(this.readingReportReq).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -288,9 +337,16 @@ export class ReadingReportManagerService {
     }
   }
   postRRKarkardDailyManager = (): Promise<any> => {
+    if (!this.readingReportReq) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/mam/karkardDaily');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRKarkardDailyManager(this.readingReportReq).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -299,9 +355,16 @@ export class ReadingReportManagerService {
     }
   }
   postRRGISManager = (): Promise<any> => {
+    if (!this.readingReportGISReq) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/mam/gis');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRGISManager(this.readingReportGISReq).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -310,9 +373,16 @@ export class ReadingReportManagerService {
     }
   }
   postRRDisposalHoursManager = (): Promise<any> => {
+    if (!this.readingReportReq) {
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/mam/dh');
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRDisposalHoursanager(this.readingReportReq).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });
@@ -321,9 +391,20 @@ export class ReadingReportManagerService {
     }
   }
   postRRDetailsManager = (): Promise<any> => {
+    console.log(this.readingReportReq);
+    if (!this.readingReportReq) {
+      console.log(1);
+      
+      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.routeTo('wr/rpts/exm/details');
+      console.log(2);
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postRRDetailsManager(this.readingReportReq).subscribe((res: any) => {
+          if (this.utilsService.isNull(res))
+            this.emptyMessage();
           resolve(res)
         })
       });

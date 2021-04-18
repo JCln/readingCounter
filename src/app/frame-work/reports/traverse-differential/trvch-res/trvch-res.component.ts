@@ -52,10 +52,6 @@ export class TrvchResComponent implements OnInit, OnDestroy {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRTraverseDiffrentialManager();
-    if (!this.dataSource.length) {
-      this.readingReportManagerService.emptyMessage();
-      return;
-    }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.insertSelectedColumns();
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType, RadialChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { IAnalyzeRes } from 'src/app/Interfaces/imanage';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 
@@ -10,7 +11,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   styleUrls: ['./analyze.component.scss']
 })
 export class AnalyzeComponent implements OnInit {
-  analyzePerformance: any[] = [];//shuold be analyzePerformance interface
+  analyzePerformance: IAnalyzeRes[] = [];//shuold be analyzePerformance interface
 
   private defaultOptions = {
     fontFamily: 'Blotus',
@@ -27,7 +28,7 @@ export class AnalyzeComponent implements OnInit {
       labels: this.defaultOptions
     },
   };
-  public barChartLabels: Label[] = ['min', 'max', 'میانگین', 'واریانس', 'انحراف معیار', 'میانی', 'مد'];
+  public barChartLabels: Label[] = ['min', 'max', 'میانگین', 'انحراف معیار', 'میانی', 'مد'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
@@ -43,7 +44,7 @@ export class AnalyzeComponent implements OnInit {
       labels: this.defaultOptions
     },
   };
-  public radarChartLabels: Label[] = ['min', 'max', 'میانگین', 'واریانس', 'انحراف معیار', 'میانی', 'مد'];
+  public radarChartLabels: Label[] = ['min', 'max', 'میانگین', 'انحراف معیار', 'میانی', 'مد'];
 
   public radarChartData: ChartDataSets[] = [];
   public radarChartType: ChartType = 'radar';
@@ -62,9 +63,8 @@ export class AnalyzeComponent implements OnInit {
   assignToChart = () => {
     let temp = [];
     this.analyzePerformance.forEach((item, index) => {
-      temp.push({ data: this.dashboardService.getElementOfArrOfObjectsAnalyze(this.analyzePerformance[index]), label: `شماره ${index}`, stack: 'a' });
+      temp.push({ data: this.dashboardService.getElementOfArrOfObjectsAnalyze(this.analyzePerformance[index]), label: item.statusTitle, stack: 'a' });
     })
-    console.log(temp);
 
     this.radarChartData = temp;
     this.barChartData = temp;

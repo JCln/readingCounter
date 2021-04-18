@@ -44,10 +44,6 @@ export class TraverseResComponent implements OnInit {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRTraverseManager();
-    if (!this.dataSource.length) {
-      this.readingReportManagerService.emptyMessage();
-      return;
-    }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
   }

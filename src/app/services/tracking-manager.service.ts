@@ -182,7 +182,7 @@ export class TrackingManagerService {
         this.utilsService.snackBarMessageSuccess(res.message);
     })
   }
-  getAllZoneTitles = () => { // convert to idictionarymanger interface
+  getAllZoneTitles = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
 

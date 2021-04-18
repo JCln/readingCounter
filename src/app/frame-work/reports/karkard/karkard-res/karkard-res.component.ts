@@ -50,10 +50,6 @@ export class KarkardResComponent implements OnInit, OnDestroy {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRKarkardManager();
-    if (!this.dataSource.length) {
-      this.readingReportManagerService.emptyMessage();
-      return;
-    }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
   }

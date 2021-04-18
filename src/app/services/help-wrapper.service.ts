@@ -137,7 +137,7 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading2.JPG';
       return;
     }
-    else if (currentRoute.includes('exm/details' || 'mam/trv' || 'mam/trvch' || 'mam/karkard' || 'mam/karkardDaily' || 'mam/dh' || 'mam/gis')) {
+    else if (currentRoute.includes('exm/details') || currentRoute.includes('mam/trv') || currentRoute.includes('mam/trvch') || currentRoute.includes('mam/karkard') || currentRoute.includes('mam/karkardDaily') || currentRoute.includes('mam/dh') || currentRoute.includes('mam/gis')) {
       this.messageToShow.title = 'گزارشات';
       this.messageToShow.messageOne = 'این بخش جهت گزارش گیری از بخش هایی مانند کارکرد روزانه، پیمایشات و .. میباشد. ';
       this.messageToShow.imgOne = 'assets/imgs/help/rr/rr1.JPG';

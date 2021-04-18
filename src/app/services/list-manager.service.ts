@@ -5,8 +5,6 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
-
-
 @Injectable({
   providedIn: 'root'
 })

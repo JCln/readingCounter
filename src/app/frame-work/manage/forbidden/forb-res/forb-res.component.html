@@ -44,11 +44,11 @@
 
         </tr>
     </ng-template>
-    <!-- <ng-template pTemplate="emptymessage" let-columns>
+    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
         <tr>
-            <td [attr.colspan]="columns.length">
+            <td [attr.colspan]="dataSource.length">
                 موردی پیدا نشد
             </td>
         </tr>
-    </ng-template> -->
+    </ng-template>
 </p-table>

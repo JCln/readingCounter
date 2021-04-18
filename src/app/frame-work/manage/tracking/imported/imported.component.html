@@ -1,7 +1,6 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl" dataKey="innerTable"
-    [globalFilterFields]="['trackNumber','listNumber','insertDateJalali','zoneId','zoneTitle','isBazdid','year','isRoosta','fromEshterak','toEshterak','fromDate','toDate','itemQuantity','alalHesabPercent','imagePercent','hasPreNumber','displayBillId','displayRadif']">
+    [filterDelay]="0" dir="rtl" dataKey="innerTable">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -13,11 +12,11 @@
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>
-                <i (click)="outputManagerService.exportExcel(dataSource)"
+                <i (click)="outputManagerService.exportExcel(dataSource, 'imported')"
                     class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>
-                <i (click)="outputManagerService.exportCSV(dataSource)"
+                <i (click)="outputManagerService.exportCSV(dataSource, 'imported')"
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
@@ -90,9 +89,9 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="emptymessage" let-columns>
+    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
         <tr>
-            <td [attr.colspan]="columns.length">
+            <td [attr.colspan]="dataSource.length">
                 موردی پیدا نشد
             </td>
         </tr>
