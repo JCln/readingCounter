@@ -136,3 +136,24 @@ export interface IDashboardReadDaily {
     period: string,
     hint: string
 }
+export interface IOffloadModifyReq {
+    id: string,
+    modifyType: number,
+    checkedItems: number[],
+    counterStateId: number,
+    counterNumber: number,
+    jalaliDay: string,
+    description: string
+}
+export interface IOffloadModifyType {
+    id: number,
+    modifyeType: ENOffloadModifyType
+}
+export enum ENOffloadModifyType {
+    callAnnounce = 'اعلام تلفنی',
+    blueScreenLight = 'اشتباه در قرائت',
+    intenseLight = 'نور صفحه آبی',
+    longDistance = 'نور زیاد',
+    counterStatesNotMatch = 'از فاصله دور',
+    wrongReading = 'عدم تطابق رقم فعلی با رقم کنتور'
+};

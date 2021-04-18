@@ -439,9 +439,7 @@ export class ReadingReportManagerService {
     });
   }
   getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId));
-    });
+    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   getTraverseDiffrentialDictionary = (): Promise<any> => {
     return new Promise((resolve) => {

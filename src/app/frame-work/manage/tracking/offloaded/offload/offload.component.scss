@@ -1,0 +1,225 @@
+@import '../../../../../../assets/variable';
+@import '../../../../../../assets/input.scss';
+@import '../../../../../../assets/button.scss';
+
+
+.main {
+  direction: rtl;
+  background: $gray_100;
+  box-shadow: 1px 1px 8px 4px $gray_400;
+  padding: $font_05;
+  border-radius: $border_15;
+  min-height: 35rem;
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
+  gap: $font_05;
+  align-items: center;
+}
+
+section._container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  margin-top: $font_05;
+  gap: $font_05;
+}
+
+.__checks,
+.__slider {
+  background: $white;
+  border-radius: $border_15;
+  padding: $font_xs $font_05;
+}
+
+.__checks {
+  grid-column: 1 / 2;
+}
+
+.__slider {
+  grid-column: 2/span 7;
+}
+
+._key,
+._value {
+  font-size: $font_m;
+  font-weight: 800;
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: $blue_700;
+  text-align: center;
+  width: 100%;
+}
+
+.btn_1 {
+  color: $white;
+  background-color: $orange_500;
+}
+
+h2 {
+  color: $gray_600;
+}
+
+footer {
+  margin-top: $font_2;
+  text-align: center;
+}
+
+::ng-deep {
+  .mat-select-arrow {
+    color: $gray_100;
+  }
+
+  .mat-select {
+    text-align: center;
+  }
+
+  .mat-select-value {
+    font-family: $font_family;
+    font-size: $font_s;
+    color: $gray_100;
+    font-weight: 600;
+  }
+
+  .mat-select-panel .mat-option {
+    font-size: 1.2rem;
+    line-height: 3em;
+    height: 3em;
+    text-align: right;
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .mat-option-text {
+    font-size: $font_s;
+    font-weight: 600;
+    color: $blue_800;
+  }
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 $font_05;
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: $blue_gray_700;
+  }
+}
+
+.order_by {
+  display: flex;
+  margin: $font_xs;
+}
+
+hr {
+  margin: 0 4rem;
+  background-color: $blue_700;
+  height: .2rem;
+  margin-bottom: $font_xxs;
+}
+
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: $gray_600;
+  margin: 0 2rem;
+}
+
+::ng-deep {
+  .mat-radio-label-content {
+    padding-right: $font_05 !important;
+    color: $blue_gray_300;
+  }
+}
+
+[hidden] {
+  display: none;
+}
+
+// slider & img
+
+._main_audio {
+  display: grid;
+  direction: rtl;
+  gap: .2rem;
+}
+
+._main_img {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+  justify-content: center;
+  direction: rtl;
+  gap: .2rem;
+}
+
+.img_wrapper {
+  border-radius: $border_15;
+  border: 2px solid $blue_gray_300;
+  position: relative;
+  margin: .4rem 0;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 1px 2px $blue_gray_300;
+  }
+}
+
+.__img_bound {
+  height: 9.5rem;
+  width: 9.5rem;
+  padding: $font_05;
+  margin: auto;
+}
+
+.__img_counter {
+  position: absolute;
+  top: -$font_s;
+  right: $font_05;
+  background-color: $blue_600;
+  color: $white;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: $border_5;
+  font-weight: 600;
+}
+
+i {
+  border-radius: $border_50;
+  padding: $font_s;
+  font-size: $font_m;
+  border: 1px solid $blue_gray_300;
+  color: $blue_gray_300;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 2px 3px $blue_gray_300;
+  }
+}
+
+img {
+  border-radius: $border_5;
+}
+
+hr {
+  margin-bottom: $font_xs;
+}
+
+.not_found_header {
+  color: $blue_600;
+}

@@ -28,11 +28,26 @@ export class DownloadManagerService {
   ) { }
 
   // calls
-  downloadFileInfo = (targetId: string): Observable<any> => {
-    return this.interfaceManagerService.downloadFileInfo(targetId);
+  downloadFileInfo = (targetId: string): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.downloadFileInfo(targetId).subscribe(res => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+
+    }
   }
-  downloadForbiddenFileInfo = (targetId: string): Observable<any> => {
-    return this.interfaceManagerService.downloadForbiddenFileInfo(targetId);
+  downloadForbiddenFileInfo = (targetId: string): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        resolve(this.interfaceManagerService.downloadForbiddenFileInfo(targetId))
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   downloadFile = (fileRepositoryId: string): Observable<any> => {
     return this.interfaceManagerService.downloadFile(fileRepositoryId);

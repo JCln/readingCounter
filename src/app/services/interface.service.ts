@@ -60,4 +60,9 @@ export class InterfaceService {
     return this.mainService.POST('V1/Tracking/Dashboard/Analyze/Performance');
   }
 
+  /* OFFLOAD */
+  postOffloadModify = (): Observable<any> => {
+    return this.mainService.POST('V1/OffLoad/Modify');
+  }
+
 }

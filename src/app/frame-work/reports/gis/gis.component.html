@@ -50,7 +50,7 @@
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2" [hidden]="!readingReportGISReq.isCounterState || !counterStateDictionary">
+                <div class="input_2" [hidden]="!readingReportGISReq.isCounterState || !counterStateDictionary.length">
                     <div class="_key">وضعیت کنتور</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.counterStateId"
                         name="counterStateId">

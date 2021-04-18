@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -22,7 +23,9 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private trackingManagerService: TrackingManagerService,
-    public outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService,
+    private router: Router,
+    public route: ActivatedRoute
   ) {
   }
 
@@ -95,5 +98,9 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  routeToOffloadModify = (dataSource: ITracking) => {
+    this.router.navigate(['./offloadMfy', dataSource.id], { relativeTo: this.route.parent })
+    // this.trackingManagerService.routeTo('./offloadMfy', dataSource.id);
   }
 }

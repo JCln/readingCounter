@@ -54,6 +54,10 @@ export enum ENSnackBarTimes {
 export enum ENStorageColumnKey {
     all_users_session = 'all_users_session'
 }
+export enum ENTrueFalse {
+    true = 'true',
+    false = 'false'
+}
 export interface IResponses {
     isValid: boolean
     message: string;

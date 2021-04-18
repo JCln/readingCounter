@@ -6,6 +6,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
+import { OffloadModify } from './../classes/offload-modify-type';
 import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
@@ -80,6 +81,25 @@ export class TrackingManagerService {
       { field: 'displayRadif', header: 'ردیف', isSelected: false },
       { field: 'counterReaderName', header: 'مامور', isSelected: false }
     ];
+  }
+  getOffloadModifyType = (): OffloadModify[] => {
+    return [
+      OffloadModify.callAnnounce,
+      OffloadModify.wrongReading
+    ]
+  }
+  getOffloadLowQualityPicture = (): OffloadModify[] => {
+    return [
+      OffloadModify.blueScreenLight,
+      OffloadModify.longDistance,
+      OffloadModify.intenseLight
+    ]
+  }
+  getOffloadHighQualityPicture = (): OffloadModify[] => {
+    return [
+      OffloadModify.counterStatesNotMatch,
+      OffloadModify.wrongReading
+    ]
   }
 
   constructor(
@@ -193,8 +213,11 @@ export class TrackingManagerService {
         this.utilsService.snackBarMessageSuccess(res.message);
     })
   }
-  getAllZoneTitles = (): Promise<any> => {
+  getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
+  }
+  getCounterStatesDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
 
   // imported service control
@@ -217,4 +240,16 @@ export class TrackingManagerService {
   backToParent = () => {
     this.utilsService.routeTo('/wr/m/track/fwu');
   }
+  routeTo = (route: string, UUID: string) => {
+    this.utilsService.routeToByParams(route, UUID);
+  }
+  selectedItems = (_selectors: any[]): any[] => {
+    const a = [];
+    _selectors.filter(items => {
+      if (items.isSelected)
+        a.push(items.id)
+    })
+    return a;
+  }
+
 }

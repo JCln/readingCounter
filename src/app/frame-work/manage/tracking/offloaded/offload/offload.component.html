@@ -1,0 +1,85 @@
+<main class="main">
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <section class="content">
+            <div class="input_2">
+                <div class="_key">ناحیه</div>
+                <mat-select placeholder="انتخاب مورد" [(ngModel)]="zoneId" name="zoneId">
+                    <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
+                        (click)="getCounterStateByZoneId()">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <div class="input_2" [hidden]="!counterStatesDictionary.length">
+                <div class="_key">وضعیت کنتور</div>
+                <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.counterStateId"
+                    name="counterStateId">
+                    <mat-option *ngFor="let truefalse of counterStatesDictionary" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <div class="input_2">
+                <div class="_key">نوع اصلاح</div>
+                <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.modifyType" name="modifyType">
+                    <mat-option *ngFor="let truefalse of modifyType" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <div class="input_2">
+                <div class="_key">از</div>
+                <div class="_value">
+                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                    </app-date-jalali>
+                </div>
+            </div>
+        </section>
+
+        <section class="_container">
+            <div class="__checks">
+                <h3>عکس بی کیفیت</h3>
+                <div class="check_boxes" *ngFor="let item of lowQualityPic">
+                    <mat-checkbox name="hasPreNumber" [(ngModel)]="item.isSelected">
+                        {{item.title}}
+                    </mat-checkbox>
+                </div>
+                <h3>عکس با کیفیت</h3>
+                <div class="check_boxes" *ngFor="let item of highQualityPic; index as i">
+                    <mat-checkbox name="low{{i+1}}" [(ngModel)]="item.isSelected">
+                        {{item.title}}
+                    </mat-checkbox>
+                </div>
+            </div>
+            <div class="__slider">
+                <div class="_main_img">
+                    <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
+                        <div class="__img_counter">{{i+1}}</div>
+
+                        <!-- tooltip -->
+                        <div *ngIf="!testLoadImage[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
+                        <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
+                        <!--   -->
+                        <div *ngIf="!testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)"
+                            class="__img_bound">
+                            <img src="assets/imgs/soundvid/2.png" alt="whatever">
+                        </div>
+                    </div>
+                    <div class="not_found_header" *ngIf="!imageFiles.length">
+                        <h2>تصویری پیدا نشد</h2>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <button *ngIf="zoneId" type="submit" class="btn_1">
+                test text
+                <i class="pi pi-list"></i>
+            </button>
+
+        </footer>
+    </form>
+</main>
+<router-outlet></router-outlet>
