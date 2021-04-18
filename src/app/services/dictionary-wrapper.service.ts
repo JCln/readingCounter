@@ -163,7 +163,7 @@ export class DictionaryWrapperService {
         })
       });
     }
-    return this.counterStateDictionary;
+    return this.counterStateByZoneIdDictionary;
   }
   getPeriodKindDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.periodKindDictionary)) {

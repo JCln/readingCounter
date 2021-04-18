@@ -394,7 +394,7 @@ export class ReadingReportManagerService {
     console.log(this.readingReportReq);
     if (!this.readingReportReq) {
       console.log(1);
-      
+
       this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
       this.routeTo('wr/rpts/exm/details');
       console.log(2);
@@ -439,9 +439,7 @@ export class ReadingReportManagerService {
     });
   }
   getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId));
-    });
+    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   getTraverseDiffrentialDictionary = (): Promise<any> => {
     return new Promise((resolve) => {

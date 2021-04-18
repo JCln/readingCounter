@@ -1,4 +1,5 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+<p-table *ngIf="route.children.length === 0" [columns]="selectedColumns" [value]="dataSource" [paginator]="true"
+    [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
     [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
 
@@ -36,13 +37,11 @@
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
                 <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
         </tr>
@@ -65,15 +64,10 @@
                 </i>
             </td>
             <td>
-                <i class="tooltip p_icons pi pi-pencil">
+                <i (click)="routeToOffloadModify(dataSource)" class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح لیست</div>
                 </i>
             </td>
-            <!-- <td (click)="toPreStatus(changeHsty)">
-                <i class="tooltip p_icons pi pi-step-backward">
-                    <div class="tooltip_text">بازگشت به قبلی</div>
-                </i>
-            </td> -->
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
@@ -84,3 +78,4 @@
         </tr>
     </ng-template>
 </p-table>
+<router-outlet></router-outlet>

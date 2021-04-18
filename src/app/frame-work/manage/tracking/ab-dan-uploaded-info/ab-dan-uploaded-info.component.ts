@@ -50,33 +50,11 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
     const checkBoolean = this.route.snapshot.paramMap.get('isForbidden');
     this.targetFile.isForbidden = checkBoolean ? checkBoolean.toLocaleLowerCase() === 'true' : false;
   }
-  private getOnOffLoadData = (): Promise<IOnOffLoad[]> => {
-    try {
-      return new Promise((resolve) => {
-        this.downloadManagerService.downloadFileInfo(this.targetFile.id).subscribe(res =>
-          resolve(res)
-        );
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  private getForbiddenData = (): Promise<IOnOffLoad[]> => {
-    try {
-      return new Promise((resolve) => {
-        this.downloadManagerService.downloadForbiddenFileInfo(this.targetFile.id).subscribe(res =>
-          resolve(res)
-        );
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
   private useAPI = (): Promise<any> => {
     return new Promise((resolve) => {
       this.targetFile.isForbidden ?
-        resolve(this.getForbiddenData()) :
-        resolve(this.getOnOffLoadData());
+        resolve(this.downloadManagerService.downloadForbiddenFileInfo(this.targetFile.id)) :
+        resolve(this.downloadManagerService.downloadFileInfo(this.targetFile.id));
     });
   }
   getDownloadListInfo = () => {

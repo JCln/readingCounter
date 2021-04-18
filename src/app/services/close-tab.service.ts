@@ -58,6 +58,7 @@ export class CloseTabService {
   saveDataForTrackFinished: any;
   saveDataForFollowUp: any;
   saveDataForLastStates: any;
+  saveDataForOffloadModify: any;
   // 
   // import dynamic
   saveDataForImportDynamic: any;
@@ -229,6 +230,10 @@ export class CloseTabService {
         break;
     }
     // listed all of the dynamic routes
+    if (url.includes('/wr/m/track/offloaded/offloadMfy/')) {
+      this.saveDataForOffloadModify = '';
+      return;
+    }
     if (url.includes('/wr/m/track/fwu')) {
       this.saveDataForFollowUp = '';
       return;
