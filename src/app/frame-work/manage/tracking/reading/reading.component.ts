@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { IResponses } from 'src/app/Interfaces/ioverall-config';
@@ -30,14 +31,15 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     private trackingManagerService: TrackingManagerService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
-    public outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService,
+    private router: Router
   ) { }
 
   routeToLMPayDay = (row: ITracking) => {
     this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
   }
   routeToLMAll = (row: ITracking) => {
-    this.utilsService.routeToByParams('wr/m/l/all', row.id);
+    this.router.navigate(['wr/m/l/all', false, row.id]);
   }
   rowToImported = (row: ITracking, desc: string) => {
     this.trackingManagerService.migrateDataRowToImported(row.id, desc).subscribe((res: IResponses) => {

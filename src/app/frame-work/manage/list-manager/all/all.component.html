@@ -48,9 +48,14 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="downloadOutputDBF(dataSource)">
+            <td *ngIf="!isModify" (click)="downloadOutputDBF(dataSource)">
                 <i class="tooltip p_icons fas fa-camera">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                </i>
+            </td>
+            <td *ngIf="isModify">
+                <i (click)="routeToOffload(dataSource)" class="tooltip p_icons fas fa-camera">
+                    <div class="tooltip_text_right">اصلاح لیست</div>
                 </i>
             </td>
         </tr>

@@ -100,7 +100,6 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   routeToOffloadModify = (dataSource: ITracking) => {
-    this.router.navigate(['./offloadMfy', dataSource.id], { relativeTo: this.route.parent })
-    // this.trackingManagerService.routeTo('./offloadMfy', dataSource.id);
+    this.router.navigate(['wr/m/l/all', true, dataSource.id]);
   }
 }

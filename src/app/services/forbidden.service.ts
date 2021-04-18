@@ -72,7 +72,7 @@ export class ForbiddenService {
     return this.utilsService.getYears();
   }
   routeToWOUI = (UUID: string, isForbidden: boolean) => {
-    this.router.navigate(['wr/m/track/woui', UUID, isForbidden]);
+    this.router.navigate(['wr/m/track/woui', isForbidden, UUID]);
   }
   routeToChild = () => {
     this.utilsService.routeTo('wr/m/fbn/res');

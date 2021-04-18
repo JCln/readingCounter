@@ -113,7 +113,7 @@ export class ListManagerService {
   getQotrDictionary = () => {
     return this.dictionaryWrapperService.getQotrDictionary();
   }
-  getCounterStateDictionary = () => {
+  getCounterStateDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateDictionary();
   }
   getLMPD = (trackNumber: number): Observable<any> => {

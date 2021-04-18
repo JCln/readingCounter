@@ -89,14 +89,14 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     if (this.utilsService.isNull(dRoute))
       return;
     // route query params maps
-    if (dRoute._dynamicRoute.includes('/wr/m/track/woui')) {
-      lastUrlPart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop().substring(0, 5);
-      completeRoutePart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop();
-    }
-    if (dRoute._dynamicRoute.includes('/wr/m/track/woui')) {
-      lastUrlPart = '233';
-      completeRoutePart = '3323'
-    }
+    // if (dRoute._dynamicRoute.includes('/wr/m/track/woui')) {
+    //   lastUrlPart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop().substring(0, 5);
+    //   completeRoutePart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop();
+    // }
+    // if (dRoute._dynamicRoute.includes('/wr/m/track/woui')) {
+    //   lastUrlPart = '233';
+    //   completeRoutePart = '3323'
+    // }
     // route param
     else {
       lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
@@ -143,7 +143,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
         } else {
           if (this.router.url === '/wr/profile') {
             if (!this.DoesTabsHaveThisRouteNow())
-            this.addProfileTab();
+              this.addProfileTab();
           }
           this.addDynamicRoute();
         }

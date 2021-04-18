@@ -14,6 +14,7 @@ import { ListManagerService } from 'src/app/services/list-manager.service';
 })
 export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   trackId: string;
+  isModify: string | boolean;
   subscription: Subscription[] = [];
 
   dataSource: IListManagerAll[] = [];
@@ -56,11 +57,6 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
           dataSource.preCounterStateCode = CounterStateDic.title;
         }
       })
-    });
-  }
-  getCounterStateDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.listManagerService.getCounterStateDictionary());
     });
   }
   convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
@@ -109,7 +105,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.zoneDictionary = await this.getZoneDictionary();
     this.karbariDictionary = await this.getKarbariDictionary();
     this.qotrDictionary = await this.getQotrDictionary();
-    this.counterStateDictionary = await this.getCounterStateDictionary();
+    this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
 
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
     this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
@@ -126,10 +122,16 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectCols = this.listManagerService.columnSelectedLMAll();
     this._selectedColumns = this.customizeSelectedColumns();
   }
+  isFromOffloadPage = () => {
+    this.trackId = this.route.snapshot.paramMap.get('trackingId');
+    this.isModify = this.route.snapshot.paramMap.get('isModify');
+    this.isModify = this.isModify.toLocaleLowerCase() === 'true' ? true : false;
+    console.log(this.isModify);
+  }
   getRouteParams = () => {
     this.subscription.push(this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
-        this.trackId = this.route.snapshot.paramMap.get('trackingId');
+        this.isFromOffloadPage();
         this.classWrapper();
         this.insertSelectedColumns();
       }
@@ -156,7 +158,10 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   downloadOutputDBF = (object: IListManagerAll) => {
-    this.router.navigate(['wr/m/track/woui', object.id, false]);
+    this.router.navigate(['wr/m/track/woui', false, object.id]);
+  }
+  routeToOffload = (object: IListManagerAll) => {
+    this.router.navigate(['wr/m/track/offloaded/offloadMfy', object.id]);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
