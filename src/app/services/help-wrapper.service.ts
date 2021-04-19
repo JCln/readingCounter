@@ -92,8 +92,8 @@ export class HelpWrapperService {
       this.messageToShow.title = 'اطلاعات غیرمجاز';
       this.messageToShow.messageOne = 'کل اطلاعات غیرمجاز در این بخش ثبت میشود. ';
       this.messageToShow.imgOne = '';
-      this.messageToShow.messageTwo = 'اطلاعاتی که توسط مامور(ها) قرائت ثبت شده قابل پیگیری می باشد';
-      this.messageToShow.messageThree = '';
+      this.messageToShow.messageTwo = 'اطلاعاتی که توسط مامورین قرائت ثبت شده قابل پیگیری می باشد.';
+      this.messageToShow.messageThree = 'همچنین درصورتی که عکسی ارسال شده باشد با کلیک برروی آیکن مربوطه قابل مشاهده است.';
       this.messageToShow.imgTwo = '';
       return;
     }

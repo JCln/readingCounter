@@ -61,8 +61,7 @@
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
-                        <app-date-jalali name="fromDate" [(ngModel)]="readingReportReq.fromDate"
-                            (dateJalEvent)="receiveFromDateJalali($event)">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
                         </app-date-jalali>
                     </div>
                 </div>

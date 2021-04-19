@@ -51,9 +51,13 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       return {
         _title: 'مامور(ها)', _dynamicRoute: '/wr/m/l/pd/'
       }
-    if (this.getCurrentDynamicRoute('/wr/m/l/all/'))
+    if (this.getCurrentDynamicRoute('/wr/m/l/all/false/'))
       return {
-        _title: 'قرائت', _dynamicRoute: '/wr/m/l/all/'
+        _title: 'لیست', _dynamicRoute: '/wr/m/l/all/false/'
+      }
+    if (this.getCurrentDynamicRoute('/wr/m/l/all/true/'))
+      return {
+        _title: 'لیست', _dynamicRoute: '/wr/m/l/all/true/'
       }
     if (this.getCurrentDynamicRoute('/wr/mu/edit/'))
       return {
@@ -71,9 +75,17 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       return {
         _title: 'نوبتی', _dynamicRoute: '/wr/m/nob/'
       }
-    if (this.getCurrentDynamicRoute('/wr/m/track/woui/'))
+    if (this.getCurrentDynamicRoute('/wr/m/track/woui/false/'))
       return {
-        _title: 'صوت/تصویر', _dynamicRoute: '/wr/m/track/woui/'
+        _title: 'صوت/تصویر', _dynamicRoute: '/wr/m/track/woui/false/'
+      }
+    if (this.getCurrentDynamicRoute('/wr/m/track/woui/true/'))
+      return {
+        _title: 'اصلاح لیست', _dynamicRoute: '/wr/m/track/woui/true/'
+      }
+    if (this.getCurrentDynamicRoute('/wr/m/track/offloaded/offloadMfy/'))
+      return {
+        _title: 'اصلاح', _dynamicRoute: '/wr/m/track/offloaded/offloadMfy/'
       }
     return null;
   }
@@ -88,24 +100,14 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     dRoute = this.findDynamicRouteStatus();
     if (this.utilsService.isNull(dRoute))
       return;
-    // route query params maps
-    // if (dRoute._dynamicRoute.includes('/wr/m/track/woui')) {
-    //   lastUrlPart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop().substring(0, 5);
-    //   completeRoutePart = this.router.url.slice(0, this.router.url.length - 5).split('/').pop();
-    // }
-    // if (dRoute._dynamicRoute.includes('/wr/m/track/woui')) {
-    //   lastUrlPart = '233';
-    //   completeRoutePart = '3323'
-    // }
-    // route param
     else {
       lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
       completeRoutePart = this.router.url.split('/').pop();
     }
     // console.log(completeRoutePart);
     // console.log(dRoute._dynamicRoute);
+    // console.log(lastUrlPart);
 
-    // console.log(`${dRoute._dynamicRoute}${completeRoutePart}`, `   ${dRoute._title}${lastUrlPart}`);
     const a = {
       route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };

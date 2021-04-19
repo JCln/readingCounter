@@ -37,11 +37,13 @@
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
                 <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
             </th>
+            <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
         </tr>
@@ -64,8 +66,13 @@
                 </i>
             </td>
             <td>
-                <i (click)="routeToOffloadModify(dataSource)" class="tooltip p_icons pi pi-pencil">
-                    <div class="tooltip_text_right">اصلاح لیست</div>
+                <i (click)="routeToOffloadModify(dataSource)" class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده(اصلاح) لیست</div>
+                </i>
+            </td>
+            <td>
+                <i (click)="backToReading(dataSource)" class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
                 </i>
             </td>
         </tr>

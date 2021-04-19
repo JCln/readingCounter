@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CarouselModule } from 'primeng/carousel';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -20,6 +21,7 @@ import { AddRowDirective } from './../directives/add-row.directive';
     MultiSelectModule,
     DropdownModule,
     SliderModule,
+    CarouselModule,
     DynamicDialogModule
   ],
   exports: [
@@ -29,10 +31,9 @@ import { AddRowDirective } from './../directives/add-row.directive';
     MatCheckboxModule,
     MultiSelectModule,
     DropdownModule,
-
+    CarouselModule,
     SliderModule,
     DynamicDialogModule,
-
     AddRowDirective
   ]
 })

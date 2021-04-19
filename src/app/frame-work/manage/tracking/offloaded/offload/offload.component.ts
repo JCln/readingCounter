@@ -27,6 +27,8 @@ export class OffloadComponent implements OnInit {
     description: ''
   }
   dataSource: IOnOffLoad[] = [];
+
+  carouselOptions;
   audioFiles: IOnOffLoad[] = [];
   imageFiles: IOnOffLoad[] = [];
   testLoadImage: any[] = [];
@@ -64,7 +66,7 @@ export class OffloadComponent implements OnInit {
       this.nullSavedSource();
     }
     this.dataSource = await this.downloadManagerService.downloadFileInfo(this.offloadModifyReq.id);
-    console.log(this.dataSource);
+    // console.log(this.dataSource);
 
     this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
     this.downloadManagerService.assignToDataSource(this.dataSource);
@@ -73,9 +75,10 @@ export class OffloadComponent implements OnInit {
     this.modifyType = this.trackingManagerService.getOffloadModifyType();
     this.lowQualityPic = this.trackingManagerService.getOffloadLowQualityPicture();
     this.highQualityPic = this.trackingManagerService.getOffloadHighQualityPicture();
-    console.log(this.modifyType);
-    console.log(this.lowQualityPic);
-    console.log(this.highQualityPic);
+
+    this.imageFiles.forEach((item, i) => {
+      this.getExactImg(item.fileRepositoryId, i);
+    })
 
   }
   ngOnInit() {
@@ -116,8 +119,6 @@ export class OffloadComponent implements OnInit {
       if (res instanceof NavigationEnd) {
         if (res) {
           this.offloadModifyReq.id = this.route.snapshot.paramMap.get('UUID');
-          console.log(this.offloadModifyReq.id);
-
         }
       }
     })
@@ -135,6 +136,8 @@ export class OffloadComponent implements OnInit {
       // ))
       .subscribe(res => {
         if (res) {
+          console.log(res);
+
           this.testLoadImage[index] = res;
           let reader = new FileReader();
           reader.addEventListener("load", () => {

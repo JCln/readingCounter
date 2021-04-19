@@ -51,25 +51,12 @@
                     </mat-checkbox>
                 </div>
             </div>
-            <div class="__slider">
-                <div class="_main_img">
-                    <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
-                        <div class="__img_counter">{{i+1}}</div>
-
-                        <!-- tooltip -->
-                        <div *ngIf="!testLoadImage[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
-                        <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
-                        <!--   -->
-                        <div *ngIf="!testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)"
-                            class="__img_bound">
-                            <img src="assets/imgs/soundvid/2.png" alt="whatever">
-                        </div>
-                    </div>
-                    <div class="not_found_header" *ngIf="!imageFiles.length">
-                        <h2>تصویری پیدا نشد</h2>
-                    </div>
-                </div>
-
+            <div class="__slider" *ngIf="testLoadImage.length">
+                <p-carousel *ngFor="let item of testLoadImage; index as i" orientation="vertical"
+                    [style]="{'max-width':'400px', 'margin-top':'2em'}" verticalViewPortHeight="250px" [numVisible]="1"
+                    [numScroll]="1">
+                    <img src="{{testLoadImage}}" alt="whatever">
+                </p-carousel>
             </div>
         </section>
 

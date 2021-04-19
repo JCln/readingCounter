@@ -28,11 +28,13 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
+            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
                 <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
             </th>
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
@@ -41,7 +43,11 @@
             <td *ngFor="let col of columns">
                 {{dataSource[col.field]}}
             </td>
-
+            <td>
+                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons fa fa-camera">
+                    <div class="tooltip_text_right">مشاهده عکس(ها)</div>
+                </i>
+            </td>
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
+import { ENTrackingMessage } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
@@ -101,5 +102,8 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   routeToOffloadModify = (dataSource: ITracking) => {
     this.router.navigate(['wr/m/l/all', true, dataSource.id]);
+  }
+  backToReading = (dataSource: ITracking) => {
+    this.trackingManagerService.TESTbackToConfirmDialog(dataSource.id, ENTrackingMessage.toReading);
   }
 }

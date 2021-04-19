@@ -32,7 +32,9 @@
     <div class="chart_1 charts">
         <app-analyze></app-analyze>
     </div>
+</main>
 
+<main class="container _unified">
     <div class="chart_1 charts pie">
         <div class="title">سالانه</div>
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
@@ -57,5 +59,4 @@
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
-
 </main>

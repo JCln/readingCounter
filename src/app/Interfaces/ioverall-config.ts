@@ -58,6 +58,18 @@ export enum ENTrueFalse {
     true = 'true',
     false = 'false'
 }
+export enum ENTrackingRoute {
+    migrateDataRowToImported,
+    migrateDataRowToReading,
+    migrateDataRowToOffloaded,
+    migrateToPreState,
+}
+export enum ENTrackingMessage {
+    toImported = 'علت بازگشت به صادر شده',
+    toReading = 'علت بازگشت به درحال قرائت',
+    toOffloaded = 'علت بازگشت به بارگذاری شده',
+    toPrevious = 'علت بازگشت به مرحله قبلی'
+}
 export interface IResponses {
     isValid: boolean
     message: string;

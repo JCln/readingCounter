@@ -153,7 +153,6 @@ export class DashboardComponent implements OnInit {
   }
   addToLineChart = () => {
     const temp = this.dashboardService.getElementOfArrOfObjects(this.readDaily);
-    console.log(temp);
     this.lineChartOptions = {
       responsive: true,
       maintainAspectRatio: false,

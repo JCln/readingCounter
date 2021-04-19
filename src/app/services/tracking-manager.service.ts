@@ -8,6 +8,7 @@ import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confir
 import { IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
 import { OffloadModify } from './../classes/offload-modify-type';
 import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
+import { ENTrackingMessage } from './../Interfaces/ioverall-config';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
 
@@ -164,7 +165,7 @@ export class TrackingManagerService {
   postEditingTrack = (rowData: ITracking) => {
     this.interfaceManagerService.postTrackingEdit(this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {
       if (res)
-        this.utilsService.snackBarMessageSuccess(res.message);
+        this.successSnackMessage(res.message);
     });
   }
   removeTrackingId = (trackNumber: string, desc: string): Observable<any> => {
@@ -186,14 +187,20 @@ export class TrackingManagerService {
   migrateDataRowToImported = (trackingId: string, desc: string): Observable<any> => {
     return this.interfaceManagerService.toImported({ trackingId: trackingId, description: desc });
   }
-  migrateDataRowToReading = (trackingId: string) => {
-    this.interfaceManagerService.toReading({ trackingId }).subscribe((res: IResponses) => {
+  migrateDataRowToReading = (trackingId: string, desc: string) => {
+    this.interfaceManagerService.toReading({ trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
       if (res)
-        this.utilsService.snackBarMessageSuccess(res.message);
+        this.successSnackMessage(res.message)
     });
   }
   migrateDataRowToOffloaded = (trackingId: string, desc: string): Observable<any> => {
     return this.interfaceManagerService.toOffloaded({ trackingId: trackingId, description: desc });
+  }
+  private migrateToPreState = (trackingId: string, desc: string) => {
+    return this.interfaceManagerService.toPre({ trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
+      if (res)
+        this.successSnackMessage(res.message);
+    })
   }
   backToConfirmDialog = (trackNumber: string) => {
     return new Promise(resolve => {
@@ -207,10 +214,16 @@ export class TrackingManagerService {
       })
     })
   }
-  private migrateToPreState = (trackingId: string, desc: string) => {
-    return this.interfaceManagerService.toPre({ trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message);
+  TESTbackToConfirmDialog = (trackNumber: string, message: ENTrackingMessage) => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        data: message
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          this.migrateDataRowToReading(trackNumber, desc);
+        }
+      })
     })
   }
   getZoneDictionary = (): Promise<any> => {

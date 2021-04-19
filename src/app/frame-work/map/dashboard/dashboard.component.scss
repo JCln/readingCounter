@@ -8,6 +8,7 @@
   margin-top: $font_xs;
   background: $gray_100;
   padding: $font_xs 0.25rem;
+  border-radius: $border_15;
 }
 
 .forbidden,
@@ -67,16 +68,29 @@
 
 .chart_1 {
   grid-column: auto / span 2;
+  box-shadow: none;
 }
 
 .chart_2 {
   grid-column: auto / span 2;
+  box-shadow: none;
 }
 
 .chart_3 {
   grid-column: auto / span 2;
+  box-shadow: none;
 }
 
 .chart_4 {
   grid-column: auto / span 2;
+  box-shadow: none;
+}
+
+._unified {
+  background-color: $white;
+}
+
+app-analyze {
+  display: grid;
+  gap: $font_xs;
 }
