@@ -38,6 +38,9 @@
 
         <section class="_container">
             <div class="__checks">
+                <input class="input_1" type="number" placeholder="رقم کنتور : " name="counterNumber"
+                    [(ngModel)]="offloadModifyReq.counterNumber" autofocus>
+
                 <h3>عکس بی کیفیت</h3>
                 <div class="check_boxes" *ngFor="let item of lowQualityPic">
                     <mat-checkbox name="hasPreNumber" [(ngModel)]="item.isSelected">
@@ -50,23 +53,50 @@
                         {{item.title}}
                     </mat-checkbox>
                 </div>
+                <div class="description">
+                    <input class="input_1" type="text" placeholder="توضیحات : " name="description"
+                        [(ngModel)]="offloadModifyReq.description">
+                </div>
             </div>
-            <div class="__slider" *ngIf="testLoadImage.length">
-                <p-carousel *ngFor="let item of testLoadImage; index as i" orientation="vertical"
-                    [style]="{'max-width':'400px', 'margin-top':'2em'}" verticalViewPortHeight="250px" [numVisible]="1"
-                    [numScroll]="1">
-                    <img src="{{testLoadImage}}" alt="whatever">
-                </p-carousel>
+            <div *ngIf="testLoadImage.length" class="__slider">
+                <div class="_img_content">
+                    <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
+                        <div class="__img_counter">{{i+1}}</div>
+
+                        <!-- tooltip -->
+                        <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
+                        <!--   -->
+
+                        <div *ngIf="testLoadImage[i]" class="__img_bound">
+                            <img (click)="showBigImage(testLoadImage[i])" src="{{testLoadImage[i]}}" alt="whatever">
+                        </div>
+                        <div *ngIf="!testLoadImage[i]" class="__img_bound">
+                            <img src="assets/imgs/soundvid/2.png" alt="whatever">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!testLoadImage.length" class="__slider">
+                <h2 class="not_found_header">تصویری پیدا نشد</h2>
             </div>
         </section>
 
         <footer>
-            <button *ngIf="zoneId" type="submit" class="btn_1">
-                test text
-                <i class="pi pi-list"></i>
+            <button type="submit" class="btn_1">
+                اصلاح
             </button>
-
         </footer>
     </form>
 </main>
 <router-outlet></router-outlet>
+<!-- <p-carousel [value]="imageFiles" [numVisible]="1" [numScroll]="1">
+                    <ng-template let-testLoadImage pTemplate="item" *ngFor="let item of testLoadImage; index as i">
+                        <div class="__img_bound">
+                            content to DiSPLAY{{i}}
+                            testLoadImage
+                            {{testLoadImage}}
+                            {{i}}
+                            <img src="{{testLoadImage[i]}}" alt="whatever{{i}}">
+                        </div>
+                    </ng-template>
+                </p-carousel> -->

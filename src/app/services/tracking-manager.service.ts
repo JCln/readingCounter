@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { InterfaceService } from 'src/app/services/interface.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
 import { OffloadModify } from './../classes/offload-modify-type';
 import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
+import { IOffloadModifyReq } from './../Interfaces/inon-manage';
 import { ENTrackingMessage } from './../Interfaces/ioverall-config';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
@@ -105,6 +107,7 @@ export class TrackingManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
+    private interfaceService: InterfaceService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private _location: Location,
@@ -232,6 +235,11 @@ export class TrackingManagerService {
   getCounterStatesDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
+  postOffloadModifyEdited = (body: IOffloadModifyReq) => {
+    this.interfaceService.postOffloadModify(body).toPromise().then(res => {
+      this.successSnackMessage(res);
+    })
+  }
 
   // imported service control
   private selectSpecialParameters = (rowData: ITracking): IEditTracking => {
@@ -263,6 +271,47 @@ export class TrackingManagerService {
         a.push(items.id)
     })
     return a;
+  }
+
+  /*VALIDATION */
+  private showWarnMessage = (message: string) => this.utilsService.snackBarMessageWarn(message);
+  private isValidationNull = (elem: any): boolean => {
+    if (this.utilsService.isNull(elem))
+      return true;
+    return false;
+  }
+  private validationisNAN = (elem: any): boolean => {
+    if (this.utilsService.isNaN(elem))
+      return true;
+    return false;
+  }
+  private offloadModifyValidation = (object: IOffloadModifyReq): boolean => {
+    if (this.isValidationNull(object.id)) {
+      this.showWarnMessage('خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید');
+      return false;
+    }
+    if (this.isValidationNull(object.counterNumber)) {
+      this.showWarnMessage('رقم کنتور را وارد نمایید');
+      return false;
+    }
+    if (this.isValidationNull(object.jalaliDay)) {
+      this.showWarnMessage('تاریخ را وارد نمایید');
+      return false;
+    }
+    if (this.isValidationNull(object.modifyType)) {
+      this.showWarnMessage('نوع اصلاح را وارد نمایید');
+      return false;
+    }
+    if (this.validationisNAN(object.counterNumber)) {
+      this.showWarnMessage('فرمت رقم کنتور اشتباه است');
+      return false;
+    }
+    return true;
+  }
+
+  /* VERIFICATION */
+  verificationOffloadModify = (object: IOffloadModifyReq): boolean => {
+    return this.offloadModifyValidation(object);
   }
 
 }

@@ -6,7 +6,6 @@ import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 import { OffloadRoutingModule } from './offload-routing.module';
 import { OffloadComponent } from './offload.component';
 
-
 @NgModule({
   declarations: [OffloadComponent],
   imports: [

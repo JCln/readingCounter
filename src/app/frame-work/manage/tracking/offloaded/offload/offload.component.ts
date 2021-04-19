@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { IOnOffLoad } from 'src/app/Interfaces/imanage';
@@ -11,6 +12,8 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceService } from 'src/app/services/interface.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
+import { ImageViewerComponent } from '../../ab-dan-uploaded-info/image-viewer/image-viewer.component';
+
 @Component({
   selector: 'app-offload',
   templateUrl: './offload.component.html',
@@ -19,16 +22,15 @@ import { TrackingManagerService } from 'src/app/services/tracking-manager.servic
 export class OffloadComponent implements OnInit {
   offloadModifyReq: IOffloadModifyReq = {
     id: '',
-    modifyType: 0,
+    modifyType: null,
     checkedItems: [],
     counterStateId: 0,
-    counterNumber: 0,
+    counterNumber: null,
     jalaliDay: '',
     description: ''
   }
   dataSource: IOnOffLoad[] = [];
 
-  carouselOptions;
   audioFiles: IOnOffLoad[] = [];
   imageFiles: IOnOffLoad[] = [];
   testLoadImage: any[] = [];
@@ -42,6 +44,7 @@ export class OffloadComponent implements OnInit {
 
   counterStatesDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  ref: DynamicDialogRef;
 
   constructor(
     private interfaceService: InterfaceService,
@@ -50,7 +53,8 @@ export class OffloadComponent implements OnInit {
     private trackingManagerService: TrackingManagerService,
     private route: ActivatedRoute,
     private router: Router,
-    private downloadManagerService: DownloadManagerService
+    private downloadManagerService: DownloadManagerService,
+    private dialogService: DialogService
   ) {
     this.getRouteParams();
   }
@@ -82,7 +86,6 @@ export class OffloadComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.classWrapper();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -105,40 +108,40 @@ export class OffloadComponent implements OnInit {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  verification = () => {
+  checkItems = () => {
     const lowQ = this.trackingManagerService.selectedItems(this.lowQualityPic);
     const highQ = this.trackingManagerService.selectedItems(this.highQualityPic);
-
-    this.offloadModifyReq.checkedItems.push(...lowQ);
-    this.offloadModifyReq.checkedItems.push(...highQ);
-
-    this.resetToDefaultFormStatus();
+    this.offloadModifyReq.checkedItems = lowQ.concat(highQ);
+    // this.offloadModifyReq.checkedItems.push(...highQ);
+    // this.offloadModifyReq.checkedItems.push(...lowQ);
+    // this.offloadModifyReq.checkedItems
+  }
+  verification = () => {
+    this.checkItems();
+    const verificationCheck = this.trackingManagerService.verificationOffloadModify(this.offloadModifyReq);
+    if (verificationCheck) {
+      this.trackingManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+    }
   }
   private getRouteParams = () => {
     this.subscription.push(this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
         if (res) {
           this.offloadModifyReq.id = this.route.snapshot.paramMap.get('UUID');
+          this.classWrapper();
         }
       }
     })
     )
   }
-  private resetToDefaultFormStatus = () => {
-    this.offloadModifyReq.checkedItems = [];
-  }
   getExactImg = (id: string, index: number) => {
     if (this.testLoadImage[index])
       return;
     this.downloadManagerService.downloadFile(id)
-      // .pipe(map(
-      //   e => this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e))
-      // ))
       .subscribe(res => {
         if (res) {
-          console.log(res);
-
           this.testLoadImage[index] = res;
+          console.log(this.testLoadImage);
           let reader = new FileReader();
           reader.addEventListener("load", () => {
             this.testLoadImage[index] = reader.result;
@@ -148,6 +151,8 @@ export class OffloadComponent implements OnInit {
           }
         }
       })
+    console.log(this.testLoadImage);
+
   }
   getExactAudio = (id: string) => {
     // this.downloadManagerService.downloadFile(id).subscribe(res => {
@@ -159,5 +164,15 @@ export class OffloadComponent implements OnInit {
 
     // })
   }
+  showBigImage = (data: any) => {
+    this.ref = this.dialogService.open(ImageViewerComponent, {
+      data: data,
+      rtl: true,
+      width: '80%',
+      height: '100%',
+      closable: true
+    })
+  }
+
 
 }

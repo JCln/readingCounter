@@ -128,6 +128,24 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = 'assets/imgs/help/edit/edit2.JPG';
       return;
     }
+    else if (currentRoute.includes('/wr/m/track/offloaded/offloadMfy')) {
+      this.messageToShow.title = 'اصلاح اشتراک';
+      this.messageToShow.messageOne = 'برای اصلاح، میتوان باتوجه به عکس(ها) و یا صوت ارسال شده نسبت به ویرایش اقدام کرد.';
+      this.messageToShow.imgOne = 'assets/imgs/help/offloadmodify/modify.JPG';
+      this.messageToShow.messageTwo = 'درصورت کلیک برروی هر عکس میتوان بزرگ شده هرکدام از تصاویر را مشاهده نمود.';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+    else if (currentRoute.includes('/wr/m/track/offloaded/offloadMfy')) {
+      this.messageToShow.title = 'اصلاح اشتراک';
+      this.messageToShow.messageOne = 'زمانی که مامور پس از پایان قرائت انجام شده اقدام به بارگذاری مینماید، مسیر به ';
+      this.messageToShow.imgOne = 'assets/imgs/help/tracking/reading1.JPG';
+      this.messageToShow.messageTwo = 'از زمانی که مسیری ایجاد میشود، مسیر ایجاد شده در قسمت صادر شده قرار میگیرد. به محض آنکه از طریق اپلیکیشن قرائت بارگیری انجام گیرد، مسیر به قسمت دریافت شده منتقل میشود. پس از آن با ثبت اولین اشتراک توسط مامور به قسمت در حال قرارئت منتقل و قابل پیگیری همزمان خواهد شد. و پس از پایان قرائت و بارگذاری عملیات به بارگذاری شده و درصورت بارگیری به مرحله آخر یعنی دانلود شده منتقل خواهد شد';
+      this.messageToShow.messageThree = 'در هر قسمت امکان مشاهده و ویرایش مراحل درنظر گرفته شده است. برای مثال در قسمت در حال قرائت امکان پیگیری لیست درحال قرائت و مشاهده درلحظه آنها برروی نقشه، مشاهده مامور ها و جزئیات اطلاعات بیشتر آنها و همچنین مشاهده و بررسی تصویر و صوت های ارسال شده توسط مامور وجود دارد';
+      this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading2.JPG';
+      return;
+    }
     else if (currentRoute.includes('/wr/m/track')) {
       this.messageToShow.title = 'مدیریت پیگیری ها';
       this.messageToShow.messageOne = 'این بخش جهت ردیابی کلیه عملیات قرائت می باشد.';

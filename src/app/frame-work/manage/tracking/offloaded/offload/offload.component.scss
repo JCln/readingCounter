@@ -1,6 +1,7 @@
 @import '../../../../../../assets/variable';
 @import '../../../../../../assets/input.scss';
 @import '../../../../../../assets/button.scss';
+@import '../../../../../../assets/tooltip.scss';
 
 
 .main {
@@ -39,6 +40,17 @@ section._container {
 
 .__slider {
   grid-column: 2/span 7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+._img_content {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: .25rem;
 }
 
 ._key,
@@ -65,6 +77,12 @@ section._container {
 
 h2 {
   color: $gray_600;
+}
+
+h3 {
+  color: $blue_500;
+  font-size: 1.4rem;
+  padding: $font_05;
 }
 
 footer {
@@ -169,6 +187,55 @@ hr {
   }
 }
 
+// slider
+.img_wrapper {
+  border-radius: $border_15;
+  border: 2px solid $blue_gray_300;
+  position: relative;
+  margin: .4rem 0;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 1px 2px $blue_gray_300;
+  }
+}
+
+.__img_bound {
+  height: 9.5rem;
+  width: 9.5rem;
+  padding: $font_05;
+  margin: auto;
+}
+
+.__img_counter {
+  position: absolute;
+  top: -$font_s;
+  right: $font_05;
+  text-align: center;
+  background-color: $blue_600;
+  color: $white;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: $border_5;
+  font-weight: 600;
+}
+
+img {
+  border-radius: $border_5;
+}
+
 .not_found_header {
   color: $blue_600;
+}
+
+.tooltip .tooltip_text {
+  right: 50%;
+  transform: translateX(50%);
+  bottom: 110%;
+}
+
+.description {
+  padding-top: $font_xxs;
 }

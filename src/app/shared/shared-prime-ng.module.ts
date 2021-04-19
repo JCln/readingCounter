@@ -2,17 +2,19 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { CarouselModule } from 'primeng/carousel';
 import { DropdownModule } from 'primeng/dropdown';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 
+import {
+  ImageViewerComponent,
+} from '../frame-work/manage/tracking/ab-dan-uploaded-info/image-viewer/image-viewer.component';
 import { AddRowDirective } from './../directives/add-row.directive';
 
 @NgModule({
-  declarations: [AddRowDirective],
+  declarations: [AddRowDirective, ImageViewerComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,7 +23,6 @@ import { AddRowDirective } from './../directives/add-row.directive';
     MultiSelectModule,
     DropdownModule,
     SliderModule,
-    CarouselModule,
     DynamicDialogModule
   ],
   exports: [
@@ -31,11 +32,14 @@ import { AddRowDirective } from './../directives/add-row.directive';
     MatCheckboxModule,
     MultiSelectModule,
     DropdownModule,
-    CarouselModule,
     SliderModule,
     DynamicDialogModule,
     AddRowDirective
-  ]
+  ],
+  entryComponents: [
+    ImageViewerComponent
+  ],
+  providers: [DialogService]
 })
 export class SharedPrimeNgModule {
   static forRoot(): ModuleWithProviders<SharedPrimeNgModule> {

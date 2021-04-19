@@ -61,7 +61,7 @@ export class InterfaceService {
   }
 
   /* OFFLOAD */
-  postOffloadModify = (): Observable<any> => {
+  postOffloadModify = (body: object): Observable<any> => {
     return this.mainService.POST('V1/OffLoad/Modify');
   }
 

@@ -139,7 +139,7 @@ export class InterfaceManagerService {
     return this.mainService.POSTBODY('V1/Tracking/ToImported', body);
   }
   toReading = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1​/Tracking​/ToReading', body);
+    return this.mainService.POSTBODY('V1/Tracking/ToReading', body);
   }
   toOffloaded = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1​/Tracking​/ToOffloaded', body);
