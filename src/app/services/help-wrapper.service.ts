@@ -129,7 +129,7 @@ export class HelpWrapperService {
       return;
     }
     else if (currentRoute.includes('/wr/m/track/offloaded/offloadMfy')) {
-      this.messageToShow.title = 'اصلاح اشتراک';
+      this.messageToShow.title = 'اصلاح';
       this.messageToShow.messageOne = 'برای اصلاح، میتوان باتوجه به عکس(ها) و یا صوت ارسال شده نسبت به ویرایش اقدام کرد.';
       this.messageToShow.imgOne = 'assets/imgs/help/offloadmodify/modify.JPG';
       this.messageToShow.messageTwo = 'درصورت کلیک برروی هر عکس میتوان بزرگ شده هرکدام از تصاویر را مشاهده نمود.';
@@ -137,13 +137,22 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute.includes('/wr/m/track/offloaded/offloadMfy')) {
-      this.messageToShow.title = 'اصلاح اشتراک';
-      this.messageToShow.messageOne = 'زمانی که مامور پس از پایان قرائت انجام شده اقدام به بارگذاری مینماید، مسیر به ';
-      this.messageToShow.imgOne = 'assets/imgs/help/tracking/reading1.JPG';
-      this.messageToShow.messageTwo = 'از زمانی که مسیری ایجاد میشود، مسیر ایجاد شده در قسمت صادر شده قرار میگیرد. به محض آنکه از طریق اپلیکیشن قرائت بارگیری انجام گیرد، مسیر به قسمت دریافت شده منتقل میشود. پس از آن با ثبت اولین اشتراک توسط مامور به قسمت در حال قرارئت منتقل و قابل پیگیری همزمان خواهد شد. و پس از پایان قرائت و بارگذاری عملیات به بارگذاری شده و درصورت بارگیری به مرحله آخر یعنی دانلود شده منتقل خواهد شد';
-      this.messageToShow.messageThree = 'در هر قسمت امکان مشاهده و ویرایش مراحل درنظر گرفته شده است. برای مثال در قسمت در حال قرائت امکان پیگیری لیست درحال قرائت و مشاهده درلحظه آنها برروی نقشه، مشاهده مامور ها و جزئیات اطلاعات بیشتر آنها و همچنین مشاهده و بررسی تصویر و صوت های ارسال شده توسط مامور وجود دارد';
-      this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading2.JPG';
+    else if (currentRoute.includes('/wr/m/track/offloaded')) {
+      this.messageToShow.title = 'بارگذاری شده';
+      this.messageToShow.messageOne = 'زمانی که مامور پس از پایان قرائت انجام شده اقدام به بارگذاری(تخلیه) مینماید، مسیر به این قسمت (بارگذار شده) منتقل میشود. درصورتی که مسیر به اصلاح نیاز داشت برروی آیکن مشاهده(اصلاح) لیست کلیک نمایید ';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+    else if (currentRoute.includes('/m/l/all/true/')) {
+      this.messageToShow.title = 'لیست بارگذاری شده';
+      this.messageToShow.messageOne = 'کلیه اطلاعات قرائت شده (تخلیه شده) توسط مامور قرائت در این قسمت قابل مشاهده و اصلاح می باشد. برای اصلاح بروی آیکن اصلاح کلیک تا به صفحه اصلاح منتقل شوید';
+      this.messageToShow.imgOne = 'assets/imgs/help/offloadmodify/allmodify.JPG';
+      this.messageToShow.messageTwo = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
       return;
     }
     else if (currentRoute.includes('/wr/m/track')) {
