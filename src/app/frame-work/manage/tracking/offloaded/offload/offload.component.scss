@@ -35,11 +35,11 @@ section._container {
 }
 
 .__checks {
-  grid-column: 1 / 2;
+  grid-column: 1 / 4;
 }
 
 .__slider {
-  grid-column: 2/span 7;
+  grid-column: 4/span 7;
   display: flex;
   justify-content: center;
   align-items: center;

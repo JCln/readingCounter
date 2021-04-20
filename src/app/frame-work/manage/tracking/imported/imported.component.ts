@@ -57,20 +57,6 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  getZoneDictionary = (): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.trackingManagerService.getZoneDictionary());
-    });
-  }
-  getDataSource = (): Promise<ITracking[]> => {
-    return new Promise((resolve) => {
-      this.trackingManagerService.getImportedDataSource().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   nullSavedSource = () => this.closeTabService.saveDataForTrackImported = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -80,8 +66,8 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackImported;
     }
     else {
-      this.dataSource = await this.getDataSource();
-      this.filterZoneDictionary = await this.getZoneDictionary();
+      this.dataSource = await this.trackingManagerService.getImportedDataSource();
+      this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
       this.closeTabService.saveDataForTrackImported = this.dataSource;
     }
     this.insertSelectedColumns();
@@ -133,8 +119,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.ref = this.dialogService.open(ImportListDgComponent, {
       data: data,
       rtl: true,
-      width: '70%',
-      header: 'مشاهده/ویرایش مسیر'
+      width: '70%'
     })
     this.ref.onClose.subscribe((res: ITracking) => {
       if (res)

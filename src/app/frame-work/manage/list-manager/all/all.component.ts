@@ -45,16 +45,11 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  getQotrDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.listManagerService.getQotrDictionary());
-    });
-  }
   convertCounterStateIdToTitle = (dataSource: any[], CounterStateDictionary: IDictionaryManager[]) => {
     CounterStateDictionary.map(CounterStateDic => {
       dataSource.map(dataSource => {
-        if (dataSource.preCounterStateCode == CounterStateDic.id) {
-          dataSource.preCounterStateCode = CounterStateDic.title;
+        if (dataSource.counterStateCode == CounterStateDic.id) {
+          dataSource.counterStateCode = CounterStateDic.title;
         }
       })
     });
@@ -77,16 +72,6 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  getZoneDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.listManagerService.getLMAllZoneDictionary());
-    });
-  }
-  getKarbariDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.listManagerService.getKarbariDictionary());
-    });
-  }
   getDataSource = (): Promise<IListManagerAll[]> => {
     return new Promise((resolve) => {
       this.listManagerService.getLMAll(this.trackId).subscribe(res => {
@@ -102,9 +87,9 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nullSavedSource();
     }
     this.dataSource = await this.getDataSource();
-    this.zoneDictionary = await this.getZoneDictionary();
-    this.karbariDictionary = await this.getKarbariDictionary();
-    this.qotrDictionary = await this.getQotrDictionary();
+    this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
+    this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
+    this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
 
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
@@ -161,7 +146,12 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate(['wr/m/track/woui', false, object.id]);
   }
   routeToOffload = (object: IListManagerAll) => {
-    this.router.navigate(['wr/m/track/offloaded/offloadMfy', object.id]);
+    let zoneId;
+    this.zoneDictionary.map(item => {
+      if (item.title === object.zoneId)
+        zoneId = item.id
+    })
+    this.router.navigate(['wr/m/track/offloaded/offloadMfy', zoneId + object.id]);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

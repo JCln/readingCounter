@@ -34,7 +34,7 @@ export class TimeLineComponent implements OnInit, AfterViewInit {
       { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
       { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false },
-      { field: 'displayRadif', header: 'ردیف', isSelected: true, readonly: false },
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false },
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true },
       { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true }
     ];

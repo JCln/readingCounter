@@ -22,13 +22,14 @@ export class AnalyzeComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     legend: {
       display: true,
       position: 'right',
       labels: this.defaultOptions
     },
   };
-  public barChartLabels: Label[] = ['min', 'max', 'میانگین', 'انحراف معیار', 'میانی', 'مد'];
+  public barChartLabels: Label[] = ['کمینه', 'بیشینه', 'میانگین', 'انحراف از معیار', 'میانی', 'مٌد'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
@@ -38,13 +39,14 @@ export class AnalyzeComponent implements OnInit {
   // Radar
   public radarChartOptions: RadialChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     legend: {
       display: true,
       position: 'right',
       labels: this.defaultOptions
     },
   };
-  public radarChartLabels: Label[] = ['min', 'max', 'میانگین', 'انحراف معیار', 'میانی', 'مد'];
+  public radarChartLabels: Label[] = ['کمینه', 'بیشینه', 'میانگین', 'انحراف از معیار', 'میانی', 'مٌد'];
 
   public radarChartData: ChartDataSets[] = [];
   public radarChartType: ChartType = 'radar';

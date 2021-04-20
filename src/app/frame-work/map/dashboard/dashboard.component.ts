@@ -46,6 +46,27 @@ export class DashboardComponent implements OnInit {
       position: 'right',
       labels: this.defaultOptions
     },
+    plugins: {
+      // labels: {
+      //   render: 'percentage',
+      //   fontColor: ['green', 'white', 'red'],
+      //   precision: 2
+      // },
+      datalabels: {
+        formatter: (value, ctx) => {
+          let sum = 0;
+          let dataArr = ctx.chart.data.datasets[0].data;
+          dataArr.map(data => {
+            sum += data;
+          });
+          console.log(sum);
+
+          let percentage = (value * 100 / sum).toFixed(2) + "%";
+          return percentage;
+        },
+        color: '#fff',
+      }
+    },
     tooltips: {
       footerFontFamily: 'Blotus',
       bodyFontFamily: 'Blotus',
@@ -65,6 +86,7 @@ export class DashboardComponent implements OnInit {
             total += parseFloat(allData[i]);
           }
           let tooltipPercentage = Math.round((tooltipData / total) * 100);
+          // return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
           return ' (  %' + tooltipPercentage + '  ) ' + tooltipData + ' :  ' + tooltipLabel;
         }
       }

@@ -16,7 +16,7 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.15rem;
+  margin: 0.06rem;
   min-width: 8.5rem;
   height: 3rem;
   border-radius: $border_15;
@@ -29,7 +29,7 @@ li {
   cursor: pointer;
 
   @media (min-width: 700px) {
-    min-width: 11rem;
+    min-width: 9rem;
   }
 
   .fa-refresh {

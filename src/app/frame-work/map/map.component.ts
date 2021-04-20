@@ -53,7 +53,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription;
 
   constructor(
-    private mapService: MapService,
+    public mapService: MapService,
     readonly mapItemsService: MapItemsService,
     private readonly interactionService: InteractionService,
     private readingReportManagerService: ReadingReportManagerService,
@@ -191,6 +191,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private getXYMarkerClusterPosition = (xyData: any) => {
     const markers = new L.markerClusterGroup();
     xyData.map((items) => {
+      this.flyToDes(32.66, 51.66, 12);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)]).bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       ));

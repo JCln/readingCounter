@@ -37,7 +37,7 @@ export class OffloadComponent implements OnInit {
 
   subscription: Subscription[] = [];
 
-  zoneId: number = null;
+  zoneId: string = null;
   modifyType: OffloadModify[];
   lowQualityPic: OffloadModify[];
   highQualityPic: OffloadModify[];
@@ -59,9 +59,6 @@ export class OffloadComponent implements OnInit {
     this.getRouteParams();
   }
 
-  getCounterStateByZoneId = async () => {
-    this.counterStatesDictionary = await this.trackingManagerService.getCounterStatesDictionary(this.zoneId);
-  }
   connectToServer = () => {
   }
   nullSavedSource = () => this.closeTabService.saveDataForOffloadModify = null;
@@ -70,9 +67,8 @@ export class OffloadComponent implements OnInit {
       this.nullSavedSource();
     }
     this.dataSource = await this.downloadManagerService.downloadFileInfo(this.offloadModifyReq.id);
-    // console.log(this.dataSource);
 
-    this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
+    this.counterStatesDictionary = await this.trackingManagerService.getCounterStatesDictionary(parseInt(this.zoneId));
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
@@ -112,9 +108,6 @@ export class OffloadComponent implements OnInit {
     const lowQ = this.trackingManagerService.selectedItems(this.lowQualityPic);
     const highQ = this.trackingManagerService.selectedItems(this.highQualityPic);
     this.offloadModifyReq.checkedItems = lowQ.concat(highQ);
-    // this.offloadModifyReq.checkedItems.push(...highQ);
-    // this.offloadModifyReq.checkedItems.push(...lowQ);
-    // this.offloadModifyReq.checkedItems
   }
   verification = () => {
     this.checkItems();
@@ -127,7 +120,10 @@ export class OffloadComponent implements OnInit {
     this.subscription.push(this.router.events.subscribe(res => {
       if (res instanceof NavigationEnd) {
         if (res) {
-          this.offloadModifyReq.id = this.route.snapshot.paramMap.get('UUID');
+          const dynamicRoute = this.route.snapshot.paramMap.get('UUID');
+          this.zoneId = dynamicRoute.substring(0, 6);
+          this.offloadModifyReq.id = dynamicRoute.substring(6, dynamicRoute.length);
+
           this.classWrapper();
         }
       }

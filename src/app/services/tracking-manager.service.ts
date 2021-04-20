@@ -20,11 +20,12 @@ import { UtilsService } from './utils.service';
 export class TrackingManagerService {
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
+      { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
       { field: 'listNumber', header: 'ش لیست', isSelected: true },
-      { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
       // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
       { field: 'isBazdid', header: 'بازدید', isSelected: false },
       { field: 'year', header: 'سال', isSelected: false },
       { field: 'isRoosta', header: 'روستایی', isSelected: false },
@@ -36,8 +37,7 @@ export class TrackingManagerService {
       { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
-      { field: 'displayRadif', header: 'ردیف', isSelected: false },
-      { field: 'counterReaderName', header: 'مامور', isSelected: false }
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
     ];
   }
   columnSelectedImportedList = (): IObjectIteratation[] => {
@@ -57,7 +57,7 @@ export class TrackingManagerService {
       { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
       { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false },
-      { field: 'displayRadif', header: 'ردیف', isSelected: true, readonly: false },
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false },
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true },
       { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true }
     ];
@@ -81,7 +81,7 @@ export class TrackingManagerService {
       { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
-      { field: 'displayRadif', header: 'ردیف', isSelected: false },
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: false },
       { field: 'counterReaderName', header: 'مامور', isSelected: false }
     ];
   }
@@ -114,20 +114,65 @@ export class TrackingManagerService {
     private dialog: MatDialog
   ) { }
 
-  getImportedDataSource = (): Observable<any> => {
-    return this.interfaceManagerService.getTrackImported();
+  getImportedDataSource = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getTrackImported().subscribe(res => {
+          resolve(res);
+        });
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
-  getLoadedDataSource = (): Observable<any> => {
-    return this.interfaceManagerService.getTrackLoaded();
+  getLoadedDataSource = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getTrackLoaded().subscribe(res => {
+          if (res) {
+            resolve(res);
+          }
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+
   }
-  getReadingDataSource = (): Observable<any> => {
-    return this.interfaceManagerService.getTrackReading();
+  getReadingDataSource = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getTrackReading().subscribe(res => {
+          resolve(res);
+        });
+      });
+    } catch (error) {
+      console.error(error);
+
+    }
   }
-  getOffloadedDataSource = (): Observable<any> => {
-    return this.interfaceManagerService.getTrackOffloaded();
+  getOffloadedDataSource = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getTrackOffloaded().subscribe(res => {
+          resolve(res);
+        });
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
-  getFinishedDataSource = (): Observable<any> => {
-    return this.interfaceManagerService.getTrackFinished();
+  getFinishedDataSource = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getTrackFinished().subscribe(res => {
+          resolve(res);
+        });
+      });
+    } catch (error) {
+      console.error(error);
+
+    }
   }
   getLastStatesDataSource = (): Promise<any> => {
     try {
@@ -148,7 +193,9 @@ export class TrackingManagerService {
             resolve(res);
           }
         })
-      })
+      }).catch(i => {console.log(i); console.log('wrong');
+      }
+      )
     } catch {
       console.error(e => e);
     }
@@ -236,6 +283,8 @@ export class TrackingManagerService {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   postOffloadModifyEdited = (body: IOffloadModifyReq) => {
+    console.log(body);
+
     this.interfaceService.postOffloadModify(body).toPromise().then(res => {
       this.successSnackMessage(res);
     })
@@ -280,7 +329,7 @@ export class TrackingManagerService {
       return true;
     return false;
   }
-  private validationisNAN = (elem: any): boolean => {
+  private validationIsNAN = (elem: any): boolean => {
     if (this.utilsService.isNaN(elem))
       return true;
     return false;
@@ -290,20 +339,20 @@ export class TrackingManagerService {
       this.showWarnMessage('خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید');
       return false;
     }
-    if (this.isValidationNull(object.counterNumber)) {
-      this.showWarnMessage('رقم کنتور را وارد نمایید');
-      return false;
-    }
     if (this.isValidationNull(object.jalaliDay)) {
       this.showWarnMessage('تاریخ را وارد نمایید');
       return false;
     }
-    if (this.isValidationNull(object.modifyType)) {
+    if (this.utilsService.isNullZero(object.modifyType)) {
       this.showWarnMessage('نوع اصلاح را وارد نمایید');
       return false;
     }
-    if (this.validationisNAN(object.counterNumber)) {
+    if (this.validationIsNAN(object.counterNumber)) {
       this.showWarnMessage('فرمت رقم کنتور اشتباه است');
+      return false;
+    }
+    if (!this.utilsService.lengthControl(object.counterNumber, object.counterNumber, 1, 7)) {
+      this.showWarnMessage('تعداد ارقام کنتور اشتباه است');
       return false;
     }
     return true;

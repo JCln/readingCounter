@@ -12,14 +12,14 @@ const persianRangeLabel = (page: number, pageSize: number, length: number) => {
         Math.min(startIndex + pageSize, length) :
         startIndex + pageSize;
 
-    return `${length} ردیف   ${startIndex + 1} - ${endIndex}  از  `;
+    return `${length} ش.پرونده   ${startIndex + 1} - ${endIndex}  از  `;
 }
 
 
 export function getPersianPaginatorIntl() {
     const paginatorIntl = new MatPaginatorIntl();
 
-    paginatorIntl.itemsPerPageLabel = 'تعداد ردیف در هر صفحه:';
+    paginatorIntl.itemsPerPageLabel = 'تعداد ش.پرونده در هر صفحه:';
     paginatorIntl.nextPageLabel = 'صفحه بعد';
     paginatorIntl.previousPageLabel = 'صفحه قبل';
     paginatorIntl.getRangeLabel = persianRangeLabel;

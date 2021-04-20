@@ -51,17 +51,18 @@ export class ReadingReportManagerService {
   }
   columnSelectedRRMaster = (): IObjectIteratation[] => {
     return [
-      { field: 'zoneId', header: 'کد ناحیه', isSelected: true, readonly: false },
+      // { field: 'zoneId', header: 'کد ناحیه', isSelected: true, readonly: false },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: true, readonly: true },
-      { field: 'reportId', header: 'گزارش', isSelected: true, readonly: true },
       { field: 'reportTitle', header: 'عنوان گزارش', isSelected: true, readonly: true },
+      { field: 'reportId', header: 'گزارش', isSelected: true, readonly: true },
       { field: 'itemCount', header: 'تعداد', isSelected: true, readonly: true }
     ];
   }
   columnSelectedRRDetails = (): IObjectIteratation[] => {
     return [
       { field: 'billId', header: 'ش قبض', isSelected: true, readonly: true },
-      { field: 'radif', header: 'ردیف', isSelected: false, readonly: true },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+      { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true },
       { field: 'eshterak', header: 'اشتراک', isSelected: false, readonly: true },
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
       { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
@@ -74,7 +75,6 @@ export class ReadingReportManagerService {
       { field: 'ahadSaierOrAbBaha', header: 'آحاد سایر/آبها', isSelected: false, readonly: true },
       { field: 'possibleSaierOrAbBaha', header: 'سایر/آبها پیمایش', isSelected: false, readonly: true },
       { field: 'reportTitle', header: 'گزارش', isSelected: true, readonly: true },
-      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
       { field: 'offloadDateJalali', header: 'روز', isSelected: true, readonly: true },
       { field: 'counterSerial', header: 'سریال کنتور', isSelected: false, readonly: true },
       { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, readonly: true }
@@ -83,7 +83,8 @@ export class ReadingReportManagerService {
   columnSelectedRRTraverse = (): IObjectIteratation[] => {
     return [
       { field: 'billId', header: 'شناسه قبض', isSelected: true, readonly: true },
-      { field: 'radif', header: 'ردیف', isSelected: true, readonly: true },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+      { field: 'radif', header: 'ش.پرونده', isSelected: true, readonly: true },
       { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: false },
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
       { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
@@ -96,7 +97,6 @@ export class ReadingReportManagerService {
       { field: 'possibleAhadTejariOrFari', header: 'آحاد تجاری/فرعی پیمایش', isSelected: false, readonly: true },
       { field: 'ahadSaierOrAbBaha', header: 'آحاد سایر/آبها', isSelected: false, readonly: true },
       { field: 'possibleSaierOrAbBaha', header: 'سایر/آبها پیمایش', isSelected: false, readonly: false },
-      { field: 'counterReaderName', header: 'مامور', isSelected: false, readonly: true },
       { field: 'offloadDateJalali', header: 'روز', isSelected: false, readonly: true },
       { field: 'counterSerial', header: 'سریال کنتور', isSelected: false, readonly: true },
       { field: 'possibleCounterSerial', header: 'سریال کنتور پیمایش', isSelected: false, readonly: false },
@@ -108,7 +108,8 @@ export class ReadingReportManagerService {
   columnSelectedRRTraverseDifferential = (): IObjectIteratation[] => {
     return [
       { field: 'billId', header: 'شناسه قبض', isSelected: true, readonly: true },
-      { field: 'radif', header: 'ردیف', isSelected: true, readonly: true },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+      { field: 'radif', header: 'ش.پرونده', isSelected: true, readonly: true },
       { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: false },
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
       { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
@@ -121,7 +122,6 @@ export class ReadingReportManagerService {
       { field: 'possibleAhadTejariOrFari', header: 'آحاد تجاری/فرعی پیمایش', isSelected: false, readonly: true },
       { field: 'ahadSaierOrAbBaha', header: 'آحاد سایر/آبها', isSelected: false, readonly: true },
       { field: 'possibleSaierOrAbBaha', header: 'سایر/آبها پیمایش', isSelected: false, readonly: false },
-      { field: 'counterReaderName', header: 'مامور', isSelected: false, readonly: true },
       { field: 'offloadDateJalali', header: 'روز', isSelected: false, readonly: true },
       { field: 'counterSerial', header: 'سریال کنتور', isSelected: false, readonly: true },
       { field: 'possibleCounterSerial', header: 'سریال کنتور پیمایش', isSelected: false, readonly: false },
@@ -133,9 +133,9 @@ export class ReadingReportManagerService {
   columnSelectedRRKarkard = (): IObjectIteratation[] => {
     return [
       { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
-      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
       { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
       { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
       { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
@@ -151,9 +151,9 @@ export class ReadingReportManagerService {
   columnSelectedRRKarkardDaly = (): IObjectIteratation[] => {
     return [
       { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
-      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
       { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
       { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
       { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
@@ -169,9 +169,9 @@ export class ReadingReportManagerService {
   columnSelectedRRDisposalHours = (): IObjectIteratation[] => {
     return [
       { field: 'dayJalali', header: 'روز', isSelected: true, readonly: true },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
-      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
       { field: '_8To10', header: '8 - 10', isSelected: true, readonly: true },
       { field: '_10To12', header: '10 - 12', isSelected: true, readonly: true },

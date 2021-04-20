@@ -25,6 +25,9 @@ export class UtilsService {
   isNull(value: any): boolean {
     return typeof value === 'undefined' || !value || value.length === 0 || value === null;
   }
+  isNullZero(value: any): boolean {
+    return typeof value === 'undefined' || value === null || value.length === 0;
+  }
   isNullTextValidation(value: string): boolean {
     return typeof value.trim() === 'undefined' || !value || value.trim().length === 0 || value.trim() === null;
   }

@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IFollowUp, IFollowUpHistory } from 'src/app/Interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
@@ -12,7 +12,7 @@ import { TrackingManagerService } from 'src/app/services/tracking-manager.servic
   templateUrl: './desc.component.html',
   styleUrls: ['./desc.component.scss']
 })
-export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DescComponent implements AfterViewInit, OnDestroy {
   trackNumber: string;
   defColumns = [
     { field: 'insertDateJalali', header: 'تاریخ ثبت' },
@@ -59,8 +59,11 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     public trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService,
     public route: ActivatedRoute,
+    private router: Router,
     private interactionService: InteractionService
-  ) { }
+  ) {
+    this.getRouteParams();
+  }
 
   toPreStatus = () => {
     this.trackingManagerService.backToConfirmDialog(this.trackNumber);
@@ -75,9 +78,14 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     this.closeTabService.saveDataForFollowUp = this.dataSource;
     this.insertToDesc();
   }
-  ngOnInit() {
-    this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
-    this.classWrapper();
+  getRouteParams = () => {
+    this.subscription.push(this.router.events.subscribe(res => {
+      if (res instanceof NavigationEnd) {
+        this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+        this.classWrapper();
+      }
+    })
+    )
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {

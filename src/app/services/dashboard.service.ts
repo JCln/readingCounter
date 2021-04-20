@@ -3,7 +3,7 @@ import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
 import { InterfaceService } from 'src/app/services/interface.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
-import { IDashboardReadDaily } from '../Interfaces/inon-manage';
+import { IDashboardKarkardTimed, IDashboardReadDaily } from '../Interfaces/inon-manage';
 import { IAnalyzeRes } from './../Interfaces/imanage';
 
 @Injectable({
@@ -93,9 +93,17 @@ export class DashboardService {
   }
 
   /* CONFIGS */
-  getObjectParameters = (sth: object): [] => {
-    let a: any = Object.values(sth);
-    return a;
+  getObjectParameters = (sth: IDashboardKarkardTimed): any[] => {
+    let b = [];
+    b.push(sth.adiCount);
+    b.push(sth.faqedCount);
+    b.push(sth.maneCount);
+    b.push(sth.saierCount);
+    b.push(sth.tavizCount);
+    b.push(sth.xarabCount);
+    return b;
+    // let a: any = Object.values(sth);
+    // return a;
   }
   getElementOfArrOfObjectsAnalyze = (item: IAnalyzeRes): any[] => {
     let a = [];

@@ -143,7 +143,7 @@ export interface IListManagerAll {
     hazf: number,
     hasError: boolean,
     errorDescription: string,
-    zoneId: number,
+    zoneId: number|string,
     counterNumber: number,
     counterStateId: number,
     counterStateCode: number,

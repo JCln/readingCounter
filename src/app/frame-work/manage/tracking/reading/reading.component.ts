@@ -49,15 +49,6 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     })
   }
-  getDataSource = (): Promise<ITracking[]> => {
-    return new Promise((resolve) => {
-      this.trackingManagerService.getReadingDataSource().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   nullSavedSource = () => this.closeTabService.saveDataForTrackReading = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -67,7 +58,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackReading;
     }
     else {
-      this.dataSource = await this.getDataSource();
+      this.dataSource = await this.trackingManagerService.getReadingDataSource();
       this.closeTabService.saveDataForTrackReading = this.dataSource;
     }
     this.insertSelectedColumns();

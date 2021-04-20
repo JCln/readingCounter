@@ -1,5 +1,6 @@
 import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js';
 
+import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { ListManagerService } from 'src/app/services/list-manager.service';
 
@@ -29,7 +30,8 @@ export class MapService {
   private map: L.Map;
 
   constructor(
-    private listManagerService: ListManagerService
+    private listManagerService: ListManagerService,
+    private _location: Location
   ) { }
 
   addMarkerCluster = (map: L.Map, latlng: any) => {
@@ -68,5 +70,8 @@ export class MapService {
   }
   hasMarkerCluster = (body: IReadingReportGISReq): boolean => {
     return body.isCluster;
+  }
+  backToPreviousPage = () => {
+    this._location.back();
   }
 }

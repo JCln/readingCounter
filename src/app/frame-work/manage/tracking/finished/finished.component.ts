@@ -43,15 +43,6 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
   }
-  getDataSource = (): Promise<ITracking[]> => {
-    return new Promise((resolve) => {
-      this.trackingManagerService.getFinishedDataSource().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   nullSavedSource = () => this.closeTabService.saveDataForTrackFinished = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -61,7 +52,7 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackFinished;
     }
     else {
-      this.dataSource = await this.getDataSource();
+      this.dataSource = await this.trackingManagerService.getFinishedDataSource();
       this.closeTabService.saveDataForTrackFinished = this.dataSource;
     }
     this.insertSelectedColumns();

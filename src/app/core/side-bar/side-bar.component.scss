@@ -70,6 +70,7 @@ ul::-webkit-scrollbar {
 
   &.active {
     border: 2px solid $blue_gray_300;
+    background: $blue_200;
 
     .on_show,
     .icons {

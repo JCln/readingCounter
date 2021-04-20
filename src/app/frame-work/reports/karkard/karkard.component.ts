@@ -61,24 +61,6 @@ export class KarkardComponent implements OnInit {
   ngOnInit() {
     this.classWrapper();
   }
-  // refreshTabStatus = () => {
-  //   this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-  //     if (res) {
-  //       if (res === '/wr/rpts/mam/karkard') {
-  //         this.classWrapper();
-  //       }
-  //     }
-  //   })
-  //   )
-  // }
-  ngAfterViewInit(): void {
-    // this.refreshTabStatus();
-  }
-  // ngOnDestroy(): void {
-  //   //  for purpose of refresh any time even without new event emiteds
-  //   // we use subscription and not use take or takeUntil
-  //   this.subscription.forEach(subscription => subscription.unsubscribe());
-  // }
   receiveFromDateJalali = ($event: string) => {
     this.readingReportReq.fromDate = $event;
   }

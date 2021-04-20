@@ -2,7 +2,6 @@
 
     <section class="forbidden">
         <div class="title relative_pos">غیر مجاز</div>
-        <div>تعداد غیر مجاز</div>
 
         <div class="_key_value" *ngFor="let item of _col_forbidden">
             <div class="key">{{item.header}}</div>
@@ -12,7 +11,6 @@
 
     <section class="media">
         <div class="title relative_pos">تصاویر</div>
-        <div>تصاویر ارسال شده</div>
 
         <div class="_key_value" *ngFor="let item of _col_Media">
             <div class="key">{{item.header}}</div>
@@ -35,6 +33,7 @@
 </main>
 
 <main class="container _unified">
+    <div class="title">کارکرد</div>
     <div class="chart_1 charts pie">
         <div class="title">سالانه</div>
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"

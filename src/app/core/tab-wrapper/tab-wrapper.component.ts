@@ -26,7 +26,14 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     private closeTabService: CloseTabService
   ) {
   }
-  reFetchPageTitle = () => this.childPageTitle.emit(Object.values(this.tabs).pop().title);
+  reFetchPageTitle = () => {
+    let a;
+    this.tabs.map(item => {
+      if (item.route === this.router.url)
+        a = item.title;
+    })
+    this.childPageTitle.emit(a);
+  }
   DoesCurrentRouteFound = (): ITabs => {
     const currentRouteFound = this.currentRoute.find((item: any) => {
       return item.route === this.router.url
@@ -104,16 +111,18 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
       completeRoutePart = this.router.url.split('/').pop();
     }
-    // console.log(completeRoutePart);
-    // console.log(dRoute._dynamicRoute);
-    // console.log(lastUrlPart);
+    console.log(completeRoutePart);
+    console.log(dRoute._dynamicRoute);
+    console.log(lastUrlPart);
 
     const a = {
       route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };
 
-    if (this.utilsService.isNull(this.DoesTabsHaveThisRouteNow()))
+    if (this.utilsService.isNull(this.DoesTabsHaveThisRouteNow())) {
       this.tabs.push(a);
+      this.reFetchPageTitle();
+    }
   }
   testCheck = () => {
     if (this.router.url !== '/wr') {
@@ -135,12 +144,10 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
         const currentRouteFound = this.DoesCurrentRouteFound();
         if (currentRouteFound) {
           if (this.DoesTabsHaveThisRouteNow()) {
-            // console.log('we have this route now !');
             return;
           }
           else {
             this.tabs.push(currentRouteFound);
-            this.reFetchPageTitle();
           }
         } else {
           if (this.router.url === '/wr/profile') {
@@ -148,6 +155,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
               this.addProfileTab();
           }
           this.addDynamicRoute();
+          this.reFetchPageTitle();
         }
       }
     }))
@@ -157,10 +165,13 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       return item;
     })
 
-    if (this.utilsService.isNull(a[0]))
+    if (this.utilsService.isNull(a[0])) {
       this.router.navigateByUrl('/wr');
+      this.reFetchPageTitle();
+    }
     else {
       this.backToPreviousPage();
+      this.reFetchPageTitle();
     }
   }
   backToPreviousPage = () => {
@@ -187,6 +198,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       route: '/wr', title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
     };
     this.tabs.push(a);
+    this.reFetchPageTitle();
   }
   addProfileTab = () => {
     const profileTab = {

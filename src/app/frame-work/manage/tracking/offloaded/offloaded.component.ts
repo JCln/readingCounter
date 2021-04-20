@@ -30,15 +30,6 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  getDataSource = (): Promise<ITracking[]> => {
-    return new Promise((resolve) => {
-      this.trackingManagerService.getOffloadedDataSource().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   nullSavedSource = () => this.closeTabService.saveDataForTrackOffloaded = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -48,7 +39,7 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackOffloaded;
     }
     else {
-      this.dataSource = await this.getDataSource();
+      this.dataSource = await this.trackingManagerService.getOffloadedDataSource();
       console.log(this.dataSource);
 
       this.closeTabService.saveDataForTrackOffloaded = this.dataSource;

@@ -1,7 +1,7 @@
 import { ENOffloadModifyType } from './../Interfaces/inon-manage';
 
 export class OffloadModify {
-    static readonly callAnnounce = new OffloadModify(1, ENOffloadModifyType.callAnnounce);
+    static readonly callAnnounce = new OffloadModify(0, ENOffloadModifyType.callAnnounce);
     static readonly wrongReading = new OffloadModify(2, ENOffloadModifyType.wrongReading);
 
     static readonly blueScreenLight = new OffloadModify(3, ENOffloadModifyType.blueScreenLight, false);

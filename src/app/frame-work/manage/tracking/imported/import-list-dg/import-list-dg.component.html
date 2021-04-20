@@ -1,6 +1,6 @@
 <section>
 
-    <h1 class="title">اطلاعات مکانی</h1>
+    <h1 class="title">ویرایش لیست صادر شده</h1>
     <form #form="ngForm" (ngSubmit)="editCloseData()" class="content">
         <div class="_desc">
             <div *ngFor="let mainDatas of _selectedDatas">
@@ -22,8 +22,8 @@
                                 </mat-option>
                             </mat-select> -->
                             <p-dropdown [options]="allCounterReaders" name="newCounterReaderName"
-                                [(ngModel)]="selectedCounterReader" placeholder="انتخاب مورد"
-                                optionLabel="title" [showClear]="true"></p-dropdown>
+                                [(ngModel)]="selectedCounterReader" placeholder="انتخاب مورد" optionLabel="title"
+                                [showClear]="true"></p-dropdown>
 
                         </div>
                     </ng-container>

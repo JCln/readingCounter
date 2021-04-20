@@ -37,28 +37,6 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  getZoneDictionary = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        resolve(this.trackingManagerService.getZoneDictionary());
-      });
-    } catch (error) {
-      console.error(e => e);
-    }
-  }
-  getDataSource = (): Promise<ITracking[]> => {
-    try {
-      return new Promise((resolve) => {
-        this.trackingManagerService.getLoadedDataSource().subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        })
-      })
-    } catch (error) {
-      console.error(e => e);
-    }
-  }
   nullSavedSource = () => this.closeTabService.saveDataForTrackLoaded = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -68,10 +46,10 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackLoaded;
     }
     else {
-      this.dataSource = await this.getDataSource();
+      this.dataSource = await this.trackingManagerService.getLoadedDataSource();
       this.closeTabService.saveDataForTrackLoaded = this.dataSource;
     }
-    this.filterZoneDictionary = await this.getZoneDictionary();
+    this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
     this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
