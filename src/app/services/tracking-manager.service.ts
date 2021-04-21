@@ -65,6 +65,7 @@ export class TrackingManagerService {
   columnlastStates = (): IObjectIteratation[] => {
     return [
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true },
       { field: 'listNumber', header: 'ش لیست', isSelected: true },
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
       // { field: 'zoneId', header: 'ناحیه', isSelected: false },
@@ -81,8 +82,7 @@ export class TrackingManagerService {
       { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
-      { field: 'displayRadif', header: 'ش.پرونده', isSelected: false },
-      { field: 'counterReaderName', header: 'مامور', isSelected: false }
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
     ];
   }
   getOffloadModifyType = (): OffloadModify[] => {

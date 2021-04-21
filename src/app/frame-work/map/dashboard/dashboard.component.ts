@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit {
   _col_forbidden: IObjectIteratation[] = [];
   _col_Media: IObjectIteratation[] = [];
 
+  _analyzer_interface: any[];
+
   /* PIE CHART*/
   private defaultOptions = {
     fontFamily: 'Blotus',
@@ -292,5 +294,7 @@ export class DashboardComponent implements OnInit {
     this.pieChartDataTwo = this.dashboardService.getObjectParameters(this.karkard[2]);
     this.pieChartDataThree = this.dashboardService.getObjectParameters(this.karkard[3]);
   }
-
+  receiveAnalyzeData($event) {
+    this._analyzer_interface = $event
+  }
 }

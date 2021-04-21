@@ -28,7 +28,10 @@
     </div>
 
     <div class="chart_1 charts">
-        <app-analyze></app-analyze>
+        <app-analyze (barAnalyzeEvent)=receiveAnalyzeData($event)></app-analyze>
+    </div>
+    <div class="charts">
+        <app-bar-anlz-prfm [barAnalyze]="_analyzer_interface"></app-bar-anlz-prfm>
     </div>
 </main>
 

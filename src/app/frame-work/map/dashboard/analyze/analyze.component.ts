@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions, ChartType, RadialChartOptions } from 'chart.js';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChartDataSets, ChartType, RadialChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { IAnalyzeRes } from 'src/app/Interfaces/imanage';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -12,6 +12,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 })
 export class AnalyzeComponent implements OnInit {
   analyzePerformance: IAnalyzeRes[] = [];//shuold be analyzePerformance interface
+  @Output() barAnalyzeEvent = new EventEmitter<any[]>();
 
   private defaultOptions = {
     fontFamily: 'Blotus',
@@ -19,22 +20,6 @@ export class AnalyzeComponent implements OnInit {
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
   }
-
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    legend: {
-      display: true,
-      position: 'right',
-      labels: this.defaultOptions
-    },
-  };
-  public barChartLabels: Label[] = ['کمینه', 'بیشینه', 'میانگین', 'انحراف از معیار', 'میانی', 'مٌد'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [];
-  public barChartData: ChartDataSets[] = [];
-
 
   // Radar
   public radarChartOptions: RadialChartOptions = {
@@ -69,6 +54,6 @@ export class AnalyzeComponent implements OnInit {
     })
 
     this.radarChartData = temp;
-    this.barChartData = temp;
+    this.barAnalyzeEvent.emit(temp);
   }
 }
