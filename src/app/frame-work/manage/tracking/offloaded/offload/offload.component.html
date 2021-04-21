@@ -1,15 +1,6 @@
 <main class="main">
     <form #form="ngForm" (ngSubmit)="verification()">
         <section class="content">
-            <!-- <div class="input_2">
-                <div class="_key">ناحیه</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="zoneId" name="zoneId">
-                    <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
-                        (click)="getCounterStateByZoneId()">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
-            </div> -->
             <div class="input_2" [hidden]="!counterStatesDictionary.length">
                 <div class="_key">وضعیت کنتور</div>
                 <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.counterStateId"
@@ -19,6 +10,8 @@
                     </mat-option>
                 </mat-select>
             </div>
+            <input class="input_1" type="number" placeholder="رقم کنتور : " name="counterNumber"
+                [(ngModel)]="offloadModifyReq.counterNumber" autofocus>
             <div class="input_2">
                 <div class="_key">نوع اصلاح</div>
                 <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.modifyType" name="modifyType">
@@ -38,9 +31,6 @@
 
         <section class="_container">
             <div class="__checks">
-                <input class="input_1" type="number" placeholder="رقم کنتور : " name="counterNumber"
-                    [(ngModel)]="offloadModifyReq.counterNumber" autofocus>
-
                 <h3>عکس بی کیفیت</h3>
                 <div class="check_boxes" *ngFor="let item of lowQualityPic">
                     <mat-checkbox name="hasPreNumber" [(ngModel)]="item.isSelected">

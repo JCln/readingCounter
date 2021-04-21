@@ -124,7 +124,8 @@ export class DashboardService {
     })
     // a.push({ label: [item.hint, item.period] })
     // console.log(a);
-
+    console.log(a);
+    
     return a;
   }
 }

@@ -1,6 +1,7 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl" dataKey="innerTable">
+<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" dataKey="innerTable" styleClass="p-datatable-responsive"
+    [responsive]="true">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -70,7 +71,7 @@
             <td *ngFor="let col of columns">
                 <ng-container
                     *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
                     {{dataSource[col.field]}}
@@ -81,7 +82,7 @@
                     <div class="tooltip_text">مشاهده جزئیات</div>
                 </i>
             </td>
-            <td (click)="firstConfirmDialog(dataSource)">
+            <td (click)="firstConfirmDialog(dataSource, index)">
                 <i class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مسیر</div>
                 </i>

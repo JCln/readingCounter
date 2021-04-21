@@ -4,11 +4,13 @@
   display: grid;
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  align-items: center;
   gap: $font_xs;
   margin-top: $font_xs;
   background: $gray_100;
   padding: $font_xs 0.25rem;
   border-radius: $border_15;
+  overflow: auto;
 }
 
 .forbidden,
@@ -22,12 +24,32 @@
 
 .forbidden {}
 
+._header {
+  font-size: $font_m;
+  color: $blue_700;
+  font-weight: 800;
+  text-align: center;
+}
+
 .title {
+  top: 0;
+  right: $font_05;
   position: absolute;
   font-size: $font_m;
   color: $blue_700;
   font-weight: 800;
   padding: 0 $font_xs;
+}
+
+.title_special {
+  position: absolute;
+  border-radius: $border_5;
+  background: $white;
+  right: 0;
+  top: -$font_xxs;
+  font-size: $font_m;
+  color: $blue_700;
+  font-weight: 800;
 }
 
 ._key_value {
@@ -56,14 +78,18 @@
   padding: $font_xs 0;
 }
 
-.pie,
+// .pie,
 .relative_pos {
   position: relative;
 }
 
 .chart_0 {
-  grid-column: auto / span 3;
+  grid-column: auto;
   grid-row: auto/ 2;
+
+  @media (min-width: 800px) {
+    grid-column: auto / span 3;
+  }
 }
 
 .chart_1 {
@@ -86,11 +112,15 @@
   box-shadow: none;
 }
 
-._unified {
-  background-color: $white;
+.chart_analyze_bar {
+  grid-column: 3/5;
 }
 
-app-analyze {
-  display: grid;
-  gap: $font_xs;
+.chart_analyze_radar {
+  grid-column: 1/3;
+
+}
+
+._unified {
+  background-color: $white;
 }

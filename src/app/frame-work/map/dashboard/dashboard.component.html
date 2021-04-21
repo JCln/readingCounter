@@ -1,7 +1,7 @@
 <main class="container">
 
     <section class="forbidden">
-        <div class="title relative_pos">غیر مجاز</div>
+        <div class="_header">غیر مجاز</div>
 
         <div class="_key_value" *ngFor="let item of _col_forbidden">
             <div class="key">{{item.header}}</div>
@@ -10,16 +10,16 @@
     </section>
 
     <section class="media">
-        <div class="title relative_pos">تصاویر</div>
+        <div class="_header">تصاویر</div>
 
         <div class="_key_value" *ngFor="let item of _col_Media">
             <div class="key">{{item.header}}</div>
             <div class="val">{{media[item.field]}}</div>
         </div>
     </section>
-    <div class="chart_0 charts line">
+    <div *ngIf="lineChartData.length" class="chart_0 charts line relative_pos">
+        <div class="title">قرائت</div>
         <div style="display: block;">
-            <div class="title">قرائت</div>
             <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
                 [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
                 [chartType]="lineChartType" [plugins]="lineChartPlugins">
@@ -27,35 +27,38 @@
         </div>
     </div>
 
-    <div class="chart_1 charts">
+</main>
+<main class="container charts relative_pos">
+    <div class="title">آنالیز عملکرد</div>
+    <div class="chart_analyze_radar">
         <app-analyze (barAnalyzeEvent)=receiveAnalyzeData($event)></app-analyze>
     </div>
-    <div class="charts">
+    <div class="chart_analyze_bar">
         <app-bar-anlz-prfm [barAnalyze]="_analyzer_interface"></app-bar-anlz-prfm>
     </div>
 </main>
 
-<main class="container _unified">
-    <div class="title">کارکرد</div>
-    <div class="chart_1 charts pie">
+<main class="container _unified relative_pos">
+    <div class="title_special">کارکرد</div>
+    <div class="chart_1 charts pie relative_pos">
         <div class="title">سالانه</div>
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
-    <div class="chart_2 charts pie">
+    <div class="chart_2 charts pie relative_pos">
         <div class="title">ماهانه</div>
         <canvas baseChart [data]="pieChartDataOne" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
-    <div class="chart_3 charts pie">
+    <div class="chart_3 charts pie relative_pos">
         <div class="title">هفتگی</div>
         <canvas baseChart [data]="pieChartDataTwo" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
-    <div class="chart_4 charts pie">
+    <div class="chart_4 charts pie relative_pos">
         <div class="title">روزانه</div>
         <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">

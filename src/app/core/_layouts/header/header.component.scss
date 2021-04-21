@@ -1,5 +1,6 @@
 @import '../../../../assets/variable.scss';
 @import '../../../../assets/mixins.scss';
+@import '../../../../assets/media.scss';
 @import './hamburger';
 
 .header {
@@ -24,7 +25,7 @@ ul {
 li {
   display: flex;
   align-items: center;
-  margin: 0 .5rem;
+  margin: 0 0.25rem;
   border-radius: 15px;
   color: $gray_700;
   text-align: center;
@@ -32,11 +33,12 @@ li {
   cursor: pointer;
 
   font-size: $font_m;
-  font-weight: 600;
+  font-weight: 600;  
 }
 
 ._name {
-  color: $blue_700;
+  font-size: $font_xxs;
+  color: $blue_700;  
 }
 
 .menu_toggle {
@@ -58,3 +60,5 @@ li {
     margin-right: 12rem;
   }
 }
+@include media_wrapper(780px, 'li', margin, 0 .5rem);
+@include media_wrapper(780px, '._name', font-size, $font_m);

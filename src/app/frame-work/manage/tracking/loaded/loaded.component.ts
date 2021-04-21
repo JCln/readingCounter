@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
@@ -20,7 +19,6 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
 export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
-  table: Table;
   dataSource: ITracking[] = [];
   filterZoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
@@ -85,43 +83,44 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-  rowToImported = (row: ITracking, desc: string) => {
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  private rowToImported = (row: ITracking, desc: string, rowIndex: number) => {
     this.trackingManagerService.migrateDataRowToImported(row.id, desc).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        this.refreshTable();
+        // this.refreshTable();
+        this.refetchTable(rowIndex)
       }
     });
   }
-  removeRow = (rowData: ITracking, desc: string) => {
+  private removeRow = (rowData: ITracking, desc: string, rowIndex: number) => {
     this.trackingManagerService.removeTrackingId(rowData.id, desc).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        // this.refreshTable();
-        this.table.initRowEdit(rowData);
+        this.refetchTable(rowIndex);
       }
     })
   }
-  firstConfirmDialog = (rowData: ITracking) => {
+  firstConfirmDialog = (rowData: ITracking, rowIndex: number) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: 'علت حذف مسیر را بیان نمایید'
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.removeRow(rowData, desc)
+          this.removeRow(rowData, desc, rowIndex)
         }
       })
     })
   }
-  backToImportedConfirmDialog = (rowData: ITracking) => {
+  backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: 'علت بازگشت به صادر شده'
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.rowToImported(rowData, desc)
+          this.rowToImported(rowData, desc, rowIndex);
         }
       })
     })

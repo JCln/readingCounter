@@ -23,9 +23,6 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
-  _firstPage: number = 0;
-  _rowsNumberPage: number = 10;
-
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
@@ -35,11 +32,13 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
     public outputManagerService: OutputManagerService
   ) {
   }
-  rowToOffloaded = (row: ITracking, desc: string) => {
+
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  private rowToOffloaded = (row: ITracking, desc: string, rowIndex: number) => {
     this.trackingManagerService.migrateDataRowToOffloaded(row.id, desc).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        this.refreshTable();
+        this.refetchTable(rowIndex);
       }
     });
   }
@@ -98,14 +97,14 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-  backToImportedConfirmDialog = (rowData: ITracking) => {
+  backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: 'علت بازگشت به صادر شده'
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.rowToOffloaded(rowData, desc)
+          this.rowToOffloaded(rowData, desc, rowIndex);
         }
       })
     })

@@ -111,5 +111,6 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+  toPrePage = () => this.router.navigate(['wr/m/track/reading']);
 
 }

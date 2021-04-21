@@ -1,5 +1,4 @@
-<div style="display: block;">
-    <div class="title">آنالیز عملکرد</div>
+<div *ngIf="radarChartData.length" style="display: block;">    
     <canvas baseChart
       [datasets]="radarChartData"
       [options]="radarChartOptions"

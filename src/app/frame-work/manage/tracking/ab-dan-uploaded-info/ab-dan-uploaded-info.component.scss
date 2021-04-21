@@ -125,3 +125,11 @@ hr {
 .not_found_header {
   color: $blue_600;
 }
+
+.header_icons_wrap {
+  position: relative;
+
+  .left_side {
+    position: absolute;
+  }
+}

@@ -297,7 +297,7 @@
             </mat-form-field>
         </th>
         <td [hidden]="isHide" mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.isOnQeraatCode"></mat-checkbox>
+            <mat-checkbox [disabled]="true" [(ngModel)]="person.isOnQeraatCode"></mat-checkbox>
         </td>
     </ng-container>
     <ng-container matColumnDef="displayBillId">
@@ -315,7 +315,7 @@
             </mat-form-field>
         </th>
         <td [hidden]="isHide" mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.displayBillId"></mat-checkbox>
+            <mat-checkbox [disabled]="true" [(ngModel)]="person.displayBillId"></mat-checkbox>
         </td>
     </ng-container>
     <ng-container matColumnDef="displayRadif">
@@ -333,7 +333,7 @@
             </mat-form-field>
         </th>
         <td [hidden]="isHide" mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.displayRadif"></mat-checkbox>
+            <mat-checkbox [disabled]="true" [(ngModel)]="person.displayRadif"></mat-checkbox>
         </td>
     </ng-container>
 

@@ -86,9 +86,8 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
+  refreshTable = () => this.classWrapper(true);
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   newRow(): IFragmentDetails {
     return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId };
   }
@@ -113,10 +112,10 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     if (a) {
       this.dataSource[index] = this.clonedProducts[dataSource.id];
       delete this.dataSource[dataSource.id];
-      this.refreshTable();
+      this.refetchTable(index);
     }
   }
-  onRowEditSave(dataSource: IFragmentDetails) {
+  onRowEditSave(dataSource: IFragmentDetails, rowIndex: number) {
     if (!this.fragmentManagerService.verificationDetails(dataSource)) {
       if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak))
         this.dataSource.shift();
@@ -129,7 +128,7 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
       this.fragmentManagerService.editFragmentDetails(dataSource);
     }
     this.table.initRowEdit(dataSource); // add to table automatically
-    this.refreshTable();
+    this.refetchTable(rowIndex)
   }
   onRowAdd(dataSource: IFragmentDetails) {
     if (!this.fragmentManagerService.verificationDetails(dataSource)) {

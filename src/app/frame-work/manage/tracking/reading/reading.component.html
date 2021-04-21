@@ -1,6 +1,6 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
+<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -49,18 +49,18 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSourceRES let-columns="columns">
+    <ng-template pTemplate="body" let-dataSourceRES let-columns="columns" let-ri=rowIndex>
         <tr>
             <td *ngFor="let col of columns">
                 <ng-container
                     *ngIf="dataSourceRES[col.field] === true || dataSourceRES[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSourceRES[col.field]"></mat-checkbox>
+                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSourceRES[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
                     {{dataSourceRES[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="backToImportedConfirmDialog(dataSourceRES)"><i class="tooltip p_icons pi pi-fast-backward">
+            <td (click)="backToImportedConfirmDialog(dataSourceRES, ri)"><i class="tooltip p_icons pi pi-fast-backward">
                     <div class="tooltip_text">بازگشت به صادر شده</div>
                 </i>
             </td>
@@ -69,7 +69,7 @@
                 </i>
             </td>
             <td (click)="routeToLMAll(dataSourceRES)"><i class="tooltip p_icons pi pi-list">
-                    <div class="tooltip_text_right">مشاهده لیست قرائت شده</div>
+                    <div class="tooltip_text_right">مشاهده لیست قرائت</div>
                 </i>
             </td>
         </tr>

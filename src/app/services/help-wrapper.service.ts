@@ -37,17 +37,17 @@ export class HelpWrapperService {
       this.messageToShow.title = 'مشاهده و ویرایش کاربران';
       this.messageToShow.messageOne = 'این قسمت شامل بخش های مشاهده همه کاربران و افزودن کاربر جدید می‌باشد.';
       this.messageToShow.imgOne = 'assets/imgs/help/edit/editContacts.PNG';
-      this.messageToShow.messageTwo = ' بخش مشاهده کاربران، اطلاعات کلی و ویرایش کاربران در دسترس میباشد. سه آیکن سمت چپ مربوط به ویرایش اطلاعات کاربر، جزئیات ورود های قبلی و تنظیمات بیشتر کاربر میباشد. تنظیمات بیشتر برای فعال سازی، غیرفعال سازی و بازنشانی رمز عبور میباشد.';
-      this.messageToShow.messageThree = 'بازنشانی بمعنای تغییر رمز عبور به شماره موبایل کابر است.قفل به معنای دسترسی یا عدم دسترسی کاربر به برنامه میباشد. درصورتی که کاربری به دفعات متعدد به اشتباه نام کاربری و گذرواژه را وارد کند در مدت زمان مشخصی قفل میشود و قادر به ورود نخواهد بود. مدت زمان آن نیز در قسمت سطح دسترسی قابل تنظیم می باشد.فعال یا غیر فعال بودن به معنای دسترسی کاربر به برنامه است و مدت مشخصی ندارد.اطلاعات هر کاربری میتواند ویرایش شود';
-      this.messageToShow.imgTwo = 'assets/imgs/help/editContacts2.PNG';
+      this.messageToShow.messageTwo = ' بخش مشاهده کاربران، اطلاعات کلی و ویرایش کاربران در دسترس می باشد. سه آیکن سمت چپ مربوط به ویرایش اطلاعات کاربر، جزئیات ورود های قبلی و تنظیمات بیشتر کاربر می باشد. تنظیمات بیشتر برای فعال سازی، غیرفعال سازی و بازنشانی رمز عبور می باشد.';
+      this.messageToShow.messageThree = 'بازنشانی بمعنای تغییر رمز عبور به شماره موبایل کابر است.قفل به معنای دسترسی یا عدم دسترسی کاربر به برنامه می باشد. درصورتی که کاربری به دفعات متعدد به اشتباه نام کاربری و گذرواژه را وارد کند در مدت زمان مشخصی قفل میشود و قادر به ورود نخواهد بود. مدت زمان آن نیز در قسمت سطح دسترسی قابل تنظیم می باشد.فعال یا غیر فعال بودن به معنای دسترسی کاربر به برنامه است و مدت مشخصی ندارد.اطلاعات هر کاربری میتواند ویرایش شود';
+      this.messageToShow.imgTwo = 'assets/imgs/help/edit/editContacts2.PNG';
       return;
     }
 
     else if (currentRoute === '/wr/mu/add') {
       this.messageToShow.title = 'افزودن کاربر';
-      this.messageToShow.messageOne = 'افزودن کاربر : برای افزودن کاربر جدید لازم است مشخصات کاربر، دسترسی به مناطق، دسترسی به خدمات و انتخاب گروه دسترسی کامل شوند.';
-      this.messageToShow.imgOne = 'assets/imgs/help/edit/editContacts.png';
-      this.messageToShow.messageThree = '';
+      this.messageToShow.messageOne = 'برای افزودن کاربر جدید لازم است مشخصات کاربر، دسترسی به مناطق، دسترسی به خدمات و انتخاب گروه دسترسی کامل شوند.';
+      this.messageToShow.imgOne = 'assets/imgs/help/add/add.JPG';
+      this.messageToShow.messageThree = 'لازم بذکر است که هر کاربر بطور کاملا پویا میتواند دسترسی های متفاوتی برحسب وظیفه و کار ایشان داشته باشد';
       this.messageToShow.messageTwo = '';
       this.messageToShow.imgTwo = '';
       return;
@@ -112,7 +112,7 @@ export class HelpWrapperService {
 
     else if (currentRoute.includes('/wr/m/al/')) {
       this.messageToShow.title = 'درخت دسترسی';
-      this.messageToShow.messageOne = 'باتوجه به اینکه برنامه بصورت یکپارچه و با این قابلیت که همه ی استان های کشور را پوشش دهد به صورت لایه ای درنظر گرفته شده است. قسمت درخت دسترسی از بخش های Appها، ماژول ها، کنترلر ها و اکشن ها بصورت طبقه ای تشکلیل شده است. برای مثال بخش App ها شامل برنامه های کلی درحال استفاده میباشد مانند سامانه جامع قرائت کنتور. ماژول ها از سامانه قرائت کنتور و کنترلر ها از ماژول تشکیل شده اند. مثلا کنترلر های کاربری ها و وضعیت کنتور از ماژول مدیریت قرائت تشکیل شده است و مدیریت قرائت خود یک App است.';
+      this.messageToShow.messageOne = 'باتوجه به اینکه برنامه بصورت یکپارچه و با این قابلیت که همه ی استان های کشور را پوشش دهد به صورت لایه ای درنظر گرفته شده است. قسمت درخت دسترسی از بخش های Appها، ماژول ها، کنترلر ها و اکشن ها بصورت طبقه ای تشکلیل شده است. برای مثال بخش App ها شامل برنامه های کلی درحال استفاده می باشد مانند سامانه جامع قرائت کنتور. ماژول ها از سامانه قرائت کنتور و کنترلر ها از ماژول تشکیل شده اند. مثلا کنترلر های کاربری ها و وضعیت کنتور از ماژول مدیریت قرائت تشکیل شده است و مدیریت قرائت خود یک App است.';
       this.messageToShow.imgOne = 'assets/imgs/help/ARE.PNG';
       this.messageToShow.messageTwo = 'امکان جستجو، ویرایش، حذف و افزودن مطابق تصویر می‌باشد.';
       this.messageToShow.messageThree = '';
@@ -155,22 +155,40 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute.includes('/wr/m/track')) {
-      this.messageToShow.title = 'مدیریت پیگیری ها';
-      this.messageToShow.messageOne = 'این بخش جهت ردیابی کلیه عملیات قرائت می باشد.';
-      this.messageToShow.imgOne = 'assets/imgs/help/tracking/reading1.JPG';
-      this.messageToShow.messageTwo = 'از زمانی که مسیری ایجاد میشود، مسیر ایجاد شده در قسمت صادر شده قرار میگیرد. به محض آنکه از طریق اپلیکیشن قرائت بارگیری انجام گیرد، مسیر به قسمت دریافت شده منتقل میشود. پس از آن با ثبت اولین اشتراک توسط مامور به قسمت در حال قرارئت منتقل و قابل پیگیری همزمان خواهد شد. و پس از پایان قرائت و بارگذاری عملیات به بارگذاری شده و درصورت بارگیری به مرحله آخر یعنی دانلود شده منتقل خواهد شد';
-      this.messageToShow.messageThree = 'در هر قسمت امکان مشاهده و ویرایش مراحل درنظر گرفته شده است. برای مثال در قسمت در حال قرائت امکان پیگیری لیست درحال قرائت و مشاهده درلحظه آنها برروی نقشه، مشاهده مامور ها و جزئیات اطلاعات بیشتر آنها و همچنین مشاهده و بررسی تصویر و صوت های ارسال شده توسط مامور وجود دارد';
-      this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading2.JPG';
+    else if (currentRoute.includes('/m/l/all/false/') || currentRoute.includes('/m/track/woui/false')) {
+      this.messageToShow.title = 'لیست قرائت';
+      this.messageToShow.messageOne = ' لیست قرائت مامور در این قسمت قابل مشاهده می باشد. درصورتی که عکس(ها) و یا صوتی گرفته شده باشد در قسمت مشاهده عکس/صوت قابل بررسی می باشد.';
+      this.messageToShow.imgOne = 'assets/imgs/help/woui/woui.JPG';
+      this.messageToShow.messageTwo = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute.includes('exm/details') || currentRoute.includes('mam/trv') || currentRoute.includes('mam/trvch') || currentRoute.includes('mam/karkard') || currentRoute.includes('mam/karkardDaily') || currentRoute.includes('mam/dh') || currentRoute.includes('mam/gis')) {
+    else if (currentRoute.includes('exm/details') || currentRoute.includes('mam/trv') || currentRoute.includes('mam/trvch') || currentRoute.includes('mam/karkard') || currentRoute.includes('mam/karkardDaily') || currentRoute.includes('mam/dh') || currentRoute.includes('exm/master') || currentRoute.includes('exm/details')) {
       this.messageToShow.title = 'گزارشات';
-      this.messageToShow.messageOne = 'این بخش جهت گزارش گیری از بخش هایی مانند کارکرد روزانه، پیمایشات و .. میباشد. ';
+      this.messageToShow.messageOne = 'این بخش جهت گزارش گیری از بخش هایی مانند کارکرد روزانه، پیمایشات و .. می باشد. ';
       this.messageToShow.imgOne = 'assets/imgs/help/rr/rr1.JPG';
       this.messageToShow.messageTwo = 'در هر قسمت با وارد کردن مقادیر خواسته شده براساس تاریخ و یا دوره میتوان گزارش ها و گاهی نمودار مناسب آن بخش را مشاهده کرد';
       this.messageToShow.messageThree = 'در صورت اشتباه در وارد کردن مقادیر، سیستم بطور خودکار پیامی برای اصلاح موارد لازم نمایش خواهد داد.';
       this.messageToShow.imgTwo = 'assets/imgs/help/rr/rr2.JPG';
+      return;
+    }
+    else if (currentRoute.includes('mam/gis')) {
+      this.messageToShow.title = 'گزارش مکانمند';
+      this.messageToShow.messageOne = 'این قسمت برای مشاهده وضعیت قرائت بر اساس وضعیت کنتور، غیرمجاز و .. می‌باشد. یعنی امکان مشاهده وضعیت، در ناحیه مدنظر برروی نقشه . ';
+      this.messageToShow.imgOne = 'assets/imgs/help/rr/gis.JPG';
+      this.messageToShow.messageTwo = 'با فعال سازی خوشه بندی امکان مشاهده درخواست به شکل کلی تر و بر اساس تراکم آن درخواست برروی نقشه قابل مشاهده است.';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+    else if (currentRoute.includes('anlz/prfm')) {
+      this.messageToShow.title = 'گزارش آنالیز کارکرد';
+      this.messageToShow.messageOne = 'این قسمت جهت مشاهده آمار کلیه قرائت های ثبت شده توسط ماموران از نظر بیشینه، کمینه، میانه و ... در وضعیت قرائت مشخص می باشد. ';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = 'این قسمت بعلت آمار کلی قرائت های ثبت شده برای متخصصان آمار نیز پرکاربر می‌باشد. ';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
       return;
     }
     else if (currentRoute.includes('/m/nob')) {
@@ -180,6 +198,15 @@ export class HelpWrapperService {
       this.messageToShow.messageTwo = 'امکان افزودن، ویرایش، مشاهده جزئیات و حذف هر مورد نیز وجود دارد.';
       this.messageToShow.messageThree = 'ستون تایید شده به معنای تایید تمامی زیر مجوعه هایی که در قسمت مسیر های هر کدام وجود دارد می باشد. درصورتی که مشکلی در ایجاد و ویرایش وجود داشته باشد سیستم بطور خودکار  پیامی برای اصلاح موارد لازم نمایش خواهد داد. ';
       this.messageToShow.imgTwo = 'assets/imgs/help/fragment/nob2.JPG';
+      return;
+    }
+    else if (currentRoute.includes('/wr/m/track')) {
+      this.messageToShow.title = 'مدیریت پیگیری ها';
+      this.messageToShow.messageOne = 'این بخش جهت ردیابی کلیه عملیات قرائت می باشد.';
+      this.messageToShow.imgOne = 'assets/imgs/help/tracking/reading1.JPG';
+      this.messageToShow.messageTwo = 'از زمانی که مسیری ایجاد میشود، مسیر ایجاد شده در قسمت صادر شده قرار میگیرد. به محض آنکه از طریق اپلیکیشن قرائت بارگیری انجام گیرد، مسیر به قسمت دریافت شده منتقل میشود. پس از آن با ثبت اولین اشتراک توسط مامور به قسمت در حال قرارئت منتقل و قابل پیگیری همزمان خواهد شد. و پس از پایان قرائت و بارگذاری عملیات به بارگذاری شده و درصورت بارگیری به مرحله آخر یعنی دانلود شده منتقل خواهد شد';
+      this.messageToShow.messageThree = 'در هر قسمت امکان مشاهده و ویرایش مراحل درنظر گرفته شده است. برای مثال در قسمت در حال قرائت امکان پیگیری لیست درحال قرائت و مشاهده درلحظه آنها برروی نقشه، مشاهده مامور ها و جزئیات اطلاعات بیشتر آنها و همچنین مشاهده و بررسی تصویر و صوت های ارسال شده توسط مامور وجود دارد';
+      this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading2.JPG';
       return;
     }
     else {

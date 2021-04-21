@@ -193,7 +193,8 @@ export class TrackingManagerService {
             resolve(res);
           }
         })
-      }).catch(i => {console.log(i); console.log('wrong');
+      }).catch(i => {
+        console.log(i); console.log('wrong');
       }
       )
     } catch {
@@ -264,7 +265,7 @@ export class TrackingManagerService {
       })
     })
   }
-  TESTbackToConfirmDialog = (trackNumber: string, message: ENTrackingMessage) => {
+  TESTbackToConfirmDialog = (trackNumber: string, message: ENTrackingMessage): Promise<any> => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: message
@@ -272,6 +273,7 @@ export class TrackingManagerService {
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
           this.migrateDataRowToReading(trackNumber, desc);
+          resolve(true);
         }
       })
     })

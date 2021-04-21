@@ -126,22 +126,23 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
         this.onRowEditSave(res);
     });
   }
-  removeRow = (rowData: ITracking, desc: string) => {
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  removeRow = (rowData: ITracking, desc: string, rowIndex: number) => {
     this.trackingManagerService.removeTrackingId(rowData.id, desc).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        this.refreshTable();
+        this.refetchTable(rowIndex);
       }
     })
   }
-  firstConfirmDialog = (rowData: ITracking) => {
+  firstConfirmDialog = (rowData: ITracking, rowIndex: number) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: 'علت حذف مسیر را بیان نمایید'
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.removeRow(rowData, desc)
+          this.removeRow(rowData, desc, rowIndex)
         }
       })
     })

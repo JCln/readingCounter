@@ -61,7 +61,7 @@
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.isMaskooni"></mat-checkbox>
+            <mat-checkbox [disabled]="true" [(ngModel)]="person.isMaskooni"></mat-checkbox>
         </td>
     </ng-container>
     <ng-container matColumnDef="hasReadingVibrate">
@@ -79,7 +79,7 @@
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.hasReadingVibrate"></mat-checkbox>
+            <mat-checkbox [disabled]="true" [(ngModel)]="person.hasReadingVibrate"></mat-checkbox>
         </td>
     </ng-container>
     <ng-container matColumnDef="isSaxt">
@@ -97,7 +97,7 @@
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.isSaxt"></mat-checkbox>
+            <mat-checkbox [disabled]="true" [(ngModel)]="person.isSaxt"></mat-checkbox>
         </td>
     </ng-container>
 

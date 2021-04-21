@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -6,6 +7,7 @@ import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ListManagerService } from 'src/app/services/list-manager.service';
+import { OutputManagerService } from 'src/app/services/output-manager.service';
 
 @Component({
   selector: 'app-all',
@@ -27,11 +29,13 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedColumns: any[];
 
   constructor(
-    private route: ActivatedRoute,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private listManagerService: ListManagerService,
-    private router: Router
+    public outputManagerService: OutputManagerService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private _location: Location
   ) {
     this.getRouteParams();
   }
@@ -160,4 +164,8 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+  refreshTable = () => {
+    this.classWrapper(true);
+  }
+  toPrePage = () => this._location.back();
 }

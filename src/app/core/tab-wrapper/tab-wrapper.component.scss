@@ -1,6 +1,7 @@
 @import '../../../assets/variable.scss';
 @import '../../../assets/mixins.scss';
 @import '../../../assets/tooltip.scss';
+@import '../../../assets/media.scss';
 
 ul {
   display: flex;
@@ -16,19 +17,25 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.06rem;
-  min-width: 8.5rem;
-  height: 3rem;
-  border-radius: $border_15;
+  margin: 0.04rem;
+  min-width: auto;
+  height: 2.5rem;
   border: 1.5px solid;
+  border-radius: 10px;
   color: $blue_700;
   list-style-type: none;
-  font-size: $font_m;
+  font-size: 1.1rem;
   font-weight: 600;
   background: $gray_400;
   cursor: pointer;
-
+  padding: 0;
+  
   @media (min-width: 700px) {
+    padding: 0 $font_05;
+    margin: 0.06rem;
+    height: 3rem;
+    border-radius: $border_15;
+    font-size: $font_m;
     min-width: 9rem;
   }
 
@@ -108,8 +115,8 @@ li.active::before {
 ._remove_all {
   margin: 0 auto 0 .3rem;
   cursor: pointer;
-  max-width: $font_2;
-  max-height: $font_2;
+  max-width: $font_s;
+  max-height: $font_s;
 
   img {
     border-radius: 50%;
@@ -131,3 +138,6 @@ li.active::before {
   bottom: -150% !important;
   left: 4rem !important;
 }
+
+@include media_wrapper(780px, '._remove_all', max-width, 2rem);
+@include media_wrapper(780px, '._remove_all', min-width, 2rem);

@@ -119,15 +119,8 @@ export class DashboardComponent implements OnInit {
 
   /* LINE CHART */
   public lineChartData: ChartDataSets[] = [];
-  public lineChartLabels: Label[] = [
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-    '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
-    '21', '22', '23', '24', '25', '26', '27', '28', '29', '30',
-    '31', '32', '33', '34', '35', '36', '37', '38', '39', '40',
-    '41', '42', '43', '44', '45', '46', '47', '48', '49', '50',
-    '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'
-  ];
-  public lineChartOptions: (ChartOptions & { annotation: any });
+  public lineChartLabels: Label[] = [];
+  public lineChartOptions: any;
   public lineChartColors: Color[] = [
     // { // grey
     //   backgroundColor: 'rgba(148,159,177,0.2)',
@@ -177,6 +170,7 @@ export class DashboardComponent implements OnInit {
   }
   addToLineChart = () => {
     const temp = this.dashboardService.getElementOfArrOfObjects(this.readDaily);
+    // this.lineChartLabels = temp;
     this.lineChartOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -200,27 +194,28 @@ export class DashboardComponent implements OnInit {
           }
         ]
       },
-      annotation: {
-        annotations: [
-          {
-            type: 'line',
-            mode: 'vertical',
-            scaleID: 'x-axis-0',
-            value: 'March',
-            // borderColor: 'orange',
-            borderWidth: 2,
-            label: {
-              enabled: true,
-              // fontColor: 'orange',
-              content: 'LineAnno'
-            }
-          },
-        ],
-      },
+      // annotation: {
+      //   annotations: [
+      //     {
+      //       type: 'line',
+      //       mode: 'vertical',
+      //       scaleID: 'x-axis-0',
+      //       value: 'March',
+      //       // borderColor: 'orange',
+      //       borderWidth: 2,
+      //       label: {
+      //         enabled: true,
+      //         // fontColor: 'orange',
+      //         content: 'LineAnno'
+      //       }
+      //     },
+      //   ],
+      // },
       tooltips: {
         callbacks: {
           label: function (tooltipItem, data) {
             const datasetLabel = data.datasets[tooltipItem.datasetIndex].label;
+            console.log(datasetLabel);
             return datasetLabel;
           }
         }

@@ -1,6 +1,6 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [lazy]="true" [paginator]="true" [rows]="10"
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
-" [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
+<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
+" [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -44,12 +44,12 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns">
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri="rowIndex">
         <tr>
             <td *ngFor="let col of columns">
                 <ng-container
                     *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
                     {{dataSource[col.field]}}
@@ -59,7 +59,7 @@
                     <div class="tooltip_text">بارگیری</div>
                 </i>
             </td>
-            <td (click)="backToImportedConfirmDialog(dataSource)"><i class="tooltip p_icons pi pi-step-backward">
+            <td (click)="backToImportedConfirmDialog(dataSource,ri)"><i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به صادر شده</div>
                 </i>
             </td>

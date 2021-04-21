@@ -35,17 +35,17 @@ export class ReadingReportManagerService {
   /* COLUMNS*/
   columnRRAnalyzeByParam = (): IObjectIteratation[] => {
     return [
-      { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: false },
-      { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: false, readonly: false },
+      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: false },
+      // { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true, readonly: false },
       { field: 'regionTitle', header: 'منطقه', isSelected: false, readonly: false },
       { field: 'statusTitle', header: 'وضعیت', isSelected: true, readonly: false },
-      { field: 'min', header: 'min', isSelected: true, readonly: false },
-      { field: 'max', header: 'max', isSelected: true, readonly: false },
+      { field: 'min', header: 'کمینه', isSelected: true, readonly: false },
+      { field: 'max', header: 'بیشینه', isSelected: true, readonly: false },
       { field: 'average', header: 'میانگین', isSelected: true, readonly: false },
-      { field: 'variance', header: 'واریانش', isSelected: true, readonly: false },
+      { field: 'variance', header: 'واریانس', isSelected: true, readonly: false },
       { field: 'standardDeviation', header: 'انحراف معیار', isSelected: true, readonly: false },
       { field: 'median', header: 'میانه', isSelected: true, readonly: false },
-      { field: 'mode', header: 'mode', isSelected: true, readonly: false },
+      { field: 'mode', header: 'مٌد', isSelected: true, readonly: false },
       { field: 'duration', header: 'مدت', isSelected: false, readonly: false }
     ];
   }

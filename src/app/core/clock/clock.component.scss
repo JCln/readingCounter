@@ -3,23 +3,17 @@
 
 .analog-clock {
   position: relative;
-  width: 10vh;
-  height: 10vh;
+  width: 3.5rem;
+  height: 3.5rem;
   background: url(/assets/imgs/clock/2.jpg);
   background-size: cover;
   border-radius: 50%;
   z-index: 1;
   top: .1rem;
 
-  @media (min-width: 500px) {
-    width: 11vh;
-    height: 11vh;
-  }
-  
-  @media (min-width: 700px) {
-    width: 13vh;
-    height: 13vh;
-    top: 0;
+  @media (min-width: 780px) {
+    width: 4.5rem;
+    height: 4.5rem;
   }
 }
 
@@ -32,27 +26,30 @@
 }
 
 .hour {
-  --font_xs: 1rem;
   width: .35rem;
-  height: $font_xs;
+  height: $font_xxs;
   background: $blue_700;
 
   @media (min-width: 500px) {
-    height: calc(var(--font_xs) + .5rem);
+    height: $font_xxs;
+  }
+
+  @media (min-width: 780px) {
+    height: $font_xs;
   }
 }
 
 .minute {
   width: .3rem;
-  height: 1.5rem;
+  height: 1.3rem;
   background: $blue_700;
 
   @media (min-width: 500px) {
-    height: $font_2;
+    height: $font_m;
   }
 
-  @media (min-width: 700px) {
-    height: 2.1rem;
+  @media (min-width: 780px) {
+    height: $font_l;
   }
 }
 
@@ -62,9 +59,14 @@
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
-  width: $font_xxs;
-  height: $font_xxs;
+  width: $font_05;
+  height: $font_05;
   background-color: $blue_700;
   border-radius: 50%;
   vertical-align: middle;
+
+  @media (min-width: 780px) {
+    width: $font_05;
+    height: $font_05;
+  }
 }

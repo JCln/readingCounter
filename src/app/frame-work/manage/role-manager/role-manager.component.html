@@ -41,7 +41,7 @@
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.needDeviceIdLogin"></mat-checkbox>
+            <mat-checkbox [disabled]="true" [(ngModel)]="person.needDeviceIdLogin"></mat-checkbox>
         </td>
     </ng-container>
     <ng-container cdkColumnDef="actions">

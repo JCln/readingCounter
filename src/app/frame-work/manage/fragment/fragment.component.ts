@@ -88,18 +88,12 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  reFetchTable = () => {
+
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refreshTable = () => {
     this.classWrapper(true);
   }
-  refreshTable = () => {
-    this.table.initRowEdit(this.dataSource);
-  }
   newRow(): IFragmentMaster {
-    // if (this.isAddingNewRow) {
-
-    //   return;
-    // }
-    // this.isAddingNewRow = true;
     return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isValidated: false, };
   }
   onRowEditInit(dataSource: any) {
@@ -132,29 +126,16 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak) || this.utilsService.isNull(dataSource.routeTitle))
         this.dataSource.shift();
   }
-  removeFragmentMaster = async (dataSource: IFragmentMaster) => {
-    // this.fragmentManagerService.setZoneDictionary(this.zoneDictionary);
-    // const validZoneIdNumber = this.fragmentManagerService.findIDFromTitleZoneDictionary(dataSource.zoneId)
-    // // to not spoil(distract) row object use temp    
-    // this.tempDataSource = dataSource;
-    // this.tempDataSource.zoneId = validZoneIdNumber;
+  removeFragmentMaster = async (dataSource: IFragmentMaster, rowIndex: number) => {
     const obj2 = { ...dataSource };
     obj2.zoneId = 1;
-    console.log(obj2);
-
     if (!this.fragmentManagerService.verificationMaster(obj2))
       return;
     const a = await this.fragmentManagerService.removeFragmentMaster(obj2);
     if (a)
-      this.reFetchTable();
+      this.refetchTable(rowIndex);
   }
   getIsValidateRow = async (dataSource: IFragmentMaster) => {
-    // this.fragmentManagerService.setZoneDictionary(this.zoneDictionary);
-    // const validZoneIdNumber = this.fragmentManagerService.findIDFromTitleZoneDictionary(dataSource.zoneId)
-    // // to not spoil(distract) row object use temp
-    // let tempDataSource: IFragmentMaster;
-    // tempDataSource = dataSource;
-    // tempDataSource.zoneId = validZoneIdNumber;
     const obj2 = { ...dataSource };
     obj2.zoneId = 1;
     if (!this.fragmentManagerService.verificationMaster(obj2))

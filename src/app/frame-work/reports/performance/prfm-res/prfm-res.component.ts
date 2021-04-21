@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IAnalyzeRes } from 'src/app/Interfaces/imanage';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
@@ -13,6 +14,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class PrfmResComponent implements OnInit {
   dataSource: IAnalyzeRes[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -32,15 +34,26 @@ export class PrfmResComponent implements OnInit {
         return items
     })
   }
+  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
+    zoneDictionary.map(zoneDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.zoneId == zoneDic.id) {
+          dataSource.zoneId = zoneDic.title;
+        }
+      })
+    });
+  }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRAnalyzeByParam();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRAnalyzeByParamManager();
+    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     console.log(this.dataSource);
     this.setGetRanges();
     this.insertSelectedColumns();
+    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
   }
   ngOnInit(): void {
     this.connectToServer();

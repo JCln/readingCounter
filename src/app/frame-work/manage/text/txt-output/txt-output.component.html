@@ -1,6 +1,6 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl" styleClass="p-datatable-responsive">
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -53,7 +53,7 @@
             <td *ngFor="let col of columns">
                 <ng-container
                     *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
                     {{dataSource[col.field]}}

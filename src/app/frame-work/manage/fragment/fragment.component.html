@@ -1,8 +1,6 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    [filterDelay]="0" dir="rtl"
-   
-    styleClass="p-datatable-responsive" #dt dataKey="id" editMode="row">
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" #dt dataKey="id" editMode="row">
 
     <ng-template pTemplate="caption">
         <!-- <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -16,7 +14,7 @@
                 </i>
             </div>
             <div class="left_side">
-                <i (click)="reFetchTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
                 </i>
             </div>
@@ -96,7 +94,7 @@
                 </p-cellEditor>
             </td>
             <td>
-                <mat-checkbox disabled="true" [(ngModel)]="dataSource.isValidated"></mat-checkbox>
+                <mat-checkbox [disabled]="true" [(ngModel)]="dataSource.isValidated"></mat-checkbox>
             </td>
             <td style="text-align: center;">
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
@@ -108,7 +106,7 @@
                     class="_cancel pi pi-times"></i>
             </td>
             <td>
-                <i *ngIf="!editing" (click)="removeFragmentMaster(dataSource)" class="tooltip p_icons fa fa-trash-o">
+                <i *ngIf="!editing" (click)="removeFragmentMaster(dataSource,ri)" class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text">حذف</div>
                 </i>
             </td>

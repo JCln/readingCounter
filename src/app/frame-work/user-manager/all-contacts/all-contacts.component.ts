@@ -87,17 +87,21 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-  ActivateUser = (dataSource: IUserManager) => {
+  ActivateUser = (dataSource: IUserManager, rowIndex: number) => {
     this.allContactsService.Activate(dataSource.id);
+    this.refetchTable(rowIndex);
   }
-  DeActivateUser = (dataSource: IUserManager) => {
+  DeActivateUser = (dataSource: IUserManager, rowIndex: number) => {
     this.allContactsService.DeActivate(dataSource.id);
+    this.refetchTable(rowIndex);
   }
-  resetPasswordUser = (dataSource: IUserManager) => {
+  resetPasswordUser = (dataSource: IUserManager, rowIndex: number) => {
     this.allContactsService.resetPassword(dataSource.id);
+    this.refetchTable(rowIndex);
   }
   showExactConfig = (index: number) => {
     let a = document.querySelectorAll('.more_configs');
     a[index].classList.toggle('showConfigs');
   }
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
 }

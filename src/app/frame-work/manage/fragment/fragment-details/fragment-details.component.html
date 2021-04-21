@@ -1,7 +1,6 @@
 <p-table #dtableDetails [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[10,25,50]" [filterDelay]="0" dir="rtl"
-   
+    [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-responsive" [responsive]="true" dir="rtl"
     styleClass="p-datatable-responsive" dataKey="id" editMode="row">
 
     <ng-template pTemplate="caption">
@@ -57,7 +56,8 @@
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
                 </i>
-                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource)" class="_save pi pi-check"></i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)"
+                    class="_save pi pi-check"></i>
                 <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
                     class="_cancel pi pi-times"></i>
             </td>

@@ -2,6 +2,7 @@
 @import '../../../../../assets/input.scss';
 @import '../../../../../assets/button.scss';
 @import '../../../../../assets/primeNG';
+@import '../../../../../assets/tooltip.scss';
 
 
 .content {
@@ -16,6 +17,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 17rem));
   direction: rtl;
+  justify-content: center;
   gap: $font_05;
   padding: $font_xs $font_05;
   border-radius: $border_15;
@@ -78,6 +80,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    margin-top: $font_xs;
     background: $orange_500;
     color: $white;
     width: 100%;
@@ -91,4 +94,12 @@ input {
 
 .input_2 {
   margin: 0;
+}
+
+.header_icons_wrap {
+  position: relative;
+
+  .left_side {
+    position: absolute;
+  }
 }

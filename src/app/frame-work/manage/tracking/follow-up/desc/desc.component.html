@@ -6,7 +6,8 @@
                 <div class="_key">{{item.header}}</div>
                 <ng-container
                     *ngIf="dataSource[item.field] === true || dataSource[item.field] === false; else elseTemplate">
-                    <mat-checkbox name="item.field" [(ngModel)]="dataSource[item.field]">{{item.header}}</mat-checkbox>
+                    <mat-checkbox [disabled]="true" name="item.field" [(ngModel)]="dataSource[item.field]">
+                        {{item.header}}</mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
                     <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
@@ -36,8 +37,8 @@
     </mat-radio-group>
 </section>
 
-<p-table *ngIf="!canShowGraph" [columns]="defColumns" [value]="changeHsty" dir="rtl"
-    styleClass="p-datatable-responsive">
+<p-table *ngIf="!canShowGraph" [columns]="defColumns" [value]="changeHsty" dir="rtl" styleClass="p-datatable-responsive"
+    [responsive]="true">
 
     <ng-template pTemplate="caption">
         <th>

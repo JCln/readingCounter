@@ -41,11 +41,11 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   routeToLMAll = (row: ITracking) => {
     this.router.navigate(['wr/m/l/all', false, row.id]);
   }
-  rowToImported = (row: ITracking, desc: string) => {
+  private rowToImported = (row: ITracking, desc: string, rowIndex: number) => {
     this.trackingManagerService.migrateDataRowToImported(row.id, desc).subscribe((res: IResponses) => {
       if (res) {
         this.utilsService.snackBarMessageSuccess(res.message);
-        this.refreshTable();
+        this.refetchTable(rowIndex);
       }
     })
   }
@@ -96,14 +96,15 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-  backToImportedConfirmDialog = (rowData: ITracking) => {
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: 'علت بازگشت به صادر شده'
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.rowToImported(rowData, desc)
+          this.rowToImported(rowData, desc, rowIndex);
         }
       })
     })

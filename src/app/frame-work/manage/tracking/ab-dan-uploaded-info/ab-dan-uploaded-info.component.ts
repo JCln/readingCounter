@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -41,7 +42,8 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
     private interactionService: InteractionService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private _location: Location
     // private domSanitizer: DomSanitizer
   ) { }
 
@@ -151,5 +153,5 @@ export class AbDanUploadedInfoComponent implements OnInit, AfterViewInit, OnDest
       closable: true
     })
   }
-
+  toPrePage = () => this._location.back();
 }

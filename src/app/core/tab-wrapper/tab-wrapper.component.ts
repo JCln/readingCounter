@@ -111,9 +111,9 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
       completeRoutePart = this.router.url.split('/').pop();
     }
-    console.log(completeRoutePart);
-    console.log(dRoute._dynamicRoute);
-    console.log(lastUrlPart);
+    // console.log(completeRoutePart);
+    // console.log(dRoute._dynamicRoute);
+    // console.log(lastUrlPart);
 
     const a = {
       route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
@@ -123,6 +123,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       this.tabs.push(a);
       this.reFetchPageTitle();
     }
+    this.reFetchPageTitle();
   }
   testCheck = () => {
     if (this.router.url !== '/wr') {
@@ -144,6 +145,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
         const currentRouteFound = this.DoesCurrentRouteFound();
         if (currentRouteFound) {
           if (this.DoesTabsHaveThisRouteNow()) {
+            this.reFetchPageTitle();
             return;
           }
           else {
@@ -157,6 +159,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
           this.addDynamicRoute();
           this.reFetchPageTitle();
         }
+        this.reFetchPageTitle();
       }
     }))
   }

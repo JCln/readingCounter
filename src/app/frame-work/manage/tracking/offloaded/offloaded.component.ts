@@ -30,7 +30,9 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
+  refreshTable = () => this.classWrapper(true);
   nullSavedSource = () => this.closeTabService.saveDataForTrackOffloaded = null;
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
@@ -81,9 +83,6 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }
@@ -94,7 +93,9 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   routeToOffloadModify = (dataSource: ITracking) => {
     this.router.navigate(['wr/m/l/all', true, dataSource.id]);
   }
-  backToReading = (dataSource: ITracking) => {
-    this.trackingManagerService.TESTbackToConfirmDialog(dataSource.id, ENTrackingMessage.toReading);
+  backToReading = async (dataSource: ITracking, rowIndex: number) => {
+    const a = await this.trackingManagerService.TESTbackToConfirmDialog(dataSource.id, ENTrackingMessage.toReading);
+    if (a)
+      this.refetchTable(rowIndex);
   }
 }
