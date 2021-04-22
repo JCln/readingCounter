@@ -1,22 +1,10 @@
 <main class="container">
 
-    <section class="forbidden">
-        <div class="_header">غیر مجاز</div>
-
-        <div class="_key_value" *ngFor="let item of _col_forbidden">
-            <div class="key">{{item.header}}</div>
-            <div class="val">{{forbidden[item.field]}}</div>
-        </div>
-    </section>
-
-    <section class="media">
-        <div class="_header">تصاویر</div>
-
-        <div class="_key_value" *ngFor="let item of _col_Media">
-            <div class="key">{{item.header}}</div>
-            <div class="val">{{media[item.field]}}</div>
-        </div>
-    </section>
+    <app-forbidden></app-forbidden>
+    <app-media></app-media>
+    <app-read-time></app-read-time>
+    <app-rr-time></app-rr-time>
+    
     <div *ngIf="lineChartData.length" class="chart_0 charts line relative_pos">
         <div class="title">قرائت</div>
         <div style="display: block;">

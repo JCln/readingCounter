@@ -1,0 +1,8 @@
+<section class="forbidden">
+    <div class="_header">غیر مجاز</div>
+
+    <div class="_key_value" *ngFor="let item of _col_forbidden">
+        <div class="key">{{item.header}}</div>
+        <div class="val">{{forbidden[item.field]}}</div>
+    </div>
+</section>

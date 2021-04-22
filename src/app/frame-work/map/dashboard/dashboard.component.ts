@@ -8,13 +8,7 @@ import {
   monkeyPatchChartJsTooltip,
   SingleDataSet,
 } from 'ng2-charts';
-import {
-  IDashboardForbiddenTimed,
-  IDashboardKarkardTimed,
-  IDashboardMediaTimed,
-  IDashboardReadDaily,
-} from 'src/app/Interfaces/inon-manage';
-import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
+import { IDashboardKarkardTimed, IDashboardReadDaily } from 'src/app/Interfaces/inon-manage';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
@@ -23,13 +17,8 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  forbidden: IDashboardForbiddenTimed;
-  media: IDashboardMediaTimed;
   karkard: IDashboardKarkardTimed[] = [];
   readDaily: IDashboardReadDaily[] = [];
-
-  _col_forbidden: IObjectIteratation[] = [];
-  _col_Media: IObjectIteratation[] = [];
 
   _analyzer_interface: any[];
 
@@ -122,6 +111,14 @@ export class DashboardComponent implements OnInit {
   public lineChartLabels: Label[] = [];
   public lineChartOptions: any;
   public lineChartColors: Color[] = [
+    { // Custom
+      backgroundColor: 'rgb(0, 69, 203)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
     // { // grey
     //   backgroundColor: 'rgba(148,159,177,0.2)',
     //   borderColor: 'rgba(148,159,177,1)',
@@ -130,14 +127,14 @@ export class DashboardComponent implements OnInit {
     //   pointHoverBackgroundColor: '#fff',
     //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     // },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    }
+    // { // dark grey
+    //   backgroundColor: 'rgba(77,83,96,0.2)',
+    //   borderColor: 'rgba(77,83,96,1)',
+    //   pointBackgroundColor: 'rgba(77,83,96,1)',
+    //   pointBorderColor: '#fff',
+    //   pointHoverBackgroundColor: '#fff',
+    //   pointHoverBorderColor: 'rgba(77,83,96,1)'
+    // }
   ];
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
@@ -153,24 +150,23 @@ export class DashboardComponent implements OnInit {
     monkeyPatchChartJsLegend();
   }
 
-  private insertSelectedColumns = () => {
-    this._col_Media = this.dashboardService.columnDashboardMedia();
-    this._col_forbidden = this.dashboardService.columnDashboardForbidden();
-  }
-
   classWrapper = async () => {
     this.readDaily = await this.dashboardService.getDashboardReadDaily();
     this.addToLineChart();
 
-    this.forbidden = await this.dashboardService.getDashboardForbidden();
-    this.media = await this.dashboardService.getDashboardMedia();
     this.karkard = await this.dashboardService.getDashboardKarkard();
-    this.insertSelectedColumns();
     this.getPieChartData();
   }
   addToLineChart = () => {
-    const temp = this.dashboardService.getElementOfArrOfObjects(this.readDaily);
+    const count = this.dashboardService.getElementOfArrOfObjects(this.readDaily, 'count');
+    const period = this.dashboardService.getElementOfArrOfObjects(this.readDaily, 'period');
+    const hints = this.dashboardService.getElementOfArrOfObjects(this.readDaily, 'hint');
     // this.lineChartLabels = temp;
+
+    this.lineChartLabels = hints, period;
+    this.lineChartData = [{ data: count, label: 'کارکرد' }];//label: this.readDaily.hint
+    this.progressiveLineChart();
+
     this.lineChartOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -185,45 +181,46 @@ export class DashboardComponent implements OnInit {
           {
             id: 'y-axis-1',
             position: 'right',
-            gridLines: {
-              color: 'rgb(14, 76, 146)',
-            },
+            // gridLines: {
+            //   color: 'rgb(14, 76, 146)',
+            // },
             ticks: {
               fontColor: 'rgb(14, 76, 146)',
+              fontFamily: 'Blutos'
             }
           }
         ]
       },
-      // annotation: {
-      //   annotations: [
-      //     {
-      //       type: 'line',
-      //       mode: 'vertical',
-      //       scaleID: 'x-axis-0',
-      //       value: 'March',
-      //       // borderColor: 'orange',
-      //       borderWidth: 2,
-      //       label: {
-      //         enabled: true,
-      //         // fontColor: 'orange',
-      //         content: 'LineAnno'
-      //       }
-      //     },
-      //   ],
-      // },
+      annotation: {
+        annotations: [
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-0',
+            value: 'March',
+            // borderColor: 'orange',
+            borderWidth: 2,
+            label: {
+              enabled: true,
+              // fontColor: 'orange',
+              content: 'LineAnno'
+            }
+          },
+        ],
+      },
       tooltips: {
         callbacks: {
           label: function (tooltipItem, data) {
-            const datasetLabel = data.datasets[tooltipItem.datasetIndex].label;
-            console.log(datasetLabel);
-            return datasetLabel;
+            let allData: any = data.datasets[tooltipItem.datasetIndex].data;
+            let tooltipLabel = data.labels[tooltipItem.index];
+            let tooltipData = allData[tooltipItem.index];
+            return tooltipData;
+
           }
         }
 
       }
     }
-    this.lineChartData = [{ data: temp, label: 'کارکرد' }];//label: this.readDaily.hint
-    this.progressiveLineChart();
   }
   progressiveLineChart = () => {
     const totalDuration = 10000;

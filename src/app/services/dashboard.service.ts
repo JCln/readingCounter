@@ -34,6 +34,30 @@ export class DashboardService {
       { field: 'inYearCount', header: 'سال', isSelected: true, readonly: false }
     ];
   }
+  columnDashboardRead = (): IObjectIteratation[] => {
+    return [
+      { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
+      { field: 'inWeekCont', header: 'هفته', isSelected: true, readonly: true },
+      { field: 'inMonthCount', header: 'ماه', isSelected: true, readonly: true },
+      { field: 'inYearCount', header: 'سال', isSelected: true, readonly: false }
+    ];
+  }
+  columnDashboardReadingReportTimed = (): IObjectIteratation[] => {
+    return [
+      { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
+      { field: 'inWeekCont', header: 'هفته', isSelected: true, readonly: true },
+      { field: 'inMonthCount', header: 'ماه', isSelected: true, readonly: true },
+      { field: 'inYearCount', header: 'سال', isSelected: true, readonly: false }
+    ];
+  }
+  columnDashboardReadTimed = (): IObjectIteratation[] => {
+    return [
+      { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
+      { field: 'inWeekCont', header: 'هفته', isSelected: true, readonly: true },
+      { field: 'inMonthCount', header: 'ماه', isSelected: true, readonly: true },
+      { field: 'inYearCount', header: 'سال', isSelected: true, readonly: false }
+    ];
+  }
 
   /* CALL API */
   getDashboardKarkard = (): Promise<any> => {
@@ -62,6 +86,28 @@ export class DashboardService {
     try {
       return new Promise((resolve) => {
         this.interfaceService.getDashboardMediaTimed().subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
+  getDashboardReadingReport = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceService.getDashboardReadingReportTimed().subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
+  getDashboardReadTimed = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceService.getDashboardReadTimed().subscribe(res => {
           resolve(res);
         })
       })
@@ -117,15 +163,11 @@ export class DashboardService {
 
     return a;
   }
-  getElementOfArrOfObjects = (sth: IDashboardReadDaily[]): any[] => {
+  getElementOfArrOfObjects = (sth: IDashboardReadDaily[], parameterName: string): any[] => {
     let a = [];
     sth.forEach((item: IDashboardReadDaily) => {
-      a.push(item.count, item.hint, item.period);
+      a.push(item[parameterName]);
     })
-    // a.push({ label: [item.hint, item.period] })
-    // console.log(a);
-    console.log(a);
-    
     return a;
   }
 }

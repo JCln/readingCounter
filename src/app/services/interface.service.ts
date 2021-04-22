@@ -50,6 +50,12 @@ export class InterfaceService {
   getDashboardMediaTimed = (): Observable<any> => {
     return this.mainService.GET('V1/List/Dashboard/Media/Timed');
   }
+  getDashboardReadingReportTimed = (): Observable<any> => {
+    return this.mainService.GET('V1/ReadingReport/Dashboard/Timed');
+  }
+  getDashboardReadTimed = (): Observable<any> => {
+    return this.mainService.GET('V1/List/Dashboard/Read/Timed');
+  }
   getDashboardForbiddenTimed = (): Observable<any> => {
     return this.mainService.GET('V1/Forbidden/Dashboard/Timed');
   }

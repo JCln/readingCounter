@@ -119,13 +119,7 @@ export interface IDashboardKarkardTimed {
     saierCount: number,
     caption: string
 }
-export interface IDashboardMediaTimed {
-    inDayCount: number,
-    inWeekCont: number,
-    inMonthCount: number,
-    inYearCount: number
-}
-export interface IDashboardForbiddenTimed {
+export interface IDashboardTimed {
     inDayCount: number,
     inWeekCont: number,
     inMonthCount: number,
