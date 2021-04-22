@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerPDXY } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
+import { EnvService } from 'src/app/services/env.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -59,7 +60,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     private readingReportManagerService: ReadingReportManagerService,
     public route: ActivatedRoute,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private envService: EnvService
   ) {
     this.extrasNavigation = this.getRouterExtras();
   }
@@ -71,10 +73,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     const SATELLITE = this.mapItems[1];
     // const Esri = this.mapItems[2];
     const
-      streets = L.tileLayer(
-        OSM.mapBoxUrl),
-      satellite = L.tileLayer(
-        SATELLITE.mapBoxUrl + SATELLITE.accessToken)
+      streets = L.tileLayer(this.envService.OSMmapBoxUrl),
+      satellite = L.tileLayer(this.envService.SATELLITEMapBoxUrl + this.envService.SATELLITEMapAccessToken)
     // esri = L.tileLayer(
     //   Esri.mapBoxUrl)
 

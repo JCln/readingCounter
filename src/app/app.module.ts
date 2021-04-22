@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CoreModule } from './core/core.module';
+import { EnvServiceProvider } from './services/env.service.provider';
 import { SharedTwoModule } from './shared/shared-two.module';
 
 @NgModule({
@@ -18,7 +19,7 @@ import { SharedTwoModule } from './shared/shared-two.module';
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [EnvServiceProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
