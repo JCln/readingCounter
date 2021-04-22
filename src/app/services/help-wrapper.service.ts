@@ -157,7 +157,7 @@ export class HelpWrapperService {
     }
     else if (currentRoute.includes('/m/l/all/false/') || currentRoute.includes('/m/track/woui/false')) {
       this.messageToShow.title = 'لیست قرائت';
-      this.messageToShow.messageOne = ' لیست قرائت مامور در این قسمت قابل مشاهده می باشد. درصورتی که عکس(ها) و یا صوتی گرفته شده باشد در قسمت مشاهده عکس/صوت قابل بررسی می باشد.';
+      this.messageToShow.messageOne = ' لیست قرائت مامور در این قسمت قابل مشاهده می باشد. درصورتی که عکس(ها) و یا صوتی گرفته شده باشد با کلیک برروی "بررسی عکس/صوت" قابل بررسی می باشد.';
       this.messageToShow.imgOne = 'assets/imgs/help/woui/woui.JPG';
       this.messageToShow.messageTwo = '';
       this.messageToShow.messageThree = '';

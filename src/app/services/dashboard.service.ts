@@ -170,4 +170,11 @@ export class DashboardService {
     })
     return a;
   }
+  getElementIndexes = (sth: IDashboardReadDaily[]): any[] => {
+    let a = [];
+    sth.forEach((item: any, index) => {
+      a.push(index + 1);
+    })
+    return a;
+  }
 }

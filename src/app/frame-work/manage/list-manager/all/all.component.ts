@@ -76,21 +76,13 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  getDataSource = (): Promise<IListManagerAll[]> => {
-    return new Promise((resolve) => {
-      this.listManagerService.getLMAll(this.trackId).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   nullSavedSource = () => this.closeTabService.saveDataForLMAll = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.getDataSource();
+
+    this.dataSource = await this.listManagerService.getLMAll(this.trackId);
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
@@ -100,6 +92,8 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
     this.convertQotrIdToTitle(this.dataSource, this.qotrDictionary);
     this.convertCounterStateIdToTitle(this.dataSource, this.counterStateDictionary);
+
+    this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -122,7 +116,6 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       if (res instanceof NavigationEnd) {
         this.isFromOffloadPage();
         this.classWrapper();
-        this.insertSelectedColumns();
       }
     })
     )
@@ -133,7 +126,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res.includes('/wr/m/l/all/'))
-          this.classWrapper(true);
+          this.classWrapper();
       }
     })
     )

@@ -45,11 +45,12 @@
   position: absolute;
   border-radius: $border_5;
   background: $white;
-  right: 0;
-  top: -$font_xxs;
-  font-size: $font_m;
+  right: $font_05;
+  top: 0;
+  font-size: $font_l;
   color: $blue_700;
   font-weight: 800;
+  z-index: 1;
 }
 
 ._key_value {
@@ -78,7 +79,6 @@
   padding: $font_xs 0;
 }
 
-// .pie,
 .relative_pos {
   position: relative;
 }
@@ -92,23 +92,27 @@
   }
 }
 
+.pie {
+  min-height: 18rem;
+
+  .title {
+    top: auto;
+  }
+}
+
 .chart_1 {
-  grid-column: auto / span 2;
   box-shadow: none;
 }
 
 .chart_2 {
-  grid-column: auto / span 2;
   box-shadow: none;
 }
 
 .chart_3 {
-  grid-column: auto / span 2;
   box-shadow: none;
 }
 
 .chart_4 {
-  grid-column: auto / span 2;
   box-shadow: none;
 }
 
@@ -128,4 +132,5 @@
 
 ._unified {
   background-color: $white;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, auto))
 }

@@ -4,10 +4,10 @@
     <app-media></app-media>
     <app-read-time></app-read-time>
     <app-rr-time></app-rr-time>
-    
+
     <div *ngIf="lineChartData.length" class="chart_0 charts line relative_pos">
         <div class="title">قرائت</div>
-        <div style="display: block;">
+        <div class="chart_analyze">
             <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
                 [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
                 [chartType]="lineChartType" [plugins]="lineChartPlugins">

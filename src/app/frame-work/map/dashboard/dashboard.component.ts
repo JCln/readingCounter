@@ -32,6 +32,7 @@ export class DashboardComponent implements OnInit {
   // Pie
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     legend: {
       display: true,
       position: 'right',
@@ -118,23 +119,7 @@ export class DashboardComponent implements OnInit {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    // { // grey
-    //   backgroundColor: 'rgba(148,159,177,0.2)',
-    //   borderColor: 'rgba(148,159,177,1)',
-    //   pointBackgroundColor: 'rgba(148,159,177,1)',
-    //   pointBorderColor: '#fff',
-    //   pointHoverBackgroundColor: '#fff',
-    //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    // },
-    // { // dark grey
-    //   backgroundColor: 'rgba(77,83,96,0.2)',
-    //   borderColor: 'rgba(77,83,96,1)',
-    //   pointBackgroundColor: 'rgba(77,83,96,1)',
-    //   pointBorderColor: '#fff',
-    //   pointHoverBackgroundColor: '#fff',
-    //   pointHoverBorderColor: 'rgba(77,83,96,1)'
-    // }
+    }
   ];
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
@@ -159,13 +144,13 @@ export class DashboardComponent implements OnInit {
   }
   addToLineChart = () => {
     const count = this.dashboardService.getElementOfArrOfObjects(this.readDaily, 'count');
-    const period = this.dashboardService.getElementOfArrOfObjects(this.readDaily, 'period');
+    // const period = this.dashboardService.getElementOfArrOfObjects(this.readDaily, 'period');
     const hints = this.dashboardService.getElementOfArrOfObjects(this.readDaily, 'hint');
-    // this.lineChartLabels = temp;
+    const indexes = this.dashboardService.getElementIndexes(this.readDaily);
 
-    this.lineChartLabels = hints, period;
+    this.lineChartLabels = indexes;
     this.lineChartData = [{ data: count, label: 'کارکرد' }];//label: this.readDaily.hint
-    this.progressiveLineChart();
+    // this.progressiveLineChart();
 
     this.lineChartOptions = {
       responsive: true,
@@ -214,7 +199,13 @@ export class DashboardComponent implements OnInit {
             let allData: any = data.datasets[tooltipItem.datasetIndex].data;
             let tooltipLabel = data.labels[tooltipItem.index];
             let tooltipData = allData[tooltipItem.index];
-            return tooltipData;
+            let customTooltip = hints[tooltipItem.index]
+            // console.log(tooltipLabel);
+            // console.log(tooltipItem);
+            // console.log(data);
+            // console.log(tooltipData);
+
+            return customTooltip;
 
           }
         }

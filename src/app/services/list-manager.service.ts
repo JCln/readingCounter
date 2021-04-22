@@ -2,13 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
+import { IListManagerAll } from '../Interfaces/imanage';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
+import { CloseTabService } from './close-tab.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListManagerService {
+  private readingListGUID: string;
+
   columnSelectedLMAll = (): IObjectIteratation[] => {
     return [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
@@ -99,11 +104,29 @@ export class ListManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    private closeTabService: CloseTabService,
+    private utilsService: UtilsService
   ) { }
 
-  getLMAll = (trackingId: string): Observable<any> => {
-    return this.interfaceManagerService.getLMAll(trackingId);
+  getLMAll = (trackingId: string): Promise<any> | IListManagerAll[] => {
+    // console.log(this.closeTabService.saveDataForLMAll);
+    // if (!this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
+    //   return this.closeTabService.saveDataForLMAll;
+    if (this.readingListGUID === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
+      return this.closeTabService.saveDataForLMAll;
+    this.readingListGUID = trackingId;
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
+          this.closeTabService.saveDataForLMAll = res;
+          console.log(this.closeTabService.saveDataForLMAll);
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   getLMAllZoneDictionary = () => {
     return this.dictionaryWrapperService.getZoneDictionary();
