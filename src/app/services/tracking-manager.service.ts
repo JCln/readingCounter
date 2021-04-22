@@ -359,10 +359,28 @@ export class TrackingManagerService {
     }
     return true;
   }
+  private followUPValidation = (id: number): boolean => {
+    if (this.isValidationNull(id)) {
+      this.showWarnMessage('شماره پیگیری را وارد نمایید');
+      return false;
+    }
+    if (this.validationIsNAN(id)) {
+      this.showWarnMessage('فرمت شماره پیگیری اشتباه است');
+      return false;
+    }
+    if (!this.utilsService.isLowerThanMinLength(id, 2) || !this.utilsService.isLowerThanMaxLength(id, 10)) {
+      this.showWarnMessage('تعداد ارقام شماره پیگیری اشتباه است');
+      return false;
+    }
+    return true;
+  }
 
   /* VERIFICATION */
   verificationOffloadModify = (object: IOffloadModifyReq): boolean => {
     return this.offloadModifyValidation(object);
+  }
+  verificationFollowUPTrackNumber = (id: number): boolean => {
+    return this.followUPValidation(id);
   }
 
 }

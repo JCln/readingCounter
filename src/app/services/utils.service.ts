@@ -79,6 +79,16 @@ export class UtilsService {
       return false;
     return true;
   }
+  isLowerThanMinLength = (sth: number | string, minLength: number): boolean => {
+    if (sth.toString().length < minLength)
+      return false;
+    return true
+  }
+  isLowerThanMaxLength = (sth: number | string, maxLength: number): boolean => {
+    if (sth.toString().length > maxLength)
+      return false;
+    return true
+  }
   isFromLowerThanTo = (from: number, to: number) => {
     if (from > to)
       return false;

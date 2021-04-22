@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 @Component({
   selector: 'app-follow-up',
@@ -25,12 +26,17 @@ export class FollowUpComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private trackingManagerService: TrackingManagerService
   ) { }
 
   ngOnInit(): void {
   }
-  routeToChild = () => {
+  verification = () => {
+    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber))
+      this.routeToChild();
+  }
+  private routeToChild = () => {
     this.router.navigate(['wr/m/track/fwu/', this.trackNumber])
   }
 

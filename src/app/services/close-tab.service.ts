@@ -195,9 +195,6 @@ export class CloseTabService {
       case '/wr/m/l/pd':
         this.saveDataForLMPD = '';
         break;
-      case '/wr/m/l/all':
-        this.saveDataForLMAll = '';
-        break;
       case '/wr/m/fbn':
         this.saveDataForLMAll = '';
         break;
@@ -244,6 +241,7 @@ export class CloseTabService {
     }
     if (url.includes('/wr/m/l/all/')) {
       this.saveDataForLMAll = '';
+      return;
     }
     if (url.includes('/wr/mu/edit/')) {
       this.saveDataForEditContacts = '';
