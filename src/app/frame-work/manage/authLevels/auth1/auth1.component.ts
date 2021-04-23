@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { AuthsManagerService } from 'src/app/services/auths-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
@@ -37,7 +38,8 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private authsManagerService: AuthsManagerService
   ) { }
 
   openDialog = () => {
@@ -91,15 +93,6 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getAuthLevel1Manager().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   filter = () => {
     this.dataSource.filterPredicate = this.createFilter();
 
@@ -119,7 +112,7 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
     if (this.closeTabService.saveDataForAppLevel1)
       this.dataSource.data = this.closeTabService.saveDataForAppLevel1;
     else {
-      this.dataSource.data = await this.getDataSource();
+      this.dataSource.data = await this.authsManagerService.getAuth1DataSource();
       this.closeTabService.saveDataForAppLevel1 = this.dataSource.data;
     }
     this.filter();

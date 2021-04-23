@@ -6,8 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { AuthsManagerService } from 'src/app/services/auths-manager.service';
 import { CloseTabService } from 'src/app/services/close-tab.service';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -43,7 +43,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private authsManagerService: AuthsManagerService
   ) { }
 
   openDialog = () => {
@@ -112,20 +112,6 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  getAuthLevel4IdDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getAuthLev3Dictionary());
-    });
-  }
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getAuthLevel4Manager().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   filter = () => {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -157,10 +143,10 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.data = this.closeTabService.saveDataForAppLevel4;
     }
     else {
-      this.dataSource.data = await this.getDataSource();
+      this.dataSource.data = await this.authsManagerService.getAuth4DataSource();
       this.closeTabService.saveDataForAppLevel4 = this.dataSource.data;
     }
-    this.auth3Dictionary = await this.getAuthLevel4IdDictionary();
+    this.auth3Dictionary = await this.authsManagerService.getAuthLevel3Dictionary();
     this.convertIdToTitle(this.dataSource.data, this.auth3Dictionary);
     this.filter();
   }

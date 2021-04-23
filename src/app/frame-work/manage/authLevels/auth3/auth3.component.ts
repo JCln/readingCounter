@@ -5,8 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { AuthsManagerService } from 'src/app/services/auths-manager.service';
 import { CloseTabService } from 'src/app/services/close-tab.service';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -41,7 +41,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private authsManagerService: AuthsManagerService
   ) { }
 
   // add auth 2 not working
@@ -107,20 +107,6 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  getAuthLevel2Id = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getAuthLev2Dictionary());
-    });
-  }
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getAuthLevel3Manager().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   filter = () => {
     this.dataSource.filterPredicate = this.createFilter();
 
@@ -148,10 +134,10 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.data = this.closeTabService.saveDataForAppLevel3;
     }
     else {
-      this.dataSource.data = await this.getDataSource();
+      this.dataSource.data = await this.authsManagerService.getAuth3DataSource();
       this.closeTabService.saveDataForAppLevel3 = this.dataSource.data;
     }
-    this.auth2Dictionary = await this.getAuthLevel2Id();
+    this.auth2Dictionary = await this.authsManagerService.getAuthLevel2Dictionary();
     this.convertIdToTitle(this.dataSource.data, this.auth2Dictionary);
     this.filter();
   }
