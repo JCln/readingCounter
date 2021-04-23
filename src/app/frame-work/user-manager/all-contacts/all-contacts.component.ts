@@ -59,7 +59,8 @@ export class AllContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     else {
       this.dataSource = this.closeTabService.saveDataForAllContacts;
     }
-    this.insertSelectedColumns();
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
     this._selectedColumns = this.allContactsService.columnSelectedUserAllContacts();

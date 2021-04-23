@@ -50,10 +50,11 @@ export class PrfmResComponent implements OnInit {
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRAnalyzeByParamManager();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
-    console.log(this.dataSource);
     this.setGetRanges();
-    this.insertSelectedColumns();
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.connectToServer();

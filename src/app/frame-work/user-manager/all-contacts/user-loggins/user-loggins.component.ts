@@ -33,7 +33,9 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getDataSource = async () => {
     this.dataSource = await this.userLogginsService.getLogsDataSource(this.UUID);
-    this.insertSelectedColumns();
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   private insertSelectedColumns = () => {
     this._selectCols = this.userLogginsService.columnSelectedUserLogs();

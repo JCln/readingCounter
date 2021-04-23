@@ -1,10 +1,9 @@
-import { Location } from '@angular/common';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { retryWhen, take } from 'rxjs/operators';
+import { take } from 'rxjs/internal/operators/take';
 
 import { AuthService } from './auth.service';
 import { JwtService } from './jwt.service';
@@ -18,7 +17,7 @@ export class InterceptorService implements HttpInterceptor {
   constructor(
     private jwtService: JwtService,
     private authService: AuthService,
-    private _location: Location
+    // private _location: Location
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -29,23 +28,13 @@ export class InterceptorService implements HttpInterceptor {
     }
     return next.handle(req)
       .pipe(
-        retryWhen(errors => errors.pipe(
-          // mergeMap((error: HttpErrorResponse, retryAttempt: number) => {
-          //   if (retryAttempt === 1) {
-          //     return throwError(error); // no retry
-          //   }
-          //   return of(error); // retry
-          // }),
-          // delay(ENSnackBarTimes.fourMili),
-          take(1)
-        )),
+        take(2),
         catchError((error => {
           console.log(req.url);
 
           if (
             req.url.includes('login')
           ) {
-            console.log(req.url);
             return throwError(error)
           }
           console.log(req.url);
@@ -64,12 +53,12 @@ export class InterceptorService implements HttpInterceptor {
                 this.authService.goOutIn();
                 // this.authService.routeTo('/wr');
                 this.authService.logout();
-                return;
+                return throwError(error);
               }
             }
             this.authService.noAccessMessage();
-            this._location.back();
-            return throwError(error)
+            // this._location.back();
+            return throwError(error);
           }
         }))
       )
@@ -90,16 +79,13 @@ export class InterceptorService implements HttpInterceptor {
     });
     if (!newStoredToken) {
       console.log("There is no new AccessToken.", { requestAccessTokenHeader: requestAccessTokenHeader, newStoredToken: newStoredToken });
-      console.log(2);
       return null;
     }
     const newAccessTokenHeader = newStoredToken;
     if (requestAccessTokenHeader === newAccessTokenHeader) {
       console.log("There is no new AccessToken.", { requestAccessTokenHeader: requestAccessTokenHeader, newAccessTokenHeader: newAccessTokenHeader });
-      console.log(3);
       return null;
     }
-    console.log(4);
     return this.addToken(request, newAccessTokenHeader);
   }
 }

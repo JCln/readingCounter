@@ -39,9 +39,11 @@ export class DetailsResComponent implements OnInit {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRDetailsManager();
-    this.insertSelectedColumns();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
 
   insertSelectedColumns = () => {

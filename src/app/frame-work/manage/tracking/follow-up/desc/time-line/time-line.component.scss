@@ -21,15 +21,19 @@
 }
 
 ._number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   left: $font_xs;
   top: -$font_xs;
   background: $blue_400;
   color: $white;
-  padding: $font_05;
   border-radius: $border_5;
   font-size: $font_l;
   font-weight: 600;
+  height: 2rem;
+  width: 2rem;  
 }
 
 .title {

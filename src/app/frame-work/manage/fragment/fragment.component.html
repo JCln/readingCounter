@@ -9,7 +9,8 @@
         <i></i>
         <div class="header_icons_wrap">
             <div class="left_side">
-                <i appAddRow [table]="dt" [newRow]="newRow()" class="tooltip _circle_border p_icons fa fa-plus">
+                <i appAddRow [table]="dt" [newRow]="newRow()" [newRowLimit]="newRowLimit" (click)="testChangedValue()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن</div>
                 </i>
             </div>
@@ -101,7 +102,7 @@
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
                 </i>
-                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource)" class="_save pi pi-check"></i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)" class="_save pi pi-check"></i>
                 <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
                     class="_cancel pi pi-times"></i>
             </td>

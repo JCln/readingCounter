@@ -21,8 +21,7 @@
   }
 
   [disabled] {
-    background: $pink_500;
-    color: $gray_200;
+    background: $gray_100;
   }
 
   .p-column-filter-row {
@@ -83,5 +82,10 @@
     flex-direction: row-reverse;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  footer,
+  .footer {
+    text-align: center;
   }
 }

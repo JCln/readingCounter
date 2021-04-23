@@ -9,8 +9,8 @@
         </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="left_side">
-                <i appAddRow [table]="dtableDetails" [newRow]="newRow()"
-                    class="tooltip _circle_border p_icons fa fa-plus">
+                <i appAddRow [table]="dtableDetails" [newRow]="newRow()" [newRowLimit]="newRowLimit"
+                    (click)="testChangedValue()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن</div>
                 </i>
             </div>

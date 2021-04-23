@@ -30,6 +30,9 @@ export class DisposalHoursResComponent implements OnInit {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRDisposalHoursManager();
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnSelectedRRDisposalHours();
@@ -37,7 +40,6 @@ export class DisposalHoursResComponent implements OnInit {
   }
   ngOnInit(): void {
     this.connectToServer();
-    this.insertSelectedColumns();
   }
   refreshTable = () => {
     this.ngOnInit();

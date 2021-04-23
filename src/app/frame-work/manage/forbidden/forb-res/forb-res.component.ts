@@ -55,9 +55,10 @@ export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.forbiddenService.getDataSource();
       this.closeTabService.saveDataForForbidden = this.dataSource;
     }
-    this.insertSelectedColumns();
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.classWrapper();

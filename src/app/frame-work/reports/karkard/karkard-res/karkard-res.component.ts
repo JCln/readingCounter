@@ -52,10 +52,12 @@ export class KarkardResComponent implements OnInit, OnDestroy {
     this.dataSource = await this.readingReportManagerService.postRRKarkardManager();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.connectToServer();
-    this.insertSelectedColumns();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

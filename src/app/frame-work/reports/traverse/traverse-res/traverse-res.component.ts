@@ -46,10 +46,12 @@ export class TraverseResComponent implements OnInit {
     this.dataSource = await this.readingReportManagerService.postRRTraverseManager();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.connectToServer();
-    this.insertSelectedColumns();
   }
   backToPrevious = () => {
     this.readingReportManagerService.backToPreviousPage();

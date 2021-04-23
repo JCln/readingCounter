@@ -48,7 +48,9 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForTrackLoaded = this.dataSource;
     }
     this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
-    this.insertSelectedColumns();
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {

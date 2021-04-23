@@ -94,7 +94,8 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.convertQotrIdToTitle(this.dataSource, this.qotrDictionary);
     this.convertCounterStateIdToTitle(this.dataSource, this.counterStateDictionary);
 
-    this.insertSelectedColumns();
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {

@@ -70,7 +70,9 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
       this.closeTabService.saveDataForTrackImported = this.dataSource;
     }
-    this.insertSelectedColumns();
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   onRowEditInit(product: any) {
     console.log(product);

@@ -17,8 +17,10 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
-  dataSource: IFragmentMaster[] = [];
   table: Table;
+  newRowLimit: number = 1;
+
+  dataSource: IFragmentMaster[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -33,6 +35,9 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
+  testChangedValue() {
+    this.newRowLimit = 2;
+  }
   convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
     dataSource.map(dataSource => {
       zoneDictionary.map(zoneDic => {
@@ -53,9 +58,10 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.fragmentManagerService.getDataSource();
     }
     this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
-    console.log(this.zoneDictionary);
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
     this.closeTabService.saveDataForFragmentNOB = this.dataSource;
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -69,7 +75,6 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit(): void {
     this.classWrapper();
-    this.insertSelectedColumns();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -94,37 +99,45 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   newRow(): IFragmentMaster {
-    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isValidated: false, };
+    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '' };
   }
   onRowEditInit(dataSource: any) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
-  onRowEditSave(dataSource: IFragmentMaster) {
+  onRowEditSave(dataSource: IFragmentMaster, rowIndex: number) {
     if (!this.fragmentManagerService.verificationMaster(dataSource)) {
-      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak) || this.utilsService.isNull(dataSource.routeTitle))
+      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak) || this.utilsService.isNull(dataSource.routeTitle)) {
+        this.newRowLimit = 1;
         this.dataSource.shift();
+      }
       return;
     }
     dataSource.zoneId = dataSource.zoneId['id'];
     if (!dataSource.id) {
-      this.onRowAdd(dataSource);
+      this.onRowAdd(dataSource, rowIndex);
     }
     else {
       this.fragmentManagerService.editFragmentMaster(dataSource);
     }
     this.refreshTable();
   }
-  onRowAdd(dataSource: IFragmentMaster) {
+  async onRowAdd(dataSource: IFragmentMaster, rowIndex: number) {
     if (!this.fragmentManagerService.verificationMaster(dataSource))
       return;
-    this.fragmentManagerService.addFragmentMaster(dataSource);
+    const a = await this.fragmentManagerService.addFragmentMaster(dataSource);
+    if (a) {
+      this.refetchTable(rowIndex);
+      this.refreshTable();
+    }
   }
   onRowEditCancel(dataSource: any, index: number) {
+    this.newRowLimit = 1;
     this.dataSource[index] = this.clonedProducts[dataSource.id];
     delete this.dataSource[dataSource.id];
     if (!this.fragmentManagerService.ValidationMasterNoMessage(dataSource))
-      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak) || this.utilsService.isNull(dataSource.routeTitle))
+      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak) || this.utilsService.isNull(dataSource.routeTitle)) {
         this.dataSource.shift();
+      }
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster, rowIndex: number) => {
     const obj2 = { ...dataSource };

@@ -88,11 +88,14 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
-        <tr>
-            <td [attr.colspan]="dataSource.length">
-                موردی پیدا نشد
-            </td>
-        </tr>
+        <ng-template pTemlate="footer">
+            <tr>
+                <td [attr.colspan]="dataSource.length">
+                    موردی پیدا نشد
+                </td>
+            </tr>
+
+        </ng-template>
     </ng-template>
 </p-table>
 

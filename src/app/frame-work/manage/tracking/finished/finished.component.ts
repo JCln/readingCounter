@@ -54,7 +54,8 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.trackingManagerService.getFinishedDataSource();
       this.closeTabService.saveDataForTrackFinished = this.dataSource;
     }
-    this.insertSelectedColumns();
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {

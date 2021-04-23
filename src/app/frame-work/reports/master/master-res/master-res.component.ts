@@ -36,12 +36,14 @@ export class MasterResComponent implements OnInit {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRMasterManager();
-    if (!this.dataSource.length)
+    if (!this.dataSource.length) {
       this.readingReportManagerService.emptyMessage();
+      return;
+    }
+    this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.connectToServer();
-    this.insertSelectedColumns();
   }
   refreshTable = () => {
     this.ngOnInit();

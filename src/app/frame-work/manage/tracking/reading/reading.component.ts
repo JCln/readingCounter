@@ -61,7 +61,9 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.trackingManagerService.getReadingDataSource();
       this.closeTabService.saveDataForTrackReading = this.dataSource;
     }
-    this.insertSelectedColumns();
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {

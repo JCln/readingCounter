@@ -46,7 +46,9 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.closeTabService.saveDataForTrackOffloaded = this.dataSource;
     }
-    this.insertSelectedColumns();
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {

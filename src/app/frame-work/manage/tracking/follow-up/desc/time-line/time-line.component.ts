@@ -13,8 +13,8 @@ export class TimeLineComponent implements OnInit, AfterViewInit {
 
   _colsTimeLine: any[] = [];
   _selectCols: any[] = [];
+  sortedItems: any;
 
-  
   constructor() { }
 
   columnTimeLine = (): IObjectIteratation[] => {
@@ -54,7 +54,18 @@ export class TimeLineComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.changeHistory = this.dataSource.changeHistory;
-    this.insertSelectedColumns();
+
+    if (this.dataSource) {
+
+      this.insertSelectedColumns();
+      // this.sortData();
+    }
   }
+  // sortData() {
+  //   this.sortedItems = this.changeHistory.sort((a: any, b: any) =>
+  //     new Date(a.date).getTime() - new Date(b.date).getTime()
+  //   );
+  // }
+  // dateNow: Date = new Date();
 
 }

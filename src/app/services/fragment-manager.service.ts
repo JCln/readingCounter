@@ -51,11 +51,19 @@ export class FragmentManagerService {
       console.error(e => e);
     }
   }
-  addFragmentMaster = (body: IFragmentMaster) => {
-    this.interfaceManagerService.addFragmentMaster(body).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message)
-    })
+  addFragmentMaster = (body: IFragmentMaster): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.addFragmentMaster(body).subscribe((res: IResponses) => {
+          if (res) {
+            this.utilsService.snackBarMessageSuccess(res.message);
+            resolve(res);
+          }
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   editFragmentMaster = (body: IFragmentMaster) => {
     this.interfaceManagerService.editFragmentMaster(body).subscribe((res: IResponses) => {
@@ -93,6 +101,10 @@ export class FragmentManagerService {
   }
   /* Details */
   getFragmentDetails = (masterId: string): Promise<any> => {
+    if (masterId.length < 6) {
+      this.routeToFragmentMaster();
+      return;
+    }
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.getFragmentDetails(masterId).subscribe(res => {
@@ -103,11 +115,19 @@ export class FragmentManagerService {
       console.error(e => e);
     }
   }
-  addFragmentDetails = (body: IFragmentDetails) => {
-    this.interfaceManagerService.addFragmentDetails(body).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message)
-    })
+  addFragmentDetails = (body: IFragmentDetails): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.addFragmentDetails(body).subscribe((res: IResponses) => {
+          if (res) {
+            this.utilsService.snackBarMessageSuccess(res.message);
+            resolve(res);
+          }
+        })
+      })
+    } catch (error) {
+      console.error(error);
+    }
   }
   editFragmentDetails = (body: IFragmentDetails) => {
     this.interfaceManagerService.editFragmentDetails(body).subscribe((res: IResponses) => {
@@ -115,20 +135,28 @@ export class FragmentManagerService {
         this.utilsService.snackBarMessageSuccess(res.message)
     })
   }
-  removeFragmentDetails = (body: IFragmentDetails): boolean => {
-    this.interfaceManagerService.deleteFragmentDetails(body).subscribe((res: IResponses) => {
-      if (res) {
-        this.utilsService.snackBarMessageSuccess(res.message)
-        return true;
-      }
-    })
-    return false;
+  removeFragmentDetails = (body: IFragmentDetails): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.deleteFragmentDetails(body).subscribe((res: IResponses) => {
+          if (res) {
+            this.utilsService.snackBarMessageSuccess(res.message)
+            resolve(true);
+          }
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   getRouteParams = () => {
     return this.utilsService.getRouteBySplit('/');
   }
   routeToFragmentDetails = (route: string) => {
     this.utilsService.routeToByParams('/wr/m/nob/', route);
+  }
+  routeToFragmentMaster = () => {
+    this.utilsService.routeTo('/wr/m/nob');
   }
   /**/
   getZoneDictionary = (): Promise<any> => {

@@ -56,10 +56,12 @@ export class KarkardDaylyResComponent implements OnInit {
     }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+
+    if (this.readingReportKarkardDaily.length)
+      this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.connectToServer();
-    this.insertSelectedColumns();
   }
   refreshTable = () => {
     this.ngOnInit();

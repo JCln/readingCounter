@@ -19,12 +19,14 @@ import { IFragmentDetails } from './../../../../Interfaces/imanage';
 export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
+  table: Table;
+  newRowLimit: number = 1;
+
   dataSource: IFragmentDetails[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
   _masterId: string = '';
-  table: Table;
   clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
@@ -44,7 +46,8 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
     this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
     this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
-    this.insertSelectedColumns();
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -57,8 +60,10 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this._selectedColumns = this.customizeSelectedColumns();
   }
   private getRouteParams = () => {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(res => {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       this._masterId = this.fragmentManagerService.getRouteParams();
+      console.log(this._masterId);
+
       this.classWrapper();
     })
   }
@@ -82,29 +87,39 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+
+  testChangedValue() {
+    this.newRowLimit = 2;
+  }
   refreshTable = () => this.classWrapper(true);
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   newRow(): IFragmentDetails {
     return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId };
   }
   onRowEditInit(dataSource: IFragmentDetails) {
+    console.log(this.newRowLimit);
+
+
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   onRowEditCancel(dataSource: IFragmentDetails, index: number) {
+    this.newRowLimit = 1;
+    console.log(this.newRowLimit);
+
     this.dataSource[index] = this.clonedProducts[dataSource.id];
     delete this.dataSource[dataSource.id];
     // execption when exiting row edited false
     if (!this.fragmentManagerService.ValidationDetailsNoMessage(dataSource)) {
-      if (dataSource.id)
-        return;
-      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak))
-        this.dataSource.shift();
+      this.dataSource.shift();
     }
   }
-  removeRow = (dataSource: IFragmentDetails, index: number) => {
+  removeRow = async (dataSource: IFragmentDetails, index: number) => {
+    this.newRowLimit = 1;
+    console.log(this.newRowLimit);
+
     if (!this.fragmentManagerService.verificationDetails(dataSource))
       return;
-    const a = this.fragmentManagerService.removeFragmentDetails(dataSource);
+    const a = await this.fragmentManagerService.removeFragmentDetails(dataSource);
     if (a) {
       this.dataSource[index] = this.clonedProducts[dataSource.id];
       delete this.dataSource[dataSource.id];
@@ -112,26 +127,33 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
   onRowEditSave(dataSource: IFragmentDetails, rowIndex: number) {
+    this.newRowLimit = 1;
+    console.log(this.newRowLimit);
     if (!this.fragmentManagerService.verificationDetails(dataSource)) {
       if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak))
         this.dataSource.shift();
       return;
     }
     if (!dataSource.id) {
-      this.onRowAdd(dataSource);
+      this.onRowAdd(dataSource, rowIndex);
     }
     else {
       this.fragmentManagerService.editFragmentDetails(dataSource);
     }
-    this.table.initRowEdit(dataSource); // add to table automatically
     this.refetchTable(rowIndex)
   }
-  onRowAdd(dataSource: IFragmentDetails) {
+  async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
+    console.log(this.newRowLimit);
+
     if (!this.fragmentManagerService.verificationDetails(dataSource)) {
       this.dataSource.shift();
       return;
     }
-    this.fragmentManagerService.addFragmentDetails(dataSource);
+    const a = await this.fragmentManagerService.addFragmentDetails(dataSource);
+    if (a) {
+      this.refetchTable(rowIndex);
+      this.refreshTable();
+    }
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

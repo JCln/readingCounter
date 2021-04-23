@@ -52,7 +52,9 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.zoneDictionary = await this.textOutputFieldManagerService.getZoneDictionary();
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
-    this.insertSelectedColumns();
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
