@@ -16,16 +16,15 @@ export class SideBarComponent implements OnInit {
     private sideBarItemsService: SidebarItemsService,
     private testSidebarService: SidebarItemsService
   ) {
-    this.sideBarItemsService.getSideBarItems().subscribe((sidebars: any) => {
-      if (sidebars) {
-        this.currentRoute = sidebars.items;
-      }
-    })
+    this.getSidebar();
+  }
+  getSidebar = async () => {
+    const sidebars = await this.sideBarItemsService.getSideBarItems();
+    this.currentRoute = sidebars.items;
     // this.currentRoute = this.testSidebarService.getTestSideTest();
     // this.currentRoute = this.currentRoute.items;
 
   }
-
   ngOnInit(): void {
     if (screen.width <= 520) {
       this.smallScreen = true;

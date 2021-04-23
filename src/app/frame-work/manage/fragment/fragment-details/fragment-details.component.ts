@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Table } from 'primeng/table';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -56,15 +57,10 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this._selectedColumns = this.customizeSelectedColumns();
   }
   private getRouteParams = () => {
-    this.subscription.push(this.router.events.subscribe(res => {
-      if (res instanceof NavigationEnd) {
-        if (res) {
-          this._masterId = this.fragmentManagerService.getRouteParams();
-          this.classWrapper();
-        }
-      }
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(res => {
+      this._masterId = this.fragmentManagerService.getRouteParams();
+      this.classWrapper();
     })
-    )
   }
   ngOnInit(): void {
 

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { ISidebarItems, ITabs, ITabWrapperDetectDynamicRoute } from 'src/app/Interfaces/ioverall-config';
+import { ITabs, ITabWrapperDetectDynamicRoute } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -25,31 +26,31 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
+    this.addDashboardTab();
   }
   reFetchPageTitle = () => {
     let a;
     this.tabs.map(item => {
-      if (item.route === this.router.url)
+      if (item.route === this.getRouterUrl())
         a = item.title;
     })
     this.childPageTitle.emit(a);
   }
   DoesCurrentRouteFound = (): ITabs => {
-    const currentRouteFound = this.currentRoute.find((item: any) => {
-      return item.route === this.router.url
+    return this.currentRoute.find((item: any) => {
+      return item.route === this.getRouterUrl()
     })
-    return currentRouteFound;
   }
   DoesTabsHaveThisRouteNow = (): ITabs => {
     const found = this.tabs.find((item: any) => {
-      return item.route === this.router.url
+      return item.route === this.getRouterUrl()
     })
     if (found)
       return found;
     return null;
   }
   getCurrentDynamicRoute = (route: string): string => {
-    if (this.router.url.includes(route))
+    if (this.getRouterUrl().includes(route))
       return route;
     return null;
   }
@@ -96,7 +97,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       }
     return null;
   }
-  addDynamicRoute = () => {
+  dynamicRouteValidation = () => {
     let lastUrlPart: string = '';
     let completeRoutePart: string = '';
 
@@ -125,43 +126,52 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     }
     this.reFetchPageTitle();
   }
-  testCheck = () => {
-    if (this.router.url !== '/wr') {
-      const currentRouteFound = this.currentRoute.find((item: any) => {
-        return item.route === this.router.url
-      })
-      if (currentRouteFound)
-        this.tabs.push(currentRouteFound);
-      if (this.router.url === '/wr/profile') {
-        if (!this.DoesTabsHaveThisRouteNow())
-          this.addProfileTab();
+  getRouterUrl = (): string => { return this.router.url; }
+  staticRouteValidation = () => {
+    if (!this.DoesTabsHaveThisRouteNow()) {
+      this.getRouterUrl() === '/wr/profile' ? this.addProfileTab() : ''
+    }
+  }
+  verification = () => {
+    const currentRouteFound = this.DoesCurrentRouteFound();
+    console.log(currentRouteFound);
+    this.staticRouteValidation();
+    if (currentRouteFound) {
+      console.log(currentRouteFound);
+
+      if (this.DoesTabsHaveThisRouteNow()) {
+        this.reFetchPageTitle();
+        return;
       }
-      this.addDynamicRoute();
+      this.tabs.push(currentRouteFound);
       this.reFetchPageTitle();
     }
-    ////// just check correct route
-    this.subscription.push(this.router.events.subscribe(res => {
-      if (res instanceof NavigationEnd) {
-        const currentRouteFound = this.DoesCurrentRouteFound();
-        if (currentRouteFound) {
-          if (this.DoesTabsHaveThisRouteNow()) {
-            this.reFetchPageTitle();
-            return;
-          }
-          else {
-            this.tabs.push(currentRouteFound);
-          }
-        } else {
-          if (this.router.url === '/wr/profile') {
-            if (!this.DoesTabsHaveThisRouteNow())
-              this.addProfileTab();
-          }
-          this.addDynamicRoute();
-          this.reFetchPageTitle();
-        }
-        this.reFetchPageTitle();
-      }
-    }))
+    else
+      this.dynamicRouteValidation();
+    this.reFetchPageTitle();
+  }
+  getTabWrapper = async () => {
+    let temp;
+    temp = await this.sideBarItemsService.getSideBarItems();
+    temp = temp.items;
+    temp.map((items: any) => {
+      items.subItems.map((subItems: any) => {
+        this.currentRoute.push(subItems);
+        this.verification();
+      })
+    })
+  }
+  changedRouteListener = () => {
+    this.subscription.push(
+      this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe(() => {
+          this.verification();
+        })
+    )
+  }
+  ngOnInit(): void {
+    this.getTabWrapper();
+    this.changedRouteListener();
   }
   isLatestTab = () => {
     const a = this.tabs.map(item => {
@@ -209,39 +219,6 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     }
     this.tabs.push(profileTab);
     this.reFetchPageTitle();
-  }
-  getTabItems = (): Promise<ISidebarItems> => {
-    return new Promise((resolve) => {
-      this.sideBarItemsService.getLatestItems().subscribe((sidebars: ISidebarItems) => {
-        if (sidebars) {
-          resolve(sidebars);
-        }
-      })
-    });
-  }
-  getTabWrapper = async () => {
-    const a = await this.getTabItems();
-    if (a) {
-      const temp = a.items;
-      temp.map((items: any) => {
-        items.subItems.map((subItems: any) => {
-          this.currentRoute.push(subItems);
-        })
-      })
-      this.testCheck();
-    }
-  }
-  ngOnInit(): void {
-    this.addDashboardTab();
-    this.getTabWrapper();
-
-    // this.currentRoute = this.sideBarItemsService.getTestSideTest();
-    // this.currentRoute = this.currentRoute.items;
-    // this.currentRoute.map((items: any) => {
-    //   items.subItems.map((subItems: any) => {
-    //     this.currentRoute.push(subItems);
-    //   })
-    // })
   }
   refreshCurrentPage = (tabRoute: string) => {
     this.interactionService.setRefresh(tabRoute);

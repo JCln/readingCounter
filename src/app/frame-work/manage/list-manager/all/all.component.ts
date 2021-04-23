@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerAll } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
@@ -112,11 +113,9 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.isModify);
   }
   getRouteParams = () => {
-    this.subscription.push(this.router.events.subscribe(res => {
-      if (res instanceof NavigationEnd) {
-        this.isFromOffloadPage();
-        this.classWrapper();
-      }
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      this.isFromOffloadPage();
+      this.classWrapper();
     })
     )
   }

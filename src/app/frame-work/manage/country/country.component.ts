@@ -4,11 +4,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ICountryManager } from 'src/app/Interfaces/imanage';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -24,7 +24,6 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   titleFilter = new FormControl('');
   dataSource = new MatTableDataSource();
-  countryDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
   columnsToDisplay = ['title', 'actions'];
   filterValues = {
@@ -37,7 +36,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private sectorsManagerService: SectorsManagerService
   ) { }
 
   openDialog = () => {
@@ -91,20 +90,6 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  getCountryDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getCountryDictionary());
-    });
-  }
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getCountryManager().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   filterSearchs = () => {
     this.dataSource.filterPredicate = this.createFilter();
 
@@ -125,7 +110,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.data = this.closeTabService.saveDataForCountry;
     }
     else {
-      this.dataSource.data = await this.getDataSource();
+      this.dataSource.data = await this.sectorsManagerService.getCountryDataSource();
       this.closeTabService.saveDataForCountry = this.dataSource.data;
     }
 

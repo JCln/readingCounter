@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { IOnOffLoad } from 'src/app/Interfaces/imanage';
@@ -117,17 +118,14 @@ export class OffloadComponent implements OnInit {
     }
   }
   private getRouteParams = () => {
-    this.subscription.push(this.router.events.subscribe(res => {
-      if (res instanceof NavigationEnd) {
-        if (res) {
-          const dynamicRoute = this.route.snapshot.paramMap.get('UUID');
-          this.zoneId = dynamicRoute.substring(0, 6);
-          this.offloadModifyReq.id = dynamicRoute.substring(6, dynamicRoute.length);
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(res => {
+        const dynamicRoute = this.route.snapshot.paramMap.get('UUID');
+        this.zoneId = dynamicRoute.substring(0, 6);
+        this.offloadModifyReq.id = dynamicRoute.substring(6, dynamicRoute.length);
 
-          this.classWrapper();
-        }
-      }
-    })
+        this.classWrapper();
+      })
     )
   }
   getExactImg = (id: string, index: number) => {

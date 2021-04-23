@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerPD, IListManagerPDHistory } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -81,14 +82,11 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   private getRouteParams = () => {
-    this.subscription.push(this.router.events.subscribe(res => {
-      if (res instanceof NavigationEnd) {
-        if (res) {
-          this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
-          this.classWrapper();
-        }
-      }
-    })
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(res => {
+        this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+        this.classWrapper();
+      })
     )
   }
   ngOnInit(): void {

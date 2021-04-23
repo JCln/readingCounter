@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { appItems, IRoleItems, IUserInfo } from 'src/app/Interfaces/iuser-manager';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -54,12 +55,11 @@ export class EditContactComponent implements AfterViewInit, OnDestroy {
     })
   }
   detectRouteChange = () => {
-    this.subscription.push(this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
         this.UUid = this.route.snapshot.paramMap.get('id');
         this.classWrapper();
-      }
-    })
+      })
     )
   }
 

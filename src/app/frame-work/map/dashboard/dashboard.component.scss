@@ -13,16 +13,14 @@
   overflow: auto;
 }
 
-.forbidden,
 .media {
+  min-width: 11rem;
   background: $white;
   text-align: center;
   border-radius: $border_15;
   box-shadow: 0 0 3px 2px $gray_200;
   padding: $font_xxs 0;
 }
-
-.forbidden {}
 
 ._header {
   font-size: $font_m;

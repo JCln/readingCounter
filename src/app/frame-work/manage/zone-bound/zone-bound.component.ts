@@ -7,9 +7,9 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IZoneBoundManager } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -56,7 +56,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private sectorsManagerService: SectorsManagerService
   ) { }
 
   openDialog = () => {
@@ -133,20 +133,6 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  getZoneBoundDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
-  }
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneBoundManager().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   filterSearchs = () => {
     this.dataSource.paginator = this.paginator;
 
@@ -216,10 +202,10 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.data = this.closeTabService.saveDataForZoneBound;
     }
     else {
-      this.dataSource.data = await this.getDataSource();
+      this.dataSource.data = await this.sectorsManagerService.getZoneBoundDataSource();
       this.closeTabService.saveDataForZoneBound = this.dataSource.data;
     }
-    this.zoneBoundDictionary = await this.getZoneBoundDictionary();
+    this.zoneBoundDictionary = await this.sectorsManagerService.getZoneDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
     this.convertIdToTitle(this.zoneBoundDictionary, this.zoneBoundDictionary);

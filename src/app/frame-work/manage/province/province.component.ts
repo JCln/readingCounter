@@ -6,9 +6,9 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -43,7 +43,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private sectorsManagerService: SectorsManagerService
   ) { }
 
   openDialog = () => {
@@ -128,20 +128,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  getProvinceDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getCountryDictionary());
-    });
-  }
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.getProvinceManager().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   filterSearchs = () => {
     this.dataSource.filterPredicate = this.createFilter();
 
@@ -176,10 +162,10 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.data = this.closeTabService.saveDataForProvince;
     }
     else {
-      this.dataSource.data = await this.getDataSource();
+      this.dataSource.data = await this.sectorsManagerService.getProvinceDataSource();
       this.closeTabService.saveDataForProvince = this.dataSource.data;
     }
-    this.countryDictionary = await this.getProvinceDictionary();
+    this.countryDictionary = await this.sectorsManagerService.getCountryDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
     this.convertIdToTitle(this.dataSource.data, this.countryDictionary);

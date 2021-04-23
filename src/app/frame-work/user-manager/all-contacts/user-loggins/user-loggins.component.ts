@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -52,14 +53,13 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   private getRouteParams = () => {
-    this.subscription.push(this.router.events.subscribe(res => {
-      if (res instanceof NavigationEnd) {
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(res => {
         if (res) {
           this.UUID = this.route.snapshot.paramMap.get('UUID');
           this.classWrapper();
         }
-      }
-    })
+      })
     )
   }
   ngOnInit(): void {

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IFollowUp, IFollowUpHistory } from 'src/app/Interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
@@ -79,12 +80,11 @@ export class DescComponent implements AfterViewInit, OnDestroy {
     this.insertToDesc();
   }
   getRouteParams = () => {
-    this.subscription.push(this.router.events.subscribe(res => {
-      if (res instanceof NavigationEnd) {
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
         this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
         this.classWrapper();
-      }
-    })
+      })
     )
   }
   refreshTabStatus = () => {

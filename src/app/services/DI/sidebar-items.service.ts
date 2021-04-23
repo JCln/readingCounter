@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
 import { ISidebarItems } from 'src/app/Interfaces/ioverall-config';
 
 import { InterfaceService } from '../interface.service';
@@ -17,12 +17,20 @@ export class SidebarItemsService {
   getLatestItems = (): Observable<ISidebarItems> => {
     return this.tabItemsSource.value;
   }
-  getSideBarItems = (): Observable<ISidebarItems[]> => {
-    const a = this.interfaceService.getSideBar();
-    this.tabItemsSource.next(a);
-    return a;
+  getSideBarItems = (): Promise<ISidebarItems> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceService.getSideBar().subscribe(res => {
+          this.tabItemsSource.next(res);
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   getTestSideTest = () => {
     return sidebarItemsTest;
   }
+  /* TAB WRAPPER */
 }
