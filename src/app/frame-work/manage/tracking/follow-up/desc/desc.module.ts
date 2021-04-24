@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { PipesModule } from 'src/app/shared/pipes.module';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -12,6 +13,7 @@ import { TimeLineComponent } from './time-line/time-line.component';
   imports: [
     SharedPrimeNgModule,
     SharedModule,
+    PipesModule,
     DescRoutingModule
   ]
 })

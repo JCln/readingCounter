@@ -26,7 +26,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
-    this.addDashboardTab();
+    this.tabs.push(this.addDashboardTab());
   }
   reFetchPageTitle = () => {
     let a;
@@ -129,16 +129,13 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   getRouterUrl = (): string => { return this.router.url; }
   staticRouteValidation = () => {
     if (!this.DoesTabsHaveThisRouteNow()) {
-      this.getRouterUrl() === '/wr/profile' ? this.addProfileTab() : ''
+      this.getRouterUrl() === '/wr/profile' ? this.tabs.push(this.addProfileTab()) : ''
     }
   }
   verification = () => {
     const currentRouteFound = this.DoesCurrentRouteFound();
-    console.log(currentRouteFound);
     this.staticRouteValidation();
     if (currentRouteFound) {
-      console.log(currentRouteFound);
-
       if (this.DoesTabsHaveThisRouteNow()) {
         this.reFetchPageTitle();
         return;
@@ -207,18 +204,14 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     this.closeCurrentPage(routerUrl);
   }
   addDashboardTab = () => {
-    const a = {
+    return {
       route: '/wr', title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
     };
-    this.tabs.push(a);
-    this.reFetchPageTitle();
   }
   addProfileTab = () => {
-    const profileTab = {
+    return {
       route: '/wr/profile', title: 'تنظیمات کاربری', cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     }
-    this.tabs.push(profileTab);
-    this.reFetchPageTitle();
   }
   refreshCurrentPage = (tabRoute: string) => {
     this.interactionService.setRefresh(tabRoute);
