@@ -46,8 +46,8 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
     this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
     this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
+    this.defaultAddStatus();    
+    this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
@@ -55,27 +55,27 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
         return items
     })
   }
+  defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
     this._selectCols = this.fragmentManagerService.columnSelectedFragmentDetails();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   private getRouteParams = () => {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       this._masterId = this.fragmentManagerService.getRouteParams();
       console.log(this._masterId);
 
       this.classWrapper();
     })
+    )
   }
   ngOnInit(): void {
 
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr/m/nob/'))
-          this.classWrapper(true);
-      }
+      if (res.includes('/wr/m/nob/'))
+        this.classWrapper(true);
     })
     )
   }
@@ -97,41 +97,38 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId };
   }
   onRowEditInit(dataSource: IFragmentDetails) {
-    console.log(this.newRowLimit);
-
-
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+    // this.insertSelectedColumns();
+    this.clonedProducts[dataSource.fragmentMasterId] = { ...dataSource };
   }
   onRowEditCancel(dataSource: IFragmentDetails, index: number) {
     this.newRowLimit = 1;
-    console.log(this.newRowLimit);
-
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
+    this.dataSource[index] = this.clonedProducts[dataSource.fragmentMasterId];
     delete this.dataSource[dataSource.id];
-    // execption when exiting row edited false
     if (!this.fragmentManagerService.ValidationDetailsNoMessage(dataSource)) {
-      this.dataSource.shift();
+      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak)) {
+        this.dataSource.shift();
+      }
     }
   }
   removeRow = async (dataSource: IFragmentDetails, index: number) => {
     this.newRowLimit = 1;
-    console.log(this.newRowLimit);
 
     if (!this.fragmentManagerService.verificationDetails(dataSource))
       return;
     const a = await this.fragmentManagerService.removeFragmentDetails(dataSource);
     if (a) {
-      this.dataSource[index] = this.clonedProducts[dataSource.id];
+      this.dataSource[index] = this.clonedProducts[dataSource.fragmentMasterId];
       delete this.dataSource[dataSource.id];
       this.refetchTable(index);
     }
   }
   onRowEditSave(dataSource: IFragmentDetails, rowIndex: number) {
     this.newRowLimit = 1;
-    console.log(this.newRowLimit);
     if (!this.fragmentManagerService.verificationDetails(dataSource)) {
-      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak))
+      console.log(this.utilsService.isNull(dataSource.fromEshterak));
+      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak)) {
         this.dataSource.shift();
+      }
       return;
     }
     if (!dataSource.id) {
@@ -140,13 +137,13 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     else {
       this.fragmentManagerService.editFragmentDetails(dataSource);
     }
-    this.refetchTable(rowIndex)
   }
   async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
-    console.log(this.newRowLimit);
 
     if (!this.fragmentManagerService.verificationDetails(dataSource)) {
-      this.dataSource.shift();
+      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak)) {
+        this.dataSource.shift();
+      }
       return;
     }
     const a = await this.fragmentManagerService.addFragmentDetails(dataSource);
@@ -162,4 +159,5 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+  routeToParent = () => this.router.navigate(['/wr/m/nob']);
 }

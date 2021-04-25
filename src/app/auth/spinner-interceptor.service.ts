@@ -28,8 +28,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
         catchError((error) => {
           // let errorDesc = error.json();
           if (error.status === 400) {
-            if (error.error.message)
+            if (error.error.message) {
               this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+            }
             else
               this.snackWrapperService.openSnackBar('مقادیر را بررسی و مجددا امتحان نمایید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }

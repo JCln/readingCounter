@@ -50,7 +50,8 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-editing="editing" let-ri="rowIndex">
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-editing="editing"
+        let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td>
                 <p-cellEditor>
@@ -102,7 +103,8 @@
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
                 </i>
-                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)" class="_save pi pi-check"></i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)"
+                    class="_save pi pi-check"></i>
                 <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
                     class="_cancel pi pi-times"></i>
             </td>
@@ -124,11 +126,9 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
-        <tr>
-            <td [attr.colspan]="dataSource.length">
-                موردی پیدا نشد
-            </td>
-        </tr>
-    </ng-template>
 </p-table>
+<section *ngIf="!dataSource || dataSource.length === 0">
+    <tr class="empty_data">
+        موردی پیدا نشد
+    </tr>
+</section>

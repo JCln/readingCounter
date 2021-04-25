@@ -18,6 +18,9 @@
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
                 </i>
+                <i (click)="routeToParent()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+                    <div class="tooltip_text_right">بازگشت به نوبتی</div>
+                </i>
             </div>
         </div>
 
@@ -34,7 +37,8 @@
 
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-editing="editing" let-ri="rowIndex">
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-editing="editing"
+        let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
                 <ng-container *ngIf="col.field === 'orderDigit'|| col.field === 'orderPersian'; else elseTemplate">
@@ -68,11 +72,9 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
-        <tr>
-            <td [attr.colspan]="dataSource.length">
-                موردی پیدا نشد
-            </td>
-        </tr>
-    </ng-template>
 </p-table>
+<section *ngIf="!dataSource || dataSource.length === 0">
+    <tr class="empty_data">
+        موردی پیدا نشد
+    </tr>
+</section>

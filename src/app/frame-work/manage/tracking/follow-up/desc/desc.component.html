@@ -37,8 +37,8 @@
     </mat-radio-group>
 </section>
 
-<p-table *ngIf="!canShowGraph" [columns]="defColumns" [value]="changeHsty" dir="rtl" styleClass="p-datatable-responsive"
-    [responsive]="true">
+<p-table *ngIf="!canShowGraph" sortField="insertDateJalali" [columns]="defColumns" [value]="changeHsty" dir="rtl"
+    styleClass="p-datatable-responsive" [responsive]="true">
 
     <ng-template pTemplate="caption">
         <th>

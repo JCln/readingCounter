@@ -12,8 +12,8 @@ export class AddRowDirective {
   @HostListener('click', ['$event'])
   onClick(event: Event) {
 
-
-    console.log(this.newRowLimit);
+    console.log(this.newRow);
+    
     if (this.newRowLimit !== 1)
       return;
 

@@ -56,10 +56,11 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else {
       this.dataSource = await this.fragmentManagerService.getDataSource();
+      this.closeTabService.saveDataForFragmentNOB = this.dataSource;
     }
     this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
-    this.closeTabService.saveDataForFragmentNOB = this.dataSource;
+    this.defaultAddStatus();
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
@@ -78,10 +79,8 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/nob')
-          this.classWrapper(true);
-      }
+      if (res === '/wr/m/nob')
+        this.classWrapper(true);
     })
     )
   }
@@ -93,7 +92,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-
+  defaultAddStatus = () => this.newRowLimit = 1;
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   refreshTable = () => {
     this.classWrapper(true);
