@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IListManagerPDXY } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
@@ -132,7 +133,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private classWrapperWithExtras = async () => {
     this.extraDataSourceRes = await this.readingReportManagerService.postRRGISManager();
     if (!this.extraDataSourceRes.length) {
-      this.utilsService.snackBarMessageFailed('مقداری وجود ندارد');
+      this.utilsService.snackBarMessageFailed(EN_messages.no_data);
       return;
     }
     this.mapService.hasMarkerCluster(this.extrasNavigation) ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes, 0);

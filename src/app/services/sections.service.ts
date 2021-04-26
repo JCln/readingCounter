@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { EN_messages } from '../Interfaces/enums.enum';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -118,7 +120,7 @@ export class SectionsService {
     if (this.dynamicValue.hasOwnProperty('toEshterak')) {
       const a = this.dynamicValue;
       if (this.utilsService.lengthControl(a.fromEshterak, a.toEshterak, 5, 15)) {
-        this.utilsService.snackBarMessageWarn('فرمت اشتراک ناصحیح است');
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
         return false;
       }
     }
@@ -128,7 +130,7 @@ export class SectionsService {
     if (this.dynamicValue.hasOwnProperty('toEshterak')) {
       const a = this.dynamicValue;
       if (this.utilsService.isFromLowerThanTo(a.fromEshterak, a.toEshterak)) {
-        this.utilsService.snackBarMessageWarn('از اشتراک کمتر از تا اشتراک است!');
+        this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
         return false;
       }
     }
@@ -136,7 +138,7 @@ export class SectionsService {
   }
   sectionVertification(): boolean {
     if (!this.sectionsNullVertificate()) {
-      this.utilsService.snackBarMessageWarn('مقادیر نمیتواند خالی باشند');
+      this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
       return false;
     }
     if (!this.fromToValidation())

@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class ConfirmTextDialogComponent {
 
   public confirm() {
     if (this.utilsService.isNullTextValidation(this.userInputText))
-      this.utilsService.snackBarMessageWarn('توضیحی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_desc);
     else {
       this.mdDialogRef.close(this.userInputText);
     }

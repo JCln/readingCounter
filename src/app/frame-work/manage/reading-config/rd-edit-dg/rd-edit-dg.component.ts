@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -102,7 +103,7 @@ export class RdEditDgComponent {
   }
   save() {
     if (!this.percentValidate()) {
-      this.utilsService.snackBarMessageWarn('مقدار نمیتواند بیش تر از 100 و کمتر از 0 باشد');
+      this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
       return;
     }
     if (!this.zoneValidate()) {

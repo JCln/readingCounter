@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
 
+import { EN_messages } from '../Interfaces/enums.enum';
 import { ENSnackBarColors } from './../Interfaces/ioverall-config';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems } from './../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -61,37 +62,37 @@ export class AddUserManagerService {
     return selectedActions;
   }
   checkEmptyUserInfos = (vals: IAddAUserManager) => {
-    if (!this.utilsService.isNullWithText(vals.userCode, 'کد کاربری را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.userCode, EN_messages.insert_karbaricode, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.username, 'نام کاربری را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.username, EN_messages.insert_karbari, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.password, 'گذرواژه را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.password, EN_messages.insert_password, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.confirmPassword, 'تکرار گذرواژه را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.confirmPassword, EN_messages.insert_confirm_pass, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.firstName, 'نام را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.firstName, EN_messages.insert_name, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.sureName, 'نام خانوادگی را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.sureName, EN_messages.insert_surename, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.mobile, 'شماره موبایل را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.mobile, EN_messages.insert_mobile, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.displayName, 'نام نمایش را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.displayName, EN_messages.insert_showName, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.selectedRoles[0], 'گروه دسترسی را مشخص نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.selectedRoles[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.selectedActions[0], 'خدمتی را مشخص نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.selectedZones[0], 'سطح دسترسی به ناحیه ای را انتخاب نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(vals.selectedZones[0], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
       return false;
     return true;
   }
   passAndConfirmPass = (vals: IAddAUserManager) => {
     if (!this.utilsService.isSameLength(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('تعداد ارقام گذرواژه با تایید آن برابر نیست', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.passwords_notFetch, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
     if (!this.utilsService.isExactEqual(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar('گذرواژه با تایید آن یکی باید باشد', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.password_notExactly, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
     return true;

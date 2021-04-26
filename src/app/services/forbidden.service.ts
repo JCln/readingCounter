@@ -4,6 +4,7 @@ import { ITitleValue } from 'src/app/Interfaces/ioverall-config';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { EN_messages } from '../Interfaces/enums.enum';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { IReadingReportWithZoneIDsReq } from './../Interfaces/imanage';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -81,20 +82,20 @@ export class ForbiddenService {
     this.utilsService.routeTo('wr/m/fbn');
   }
   emptyMessage = () => {
-    this.utilsService.snackBarMessageWarn('یکبار دیگر مقادیر را وارد نمایید');
+    this.utilsService.snackBarMessageWarn(EN_messages.try_again);
   }
   /* VALIDATION */
   private datesValidationForbidden = (): boolean => {
     if (this.utilsService.isNull(this.forbiddenReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.forbiddenReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.forbiddenReq.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;

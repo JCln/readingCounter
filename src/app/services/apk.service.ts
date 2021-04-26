@@ -7,6 +7,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
+import { EN_messages } from '../Interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes } from '../Interfaces/ioverall-config';
 import { UtilsService } from './utils.service';
 
@@ -49,7 +50,7 @@ export class ApkService {
   }
   isInteger = (): boolean => {
     if (this.desc.versionCode.toString().includes('.')) {
-      this.snackWrapperService.openSnackBar('شماره نسخه را بدون اعشار وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.insert_without_decimal, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;

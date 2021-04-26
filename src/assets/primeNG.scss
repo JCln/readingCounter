@@ -51,6 +51,12 @@
     }
   }
 
+  .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: $blue_gray_300;
+    border-color: $blue_gray_300;
+    color: $white;
+  }
+
   .fa-trash-o {
     color: $red_600;
   }

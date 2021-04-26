@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ICredentials } from 'src/app/Interfaces/iauth-guard-permission';
 
 import { UtilsService } from './../../services/utils.service';
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
   logging = () => {
     if (this.utilsService.isNull(this.userData.password) || this.utilsService.isNull(this.userData.username)) {
-      this.utilsService.snackBarMessageWarn('نام کاربری یا گذرواژه نمیتواند خالی باشد');
+      this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
       return;
     }
     this.authService.logging(this.userData);

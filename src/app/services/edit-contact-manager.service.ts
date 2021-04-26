@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { EN_messages } from '../Interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from '../Interfaces/ioverall-config';
 import { IAUserEditSave, IUserEditManager } from './../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -55,19 +56,19 @@ export class EditContactManagerService {
     return selectedActions;
   }
   checkEmptyUserInfos = () => {
-    if (!this.utilsService.isNullWithText(this.dataSource.firstName, 'نام را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(this.dataSource.firstName, EN_messages.insert_name, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.sureName, 'نام خانوادگی را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(this.dataSource.sureName, EN_messages.insert_surename, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.mobile, 'شماره موبایل را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(this.dataSource.mobile, EN_messages.insert_mobile, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.displayName, 'نام  نمایش(نمایشی) را وارد نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(this.dataSource.displayName, EN_messages.insert_showName, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.selectedRoles[0], 'گروه دسترسی را مشخص نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(this.dataSource.selectedRoles[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.selectedActions[0], 'خدمتی را مشخص نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(this.dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.selectedZones[0], 'سطح دسترسی به ناحیه ای را انتخاب نمایید', ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(this.dataSource.selectedZones[0], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
       return false;
     return true;
   }

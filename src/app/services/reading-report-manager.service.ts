@@ -6,6 +6,7 @@ import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.se
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { EN_messages } from '../Interfaces/enums.enum';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from './../Interfaces/imanage';
 
 @Injectable({
@@ -192,7 +193,7 @@ export class ReadingReportManagerService {
   // CALL APIs
   postRRAnalyzeByParamManager = (): Promise<any> => {
     if (!this.rRAnalyzeReq) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/anlz/prfm');
       return;
     }
@@ -211,7 +212,7 @@ export class ReadingReportManagerService {
   }
   postRRMasterManager = (): Promise<any> => {
     if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/exm/master');
       return;
     }
@@ -230,7 +231,7 @@ export class ReadingReportManagerService {
   }
   postRRTraverseDiffrentialManager = (): Promise<any> => {
     if (!this.rRTraverseDiffrential) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/mam/trvch');
       return;
     }
@@ -248,7 +249,7 @@ export class ReadingReportManagerService {
   }
   postRRTraverseManager = (): Promise<any> => {
     if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/mam/trv');
       return;
     }
@@ -266,7 +267,7 @@ export class ReadingReportManagerService {
   }
   postRRKarkardManager = (): Promise<any> => {
     if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/mam/karkard');
       return;
     }
@@ -284,7 +285,7 @@ export class ReadingReportManagerService {
   }
   postRRTraverseDifferentialChartManager = (): Promise<any> => {
     if (!this.rRTraverseDiffrential) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/mam/trvch');
       return;
     }
@@ -302,7 +303,7 @@ export class ReadingReportManagerService {
   }
   postRRKarkardChartManager = (): Promise<any> => {
     if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/mam/karkard');
       return;
     }
@@ -320,7 +321,7 @@ export class ReadingReportManagerService {
   }
   postRRDisposalChartManager = (): Promise<any> => {
     if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/mam/dh');
       return;
     }
@@ -338,7 +339,7 @@ export class ReadingReportManagerService {
   }
   postRRKarkardDailyManager = (): Promise<any> => {
     if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/mam/karkardDaily');
       return;
     }
@@ -356,7 +357,7 @@ export class ReadingReportManagerService {
   }
   postRRGISManager = (): Promise<any> => {
     if (!this.readingReportGISReq) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/mam/gis');
       return;
     }
@@ -374,7 +375,7 @@ export class ReadingReportManagerService {
   }
   postRRDisposalHoursManager = (): Promise<any> => {
     if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/mam/dh');
       return;
     }
@@ -395,7 +396,7 @@ export class ReadingReportManagerService {
     if (!this.readingReportReq) {
       console.log(1);
 
-      this.utilsService.snackBarMessageWarn('مجددا مقادیر را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
       this.routeTo('wr/rpts/exm/details');
       console.log(2);
       return;
@@ -450,11 +451,11 @@ export class ReadingReportManagerService {
 
   private datesValidationMaster = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
@@ -465,7 +466,7 @@ export class ReadingReportManagerService {
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
     return true;
@@ -473,30 +474,30 @@ export class ReadingReportManagerService {
 
   private datesValidationDetails = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
   }
   private periodValidationDetails = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     return true;
@@ -504,30 +505,30 @@ export class ReadingReportManagerService {
 
   private datesValidationTraverse = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
   }
   private periodValidationTraverse = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
     return true;
@@ -535,30 +536,30 @@ export class ReadingReportManagerService {
 
   private datesValidationTraversedIFF = (): boolean => {
     if (this.utilsService.isNull(this.rRTraverseDiffrential.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.rRTraverseDiffrential.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.rRTraverseDiffrential.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
   }
   private periodValidationTraverseDIFF = (): boolean => {
     if (this.utilsService.isNull(this.rRTraverseDiffrential.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.rRTraverseDiffrential.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNull(this.rRTraverseDiffrential.year)) {
-      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
     return true;
@@ -566,30 +567,30 @@ export class ReadingReportManagerService {
 
   private datesValidationKarkard = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
   }
   private periodValidationKarkard = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
     return true;
@@ -597,30 +598,30 @@ export class ReadingReportManagerService {
 
   private datesValidationKarkardDaily = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
   }
   private periodValidationKarkardDaily = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
     return true;
@@ -628,30 +629,30 @@ export class ReadingReportManagerService {
 
   private datesValidationAnalyzePerformance = (): boolean => {
     if (this.utilsService.isNull(this.rRAnalyzeReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.rRAnalyzeReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.rRAnalyzeReq.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
   }
   private periodValidationAnalyzePerformance = (): boolean => {
     if (this.utilsService.isNull(this.rRAnalyzeReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.rRAnalyzeReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNull(this.rRAnalyzeReq.year)) {
-      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
     return true;
@@ -659,15 +660,15 @@ export class ReadingReportManagerService {
 
   private datesValidationDisposalHours = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
@@ -676,45 +677,45 @@ export class ReadingReportManagerService {
   private datesValidationGIS = (): boolean => {
     if (this.readingReportGISReq.isCounterState === true) {
       if (this.utilsService.isNull(this.readingReportGISReq.counterStateId)) {
-        this.utilsService.snackBarMessageWarn('وضعیت کنتور را مشخص نمایید');
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
         return false;
       }
     }
     if (this.utilsService.isNull(this.readingReportGISReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportGISReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn('از تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportGISReq.toDate)) {
-      this.utilsService.snackBarMessageWarn('تا تاریخ خالی است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     return true;
   }
   private periodValidationGIS = (): boolean => {
     if (this.readingReportGISReq.isForbidden === true) {
-      this.utilsService.snackBarMessageWarn('مشاهده غیر مجاز تنها با تاریخ امکان پذیر است');
+      this.utilsService.snackBarMessageWarn(EN_messages.allowed_forbiddenByDate);
       return false;
     }
     if (this.readingReportGISReq.isCounterState === true) {
       if (this.utilsService.isNull(this.readingReportGISReq.counterStateId)) {
-        this.utilsService.snackBarMessageWarn('وضعیت کنتور را مشخص نمایید');
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
         return false;
       }
     }
     if (this.utilsService.isNull(this.readingReportGISReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportGISReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn('دوره قرائت را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportGISReq.year)) {
-      this.utilsService.snackBarMessageWarn('سالی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
     return true;

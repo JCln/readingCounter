@@ -4,6 +4,7 @@ import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.se
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { EN_messages } from '../Interfaces/enums.enum';
 import { IFragmentDetails, IFragmentMaster } from './../Interfaces/imanage';
 
 @Injectable({
@@ -187,7 +188,7 @@ export class FragmentManagerService {
 
 
   private masterValidation = (): boolean => {
-    if (!this.nullValidation(this.fragmentMaster.zoneId, 'ناحیه ای وارد نمایید'))
+    if (!this.nullValidation(this.fragmentMaster.zoneId, EN_messages.insert_zone))
       return false;
     if (!this.nullValidation(this.fragmentMaster.fromEshterak, 'از اشتراک را وارد نمایید'))
       return false;
@@ -202,17 +203,17 @@ export class FragmentManagerService {
       return false;
 
     if (!this.utilsService.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
-      this.utilsService.snackBarMessageWarn('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد');
+      this.utilsService.snackBarMessageWarn(EN_messages.sameLength_eshterak);
       return false;
     }
 
     if (!this.utilsService.isFromLowerThanToByString(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
-      this.utilsService.snackBarMessageWarn('از اشتراک کمتر از تا اشتراک است!');
+      this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
       return false;
     }
 
     if (!this.utilsService.lengthControl(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak, 5, 10)) {
-      this.utilsService.snackBarMessageWarn('فرمت اشتراک ناصحیح است');
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
       return false;
     }
     return true;
@@ -260,17 +261,17 @@ export class FragmentManagerService {
     if (!this.NANValidation(this.fragmentDetails.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
       return false;
     if (!this.utilsService.isFromLowerThanToByString(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
-      this.utilsService.snackBarMessageWarn('از اشتراک کمتر از تا اشتراک است!');
+      this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
       return false;
     }
 
     if (!this.utilsService.isSameLength(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
-      this.utilsService.snackBarMessageWarn('تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد');
+      this.utilsService.snackBarMessageWarn(EN_messages.sameLength_eshterak);
       return false;
     }
 
     if (!this.utilsService.lengthControl(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak, 5, 10)) {
-      this.utilsService.snackBarMessageWarn('فرمت اشتراک ناصحیح است');
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
       return false;
     }
     return true;

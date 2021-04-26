@@ -41,19 +41,19 @@ app-side-bar {
   transition: all ease-in-out 150ms;
 
   @media (min-width: 520px) {
-    width: 38%;
+    width: 29%;
   }
 
   @media (min-width: 700px) {
-    width: 25%;
-  }
-
-  @media (min-width: 1000px) {
     width: 22%;
   }
 
+  @media (min-width: 1000px) {
+    width: 20%;
+  }
+
   @media (min-width: 1200px) {
-    width: 14%;
+    width: 15%;
   }
 
 }
@@ -62,19 +62,19 @@ app-frame-work {
   width: 100%;
 
   @media (min-width: 520px) {
-    width: 62%;
+    width: 71%;
   }
 
   @media (min-width: 700px) {
-    width: 75%;
-  }
-
-  @media (min-width: 1000px) {
     width: 78%;
   }
 
+  @media (min-width: 1000px) {
+    width: 80%;
+  }
+
   @media (min-width: 1200px) {
-    width: 86%;
+    width: 85%;
   }
 }
 
