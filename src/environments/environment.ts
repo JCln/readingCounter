@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://37.191.92.157/kontoriNew'
+  API_URL: ''
 };
 
 /*

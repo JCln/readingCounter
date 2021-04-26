@@ -27,6 +27,7 @@
               "src/favicon.ico",
               "src/web.config",
               "src/.htaccess",
+              "src/assets/env.js",
               {
                 "glob": "**/*",
                 "input": "src/assets/",
