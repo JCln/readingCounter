@@ -107,7 +107,7 @@ export class RdEditDgComponent {
       return;
     }
     if (!this.zoneValidate()) {
-      this.utilsService.snackBarMessageWarn('ناحیه انتخاب نشده است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return;
     }
     this.dialogRef.close(this.form.value);

@@ -3,6 +3,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 
+import { EN_messages } from '../Interfaces/enums.enum';
 import { IOutputManager } from './../Interfaces/imanage';
 import { UtilsService } from './utils.service';
 
@@ -27,15 +28,15 @@ export class OutputManagerService {
 
   checkVertification = (val: IOutputManager): boolean => {
     if (this.utilsService.isNullTextValidation(val.fromDate)) {
-      this.utilsService.snackBarMessageWarn('مقدار از تاریخ را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
     if (this.utilsService.isNullTextValidation(val.toDate)) {
-      this.utilsService.snackBarMessageWarn('مقدار تا تاریخ را وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
     if (this.utilsService.isNull(val.zoneId)) {
-      this.utilsService.snackBarMessageWarn('ناحیه ای انتخاب نشده است');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     return true;

@@ -462,7 +462,7 @@ export class ReadingReportManagerService {
   }
   private periodValidationMaster = (): boolean => {
     if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn('دوره قرائتی وارد نمایید');
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNull(this.readingReportReq.year)) {
@@ -762,7 +762,7 @@ export class ReadingReportManagerService {
   // 
   // snack bar
   emptyMessage = () => {
-    this.utilsService.snackBarMessageFailed('موردی یافت نشد');
+    this.utilsService.snackBarMessageFailed(EN_messages.404);
   }
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();
