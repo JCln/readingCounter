@@ -26,7 +26,7 @@ export class BarAnlzPrfmComponent implements AfterViewChecked {
       labels: this.defaultOptions
     },
   };
-  public barChartLabels: Label[] = ['کمینه', 'بیشینه', 'میانگین', 'انحراف از معیار', 'میانی', 'مٌد'];
+  public barChartLabels: Label[] = ['کمینه', 'بیشینه', 'میانگین', 'انحراف از معیار', 'میانه', 'مٌد'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];

@@ -49,10 +49,13 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     CoreRoutingModule
   ],
   exports: [
+    BrowserModule,
+    CommonModule,
     MatSnackBarModule,
     SpinnerComponent,
     SnackBarComponent,
-    ClockComponent
+    ClockComponent,
+    SharedThreeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

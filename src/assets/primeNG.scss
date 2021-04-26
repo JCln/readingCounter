@@ -32,6 +32,10 @@
     width: 100%;
   }
 
+  .p-hidden-space {
+    display: none !important;
+  }
+
   th {
     p-sorticon {
       opacity: 0;
@@ -88,4 +92,15 @@
   .footer {
     text-align: center;
   }
+}
+
+.empty_data {
+  display: flex;
+  justify-content: center;
+  background: $white;
+  padding: $font_3;
+  border-radius: $border_15;
+  font-size: $font_l;
+  font-weight: 600;
+  color: $gray_700;
 }

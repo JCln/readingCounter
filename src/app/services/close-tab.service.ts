@@ -66,6 +66,7 @@ export class CloseTabService {
   // list manager
   saveDataForLMPD: any;
   saveDataForLMAll: any;
+  saveDataForLMAll_extra: any;
   // 
   // WOUI manager
   saveDataForWOUI: any;
@@ -196,7 +197,7 @@ export class CloseTabService {
         this.saveDataForLMPD = '';
         break;
       case '/wr/m/fbn':
-        this.saveDataForLMAll = '';
+        this.saveDataForForbidden = '';
         break;
       case '/wr/m/dbf':
         this.saveDataForOutputDBF = '';
@@ -241,6 +242,7 @@ export class CloseTabService {
     }
     if (url.includes('/wr/m/l/all/')) {
       this.saveDataForLMAll = '';
+      this.saveDataForLMAll_extra = '';
       return;
     }
     if (url.includes('/wr/mu/edit/')) {

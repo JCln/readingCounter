@@ -10,6 +10,7 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { MediaComponent } from './media/media.component';
 import { ReadTimeComponent } from './read-time/read-time.component';
 import { RrTimeComponent } from './rr-time/rr-time.component';
+import { LineReadDailyComponent } from './line-read-daily/line-read-daily.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RrTimeComponent } from './rr-time/rr-time.component';
     ReadTimeComponent,
     RrTimeComponent,
     MediaComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    LineReadDailyComponent
   ],
   imports: [
     CommonModule,

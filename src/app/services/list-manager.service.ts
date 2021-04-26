@@ -13,6 +13,8 @@ import { UtilsService } from './utils.service';
 })
 export class ListManagerService {
   private readingListGUID: string;
+  private readingListGUID_extra: string;
+  private saveTo: number = 0;
 
   columnSelectedLMAll = (): IObjectIteratation[] => {
     return [
@@ -109,17 +111,48 @@ export class ListManagerService {
     private utilsService: UtilsService
   ) { }
 
+  whereToSave = (): number => {
+    return this.saveTo == 0 ? this.saveTo = 1 : this.saveTo = 0
+  }
+  nullSavedAllLMSource = () => {
+    this.saveTo === 0 ? this.closeTabService.saveDataForLMAll = null : this.closeTabService.saveDataForLMAll_extra = null
+  }
   getLMAll = (trackingId: string): Promise<any> | IListManagerAll[] => {
     // console.log(this.closeTabService.saveDataForLMAll);
     // if (!this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
     //   return this.closeTabService.saveDataForLMAll;
     if (this.readingListGUID === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
       return this.closeTabService.saveDataForLMAll;
-    this.readingListGUID = trackingId;
+    if (this.readingListGUID_extra === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
+      return this.closeTabService.saveDataForLMAll_extra;
+
+    if (this.whereToSave() === 0) {
+      this.readingListGUID = trackingId;
+      return this.getLMAllFirst(trackingId);
+    }
+    else {
+      this.readingListGUID_extra = trackingId;
+      return this.getLMAllExtra(trackingId);
+    }
+  }
+  getLMAllFirst = (trackingId: string): Promise<any> | IListManagerAll[] => {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
           this.closeTabService.saveDataForLMAll = res;
+          console.log(this.closeTabService.saveDataForLMAll);
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  getLMAllExtra = (trackingId: string): Promise<any> | IListManagerAll[] => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
+          this.closeTabService.saveDataForLMAll_extra = res;
           console.log(this.closeTabService.saveDataForLMAll);
           resolve(res);
         })

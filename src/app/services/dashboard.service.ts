@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
 import { InterfaceService } from 'src/app/services/interface.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 import { IDashboardKarkardTimed, IDashboardReadDaily } from '../Interfaces/inon-manage';
 import { IAnalyzeRes } from './../Interfaces/imanage';
@@ -12,8 +11,7 @@ import { IAnalyzeRes } from './../Interfaces/imanage';
 export class DashboardService {
 
   constructor(
-    private interfaceService: InterfaceService,
-    private utilsService: UtilsService
+    private interfaceService: InterfaceService    
   ) { }
 
   /* COLUMNS */
@@ -144,12 +142,10 @@ export class DashboardService {
     b.push(sth.adiCount);
     b.push(sth.faqedCount);
     b.push(sth.maneCount);
-    b.push(sth.saierCount);
-    b.push(sth.tavizCount);
     b.push(sth.xarabCount);
+    b.push(sth.tavizCount);
+    b.push(sth.saierCount);
     return b;
-    // let a: any = Object.values(sth);
-    // return a;
   }
   getElementOfArrOfObjectsAnalyze = (item: IAnalyzeRes): any[] => {
     let a = [];

@@ -77,13 +77,15 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     });
   }
-  nullSavedSource = () => this.closeTabService.saveDataForLMAll = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.nullSavedSource();
+      this.listManagerService.nullSavedAllLMSource();
     }
 
     this.dataSource = await this.listManagerService.getLMAll(this.trackId);
+    console.log(this.dataSource);
+    
+
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
@@ -111,7 +113,6 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.trackId = this.route.snapshot.paramMap.get('trackingId');
     this.isModify = this.route.snapshot.paramMap.get('isModify');
     this.isModify = this.isModify.toLocaleLowerCase() === 'true' ? true : false;
-    console.log(this.isModify);
   }
   getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {

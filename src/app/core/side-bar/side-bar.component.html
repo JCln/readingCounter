@@ -18,7 +18,7 @@
     </li>
 </ul>
 
-<ul class="ul_2" [hidden]="!sid_isSmall">
+<ul class="ul_2" *ngIf="sid_isSmall">
     <li class="li_2" *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)"
         routerLinkActive="active_2">
         <div class="btn_2">
