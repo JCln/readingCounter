@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { RouteReuseStrategy } from '@angular/router';
-import { RouteReuseStrategyService } from 'src/app/services/route-reuse-strategy.service';
 import { SharedChartsModule } from 'src/app/shared/shared-charts.module';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -19,9 +17,6 @@ import { KarkardComponent } from './karkard.component';
     SharedThreeModule,
     SharedChartsModule,
     KarkardRoutingModule
-  ],
-  providers: [
-    { provide: RouteReuseStrategy, useClass: RouteReuseStrategyService }
   ]
 })
 export class KarkardModule { }

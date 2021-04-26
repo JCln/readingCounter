@@ -762,7 +762,7 @@ export class ReadingReportManagerService {
   // 
   // snack bar
   emptyMessage = () => {
-    this.utilsService.snackBarMessageFailed(EN_messages.404);
+    this.utilsService.snackBarMessageFailed(EN_messages.notFound);
   }
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();

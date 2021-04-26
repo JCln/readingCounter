@@ -133,7 +133,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private classWrapperWithExtras = async () => {
     this.extraDataSourceRes = await this.readingReportManagerService.postRRGISManager();
     if (!this.extraDataSourceRes.length) {
-      this.utilsService.snackBarMessageFailed(EN_messages.404);
+      this.utilsService.snackBarMessageFailed(EN_messages.notFound);
       return;
     }
     this.mapService.hasMarkerCluster(this.extrasNavigation) ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes, 0);
