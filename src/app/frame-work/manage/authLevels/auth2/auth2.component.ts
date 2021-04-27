@@ -99,11 +99,11 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[]) => {
+    dictionary.map(dictionary => {
       dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.id)
-          dataSource.authLevel1Id = zoneDic.title;
+        if (dictionary.id == dataSource.authLevel1Id)
+          dataSource.authLevel1Id = dictionary.title;
       })
     });
   }

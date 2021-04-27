@@ -50,11 +50,6 @@ export class SectorsManagerService {
       })
     })
   }
-  getCountryDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getCountryDictionary());
-    });
-  }
   getCountryDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getCountryManager().subscribe(res => {
@@ -64,25 +59,18 @@ export class SectorsManagerService {
       })
     })
   }
-  getRegionDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getProvinceDictionary());
-    });
+
+  getCountryDictionary = (): any => {
+    return this.dictionaryWrapperService.getCountryDictionary();
   }
-  getZoneBoundDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
+  getRegionDictionary = (): any => {
+    return this.dictionaryWrapperService.getRegionDictionary();
   }
   getProvinceDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getCountryDictionary());
-    });
+    return this.dictionaryWrapperService.getProvinceDictionary();
+  }
+  getZoneDictionary = (): any => {
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
 
-  getZoneDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getRegionDictionary());
-    });
-  }
 }

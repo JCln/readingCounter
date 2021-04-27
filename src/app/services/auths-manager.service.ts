@@ -58,34 +58,14 @@ export class AuthsManagerService {
     }
   }
 
-  getAuthLevel1Dictionary = (): any => {
-    try {
-      return new Promise((resolve) => {
-        resolve(this.dictionaryWrapperService.getAuthLev1Dictionary());
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  getAuthLevel1Dictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getAuthLev1Dictionary();
   }
-
   getAuthLevel2Dictionary = (): any => {
-    try {
-      return new Promise((resolve) => {
-        resolve(this.dictionaryWrapperService.getAuthLev2Dictionary());
-      });
-
-    } catch (error) {
-      console.error(error);
-    }
+    return this.dictionaryWrapperService.getAuthLev2Dictionary();
   }
   getAuthLevel3Dictionary = (): any => {
-    try {
-      return new Promise((resolve) => {
-        resolve(this.dictionaryWrapperService.getAuthLev3Dictionary());
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return this.dictionaryWrapperService.getAuthLev3Dictionary();
   }
 
 }

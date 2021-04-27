@@ -148,13 +148,12 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     this.reFetchPageTitle();
   }
   getTabWrapper = async () => {
-    let temp;
-    temp = await this.sideBarItemsService.getSideBarItems();
-    temp = temp.items;
-    temp.map((items: any) => {
-      items.subItems.map((subItems: any) => {
-        this.currentRoute.push(subItems);
-        this.verification();
+    this.sideBarItemsService.getLatestItems().subscribe(res => {
+      res.map((items: any) => {
+        items.subItems.map((subItems: any) => {
+          this.currentRoute.push(subItems);
+          this.verification();
+        })
       })
     })
   }

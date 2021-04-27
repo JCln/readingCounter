@@ -30,7 +30,7 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-i="rowIndex">
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-i="rowIndex">
         <tr>
             <td *ngFor="let col of columns" class="d_ltr">
                 <ng-container
@@ -72,11 +72,10 @@
         </tr>
 
     </ng-template>
-    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
-        <tr>
-            <td [attr.colspan]="dataSource.length">
-                موردی پیدا نشد
-            </td>
-        </tr>
-    </ng-template>
 </p-table>
+
+<section *ngIf="!dataSource || dataSource.length === 0">
+    <tr class="empty_data">
+        موردی پیدا نشد
+    </tr>
+</section>

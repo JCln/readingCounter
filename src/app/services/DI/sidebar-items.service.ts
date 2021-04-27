@@ -10,18 +10,18 @@ import { sidebarItemsTest } from './sidebarItems';
   providedIn: 'root'
 })
 export class SidebarItemsService {
-  private tabItemsSource = new BehaviorSubject<any>({});
+  private tabItemsSource = new BehaviorSubject<any>([]);
 
   constructor(private interfaceService: InterfaceService) { }
 
-  getLatestItems = (): Observable<ISidebarItems> => {
-    return this.tabItemsSource.value;
+  getLatestItems = (): Observable<any> => {
+    return this.tabItemsSource.asObservable();
   }
   getSideBarItems = (): Promise<ISidebarItems> => {
     try {
       return new Promise((resolve) => {
         this.interfaceService.getSideBar().subscribe(res => {
-          this.tabItemsSource.next(res);
+          this.tabItemsSource.next(res.items);
           resolve(res)
         })
       });
