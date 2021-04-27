@@ -143,9 +143,7 @@ export class CounterStateService {
     });
   }
   getZoneDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
 
 

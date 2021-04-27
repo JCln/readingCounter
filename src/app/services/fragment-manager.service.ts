@@ -161,9 +161,7 @@ export class FragmentManagerService {
   }
   /**/
   getZoneDictionary = (): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
 
   /* VALIDATION */

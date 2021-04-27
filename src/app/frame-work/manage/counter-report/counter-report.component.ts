@@ -150,9 +150,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
   getZoneDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {

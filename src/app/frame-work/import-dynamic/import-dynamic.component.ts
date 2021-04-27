@@ -83,22 +83,10 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     })
   }
   getZoneDictionary = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        resolve(this.dictionaryWrapperService.getZoneDictionary());
-      });
-    } catch {
-      console.error(e => e);
-    }
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
   getReadingPeriodsKindDictionary = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        resolve(this.dictionaryWrapperService.getPeriodKindDictionary());
-      });
-    } catch {
-      console.error(e => e);
-    }
+    return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getReadingPeriod = (): Promise<any> => {
     try {

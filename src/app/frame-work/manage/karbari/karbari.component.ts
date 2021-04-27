@@ -143,9 +143,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   getProvinceDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getProvinceDictionary());
-    });
+    return this.dictionaryWrapperService.getProvinceDictionary();
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {

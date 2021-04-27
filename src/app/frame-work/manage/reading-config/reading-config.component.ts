@@ -405,9 +405,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
   getZoneDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
   nullSavedSource = () => this.closeTabService.saveDataForReadingConfig = null;
   classWrapper = async (canRefresh?: boolean) => {

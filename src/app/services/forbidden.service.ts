@@ -65,9 +65,7 @@ export class ForbiddenService {
     }
   }
   getZoneDictionary = (): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();

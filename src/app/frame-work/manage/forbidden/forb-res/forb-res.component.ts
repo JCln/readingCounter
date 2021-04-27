@@ -48,13 +48,13 @@ export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForForbidden) {
-      this.dataSource = this.closeTabService.saveDataForForbidden;
-    }
-    else {
-      this.dataSource = await this.forbiddenService.getDataSource();
-      this.closeTabService.saveDataForForbidden = this.dataSource;
-    }
+    // if (this.closeTabService.saveDataForForbidden) {
+    //   this.dataSource = this.closeTabService.saveDataForForbidden;
+    // }
+    // else {
+    this.dataSource = await this.forbiddenService.getDataSource();
+    this.closeTabService.saveDataForForbidden = this.dataSource;
+    // }
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
     this.convertIdToTitle(this.dataSource, this.zoneDictionary);
     if (this.dataSource.length)

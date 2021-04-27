@@ -98,9 +98,7 @@ export class RoleManagerComponent implements OnInit {
     })
   }
   getRoleManagerDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getRoleDictionary());
-    });
+    return this.dictionaryWrapperService.getRoleDictionary();
   }
   classWrapper = async () => {
     const rolesData = await this.getRole();

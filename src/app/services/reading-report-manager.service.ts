@@ -68,7 +68,7 @@ export class ReadingReportManagerService {
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
       { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
       { field: 'karbariCode', header: 'کاربری', isSelected: false, readonly: true },
-      { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false, readonly: true },
+      // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false, readonly: true },
       { field: 'ahadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی', isSelected: true, readonly: true },
       { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, readonly: true },
       { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فرعی', isSelected: false, readonly: true },
@@ -91,7 +91,7 @@ export class ReadingReportManagerService {
       { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
       { field: 'possibleAddress', header: 'نشانی پیمایش', isSelected: false, readonly: true },
       { field: 'karbariCode', header: 'کاربری', isSelected: false, readonly: false },
-      { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: true, readonly: true },
+      // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false, readonly: true },
       { field: 'ahadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی', isSelected: false, readonly: true },
       { field: 'possibleAhadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی پیمایش', isSelected: false, readonly: true },
       { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فرعی', isSelected: false, readonly: false },
@@ -113,10 +113,8 @@ export class ReadingReportManagerService {
       { field: 'radif', header: 'ش.پرونده', isSelected: true, readonly: true },
       { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: false },
       { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
-      { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
-      { field: 'possibleAddress', header: 'نشانی پیمایش', isSelected: false, readonly: true },
+      // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: true, readonly: true },
       { field: 'karbariCode', header: 'کاربری', isSelected: false, readonly: false },
-      { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: true, readonly: true },
       { field: 'ahadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی', isSelected: false, readonly: true },
       { field: 'possibleAhadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی پیمایش', isSelected: false, readonly: true },
       { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فرعی', isSelected: false, readonly: false },
@@ -128,17 +126,17 @@ export class ReadingReportManagerService {
       { field: 'possibleCounterSerial', header: 'سریال کنتور پیمایش', isSelected: false, readonly: false },
       { field: 'mobile', header: 'موبایل', isSelected: false, readonly: true },
       { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, readonly: true },
-      { field: 'possibleEmpty', header: 'خالی پیمایش', isSelected: false, readonly: true }
+      { field: 'possibleEmpty', header: 'خالی پیمایش', isSelected: false, readonly: true },
+      { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
+      { field: 'possibleAddress', header: 'نشانی پیمایش', isSelected: false, readonly: true },
     ];
   }
   columnSelectedRRKarkard = (): IObjectIteratation[] => {
     return [
       { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
       { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
-      { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
-      { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
+      { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
+      { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
       { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
       { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
@@ -146,15 +144,15 @@ export class ReadingReportManagerService {
       { field: 'maneCount', header: 'مانع', isSelected: true, readonly: true },
       { field: 'xarabCount', header: 'خراب', isSelected: true, readonly: true },
       { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
-      { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true }
+      { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
     ];
   }
   columnSelectedRRKarkardDaly = (): IObjectIteratation[] => {
     return [
       { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
       { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
       { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
       { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
       { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
@@ -164,15 +162,15 @@ export class ReadingReportManagerService {
       { field: 'maneCount', header: 'مانع', isSelected: true, readonly: true },
       { field: 'xarabCount', header: 'خراب', isSelected: true, readonly: true },
       { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
-      { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true }
+      { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true }
     ];
   }
   columnSelectedRRDisposalHours = (): IObjectIteratation[] => {
     return [
       { field: 'dayJalali', header: 'روز', isSelected: true, readonly: true },
       { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
       { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
       { field: '_8To10', header: '8 - 10', isSelected: true, readonly: true },
       { field: '_10To12', header: '10 - 12', isSelected: true, readonly: true },
@@ -180,6 +178,8 @@ export class ReadingReportManagerService {
       { field: '_14To16', header: '14 - 16', isSelected: true, readonly: true },
       { field: '_16To18', header: '16 - 18', isSelected: true, readonly: true },
       { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true }
     ];
   }
 
@@ -425,27 +425,19 @@ export class ReadingReportManagerService {
     }
   }
   getReadingPeriodKindDictionary = (): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getPeriodKindDictionary());
-    });
+    return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getZoneDictionary = (): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
   getKarbariDictionary = (): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getKarbariDictionary());
-    });
+      return this.dictionaryWrapperService.getKarbariDictionary();    
   }
   getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   getTraverseDiffrentialDictionary = (): Promise<any> => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getTraverseDifferentialDictionary());
-    });
+    return this.dictionaryWrapperService.getTraverseDifferentialDictionary();
   }
 
 

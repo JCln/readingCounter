@@ -55,6 +55,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       dataSource.map(dataSource => {
         if (dataSource.counterStateCode == CounterStateDic.id) {
           dataSource.counterStateCode = CounterStateDic.title;
+          dataSource.preCounterStateCode = CounterStateDic.title;
         }
       })
     });
@@ -82,9 +83,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       this.listManagerService.nullSavedAllLMSource();
     }
 
-    this.dataSource = await this.listManagerService.getLMAll(this.trackId);
-    console.log(this.dataSource);
-    
+    this.dataSource = await this.listManagerService.getLMAll(this.trackId);    
 
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();

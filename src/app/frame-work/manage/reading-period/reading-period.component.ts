@@ -139,18 +139,10 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
   getZoneDictionary = (): any => {
-    return new Promise((resolve) => {
-      resolve(this.dictionaryWrapperService.getZoneDictionary());
-    });
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
   getReadingPeriodKindId = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        resolve(this.dictionaryWrapperService.getPeriodKindDictionary());
-      });
-    } catch (error) {
-      console.error(e => e);
-    }
+    return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {

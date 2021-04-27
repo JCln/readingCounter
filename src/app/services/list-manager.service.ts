@@ -23,27 +23,27 @@ export class ListManagerService {
       { field: 'radif', header: 'ش.پرونده', isSelected: false },
       { field: 'eshterak', header: 'اشتراک', isSelected: true },
       { field: 'zoneId', header: 'ناحیه', isSelected: false },
-      { field: 'qeraatCode', header: 'کد قرائت', isSelected: false },
+      { field: 'qeraatCode', header: 'قرائت', isSelected: false },
       { field: 'firstName', header: 'نام', isSelected: true },
       { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
-      { field: 'address', header: 'آدرس', isSelected: false },
-      { field: 'pelak', header: 'پلاک', isSelected: false },
       { field: 'karbariCode', header: 'کاربری', isSelected: true },
-      { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
-      { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false },
-      { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false },
-      { field: 'qotrCode', header: 'قطر', isSelected: false },
-      { field: 'sifoonQotrCode', header: 'کد قطر سیفون', isSelected: false },
-      { field: 'postalCode', header: 'کد پستی', isSelected: false },
       { field: 'preNumber', header: 'رقم قبلی', isSelected: true },
       { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
       { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
       { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true },
+      { field: 'counterStateCode', header: 'وضعیت کنتور', isSelected: true },
+      { field: 'address', header: 'آدرس', isSelected: false },
+      { field: 'pelak', header: 'پلاک', isSelected: false },
+      { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
+      { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false },
+      { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false },
+      { field: 'qotrCode', header: 'قطر', isSelected: false },
+      // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
+      { field: 'postalCode', header: 'کد پستی', isSelected: false },
       { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
       { field: 'preCounterStateCode', header: 'وضعیت قرائت قبلی', isSelected: false },
       { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
-      { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },
-      { field: 'counterStateCode', header: 'وضعیت کنتور', isSelected: true },
+      // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
       { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
       { field: 'tavizDate', header: 'تاریخ تعویض', isSelected: false },
       { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
@@ -60,7 +60,7 @@ export class ListManagerService {
       { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
       { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
       { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
-      { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false },
+      // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false },
       { field: 'y', header: 'Y', isSelected: false },
       { field: 'x', header: 'X', isSelected: false },
       { field: 'gisAccuracy', header: 'دقت', isSelected: false },
@@ -79,14 +79,14 @@ export class ListManagerService {
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
       { field: 'readCount', header: 'تعداد قرائت', isSelected: true, readonly: true },
+      { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
+      { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
+      { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
+      { field: 'distance', header: 'فاصله', isSelected: true, readonly: true },
       { field: 'maneCount', header: 'تعداد مانع', isSelected: false, readonly: true },
       { field: 'manePercent', header: 'درصد مانع', isSelected: false, readonly: true },
       { field: 'xarabFaqedCount', header: 'تعداد فاقد/خراب', isSelected: false, readonly: true },
-      { field: 'xarabFaqedPercent', header: 'درصد فاقد/خراب', isSelected: false, readonly: true },
-      { field: 'fromTime', header: 'از زمان', isSelected: true, readonly: true },
-      { field: 'toTime', header: 'تا زمان', isSelected: true, readonly: true },
-      { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
-      { field: 'distance', header: 'فاصله', isSelected: true, readonly: true },
+      { field: 'xarabFaqedPercent', header: 'درصد فاقد/خراب', isSelected: false, readonly: true }
     ];
   }
   columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
@@ -96,8 +96,8 @@ export class ListManagerService {
       { field: 'counterReaders', header: 'مامور(ها) :', isSelected: true, readonly: true },
       { field: 'fromEshterak', header: 'از اشتراک :', isSelected: true, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک :', isSelected: true, readonly: true },
-      { field: 'overalCount', header: 'تعداد کل :', isSelected: true, readonly: true },
       { field: 'readCount', header: 'قرائت شده :', isSelected: true, readonly: true },
+      { field: 'overalCount', header: 'تعداد کل :', isSelected: true, readonly: true },
       { field: 'overalDistance', header: 'مسافت کل :', isSelected: true, readonly: true },
       { field: 'overalDuration', header: 'زمان کل :', isSelected: true, readonly: true }
 
@@ -140,7 +140,6 @@ export class ListManagerService {
       return new Promise((resolve) => {
         this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
           this.closeTabService.saveDataForLMAll = res;
-          console.log(this.closeTabService.saveDataForLMAll);
           resolve(res);
         })
       });
@@ -153,7 +152,6 @@ export class ListManagerService {
       return new Promise((resolve) => {
         this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
           this.closeTabService.saveDataForLMAll_extra = res;
-          console.log(this.closeTabService.saveDataForLMAll);
           resolve(res);
         })
       });

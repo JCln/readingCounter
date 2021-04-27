@@ -25,6 +25,10 @@ export class BarAnlzPrfmComponent implements AfterViewChecked {
       position: 'right',
       labels: this.defaultOptions
     },
+    tooltips: {
+      titleFontFamily: 'Blotus',
+      titleFontSize: 16
+    }
   };
   public barChartLabels: Label[] = ['کمینه', 'بیشینه', 'میانگین', 'انحراف از معیار', 'میانه', 'مٌد'];
   public barChartType: ChartType = 'bar';

@@ -11,7 +11,7 @@ import { IAnalyzeRes } from './../Interfaces/imanage';
 export class DashboardService {
 
   constructor(
-    private interfaceService: InterfaceService    
+    private interfaceService: InterfaceService
   ) { }
 
   /* COLUMNS */
@@ -149,13 +149,13 @@ export class DashboardService {
   }
   getElementOfArrOfObjectsAnalyze = (item: IAnalyzeRes): any[] => {
     let a = [];
-    a.push(item.min);
-    a.push(item.max);
-    a.push(item.average);
+    a.push(item.min.toFixed(3));
+    a.push(item.max.toFixed(3));
+    a.push(item.average.toFixed(3));
     // a.push(item.variance);
-    a.push(item.standardDeviation);
-    a.push(item.median);
-    a.push(item.mode);
+    a.push(item.standardDeviation.toFixed(3));
+    a.push(item.median.toFixed(3));
+    a.push(item.mode.toFixed(3));
 
     return a;
   }
