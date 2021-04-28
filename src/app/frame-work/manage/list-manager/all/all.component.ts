@@ -83,7 +83,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       this.listManagerService.nullSavedAllLMSource();
     }
 
-    this.dataSource = await this.listManagerService.getLMAll(this.trackId);    
+    this.dataSource = await this.listManagerService.getLMAll(this.trackId);
 
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();

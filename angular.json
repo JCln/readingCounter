@@ -54,7 +54,9 @@
             ],
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js",
-              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"            
+              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js",
+              "node_modules/pdfmake/build/pdfmake.js",
+              "node_modules/pdfmake/build/vfs_fonts.js"              
             ]
           },
           "configurations": {

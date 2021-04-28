@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 import * as XLSX from 'xlsx';
 
 import { EN_messages } from '../Interfaces/enums.enum';
@@ -20,7 +20,8 @@ export class OutputManagerService {
 
   constructor(
     private utilsService: UtilsService
-  ) { }
+  ) {
+  }
 
   get getDBFOutPut(): IOutputManager {
     return this.dbfOutput;
@@ -50,64 +51,33 @@ export class OutputManagerService {
     link.download = `${new Date().toLocaleDateString() + type}`;
     link.click();
   }
-  fuckingPrintIt = (name) => {
-    var tab = document.getElementById(name);
+  exportPdf = (name: any[], fileName: string) => {
+    (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
-    var style = "<style>";
-    style = style + "table {width: 100%;font: 17px Calibri;}";
-    style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
-    style = style + "padding: 2px 3px;text-align: center;}";
-    style = style + "</style>";
+    var fila = new Array();
+    name.map((item) => {
+      fila.push(Object.values(item))
+    })
+    const definition = {
+      content: [
+        {
+          layout: 'lightHorizontalLines', // optional
+          table: {
+            headerRows: 2,
+            body: fila,
+          },
+          styles: {
+            header: { fontSize: 16, bold: true, alignment: 'center' },
+            tableHeader: { fillColor: '#29517c', color: 'white' }
+          }
+        }
+      ]
+    }
 
-    var win = window.open('', '', 'height=700,width=700');
-    win.document.write(style);          //  add the style.
-    win.document.write(tab.outerHTML);
-    win.document.close();
-    win.print();
-  }
-  exportPdf(data: any, column?: any) {
-    let someTest;
-    column = column._columns;
-    column.forEach(element => {
-      someTest += element.header
-    });
-    console.log(data.value);
-    console.log(someTest);
-
-
-    const doc = new jsPDF('landscape', 'em', 'a4');
-    const finalY = 10;
-
-    // doc.addFileToVFS('assets/fonts/BLotus.woff', 'BLotus');
-    // doc.addFont('assets/fonts/BLotus.woff', 'BLotus', 'normal');
-
-    // doc.setFont('BLotus');
-    // doc.setLanguage('fa-IR');
-    // autoTable(doc, { startY: finalY, head: column, body: data });
-    // doc.save('product.pdf');
-
-    doc.setFont('tahoma');
-    doc.setLanguage('ar-AE');
-    autoTable(data.value, someTest);
-    // autoTable(column._value, {})
-    autoTable(doc, { startY: finalY, head: column, body: column._value });
-    doc.save('product.pdf');
+    const date = new Date();
+    pdfMake.createPdf(definition).download(date.getDay() + date.getMonth() + fileName);
 
   }
-  downloadTestFile = (data: any[], contentType: string) => {
-    const doc = new jsPDF();
-    // doc.text(20, 20, data,);
-
-    const blob = new Blob(data, { type: contentType });
-    console.log(1);
-
-    this.downloadFile(blob, contentType);
-    console.log(blob.text());
-    console.log(blob.arrayBuffer);
-    console.log(blob);
-    doc.save('product.pdf');
-  }
-
   exportExcel(dataSource: any, fileName: string) {
     const worksheet = XLSX.utils.json_to_sheet(dataSource);
     const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };

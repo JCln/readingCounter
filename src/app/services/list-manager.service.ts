@@ -126,7 +126,7 @@ export class ListManagerService {
     if (this.readingListGUID_extra === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
       return this.closeTabService.saveDataForLMAll_extra;
 
-    if (this.whereToSave() === 0) {
+    if (this.whereToSave() == 0) {
       this.readingListGUID = trackingId;
       return this.getLMAllFirst(trackingId);
     }
