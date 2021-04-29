@@ -146,74 +146,44 @@ ul::-webkit-scrollbar {
   z-index: -1;
 }
 
+// small sidebar
+// for small sidebar we added ngIf and separate scss
 .btn_2 {
+  position: relative;
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
   background: $gray_200;
   margin-bottom: $font_05;
   padding: $font_xxs $font_05;
   border: 1px solid;
+
+  @media (max-width: 550px) {
+    margin-bottom: .1rem;
+  }
 }
 
-// small sidebar
-// for small sidebar we added ngIf and separate scss
 .ul_2 {
+  position: absolute;
   list-style-type: none;
-  padding: 0;
   height: 84vh;
-  overflow-y: auto;
-
-  .li_2 {
-    // position: relative;
-
-    h3 {
-      color: $blue_700;
-    }
-
-    // &:hover,
-    // &:focus {
-    //   nav.ul_2 {
-    //     overflow-x: unset !important;
-    //     overflow-y: unset !important;
-    //   }
-
-    //   ._show {
-    //     visibility: visible;
-    //     top: 25%;
-    //   }
-    // }
-  }
-
-  .active_2 {
-    .btn_2 {
-      border: 2px solid $blue_gray_300;
-    }
-
-    .icons {
-      color: $blue_gray_300;
-    }
-  }
-
-
-  .sub_item_2 {
-    cursor: pointer;
-    direction: rtl;
-  }
+  padding: 0;
+  right: 0;
 
   ._show {
-    visibility: visible;
-    display: block;
-    z-index: 4;
     position: absolute;
+    display: none;
     width: 15rem;
-    right: 4rem;
+    right: 3.4rem;
     background: $gray_300;
-    top: $font_05;
-    height: 100%;
     padding: $font_05;
-    min-height: 10rem;
-    height: auto;
     border-radius: $border_15;
+    height: 13rem;
+    z-index: 4;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
     h3 {
       font-size: $font_m;
@@ -232,11 +202,40 @@ ul::-webkit-scrollbar {
       font-weight: 600;
       border-radius: $border_15;
     }
+
   }
 
+  .li_2 {
+    h3 {
+      color: $blue_700;
+    }
+  }
 
+  .active_2 {
+    .btn_2 {
+      border: 2px solid $blue_gray_300;
+    }
 
+    .icons {
+      color: $blue_gray_300;
+    }
+  }
+
+  .sub_item_2 {
+    direction: rtl;
+  }
+
+  .btn_2:hover {
+    ._show {
+      display: block;
+
+      &:nth-last-child(1) {
+        top: -7rem;
+      }
+    }
+  }
 }
+
 
 i.icons {
   display: flex;

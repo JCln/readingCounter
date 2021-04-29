@@ -22,12 +22,7 @@
     <li class="li_2" *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)"
         routerLinkActive="active_2">
         <div class="btn_2">
-            <div class="ul_items_2">
-                <i class="{{item.cssClass}} icons"></i>
-            </div>
-        </div>
-
-        <div [hidden]="!item.isOpen">
+            <i class="{{item.cssClass}} icons"></i>
             <div class="_show">
                 <h3>{{item.title}}</h3>
                 <hr>
@@ -37,5 +32,6 @@
                 </div>
             </div>
         </div>
+
     </li>
 </ul>

@@ -12,6 +12,10 @@ $border_15: 10px;
   font-weight: 600;
   border: 1px solid;
   font-family: inherit;
+
+  @media (max-width: 550px) {
+    min-width: 15rem;
+  }
 }
 
 // key value input

@@ -94,4 +94,7 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+  backToPrevious = () => {
+    this.router.navigate(['/wr/mu/all']);
+  }
 }
