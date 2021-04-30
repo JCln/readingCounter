@@ -31,14 +31,14 @@ export class CloseTabService {
 
   saveDataForZoneBound: any;
 
-  saveDataForAllContacts: any;
-  saveDictionaryForAllContacts: any;
+  saveDataForAllUsers: any;
+  saveDictionaryForAllUsers: any;
 
-  saveDataForEditContacts: any;
-  saveDictionaryForEditContacts: any;
+  saveDataForEditUsers: any;
+  saveDictionaryForEditUsers: any;
 
-  saveDataForForAddContacts: any;
-  saveDictionaryForAddContacts: any;
+  saveDataForForAddUsers: any;
+  saveDictionaryForAddUsers: any;
 
   saveDataForReadingPeriodManager: any;
 
@@ -107,10 +107,10 @@ export class CloseTabService {
         this.saveDataForCounterState = '';
         break;
       case '/wr/mu/all':
-        this.saveDataForAllContacts = '';
+        this.saveDataForAllUsers = '';
         break;
       case '/wr/mu/add':
-        this.saveDataForForAddContacts = '';
+        this.saveDataForForAddUsers = '';
         break;
       case '/wr/m/ms':
         break;
@@ -246,7 +246,7 @@ export class CloseTabService {
       return;
     }
     if (url.includes('/wr/mu/edit/')) {
-      this.saveDataForEditContacts = '';
+      this.saveDataForEditUsers = '';
       return;
     }
     if (url.includes('/wr/m/track/woui?')) {

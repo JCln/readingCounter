@@ -8,9 +8,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 
-import {
-  ImageViewerComponent,
-} from '../frame-work/manage/tracking/ab-dan-uploaded-info/image-viewer/image-viewer.component';
+import { ImageViewerComponent } from '../frame-work/manage/tracking/wuoi/image-viewer/image-viewer.component';
 import { AddRowDirective } from './../directives/add-row.directive';
 
 @NgModule({

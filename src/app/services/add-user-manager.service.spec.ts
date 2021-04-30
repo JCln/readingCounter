@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AddUserManagerService } from './add-user-manager.service';
+import { UserAddManagerService } from './user-add-manager.service';
 
-describe('AddUserManagerService', () => {
-  let service: AddUserManagerService;
+describe('UserAddManagerService', () => {
+  let service: UserAddManagerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AddUserManagerService);
+    service = TestBed.inject(UserAddManagerService);
   });
 
   it('should be created', () => {

@@ -91,17 +91,18 @@ export class TrackingManagerService {
       OffloadModify.wrongReading
     ]
   }
-  getOffloadLowQualityPicture = (): OffloadModify[] => {
+  getOffloadItems = (): OffloadModify[] => {
     return [
       OffloadModify.blueScreenLight,
       OffloadModify.longDistance,
-      OffloadModify.intenseLight
-    ]
-  }
-  getOffloadHighQualityPicture = (): OffloadModify[] => {
-    return [
+      OffloadModify.intenseLight,
       OffloadModify.counterStatesNotMatch,
-      OffloadModify.wrongReading
+      OffloadModify.wrongReading,
+      OffloadModify.occasion,
+      OffloadModify.inappropriate,
+      OffloadModify.doorPicture,
+      OffloadModify.counterHumidity,
+      OffloadModify.others
     ]
   }
 

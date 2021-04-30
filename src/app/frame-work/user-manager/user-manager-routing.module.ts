@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'all', loadChildren: () => import('./all-contacts/all-contacts.module').then(allcontacts => allcontacts.AllContactsModule) },
-  { path: 'add', loadChildren: () => import('./add-contact/add-contact.module').then(addContacts => addContacts.AddContactModule) },
-  { path: 'edit/:id', loadChildren: () => import('./edit-contact/edit-contact.module').then(editContacts => editContacts.EditContactModule) }
+  { path: 'all', loadChildren: () => import('./users-all/users-all.module').then(usersAll => usersAll.UsersAllModule) },
+  { path: 'add', loadChildren: () => import('./add-user/user-add.module').then(userAdd => userAdd.UserAddModule) },
+  { path: 'edit/:id', loadChildren: () => import('./user-edit/edit-user.module').then(userEdit => userEdit.UserEditModule) }
 ];
 
 @NgModule({

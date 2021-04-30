@@ -148,6 +148,11 @@ export enum ENOffloadModifyType {
     blueScreenLight = 'اشتباه در قرائت',
     intenseLight = 'نور صفحه آبی',
     longDistance = 'نور زیاد',
-    counterStatesNotMatch = 'از فاصله دور',
-    wrongReading = 'عدم تطابق رقم فعلی با رقم کنتور'
+    counterStatesNotMatch = 'عکس از فاصله دور',
+    wrongReading = 'عدم تطابق رقم فعلی با رقم کنتور',
+    occasion = 'مناسب',
+    inappropriate = 'نا مناسب',
+    doorPicture = 'عکس درب',
+    counterHumidity = 'رطوبت کنتور',
+    others = 'سایر'
 };

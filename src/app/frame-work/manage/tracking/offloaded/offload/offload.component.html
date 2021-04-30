@@ -31,15 +31,9 @@
 
         <section class="_container">
             <div class="__checks">
-                <h3>عکس بی کیفیت</h3>
-                <div class="check_boxes" *ngFor="let item of lowQualityPic">
+                <h3>موارد</h3>
+                <div class="check_boxes" *ngFor="let item of offloadItems">
                     <mat-checkbox name="hasPreNumber" [(ngModel)]="item.isSelected">
-                        {{item.title}}
-                    </mat-checkbox>
-                </div>
-                <h3>عکس با کیفیت</h3>
-                <div class="check_boxes" *ngFor="let item of highQualityPic; index as i">
-                    <mat-checkbox name="low{{i+1}}" [(ngModel)]="item.isSelected">
                         {{item.title}}
                     </mat-checkbox>
                 </div>
@@ -69,6 +63,42 @@
             <div *ngIf="!testLoadImage.length" class="__slider">
                 <h2 class="not_found_header">تصویری پیدا نشد</h2>
             </div>
+        </section>
+        <section class="content">
+            <h1 class="title">صدای ضبط شده</h1>
+            <hr>
+
+            <div class="_main_audio">
+                <div *ngFor="let item of audioFiles">
+                    <button [hidden]="showAudioControllers" (click)="getExactAudio(item.fileRepositoryId)">
+                        <i class="tooltip pi pi-cloud-download">
+                            <div class="tooltip_text">بارگیری</div>
+                        </i>
+                    </button>
+                    <button [hidden]="!showAudioControllers" (click)="downloadAudio()">
+                        <i class="tooltip pi pi-download">
+                            <div class="tooltip_text">ذخیره صوت</div>
+                        </i>
+                    </button>
+                    <button [hidden]="!showAudioControllers" (click)="isPlaying = !isPlaying">
+                        <i *ngIf="isPlaying" (click)="pauseAudio()" class="tooltip pi pi-pause">
+                            <div class="tooltip_text">توقف صوت</div>
+                        </i>
+                        <i *ngIf="!isPlaying" (click)="playAudio()" class="tooltip pi pi-play">
+                            <div class="tooltip_text">پخش صوت</div>
+                        </i>
+                    </button>
+                    <button [hidden]="!showAudioControllers" (click)="rePlayAudio()">
+                        <i class="tooltip pi pi-replay">
+                            <div class="tooltip_text">پخش مجدد</div>
+                        </i>
+                    </button>
+                </div>
+                <div class="not_found_header" *ngIf="!audioFiles.length">
+                    <h2>صوتی پیدا نشد</h2>
+                </div>
+            </div>
+
         </section>
 
         <footer>

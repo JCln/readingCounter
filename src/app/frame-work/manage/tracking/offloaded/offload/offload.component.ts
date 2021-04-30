@@ -13,7 +13,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceService } from 'src/app/services/interface.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
-import { ImageViewerComponent } from '../../ab-dan-uploaded-info/image-viewer/image-viewer.component';
+import { ImageViewerComponent } from '../../wuoi/image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-offload',
@@ -32,7 +32,12 @@ export class OffloadComponent implements OnInit {
   }
   dataSource: IOnOffLoad[] = [];
 
+  testAudio = new Audio();
   audioFiles: IOnOffLoad[] = [];
+  downloadURL: string = '';
+  showAudioControllers: boolean = false;
+  isPlaying: boolean = false;
+
   imageFiles: IOnOffLoad[] = [];
   testLoadImage: any[] = [];
 
@@ -40,8 +45,7 @@ export class OffloadComponent implements OnInit {
 
   zoneId: string = null;
   modifyType: OffloadModify[];
-  lowQualityPic: OffloadModify[];
-  highQualityPic: OffloadModify[];
+  offloadItems: OffloadModify[];
 
   counterStatesDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -74,8 +78,7 @@ export class OffloadComponent implements OnInit {
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
     this.modifyType = this.trackingManagerService.getOffloadModifyType();
-    this.lowQualityPic = this.trackingManagerService.getOffloadLowQualityPicture();
-    this.highQualityPic = this.trackingManagerService.getOffloadHighQualityPicture();
+    this.offloadItems = this.trackingManagerService.getOffloadItems();
 
     this.imageFiles.forEach((item, i) => {
       this.getExactImg(item.fileRepositoryId, i);
@@ -106,9 +109,8 @@ export class OffloadComponent implements OnInit {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   checkItems = () => {
-    const lowQ = this.trackingManagerService.selectedItems(this.lowQualityPic);
-    const highQ = this.trackingManagerService.selectedItems(this.highQualityPic);
-    this.offloadModifyReq.checkedItems = lowQ.concat(highQ);
+    const offloadItems = this.trackingManagerService.selectedItems(this.offloadItems);
+    this.offloadModifyReq.checkedItems = offloadItems;
   }
   verification = () => {
     this.checkItems();
@@ -128,35 +130,20 @@ export class OffloadComponent implements OnInit {
       })
     )
   }
-  getExactImg = (id: string, index: number) => {
+  getExactImg = async (id: string, index: number) => {
     if (this.testLoadImage[index])
       return;
-    this.downloadManagerService.downloadFile(id)
-      .subscribe(res => {
-        if (res) {
-          this.testLoadImage[index] = res;
-          console.log(this.testLoadImage);
-          let reader = new FileReader();
-          reader.addEventListener("load", () => {
-            this.testLoadImage[index] = reader.result;
-          }, false);
-          if (this.testLoadImage[index]) {
-            reader.readAsDataURL(this.testLoadImage[index]);
-          }
-        }
-      })
+    const res = await this.downloadManagerService.downloadFile(id);
+
+    this.testLoadImage[index] = res;
     console.log(this.testLoadImage);
-
-  }
-  getExactAudio = (id: string) => {
-    // this.downloadManagerService.downloadFile(id).subscribe(res => {
-    //   if (res) {
-    //     this.downloadURL = window.URL.createObjectURL(res);
-    //     this.testAudio.src = this.downloadURL;
-    //     this.isShowAudioControllers();
-    //   }
-
-    // })
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.testLoadImage[index] = reader.result;
+    }, false);
+    if (this.testLoadImage[index]) {
+      reader.readAsDataURL(this.testLoadImage[index]);
+    }
   }
   showBigImage = (data: any) => {
     this.ref = this.dialogService.open(ImageViewerComponent, {
@@ -167,6 +154,27 @@ export class OffloadComponent implements OnInit {
       closable: true
     })
   }
+  /* AUDIO */
 
-
+  isShowAudioControllers = () => {
+    this.showAudioControllers = true;
+  }
+  getExactAudio = async (id: string) => {
+    const res = await this.downloadManagerService.downloadFile(id)
+    this.downloadURL = window.URL.createObjectURL(res);
+    this.testAudio.src = this.downloadURL;
+    this.isShowAudioControllers();
+  }
+  downloadAudio = () => {
+    const link = document.createElement('a');
+    link.href = this.downloadURL;
+    link.download = `${new Date().toLocaleDateString()}.ogg`;
+    link.click();
+  }
+  playAudio = () => this.testAudio.play();
+  pauseAudio = () => this.testAudio.pause();
+  rePlayAudio = () => {
+    this.testAudio.load();
+    this.testAudio.play();
+  }
 }

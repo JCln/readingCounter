@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
@@ -49,9 +48,18 @@ export class DownloadManagerService {
       console.error(error);
     }
   }
-  downloadFile = (fileRepositoryId: string): Observable<any> => {
-    return this.interfaceManagerService.downloadFile(fileRepositoryId);
+  downloadFile = (fileRepositoryId: string): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.downloadFile(fileRepositoryId).subscribe(res => {
+          resolve(res)
+        });
+      })
+    } catch (error) {
+      console.error(error);
+    }
   }
+
   // 
   getOverAllSize = () => {
     this.dataSource.filter(item => {

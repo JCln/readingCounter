@@ -17,10 +17,10 @@ export class InterfaceManagerService {
   /* */
 
   // //// User manager
-  getAllUserContactsManager = (): Observable<any> => {
+  getAllUsersManager = (): Observable<any> => {
     return this.mainService.GET('V1/User/All');
   }
-  getUserContactManager = (uuid: string): Observable<any> => {
+  getUserManager = (uuid: string): Observable<any> => {
     return this.mainService.GETID(uuid, 'V1/user/Edit');
   }
   getUserLoggins = (UUID: string): Observable<any> => {
@@ -77,13 +77,13 @@ export class InterfaceManagerService {
   getCounterReadersByZoneId = (zoneId: number): Observable<any> => {
     return this.mainService.GET(`V1/User/CounterReaders/${zoneId}`);
   }
-  postUserContactManager = (body: object): Observable<any> => {
+  postUserManager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/user/Edit', body);
   }
-  getAddUserContactManager = (): Observable<any> => {
+  getAddUserManager = (): Observable<any> => {
     return this.mainService.GET('V1/user/Add');
   }
-  postAddContact = (body: object): Observable<any> => {
+  postUserAdd = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/User/Add', body);
   }
   // apk file manager
