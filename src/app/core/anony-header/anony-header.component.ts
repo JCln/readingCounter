@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EnvService } from 'src/app/services/env.service';
 
 @Component({
   selector: 'app-anony-header',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./anony-header.component.scss']
 })
 export class AnonyHeaderComponent implements OnInit {
+  provinceName: string;
 
-  constructor() { }
+  constructor(
+    private envService: EnvService
+  ) {
+    this.provinceName = this.envService.headerProvinceTitle;
+  }
 
   ngOnInit(): void {
   }

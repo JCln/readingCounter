@@ -2,6 +2,7 @@
     window.__env = window.__env || {};
 
     // API url
+    window.__env.provinceName = 'اصفهان';
     window.__env.API_URL = 'https://37.191.92.157/kontoriNew';
     // window.__env.OSMmapBoxUrl = 'http://172.18.12.242/osm_tiles/{z}/{x}/{y}.png';
     window.__env.OSMmapBoxUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';

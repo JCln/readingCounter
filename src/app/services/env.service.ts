@@ -1,13 +1,16 @@
+import { ActivatedProvince } from '../classes/activated-province';
+
 export class EnvService {
+  temp = ActivatedProvince.TEH;
 
-  // The values that are defined here are the default values that can
-  // be overridden by env.js
+  headerProvinceTitle = this.temp.headerProvinceTitle;
+  API_URL = this.temp.API_URL;
+  OSMmapBoxUrl = this.temp.OSMmapBoxUrl;
+  SATELLITEMapBoxUrl = this.temp.SATELLITEMapBoxUrl;
+  SATELLITEMapAccessToken = this.temp.SATELLITEMapAccessToken;
 
-  // API url
-  public API_URL = 'https://37.191.92.157/kontoriNew';
-  public OSMmapBoxUrl: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-  public SATELLITEMapBoxUrl: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token='
-  public SATELLITEMapAccessToken: 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg'
+
+  // API url          
 
   // Whether or not to enable debug mode
   public enableDebug = true;

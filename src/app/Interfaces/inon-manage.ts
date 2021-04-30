@@ -139,20 +139,3 @@ export interface IOffloadModifyReq {
     jalaliDay: string,
     description: string
 }
-export interface IOffloadModifyType {
-    id: number,
-    modifyeType: ENOffloadModifyType
-}
-export enum ENOffloadModifyType {
-    callAnnounce = 'اعلام تلفنی',
-    blueScreenLight = 'اشتباه در قرائت',
-    intenseLight = 'نور صفحه آبی',
-    longDistance = 'نور زیاد',
-    counterStatesNotMatch = 'عکس از فاصله دور',
-    wrongReading = 'عدم تطابق رقم فعلی با رقم کنتور',
-    occasion = 'مناسب',
-    inappropriate = 'نا مناسب',
-    doorPicture = 'عکس درب',
-    counterHumidity = 'رطوبت کنتور',
-    others = 'سایر'
-};
