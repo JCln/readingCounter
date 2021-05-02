@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>افزودن منطقه</h2>
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="save()">
     <mat-dialog-content>
 
         <mat-form-field appearance="fill">
@@ -29,7 +29,7 @@
     </mat-dialog-content>
 
     <mat-dialog-actions>
-        <button class="btn_2" (click)="close()">بازگشت</button>
-        <button class="btn_2 _custom" (click)="save()">ذخیره</button>
+        <button class="btn_2" (click)="close()" type="button">بازگشت</button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
     </mat-dialog-actions>
 </form>

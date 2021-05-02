@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SectionsService } from 'src/app/services/sections.service';
 
 @Component({
   selector: 'app-karbari-add-dg',
@@ -15,6 +16,7 @@ export class KarbariAddDgComponent {
     fb: FormBuilder,
     private dialogRef: MatDialogRef<KarbariAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private sectionsService: SectionsService
   ) {
     data = data.di;
     this.form = fb.group({
@@ -30,7 +32,10 @@ export class KarbariAddDgComponent {
 
   }
   save() {
-    console.log(this.form.value);
+    this.sectionsService.setSectionsValue(this.form.value);
+    if (!this.sectionsService.sectionVertification()) {
+      return;
+    }
 
     this.dialogRef.close(this.form.value);
   }
