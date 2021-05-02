@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ICountryManager } from 'src/app/Interfaces/imanage';
@@ -40,9 +40,8 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   openDialog = () => {
-    const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(CountryAddDgComponent, dialogConfig);
+      const dialogRef = this.dialog.open(CountryAddDgComponent, { disableClose: true });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addCountryManager(result).subscribe((res: IResponses) => {
@@ -57,6 +56,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   editDialog = (row: any) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(CountryEditDgComponent, {
+        disableClose: true,
         width: '30rem',
         data: row
 

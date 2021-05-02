@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { IRoleManager } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
@@ -41,9 +41,8 @@ export class RoleManagerComponent implements OnInit {
   ) { }
 
   openDialog = () => {
-    const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(AddNewComponent, dialogConfig);
+      const dialogRef = this.dialog.open(AddNewComponent, { disableClose: true });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addRole(result).subscribe(res => {

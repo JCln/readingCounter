@@ -62,6 +62,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
   openDialog = () => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ZoneBoundAddDgComponent, {
+        disableClose: true,
         data: {
           di: this.zoneBoundDictionary
         }
@@ -97,6 +98,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     const editable = this.getEditableSource(row).zoneId;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ZoneBoundEditDgComponent, {
+        disableClose: true,
         width: '30rem',
         data: {
           row,

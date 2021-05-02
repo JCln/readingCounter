@@ -70,6 +70,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   openDialog = () => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(KarbariAddDgComponent, {
+        disableClose: true,
         width: '30rem',
         data: {
           di: this.provinceDictionary
@@ -98,6 +99,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   editDialog = (row: any) => {
     const editable = this.getEditableSource(row).provinceId;
     const dialogRef = this.dialog.open(KarbariEditDgComponent, {
+      disableClose: true,
       width: '30rem',
       data: {
         row,

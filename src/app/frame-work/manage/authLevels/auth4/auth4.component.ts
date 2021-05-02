@@ -49,6 +49,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
   openDialog = () => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth4AddDgComponent, {
+        disableClose: true,
         minWidth: '30rem',
         data: {
           di: this.auth3Dictionary
@@ -70,6 +71,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
 
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth4EditDgComponent, {
+        disableClose: true,
         width: '30rem',
         data: { row, di: this.auth3Dictionary }
 

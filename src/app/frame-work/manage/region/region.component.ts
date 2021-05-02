@@ -53,6 +53,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(RegionAddDgComponent,
         {
+          disableClose: true,
           width: '30rem',
           data: {
             di: this.regionDictionary
@@ -82,6 +83,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(RegionEditDgComponent, {
         width: '30rem',
+        disableClose: true,
         data: {
           row, di: this.regionDictionary, editable
         }

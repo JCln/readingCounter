@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
@@ -43,9 +43,8 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   openDialog = () => {
-    const dialogConfig = new MatDialogConfig();
     return new Promise(resolve => {
-      const dialogRef = this.dialog.open(Auth1AddDgComponent, dialogConfig);
+      const dialogRef = this.dialog.open(Auth1AddDgComponent, { disableClose: true });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.interfaceManagerService.addAuthLevel1Manager(result).subscribe((res: IResponses) => {
@@ -61,8 +60,8 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth1EditDgComponent, {
         width: '30rem',
-        data: row
-
+        data: row,
+        disableClose: true
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {

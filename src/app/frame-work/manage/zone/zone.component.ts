@@ -67,6 +67,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   openDialog = () => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ZoneAddDgComponent, {
+        disableClose: true,
         minWidth: '30rem',
         data: {
           di: this.zoneDictionary
@@ -97,6 +98,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     const editable = this.getEditableSource(row).regionId;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ZoneEditDgComponent, {
+        disableClose: true,
         minWidth: '30rem',
         data: {
           row,

@@ -53,6 +53,7 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(QotrAddDgComponent,
         {
+          disableClose: true,
           width: '30rem',
           data: {
             di: this.countryDictionary
@@ -85,6 +86,7 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(QotrEditDgComponent, {
         width: '30rem',
+        disableClose: true,
         data: {
           row,
           editable,

@@ -50,6 +50,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ProvinceAddDgComponent,
         {
+          disableClose: true,
           width: '30rem',
           data: {
             di: this.countryDictionary
@@ -81,6 +82,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     const editable = this.getEditableSource(row).countryId;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ProvinceEditDgComponent, {
+        disableClose: true,
         width: '30rem',
         data: {
           row,

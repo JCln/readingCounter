@@ -48,6 +48,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
   openDialog = () => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth3AddDgComponent, {
+        disableClose: true,
         data: {
           di: this.auth2Dictionary
         }
@@ -66,6 +67,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
   editDialog = (row: any) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth3EditDgComponent, {
+        disableClose: true,
         width: '30rem',
         data: { row, di: this.auth2Dictionary }
 

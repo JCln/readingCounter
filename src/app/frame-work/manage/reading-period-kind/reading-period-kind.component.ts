@@ -54,6 +54,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(RpkmAddDgComponent,
         {
+          disableClose: true,
           width: '30rem'
         });
       dialogRef.afterClosed().subscribe(result => {
@@ -70,6 +71,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
   editDialog = (row: any) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(RpkmEditDgComponent, {
+        disableClose: true,
         width: '30rem',
         data: {
           row

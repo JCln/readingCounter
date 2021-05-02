@@ -55,6 +55,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(RpmAddDgComponent,
         {
+          disableClose: true,
           width: '30rem',
           data: {
             di: this.zoneDictionary,
@@ -84,6 +85,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     const editable = this.getEditableSource(row).zoneId;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(RpmEditDgComponent, {
+        disableClose: true,
         width: '30rem',
         data: {
           row,
