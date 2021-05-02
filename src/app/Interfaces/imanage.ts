@@ -143,7 +143,7 @@ export interface IListManagerAll {
     hazf: number,
     hasError: boolean,
     errorDescription: string,
-    zoneId: number|string,
+    zoneId: number | string,
     counterNumber: number,
     counterStateId: number,
     counterStateCode: number,
@@ -690,7 +690,8 @@ export interface IFragmentMaster {
     routeTitle: string,
     fromEshterak: string,
     toEshterak: string,
-    isValidated?: boolean
+    isValidated?: boolean,
+    isNew?: boolean
 }
 export interface IFragmentDetails {
     id?: string,
@@ -699,7 +700,8 @@ export interface IFragmentDetails {
     fromEshterak: string,
     toEshterak: string,
     orderDigit?: number,
-    orderPersian?: string
+    orderPersian?: string,
+    isNew?: boolean
 }
 
 //

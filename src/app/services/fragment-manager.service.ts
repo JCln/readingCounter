@@ -242,6 +242,7 @@ export class FragmentManagerService {
     if (!this.utilsService.lengthControl(fragmentMaster.fromEshterak, fragmentMaster.toEshterak, 5, 10)) {
       return false;
     }
+    return true;
   }
   private detailsValidation = (): boolean => {
     if (!this.nullValidation(this.fragmentDetails.fragmentMasterId, ('خطا در ارسال مقادیر')))
@@ -286,7 +287,7 @@ export class FragmentManagerService {
 
     if (!this.NANValidation(fragmentDetails.fromEshterak))
       return false;
-    if (!this.NANValidation(fragmentDetails.fromEshterak))
+    if (!this.NANValidation(fragmentDetails.toEshterak))
       return false;
 
     if (!this.utilsService.isFromLowerThanToByString(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
@@ -294,7 +295,8 @@ export class FragmentManagerService {
     if (!this.utilsService.isSameLength(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
       return false;
     if (!this.utilsService.lengthControl(fragmentDetails.fromEshterak, fragmentDetails.toEshterak, 5, 10))
-      return true;
+      return false;
+    return true;
   }
 
   verificationMaster = (fragmentMaster: IFragmentMaster): boolean => {

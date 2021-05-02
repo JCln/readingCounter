@@ -46,7 +46,7 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
     this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
     this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
-    this.defaultAddStatus();    
+    this.defaultAddStatus();
     this.insertSelectedColumns();
   }
   customizeSelectedColumns = () => {
@@ -63,8 +63,6 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
   private getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       this._masterId = this.fragmentManagerService.getRouteParams();
-      console.log(this._masterId);
-
       this.classWrapper();
     })
     )
@@ -94,7 +92,7 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
   refreshTable = () => this.classWrapper(true);
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   newRow(): IFragmentDetails {
-    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId };
+    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId, isNew: true };
   }
   onRowEditInit(dataSource: IFragmentDetails) {
     // this.insertSelectedColumns();
@@ -104,11 +102,9 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this.newRowLimit = 1;
     this.dataSource[index] = this.clonedProducts[dataSource.fragmentMasterId];
     delete this.dataSource[dataSource.id];
-    if (!this.fragmentManagerService.ValidationDetailsNoMessage(dataSource)) {
-      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak)) {
-        this.dataSource.shift();
-      }
-    }
+    if (dataSource.isNew)
+      this.dataSource.shift();
+    return;
   }
   removeRow = async (dataSource: IFragmentDetails, index: number) => {
     this.newRowLimit = 1;
@@ -125,10 +121,11 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
   onRowEditSave(dataSource: IFragmentDetails, rowIndex: number) {
     this.newRowLimit = 1;
     if (!this.fragmentManagerService.verificationDetails(dataSource)) {
-      console.log(this.utilsService.isNull(dataSource.fromEshterak));
-      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak)) {
+      if (dataSource.isNew) {
         this.dataSource.shift();
+        return;
       }
+      this.dataSource[rowIndex] = this.clonedProducts[dataSource.fragmentMasterId];
       return;
     }
     if (!dataSource.id) {
@@ -139,13 +136,6 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     }
   }
   async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
-
-    if (!this.fragmentManagerService.verificationDetails(dataSource)) {
-      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak)) {
-        this.dataSource.shift();
-      }
-      return;
-    }
     const a = await this.fragmentManagerService.addFragmentDetails(dataSource);
     if (a) {
       this.refetchTable(rowIndex);

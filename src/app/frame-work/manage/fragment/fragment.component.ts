@@ -98,17 +98,19 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   newRow(): IFragmentMaster {
-    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '' };
+    return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isNew: true };
   }
   onRowEditInit(dataSource: any) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   onRowEditSave(dataSource: IFragmentMaster, rowIndex: number) {
+    this.newRowLimit = 1;
     if (!this.fragmentManagerService.verificationMaster(dataSource)) {
-      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak) || this.utilsService.isNull(dataSource.routeTitle)) {
-        this.newRowLimit = 1;
+      if (dataSource.isNew) {
         this.dataSource.shift();
+        return;
       }
+      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
       return;
     }
     dataSource.zoneId = dataSource.zoneId['id'];
@@ -129,14 +131,13 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
       this.refreshTable();
     }
   }
-  onRowEditCancel(dataSource: any, index: number) {
+  onRowEditCancel(dataSource: IFragmentMaster, index: number) {
     this.newRowLimit = 1;
     this.dataSource[index] = this.clonedProducts[dataSource.id];
     delete this.dataSource[dataSource.id];
-    if (!this.fragmentManagerService.ValidationMasterNoMessage(dataSource))
-      if (this.utilsService.isNull(dataSource.fromEshterak) || this.utilsService.isNull(dataSource.toEshterak) || this.utilsService.isNull(dataSource.routeTitle)) {
-        this.dataSource.shift();
-      }
+    if (dataSource.isNew)
+      this.dataSource.shift();
+    return;
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster, rowIndex: number) => {
     const obj2 = { ...dataSource };
