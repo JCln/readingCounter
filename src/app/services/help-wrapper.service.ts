@@ -53,8 +53,17 @@ export class HelpWrapperService {
       return;
     }
     else if (currentRoute === '/wr/m/mr' || currentRoute === '/wr/m/mp' || currentRoute === '/wr/m/mzd' || currentRoute === '/wr/m/mz' || currentRoute === '/wr/m/mc') {
-      this.messageToShow.title = 'مدیریت کاربران';
-      this.messageToShow.messageOne = 'برای مشاهده، شخصی سازی ، کنترل نرم افزار های قرائت درنظر گرفته شده است. این قسمت شامل کنترل بخش های کاربری، تنظیمات پیش فرض، وضعیت کنتور و ... است.';
+      this.messageToShow.title = 'مدیریت نواحی';
+      this.messageToShow.messageOne = 'این بخش برای مشاهده، شخصی سازی ، کنترل نواحی درنظر گرفته شده است.از قسمت های کشور، استان، مناطق، نواحی و محدوده ها تشکیل شده است بطوری که هر محدوده مربوط به یک ناحیه/شهر است. همچنین هر ناحیه/شهر مربوط به یک منطقه است. برای مثال مجموعه استان ها کشور را میسازند.';
+      this.messageToShow.imgOne = 'assets/imgs/help/ARE.PNG';
+      this.messageToShow.messageTwo = 'این بخش به این منظور درنظر گرفته شده است که بتوان بسادگی نواحی مختلف را درنظر گرفت. مثلا محدوده جدیدی را به یک ناحیه افزود';
+      this.messageToShow.messageThree = 'امکان جستجو، ویرایش، حذف و افزودن مطابق تصویر می‌باشد.';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+    else if (currentRoute === '/wr/m/kar' || currentRoute === '/wr/m/rcd' || currentRoute === '/wr/m/cs' || currentRoute === '/wr/m/rpk' || currentRoute === '/wr/m/rp') {
+      this.messageToShow.title = 'مدیریت قرائت';
+      this.messageToShow.messageOne = 'برای مشاهده، شخصی سازی و کنترل بخش های مدیریت قرائت درنظر گرفته شده است. این قسمت شامل کنترل بخش های کاربری، تنظیمات پیش فرض، وضعیت کنتور و ... است.';
       this.messageToShow.imgOne = 'assets/imgs/help/ARE.PNG';
       this.messageToShow.messageTwo = 'امکان جستجو، ویرایش، حذف و افزودن مطابق تصویر می‌باشد.';
       this.messageToShow.messageThree = '';
@@ -63,7 +72,7 @@ export class HelpWrapperService {
     }
     else if (currentRoute === '/wr/apk') {
       this.messageToShow.title = 'مدیریت apk';
-      this.messageToShow.messageOne = 'این بخش به دو بخش نسخه های گذشته و جدید تقسیم میشود. درصورتی که نیاز به استفاده از apk قبلی بود میتوان برروی فایل مربوط به همان سطر کلیک تا به عنوان نسخه جدید درنظر گرفته شود. برای ایجاد نسخه جدید با وارد کردن نام، شماره و فایل نسخه میتوان به ایجاد نسخه جدید اقدام نمود. ';
+      this.messageToShow.messageOne = 'این بخش به دو قسمت نسخه های گذشته و جدید تقسیم میشود. درصورتی که نیاز به استفاده از apk قبلی بود میتوان برروی فایل مربوط به همان سطر کلیک تا به عنوان نسخه جدید درنظر گرفته شود. برای ایجاد نسخه جدید با وارد کردن نام، شماره و فایل نسخه میتوان به ایجاد نسخه جدید اقدام نمود. ';
       this.messageToShow.imgOne = '';
       this.messageToShow.messageTwo = '';
       this.messageToShow.messageThree = '';
@@ -76,7 +85,7 @@ export class HelpWrapperService {
       this.messageToShow.imgOne = 'assets/imgs/help/tracking/impd1.JPG';
       this.messageToShow.messageTwo = 'نکته: امکان ویرایش مقادیر مانند درصد علی الحساب و درصد تصویر وجود دارد';
       this.messageToShow.messageThree = 'نکته: تا زمانی که پیامی به شکل زیر نمایش داده نشده، مسیری ایجاد نشده است.';
-      this.messageToShow.imgTwo = '';
+      this.messageToShow.imgTwo = 'assets/imgs/help/tracking/impd3.JPG';
       return;
     }
     else if (currentRoute === '/wr/m/dbf') {
@@ -103,6 +112,15 @@ export class HelpWrapperService {
       this.messageToShow.imgOne = '';
       this.messageToShow.messageTwo = 'جزئیات نمایشی بیشتر مانند تاریخ ثبت، نام مامور و وضعیت پیگیری قابل مشاهده هستند.';
       this.messageToShow.messageThree = 'همچنین میتوان مسیر را به قسمت قبلی بازگشت داد. برای مثال اگر مسیر در وضعیت درحال قرائت باشد میتواند به وضعیت بارگیری شده بازگشت داده شود.';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+    else if (currentRoute === '/wr/profile') {
+      this.messageToShow.title = 'تنظیمات کاربری';
+      this.messageToShow.messageOne = 'مشخصات کاربری شما در این قسمت قابل مشاهده است، درصورتی نیاز به تغییر گذرواژه نیز میتوان اقدام نمود.';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = 'توجه شود که اگر گذرواژه شما قبلا بازنشانی شده باشد، گذرواژه،شماره موبایل شما خواهد بود. ';
+      this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
       return;
     }

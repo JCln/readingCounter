@@ -180,6 +180,7 @@ ul::-webkit-scrollbar {
     height: 13rem;
     z-index: 4;
     bottom: 0;
+    box-shadow: -3px 0px 3px 0px $blue_700;
     overflow-y: auto;
     overflow-x: hidden;
     -ms-overflow-style: none;

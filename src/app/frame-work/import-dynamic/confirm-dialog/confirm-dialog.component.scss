@@ -11,3 +11,18 @@
 strong {
   color: $blue_600;
 }
+
+._circle_border {
+  color: $green_500;
+  border: 2px solid $green_500;
+  margin-left: $font_xs;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+._text {
+  margin-left: $font_xs;
+}
