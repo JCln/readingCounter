@@ -25,6 +25,11 @@
   margin: 0 2rem;
 }
 
+._options {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 .unit {
   display: flex;
   align-items: center;
@@ -147,10 +152,14 @@ h3 {
   margin-top: $font_xs;
 }
 
-._flex_dr_ric p {
-  font-size: $font_s;
-  color: $blue_700;
-  margin: 0 $font_xs;
+._flex_dr_ric {
+  margin: 0 $font_05;
+
+  p {
+    font-size: $font_s;
+    color: $blue_700;
+    margin: 0 $font_xs;
+  }
 }
 
 // 

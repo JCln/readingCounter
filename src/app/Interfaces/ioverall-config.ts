@@ -108,6 +108,7 @@ export interface IObjectIteratation {
     isSelected: boolean;
     ltr?: boolean;
     readonly?: boolean;
+    borderize?: boolean;
 }
 export interface ITabWrapperDetectDynamicRoute {
     _title: string,

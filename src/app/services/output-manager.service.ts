@@ -52,6 +52,10 @@ export class OutputManagerService {
     link.click();
   }
   exportPdf = (name: any[], fileName: string) => {
+    if (this.utilsService.isNull(name)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
+      return;
+    }
     (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
     var fila = new Array();
@@ -79,12 +83,20 @@ export class OutputManagerService {
 
   }
   exportExcel(dataSource: any, fileName: string) {
+    if (this.utilsService.isNull(dataSource)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
+      return;
+    }
     const worksheet = XLSX.utils.json_to_sheet(dataSource);
     const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     this.saveAsExcelFile(excelBuffer, fileName, '.xlsx');
   }
   exportCSV(dataSource: any, fileName: string) {
+    if (this.utilsService.isNull(dataSource)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
+      return;
+    }
     const worksheet = XLSX.utils.json_to_sheet(dataSource);
     const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });

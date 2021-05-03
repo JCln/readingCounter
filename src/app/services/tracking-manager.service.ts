@@ -42,8 +42,8 @@ export class TrackingManagerService {
   }
   columnSelectedImportedList = (): IObjectIteratation[] => {
     return [
-      { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true, readonly: false },
-      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false },
+      { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true, readonly: false, borderize: true },
+      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, borderize: true },
       { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
       { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true },
@@ -55,7 +55,7 @@ export class TrackingManagerService {
       { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
       { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
-      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false },
+      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false, borderize: true },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false },
       { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false },
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true },

@@ -44,6 +44,11 @@ input {
   // box-shadow: 1px 1px 8px 1px $gray_200;
 }
 
+.coloring_border {
+  border: 1.5px solid $orange_600;
+  animation: pulse-new-button 500ms;
+}
+
 // dialog conf
 :host ::ng-deep {
   .p-dialog .p-dialog-header {

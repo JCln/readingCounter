@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -15,7 +16,7 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
   templateUrl: './woui.component.html',
   styleUrls: ['./woui.component.scss']
 })
-export class WouiComponent implements OnInit, AfterViewInit, OnDestroy {
+export class WouiComponent implements AfterViewInit, OnDestroy {
   targetFile = {
     id: '',
     isForbidden: false
@@ -43,14 +44,23 @@ export class WouiComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     private interactionService: InteractionService,
     private dialogService: DialogService,
-    private _location: Location
+    private _location: Location,
+    private router: Router
     // private domSanitizer: DomSanitizer
-  ) { }
+  ) {
+    this.getRouteParams();
+  }
 
   private getRouteParams = () => {
-    this.targetFile.id = this.route.snapshot.paramMap.get('UUID');
-    const checkBoolean = this.route.snapshot.paramMap.get('isForbidden');
-    this.targetFile.isForbidden = checkBoolean ? checkBoolean.toLocaleLowerCase() === 'true' : false;
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(res => {
+        this.targetFile.id = this.route.snapshot.paramMap.get('UUID');
+        const checkBoolean = this.route.snapshot.paramMap.get('isForbidden');
+        this.targetFile.isForbidden = checkBoolean ? checkBoolean.toLocaleLowerCase() === 'true' : false;
+        this.classWrapper();
+      })
+    )
+
   }
   private useAPI = (): Promise<any> => {
     return new Promise((resolve) => {
@@ -73,10 +83,6 @@ export class WouiComponent implements OnInit, AfterViewInit, OnDestroy {
     this.imageFiles = this.downloadManagerService.separateImageFiles();
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
     this.getDownloadListInfo();
-  }
-  ngOnInit(): void {
-    this.getRouteParams();
-    this.classWrapper();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {

@@ -12,6 +12,7 @@ export enum EN_messages {
     not_found_zoneId = 'ناحیه ای تعریف نشده است',
     try_again = 'یکبار دیگر مقادیر را وارد نمایید',
     notFound = 'موردی یافت نشد',
+    notFoundToExport = 'موردی برای ذخیره وجود ندارد',
     highLow100 = 'مقدار نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     userPass_empty = 'نام کاربری یا گذرواژه نمیتواند خالی باشد',
 
