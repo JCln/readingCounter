@@ -3,6 +3,8 @@ export enum EN_messages {
     password_notExactly = 'گذرواژه با تایید آن یکی باید باشد',
     sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد',
     format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
+    format_invalid_from_esterak = 'فرمت از اشتراک ناصحیح است',
+    format_invalid_to_esterak = 'فرمت  تا اشتراک ناصحیح است',
     lessThan_eshterak = 'از اشتراک کمتر از تا اشتراک است!',
     percent_pictures = 'درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     thereis_no_reader = 'ماموری در این ناحیه انتخاب نشده است',

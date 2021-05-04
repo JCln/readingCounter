@@ -6,11 +6,18 @@
 </h2>
 
 <mat-dialog-content>
-    <p>تعداد <strong>{{data.count}}</strong>،
-        با شماره پیگیری <strong>{{data.trackNumber}}</strong>
-        و <strong>{{data.errorCount}}</strong>
-        خطا صادر شد
-    </p>
+    <div class="_key_value">
+        <div class="key">تعداد</div>
+        <div class="val"><strong>{{data.count}}</strong></div>
+    </div>
+    <div class="_key_value">
+        <div class="key">شماره پیگیری</div>
+        <div class="val"><strong>{{data.trackNumber}}</strong></div>
+    </div>
+    <div class="_key_value">
+        <div class="key">خطا</div>
+        <div class="val"><strong>{{data.errorCount}}</strong></div>
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>

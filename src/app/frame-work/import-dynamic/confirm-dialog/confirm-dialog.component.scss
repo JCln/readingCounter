@@ -23,6 +23,17 @@ h2 {
   justify-content: center;
 }
 
+._key_value {
+  columns: 2;
+  text-align: center;
+  column-rule: 1px dashed $blue_400;
+}
+
+.key,
+.val {
+  font-weight: 600;
+}
+
 ._text {
   margin-left: $font_xs;
 }

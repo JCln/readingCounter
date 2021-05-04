@@ -55,9 +55,9 @@ export class ImportDynamicService {
       return false;
     }
 
-    if (!this.NANValidation(this.importDynamicValue.fromEshterak, 'فرمت از اشتراک ناصحیح است'))
+    if (!this.NANValidation(this.importDynamicValue.fromEshterak, EN_messages.format_invalid_from_esterak))
       return false;
-    if (!this.NANValidation(this.importDynamicValue.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
+    if (!this.NANValidation(this.importDynamicValue.fromEshterak, EN_messages.format_invalid_to_esterak))
       return false;
 
     if (!this.utilsService.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 10)) {
