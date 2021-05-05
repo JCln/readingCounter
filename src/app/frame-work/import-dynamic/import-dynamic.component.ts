@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
-import { IZoneManager } from 'src/app/Interfaces/imanage';
 import { IImportDynamicDefault } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -60,7 +59,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   readingPeriodDictionary: IDictionaryManager[] = [];
   readingConfigDefault: string[] = [];
   userCounterReader: IDictionaryManager[] = [];
-  zoneDictionary: IZoneManager[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
   dataSource: any;
   subscription: Subscription[] = [];
 
