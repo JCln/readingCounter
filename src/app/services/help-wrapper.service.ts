@@ -193,7 +193,7 @@ export class HelpWrapperService {
     }
     else if (currentRoute.includes('mam/gis')) {
       this.messageToShow.title = 'گزارش مکانمند';
-      this.messageToShow.messageOne = 'این قسمت برای مشاهده وضعیت قرائت بر اساس وضعیت کنتور، غیرمجاز و .. می‌باشد. یعنی امکان مشاهده وضعیت، در ناحیه مدنظر برروی نقشه . ';
+      this.messageToShow.messageOne = 'این قسمت برای مشاهده گزارش مکانمند بر اساس وضعیت کنتور، غیرمجاز و .. می‌باشد. یعنی امکان مشاهده وضعیت، در ناحیه مدنظر برروی نقشه . ';
       this.messageToShow.imgOne = 'assets/imgs/help/rr/gis.JPG';
       this.messageToShow.messageTwo = 'با فعال سازی خوشه بندی امکان مشاهده درخواست به شکل کلی تر و بر اساس تراکم آن درخواست برروی نقشه قابل مشاهده است.';
       this.messageToShow.messageThree = '';

@@ -70,12 +70,6 @@ main {
 
 }
 
-::ng-deep {
-  .mat-checkbox-layout .mat-checkbox-label {
-    margin: 0 .5rem;
-  }
-}
-
 .accept {
   display: flex;
 }
@@ -91,8 +85,6 @@ main {
 .toggle {
   display: flex;
   flex-wrap: wrap;
-  // grid-template-columns: repeat(auto-fit, minmax(7rem, 8rem));
-  // grid-template-rows: repeat(6, 1fr);
 }
 
 .toggle_content {

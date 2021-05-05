@@ -13,6 +13,7 @@
       font-size: $font_s;
       font-weight: 600;
       color: $blue_500;
+      // padding: $font_xxs;
       // color: $blue_600;
       line-height: 2;
       border-radius: $border_15;
@@ -69,4 +70,110 @@
 ._special {
   background-color: $blue_400;
   color: $gray_100;
+}
+
+
+/* actions */
+
+
+.auth_1 {
+  direction: rtl;
+}
+
+.auth_1_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
+  gap: .25rem;
+  direction: rtl;
+
+  .auth_1_item {
+    display: grid;
+    place-content: center;
+    padding: $font_05;
+    margin: $font_s 0;
+    border-radius: $border_5;
+    font-size: $font_l;
+    font-weight: 600;
+    background: $blue_gray_400;
+    color: $blue_700;
+    box-shadow: 1px 1px 3px 0px $blue_gray_400;
+    cursor: pointer;
+  }
+}
+
+// active auth1 tab
+.active_tab {
+  background-color: $blue_600 !important;
+  color: $gray_100 !important;
+}
+
+// 
+
+.auth_2 {
+  padding: 0 $font_xxs;
+  margin-bottom: $font_2;
+  border-radius: $border_15;
+}
+
+.auth_3 {
+  margin: $font_05 4rem$font_05 $font_xxs;
+  padding: $font_05;
+  border-radius: $border_15;
+  box-shadow: 0px 2px 3px 1.5px $gray_400;
+}
+
+.auth_4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  gap: .3rem;
+  background: $gray_100;
+  border: 1px solid $blue_600;
+  border-radius: $border_5;
+  margin: $font_xxs;
+
+  .checkboxes {
+    display: flex;
+    border-radius: 15px;
+    padding: .25rem;
+  }
+}
+
+.text {
+  padding: 0 $font_05;
+  color: $blue_600;
+  font-size: $font_l;
+  font-weight: 600;
+}
+
+.text_btn {
+  max-width: 11rem;
+  width: auto;
+  text-align: center;
+  padding: $font_05;
+  border-radius: $border_15;
+  margin-bottom: $font_05;
+  font-size: $font_m;
+  font-weight: 600;
+  color: $blue_600;
+  background: $gray_300;
+}
+
+.accept {
+  display: flex;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid $blue_600;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .25em;
 }
