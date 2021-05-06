@@ -264,11 +264,57 @@ export class CloseTabService {
   }
   // 
 
-  constructor() { }
+  cleanAllData = () => {
+    this.saveDataForAppLevel1 = [];
+    this.saveDataForAppLevel2 = [];
+    this.saveDataForAppLevel3 = [];
+    this.saveDataForAppLevel4 = [];
+    this.saveDataForCounterState = [];
+    this.saveDataForKarbari = [];
+    this.saveDataForReadingConfig = [];
+    this.saveDictionaryForReadingConfig = [];
+    this.saveDataForCountry = [];
+    this.saveDataForProvince = [];
+    this.saveDataForRegion = [];
+    this.saveDataForZone = [];
+    this.saveDataForZoneBound = [];
+    this.saveDataForAllUsers = [];
+    this.saveDictionaryForAllUsers = [];
+    this.saveDataForEditUsers = [];
+    this.saveDictionaryForEditUsers = [];
+    this.saveDataForForAddUsers = [];
+    this.saveDictionaryForAddUsers = [];
+    this.saveDataForReadingPeriodManager = [];
+    this.saveDataForReadingPeriodKindManager = [];
+    this.saveDataForAPKManager = [];
+    this.saveDataForCounterReport = [];
+    this.saveDataForQotrManager = [];
+    this.saveDataForTrackImported = [];
+    this.saveDataForTrackLoaded = [];
+    this.saveDataForTrackReading = [];
+    this.saveDataForTrackOffloaded = [];
+    this.saveDataForTrackFinished = [];
+    this.saveDataForFollowUp = [];
+    this.saveDataForLastStates = [];
+    this.saveDataForOffloadModify = [];
+    this.saveDataForImportDynamic = [];
+    this.saveDataForLMPD = [];
+    this.saveDataForLMAll = [];
+    this.saveDataForLMAll_extra = [];
+    this.saveDataForWOUI = [];
+    this.saveDataForForbidden = [];
+    this.saveDataForOutputDBF = [];
+    this.saveDataForUserLoggins = [];
+    this.saveDataForRRTraverse = [];
+    this.saveDataForRRTraverseDifferential = [];
+    this.saveDataForRRKarkard = [];
+    this.saveDataForRRkarkardDaily = [];
+    this.saveDataForRRMaster = [];
+    this.saveDataForRRDetails = [];
+    this.saveDataForRRDisposalHours = [];
+    this.saveDataForRRGIS = [];
+    this.saveDataForFragmentNOB = [];
+    this.saveDataForFragmentNOBDetails = [];
+    this.saveDataForTextOutput = [];
+  }
 }
-// '/wr/mu/all', title: 'agGrid', isClosable
-// '/wr/mu/add', title: 'add Contact mg
-// '/wr/m/ms', title: 'مدیریت سرور',
-//   '/wr/m/rpm', title: 'مدیریت دوره قرائت
-// '/wr/m/rpkm', title: 'مدیریت نوع دوره
-// '/wr/m/mrm', title: 'مدیریت نقش ها

@@ -5,6 +5,8 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 
 import { IAuthTokenType, IAuthUser, ICredentials } from '../Interfaces/iauth-guard-permission';
 import { MainService } from '../services/main.service';
@@ -26,7 +28,8 @@ export class AuthService {
     private router: Router,
     private route: ActivatedRoute,
     private utilsService: UtilsService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private closeTabService: CloseTabService
   ) { }
 
   private getRefreshToken = (): string => {
@@ -61,8 +64,10 @@ export class AuthService {
 
       })
   }
+  private clearAllSavedData = () => this.closeTabService.cleanAllData();
   logout = () => {
     const refreshToken = this.jwtService.getRefreshToken();
+    this.clearAllSavedData();
     this.mainService.POSTBODY('V1/Account/Logout', { refreshToken }).subscribe(() => {
       this.jwtService.removeAllLocalStorage();
       this.routeTo('/login');
@@ -103,10 +108,10 @@ export class AuthService {
     });
   }
   noAccessMessage = () => {
-    this.snackWrapperService.openSnackBar('شما به این بخش دسترسی ندارید', ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
+    this.snackWrapperService.openSnackBar(EN_messages.access_denied, ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
   }
   goOutIn = () => {
-    this.snackWrapperService.openSnackBar('دسترسی شما باطل شده است. مجددا وارد شوید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+    this.snackWrapperService.openSnackBar(EN_messages.accedd_denied_relogin, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
   }
 
 }

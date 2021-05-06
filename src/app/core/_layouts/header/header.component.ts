@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, EventEmitter, OnDestroy, Output, Type } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthService } from 'src/app/auth/auth.service';
 
 
@@ -16,7 +16,9 @@ export class HeaderComponent implements AfterContentInit, OnDestroy {
 
   displayName: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   setSidebar = () => {
     this.sideBar = !this.sideBar;

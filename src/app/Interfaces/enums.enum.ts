@@ -17,7 +17,7 @@ export enum EN_messages {
     notFoundToExport = 'موردی برای ذخیره وجود ندارد',
     highLow100 = 'مقدار نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     userPass_empty = 'نام کاربری یا گذرواژه نمیتواند خالی باشد',
-
+    access_denied = 'شما به این بخش دسترسی ندارید',
     insert_without_decimal = 'شماره نسخه را بدون اعشار وارد نمایید',
     insert_reading_time = 'مدت قرائتی ایجاد و سپس امتحان نمایید',
     insert_reader = 'یک مامور انتخاب نمایید',
@@ -30,6 +30,7 @@ export enum EN_messages {
     insert_mobile = 'شماره موبایل را وارد نمایید',
     insert_showName = 'نام قابل نمایش را وارد نمایید',
     insert_work = 'خدمتی را مشخص نمایید',
+    accedd_denied_relogin = 'دسترسی شما باطل شده است. مجددا وارد شوید',
     insert_roleAccess = 'سطح دسترسی به ناحیه ای را انتخاب نمایید',
     insert_group_access = 'گروه دسترسی را مشخص نمایید',
     insert_again = 'مجددا مقادیر را وارد نمایید',
