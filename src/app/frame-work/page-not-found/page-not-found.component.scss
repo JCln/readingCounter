@@ -1,0 +1,25 @@
+@import '../../../assets/variable';
+@import '../../../assets/button.scss';
+@import '../../../assets/mixins.scss';
+
+main {
+  display: grid;
+  text-align: center;
+  width: 30rem;
+  margin: auto;
+  padding: $font_xs;
+  min-height: 15rem;
+
+  border-radius: $border_15;
+  background: $gray_100;
+  box-shadow: 1px 1px 8px 4px $gray_400;
+}
+
+button {
+  min-width: 13rem;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+}

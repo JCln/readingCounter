@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { GuardService } from '../auth/guard.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', canActivate: [GuardService], loadChildren: () => import('./map/map.module').then(mapComponent => mapComponent.MapModule) },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'privacy', canActivate: [GuardService], loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) },
   { path: 'rpts', canActivate: [GuardService], loadChildren: () => import('./reports/reports.module').then(reports => reports.ReportsModule) },
   { path: 'm', canActivate: [GuardService], loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) },
-  { path: 'mu', canActivate: [GuardService], loadChildren: () => import('./user-manager/user-manager.module').then(userManager => userManager.UserManagerModule) }
+  { path: 'mu', canActivate: [GuardService], loadChildren: () => import('./user-manager/user-manager.module').then(userManager => userManager.UserManagerModule) },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
