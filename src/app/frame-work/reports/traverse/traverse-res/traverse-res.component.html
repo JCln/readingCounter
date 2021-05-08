@@ -1,7 +1,6 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    dir="rtl" [globalFilterFields]="['zoneId','zoneTitle','reportId','reportTitle','itemCount']"
-    styleClass="p-datatable-responsive" [responsive]="true">
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" [resizableColumns]="true">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -34,7 +33,7 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>

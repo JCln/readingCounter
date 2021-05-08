@@ -3,7 +3,7 @@
     currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[20,50,100, 500, 1000]" [filterDelay]="0"
     [globalFilterFields]="['moshtarakinId','title','zoneId','clientOrder','canEnterNumber','isMane','canNumberBeLessThanPre','isTavizi','shouldEnterNumber','isXarab','isFaqed']"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" [resizableColumns]="true">
     <!--[loading]="innerLoading"-->
 
     <ng-template pTemplate="caption">
@@ -14,7 +14,7 @@
 
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>

@@ -1,6 +1,7 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" #dt dataKey="id" editMode="row">
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" #dt dataKey="id" editMode="row"
+    [resizableColumns]="true">
 
     <ng-template pTemplate="caption">
         <!-- <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -27,19 +28,19 @@
                 <p-sortIcon field="zoneId"></p-sortIcon>
                 منطقه
             </th>
-            <th pSortableColumn="routeTitle">
+            <th pSortableColumn="routeTitle" pResizableColumn>
                 <p-sortIcon field="routeTitle"></p-sortIcon>
                 عنوان
             </th>
-            <th pSortableColumn="fromEshterak">
+            <th pSortableColumn="fromEshterak" pResizableColumn>
                 <p-sortIcon field="fromEshterak"></p-sortIcon>
                 از اشتراک
             </th>
-            <th pSortableColumn="toEshterak">
+            <th pSortableColumn="toEshterak" pResizableColumn>
                 <p-sortIcon field="toEshterak"></p-sortIcon>
                 تا اشتراک
             </th>
-            <th pSortableColumn="isValidated">
+            <th pSortableColumn="isValidated" pResizableColumn>
                 <p-sortIcon field="isValidated"></p-sortIcon>
                 تایید
             </th>

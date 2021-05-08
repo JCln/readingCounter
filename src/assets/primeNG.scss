@@ -94,6 +94,13 @@
     justify-content: center;
   }
 
+  .p-datatable-resizable .p-datatable-tbody>tr>td,
+  .p-datatable-resizable .p-datatable-tfoot>tr>td,
+  .p-datatable-resizable .p-datatable-thead>tr>th {
+    overflow: inherit;
+    white-space: normal;
+  }
+
   footer,
   .footer {
     text-align: center;

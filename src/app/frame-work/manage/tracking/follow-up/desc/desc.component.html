@@ -38,7 +38,7 @@
 </section>
 
 <p-table *ngIf="!canShowGraph" sortField="insertDateJalali" [columns]="defColumns" [value]="changeHsty" dir="rtl"
-    styleClass="p-datatable-responsive" [responsive]="true">
+    styleClass="p-datatable-responsive" [responsive]="true" [resizableColumns]="true">
 
     <ng-template pTemplate="caption">
         <th>
@@ -63,7 +63,7 @@
 
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
