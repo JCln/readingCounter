@@ -33,9 +33,11 @@ export class JwtService {
   }
   isAccessTokenTokenExpired(): boolean {
     const expirationDateUtc = this.getAccessTokenExpirationDateUtc();
+
     if (!expirationDateUtc) {
       return true;
     }
+    console.log(!(expirationDateUtc.valueOf() > new Date().valueOf()));
     return !(expirationDateUtc.valueOf() > new Date().valueOf());
   }
   getDecodedTokenRoles(): string[] | null {

@@ -17,7 +17,7 @@ export enum EN_messages {
     notFoundToExport = 'موردی برای ذخیره وجود ندارد',
     highLow100 = 'مقدار نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     userPass_empty = 'نام کاربری یا گذرواژه نمیتواند خالی باشد',
-    access_denied = 'شما به این بخش دسترسی ندارید',
+    access_denied = 'دسترسی کافی به شما داده نشده است',
     insert_without_decimal = 'شماره نسخه را بدون اعشار وارد نمایید',
     insert_reading_time = 'مدت قرائتی ایجاد و سپس امتحان نمایید',
     insert_reader = 'یک مامور انتخاب نمایید',

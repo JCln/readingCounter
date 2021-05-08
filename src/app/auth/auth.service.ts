@@ -110,7 +110,7 @@ export class AuthService {
   noAccessMessage = () => {
     this.snackWrapperService.openSnackBar(EN_messages.access_denied, ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
   }
-  goOutIn = () => {
+  goOutInMessage = () => {
     this.snackWrapperService.openSnackBar(EN_messages.accedd_denied_relogin, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
   }
 

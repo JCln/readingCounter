@@ -1,8 +1,12 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { filter } from 'rxjs/internal/operators/filter';
+import { finalize } from 'rxjs/internal/operators/finalize';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { take } from 'rxjs/internal/operators/take';
 
 import { AuthService } from './auth.service';
@@ -13,11 +17,14 @@ import { JwtService } from './jwt.service';
 })
 export class InterceptorService implements HttpInterceptor {
   private authorizationHeader = "Authorization";
+  private isRefreshTokenInProcess: boolean = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
 
   constructor(
     private jwtService: JwtService,
-    private authService: AuthService,
-    // private _location: Location
+    private authService: AuthService
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -28,50 +35,55 @@ export class InterceptorService implements HttpInterceptor {
     }
     return next.handle(req)
       .pipe(
-        take(2),
         catchError((error => {
-          console.log(req.url);
-
           if (
             req.url.includes('login')
           ) {
             return throwError(error)
           }
-          console.log(req.url);
           if (error instanceof HttpErrorResponse) {
-            console.log(error.status);
             if (error.status === 401) {
-              console.log(1);
+              if (this.isRefreshTokenInProcess) {
+                return this.refreshTokenSubject.pipe(
+                  filter(result => result !== null),
+                  take(3),
+                  switchMap(() => next.handle(this.addToken(req, authToken))),
+                  finalize(() => this.authService.savedStatusFromToken())
+                );
+              } else {
+                this.isRefreshTokenInProcess = true;
+                this.refreshTokenSubject.next(null);
 
-              const newRequest = this.handle401Error(req);
-              if (newRequest) {
-                console.log("Try new AuthRequest ...");
-                this.authService.savedStatusFromToken();
-                return next.handle(newRequest);
+                if (!this.authService.isAuthUserLoggedIn()) {
+                  this.authService.goOutInMessage();
+                  this.authService.logout();
+                  return throwError(error);
+                }
+
+                return this.authService.refreshToken().pipe(
+                  switchMap((success: boolean) => {
+                    this.refreshTokenSubject.next(success);
+                    return next.handle(this.addToken(req, authToken));
+                  }),
+                  finalize(() => (this.isRefreshTokenInProcess = false, this.authService.savedStatusFromToken()))
+                );
               }
-              else {
-                this.authService.goOutIn();
-                // this.authService.routeTo('/wr');
-                this.authService.logout();
-                return throwError(error);
-              }
+            } else {
+              return throwError(error);
             }
-            // this.authService.noAccessMessage();
-            // this._location.back();
-            return throwError(error);
           }
-        }))
+        })
+        )
       )
+
   }
-  private addToken(req: HttpRequest<any>, token: string) {
+  private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
     return req.clone({
       headers: req.headers.set(this.authorizationHeader, `Bearer ` + token)
       // withCredentials: true
     });
   }
   private handle401Error(request: HttpRequest<any>): HttpRequest<any> | null {
-    console.log(1);
-
     let newStoredToken: any;
     const requestAccessTokenHeader = request.headers.get(this.authorizationHeader);
     this.authService.refreshToken().subscribe(res => {
