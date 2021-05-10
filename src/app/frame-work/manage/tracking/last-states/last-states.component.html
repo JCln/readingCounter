@@ -1,7 +1,7 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
 " [rowsPerPageOptions]="[10,25,50]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    [resizableColumns]="true">
+    [resizableColumns]="true" stateStorage="session" stateKey="last-states-session">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
