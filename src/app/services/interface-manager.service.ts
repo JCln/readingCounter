@@ -10,6 +10,73 @@ export class InterfaceManagerService {
 
   constructor(private mainService: MainService) { }
 
+  /* Formular manager */
+
+  getAbBahaFormulaAll = (): Observable<any> => {
+    return this.mainService.GET('V1/AbBahaFormula/All');
+  }
+  postAbBahaFormulaEdit = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/AbBahaFormula/Edit', body);
+  }
+  postAbBahaFormulaAdd = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/AbBahaFormula/Add', body);
+  }
+  postAbBahaFormulaAddExcel = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/AbBahaFormula/AddExcel', body);
+  }
+  postAbBahaFormulaRemove = (uuid: string): Observable<any> => {
+    return this.mainService.POSTSG('V1/AbBahaFormula/Remove', uuid);
+  }
+
+  getBudgetFormulaAll = (): Observable<any> => {
+    return this.mainService.GET('V1/BudgetFormula/All');
+  }
+  postBudgetFormulaEdit = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/BudgetFormula/Edit', body);
+  }
+  postBudgetFormulaAdd = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/BudgetFormula/Add', body);
+  }
+  postBudgetFormulaAddExcel = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/BudgetFormula/AddExcel', body);
+  }
+  postBudgetFormulaRemove = (uuid: string): Observable<any> => {
+    return this.mainService.POSTSG('V1/BudgetFormula/Remove', uuid);
+  }
+
+  getTabsare2FormulaAll = (): Observable<any> => {
+    return this.mainService.GET('V1/Tabsare2Formula/All');
+  }
+  postTabsare2FormulaEdit = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tabsare2Formula/Edit', body);
+  }
+  postTabsare2FormulaAdd = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tabsare2Formula/Add', body);
+  }
+  postTabsare2FormulaAddExcel = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tabsare2Formula/AddExcel', body);
+  }
+  postTabsare2FormulaRemove = (uuid: string): Observable<any> => {
+    return this.mainService.POSTSG('V1/Tabsare2Formula/Remove', uuid);
+  }
+
+  getTabsare3FormulaAll = (): Observable<any> => {
+    return this.mainService.GET('V1/Tabsare3Formula/All');
+  }
+  postTabsare3FormulaEdit = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tabsare3Formula/Edit', body);
+  }
+  postTabsare3FormulaAdd = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tabsare3Formula/Add', body);
+  }
+  postTabsare3FormulaAddExcel = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/Tabsare3Formula/AddExcel', body);
+  }
+  postTabsare3FormulaRemove = (uuid: string): Observable<any> => {
+    return this.mainService.POSTSG('V1/Tabsare3Formula/Remove', uuid);
+  }
+  /* */
+
   /* text output manager */
   getTextOutputManager = (): Observable<any> => {
     return this.mainService.GET('V1/TextOutputField/All');
@@ -258,6 +325,9 @@ export class InterfaceManagerService {
   }
   getKarbariDictionary = (): Observable<any> => {
     return this.mainService.GET('V1/Karbari/Dictionary');
+  }
+  getKarbariDictionaryCode = (): Observable<any> => {
+    return this.mainService.GET('V1/Karbari/DictionaryCode');
   }
   deleteKarbari = (id: number): Observable<any> => {
     return this.mainService.POST('V1/Karbari/Remove', id);
@@ -527,8 +597,10 @@ export class InterfaceManagerService {
   addAuthLevel4Manager = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/AuthLevel4/Add', body);
   }
-
-
   // 
+
+  /* DICTIONRIES */
+
+
 
 }

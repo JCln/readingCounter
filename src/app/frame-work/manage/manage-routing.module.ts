@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'fbn', loadChildren: () => import('./forbidden/forbidden.module').then(forbidden => forbidden.ForbiddenModule) },
   { path: 'nob', loadChildren: () => import('./fragment/fragment.module').then(fragmentNob => fragmentNob.FragmentModule) },
   { path: 'txt', loadChildren: () => import('./text/text.module').then(textOutput => textOutput.TextModule) },
+  { path: 'formula', loadChildren: () => import('./formula/formula.module').then(formula => formula.FormulaModule) },
 ];
 
 @NgModule({

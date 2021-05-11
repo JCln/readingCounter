@@ -114,6 +114,37 @@ export class SectionsService {
         return false;
     }
     // 
+    // formulas
+    if (this.dynamicValue.hasOwnProperty('karbariMoshtarakinCode')) {
+      if (this.utilsService.isNull(this.dynamicValue.karbariMoshtarakinCode))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('fromDate')) {
+      if (this.utilsService.isNull(this.dynamicValue.fromDate))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('toDate')) {
+      if (this.utilsService.isNull(this.dynamicValue.toDate))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('fromRate')) {
+      if (this.utilsService.isNull(this.dynamicValue.fromRate))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('toRate')) {
+      if (this.utilsService.isNull(this.dynamicValue.toRate))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('abFormula')) {
+      if (this.utilsService.isNull(this.dynamicValue.abFormula))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('fazelabFormula')) {
+      if (this.utilsService.isNull(this.dynamicValue.fazelabFormula))
+        return false;
+    }
+
+    // 
     return true;
   }
   private fromToValidation = (): boolean => {

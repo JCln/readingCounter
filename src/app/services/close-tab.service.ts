@@ -5,6 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class CloseTabService {
 
+  // Formular s 
+  saveDataForWaterFormula: any;
+  saveDataForBadgetFormula: any;
+  saveDataForTabsare2Formula: any;
+  saveDataForTabsare3Formula: any;
+  // 
   // save data when route change 
   saveDataForAppLevel1: any;
 
@@ -225,6 +231,18 @@ export class CloseTabService {
         break;
       case '/wr/rpts/mam/gis':
         this.saveDataForRRGIS = '';
+        break;
+      case '/wr/m/formula/ab':
+        this.saveDataForWaterFormula = '';
+        break;
+      case '/wr/m/formula/budget':
+        this.saveDataForBadgetFormula = '';
+        break;
+      case '/wr/m/formula/tabsare2':
+        this.saveDataForTabsare3Formula = '';
+        break;
+      case '/wr/m/formula/tabsare3':
+        this.saveDataForTabsare2Formula = '';
         break;
     }
     // listed all of the dynamic routes

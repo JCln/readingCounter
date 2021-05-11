@@ -25,6 +25,9 @@ export class ConfirmTextDialogComponent {
       this.mdDialogRef.close(this.userInputText);
     }
   }
+  public confirmWithoutText = () => {
+    this.mdDialogRef.close();
+  }
   public cancel() {
     this.mdDialogRef.close();
   }

@@ -1,4 +1,24 @@
-export interface IReadingPeriodKindManage {
+// ab baha formular manager
+export interface IAbBahaFormula {
+    id: string,
+    zoneId: number,
+    karbariMoshtarakinCode: number,
+    fromDate: string,
+    toDate: string,
+    fromRate: number,
+    toRate: number,
+    abFormula: string,
+    fazelabFormula: string,
+    formula?: string
+}
+export interface ITabsare2Formula {
+    id: number,
+    zoneId: number,
+    formula: string
+}
+// 
+
+export interface IReadingPeriodKind {
     id: number,
     title: string,
     moshtarakinId: number,

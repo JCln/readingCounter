@@ -1,8 +1,9 @@
 <h2 mat-dialog-title>{{data}}</h2>
 
-<input class="input_1" type="text" [(ngModel)]="userInputText">
+<input *ngIf="userInputText" class="input_1" type="text" [(ngModel)]="userInputText">
 
 <mat-dialog-actions>
     <button class="btn_2" (click)="cancel()">بازگشت</button>
-    <button class="btn_2 _custom" (click)="confirm()">تایید</button>
+    <button *ngIf="userInputText" class="btn_2 _custom" (click)="confirm()">تایید</button>
+    <button *ngIf="!userInputText" class="btn_2 _custom" (click)="confirmWithoutText()">تایید</button>
 </mat-dialog-actions>

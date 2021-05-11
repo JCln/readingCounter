@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>افزودن فرمول آب</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <mat-dialog-content>
+
+        <mat-form-field appearance="fill">
+            <mat-label>ناحیه</mat-label>
+            <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
+                <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>کاربری مشترکین</mat-label>
+            <mat-select placeholder="انتخاب مورد" formControlName="karbariMoshtarakinCode">
+                <mat-option *ngFor="let truefalse of data.moshtarakinCodeDictionary" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+        </app-date-jalali>
+
+        <app-date-jalali name="toDate" (dateJalEvent)="receiveFromDateJalali($event)">
+        </app-date-jalali>
+
+        <mat-form-field appearance="fill">
+            <mat-label>از نرخ</mat-label>
+            <input matInput formControlName="fromRate" placeholder="از نرخ">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>تا نرخ</mat-label>
+            <input matInput formControlName="toRate" placeholder="تا نرخ">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>فرمول آب</mat-label>
+            <input matInput formControlName="abFormula" placeholder="فرمول آب">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>فرمول فاضلاب</mat-label>
+            <input matInput formControlName="fazelabFormula" placeholder="فرمول فاضلاب">
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="btn_2" (click)="close()" type="button">بازگشت</button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
+    </mat-dialog-actions>
+</form>

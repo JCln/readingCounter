@@ -31,8 +31,20 @@ export class DictionaryWrapperService {
   private qotrDictionary: any = [];
   private roleDictionary: any = [];
 
+  private karbariDictionaryCode: any = [];
   private traverseDifferentialDictionary: any = [];
 
+  getkarbariCodeDictionary(): Promise<any> {
+    if (this.utilsService.isNull(this.karbariDictionaryCode)) {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getKarbariDictionaryCode().subscribe(res => {
+          this.setKarbariDictionaryCode(res);
+          resolve(this.karbariDictionaryCode);
+        })
+      });
+    }
+    return this.provinceDictionary;
+  }
   getProvinceDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.provinceDictionary)) {
       return new Promise((resolve) => {
@@ -222,6 +234,9 @@ export class DictionaryWrapperService {
   }
 
 
+  private setKarbariDictionaryCode(v: any) {
+    this.karbariDictionaryCode = v;
+  }
   private setProvinceDictionary(v: any) {
     this.provinceDictionary = v;
   }
