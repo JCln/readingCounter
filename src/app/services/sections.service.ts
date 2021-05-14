@@ -14,10 +14,14 @@ export class SectionsService {
   ) { }
 
   private sectionsNullVertificate = (): boolean => {
-    if (this.utilsService.isNull(this.dynamicValue.id))
-      return false;
-    if (this.utilsService.isNull(this.dynamicValue.title))
-      return false;
+    if (this.dynamicValue.hasOwnProperty('id')) {
+      if (this.utilsService.isNull(this.dynamicValue.id))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('title')) {
+      if (this.utilsService.isNull(this.dynamicValue.title))
+        return false;
+    }
     if (this.dynamicValue.hasOwnProperty('provinceId')) {
       if (this.utilsService.isNull(this.dynamicValue.provinceId))
         return false;

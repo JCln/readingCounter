@@ -19,6 +19,7 @@ export class WaterAddDgComponent {
   ) {
     data = data.di;
     data = data.moshtarakinCodeDictionary;
+
     this.form = fb.group({
       zoneId: [],
       karbariMoshtarakinCode: [],
@@ -29,14 +30,13 @@ export class WaterAddDgComponent {
       abFormula: [''],
       fazelabFormula: ['']
     })
+
   }
   receiveFromDateJalali = ($event: string) => {
-    console.log($event);
-    this.form['fromDate'] = $event;
+    this.form.get('fromDate').setValue($event);
   }
   receiveToDateJalali = ($event: string) => {
-    console.log($event);
-    this.form['toDate'] = $event;
+    this.form.get('toDate').setValue($event);
   }
 
   save() {

@@ -2,6 +2,10 @@
 @import '../../../../../assets/button.scss';
 @import '../../../../../assets/input.scss';
 
+.container {
+  direction: rtl;
+}
+
 .content {
   background: $gray_100;
   box-shadow: 1px 1px 8px 4px $gray_400;

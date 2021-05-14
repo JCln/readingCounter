@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
-import { EN_messages } from '../Interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes } from '../Interfaces/ioverall-config';
 import { UtilsService } from './utils.service';
 
@@ -35,15 +35,15 @@ export class ApkService {
   }
   isNull = (): boolean => {
     if (this.utilsService.isNull(this.desc.versionName)) {
-      this.snackWrapperService.openSnackBar('نام نسخه را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.insert_versionName, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (this.utilsService.isNull(this.desc.versionCode)) {
-      this.snackWrapperService.openSnackBar('شماره نسخه را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.insert_versionCode, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (this.utilsService.isNull(this.fileForm)) {
-      this.snackWrapperService.openSnackBar('لطفا یک فایل apk انتخاب نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.should_insert_APK, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
@@ -57,7 +57,7 @@ export class ApkService {
   }
   isAPK = (): boolean => {
     if (this.fileForm[0].name.split('.').pop() !== 'apk') {
-      this.snackWrapperService.openSnackBar('فرمت ارسالی باید فایل apk باشد', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.should_insert_APK, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;

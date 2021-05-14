@@ -94,6 +94,10 @@
     justify-content: center;
   }
 
+  .p-datatable-resizable>.p-datatable-wrapper {
+    overflow-x: unset;
+  }
+
   .p-datatable-resizable .p-datatable-tbody>tr>td,
   .p-datatable-resizable .p-datatable-tfoot>tr>td,
   .p-datatable-resizable .p-datatable-thead>tr>th {
@@ -105,6 +109,64 @@
   .footer {
     text-align: center;
   }
+}
+
+.empty_data {
+  display: flex;
+  justify-content: center;
+  background: $white;
+  padding: $font_3;
+  border-radius: $border_15;
+  font-size: $font_l;
+  font-weight: 600;
+  color: $gray_700;
+}
+
+/* EDITABLE ROWS*/
+
+
+._edit {
+  color: $blue_gray_300;
+
+  &:hover {
+    background-color: rgba($blue_gray_300, 0.3);
+  }
+}
+
+._save {
+  color: $green_500;
+
+  &:hover {
+    background-color: rgba($green_500, 0.3);
+  }
+}
+
+._cancel {
+  color: $red_600;
+
+  &:hover {
+    background-color: rgba($red_600, 0.3);
+  }
+}
+
+input {
+  font-size: $font_xs;
+  font-weight: 600;
+  width: 100%;
+  border: 1px solid $orange_500;
+  box-shadow: 0 0 3px 0 $orange_500;
+  border-radius: 10px;
+  padding: .3rem;
+  color: $blue_700;
+}
+
+._edit,
+._save,
+._cancel {
+  padding: 0.3rem;
+  border-radius: $border_50;
+  border: 0;
+  cursor: pointer;
 }
 
 .empty_data {

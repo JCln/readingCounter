@@ -3,8 +3,6 @@ export enum EN_messages {
     password_notExactly = 'گذرواژه با تایید آن یکی باید باشد',
     sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد',
     format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
-    format_invalid_from_esterak = 'فرمت از اشتراک ناصحیح است',
-    format_invalid_to_esterak = 'فرمت  تا اشتراک ناصحیح است',
     lessThan_eshterak = 'از اشتراک کمتر از تا اشتراک است!',
     percent_pictures = 'درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     thereis_no_reader = 'ماموری در این ناحیه انتخاب نشده است',
@@ -36,16 +34,38 @@ export enum EN_messages {
     insert_again = 'مجددا مقادیر را وارد نمایید',
     insert_fromDate = 'از تاریخ خالی است',
     insert_toDate = 'تا تاریخ خالی است',
+    insert_date = 'تاریخ را وارد نمایید',
+    insert_fromRate = 'از نرخ را وارد نمایید',
+    insert_toRate = 'تا نرخ را وارد نمایید',
     insert_readingPeriod = 'دوره قرائت را وارد نمایید',
     insert_year = 'سالی وارد نمایید',
     insert_zone = 'ناحیه ای وارد نمایید',
+    insert_karbariMoshtarakinCode = 'کاربری مشترکین را وارد نمایید',
     insert_counterState = 'وضعیت کنتور را مشخص نمایید',
     insert_desc = 'توضیحی وارد نمایید',
+    insert_excelFile = 'لطفا یک فایل excel انتخاب نمایید',
+    insert_excelRows = 'تعداد سطر های فایل Excel را وارد نمایید',
+    insert_abFormula = 'فرمول آب را وارد نمایید',
+    insert_fazelabFormula = 'فرمول فاضلاب را وارد نمایید',
+    insert_versionName = 'نام نسخه را وارد نمایید',
+    insert_versionCode = 'شماره نسخه را وارد نمایید',
+    insert_APK = 'لطفا یک فایل apk انتخاب نمایید',
+    insert_modify_type = 'نوع اصلاح را وارد نمایید',
+
+    should_insert_APK = 'فرمت ارسالی باید فایل apk باشد',
+    format_invalid_excel = 'فرمت ارسالی باید فایل excel باشد',
+    invalid_mobile = 'شماره موبایل نادرست است',
+    invalid_email = 'ایمیل نادرست است',
+    format_invalid_from_esterak = 'فرمت از اشتراک ناصحیح است',
+    format_invalid_to_esterak = 'فرمت  تا اشتراک ناصحیح است',
+    format_invalid_counterNumber = 'فرمت رقم کنتور اشتباه است',
+    format_invalid_counterNumberTimes = 'تعداد ارقام کنتور اشتباه است',
 
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
 
     delete_confirm = 'آیا از حذف مسیر اطمینان دارید',
-    delete_backto_imported = 'علت بازگشت به صادر شده'
+    delete_backto_imported = 'علت بازگشت به صادر شده',
 
+    call_supportGroup = 'خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید'
 }

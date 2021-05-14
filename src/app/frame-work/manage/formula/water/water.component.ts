@@ -3,12 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IAbBahaFormula } from 'src/app/Interfaces/imanage';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { FormulasService } from 'src/app/services/formulas.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { ConfirmTextDialogComponent } from '../../tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { AddExcelFileComponent } from './../add-excel-file/add-excel-file.component';
@@ -28,17 +27,13 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
-  uploadForm: any = {
-    rows: null,
-    file: File
-  }
+  clonedProducts: { [s: string]: IAbBahaFormula; } = {};
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private formulasService: FormulasService,
     private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -66,7 +61,6 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
-          disableClose: true,
           width: '30rem'
         });
       dialogRef.afterClosed().subscribe(result => {
@@ -147,8 +141,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   private removeRow = async (rowData: IAbBahaFormula, rowIndex: number) => {
-    const a = await this.formulasService.postAbBahaFormulaRemove(rowData.id);
-    this.snackWrapperService.openSnackBar(a.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+    await this.formulasService.postAbBahaFormulaRemove(rowData.id);
     this.refetchTable(rowIndex);
   }
 
@@ -164,18 +157,25 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  // backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
-  //   return new Promise(resolve => {
-  //     const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-  //       data: 
-  //     });
-  //     dialogRef.afterClosed().subscribe(desc => {
-  //       if (desc) {
-  //         this.rowToImported(rowData, desc, rowIndex);
-  //       }
-  //     })
-  //   })
-  // }
+  onRowEditInit(dataSource: any) {
+    this.clonedProducts[dataSource.id] = { ...dataSource };
+  }
+  onRowEditSave(dataSource: IAbBahaFormula, rowIndex: number) {
+    if (!this.formulasService.verificationEditedRow(dataSource)) {
+      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      return;
+    }
+    // dataSource.zoneId = dataSource.zoneId['id'];
+    // this.formulasService.postAbBahaFormulaEdit(dataSource);
+    console.log(dataSource);
+
+    // this.refreshTable();
+  }
+  onRowEditCancel(dataSource: IAbBahaFormula, index: number) {
+    this.dataSource[index] = this.clonedProducts[dataSource.id];
+    delete this.dataSource[dataSource.id];
+    return;
+  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }

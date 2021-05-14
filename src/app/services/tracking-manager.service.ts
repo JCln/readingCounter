@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs/internal/Observable';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { InterfaceService } from 'src/app/services/interface.service';
 
@@ -339,23 +340,23 @@ export class TrackingManagerService {
   }
   private offloadModifyValidation = (object: IOffloadModifyReq): boolean => {
     if (this.isValidationNull(object.id)) {
-      this.showWarnMessage('خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید');
+      this.showWarnMessage(EN_messages.call_supportGroup);
       return false;
     }
     if (this.isValidationNull(object.jalaliDay)) {
-      this.showWarnMessage('تاریخ را وارد نمایید');
+      this.showWarnMessage(EN_messages.insert_date);
       return false;
     }
     if (this.utilsService.isNullZero(object.modifyType)) {
-      this.showWarnMessage('نوع اصلاح را وارد نمایید');
+      this.showWarnMessage(EN_messages.insert_modify_type);
       return false;
     }
     if (this.validationIsNAN(object.counterNumber)) {
-      this.showWarnMessage('فرمت رقم کنتور اشتباه است');
+      this.showWarnMessage(EN_messages.format_invalid_counterNumber);
       return false;
     }
     if (!this.utilsService.lengthControl(object.counterNumber, object.counterNumber, 1, 7)) {
-      this.showWarnMessage('تعداد ارقام کنتور اشتباه است');
+      this.showWarnMessage(EN_messages.format_invalid_counterNumberTimes);
       return false;
     }
     return true;

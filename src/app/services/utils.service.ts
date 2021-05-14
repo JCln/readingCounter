@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ITitleValue } from 'src/app/Interfaces/ioverall-config';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
@@ -51,7 +52,7 @@ export class UtilsService {
   isEmailValid = (email: string): boolean => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(email)) {
-      this.snackWrapperService.openSnackBar('ایمیل نادرست است', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
+      this.snackWrapperService.openSnackBar(EN_messages.invalid_email, ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
       return false;
     }
     return true;
@@ -114,7 +115,7 @@ export class UtilsService {
   // }
   mobileValidation = (mobile: string | number): boolean => {
     if (!(mobile.toString().length === 11)) {
-      this.snackWrapperService.openSnackBar('شماره موبایل نادرست است', ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
+      this.snackWrapperService.openSnackBar(EN_messages.invalid_mobile, ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
       return false;
     }
     return true;

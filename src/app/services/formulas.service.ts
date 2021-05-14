@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
-import { EN_messages } from '../Interfaces/enums.enum';
 import { IObjectIteratation } from './../Interfaces/ioverall-config';
 
 @Injectable({
@@ -32,8 +32,8 @@ export class FormulasService {
       { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
       { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
       { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
-      { field: 'abFormula', header: 'فرمول آب', isSelected: true, readonly: true },
-      { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: true, readonly: true },
+      { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true },
+      { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true },
     ]
   }
   /* API CALLS */
@@ -76,7 +76,8 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postAbBahaFormulaRemove(UUID).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -252,15 +253,14 @@ export class FormulasService {
 
     await this.postAbBahaFormulaAddExcel(formData);
   }
-  /* VERIFICATION */
-
+  /* VALIDATION */
   isNull = (): boolean => {
     if (this.utilsService.isNull(this.desc.rows)) {
-      this.snackWrapperService.openSnackBar('تعداد سطر های فایل Excel را وارد نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.insert_excelRows, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (this.utilsService.isNull(this.fileForm)) {
-      this.snackWrapperService.openSnackBar('لطفا یک فایل excel انتخاب نمایید', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.insert_excelFile, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
@@ -274,12 +274,68 @@ export class FormulasService {
   }
   isExcelFormat = (): boolean => {
     if (this.fileForm[0].name.split('.').pop() !== 'xlsx') {
-      this.snackWrapperService.openSnackBar('فرمت ارسالی باید فایل excel باشد', ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.format_invalid_excel, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
   }
-  vertification = (): boolean => {
+  validationEditableRow = (dataSource: object): boolean => {
+    if (this.utilsService.isNull(dataSource['id'])) {
+      this.snackWrapperService.openSnackBar(EN_messages.call_supportGroup, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+      return false;
+    }
+    if (this.utilsService.hasOwnProperty(dataSource['zoneId'])) {
+      if (this.utilsService.isNull(dataSource['zoneId'])) {
+        this.snackWrapperService.openSnackBar(EN_messages.insert_zone, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        return false;
+      }
+    }
+    if (this.utilsService.hasOwnProperty(dataSource['karbariMoshtarakinCode'])) {
+      if (this.utilsService.isNull(dataSource['karbariMoshtarakinCode'])) {
+        this.snackWrapperService.openSnackBar(EN_messages.insert_karbariMoshtarakinCode, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        return false;
+      }
+    }
+    if (this.utilsService.hasOwnProperty(dataSource['fromDate'])) {
+      if (this.utilsService.isNull(dataSource['fromDate'])) {
+        this.snackWrapperService.openSnackBar(EN_messages.insert_fromDate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        return false;
+      }
+    }
+    if (this.utilsService.hasOwnProperty(dataSource['toDate'])) {
+      if (this.utilsService.isNull(dataSource['toDate'])) {
+        this.snackWrapperService.openSnackBar(EN_messages.insert_toDate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        return false;
+      }
+    }
+    if (this.utilsService.hasOwnProperty(dataSource['fromRate'])) {
+      if (this.utilsService.isNull(dataSource['fromRate'])) {
+        this.snackWrapperService.openSnackBar(EN_messages.insert_fromRate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        return false;
+      }
+    }
+    if (this.utilsService.hasOwnProperty(dataSource['toRate'])) {
+      if (this.utilsService.isNull(dataSource['toRate'])) {
+        this.snackWrapperService.openSnackBar(EN_messages.insert_toRate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        return false;
+      }
+    }
+    if (this.utilsService.hasOwnProperty(dataSource['abFormula'])) {
+      if (this.utilsService.isNull(dataSource['abFormula'])) {
+        this.snackWrapperService.openSnackBar(EN_messages.insert_abFormula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        return false;
+      }
+    }
+    if (this.utilsService.hasOwnProperty(dataSource['fazelabFormula'])) {
+      if (this.utilsService.isNull(dataSource['fazelabFormula'])) {
+        this.snackWrapperService.openSnackBar(EN_messages.insert_fazelabFormula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        return false;
+      }
+    }
+  }
+  /* VERIFICATION */
+
+  vertificationExcel = (): boolean => {
     if (!this.isNull())
       return false;
     if (!this.isInteger())
@@ -291,7 +347,12 @@ export class FormulasService {
   checkVertitication = (filesList: FileList, data: any): boolean => {
     this.fileForm = filesList;
     this.desc = data;
-    if (!this.vertification())
+    if (!this.vertificationExcel())
+      return false;
+    return true;
+  }
+  verificationEditedRow = (dataSource: object): boolean => {
+    if (this.validationEditableRow(dataSource))
       return false;
     return true;
   }

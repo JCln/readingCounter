@@ -1,7 +1,7 @@
 <p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    [resizableColumns]="true" stateStorage="session" stateKey="water-session">
+    [rowsPerPageOptions]="[20,50,100, 500]" dir="rtl" editMode="row" styleClass="p-datatable-responsive"
+    [responsive]="true" stateStorage="session" stateKey="water-session" resizableColumns="true">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -23,11 +23,11 @@
                 </i>
             </div>
             <div class="left_side">
-                <i (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
-                    <div class="tooltip_text">افزودن</div>
-                </i>
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
+                </i>
+                <i (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن موردی</div>
                 </i>
                 <i (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload">
                     <div class="tooltip_text_right">افزودن فایل Excel</div>
@@ -47,13 +47,13 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="col.field !== 'zoneTitle'" type="text" field="{{col.field}}"></p-columnFilter>
-                <p-columnFilter field="zoneTitle" *ngIf="col.field === 'zoneTitle'" matchMode="in" display="menu"
+                <p-columnFilter *ngIf="col.field !== 'zoneId'" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter field="zoneId" *ngIf="col.field === 'zoneId'" matchMode="in" display="menu"
                     [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
 
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                         <p-multiSelect [options]="zoneDictionary" (onChange)="filter($event.value)"
-                            optionLabel="zoneTitle">
+                            optionLabel="zoneId">
                             {{col.field}}
                             <ng-template let-option pTemplate="item">
                                 <div class="p-multiselect-representative-option">
@@ -71,26 +71,39 @@
         </tr>
     </ng-template>
 
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-ri="rowIndex">
-        <tr>
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing" let-columns="columns"
+        let-ri="rowIndex">
+        <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
                 <ng-container
                     *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
                     <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    {{dataSource[col.field]}}
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{dataSource[col.field]}}
+                        </ng-template>
+                    </p-cellEditor>
                 </ng-template>
             </td>
-            <td>
-                <i class="tooltip p_icons pi pi-step-backward">
-                    <div class="tooltip_text"></div>
+            <td style="text-align: center;">
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
+                    class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
                 </i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)"
+                    class="_save pi pi-check"></i>
+                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
+                    class="_cancel pi pi-times"></i>
             </td>
+
             <td>
-                <i class="tooltip p_icons fa fa-trash-o">
-                    <div class="tooltip_text_right"></div>
-                    حذف مسیر برای آنکه در زمینه
+                <i (click)="firstConfirmDialog(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف مسیر</div>
                 </i>
             </td>
         </tr>

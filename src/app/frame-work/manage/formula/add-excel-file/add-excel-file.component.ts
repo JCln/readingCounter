@@ -46,7 +46,7 @@ export class AddExcelFileComponent implements OnInit {
     console.log(form.value);
     console.log(fileInput.files);
     this.formulasService.postExcelFile();
-    this.dialogRef
+    // this.dialogRef
     // this.dialogRef.close(this.uploadForm);
   }
   closeDialog = () => this.dialogRef.close();

@@ -1,4 +1,4 @@
-<section>
+<section class="container">
 
     <h1 class="title">ایجاد فایل جدید</h1>
     <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
@@ -25,3 +25,6 @@
     </form>
 
 </section>
+<mat-dialog-actions>
+    <button class="btn_2" (click)="closeDialog()" type="button">بازگشت</button>
+</mat-dialog-actions>

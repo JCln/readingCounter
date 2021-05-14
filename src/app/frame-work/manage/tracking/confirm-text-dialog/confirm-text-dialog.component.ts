@@ -19,14 +19,16 @@ export class ConfirmTextDialogComponent {
   }
 
   public confirm() {
-    if (this.utilsService.isNullTextValidation(this.userInputText))
+    if (this.utilsService.isNullTextValidation(this.userInputText)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_desc);
+      return;
+    }
     else {
       this.mdDialogRef.close(this.userInputText);
     }
   }
   public confirmWithoutText = () => {
-    this.mdDialogRef.close();
+    this.mdDialogRef.close(true);
   }
   public cancel() {
     this.mdDialogRef.close();
