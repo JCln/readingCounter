@@ -165,6 +165,20 @@ export class SectionsService {
         return false;
       }
     }
+    if (this.dynamicValue.hasOwnProperty('toDate')) {
+      const a = this.dynamicValue;
+      if (this.utilsService.lengthControl(a.toDate, a.toDate, 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
+        return false;
+      }
+    }
+    if (this.dynamicValue.hasOwnProperty('fromDate')) {
+      const a = this.dynamicValue;
+      if (this.utilsService.lengthControl(a.fromDate, a.fromDate, 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
+        return false;
+      }
+    }
     return true;
   }
   private isFromLowerThanTo = (): boolean => {
@@ -172,6 +186,13 @@ export class SectionsService {
       const a = this.dynamicValue;
       if (this.utilsService.isFromLowerThanTo(a.fromEshterak, a.toEshterak)) {
         this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
+        return false;
+      }
+    }
+    if (this.dynamicValue.hasOwnProperty('toRate')) {
+      const a = this.dynamicValue;
+      if (this.utilsService.isFromLowerThanTo(a.fromRate, a.toRate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.lessThan_rate);
         return false;
       }
     }

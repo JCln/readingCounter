@@ -59,6 +59,7 @@ export enum EN_messages {
     invalid_mobile = 'شماره موبایل نادرست است',
     invalid_email = 'ایمیل نادرست است',
     format_invalid_from_esterak = 'فرمت از اشتراک ناصحیح است',
+    format_invalid_date = 'فرمت تاریخ ناصحیح است',
     format_invalid_to_esterak = 'فرمت  تا اشتراک ناصحیح است',
     format_invalid_counterNumber = 'فرمت رقم کنتور اشتباه است',
     format_invalid_counterNumberTimes = 'تعداد ارقام کنتور اشتباه است',
