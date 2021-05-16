@@ -184,7 +184,6 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
     }
 
     await this.formulasService.postTabsare3FormulaEdit(dataSource);
-    this.refetchTable(rowIndex);
   }
   onRowEditCancel(dataSource: IAbBahaFormula, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];

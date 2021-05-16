@@ -1,7 +1,7 @@
 <p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[20,50,100, 500]" dir="rtl" editMode="row" styleClass="p-datatable-responsive"
-    [responsive]="true" stateStorage="session" stateKey="water-session">
+    [responsive]="true" stateStorage="session" stateKey="water-session" dataKey="id">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -94,6 +94,7 @@
                         </ng-template>
                     </p-cellEditor>
                 </ng-container>
+                
                 <ng-container *ngIf="col.field === 'karbariMoshtarakinCode'">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
@@ -107,6 +108,7 @@
                         </ng-template>
                     </p-cellEditor>
                 </ng-container>
+
                 <ng-template #selectOption>
                     <p-cellEditor *ngIf="col.field !== 'karbariMoshtarakinCode'">
                         <ng-template pTemplate="input">
@@ -116,8 +118,6 @@
                             {{dataSource[col.field]}}
                         </ng-template>
                     </p-cellEditor>
-
-
                 </ng-template>
             </td>
             <td style="text-align: center;">

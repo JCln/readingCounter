@@ -1,7 +1,7 @@
 <p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[20,50,100, 500]" dir="rtl" editMode="row" styleClass="p-datatable-responsive"
-    [responsive]="true" stateStorage="session" stateKey="tabsare2-session" resizableColumns="true">
+    [responsive]="true" stateStorage="session" stateKey="tabsare2-session" dataKey="id">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -34,7 +34,7 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
@@ -72,11 +72,21 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
-                <ng-container
-                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+
+                <ng-container *ngIf="col.field === 'zoneId';else selectOption">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
+                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{dataSource.zoneId}}
+                        </ng-template>
+                    </p-cellEditor>
                 </ng-container>
-                <ng-template #elseTemplate>
+
+                <ng-template #selectOption>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="dataSource[col.field]">

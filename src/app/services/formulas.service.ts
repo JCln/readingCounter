@@ -6,6 +6,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { IAbBahaFormula, ITabsare2Formula } from './../Interfaces/imanage';
 import { IObjectIteratation } from './../Interfaces/ioverall-config';
 
 @Injectable({
@@ -50,7 +51,7 @@ export class FormulasService {
   columnTabsare2Formulas = (): IObjectIteratation[] => {
     return [
       { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-      { field: 'formula', header: 'کاربری مشترکین', isSelected: true, readonly: true, ltr: true }
+      { field: 'formula', header: 'فرمول', isSelected: true, readonly: true, ltr: true }
     ]
   }
   columnTabsare3Formulas = (): IObjectIteratation[] => {
@@ -78,8 +79,9 @@ export class FormulasService {
   postAbBahaFormulaEdit = (body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postAbBahaFormulaEdit(body).toPromise().then(res => {
-          resolve(res)
+        this.interfaceManagerService.postAbBahaFormulaEdit(body).toPromise().then((res: IResponses) => {
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -187,7 +189,7 @@ export class FormulasService {
   postTabsare2FormulaEdit = (body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postTabsare2FormulaEdit(body).toPromise().then(res => {
+        this.interfaceManagerService.postTabsare2FormulaEdit(body).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -376,6 +378,15 @@ export class FormulasService {
         return false;
       }
     }
+    return true;
+  }
+  validationRate = (dataSource: IAbBahaFormula): boolean => {
+
+    if (!this.utilsService.isFromLowerThanTo(dataSource.fromRate, dataSource.toRate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.lessThan_rate);
+      return false;
+    }
+    return true;
   }
   /* VERIFICATION */
 
@@ -395,8 +406,15 @@ export class FormulasService {
       return false;
     return true;
   }
-  verificationEditedRow = (dataSource: object): boolean => {
-    if (this.validationEditableRow(dataSource))
+  verificationEditedRow = (dataSource: IAbBahaFormula): boolean => {
+    if (!this.validationEditableRow(dataSource))
+      return false;
+    if (!this.validationRate(dataSource))
+      return false;
+    return true;
+  }
+  verificationEditedRowTabsare2 = (dataSource: ITabsare2Formula): boolean => {
+    if (!this.validationEditableRow(dataSource))
       return false;
     return true;
   }

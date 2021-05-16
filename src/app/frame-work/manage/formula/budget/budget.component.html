@@ -1,7 +1,7 @@
 <p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[20,50,100, 500]" dir="rtl" editMode="row" styleClass="p-datatable-responsive"
-    [responsive]="true" stateStorage="session" stateKey="budget-session" resizableColumns="true">
+    [responsive]="true" stateStorage="session" stateKey="budget-session" dataKey="id">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -47,7 +47,10 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="col.field !== 'zoneId'" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="col.field !== 'zoneId' && col.field !== 'karbariMoshtarakinCode' " type="text"
+                    field="{{col.field}}">
+                </p-columnFilter>
+
                 <p-columnFilter field="zoneId" *ngIf="col.field === 'zoneId'" matchMode="in" display="menu"
                     [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
 
@@ -61,8 +64,25 @@
                                 </div>
                             </ng-template>
                         </p-multiSelect>
-
                     </ng-template>
+
+                </p-columnFilter>
+                <p-columnFilter field="karbariMoshtarakinCode" *ngIf="col.field === 'karbariMoshtarakinCode'"
+                    matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false"
+                    [showAddButton]="false">
+
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [options]="karbariCodeDictionary" (onChange)="filter($event.value)"
+                            optionLabel="karbariMoshtarakinCode">
+                            {{col.field}}
+                            <ng-template let-option pTemplate="item">
+                                <div class="p-multiselect-representative-option">
+                                    <span class="p-ml-1">{{option.title}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </ng-template>
+
                 </p-columnFilter>
             </th>
 
@@ -75,35 +95,42 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
-                <ng-container
-                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                <ng-container *ngIf="col.field === 'zoneId';else selectOption">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
+                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{dataSource.zoneId}}
+                        </ng-template>
+                    </p-cellEditor>
                 </ng-container>
 
-                <ng-template #elseTemplate>
-                    <ng-container *ngIf="col.field === 'zoneId';else selectOption">
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
-                                    placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
-                                </p-dropdown>
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{dataSource.zoneId}}
-                            </ng-template>
-                        </p-cellEditor>
-                    </ng-container>
-                    <ng-template #selectOption>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{dataSource[col.field]}}
-                            </ng-template>
-                        </p-cellEditor>
-                    </ng-template>
+                <ng-container *ngIf="col.field === 'karbariMoshtarakinCode'">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown name="karbariMoshtarakinCode" [options]="karbariCodeDictionary"
+                                [(ngModel)]="dataSource.karbariMoshtarakinCode" placeholder="انتخاب مورد"
+                                [style]="{'width':'100%'}" optionLabel="title">
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{dataSource.karbariMoshtarakinCode}}
+                        </ng-template>
+                    </p-cellEditor>
+                </ng-container>
 
+                <ng-template #selectOption>
+                    <p-cellEditor *ngIf="col.field !== 'karbariMoshtarakinCode'">
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{dataSource[col.field]}}
+                        </ng-template>
+                    </p-cellEditor>
                 </ng-template>
             </td>
             <td style="text-align: center;">

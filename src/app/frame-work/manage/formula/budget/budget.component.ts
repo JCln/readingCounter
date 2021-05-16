@@ -183,7 +183,6 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     await this.formulasService.postBudgetFormulaEdit(dataSource);
-    this.refetchTable(rowIndex);
   }
   onRowEditCancel(dataSource: IAbBahaFormula, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];
