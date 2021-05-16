@@ -47,7 +47,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
           width: '30rem',
           data: {
             di: this.zoneDictionary,
-            moshtarakinCodeDictionary: this.karbariCodeDictionary
+            karbariCodeDic: this.karbariCodeDictionary
           }
 
         });
@@ -100,8 +100,8 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
 
-    this.convertKarbariCodeToTitle(this.dataSource, this.karbariCodeDictionary);
     this.convertZoneIdToTitle(this.dataSource, this.zoneDictionary);
+    this.convertKarbariCodeToTitle(this.dataSource, this.karbariCodeDictionary);
 
     if (this.dataSource.length)
       this.insertSelectedColumns();
@@ -157,24 +157,39 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  onRowEditInit(dataSource: any) {
+  onRowEditInit(dataSource: IAbBahaFormula, rowIndex: number) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
+    // this.clonedProducts[dataSource.id[rowIndex]] = { ...dataSource }; // for test perpuse
   }
-  onRowEditSave(dataSource: IAbBahaFormula, rowIndex: number) {
+  async onRowEditSave(dataSource: IAbBahaFormula, rowIndex: number) {
     if (!this.formulasService.verificationEditedRow(dataSource)) {
       this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
       return;
     }
-    // dataSource.zoneId = dataSource.zoneId['id'];
-    // this.formulasService.postAbBahaFormulaEdit(dataSource);
-    console.log(dataSource);
+    if (typeof dataSource.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSource.zoneId)
+          dataSource.zoneId = item.id
+      })
+    } else {
+      dataSource.zoneId = dataSource.zoneId['id'];
+    }
+    if (typeof dataSource.karbariMoshtarakinCode !== 'object') {
+      this.karbariCodeDictionary.find(item => {
+        if (item.title === dataSource.karbariMoshtarakinCode)
+          dataSource.karbariMoshtarakinCode = item.id
+      })
+    } else {
+      dataSource.karbariMoshtarakinCode = dataSource.karbariMoshtarakinCode['id'];
+    }
 
-    // this.refreshTable();
+    await this.formulasService.postAbBahaFormulaEdit(dataSource);
+    this.refetchTable(rowIndex);
   }
   onRowEditCancel(dataSource: IAbBahaFormula, index: number) {
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
-    return;
+    // this.dataSource[index] = this.clonedProducts[dataSource.id];
+    // delete this.dataSource[dataSource.id];
+    // return;
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

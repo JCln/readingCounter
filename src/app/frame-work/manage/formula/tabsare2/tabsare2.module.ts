@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { Tabsare2RoutingModule } from './tabsare2-routing.module';
 import { Tabsare2Component } from './tabsare2.component';
@@ -8,7 +8,7 @@ import { Tabsare2Component } from './tabsare2.component';
 @NgModule({
   declarations: [Tabsare2Component],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
     Tabsare2RoutingModule
   ]
 })

@@ -53,9 +53,6 @@ export class InterfaceManagerService {
   postTabsare2FormulaAdd = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tabsare2Formula/Add', body);
   }
-  postTabsare2FormulaAddExcel = (body: object): Observable<any> => {
-    return this.mainService.POSTBODY('V1/Tabsare2Formula/AddExcel', body);
-  }
   postTabsare2FormulaRemove = (uuid: string): Observable<any> => {
     return this.mainService.POSTSG('V1/Tabsare2Formula/Remove', uuid);
   }

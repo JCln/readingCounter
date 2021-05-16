@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { BudgetRoutingModule } from './budget-routing.module';
 import { BudgetComponent } from './budget.component';
@@ -8,7 +8,7 @@ import { BudgetComponent } from './budget.component';
 @NgModule({
   declarations: [BudgetComponent],
   imports: [
-    CommonModule,
+    SharedPrimeNgModule,
     BudgetRoutingModule
   ]
 })

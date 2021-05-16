@@ -1,6 +1,8 @@
 <main class="main">
     <form #form="ngForm" (ngSubmit)="verification()">
         <section class="content">
+            <input class="input_1" type="number" placeholder="رقم کنتور : " name="counterNumber"
+                [(ngModel)]="offloadModifyReq.counterNumber" autofocus style="min-width: auto;">
             <div class="input_2" [hidden]="!counterStatesDictionary.length">
                 <div class="_key">وضعیت کنتور</div>
                 <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.counterStateId"
@@ -10,8 +12,6 @@
                     </mat-option>
                 </mat-select>
             </div>
-            <input class="input_1" type="number" placeholder="رقم کنتور : " name="counterNumber"
-                [(ngModel)]="offloadModifyReq.counterNumber" autofocus>
             <div class="input_2">
                 <div class="_key">نوع اصلاح</div>
                 <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.modifyType" name="modifyType">

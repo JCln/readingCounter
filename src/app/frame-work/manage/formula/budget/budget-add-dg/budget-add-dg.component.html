@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>افزودن فرمول آب</h2>
+<h2 mat-dialog-title>افزودن بودجه</h2>
 
 <form [formGroup]="form" (ngSubmit)="save()">
     <mat-dialog-content>
@@ -37,6 +37,7 @@
             </div>
         </div>
 
+
         <mat-form-field appearance="fill">
             <mat-label>از نرخ</mat-label>
             <input matInput formControlName="fromRate" placeholder="از نرخ">
@@ -48,13 +49,8 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>فرمول آب</mat-label>
-            <input matInput formControlName="abFormula" placeholder="فرمول آب">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>فرمول فاضلاب</mat-label>
-            <input matInput formControlName="fazelabFormula" placeholder="فرمول فاضلاب">
+            <mat-label>فرمول</mat-label>
+            <input matInput formControlName="formula" placeholder="فرمول آب">
         </mat-form-field>
 
     </mat-dialog-content>

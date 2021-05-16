@@ -1,21 +1,19 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { SectionsService } from 'src/app/services/sections.service';
 
 @Component({
-  selector: 'app-water-add-dg',
-  templateUrl: './water-add-dg.component.html',
-  styleUrls: ['./water-add-dg.component.scss']
+  selector: 'app-tabsare3-add-dg',
+  templateUrl: './tabsare3-add-dg.component.html',
+  styleUrls: ['./tabsare3-add-dg.component.scss']
 })
-export class WaterAddDgComponent {
+export class Tabsare3AddDgComponent {
   selectedValue: string;
   form: FormGroup;
-  karbariCodeDic: IDictionaryManager[] = [];
 
   constructor(fb: FormBuilder,
-    private dialogRef: MatDialogRef<WaterAddDgComponent>,
+    private dialogRef: MatDialogRef<Tabsare3AddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sectionsService: SectionsService
   ) {
@@ -28,7 +26,8 @@ export class WaterAddDgComponent {
       fromRate: [0],
       toRate: [0],
       abFormula: [''],
-      fazelabFormula: ['']
+      fazelabFormula: [''],
+      formula: ['']
     })
 
   }
@@ -49,5 +48,6 @@ export class WaterAddDgComponent {
   close() {
     this.dialogRef.close();
   }
+
 
 }

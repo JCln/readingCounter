@@ -124,6 +124,15 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
+    else if (currentRoute.includes('/wr/m/formula/')) {
+      this.messageToShow.title = 'فرمول ها';
+      this.messageToShow.messageOne = 'میتوان در این قسمت ها نسبت به فرمول های محاسبه اقدام نمود. هر قسمت امکان افزودن با استفاده از فایل Excel  و افزودن تکی را دارد. ';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = 'امکان ویرایش و حذف هر مورد نیز وجود دارد.';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
 
 
     /* DYNAMIC OR INCLUDES ROUTE S */

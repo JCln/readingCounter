@@ -47,6 +47,7 @@ export enum EN_messages {
     insert_excelRows = 'تعداد سطر های فایل Excel را وارد نمایید',
     insert_abFormula = 'فرمول آب را وارد نمایید',
     insert_fazelabFormula = 'فرمول فاضلاب را وارد نمایید',
+    insert_formula = 'فرمول را وارد نمایید',
     insert_versionName = 'نام نسخه را وارد نمایید',
     insert_versionCode = 'شماره نسخه را وارد نمایید',
     insert_APK = 'لطفا یک فایل apk انتخاب نمایید',

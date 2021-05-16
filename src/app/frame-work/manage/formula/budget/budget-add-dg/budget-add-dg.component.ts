@@ -1,21 +1,20 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { SectionsService } from 'src/app/services/sections.service';
 
 @Component({
-  selector: 'app-water-add-dg',
-  templateUrl: './water-add-dg.component.html',
-  styleUrls: ['./water-add-dg.component.scss']
+  selector: 'app-budget-add-dg',
+  templateUrl: './budget-add-dg.component.html',
+  styleUrls: ['./budget-add-dg.component.scss']
 })
-export class WaterAddDgComponent {
+export class BudgetAddDgComponent {
   selectedValue: string;
   form: FormGroup;
-  karbariCodeDic: IDictionaryManager[] = [];
 
-  constructor(fb: FormBuilder,
-    private dialogRef: MatDialogRef<WaterAddDgComponent>,
+  constructor(
+    fb: FormBuilder,
+    private dialogRef: MatDialogRef<BudgetAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sectionsService: SectionsService
   ) {
@@ -27,8 +26,7 @@ export class WaterAddDgComponent {
       toDate: [''],
       fromRate: [0],
       toRate: [0],
-      abFormula: [''],
-      fazelabFormula: ['']
+      formula: ['']
     })
 
   }
@@ -49,5 +47,6 @@ export class WaterAddDgComponent {
   close() {
     this.dialogRef.close();
   }
+
 
 }

@@ -32,9 +32,40 @@ export class FormulasService {
       { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
       { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
       { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
-      { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true },
-      { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true },
+      { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
+      { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
     ]
+  }
+  columnBudgetFormulas = (): IObjectIteratation[] => {
+    return [
+      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+      { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
+      { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
+      { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
+      { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
+      { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
+      { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
+    ]
+  }
+  columnTabsare2Formulas = (): IObjectIteratation[] => {
+    return [
+      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+      { field: 'formula', header: 'کاربری مشترکین', isSelected: true, readonly: true, ltr: true }
+    ]
+  }
+  columnTabsare3Formulas = (): IObjectIteratation[] => {
+    return [
+      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+      { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
+      { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
+      { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
+      { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
+      { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
+      { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
+      { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
+      { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
+    ]
+
   }
   /* API CALLS */
   getAbBahaFormulaAll = (): Promise<any> => {
@@ -56,9 +87,16 @@ export class FormulasService {
     }
   }
   postAbBahaFormulaAdd = (body: object) => {
-    this.interfaceManagerService.postAbBahaFormulaAdd(body).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    })
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.postAbBahaFormulaAdd(body).toPromise().then((res: IResponses) => {
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   private postAbBahaFormulaAddExcel = (body: object): Promise<any> => {
     try {
@@ -84,7 +122,7 @@ export class FormulasService {
       console.error(error);
     }
   }
-  getBudgetFormulaAll = () => {
+  getBudgetFormulaAll = (): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getBudgetFormulaAll().toPromise().then(res => {
         resolve(res);
@@ -95,7 +133,8 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postBudgetFormulaEdit(body).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -106,7 +145,8 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postBudgetFormulaAdd(body).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -117,7 +157,8 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postBudgetFormulaAddExcel(body).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -128,14 +169,15 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postBudgetFormulaRemove(UUID).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
       console.error(error);
     }
   }
-  getTabsare2FormulaAll = () => {
+  getTabsare2FormulaAll = (): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getTabsare2FormulaAll().toPromise().then(res => {
         resolve(res);
@@ -146,7 +188,8 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postTabsare2FormulaEdit(body).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -157,18 +200,8 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postTabsare2FormulaAdd(body).toPromise().then(res => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postTabsare2FormulaAddExcel = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.postTabsare2FormulaAddExcel(body).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -179,14 +212,15 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postTabsare2FormulaRemove(UUID).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
       console.error(error);
     }
   }
-  getTabsare3FormulaAll = () => {
+  getTabsare3FormulaAll = (): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getTabsare3FormulaAll().toPromise().then(res => {
         resolve(res);
@@ -197,6 +231,7 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postTabsare3FormulaEdit(body).toPromise().then(res => {
+          this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res)
         })
       });
@@ -208,7 +243,8 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postTabsare3FormulaAdd(body).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -219,7 +255,8 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postTabsare3FormulaAddExcel(body).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
@@ -230,17 +267,18 @@ export class FormulasService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.postTabsare3FormulaRemove(UUID).toPromise().then(res => {
-          resolve(res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
         })
       });
     } catch (error) {
       console.error(error);
     }
   }
-  getZoneDictionary = () => {
+  getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
-  getKarbariCodeDictionary = () => {
+  getKarbariCodeDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
   postExcelFile = async () => {
@@ -329,6 +367,12 @@ export class FormulasService {
     if (this.utilsService.hasOwnProperty(dataSource['fazelabFormula'])) {
       if (this.utilsService.isNull(dataSource['fazelabFormula'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_fazelabFormula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
+        return false;
+      }
+    }
+    if (this.utilsService.hasOwnProperty(dataSource['formula'])) {
+      if (this.utilsService.isNull(dataSource['formula'])) {
+        this.snackWrapperService.openSnackBar(EN_messages.insert_formula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }

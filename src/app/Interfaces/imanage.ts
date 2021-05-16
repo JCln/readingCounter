@@ -1,8 +1,8 @@
 // ab baha formular manager
 export interface IAbBahaFormula {
     id: string,
-    zoneId: number,
-    karbariMoshtarakinCode: number,
+    zoneId: number | string,
+    karbariMoshtarakinCode: number | string,
     fromDate: string,
     toDate: string,
     fromRate: number,
@@ -12,8 +12,8 @@ export interface IAbBahaFormula {
     formula?: string
 }
 export interface ITabsare2Formula {
-    id: number,
-    zoneId: number,
+    id: string,
+    zoneId: number | string,
     formula: string
 }
 // 
