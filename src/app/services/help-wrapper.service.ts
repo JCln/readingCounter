@@ -126,7 +126,7 @@ export class HelpWrapperService {
     }
     else if (currentRoute.includes('/wr/m/formula/')) {
       this.messageToShow.title = 'فرمول ها';
-      this.messageToShow.messageOne = 'میتوان در این قسمت ها نسبت به فرمول های محاسبه اقدام نمود. هر قسمت امکان افزودن با استفاده از فایل Excel  و افزودن تکی را دارد. ';
+      this.messageToShow.messageOne = 'این قسمت ها مربوط به تبصره 2، 3، بودجه و آبها می‌باشد. هر قسمت امکان افزودن دسته ای با استفاده از فایل Excel  و افزودن تکی را دارد. ';
       this.messageToShow.imgOne = '';
       this.messageToShow.messageTwo = 'امکان ویرایش و حذف هر مورد نیز وجود دارد.';
       this.messageToShow.messageThree = '';

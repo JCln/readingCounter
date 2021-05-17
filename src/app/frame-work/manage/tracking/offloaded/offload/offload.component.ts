@@ -177,4 +177,7 @@ export class OffloadComponent implements OnInit {
     this.testAudio.load();
     this.testAudio.play();
   }
+  toPrePage = () => {
+    this.trackingManagerService.backToPreviousPage();
+  }
 }

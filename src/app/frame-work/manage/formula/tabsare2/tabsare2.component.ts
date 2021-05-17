@@ -149,8 +149,6 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     } else {
       dataSource.zoneId = dataSource.zoneId['id'];
     }
-    console.log(1);
-    
     await this.formulasService.postTabsare2FormulaEdit(dataSource);
   }
   onRowEditCancel(dataSource: ITabsare2Formula, index: number) {

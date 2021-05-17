@@ -1,3 +1,11 @@
+<div class="header_icons_wrap">
+    <div class="left_side">
+        <i (click)="toPrePage()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+            <div class="tooltip_text_right">بازگشت به صفحه قبلی</div>
+        </i>
+    </div>
+</div>
+
 <main class="main">
     <form #form="ngForm" (ngSubmit)="verification()">
         <section class="content">
@@ -42,8 +50,8 @@
                         [(ngModel)]="offloadModifyReq.description">
                 </div>
             </div>
-            <div *ngIf="testLoadImage.length" class="__slider">
-                <div class="_img_content">
+            <div class="__slider">
+                <div *ngIf="testLoadImage.length" class="_img_content">
                     <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
                         <div class="__img_counter">{{i+1}}</div>
 
@@ -59,43 +67,42 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="!testLoadImage.length" class="__slider">
-                <h2 class="not_found_header">تصویری پیدا نشد</h2>
-            </div>
-        </section>
-        <section class="content">
-            <h1 class="title">صدای ضبط شده</h1>
-            <hr>
-
-            <div class="_main_audio">
-                <div *ngFor="let item of audioFiles">
-                    <button [hidden]="showAudioControllers" (click)="getExactAudio(item.fileRepositoryId)">
-                        <i class="tooltip pi pi-cloud-download">
-                            <div class="tooltip_text">بارگیری</div>
-                        </i>
-                    </button>
-                    <button [hidden]="!showAudioControllers" (click)="downloadAudio()">
-                        <i class="tooltip pi pi-download">
-                            <div class="tooltip_text">ذخیره صوت</div>
-                        </i>
-                    </button>
-                    <button [hidden]="!showAudioControllers" (click)="isPlaying = !isPlaying">
-                        <i *ngIf="isPlaying" (click)="pauseAudio()" class="tooltip pi pi-pause">
-                            <div class="tooltip_text">توقف صوت</div>
-                        </i>
-                        <i *ngIf="!isPlaying" (click)="playAudio()" class="tooltip pi pi-play">
-                            <div class="tooltip_text">پخش صوت</div>
-                        </i>
-                    </button>
-                    <button [hidden]="!showAudioControllers" (click)="rePlayAudio()">
-                        <i class="tooltip pi pi-replay">
-                            <div class="tooltip_text">پخش مجدد</div>
-                        </i>
-                    </button>
+                <div *ngIf="audioFiles.length" class="_main_audio">
+                    <h1 class="title">صدای ضبط شده</h1>
+                    <hr>
+                    <div *ngFor="let item of audioFiles">
+                        <button [hidden]="showAudioControllers" (click)="getExactAudio(item.fileRepositoryId)">
+                            <i class="tooltip pi pi-cloud-download">
+                                <div class="tooltip_text">بارگیری</div>
+                            </i>
+                        </button>
+                        <button [hidden]="!showAudioControllers" (click)="downloadAudio()">
+                            <i class="tooltip pi pi-download">
+                                <div class="tooltip_text">ذخیره صوت</div>
+                            </i>
+                        </button>
+                        <button [hidden]="!showAudioControllers" (click)="isPlaying = !isPlaying">
+                            <i *ngIf="isPlaying" (click)="pauseAudio()" class="tooltip pi pi-pause">
+                                <div class="tooltip_text">توقف صوت</div>
+                            </i>
+                            <i *ngIf="!isPlaying" (click)="playAudio()" class="tooltip pi pi-play">
+                                <div class="tooltip_text">پخش صوت</div>
+                            </i>
+                        </button>
+                        <button [hidden]="!showAudioControllers" (click)="rePlayAudio()">
+                            <i class="tooltip pi pi-replay">
+                                <div class="tooltip_text">پخش مجدد</div>
+                            </i>
+                        </button>
+                    </div>
                 </div>
-                <div class="not_found_header" *ngIf="!audioFiles.length">
-                    <h2>صوتی پیدا نشد</h2>
+                <div>
+                    <div *ngIf="!testLoadImage.length">
+                        <h2 class="not_found_header">تصویری پیدا نشد</h2>
+                    </div>
+                    <div *ngIf="!audioFiles.length">
+                        <h2 class="not_found_header">صوتی پیدا نشد</h2>
+                    </div>
                 </div>
             </div>
 
