@@ -100,17 +100,10 @@ export class FormulasService {
       console.error(error);
     }
   }
-  private postAbBahaFormulaAddExcel = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.postAbBahaFormulaAddExcel(body).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(true);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  private postAbBahaFormulaAddExcel = (body: object) => {
+    this.interfaceManagerService.postAbBahaFormulaAddExcel(body).toPromise().then((res: IResponses) => {
+      this.utilsService.snackBarMessageSuccess(res.message);
+    })
   }
   postAbBahaFormulaRemove = (UUID: string): Promise<any> => {
     try {
@@ -155,17 +148,10 @@ export class FormulasService {
       console.error(error);
     }
   }
-  postBudgetFormulaAddExcel = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.postBudgetFormulaAddExcel(body).toPromise().then(res => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  private postBudgetFormulaAddExcel = (body: object) => {
+    this.interfaceManagerService.postBudgetFormulaAddExcel(body).toPromise().then(res => {
+      this.utilsService.snackBarMessageSuccess(res.message);
+    })
   }
   postBudgetFormulaRemove = (UUID: string): Promise<any> => {
     try {
@@ -253,17 +239,10 @@ export class FormulasService {
       console.error(error);
     }
   }
-  postTabsare3FormulaAddExcel = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.postTabsare3FormulaAddExcel(body).toPromise().then(res => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  private postTabsare3FormulaAddExcel = (body: object) => {
+    this.interfaceManagerService.postTabsare3FormulaAddExcel(body).toPromise().then(res => {
+      this.utilsService.snackBarMessageSuccess(res.message);
+    });
   }
   postTabsare3FormulaRemove = (UUID: string): Promise<any> => {
     try {
@@ -283,7 +262,7 @@ export class FormulasService {
   getKarbariCodeDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
-  postExcelFile = async () => {
+  postExcelFile = async (method: string) => {
     const formData: FormData = new FormData();
 
     console.log(this.fileForm);
@@ -291,7 +270,7 @@ export class FormulasService {
     formData.append('file', this.fileForm[0]);
     formData.append('rows', this.desc.rows);
 
-    await this.postAbBahaFormulaAddExcel(formData);
+    await this[method](formData);
   }
   /* VALIDATION */
   isNull = (): boolean => {

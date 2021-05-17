@@ -43,11 +43,7 @@ export class AddExcelFileComponent implements OnInit {
     if (!this.formulasService.checkVertitication(fileInput.files, form.value))
       return;
 
-    console.log(form.value);
-    console.log(fileInput.files);
-    this.formulasService.postExcelFile();
-    // this.dialogRef
-    // this.dialogRef.close(this.uploadForm);
+    this.dialogRef.close(true);
   }
   closeDialog = () => this.dialogRef.close();
 

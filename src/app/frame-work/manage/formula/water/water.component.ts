@@ -65,7 +65,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result)
-          console.log(result);
+          this.formulasService.postExcelFile('postAbBahaFormulaAddExcel');
       });
     });
   }

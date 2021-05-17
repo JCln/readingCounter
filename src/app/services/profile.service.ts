@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IObjectIteratation, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { InterfaceService } from 'src/app/services/interface.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -25,7 +26,28 @@ export class ProfileService {
       { field: 'userCode', header: 'کد کاربری', isSelected: false, readonly: true }
     ];
   }
+  verification = (password: IChangePassword) => {
+    if (this.utilsService.isNull(password.oldPassword)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
+      return false;
+    }
+    if (this.utilsService.isNull(password.newPassword)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
+      return false;
+    }
+    if (this.utilsService.isNull(password.confirmPassword)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
+      return false;
+    }
+    if (!this.utilsService.isSameLength(password.newPassword, password.confirmPassword)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.passwords_notFetch);
+      return false;
+    }
+    return true;
+  }
   changePassword = (password: IChangePassword) => {
+    if (!this.verification(password))
+      return;
     return this.interfaceService.changePassword(password).subscribe(res => {
       if (res)
         this.utilsService.snackBarMessageSuccess(res.message);

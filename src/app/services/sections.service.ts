@@ -81,10 +81,7 @@ export class SectionsService {
         return false;
     }
     // auth level parts
-    if (this.dynamicValue.hasOwnProperty('cssClass')) {
-      if (this.utilsService.isNull(this.dynamicValue.cssClass))
-        return false;
-    }
+
     if (this.dynamicValue.hasOwnProperty('authLevel3Id')) {
       if (this.utilsService.isNull(this.dynamicValue.authLevel3Id))
         return false;
@@ -284,10 +281,6 @@ export class SectionsService {
         this.setNewForm(this.dynamicValue.dbInitialCatalog);
     }
     // auth level parts
-    if (this.dynamicValue.hasOwnProperty('cssClass')) {
-      if (!this.utilsService.isNull(this.dynamicValue.cssClass))
-        this.setNewForm(this.dynamicValue.cssClass);
-    }
     if (this.dynamicValue.hasOwnProperty('authLevel3Id')) {
       if (!this.utilsService.isNull(this.dynamicValue.authLevel3Id))
         this.setNewForm(this.dynamicValue.authLevel3Id);
