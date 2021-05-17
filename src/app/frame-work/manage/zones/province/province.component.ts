@@ -11,7 +11,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
 import { ProvinceEditDgComponent } from './province-edit-dg/province-edit-dg.component';
 

@@ -12,7 +12,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 import { RegionEditDgComponent } from './region-edit-dg/region-edit-dg.component';
 
