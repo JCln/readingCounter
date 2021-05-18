@@ -52,7 +52,7 @@ $border_15: 10px;
 
 ._key,
 ._value {
-  padding: $font_05 0.3rem;
+  padding: $font_05 $font_05 $font_05 0.3rem;
   font-size: $font_s;
   font-weight: 600;
   height: 2.6rem;

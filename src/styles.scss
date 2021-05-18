@@ -97,6 +97,9 @@ input[type=number] {
 }
 
 :host ::ng-deep {
+  .p-datatable table {
+    table-layout: auto;
+  }
 
   .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
   .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {

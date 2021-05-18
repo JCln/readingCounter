@@ -51,13 +51,21 @@ export class WouiComponent implements AfterViewInit, OnDestroy {
     this.getRouteParams();
   }
 
+  private setToDefault = () => {
+    this.audioFiles = [];
+    this.imageFiles = [];
+    this.testLoadImage = [];
+  }
   private getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(res => {
-        this.targetFile.id = this.route.snapshot.paramMap.get('UUID');
-        const checkBoolean = this.route.snapshot.paramMap.get('isForbidden');
-        this.targetFile.isForbidden = checkBoolean ? checkBoolean.toLocaleLowerCase() === 'true' : false;
-        this.classWrapper();
+        if (res) {
+          this.setToDefault();
+          this.targetFile.id = this.route.snapshot.paramMap.get('UUID');
+          const checkBoolean = this.route.snapshot.paramMap.get('isForbidden');
+          this.targetFile.isForbidden = checkBoolean ? checkBoolean.toLocaleLowerCase() === 'true' : false;
+          this.classWrapper();
+        }
       })
     )
 
@@ -79,8 +87,10 @@ export class WouiComponent implements AfterViewInit, OnDestroy {
     }
     this.dataSource = await this.useAPI();
     this.downloadManagerService.assignToDataSource(this.dataSource);
+
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
+
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
     this.getDownloadListInfo();
   }
@@ -117,8 +127,9 @@ export class WouiComponent implements AfterViewInit, OnDestroy {
       reader.readAsDataURL(this.testLoadImage[index]);
     }
   }
-  getExactAudio = (id: string) => {
-    const res = this.downloadManagerService.downloadFile(id)
+  getExactAudio = async (id: string) => {
+    const res = await this.downloadManagerService.downloadFile(id);
+
     this.downloadURL = window.URL.createObjectURL(res);
     this.testAudio.src = this.downloadURL;
     this.isShowAudioControllers();

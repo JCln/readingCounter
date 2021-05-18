@@ -20,11 +20,11 @@
         <form #form="ngForm" (ngSubmit)="changePassword()" class="content">
             <div class="_desc">
                 <input type="password" name="oldPassword" [(ngModel)]="password.oldPassword" class="input_1"
-                    placeholder="گذرواژه فعلی :">
+                    placeholder="گذرواژه فعلی">
                 <input type="password" name="newPassword" [(ngModel)]="password.newPassword" class="input_1"
-                    placeholder="گذرواژه جدید :">
+                    placeholder="گذرواژه جدید">
                 <input type="password" name="confirmPassword" [(ngModel)]="password.confirmPassword" class="input_1"
-                    placeholder="تکرار گذرواژه جدید :">
+                    placeholder="تکرار گذرواژه جدید">
             </div>
             <div class="change_pass">
                 <button type="submit" class="btn_2">ذخیره</button>

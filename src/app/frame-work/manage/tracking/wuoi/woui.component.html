@@ -26,7 +26,7 @@
         <hr>
 
         <div class="_main_audio">
-            <div *ngFor="let item of audioFiles">
+            <div *ngFor="let item of audioFiles; index as i">
                 <button [hidden]="showAudioControllers" (click)="getExactAudio(item.fileRepositoryId)">
                     <i class="tooltip pi pi-cloud-download">
                         <div class="tooltip_text">بارگیری</div>
