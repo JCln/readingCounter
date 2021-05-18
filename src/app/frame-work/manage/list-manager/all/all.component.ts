@@ -139,7 +139,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  downloadOutputDBF = (object: IListManagerAll) => {
+  routeToWoui = (object: IListManagerAll) => {
     this.router.navigate(['wr/m/track/woui', false, object.id]);
   }
   routeToOffload = (object: IListManagerAll) => {

@@ -267,7 +267,7 @@ export class CloseTabService {
       this.saveDataForEditUsers = '';
       return;
     }
-    if (url.includes('/wr/m/track/woui?')) {
+    if (url.includes('/wr/m/track/woui/')) {
       this.saveDataForWOUI = '';
       return;
     }
