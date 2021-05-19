@@ -37,7 +37,6 @@ export class MasterResComponent implements OnInit {
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRMasterManager();
     if (!this.dataSource.length) {
-      this.readingReportManagerService.emptyMessage();
       return;
     }
     this.insertSelectedColumns();

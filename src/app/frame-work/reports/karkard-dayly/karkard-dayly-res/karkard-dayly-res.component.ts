@@ -13,8 +13,7 @@ import { ReadingReportManagerService } from 'src/app/services/reading-report-man
   styleUrls: ['./karkard-dayly-res.component.scss']
 })
 export class KarkardDaylyResComponent implements OnInit {
-  @Input() dataSource: IReadingReportKarkard[];
-  readingReportKarkardDaily: IReadingReportKarkard[] = [];
+  dataSource: IReadingReportKarkard[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
 
@@ -39,25 +38,10 @@ export class KarkardDaylyResComponent implements OnInit {
     this._selectCols = this.readingReportManagerService.columnSelectedRRKarkardDaly();
     this._selectedColumns = this.customizeSelectedColumns();
   }
-  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
-    karbariDictionary.map(karbariDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.karbariCode == karbariDic.id) {
-          dataSource.karbariCode = karbariDic.title;
-        }
-      })
-    });
-  }
   connectToServer = async () => {
-    this.readingReportKarkardDaily = await this.readingReportManagerService.postRRKarkardDailyManager();
-    if (!this.readingReportKarkardDaily.length) {
-      this.readingReportManagerService.emptyMessage();
-      return;
-    }
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+    this.dataSource = await this.readingReportManagerService.postRRKarkardDailyManager();
 
-    if (this.readingReportKarkardDaily.length)
+    if (this.dataSource.length)
       this.insertSelectedColumns();
   }
   ngOnInit(): void {

@@ -163,6 +163,7 @@ export class ReadingReportManagerService {
       { field: 'xarabCount', header: 'خراب', isSelected: true, readonly: true },
       { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
       { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
+      // { field: 'areaTitle', header: 'سایر', isSelected: true, readonly: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true }
     ];
@@ -431,7 +432,7 @@ export class ReadingReportManagerService {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
   getKarbariDictionary = (): Promise<any> => {
-      return this.dictionaryWrapperService.getKarbariDictionary();    
+    return this.dictionaryWrapperService.getKarbariDictionary();
   }
   getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);

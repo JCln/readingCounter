@@ -687,6 +687,7 @@ export interface IReadingReportKarkard {
     xarabCount: number,
     tavizCount: number,
     saierCount: number
+    // areaTitle?:     
 }
 export interface IReadingReportDisposalHours {
     dayJalali: string,

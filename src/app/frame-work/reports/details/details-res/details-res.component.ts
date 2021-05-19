@@ -10,7 +10,7 @@ import { ReadingReportManagerService } from 'src/app/services/reading-report-man
   styleUrls: ['./details-res.component.scss']
 })
 export class DetailsResComponent implements OnInit {
-  @Input() dataSource: IReadingReportDetails[] = [];
+  dataSource: IReadingReportDetails[] = [];
   karbariDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];

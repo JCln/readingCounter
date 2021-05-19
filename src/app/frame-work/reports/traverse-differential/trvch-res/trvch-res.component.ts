@@ -54,6 +54,7 @@ export class TrvchResComponent implements OnInit, OnDestroy {
     this.dataSource = await this.readingReportManagerService.postRRTraverseDiffrentialManager();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
 
+    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
