@@ -229,7 +229,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/kar')
+        if (res === '/wr/m/r/kar')
           this.classWrapper(true);
       }
     })

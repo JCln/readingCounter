@@ -72,7 +72,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/txt/out')
+        if (res === '/wr/m/r/txt/out')
           this.classWrapper(true);
       }
     })

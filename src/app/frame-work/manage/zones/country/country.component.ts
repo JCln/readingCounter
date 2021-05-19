@@ -122,7 +122,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/mc')
+        if (res === '/wr/m/zs/c')
           this.classWrapper(true);
       }
     })

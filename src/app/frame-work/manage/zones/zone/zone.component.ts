@@ -206,7 +206,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/mz')
+        if (res === '/wr/m/zs/z')
           this.classWrapper(true);
       }
     })

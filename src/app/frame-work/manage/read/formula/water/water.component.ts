@@ -122,7 +122,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/formula/ab')
+        if (res === '/wr/m/r/formula/ab')
           this.classWrapper(true);
       }
     })

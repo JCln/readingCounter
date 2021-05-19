@@ -179,7 +179,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/mr')
+        if (res === '/wr/m/zs/r')
           this.classWrapper(true);
       }
     })

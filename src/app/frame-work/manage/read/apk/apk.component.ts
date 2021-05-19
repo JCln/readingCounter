@@ -94,7 +94,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/apk')
+        if (res === '/wr/m/r/apk')
           this.classWrapper(true);
       }
     })

@@ -79,7 +79,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res === '/wr/m/nob')
+      if (res === '/wr/m/r/nob')
         this.classWrapper(true);
     })
     )

@@ -75,7 +75,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/cs')
+        if (res === '/wr/m/r/cs')
           this.classWrapper(true);
       }
     })

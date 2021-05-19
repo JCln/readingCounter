@@ -179,7 +179,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/mp')
+        if (res === '/wr/m/zs/p')
           this.classWrapper(true);
       }
     })

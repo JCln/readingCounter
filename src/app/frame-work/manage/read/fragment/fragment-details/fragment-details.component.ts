@@ -149,5 +149,5 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  routeToParent = () => this.router.navigate(['/wr/m/nob']);
+  routeToParent = () => this.router.navigate(['/wr/m/r/nob']);
 }

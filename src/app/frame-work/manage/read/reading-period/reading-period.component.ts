@@ -225,7 +225,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/rp')
+        if (res === '/wr/m/r/rp')
           this.classWrapper(true);
       }
     })

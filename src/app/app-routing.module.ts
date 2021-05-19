@@ -5,23 +5,20 @@ import { GuardService } from './auth/guard.service';
 import { LoginComponent } from './auth/login/login.component';
 import { HfcComponent } from './core/_layouts/hfc/hfc.component';
 import { LayoutComponent } from './core/_layouts/layout/layout.component';
-import { PageNotFoundComponent } from './frame-work/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
   {
     path: '', component: HfcComponent, children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      { path: 'pnf', component: PageNotFoundComponent }
+      { path: 'login', component: LoginComponent }
     ]
   },
   {
     path: '', canActivate: [GuardService], component: LayoutComponent, children: [
       { path: 'wr', loadChildren: () => import('./frame-work/frame-work.module').then(fr => fr.FrameWorkModule) }
     ]
-  },
-  { path: '**', redirectTo: 'pnf', pathMatch: 'full' }
+  }
 
 ];
 

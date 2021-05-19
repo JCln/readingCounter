@@ -29,6 +29,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   auth2Dictionary: IDictionaryManager[] = [];
+  editableDataSource = [];
   columnsToDisplay = ['title', 'authLevel2Id', 'actions'];
   filterValues = {
     title: '',
@@ -64,12 +65,21 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
+  getEditableSource = (row: any) => {
+    const a = this.editableDataSource.find(dataSource => {
+      if (dataSource.id == row.id) {
+        return dataSource.id;
+      }
+    })
+    return a;
+  }
   editDialog = (row: any) => {
+    const editable = this.getEditableSource(row).authLevel2Id;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth3EditDgComponent, {
         disableClose: true,
         width: '30rem',
-        data: { row, di: this.auth2Dictionary }
+        data: { row, di: this.auth2Dictionary, editable }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -140,6 +150,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForAppLevel3 = this.dataSource.data;
     }
     this.auth2Dictionary = await this.authsManagerService.getAuthLevel2Dictionary();
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
     this.convertIdToTitle(this.dataSource.data, this.auth2Dictionary);
     this.filter();
   }

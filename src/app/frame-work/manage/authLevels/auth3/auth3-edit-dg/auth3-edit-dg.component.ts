@@ -18,12 +18,13 @@ export class Auth3EditDgComponent {
     fb: FormBuilder,
     private sectionsService: SectionsService
   ) {
+    const editable = data.editable;
     data = data.row;
     this.selected = data.authLevel2Id;
     this.form = fb.group({
       id: data.id,
       title: data.title,
-      authLevel2Id: data.id,
+      authLevel2Id: editable,
       cssClass: data.cssClass,
       route: data.route,
       inSidebar: data.inSidebar,

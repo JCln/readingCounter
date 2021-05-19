@@ -175,7 +175,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/rpk')
+        if (res === '/wr/m/r/rpk')
           this.classWrapper(true);
       }
     })

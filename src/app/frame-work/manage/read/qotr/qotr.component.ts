@@ -197,7 +197,7 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/qr')
+        if (res === '/wr/m/r/qr')
           this.classWrapper(true);
       }
     })

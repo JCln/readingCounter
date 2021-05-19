@@ -98,7 +98,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/formula/tabsare2')
+        if (res === '/wr/m/r/formula/tabsare2')
           this.classWrapper(true);
       }
     })

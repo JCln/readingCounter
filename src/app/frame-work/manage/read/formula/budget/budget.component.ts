@@ -122,7 +122,7 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/formula/budget')
+        if (res === '/wr/m/r/formula/budget')
           this.classWrapper(true);
       }
     })

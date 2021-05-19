@@ -52,7 +52,7 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute === '/wr/m/mr' || currentRoute === '/wr/m/mp' || currentRoute === '/wr/m/mzd' || currentRoute === '/wr/m/mz' || currentRoute === '/wr/m/mc') {
+    else if (currentRoute === '/wr/m/zs/r' || currentRoute === '/wr/m/zs/p' || currentRoute === '/wr/m/zs/zb' || currentRoute === '/wr/m/zs/z' || currentRoute === '/wr/m/zs/c') {
       this.messageToShow.title = 'مدیریت نواحی';
       this.messageToShow.messageOne = 'این بخش برای مشاهده، شخصی سازی ، کنترل نواحی درنظر گرفته شده است.از قسمت های کشور، استان، مناطق، نواحی و محدوده ها تشکیل شده است بطوری که هر محدوده مربوط به یک ناحیه/شهر است. همچنین هر ناحیه/شهر مربوط به یک منطقه است. برای مثال مجموعه استان ها کشور را میسازند.';
       this.messageToShow.imgOne = 'assets/imgs/help/ARE.PNG';
@@ -61,7 +61,7 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute === '/wr/m/kar' || currentRoute === '/wr/m/rcd' || currentRoute === '/wr/m/cs' || currentRoute === '/wr/m/rpk' || currentRoute === '/wr/m/rp') {
+    else if (currentRoute === '/wr/m/r/kar' || currentRoute === '/wr/m/r/rcd' || currentRoute === '/wr/m/r/cs' || currentRoute === '/wr/m/r/rpk' || currentRoute === '/wr/m/r/rp' || currentRoute === '/wr/m/r/qtr') {
       this.messageToShow.title = 'مدیریت قرائت';
       this.messageToShow.messageOne = 'برای مشاهده، شخصی سازی و کنترل بخش های مدیریت قرائت درنظر گرفته شده است. این قسمت شامل کنترل بخش های کاربری، تنظیمات پیش فرض، وضعیت کنتور و ... است.';
       this.messageToShow.imgOne = 'assets/imgs/help/ARE.PNG';
@@ -70,7 +70,7 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute === '/wr/apk') {
+    else if (currentRoute === '/wr/m/r/apk') {
       this.messageToShow.title = 'مدیریت apk';
       this.messageToShow.messageOne = 'این بخش به دو قسمت نسخه های گذشته و جدید تقسیم میشود. درصورتی که نیاز به استفاده از apk قبلی بود میتوان برروی فایل مربوط به همان سطر کلیک تا به عنوان نسخه جدید درنظر گرفته شود. برای ایجاد نسخه جدید با وارد کردن نام، شماره و فایل نسخه میتوان به ایجاد نسخه جدید اقدام نمود. ';
       this.messageToShow.imgOne = '';
@@ -124,7 +124,7 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute.includes('/wr/m/formula/')) {
+    else if (currentRoute.includes('/wr/m/r/formula/')) {
       this.messageToShow.title = 'فرمول ها';
       this.messageToShow.messageOne = 'این قسمت ها مربوط به تبصره 2، 3، بودجه و آبها می‌باشد. هر قسمت امکان افزودن دسته ای با استفاده از فایل Excel  و افزودن تکی را دارد. ';
       this.messageToShow.imgOne = '';
@@ -218,7 +218,7 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute.includes('/m/nob')) {
+    else if (currentRoute.includes('/m/r/nob')) {
       this.messageToShow.title = 'نوبتی';
       this.messageToShow.messageOne = 'اطلاعات کلی نوبتی در این بخش قابل مشاهده است';
       this.messageToShow.imgOne = 'assets/imgs/help/fragment/nob1.JPG';

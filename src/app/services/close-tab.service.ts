@@ -106,28 +106,47 @@ export class CloseTabService {
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
     switch (url) {
-      case '/wr/m/kar':
+      // reading manage 
+      case '/wr/m/r/kar':
         this.saveDataForKarbari = '';
         break;
-      case '/wr/m/cs':
+      case '/wr/m/r/cs':
         this.saveDataForCounterState = '';
         break;
-      case '/wr/mu/all':
-        this.saveDataForAllUsers = '';
+      case '/wr/m/r/qr':
+        this.saveDataForQotrManager = '';
         break;
-      case '/wr/mu/add':
-        this.saveDataForForAddUsers = '';
+      case '/wr/m/r/cr':
+        this.saveDataForCounterReport = '';
         break;
-      case '/wr/m/ms':
+      case '/wr/m/r/nob':
+        this.saveDataForFragmentNOB = '';
         break;
-      case '/wr/m/rpm':
+      case '/wr/m/r/txt/out':
+        this.saveDataForTextOutput = '';
+        break;
+      case '/wr/m/r/apk':
+        this.saveDataForAPKManager = '';
+        break;
+      case '/wr/m/r/rpm':
         this.saveDataForReadingPeriodManager = '';
         break;
-      case '/wr/m/rpkm':
+      case '/wr/m/r/rpkm':
         this.saveDataForReadingPeriodKindManager = '';
         break;
-      case '/wr/m/mrm':
+      case '/wr/m/r/formula/ab':
+        this.saveDataForWaterFormula = '';
         break;
+      case '/wr/m/r/formula/budget':
+        this.saveDataForBadgetFormula = '';
+        break;
+      case '/wr/m/r/formula/tabsare2':
+        this.saveDataForTabsare3Formula = '';
+        break;
+      case '/wr/m/r/formula/tabsare3':
+        this.saveDataForTabsare2Formula = '';
+        break;
+      // auths manage
       case '/wr/m/al/ap':
         this.saveDataForAppLevel1 = '';
         break;
@@ -140,44 +159,40 @@ export class CloseTabService {
       case '/wr/m/al/ac':
         this.saveDataForAppLevel4 = '';
         break;
-      case '/wr/m/mc':
+      // user manage
+      case '/wr/mu/all':
+        this.saveDataForAllUsers = '';
+        break;
+      case '/wr/mu/add':
+        this.saveDataForForAddUsers = '';
+        break;
+      // zones manage
+      case '/wr/m/zs/c':
         this.saveDataForCountry = '';
         break;
-      case '/wr/m/mp':
+      case '/wr/m/zs/p':
         this.saveDataForProvince = '';
         break;
-      case '/wr/m/txt/out':
-        this.saveDataForTextOutput = '';
-        break;
-      case '/wr/m/mr':
+      case '/wr/m/zs/r':
         this.saveDataForRegion = '';
         break;
-      case '/wr/m/mz':
+      case '/wr/m/zs/z':
         this.saveDataForZone = '';
         break;
-      case '/wr/m/mzd':
+      case '/wr/m/zs/zb':
         this.saveDataForZoneBound = '';
         break;
-      case '/wr/m/nob':
-        this.saveDataForFragmentNOB = '';
+      // ////     
+      case '/wr/m/ms':
+        break;
+      case '/wr/m/mrm':
         break;
       case '/wr/imd':
         this.saveDataForImportDynamic = '';
         break;
       case '/wr/profile':
         break;
-      case '/wr/apk':
-        this.saveDataForAPKManager = '';
-        break;
-      case '/wr/bi':
-        break;
-      case '/wr/qr':
-        this.saveDataForQotrManager = '';
-        break;
       case '/wr/msge':
-        break;
-      case '/wr/m/cr':
-        this.saveDataForCounterReport = '';
         break;
       case '/wr/m/track/imported':
         this.saveDataForTrackImported = '';
@@ -208,6 +223,7 @@ export class CloseTabService {
       case '/wr/m/dbf':
         this.saveDataForOutputDBF = '';
         break;
+      // reading reports
       case '/wr/rpts/mam/trv':
         this.saveDataForRRTraverse = '';
         break;
@@ -231,18 +247,6 @@ export class CloseTabService {
         break;
       case '/wr/rpts/mam/gis':
         this.saveDataForRRGIS = '';
-        break;
-      case '/wr/m/formula/ab':
-        this.saveDataForWaterFormula = '';
-        break;
-      case '/wr/m/formula/budget':
-        this.saveDataForBadgetFormula = '';
-        break;
-      case '/wr/m/formula/tabsare2':
-        this.saveDataForTabsare3Formula = '';
-        break;
-      case '/wr/m/formula/tabsare3':
-        this.saveDataForTabsare2Formula = '';
         break;
     }
     // listed all of the dynamic routes
