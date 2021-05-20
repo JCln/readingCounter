@@ -224,6 +224,9 @@ export class TrackingManagerService {
   removeTrackingId = (trackNumber: string, desc: string): Observable<any> => {
     return this.interfaceManagerService.removeTrackingId({ trackingId: trackNumber, description: desc });
   }
+  finishReading = (trackNumber: string, desc: string) => {
+    return this.interfaceManagerService.finishReading({ trackingId: trackNumber, description: desc });
+  }
   // Output manager 
   downloadOutputDBF = (dbfData: ITracking | IOutputManager): any => {
     const a: IOutputManager = {
@@ -258,7 +261,7 @@ export class TrackingManagerService {
   backToConfirmDialog = (trackNumber: string) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: 'علت بازگشت به مرحله قبلی'
+        data: EN_messages.reason_backToPrev
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {

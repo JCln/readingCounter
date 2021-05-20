@@ -10,6 +10,7 @@ import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
+import { EN_messages } from './../../../../Interfaces/enums.enum';
 
 @Component({
   selector: 'app-finished',
@@ -99,9 +100,9 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: 'علت بازگشت به صادر شده'
+        data: EN_messages.reson_delete_backtoImported
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {

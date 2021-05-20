@@ -11,6 +11,7 @@ import { TrackingManagerService } from 'src/app/services/tracking-manager.servic
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
+import { EN_messages } from './../../../../Interfaces/enums.enum';
 
 
 @Component({
@@ -100,9 +101,9 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: 'علت بازگشت به صادر شده'
+        data: EN_messages.reson_delete_backtoImported
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
@@ -118,4 +119,17 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+  forceOffload = (rowData: ITracking) => {
+    return new Promise(() => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        data: EN_messages.reason_forceOffload
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          this.trackingManagerService.finishReading(rowData.id, desc);
+        }
+      })
+    })
+  }
+
 }

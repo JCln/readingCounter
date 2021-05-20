@@ -58,8 +58,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
 
         });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-
         if (result) {
           this.interfaceManagerService.addProvinceManager(result).subscribe((res: IResponses) => {
             if (res) {

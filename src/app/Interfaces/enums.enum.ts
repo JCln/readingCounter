@@ -68,7 +68,11 @@ export enum EN_messages {
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
 
     delete_confirm = 'آیا از حذف مسیر اطمینان دارید',
-    delete_backto_imported = 'علت بازگشت به صادر شده',
+    reson_delete_backtoImported = 'علت بازگشت به صادر شده',
+    reason_forceOffload = 'علت تخلیه اضطراری !',
+    reason_deleteRoute = 'علت حذف مسیر !',
+    reason_backToPrev = 'علت بازگشت به مرحله قبلی',
+
 
     call_supportGroup = 'خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید'
 }

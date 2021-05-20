@@ -1,9 +1,3 @@
-<div class="operation">
-    <button (click)="openDialog()" class="operation_btn">
-        <i class="fa fa-plus"></i>
-    </button>
-</div>
-
 <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef>
@@ -46,14 +40,6 @@
             </mat-form-field>
         </th>
         <td mat-cell *matCellDef="let person">{{person.province}}</td>
-    </ng-container>
-
-    <ng-container cdkColumnDef="actions">
-        <th md-header-cell *matHeaderCellDef></th>
-        <td md-cell *matCellDef="let row" class="_actions">
-            <i (click)="editDialog(row)" class="_custom fa fa-edit"></i>|
-            <i (click)="deleteSingleRow(row)" class="_custom fa fa-trash-o"></i>
-        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

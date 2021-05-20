@@ -12,6 +12,7 @@ import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
+import { EN_messages } from './../../../../Interfaces/enums.enum';
 import { ImportListDgComponent } from './import-list-dg/import-list-dg.component';
 
 
@@ -140,7 +141,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   firstConfirmDialog = (rowData: ITracking, rowIndex: number) => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: 'علت حذف مسیر را بیان نمایید'
+        data: EN_messages.reason_deleteRoute
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {

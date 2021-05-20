@@ -79,7 +79,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addKarbari(result.value).subscribe((res: IResponses) => {
+          this.interfaceManagerService.addKarbari(result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }

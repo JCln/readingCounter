@@ -211,6 +211,9 @@ export class InterfaceManagerService {
   toPre = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tracking/Pre', body);
   }
+  finishReading = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('/V1/Tracking/FinishReading', body);
+  }
   removeTrackingId = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tracking/Remove', body);
   }
