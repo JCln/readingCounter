@@ -19,10 +19,11 @@ export class Auth2EditDgComponent {
     private sectionsService: SectionsService
   ) {
     data = data.row;
+    const editable = data.editable;
     this.selected = data.authLevel1Id;
     this.form = fb.group({
       id: data.id,
-      authLevel1Id: data.id,
+      authLevel1Id: editable,
       title: data.title,
       cssClass: data.cssClass,
       route: data.route,

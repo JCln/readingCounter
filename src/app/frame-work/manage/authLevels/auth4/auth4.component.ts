@@ -31,6 +31,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   auth3Dictionary: IDictionaryManager[] = [];
+  editableDataSource = [];
   columnsToDisplay = ['title', 'authLevel3Id', 'actions'];
   filterValues = {
     title: '',
@@ -66,14 +67,21 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
+  getEditableSource = (row: any) => {
+    const a = this.editableDataSource.find(dataSource => {
+      if (dataSource.id == row.id) {
+        return dataSource.id;
+      }
+    })
+    return a;
+  }
   editDialog = (row: any) => {
-    console.log(this.auth3Dictionary);
-
+    const editable = this.getEditableSource(row).authLevel2Id;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth4EditDgComponent, {
         disableClose: true,
         width: '30rem',
-        data: { row, di: this.auth3Dictionary }
+        data: { row, di: this.auth3Dictionary, editable }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -149,6 +157,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForAppLevel4 = this.dataSource.data;
     }
     this.auth3Dictionary = await this.authsManagerService.getAuthLevel3Dictionary();
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
     this.convertIdToTitle(this.dataSource.data, this.auth3Dictionary);
     this.filter();
   }

@@ -28,6 +28,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   auth1Dictionary: IDictionaryManager[] = [];
+  editableDataSource = [];
   columnsToDisplay = ['title', 'authLevel1Id', 'actions'];
   filterValues = {
     title: '',
@@ -64,12 +65,21 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
+  getEditableSource = (row: any) => {
+    const a = this.editableDataSource.find(dataSource => {
+      if (dataSource.id == row.id) {
+        return dataSource.id;
+      }
+    })
+    return a;
+  }
   editDialog = (row: any) => {
+    const editable = this.getEditableSource(row).authLevel1Id;
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(Auth2EditDgComponent, {
         disableClose: true,
         width: '30rem',
-        data: { row, di: this.auth1Dictionary }
+        data: { row, di: this.auth1Dictionary, editable }
 
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -139,6 +149,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForAppLevel2 = this.dataSource.data;
     }
     this.auth1Dictionary = await this.authsManagerService.getAuthLevel1Dictionary();
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
     this.convertIdToTitle(this.dataSource.data, this.auth1Dictionary);
     this.filter();
   }
