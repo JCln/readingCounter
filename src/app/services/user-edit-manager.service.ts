@@ -84,12 +84,14 @@ export class UserEditManagerService {
   }
   private connectToServer = (vals: IAUserEditSave) => {
     this.dataSource = vals;
-    // if (!this.vertification())
-    //   return false;
+    if (!this.vertification())
+      return false;
     this.interfaceManagerService.postUserManager(vals).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
         this.utilsService.routeToByUrl('/wr/mu/all');
+
+        this.snackWrapperService.openSnackBar(EN_messages.access_whenLoginAgain, ENSnackBarTimes.tenMili, ENSnackBarColors.success);
       }
     });
   }

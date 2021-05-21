@@ -154,10 +154,10 @@ export class FragmentManagerService {
     return this.utilsService.getRouteBySplit('/');
   }
   routeToFragmentDetails = (route: string) => {
-    this.utilsService.routeToByParams('/wr/m/nob/', route);
+    this.utilsService.routeToByParams('/wr/m/r/nob/', route);
   }
   routeToFragmentMaster = () => {
-    this.utilsService.routeTo('/wr/m/nob');
+    this.utilsService.routeTo('/wr/m/r/nob');
   }
   /**/
   getZoneDictionary = (): Promise<any> => {

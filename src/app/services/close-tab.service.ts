@@ -263,7 +263,7 @@ export class CloseTabService {
       this.saveDataForUserLoggins = '';
       return;
     }
-    if (url.includes('/wr/m/nob/')) {
+    if (url.includes('/wr/m/r/nob/')) {
       this.saveDataForFragmentNOBDetails = '';
       return;
     }

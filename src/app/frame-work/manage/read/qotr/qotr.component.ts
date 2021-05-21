@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -9,7 +8,6 @@ import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 @Component({
   selector: 'app-qotr',
@@ -23,10 +21,10 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
   provinceFilter = new FormControl('');
 
   dataSource = new MatTableDataSource();
-  editableDataSource = [];
-
+  
   subscription: Subscription[] = [];
   countryDictionary: IDictionaryManager[] = [];
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columnsToDisplay = ['title', 'provinceId', 'province', 'actions'];
   filterValues = {
@@ -38,8 +36,6 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private dictionaryWrapperService: DictionaryWrapperService
@@ -56,12 +52,10 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
   getProvinceDictionary = (): any => {
     return this.dictionaryWrapperService.getProvinceDictionary();
   }
-  getDataSource = (): any => {
+  getDataSource = (): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.getQotr().subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
+        resolve(res);
       })
     })
   }

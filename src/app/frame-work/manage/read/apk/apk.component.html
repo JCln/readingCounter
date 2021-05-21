@@ -4,11 +4,11 @@
         <h1 class="title">ایجاد نسخه جدید</h1>
         <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
             <div class="_desc">
-                <input class="input_1" type="text" placeholder="نام نسخه : " name="versionName"
+                <input class="input_1" type="text" placeholder="نام نسخه " name="versionName"
                     [(ngModel)]="uploadForm.versionName">
-                <input class="input_1" type="number" placeholder="کد نسخه :" name="versionCode"
+                <input class="input_1" type="number" placeholder="کد نسخه" name="versionCode"
                     [(ngModel)]="uploadForm.versionCode">
-                <input class="input_1" type="text" placeholder="توضیحات :" name="description"
+                <input class="input_1" type="text" placeholder="توضیحات" name="description"
                     [(ngModel)]="uploadForm.description">
             </div>
             <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
