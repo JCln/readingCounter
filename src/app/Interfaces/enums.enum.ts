@@ -69,8 +69,8 @@ export enum EN_messages {
 
     delete_confirm = 'آیا از حذف مسیر اطمینان دارید',
     reson_delete_backtoImported = 'علت بازگشت به صادر شده',
-    reason_forceOffload = 'علت تخلیه اضطراری !',
-    reason_deleteRoute = 'علت حذف مسیر !',
+    reason_forceOffload = 'علت تخلیه اضطراری',
+    reason_deleteRoute = 'علت حذف مسیر',
     reason_backToPrev = 'علت بازگشت به مرحله قبلی',
 
 

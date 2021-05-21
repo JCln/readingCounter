@@ -272,6 +272,17 @@ export class FormulasService {
 
     await this[method](formData);
   }
+  getExcelAbBahaSample = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getAbBahaFormulaExcelSample().subscribe(res => {
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   /* VALIDATION */
   isNull = (): boolean => {
     if (this.utilsService.isNull(this.desc.rows)) {

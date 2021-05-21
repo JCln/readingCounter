@@ -146,9 +146,13 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   firstConfirmDialog = (rowData: IAbBahaFormula, rowIndex: number) => {
-    return new Promise(resolve => {
+    const title = EN_messages.delete_confirm;
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: EN_messages.delete_confirm
+        data: {
+          title: title,
+          isInput: false
+        }
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
@@ -197,4 +201,18 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+  // getExcelSample = async () => {
+  //   const a = await this.formulasService.getExcelAbBahaSample();
+  //   console.log(typeof a);
+
+
+  //   let reader = new FileReader();
+  //   reader.addEventListener("load", () => {
+  //     reader.result
+  //   }, false);
+  //   // reader.readAsDataURL();
+  //   console.log(reader);
+
+  // }
+
 }

@@ -11,6 +11,10 @@
     background: #e9ecef;
   }
 
+  ._important {
+    color: $red_600;
+  }
+
   .p-datatable .p-datatable-thead>tr>th,
   .p-datatable .p-datatable-tbody>tr>td {
     text-align: center;

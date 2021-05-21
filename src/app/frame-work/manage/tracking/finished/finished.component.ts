@@ -100,9 +100,13 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
+    const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: EN_messages.reson_delete_backtoImported
+        data: {
+          title: title,
+          isInput: true
+        }
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {

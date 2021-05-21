@@ -37,7 +37,6 @@ export class JwtService {
     if (!expirationDateUtc) {
       return true;
     }
-    console.log(!(expirationDateUtc.valueOf() > new Date().valueOf()));
     return !(expirationDateUtc.valueOf() > new Date().valueOf());
   }
   getDecodedTokenRoles(): string[] | null {

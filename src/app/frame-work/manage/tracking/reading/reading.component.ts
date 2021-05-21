@@ -101,10 +101,14 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
+    const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: EN_messages.reson_delete_backtoImported
-      });
+        data: {
+          title: title,
+          isInput: true
+        }
+      })
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
           this.rowToImported(rowData, desc, rowIndex);
@@ -120,13 +124,20 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   forceOffload = (rowData: ITracking) => {
+    const title = EN_messages.reason_forceOffload;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: EN_messages.reason_forceOffload
+        data: {
+          title: title,
+          isInput: true
+        }
       });
-      dialogRef.afterClosed().subscribe(desc => {
+      dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          this.trackingManagerService.finishReading(rowData.id, desc);
+          console.log(1);
+          const a = await this.trackingManagerService.finishReading(rowData.id, desc);
+          console.log(a);
+
         }
       })
     })

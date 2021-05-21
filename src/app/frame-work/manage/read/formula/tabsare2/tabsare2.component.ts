@@ -122,9 +122,13 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
   }
 
   firstConfirmDialog = (rowData: ITabsare2Formula, rowIndex: number) => {
-    return new Promise(resolve => {
+    const title = EN_messages.delete_confirm;
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: EN_messages.delete_confirm
+        data: {
+          title: title,
+          isInput: false
+        }
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {

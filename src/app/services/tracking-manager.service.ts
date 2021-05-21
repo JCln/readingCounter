@@ -224,8 +224,12 @@ export class TrackingManagerService {
   removeTrackingId = (trackNumber: string, desc: string): Observable<any> => {
     return this.interfaceManagerService.removeTrackingId({ trackingId: trackNumber, description: desc });
   }
-  finishReading = (trackNumber: string, desc: string) => {
-    return this.interfaceManagerService.finishReading({ trackingId: trackNumber, description: desc });
+  finishReading = (trackNumber: string, desc: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.finishReading({ trackingId: trackNumber, description: desc }).toPromise().then(res => {
+        resolve(res);
+      })
+    });
   }
   // Output manager 
   downloadOutputDBF = (dbfData: ITracking | IOutputManager): any => {
@@ -259,9 +263,13 @@ export class TrackingManagerService {
     })
   }
   backToConfirmDialog = (trackNumber: string) => {
-    return new Promise(resolve => {
+    const title = EN_messages.reason_backToPrev;
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: EN_messages.reason_backToPrev
+        data: {
+          title: title,
+          isInput: true
+        }
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
@@ -273,7 +281,10 @@ export class TrackingManagerService {
   TESTbackToConfirmDialog = (trackNumber: string, message: ENTrackingMessage): Promise<any> => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: message
+        data: {
+          title: message,
+          isInput: true
+        }
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {

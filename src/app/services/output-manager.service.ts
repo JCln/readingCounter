@@ -102,12 +102,24 @@ export class OutputManagerService {
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     this.saveAsExcelFile(excelBuffer, fileName, '.csv');
   }
+  saveAsExcelABuffer = (buffer: any) => {
+    console.log(buffer);
+    import("file-saver").then(FileSaver => {
+      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+      const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+      });
+      FileSaver.saveAs(data, 'testName');
+    })
+  }
   saveAsExcelFile(buffer: any, fileName: string, EXCEL_EXTENSION: string): void {
     import("file-saver").then(FileSaver => {
       let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
       const data: Blob = new Blob([buffer], {
         type: EXCEL_TYPE
       });
+      console.log(data);
+
       FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
     });
   }

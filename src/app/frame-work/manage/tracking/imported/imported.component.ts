@@ -139,9 +139,13 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   firstConfirmDialog = (rowData: ITracking, rowIndex: number) => {
-    return new Promise(resolve => {
+    const title = EN_messages.reason_deleteRoute;
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: EN_messages.reason_deleteRoute
+        data: {
+          title: title,
+          isInput: true
+        }
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {

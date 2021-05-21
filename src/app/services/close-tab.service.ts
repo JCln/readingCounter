@@ -13,28 +13,25 @@ export class CloseTabService {
   // 
   // save data when route change 
   saveDataForAppLevel1: any;
-
   saveDataForAppLevel2: any;
-
   saveDataForAppLevel3: any;
-
   saveDataForAppLevel4: any;
 
   saveDataForCounterState: any;
-
   saveDataForKarbari: any;
-
   saveDataForReadingConfig: any;
   saveDictionaryForReadingConfig: any;
+  saveDataForReadingPeriodManager: any;
+  saveDataForReadingPeriodKindManager: any;
+  saveDataForAPKManager: any;
+  saveDataForCounterReport: any;
+  saveDataForQotrManager: any;
 
+  // zones
   saveDataForCountry: any;
-
   saveDataForProvince: any;
-
   saveDataForRegion: any;
-
   saveDataForZone: any;
-
   saveDataForZoneBound: any;
 
   saveDataForAllUsers: any;
@@ -42,19 +39,8 @@ export class CloseTabService {
 
   saveDataForEditUsers: any;
   saveDictionaryForEditUsers: any;
-
   saveDataForForAddUsers: any;
   saveDictionaryForAddUsers: any;
-
-  saveDataForReadingPeriodManager: any;
-
-  saveDataForReadingPeriodKindManager: any;
-  // 
-  saveDataForAPKManager: any;
-
-  saveDataForCounterReport: any;
-
-  saveDataForQotrManager: any;
 
   // track manager
   saveDataForTrackImported: any;
@@ -65,7 +51,6 @@ export class CloseTabService {
   saveDataForFollowUp: any;
   saveDataForLastStates: any;
   saveDataForOffloadModify: any;
-  // 
   // import dynamic
   saveDataForImportDynamic: any;
   // 
@@ -73,19 +58,14 @@ export class CloseTabService {
   saveDataForLMPD: any;
   saveDataForLMAll: any;
   saveDataForLMAll_extra: any;
-  // 
   // WOUI manager
   saveDataForWOUI: any;
-  // 
   // Forbidden manager
   saveDataForForbidden: any;
-  // 
   // dbf output manager
   saveDataForOutputDBF: any;
-  // 
   // number of Logs
   saveDataForUserLoggins: any;
-  // 
   // reading reports 
   saveDataForRRTraverse: any;
   saveDataForRRTraverseDifferential: any;
@@ -95,9 +75,6 @@ export class CloseTabService {
   saveDataForRRDetails: any;
   saveDataForRRDisposalHours: any;
   saveDataForRRGIS: any;
-
-  // 
-
   // managers
   saveDataForFragmentNOB: any;
   saveDataForFragmentNOBDetails: any;
@@ -287,56 +264,56 @@ export class CloseTabService {
   // 
 
   cleanAllData = () => {
-    this.saveDataForAppLevel1 = [];
-    this.saveDataForAppLevel2 = [];
-    this.saveDataForAppLevel3 = [];
-    this.saveDataForAppLevel4 = [];
-    this.saveDataForCounterState = [];
-    this.saveDataForKarbari = [];
-    this.saveDataForReadingConfig = [];
-    this.saveDictionaryForReadingConfig = [];
-    this.saveDataForCountry = [];
-    this.saveDataForProvince = [];
-    this.saveDataForRegion = [];
-    this.saveDataForZone = [];
-    this.saveDataForZoneBound = [];
-    this.saveDataForAllUsers = [];
-    this.saveDictionaryForAllUsers = [];
-    this.saveDataForEditUsers = [];
-    this.saveDictionaryForEditUsers = [];
-    this.saveDataForForAddUsers = [];
-    this.saveDictionaryForAddUsers = [];
-    this.saveDataForReadingPeriodManager = [];
-    this.saveDataForReadingPeriodKindManager = [];
-    this.saveDataForAPKManager = [];
-    this.saveDataForCounterReport = [];
-    this.saveDataForQotrManager = [];
-    this.saveDataForTrackImported = [];
-    this.saveDataForTrackLoaded = [];
-    this.saveDataForTrackReading = [];
-    this.saveDataForTrackOffloaded = [];
-    this.saveDataForTrackFinished = [];
-    this.saveDataForFollowUp = [];
-    this.saveDataForLastStates = [];
-    this.saveDataForOffloadModify = [];
-    this.saveDataForImportDynamic = [];
-    this.saveDataForLMPD = [];
-    this.saveDataForLMAll = [];
-    this.saveDataForLMAll_extra = [];
-    this.saveDataForWOUI = [];
-    this.saveDataForForbidden = [];
-    this.saveDataForOutputDBF = [];
-    this.saveDataForUserLoggins = [];
-    this.saveDataForRRTraverse = [];
-    this.saveDataForRRTraverseDifferential = [];
-    this.saveDataForRRKarkard = [];
-    this.saveDataForRRkarkardDaily = [];
-    this.saveDataForRRMaster = [];
-    this.saveDataForRRDetails = [];
-    this.saveDataForRRDisposalHours = [];
-    this.saveDataForRRGIS = [];
-    this.saveDataForFragmentNOB = [];
-    this.saveDataForFragmentNOBDetails = [];
-    this.saveDataForTextOutput = [];
+    this.saveDataForAppLevel1 = '';
+    this.saveDataForAppLevel2 = '';
+    this.saveDataForAppLevel3 = '';
+    this.saveDataForAppLevel4 = '';
+    this.saveDataForCounterState = '';
+    this.saveDataForKarbari = '';
+    this.saveDataForReadingConfig = '';
+    this.saveDictionaryForReadingConfig = '';
+    this.saveDataForCountry = '';
+    this.saveDataForProvince = '';
+    this.saveDataForRegion = '';
+    this.saveDataForZone = '';
+    this.saveDataForZoneBound = '';
+    this.saveDataForAllUsers = '';
+    this.saveDictionaryForAllUsers = '';
+    this.saveDataForEditUsers = '';
+    this.saveDictionaryForEditUsers = '';
+    this.saveDataForForAddUsers = '';
+    this.saveDictionaryForAddUsers = '';
+    this.saveDataForReadingPeriodManager = '';
+    this.saveDataForReadingPeriodKindManager = '';
+    this.saveDataForAPKManager = '';
+    this.saveDataForCounterReport = '';
+    this.saveDataForQotrManager = '';
+    this.saveDataForTrackImported = '';
+    this.saveDataForTrackLoaded = '';
+    this.saveDataForTrackReading = '';
+    this.saveDataForTrackOffloaded = '';
+    this.saveDataForTrackFinished = '';
+    this.saveDataForFollowUp = '';
+    this.saveDataForLastStates = '';
+    this.saveDataForOffloadModify = '';
+    this.saveDataForImportDynamic = '';
+    this.saveDataForLMPD = '';
+    this.saveDataForLMAll = '';
+    this.saveDataForLMAll_extra = '';
+    this.saveDataForWOUI = '';
+    this.saveDataForForbidden = '';
+    this.saveDataForOutputDBF = '';
+    this.saveDataForUserLoggins = '';
+    this.saveDataForRRTraverse = '';
+    this.saveDataForRRTraverseDifferential = '';
+    this.saveDataForRRKarkard = '';
+    this.saveDataForRRkarkardDaily = '';
+    this.saveDataForRRMaster = '';
+    this.saveDataForRRDetails = '';
+    this.saveDataForRRDisposalHours = '';
+    this.saveDataForRRGIS = '';
+    this.saveDataForFragmentNOB = '';
+    this.saveDataForFragmentNOBDetails = '';
+    this.saveDataForTextOutput = '';
   }
 }
