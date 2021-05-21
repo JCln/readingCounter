@@ -106,7 +106,7 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute === '/wr/m/track/fwu') {
+    else if (currentRoute === '/wr/m/s/fwu') {
       this.messageToShow.title = 'پیگیری درخواست ها';
       this.messageToShow.messageOne = 'این بخش جهت پیگیری کلیه مسیر های ایجاد شده در بخش کارتابل ایجاد شده است. ';
       this.messageToShow.imgOne = '';

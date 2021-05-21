@@ -210,9 +210,6 @@ export class InterfaceManagerService {
   postTrackingEdit = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tracking/Edit', body);
   }
-  getTrackFollowUp = (trackNumber: string): Observable<any> => {
-    return this.mainService.GET(`V1/Tracking/FollowUp/?trackNumber=${trackNumber}`);
-  }
   toImported = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tracking/ToImported', body);
   }
@@ -231,7 +228,13 @@ export class InterfaceManagerService {
   removeTrackingId = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tracking/Remove', body);
   }
-  // 
+  // SEARCH MANAGER
+  getTrackFollowUp = (trackNumber: string): Observable<any> => {
+    return this.mainService.GET(`V1/Tracking/FollowUp/?trackNumber=${trackNumber}`);
+  }
+  postSearchMosh = (body: object): Observable<any> => {
+    return this.mainService.POSTBODY('V1/List/Search/Moshtarak', body);
+  }
   // reading report manager
 
   postRRMasterManager = (body: object): Observable<any> => {

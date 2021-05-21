@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'fwu', loadChildren: () => import('./follow-up/follow-up.module').then(followUp => followUp.FollowUpModule) },
   { path: 'imported', loadChildren: () => import('./imported/imported.module').then(imported => imported.ImportedModule) },
   { path: 'loaded', loadChildren: () => import('./loaded/loaded.module').then(loaded => loaded.LoadedModule) },
   { path: 'reading', loadChildren: () => import('./reading/reading.module').then(reading => reading.ReadingModule) },

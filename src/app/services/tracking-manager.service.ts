@@ -326,7 +326,7 @@ export class TrackingManagerService {
     this._location.back();
   }
   backToParent = () => {
-    this.utilsService.routeTo('/wr/m/track/fwu');
+    this.utilsService.routeTo('/wr/m/s/fwu');
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);

@@ -3,7 +3,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IListManagerAll } from 'src/app/Interfaces/imanage';
+import { IOnOffLoadFlat } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -20,7 +20,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   isModify: string | boolean;
   subscription: Subscription[] = [];
 
-  dataSource: IListManagerAll[] = [];
+  dataSource: IOnOffLoadFlat[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
@@ -139,10 +139,10 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  routeToWoui = (object: IListManagerAll) => {
+  routeToWoui = (object: IOnOffLoadFlat) => {
     this.router.navigate(['wr/m/track/woui', false, object.id]);
   }
-  routeToOffload = (object: IListManagerAll) => {
+  routeToOffload = (object: IOnOffLoadFlat) => {
     let zoneId;
     this.zoneDictionary.map(item => {
       if (item.title === object.zoneId)

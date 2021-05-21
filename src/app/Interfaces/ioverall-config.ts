@@ -144,3 +144,9 @@ export enum ENActivateProvinceTitle {
     ESF = 'اصفهان',
     TEH = 'تهران'
 }
+export enum ENSearch {
+    eshterak = 'اشتراک',
+    radif = 'ش پرونده',
+    readCode = 'قرائت',
+    billId = 'شناسه قبض',
+}

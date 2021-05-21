@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
-import { IListManagerAll } from '../Interfaces/imanage';
+import { IOnOffLoadFlat } from '../Interfaces/imanage';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { CloseTabService } from './close-tab.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -117,7 +117,7 @@ export class ListManagerService {
   nullSavedAllLMSource = () => {
     this.saveTo === 0 ? this.closeTabService.saveDataForLMAll = null : this.closeTabService.saveDataForLMAll_extra = null
   }
-  getLMAll = (trackingId: string): Promise<any> | IListManagerAll[] => {
+  getLMAll = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
     // console.log(this.closeTabService.saveDataForLMAll);
     // if (!this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
     //   return this.closeTabService.saveDataForLMAll;
@@ -135,7 +135,7 @@ export class ListManagerService {
       return this.getLMAllExtra(trackingId);
     }
   }
-  getLMAllFirst = (trackingId: string): Promise<any> | IListManagerAll[] => {
+  getLMAllFirst = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
@@ -147,7 +147,7 @@ export class ListManagerService {
       console.error(error);
     }
   }
-  getLMAllExtra = (trackingId: string): Promise<any> | IListManagerAll[] => {
+  getLMAllExtra = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {

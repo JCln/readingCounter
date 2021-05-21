@@ -132,7 +132,7 @@ export interface IOutputManager {
 // 
 
 // List Manager
-export interface IListManagerAll {
+export interface IOnOffLoadFlat {
     id: string,
     trackNumber: number,
     billId: string,
@@ -725,4 +725,10 @@ export interface IFragmentDetails {
     isNew?: boolean
 }
 
-//
+// SEARCH   
+export interface ISearchMoshReq {
+    zoneId: number,
+    searchBy: number,
+    item: string,
+    similar: boolean
+}

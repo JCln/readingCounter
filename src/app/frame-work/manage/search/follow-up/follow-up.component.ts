@@ -37,7 +37,7 @@ export class FollowUpComponent implements OnInit {
       this.routeToChild();
   }
   private routeToChild = () => {
-    this.router.navigate(['wr/m/track/fwu/', this.trackNumber])
+    this.router.navigate(['wr/m/s/fwu/', this.trackNumber])
   }
 
 

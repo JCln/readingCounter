@@ -48,12 +48,13 @@ export class CloseTabService {
   saveDataForTrackReading: any;
   saveDataForTrackOffloaded: any;
   saveDataForTrackFinished: any;
-  saveDataForFollowUp: any;
   saveDataForLastStates: any;
   saveDataForOffloadModify: any;
   // import dynamic
   saveDataForImportDynamic: any;
-  // 
+  // SEARCH
+  saveDataForFollowUp: any;
+  saveDataForSearchMoshtarakin: any;
   // list manager
   saveDataForLMPD: any;
   saveDataForLMAll: any;
@@ -171,6 +172,7 @@ export class CloseTabService {
         break;
       case '/wr/msge':
         break;
+      //  trackings
       case '/wr/m/track/imported':
         this.saveDataForTrackImported = '';
         break;
@@ -189,6 +191,11 @@ export class CloseTabService {
       case '/wr/m/track/finished':
         this.saveDataForTrackFinished = '';
         break;
+      // searchs
+      case '/wr/m/s/searchMosh':
+        this.saveDataForSearchMoshtarakin = '';
+        break;
+      // 
       case '/wr/privacy':
         break;
       case '/wr/m/l/pd':
@@ -231,7 +238,7 @@ export class CloseTabService {
       this.saveDataForOffloadModify = '';
       return;
     }
-    if (url.includes('/wr/m/track/fwu')) {
+    if (url.includes('/wr/m/s/fwu')) {
       this.saveDataForFollowUp = '';
       return;
     }
@@ -279,6 +286,7 @@ export class CloseTabService {
     this.saveDataForZoneBound = '';
     this.saveDataForAllUsers = '';
     this.saveDictionaryForAllUsers = '';
+    this.saveDataForSearchMoshtarakin = '';
     this.saveDataForEditUsers = '';
     this.saveDictionaryForEditUsers = '';
     this.saveDataForForAddUsers = '';
