@@ -119,7 +119,7 @@ export class HelpWrapperService {
       this.messageToShow.title = 'جستجوی مشترک';
       this.messageToShow.messageOne = 'برای جستجوی مشترک میتوان به 4 طریق قابل مشاهده در تصویر اقدام نمود. ';
       this.messageToShow.imgOne = 'assets/imgs/help/search/search_mosh.JPG';
-      this.messageToShow.messageTwo = 'جستجوی موارد مشابه بمعنای جستجوی تقریبی مقادیر است. مثلا عدد 10 در جستجوی اشتراک میتواند شامل همه‌ی مقادیری که این عدد در آنها هستند باشد.  ';
+      this.messageToShow.messageTwo = 'جستجوی موارد مشابه بمعنای جستجوی تقریبی مقادیر است و نه دقیقا مقدار وارد شده.';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
       return;
