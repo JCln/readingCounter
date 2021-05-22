@@ -115,6 +115,15 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
+    else if (currentRoute === '/wr/m/s/searchMosh') {
+      this.messageToShow.title = 'جستجوی مشترک';
+      this.messageToShow.messageOne = 'برای جستجوی مشترک میتوان به 4 طریق قابل مشاهده در تصویر اقدام نمود. ';
+      this.messageToShow.imgOne = 'assets/imgs/help/search/search_mosh.JPG';
+      this.messageToShow.messageTwo = 'جستجوی موارد مشابه بمعنای جستجوی تقریبی مقادیر است. مثلا عدد 10 در جستجوی اشتراک میتواند شامل همه‌ی مقادیری که این عدد در آنها هستند باشد.  ';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
     else if (currentRoute === '/wr/profile') {
       this.messageToShow.title = 'تنظیمات کاربری';
       this.messageToShow.messageOne = 'مشخصات کاربری شما در این قسمت قابل مشاهده است، درصورتی نیاز به تغییر گذرواژه نیز میتوان اقدام نمود.';

@@ -38,7 +38,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
 
   /* TODO// show dialog box to add excel file*/
   openAddDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(Tabsare2AddDgComponent,
         {
           disableClose: true,

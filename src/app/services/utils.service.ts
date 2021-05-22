@@ -35,7 +35,7 @@ export class UtilsService {
   isNullWithText = (value: string | number, text: string, color: ENSnackBarColors): boolean => {
     if (typeof value === 'undefined' || !value || value.toString().trim().length === 0) {
       this.snackWrapperService.openSnackBar(text, 3000, color);
-      return false
+      return false;
     }
     return true;
   }

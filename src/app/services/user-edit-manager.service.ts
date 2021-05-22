@@ -68,30 +68,31 @@ export class UserEditManagerService {
       return false;
     if (!this.utilsService.isNullWithText(this.dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.selectedZones[0], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
+    if (!this.utilsService.isNullWithText(this.dataSource.selectedZones[1], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
       return false;
+
     return true;
   }
   vertification = () => {
-    if (!this.checkEmptyUserInfos())
+    if (!this.checkEmptyUserInfos()) {
       return false;
+    }
     if (!this.utilsService.mobileValidation(this.dataSource.mobile))
       return false;
     if (this.dataSource.email)
       if (!this.utilsService.isEmailValid(this.dataSource.email))
         return false;
+
     return true;
   }
   private connectToServer = (vals: IAUserEditSave) => {
     this.dataSource = vals;
     if (!this.vertification())
-      return false;
+      return;
     this.interfaceManagerService.postUserManager(vals).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
         this.utilsService.routeToByUrl('/wr/mu/all');
-
-        this.snackWrapperService.openSnackBar(EN_messages.access_whenLoginAgain, ENSnackBarTimes.tenMili, ENSnackBarColors.success);
       }
     });
   }
