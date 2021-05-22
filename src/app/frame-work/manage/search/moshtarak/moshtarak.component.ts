@@ -87,7 +87,7 @@ export class MoshtarakComponent implements OnInit {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === ('/wr/m/s/searchMosh')) {
+        if (res === '/wr/m/s/searchMosh') {
           this.classWrapper(true);
         }
       }

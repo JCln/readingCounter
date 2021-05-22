@@ -119,10 +119,10 @@ export class CloseTabService {
         this.saveDataForBadgetFormula = '';
         break;
       case '/wr/m/r/formula/tabsare2':
-        this.saveDataForTabsare3Formula = '';
+        this.saveDataForTabsare2Formula = '';
         break;
       case '/wr/m/r/formula/tabsare3':
-        this.saveDataForTabsare2Formula = '';
+        this.saveDataForTabsare3Formula = '';
         break;
       // auths manage
       case '/wr/m/al/ap':
@@ -271,6 +271,10 @@ export class CloseTabService {
   // 
 
   cleanAllData = () => {
+    this.saveDataForWaterFormula = '';
+    this.saveDataForBadgetFormula = '';
+    this.saveDataForTabsare2Formula = '';
+    this.saveDataForTabsare3Formula = '';
     this.saveDataForAppLevel1 = '';
     this.saveDataForAppLevel2 = '';
     this.saveDataForAppLevel3 = '';
