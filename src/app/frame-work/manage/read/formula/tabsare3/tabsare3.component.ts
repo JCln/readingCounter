@@ -201,5 +201,7 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-
+  getExcelSample = async () => {
+    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelTabsare3Sample());
+  }
 }

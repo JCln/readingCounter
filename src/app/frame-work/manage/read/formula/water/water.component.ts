@@ -201,18 +201,8 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  // getExcelSample = async () => {
-  //   const a = await this.formulasService.getExcelAbBahaSample();
-  //   console.log(typeof a);
-
-
-  //   let reader = new FileReader();
-  //   reader.addEventListener("load", () => {
-  //     reader.result
-  //   }, false);
-  //   // reader.readAsDataURL();
-  //   console.log(reader);
-
-  // }
+  getExcelSample = async () => {
+    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelAbBahaSample());
+  }
 
 }

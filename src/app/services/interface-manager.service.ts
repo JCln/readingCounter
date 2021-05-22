@@ -18,9 +18,9 @@ export class InterfaceManagerService {
   postAbBahaFormulaEdit = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/AbBahaFormula/Edit', body);
   }
-  /* FOR TEST PORPUSE USE PROMISE IN THIS CLASS, NOT TEMPORARILY */
+
   getAbBahaFormulaExcelSample = (): Observable<any> => {
-    return this.mainService.GET('v1/abbahaformula/excelsample');
+    return this.mainService.GETBLOB('v1/abbahaformula/excelsample');
   }
   postAbBahaFormulaAdd = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/AbBahaFormula/Add', body);
@@ -38,12 +38,8 @@ export class InterfaceManagerService {
   postBudgetFormulaEdit = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/BudgetFormula/Edit', body);
   }
-  getBudgetFormulaExcelSample = (): Promise<any> => {
-    return new Promise((resolve, reject) => {
-      this.mainService.GET('V1/BudgetFormula/ExcelSample').toPromise().then(res => {
-        resolve(res);
-      })
-    });
+  getBudgetFormulaExcelSample = (): Observable<any> => {
+    return this.mainService.GETBLOB('V1/BudgetFormula/ExcelSample');
   }
   postBudgetFormulaAdd = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/BudgetFormula/Add', body);
@@ -72,7 +68,7 @@ export class InterfaceManagerService {
     return this.mainService.GET('V1/Tabsare3Formula/All');
   }
   getTabsare3ExcelSample = (): Observable<any> => {
-    return this.mainService.GET('V1/Tabsare3Formula/ExcelSample');
+    return this.mainService.GETBLOB('V1/Tabsare3Formula/ExcelSample');
   }
   postTabsare3FormulaEdit = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/Tabsare3Formula/Edit', body);
@@ -441,7 +437,7 @@ export class InterfaceManagerService {
 
   // downlaod manager
   downloadFile = (fileRepositoryId: string): Observable<any> => {
-    return this.mainService.GETBLOB(fileRepositoryId, 'V1/Download/File');
+    return this.mainService.GETBLOB('V1/Download/File', fileRepositoryId);
   }
   downloadFileInfo = (targetId: string): Observable<any> => {
     return this.mainService.GETID(targetId, 'V1/Download/File/info');

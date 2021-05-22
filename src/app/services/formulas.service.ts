@@ -283,6 +283,28 @@ export class FormulasService {
       console.error(error);
     }
   }
+  getExcelBudgetSample = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getBudgetFormulaExcelSample().subscribe(res => {
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  getExcelTabsare3Sample = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getTabsare3ExcelSample().subscribe(res => {
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   /* VALIDATION */
   isNull = (): boolean => {
     if (this.utilsService.isNull(this.desc.rows)) {
