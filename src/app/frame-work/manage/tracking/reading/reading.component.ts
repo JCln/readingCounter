@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -11,7 +12,6 @@ import { TrackingManagerService } from 'src/app/services/tracking-manager.servic
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
-import { EN_messages } from './../../../../Interfaces/enums.enum';
 
 
 @Component({

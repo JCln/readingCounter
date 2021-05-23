@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { IOnOffLoadFlat } from '../Interfaces/imanage';
-import { IObjectIteratation } from '../Interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { CloseTabService } from './close-tab.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
@@ -177,5 +177,51 @@ export class ListManagerService {
   postLMPDXY = (body: object): Observable<any> => {
     return this.interfaceManagerService.postLMPDXY(body);
   }
+  /*OTHER */
+  setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
+    dataSource.forEach(item => {
+      if (item.newRate > 0)
+        item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
+      if (item.gisAccuracy.length > 0)
+        item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+    })
+  }
 
+  convertQotrIdToTitle = (dataSource: any[], qotrDictionary: IDictionaryManager[]) => {
+    qotrDictionary.map(qotrDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.qotrCode == qotrDic.id) {
+          dataSource.qotrCode = qotrDic.title;
+        }
+      })
+    });
+  }
+  convertCounterStateIdToTitle = (dataSource: any[], CounterStateDictionary: IDictionaryManager[]) => {
+    CounterStateDictionary.map(CounterStateDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.counterStateCode == CounterStateDic.id) {
+          dataSource.counterStateCode = CounterStateDic.title;
+          dataSource.preCounterStateCode = CounterStateDic.title;
+        }
+      })
+    });
+  }
+  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
+    zoneDictionary.map(zoneDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.zoneId == zoneDic.id) {
+          dataSource.zoneId = zoneDic.title;
+        }
+      })
+    });
+  }
+  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
+    karbariDictionary.map(karbariDic => {
+      dataSource.map(dataSource => {
+        if (dataSource.karbariCode == karbariDic.id) {
+          dataSource.karbariCode = karbariDic.title;
+        }
+      })
+    });
+  }
 }

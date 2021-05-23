@@ -41,43 +41,6 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getRouteParams();
   }
 
-  convertQotrIdToTitle = (dataSource: any[], qotrDictionary: IDictionaryManager[]) => {
-    qotrDictionary.map(qotrDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.qotrCode == qotrDic.id) {
-          dataSource.qotrCode = qotrDic.title;
-        }
-      })
-    });
-  }
-  convertCounterStateIdToTitle = (dataSource: any[], CounterStateDictionary: IDictionaryManager[]) => {
-    CounterStateDictionary.map(CounterStateDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.counterStateCode == CounterStateDic.id) {
-          dataSource.counterStateCode = CounterStateDic.title;
-          dataSource.preCounterStateCode = CounterStateDic.title;
-        }
-      })
-    });
-  }
-  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.zoneId == zoneDic.id) {
-          dataSource.zoneId = zoneDic.title;
-        }
-      })
-    });
-  }
-  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
-    karbariDictionary.map(karbariDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.karbariCode == karbariDic.id) {
-          dataSource.karbariCode = karbariDic.title;
-        }
-      })
-    });
-  }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.listManagerService.nullSavedAllLMSource();
@@ -90,11 +53,12 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
 
-    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
-    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
-    this.convertQotrIdToTitle(this.dataSource, this.qotrDictionary);
-    this.convertCounterStateIdToTitle(this.dataSource, this.counterStateDictionary);
+    this.listManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    this.listManagerService.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+    this.listManagerService.convertQotrIdToTitle(this.dataSource, this.qotrDictionary);
+    this.listManagerService.convertCounterStateIdToTitle(this.dataSource, this.counterStateDictionary);
 
+    this.setDynamicRages();
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
@@ -161,4 +125,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   toPrePage = () => this._location.back();
+  setDynamicRages = () => {
+    this.listManagerService.setDynamicPartRanges(this.dataSource);
+  }
 }
