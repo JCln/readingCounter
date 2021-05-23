@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ITitleValue } from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'src/app/Interfaces/ioverall-config';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { EN_messages } from '../Interfaces/enums.enum';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { IReadingReportWithZoneIDsReq } from './../Interfaces/imanage';
+import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 @Injectable({
@@ -44,7 +45,8 @@ export class ForbiddenService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private converterService: ConverterService
   ) { }
 
   /* API CALL */
@@ -104,7 +106,9 @@ export class ForbiddenService {
     this.forbiddenReq = forbidden;
     return this.datesValidationForbidden();
   }
-
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
+  }
 }
 
 

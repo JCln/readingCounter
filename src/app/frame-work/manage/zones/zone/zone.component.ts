@@ -136,14 +136,6 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      zoneDictionary.map(zoneDic => {
-        if (zoneDic.id === dataSource.regionId)
-          dataSource.regionId = zoneDic.title;
-      })
-    });
-  }
   filterSearchs = () => {
 
     if (this.dataSource.paginator) {
@@ -196,7 +188,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     this.zoneDictionary = await this.sectorsManagerService.getRegionDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
-    this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);
+    this.sectorsManagerService.convertIdToTitle(this.dataSource.data, this.zoneDictionary, 'regionId');
     this.filterSearchs();
 
   }

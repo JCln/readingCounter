@@ -33,19 +33,10 @@ export class TraverseResComponent implements OnInit {
     this._selectCols = this.readingReportManagerService.columnSelectedRRTraverse();
     this._selectedColumns = this.customizeSelectedColumns();
   }
-  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
-    karbariDictionary.map(karbariDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.karbariCode == karbariDic.id) {
-          dataSource.karbariCode = karbariDic.title;
-        }
-      })
-    });
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRTraverseManager();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+    this.outputManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

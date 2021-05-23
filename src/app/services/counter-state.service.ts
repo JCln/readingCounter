@@ -3,7 +3,8 @@ import { LazyLoadEvent } from 'primeng/api';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { ICounterStateGridFriendlyReq } from '../Interfaces/imanage';
-import { IObjectIteratation } from '../Interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
+import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 
@@ -14,7 +15,8 @@ export class CounterStateService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    private converterService: ConverterService
   ) { }
 
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
@@ -145,6 +147,7 @@ export class CounterStateService {
   getZoneDictionary = (): any => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
-
-
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
+  }
 }

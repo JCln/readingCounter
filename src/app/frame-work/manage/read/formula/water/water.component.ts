@@ -70,22 +70,6 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   nullSavedSource = () => this.closeTabService.saveDataForWaterFormula = null;
-  convertKarbariCodeToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      zoneDictionary.map(zoneDic => {
-        if (zoneDic.id === dataSource.karbariMoshtarakinCode)
-          dataSource.karbariMoshtarakinCode = zoneDic.title;
-      })
-    });
-  }
-  convertZoneIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      zoneDictionary.map(zoneDic => {
-        if (zoneDic.id === dataSource.zoneId)
-          dataSource.zoneId = zoneDic.title;
-      })
-    });
-  }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
@@ -100,8 +84,8 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
 
-    this.convertZoneIdToTitle(this.dataSource, this.zoneDictionary);
-    this.convertKarbariCodeToTitle(this.dataSource, this.karbariCodeDictionary);
+    this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    this.formulasService.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

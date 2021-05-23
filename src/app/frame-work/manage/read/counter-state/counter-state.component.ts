@@ -44,14 +44,6 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
   sendGridFriendlyDataSource = (event: LazyLoadEvent): any => {
     this.counterStateService.getGridFriendlyDataSource(event);
   }
-  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      zoneDictionary.map(zoneDic => {
-        if (zoneDic.id === dataSource.zoneId)
-          dataSource.zoneId = zoneDic.title;
-      })
-    });
-  }
   nullSavedSource = () => this.closeTabService.saveDataForCounterState = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -66,7 +58,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.zoneDictionary = await this.counterStateService.getZoneDictionary();
     this.dataSource = this.dataSourceRES.data;
-    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    this.counterStateService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   ngOnInit(): void {
     this.classWrapper();

@@ -5,6 +5,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { IOnOffLoadFlat } from '../Interfaces/imanage';
 import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { CloseTabService } from './close-tab.service';
+import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
 
@@ -108,7 +109,8 @@ export class ListManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private closeTabService: CloseTabService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private converterService: ConverterService
   ) { }
 
   whereToSave = (): number => {
@@ -186,42 +188,7 @@ export class ListManagerService {
         item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
     })
   }
-
-  convertQotrIdToTitle = (dataSource: any[], qotrDictionary: IDictionaryManager[]) => {
-    qotrDictionary.map(qotrDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.qotrCode == qotrDic.id) {
-          dataSource.qotrCode = qotrDic.title;
-        }
-      })
-    });
-  }
-  convertCounterStateIdToTitle = (dataSource: any[], CounterStateDictionary: IDictionaryManager[]) => {
-    CounterStateDictionary.map(CounterStateDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.counterStateCode == CounterStateDic.id) {
-          dataSource.counterStateCode = CounterStateDic.title;
-          dataSource.preCounterStateCode = CounterStateDic.title;
-        }
-      })
-    });
-  }
-  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.zoneId == zoneDic.id) {
-          dataSource.zoneId = zoneDic.title;
-        }
-      })
-    });
-  }
-  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
-    karbariDictionary.map(karbariDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.karbariCode == karbariDic.id) {
-          dataSource.karbariCode = karbariDic.title;
-        }
-      })
-    });
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
 }

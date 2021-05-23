@@ -158,6 +158,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
+    lat = this.utilsService.getRangeTo(lat, 7);
+    lat = this.utilsService.getRangeTo(lag, 7);
+
     this.map.flyTo([(lat), (lag)], zoom);
   }
   private addButtonsToLeaflet = () => {

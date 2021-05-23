@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { IObjectIteratation } from '../Interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
+import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
@@ -13,7 +14,8 @@ export class TextOutputFieldManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private converterService: ConverterService
   ) { }
 
   /* GRID COLUMNS */
@@ -42,6 +44,9 @@ export class TextOutputFieldManagerService {
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary()
+  }
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
 
 }

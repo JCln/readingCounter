@@ -35,15 +35,6 @@ export class KarkardResComponent implements OnInit, OnDestroy {
         return items
     })
   }
-  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
-    karbariDictionary.map(karbariDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.karbariCode == karbariDic.id) {
-          dataSource.karbariCode = karbariDic.title;
-        }
-      })
-    });
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnSelectedRRKarkard();
     this._selectedColumns = this.customizeSelectedColumns();
@@ -51,7 +42,7 @@ export class KarkardResComponent implements OnInit, OnDestroy {
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRKarkardManager();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+    this.outputManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

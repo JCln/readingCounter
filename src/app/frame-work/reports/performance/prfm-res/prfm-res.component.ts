@@ -34,15 +34,6 @@ export class PrfmResComponent implements OnInit {
         return items
     })
   }
-  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.zoneId == zoneDic.id) {
-          dataSource.zoneId = zoneDic.title;
-        }
-      })
-    });
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRAnalyzeByParam();
     this._selectedColumns = this.customizeSelectedColumns();
@@ -51,7 +42,7 @@ export class PrfmResComponent implements OnInit {
     this.dataSource = await this.readingReportManagerService.postRRAnalyzeByParamManager();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.setGetRanges();
-    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    this.outputManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

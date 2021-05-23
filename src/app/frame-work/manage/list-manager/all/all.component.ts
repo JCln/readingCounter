@@ -53,10 +53,11 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
 
-    this.listManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary);
-    this.listManagerService.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
-    this.listManagerService.convertQotrIdToTitle(this.dataSource, this.qotrDictionary);
-    this.listManagerService.convertCounterStateIdToTitle(this.dataSource, this.counterStateDictionary);
+    this.listManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    this.listManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.listManagerService.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    this.listManagerService.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateCode');
+    this.listManagerService.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'preCounterStateCode');
 
     this.setDynamicRages();
     if (this.dataSource.length)

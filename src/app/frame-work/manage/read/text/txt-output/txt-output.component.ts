@@ -30,14 +30,6 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      zoneDictionary.map(zoneDic => {
-        if (zoneDic.id === dataSource.zoneId)
-          dataSource.zoneId = zoneDic.title;
-      })
-    });
-  }
   nullSavedSource = () => this.closeTabService.saveDataForTextOutput = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -51,7 +43,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForTextOutput = this.dataSource;
     }
     this.zoneDictionary = await this.textOutputFieldManagerService.getZoneDictionary();
-    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    this.textOutputFieldManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

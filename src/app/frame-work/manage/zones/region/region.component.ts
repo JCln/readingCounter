@@ -118,14 +118,6 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.provinceId)
-          dataSource.provinceId = zoneDic.title;
-      })
-    });
-  }
   filterSearchs = () => {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -170,7 +162,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     this.regionDictionary = await this.sectorsManagerService.getProvinceDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
-    this.convertIdToTitle(this.dataSource.data, this.regionDictionary);
+    this.sectorsManagerService.convertIdToTitle(this.dataSource.data, this.regionDictionary, 'provinceId');
     this.filterSearchs();
   }
   ngOnInit() {

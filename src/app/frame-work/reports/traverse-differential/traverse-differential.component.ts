@@ -50,15 +50,6 @@ export class TraverseDifferentialComponent implements OnInit, AfterViewInit, OnD
     private closeTabService: CloseTabService
   ) { }
 
-  convertTraverseTypeToTitle = (dataSource: any[], dictionary: IDictionaryManager[]) => {
-    dictionary.map(diction => {
-      dataSource.map(dataSource => {
-        if (dataSource.traverseType == diction.id) {
-          dataSource.traverseType = diction.title;
-        }
-      })
-    });
-  }
   nullSavedSource = () => this.closeTabService.saveDataForRRTraverseDifferential = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -66,7 +57,7 @@ export class TraverseDifferentialComponent implements OnInit, AfterViewInit, OnD
     }
     if (this.closeTabService.saveDataForRRTraverseDifferential) {
       this.readingReportReq = this.closeTabService.saveDataForRRTraverseDifferential;
-    }    
+    }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.getTraverseDiffrentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();

@@ -118,16 +118,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
-
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.countryId == zoneDic.id) {
-          dataSource.countryId = zoneDic.title;
-        }
-      })
-    });
-  }
   filterSearchs = () => {
     this.dataSource.filterPredicate = this.createFilter();
 
@@ -168,7 +158,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     this.countryDictionary = await this.sectorsManagerService.getCountryDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
-    this.convertIdToTitle(this.dataSource.data, this.countryDictionary);
+    this.sectorsManagerService.convertIdToTitle(this.dataSource.data, this.countryDictionary, 'countryId');
     this.filterSearchs();
   }
   ngOnInit() {

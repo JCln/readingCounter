@@ -4,7 +4,9 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 import * as XLSX from 'xlsx';
 
 import { EN_messages } from '../Interfaces/enums.enum';
+import { IDictionaryManager } from '../Interfaces/ioverall-config';
 import { IOutputManager } from './../Interfaces/imanage';
+import { ConverterService } from './converter.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -19,7 +21,8 @@ export class OutputManagerService {
   };
 
   constructor(
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private converterService: ConverterService
   ) {
   }
 
@@ -123,4 +126,8 @@ export class OutputManagerService {
       FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
     });
   }
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
+  }
+
 }

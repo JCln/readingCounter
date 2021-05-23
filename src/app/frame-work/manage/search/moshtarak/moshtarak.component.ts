@@ -42,22 +42,6 @@ export class MoshtarakComponent implements OnInit {
   ) {
   }
 
-  convertKarbariIdToTitle = (dataSource: any, dictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      dictionary.map(Dict => {
-        if (Dict.id === dataSource.karbariCode)
-          dataSource.karbariCode = Dict.title;
-      })
-    });
-  }
-  convertCounterStateIdToTitle = (dataSource: any, dictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      dictionary.map(Dict => {
-        if (Dict.id === dataSource.counterStateCode)
-          dataSource.counterStateCode = Dict.title;
-      })
-    });
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.searchService.columnSearchMoshtarakin();
     this._selectedColumns = this.searchService.customizeSelectedColumns(this._selectCols);
@@ -69,8 +53,8 @@ export class MoshtarakComponent implements OnInit {
     this.counterStateDictionary = await this.searchService.getCounterStateDictionary(this.searchReq.zoneId);
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
 
-    this.convertCounterStateIdToTitle(this.dataSource, this.counterStateDictionary);
-    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+    this.outputManagerService.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateCode');
+    this.outputManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.insertSelectedColumns();
   }
   nullSavedSource = () => this.closeTabService.saveDataForSearchMoshtarakin = null;

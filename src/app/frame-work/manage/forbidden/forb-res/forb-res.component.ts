@@ -25,14 +25,6 @@ export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService
   ) { }
 
-  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      zoneDictionary.map(zoneDic => {
-        if (zoneDic.id === dataSource.zoneId)
-          dataSource.zoneId = zoneDic.title;
-      })
-    });
-  }
   customizeSelectedColumns = () => {
     return this._selectCols.filter(items => {
       if (items.isSelected)
@@ -56,7 +48,7 @@ export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
     this.closeTabService.saveDataForForbidden = this.dataSource;
     // }
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
-    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    this.forbiddenService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }

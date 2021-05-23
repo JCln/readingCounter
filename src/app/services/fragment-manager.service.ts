@@ -6,6 +6,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 import { EN_messages } from '../Interfaces/enums.enum';
 import { IFragmentDetails, IFragmentMaster } from './../Interfaces/imanage';
+import { ConverterService } from './converter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,8 @@ export class FragmentManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private converterService: ConverterService
   ) { }
 
   /* Master */
@@ -320,5 +322,7 @@ export class FragmentManagerService {
     if (!this.zoneDictionary)
       this.zoneDictionary = zoneDic;
   }
-
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
+  }
 }

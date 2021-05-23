@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -8,6 +8,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 import { IAbBahaFormula, ITabsare2Formula } from './../Interfaces/imanage';
 import { IObjectIteratation } from './../Interfaces/ioverall-config';
+import { ConverterService } from './converter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class FormulasService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private converterService: ConverterService
   ) { }
 
   /* COLUMNS */
@@ -429,5 +431,8 @@ export class FormulasService {
     if (!this.validationEditableRow(dataSource))
       return false;
     return true;
+  }
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
 }

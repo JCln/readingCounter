@@ -28,19 +28,10 @@ export class DetailsResComponent implements OnInit {
         return items
     })
   }
-  convertKarbariIdToTitle = (dataSource: any[], karbariDictionary: IDictionaryManager[]) => {
-    karbariDictionary.map(karbariDic => {
-      dataSource.map(dataSource => {
-        if (dataSource.karbariCode == karbariDic.id) {
-          dataSource.karbariCode = karbariDic.title;
-        }
-      })
-    });
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.postRRDetailsManager();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+    this.outputManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

@@ -38,14 +38,6 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  convertIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      zoneDictionary.map(zoneDic => {
-        if (zoneDic.id === dataSource.zoneId)
-          dataSource.zoneId = zoneDic.title;
-      })
-    });
-  }
   nullSavedSource = () => this.closeTabService.saveDataForFragmentNOB = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -59,7 +51,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForFragmentNOB = this.dataSource;
     }
     this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
-    this.convertIdToTitle(this.dataSource, this.zoneDictionary);
+    this.fragmentManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.defaultAddStatus();
     if (this.dataSource.length)
       this.insertSelectedColumns();

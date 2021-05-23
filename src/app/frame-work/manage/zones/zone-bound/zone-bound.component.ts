@@ -127,14 +127,6 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.zoneId)
-          dataSource.zoneId = zoneDic.title;
-      })
-    });
-  }
   filterSearchs = () => {
     this.dataSource.paginator = this.paginator;
 
@@ -210,7 +202,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     this.zoneBoundDictionary = await this.sectorsManagerService.getZoneDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
 
-    this.convertIdToTitle(this.zoneBoundDictionary, this.zoneBoundDictionary);
+    this.sectorsManagerService.convertIdToTitle(this.zoneBoundDictionary, this.zoneBoundDictionary, 'zoneId');
     this.filterSearchs();
   }
   ngOnInit() {

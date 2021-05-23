@@ -55,15 +55,6 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   nullSavedSource = () => this.closeTabService.saveDataForTabsare2Formula = null;
-
-  convertZoneIdToTitle = (dataSource: any, zoneDictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      zoneDictionary.map(zoneDic => {
-        if (zoneDic.id === dataSource.zoneId)
-          dataSource.zoneId = zoneDic.title;
-      })
-    });
-  }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
@@ -77,7 +68,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
 
-    this.convertZoneIdToTitle(this.dataSource, this.zoneDictionary);
+    this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

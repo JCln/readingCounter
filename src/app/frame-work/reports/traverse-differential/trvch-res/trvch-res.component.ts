@@ -36,15 +36,6 @@ export class TrvchResComponent implements OnInit, OnDestroy {
         return items
     })
   }
-  convertKarbariIdToTitle = (dataSource: any[], dictionary: IDictionaryManager[]) => {
-    dictionary.map(diction => {
-      dataSource.map(dataSource => {
-        if (dataSource.karbariCode == diction.id) {
-          dataSource.karbariCode = diction.title;
-        }
-      })
-    });
-  }
 
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnSelectedRRTraverseDifferential();
@@ -54,7 +45,7 @@ export class TrvchResComponent implements OnInit, OnDestroy {
     this.dataSource = await this.readingReportManagerService.postRRTraverseDiffrentialManager();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
 
-    this.convertKarbariIdToTitle(this.dataSource, this.karbariDictionary);
+    this.outputManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { IDictionaryManager } from '../Interfaces/ioverall-config';
+import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 
@@ -10,7 +12,8 @@ export class AuthsManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    private converterService: ConverterService
   ) { }
 
   getAuth1DataSource = (): Promise<any> => {
@@ -66,6 +69,9 @@ export class AuthsManagerService {
   }
   getAuthLevel3Dictionary = (): any => {
     return this.dictionaryWrapperService.getAuthLev3Dictionary();
+  }
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
 
 }

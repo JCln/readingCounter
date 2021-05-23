@@ -114,14 +114,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[]) => {
-    dictionary.map(dic => {
-      dataSource.map(dataSource => {
-        if (dic.id === dataSource.authLevel3Id)
-          dataSource.authLevel3Id = dic.title;
-      })
-    });
-  }
+
   filter = () => {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -158,7 +151,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
     }
     this.auth3Dictionary = await this.authsManagerService.getAuthLevel3Dictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
-    this.convertIdToTitle(this.dataSource.data, this.auth3Dictionary);
+    this.authsManagerService.convertIdToTitle(this.dataSource.data, this.auth3Dictionary, 'authLevel3Id');
     this.filter();
   }
   ngOnInit() {

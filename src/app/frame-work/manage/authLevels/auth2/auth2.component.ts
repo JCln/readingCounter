@@ -111,14 +111,6 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[]) => {
-    dictionary.map(dictionary => {
-      dataSource.map(dataSource => {
-        if (dictionary.id == dataSource.authLevel1Id)
-          dataSource.authLevel1Id = dictionary.title;
-      })
-    });
-  }
   filter = () => {
     this.dataSource.filterPredicate = this.createFilter();
 
@@ -150,7 +142,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
     }
     this.auth1Dictionary = await this.authsManagerService.getAuthLevel1Dictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
-    this.convertIdToTitle(this.dataSource.data, this.auth1Dictionary);
+    this.authsManagerService.convertIdToTitle(this.dataSource.data, this.auth1Dictionary, 'authLevel1Id');
     this.filter();
   }
   ngOnInit() {

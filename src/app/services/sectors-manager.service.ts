@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { IDictionaryManager } from '../Interfaces/ioverall-config';
+import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 
@@ -10,7 +12,8 @@ export class SectorsManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    private converterService: ConverterService
   ) { }
 
   getProvinceDataSource = (): any => {
@@ -71,6 +74,9 @@ export class SectorsManagerService {
   }
   getZoneDictionary = (): any => {
     return this.dictionaryWrapperService.getZoneDictionary();
+  }
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
 
 }
