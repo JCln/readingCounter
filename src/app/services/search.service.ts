@@ -74,7 +74,7 @@ export class SearchService {
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'dateDifference', header: 'طول دوره', isSelected: false },
-      { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: false },
+      { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ];
   }

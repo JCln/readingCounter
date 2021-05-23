@@ -1,7 +1,6 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-     >
+    [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -69,7 +68,26 @@
                     <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    {{dataSource[col.field]}}
+                    <ng-container *ngIf="col.field === 'masrafStateId';else showText">
+                        <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
+                            <div class="tooltip_text">عادی</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
+                            <div class="tooltip_text">پایین</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
+                            <div class="tooltip_text">بالا</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">0
+                            <div class="tooltip_text">صفر</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
+                            <div class="tooltip_text">غیرقابل محاسبه</div>
+                        </i>
+                    </ng-container>
+                    <ng-template #showText>
+                        {{dataSource[col.field]}}
+                    </ng-template>
                 </ng-template>
             </td>
             <td *ngIf="!isModify" (click)="routeToWoui(dataSource)">

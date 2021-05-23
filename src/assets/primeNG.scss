@@ -183,3 +183,24 @@ input {
   font-weight: 600;
   color: $gray_700;
 }
+
+/*ICONS*/
+.pi-check {
+  color: $green_500;
+}
+
+.pi-arrow-down {
+  color: $blue_500;
+}
+
+.pi-arrow-up {
+  color: $red_500;
+}
+
+._empty {
+  color: $blue_600;
+}
+
+._mark {
+  color: $red_600;
+}
