@@ -65,9 +65,6 @@ export class UtilsService {
   getRange = (val: any): string => {
     return val.toString().substring(0, 5);
   }
-  getRangeTo = (val: any, to: number): number => {
-    return val.substring(0, to);
-  }
   isExactEqual = (first: string, second: string): boolean => {
     if (first.trim() === second.trim())
       return true;
@@ -91,7 +88,7 @@ export class UtilsService {
   isLowerThanMaxLength = (sth: number | string, maxLength: number): boolean => {
     if (sth.toString().length > maxLength)
       return false;
-    return true
+    return true;
   }
   isFromLowerThanTo = (from: number, to: number) => {
     if (from > to)

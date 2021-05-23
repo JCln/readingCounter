@@ -184,7 +184,7 @@ export class ListManagerService {
     dataSource.forEach(item => {
       if (item.newRate > 0)
         item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
-      if (item.gisAccuracy.length > 0)
+      if (item.gisAccuracy)
         item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
     })
   }
