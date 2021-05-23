@@ -402,6 +402,21 @@ export class FormulasService {
     }
     return true;
   }
+  private fromToValidation = (dynamicValue: any): boolean => {
+    if (dynamicValue.hasOwnProperty('toDate')) {
+      if (!this.utilsService.lengthControl(dynamicValue.toDate, dynamicValue.toDate, 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
+        return false;
+      }
+    }
+    if (dynamicValue.hasOwnProperty('fromDate')) {
+      if (!this.utilsService.lengthControl(dynamicValue.fromDate, dynamicValue.fromDate, 9, 10)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
+        return false;
+      }
+    }
+    return true;
+  }
   /* VERIFICATION */
 
   vertificationExcel = (): boolean => {
@@ -422,6 +437,8 @@ export class FormulasService {
   }
   verificationEditedRow = (dataSource: IAbBahaFormula): boolean => {
     if (!this.validationEditableRow(dataSource))
+      return false;
+    if (!this.fromToValidation(dataSource))
       return false;
     if (!this.validationRate(dataSource))
       return false;

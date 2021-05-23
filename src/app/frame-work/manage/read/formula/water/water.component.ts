@@ -40,7 +40,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /* TODO// show dialog box to add excel file*/
   openAddDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(WaterAddDgComponent,
         {
           disableClose: true,
@@ -51,21 +51,25 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
           }
 
         });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result)
-          this.formulasService.postAbBahaFormulaAdd(result);
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result) {
+          await this.formulasService.postAbBahaFormulaAdd(result);
+          this.refreshTable();
+        }
       });
     });
   }
   openAddExcelDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
           width: '30rem'
         });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result)
-          this.formulasService.postExcelFile('postAbBahaFormulaAddExcel');
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result) {
+          await this.formulasService.postExcelFile('postAbBahaFormulaAddExcel');
+          this.refreshTable();
+        }
       });
     });
   }
@@ -140,7 +144,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.removeRow(rowData, rowIndex)
+          this.removeRow(rowData, rowIndex);
         }
       })
     })
@@ -172,6 +176,8 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     await this.formulasService.postAbBahaFormulaEdit(dataSource);
+    this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    this.formulasService.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
   }
   onRowEditCancel(dataSource: IAbBahaFormula, index: number) {
     // this.dataSource[index] = this.clonedProducts[dataSource.id];

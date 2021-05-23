@@ -48,9 +48,11 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
           }
 
         });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result)
-          this.formulasService.postTabsare2FormulaAdd(result);
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result) {
+          await this.formulasService.postTabsare2FormulaAdd(result);
+          this.refreshTable();
+        }
       });
     });
   }
@@ -145,6 +147,8 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
       dataSource.zoneId = dataSource.zoneId['id'];
     }
     await this.formulasService.postTabsare2FormulaEdit(dataSource);
+    this.clonedProducts[dataSource.id] = { ...dataSource };
+    this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel(dataSource: ITabsare2Formula, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];

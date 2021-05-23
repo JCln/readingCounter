@@ -51,21 +51,25 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
           }
 
         });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result)
-          this.formulasService.postTabsare3FormulaAdd(result);
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result) {
+          await this.formulasService.postTabsare3FormulaAdd(result);
+          this.refreshTable();
+        }
       });
     });
   }
   openAddExcelDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
           width: '30rem'
         });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result)
-          this.formulasService.postExcelFile('postTabsare3FormulaAddExcel');
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result) {
+          await this.formulasService.postExcelFile('postTabsare3FormulaAddExcel');
+          this.refreshTable();
+        }
       });
     });
   }
@@ -172,6 +176,8 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
     }
 
     await this.formulasService.postTabsare3FormulaEdit(dataSource);
+    this.formulasService.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
+    this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel(dataSource: IAbBahaFormula, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];
