@@ -83,8 +83,8 @@ export class HelpWrapperService {
       this.messageToShow.title = 'ایجاد مسیر';
       this.messageToShow.messageOne = 'این بخش جهت ایجاد مسیر برای مامورین قرائت درنظر گرفته شده است. از دو طریق میتوان مسیری ایجاد کرد. یک: از طریق دوره زمانی دو: بر اساس تاریخ تنها کافیست موارد مربوطه کامل شود تا مسیری ایجاد گردد.';
       this.messageToShow.imgOne = 'assets/imgs/help/tracking/impd1.JPG';
-      this.messageToShow.messageTwo = 'نکته: امکان ویرایش مقادیر مانند درصد علی الحساب و درصد تصویر وجود دارد';
-      this.messageToShow.messageThree = 'نکته: تا زمانی که پیامی به شکل زیر نمایش داده نشده، مسیری ایجاد نشده است.';
+      this.messageToShow.messageTwo = 'نکته: جهت صدور لیست لازم است دسترسی به "مشاهده دیکشنری" ها در قسمت مدیریت کاربران => مدیریت سامانه ها به کاربر داده شده باشد.';
+      this.messageToShow.messageThree = 'نکته: تا زمانی که پیامی به شکل زیر نمایش داده نشده، مسیری ایجاد نشده است .نکته: امکان ویرایش مقادیر مانند درصد علی الحساب و درصد تصویر وجود دارد.';
       this.messageToShow.imgTwo = 'assets/imgs/help/tracking/impd3.JPG';
       return;
     }

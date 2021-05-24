@@ -24,7 +24,8 @@
             <p>زمان نمایش؟</p>
         </div>
         <div class="_flex_dr_ric" [hidden]="!isShowMap">
-            <button (click)="mapService.backToPreviousPage()" class="_circle_border p_icons tooltip">
+            <button style="z-index: 1;" (click)="mapService.backToPreviousPage()"
+                class="_circle_border p_icons tooltip">
                 <i class="pi pi-arrow-left"></i>
                 <div class="tooltip_text">بازگشت به صفحه قبلی</div>
             </button>

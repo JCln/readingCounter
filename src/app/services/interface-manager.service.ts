@@ -176,6 +176,9 @@ export class InterfaceManagerService {
   postOutputManager = (body: object): any => {
     return this.mainService.POSTBLOB('V1/Output/Dbf', body);
   }
+  postOutputSingleManager = (body: object): Observable<any> => {
+    return this.mainService.POSTBLOB('V1/Output/single', body);
+  }
   // 
 
   // forbidden manager DBF 
@@ -363,6 +366,9 @@ export class InterfaceManagerService {
   }
   getCounterStateByZoneIdDictionary = (zoneId: number): Observable<any> => {
     return this.mainService.GET(`V1/CounterState/DictionaryByZoneId/${zoneId}`);
+  }
+  getCounterStateByCodeDictionary = (zoneId: number): Observable<any> => {
+    return this.mainService.GET(`V1/CounterState/DictionaryBycode/${zoneId}`);
   }
   postCounterStatGridFriendly = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/CounterState/GridFriendly', body);

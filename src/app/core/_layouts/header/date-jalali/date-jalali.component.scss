@@ -18,6 +18,10 @@
     cursor: pointer;
   }
 
+  #datepicker.ui-widget-content {
+    z-index: 100;
+  }
+
   .dp-calendar-weekday {
     font-size: 1.15rem !important;
   }

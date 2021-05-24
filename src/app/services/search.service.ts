@@ -5,8 +5,9 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { Search } from '../classes/search';
-import { ISearchMoshReq } from '../Interfaces/imanage';
-import { IObjectIteratation } from '../Interfaces/ioverall-config';
+import { IOnOffLoadFlat, ISearchMoshReq } from '../Interfaces/imanage';
+import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
+import { ConverterService } from './converter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class SearchService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    private converterService: ConverterService
   ) { }
 
   /*COLUMNS*/
@@ -36,7 +38,6 @@ export class SearchService {
       { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
       { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
       { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true },
-      { field: 'counterStateCode', header: 'وضعیت کنتور', isSelected: true },
       { field: 'address', header: 'آدرس', isSelected: false },
       { field: 'pelak', header: 'پلاک', isSelected: false },
       { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
@@ -46,7 +47,8 @@ export class SearchService {
       // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
       { field: 'postalCode', header: 'کد پستی', isSelected: false },
       { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
-      { field: 'preCounterStateCode', header: 'وضعیت قرائت قبلی', isSelected: false },
+      { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
+      { field: 'counterStateCode', header: 'وضعیت فعلی', isSelected: true },
       { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
       // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
       { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
@@ -98,6 +100,9 @@ export class SearchService {
   }
   getCounterStateDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
+  }
+  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
   }
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -153,5 +158,17 @@ export class SearchService {
   /*VERIFICATION*/
   verificationMosh = (searchReq: ISearchMoshReq): boolean => {
     return this.validationNull(searchReq) && this.validationNumbers(searchReq)
+  }
+
+  setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
+    dataSource.forEach(item => {
+      if (item.newRate > 0)
+        item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
+      if (item.gisAccuracy)
+        item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+    })
+  }
+  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
+    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
 }

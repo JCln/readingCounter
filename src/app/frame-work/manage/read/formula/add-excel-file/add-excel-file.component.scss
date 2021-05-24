@@ -47,6 +47,12 @@ input {
   box-shadow: 1px 1px 8px 1px $gray_400;
 }
 
+.input_1 {
+  margin: 0 auto;
+  width: 19rem;
+  text-align: center;
+}
+
 ._choose_file {
   width: 100%;
   border: 2px solid $blue_400;

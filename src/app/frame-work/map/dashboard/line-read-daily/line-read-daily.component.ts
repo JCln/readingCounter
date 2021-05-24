@@ -101,20 +101,18 @@ export class LineReadDailyComponent implements OnInit {
       tooltips: {
         callbacks: {
           label: function (tooltipItem, data) {
+            // let tooltipLabel = data.labels[tooltipItem.index];
+            // let tooltipLabel = tooltipData;
             let allData: any = data.datasets[tooltipItem.datasetIndex].data;
-            let tooltipLabel = data.labels[tooltipItem.index];
             let tooltipData = allData[tooltipItem.index];
-            let customTooltip = hints[tooltipItem.index]
-            // console.log(tooltipLabel);
-            // console.log(tooltipItem);
-            // console.log(data);
-            // console.log(tooltipData);
+            let customTooltip = hints[tooltipItem.index];
 
-            return customTooltip;
+            return 'مقدار : ' + tooltipData + '  ' + customTooltip;
 
           }
-        }
-
+        },
+        bodyFontFamily: 'Blotus',
+        bodyFontSize: 18
       }
     }
   }

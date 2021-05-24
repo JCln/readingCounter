@@ -26,6 +26,7 @@ export class DictionaryWrapperService {
   private counterReportDictionary: any = [];
   private counterStateDictionary: any = [];
   private counterStateByZoneIdDictionary: any = [];
+  private counterStateByCodeDictionary: any = [];
   private periodKindDictionary: any = [];
   private karbariDictionary: any = [];
   private qotrDictionary: any = [];
@@ -177,6 +178,17 @@ export class DictionaryWrapperService {
     }
     return this.counterStateByZoneIdDictionary;
   }
+  getCounterStateByCodeDictionary(zoneId: number): Promise<any> {
+    if (this.utilsService.isNull(this.counterStateByCodeDictionary)) {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.getCounterStateByCodeDictionary(zoneId).subscribe(res => {
+          this.setCounterStateByCodeDictionary(res);
+          resolve(this.counterStateByCodeDictionary);
+        })
+      });
+    }
+    return this.counterStateByCodeDictionary;
+  }
   getPeriodKindDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.periodKindDictionary)) {
       return new Promise((resolve) => {
@@ -271,6 +283,9 @@ export class DictionaryWrapperService {
     this.counterStateDictionary = v;
   }
   private setCounterStateByZoneIdDictionary(v: any) {
+    this.counterStateByZoneIdDictionary = v;
+  }
+  private setCounterStateByCodeDictionary(v: any) {
     this.counterStateByZoneIdDictionary = v;
   }
   private setPeriodKindDictionary(v: any) {

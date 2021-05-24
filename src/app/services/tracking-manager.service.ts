@@ -72,7 +72,7 @@ export class TrackingManagerService {
       { field: 'itemQuantity', header: 'تعداد', isSelected: true },
       // { field: 'zoneId', header: 'ناحیه', isSelected: false },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
-      { field: 'stateTitle', header: 'منطقه', isSelected: true },
+      { field: 'stateTitle', header: 'مرحله', isSelected: true },
       { field: 'isBazdid', header: 'بازدید', isSelected: false },
       { field: 'year', header: 'سال', isSelected: false },
       { field: 'isRoosta', header: 'روستایی', isSelected: false },
@@ -239,6 +239,17 @@ export class TrackingManagerService {
       toDate: dbfData.toDate
     }
     return this.interfaceManagerService.postOutputManager(a);
+  }
+  downloadOutputSingle = (single: ITracking): Promise<any> => {
+    const a: any = {
+      trackingId: single.id
+    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.postOutputSingleManager(a).toPromise().then(res => {
+        resolve(res);
+      })
+
+    });
   }
   // 
   successSnackMessage = (message: string) => {
