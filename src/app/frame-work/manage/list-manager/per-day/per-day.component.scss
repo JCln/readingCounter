@@ -96,6 +96,10 @@ input {
   margin: 0;
 }
 
+.double_size {
+  grid-column: auto/ span 2;
+}
+
 .header_icons_wrap {
   position: relative;
 

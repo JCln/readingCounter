@@ -12,7 +12,8 @@
     <h1 class="title">اطلاعات مکانی</h1>
     <form #form="ngForm" class="content">
         <div class="_desc">
-            <div class="input_2" *ngFor="let mainDatas of _selectMainDatas">
+            <div class="input_2" [ngClass]="{'double_size':mainDatas.icon}"            
+                *ngFor="let mainDatas of _selectMainDatas">
                 <div class="_key">{{mainDatas.header}}</div>
                 <input [readOnly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"
                     [(ngModel)]="dataSource[mainDatas.field]">

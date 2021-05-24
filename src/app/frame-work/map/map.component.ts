@@ -112,7 +112,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         lines.push([parseFloat(items.y), parseFloat(items.x)]);
         L.polyline(lines, {
           color: '#0e4c92',
-          weight: 3
+          weight: 2
         }).addTo(this.layerGroup);
       }, i * delay);
     })

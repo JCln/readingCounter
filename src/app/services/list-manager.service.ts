@@ -92,15 +92,15 @@ export class ListManagerService {
   }
   columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
     return [
-      { field: 'trackNumber', header: 'ش پیگیری :', isSelected: true, readonly: true },
-      { field: 'listNumber', header: 'ش لیست :', isSelected: true, readonly: true },
-      { field: 'counterReaders', header: 'مامور(ها) :', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک :', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک :', isSelected: true, readonly: true },
-      { field: 'readCount', header: 'قرائت شده :', isSelected: true, readonly: true },
-      { field: 'overalCount', header: 'تعداد کل :', isSelected: true, readonly: true },
-      { field: 'overalDistance', header: 'مسافت کل :', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل :', isSelected: true, readonly: true }
+      { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
+      { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true },
+      { field: 'counterReaders', header: 'مامور(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
+      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
+      { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
+      { field: 'overalDistance', header: 'مسافت کل', isSelected: true, readonly: true },
+      { field: 'overalDuration', header: 'زمان کل', isSelected: true, readonly: true }
 
     ];
   }

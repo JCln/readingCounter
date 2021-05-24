@@ -29,6 +29,12 @@ export class LineReadDailyComponent implements OnInit {
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
+  private defaultOptions = {
+    fontFamily: 'Blotus',
+    fontSize: 16,
+    fontStyle: 'bold',
+    fontColor: 'rgb(112, 112, 112)'
+  }
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
@@ -62,7 +68,7 @@ export class LineReadDailyComponent implements OnInit {
       maintainAspectRatio: false,
       scales: {
         // We use this empty structure as a placeholder for dynamic theming.
-        xAxes: [{}],
+        xAxes: [{ ticks: this.defaultOptions }],
         yAxes: [
           {
             id: 'y-axis-0',
@@ -75,8 +81,7 @@ export class LineReadDailyComponent implements OnInit {
             //   color: 'rgb(14, 76, 146)',
             // },
             ticks: {
-              fontColor: 'rgb(14, 76, 146)',
-              fontFamily: 'Blutos'
+              ticks: this.defaultOptions
             }
           }
         ]

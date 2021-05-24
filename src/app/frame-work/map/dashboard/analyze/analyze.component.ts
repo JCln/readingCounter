@@ -30,6 +30,10 @@ export class AnalyzeComponent implements OnInit {
       position: 'right',
       labels: this.defaultOptions
     },
+    scales: {
+      xAxes: [{ ticks: this.defaultOptions }],
+      yAxes: [{ ticks: this.defaultOptions }]
+    },
     tooltips: {
       footerFontFamily: 'Blotus',
       bodyFontFamily: 'Blotus',
