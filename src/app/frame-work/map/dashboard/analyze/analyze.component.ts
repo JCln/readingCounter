@@ -31,8 +31,13 @@ export class AnalyzeComponent implements OnInit {
       labels: this.defaultOptions
     },
     tooltips: {
+      footerFontFamily: 'Blotus',
+      bodyFontFamily: 'Blotus',
       titleFontFamily: 'Blotus',
-      titleFontSize: 16      
+      bodyFontSize: 18,
+      titleFontSize: 18,
+      footerFontSize: 18,
+      bodyFontStyle: 'bold'
     }
   };
   public radarChartLabels: Label[] = ['کمینه', 'بیشینه', 'میانگین', 'انحراف از معیار', 'میانه', 'مٌد'];

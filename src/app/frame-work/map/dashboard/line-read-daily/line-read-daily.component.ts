@@ -107,12 +107,17 @@ export class LineReadDailyComponent implements OnInit {
             let tooltipData = allData[tooltipItem.index];
             let customTooltip = hints[tooltipItem.index];
 
-            return 'مقدار : ' + tooltipData + '  ' + customTooltip;
+            return 'مقدار : ' + tooltipData + ', ' + customTooltip;
 
           }
         },
+        footerFontFamily: 'Blotus',
         bodyFontFamily: 'Blotus',
-        bodyFontSize: 18
+        titleFontFamily: 'Blotus',
+        bodyFontSize: 18,
+        titleFontSize: 18,
+        footerFontSize: 18,
+        bodyFontStyle: 'bold'
       }
     }
   }

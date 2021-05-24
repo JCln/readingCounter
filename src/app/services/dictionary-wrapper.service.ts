@@ -303,6 +303,26 @@ export class DictionaryWrapperService {
   private setTraverseDiffDictionary(v: any) {
     this.traverseDifferentialDictionary = v;
   }
-
+  cleanAllData = () => {
+    this.provinceDictionary = [];
+    this.regionDictionary = [];
+    this.zoneDictionary = [];
+    this.zoneBoundDictionary = [];
+    this.countryDictionary = [];
+    this.authLev1Dictionary = [];
+    this.authLev2Dictionary = [];
+    this.authLev3Dictionary = [];
+    this.authLev4Dictionary = [];
+    this.counterReportDictionary = [];
+    this.counterStateDictionary = [];
+    this.counterStateByZoneIdDictionary = [];
+    this.counterStateByCodeDictionary = [];
+    this.periodKindDictionary = [];
+    this.karbariDictionary = [];
+    this.qotrDictionary = [];
+    this.roleDictionary = [];
+    this.karbariCodeDictionary = [];
+    this.traverseDifferentialDictionary = [];
+  }
 
 }
