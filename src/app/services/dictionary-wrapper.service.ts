@@ -143,7 +143,7 @@ export class DictionaryWrapperService {
         })
       });
     }
-    return this.counterReportDictionary;
+    return this.traverseDifferentialDictionary;
   }
   getCounterReportDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.counterReportDictionary)) {

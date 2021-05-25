@@ -74,10 +74,9 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.classWrapper();
   }
-  downloadDbfOutput = (row: ITracking) => {
-    this.trackingManagerService.downloadOutputDBF(row).subscribe(res => {
-      console.log(res);
-    })
+  downloadDbfOutput = async (row: ITracking) => {
+    const a = await this.trackingManagerService.downloadOutputSingle(row);
+    this.outputManagerService.downloadFile(a, `.${a.type}`);
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {

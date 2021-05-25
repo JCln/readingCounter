@@ -164,10 +164,10 @@ export class HelpWrapperService {
       return;
     }
     else if (currentRoute.includes('/wr/m/r/formula/')) {
-      this.messageToShow.title = 'فرمول ها';
-      this.messageToShow.messageOne = 'این قسمت ها مربوط به تبصره 2، 3، بودجه و آبها می‌باشد. هر قسمت امکان افزودن دسته ای با استفاده از فایل Excel  و افزودن تکی را دارد. ';
+      this.messageToShow.title = 'تعرفه ها';
+      this.messageToShow.messageOne = 'این بخش مربوط به تبصره 2، 3، بودجه و آبها می‌باشد. هر قسمت امکان افزودن دسته ای با استفاده از فایل Excel  و افزودن تکی را دارد. ';
       this.messageToShow.imgOne = '';
-      this.messageToShow.messageTwo = 'امکان ویرایش و حذف هر مورد نیز وجود دارد.';
+      this.messageToShow.messageTwo = 'امکان دانلود راهنمای نمونه فایل قابل ارسال و هنچنین ویرایش و حذف هر مورد وجود دارد.';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
       return;
