@@ -22,8 +22,8 @@ export class UsersAllService {
       { field: 'username', header: 'نام کاربری', isSelected: true, ltr: false },
       { field: 'userCode', header: 'کد کاربری', isSelected: true, ltr: false },
       { field: 'mobile', header: 'موبایل', isSelected: true, ltr: true },
-      { field: 'isActive', header: 'فعال', isSelected: true, ltr: false },
-      { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false }
+      { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
+      { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true }
     ];
   }
   connectToServer = (): Observable<any> => {

@@ -23,7 +23,7 @@ export class FragmentManagerService {
       { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
-      { field: 'isValidated', header: 'تایید شده', isSelected: true, readonly: true },
+      { field: 'isValidated', header: 'تایید شده', isSelected: true, readonly: true, isBoolean: true },
     ];
   }
   columnSelectedFragmentDetails = (): IObjectIteratation[] => {
@@ -32,7 +32,7 @@ export class FragmentManagerService {
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
       { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
-      { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true }
+      { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }
     ];
   }
   constructor(

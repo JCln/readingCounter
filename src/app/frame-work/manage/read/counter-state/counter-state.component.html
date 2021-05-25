@@ -3,7 +3,7 @@
     currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[20,50,100, 500, 1000]" [filterDelay]="0"
     [globalFilterFields]="['moshtarakinId','title','zoneId','clientOrder','canEnterNumber','isMane','canNumberBeLessThanPre','isTavizi','shouldEnterNumber','isXarab','isFaqed']"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"  >
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
     <!--[loading]="innerLoading"-->
 
     <ng-template pTemplate="caption">
@@ -21,7 +21,8 @@
         </tr>
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
         </tr>
     </ng-template>
