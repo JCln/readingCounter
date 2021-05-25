@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { Observable } from 'rxjs/internal/Observable';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { ICounterStateGridFriendlyReq } from '../Interfaces/imanage';
 import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
@@ -126,7 +127,7 @@ export class CounterStateService {
       group: null,
       aggregate: null
     }
-    this.interfaceManagerService.postCounterStatGridFriendly(counterStateReq).subscribe(res => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.counterStateGridFriendly, counterStateReq).subscribe(res => {
       if (res)
         console.log(res);
 
@@ -135,11 +136,11 @@ export class CounterStateService {
     })
   }
   sendGridEventData = (event: ICounterStateGridFriendlyReq): Observable<any> => {
-    return this.interfaceManagerService.postCounterStatGridFriendly(event);
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.counterStateGridFriendly, event);
   }
   getGridFriendlyDataSourceDefault = (): any => {
     return new Promise(resolve => {
-      this.interfaceManagerService.postCounterStatGridFriendly(this.gridFriendlyDefaultReq).subscribe(res => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.counterStateGridFriendly, this.gridFriendlyDefaultReq).subscribe(res => {
         resolve(res);
       })
     });

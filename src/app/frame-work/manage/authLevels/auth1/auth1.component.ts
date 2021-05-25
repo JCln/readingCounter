@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { AuthsManagerService } from 'src/app/services/auths-manager.service';
@@ -43,11 +44,11 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   openDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(Auth1AddDgComponent, { disableClose: true });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel1Manager(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.AuthLevel1ADD, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -65,7 +66,7 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editAuthLevel1Manager(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.AuthLevel1EDIT, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -85,7 +86,7 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
   deleteSingleRow = async (row: IProvinceManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteAuthLevel1Manager(row.id).subscribe(res => {
+      this.interfaceManagerService.POST(ENInterfaces.AuthLevel1REMOVE, row.id).subscribe(res => {
         if (res) {
           this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }

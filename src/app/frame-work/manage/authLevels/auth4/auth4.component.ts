@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { AuthsManagerService } from 'src/app/services/auths-manager.service';
@@ -58,7 +59,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel4Manager(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.AuthLevel4ADD, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -86,7 +87,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editAuthLevel4Manager(result).subscribe(res => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.AuthLevel4EDIT, result).subscribe(res => {
             if (res) {
               console.log(res);
 
@@ -107,7 +108,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
   deleteSingleRow = async (row: IProvinceManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteAuthLevel4Manager(row.id).subscribe(res => {
+      this.interfaceManagerService.POST(ENInterfaces.AuthLevel4REMOVE, row.id).subscribe(res => {
         if (res) {
           this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }

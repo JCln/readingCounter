@@ -5,6 +5,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { Search } from '../classes/search';
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IOnOffLoadFlat, ISearchMoshReq } from '../Interfaces/imanage';
 import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
@@ -98,7 +99,7 @@ export class SearchService {
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
-  getCounterStateDictionary = (zoneId: number): Promise<any> => {
+  getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
@@ -113,7 +114,7 @@ export class SearchService {
   searchMoshterakin = (body: ISearchMoshReq): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postSearchMosh(body).toPromise().then(res => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListSearchMoshtarak, body).toPromise().then(res => {
           resolve(res);
         })
       });

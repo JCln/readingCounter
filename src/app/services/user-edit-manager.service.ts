@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { EN_messages } from '../Interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from '../Interfaces/ioverall-config';
 import { IAUserEditSave, IUserEditManager } from '../Interfaces/iuser-manager';
@@ -89,7 +90,7 @@ export class UserEditManagerService {
     this.dataSource = vals;
     if (!this.vertification())
       return;
-    this.interfaceManagerService.postUserManager(vals).subscribe((res: IResponses) => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
         this.utilsService.routeToByUrl('/wr/mu/all');

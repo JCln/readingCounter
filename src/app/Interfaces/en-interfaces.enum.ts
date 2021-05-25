@@ -68,6 +68,7 @@ export enum ENInterfaces {
     ReadingConfigREMOVE = 'V1/ReadingConfigDefault/Remove',
     ReadingConfigEDIT = 'V1/ReadingConfigDefault/Edit',
     ReadingConfigADD = 'V1/ReadingConfigDefault/Add',
+    readingConfigDefaultByZoneId = `V1/ReadingConfigDefault/Get/`,
 
     FormulaWaterAll = 'V1/AbBahaFormula/All',
     FormulaWaterEdit = 'V1/AbBahaFormula/Edit',
@@ -94,196 +95,110 @@ export enum ENInterfaces {
     FormulaTabsare3Add = 'V1/Tabsare3Formula/Add',
     FormulaTabsare3AddExcel = 'V1/Tabsare3Formula/AddExcel',
     FormulaTabsare3Remove = 'V1/Tabsare3Formula/Remove',
-    
-    
-All =  V1/TextOutputField/All
-All =  V1/User/All
-V1 =  uid, 'V1
-V1 =  UID, 'V1
-ResetPassword =  V1/User/ResetPassword
-Activate =  V1/User/Activate
-Deactivate =  V1/User/Deactivate
-FragmentMaster =  V1/Fragment/Master
-FragmentMaster =  V1/Fragment/Master
-FragmentMaster =  V1/Fragment/Master
-FragmentMaster =  V1/Fragment/Master
-FragmentMaster =  V1/Fragment/Master
-FragmentV1 =  asterId, 'V1
-FragmentDetials =  V1/Fragment/Detials
-FragmentDetails =  V1/Fragment/Details
-FragmentDetails =  V1/Fragment/Details
-CounterReaders =  V1/User/CounterReaders
-UserEdit =  V1/user/Edit
-UserAdd =  V1/user/Add
-UserAdd =  V1/User/Add
-APKPreList =  V1/APK/PreList
-APKLast =  V1/APK/Last
-APKUpload =  V1/APK/Upload
-OutputDbf =  V1/Output/Dbf
-Outputsingle =  V1/Output/single
 
-ForbiddenByParam =  V1/Forbidden/ByParam
-trackingImported =  V1/Tracking/Imported
-trackingLoaded =  V1/Tracking/Loaded
-trackingReading =  V1/Tracking/Reading
-trackingOffloaded =  V1/Tracking/Offloaded
-trackingFinished =  V1/Tracking/Finished
-trackingLastStates =  V1/Tracking/LastStates
-trackingEdit =  V1/Tracking/Edit
-trackingToImported =  V1/Tracking/ToImported
-trackingToReading =  V1/Tracking/ToReading
-trackingToOffloaded =  V1​/Tracking​/ToOffloaded
-trackingPre =  V1/Tracking/Pre
-trackingFinishReading =  V1/Tracking/FinishReading
-trackingRemove =  V1/Tracking/Remove
-trackingFollowUp =  V1/Tracking/FollowUp
-Search =  V1/List/Search
-Master =  V1/ReadingReport/Master
-Details =  V1/ReadingReport/Details
-Offloaded =  V1/List/Offloaded
-Offloaded =  V1/List/Offloaded
-Offloaded =  V1/List/Offloaded
-Offloaded =  V1/List/Offloaded
-Offloaded =  V1/List/Offloaded
-Analyze =  V1/Tracking/Analyze
-TraverseDifferential =  V1/List/TraverseDifferential
-Offloaded =  V1/List/Offloaded
-Offloaded =  V1/List/Offloaded
-Offloaded =  V1/List/Offloaded
-Offloaded =  V1/List/Offloaded
-OffLoaded =  V1/List/OffLoaded
-OffLoaded =  V1/List/OffLoaded
-OffLoaded =  V1/List/OffLoaded
-All =  V1/readingPeriod/All
-Dictionary =  V1/readingPeriod/Dictionary
-DictionaryByKind =  V1/ReadingPeriod/DictionaryByKind
-Dictionary =  V1/readingPeriod/Dictionary
-Edit =  V1/readingPeriod/Edit
-Add =  V1/readingPeriod/Add
-Remove =  V1/readingPeriod/Remove
-All =  V1/readingPeriodKind/All
-Dictionary =  V1/readingPeriodKind/Dictionary
-Edit =  V1/readingPeriodKind/Edit
-Add =  V1/readingPeriodKind/Add
-Remove =  V1/readingPeriodKind/Remove
-All =  V1/Karbari/All
-Dictionary =  V1/Karbari/Dictionary
-DictionaryCode =  V1/Karbari/DictionaryCode
-Remove =  V1/Karbari/Remove
-Edit =  V1/Karbari/Edit
-Add =  V1/Karbari/Add
-All =  V1/CounterState/All
-Dictionary =  V1/CounterState/Dictionary
-DictionaryByZoneId =  V1/CounterState/DictionaryByZoneId
-DictionaryBycode =  V1/CounterState/DictionaryBycode
-GridFriendly =  V1/CounterState/GridFriendly
-Remove =  V1/CounterState/Remove
-Edit =  V1/CounterState/Edit
-Add =  V1/CounterState/Add
-All =  V1/CounterReport/All
-Get =  V1/CounterReport/Get
-Remove =  V1/CounterReport/Remove
-Edit =  V1/CounterReport/Edit
-Add =  V1/CounterReport/Add
-All =  V1/Qotr/All
-Dictionary =  V1/Qotr/Dictionary
-Remove =  V1/Qotr/Remove
-Edit =  V1/Qotr/Edit
-Add =  V1/Qotr/Add
-    
+    textOutputGET = 'V1/TextOutputField/All',
+    userGET = 'V1/User/All',
+    userEDIT = 'V1/user/Edit',
+    userADD = 'V1/user/Add',
+    userLOGINS = 'V1/User/Logins',
+    userRESETPASS = 'V1/User/ResetPassword',
+    userACTIVATE = 'V1/User/Activate',
+    userDEACTIVATE = 'V1/User/Deactivate',
+
+    fragmentMASTERALL = 'V1/Fragment/Master/All',
+    fragmentMASTERREMOVE = 'V1/Fragment/Master/Remove',
+    fragmentMASTEREDIT = 'V1/Fragment/Master/Edit',
+    fragmentMASTERADD = 'V1/Fragment/Master/Add',
+    fragmentMASTERVALIDATE = 'V1/Fragment/Master/Validate',
+    fragmentDETAILSDETAILS = 'V1/Fragment/Details',
+    fragmentDETAILSREMOVE = 'V1/Fragment/Detials/Remove',
+    fragmentDETAILSEDIT = 'V1/Fragment/Details/Edit',
+    fragmentDETAILSADD = 'V1/Fragment/Details/Add',
+
+    OutputDBF = 'V1/Output/Dbf',
+    OutputSINGLE = 'V1/Output/single',
+    forbidden = 'V1/Forbidden/ByParam',
+
+    trackingIMPORTED = 'V1/Tracking/Imported',
+    trackingLOADED = 'V1/Tracking/Loaded',
+    trackingREADING = 'V1/Tracking/Reading',
+    trackingOFFLOADED = 'V1/Tracking/Offloaded',
+    trackingFINISHED = 'V1/Tracking/Finished',
+    trackingLASTSTATES = 'V1/Tracking/LastStates',
+    trackingEDIT = 'V1/Tracking/Edit',
+    trackingToIMPORTED = 'V1/Tracking/ToImported',
+    trackingToREADING = 'V1/Tracking/ToReading',
+    trackingToOFFLOADED = 'V1​/Tracking​/ToOffloaded',
+    trackingPRE = 'V1/Tracking/Pre',
+    trackingFinishReadiED = 'V1/Tracking/FinishReading',
+    trackingREMOVE = 'V1/Tracking/Remove',
+    trackingFOLLOWUP = 'V1/Tracking/FollowUp/?trackNumber=',
+    trackingAnalyzeByParam = 'V1/Tracking/Analyze/ByParam',
+
+    ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
+    ListTraverse = 'V1/List/Offloaded/Traverse',
+    ListTraverseDifferential = 'V1/List/Offloaded/TraverseDifferential',
+    ListTraverseDifferentialDictionary = 'V1/List/TraverseDifferential/Dictionary',
+    ListOFFKarkard = 'V1/List/Offloaded/Karkard',
+    ListKarkardChart = 'V1/List/Offloaded/KarkardChart',
+    ListTraverseDifferntialChart = 'V1/List/Offloaded/TraverseDifferntialChart',
+    ListOffloadedPERDAY = `V1/List/OffLoaded/PerDay/`,
+    ListOffloadedALL = `V1/List/OffLoaded/All/`,
+    ListDictionary = 'V1/List/TraverseDifferential/Dictionary',
+    ListKarkardDaily = 'V1/List/Offloaded/KarkardDaily',
+    ListToGis = 'V1/List/Offloaded/Gis',
+    ListDispersalHours = 'V1/List/Offloaded/DispersalHours',
+    ListDispersalChart = 'V1/List/Offloaded/DispersalChart',
+    ListPerDayXY = 'V1/List/OffLoaded/PerDayXY',
 
 
-this.mainService.GET('V1/TextOutputField/All');
-this.mainService.GET('V1/User/All');
-this.mainService.GETID(uuid, 'V1/user/Edit');
-this.mainService.GETID(UUID, 'V1/User/Logins');
-this.mainService.POSTSG('V1/User/ResetPassword', UUID);
-this.mainService.POSTSG('V1/User/Activate', UUID);
-this.mainService.POSTSG('V1/User/Deactivate', UUID);
-this.mainService.GET('V1/Fragment/Master/All');
-this.mainService.POSTBODY('V1/Fragment/Master/Remove', body);
-this.mainService.POSTBODY('V1/Fragment/Master/Edit', body);
-this.mainService.POSTBODY('V1/Fragment/Master/Add', body);
-this.mainService.POSTBODY('V1/Fragment/Master/Validate', body);
-this.mainService.GETID(masterId, 'V1/Fragment/Details');
-this.mainService.POSTBODY('V1/Fragment/Detials/Remove', body);
-this.mainService.POSTBODY('V1/Fragment/Details/Edit', body);
-this.mainService.POSTBODY('V1/Fragment/Details/Add', body);
-this.mainService.GET(`V1/User/CounterReaders/${zoneId}`);
-this.mainService.POSTBODY('V1/user/Edit', body);
-this.mainService.GET('V1/user/Add');
-this.mainService.POSTBODY('V1/User/Add', body);
-this.mainService.GET('V1/APK/PreList');
-this.mainService.GET('V1/APK/Last');
-this.mainService.POSTBODY('V1/APK/Upload', body);
-this.mainService.POSTBLOB('V1/Output/Dbf', body);
-this.mainService.POSTBLOB('V1/Output/single', body);
-this.mainService.POSTBODY('V1/Forbidden/ByParam', body);
-this.mainService.GET('V1/Tracking/Imported');
-this.mainService.GET('V1/Tracking/Loaded');
-this.mainService.GET('V1/Tracking/Reading');
-this.mainService.GET('V1/Tracking/Offloaded');
-this.mainService.GET('V1/Tracking/Finished');
-this.mainService.GET('V1/Tracking/LastStates');
-this.mainService.POSTBODY('V1/Tracking/Edit', body);
-this.mainService.POSTBODY('V1/Tracking/ToImported', body);
-this.mainService.POSTBODY('V1/Tracking/ToReading', body);
-this.mainService.POSTBODY('V1​/Tracking​/ToOffloaded', body);
-this.mainService.POSTBODY('V1/Tracking/Pre', body);
-this.mainService.POSTBODY('V1/Tracking/FinishReading', body);
-this.mainService.POSTBODY('V1/Tracking/Remove', body);
-this.mainService.GET(`V1/Tracking/FollowUp/?trackNumber=${trackNumber}`);
-this.mainService.POSTBODY('V1/List/Search/Moshtarak', body);
-this.mainService.POSTBODY('V1/ReadingReport/Master/WithParam', body);
-this.mainService.POSTBODY('V1/ReadingReport/Details/WithParam', body);
-this.mainService.POSTBODY('V1/List/Offloaded/Traverse', body);
-this.mainService.POSTBODY('V1/List/Offloaded/TraverseDifferential', body);
-this.mainService.POSTBODY('V1/List/Offloaded/Karkard', body);
-this.mainService.POSTBODY('V1/List/Offloaded/KarkardChart', body);
-this.mainService.POSTBODY('V1/List/Offloaded/TraverseDifferntialChart', body);
-this.mainService.POSTBODY('V1/Tracking/Analyze/ByParam', body);
-this.mainService.GET('V1/List/TraverseDifferential/Dictionary');
-this.mainService.POSTBODY('V1/List/Offloaded/KarkardDaily', body);
-this.mainService.POSTBODY('V1/List/Offloaded/Gis', body);
-this.mainService.POSTBODY('V1/List/Offloaded/DispersalHours', body);
-this.mainService.POSTBODY('V1/List/Offloaded/DispersalChart', body);
-this.mainService.GET(`V1/List/OffLoaded/All/${trackingId}`);
-this.mainService.GET(`V1/List/OffLoaded/PerDay/${trackNumber}`);
-this.mainService.POSTBODY('V1/List/OffLoaded/PerDayXY', body);
-this.mainService.GET('V1/readingPeriod/All');
-this.mainService.GET(`V1/readingPeriod/Dictionary/${zoneId}`);
-this.mainService.GET(`V1/ReadingPeriod/DictionaryByKind/${kindId}`);
-this.mainService.GET(`V1/readingPeriod/Dictionary/${zoneId}/${kindId}`);
-this.mainService.POSTBODY('V1/readingPeriod/Edit', body);
-this.mainService.POSTBODY('V1/readingPeriod/Add', body);
-this.mainService.POST('V1/readingPeriod/Remove', id);
-this.mainService.GET('V1/readingPeriodKind/All');
-this.mainService.GET('V1/readingPeriodKind/Dictionary');
-this.mainService.POSTBODY('V1/readingPeriodKind/Edit', body);
-this.mainService.POSTBODY('V1/readingPeriodKind/Add', body);
-this.mainService.POST('V1/readingPeriodKind/Remove', id);
-this.mainService.GET('V1/Karbari/All');
-this.mainService.GET('V1/Karbari/Dictionary');
-this.mainService.GET('V1/Karbari/DictionaryCode');
-this.mainService.POST('V1/Karbari/Remove', id);
-this.mainService.POSTBODY('V1/Karbari/Edit', body);
-this.mainService.POSTBODY('V1/Karbari/Add', body);
-this.mainService.GET('V1/CounterState/All');
-this.mainService.GET('V1/CounterState/Dictionary');
-this.mainService.GET(`V1/CounterState/DictionaryByZoneId/${zoneId}`);
-this.mainService.GET(`V1/CounterState/DictionaryBycode/${zoneId}`);
-this.mainService.POSTBODY('V1/CounterState/GridFriendly', body);
-this.mainService.POST('V1/CounterState/Remove', id);
-this.mainService.POSTBODY('V1/CounterState/Edit', body);
-this.mainService.POSTBODY('V1/CounterState/Add', body);
-this.mainService.GET('V1/CounterReport/All');
-this.mainService.GET('V1/CounterReport/Get');
-this.mainService.POST('V1/CounterReport/Remove', id);
-this.mainService.POSTBODY('V1/CounterReport/Edit', body);
-this.mainService.POSTBODY('V1/CounterReport/Add', body);
-this.mainService.GET('V1/Qotr/All');
-this.mainService.GET('V1/Qotr/Dictionary');
-this.mainService.POST('V1/Qotr/Remove', id);
-this.mainService.POSTBODY('V1/Qotr/Edit', body);
-this.mainService.POSTBODY('V1/Qotr/Add', body);
+    readingPeriodAll = 'V1/readingPeriod/All',
+    readingPeriodEdit = 'V1/readingPeriod/Edit',
+    readingPeriodAdd = 'V1/readingPeriod/Add',
+    readingPeriodRemove = 'V1/readingPeriod/Remove',
+    readingPeriodKindAll = 'V1/readingPeriodKind/All',
+    readingPeriodKindDictionary = 'V1/readingPeriodKind/Dictionary',
+    readingPeriodDictionaryByZoneIdAndKindId = `V1/readingPeriod/Dictionary/`,
+    readingPeriodByKindDictionary = `V1/ReadingPeriod/DictionaryByKind/`,
+    readingPeriodKindEdit = 'V1/readingPeriodKind/Edit',
+    readingPeriodKindAdd = 'V1/readingPeriodKind/Add',
+    readingPeriodKindRemove = 'V1/readingPeriodKind/Remove',
+
+    KarbariAll = 'V1/Karbari/All',
+    KarbariDictionary = 'V1/Karbari/Dictionary',
+    KarbariDictionaryCode = 'V1/Karbari/DictionaryCode',
+    KarbariRemove = 'V1/Karbari/Remove',
+    KarbariEdit = 'V1/Karbari/Edit',
+    KarbariAdd = 'V1/Karbari/Add',
+
+    counterStateAll = 'V1/CounterState/All',
+    counterStateDictionary = 'V1/CounterState/Dictionary',
+    counterStateDictionaryByZoneId = `V1/CounterState/DictionaryByZoneId/`,
+    counterStateDictionaryByCode = `V1/CounterState/DictionaryByCode/`,
+    counterStateGridFriendly = 'V1/CounterState/GridFriendly',
+    counterStateRemove = 'V1/CounterState/Remove',
+    counterStateEdit = 'V1/CounterState/Edit',
+    counterStateAdd = 'V1/CounterState/Add',
+
+    CounterReportAll = 'V1/CounterReport/All',
+    CounterReportGet = 'V1/CounterReport/Get',
+    CounterReportRemove = 'V1/CounterReport/Remove',
+    CounterReportEdit = 'V1/CounterReport/Edit',
+    CounterReportAdd = 'V1/CounterReport/Add',
+    CounterReportDICTIONARY = '​V1​/CounterReport​/Dictionary',
+
+    counterReadersByZoneId = `V1/User/CounterReaders/`,
+
+    ReadingReportMasterWithParam = 'V1/ReadingReport/Master/WithParam',
+    ReadingReportDETAILSWithParam = 'V1/ReadingReport/Details/WithParam',
+
+    APKPreList = 'V1/APK/PreList',
+    APKLast = 'V1/APK/Last',
+    APKUpload = 'V1/APK/Upload',
+
+    QotrAll = 'V1/Qotr/All',
+    QotrDictionary = 'V1/Qotr/Dictionary',
+    QotrRemove = 'V1/Qotr/Remove',
+    QotrEdit = 'V1/Qotr/Edit',
+    QotrAdd = 'V1/Qotr/Add',
 }

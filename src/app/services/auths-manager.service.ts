@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IDictionaryManager } from '../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -19,7 +20,7 @@ export class AuthsManagerService {
   getAuth1DataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getAuthLevel1Manager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.AuthLevel1GET).subscribe(res => {
           resolve(res);
         })
       })
@@ -30,7 +31,7 @@ export class AuthsManagerService {
   getAuth4DataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getAuthLevel4Manager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.AuthLevel4GET).subscribe(res => {
           resolve(res);
         })
       })
@@ -41,7 +42,7 @@ export class AuthsManagerService {
   getAuth3DataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getAuthLevel3Manager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.AuthLevel3GET).subscribe(res => {
           resolve(res);
         })
       })
@@ -52,7 +53,7 @@ export class AuthsManagerService {
   getAuth2DataSource = (): any => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getAuthLevel2Manager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.AuthLevel2GET).subscribe(res => {
           resolve(res);
         })
       })

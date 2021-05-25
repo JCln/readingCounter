@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -73,7 +74,7 @@ export class UserAddComponent implements OnInit, AfterViewInit, OnDestroy {
       this.provinceItemsData = this.dataSource.provinceItems;
     }
     else {
-      this.interfaceManagerService.getAddUserManager().subscribe((res: any) => {
+      this.interfaceManagerService.GET(ENInterfaces.userADD).subscribe((res: any) => {
         if (res) {
           this.dataSource = res;
           this.closeTabService.saveDataForForAddUsers = res;

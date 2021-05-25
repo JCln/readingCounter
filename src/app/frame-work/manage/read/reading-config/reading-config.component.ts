@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import {
   ENSnackBarColors,
   ENSnackBarTimes,
@@ -135,7 +136,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   ) { }
 
   openDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(RdAddDgComponent, {
         disableClose: true,
         minWidth: '30rem',
@@ -147,7 +148,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
         if (result) {
           console.log(result);
 
-          this.interfaceManagerService.addReadingConfig(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.ReadingConfigADD, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -166,7 +167,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   editDialog = (row: any) => {
     const editable = this.getEditableSource(row).zoneId;
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(RdEditDgComponent, {
         disableClose: true,
         minWidth: '30rem',
@@ -179,7 +180,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editReadingConfig(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.ReadingConfigEDIT, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -199,7 +200,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   deleteSingleRow = async (row: any) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteReadingConfig(row.id).subscribe(res => {
+      this.interfaceManagerService.POST(ENInterfaces.ReadingConfigREMOVE, row.id).subscribe(res => {
         if (res) {
           this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }
@@ -208,7 +209,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getReadingConfig().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.ReadingConfigALL).subscribe(res => {
         if (res) {
           resolve(res);
         }

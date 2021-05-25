@@ -52,7 +52,7 @@ export class MoshtarakComponent implements OnInit {
     if (!this.searchService.verificationMosh(this.searchReq))
       return;
     this.dataSource = await this.searchService.searchMoshterakin(this.searchReq);
-    this.counterStateDictionary = await this.searchService.getCounterStateDictionary(this.searchReq.zoneId);
+    this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
     this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
@@ -64,7 +64,7 @@ export class MoshtarakComponent implements OnInit {
     this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     this.searchService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.searchService.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-    
+
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   nullSavedSource = () => this.closeTabService.saveDataForSearchMoshtarakin = null;

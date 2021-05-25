@@ -3,8 +3,8 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ICountryManager } from 'src/app/Interfaces/imanage';
-import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -40,15 +40,11 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   openDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(CountryAddDgComponent, { disableClose: true });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addCountryManager(result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.CountryADD, result.value);
         }
       });
     });
@@ -63,11 +59,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editCountryManager(result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.CountryEDIT, result.value);
         }
       });
     });
@@ -83,11 +75,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   deleteSingleRow = async (row: ICountryManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteCountryManager(row.id).subscribe(res => {
-        if (res) {
-          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-        }
-      });
+      this.sectorsManagerService.sectorsDelete(ENInterfaces.CountryREMOVE, row.id);
     }
   }
   filterSearchs = () => {

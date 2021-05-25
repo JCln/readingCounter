@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -38,7 +39,7 @@ export class DictionaryWrapperService {
   getkarbariCodeDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.karbariCodeDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getKarbariDictionaryCode().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.KarbariDictionary).subscribe(res => {
           this.setKarbariDictionaryCode(res);
           resolve(this.karbariCodeDictionary);
         })
@@ -49,7 +50,7 @@ export class DictionaryWrapperService {
   getProvinceDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.provinceDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getProvinceDictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.ProvinceDICTIONARY).subscribe(res => {
           this.setProvinceDictionary(res);
           resolve(this.provinceDictionary);
         })
@@ -60,7 +61,7 @@ export class DictionaryWrapperService {
   getRegionDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.regionDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getRegionDictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.RegionDICTIONARY).subscribe(res => {
           this.setRegionDictionary(res);
           resolve(this.regionDictionary);
         })
@@ -71,7 +72,7 @@ export class DictionaryWrapperService {
   getZoneDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.zoneDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getZoneDictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.ZoneDICTIONARY).subscribe(res => {
           this.setZoneDictionary(res);
           resolve(this.zoneDictionary);
         })
@@ -82,7 +83,7 @@ export class DictionaryWrapperService {
   getCountryDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.countryDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getCountryDictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.CountryDICTIONARY).subscribe(res => {
           this.setCountryDictionary(res);
           resolve(this.countryDictionary);
         })
@@ -93,7 +94,7 @@ export class DictionaryWrapperService {
   getAuthLev1Dictionary(): Promise<any> {
     if (this.utilsService.isNull(this.authLev1Dictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getAuthLevel1DictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.AuthLevel1DICTIONARY).subscribe(res => {
           this.setAuthLev1Dictionary(res);
           resolve(this.authLev1Dictionary);
         })
@@ -104,7 +105,7 @@ export class DictionaryWrapperService {
   getAuthLev2Dictionary(): Promise<any> {
     if (this.utilsService.isNull(this.authLev2Dictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getAuthLevel2DictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.AuthLevel2DICTIONARY).subscribe(res => {
           this.setAuthLev2Dictionary(res);
           resolve(this.authLev2Dictionary);
         })
@@ -115,7 +116,7 @@ export class DictionaryWrapperService {
   getAuthLev3Dictionary(): Promise<any> {
     if (this.utilsService.isNull(this.authLev3Dictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getAuthLevel3DictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.AuthLevel3DICTIONARY).subscribe(res => {
           this.setAuthLev3Dictionary(res);
           resolve(this.authLev3Dictionary);
         })
@@ -126,7 +127,7 @@ export class DictionaryWrapperService {
   getAuthLev4Dictionary(): Promise<any> {
     if (this.utilsService.isNull(this.authLev4Dictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getAuthLevel4DictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.AuthLevel4DICTIONARY).subscribe(res => {
           this.setAuthLev4Dictionary(res);
           resolve(this.authLev4Dictionary);
         })
@@ -137,7 +138,7 @@ export class DictionaryWrapperService {
   getTraverseDifferentialDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.traverseDifferentialDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getRRTraverseDifferentialDictionary().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.ListTraverseDifferentialDictionary).subscribe(res => {
           this.setTraverseDiffDictionary(res);
           resolve(this.traverseDifferentialDictionary);
         })
@@ -148,7 +149,7 @@ export class DictionaryWrapperService {
   getCounterReportDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.counterReportDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getCounterReportDictionary().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.CounterReportDICTIONARY).subscribe(res => {
           this.setCounterReportDictionary(res);
           resolve(this.counterReportDictionary);
         })
@@ -159,7 +160,7 @@ export class DictionaryWrapperService {
   getCounterStateDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.counterStateDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getCounterStateDictionary().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.counterStateDictionary).subscribe(res => {
           this.setCounterStateDictionary(res);
           resolve(this.counterStateDictionary);
         })
@@ -168,31 +169,25 @@ export class DictionaryWrapperService {
     return this.counterStateDictionary;
   }
   getCounterStateByZoneIdDictionary(zoneId: number): Promise<any> {
-    if (this.utilsService.isNull(this.counterStateByZoneIdDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.getCounterStateByZoneIdDictionary(zoneId).subscribe(res => {
-          this.setCounterStateByZoneIdDictionary(res);
-          resolve(this.counterStateByZoneIdDictionary);
-        })
-      });
-    }
-    return this.counterStateByZoneIdDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId).subscribe(res => {
+        this.setCounterStateByZoneIdDictionary(res);
+        resolve(this.counterStateByZoneIdDictionary);
+      })
+    })
   }
   getCounterStateByCodeDictionary(zoneId: number): Promise<any> {
-    if (this.utilsService.isNull(this.counterStateByCodeDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.getCounterStateByCodeDictionary(zoneId).subscribe(res => {
-          this.setCounterStateByCodeDictionary(res);
-          resolve(this.counterStateByCodeDictionary);
-        })
-      });
-    }
-    return this.counterStateByCodeDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId).subscribe(res => {
+        this.setCounterStateByCodeDictionary(res);
+        resolve(this.counterStateByCodeDictionary);
+      })
+    });
   }
   getPeriodKindDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.periodKindDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getReadingPeriodKindManagerDictionary().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.readingPeriodKindDictionary).subscribe(res => {
           this.setPeriodKindDictionary(res);
           resolve(this.periodKindDictionary);
         })
@@ -203,7 +198,7 @@ export class DictionaryWrapperService {
   getKarbariDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.karbariDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getKarbariDictionary().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.KarbariDictionary).subscribe(res => {
           this.setKarbariDictionary(res);
           resolve(this.karbariDictionary);
         })
@@ -214,7 +209,7 @@ export class DictionaryWrapperService {
   getQotrDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.qotrDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getQotrDictionary().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.QotrDictionary).subscribe(res => {
           this.setQotrDictionary(res);
           resolve(this.qotrDictionary);
         })
@@ -225,7 +220,7 @@ export class DictionaryWrapperService {
   getRoleDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.roleDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getRoleDictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.RoleDICTIONARY).subscribe(res => {
           this.setRoleDictionary(res);
           resolve(this.roleDictionary);
         })
@@ -236,7 +231,7 @@ export class DictionaryWrapperService {
   getZoneBoundDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.zoneBoundDictionary)) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getZoneBoundDictionaryManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.ZoneBoundDICTIONARY).subscribe(res => {
           this.setZoneBoundDictionary(res);
           resolve(this.zoneBoundDictionary);
         })
@@ -302,27 +297,6 @@ export class DictionaryWrapperService {
   }
   private setTraverseDiffDictionary(v: any) {
     this.traverseDifferentialDictionary = v;
-  }
-  cleanAllData = () => {
-    this.provinceDictionary = [];
-    this.regionDictionary = [];
-    this.zoneDictionary = [];
-    this.zoneBoundDictionary = [];
-    this.countryDictionary = [];
-    this.authLev1Dictionary = [];
-    this.authLev2Dictionary = [];
-    this.authLev3Dictionary = [];
-    this.authLev4Dictionary = [];
-    this.counterReportDictionary = [];
-    this.counterStateDictionary = [];
-    this.counterStateByZoneIdDictionary = [];
-    this.counterStateByCodeDictionary = [];
-    this.periodKindDictionary = [];
-    this.karbariDictionary = [];
-    this.qotrDictionary = [];
-    this.roleDictionary = [];
-    this.karbariCodeDictionary = [];
-    this.traverseDifferentialDictionary = [];
   }
 
 }

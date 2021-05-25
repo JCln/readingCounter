@@ -6,7 +6,6 @@ import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'src/app/Interf
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { ImportDynamicService } from 'src/app/services/import-dynamic.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { InterfaceService } from 'src/app/services/interface.service';
 
 import { DictionaryWrapperService } from './../../services/dictionary-wrapper.service';
@@ -66,7 +65,6 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   constructor(
     private interfaceService: InterfaceService,
     private interactionService: InteractionService,
-    private interfaceManagerService: InterfaceManagerService,
     private importDynamicService: ImportDynamicService,
     private closeTabService: CloseTabService,
     private dictionaryWrapperService: DictionaryWrapperService
@@ -87,39 +85,6 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   getReadingPeriodsKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
-  getReadingPeriod = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.getReadingPeriodManagerDictionaryByZoneIdAndKindId(this.importDynamic.zoneId, this.kindId).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch {
-      console.error(e => e);
-    }
-  }
-  getReadingConfigDefaults = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.getReadingConfigDefaultByZoneId(this.importDynamic.zoneId).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch {
-      console.error(e => e);
-    }
-  }
-  getUserCounterReaders = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.getCounterReadersByZoneId(this.importDynamic.zoneId).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(e => e);
-    }
-  }
   private insertReadingConfigDefaults = (rcd: any) => {
     this.importDynamic.hasPreNumber = rcd.hasPreNumber;
     this.importDynamic.displayBillId = rcd.displayBillId;
@@ -137,7 +102,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   verificationACounterReaderId = async () => {
     if (this.importDynamic.zoneId || this.zoneDictionary) {
       this.verificationReadingPeriod();
-      this.readingConfigDefault = await this.getReadingConfigDefaults();
+      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamic.zoneId);
     }
     if (!this.importDynamic.zoneId || !this.zoneDictionary)
       return;
@@ -145,7 +110,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       this.readingConfigDefault = [];
       return;
     }
-    this.userCounterReader = await this.getUserCounterReaders();
+    this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.importDynamic.zoneId);
     if (!this.importDynamicService.validationInvalid(this.userCounterReader)) {
       this.userCounterReader = [];
       return;
@@ -160,7 +125,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       this.readingPeriodDictionary = [];
       return;
     }
-    this.readingPeriodDictionary = await this.getReadingPeriod();
+    this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriod(this.importDynamic.zoneId, this.kindId);
     this.importDynamicService.validationReadingPeriod(this.readingPeriodDictionary);
 
   }

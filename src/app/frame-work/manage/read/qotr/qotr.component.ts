@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
@@ -21,10 +22,10 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
   provinceFilter = new FormControl('');
 
   dataSource = new MatTableDataSource();
-  
+
   subscription: Subscription[] = [];
   countryDictionary: IDictionaryManager[] = [];
-  
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   columnsToDisplay = ['title', 'provinceId', 'province', 'actions'];
   filterValues = {
@@ -54,7 +55,7 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getDataSource = (): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getQotr().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.QotrAll).subscribe(res => {
         resolve(res);
       })
     })

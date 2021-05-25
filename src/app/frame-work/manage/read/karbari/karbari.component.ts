@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IZoneManager } from 'src/app/Interfaces/imanage';
 import {
   ENSnackBarColors,
@@ -68,7 +69,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   openDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(KarbariAddDgComponent, {
         disableClose: true,
         width: '30rem',
@@ -79,7 +80,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addKarbari(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.KarbariAdd, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -110,7 +111,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.interfaceManagerService.editKarbari(result).subscribe((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.KarbariEdit, result).subscribe((res: IResponses) => {
           if (res) {
             this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
           }
@@ -129,7 +130,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   deleteSingleRow = async (row: IZoneManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteKarbari(row.id).subscribe(res => {
+      this.interfaceManagerService.POST(ENInterfaces.KarbariRemove, row.id).subscribe(res => {
         if (res) {
           this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }
@@ -149,7 +150,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getKarbari().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.KarbariAll).subscribe(res => {
         if (res) {
           resolve(res);
         }

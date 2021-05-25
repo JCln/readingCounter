@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -34,7 +35,7 @@ export class TextOutputFieldManagerService {
   getOutputTextField = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getTextOutputManager().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.textOutputGET).subscribe(res => {
           resolve(res);
         })
       });

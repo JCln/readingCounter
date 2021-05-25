@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IOnOffLoadFlat } from '../Interfaces/imanage';
 import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { CloseTabService } from './close-tab.service';
@@ -140,7 +141,7 @@ export class ListManagerService {
   getLMAllFirst = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedALL, trackingId).subscribe(res => {
           this.closeTabService.saveDataForLMAll = res;
           resolve(res);
         })
@@ -152,7 +153,7 @@ export class ListManagerService {
   getLMAllExtra = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedALL, trackingId).subscribe(res => {
           this.closeTabService.saveDataForLMAll_extra = res;
           resolve(res);
         })
@@ -177,10 +178,10 @@ export class ListManagerService {
     return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
   }
   getLMPD = (trackNumber: number): Observable<any> => {
-    return this.interfaceManagerService.getLMPD(trackNumber);
+    return this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedPERDAY, trackNumber);
   }
   postLMPDXY = (body: object): Observable<any> => {
-    return this.interfaceManagerService.postLMPDXY(body);
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.ListPerDayXY, body);
   }
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {

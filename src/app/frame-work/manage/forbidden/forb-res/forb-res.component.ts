@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { IForbiddenManager } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { ForbiddenService } from 'src/app/services/forbidden.service';
@@ -11,7 +12,7 @@ import { InteractionService } from 'src/app/services/interaction.service';
   styleUrls: ['./forb-res.component.scss']
 })
 export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() dataSource: any[] = [];
+  @Input() dataSource: IForbiddenManager[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
@@ -49,6 +50,7 @@ export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
     // }
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
     this.forbiddenService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    this.forbiddenService.setDynamicPartRanges(this.dataSource);
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
