@@ -104,6 +104,9 @@ export class SearchService {
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
   }
+  getQotrDictionary = () => {
+    return this.dictionaryWrapperService.getQotrDictionary();
+  }
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }

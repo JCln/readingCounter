@@ -25,6 +25,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   karbariDictionary: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
+  counterStateByCodeDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -56,8 +57,9 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.listManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.listManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.listManagerService.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-    this.listManagerService.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateCode');
-    this.listManagerService.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'preCounterStateCode');
+
+    this.listManagerService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    this.listManagerService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.setDynamicRages();
     if (this.dataSource.length)

@@ -173,6 +173,9 @@ export class ListManagerService {
   getCounterStateDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateDictionary();
   }
+  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
+  }
   getLMPD = (trackNumber: number): Observable<any> => {
     return this.interfaceManagerService.getLMPD(trackNumber);
   }

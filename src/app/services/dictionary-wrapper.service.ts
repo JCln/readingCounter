@@ -286,7 +286,7 @@ export class DictionaryWrapperService {
     this.counterStateByZoneIdDictionary = v;
   }
   private setCounterStateByCodeDictionary(v: any) {
-    this.counterStateByZoneIdDictionary = v;
+    this.counterStateByCodeDictionary = v;
   }
   private setPeriodKindDictionary(v: any) {
     this.periodKindDictionary = v;
