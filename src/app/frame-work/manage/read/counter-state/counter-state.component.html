@@ -1,10 +1,7 @@
-<p-table #dt2 [columns]="selectedColumns" [value]="dataSource" [lazy]="true"
-    (onLazyLoad)="sendGridFriendlyDataSource($event)" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[20,50,100, 500, 1000]" [filterDelay]="0"
-    [globalFilterFields]="['moshtarakinId','title','zoneId','clientOrder','canEnterNumber','isMane','canNumberBeLessThanPre','isTavizi','shouldEnterNumber','isXarab','isFaqed']"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
-    <!--[loading]="innerLoading"-->
+<p-table #dt2 [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
+    stateStorage="session" stateKey="counterstate-session">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"

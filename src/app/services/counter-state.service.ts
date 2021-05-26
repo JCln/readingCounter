@@ -34,20 +34,6 @@ export class CounterStateService {
       { field: 'isFaqed', header: 'فاقد', isSelected: true, isBoolean: true }
     ];
   }
-  columnsToFilter = (event: any): any => {
-    // let a;
-    // event.filter(item => {
-    //   if (item.value)
-    //     a.push(item);
-    // })
-    // console.log(a);
-
-    // console.log(event.value);
-    console.log(event);
-
-
-    // return a;
-  }
   gridFriendlyDefaultReq = {
     take: 20,
     skip: 0,
@@ -57,6 +43,8 @@ export class CounterStateService {
     aggregate: []
   }
   getGridFriendlyDataSource = (event: LazyLoadEvent): any => {
+    console.log(event);
+
     const counterStateReq: ICounterStateGridFriendlyReq = {
       take: event.rows,
       skip: event.first,
@@ -127,9 +115,7 @@ export class CounterStateService {
       aggregate: null
     }
     this.interfaceManagerService.postCounterStatGridFriendly(counterStateReq).subscribe(res => {
-      if (res)
-        console.log(res);
-
+      return res;
       // this.dataSourceRES.data = res;
       // this.innerLoading = false;
     })
@@ -139,7 +125,7 @@ export class CounterStateService {
   }
   getGridFriendlyDataSourceDefault = (): any => {
     return new Promise(resolve => {
-      this.interfaceManagerService.postCounterStatGridFriendly(this.gridFriendlyDefaultReq).subscribe(res => {
+      this.interfaceManagerService.getCounterState().subscribe(res => {
         resolve(res);
       })
     });

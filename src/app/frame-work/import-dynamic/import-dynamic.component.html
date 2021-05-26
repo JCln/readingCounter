@@ -33,7 +33,7 @@
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2 this" [hidden]="!readingPeriodDictionary.length">
+                <div class="input_2 this" [hidden]="_isOrderByDate || !readingPeriodDictionary.length">
                     <div class="_key">دوره قرائت</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.readingPeriodId"
                         name="readingPeriodId">

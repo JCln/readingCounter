@@ -104,7 +104,7 @@ export class UserAddManagerService {
       return false;
     if (!this.utilsService.mobileValidation(vals.mobile))
       return false;
-    if (vals.email)
+    if (!this.utilsService.isNull(vals.email))
       if (!this.utilsService.isEmailValid(vals.email))
         return false;
     return true;

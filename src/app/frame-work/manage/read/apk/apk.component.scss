@@ -26,6 +26,11 @@
   padding: $font_xs 0;
   width: 90%;
   border-radius: $border_15;
+
+  input {
+    text-align: center;
+    width: 19rem;
+  }
 }
 
 .title {
