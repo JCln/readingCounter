@@ -41,10 +41,10 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean && col.field !== 'zoneTitle'" type="text" field="{{col.field}}">
+                <p-columnFilter *ngIf="!col?.isBoolean && !col?.isSelectOption" type="text" field="{{col.field}}">
                 </p-columnFilter>
-                <p-columnFilter field="zoneTitle" *ngIf="!col?.isBoolean && col.field === 'zoneTitle'" matchMode="in"
-                    display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                <p-columnFilter *ngIf="!col?.isBoolean && col?.isSelectOption" field="{{col.field}}" matchMode="in"
+                    display="menu" [showMatchModes]="true" [showOperator]="false" [showAddButton]="false">
 
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                         <p-multiSelect [options]="filterZoneDictionary" [(ngModel)]="selectedFuckingTest"

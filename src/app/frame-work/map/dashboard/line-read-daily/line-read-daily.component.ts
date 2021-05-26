@@ -66,43 +66,6 @@ export class LineReadDailyComponent implements OnInit {
     this.lineChartOptions = {
       responsive: true,
       maintainAspectRatio: false,
-      scales: {
-        // We use this empty structure as a placeholder for dynamic theming.
-        xAxes: [{ ticks: this.defaultOptions }],
-        yAxes: [
-          {
-            id: 'y-axis-0',
-            position: 'left',
-          },
-          {
-            id: 'y-axis-1',
-            position: 'right',
-            // gridLines: {
-            //   color: 'rgb(14, 76, 146)',
-            // },
-            ticks: {
-              ticks: this.defaultOptions
-            }
-          }
-        ]
-      },
-      annotation: {
-        annotations: [
-          {
-            type: 'line',
-            mode: 'vertical',
-            scaleID: 'x-axis-0',
-            value: 'March',
-            // borderColor: 'orange',
-            borderWidth: 2,
-            label: {
-              enabled: true,
-              // fontColor: 'orange',
-              content: 'LineAnno'
-            }
-          },
-        ],
-      },
       tooltips: {
         callbacks: {
           label: function (tooltipItem, data) {

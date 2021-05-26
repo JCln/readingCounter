@@ -21,14 +21,14 @@ import { UtilsService } from './utils.service';
 export class TrackingManagerService {
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
       { field: 'counterReaderName', header: 'مامور', isSelected: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
       { field: 'listNumber', header: 'ش لیست', isSelected: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: true },
       // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false , isBoolean: true},
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
       { field: 'year', header: 'سال', isSelected: false },
       { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },

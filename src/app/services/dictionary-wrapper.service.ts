@@ -168,26 +168,20 @@ export class DictionaryWrapperService {
     return this.counterStateDictionary;
   }
   getCounterStateByZoneIdDictionary(zoneId: number): Promise<any> {
-    if (this.utilsService.isNull(this.counterStateByZoneIdDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.getCounterStateByZoneIdDictionary(zoneId).subscribe(res => {
-          this.setCounterStateByZoneIdDictionary(res);
-          resolve(this.counterStateByZoneIdDictionary);
-        })
-      });
-    }
-    return this.counterStateByZoneIdDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getCounterStateByZoneIdDictionary(zoneId).subscribe(res => {
+        this.setCounterStateByZoneIdDictionary(res);
+        resolve(this.counterStateByZoneIdDictionary);
+      })
+    });
   }
   getCounterStateByCodeDictionary(zoneId: number): Promise<any> {
-    if (this.utilsService.isNull(this.counterStateByCodeDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.getCounterStateByCodeDictionary(zoneId).subscribe(res => {
-          this.setCounterStateByCodeDictionary(res);
-          resolve(this.counterStateByCodeDictionary);
-        })
-      });
-    }
-    return this.counterStateByCodeDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getCounterStateByCodeDictionary(zoneId).subscribe(res => {
+        this.setCounterStateByCodeDictionary(res);
+        resolve(this.counterStateByCodeDictionary);
+      })
+    });
   }
   getPeriodKindDictionary(): Promise<any> {
     if (this.utilsService.isNull(this.periodKindDictionary)) {
