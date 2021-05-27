@@ -24,8 +24,8 @@ export class HelpWrapperService {
 
   /* STATIC ROUTE S*/
   private someName = (currentRoute: string) => {
-    if (currentRoute === '/wr' || currentRoute === '/wr/db') {
-      this.messageToShow.title = 'مشاهده نقشه و یا داشبورد';
+    if (currentRoute === '/wr') {
+      this.messageToShow.title = 'مشاهده نقشه';
       this.messageToShow.messageOne = '1-	امکان استفاده از دو لایه ظاهری2-	پرینت نقشه بصورت عمودی و افقی3-	بزرگ و کوچک کردن نقشه4-	بارگذاری مجدد نقشه درصورت خطا در نمایش احتمالی5-	مکان یابی6-	حذف تمامی لایه ها';
       this.messageToShow.imgOne = 'assets/imgs/help/wr1.PNG';
       this.messageToShow.messageThree = '';
@@ -33,13 +33,22 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
+    if (currentRoute === '/wr/db') {
+      this.messageToShow.title = 'داشبورد';
+      this.messageToShow.messageOne = 'گزارش های جامع(قرائت های انجام شده - تصاویر ارسالی- موارد غیرمجاز ثبت شده - گزارشات ثبت شده و ..)';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageThree = 'عملکرد فرایند قرائت را در دو نمودار رادار و میلیه ای قابل مشاهده و بررسی هستند.';
+      this.messageToShow.messageTwo = 'قسمت کارکرد، مربوط به اطلاعات قرائت به تفکیک روز، هفته، ماه و سال میباشد. ';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
     else if (currentRoute === '/wr/mu/edit' || currentRoute === '/wr/mu/all') {
       this.messageToShow.title = 'مشاهده و ویرایش کاربران';
-      this.messageToShow.messageOne = 'این قسمت شامل بخش های مشاهده همه کاربران و افزودن کاربر جدید می‌باشد.';
-      this.messageToShow.imgOne = 'assets/imgs/help/edit/editContacts.PNG';
+      this.messageToShow.messageOne = 'این بخش شامل قسمت های مشاهده همه کاربران و افزودن کاربر جدید می‌باشد.';
+      this.messageToShow.imgOne = 'assets/imgs/help/edit/edit.JPG';
       this.messageToShow.messageTwo = ' بخش مشاهده کاربران، اطلاعات کلی و ویرایش کاربران در دسترس می باشد. سه آیکن سمت چپ مربوط به ویرایش اطلاعات کاربر، جزئیات ورود های قبلی و تنظیمات بیشتر کاربر می باشد. تنظیمات بیشتر برای فعال سازی، غیرفعال سازی و بازنشانی رمز عبور می باشد.';
-      this.messageToShow.messageThree = 'بازنشانی بمعنای تغییر رمز عبور به شماره موبایل کابر است.قفل به معنای دسترسی یا عدم دسترسی کاربر به برنامه می باشد. درصورتی که کاربری به دفعات متعدد به اشتباه نام کاربری و گذرواژه را وارد کند در مدت زمان مشخصی قفل میشود و قادر به ورود نخواهد بود. مدت زمان آن نیز در قسمت سطح دسترسی قابل تنظیم می باشد.فعال یا غیر فعال بودن به معنای دسترسی کاربر به برنامه است و مدت مشخصی ندارد.اطلاعات هر کاربری قابل ویرایش شود';
-      this.messageToShow.imgTwo = 'assets/imgs/help/edit/editContacts2.PNG';
+      this.messageToShow.messageThree = 'بازنشانی بمعنای تغییر رمز عبور به شماره موبایل کابر است.قفل به معنای دسترسی یا عدم دسترسی کاربر به برنامه می باشد. درصورتی که کاربری به دفعات متعدد به اشتباه نام کاربری و گذرواژه را وارد کند در مدت زمان مشخصی قفل میشود و قادر به ورود نخواهد بود. مدت زمان آن نیز در قسمت سطح دسترسی قابل تنظیم می باشد.فعال یا غیر فعال بودن به معنای دسترسی کاربر به برنامه است و مدت مشخصی ندارد.اطلاعات هر کاربری قابل ویرایش شود.قسمت افزودن کاربر جدید برای معرفی کاربر جدید میباشد. با کامل کردن زیر قسمت های مربوطه(مشخصات کاربر-دسترسی به ناحیه-دسترسی به خدمات ارائه شده در برنامه - نوع یا گروه دسترسی) نسبت به ایجاد کاربر اقدام نمایید.';
+      this.messageToShow.imgTwo = '';
       return;
     }
     else if (currentRoute === '/wr/mu/all/loggins/') {

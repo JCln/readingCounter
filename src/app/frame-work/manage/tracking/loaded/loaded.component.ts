@@ -21,7 +21,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   dataSource: ITracking[] = [];
-  filterZoneDictionary: IDictionaryManager[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
   selectedFuckingTest: any[] = [];
@@ -48,7 +48,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.trackingManagerService.getLoadedDataSource();
       this.closeTabService.saveDataForTrackLoaded = this.dataSource;
     }
-    this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

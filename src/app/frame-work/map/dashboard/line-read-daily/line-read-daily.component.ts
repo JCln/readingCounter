@@ -67,6 +67,14 @@ export class LineReadDailyComponent implements OnInit {
       responsive: true,
       maintainAspectRatio: false,
       tooltips: {
+        mode: 'single',
+        footerFontFamily: 'Blotus',
+        bodyFontFamily: 'Blotus',
+        titleFontFamily: 'Blotus',
+        bodyFontSize: 18,
+        titleFontSize: 18,
+        footerFontSize: 18,
+        bodyFontStyle: 'bold',
         callbacks: {
           label: function (tooltipItem, data) {
             // let tooltipLabel = data.labels[tooltipItem.index];
@@ -74,18 +82,12 @@ export class LineReadDailyComponent implements OnInit {
             let allData: any = data.datasets[tooltipItem.datasetIndex].data;
             let tooltipData = allData[tooltipItem.index];
             let customTooltip = hints[tooltipItem.index];
-
-            return 'مقدار : ' + tooltipData + ', ' + customTooltip;
+            let temp = ['مقدار : ' + tooltipData];
+            temp.push(customTooltip);
+            return temp;
 
           }
         },
-        footerFontFamily: 'Blotus',
-        bodyFontFamily: 'Blotus',
-        titleFontFamily: 'Blotus',
-        bodyFontSize: 18,
-        titleFontSize: 18,
-        footerFontSize: 18,
-        bodyFontStyle: 'bold'
       }
     }
   }

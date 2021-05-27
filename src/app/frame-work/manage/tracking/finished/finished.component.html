@@ -36,14 +36,12 @@
                 {{col.header}}
             </th>
             <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
                 <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
         </tr>
     </ng-template>
@@ -58,10 +56,6 @@
                 <ng-template #elseTemplate>
                     {{dataSource[col.field]}}
                 </ng-template>
-            </td>
-            <td (click)="downloadDbfOutput(dataSource)"><i class="tooltip p_icons pi pi-download">
-                    <div class="tooltip_text">دانلود</div>
-                </i>
             </td>
             <td (click)="backToImportedConfirmDialog(dataSource,ri)"><i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به صادر شده</div>
