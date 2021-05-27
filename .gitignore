@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /src/assets/env.js
+/src/app/services/env.service.ts
 # Only exists if Bazel was run
 /bazel-out
 
