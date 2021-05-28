@@ -62,8 +62,7 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   downloadOutputSingle = async (row: ITracking) => {
     const a = await this.trackingManagerService.downloadOutputSingle(row);
-    console.log(a);
-
+    this.outputManagerService.downloadFile(a, `.${a.type}`);
   }
   ngOnInit(): void {
     this.classWrapper();
@@ -96,8 +95,7 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate(['wr/m/l/all', true, dataSource.id]);
   }
   backToReading = async (dataSource: ITracking, rowIndex: number) => {
-    const a = await this.trackingManagerService.TESTbackToConfirmDialog(dataSource.id, ENTrackingMessage.toReading);
-    if (a)
+    if (await this.trackingManagerService.TESTbackToConfirmDialog(dataSource.id, ENTrackingMessage.toReading))
       this.refetchTable(rowIndex);
   }
 }

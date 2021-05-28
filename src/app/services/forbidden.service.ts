@@ -4,9 +4,10 @@ import { IDictionaryManager, ITitleValue } from 'src/app/Interfaces/ioverall-con
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { EN_messages } from '../Interfaces/enums.enum';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
-import { IReadingReportWithZoneIDsReq } from './../Interfaces/imanage';
+import { IForbiddenManager, IReadingReportWithZoneIDsReq } from './../Interfaces/imanage';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
@@ -58,7 +59,7 @@ export class ForbiddenService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postForbiddenByParamManager(this.forbiddenReq).subscribe(res => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.forbidden, this.forbiddenReq).subscribe(res => {
           resolve(res);
         })
       })
@@ -109,54 +110,12 @@ export class ForbiddenService {
   convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
     this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
+
+  setDynamicPartRanges = (dataSource: IForbiddenManager[]) => {
+    dataSource.forEach(item => {
+      if (item.gisAccuracy)
+        item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+    })
+  }
+
 }
-
-
-
-
-// unUsed for now
-  // gridFriendlyDefaultReq = {
-  //   take: 20,
-  //   skip: 0,
-  //   sort: [],
-  //   filter: {},
-  //   group: [],
-  //   aggregate: []
-  // }
-
- // setGridFriendlyDataSource = (event: LazyLoadEvent): ICounterStateGridFriendlyReq => {
-  //   console.log(event);
-  //   const counterStateReq: ICounterStateGridFriendlyReq = {
-  //     take: event.rows,
-  //     skip: event.first,
-  //     sort: [
-  //       {
-  //         field: event.sortField,
-  //         dir: event.sortOrder === 1 ? 'asc' : 'desc'
-  //       }
-  //     ],
-  //     filter: null,
-  //     group: null,
-  //     aggregate: null
-  //   }
-  //   console.log(counterStateReq);
-  //   return counterStateReq;
-  // }
-  // getDataSource = (gridData: ICounterStateGridFriendlyReq): Promise<IForbiddenManagerGridFriendlyRes[]> => {
-  //   try {
-  //     return new Promise((resolve) => {
-  //       this.interfaceManagerService.postForbiddenGridFriendlyManager(gridData).subscribe(res => {
-  //         resolve(res);
-  //       })
-  //     })
-  //   } catch (error) {
-  //     console.error(e => e);
-  //   }
-  // }
-  // getGridFriendlyDataSourceDefault = (): Promise<IForbiddenManagerGridFriendlyRes> => {
-  //   return new Promise(resolve => {
-  //     this.interfaceManagerService.postForbiddenGridFriendlyManager(this.gridFriendlyDefaultReq).subscribe(res => {
-  //       resolve(res);
-  //     })
-  //   });
-  // }

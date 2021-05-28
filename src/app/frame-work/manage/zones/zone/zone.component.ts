@@ -4,14 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IZoneManager } from 'src/app/Interfaces/imanage';
-import {
-  ENSnackBarColors,
-  ENSnackBarTimes,
-  IDictionaryManager,
-  IResponses,
-  ITrueFalse,
-} from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -65,7 +60,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   openDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ZoneAddDgComponent, {
         disableClose: true,
         minWidth: '30rem',
@@ -75,13 +70,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          console.log(result);
-
-          this.interfaceManagerService.addZoneManager(result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneADD, result.value);
         }
       });
     });
@@ -96,7 +85,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   editDialog = (row: any) => {
     const editable = this.getEditableSource(row).regionId;
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ZoneEditDgComponent, {
         disableClose: true,
         minWidth: '30rem',
@@ -109,11 +98,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editZoneManager(result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneEDIT, result.value);
         }
       });
     });
@@ -129,11 +114,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
   deleteSingleRow = async (row: IZoneManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteZoneManager(row.id).subscribe(res => {
-        if (res) {
-          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-        }
-      });
+      this.sectorsManagerService.sectorsDelete(ENInterfaces.ZoneREMOVE, row.id);
     }
   }
   filterSearchs = () => {

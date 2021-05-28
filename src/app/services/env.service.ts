@@ -1,7 +1,7 @@
 import { ActivatedProvince } from '../classes/activated-province';
 
 export class EnvService {
-  temp = ActivatedProvince.ESF;
+  temp = ActivatedProvince.DEFAULT;
 
   headerProvinceTitle = this.temp.headerProvinceTitle;
   API_URL = this.temp.API_URL;

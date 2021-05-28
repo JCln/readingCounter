@@ -1,7 +1,7 @@
 <p-table #dtableDetails [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[10,25,50]" [responsive]="true" dir="rtl" styleClass="p-datatable-responsive" dataKey="id"
-    editMode="row"  >
+    editMode="row">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -27,9 +27,17 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
+            </th>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>

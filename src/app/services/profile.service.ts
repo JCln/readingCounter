@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IObjectIteratation, IResponses } from 'src/app/Interfaces/ioverall-config';
-import { InterfaceService } from 'src/app/services/interface.service';
+import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { IChangePassword } from './../Interfaces/inon-manage';
@@ -12,7 +13,7 @@ import { IChangePassword } from './../Interfaces/inon-manage';
 export class ProfileService {
 
   constructor(
-    private interfaceService: InterfaceService,
+    private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService
   ) { }
 
@@ -48,7 +49,7 @@ export class ProfileService {
   changePassword = (password: IChangePassword) => {
     if (!this.verification(password))
       return;
-    return this.interfaceService.changePassword(password).subscribe(res => {
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe(res => {
       if (res)
         this.utilsService.snackBarMessageSuccess(res.message);
     });
@@ -56,7 +57,7 @@ export class ProfileService {
   getMyInfoDataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getMyProfile().subscribe((res: IResponses) => {
+        this.interfaceManagerService.GET(ENInterfaces.getMyProfile).subscribe((res: IResponses) => {
           resolve(res)
         });
       });

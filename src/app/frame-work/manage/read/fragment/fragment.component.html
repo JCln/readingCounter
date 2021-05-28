@@ -1,7 +1,7 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
     dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" #dt dataKey="id" editMode="row"
-      stateStorage="session" stateKey="fragment-session">
+    stateStorage="session" stateKey="fragment-session">
 
     <ng-template pTemplate="caption">
         <!-- <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -43,6 +43,27 @@
             <th pSortableColumn="isValidated" pResizableColumn>
                 <p-sortIcon field="isValidated"></p-sortIcon>
                 تایید
+            </th>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
+        <tr>
+            <th>
+                <p-columnFilter type="text" field="zoneId"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="routeTitle"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="fromEshterak"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="toEshterak"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="boolean" field="isValidated"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>

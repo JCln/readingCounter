@@ -18,7 +18,9 @@ export class DateJalaliComponent implements OnInit {
   constructor(private dateJalaliService: DateJalaliService) {
   }
 
-  sendDateJal = ($event) => this.dateJalEvent.emit($event.inputElementValue);
+  sendDateJal = ($event) => {
+    this.dateJalEvent.emit($event.inputElementValue);
+  }
   ngOnInit(): void {
     this.dateObject = this.dateJalaliService.getCurrentDate();
     this.dateJalEvent.emit(this.dateObject);

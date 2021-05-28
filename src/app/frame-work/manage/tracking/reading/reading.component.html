@@ -1,7 +1,7 @@
 <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-      stateStorage="session" stateKey="reading-session">
+    stateStorage="session" stateKey="reading-session">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -43,7 +43,8 @@
         </tr>
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
@@ -63,7 +64,7 @@
                     {{dataSourceRES[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="forceOffload(dataSourceRES)"><i class="tooltip p_icons pi pi-send _important">
+            <td (click)="forceOffload(dataSourceRES, ri)"><i class="tooltip p_icons pi pi-send _important">
                     <div class="tooltip_text">اتمام وقت</div>
                 </i>
             </td>

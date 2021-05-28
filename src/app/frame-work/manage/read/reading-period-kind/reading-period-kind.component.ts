@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -51,7 +52,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
   ) { }
 
   openDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(RpkmAddDgComponent,
         {
           disableClose: true,
@@ -59,7 +60,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.AddReadingPeriodKindManager(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.readingPeriodKindAdd, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -69,7 +70,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
     });
   }
   editDialog = (row: any) => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(RpkmEditDgComponent, {
         disableClose: true,
         width: '30rem',
@@ -80,7 +81,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editReadingPeriodKindManager(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.readingPeriodKindEdit, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -100,7 +101,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
   deleteSingleRow = async (row: any) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteReadingPeriodKindManager(row.id).subscribe(res => {
+      this.interfaceManagerService.POST(ENInterfaces.readingPeriodKindRemove, row.id).subscribe(res => {
         if (res) {
           console.log(res);
 
@@ -111,7 +112,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getReadingPeriodKindManager().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.readingPeriodKindAll).subscribe(res => {
         if (res) {
           resolve(res);
         }

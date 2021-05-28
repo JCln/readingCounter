@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IObjectIteratation, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { EN_messages } from '../Interfaces/enums.enum';
-import { IDictionaryManager } from '../Interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
+import { ENInterfaces } from './../Interfaces/en-interfaces.enum';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -31,7 +31,7 @@ export class SectorsManagerService {
   /*API CALLS */
   getProvinceDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getProvinceManager().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.ProvinceGET).subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -40,7 +40,7 @@ export class SectorsManagerService {
   }
   getZoneDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneManager().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.ZoneGET).subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -49,7 +49,7 @@ export class SectorsManagerService {
   }
   getZoneBoundDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getZoneBoundManager().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.ZoneBoundGET).subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -58,7 +58,7 @@ export class SectorsManagerService {
   }
   getRegionDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getRegionManager().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.RegionGET).subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -67,7 +67,7 @@ export class SectorsManagerService {
   }
   getCountryDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getCountryManager().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.CountryGET).subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -87,6 +87,22 @@ export class SectorsManagerService {
   getZoneDictionary = (): any => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
+
+  sectorsAddEdit = (apiUse: ENInterfaces, value: any) => {
+    this.interfaceManagerService.POSTBODY(apiUse, value).subscribe((res: IResponses) => {
+      if (res) {
+        this.utilsService.snackBarMessageSuccess(res.message);
+      }
+    })
+  }
+  sectorsDelete = (apiUse: ENInterfaces, id: any) => {
+    this.interfaceManagerService.POST(apiUse, id).subscribe((res: IResponses) => {
+      if (res) {
+        this.utilsService.snackBarMessageSuccess(res.message);
+      }
+    });
+  }
+
   convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
     this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }

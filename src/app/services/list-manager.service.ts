@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IOnOffLoadFlat } from '../Interfaces/imanage';
 import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { CloseTabService } from './close-tab.service';
@@ -51,7 +52,7 @@ export class ListManagerService {
       { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
       { field: 'mobile', header: 'موبایل', isSelected: false },
       { field: 'hazf', header: 'حذف', isSelected: false },
-      { field: 'hasError', header: 'خطا', isSelected: false },
+      { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
       { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
       { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false },
       { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false },
@@ -140,7 +141,7 @@ export class ListManagerService {
   getLMAllFirst = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedALL, trackingId).subscribe(res => {
           this.closeTabService.saveDataForLMAll = res;
           resolve(res);
         })
@@ -152,7 +153,7 @@ export class ListManagerService {
   getLMAllExtra = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getLMAll(trackingId).subscribe(res => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedALL, trackingId).subscribe(res => {
           this.closeTabService.saveDataForLMAll_extra = res;
           resolve(res);
         })
@@ -173,11 +174,14 @@ export class ListManagerService {
   getCounterStateDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateDictionary();
   }
+  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
+  }
   getLMPD = (trackNumber: number): Observable<any> => {
-    return this.interfaceManagerService.getLMPD(trackNumber);
+    return this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedPERDAY, trackNumber);
   }
   postLMPDXY = (body: object): Observable<any> => {
-    return this.interfaceManagerService.postLMPDXY(body);
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.ListPerDayXY, body);
   }
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {

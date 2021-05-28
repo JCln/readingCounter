@@ -6,6 +6,7 @@ import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.se
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { EN_messages } from '../Interfaces/enums.enum';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from './../Interfaces/imanage';
 
@@ -36,9 +37,9 @@ export class ReadingReportManagerService {
   /* COLUMNS*/
   columnRRAnalyzeByParam = (): IObjectIteratation[] => {
     return [
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: false },
+      // { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: false },
       // { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true, readonly: false },
-      { field: 'regionTitle', header: 'منطقه', isSelected: false, readonly: false },
+      // { field: 'regionTitle', header: 'منطقه', isSelected: false, readonly: false },
       { field: 'statusTitle', header: 'وضعیت', isSelected: true, readonly: false },
       { field: 'min', header: 'کمینه', isSelected: true, readonly: false },
       { field: 'max', header: 'بیشینه', isSelected: true, readonly: false },
@@ -133,10 +134,10 @@ export class ReadingReportManagerService {
   }
   columnSelectedRRKarkard = (): IObjectIteratation[] => {
     return [
-      { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
+      // { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
       { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
-      { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
-      { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
+      // { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
+      // { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
       { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
       { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
@@ -200,7 +201,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRAnalyzeByParam(this.rRAnalyzeReq).subscribe((res) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.trackingAnalyzeByParam, this.rRAnalyzeReq).subscribe((res) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -219,7 +220,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRMasterManager(this.readingReportReq).subscribe((res) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ReadingReportMasterWithParam, this.readingReportReq).subscribe((res) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -238,7 +239,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRTraverseDifferentialManager(this.rRTraverseDiffrential).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListTraverseDifferential, this.rRTraverseDiffrential).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -256,7 +257,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRTraverseManager(this.readingReportReq).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListTraverse, this.readingReportReq).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -274,7 +275,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRKarkardManager(this.readingReportReq).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListOFFKarkard, this.readingReportReq).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -292,7 +293,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRTraverseDifferentialChartManager(this.rRTraverseDiffrential).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListTraverseDifferntialChart, this.rRTraverseDiffrential).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -310,7 +311,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRKarkardChartManager(this.readingReportReq).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListKarkardChart, this.readingReportReq).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -328,7 +329,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRDispersalChartManager(this.readingReportReq).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListDispersalChart, this.readingReportReq).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -346,7 +347,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRKarkardDailyManager(this.readingReportReq).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListKarkardDaily, this.readingReportReq).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -364,7 +365,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRGISManager(this.readingReportGISReq).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListToGis, this.readingReportGISReq).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -382,7 +383,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRDisposalHoursanager(this.readingReportReq).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListDispersalHours, this.readingReportReq).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -404,7 +405,7 @@ export class ReadingReportManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postRRDetailsManager(this.readingReportReq).subscribe((res: any) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ReadingReportDETAILSWithParam, this.readingReportReq).subscribe((res: any) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -417,7 +418,7 @@ export class ReadingReportManagerService {
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getReadingPeriodByKindManagerDictionary(kindId).subscribe((res: any) => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.readingPeriodByKindDictionary, kindId).subscribe((res: any) => {
           resolve(res)
         })
       });
@@ -621,6 +622,7 @@ export class ReadingReportManagerService {
   }
 
   private datesValidationAnalyzePerformance = (): boolean => {
+    this.convertDates();
     if (this.utilsService.isNull(this.rRAnalyzeReq.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
@@ -754,6 +756,10 @@ export class ReadingReportManagerService {
 
   // 
   // snack bar
+  convertDates = () => {
+    this.rRAnalyzeReq.fromDate = this.utilsService.persianToEngNumbers(this.rRAnalyzeReq.fromDate);
+    this.rRAnalyzeReq.toDate = this.utilsService.persianToEngNumbers(this.rRAnalyzeReq.toDate);
+  }
   emptyMessage = () => {
     this.utilsService.snackBarMessageFailed(EN_messages.notFound);
   }

@@ -3,8 +3,9 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -59,11 +60,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addProvinceManager(result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ProvinceADD, result.value);
         }
       });
     });
@@ -78,7 +75,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   editDialog = (row: any) => {
     const editable = this.getEditableSource(row).countryId;
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ProvinceEditDgComponent, {
         disableClose: true,
         width: '30rem',
@@ -91,11 +88,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editProvinceManager(result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ProvinceEDIT, result.value);
         }
       });
     });
@@ -111,11 +104,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   deleteSingleRow = async (row: IProvinceManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteProvinceManager(row.id).subscribe(res => {
-        if (res) {
-          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-        }
-      });
+      this.sectorsManagerService.sectorsDelete(ENInterfaces.ProvinceREMOVE, row.id);
     }
   }
   filterSearchs = () => {

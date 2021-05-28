@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { IOnOffLoad, IOverAllWOUIInfo } from './../Interfaces/imanage';
 
@@ -30,7 +31,7 @@ export class DownloadManagerService {
   downloadFileInfo = (targetId: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.downloadFileInfo(targetId).subscribe(res => {
+        this.interfaceManagerService.GETID(ENInterfaces.downloadFileInfo, targetId).subscribe(res => {
           resolve(res)
         })
       });
@@ -42,7 +43,7 @@ export class DownloadManagerService {
   downloadForbiddenFileInfo = (targetId: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.downloadForbiddenFileInfo(targetId).subscribe(res => {
+        this.interfaceManagerService.GETID(ENInterfaces.downloadFileInfo, targetId).subscribe(res => {
           resolve(res)
         })
       });
@@ -53,7 +54,7 @@ export class DownloadManagerService {
   downloadFile = (fileRepositoryId: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.downloadFile(fileRepositoryId).subscribe(res => {
+        this.interfaceManagerService.GETBLOB(ENInterfaces.downloadFileGET, fileRepositoryId).subscribe(res => {
           resolve(res)
         });
       })

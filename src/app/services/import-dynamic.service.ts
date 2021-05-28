@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
+import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { EN_messages } from '../Interfaces/enums.enum';
@@ -18,7 +20,8 @@ export class ImportDynamicService {
   constructor(
     private snackWrapperService: SnackWrapperService,
     private utilsService: UtilsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private interfaceManagerService: InterfaceManagerService
   ) { }
 
   persentCheck = (val: number): boolean => {
@@ -129,6 +132,52 @@ export class ImportDynamicService {
         data: res
       })
     })
+  }
+
+  /*API CALLS */
+  getReadingPeriod = (zoneId: number, kindId: number): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.GETByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, zoneId, kindId).subscribe(res => {
+          resolve(res);
+        })
+      });
+    } catch {
+      console.error(e => e);
+    }
+  }
+  getReadingConfigDefaults = (zoneId: number): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.readingConfigDefaultByZoneId, zoneId).subscribe(res => {
+          resolve(res);
+        })
+      });
+    } catch {
+      console.error(e => e);
+    }
+  }
+  getUserCounterReaders = (zoneId: number): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).subscribe(res => {
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
+  postImportDynamicData = (importDynamic: IImportDynamicDefault): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.postImportData, importDynamic).toPromise().then(res => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
 }

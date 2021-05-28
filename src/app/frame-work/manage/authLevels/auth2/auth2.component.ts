@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { AuthsManagerService } from 'src/app/services/auths-manager.service';
@@ -46,7 +47,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
 
   // add auth 2 not working
   openDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(Auth2AddDgComponent, {
         disableClose: true,
         minWidth: '30rem',
@@ -56,7 +57,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addAuthLevel2Manager(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.AuthLevel2ADD, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -75,7 +76,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   }
   editDialog = (row: any) => {
     const editable = this.getEditableSource(row).authLevel1Id;
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(Auth2EditDgComponent, {
         disableClose: true,
         width: '30rem',
@@ -84,7 +85,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editAuthLevel2Manager(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.AuthLevel2EDIT, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -104,7 +105,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   deleteSingleRow = async (row: IProvinceManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteAuthLevel2Manager(row.id).subscribe(res => {
+      this.interfaceManagerService.POST(ENInterfaces.AuthLevel2REMOVE, row.id).subscribe(res => {
         if (res) {
           this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }

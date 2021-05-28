@@ -1,7 +1,7 @@
 <p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-      stateStorage="session" stateKey="loaded-session">
+    stateStorage="session" stateKey="loaded-session">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -41,12 +41,13 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="col.field !== 'zoneTitle'" type="text" field="{{col.field}}"></p-columnFilter>
-                <p-columnFilter field="zoneTitle" *ngIf="col.field === 'zoneTitle'" matchMode="in" display="menu"
-                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                <p-columnFilter *ngIf="!col?.isBoolean && !col?.isSelectOption" type="text" field="{{col.field}}">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean && col?.isSelectOption" field="{{col.field}}" matchMode="in"
+                    display="menu" [showMatchModes]="true" [showOperator]="false" [showAddButton]="false">
 
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-multiSelect [options]="filterZoneDictionary" [(ngModel)]="selectedFuckingTest"
+                        <p-multiSelect [options]="zoneDictionary" [(ngModel)]="selectedFuckingTest"
                             (onChange)="filter($event.value)" optionLabel="zoneTitle">
                             {{col.field}}
                             <ng-template let-option pTemplate="item">
@@ -58,6 +59,7 @@
 
                     </ng-template>
                 </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
             <th style="width: 4rem"></th>
@@ -105,58 +107,3 @@
         موردی پیدا نشد
     </tr>
 </section>
-
-<!-- <p-columnFilter *ngIf="col.field === 'zoneId'" field="zoneId" matchMode="in" display="menu"
-                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                    <ng-template pTemplate="header">
-                        <div class="p-px-3 p-pt-3 p-pb-0">
-                            <span class="p-text-bold">Agent Picker</span>
-                        </div>
-                    </ng-template>
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-multiSelect [ngModel]="value" [options]="zoneDictionary" placeholder="Any"
-                            (onChange)="filter($event.value)" optionLabel="title">
-                            <ng-template let-option pTemplate="item">
-                                <div class="p-multiselect-representative-option">
-                                    <span class="p-ml-1">{{option.title}}</span>
-                                </div>
-                            </ng-template>
-                        </p-multiSelect>
-                    </ng-template>
-                </p-columnFilter>
-
-       
-             <p-columnFilter field="zoneId" matchMode="in" [showMenu]="false">
-                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                    <p-multiSelect [ngModel]="value" [options]="zoneDictionary" placeholder="Any"
-                        (onChange)="filter($event.value)" optionLabel="name">
-                        <ng-template let-option pTemplate="item">
-                            <div class="p-multiselect-representative-option">
-                                <img [alt]="option.label" src="assets/showcase/images/demo/avatar/{{option.image}}"
-                                    width="32" style="vertical-align: middle" />
-                                <span class="p-ml-1">{{option.name}}</span>
-                            </div>
-                        </ng-template>
-                    </p-multiSelect>
-                </ng-template>
-            </p-columnFilter> -->
-
-
-<!-- trackNumber
-listNumber
-insertDateJalali
-zoneId
-zoneTitle
-isBazdid
-year
-isRoosta
-fromEshterak
-toEshterak
-fromDate
-toDate
-itemQuantity
-alalHesabPercent
-imagePercent
-hasPreNumber
-displayBillId
-displayRadif -->

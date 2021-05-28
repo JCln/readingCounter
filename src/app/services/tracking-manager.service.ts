@@ -4,9 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs/internal/Observable';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { InterfaceService } from 'src/app/services/interface.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
 import { OffloadModify } from './../classes/offload-modify-type';
 import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
@@ -21,16 +21,16 @@ import { UtilsService } from './utils.service';
 export class TrackingManagerService {
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
       { field: 'counterReaderName', header: 'مامور', isSelected: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
       { field: 'listNumber', header: 'ش لیست', isSelected: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: true },
       // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false },
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
       { field: 'year', header: 'سال', isSelected: false },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
       { field: 'fromDate', header: 'از', isSelected: false },
@@ -59,8 +59,8 @@ export class TrackingManagerService {
       { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false, borderize: true },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false },
       { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true }
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true }
     ];
   }
   columnlastStates = (): IObjectIteratation[] => {
@@ -73,9 +73,9 @@ export class TrackingManagerService {
       // { field: 'zoneId', header: 'ناحیه', isSelected: false },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
       { field: 'stateTitle', header: 'مرحله', isSelected: true },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false },
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
       { field: 'year', header: 'سال', isSelected: false },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
       { field: 'fromDate', header: 'از', isSelected: false },
@@ -109,7 +109,6 @@ export class TrackingManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private interfaceService: InterfaceService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private _location: Location,
@@ -119,7 +118,7 @@ export class TrackingManagerService {
   getImportedDataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getTrackImported().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.trackingIMPORTED).subscribe(res => {
           resolve(res);
         });
       });
@@ -130,7 +129,7 @@ export class TrackingManagerService {
   getLoadedDataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getTrackLoaded().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.trackingLOADED).subscribe(res => {
           if (res) {
             resolve(res);
           }
@@ -144,7 +143,7 @@ export class TrackingManagerService {
   getReadingDataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getTrackReading().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.trackingREADING).subscribe(res => {
           resolve(res);
         });
       });
@@ -156,7 +155,7 @@ export class TrackingManagerService {
   getOffloadedDataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getTrackOffloaded().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.trackingOFFLOADED).subscribe(res => {
           resolve(res);
         });
       });
@@ -167,7 +166,7 @@ export class TrackingManagerService {
   getFinishedDataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getTrackFinished().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.trackingFINISHED).subscribe(res => {
           resolve(res);
         });
       });
@@ -179,7 +178,7 @@ export class TrackingManagerService {
   getLastStatesDataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getTrackLastStates().subscribe((res: any) => {
+        this.interfaceManagerService.GET(ENInterfaces.trackingLASTSTATES).subscribe((res: any) => {
           resolve(res)
         })
       });
@@ -190,7 +189,7 @@ export class TrackingManagerService {
   getFollowUpSource = (trackNumber: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getTrackFollowUp(trackNumber).subscribe(res => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.trackingFOLLOWUP, trackNumber).subscribe(res => {
           if (res) {
             resolve(res);
           }
@@ -207,7 +206,7 @@ export class TrackingManagerService {
   getCounterReaders = (zoneId: number): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getCounterReadersByZoneId(zoneId).subscribe(res => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).subscribe(res => {
           resolve(res)
         })
       });
@@ -216,17 +215,18 @@ export class TrackingManagerService {
     }
   }
   postEditingTrack = (rowData: ITracking) => {
-    this.interfaceManagerService.postTrackingEdit(this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingEDIT, this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {
       if (res)
         this.successSnackMessage(res.message);
     });
   }
   removeTrackingId = (trackNumber: string, desc: string): Observable<any> => {
-    return this.interfaceManagerService.removeTrackingId({ trackingId: trackNumber, description: desc });
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.trackingREMOVE, { trackingId: trackNumber, description: desc });
   }
   finishReading = (trackNumber: string, desc: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.finishReading({ trackingId: trackNumber, description: desc }).toPromise().then(res => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.trackingFinishReadiED, { trackingId: trackNumber, description: desc }).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
         resolve(res);
       })
     });
@@ -238,14 +238,14 @@ export class TrackingManagerService {
       fromDate: dbfData.fromDate,
       toDate: dbfData.toDate
     }
-    return this.interfaceManagerService.postOutputManager(a);
+    return this.interfaceManagerService.POSTBLOB(ENInterfaces.OutputDBF, a);
   }
   downloadOutputSingle = (single: ITracking): Promise<any> => {
     const a: any = {
       trackingId: single.id
     }
     return new Promise((resolve) => {
-      this.interfaceManagerService.postOutputSingleManager(a).toPromise().then(res => {
+      this.interfaceManagerService.POSTBLOB(ENInterfaces.OutputSINGLE, a).toPromise().then(res => {
         resolve(res);
       })
 
@@ -256,19 +256,19 @@ export class TrackingManagerService {
     this.utilsService.snackBarMessageSuccess(message);
   }
   migrateDataRowToImported = (trackingId: string, desc: string): Observable<any> => {
-    return this.interfaceManagerService.toImported({ trackingId: trackingId, description: desc });
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.trackingToIMPORTED, { trackingId: trackingId, description: desc });
   }
   migrateDataRowToReading = (trackingId: string, desc: string) => {
-    this.interfaceManagerService.toReading({ trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingToREADING, { trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
       if (res)
         this.successSnackMessage(res.message)
     });
   }
   migrateDataRowToOffloaded = (trackingId: string, desc: string): Observable<any> => {
-    return this.interfaceManagerService.toOffloaded({ trackingId: trackingId, description: desc });
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.trackingToOFFLOADED, { trackingId: trackingId, description: desc });
   }
   private migrateToPreState = (trackingId: string, desc: string) => {
-    return this.interfaceManagerService.toPre({ trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPRE, { trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
       if (res)
         this.successSnackMessage(res.message);
     })
@@ -314,7 +314,7 @@ export class TrackingManagerService {
   postOffloadModifyEdited = (body: IOffloadModifyReq) => {
     console.log(body);
 
-    this.interfaceService.postOffloadModify(body).toPromise().then(res => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then(res => {
       this.successSnackMessage(res);
     })
   }

@@ -4,8 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IRegionManager } from 'src/app/Interfaces/inon-manage';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -61,11 +62,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addRegionManager(result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.RegionADD, result.value);
         }
       });
     });
@@ -91,11 +88,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editRegionManager(result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.RegionEDIT, result.value);
         }
       });
     });
@@ -111,11 +104,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   deleteSingleRow = async (row: IRegionManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteRegionManager(row.id).subscribe(res => {
-        if (res) {
-          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-        }
-      });
+      this.sectorsManagerService.sectorsDelete(ENInterfaces.RegionREMOVE, row.id);
     }
   }
   filterSearchs = () => {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { EN_messages } from '../Interfaces/enums.enum';
 import { ENSnackBarColors } from '../Interfaces/ioverall-config';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems } from '../Interfaces/iuser-manager';
@@ -104,7 +105,7 @@ export class UserAddManagerService {
       return false;
     if (!this.utilsService.mobileValidation(vals.mobile))
       return false;
-    if (vals.email)
+    if (!this.utilsService.isNull(vals.email))
       if (!this.utilsService.isEmailValid(vals.email))
         return false;
     return true;
@@ -112,7 +113,7 @@ export class UserAddManagerService {
   connectToServer = (vals: IAddAUserManager) => {
     if (!this.vertification(vals))
       return false;
-    this.interfaceManagerService.postUserAdd(vals).subscribe((res: IResponses) => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.userADD, vals).subscribe((res: IResponses) => {
       if (res) {
         this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
         this.utilsService.routeTo('/wr/mu/all');

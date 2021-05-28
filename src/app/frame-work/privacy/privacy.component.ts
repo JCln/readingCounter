@@ -2,9 +2,10 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IPolicies, IPrivacy } from 'src/app/Interfaces/inon-manage';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceService } from 'src/app/services/interface.service';
+import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { PrivacyService } from 'src/app/services/privacy.service';
 
 
@@ -35,11 +36,11 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   constructor(private interactionService: InteractionService,
-    private router: Router, private privacyService: PrivacyService, private interfaceService: InterfaceService, private _snackBar: MatSnackBar) { }
+    private router: Router, private privacyService: PrivacyService, private interfaceManagerService: InterfaceManagerService, private _snackBar: MatSnackBar) { }
 
   getPolicies = (): Promise<IPolicies> => {
     return new Promise((resolve) => {
-      this.interfaceService.getPolicies(true).subscribe(res => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.getPolicies, true).subscribe(res => {
         if (res)
           resolve(res);
       })
@@ -83,7 +84,7 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
   addPolicy = () => {
-    this.interfaceService.addPolicies(this.policies);
+    this.interfaceManagerService.POSTBODY(ENInterfaces.addPolicies, this.policies);
   }
   openSnackBar(message: string, duration: number) {
     this._snackBar.open(message, 'بازگشت', {

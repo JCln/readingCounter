@@ -8,6 +8,7 @@ import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { ENSnackBarColors, ENSnackBarTimes } from '../Interfaces/ioverall-config';
 import { UtilsService } from './utils.service';
 
@@ -26,7 +27,7 @@ export class ApkService {
 
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getAPKPreList().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.APKPreList).subscribe(res => {
         if (res) {
           resolve(res);
         }
@@ -86,7 +87,7 @@ export class ApkService {
     formData.append('versionName', this.desc.versionName);
     formData.append('description', this.desc.description);
 
-    return this.interfaceManagerService.postAPK(formData)
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.APKUpload, formData)
       .pipe(
         map(response => response || {}),
         catchError((error: HttpErrorResponse) => {

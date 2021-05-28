@@ -20,15 +20,9 @@
 
 <main class="container _unified relative_pos">
     <div class="title_special">کارکرد</div>
-    <div class="chart_1 charts pie relative_pos" *ngIf="pieChartData[0]">
-        <div class="title">سالانه</div>
-        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
-        </canvas>
-    </div>
-    <div class="chart_2 charts pie relative_pos" *ngIf="pieChartDataOne[0]">
-        <div class="title">ماهانه</div>
-        <canvas baseChart [data]="pieChartDataOne" [labels]="pieChartLabels" [chartType]="pieChartType"
+    <div class="chart_4 charts pie relative_pos" *ngIf="pieChartDataThree[0]">
+        <div class="title">روزانه</div>
+        <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
@@ -38,9 +32,15 @@
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
-    <div class="chart_4 charts pie relative_pos" *ngIf="pieChartDataThree[0]">
-        <div class="title">روزانه</div>
-        <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"
+    <div class="chart_2 charts pie relative_pos" *ngIf="pieChartDataOne[0]">
+        <div class="title">ماهانه</div>
+        <canvas baseChart [data]="pieChartDataOne" [labels]="pieChartLabels" [chartType]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
+        </canvas>
+    </div>
+    <div class="chart_1 charts pie relative_pos" *ngIf="pieChartData[0]">
+        <div class="title">سالانه</div>
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>

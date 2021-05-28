@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { appItems, IRoleItems, IUserInfo } from 'src/app/Interfaces/iuser-manager';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -43,7 +44,7 @@ export class UserEditComponent implements AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.interfaceManagerService.getUserManager(this.UUid).subscribe((res: any) => {
+    this.interfaceManagerService.GETID(ENInterfaces.userEDIT, this.UUid).subscribe((res: any) => {
       if (res) {
         this.dataSource = res;
         this.closeTabService.saveDataForEditUsers = res;

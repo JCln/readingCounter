@@ -20,7 +20,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  convertNumbers = () => {
+    this.userData.password = this.utilsService.persianToEngNumbers(this.userData.password);
+    this.userData.username = this.utilsService.persianToEngNumbers(this.userData.username);
+  }
   logging = () => {
+    this.convertNumbers();
     if (this.utilsService.isNull(this.userData.password) || this.utilsService.isNull(this.userData.username)) {
       this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
       return;

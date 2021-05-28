@@ -34,6 +34,7 @@ export class MoshtarakComponent implements OnInit {
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  qotrDictionary: IDictionaryManager[] = [];
 
   constructor(
     private interactionService: InteractionService,
@@ -51,16 +52,19 @@ export class MoshtarakComponent implements OnInit {
     if (!this.searchService.verificationMosh(this.searchReq))
       return;
     this.dataSource = await this.searchService.searchMoshterakin(this.searchReq);
-    this.counterStateDictionary = await this.searchService.getCounterStateDictionary(this.searchReq.zoneId);
+    this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
     this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
+    this.qotrDictionary = await this.searchService.getQotrDictionary();
 
     this.insertSelectedColumns();
 
     this.searchService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.searchService.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateCode');
-    this.searchService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    this.searchService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.searchService.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   nullSavedSource = () => this.closeTabService.saveDataForSearchMoshtarakin = null;

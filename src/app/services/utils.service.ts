@@ -10,6 +10,7 @@ import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-conf
   providedIn: 'root'
 })
 export class UtilsService {
+  persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
 
   constructor(
     private router: Router,
@@ -100,6 +101,12 @@ export class UtilsService {
       return false;
     return true;
   }
+  persianToEngNumbers = (str) => {
+    for (let i = 0; i < 10; i++) {
+      str = str.replace(this.persianNumbers[i], i);
+    }
+    return str;
+  };
   // private pushOrPopFromMobileNumber = (mobileNum: string | number) => {
   //   // unshift to array just allowed so => string to array and then to string should converted
   //   const arrayString = [];

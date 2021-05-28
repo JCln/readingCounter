@@ -4,6 +4,7 @@ import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.se
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { EN_messages } from '../Interfaces/enums.enum';
 import { IFragmentDetails, IFragmentMaster } from './../Interfaces/imanage';
 import { ConverterService } from './converter.service';
@@ -23,7 +24,7 @@ export class FragmentManagerService {
       { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
-      { field: 'isValidated', header: 'تایید شده', isSelected: true, readonly: true },
+      { field: 'isValidated', header: 'تایید شده', isSelected: true, readonly: true, isBoolean: true },
     ];
   }
   columnSelectedFragmentDetails = (): IObjectIteratation[] => {
@@ -32,7 +33,7 @@ export class FragmentManagerService {
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
       { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
-      { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true }
+      { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }
     ];
   }
   constructor(
@@ -46,7 +47,7 @@ export class FragmentManagerService {
   getDataSource = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getFragmentMaster().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.fragmentMASTERALL).subscribe(res => {
           resolve(res);
         })
       })
@@ -57,7 +58,7 @@ export class FragmentManagerService {
   addFragmentMaster = (body: IFragmentMaster): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.addFragmentMaster(body).subscribe((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTERADD, body).subscribe((res: IResponses) => {
           if (res) {
             this.utilsService.snackBarMessageSuccess(res.message);
             resolve(res);
@@ -69,7 +70,7 @@ export class FragmentManagerService {
     }
   }
   editFragmentMaster = (body: IFragmentMaster) => {
-    this.interfaceManagerService.editFragmentMaster(body).subscribe((res: IResponses) => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTEREDIT, body).subscribe((res: IResponses) => {
       if (res)
         this.utilsService.snackBarMessageSuccess(res.message)
     })
@@ -77,7 +78,7 @@ export class FragmentManagerService {
   removeFragmentMaster = (body: IFragmentMaster): Promise<boolean> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.deleteFragmentMaster(body).subscribe((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTERREMOVE, body).subscribe((res: IResponses) => {
           if (res) {
             this.utilsService.snackBarMessageSuccess(res.message);
             resolve(true);
@@ -91,7 +92,7 @@ export class FragmentManagerService {
   isValidateMaster = (body: IFragmentMaster): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.validateFragmentMaster(body).subscribe((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTERVALIDATE, body).subscribe((res: IResponses) => {
           if (res) {
             this.utilsService.snackBarMessageSuccess(res.message);
             resolve(res);
@@ -110,7 +111,7 @@ export class FragmentManagerService {
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getFragmentDetails(masterId).subscribe(res => {
+        this.interfaceManagerService.GETID(ENInterfaces.fragmentDETAILSDETAILS, masterId).subscribe(res => {
           resolve(res);
         })
       })
@@ -121,7 +122,7 @@ export class FragmentManagerService {
   addFragmentDetails = (body: IFragmentDetails): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.addFragmentDetails(body).subscribe((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSADD, body).subscribe((res: IResponses) => {
           if (res) {
             this.utilsService.snackBarMessageSuccess(res.message);
             resolve(res);
@@ -133,7 +134,7 @@ export class FragmentManagerService {
     }
   }
   editFragmentDetails = (body: IFragmentDetails) => {
-    this.interfaceManagerService.editFragmentDetails(body).subscribe((res: IResponses) => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSEDIT, body).subscribe((res: IResponses) => {
       if (res)
         this.utilsService.snackBarMessageSuccess(res.message)
     })
@@ -141,7 +142,7 @@ export class FragmentManagerService {
   removeFragmentDetails = (body: IFragmentDetails): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.deleteFragmentDetails(body).subscribe((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSREMOVE, body).subscribe((res: IResponses) => {
           if (res) {
             this.utilsService.snackBarMessageSuccess(res.message)
             resolve(true);

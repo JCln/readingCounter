@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IRoleManager } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
@@ -45,7 +46,7 @@ export class RoleManagerComponent implements OnInit {
       const dialogRef = this.dialog.open(AddNewComponent, { disableClose: true });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.addRole(result).subscribe(res => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.RoleADD, result).subscribe(res => {
             if (res) {
               console.log(res);
 
@@ -67,7 +68,7 @@ export class RoleManagerComponent implements OnInit {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
       return new Promise((resolve) => {
-        this.interfaceManagerService.deleteRole(row.id).subscribe(res => {
+        this.interfaceManagerService.POST(ENInterfaces.RoleREMOVE, row.id).subscribe(res => {
           if (res) {
             resolve(res);
           }
@@ -89,7 +90,7 @@ export class RoleManagerComponent implements OnInit {
   }
   getRole = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getRole().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.RoleGET).subscribe(res => {
         if (res) {
           resolve(res);
         }

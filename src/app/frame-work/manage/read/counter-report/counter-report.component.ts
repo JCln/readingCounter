@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import {
   ENSnackBarColors,
   ENSnackBarTimes,
@@ -72,7 +73,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
   ) { }
 
   openDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(CrAddDgComponent, {
         disableClose: true,
         minWidth: '30rem',
@@ -84,7 +85,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
         if (result) {
           console.log(result);
 
-          this.interfaceManagerService.addCounterReport(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.CounterReportAdd, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -103,7 +104,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   editDialog = (row: any) => {
     const editable = this.getEditableSource(row).zoneId;
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(CrEditDgComponent, {
         disableClose: true,
         minWidth: '30rem',
@@ -116,7 +117,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.interfaceManagerService.editCounterReport(result).subscribe((res: IResponses) => {
+          this.interfaceManagerService.POSTBODY(ENInterfaces.CounterReportEdit, result).subscribe((res: IResponses) => {
             if (res) {
               this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
             }
@@ -136,7 +137,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
   deleteSingleRow = async (row: any) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.deleteCounterReport(row.id).subscribe(res => {
+      this.interfaceManagerService.POST(ENInterfaces.CounterReportRemove, row.id).subscribe(res => {
         if (res) {
           this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }
@@ -156,7 +157,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   getDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.getCounterReport().subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.CounterReportGet).subscribe(res => {
         if (res) {
           resolve(res);
         }

@@ -5,6 +5,7 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { Search } from '../classes/search';
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IOnOffLoadFlat, ISearchMoshReq } from '../Interfaces/imanage';
 import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
@@ -57,7 +58,7 @@ export class SearchService {
       { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
       { field: 'mobile', header: 'موبایل', isSelected: false },
       { field: 'hazf', header: 'حذف', isSelected: false },
-      { field: 'hasError', header: 'خطا', isSelected: false },
+      { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
       { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
       { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false },
       { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false },
@@ -98,11 +99,14 @@ export class SearchService {
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
-  getCounterStateDictionary = (zoneId: number): Promise<any> => {
+  getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
+  }
+  getQotrDictionary = () => {
+    return this.dictionaryWrapperService.getQotrDictionary();
   }
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
@@ -110,7 +114,7 @@ export class SearchService {
   searchMoshterakin = (body: ISearchMoshReq): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.postSearchMosh(body).toPromise().then(res => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListSearchMoshtarak, body).toPromise().then(res => {
           resolve(res);
         })
       });

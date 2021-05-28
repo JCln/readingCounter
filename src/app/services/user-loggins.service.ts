@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
+import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { IUserLoggins } from './../Interfaces/iuser-manager';
 
@@ -36,7 +37,7 @@ export class UserLogginsService {
   getLogsDataSource = (UUID: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.getUserLoggins(UUID).subscribe((res: IUserLoggins[]) => {
+        this.interfaceManagerService.GETID(ENInterfaces.userLOGINS, UUID).subscribe((res: IUserLoggins[]) => {
           resolve(res)
         });
       });

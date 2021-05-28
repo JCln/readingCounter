@@ -67,11 +67,9 @@ export class AuthService {
       })
   }
   private clearAllSavedData = () => this.closeTabService.cleanAllData();
-  private clearAllDictionaries = () => this.dictionaryWrapperService.cleanAllData();
   logout = () => {
     const refreshToken = this.jwtService.getRefreshToken();
     this.clearAllSavedData();
-    this.clearAllDictionaries();
     this.mainService.POSTBODY('V1/Account/Logout', { refreshToken }).subscribe(() => {
       this.jwtService.removeAllLocalStorage();
       this.routeTo('/login');
