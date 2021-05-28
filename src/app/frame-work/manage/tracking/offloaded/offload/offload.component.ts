@@ -10,7 +10,6 @@ import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { DownloadManagerService } from 'src/app/services/download-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceService } from 'src/app/services/interface.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 import { ImageViewerComponent } from '../../wuoi/image-viewer/image-viewer.component';
@@ -52,7 +51,6 @@ export class OffloadComponent implements OnInit {
   ref: DynamicDialogRef;
 
   constructor(
-    private interfaceService: InterfaceService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private trackingManagerService: TrackingManagerService,

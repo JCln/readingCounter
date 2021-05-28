@@ -13,7 +13,7 @@ export class InterfaceManagerService {
   GET = (URL: string): Observable<any> => {
     return this.mainService.GET(URL);
   }
-  GETByQuote = (URL: string, track: string | number): Observable<any> => {
+  GETByQuote = (URL: string, track: string | number | boolean): Observable<any> => {
     return this.mainService.GET(URL + `${track}`);
   }
   GETByQuoteTriple = (URL: string, zoneId: number, kindId: string | number): Observable<any> => {
@@ -28,8 +28,10 @@ export class InterfaceManagerService {
     return this.mainService.GETID(uuid, URL);
   }
 
-  POST = (URL: string, id: number): Observable<any> => {
-    return this.mainService.POST(URL, id);
+  POST = (URL: string, id?: number): Observable<any> => {
+    if (id)
+      return this.mainService.POST(URL, id);
+    return this.mainService.POST(URL);
   }
   POSTBODY = (URL: string, body: object): Observable<any> => {
     return this.mainService.POSTBODY(URL, body);

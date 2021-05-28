@@ -128,12 +128,13 @@ export enum ENInterfaces {
     trackingEDIT = 'V1/Tracking/Edit',
     trackingToIMPORTED = 'V1/Tracking/ToImported',
     trackingToREADING = 'V1/Tracking/ToReading',
-    trackingToOFFLOADED = 'V1​/Tracking​/ToOffloaded',
+    trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
     trackingPRE = 'V1/Tracking/Pre',
     trackingFinishReadiED = 'V1/Tracking/FinishReading',
     trackingREMOVE = 'V1/Tracking/Remove',
     trackingFOLLOWUP = 'V1/Tracking/FollowUp/?trackNumber=',
     trackingAnalyzeByParam = 'V1/Tracking/Analyze/ByParam',
+    trackingPostOffloadModify = 'V1/OffLoad/Modify',
 
     ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
     ListTraverse = 'V1/List/Offloaded/Traverse',
@@ -201,4 +202,22 @@ export enum ENInterfaces {
     QotrRemove = 'V1/Qotr/Remove',
     QotrEdit = 'V1/Qotr/Edit',
     QotrAdd = 'V1/Qotr/Add',
+
+
+    /* NON MANAGER INTERFACES */
+    getPolicies = `V1.Test/Policy/Active/`,
+    editPolicies = 'V1.Test/Policy/Edit', //post body
+    addPolicies = 'V1.Test/Policy/Add',
+    getSideBar = 'V1/User/SideBar',
+    postImportData = 'V1/Import/Dynamic',
+    changePassword = 'V1/Account/ChangePassword',
+    getMyProfile = 'V1/Account/MyInfo',
+
+    getDashboardKarkardTimed = 'V1/List/Dashboard/Karkard/Timed',
+    getDashboardMediaTimed = 'V1/List/Dashboard/Media/Timed',
+    getDashboardReadingReportTimed = 'V1/ReadingReport/Dashboard/Timed',
+    getDashboardReadTimed = 'V1/List/Dashboard/Read/Timed',
+    getDashboardForbiddenTimed = 'V1/Forbidden/Dashboard/Timed',
+    getDashboardReadDaily = 'V1/List/Dashboard/Read/Daily',
+    postDashboardAnalyzePerformance = 'V1/Tracking/Dashboard/Analyze/Performance',
 }

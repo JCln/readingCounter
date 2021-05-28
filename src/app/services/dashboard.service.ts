@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
-import { InterfaceService } from 'src/app/services/interface.service';
+import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { IDashboardKarkardTimed, IDashboardReadDaily } from '../Interfaces/inon-manage';
 import { IAnalyzeRes } from './../Interfaces/imanage';
@@ -11,7 +12,7 @@ import { IAnalyzeRes } from './../Interfaces/imanage';
 export class DashboardService {
 
   constructor(
-    private interfaceService: InterfaceService
+    private interfaceManagerService: InterfaceManagerService
   ) { }
 
   /* COLUMNS */
@@ -61,7 +62,7 @@ export class DashboardService {
   getDashboardKarkard = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getDashboardKarkardTimed().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardKarkardTimed).subscribe(res => {
           resolve(res);
         })
       })
@@ -72,7 +73,7 @@ export class DashboardService {
   getDashboardForbidden = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getDashboardForbiddenTimed().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardMediaTimed).subscribe(res => {
           resolve(res);
         })
       })
@@ -83,7 +84,7 @@ export class DashboardService {
   getDashboardMedia = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getDashboardMediaTimed().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardReadingReportTimed).subscribe(res => {
           resolve(res);
         })
       })
@@ -94,7 +95,7 @@ export class DashboardService {
   getDashboardReadingReport = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getDashboardReadingReportTimed().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardReadTimed).subscribe(res => {
           resolve(res);
         })
       })
@@ -105,7 +106,7 @@ export class DashboardService {
   getDashboardReadTimed = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getDashboardReadTimed().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardForbiddenTimed).subscribe(res => {
           resolve(res);
         })
       })
@@ -116,7 +117,7 @@ export class DashboardService {
   getDashboardReadDaily = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getDashboardReadDaily().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardReadDaily).subscribe(res => {
           resolve(res);
         })
       })
@@ -127,7 +128,7 @@ export class DashboardService {
   postDashboardAnalyzePerformance = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.postDashboardAnalyzePerformance().subscribe(res => {
+        this.interfaceManagerService.POST(ENInterfaces.postDashboardAnalyzePerformance).subscribe(res => {
           resolve(res);
         })
       })

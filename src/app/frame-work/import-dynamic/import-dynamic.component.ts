@@ -6,7 +6,6 @@ import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'src/app/Interf
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { ImportDynamicService } from 'src/app/services/import-dynamic.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceService } from 'src/app/services/interface.service';
 
 import { DictionaryWrapperService } from './../../services/dictionary-wrapper.service';
 
@@ -63,21 +62,18 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   subscription: Subscription[] = [];
 
   constructor(
-    private interfaceService: InterfaceService,
     private interactionService: InteractionService,
     private importDynamicService: ImportDynamicService,
     private closeTabService: CloseTabService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
-  connectToServer = () => {
+  connectToServer = async () => {
     const validation = this.importDynamicService.checkVertification(this.importDynamic, this._isOrderByDate);
     if (!validation)
       return;
-    this.interfaceService.postImportData(this.importDynamic).subscribe(res => {
-      this.importDynamicService.showResDialog(res);
-      this.resetToDefaultFormStatus();
-    })
+    this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic));
+    this.resetToDefaultFormStatus();
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();

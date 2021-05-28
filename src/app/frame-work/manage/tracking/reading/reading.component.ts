@@ -123,7 +123,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  forceOffload = (rowData: ITracking) => {
+  forceOffload = (rowData: ITracking, rowIndex: number) => {
     const title = EN_messages.reason_forceOffload;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -134,10 +134,8 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          console.log(1);
-          const a = await this.trackingManagerService.finishReading(rowData.id, desc);
-          console.log(a);
-
+          if (await this.trackingManagerService.finishReading(rowData.id, desc))
+            this.refetchTable(rowIndex);
         }
       })
     })

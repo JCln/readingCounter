@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-dynamic/confirm-dialog/confirm-dialog.component';
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { EN_messages } from '../Interfaces/enums.enum';
 import { IImportDynamic, IImportDynamicDefault } from '../Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes } from '../Interfaces/ioverall-config';
@@ -166,6 +166,17 @@ export class ImportDynamicService {
       });
     } catch (error) {
       console.error(e => e);
+    }
+  }
+  postImportDynamicData = (importDynamic: IImportDynamicDefault): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.postImportData, importDynamic).toPromise().then(res => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
     }
   }
 

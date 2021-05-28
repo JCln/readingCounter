@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs/internal/Observable';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { InterfaceService } from 'src/app/services/interface.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
@@ -110,7 +109,6 @@ export class TrackingManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private interfaceService: InterfaceService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private _location: Location,
@@ -227,7 +225,8 @@ export class TrackingManagerService {
   }
   finishReading = (trackNumber: string, desc: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.trackingFinishReadiED, { trackingId: trackNumber, description: desc }).toPromise().then(res => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.trackingFinishReadiED, { trackingId: trackNumber, description: desc }).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
         resolve(res);
       })
     });
@@ -315,7 +314,7 @@ export class TrackingManagerService {
   postOffloadModifyEdited = (body: IOffloadModifyReq) => {
     console.log(body);
 
-    this.interfaceService.postOffloadModify(body).toPromise().then(res => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then(res => {
       this.successSnackMessage(res);
     })
   }

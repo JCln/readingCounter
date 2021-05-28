@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ISidebarItems } from 'src/app/Interfaces/ioverall-config';
 
-import { InterfaceService } from '../interface.service';
+import { InterfaceManagerService } from '../interface-manager.service';
 import { sidebarItemsTest } from './sidebarItems';
 
 @Injectable({
@@ -12,7 +13,7 @@ import { sidebarItemsTest } from './sidebarItems';
 export class SidebarItemsService {
   private tabItemsSource = new BehaviorSubject<any>([]);
 
-  constructor(private interfaceService: InterfaceService) { }
+  constructor(private interfaceServiceManager: InterfaceManagerService) { }
 
   getLatestItems = (): Observable<any> => {
     return this.tabItemsSource.asObservable();
@@ -20,7 +21,7 @@ export class SidebarItemsService {
   getSideBarItems = (): Promise<ISidebarItems> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getSideBar().subscribe(res => {
+        this.interfaceServiceManager.GET(ENInterfaces.getSideBar).subscribe(res => {
           this.tabItemsSource.next(res.items);
           resolve(res)
         })
