@@ -26,28 +26,14 @@ export class CounterStateService {
       { field: 'title', header: 'عنوان', isSelected: true },
       { field: 'zoneId', header: 'ناحیه', isSelected: true },
       { field: 'clientOrder', header: 'ترتیب', isSelected: true },
-      { field: 'canEnterNumber', header: 'ثبت رقم', isSelected: true },
-      { field: 'isMane', header: 'مانع', isSelected: true },
-      { field: 'canNumberBeLessThanPre', header: 'رقم فعلی کمتر از قبلی', isSelected: false },
-      { field: 'isTavizi', header: 'تعویضی', isSelected: true },
-      { field: 'shouldEnterNumber', header: 'اجبار رقم', isSelected: true },
-      { field: 'isXarab', header: 'خراب', isSelected: true },
-      { field: 'isFaqed', header: 'فاقد', isSelected: true }
+      { field: 'canEnterNumber', header: 'ثبت رقم', isSelected: true, isBoolean: true },
+      { field: 'isMane', header: 'مانع', isSelected: true, isBoolean: true },
+      { field: 'canNumberBeLessThanPre', header: 'رقم فعلی کمتر از قبلی', isSelected: false, isBoolean: true },
+      { field: 'isTavizi', header: 'تعویضی', isSelected: true, isBoolean: true },
+      { field: 'shouldEnterNumber', header: 'اجبار رقم', isSelected: true, isBoolean: true },
+      { field: 'isXarab', header: 'خراب', isSelected: true, isBoolean: true },
+      { field: 'isFaqed', header: 'فاقد', isSelected: true, isBoolean: true }
     ];
-  }
-  columnsToFilter = (event: any): any => {
-    // let a;
-    // event.filter(item => {
-    //   if (item.value)
-    //     a.push(item);
-    // })
-    // console.log(a);
-
-    // console.log(event.value);
-    console.log(event);
-
-
-    // return a;
   }
   gridFriendlyDefaultReq = {
     take: 20,
@@ -58,6 +44,8 @@ export class CounterStateService {
     aggregate: []
   }
   getGridFriendlyDataSource = (event: LazyLoadEvent): any => {
+    console.log(event);
+
     const counterStateReq: ICounterStateGridFriendlyReq = {
       take: event.rows,
       skip: event.first,
@@ -140,7 +128,7 @@ export class CounterStateService {
   }
   getGridFriendlyDataSourceDefault = (): any => {
     return new Promise(resolve => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.counterStateGridFriendly, this.gridFriendlyDefaultReq).subscribe(res => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.counterStateAll, this.gridFriendlyDefaultReq).subscribe(res => {
         resolve(res);
       })
     });

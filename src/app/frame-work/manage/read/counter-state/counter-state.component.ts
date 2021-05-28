@@ -42,7 +42,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.customizeSelectedColumns();
   }
   sendGridFriendlyDataSource = (event: LazyLoadEvent): any => {
-    this.counterStateService.getGridFriendlyDataSource(event);
+    this.dataSource = this.counterStateService.getGridFriendlyDataSource(event);
   }
   nullSavedSource = () => this.closeTabService.saveDataForCounterState = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -50,14 +50,13 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForCounterState) {
-      this.dataSourceRES = this.closeTabService.saveDataForCounterState;
+      this.dataSource = this.closeTabService.saveDataForCounterState;
     }
     else {
-      this.dataSourceRES = await this.counterStateService.getGridFriendlyDataSourceDefault();
-      this.closeTabService.saveDataForCounterState = this.dataSourceRES;
+      this.dataSource = await this.counterStateService.getGridFriendlyDataSourceDefault();
+      this.closeTabService.saveDataForCounterState = this.dataSource;
     }
     this.zoneDictionary = await this.counterStateService.getZoneDictionary();
-    this.dataSource = this.dataSourceRES.data;
     this.counterStateService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   ngOnInit(): void {

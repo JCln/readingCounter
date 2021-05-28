@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -10,7 +11,6 @@ import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
-import { EN_messages } from './../../../../Interfaces/enums.enum';
 
 @Component({
   selector: 'app-loaded',
@@ -21,7 +21,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   dataSource: ITracking[] = [];
-  filterZoneDictionary: IDictionaryManager[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
   selectedFuckingTest: any[] = [];
@@ -48,7 +48,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = await this.trackingManagerService.getLoadedDataSource();
       this.closeTabService.saveDataForTrackLoaded = this.dataSource;
     }
-    this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
+    this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

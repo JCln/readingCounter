@@ -37,9 +37,9 @@ export class ReadingReportManagerService {
   /* COLUMNS*/
   columnRRAnalyzeByParam = (): IObjectIteratation[] => {
     return [
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: false },
+      // { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: false },
       // { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true, readonly: false },
-      { field: 'regionTitle', header: 'منطقه', isSelected: false, readonly: false },
+      // { field: 'regionTitle', header: 'منطقه', isSelected: false, readonly: false },
       { field: 'statusTitle', header: 'وضعیت', isSelected: true, readonly: false },
       { field: 'min', header: 'کمینه', isSelected: true, readonly: false },
       { field: 'max', header: 'بیشینه', isSelected: true, readonly: false },
@@ -134,10 +134,10 @@ export class ReadingReportManagerService {
   }
   columnSelectedRRKarkard = (): IObjectIteratation[] => {
     return [
-      { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
+      // { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
       { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
-      { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
-      { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
+      // { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
+      // { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
       { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
       { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
@@ -622,6 +622,7 @@ export class ReadingReportManagerService {
   }
 
   private datesValidationAnalyzePerformance = (): boolean => {
+    this.convertDates();
     if (this.utilsService.isNull(this.rRAnalyzeReq.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
@@ -755,6 +756,10 @@ export class ReadingReportManagerService {
 
   // 
   // snack bar
+  convertDates = () => {
+    this.rRAnalyzeReq.fromDate = this.utilsService.persianToEngNumbers(this.rRAnalyzeReq.fromDate);
+    this.rRAnalyzeReq.toDate = this.utilsService.persianToEngNumbers(this.rRAnalyzeReq.toDate);
+  }
   emptyMessage = () => {
     this.utilsService.snackBarMessageFailed(EN_messages.notFound);
   }

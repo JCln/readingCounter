@@ -22,16 +22,16 @@ import { UtilsService } from './utils.service';
 export class TrackingManagerService {
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
+      { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
       { field: 'counterReaderName', header: 'مامور', isSelected: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
       { field: 'listNumber', header: 'ش لیست', isSelected: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: true },
       // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false },
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
       { field: 'year', header: 'سال', isSelected: false },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
       { field: 'fromDate', header: 'از', isSelected: false },
@@ -60,8 +60,8 @@ export class TrackingManagerService {
       { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false, borderize: true },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false },
       { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true }
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true }
     ];
   }
   columnlastStates = (): IObjectIteratation[] => {
@@ -74,9 +74,9 @@ export class TrackingManagerService {
       // { field: 'zoneId', header: 'ناحیه', isSelected: false },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
       { field: 'stateTitle', header: 'مرحله', isSelected: true },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false },
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
       { field: 'year', header: 'سال', isSelected: false },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
       { field: 'fromDate', header: 'از', isSelected: false },

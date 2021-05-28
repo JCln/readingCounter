@@ -80,7 +80,7 @@ export class UserEditManagerService {
     }
     if (!this.utilsService.mobileValidation(this.dataSource.mobile))
       return false;
-    if (this.dataSource.email)
+    if (!this.utilsService.isNull(this.dataSource.email))
       if (!this.utilsService.isEmailValid(this.dataSource.email))
         return false;
 

@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IAnalyzeRes } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -20,8 +18,6 @@ export class PrfmResComponent implements OnInit {
   _selectedColumns: any[];
 
   constructor(
-    private interactionService: InteractionService,
-    private closeTabService: CloseTabService,
     private readingReportManagerService: ReadingReportManagerService,
     public outputManagerService: OutputManagerService,
     private utilsService: UtilsService

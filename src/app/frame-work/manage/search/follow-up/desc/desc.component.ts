@@ -19,10 +19,10 @@ export class DescComponent implements AfterViewInit, OnDestroy {
     { field: 'insertDateJalali', header: 'تاریخ ثبت' },
     { field: 'inserterCode', header: 'کد کاربر' },
     { field: 'userDisplayName', header: 'نام نمایش' },
-    { field: 'seen', header: 'دیده شده' },
     { field: 'counterReaderName', header: 'مامور' },
-    { field: 'trackStatusTitle', header: 'وضعیت' },
-    { field: 'hasDetails', header: 'جزئیات' },
+    { field: 'trackStatusTitle', header: 'وضعیت' }
+    // { field: 'seen', header: 'دیده شده' },
+    // { field: 'hasDetails', header: 'جزئیات' },
   ]
   _descView = (): IObjectIteratation[] => {
     return [

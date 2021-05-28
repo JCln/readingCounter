@@ -52,7 +52,7 @@ export class ListManagerService {
       { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
       { field: 'mobile', header: 'موبایل', isSelected: false },
       { field: 'hazf', header: 'حذف', isSelected: false },
-      { field: 'hasError', header: 'خطا', isSelected: false },
+      { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
       { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
       { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false },
       { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false },
