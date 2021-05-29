@@ -18,8 +18,6 @@ export class CountInStatesComponent implements OnInit {
   classWrapper = async () => {
     this.countInStateDataSource = await this.dashboardService.getDashboardCountInStatesTimed();
     this.insertSelectedColumns();
-    console.log(this.countInStateDataSource);
-
   }
   ngOnInit(): void {
     this.classWrapper();

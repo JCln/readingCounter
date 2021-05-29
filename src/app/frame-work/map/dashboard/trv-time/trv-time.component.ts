@@ -20,8 +20,6 @@ export class TrvTimeComponent implements OnInit {
   classWrapper = async () => {
     this.traverseTime = await this.dashboardService.getDashboardTraverseTimed();
     this.insertSelectedColumns();
-    console.log(this.traverseTime);
-
   }
   ngOnInit(): void {
     this.classWrapper();
