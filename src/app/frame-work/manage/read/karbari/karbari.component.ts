@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { IZoneManager } from 'src/app/Interfaces/imanage';
+import { IZoneManager } from 'src/app/Interfaces/inon-manage';
 import {
   ENSnackBarColors,
   ENSnackBarTimes,

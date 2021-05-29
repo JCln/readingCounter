@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { ICountryManager } from 'src/app/Interfaces/imanage';
+import { ICountryManager } from 'src/app/Interfaces/inon-manage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { SectorsManagerService } from 'src/app/services/sectors-manager.service';

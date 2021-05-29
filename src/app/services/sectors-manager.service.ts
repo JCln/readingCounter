@@ -28,6 +28,43 @@ export class SectorsManagerService {
       { field: 'title', header: 'عنوان', isSelected: true }
     ]
   }
+  columnProvince = (): IObjectIteratation[] => {
+    return [
+      { field: 'title', header: 'عنوان', isSelected: true },
+      { field: 'countryId', header: 'کشور', isSelected: true },
+      { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
+    ]
+  }
+  columnRegion = (): IObjectIteratation[] => {
+    return [
+      { field: 'title', header: 'عنوان', isSelected: true },
+      { field: 'provinceId', header: 'استان', isSelected: true },
+      { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
+    ]
+  }
+  columnZone = (): IObjectIteratation[] => {
+    return [
+      { field: 'title', header: 'عنوان', isSelected: true },
+      { field: 'regionId', header: 'منطقه', isSelected: true },
+      { field: 'isMetro', header: 'شهری', isSelected: true },
+      { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
+    ]
+  }
+  columnZoneBound = (): IObjectIteratation[] => {
+    return [
+      { field: 'title', header: 'عنوان', isSelected: true },
+      { field: 'zoneId', header: 'ناحیه', isSelected: true },
+      // { field: 'govermentalCode', header: 'کشور', isSelected: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true },
+      // { field: 'fromRadif', header: 'عنوان', isSelected: true },
+      // { field: 'toRadif', header: 'کشور', isSelected: true },
+      // { field: 'host', header: 'ترتیب', isSelected: true },
+      // { field: 'dbUserName', header: 'ترتیب', isSelected: true },
+      // { field: 'dbPassword', header: 'ترتیب', isSelected: true },
+      // { field: 'dbInitialCatalog', header: 'ترتیب', isSelected: true }
+    ]
+  }
   /*API CALLS */
   getProvinceDataSource = (): any => {
     return new Promise((resolve) => {
