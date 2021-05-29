@@ -71,6 +71,7 @@ export enum EN_messages {
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
 
+    confirm_remove = ' آیا میخواهید این مورد را حذف کنید؟',
     delete_confirm = 'آیا از حذف مسیر اطمینان دارید',
     reson_delete_backtoImported = 'علت بازگشت به صادر شده',
     reason_forceOffload = 'علت اتمام وقت',

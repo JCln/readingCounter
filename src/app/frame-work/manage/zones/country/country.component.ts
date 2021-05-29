@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ICountryManager } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -32,9 +33,9 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   openAddDialog = () => {
     return new Promise(() => {
       const dialogRef = this.dialog.open(CountryAddDgComponent, { disableClose: true });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          this.sectorsManagerService.addOrEditCountry(result, 'addCountryManager');
+          await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryADD, result);
         }
       });
     });
@@ -50,6 +51,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     else {
       this.dataSource = await this.sectorsManagerService.getCountryDataSource();
       this.closeTabService.saveDataForCountry = this.dataSource;
+      this.insertSelectedColumns();
     }
   }
   ngOnInit() {
@@ -78,20 +80,24 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: ICountryManager, rowIndex: number) => {
-    if (this.sectorsManagerService.firstConfirmDialog()) {
-      await this.sectorsManagerService.deleteSingleRow(rowData.id, 'deleteCountryManager');
+    const a = await this.sectorsManagerService.firstConfirmDialog();
+    console.log(a);
+    console.log(!!a);
+
+    if (!!a) {
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.CountryREMOVE, rowData.id);
       this.refetchTable(rowIndex);
     }
   }
   onRowEditInit(dataSource: any) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
-  onRowEditSave(dataSource: ICountryManager, rowIndex: number) {
+  onRowEditSave = async (dataSource: ICountryManager, rowIndex: number) => {
     if (!this.sectorsManagerService.verificationEditedRow(dataSource)) {
       this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
       return;
     }
-    this.sectorsManagerService.addOrEditCountry(dataSource, 'editCountryManager');
+    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryEDIT, dataSource);
   }
   onRowEditCancel(dataSource: ICountryManager, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];

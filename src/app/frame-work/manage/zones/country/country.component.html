@@ -3,18 +3,15 @@
     styleClass="p-datatable-responsive" [responsive]="true" dataKey="id">
 
     <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="left_side">
+                <i (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن موردی</div>
+                </i>
             </div>
             <div class="left_side">
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i>
-                <i (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
-                    <div class="tooltip_text">افزودن موردی</div>
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
             </div>
         </div>
@@ -43,7 +40,14 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
-                {{dataSource.zoneId}}
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{dataSource[col.field]}}
+                    </ng-template>
+                </p-cellEditor>
             </td>
             <td style="text-align: center;">
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"

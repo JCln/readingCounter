@@ -8,7 +8,6 @@ import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { FragmentManagerService } from 'src/app/services/fragment-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
@@ -33,8 +32,7 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
-    private router: Router,
-    private utilsService: UtilsService
+    private router: Router    
   ) {
     this.getRouteParams();
   }

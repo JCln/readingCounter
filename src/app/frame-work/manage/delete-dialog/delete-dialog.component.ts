@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 
 import { AddNewComponent } from '../add-new/add-new.component';
 
@@ -19,6 +20,7 @@ export class DeleteDialogComponent implements OnInit {
   }
   selectedValue: string;
   form: FormGroup;
+  deleteMessage: EN_messages.confirm_remove;
 
   save() {
     this.dialogRef.close(this.form.value);

@@ -18,6 +18,12 @@
   color: $gray_100;
 }
 
+._delete_style {
+  background-color: $red_500;
+  border-color: $red_500;
+  color: $white;
+}
+
 h2 {
   font-size: $font_m;
   padding: $font_05;

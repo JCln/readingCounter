@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { UtilsService } from 'src/app/services/utils.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { EN_messages } from '../Interfaces/enums.enum';
 import { IDictionaryManager, IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
-import { ENInterfaces } from './../Interfaces/en-interfaces.enum';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -67,10 +67,8 @@ export class SectorsManagerService {
   }
   getCountryDataSource = (): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.CountryGET).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
+      this.interfaceManagerService.GET(ENInterfaces.CountryGET).toPromise().then(res => {
+        resolve(res);
       })
     })
   }
@@ -106,15 +104,14 @@ export class SectorsManagerService {
   convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
     this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
-  deleteSingleRow = (data: number, place: string): Promise<any> => {
+  deleteSingleRow = (place: ENInterfaces, id: number) => {
     return new Promise((resolve) => {
-      this.interfaceManagerService[place](data).toPromise().then((res: IResponses) => {
+      this.interfaceManagerService.POST(place, id).subscribe((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);
         resolve(true);
       })
     });
   }
-  editSingle
   // private deleteDialog = () => {
   //   return new Promise(resolve => {
   //     const dialogRef = this.dialog.open(DeleteDialogComponent);
@@ -139,11 +136,13 @@ export class SectorsManagerService {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: {
           title: title,
-          isInput: false
+          isInput: false,
+          isDelete: true
         }
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
+          console.log(desc);
           return desc;
         }
       })
@@ -156,10 +155,13 @@ export class SectorsManagerService {
     })
   }
   /*FOR COUNTRY */
-  addOrEditCountry = (result: any, place: string) => {
-    this.interfaceManagerService[place](result).subscribe((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    })
+  addOrEditCountry = (place: ENInterfaces, result: object) => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(place, result).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    });
   }
   /* VALIDATION */
   validationEditableRow = (dataSource: object): boolean => {
@@ -179,6 +181,7 @@ export class SectorsManagerService {
         return false;
       }
     }
+    return true;
   }
   /* VERFIFICATION */
   verificationSingleRow = () => {
