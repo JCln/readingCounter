@@ -139,3 +139,10 @@ export interface IOffloadModifyReq {
     jalaliDay: string,
     description: string
 }
+export interface IDashboardTraverseTimed {
+    ahad: IDashboardTimed,
+    karbari: IDashboardTimed,
+    mobile: IDashboardTimed,
+    counterSerial: IDashboardTimed,
+    empty: IDashboardTimed,
+}

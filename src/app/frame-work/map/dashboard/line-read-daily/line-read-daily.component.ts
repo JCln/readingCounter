@@ -11,6 +11,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 })
 export class LineReadDailyComponent implements OnInit {
   readDaily: IDashboardReadDaily[] = [];
+  overAllReads: number = 0;
 
 
   /* LINE CHART */
@@ -61,6 +62,7 @@ export class LineReadDailyComponent implements OnInit {
 
     this.lineChartLabels = indexes;
     this.lineChartData = [{ data: count, label: 'کارکرد' }];//label: this.readDaily.hint
+    this.overAllReads = this.dashboardService.sumOfCounts(count);
     // this.progressiveLineChart();
 
     this.lineChartOptions = {

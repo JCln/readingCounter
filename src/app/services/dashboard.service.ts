@@ -23,7 +23,14 @@ export class DashboardService {
       { field: 'inYearCount', header: 'سال', isSelected: true, readonly: false }
     ];
   }
-
+  columnDashboardTimed = (): IObjectIteratation[] => {
+    return [
+      { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
+      { field: 'inWeekCont', header: 'هفته', isSelected: true, readonly: true },
+      { field: 'inMonthCount', header: 'ماه', isSelected: true, readonly: true },
+      { field: 'inYearCount', header: 'سال', isSelected: true, readonly: false }
+    ];
+  }
   columnDashboardMedia = (): IObjectIteratation[] => {
     return [
       { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
@@ -73,6 +80,28 @@ export class DashboardService {
     try {
       return new Promise((resolve) => {
         this.interfaceService.getDashboardForbiddenTimed().subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
+  getDashboardTraverseTimed = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceService.getDashboardTraverseTimed().subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
+  getDashboardCountInStatesTimed = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceService.getDashboardCountInStates().subscribe(res => {
           resolve(res);
         })
       })
@@ -165,6 +194,13 @@ export class DashboardService {
       a.push(item[parameterName]);
     })
     return a;
+  }
+  sumOfCounts = (sth: any[]): number => {
+    let sum: number = 0;
+    sth.map(item => {
+      sum += item
+    })
+    return sum;
   }
   getElementIndexes = (sth: IDashboardReadDaily[]): any[] => {
     let a = [];
