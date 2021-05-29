@@ -1,21 +1,15 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IZoneManager } from 'src/app/Interfaces/inon-manage';
-import { IDictionaryManager, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { ZoneAddDgComponent } from './zone-add-dg/zone-add-dg.component';
-import { ZoneEditDgComponent } from './zone-edit-dg/zone-edit-dg.component';
 
 @Component({
   selector: 'app-zone',
@@ -23,54 +17,37 @@ import { ZoneEditDgComponent } from './zone-edit-dg/zone-edit-dg.component';
   styleUrls: ['./zone.component.scss']
 })
 export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
-  titleFilter = new FormControl('');
-  regionIdFilter = new FormControl('');
-  logicalOrderFilter = new FormControl('');
-  isMetroFilter = new FormControl('');
+  dataSource: IZoneManager[] = [];
+  editableDataSource = [];
 
   subscription: Subscription[] = [];
-  dataSource = new MatTableDataSource();
-  editableDataSource = [];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  regionDictionary: IDictionaryManager[] = [];
 
-  selectedValue;
-  isTrueF: ITrueFalse[] = [
-    { name: 'نباشد', value: false },
-    { name: 'باشد', value: true },
-    { name: 'هیچکدام', value: '' }
-  ]
-  zoneId: any[] = [];
-  zoneDictionary: IDictionaryManager[] = [];
-
-  columnsToDisplay = ['title', 'regionId', 'logicalOrder', 'isMetro', 'actions'];
-  filterValues = {
-    title: '',
-    regionId: '',
-    logicalOrder: '',
-    isMetro: ''
-  };
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
+  clonedProducts: { [s: string]: IZoneManager; } = {};
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) { }
 
-  openDialog = () => {
+  openAddDialog = () => {
     return new Promise(() => {
-      const dialogRef = this.dialog.open(ZoneAddDgComponent, {
-        disableClose: true,
-        minWidth: '30rem',
-        data: {
-          di: this.zoneDictionary
-        }
-      });
+      const dialogRef = this.dialog.open(ZoneAddDgComponent,
+        {
+          disableClose: true,
+          width: '30rem',
+          data: {
+            di: this.regionDictionary
+          }
+
+        });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneADD, result.value);
+          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneADD, result);
         }
       });
     });
@@ -82,26 +59,6 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     })
     return a;
-  }
-  editDialog = (row: any) => {
-    const editable = this.getEditableSource(row).regionId;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ZoneEditDgComponent, {
-        disableClose: true,
-        minWidth: '30rem',
-        data: {
-          row,
-          editable,
-          di: this.zoneDictionary
-        }
-
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneEDIT, result.value);
-        }
-      });
-    });
   }
   deleteDialog = () => {
     return new Promise(resolve => {
@@ -117,61 +74,23 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       this.sectorsManagerService.sectorsDelete(ENInterfaces.ZoneREMOVE, row.id);
     }
   }
-  filterSearchs = () => {
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-
-    this.dataSource.filterPredicate = this.createFilter();
-
-    this.titleFilter.valueChanges
-      .subscribe(
-        title => {
-          this.filterValues.title = title;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.regionIdFilter.valueChanges
-      .subscribe(
-        regionId => {
-          this.filterValues.regionId = regionId;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.isMetroFilter.valueChanges
-      .subscribe(
-        isMetro => {
-          this.filterValues.isMetro = isMetro;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.logicalOrderFilter.valueChanges
-      .subscribe(
-        logicalOrder => {
-          this.filterValues.logicalOrder = logicalOrder;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-  }
   nullSavedSource = () => this.closeTabService.saveDataForZone = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForZone) {
-      this.dataSource.data = this.closeTabService.saveDataForZone;
+      this.dataSource = this.closeTabService.saveDataForZone;
     }
     else {
-      this.dataSource.data = await this.sectorsManagerService.getZoneDataSource();
-      this.closeTabService.saveDataForZone = this.dataSource.data;
+      this.dataSource = await this.sectorsManagerService.getZoneDataSource();
+      this.closeTabService.saveDataForZone = this.dataSource;
     }
-    this.zoneDictionary = await this.sectorsManagerService.getRegionDictionary();
-    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
+    this.regionDictionary = await this.sectorsManagerService.getRegionDictionary();
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
 
-    this.sectorsManagerService.convertIdToTitle(this.dataSource.data, this.zoneDictionary, 'regionId');
-    this.filterSearchs();
-
+    this.sectorsManagerService.convertIdToTitle(this.dataSource, this.regionDictionary, 'regionId');
+    this.insertSelectedColumns();
   }
   ngOnInit() {
     this.classWrapper();
@@ -186,24 +105,53 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
+    this.subscription.forEach(subscription => subscription.unsubscribe())
   }
-  createFilter(): (data: any, filter: string) => boolean {
-    let filterFunction = function (data, filter): boolean {
-      let searchTerms = JSON.parse(filter);
+  insertSelectedColumns = () => {
+    this._selectCols = this.sectorsManagerService.columnZone();
+    this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  removeRow = async (rowData: IZoneManager, rowIndex: number) => {
+    const a = await this.sectorsManagerService.firstConfirmDialog();
 
-      return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.regionId.toString().toLowerCase().indexOf(searchTerms.regionId) !== -1
-        && data.logicalOrder.toString().toLowerCase().indexOf(searchTerms.logicalOrder) !== -1
-        && data.isMetro.toString().indexOf(searchTerms.isMetro) !== -1
+    if (!!a) {
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ZoneREMOVE, rowData.id);
+      this.sectorsManagerService.convertIdToTitle(this.dataSource, this.regionDictionary, 'regionId');
+      this.refetchTable(rowIndex);
     }
-    return filterFunction;
+  }
+  onRowEditInit(dataSource: any) {
+    this.clonedProducts[dataSource.id] = { ...dataSource };
+  }
+  onRowEditSave = async (dataSource: IZoneManager, rowIndex: number) => {
+    if (!this.sectorsManagerService.verificationEditedRow(dataSource)) {
+      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      return;
+    }
+    dataSource.regionId = dataSource.regionId['id'];
+    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneEDIT, dataSource);
+    this.sectorsManagerService.convertIdToTitle(this.dataSource, this.regionDictionary, 'regionId');
+  }
+  onRowEditCancel(dataSource: IZoneManager, index: number) {
+    this.dataSource[index] = this.clonedProducts[dataSource.id];
+    delete this.dataSource[dataSource.id];
+    return;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  refreshTable = () => {
+    this.classWrapper(true);
   }
 }
 

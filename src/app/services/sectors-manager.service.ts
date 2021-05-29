@@ -31,29 +31,29 @@ export class SectorsManagerService {
   columnProvince = (): IObjectIteratation[] => {
     return [
       { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'countryId', header: 'کشور', isSelected: true },
+      { field: 'countryId', header: 'کشور', isSelected: true, isSelectOption: true },
       { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
     ]
   }
   columnRegion = (): IObjectIteratation[] => {
     return [
       { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'provinceId', header: 'استان', isSelected: true },
+      { field: 'provinceId', header: 'استان', isSelected: true, isSelectOption: true },
       { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
     ]
   }
   columnZone = (): IObjectIteratation[] => {
     return [
       { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'regionId', header: 'منطقه', isSelected: true },
-      { field: 'isMetro', header: 'شهری', isSelected: true },
+      { field: 'regionId', header: 'منطقه', isSelected: true, isSelectOption: true },
+      { field: 'isMetro', header: 'شهری', isSelected: true, isBoolean: true },
       { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
     ]
   }
   columnZoneBound = (): IObjectIteratation[] => {
     return [
       { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: true },
+      { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
       // { field: 'govermentalCode', header: 'کشور', isSelected: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true },
@@ -124,6 +124,8 @@ export class SectorsManagerService {
   }
 
   sectorsAddEdit = (apiUse: ENInterfaces, value: any) => {
+    console.log(value);
+
     this.interfaceManagerService.POSTBODY(apiUse, value).subscribe((res: IResponses) => {
       if (res) {
         this.utilsService.snackBarMessageSuccess(res.message);
@@ -192,7 +194,7 @@ export class SectorsManagerService {
     })
   }
   /*FOR COUNTRY */
-  addOrEditCountry = (place: ENInterfaces, result: object) => {
+  addOrEditCountry = (place: ENInterfaces, result: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(place, result).toPromise().then((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);

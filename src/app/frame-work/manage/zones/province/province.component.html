@@ -40,14 +40,29 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
-                <p-cellEditor>
-                    <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                        {{dataSource[col.field]}}
-                    </ng-template>
-                </p-cellEditor>
+                <ng-container *ngIf="col.isSelectOption;else selectOption">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown name="countryId" [options]="countryDictionary"
+                                [(ngModel)]="dataSource.countryId" placeholder="انتخاب مورد" [style]="{'width':'100%'}"
+                                optionLabel="title">
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{dataSource.countryId}}
+                        </ng-template>
+                    </p-cellEditor>
+                </ng-container>
+                <ng-template #selectOption>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{dataSource[col.field]}}
+                        </ng-template>
+                    </p-cellEditor>
+                </ng-template>
             </td>
             <td style="text-align: center;">
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"

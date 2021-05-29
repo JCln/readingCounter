@@ -74,7 +74,7 @@ export enum EN_messages {
     confirm_remove = ' آیا میخواهید این مورد را حذف کنید؟',
     delete_confirm = 'آیا از حذف مسیر اطمینان دارید',
     reson_delete_backtoImported = 'علت بازگشت به صادر شده',
-    reason_forceOffload = 'علت اتمام وقت',
+    reason_forceOffload = 'علت اتمام قرائت',
     reason_deleteRoute = 'علت حذف مسیر',
     reason_backToPrev = 'علت بازگشت به مرحله قبلی',
 
