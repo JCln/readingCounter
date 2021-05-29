@@ -1,0 +1,57 @@
+@import '../../../../../assets/variable';
+
+table {
+  background-color: $gray_300;
+  font-family: $font_family;
+  border-collapse: collapse;
+  width: 100%;
+  direction: rtl;
+  text-align: center;
+  font-size: $font_s;
+  font-weight: 500;
+}
+
+table td,
+table th {
+  border: 1px solid $white;
+  padding: $font_05;
+  text-align: center;
+  direction: ltr;
+  font-size: $font_m;
+  font-weight: 600;
+}
+
+table th {
+  background-color: $gray_500;
+}
+
+table tr {
+  direction: rtl;
+}
+
+table tr:nth-child(even) {
+  background-color: $gray_100;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #0045cbbf;
+  color: $white;
+}
+
+._normal {
+  background: rgba(117, 188, 84, 0.6);
+}
+
+._closed {
+  background: rgba(246, 62, 56, 0.6);
+}
+
+._percent {
+  background: rgb(230, 230, 230);
+}
+
+._hours {
+  background-color: $gray_400;
+}

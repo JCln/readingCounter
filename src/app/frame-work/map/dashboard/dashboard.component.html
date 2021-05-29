@@ -50,6 +50,17 @@
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
+
+    <div class="chart_1 pie relative_pos">
+        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+            [colors]="donutColors" [options]="pieChartOptions" [plugins]="pieChartPlugins">
+        </canvas>
+    </div>
+
+    <!-- <div>
+        <app-karkard-grid [dataSource]="doughnutTemp"></app-karkard-grid>
+    </div> -->
 </main>
 
 <app-trv-time></app-trv-time>
+<app-dispersal-rate></app-dispersal-rate>

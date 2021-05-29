@@ -47,6 +47,9 @@ export class InterfaceService {
   getDashboardKarkardTimed = (): Observable<any> => {
     return this.mainService.GET('V1/List/Dashboard/Karkard/Timed');
   }
+  getDashboardDispersalRateTimed = (): Observable<any> => {
+    return this.mainService.GET('V1/List/Dashboard/DispersalRate/Timed');
+  }
   getDashboardMediaTimed = (): Observable<any> => {
     return this.mainService.GET('V1/List/Dashboard/Media/Timed');
   }

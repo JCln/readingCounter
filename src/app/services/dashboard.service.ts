@@ -55,6 +55,29 @@ export class DashboardService {
       { field: 'inYearCount', header: 'سال', isSelected: true, readonly: false }
     ];
   }
+  // columnDashboardDispersalRateTimed = (): IObjectIteratation[] => {
+  //   return [
+  //     { field: '_8_10', header: '_8_10', isSelected: true, readonly: true },
+  //     { field: '_8_10Closed', header: '_8_10Closed', isSelected: true, readonly: true },
+  //     { field: '_8_10Rate', header: '_8_10Rate', isSelected: true, readonly: true },
+  //     { field: '_10_12', header: '_10_12', isSelected: true, readonly: true },
+  //     { field: '_10_12Closed', header: '_10_12Closed', isSelected: true, readonly: true },
+  //     { field: '_10_12Rate', header: '_10_12Rate', isSelected: true, readonly: true },
+  //     { field: '_12_14', header: '_12_14', isSelected: true, readonly: true },
+  //     { field: '_12_14Closed', header: '_12_14Closed', isSelected: true, readonly: true },
+  //     { field: '_12_14Rate', header: '_12_14Rate', isSelected: true, readonly: true },
+  //     { field: '_14_16', header: '_14_16', isSelected: true, readonly: true },
+  //     { field: '_14_16Closed', header: '_14_16Closed', isSelected: true, readonly: true },
+  //     { field: '_14_16Rate', header: '_14_16Rate', isSelected: true, readonly: true },
+  //     { field: '_16_18', header: '_16_18', isSelected: true, readonly: true },
+  //     { field: '_16_18Closed', header: '_16_18Closed', isSelected: true, readonly: true },
+  //     { field: '_16_18Rate', header: '_16_18Rate', isSelected: true, readonly: true },
+  //     { field: 'other', header: 'other', isSelected: true, readonly: false },
+  //     { field: 'otherClosed', header: 'otherClosed', isSelected: true, readonly: false },
+  //     { field: 'otherRate', header: 'otherRate', isSelected: true, readonly: false },
+  //     { field: 'title', header: 'عنوان', isSelected: true, readonly: false }
+  //   ];
+  // }
   columnDashboardReadTimed = (): IObjectIteratation[] => {
     return [
       { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
@@ -135,6 +158,17 @@ export class DashboardService {
     try {
       return new Promise((resolve) => {
         this.interfaceService.getDashboardReadTimed().subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
+  getDashboardDispersalRateTimed = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceService.getDashboardDispersalRateTimed().subscribe(res => {
           resolve(res);
         })
       })

@@ -80,7 +80,10 @@ export class CloseTabService {
   saveDataForFragmentNOB: any;
   saveDataForFragmentNOBDetails: any;
   saveDataForTextOutput: any;
-  // 
+  // DASHBOARD
+  // saveDataForDispersalRateTimed: any;
+
+
   // close config and remove data for specific page(component)
   setClose = (url: string) => {
     switch (url) {
@@ -232,6 +235,9 @@ export class CloseTabService {
       case '/wr/rpts/mam/gis':
         this.saveDataForRRGIS = '';
         break;
+      // case '/wr/db':
+      //   this.saveDataForDispersalRateTimed = '';
+      //   break;
     }
     // listed all of the dynamic routes
     if (url.includes('/wr/m/track/offloaded/offloadMfy/')) {
@@ -327,5 +333,6 @@ export class CloseTabService {
     this.saveDataForFragmentNOB = '';
     this.saveDataForFragmentNOBDetails = '';
     this.saveDataForTextOutput = '';
+    // this.saveDataForDispersalRateTimed = '';
   }
 }

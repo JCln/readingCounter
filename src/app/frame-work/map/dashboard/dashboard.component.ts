@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
-import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
+import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, MultiDataSet, SingleDataSet } from 'ng2-charts';
 import { IDashboardKarkardTimed } from 'src/app/Interfaces/inon-manage';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
@@ -11,17 +11,69 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   karkard: IDashboardKarkardTimed[] = [];
-
-
   _analyzer_interface: any[];
+  doughnutTemp: any[] = [];
 
-  /* PIE CHART*/
   private defaultOptions = {
     fontFamily: 'Blotus',
     fontSize: 16,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
   }
+
+
+  public doughnutChartLabels: Label[] = ['عادی', 'فاقد', 'مانع', 'خراب', 'تعویض', 'سایر'];
+  public doughnutChartData: MultiDataSet = [];
+  public doughnutChartType: ChartType = 'doughnut';
+  donutColors = [
+    {
+      backgroundColor: [
+        'rgb(0, 69, 203)',
+        'rgb(117, 188, 84)',
+        'rgba(139, 136, 136, 0.9)',
+        'rgb(246, 62, 56)',
+        'rgb(246, 128, 56)',
+        'rgb(125, 131, 255)'
+      ]
+    }
+  ];
+  public doughnutChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: true,
+      position: 'right',
+      labels: this.defaultOptions
+    },
+    plugins: {
+      datalabels: {
+        formatter: (value, ctx) => {
+          let sum = 0;
+          let dataArr = ctx.chart.data.datasets[0].data;
+          dataArr.map(data => {
+            sum += data;
+          });
+          console.log(sum);
+
+          let percentage = (value * 100 / sum).toFixed(2) + "%";
+          return percentage;
+        },
+        color: '#fff',
+      }
+    },
+    tooltips: {
+      footerFontFamily: 'Blotus',
+      bodyFontFamily: 'Blotus',
+      titleFontFamily: 'Blotus',
+      bodyFontSize: 18,
+      titleFontSize: 18,
+      footerFontSize: 18,
+      bodyFontStyle: 'bold',
+      enabled: true
+    }
+  }
+
+
   // Pie
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -119,6 +171,18 @@ export class DashboardComponent implements OnInit {
     this.pieChartDataOne = this.dashboardService.getObjectParameters(this.karkard[1]);
     this.pieChartDataTwo = this.dashboardService.getObjectParameters(this.karkard[2]);
     this.pieChartDataThree = this.dashboardService.getObjectParameters(this.karkard[3]);
+
+    this.addToDougnut();
+  }
+  addToDougnut = () => {
+    this.doughnutTemp.push(this.pieChartDataOne);
+    this.doughnutTemp.push(this.pieChartDataTwo);
+    this.doughnutTemp.push(this.pieChartDataThree);
+
+    console.log(this.doughnutTemp);
+
+    this.doughnutChartData = this.doughnutTemp;
+
   }
   receiveAnalyzeData($event) {
     this._analyzer_interface = $event
