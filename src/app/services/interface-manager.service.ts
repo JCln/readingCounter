@@ -165,7 +165,7 @@ export class InterfaceManagerService {
     return this.mainService.GET('V1/APK/PreList');
   }
   getAPKLast = (): Observable<any> => {
-    return this.mainService.GET('V1/APK/Last');
+    return this.mainService.GETBLOB('V1/APK/Last');
   }
   postAPK = (body: object): Observable<any> => {
     return this.mainService.POSTBODY('V1/APK/Upload', body);
