@@ -1,4 +1,5 @@
-<p-table #td [columns]="selectedColumns" [value]="dataSource" [rows]="20" [showCurrentPageReport]="true"
+<p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    [rowsPerPageOptions]="[10, 20,50]" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" dir="rtl" editMode="row"
     styleClass="p-datatable-responsive" [responsive]="true" dataKey="id">
 
@@ -45,7 +46,7 @@
                         <ng-template pTemplate="input">
                             <p-dropdown name="countryId" [options]="countryDictionary"
                                 [(ngModel)]="dataSource.countryId" placeholder="انتخاب مورد" [style]="{'width':'100%'}"
-                                optionLabel="title">
+                                optionLabel="title" dataKey="dataSource.countryId">
                             </p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">

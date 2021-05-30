@@ -90,7 +90,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   onRowEditSave = async (dataSource: ICountryManager, rowIndex: number) => {
-    if (!this.sectorsManagerService.verificationEditedRow(dataSource)) {
+    if (!this.sectorsManagerService.verification(dataSource)) {
       this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
       return;
     }

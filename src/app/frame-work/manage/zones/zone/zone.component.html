@@ -1,4 +1,5 @@
-<p-table #td [columns]="selectedColumns" [value]="dataSource" [rows]="20" [showCurrentPageReport]="true"
+<p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    [rowsPerPageOptions]="[10, 20,50]" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" dir="rtl" editMode="row"
     styleClass="p-datatable-responsive" [responsive]="true" dataKey="id">
 
@@ -45,14 +46,15 @@
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <p-dropdown name="regionId" [options]="regionDictionary" [(ngModel)]="dataSource.regionId"
-                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
+                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title"
+                                dataKey="dataSource.regionId">
                             </p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{dataSource.regionId}}
                         </ng-template>
                     </p-cellEditor>
-                </ng-container> 
+                </ng-container>
                 <ng-template #selectOption>
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">
                         <p-cellEditor>

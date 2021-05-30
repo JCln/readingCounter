@@ -1,20 +1,14 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { IAuthLevel3 } from 'src/app/Interfaces/iauth-levels';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { AuthsManagerService } from 'src/app/services/auths-manager.service';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
-import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
-import { Auth3EditDgComponent } from './auth3-edit-dg/auth3-edit-dg.component';
 
 
 @Component({
@@ -23,113 +17,38 @@ import { Auth3EditDgComponent } from './auth3-edit-dg/auth3-edit-dg.component';
   styleUrls: ['./auth3.component.scss']
 })
 export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
-  titleFilter = new FormControl('');
-  authLevel2IdFilter = new FormControl('');
 
-  dataSource = new MatTableDataSource();
+  dataSource: IAuthLevel3[] = [];
   subscription: Subscription[] = [];
 
-  auth2Dictionary: IDictionaryManager[] = [];
+
   editableDataSource = [];
-  columnsToDisplay = ['title', 'authLevel2Id', 'actions'];
-  filterValues = {
-    title: '',
-    authLevel2Id: ''
-  };
+  authLevel2Dictionary: IDictionaryManager[] = [];
+  clonedProducts: { [s: string]: IAuthLevel3; } = {};
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
 
   constructor(
+    private dialog: MatDialog,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private interfaceManagerService: InterfaceManagerService,
-    private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService,
     private authsManagerService: AuthsManagerService
   ) { }
 
-  // add auth 2 not working
-  openDialog = () => {
+  openAddDialog = () => {
     return new Promise(() => {
       const dialogRef = this.dialog.open(Auth3AddDgComponent, {
         disableClose: true,
         data: {
-          di: this.auth2Dictionary
+          di: this.authLevel2Dictionary
         }
       });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          this.interfaceManagerService.POSTBODY(ENInterfaces.AuthLevel3ADD, result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3ADD, result);
         }
       });
     });
-  }
-  getEditableSource = (row: any) => {
-    const a = this.editableDataSource.find(dataSource => {
-      if (dataSource.id == row.id) {
-        return dataSource.id;
-      }
-    })
-    return a;
-  }
-  editDialog = (row: any) => {
-    const editable = this.getEditableSource(row).authLevel2Id;
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(Auth3EditDgComponent, {
-        disableClose: true,
-        width: '30rem',
-        data: { row, di: this.auth2Dictionary, editable }
-
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.interfaceManagerService.POSTBODY(ENInterfaces.AuthLevel3EDIT, result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
-        }
-      });
-    });
-  }
-  deleteDialog = () => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(DeleteDialogComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        resolve(result)
-      });
-    });
-  }
-  deleteSingleRow = async (row: IProvinceManager) => {
-    const dialogResult = await this.deleteDialog();
-    if (dialogResult) {
-      this.interfaceManagerService.POST(ENInterfaces.AuthLevel3REMOVE, row.id).subscribe(res => {
-        if (res) {
-          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-        }
-      });
-    }
-  }
-
-  filter = () => {
-    this.dataSource.filterPredicate = this.createFilter();
-
-    this.titleFilter.valueChanges
-      .subscribe(
-        title => {
-          this.filterValues.title = title;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.authLevel2IdFilter.valueChanges
-      .subscribe(
-        authLevel2Id => {
-          this.filterValues.authLevel2Id = authLevel2Id;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
   }
   nullSavedSource = () => this.closeTabService.saveDataForAppLevel3 = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -137,21 +56,21 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForAppLevel3) {
-      this.dataSource.data = this.closeTabService.saveDataForAppLevel3;
+      this.dataSource = this.closeTabService.saveDataForAppLevel3;
     }
     else {
-      this.dataSource.data = await this.authsManagerService.getAuth3DataSource();
-      this.closeTabService.saveDataForAppLevel3 = this.dataSource.data;
+      this.dataSource = await this.authsManagerService.getAuth3DataSource();
+      this.closeTabService.saveDataForAppLevel3 = this.dataSource;
     }
-    this.auth2Dictionary = await this.authsManagerService.getAuthLevel2Dictionary();
-    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
-    this.authsManagerService.convertIdToTitle(this.dataSource.data, this.auth2Dictionary, 'authLevel2Id');
-    this.filter();
+    this.authLevel2Dictionary = await this.authsManagerService.getAuthLevel2Dictionary();
+    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
+
+    this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
+    this.insertSelectedColumns();
   }
   ngOnInit() {
     this.classWrapper();
   }
-
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -169,12 +88,51 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  createFilter(): (data: any, filter: string) => boolean {
-    let filterFunction = function (data, filter): boolean {
-      let searchTerms = JSON.parse(filter);
-      return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.authLevel2Id.toLowerCase().indexOf(searchTerms.authLevel2Id) !== -1
-    }
-    return filterFunction;
+  insertSelectedColumns = () => {
+    this._selectCols = this.authsManagerService.columnAuth3();
+    this._selectedColumns = this.authsManagerService.customizeSelectedColumns(this._selectCols);
   }
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  removeRow = async (rowData: IAuthLevel3, rowIndex: number) => {
+    const a = await this.authsManagerService.firstConfirmDialog();
+    if (a) {
+      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel3REMOVE, rowData.id);
+      this.refetchTable(rowIndex);
+    }
+  }
+  onRowEditInit(dataSource: any) {
+    this.clonedProducts[dataSource.id] = { ...dataSource };
+  }
+  onRowEditSave = async (dataSource: IAuthLevel3, rowIndex: number) => {
+    if (!this.authsManagerService.verification(dataSource)) {
+      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      return;
+    }
+    if (typeof dataSource.authLevel2Id !== 'object') {
+      this.authLevel2Dictionary.find(item => {
+        if (item.title === dataSource.authLevel2Id)
+          dataSource.authLevel2Id = item.id
+      })
+    } else {
+      dataSource.authLevel2Id = dataSource.authLevel2Id['id'];
+    }
+    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3EDIT, dataSource);
+    this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
+  }
+  onRowEditCancel(dataSource: IAuthLevel3, index: number) {
+    // this.dataSource[index] = this.clonedProducts[dataSource.id];
+    // delete this.dataSource[dataSource.id];
+    // return;
+  }
+  refreshTable = () => {
+    this.classWrapper(true);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+
 }

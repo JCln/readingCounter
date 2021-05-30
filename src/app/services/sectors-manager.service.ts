@@ -9,6 +9,7 @@ import { IDictionaryManager, IObjectIteratation, IResponses } from '../Interface
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
+import { SectionsService } from './sections.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class SectorsManagerService {
     private converterService: ConverterService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
+    private sectionsService: SectionsService
   ) { }
   /*COLUMNS */
   columnCountry = (): IObjectIteratation[] => {
@@ -201,34 +203,11 @@ export class SectorsManagerService {
       })
     });
   }
-  /* VALIDATION */
-  validationEditableRow = (dataSource: object): boolean => {
-    if (this.utilsService.isNull(dataSource['id'])) {
-      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
-      return false;
-    }
-    if (this.utilsService.hasOwnProperty(dataSource['zoneId'])) {
-      if (this.utilsService.isNull(dataSource['zoneId'])) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-        return false;
-      }
-    }
-    if (this.utilsService.hasOwnProperty(dataSource['title'])) {
-      if (this.utilsService.isNull(dataSource['title'])) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
-        return false;
-      }
-    }
-    return true;
-  }
-  /* VERFIFICATION */
-  verificationSingleRow = () => {
-
-  }
-  verificationEditedRow = (dataSource: object): boolean => {
-    if (!this.validationEditableRow(dataSource))
+  /* VALIDATION & VERIFICATION */
+  verification = (dataSource: any): boolean => {
+    this.sectionsService.setSectionsValue(dataSource);
+    if (!this.sectionsService.sectionVertification())
       return false;
     return true;
   }
-
 }

@@ -114,7 +114,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   onRowEditSave = async (dataSource: IRegionManager, rowIndex: number) => {
-    if (!this.sectorsManagerService.verificationEditedRow(dataSource)) {
+    if (!this.sectorsManagerService.verification(dataSource)) {
       this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
       return;
     }

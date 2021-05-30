@@ -1,53 +1,118 @@
-<div class="operation">
-    <button (click)="openDialog()" class="tooltip operation_btn">
-        <i class="fa fa-plus"></i>
-        <div class="tooltip_text">افزودن کنترلر</div>
-    </button>
-</div>
+<p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    [rowsPerPageOptions]="[10, 20,50]" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" dir="rtl" editMode="row"
+    styleClass="p-datatable-responsive" [responsive]="true" dataKey="id">
 
-<table mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                عنوان
+    <ng-template pTemplate="caption">
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
+            selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <div class="header_icons_wrap">
+            <div class="left_side">
+                <i (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن موردی</div>
+                </i>
             </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="titleFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.title}}</td>
-    </ng-container>
-    <ng-container matColumnDef="authLevel2Id">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                ماژول
+            <div class="left_side">
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
+                </i>
             </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <mat-select placeholder="انتخاب مورد" [formControl]="authLevel2IdFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of auth2Dictionary" [value]="truefalse.title">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.authLevel2Id}}</td>
-    </ng-container>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
 
-    <ng-container cdkColumnDef="actions">
-        <th md-header-cell *matHeaderCellDef></th>
-        <td md-cell *matCellDef="let row" class="_actions">
-            <i (click)="editDialog(row)" class="tooltip _custom fa fa-edit">
-                <div class="tooltip_text">ویرایش</div>
-            </i>|
-            <i (click)="deleteSingleRow(row)" class="tooltip _custom fa fa-trash-o">
-                <div class="tooltip_text_right">حذف</div>
-            </i>
-        </td>
-    </ng-container>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+            </th>
 
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let person; columns: columnsToDisplay"></tr>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
+    </ng-template>
 
-</table>
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing" let-columns="columns"
+        let-ri="rowIndex">
+        <tr [pEditableRow]="dataSource">
+            <td *ngFor="let col of columns">
+                <ng-container *ngIf="col.isSelectOption;else selectOption">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown name="authLevel2Id" [options]="authLevel2Dictionary"
+                                [(ngModel)]="dataSource.authLevel2Id" placeholder="انتخاب مورد"
+                                [style]="{'width':'100%'}" optionLabel="title" dataKey="dataSource.authLevel2Id">
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{dataSource.authLevel2Id}}
+                        </ng-template>
+                    </p-cellEditor>
+                </ng-container>
+                <ng-template #selectOption>
+                    <ng-container *ngIf="col.isBoolean; else elseTemplate">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{dataSource[col.field]}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-template>
+                </ng-template>
+            </td>
+            <td style="text-align: center;">
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
+                    class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)"
+                    class="_save pi pi-check"></i>
+                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
+                    class="_cancel pi pi-times"></i>
+            </td>
+
+            <td>
+                <i (click)="removeRow(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف مورد</div>
+                </i>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
+        <ng-template pTemlate="footer">
+            <tr>
+                <td [attr.colspan]="dataSource.length">
+                    موردی پیدا نشد
+                </td>
+            </tr>
+
+        </ng-template>
+    </ng-template>
+</p-table>
+
+<section *ngIf="!dataSource || dataSource.length === 0">
+    <tr class="empty_data">
+        موردی پیدا نشد
+    </tr>
+</section>

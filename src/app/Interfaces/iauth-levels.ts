@@ -23,7 +23,6 @@ export interface IAuthLevel3 {
     inSidebar: boolean;
     isClosable: boolean;
     isRefreshable: boolean;
-    logicalOrder: number;
 }
 export interface IAuthLevel4 {
     id: number;
