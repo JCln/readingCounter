@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { IAPK } from 'src/app/Interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { ApkService } from '../../../../services/apk.service';
@@ -36,18 +36,15 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private interfaceManagerService: InterfaceManagerService,
     private apkService: ApkService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private outputManagerService: OutputManagerService
   ) { }
 
-  downloadAPK = (fileRepositoryId: string) => {
-    console.log(fileRepositoryId);
-
-    // this.interfaceManagerService.downloadFile(fileRepositoryId).subscribe(res => {
-    //   console.log(res);
-
-    // })
+  downloadAPK = async () => {
+    const a = await this.apkService.getlastAPK();
+    console.log(a);
+    this.outputManagerService.downloadFile(a, '.apk');
   }
   onChange(event) {
     const a = document.getElementById('files') as any;

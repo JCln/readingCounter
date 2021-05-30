@@ -20,6 +20,10 @@
   border-radius: $border_15;
   box-shadow: 0 0 3px 2px $gray_200;
   padding: $font_xxs 0;
+
+  // &:nth-child(even) {
+  //   background: $gray_100;
+  // }
 }
 
 ._header {

@@ -165,3 +165,37 @@ export interface IOffloadModifyReq {
     jalaliDay: string,
     description: string
 }
+export interface IDashboardTraverseTimed {
+    ahad: IDashboardTimed,
+    karbari: IDashboardTimed,
+    mobile: IDashboardTimed,
+    counterSerial: IDashboardTimed,
+    empty: IDashboardTimed,
+}
+export interface IDashboardTimedItem {
+    _8_10: number,
+    _8_10Closed: number,
+    _8_10Rate: number,
+    _10_12: number,
+    _10_12Closed: number,
+    _10_12Rate: number,
+    _12_14: number,
+    _12_14Closed: number,
+    _12_14Rate: number,
+    _14_16: number,
+    _14_16Closed: number,
+    _14_16Rate: number,
+    _16_18: number,
+    _16_18Closed: number,
+    _16_18Rate: number,
+    other: number,
+    otherClosed: number,
+    otherRate: number,
+    title: string
+}
+export interface IDashboardSpecial {
+    daily: IDashboardTimedItem,
+    weekly: IDashboardTimedItem,
+    monthly: IDashboardTimedItem,
+    yearly: IDashboardTimedItem
+}

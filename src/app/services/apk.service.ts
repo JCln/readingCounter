@@ -34,6 +34,13 @@ export class ApkService {
       })
     })
   }
+  getlastAPK = (): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.getAPKLast().toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
   isNull = (): boolean => {
     if (this.utilsService.isNull(this.desc.versionName)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_versionName, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
