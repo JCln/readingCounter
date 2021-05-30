@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -11,9 +10,8 @@ import { CountryComponent } from './country.component';
 @NgModule({
   declarations: [CountryComponent, CountryAddDgComponent],
   imports: [
-    SharedModule,
     SharedPrimeNgModule,
-    ReactiveFormsModule,
+    SharedModule,
     CountryRoutingModule
   ]
 })

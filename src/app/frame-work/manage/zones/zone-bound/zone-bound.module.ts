@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -13,7 +12,6 @@ import { ZoneBoundComponent } from './zone-bound.component';
   imports: [
     SharedModule,
     SharedPrimeNgModule,
-    ReactiveFormsModule,
     ZoneBoundRoutingModule
   ]
 })

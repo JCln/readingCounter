@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -32,7 +32,8 @@ import { AddRowDirective } from './../directives/add-row.directive';
     DropdownModule,
     SliderModule,
     DynamicDialogModule,
-    AddRowDirective
+    AddRowDirective,
+    ReactiveFormsModule,
   ],
   entryComponents: [
     ImageViewerComponent
