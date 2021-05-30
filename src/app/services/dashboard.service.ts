@@ -114,7 +114,7 @@ export class DashboardService {
   getDashboardTraverseTimed = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getDashboardTraverseTimed().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardTraverseTimed).subscribe(res => {
           resolve(res);
         })
       })
@@ -125,7 +125,7 @@ export class DashboardService {
   getDashboardCountInStatesTimed = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getDashboardCountInStates().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardCountInStates).subscribe(res => {
           resolve(res);
         })
       })
@@ -169,7 +169,7 @@ export class DashboardService {
   getDashboardDispersalRateTimed = (): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceService.getDashboardDispersalRateTimed().subscribe(res => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardDispersalRateTimed).subscribe(res => {
           resolve(res);
         })
       })
