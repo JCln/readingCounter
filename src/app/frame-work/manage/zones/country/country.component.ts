@@ -51,8 +51,8 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     else {
       this.dataSource = await this.sectorsManagerService.getCountryDataSource();
       this.closeTabService.saveDataForCountry = this.dataSource;
-      this.insertSelectedColumns();
     }
+    this.insertSelectedColumns();
   }
   ngOnInit() {
     this.classWrapper();
@@ -81,10 +81,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: ICountryManager, rowIndex: number) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
-    console.log(a);
-    console.log(!!a);
-
-    if (!!a) {
+    if (a) {
       await this.sectorsManagerService.deleteSingleRow(ENInterfaces.CountryREMOVE, rowData.id);
       this.refetchTable(rowIndex);
     }

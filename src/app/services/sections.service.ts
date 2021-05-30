@@ -157,7 +157,7 @@ export class SectionsService {
   private fromToValidation = (): boolean => {
     if (this.dynamicValue.hasOwnProperty('toEshterak')) {
       const a = this.dynamicValue;
-      if (this.utilsService.lengthControl(a.fromEshterak, a.toEshterak, 5, 15)) {
+      if (!this.utilsService.lengthControl(a.fromEshterak, a.toEshterak, 5, 15)) {
         this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
         return false;
       }

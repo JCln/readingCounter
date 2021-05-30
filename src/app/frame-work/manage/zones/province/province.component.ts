@@ -8,9 +8,7 @@ import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
 
-import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
-import { ProvinceEditDgComponent } from './province-edit-dg/province-edit-dg.component';
 
 @Component({
   selector: 'app-province',
@@ -61,40 +59,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     return a;
   }
-  editDialog = (row: any) => {
-    const editable = this.getEditableSource(row).countryId;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ProvinceEditDgComponent, {
-        disableClose: true,
-        width: '30rem',
-        data: {
-          row,
-          editable,
-          di: this.countryDictionary
-        }
-
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ProvinceEDIT, result.value);
-        }
-      });
-    });
-  }
-  deleteDialog = () => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(DeleteDialogComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        resolve(result)
-      });
-    });
-  }
-  deleteSingleRow = async (row: IProvinceManager) => {
-    const dialogResult = await this.deleteDialog();
-    if (dialogResult) {
-      this.sectorsManagerService.sectorsDelete(ENInterfaces.ProvinceREMOVE, row.id);
-    }
-  }
   nullSavedSource = () => this.closeTabService.saveDataForProvince = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -140,10 +104,8 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: IProvinceManager, rowIndex: number) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
-
-    if (!!a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.CountryREMOVE, rowData.id);
-      this.sectorsManagerService.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
+    if (a) {
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ProvinceREMOVE, rowData.id);
       this.refetchTable(rowIndex);
     }
   }
@@ -155,7 +117,15 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
       return;
     }
-    dataSource.countryId = dataSource.countryId['id'];
+    if (typeof dataSource.countryId !== 'object') {
+      this.countryDictionary.find(item => {
+        if (item.title === dataSource.countryId)
+          dataSource.countryId = item.id
+      })
+    } else {
+      dataSource.countryId = dataSource.countryId['id'];
+    }
+
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ProvinceEDIT, dataSource);
     this.sectorsManagerService.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
   }

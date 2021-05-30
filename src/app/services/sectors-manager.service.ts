@@ -169,9 +169,9 @@ export class SectorsManagerService {
   //     });
   //   }
   // }
-  firstConfirmDialog = () => {
+  firstConfirmDialog = (): Promise<any> => {
     const title = EN_messages.delete_confirm;
-    return new Promise(() => {
+    return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: {
           title: title,
@@ -181,8 +181,7 @@ export class SectorsManagerService {
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          console.log(desc);
-          return desc;
+          resolve(desc);
         }
       })
     })

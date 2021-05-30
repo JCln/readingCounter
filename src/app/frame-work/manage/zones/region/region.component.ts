@@ -8,7 +8,6 @@ import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
 
-import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 
 @Component({
@@ -60,20 +59,6 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     return a;
   }
-  deleteDialog = () => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(DeleteDialogComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        resolve(result)
-      });
-    });
-  }
-  deleteSingleRow = async (row: IRegionManager) => {
-    const dialogResult = await this.deleteDialog();
-    if (dialogResult) {
-      this.sectorsManagerService.sectorsDelete(ENInterfaces.RegionREMOVE, row.id);
-    }
-  }
   nullSavedSource = () => this.closeTabService.saveDataForRegion = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -120,9 +105,8 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   removeRow = async (rowData: IRegionManager, rowIndex: number) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
 
-    if (!!a) {
+    if (a) {
       await this.sectorsManagerService.deleteSingleRow(ENInterfaces.RegionREMOVE, rowData.id);
-      this.sectorsManagerService.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
       this.refetchTable(rowIndex);
     }
   }
@@ -134,7 +118,15 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
       return;
     }
-    dataSource.provinceId = dataSource.provinceId['id'];
+    if (typeof dataSource.provinceId !== 'object') {
+      this.provinceDictionary.find(item => {
+        if (item.title === dataSource.provinceId)
+          dataSource.provinceId = item.id
+      })
+    } else {
+      dataSource.provinceId = dataSource.provinceId['id'];
+    }
+
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ProvinceEDIT, dataSource);
     this.sectorsManagerService.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
   }

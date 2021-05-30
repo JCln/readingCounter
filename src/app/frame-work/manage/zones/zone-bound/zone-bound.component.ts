@@ -8,7 +8,6 @@ import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
 
-import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.component';
 
 @Component({
@@ -60,20 +59,6 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     return a;
   }
-  deleteDialog = () => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(DeleteDialogComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        resolve(result)
-      });
-    });
-  }
-  deleteSingleRow = async (row: IZoneBoundManager) => {
-    const dialogResult = await this.deleteDialog();
-    if (dialogResult) {
-      this.sectorsManagerService.sectorsDelete(ENInterfaces.ZoneBoundREMOVE, row.id);
-    }
-  }
   nullSavedSource = () => this.closeTabService.saveDataForZoneBound = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -120,9 +105,8 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
   removeRow = async (rowData: IZoneBoundManager, rowIndex: number) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
 
-    if (!!a) {
+    if (a) {
       await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ZoneBoundREMOVE, rowData.id);
-      this.sectorsManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
       this.refetchTable(rowIndex);
     }
   }
@@ -134,7 +118,14 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
       return;
     }
-    dataSource.zoneId = dataSource.zoneId['id'];
+    if (typeof dataSource.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSource.zoneId)
+          dataSource.zoneId = item.id
+      })
+    } else {
+      dataSource.zoneId = dataSource.zoneId['id'];
+    }
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneBoundEDIT, dataSource);
     this.sectorsManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
