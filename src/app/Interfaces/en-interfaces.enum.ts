@@ -213,6 +213,10 @@ export enum ENInterfaces {
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
 
+
+    getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
+    getDashboardTraverseTimed = 'V1/List/Dashboard/Traverse/Timed',
+    getDashboardCountInStates = 'V1/Tracking/Dashboard/CountInStates',
     getDashboardKarkardTimed = 'V1/List/Dashboard/Karkard/Timed',
     getDashboardMediaTimed = 'V1/List/Dashboard/Media/Timed',
     getDashboardReadingReportTimed = 'V1/ReadingReport/Dashboard/Timed',
