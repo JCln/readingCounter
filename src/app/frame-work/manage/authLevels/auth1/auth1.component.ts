@@ -65,7 +65,7 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/zs/c')
+        if (res === '/wr/m/al/ap')
           this.classWrapper(true);
       }
     })

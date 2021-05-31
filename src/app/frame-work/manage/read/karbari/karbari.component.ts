@@ -130,7 +130,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
   deleteSingleRow = async (row: IZoneManager) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.POST(ENInterfaces.KarbariRemove, row.id).subscribe(res => {
+      this.interfaceManagerService.POST(ENInterfaces.KarbariRemove, row.id).subscribe((res: IResponses) => {
         if (res) {
           this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }

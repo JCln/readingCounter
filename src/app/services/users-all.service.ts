@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { ENSnackBarColors, ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
@@ -31,17 +31,17 @@ export class UsersAllService {
     return this.interfaceManagerService.GET(ENInterfaces.userGET);
   }
   Activate = (UUID: string) => {
-    this.interfaceManagerService.POSTSG(ENInterfaces.userACTIVATE, UUID).subscribe(res => {
+    this.interfaceManagerService.POSTSG(ENInterfaces.userACTIVATE, UUID).toPromise().then((res: IResponses) => {
       this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
     });
   }
   DeActivate = (UUID: string) => {
-    this.interfaceManagerService.POSTSG(ENInterfaces.userDEACTIVATE, UUID).subscribe(res => {
+    this.interfaceManagerService.POSTSG(ENInterfaces.userDEACTIVATE, UUID).toPromise().then((res: IResponses) => {
       this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
     });
   }
   resetPassword = (UUID: string) => {
-    return this.interfaceManagerService.POSTSG(ENInterfaces.userRESETPASS, UUID).subscribe(res => {
+    return this.interfaceManagerService.POSTSG(ENInterfaces.userRESETPASS, UUID).toPromise().then((res: IResponses) => {
       this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
     });
   }

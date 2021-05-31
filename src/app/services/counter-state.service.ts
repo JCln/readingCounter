@@ -128,7 +128,7 @@ export class CounterStateService {
   }
   getGridFriendlyDataSourceDefault = (): any => {
     return new Promise(resolve => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.counterStateAll, this.gridFriendlyDefaultReq).subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.counterStateAll).subscribe(res => {
         resolve(res);
       })
     });

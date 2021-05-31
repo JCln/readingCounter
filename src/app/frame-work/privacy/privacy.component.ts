@@ -38,9 +38,9 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private interactionService: InteractionService,
     private router: Router, private privacyService: PrivacyService, private interfaceManagerService: InterfaceManagerService, private _snackBar: MatSnackBar) { }
 
-  getPolicies = (): Promise<IPolicies> => {
+  getPolicies = (): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.getPolicies, true).subscribe(res => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.getPolicies, true).subscribe((res: IPolicies) => {
         if (res)
           resolve(res);
       })

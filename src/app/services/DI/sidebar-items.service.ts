@@ -21,7 +21,7 @@ export class SidebarItemsService {
   getSideBarItems = (): Promise<ISidebarItems> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceServiceManager.GET(ENInterfaces.getSideBar).subscribe(res => {
+        this.interfaceServiceManager.GET(ENInterfaces.getSideBar).toPromise().then((res: any) => {
           this.tabItemsSource.next(res.items);
           resolve(res)
         })

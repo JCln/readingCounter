@@ -49,7 +49,7 @@ export class ProfileService {
   changePassword = (password: IChangePassword) => {
     if (!this.verification(password))
       return;
-    return this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe(res => {
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe((res: IResponses) => {
       if (res)
         this.utilsService.snackBarMessageSuccess(res.message);
     });

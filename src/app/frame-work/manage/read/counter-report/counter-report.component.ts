@@ -137,7 +137,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
   deleteSingleRow = async (row: any) => {
     const dialogResult = await this.deleteDialog();
     if (dialogResult) {
-      this.interfaceManagerService.POST(ENInterfaces.CounterReportRemove, row.id).subscribe(res => {
+      this.interfaceManagerService.POST(ENInterfaces.CounterReportRemove, row.id).subscribe((res: IResponses) => {
         if (res) {
           this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
         }

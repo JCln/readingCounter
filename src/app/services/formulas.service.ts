@@ -111,7 +111,7 @@ export class FormulasService {
   postAbBahaFormulaRemove = (UUID: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.GET(UUID).toPromise().then(res => {
+        this.interfaceManagerService.GET(UUID).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -130,7 +130,7 @@ export class FormulasService {
   postBudgetFormulaEdit = (body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetEdit, body).toPromise().then(res => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetEdit, body).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -142,7 +142,7 @@ export class FormulasService {
   postBudgetFormulaAdd = (body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetAdd, body).toPromise().then(res => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetAdd, body).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -152,14 +152,14 @@ export class FormulasService {
     }
   }
   private postBudgetFormulaAddExcel = (body: object) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetAddExcel, body).toPromise().then(res => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetAddExcel, body).toPromise().then((res: IResponses) => {
       this.utilsService.snackBarMessageSuccess(res.message);
     })
   }
   postBudgetFormulaRemove = (UUID: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.GET(UUID).toPromise().then(res => {
+        this.interfaceManagerService.GET(UUID).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -190,7 +190,7 @@ export class FormulasService {
   postTabsare2FormulaAdd = (body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare2Add, body).toPromise().then(res => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare2Add, body).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -202,7 +202,7 @@ export class FormulasService {
   postTabsare2FormulaRemove = (UUID: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTSG(ENInterfaces.FormulaTabsare2Remove, UUID).toPromise().then(res => {
+        this.interfaceManagerService.POSTSG(ENInterfaces.FormulaTabsare2Remove, UUID).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -221,7 +221,7 @@ export class FormulasService {
   postTabsare3FormulaEdit = (body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3Edit, body).toPromise().then(res => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3Edit, body).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res)
         })
@@ -233,7 +233,7 @@ export class FormulasService {
   postTabsare3FormulaAdd = (body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3Add, body).toPromise().then(res => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3Add, body).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -243,14 +243,14 @@ export class FormulasService {
     }
   }
   private postTabsare3FormulaAddExcel = (body: object) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3AddExcel, body).toPromise().then(res => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3AddExcel, body).toPromise().then((res: IResponses) => {
       this.utilsService.snackBarMessageSuccess(res.message);
     });
   }
   postTabsare3FormulaRemove = (UUID: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTSG(ENInterfaces.FormulaTabsare3Remove, UUID).toPromise().then(res => {
+        this.interfaceManagerService.POSTSG(ENInterfaces.FormulaTabsare3Remove, UUID).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })

@@ -314,8 +314,8 @@ export class TrackingManagerService {
   postOffloadModifyEdited = (body: IOffloadModifyReq) => {
     console.log(body);
 
-    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then(res => {
-      this.successSnackMessage(res);
+    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
+      this.successSnackMessage(res.message);
     })
   }
 

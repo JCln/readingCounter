@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { retry } from 'rxjs/operators';
 
 import { EnvService } from './env.service';
@@ -13,7 +12,7 @@ export class MainService {
   constructor(private http: HttpClient, private environment: EnvService) { }
 
 
-  GET = (URL: string, base64?: string): Observable<any> => {
+  GET = (URL: string, base64?: string) => {
     if (base64) {
       this.http.get(this.environment.API_URL + '/' + URL + '/' + base64).pipe(
         retry(1)
@@ -32,30 +31,30 @@ export class MainService {
       return this.http.get<any>(this.environment.API_URL + '/' + URL + '/' + ID);
     }
   }
-  POSTBLOB = (URL: string, body: object): Observable<any> => {
+  POSTBLOB = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body, { responseType: 'blob' });
   }
-  GETBLOB = (URL: string, ID?: string): Observable<any> => {
+  GETBLOB = (URL: string, ID?: string) => {
     if (ID)
       return this.http.get(this.environment.API_URL + '/' + URL + '/' + ID, { responseType: 'blob' });
     else
       return this.http.get(this.environment.API_URL + '/' + URL, { responseType: 'blob' });
   }
-  POST = (URL: string, ID?: number): Observable<any> => {
+  POST = (URL: string, ID?: number) => {
     if (ID)
       return this.http.post(this.environment.API_URL + '/' + URL + '/' + ID, '');
     else
       return this.http.post(this.environment.API_URL + '/' + URL, '');
   }
-  POSTSG = (URL: string, ID?: string): Observable<any> => {
+  POSTSG = (URL: string, ID?: string) => {
     return this.http.post(this.environment.API_URL + '/' + URL + '/' + ID, '');
   }
-  POSTBODY = (URL: string, body: object): Observable<any> => {
+  POSTBODY = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body);
   }
   PUT = (URL: string, body: object): any => {
   }
-  DELETE = (URL: string, id: number): Observable<any> => {
+  DELETE = (URL: string, id: number) => {
     return this.http.delete(this.environment.API_URL + '/' + URL + '/' + id).pipe(
       retry(1)
     );
