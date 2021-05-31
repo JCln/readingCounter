@@ -110,7 +110,8 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: {
           title: title,
-          isInput: true
+          isInput: true,
+          isDelete: true
         }
       });
       dialogRef.afterClosed().subscribe(desc => {

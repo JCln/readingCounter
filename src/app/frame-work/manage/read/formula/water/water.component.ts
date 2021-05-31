@@ -140,7 +140,8 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: {
           title: title,
-          isInput: false
+          isInput: false,
+          isDelete: true
         }
       });
       dialogRef.afterClosed().subscribe(desc => {

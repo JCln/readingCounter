@@ -58,7 +58,7 @@ export class AuthsManagerService {
     return [
       { field: 'title', header: 'عنوان', isSelected: true },
       { field: 'authLevel3Id', header: 'کنترلر', isSelected: true, isSelectOption: true },
-      { field: 'value', header: 'مقدار', isSelected: true },
+      { field: 'value', header: 'مقدار', isSelected: false },
       { field: 'cssClass', header: 'کلاس css', isSelected: false },
       { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
     ]
