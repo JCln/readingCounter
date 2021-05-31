@@ -36,7 +36,7 @@ export class ApkService {
   }
   getlastAPK = (): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.APKLast).toPromise().then(res => {
+      this.interfaceManagerService.GETBLOB(ENInterfaces.APKLast).toPromise().then(res => {
         resolve(res);
       })
     });
