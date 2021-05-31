@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ITabsare2Formula } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
@@ -50,7 +51,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          await this.formulasService.postTabsare2FormulaAdd(result);
+          await this.formulasService.postFormulaAdd(ENInterfaces.FormulaTabsare2Add, result);
           this.refreshTable();
         }
       });
@@ -65,7 +66,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTabsare2Formula;
     }
     else {
-      this.dataSource = await this.formulasService.getTabsare2FormulaAll();
+      this.dataSource = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare2All);
       this.closeTabService.saveDataForTabsare2Formula = this.dataSource;
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
@@ -110,7 +111,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   private removeRow = async (rowData: ITabsare2Formula, rowIndex: number) => {
-    await this.formulasService.postTabsare2FormulaRemove(rowData.id);
+    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaTabsare2Remove, rowData.id);
     this.refetchTable(rowIndex);
   }
 
@@ -146,7 +147,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     } else {
       dataSource.zoneId = dataSource.zoneId['id'];
     }
-    await this.formulasService.postTabsare2FormulaEdit(dataSource);
+    await this.formulasService.postFormulaEdit(ENInterfaces.FormulaTabsare2Edit, dataSource);
     this.clonedProducts[dataSource.id] = { ...dataSource };
     this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }

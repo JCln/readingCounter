@@ -72,17 +72,10 @@ export class FormulasService {
 
   }
   /* API CALLS */
-  getAbBahaFormulaAll = (): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.FormulaWaterAll).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  postAbBahaFormulaEdit = (body: object): Promise<any> => {
+  postFormulaEdit = (method: ENInterfaces, body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaWaterEdit, body).toPromise().then((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -91,10 +84,10 @@ export class FormulasService {
       console.error(error);
     }
   }
-  postAbBahaFormulaAdd = (body: object) => {
+  postFormulaAdd = (method: ENInterfaces, body: object) => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaWaterAdd, body).toPromise().then((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -108,10 +101,10 @@ export class FormulasService {
       this.utilsService.snackBarMessageSuccess(res.message);
     })
   }
-  postAbBahaFormulaRemove = (UUID: string): Promise<any> => {
+  postFormulaRemove = (method: ENInterfaces, UUID: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.GET(UUID).toPromise().then((res: IResponses) => {
+        this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -120,144 +113,22 @@ export class FormulasService {
       console.error(error);
     }
   }
-  getBudgetFormulaAll = (): Promise<any> => {
+  getFormulaAll = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.FormulaBudgetAll).toPromise().then(res => {
+      this.interfaceManagerService.GET(method).toPromise().then(res => {
         resolve(res);
       })
     });
-  }
-  postBudgetFormulaEdit = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetEdit, body).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postBudgetFormulaAdd = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetAdd, body).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
   }
   private postBudgetFormulaAddExcel = (body: object) => {
     this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetAddExcel, body).toPromise().then((res: IResponses) => {
       this.utilsService.snackBarMessageSuccess(res.message);
     })
   }
-  postBudgetFormulaRemove = (UUID: string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(UUID).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getTabsare2FormulaAll = (): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.FormulaTabsare2All).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  postTabsare2FormulaEdit = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare2Edit, body).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postTabsare2FormulaAdd = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare2Add, body).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postTabsare2FormulaRemove = (UUID: string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTSG(ENInterfaces.FormulaTabsare2Remove, UUID).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getTabsare3FormulaAll = (): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.FormulaTabsare3All).toPromise().then(res => {
-        resolve(res);
-      })
-    });
-  }
-  postTabsare3FormulaEdit = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3Edit, body).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postTabsare3FormulaAdd = (body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3Add, body).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
   private postTabsare3FormulaAddExcel = (body: object) => {
     this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3AddExcel, body).toPromise().then((res: IResponses) => {
       this.utilsService.snackBarMessageSuccess(res.message);
     });
-  }
-  postTabsare3FormulaRemove = (UUID: string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTSG(ENInterfaces.FormulaTabsare3Remove, UUID).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
@@ -275,32 +146,10 @@ export class FormulasService {
 
     await this[method](formData);
   }
-  getExcelAbBahaSample = (): Promise<any> => {
+  getExcelSample = (method: ENInterfaces): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.GETBLOB(ENInterfaces.FormulaWaterExcelSample).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getExcelBudgetSample = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETBLOB(ENInterfaces.FormulaBudgetExcelSample).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getExcelTabsare3Sample = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETBLOB(ENInterfaces.FormulaTabsare3ExcelSample).subscribe(res => {
+        this.interfaceManagerService.GETBLOB(method).toPromise().then(res => {
           resolve(res);
         })
       });

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IAbBahaFormula } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
@@ -53,7 +54,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          await this.formulasService.postAbBahaFormulaAdd(result);
+          await this.formulasService.postFormulaAdd(ENInterfaces.FormulaWaterAdd, result);
           this.refreshTable();
         }
       });
@@ -82,7 +83,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForWaterFormula;
     }
     else {
-      this.dataSource = await this.formulasService.getAbBahaFormulaAll();
+      this.dataSource = await this.formulasService.getFormulaAll(ENInterfaces.FormulaWaterAll);
       this.closeTabService.saveDataForWaterFormula = this.dataSource;
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
@@ -129,7 +130,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   private removeRow = async (rowData: IAbBahaFormula, rowIndex: number) => {
-    await this.formulasService.postAbBahaFormulaRemove(rowData.id);
+    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaWaterRemove, rowData.id);
     this.refetchTable(rowIndex);
   }
 
@@ -175,7 +176,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
       dataSource.karbariMoshtarakinCode = dataSource.karbariMoshtarakinCode['id'];
     }
 
-    await this.formulasService.postAbBahaFormulaEdit(dataSource);
+    await this.formulasService.postFormulaEdit(ENInterfaces.FormulaWaterEdit, dataSource);
     this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.formulasService.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
   }
@@ -192,7 +193,10 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelAbBahaSample());
+    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelSample(ENInterfaces.FormulaWaterExcelSample));
   }
 
+  trackByFn(index, item) {
+    return item.id;
+  }
 }

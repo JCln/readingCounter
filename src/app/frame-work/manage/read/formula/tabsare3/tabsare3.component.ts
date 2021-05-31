@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IAbBahaFormula } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
@@ -40,7 +41,7 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
 
   /* TODO// show dialog box to add excel file*/
   openAddDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(Tabsare3AddDgComponent,
         {
           disableClose: true,
@@ -53,7 +54,7 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          await this.formulasService.postTabsare3FormulaAdd(result);
+          await this.formulasService.postFormulaAdd(ENInterfaces.FormulaTabsare3Add, result);
           this.refreshTable();
         }
       });
@@ -82,7 +83,7 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTabsare3Formula;
     }
     else {
-      this.dataSource = await this.formulasService.getTabsare3FormulaAll();
+      this.dataSource = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare3All);
       this.closeTabService.saveDataForTabsare3Formula = this.dataSource;
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
@@ -129,7 +130,7 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   private removeRow = async (rowData: IAbBahaFormula, rowIndex: number) => {
-    await this.formulasService.postTabsare3FormulaRemove(rowData.id);
+    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaTabsare3Remove, rowData.id);
     this.refetchTable(rowIndex);
   }
 
@@ -175,7 +176,7 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
       dataSource.karbariMoshtarakinCode = dataSource.karbariMoshtarakinCode['id'];
     }
 
-    await this.formulasService.postTabsare3FormulaEdit(dataSource);
+    await this.formulasService.postFormulaEdit(ENInterfaces.FormulaTabsare3Edit, dataSource);
     this.formulasService.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
     this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
@@ -192,6 +193,6 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelTabsare3Sample());
+    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelSample(ENInterfaces.FormulaTabsare3ExcelSample));
   }
 }

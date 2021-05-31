@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IAbBahaFormula } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
@@ -40,7 +41,7 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /* TODO// show dialog box to add excel file*/
   openAddDialog = () => {
-    return new Promise(resolve => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(BudgetAddDgComponent,
         {
           disableClose: true,
@@ -51,9 +52,9 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
           }
 
         });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          this.formulasService.postBudgetFormulaAdd(result);
+          await this.formulasService.postFormulaAdd(ENInterfaces.FormulaBudgetAdd, result);
       });
     });
   }
@@ -78,7 +79,7 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForBadgetFormula;
     }
     else {
-      this.dataSource = await this.formulasService.getBudgetFormulaAll();
+      this.dataSource = await this.formulasService.getFormulaAll(ENInterfaces.FormulaBudgetAll);
       this.closeTabService.saveDataForBadgetFormula = this.dataSource;
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
@@ -125,7 +126,7 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   private removeRow = async (rowData: IAbBahaFormula, rowIndex: number) => {
-    await this.formulasService.postBudgetFormulaRemove(rowData.id);
+    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaBudgetRemove, rowData.id);
     this.refetchTable(rowIndex);
   }
 
@@ -170,7 +171,7 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
       dataSource.karbariMoshtarakinCode = dataSource.karbariMoshtarakinCode['id'];
     }
 
-    await this.formulasService.postBudgetFormulaEdit(dataSource);
+    await this.formulasService.postFormulaEdit(ENInterfaces.FormulaBudgetEdit, dataSource);
   }
   onRowEditCancel(dataSource: IAbBahaFormula, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];
@@ -185,6 +186,6 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelBudgetSample());
+    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelSample(ENInterfaces.FormulaBudgetExcelSample));
   }
 }
