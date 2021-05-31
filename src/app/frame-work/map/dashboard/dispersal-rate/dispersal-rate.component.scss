@@ -9,6 +9,7 @@ table {
   text-align: center;
   font-size: $font_s;
   font-weight: 500;
+  overflow-x: auto;
 }
 
 table td,
@@ -49,7 +50,11 @@ table th {
 }
 
 ._percent {
-  background: rgb(230, 230, 230);
+  background: rgba(246, 152, 56, 0.8);
+}
+
+._border_left {
+  border-left: 2px solid #0045cbbf !important;
 }
 
 ._hours {

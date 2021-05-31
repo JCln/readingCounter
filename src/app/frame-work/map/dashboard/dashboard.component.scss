@@ -5,10 +5,9 @@
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
   align-items: center;
-  gap: $font_xs;
+  gap: 0.3rem;
   margin-top: $font_xs;
   background: $gray_100;
-  padding: $font_xs 0.25rem;
   border-radius: $border_15;
   overflow: auto;
 }
@@ -34,8 +33,7 @@
 }
 
 .title {
-  top: 0;
-  right: $font_05;
+  top: $font_2;
   position: absolute;
   font-size: $font_m;
   color: $blue_500;
@@ -78,7 +76,7 @@
   border-radius: $border_15;
   background: $white;
   min-height: 15rem;
-  padding: $font_xs 0;
+  margin-top: $font_xs;
 }
 
 .relative_pos {
@@ -93,10 +91,6 @@
 
 .pie {
   min-height: 18rem;
-
-  .title {
-    top: auto;
-  }
 }
 
 .chart_1 {
