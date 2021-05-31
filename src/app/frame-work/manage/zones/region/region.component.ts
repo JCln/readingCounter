@@ -127,7 +127,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       dataSource.provinceId = dataSource.provinceId['id'];
     }
 
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ProvinceEDIT, dataSource);
+    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.RegionEDIT, dataSource);
     this.sectorsManagerService.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
   }
   onRowEditCancel(dataSource: IRegionManager, index: number) {
