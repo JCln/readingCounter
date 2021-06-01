@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
+
+import { SpinnerWrapperService } from './services/spinner-wrapper.service';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +10,24 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private config: PrimeNGConfig
-  ) { }
+  loadingRouteConfig: boolean = false;
 
-  ngOnInit(): void {
+  constructor(
+    private config: PrimeNGConfig,
+    private router: Router,
+    private spinnerWrapperService: SpinnerWrapperService
+  ) {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof RouteConfigLoadStart) {
+        this.spinnerWrapperService.startLoading();
+      } else if (event instanceof RouteConfigLoadEnd) {
+        this.spinnerWrapperService.stopLoading();
+      }
+    });
+  }
+
+  setTraslateToPrimeNgTable = () => {
     this.config.setTranslation({
       'accept': 'تایید',
       'reject': 'بازگشت',
@@ -39,5 +55,8 @@ export class AppComponent implements OnInit {
       'upload': 'ارسال',
       'cancel': 'بازگشت'
     });
+  }
+  ngOnInit(): void {
+    this.setTraslateToPrimeNgTable();
   }
 }
