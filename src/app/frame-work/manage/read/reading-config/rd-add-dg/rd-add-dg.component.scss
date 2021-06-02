@@ -2,6 +2,6 @@
 
 .mat-dialog-content {
   display: grid;
-  grid-template-columns: repeat(6, minmax(8rem, 9rem));
+  grid-template-columns: repeat(auto-fit, minmax(8rem, auto));
   gap: .5rem;
 }

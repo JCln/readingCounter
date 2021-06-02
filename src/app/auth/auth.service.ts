@@ -9,7 +9,6 @@ import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 
 import { IAuthTokenType, IAuthUser, ICredentials } from '../Interfaces/iauth-guard-permission';
-import { DictionaryWrapperService } from '../services/dictionary-wrapper.service';
 import { MainService } from '../services/main.service';
 import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-config';
 import { SnackWrapperService } from './../services/snack-wrapper.service';
@@ -30,8 +29,7 @@ export class AuthService {
     private route: ActivatedRoute,
     private utilsService: UtilsService,
     private snackWrapperService: SnackWrapperService,
-    private closeTabService: CloseTabService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private closeTabService: CloseTabService
   ) { }
 
   private getRefreshToken = (): string => {

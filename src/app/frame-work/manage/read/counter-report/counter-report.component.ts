@@ -1,26 +1,14 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import {
-  ENSnackBarColors,
-  ENSnackBarTimes,
-  IDictionaryManager,
-  IResponses,
-  ITrueFalse,
-} from 'src/app/Interfaces/ioverall-config';
+import { ICounterReport } from 'src/app/Interfaces/imanage';
+import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
+import { ReadManagerService } from 'src/app/services/read-manager.service';
 
-import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { CrAddDgComponent } from './cr-add-dg/cr-add-dg.component';
-import { CrEditDgComponent } from './cr-edit-dg/cr-edit-dg.component';
 
 @Component({
   selector: 'app-counter-report',
@@ -28,51 +16,24 @@ import { CrEditDgComponent } from './cr-edit-dg/cr-edit-dg.component';
   styleUrls: ['./counter-report.component.scss']
 })
 export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy {
-  moshtarakinIdFilter = new FormControl('');
-  titleFilter = new FormControl('');
-  zoneIdFilter = new FormControl('');
-  isAhadFilter = new FormControl('');
-  isKarbariFilter = new FormControl('');
-  canNumberBeLessThanPreFilter = new FormControl('');
-  isTaviziFilter = new FormControl('');
-  clientOrderFilter = new FormControl('');
 
+  dataSource: ICounterReport[] = [];
   subscription: Subscription[] = [];
-  dataSource = new MatTableDataSource();
-  editableDataSource = [];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  isTrueF: ITrueFalse[] = [
-    { name: 'نباشد', value: false },
-    { name: 'باشد', value: true },
-    { name: 'هیچکدام', value: '' }
-  ]
-
-  zoneId: any[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  clonedProducts: { [s: string]: ICounterReport; } = {};
 
-  columnsToDisplay = ['moshtarakinId', 'title', 'zoneId', 'isAhad', 'isKarbari', 'canNumberBeLessThanPre', 'isTavizi', 'clientOrder', 'actions'];
-  filterValues = {
-    moshtarakinId: '',
-    title: '',
-    zoneId: '',
-    isAhad: '',
-    isKarbari: '',
-    canNumberBeLessThanPre: '',
-    isTavizi: '',
-    clientOrder: '',
-  };
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private readManagerService: ReadManagerService
   ) { }
 
-  openDialog = () => {
+  openAddDialog = () => {
     return new Promise(() => {
       const dialogRef = this.dialog.open(CrAddDgComponent, {
         disableClose: true,
@@ -81,153 +42,12 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
           di: this.zoneDictionary
         }
       });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          console.log(result);
-
-          this.interfaceManagerService.POSTBODY(ENInterfaces.CounterReportAdd, result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportAdd, result);
         }
       });
     });
-  }
-  getEditableSource = (row: any) => {
-    const a = this.editableDataSource.find(dataSource => {
-      if (dataSource.id == row.id) {
-        return dataSource.id;
-      }
-    })
-    return a;
-  }
-  editDialog = (row: any) => {
-    const editable = this.getEditableSource(row).zoneId;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(CrEditDgComponent, {
-        disableClose: true,
-        minWidth: '30rem',
-        data: {
-          row,
-          editable,
-          di: this.zoneDictionary
-        }
-
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.interfaceManagerService.POSTBODY(ENInterfaces.CounterReportEdit, result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
-        }
-      });
-    });
-  }
-  deleteDialog = () => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(DeleteDialogComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        resolve(result)
-      });
-    });
-  }
-  deleteSingleRow = async (row: any) => {
-    const dialogResult = await this.deleteDialog();
-    if (dialogResult) {
-      this.interfaceManagerService.POST(ENInterfaces.CounterReportRemove, row.id).subscribe((res: IResponses) => {
-        if (res) {
-          this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-        }
-      });
-    }
-  }
-  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
-    dataSource.map(dataSource => {
-      zoneDictionary.map(zoneDic => {
-        if (zoneDic.id === dataSource.zoneId)
-          dataSource.zoneId = zoneDic.title;
-      })
-    });
-  }
-  getZoneDictionary = (): any => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.CounterReportGet).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
-  filterSearchs = () => {
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-
-    this.dataSource.filterPredicate = this.createFilter();
-
-    this.moshtarakinIdFilter.valueChanges
-      .subscribe(
-        moshtarakinId => {
-          this.filterValues.moshtarakinId = moshtarakinId;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.titleFilter.valueChanges
-      .subscribe(
-        title => {
-          this.filterValues.title = title;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.zoneIdFilter.valueChanges
-      .subscribe(
-        zoneId => {
-          this.filterValues.zoneId = zoneId;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.isAhadFilter.valueChanges
-      .subscribe(
-        isAhad => {
-          this.filterValues.isAhad = isAhad;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.isKarbariFilter.valueChanges
-      .subscribe(
-        isKarbari => {
-          this.filterValues.isKarbari = isKarbari;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.canNumberBeLessThanPreFilter.valueChanges
-      .subscribe(
-        canNumberBeLessThanPre => {
-          this.filterValues.canNumberBeLessThanPre = canNumberBeLessThanPre;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.isTaviziFilter.valueChanges
-      .subscribe(
-        isTavizi => {
-          this.filterValues.isTavizi = isTavizi;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.clientOrderFilter.valueChanges
-      .subscribe(
-        clientOrder => {
-          this.filterValues.clientOrder = clientOrder;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
   }
   nullSavedSource = () => this.closeTabService.saveDataForCounterReport = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -235,21 +55,16 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForCounterReport) {
-      this.dataSource.data = this.closeTabService.saveDataForZone;
-      this.zoneDictionary = this.closeTabService.saveDataForCounterReport;
+      this.dataSource = this.closeTabService.saveDataForCounterReport;
     }
     else {
-      this.dataSource.data = await this.getDataSource();
-      this.zoneDictionary = await this.getZoneDictionary();
-      this.closeTabService.saveDataForZone = this.dataSource.data;
-      this.closeTabService.saveDataForCounterReport = this.zoneDictionary;
+      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.CounterReportAll);
+      this.closeTabService.saveDataForCounterReport = this.dataSource;
     }
+    this.zoneDictionary = await this.readManagerService.getZoneDictionary();
 
-    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource.data));
-
-    this.convertIdToTitle(this.dataSource.data, this.zoneDictionary);
-    this.filterSearchs();
-
+    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    this.insertSelectedColumns();
   }
   ngOnInit() {
     this.classWrapper();
@@ -264,7 +79,6 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
     )
   }
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
     this.refreshTabStatus();
   }
   ngOnDestroy(): void {
@@ -272,19 +86,45 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  createFilter(): (data: any, filter: string) => boolean {
-    let filterFunction = function (data, filter): boolean {
-      let searchTerms = JSON.parse(filter);
-
-      return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.zoneId.toString().toLowerCase().indexOf(searchTerms.zoneId) !== -1
-        && data.clientOrder.toString().toLowerCase().indexOf(searchTerms.clientOrder) !== -1
-        && data.moshtarakinId.toString().toLowerCase().indexOf(searchTerms.moshtarakinId) !== -1
-        && data.isTavizi.toString().indexOf(searchTerms.isTavizi) !== -1
-        && data.isKarbari.toString().indexOf(searchTerms.isKarbari) !== -1
-        && data.isAhad.toString().indexOf(searchTerms.isAhad) !== -1
-        && data.canNumberBeLessThanPre.toString().indexOf(searchTerms.canNumberBeLessThanPre) !== -1
+  insertSelectedColumns = () => {
+    this._selectCols = this.readManagerService.columnCounterReport();
+    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  removeRow = async (rowData: ICounterReport, rowIndex: number) => {
+    const a = await this.readManagerService.firstConfirmDialog();
+    if (a) {
+      await this.readManagerService.deleteSingleRow(ENInterfaces.CounterReportRemove, rowData.id);
+      this.refetchTable(rowIndex);
     }
-    return filterFunction;
+  }
+  onRowEditInit(dataSource: any) {
+    this.clonedProducts[dataSource.id] = { ...dataSource };
+  }
+  onRowEditSave = async (dataSource: ICounterReport, rowIndex: number) => {
+    if (!this.readManagerService.verification(dataSource)) {
+      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      return;
+    }
+    if (typeof dataSource.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSource.zoneId)
+          dataSource.zoneId = item.id
+      })
+    } else {
+      dataSource.zoneId = dataSource.zoneId['id'];
+    }
+    await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportEdit, dataSource);
+    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+  }
+  refreshTable = () => {
+    this.classWrapper(true);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 }

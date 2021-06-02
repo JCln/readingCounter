@@ -17,7 +17,6 @@ import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.compon
 })
 export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: IProvinceManager[] = [];
-  editableDataSource = [];
 
   subscription: Subscription[] = [];
   countryDictionary: IDictionaryManager[] = [];
@@ -51,14 +50,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
-  getEditableSource = (row: any) => {
-    const a = this.editableDataSource.find(dataSource => {
-      if (dataSource.id == row.id) {
-        return dataSource.id;
-      }
-    })
-    return a;
-  }
   nullSavedSource = () => this.closeTabService.saveDataForProvince = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -72,7 +63,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForProvince = this.dataSource;
     }
     this.countryDictionary = await this.sectorsManagerService.getCountryDictionary();
-    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
 
     this.sectorsManagerService.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
     this.insertSelectedColumns();

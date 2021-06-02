@@ -1,19 +1,13 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IResponses, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
+import { IReadingPeriodKind } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
+import { ReadManagerService } from 'src/app/services/read-manager.service';
 
-import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { RpkmAddDgComponent } from './rpkm-add-dg/rpkm-add-dg.component';
-import { RpkmEditDgComponent } from './rpkm-edit-dg/rpkm-edit-dg.component';
 
 @Component({
   selector: 'app-reading-period-kind',
@@ -21,140 +15,33 @@ import { RpkmEditDgComponent } from './rpkm-edit-dg/rpkm-edit-dg.component';
   styleUrls: ['./reading-period-kind.component.scss']
 })
 export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDestroy {
-  titleFilter = new FormControl('');
-  moshtarakinIdFilter = new FormControl('');
-  clientOrderFilter = new FormControl('');
-  isEnabledFilter = new FormControl('');
-
-  dataSource = new MatTableDataSource();
-
+  dataSource: IReadingPeriodKind[] = [];
   subscription: Subscription[] = [];
-  isTrueF: ITrueFalse[] = [
-    { name: 'نباشد', value: false },
-    { name: 'باشد', value: true },
-    { name: 'هیچکدام', value: '' }
-  ]
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  columnsToDisplay = ['title', 'moshtarakinId', 'clientOrder', 'isEnabled', 'actions'];
-  filterValues = {
-    title: '',
-    moshtarakinId: '',
-    clientOrder: '',
-    isEnabled: ''
-  };
+
+  clonedProducts: { [s: string]: IReadingPeriodKind; } = {};
+
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
     private dialog: MatDialog,
     private interactionService: InteractionService,
-    private snackWrapperService: SnackWrapperService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private readManagerService: ReadManagerService
   ) { }
 
-  openDialog = () => {
+  openAddDialog = () => {
     return new Promise(() => {
-      const dialogRef = this.dialog.open(RpkmAddDgComponent,
-        {
-          disableClose: true,
-          width: '30rem'
-        });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.interfaceManagerService.POSTBODY(ENInterfaces.readingPeriodKindAdd, result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
-        }
-      });
-    });
-  }
-  editDialog = (row: any) => {
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(RpkmEditDgComponent, {
+      const dialogRef = this.dialog.open(RpkmAddDgComponent, {
         disableClose: true,
-        width: '30rem',
-        data: {
-          row
-        }
-
+        minWidth: '30rem'
       });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          this.interfaceManagerService.POSTBODY(ENInterfaces.readingPeriodKindEdit, result).subscribe((res: IResponses) => {
-            if (res) {
-              this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-            }
-          })
+          await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodKindAdd, result);
         }
       });
     });
-  }
-  deleteDialog = () => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(DeleteDialogComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        resolve(result)
-      });
-    });
-  }
-  deleteSingleRow = async (row: any) => {
-    const dialogResult = await this.deleteDialog();
-    if (dialogResult) {
-      this.interfaceManagerService.POST(ENInterfaces.readingPeriodKindRemove, row.id).subscribe(res => {
-        if (res) {
-          console.log(res);
-
-          // this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-        }
-      });
-    }
-  }
-  getDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.readingPeriodKindAll).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
-  filterSearchs = () => {
-    this.dataSource.paginator = this.paginator;
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-
-    this.dataSource.filterPredicate = this.createFilter();
-
-    this.titleFilter.valueChanges
-      .subscribe(
-        title => {
-          this.filterValues.title = title;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.moshtarakinIdFilter.valueChanges
-      .subscribe(
-        moshtarakinId => {
-          this.filterValues.moshtarakinId = moshtarakinId;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.clientOrderFilter.valueChanges
-      .subscribe(
-        clientOrder => {
-          this.filterValues.clientOrder = clientOrder;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.isEnabledFilter.valueChanges
-      .subscribe(
-        isEnabled => {
-          this.filterValues.isEnabled = isEnabled;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
   }
   nullSavedSource = () => this.closeTabService.saveDataForReadingPeriodKindManager = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -162,13 +49,13 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForReadingPeriodKindManager) {
-      this.dataSource.data = this.closeTabService.saveDataForReadingPeriodKindManager;
+      this.dataSource = this.closeTabService.saveDataForReadingPeriodKindManager;
     }
     else {
-      this.dataSource.data = await this.getDataSource();
-      this.closeTabService.saveDataForReadingPeriodKindManager = this.dataSource.data;
+      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.readingPeriodKindAll);
+      this.closeTabService.saveDataForReadingPeriodKindManager = this.dataSource;
     }
-    this.filterSearchs();
+    this.insertSelectedColumns();
   }
   ngOnInit() {
     this.classWrapper();
@@ -185,19 +72,41 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
   ngAfterViewInit(): void {
     this.refreshTabStatus();
   }
-  createFilter(): (data: any, filter: string) => boolean {
-    let filterFunction = function (data, filter): boolean {
-      let searchTerms = JSON.parse(filter);
-      return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.moshtarakinId.toString().toLowerCase().indexOf(searchTerms.moshtarakinId) !== -1
-        && data.clientOrder.toString().toLowerCase().indexOf(searchTerms.clientOrder) !== -1
-        && data.isEnabled.toString().indexOf(searchTerms.isEnabled) !== -1
-    }
-    return filterFunction;
-  }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe())
+    this.subscription.forEach(subscription => subscription.unsubscribe());
+  }
+  insertSelectedColumns = () => {
+    this._selectCols = this.readManagerService.columnReadingPeriodKind();
+    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  removeRow = async (rowData: IReadingPeriodKind, rowIndex: number) => {
+    const a = await this.readManagerService.firstConfirmDialog();
+    if (a) {
+      await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodKindRemove, rowData.id);
+      this.refetchTable(rowIndex);
+    }
+  }
+  onRowEditInit(dataSource: any) {
+    this.clonedProducts[dataSource.id] = { ...dataSource };
+  }
+  onRowEditSave = async (dataSource: IReadingPeriodKind, rowIndex: number) => {
+    if (!this.readManagerService.verification(dataSource)) {
+      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      return;
+    }
+    await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodKindEdit, dataSource);
+  }
+  refreshTable = () => {
+    this.classWrapper(true);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 }

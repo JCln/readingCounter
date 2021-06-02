@@ -1,3 +1,72 @@
+/* READING MANAGER */
+export interface IKarbari {
+    id: number,
+    moshtarakinId: number,
+    title: string,
+    provinceId: number | string,
+    isMaskooni: boolean,
+    isTejari: boolean,
+    isSaxt: boolean,
+    hasReadingVibrate: boolean
+}
+export interface IQotr {
+
+}
+export interface IReadingConfigDefault {
+    id: number,
+    zoneId: number,
+    defaultAlalHesab: number,
+    maxAlalHesab: number,
+    minAlalHesab: number,
+    defaultImagePercent: number,
+    maxImagePercent: number,
+    minImagePercent: number,
+    defaultHasPreNumber: boolean,
+    isOnQeraatCode: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    lowConstBoundMaskooni: number,
+    lowPercentBoundMaskooni: number,
+    highConstBoundMaskooni: number,
+    highPercentBoundMaskooni: number,
+    lowConstBoundSaxt: number,
+    lowPercentBoundSaxt: number,
+    highConstBoundSaxt: number,
+    highPercentBoundSaxt: number,
+    lowConstZarfiatBound: number,
+    lowPercentZarfiatBound: number,
+    highConstZarfiatBound: number,
+    highPercentZarfiatBound: number,
+    lowPercentRateBoundNonMaskooni: number,
+    highPercentRateBoundNonMaskooni: number
+}
+export interface IReadingPeriod {
+    id: number,
+    title: string,
+    moshtarakinId: number,
+    readingPeriodKindId: number | string,
+    zoneId: number | string,
+    clientOrder: number
+}
+export interface IReadingPeriodKind {
+    id: number,
+    title: string,
+    moshtarakinId: number,
+    clientOrder: number,
+    isEnabled: boolean
+}
+export interface ICounterReport {
+    id: number,
+    moshtarakinId: number,
+    title: string,
+    zoneId: number | string,
+    isAhad: boolean,
+    isKarbari: boolean,
+    canNumberBeLessThanPre: boolean,
+    isTavizi: boolean,
+    clientOrder: number
+}
+
 // ab baha formular manager
 export interface IAbBahaFormula {
     id: string,

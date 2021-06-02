@@ -1,362 +1,83 @@
-<div class="operation">
-    <button (click)="openDialog()" class="tooltip operation_btn">
-        <i class="fa fa-plus">
-            <div class="tooltip_text">افزودن تنظیمات قرائت</div>
-        </i>
-    </button>
-</div>
+<p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    [rowsPerPageOptions]="[10, 20,50]" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" dir="rtl" editMode="row"
+    styleClass="p-datatable-responsive" [responsive]="true" dataKey="id">
 
-<table mat-table [dataSource]="dataSource">
+    <ng-template pTemplate="caption">
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
+            selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <div class="header_icons_wrap">
+            <div class="left_side">
+                <i (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن موردی</div>
+                </i>
+            </div>
+            <div class="left_side">
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
+                </i>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
 
-    <!-- <ng-container matColumnDef="defaultHasPreNumber">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                شماره قبلی پیشفرض
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <mat-select placeholder="انتخاب مورد" [formControl]="defaultHasPreNumberFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
-                        {{truefalse.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">
-            <mat-checkbox [(ngModel)]="person.defaultHasPreNumber"></mat-checkbox>
-        </td>
-    </ng-container> -->
-    <ng-container matColumnDef="zoneId">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                ناحیه
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <mat-select placeholder="انتخاب مورد" [formControl]="zoneIdFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.title">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.zoneId}}</td>
-    </ng-container>
-    <ng-container matColumnDef="defaultAlalHesab">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                علی الحساب
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="defaultAlalHesabFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.defaultAlalHesab}}</td>
-    </ng-container>
-    <ng-container matColumnDef="defaultImagePercent">
-        <th mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                درصد پیشفرض عکس
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="defaultImagePercentFilter">
-            </mat-form-field>
-        </th>
-        <td mat-cell *matCellDef="let person">{{person.defaultImagePercent}}</td>
-    </ng-container>
-    <ng-container matColumnDef="maxAlalHesab">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                اللحساب بیشینه
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="maxAlalHesabFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.maxAlalHesab}}</td>
-    </ng-container>
-    <ng-container matColumnDef="minAlalHesab">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                اللحساب کمینه
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="minAlalHesabFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.minAlalHesab}}</td>
-    </ng-container>
-    <ng-container matColumnDef="maxImagePercent">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                بیشینه درصد عکس
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="maxImagePercentFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.maxImagePercent}}</td>
-    </ng-container>
-    <ng-container matColumnDef="minImagePercent">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                کمینه درصد عکس
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="minImagePercentFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.minImagePercent}}</td>
-    </ng-container>
-    <ng-container matColumnDef="lowConstBoundMaskooni">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                ثابت کمینه مسکونی
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="lowConstBoundMaskooniFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.lowConstBoundMaskooni}}</td>
-    </ng-container>
-    <ng-container matColumnDef="lowPercentBoundMaskooni">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                درصد کمینه مسکونی
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="lowPercentBoundMaskooniFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.lowPercentBoundMaskooni}}</td>
-    </ng-container>
-    <ng-container matColumnDef="highConstBoundMaskooni">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                ثابت بیشینه مسکونی
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="highConstBoundMaskooniFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.highConstBoundMaskooni}}</td>
-    </ng-container>
-    <ng-container matColumnDef="highPercentBoundMaskooni">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                درصد بیشینه مسکونی
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="highPercentBoundMaskooniFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.highPercentBoundMaskooni}}</td>
-    </ng-container>
-    <ng-container matColumnDef="lowConstBoundSaxt">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                ثابت کمینه ساخت
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="lowConstBoundSaxtFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.lowConstBoundSaxt}}</td>
-    </ng-container>
-    <ng-container matColumnDef="lowPercentBoundSaxt">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                درصد کمینه ساخت
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="lowPercentBoundSaxtFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.lowPercentBoundSaxt}}</td>
-    </ng-container>
-    <ng-container matColumnDef="highConstBoundSaxt">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                ثابت بیشینه ساخت
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="highConstBoundSaxtFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.highConstBoundSaxt}}</td>
-    </ng-container>
-    <ng-container matColumnDef="highPercentBoundSaxt">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                درصد بیشینه ساخت
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="highPercentBoundSaxtFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.highPercentBoundSaxt}}</td>
-    </ng-container>
-    <ng-container matColumnDef="lowConstZarfiatBound">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                ثابت کمینه ظرفیت
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="lowConstZarfiatBoundFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.lowConstZarfiatBound}}</td>
-    </ng-container>
-    <ng-container matColumnDef="lowPercentZarfiatBound">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                درصد کمینه ظرفیت
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="lowPercentZarfiatBoundFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.lowPercentZarfiatBound}}</td>
-    </ng-container>
-    <ng-container matColumnDef="highConstZarfiatBound">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                ثابت بیشینه ظرفیت
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="highConstZarfiatBoundFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.highConstZarfiatBound}}</td>
-    </ng-container>
-    <ng-container matColumnDef="highPercentZarfiatBound">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                درصد بیشنه ظرفیت
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="highPercentZarfiatBoundFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.highPercentZarfiatBound}}</td>
-    </ng-container>
-    <ng-container matColumnDef="lowPercentRateBoundNonMaskooni">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                درصد low غیر مسکونی
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="lowPercentRateBoundNonMaskooniFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.lowPercentRateBoundNonMaskooni}}</td>
-    </ng-container>
-    <ng-container matColumnDef="highPercentRateBoundNonMaskooni">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                درصد high غیر مسکونی
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <input matInput [formControl]="highPercentRateBoundNonMaskooniFilter">
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">{{person.highPercentRateBoundNonMaskooni}}</td>
-    </ng-container>
-    <ng-container matColumnDef="isOnQeraatCode">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                کد قرائت باشد
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <mat-select placeholder="انتخاب مورد" [formControl]="isOnQeraatCodeFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
-                        {{truefalse.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">
-            <mat-checkbox [disabled]="true" [(ngModel)]="person.isOnQeraatCode"></mat-checkbox>
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="displayBillId">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                نمایش قبض
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <mat-select placeholder="انتخاب مورد" [formControl]="displayBillIdFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
-                        {{truefalse.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">
-            <mat-checkbox [disabled]="true" [(ngModel)]="person.displayBillId"></mat-checkbox>
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="displayRadif">
-        <th [hidden]="isHide" mat-header-cell *matHeaderCellDef>
-            <div class="header">
-                نمایش ش.پرونده
-            </div>
-            <mat-form-field class="filter" floatLabel="never">
-                <mat-label>جستجو</mat-label>
-                <mat-select placeholder="انتخاب مورد" [formControl]="displayRadifFilter" name="truefalse">
-                    <mat-option *ngFor="let truefalse of isTrueF" [value]="truefalse.value">
-                        {{truefalse.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </th>
-        <td [hidden]="isHide" mat-cell *matCellDef="let person">
-            <mat-checkbox [disabled]="true" [(ngModel)]="person.displayRadif"></mat-checkbox>
-        </td>
-    </ng-container>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+            </th>
 
-    <ng-container cdkColumnDef="actions">
-        <th md-header-cell *matHeaderCellDef></th>
+            <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
+    </ng-template>
 
-        <td md-cell *matCellDef="let row" class="_actions">
-            <i (click)="editDialog(row)" class="tooltip _custom fa fa-edit">
-                <div class="tooltip_text">ویرایش</div>
-            </i>|
-            <i (click)="deleteSingleRow(row)" class="tooltip _custom fa fa-trash-o">
-                <div class="tooltip_text_right">حذف</div>
-            </i>
-            <i *ngIf="isHide" (click)="isHide = !isHide" class="tooltip _custom fa fa-eye">
-                <div class="tooltip_text">جزئیات</div>
-            </i>
-            <i *ngIf="!isHide" (click)="isHide = !isHide" class="tooltip _custom fa fa-eye-slash">
-                <div class="tooltip_text_right">عدم نمایش جزئیات</div>
-            </i>
-        </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let person; columns: columnsToDisplay"></tr>
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-ri="rowIndex">
+        <tr>
+            <td *ngFor="let col of columns">
+                <ng-container *ngIf="col.isBoolean; else elseTemplate">
+                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{dataSource[col.field]}}
+                </ng-template>
+            </td>
+            <td style="text-align: center;">
+                <i (click)="openEditDialog(dataSource)" class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
+            </td>
 
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            <td>
+                <i (click)="removeRow(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف مورد</div>
+                </i>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
+        <ng-template pTemlate="footer">
+            <tr>
+                <td [attr.colspan]="dataSource.length">
+                    موردی پیدا نشد
+                </td>
+            </tr>
+
+        </ng-template>
+    </ng-template>
+</p-table>
+
+<section *ngIf="!dataSource || dataSource.length === 0">
+    <tr class="empty_data">
+        موردی پیدا نشد
+    </tr>
+</section>

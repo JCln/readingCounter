@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { RdAddDgComponent } from './rd-add-dg/rd-add-dg.component';
@@ -11,8 +11,8 @@ import { ReadingConfigComponent } from './reading-config.component';
 @NgModule({
   declarations: [ReadingConfigComponent, RdAddDgComponent, RdEditDgComponent],
   imports: [
+    SharedPrimeNgModule,
     SharedModule,
-    ReactiveFormsModule,
     ReadingConfigRoutingModule
   ]
 })

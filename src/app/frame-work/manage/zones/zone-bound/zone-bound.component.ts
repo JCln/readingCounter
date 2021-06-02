@@ -17,7 +17,6 @@ import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.c
 })
 export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: IZoneBoundManager[] = [];
-  editableDataSource = [];
 
   subscription: Subscription[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -51,14 +50,6 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
-  getEditableSource = (row: any) => {
-    const a = this.editableDataSource.find(dataSource => {
-      if (dataSource.id == row.id) {
-        return dataSource.id;
-      }
-    })
-    return a;
-  }
   nullSavedSource = () => this.closeTabService.saveDataForZoneBound = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -72,7 +63,6 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForZoneBound = this.dataSource;
     }
     this.zoneDictionary = await this.sectorsManagerService.getZoneDictionary();
-    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
 
     this.sectorsManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.insertSelectedColumns();

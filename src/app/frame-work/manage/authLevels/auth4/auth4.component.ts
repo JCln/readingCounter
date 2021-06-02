@@ -22,7 +22,6 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
 
-  editableDataSource = [];
   authLevel3Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel4; } = {};
   _selectCols: any[] = [];
@@ -66,7 +65,6 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForAppLevel4 = this.dataSource;
     }
     this.authLevel3Dictionary = await this.authsManagerService.getAuthLevel3Dictionary();
-    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
 
     this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
     this.insertSelectedColumns();

@@ -17,7 +17,6 @@ import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 })
 export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: IRegionManager[] = [];
-  editableDataSource = [];
 
   subscription: Subscription[] = [];
   provinceDictionary: IDictionaryManager[] = [];
@@ -51,14 +50,6 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
   }
-  getEditableSource = (row: any) => {
-    const a = this.editableDataSource.find(dataSource => {
-      if (dataSource.id == row.id) {
-        return dataSource.id;
-      }
-    })
-    return a;
-  }
   nullSavedSource = () => this.closeTabService.saveDataForRegion = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -72,8 +63,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForRegion = this.dataSource;
     }
     this.provinceDictionary = await this.sectorsManagerService.getProvinceDictionary();
-    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
-
+    
     this.sectorsManagerService.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
     this.insertSelectedColumns();
   }

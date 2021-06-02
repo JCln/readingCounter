@@ -20,8 +20,6 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
   dataSource: IAuthLevel2[] = [];
   subscription: Subscription[] = [];
 
-
-  editableDataSource = [];
   authLevel1Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel2; } = {};
   _selectCols: any[] = [];
@@ -63,7 +61,6 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForAppLevel2 = this.dataSource;
     }
     this.authLevel1Dictionary = await this.authsManagerService.getAuthLevel1Dictionary();
-    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
 
     this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
     this.insertSelectedColumns();

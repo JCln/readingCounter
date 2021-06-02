@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ITextOutput } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
-import { TextOutputFieldManagerService } from 'src/app/services/text-output-field-manager.service';
+import { ReadManagerService } from 'src/app/services/read-manager.service';
 
 @Component({
   selector: 'app-txt-output',
@@ -16,16 +15,14 @@ import { TextOutputFieldManagerService } from 'src/app/services/text-output-fiel
 export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
-  table: Table;
   dataSource: ITextOutput[] = [];
-  zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private textOutputFieldManagerService: TextOutputFieldManagerService,
+    private readManagerService: ReadManagerService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -39,24 +36,15 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTextOutput;
     }
     else {
-      this.dataSource = await this.textOutputFieldManagerService.getOutputTextField();
+      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.textOutputGET);
       this.closeTabService.saveDataForTextOutput = this.dataSource;
     }
-    this.zoneDictionary = await this.textOutputFieldManagerService.getZoneDictionary();
-    this.textOutputFieldManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
-    this._selectCols = this.textOutputFieldManagerService.columnSelectedTextOutput();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectCols = this.readManagerService.columnTextOutput();
+    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
     this.classWrapper();

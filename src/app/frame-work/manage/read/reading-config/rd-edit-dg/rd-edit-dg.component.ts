@@ -29,7 +29,6 @@ export class RdEditDgComponent {
       isOnQeraatCode: data.isOnQeraatCode,
       displayBillId: data.displayBillId,
       displayRadif: data.displayRadif,
-      logicalOrder: data.logicalOrder,
       zoneId: editable,
       defaultAlalHesab: data.defaultAlalHesab,
       maxAlalHesab: data.maxAlalHesab,
