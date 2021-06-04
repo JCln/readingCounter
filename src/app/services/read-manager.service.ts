@@ -142,7 +142,7 @@ export class ReadManagerService {
     });
   }
   firstConfirmDialog = (): Promise<any> => {
-    const title = EN_messages.delete_confirm;
+    const title = EN_messages.confirm_remove;
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         data: {

@@ -97,11 +97,6 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
     }
     await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel1EDIT, dataSource);
   }
-  onRowEditCancel(dataSource: IAuthLevels, index: number) {
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
-    return;
-  }
   refreshTable = () => {
     this.classWrapper(true);
   }

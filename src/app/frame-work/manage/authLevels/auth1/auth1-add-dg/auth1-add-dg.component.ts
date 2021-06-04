@@ -20,7 +20,7 @@ export class Auth1AddDgComponent {
       id: [''],
       title: [''],
       cssClass: [''],
-      inSidebar: [''],
+      inSidebar: false,
       logicalOrder: ['']
     })
   }

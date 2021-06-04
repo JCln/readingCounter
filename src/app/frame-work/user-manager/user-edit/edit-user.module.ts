@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../../../shared/shared.module';
 import { SelectActionComponent } from './select-action/select-action.component';
@@ -13,7 +12,6 @@ import { UserInputsComponent } from './user-inputs/user-inputs.component';
   declarations: [UserEditComponent, SelectZoneComponent, UserInputsComponent, SelectActionComponent],
   imports: [
     SharedModule,
-    ReactiveFormsModule,
     UserEditRoutingModule
   ]
 })

@@ -22,9 +22,21 @@
   background-color: $red_500;
   border-color: $red_500;
   color: $white;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $red_600;
+    box-shadow: 0 0 0 3px $red_600;
+  }
 }
 
 h2 {
   font-size: $font_m;
   padding: $font_05;
+}
+
+.btn_1,
+.btn_2 {
+  width: 7rem;
 }

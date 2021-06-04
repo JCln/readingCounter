@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import { getPersianPaginatorIntl } from './getPersianPaginatorIntl';
@@ -14,7 +14,7 @@ import { MaterialModule } from './material.module';
     MaterialModule
   ],
   exports: [
-    CommonModule, FormsModule, MaterialModule
+    CommonModule, FormsModule, MaterialModule, ReactiveFormsModule,
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPersianPaginatorIntl() }

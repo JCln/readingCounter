@@ -8,8 +8,8 @@ import { TrackingRoutingModule } from './tracking-routing.module';
 @NgModule({
   declarations: [ConfirmTextDialogComponent],
   imports: [
-    TrackingRoutingModule,
-    SharedModule
+    SharedModule,
+    TrackingRoutingModule
   ]
 })
 export class TrackingModule { }
