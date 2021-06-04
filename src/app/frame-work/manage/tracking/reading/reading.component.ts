@@ -140,5 +140,5 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-
+  trackColumnChanges = ($event: any) => this.trackingManagerService.setColumnsChanges('menuDefault', $event);
 }

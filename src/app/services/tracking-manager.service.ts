@@ -19,27 +19,28 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class TrackingManagerService {
+  private menuDefault = [
+    { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+    { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+    { field: 'counterReaderName', header: 'مامور', isSelected: true },
+    { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
+    { field: 'listNumber', header: 'ش لیست', isSelected: true },
+    { field: 'itemQuantity', header: 'تعداد', isSelected: true },
+    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
+    { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
+    // { field: 'year', header: 'سال', isSelected: false },
+    { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
+    { field: 'fromDate', header: 'از', isSelected: false },
+    { field: 'toDate', header: 'تا', isSelected: false },
+    { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
+    { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
+    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
+    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
+  ];
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
-    return [
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
-      { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-      { field: 'counterReaderName', header: 'مامور', isSelected: true },
-      { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: true },
-      { field: 'itemQuantity', header: 'تعداد', isSelected: true },
-      // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-      { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
-      // { field: 'year', header: 'سال', isSelected: false },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
-      { field: 'fromDate', header: 'از', isSelected: false },
-      { field: 'toDate', header: 'تا', isSelected: false },
-      { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
-      { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-      { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
-      { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
-    ];
+    return this.menuDefault;
   }
   columnSelectedImportedList = (): IObjectIteratation[] => {
     return [
@@ -408,6 +409,15 @@ export class TrackingManagerService {
   }
   verificationFollowUPTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
+  }
+  /* OTHER */
+  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
+    this[variableName].find(old => {
+      newValues.find(newVals => {
+        if (newVals.field == old.field)
+          old.isSelected = true;
+      })
+    })
   }
 
 }
