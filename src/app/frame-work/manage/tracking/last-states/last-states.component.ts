@@ -21,7 +21,7 @@ export class LastStatesComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService
   ) {
   }

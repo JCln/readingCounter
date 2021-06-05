@@ -5,7 +5,6 @@ import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IOnOffLoadFlat } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ListManagerService } from 'src/app/services/list-manager.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
@@ -32,8 +31,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService,
-    private listManagerService: ListManagerService,
+    public listManagerService: ListManagerService,
     public outputManagerService: OutputManagerService,
     private route: ActivatedRoute,
     private router: Router,
@@ -72,7 +70,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.listManagerService.columnSelectedLMAll();
+    this._selectCols = this.listManagerService.columnLMAll();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   isFromOffloadPage = () => {

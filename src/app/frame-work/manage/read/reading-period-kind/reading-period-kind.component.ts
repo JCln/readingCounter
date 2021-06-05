@@ -27,7 +27,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
     private dialog: MatDialog,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private readManagerService: ReadManagerService
+    public readManagerService: ReadManagerService
   ) { }
 
   openAddDialog = () => {

@@ -23,7 +23,7 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,
     private router: Router,
     public route: ActivatedRoute

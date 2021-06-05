@@ -29,7 +29,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService,

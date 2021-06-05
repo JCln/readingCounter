@@ -129,6 +129,32 @@ export interface IOffloadModifyType {
     id: number,
     modifyeType: ENOffloadModifyType
 }
+export enum ENSelectedColumnVariables {
+    selectedTracks = 'menuDefault',
+    selectedlastStates = 'lastStates',
+    selectedListManagerAll = 'listManagerAll',
+    selectedAuth2 = '_auth2',
+    selectedAuth3 = '_auth3',
+    selectedAuth4 = '_auth4',
+    selectedRRAnalyzeByParam = '_RRAnalyzeByParam',
+    selectedRRMaster = '_RRMaster',
+    selectedRRDetails = '_RRDetails',
+    selectedRRTraverse = '_RRTraverse',
+    selectedRRTraverseDifferential = '_RRTraverseDifferential',
+    selectedRRKarkard = '_RRKarkard',
+    selectedRRKarkardDaily = '_RRKarkardDaily',
+    selectedRRDisposalHours = '_RRDisposalHours',
+    selectedAbFormulas = '_abFormulas',
+    selectedBudgetFormulas = '_budgetFormulas',
+    selectedTabsare2Formulas = '_tabsare2Formulas',
+    selectedTabsare3Formulas = '_tabsare3Formulas',
+    selectedCounterReport = '_counterReport',
+    selectedReadingConfigDefault = '_readingConfigDefault',
+    selectedReadingPeriod = '_readingPeriod',
+    selectedReadingPeriodKind = '_readingPeriodKind',
+    selectedTextOutput = '_textOutput',
+    selectedKarbari = '_karbari',
+}
 export enum ENOffloadModifyType {
     callAnnounce = 'اعلام تلفنی',
     blueScreenLight = 'اشتباه در قرائت',

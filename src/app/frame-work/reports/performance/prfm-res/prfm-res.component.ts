@@ -18,7 +18,7 @@ export class PrfmResComponent implements OnInit {
   _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public outputManagerService: OutputManagerService,
     private utilsService: UtilsService
   ) {

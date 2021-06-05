@@ -2,8 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IReadingReportKarkard } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
@@ -21,9 +19,7 @@ export class KarkardDaylyResComponent implements OnInit {
   _selectedColumns: any[];
 
   constructor(
-    private interactionService: InteractionService,
-    private closeTabService: CloseTabService,
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -35,7 +31,7 @@ export class KarkardDaylyResComponent implements OnInit {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRKarkardDaly();
+    this._selectCols = this.readingReportManagerService.columnRRKarkardDaly();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   connectToServer = async () => {

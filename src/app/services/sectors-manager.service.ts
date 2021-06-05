@@ -210,4 +210,5 @@ export class SectorsManagerService {
       return false;
     return true;
   }
+
 }

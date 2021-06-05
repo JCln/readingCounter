@@ -5,6 +5,7 @@
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
+            (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables.selectedlastStates ,$event)"
             selectedItemsLabel=" ستون انتخاب شده{0}" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">

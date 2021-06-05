@@ -33,7 +33,7 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private formulasService: FormulasService,
+    public formulasService: FormulasService,
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
   ) {

@@ -27,7 +27,7 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     public outputManagerService: OutputManagerService

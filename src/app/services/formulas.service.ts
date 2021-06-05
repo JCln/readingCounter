@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
+import {
+  ENSelectedColumnVariables,
+  ENSnackBarColors,
+  ENSnackBarTimes,
+  IDictionaryManager,
+  IResponses,
+} from 'src/app/Interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
@@ -17,6 +23,7 @@ import { ConverterService } from './converter.service';
 export class FormulasService {
   private fileForm: FileList;
   private desc: any;
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -27,49 +34,52 @@ export class FormulasService {
   ) { }
 
   /* COLUMNS */
+  private _abFormulas = [
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
+    { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
+    { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
+    { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
+    { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
+    { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
+    { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
+  ]
+  private _budgetFormulas = [
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
+    { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
+    { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
+    { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
+    { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
+    { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
+  ]
+  private _tabsare2Formulas = [
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+    { field: 'formula', header: 'فرمول', isSelected: true, readonly: true, ltr: true }
+  ]
+  private _tabsare3Formulas = [
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
+    { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
+    { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
+    { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
+    { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
+    { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
+    { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
+    { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
+  ]
 
   columnAbFormulas = (): IObjectIteratation[] => {
-    return [
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-      { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
-      { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
-      { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
-      { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
-      { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
-      { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
-      { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
-    ]
+    return this._abFormulas;
   }
   columnBudgetFormulas = (): IObjectIteratation[] => {
-    return [
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-      { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
-      { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
-      { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
-      { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
-      { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
-      { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
-    ]
+    return this._budgetFormulas;
   }
   columnTabsare2Formulas = (): IObjectIteratation[] => {
-    return [
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-      { field: 'formula', header: 'فرمول', isSelected: true, readonly: true, ltr: true }
-    ]
+    return this._tabsare2Formulas;
   }
   columnTabsare3Formulas = (): IObjectIteratation[] => {
-    return [
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-      { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
-      { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
-      { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
-      { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
-      { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
-      { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
-      { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
-      { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
-    ]
-
+    return this._tabsare3Formulas;
   }
   /* API CALLS */
   postFormulaEdit = (method: ENInterfaces, body: object): Promise<any> => {
@@ -302,4 +312,19 @@ export class FormulasService {
   convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
     this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
+  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
+    // convert all items to false
+    this[variableName].forEach(old => {
+      old.isSelected = false;
+    })
+
+    // merge new values
+    this[variableName].find(old => {
+      newValues.find(newVals => {
+        if (newVals.field == old.field)
+          old.isSelected = true;
+      })
+    })
+  }
+
 }
