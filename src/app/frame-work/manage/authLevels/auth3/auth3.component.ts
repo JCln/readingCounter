@@ -30,7 +30,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private authsManagerService: AuthsManagerService
+    public authsManagerService: AuthsManagerService
   ) { }
 
   openAddDialog = () => {

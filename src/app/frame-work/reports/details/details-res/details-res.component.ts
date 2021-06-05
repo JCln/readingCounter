@@ -17,7 +17,7 @@ export class DetailsResComponent implements OnInit {
   _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -38,7 +38,7 @@ export class DetailsResComponent implements OnInit {
   }
 
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRDetails();
+    this._selectCols = this.readingReportManagerService.columnRRDetails();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {

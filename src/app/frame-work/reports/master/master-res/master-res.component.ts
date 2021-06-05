@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IReadingReportMaster } from 'src/app/Interfaces/imanage';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
@@ -17,9 +15,7 @@ export class MasterResComponent implements OnInit {
   _selectedColumns: any[];
 
   constructor(
-    private interactionService: InteractionService,
-    private closeTabService: CloseTabService,
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -31,7 +27,7 @@ export class MasterResComponent implements OnInit {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRMaster();
+    this._selectCols = this.readingReportManagerService.columnRRMaster();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   connectToServer = async () => {

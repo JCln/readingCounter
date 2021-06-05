@@ -17,7 +17,7 @@ export class DisposalHoursResComponent implements OnInit {
   _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -35,7 +35,7 @@ export class DisposalHoursResComponent implements OnInit {
       this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRDisposalHours();
+    this._selectCols = this.readingReportManagerService.columnRRDisposalHours();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   ngOnInit(): void {

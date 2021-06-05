@@ -29,7 +29,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService,
     public outputManagerService: OutputManagerService
@@ -144,6 +144,5 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  trackColumnChanges = ($event: any) => this.trackingManagerService.setColumnsChanges('menuDefault', $event);
 
 }

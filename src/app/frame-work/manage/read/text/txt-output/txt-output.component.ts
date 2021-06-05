@@ -22,7 +22,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private readManagerService: ReadManagerService,
+    public readManagerService: ReadManagerService,
     public outputManagerService: OutputManagerService
   ) {
   }

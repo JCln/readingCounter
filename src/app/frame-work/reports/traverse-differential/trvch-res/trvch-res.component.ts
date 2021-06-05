@@ -21,7 +21,7 @@ export class TrvchResComponent implements OnInit, OnDestroy {
   _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -34,7 +34,7 @@ export class TrvchResComponent implements OnInit, OnDestroy {
   }
 
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRTraverseDifferential();
+    this._selectCols = this.readingReportManagerService.columnRRTraverseDifferential();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   connectToServer = async () => {

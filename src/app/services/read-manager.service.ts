@@ -3,7 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { EN_messages } from '../Interfaces/enums.enum';
-import { IDictionaryManager, IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
+import {
+  ENSelectedColumnVariables,
+  IDictionaryManager,
+  IObjectIteratation,
+  IResponses,
+} from '../Interfaces/ioverall-config';
 import { ENInterfaces } from './../Interfaces/en-interfaces.enum';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -15,6 +20,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ReadManagerService {
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -26,83 +32,89 @@ export class ReadManagerService {
   ) { }
 
   /* COLUMNS */
+  private _counterReport = [
+    { field: 'title', header: 'عنوان', isSelected: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+    { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
+    { field: 'isAhad', header: 'آحاد', isSelected: true, isBoolean: true },
+    { field: 'isKarbari', header: 'کاربری', isSelected: true, isBoolean: true },
+    { field: 'canNumberBeLessThanPre', header: 'کمتر از قبلی', isSelected: true, isBoolean: true },
+    { field: 'isTavizi', header: 'تعویض', isSelected: true, isBoolean: true },
+    { field: 'clientOrder', header: 'ترتیب', isSelected: true }
+  ]
+  private _readingConfigDefault = [
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+    { field: 'defaultAlalHesab', header: 'علی‌الحساب', isSelected: true },
+    { field: 'minAlalHesab', header: 'علی‌الحساب کمینه', isSelected: false },
+    { field: 'maxAlalHesab', header: 'علی‌الحساب بیشینه', isSelected: false },
+    { field: 'defaultImagePercent', header: 'درصد پیشفرض عکس', isSelected: true },
+    { field: 'minImagePercent', header: 'درصد عکس کمینه', isSelected: false },
+    { field: 'maxImagePercent', header: 'درصد عکس بیشینه', isSelected: false },
+    // { field: 'defaultHasPreNumber', header: 'ش قبلی پیشفرض', isSelected: false },      
+    { field: 'isOnQeraatCode', header: 'کد قرائت باشد', isSelected: false, isBoolean: true },
+    { field: 'displayBillId', header: 'نمایش قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false },
+    { field: 'lowConstBoundMaskooni', header: 'ثابت کمینه مسکونی', isSelected: false },
+    { field: 'highConstBoundMaskooni', header: 'ثابت بیشینه مسکونی', isSelected: false },
+    { field: 'lowPercentBoundMaskooni', header: 'درصد کمینه مسکونی', isSelected: false },
+    { field: 'highPercentBoundMaskooni', header: 'درصد بیشینه مسکونی', isSelected: false },
+    { field: 'lowPercentBoundSaxt', header: 'درصد کمینه ساخت', isSelected: false },
+    { field: 'lowConstBoundSaxt', header: 'ثابت کمینه ساخت', isSelected: false },
+    { field: 'highConstBoundSaxt', header: 'ثابت بیشینه ساخت', isSelected: false },
+    { field: 'highPercentBoundSaxt', header: 'درصد بیشینه ساخت', isSelected: false },
+    { field: 'lowPercentZarfiatBound', header: 'درصد کمینه ظرفیت', isSelected: false },
+    { field: 'lowConstZarfiatBound', header: 'ثابت کمینه ظرفیت', isSelected: false },
+    { field: 'highConstZarfiatBound', header: 'ثابت بیشینه ظرفیت', isSelected: false },
+    { field: 'highPercentZarfiatBound', header: 'درصد بیشنه ظرفیت', isSelected: false },
+    { field: 'lowPercentRateBoundNonMaskooni', header: 'درصد low غیر مسکونی', isSelected: false },
+    { field: 'highPercentRateBoundNonMaskooni', header: 'درصد high غیر مسکونی', isSelected: false }
+  ]
+  private _readingPeriod = [
+    { field: 'title', header: 'عنوان', isSelected: true },
+    { field: 'readingPeriodKindId', header: 'نوع دوره', isSelected: true, isSelectOption: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+    { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
+    { field: 'clientOrder', header: 'ترتیب', isSelected: true }
+  ]
+  private _readingPeriodKind = [
+    { field: 'title', header: 'عنوان', isSelected: true },
+    { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
+    { field: 'clientOrder', header: 'ترتیب', isSelected: true },
+    { field: 'isEnabled', header: 'فعال', isSelected: true, isBoolean: true },
+  ]
+  private _textOutput = [
+    { field: 'itemTitle', header: 'عنوان', isSelected: true, readonly: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+    { field: 'startIndex', header: 'ابتدا', isSelected: true, readonly: true },
+    { field: 'endIndex', header: 'انتها', isSelected: true, readonly: true },
+    { field: 'length', header: 'طول', isSelected: true, readonly: true }
+  ]
+  private _karbari = [
+    { field: 'title', header: 'عنوان', isSelected: true },
+    { field: 'provinceId', header: 'استان', isSelected: true, isSelectOption: true },
+    { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
+    { field: 'isMaskooni', header: 'مسکونی', isSelected: true, isBoolean: true },
+    { field: 'isTejari', header: 'تجاری', isSelected: true, isBoolean: true },
+    { field: 'isSaxt', header: 'ساخت', isSelected: true, isBoolean: true },
+    { field: 'hasReadingVibrate', header: 'لرزش', isSelected: true, isBoolean: true }
+  ]
   columnCounterReport = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-      { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
-      { field: 'isAhad', header: 'آحاد', isSelected: true, isBoolean: true },
-      { field: 'isKarbari', header: 'کاربری', isSelected: true, isBoolean: true },
-      { field: 'canNumberBeLessThanPre', header: 'کمتر از قبلی', isSelected: true, isBoolean: true },
-      { field: 'isTavizi', header: 'تعویض', isSelected: true, isBoolean: true },
-      { field: 'clientOrder', header: 'ترتیب', isSelected: true }
-    ]
+    return this._counterReport;
   }
   columnReadingConfigDefault = (): IObjectIteratation[] => {
-    return [
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-      { field: 'defaultAlalHesab', header: 'علی‌الحساب', isSelected: true },
-      { field: 'minAlalHesab', header: 'علی‌الحساب کمینه', isSelected: false },
-      { field: 'maxAlalHesab', header: 'علی‌الحساب بیشینه', isSelected: false },
-      { field: 'defaultImagePercent', header: 'درصد پیشفرض عکس', isSelected: true },
-      { field: 'minImagePercent', header: 'درصد عکس کمینه', isSelected: false },
-      { field: 'maxImagePercent', header: 'درصد عکس بیشینه', isSelected: false },
-      // { field: 'defaultHasPreNumber', header: 'ش قبلی پیشفرض', isSelected: false },      
-      { field: 'isOnQeraatCode', header: 'کد قرائت باشد', isSelected: false, isBoolean: true },
-      { field: 'displayBillId', header: 'نمایش قبض', isSelected: false, isBoolean: true },
-      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false },
-      { field: 'lowConstBoundMaskooni', header: 'ثابت کمینه مسکونی', isSelected: false },
-      { field: 'highConstBoundMaskooni', header: 'ثابت بیشینه مسکونی', isSelected: false },
-      { field: 'lowPercentBoundMaskooni', header: 'درصد کمینه مسکونی', isSelected: false },
-      { field: 'highPercentBoundMaskooni', header: 'درصد بیشینه مسکونی', isSelected: false },
-      { field: 'lowPercentBoundSaxt', header: 'درصد کمینه ساخت', isSelected: false },
-      { field: 'lowConstBoundSaxt', header: 'ثابت کمینه ساخت', isSelected: false },
-      { field: 'highConstBoundSaxt', header: 'ثابت بیشینه ساخت', isSelected: false },
-      { field: 'highPercentBoundSaxt', header: 'درصد بیشینه ساخت', isSelected: false },
-      { field: 'lowPercentZarfiatBound', header: 'درصد کمینه ظرفیت', isSelected: false },
-      { field: 'lowConstZarfiatBound', header: 'ثابت کمینه ظرفیت', isSelected: false },
-      { field: 'highConstZarfiatBound', header: 'ثابت بیشینه ظرفیت', isSelected: false },
-      { field: 'highPercentZarfiatBound', header: 'درصد بیشنه ظرفیت', isSelected: false },
-      { field: 'lowPercentRateBoundNonMaskooni', header: 'درصد low غیر مسکونی', isSelected: false },
-      { field: 'highPercentRateBoundNonMaskooni', header: 'درصد high غیر مسکونی', isSelected: false }
-    ]
+    return this._readingConfigDefault;
   }
   columnReadingPeriod = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'readingPeriodKindId', header: 'نوع دوره', isSelected: true, isSelectOption: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-      { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
-      { field: 'clientOrder', header: 'ترتیب', isSelected: true }
-    ]
+    return this._readingPeriod;
   }
   columnReadingPeriodKind = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
-      { field: 'clientOrder', header: 'ترتیب', isSelected: true },
-      { field: 'isEnabled', header: 'فعال', isSelected: true, isBoolean: true },
-    ]
+    return this._readingPeriodKind;
   }
   columnTextOutput = (): IObjectIteratation[] => {
-    return [
-      { field: 'itemTitle', header: 'عنوان', isSelected: true, readonly: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-      { field: 'startIndex', header: 'ابتدا', isSelected: true, readonly: true },
-      { field: 'endIndex', header: 'انتها', isSelected: true, readonly: true },
-      { field: 'length', header: 'طول', isSelected: true, readonly: true }
-    ];
+    return this._textOutput;
   }
   columnKarbari = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'provinceId', header: 'استان', isSelected: true, isSelectOption: true },
-      { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
-      { field: 'isMaskooni', header: 'مسکونی', isSelected: true, isBoolean: true },
-      { field: 'isTejari', header: 'تجاری', isSelected: true, isBoolean: true },
-      { field: 'isSaxt', header: 'ساخت', isSelected: true, isBoolean: true },
-      { field: 'hasReadingVibrate', header: 'لرزش', isSelected: true, isBoolean: true }
-    ]
+    return this._karbari;
   }
   /* API CALLS */
   getProvinceDictionary = (): Promise<any> => {
@@ -175,5 +187,18 @@ export class ReadManagerService {
         return items
     })
   }
+  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
+    // convert all items to false
+    this[variableName].forEach(old => {
+      old.isSelected = false;
+    })
 
+    // merge new values
+    this[variableName].find(old => {
+      newValues.find(newVals => {
+        if (newVals.field == old.field)
+          old.isSelected = true;
+      })
+    })
+  }
 }

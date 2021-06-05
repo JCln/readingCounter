@@ -5,7 +5,12 @@ import { SectionsService } from 'src/app/services/sections.service';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { EN_messages } from '../Interfaces/enums.enum';
-import { IDictionaryManager, IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
+import {
+  ENSelectedColumnVariables,
+  IDictionaryManager,
+  IObjectIteratation,
+  IResponses,
+} from '../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -15,6 +20,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class AuthsManagerService {
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -26,42 +32,47 @@ export class AuthsManagerService {
   ) { }
 
   /* COLUMNS */
+  private _auth1 = [
+    { field: 'title', header: 'عنوان', isSelected: true },
+    { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
+    { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true }
+  ];
+  private _auth2 = [
+    { field: 'title', header: 'عنوان', isSelected: true },
+    { field: 'authLevel1Id', header: 'app', isSelected: true, isSelectOption: true },
+    { field: 'cssClass', header: 'کلاس css', isSelected: false },
+    { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
+    { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
+  ];
+  private _auth3 = [
+    { field: 'title', header: 'عنوان', isSelected: true },
+    { field: 'authLevel2Id', header: 'ماژول', isSelected: true, isSelectOption: true },
+    { field: 'cssClass', header: 'کلاس css', isSelected: false },
+    { field: 'route', header: 'مسیر', isSelected: true },
+    { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
+    { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
+    { field: 'isClosable', header: 'قابل بستن', isSelected: false, isBoolean: true },
+    { field: 'isRefreshable', header: 'قابل refresh', isSelected: false, isBoolean: true }
+  ];
+  private _auth4 = [
+    { field: 'title', header: 'عنوان', isSelected: true },
+    { field: 'authLevel3Id', header: 'کنترلر', isSelected: true, isSelectOption: true },
+    { field: 'value', header: 'مقدار', isSelected: false },
+    { field: 'cssClass', header: 'کلاس css', isSelected: false },
+    { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
+  ];
+
   columnAuth1 = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
-      { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
-    ]
+    return this._auth1;
   }
   columnAuth2 = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'authLevel1Id', header: 'app', isSelected: true, isSelectOption: true },
-      { field: 'cssClass', header: 'کلاس css', isSelected: false },
-      { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
-      { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
-    ]
+    return this._auth2;
   }
   columnAuth3 = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'authLevel2Id', header: 'ماژول', isSelected: true, isSelectOption: true },
-      { field: 'cssClass', header: 'کلاس css', isSelected: false },
-      { field: 'route', header: 'مسیر', isSelected: true },
-      { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
-      { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
-      { field: 'isClosable', header: 'قابل بستن', isSelected: false, isBoolean: true },
-      { field: 'isRefreshable', header: 'قابل refresh', isSelected: false, isBoolean: true }
-    ]
+    return this._auth3;
   }
   columnAuth4 = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'authLevel3Id', header: 'کنترلر', isSelected: true, isSelectOption: true },
-      { field: 'value', header: 'مقدار', isSelected: false },
-      { field: 'cssClass', header: 'کلاس css', isSelected: false },
-      { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
-    ]
+    return this._auth4;
   }
   /* API CALSS */
   getAuth1DataSource = (): Promise<any> => {
@@ -168,6 +179,20 @@ export class AuthsManagerService {
     if (!this.sectionsService.sectionVertification())
       return false;
     return true;
+  }
+  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
+    // convert all items to false
+    this[variableName].forEach(old => {
+      old.isSelected = false;
+    })
+
+    // merge new values
+    this[variableName].find(old => {
+      newValues.find(newVals => {
+        if (newVals.field == old.field)
+          old.isSelected = true;
+      })
+    })
   }
 
 }

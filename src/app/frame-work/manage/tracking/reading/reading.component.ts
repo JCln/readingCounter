@@ -29,7 +29,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService,
@@ -140,5 +140,5 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  trackColumnChanges = ($event: any) => this.trackingManagerService.setColumnsChanges('menuDefault', $event);
+
 }

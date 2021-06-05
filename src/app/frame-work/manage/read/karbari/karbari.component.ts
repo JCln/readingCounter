@@ -30,7 +30,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     private dialog: MatDialog,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private readManagerService: ReadManagerService
+    public readManagerService: ReadManagerService
   ) { }
 
   openAddDialog = () => {

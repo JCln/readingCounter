@@ -18,7 +18,7 @@ export class TraverseResComponent implements OnInit {
   _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -30,7 +30,7 @@ export class TraverseResComponent implements OnInit {
     })
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnSelectedRRTraverse();
+    this._selectCols = this.readingReportManagerService.columnRRTraverse();
     this._selectedColumns = this.customizeSelectedColumns();
   }
   connectToServer = async () => {
