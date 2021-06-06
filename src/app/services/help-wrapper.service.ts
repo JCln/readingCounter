@@ -136,7 +136,7 @@ export class HelpWrapperService {
       this.messageToShow.title = 'آخرین وضعیت لیست/مسیر';
       this.messageToShow.messageOne = 'آخرین وضعیت لیست/مسیر ایجاد شده، در این قسمت در کنار بخش پیگیری قابل مشاهده است.';
       this.messageToShow.imgOne = '';
-      this.messageToShow.messageTwo = 'بطور کلی کلیه روند کارتابل از صدور لیست تا دانلود شده در این قسمت قرار میگیرد. ';
+      this.messageToShow.messageTwo = 'بطور کلی کلیه روند کارتابل از صدور لیست تا دانلود شده در این قسمت قابل پیگیری است. ';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
       return;
@@ -159,6 +159,34 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
+    else if (currentRoute === '/wr/m/track/reading') {
+      this.messageToShow.title = 'درحال قرائت';
+      this.messageToShow.messageOne = 'این قسمت جهت پگیری آنی و درلحظه اشتراک های ثبت شده می‌باشد. چهار گزینه همانند تصویر وجود دارد';
+      this.messageToShow.imgOne = 'assets/imgs/help/tracking/reading3.JPG';
+      this.messageToShow.messageTwo = 'اتمام قرائت: درصورتی که به هر علتی مامور قرائت قادر به اتمام فرایند قرائت نبود، از این گزینه استفاده میشود. بارگشت به صادر شده:  بازگشت مسیر به بخش صادر شده. مشاهده مامور/ها:  امکان مشاهده اطلاعات کلی مامور درحال قرائت و همچنین آخرین مکان(اشتراک) ثبت شده و مسیر طی شده برروی نقشه. ';
+      this.messageToShow.messageThree = 'مشاهده لیست قرائت: لیست کلیه مشترکین در مسیر، همراه با جزئیات بیشتر و همچنین مشاهده تصاویر یا صوت بارگذاری شده در لحظه. لیست کلیه مسیر های در حال قرائت تا قبل از تخلیه اطلاعات توسط مامور در این قسمت قابل مشاهده است. ';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+    else if (currentRoute === '/wr/m/track/imported') {
+      this.messageToShow.title = 'لیست صادر شده';
+      this.messageToShow.messageOne = 'مشاهده جزئیات: علاوه بر مشاهده جزئیات بیشتر لیست صادر شده، میتوان لیست را ویرایش کرد، برای مثال تغییر مامور قرائت.';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = 'لیست مسیر ها قبل از بارگیری توسط مامور در این قسمت قابل مشاهده است.';
+      this.messageToShow.messageThree = 'حذف مسیر با ارائه توضیح قابل انجام است.';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+    else if (currentRoute === '/wr/m/track/loaded') {
+      this.messageToShow.title = 'لیست بارگیری شده توسط مامور';
+      this.messageToShow.messageOne = 'با بارگیری مسیر توسط مامور قرائت، مسیر به این قسمت منتقل میشود. لیست مسیر های بارگذاری شده توسط تمامی مامور ها قبل از شروع قرائت در این قسمت هستند.';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = 'برگشت به صادر شده:  با ارائه دلیل، قابل انجام است';
+      this.messageToShow.messageThree = 'حذف مسیر:  با ارائه دلیل قابل انجام است.';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+
 
     /* DYNAMIC OR INCLUDES ROUTE S */
 
@@ -208,12 +236,12 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute.includes('/wr/m/track/offloaded')) {
+    else if (currentRoute === '/wr/m/track/offloaded') {
       this.messageToShow.title = 'بارگذاری شده';
       this.messageToShow.messageOne = 'زمانی که مامور پس از پایان قرائت انجام شده، اقدام به بارگذاری(تخلیه) مینماید، لیست قرائت به این قسمت منتقل میشود. درصورت نیاز به اصلاح یا بررسی لیست، برروی آیکن مشاهده(اصلاح) لیست کلیک نمایید ';
       this.messageToShow.imgOne = '';
-      this.messageToShow.messageTwo = '';
-      this.messageToShow.messageThree = '';
+      this.messageToShow.messageTwo = 'دانلود فایل: با کلیک برروی دانلود فایل و ذخیره، فایل شما به قسمت دانلود مرورگر منتقل خواهد شد.';
+      this.messageToShow.messageThree = 'پس از آن این مسیر به قسمت دانلود شده منتقل و تا مدت محدود قابل مشاهده است ';
       this.messageToShow.imgTwo = '';
       return;
     }
@@ -274,10 +302,10 @@ export class HelpWrapperService {
     else if (currentRoute.includes('/wr/m/track')) {
       this.messageToShow.title = 'مدیریت پیگیری ها';
       this.messageToShow.messageOne = 'این بخش جهت رهگیری وضعیت قرائت می باشد.';
-      this.messageToShow.imgOne = 'assets/imgs/help/tracking/reading1.JPG';
-      this.messageToShow.messageTwo = 'از زمانی که مسیری ایجاد میشود، مسیر ایجاد شده در قسمت صادر شده قرار میگیرد. به محض آنکه از طریق اپلیکیشن قرائت بارگیری انجام گیرد، مسیر به قسمت دریافت شده منتقل میشود. پس از آن با ثبت اولین اشتراک توسط مامور به قسمت در حال قرائت منتقل و قابل پیگیری همزمان خواهد شد. و پس از پایان قرائت و بارگذاری عملیات، لیست/مسیر به قسمت بارگذاری شده و درصورت بارگیری به دانلود شده منتقل خواهد شد';
-      this.messageToShow.messageThree = 'در هر قسمت امکان مشاهده و ویرایش مراحل درنظر گرفته شده است. برای مثال در قسمت در حال قرائت امکان مشاهده لیست درحال قرائت مامور با امکان مشاهده برروی نقشه در نظر گرفته شده است. همچنین مشاهده و بررسی تصویر/ها و صوت ارسال شده توسط مامور نیز وجود دارد';
-      this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading2.JPG';
+      this.messageToShow.imgOne = 'assets/imgs/help/tracking/reading2.JPG';
+      this.messageToShow.messageTwo = 'از زمانی که مسیری(لیست) ایجاد میشود، مسیر در قسمت صادر شده قرار میگیرد. به محض آنکه از طریق اپلیکیشن قرائت بارگیری انجام گیرد، مسیر به قسمت دریافت شده منتقل میشود. پس از آن با ثبت اولین اشتراک توسط مامور به قسمت در حال قرائت منتقل و قابل پیگیری همزمان خواهد شد. و پس از پایان قرائت و بارگذاری عملیات، لیست/مسیر به قسمت بارگذاری شده و درصورت بارگیری به دانلود شده منتقل خواهد شد';
+      this.messageToShow.messageThree = 'در هر قسمت امکان مشاهده و ویرایش مراحل درنظر گرفته شده است. همچنین مشاهده و بررسی تصویر/ها و صوت ارسال شده توسط مامور نیز وجود دارد';
+      this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading1.JPG';
       return;
     }
     else {

@@ -17,6 +17,8 @@ export class DispersalRateComponent implements OnInit {
 
   classWrapper = async () => {
     this.dataSource = await this.dashboardService.getDashboardDispersalRateTimed();
+    console.log(this.dataSource);
+
   }
   ngOnInit(): void {
     this.classWrapper();

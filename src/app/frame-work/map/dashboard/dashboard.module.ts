@@ -15,6 +15,7 @@ import { ReadTimeComponent } from './read-time/read-time.component';
 import { RrTimeComponent } from './rr-time/rr-time.component';
 import { TrvTimeComponent } from './trv-time/trv-time.component';
 import { DispersalRateComponent } from './dispersal-rate/dispersal-rate.component';
+import { BarDispersalrateComponent } from './dispersal-rate/bar-dispersalrate/bar-dispersalrate.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { DispersalRateComponent } from './dispersal-rate/dispersal-rate.componen
     CountInStatesComponent,
     KarkardGridComponent,
     DispersalRateComponent,
+    BarDispersalrateComponent,
   ],
   imports: [
     SharedPrimeNgModule,

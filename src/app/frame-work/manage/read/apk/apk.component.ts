@@ -1,16 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IAPK } from 'src/app/Interfaces/inon-manage';
-import { ENSnackBarColors, ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
+import { ApkService } from 'src/app/services/apk.service';
+import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
-
-import { ApkService } from '../../../../services/apk.service';
-import { CloseTabService } from '../../../../services/close-tab.service';
 
 @Component({
   selector: 'app-apk',
@@ -20,6 +15,7 @@ import { CloseTabService } from '../../../../services/close-tab.service';
 export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
   choosenFileName: string = '';
+  fileNameAfterChoose: string = '';
 
   uploadForm: any = {
     versionCode: null,
@@ -27,17 +23,15 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     description: '',
     file: File
   }
-  fileNameAfterChoose: string = '';
+
+  dataSource: IAPK[] = [];
+  _columns: any[] = [];
   subscription: Subscription[] = [];
-  dataSource = new MatTableDataSource<IAPK>();
-  displayedColumns: string[] = ['versionName', 'versionCode', 'fileRepositoryId'];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+    private apkService: ApkService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private apkService: ApkService,
-    private snackWrapperService: SnackWrapperService,
     private outputManagerService: OutputManagerService
   ) { }
 
@@ -51,7 +45,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     this.choosenFileName = a.files.item(0).name;
     FileList = event.target.files;
   }
-  uploadFile = (form: NgForm) => {
+  uploadFile = async (form: NgForm) => {
     if (!this.screenshotInput) {
       throw new Error("this.screenshotInput is null.");
     }
@@ -64,26 +58,18 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.apkService.checkVertitication(fileInput.files, form.value))
       return;
 
-    this.apkService.postTicket().subscribe((res: any) => {
-      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-    });
-  }
-
-  paginatorTable = () => {
-    this.dataSource.paginator = this.paginator;
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    await this.apkService.postTicket()
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh)
       this.closeTabService.saveDataForAPKManager = '';
+
     if (this.closeTabService.saveDataForAPKManager)
       this.dataSource = this.closeTabService.saveDataForAPKManager;
     else
       this.dataSource = await this.apkService.getDataSource();
-    this.paginatorTable();
 
+    this._columns = this.apkService.columnAPK();
   }
   ngOnInit(): void {
     this.classWrapper();

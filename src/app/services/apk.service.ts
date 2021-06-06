@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
@@ -9,7 +8,8 @@ import { InterfaceManagerService } from 'src/app/services/interface-manager.serv
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { ENSnackBarColors, ENSnackBarTimes } from '../Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IResponses } from '../Interfaces/ioverall-config';
+import { IObjectIteratation } from './../Interfaces/ioverall-config';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -25,6 +25,14 @@ export class ApkService {
     private utilsService: UtilsService
   ) { }
 
+  /* COLUMNS */
+  columnAPK = (): IObjectIteratation[] => {
+    return [
+      { field: 'versionName', header: 'نام نسخه', isSelected: true },
+      { field: 'versionCode', header: 'نسخه', isSelected: true },
+      // { field: 'fileRepositoryId', header: 'دانلود فایل', isSelected: true }
+    ]
+  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GET(ENInterfaces.APKPreList).subscribe(res => {
@@ -86,7 +94,7 @@ export class ApkService {
       return false;
     return true;
   }
-  postTicket(): Observable<any> {
+  postTicket(): Promise<void> {
     const formData: FormData = new FormData();
 
     formData.append('file', this.fileForm[0]);
@@ -101,6 +109,8 @@ export class ApkService {
           console.error("observable error: ", error);
           return throwError(error);
         })
-      );
+      ).toPromise().then((res: IResponses) => {
+        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
+      });
   }
 }

@@ -1,7 +1,5 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
@@ -21,12 +19,9 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
   provinceIdFilter = new FormControl('');
   provinceFilter = new FormControl('');
 
-  dataSource = new MatTableDataSource();
-
   subscription: Subscription[] = [];
   countryDictionary: IDictionaryManager[] = [];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   columnsToDisplay = ['title', 'provinceId', 'province', 'actions'];
   filterValues = {
     id: '',
@@ -60,52 +55,13 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     })
   }
-  filterSearchs = () => {
-    this.dataSource.paginator = this.paginator;
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = this.createFilter();
-
-    this.titleFilter.valueChanges
-      .subscribe(
-        title => {
-          this.filterValues.title = title;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.provinceIdFilter.valueChanges
-      .subscribe(
-        provinceId => {
-          this.filterValues.provinceId = provinceId;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.provinceFilter.valueChanges
-      .subscribe(
-        province => {
-          this.filterValues.province = province;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-  }
   nullSavedSource = () => this.closeTabService.saveDataForQotrManager = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForQotrManager) {
-      this.dataSource.data = this.closeTabService.saveDataForQotrManager;
     }
-    else {
-      this.dataSource.data = await this.getDataSource();
-      this.closeTabService.saveDataForQotrManager = this.dataSource.data;
-    }
-    this.countryDictionary = await this.getProvinceDictionary();
-
-    this.convertIdToTitle(this.dataSource.data, this.countryDictionary);
-    this.filterSearchs();
   }
   ngOnInit() {
     this.classWrapper();

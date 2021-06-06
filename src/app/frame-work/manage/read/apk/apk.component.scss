@@ -2,6 +2,8 @@
 @import '../../../../../assets/button.scss';
 @import '../../../../../assets/input.scss';
 @import '../../../../../assets/media.scss';
+@import '../../../../../assets/primeNG.scss';
+@import '../../../../../assets/tooltip.scss';
 
 .over_all {
   display: grid;
@@ -68,34 +70,6 @@ input {
   text-align: center;
   border-radius: 100vmax;
   margin-bottom: 1rem;
-}
-
-th.mat-header-cell {
-  text-align: center;
-  font-size: $font_s;
-  font-weight: 600;
-}
-
-td.mat-cell {
-  font-size: $font_s;
-  font-weight: 600;
-  color: $gray_500;
-}
-
-.mat-table {
-  font-family: inherit;
-}
-
-.__custom {
-  height: 2.5rem;
-  border: 1px solid $blue_400;
-  width: auto;
-  color: $blue_400;
-  min-width: 4rem;
-}
-
-tr.mat-row {
-  height: 60px;
 }
 
 .not_choosen_file {
