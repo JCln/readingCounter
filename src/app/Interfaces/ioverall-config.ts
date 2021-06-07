@@ -132,6 +132,7 @@ export interface IOffloadModifyType {
 export enum ENSelectedColumnVariables {
     selectedTracks = 'menuDefault',
     selectedlastStates = 'lastStates',
+    selectedUsersAll = '_usersAll',
     selectedListManagerAll = 'listManagerAll',
     selectedAuth2 = '_auth2',
     selectedAuth3 = '_auth3',

@@ -80,29 +80,6 @@ export class SectionsService {
       if (this.utilsService.isNull(this.dynamicValue.dbInitialCatalog))
         return false;
     }
-    // auth level parts
-
-    if (this.dynamicValue.hasOwnProperty('authLevel3Id')) {
-      if (this.utilsService.isNull(this.dynamicValue.authLevel3Id))
-        return false;
-    }
-    if (this.dynamicValue.hasOwnProperty('value')) {
-      if (this.utilsService.isNull(this.dynamicValue.value))
-        return false;
-    }
-    if (this.dynamicValue.hasOwnProperty('authLevel1Id')) {
-      if (this.utilsService.isNull(this.dynamicValue.authLevel1Id))
-        return false;
-    }
-    if (this.dynamicValue.hasOwnProperty('authLevel2Id')) {
-      if (this.utilsService.isNull(this.dynamicValue.authLevel2Id))
-        return false;
-    }
-    if (this.dynamicValue.hasOwnProperty('route')) {
-      if (this.utilsService.isNull(this.dynamicValue.route))
-        return false;
-    }
-    // 
     // periods
     if (this.dynamicValue.hasOwnProperty('moshtarakinId')) {
       if (this.utilsService.isNull(this.dynamicValue.moshtarakinId))
@@ -189,7 +166,7 @@ export class SectionsService {
     if (this.dynamicValue.hasOwnProperty('toRate')) {
       const a = this.dynamicValue;
       console.log(this.utilsService.isFromLowerThanTo(a.fromRate, a.toRate));
-      
+
       if (!this.utilsService.isFromLowerThanTo(a.fromRate, a.toRate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.lessThan_rate);
         return false;
@@ -299,10 +276,10 @@ export class SectionsService {
       if (!this.utilsService.isNull(this.dynamicValue.authLevel2Id))
         this.setNewForm(this.dynamicValue.authLevel2Id);
     }
-    if (this.dynamicValue.hasOwnProperty('route')) {
-      if (!this.utilsService.isNull(this.dynamicValue.route))
-        this.setNewForm(this.dynamicValue.route);
-    }
+    // if (this.dynamicValue.hasOwnProperty('route')) {
+    //   if (!this.utilsService.isNull(this.dynamicValue.route))
+    //     this.setNewForm(this.dynamicValue.route);
+    // }
     // 
     // periods
     if (this.dynamicValue.hasOwnProperty('moshtarakinId')) {

@@ -51,7 +51,7 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
                 <!-- <p-columnFilter *ngIf="col.field !== 'zoneId'" type="text" field="{{col.field}}"></p-columnFilter>
                 <p-columnFilter field="zoneId" *ngIf="col.field === 'zoneId'" matchMode="in" display="menu"
                     [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">

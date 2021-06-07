@@ -33,7 +33,7 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
@@ -51,8 +51,7 @@
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
-                                    placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title"
-                                    dataKey="dataSource.zoneId">
+                                    placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
                                 </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -65,8 +64,7 @@
                             <ng-template pTemplate="input">
                                 <p-dropdown name="readingPeriodKindId" [options]="readingPeriodKindDictionary"
                                     [(ngModel)]="dataSource.readingPeriodKindId" placeholder="انتخاب مورد"
-                                    [style]="{'width':'100%'}" optionLabel="title"
-                                    dataKey="dataSource.readingPeriodKindId">
+                                    [style]="{'width':'100%'}" optionLabel="title">
                                 </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">

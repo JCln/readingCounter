@@ -5,7 +5,7 @@
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-        (ngModelChange)="authsManagerService.setColumnsChanges(authsManagerService.ENSelectedColumnVariables.selectedAuth3 ,$event)"
+            (ngModelChange)="authsManagerService.setColumnsChanges(authsManagerService.ENSelectedColumnVariables.selectedAuth3 ,$event)"
             selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
@@ -33,7 +33,7 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
@@ -51,7 +51,7 @@
                         <ng-template pTemplate="input">
                             <p-dropdown name="authLevel2Id" [options]="authLevel2Dictionary"
                                 [(ngModel)]="dataSource.authLevel2Id" placeholder="انتخاب مورد"
-                                [style]="{'width':'100%'}" optionLabel="title" dataKey="dataSource.authLevel2Id">
+                                [style]="{'width':'100%'}" optionLabel="title">
                             </p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">
