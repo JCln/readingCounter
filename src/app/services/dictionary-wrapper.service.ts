@@ -37,136 +37,136 @@ export class DictionaryWrapperService {
   private traverseDifferentialDictionary: any = [];
 
   getkarbariCodeDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.karbariCodeDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.KarbariDictionary).subscribe(res => {
-          this.setKarbariDictionaryCode(res);
-          resolve(this.karbariCodeDictionary);
-        })
-      });
-    }
-    return this.karbariCodeDictionary;
+    if (!this.utilsService.isNull(this.karbariCodeDictionary))
+      return this.karbariCodeDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.KarbariDictionary).subscribe(res => {
+        this.setKarbariDictionaryCode(res);
+        resolve(this.karbariCodeDictionary);
+      })
+    });
+
   }
   getProvinceDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.provinceDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.ProvinceDICTIONARY).subscribe(res => {
-          this.setProvinceDictionary(res);
-          resolve(this.provinceDictionary);
-        })
-      });
-    }
-    return this.provinceDictionary;
+    if (!this.utilsService.isNull(this.provinceDictionary))
+      return this.provinceDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.ProvinceDICTIONARY).subscribe(res => {
+        this.setProvinceDictionary(res);
+        resolve(this.provinceDictionary);
+      })
+    });
+
   }
   getRegionDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.regionDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.RegionDICTIONARY).subscribe(res => {
-          this.setRegionDictionary(res);
-          resolve(this.regionDictionary);
-        })
-      });
-    }
-    return this.regionDictionary;
+    if (!this.utilsService.isNull(this.regionDictionary))
+      return this.regionDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.RegionDICTIONARY).subscribe(res => {
+        this.setRegionDictionary(res);
+        resolve(this.regionDictionary);
+      })
+    });
+
   }
   getZoneDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.zoneDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.ZoneDICTIONARY).subscribe(res => {
-          this.setZoneDictionary(res);
-          resolve(this.zoneDictionary);
-        })
-      });
-    }
-    return this.zoneDictionary;
+    if (!this.utilsService.isNull(this.zoneDictionary))
+      return this.zoneDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.ZoneDICTIONARY).subscribe(res => {
+        this.setZoneDictionary(res);
+        resolve(this.zoneDictionary);
+      })
+    });
+
   }
   getCountryDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.countryDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.CountryDICTIONARY).subscribe(res => {
-          this.setCountryDictionary(res);
-          resolve(this.countryDictionary);
-        })
-      });
-    }
-    return this.countryDictionary;
+    if (!this.utilsService.isNull(this.countryDictionary))
+      return this.countryDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.CountryDICTIONARY).subscribe(res => {
+        this.setCountryDictionary(res);
+        resolve(this.countryDictionary);
+      })
+    });
+
   }
   getAuthLev1Dictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.authLev1Dictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.AuthLevel1DICTIONARY).subscribe(res => {
-          this.setAuthLev1Dictionary(res);
-          resolve(this.authLev1Dictionary);
-        })
-      });
-    }
-    return this.authLev1Dictionary;
+    if (!this.utilsService.isNull(this.authLev1Dictionary))
+      return this.authLev1Dictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.AuthLevel1DICTIONARY).subscribe(res => {
+        this.setAuthLev1Dictionary(res);
+        resolve(this.authLev1Dictionary);
+      })
+    });
+
   }
   getAuthLev2Dictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.authLev2Dictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.AuthLevel2DICTIONARY).subscribe(res => {
-          this.setAuthLev2Dictionary(res);
-          resolve(this.authLev2Dictionary);
-        })
-      });
-    }
-    return this.authLev2Dictionary;
+    if (!this.utilsService.isNull(this.authLev2Dictionary))
+      return this.authLev2Dictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.AuthLevel2DICTIONARY).subscribe(res => {
+        this.setAuthLev2Dictionary(res);
+        resolve(this.authLev2Dictionary);
+      })
+    });
+
   }
   getAuthLev3Dictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.authLev3Dictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.AuthLevel3DICTIONARY).subscribe(res => {
-          this.setAuthLev3Dictionary(res);
-          resolve(this.authLev3Dictionary);
-        })
-      });
-    }
-    return this.authLev3Dictionary;
+    if (!this.utilsService.isNull(this.authLev3Dictionary))
+      return this.authLev3Dictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.AuthLevel3DICTIONARY).subscribe(res => {
+        this.setAuthLev3Dictionary(res);
+        resolve(this.authLev3Dictionary);
+      })
+    });
+
   }
   getAuthLev4Dictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.authLev4Dictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.AuthLevel4DICTIONARY).subscribe(res => {
-          this.setAuthLev4Dictionary(res);
-          resolve(this.authLev4Dictionary);
-        })
-      });
-    }
-    return this.authLev4Dictionary;
+    if (!this.utilsService.isNull(this.authLev4Dictionary))
+      return this.authLev4Dictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.AuthLevel4DICTIONARY).subscribe(res => {
+        this.setAuthLev4Dictionary(res);
+        resolve(this.authLev4Dictionary);
+      })
+    });
+
   }
   getTraverseDifferentialDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.traverseDifferentialDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.ListTraverseDifferentialDictionary).subscribe(res => {
-          this.setTraverseDiffDictionary(res);
-          resolve(this.traverseDifferentialDictionary);
-        })
-      });
-    }
-    return this.traverseDifferentialDictionary;
+    if (!this.utilsService.isNull(this.traverseDifferentialDictionary))
+      return this.traverseDifferentialDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.ListTraverseDifferentialDictionary).subscribe(res => {
+        this.setTraverseDiffDictionary(res);
+        resolve(this.traverseDifferentialDictionary);
+      })
+    });
+
   }
   getCounterReportDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.counterReportDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.CounterReportDICTIONARY).subscribe(res => {
-          this.setCounterReportDictionary(res);
-          resolve(this.counterReportDictionary);
-        })
-      });
-    }
-    return this.counterReportDictionary;
+    if (!this.utilsService.isNull(this.counterReportDictionary))
+      return this.counterReportDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.CounterReportDICTIONARY).subscribe(res => {
+        this.setCounterReportDictionary(res);
+        resolve(this.counterReportDictionary);
+      })
+    });
+
   }
   getCounterStateDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.counterStateDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.counterStateDictionary).subscribe(res => {
-          this.setCounterStateDictionary(res);
-          resolve(this.counterStateDictionary);
-        })
-      });
-    }
-    return this.counterStateDictionary;
+    if (!this.utilsService.isNull(this.counterStateDictionary))
+      return this.counterStateDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.counterStateDictionary).subscribe(res => {
+        this.setCounterStateDictionary(res);
+        resolve(this.counterStateDictionary);
+      })
+    });
+
   }
   getCounterStateByZoneIdDictionary(zoneId: number): Promise<any> {
     return new Promise((resolve) => {
@@ -185,59 +185,59 @@ export class DictionaryWrapperService {
     });
   }
   getPeriodKindDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.periodKindDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.readingPeriodKindDictionary).subscribe(res => {
-          this.setPeriodKindDictionary(res);
-          resolve(this.periodKindDictionary);
-        })
-      });
-    }
-    return this.periodKindDictionary;
+    if (!this.utilsService.isNull(this.periodKindDictionary))
+      return this.periodKindDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.readingPeriodKindDictionary).subscribe(res => {
+        this.setPeriodKindDictionary(res);
+        resolve(this.periodKindDictionary);
+      })
+    });
+
   }
   getKarbariDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.karbariDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.KarbariDictionary).subscribe(res => {
-          this.setKarbariDictionary(res);
-          resolve(this.karbariDictionary);
-        })
-      });
-    }
-    return this.karbariDictionary;
+    if (!this.utilsService.isNull(this.karbariDictionary))
+      return this.karbariDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.KarbariDictionary).subscribe(res => {
+        this.setKarbariDictionary(res);
+        resolve(this.karbariDictionary);
+      })
+    });
+
   }
   getQotrDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.qotrDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.QotrDictionary).subscribe(res => {
-          this.setQotrDictionary(res);
-          resolve(this.qotrDictionary);
-        })
-      });
-    }
-    return this.qotrDictionary;
+    if (!this.utilsService.isNull(this.qotrDictionary))
+      return this.qotrDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.QotrDictionary).subscribe(res => {
+        this.setQotrDictionary(res);
+        resolve(this.qotrDictionary);
+      })
+    });
+
   }
   getRoleDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.roleDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.RoleDICTIONARY).subscribe(res => {
-          this.setRoleDictionary(res);
-          resolve(this.roleDictionary);
-        })
-      });
-    }
-    return this.roleDictionary;
+    if (!this.utilsService.isNull(this.roleDictionary))
+      return this.roleDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.RoleDICTIONARY).subscribe(res => {
+        this.setRoleDictionary(res);
+        resolve(this.roleDictionary);
+      })
+    });
+
   }
   getZoneBoundDictionary(): Promise<any> {
-    if (this.utilsService.isNull(this.zoneBoundDictionary)) {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.ZoneBoundDICTIONARY).subscribe(res => {
-          this.setZoneBoundDictionary(res);
-          resolve(this.zoneBoundDictionary);
-        })
-      });
-    }
-    return this.zoneBoundDictionary;
+    if (!this.utilsService.isNull(this.zoneBoundDictionary))
+      return this.zoneBoundDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.ZoneBoundDICTIONARY).subscribe(res => {
+        this.setZoneBoundDictionary(res);
+        resolve(this.zoneBoundDictionary);
+      })
+    });
+
   }
 
 
