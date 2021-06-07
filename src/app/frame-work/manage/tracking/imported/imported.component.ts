@@ -3,6 +3,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -67,7 +68,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackImported;
     }
     else {
-      this.dataSource = await this.trackingManagerService.getImportedDataSource();
+      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingIMPORTED);
       this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
       this.closeTabService.saveDataForTrackImported = this.dataSource;
     }

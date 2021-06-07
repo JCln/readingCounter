@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { IResponses } from 'src/app/Interfaces/ioverall-config';
@@ -59,7 +60,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackReading;
     }
     else {
-      this.dataSource = await this.trackingManagerService.getReadingDataSource();
+      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingREADING);
       this.closeTabService.saveDataForTrackReading = this.dataSource;
     }
 

@@ -8,6 +8,8 @@ import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
+import { ENInterfaces } from './../../../../Interfaces/en-interfaces.enum';
+
 @Component({
   selector: 'app-offloaded',
   templateUrl: './offloaded.component.html',
@@ -41,7 +43,7 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackOffloaded;
     }
     else {
-      this.dataSource = await this.trackingManagerService.getOffloadedDataSource();
+      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
       console.log(this.dataSource);
 
       this.closeTabService.saveDataForTrackOffloaded = this.dataSource;

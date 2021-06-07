@@ -118,72 +118,12 @@ export class TrackingManagerService {
     private dialog: MatDialog
   ) { }
 
-  getImportedDataSource = (): Promise<any> => {
+  getDataSource = (method: ENInterfaces): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.trackingIMPORTED).subscribe(res => {
+        this.interfaceManagerService.GET(method).subscribe(res => {
           resolve(res);
         });
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getLoadedDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.trackingLOADED).subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        })
-      })
-    } catch (error) {
-      console.error(e => e);
-    }
-
-  }
-  getReadingDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.trackingREADING).subscribe(res => {
-          resolve(res);
-        });
-      });
-    } catch (error) {
-      console.error(error);
-
-    }
-  }
-  getOffloadedDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.trackingOFFLOADED).subscribe(res => {
-          resolve(res);
-        });
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getFinishedDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.trackingFINISHED).subscribe(res => {
-          resolve(res);
-        });
-      });
-    } catch (error) {
-      console.error(error);
-
-    }
-  }
-  getLastStatesDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.trackingLASTSTATES).subscribe((res: any) => {
-          resolve(res)
-        })
       });
     } catch (error) {
       console.error(error);

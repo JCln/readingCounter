@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -52,7 +53,7 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackFinished;
     }
     else {
-      this.dataSource = await this.trackingManagerService.getFinishedDataSource();
+      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingFINISHED);
       this.closeTabService.saveDataForTrackFinished = this.dataSource;
     }
     if (this.dataSource.length)

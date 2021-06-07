@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
@@ -45,7 +46,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForTrackLoaded;
     }
     else {
-      this.dataSource = await this.trackingManagerService.getLoadedDataSource();
+      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingLOADED);
       this.closeTabService.saveDataForTrackLoaded = this.dataSource;
     }
     this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
