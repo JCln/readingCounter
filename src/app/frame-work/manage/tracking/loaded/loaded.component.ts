@@ -1,5 +1,8 @@
+import 'jspdf-autotable';
+
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { jsPDF } from 'jspdf';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
@@ -11,6 +14,7 @@ import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
+import { font } from '../../../../../assets/pdfjs/BLotus-normal';
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 
 @Component({
@@ -145,5 +149,47 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+  exportPDF = (dataSource: ITracking[]) => {
+    console.log(dataSource);
+    let head = [];
+    dataSource.forEach(item => {
+      if (item.id)
+        delete item.id;
+      if (item.counterReaderId)
+        delete item.counterReaderId;
+      head.push(Object.keys(item) + ':' + Object.keys(item));
+    })
+    console.log(head[0]);
 
+
+    const doc = new jsPDF('landscape');
+
+    (doc as any).addFileToVFS('Blotus.ttf', font);
+    doc.addFont('Blotus.ttf', 'font', 'normal');
+
+    doc.setFont('font'); // set font    
+
+    (doc as any).autoTable(
+      {
+        styles: {
+          font: 'font',
+          theme: 'striped',
+          fillColor: [233, 236, 239],
+          fontSize: 14
+        },
+        // head: head[0],//not working      
+        headStyles: {
+          fillColor: [0, 69, 203],
+          textColor: [0, 0, 0],
+          fontSize: 8,
+          padding: 0,
+        },
+        margin: { top: 10 },
+        body: dataSource,
+        columns: [],
+        theme: 'grid',
+      }
+    )
+    doc.save("a2.pdf");
+  }
 }
