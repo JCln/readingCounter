@@ -33,7 +33,8 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
@@ -51,7 +52,7 @@
                         <ng-template pTemplate="input">
                             <p-dropdown name="authLevel1Id" [options]="authLevel1Dictionary"
                                 [(ngModel)]="dataSource.authLevel1Id" placeholder="انتخاب مورد"
-                                [style]="{'width':'100%'}" optionLabel="title" dataKey="dataSource.authLevel1Id">
+                                [style]="{'width':'100%'}" optionLabel="title">
                             </p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">

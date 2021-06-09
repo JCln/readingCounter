@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IUserManager } from 'src/app/Interfaces/iuser-manager';
@@ -17,13 +17,14 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dataSource: IUserManager[] = [];
   _selectedColumns: any[];
+  _selectCols: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private interactionService: InteractionService,
     private router: Router,
     private closeTabService: CloseTabService,
-    private usersAllService: UsersAllService,
+    public usersAllService: UsersAllService,
     private utilsService: UtilsService
   ) {
   }
@@ -63,7 +64,8 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
       this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
-    this._selectedColumns = this.usersAllService.columnSelectedUserAllUsers();
+    this._selectCols = this.usersAllService.columnUserAllUsers();
+    this._selectedColumns = this.usersAllService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
     this.classWrapper();
@@ -105,4 +107,11 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
     a[index].classList.toggle('showConfigs');
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
 }

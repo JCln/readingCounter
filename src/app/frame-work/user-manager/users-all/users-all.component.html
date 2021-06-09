@@ -4,11 +4,19 @@
     [responsive]="true" stateStorage="session" stateKey="user-all-session">
 
     <ng-template pTemplate="caption">
-        <i></i>
-        <!--refresh button position on left-->
-        <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-            <div class="tooltip_text_right">بارگیری مجدد جدول</div>
-        </i>
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns"
+            (ngModelChange)="usersAllService.setColumnsChanges(usersAllService.ENSelectedColumnVariables.selectedUsersAll ,$event)"
+            optionLabel="header" selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}"
+            placeholder="ستون ها">
+        </p-multiSelect>
+        <div class="header_icons_wrap">
+            <div class="left_side">
+                <i></i>
+            </div>
+            <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                <div class="tooltip_text_right">بارگیری مجدد جدول</div>
+            </i>
+        </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -22,7 +30,7 @@
         </tr>
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>

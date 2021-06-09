@@ -29,7 +29,7 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
@@ -46,8 +46,7 @@
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <p-dropdown name="regionId" [options]="regionDictionary" [(ngModel)]="dataSource.regionId"
-                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title"
-                                dataKey="dataSource.regionId">
+                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
                             </p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">

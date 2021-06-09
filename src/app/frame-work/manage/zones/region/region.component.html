@@ -29,7 +29,7 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
             </th>
 
             <th style="width: 4rem"></th>
@@ -46,7 +46,7 @@
                         <ng-template pTemplate="input">
                             <p-dropdown name="provinceId" [options]="provinceDictionary"
                                 [(ngModel)]="dataSource.provinceId" placeholder="انتخاب مورد" [style]="{'width':'100%'}"
-                                optionLabel="title" dataKey="dataSource.provinceId">
+                                optionLabel="title">
                             </p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">
