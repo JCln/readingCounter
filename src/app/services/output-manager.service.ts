@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as pdfMake from 'pdfmake/build/pdfmake.js';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 import * as XLSX from 'xlsx';
 
 import { EN_messages } from '../Interfaces/enums.enum';
@@ -59,31 +57,14 @@ export class OutputManagerService {
       this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
       return;
     }
-    (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+    // const doc = new jsPDF();
 
-    var fila = new Array();
-    name.map((item) => {
-      fila.push(Object.values(item))
-    })
-    const definition = {
-      content: [
-        {
-          layout: 'lightHorizontalLines', // optional
-          table: {
-            headerRows: 2,
-            body: fila,
-          },
-          styles: {
-            header: { fontSize: 16, bold: true, alignment: 'center' },
-            tableHeader: { fillColor: '#29517c', color: 'white' }
-          }
-        }
-      ]
-    }
+    // const myFont = MyFont;
+    // doc.addFileToVFS('BLotus.ttf', myFont);
+    // doc.addFont('BLotus.ttf', 'myFont', 'normal');
+    // doc.setFont('myFont');
 
-    const date = new Date();
-    pdfMake.createPdf(definition).download(date.getDay() + date.getMonth() + fileName);
-
+    // doc.save("a4.pdf");
   }
   exportExcel(dataSource: any, fileName: string) {
     if (this.utilsService.isNull(dataSource)) {
