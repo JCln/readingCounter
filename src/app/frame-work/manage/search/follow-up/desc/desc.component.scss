@@ -12,20 +12,11 @@
   direction: rtl;
   text-align: center;
   gap: .5rem;
-<<<<<<< Updated upstream:src/app/frame-work/manage/search/follow-up/desc/desc.component.scss
   margin: $font_xxs 0;
   background: $gray_100;
   box-shadow: 1px 1px 8px 4px $gray_400;
   padding: $font_05;
   border-radius: $border_15;
-=======
-  margin: $font_xs 0;
-  background: $gray_100;
-  box-shadow: 1px 1px 8px 4px $gray_400;
-  padding: $font_xxs $font_05;
-  border-radius: $border_15;
-  min-height: 15rem;
->>>>>>> Stashed changes:src/app/frame-work/manage/tracking/follow-up/desc/desc.component.scss
 }
 
 input {
@@ -53,7 +44,6 @@ input {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-<<<<<<< Updated upstream:src/app/frame-work/manage/search/follow-up/desc/desc.component.scss
     color: $gray_600;
   }
 
@@ -63,8 +53,5 @@ input {
     font-weight: 600;
     margin: 0 $font_xs;
     font-family: $font_family;
-=======
-    color: $gray_400;
->>>>>>> Stashed changes:src/app/frame-work/manage/tracking/follow-up/desc/desc.component.scss
   }
 }
