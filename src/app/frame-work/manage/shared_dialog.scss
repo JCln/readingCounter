@@ -6,7 +6,11 @@
   font-family: $font_family;
   font-size: $font_s;
   font-weight: 600;
+<<<<<<< Updated upstream
   color: $gray_600;
+=======
+  color: $gray_400;
+>>>>>>> Stashed changes
 }
 
 .mat-dialog-content {
@@ -50,6 +54,7 @@
 ._custom {
   background: $blue_400;
   color: $gray_100;
+<<<<<<< Updated upstream
 
   &:hover,
   &:focus,
@@ -57,6 +62,8 @@
     background-color: $blue_500;
     box-shadow: 0 0 0 3px $blue_500;
   }
+=======
+>>>>>>> Stashed changes
 }
 
 h2 {
@@ -91,7 +98,11 @@ button._blue_dark {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
+<<<<<<< Updated upstream
     color: $gray_600;
+=======
+    color: $gray_400;
+>>>>>>> Stashed changes
   }
 
   .mat-select {
@@ -101,7 +112,11 @@ button._blue_dark {
   }
 
   .mat-select-value-text {
+<<<<<<< Updated upstream
     color: $gray_600;
+=======
+    color: $gray_400;
+>>>>>>> Stashed changes
   }
 
 }

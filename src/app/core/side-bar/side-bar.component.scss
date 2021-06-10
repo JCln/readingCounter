@@ -29,7 +29,11 @@ ul::-webkit-scrollbar {
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
   background: $gray_200;
+<<<<<<< Updated upstream
   margin-bottom: 0.2rem;
+=======
+  margin-bottom: $font_05;
+>>>>>>> Stashed changes
   padding: $font_05 0.1rem;
   border: 1px solid;
 }
@@ -70,7 +74,10 @@ ul::-webkit-scrollbar {
 
   &.active {
     border: 2px solid $blue_gray_300;
+<<<<<<< Updated upstream
     background: $blue_200;
+=======
+>>>>>>> Stashed changes
 
     .on_show,
     .icons {
@@ -97,7 +104,11 @@ ul::-webkit-scrollbar {
   overflow: visible;
 
   color: $blue_700;
+<<<<<<< Updated upstream
   font-size: 1.1rem;
+=======
+  font-size: $font_s;
+>>>>>>> Stashed changes
   font-weight: 600;
   outline: none;
 
@@ -166,13 +177,55 @@ ul::-webkit-scrollbar {
   position: absolute;
   list-style-type: none;
   height: 84vh;
+<<<<<<< Updated upstream
   padding: 0;
   right: 0;
+=======
+  overflow-y: auto;
+
+  .li_2 {
+    // position: relative;
+
+    h3 {
+      color: $blue_700;
+    }
+
+    // &:hover,
+    // &:focus {
+    //   nav.ul_2 {
+    //     overflow-x: unset !important;
+    //     overflow-y: unset !important;
+    //   }
+
+    //   ._show {
+    //     visibility: visible;
+    //     top: 25%;
+    //   }
+    // }
+  }
+
+  .active_2 {
+    .btn_2 {
+      border: 2px solid $blue_gray_300;
+    }
+
+    .icons {
+      color: $blue_gray_300;
+    }
+  }
+
+
+  .sub_item_2 {
+    cursor: pointer;
+    direction: rtl;
+  }
+>>>>>>> Stashed changes
 
   ._show {
     position: absolute;
     display: none;
     width: 15rem;
+<<<<<<< Updated upstream
     right: 3.4rem;
     background: $gray_300;
     padding: $font_05;
@@ -185,6 +238,16 @@ ul::-webkit-scrollbar {
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
+=======
+    right: 4rem;
+    background: $gray_300;
+    top: $font_05;
+    height: 100%;
+    padding: $font_05;
+    min-height: 10rem;
+    height: auto;
+    border-radius: $border_15;
+>>>>>>> Stashed changes
 
     h3 {
       font-size: $font_m;
@@ -198,6 +261,7 @@ ul::-webkit-scrollbar {
       display: block;
       padding-right: .3rem;
       margin-bottom: .3rem;
+<<<<<<< Updated upstream
       color: $gray_600;
       font-size: $font_m;
       font-weight: 600;
@@ -219,6 +283,12 @@ ul::-webkit-scrollbar {
 
     .icons {
       color: $blue_gray_300;
+=======
+      color: $gray_400;
+      font-size: $font_m;
+      font-weight: 600;
+      border-radius: $border_15;
+>>>>>>> Stashed changes
     }
   }
 

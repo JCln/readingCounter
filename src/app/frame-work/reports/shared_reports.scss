@@ -45,11 +45,19 @@ section.content {
 
 .btn_1 {
   color: $white;
+<<<<<<< Updated upstream
   background-color: $orange_500;
 }
 
 h2 {
   color: $gray_600;
+=======
+  background-color: $orange_600;
+}
+
+h2 {
+  color: $gray_400;
+>>>>>>> Stashed changes
 }
 
 footer {
@@ -118,7 +126,11 @@ hr {
   font-size: $font_s;
   font-weight: 700;
   font-family: inherit;
+<<<<<<< Updated upstream
   color: $gray_600;
+=======
+  color: $gray_400;
+>>>>>>> Stashed changes
   margin: 0 2rem;
 }
 

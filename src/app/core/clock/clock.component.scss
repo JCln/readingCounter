@@ -27,7 +27,11 @@
 
 .hour {
   width: .35rem;
+<<<<<<< Updated upstream
   height: $font_xxs;
+=======
+  height: $font_xs;
+>>>>>>> Stashed changes
   background: $blue_700;
 
   @media (min-width: 500px) {
@@ -41,7 +45,11 @@
 
 .minute {
   width: .3rem;
+<<<<<<< Updated upstream
   height: 1.3rem;
+=======
+  height: 1.5rem;
+>>>>>>> Stashed changes
   background: $blue_700;
 
   @media (min-width: 500px) {
@@ -59,8 +67,13 @@
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+<<<<<<< Updated upstream
   width: $font_05;
   height: $font_05;
+=======
+  width: $font_xxs;
+  height: $font_xxs;
+>>>>>>> Stashed changes
   background-color: $blue_700;
   border-radius: 50%;
   vertical-align: middle;

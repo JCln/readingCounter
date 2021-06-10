@@ -17,11 +17,19 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
+<<<<<<< Updated upstream
   margin: 0.04rem;
   min-width: auto;
   height: 2.5rem;
   border: 1.5px solid;
   border-radius: 10px;
+=======
+  margin: 0.15rem;
+  min-width: 8.5rem;
+  height: 3rem;
+  border-radius: $border_15;
+  border: 1.5px solid;
+>>>>>>> Stashed changes
   color: $blue_700;
   list-style-type: none;
   font-size: 1.1rem;
@@ -49,7 +57,11 @@ li {
     height: 2.2rem;
     margin-right: auto;
     border-radius: 2rem;
+<<<<<<< Updated upstream
     color: $gray_600;
+=======
+    color: $gray_400;
+>>>>>>> Stashed changes
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
@@ -69,7 +81,11 @@ li {
     height: 2.2rem;
     margin-left: auto;
     border-radius: 2rem;
+<<<<<<< Updated upstream
     color: $gray_600;
+=======
+    color: $gray_400;
+>>>>>>> Stashed changes
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
