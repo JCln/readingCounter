@@ -5,12 +5,12 @@
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-        (ngModelChange)="formulasService.setColumnsChanges(formulasService.ENSelectedColumnVariables.selectedTabsare2Formulas ,$event)"
+            (ngModelChange)="formulasService.setColumnsChanges(formulasService.ENSelectedColumnVariables.selectedTabsare2Formulas ,$event)"
             selectedItemsLabel="{0}ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="left_side">
-                <i (click)="outputManagerService.exportPdf(dataSource,'tabsare2')"
+                <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'tabsare2')"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>

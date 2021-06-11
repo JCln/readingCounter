@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 
 import { EN_messages } from '../Interfaces/enums.enum';
-import { IDictionaryManager } from '../Interfaces/ioverall-config';
+import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { IOutputManager } from './../Interfaces/imanage';
 import { ConverterService } from './converter.service';
 import { UtilsService } from './utils.service';
+
+import { jsPDF } from 'jspdf';
+import { font } from '../../assets/pdfjs/BLotus-normal';
+import 'jspdf-autotable';
 
 @Injectable({
   providedIn: 'root'
@@ -52,19 +56,92 @@ export class OutputManagerService {
     link.download = `${new Date().toLocaleDateString() + type}`;
     link.click();
   }
-  exportPdf = (name: any[], fileName: string) => {
-    if (this.utilsService.isNull(name)) {
+  exportPDF = (dataSource: any[], _selectCols: IObjectIteratation[], fileName: string) => {
+    if (this.utilsService.isNull(dataSource)) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
       return;
     }
-    // const doc = new jsPDF();
+    let head = [];
+    let tempDataSource = [];
+    dataSource.forEach(item => {
+      if (item.hasOwnProperty('id'))
+        delete item.id;
+      if (item.hasOwnProperty('counterReaderId'))
+        delete item.counterReaderId;
+      if (item.hasOwnProperty('zoneId'))
+        delete item.zoneId;
+      if (item.hasOwnProperty('year'))
+        delete item.year;
+      if (item.hasOwnProperty('hasPreNumber'))
+        delete item.hasPreNumber;
+      if (item.hasOwnProperty('displayBillId'))
+        delete item.displayBillId;
+      if (item.hasOwnProperty('displayRadif'))
+        delete item.displayRadif;
+      if (item.hasOwnProperty('isBazdid'))
+        delete item.isBazdid;
+      if (item.hasOwnProperty('isRoosta'))
+        delete item.isRoosta;
+      if (item.hasOwnProperty('address'))
+        delete item.address;
+      if (item.hasOwnProperty('possibleSaierOrAbBaha'))
+        delete item.possibleSaierOrAbBaha;
+      if (item.hasOwnProperty('counterSerial'))
+        delete item.counterSerial;
+      if (item.hasOwnProperty('possibleCounterSerial'))
+        delete item.possibleCounterSerial;
+      if (item.hasOwnProperty('possibleAddress'))
+        delete item.possibleAddress;      
+      tempDataSource.push(Object.values(item));
+      head.push(Object.keys(item));
+    })
 
-    // const myFont = MyFont;
-    // doc.addFileToVFS('BLotus.ttf', myFont);
-    // doc.addFont('BLotus.ttf', 'myFont', 'normal');
-    // doc.setFont('myFont');
+    tempDataSource.forEach(item => {
+      item = item.toString();
+    })
+    head = head[0];
+    let tempHeadTest = [];
 
-    // doc.save("a4.pdf");
+    head.forEach(tempHead => {
+      _selectCols.find(item => {
+        if (item.field === tempHead) {
+          tempHeadTest.push(item.header);
+        }
+      })
+    })
+
+    const doc = new jsPDF('landscape');
+
+    (doc as any).addFileToVFS('Blotus.ttf', font);
+    doc.addFont('Blotus.ttf', 'font', 'normal');
+
+    doc.setFont('font'); // set font    
+
+    (doc as any).autoTable(
+      {
+        body: tempDataSource,
+        head: [tempHeadTest],
+        styles: {
+          font: 'font',
+          fillColor: [233, 236, 239],
+          fontSize: 12
+        },
+        headStyles: {
+          font: 'font',
+          fillColor: [0, 69, 203],
+          textColor: [255, 255, 255],
+          fontSize: 14
+
+        },
+        showHead: 'everyPage',
+        margin: { top: 10 },
+        theme: 'striped',
+        didDrawPage: (dataArg) => {
+          doc.text('PAGE', dataArg.settings.margin.left, 10);
+        }
+      }
+    )
+    doc.save(new Date().getDate() + fileName);
   }
   exportExcel(dataSource: any, fileName: string) {
     if (this.utilsService.isNull(dataSource)) {
