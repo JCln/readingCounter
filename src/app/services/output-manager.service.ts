@@ -91,7 +91,7 @@ export class OutputManagerService {
       if (item.hasOwnProperty('possibleCounterSerial'))
         delete item.possibleCounterSerial;
       if (item.hasOwnProperty('possibleAddress'))
-        delete item.possibleAddress;      
+        delete item.possibleAddress;
       tempDataSource.push(Object.values(item));
       head.push(Object.keys(item));
     })
@@ -141,7 +141,8 @@ export class OutputManagerService {
         }
       }
     )
-    doc.save(new Date().getDate() + fileName);
+    const customDate = new Date();
+    doc.save(customDate.getFullYear() + '' + customDate.getDay() + '' + customDate.getDate() + fileName);
   }
   exportExcel(dataSource: any, fileName: string) {
     if (this.utilsService.isNull(dataSource)) {
