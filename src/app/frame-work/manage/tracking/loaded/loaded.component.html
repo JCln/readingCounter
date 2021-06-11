@@ -11,7 +11,8 @@
         </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="left_side">
-                <i (click)="exportPDF(dataSource)" class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
+                <i (click)="exportPDF(dataSource, _selectCols)"
+                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>
                 <i (click)="outputManagerService.exportExcel(dataSource, 'loaded')"

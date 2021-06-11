@@ -62,7 +62,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
           }
           if (error.status === 0) {
-            this.snackWrapperService.openSnackBar('احتمالا شما به شبکه دسترسی ندارید یا موقعیت مکانی شما در ایران نیست', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+            this.snackWrapperService.openSnackBar('از دسترسی به شبکه اطمینان حاصل نمایید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
           }
           if (error.status === 500 || error.status === 502) {
             this.snackWrapperService.openSnackBar('خطای سرویس دهنده', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
