@@ -85,12 +85,16 @@
   grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
   gap: .25rem;
   direction: rtl;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: $white;
+  box-shadow: 0px 0px 2px 2px $blue_gray_400;
 
   .auth_1_item {
     display: grid;
     place-content: center;
     padding: $font_05;
-    margin: $font_s 0;
     border-radius: $border_5;
     font-size: $font_l;
     font-weight: 600;
@@ -160,6 +164,7 @@
 
 .accept {
   display: flex;
+  box-shadow: 0 -3px 2px -1px $blue_gray_400;
 }
 
 .separator {

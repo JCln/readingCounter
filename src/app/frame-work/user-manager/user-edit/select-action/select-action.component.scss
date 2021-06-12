@@ -1,1 +1,6 @@
 @import '../user-edit.component.scss';
+
+form {
+  height: 58vh;
+  overflow-x: auto;
+}
