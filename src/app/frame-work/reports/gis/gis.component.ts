@@ -59,7 +59,7 @@ export class GisComponent implements OnInit {
     },
 
   ]
-  _isOrderByDate: boolean = false;
+  _isOrderByDate: boolean = true;
   _orderBy: string = '';
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];

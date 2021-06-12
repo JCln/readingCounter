@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IReadingReportReq } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
+import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
-import { ITitleValue } from './../../../Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-details',
@@ -33,7 +32,7 @@ export class DetailsComponent implements OnInit {
       isSelected: false
     }
   ]
-  _isOrderByDate: boolean = false;
+  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];

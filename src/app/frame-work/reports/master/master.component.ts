@@ -33,7 +33,7 @@ export class MasterComponent implements OnInit {
       isSelected: false
     }
   ]
-  _isOrderByDate: boolean = false;
+  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];

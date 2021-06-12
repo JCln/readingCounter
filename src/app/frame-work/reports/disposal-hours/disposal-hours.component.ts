@@ -22,7 +22,7 @@ export class DisposalHoursComponent implements OnInit {
     reportCode: 0,
     year: 1400
   }
-  _isOrderByDate: boolean = false;
+  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];

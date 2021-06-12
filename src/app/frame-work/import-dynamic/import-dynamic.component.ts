@@ -4,10 +4,10 @@ import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/da
 import { IImportDynamicDefault } from 'src/app/Interfaces/inon-manage';
 import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { ImportDynamicService } from 'src/app/services/import-dynamic.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
-import { DictionaryWrapperService } from './../../services/dictionary-wrapper.service';
 
 @Component({
   selector: 'app-import-dynamic',
@@ -47,7 +47,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       isSelected: false
     }
   ]
-  _isOrderByDate: boolean = false;
+  _isOrderByDate: boolean = true;
   _showAlalHesabPercent: boolean = false;
   _showimagePercent: boolean = false;
   canShowEditButton: boolean = false;

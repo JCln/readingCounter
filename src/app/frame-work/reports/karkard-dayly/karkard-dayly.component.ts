@@ -32,7 +32,7 @@ export class KarkardDaylyComponent implements OnInit {
       isSelected: false
     }
   ]
-  _isOrderByDate: boolean = false;
+  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];

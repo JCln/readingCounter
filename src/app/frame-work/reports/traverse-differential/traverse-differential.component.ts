@@ -33,7 +33,7 @@ export class TraverseDifferentialComponent implements OnInit, AfterViewInit, OnD
       isSelected: false
     }
   ]
-  _isOrderByDate: boolean = false;
+  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];

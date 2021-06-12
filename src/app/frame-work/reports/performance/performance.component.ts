@@ -32,7 +32,7 @@ export class PerformanceComponent implements OnInit, AfterViewInit, OnDestroy {
       isSelected: false
     }
   ]
-  _isOrderByDate: boolean = false;
+  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];

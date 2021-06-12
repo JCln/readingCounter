@@ -31,7 +31,7 @@ export class KarkardComponent implements OnInit {
       isSelected: false
     }
   ]
-  _isOrderByDate: boolean = false;
+  _isOrderByDate: boolean = true;
   _canRouteToChild: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
