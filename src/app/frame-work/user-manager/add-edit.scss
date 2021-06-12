@@ -1,5 +1,6 @@
 @import '../../../assets/variable';
 @import '../../../assets/button.scss';
+@import '../../../assets/tooltip.scss';
 
 .btn_1 {
   color: $gray_100;
@@ -167,6 +168,10 @@
   box-shadow: 0 -3px 2px -1px $blue_gray_400;
 }
 
+._double_size {
+  grid-column: auto/span 2;
+}
+
 .separator {
   display: flex;
   align-items: center;
@@ -181,4 +186,10 @@
 
 .separator:not(:empty)::after {
   margin-left: .25em;
+}
+
+.tooltip .tooltip_text {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rem;
 }

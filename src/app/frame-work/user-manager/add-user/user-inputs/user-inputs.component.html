@@ -43,10 +43,11 @@
             minlength=11 placeholder="شماره موبایل را وارد نمایید" required>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field class="_double_size tooltip" appearance="fill">
         <mat-label>نام نمایش</mat-label>
-        <input matInput [(ngModel)]="userInputForm.displayName" name="displayName"
-            placeholder="نامی که نمایش داده شود را وارد نمایید؟" required>
+        <input matInput [(ngModel)]="userInputForm.displayName" name="displayName" placeholder="نام قابل نمایش"
+            required>
+        <div class="tooltip_text">این فیلد جهت نمایش نام کاربر در برنامه استفاده می‌شود</div>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
