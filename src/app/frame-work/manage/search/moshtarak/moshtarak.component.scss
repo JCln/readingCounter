@@ -10,6 +10,7 @@
   box-shadow: 1px 1px 8px 4px $gray_400;
   padding: $font_05;
   border-radius: $border_15;
+  border: 1px solid $blue_400;
 }
 
 section.content {
@@ -21,6 +22,10 @@ section.content {
 
 .tooltip {
   cursor: pointer;
+}
+
+.input_1 {
+  border-radius: 10px;
 }
 
 .btn_2_o {

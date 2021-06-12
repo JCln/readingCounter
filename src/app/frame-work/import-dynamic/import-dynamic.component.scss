@@ -28,15 +28,14 @@ section.dynamic_content {
   gap: $font_05;
   align-items: center;
   border: .15rem solid $blue_gray_700;
-  box-shadow: 1px 1px 5px 1px $blue_gray_700;
+  box-shadow: 1px 1px 3px 1px $blue_gray_700;
   border-radius: $border_15;
   padding: $font_xxs;
   margin: 1rem 0;
 }
 
 .static_part {
-  border: .15rem solid $blue_700;
-  box-shadow: 1px 1px 5px 1px $blue_700;
+  border: .15rem solid $blue_400;
   border-radius: $border_15;
   padding: $font_xxs;
 }

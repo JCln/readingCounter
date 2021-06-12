@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Search } from 'src/app/classes/search';
+import { IOnOffLoadFlat, ISearchMoshReq } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { SearchService } from 'src/app/services/search.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
-import { IOnOffLoadFlat, ISearchMoshReq } from './../../../../Interfaces/imanage';
 
 @Component({
   selector: 'app-moshtarak',
@@ -40,13 +41,24 @@ export class MoshtarakComponent implements OnInit {
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private searchService: SearchService,
-    public outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService,
+    private utilsService: UtilsService
   ) {
   }
 
   insertSelectedColumns = () => {
     this._selectCols = this.searchService.columnSearchMoshtarakin();
     this._selectedColumns = this.searchService.customizeSelectedColumns(this._selectCols);
+  }
+  converts = () => {
+    this.searchService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    this.searchService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.searchService.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+
+    this.insertSelectedColumns();
+    this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
     if (!this.searchService.verificationMosh(this.searchReq))
@@ -57,21 +69,22 @@ export class MoshtarakComponent implements OnInit {
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 
-    this.insertSelectedColumns();
+    this.converts();
 
-    this.searchService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-    this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    this.searchService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    this.searchService.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-
-    this.searchService.setDynamicPartRanges(this.dataSource);
+    this.closeTabService.saveDataForSearchMoshtarakin = this.dataSource;
   }
   nullSavedSource = () => this.closeTabService.saveDataForSearchMoshtarakin = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
+    if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
+      this.dataSource = this.closeTabService.saveDataForSearchMoshtarakin;
+      this.converts();
+    }
+    else
+      this.toDefaultVals();
+
     this.searchType = this.searchService.getSearchTypes();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
   }
@@ -106,5 +119,7 @@ export class MoshtarakComponent implements OnInit {
   refreshTable = () => {
     this.connectToServer();
   }
-
+  toDefaultVals = () => {
+    this.dataSource = [];
+  }
 }
