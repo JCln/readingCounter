@@ -157,7 +157,7 @@ export class TrackingManagerService {
       console.error(error);
     }
   }
-  postEditingTrack = (rowData: ITracking) => {
+  postEditingTrack = (rowData: IEditTracking) => {
     this.interfaceManagerService.POSTBODY(ENInterfaces.trackingEDIT, this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {
       if (res)
         this.successSnackMessage(res.message);
@@ -175,13 +175,17 @@ export class TrackingManagerService {
     });
   }
   // Output manager 
-  downloadOutputDBF = (dbfData: ITracking | IOutputManager): any => {
+  downloadOutputDBF = (dbfData: ITracking | IOutputManager): Promise<any> => {
     const a: IOutputManager = {
       zoneId: dbfData.zoneId,
       fromDate: dbfData.fromDate,
       toDate: dbfData.toDate
     }
-    return this.interfaceManagerService.POSTBLOB(ENInterfaces.OutputDBF, a);
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBLOB(ENInterfaces.OutputDBF, a).subscribe(res => {
+        resolve(res);
+      });
+    });
   }
   downloadOutputSingle = (single: ITracking): Promise<any> => {
     const a: any = {
@@ -263,7 +267,7 @@ export class TrackingManagerService {
   }
 
   // imported service control
-  private selectSpecialParameters = (rowData: ITracking): IEditTracking => {
+  private selectSpecialParameters = (rowData: IEditTracking): IEditTracking => {
     const a: IEditTracking = {
       id: rowData.id,
       alalHesabPercent: rowData.alalHesabPercent,

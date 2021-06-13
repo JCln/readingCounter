@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Search } from 'src/app/classes/search';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IOnOffLoadFlat, ISearchMoshReq } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
@@ -25,6 +26,7 @@ export class MoshtarakComponent implements OnInit {
   dataSource: IOnOffLoadFlat[] = [];
   searchType: Search[];
   searchByText: string = '';
+  _empty_message: string = '';
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -40,7 +42,7 @@ export class MoshtarakComponent implements OnInit {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private searchService: SearchService,
+    public searchService: SearchService,
     public outputManagerService: OutputManagerService,
     private utilsService: UtilsService
   ) {
@@ -51,6 +53,7 @@ export class MoshtarakComponent implements OnInit {
     this._selectedColumns = this.searchService.customizeSelectedColumns(this._selectCols);
   }
   converts = () => {
+    this._empty_message = EN_messages.notFound;
     this.searchService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');

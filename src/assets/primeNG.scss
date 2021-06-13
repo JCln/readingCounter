@@ -18,14 +18,28 @@
   .p-datatable .p-datatable-thead>tr>th,
   .p-datatable .p-datatable-tbody>tr>td {
     text-align: center;
-    font-size: $font_m;
     font-weight: 600;
-    padding: $font_xs .2rem;
+    padding: $font_xs .1rem;
     border: 1px solid $gray_200;
   }
 
   [disabled] {
     background: $gray_100;
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item,
+  .p-dropdown .p-dropdown-label.p-placeholder,
+  .p-multiselect .p-multiselect-label.p-placeholder,
+  .p-multiselect-label,
+  .p-multiselect-items {
+    font-family: $font_family;
+    font-size: $font_m;
+    font-weight: 600;
+  }
+
+  .p-dropdown {
+    height: 2.8rem;
+    border-radius: 10px;
   }
 
   .p-column-filter-row {

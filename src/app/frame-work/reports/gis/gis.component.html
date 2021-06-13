@@ -17,7 +17,7 @@
                 <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
                     name="isOrderByDate">
                     <mat-radio-button class="radio_button" *ngFor="let orderType of dateEvaluate"
-                        [value]="orderType.isSelected">
+                        [value]="orderType.isSelected" [disabled]="_orderBy === 'isForbidden'">
                         {{orderType.title}}
                     </mat-radio-button>
                 </mat-radio-group>
@@ -89,7 +89,7 @@
                 </div>
             </section>
             <footer>
-                <button *ngIf="readingReportGISReq.zoneId" type="submit" class="btn_1">مشاهده</button>
+                <button type="submit" class="btn_1">مشاهده</button>
             </footer>
         </section>
     </main>

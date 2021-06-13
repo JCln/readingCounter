@@ -1,15 +1,15 @@
+import 'jspdf-autotable';
+
 import { Injectable } from '@angular/core';
+import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
 
+import { font } from '../../assets/pdfjs/BLotus-normal';
 import { EN_messages } from '../Interfaces/enums.enum';
 import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { IOutputManager } from './../Interfaces/imanage';
 import { ConverterService } from './converter.service';
 import { UtilsService } from './utils.service';
-
-import { jsPDF } from 'jspdf';
-import { font } from '../../assets/pdfjs/BLotus-normal';
-import 'jspdf-autotable';
 
 @Injectable({
   providedIn: 'root'
@@ -57,13 +57,15 @@ export class OutputManagerService {
     link.click();
   }
   exportPDF = (dataSource: any[], _selectCols: IObjectIteratation[], fileName: string) => {
-    if (this.utilsService.isNull(dataSource)) {
+    /* TO CREATE DEEP COPY */
+    let originDataSource = JSON.parse(JSON.stringify(dataSource));
+    if (this.utilsService.isNull(originDataSource)) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
       return;
     }
     let head = [];
     let tempDataSource = [];
-    dataSource.forEach(item => {
+    originDataSource.forEach(item => {
       if (item.hasOwnProperty('id'))
         delete item.id;
       if (item.hasOwnProperty('counterReaderId'))

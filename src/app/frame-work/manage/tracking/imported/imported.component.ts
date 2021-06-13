@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { ITracking } from 'src/app/Interfaces/imanage';
+import { EN_messages } from 'src/app/Interfaces/enums.enum';
+import { IEditTracking, ITracking } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -13,7 +14,6 @@ import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
-import { EN_messages } from './../../../../Interfaces/enums.enum';
 import { ImportListDgComponent } from './import-list-dg/import-list-dg.component';
 
 
@@ -79,7 +79,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   onRowEditInit(product: any) {
     console.log(product);
   }
-  onRowEditSave(rowData: any) {
+  private onRowEditSave(rowData: IEditTracking) {
     this.trackingManagerService.postEditingTrack(rowData);
     this.refreshTable();
   }

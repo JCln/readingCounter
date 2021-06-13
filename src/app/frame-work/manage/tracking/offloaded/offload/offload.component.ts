@@ -169,7 +169,12 @@ export class OffloadComponent implements OnInit {
     link.download = `${new Date().toLocaleDateString()}.ogg`;
     link.click();
   }
-  playAudio = () => this.testAudio.play();
+  playAudio = () => {
+    this.testAudio.play();
+    this.testAudio.addEventListener('ended', () => {
+      this.isPlaying = false;
+    });
+  }
   pauseAudio = () => this.testAudio.pause();
   rePlayAudio = () => {
     this.testAudio.load();

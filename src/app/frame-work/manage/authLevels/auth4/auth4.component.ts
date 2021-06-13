@@ -121,9 +121,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
     this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
   }
   onRowEditCancel(dataSource: IAuthLevel4, index: number) {
-    // this.dataSource[index] = this.clonedProducts[dataSource.id];
-    // delete this.dataSource[dataSource.id];
-    // return;
+    this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
   }
   refreshTable = () => {
     this.classWrapper(true);

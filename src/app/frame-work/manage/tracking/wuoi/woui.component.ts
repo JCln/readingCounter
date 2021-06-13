@@ -136,6 +136,9 @@ export class WouiComponent implements AfterViewInit, OnDestroy {
   }
   playAudio = () => {
     this.testAudio.play();
+    this.testAudio.addEventListener('ended', (event) => {
+      this.isPlaying = false;
+    });
   }
   pauseAudio = () => {
     this.testAudio.pause();

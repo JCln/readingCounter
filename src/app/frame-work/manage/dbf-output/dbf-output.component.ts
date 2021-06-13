@@ -29,27 +29,17 @@ export class DbfOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dbfOutput = this.outputManagerService.getDBFOutPut;
   }
 
-  connectToServer = () => {
+  connectToServer = async () => {
     if (!this.outputManagerService.checkVertification(this.dbfOutput))
       return;
-    this.trackingManagerService.downloadOutputDBF(this.dbfOutput).subscribe((res: Blob) => {
-      this.outputManagerService.downloadFile(res, '.dbf');
-    })
-  }
-  getZoneDictionary = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        resolve(this.trackingManagerService.getZoneDictionary());
-      });
-    } catch {
-      console.error(e => e);
-    }
+    const res = await this.trackingManagerService.downloadOutputDBF(this.dbfOutput);
+    this.outputManagerService.downloadFile(res, '.dbf');
   }
   nullSavedSource = () => this.closeTabService.saveDataForOutputDBF = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh)
       this.nullSavedSource();
-    this.zoneDictionary = await this.getZoneDictionary();
+    this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
   }
   receiveFromDateJalali = ($event: string) => {
     this.dbfOutput.fromDate = $event;

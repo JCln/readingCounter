@@ -117,6 +117,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
   }
   onRowEditCancel(dataSource: IAuthLevel3, index: number) {
+    this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
     // this.dataSource[index] = this.clonedProducts[dataSource.id];
     // delete this.dataSource[dataSource.id];
     // return;
