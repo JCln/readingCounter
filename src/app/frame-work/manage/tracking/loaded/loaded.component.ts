@@ -2,17 +2,17 @@ import 'jspdf-autotable';
 
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ITracking } from 'src/app/Interfaces/imanage';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IObjectIteratation, IResponses } from 'src/app/Interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
+
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 
 @Component({
@@ -98,31 +98,6 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
         this.refetchTable(rowIndex)
       }
     });
-  }
-  private removeRow = (rowData: ITracking, desc: string, rowIndex: number) => {
-    this.trackingManagerService.removeTrackingId(rowData.id, desc).subscribe((res: IResponses) => {
-      if (res) {
-        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        this.refetchTable(rowIndex);
-      }
-    })
-  }
-  firstConfirmDialog = (rowData: ITracking, rowIndex: number) => {
-    const title = EN_messages.reason_deleteRoute;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        data: {
-          title: title,
-          isInput: true,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.removeRow(rowData, desc, rowIndex)
-        }
-      })
-    })
   }
   backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
     const title = EN_messages.reson_delete_backtoImported;
