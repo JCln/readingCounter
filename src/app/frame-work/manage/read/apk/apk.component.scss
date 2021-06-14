@@ -7,10 +7,10 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(25rem, auto));
   direction: rtl;
   justify-content: center;
-  gap: 2rem;
+  gap: $font_xs;
 }
 
 @include media_wrapper(550px, over_all, grid-template-columns, repeat(auto-fit, minmax(24rem, auto)));
@@ -20,23 +20,18 @@
   box-shadow: 1px 1px 8px 4px $gray_400;
   text-align: center;
   padding: $font_2 0;
-  justify-content: space-around;
   border-radius: $border_15;
   min-height: 25rem;
+}
+
+input {
+  text-align: center;
+  width: 19rem;
 }
 
 ._desc {
   display: grid;
   justify-content: center;
-  margin: auto;
-  padding: $font_xs 0;
-  width: 90%;
-  border-radius: $border_15;
-
-  input {
-    text-align: center;
-    width: 19rem;
-  }
 }
 
 .title {

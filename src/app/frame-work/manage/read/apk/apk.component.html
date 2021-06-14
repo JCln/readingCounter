@@ -3,6 +3,7 @@
 
         <h1 class="title">ایجاد نسخه جدید</h1>
         <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
+
             <div class="_desc">
                 <input class="input_1" type="text" placeholder="نام نسخه " name="versionName"
                     [(ngModel)]="uploadForm.versionName">
@@ -10,24 +11,25 @@
                     [(ngModel)]="uploadForm.versionCode">
                 <input class="input_1" type="text" placeholder="توضیحات" name="description"
                     [(ngModel)]="uploadForm.description">
-            </div>
-            <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
-                <span class="fa fa-android"></span>
-                فایل <small>apk</small> انتخاب نمایید
-            </label>
-            <label *ngIf="choosenFileName" class="label_choose_file" for="files">
-                {{choosenFileName}}
-            </label>
-            <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file"
-                name="screenshot" (change)="onChange($event)" id="files">
+                <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files"
+                    title="فایلی انتخاب نشده است">
+                    <span class="fa fa-android"></span>
+                    فایل <small>apk</small> انتخاب نمایید
+                </label>
+                <label *ngIf="choosenFileName" class="label_choose_file" for="files">
+                    {{choosenFileName}}
+                </label>
+                <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file"
+                    name="screenshot" (change)="onChange($event)" id="files">
 
-
-            <div class="change_pass">
-                <button class="btn_2" type="submit">
-                    <div class="fa fa-upload"></div>
-                    ارسال
-                </button>
+                <div class="change_pass">
+                    <button class="btn_2" type="submit">
+                        <div class="fa fa-upload"></div>
+                        ارسال
+                    </button>
+                </div>
             </div>
+
         </form>
 
     </section>
@@ -36,51 +38,48 @@
 
         <h1 class="title">نسخه های گذشته</h1>
         <div class="content">
-            <div class="_desc">
+            <p-table [columns]="_columns" [value]="dataSource" [paginator]="true" [rows]="5" sortField="versionName"
+                [sortOrder]="-1" [rowsPerPageOptions]="[5,10,20]" dir="rtl" styleClass="p-datatable-responsive"
+                [responsive]="true">
 
-                <p-table [columns]="_columns" [value]="dataSource" [paginator]="true" [rows]="5"
-                    [showCurrentPageReport]="true"
-                    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-                    [rowsPerPageOptions]="[5,10,20]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                            <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                            {{col.header}}
+                        </th>
+                        <th style="width: 4rem"></th>
+                    </tr>
 
-                    <ng-template pTemplate="header" let-columns>
-                        <tr>
-                            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                                {{col.header}}
-                            </th>
-                            <th style="width: 4rem"></th>
-                        </tr>
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
+                        </th>
+                        <th style="width: 4rem"></th>
+                    </tr>
+                </ng-template>
 
-                        <tr>
-                            <th *ngFor="let col of columns">
-                                <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
-                            </th>
-                            <th style="width: 4rem"></th>
-                        </tr>
-                    </ng-template>
+                <ng-template pTemplate="body" let-dataSource let-columns="columns">
+                    <tr>
+                        <td *ngFor="let col of columns">
+                            {{dataSource[col.field]}}
+                        </td>
+                        <td (click)="downloadAPK()">
+                            <i class="tooltip p_icons fa fa-inbox">
+                                <div class="tooltip_text">دانلود فایل</div>
+                            </i>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
+                    <tr>
+                        <td [attr.colspan]="dataSource.length">
+                            موردی پیدا نشد
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
 
-                    <ng-template pTemplate="body" let-dataSource let-columns="columns">
-                        <tr>
-                            <td *ngFor="let col of columns">
-                                {{dataSource[col.field]}}
-                            </td>
-                            <td (click)="downloadAPK()">
-                                <i class="tooltip p_icons fa fa-inbox">
-                                    <div class="tooltip_text">دانلود فایل</div>
-                                </i>
-                            </td>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
-                        <tr>
-                            <td [attr.colspan]="dataSource.length">
-                                موردی پیدا نشد
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
         </div>
 
     </section>
