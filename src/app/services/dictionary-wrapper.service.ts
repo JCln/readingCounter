@@ -299,4 +299,7 @@ export class DictionaryWrapperService {
     this.traverseDifferentialDictionary = v;
   }
 
+  cleanDictionaries = () => {
+    this.zoneDictionary = [];
+  }
 }

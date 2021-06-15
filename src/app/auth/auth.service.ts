@@ -7,6 +7,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 
 import { IAuthTokenType, IAuthUser, ICredentials } from '../Interfaces/iauth-guard-permission';
 import { MainService } from '../services/main.service';
@@ -29,7 +30,8 @@ export class AuthService {
     private route: ActivatedRoute,
     private utilsService: UtilsService,
     private snackWrapperService: SnackWrapperService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   private getRefreshToken = (): string => {
@@ -65,9 +67,11 @@ export class AuthService {
       })
   }
   private clearAllSavedData = () => this.closeTabService.cleanAllData();
+  private clearDictionaries = () => this.dictionaryWrapperService.cleanDictionaries();
   logout = () => {
     const refreshToken = this.jwtService.getRefreshToken();
     this.clearAllSavedData();
+    this.clearDictionaries();
     this.mainService.POSTBODY('V1/Account/Logout', { refreshToken }).subscribe(() => {
       this.jwtService.removeAllLocalStorage();
       this.routeTo('/login');
