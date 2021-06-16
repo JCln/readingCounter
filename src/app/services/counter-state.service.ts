@@ -22,7 +22,7 @@ export class CounterStateService {
 
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
-      { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
+      { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
       { field: 'title', header: 'عنوان', isSelected: true },
       { field: 'zoneId', header: 'ناحیه', isSelected: true },
       { field: 'clientOrder', header: 'ترتیب', isSelected: true },

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -19,7 +19,7 @@ import { ImageViewerComponent } from '../../wuoi/image-viewer/image-viewer.compo
   templateUrl: './offload.component.html',
   styleUrls: ['./offload.component.scss']
 })
-export class OffloadComponent implements OnInit {
+export class OffloadComponent implements OnInit, AfterViewInit, OnDestroy {
   offloadModifyReq: IOffloadModifyReq = {
     id: '',
     modifyType: null,
@@ -69,7 +69,13 @@ export class OffloadComponent implements OnInit {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.downloadManagerService.downloadFileInfo(this.offloadModifyReq.id);
+    if (this.closeTabService.saveDataForOffloadModify) {
+      this.dataSource = this.closeTabService.saveDataForOffloadModify;
+    }
+    else {
+      this.dataSource = await this.downloadManagerService.downloadFileInfo(this.offloadModifyReq.id);
+      this.closeTabService.saveDataForOffloadModify = this.dataSource;
+    }
 
     this.counterStatesDictionary = await this.trackingManagerService.getCounterStatesDictionary(parseInt(this.zoneId));
     this.downloadManagerService.assignToDataSource(this.dataSource);
@@ -88,7 +94,7 @@ export class OffloadComponent implements OnInit {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res.includes('/wr/m/track/offloaded/offloadMdf')) {
+        if (res.includes('/wr/m/track/offloaded/offloadMfy')) {
           this.classWrapper(true);
         }
       }

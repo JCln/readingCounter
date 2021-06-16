@@ -35,7 +35,7 @@ export class ReadManagerService {
   private _counterReport = [
     { field: 'title', header: 'عنوان', isSelected: true },
     { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-    { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
+    { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
     { field: 'isAhad', header: 'آحاد', isSelected: true, isBoolean: true },
     { field: 'isKarbari', header: 'کاربری', isSelected: true, isBoolean: true },
     { field: 'canNumberBeLessThanPre', header: 'کمتر از قبلی', isSelected: true, isBoolean: true },
@@ -73,12 +73,12 @@ export class ReadManagerService {
     { field: 'title', header: 'عنوان', isSelected: true },
     { field: 'readingPeriodKindId', header: 'نوع دوره', isSelected: true, isSelectOption: true },
     { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-    { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
+    { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
     { field: 'clientOrder', header: 'ترتیب', isSelected: true }
   ]
   private _readingPeriodKind = [
     { field: 'title', header: 'عنوان', isSelected: true },
-    { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
+    { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
     { field: 'clientOrder', header: 'ترتیب', isSelected: true },
     { field: 'isEnabled', header: 'فعال', isSelected: true, isBoolean: true },
   ]
@@ -92,7 +92,7 @@ export class ReadManagerService {
   private _karbari = [
     { field: 'title', header: 'عنوان', isSelected: true },
     { field: 'provinceId', header: 'استان', isSelected: true, isSelectOption: true },
-    { field: 'moshtarakinId', header: 'مشترکین', isSelected: true },
+    { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
     { field: 'isMaskooni', header: 'مسکونی', isSelected: true, isBoolean: true },
     { field: 'isTejari', header: 'تجاری', isSelected: true, isBoolean: true },
     { field: 'isSaxt', header: 'ساخت', isSelected: true, isBoolean: true },

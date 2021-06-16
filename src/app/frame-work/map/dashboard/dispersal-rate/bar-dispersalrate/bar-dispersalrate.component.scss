@@ -1,1 +1,13 @@
 @import '../../dashboard.component.scss';
+@import '../../../../../../assets/media';
+
+.grid_half_width {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, auto));
+  align-items: center;
+  gap: 0.3rem;
+  overflow: auto;
+}
+
+@include media_wrapper(780px, grid_half_width, grid-template-columns, repeat(auto-fit, minmax(50%, auto)));

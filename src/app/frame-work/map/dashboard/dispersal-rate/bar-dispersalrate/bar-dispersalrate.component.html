@@ -1,27 +1,31 @@
-<div class="chart_analyze">
-  <div class="title" style="position: inherit; direction: rtl;">روزانه</div>
-  <canvas baseChart [datasets]="barChartDataDaily" [labels]="barChartLabels" [options]="barChartOptions"
-    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-  </canvas>
-</div>
+<section class="grid_half_width charts">
 
-<div class="chart_analyze">
-  <div class="title" style="position: inherit; direction: rtl;">هفتگی</div>
-  <canvas baseChart [datasets]="barChartDataWeekly" [labels]="barChartLabels" [options]="barChartOptions"
-    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-  </canvas>
-</div>
+  <div class="chart_analyze">
+    <div class="title" style="position: inherit; direction: rtl;">روزانه</div>
+    <canvas baseChart [datasets]="barChartDataDaily" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
 
-<div class="chart_analyze">
-  <div class="title" style="position: inherit; direction: rtl;">ماهانه</div>
-  <canvas baseChart [datasets]="barChartDataMonthly" [labels]="barChartLabels" [options]="barChartOptions"
-    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-  </canvas>
-</div>
+  <div class="chart_analyze">
+    <div class="title" style="position: inherit; direction: rtl;">هفتگی</div>
+    <canvas baseChart [datasets]="barChartDataWeekly" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
 
-<div class="chart_analyze">
-  <div class="title" style="position: inherit; direction: rtl;">سالانه</div>
-  <canvas baseChart [datasets]="barChartDataYearly" [labels]="barChartLabels" [options]="barChartOptions"
-    [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-  </canvas>
-</div>
+  <div class="chart_analyze">
+    <div class="title" style="position: inherit; direction: rtl;">ماهانه</div>
+    <canvas baseChart [datasets]="barChartDataMonthly" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
+
+  <div class="chart_analyze">
+    <div class="title" style="position: inherit; direction: rtl;">سالانه</div>
+    <canvas baseChart [datasets]="barChartDataYearly" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+  </div>
+
+</section>

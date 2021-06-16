@@ -51,6 +51,10 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
+    const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
+    if (tempZone)
+      this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
+
 
     this.listManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.listManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
@@ -125,7 +129,13 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-  toPrePage = () => this._location.back();
+  toPrePage = () => {
+    if (this.isModify) {
+      this.router.navigate(['/wr/m/track/offloaded']);
+      return;
+    }
+    this._location.back();
+  }
   setDynamicRages = () => {
     this.listManagerService.setDynamicPartRanges(this.dataSource);
   }
