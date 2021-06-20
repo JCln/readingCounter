@@ -48,19 +48,22 @@ export class OutputManagerService {
     return true;
   }
   // Exports
-
   downloadFile(data: any, type: string) {
-    const contentDis = data.headers.get('content-disposition');
-    console.log(contentDis);
+    const fileName = data.headers.get('content-disposition').split('filename=')[1].split(';')[0];
+    console.log(fileName);
+    console.log(data.body);
+    console.log(data);
 
-    const contentType = data.headers.get('content-type');
-    console.log(contentType);
+    const blob = new Blob(data, { type: data.type });
+    console.log(data);
+    console.log(typeof data);
 
     const downloadURL = window.URL.createObjectURL(data);
     const link = document.createElement('a');
     link.href = downloadURL;
-    link.download = `${new Date().toLocaleDateString() + type}`;
+    link.download = 'anyName';
     link.click();
+    // window.URL.revokeObjectURL(downloadURL);
   }
   exportPDF = (dataSource: any[], _selectCols: IObjectIteratation[], fileName: string) => {
     /* TO CREATE DEEP COPY */

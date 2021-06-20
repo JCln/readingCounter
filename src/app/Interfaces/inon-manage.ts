@@ -56,13 +56,6 @@ export interface IZoneBoundManager {
     dbInitialCatalog: string;
 }
 
-export interface IRoleManager {
-    id: number;
-    title: string;
-    isActive: boolean
-    needDeviceIdLogin: boolean;
-    titleUnicode: string;
-}
 export interface IAPK {
     versionName: string;
     versionCode: number;

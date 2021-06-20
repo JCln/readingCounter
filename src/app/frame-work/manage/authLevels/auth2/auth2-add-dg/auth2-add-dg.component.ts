@@ -19,13 +19,12 @@ export class Auth2AddDgComponent {
   ) {
     data = data.di;
     this.form = fb.group({
-      id: [''],
       title: ['', Validators.required],
       authLevel1Id: data.authLevel1Id,
       cssClass: [''],
       logicalOrder: [''],
       route: [''],
-      inSidebar: [false, Validators.required]
+      inSidebar: [false]
     })
   }
   save() {

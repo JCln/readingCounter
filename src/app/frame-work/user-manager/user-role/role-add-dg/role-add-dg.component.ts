@@ -1,32 +1,29 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ZoneAddDgComponent } from 'src/app/frame-work/manage/zones/zone/zone-add-dg/zone-add-dg.component';
 import { SectionsService } from 'src/app/services/sections.service';
 
 @Component({
-  selector: 'app-auth3-add-dg',
-  templateUrl: './auth3-add-dg.component.html',
-  styleUrls: ['./auth3-add-dg.component.scss']
+  selector: 'app-role-add-dg',
+  templateUrl: './role-add-dg.component.html',
+  styleUrls: ['./role-add-dg.component.scss']
 })
-export class Auth3AddDgComponent {
+export class RoleAddDgComponent {
   form: FormGroup;
 
   constructor(
     fb: FormBuilder,
+    private dialogRef: MatDialogRef<ZoneAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<Auth3AddDgComponent>,
     private sectionsService: SectionsService
   ) {
     data = data.di;
     this.form = fb.group({
-      title: ['', Validators.required],
-      authLevel2Id: data.authLevel2Id,
-      cssClass: [''],
-      route: [''],
-      inSidebar: [false],
-      isClosable: [false],
-      isRefreshable: [false],
-      logicalOrder: ['']
+      title: [''],
+      isActive: true,
+      needDeviceIdLogin: false,
+      titleUnicode: ['']
     })
   }
   save() {
@@ -39,4 +36,6 @@ export class Auth3AddDgComponent {
   close() {
     this.dialogRef.close();
   }
+
+
 }

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IUserManager } from 'src/app/Interfaces/iuser-manager';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -35,26 +36,13 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
   routeToLoggs(e: string) {
     this.router.navigate(['./loggins', e], { relativeTo: this.route.parent })
   }
-  getDataSource = (): Promise<IUserManager[]> => {
-    try {
-      return new Promise((resolve) => {
-        this.usersAllService.connectToServer().subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        })
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  }
   nullSavedSource = () => this.closeTabService.saveDataForAllUsers = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
     if (this.utilsService.isNull(this.closeTabService.saveDataForAllUsers)) {
-      this.dataSource = await this.getDataSource();
+      this.dataSource = await this.usersAllService.connectToServer(ENInterfaces.userGET);
       this.closeTabService.saveDataForAllUsers = this.dataSource;
     }
     else {

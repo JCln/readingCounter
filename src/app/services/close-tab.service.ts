@@ -36,6 +36,7 @@ export class CloseTabService {
 
   saveDataForAllUsers: any;
   saveDictionaryForAllUsers: any;
+  saveDataForRoleManager: any;
 
   saveDataForEditUsers: any;
   saveDictionaryForEditUsers: any;
@@ -146,6 +147,9 @@ export class CloseTabService {
         break;
       case '/wr/mu/add':
         this.saveDataForForAddUsers = '';
+        break;
+      case '/wr/mu/role':
+        this.saveDataForRoleManager = '';
         break;
       // zones manage
       case '/wr/m/zs/c':
@@ -301,6 +305,7 @@ export class CloseTabService {
     this.saveDictionaryForEditUsers = '';
     this.saveDataForForAddUsers = '';
     this.saveDictionaryForAddUsers = '';
+    this.saveDataForRoleManager = '';
     this.saveDataForReadingPeriodManager = '';
     this.saveDataForReadingPeriodKindManager = '';
     this.saveDataForAPKManager = '';

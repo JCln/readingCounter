@@ -80,7 +80,13 @@ export interface IUserEditManager {
         deviceId: string
     }
 }
-
+export interface IRoleManager {
+    id: number;
+    title: string;
+    isActive: boolean
+    needDeviceIdLogin: boolean;
+    titleUnicode: string;
+}
 export interface IAUserEditSave {
     selectedRoles: number[],
     selectedZones: number[],
