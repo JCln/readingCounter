@@ -14,11 +14,11 @@
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>
-                <i (click)="outputManagerService.exportExcel(dataSource, 'reading')"
+                <i (click)="outputManagerService.export(dataSource, _selectCols, 'reading', 'xlsx')"
                     class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>
-                <i (click)="outputManagerService.exportCSV(dataSource, 'reading')"
+                <i (click)="outputManagerService.export(dataSource, _selectCols, 'reading', 'csv')"
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
@@ -66,7 +66,7 @@
                     {{dataSourceRES[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="forceOffload(dataSourceRES, ri)"><i class="tooltip p_icons pi pi-send _important">
+            <td (click)="forceOffload(dataSourceRES, ri)"><i class="tooltip p_icons pi pi-ban _important">
                     <div class="tooltip_text">اتمام قرائت</div>
                 </i>
             </td>

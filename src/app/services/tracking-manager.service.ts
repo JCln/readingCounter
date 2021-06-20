@@ -192,7 +192,7 @@ export class TrackingManagerService {
       trackingId: single.id
     }
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOB(ENInterfaces.OutputSINGLE, a).toPromise().then(res => {
+      this.interfaceManagerService.POSTBLOB(ENInterfaces.OutputSINGLE, a).subscribe(res => {
         resolve(res);
       })
 

@@ -50,6 +50,12 @@ export class OutputManagerService {
   // Exports
 
   downloadFile(data: any, type: string) {
+    const contentDis = data.headers.get('content-disposition');
+    console.log(contentDis);
+
+    const contentType = data.headers.get('content-type');
+    console.log(contentType);
+
     const downloadURL = window.URL.createObjectURL(data);
     const link = document.createElement('a');
     link.href = downloadURL;
@@ -146,25 +152,50 @@ export class OutputManagerService {
     const customDate = new Date();
     doc.save(customDate.getFullYear() + '' + customDate.getDay() + '' + customDate.getDate() + fileName);
   }
-  exportExcel(dataSource: any, fileName: string) {
-    if (this.utilsService.isNull(dataSource)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
-      return;
-    }
-    const worksheet = XLSX.utils.json_to_sheet(dataSource);
-    const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, fileName, '.xlsx');
+  deleteForExcel = (originDataSource: any) => {
+    originDataSource.forEach(item => {
+      if (item.hasOwnProperty('id'))
+        delete item.id;
+      if (item.hasOwnProperty('counterReaderId'))
+        delete item.counterReaderId;
+      if (item.hasOwnProperty('zoneId'))
+        delete item.zoneId;
+      if (item.hasOwnProperty('year'))
+        delete item.year;
+      if (item.hasOwnProperty('hasPreNumber'))
+        delete item.hasPreNumber;
+      if (item.hasOwnProperty('stateTitle'))
+        delete item.stateTitle;
+    })
   }
-  exportCSV(dataSource: any, fileName: string) {
+  isNullData = (dataSource: any): boolean => {
     if (this.utilsService.isNull(dataSource)) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
-      return;
+      return false;
     }
-    const worksheet = XLSX.utils.json_to_sheet(dataSource);
+    return true;
+  }
+  export = (dataSource: any, _selectCols: IObjectIteratation[], fileName: string, type: XLSX.BookType) => {
+    /* TO CREATE DEEP COPY */
+    if (!this.isNullData(dataSource))
+      return;
+
+    let originDataSource = JSON.parse(JSON.stringify(dataSource));
+    this.deleteForExcel(originDataSource);
+    const worksheet = XLSX.utils.json_to_sheet(originDataSource);
+    var range = XLSX.utils.decode_range(worksheet['!ref']);
+    for (var C = range.s.r; C <= range.e.r; ++C) {
+      var address = XLSX.utils.encode_col(C) + "1"; // <-- first row, column number C
+      if (!worksheet[address]) continue;
+      _selectCols.find(item => {
+        if (item.field === worksheet[address].v) {
+          worksheet[address].v = item.header;
+        }
+      })
+    }
     const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, fileName, '.csv');
+    const excelBuffer: any = XLSX.write(workbook, { bookType: type, type: 'array' });
+    this.saveAsExcelFile(excelBuffer, fileName, '.' + type);
   }
   saveAsExcelABuffer = (buffer: any) => {
     console.log(buffer);

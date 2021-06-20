@@ -14,11 +14,11 @@
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>
-                <i (click)="outputManagerService.exportExcel(dataSource, 'lastStates')"
+                <i (click)="outputManagerService.export(dataSource, _selectCols, 'lastStates', 'xlsx')"
                     class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>
-                <i (click)="outputManagerService.exportCSV(dataSource, 'lastStates')"
+                <i (click)="outputManagerService.export(dataSource, _selectCols, 'lastStates', 'csv')"
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>

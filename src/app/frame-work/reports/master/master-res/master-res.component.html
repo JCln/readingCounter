@@ -1,10 +1,10 @@
 <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[20,50,100, 500]"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"  >
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-        (ngModelChange)="readingReportManagerService.setColumnsChanges(readingReportManagerService.ENSelectedColumnVariables.selectedRRMaster ,$event)"
+            (ngModelChange)="readingReportManagerService.setColumnsChanges(readingReportManagerService.ENSelectedColumnVariables.selectedRRMaster ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
@@ -13,11 +13,11 @@
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>
-                <i (click)="outputManagerService.exportExcel(dataSource, 'master')"
+                <i (click)="outputManagerService.export(dataSource, _selectCols, 'master', 'xlsx')"
                     class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>
-                <i (click)="outputManagerService.exportCSV(dataSource, 'master')"
+                <i (click)="outputManagerService.export(dataSource, _selectCols, 'master', 'csv')"
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
