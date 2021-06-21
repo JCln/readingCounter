@@ -776,3 +776,28 @@ export interface ISearchMoshReq {
     item: string,
     similar: boolean
 }
+export interface IProReportInput {
+    zoneId: number,
+    zoneIds: [
+        number
+    ],
+    fromDate: string,
+    toDate: string,
+    readingPeriodId: number,
+    year: number,
+    reportIds: [
+        number
+    ],
+    counterStateIds: [
+        number
+    ],
+    masrafStates: [
+        number
+    ],
+    karbariCodes: [
+        number
+    ],
+    fragmentMasterIds: [
+        string
+    ]
+}

@@ -10,13 +10,12 @@ import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { SearchService } from 'src/app/services/search.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
-
 @Component({
-  selector: 'app-moshtarak',
-  templateUrl: './moshtarak.component.html',
-  styleUrls: ['./moshtarak.component.scss']
+  selector: 'app-pro',
+  templateUrl: './pro.component.html',
+  styleUrls: ['./pro.component.scss']
 })
-export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   searchReq: ISearchMoshReq = {
     zoneId: null,
     searchBy: null,
@@ -97,7 +96,7 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/m/s/searchMosh') {
+        if (res === '/wr/m/s/searchPro') {
           this.classWrapper(true);
         }
       }
@@ -125,4 +124,5 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
   toDefaultVals = () => {
     this.dataSource = [];
   }
+
 }
