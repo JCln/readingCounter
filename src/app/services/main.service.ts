@@ -32,7 +32,7 @@ export class MainService {
     }
   }
   POSTBLOB = (URL: string, body: object) => {
-    return this.http.post(this.environment.API_URL + '/' + URL, body, { responseType: 'blob', observe: 'response' });
+    return this.http.post(this.environment.API_URL + '/' + URL, body, { responseType: 'blob' as 'json' });//, observe: 'response'
   }
   GETBLOB = (URL: string, ID?: string) => {
     if (ID)
