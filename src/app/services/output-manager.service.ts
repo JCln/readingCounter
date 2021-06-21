@@ -48,36 +48,21 @@ export class OutputManagerService {
     return true;
   }
   // Exports
-  downloadFile(data: any, type: string) {
-    // const originData = JSON.stringify(data);
-    // const fileName = data.headers.get('content-disposition').split('filename=')[1].split(';')[0];
-    // console.log(fileName);
-    console.log(data.body);
-    console.log(data);
+  downloadFile(data: any, type?: string) {
+    if (type) {
+      const downloadURL = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = `${new Date().toLocaleDateString() + type}`;
+      link.click();
+      return;
+    }
+    const fileName = data.headers.get('content-disposition').split('filename=')[1].split(';')[0]
     import("file-saver").then(FileSaver => {
-      const blob = new Blob([data], { type: data.body.type });
-      FileSaver.saveAs(blob, 'fileName');
+      const blob = new Blob([data.body], { type: data.body.type });
+      console.log(blob);
+      FileSaver.saveAs(blob, fileName);
     })
-
-    // const blob = new Blob([data], { type: data.body.type });
-    // const url = window.URL.createObjectURL(blob);
-    // console.log(blob);
-    // console.log(url);
-
-
-    // var a = document.createElement("a");
-    // document.body.appendChild(a);
-    // var json = JSON.stringify(data),
-    // a.download = fileName;
-    // a.click();
-    // window.URL.revokeObjectURL(url);
-
-
-    // const downloadURL = window.URL.createObjectURL(data);
-    // const link = document.createElement('a');
-    // link.href = downloadURL;
-    // link.download = 'anyName';
-    // link.click();
   }
   exportPDF = (dataSource: any[], _selectCols: IObjectIteratation[], fileName: string) => {
     /* TO CREATE DEEP COPY */

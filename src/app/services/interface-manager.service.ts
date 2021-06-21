@@ -42,5 +42,7 @@ export class InterfaceManagerService {
   POSTBLOB = (URL: string, body: object): Observable<any> => {
     return this.mainService.POSTBLOB(URL, body);
   }
-
+  POSTBLOBOBSERVE = (URL: string, body: object): Observable<any> => {
+    return this.mainService.POSTBLOBObserve(URL, body);
+  }
 }

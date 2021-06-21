@@ -63,7 +63,9 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   downloadOutputSingle = async (row: ITracking) => {
     const a = await this.trackingManagerService.downloadOutputSingle(row);
-    this.outputManagerService.downloadFile(a, '.dbf');
+    console.log(a);
+
+    this.outputManagerService.downloadFile(a);
   }
   ngOnInit(): void {
     this.classWrapper();
