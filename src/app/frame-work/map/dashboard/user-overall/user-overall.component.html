@@ -1,0 +1,8 @@
+<section class="media">
+    <div class="_header">اطلاعات کاربران</div>
+
+    <div class="_key_value" *ngFor="let item of _colUsersInfo">
+        <div class="key">{{item.header}}</div>
+        <div class="val">{{usersInfo[item.field]}}</div>
+    </div>
+</section>

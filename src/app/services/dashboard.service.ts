@@ -16,6 +16,14 @@ export class DashboardService {
   ) { }
 
   /* COLUMNS */
+  columnDashboardUserOverall = (): IObjectIteratation[] => {
+    return [
+      { field: 'all', header: 'مجموع', isSelected: true, readonly: true },
+      { field: 'counterReaders', header: 'ماموران قرائت', isSelected: true, readonly: true },
+      { field: 'readingSupervisors', header: 'ناظران قرائت', isSelected: true, readonly: true },
+      { field: 'inactiveOrLockeds', header: 'غیرفعال/قفل', isSelected: true, readonly: false }
+    ];
+  }
   columnDashboardForbidden = (): IObjectIteratation[] => {
     return [
       { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
@@ -104,6 +112,17 @@ export class DashboardService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.GET(ENInterfaces.getDashboardMediaTimed).subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
+    }
+  }
+  getDashboardUsersInfo = (): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.GET(ENInterfaces.getDashboardUsersOverall).subscribe(res => {
           resolve(res);
         })
       })

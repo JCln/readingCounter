@@ -12,6 +12,19 @@
   overflow: auto;
 }
 
+.grid_double {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: $font_xs;
+
+  @media (min-width:780px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .media {
   min-width: 11rem;
   background: $white;

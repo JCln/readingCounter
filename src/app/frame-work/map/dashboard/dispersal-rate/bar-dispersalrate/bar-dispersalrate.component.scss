@@ -10,4 +10,4 @@
   overflow: auto;
 }
 
-@include media_wrapper(780px, 'grid_half_width', grid-template-columns, repeat(auto-fit, minmax(50%, auto)));
+@include media_wrapper(780px, '.grid_half_width', grid-template-columns, 1fr 1fr);

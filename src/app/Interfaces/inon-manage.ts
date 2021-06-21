@@ -129,6 +129,11 @@ export interface IChangePassword {
     confirmPassword: string
 }
 /* DASHBOARD */
+export interface IDashboardUsersInfo {
+    oldPassword: string,
+    newPassword: string,
+    confirmPassword: string
+}
 export interface IDashboardKarkardTimed {
     adiCount: number,
     faqedCount: number,

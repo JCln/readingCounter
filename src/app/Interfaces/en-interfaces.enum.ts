@@ -224,4 +224,5 @@ export enum ENInterfaces {
     getDashboardForbiddenTimed = 'V1/Forbidden/Dashboard/Timed',
     getDashboardReadDaily = 'V1/List/Dashboard/Read/Daily',
     postDashboardAnalyzePerformance = 'V1/Tracking/Dashboard/Analyze/Performance',
+    getDashboardUsersOverall = 'V1/User/Dashboard/Overall',
 }
