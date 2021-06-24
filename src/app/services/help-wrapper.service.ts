@@ -33,6 +33,15 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
+    if (currentRoute === '/wr;trackNumber=') {
+      this.messageToShow.title = 'پیگیری درحال قرائت';
+      this.messageToShow.messageOne = 'اشتراک های درحال قرائت با نقطه مشخص شده اند. با کلیک بروی هرکدام اطلاعات اشتراک مشخص میشود.';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.messageTwo = ' درصورت نیاز به مسیر طی شده(اشتراک های ثبت شده) به ترتیب برروی زمان نمایش کلیک نمایید. زمان مشاهده براساس میلی ثانیه "ms" است.';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
     if (currentRoute === '/wr/db') {
       this.messageToShow.title = 'داشبورد';
       this.messageToShow.messageOne = 'گزارش های جامع(قرائت های انجام شده - تصاویر ارسالی- موارد غیرمجاز ثبت شده - گزارشات ثبت شده و ..)';

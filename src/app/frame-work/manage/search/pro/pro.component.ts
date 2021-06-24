@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { Search } from 'src/app/classes/search';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { IOnOffLoadFlat, ISearchMoshReq } from 'src/app/Interfaces/imanage';
+import { IOnOffLoadFlat, ISearchProReportInput } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -10,21 +10,15 @@ import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { SearchService } from 'src/app/services/search.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
+import { SearchDgComponentComponent } from './search-dg-component/search-dg-component.component';
+
 @Component({
   selector: 'app-pro',
   templateUrl: './pro.component.html',
   styleUrls: ['./pro.component.scss']
 })
 export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
-  searchReq: ISearchMoshReq = {
-    zoneId: null,
-    searchBy: null,
-    item: '',
-    similar: true
-  }
-  dataSource: IOnOffLoadFlat[] = [];
-  searchType: Search[];
-  searchByText: string = '';
+
   _empty_message: string = '';
 
   _selectCols: any[] = [];
@@ -32,23 +26,27 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
 
   subscription: Subscription[] = [];
 
+  dataSource: IOnOffLoadFlat[] = [];
+  searchReq: ISearchProReportInput;
   zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
+  ref: DynamicDialogRef;
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public searchService: SearchService,
     public outputManagerService: OutputManagerService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private dialogService: DialogService,
   ) {
   }
 
   insertSelectedColumns = () => {
-    this._selectCols = this.searchService.columnSearchMoshtarakin();
+    this._selectCols = this.searchService.columnSearchPro();
     this._selectedColumns = this.searchService.customizeSelectedColumns(this._selectCols);
   }
   converts = () => {
@@ -63,9 +61,7 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    if (!this.searchService.verificationMosh(this.searchReq))
-      return;
-    this.dataSource = await this.searchService.searchMoshterakin(this.searchReq);
+    this.dataSource = await this.searchService.searchPro(this.searchReq);
     this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
     this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
@@ -73,22 +69,20 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.converts();
 
-    this.closeTabService.saveDataForSearchMoshtarakin = this.dataSource;
+    this.closeTabService.saveDataForSearchPro = this.dataSource;
   }
-  nullSavedSource = () => this.closeTabService.saveDataForSearchMoshtarakin = null;
+  nullSavedSource = () => this.closeTabService.saveDataForSearchPro = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
-      this.dataSource = this.closeTabService.saveDataForSearchMoshtarakin;
+    if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchPro)) {
+      this.dataSource = this.closeTabService.saveDataForSearchPro;
       this.converts();
     }
     else
       this.toDefaultVals();
 
-    this.searchType = this.searchService.getSearchTypes();
-    this.zoneDictionary = await this.searchService.getZoneDictionary();
   }
   ngOnInit() {
     this.classWrapper();
@@ -125,4 +119,15 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource = [];
   }
 
+  showSearchOptionsDialog = () => {
+    this.ref = this.dialogService.open(SearchDgComponentComponent, {
+      rtl: true,
+      width: '80%'
+    })
+    this.ref.onClose.subscribe((res: ISearchProReportInput) => {
+      if (res)
+        console.log(res);
+
+    });
+  }
 }

@@ -333,7 +333,28 @@ export class SectionsService {
         this.setNewForm(this.dynamicValue.fazelabFormula);
     }
 
-    // 
+    // reading managers
+    if (this.dynamicValue.hasOwnProperty('columnId')) {
+      if (!this.utilsService.isNull(this.dynamicValue.columnId))
+        this.setNewForm(this.dynamicValue.fazelabFormula);
+    }
+    if (this.dynamicValue.hasOwnProperty('itemTitle')) {
+      if (!this.utilsService.isNull(this.dynamicValue.itemTitle))
+        this.setNewForm(this.dynamicValue.fazelabFormula);
+    }
+    if (this.dynamicValue.hasOwnProperty('startIndex')) {
+      if (!this.utilsService.isNull(this.dynamicValue.startIndex))
+        this.setNewForm(this.dynamicValue.fazelabFormula);
+    }
+    if (this.dynamicValue.hasOwnProperty('endIndex')) {
+      if (!this.utilsService.isNull(this.dynamicValue.endIndex))
+        this.setNewForm(this.dynamicValue.fazelabFormula);
+    }
+    if (this.dynamicValue.hasOwnProperty('length')) {
+      if (!this.utilsService.isNull(this.dynamicValue['length']))
+        this.setNewForm(this.dynamicValue.fazelabFormula);
+    }
+
     return this.form.value;
   }
 

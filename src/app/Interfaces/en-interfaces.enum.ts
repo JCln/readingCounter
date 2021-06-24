@@ -97,6 +97,10 @@ export enum ENInterfaces {
     FormulaTabsare3Remove = 'V1/Tabsare3Formula/Remove',
 
     textOutputGET = 'V1/TextOutputField/All',
+    textOutputRemove = 'V1/TextOutputField/Remove',
+    textOutputAdd = 'V1/TextOutputField/Add',
+    textOutputEdit = 'V1/TextOutputField/Edit',
+
     userGET = 'V1/User/All',
     userEDIT = 'V1/user/Edit',
     userADD = 'V1/user/Add',
@@ -110,6 +114,7 @@ export enum ENInterfaces {
     fragmentMASTEREDIT = 'V1/Fragment/Master/Edit',
     fragmentMASTERADD = 'V1/Fragment/Master/Add',
     fragmentMASTERVALIDATE = 'V1/Fragment/Master/Validate',
+    fragmentMasterInZone = `V1/Fragment/Master/InZone/`,
     fragmentDETAILSDETAILS = 'V1/Fragment/Details',
     fragmentDETAILSREMOVE = 'V1/Fragment/Detials/Remove',
     fragmentDETAILSEDIT = 'V1/Fragment/Details/Edit',
@@ -137,6 +142,7 @@ export enum ENInterfaces {
     trackingPostOffloadModify = 'V1/OffLoad/Modify',
 
     ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
+    ListSearchPro = 'V1/List/Search/Pro',
     ListTraverse = 'V1/List/Offloaded/Traverse',
     ListTraverseDifferential = 'V1/List/Offloaded/TraverseDifferential',
     ListTraverseDifferentialDictionary = 'V1/List/TraverseDifferential/Dictionary',

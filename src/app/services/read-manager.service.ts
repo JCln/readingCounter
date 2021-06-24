@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ITextOutput } from 'src/app/Interfaces/imanage';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { EN_messages } from '../Interfaces/enums.enum';
@@ -84,7 +85,7 @@ export class ReadManagerService {
   ]
   private _textOutput = [
     { field: 'itemTitle', header: 'عنوان', isSelected: true, readonly: true },
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
     { field: 'startIndex', header: 'ابتدا', isSelected: true, readonly: true },
     { field: 'endIndex', header: 'انتها', isSelected: true, readonly: true },
     { field: 'length', header: 'طول', isSelected: true, readonly: true }
@@ -137,10 +138,28 @@ export class ReadManagerService {
       console.error(error);
     }
   }
+  postTextOutputDATA = (method: ENInterfaces, body: object): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
+          this.utilsService.snackBarMessageSuccess(res.message);
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   /* VERIFICATION & VALIDATION */
   verification = (dataSource: any): boolean => {
     this.sectionsService.setSectionsValue(dataSource);
     if (!this.sectionsService.sectionVertification())
+      return false;
+    return true;
+  }
+  verificationTextOutputEditedRow = (dataSource: ITextOutput): boolean => {
+    this.sectionsService.setSectionsValue(dataSource);
+    if (!this.sectionsService.createFormGroup())
       return false;
     return true;
   }

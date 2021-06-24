@@ -33,7 +33,9 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
             <th style="width: 4rem"></th>
@@ -59,14 +61,26 @@
                     </p-cellEditor>
                 </ng-container>
                 <ng-template #selectOption>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{dataSource[col.field]}}
-                        </ng-template>
-                    </p-cellEditor>
+                    <ng-container *ngIf="col.isBoolean; else elseTemplate">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{dataSource[col.field]}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-template>
                 </ng-template>
             </td>
             <td style="text-align: center;">

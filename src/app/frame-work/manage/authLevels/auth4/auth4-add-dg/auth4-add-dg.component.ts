@@ -20,10 +20,11 @@ export class Auth4AddDgComponent {
     data = data.di;
     this.form = fb.group({
       title: ['', Validators.required],
-      authLevel3Id: data.authLevel3Id,
+      authLevel3Id: [data.authLevel3Id, Validators.required],
       value: ['', Validators.required],
       cssClass: [''],
-      logicalOrder: ['', Validators.required]
+      logicalOrder: ['', Validators.required],
+      isSidebar: [false]
     })
   }
   save() {

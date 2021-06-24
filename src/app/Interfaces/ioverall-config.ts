@@ -102,6 +102,11 @@ export interface ITitleValue {
     title: string;
     value: number;
 }
+export interface ITHV {
+    title: string,
+    header: string,
+    value: number
+}
 export interface IObjectIteratation {
     field: string;
     header: string;
@@ -180,3 +185,10 @@ export enum ENSearch {
     readCode = 'قرائت',
     billId = 'شناسه قبض',
 }
+export const IMasrafStates: ITHV[] = [
+    { title: 'normal', header: 'عادی', value: 0 },
+    { title: 'down', header: 'پایین', value: 1 },
+    { title: 'up', header: 'بالا', value: 2 },
+    { title: 'zero', header: 'صفر', value: 3 },
+    { title: 'inCalculable', header: 'غیرقابل محاسبه', value: 4 }
+]

@@ -37,9 +37,14 @@
     font-weight: 600;
   }
 
+  .p-multiselect {
+    border-radius: 7px;
+  }
+
   .p-dropdown {
     height: 2.8rem;
     border-radius: 10px;
+    min-width: 200px;
   }
 
   .p-column-filter-row {
@@ -87,6 +92,7 @@
   .header_icons_wrap {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 0 $font_05;
     width: 100%;
 

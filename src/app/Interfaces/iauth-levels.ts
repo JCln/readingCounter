@@ -31,6 +31,7 @@ export interface IAuthLevel4 {
     value: string;
     cssClass: string;
     logicalorder: number;
+    isSidebar: boolean
 }
 
 

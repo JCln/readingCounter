@@ -1,6 +1,7 @@
 <h2 mat-dialog-title [ngClass]="{'_delete_style': data?.isDelete }">{{data.title}}</h2>
 
-<input *ngIf="data.isInput" class="input_1" type="text" [(ngModel)]="userInputText">
+<input *ngIf="data.isInput" class="input_1" type="text" placeholder="توضیحات را وارد نمایید"
+    [(ngModel)]="userInputText">
 
 <mat-dialog-actions>
     <button class="btn_2" (click)="cancel()">بازگشت</button>

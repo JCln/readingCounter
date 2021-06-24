@@ -32,19 +32,19 @@ export class AuthsManagerService {
   ) { }
 
   /* COLUMNS */
-  private _auth1 = [
+  private _auth1: IObjectIteratation[] = [
     { field: 'title', header: 'عنوان', isSelected: true },
     { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
     { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true }
   ];
-  private _auth2 = [
+  private _auth2: IObjectIteratation[] = [
     { field: 'title', header: 'عنوان', isSelected: true },
     { field: 'authLevel1Id', header: 'app', isSelected: true, isSelectOption: true },
     { field: 'cssClass', header: 'کلاس css', isSelected: false },
     { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
     { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
   ];
-  private _auth3 = [
+  private _auth3: IObjectIteratation[] = [
     { field: 'title', header: 'عنوان', isSelected: true },
     { field: 'authLevel2Id', header: 'ماژول', isSelected: true, isSelectOption: true },
     { field: 'cssClass', header: 'کلاس css', isSelected: false },
@@ -54,12 +54,13 @@ export class AuthsManagerService {
     { field: 'isClosable', header: 'قابل بستن', isSelected: false, isBoolean: true },
     { field: 'isRefreshable', header: 'قابل refresh', isSelected: false, isBoolean: true }
   ];
-  private _auth4 = [
+  private _auth4: IObjectIteratation[] = [
     { field: 'title', header: 'عنوان', isSelected: true },
     { field: 'authLevel3Id', header: 'کنترلر', isSelected: true, isSelectOption: true },
     { field: 'value', header: 'مقدار', isSelected: false },
     { field: 'cssClass', header: 'کلاس css', isSelected: false },
-    { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
+    { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
+    { field: 'isSidebar', header: 'در سایدبار', isSelected: false, isBoolean: true }
   ];
 
   columnAuth1 = (): IObjectIteratation[] => {

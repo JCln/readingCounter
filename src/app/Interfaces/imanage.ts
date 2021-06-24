@@ -443,7 +443,7 @@ export interface IManageServer {
 
 export interface ITextOutput {
     id: number,
-    zoneId: number,
+    zoneId: number | string,
     itemTitle: string,
     startIndex: number,
     endIndex: number,
@@ -776,7 +776,7 @@ export interface ISearchMoshReq {
     item: string,
     similar: boolean
 }
-export interface IProReportInput {
+export interface ISearchProReportInput {
     zoneId: number,
     zoneIds: [
         number

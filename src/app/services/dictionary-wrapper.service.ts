@@ -195,6 +195,13 @@ export class DictionaryWrapperService {
     });
 
   }
+  getReadingPeriodDictionary = (kindId: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.readingPeriodByKindDictionary, kindId).toPromise().then((res: any) => {
+        resolve(res)
+      })
+    });
+  }
   getKarbariDictionary(): Promise<any> {
     if (!this.utilsService.isNull(this.karbariDictionary))
       return this.karbariDictionary;

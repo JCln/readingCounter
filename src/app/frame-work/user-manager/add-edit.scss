@@ -121,7 +121,7 @@
 }
 
 .auth_3 {
-  margin: $font_05 4rem$font_05 $font_xxs;
+  margin: $font_05 4rem $font_05 $font_xxs;
   padding: $font_05;
   border-radius: $border_15;
   box-shadow: 0px 2px 3px 1.5px $gray_400;
@@ -129,7 +129,7 @@
 
 .auth_4 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   gap: .3rem;
   background: $gray_100;
   border: 1px solid $blue_600;

@@ -427,15 +427,7 @@ export class ReadingReportManagerService {
     }
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.readingPeriodByKindDictionary, kindId).subscribe((res: any) => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
   }
   getReadingPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();

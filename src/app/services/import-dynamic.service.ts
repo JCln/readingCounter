@@ -63,7 +63,7 @@ export class ImportDynamicService {
     if (!this.NANValidation(this.importDynamicValue.fromEshterak, EN_messages.format_invalid_to_esterak))
       return false;
 
-    if (!this.utilsService.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 10)) {
+    if (!this.utilsService.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 15)) {
       this.snackWrapperService.openSnackBar(EN_messages.format_invalid_esterak, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }

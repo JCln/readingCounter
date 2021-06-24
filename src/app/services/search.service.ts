@@ -6,8 +6,9 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 import { Search } from '../classes/search';
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { IOnOffLoadFlat, ISearchMoshReq } from '../Interfaces/imanage';
-import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
+import { IOnOffLoadFlat, ISearchMoshReq, ISearchProReportInput } from '../Interfaces/imanage';
+import { IDictionaryManager, IObjectIteratation, ITitleValue } from '../Interfaces/ioverall-config';
+import { IMasrafStates } from './../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
 
 @Injectable({
@@ -168,8 +169,32 @@ export class SearchService {
   getQotrDictionary = () => {
     return this.dictionaryWrapperService.getQotrDictionary();
   }
+  getReadingPeriodDictionary = (kindId: string): Promise<any> => {
+    return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
+  }
+  getReadingPeriodKindDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getPeriodKindDictionary();
+  }
+  getFragmentMasterInZone = (zoneId: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.fragmentMasterInZone, zoneId).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
+  }
+  searchPro = (body: ISearchProReportInput): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.ListSearchPro, body).toPromise().then(res => {
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
   searchMoshterakin = (body: ISearchMoshReq): Promise<any> => {
     try {
@@ -183,7 +208,7 @@ export class SearchService {
     }
   }
   /*VALIDATION*/
-  private validationNull = (object: ISearchMoshReq): boolean => {
+  private validationNull = (object: any): boolean => {
     if (object.hasOwnProperty('zoneId')) {
       if (this.utilsService.isNull(object.zoneId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
@@ -198,6 +223,19 @@ export class SearchService {
     }
     if (object.hasOwnProperty('item')) {
       if (this.utilsService.isNull(object.item)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+        return false;
+      }
+    }
+    // for search pro
+    if (object.hasOwnProperty('fromDate')) {
+      if (this.utilsService.isNull(object.fromDate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+        return false;
+      }
+    }
+    if (object.hasOwnProperty('fromDate')) {
+      if (this.utilsService.isNull(object.fromDate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
         return false;
       }
@@ -223,7 +261,9 @@ export class SearchService {
   verificationMosh = (searchReq: ISearchMoshReq): boolean => {
     return this.validationNull(searchReq) && this.validationNumbers(searchReq)
   }
-
+  verificationPro = (searchReq: ISearchProReportInput): boolean => {
+    return;
+  }
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
       if (item.newRate > 0)
@@ -248,5 +288,11 @@ export class SearchService {
           old.isSelected = true;
       })
     })
+  }
+  getYears = (): ITitleValue[] => {
+    return this.utilsService.getYears();
+  }
+  getMasrafStates = () => {
+    return IMasrafStates;
   }
 }

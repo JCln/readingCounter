@@ -56,6 +56,31 @@ footer {
   text-align: center;
 }
 
+.order_by {
+  display: flex;
+  margin: $font_xs;
+}
+
+hr {
+  margin: 0 4rem;
+  background-color: $blue_700;
+  height: .2rem;
+  margin-bottom: $font_xxs;
+}
+
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: $gray_600;
+  margin: 0 2rem;
+}
+
 ::ng-deep {
   .mat-select-arrow {
     color: $gray_100;
@@ -94,31 +119,6 @@ footer {
     font-weight: 600;
     color: $blue_gray_700;
   }
-}
-
-.order_by {
-  display: flex;
-  margin: $font_xs;
-}
-
-hr {
-  margin: 0 4rem;
-  background-color: $blue_700;
-  height: .2rem;
-  margin-bottom: $font_xxs;
-}
-
-.radio_group {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.radio_button {
-  font-size: $font_s;
-  font-weight: 700;
-  font-family: inherit;
-  color: $gray_600;
-  margin: 0 2rem;
 }
 
 ::ng-deep {

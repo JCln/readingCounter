@@ -1,0 +1,133 @@
+@import '../../../../../../assets/primeNG.scss';
+@import '../../../../../../assets/input.scss';
+@import '../../../../../../assets/button.scss';
+@import '../../../../../../assets/mat';
+
+form {
+  font-family: $font_family;
+}
+
+.main_content {
+  display: grid;
+  direction: rtl;
+  background: $gray_100;
+  box-shadow: 1px 1px 8px 4px $gray_200;
+  text-align: center;
+  padding: $font_xs 0.2rem 6rem 0.2rem;
+  border-radius: $border_15;
+  gap: .2rem;
+}
+
+._toselect {
+  grid-column: 1/6;
+
+  .__content {
+    gap: $font_xs;
+    grid-template-columns: repeat(auto-fit, minmax(45%, auto));
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+._more_options {
+  grid-column: 6/8;
+}
+
+app-date-jalali {
+  padding: $font_05 $font_xs;
+  background: $white;
+  border-radius: $border_5;
+  border: 1px solid $gray_300;
+}
+
+.p-dropdown.p-dropdown-clearable .p-dropdown-label {
+  min-width: 5rem;
+}
+
+.ui-float-label {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-weight: 600;
+  font-size: $font_m;
+  font-weight: 600;
+}
+
+.title {
+  color: $blue_400;
+  text-align: center;
+  // font-size: ;
+}
+
+article {
+  padding: $font_xs $font_05 $font_05;
+  border-radius: $border_15;
+  background-color: $gray_300;
+  margin: $font_05 0;
+
+  &:nth-child(odd) {}
+}
+
+.btn_2_o {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: $font_s auto;
+  font-family: $font_family;
+}
+
+hr {
+  margin-bottom: $font_xs;
+}
+
+.p-dropdown {
+  border-radius: 5px;
+  height: 3.35rem;
+}
+
+[hidden] {
+  display: none;
+}
+
+
+// materials 
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: $gray_600;
+  margin: 0 2rem;
+}
+
+::ng-deep {
+  .mat-checkbox-layout {
+    .mat-checkbox-label {
+      margin: 0 $font_05;
+      font-size: $font_s;
+      font-weight: 600;
+      color: $blue_700;
+      line-height: 2;
+      border-radius: $border_15;
+      font-family: $font_family;
+    }
+  }
+
+  .mat-radio-label-content {
+    padding-right: $font_05 !important;
+    color: $blue_gray_300;
+  }
+}
+
+// dialog conf
+:host ::ng-deep {
+  .p-dialog .p-dialog-header {
+    background-color: $blue_gray_300;
+    direction: rtl;
+  }
+}

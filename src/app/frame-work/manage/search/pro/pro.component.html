@@ -1,43 +1,6 @@
-<main class="main">
-    <form #form="ngForm" (ngSubmit)="connectToServer()">
-        <section class="content">
-
-            <div class="input_2">
-                <div class="_key">نوع جستجو</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchReq.searchBy" name="searchType">
-                    <mat-option *ngFor="let truefalse of searchType" [value]="truefalse.id">
-                        {{truefalse.searchBy}}
-                    </mat-option>
-                </mat-select>
-            </div>
-            <div class="input_2">
-                <div class="_key">ناحیه</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchReq.zoneId" name="zoneId">
-                    <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
-            </div>
-            <input class="input_1" type="number" placeholder="مقدار را وارد نمایید " name="counterNumber"
-                [(ngModel)]="searchReq.item" autofocus style="min-width: auto;">
-
-            <div class="check_boxes">
-                <mat-checkbox name="similar" [(ngModel)]="searchReq.similar">جستجوی موارد مشابه</mat-checkbox>
-            </div>
-        </section>
-        <footer>
-            <button type="submit" class="tooltip btn_2_o">
-                <i class="pi pi-search"></i>
-                جستجو
-            </button>
-        </footer>
-    </form>
-</main>
-
-
-<p-table *ngIf="dataSource.length" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[20,50,100, 500]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
+<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
+    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[20,50,100, 500]"
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -59,8 +22,11 @@
                 </i>
             </div>
             <div class="left_side">
+                <i (click)="showSearchOptionsDialog()" class="tooltip _circle_border p_icons pi pi-search">
+                    <div class="tooltip_text">جستجو</div>
+                </i>
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
             </div>
         </div>

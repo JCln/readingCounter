@@ -213,7 +213,7 @@ export class FragmentManagerService {
       return false;
     }
 
-    if (!this.utilsService.lengthControl(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak, 5, 10)) {
+    if (!this.utilsService.lengthControl(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak, 5, 15)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
       return false;
     }
@@ -242,7 +242,7 @@ export class FragmentManagerService {
       return false;
     }
 
-    if (!this.utilsService.lengthControl(fragmentMaster.fromEshterak, fragmentMaster.toEshterak, 5, 10)) {
+    if (!this.utilsService.lengthControl(fragmentMaster.fromEshterak, fragmentMaster.toEshterak, 5, 15)) {
       return false;
     }
     return true;
@@ -272,7 +272,7 @@ export class FragmentManagerService {
       return false;
     }
 
-    if (!this.utilsService.lengthControl(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak, 5, 10)) {
+    if (!this.utilsService.lengthControl(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak, 5, 15)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
       return false;
     }
@@ -297,7 +297,7 @@ export class FragmentManagerService {
       return false;
     if (!this.utilsService.isSameLength(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
       return false;
-    if (!this.utilsService.lengthControl(fragmentDetails.fromEshterak, fragmentDetails.toEshterak, 5, 10))
+    if (!this.utilsService.lengthControl(fragmentDetails.fromEshterak, fragmentDetails.toEshterak, 5, 15))
       return false;
     return true;
   }
