@@ -81,11 +81,12 @@ export interface IUserEditManager {
     }
 }
 export interface IRoleManager {
-    id: number;
+    id?: number;
     title: string;
     isActive: boolean
     needDeviceIdLogin: boolean;
     titleUnicode: string;
+    isNew?: boolean
 }
 export interface IAUserEditSave {
     selectedRoles: number[],

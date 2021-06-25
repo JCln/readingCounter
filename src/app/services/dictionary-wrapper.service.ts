@@ -25,6 +25,7 @@ export class DictionaryWrapperService {
   private authLev4Dictionary: any = [];
 
   private counterReportDictionary: any = [];
+  private counterReportByZoneDictionary: any = [];
   private counterStateDictionary: any = [];
   private counterStateByZoneIdDictionary: any = [];
   private counterStateByCodeDictionary: any = [];
@@ -155,7 +156,14 @@ export class DictionaryWrapperService {
         resolve(this.counterReportDictionary);
       })
     });
-
+  }
+  getCounterReportByZoneIdDictionary(zoneId: number): Promise<any> {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.CounterReportByZoneIdDICTIONARY, zoneId).subscribe(res => {
+        this.setCounterReportByZoneDictionary(res);
+        resolve(this.counterReportByZoneDictionary);
+      })
+    });
   }
   getCounterStateDictionary(): Promise<any> {
     if (!this.utilsService.isNull(this.counterStateDictionary))
@@ -280,6 +288,9 @@ export class DictionaryWrapperService {
   }
   private setCounterReportDictionary(v: any) {
     this.counterReportDictionary = v;
+  }
+  private setCounterReportByZoneDictionary(v: any) {
+    this.counterReportByZoneDictionary = v;
   }
   private setCounterStateDictionary(v: any) {
     this.counterStateDictionary = v;

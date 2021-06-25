@@ -75,6 +75,13 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
+      this.searchReq = this.searchService.getSearchPro();
+      if (this.utilsService.isNull(this.searchReq)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
+        return;
+      }
+      if (!this.searchService.verificationPro(this.searchReq))
+        this.connectToServer();
     }
     if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchPro)) {
       this.dataSource = this.closeTabService.saveDataForSearchPro;
@@ -113,7 +120,7 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   refreshTable = () => {
-    this.connectToServer();
+    this.classWrapper(true);
   }
   toDefaultVals = () => {
     this.dataSource = [];
@@ -125,9 +132,10 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
       width: '80%'
     })
     this.ref.onClose.subscribe((res: ISearchProReportInput) => {
-      if (res)
-        console.log(res);
-
+      if (res) {
+        this.searchReq = res;
+        this.connectToServer();
+      }
     });
   }
 }

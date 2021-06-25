@@ -6,7 +6,7 @@ import { Table } from 'primeng/table';
 })
 export class AddRowDirective {
   @Input() table: Table;
-  @Input() newRow: any;
+  @Input() newRow: object;
   @Input() newRowLimit: number;
 
   @HostListener('click', ['$event'])

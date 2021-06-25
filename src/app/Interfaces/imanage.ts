@@ -442,12 +442,13 @@ export interface IManageServer {
 }
 
 export interface ITextOutput {
-    id: number,
+    id?: number,
     zoneId: number | string,
     itemTitle: string,
-    startIndex: number,
-    endIndex: number,
-    length: number
+    startIndex: any,
+    endIndex: any,
+    length: any,
+    isNew: boolean
 }
 // reading report manager(reports)
 export interface IReadingReportReq {
@@ -778,26 +779,14 @@ export interface ISearchMoshReq {
 }
 export interface ISearchProReportInput {
     zoneId: number,
-    zoneIds: [
-        number
-    ],
+    zoneIds: number[],
     fromDate: string,
     toDate: string,
     readingPeriodId: number,
     year: number,
-    reportIds: [
-        number
-    ],
-    counterStateIds: [
-        number
-    ],
-    masrafStates: [
-        number
-    ],
-    karbariCodes: [
-        number
-    ],
-    fragmentMasterIds: [
-        string
-    ]
+    reportIds: number[],
+    counterStateIds: number[],
+    masrafStates: number[],
+    karbariCodes: number[],
+    fragmentMasterIds: string[]
 }

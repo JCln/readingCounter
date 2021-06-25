@@ -21,6 +21,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectCols: any[] = [];
   _selectedColumns: any[];
   clonedProducts: { [s: string]: ITextOutput; } = {};
+  newRowLimit: number = 1;
 
   subscription: Subscription[] = [];
 
@@ -47,8 +48,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
     this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
 
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
+    this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.readManagerService.columnTextOutput();
@@ -79,6 +79,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: ITextOutput, rowIndex: number) => {
+    this.defaultAddStatus();
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
       await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputRemove, rowData);
@@ -88,7 +89,23 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   onRowEditInit(dataSource: ITextOutput, rowIndex: number) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
   }
+  onRowEditCancel(dataSource: ITextOutput, index: number) {
+    this.defaultAddStatus();
+    this.dataSource[index] = this.clonedProducts[dataSource.id];
+    delete this.dataSource[dataSource.id];
+    if (dataSource.isNew)
+      this.dataSource.shift();
+    return;
+  }
   async onRowEditSave(dataSource: ITextOutput, rowIndex: number) {
+    this.defaultAddStatus();
+
+    if (dataSource.isNew) {
+      dataSource['endIndex'] = parseInt(dataSource.endIndex);
+      dataSource['startIndex'] = parseInt(dataSource.startIndex);
+      dataSource['length'] = parseInt(dataSource.length);
+    }
+
     if (!this.readManagerService.verificationTextOutputEditedRow(dataSource)) {
       this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
       return;
@@ -101,10 +118,28 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       dataSource.zoneId = dataSource.zoneId['id'];
     }
-    await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputEdit, dataSource);
+    if (dataSource.isNew) {
+      delete dataSource.isNew;
+      await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputAdd, dataSource);
+    }
+    else {
+      delete dataSource.isNew;
+      await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputEdit, dataSource);
+    }
     this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
-
+  newRow(): ITextOutput {
+    return {
+      zoneId: null,
+      itemTitle: '',
+      startIndex: null,
+      endIndex: null,
+      length: null,
+      isNew: true
+    };
+  }
+  defaultAddStatus = () => this.newRowLimit = 1;
+  testChangedValue = () => this.newRowLimit = 2;
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }

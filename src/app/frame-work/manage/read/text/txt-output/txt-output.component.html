@@ -1,7 +1,7 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session"
-    stateKey="txt-output-session">
+<p-table #dtableTextOutput [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="[10,25,50]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
+    stateStorage="session" stateKey="txt-output-session" dataKey="id" editMode="row">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
@@ -22,6 +22,10 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
+                <i appAddRow [table]="dtableTextOutput" [newRow]="newRow()" [newRowLimit]="newRowLimit"
+                    (click)="testChangedValue()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن</div>
+                </i>
             </div>
             <div class="left_side">
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
@@ -37,22 +41,22 @@
                 {{col.header}}
             </th>
             <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>            
+            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
                 <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>            
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
     <ng-template hidden="!dataSource.length" pTemplate="body" let-editing="editing" let-ri="rowIndex" let-dataSource
         let-columns="columns">
-        <tr>
+        <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
-                <ng-container *ngIf="col.isSelectOption ;else selectOption">
+                <ng-container *ngIf="col.isSelectOption ;else simple">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
@@ -64,8 +68,8 @@
                         </ng-template>
                     </p-cellEditor>
                 </ng-container>
-                <ng-template #selectOption>
-                    <p-cellEditor *ngIf="!col.isSelectOption">
+                <ng-template #simple>
+                    <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
                         </ng-template>
@@ -82,9 +86,14 @@
                 </i>
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)"
                     class="_save pi pi-check"></i>
-                <i *ngIf="editing" pCancelEditableRow class="_cancel pi pi-times"></i>
+                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
+                    class="_cancel pi pi-times"></i>
             </td>
-
+            <td>
+                <i *ngIf="!editing" (click)="removeRow(dataSource, ri)" class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف</div>
+                </i>
+            </td>
         </tr>
     </ng-template>
 </p-table>

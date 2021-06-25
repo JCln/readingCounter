@@ -127,11 +127,7 @@ export class SectionsService {
       if (this.utilsService.isNull(this.dynamicValue.formula))
         return false;
     }
-    // users    
-    if (this.dynamicValue.hasOwnProperty('needDeviceIdLogin')) {
-      if (this.utilsService.isNull(this.dynamicValue.needDeviceIdLogin))
-        return false;
-    }
+    // users        
     if (this.dynamicValue.hasOwnProperty('titleUnicode')) {
       if (this.utilsService.isNull(this.dynamicValue.titleUnicode))
         return false;

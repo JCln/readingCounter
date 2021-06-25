@@ -30,8 +30,8 @@ export class UsersAllService {
   ]
   private _userRoles = [
     { field: 'title', header: 'عنوان', isSelected: true },
-    { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
-    { field: 'needDeviceIdLogin', header: 'شماره سریال', isSelected: true, isBoolean: true },
+    // { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
+    { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: true, isBoolean: true },
     { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true }
   ]
   constructor(

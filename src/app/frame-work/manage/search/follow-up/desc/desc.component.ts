@@ -15,12 +15,12 @@ import { TrackingManagerService } from 'src/app/services/tracking-manager.servic
 })
 export class DescComponent implements AfterViewInit, OnDestroy {
   trackNumber: string;
-  defColumns = [
-    { field: 'insertDateJalali', header: 'تاریخ ثبت' },
-    { field: 'inserterCode', header: 'کد کاربر' },
-    { field: 'userDisplayName', header: 'نام نمایش' },
-    { field: 'counterReaderName', header: 'مامور' },
-    { field: 'trackStatusTitle', header: 'وضعیت' }
+  defColumns: IObjectIteratation[] = [
+    { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
+    // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },
+    { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+    { field: 'counterReaderName', header: 'مامور', isSelected: true },
+    { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true }
     // { field: 'seen', header: 'دیده شده' },
     // { field: 'hasDetails', header: 'جزئیات' },
   ]

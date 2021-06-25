@@ -13,7 +13,7 @@ form {
   background: $gray_100;
   box-shadow: 1px 1px 8px 4px $gray_200;
   text-align: center;
-  padding: $font_xs 0.2rem 6rem 0.2rem;
+  padding: $font_xs 0.2rem $font_xs 0.2rem;
   border-radius: $border_15;
   gap: .2rem;
 }
@@ -22,8 +22,8 @@ form {
   grid-column: 1/6;
 
   .__content {
-    gap: $font_xs;
-    grid-template-columns: repeat(auto-fit, minmax(45%, auto));
+    gap: $font_05;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
     display: grid;
     align-items: center;
     justify-content: center;
@@ -32,6 +32,8 @@ form {
 
 ._more_options {
   grid-column: 6/8;
+  background-color: $gray_400;
+  border-radius: 5px;
 }
 
 app-date-jalali {
@@ -61,10 +63,10 @@ app-date-jalali {
 }
 
 article {
-  padding: $font_xs $font_05 $font_05;
+  padding: $font_05;
   border-radius: $border_15;
-  background-color: $gray_300;
-  margin: $font_05 0;
+  background-color: $gray_200;
+  margin: 0.2rem;
 
   &:nth-child(odd) {}
 }
@@ -84,6 +86,7 @@ hr {
 .p-dropdown {
   border-radius: 5px;
   height: 3.35rem;
+  min-width: 200px;
 }
 
 [hidden] {

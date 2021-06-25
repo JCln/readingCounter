@@ -15,6 +15,10 @@ import { ConverterService } from './converter.service';
   providedIn: 'root'
 })
 export class SearchService {
+
+  private _searchReq: ISearchProReportInput;
+  private _isValidateByDate: boolean;
+
   private _searchPro =
     [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
@@ -160,6 +164,9 @@ export class SearchService {
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
+  getCounterReportByZoneDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterReportByZoneIdDictionary(zoneId);
+  }
   getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
@@ -242,6 +249,27 @@ export class SearchService {
     }
     return true;
   }
+  private validationByReadingPeriod = (object: ISearchProReportInput): boolean => {
+    if (object.hasOwnProperty('readingPeriodId')) {
+      if (this.utilsService.isNull(object.readingPeriodId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
+        return false;
+      }
+    }
+    if (object.hasOwnProperty('year')) {
+      if (this.utilsService.isNull(object.year)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
+        return false;
+      }
+    }
+    if (object.hasOwnProperty('zoneId')) {
+      if (this.utilsService.isNull(object.zoneId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
+    return true;
+  }
   private validationNumbers = (object: ISearchMoshReq): boolean => {
     if (object.hasOwnProperty('searchBy')) {
       if (this.utilsService.isNaN(object.searchBy)) {
@@ -257,12 +285,26 @@ export class SearchService {
     }
     return true;
   }
+  private validationDate = (object: ISearchProReportInput): boolean => {
+    if (object.fromDate.length == 10 && object.toDate.length == 10)
+      return true;
+    return false;
+  }
   /*VERIFICATION*/
   verificationMosh = (searchReq: ISearchMoshReq): boolean => {
     return this.validationNull(searchReq) && this.validationNumbers(searchReq)
   }
-  verificationPro = (searchReq: ISearchProReportInput): boolean => {
-    return;
+  verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
+    if (isValidateByDate == true || isValidateByDate == false)
+      this._isValidateByDate = isValidateByDate;
+    this._searchReq = searchReq;
+    if (this._isValidateByDate) {
+      return this.validationNull(searchReq) && this.validationDate(searchReq);
+    }
+    return this.validationByReadingPeriod(searchReq);
+  }
+  getSearchPro = (): ISearchProReportInput => {
+    return this._searchReq;
   }
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {

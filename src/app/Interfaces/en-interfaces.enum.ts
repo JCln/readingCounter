@@ -55,8 +55,8 @@ export enum ENInterfaces {
 
     RoleGET = 'V1/Role/All',
     RoleDICTIONARY = 'V1/Role/Dictionary',
-    RoleREMOVE = 'Role/Remove',
-    RoleEDIT = 'Role/Edit',
+    RoleREMOVE = 'V1/Role/Remove',
+    RoleEDIT = 'V1/Role/Edit',
     RoleADD = 'V1/Role/Add',
 
     downloadFileGET = 'V1/Download/File',
@@ -192,7 +192,8 @@ export enum ENInterfaces {
     CounterReportRemove = 'V1/CounterReport/Remove',
     CounterReportEdit = 'V1/CounterReport/Edit',
     CounterReportAdd = 'V1/CounterReport/Add',
-    CounterReportDICTIONARY = '​V1​/CounterReport​/Dictionary',
+    CounterReportDICTIONARY = 'V1/CounterReport/Dictionary',
+    CounterReportByZoneIdDICTIONARY = `/V1/CounterReport/DictionaryByZoneId/`,
 
     counterReadersByZoneId = `V1/User/CounterReaders/`,
 

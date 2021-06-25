@@ -17,22 +17,24 @@
             <section class="__content">
                 <span class="ui-float-label">
                     <label for="float-input">ناحیه</label>
-                    <p-multiSelect name="zone" [options]="zoneDictionary" [(ngModel)]="searchReq.zoneId"
-                        optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                        [style]="{minWidth: '200px'}" placeholder="انتخاب مورد" (ngModelChange)="getMasterInZone()">
-                    </p-multiSelect>
+                    <p-dropdown [style]="{minWidth: '200px'}" name="zone" #zoneId [options]="zoneDictionary"
+                        name="_selectedKindId" [(ngModel)]="searchReq.zoneId" optionLabel="title" [filter]="true"
+                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
+                        (onChange)="getMasterInZone()">
+                    </p-dropdown>
                 </span>
                 <span class="ui-float-label" [hidden]="_isOrderByDate">
                     <label for="float-input">نوع دوره</label>
-                    <p-dropdown name="kindId" #kindId [options]="readingPeriodKindDictionary" name="_selectedKindId"
-                        [(ngModel)]="_selectedKindId" optionLabel="title" [filter]="true" filterBy="title"
-                        optionValue="id" [showClear]="true" placeholder="انتخاب مورد" (onChange)="getReadingPeriod()">
+                    <p-dropdown [style]="{minWidth: '200px'}" name="kindId" #kindId
+                        [options]="readingPeriodKindDictionary" name="_selectedKindId" [(ngModel)]="_selectedKindId"
+                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        placeholder="انتخاب مورد" (onChange)="getReadingPeriod()">
                     </p-dropdown>
                 </span>
 
                 <span class="ui-float-label" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
                     <label for="float-input">دوره قرائت</label>
-                    <p-dropdown name="period" #period [options]="readingPeriodDictionary" name="readingPeriodId"
+                    <p-dropdown [style]="{minWidth: '200px'}" name="period" #period [options]="readingPeriodDictionary" name="readingPeriodId"
                         [(ngModel)]="searchReq.readingPeriodId" optionLabel="title" [filter]="true" filterBy="title"
                         optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
                     </p-dropdown>
@@ -40,7 +42,7 @@
 
                 <span class="ui-float-label" [hidden]="_isOrderByDate">
                     <label for="float-input">سال</label>
-                    <p-dropdown #year [options]="_years" name="year" [(ngModel)]="searchReq.year" optionLabel="title"
+                    <p-dropdown [style]="{minWidth: '200px'}" #year [options]="_years" name="year" [(ngModel)]="searchReq.year" optionLabel="title"
                         [filter]="true" filterBy="value" optionValue="value" [showClear]="true"
                         placeholder="انتخاب مورد">
                     </p-dropdown>
@@ -66,6 +68,13 @@
                 <p-multiSelect [options]="masrafState" name="masraf" [(ngModel)]="searchReq.masrafStates"
                     optionLabel="header" optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده"
                     [style]="{minWidth: '200px'}" placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+            <article *ngIf="counterReportDictionary.length">
+                <h3 class="title">گزارش کنتور</h3>
+                <p-multiSelect [options]="counterReportDictionary" name="counterReport"
+                    [(ngModel)]="searchReq.reportIds" optionLabel="title" optionValue="id"
+                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '200px'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article *ngIf="counterStateByZoneIdDictionary.length">

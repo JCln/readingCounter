@@ -15,13 +15,13 @@ export class SearchDgComponentComponent implements OnInit {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    zoneIds: [null],
+    zoneIds: [],
     year: 1400,
-    reportIds: [null],
-    counterStateIds: [null],
-    masrafStates: [null],
-    karbariCodes: [null],
-    fragmentMasterIds: ['']
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    fragmentMasterIds: []
   }
   searchInOrderTo: ISearchInOrderTo[] = [
     {
@@ -38,6 +38,7 @@ export class SearchDgComponentComponent implements OnInit {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   counterStateByZoneIdDictionary: IDictionaryManager[] = [];
+  counterReportDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   fragmentMasterIds: any[] = [];
   masrafState: ITHV[] = []
@@ -77,6 +78,7 @@ export class SearchDgComponentComponent implements OnInit {
       return;
 
     this.fragmentMasterIds = await this.searchService.getFragmentMasterInZone(this.searchReq.zoneId);
+    this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(this.searchReq.zoneId);
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
   }
@@ -84,9 +86,7 @@ export class SearchDgComponentComponent implements OnInit {
     this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this._selectedKindId);
   }
   editCloseData() {
-    console.log(this.searchReq);
-
-    if (!this.searchService.verificationPro(this.searchReq))
+    if (!this.searchService.verificationPro(this.searchReq, this._isOrderByDate))
       return;
     this.ref.close(this.searchReq);
   }
