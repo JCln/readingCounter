@@ -57,8 +57,12 @@ export enum EN_messages {
     insert_versionName = 'نام نسخه را وارد نمایید',
     insert_versionCode = 'شماره نسخه را وارد نمایید',
     insert_APK = 'لطفا یک فایل apk انتخاب نمایید',
+    insert_trackNumber = 'شماره پیگیری را وارد نمایید',
     insert_modify_type = 'نوع اصلاح را وارد نمایید',
-
+    
+    format_invalid_trackNumber = 'فرمت شماره پیگیری اشتباه است',
+    format_invalid_trackNumbersLength = 'تعداد ارقام شماره پیگیری اشتباه است',
+    format_invalid_numberLengths = 'تعداد ارقام وارد شده اشتباه است',
     should_insert_APK = 'فرمت ارسالی باید فایل apk باشد',
     format_invalid_excel = 'فرمت ارسالی باید فایل excel باشد',
     invalid_mobile = 'شماره موبایل نادرست است',

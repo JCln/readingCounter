@@ -42,3 +42,9 @@
 }
 
 // 
+._map_frame_show::after {
+  position: absolute;
+  border: 1px solid blue;
+  width: 10rem;
+  height: 4rem;
+}

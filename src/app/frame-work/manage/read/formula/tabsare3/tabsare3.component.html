@@ -5,7 +5,7 @@
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-        (ngModelChange)="formulasService.setColumnsChanges(formulasService.ENSelectedColumnVariables.selectedTabsare3Formulas ,$event)"
+            (ngModelChange)="formulasService.setColumnsChanges(formulasService.ENSelectedColumnVariables.selectedTabsare3Formulas ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
@@ -51,41 +51,9 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="col.field !== 'zoneId' && col.field !== 'karbariMoshtarakinCode'" type="text"
-                    field="{{col.field}}"></p-columnFilter>
-                <p-columnFilter field="zoneId" *ngIf="col.field === 'zoneId'" matchMode="in" display="menu"
-                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-multiSelect [options]="zoneDictionary" (onChange)="filter($event.value)"
-                            optionLabel="zoneId">
-                            {{col.field}}
-                            <ng-template let-option pTemplate="item">
-                                <div class="p-multiselect-representative-option">
-                                    <span class="p-ml-1">{{option.title}}</span>
-                                </div>
-                            </ng-template>
-                        </p-multiSelect>
-                    </ng-template>
-
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                 </p-columnFilter>
-                <p-columnFilter field="karbariMoshtarakinCode" *ngIf="col.field === 'karbariMoshtarakinCode'"
-                    matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false"
-                    [showAddButton]="false">
-
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-multiSelect [options]="zoneDictionary" (onChange)="filter($event.value)"
-                            optionLabel="karbariMoshtarakinCode">
-                            {{col.field}}
-                            <ng-template let-option pTemplate="item">
-                                <div class="p-multiselect-representative-option">
-                                    <span class="p-ml-1">{{option.title}}</span>
-                                </div>
-                            </ng-template>
-                        </p-multiSelect>
-                    </ng-template>
-
-                </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
             <th style="width: 4rem"></th>

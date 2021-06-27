@@ -83,12 +83,13 @@ export class ReadManagerService {
     { field: 'clientOrder', header: 'ترتیب', isSelected: true },
     { field: 'isEnabled', header: 'فعال', isSelected: true, isBoolean: true },
   ]
-  private _textOutput = [
-    { field: 'itemTitle', header: 'عنوان', isSelected: true, readonly: true },
+  private _textOutput: IObjectIteratation[] = [
+    { field: 'id', header: 'کد', isSelected: true, isNumber: true },
+    { field: 'itemTitle', header: 'عنوان', isSelected: true },
     { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
-    { field: 'startIndex', header: 'ابتدا', isSelected: true, readonly: true },
-    { field: 'endIndex', header: 'انتها', isSelected: true, readonly: true },
-    { field: 'length', header: 'طول', isSelected: true, readonly: true }
+    { field: 'startIndex', header: 'ابتدا', isSelected: true, isNumber: true },
+    { field: 'endIndex', header: 'انتها', isSelected: true, isNumber: true },
+    { field: 'length', header: 'طول', isSelected: true, isNumber: true }
   ]
   private _karbari = [
     { field: 'title', header: 'عنوان', isSelected: true },
@@ -159,7 +160,9 @@ export class ReadManagerService {
   }
   verificationTextOutputEditedRow = (dataSource: ITextOutput): boolean => {
     this.sectionsService.setSectionsValue(dataSource);
-    if (!this.sectionsService.createFormGroup())
+    if (!this.sectionsService.sectionVertification())
+      return false;
+    if (!this.sectionsService.verfificationIsNaN())
       return false;
     return true;
   }

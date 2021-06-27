@@ -132,7 +132,12 @@ export class SectionsService {
       if (this.utilsService.isNull(this.dynamicValue.titleUnicode))
         return false;
     }
-
+    //   // reading managers
+    if (this.dynamicValue.hasOwnProperty('itemTitle')) {
+      if (this.utilsService.isNull(this.dynamicValue.itemTitle))
+        return false;
+    }
+    
     return true;
   }
   private fromToValidation = (): boolean => {
@@ -178,6 +183,35 @@ export class SectionsService {
     }
     return true;
   }
+  private validationIsNaN = (): boolean => {
+    if (this.dynamicValue.hasOwnProperty('endIndex')) {
+      if (!this.utilsService.isNaN(this.dynamicValue.endIndex))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('startIndex')) {
+      if (!this.utilsService.isNaN(this.dynamicValue.startIndex))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('length')) {
+      if (!this.utilsService.isNaN(this.dynamicValue['length']))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('fromEshterak')) {
+      if (!this.utilsService.isNaN(this.dynamicValue['fromEshterak']))
+        return false;
+    }
+    if (this.dynamicValue.hasOwnProperty('toEshterak')) {
+      if (!this.utilsService.isNaN(this.dynamicValue['toEshterak']))
+        return false;
+    }
+    return true;
+  }
+  verfificationIsNaN = (): boolean => {
+    if (!this.validationIsNaN()) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_numberLengths)
+      return false;
+    }
+  }
   sectionVertification(): boolean {
     if (!this.sectionsNullVertificate()) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
@@ -187,6 +221,7 @@ export class SectionsService {
       return false;
     if (!this.isFromLowerThanTo())
       return false;
+
     return true;
   }
 
@@ -198,161 +233,161 @@ export class SectionsService {
   setNewForm = (v: any) => {
     this.form[v] = new FormControl('');
   }
-  createFormGroup = (): FormGroup => {
-    if (this.dynamicValue.hasOwnProperty('id')) {
-      if (!this.utilsService.isNull(this.dynamicValue.id))
-        this.setNewForm(this.dynamicValue.id);
-    }
-    if (this.dynamicValue.hasOwnProperty('title')) {
-      if (!this.utilsService.isNull(this.dynamicValue.title))
-        this.setNewForm(this.dynamicValue.title);
-    }
-    if (this.dynamicValue.hasOwnProperty('provinceId')) {
-      if (!this.utilsService.isNull(this.dynamicValue.provinceId))
-        this.setNewForm(this.dynamicValue.provinceId);
-    }
-    if (this.dynamicValue.hasOwnProperty('countryId')) {
-      if (!this.utilsService.isNull(this.dynamicValue.countryId))
-        this.setNewForm(this.dynamicValue.countryId);
-    }
-    if (this.dynamicValue.hasOwnProperty('regionId')) {
-      if (!this.utilsService.isNull(this.dynamicValue.regionId))
-        this.setNewForm(this.dynamicValue.regionId);
-    }
-    if (this.dynamicValue.hasOwnProperty('zoneId')) {
-      if (!this.utilsService.isNull(this.dynamicValue.zoneId))
-        this.setNewForm(this.dynamicValue.zoneId);
-    }
-    if (this.dynamicValue.hasOwnProperty('logicalOrder')) {
-      if (!this.utilsService.isNull(this.dynamicValue.logicalOrder))
-        this.setNewForm(this.dynamicValue.logicalOrder);
-    }
-    if (this.dynamicValue.hasOwnProperty('govermentalCode')) {
-      if (!this.utilsService.isNull(this.dynamicValue.govermentalCode))
-        this.setNewForm(this.dynamicValue.govermentalCode);
-    }
-    if (this.dynamicValue.hasOwnProperty('fromEshterak')) {
-      if (!this.utilsService.isNull(this.dynamicValue.fromEshterak))
-        this.setNewForm(this.dynamicValue.fromEshterak);
-    }
-    if (this.dynamicValue.hasOwnProperty('toEshterak')) {
-      if (!this.utilsService.isNull(this.dynamicValue.toEshterak))
-        this.setNewForm(this.dynamicValue.toEshterak);
-    }
-    if (this.dynamicValue.hasOwnProperty('fromRadif')) {
-      if (!this.utilsService.isNull(this.dynamicValue.fromRadif))
-        this.setNewForm(this.dynamicValue.fromRadif);
-    }
-    if (this.dynamicValue.hasOwnProperty('toRadif')) {
-      if (!this.utilsService.isNull(this.dynamicValue.toRadif))
-        this.setNewForm(this.dynamicValue.toRadif);
-    }
-    if (this.dynamicValue.hasOwnProperty('host')) {
-      if (!this.utilsService.isNull(this.dynamicValue.host))
-        this.setNewForm(this.dynamicValue.host);
-    }
-    if (this.dynamicValue.hasOwnProperty('dbUserName')) {
-      if (!this.utilsService.isNull(this.dynamicValue.dbUserName))
-        this.setNewForm(this.dynamicValue.dbUserName);
-    }
-    if (this.dynamicValue.hasOwnProperty('dbPassword')) {
-      if (!this.utilsService.isNull(this.dynamicValue.dbPassword))
-        this.setNewForm(this.dynamicValue.dbPassword);
-    }
-    if (this.dynamicValue.hasOwnProperty('dbInitialCatalog')) {
-      if (!this.utilsService.isNull(this.dynamicValue.dbInitialCatalog))
-        this.setNewForm(this.dynamicValue.dbInitialCatalog);
-    }
-    // auth level parts
-    if (this.dynamicValue.hasOwnProperty('authLevel3Id')) {
-      if (!this.utilsService.isNull(this.dynamicValue.authLevel3Id))
-        this.setNewForm(this.dynamicValue.authLevel3Id);
-    }
-    if (this.dynamicValue.hasOwnProperty('value')) {
-      if (!this.utilsService.isNull(this.dynamicValue.value))
-        this.setNewForm(this.dynamicValue.value);
-    }
-    if (this.dynamicValue.hasOwnProperty('authLevel1Id')) {
-      if (!this.utilsService.isNull(this.dynamicValue.authLevel1Id))
-        this.setNewForm(this.dynamicValue.authLevel1Id);
-    }
-    if (this.dynamicValue.hasOwnProperty('authLevel2Id')) {
-      if (!this.utilsService.isNull(this.dynamicValue.authLevel2Id))
-        this.setNewForm(this.dynamicValue.authLevel2Id);
-    }
-    // if (this.dynamicValue.hasOwnProperty('route')) {
-    //   if (!this.utilsService.isNull(this.dynamicValue.route))
-    //     this.setNewForm(this.dynamicValue.route);
-    // }
-    // 
-    // periods
-    if (this.dynamicValue.hasOwnProperty('moshtarakinId')) {
-      if (!this.utilsService.isNull(this.dynamicValue.moshtarakinId))
-        this.setNewForm(this.dynamicValue.moshtarakinId);
-    }
-    if (this.dynamicValue.hasOwnProperty('readingPeriodKindId')) {
-      if (!this.utilsService.isNull(this.dynamicValue.readingPeriodKindId))
-        this.setNewForm(this.dynamicValue.readingPeriodKindId);
-    }
-    if (this.dynamicValue.hasOwnProperty('clientOrder')) {
-      if (!this.utilsService.isNull(this.dynamicValue.clientOrder))
-        this.setNewForm(this.dynamicValue.clientOrder);
-    }
-    // 
-    // formulas
-    if (this.dynamicValue.hasOwnProperty('karbariMoshtarakinCode')) {
-      if (!this.utilsService.isNull(this.dynamicValue.karbariMoshtarakinCode))
-        this.setNewForm(this.dynamicValue.karbariMoshtarakinCode);
-    }
-    if (this.dynamicValue.hasOwnProperty('fromDate')) {
-      if (!this.utilsService.isNull(this.dynamicValue.fromDate))
-        this.setNewForm(this.dynamicValue.fromDate);
-    }
-    if (this.dynamicValue.hasOwnProperty('toDate')) {
-      if (!this.utilsService.isNull(this.dynamicValue.toDate))
-        this.setNewForm(this.dynamicValue.toDate);
-    }
-    if (this.dynamicValue.hasOwnProperty('fromRate')) {
-      if (!this.utilsService.isNull(this.dynamicValue.fromRate))
-        this.setNewForm(this.dynamicValue.fromRate);
-    }
-    if (this.dynamicValue.hasOwnProperty('toRate')) {
-      if (!this.utilsService.isNull(this.dynamicValue.toRate))
-        this.setNewForm(this.dynamicValue.toRate);
-    }
-    if (this.dynamicValue.hasOwnProperty('abFormula')) {
-      if (!this.utilsService.isNull(this.dynamicValue.abFormula))
-        this.setNewForm(this.dynamicValue.abFormula);
-    }
-    if (this.dynamicValue.hasOwnProperty('fazelabFormula')) {
-      if (!this.utilsService.isNull(this.dynamicValue.fazelabFormula))
-        this.setNewForm(this.dynamicValue.fazelabFormula);
-    }
+  // createFormGroup = (): FormGroup => {
+  //   if (this.dynamicValue.hasOwnProperty('id')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.id))
+  //       this.setNewForm(this.dynamicValue.id);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('title')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.title))
+  //       this.setNewForm(this.dynamicValue.title);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('provinceId')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.provinceId))
+  //       this.setNewForm(this.dynamicValue.provinceId);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('countryId')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.countryId))
+  //       this.setNewForm(this.dynamicValue.countryId);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('regionId')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.regionId))
+  //       this.setNewForm(this.dynamicValue.regionId);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('zoneId')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.zoneId))
+  //       this.setNewForm(this.dynamicValue.zoneId);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('logicalOrder')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.logicalOrder))
+  //       this.setNewForm(this.dynamicValue.logicalOrder);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('govermentalCode')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.govermentalCode))
+  //       this.setNewForm(this.dynamicValue.govermentalCode);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('fromEshterak')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.fromEshterak))
+  //       this.setNewForm(this.dynamicValue.fromEshterak);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('toEshterak')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.toEshterak))
+  //       this.setNewForm(this.dynamicValue.toEshterak);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('fromRadif')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.fromRadif))
+  //       this.setNewForm(this.dynamicValue.fromRadif);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('toRadif')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.toRadif))
+  //       this.setNewForm(this.dynamicValue.toRadif);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('host')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.host))
+  //       this.setNewForm(this.dynamicValue.host);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('dbUserName')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.dbUserName))
+  //       this.setNewForm(this.dynamicValue.dbUserName);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('dbPassword')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.dbPassword))
+  //       this.setNewForm(this.dynamicValue.dbPassword);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('dbInitialCatalog')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.dbInitialCatalog))
+  //       this.setNewForm(this.dynamicValue.dbInitialCatalog);
+  //   }
+  //   // auth level parts
+  //   if (this.dynamicValue.hasOwnProperty('authLevel3Id')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.authLevel3Id))
+  //       this.setNewForm(this.dynamicValue.authLevel3Id);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('value')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.value))
+  //       this.setNewForm(this.dynamicValue.value);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('authLevel1Id')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.authLevel1Id))
+  //       this.setNewForm(this.dynamicValue.authLevel1Id);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('authLevel2Id')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.authLevel2Id))
+  //       this.setNewForm(this.dynamicValue.authLevel2Id);
+  //   }
+  //   // if (this.dynamicValue.hasOwnProperty('route')) {
+  //   //   if (!this.utilsService.isNull(this.dynamicValue.route))
+  //   //     this.setNewForm(this.dynamicValue.route);
+  //   // }
+  //   // 
+  //   // periods
+  //   if (this.dynamicValue.hasOwnProperty('moshtarakinId')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.moshtarakinId))
+  //       this.setNewForm(this.dynamicValue.moshtarakinId);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('readingPeriodKindId')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.readingPeriodKindId))
+  //       this.setNewForm(this.dynamicValue.readingPeriodKindId);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('clientOrder')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.clientOrder))
+  //       this.setNewForm(this.dynamicValue.clientOrder);
+  //   }
+  //   // 
+  //   // formulas
+  //   if (this.dynamicValue.hasOwnProperty('karbariMoshtarakinCode')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.karbariMoshtarakinCode))
+  //       this.setNewForm(this.dynamicValue.karbariMoshtarakinCode);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('fromDate')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.fromDate))
+  //       this.setNewForm(this.dynamicValue.fromDate);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('toDate')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.toDate))
+  //       this.setNewForm(this.dynamicValue.toDate);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('fromRate')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.fromRate))
+  //       this.setNewForm(this.dynamicValue.fromRate);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('toRate')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.toRate))
+  //       this.setNewForm(this.dynamicValue.toRate);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('abFormula')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.abFormula))
+  //       this.setNewForm(this.dynamicValue.abFormula);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('fazelabFormula')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.fazelabFormula))
+  //       this.setNewForm(this.dynamicValue.fazelabFormula);
+  //   }
 
-    // reading managers
-    if (this.dynamicValue.hasOwnProperty('columnId')) {
-      if (!this.utilsService.isNull(this.dynamicValue.columnId))
-        this.setNewForm(this.dynamicValue.fazelabFormula);
-    }
-    if (this.dynamicValue.hasOwnProperty('itemTitle')) {
-      if (!this.utilsService.isNull(this.dynamicValue.itemTitle))
-        this.setNewForm(this.dynamicValue.fazelabFormula);
-    }
-    if (this.dynamicValue.hasOwnProperty('startIndex')) {
-      if (!this.utilsService.isNull(this.dynamicValue.startIndex))
-        this.setNewForm(this.dynamicValue.fazelabFormula);
-    }
-    if (this.dynamicValue.hasOwnProperty('endIndex')) {
-      if (!this.utilsService.isNull(this.dynamicValue.endIndex))
-        this.setNewForm(this.dynamicValue.fazelabFormula);
-    }
-    if (this.dynamicValue.hasOwnProperty('length')) {
-      if (!this.utilsService.isNull(this.dynamicValue['length']))
-        this.setNewForm(this.dynamicValue.fazelabFormula);
-    }
+  //   // reading managers
+  //   if (this.dynamicValue.hasOwnProperty('columnId')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.columnId))
+  //       this.setNewForm(this.dynamicValue.columnId);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('itemTitle')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.itemTitle))
+  //       this.setNewForm(this.dynamicValue.itemTitle);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('startIndex')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.startIndex))
+  //       this.setNewForm(this.dynamicValue.startIndex);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('endIndex')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue.endIndex))
+  //       this.setNewForm(this.dynamicValue.endIndex);
+  //   }
+  //   if (this.dynamicValue.hasOwnProperty('length')) {
+  //     if (!this.utilsService.isNull(this.dynamicValue['length']))
+  //       this.setNewForm(this.dynamicValue.length);
+  //   }
 
-    return this.form.value;
-  }
+  //   return this.form.value;
+  // }
 
 
 }

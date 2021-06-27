@@ -78,6 +78,33 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
+    // else if (currentRoute === '/wr/m/r/txt/out') {
+    //   this.messageToShow.title = 'تکست خروجی';
+    //   this.messageToShow.messageOne = 'در نسخه آینده ';
+    //   this.messageToShow.imgOne = '';
+    //   this.messageToShow.messageThree = '';
+    //   this.messageToShow.messageTwo = '';
+    //   this.messageToShow.imgTwo = '';
+    //   return;
+    // }
+    else if (currentRoute === '/wr/mu/role') {
+      this.messageToShow.title = 'مدیریت گروه ها';
+      this.messageToShow.messageOne = 'این بخش جهت ایجاد و بررسی نقش/گروه های موجود ایجاد شده است';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.messageTwo = '';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+    else if (currentRoute === '/wr/m/s/searchPro') {
+      this.messageToShow.title = 'جستجوی تجمیعی';
+      this.messageToShow.messageOne = 'برای جستجو کامل‌تر اطلاعات، با کلیک برروی "+" نوع جستجوی خود بر اساس ناحیه را انتخاب نمایید. ';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.messageTwo = ' قسمت های اختیاری وضعیت مصرف، گزارش کنتور، وضعیت کنتور و نوبتی ها جهت جستجوی مناسب تر درنظر گرفته شده است';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
     else if (currentRoute === '/wr/m/zs/r' || currentRoute === '/wr/m/zs/p' || currentRoute === '/wr/m/zs/zb' || currentRoute === '/wr/m/zs/z' || currentRoute === '/wr/m/zs/c') {
       this.messageToShow.title = 'مدیریت نواحی';
       this.messageToShow.messageOne = 'این بخش برای مشاهده، شخصی سازی ، کنترل نواحی درنظر گرفته شده است.از قسمت های کشور، استان، مناطق، نواحی و محدوده ها تشکیل شده است بطوری که هر محدوده مربوط به یک ناحیه/شهر است. همچنین هر ناحیه/شهر مربوط به یک منطقه است. برای مثال مجموعه استان ها کشور را میسازند.';

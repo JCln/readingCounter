@@ -87,29 +87,25 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   onRowEditInit(dataSource: ITextOutput, rowIndex: number) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+    this.clonedProducts[dataSource._id] = { ...dataSource };
   }
   onRowEditCancel(dataSource: ITextOutput, index: number) {
-    this.defaultAddStatus();
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
+    this.newRowLimit = 1;
+    this.dataSource[index] = this.clonedProducts[dataSource._id];
+    delete this.dataSource[dataSource._id];
     if (dataSource.isNew)
       this.dataSource.shift();
     return;
+    // this.newRowLimit = 1;
+    // console.log(dataSource);
+    // if (dataSource.isNew) {
+    //   this.dataSource.shift();
+    //   delete this.dataSource[index];
+    //   return;
+    // }
   }
   async onRowEditSave(dataSource: ITextOutput, rowIndex: number) {
     this.defaultAddStatus();
-
-    if (dataSource.isNew) {
-      dataSource['endIndex'] = parseInt(dataSource.endIndex);
-      dataSource['startIndex'] = parseInt(dataSource.startIndex);
-      dataSource['length'] = parseInt(dataSource.length);
-    }
-
-    if (!this.readManagerService.verificationTextOutputEditedRow(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
-      return;
-    }
     if (typeof dataSource.zoneId !== 'object') {
       this.zoneDictionary.find(item => {
         if (item.title === dataSource.zoneId)
@@ -118,6 +114,13 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       dataSource.zoneId = dataSource.zoneId['id'];
     }
+    if (!this.readManagerService.verificationTextOutputEditedRow(dataSource)) {
+      if (dataSource.isNew) {
+        this.dataSource.shift();
+        return;
+      }
+    }
+    console.log(dataSource);
     if (dataSource.isNew) {
       delete dataSource.isNew;
       await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputAdd, dataSource);
@@ -130,6 +133,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   newRow(): ITextOutput {
     return {
+      _id: null,
       zoneId: null,
       itemTitle: '',
       startIndex: null,

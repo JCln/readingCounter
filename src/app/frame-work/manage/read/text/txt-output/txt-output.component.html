@@ -1,11 +1,10 @@
-<p-table #dtableTextOutput [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+<p-table #dtableDetails [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[10,25,50]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" stateKey="txt-output-session" dataKey="id" editMode="row">
+    [rowsPerPageOptions]="[10,25,50]" [responsive]="true" dir="rtl" styleClass="p-datatable-responsive" dataKey="id"
+    editMode="row">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="readManagerService.setColumnsChanges(readManagerService.ENSelectedColumnVariables.selectedTextOutput ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
@@ -22,7 +21,7 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
-                <i appAddRow [table]="dtableTextOutput" [newRow]="newRow()" [newRowLimit]="newRowLimit"
+                <i appAddRow [table]="dtableDetails" [newRow]="newRow()" [newRowLimit]="newRowLimit"
                     (click)="testChangedValue()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن</div>
                 </i>
@@ -33,10 +32,11 @@
                 </i>
             </div>
         </div>
+
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
@@ -45,15 +45,17 @@
         </tr>
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
         </tr>
-    </ng-template>
 
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-editing="editing" let-ri="rowIndex" let-dataSource
-        let-columns="columns">
+    </ng-template>
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-editing="editing"
+        let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
                 <ng-container *ngIf="col.isSelectOption ;else simple">
@@ -69,14 +71,26 @@
                     </p-cellEditor>
                 </ng-container>
                 <ng-template #simple>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{dataSource[col.field]}}
-                        </ng-template>
-                    </p-cellEditor>
+                    <ng-container *ngIf="col.isNumber; else isText">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="number" [(ngModel)]="dataSource[col.field]">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{dataSource[col.field]}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-container>
+                    <ng-template #isText>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{dataSource[col.field]}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-template>
                 </ng-template>
             </td>
             <td style="text-align: center;">
@@ -97,7 +111,6 @@
         </tr>
     </ng-template>
 </p-table>
-
 <section *ngIf="!dataSource || dataSource.length === 0">
     <tr class="empty_data">
         موردی پیدا نشد

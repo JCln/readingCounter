@@ -51,24 +51,9 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
-                <!-- <p-columnFilter *ngIf="col.field !== 'zoneId'" type="text" field="{{col.field}}"></p-columnFilter>
-                <p-columnFilter field="zoneId" *ngIf="col.field === 'zoneId'" matchMode="in" display="menu"
-                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-multiSelect [options]="zoneDictionary" (onChange)="filter($event.value)"
-                            optionLabel="zoneId">
-                            {{col.field}}
-                            <ng-template let-option pTemplate="item">
-                                <div class="p-multiselect-representative-option">
-                                    <span class="p-ml-1">{{option.title}}</span>
-                                </div>
-                            </ng-template>
-                        </p-multiSelect>
-
-                    </ng-template>
-                </p-columnFilter> -->
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
             <th style="width: 4rem"></th>

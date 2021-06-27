@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IUserManager } from 'src/app/Interfaces/iuser-manager';
@@ -14,6 +15,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./users-all.component.scss']
 })
 export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild(Table) UsersAllComponent: Table;
   subscription: Subscription[] = [];
 
   dataSource: IUserManager[] = [];
@@ -72,7 +74,7 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil    
+    // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   refreshTable = () => {
@@ -102,4 +104,5 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+
 }

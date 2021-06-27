@@ -335,15 +335,15 @@ export class TrackingManagerService {
   }
   private followUPValidation = (id: number): boolean => {
     if (this.isValidationNull(id)) {
-      this.showWarnMessage('شماره پیگیری را وارد نمایید');
+      this.showWarnMessage(EN_messages.insert_trackNumber);
       return false;
     }
     if (this.validationIsNAN(id)) {
-      this.showWarnMessage('فرمت شماره پیگیری اشتباه است');
+      this.showWarnMessage(EN_messages.format_invalid_trackNumber);
       return false;
     }
     if (!this.utilsService.isLowerThanMinLength(id, 2) || !this.utilsService.isLowerThanMaxLength(id, 10)) {
-      this.showWarnMessage('تعداد ارقام شماره پیگیری اشتباه است');
+      this.showWarnMessage(EN_messages.format_invalid_trackNumbersLength);
       return false;
     }
     return true;

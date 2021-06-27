@@ -42,23 +42,7 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean && !col?.isSelectOption" type="text" field="{{col.field}}">
-                </p-columnFilter>
-                <p-columnFilter *ngIf="!col?.isBoolean && col?.isSelectOption" field="{{col.field}}" matchMode="in"
-                    display="menu" [showMatchModes]="true" [showOperator]="false" [showAddButton]="false">
-
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-multiSelect [options]="zoneDictionary" [(ngModel)]="selectedFuckingTest"
-                            (onChange)="filter($event.value)" optionLabel="zoneTitle">
-                            {{col.field}}
-                            <ng-template let-option pTemplate="item">
-                                <div class="p-multiselect-representative-option">
-                                    <span class="p-ml-1">{{option.title}}</span>
-                                </div>
-                            </ng-template>
-                        </p-multiSelect>
-
-                    </ng-template>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>

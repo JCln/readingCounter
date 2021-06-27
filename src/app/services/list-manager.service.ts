@@ -180,8 +180,12 @@ export class ListManagerService {
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
   }
-  getLMPD = (trackNumber: number): Observable<any> => {
-    return this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedPERDAY, trackNumber);
+  getLMPD = (trackNumber: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedPERDAY, trackNumber).subscribe(res => {
+        resolve(res);
+      })
+    })
   }
   postLMPDXY = (body: object): Observable<any> => {
     return this.interfaceManagerService.POSTBODY(ENInterfaces.ListPerDayXY, body);
@@ -212,4 +216,11 @@ export class ListManagerService {
       })
     })
   }
+  customizeSelectedColumns = (_selectCols: any[]) => {
+    return _selectCols.filter(items => {
+      if (items.isSelected)
+        return items
+    })
+  }
+
 }

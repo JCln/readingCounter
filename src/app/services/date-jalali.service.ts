@@ -22,4 +22,9 @@ export class DateJalaliService {
 
     return persianDate;
   }
+  sortByDate = (data: any, toSort: any) => {
+    return data.sort((a, b) => {
+      return <any>new Date(a[toSort]) - <any>new Date(b[toSort]);
+    });
+  }
 }

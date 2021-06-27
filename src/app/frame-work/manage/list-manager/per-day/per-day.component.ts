@@ -4,6 +4,7 @@ import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { IListManagerPD, IListManagerPDHistory } from 'src/app/Interfaces/imanage';
 import { CloseTabService } from 'src/app/services/close-tab.service';
+import { DateJalaliService } from 'src/app/services/date-jalali.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ListManagerService } from 'src/app/services/list-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -31,6 +32,7 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     private utilsService: UtilsService,
     private router: Router,
     private route: ActivatedRoute,
+    private dateJalaliService: DateJalaliService
   ) {
     this.getRouteParams();
   }
@@ -38,19 +40,11 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
   routeToLMPDXY = (day: string) => {
     this.utilsService.routeToByParams('wr', { trackNumber: this.dataSource.trackNumber, day: day });
   }
-  getDataSource = (): Promise<IListManagerPD> => {
-    return new Promise((resolve) => {
-      this.listManagerService.getLMPD(parseInt(this.trackNumber)).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
   private insertSelectedColumns = () => {
     this._selectMainDatas = this.listManagerService.columnSelectedLMPerDayPositions();
     this._selectCols = this.listManagerService.columnSelectedLMPerDay();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
+    this.dateJalaliService.sortByDate(this.offLoadPerDayHistory, 'day');
   }
   private setGetRanges = () => {
     this.dataSource.overalDuration = parseFloat(this.utilsService.getRange(this.dataSource.overalDuration));
@@ -69,23 +63,18 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.getDataSource();
+    this.dataSource = await this.listManagerService.getLMPD(parseInt(this.trackNumber));
     this.offLoadPerDayHistory = this.dataSource.offLoadPerDayHistory;
+
     this.setGetRanges();
     this.setDynamicPartRanges();
 
     if (this.dataSource)
       this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   private getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(res => {
+      .subscribe(() => {
         this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
         this.classWrapper();
       })

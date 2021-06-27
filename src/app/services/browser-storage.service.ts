@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class BrowserStorageService {
   localStorage: Storage;
+  sessionStorage: Storage;
 
   constructor() {
     this.localStorage = window.localStorage;
@@ -56,6 +57,6 @@ export class BrowserStorageService {
     return !!this.localStorage;
   }
   get isSessionStorageSupported(): boolean {
-    return !!this.localStorage;
+    return !!this.sessionStorage;
   }
 }

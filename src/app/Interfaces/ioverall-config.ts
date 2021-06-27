@@ -116,6 +116,7 @@ export interface IObjectIteratation {
     borderize?: boolean;
     icon?: string;
     isBoolean?: boolean;
+    isNumber?: boolean;
     isSelectOption?: boolean;
 }
 export interface ITabWrapperDetectDynamicRoute {

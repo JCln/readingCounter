@@ -30,7 +30,8 @@
         </tr>
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
             <th style="width: 4rem"></th>
@@ -60,9 +61,9 @@
                     <div class="tooltip_text">مشاهده ورودها</div>
                 </i>
             </td>
-            <td class="edit_button">
-                <i class="tooltip _map_frame_show p_icons pi pi-ellipsis-h" (click)="showExactConfig(i)">
-                    <div class="tooltip_text_right">تغییر وضعیت</div>
+            <td class="edit_button" (mouseover)="showExactConfig(i)" (mouseout)="showExactConfig(i)">
+                <i class="tooltip _map_frame_show p_icons pi pi-ellipsis-h">
+                    <div class="tooltip_text">تغییر وضعیت</div>
                 </i>
                 <div class="map-frame">
                     <div class="more_configs">
