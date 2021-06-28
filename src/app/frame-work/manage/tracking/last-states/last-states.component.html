@@ -36,12 +36,15 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
+            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
@@ -55,6 +58,11 @@
                 <ng-template #elseTemplate>
                     {{dataSource[col.field]}}
                 </ng-template>
+            </td>
+            <td (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                </i>
             </td>
         </tr>
     </ng-template>

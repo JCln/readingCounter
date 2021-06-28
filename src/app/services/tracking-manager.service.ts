@@ -371,5 +371,8 @@ export class TrackingManagerService {
       })
     })
   }
+  routeToLMPDXY = (trackNumber: number, day: string) => {
+    this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day });
+  }
 
 }
