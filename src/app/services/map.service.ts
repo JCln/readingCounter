@@ -2,6 +2,7 @@ import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.j
 
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { DateJalaliService } from 'src/app/services/date-jalali.service';
 import { ListManagerService } from 'src/app/services/list-manager.service';
 
 import { IReadingReportGISReq } from '../Interfaces/imanage.js';
@@ -31,6 +32,7 @@ export class MapService {
 
   constructor(
     private listManagerService: ListManagerService,
+    private dateJalaliService: DateJalaliService,
     private _location: Location
   ) { }
 
@@ -62,9 +64,6 @@ export class MapService {
     this.refreshMapButtonLeaflet();
     this.easyprintButtonLeaflet();
   }
-  callPointerMarks = (data: object) => {
-    return this.listManagerService.postLMPDXY(data);
-  }
   serviceInstantiate = (map: L.Map) => {
     this.map = map;
   }
@@ -73,5 +72,8 @@ export class MapService {
   }
   backToPreviousPage = () => {
     this._location.back();
+  }
+  getPointerMarks = (a: object): Promise<any> => {
+    return this.listManagerService.postLMPDXY(a);
   }
 }

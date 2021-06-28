@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
@@ -187,8 +186,12 @@ export class ListManagerService {
       })
     })
   }
-  postLMPDXY = (body: object): Observable<any> => {
-    return this.interfaceManagerService.POSTBODY(ENInterfaces.ListPerDayXY, body);
+  postLMPDXY = (body: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.ListPerDayXY, body).toPromise().then(res => {
+        resolve(res);
+      })
+    });
   }
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {

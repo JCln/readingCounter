@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IListManagerPDXY } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
+import { DateJalaliService } from 'src/app/services/date-jalali.service';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
 import { EnvService } from 'src/app/services/env.service';
 import { InteractionService } from 'src/app/services/interaction.service';
@@ -20,17 +21,35 @@ const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
 const shadowUrl = 'assets/leaflet/images/marker-shadow.png';
 
-const defaultIcon = L.icon({
+const simpleIcon = L.icon({
   iconRetinaUrl,
   iconUrl,
   shadowUrl,
   iconSize: [25, 41],
   iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  tooltipAnchor: [16, -28],
-  shadowSize: [41, 41]
 })
-L.Marker.prototype.options.icon = defaultIcon;
+
+const defaultIcon = L.Icon.extend({
+  options: {
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+  }
+})
+const myIcon = L.Icon.extend({
+  options: {
+    shadowUrl,
+    iconSize: [25, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+    shadowSize: [41, 41]
+  }
+});
+const iconSimple = new myIcon({ iconUrl: 'assets/leaflet/images/marker-icon.png' });
+const markerGreen = new defaultIcon({ iconUrl: 'assets/leaflet/images/marker_green.png' });
+const markerRed = new defaultIcon({ iconUrl: 'assets/leaflet/images/marker_red.png' });
+L.Marker.prototype.options.icon = simpleIcon;
 
 @Component({
   selector: 'app-map',
@@ -62,7 +81,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     public route: ActivatedRoute,
     private router: Router,
     private utilsService: UtilsService,
-    private envService: EnvService
+    private envService: EnvService,
+    private dateJalaliService: DateJalaliService
   ) {
     this.extrasNavigation = this.getRouterExtras();
   }
@@ -98,13 +118,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     L.control.layers(baseMaps, overlays).addTo(this.map);
   }
-  getPointerMarks = (a: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.mapService.callPointerMarks(a).subscribe(res => {
-        resolve(res);
-      });
-    });
-  }
   private leafletDrawPolylines = (delay: number) => {
     const lines = [];
     this.markersDataSourceXY.forEach((items, i) => {
@@ -112,7 +125,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         lines.push([parseFloat(items.y), parseFloat(items.x)]);
         L.polyline(lines, {
           color: '#0e4c92',
-          weight: 2
+          weight: 1
         }).addTo(this.layerGroup);
       }, i * delay);
     })
@@ -127,7 +140,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.utilsService.isNull(a.trackNumber))
       return;
     this.canShowOptionsButton = true;
-    this.markersDataSourceXY = await this.getPointerMarks(a);
+    this.markersDataSourceXY = await this.mapService.getPointerMarks(a);
     this.mapConfigOptions(0);
   }
   private classWrapperWithExtras = async () => {
@@ -159,7 +172,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
     lat = parseFloat(lat.toString().substring(0, 6));
-    lag = parseFloat(lag.toString().substring(0, 6));    
+    lag = parseFloat(lag.toString().substring(0, 6));
 
     this.map.flyTo([(lat), (lag)], zoom);
   }
@@ -176,18 +189,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // get X Y positions
-  private getXYPosition = (xyData: any, delay: number) => {
+  private getXYPosition = (method: string, xyData: any, delay: number) => {
     xyData.map((items, i) => {
       setTimeout(() => {
-        this.circleToLeaflet(parseFloat(items.y), parseFloat(items.x), items);
-        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
-      }, i * delay);
-    })
-  }
-  private getXYPositionExtras = (xyData: any, delay: number) => {
-    xyData.map((items, i) => {
-      setTimeout(() => {
-        this.circleToExtrasLeaflet(parseFloat(items.y), parseFloat(items.x), items);
+        this[method](parseFloat(items.y), parseFloat(items.x), items);
         this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
       }, i * delay);
     })
@@ -206,12 +211,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   mapConfigOptions = (delay: number) => {
     this.removeAllLayers();
-    this.getXYPosition(this.markersDataSourceXY, delay + 20);
+    this.markersDataSourceXY.sort(this.dateJalaliService.sortByDatePersian);
+    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay + 20);
     this.leafletDrawPolylines(delay);
   }
   private extrasConfigOptions = (xyData: any, delay: number) => {
     this.removeAllLayers();
-    this.getXYPositionExtras(xyData, delay + 20);
+    this.markersDataSourceXY.sort(xyData);
+    this.getXYPosition('circleToExtrasLeaflet', xyData, delay + 20);
   }
   private extrasConfigOptionsCluster = (xyData: any) => {
     this.removeAllLayers();
@@ -235,20 +242,20 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 'بستن تمامی لایه ها').addTo(this.map);
   }
   private circleToLeaflet = (lat: number, lng: number, items) => {
-    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: "#3686c9" }).addTo(this.layerGroup)
+    L.marker([lat, lng], { weight: 4, radius: 3, icon: items.counterStateTitle === 'بسته' ? markerRed : markerGreen }).addTo(this.layerGroup)
       .bindPopup(
         `${items.firstName}` + `${items.sureName} <br> ${items.eshterak}`,
       );
   }
   private circleToExtrasLeaflet = (lat: number, lng: number, items) => {
-    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: "#3686c9" }).addTo(this.layerGroup)
+    L.marker([lat, lng], { weight: 4, radius: 3, icon: items.counterStateTitle === 'بسته' ? markerRed : markerGreen }).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );
   }
   private findMyLocationLeaflet = (e) => {
     const radius = e.accuracy;
-    L.marker(e.latlng).addTo(this.layerGroup)
+    L.marker(e.latlng, { icon: iconSimple }).addTo(this.layerGroup)
       .bindPopup("شما در حدود تقریبی " + radius + " متر از این مکان قرار دارید").openPopup();
 
     this.flyToDes(e.latlng.lat, e.latlng.lng, 16);

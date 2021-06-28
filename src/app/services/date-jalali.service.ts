@@ -27,4 +27,23 @@ export class DateJalaliService {
       return <any>new Date(a[toSort]) - <any>new Date(b[toSort]);
     });
   }
+  sortByDatePersian = (a: any, b: any) => {
+    if (a.time < b.time) {
+      return -1;
+    }
+    if (a.time > b.time) {
+      return 1;
+    }
+    return 0;
+  }
+  sortByDateDESCPersian = (a: any, b: any) => {
+    if (a.time > b.time) {
+      return -1;
+    }
+    if (a.time < b.time) {
+      return 1;
+    }
+    return 0;
+  }
+
 }
