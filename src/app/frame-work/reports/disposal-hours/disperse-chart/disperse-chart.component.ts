@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IReadingReportChartDisposeRes } from 'src/app/Interfaces/imanage';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
@@ -108,7 +109,7 @@ export class DisperseChartComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.dataSource = await this.readingReportManagerService.postRRDisposalChartManager();
+    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/dh', ENInterfaces.ListDispersalChart,'readingReportReq');
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();

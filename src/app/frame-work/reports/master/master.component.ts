@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { IDictionaryManager, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
+import { IReadingReportReq } from 'src/app/Interfaces/imanage';
+import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'src/app/Interfaces/ioverall-config';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
-
-import { IReadingReportReq } from './../../../Interfaces/imanage';
-import { ITitleValue } from './../../../Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-master',
@@ -15,7 +13,6 @@ import { ITitleValue } from './../../../Interfaces/ioverall-config';
 })
 export class MasterComponent implements OnInit {
   readingReportReq: IReadingReportReq = {
-    zoneId: 0,
     fromDate: '',
     toDate: '',
     counterReaderId: '',

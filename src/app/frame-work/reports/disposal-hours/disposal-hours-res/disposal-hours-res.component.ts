@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IReadingReportDisposalHours } from 'src/app/Interfaces/imanage';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-disposal-hours-res',
@@ -18,25 +20,20 @@ export class DisposalHoursResComponent implements OnInit {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    public outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService,
+    private utilsService: UtilsService
   ) {
   }
-
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.postRRDisposalHoursManager();
+    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/dh', ENInterfaces.ListDispersalHours, 'readingReportReq');
+    if (this.utilsService.isNull(this.dataSource))
+      return;
 
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
+    this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRDisposalHours();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
     this.connectToServer();

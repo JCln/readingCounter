@@ -204,15 +204,16 @@ export class ReadingReportManagerService {
   ) { }
 
   // CALL APIs
-  postRRAnalyzeByParamManager = (): Promise<any> => {
-    if (!this.rRAnalyzeReq) {
+  postRRManager = (backTo: string, method: ENInterfaces, validator: string): Promise<any> => {
+    console.log(this[validator]);
+    if (!this[validator]) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/anlz/prfm');
+      this.routeTo(backTo);
       return;
     }
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.trackingAnalyzeByParam, this.rRAnalyzeReq).subscribe((res) => {
+        this.interfaceManagerService.POSTBODY(method, this[validator]).subscribe((res) => {
           if (this.utilsService.isNull(res))
             this.emptyMessage();
           resolve(res)
@@ -222,209 +223,6 @@ export class ReadingReportManagerService {
       console.error(error);
     }
 
-  }
-  postRRMasterManager = (): Promise<any> => {
-    if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/exm/master');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ReadingReportMasterWithParam, this.readingReportReq).subscribe((res) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-
-  }
-  postRRTraverseDiffrentialManager = (): Promise<any> => {
-    if (!this.rRTraverseDiffrential) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/mam/trvch');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListTraverseDifferential, this.rRTraverseDiffrential).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postRRTraverseManager = (): Promise<any> => {
-    if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/mam/trv');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListTraverse, this.readingReportReq).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postRRKarkardManager = (): Promise<any> => {
-    if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/mam/karkard');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListOFFKarkard, this.readingReportReq).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postRRTraverseDifferentialChartManager = (): Promise<any> => {
-    if (!this.rRTraverseDiffrential) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/mam/trvch');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListTraverseDifferntialChart, this.rRTraverseDiffrential).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postRRKarkardChartManager = (): Promise<any> => {
-    if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/mam/karkard');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListKarkardChart, this.readingReportReq).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postRRDisposalChartManager = (): Promise<any> => {
-    if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/mam/dh');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListDispersalChart, this.readingReportReq).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postRRKarkardDailyManager = (): Promise<any> => {
-    if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/mam/karkardDaily');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListKarkardDaily, this.readingReportReq).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postRRGISManager = (): Promise<any> => {
-    if (!this.readingReportGISReq) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/mam/gis');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListToGis, this.readingReportGISReq).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postRRDisposalHoursManager = (): Promise<any> => {
-    if (!this.readingReportReq) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/mam/dh');
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListDispersalHours, this.readingReportReq).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  postRRDetailsManager = (): Promise<any> => {
-    console.log(this.readingReportReq);
-    if (!this.readingReportReq) {
-      console.log(1);
-
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo('wr/rpts/exm/details');
-      console.log(2);
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ReadingReportDETAILSWithParam, this.readingReportReq).subscribe((res: any) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
@@ -446,251 +244,51 @@ export class ReadingReportManagerService {
   }
 
 
-  private datesValidationMaster = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    return true;
-  }
-  private periodValidationMaster = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-      return false;
-    }
-    return true;
-  }
-
-  private datesValidationDetails = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    return true;
-  }
-  private periodValidationDetails = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    return true;
-  }
-
-  private datesValidationTraverse = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    return true;
-  }
-  private periodValidationTraverse = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-      return false;
-    }
-    return true;
-  }
-
-  private datesValidationTraversedIFF = (): boolean => {
-    if (this.utilsService.isNull(this.rRTraverseDiffrential.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.rRTraverseDiffrential.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (this.utilsService.isNull(this.rRTraverseDiffrential.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    return true;
-  }
-  private periodValidationTraverseDIFF = (): boolean => {
-    if (this.utilsService.isNull(this.rRTraverseDiffrential.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.rRTraverseDiffrential.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
-      return false;
-    }
-    if (this.utilsService.isNull(this.rRTraverseDiffrential.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-      return false;
-    }
-    return true;
-  }
-
-  private datesValidationKarkard = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    return true;
-  }
-  private periodValidationKarkard = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-      return false;
-    }
-    return true;
-  }
-
-  private datesValidationKarkardDaily = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    return true;
-  }
-  private periodValidationKarkardDaily = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-      return false;
-    }
-    return true;
-  }
-
-  private datesValidationAnalyzePerformance = (): boolean => {
-    this.convertDates();
-    if (this.utilsService.isNull(this.rRAnalyzeReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.rRAnalyzeReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (this.utilsService.isNull(this.rRAnalyzeReq.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    return true;
-  }
-  private periodValidationAnalyzePerformance = (): boolean => {
-    if (this.utilsService.isNull(this.rRAnalyzeReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.rRAnalyzeReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
-      return false;
-    }
-    if (this.utilsService.isNull(this.rRAnalyzeReq.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-      return false;
-    }
-    return true;
-  }
-
-  private datesValidationDisposalHours = (): boolean => {
-    if (this.utilsService.isNull(this.readingReportReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportReq.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    return true;
-  }
-
-  private datesValidationGIS = (): boolean => {
-    if (this.readingReportGISReq.isCounterState === true) {
-      if (this.utilsService.isNull(this.readingReportGISReq.counterStateId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
+  private datesValidation = (value: object): boolean => {
+    if (value.hasOwnProperty('fromDate')) {
+      if (this.utilsService.isNull(value['fromDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
     }
-    if (this.utilsService.isNull(this.readingReportGISReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
+    if (value.hasOwnProperty('toDate')) {
+      if (this.utilsService.isNull(value['toDate'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+        return false;
+      }
     }
-    if (this.utilsService.isNull(this.readingReportGISReq.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
+    if (value.hasOwnProperty('zoneId')) {
+      if (this.utilsService.isNull(value['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
     }
-    if (this.utilsService.isNull(this.readingReportGISReq.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
+    if (value.hasOwnProperty('isCounterState')) {
+      if (this.readingReportGISReq.isCounterState === true) {
+        if (this.utilsService.isNull(this.readingReportGISReq.counterStateId)) {
+          this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
+          return false;
+        }
+      }
     }
+    return true;
+  }
+  private periodValidations = (value: object): boolean => {
+    if (value.hasOwnProperty('readingPeriodId'))
+      if (this.utilsService.isNull(value['readingPeriodId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
+        return false;
+      }
+    if (value.hasOwnProperty('year'))
+      if (this.utilsService.isNull(value['year'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
+        return false;
+      }
+    if (value.hasOwnProperty('zoneId'))
+      if (this.utilsService.isNull(value['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
     return true;
   }
   private periodValidationGIS = (): boolean => {
@@ -704,57 +302,46 @@ export class ReadingReportManagerService {
         return false;
       }
     }
-    if (this.utilsService.isNull(this.readingReportGISReq.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportGISReq.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
-      return false;
-    }
-    if (this.utilsService.isNull(this.readingReportGISReq.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-      return false;
-    }
     return true;
   }
 
   // VerificationS
   verificationRRTraverse = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
-    return isValidateByDate ? this.datesValidationTraverse() : this.periodValidationTraverse()
+    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
   verificationRRTraverseDifferential = (readingReportReq: IReadingReportTraverseDifferentialReq, isValidateByDate: boolean): boolean => {
     this.rRTraverseDiffrential = readingReportReq;
-    return isValidateByDate ? this.datesValidationTraversedIFF() : this.periodValidationTraverseDIFF()
+    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
   verificationRRKarkard = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
-    return isValidateByDate ? this.datesValidationKarkard() : this.periodValidationKarkard()
+    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
   verificationRRKarkardDaily = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
-    return isValidateByDate ? this.datesValidationKarkardDaily() : this.periodValidationKarkardDaily()
+    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
   verificationRRMaster = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
-    return isValidateByDate ? this.datesValidationMaster() : this.periodValidationMaster()
+    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
   verificationRRDetails = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     this.readingReportReq = readingReportReq;
-    return isValidateByDate ? this.datesValidationDetails() : this.periodValidationDetails()
+    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
   verificationRRDisposalHours = (readingReportReq: IReadingReportReq): boolean => {
     this.readingReportReq = readingReportReq;
-    return this.datesValidationDisposalHours();
+    return this.datesValidation(readingReportReq);
   }
   verificationRRGIS = (readingReportGISReq: IReadingReportGISReq, isValidateByDate: boolean): boolean => {
     this.readingReportGISReq = readingReportGISReq;
-    return isValidateByDate ? this.datesValidationGIS() : this.periodValidationGIS()
+    return isValidateByDate ? this.datesValidation(readingReportGISReq) : this.periodValidationGIS()
   }
   verificationRRAnalyzePerformance = (readingReportReq: IReadingReportWithZoneIDsReq, isValidateByDate: boolean): boolean => {
     this.rRAnalyzeReq = readingReportReq;
-    return isValidateByDate ? this.datesValidationAnalyzePerformance() : this.periodValidationAnalyzePerformance()
+    this.convertDates();
+    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
 
   // 
@@ -790,6 +377,12 @@ export class ReadingReportManagerService {
         if (newVals.field == old.field)
           old.isSelected = true;
       })
+    })
+  }
+  customizeSelectedColumns = (_selectCols: any) => {
+    return _selectCols.filter(items => {
+      if (items.isSelected)
+        return items
     })
   }
 }

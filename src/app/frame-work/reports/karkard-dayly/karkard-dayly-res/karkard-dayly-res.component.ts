@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IReadingReportKarkard } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
@@ -23,19 +24,12 @@ export class KarkardDaylyResComponent implements OnInit {
     public outputManagerService: OutputManagerService
   ) {
   }
-
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRKarkardDaly();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.postRRKarkardDailyManager();
+    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/karkardDaily', ENInterfaces.ListKarkardDaily, 'readingReportReq');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();

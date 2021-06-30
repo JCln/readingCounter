@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IReadingReportMaster } from 'src/app/Interfaces/imanage';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-master-res',
@@ -16,25 +18,20 @@ export class MasterResComponent implements OnInit {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    public outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService,
+    private utilsService: UtilsService
   ) {
   }
 
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRMaster();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.postRRMasterManager();
-    if (!this.dataSource.length) {
+    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/exm/master', ENInterfaces.ReadingReportMasterWithParam, 'readingReportReq');
+    if (this.utilsService.isNull(this.dataSource))
       return;
-    }
+
     this.insertSelectedColumns();
   }
   ngOnInit(): void {

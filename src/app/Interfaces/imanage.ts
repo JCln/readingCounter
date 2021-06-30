@@ -452,7 +452,7 @@ export interface ITextOutput {
 }
 // reading report manager(reports)
 export interface IReadingReportReq {
-    zoneId: number,
+    zoneId?: number,
     fromDate: string,
     toDate: string,
     counterReaderId: string,

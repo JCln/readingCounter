@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IAnalyzeRes } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
@@ -24,24 +25,18 @@ export class PrfmResComponent implements OnInit {
   ) {
   }
 
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRAnalyzeByParam();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.postRRAnalyzeByParamManager();
+    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/anlz/prfm', ENInterfaces.trackingAnalyzeByParam, 'rRAnalyzeReq');
+    if (this.utilsService.isNull(this.dataSource))
+      return;
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
-    this.setGetRanges();
+    this.insertSelectedColumns();
     this.outputManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
+    this.setGetRanges();
   }
   ngOnInit(): void {
     this.connectToServer();

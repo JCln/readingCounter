@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IReadingReportTraverse } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { OutputManagerService } from 'src/app/services/output-manager.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
@@ -19,27 +21,21 @@ export class TraverseResComponent implements OnInit {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    public outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService,
+    private utilsService: UtilsService
   ) {
-  }
-
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
   }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRTraverse();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.postRRTraverseManager();
+    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/trv', ENInterfaces.ListTraverse, 'readingReportReq');
+    if (this.utilsService.isNull(this.dataSource))
+      return;
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.outputManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
+    this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.connectToServer();

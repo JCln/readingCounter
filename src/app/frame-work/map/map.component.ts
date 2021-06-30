@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IListManagerPDXY } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
@@ -144,12 +145,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mapConfigOptions(0);
   }
   private classWrapperWithExtras = async () => {
-    this.extraDataSourceRes = await this.readingReportManagerService.postRRGISManager();
+    this.extraDataSourceRes = await this.readingReportManagerService.postRRManager('wr/rpts/mam/gis', ENInterfaces.ListToGis, 'readingReportGISReq');
     if (!this.extraDataSourceRes.length) {
       this.utilsService.snackBarMessageFailed(EN_messages.notFound);
       return;
     }
-    this.mapService.hasMarkerCluster(this.extrasNavigation) ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes, 0);
+    this.mapService.hasMarkerCluster(this.extrasNavigation) ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes);
   }
   ngOnInit(): void {
     this.getMapItems();
@@ -189,12 +190,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // get X Y positions
-  private getXYPosition = (method: string, xyData: any, delay: number) => {
+  private getXYPosition = (method: string, xyData: any, delay?: number) => {
     xyData.map((items, i) => {
       setTimeout(() => {
         this[method](parseFloat(items.y), parseFloat(items.x), items);
         this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
       }, i * delay);
+    })
+  }
+  private markingOnMapNClusterNDelay = (method: string, xyData: any) => {
+    this.flyToDes(32.66, 51.66, 12);
+    xyData.map((items, i) => {
+      this[method](parseFloat(items.y), parseFloat(items.x), items);
     })
   }
   private getXYMarkerClusterPosition = (xyData: any) => {
@@ -215,10 +222,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay + 20);
     this.leafletDrawPolylines(delay);
   }
-  private extrasConfigOptions = (xyData: any, delay: number) => {
+  private extrasConfigOptions = (xyData: any) => {
     this.removeAllLayers();
-    this.markersDataSourceXY.sort(xyData);
-    this.getXYPosition('circleToExtrasLeaflet', xyData, delay + 20);
+    this.markingOnMapNClusterNDelay('markWithoutCluster', xyData);
   }
   private extrasConfigOptionsCluster = (xyData: any) => {
     this.removeAllLayers();
@@ -247,8 +253,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
         `${items.firstName}` + `${items.sureName} <br> ${items.eshterak}`,
       );
   }
-  private circleToExtrasLeaflet = (lat: number, lng: number, items) => {
-    L.marker([lat, lng], { weight: 4, radius: 3, icon: items.counterStateTitle === 'بسته' ? markerRed : markerGreen }).addTo(this.layerGroup)
+  private markWithoutCluster = (lat: number, lng: number, items) => {
+    L.circleMarker([lat, lng], { weight: 4, radius: 3, icon: items.counterStateTitle === 'بسته' ? markerRed : markerGreen }).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );
