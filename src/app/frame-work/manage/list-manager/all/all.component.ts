@@ -67,15 +67,9 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.listManagerService.columnLMAll();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
   }
   isFromOffloadPage = () => {
     this.trackId = this.route.snapshot.paramMap.get('trackingId');

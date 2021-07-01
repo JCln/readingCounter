@@ -59,18 +59,9 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    console.log(this.customizeSelectedColumns());
-
-
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
     this.classWrapper();

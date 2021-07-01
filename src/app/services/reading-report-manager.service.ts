@@ -58,10 +58,10 @@ export class ReadingReportManagerService {
     { field: 'itemCount', header: 'تعداد', isSelected: true, readonly: true }
   ]
   private _RRDetails = [
-    { field: 'billId', header: 'ش قبض', isSelected: true, readonly: true },
+    { field: 'billId', header: 'ش قبض', isSelected: false, readonly: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
     { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true },
-    { field: 'eshterak', header: 'اشتراک', isSelected: false, readonly: true },
+    { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: true },
     { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
     { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
     { field: 'karbariCode', header: 'کاربری', isSelected: false, readonly: true },
@@ -78,9 +78,9 @@ export class ReadingReportManagerService {
     { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, readonly: true }
   ]
   private _RRTraverse = [
-    { field: 'billId', header: 'شناسه قبض', isSelected: true, readonly: true },
+    { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
-    { field: 'radif', header: 'ش.پرونده', isSelected: true, readonly: true },
+    { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true },
     { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: false },
     { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
     { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
@@ -101,27 +101,15 @@ export class ReadingReportManagerService {
     { field: 'possibleEmpty', header: 'خالی پیمایش', isSelected: false, readonly: true }
   ]
   private _RRTraverseDifferential = [
-    { field: 'billId', header: 'شناسه قبض', isSelected: true, readonly: true },
-    { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
-    { field: 'radif', header: 'ش.پرونده', isSelected: true, readonly: true },
-    { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: false },
-    { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true, readonly: true },
-    // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: true, readonly: true },
-    { field: 'karbariCode', header: 'کاربری', isSelected: false, readonly: false },
-    { field: 'ahadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی', isSelected: false, readonly: true },
-    { field: 'possibleAhadMaskooniOrAsli', header: 'آحاد مسکونی/اصلی پیمایش', isSelected: false, readonly: true },
-    { field: 'ahadTejariOrFari', header: 'آحاد تجاری/فرعی', isSelected: false, readonly: false },
-    { field: 'possibleAhadTejariOrFari', header: 'آحاد تجاری/فرعی پیمایش', isSelected: false, readonly: true },
-    { field: 'ahadSaierOrAbBaha', header: 'آحاد سایر/آبها', isSelected: false, readonly: true },
-    { field: 'possibleSaierOrAbBaha', header: 'سایر/آبها پیمایش', isSelected: false, readonly: false },
-    { field: 'offloadDateJalali', header: 'روز', isSelected: false, readonly: true },
-    { field: 'counterSerial', header: 'سریال کنتور', isSelected: false, readonly: true },
-    { field: 'possibleCounterSerial', header: 'سریال کنتور پیمایش', isSelected: false, readonly: false },
-    { field: 'mobile', header: 'موبایل', isSelected: false, readonly: true },
-    { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, readonly: true },
-    { field: 'possibleEmpty', header: 'خالی پیمایش', isSelected: false, readonly: true },
-    { field: 'address', header: 'نشانی', isSelected: false, readonly: true },
-    { field: 'possibleAddress', header: 'نشانی پیمایش', isSelected: false, readonly: true },
+    { field: 'billId', header: 'شناسه قبض', isSelected: false },
+    { field: 'radif', header: 'ش.پرونده', isSelected: false },
+    { field: 'eshterak', header: 'اشتراک', isSelected: true },
+    { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true },
+    { field: 'address', header: 'آدرس', isSelected: false },
+    { field: 'offloadDateJalali', header: 'روز', isSelected: true },
+    { field: 'description', header: 'توضیحات', isSelected: false, readonly: false },
+    { field: 'value', header: 'مقدار قدیم', isSelected: true },
+    { field: 'newValue', header: 'مقدار جدید', isSelected: true },
   ]
   private _RRKarkard = [
     // { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },

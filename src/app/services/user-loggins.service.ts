@@ -46,5 +46,11 @@ export class UserLogginsService {
 
     }
   }
+  customizeSelectedColumns = (_selectCols: any) => {
+    return _selectCols.filter(items => {
+      if (items.isSelected)
+        return items
+    })
+  }
 
 }

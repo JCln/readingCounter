@@ -26,15 +26,9 @@ export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService
   ) { }
 
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   private insertSelectedColumns = () => {
     this._selectCols = this.forbiddenService.columnSelectedMenuDefault();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.forbiddenService.customizeSelectedColumns(this._selectCols);
   }
   nullSavedSource = () => this.closeTabService.saveDataForForbidden = null;
   classWrapper = async (canRefresh?: boolean) => {

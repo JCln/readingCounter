@@ -629,22 +629,10 @@ export interface IReadingReportTraverseDifferentialRes {
     eshterak: string,
     fulName: string,
     address: string,
-    karbariCode: number,
-    possibleKarbariCode: number,
-    ahadMaskooniOrAsli: number,
-    possibleAhadMaskooniOrAsli: number,
-    ahadTejariOrFari: number,
-    possibleAhadTejariOrFari: number,
-    ahadSaierOrAbBaha: number,
-    possibleSaierOrAbBaha: number,
-    counterReaderName: string,
     offloadDateJalali: string,
-    counterSerial: string,
-    possibleCounterSerial: string,
-    possibleAddress: string,
-    mobile: string,
-    possibleMobile: string,
-    possibleEmpty: number
+    description: string,
+    value: string,
+    newValue: string
 }
 export interface IReadingReportTraverseDifferentialReq {
     zoneId: number,

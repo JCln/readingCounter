@@ -374,5 +374,10 @@ export class TrackingManagerService {
   routeToLMPDXY = (trackNumber: number, day: string) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day });
   }
-
+  customizeSelectedColumns = (_selectCols: any) => {
+    return _selectCols.filter(items => {
+      if (items.isSelected)
+        return items
+    })
+  }
 }

@@ -91,15 +91,9 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.formulasService.columnBudgetFormulas();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.formulasService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
     this.classWrapper();

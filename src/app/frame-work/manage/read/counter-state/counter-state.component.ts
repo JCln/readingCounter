@@ -6,6 +6,7 @@ import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { CounterStateService } from 'src/app/services/counter-state.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { ReadManagerService } from 'src/app/services/read-manager.service';
 
 @Component({
   selector: 'app-counter-state',
@@ -28,18 +29,14 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private counterStateService: CounterStateService
+    private counterStateService: CounterStateService,
+    private readManagerService: ReadManagerService
   ) {
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
+  
   columnSelectedMenuDefault = () => {
     this._selectCols = this.counterStateService.columnSelectedMenuDefault();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   sendGridFriendlyDataSource = (event: LazyLoadEvent): any => {
     this.dataSource = this.counterStateService.getGridFriendlyDataSource(event);

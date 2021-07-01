@@ -39,7 +39,7 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   private insertSelectedColumns = () => {
     this._selectCols = this.userLogginsService.columnSelectedUserLogs();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.userLogginsService.customizeSelectedColumns(this._selectCols);
   }
   nullSavedSource = () => this.closeTabService.saveDataForUserLoggins = null;
   private classWrapper = (canRefresh?: boolean) => {
@@ -47,12 +47,6 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.nullSavedSource();
     }
     this.getDataSource();
-  }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
   }
   private getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))

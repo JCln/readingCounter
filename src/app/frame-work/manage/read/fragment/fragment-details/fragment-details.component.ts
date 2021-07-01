@@ -32,7 +32,7 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
-    private router: Router    
+    private router: Router
   ) {
     this.getRouteParams();
   }
@@ -47,16 +47,10 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this.defaultAddStatus();
     this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
     this._selectCols = this.fragmentManagerService.columnSelectedFragmentDetails();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
   private getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {

@@ -326,5 +326,11 @@ export class FormulasService {
       })
     })
   }
+  customizeSelectedColumns = (_selectCols: any) => {
+    return _selectCols.filter(items => {
+      if (items.isSelected)
+        return items
+    })
+  }
 
 }

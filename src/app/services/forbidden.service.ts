@@ -117,5 +117,11 @@ export class ForbiddenService {
         item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
     })
   }
+  customizeSelectedColumns = (_selectCols: any) => {
+    return _selectCols.filter(items => {
+      if (items.isSelected)
+        return items
+    })
+  }
 
 }

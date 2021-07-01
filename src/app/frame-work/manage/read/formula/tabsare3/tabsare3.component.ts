@@ -95,15 +95,9 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.formulasService.columnTabsare3Formulas();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.formulasService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
     this.classWrapper();

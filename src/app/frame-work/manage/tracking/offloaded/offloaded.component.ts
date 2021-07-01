@@ -51,15 +51,9 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   downloadOutputSingle = async (row: ITracking) => {
     const a = await this.trackingManagerService.downloadOutputSingle(row);

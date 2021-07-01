@@ -6,7 +6,6 @@ import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { CloseTabService } from 'src/app/services/close-tab.service';
 import { FragmentManagerService } from 'src/app/services/fragment-manager.service';
 import { InteractionService } from 'src/app/services/interaction.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
@@ -30,8 +29,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public fragmentManagerService: FragmentManagerService,
-    private utilsService: UtilsService
+    public fragmentManagerService: FragmentManagerService
   ) {
   }
 
@@ -56,15 +54,9 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.dataSource.length)
       this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.fragmentManagerService.columnSelectedFragmentMaster();
-    this._selectedColumns = this.customizeSelectedColumns();
+    this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {
     this.classWrapper();
