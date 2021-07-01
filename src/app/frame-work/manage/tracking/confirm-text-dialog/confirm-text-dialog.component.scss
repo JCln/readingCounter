@@ -1,6 +1,6 @@
-@import '../../shared_dialog';
-@import '../../../../../assets/button.scss';
-@import '../../../../../assets/input.scss';
+@import 'shared_dialog';
+@import 'button.scss';
+@import 'input.scss';
 
 .mat-dialog-content {
   color: $gray_700;

@@ -1,11 +1,11 @@
-@import '../../../assets/variable.scss';
-@import '../../../assets/mixins.scss';
+@import 'variable.scss';
+@import 'mixins.scss';
 
 .analog-clock {
   position: relative;
   width: 3.5rem;
   height: 3.5rem;
-  background: url(/assets/imgs/clock/2.jpg);
+  background: url('/assets/imgs/clock/2.jpg');
   background-size: cover;
   border-radius: 50%;
   top: .1rem;

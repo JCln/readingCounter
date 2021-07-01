@@ -1,7 +1,6 @@
-@import '../../../../assets/variable.scss';
-@import '../../../../assets/mixins.scss';
-@import '../../../../assets/media.scss';
-@import './hamburger';
+@import 'variable.scss';
+@import 'mixins.scss';
+@import 'media.scss';
 
 .header {
   display: flex;
@@ -33,12 +32,12 @@ li {
   cursor: pointer;
 
   font-size: $font_m;
-  font-weight: 600;  
+  font-weight: 600;
 }
 
 ._name {
   font-size: $font_xxs;
-  color: $blue_700;  
+  color: $blue_700;
 }
 
 .menu_toggle {
@@ -60,5 +59,6 @@ li {
     margin-right: 12rem;
   }
 }
+
 @include media_wrapper(780px, 'li', margin, 0 .5rem);
 @include media_wrapper(780px, '._name', font-size, $font_m);

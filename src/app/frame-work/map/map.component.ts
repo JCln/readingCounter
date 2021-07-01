@@ -3,17 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { IListManagerPDXY } from 'src/app/Interfaces/imanage';
+import { IListManagerPDXY, IReadingReportGISReq, IReadingReportGISResponse } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
 import { DateJalaliService } from 'src/app/services/date-jalali.service';
 import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
 import { EnvService } from 'src/app/services/env.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { MapService } from 'src/app/services/map.service';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 import { UtilsService } from 'src/app/services/utils.service';
-
-import { IReadingReportGISReq, IReadingReportGISResponse } from './../../Interfaces/imanage';
-import { MapService } from './../../services/map.service';
 
 
 declare let L;
@@ -254,7 +252,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       );
   }
   private markWithoutCluster = (lat: number, lng: number, items) => {
-    L.circleMarker([lat, lng], { weight: 4, radius: 3, icon: items.counterStateTitle === 'بسته' ? markerRed : markerGreen }).addTo(this.layerGroup)
+    L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );

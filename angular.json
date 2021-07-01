@@ -52,9 +52,14 @@
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/primeicons/primeicons.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js",
-              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"              
+              "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"
             ]
           },
           "configurations": {
