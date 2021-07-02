@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
@@ -11,8 +10,6 @@ import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.se
 
 import { IAuthTokenType, IAuthUser, ICredentials } from '../Interfaces/iauth-guard-permission';
 import { MainService } from '../services/main.service';
-import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-config';
-import { SnackWrapperService } from './../services/snack-wrapper.service';
 import { UtilsService } from './../services/utils.service';
 import { JwtService } from './jwt.service';
 
@@ -26,10 +23,7 @@ export class AuthService {
   constructor(
     private mainService: MainService,
     private jwtService: JwtService,
-    private router: Router,
-    private route: ActivatedRoute,
     private utilsService: UtilsService,
-    private snackWrapperService: SnackWrapperService,
     private closeTabService: CloseTabService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
@@ -41,13 +35,13 @@ export class AuthService {
     return this.mainService.POSTBODY('V1/Account/Refresh', { 'refreshToken': this.getRefreshToken() })
   }
   logging = (userData: ICredentials) => {
-    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+    const returnUrl = this.utilsService.getRouteParams('returnUrl');
     this.mainService.POSTBODY('v1/account/login', userData)
       .pipe(
         catchError((error: any) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
-              this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.threeMili, ENSnackBarColors.danger);
+              this.utilsService.snackBarMessageFailed(error.error.message);
             }
           }
           return throwError(error)
@@ -74,7 +68,7 @@ export class AuthService {
     this.clearDictionaries();
     this.mainService.POSTBODY('V1/Account/Logout', { refreshToken }).subscribe(() => {
       this.jwtService.removeAllLocalStorage();
-      this.routeTo('/login');
+      this.utilsService.routeTo('/login');
     })
   }
   saveTolStorage = (token: IAuthTokenType) => {
@@ -86,12 +80,9 @@ export class AuthService {
   }
   private routeToReturnUrl = (returnUrl: string) => {
     if (!this.utilsService.isNull(returnUrl))
-      this.routeTo(returnUrl);
+      this.utilsService.routeTo(returnUrl);
     else
-      this.routeTo('/wr');
-  }
-  routeTo = (router: string) => {
-    this.router.navigate([router]);
+      this.utilsService.routeTo('/wr');
   }
   isAuthUserLoggedIn(): boolean {
     return this.jwtService.hasStoredAccessAndRefreshTokens() &&
@@ -112,10 +103,10 @@ export class AuthService {
     });
   }
   noAccessMessage = () => {
-    this.snackWrapperService.openSnackBar(EN_messages.access_denied, ENSnackBarTimes.tenMili, ENSnackBarColors.warn);
+    this.utilsService.snackBarMessageWarn(EN_messages.access_denied);
   }
   goOutInMessage = () => {
-    this.snackWrapperService.openSnackBar(EN_messages.accedd_denied_relogin, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+    this.utilsService.snackBarMessageFailed(EN_messages.accedd_denied_relogin);
   }
 
 }
