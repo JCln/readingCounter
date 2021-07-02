@@ -91,6 +91,7 @@
   .header_icons_wrap {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
     margin: 0 $font_05;
     width: 100%;

@@ -48,7 +48,7 @@ export class AuthsManagerService {
     { field: 'title', header: 'عنوان', isSelected: true },
     { field: 'authLevel2Id', header: 'ماژول', isSelected: true, isSelectOption: true },
     { field: 'cssClass', header: 'کلاس css', isSelected: false },
-    { field: 'route', header: 'مسیر', isSelected: true },
+    { field: 'route', header: 'مسیر', isSelected: true, ltr: true },
     { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
     { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
     { field: 'isClosable', header: 'قابل بستن', isSelected: false, isBoolean: true },
