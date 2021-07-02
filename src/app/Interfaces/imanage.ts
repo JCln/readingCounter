@@ -442,7 +442,7 @@ export interface IManageServer {
 }
 
 export interface ITextOutput {
-    _id?: any,
+    id?: any,
     zoneId: number | string,
     itemTitle: string,
     startIndex: any,

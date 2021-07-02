@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ITextOutput } from 'src/app/Interfaces/imanage';
@@ -14,42 +15,39 @@ import { ReadManagerService } from 'src/app/services/read-manager.service';
   styleUrls: ['./txt-output.component.scss']
 })
 export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
+  subscription: Subscription[] = [];
+
+  table: Table;
+  newRowLimit: number = 1;
 
   dataSource: ITextOutput[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-
   _selectCols: any[] = [];
   _selectedColumns: any[];
+  _masterId: string = '';
   clonedProducts: { [s: string]: ITextOutput; } = {};
-  newRowLimit: number = 1;
-
-  subscription: Subscription[] = [];
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService,
     public outputManagerService: OutputManagerService
-  ) {
-  }
+  ) { }
 
   nullSavedSource = () => this.closeTabService.saveDataForTextOutput = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTextOutput) {
-      this.dataSource = this.closeTabService.saveDataForTextOutput;
-    }
-    else {
-      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.textOutputGET);
-      this.closeTabService.saveDataForTextOutput = this.dataSource;
-    }
+    this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.textOutputGET);
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
-    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-
+    this.closeTabService.saveDataForTextOutput = this.dataSource;
+    this.makeIDReadable();
+    this.defaultAddStatus();
     this.insertSelectedColumns();
+    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
+  defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
     this._selectCols = this.readManagerService.columnTextOutput();
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
@@ -59,10 +57,8 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/txt/out')
-          this.classWrapper(true);
-      }
+      if (res.includes('/wr/m/r/txt/out'))
+        this.classWrapper(true);
     })
     )
   }
@@ -74,66 +70,15 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  refreshTable = () => {
-    this.classWrapper(true);
+
+  testChangedValue() {
+    this.newRowLimit = 2;
   }
+  refreshTable = () => this.classWrapper(true);
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: ITextOutput, rowIndex: number) => {
-    this.defaultAddStatus();
-    const a = await this.readManagerService.firstConfirmDialog();
-    if (a) {
-      await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputRemove, rowData);
-      this.refetchTable(rowIndex);
-    }
-  }
-  onRowEditInit(dataSource: ITextOutput, rowIndex: number) {
-    this.clonedProducts[dataSource._id] = { ...dataSource };
-  }
-  onRowEditCancel(dataSource: ITextOutput, index: number) {
-    this.newRowLimit = 1;
-    this.dataSource[index] = this.clonedProducts[dataSource._id];
-    delete this.dataSource[dataSource._id];
-    if (dataSource.isNew)
-      this.dataSource.shift();
-    return;
-    // this.newRowLimit = 1;
-    // console.log(dataSource);
-    // if (dataSource.isNew) {
-    //   this.dataSource.shift();
-    //   delete this.dataSource[index];
-    //   return;
-    // }
-  }
-  async onRowEditSave(dataSource: ITextOutput, rowIndex: number) {
-    this.defaultAddStatus();
-    if (typeof dataSource.zoneId !== 'object') {
-      this.zoneDictionary.find(item => {
-        if (item.title === dataSource.zoneId)
-          dataSource.zoneId = item.id
-      })
-    } else {
-      dataSource.zoneId = dataSource.zoneId['id'];
-    }
-    if (!this.readManagerService.verificationTextOutputEditedRow(dataSource)) {
-      if (dataSource.isNew) {
-        this.dataSource.shift();
-        return;
-      }
-    }
-    console.log(dataSource);
-    if (dataSource.isNew) {
-      delete dataSource.isNew;
-      await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputAdd, dataSource);
-    }
-    else {
-      delete dataSource.isNew;
-      await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputEdit, dataSource);
-    }
-    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-  }
   newRow(): ITextOutput {
     return {
-      _id: null,
+      id: null,
       zoneId: null,
       itemTitle: '',
       startIndex: null,
@@ -142,13 +87,85 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
       isNew: true
     };
   }
-  defaultAddStatus = () => this.newRowLimit = 1;
-  testChangedValue = () => this.newRowLimit = 2;
+  onRowEditInit(dataSource: ITextOutput) {
+    // this.insertSelectedColumns();
+    this.clonedProducts[dataSource.id] = { ...dataSource };
+  }
+  onRowEditCancel(dataSource: ITextOutput, index: number) {
+    this.newRowLimit = 1;
+    this.dataSource[index] = this.clonedProducts[dataSource.id];
+    delete this.dataSource[dataSource.id];
+    if (dataSource.isNew)
+      this.dataSource.shift();
+    return;
+  }
+  removeRow = async (dataSource: ITextOutput, index: number) => {
+    this.newRowLimit = 1;
+    console.log(dataSource);
+    if (typeof dataSource.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSource.zoneId)
+          dataSource.zoneId = item.id
+      })
+    } else {
+      dataSource.zoneId = dataSource.zoneId['id'];
+    }
+
+    const verif = await this.readManagerService.firstConfirmDialog();
+    if (verif) {
+      const a = await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputRemove, dataSource);
+
+      if (a) {
+        this.dataSource[index] = this.clonedProducts[dataSource.id];
+        delete this.dataSource[dataSource.id];
+        this.refetchTable(index);
+      }
+    }
+  }
+  onRowEditSave(dataSource: ITextOutput, rowIndex: number) {
+    this.newRowLimit = 1;
+    if (!this.readManagerService.verificationTextOutputEditedRow(dataSource)) {
+      if (dataSource.isNew) {
+        this.dataSource.shift();
+        return;
+      }
+      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      return;
+    }
+
+    if (typeof dataSource.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSource.zoneId)
+          dataSource.zoneId = item.id
+      })
+    } else {
+      dataSource.zoneId = dataSource.zoneId['id'];
+    }
+
+    if (dataSource.isNew) {
+      this.onRowAdd(dataSource, rowIndex);
+    }
+    else {
+      this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputEdit, dataSource);
+    }
+  }
+  async onRowAdd(dataSource: ITextOutput, rowIndex: number) {
+    const a = await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputAdd, dataSource);
+    if (a) {
+      this.refetchTable(rowIndex);
+      this.refreshTable();
+    }
+  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  private makeIDReadable = () => {
+    this.dataSource.forEach(item => {
+      item.id = item['id'];
+    })
   }
 }

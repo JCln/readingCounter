@@ -21,8 +21,8 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
-                <i appAddRow [table]="dtableDetails" [newRow]="newRow()" [newRowLimit]="newRowLimit"
-                    (click)="testChangedValue()" class="tooltip _circle_border p_icons fa fa-plus">
+                <i appAddRow [table]="dtableDetails" [newRow]="newRow()" [newRowLimit]="newRowLimit" (click)="testChangedValue()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن</div>
                 </i>
             </div>
@@ -71,37 +71,24 @@
                     </p-cellEditor>
                 </ng-container>
                 <ng-template #simple>
-                    <ng-container *ngIf="col.isNumber; else isText">
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input type="number" [(ngModel)]="dataSource[col.field]">
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{dataSource[col.field]}}
-                            </ng-template>
-                        </p-cellEditor>
-                    </ng-container>
-                    <ng-template #isText>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{dataSource[col.field]}}
-                            </ng-template>
-                        </p-cellEditor>
-                    </ng-template>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input [type]="col.isNumber ? 'number': 'text'" [(ngModel)]="dataSource[col.field]">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{dataSource[col.field]}}
+                        </ng-template>
+                    </p-cellEditor>
                 </ng-template>
             </td>
             <td style="text-align: center;">
-                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource,ri)"
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
                 </i>
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)"
                     class="_save pi pi-check"></i>
-                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
-                    class="_cancel pi pi-times"></i>
+                <i *ngIf="editing" pCancelEditableRow class="_cancel pi pi-times"></i>
             </td>
             <td>
                 <i *ngIf="!editing" (click)="removeRow(dataSource, ri)" class="tooltip p_icons fa fa-trash-o">

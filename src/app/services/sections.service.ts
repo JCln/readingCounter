@@ -137,7 +137,7 @@ export class SectionsService {
       if (this.utilsService.isNull(this.dynamicValue.itemTitle))
         return false;
     }
-    
+
     return true;
   }
   private fromToValidation = (): boolean => {
@@ -184,24 +184,27 @@ export class SectionsService {
     return true;
   }
   private validationIsNaN = (): boolean => {
+    console.log(this.dynamicValue);
+    console.log(this.dynamicValue.endIndex);
+
     if (this.dynamicValue.hasOwnProperty('endIndex')) {
-      if (!this.utilsService.isNaN(this.dynamicValue.endIndex))
+      if (this.utilsService.isNaN(this.dynamicValue.endIndex))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('startIndex')) {
-      if (!this.utilsService.isNaN(this.dynamicValue.startIndex))
+      if (this.utilsService.isNaN(this.dynamicValue.startIndex))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('length')) {
-      if (!this.utilsService.isNaN(this.dynamicValue['length']))
+      if (this.utilsService.isNaN(this.dynamicValue['length']))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('fromEshterak')) {
-      if (!this.utilsService.isNaN(this.dynamicValue['fromEshterak']))
+      if (this.utilsService.isNaN(this.dynamicValue['fromEshterak']))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('toEshterak')) {
-      if (!this.utilsService.isNaN(this.dynamicValue['toEshterak']))
+      if (this.utilsService.isNaN(this.dynamicValue['toEshterak']))
         return false;
     }
     return true;
@@ -211,6 +214,7 @@ export class SectionsService {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_numberLengths)
       return false;
     }
+    return true;
   }
   sectionVertification(): boolean {
     if (!this.sectionsNullVertificate()) {
