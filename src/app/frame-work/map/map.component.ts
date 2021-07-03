@@ -121,6 +121,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     const lines = [];
     this.markersDataSourceXY.forEach((items, i) => {
       setTimeout(() => {
+        if (parseFloat(items.y) === 0)
+          return;
         lines.push([parseFloat(items.y), parseFloat(items.x)]);
         L.polyline(lines, {
           color: '#0e4c92',
@@ -217,7 +219,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   mapConfigOptions = (delay: number) => {
     this.removeAllLayers();
     this.markersDataSourceXY.sort(this.dateJalaliService.sortByDatePersian);
-    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay + 20);
+    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay + 10);
     this.leafletDrawPolylines(delay);
   }
   private extrasConfigOptions = (xyData: any) => {
@@ -246,12 +248,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 'بستن تمامی لایه ها').addTo(this.map);
   }
   private circleToLeaflet = (lat: number, lng: number, items) => {
+    if (lat === 0)
+      return;
     L.marker([lat, lng], { weight: 4, radius: 3, icon: items.counterStateTitle === 'بسته' ? markerRed : markerGreen }).addTo(this.layerGroup)
       .bindPopup(
         `${items.firstName}` + `${items.sureName} <br> ${items.eshterak}`,
       );
   }
   private markWithoutCluster = (lat: number, lng: number, items) => {
+    if (lat === 0)
+      return;
     L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`

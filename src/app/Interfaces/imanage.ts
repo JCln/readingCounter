@@ -250,7 +250,7 @@ export interface IOnOffLoadFlat {
     y: string,
     x: string,
     gisAccuracy: string,
-    imageCount: number,
+    imageCount: number | boolean,
     masraf: number,
     eslahType: number,
     newRate: number,

@@ -47,6 +47,9 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.dataSource = await this.listManagerService.getLMAll(this.trackId);
 
+    if (!this.dataSource.length)
+      return;
+
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
@@ -64,8 +67,8 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.listManagerService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.setDynamicRages();
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
+    this.makeHadPicturesToBoolean();
+    this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.listManagerService.columnLMAll();
@@ -132,5 +135,13 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   setDynamicRages = () => {
     this.listManagerService.setDynamicPartRanges(this.dataSource);
+  }
+  makeHadPicturesToBoolean = () => {
+    this.dataSource.forEach(item => {
+      if (item.imageCount > 0)
+        item.imageCount = true;
+      else
+        item.imageCount = false;
+    })
   }
 }

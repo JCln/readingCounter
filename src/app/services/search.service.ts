@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
@@ -19,7 +20,7 @@ export class SearchService {
   private _searchReq: ISearchProReportInput;
   private _isValidateByDate: boolean;
 
-  private _searchPro =
+  private _searchPro: IObjectIteratation[] =
     [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -67,15 +68,15 @@ export class SearchService {
       { field: 'y', header: 'Y', isSelected: false },
       { field: 'x', header: 'X', isSelected: false },
       { field: 'gisAccuracy', header: 'دقت', isSelected: false },
-      { field: 'imageCount', header: 'تعداد تصویر', isSelected: false },
       { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'dateDifference', header: 'طول دوره', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+      { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ];
-  private _searchMosh =
+  private _searchMosh: IObjectIteratation[] =
     [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -123,12 +124,12 @@ export class SearchService {
       { field: 'y', header: 'Y', isSelected: false },
       { field: 'x', header: 'X', isSelected: false },
       { field: 'gisAccuracy', header: 'دقت', isSelected: false },
-      { field: 'imageCount', header: 'تعداد تصویر', isSelected: false },
       { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'dateDifference', header: 'طول دوره', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+      { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ];
 
@@ -136,7 +137,8 @@ export class SearchService {
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private converterService: ConverterService
+    private converterService: ConverterService,
+    private router: Router
   ) { }
 
   /*COLUMNS*/
@@ -336,5 +338,16 @@ export class SearchService {
   }
   getMasrafStates = () => {
     return IMasrafStates;
+  }
+  makeHadPicturesToBoolean = (dataSource: any) => {
+    dataSource.forEach(item => {
+      if (item.imageCount > 0)
+        item.imageCount = true;
+      else
+        item.imageCount = false;
+    })
+  }
+  routeToWoui = (object: IOnOffLoadFlat) => {
+    this.router.navigate(['wr/m/track/woui', false, object.id]);
   }
 }

@@ -18,7 +18,7 @@ export class ListManagerService {
   private saveTo: number = 0;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
-  private listManagerAll = [
+  private listManagerAll: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: false },
     { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
     { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -65,12 +65,12 @@ export class ListManagerService {
     { field: 'y', header: 'Y', isSelected: false },
     { field: 'x', header: 'X', isSelected: false },
     { field: 'gisAccuracy', header: 'دقت', isSelected: false },
-    { field: 'imageCount', header: 'تعداد تصویر', isSelected: false },
+    { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+    { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
     { field: 'masraf', header: 'مصرف', isSelected: false },
     { field: 'eslahType', header: 'اصلاح', isSelected: false },
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
     { field: 'dateDifference', header: 'طول دوره', isSelected: false },
-    { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
     { field: 'description', header: 'توضیحات', isSelected: false }
   ]
 

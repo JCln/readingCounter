@@ -68,6 +68,7 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 
     this.converts();
+    this.searchService.makeHadPicturesToBoolean(this.dataSource);
 
     this.closeTabService.saveDataForSearchPro = this.dataSource;
   }

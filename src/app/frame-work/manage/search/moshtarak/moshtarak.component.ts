@@ -73,6 +73,7 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 
     this.converts();
+    this.searchService.makeHadPicturesToBoolean(this.dataSource);
 
     this.closeTabService.saveDataForSearchMoshtarakin = this.dataSource;
   }
