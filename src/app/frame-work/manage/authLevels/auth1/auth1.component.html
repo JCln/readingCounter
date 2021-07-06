@@ -19,6 +19,7 @@
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <span class="ui-column-title">{{col.header}}</span>
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
@@ -28,7 +29,8 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
@@ -41,6 +43,7 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
                         <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
@@ -50,7 +53,7 @@
                     </ng-template>
                 </p-cellEditor>
             </td>
-            <td style="text-align: center;">
+            <td>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>

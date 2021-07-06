@@ -76,6 +76,7 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td>
+                <span class="ui-column-title">ناحیه</span>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
                         <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
@@ -88,6 +89,7 @@
                 </p-cellEditor>
             </td>
             <td>
+                <span class="ui-column-title">مسیر</span>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
                         <input pInputText type="text" [(ngModel)]="dataSource.routeTitle">
@@ -98,6 +100,7 @@
                 </p-cellEditor>
             </td>
             <td>
+                <span class="ui-column-title">از اشتراک</span>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
                         <input pInputText type="text" [(ngModel)]="dataSource.fromEshterak">
@@ -108,6 +111,7 @@
                 </p-cellEditor>
             </td>
             <td>
+                <span class="ui-column-title">تا اشتراک</span>
                 <p-cellEditor>
                     <ng-template pTemplate="input">
                         <input pInputText type="text" [(ngModel)]="dataSource.toEshterak">
@@ -118,9 +122,10 @@
                 </p-cellEditor>
             </td>
             <td>
+                <span class="ui-column-title">تایید شده</span>
                 <mat-checkbox [disabled]="true" [(ngModel)]="dataSource.isValidated"></mat-checkbox>
             </td>
-            <td style="text-align: center;">
+            <td>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>

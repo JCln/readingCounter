@@ -5,10 +5,14 @@
   display: grid;
   justify-content: center;
   min-height: 13rem;
-  min-width: 20rem;
+  min-width: 17rem;
   overflow: auto;
   direction: rtl;
   text-align: right;
+
+  @media (min-width: 780px) {
+    min-width: 28rem;
+  }
 }
 
 .btn_2 {

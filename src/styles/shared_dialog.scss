@@ -12,9 +12,13 @@
 .mat-dialog-content {
   display: grid;
   min-height: 13rem;
-  min-width: 28rem;
+  min-width: 18rem;
   gap: .2rem;
   overflow: auto;
+
+  @media (min-width: 780px) {
+    min-width: 28rem;
+  }
 }
 
 .mat-dialog-actions {

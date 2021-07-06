@@ -18,7 +18,8 @@
         </tr>
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
         </tr>
@@ -27,6 +28,7 @@
     <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
                 <ng-container
                     *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
                     <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>

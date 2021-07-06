@@ -62,6 +62,7 @@
                 <ng-template pTemplate="body" let-dataSource let-columns="columns">
                     <tr>
                         <td *ngFor="let col of columns">
+                            <span class="ui-column-title">{{col.header}}</span>
                             {{dataSource[col.field]}}
                         </td>
                         <td (click)="downloadAPK()">

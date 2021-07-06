@@ -6,8 +6,8 @@
     <ng-template pTemplate="caption">
         <div class="header_icons_wrap">
             <div class="left_side">
-                <i appAddRow [table]="td" [newRow]="newRow()" [newRowLimit]="newRowLimit"
-                    (click)="testChangedValue()" class="tooltip _circle_border p_icons fa fa-plus">
+                <i appAddRow [table]="td" [newRow]="newRow()" [newRowLimit]="newRowLimit" (click)="testChangedValue()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن</div>
                 </i>
             </div>
@@ -44,6 +44,7 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isBoolean; else elseTemplate">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
@@ -65,7 +66,7 @@
                     </p-cellEditor>
                 </ng-template>
             </td>
-            <td style="text-align: center;">
+            <td>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>

@@ -52,6 +52,7 @@
     <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isBoolean; else elseTemplate">
                     <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>

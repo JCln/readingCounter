@@ -46,6 +46,7 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isSelectOption;else selectOption">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
@@ -82,7 +83,7 @@
                     </ng-template>
                 </ng-template>
             </td>
-            <td style="text-align: center;">
+            <td>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>

@@ -65,12 +65,7 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
-                <!-- <ng-container
-                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
-                </ng-container> -->
-
-
+                <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.field === 'zoneId';else selectOption">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
@@ -109,7 +104,7 @@
                     </p-cellEditor>
                 </ng-template>
             </td>
-            <td style="text-align: center;">
+            <td>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource,ri)"
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>

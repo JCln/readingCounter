@@ -23,6 +23,46 @@
     border: 1px solid $gray_200;
   }
 
+
+  span.ui-column-title {
+    display: none;
+  }
+
+  @media (max-width: 40rem) {
+    span.ui-column-title {
+      display: inline;
+      padding-right: .5rem;
+      float: right;
+      margin-left: auto;
+    }
+
+    .p-datatable {
+      &.p-datatable-responsive {
+        .p-datatable-tbody>tr>td {
+          text-align: left;
+          display: block;
+          width: 100%;
+          float: left;
+          clear: left;
+          border: 0 none;
+          padding-left: .5rem;
+
+          .p-column-title {
+            padding: .4rem;
+            min-width: 30%;
+            display: inline-block;
+            margin: -.4em 1em -.4em -.4rem;
+            font-weight: bold;
+          }
+
+          &:last-child {
+            border-bottom: 1px solid var(--surface-d);
+          }
+        }
+      }
+    }
+  }
+
   [disabled] {
     background: $gray_100;
   }

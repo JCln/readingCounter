@@ -29,7 +29,8 @@
 
         <tr>
             <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
 
@@ -43,6 +44,7 @@
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
                 <ng-container *ngIf="col.isSelectOption;else selectOption">
+                    <span class="ui-column-title">{{col.header}}</span>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <p-dropdown name="regionId" [options]="regionDictionary" [(ngModel)]="dataSource.regionId"
@@ -77,7 +79,7 @@
                     </ng-template>
                 </ng-template>
             </td>
-            <td style="text-align: center;">
+            <td>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>

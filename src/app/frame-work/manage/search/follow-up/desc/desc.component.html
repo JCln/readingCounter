@@ -74,6 +74,7 @@
     <ng-template pTemplate="body" let-changeHsty let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
                 <ng-container
                     *ngIf="changeHsty[col.field] === true || changeHsty[col.field] === false; else elseTemplate">
                     <mat-checkbox [disabled]="true" [(ngModel)]="changeHsty[col.field]"></mat-checkbox>

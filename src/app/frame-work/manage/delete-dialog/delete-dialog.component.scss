@@ -10,9 +10,12 @@
   display: grid;
   justify-content: center;
   min-height: auto;
-  min-width: 20rem;
+  min-width: 17rem;
   overflow: hidden;
   padding: $font_2 0;
+  @media (min-width: 780px) {
+    min-width: 28rem;
+  }
 }
 
 .mat-dialog-actions {

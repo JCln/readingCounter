@@ -58,6 +58,7 @@
     <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSourceRES let-columns="columns" let-ri=rowIndex>
         <tr>
             <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
                 <ng-container
                     *ngIf="dataSourceRES[col.field] === true || dataSourceRES[col.field] === false; else elseTemplate">
                     <mat-checkbox [disabled]="true" [(ngModel)]="dataSourceRES[col.field]"></mat-checkbox>
