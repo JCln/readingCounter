@@ -36,7 +36,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
     return new Promise(() => {
       const dialogRef = this.dialog.open(Auth2AddDgComponent, {
         disableClose: true,
-        minWidth: '30rem',
+        minWidth: '19rem',
         data: {
           di: this.authLevel1Dictionary
         }

@@ -99,6 +99,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: true
@@ -122,6 +123,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     const title = EN_messages.reason_forceOffload;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: true,

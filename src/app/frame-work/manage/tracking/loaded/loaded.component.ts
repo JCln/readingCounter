@@ -97,6 +97,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: true

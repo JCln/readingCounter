@@ -37,7 +37,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
     return new Promise(() => {
       const dialogRef = this.dialog.open(CrAddDgComponent, {
         disableClose: true,
-        minWidth: '30rem',
+        minWidth: '19rem',
         data: {
           di: this.zoneDictionary
         }

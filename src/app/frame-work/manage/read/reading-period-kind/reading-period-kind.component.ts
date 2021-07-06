@@ -34,7 +34,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
     return new Promise(() => {
       const dialogRef = this.dialog.open(RpkmAddDgComponent, {
         disableClose: true,
-        minWidth: '30rem'
+        minWidth: '19rem',
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {

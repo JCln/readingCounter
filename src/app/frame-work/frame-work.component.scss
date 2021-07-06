@@ -1,5 +1,6 @@
 @import 'variable.scss';
 @import 'mixins.scss';
+@import 'media';
 
 main {
   width: auto;
@@ -26,7 +27,10 @@ main {
   .title {
     color: $blue_700;
     direction: rtl;
+    font-size: 1.1rem;
   }
+
+  @include media_wrapper(550px, '.title', font-size, 1.3rem);
 }
 
 ._logo_content {

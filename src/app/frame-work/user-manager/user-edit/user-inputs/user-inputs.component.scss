@@ -2,7 +2,7 @@
 
 form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
   gap: .87rem;
 }
 

@@ -11,7 +11,7 @@ main {
   margin: .2rem;
   border-radius: $border_15;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17.5rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
   grid-auto-flow: dense;
 }
 

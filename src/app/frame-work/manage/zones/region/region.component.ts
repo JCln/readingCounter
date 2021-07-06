@@ -37,7 +37,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       const dialogRef = this.dialog.open(RegionAddDgComponent,
         {
           disableClose: true,
-          width: '30rem',
+          minWidth: '19rem',
           data: {
             di: this.provinceDictionary
           }
@@ -63,7 +63,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForRegion = this.dataSource;
     }
     this.provinceDictionary = await this.sectorsManagerService.getProvinceDictionary();
-    
+
     this.sectorsManagerService.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
     this.insertSelectedColumns();
   }

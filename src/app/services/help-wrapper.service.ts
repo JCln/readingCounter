@@ -358,6 +358,7 @@ export class HelpWrapperService {
     this.someName(this.router.url);
 
     this.dialog.open(AddNewComponent, {
+      minWidth: '19rem',
       data: this.messageToShow
     });
   }

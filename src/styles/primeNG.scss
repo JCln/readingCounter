@@ -138,6 +138,7 @@
 
     .left_side {
       display: flex;
+      flex-wrap: wrap;
 
       i {
         margin: 0 .25rem;

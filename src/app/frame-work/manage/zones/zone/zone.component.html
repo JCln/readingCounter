@@ -58,6 +58,7 @@
                 </ng-container>
                 <ng-template #selectOption>
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">
+                        <span class="ui-column-title">{{col.header}}</span>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
@@ -68,6 +69,7 @@
                         </p-cellEditor>
                     </ng-container>
                     <ng-template #elseTemplate>
+                        <span class="ui-column-title">{{col.header}}</span>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
@@ -80,6 +82,7 @@
                 </ng-template>
             </td>
             <td>
+                <span class="ui-column-title">ویرایش</span>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
@@ -91,6 +94,7 @@
             </td>
 
             <td>
+                <span class="ui-column-title">حذف مورد</span>
                 <i (click)="removeRow(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مورد</div>
                 </i>

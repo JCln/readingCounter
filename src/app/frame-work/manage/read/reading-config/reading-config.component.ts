@@ -39,7 +39,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     return new Promise(() => {
       const dialogRef = this.dialog.open(RdAddDgComponent, {
         disableClose: true,
-        minWidth: '30rem',
+        minWidth: '19rem',
         width: '100%',
         data: {
           di: this.zoneDictionary
@@ -65,7 +65,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     return new Promise(() => {
       const dialogRef = this.dialog.open(RdEditDgComponent, {
         disableClose: true,
-        minWidth: '30rem',
+        minWidth: '19rem',
         width: '100%',
         data: {
           row,

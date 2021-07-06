@@ -5,10 +5,10 @@ import { ITextOutput } from 'src/app/Interfaces/imanage';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { EN_messages } from '../Interfaces/enums.enum';
 import {
-    ENSelectedColumnVariables,
-    IDictionaryManager,
-    IObjectIteratation,
-    IResponses,
+  ENSelectedColumnVariables,
+  IDictionaryManager,
+  IObjectIteratation,
+  IResponses,
 } from '../Interfaces/ioverall-config';
 import { ENInterfaces } from './../Interfaces/en-interfaces.enum';
 import { ConverterService } from './converter.service';
@@ -179,6 +179,7 @@ export class ReadManagerService {
     const title = EN_messages.confirm_remove;
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: false,

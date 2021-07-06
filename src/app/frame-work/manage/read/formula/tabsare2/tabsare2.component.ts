@@ -43,7 +43,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
       const dialogRef = this.dialog.open(Tabsare2AddDgComponent,
         {
           disableClose: true,
-          width: '30rem',
+          minWidth: '19rem',
           data: {
             di: this.zoneDictionary
           }
@@ -113,6 +113,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     const title = EN_messages.confirm_remove;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: false,

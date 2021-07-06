@@ -38,7 +38,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     return new Promise(() => {
       const dialogRef = this.dialog.open(RpmAddDgComponent, {
         disableClose: true,
-        minWidth: '30rem',
+        minWidth: '19rem',
         data: {
           di: this.zoneDictionary,
           rpkmId: this.readingPeriodKindDictionary

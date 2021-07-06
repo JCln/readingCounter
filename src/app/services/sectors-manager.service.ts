@@ -153,28 +153,11 @@ export class SectorsManagerService {
       })
     });
   }
-  // private deleteDialog = () => {
-  //   return new Promise(resolve => {
-  //     const dialogRef = this.dialog.open(DeleteDialogComponent);
-  //     dialogRef.afterClosed().subscribe(result => {
-  //       resolve(result)
-  //     });
-  //   });
-  // }
-  // deleteSingleRowCountry = async (row: ICountryManager) => {
-  //   const dialogResult = await this.deleteDialog();
-  //   if (dialogResult) {
-  //     this.interfaceManagerService.deleteCountryManager(row.id).subscribe((res: IResponses) => {
-  //       if (res) {
-  //         this.utilsService.snackBarMessageSuccess(res.message);
-  //       }
-  //     });
-  //   }
-  // }
   firstConfirmDialog = (): Promise<any> => {
     const title = EN_messages.confirm_remove;
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: false,

@@ -137,6 +137,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     const title = EN_messages.reason_deleteRoute;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: true,

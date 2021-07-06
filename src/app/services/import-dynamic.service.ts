@@ -129,6 +129,7 @@ export class ImportDynamicService {
   showResDialog = (res: IImportDynamicRes) => {
     return new Promise(resolve => {
       this.dialog.open(ConfirmDialogComponent, {
+        minWidth: '19rem',
         data: res
       })
     })

@@ -33,7 +33,7 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
 
   openAddDialog = () => {
     return new Promise(() => {
-      const dialogRef = this.dialog.open(Auth1AddDgComponent, { disableClose: true });
+      const dialogRef = this.dialog.open(Auth1AddDgComponent, { disableClose: true, minWidth: '19rem' });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
           await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel1ADD, result);

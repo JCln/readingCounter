@@ -45,7 +45,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
       const dialogRef = this.dialog.open(WaterAddDgComponent,
         {
           disableClose: true,
-          width: '30rem',
+          minWidth: '19rem',
           data: {
             di: this.zoneDictionary,
             karbariCodeDic: this.karbariCodeDictionary
@@ -64,7 +64,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     return new Promise(() => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
-          width: '30rem'
+          minWidth: '19rem',
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
@@ -132,6 +132,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     const title = EN_messages.confirm_remove;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: false,

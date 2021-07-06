@@ -111,6 +111,7 @@ export class UsersAllService {
     const title = EN_messages.confirm_remove;
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: false,

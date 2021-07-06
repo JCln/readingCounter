@@ -1,12 +1,13 @@
 @import 'variable';
 @import 'button.scss';
 @import 'tooltip.scss';
+@import 'media';
 
 .btn_1 {
   color: $gray_100;
 }
 
-// materials 
+/* materials */
 ::ng-deep {
   .mat-checkbox-layout {
     .mat-checkbox-label {
@@ -14,8 +15,6 @@
       font-size: $font_s;
       font-weight: 600;
       color: $blue_500;
-      // padding: $font_xxs;
-      // color: $blue_600;
       line-height: 2;
       border-radius: $border_15;
       font-family: $font_family;
@@ -54,7 +53,6 @@
   padding: $font_05;
 }
 
-// 
 .accept {
   display: flex;
 }
@@ -75,8 +73,6 @@
 
 
 /* actions */
-
-
 .auth_1 {
   direction: rtl;
 }
@@ -104,6 +100,15 @@
     box-shadow: 1px 1px 3px 0px $blue_gray_400;
     cursor: pointer;
   }
+
+  @media (max-width: 550px) {
+    grid-template-columns: repeat(auto-fit, minmax(5rem, auto));
+
+    .auth_1_item {
+      font-size: $font_xs;
+    }
+  }
+
 }
 
 // active auth1 tab
@@ -112,20 +117,20 @@
   color: $gray_100 !important;
 }
 
-// 
-
 .auth_2 {
-  padding: 0 $font_xxs;
+  padding: 0 $font_05;
   margin-bottom: $font_2;
   border-radius: $border_15;
 }
 
 .auth_3 {
-  margin: $font_05 4rem $font_05 $font_xxs;
+  margin: 0;
   padding: $font_05;
   border-radius: $border_15;
   box-shadow: 0px 2px 3px 1.5px $gray_400;
 }
+
+@include media_wrapper(550px, '.auth_3', margin, $font_05 4rem $font_05 $font_xxs);
 
 .auth_4 {
   display: grid;
@@ -169,8 +174,10 @@
 }
 
 ._double_size {
-  grid-column: auto/span 2;
+  grid-column: auto;
 }
+
+@include media_wrapper(550px, '._double_size', grid-column, auto/span 2);
 
 .separator {
   display: flex;

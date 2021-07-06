@@ -37,7 +37,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       const dialogRef = this.dialog.open(ProvinceAddDgComponent,
         {
           disableClose: true,
-          width: '30rem',
+          minWidth: '19rem',
           data: {
             di: this.countryDictionary
           }

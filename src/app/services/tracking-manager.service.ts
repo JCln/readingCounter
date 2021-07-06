@@ -224,6 +224,7 @@ export class TrackingManagerService {
     const title = EN_messages.reason_backToPrev;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: title,
           isInput: true
@@ -239,6 +240,7 @@ export class TrackingManagerService {
   TESTbackToConfirmDialog = (trackNumber: string, message: ENTrackingMessage): Promise<any> => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
         data: {
           title: message,
           isInput: true

@@ -37,7 +37,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       const dialogRef = this.dialog.open(ZoneBoundAddDgComponent,
         {
           disableClose: true,
-          width: '30rem',
+          minWidth: '19rem',
           data: {
             di: this.zoneDictionary
           }
