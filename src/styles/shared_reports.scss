@@ -7,14 +7,14 @@
   direction: rtl;
   background: $gray_100;
   box-shadow: 1px 1px 8px 4px $gray_400;
-  padding: $font_s;
+  padding: $font_05;
   border-radius: $border_15;
   min-height: 35rem;
 }
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 17rem));
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 17rem));
   gap: $font_05;
   align-items: center;
 }
@@ -59,10 +59,15 @@ footer {
 .order_by {
   display: flex;
   margin: $font_xs;
+
+  @media (max-width: 550px) {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 hr {
-  margin: 0 4rem;
+  margin: 0 auto;
   background-color: $blue_700;
   height: .2rem;
   margin-bottom: $font_xxs;

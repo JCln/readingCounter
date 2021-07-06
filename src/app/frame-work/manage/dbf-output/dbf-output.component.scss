@@ -4,11 +4,12 @@
 @import 'mixins.scss';
 
 section {
-  direction: rtl;
   display: grid;
+  justify-content: center;
+  direction: rtl;
   margin: auto;
-  padding: 2rem;
-  width: 25rem;
+  padding: $font_xs;
+  width: 18rem;
   background: $gray_100;
   border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px $gray_400;
@@ -16,7 +17,7 @@ section {
 
 .input_2 {
   text-align: center;
-  width: 19rem;
+  width: 15rem;
 }
 
 .btn_1 {

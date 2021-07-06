@@ -9,7 +9,7 @@
             selectedItemsLabel=" ستون انتخاب شده{0}" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
-            <div class="left_side">
+            <div class="right_side">
                 <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'finished')"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
@@ -60,7 +60,9 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="backToImportedConfirmDialog(dataSource,ri)"><i class="tooltip p_icons pi pi-step-backward">
+            <td (click)="backToImportedConfirmDialog(dataSource,ri)">
+                <span class="ui-column-title">بازگشت به بارگذاری شده</span>
+                <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به بارگذاری شده</div>
                 </i>
             </td>

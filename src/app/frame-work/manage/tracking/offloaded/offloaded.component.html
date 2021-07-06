@@ -9,7 +9,7 @@
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
-            <div class="left_side">
+            <div class="right_side">
                 <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'offloaded')"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
@@ -65,16 +65,19 @@
                 </ng-template>
             </td>
             <td (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود فایل</span>
                 <i class="tooltip p_icons pi pi-download">
                     <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </td>
             <td>
+                <span class="ui-column-title">مشاهده (اصلاح) لیست</span>
                 <i (click)="routeToOffloadModify(dataSource)" class="tooltip p_icons pi pi-info-circle">
                     <div class="tooltip_text_right">مشاهده(اصلاح) لیست</div>
                 </i>
             </td>
             <td>
+                <span class="ui-column-title">بازگشت به درحال قرائت</span>
                 <i (click)="backToReading(dataSource,ri)" class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
                 </i>

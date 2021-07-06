@@ -10,7 +10,7 @@
             placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
-            <div class="left_side">
+            <div class="right_side">
                 <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'loaded')"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
@@ -64,6 +64,7 @@
                 </ng-template>
             </td>
             <td (click)="backToImportedConfirmDialog(dataSource, ri)">
+                <span class="ui-column-title">برگشت به صادر شده</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text">برگشت به صادر شده</div>
                 </i>

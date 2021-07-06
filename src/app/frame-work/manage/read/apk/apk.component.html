@@ -13,7 +13,7 @@
                     [(ngModel)]="uploadForm.description">
                 <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files"
                     title="فایلی انتخاب نشده است">
-                    <span class="fa fa-android"></span>
+                    <span class="icon_android fa fa-android"></span>
                     فایل <small>apk</small> انتخاب نمایید
                 </label>
                 <label *ngIf="choosenFileName" class="label_choose_file" for="files">
@@ -50,7 +50,6 @@
                         </th>
                         <th style="width: 4rem"></th>
                     </tr>
-
                     <tr>
                         <th *ngFor="let col of columns">
                             <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>

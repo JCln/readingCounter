@@ -1,2 +1,82 @@
-@import 'shared_reports';
-@import 'mixins.scss';
+@import 'variable.scss';
+@import 'button.scss';
+@import 'input.scss';
+
+section {
+  display: grid;
+  direction: rtl;
+  justify-content: center;
+  margin: auto;
+  padding: $font_xs;
+  width: 18rem;
+  background: $gray_100;
+  border-radius: $border_15;
+  box-shadow: 1px 1px 8px 4px $gray_400;
+}
+
+.input_2 {
+  text-align: center;
+  width: 15rem;
+}
+
+.btn_1 {
+  margin-top: $font_2;
+  color: $white;
+  background-color: $orange_500;
+}
+
+._key,
+._value {
+  font-size: $font_m;
+  font-weight: 800;
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: $blue_700;
+  text-align: center;
+}
+
+._key {
+  white-space: nowrap;
+}
+
+input {
+  border: none;
+}
+
+::ng-deep {
+  .mat-select-panel .mat-option {
+    font-size: 1.2rem;
+    line-height: 3em;
+    height: 3em;
+    text-align: right;
+    font-family: $font_family;
+    font-weight: 600;
+  }
+
+  .mat-option-text {
+    font-size: $font_s;
+    font-weight: 600;
+    color: $blue_800;
+  }
+
+  .mat-select-arrow {
+    color: $gray_100;
+  }
+
+  .mat-select-value {
+    color: $gray_100;
+    font-family: $font_family;
+    font-weight: 600;
+  }
+
+  .mat-select {
+    text-align: center;
+  }
+
+}

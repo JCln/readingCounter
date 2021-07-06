@@ -67,6 +67,7 @@
                 </ng-template>
             </td>
             <td>
+                <span class="ui-column-title">ویرایش</span>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
                     class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
@@ -76,8 +77,8 @@
                 <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
                     class="_cancel pi pi-times"></i>
             </td>
-
             <td>
+                <span class="ui-column-title">حذف مورد</span>
                 <i (click)="removeRow(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مورد</div>
                 </i>

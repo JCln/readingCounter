@@ -136,6 +136,23 @@
     margin: 0 $font_05;
     width: 100%;
 
+    .right_side {
+      display: flex;
+      flex-wrap: wrap;
+
+      i {
+        margin: 0 .25rem;
+      }
+
+      @media (max-width: 550px) {
+        display: flex;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 4.4rem;
+        right: 1rem;
+      }
+    }
+
     .left_side {
       display: flex;
       flex-wrap: wrap;

@@ -8,7 +8,7 @@
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
-            <div class="left_side">
+            <div class="right_side">
                 <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'allReads')"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
@@ -81,11 +81,13 @@
                 </ng-template>
             </td>
             <td *ngIf="!isModify" (click)="routeToWoui(dataSource)">
+                <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
             <td *ngIf="isModify">
+                <span class="ui-column-title">اصلاح</span>
                 <i (click)="routeToOffload(dataSource)" class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>
                 </i>

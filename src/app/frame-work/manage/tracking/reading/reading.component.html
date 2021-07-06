@@ -9,7 +9,7 @@
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
-            <div class="left_side">
+            <div class="right_side">
                 <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'reading')"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
@@ -67,19 +67,27 @@
                     {{dataSourceRES[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="forceOffload(dataSourceRES, ri)"><i class="tooltip p_icons pi pi-ban _important">
+            <td (click)="forceOffload(dataSourceRES, ri)">
+                <span class="ui-column-title">اتمام قرائت</span>
+                <i class="tooltip p_icons pi pi-ban _important">
                     <div class="tooltip_text">اتمام قرائت</div>
                 </i>
             </td>
-            <td (click)="backToImportedConfirmDialog(dataSourceRES, ri)"><i class="tooltip p_icons pi pi-fast-backward">
+            <td (click)="backToImportedConfirmDialog(dataSourceRES, ri)">
+                <span class="ui-column-title">بازگشت به صادر شده</span>
+                <i class="tooltip p_icons pi pi-fast-backward">
                     <div class="tooltip_text">بازگشت به صادر شده</div>
                 </i>
             </td>
-            <td (click)="routeToLMPayDay(dataSourceRES)"><i class="tooltip p_icons pi pi-folder-open">
+            <td (click)="routeToLMPayDay(dataSourceRES)">
+                <span class="ui-column-title">مشاهده مامور (ها)</span>
+                <i class="tooltip p_icons pi pi-folder-open">
                     <div class="tooltip_text">مشاهده مامور(ها)</div>
                 </i>
             </td>
-            <td (click)="routeToLMAll(dataSourceRES)"><i class="tooltip p_icons pi pi-list">
+            <td (click)="routeToLMAll(dataSourceRES)">
+                <span class="ui-column-title">مشاهده لیست قرائت</span>
+                <i class="tooltip p_icons pi pi-list">
                     <div class="tooltip_text_right">مشاهده لیست قرائت</div>
                 </i>
             </td>

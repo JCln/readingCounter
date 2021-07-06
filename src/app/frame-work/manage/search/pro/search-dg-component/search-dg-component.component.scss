@@ -42,6 +42,11 @@ form {
     margin-top: $font_2;
   }
 
+  @media (max-width: 550px) {
+    grid-column: 1;
+    margin-top: $font_2;
+  }
+
 }
 
 app-date-jalali {

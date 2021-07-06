@@ -2,7 +2,7 @@
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="static_part">
             <section class="order_by">
-                <h2>صدور بر اساس :</h2>
+                <h3>صدور بر اساس :</h3>
                 <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
                     name="_isOrderByDate">
                     <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"

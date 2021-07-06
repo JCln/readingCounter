@@ -53,16 +53,19 @@
                 </ng-template>
             </td>
             <td class="edit_button" (click)="routeToEditPage(dataSource.id)">
+                <span class="ui-column-title">مشاهده/ویرایش کاربر</span>
                 <i class="tooltip p_icons pi pi-user-edit">
                     <div class="tooltip_text">مشاهده/ویرایش کاربر</div>
                 </i>
             </td>
             <td class="edit_button" (click)="routeToLoggs(dataSource.id)">
+                <span class="ui-column-title">مشاهده ورودها</span>
                 <i class="tooltip p_icons pi pi-sign-in">
                     <div class="tooltip_text">مشاهده ورودها</div>
                 </i>
             </td>
             <td class="edit_button" (mouseover)="showExactConfig(i)" (mouseout)="showExactConfig(i)">
+                <span class="ui-column-title">تغییر وضعیت</span>
                 <i class="tooltip _map_frame_show p_icons pi pi-ellipsis-h">
                     <div class="tooltip_text">تغییر وضعیت</div>
                 </i>

@@ -43,8 +43,8 @@
         let-ri="rowIndex">
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isSelectOption;else selectOption">
-                    <span class="ui-column-title">{{col.header}}</span>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <p-dropdown name="regionId" [options]="regionDictionary" [(ngModel)]="dataSource.regionId"
@@ -58,7 +58,6 @@
                 </ng-container>
                 <ng-template #selectOption>
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">
-                        <span class="ui-column-title">{{col.header}}</span>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
@@ -69,7 +68,6 @@
                         </p-cellEditor>
                     </ng-container>
                     <ng-template #elseTemplate>
-                        <span class="ui-column-title">{{col.header}}</span>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <input pInputText type="text" [(ngModel)]="dataSource[col.field]">

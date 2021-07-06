@@ -1,49 +1,33 @@
-<main class="main" *ngIf="route.children.length === 0">
-    <form #form="ngForm" (ngSubmit)="verification()">
-        <section class="static_part">
-            <section class="content">
-                <div class="input_2">
-                    <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.zoneId" name="zoneId">
-                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
-                </div>
-                <!-- <div class="input_2" [hidden]="_isOrderByDate">
-                    <div class="_key">سال</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.year" name="year">
-                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
-                </div> -->
-            </section>
-
-            <section class="content">
-                <div class="input_2">
-                    <div class="_key">از</div>
-                    <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
-                        </app-date-jalali>
-                    </div>
-                </div>
-                <div class="input_2">
-                    <div class="_key">تا</div>
-                    <div class="_value">
-                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
-                        </app-date-jalali>
-                    </div>
-                </div>
-            </section>
-
-        </section>
-        <footer class="d_flex_s_around">
+<form #form="ngForm" (ngSubmit)="verification()" *ngIf="route.children.length === 0">
+    <section>
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.zoneId" name="zoneId">
+                <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </div>
+        <div class="input_2">
+            <div class="_key">از</div>
+            <div class="_value">
+                <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+        <div class="input_2">
+            <div class="_key">تا</div>
+            <div class="_value">
+                <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+        <footer>
             <button type="submit" class="btn_1">
                 مشاهده لیست
                 <i class="pi pi-list"></i>
             </button>
         </footer>
-    </form>
-</main>
+    </section>
+</form>
 <router-outlet></router-outlet>

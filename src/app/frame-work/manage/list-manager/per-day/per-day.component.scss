@@ -42,17 +42,11 @@ input {
 }
 
 /* card content */
-.position_section {
-  direction: rtl;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(23rem, auto));
-  gap: $font_05;
-}
 
 .card_wrapper {
   display: grid;
   direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(46%, 47%));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
   gap: $font_05;
   background: $gray_400;
   place-content: center;
@@ -98,6 +92,10 @@ input {
 
 .double_size {
   grid-column: auto/ span 2;
+
+  @media (max-width:550px) {
+    grid-column: auto;
+  }
 }
 
 .header_icons_wrap {

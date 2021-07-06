@@ -13,7 +13,7 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 17rem));
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   gap: $font_05;
   align-items: center;
 }
@@ -69,7 +69,7 @@ section.dynamic_content {
   background-color: $orange_500;
 }
 
-h2 {
+h3 {
   color: $gray_600;
   margin-left: 5rem;
 }
@@ -125,7 +125,7 @@ footer {
 }
 
 hr {
-  margin: 0 4rem;
+  margin: 0 auto;
   background-color: $blue_700;
   height: .2rem;
   margin-bottom: $font_xxs;
