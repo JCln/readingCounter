@@ -17,6 +17,10 @@ main {
   border-radius: $border_15;
   background: $gray_100;
   box-shadow: 2px 2px 5px 0px $gray_400;
+
+  @media (max-width: 550px) {
+    padding: 0 $font_xxs $font_05;
+  }
 }
 
 .input__icons {
@@ -37,6 +41,10 @@ main {
   color: $blue_900;
   font-size: 2.5rem;
   margin-bottom: $font_s;
+
+  @media (max-width: 550px) {
+    font-size: $font_2;
+  }
 }
 
 ._inputs {
