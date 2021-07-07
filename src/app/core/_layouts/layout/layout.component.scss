@@ -93,6 +93,14 @@ app-frame-work {
 
 .page_conf_13 {
   width: 13%;
+
+  @media (max-width: 550px) {
+    height: 98vh;
+    width: 80%;
+    overflow-x: auto;
+    top: 1rem;
+    bottom: 0;
+  }
 }
 
 .framework_conf_xs {
