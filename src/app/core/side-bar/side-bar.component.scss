@@ -4,6 +4,36 @@ nav {
   direction: rtl;
 }
 
+/* small sidebar */
+._small_show {
+  display: none;
+}
+
+._test_show {
+  display: none;
+}
+
+@media (max-width: 550px) {
+  ._small_show {
+    display: flex !important;
+    justify-content: space-around;
+  }
+
+  ._small_notshow {
+    display: none !important;
+  }
+
+  ._test_show {
+    display: block !important;
+  }
+}
+
+.title {
+  font-size: $font_xs;
+  font-weight: 600;
+}
+
+/* ***** */
 .ul {
   position: relative;
   right: 0;
@@ -59,14 +89,6 @@ ul::-webkit-scrollbar {
     color: $blue_700;
 
   }
-
-  // ts config for on close/open lists
-  .tsConfig {
-    transform: rotate(180deg);
-    color: $blue_gray_300;
-  }
-
-  //
 
   &.active {
     border: 2px solid $blue_gray_300;
@@ -146,8 +168,8 @@ ul::-webkit-scrollbar {
   z-index: -1;
 }
 
-// small sidebar
 // for small sidebar we added ngIf and separate scss
+
 .btn_2 {
   position: relative;
   cursor: pointer;
@@ -283,3 +305,11 @@ i.icons {
     opacity: 1;
   }
 }
+
+// ts config for on close/open lists
+.tsConfig {
+  transform: rotate(180deg);
+  color: $blue_gray_300;
+}
+
+//
