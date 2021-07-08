@@ -73,9 +73,12 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 24rem));
   gap: .5rem;
-  justify-content: center;
   direction: rtl;
   margin-bottom: $font_xs;
+
+  @media (min-width: 550px) {
+    justify-content: center;
+  }
 }
 
 ._value {

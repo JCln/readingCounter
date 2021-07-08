@@ -3,9 +3,9 @@ import { ChartOptions, ChartType } from 'chart.js';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
+import { IReadingReportChartKarkard } from 'src/app/Interfaces/imanage';
 import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
-import { IReadingReportChartKarkard } from './../../../../Interfaces/imanage';
 
 @Component({
   selector: 'app-karkard-chart',
@@ -17,13 +17,14 @@ export class KarkardChartComponent implements OnInit {
 
   private defaultOptions = {
     fontFamily: 'Blotus',
-    fontSize: 18,
+    fontSize: 14,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
   }
   // Pie
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     legend: {
       display: true,
       position: 'right',

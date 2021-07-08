@@ -16,13 +16,14 @@ export class TrvchChartComponent implements OnInit {
 
   private defaultOptions = {
     fontFamily: 'Blotus',
-    fontSize: 18,
+    fontSize: 14,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
   }
   // Pie
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     legend: {
       display: true,
       position: 'right',
@@ -107,7 +108,7 @@ export class TrvchChartComponent implements OnInit {
       this.backToPrevious();
       return;
     }
-    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/trvch', ENInterfaces.ListTraverseDifferntialChart,'rRTraverseDiffrential');
+    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/trvch', ENInterfaces.ListTraverseDifferntialChart, 'rRTraverseDiffrential');
 
     this.insertToPieChartProvince();
     this.insertToPieChartZone();

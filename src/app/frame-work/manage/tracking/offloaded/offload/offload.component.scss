@@ -39,10 +39,14 @@ section._container {
 }
 
 .__slider {
-  grid-column: 4/span 7;
   display: flex;
+  grid-column: 1 / span 2;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: 550px) {
+    grid-column: 4/span 7;
+  }
 }
 
 ._img_content {

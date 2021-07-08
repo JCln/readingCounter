@@ -3,8 +3,12 @@
 
 .container_wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(27rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
   gap: .5rem;
+
+  @media (min-width: 550px) {
+    grid-template-columns: repeat(auto-fit, minmax(27rem, auto));
+  }
 }
 
 .charts {

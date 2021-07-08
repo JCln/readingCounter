@@ -16,12 +16,13 @@ export class DisperseChartComponent implements OnInit, OnDestroy {
 
   private defaultOptions = {
     fontFamily: 'Blotus',
-    fontSize: 18,
+    fontSize: 14,
     fontStyle: 'bold',
     fontColor: 'rgb(112, 112, 112)'
   }
   // Pie
   public pieChartOptions: ChartOptions = {
+    maintainAspectRatio: false,
     responsive: true,
     legend: {
       display: true,
@@ -109,7 +110,7 @@ export class DisperseChartComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/dh', ENInterfaces.ListDispersalChart,'readingReportReq');
+    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/dh', ENInterfaces.ListDispersalChart, 'readingReportReq');
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();
