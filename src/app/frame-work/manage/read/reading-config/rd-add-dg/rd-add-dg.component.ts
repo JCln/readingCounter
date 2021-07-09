@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { UtilsService } from 'services/utils.service';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-rd-add-dg',

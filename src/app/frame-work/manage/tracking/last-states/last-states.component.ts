@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { OutputManagerService } from 'services/output-manager.service';
+import { TrackingManagerService } from 'services/tracking-manager.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ITracking } from 'src/app/Interfaces/imanage';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { OutputManagerService } from 'src/app/services/output-manager.service';
-import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 @Component({
   selector: 'app-last-states',

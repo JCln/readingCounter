@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 import { Search } from '../classes/search';
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';

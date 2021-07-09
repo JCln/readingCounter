@@ -3,8 +3,7 @@ import '../../../src/assets/L.EasyButton/src/easy-button.js';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { HelpWrapperService } from './../services/help-wrapper.service';
+import { HelpWrapperService } from 'services/help-wrapper.service';
 
 @Component({
   selector: 'app-frame-work',

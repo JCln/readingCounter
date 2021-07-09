@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { CounterStateService } from 'services/counter-state.service';
+import { InteractionService } from 'services/interaction.service';
+import { ReadManagerService } from 'services/read-manager.service';
 import { ICounterState, ICounterStateGridFriendlyResp } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { CounterStateService } from 'src/app/services/counter-state.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { ReadManagerService } from 'src/app/services/read-manager.service';
 
 @Component({
   selector: 'app-counter-state',

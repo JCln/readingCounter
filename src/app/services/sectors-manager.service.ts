@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { UtilsService } from 'services/utils.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { UtilsService } from 'src/app/services/utils.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { EN_messages } from '../Interfaces/enums.enum';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { InterfaceManagerService } from 'services/interface-manager.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { EN_messages } from '../Interfaces/enums.enum';

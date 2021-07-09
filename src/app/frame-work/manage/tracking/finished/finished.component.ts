@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { OutputManagerService } from 'services/output-manager.service';
+import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { TrackingManagerService } from 'services/tracking-manager.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ITracking } from 'src/app/Interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'src/app/Interfaces/ioverall-config';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { OutputManagerService } from 'src/app/services/output-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
-import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 import { EN_messages } from './../../../../Interfaces/enums.enum';

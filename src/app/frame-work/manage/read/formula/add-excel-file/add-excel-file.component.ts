@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormulasService } from 'src/app/services/formulas.service';
+import { FormulasService } from 'services/formulas.service';
 
 @Component({
   selector: 'app-add-excel-file',

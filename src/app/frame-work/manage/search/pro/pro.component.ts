@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { OutputManagerService } from 'services/output-manager.service';
+import { SearchService } from 'services/search.service';
+import { UtilsService } from 'services/utils.service';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IOnOffLoadFlat, ISearchProReportInput } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { OutputManagerService } from 'src/app/services/output-manager.service';
-import { SearchService } from 'src/app/services/search.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 import { SearchDgComponentComponent } from './search-dg-component/search-dg-component.component';
 

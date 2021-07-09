@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DashboardService } from 'src/app/services/dashboard.service';
+import { DashboardService } from 'services/dashboard.service';
 
 @Component({
   selector: 'app-karkard-grid',

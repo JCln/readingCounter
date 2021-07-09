@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
+import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-config';
 import { AuthService } from './auth.service';

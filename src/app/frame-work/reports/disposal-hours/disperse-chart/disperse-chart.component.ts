@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IReadingReportChartDisposeRes } from 'src/app/Interfaces/imanage';
-import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
 @Component({
   selector: 'app-disperse-chart',

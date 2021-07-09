@@ -2,8 +2,8 @@ import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs/internal/Observable';
+import { InterfaceManagerService } from 'services/interface-manager.service';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';

@@ -2,11 +2,11 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { InteractionService } from 'services/interaction.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { PrivacyService } from 'services/privacy.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IPolicies, IPrivacy } from 'src/app/Interfaces/inon-manage';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { PrivacyService } from 'src/app/services/privacy.service';
 
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SectionsService } from 'services/sections.service';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { SectionsService } from 'src/app/services/sections.service';
 
 @Component({
   selector: 'app-water-add-dg',

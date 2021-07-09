@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SectionsService } from 'src/app/services/sections.service';
+import { SectionsService } from 'services/sections.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';

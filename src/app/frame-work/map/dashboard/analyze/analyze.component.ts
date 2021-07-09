@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ChartDataSets, ChartType, RadialChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { DashboardService } from 'services/dashboard.service';
 import { IAnalyzeRes } from 'src/app/Interfaces/imanage';
-import { DashboardService } from 'src/app/services/dashboard.service';
 
 
 @Component({

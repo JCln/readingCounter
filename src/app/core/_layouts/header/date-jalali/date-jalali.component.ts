@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DateJalaliService } from 'src/app/services/date-jalali.service';
+import { DateJalaliService } from 'services/date-jalali.service';
 
 
 @Component({

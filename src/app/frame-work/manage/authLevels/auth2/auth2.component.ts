@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { AuthsManagerService } from 'services/auths-manager.service';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IAuthLevel2 } from 'src/app/Interfaces/iauth-levels';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { AuthsManagerService } from 'src/app/services/auths-manager.service';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
 
 import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
 

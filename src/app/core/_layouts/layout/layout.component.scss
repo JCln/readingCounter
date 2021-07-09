@@ -11,7 +11,7 @@ app-header {
   position: sticky;
   top: 0;
   display: block;
-  z-index: 20;
+  z-index: 30;
 }
 
 app-tab-wrapper {
@@ -37,7 +37,7 @@ app-side-bar {
   width: 0%;
   min-height: 75vh;
   height: 85vh;
-  z-index: 2;
+  z-index: 25;
   transition: all ease-in-out 150ms;
 
   @media (min-width: 520px) {

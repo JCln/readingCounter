@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { SectionsService } from 'src/app/services/sections.service';
+import { SectionsService } from 'services/sections.service';
 
 @Component({
   selector: 'app-auth4-add-dg',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilsService } from 'services/utils.service';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { ICredentials } from 'src/app/Interfaces/iauth-guard-permission';
 
-import { UtilsService } from './../../services/utils.service';
 import { AuthService } from './../auth.service';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from 'services/dashboard.service';
 import { IDashboardSpecial } from 'src/app/Interfaces/inon-manage';
-import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-dispersal-rate',

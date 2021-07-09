@@ -2,12 +2,12 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { DateJalaliService } from 'services/date-jalali.service';
+import { InteractionService } from 'services/interaction.service';
+import { ListManagerService } from 'services/list-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { IListManagerPD, IListManagerPDHistory } from 'src/app/Interfaces/imanage';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { DateJalaliService } from 'src/app/services/date-jalali.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { ListManagerService } from 'src/app/services/list-manager.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({

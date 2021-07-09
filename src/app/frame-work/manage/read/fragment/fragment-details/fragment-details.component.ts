@@ -3,11 +3,11 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { FragmentManagerService } from 'services/fragment-manager.service';
+import { InteractionService } from 'services/interaction.service';
 import { IFragmentDetails } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { FragmentManagerService } from 'src/app/services/fragment-manager.service';
-import { InteractionService } from 'src/app/services/interaction.service';
 
 
 @Component({

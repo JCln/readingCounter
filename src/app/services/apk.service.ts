@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
 
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from '../Interfaces/ioverall-config';

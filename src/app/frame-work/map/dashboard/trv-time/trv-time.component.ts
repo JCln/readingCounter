@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from 'services/dashboard.service';
 import { IDashboardTraverseTimed } from 'src/app/Interfaces/inon-manage';
 import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
-import { DashboardService } from 'src/app/services/dashboard.service';
 
 
 @Component({

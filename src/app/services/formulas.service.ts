@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { UtilsService } from 'services/utils.service';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import {
   ENSelectedColumnVariables,
@@ -7,10 +11,6 @@ import {
   IDictionaryManager,
   IResponses,
 } from 'src/app/Interfaces/ioverall-config';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { SnackWrapperService } from 'src/app/services/snack-wrapper.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IAbBahaFormula, ITabsare2Formula } from './../Interfaces/imanage';

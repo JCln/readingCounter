@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { SectorsManagerService } from 'services/sectors-manager.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { ICountryManager } from 'src/app/Interfaces/inon-manage';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { SectorsManagerService } from 'src/app/services/sectors-manager.service';
 
 import { CountryAddDgComponent } from './country-add-dg/country-add-dg.component';
 

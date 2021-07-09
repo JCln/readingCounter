@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { IReadingReportReq } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'src/app/Interfaces/ioverall-config';
-import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
 
 @Component({

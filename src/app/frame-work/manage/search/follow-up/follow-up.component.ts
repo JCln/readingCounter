@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
+import { TrackingManagerService } from 'services/tracking-manager.service';
 
 @Component({
   selector: 'app-follow-up',

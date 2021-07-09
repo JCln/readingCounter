@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EnvService } from 'src/app/services/env.service';
+import { EnvService } from 'services/env.service';
 
 @Component({
   selector: 'app-anony-header',

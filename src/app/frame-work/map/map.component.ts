@@ -1,17 +1,17 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { DateJalaliService } from 'services/date-jalali.service';
+import { MapItemsService } from 'services/DI/map-items.service.js';
+import { EnvService } from 'services/env.service';
+import { InteractionService } from 'services/interaction.service';
+import { MapService } from 'services/map.service';
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IListManagerPDXY, IReadingReportGISReq, IReadingReportGISResponse } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
-import { DateJalaliService } from 'src/app/services/date-jalali.service';
-import { MapItemsService } from 'src/app/services/DI/map-items.service.js';
-import { EnvService } from 'src/app/services/env.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { MapService } from 'src/app/services/map.service';
-import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 
 declare let L;

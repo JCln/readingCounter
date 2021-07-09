@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { IDictionaryManager, IObjectIteratation, IResponses } from 'src/app/Interfaces/ioverall-config';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { EN_messages } from '../Interfaces/enums.enum';

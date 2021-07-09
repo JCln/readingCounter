@@ -2,12 +2,12 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { UsersAllService } from 'services/users-all.service';
+import { UtilsService } from 'services/utils.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IUserManager } from 'src/app/Interfaces/iuser-manager';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { UsersAllService } from 'src/app/services/users-all.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-users-all',

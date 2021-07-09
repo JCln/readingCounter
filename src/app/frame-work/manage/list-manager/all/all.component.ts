@@ -3,11 +3,11 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { InteractionService } from 'services/interaction.service';
+import { ListManagerService } from 'services/list-manager.service';
+import { OutputManagerService } from 'services/output-manager.service';
 import { IOnOffLoadFlat } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { ListManagerService } from 'src/app/services/list-manager.service';
-import { OutputManagerService } from 'src/app/services/output-manager.service';
 
 @Component({
   selector: 'app-all',

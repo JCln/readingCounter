@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { ReadManagerService } from 'services/read-manager.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IKarbari } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { ReadManagerService } from 'src/app/services/read-manager.service';
 
 import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';
 

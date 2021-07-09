@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
+import { BrowserStorageService } from 'services/browser-storage.service';
+import { UtilsService } from 'services/utils.service';
 
-import { BrowserStorageService } from '../services/browser-storage.service';
-import { UtilsService } from '../services/utils.service';
 import { ENAuthTokenType } from './../Interfaces/iauth-guard-permission';
 
 @Injectable({

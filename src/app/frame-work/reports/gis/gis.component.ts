@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { InteractionService } from 'services/interaction.service';
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'src/app/Interfaces/ioverall-config';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
 
 @Component({
   selector: 'app-gis',

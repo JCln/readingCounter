@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { SearchService } from 'services/search.service';
 import { ISearchProReportInput } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITHV, ITitleValue } from 'src/app/Interfaces/ioverall-config';
-import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-search-dg-component',

@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { OutputManagerService } from 'services/output-manager.service';
+import { TrackingManagerService } from 'services/tracking-manager.service';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
 import { IOutputManager } from 'src/app/Interfaces/imanage';
 import { IZoneManager } from 'src/app/Interfaces/inon-manage';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { OutputManagerService } from 'src/app/services/output-manager.service';
-import { TrackingManagerService } from 'src/app/services/tracking-manager.service';
 
 @Component({
   selector: 'app-dbf-output',

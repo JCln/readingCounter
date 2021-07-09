@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
+import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
 
 import { ENSnackBarColors } from '../Interfaces/ioverall-config';
-import { SnackWrapperService } from '../services/snack-wrapper.service';
-import { SpinnerWrapperService } from '../services/spinner-wrapper.service';
 
 @Injectable({
   providedIn: 'root'

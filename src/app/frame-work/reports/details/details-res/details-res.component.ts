@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { OutputManagerService } from 'services/output-manager.service';
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IReadingReportDetails } from 'src/app/Interfaces/imanage';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
-import { OutputManagerService } from 'src/app/services/output-manager.service';
-import { ReadingReportManagerService } from 'src/app/services/reading-report-manager.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-details-res',

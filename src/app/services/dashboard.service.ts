@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { InterfaceManagerService } from 'services/interface-manager.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
 
 import { IDashboardKarkardTimed, IDashboardReadDaily } from '../Interfaces/inon-manage';
 import { IAnalyzeRes } from './../Interfaces/imanage';

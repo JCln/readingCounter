@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SectionsService } from 'src/app/services/sections.service';
+import { SectionsService } from 'services/sections.service';
 
 @Component({
   selector: 'app-country-add-dg',

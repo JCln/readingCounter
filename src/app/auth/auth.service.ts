@@ -4,13 +4,13 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { CloseTabService } from 'services/close-tab.service';
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
+import { MainService } from 'services/main.service';
+import { UtilsService } from 'services/utils.service';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { DictionaryWrapperService } from 'src/app/services/dictionary-wrapper.service';
 
 import { IAuthTokenType, IAuthUser, ICredentials } from '../Interfaces/iauth-guard-permission';
-import { MainService } from '../services/main.service';
-import { UtilsService } from './../services/utils.service';
 import { JwtService } from './jwt.service';
 
 @Injectable({

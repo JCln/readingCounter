@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { UtilsService } from 'src/app/services/utils.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { UsersAllService } from 'services/users-all.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 import { IRoleManager } from 'src/app/Interfaces/iuser-manager';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { UsersAllService } from 'src/app/services/users-all.service';
 
 @Component({
   selector: 'app-user-role',

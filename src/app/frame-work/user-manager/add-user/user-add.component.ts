@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { UserAddManagerService } from 'services/user-add-manager.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { UserAddManagerService } from 'src/app/services/user-add-manager.service';
 
 import { appItems, IAddAUserManager, IAddUserInfos, IRoleItems } from '../../../Interfaces/iuser-manager';
 import { UserInputsComponent } from './user-inputs/user-inputs.component';

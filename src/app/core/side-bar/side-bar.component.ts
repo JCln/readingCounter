@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SidebarItemsService } from 'src/app/services/DI/sidebar-items.service';
+import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 
 
 @Component({

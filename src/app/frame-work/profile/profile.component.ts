@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { InteractionService } from 'services/interaction.service';
+import { ProfileService } from 'services/profile.service';
 import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
 import { IProfile } from 'src/app/Interfaces/iuser-manager';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { ProfileService } from 'src/app/services/profile.service';
 
 import { IChangePassword } from './../../Interfaces/inon-manage';
 

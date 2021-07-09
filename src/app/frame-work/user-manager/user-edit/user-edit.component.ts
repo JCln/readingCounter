@@ -2,12 +2,12 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CloseTabService } from 'services/close-tab.service';
+import { InteractionService } from 'services/interaction.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { UserEditManagerService } from 'services/user-edit-manager.service';
 import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { appItems, IRoleItems, IUserInfo } from 'src/app/Interfaces/iuser-manager';
-import { CloseTabService } from 'src/app/services/close-tab.service';
-import { InteractionService } from 'src/app/services/interaction.service';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
-import { UserEditManagerService } from 'src/app/services/user-edit-manager.service';
 
 @Component({
   selector: 'app-user-edit',

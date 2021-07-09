@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { InterfaceManagerService } from 'src/app/services/interface-manager.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
 import { IObjectIteratation } from '../Interfaces/ioverall-config';
