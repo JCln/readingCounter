@@ -29,9 +29,9 @@
                 <i class="{{item.cssClass}} icons _small_show"></i>
             </div>
             <div class="_test_show">
-                <div class="sub_item_1" *ngFor="let subItem of item.subItems" (click)="$event.stopPropagation()"
-                    [routerLink]="subItem.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                    [hidden]="!item.isOpen">
+                <div class="sub_item_1" *ngFor="let subItem of item.subItems" (click)="sid_isSmallStatus()"
+                    (click)="$event.stopPropagation()" [routerLink]="subItem.route" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }" [hidden]="!item.isOpen">
                     {{subItem.title}}
                 </div>
             </div>

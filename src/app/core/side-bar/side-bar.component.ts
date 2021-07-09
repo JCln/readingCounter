@@ -26,7 +26,7 @@ export class SideBarComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    if (screen.width <= 520) {
+    if (screen.width <= 550) {
       this.smallScreen = true;
     }
   }
