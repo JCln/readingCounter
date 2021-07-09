@@ -208,7 +208,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     xyData.map((items, i) => {
       setTimeout(() => {
         this[method](parseFloat(items.y), parseFloat(items.x), items);
-        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 18);
+        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
       }, i * delay);
     })
   }

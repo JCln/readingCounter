@@ -56,15 +56,15 @@ footer {
   text-align: center;
 }
 
-.order_by {
-  display: flex;
-  margin: $font_xs;
+// .order_by {
+//   display: flex;
+//   margin: $font_xs;
 
-  @media (max-width: 550px) {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-}
+//   @media (max-width: 550px) {
+//     justify-content: center;
+//     flex-wrap: wrap;
+//   }
+// }
 
 hr {
   margin: 0 auto;
@@ -74,8 +74,10 @@ hr {
 }
 
 .radio_group {
-  display: flex;
-  justify-content: space-evenly;
+  // display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, auto));
+  justify-content: center;
 }
 
 .radio_button {

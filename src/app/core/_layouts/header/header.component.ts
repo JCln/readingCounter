@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, EventEmitter, OnDestroy, Output, Type } from '@angular/core';
+import { AfterContentInit, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, Type } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -8,8 +8,9 @@ import { AuthService } from 'src/app/auth/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterContentInit, OnDestroy {
+export class HeaderComponent implements AfterContentInit, OnChanges, OnDestroy {
   private sideBar: boolean;
+  @Input() sid_isSmall: boolean;
   @Output() sidebarEvent = new EventEmitter<boolean>();
   DateJalaliComponent?: Type<any>;
   subscription: Subscription;
@@ -37,5 +38,8 @@ export class HeaderComponent implements AfterContentInit, OnDestroy {
   }
   logout = () => {
     this.authService.logout();
+  }
+  ngOnChanges(): void {
+    this.sideBar = this.sid_isSmall;
   }
 }

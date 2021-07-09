@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 
 
@@ -9,6 +9,7 @@ import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 })
 export class SideBarComponent implements OnInit {
   @Input() sid_isSmall: boolean;
+  @Output() sidebarEvent = new EventEmitter<boolean>();
   smallScreen: boolean = false;
   currentRoute: any;
 
@@ -43,8 +44,7 @@ export class SideBarComponent implements OnInit {
       }
     })
   }
-  sid_isSmallStatus = () => {
-    this.sid_isSmall = !this.sid_isSmall;
+  setSidebar = () => {
+    this.sidebarEvent.emit(!this.sid_isSmall);
   }
-
 }
