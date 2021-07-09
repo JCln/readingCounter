@@ -21,7 +21,7 @@
                 <i class="pi pi-cog"></i>
                 <div class="tooltip_text">تنظیمات نقشه</div>
             </button>
-            <p>زمان نمایش؟</p>
+            <p>تنظیمات نقشه</p>
         </div>
         <div class="_flex_dr_ric" [hidden]="!isShowMap">
             <button style="z-index: 1;" (click)="mapService.backToPreviousPage()"
@@ -38,7 +38,20 @@
     <div *ngIf="isShowMapConfig" [hidden]="!canShowOptionsButton" class="polyline_config">
         <h3>زمان نمایش (ms) : {{polyline_configs}}</h3>
         <p-slider [(ngModel)]="polyline_configs" [max]=3000></p-slider>
-        <button class="btn_2" (click)="mapConfigOptions(polyline_configs)">نمایش</button>
+        <article>
+            <h3>ترتیب براساس :</h3>
+            <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_selectedOrderId"
+                name="_isOrderByTime">
+                <mat-radio-button class="radio_button" *ngFor="let orderType of orderGroup" [value]="orderType.value">
+                    {{orderType.header}}
+                </mat-radio-button>
+            </mat-radio-group>
+            <h3>به ترتیب صعودی؟</h3>
+            <mat-checkbox name="orderInAsc" [(ngModel)]="_isOrderInAsc">بلی</mat-checkbox>
+            <br>
+        </article>
+        <button class="btn_2" (click)="mapConfigOptions(polyline_configs)"
+            (click)="isShowMapConfig = false">نمایش</button>
     </div>
     <div id="map"></div>
 </div>

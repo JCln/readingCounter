@@ -12,6 +12,7 @@ import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 import { EN_messages } from 'src/app/Interfaces/enums.enum';
 import { IListManagerPDXY, IReadingReportGISReq, IReadingReportGISResponse } from 'src/app/Interfaces/imanage';
 import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
+import { ITHV } from 'src/app/Interfaces/ioverall-config';
 
 
 declare let L;
@@ -68,9 +69,22 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   isShowMap: boolean = true;
   canShowOptionsButton: boolean = false;
   isShowMapConfig: boolean = false;
-
-  title: string = '';
   subscription: Subscription;
+
+  _selectedOrderId: number = 0;
+  orderGroup: ITHV[] = [
+    {
+      title: 'eshterak',
+      header: 'اشتراک',
+      value: 0
+    },
+    {
+      title: 'time',
+      header: 'زمان',
+      value: 1
+    }
+  ]
+  _isOrderInAsc: boolean = false;
 
   constructor(
     public mapService: MapService,
@@ -166,7 +180,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr')
+        if (res === '/wr' || res === '/wr/db')
           this.ngOnInit();
       }
     })
@@ -194,7 +208,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     xyData.map((items, i) => {
       setTimeout(() => {
         this[method](parseFloat(items.y), parseFloat(items.x), items);
-        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
+        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 18);
       }, i * delay);
     })
   }
@@ -218,7 +232,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   mapConfigOptions = (delay: number) => {
     this.removeAllLayers();
-    this.markersDataSourceXY.sort(this.dateJalaliService.sortByDatePersian);
+
+    if (this._selectedOrderId === 0) {
+      this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterak) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterakDESC)
+    }
+    else {
+      this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByDatePersian) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByDateDESCPersian)
+    }
+
     this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay + 10);
     this.leafletDrawPolylines(delay);
   }

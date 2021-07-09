@@ -46,4 +46,23 @@ export class DateJalaliService {
     return 0;
   }
 
+  sortByEshterak = (a: any, b: any) => {
+    if (a.eshterak < b.eshterak) {
+      return -1;
+    }
+    if (a.eshterak > b.eshterak) {
+      return 1;
+    }
+    return 0;
+  }
+  sortByEshterakDESC = (a: any, b: any) => {
+    if (a.eshterak > b.eshterak) {
+      return -1;
+    }
+    if (a.eshterak < b.eshterak) {
+      return 1;
+    }
+    return 0;
+  }
+
 }

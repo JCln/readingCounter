@@ -1,8 +1,8 @@
 @import 'variable.scss';
-@import 'mixins.scss';
-@import 'button.scss';
 @import 'tooltip.scss';
 @import 'mixins.scss';
+@import 'button.scss';
+@import '_mat.scss';
 
 .map-frame {
   margin: 1rem .2rem;
@@ -140,6 +140,23 @@
   direction: rtl;
   border-radius: $border_15;
   box-shadow: 0px 2px 3px 1px $blue_gray_700;
+
+  @media (max-width: 550px) {
+    margin: $font_l 0;
+    width: 18rem;
+  }
+}
+
+article {
+  background-color: $gray_200;
+  border-radius: $border_15;
+  margin: $font_05 0;
+  padding: $font_05;
+  box-shadow: 0 0 2px 1px $gray_500;
+}
+
+._flex_dr_ric {
+  justify-content: center;
 }
 
 h3 {
