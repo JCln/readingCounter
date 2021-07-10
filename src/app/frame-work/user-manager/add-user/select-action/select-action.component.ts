@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { appItems } from 'src/app/Interfaces/iuser-manager';
+import { appItems } from 'interfaces/iuser-manager';
 
 @Component({
   selector: 'app-select-action',

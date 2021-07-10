@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IDashboardUsersInfo } from 'interfaces/inon-manage';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
-import { IDashboardUsersInfo } from 'src/app/Interfaces/inon-manage';
-import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-user-overall',

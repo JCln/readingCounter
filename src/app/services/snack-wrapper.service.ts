@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
+import { ENSnackBarColors, ENSnackBarTimes, ISnackBar } from 'interfaces/ioverall-config';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
-import { ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
-
-import { ENSnackBarColors, ISnackBar } from '../Interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'

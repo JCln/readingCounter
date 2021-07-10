@@ -1,4 +1,4 @@
-import { Imap } from './../../Interfaces/imap';
+import { Imap } from 'interfaces/imap';
 
 export enum ENtestMap {
     OSM = 'map[0]',

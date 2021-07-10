@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IDictionaryManager, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { EN_messages } from '../Interfaces/enums.enum';
-import { IDictionaryManager, IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';

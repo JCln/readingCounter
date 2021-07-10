@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
-import { UtilsService } from 'services/utils.service';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IAbBahaFormula, ITabsare2Formula } from 'interfaces/imanage';
 import {
   ENSelectedColumnVariables,
   ENSnackBarColors,
   ENSnackBarTimes,
   IDictionaryManager,
+  IObjectIteratation,
   IResponses,
-} from 'src/app/Interfaces/ioverall-config';
+} from 'interfaces/ioverall-config';
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { UtilsService } from 'services/utils.service';
 
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { IAbBahaFormula, ITabsare2Formula } from './../Interfaces/imanage';
-import { IObjectIteratation } from './../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
 
 @Injectable({

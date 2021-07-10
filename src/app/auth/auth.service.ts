@@ -1,5 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-permission';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
@@ -8,9 +10,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { MainService } from 'services/main.service';
 import { UtilsService } from 'services/utils.service';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
 
-import { IAuthTokenType, IAuthUser, ICredentials } from '../Interfaces/iauth-guard-permission';
 import { JwtService } from './jwt.service';
 
 @Injectable({

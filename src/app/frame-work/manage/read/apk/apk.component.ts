@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { IAPK } from 'interfaces/inon-manage';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { IAPK } from 'src/app/Interfaces/inon-manage';
 
 @Component({
   selector: 'app-apk',

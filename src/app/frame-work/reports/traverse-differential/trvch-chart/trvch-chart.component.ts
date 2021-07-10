@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IReadingReportChartTraverseDifferential } from 'interfaces/imanage';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { IReadingReportChartTraverseDifferential } from 'src/app/Interfaces/imanage';
 
 @Component({
   selector: 'app-trvch-chart',

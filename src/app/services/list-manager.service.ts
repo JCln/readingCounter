@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
+import { ENSelectedColumnVariables, IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { IOnOffLoadFlat } from '../Interfaces/imanage';
-import { ENSelectedColumnVariables, IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
 import { CloseTabService } from './close-tab.service';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';

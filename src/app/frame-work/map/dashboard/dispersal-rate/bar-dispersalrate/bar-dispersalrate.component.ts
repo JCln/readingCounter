@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { IDashboardSpecial } from 'interfaces/inon-manage';
 import { Label } from 'ng2-charts';
-import { IDashboardSpecial } from 'src/app/Interfaces/inon-manage';
 
 @Component({
   selector: 'app-bar-dispersalrate',

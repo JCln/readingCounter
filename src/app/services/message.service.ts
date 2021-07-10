@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { IMessage } from 'interfaces/inon-manage';
 
-import { IMessage } from './../Interfaces/inon-manage';
 import { colors, times } from './DI/messages';
 
 @Injectable({

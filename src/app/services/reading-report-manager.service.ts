@@ -1,14 +1,17 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import {
+  IReadingReportGISReq,
+  IReadingReportReq,
+  IReadingReportTraverseDifferentialReq,
+  IReadingReportWithZoneIDsReq,
+} from 'interfaces/imanage';
+import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { IReadingReportWithZoneIDsReq } from 'src/app/Interfaces/imanage';
-import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'src/app/Interfaces/ioverall-config';
-
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { EN_messages } from '../Interfaces/enums.enum';
-import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from './../Interfaces/imanage';
 
 @Injectable({
   providedIn: 'root'

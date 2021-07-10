@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { IFollowUp, IFollowUpHistory } from 'interfaces/imanage';
+import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { IFollowUp, IFollowUpHistory } from 'src/app/Interfaces/imanage';
-import { IObjectIteratation, ISearchInOrderTo } from 'src/app/Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-desc',

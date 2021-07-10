@@ -2,16 +2,16 @@ import 'jspdf-autotable';
 
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ITracking } from 'interfaces/imanage';
+import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { ITracking } from 'src/app/Interfaces/imanage';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'src/app/Interfaces/ioverall-config';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 

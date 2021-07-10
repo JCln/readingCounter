@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IAddUserInfos } from 'src/app/Interfaces/iuser-manager';
+import { IAddUserInfos } from 'interfaces/iuser-manager';
 
 @Component({
   selector: 'app-user-inputs',

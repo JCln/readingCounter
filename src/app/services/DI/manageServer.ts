@@ -1,4 +1,4 @@
-import { IManageServer } from 'src/app/Interfaces/imanage';
+import { IManageServer } from 'interfaces/imanage';
 
 export const serverTasts: IManageServer[] = [
 

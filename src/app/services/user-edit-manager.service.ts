@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
+import { IAUserEditSave, IUserEditManager } from 'interfaces/iuser-manager';
 
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { EN_messages } from '../Interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IResponses } from '../Interfaces/ioverall-config';
-import { IAUserEditSave, IUserEditManager } from '../Interfaces/iuser-manager';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IReadingReportWithZoneIDsReq } from 'interfaces/imanage';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
 import { InteractionService } from 'services/interaction.service';
-import { IReadingReportWithZoneIDsReq } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager, ITitleValue } from 'src/app/Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-forbidden',

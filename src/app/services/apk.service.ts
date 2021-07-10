@@ -1,15 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, ENSnackBarTimes, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
 
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IResponses } from '../Interfaces/ioverall-config';
-import { IObjectIteratation } from './../Interfaces/ioverall-config';
 import { UtilsService } from './utils.service';
 
 @Injectable({

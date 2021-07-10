@@ -1,4 +1,4 @@
-import { ENOffloadModifyType } from '../Interfaces/ioverall-config';
+import { ENOffloadModifyType } from 'interfaces/ioverall-config';
 
 export class OffloadModify {
     static readonly callAnnounce = new OffloadModify(0, ENOffloadModifyType.callAnnounce);

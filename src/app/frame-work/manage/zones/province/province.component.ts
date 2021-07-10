@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IProvinceManager } from 'interfaces/inon-manage';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { IProvinceManager } from 'src/app/Interfaces/inon-manage';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
 

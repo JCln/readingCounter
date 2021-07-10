@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { IForbiddenManager } from 'interfaces/imanage';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
 import { InteractionService } from 'services/interaction.service';
-import { IForbiddenManager } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-forb-res',

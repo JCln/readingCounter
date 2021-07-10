@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { EN_messages } from 'interfaces/enums.enum';
 import { UtilsService } from 'services/utils.service';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
 
 @Component({
   selector: 'app-confirm-text-dialog',

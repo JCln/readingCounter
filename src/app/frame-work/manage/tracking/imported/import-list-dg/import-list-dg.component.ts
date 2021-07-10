@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ITracking } from 'interfaces/imanage';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { ITracking } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager, IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
 
 
 @Component({

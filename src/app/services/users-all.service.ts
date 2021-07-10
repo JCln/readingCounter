@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import {
   ENSelectedColumnVariables,
   ENSnackBarColors,
   ENSnackBarTimes,
+  IObjectIteratation,
   IResponses,
-} from 'src/app/Interfaces/ioverall-config';
+} from 'interfaces/ioverall-config';
+import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { EN_messages } from '../Interfaces/enums.enum';
-import { IObjectIteratation } from '../Interfaces/ioverall-config';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
 

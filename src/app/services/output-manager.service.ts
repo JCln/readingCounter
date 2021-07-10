@@ -1,13 +1,13 @@
 import 'jspdf-autotable';
 
 import { Injectable } from '@angular/core';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IOutputManager } from 'interfaces/imanage';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
 
 import { font } from '../../assets/pdfjs/BLotus-normal';
-import { EN_messages } from '../Interfaces/enums.enum';
-import { IDictionaryManager, IObjectIteratation } from '../Interfaces/ioverall-config';
-import { IOutputManager } from './../Interfaces/imanage';
 import { ConverterService } from './converter.service';
 import { UtilsService } from './utils.service';
 

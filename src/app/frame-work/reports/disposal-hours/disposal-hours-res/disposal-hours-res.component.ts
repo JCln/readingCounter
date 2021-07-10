@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IReadingReportDisposalHours } from 'interfaces/imanage';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { IReadingReportDisposalHours } from 'src/app/Interfaces/imanage';
 
 @Component({
   selector: 'app-disposal-hours-res',

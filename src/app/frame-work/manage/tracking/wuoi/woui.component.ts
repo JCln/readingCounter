@@ -1,13 +1,13 @@
 import { Location } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/imanage';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { InteractionService } from 'services/interaction.service';
-import { IOnOffLoad, IOverAllWOUIInfo } from 'src/app/Interfaces/imanage';
 
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 

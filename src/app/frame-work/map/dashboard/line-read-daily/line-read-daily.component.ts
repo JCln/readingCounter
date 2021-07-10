@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartType } from 'chart.js';
+import { IDashboardReadDaily } from 'interfaces/inon-manage';
 import { BaseChartDirective, Color, Label } from 'ng2-charts';
 import { DashboardService } from 'services/dashboard.service';
-import { IDashboardReadDaily } from 'src/app/Interfaces/inon-manage';
 
 @Component({
   selector: 'app-line-read-daily',

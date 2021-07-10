@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
-import { IDictionaryManager, IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-count-in-states',

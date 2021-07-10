@@ -1,14 +1,12 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
-import { ENSnackBarTimes } from 'src/app/Interfaces/ioverall-config';
-
-import { ENSnackBarColors } from '../Interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'

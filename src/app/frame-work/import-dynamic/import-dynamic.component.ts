@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { IImportDynamicDefault } from 'interfaces/inon-manage';
+import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
-import { IImportDynamicDefault } from 'src/app/Interfaces/inon-manage';
-import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'src/app/Interfaces/ioverall-config';
 
 
 @Component({

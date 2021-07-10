@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IDashboardTimed } from 'interfaces/inon-manage';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
-import { IDashboardTimed } from 'src/app/Interfaces/inon-manage';
-import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-media',

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { IFollowUp, IFollowUpHistory } from 'src/app/Interfaces/imanage';
-import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
+import { IFollowUp, IFollowUpHistory } from 'interfaces/imanage';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
 
 @Component({
   selector: 'app-time-line',

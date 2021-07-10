@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IForbiddenManager, IReadingReportWithZoneIDsReq } from 'interfaces/imanage';
+import { IDictionaryManager, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { IDictionaryManager, ITitleValue } from 'src/app/Interfaces/ioverall-config';
 
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { EN_messages } from '../Interfaces/enums.enum';
-import { IObjectIteratation } from '../Interfaces/ioverall-config';
-import { IForbiddenManager, IReadingReportWithZoneIDsReq } from './../Interfaces/imanage';
 import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 

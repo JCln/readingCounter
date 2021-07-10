@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IChangePassword } from 'interfaces/inon-manage';
+import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { IObjectIteratation, IResponses } from 'src/app/Interfaces/ioverall-config';
-
-import { IChangePassword } from './../Interfaces/inon-manage';
 
 @Injectable({
   providedIn: 'root'

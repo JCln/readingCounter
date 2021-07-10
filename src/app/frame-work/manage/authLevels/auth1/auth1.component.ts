@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IAuthLevels } from 'interfaces/iauth-levels';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { IAuthLevels } from 'src/app/Interfaces/iauth-levels';
 
 import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';
 

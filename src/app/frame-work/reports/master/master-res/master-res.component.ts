@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IReadingReportMaster } from 'interfaces/imanage';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { IReadingReportMaster } from 'src/app/Interfaces/imanage';
 
 @Component({
   selector: 'app-master-res',

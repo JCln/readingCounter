@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ISidebarItems } from 'interfaces/ioverall-config';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { ISidebarItems } from 'src/app/Interfaces/ioverall-config';
 
 import { InterfaceManagerService } from '../interface-manager.service';
 import { sidebarItemsTest } from './sidebarItems';

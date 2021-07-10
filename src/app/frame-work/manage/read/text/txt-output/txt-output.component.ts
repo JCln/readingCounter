@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ITextOutput } from 'interfaces/imanage';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Table } from 'primeng/table';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadManagerService } from 'services/read-manager.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { ITextOutput } from 'src/app/Interfaces/imanage';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-txt-output',

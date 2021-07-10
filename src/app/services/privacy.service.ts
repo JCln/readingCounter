@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { IPrivacy } from 'interfaces/inon-manage';
 
-import { IPrivacy } from '../Interfaces/inon-manage';
 import { privacies } from './DI/privacies';
 
 @Injectable({

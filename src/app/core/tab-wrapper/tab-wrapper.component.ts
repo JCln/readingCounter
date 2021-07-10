@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ITabs, ITabWrapperDetectDynamicRoute } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 import { InteractionService } from 'services/interaction.service';
 import { UtilsService } from 'services/utils.service';
-import { ITabs, ITabWrapperDetectDynamicRoute } from 'src/app/Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-tab-wrapper',

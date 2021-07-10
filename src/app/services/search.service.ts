@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IOnOffLoadFlat, ISearchMoshReq, ISearchProReportInput } from 'interfaces/imanage';
+import { IDictionaryManager, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
 
 import { Search } from '../classes/search';
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { IOnOffLoadFlat, ISearchMoshReq, ISearchProReportInput } from '../Interfaces/imanage';
-import { IDictionaryManager, IObjectIteratation, ITitleValue } from '../Interfaces/ioverall-config';
-import { IMasrafStates } from './../Interfaces/ioverall-config';
 import { ConverterService } from './converter.service';
 
 @Injectable({

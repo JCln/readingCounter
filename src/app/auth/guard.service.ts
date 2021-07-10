@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
-import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-config';
 import { AuthService } from './auth.service';
 
 @Injectable({

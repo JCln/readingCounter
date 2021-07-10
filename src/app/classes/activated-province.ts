@@ -1,4 +1,4 @@
-import { ENActivateProvinceTitle } from '../Interfaces/ioverall-config';
+import { ENActivateProvinceTitle } from 'interfaces/ioverall-config';
 
 export class ActivatedProvince {
     public static readonly DEFAULT = new ActivatedProvince(

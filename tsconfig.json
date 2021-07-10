@@ -5,6 +5,9 @@
     "paths": {
       "services/*": [
           "src/app/services/*"
+      ],
+      "interfaces/*": [
+          "src/app/interfaces/*"
       ]
     },
     "outDir": "./dist/out-tsc",

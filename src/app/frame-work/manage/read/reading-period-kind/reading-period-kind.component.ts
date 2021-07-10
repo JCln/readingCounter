@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IReadingPeriodKind } from 'interfaces/imanage';
 import { Subscription } from 'rxjs';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { IReadingPeriodKind } from 'src/app/Interfaces/imanage';
 
 import { RpkmAddDgComponent } from './rpkm-add-dg/rpkm-add-dg.component';
 

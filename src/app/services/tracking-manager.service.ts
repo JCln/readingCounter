@@ -1,17 +1,16 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IEditTracking, IOutputManager, ITracking } from 'interfaces/imanage';
+import { IOffloadModifyReq } from 'interfaces/inon-manage';
+import { ENSelectedColumnVariables, ENTrackingMessage, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from '../Interfaces/ioverall-config';
 import { OffloadModify } from './../classes/offload-modify-type';
-import { IEditTracking, IOutputManager, ITracking } from './../Interfaces/imanage';
-import { IOffloadModifyReq } from './../Interfaces/inon-manage';
-import { ENTrackingMessage } from './../Interfaces/ioverall-config';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
 

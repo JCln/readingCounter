@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IColor, IMessage, ITime } from 'interfaces/inon-manage';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { InteractionService } from 'services/interaction.service';
 import { MessageService } from 'services/message.service';
-import { IColor, IMessage, ITime } from 'src/app/Interfaces/inon-manage';
 
 @Component({
   selector: 'app-messages',

@@ -1,4 +1,4 @@
-import { IPrivacy } from 'src/app/Interfaces/inon-manage';
+import { IPrivacy } from 'interfaces/inon-manage';
 
 export const privacies: IPrivacy = {
     minLength: 4,

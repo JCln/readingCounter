@@ -1,4 +1,4 @@
-import { IColor, IMessage, ITime } from 'src/app/Interfaces/inon-manage';
+import { IColor, IMessage, ITime } from 'interfaces/inon-manage';
 
 export const messages: IMessage[] = [
     { title: '', text: '', color: '', showTime: 0, canSave: true }

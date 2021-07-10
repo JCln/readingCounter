@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { IUserLoggins } from 'interfaces/iuser-manager';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { IObjectIteratation } from '../Interfaces/ioverall-config';
-import { IUserLoggins } from './../Interfaces/iuser-manager';
 
 @Injectable({
   providedIn: 'root'

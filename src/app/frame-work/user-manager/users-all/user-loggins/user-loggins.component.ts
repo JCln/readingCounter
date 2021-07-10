@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { IUserLoggins } from 'interfaces/iuser-manager';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { UserLogginsService } from 'services/user-loggins.service';
-
-import { IUserLoggins } from '../../../../Interfaces/iuser-manager';
 
 @Component({
   selector: 'app-user-loggins',

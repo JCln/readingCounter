@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { ITitleValue } from 'src/app/Interfaces/ioverall-config';
-
-import { ENSnackBarColors, ENSnackBarTimes } from './../Interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'

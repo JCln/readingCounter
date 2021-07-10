@@ -1,11 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { IChangePassword } from 'interfaces/inon-manage';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { IProfile } from 'interfaces/iuser-manager';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { ProfileService } from 'services/profile.service';
-import { IObjectIteratation } from 'src/app/Interfaces/ioverall-config';
-import { IProfile } from 'src/app/Interfaces/iuser-manager';
-
-import { IChangePassword } from './../../Interfaces/inon-manage';
 
 @Component({
   selector: 'app-profile',

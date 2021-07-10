@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/imanage';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { IObjectIteratation } from '../Interfaces/ioverall-config';
-import { IOnOffLoad, IOverAllWOUIInfo } from './../Interfaces/imanage';
 
 @Injectable({
   providedIn: 'root'

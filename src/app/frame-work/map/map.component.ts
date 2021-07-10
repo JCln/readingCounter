@@ -1,5 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IListManagerPDXY, IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/imanage';
+import { Imap, IMapTrackDesc } from 'interfaces/imap.js';
+import { ITHV } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { MapItemsService } from 'services/DI/map-items.service.js';
@@ -8,11 +13,6 @@ import { InteractionService } from 'services/interaction.service';
 import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { EN_messages } from 'src/app/Interfaces/enums.enum';
-import { IListManagerPDXY, IReadingReportGISReq, IReadingReportGISResponse } from 'src/app/Interfaces/imanage';
-import { Imap, IMapTrackDesc } from 'src/app/Interfaces/imap.js';
-import { ITHV } from 'src/app/Interfaces/ioverall-config';
 
 
 declare let L;

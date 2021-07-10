@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IFragmentDetails, IFragmentMaster } from 'interfaces/imanage';
+import { IDictionaryManager, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { IDictionaryManager, IObjectIteratation, IResponses } from 'src/app/Interfaces/ioverall-config';
 
-import { ENInterfaces } from '../Interfaces/en-interfaces.enum';
-import { EN_messages } from '../Interfaces/enums.enum';
-import { IFragmentDetails, IFragmentMaster } from './../Interfaces/imanage';
 import { ConverterService } from './converter.service';
 
 @Injectable({

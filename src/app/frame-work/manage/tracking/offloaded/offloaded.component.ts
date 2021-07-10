@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ITracking } from 'interfaces/imanage';
+import { ENTrackingMessage } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
-import { ITracking } from 'src/app/Interfaces/imanage';
-import { ENTrackingMessage } from 'src/app/Interfaces/ioverall-config';
 
 @Component({
   selector: 'app-offloaded',

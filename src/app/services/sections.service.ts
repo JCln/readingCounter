@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { EN_messages } from 'interfaces/enums.enum';
 import { UtilsService } from 'services/utils.service';
-
-import { EN_messages } from '../Interfaces/enums.enum';
 
 @Injectable({
   providedIn: 'root'

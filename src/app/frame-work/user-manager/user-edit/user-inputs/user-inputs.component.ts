@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IUserInfo } from 'src/app/Interfaces/iuser-manager';
+import { IUserInfo } from 'interfaces/iuser-manager';
 
 
 @Component({

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { IDictionaryManager } from '../Interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'

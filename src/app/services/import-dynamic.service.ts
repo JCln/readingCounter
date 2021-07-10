@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { IImportDynamic, IImportDynamicDefault, IImportDynamicRes } from 'interfaces/inon-manage';
+import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { ENInterfaces } from 'src/app/Interfaces/en-interfaces.enum';
 
 import { ConfirmDialogComponent } from '../frame-work/import-dynamic/confirm-dialog/confirm-dialog.component';
-import { EN_messages } from '../Interfaces/enums.enum';
-import { IImportDynamic, IImportDynamicDefault } from '../Interfaces/inon-manage';
-import { ENSnackBarColors, ENSnackBarTimes } from '../Interfaces/ioverall-config';
-import { IImportDynamicRes } from './../Interfaces/inon-manage';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
 

@@ -1,5 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { IOnOffLoad } from 'interfaces/imanage';
+import { IOffloadModifyReq } from 'interfaces/inon-manage';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -8,9 +11,6 @@ import { DownloadManagerService } from 'services/download-manager.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
-import { IOnOffLoad } from 'src/app/Interfaces/imanage';
-import { IOffloadModifyReq } from 'src/app/Interfaces/inon-manage';
-import { IDictionaryManager } from 'src/app/Interfaces/ioverall-config';
 
 import { ImageViewerComponent } from '../../wuoi/image-viewer/image-viewer.component';
 
