@@ -5,12 +5,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/imanage';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
@@ -34,7 +33,6 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -84,14 +82,9 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private rowToImported = (row: ITracking, desc: string, rowIndex: number) => {
-    this.trackingManagerService.migrateDataRowToImported(row.id, desc).subscribe((res: IResponses) => {
-      if (res) {
-        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        // this.refreshTable();
-        this.refetchTable(rowIndex)
-      }
-    });
+  private rowToImported = async (row: ITracking, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row.id, desc);
+    this.refetchTable(rowIndex);
   }
   backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
     const title = EN_messages.reson_delete_backtoImported;

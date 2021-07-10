@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFollowUp, IFollowUpHistory } from 'interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -74,7 +75,7 @@ export class DescComponent implements AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.trackingManagerService.getFollowUpSource(this.trackNumber);
+    this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
     this.changeHsty = this.dataSource.changeHistory;
     this.closeTabService.saveDataForFollowUp = this.dataSource;
     this.insertToDesc();

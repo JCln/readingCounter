@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
 
@@ -16,14 +17,14 @@ export class CountInStatesComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.countInStateDataSource = await this.dashboardService.getDashboardCountInStatesTimed();
+    this.countInStateDataSource = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardCountInStates);
     this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.classWrapper();
   }
   private insertSelectedColumns = () => {
-    this.countInStates = this.dashboardService.columnDashboardForbidden();
+    this.countInStates = this.dashboardService.columnDashboards();
   }
 
 

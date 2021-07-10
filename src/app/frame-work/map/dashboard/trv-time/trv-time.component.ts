@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardTraverseTimed } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
@@ -18,14 +19,14 @@ export class TrvTimeComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.traverseTime = await this.dashboardService.getDashboardTraverseTimed();
+    this.traverseTime = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardTraverseTimed);
     this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.classWrapper();
   }
   private insertSelectedColumns = () => {
-    this._col_traverseTime = this.dashboardService.columnDashboardTimed();
+    this._col_traverseTime = this.dashboardService.columnDashboards();
   }
 
 

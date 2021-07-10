@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardKarkardTimed } from 'interfaces/inon-manage';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, MultiDataSet, SingleDataSet } from 'ng2-charts';
 import { DashboardService } from 'services/dashboard.service';
@@ -160,7 +161,7 @@ export class DashboardComponent implements OnInit {
   }
 
   classWrapper = async () => {
-    this.karkard = await this.dashboardService.getDashboardKarkard();
+    this.karkard = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardKarkardTimed);
     this.getPieChartData();
   }
   ngOnInit(): void {

@@ -3,12 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/imanage';
-import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
@@ -30,19 +28,14 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService,
     public outputManagerService: OutputManagerService
   ) {
   }
 
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private rowToOffloaded = (row: ITracking, desc: string, rowIndex: number) => {
-    this.trackingManagerService.migrateDataRowToOffloaded(row.id, desc).subscribe((res: IResponses) => {
-      if (res) {
-        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        this.refetchTable(rowIndex);
-      }
-    });
+  private rowToOffloaded = async (row: ITracking, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row.id, desc);
+    this.refetchTable(rowIndex);
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackFinished = null;
   classWrapper = async (canRefresh?: boolean) => {

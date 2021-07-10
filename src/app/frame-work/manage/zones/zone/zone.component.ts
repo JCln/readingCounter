@@ -59,7 +59,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForZone;
     }
     else {
-      this.dataSource = await this.sectorsManagerService.getZoneDataSource();
+      this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ZoneGET);
       this.closeTabService.saveDataForZone = this.dataSource;
     }
     this.regionDictionary = await this.sectorsManagerService.getRegionDictionary();

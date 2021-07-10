@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardSpecial } from 'interfaces/inon-manage';
 import { DashboardService } from 'services/dashboard.service';
 
@@ -16,7 +17,7 @@ export class DispersalRateComponent implements OnInit {
   }
 
   classWrapper = async () => {
-    this.dataSource = await this.dashboardService.getDashboardDispersalRateTimed();
+    this.dataSource = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardDispersalRateTimed);
     console.log(this.dataSource);
 
   }

@@ -59,7 +59,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForZoneBound;
     }
     else {
-      this.dataSource = await this.sectorsManagerService.getZoneBoundDataSource();
+      this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ZoneBoundGET);
       this.closeTabService.saveDataForZoneBound = this.dataSource;
     }
     this.zoneDictionary = await this.sectorsManagerService.getZoneDictionary();

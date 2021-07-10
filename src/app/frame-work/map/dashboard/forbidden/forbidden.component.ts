@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardTimed } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
@@ -17,14 +18,14 @@ export class ForbiddenComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.forbidden = await this.dashboardService.getDashboardForbidden();
+    this.forbidden = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardMediaTimed);
     this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.classWrapper();
   }
   private insertSelectedColumns = () => {
-    this._col_forbidden = this.dashboardService.columnDashboardForbidden();
+    this._col_forbidden = this.dashboardService.columnDashboards();
   }
 
 }

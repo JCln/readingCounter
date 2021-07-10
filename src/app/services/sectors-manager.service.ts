@@ -68,46 +68,12 @@ export class SectorsManagerService {
     ]
   }
   /*API CALLS */
-  getProvinceDataSource = (): any => {
+  getSectorsDataSource = (method: ENInterfaces): any => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.ProvinceGET).subscribe(res => {
+      this.interfaceManagerService.GET(method).subscribe(res => {
         if (res) {
           resolve(res);
         }
-      })
-    })
-  }
-  getZoneDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.ZoneGET).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
-  getZoneBoundDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.ZoneBoundGET).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
-  getRegionDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.RegionGET).subscribe(res => {
-        if (res) {
-          resolve(res);
-        }
-      })
-    })
-  }
-  getCountryDataSource = (): any => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.CountryGET).toPromise().then(res => {
-        resolve(res);
       })
     })
   }

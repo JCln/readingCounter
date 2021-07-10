@@ -49,7 +49,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForCountry;
     }
     else {
-      this.dataSource = await this.sectorsManagerService.getCountryDataSource();
+      this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.CountryGET);
       this.closeTabService.saveDataForCountry = this.dataSource;
     }
     this.insertSelectedColumns();

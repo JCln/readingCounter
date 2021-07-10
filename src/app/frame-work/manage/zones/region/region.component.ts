@@ -59,7 +59,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForRegion;
     }
     else {
-      this.dataSource = await this.sectorsManagerService.getRegionDataSource();
+      this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.RegionGET);
       this.closeTabService.saveDataForRegion = this.dataSource;
     }
     this.provinceDictionary = await this.sectorsManagerService.getProvinceDictionary();

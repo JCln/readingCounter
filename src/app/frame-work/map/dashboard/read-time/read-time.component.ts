@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardTimed } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
@@ -17,13 +18,13 @@ export class ReadTimeComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.readTimed = await this.dashboardService.getDashboardReadTimed();
+    this.readTimed = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardForbiddenTimed);
     this.insertSelectedColumns();
   }
   ngOnInit(): void {
     this.classWrapper();
   }
   private insertSelectedColumns = () => {
-    this._colReadTimed = this.dashboardService.columnDashboardReadTimed();
+    this._colReadTimed = this.dashboardService.columnDashboards();
   }
 }

@@ -4,13 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IEditTracking, ITracking } from 'interfaces/imanage';
-import { ENSnackBarColors, ENSnackBarTimes, IDictionaryManager, IResponses } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
@@ -54,7 +53,6 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     public trackingManagerService: TrackingManagerService,
     private dialogService: DialogService,
     private dialog: MatDialog,
-    private snackWrapperService: SnackWrapperService,
     public outputManagerService: OutputManagerService
   ) {
   }
@@ -125,13 +123,9 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = (rowData: ITracking, desc: string, rowIndex: number) => {
-    this.trackingManagerService.removeTrackingId(rowData.id, desc).subscribe((res: IResponses) => {
-      if (res) {
-        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        this.refetchTable(rowIndex);
-      }
-    })
+  removeRow = async (rowData: ITracking, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowData.id, desc)
+    this.refetchTable(rowIndex);
   }
   firstConfirmDialog = (rowData: ITracking, rowIndex: number) => {
     const title = EN_messages.reason_deleteRoute;

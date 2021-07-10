@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/imanage';
-import { IResponses } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
@@ -43,13 +42,9 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   routeToLMAll = (row: ITracking) => {
     this.router.navigate(['wr/m/l/all', false, row.id]);
   }
-  private rowToImported = (row: ITracking, desc: string, rowIndex: number) => {
-    this.trackingManagerService.migrateDataRowToImported(row.id, desc).subscribe((res: IResponses) => {
-      if (res) {
-        this.utilsService.snackBarMessageSuccess(res.message);
-        this.refetchTable(rowIndex);
-      }
-    })
+  private rowToImported = async (row: ITracking, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row.id, desc);
+    this.refetchTable(rowIndex);
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackReading = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -132,7 +127,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          if (await this.trackingManagerService.finishReading(rowData.id, desc))
+          if (await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowData.id, desc))
             this.refetchTable(rowIndex);
         }
       })

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartType } from 'chart.js';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardReadDaily } from 'interfaces/inon-manage';
 import { BaseChartDirective, Color, Label } from 'ng2-charts';
 import { DashboardService } from 'services/dashboard.service';
@@ -46,7 +47,7 @@ export class LineReadDailyComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.readDaily = await this.dashboardService.getDashboardReadDaily();
+    this.readDaily = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardReadDaily);
     this.addToLineChart();
 
   }

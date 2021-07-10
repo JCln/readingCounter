@@ -6,7 +6,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IEditTracking, IOutputManager, ITracking } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, ENTrackingMessage, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
-import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
@@ -128,27 +127,10 @@ export class TrackingManagerService {
       console.error(error);
     }
   }
-  getFollowUpSource = (trackNumber: string): Promise<any> => {
+  getDataSourceByQuote = (method: ENInterfaces, insertedInput: number | string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.trackingFOLLOWUP, trackNumber).subscribe(res => {
-          if (res) {
-            resolve(res);
-          }
-        })
-      }).catch(i => {
-        console.log(i); console.log('wrong');
-      }
-      )
-    } catch {
-      console.error(e => e);
-    }
-
-  }
-  getCounterReaders = (zoneId: number): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).subscribe(res => {
+        this.interfaceManagerService.GETByQuote(method, insertedInput).subscribe(res => {
           resolve(res)
         })
       });
@@ -162,12 +144,9 @@ export class TrackingManagerService {
         this.successSnackMessage(res.message);
     });
   }
-  removeTrackingId = (trackNumber: string, desc: string): Observable<any> => {
-    return this.interfaceManagerService.POSTBODY(ENInterfaces.trackingREMOVE, { trackingId: trackNumber, description: desc });
-  }
-  finishReading = (trackNumber: string, desc: string): Promise<any> => {
+  migrateOrRemoveTask = (method: ENInterfaces, trackNumber: string, desc: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.trackingFinishReadiED, { trackingId: trackNumber, description: desc }).toPromise().then((res: IResponses) => {
+      this.interfaceManagerService.POSTBODY(method, { trackingId: trackNumber, description: desc }).toPromise().then((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);
         resolve(res);
       })
@@ -201,24 +180,6 @@ export class TrackingManagerService {
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
   }
-  migrateDataRowToImported = (trackingId: string, desc: string): Observable<any> => {
-    return this.interfaceManagerService.POSTBODY(ENInterfaces.trackingToIMPORTED, { trackingId: trackingId, description: desc });
-  }
-  migrateDataRowToReading = (trackingId: string, desc: string) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.trackingToREADING, { trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
-      if (res)
-        this.successSnackMessage(res.message)
-    });
-  }
-  migrateDataRowToOffloaded = (trackingId: string, desc: string): Observable<any> => {
-    return this.interfaceManagerService.POSTBODY(ENInterfaces.trackingToOFFLOADED, { trackingId: trackingId, description: desc });
-  }
-  private migrateToPreState = (trackingId: string, desc: string) => {
-    return this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPRE, { trackingId: trackingId, description: desc }).subscribe((res: IResponses) => {
-      if (res)
-        this.successSnackMessage(res.message);
-    })
-  }
   backToConfirmDialog = (trackNumber: string) => {
     const title = EN_messages.reason_backToPrev;
     return new Promise(() => {
@@ -231,7 +192,7 @@ export class TrackingManagerService {
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.migrateToPreState(trackNumber, desc);
+          this.migrateOrRemoveTask(ENInterfaces.trackingPRE, trackNumber, desc);
         }
       })
     })
@@ -247,7 +208,7 @@ export class TrackingManagerService {
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.migrateDataRowToReading(trackNumber, desc);
+          this.migrateOrRemoveTask(ENInterfaces.trackingToREADING, trackNumber, desc);
           resolve(true);
         }
       })

@@ -59,7 +59,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource = this.closeTabService.saveDataForProvince;
     }
     else {
-      this.dataSource = await this.sectorsManagerService.getProvinceDataSource();
+      this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ProvinceGET);
       this.closeTabService.saveDataForProvince = this.dataSource;
     }
     this.countryDictionary = await this.sectorsManagerService.getCountryDictionary();

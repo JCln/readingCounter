@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardUsersInfo } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
@@ -17,7 +18,7 @@ export class UserOverallComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.usersInfo = await this.dashboardService.getDashboardUsersInfo();
+    this.usersInfo = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardUsersOverall);
     this.insertSelectedColumns();
   }
   ngOnInit(): void {
