@@ -182,6 +182,6 @@ export class BudgetComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   getExcelSample = async () => {
-    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelSample(ENInterfaces.FormulaBudgetExcelSample));
+    this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelSample(ENInterfaces.FormulaBudgetExcelSample), 'budgetSample');
   }
 }

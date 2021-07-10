@@ -10,16 +10,14 @@
   background: $gray_100;
   box-shadow: 1px 1px 8px 4px $gray_400;
   text-align: center;
-  padding: $font_2 0;
+  padding: $font_xs 0;
   justify-content: space-around;
   border-radius: $border_15;
   min-height: 25rem;
 }
 
 ._desc {
-  display: grid;
-  margin: auto;
-  padding: $font_xs 0;
+  margin: $font_xs 0;
   width: 90%;
   border-radius: $border_15;
 }
@@ -35,7 +33,7 @@
 
   button {
     background: $blue_400;
-    margin: $font_2;
+    margin: $font_2 auto;
     color: $white;
     width: 100%;
   }

@@ -41,12 +41,16 @@ nav {
   padding: $font_xs 0;
   margin-left: .2rem;
   margin-top: 0;
-  height: 84vh;
+  height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
   transition: all ease-in-out 150ms;
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  @media (max-width: 550px) {
+    margin-top: 1rem;
+  }
 }
 
 ul::-webkit-scrollbar {
@@ -55,13 +59,13 @@ ul::-webkit-scrollbar {
 }
 
 .ul li {
+  background: $gray_400;
   margin-left: .2rem;
-  cursor: pointer;
-  border-radius: $font_2 0 0 $font_2;
-  background: $gray_200;
   margin-bottom: 0.2rem;
   padding: $font_05 0.1rem;
+  border-radius: $font_2 0 0 $font_2;
   border: 1px solid;
+  cursor: pointer;
 }
 
 .ul li {
@@ -91,12 +95,12 @@ ul::-webkit-scrollbar {
   }
 
   &.active {
-    border: 2px solid $blue_gray_300;
-    background: $blue_200;
+    border: 2px solid $blue_500;
+    background: $gray_200;
 
     .on_show,
     .icons {
-      color: $blue_gray_300;
+      color: $blue_500;
     }
 
   }
@@ -125,13 +129,15 @@ ul::-webkit-scrollbar {
 
   &:hover,
   &:focus {
-    background: linear-gradient(to left, $blue_gray_300, rgba(255, 0, 0, 0));
+    background: linear-gradient(to left, $blue_500, rgba(255, 0, 0, 0));
     color: $white;
   }
 }
 
 .active {
-  background: linear-gradient(to left, rgba(255, 0, 0, 0), $blue_gray_300);
+  background: linear-gradient(to left, rgba(255, 0, 0, 0), $blue_500);
+  color: $blue_900;
+  border: 1px solid $gray_400;
 }
 
 .ul_items {
@@ -174,7 +180,7 @@ ul::-webkit-scrollbar {
   position: relative;
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
-  background: $gray_200;
+  background: $gray_400;
   margin-bottom: $font_05;
   padding: $font_xxs $font_05;
   border: 1px solid;
@@ -242,11 +248,12 @@ ul::-webkit-scrollbar {
 
   .active_2 {
     .btn_2 {
-      border: 2px solid $blue_gray_300;
+      border: 2px solid $blue_500;
+      background-color: $gray_200;
     }
 
     .icons {
-      color: $blue_gray_300;
+      color: $blue_500;
     }
   }
 
@@ -266,9 +273,8 @@ ul::-webkit-scrollbar {
 
   @media (max-width: 550px) {
     position: absolute;
-    // position: fixed; // could be fix but need attention
     width: 100%;
-    height: 98vh;
+    height: 150vh;
     right: 0;
     background: #F2F3F4;
     border-left: 2px solid gray;
@@ -308,8 +314,8 @@ i.icons {
 
 // ts config for on close/open lists
 .tsConfig {
-  transform: rotate(180deg);
-  color: $blue_gray_300;
+  transform: rotate(180deg) !important;
+  color: $blue_400 !important;
 }
 
 //

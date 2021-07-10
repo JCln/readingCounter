@@ -186,6 +186,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
+    if (lat === 0 || lag === 0)
+      return;
     lat = parseFloat(lat.toString().substring(0, 6));
     lag = parseFloat(lag.toString().substring(0, 6));
 

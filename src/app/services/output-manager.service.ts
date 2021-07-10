@@ -199,14 +199,14 @@ export class OutputManagerService {
     const excelBuffer: any = XLSX.write(workbook, { bookType: type, type: 'array' });
     this.saveAsExcelFile(excelBuffer, fileName, '.' + type);
   }
-  saveAsExcelABuffer = (buffer: any) => {
+  saveAsExcelABuffer = (buffer: any, name: string) => {
     console.log(buffer);
     import("file-saver").then(FileSaver => {
       let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
       const data: Blob = new Blob([buffer], {
         type: EXCEL_TYPE
       });
-      FileSaver.saveAs(data, 'testName');
+      FileSaver.saveAs(data, name);
     })
   }
   saveAsExcelFile(buffer: any, fileName: string, EXCEL_EXTENSION: string): void {
