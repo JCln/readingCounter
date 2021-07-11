@@ -90,7 +90,7 @@ export class KarkardDaylyComponent implements OnInit {
   }
   verification = async () => {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRKarkardDaily(this.readingReportReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
     if (temp)
       this.routeToChild();
   }

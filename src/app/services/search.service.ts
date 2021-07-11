@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat, ISearchMoshReq, ISearchProReportInput } from 'interfaces/imanage';
-import { IDictionaryManager, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Search } from '../classes/search';
-import { ConverterService } from './converter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -136,7 +135,6 @@ export class SearchService {
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private converterService: ConverterService,
     private router: Router
   ) { }
 
@@ -314,9 +312,6 @@ export class SearchService {
       if (item.gisAccuracy)
         item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
     })
-  }
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
-    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

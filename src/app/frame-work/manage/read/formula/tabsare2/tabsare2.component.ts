@@ -9,6 +9,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { FormulasService } from 'services/formulas.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { ConfirmTextDialogComponent } from '../../../tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { Tabsare2AddDgComponent } from './tabsare2-add-dg/tabsare2-add-dg.component';
@@ -71,7 +72,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
 
-    this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();
@@ -145,7 +146,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     }
     await this.formulasService.postFormulaEdit(ENInterfaces.FormulaTabsare2Edit, dataSource);
     this.clonedProducts[dataSource.id] = { ...dataSource };
-    this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel(dataSource: ITabsare2Formula, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];

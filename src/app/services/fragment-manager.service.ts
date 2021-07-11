@@ -7,8 +7,6 @@ import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
-import { ConverterService } from './converter.service';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -39,8 +37,7 @@ export class FragmentManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
-    private converterService: ConverterService
+    private utilsService: UtilsService
   ) { }
 
   /* Master */
@@ -322,9 +319,6 @@ export class FragmentManagerService {
   setZoneDictionary = (zoneDic: IDictionaryManager[]) => {
     if (!this.zoneDictionary)
       this.zoneDictionary = zoneDic;
-  }
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
-    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
   customizeSelectedColumns = (_selectCols: any) => {
     return _selectCols.filter(items => {

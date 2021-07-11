@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { CrAddDgComponent } from './cr-add-dg/cr-add-dg.component';
 
@@ -63,7 +64,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
 
-    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.insertSelectedColumns();
   }
   ngOnInit() {
@@ -115,7 +116,7 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
       dataSource.zoneId = dataSource.zoneId['id'];
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportEdit, dataSource);
-    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   refreshTable = () => {
     this.classWrapper(true);

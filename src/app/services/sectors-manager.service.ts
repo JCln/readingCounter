@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IDictionaryManager, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
@@ -19,7 +18,6 @@ export class SectorsManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private converterService: ConverterService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
     private sectionsService: SectionsService
@@ -106,10 +104,6 @@ export class SectorsManagerService {
         this.utilsService.snackBarMessageSuccess(res.message);
       }
     });
-  }
-
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
-    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
   deleteSingleRow = (place: ENInterfaces, id: number) => {
     return new Promise((resolve) => {

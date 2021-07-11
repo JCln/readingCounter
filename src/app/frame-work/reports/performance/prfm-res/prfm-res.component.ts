@@ -5,6 +5,7 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { Converter } from 'src/app/classes/converter';
 
 @Component({
   selector: 'app-prfm-res',
@@ -35,7 +36,7 @@ export class PrfmResComponent implements OnInit {
       return;
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.insertSelectedColumns();
-    this.outputManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.setGetRanges();
   }
   ngOnInit(): void {

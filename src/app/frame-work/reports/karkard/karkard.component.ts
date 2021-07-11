@@ -76,7 +76,7 @@ export class KarkardComponent implements OnInit {
   }
   verification = async () => {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRKarkard(this.readingReportReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
     if (temp)
       document.activeElement.id == 'grid_view' ? this.routeToGridView() : this.routeToChartView();
   }

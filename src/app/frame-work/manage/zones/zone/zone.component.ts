@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { ZoneAddDgComponent } from './zone-add-dg/zone-add-dg.component';
 
@@ -64,7 +65,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.regionDictionary = await this.sectorsManagerService.getRegionDictionary();
 
-    this.sectorsManagerService.convertIdToTitle(this.dataSource, this.regionDictionary, 'regionId');
+    Converter.convertIdToTitle(this.dataSource, this.regionDictionary, 'regionId');
     this.insertSelectedColumns();
   }
   ngOnInit() {
@@ -117,7 +118,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
       dataSource.regionId = dataSource.regionId['id'];
     }
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneEDIT, dataSource);
-    this.sectorsManagerService.convertIdToTitle(this.dataSource, this.regionDictionary, 'regionId');
+    Converter.convertIdToTitle(this.dataSource, this.regionDictionary, 'regionId');
   }
   onRowEditCancel(dataSource: IZoneManager, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];

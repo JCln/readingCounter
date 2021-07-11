@@ -7,6 +7,7 @@ import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-dynamic/confirm-dialog/confirm-dialog.component';
+import { Converter } from './../classes/converter';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
 
@@ -169,6 +170,8 @@ export class ImportDynamicService {
     }
   }
   postImportDynamicData = (importDynamic: IImportDynamicDefault): Promise<any> => {
+    importDynamic.fromDate = Converter.persianToEngNumbers(importDynamic.fromDate);
+    importDynamic.toDate = Converter.persianToEngNumbers(importDynamic.toDate);
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.POSTBODY(ENInterfaces.postImportData, importDynamic).toPromise().then(res => {

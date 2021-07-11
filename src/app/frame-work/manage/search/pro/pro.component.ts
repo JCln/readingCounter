@@ -9,6 +9,7 @@ import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
 import { UtilsService } from 'services/utils.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { SearchDgComponentComponent } from './search-dg-component/search-dg-component.component';
 
@@ -51,11 +52,11 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   converts = () => {
     this._empty_message = EN_messages.notFound;
-    this.searchService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-    this.searchService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    this.searchService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    this.searchService.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
     this.insertSelectedColumns();
     this.searchService.setDynamicPartRanges(this.dataSource);
@@ -134,6 +135,8 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     this.ref.onClose.subscribe((res: ISearchProReportInput) => {
       if (res) {
+        this.searchReq.fromDate = Converter.persianToEngNumbers(res.fromDate);
+        this.searchReq.toDate = Converter.persianToEngNumbers(res.toDate);
         this.searchReq = res;
         this.connectToServer();
       }

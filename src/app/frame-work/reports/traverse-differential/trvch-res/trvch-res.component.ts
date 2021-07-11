@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { Converter } from 'src/app/classes/converter';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class TrvchResComponent implements OnInit, OnDestroy {
     if (this.utilsService.isNull(this.dataSource))
       return;
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    this.outputManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.insertSelectedColumns();
   }
   ngOnInit(): void {

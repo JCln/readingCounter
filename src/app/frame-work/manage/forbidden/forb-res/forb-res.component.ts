@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
 import { InteractionService } from 'services/interaction.service';
+import { Converter } from 'src/app/classes/converter';
 
 @Component({
   selector: 'app-forb-res',
@@ -43,7 +44,7 @@ export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
     this.closeTabService.saveDataForForbidden = this.dataSource;
     // }
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
-    this.forbiddenService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.forbiddenService.setDynamicPartRanges(this.dataSource);
     if (this.dataSource.length)
       this.insertSelectedColumns();

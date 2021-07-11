@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ICounterStateGridFriendlyReq } from 'interfaces/imanage';
-import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { LazyLoadEvent } from 'primeng/api';
 import { Observable } from 'rxjs/internal/Observable';
 
-import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 
@@ -16,8 +15,7 @@ export class CounterStateService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
-    private converterService: ConverterService
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
@@ -136,7 +134,5 @@ export class CounterStateService {
   getZoneDictionary = (): any => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
-    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
-  }
+
 }

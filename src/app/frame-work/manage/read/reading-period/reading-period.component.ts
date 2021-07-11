@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { RpmAddDgComponent } from './rpm-add-dg/rpm-add-dg.component';
 
@@ -66,8 +67,8 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readManagerService.getReadingPeriodKindDictionary();
 
-    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.readManagerService.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
     this.insertSelectedColumns();
   }
   ngOnInit() {
@@ -127,8 +128,8 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
       dataSource.readingPeriodKindId = dataSource.readingPeriodKindId['id'];
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodEdit, dataSource);
-    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.readManagerService.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
   }
   refreshTable = () => {
     this.classWrapper(true);

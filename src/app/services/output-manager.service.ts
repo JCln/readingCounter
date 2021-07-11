@@ -3,12 +3,11 @@ import 'jspdf-autotable';
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
-import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
 
 import { font } from '../../assets/pdfjs/BLotus-normal';
-import { ConverterService } from './converter.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -23,8 +22,7 @@ export class OutputManagerService {
   };
 
   constructor(
-    private utilsService: UtilsService,
-    private converterService: ConverterService
+    private utilsService: UtilsService
   ) {
   }
 
@@ -219,9 +217,6 @@ export class OutputManagerService {
 
       FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
     });
-  }
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
-    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
 
 }

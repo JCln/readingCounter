@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { InteractionService } from 'services/interaction.service';
+import { Converter } from 'src/app/classes/converter';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForFragmentNOB = this.dataSource;
     }
     this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
-    this.fragmentManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.defaultAddStatus();
     if (this.dataSource.length)
       this.insertSelectedColumns();

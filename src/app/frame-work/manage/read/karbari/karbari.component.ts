@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';
 
@@ -63,7 +64,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.provinceDictionary = await this.readManagerService.getProvinceDictionary();
 
-    this.readManagerService.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
+    Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
     this.insertSelectedColumns();
   }
   ngOnInit() {
@@ -115,7 +116,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
       dataSource.provinceId = dataSource.provinceId['id'];
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.KarbariEdit, dataSource);
-    this.readManagerService.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
+    Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
   }
   refreshTable = () => {
     this.classWrapper(true);

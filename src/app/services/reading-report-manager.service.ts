@@ -13,6 +13,8 @@ import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
+import { Converter } from './../classes/converter';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -297,49 +299,42 @@ export class ReadingReportManagerService {
   }
 
   // VerificationS
-  verificationRRTraverse = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
+  verificationRRShared = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
+    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
+    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     this.readingReportReq = readingReportReq;
     return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
   verificationRRTraverseDifferential = (readingReportReq: IReadingReportTraverseDifferentialReq, isValidateByDate: boolean): boolean => {
+    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
+    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     this.rRTraverseDiffrential = readingReportReq;
     return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
-  verificationRRKarkard = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
-    this.readingReportReq = readingReportReq;
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
-  }
-  verificationRRKarkardDaily = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
-    this.readingReportReq = readingReportReq;
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
-  }
-  verificationRRMaster = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
-    this.readingReportReq = readingReportReq;
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
-  }
-  verificationRRDetails = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
-    this.readingReportReq = readingReportReq;
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
-  }
   verificationRRDisposalHours = (readingReportReq: IReadingReportReq): boolean => {
+    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
+    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     this.readingReportReq = readingReportReq;
     return this.datesValidation(readingReportReq);
   }
   verificationRRGIS = (readingReportGISReq: IReadingReportGISReq, isValidateByDate: boolean): boolean => {
+    readingReportGISReq.fromDate = Converter.persianToEngNumbers(readingReportGISReq.fromDate);
+    readingReportGISReq.toDate = Converter.persianToEngNumbers(readingReportGISReq.toDate);
     this.readingReportGISReq = readingReportGISReq;
     return isValidateByDate ? this.datesValidation(readingReportGISReq) : this.periodValidationGIS()
   }
   verificationRRAnalyzePerformance = (readingReportReq: IReadingReportWithZoneIDsReq, isValidateByDate: boolean): boolean => {
+    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
+    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     this.rRAnalyzeReq = readingReportReq;
-    this.convertDates();
     return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
 
   // 
   // snack bar
   convertDates = () => {
-    this.rRAnalyzeReq.fromDate = this.utilsService.persianToEngNumbers(this.rRAnalyzeReq.fromDate);
-    this.rRAnalyzeReq.toDate = this.utilsService.persianToEngNumbers(this.rRAnalyzeReq.toDate);
+    this.rRAnalyzeReq.fromDate = Converter.persianToEngNumbers(this.rRAnalyzeReq.fromDate);
+    this.rRAnalyzeReq.toDate = Converter.persianToEngNumbers(this.rRAnalyzeReq.toDate);
   }
   emptyMessage = () => {
     this.utilsService.snackBarMessageFailed(EN_messages.notFound);

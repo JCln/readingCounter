@@ -8,6 +8,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadManagerService } from 'services/read-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 @Component({
   selector: 'app-txt-output',
@@ -45,7 +46,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.makeIDReadable();
     this.defaultAddStatus();
     this.insertSelectedColumns();
-    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
-import { ENSelectedColumnVariables, IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { CloseTabService } from './close-tab.service';
-import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
 
@@ -112,8 +111,7 @@ export class ListManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private closeTabService: CloseTabService,
-    private utilsService: UtilsService,
-    private converterService: ConverterService
+    private utilsService: UtilsService
   ) { }
 
   whereToSave = (): number => {
@@ -201,9 +199,6 @@ export class ListManagerService {
       if (item.gisAccuracy)
         item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
     })
-  }
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
-    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

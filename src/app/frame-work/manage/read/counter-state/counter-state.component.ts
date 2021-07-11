@@ -7,6 +7,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { CounterStateService } from 'services/counter-state.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 @Component({
   selector: 'app-counter-state',
@@ -33,7 +34,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     private readManagerService: ReadManagerService
   ) {
   }
-  
+
   columnSelectedMenuDefault = () => {
     this._selectCols = this.counterStateService.columnSelectedMenuDefault();
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
@@ -54,7 +55,7 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForCounterState = this.dataSource;
     }
     this.zoneDictionary = await this.counterStateService.getZoneDictionary();
-    this.counterStateService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   ngOnInit(): void {
     this.classWrapper();

@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
 
@@ -64,7 +65,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.countryDictionary = await this.sectorsManagerService.getCountryDictionary();
 
-    this.sectorsManagerService.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
+    Converter.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
     this.insertSelectedColumns();
   }
   ngOnInit() {
@@ -117,7 +118,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ProvinceEDIT, dataSource);
-    this.sectorsManagerService.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
+    Converter.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
   }
   onRowEditCancel(dataSource: IProvinceManager, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];

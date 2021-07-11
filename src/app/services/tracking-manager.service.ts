@@ -7,6 +7,7 @@ import { IEditTracking, IOutputManager, ITracking } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, ENTrackingMessage, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { OffloadModify } from './../classes/offload-modify-type';
@@ -154,6 +155,8 @@ export class TrackingManagerService {
   }
   // Output manager 
   downloadOutputDBF = (dbfData: ITracking | IOutputManager): Promise<any> => {
+    dbfData.fromDate = Converter.persianToEngNumbers(dbfData.fromDate);
+    dbfData.toDate = Converter.persianToEngNumbers(dbfData.toDate);
     const a: IOutputManager = {
       zoneId: dbfData.zoneId,
       fromDate: dbfData.fromDate,
@@ -221,7 +224,7 @@ export class TrackingManagerService {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   postOffloadModifyEdited = (body: IOffloadModifyReq) => {
-    console.log(body);
+    body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
 
     this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
       this.successSnackMessage(res.message);

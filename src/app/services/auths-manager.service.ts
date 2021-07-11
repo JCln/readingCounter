@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSelectedColumnVariables, IDictionaryManager, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { SectionsService } from 'services/sections.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { ConverterService } from './converter.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
@@ -20,7 +19,6 @@ export class AuthsManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private converterService: ConverterService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
     private sectionsService: SectionsService
@@ -160,9 +158,6 @@ export class AuthsManagerService {
         resolve(true);
       })
     });
-  }
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
-    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
   customizeSelectedColumns = (_selectCols: any[]) => {
     return _selectCols.filter(items => {

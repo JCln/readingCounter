@@ -6,7 +6,6 @@ import {
   ENSelectedColumnVariables,
   ENSnackBarColors,
   ENSnackBarTimes,
-  IDictionaryManager,
   IObjectIteratation,
   IResponses,
 } from 'interfaces/ioverall-config';
@@ -15,7 +14,7 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 
-import { ConverterService } from './converter.service';
+import { Converter } from '../classes/converter';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +28,7 @@ export class FormulasService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
-    private snackWrapperService: SnackWrapperService,
-    private converterService: ConverterService
+    private snackWrapperService: SnackWrapperService
   ) { }
 
   /* COLUMNS */
@@ -95,6 +93,8 @@ export class FormulasService {
     }
   }
   postFormulaAdd = (method: ENInterfaces, body: object) => {
+    body['fromDate'] = Converter.persianToEngNumbers(body['fromDate']);
+    body['toDate'] = Converter.persianToEngNumbers(body['toDate']);
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
@@ -308,9 +308,6 @@ export class FormulasService {
     if (!this.validationEditableRow(dataSource))
       return false;
     return true;
-  }
-  convertIdToTitle = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string) => {
-    this.converterService.convertIdToTitle(dataSource, dictionary, toConvert);
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

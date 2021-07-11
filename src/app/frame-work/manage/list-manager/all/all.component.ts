@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 @Component({
   selector: 'app-all',
@@ -59,12 +60,12 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
       this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
 
 
-    this.listManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.listManagerService.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    this.listManagerService.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
-    this.listManagerService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-    this.listManagerService.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.setDynamicRages();
     this.makeHadPicturesToBoolean();

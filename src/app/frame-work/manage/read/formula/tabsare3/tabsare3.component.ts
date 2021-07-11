@@ -9,6 +9,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { FormulasService } from 'services/formulas.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { ConfirmTextDialogComponent } from '../../../tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { AddExcelFileComponent } from '../add-excel-file/add-excel-file.component';
@@ -89,8 +90,8 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
 
-    this.formulasService.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
-    this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
 
     if (this.dataSource.length)
       this.insertSelectedColumns();
@@ -173,8 +174,8 @@ export class Tabsare3Component implements OnInit, AfterViewInit, OnDestroy {
     }
 
     await this.formulasService.postFormulaEdit(ENInterfaces.FormulaTabsare3Edit, dataSource);
-    this.formulasService.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
-    this.formulasService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel(dataSource: IAbBahaFormula, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];

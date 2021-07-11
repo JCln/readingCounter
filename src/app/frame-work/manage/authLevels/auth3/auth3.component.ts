@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
 
@@ -63,7 +64,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     }
     this.authLevel2Dictionary = await this.authsManagerService.getAuthLevel2Dictionary();
 
-    this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
+    Converter.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
     this.insertSelectedColumns();
   }
   ngOnInit() {
@@ -115,10 +116,10 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
       dataSource.authLevel2Id = dataSource.authLevel2Id['id'];
     }
     await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3EDIT, dataSource);
-    this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
+    Converter.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
   }
   onRowEditCancel(dataSource: IAuthLevel3, index: number) {
-    this.authsManagerService.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
+    Converter.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
     // this.dataSource[index] = this.clonedProducts[dataSource.id];
     // delete this.dataSource[dataSource.id];
     // return;

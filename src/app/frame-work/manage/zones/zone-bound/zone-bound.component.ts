@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.component';
 
@@ -64,7 +65,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.zoneDictionary = await this.sectorsManagerService.getZoneDictionary();
 
-    this.sectorsManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.insertSelectedColumns();
   }
   ngOnInit() {
@@ -117,7 +118,7 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
       dataSource.zoneId = dataSource.zoneId['id'];
     }
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneBoundEDIT, dataSource);
-    this.sectorsManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel(dataSource: IZoneBoundManager, index: number) {
     this.dataSource[index] = this.clonedProducts[dataSource.id];

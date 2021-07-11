@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { RdAddDgComponent } from './rd-add-dg/rd-add-dg.component';
 import { RdEditDgComponent } from './rd-edit-dg/rd-edit-dg.component';
@@ -95,7 +96,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
 
-    this.readManagerService.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.insertSelectedColumns();
   }
   ngOnInit() {
