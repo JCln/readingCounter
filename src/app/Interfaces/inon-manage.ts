@@ -122,7 +122,12 @@ export interface IImportDynamicRes {
     count: number,
     errorCount: number
 }
-
+export interface IImportSimafaBatch {
+    trackNumber: number,
+    count: number,
+    errorCount: number
+}
+export interface IImportSimafaReadingPrograms { }
 export interface IChangePassword {
     oldPassword: string,
     newPassword: string,

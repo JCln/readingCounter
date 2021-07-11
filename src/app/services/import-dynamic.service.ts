@@ -6,7 +6,7 @@ import { IImportDynamic, IImportDynamicDefault, IImportDynamicRes } from 'interf
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
-import { ConfirmDialogComponent } from '../frame-work/import-dynamic/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { Converter } from './../classes/converter';
 import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';

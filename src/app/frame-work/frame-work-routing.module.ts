@@ -5,7 +5,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./map/map.module').then(mapComponent => mapComponent.MapModule) },
-  { path: 'imd', loadChildren: () => import('./import-dynamic/import-dynamic.module').then(importDynamicDto => importDynamicDto.ImportDynamicModule) },
+  { path: 'imp', loadChildren: () => import('./import-data/import-data.module').then(importData => importData.ImportDataModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(profile => profile.ProfileModule) },
   { path: 'msge', loadChildren: () => import('./messages/messages.module').then(msge => msge.MessagesModule) },
   { path: 'privacy', loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) },
