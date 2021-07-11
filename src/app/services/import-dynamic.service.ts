@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IImportDynamic, IImportDynamicDefault, IImportDynamicRes } from 'interfaces/inon-manage';
+import { IImportDataResponse, IImportDynamicDefault } from 'interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
@@ -15,13 +16,14 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ImportDynamicService {
-  importDynamicValue: IImportDynamic;
+  importDynamicValue: IImportDynamicDefault;
 
   constructor(
     private snackWrapperService: SnackWrapperService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
-    private interfaceManagerService: InterfaceManagerService
+    private interfaceManagerService: InterfaceManagerService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   persentCheck = (val: number): boolean => {
@@ -126,7 +128,7 @@ export class ImportDynamicService {
     }
     return true;
   }
-  showResDialog = (res: IImportDynamicRes) => {
+  showResDialog = (res: IImportDataResponse) => {
     return new Promise(resolve => {
       this.dialog.open(ConfirmDialogComponent, {
         minWidth: '19rem',
@@ -136,6 +138,12 @@ export class ImportDynamicService {
   }
 
   /*API CALLS */
+  getZoneDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getZoneDictionary();
+  }
+  getReadingPeriodsKindDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getPeriodKindDictionary();
+  }
   getReadingPeriod = (zoneId: number, kindId: number): Promise<any> => {
     try {
       return new Promise((resolve) => {
@@ -175,6 +183,17 @@ export class ImportDynamicService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.POSTBODY(ENInterfaces.postImportData, importDynamic).toPromise().then(res => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  postImportSimafa = (method: ENInterfaces, body: object): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
           resolve(res)
         })
       });
