@@ -1,1 +1,112 @@
-<p>simafa-reading-prog works!</p>
+<main class="main">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importSimafaReadingProgram.zoneId" name="zoneId">
+                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2">
+                    <div class="_key">نوع دوره</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                        <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindsDictionary"
+                            [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2" [hidden]="!readingPeriodDictionary.length">
+                    <div class="_key">دوره قرائت</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importSimafaReadingProgram.readingPeriodId"
+                        name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2">
+                    <div class="_key">سال</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importSimafaReadingProgram.year" name="year">
+                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <button type="submit" class="btn_2_o">
+                    مشاهده
+                    <i class="pi pi-list"></i>
+                </button>
+            </section>
+        </section>
+
+    </form>
+</main>
+
+<p-table *ngIf="dataSource.length" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="[20,50,100, 500]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
+
+    <ng-template pTemplate="caption">
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <div class="header_icons_wrap">
+            <div class="right_side">
+                <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'simafa-readingProg')"
+                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
+                    <div class="tooltip_text">دریافت pdf</div>
+                </i>
+                <i (click)="outputManagerService.export(dataSource, _selectCols, 'simafa-readingProg', 'xlsx')"
+                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
+                    <div class="tooltip_text">دریافت Excel</div>
+                </i>
+                <i (click)="outputManagerService.export(dataSource, _selectCols, 'simafa-readingProg', 'csv')"
+                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
+                    <div class="tooltip_text">دریافت CSV</div>
+                </i>
+            </div>
+            <div class="left_side">
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                </i>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+            <th style="width: 4rem"></th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+            </th>
+            <th style="width: 4rem"></th>
+        </tr>
+    </ng-template>
+
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                {{dataSource[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>
+
+<section *ngIf="!dataSource || dataSource.length === 0">
+    <tr class="empty_data">
+        {{_empty_message}}
+    </tr>
+</section>

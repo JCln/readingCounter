@@ -1,10 +1,13 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IImportSimafaReadingProgramsReq, IReadingProgramRes } from 'interfaces/inon-manage';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
+import { OutputManagerService } from 'services/output-manager.service';
 
 @Component({
   selector: 'app-simafa-reading-prog',
@@ -18,23 +21,38 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
     year: 0
   }
 
+  _empty_message: string = '';
   kindId: number = 0;
+  _years: ITitleValue[] = [];
+  _selectedKindId: string = '';
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  dataSource: IReadingProgramRes[];
+  dataSource: IReadingProgramRes[] = [];
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
   subscription: Subscription[] = [];
 
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private importDynamicService: ImportDynamicService
+    private importDynamicService: ImportDynamicService,
+    public outputManagerService: OutputManagerService
   ) { }
 
   connectToServer = async () => {
-    const validation = this.importDynamicService.checkVertification(this.importSimafaReadingProgram);
+    const validation = this.importDynamicService.checkSimafaVertification(this.importSimafaReadingProgram);
     if (!validation)
       return;
+    this.dataSource = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaReadingProgram, this.importSimafaReadingProgram);
+    this._empty_message = EN_messages.notFound;
+  }
+  insertSelectedColumns = () => {
+    this._selectCols = this.importDynamicService.columnSimafaReadingProgram();
+    this._selectedColumns = this.importDynamicService.customizeSelectedColumns(this._selectCols);
+  }
+  getReadingPeriod = async () => {
+    this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriodDictionary(this._selectedKindId);
   }
   nullSavedSource = () => this.closeTabService.saveDataForSimafaReadingPrograms = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -42,11 +60,8 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
       this.nullSavedSource();
     }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
-    if (!this.importDynamicService.validationPeriodKind(this.readingPeriodKindsDictionary))
-      this.readingPeriodKindsDictionary = [];
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
-    if (!this.importDynamicService.validationZoneDictionary(this.zoneDictionary))
-      this.zoneDictionary = [];
+    this._years = this.importDynamicService.getYears();
   }
   ngOnInit() {
     this.classWrapper();
@@ -69,5 +84,14 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  refreshTable = () => {
+    this.connectToServer();
+  }
 }

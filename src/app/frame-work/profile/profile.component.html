@@ -18,14 +18,22 @@
 
         <h1 class="title">تغییر گذرواژه</h1>
         <form #form="ngForm" (ngSubmit)="changePassword()" class="content">
+
             <div class="_desc">
-                <input type="password" name="oldPassword" [(ngModel)]="password.oldPassword" class="input_1"
-                    placeholder="گذرواژه فعلی">
-                <input type="password" name="newPassword" [(ngModel)]="password.newPassword" class="input_1"
-                    placeholder="گذرواژه جدید">
-                <input type="password" name="confirmPassword" [(ngModel)]="password.confirmPassword" class="input_1"
-                    placeholder="تکرار گذرواژه جدید">
+                <div class="input_2">
+                    <div class="_key">گذرواژه فعلی</div>
+                    <input class="_value" type="password" name="oldPassword" [(ngModel)]="password.oldPassword">
+                </div>
+                <div class="input_2">
+                    <div class="_key">گذرواژه جدید</div>
+                    <input class="_value" type="password" name="newPassword" [(ngModel)]="password.newPassword">
+                </div>
+                <div class="input_2">
+                    <div class="_key">تکرار گذرواژه جدید</div>
+                    <input class="_value" type="password" name="confirmPassword" [(ngModel)]="password.confirmPassword">
+                </div>
             </div>
+
             <div class="change_pass">
                 <button type="submit" class="btn_2">ذخیره</button>
             </div>

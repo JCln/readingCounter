@@ -5,7 +5,7 @@
 main {
   display: grid;
   text-align: center;
-  width: 30rem;
+  width: 21rem;
   margin: 5rem auto;
   padding: $font_xs;
   min-height: 15rem;
@@ -22,4 +22,5 @@ button {
 footer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  justify-content: center;
 }

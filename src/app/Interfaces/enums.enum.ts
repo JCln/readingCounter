@@ -59,6 +59,7 @@ export enum EN_messages {
     insert_APK = 'لطفا یک فایل apk انتخاب نمایید',
     insert_trackNumber = 'شماره پیگیری را وارد نمایید',
     insert_modify_type = 'نوع اصلاح را وارد نمایید',
+    insert_number = 'مقدار عددی وارد نمایید',
     
     format_invalid_trackNumber = 'فرمت شماره پیگیری اشتباه است',
     format_invalid_trackNumbersLength = 'تعداد ارقام شماره پیگیری اشتباه است',

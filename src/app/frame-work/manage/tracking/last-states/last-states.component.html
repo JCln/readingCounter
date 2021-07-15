@@ -1,5 +1,5 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
+<p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
 " [rowsPerPageOptions]="[10,25,50]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" stateKey="last-states-session">
 
@@ -32,7 +32,7 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>

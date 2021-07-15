@@ -5,6 +5,7 @@
 
 form {
   font-family: $font_family;
+  margin: $font_3 0;
 }
 
 .main_content {
@@ -32,19 +33,18 @@ form {
 
 ._more_options {
   grid-column: 5/10;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  justify-content: center;
   background-color: $gray_400;
   border-radius: 5px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
 
   @media (max-width: 780px) {
     grid-column: 1/6;
-    margin-top: $font_2;
   }
 
   @media (max-width: 550px) {
-    grid-column: 1;
-    margin-top: $font_2;
+    margin-top: 2rem;
   }
 
 }

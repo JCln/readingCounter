@@ -131,7 +131,7 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   showSearchOptionsDialog = () => {
     this.ref = this.dialogService.open(SearchDgComponentComponent, {
       rtl: true,
-      width: '80%'
+      width: '90%'
     })
     this.ref.onClose.subscribe((res: ISearchProReportInput) => {
       if (res) {

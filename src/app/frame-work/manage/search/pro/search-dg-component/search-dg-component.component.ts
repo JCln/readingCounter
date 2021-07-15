@@ -55,6 +55,8 @@ export class SearchDgComponentComponent implements OnInit {
   ) {
   }
   classWrapper = async () => {
+    if (!this.searchService.verificationPro(this.searchReq))
+      this.searchReq = this.searchService.getSearchPro();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
     this.masrafState = this.searchService.getMasrafStates();

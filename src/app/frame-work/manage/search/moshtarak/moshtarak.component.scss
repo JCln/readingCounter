@@ -26,10 +26,14 @@ section.content {
 
 .input_1 {
   border-radius: 10px;
+  min-width: 100%;
 }
 
 .btn_2_o {
-  font-family: $font_family
+  font-family: $font_family;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 h2 {
@@ -40,11 +44,6 @@ h3 {
   color: $blue_500;
   font-size: 1.4rem;
   padding: $font_05;
-}
-
-footer {
-  margin-top: $font_05;
-  text-align: center;
 }
 
 ::ng-deep {

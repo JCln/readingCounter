@@ -4,7 +4,7 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 29rem));
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
   direction: rtl;
   justify-content: center;
   gap: 3rem;
@@ -33,11 +33,14 @@ main {
 }
 
 ._key {
-  min-width: 7rem;
+  min-width: 8.5rem;
 }
 
 ._value {
   max-width: inherit;
+  border: 0;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 .content {
@@ -77,7 +80,7 @@ main {
 }
 
 .input_2 {
-  min-width: 23rem;
+  min-width: 100%;
   color: $gray_500;
   margin-bottom: $font_05;
   box-shadow: 1px 1px 8px 1px $gray_400;
