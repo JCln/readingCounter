@@ -1,5 +1,6 @@
 @import 'variable.scss';
 @import 'button.scss';
+@import '_mat.scss';
 
 .mat-form-field {
   text-align: center;
@@ -95,16 +96,6 @@ button._blue_dark {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $gray_600;
-  }
-
-  .mat-select {
-    font-family: $font_family;
-    font-weight: 600;
-    direction: rtl;
-  }
-
-  .mat-select-value-text {
     color: $gray_600;
   }
 

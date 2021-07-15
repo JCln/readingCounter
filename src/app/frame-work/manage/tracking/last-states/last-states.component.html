@@ -60,15 +60,17 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
+            <td *ngIf="dataSource.hasMap" (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
             </td>
+            <td *ngIf="!dataSource.hasMap">
+            </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
+    <ng-template pTemplate="emptymessage" *ngIf="dataSource.length === 0">
         <tr>
             <td [attr.colspan]="dataSource.length">
                 موردی پیدا نشد

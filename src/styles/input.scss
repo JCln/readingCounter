@@ -21,8 +21,8 @@ $border_15: 10px;
 // key value input
 .input_2 {
   border-radius: $border_15;
-  background: $blue_600;
-  color: $blue_600;
+  background: $gray_300;
+  color: $gray_300;
   display: flex;
   align-items: center;
   margin: .25rem 0;
@@ -30,7 +30,7 @@ $border_15: 10px;
 }
 
 ._key {
-  color: $gray_100;
+  color: $blue_400;
   text-align: left;
   padding-right: .5rem;
   display: flex;

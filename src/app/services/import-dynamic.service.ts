@@ -68,9 +68,9 @@ export class ImportDynamicService {
       return false;
     }
 
-    if (!this.NANValidation(this.importDynamicValue.fromEshterak, EN_messages.format_invalid_from_esterak))
+    if (!this.NANValidation(this.importDynamicValue.fromEshterak, EN_messages.format_invalid_from_eshterak))
       return false;
-    if (!this.NANValidation(this.importDynamicValue.fromEshterak, EN_messages.format_invalid_to_esterak))
+    if (!this.NANValidation(this.importDynamicValue.fromEshterak, EN_messages.format_invalid_to_eshterak))
       return false;
 
     if (!this.utilsService.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 15)) {
@@ -90,6 +90,8 @@ export class ImportDynamicService {
       return false;
     }
     if (!_isOrderByDate) {
+      console.log(1);
+      
       if (!this.validationOnNull(val.readingPeriodId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_reading_time);
         return false;
@@ -238,6 +240,17 @@ export class ImportDynamicService {
       });
     } catch (error) {
       console.error(error);
+    }
+  }
+  getFragmentDetailsByMaster = (zoneId: string) => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.GETID(ENInterfaces.fragmentMasterInZone, zoneId).subscribe(res => {
+          resolve(res);
+        })
+      })
+    } catch (error) {
+      console.error(e => e);
     }
   }
   getYears = (): ITitleValue[] => {

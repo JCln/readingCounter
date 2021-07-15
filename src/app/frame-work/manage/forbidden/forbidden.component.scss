@@ -1,6 +1,7 @@
 @import 'variable.scss';
 @import 'button.scss';
 @import 'input.scss';
+@import '_mat.scss';
 
 section {
   display: grid;
@@ -63,20 +64,6 @@ input {
     font-size: $font_s;
     font-weight: 600;
     color: $blue_800;
-  }
-
-  .mat-select-arrow {
-    color: $gray_100;
-  }
-
-  .mat-select-value {
-    color: $gray_100;
-    font-family: $font_family;
-    font-weight: 600;
-  }
-
-  .mat-select {
-    text-align: center;
   }
 
 }

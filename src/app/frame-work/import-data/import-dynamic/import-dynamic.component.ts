@@ -3,7 +3,6 @@ import { IImportDynamicDefault } from 'interfaces/inon-manage';
 import { IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
-import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
@@ -64,8 +63,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   constructor(
     private interactionService: InteractionService,
     private importDynamicService: ImportDynamicService,
-    private closeTabService: CloseTabService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private closeTabService: CloseTabService    
   ) { }
 
   connectToServer = async () => {
@@ -74,12 +72,6 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       return;
     this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic));
     this.resetToDefaultFormStatus();
-  }
-  getZoneDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getZoneDictionary();
-  }
-  getReadingPeriodsKindDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
   private insertReadingConfigDefaults = (rcd: any) => {
     this.importDynamic.hasPreNumber = rcd.hasPreNumber;
@@ -130,10 +122,10 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.readingPeriodKindsDictionary = await this.getReadingPeriodsKindDictionary();
+    this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
     if (!this.importDynamicService.validationPeriodKind(this.readingPeriodKindsDictionary))
       this.readingPeriodKindsDictionary = [];
-    this.zoneDictionary = await this.getZoneDictionary();
+    this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     if (!this.importDynamicService.validationZoneDictionary(this.zoneDictionary))
       this.zoneDictionary = [];
   }
@@ -143,7 +135,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/imd') {
+        if (res === '/wr/imp/imd') {
           this.resetToDefaultFormStatus();
           this.classWrapper(true);
         }
