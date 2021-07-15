@@ -39,7 +39,7 @@ export class TrackingManagerService {
     { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
     { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
   ];
-  private lastStates = [
+  private lastStates: IObjectIteratation[] = [
     { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
     { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -59,6 +59,7 @@ export class TrackingManagerService {
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
     { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
     { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
+    // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }
   ]
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return this.menuDefault;

@@ -1,13 +1,15 @@
 :host::ng-deep {
   .mat-select-value {
     font-family: $font_family;
-    font-size: 1.2rem;
+    font-size: $font_s;
+    color: $gray_700;
+    font-weight: 600;
   }
 
   .mat-select-value-text {
     font-family: $font_family;
     font-size: 1.2rem;
-    color: $gray_600;
+    color: $gray_700;
   }
 
   .mat-dialog-container {
@@ -21,10 +23,12 @@
 
   .mat-select {
     font-family: $font_family;
+    font-weight: 600;
+    text-align: center;
   }
 
   .mat-select-arrow {
-    color: $gray_500;
+    color: $blue_400;
   }
 
   .mat-radio-label-content {

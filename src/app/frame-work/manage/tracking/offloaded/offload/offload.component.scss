@@ -2,6 +2,7 @@
 @import 'input.scss';
 @import 'button.scss';
 @import 'tooltip.scss';
+@import '_mat.scss';
 
 
 .main {
@@ -95,21 +96,6 @@ footer {
 }
 
 ::ng-deep {
-  .mat-select-arrow {
-    color: $gray_100;
-  }
-
-  .mat-select {
-    text-align: center;
-  }
-
-  .mat-select-value {
-    font-family: $font_family;
-    font-size: $font_s;
-    color: $gray_100;
-    font-weight: 600;
-  }
-
   .mat-select-panel .mat-option {
     font-size: 1.2rem;
     line-height: 3em;

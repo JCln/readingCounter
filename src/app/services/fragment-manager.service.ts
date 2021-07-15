@@ -245,19 +245,19 @@ export class FragmentManagerService {
     return true;
   }
   private detailsValidation = (): boolean => {
-    if (!this.nullValidation(this.fragmentDetails.fragmentMasterId, ('خطا در ارسال مقادیر')))
+    if (!this.nullValidation(this.fragmentDetails.fragmentMasterId, EN_messages.call_supportGroup))
       return false;
-    if (!this.nullValidation(this.fragmentDetails.fromEshterak, 'از اشتراک را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentDetails.fromEshterak, EN_messages.insert_fromEshterak))
       return false;
-    if (!this.nullValidation(this.fragmentDetails.toEshterak, 'تا اشتراک را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentDetails.toEshterak, EN_messages.insert_ToEshterak))
       return false;
-    if (!this.nullValidation(this.fragmentDetails.routeTitle, 'عنوان مسیر را وارد نمایید'))
-      return false;
-
-    if (!this.NANValidation(this.fragmentDetails.fromEshterak, 'فرمت از اشتراک ناصحیح است'))
+    if (!this.nullValidation(this.fragmentDetails.routeTitle, EN_messages.insert_title_route))
       return false;
 
-    if (!this.NANValidation(this.fragmentDetails.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
+    if (!this.NANValidation(this.fragmentDetails.fromEshterak, EN_messages.format_invalid_from_eshterak))
+      return false;
+
+    if (!this.NANValidation(this.fragmentDetails.toEshterak, EN_messages.format_invalid_to_eshterak))
       return false;
     if (!this.utilsService.isFromLowerThanToByString(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);

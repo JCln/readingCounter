@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IImportDynamicRes } from 'interfaces/inon-manage';
+import { IImportDataResponse } from 'interfaces/inon-manage';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -11,7 +11,7 @@ export class ConfirmDialogComponent implements OnInit {
 
   constructor(
     private mdDialogRef: MatDialogRef<ConfirmDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IImportDynamicRes
+    @Inject(MAT_DIALOG_DATA) public data: IImportDataResponse
   ) {
   }
 

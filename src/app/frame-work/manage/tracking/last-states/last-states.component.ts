@@ -41,12 +41,6 @@ export class LastStatesComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnlastStates();
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);

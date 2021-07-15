@@ -62,4 +62,5 @@ li {
 }
 
 @include media_wrapper(780px, 'li', margin, 0 .5rem);
+@include media_wrapper(550px, '._name', font-size, $font_xs);
 @include media_wrapper(780px, '._name', font-size, $font_m);

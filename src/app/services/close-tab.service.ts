@@ -53,6 +53,8 @@ export class CloseTabService {
   saveDataForOffloadModify: any;
   // import dynamic
   saveDataForImportDynamic: any;
+  saveDataForSimafaBatch: any;
+  saveDataForSimafaReadingPrograms: any;
   // SEARCH
   saveDataForFollowUp: any;
   saveDataForSearchMoshtarakin: any;
@@ -173,8 +175,14 @@ export class CloseTabService {
         break;
       case '/wr/m/mrm':
         break;
-      case '/wr/imd':
+      case '/wr/imp/imd':
         this.saveDataForImportDynamic = '';
+        break;
+      case '/wr/imp/simafa/rdpg':
+        this.saveDataForSimafaReadingPrograms = '';
+        break;
+      case '/wr/imp/simafa/batch':
+        this.saveDataForSimafaBatch = '';
         break;
       case '/wr/profile':
         break;
@@ -325,6 +333,8 @@ export class CloseTabService {
     this.saveDataForLastStates = '';
     this.saveDataForOffloadModify = '';
     this.saveDataForImportDynamic = '';
+    this.saveDataForSimafaReadingPrograms = '';
+    this.saveDataForSimafaBatch = '';
     this.saveDataForLMPD = '';
     this.saveDataForLMAll = '';
     this.saveDataForLMAll_extra = '';

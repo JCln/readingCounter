@@ -14,8 +14,7 @@ import { Search } from '../classes/search';
   providedIn: 'root'
 })
 export class SearchService {
-
-  private _searchReq: ISearchProReportInput;
+  private _searchReqPro: ISearchProReportInput;
   private _isValidateByDate: boolean;
 
   private _searchPro: IObjectIteratation[] =
@@ -296,14 +295,14 @@ export class SearchService {
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
     if (isValidateByDate == true || isValidateByDate == false)
       this._isValidateByDate = isValidateByDate;
-    this._searchReq = searchReq;
+    this._searchReqPro = searchReq;
     if (this._isValidateByDate) {
       return this.validationNull(searchReq) && this.validationDate(searchReq);
     }
     return this.validationByReadingPeriod(searchReq);
   }
   getSearchPro = (): ISearchProReportInput => {
-    return this._searchReq;
+    return this._searchReqPro;
   }
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {

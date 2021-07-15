@@ -6,7 +6,7 @@
 
 
 .content {
-  background: $gray_400;
+  background: $gray_100;
   box-shadow: 1px 2px 3px 1px $blue_400;
   text-align: center;
   justify-content: space-around;
@@ -48,7 +48,7 @@ input {
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
   gap: $font_05;
-  background: $gray_400;
+  background: $gray_100;
   place-content: center;
   padding: $font_xs 0;
   border-radius: $border_15;

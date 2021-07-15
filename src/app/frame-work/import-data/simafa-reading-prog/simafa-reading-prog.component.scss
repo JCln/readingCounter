@@ -61,32 +61,6 @@ h3 {
     font-weight: 600;
     color: $blue_800;
   }
-
-  .mat-checkbox-layout .mat-checkbox-label {
-    margin: 0 $font_05;
-    font-family: $font_family;
-    font-size: $font_s;
-    font-weight: 600;
-    color: $blue_gray_700;
-  }
-
-  .mat-radio-label-content {
-    padding-right: $font_05 !important;
-    color: $blue_gray_300;
-  }
-}
-
-.radio_group {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.radio_button {
-  font-size: $font_s;
-  font-weight: 700;
-  font-family: inherit;
-  color: $gray_600;
-  margin: 0 2rem;
 }
 
 [hidden] {

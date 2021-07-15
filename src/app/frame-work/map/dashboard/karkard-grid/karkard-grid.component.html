@@ -4,7 +4,7 @@
 
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>

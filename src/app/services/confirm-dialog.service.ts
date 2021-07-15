@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { take } from 'rxjs/internal/operators/take';
 
-import { ConfirmDialogComponent } from '../frame-work/import-dynamic/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
 
 @Injectable({
   providedIn: 'root'

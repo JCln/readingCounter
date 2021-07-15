@@ -181,7 +181,8 @@ export interface ITracking {
     displayRadif: boolean,
     counterReaderId: string,
     counterReaderName: string,
-    stateTitle?: string
+    stateTitle?: string,
+    hasMap: boolean
 }
 export interface IEditTracking {
     id: string,
@@ -405,7 +406,8 @@ export interface IFollowUp {
             seen: boolean,
             counterReaderName: string,
             trackStatusTitle: string,
-            hasDetails: boolean
+            hasDetails: boolean,
+            hasMap: boolean
         }
     ]
 }

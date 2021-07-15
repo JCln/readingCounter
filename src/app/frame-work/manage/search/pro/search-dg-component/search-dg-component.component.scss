@@ -5,6 +5,7 @@
 
 form {
   font-family: $font_family;
+  margin: $font_3 0;
 }
 
 .main_content {
@@ -23,7 +24,7 @@ form {
 
   .__content {
     gap: $font_05;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
+    grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
     display: grid;
     align-items: center;
     justify-content: center;
@@ -32,19 +33,19 @@ form {
 
 ._more_options {
   grid-column: 5/10;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  justify-content: center;
   background-color: $gray_400;
   border-radius: 5px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
 
   @media (max-width: 780px) {
+    margin-top: $font_xs;
     grid-column: 1/6;
-    margin-top: $font_2;
   }
 
   @media (max-width: 550px) {
-    grid-column: 1;
-    margin-top: $font_2;
+    margin-top: 2rem;
   }
 
 }
@@ -62,17 +63,17 @@ span label {
 }
 
 .ui-float-label {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  display: grid;
   font-size: $font_m;
   font-weight: 600;
+  padding: .3rem 0.1rem;
+  border-radius: 7px;
+  background: $gray_300;
 }
 
 .title {
   color: $blue_400;
   text-align: center;
-  // font-size: ;
 }
 
 article {

@@ -216,10 +216,13 @@ export enum ENInterfaces {
     editPolicies = 'V1.Test/Policy/Edit', //post body
     addPolicies = 'V1.Test/Policy/Add',
     getSideBar = 'V1/User/SideBar',
-    postImportData = 'V1/Import/Dynamic',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
 
+    postImportData = 'V1/Import/Dynamic',
+    postSimafaReadingProgram = 'V1/Import/Simafa/ReadingPrograms',
+    postSimafaBatch = 'V1/Import/Simafa/Batch',
+    postSimafaSingle = 'V1/Import/Simafa/single',
 
     getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
     getDashboardTraverseTimed = 'V1/List/Dashboard/Traverse/Timed',

@@ -75,22 +75,27 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   nullSavedSource = () => this.closeTabService.saveDataForSearchPro = null;
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
+    if (this.utilsService.isNull(this.searchReq)) {
       this.searchReq = this.searchService.getSearchPro();
       if (this.utilsService.isNull(this.searchReq)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
+        this.showSearchOptionsDialog();
         return;
       }
+    }
+    if (canRefresh) {
+      this.nullSavedSource();
+
       if (!this.searchService.verificationPro(this.searchReq))
         this.connectToServer();
     }
-    if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchPro)) {
-      this.dataSource = this.closeTabService.saveDataForSearchPro;
-      this.converts();
+    else {
+      if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchPro)) {
+        this.dataSource = this.closeTabService.saveDataForSearchPro;
+        this.converts();
+      }
+      else
+        this.toDefaultVals();
     }
-    else
-      this.toDefaultVals();
 
   }
   ngOnInit() {
@@ -131,7 +136,7 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   showSearchOptionsDialog = () => {
     this.ref = this.dialogService.open(SearchDgComponentComponent, {
       rtl: true,
-      width: '80%'
+      width: '90%'
     })
     this.ref.onClose.subscribe((res: ISearchProReportInput) => {
       if (res) {
