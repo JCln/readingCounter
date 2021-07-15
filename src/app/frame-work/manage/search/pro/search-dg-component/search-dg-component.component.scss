@@ -24,7 +24,7 @@ form {
 
   .__content {
     gap: $font_05;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
+    grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
     display: grid;
     align-items: center;
     justify-content: center;
@@ -40,6 +40,7 @@ form {
   border-radius: 5px;
 
   @media (max-width: 780px) {
+    margin-top: $font_xs;
     grid-column: 1/6;
   }
 
@@ -62,11 +63,12 @@ span label {
 }
 
 .ui-float-label {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  display: grid;
   font-size: $font_m;
   font-weight: 600;
+  padding: .3rem 0.1rem;
+  border-radius: 7px;
+  background: $gray_300;
 }
 
 .title {
