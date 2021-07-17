@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { AssessAddComponent } from './assess-add.component';
+
+const routes: Routes = [
+  { path: '', component: AssessAddComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

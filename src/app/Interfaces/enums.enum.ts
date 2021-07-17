@@ -43,6 +43,7 @@ export enum EN_messages {
     insert_readingPeriod = 'دوره قرائت را وارد نمایید',
     insert_year = 'سالی وارد نمایید',
     insert_zone = 'ناحیه ای وارد نمایید',
+    insert_listNumber = 'شماره لیست را وارد نمایید',
     insert_title = 'عنوان را وارد نمایید',
     insert_title_route = 'عنوان مسیر را وارد نمایید',
     insert_searchType = 'نوع جستجو وارد نمایید',

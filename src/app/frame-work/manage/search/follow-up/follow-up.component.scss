@@ -5,11 +5,13 @@
 
 section {
   display: grid;
+  direction: rtl;
   margin: auto;
   padding: 2rem;
-  background: $gray_300;
-  border-radius: $border_15;
+  background: $gray_100;
+  border-radius: 10px;
   width: 18rem;
+  box-shadow: 1px 1px 8px 4px $gray_400;
 }
 
 ._center {
