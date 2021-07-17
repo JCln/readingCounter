@@ -8,7 +8,7 @@
   margin: 1rem .2rem;
   height: 100%;
   min-height: 31rem;
-  box-shadow: -1px 2px 5px 5px $gray_400;
+  box-shadow: -1px 2px 5px 5px var(--gray_400);
   position: relative;
 }
 
@@ -38,7 +38,7 @@
 
   .unit_toggle {
     cursor: pointer;
-    border: 2px solid $orange_500;
+    border: 2px solid var(--orange_500);
     border-radius: 100vmax;
     width: 5rem;
     transition: all ease-in-out 250ms;
@@ -50,7 +50,7 @@
       height: $font_s;
       width: $font_s;
       border-radius: $border_50;
-      background: $orange_500;
+      background: var(--orange_500);
       transition: all ease-in-out 250ms;
 
     }
@@ -75,8 +75,8 @@
     position: relative;
     font-size: $font_m;
     margin: 0 $font_05;
-    color: $blue_700;
-    background: $gray_300;
+    color: var(--blue_700);
+    background: var(--gray_300);
     border-radius: $border_50;
     padding: $font_05;
     cursor: pointer;
@@ -118,8 +118,8 @@
   height: 2.5rem;
   padding: 0rem;
   border: 0;
-  background-color: $gray_300;
-  color: $blue_gray_300;
+  background-color: var(--gray_300);
+  color: var(--blue_gray_300);
 
   i {
     font-size: $font_m;
@@ -132,14 +132,14 @@
   left: 0rem;
   top: -3rem;
   z-index: 2;
-  background: $white;
+  background: var(--white);
   width: 20rem;
   margin: $font_xs;
   padding: $font_xs;
   text-align: right;
   direction: rtl;
   border-radius: $border_15;
-  box-shadow: 0px 2px 3px 1px $blue_gray_700;
+  box-shadow: 0px 2px 3px 1px var(--blue_gray_700);
 
   @media (max-width: 550px) {
     margin: $font_l 0;
@@ -148,11 +148,11 @@
 }
 
 article {
-  background-color: $gray_200;
+  background-color: var(--gray_200);
   border-radius: $border_15;
   margin: $font_05 0;
   padding: $font_05;
-  box-shadow: 0 0 2px 1px $gray_500;
+  box-shadow: 0 0 2px 1px var(--gray_500);
 }
 
 ._flex_dr_ric {
@@ -160,13 +160,13 @@ article {
 }
 
 h3 {
-  color: $gray_600;
+  color: var(--gray_600);
   margin-bottom: $font_05;
 }
 
 .btn_2 {
   height: 2.5rem;
-  color: $gray_600;
+  color: var(--gray_600);
   margin-top: $font_xs;
 }
 
@@ -175,7 +175,7 @@ h3 {
 
   p {
     font-size: $font_s;
-    color: $blue_700;
+    color: var(--blue_700);
     margin: 0 $font_xs;
   }
 }

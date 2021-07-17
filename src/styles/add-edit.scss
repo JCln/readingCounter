@@ -4,7 +4,7 @@
 @import 'media';
 
 .btn_1 {
-  color: $gray_100;
+  color: var(--gray_100);
 }
 
 /* materials */
@@ -14,7 +14,7 @@
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: $blue_500;
+      color: var(--blue_500);
       line-height: 2;
       border-radius: $border_15;
       font-family: $font_family;
@@ -25,7 +25,7 @@
   .mat-horizontal-stepper-header-container {
     height: 4rem;
     direction: rtl;
-    border: 2px solid $blue_700;
+    border: 2px solid var(--blue_700);
     border-radius: 6rem;
     padding: $font_05;
     margin-bottom: 1rem;
@@ -62,13 +62,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $blue_gray_400;
-  color: $blue_700;
+  background-color: var(--blue_gray_400);
+  color: var(--blue_700);
 }
 
 ._special {
-  background-color: $blue_400;
-  color: $gray_100;
+  background-color: var(--blue_400);
+  color: var(--gray_100);
 }
 
 
@@ -85,8 +85,8 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: $white;
-  box-shadow: 0px 0px 2px 2px $blue_gray_400;
+  background-color: var(--white);
+  box-shadow: 0px 0px 2px 2px var(--blue_gray_400);
 
   .auth_1_item {
     display: grid;
@@ -95,9 +95,9 @@
     border-radius: $border_5;
     font-size: $font_l;
     font-weight: 600;
-    background: $blue_gray_400;
-    color: $blue_700;
-    box-shadow: 1px 1px 3px 0px $blue_gray_400;
+    background: var(--blue_gray_400);
+    color: var(--blue_700);
+    box-shadow: 1px 1px 3px 0px var(--blue_gray_400);
     cursor: pointer;
   }
 
@@ -113,8 +113,8 @@
 
 // active auth1 tab
 .active_tab {
-  background-color: $blue_600 !important;
-  color: $gray_100 !important;
+  background-color: var(--blue_600) !important;
+  color: var(--gray_100) !important;
 }
 
 .auth_2 {
@@ -127,7 +127,7 @@
   margin: 0;
   padding: $font_05;
   border-radius: $border_15;
-  box-shadow: 0px 2px 3px 1.5px $gray_400;
+  box-shadow: 0px 2px 3px 1.5px var(--gray_400);
 }
 
 @include media_wrapper(550px, '.auth_3', margin, $font_05 4rem $font_05 $font_xxs);
@@ -136,8 +136,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   gap: .3rem;
-  background: $gray_100;
-  border: 1px solid $blue_600;
+  background: var(--gray_100);
+  border: 1px solid var(--blue_600);
   border-radius: $border_5;
   margin: $font_xxs;
 
@@ -150,7 +150,7 @@
 
 .text {
   padding: 0 $font_05;
-  color: $blue_600;
+  color: var(--blue_600);
   font-size: $font_l;
   font-weight: 600;
 }
@@ -164,13 +164,13 @@
   margin-bottom: $font_05;
   font-size: $font_m;
   font-weight: 600;
-  color: $blue_600;
-  background: $gray_300;
+  color: var(--blue_600);
+  background: var(--gray_300);
 }
 
 .accept {
   display: flex;
-  box-shadow: 0 -3px 2px -1px $blue_gray_400;
+  box-shadow: 0 -3px 2px -1px var(--blue_gray_400);
 }
 
 ._double_size {
@@ -188,7 +188,7 @@
 .separator::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid $blue_600;
+  border-bottom: 1px solid var(--blue_600);
 }
 
 .separator:not(:empty)::after {

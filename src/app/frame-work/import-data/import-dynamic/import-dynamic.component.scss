@@ -5,8 +5,8 @@
 
 .main {
   direction: rtl;
-  background: $gray_100;
-  box-shadow: 1px 1px 8px 4px $gray_400;
+  background: var(--gray_100);
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
   padding: $font_s;
   border-radius: $border_15;
   min-height: 35rem;
@@ -28,15 +28,15 @@ section.dynamic_content {
   grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
   gap: $font_05;
   align-items: center;
-  border: .15rem solid $blue_gray_700;
-  box-shadow: 1px 1px 3px 1px $blue_gray_700;
+  border: .15rem solid var(--blue_gray_700);
+  box-shadow: 1px 1px 3px 1px var(--blue_gray_700);
   border-radius: $border_15;
   padding: $font_xxs;
   margin: 1rem 0;
 }
 
 .static_part {
-  border: .15rem solid $blue_400;
+  border: .15rem solid var(--blue_400);
   border-radius: $border_15;
   padding: $font_xxs;
 }
@@ -60,18 +60,18 @@ section.dynamic_content {
   justify-content: center;
   direction: ltr;
   border: none;
-  color: $blue_700;
+  color: var(--blue_700);
   text-align: center;
   width: 100%;
 }
 
 .btn_1 {
-  color: $white;
-  background-color: $orange_500;
+  color: var(--white);
+  background-color: var(--orange_500);
 }
 
 h3 {
-  color: $gray_600;
+  color: var(--gray_600);
   margin-left: 5rem;
 }
 
@@ -94,7 +94,7 @@ footer {
   .mat-option-text {
     font-size: $font_s;
     font-weight: 600;
-    color: $blue_800;
+    color: var(--blue_800);
   }
 
   .mat-checkbox-layout .mat-checkbox-label {
@@ -102,7 +102,7 @@ footer {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $blue_gray_700;
+    color: var(--blue_gray_700);
   }
 }
 
@@ -113,7 +113,7 @@ footer {
 
 hr {
   margin: 0 auto;
-  background-color: $blue_700;
+  background-color: var(--blue_700);
   height: .2rem;
   margin-bottom: $font_xxs;
 }
@@ -127,14 +127,14 @@ hr {
   font-size: $font_s;
   font-weight: 700;
   font-family: inherit;
-  color: $gray_600;
+  color: var(--gray_600);
   margin: 0 2rem;
 }
 
 ::ng-deep {
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: $blue_gray_300;
+    color: var(--blue_gray_300);
   }
 }
 
@@ -143,7 +143,7 @@ hr {
 }
 
 .this {
-  border: 1.5px solid $orange_600;
+  border: 1.5px solid var(--orange_600);
   animation: pulse-new-button 500ms;
 }
 
@@ -153,10 +153,10 @@ hr {
   }
 
   50% {
-    box-shadow: 0px 0px 3px 0px $orange_600;
+    box-shadow: 0px 0px 3px 0px var(--orange_600);
   }
 
   100% {
-    box-shadow: 0px 0px 5px 1px $orange_600;
+    box-shadow: 0px 0px 5px 1px var(--orange_600);
   }
 }

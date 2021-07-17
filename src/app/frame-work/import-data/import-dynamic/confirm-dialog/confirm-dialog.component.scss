@@ -2,19 +2,19 @@
 @import 'button.scss';
 
 .mat-dialog-content {
-  color: $gray_700;
+  color: var(--gray_700);
   font-size: $font_s;
   text-align: right;
   word-spacing: .3rem;
 }
 
 strong {
-  color: $blue_600;
+  color: var(--blue_600);
 }
 
 ._circle_border {
-  color: $green_500;
-  border: 2px solid $green_500;
+  color: var(--green_500);
+  border: 2px solid var(--green_500);
   margin-left: $font_xs;
 }
 
@@ -26,7 +26,7 @@ h2 {
 ._key_value {
   columns: 2;
   text-align: center;
-  column-rule: 1px dashed $blue_400;
+  column-rule: 1px dashed var(--blue_400);
   direction: rtl;
 }
 

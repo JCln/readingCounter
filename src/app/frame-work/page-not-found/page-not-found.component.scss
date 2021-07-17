@@ -11,8 +11,8 @@ main {
   min-height: 15rem;
 
   border-radius: $border_15;
-  background: $gray_100;
-  box-shadow: 1px 1px 8px 4px $gray_400;
+  background: var(--gray_100);
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
 }
 
 button {

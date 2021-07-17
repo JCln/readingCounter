@@ -14,7 +14,7 @@
     text-align: center;
     padding: 1.1rem 0;
     background: transparent;
-    color: $blue_700 !important;
+    color: var(--blue_700) !important;
     cursor: pointer;
   }
 
@@ -37,8 +37,8 @@
   }
 
   .dp-current-location-btn {
-    background: $red_500 !important;
-    border: 1px solid $red_500 !important;
+    background: var(--red_500) !important;
+    border: 1px solid var(--red_500) !important;
   }
 
   .dp-calendar-nav-container-left,

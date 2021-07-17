@@ -6,7 +6,7 @@
 
 table {
   display: block;
-  border: 2px solid $blue_gray_700;
+  border: 2px solid var(--blue_gray_700);
   overflow: auto;
   width: 100%;
   direction: rtl;
@@ -14,7 +14,7 @@ table {
 
 td,
 th {
-  border: 1px solid $gray_200;
+  border: 1px solid var(--gray_200);
 }
 
 th.mat-header-cell {
@@ -26,8 +26,8 @@ th.mat-header-cell {
 }
 
 .header {
-  color: $blue_gray_700;
-  border: 1px solid $blue_gray_700;
+  color: var(--blue_gray_700);
+  border: 1px solid var(--blue_gray_700);
   margin: auto;
   border-radius: $border_15;
   text-align: center;
@@ -39,7 +39,7 @@ th.mat-header-cell {
 td.mat-cell {
   padding: .87rem;
   font-size: $font_m;
-  color: $gray_700;
+  color: var(--gray_700);
   font-weight: 600;
 }
 
@@ -50,7 +50,7 @@ td.mat-cell {
 }
 
 ._custom {
-  color: $blue_gray_300;
+  color: var(--blue_gray_300);
   border-radius: $border_50;
   padding: $font_xs;
   font-size: $font_l;
@@ -76,7 +76,7 @@ th {
 }
 
 .fa-trash-o {
-  color: $red_600;
+  color: var(--red_600);
 }
 
 .mat-form-field {
@@ -98,9 +98,9 @@ th {
 .operation {
   display: flex;
   justify-content: flex-end;
-  background: $white;
+  background: var(--white);
   border-radius: $border_15 $border_15 0 0;
-  border: 2px solid $blue_gray_700;
+  border: 2px solid var(--blue_gray_700);
   border-bottom: 0;
 }
 
@@ -115,7 +115,7 @@ th {
   width: 3rem;
   display: grid;
   place-content: center;
-  color: $blue_gray_300;
+  color: var(--blue_gray_300);
 
   &:hover,
   &:focus,
@@ -125,12 +125,12 @@ th {
 }
 
 .mat-row:nth-child(even) {
-  background-color: $white;
+  background-color: var(--white);
 
   &:hover,
   &:focus,
   &:active {
-    background-color: $gray_400;
+    background-color: var(--gray_400);
   }
 }
 
@@ -140,7 +140,7 @@ th {
   &:hover,
   &:focus,
   &:active {
-    background-color: $gray_400;
+    background-color: var(--gray_400);
   }
 }
 
@@ -164,7 +164,7 @@ td.mat-footer-cell:first-of-type {
     font-weight: 600;
     overflow: hidden;
     flex-grow: 1;
-    color: $gray_600;
+    color: var(--gray_600);
   }
 }
 

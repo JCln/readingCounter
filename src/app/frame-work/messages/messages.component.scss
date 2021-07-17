@@ -12,7 +12,7 @@
 }
 
 .content {
-  background: $gray_300;
+  background: var(--gray_300);
   border-radius: $border_15;
   margin: auto;
   padding: 1rem;
@@ -25,9 +25,9 @@
 }
 
 textarea {
-  background: $gray_100;
+  background: var(--gray_100);
   font-size: $font_m;
-  color: $gray_500;
+  color: var(--gray_500);
   font-weight: 600;
   text-align: right;
   direction: rtl;
@@ -41,13 +41,13 @@ textarea {
 
 .t_separator {
   .btn_2 {
-    color: $blue_700;
+    color: var(--blue_700);
   }
 }
 
 .c_separator {
   .btn_2 {
-    color: $gray_100;
+    color: var(--gray_100);
   }
 
 }
@@ -67,7 +67,7 @@ textarea {
   margin: $font_2 0 $font_05;
 
   .btn_2 {
-    color: $blue_400;
+    color: var(--blue_400);
     width: 10.5rem;
   }
 }
@@ -83,18 +83,18 @@ textarea {
   height: 80vh;
   overflow: auto;
   padding: 1rem;
-  background: $gray_300;
+  background: var(--gray_300);
   border-radius: 15px;
 
   #btn {
     width: 10.5rem;
-    color: $blue_400;
+    color: var(--blue_400);
   }
 }
 
 .main_content {
   position: relative;
-  background: $gray_100;
+  background: var(--gray_100);
   border-radius: $border_15;
   padding: $font_xs $font_xs 0;
   margin-bottom: $font_05;
@@ -104,7 +104,7 @@ textarea {
   text-align: right;
   font-size: $font_s;
   font-weight: 600;
-  color: $gray_600;
+  color: var(--gray_600);
 }
 
 ._details {
@@ -117,10 +117,10 @@ textarea {
     font-size: $font_s;
     padding: .2rem 1.5rem;
     text-align: center;
-    color: $gray_500;
+    color: var(--gray_500);
 
     margin: .3rem;
-    background-color: $gray_300;
+    background-color: var(--gray_300);
     border-radius: $border_5;
   }
 }
@@ -129,11 +129,11 @@ textarea {
   position: absolute;
   left: 0;
   top: 0;
-  color: $gray_500;
+  color: var(--gray_500);
   opacity: .5;
   padding: $font_05;
   margin: .15rem;
-  border: 1px solid $gray_500;
+  border: 1px solid var(--gray_500);
   border-radius: $font_2;
   width: 1.5rem;
   height: 1.5rem;
@@ -143,18 +143,18 @@ textarea {
   &:active {
     background-color: rgba(213, 213, 213, .7);
     opacity: 1;
-    color: $red_500;
+    color: var(--red_500);
   }
 }
 
 h1 {
   text-align: center;
-  color: $blue_700;
+  color: var(--blue_700);
   margin-bottom: $font_l;
 }
 
 h2 {
-  color: $blue_700;
+  color: var(--blue_700);
 }
 
 ._delete_pres {
@@ -174,12 +174,12 @@ h2 {
   .input_1 {
     min-width: auto;
     border: none;
-    color: $gray_500;
-    background: $gray_100;
+    color: var(--gray_500);
+    background: var(--gray_100);
   }
 
   p {
-    color: $gray_500;
+    color: var(--gray_500);
     font-size: $font_s;
     margin-left: $font_05;
   }
@@ -196,13 +196,13 @@ h2 {
 }
 
 .mat-button-toggle-checked {
-  color: $gray_700 !important;
-  border-bottom: .3rem solid $gray_700 !important;
-  box-shadow: 2px 2px 2px 2px $gray_300 !important;
+  color: var(--gray_700) !important;
+  border-bottom: .3rem solid var(--gray_700) !important;
+  box-shadow: 2px 2px 2px 2px var(--gray_300) !important;
 }
 
 .mat-button-toggle-appearance-standard {
-  background: $gray_100;
+  background: var(--gray_100);
 }
 
 ::ng-deep {
@@ -217,6 +217,6 @@ h2 {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $gray_500;
+    color: var(--gray_500);
   }
 }

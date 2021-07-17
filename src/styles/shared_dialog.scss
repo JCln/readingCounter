@@ -7,7 +7,7 @@
   font-family: $font_family;
   font-size: $font_s;
   font-weight: 600;
-  color: $gray_600;
+  color: var(--gray_600);
 }
 
 .mat-dialog-content {
@@ -48,19 +48,19 @@
   &:hover,
   &:focus,
   &:active {
-    box-shadow: 1px 1px 2px 3px $gray_400;
+    box-shadow: 1px 1px 2px 3px var(--gray_400);
   }
 }
 
 ._custom {
-  background: $blue_400;
-  color: $gray_100;
+  background: var(--blue_400);
+  color: var(--gray_100);
 
   &:hover,
   &:focus,
   &:active {
-    background-color: $blue_500;
-    box-shadow: 0 0 0 3px $blue_500;
+    background-color: var(--blue_500);
+    box-shadow: 0 0 0 3px var(--blue_500);
   }
 }
 
@@ -69,24 +69,24 @@ h2 {
   font-family: $font_family;
   font-size: 1.5rem;
   font-weight: 600;
-  color: $blue_400;
-  border: 2px solid $blue_400;
+  color: var(--blue_400);
+  border: 2px solid var(--blue_400);
   border-radius: 15px;
   padding: 1rem;
 }
 
 .mat-dialog-container {
-  border: 1px solid $blue_400;
+  border: 1px solid var(--blue_400);
 }
 
 ._blue_dark {
-  color: $blue_700;
-  border: 2px solid $blue_700;
+  color: var(--blue_700);
+  border: 2px solid var(--blue_700);
 }
 
 button._blue_dark {
-  background-color: $blue_700;
-  color: $gray_100;
+  background-color: var(--blue_700);
+  color: var(--gray_100);
 }
 
 ::ng-deep {
@@ -96,7 +96,7 @@ button._blue_dark {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $gray_600;
+    color: var(--gray_600);
   }
 
 }

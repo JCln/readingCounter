@@ -2,14 +2,14 @@
   .mat-select-value {
     font-family: $font_family;
     font-size: $font_s;
-    color: $gray_700;
+    color: var(--gray_700);
     font-weight: 600;
   }
 
   .mat-select-value-text {
     font-family: $font_family;
     font-size: 1.2rem;
-    color: $gray_700;
+    color: var(--gray_700);
   }
 
   .mat-dialog-container {
@@ -28,12 +28,12 @@
   }
 
   .mat-select-arrow {
-    color: $blue_400;
+    color: var(--blue_400);
   }
 
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: $blue_gray_300;
+    color: var(--blue_gray_300);
     font-family: $font_family;
     font-weight: 600;
   }
@@ -43,6 +43,6 @@
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $blue_gray_700;
+    color: var(--blue_gray_700);
   }
 }

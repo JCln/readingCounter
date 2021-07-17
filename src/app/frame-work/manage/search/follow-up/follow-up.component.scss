@@ -7,7 +7,7 @@ section {
   display: grid;
   margin: auto;
   padding: 2rem;
-  background: $gray_300;
+  background: var(--gray_300);
   border-radius: $border_15;
   width: 18rem;
 }
@@ -19,12 +19,12 @@ section {
 
 .input_1 {
   text-align: center;
-  border-color: $blue_600;
+  border-color: var(--blue_600);
   min-width: 16rem;
 }
 
 .btn_1 {
-  color: $white;
+  color: var(--white);
   margin-top: 1rem;
-  background-color: $orange_500;
+  background-color: var(--orange_500);
 }

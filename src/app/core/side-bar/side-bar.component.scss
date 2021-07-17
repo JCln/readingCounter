@@ -59,7 +59,7 @@ ul::-webkit-scrollbar {
 }
 
 .ul li {
-  background: $gray_400;
+  background: var(--gray_400);
   margin-left: .2rem;
   margin-bottom: 0.2rem;
   padding: $font_05 0.1rem;
@@ -75,7 +75,7 @@ ul::-webkit-scrollbar {
   .btn {
     font-size: $font_m;
     font-weight: 600;
-    color: $blue_900;
+    color: var(--blue_900);
 
     .on_show {
       display: flex;
@@ -90,17 +90,17 @@ ul::-webkit-scrollbar {
   .pi-angle-up {
     transform: rotate(0);
     transition: transform ease-in-out 150ms;
-    color: $blue_700;
+    color: var(--blue_700);
 
   }
 
   &.active {
-    border: 2px solid $blue_500;
-    background: $gray_200;
+    border: 2px solid var(--blue_500);
+    background: var(--gray_200);
 
     .on_show,
     .icons {
-      color: $blue_500;
+      color: var(--blue_500);
     }
 
   }
@@ -113,7 +113,7 @@ ul::-webkit-scrollbar {
 .sub_item_1,
 .sub_item_2 {
   background: #e9ecef;
-  border: 1px solid $blue_700;
+  border: 1px solid var(--blue_700);
   padding: $font_05 0.87rem;
   margin: 0.13rem 0.2rem;
   text-align: right;
@@ -122,22 +122,22 @@ ul::-webkit-scrollbar {
   border-radius: $border_15;
   overflow: visible;
 
-  color: $blue_700;
+  color: var(--blue_700);
   font-size: 1.1rem;
   font-weight: 600;
   outline: none;
 
   &:hover,
   &:focus {
-    background: linear-gradient(to left, $blue_500, rgba(255, 0, 0, 0));
-    color: $white;
+    background: linear-gradient(to left, var(--blue_500), rgba(255, 0, 0, 0));
+    color: var(--white);
   }
 }
 
 .active {
-  background: linear-gradient(to left, rgba(255, 0, 0, 0), $blue_500);
-  color: $blue_900;
-  border: 1px solid $gray_400;
+  background: linear-gradient(to left, rgba(255, 0, 0, 0), var(--blue_500));
+  color: var(--blue_900);
+  border: 1px solid var(--gray_400);
 }
 
 .ul_items {
@@ -163,7 +163,7 @@ ul::-webkit-scrollbar {
 .ul::before {
   content: '';
   position: absolute;
-  background: $blue_700;
+  background: var(--blue_700);
   clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
   top: 0;
   bottom: 0;
@@ -180,7 +180,7 @@ ul::-webkit-scrollbar {
   position: relative;
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
-  background: $gray_400;
+  background: var(--gray_400);
   margin-bottom: $font_05;
   padding: $font_xxs $font_05;
   border: 1px solid;
@@ -202,13 +202,13 @@ ul::-webkit-scrollbar {
     display: none;
     width: 15rem;
     right: 3.4rem;
-    background: $gray_300;
+    background: var(--gray_300);
     padding: $font_05;
     border-radius: $border_15;
     height: 13rem;
     z-index: 4;
     bottom: 0;
-    box-shadow: -3px 0px 3px 0px $blue_700;
+    box-shadow: -3px 0px 3px 0px var(--blue_700);
     overflow-y: auto;
     overflow-x: hidden;
     -ms-overflow-style: none;
@@ -217,16 +217,16 @@ ul::-webkit-scrollbar {
     h3 {
       font-size: $font_m;
       font-weight: 600;
-      color: $blue_900;
+      color: var(--blue_900);
       text-align: center;
-      color: $blue_900;
+      color: var(--blue_900);
     }
 
     & a {
       display: block;
       padding-right: .3rem;
       margin-bottom: .3rem;
-      color: $gray_600;
+      color: var(--gray_600);
       font-size: $font_m;
       font-weight: 600;
       border-radius: $border_15;
@@ -242,18 +242,18 @@ ul::-webkit-scrollbar {
 
   .li_2 {
     h3 {
-      color: $blue_700;
+      color: var(--blue_700);
     }
   }
 
   .active_2 {
     .btn_2 {
-      border: 2px solid $blue_500;
-      background-color: $gray_200;
+      border: 2px solid var(--blue_500);
+      background-color: var(--gray_200);
     }
 
     .icons {
-      color: $blue_500;
+      color: var(--blue_500);
     }
   }
 
@@ -291,7 +291,7 @@ i.icons {
   margin: 0 0.2rem 0 .3rem;
   font-size: $font_l;
   width: 1.87rem;
-  color: $blue_700;
+  color: var(--blue_700);
 }
 
 @keyframes toggle_side {
@@ -315,7 +315,7 @@ i.icons {
 // ts config for on close/open lists
 .tsConfig {
   transform: rotate(180deg) !important;
-  color: $blue_400 !important;
+  color: var(--blue_400) !important;
 }
 
 //

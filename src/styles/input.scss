@@ -3,7 +3,7 @@ $border_15: 10px;
 .input_1 {
   min-width: 19rem;
   height: 3rem;
-  background: $white;
+  background: var(--white);
   padding: 0 1rem;
   margin: .25rem 0;
   text-align: center;
@@ -21,8 +21,8 @@ $border_15: 10px;
 // key value input
 .input_2 {
   border-radius: $border_15;
-  background: $gray_300;
-  color: $gray_300;
+  background: var(--gray_300);
+  color: var(--gray_300);
   display: flex;
   align-items: center;
   margin: .25rem 0;
@@ -30,7 +30,7 @@ $border_15: 10px;
 }
 
 ._key {
-  color: $blue_400;
+  color: var(--blue_400);
   text-align: left;
   padding-right: .5rem;
   display: flex;
@@ -46,8 +46,8 @@ $border_15: 10px;
   width: 100%;
   flex: 1;
   text-align: center;
-  background: $white;
-  color: $blue_600;
+  background: var(--white);
+  color: var(--blue_600);
 }
 
 ._key,

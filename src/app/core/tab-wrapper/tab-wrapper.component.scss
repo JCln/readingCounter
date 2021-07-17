@@ -22,11 +22,11 @@ li {
   height: 2.5rem;
   border: 1.5px solid;
   border-radius: 10px;
-  color: $blue_700;
+  color: var(--blue_700);
   list-style-type: none;
   font-size: 1.1rem;
   font-weight: 600;
-  background: $gray_400;
+  background: var(--gray_400);
   cursor: pointer;
   padding: 0;
 
@@ -49,13 +49,13 @@ li {
     height: 2.2rem;
     margin-right: auto;
     border-radius: 2rem;
-    color: $gray_600;
+    color: var(--gray_600);
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $blue_gray_300;
-      background: $gray_400;
+      color: var(--blue_gray_300);
+      background: var(--gray_400);
     }
   }
 
@@ -69,18 +69,18 @@ li {
     height: 2.2rem;
     margin-left: auto;
     border-radius: 2rem;
-    color: $gray_600;
+    color: var(--gray_600);
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: $red_500;
-      background: $gray_400;
+      color: var(--red_500);
+      background: var(--gray_400);
     }
   }
 
   &:hover {
-    background: $gray_300;
+    background: var(--gray_300);
 
     .fa {
       opacity: 1;
@@ -98,12 +98,12 @@ li::before {
   border-radius: 15px;
   height: .3rem;
   width: 90%;
-  background: $blue_500;
+  background: var(--blue_500);
 }
 
 li.active {
-  color: $blue_500;
-  background: $gray_200;
+  color: var(--blue_500);
+  background: var(--gray_200);
   border: 1.5px solid;
   border-top: none;
 }
@@ -121,12 +121,12 @@ li.active::before {
   span {
     border-radius: $border_50;
     font-size: $font_s;
-    background: $red_500;
+    background: var(--red_500);
     padding: .3rem;
-    color: $white;
+    color: var(--white);
 
     &:hover {
-      box-shadow: 0px 0px 4px 1px $red_500;
+      box-shadow: 0px 0px 4px 1px var(--red_500);
     }
   }
 }

@@ -1,8 +1,4 @@
 @import "mixins.scss";
-@import "variable.scss";
-
-$white: white;
-$medium_slate_blue: #365475;
 
 .spinner {
   position: fixed;
@@ -28,7 +24,7 @@ $medium_slate_blue: #365475;
 
   h2 {
     margin-top: 10rem;
-    color: $white;
+    color: var(--white);
 
     .fa-spin,
     .fa-circle-notch {
@@ -48,7 +44,7 @@ $medium_slate_blue: #365475;
   border-radius: 30%;
   left: 25px;
   bottom: 25px;
-  background: $medium_slate_blue;
+  background: var(--blue_700);
   animation: around2 .8s infinite;
 }
 

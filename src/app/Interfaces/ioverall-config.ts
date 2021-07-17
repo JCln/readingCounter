@@ -193,3 +193,7 @@ export const IMasrafStates: ITHV[] = [
     { title: 'zero', header: 'صفر', value: 3 },
     { title: 'inCalculable', header: 'غیرقابل محاسبه', value: 4 }
 ]
+export interface Theme {
+    name: string,
+    properties: any
+}

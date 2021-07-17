@@ -6,8 +6,8 @@
 
 
 .content {
-  background: $gray_100;
-  box-shadow: 1px 2px 3px 1px $blue_400;
+  background: var(--gray_100);
+  box-shadow: 1px 2px 3px 1px var(--blue_400);
   text-align: center;
   justify-content: space-around;
   border-radius: $border_15;
@@ -29,16 +29,16 @@
 }
 
 .title {
-  color: $blue_400;
+  color: var(--blue_400);
   text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
 }
 
 input {
-  color: $gray_500;
+  color: var(--gray_500);
   margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px $gray_400;
+  box-shadow: 1px 1px 8px 1px var(--gray_400);
 }
 
 /* card content */
@@ -48,12 +48,12 @@ input {
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
   gap: $font_05;
-  background: $gray_100;
+  background: var(--gray_100);
   place-content: center;
   padding: $font_xs 0;
   border-radius: $border_15;
 
-  box-shadow: 1px 2px 3px 1px $blue_400;
+  box-shadow: 1px 2px 3px 1px var(--blue_400);
 }
 
 .card__content {
@@ -75,13 +75,13 @@ input {
     align-items: center;
     justify-content: space-evenly;
     margin-top: $font_xs;
-    background: $orange_500;
-    color: $white;
+    background: var(--orange_500);
+    color: var(--white);
     width: 100%;
     max-width: 100%;
 
     i {
-      color: $white;
+      color: var(--white);
     }
   }
 }

@@ -1,7 +1,7 @@
 @import 'variable';
 
 table {
-  background-color: $gray_300;
+  background-color: var(--gray_300);
   font-family: $font_family;
   border-collapse: collapse;
   width: 100%;
@@ -14,7 +14,7 @@ table {
 
 table td,
 table th {
-  border: 1px solid $white;
+  border: 1px solid var(--white);
   padding: $font_05;
   text-align: center;
   direction: ltr;
@@ -23,7 +23,7 @@ table th {
 }
 
 table th {
-  background-color: $gray_500;
+  background-color: var(--gray_500);
 }
 
 table tr {
@@ -31,14 +31,14 @@ table tr {
 }
 
 table tr:nth-child(even) {
-  background-color: $gray_100;
+  background-color: var(--gray_100);
 }
 
 table th {
   padding-top: 12px;
   padding-bottom: 12px;
   background-color: #0045cbbf;
-  color: $white;
+  color: var(--white);
 }
 
 ._normal {
@@ -58,5 +58,5 @@ table th {
 }
 
 ._hours {
-  background-color: $gray_400;
+  background-color: var(--gray_400);
 }

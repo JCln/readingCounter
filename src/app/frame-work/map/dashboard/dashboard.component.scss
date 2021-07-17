@@ -7,7 +7,7 @@
   align-items: center;
   gap: 0.3rem;
   margin-top: $font_xs;
-  background: $gray_100;
+  background: var(--gray_100);
   border-radius: $border_15;
   overflow: auto;
 }
@@ -27,20 +27,20 @@
 
 .media {
   min-width: 11rem;
-  background: $white;
+  background: var(--white);
   text-align: center;
   border-radius: $border_15;
-  box-shadow: 0 0 3px 2px $gray_200;
+  box-shadow: 0 0 3px 2px var(--gray_200);
   padding: $font_xxs 0;
 
   // &:nth-child(even) {
-  //   background: $gray_100;
+  //   background: var(--gray_100);
   // }
 }
 
 ._header {
   font-size: $font_m;
-  color: $blue_500;
+  color: var(--blue_500);
   font-weight: 800;
   text-align: center;
 }
@@ -49,7 +49,7 @@
   top: $font_2;
   position: absolute;
   font-size: $font_m;
-  color: $blue_500;
+  color: var(--blue_500);
   font-weight: 800;
   padding: 0 $font_xs;
 }
@@ -57,11 +57,11 @@
 .title_special {
   position: absolute;
   border-radius: $border_5;
-  background: $white;
+  background: var(--white);
   right: $font_05;
   top: 0;
   font-size: $font_l;
-  color: $blue_500;
+  color: var(--blue_500);
   font-weight: 800;
   z-index: 1;
 }
@@ -73,21 +73,21 @@
 .key {
   font-size: $font_s;
   font-weight: 600;
-  color: $blue_700;
+  color: var(--blue_700);
 }
 
 .val {
   font-size: $font_l;
   font-weight: 600;
-  color: $blue_700;
+  color: var(--blue_700);
 }
 
 /* CHARTS CONFIG*/
 
 .charts {
-  box-shadow: 0px 1px 2px 2px $gray_200;
+  box-shadow: 0px 1px 2px 2px var(--gray_200);
   border-radius: $border_15;
-  background: $white;
+  background: var(--white);
   min-height: 15rem;
 }
 
@@ -136,6 +136,6 @@
 }
 
 ._unified {
-  background-color: $white;
+  background-color: var(--white);
   grid-template-columns: repeat(auto-fit, minmax(15rem, auto))
 }

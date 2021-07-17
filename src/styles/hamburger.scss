@@ -5,7 +5,7 @@ span {
   margin-bottom: 3px;
   margin-left: auto;
   position: relative;
-  background: $blue_700;
+  background: var(--blue_700);
   border: 1px outset #afafaf;
   border-radius: 3px;
   z-index: 2;

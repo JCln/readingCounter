@@ -7,13 +7,13 @@
   justify-content: center;
   margin: .2rem 0;
   text-align: center;
-  border: 2px solid $blue_400;
+  border: 2px solid var(--blue_400);
   border-radius: $border_15;
 }
 
 .ag-theme-alpine .ag-root-wrapper {
   border-radius: $border_15;
-  border: 2px solid $blue_400;
+  border: 2px solid var(--blue_400);
 }
 
 .ag-theme-alpine {
@@ -25,7 +25,7 @@
 
 // ts config
 .cell-conf {
-  color: $blue_400;
-  // color: $gray_600;
+  color: var(--blue_400);
+  // color: var(--gray_600);
   font-size: 1.2rem;
 }

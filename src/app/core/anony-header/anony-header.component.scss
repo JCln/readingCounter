@@ -1,15 +1,17 @@
+@import 'variable';
+
 .header {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background-color: #fff;
-  height: 3rem;
+  background-color: var(--white);
+  height: $font_3;
   position: sticky;
   top: 0;
 
   ._logo_content {
     width: 4.2rem;
-    height: 3rem;
+    height: $font_3;
   }
 }
 
@@ -19,8 +21,8 @@ ul {
 }
 
 li {
-  padding-right: 1rem;
-  font-size: 1.3rem;
+  padding-right: $font_xs;
+  font-size: $font_m;
   font-weight: 600;
 
   @media (min-width: 700px) {

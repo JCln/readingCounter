@@ -7,8 +7,8 @@
 
 .main {
   direction: rtl;
-  background: $gray_100;
-  box-shadow: 1px 1px 8px 4px $gray_400;
+  background: var(--gray_100);
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
   padding: $font_05;
   border-radius: $border_15;
   min-height: 35rem;
@@ -30,7 +30,7 @@ section._container {
 
 .__checks,
 .__slider {
-  background: $white;
+  background: var(--white);
   border-radius: $border_15;
   padding: $font_xs $font_05;
 }
@@ -70,22 +70,22 @@ section._container {
   justify-content: center;
   direction: ltr;
   border: none;
-  color: $blue_700;
+  color: var(--blue_700);
   text-align: center;
   width: 100%;
 }
 
 .btn_1 {
-  color: $white;
-  background-color: $orange_500;
+  color: var(--white);
+  background-color: var(--orange_500);
 }
 
 h2 {
-  color: $gray_600;
+  color: var(--gray_600);
 }
 
 h3 {
-  color: $blue_500;
+  color: var(--blue_500);
   font-size: 1.4rem;
   padding: $font_05;
 }
@@ -108,7 +108,7 @@ footer {
   .mat-option-text {
     font-size: $font_s;
     font-weight: 600;
-    color: $blue_800;
+    color: var(--blue_800);
   }
 
   .mat-checkbox-layout .mat-checkbox-label {
@@ -116,7 +116,7 @@ footer {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $blue_gray_700;
+    color: var(--blue_gray_700);
   }
 }
 
@@ -127,7 +127,7 @@ footer {
 
 hr {
   margin: 0 4rem;
-  background-color: $blue_700;
+  background-color: var(--blue_700);
   height: .2rem;
   margin-bottom: $font_xxs;
 }
@@ -141,14 +141,14 @@ hr {
   font-size: $font_s;
   font-weight: 700;
   font-family: inherit;
-  color: $gray_600;
+  color: var(--gray_600);
   margin: 0 2rem;
 }
 
 ::ng-deep {
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: $blue_gray_300;
+    color: var(--blue_gray_300);
   }
 }
 
@@ -180,7 +180,7 @@ hr {
 // slider
 .img_wrapper {
   border-radius: $border_15;
-  border: 2px solid $blue_gray_300;
+  border: 2px solid var(--blue_gray_300);
   position: relative;
   margin: .4rem 0;
   cursor: pointer;
@@ -188,7 +188,7 @@ hr {
   &:hover,
   &:active,
   &:focus {
-    box-shadow: 0px 0px 1px 2px $blue_gray_300;
+    box-shadow: 0px 0px 1px 2px var(--blue_gray_300);
   }
 }
 
@@ -204,8 +204,8 @@ hr {
   top: -$font_s;
   right: $font_05;
   text-align: center;
-  background-color: $blue_600;
-  color: $white;
+  background-color: var(--blue_600);
+  color: var(--white);
   width: 1.5rem;
   height: 1.5rem;
   border-radius: $border_5;
@@ -217,7 +217,7 @@ img {
 }
 
 .not_found_header {
-  color: $blue_600;
+  color: var(--blue_600);
 }
 
 .tooltip .tooltip_text {
