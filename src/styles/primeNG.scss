@@ -40,7 +40,7 @@
   .p-inputtext {
     background: var(--white);
     border: 1px solid var(--blue_400);
-    color: var(--gray_400);
+    color: var(--gray_800);
   }
 
   .p-datatable .p-datatable-thead>tr>th {
@@ -212,7 +212,12 @@
   }
 
   .p-datatable .p-datatable-thead>tr>th {
-    color: var(--gray_700);
+    color: var(--gray_800);
+  }
+
+  .p-paginator {
+    background: var(--white);
+    color: var(--gray_800);
   }
 
   footer,

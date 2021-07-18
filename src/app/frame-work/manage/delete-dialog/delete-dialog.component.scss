@@ -1,10 +1,6 @@
 @import 'variable.scss';
 @import 'button.scss';
-
-.mat-form-field {
-  text-align: right;
-  font-family: $font_family;
-}
+@import '_mat.scss';
 
 .mat-dialog-content {
   display: grid;
@@ -13,6 +9,7 @@
   min-width: 17rem;
   overflow: hidden;
   padding: $font_2 0;
+
   @media (min-width: 780px) {
     min-width: 28rem;
   }

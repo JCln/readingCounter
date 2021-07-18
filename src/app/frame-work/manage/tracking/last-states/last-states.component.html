@@ -48,7 +48,7 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-dataSource let-columns="columns">
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns">
         <tr>
             <td *ngFor="let col of columns">
                 <span class="ui-column-title">{{col.header}}</span>
@@ -70,7 +70,7 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" *ngIf="dataSource.length === 0">
+    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
         <tr>
             <td [attr.colspan]="dataSource.length">
                 موردی پیدا نشد

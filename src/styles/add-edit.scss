@@ -2,6 +2,7 @@
 @import 'button.scss';
 @import 'tooltip.scss';
 @import 'media';
+@import '_mat';
 
 .btn_1 {
   color: var(--gray_100);
@@ -21,6 +22,10 @@
     }
   }
 
+  .mat-stepper-horizontal,
+  .mat-stepper-vertical {
+    background: var(--white);
+  }
 
   .mat-horizontal-stepper-header-container {
     height: 4rem;

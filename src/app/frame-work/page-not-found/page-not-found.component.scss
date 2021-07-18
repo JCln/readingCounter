@@ -24,3 +24,7 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   justify-content: center;
 }
+
+.title {
+  color: var(--gray_800);
+}

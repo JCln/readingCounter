@@ -8,7 +8,7 @@
 
   .mat-select-value-text {
     font-family: $font_family;
-    font-size: 1.2rem;
+    font-size: $font_s;
     color: var(--gray_700);
   }
 
@@ -17,8 +17,16 @@
   }
 
   .mat-form-field-infix {
-    font-size: 1.2rem;
+    font-size: $font_s;
     font-weight: 600;
+  }
+
+  .mat-form-field {
+    text-align: right;
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: var(--gray_800);
   }
 
   .mat-select {
@@ -43,6 +51,14 @@
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: var(--blue_gray_700);
+    color: var(--gray_800);
+  }
+
+  .mat-form-field-label {
+    color: var(--gray_800);
+  }
+
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: var(--gray_300);
   }
 }

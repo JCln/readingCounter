@@ -23,16 +23,22 @@ ul {
 ._theme_mode {
   margin: auto;
   font-size: $font_m;
+  cursor: pointer;
 
   .fa-sun {
     color: yellow;
   }
 }
 
+._title {
+  color: var(--gray_800);
+}
+
 li {
   padding-right: $font_xs;
   font-size: $font_m;
   font-weight: 600;
+  list-style-type: none;
 
   @media (min-width: 700px) {
     padding-right: 8rem;
