@@ -132,7 +132,7 @@ export class ImportDynamicService {
       }
     }
     if (object.hasOwnProperty('listNumber')) {
-      if (this.utilsService.isNull(object.zoneId)) {
+      if (this.utilsService.isNull(object.listNumber)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_listNumber);
         return false;
       }

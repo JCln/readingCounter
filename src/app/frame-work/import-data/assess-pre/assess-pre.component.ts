@@ -63,6 +63,8 @@ export class AssessPreComponent implements OnInit {
     this.importDynamicService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
+    console.log(this.assessPreReq);
+    
     this.dataSource = await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessPre, this.assessPreReq);
     this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.assessPreReq.zoneId);
     this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.assessPreReq.zoneId);

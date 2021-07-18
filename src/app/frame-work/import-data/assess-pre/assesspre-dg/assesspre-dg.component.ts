@@ -51,8 +51,7 @@ export class AssesspreDgComponent implements OnInit {
     this.counterStateByZoneIdDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.AssessPreReq.zoneId);
   }
   editCloseData() {
-    console.log(this.AssessPreReq);
-
-    // this.ref.close(this.AssessPreReq);
+    if (this.importDynamicService.verificationAssessPre(this.AssessPreReq))
+      this.ref.close(this.AssessPreReq);
   }
 }

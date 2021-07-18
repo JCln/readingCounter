@@ -1,83 +1,123 @@
-@import 'primeNG';
-@import 'tooltip.scss';
+@import 'primeNG.scss';
 @import 'input.scss';
 @import 'button.scss';
-@import '_mat.scss';
 
-.main {
-  direction: rtl;
+form {
+  font-family: $font_family;
+  margin: $font_3 0;
   background: $gray_100;
-  box-shadow: 1px 1px 8px 4px $gray_400;
-  padding: $font_05;
-  border-radius: $border_15;
-  border: 1px solid $blue_400;
+  box-shadow: 1px 1px 8px 4px $gray_200;
 }
 
-section.content {
+.main_content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
-  gap: $font_05;
-  align-items: center;
+  direction: rtl;
+  text-align: center;
+  padding: $font_xs 0.2rem $font_xs 0.2rem;
+  border-radius: $border_15;
+  gap: .2rem;
 }
 
-.tooltip {
-  cursor: pointer;
+._toselect {
+  grid-column: 1/5;
+
+  .__content {
+    gap: $font_05;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-.input_1 {
-  border-radius: 10px;
+._to_insert {
+  display: flex;
+  justify-content: center;
+  direction: rtl;
+
+  input {
+    width: auto;
+    min-width: auto;
+    direction: rtl;
+  }
 }
 
-.btn_2_o {
-  font-family: $font_family
+._more_options {
+  grid-column: 5/10;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  justify-content: center;
+  background-color: $gray_400;
+  border-radius: 5px;
+
+  @media (max-width: 780px) {
+    margin-top: $font_xs;
+    grid-column: 1/6;
+  }
+
+  @media (max-width: 550px) {
+    margin-top: 2rem;
+  }
+
 }
 
-h2 {
-  color: $gray_600;
+app-date-jalali {
+  width: 100%;
+  height: 2.8rem;
+  background: $white;
+  border-radius: 9px;
+  border: 1px solid $gray_300;
 }
 
-h3 {
-  color: $blue_500;
-  font-size: 1.4rem;
-  padding: $font_05;
+span label {
+  margin-left: $font_05;
 }
 
-footer {
-  margin-top: $font_05;
+.ui-float-label {
+  display: grid;
+  font-size: $font_m;
+  font-weight: 600;
+  padding: .3rem 0.1rem;
+  border-radius: 7px;
+  background: $gray_300;
+}
+
+.title {
+  color: $blue_400;
   text-align: center;
 }
 
-::ng-deep {
-
-  .mat-select-panel .mat-option {
-    font-size: 1.2rem;
-    line-height: 3em;
-    height: 3em;
-    text-align: right;
-    font-family: inherit;
-    font-weight: 600;
-  }
-
-  .mat-option-text {
-    font-size: $font_s;
-    font-weight: 600;
-    color: $blue_800;
-  }
-
-  .mat-checkbox-layout .mat-checkbox-label {
-    margin: 0 $font_05;
-    font-family: $font_family;
-    font-size: $font_s;
-    font-weight: 600;
-    color: $blue_gray_700;
-  }
-
-  .mat-radio-label-content {
-    padding-right: $font_05 !important;
-    color: $blue_gray_300;
-  }
+article {
+  padding: $font_05;
+  border-radius: $border_15;
+  background-color: $gray_200;
+  margin: 0.1rem;
 }
 
+.btn_2_o {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: $font_s auto;
+  font-family: $font_family;
+}
+
+hr {
+  margin-bottom: $font_xs;
+}
+
+.p-dropdown {
+  width: 100%;
+  border-radius: 5px;
+  height: 3.35rem;
+}
+
+[hidden] {
+  display: none;
+}
+
+
+// materials 
 .radio_group {
   display: flex;
   justify-content: space-evenly;
@@ -91,6 +131,29 @@ footer {
   margin: 0 2rem;
 }
 
-[hidden] {
-  display: none;
+::ng-deep {
+  .mat-checkbox-layout {
+    .mat-checkbox-label {
+      margin: 0 $font_05;
+      font-size: $font_s;
+      font-weight: 600;
+      color: $blue_700;
+      line-height: 2;
+      border-radius: $border_15;
+      font-family: $font_family;
+    }
+  }
+
+  .mat-radio-label-content {
+    padding-right: $font_05 !important;
+    color: $blue_gray_300;
+  }
+}
+
+// dialog conf
+:host ::ng-deep {
+  .p-dialog .p-dialog-header {
+    background-color: $blue_gray_300;
+    direction: rtl;
+  }
 }
