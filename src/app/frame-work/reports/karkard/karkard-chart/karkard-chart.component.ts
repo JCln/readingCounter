@@ -48,7 +48,7 @@ export class KarkardChartComponent implements OnInit {
           let percentage = (value * 100 / sum).toFixed(2) + "%";
           return percentage;
         },
-        color: '#fff',
+        color: 'var(--white)',
       }
     },
     tooltips: {

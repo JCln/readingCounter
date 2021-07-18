@@ -6,7 +6,7 @@
 .header {
   display: flex;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--white);
   width: 100%;
   padding: 0.1rem;
 }
@@ -35,6 +35,17 @@ li {
   font-size: $font_m;
   font-weight: 600;
 }
+
+._theme_mode {
+  margin: auto;
+  font-size: $font_m;
+  cursor: pointer;
+
+  .fa-sun {
+    color: yellow;
+  }
+}
+
 
 ._name {
   font-size: $font_xxs;

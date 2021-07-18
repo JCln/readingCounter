@@ -55,13 +55,18 @@ a:active {
 
 ::ng-deep {
   .mat-select-placeholder {
-    color: var(--gray_700);
+    color: var(--gray_800);
     font-size: 1rem;
   }
 
   .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
   .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: var(--pink_500);
+  }
+
+  .mat-dialog-container {
+    background: var(--white);
+    color: var(--blue_400);
   }
 }
 

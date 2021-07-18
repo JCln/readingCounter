@@ -15,6 +15,11 @@
     color: var(--red_600);
   }
 
+  .p-datatable .p-datatable-header {
+    background: var(--white);
+    color: var(--gray_800);
+  }
+
   .p-datatable .p-datatable-thead>tr>th,
   .p-datatable .p-datatable-tbody>tr>td {
     text-align: center;
@@ -23,6 +28,24 @@
     border: 1px solid var(--gray_200);
   }
 
+  .p-datatable .p-datatable-tbody>tr {
+    background-color: var(--gray_100);
+    color: var(--gray_800);
+
+    &:nth-child(even) {
+      background-color: var(--gray_300);
+    }
+  }
+
+  .p-inputtext {
+    background: var(--white);
+    border: 1px solid var(--blue_400);
+    color: var(--gray_400);
+  }
+
+  .p-datatable .p-datatable-thead>tr>th {
+    background-color: var(--gray_300);
+  }
 
   span.ui-column-title {
     display: none;
@@ -185,6 +208,11 @@
   .p-datatable-resizable .p-datatable-thead>tr>th {
     overflow: inherit;
     white-space: normal;
+    background-color: var(--gray_800);
+  }
+
+  .p-datatable .p-datatable-thead>tr>th {
+    color: var(--gray_700);
   }
 
   footer,

@@ -2,6 +2,8 @@
     <div class="_logo_content">
         <img src="assets/imgs/header/logo.png" alt="">
     </div>
+    <i *ngIf="this.themeService.isDarkTheme()" (click)="toggleTheme()" class="_theme_mode fas fa-sun"></i>
+    <i *ngIf="!this.themeService.isDarkTheme()" (click)="toggleTheme()" class="_theme_mode fas fa-moon"></i>
     <ul>
         <li>سامانه جامع قرائت کنتور آبفا {{provinceName}}</li>
     </ul>

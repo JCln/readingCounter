@@ -24,7 +24,7 @@ export class LineReadDailyComponent implements OnInit {
       borderColor: 'rgba(148,159,177,1)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: 'rgb(0, 69, 203)',
-      pointHoverBackgroundColor: '#fff',
+      pointHoverBackgroundColor: 'var(--white)',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];

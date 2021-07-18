@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
           let percentage = (value * 100 / sum).toFixed(2) + "%";
           return percentage;
         },
-        color: '#fff',
+        color: 'var(--white)',
       }
     },
     tooltips: {
@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit {
           let percentage = (value * 100 / sum).toFixed(2) + "%";
           return percentage;
         },
-        color: '#fff',
+        color: 'var(--white)',
       }
     },
     tooltips: {

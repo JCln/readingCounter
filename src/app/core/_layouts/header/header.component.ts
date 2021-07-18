@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, Type } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ThemeService } from 'services/theme.service';
 import { AuthService } from 'src/app/auth/auth.service';
-
 
 @Component({
   selector: 'app-header',
@@ -18,7 +18,8 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnDestroy {
   displayName: string = '';
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    public themeService: ThemeService
   ) { }
 
   setSidebar = () => {
@@ -41,5 +42,12 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnDestroy {
   }
   ngOnChanges(): void {
     this.sideBar = this.sid_isSmall;
+  }
+  toggleTheme() {
+    if (this.themeService.isDarkTheme()) {
+      this.themeService.setLightTheme();
+    } else {
+      this.themeService.setDarkTheme();
+    }
   }
 }

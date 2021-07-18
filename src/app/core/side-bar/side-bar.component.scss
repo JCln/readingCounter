@@ -112,7 +112,7 @@ ul::-webkit-scrollbar {
 
 .sub_item_1,
 .sub_item_2 {
-  background: #e9ecef;
+  background: var(--gray_100);
   border: 1px solid var(--blue_700);
   padding: $font_05 0.87rem;
   margin: 0.13rem 0.2rem;
@@ -149,7 +149,7 @@ ul::-webkit-scrollbar {
 .ul::after {
   content: '';
   position: absolute;
-  background: #e9ecef;
+  background: var(--gray_100);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
   bottom: 0;

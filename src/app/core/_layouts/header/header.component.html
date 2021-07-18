@@ -9,6 +9,10 @@
         <li class="_name">
             {{displayName}}
         </li>
+        <li class="_theme_mode">
+            <i *ngIf="this.themeService.isDarkTheme()" (click)="toggleTheme()" class="fas fa-sun"></i>
+            <i *ngIf="!this.themeService.isDarkTheme()" (click)="toggleTheme()" class="fas fa-moon"></i>
+        </li>
         <div class="menu_toggle" (click)="setSidebar()">
             <span></span>
             <span></span>

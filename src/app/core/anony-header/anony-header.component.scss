@@ -10,7 +10,7 @@
   top: 0;
 
   ._logo_content {
-    width: 4.2rem;
+    width: $font_3;
     height: $font_3;
   }
 }
@@ -18,6 +18,15 @@
 ul {
   margin-left: auto;
   list-style-type: none;
+}
+
+._theme_mode {
+  margin: auto;
+  font-size: $font_m;
+
+  .fa-sun {
+    color: yellow;
+  }
 }
 
 li {
