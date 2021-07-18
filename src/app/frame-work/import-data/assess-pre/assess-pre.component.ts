@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
@@ -12,6 +13,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
+import { ConfirmTextDialogComponent } from '../../manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { AssesspreDgComponent } from './assesspre-dg/assesspre-dg.component';
 
 @Component({
@@ -44,6 +46,7 @@ export class AssessPreComponent implements OnInit {
     public outputManagerService: OutputManagerService,
     private utilsService: UtilsService,
     private dialogService: DialogService,
+    private dialog: MatDialog,
   ) {
   }
 
@@ -64,7 +67,7 @@ export class AssessPreComponent implements OnInit {
   }
   connectToServer = async () => {
     console.log(this.assessPreReq);
-    
+
     this.dataSource = await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessPre, this.assessPreReq);
     this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.assessPreReq.zoneId);
     this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.assessPreReq.zoneId);
@@ -140,5 +143,22 @@ export class AssessPreComponent implements OnInit {
         this.connectToServer();
       }
     });
+  }
+  backToImportedConfirmDialog = () => {
+    const title = EN_messages.confirm_send;
+    return new Promise(() => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: title,
+          isInput: false
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          // this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessAdd, this.)
+        }
+      })
+    })
   }
 }

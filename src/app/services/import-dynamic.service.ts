@@ -11,6 +11,7 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { Converter } from './../classes/converter';
+import { IAssessAddDtoSimafa } from './../Interfaces/imanage';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -395,4 +396,20 @@ export class ImportDynamicService {
         item.imageCount = false;
     })
   }
+  makeAssessAddReq = (dataReq: IAssessAddDtoSimafa): IAssessAddDtoSimafa => {
+    const temp: IAssessAddDtoSimafa = {
+      onOffLoadIds: [],
+      alalHesabPercent: 0,
+      imagePercent: 0,
+      hasPreNumber: true,
+      displayBillId: true,
+      displayRadif: true,
+      counterReaderId: '',
+      trackNumber: 0
+    }
+    return temp;
+  }
+  // getAllCheckedIds = (data: any[]) => {
+  //   data.
+  // }
 }
