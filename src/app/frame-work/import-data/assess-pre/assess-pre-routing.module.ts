@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { AssessPreComponent } from './assess-pre.component';
+
+const routes: Routes = [
+  { path: '', component: AssessPreComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

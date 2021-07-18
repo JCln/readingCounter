@@ -43,6 +43,7 @@ export enum EN_messages {
     insert_readingPeriod = 'دوره قرائت را وارد نمایید',
     insert_year = 'سالی وارد نمایید',
     insert_zone = 'ناحیه ای وارد نمایید',
+    insert_listNumber = 'شماره لیست را وارد نمایید',
     insert_title = 'عنوان را وارد نمایید',
     insert_title_route = 'عنوان مسیر را وارد نمایید',
     insert_searchType = 'نوع جستجو وارد نمایید',
@@ -81,6 +82,7 @@ export enum EN_messages {
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
 
     confirm_remove = ' آیا از حذف  مورد اطمینان دارید؟',
+    confirm_send = ' آیا از ارسال موارد اطمینان دارید؟',
     reson_delete_backtoImported = 'علت بازگشت به صادر شده',
     reason_forceOffload = 'علت اتمام قرائت(تخلیه اضطراری)',
     reason_deleteRoute = 'علت حذف مسیر',

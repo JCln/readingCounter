@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssessAddComponent } from './assess-add.component';
+import { AssesspreDgComponent } from './assesspre-dg.component';
 
-describe('AssessAddComponent', () => {
-  let component: AssessAddComponent;
-  let fixture: ComponentFixture<AssessAddComponent>;
+describe('AssesspreDgComponent', () => {
+  let component: AssesspreDgComponent;
+  let fixture: ComponentFixture<AssesspreDgComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AssessAddComponent ]
+      declarations: [ AssesspreDgComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssessAddComponent);
+    fixture = TestBed.createComponent(AssesspreDgComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

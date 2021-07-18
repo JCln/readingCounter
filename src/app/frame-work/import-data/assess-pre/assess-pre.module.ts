@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { AssessPreRoutingModule } from './assess-pre-routing.module';
 import { AssessPreComponent } from './assess-pre.component';
+import { AssesspreDgComponent } from './assesspre-dg/assesspre-dg.component';
 
 
 @NgModule({
-  declarations: [AssessPreComponent],
+  declarations: [AssessPreComponent, AssesspreDgComponent],
   imports: [
-    CommonModule,
+    SharedModule,
+    SharedPrimeNgModule,
     AssessPreRoutingModule
   ]
 })
