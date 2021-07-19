@@ -287,7 +287,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       );
   }
   private findMyLocationLeaflet = (e) => {
-    const radius = e.accuracy;
+    const radius = parseFloat(this.utilsService.getRange(e.accuracy));
     L.marker(e.latlng, { icon: iconSimple }).addTo(this.layerGroup)
       .bindPopup("شما در حدود تقریبی " + radius + " متر از این مکان قرار دارید").openPopup();
 
