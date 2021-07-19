@@ -140,8 +140,6 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     this.ref.onClose.subscribe((res: ISearchProReportInput) => {
       if (res) {
-        this.searchReq.fromDate = Converter.persianToEngNumbers(res.fromDate);
-        this.searchReq.toDate = Converter.persianToEngNumbers(res.toDate);
         this.searchReq = res;
         this.connectToServer();
       }

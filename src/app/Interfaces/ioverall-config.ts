@@ -178,7 +178,8 @@ export enum ENOffloadModifyType {
 export enum ENActivateProvinceTitle {
     DEFAULT = '',
     ESF = 'اصفهان',
-    TEH = 'تهران'
+    TEH = 'تهران',
+    ZONE4 = 'منطقه 4'
 }
 export enum ENSearch {
     eshterak = 'اشتراک',

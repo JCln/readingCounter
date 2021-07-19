@@ -22,6 +22,13 @@ export class ActivatedProvince {
         'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
         'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg'
     );
+    public static readonly ZONE4 = new ActivatedProvince(
+        ENActivateProvinceTitle.ZONE4,
+        'http://81.12.106.167:8081/kontoriNew',
+        'https://{s}.tile.openstreetmap11.org/{z}/{x}/{y}.png',
+        'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
+        'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg'
+    );
 
     private constructor(
         public readonly headerProvinceTitle: ENActivateProvinceTitle,

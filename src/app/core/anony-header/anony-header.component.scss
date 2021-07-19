@@ -10,7 +10,7 @@
   top: 0;
 
   ._logo_content {
-    width: $font_3;
+    width: 4.2rem;
     height: $font_3;
   }
 }
@@ -21,7 +21,7 @@ ul {
 }
 
 ._theme_mode {
-  margin: auto;
+  margin-left: $font_xs;
   font-size: $font_m;
   cursor: pointer;
 

@@ -16,6 +16,7 @@ html {
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) all 250ms;
 }
 
 *,
@@ -96,7 +97,7 @@ li {
 
 // ts config
 .cell_conf {
-  color: #5c5c5c;
+  color: rgb(92, 92, 92);
   font-size: 1.2rem;
 }
 

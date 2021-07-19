@@ -100,8 +100,29 @@
     font-weight: 600;
   }
 
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+    background: var(--gray_100);
+    color: var(--gray_800);
+  }
+
+  .p-multiselect-panel .p-multiselect-header {
+    background: var(--white);
+    color: var(--gray_800);
+  }
+
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+    background: var(--gray_300);
+    color: var(--gray_800);
+  }
+
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled):hover {
+    background: var(--gray_100);
+    color: var(--gray_800);
+  }
+
   .p-multiselect {
     border-radius: 7px;
+    background: var(--white);
   }
 
   .p-dropdown {
