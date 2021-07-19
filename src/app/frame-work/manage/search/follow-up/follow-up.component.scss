@@ -11,7 +11,7 @@ section {
   background: var(--gray_300);
   border-radius: $border_15;
   width: 18rem;
-  box-shadow: 1px 1px 8px 4px $gray_400;
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
 }
 
 ._center {
