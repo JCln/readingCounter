@@ -44,10 +44,7 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnDestroy {
     this.sideBar = this.sid_isSmall;
   }
   toggleTheme() {
-    if (this.themeService.isDarkTheme()) {
-      this.themeService.setLightTheme();
-    } else {
-      this.themeService.setDarkTheme();
-    }
+    this.themeService.toggleTheme();
   }
+
 }

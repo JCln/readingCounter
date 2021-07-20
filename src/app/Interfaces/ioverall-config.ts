@@ -135,6 +135,13 @@ export interface IOffloadModifyType {
     id: number,
     modifyeType: ENOffloadModifyType
 }
+export enum ENThemeName {
+    themeColor = 'themeColor'
+}
+export enum ENThemeColor {
+    light = 0,
+    dark = 1,
+}
 export enum ENSelectedColumnVariables {
     selectedTracks = 'menuDefault',
     selectedlastStates = 'lastStates',

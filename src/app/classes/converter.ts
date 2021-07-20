@@ -10,17 +10,11 @@ export class Converter {
         });
     }
     static persianToEngNumbers = (str) => {
-        let temp = str;
-        if (temp == null || typeof temp === 'undefined' || !temp) return;
+        if (str == null || typeof str === 'undefined' || !str) return;
         const persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
         for (let i = 0; i < 10; i++) {
-            temp = temp.replace(persianNumbers[i], i);
+            str = str.replace(persianNumbers[i], i);
         }
-        console.log(temp);
-        console.log(temp.toString());
-
-        if (temp === 'undefined')
-            return str;
-        return temp;
+        return str;
     }
 }

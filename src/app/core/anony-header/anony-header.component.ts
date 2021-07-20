@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { EnvService } from 'services/env.service';
 import { ThemeService } from 'services/theme.service';
 
@@ -7,7 +7,7 @@ import { ThemeService } from 'services/theme.service';
   templateUrl: './anony-header.component.html',
   styleUrls: ['./anony-header.component.scss']
 })
-export class AnonyHeaderComponent implements OnInit {
+export class AnonyHeaderComponent {
   provinceName: string;
 
   constructor(
@@ -17,15 +17,8 @@ export class AnonyHeaderComponent implements OnInit {
     this.provinceName = this.envService.headerProvinceTitle;
   }
 
-  ngOnInit(): void {
-  }
-
   toggleTheme() {
-    if (this.themeService.isDarkTheme()) {
-      this.themeService.setLightTheme();
-    } else {
-      this.themeService.setDarkTheme();
-    }
+    this.themeService.toggleTheme();
   }
 
 }
