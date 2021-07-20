@@ -266,7 +266,7 @@ export class TrackingManagerService {
 
   /*VALIDATION */
   private showWarnMessage = (message: string) => this.utilsService.snackBarMessageWarn(message);
-  private isValidationNull = (elem: any): boolean => {
+  isValidationNull = (elem: any): boolean => {
     if (this.utilsService.isNull(elem))
       return true;
     return false;

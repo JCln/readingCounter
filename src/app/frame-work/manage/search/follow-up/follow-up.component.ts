@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+
+import { FollowUpService } from './follow-up.service';
 
 @Component({
   selector: 'app-follow-up',
@@ -11,30 +13,22 @@ import { TrackingManagerService } from 'services/tracking-manager.service';
 export class FollowUpComponent implements OnInit {
   trackNumber: number;
 
-  dataSource = new MatTableDataSource();
-  desc: any;
-
-  columnsToDisplay = [
-    'insertDateJalali',
-    'userDisplayName',
-    'seen',
-    'counterReaderName',
-    'trackStatusTitle',
-    'hasDetails',
-    'actions'
-  ];
-
   constructor(
     private router: Router,
     public route: ActivatedRoute,
-    private trackingManagerService: TrackingManagerService
+    private trackingManagerService: TrackingManagerService,
+    private followUpService: FollowUpService
   ) { }
 
   ngOnInit(): void {
   }
-  verification = () => {
-    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber))
-      this.routeToChild();
+  verification = async () => {
+    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber)) {
+      const dataSource = this.followUpService.setData(await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber));
+      if (this.trackingManagerService.isValidationNull(dataSource)) {
+        this.routeToChild();
+      }
+    }
   }
   private routeToChild = () => {
     this.router.navigate(['wr/m/s/fwu/', this.trackNumber])

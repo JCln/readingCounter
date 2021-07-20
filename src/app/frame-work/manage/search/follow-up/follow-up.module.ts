@@ -3,6 +3,7 @@ import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 
 import { FollowUpRoutingModule } from './follow-up-routing.module';
 import { FollowUpComponent } from './follow-up.component';
+import { FollowUpService } from './follow-up.service';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import { FollowUpComponent } from './follow-up.component';
   imports: [
     SharedTwoModule,
     FollowUpRoutingModule
-  ]
+  ],
+  providers: [FollowUpService]
 })
 export class FollowUpModule { }

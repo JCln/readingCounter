@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFollowUp, IFollowUpHistory } from 'interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -8,6 +7,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+
+import { FollowUpService } from './../follow-up.service';
 
 @Component({
   selector: 'app-desc',
@@ -62,7 +63,8 @@ export class DescComponent implements AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     public route: ActivatedRoute,
     private router: Router,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private followUpService: FollowUpService
   ) {
     this.getRouteParams();
   }
@@ -75,7 +77,7 @@ export class DescComponent implements AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
+    this.dataSource = this.followUpService.getData();
     this.changeHsty = this.dataSource.changeHistory;
     this.closeTabService.saveDataForFollowUp = this.dataSource;
     this.insertToDesc();
