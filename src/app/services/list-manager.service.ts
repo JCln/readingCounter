@@ -121,12 +121,9 @@ export class ListManagerService {
     this.saveTo === 0 ? this.closeTabService.saveDataForLMAll = null : this.closeTabService.saveDataForLMAll_extra = null
   }
   getLMAll = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
-    // console.log(this.closeTabService.saveDataForLMAll);
-    // if (!this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
-    //   return this.closeTabService.saveDataForLMAll;
     if (this.readingListGUID === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
       return this.closeTabService.saveDataForLMAll;
-    if (this.readingListGUID_extra === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
+    if (this.readingListGUID_extra === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll_extra))
       return this.closeTabService.saveDataForLMAll_extra;
 
     if (this.whereToSave() == 0) {
