@@ -67,8 +67,8 @@ export class DescComponent implements AfterViewInit, OnDestroy {
     this.getRouteParams();
   }
 
-  toPreStatus = () => {
-    this.trackingManagerService.backToConfirmDialog(this.trackNumber);
+  toPreStatus = (dataSource: IFollowUpHistory) => {
+    this.trackingManagerService.backToConfirmDialog(dataSource.id);
   }
   nullSavedSource = () => this.closeTabService.saveDataForFollowUp = null;
   classWrapper = async (canRefresh?: boolean) => {

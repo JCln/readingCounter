@@ -54,7 +54,8 @@
                     class="tooltip _circle_border p_icons pi pi-arrow-left">
                     <div class="tooltip_text">بازگشت به پیگیری</div>
                 </i>
-                <i (click)="toPreStatus()" class="tooltip _circle_border p_icons pi pi-step-backward">
+                <i (click)="toPreStatus(changeHsty[changeHsty.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به قبلی</div>
                 </i>
             </div>

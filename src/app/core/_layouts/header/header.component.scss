@@ -42,8 +42,20 @@ li {
   cursor: pointer;
   font-size: $font_m;
 
+  .fa-sun,
+  .fa-moon {
+    padding: .5rem;
+    box-shadow: 0 0 5px 0px;
+    border-radius: 50%;
+  }
+
   .fa-sun {
     color: yellow;
+  }
+
+  .fa-moon {
+    color: white;
+    background: black;
   }
 
 }
