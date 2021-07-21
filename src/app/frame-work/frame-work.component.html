@@ -1,4 +1,4 @@
-<main role="main">
+<main role="main" [ngClass]="this.themeService.isDarkTheme() ? 'darkBackground' : 'lightBackground'">
     <div class="header">
         <div class="_logo_content">
             <img src="assets/imgs/header/logo.png" alt="">
