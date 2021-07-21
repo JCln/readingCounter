@@ -14,8 +14,6 @@ main {
   width: auto;
   min-height: 84vh;
   border-radius: $border_15;
-  // background-color: var(--gray_100);
-  // background-image: url('/assets/imgs/framework/bb.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   border-top: .2rem solid var(--orange_500);
@@ -32,7 +30,7 @@ main {
   padding: 0 $font_xs;
   margin-bottom: $font_05;
   background: var(--white);
-  border-bottom: .2rem solid var(--blue_900);
+  border-bottom: .2rem solid var(--blue_800);
 
   .title {
     color: var(--blue_700);

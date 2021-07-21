@@ -1,0 +1,31 @@
+._theme_mode {
+  margin-left: 0;
+  font-size: $font_m;
+  cursor: pointer;
+
+  .fa-sun,
+  .fa-moon {
+    padding: .25rem;
+    box-shadow: 0 0 5px 0px;
+    border-radius: $border_50;
+  }
+
+  .fa-sun {
+    color: yellow;
+  }
+
+  .fa-moon {
+    color: white;
+    background: black;
+  }
+
+  @media (min-width: 700px) {
+
+    .fa-sun,
+    .fa-moon {
+      padding: $font_05;
+    }
+
+    margin-left: $font_xs;
+  }
+}

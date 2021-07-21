@@ -31,6 +31,7 @@ nav {
 .title {
   font-size: $font_xs;
   font-weight: 600;
+  color: var(--blue_900);
 }
 
 /* ***** */
@@ -85,13 +86,6 @@ ul::-webkit-scrollbar {
       white-space: nowrap;
       z-index: 500;
     }
-  }
-
-  .pi-angle-up {
-    transform: rotate(0);
-    transition: transform ease-in-out 150ms;
-    color: var(--blue_700);
-
   }
 
   &.active {
@@ -293,6 +287,13 @@ i.icons {
   width: 1.87rem;
   color: var(--blue_700);
 }
+
+.pi-angle-up {
+  transform: rotate(0);
+  transition: transform ease-in-out 150ms;
+  color: var(--blue_700);
+}
+
 
 @keyframes toggle_side {
   0% {

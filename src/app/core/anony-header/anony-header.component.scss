@@ -1,4 +1,5 @@
 @import 'variable';
+@import 'theme';
 
 .header {
   display: flex;
@@ -18,28 +19,6 @@
 ul {
   margin-left: auto;
   list-style-type: none;
-}
-
-._theme_mode {
-  margin-left: $font_xs;
-  font-size: $font_m;
-  cursor: pointer;
-
-  .fa-sun,
-  .fa-moon {
-    padding: .5rem;
-    box-shadow: 0 0 5px 0px;
-    border-radius: 50%;
-  }
-
-  .fa-sun {
-    color: yellow;
-  }
-
-  .fa-moon {
-    color: white;
-    background: black;
-  }
 }
 
 ._title {
