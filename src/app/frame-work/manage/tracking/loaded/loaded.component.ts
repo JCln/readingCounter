@@ -28,6 +28,10 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedColumns: any[];
   selectedFuckingTest: any[] = [];
 
+  loaded: string = 'loaded';
+  _numberOfExtraColumns = [1];
+  _sessionName = 'loaded-session';
+
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,

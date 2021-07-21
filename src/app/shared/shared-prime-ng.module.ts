@@ -10,9 +10,10 @@ import { TableModule } from 'primeng/table';
 
 import { ImageViewerComponent } from '../frame-work/manage/tracking/wuoi/image-viewer/image-viewer.component';
 import { AddRowDirective } from './../directives/add-row.directive';
+import { PrimeTableComponent } from './prime-table/prime-table.component';
 
 @NgModule({
-  declarations: [AddRowDirective, ImageViewerComponent],
+  declarations: [AddRowDirective, ImageViewerComponent, PrimeTableComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,6 +25,7 @@ import { AddRowDirective } from './../directives/add-row.directive';
     DynamicDialogModule
   ],
   exports: [
+    PrimeTableComponent,
     CommonModule,
     FormsModule,
     TableModule,
@@ -36,7 +38,7 @@ import { AddRowDirective } from './../directives/add-row.directive';
     ReactiveFormsModule,
   ],
   entryComponents: [
-    ImageViewerComponent
+    ImageViewerComponent,
   ],
   providers: [DialogService]
 })

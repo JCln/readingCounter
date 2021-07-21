@@ -1,3 +1,6 @@
+1
+10,25,50
+last-states-session
 <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
 " [rowsPerPageOptions]="[10,25,50]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
@@ -60,14 +63,7 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td *ngIf="dataSource.hasMap" (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
-                <span class="ui-column-title">مشاهده روی نقشه</span>
-                <i class="tooltip p_icons pi pi-map-marker">
-                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
-                </i>
-            </td>
-            <td *ngIf="!dataSource.hasMap">
-            </td>
+           
         </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">

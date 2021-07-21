@@ -25,6 +25,8 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: ITracking[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
+  reading: string = 'reading';
+  _numberOfExtraColumns = [1, 2, 3, 4];
 
   constructor(
     private interactionService: InteractionService,
@@ -86,7 +88,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  refreshTable = () => {
+  refreshTable = ($event) => {
     this.classWrapper(true);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));

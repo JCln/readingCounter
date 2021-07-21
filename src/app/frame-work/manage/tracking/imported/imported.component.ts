@@ -47,6 +47,10 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ref: DynamicDialogRef;
 
+  _outputFileName: string = 'imported';
+  _numberOfExtraColumns = [1, 2];
+  _sessionName = 'imported-session';
+
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,

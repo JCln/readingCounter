@@ -1,103 +1,14 @@
-<p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" stateKey="reading-session">
-
-    <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables.selectedTracks ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <div class="header_icons_wrap">
-            <div class="right_side">
-                <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'reading')"
-                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
-                    <div class="tooltip_text">دریافت pdf</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'reading', 'xlsx')"
-                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
-                    <div class="tooltip_text">دریافت Excel</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'reading', 'csv')"
-                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
-                    <div class="tooltip_text">دریافت CSV</div>
-                </i>
-            </div>
-            <div class="left_side">
-
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
-            </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-        <tr>
-            <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
-                </p-columnFilter>
-                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
-            </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-    </ng-template>
-
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSourceRES let-columns="columns" let-ri=rowIndex>
-        <tr>
-            <td *ngFor="let col of columns">
-                <span class="ui-column-title">{{col.header}}</span>
-                <ng-container
-                    *ngIf="dataSourceRES[col.field] === true || dataSourceRES[col.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSourceRES[col.field]"></mat-checkbox>
-                </ng-container>
-                <ng-template #elseTemplate>
-                    {{dataSourceRES[col.field]}}
-                </ng-template>
-            </td>
-            <td (click)="forceOffload(dataSourceRES, ri)">
-                <span class="ui-column-title">اتمام قرائت</span>
-                <i class="tooltip p_icons pi pi-ban _important">
-                    <div class="tooltip_text">اتمام قرائت</div>
-                </i>
-            </td>
-            <td (click)="backToImportedConfirmDialog(dataSourceRES, ri)">
-                <span class="ui-column-title">بازگشت به صادر شده</span>
-                <i class="tooltip p_icons pi pi-fast-backward">
-                    <div class="tooltip_text">بازگشت به صادر شده</div>
-                </i>
-            </td>
-            <td (click)="routeToLMPayDay(dataSourceRES)">
-                <span class="ui-column-title">مشاهده مامور (ها)</span>
-                <i class="tooltip p_icons pi pi-folder-open">
-                    <div class="tooltip_text">مشاهده مامور(ها)</div>
-                </i>
-            </td>
-            <td (click)="routeToLMAll(dataSourceRES)">
-                <span class="ui-column-title">مشاهده لیست قرائت</span>
-                <i class="tooltip p_icons pi pi-list">
-                    <div class="tooltip_text_right">مشاهده لیست قرائت</div>
-                </i>
-            </td>
-        </tr>
-    </ng-template>
-
-</p-table>
-
-<section *ngIf="!dataSource || dataSource.length === 0">
-    <tr class="empty_data">
-        موردی پیدا نشد
-    </tr>
-</section>
+<app-prime-table     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="reading"
+    [_rowsPerPage]="[20,50,100, 500, 1000]"
+    [_numberOfExtraColumns]="_numberOfExtraColumns"
+    (refreshedTable)="refreshTable($event)"
+    (forcedOffload)="forceOffload($event , $event)"
+    (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event, $event)"
+    (routedToLMPayDay)="routeToLMPayDay($event)"
+    (routedToLMAll)="routeToLMAll($event)"
+ > 
+</app-prime-table>

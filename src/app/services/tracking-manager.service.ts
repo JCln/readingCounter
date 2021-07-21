@@ -19,7 +19,7 @@ import { UtilsService } from './utils.service';
 })
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  private menuDefault = [
+  private menuDefault: IObjectIteratation[] = [
     { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
     { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -36,8 +36,8 @@ export class TrackingManagerService {
     { field: 'toDate', header: 'تا', isSelected: false },
     { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
-    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
+    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
   ];
   private lastStates: IObjectIteratation[] = [
     { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
