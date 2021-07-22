@@ -18,7 +18,6 @@
 
 ul {
   margin-left: auto;
-  list-style-type: none;
 }
 
 ._title {
@@ -26,7 +25,6 @@ ul {
 }
 
 li {
-  padding-right: $font_xs;
   font-size: $font_m;
   font-weight: 600;
   list-style-type: none;

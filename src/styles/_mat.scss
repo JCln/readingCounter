@@ -41,9 +41,14 @@
 
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: var(--blue_gray_300);
+    color: var(--gray_800);
     font-family: $font_family;
     font-weight: 600;
+    font-size: $font_s;
+  }
+
+  .mat-radio-outer-circle {
+    border-color: var(--gray_800);
   }
 
   .mat-checkbox-layout .mat-checkbox-label {
@@ -54,8 +59,17 @@
     color: var(--gray_800);
   }
 
+  .mat-form-field.mat-focused .mat-form-field-label,
   .mat-form-field-label {
     color: var(--gray_800);
+  }
+
+  .mat-input-element {
+    color: var(--blue_700);
+  }
+
+  .mat-checkbox-frame {
+    border-color: var(--gray_500);
   }
 
   .mat-form-field-appearance-fill .mat-form-field-flex {

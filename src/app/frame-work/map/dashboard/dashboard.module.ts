@@ -10,7 +10,6 @@ import { DashboardComponent } from './dashboard.component';
 import { BarDispersalrateComponent } from './dispersal-rate/bar-dispersalrate/bar-dispersalrate.component';
 import { DispersalRateComponent } from './dispersal-rate/dispersal-rate.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
-import { KarkardGridComponent } from './karkard-grid/karkard-grid.component';
 import { LineReadDailyComponent } from './line-read-daily/line-read-daily.component';
 import { MediaComponent } from './media/media.component';
 import { ReadTimeComponent } from './read-time/read-time.component';
@@ -31,7 +30,6 @@ import { UserOverallComponent } from './user-overall/user-overall.component';
     LineReadDailyComponent,
     TrvTimeComponent,
     CountInStatesComponent,
-    KarkardGridComponent,
     DispersalRateComponent,
     BarDispersalrateComponent,
     UserOverallComponent,

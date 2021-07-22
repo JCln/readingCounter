@@ -70,13 +70,13 @@
   columns: 2;
 }
 
-.key {
+._key {
   font-size: $font_s;
   font-weight: 600;
   color: var(--blue_700);
 }
 
-.val {
+._value {
   font-size: $font_l;
   font-weight: 600;
   color: var(--blue_700);

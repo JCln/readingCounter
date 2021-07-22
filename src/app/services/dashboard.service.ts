@@ -18,8 +18,8 @@ export class DashboardService {
   columnDashboardUserOverall = (): IObjectIteratation[] => {
     return [
       { field: 'all', header: 'مجموع', isSelected: true, readonly: true },
-      { field: 'counterReaders', header: 'ماموران قرائت', isSelected: true, readonly: true },
-      { field: 'readingSupervisors', header: 'ناظران قرائت', isSelected: true, readonly: true },
+      { field: 'counterReaders', header: 'ماموران', isSelected: true, readonly: true },
+      { field: 'readingSupervisors', header: 'ناظران', isSelected: true, readonly: true },
       { field: 'inactiveOrLockeds', header: 'غیرفعال/قفل', isSelected: true, readonly: false }
     ];
   }

@@ -235,13 +235,13 @@ export class SearchService {
     // for search pro
     if (object.hasOwnProperty('fromDate')) {
       if (this.utilsService.isNull(object.fromDate)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
     }
-    if (object.hasOwnProperty('fromDate')) {
-      if (this.utilsService.isNull(object.fromDate)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+    if (object.hasOwnProperty('toDate')) {
+      if (this.utilsService.isNull(object.toDate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
       }
     }

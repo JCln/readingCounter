@@ -255,12 +255,22 @@ export class ImportDynamicService {
     }
     return true;
   }
-  showResDialog = (res: IImportDataResponse) => {
-    return new Promise(resolve => {
-      this.dialog.open(ConfirmDialogComponent, {
+  showResDialog = async (res: IImportDataResponse, disableClose: boolean) => {
+    // disable close mean when dynamic count show decision should make
+    return new Promise(() => {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        disableClose: disableClose,
         minWidth: '19rem',
         data: res
       })
+      if (disableClose) {
+        dialogRef.afterClosed().subscribe(async result => {
+          if (result) {
+            return true;
+          }
+        });
+      }
+
     })
   }
 
@@ -349,6 +359,19 @@ export class ImportDynamicService {
       console.error(error);
     }
   }
+  postImportDynamicCount = (importDynamic: IImportDynamicDefault): Promise<any> => {
+    importDynamic.fromDate = Converter.persianToEngNumbers(importDynamic.fromDate);
+    importDynamic.toDate = Converter.persianToEngNumbers(importDynamic.toDate);
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.postImportDynamicCount, importDynamic).toPromise().then(res => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   postImportSimafa = (method: ENInterfaces, body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
@@ -409,7 +432,4 @@ export class ImportDynamicService {
     }
     return temp;
   }
-  // getAllCheckedIds = (data: any[]) => {
-  //   data.
-  // }
 }

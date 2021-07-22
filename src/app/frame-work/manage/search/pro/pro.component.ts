@@ -85,7 +85,7 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
 
-      if (!this.searchService.verificationPro(this.searchReq))
+      if (this.searchService.verificationPro(this.searchReq))
         this.connectToServer();
     }
     else {

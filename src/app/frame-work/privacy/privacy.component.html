@@ -9,7 +9,7 @@
                     <div class="plus_minus">
                         <div class="plus" (click)="plusOrMinus(policies.minPasswordLength + 1)">
                             <i class="fa fa-plus"></i></div>
-                        <div class="val"> {{policies.minPasswordLength}}</div>
+                        <div class="_value"> {{policies.minPasswordLength}}</div>
                         <div class="minus" (click)="plusOrMinus(policies.minPasswordLength - 1)">
                             <i class="fa fa-minus"></i></div>
                     </div>
@@ -30,7 +30,7 @@
                                 <div class="plus"
                                     (click)="policies.lockInvalidAttempts = policies.lockInvalidAttempts + 1">
                                     <i class="fa fa-plus"></i></div>
-                                <div class="val"> {{policies.lockInvalidAttempts}}</div>
+                                <div class="_value"> {{policies.lockInvalidAttempts}}</div>
                                 <div class="minus"
                                     (click)="policies.lockInvalidAttempts = policies.lockInvalidAttempts - 1">
                                     <i class="fa fa-minus"></i></div>
@@ -41,7 +41,7 @@
                             <div class="plus_minus">
                                 <div class="plus" (click)="policies.lockMin = policies.lockMin + 1"><i
                                         class="fa fa-plus"></i></div>
-                                <div class="val"> {{policies.lockMin}}</div>
+                                <div class="_value"> {{policies.lockMin}}</div>
                                 <div class="minus" (click)="policies.lockMin = policies.lockMin - 1"><i
                                         class="fa fa-minus"></i></div>
                             </div>
@@ -96,7 +96,7 @@
                                 <div class="plus"
                                     (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts + 1">
                                     <i class="fa fa-plus"></i></div>
-                                <div class="val"> {{policies.requireCaptchaInvalidAttempts}}</div>
+                                <div class="_value"> {{policies.requireCaptchaInvalidAttempts}}</div>
                                 <div class="minus"
                                     (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts - 1">
                                     <i class="fa fa-minus"></i></div>
@@ -113,7 +113,7 @@
                                 <div class="plus"
                                     (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts + 1">
                                     <i class="fa fa-plus"></i></div>
-                                <div class="val"> {{policies.requireRecaptchaInvalidAttempts}}</div>
+                                <div class="_value"> {{policies.requireRecaptchaInvalidAttempts}}</div>
                                 <div class="minus"
                                     (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts - 1">
                                     <i class="fa fa-minus"></i></div>

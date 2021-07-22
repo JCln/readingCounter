@@ -90,6 +90,9 @@
 
                 <mat-checkbox name="displayRadif" [(ngModel)]="importDynamic.displayRadif">نمایش ش.پرونده
                 </mat-checkbox>
+
+                <mat-checkbox name="showDynamicCount" [(ngModel)]="_showDynamicCount" (ngModelChange)="setShowDynamicCount($event)">پیش نمایش نشان داده شود؟
+                </mat-checkbox>
             </div>
         </section>
         <section *ngIf="canShowEditButton" class="dynamic_content">
