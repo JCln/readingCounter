@@ -1,5 +1,5 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
+<p-table sortField="insertDateJalali" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
 " [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" stateKey="finished-session">
 
