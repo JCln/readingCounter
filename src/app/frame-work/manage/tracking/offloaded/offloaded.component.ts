@@ -89,8 +89,8 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   routeToOffloadModify = (dataSource: ITracking) => {
     this.router.navigate(['wr/m/l/all', true, dataSource.id]);
   }
-  backToReading = async (dataSource: ITracking, rowIndex: number) => {
-    if (await this.trackingManagerService.TESTbackToConfirmDialog(dataSource.id, ENTrackingMessage.toReading))
-      this.refetchTable(rowIndex);
+  backToReading = async (rowDataAndIndex: object) => {
+    if (await this.trackingManagerService.TESTbackToConfirmDialog(rowDataAndIndex['dataSource'], ENTrackingMessage.toReading))
+      this.refetchTable(rowDataAndIndex['ri']);
   }
 }

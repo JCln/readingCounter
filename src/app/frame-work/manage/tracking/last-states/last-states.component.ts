@@ -75,8 +75,8 @@ export class LastStatesComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  showInMap = (trackNumber: number, day: string) => {
-    this.trackingManagerService.routeToLMPDXY(trackNumber, day);
+  showInMap = (trackNumberAndDate: object) => {
+    this.trackingManagerService.routeToLMPDXY(trackNumberAndDate['trackNumber'], trackNumberAndDate['insertDateJalali']);
   }
 
 }

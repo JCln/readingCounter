@@ -79,7 +79,7 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-  backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
+  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
     const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -92,7 +92,7 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.rowToOffloaded(rowData, desc, rowIndex);
+          this.rowToOffloaded(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
         }
       })
     })

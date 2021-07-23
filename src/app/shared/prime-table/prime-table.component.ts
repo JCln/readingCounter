@@ -15,6 +15,9 @@ export class PrimeTableComponent implements OnInit {
   @Input() _rowsPerPage: number[] = [20, 50, 100, 500];
   @Input() _numberOfExtraColumns: number[];
   @Input() _sessionName: string;
+  @Input() _sortBy: string;
+  @Input() _rowsNumbers = 20;
+  @Input() _selectedColumnsToRemember: string;
 
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() forcedOffload = new EventEmitter<any>();
@@ -24,8 +27,10 @@ export class PrimeTableComponent implements OnInit {
   @Output() showedMoreDetails = new EventEmitter<any>();
   @Output() firstConfirmedDialog = new EventEmitter<any>();
   @Output() showedInMap = new EventEmitter<any>();
+  @Output() downloadedOutputSingle = new EventEmitter<any>();
+  @Output() routeedToOffloadModify = new EventEmitter<any>();
+  @Output() backedToReading = new EventEmitter<any>();
 
-  _rowsNumbers = 20;
 
   constructor(
     public outputManagerService: OutputManagerService,
@@ -46,10 +51,10 @@ export class PrimeTableComponent implements OnInit {
     this.refreshedTable.emit(true);
   }
   forceOffload = (dataSource: object, ri: number) => {
-    this.forcedOffload.emit(dataSource);
+    this.forcedOffload.emit({ dataSource, ri });
   }
   backToImportedConfirmDialog = (dataSource: object, ri: number) => {
-    this.backedToImportedConfirmDialog.emit(dataSource);
+    this.backedToImportedConfirmDialog.emit({ dataSource, ri });
   }
   routeToLMPayDay = (dataSource: object) => {
     this.routedToLMPayDay.emit(dataSource);
@@ -61,10 +66,19 @@ export class PrimeTableComponent implements OnInit {
     this.showedMoreDetails.emit(dataSource);
   }
   firstConfirmDialog = (dataSource: object, ri: number) => {
-    this.firstConfirmedDialog.emit(dataSource);
+    this.firstConfirmedDialog.emit({ dataSource, ri });
   }
-  showInMap = (trackNumber , insertDateJalali) => {
-    this.showedInMap.emit(trackNumber , insertDateJalali);
+  showInMap = (trackNumber, insertDateJalali) => {
+    this.showedInMap.emit({ trackNumber, insertDateJalali });
+  }
+  downloadOutputSingle = (dataSource: object) => {
+    this.downloadedOutputSingle.emit(dataSource);
+  }
+  routeToOffloadModify = (dataSource: object) => {
+    this.routeedToOffloadModify.emit(dataSource);
+  }
+  backToReading = (dataSource: object, ri: number) => {
+    this.backedToReading.emit({ dataSource, ri });
   }
 
 }

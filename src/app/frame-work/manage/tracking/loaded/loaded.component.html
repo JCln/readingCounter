@@ -2,11 +2,12 @@
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
-    [_outputFileName]="loaded"
-    [_rowsPerPage]="[20,50,100, 500, 1000]"
-    [_numberOfExtraColumns]="_numberOfExtraColumns"
-    [_sessionName]="_sessionName"
+    [_outputFileName]="'loaded'"
+    [_rowsPerPage]="[1, 2, 3, 4]"
+    [_numberOfExtraColumns]="[1]"
+    [_selectedColumnsToRemember]="'selectedTracks'"
+    [_sessionName]="'loaded-session'"
     (refreshedTable)="refreshTable()"
-    (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event, $event)"        
+    (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event)"        
  > 
 </app-prime-table>

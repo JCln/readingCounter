@@ -2,11 +2,13 @@
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
-    [_outputFileName]="_outputFileName"
+    [_outputFileName]="'imported'"
     [_rowsPerPage]="[20,50,100, 500, 1000]"
-    [_numberOfExtraColumns]="_numberOfExtraColumns"
+    [_numberOfExtraColumns]="[1, 2]"
+    [_sessionName]="'imported-session'"
+    [_selectedColumnsToRemember]="'selectedTracks'"
     (refreshedTable)="refreshTable()"
-    (forcedOffload)="showMoreDetails($event)"    
-    (routedToLMAll)="firstConfirmDialog($event, $event)"
+    (showedMoreDetails)="showMoreDetails($event)"    
+    (firstConfirmedDialog)="firstConfirmDialog($event)"
  > 
 </app-prime-table>

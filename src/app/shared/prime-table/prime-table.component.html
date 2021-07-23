@@ -5,7 +5,7 @@
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables.selectedTracks ,$event)"
+            (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
@@ -61,13 +61,13 @@
                     {{dataSource[col.field]}}
                 </ng-template>
             </td>
-            <td *ngIf="_outputFileName== 'reading'" (click)="forceOffload(dataSource, ri)">
+            <td *ngIf="_outputFileName== 'reading'" (click)="forceOffload(dataSource.id, ri)">
                 <span class="ui-column-title">اتمام قرائت</span>
                 <i class="tooltip p_icons pi pi-ban _important">
                     <div class="tooltip_text">اتمام قرائت</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'reading'" (click)="backToImportedConfirmDialog(dataSource, ri)">
+            <td *ngIf="_outputFileName== 'reading'" (click)="backToImportedConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">بازگشت به صادر شده</span>
                 <i class="tooltip p_icons pi pi-fast-backward">
                     <div class="tooltip_text">بازگشت به صادر شده</div>
@@ -85,31 +85,56 @@
                     <div class="tooltip_text_right">مشاهده لیست قرائت</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'loaded'" (click)="backToImportedConfirmDialog(dataSource, ri)">
+            <td *ngIf="_outputFileName== 'loaded'" (click)="backToImportedConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">بازگشت به صادر شده</span>
                 <i class="tooltip p_icons pi pi-fast-backward">
                     <div class="tooltip_text">بازگشت به صادر شده</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName == 'imported'">
+            <td *ngIf="_outputFileName == 'imported'" (click)="showMoreDetails(dataSource)">
                 <span class="ui-column-title">مشاهده جزئیات</span>
-                <i class="tooltip p_icons pi pi-info-circle" (click)="showMoreDetails(dataSource)">
+                <i class="tooltip p_icons pi pi-info-circle">
                     <div class="tooltip_text">مشاهده جزئیات</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName == 'imported'" (click)="firstConfirmDialog(dataSource, ri)">
+            <td *ngIf="_outputFileName == 'imported'" (click)="firstConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">حذف مسیر</span>
                 <i class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مسیر</div>
                 </i>
             </td>
-            <td *ngIf="dataSource.hasMap && _outputFileName == 'lastStates'" (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
+            <td *ngIf="dataSource.hasMap && _outputFileName == 'lastStates'"
+                (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
             </td>
             <td *ngIf="!dataSource.hasMap && _outputFileName == 'lastStates'">
+            </td>
+            <td *ngIf="_outputFileName == 'finished'" (click)="backToImportedConfirmDialog(dataSource.id,ri)">
+                <span class="ui-column-title">بازگشت به بارگذاری شده</span>
+                <i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به بارگذاری شده</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'offloaded'" (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">دانلود فایل</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'offloaded'" (click)="routeToOffloadModify(dataSource)">
+                <span class="ui-column-title">مشاهده (اصلاح) لیست</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده(اصلاح) لیست</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'offloaded'" (click)="backToReading(dataSource.id,ri)">
+                <span class="ui-column-title">بازگشت به درحال قرائت</span>
+                <i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
+                </i>
             </td>
         </tr>
     </ng-template>

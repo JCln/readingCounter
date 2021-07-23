@@ -28,10 +28,6 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedColumns: any[];
   selectedFuckingTest: any[] = [];
 
-  loaded: string = 'loaded';
-  _numberOfExtraColumns = [1];
-  _sessionName = 'loaded-session';
-
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
@@ -90,7 +86,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row.id, desc);
     this.refetchTable(rowIndex);
   }
-  backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
+  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
     const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -102,7 +98,7 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.rowToImported(rowData, desc, rowIndex);
+          this.rowToImported(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
         }
       })
     })
