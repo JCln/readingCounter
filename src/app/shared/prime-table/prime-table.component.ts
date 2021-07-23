@@ -18,6 +18,14 @@ export class PrimeTableComponent implements OnInit {
   @Input() _sortBy: string;
   @Input() _rowsNumbers = 20;
   @Input() _selectedColumnsToRemember: string;
+  @Input() _backToPreviousText: string;
+  @Input() _captionEnabled: boolean = true;
+  @Input() _sortField: string = '';
+  @Input() _sortOrder: string = '';
+  @Input() _outputEnabled: boolean = true;
+  @Input() _backToPreviousEnabled: boolean = false;
+  @Input() _checkUpName: string = '';
+  @Input() _multiSelectEnable: boolean = true;
 
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() forcedOffload = new EventEmitter<any>();
@@ -30,6 +38,9 @@ export class PrimeTableComponent implements OnInit {
   @Output() downloadedOutputSingle = new EventEmitter<any>();
   @Output() routeedToOffloadModify = new EventEmitter<any>();
   @Output() backedToReading = new EventEmitter<any>();
+  @Output() backedToPrevious = new EventEmitter<any>();
+  @Output() downloadedAPK = new EventEmitter<any>();
+  @Output() showedPictures = new EventEmitter<any>();
 
 
   constructor(
@@ -79,6 +90,15 @@ export class PrimeTableComponent implements OnInit {
   }
   backToReading = (dataSource: object, ri: number) => {
     this.backedToReading.emit({ dataSource, ri });
+  }
+  backToPrevious = () => {
+    this.backedToPrevious.emit(true);
+  }
+  downloadAPK = () => {
+    this.downloadedAPK.emit();
+  }
+  showPictures = ($event) => {
+    this.showedPictures.emit($event);
   }
 
 }

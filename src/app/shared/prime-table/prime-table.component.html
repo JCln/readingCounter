@@ -1,32 +1,43 @@
 <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" [stateKey]="_sessionName">
+    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder">
 
-    <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
+    <ng-template pTemplate="caption" *ngIf="_captionEnabled">
+        <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            optionLabel="header"
             (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="right_side">
-                <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, _outputFileName)"
+                <i *ngIf="_outputEnabled"
+                    (click)="outputManagerService.exportPDF(dataSource, _selectCols, _outputFileName)"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
                     <div class="tooltip_text">دریافت pdf</div>
                 </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'xlsx')"
+                <i *ngIf="_outputEnabled"
+                    (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'xlsx')"
                     class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                     <div class="tooltip_text">دریافت Excel</div>
                 </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'csv')"
+                <i *ngIf="_outputEnabled"
+                    (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'csv')"
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
             </div>
             <div class="left_side">
-
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
+                </i>
+                <i *ngIf="_backToPreviousEnabled" (click)="backToPrevious()"
+                    class="tooltip _circle_border p_icons pi pi-arrow-left">
+                    <div class="tooltip_text_right"> {{_backToPreviousText}}</div>
+                </i>
+                <i *ngIf="_checkUpName== 'apk'" (click)="downloadAPK()"
+                    class="tooltip _circle_border p_icons fa fa-inbox">
+                    <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </div>
         </div>
@@ -134,6 +145,12 @@
                 <span class="ui-column-title">بازگشت به درحال قرائت</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'forbidden'">
+                <span class="ui-column-title">مشاهده عکس(ها)</span>
+                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons fa fa-camera">
+                    <div class="tooltip_text_right">مشاهده عکس(ها)</div>
                 </i>
             </td>
         </tr>
