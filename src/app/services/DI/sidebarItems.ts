@@ -76,7 +76,7 @@ export const sidebarItemsTest = {
                 { route: '/wr/apk', title: 'apk', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/bi', title: 'اطلاعات پایه', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
                 { route: '/wr/msge', title: 'پیام زمان‌دار', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 },
-                { route: '/wr/privacy', title: 'تنظیمات کلمه عبور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 }
+                { route: '/wr/policies', title: 'تنظیمات کلمه عبور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 3 }
             ]
         },
     ]
