@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 
@@ -7,7 +7,7 @@ import { TrackingManagerService } from 'services/tracking-manager.service';
   templateUrl: './prime-table.component.html',
   styleUrls: ['./prime-table.component.scss']
 })
-export class PrimeTableComponent implements OnInit {
+export class PrimeTableComponent{
   @Input() dataSource: any[] = [];
   @Input() _selectCols: any = [];
   @Input() _selectedColumns: any[];
@@ -48,8 +48,6 @@ export class PrimeTableComponent implements OnInit {
     public trackingManagerService: TrackingManagerService
   ) { }
 
-  ngOnInit(): void {
-  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }

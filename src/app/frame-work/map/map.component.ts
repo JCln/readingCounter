@@ -17,9 +17,9 @@ import { UtilsService } from 'services/utils.service';
 
 declare let L;
 
-const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
-const iconUrl = 'assets/leaflet/images/marker-icon.png';
-const shadowUrl = 'assets/leaflet/images/marker-shadow.png';
+const iconRetinaUrl = 'assets/imgs/leaflet/marker-icon-2x.png';
+const iconUrl = 'assets/imgs/leaflet/marker-icon.png';
+const shadowUrl = 'assets/imgs/leaflet/marker-shadow.png';
 
 const simpleIcon = L.icon({
   iconRetinaUrl,
@@ -46,9 +46,9 @@ const myIcon = L.Icon.extend({
     shadowSize: [41, 41]
   }
 });
-const iconSimple = new myIcon({ iconUrl: 'assets/leaflet/images/marker-icon.png' });
-const markerGreen = new defaultIcon({ iconUrl: 'assets/leaflet/images/marker_green.png' });
-const markerRed = new defaultIcon({ iconUrl: 'assets/leaflet/images/marker_red.png' });
+const iconSimple = new myIcon({ iconUrl: 'assets/imgs/leaflet/marker-icon.png' });
+const markerGreen = new defaultIcon({ iconUrl: 'assets/imgs/leaflet/marker_green.png' });
+const markerRed = new defaultIcon({ iconUrl: 'assets/imgs/leaflet/marker_red.png' });
 L.Marker.prototype.options.icon = simpleIcon;
 
 @Component({
