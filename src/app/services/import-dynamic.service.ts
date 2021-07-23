@@ -206,15 +206,15 @@ export class ImportDynamicService {
       return false;
     }
     if (this.utilsService.isNaN(val.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_number);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNaN(val.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_number);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNaN(val.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_number);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
 
@@ -255,23 +255,28 @@ export class ImportDynamicService {
     }
     return true;
   }
-  showResDialog = async (res: IImportDataResponse, disableClose: boolean) => {
+  showResDialog = (res: IImportDataResponse, disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-        disableClose: disableClose,
-        minWidth: '19rem',
-        data: res
-      })
-      if (disableClose) {
-        dialogRef.afterClosed().subscribe(async result => {
-          if (result) {
-            return true;
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent,
+        {
+          disableClose: disableClose,
+          minWidth: '19rem',
+          data: {
+            data: res,
+            title: title,
+            isConfirm: disableClose
           }
         });
-      }
+      dialogRef.afterClosed().subscribe(async result => {
+        if (disableClose) {
+          if (result) {
+            resolve(true);
+          }
+        }
+      })
+    });
 
-    })
   }
 
   /*API CALLS */
