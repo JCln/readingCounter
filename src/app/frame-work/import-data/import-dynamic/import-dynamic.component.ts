@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IImportDynamicDefault } from 'interfaces/inon-manage';
 import { ENLocalStorageNames, IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -73,12 +74,13 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     const validation = this.importDynamicService.checkVertification(this.importDynamic, this._isOrderByDate);
     if (!validation)
       return;
-    if (this._showDynamicCount)
-      if (this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicCount(this.importDynamic), true)) {
-        this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic), false)
+    if (this._showDynamicCount) {
+      if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicCount(this.importDynamic), true, EN_messages.confirm_createList)) {
+        this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic), false, EN_messages.importDynamic_created)
         return;
       }
-    this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic), false)
+    }
+    this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic), false, EN_messages.importDynamic_created)
     this.resetToDefaultFormStatus();
   }
   private insertReadingConfigDefaults = (rcd: any) => {
