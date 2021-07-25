@@ -4,7 +4,7 @@
   </i>
 </section>
 
-<main class="container_wrapper">
+<main class="container_wrapper" *ngIf="dataSource">
   <div class="charts">
     <div class="title">{{dataSource.inProvince.areaTitle}}</div>
     <canvas baseChart [data]="pieChartDataProvince" [labels]="pieChartLabels" [chartType]="pieChartType"

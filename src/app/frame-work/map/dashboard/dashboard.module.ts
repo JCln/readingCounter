@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { SharedChartsModule } from 'src/app/shared/shared-charts.module';
-import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { AnalyzeComponent } from './analyze/analyze.component';
 import { BarAnlzPrfmComponent } from './bar-anlz-prfm/bar-anlz-prfm.component';
@@ -35,7 +34,6 @@ import { UserOverallComponent } from './user-overall/user-overall.component';
     UserOverallComponent,
   ],
   imports: [
-    SharedPrimeNgModule,
     SharedChartsModule,
     DashboardRoutingModule
   ]

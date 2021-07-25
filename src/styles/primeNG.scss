@@ -28,6 +28,10 @@
     border: 1px solid var(--gray_200);
   }
 
+  .p-datatable .p-datatable-tbody>tr>td {
+    line-break: anywhere;
+  }
+
   .p-datatable .p-datatable-tbody>tr {
     background-color: var(--gray_100);
     color: var(--gray_800);
@@ -41,6 +45,7 @@
     background: var(--white);
     border: 1px solid var(--blue_400);
     color: var(--gray_800);
+    text-align: center;
   }
 
   .p-datatable .p-datatable-thead>tr>th {
@@ -268,17 +273,6 @@
   .footer {
     text-align: center;
   }
-}
-
-.empty_data {
-  display: flex;
-  justify-content: center;
-  background: var(--white);
-  padding: $font_3;
-  border-radius: $border_15;
-  font-size: $font_l;
-  font-weight: 600;
-  color: var(--gray_800);
 }
 
 .tooltip {

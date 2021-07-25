@@ -1,118 +1,21 @@
-<p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
-    [rowsPerPageOptions]="[10, 20,50]" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" dir="rtl" editMode="row"
-    styleClass="p-datatable-responsive" [responsive]="true" dataKey="id">
-
-    <ng-template pTemplate="caption">
-        <div class="header_icons_wrap">
-            <div class="left_side">
-                <i (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
-                    <div class="tooltip_text">افزودن موردی</div>
-                </i>
-            </div>
-            <div class="left_side">
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
-                </i>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
-            </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-
-        <tr>
-            <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
-                </p-columnFilter>
-                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
-            </th>
-
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-    </ng-template>
-
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing" let-columns="columns"
-        let-ri="rowIndex">
-        <tr [pEditableRow]="dataSource">
-            <td *ngFor="let col of columns">
-                <span class="ui-column-title">{{col.header}}</span>
-                <ng-container *ngIf="col.isSelectOption;else selectOption">
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <p-dropdown name="regionId" [options]="regionDictionary" [(ngModel)]="dataSource.regionId"
-                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
-                            </p-dropdown>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{dataSource.regionId}}
-                        </ng-template>
-                    </p-cellEditor>
-                </ng-container>
-                <ng-template #selectOption>
-                    <ng-container *ngIf="col.isBoolean; else elseTemplate">
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
-                            </ng-template>
-                        </p-cellEditor>
-                    </ng-container>
-                    <ng-template #elseTemplate>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{dataSource[col.field]}}
-                            </ng-template>
-                        </p-cellEditor>
-                    </ng-template>
-                </ng-template>
-            </td>
-            <td>
-                <span class="ui-column-title">ویرایش</span>
-                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"
-                    class="tooltip _edit pi pi-pencil">
-                    <div class="tooltip_text">ویرایش</div>
-                </i>
-                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)"
-                    class="_save pi pi-check"></i>
-                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
-                    class="_cancel pi pi-times"></i>
-            </td>
-
-            <td>
-                <span class="ui-column-title">حذف مورد</span>
-                <i (click)="removeRow(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
-                    <div class="tooltip_text_right">حذف مورد</div>
-                </i>
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
-        <ng-template pTemlate="footer">
-            <tr>
-                <td [attr.colspan]="dataSource.length">
-                    موردی پیدا نشد
-                </td>
-            </tr>
-
-        </ng-template>
-    </ng-template>
-</p-table>
-
-<section *ngIf="!dataSource || dataSource.length === 0">
-    <tr class="empty_data">
-        موردی پیدا نشد
-    </tr>
-</section>
+<app-prime-table-editable     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_checkUpName]="'zone'"
+    [_dictionaryName]="'regionId'"
+    [_multiSelectEnable]=false
+    [_outputEnabled]= false
+    [_rowsNumbers]=10
+    [_rowsPerPage]="[10,20,50]"
+    [_numberOfExtraColumns]="[1, 2]"
+    [dictionary]="regionDictionary"
+    (refreshedTable)="refreshTable()"
+    (openedAddDialog)="openAddDialog()"
+    (dropDownChanges)="dataSource['regionId']"
+    (removedRow)="removeRow($event)"
+    (onRowEditedCancel)="onRowEditCancel($event)"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+ > 
+</app-prime-table-editable>

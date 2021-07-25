@@ -92,33 +92,33 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.authsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IAuthLevel3, rowIndex: number) => {
+  removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog();
     if (a) {
-      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel3REMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel3REMOVE, rowDataAndIndex['dataSource']);
+      this.refetchTable(rowDataAndIndex['ri']);
     }
   }
   onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IAuthLevel3, rowIndex: number) => {
+  onRowEditSave = async (dataSource: object) => {
     if (!this.authsManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.authLevel2Id !== 'object') {
+    if (typeof dataSource['dataSource'].authLevel2Id !== 'object') {
       this.authLevel2Dictionary.find(item => {
-        if (item.title === dataSource.authLevel2Id)
-          dataSource.authLevel2Id = item.id
+        if (item.title === dataSource['dataSource'].authLevel2Id)
+          dataSource['dataSource'].authLevel2Id = item.id
       })
     } else {
-      dataSource.authLevel2Id = dataSource.authLevel2Id['id'];
+      dataSource['dataSource'].authLevel2Id = dataSource['dataSource'].authLevel2Id['id'];
     }
-    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3EDIT, dataSource);
+    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3EDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
   }
-  onRowEditCancel(dataSource: IAuthLevel3, index: number) {
+  onRowEditCancel() {
     Converter.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
     // this.dataSource[index] = this.clonedProducts[dataSource.id];
     // delete this.dataSource[dataSource.id];

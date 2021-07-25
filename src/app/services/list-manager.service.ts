@@ -79,8 +79,8 @@ export class ListManagerService {
   columnSelectedLMPerDay = (): IObjectIteratation[] => {
     return [
       { field: 'day', header: 'روز', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true, ltr: true },
       { field: 'readCount', header: 'تعداد قرائت', isSelected: true, readonly: true },
       { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
       { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },

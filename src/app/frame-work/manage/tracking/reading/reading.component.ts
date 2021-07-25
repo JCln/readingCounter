@@ -90,7 +90,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
+  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
     const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -102,7 +102,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       })
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.rowToImported(rowData, desc, rowIndex);
+          this.rowToImported(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
         }
       })
     })
@@ -114,7 +114,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  forceOffload = (rowData: ITracking, rowIndex: number) => {
+  forceOffload = (rowDataAndIndex: object) => {
     const title = EN_messages.reason_forceOffload;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -127,8 +127,8 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          if (await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowData.id, desc))
-            this.refetchTable(rowIndex);
+          if (await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex['dataSource'], desc))
+            this.refetchTable(rowDataAndIndex['ri']);
         }
       })
     })

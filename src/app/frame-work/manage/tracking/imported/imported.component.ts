@@ -123,11 +123,10 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: ITracking, desc: string, rowIndex: number) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowData.id, desc)
-    this.refetchTable(rowIndex);
+  removeRow = async (rowData: string, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowData, desc);
   }
-  firstConfirmDialog = (rowData: ITracking, rowIndex: number) => {
+  firstConfirmDialog = (rowDataAndIndex: object) => {
     const title = EN_messages.reason_deleteRoute;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -140,7 +139,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.removeRow(rowData, desc, rowIndex)
+          this.removeRow(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri'])
         }
       })
     })

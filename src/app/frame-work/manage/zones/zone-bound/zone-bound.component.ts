@@ -93,37 +93,37 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IZoneBoundManager, rowIndex: number) => {
+  removeRow = async (rowDataAndIndex: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
 
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ZoneBoundREMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.ZoneBoundREMOVE, rowDataAndIndex['dataSource']);
+      this.refetchTable(rowDataAndIndex['ri']);
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IZoneBoundManager, rowIndex: number) => {
-    if (!this.sectorsManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  onRowEditSave = async (dataSource: object) => {
+    if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.zoneId !== 'object') {
+    if (typeof dataSource['dataSource'].zoneId !== 'object') {
       this.zoneDictionary.find(item => {
-        if (item.title === dataSource.zoneId)
-          dataSource.zoneId = item.id
+        if (item.title === dataSource['dataSource'].zoneId)
+          dataSource['dataSource'].zoneId = item.id
       })
     } else {
-      dataSource.zoneId = dataSource.zoneId['id'];
+      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneBoundEDIT, dataSource);
+    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneBoundEDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
-  onRowEditCancel(dataSource: IZoneBoundManager, index: number) {
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
-    return;
+  onRowEditCancel(rowDataAndIndex: object) {
+    // this.dataSource[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];
+    // delete this.dataSource[rowDataAndIndex['dataSource']];
+    // return;
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

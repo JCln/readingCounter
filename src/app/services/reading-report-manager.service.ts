@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-  IReadingReportGISReq,
-  IReadingReportReq,
-  IReadingReportTraverseDifferentialReq,
-  IReadingReportWithZoneIDsReq,
+    IReadingReportGISReq,
+    IReadingReportReq,
+    IReadingReportTraverseDifferentialReq,
+    IReadingReportWithZoneIDsReq,
 } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -129,8 +129,8 @@ export class ReadingReportManagerService {
     { field: 'xarabCount', header: 'خراب', isSelected: true, readonly: true },
     { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
     { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true }
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true , ltr: true},
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true }
   ]
   private _RRKarkardDaily = [
     { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
@@ -159,8 +159,8 @@ export class ReadingReportManagerService {
     { field: '_14To16', header: '14 - 16', isSelected: true, readonly: true },
     { field: '_16To18', header: '16 - 18', isSelected: true, readonly: true },
     { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true }
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true }
   ];
 
   columnRRAnalyzeByParam = (): IObjectIteratation[] => {

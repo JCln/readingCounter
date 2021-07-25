@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
@@ -22,7 +21,7 @@ export class ImportDynamicService {
   private _assessPre: IAssessPreDisplayDtoSimafa;
   _simafaReadingProgram: IObjectIteratation[] = [
     { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectOption: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isNumber: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isNumber: true, ltr: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isNumber: true },
     { field: 'listNumber', header: 'ش لیست', isSelected: false },
     { field: 'year', header: 'سال', isSelected: false, isNumber: true },
@@ -89,8 +88,7 @@ export class ImportDynamicService {
     private utilsService: UtilsService,
     private dialog: MatDialog,
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService,
-    private router: Router
+    private dictionaryWrapperService: DictionaryWrapperService    
   ) { }
 
   columnAssessPre = (): IObjectIteratation[] => {
@@ -139,9 +137,6 @@ export class ImportDynamicService {
       }
     }
     return true;
-  }
-  routeToWoui = (object: IOnOffLoadFlat) => {
-    this.router.navigate(['wr/m/track/woui', false, object.id]);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     this._assessPre = searchReq;

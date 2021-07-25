@@ -19,7 +19,7 @@ import { UtilsService } from './utils.service';
 })
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  private menuDefault = [
+  private menuDefault: IObjectIteratation[] = [
     { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
     { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -30,14 +30,14 @@ export class TrackingManagerService {
     { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
     // { field: 'year', header: 'سال', isSelected: false },
     { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
     { field: 'fromDate', header: 'از', isSelected: false },
     { field: 'toDate', header: 'تا', isSelected: false },
     { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
-    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
+    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
   ];
   private lastStates: IObjectIteratation[] = [
     { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
@@ -51,8 +51,8 @@ export class TrackingManagerService {
     // { field: 'zoneId', header: 'ناحیه', isSelected: false },
     // { field: 'year', header: 'سال', isSelected: false },
     { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
     { field: 'fromDate', header: 'از', isSelected: false },
     { field: 'toDate', header: 'تا', isSelected: false },
     { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
@@ -74,8 +74,8 @@ export class TrackingManagerService {
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, readonly: true },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
       // { field: 'year', header: 'سال', isSelected: false, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true },
       { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
       { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
