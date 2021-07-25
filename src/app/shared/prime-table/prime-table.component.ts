@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { SearchService } from 'services/search.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 
 @Component({
@@ -7,7 +9,7 @@ import { TrackingManagerService } from 'services/tracking-manager.service';
   templateUrl: './prime-table.component.html',
   styleUrls: ['./prime-table.component.scss']
 })
-export class PrimeTableComponent{
+export class PrimeTableComponent {
   @Input() dataSource: any[] = [];
   @Input() _selectCols: any = [];
   @Input() _selectedColumns: any[];
@@ -26,6 +28,7 @@ export class PrimeTableComponent{
   @Input() _backToPreviousEnabled: boolean = false;
   @Input() _checkUpName: string = '';
   @Input() _multiSelectEnable: boolean = true;
+  @Input() _allComponentIsModify: boolean = false;
 
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() forcedOffload = new EventEmitter<any>();
@@ -41,11 +44,16 @@ export class PrimeTableComponent{
   @Output() backedToPrevious = new EventEmitter<any>();
   @Output() downloadedAPK = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
+  @Output() showSearchedOptionsDialog = new EventEmitter<any>();
+  @Output() routedToOffload = new EventEmitter<any>();
+  @Output() openedAddDialog = new EventEmitter<any>();
 
 
   constructor(
     public outputManagerService: OutputManagerService,
-    public trackingManagerService: TrackingManagerService
+    public trackingManagerService: TrackingManagerService,
+    public searchService: SearchService,
+    public listManagerService: ListManagerService
   ) { }
 
   @Input() get selectedColumns(): any[] {
@@ -97,6 +105,15 @@ export class PrimeTableComponent{
   }
   showPictures = ($event) => {
     this.showedPictures.emit($event);
+  }
+  showSearchOptionsDialog = () => {
+    this.showSearchedOptionsDialog.emit();
+  }
+  routeToOffload = ($event) => {
+    this.routedToOffload.emit($event);
+  }
+  openAddDialog = () => {
+    this.openedAddDialog.emit();
   }
 
 }

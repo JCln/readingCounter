@@ -88,66 +88,66 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
       isNew: true
     };
   }
-  onRowEditInit(dataSource: ITextOutput) {
-    // this.insertSelectedColumns();
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditCancel(dataSource: ITextOutput, index: number) {
+  onRowEditCancel(dataSource: object) {
     this.newRowLimit = 1;
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
-    if (dataSource.isNew)
+    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    delete this.dataSource[dataSource['dataSource'].id];
+    if (dataSource['dataSource'].isNew)
       this.dataSource.shift();
     return;
   }
-  removeRow = async (dataSource: ITextOutput, index: number) => {
+  removeRow = async (dataSource: object) => {
     this.newRowLimit = 1;
-    console.log(dataSource);
-    if (typeof dataSource.zoneId !== 'object') {
+    if (typeof dataSource['dataSource'].zoneId !== 'object') {
       this.zoneDictionary.find(item => {
-        if (item.title === dataSource.zoneId)
-          dataSource.zoneId = item.id
+        if (item.title === dataSource['dataSource'].zoneId)
+          dataSource['dataSource'].zoneId = item.id
       })
     } else {
-      dataSource.zoneId = dataSource.zoneId['id'];
+      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
 
     const verif = await this.readManagerService.firstConfirmDialog();
     if (verif) {
-      const a = await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputRemove, dataSource);
+      console.log(dataSource['dataSource']);
+      const a = await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputRemove, dataSource['dataSource']);
 
       if (a) {
-        this.dataSource[index] = this.clonedProducts[dataSource.id];
-        delete this.dataSource[dataSource.id];
-        this.refetchTable(index);
+        this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+        delete this.dataSource[dataSource['dataSource'].id];
+        this.refetchTable(dataSource['ri']);
       }
     }
   }
-  onRowEditSave(dataSource: ITextOutput, rowIndex: number) {
+  onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
-    if (!this.readManagerService.verificationTextOutputEditedRow(dataSource)) {
-      if (dataSource.isNew) {
-        this.dataSource.shift();
+    if (!this.readManagerService.verificationTextOutputEditedRow(dataSource['dataSource'])) {
+      if (dataSource['dataSource'].isNew) {
+        this.dataSource['dataSource'].shift();
         return;
       }
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
 
-    if (typeof dataSource.zoneId !== 'object') {
+    if (typeof dataSource['dataSource'].zoneId !== 'object') {
       this.zoneDictionary.find(item => {
-        if (item.title === dataSource.zoneId)
-          dataSource.zoneId = item.id
+        if (item.title === dataSource['dataSource'].zoneId)
+          dataSource['dataSource'].zoneId = item.id
       })
     } else {
-      dataSource.zoneId = dataSource.zoneId['id'];
+      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
 
-    if (dataSource.isNew) {
-      this.onRowAdd(dataSource, rowIndex);
+    if (dataSource['dataSource'].isNew) {
+      this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputEdit, dataSource);
+      this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputEdit, dataSource['dataSource']);
     }
   }
   async onRowAdd(dataSource: ITextOutput, rowIndex: number) {

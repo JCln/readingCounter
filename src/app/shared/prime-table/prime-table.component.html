@@ -2,11 +2,21 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder">
-
+    listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
-        <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
-            optionLabel="header"
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName !== 'allReads'" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'allReads'" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" optionLabel="header"
+            (ngModelChange)="listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'readingConfig'" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" optionLabel="header"
+            (ngModelChange)="listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
@@ -26,6 +36,10 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
+                <i *ngIf="_checkUpName == 'readingConfig'" (click)="openAddDialog()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن موردی</div>
+                </i>
             </div>
             <div class="left_side">
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
@@ -38,6 +52,10 @@
                 <i *ngIf="_checkUpName== 'apk'" (click)="downloadAPK()"
                     class="tooltip _circle_border p_icons fa fa-inbox">
                     <div class="tooltip_text">دانلود فایل</div>
+                </i>
+                <i *ngIf="_checkUpName == 'search_acme' || _checkUpName == 'assess_pre'"
+                    (click)="showSearchOptionsDialog()" class="tooltip _circle_border p_icons pi pi-search">
+                    <div class="tooltip_text">جستجو</div>
                 </i>
             </div>
         </div>
@@ -62,14 +80,32 @@
 
     <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
         <tr>
-            <td *ngFor="let col of columns">
+            <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>
-                <ng-container
-                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
+                <ng-container *ngIf="col.isBoolean; else elseTemplate">
                     <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    {{dataSource[col.field]}}
+                    <ng-container *ngIf="_outputFileName === 'search_moshtarak'; else showText">
+                        <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
+                            <div class="tooltip_text">عادی</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
+                            <div class="tooltip_text">پایین</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
+                            <div class="tooltip_text">بالا</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">0
+                            <div class="tooltip_text">صفر</div>
+                        </i>
+                        <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
+                            <div class="tooltip_text">غیرقابل محاسبه</div>
+                        </i>
+                    </ng-container>
+                    <ng-template #showText>
+                        {{dataSource[col.field]}}
+                    </ng-template>
                 </ng-template>
             </td>
             <td *ngIf="_outputFileName== 'reading'" (click)="forceOffload(dataSource.id, ri)">
@@ -151,6 +187,23 @@
                 <span class="ui-column-title">مشاهده عکس(ها)</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons fa fa-camera">
                     <div class="tooltip_text_right">مشاهده عکس(ها)</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'search_moshtarak' || _outputFileName == 'allReads' && !_allComponentIsModify"
+                (click)="searchService.routeToWoui(dataSource)">
+                <span class="ui-column-title">بررسی عکس/صوت</span>
+                <i class="tooltip p_icons fas fa-camera">
+                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'assess_pre'">
+                <span class="ui-column-title">انتخاب</span>
+                <mat-checkbox [checked]="true" [(ngModel)]="dataSource[ri]"></mat-checkbox>
+            </td>
+            <td *ngIf="_outputFileName == 'allReads' &&  _allComponentIsModify">
+                <span class="ui-column-title">اصلاح</span>
+                <i (click)="routeToOffload(dataSource)" class="tooltip p_icons pi pi-pencil">
+                    <div class="tooltip_text_right">اصلاح</div>
                 </i>
             </td>
         </tr>
