@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormulasService } from 'services/formulas.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { ReadManagerService } from 'services/read-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 
 @Component({
@@ -9,7 +11,6 @@ import { TrackingManagerService } from 'services/tracking-manager.service';
 })
 export class PrimeTableEditableComponent {
   @Input() dataSource: any[] = [];
-  @Input() dictionary = new EventEmitter<any>();
   @Input() _selectCols: any = [];
   @Input() _selectedColumns: any[];
   @Input() _outputFileName: string;
@@ -27,17 +28,32 @@ export class PrimeTableEditableComponent {
   @Input() _backToPreviousEnabled: boolean = false;
   @Input() _checkUpName: string = '';
   @Input() _multiSelectEnable: boolean = true;
+  @Input() _isInRowEditing: boolean = false;
+  @Input() _dictionaryName: string = '';
+  @Input() _secondDictionaryName: string = '';
+  @Input() newRow: object;
+  @Input() newRowLimit: number;
+  @Input() dictionary = new EventEmitter<any>();
+  @Input() secondDictionary = new EventEmitter<any>();
 
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() onRowEditedInit = new EventEmitter<any>();
   @Output() onRowEditedSave = new EventEmitter<any>();
   @Output() onRowEditedCancel = new EventEmitter<any>();
+  @Output() onRowEditedCancelRowEditing = new EventEmitter<any>();
   @Output() removedRow = new EventEmitter<any>();
+  @Output() removedRowEditing = new EventEmitter<any>();
   @Output() openedAddDialog = new EventEmitter<any>();
+  @Output() newedRowChangedStatus = new EventEmitter<any>();
+  @Output() addedNewRow = new EventEmitter<any>();
+  @Output() getedExcelSample = new EventEmitter<any>();
+  @Output() openedAddExcelDialog = new EventEmitter<any>();
 
   constructor(
     public outputManagerService: OutputManagerService,
-    public trackingManagerService: TrackingManagerService
+    public trackingManagerService: TrackingManagerService,
+    public readManagerService: ReadManagerService,
+    public formulasService: FormulasService
   ) { }
 
   @Input() get selectedColumns(): any[] {
@@ -60,6 +76,9 @@ export class PrimeTableEditableComponent {
   removeRow = (dataSource: object, ri: number) => {
     this.removedRow.emit({ dataSource, ri });
   }
+  removeRowEditing = (dataSource: object, ri: number) => {
+    this.removedRowEditing.emit({ dataSource, ri })
+  }
   refreshTable() {
     this.refreshedTable.emit(true);
   }
@@ -69,5 +88,19 @@ export class PrimeTableEditableComponent {
   openAddDialog = () => {
     this.openedAddDialog.emit();
   }
-
+  newRowChangedStatus = () => {
+    this.newedRowChangedStatus.emit();
+  }
+  addNewRow = () => {
+    this.addedNewRow.emit();
+  }
+  onRowEditCancelRowEditing = (dataSource: object, ri: number) => {
+    this.onRowEditedCancelRowEditing.emit({ dataSource, ri });
+  }
+  getExcelSample = () => {
+    this.getedExcelSample.emit();
+  }
+  openAddExcelDialog = () => {
+    this.openedAddExcelDialog.emit();
+  }
 }

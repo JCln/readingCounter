@@ -79,27 +79,27 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: ICountryManager, rowIndex: number) => {
+  removeRow = async (rowData: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.CountryREMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.CountryREMOVE, rowData['dataSource']);
+      this.refetchTable(rowData['ri']);
     }
   }
   onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: ICountryManager, rowIndex: number) => {
-    if (!this.sectorsManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  onRowEditSave = async (dataSource: object) => {
+    if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryEDIT, dataSource);
+    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryEDIT, dataSource['dataSource']);
   }
-  onRowEditCancel(dataSource: ICountryManager, index: number) {
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
-    return;
+  onRowEditCancel(dataSource: object) {
+    // this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+    // delete this.dataSource[dataSource['dataSource'].id];
+    // return;
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

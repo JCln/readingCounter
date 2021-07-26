@@ -92,30 +92,33 @@ export class CounterReportComponent implements OnInit, AfterViewInit, OnDestroy 
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: ICounterReport, rowIndex: number) => {
+  removeRow = async (rowDataAndIndex: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.CounterReportRemove, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.CounterReportRemove, rowDataAndIndex['dataSource']);
+      this.refetchTable(rowDataAndIndex['ri']);
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditCancel() {
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
-  onRowEditSave = async (dataSource: ICounterReport, rowIndex: number) => {
-    if (!this.readManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
+  }
+  onRowEditSave = async (dataSource: object) => {
+    if (!this.readManagerService.verification(dataSource['dataSource'])) {
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.zoneId !== 'object') {
+    if (typeof dataSource['dataSource'].zoneId !== 'object') {
       this.zoneDictionary.find(item => {
-        if (item.title === dataSource.zoneId)
-          dataSource.zoneId = item.id
+        if (item.title === dataSource['dataSource'].zoneId)
+          dataSource['dataSource'].zoneId = item.id
       })
     } else {
-      dataSource.zoneId = dataSource.zoneId['id'];
+      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
-    await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportEdit, dataSource);
+    await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportEdit, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   refreshTable = () => {

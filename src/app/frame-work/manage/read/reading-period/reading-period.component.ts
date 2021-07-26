@@ -96,38 +96,38 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IReadingPeriod, rowIndex: number) => {
+  removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodRemove, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodRemove, rowData['dataSource']);
+      this.refetchTable(rowData['ri']);
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IReadingPeriod, rowIndex: number) => {
-    if (!this.readManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  onRowEditSave = async (dataSource: object) => {
+    if (!this.readManagerService.verification(dataSource['dataSource'])) {
+      this.dataSource['ri'] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.zoneId !== 'object') {
+    if (typeof dataSource['dataSource'].zoneId !== 'object') {
       this.zoneDictionary.find(item => {
-        if (item.title === dataSource.zoneId)
-          dataSource.zoneId = item.id
+        if (item.title === dataSource['dataSource'].zoneId)
+          dataSource['dataSource'].zoneId = item.id
       })
     } else {
-      dataSource.zoneId = dataSource.zoneId['id'];
+      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
-    if (typeof dataSource.readingPeriodKindId !== 'object') {
+    if (typeof dataSource['dataSource'].readingPeriodKindId !== 'object') {
       this.readingPeriodKindDictionary.find(item => {
-        if (item.title === dataSource.readingPeriodKindId)
-          dataSource.readingPeriodKindId = item.id
+        if (item.title === dataSource['dataSource'].readingPeriodKindId)
+          dataSource['dataSource'].readingPeriodKindId = item.id
       })
     } else {
-      dataSource.readingPeriodKindId = dataSource.readingPeriodKindId['id'];
+      dataSource['dataSource'].readingPeriodKindId = dataSource['dataSource'].readingPeriodKindId['id'];
     }
-    await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodEdit, dataSource);
+    await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodEdit, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
   }

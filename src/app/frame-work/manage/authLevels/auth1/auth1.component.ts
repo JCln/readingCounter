@@ -80,22 +80,22 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IAuthLevels, rowIndex: number) => {
+  removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog();
     if (a) {
-      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel1REMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel1REMOVE, rowDataAndIndex['dataSource']);
+      this.refetchTable(rowDataAndIndex['ri']);
     }
   }
   onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IAuthLevels, rowIndex: number) => {
-    if (!this.authsManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  onRowEditSave = async (dataSource: object) => {
+    if (!this.authsManagerService.verification(dataSource['dataSource'])) {
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel1EDIT, dataSource);
+    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel1EDIT, dataSource['dataSource']);
   }
   refreshTable = () => {
     this.classWrapper(true);

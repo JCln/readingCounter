@@ -1,143 +1,21 @@
-<p-table #td [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20"
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[20,50,100, 500]" dir="rtl" editMode="row" styleClass="p-datatable-responsive"
-    [responsive]="true" stateStorage="session" stateKey="water-session" dataKey="id">
-
-    <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="formulasService.setColumnsChanges(formulasService.ENSelectedColumnVariables.selectedAbFormulas ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <div class="header_icons_wrap">
-            <div class="right_side">
-                <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'abBaha')"
-                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
-                    <div class="tooltip_text">دریافت pdf</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'abBaha', 'xlsx')"
-                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
-                    <div class="tooltip_text">دریافت Excel</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'abBaha', 'csv')"
-                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
-                    <div class="tooltip_text">دریافت CSV</div>
-                </i>
-                <i (click)="getExcelSample()" class="tooltip _circle_border _xlsx_download pi pi-download">
-                    <div class="tooltip_text">دانلود نمونه فایلExcel</div>
-                </i>
-            </div>
-            <div class="left_side">
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i>
-                <i (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
-                    <div class="tooltip_text">افزودن موردی</div>
-                </i>
-                <i (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
-                    <div class="tooltip_text_right">افزودن فایل Excel</div>
-                </i>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
-            </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-
-        <tr>
-            <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
-                </p-columnFilter>
-                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
-            </th>
-
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-    </ng-template>
-
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing" let-columns="columns"
-        let-ri="rowIndex">
-        <tr [pEditableRow]="dataSource">
-            <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
-                <span class="ui-column-title">{{col.header}}</span>
-                <ng-container *ngIf="col.field === 'zoneId';else selectOption">
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
-                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
-                            </p-dropdown>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{dataSource.zoneId}}
-                        </ng-template>
-                    </p-cellEditor>
-                </ng-container>
-
-                <ng-container *ngIf="col.field === 'karbariMoshtarakinCode'">
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <p-dropdown name="karbariMoshtarakinCode" [options]="karbariCodeDictionary"
-                                [(ngModel)]="dataSource.karbariMoshtarakinCode" placeholder="انتخاب مورد"
-                                [style]="{'width':'100%'}" optionLabel="title">
-                            </p-dropdown>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{dataSource.karbariMoshtarakinCode}}
-                        </ng-template>
-                    </p-cellEditor>
-                </ng-container>
-
-                <ng-template #selectOption>
-                    <p-cellEditor *ngIf="col.field !== 'karbariMoshtarakinCode'">
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="dataSource[col.field]">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{dataSource[col.field]}}
-                        </ng-template>
-                    </p-cellEditor>
-                </ng-template>
-            </td>
-            <td>
-                <span class="ui-column-title">ویرایش</span>
-                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource,ri)"
-                    class="tooltip _edit pi pi-pencil">
-                    <div class="tooltip_text">ویرایش</div>
-                </i>
-                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)" class="_save pi pi-check">
-                </i>
-                <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
-                    class="_cancel pi pi-times">
-                </i>
-            </td>
-            <td>
-                <span class="ui-column-title">حذف مورد</span>
-                <i (click)="firstConfirmDialog(dataSource , ri)" class="tooltip p_icons fa fa-trash-o">
-                    <div class="tooltip_text_right">حذف مورد</div>
-                </i>
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
-        <ng-template pTemlate="footer">
-            <tr>
-                <td [attr.colspan]="dataSource.length">
-                    موردی پیدا نشد
-                </td>
-            </tr>
-
-        </ng-template>
-    </ng-template>
-</p-table>
-
-<section *ngIf="!dataSource || dataSource.length === 0">
-    <tr class="empty_data">
-        موردی پیدا نشد
-    </tr>
-</section>
+<app-prime-table-editable
+[dataSource]="dataSource"
+[_selectCols]="_selectCols"
+[_selectedColumns]="_selectedColumns"
+[_outputFileName]="'abBaha'"
+[_numberOfExtraColumns]="[1, 2]"
+[_sessionName]="'water-session'"
+[_selectedColumnsToRemember]="'selectedAbFormulas'"
+[_checkUpName]="'abBaha'"
+[_dictionaryName]="'zoneId'"
+[_secondDictionaryName]="'karbariMoshtarakinCode'"
+[dictionary]="zoneDictionary"
+[secondDictionary]="karbariCodeDictionary"
+(getedExcelSample)="getExcelSample()"
+(openedAddDialog)="openAddDialog()"
+(openedAddExcelDialog)="openAddExcelDialog()"
+(onRowEditInit)="onRowEditInit($event)"
+(onRowEditSave)="onRowEditSave($event)"
+(onRowEditCancel)="onRowEditCancel($event)"
+(removedRow)="firstConfirmDialog($event)"
+></app-prime-table-editable>

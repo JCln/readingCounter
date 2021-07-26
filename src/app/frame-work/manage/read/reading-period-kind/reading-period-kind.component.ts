@@ -82,22 +82,22 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IReadingPeriodKind, rowIndex: number) => {
+  removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodKindRemove, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodKindRemove, rowData['dataSource']);
+      this.refetchTable(rowData['ri']);
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IReadingPeriodKind, rowIndex: number) => {
-    if (!this.readManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  onRowEditSave = async (dataSource: object) => {
+    if (!this.readManagerService.verification(dataSource['dataSource'])) {
+      this.dataSource['ri'] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodKindEdit, dataSource);
+    await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodKindEdit, dataSource['dataSource']);
   }
   refreshTable = () => {
     this.classWrapper(true);

@@ -20,16 +20,16 @@ export class FragmentManagerService {
     return [
       { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
       { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
       { field: 'isValidated', header: 'تایید شده', isSelected: true, readonly: true, isBoolean: true },
     ];
   }
   columnSelectedFragmentDetails = (): IObjectIteratation[] => {
     return [
       { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
       { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
       { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }
     ];

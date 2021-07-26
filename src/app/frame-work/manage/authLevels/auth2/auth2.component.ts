@@ -91,37 +91,34 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.authsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IAuthLevel2, rowIndex: number) => {
+  removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog();
     if (a) {
-      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel2REMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel2REMOVE, rowDataAndIndex['dataSource']);
+      this.refetchTable(rowDataAndIndex['ri']);
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IAuthLevel2, rowIndex: number) => {
+  onRowEditSave = async (dataSource: object) => {
     if (!this.authsManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.authLevel1Id !== 'object') {
+    if (typeof dataSource['dataSource'].authLevel1Id !== 'object') {
       this.authLevel1Dictionary.find(item => {
-        if (item.title === dataSource.authLevel1Id)
-          dataSource.authLevel1Id = item.id
+        if (item.title === dataSource['dataSource'].authLevel1Id)
+          dataSource['dataSource'].authLevel1Id = item.id
       })
     } else {
-      dataSource.authLevel1Id = dataSource.authLevel1Id['id'];
+      dataSource['dataSource'].authLevel1Id = dataSource['dataSource'].authLevel1Id['id'];
     }
-    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel2EDIT, dataSource);
+    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel2EDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
   }
-  onRowEditCancel(dataSource: IAuthLevel2, index: number) {
-    Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
-    // this.dataSource[index] = this.clonedProducts[dataSource.id];
-    // delete this.dataSource[dataSource.id];
-    // return;
+  onRowEditCancel() {
+    Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');  
   }
   refreshTable = () => {
     this.classWrapper(true);

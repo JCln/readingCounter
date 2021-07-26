@@ -93,38 +93,38 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IRegionManager, rowIndex: number) => {
+  removeRow = async (rowDataAndIndex: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
 
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.RegionREMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.RegionREMOVE, rowDataAndIndex['dataSource']);
+      this.refreshTable();
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IRegionManager, rowIndex: number) => {
-    if (!this.sectorsManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  onRowEditSave = async (dataSource: object) => {
+    if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.provinceId !== 'object') {
+    if (typeof dataSource['dataSource'].provinceId !== 'object') {
       this.provinceDictionary.find(item => {
-        if (item.title === dataSource.provinceId)
-          dataSource.provinceId = item.id
+        if (item.title === dataSource['dataSource'].provinceId)
+          dataSource['dataSource'].provinceId = item.id
       })
     } else {
-      dataSource.provinceId = dataSource.provinceId['id'];
+      dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
     }
 
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.RegionEDIT, dataSource);
+    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.RegionEDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
   }
-  onRowEditCancel(dataSource: IRegionManager, index: number) {
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
-    return;
+  onRowEditCancel(rowDataAndIndex: object) {
+    // this.dataSource[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];
+    // delete this.dataSource[rowDataAndIndex['dataSource']];
+    // return;
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

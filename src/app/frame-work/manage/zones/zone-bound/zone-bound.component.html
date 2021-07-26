@@ -3,11 +3,19 @@
     [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
     [_checkUpName]="'zoneBound'"
+    [_dictionaryName]="'zoneId'"
+    [dictionary]="zoneDictionary"
     [_multiSelectEnable]=false
+    [_outputEnabled]= false
     [_rowsNumbers]=10
     [_rowsPerPage]="[10,20,50]"
     [_numberOfExtraColumns]="[1, 2]"
     (refreshedTable)="refreshTable()"
     (openedAddDialog)="openAddDialog()"
+    (dropDownChanges)="dataSource['zoneId']"
+    (removedRow)="removeRow($event)"
+    (onRowEditedCancel)="onRowEditCancel($event)"
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
  > 
 </app-prime-table-editable>
