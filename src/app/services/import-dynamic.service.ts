@@ -21,12 +21,12 @@ export class ImportDynamicService {
   importDynamicValue: IImportDynamicDefault;
   private _assessPre: IAssessPreDisplayDtoSimafa;
   _simafaReadingProgram: IObjectIteratation[] = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectOption: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isNumber: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isNumber: true },
-    { field: 'listNumber', header: 'ش لیست', isSelected: false },
-    { field: 'year', header: 'سال', isSelected: false, isNumber: true },
-    { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: false, isSelectOption: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isNumber: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isNumber: true },
+    { field: 'listNumber', header: 'ش لیست', isSelected: true },
+    { field: 'year', header: 'سال', isSelected: true, isNumber: true },
+    { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: true, isSelectOption: true },
   ]
   private _assessPreColumns: IObjectIteratation[] =
     [

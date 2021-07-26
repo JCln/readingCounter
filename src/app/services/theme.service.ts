@@ -59,6 +59,7 @@ export class ThemeService {
     const a = this.browserStorageService.get(name);
     if (a === null) {
       this.setLightTheme();
+      return;
     }
     a === 0 ? this.setLightTheme() : this.setDarkTheme()
   }

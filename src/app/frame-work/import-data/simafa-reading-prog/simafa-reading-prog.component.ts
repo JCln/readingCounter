@@ -46,6 +46,7 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
       return;
     this.dataSource = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaReadingProgram, this.importSimafaReadingProgram);
     this._empty_message = EN_messages.notFound;
+    this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.importDynamicService.columnSimafaReadingProgram();
