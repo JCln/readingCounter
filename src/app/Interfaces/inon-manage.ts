@@ -128,6 +128,18 @@ export interface IImportSimafaBatchReq {
     year: number,
     readingPeriodId: number
 }
+export interface IImportSimafaSingleReq {
+    counterReaderId: string,
+    readingProgramId: string,
+    zoneId: number,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    year: number,
+    readingPeriodId: number
+}
 export interface IImportSimafaReadingProgramsReq {
     readingPeriodId: number,
     year: number,

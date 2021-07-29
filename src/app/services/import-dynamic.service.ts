@@ -3,15 +3,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
-import { IImportDataResponse, IImportDynamicDefault, IImportSimafaReadingProgramsReq } from 'interfaces/inon-manage';
+import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
+import {
+  IImportDataResponse,
+  IImportDynamicDefault,
+  IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
+  IReadingProgramRes,
+} from 'interfaces/inon-manage';
 import { IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { Converter } from './../classes/converter';
-import { IAssessAddDtoSimafa } from './../Interfaces/imanage';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -20,6 +25,7 @@ import { UtilsService } from './utils.service';
 export class ImportDynamicService {
   importDynamicValue: IImportDynamicDefault;
   private _assessPre: IAssessPreDisplayDtoSimafa;
+  private _simafaSingleReq: IReadingProgramRes;
   _simafaReadingProgram: IObjectIteratation[] = [
     { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isNumber: true },
@@ -96,6 +102,9 @@ export class ImportDynamicService {
   columnAssessPre = (): IObjectIteratation[] => {
     return this._assessPreColumns;
   }
+  columnSimafaSingle = () => {
+    return this._simafaSingleReq;
+  }
   columnSimafaReadingProgram = (): IObjectIteratation[] => {
     return this._simafaReadingProgram;
   }
@@ -142,6 +151,9 @@ export class ImportDynamicService {
   }
   routeToWoui = (object: IOnOffLoadFlat) => {
     this.router.navigate(['wr/m/track/woui', false, object.id]);
+  }
+  routeToSimafaSingle = (object: IReadingProgramRes) => {
+    this.router.navigate(['/wr/imp/simafa/rdpg/single', object]);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     this._assessPre = searchReq;
@@ -220,6 +232,51 @@ export class ImportDynamicService {
 
     return true;
   }
+  checkSimafaSingleVertification = (val: IImportSimafaSingleReq): boolean => {
+    // call support group because inserted in previous section and readonly
+    if (this.utilsService.isNull(val.readingProgramId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.counterReaderId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_reader);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_alalhesab);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_imagePercent);
+      return false;
+    }
+
+    return true;
+  }
   validationInvalid = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
       this.utilsService.snackBarMessageFailed(EN_messages.thereis_no_reader);
@@ -289,6 +346,12 @@ export class ImportDynamicService {
   getQotrDictionary = () => {
     return this.dictionaryWrapperService.getQotrDictionary();
   }
+  getCounterReaders = (zoneId: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
+        resolve(res))
+    });
+  }
   getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
@@ -297,6 +360,12 @@ export class ImportDynamicService {
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
+  }
+  getFragmentMasterDictionary = (zoneId: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.fragmentMasterInZone, zoneId).toPromise().then(res =>
+        resolve(res))
+    });
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
@@ -436,5 +505,10 @@ export class ImportDynamicService {
       trackNumber: 0
     }
     return temp;
+  }
+  /* OTHERS */
+
+  setSimafaSingleReq = (dataSourceReq: IReadingProgramRes) => {
+    this._simafaSingleReq = dataSourceReq;
   }
 }

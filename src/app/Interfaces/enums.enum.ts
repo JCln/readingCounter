@@ -1,9 +1,7 @@
 export enum EN_messages {
     passwords_notFetch = 'تعداد ارقام گذرواژه با تایید آن برابر نیست',
     password_notExactly = 'گذرواژه با تایید آن یکی باید باشد',
-    sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد',
-    format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
-    format_invalid = 'فرمت ناصحیح است',
+    sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد',    
     lessThan_eshterak = 'از اشتراک کمتر از تا اشتراک است!',
     lessThan_rate = 'از نرخ کمتر از تا نرخ است!',
     percent_pictures = 'درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد',
@@ -69,6 +67,8 @@ export enum EN_messages {
     format_invalid_trackNumbersLength = 'تعداد ارقام شماره پیگیری اشتباه است',
     format_invalid_numberLengths = 'تعداد ارقام وارد شده اشتباه است',
     should_insert_APK = 'فرمت ارسالی باید فایل apk باشد',
+    format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
+    format_invalid = 'فرمت ناصحیح است',
     format_invalid_excel = 'فرمت ارسالی باید فایل excel باشد',
     invalid_mobile = 'شماره موبایل نادرست است',
     invalid_email = 'ایمیل نادرست است',
@@ -77,6 +77,8 @@ export enum EN_messages {
     format_invalid_to_eshterak = 'فرمت  تا اشتراک ناصحیح است',
     format_invalid_counterNumber = 'فرمت رقم کنتور اشتباه است',
     format_invalid_counterNumberTimes = 'تعداد ارقام کنتور اشتباه است',
+    format_imagePercent = 'فرمت درصد تصویر اشتباه است',    
+    format_alalhesab = 'فرمت علی الحساب اشتباه است',    
 
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',

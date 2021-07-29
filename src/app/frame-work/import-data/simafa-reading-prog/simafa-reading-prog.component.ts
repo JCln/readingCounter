@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IImportSimafaReadingProgramsReq, IReadingProgramRes } from 'interfaces/inon-manage';
@@ -18,7 +19,7 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
   importSimafaReadingProgram: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
-    year: 0
+    year: 1400
   }
 
   _empty_message: string = '';
@@ -36,8 +37,9 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private importDynamicService: ImportDynamicService,
-    public outputManagerService: OutputManagerService
+    public importDynamicService: ImportDynamicService,
+    public outputManagerService: OutputManagerService,
+    public route: ActivatedRoute
   ) { }
 
   connectToServer = async () => {
