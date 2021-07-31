@@ -1,8 +1,9 @@
-<app-prime-table     
+<app-prime-table *ngIf="route.children.length === 0"     
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
     [_outputFileName]="'offloaded'"
+    [_checkUpName]="'offloaded'"
     [_sortField]="'insertDateJalali'"
     [_rowsPerPage]="[20, 50, 100, 500, 1000]"
     [_numberOfExtraColumns]="[1, 2, 3]"

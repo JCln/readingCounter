@@ -1,5 +1,4 @@
 @import 'shared_dialog';
-@import 'button.scss';
 
 .mat-dialog-content {
   color: var(--gray_700);
@@ -30,11 +29,20 @@ h2 {
   direction: rtl;
 }
 
-.key,
-.val {
+._key,
+._value {
   font-weight: 600;
+}
+
+._key {
+  color: var(--blue_600);
 }
 
 ._text {
   margin-left: $font_xs;
+}
+
+._custom {
+  background: var(--blue_400);
+  color: var(--gray_100);
 }

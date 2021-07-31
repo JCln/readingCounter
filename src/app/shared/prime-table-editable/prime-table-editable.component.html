@@ -42,6 +42,10 @@
                     (click)="newRowChangedStatus()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن</div>
                 </i>
+                <i *ngIf="_checkUpName == 'zoneBound' || _checkUpName == 'zone' || _checkUpName == 'region' || _checkUpName == 'province' || _checkUpName == 'country' || _checkUpName == 'karbari' || _checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3' "
+                    (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن موردی</div>
+                </i>
                 <i *ngIf="_outputEnabled && _outputFileName == 'abBaha' || _outputFileName == 'Budget' || _outputFileName == 'tabsare3'"
                     (click)="getExcelSample()" class="tooltip _circle_border _xlsx_download pi pi-download">
                     <div class="tooltip_text">دانلود نمونه فایلExcel</div>
@@ -50,12 +54,8 @@
             <div class="left_side">
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i>
-                <i *ngIf="_checkUpName == 'zoneBound' || _checkUpName == 'zone' || _checkUpName == 'region' || _checkUpName == 'province' || _checkUpName == 'country' || _checkUpName == 'karbari' || _checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3' "
-                    (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
-                    <div class="tooltip_text">افزودن موردی</div>
-                </i>
-                <i (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
+                </i>                
+                <i *ngIf="_checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3'" (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
                     <div class="tooltip_text_right">افزودن فایل Excel</div>
                 </i>
                 <i *ngIf="_checkUpName == 'fragmentDetails'" (click)="routeToParent()" class="tooltip _circle_border p_icons pi pi-arrow-left">

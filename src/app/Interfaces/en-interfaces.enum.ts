@@ -220,6 +220,7 @@ export enum ENInterfaces {
     getMyProfile = 'V1/Account/MyInfo',
 
     postImportData = 'V1/Import/Dynamic',
+    postImportDynamicCount = 'V1/Import/DynamicCount',
     postSimafaReadingProgram = 'V1/Import/Simafa/ReadingPrograms',
     postSimafaBatch = 'V1/Import/Simafa/Batch',
     postSimafaSingle = 'V1/Import/Simafa/single',

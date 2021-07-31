@@ -135,6 +135,13 @@ export interface IOffloadModifyType {
     id: number,
     modifyeType: ENOffloadModifyType
 }
+export enum ENHasImportDynamicCount {
+    hasCount = 'true',
+    hasNotCount = 'false'
+}
+export enum ENLocalStorageNames {
+    hasDynamicCount = 'hasDynamicCount'
+}
 export enum ENThemeName {
     themeColor = 'themeColor'
 }

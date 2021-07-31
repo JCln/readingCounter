@@ -67,7 +67,7 @@ export class AuthService {
     this.clearAllSavedData();
     this.clearDictionaries();
     this.mainService.POSTBODY('V1/Account/Logout', { refreshToken }).subscribe(() => {
-      this.jwtService.removeAllLocalStorage();
+      this.jwtService.removeAuthLocalStorage();
       this.utilsService.routeTo('/login');
     })
   }

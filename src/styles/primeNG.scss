@@ -103,6 +103,12 @@
     font-family: $font_family;
     font-size: $font_m;
     font-weight: 600;
+    background: var(--gray_300);
+    color: var(--gray_800);
+  }
+
+  .p-dropdown-panel .p-dropdown-items {
+    background: var(--gray_100);
   }
 
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
@@ -118,9 +124,25 @@
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
     background: var(--gray_300);
     color: var(--gray_800);
+    padding: 0.25rem;
+  }
+
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-checkbox {
+    margin-right: 0.25rem;
+    margin-left: 0.3rem;
   }
 
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled):hover {
+    background: var(--gray_100);
+    color: var(--gray_800);
+  }
+
+  .p-dropdown-panel .p-dropdown-header {
+    background: var(--gray_300);
+    color: var(--gray_800);
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
     background: var(--gray_100);
     color: var(--gray_800);
   }
@@ -133,6 +155,7 @@
   .p-dropdown {
     height: 2.8rem;
     border-radius: 10px;
+    background: var(--white);
   }
 
   .p-column-filter-row {
@@ -311,7 +334,7 @@ input {
   border-radius: $border_15;
   font-size: $font_l;
   font-weight: 600;
-  color: var(--gray_700);
+  color: var(--gray_800);
 }
 
 /*ICONS*/
@@ -332,5 +355,5 @@ input {
 }
 
 ._mark {
-  color: var(--red_600);
+  color: var(--orange_500);
 }

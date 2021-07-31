@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -7,7 +7,7 @@ import { Label } from 'ng2-charts';
   templateUrl: './bar-anlz-prfm.component.html',
   styleUrls: ['./bar-anlz-prfm.component.scss']
 })
-export class BarAnlzPrfmComponent implements OnInit {
+export class BarAnlzPrfmComponent implements OnInit, AfterViewChecked {
   @Input() barAnalyze: any[];
 
   private defaultOptions = {
@@ -48,8 +48,10 @@ export class BarAnlzPrfmComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.barAnalyze)
-      this.barChartData = this.barAnalyze;
+    // this.barChartData = this.barAnalyze;
+  }
+  ngAfterViewChecked(): void {
+    this.barChartData = this.barAnalyze;
   }
 
 }

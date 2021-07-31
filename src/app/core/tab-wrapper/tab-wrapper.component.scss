@@ -94,7 +94,7 @@ li::before {
   content: '';
   opacity: 0;
   position: absolute;
-  top: 0;
+  top: .06rem;
   border-radius: 15px;
   height: .3rem;
   width: 90%;
@@ -103,7 +103,7 @@ li::before {
 
 li.active {
   color: var(--blue_500);
-  background: var(--gray_200);
+  background: var(--gray_100);
   border: 1.5px solid;
   border-top: none;
 }

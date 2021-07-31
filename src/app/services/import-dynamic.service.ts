@@ -201,15 +201,15 @@ export class ImportDynamicService {
       return false;
     }
     if (this.utilsService.isNaN(val.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_number);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
     if (this.utilsService.isNaN(val.readingPeriodId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_number);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
     if (this.utilsService.isNaN(val.year)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_number);
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
 
@@ -250,13 +250,28 @@ export class ImportDynamicService {
     }
     return true;
   }
-  showResDialog = (res: IImportDataResponse) => {
-    return new Promise(resolve => {
-      this.dialog.open(ConfirmDialogComponent, {
-        minWidth: '19rem',
-        data: res
+  showResDialog = (res: IImportDataResponse, disableClose: boolean, title: string): Promise<any> => {
+    // disable close mean when dynamic count show decision should make
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent,
+        {
+          disableClose: disableClose,
+          minWidth: '19rem',
+          data: {
+            data: res,
+            title: title,
+            isConfirm: disableClose
+          }
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (disableClose) {
+          if (result) {
+            resolve(true);
+          }
+        }
       })
-    })
+    });
+
   }
 
   /*API CALLS */
@@ -344,6 +359,19 @@ export class ImportDynamicService {
       console.error(error);
     }
   }
+  postImportDynamicCount = (importDynamic: IImportDynamicDefault): Promise<any> => {
+    importDynamic.fromDate = Converter.persianToEngNumbers(importDynamic.fromDate);
+    importDynamic.toDate = Converter.persianToEngNumbers(importDynamic.toDate);
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.postImportDynamicCount, importDynamic).toPromise().then(res => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   postImportSimafa = (method: ENInterfaces, body: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
@@ -404,7 +432,4 @@ export class ImportDynamicService {
     }
     return temp;
   }
-  // getAllCheckedIds = (data: any[]) => {
-  //   data.
-  // }
 }

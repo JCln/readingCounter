@@ -150,7 +150,7 @@
 article {
   background-color: var(--gray_200);
   border-radius: $border_15;
-  margin: $font_05 0;
+  margin: $font_2 0 0;
   padding: $font_05;
   box-shadow: 0 0 2px 1px var(--gray_500);
 }
@@ -160,7 +160,7 @@ article {
 }
 
 h3 {
-  color: var(--gray_600);
+  color: var(--blue_400);
   margin-bottom: $font_05;
 }
 
