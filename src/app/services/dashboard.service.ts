@@ -34,15 +34,11 @@ export class DashboardService {
 
   /* CALL API */
   getDashboardDataSource = (method: ENInterfaces): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(method).subscribe(res => {
-          resolve(res);
-        })
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).toPromise().then(res => {
+        resolve(res);
       })
-    } catch (error) {
-      console.error(e => e);
-    }
+    })
   }
   postDashboardAnalyzePerformance = (): Promise<any> => {
     try {

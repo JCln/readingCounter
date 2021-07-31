@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedChartsModule } from 'src/app/shared/shared-charts.module';
 
@@ -34,6 +35,7 @@ import { UserOverallComponent } from './user-overall/user-overall.component';
     UserOverallComponent,
   ],
   imports: [
+    CommonModule,
     SharedChartsModule,
     DashboardRoutingModule
   ]

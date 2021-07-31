@@ -1,8 +1,8 @@
 <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder">
-    listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
+    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]=_sortOrder
+    [sortMode]="_sortMode">
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName !== 'allReads'" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
@@ -18,6 +18,12 @@
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'userAll'" [options]="_selectCols"
+            [(ngModel)]="selectedColumns"
+            (ngModelChange)="usersAllService.setColumnsChanges(usersAllService.ENSelectedColumnVariables.selectedUsersAll ,$event)"
+            optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
+            placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="right_side">
@@ -56,6 +62,14 @@
                 <i *ngIf="_checkUpName == 'search_acme' || _checkUpName == 'assess_pre'"
                     (click)="showSearchOptionsDialog()" class="tooltip _circle_border p_icons pi pi-search">
                     <div class="tooltip_text">جستجو</div>
+                </i>
+                <i *ngIf="_checkUpName == 'desc'" (click)="trackingManagerService.backToParent()"
+                    class="tooltip _circle_border p_icons pi pi-arrow-left">
+                    <div class="tooltip_text">بازگشت به پیگیری</div>
+                </i>
+                <i *ngIf="_checkUpName == 'desc'" (click)="toPreStatus(dataSource[dataSource.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به قبلی</div>
                 </i>
             </div>
         </div>
@@ -150,14 +164,14 @@
                     <div class="tooltip_text_right">حذف مسیر</div>
                 </i>
             </td>
-            <td *ngIf="dataSource.hasMap && _outputFileName == 'lastStates'"
+            <td *ngIf="dataSource.hasMap && _checkUpName == 'lastStates' || _checkUpName == 'desc'"
                 (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
             </td>
-            <td *ngIf="!dataSource.hasMap && _outputFileName == 'lastStates'">
+            <td *ngIf="!dataSource.hasMap && _checkUpName == 'lastStates' || _checkUpName == 'desc'">
             </td>
             <td *ngIf="_outputFileName == 'finished'" (click)="backToImportedConfirmDialog(dataSource.id,ri)">
                 <span class="ui-column-title">بازگشت به بارگذاری شده</span>
@@ -205,6 +219,38 @@
                 <i (click)="routeToOffload(dataSource)" class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>
                 </i>
+            </td>
+            <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (click)="routeToEditPage(dataSource.id)">
+                <span class="ui-column-title">مشاهده/ویرایش کاربر</span>
+                <i class="tooltip p_icons pi pi-user-edit">
+                    <div class="tooltip_text">مشاهده/ویرایش کاربر</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (click)="routeToLoggs(dataSource.id)">
+                <span class="ui-column-title">مشاهده ورودها</span>
+                <i class="tooltip p_icons pi pi-sign-in">
+                    <div class="tooltip_text">مشاهده ورودها</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (mouseover)="showExactConfig(ri)"
+                (mouseout)="showExactConfig(ri)">
+                <span class="ui-column-title">تغییر وضعیت</span>
+                <i class="tooltip _map_frame_show p_icons pi pi-ellipsis-h">
+                    <div class="tooltip_text">تغییر وضعیت</div>
+                </i>
+                <div class="map-frame">
+                    <div class="more_configs">
+                        <i class="bbr tooltip p_icons pi pi-lock-open" (click)="ActivateUser(dataSource,ri)">
+                            <div class="tooltip_text">فعال</div>
+                        </i>
+                        <i class="bbr tooltip p_icons pi pi-unlock" (click)="DeActivateUser(dataSource,ri)">
+                            <div class="tooltip_text">غیر فعال</div>
+                        </i>
+                        <i class="bbr tooltip p_icons pi pi-refresh" (click)="resetPasswordUser(dataSource,ri)">
+                            <div class="tooltip_text">بازنشانی گذرواژه</div>
+                        </i>
+                    </div>
+                </div>
             </td>
         </tr>
     </ng-template>

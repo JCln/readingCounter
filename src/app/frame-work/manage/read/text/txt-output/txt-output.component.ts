@@ -127,7 +127,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.newRowLimit = 1;
     if (!this.readManagerService.verificationTextOutputEditedRow(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
-        this.dataSource['dataSource'].shift();
+        this.dataSource.shift();
         return;
       }
       this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
@@ -150,7 +150,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
       this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputEdit, dataSource['dataSource']);
     }
   }
-  async onRowAdd(dataSource: ITextOutput, rowIndex: number) {
+  private async onRowAdd(dataSource: ITextOutput, rowIndex: number) {
     const a = await this.readManagerService.postTextOutputDATA(ENInterfaces.textOutputAdd, dataSource);
     if (a) {
       this.refetchTable(rowIndex);

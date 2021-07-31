@@ -48,6 +48,7 @@ export class PrimeTableEditableComponent {
   @Output() addedNewRow = new EventEmitter<any>();
   @Output() getedExcelSample = new EventEmitter<any>();
   @Output() openedAddExcelDialog = new EventEmitter<any>();
+  @Output() routedToParent = new EventEmitter<any>();
 
   constructor(
     public outputManagerService: OutputManagerService,
@@ -102,5 +103,8 @@ export class PrimeTableEditableComponent {
   }
   openAddExcelDialog = () => {
     this.openedAddExcelDialog.emit();
+  }
+  routeToParent = () => {
+    this.routedToParent.emit();
   }
 }

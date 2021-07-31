@@ -90,44 +90,44 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     // this.insertSelectedColumns();
     this.clonedProducts[dataSource.fragmentMasterId] = { ...dataSource };
   }
-  onRowEditCancel(dataSource: IFragmentDetails, index: number) {
+  onRowEditCancel(dataSource: object) {
     this.newRowLimit = 1;
-    this.dataSource[index] = this.clonedProducts[dataSource.fragmentMasterId];
-    delete this.dataSource[dataSource.id];
-    if (dataSource.isNew)
+    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+    delete this.dataSource[dataSource['dataSource'].id];
+    if (dataSource['dataSource'].isNew)
       this.dataSource.shift();
     return;
   }
-  removeRow = async (dataSource: IFragmentDetails, index: number) => {
+  removeRow = async (dataSource: object) => {
     this.newRowLimit = 1;
 
-    if (!this.fragmentManagerService.verificationDetails(dataSource))
+    if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource']))
       return;
-    const a = await this.fragmentManagerService.removeFragmentDetails(dataSource);
+    const a = await this.fragmentManagerService.removeFragmentDetails(dataSource['dataSource']);
     if (a) {
-      this.dataSource[index] = this.clonedProducts[dataSource.fragmentMasterId];
-      delete this.dataSource[dataSource.id];
-      this.refetchTable(index);
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+      delete this.dataSource[dataSource['dataSource'].id];
+      this.refetchTable(dataSource['ri']);
     }
   }
-  onRowEditSave(dataSource: IFragmentDetails, rowIndex: number) {
+  onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
-    if (!this.fragmentManagerService.verificationDetails(dataSource)) {
-      if (dataSource.isNew) {
+    if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource'])) {
+      if (dataSource['dataSource'].isNew) {
         this.dataSource.shift();
         return;
       }
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.fragmentMasterId];
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
       return;
     }
-    if (!dataSource.id) {
-      this.onRowAdd(dataSource, rowIndex);
+    if (!dataSource['dataSource'].id) {
+      this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      this.fragmentManagerService.editFragmentDetails(dataSource);
+      this.fragmentManagerService.editFragmentDetails(dataSource['dataSource']);
     }
   }
-  async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
+  private async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
     const a = await this.fragmentManagerService.addFragmentDetails(dataSource);
     if (a) {
       this.refetchTable(rowIndex);

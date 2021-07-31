@@ -84,13 +84,13 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.usersAllService.Activate(dataSource.id);
     this.refetchTable(rowIndex);
   }
-  DeActivateUser = (dataSource: IUserManager, rowIndex: number) => {
-    this.usersAllService.DeActivate(dataSource.id);
-    this.refetchTable(rowIndex);
+  DeActivateUser = (dataSource: object) => {
+    this.usersAllService.DeActivate(dataSource['dataSource'].id);
+    this.refetchTable(dataSource['ri']);
   }
-  resetPasswordUser = (dataSource: IUserManager, rowIndex: number) => {
-    this.usersAllService.resetPassword(dataSource.id);
-    this.refetchTable(rowIndex);
+  resetPasswordUser = (dataSource: object) => {
+    this.usersAllService.resetPassword(dataSource['dataSource'].id);
+    this.refetchTable(dataSource['ri']);
   }
   showExactConfig = (index: number) => {
     let a = document.querySelectorAll('.more_configs');
