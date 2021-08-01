@@ -103,6 +103,8 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
 
     if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource']))
       return;
+    const confirmed = await this.fragmentManagerService.firstConfirmDialog();
+    if (!confirmed) return;
     const a = await this.fragmentManagerService.removeFragmentDetails(dataSource['dataSource']);
     if (a) {
       this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];

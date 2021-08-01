@@ -178,7 +178,7 @@
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
             </td>
-            <td *ngIf="!dataSource.hasMap && _checkUpName == 'lastStates' || _checkUpName == 'desc'">
+            <td *ngIf="!dataSource.hasMap && (_checkUpName == 'lastStates' || _checkUpName == 'desc')">
             </td>
             <td *ngIf="_outputFileName == 'finished'" (click)="backToImportedConfirmDialog(dataSource.id,ri)">
                 <span class="ui-column-title">بازگشت به بارگذاری شده</span>
@@ -210,7 +210,7 @@
                     <div class="tooltip_text_right">مشاهده عکس(ها)</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName == 'search_moshtarak' || _outputFileName == 'allReads' && !_allComponentIsModify"
+            <td *ngIf="(_outputFileName == 'search_moshtarak' || _outputFileName == 'allReads' )&& !_allComponentIsModify"
                 (click)="searchService.routeToWoui(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
@@ -225,6 +225,18 @@
                 <span class="ui-column-title">اصلاح</span>
                 <i (click)="routeToOffload(dataSource)" class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'readingConfig'" class="edit_button" (click)="openEditDialog(dataSource)">
+                <span class="ui-column-title">ویرایش</span>
+                <i class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'readingConfig'" class="edit_button" (click)="removeRow(dataSource , ri)">
+                <span class="ui-column-title">حذف مورد</span>
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف مورد</div>
                 </i>
             </td>
             <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (click)="routeToEditPage(dataSource.id)">

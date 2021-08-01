@@ -3,7 +3,7 @@ import { IFollowUp } from 'interfaces/imanage';
 
 @Injectable()
 export class FollowUpService {
-    serviceData: IFollowUp;
+    private serviceData: IFollowUp;
 
     setData(value: IFollowUp) {
         this.serviceData = value;

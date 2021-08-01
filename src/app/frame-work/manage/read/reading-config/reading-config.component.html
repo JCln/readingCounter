@@ -4,11 +4,13 @@
     [dataSource]="dataSource"
     [_outputEnabled]=false
     [_checkUpName]="'readingConfig'"
-    [_rowsPerPage]="[10, 20,50]"
+    [_rowsPerPage]="[10, 20, 50]"
     [_numberOfExtraColumns]="[1, 2]"
     (refreshedTable)="refreshTable()"    
     [_selectedColumnsToRemember]="'selectedReadingConfigDefault'"    
     (openedAddDialog)="openAddDialog()"    
     (refreshedTable)="refreshTable()"
+    (removedRow)="removeRow($event)"
+    (openedEditDialog)="openEditDialog($event)"
  > 
 </app-prime-table>

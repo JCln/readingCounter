@@ -61,7 +61,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     })
     return a;
   }
-  openEditDialog = (row: any) => {
+  openEditDialog = (row: object) => {
     const editable = this.getEditableSource(row).zoneId;
     return new Promise(() => {
       const dialogRef = this.dialog.open(RdEditDgComponent, {
@@ -124,11 +124,11 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IReadingConfigDefault, rowIndex: number) => {
+  removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource'].id);
+      this.refetchTable(rowData['ri']);
     }
   }
   refreshTable = () => {

@@ -5,24 +5,27 @@
     dataKey="id" #dtable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
-        <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
-            optionLabel="header"
-            (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName=='karbari' || _checkUpName=='periodKind'"
+        <p-multiSelect *ngIf="_multiSelectEnable && (_checkUpName=='karbari' || _checkUpName=='periodKind')"
             [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="readManagerService.setColumnsChanges(readManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <p-multiSelect
-            *ngIf="_multiSelectEnable && _checkUpName=='abBaha' || _checkUpName=='tabsare3' || _checkUpName=='Budget'"
+            *ngIf="_multiSelectEnable && (_checkUpName=='abBaha' || _checkUpName=='tabsare3' || _checkUpName=='Budget')"
             [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="formulasService.setColumnsChanges(formulasService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="right_side">
+                <i *ngIf="_checkUpName == 'zoneBound' || _checkUpName == 'zone' || _checkUpName == 'region' || _checkUpName == 'province' || _checkUpName == 'country' || _checkUpName == 'karbari' || _checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3' || _checkUpName == 'tabsare2' "
+                    (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن موردی</div>
+                </i>
+                <i *ngIf="_isInRowEditing" appAddRow [table]="dtable" [newRow]="newRow" [newRowLimit]="newRowLimit"
+                    (click)="newRowChangedStatus()" class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن</div>
+                </i>
                 <i *ngIf="_outputEnabled"
                     (click)="outputManagerService.exportPDF(dataSource, _selectCols, _outputFileName)"
                     class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
@@ -38,15 +41,7 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
-                <i *ngIf="_isInRowEditing" appAddRow [table]="dtable" [newRow]="newRow" [newRowLimit]="newRowLimit"
-                    (click)="newRowChangedStatus()" class="tooltip _circle_border p_icons fa fa-plus">
-                    <div class="tooltip_text">افزودن</div>
-                </i>
-                <i *ngIf="_checkUpName == 'zoneBound' || _checkUpName == 'zone' || _checkUpName == 'region' || _checkUpName == 'province' || _checkUpName == 'country' || _checkUpName == 'karbari' || _checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3' "
-                    (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
-                    <div class="tooltip_text">افزودن موردی</div>
-                </i>
-                <i *ngIf="_outputEnabled && _outputFileName == 'abBaha' || _outputFileName == 'Budget' || _outputFileName == 'tabsare3'"
+                <i *ngIf="_outputEnabled && (_outputFileName == 'abBaha' || _outputFileName == 'Budget' || _outputFileName == 'tabsare3')"
                     (click)="getExcelSample()" class="tooltip _circle_border _xlsx_download pi pi-download">
                     <div class="tooltip_text">دانلود نمونه فایلExcel</div>
                 </i>

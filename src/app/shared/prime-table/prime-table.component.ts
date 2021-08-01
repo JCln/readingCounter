@@ -31,6 +31,8 @@ export class PrimeTableComponent {
   @Input() _multiSelectEnable: boolean = true;
   @Input() _allComponentIsModify: boolean = false;
 
+  @Output() removedRow = new EventEmitter<any>();
+  @Output() openedEditDialog = new EventEmitter<any>();
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() forcedOffload = new EventEmitter<any>();
   @Output() backedToImportedConfirmDialog = new EventEmitter<any>();
@@ -146,8 +148,12 @@ export class PrimeTableComponent {
     this.resetedPasswordUser.emit({ dataSource, ri });
   }
   toPreStatus = (val: any) => {
-    console.log(val);
-
     this.toPredStatus.emit(val);
+  }
+  removeRow = (dataSource: object, ri: number) => {
+    this.removedRow.emit({ dataSource, ri });
+  }
+  openEditDialog = (dataSource: object) => {
+    this.openedEditDialog.emit(dataSource);
   }
 }

@@ -129,6 +129,8 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     obj2.zoneId = 1;
     if (!this.fragmentManagerService.verificationMaster(obj2))
       return;
+    const confirmed = await this.fragmentManagerService.firstConfirmDialog();
+    if (!confirmed) return;
     const a = await this.fragmentManagerService.removeFragmentMaster(obj2);
     if (a)
       this.refetchTable(rowIndex);

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFollowUp, IFollowUpHistory } from 'interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -76,8 +77,14 @@ export class DescComponent implements AfterViewInit, OnDestroy {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
+      this.followUpService.setData(null);
     }
+
+    this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
+    this.followUpService.setData(this.dataSource);
+
     this.dataSource = this.followUpService.getData();
+
     this.changeHsty = this.dataSource.changeHistory;
     this.closeTabService.saveDataForFollowUp = this.dataSource;
     this.insertToDesc();
@@ -113,7 +120,7 @@ export class DescComponent implements AfterViewInit, OnDestroy {
   insertToDesc = () => {
     this._showDesc = this._descView();
   }
-  showInMap = () => {   
+  showInMap = () => {
     this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[0].insertDateJalali);
   }
 }
