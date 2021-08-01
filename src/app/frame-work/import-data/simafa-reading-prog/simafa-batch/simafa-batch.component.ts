@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IImportDataResponse, IImportSimafaBatchReq, IReadingProgramRes } from 'interfaces/inon-manage';
+import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
+import { IImportSimafaBatchReq, IReadingProgramRes } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
@@ -13,7 +14,11 @@ import { InteractionService } from 'services/interaction.service';
   styleUrls: ['./simafa-batch.component.scss']
 })
 export class SimafaBatchComponent implements OnInit {
-
+  _fragmentDetailsEshterak: IFragmentDetailsByEshterakReq = {
+    fromEshterak: null,
+    toEshterak: null,
+    zoneId: null
+  };
   _readingProgramRes: IReadingProgramRes;
   simafaBatchReq: IImportSimafaBatchReq = {
     routeAndReaderIds: [{ routeId: '', counterReaderId: '' }],
@@ -28,10 +33,13 @@ export class SimafaBatchComponent implements OnInit {
     year: 1400,
     readingProgramId: ''
   }
-  
+
   userCounterReaderDictionary: IDictionaryManager[] = [];
   fragmentMasterDictionary: IDictionaryManager[] = [];
-  dataSource: IImportDataResponse;
+  dataSource: IFragmentDetails[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
+  _selectCols: any = [];
+  _selectedColumns: any[];
   subscription: Subscription[] = [];
 
   constructor(
@@ -46,10 +54,14 @@ export class SimafaBatchComponent implements OnInit {
     this.simafaBatchReq.readingPeriodId = parseInt(this.route.snapshot.paramMap.get('readingPeriodId'));
     this.simafaBatchReq.zoneId = parseInt(this.route.snapshot.paramMap.get('zoneId'));
     this.simafaBatchReq.year = parseInt(this.route.snapshot.paramMap.get('year'));
+
+    this._fragmentDetailsEshterak.fromEshterak = this.route.snapshot.paramMap.get('fromEshterak');
+    this._fragmentDetailsEshterak.toEshterak = this.route.snapshot.paramMap.get('toEshterak');
+    this._fragmentDetailsEshterak.zoneId = parseInt(this.route.snapshot.paramMap.get('zoneId'));
   }
   connectToServer = async () => {
     console.log(this.simafaBatchReq);
-    
+
     // const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaBatchReq);
     // if (!validation)
     //   return;
@@ -60,7 +72,7 @@ export class SimafaBatchComponent implements OnInit {
     if (canRefresh) {
       // this.nullSavedSource();
     }
-    this._readingProgramRes = this.importDynamicService.columnSimafaSingle();
+    // this._readingProgramRes = this.importDynamicService.columnSimafaSingle();
     this.getRouteParams();
     this.getApiCalls();
   }
@@ -86,8 +98,28 @@ export class SimafaBatchComponent implements OnInit {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   getApiCalls = async () => {
+    console.log(this._fragmentDetailsEshterak);
+
+    this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
+    if (!this.dataSource) return;
+    console.log(this.dataSource);
+
     this.userCounterReaderDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.simafaBatchReq.zoneId);
     this.fragmentMasterDictionary = await this.importDynamicService.getFragmentMasterDictionary(this.simafaBatchReq.zoneId);
+    this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
+
+    this.insertSelectedColumns();
+  }
+  insertSelectedColumns = () => {
+    this._selectCols = this.importDynamicService.columnSimafaBatch();
+    this._selectedColumns = this.importDynamicService.customizeSelectedColumns(this._selectCols);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

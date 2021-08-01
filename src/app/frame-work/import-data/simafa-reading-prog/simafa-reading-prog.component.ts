@@ -9,6 +9,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 @Component({
   selector: 'app-simafa-reading-prog',
@@ -47,6 +48,7 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
     if (!validation)
       return;
     this.dataSource = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaReadingProgram, this.importSimafaReadingProgram);
+
     this._empty_message = EN_messages.notFound;
     this.insertSelectedColumns();
   }
@@ -65,6 +67,7 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     this._years = this.importDynamicService.getYears();
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   ngOnInit() {
     this.classWrapper();

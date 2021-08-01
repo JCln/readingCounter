@@ -759,6 +759,11 @@ export interface IFragmentDetails {
     orderPersian?: string,
     isNew?: boolean
 }
+export interface IFragmentDetailsByEshterakReq {
+    fromEshterak: string,
+    toEshterak: string,
+    zoneId: number
+}
 
 // SEARCH   
 export interface ISearchMoshReq {

@@ -119,6 +119,7 @@ export enum ENInterfaces {
     fragmentDETAILSREMOVE = 'V1/Fragment/Detials/Remove',
     fragmentDETAILSEDIT = 'V1/Fragment/Details/Edit',
     fragmentDETAILSADD = 'V1/Fragment/Details/Add',
+    fragmentDETAILSByEshterak = 'V1/Fragment/Details/ByEshterak',
 
     OutputDBF = 'V1/Output/Dbf',
     OutputSINGLE = 'V1/Output/single',

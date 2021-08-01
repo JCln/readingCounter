@@ -34,6 +34,13 @@ export class ImportDynamicService {
     { field: 'year', header: 'سال', isSelected: true, isNumber: true },
     { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: true, isSelectOption: true },
   ]
+  private _simafaBatch: IObjectIteratation[] = [
+    { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
+    { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
+    { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }
+  ]
   private _assessPreColumns: IObjectIteratation[] =
     [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
@@ -108,6 +115,9 @@ export class ImportDynamicService {
   columnSimafaReadingProgram = (): IObjectIteratation[] => {
     return this._simafaReadingProgram;
   }
+  columnSimafaBatch = (): IObjectIteratation[] => {
+    return this._simafaBatch;
+  }
   persentCheck = (val: number): boolean => {
     return this.utilsService.persentCheck(val);
   }
@@ -154,6 +164,9 @@ export class ImportDynamicService {
   }
   routeToSimafaSingle = (object: IReadingProgramRes) => {
     this.router.navigate(['/wr/imp/simafa/rdpg/single', object]);
+  }
+  routeToSimafaBatch = (object: IReadingProgramRes) => {
+    this.router.navigate(['/wr/imp/simafa/rdpg/batch', object]);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     this._assessPre = searchReq;
@@ -346,6 +359,12 @@ export class ImportDynamicService {
   getQotrDictionary = () => {
     return this.dictionaryWrapperService.getQotrDictionary();
   }
+  postFragmentDetailsByEshterak = (val: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSByEshterak, val).toPromise().then(res =>
+        resolve(res))
+    });
+  }
   getCounterReaders = (zoneId: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
@@ -511,4 +530,19 @@ export class ImportDynamicService {
   setSimafaSingleReq = (dataSourceReq: IReadingProgramRes) => {
     this._simafaSingleReq = dataSourceReq;
   }
+  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
+    // convert all items to false
+    this[variableName].forEach(old => {
+      old.isSelected = false;
+    })
+
+    // merge new values
+    this[variableName].find(old => {
+      newValues.find(newVals => {
+        if (newVals.field == old.field)
+          old.isSelected = true;
+      })
+    })
+  }
+  
 }
