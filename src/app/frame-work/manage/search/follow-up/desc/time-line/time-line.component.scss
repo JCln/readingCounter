@@ -33,7 +33,7 @@
   font-size: $font_l;
   font-weight: 600;
   height: 2rem;
-  width: 2rem;  
+  width: 2rem;
 }
 
 .title {
@@ -47,7 +47,8 @@
   margin-bottom: $font_05;
 }
 
-.key {
+._key,
+._value {
   font-size: $font_s;
   font-weight: 600;
   color: var(--blue_700);

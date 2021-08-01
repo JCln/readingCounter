@@ -39,6 +39,7 @@ export class PrimeTableComponent {
   @Output() showedMoreDetails = new EventEmitter<any>();
   @Output() firstConfirmedDialog = new EventEmitter<any>();
   @Output() showedInMap = new EventEmitter<any>();
+  @Output() showedInMapDESC = new EventEmitter<any>();
   @Output() downloadedOutputSingle = new EventEmitter<any>();
   @Output() routeedToOffloadModify = new EventEmitter<any>();
   @Output() backedToReading = new EventEmitter<any>();
@@ -55,7 +56,6 @@ export class PrimeTableComponent {
   @Output() DeActivatedUser = new EventEmitter<any>();
   @Output() resetedPasswordUser = new EventEmitter<any>();
   @Output() toPredStatus = new EventEmitter<any>();
-
 
   constructor(
     public outputManagerService: OutputManagerService,
@@ -96,6 +96,9 @@ export class PrimeTableComponent {
   }
   showInMap = (trackNumber, insertDateJalali) => {
     this.showedInMap.emit({ trackNumber, insertDateJalali });
+  }
+  showInMapDESC = () => {
+    this.showedInMapDESC.emit();
   }
   downloadOutputSingle = (dataSource: object) => {
     this.downloadedOutputSingle.emit(dataSource);
@@ -143,6 +146,8 @@ export class PrimeTableComponent {
     this.resetedPasswordUser.emit({ dataSource, ri });
   }
   toPreStatus = (val: any) => {
+    console.log(val);
+
     this.toPredStatus.emit(val);
   }
 }

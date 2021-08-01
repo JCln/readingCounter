@@ -29,7 +29,7 @@
 </section>
 
 <section class="order_by">
-    <h2>نمایش :</h2>
+    <h2 class="title">نمایش :</h2>
     <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="canShowGraph" name="_isOrderByDate">
         <mat-radio-button class="radio_button" *ngFor="let orderType of showInOrderTo" [value]="orderType.isSelected">
             {{orderType.title}}
@@ -38,13 +38,17 @@
 </section>
 
 
-<app-prime-table 
+<app-prime-table *ngIf="!canShowGraph"
 [dataSource]="changeHsty"
+[_selectedColumns]="defColumns"
 [_numberOfExtraColumns]="[1]"
 [_sortField]="'insertDateJalali'"
 [_outputEnabled]=false
 [_checkUpName]="'desc'"
 [_multiSelectEnable]=false
+(refreshedTable)="refreshTable()"
+(toPredStatus)="toPreStatus($event)"
+(showedInMapDESC)="showInMap()"
 ></app-prime-table>
 
 <!-- could implement by lazy load route -->

@@ -113,7 +113,7 @@ export class DescComponent implements AfterViewInit, OnDestroy {
   insertToDesc = () => {
     this._showDesc = this._descView();
   }
-  showInMap = (trackNumber: number, day: string) => {
-    this.trackingManagerService.routeToLMPDXY(trackNumber, day);
+  showInMap = () => {   
+    this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[0].insertDateJalali);
   }
 }

@@ -54,11 +54,13 @@
             <div class="left_side">
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i>                
-                <i *ngIf="_checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3'" (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
+                </i>
+                <i *ngIf="_checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3'"
+                    (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
                     <div class="tooltip_text_right">افزودن فایل Excel</div>
                 </i>
-                <i *ngIf="_checkUpName == 'fragmentDetails'" (click)="routeToParent()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+                <i *ngIf="_checkUpName == 'fragmentDetails'" (click)="routeToParent()"
+                    class="tooltip _circle_border p_icons pi pi-arrow-left">
                     <div class="tooltip_text_right">بازگشت به نوبتی</div>
                 </i>
             </div>
@@ -89,21 +91,24 @@
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isSelectOption;else selectOption">
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
-                                [(ngModel)]="dataSource[_dictionaryName]" placeholder="انتخاب مورد"
-                                [style]="{'width':'100%'}" optionLabel="title">
-                            </p-dropdown>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{dataSource[_dictionaryName]}}
-                        </ng-template>
-                    </p-cellEditor>
-                    <ng-container *ngIf="_checkUpName == 'abBaha' && col.field === 'karbariMoshtarakinCode'">
+                    <ng-container
+                        *ngIf="_checkUpName == 'abBaha' || col.field === 'karbariMoshtarakinCode'; else dictionaryTwo">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <p-dropdown name="_secondDictionaryName" [options]="secondDictionary"
+                                <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
+                                    [(ngModel)]="dataSource[_dictionaryName]" placeholder="انتخاب مورد"
+                                    [style]="{'width':'100%'}" optionLabel="title">
+                                </p-dropdown>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{dataSource[_dictionaryName]}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </ng-container>
+                    <ng-template #dictionaryTwo>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-dropdown name="{{_secondDictionaryName}}" [options]="secondDictionary"
                                     [(ngModel)]="dataSource[_secondDictionaryName]" placeholder="انتخاب مورد"
                                     [style]="{'width':'100%'}" optionLabel="title">
                                 </p-dropdown>
@@ -112,7 +117,7 @@
                                 {{dataSource[_secondDictionaryName]}}
                             </ng-template>
                         </p-cellEditor>
-                    </ng-container>
+                    </ng-template>
                 </ng-container>
                 <ng-template #selectOption>
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">

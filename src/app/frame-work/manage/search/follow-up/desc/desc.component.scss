@@ -38,6 +38,13 @@ input {
   direction: rtl;
 }
 
+.title {
+  color: var(--blue_400);
+  text-align: center;
+  margin: $font_xs $font_05;
+  font-size: 1.6rem;
+}
+
 ::ng-deep {
   .mat-checkbox-layout .mat-checkbox-label {
     margin: 0 $font_05;

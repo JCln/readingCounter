@@ -165,8 +165,14 @@
                     <div class="tooltip_text_right">حذف مسیر</div>
                 </i>
             </td>
-            <td *ngIf="dataSource.hasMap && _checkUpName == 'lastStates' || _checkUpName == 'desc'"
+            <td *ngIf="dataSource.hasMap && _checkUpName == 'lastStates'"
                 (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
+                <span class="ui-column-title">مشاهده روی نقشه</span>
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                </i>
+            </td>
+            <td *ngIf="dataSource.hasMap && _checkUpName == 'desc'" (click)="showInMapDESC()">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
