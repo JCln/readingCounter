@@ -39,7 +39,8 @@ export class ImportDynamicService {
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
     { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
-    { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }
+    { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true },
+    { field: 'counterReaderId', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true }
   ]
   private _assessPreColumns: IObjectIteratation[] =
     [
@@ -365,7 +366,7 @@ export class ImportDynamicService {
         resolve(res))
     });
   }
-  getCounterReaders = (zoneId: number): Promise<any> => {
+  getUserCounterReaders = (zoneId: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
         resolve(res))
@@ -411,17 +412,6 @@ export class ImportDynamicService {
         })
       });
     } catch {
-      console.error(e => e);
-    }
-  }
-  getUserCounterReaders = (zoneId: number): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
       console.error(e => e);
     }
   }
@@ -544,5 +534,5 @@ export class ImportDynamicService {
       })
     })
   }
-  
+
 }

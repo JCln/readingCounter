@@ -50,7 +50,7 @@ export class SimafaSingleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   connectToServer = async () => {
     console.log(this.simafaSingleReq);
-    
+
     const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaSingleReq);
     if (!validation)
       return;
@@ -87,6 +87,6 @@ export class SimafaSingleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   selectedZoneId = async () => {
-    this.userCounterReaderDictionary = await this.importDynamicService.getCounterReaders(this.simafaSingleReq.zoneId);
+    this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaSingleReq.zoneId);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
+import { IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
 import { IImportSimafaBatchReq, IReadingProgramRes } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -20,8 +20,9 @@ export class SimafaBatchComponent implements OnInit {
     zoneId: null
   };
   _readingProgramRes: IReadingProgramRes;
+  _routeAndReaderIds = [{ routeId: null, counterReaderId: null }];
   simafaBatchReq: IImportSimafaBatchReq = {
-    routeAndReaderIds: [{ routeId: '', counterReaderId: '' }],
+    routeAndReaderIds: [{ routeId: null, counterReaderId: null }],
     fragmentMasterId: '',
     zoneId: 0,
     alalHesabPercent: 5,
@@ -35,8 +36,8 @@ export class SimafaBatchComponent implements OnInit {
   }
 
   userCounterReaderDictionary: IDictionaryManager[] = [];
-  fragmentMasterDictionary: IDictionaryManager[] = [];
-  dataSource: IFragmentDetails[] = [];
+  // fragmentMasterDictionary: IDictionaryManager[] = [];
+  dataSource: IImportSimafaBatchReq;
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
@@ -98,15 +99,14 @@ export class SimafaBatchComponent implements OnInit {
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   getApiCalls = async () => {
-    console.log(this._fragmentDetailsEshterak);
-
     this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
     if (!this.dataSource) return;
     console.log(this.dataSource);
 
-    this.userCounterReaderDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.simafaBatchReq.zoneId);
-    this.fragmentMasterDictionary = await this.importDynamicService.getFragmentMasterDictionary(this.simafaBatchReq.zoneId);
-    this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
+    this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaBatchReq.zoneId);
+    console.log(this.userCounterReaderDictionary);
+
+    // this.fragmentMasterDictionary = await this.importDynamicService.getFragmentMasterDictionary(this.simafaBatchReq.zoneId);    
 
     this.insertSelectedColumns();
   }
