@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
+import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
 import { IImportSimafaBatchReq, IReadingProgramRes } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -36,8 +36,7 @@ export class SimafaBatchComponent implements OnInit {
   }
 
   userCounterReaderDictionary: IDictionaryManager[] = [];
-  // fragmentMasterDictionary: IDictionaryManager[] = [];
-  dataSource: IImportSimafaBatchReq;
+  dataSource: IFragmentDetails[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
@@ -73,7 +72,6 @@ export class SimafaBatchComponent implements OnInit {
     if (canRefresh) {
       // this.nullSavedSource();
     }
-    // this._readingProgramRes = this.importDynamicService.columnSimafaSingle();
     this.getRouteParams();
     this.getApiCalls();
   }
@@ -101,14 +99,14 @@ export class SimafaBatchComponent implements OnInit {
   getApiCalls = async () => {
     this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
     if (!this.dataSource) return;
-    console.log(this.dataSource);
 
+
+    this.simafaBatchReq.fragmentMasterId = this.dataSource[0].fragmentMasterId;
     this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaBatchReq.zoneId);
-    console.log(this.userCounterReaderDictionary);
-
-    // this.fragmentMasterDictionary = await this.importDynamicService.getFragmentMasterDictionary(this.simafaBatchReq.zoneId);    
+    console.log(this.simafaBatchReq.fragmentMasterId);
 
     this.insertSelectedColumns();
+    this.assingIdToRouteId();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.importDynamicService.columnSimafaBatch();
@@ -120,6 +118,16 @@ export class SimafaBatchComponent implements OnInit {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  assingIdToRouteId = () => {
+    this.dataSource.forEach((item, index) => {
+      this.simafaBatchReq.routeAndReaderIds.forEach(routeIdItems => {
+        routeIdItems.routeId = item.id;
+      })
+    })
+
+    console.log(this.dataSource);
+
   }
 
 }
