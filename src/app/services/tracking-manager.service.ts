@@ -36,8 +36,8 @@ export class TrackingManagerService {
     { field: 'toDate', header: 'تا', isSelected: false },
     { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
-    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
+    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
   ];
   private lastStates: IObjectIteratation[] = [
     { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
@@ -57,8 +57,8 @@ export class TrackingManagerService {
     { field: 'toDate', header: 'تا', isSelected: false },
     { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
-    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
+    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
     // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }
   ]
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
@@ -80,8 +80,8 @@ export class TrackingManagerService {
       { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
       { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false, borderize: true },
-      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false },
-      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false },
+      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
       { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true }
     ];

@@ -47,7 +47,7 @@ export class ReadManagerService {
     // { field: 'defaultHasPreNumber', header: 'ش قبلی پیشفرض', isSelected: false },      
     { field: 'isOnQeraatCode', header: 'کد قرائت باشد', isSelected: false, isBoolean: true },
     { field: 'displayBillId', header: 'نمایش قبض', isSelected: false, isBoolean: true },
-    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false },
+    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
     { field: 'lowConstBoundMaskooni', header: 'ثابت کمینه مسکونی', isSelected: false },
     { field: 'highConstBoundMaskooni', header: 'ثابت بیشینه مسکونی', isSelected: false },
     { field: 'lowPercentBoundMaskooni', header: 'درصد کمینه مسکونی', isSelected: false },
