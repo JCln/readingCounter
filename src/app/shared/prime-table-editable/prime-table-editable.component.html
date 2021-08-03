@@ -86,8 +86,8 @@
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isSelectOption;else selectOption">
-                    <ng-container
-                        *ngIf="_checkUpName == 'abBaha' || col.field === 'karbariMoshtarakinCode'; else dictionaryTwo">
+                    <!--|| _checkUpName == 'abBaha' || col.field === 'karbariMoshtarakinCode-->
+                    <ng-container *ngIf="_dictionaryName.length !== 0">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
@@ -100,7 +100,7 @@
                             </ng-template>
                         </p-cellEditor>
                     </ng-container>
-                    <ng-template #dictionaryTwo>
+                    <ng-container *ngIf="_secondDictionaryName.length !== 0">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_secondDictionaryName}}" [options]="secondDictionary"
@@ -112,7 +112,7 @@
                                 {{dataSource[_secondDictionaryName]}}
                             </ng-template>
                         </p-cellEditor>
-                    </ng-template>
+                    </ng-container>
                 </ng-container>
                 <ng-template #selectOption>
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">

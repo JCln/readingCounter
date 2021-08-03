@@ -31,6 +31,7 @@ export class PrimeTableEditableComponent {
   @Input() _isInRowEditing: boolean = false;
   @Input() _dictionaryName: string = '';
   @Input() _secondDictionaryName: string = '';
+
   @Input() newRow: object;
   @Input() newRowLimit: number;
   @Input() dictionary = new EventEmitter<any>();

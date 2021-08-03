@@ -176,11 +176,7 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
   }
-  onRowEditCancel(dataSource: object) {
-    // this.dataSource[index] = this.clonedProducts[dataSource.id];
-    // delete this.dataSource[dataSource.id];
-    // return;
-  }
+  onRowEditCancel() { }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }
