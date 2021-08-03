@@ -39,7 +39,8 @@ export class ImportDynamicService {
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
     { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
-    { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }    
+    { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }    ,
+    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true }    
   ]
   private _assessPreColumns: IObjectIteratation[] =
     [

@@ -38,7 +38,7 @@
 
             </div>
         </section>
-    
+
         <footer>
             <button type="submit" class="btn_1">افزودن</button>
 
@@ -73,7 +73,6 @@
                     <p-sortIcon field="{{col.field}}"></p-sortIcon>
                     {{col.header}}
                 </th>
-                <th style="width: 4rem"></th>
             </tr>
             <tr>
                 <th *ngFor="let col of columns">
@@ -81,7 +80,6 @@
                     </p-columnFilter>
                     <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
                 </th>
-                <th style="width: 4rem"></th>
             </tr>
         </ng-template>
 
@@ -89,19 +87,28 @@
             <tr [pEditableRow]="dataSource">
                 <td *ngFor="let col of columns">
                     <span class="ui-column-title">{{col.header}}</span>
-                    <ng-container *ngIf="col.isBoolean; else simple">
+                    <ng-container *ngIf="col.isBoolean; else dropdown">
                         <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                     </ng-container>
-                    <ng-template #simple>
-                        {{dataSource[col.field]}}
+                    <ng-template #dropdown>
+                        <ng-container *ngIf="col.isSelectOption; else simple">
+                            <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
+                                [(ngModel)]="dataSource.routeAndReaderIds"
+                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id" optionLabel="title">
+                            </p-dropdown>
+                        </ng-container>
+                        <ng-template #simple>
+                            {{dataSource[col.field]}}
+                        </ng-template>
                     </ng-template>
                 </td>
-                <td>
+                <!-- <td>
                     <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
-                        [(ngModel)]="simafaBatchReq.routeAndReaderIds[ri]" placeholder="انتخاب مورد"
-                        [style]="{'width':'100%'}" optionLabel="title">
-                    </p-dropdown>
-                </td>
+                    [(ngModel)]="testCounterReaders"
+                    placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
+                </p-dropdown>
+                </td> -->
+
             </tr>
         </ng-template>
 

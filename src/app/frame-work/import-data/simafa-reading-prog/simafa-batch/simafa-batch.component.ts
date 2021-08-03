@@ -20,7 +20,8 @@ export class SimafaBatchComponent implements OnInit {
     zoneId: null
   };
   _readingProgramRes: IReadingProgramRes;
-  _routeAndReaderIds = [{ routeId: null, counterReaderId: null }];
+  _routeAndReaderIds: IDictionaryManager[] = [];
+  testCounterReaders: IDictionaryManager[];
   simafaBatchReq: IImportSimafaBatchReq = {
     routeAndReaderIds: [{ routeId: null, counterReaderId: null }],
     fragmentMasterId: '',
@@ -61,6 +62,10 @@ export class SimafaBatchComponent implements OnInit {
   }
   connectToServer = async () => {
     console.log(this.simafaBatchReq);
+    
+    // this.assingUserIdsToCounterReaderId();
+
+
 
     // const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaBatchReq);
     // if (!validation)
@@ -100,10 +105,12 @@ export class SimafaBatchComponent implements OnInit {
     this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
     if (!this.dataSource) return;
 
-
+    this.dataSource.length
+    for (let index = 1; index < this.dataSource.length; index++) {
+      this.simafaBatchReq.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
+    }
     this.simafaBatchReq.fragmentMasterId = this.dataSource[0].fragmentMasterId;
     this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaBatchReq.zoneId);
-    console.log(this.simafaBatchReq.fragmentMasterId);
 
     this.insertSelectedColumns();
     this.assingIdToRouteId();
@@ -121,13 +128,18 @@ export class SimafaBatchComponent implements OnInit {
   }
   assingIdToRouteId = () => {
     this.dataSource.forEach((item, index) => {
-      this.simafaBatchReq.routeAndReaderIds.forEach(routeIdItems => {
-        routeIdItems.routeId = item.id;
-      })
+      this.simafaBatchReq.routeAndReaderIds[index].routeId = item.id;
     })
+    console.log(this.simafaBatchReq);
 
-    console.log(this.dataSource);
+  }
+  // is it always assign true counter reader id to correct row ?
+  assingUserIdsToCounterReaderId = () => {
+    this._routeAndReaderIds.forEach((item, index) => {
+      this.simafaBatchReq.routeAndReaderIds[index].counterReaderId = item.id
 
+    })
+    console.log(this.simafaBatchReq);
   }
 
 }

@@ -76,8 +76,6 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
     }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
-    console.log(this.zoneDictionary);
-
     this._years = this.importDynamicService.getYears();
   }
   ngOnInit() {

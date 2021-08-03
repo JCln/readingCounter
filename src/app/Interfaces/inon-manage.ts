@@ -113,8 +113,8 @@ export interface IImportDataResponse {
 export interface IImportSimafaBatchReq {
     routeAndReaderIds: [
         {
-            routeId: string,
-            counterReaderId: string
+            routeId: string ,
+            counterReaderId: string | number
         }
     ],
     readingProgramId: string,
