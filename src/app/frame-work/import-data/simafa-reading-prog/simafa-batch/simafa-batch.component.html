@@ -93,7 +93,7 @@
                     <ng-template #dropdown>
                         <ng-container *ngIf="col.isSelectOption; else simple">
                             <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
-                                [(ngModel)]="dataSource.routeAndReaderIds"
+                                [(ngModel)]="simafaBatchReq.routeAndReaderIds[ri].counterReaderId"
                                 placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id" optionLabel="title">
                             </p-dropdown>
                         </ng-container>
@@ -101,14 +101,7 @@
                             {{dataSource[col.field]}}
                         </ng-template>
                     </ng-template>
-                </td>
-                <!-- <td>
-                    <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
-                    [(ngModel)]="testCounterReaders"
-                    placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
-                </p-dropdown>
-                </td> -->
-
+                </td>              
             </tr>
         </ng-template>
 

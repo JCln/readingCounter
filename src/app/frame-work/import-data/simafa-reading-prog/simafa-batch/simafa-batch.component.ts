@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
-import { IImportSimafaBatchReq, IReadingProgramRes } from 'interfaces/inon-manage';
+import { IImportSimafaBatchReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
@@ -19,9 +21,6 @@ export class SimafaBatchComponent implements OnInit {
     toEshterak: null,
     zoneId: null
   };
-  _readingProgramRes: IReadingProgramRes;
-  _routeAndReaderIds: IDictionaryManager[] = [];
-  testCounterReaders: IDictionaryManager[];
   simafaBatchReq: IImportSimafaBatchReq = {
     routeAndReaderIds: [{ routeId: null, counterReaderId: null }],
     fragmentMasterId: '',
@@ -62,15 +61,10 @@ export class SimafaBatchComponent implements OnInit {
   }
   connectToServer = async () => {
     console.log(this.simafaBatchReq);
-    
-    // this.assingUserIdsToCounterReaderId();
-
-
-
     // const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaBatchReq);
     // if (!validation)
     //   return;
-    // this.importDynamicService.showResDialog(await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaSingle, this.simafaBatchReq), false, EN_messages.importDynamic_created)
+    this.importDynamicService.showResDialog(await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.simafaBatchReq), false, EN_messages.importDynamic_created)
   }
   // nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -133,13 +127,4 @@ export class SimafaBatchComponent implements OnInit {
     console.log(this.simafaBatchReq);
 
   }
-  // is it always assign true counter reader id to correct row ?
-  assingUserIdsToCounterReaderId = () => {
-    this._routeAndReaderIds.forEach((item, index) => {
-      this.simafaBatchReq.routeAndReaderIds[index].counterReaderId = item.id
-
-    })
-    console.log(this.simafaBatchReq);
-  }
-
 }
