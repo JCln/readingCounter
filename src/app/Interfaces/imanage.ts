@@ -758,6 +758,15 @@ export interface IFragmentDetails {
     orderDigit?: number,
     orderPersian?: string,
     isNew?: boolean
+    // for batch
+    trackNumber?: number,
+    count?: number,
+    counterReaderName?: string
+}
+export interface IFragmentDetailsByEshterakReq {
+    fromEshterak: string,
+    toEshterak: string,
+    zoneId: number
 }
 
 // SEARCH   

@@ -104,6 +104,14 @@ export interface IImportDynamicDefault {
     kindId?: number,
     period?: number
 }
+export interface IBatchImportDataResponse {
+    trackNumber: number,
+    count: number,
+    errorCount: number,
+    counterReaderName: string,
+    fragmentDetailId: string,
+    listNumber: string
+}
 export interface IImportDataResponse {
     trackNumber: number,
     count: number,
@@ -114,11 +122,23 @@ export interface IImportSimafaBatchReq {
     routeAndReaderIds: [
         {
             routeId: string,
-            counterReaderId: string
+            counterReaderId: string | number
         }
     ],
     readingProgramId: string,
     fragmentMasterId: string,
+    zoneId: number,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    year: number,
+    readingPeriodId: number
+}
+export interface IImportSimafaSingleReq {
+    counterReaderId: string,
+    readingProgramId: string,
     zoneId: number,
     alalHesabPercent: number,
     imagePercent: number,

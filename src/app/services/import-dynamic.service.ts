@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
-import { IImportDataResponse, IImportDynamicDefault, IImportSimafaReadingProgramsReq } from 'interfaces/inon-manage';
+import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
+import {
+  IImportDataResponse,
+  IImportDynamicDefault,
+  IImportSimafaBatchReq,
+  IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
+  IReadingProgramRes,
+} from 'interfaces/inon-manage';
 import { IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { Converter } from './../classes/converter';
-import { IAssessAddDtoSimafa } from './../Interfaces/imanage';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -19,13 +26,24 @@ import { UtilsService } from './utils.service';
 export class ImportDynamicService {
   importDynamicValue: IImportDynamicDefault;
   private _assessPre: IAssessPreDisplayDtoSimafa;
+  private _simafaSingleReq: IReadingProgramRes;
   _simafaReadingProgram: IObjectIteratation[] = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: false, isSelectOption: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, isNumber: true, ltr: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, isNumber: true },
-    { field: 'listNumber', header: 'ش لیست', isSelected: false },
-    { field: 'year', header: 'سال', isSelected: false, isNumber: true },
-    { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: false, isSelectOption: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isNumber: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isNumber: true },
+    { field: 'listNumber', header: 'ش لیست', isSelected: true },
+    { field: 'year', header: 'سال', isSelected: true, isNumber: true },
+    { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: true, isSelectOption: true },
+  ]
+  private _simafaBatch: IObjectIteratation[] = [
+    { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
+    { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
+    { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true },
+    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true },
+    { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, readonly: true },
+    { field: 'count', header: 'تعداد', isSelected: true, readonly: true }
   ]
   private _assessPreColumns: IObjectIteratation[] =
     [
@@ -87,6 +105,7 @@ export class ImportDynamicService {
   constructor(
     private utilsService: UtilsService,
     private dialog: MatDialog,
+    private router: Router,
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService    
   ) { }
@@ -94,8 +113,14 @@ export class ImportDynamicService {
   columnAssessPre = (): IObjectIteratation[] => {
     return this._assessPreColumns;
   }
+  columnSimafaSingle = () => {
+    return this._simafaSingleReq;
+  }
   columnSimafaReadingProgram = (): IObjectIteratation[] => {
     return this._simafaReadingProgram;
+  }
+  columnSimafaBatch = (): IObjectIteratation[] => {
+    return this._simafaBatch;
   }
   persentCheck = (val: number): boolean => {
     return this.utilsService.persentCheck(val);
@@ -115,7 +140,7 @@ export class ImportDynamicService {
       return false;
     return true;
   }
-  private NANValidation = (sth: string, message?: string): boolean => {
+  private NANValidation = (sth: string, message?: EN_messages): boolean => {
     if (this.utilsService.isNaN(sth)) {
       if (message)
         this.utilsService.snackBarMessageWarn(message);
@@ -137,6 +162,15 @@ export class ImportDynamicService {
       }
     }
     return true;
+  }
+  routeToWoui = (object: IOnOffLoadFlat) => {
+    this.router.navigate(['wr/m/track/woui', false, object.id]);
+  }
+  routeToSimafaSingle = (object: IReadingProgramRes) => {
+    this.router.navigate(['/wr/imp/simafa/rdpg/single', object]);
+  }
+  routeToSimafaBatch = (object: IReadingProgramRes) => {
+    this.router.navigate(['/wr/imp/simafa/rdpg/batch', object]);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     this._assessPre = searchReq;
@@ -215,6 +249,105 @@ export class ImportDynamicService {
 
     return true;
   }
+  validateSimafaBatch = (val: IImportSimafaBatchReq): boolean => {
+    if (this.utilsService.isNull(val.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.readingProgramId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.fragmentMasterId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+
+    if (this.utilsService.isNaN(val.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+
+    return true;
+  }
+  private validateSimafaBatchSelectedCounterReaders = (val: IImportSimafaBatchReq): boolean => {
+    return val.routeAndReaderIds.every(item => {
+      return item.counterReaderId == null
+    })
+  }
+  verificationSimafaBatch = (val: IImportSimafaBatchReq) => {
+    if (!this.validateSimafaBatchSelectedCounterReaders(val)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders)
+      return false;
+    }
+    if (!this.validateSimafaBatch(val)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders)
+      return false;
+    }
+
+    return true;
+  }
+  checkSimafaSingleVertification = (val: IImportSimafaSingleReq): boolean => {
+    // call support group because inserted in previous section and readonly
+    if (this.utilsService.isNull(val.readingProgramId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.counterReaderId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_reader);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_alalhesab);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_imagePercent);
+      return false;
+    }
+
+    return true;
+  }
   validationInvalid = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
       this.utilsService.snackBarMessageFailed(EN_messages.thereis_no_reader);
@@ -284,6 +417,18 @@ export class ImportDynamicService {
   getQotrDictionary = () => {
     return this.dictionaryWrapperService.getQotrDictionary();
   }
+  postFragmentDetailsByEshterak = (val: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSByEshterak, val).toPromise().then(res =>
+        resolve(res))
+    });
+  }
+  getUserCounterReaders = (zoneId: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
+        resolve(res))
+    });
+  }
   getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
@@ -292,6 +437,12 @@ export class ImportDynamicService {
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
+  }
+  getFragmentMasterDictionary = (zoneId: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.fragmentMasterInZone, zoneId).toPromise().then(res =>
+        resolve(res))
+    });
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
@@ -318,17 +469,6 @@ export class ImportDynamicService {
         })
       });
     } catch {
-      console.error(e => e);
-    }
-  }
-  getUserCounterReaders = (zoneId: number): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
       console.error(e => e);
     }
   }
@@ -432,4 +572,24 @@ export class ImportDynamicService {
     }
     return temp;
   }
+  /* OTHERS */
+
+  setSimafaSingleReq = (dataSourceReq: IReadingProgramRes) => {
+    this._simafaSingleReq = dataSourceReq;
+  }
+  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
+    // convert all items to false
+    this[variableName].forEach(old => {
+      old.isSelected = false;
+    })
+
+    // merge new values
+    this[variableName].find(old => {
+      newValues.find(newVals => {
+        if (newVals.field == old.field)
+          old.isSelected = true;
+      })
+    })
+  }
+
 }
