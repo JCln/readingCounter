@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
 import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
-import { IImportSimafaBatchReq } from 'interfaces/inon-manage';
+import { IBatchImportDataResponse, IImportSimafaBatchReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
@@ -35,8 +34,10 @@ export class SimafaBatchComponent implements OnInit {
     readingProgramId: ''
   }
 
+
   userCounterReaderDictionary: IDictionaryManager[] = [];
   dataSource: IFragmentDetails[] = [];
+  _batchResponse: IBatchImportDataResponse[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
@@ -64,7 +65,8 @@ export class SimafaBatchComponent implements OnInit {
     // const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaBatchReq);
     // if (!validation)
     //   return;
-    this.importDynamicService.showResDialog(await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.simafaBatchReq), false, EN_messages.importDynamic_created)
+    this._batchResponse = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.simafaBatchReq);
+    this.assignBatchResToDataSource();
   }
   // nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -99,7 +101,6 @@ export class SimafaBatchComponent implements OnInit {
     this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
     if (!this.dataSource) return;
 
-    this.dataSource.length
     for (let index = 1; index < this.dataSource.length; index++) {
       this.simafaBatchReq.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
     }
@@ -124,7 +125,23 @@ export class SimafaBatchComponent implements OnInit {
     this.dataSource.forEach((item, index) => {
       this.simafaBatchReq.routeAndReaderIds[index].routeId = item.id;
     })
-    console.log(this.simafaBatchReq);
+  }
+  assignBatchResToDataSource = () => {
+    console.log(this._batchResponse);
+    
+    this.simafaBatchReq.routeAndReaderIds.forEach((simafaBatchItem, index) => {
+      this._batchResponse.forEach(batchRes => {
+
+        if (batchRes.fragmentDetailId === simafaBatchItem.routeId) {
+          console.log(batchRes.count);
+          console.log(batchRes.trackNumber);
+          
+          this.dataSource[index].count = batchRes.count;
+          this.dataSource[index].trackNumber = batchRes.trackNumber;
+        }
+      })
+    })
+    console.log(this.dataSource);
 
   }
 }

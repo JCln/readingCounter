@@ -758,6 +758,9 @@ export interface IFragmentDetails {
     orderDigit?: number,
     orderPersian?: string,
     isNew?: boolean
+    // for batch
+    trackNumber?: number,
+    count?: number    
 }
 export interface IFragmentDetailsByEshterakReq {
     fromEshterak: string,

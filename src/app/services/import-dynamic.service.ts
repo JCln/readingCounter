@@ -7,6 +7,7 @@ import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 
 import {
   IImportDataResponse,
   IImportDynamicDefault,
+  IImportSimafaBatchReq,
   IImportSimafaReadingProgramsReq,
   IImportSimafaSingleReq,
   IReadingProgramRes,
@@ -39,8 +40,10 @@ export class ImportDynamicService {
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
     { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
-    { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }    ,
-    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true }    
+    { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true },
+    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true },
+    { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, readonly: true },
+    { field: 'count', header: 'تعداد', isSelected: true, readonly: true }
   ]
   private _assessPreColumns: IObjectIteratation[] =
     [
@@ -137,7 +140,7 @@ export class ImportDynamicService {
       return false;
     return true;
   }
-  private NANValidation = (sth: string, message?: string): boolean => {
+  private NANValidation = (sth: string, message?: EN_messages): boolean => {
     if (this.utilsService.isNaN(sth)) {
       if (message)
         this.utilsService.snackBarMessageWarn(message);
@@ -241,6 +244,60 @@ export class ImportDynamicService {
     }
     if (this.utilsService.isNaN(val.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
+      return false;
+    }
+
+    return true;
+  }
+  validateSimafaBatch = (val: IImportSimafaBatchReq): boolean => {
+    if (this.utilsService.isNull(val.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.readingProgramId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNull(val.fragmentMasterId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+
+    if (this.utilsService.isNaN(val.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(val.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+
+    return true;
+  }
+  private validateSimafaBatchSelectedCounterReaders = (val: IImportSimafaBatchReq): boolean => {
+    return val.routeAndReaderIds.every(item => {
+      return item.counterReaderId == null
+    })
+  }
+  verificationSimafaBatch = (val: IImportSimafaBatchReq) => {
+    if (!this.validateSimafaBatchSelectedCounterReaders(val)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders)
+      return false;
+    }
+    if (!this.validateSimafaBatch(val)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders)
       return false;
     }
 

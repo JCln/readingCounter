@@ -62,6 +62,7 @@ export enum EN_messages {
     insert_number = 'مقدار عددی وارد نمایید',
     insert_fromEshterak = 'از اشتراک را وارد نمایید',
     insert_ToEshterak = 'تا اشتراک را وارد نمایید',
+    insert_allReaders = 'برای هر مسیر یک مامور قرائت مشخص نمایید',
 
     format_invalid_trackNumber = 'فرمت شماره پیگیری اشتباه است',
     format_invalid_trackNumbersLength = 'تعداد ارقام شماره پیگیری اشتباه است',
