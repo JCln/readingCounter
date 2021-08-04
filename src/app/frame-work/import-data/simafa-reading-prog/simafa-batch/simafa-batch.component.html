@@ -83,15 +83,19 @@
                     <td *ngFor="let col of columns">
                         <span class="ui-column-title">{{col.header}}</span>
                         <ng-container *ngIf="col.isBoolean; else dropdown">
-                            <mat-checkbox [disabled]="true" name="isBoolean" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                            <mat-checkbox [disabled]="true" name="isBoolean" [(ngModel)]="dataSource[col.field]">
+                            </mat-checkbox>
                         </ng-container>
                         <ng-template #dropdown>
                             <ng-container *ngIf="col.isSelectOption; else simple">
-                                <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
-                                    [(ngModel)]="simafaBatchReq.routeAndReaderIds[ri].counterReaderId"
-                                    placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id"
-                                    optionLabel="title">
-                                </p-dropdown>
+                                <div *ngIf="dataSource.counterReaderName">{{dataSource.counterReaderName}}</div>
+                                <div *ngIf="!dataSource.counterReaderName">
+                                    <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
+                                        [(ngModel)]="simafaBatchReq.routeAndReaderIds[ri].counterReaderId"
+                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id"
+                                        optionLabel="title">
+                                    </p-dropdown>
+                                </div>
                             </ng-container>
                             <ng-template #simple>
                                 {{dataSource[col.field]}}
@@ -108,7 +112,7 @@
                 موردی پیدا نشد
             </tr>
         </section>
-        <footer>
+        <footer *ngIf="!dataSource[0].trackNumber">
             <button type="submit" class="btn_1">ایجاد لیست</button>
         </footer>
     </form>

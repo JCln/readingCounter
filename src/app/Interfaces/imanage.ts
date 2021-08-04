@@ -760,7 +760,8 @@ export interface IFragmentDetails {
     isNew?: boolean
     // for batch
     trackNumber?: number,
-    count?: number    
+    count?: number,
+    counterReaderName?: string
 }
 export interface IFragmentDetailsByEshterakReq {
     fromEshterak: string,

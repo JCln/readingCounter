@@ -54,7 +54,8 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
     if (!this.importDynamicService.checkSimafaVertification(this.importSimafaReadingProgram))
       return;
     this.dataSource = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaReadingProgram, this.importSimafaReadingProgram);
-    // let AuxiliaryDataSource = JSON.parse(JSON.stringify(this.dataSource));
+    this.closeTabService.saveDataForSimafaReadingPrograms = this.dataSource;
+    
     if (!this.dataSource) {
       this._empty_message = EN_messages.notFound;
       return;
@@ -74,6 +75,13 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
     if (canRefresh) {
       this.nullSavedSource();
     }
+    console.log(this.closeTabService.saveDataForSimafaReadingPrograms);
+
+    if (this.closeTabService.saveDataForSimafaReadingPrograms) {
+      this.dataSource = this.closeTabService.saveDataForSimafaReadingPrograms;
+      this.insertSelectedColumns();
+    }
+
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     this._years = this.importDynamicService.getYears();

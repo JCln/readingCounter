@@ -344,6 +344,15 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading1.JPG';
       return;
     }
+    else if (currentRoute.includes('/wr/imp/simafa/rdpg/batch')) {
+      this.messageToShow.title = 'سیمافا افزودن لیست دسته‌ای';
+      this.messageToShow.messageOne = 'پس از انتخاب تمامی مامور های قرائت در هر سطر(مسیر) برروی ایجاد لیست کلیک کرده تا لیست مربوطه ایجاد شود';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
     else {
       this.messageToShow.title = 'راهنمایی';
       this.messageToShow.imgOne = '';

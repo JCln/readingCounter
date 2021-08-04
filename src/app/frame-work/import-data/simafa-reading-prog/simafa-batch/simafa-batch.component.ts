@@ -127,21 +127,16 @@ export class SimafaBatchComponent implements OnInit {
     })
   }
   assignBatchResToDataSource = () => {
-    console.log(this._batchResponse);
-    
     this.simafaBatchReq.routeAndReaderIds.forEach((simafaBatchItem, index) => {
       this._batchResponse.forEach(batchRes => {
 
         if (batchRes.fragmentDetailId === simafaBatchItem.routeId) {
-          console.log(batchRes.count);
-          console.log(batchRes.trackNumber);
-          
           this.dataSource[index].count = batchRes.count;
           this.dataSource[index].trackNumber = batchRes.trackNumber;
+          this.dataSource[index].counterReaderName = batchRes.counterReaderName;
         }
+        
       })
     })
-    console.log(this.dataSource);
-
   }
 }
