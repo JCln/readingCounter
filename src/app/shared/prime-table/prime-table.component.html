@@ -126,7 +126,7 @@
                     <div class="tooltip_text">مشاهده مامور(ها)</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'reading'" (click)="routeToLMAll(dataSource)">
+            <td *ngIf="_outputFileName== 'reading' || _outputFileName== 'imported'" (click)="routeToLMAll(dataSource)">
                 <span class="ui-column-title">مشاهده لیست قرائت</span>
                 <i class="tooltip p_icons pi pi-list">
                     <div class="tooltip_text_right">مشاهده لیست قرائت</div>
