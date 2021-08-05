@@ -117,8 +117,7 @@ export interface IObjectIteratation {
     icon?: string;
     isBoolean?: boolean;
     isNumber?: boolean;
-    isSelectOption?: boolean;
-    width?: string
+    isSelectOption?: boolean;    
 }
 export interface ITabWrapperDetectDynamicRoute {
     _title: string,
@@ -151,6 +150,7 @@ export enum ENThemeColor {
     dark = 1,
 }
 export enum ENSelectedColumnVariables {
+    selectedSimafaBatch = '_simafaBatch',
     selectedTracks = 'menuDefault',
     selectedlastStates = 'lastStates',
     selectedUsersAll = '_usersAll',

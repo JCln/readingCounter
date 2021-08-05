@@ -53,8 +53,7 @@
         </tr>
     </ng-template>
 
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns"
-        let-expanded="expanded" let-index="rowIndex">
+    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-index="rowIndex">
         <tr>
             <td *ngFor="let col of columns">
                 <span class="ui-column-title">{{col.header}}</span>

@@ -87,7 +87,7 @@ export enum EN_messages {
     confirm_remove = ' آیا از حذف  مورد اطمینان دارید؟',
     confirm_createList = ' آیا لیست صادر شود؟',
     importDynamic_created = 'لیست صادر شد',
-    import_simafaBatch = 'لیست صادر شده بصورت زیر است.',
+    import_simafaBatch = 'لیست صادر شده بصورت زیر است:',
     import_NoRouteAvailable = 'مسیری برای ایجاد وجود ندارد',
     confirm_send = ' آیا از ارسال موارد اطمینان دارید؟',
     reson_delete_backtoImported = 'علت بازگشت به صادر شده',
