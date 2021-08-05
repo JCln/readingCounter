@@ -38,6 +38,10 @@
     }
   }
 
+  .p-datatable .p-datatable-tbody>tr>td {
+    word-break: break-word;
+  }
+
   .p-inputtext {
     background: var(--white);
     border: 1px solid var(--blue_400);

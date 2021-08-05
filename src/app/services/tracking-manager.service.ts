@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IEditTracking, IOutputManager, ITracking } from 'interfaces/imanage';
@@ -115,7 +116,8 @@ export class TrackingManagerService {
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private _location: Location,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   getDataSource = (method: ENInterfaces): Promise<any> => {
@@ -345,5 +347,8 @@ export class TrackingManagerService {
       if (items.isSelected)
         return items
     })
+  }
+  routeToLMAll = (row: ITracking) => {
+    this.router.navigate(['wr/m/l/all', false, row.id]);
   }
 }

@@ -152,4 +152,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+  routeToLMAll = (row: ITracking) => {
+    this.trackingManagerService.routeToLMAll(row);
+  }
 }

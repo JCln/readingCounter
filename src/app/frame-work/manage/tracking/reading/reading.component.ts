@@ -40,7 +40,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
   }
   routeToLMAll = (row: ITracking) => {
-    this.router.navigate(['wr/m/l/all', false, row.id]);
+    this.trackingManagerService.routeToLMAll(row);
   }
   private rowToImported = async (row: ITracking, desc: string, rowIndex: number) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row.id, desc);
