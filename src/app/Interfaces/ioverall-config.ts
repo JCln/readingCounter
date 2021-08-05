@@ -118,6 +118,7 @@ export interface IObjectIteratation {
     isBoolean?: boolean;
     isNumber?: boolean;
     isSelectOption?: boolean;
+    width?: string
 }
 export interface ITabWrapperDetectDynamicRoute {
     _title: string,

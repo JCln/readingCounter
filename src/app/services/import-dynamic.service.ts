@@ -41,7 +41,7 @@ export class ImportDynamicService {
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
     { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
     { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true },
-    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true },
+    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true, width: '7rem' },
     { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, readonly: true },
     { field: 'count', header: 'تعداد', isSelected: true, readonly: true }
   ]

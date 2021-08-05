@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
 import { IBatchImportDataResponse, IImportSimafaBatchReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -41,6 +42,7 @@ export class SimafaBatchComponent implements OnInit {
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
+  _successImportBatchMessage: string = '';
   subscription: Subscription[] = [];
 
   constructor(
@@ -67,6 +69,7 @@ export class SimafaBatchComponent implements OnInit {
     //   return;
     this._batchResponse = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.simafaBatchReq);
     this.assignBatchResToDataSource();
+    this._successImportBatchMessage = EN_messages.import_simafaBatch;
   }
   // nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -135,7 +138,7 @@ export class SimafaBatchComponent implements OnInit {
           this.dataSource[index].trackNumber = batchRes.trackNumber;
           this.dataSource[index].counterReaderName = batchRes.counterReaderName;
         }
-        
+
       })
     })
   }
