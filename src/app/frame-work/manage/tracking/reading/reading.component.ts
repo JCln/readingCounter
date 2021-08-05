@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/imanage';
@@ -32,15 +31,14 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     public trackingManagerService: TrackingManagerService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
-    public outputManagerService: OutputManagerService,
-    private router: Router
+    public outputManagerService: OutputManagerService
   ) { }
 
   routeToLMPayDay = (row: ITracking) => {
     this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
   }
   routeToLMAll = (row: ITracking) => {
-    this.router.navigate(['wr/m/l/all', false, row.id]);
+    this.trackingManagerService.routeToLMAll(row);
   }
   private rowToImported = async (row: ITracking, desc: string, rowIndex: number) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row.id, desc);

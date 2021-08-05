@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
 import { IBatchImportDataResponse, IImportSimafaBatchReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
 
@@ -14,7 +14,7 @@ import { InteractionService } from 'services/interaction.service';
   templateUrl: './simafa-batch.component.html',
   styleUrls: ['./simafa-batch.component.scss']
 })
-export class SimafaBatchComponent implements OnInit {
+export class SimafaBatchComponent implements OnInit, OnDestroy, AfterViewInit {
   _fragmentDetailsEshterak: IFragmentDetailsByEshterakReq = {
     fromEshterak: null,
     toEshterak: null,
@@ -41,14 +41,17 @@ export class SimafaBatchComponent implements OnInit {
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
+  _successImportBatchMessage: string = '';
+  _canShowImportBatchButton: boolean = true;
   subscription: Subscription[] = [];
 
   constructor(
     private interactionService: InteractionService,
     public importDynamicService: ImportDynamicService,
-    private closeTabService: CloseTabService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.getRouteParams();
+  }
 
   getRouteParams = () => {
     this.simafaBatchReq.readingProgramId = this.route.snapshot.paramMap.get('id');
@@ -60,30 +63,48 @@ export class SimafaBatchComponent implements OnInit {
     this._fragmentDetailsEshterak.toEshterak = this.route.snapshot.paramMap.get('toEshterak');
     this._fragmentDetailsEshterak.zoneId = parseInt(this.route.snapshot.paramMap.get('zoneId'));
   }
+  changeStatusAfterSuccess = () => {
+    this._successImportBatchMessage = EN_messages.import_simafaBatch;
+    this._canShowImportBatchButton = false;
+  }
   connectToServer = async () => {
     console.log(this.simafaBatchReq);
-    // const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaBatchReq);
-    // if (!validation)
-    //   return;
-    this._batchResponse = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.simafaBatchReq);
-    this.assignBatchResToDataSource();
-  }
-  // nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      // this.nullSavedSource();
+    if (!this.dataSource || this.dataSource.length == 0) {
+      this.importDynamicService.noRouteToImportMessage();
+      return;
     }
-    this.getRouteParams();
-    this.getApiCalls();
+    const validation = this.importDynamicService.verificationSimafaBatch(this.simafaBatchReq);
+    if (!validation)
+      return;
+    this._batchResponse = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.simafaBatchReq);
+    this.insertColumnsToTableAfterSuccess();
+    this.assignBatchResToDataSource();
+    this.insertSelectedColumns();
+    this.changeStatusAfterSuccess();
+    scrollTo(0, 0);
+  }
+  classWrapper = async () => {
+    this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
+    if (!this.dataSource) return;
+
+    for (let index = 1; index < this.dataSource.length; index++) {
+      this.simafaBatchReq.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
+    }
+    this.simafaBatchReq.fragmentMasterId = this.dataSource[0].fragmentMasterId;
+    this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaBatchReq.zoneId);
+
+    this.insertSelectedColumns();
+    this.assingIdToRouteId();
   }
   ngOnInit() {
+    this.columnsToDefault();
     this.classWrapper();
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/imp/simafa/rdpg/batch') {
-          this.classWrapper(true);
+        if (res.includes('/wr/imp/simafa/rdpg/batch')) {
+          this.classWrapper();
         }
       }
     })
@@ -97,19 +118,7 @@ export class SimafaBatchComponent implements OnInit {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  getApiCalls = async () => {
-    this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
-    if (!this.dataSource) return;
-
-    for (let index = 1; index < this.dataSource.length; index++) {
-      this.simafaBatchReq.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
-    }
-    this.simafaBatchReq.fragmentMasterId = this.dataSource[0].fragmentMasterId;
-    this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaBatchReq.zoneId);
-
-    this.insertSelectedColumns();
-    this.assingIdToRouteId();
-  }
+  refreshTable = () => this.classWrapper();
   insertSelectedColumns = () => {
     this._selectCols = this.importDynamicService.columnSimafaBatch();
     this._selectedColumns = this.importDynamicService.customizeSelectedColumns(this._selectCols);
@@ -135,8 +144,15 @@ export class SimafaBatchComponent implements OnInit {
           this.dataSource[index].trackNumber = batchRes.trackNumber;
           this.dataSource[index].counterReaderName = batchRes.counterReaderName;
         }
-        
+
       })
     })
+  }
+  insertColumnsToTableAfterSuccess = () => {
+    this.importDynamicService.columnSetSimafaBatch({ field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, readonly: true })
+    this.importDynamicService.columnSetSimafaBatch({ field: 'count', header: 'تعداد', isSelected: true, readonly: true })
+  }
+  columnsToDefault = () => {
+    this.importDynamicService.columnRemoveSimafaBatch();
   }
 }

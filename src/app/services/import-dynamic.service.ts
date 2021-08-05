@@ -12,7 +12,7 @@ import {
   IImportSimafaSingleReq,
   IReadingProgramRes,
 } from 'interfaces/inon-manage';
-import { IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
@@ -24,6 +24,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ImportDynamicService {
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
   importDynamicValue: IImportDynamicDefault;
   private _assessPre: IAssessPreDisplayDtoSimafa;
   private _simafaSingleReq: IReadingProgramRes;
@@ -39,11 +40,9 @@ export class ImportDynamicService {
     { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
-    { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
-    { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true },
-    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true },
-    { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, readonly: true },
-    { field: 'count', header: 'تعداد', isSelected: true, readonly: true }
+    { field: 'orderDigit', header: 'ترتیب', isSelected: false, readonly: true },
+    { field: 'orderPersian', header: 'فارسی', isSelected: false, readonly: true, isBoolean: true },
+    { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true }
   ]
   private _assessPreColumns: IObjectIteratation[] =
     [
@@ -122,6 +121,16 @@ export class ImportDynamicService {
   columnSimafaBatch = (): IObjectIteratation[] => {
     return this._simafaBatch;
   }
+  columnSetSimafaBatch = (val: IObjectIteratation) => {
+    this._simafaBatch.push(val);
+  }
+  columnRemoveSimafaBatch = () => {
+    const a = this._simafaBatch.filter(item => {
+      return !(item.field == 'trackNumber' || item.field == 'count')
+    })
+    this._simafaBatch = a;
+  }
+
   persentCheck = (val: number): boolean => {
     return this.utilsService.persentCheck(val);
   }
@@ -140,6 +149,8 @@ export class ImportDynamicService {
       return false;
     return true;
   }
+  noRouteToImportMessage = () => this.utilsService.snackBarMessageWarn(EN_messages.import_NoRouteAvailable);
+
   private NANValidation = (sth: string, message?: EN_messages): boolean => {
     if (this.utilsService.isNaN(sth)) {
       if (message)
@@ -286,18 +297,17 @@ export class ImportDynamicService {
 
     return true;
   }
-  private validateSimafaBatchSelectedCounterReaders = (val: IImportSimafaBatchReq): boolean => {
+  private validateSimafaBatchHaveSelectedCounterReaders = (val: IImportSimafaBatchReq): boolean => {
     return val.routeAndReaderIds.every(item => {
-      return item.counterReaderId == null
+      return item.counterReaderId !== null
     })
   }
   verificationSimafaBatch = (val: IImportSimafaBatchReq) => {
-    if (!this.validateSimafaBatchSelectedCounterReaders(val)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders)
+    if (!this.validateSimafaBatchHaveSelectedCounterReaders(val)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders);
       return false;
     }
     if (!this.validateSimafaBatch(val)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders)
       return false;
     }
 

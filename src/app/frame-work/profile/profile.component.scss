@@ -7,7 +7,7 @@
   grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
   direction: rtl;
   justify-content: center;
-  gap: 3rem;
+  gap: $font_2;
 }
 
 main {
@@ -64,7 +64,7 @@ main {
 
 .title {
   color: var(--blue_400);
-  text-align: right;
+  text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
 }
