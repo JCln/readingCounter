@@ -140,6 +140,8 @@ export class ImportDynamicService {
       return false;
     return true;
   }
+  noRouteToImportMessage = () => this.utilsService.snackBarMessageWarn(EN_messages.import_NoRouteAvailable);
+
   private NANValidation = (sth: string, message?: EN_messages): boolean => {
     if (this.utilsService.isNaN(sth)) {
       if (message)
@@ -286,18 +288,17 @@ export class ImportDynamicService {
 
     return true;
   }
-  private validateSimafaBatchSelectedCounterReaders = (val: IImportSimafaBatchReq): boolean => {
+  private validateSimafaBatchHaveSelectedCounterReaders = (val: IImportSimafaBatchReq): boolean => {
     return val.routeAndReaderIds.every(item => {
-      return item.counterReaderId == null
+      return item.counterReaderId !== null
     })
   }
   verificationSimafaBatch = (val: IImportSimafaBatchReq) => {
-    if (!this.validateSimafaBatchSelectedCounterReaders(val)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders)
+    if (!this.validateSimafaBatchHaveSelectedCounterReaders(val)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders);
       return false;
     }
     if (!this.validateSimafaBatch(val)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_allReaders)
       return false;
     }
 

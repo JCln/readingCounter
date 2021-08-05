@@ -39,7 +39,9 @@
             </div>
         </section>
 
-        <h2 *ngIf="_successImportBatchMessage.toString().trim().length !== 0">{{_successImportBatchMessage}}</h2>
+        <h2 *ngIf="_successImportBatchMessage.toString().trim().length !== 0">{{_successImportBatchMessage}}
+            <i class="pi pi-check p_icons _circle_border"></i>
+        </h2>
         <p-table id="tdm" sortField="insertDateJalali" [columns]="selectedColumns" [value]="dataSource"
             [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
             currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
@@ -56,9 +58,9 @@
                     </div>
                     <div class="left_side">
 
-                        <!-- <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i> -->
+                        <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                            <div class="tooltip_text">بارگیری مجدد جدول</div>
+                        </i>
                     </div>
                 </div>
             </ng-template>
@@ -113,7 +115,7 @@
                 موردی پیدا نشد
             </tr>
         </section>
-        <footer *ngIf="!dataSource[0].trackNumber">
+        <footer>
             <button type="submit" class="btn_1">ایجاد لیست</button>
         </footer>
     </form>

@@ -64,9 +64,13 @@ export class SimafaBatchComponent implements OnInit {
   }
   connectToServer = async () => {
     console.log(this.simafaBatchReq);
-    // const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaBatchReq);
-    // if (!validation)
-    //   return;
+    if (!this.dataSource || this.dataSource.length == 0) {
+      this.importDynamicService.noRouteToImportMessage();
+      return;
+    }
+    const validation = this.importDynamicService.verificationSimafaBatch(this.simafaBatchReq);
+    if (!validation)
+      return;
     this._batchResponse = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.simafaBatchReq);
     this.assignBatchResToDataSource();
     this._successImportBatchMessage = EN_messages.import_simafaBatch;
@@ -100,6 +104,7 @@ export class SimafaBatchComponent implements OnInit {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
+  refreshTable = () => this.classWrapper();
   getApiCalls = async () => {
     this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
     if (!this.dataSource) return;

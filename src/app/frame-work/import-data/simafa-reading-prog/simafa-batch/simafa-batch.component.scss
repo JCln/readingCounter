@@ -1,4 +1,5 @@
 @import 'primeNG';
+@import 'tooltip';
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
@@ -71,11 +72,20 @@ section.dynamic_content {
 }
 
 h2 {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+
   padding: $font_xs;
   margin: $font_05;
-  color: var(--blue_400);
-  border: 1px solid var(--blue_400);
+  background: var(--white);
+  color: var(--green_500);
+  border: 1px solid var(--green_500);
   border-radius: $border_5;
+
+  i {
+    margin-left: $font_xs;
+  }
 }
 
 h3 {
