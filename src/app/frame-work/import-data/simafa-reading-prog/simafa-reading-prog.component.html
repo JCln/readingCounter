@@ -103,16 +103,28 @@
                 <span class="ui-column-title">{{col.header}}</span>
                 {{dataSource[col.field]}}
             </td>
-            <td (click)="importDynamicService.routeToSimafaSingle(dataSource)">
+            <td *ngIf="dataSource.canContinue" (click)="importDynamicService.routeToSimafaSingle(dataSource)">
                 <span class="ui-column-title">تکی</span>
                 <i class="tooltip p_icons pi pi-list">
                     <div class="tooltip_text_right">تکی</div>
                 </i>
             </td>
-            <td (click)="routeToBatch(dataSource)">
+            <td *ngIf="dataSource.canContinue" (click)="routeToBatch(dataSource)">
                 <span class="ui-column-title">دسته‌ای</span>
                 <i class="tooltip p_icons pi pi-list">
                     <div class="tooltip_text_right">دسته‌ای</div>
+                </i>
+            </td>
+            <td *ngIf="!dataSource.canContinue">
+                <span class="ui-column-title">لیست قبلا صادر شده</span>
+                <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
+                    <div class="tooltip_text">لیست قبلا صادر شده</div>
+                </i>
+            </td>
+            <td *ngIf="!dataSource.canContinue">
+                <span class="ui-column-title">لیست قبلا صادر شده</span>
+                <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
+                    <div class="tooltip_text">لیست قبلا صادر شده</div>
                 </i>
             </td>
         </tr>

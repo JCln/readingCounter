@@ -160,7 +160,8 @@ export interface IReadingProgramRes {
     toEshterak: string,
     listNumber: string,
     year: number,
-    readingPeriodId: number
+    readingPeriodId: number,
+    canContinue: boolean
 }
 export interface IChangePassword {
     oldPassword: string,
