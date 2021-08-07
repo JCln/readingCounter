@@ -10,13 +10,13 @@ import { UtilsService } from 'services/utils.service';
 })
 export class ConfirmTextDialogComponent {
   userInputText: string = '';
+  _selectedDate: string = '';
 
   constructor(
     private mdDialogRef: MatDialogRef<ConfirmTextDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private utilsService: UtilsService
-  ) {
-  }
+  ) { }
 
   public confirm() {
     if (this.utilsService.isNullTextValidation(this.userInputText)) {
@@ -32,10 +32,21 @@ export class ConfirmTextDialogComponent {
     }
   }
   public confirmWithoutText = () => {
+    if (this.data.isSelectableDate) {
+      if (this.utilsService.isNull(this._selectedDate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
+        return;
+      }
+      this.mdDialogRef.close(this._selectedDate);
+      return;
+    }
     this.mdDialogRef.close(true);
   }
   public cancel() {
     this.mdDialogRef.close();
+  }
+  receiveFromDateJalali = ($event: string) => {
+    this._selectedDate = $event;
   }
 
 }

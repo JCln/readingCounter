@@ -3,6 +3,12 @@
 <input *ngIf="data.isInput" class="input_1" type="text" placeholder="توضیحات را وارد نمایید"
     [(ngModel)]="userInputText">
 
+<div *ngIf="data?.isSelectableDate"
+    style="min-height: 20rem;display: flex; justify-content: center;min-height: 20rem;transform: translateX(-16%);">
+    <app-date-jalali name="date" (dateJalEvent)="receiveFromDateJalali($event)">
+    </app-date-jalali>
+</div>
+
 <mat-dialog-actions>
     <button class="btn_2" (click)="cancel()">بازگشت</button>
     <button *ngIf="data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"

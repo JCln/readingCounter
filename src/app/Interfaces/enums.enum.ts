@@ -63,6 +63,7 @@ export enum EN_messages {
     insert_fromEshterak = 'از اشتراک را وارد نمایید',
     insert_ToEshterak = 'تا اشتراک را وارد نمایید',
     insert_allReaders = 'برای هر مسیر یک مامور قرائت مشخص نمایید',
+    insert_nextBazdidDate = 'تاریخ بازدید بعدی را مشخص نمایید',
 
     format_invalid_trackNumber = 'فرمت شماره پیگیری اشتباه است',
     format_invalid_trackNumbersLength = 'تعداد ارقام شماره پیگیری اشتباه است',
@@ -94,7 +95,10 @@ export enum EN_messages {
     reason_forceOffload = 'علت اتمام قرائت(تخلیه اضطراری)',
     reason_deleteRoute = 'علت حذف مسیر',
     reason_backToPrev = 'علت بازگشت به مرحله قبلی',
-
+    toImported = 'علت بازگشت به صادر شده',
+    toReading = 'علت بازگشت به درحال قرائت',
+    toOffloaded = 'علت بازگشت به بارگذاری شده',
+    toPrevious = 'علت بازگشت به مرحله قبلی',
 
     call_supportGroup = 'خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید'
 }

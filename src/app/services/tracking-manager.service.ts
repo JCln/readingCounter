@@ -6,7 +6,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IEditTracking, IOutputManager, ITracking } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENSelectedColumnVariables, ENTrackingMessage, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { Converter } from 'src/app/classes/converter';
 
@@ -190,6 +190,17 @@ export class TrackingManagerService {
 
     });
   }
+  downloadOutputSingleWithENV = (single: ITracking, date: string): Promise<any> => {
+    const a: any = {
+      trackingId: single.id,
+      description: date
+    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBLOBOBSERVE(ENInterfaces.OutputSINGLE, a).subscribe(res => {
+        resolve(res);
+      })
+    });
+  }
   // 
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
@@ -211,7 +222,7 @@ export class TrackingManagerService {
       })
     })
   }
-  TESTbackToConfirmDialog = (trackNumber: string, message: ENTrackingMessage): Promise<any> => {
+  TESTbackToConfirmDialog = (trackNumber: string, message: EN_messages): Promise<any> => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: '19rem',
@@ -224,6 +235,22 @@ export class TrackingManagerService {
         if (desc) {
           this.migrateOrRemoveTask(ENInterfaces.trackingToREADING, trackNumber, desc);
           resolve(true);
+        }
+      })
+    })
+  }
+  hasNextBazdidConfirmDialog = (message: EN_messages): Promise<any> => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '21rem',
+        data: {
+          title: message,
+          isSelectableDate: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
         }
       })
     })
@@ -261,9 +288,6 @@ export class TrackingManagerService {
   }
   backToParent = () => {
     this.utilsService.routeTo('/wr/m/s/fwu');
-  }
-  routeTo = (route: string, UUID: string) => {
-    this.utilsService.routeToByParams(route, UUID);
   }
   selectedItems = (_selectors: any[]): any[] => {
     const a = [];
@@ -358,5 +382,11 @@ export class TrackingManagerService {
   }
   routeToLMAll = (row: ITracking) => {
     this.router.navigate(['wr/m/l/all', false, row.id]);
+  }
+  routeToOffloadModify = (dataSource: ITracking) => {
+    this.router.navigate(['wr/m/l/all', true, dataSource.id]);
+  }
+  routeTo = (route: string, UUID: string) => {
+    this.utilsService.routeToByParams(route, UUID);
   }
 }
