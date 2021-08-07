@@ -29,12 +29,8 @@
     border: 1px solid var(--gray_200);
   }
 
-  .p-datatable .p-datatable-tbody>tr>td {
-    line-break: anywhere;
-  }
-
   .p-datatable .p-datatable-tbody>tr {
-    background-color: var(--gray_100);
+    background-color: var(--white);
     color: var(--gray_800);
 
     &:nth-child(even) {
