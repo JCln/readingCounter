@@ -38,7 +38,7 @@
 </section>
 
 <p-table *ngIf="!canShowGraph" sortField="insertDateJalali" [columns]="defColumns" [value]="changeHsty" dir="rtl"
-    styleClass="p-datatable-responsive" [responsive]="true">
+    styleClass="p-datatable-responsive" [responsive]="true" editMode="row" dataKey="id">
 
     <ng-template pTemplate="caption">
         <th>
@@ -69,20 +69,36 @@
                 {{col.header}}
             </th>
             <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-changeHsty let-columns="columns">
-        <tr>
+    <ng-template pTemplate="body" let-changeHsty let-editing="editing" let-columns="columns">
+        <tr [pEditableRow]="changeHsty">
             <td *ngFor="let col of columns">
                 <span class="ui-column-title">{{col.header}}</span>
-                <ng-container
-                    *ngIf="changeHsty[col.field] === true || changeHsty[col.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                <ng-container *ngIf="col.field === 'seen'; else elseTemplate">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <mat-checkbox [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <mat-checkbox [disabled]="true" [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                        </ng-template>
+                    </p-cellEditor>
                 </ng-container>
                 <ng-template #elseTemplate>
                     {{changeHsty[col.field]}}
                 </ng-template>
+            </td>
+            <td>
+                <span class="ui-column-title">ویرایش</span>
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(changeHsty)"
+                    class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(changeHsty)" class="_save pi pi-check"></i>
+                <i *ngIf="editing" pCancelEditableRow class="_cancel pi pi-times"></i>
             </td>
             <td *ngIf="changeHsty.hasMap" (click)="showInMap(dataSource.trackNumber , changeHsty.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>

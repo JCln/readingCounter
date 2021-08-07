@@ -156,6 +156,14 @@ export class TrackingManagerService {
       })
     });
   }
+  postEditState = (method: ENInterfaces, val: object) => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, val).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    });
+  }
   // Output manager 
   downloadOutputDBF = (dbfData: ITracking | IOutputManager): Promise<any> => {
     dbfData.fromDate = Converter.persianToEngNumbers(dbfData.fromDate);

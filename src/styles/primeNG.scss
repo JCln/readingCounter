@@ -286,6 +286,19 @@
   .footer {
     text-align: center;
   }
+
+  p-cellEditor {
+    input {
+      font-size: $font_xs;
+      font-weight: 600;
+      width: 100%;
+      border: 1px solid var(--orange_500);
+      box-shadow: 0 0 3px 0 var(--orange_500);
+      border-radius: 10px;
+      padding: .3rem;
+      color: var(--blue_700);
+    }
+  }
 }
 
 .tooltip {
@@ -317,17 +330,6 @@
   &:hover {
     background-color: rgba(var(--red_600), 0.3);
   }
-}
-
-input {
-  font-size: $font_xs;
-  font-weight: 600;
-  width: 100%;
-  border: 1px solid var(--orange_500);
-  box-shadow: 0 0 3px 0 var(--orange_500);
-  border-radius: 10px;
-  padding: .3rem;
-  color: var(--blue_700);
 }
 
 ._edit,
