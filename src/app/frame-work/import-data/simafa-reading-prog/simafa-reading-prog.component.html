@@ -103,7 +103,7 @@
                 <span class="ui-column-title">{{col.header}}</span>
                 {{dataSource[col.field]}}
             </td>
-            <td *ngIf="dataSource.canContinue" (click)="importDynamicService.routeToSimafaSingle(dataSource)">
+            <td *ngIf="dataSource.canContinue" (click)="routeToSingle(dataSource)">
                 <span class="ui-column-title">تکی</span>
                 <i class="tooltip p_icons pi pi-list">
                     <div class="tooltip_text_right">تکی</div>

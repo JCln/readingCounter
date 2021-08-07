@@ -106,7 +106,7 @@ export class ImportDynamicService {
     private dialog: MatDialog,
     private router: Router,
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService    
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   columnAssessPre = (): IObjectIteratation[] => {

@@ -45,7 +45,7 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public importDynamicService: ImportDynamicService,
+    private importDynamicService: ImportDynamicService,
     public outputManagerService: OutputManagerService,
     public route: ActivatedRoute
   ) { }
@@ -55,7 +55,7 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
       return;
     this.dataSource = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaReadingProgram, this.importSimafaReadingProgram);
     this.closeTabService.saveDataForSimafaReadingPrograms = this.dataSource;
-    
+
     if (!this.dataSource) {
       this._empty_message = EN_messages.notFound;
       return;
@@ -129,4 +129,17 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
 
     this.importDynamicService.routeToSimafaBatch(dataSource);
   }
+  routeToSingle = (dataSource: any) => {
+    if (typeof dataSource.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSource.zoneId)
+          dataSource.zoneId = item.id
+      })
+    } else {
+      dataSource.zoneId = dataSource.zoneId['id'];
+    }
+
+    this.importDynamicService.routeToSimafaSingle(dataSource);
+  }
+
 }
