@@ -111,6 +111,8 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.fragmentManagerService.verificationMaster(dataSource))
       return;
     const a = await this.fragmentManagerService.addFragmentMaster(dataSource);
+    console.log(a);
+    
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();

@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/imanage';
-import { ENTrackingMessage } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
+import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -26,8 +27,8 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,
-    private router: Router,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private envService: EnvService
   ) {
   }
 
@@ -56,6 +57,10 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   downloadOutputSingle = async (row: ITracking) => {
+    if (this.envService.hasNextBazdid) {
+      this.hasNextBazdid(row);
+      return;
+    }
     const a = await this.trackingManagerService.downloadOutputSingle(row);
     this.outputManagerService.downloadFile(a);
   }
@@ -87,10 +92,17 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   routeToOffloadModify = (dataSource: ITracking) => {
-    this.router.navigate(['wr/m/l/all', true, dataSource.id]);
+    this.trackingManagerService.routeToOffloadModify(dataSource);
   }
   backToReading = async (rowDataAndIndex: object) => {
-    if (await this.trackingManagerService.TESTbackToConfirmDialog(rowDataAndIndex['dataSource'], ENTrackingMessage.toReading))
+    if (await this.trackingManagerService.TESTbackToConfirmDialog(rowDataAndIndex['dataSource'], EN_messages.toReading))
       this.refetchTable(rowDataAndIndex['ri']);
+  }
+  hasNextBazdid = async (row: ITracking) => {
+    const hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
+    if (hasbazdid) {
+      const a = await this.trackingManagerService.downloadOutputSingleWithENV(row, hasbazdid);
+      this.outputManagerService.downloadFile(a);
+    }
   }
 }

@@ -6,11 +6,12 @@
     [_checkUpName]="'imported'"
     [_sortField]="'insertDateJalali'"
     [_rowsPerPage]="[20,50,100, 500, 1000]"
-    [_numberOfExtraColumns]="[1, 2]"
+    [_numberOfExtraColumns]="[1, 2 , 3]"
     [_sessionName]="'imported-session'"
     [_selectedColumnsToRemember]="'selectedTracks'"
     (refreshedTable)="refreshTable()"
     (showedMoreDetails)="showMoreDetails($event)"    
     (firstConfirmedDialog)="firstConfirmDialog($event)"
+    (routedToLMAll)="routeToLMAll($event)"
  > 
 </app-prime-table>

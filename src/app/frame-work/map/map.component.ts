@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IListManagerPDXY, IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/imanage';
-import { Imap, IMapTrackDesc } from 'interfaces/imap.js';
+import { Imap } from 'interfaces/imap.js';
 import { ITHV } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
@@ -57,7 +57,6 @@ L.Marker.prototype.options.icon = simpleIcon;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
-  private extrasNavigation: IReadingReportGISReq;
   extraDataSourceRes: IReadingReportGISResponse[] = [];
 
   private map: L.Map;
@@ -69,7 +68,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   isShowMap: boolean = true;
   canShowOptionsButton: boolean = false;
   isShowMapConfig: boolean = false;
-  subscription: Subscription;
+  subscription: Subscription[] = [];
 
   _selectedOrderId: number = 0;
   orderGroup: ITHV[] = [
@@ -85,6 +84,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ]
   _isOrderInAsc: boolean = false;
+  onShowCounterReader = {
+    trackNumber: '', day: ''
+  }
+  _isCluster: boolean;
 
   constructor(
     public mapService: MapService,
@@ -96,9 +99,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     private utilsService: UtilsService,
     private envService: EnvService,
     private dateJalaliService: DateJalaliService
-  ) {
-    this.extrasNavigation = this.getRouterExtras();
-  }
+  ) { }
+
   private getMapItems = () => {
     this.mapItems = this.mapItemsService.getMapItems();
   }
@@ -145,45 +147,61 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       }, i * delay);
     })
   }
-  private getRouteParams = (): IMapTrackDesc => {
-    const a = this.route.snapshot.paramMap.get('trackNumber');
-    const b = this.route.snapshot.paramMap.get('day');
-    return { trackNumber: a, day: b };
-  }
-  private classWrapper = async () => {
-    const a: IMapTrackDesc = this.getRouteParams();
-    if (this.utilsService.isNull(a.trackNumber))
-      return;
+  private classWrapper = async (a: any) => {
     this.canShowOptionsButton = true;
     this.markersDataSourceXY = await this.mapService.getPointerMarks(a);
     this.mapConfigOptions(0);
   }
-  private classWrapperWithExtras = async () => {
-    this.extraDataSourceRes = await this.readingReportManagerService.postRRManager('wr/rpts/mam/gis', ENInterfaces.ListToGis, 'readingReportGISReq');
+  private makeClusterRouteObject = (): IReadingReportGISReq => {
+    this._isCluster = this.route.snapshot.paramMap.get('isCluster') === 'true' ? true : false;
+    return {
+      zoneId: parseInt(this.route.snapshot.paramMap.get('zoneId')),
+      isCounterState: this.route.snapshot.paramMap.get('isCounterState') === 'true' ? true : false,
+      counterStateId: parseInt(this.route.snapshot.paramMap.get('counterStateId')),
+      isKarbariChange: this.route.snapshot.paramMap.get('isKarbariChange') === 'true' ? true : false,
+      isAhadChange: this.route.snapshot.paramMap.get('isAhadChange') === 'true' ? true : false,
+      isForbidden: this.route.snapshot.paramMap.get('isForbidden') === 'true' ? true : false,
+      readingPeriodId: parseInt(this.route.snapshot.paramMap.get('readingPeriodId')),
+      year: parseInt(this.route.snapshot.paramMap.get('year')),
+      fromDate: this.route.snapshot.paramMap.get('fromDate'),
+      toDate: this.route.snapshot.paramMap.get('toDate'),
+      isCluster: this.route.snapshot.paramMap.get('isCluster') === 'true' ? true : false,
+    }
+  }
+  private classWrapperCluster = async () => {
+    this.extraDataSourceRes = await this.readingReportManagerService.postRRManagerOnMap(ENInterfaces.ListToGis, this.makeClusterRouteObject());
     if (!this.extraDataSourceRes.length) {
       this.utilsService.snackBarMessageFailed(EN_messages.notFound);
       return;
     }
-    this.mapService.hasMarkerCluster(this.extrasNavigation) ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes);
+    this._isCluster ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes);
+  }
+  private getRouteParams = () => {
+    this.onShowCounterReader.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+    this.onShowCounterReader.day = this.route.snapshot.paramMap.get('day');
+
+    if (!this.utilsService.isNull(this.onShowCounterReader.day))
+      this.classWrapper(this.onShowCounterReader);
+    else
+      this.classWrapperCluster();
   }
   ngOnInit(): void {
     this.getMapItems();
     this.initMap();
-    if (this.extrasNavigation) {
-      this.classWrapperWithExtras();
-    }
-    else {
-      this.classWrapper();
-    }
-    this.addButtonsToLeaflet();
+    this.getRouteParams();
+    this.mapService.serviceInstantiate(this.map);
+    this.mapService.addButtonsToLeaflet();
+    this.removeLayerButtonLeaflet();
+    this.myLocationButtonLeaflet();
   }
   ngAfterViewInit(): void {
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
+    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res === '/wr' || res === '/wr/db')
           this.ngOnInit();
       }
     })
+    )
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
     if (lat === 0 || lag === 0)
@@ -193,18 +211,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.map.flyTo([(lat), (lag)], zoom);
   }
-  private addButtonsToLeaflet = () => {
-    this.mapService.serviceInstantiate(this.map);
-    this.mapService.addButtonsToLeaflet();
-    this.removeLayerButtonLeaflet();
-    this.myLocationButtonLeaflet();
-  }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
+    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-
   // get X Y positions
   private getXYPosition = (method: string, xyData: any, delay?: number) => {
     xyData.map((items, i) => {
@@ -242,7 +253,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByDatePersian) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByDateDESCPersian)
     }
 
-    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay + 10);
+    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay + 1);
     this.leafletDrawPolylines(delay);
   }
   private extrasConfigOptions = (xyData: any) => {
@@ -303,12 +314,5 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.map.on('locationfound', this.findMyLocationLeaflet);
       this.map.on('locationerror', this.onLocationError);
     }, 'مکان من').addTo(this.map);
-  }
-  getRouterExtras = (): any => {
-    try {
-      return this.router.getCurrentNavigation().extras.state.test;
-    } catch (error) {
-      console.error(error);
-    }
   }
 }

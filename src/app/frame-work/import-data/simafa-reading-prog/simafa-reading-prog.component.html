@@ -1,4 +1,4 @@
-<main class="main">
+<main *ngIf="route.children.length === 0" class="main">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="static_part">
             <section class="content">
@@ -46,8 +46,7 @@
     </form>
 </main>
 
-
-<app-prime-table *ngIf="dataSource.length"     
+<app-prime-table *ngIf="dataSource.length && route.children.length === 0"     
 [_selectCols]="_selectCols" 
 [_selectedColumns]="selectedColumns"
 [dataSource]="dataSource" 
@@ -57,3 +56,5 @@
 (refreshedTable)="refreshTable()"
 > 
 </app-prime-table>
+
+<router-outlet></router-outlet>

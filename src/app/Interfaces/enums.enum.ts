@@ -1,9 +1,7 @@
 export enum EN_messages {
     passwords_notFetch = 'تعداد ارقام گذرواژه با تایید آن برابر نیست',
     password_notExactly = 'گذرواژه با تایید آن یکی باید باشد',
-    sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد',
-    format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
-    format_invalid = 'فرمت ناصحیح است',
+    sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد',    
     lessThan_eshterak = 'از اشتراک کمتر از تا اشتراک است!',
     lessThan_rate = 'از نرخ کمتر از تا نرخ است!',
     percent_pictures = 'درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد',
@@ -64,11 +62,15 @@ export enum EN_messages {
     insert_number = 'مقدار عددی وارد نمایید',
     insert_fromEshterak = 'از اشتراک را وارد نمایید',
     insert_ToEshterak = 'تا اشتراک را وارد نمایید',
+    insert_allReaders = 'برای هر مسیر یک مامور قرائت مشخص نمایید',
+    insert_nextBazdidDate = 'تاریخ بازدید بعدی را مشخص نمایید',
 
     format_invalid_trackNumber = 'فرمت شماره پیگیری اشتباه است',
     format_invalid_trackNumbersLength = 'تعداد ارقام شماره پیگیری اشتباه است',
     format_invalid_numberLengths = 'تعداد ارقام وارد شده اشتباه است',
     should_insert_APK = 'فرمت ارسالی باید فایل apk باشد',
+    format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
+    format_invalid = 'فرمت ناصحیح است',
     format_invalid_excel = 'فرمت ارسالی باید فایل excel باشد',
     invalid_mobile = 'شماره موبایل نادرست است',
     invalid_email = 'ایمیل نادرست است',
@@ -77,19 +79,26 @@ export enum EN_messages {
     format_invalid_to_eshterak = 'فرمت  تا اشتراک ناصحیح است',
     format_invalid_counterNumber = 'فرمت رقم کنتور اشتباه است',
     format_invalid_counterNumberTimes = 'تعداد ارقام کنتور اشتباه است',
+    format_imagePercent = 'فرمت درصد تصویر اشتباه است',    
+    format_alalhesab = 'فرمت علی الحساب اشتباه است',    
 
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
 
-    confirm_remove = ' آیا از حذف  مورد اطمینان دارید؟',
-    confirm_createList = ' آیا لیست صادر شود؟',
+    confirm_remove = 'از حذف  مورد اطمینان دارید؟',
+    confirm_createList = ' لیست صادر شود؟',
     importDynamic_created = 'لیست صادر شد',
-    confirm_send = ' آیا از ارسال موارد اطمینان دارید؟',
+    import_simafaBatch = 'لیست صادر شده بصورت زیر است:',
+    import_NoRouteAvailable = 'مسیری برای ایجاد وجود ندارد',
+    confirm_send = ' از ارسال موارد اطمینان دارید؟',
     reson_delete_backtoImported = 'علت بازگشت به صادر شده',
     reason_forceOffload = 'علت اتمام قرائت(تخلیه اضطراری)',
     reason_deleteRoute = 'علت حذف مسیر',
     reason_backToPrev = 'علت بازگشت به مرحله قبلی',
-
+    toImported = 'علت بازگشت به صادر شده',
+    toReading = 'علت بازگشت به درحال قرائت',
+    toOffloaded = 'علت بازگشت به بارگذاری شده',
+    toPrevious = 'علت بازگشت به مرحله قبلی',
 
     call_supportGroup = 'خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید'
 }

@@ -1,0 +1,50 @@
+<main class="main">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+
+            <section class="content">
+
+                <div class="input_2 this" *ngIf="userCounterReaderDictionary.length">
+                    <div class="_key">مامور</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="simafaSingleReq.counterReaderId"
+                        name="counterReaderId">
+                        <mat-option *ngFor="let truefalse of userCounterReaderDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+
+            </section>
+
+            <div class="check_boxes">
+                <mat-checkbox name="hasPreNumber" [(ngModel)]="simafaSingleReq.hasPreNumber">شماره قبلی
+                </mat-checkbox>
+
+                <mat-checkbox name="displayBillId" [(ngModel)]="simafaSingleReq.displayBillId">
+                    نمایش شناسه قبض
+                </mat-checkbox>
+
+                <mat-checkbox name="displayRadif" [(ngModel)]="simafaSingleReq.displayRadif">نمایش ش.پرونده
+                </mat-checkbox>
+
+            </div>
+        </section>
+        <section class="dynamic_content">
+            <div class="input_2 this">
+                <div class="_key">درصد علی الحساب</div>
+                <input class="_value" type="number" name="alalHesabPercent"
+                    [(ngModel)]="simafaSingleReq.alalHesabPercent">
+            </div>
+            <div class="input_2 this">
+                <div class="_key">درصد تصویر</div>
+                <input class="_value" type="number" name="imagePercent" [(ngModel)]="simafaSingleReq.imagePercent">
+            </div>
+
+        </section>
+
+        <footer>
+            <button type="submit" class="btn_1">افزودن</button>
+
+        </footer>
+    </form>
+</main>

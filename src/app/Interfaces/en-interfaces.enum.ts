@@ -119,6 +119,7 @@ export enum ENInterfaces {
     fragmentDETAILSREMOVE = 'V1/Fragment/Detials/Remove',
     fragmentDETAILSEDIT = 'V1/Fragment/Details/Edit',
     fragmentDETAILSADD = 'V1/Fragment/Details/Add',
+    fragmentDETAILSByEshterak = 'V1/Fragment/Details/ByEshterak',
 
     OutputDBF = 'V1/Output/Dbf',
     OutputSINGLE = 'V1/Output/single',
@@ -140,6 +141,7 @@ export enum ENInterfaces {
     trackingFOLLOWUP = 'V1/Tracking/FollowUp/?trackNumber=',
     trackingAnalyzeByParam = 'V1/Tracking/Analyze/ByParam',
     trackingPostOffloadModify = 'V1/OffLoad/Modify',
+    trackingEditState = 'V1​/Tracking​/EditState',
 
     ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
     ListSearchPro = 'V1/List/Search/Pro',

@@ -64,12 +64,6 @@ export enum ENTrackingRoute {
     migrateDataRowToOffloaded,
     migrateToPreState,
 }
-export enum ENTrackingMessage {
-    toImported = 'علت بازگشت به صادر شده',
-    toReading = 'علت بازگشت به درحال قرائت',
-    toOffloaded = 'علت بازگشت به بارگذاری شده',
-    toPrevious = 'علت بازگشت به مرحله قبلی'
-}
 export interface IResponses {
     isValid: boolean
     message: string;
@@ -150,6 +144,7 @@ export enum ENThemeColor {
     dark = 1,
 }
 export enum ENSelectedColumnVariables {
+    selectedSimafaBatch = '_simafaBatch',
     selectedTracks = 'menuDefault',
     selectedlastStates = 'lastStates',
     selectedUsersAll = '_usersAll',
@@ -211,4 +206,12 @@ export const IMasrafStates: ITHV[] = [
 export interface Theme {
     name: string,
     properties: any
+}
+export interface IENV {
+    headerProvinceTitle: string,
+    API_URL: string,
+    OSMmapBoxUrl: string,
+    SATELLITEMapBoxUrl: string,
+    SATELLITEMapAccessToken: string,
+    hasNextBazdid: boolean
 }

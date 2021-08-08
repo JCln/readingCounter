@@ -34,9 +34,13 @@ export class ImportListDgComponent implements OnInit {
     this.counterWrapper();
   }
   editCloseData() {
-    if (this.selectedCounterReader)
+    console.log(this.selectedCounterReader.id);
+    if (this.selectedCounterReader) {
+
       this.dataSource.counterReaderId = this.selectedCounterReader.id;
-    this.ref.close(this.dataSource);
+
+    }
+    // this.ref.close(this.dataSource);
   }
 
 }

@@ -20,11 +20,11 @@ export class DescComponent implements AfterViewInit, OnDestroy {
   trackNumber: string;
   defColumns: IObjectIteratation[] = [
     { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
-    // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },
     { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true },
-    { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true }
-    // { field: 'seen', header: 'دیده شده' },
+    { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true },
+    { field: 'seen', header: 'دیده شده', isSelected: true, isBoolean: true },
+    // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },    
     // { field: 'hasDetails', header: 'جزئیات' },
   ]
   _descView = (): IObjectIteratation[] => {
@@ -55,6 +55,7 @@ export class DescComponent implements AfterViewInit, OnDestroy {
       isSelected: false
     }
   ]
+  clonedProducts: { [s: string]: IFollowUpHistory; } = {};
   subscription: Subscription[] = [];
   dataSource: IFollowUp;
   changeHsty: IFollowUpHistory[] = [];
@@ -122,5 +123,11 @@ export class DescComponent implements AfterViewInit, OnDestroy {
   }
   showInMap = () => {
     this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[0].insertDateJalali);
+  }
+  onRowEditSave = async (dataSource: IFollowUpHistory) => {
+    await this.trackingManagerService.postEditState(ENInterfaces.trackingEditState, { id: dataSource.id, seen: dataSource.seen });
+  }
+  onRowEditInit(dataSource: any) {
+    this.clonedProducts[dataSource.id] = { ...dataSource };
   }
 }

@@ -33,8 +33,8 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private rowToOffloaded = async (row: ITracking, desc: string, rowIndex: number) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row.id, desc);
+  private rowToOffloaded = async (row: string, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row, desc);
     this.refetchTable(rowIndex);
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackFinished = null;
@@ -87,7 +87,6 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
         data: {
           title: title,
           isInput: true,
-          isDelete: true
         }
       });
       dialogRef.afterClosed().subscribe(desc => {

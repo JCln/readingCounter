@@ -1,11 +1,12 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IEditTracking, IOutputManager, ITracking } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENSelectedColumnVariables, ENTrackingMessage, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { Converter } from 'src/app/classes/converter';
 
@@ -57,8 +58,8 @@ export class TrackingManagerService {
     { field: 'toDate', header: 'تا', isSelected: false },
     { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false },
-    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false }
+    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
     // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }
   ]
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
@@ -80,8 +81,8 @@ export class TrackingManagerService {
       { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
       { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false, borderize: true },
-      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false },
-      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false },
+      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
       { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true }
     ];
@@ -115,7 +116,8 @@ export class TrackingManagerService {
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private _location: Location,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   getDataSource = (method: ENInterfaces): Promise<any> => {
@@ -154,6 +156,14 @@ export class TrackingManagerService {
       })
     });
   }
+  postEditState = (method: ENInterfaces, val: object) => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, val).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    });
+  }
   // Output manager 
   downloadOutputDBF = (dbfData: ITracking | IOutputManager): Promise<any> => {
     dbfData.fromDate = Converter.persianToEngNumbers(dbfData.fromDate);
@@ -180,6 +190,17 @@ export class TrackingManagerService {
 
     });
   }
+  downloadOutputSingleWithENV = (single: ITracking, date: string): Promise<any> => {
+    const a: any = {
+      trackingId: single.id,
+      description: date
+    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBLOBOBSERVE(ENInterfaces.OutputSINGLE, a).subscribe(res => {
+        resolve(res);
+      })
+    });
+  }
   // 
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
@@ -201,7 +222,7 @@ export class TrackingManagerService {
       })
     })
   }
-  TESTbackToConfirmDialog = (trackNumber: string, message: ENTrackingMessage): Promise<any> => {
+  TESTbackToConfirmDialog = (trackNumber: string, message: EN_messages): Promise<any> => {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: '19rem',
@@ -214,6 +235,22 @@ export class TrackingManagerService {
         if (desc) {
           this.migrateOrRemoveTask(ENInterfaces.trackingToREADING, trackNumber, desc);
           resolve(true);
+        }
+      })
+    })
+  }
+  hasNextBazdidConfirmDialog = (message: EN_messages): Promise<any> => {
+    return new Promise(resolve => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '21rem',
+        data: {
+          title: message,
+          isSelectableDate: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
         }
       })
     })
@@ -245,16 +282,7 @@ export class TrackingManagerService {
     }
     return a;
   }
-  //
-  backToPreviousPage = () => {
-    this._location.back();
-  }
-  backToParent = () => {
-    this.utilsService.routeTo('/wr/m/s/fwu');
-  }
-  routeTo = (route: string, UUID: string) => {
-    this.utilsService.routeToByParams(route, UUID);
-  }
+  //  
   selectedItems = (_selectors: any[]): any[] => {
     const a = [];
     _selectors.filter(items => {
@@ -345,5 +373,20 @@ export class TrackingManagerService {
       if (items.isSelected)
         return items
     })
+  }
+  routeToLMAll = (row: ITracking) => {
+    this.router.navigate(['wr/m/l/all', false, row.id]);
+  }
+  routeToOffloadModify = (dataSource: ITracking) => {
+    this.router.navigate(['wr/m/l/all', true, dataSource.id]);
+  }
+  routeTo = (route: string, UUID: string) => {
+    this.utilsService.routeToByParams(route, UUID);
+  }
+  backToPreviousPage = () => {
+    this._location.back();
+  }
+  backToParent = () => {
+    this.utilsService.routeTo('/wr/m/s/fwu');
   }
 }
