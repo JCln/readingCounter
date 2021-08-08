@@ -58,6 +58,8 @@ export class PrimeTableComponent {
   @Output() DeActivatedUser = new EventEmitter<any>();
   @Output() resetedPasswordUser = new EventEmitter<any>();
   @Output() toPredStatus = new EventEmitter<any>();
+  @Output() routedToSingle = new EventEmitter<any>();
+  @Output() routedToBatch = new EventEmitter<any>();
 
   constructor(
     public outputManagerService: OutputManagerService,
@@ -155,5 +157,11 @@ export class PrimeTableComponent {
   }
   openEditDialog = (dataSource: object) => {
     this.openedEditDialog.emit(dataSource);
+  }
+  routeToBatch = (dataSource: object) => {
+    this.routedToBatch.emit(dataSource);
+  }
+  routeToSingle = (dataSource: object) => {
+    this.routedToSingle.emit(dataSource);
   }
 }

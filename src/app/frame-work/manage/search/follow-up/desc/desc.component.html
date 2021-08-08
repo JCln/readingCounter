@@ -40,19 +40,6 @@
 <p-table *ngIf="!canShowGraph" sortField="insertDateJalali" [columns]="defColumns" [value]="changeHsty" dir="rtl"
     styleClass="p-datatable-responsive" [responsive]="true" editMode="row" dataKey="id">
 
-<app-prime-table *ngIf="!canShowGraph"
-[dataSource]="changeHsty"
-[_selectedColumns]="defColumns"
-[_numberOfExtraColumns]="[1]"
-[_sortField]="'insertDateJalali'"
-[_outputEnabled]=false
-[_checkUpName]="'desc'"
-[_multiSelectEnable]=false
-(refreshedTable)="refreshTable()"
-(toPredStatus)="toPreStatus($event)"
-(showedInMapDESC)="showInMap()"
-></app-prime-table>
-
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">

@@ -26,6 +26,10 @@
             optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
             placeholder="ستون ها">
         </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'simafa-readingProg'" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="right_side">
                 <i *ngIf="_outputEnabled"
@@ -64,14 +68,14 @@
                     (click)="showSearchOptionsDialog()" class="tooltip _circle_border p_icons pi pi-search">
                     <div class="tooltip_text">جستجو</div>
                 </i>
-                <i *ngIf="_checkUpName == 'desc'" (click)="trackingManagerService.backToParent()"
+                <!-- <i *ngIf="_checkUpName == 'desc'" (click)="trackingManagerService.backToParent()"
                     class="tooltip _circle_border p_icons pi pi-arrow-left">
                     <div class="tooltip_text">بازگشت به پیگیری</div>
                 </i>
                 <i *ngIf="_checkUpName == 'desc'" (click)="toPreStatus(dataSource[dataSource.length-1])"
                     class="tooltip _circle_border p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به قبلی</div>
-                </i>
+                </i> -->
             </div>
         </div>
     </ng-template>
@@ -172,12 +176,12 @@
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
             </td>
-            <td *ngIf="dataSource.hasMap && _checkUpName == 'desc'" (click)="showInMapDESC()">
+            <!-- <td *ngIf="dataSource.hasMap && _checkUpName == 'desc'" (click)="showInMapDESC()">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
-            </td>
+            </td> -->
             <td *ngIf="!dataSource.hasMap && (_checkUpName == 'lastStates' || _checkUpName == 'desc')">
             </td>
             <td *ngIf="_outputFileName == 'finished'" (click)="backToImportedConfirmDialog(dataSource.id,ri)">
@@ -270,6 +274,30 @@
                         </i>
                     </div>
                 </div>
+            </td>
+            <td *ngIf="_checkUpName == 'simafa-readingProg' && dataSource.canContinue" (click)="routeToSingle(dataSource)">
+                <span class="ui-column-title">تکی</span>
+                <i class="tooltip p_icons pi pi-minus">
+                    <div class="tooltip_text_right">تکی</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'simafa-readingProg' && dataSource.canContinue" (click)="routeToBatch(dataSource)">
+                <span class="ui-column-title">دسته‌ای</span>
+                <i class="tooltip p_icons pi pi-list">
+                    <div class="tooltip_text_right">دسته‌ای</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'simafa-readingProg' && !dataSource.canContinue">
+                <span class="ui-column-title">لیست قبلا صادر شده</span>
+                <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
+                    <div class="tooltip_text">لیست قبلا صادر شده</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'simafa-readingProg' && !dataSource.canContinue">
+                <span class="ui-column-title">لیست قبلا صادر شده</span>
+                <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
+                    <div class="tooltip_text">لیست قبلا صادر شده</div>
+                </i>
             </td>
         </tr>
     </ng-template>
