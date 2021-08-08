@@ -282,13 +282,7 @@ export class TrackingManagerService {
     }
     return a;
   }
-  //
-  backToPreviousPage = () => {
-    this._location.back();
-  }
-  backToParent = () => {
-    this.utilsService.routeTo('/wr/m/s/fwu');
-  }
+  //  
   selectedItems = (_selectors: any[]): any[] => {
     const a = [];
     _selectors.filter(items => {
@@ -388,5 +382,11 @@ export class TrackingManagerService {
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);
+  }
+  backToPreviousPage = () => {
+    this._location.back();
+  }
+  backToParent = () => {
+    this.utilsService.routeTo('/wr/m/s/fwu');
   }
 }

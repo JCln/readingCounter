@@ -1,12 +1,13 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-    IReadingReportGISReq,
-    IReadingReportReq,
-    IReadingReportTraverseDifferentialReq,
-    IReadingReportWithZoneIDsReq,
+  IReadingReportGISReq,
+  IReadingReportReq,
+  IReadingReportTraverseDifferentialReq,
+  IReadingReportWithZoneIDsReq,
 } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -129,7 +130,7 @@ export class ReadingReportManagerService {
     { field: 'xarabCount', header: 'خراب', isSelected: true, readonly: true },
     { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
     { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true , ltr: true},
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true }
   ]
   private _RRKarkardDaily = [
@@ -193,7 +194,8 @@ export class ReadingReportManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private _location: Location
+    private _location: Location,
+    private router: Router
   ) { }
 
   // CALL APIs
@@ -216,6 +218,15 @@ export class ReadingReportManagerService {
       console.error(error);
     }
 
+  }
+  postRRManagerOnMap = (method: ENInterfaces, val: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
+        if (this.utilsService.isNull(res))
+          this.emptyMessage();
+        resolve(res)
+      })
+    });
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
@@ -349,7 +360,7 @@ export class ReadingReportManagerService {
     this._location.back();
   }
   routeToMapGIS = () => {
-    this.utilsService.routeToByExtras('/wr', { state: { test: this.readingReportGISReq } });
+    this.router.navigate(['/wr', this.readingReportGISReq]);
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

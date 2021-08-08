@@ -3,7 +3,8 @@ import { IENV } from 'interfaces/ioverall-config';
 import { ActivatedProvince } from '../classes/activated-province';
 
 export class EnvService implements IENV {
-  temp = ActivatedProvince.ZONE4;
+  
+  temp = ActivatedProvince.DEFAULT;
 
   headerProvinceTitle = this.temp.headerProvinceTitle;
   API_URL = this.temp.API_URL;
