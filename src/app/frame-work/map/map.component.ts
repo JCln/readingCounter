@@ -153,7 +153,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mapConfigOptions(0);
   }
   private makeClusterRouteObject = (): IReadingReportGISReq => {
-    this._isCluster = this.route.snapshot.paramMap.get('isCluster') === 'true' ? true : false;
     return {
       zoneId: parseInt(this.route.snapshot.paramMap.get('zoneId')),
       isCounterState: this.route.snapshot.paramMap.get('isCounterState') === 'true' ? true : false,
@@ -180,9 +179,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.onShowCounterReader.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
     this.onShowCounterReader.day = this.route.snapshot.paramMap.get('day');
 
-    if (!this.utilsService.isNull(this.onShowCounterReader.day))
+    if (!this.utilsService.isNull(this.onShowCounterReader.day)) {
       this.classWrapper(this.onShowCounterReader);
-    else
+      return;
+    }
+    this._isCluster = this.route.snapshot.paramMap.get('isCluster') == 'true' ? true :
+      this.route.snapshot.paramMap.get('isCluster') == 'false' ? false : null
+    if (this._isCluster)
       this.classWrapperCluster();
   }
   ngOnInit(): void {

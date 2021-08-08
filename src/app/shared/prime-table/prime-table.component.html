@@ -275,15 +275,17 @@
                     </div>
                 </div>
             </td>
-            <td *ngIf="_checkUpName == 'simafa-readingProg' && dataSource.canContinue" (click)="routeToSingle(dataSource)">
+            <td *ngIf="_checkUpName == 'simafa-readingProg' && dataSource.canContinue"
+                (click)="routeToSingle(dataSource)">
                 <span class="ui-column-title">تکی</span>
                 <i class="tooltip p_icons pi pi-minus">
                     <div class="tooltip_text_right">تکی</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'simafa-readingProg' && dataSource.canContinue" (click)="routeToBatch(dataSource)">
+            <td *ngIf="_checkUpName == 'simafa-readingProg' && dataSource.canContinue"
+                (click)="routeToBatch(dataSource)">
                 <span class="ui-column-title">دسته‌ای</span>
-                <i class="tooltip p_icons pi pi-list">
+                <i class="tooltip p_icons pi-th-large">
                     <div class="tooltip_text_right">دسته‌ای</div>
                 </i>
             </td>
