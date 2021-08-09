@@ -68,7 +68,7 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 4rem"></th>
+            <th *ngIf="shouldActive" style="width: 4rem"></th>
             <th style="width: 4rem"></th>
         </tr>
     </ng-template>
@@ -91,7 +91,7 @@
                     {{changeHsty[col.field]}}
                 </ng-template>
             </td>
-            <td>
+            <td *ngIf="shouldActive">
                 <span class="ui-column-title">ویرایش</span>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(changeHsty)"
                     class="tooltip _edit pi pi-pencil">
