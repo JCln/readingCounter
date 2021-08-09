@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFollowUp, IFollowUpHistory } from 'interfaces/imanage';
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 import { FollowUpService } from './../follow-up.service';
 
@@ -16,8 +17,10 @@ import { FollowUpService } from './../follow-up.service';
   templateUrl: './desc.component.html',
   styleUrls: ['./desc.component.scss']
 })
-export class DescComponent implements AfterViewInit, OnDestroy {
+export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   trackNumber: string;
+  shouldActive: boolean = false;
+
   defColumns: IObjectIteratation[] = [
     { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
     { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
@@ -66,7 +69,8 @@ export class DescComponent implements AfterViewInit, OnDestroy {
     public route: ActivatedRoute,
     private router: Router,
     private interactionService: InteractionService,
-    private followUpService: FollowUpService
+    private followUpService: FollowUpService,
+    private authService: AuthService
   ) {
     this.getRouteParams();
   }
@@ -109,6 +113,7 @@ export class DescComponent implements AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
+    this.getUserRole();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
@@ -129,5 +134,22 @@ export class DescComponent implements AfterViewInit, OnDestroy {
   }
   onRowEditInit(dataSource: any) {
     this.clonedProducts[dataSource.id] = { ...dataSource };
+  }
+  getUserRole = (): boolean => {
+    const jwtRole = this.authService.getAuthUser();
+    return jwtRole.roles.includes('admin') ? true : false;
+  } 
+  clearUNUsables = () => {
+    if (!this.shouldActive) {
+      const c = this.defColumns.filter(item => {
+        return item.field !== 'seen'
+      })
+      this.defColumns = c;
+      return;
+    }
+  }
+  ngOnInit(): void {
+    this.shouldActive = this.getUserRole();
+    this.clearUNUsables();
   }
 }
