@@ -40,8 +40,8 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
   routeToLMAll = (row: ITracking) => {
     this.trackingManagerService.routeToLMAll(row);
   }
-  private rowToImported = async (row: ITracking, desc: string, rowIndex: number) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row.id, desc);
+  private rowToImported = async (row: string, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row, desc);
     this.refetchTable(rowIndex);
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackReading = null;

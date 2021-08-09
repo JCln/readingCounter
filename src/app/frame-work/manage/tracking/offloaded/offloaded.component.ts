@@ -9,6 +9,7 @@ import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+import { Converter } from 'src/app/classes/converter';
 
 @Component({
   selector: 'app-offloaded',
@@ -99,7 +100,8 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
       this.refetchTable(rowDataAndIndex['ri']);
   }
   hasNextBazdid = async (row: ITracking) => {
-    const hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
+    let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
+    hasbazdid = Converter.persianToEngNumbers(hasbazdid);
     if (hasbazdid) {
       const a = await this.trackingManagerService.downloadOutputSingleWithENV(row, hasbazdid);
       this.outputManagerService.downloadFile(a);

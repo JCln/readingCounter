@@ -49,11 +49,14 @@
 <app-prime-table *ngIf="dataSource.length && route.children.length === 0"     
 [_selectCols]="_selectCols" 
 [_selectedColumns]="selectedColumns"
-[dataSource]="dataSource" 
+[dataSource]="dataSource"
 [_outputFileName]="'simafa-readingProg'"
 [_checkUpName]="'simafa-readingProg'"
+[_numberOfExtraColumns]="[1, 2]"
 [_rowsPerPage]="[20,50,100, 500, 1000]"
 (refreshedTable)="refreshTable()"
+(routedToBatch)="routeToBatch($event)"
+(routedToSingle)="routeToSingle($event)"
 > 
 </app-prime-table>
 

@@ -32,11 +32,12 @@
     </form>
 </main>
 
-<app-prime-table     
-    [_selectCols]="_selectCols" 
+<app-prime-table  *ngIf="dataSource.length"   
+    [_selectCols]="_selectCols"
     [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
-    [_outputFileName]="'search_moshtarak'"
+    [_outputFileName]="'allReads'"
+    [_checkUpName]="'search_moshtarak'"
     [_rowsPerPage]="[20,50,100, 500, 1000]"
     [_numberOfExtraColumns]="[1]"
     [_sessionName]="'moshtarak-session'"

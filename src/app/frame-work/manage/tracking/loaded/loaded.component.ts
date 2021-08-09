@@ -82,8 +82,8 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private rowToImported = async (row: ITracking, desc: string, rowIndex: number) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row.id, desc);
+  private rowToImported = async (row: string, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row, desc);
     this.refetchTable(rowIndex);
   }
   backToImportedConfirmDialog = (rowDataAndIndex: object) => {

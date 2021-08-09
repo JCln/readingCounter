@@ -20,10 +20,10 @@ export class CounterStateService {
 
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
-      { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
+      { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: false },
       { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: true },
-      { field: 'clientOrder', header: 'ترتیب', isSelected: true },
+      { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+      { field: 'clientOrder', header: 'ترتیب', isSelected: false },
       { field: 'canEnterNumber', header: 'ثبت رقم', isSelected: true, isBoolean: true },
       { field: 'isMane', header: 'مانع', isSelected: true, isBoolean: true },
       { field: 'canNumberBeLessThanPre', header: 'رقم فعلی کمتر از قبلی', isSelected: false, isBoolean: true },

@@ -40,6 +40,28 @@
 <p-table *ngIf="!canShowGraph" sortField="insertDateJalali" [columns]="defColumns" [value]="changeHsty" dir="rtl"
     styleClass="p-datatable-responsive" [responsive]="true" editMode="row" dataKey="id">
 
+    <ng-template pTemplate="caption">
+        <th>
+        </th>
+        <div class="header_icons_wrap">
+            <div class="left_side">
+            </div>
+            <div class="left_side">
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                </i>
+                <i (click)="trackingManagerService.backToParent()"
+                    class="tooltip _circle_border p_icons pi pi-arrow-left">
+                    <div class="tooltip_text">بازگشت به پیگیری</div>
+                </i>
+                <i (click)="toPreStatus(changeHsty[changeHsty.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به قبلی</div>
+                </i>
+            </div>
+        </div>
+    </ng-template>
+
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">

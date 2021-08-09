@@ -4,13 +4,14 @@
     stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]=_sortOrder
     [sortMode]="_sortMode">
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
+
         <p-multiSelect
             *ngIf="_multiSelectEnable && _checkUpName == 'reading' || _checkUpName == 'finished'|| _checkUpName == 'offloaded'|| _checkUpName == 'loaded'|| _checkUpName == 'imported' || _checkUpName == 'lastStates' "
             [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'allReads'" [options]="_selectCols"
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == '_outputFileName'" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
@@ -26,10 +27,12 @@
             optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
             placeholder="ستون ها">
         </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'simafa-readingProg'" [options]="_selectCols"
-            [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
+        <p-multiSelect
+            *ngIf="_multiSelectEnable && (_checkUpName == 'simafa-readingProg' || _outputFileName == 'allReads')"
+            [options]="_selectCols" [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
+
         <div class="header_icons_wrap">
             <div class="right_side">
                 <i *ngIf="_outputEnabled"
@@ -78,6 +81,7 @@
                 </i> -->
             </div>
         </div>
+
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -105,7 +109,7 @@
                     <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    <ng-container *ngIf="_outputFileName === 'search_moshtarak'; else showText">
+                    <ng-container *ngIf="col.field == 'masrafStateId'; else showText">
                         <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
                             <div class="tooltip_text">عادی</div>
                         </i>
@@ -214,7 +218,7 @@
                     <div class="tooltip_text_right">مشاهده عکس(ها)</div>
                 </i>
             </td>
-            <td *ngIf="(_outputFileName == 'search_moshtarak' || _outputFileName == 'allReads' )&& !_allComponentIsModify"
+            <td *ngIf="(_outputFileName == 'allReads')&& !_allComponentIsModify"
                 (click)="searchService.routeToWoui(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
@@ -285,7 +289,7 @@
             <td *ngIf="_checkUpName == 'simafa-readingProg' && dataSource.canContinue"
                 (click)="routeToBatch(dataSource)">
                 <span class="ui-column-title">دسته‌ای</span>
-                <i class="tooltip p_icons pi-th-large">
+                <i class="tooltip p_icons pi pi-th-large">
                     <div class="tooltip_text_right">دسته‌ای</div>
                 </i>
             </td>

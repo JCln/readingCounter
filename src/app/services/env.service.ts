@@ -3,8 +3,8 @@ import { IENV } from 'interfaces/ioverall-config';
 import { ActivatedProvince } from '../classes/activated-province';
 
 export class EnvService implements IENV {
-  
-  temp = ActivatedProvince.DEFAULT;
+
+  temp = ActivatedProvince.ZONE4;
 
   headerProvinceTitle = this.temp.headerProvinceTitle;
   API_URL = this.temp.API_URL;
@@ -12,7 +12,7 @@ export class EnvService implements IENV {
   SATELLITEMapBoxUrl = this.temp.SATELLITEMapBoxUrl;
   SATELLITEMapAccessToken = this.temp.SATELLITEMapAccessToken;
   hasNextBazdid = this.temp.hasNextBazdid;
-  
+
   // Whether or not to enable debug mode
   public enableDebug = true;
 

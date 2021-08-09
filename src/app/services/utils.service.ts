@@ -70,6 +70,10 @@ export class UtilsService {
     return false;
   }
   isSameLength = (from: string, to: string): boolean => {
+    if (from === null || to === null) {
+      this.snackBarMessageWarn(EN_messages.sameLength_notValid);
+      return;
+    }
     if (from.toString().trim().length === to.toString().trim().length)
       return true;
     return false;
