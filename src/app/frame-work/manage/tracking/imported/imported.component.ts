@@ -123,7 +123,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: string, desc: string, rowIndex: number) => {
+  removeRow = async (rowData: string, desc: string) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowData, desc);
   }
   firstConfirmDialog = (rowDataAndIndex: object) => {
@@ -139,7 +139,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.removeRow(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri'])
+          this.removeRow(rowDataAndIndex['dataSource'], desc)
         }
       })
     })
