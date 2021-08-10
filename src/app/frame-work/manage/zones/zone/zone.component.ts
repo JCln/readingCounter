@@ -120,7 +120,7 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneEDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.regionDictionary, 'regionId');
   }
-  onRowEditCancel(rowDataAndIndex: object) {
+  onRowEditCancel() {
     // this.dataSource[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];
     // delete this.dataSource[rowDataAndIndex['dataSource']];
     // return;

@@ -92,30 +92,30 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IKarbari, rowIndex: number) => {
+  removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.KarbariRemove, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.KarbariRemove, rowData['dataSource']);
+      this.refetchTable(rowData['ri']);
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IKarbari, rowIndex: number) => {
+  onRowEditSave = async (dataSource: IKarbari) => {
     if (!this.readManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.provinceId !== 'object') {
+    if (typeof dataSource['dataSource'].provinceId !== 'object') {
       this.provinceDictionary.find(item => {
-        if (item.title === dataSource.provinceId)
-          dataSource.provinceId = item.id
+        if (item.title === dataSource['dataSource'].provinceId)
+          dataSource['dataSource'].provinceId = item.id
       })
     } else {
-      dataSource.provinceId = dataSource.provinceId['id'];
+      dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
     }
-    await this.readManagerService.addOrEditAuths(ENInterfaces.KarbariEdit, dataSource);
+    await this.readManagerService.addOrEditAuths(ENInterfaces.KarbariEdit, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
   }
   refreshTable = () => {

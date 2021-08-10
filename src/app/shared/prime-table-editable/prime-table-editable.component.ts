@@ -84,9 +84,6 @@ export class PrimeTableEditableComponent {
   refreshTable() {
     this.refreshedTable.emit(true);
   }
-  dropDownChanges = (dataSource: number) => {
-    this.dictionary.emit(dataSource);
-  }
   openAddDialog = () => {
     this.openedAddDialog.emit();
   }

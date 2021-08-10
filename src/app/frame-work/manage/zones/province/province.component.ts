@@ -120,7 +120,7 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ProvinceEDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
   }
-  onRowEditCancel(dataSource: object) {
+  onRowEditCancel() {
     // this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
     // delete this.dataSource[dataSource['dataSource'].id];
     // return;

@@ -3,12 +3,13 @@
     [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
     [_outputFileName]="'traverse'"
+    [_checkUpName]="'rr-traverse'"
     [_rowsNumbers]=10
     [_rowsPerPage]="[10,25,25]"
     [_backToPreviousEnabled]=true
-    (refreshedTable)="refreshTable()"
     [_selectedColumnsToRemember]="'selectedRRTraverse'"    
     [_backToPreviousText]="'بازگشت به ایجاد پیمایش'"
+    (refreshedTable)="refreshTable()"
     (backedToPrevious)="backToPrevious()"    
  > 
 </app-prime-table>

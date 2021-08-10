@@ -6,10 +6,14 @@
     [_rowsPerPage]="[10, 20,50]"
     [_rowsNumbers]=10
     [_numberOfExtraColumns]="[1, 2]"
-    (refreshedTable)="refreshTable()"
     [_checkUpName]="'karbari'"
     [dictionary]="provinceDictionary"
     [_dictionaryName]="'provinceId'"
-    [_selectedColumnsToRemember]="'selectedKarbari'"    
+    [_selectedColumnsToRemember]="'selectedKarbari'"
+    (refreshedTable)="refreshTable()"
+    (openedAddDialog)="openAddDialog()"
+    (removedRow)="removeRow($event)"    
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
  > 
 </app-prime-table-editable>

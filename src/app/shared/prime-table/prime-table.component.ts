@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { SearchService } from 'services/search.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { UsersAllService } from 'services/users-all.service';
@@ -66,7 +67,8 @@ export class PrimeTableComponent {
     public trackingManagerService: TrackingManagerService,
     public searchService: SearchService,
     public listManagerService: ListManagerService,
-    public usersAllService: UsersAllService
+    public usersAllService: UsersAllService,
+    public readingReportManagerService: ReadingReportManagerService
   ) { }
 
   @Input() get selectedColumns(): any[] {

@@ -121,7 +121,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.RegionEDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
   }
-  onRowEditCancel(rowDataAndIndex: object) {
+  onRowEditCancel() {
     // this.dataSource[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];
     // delete this.dataSource[rowDataAndIndex['dataSource']];
     // return;

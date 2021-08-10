@@ -123,7 +123,7 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: string, desc: string) => {
+  private removeRow = async (rowData: string, desc: string) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowData, desc);
   }
   firstConfirmDialog = (rowDataAndIndex: object) => {

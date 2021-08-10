@@ -96,7 +96,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryEDIT, dataSource['dataSource']);
   }
-  onRowEditCancel(dataSource: object) {
+  onRowEditCancel() {
     // this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
     // delete this.dataSource[dataSource['dataSource'].id];
     // return;

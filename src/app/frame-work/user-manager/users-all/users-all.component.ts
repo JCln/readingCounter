@@ -80,9 +80,9 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-  ActivateUser = (dataSource: IUserManager, rowIndex: number) => {
-    this.usersAllService.Activate(dataSource.id);
-    this.refetchTable(rowIndex);
+  ActivateUser = (dataSource: IUserManager) => {
+    this.usersAllService.Activate(dataSource['dataSource'].id);
+    this.refetchTable(dataSource['ri']);
   }
   DeActivateUser = (dataSource: object) => {
     this.usersAllService.DeActivate(dataSource['dataSource'].id);

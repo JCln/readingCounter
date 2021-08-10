@@ -105,8 +105,8 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private removeRow = async (rowData: ITabsare2Formula, rowIndex: number) => {
-    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaTabsare2Remove, rowData.id);
+  private removeRow = async (rowData: string, rowIndex: number) => {
+    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaTabsare2Remove, rowData);
     this.refetchTable(rowIndex);
   }
 
@@ -149,11 +149,7 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
-  onRowEditCancel(dataSource: ITabsare2Formula) {
-    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-    delete this.dataSource[dataSource['dataSource'].id];
-    return;
-  }
+  onRowEditCancel() { }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }

@@ -3,7 +3,6 @@
 [_selectCols]="_selectCols"
 [_selectedColumns]="_selectedColumns"
 [_outputFileName]="'tabsare2'"
-[_isInRowEditing]=true
 [_numberOfExtraColumns]="[1, 2]"
 [_sessionName]="'tabsare2-session'"
 [_selectedColumnsToRemember]="'selectedTabsare2Formulas'"
@@ -12,8 +11,8 @@
 [dictionary]="zoneDictionary"
 (refreshedTable)="refreshTable()"
 (openedAddDialog)="openAddDialog()"
-(onRowEditInit)="onRowEditInit($event)"
-(onRowEditSave)="onRowEditSave($event)"
-(onRowEditCancel)="onRowEditCancel($event)"
+(onRowEditedInit)="onRowEditInit($event)"
+(onRowEditedSave)="onRowEditSave($event)"
+(onRowEditedCancel)="onRowEditCancel()"
 (removedRow)="firstConfirmDialog($event)"
 ></app-prime-table-editable>

@@ -124,8 +124,8 @@ export class WaterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper(true);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private removeRow = async (rowData: IAbBahaFormula, rowIndex: number) => {
-    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaWaterRemove, rowData.id);
+  private removeRow = async (rowData: string, rowIndex: number) => {
+    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaWaterRemove, rowData);
     this.refetchTable(rowIndex);
   }
 

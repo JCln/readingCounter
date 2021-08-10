@@ -127,7 +127,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource'].id);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource']);
       this.refetchTable(rowData['ri']);
     }
   }
