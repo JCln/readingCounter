@@ -14,7 +14,7 @@ export class PrimeTableEditableComponent {
   @Input() _selectCols: any = [];
   @Input() _selectedColumns: any[];
   @Input() _outputFileName: string;
-  @Input() _rowsPerPage: number[] = [20, 50, 100, 500];
+  @Input() _rowsPerPage: number[] = [10, 20, 50, 100, 500];
   @Input() _numberOfExtraColumns: number[];
   @Input() _sessionName: string;
   @Input() _sortBy: string;

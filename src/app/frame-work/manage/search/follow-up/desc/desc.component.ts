@@ -89,8 +89,8 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
     this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber);
-    this.followUpService.setData(this.dataSource);
 
+    this.followUpService.setData(this.dataSource);
     this.dataSource = this.followUpService.getData();
 
     this.changeHsty = this.dataSource.changeHistory;

@@ -409,4 +409,5 @@ export class TrackingManagerService {
     dataSource.overalDuration = parseFloat(this.utilsService.getRange(dataSource.overalDuration));
     dataSource.overalDistance = parseFloat(this.utilsService.getRange(dataSource.overalDistance));
   }
+
 }

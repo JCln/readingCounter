@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IListManagerPD, IListManagerPDHistory } from 'interfaces/imanage';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -15,7 +15,7 @@ import { UtilsService } from 'services/utils.service';
   templateUrl: './per-day.component.html',
   styleUrls: ['./per-day.component.scss']
 })
-export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PerDayComponent implements AfterViewInit, OnDestroy {
   trackNumber: string;
   subscription: Subscription[] = [];
 
@@ -79,9 +79,6 @@ export class PerDayComponent implements OnInit, AfterViewInit, OnDestroy {
         this.classWrapper();
       })
     )
-  }
-  ngOnInit(): void {
-
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
