@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IFollowUp, IFollowUpHistory } from 'interfaces/imanage';
+import { IFollowUp, IFollowUpHistory, IListManagerPD } from 'interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -61,7 +61,9 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   clonedProducts: { [s: string]: IFollowUpHistory; } = {};
   subscription: Subscription[] = [];
   dataSource: IFollowUp;
+  dataSourceAUX: IListManagerPD;
   changeHsty: IFollowUpHistory[] = [];
+  _selectColumnsAUX: any[];
 
   constructor(
     public trackingManagerService: TrackingManagerService,
@@ -86,6 +88,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
+    this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber);
     this.followUpService.setData(this.dataSource);
 
     this.dataSource = this.followUpService.getData();
@@ -93,6 +96,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     this.changeHsty = this.dataSource.changeHistory;
     this.closeTabService.saveDataForFollowUp = this.dataSource;
     this.insertToDesc();
+    this.trackingManagerService.setGetRanges(this.dataSourceAUX);
   }
   getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
@@ -125,6 +129,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   insertToDesc = () => {
     this._showDesc = this._descView();
+    this._selectColumnsAUX = this.trackingManagerService.columnSelectedLMPerDayPositions();
   }
   showInMap = () => {
     this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[0].insertDateJalali);
@@ -138,7 +143,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   getUserRole = (): boolean => {
     const jwtRole = this.authService.getAuthUser();
     return jwtRole.roles.includes('admin') ? true : false;
-  } 
+  }
   clearUNUsables = () => {
     if (!this.shouldActive) {
       const c = this.defColumns.filter(item => {

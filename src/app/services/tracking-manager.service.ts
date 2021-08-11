@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IEditTracking, IOutputManager, ITracking } from 'interfaces/imanage';
+import { IEditTracking, IListManagerPD, IOutputManager, ITracking } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -87,6 +87,15 @@ export class TrackingManagerService {
       { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true }
     ];
   }
+  columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
+    return [
+      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
+      { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
+      { field: 'overalDistance', header: 'مسافت کل', isSelected: true, readonly: true },
+      { field: 'overalDuration', header: 'زمان کل', isSelected: true, readonly: true }
+
+    ];
+  }
   columnlastStates = (): IObjectIteratation[] => {
     return this.lastStates;
   }
@@ -147,6 +156,13 @@ export class TrackingManagerService {
       if (res)
         this.successSnackMessage(res.message);
     });
+  }
+  getLMPD = (trackNumber: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedPERDAY, trackNumber).subscribe(res => {
+        resolve(res);
+      })
+    })
   }
   migrateOrRemoveTask = (method: ENInterfaces, trackNumber: string, desc: string): Promise<any> => {
     return new Promise((resolve) => {
@@ -388,5 +404,9 @@ export class TrackingManagerService {
   }
   backToParent = () => {
     this.utilsService.routeTo('/wr/m/s/fwu');
+  }
+  setGetRanges = (dataSource: IListManagerPD) => {
+    dataSource.overalDuration = parseFloat(this.utilsService.getRange(dataSource.overalDuration));
+    dataSource.overalDistance = parseFloat(this.utilsService.getRange(dataSource.overalDistance));
   }
 }

@@ -14,6 +14,18 @@
                         [(ngModel)]="dataSource[item.field]">
                 </ng-template>
             </div>
+            <div class="input_2" *ngFor="let item of _selectColumnsAUX">
+                <div class="_key">{{item.header}}</div>
+                <ng-container
+                    *ngIf="dataSourceAUX[item.field] === true || dataSourceAUX[item.field] === false; else elseTemplate">
+                    <mat-checkbox [disabled]="true" name="item.field" [(ngModel)]="dataSourceAUX[item.field]">
+                        {{item.header}}</mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                        [(ngModel)]="dataSourceAUX[item.field]">
+                </ng-template>
+            </div>
 
             <div class="check_boxes">
                 <mat-checkbox [disabled]="true" name="isBazdid" [(ngModel)]="dataSource.isBazdid">بازدید
