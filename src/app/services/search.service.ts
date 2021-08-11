@@ -7,6 +7,7 @@ import { IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/iover
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { Search } from '../classes/search';
 
@@ -14,9 +15,20 @@ import { Search } from '../classes/search';
   providedIn: 'root'
 })
 export class SearchService {
-  private _searchReqPro: ISearchProReportInput;
+  private _searchReqPro: ISearchProReportInput = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    readingPeriodId: null,
+    zoneIds: [],
+    year: 1400,
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    fragmentMasterIds: []
+  }
   private _isValidateByDate: boolean;
-
   private _searchPro: IObjectIteratation[] =
     [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
@@ -149,6 +161,9 @@ export class SearchService {
       if (items.isSelected)
         return items
     })
+  }
+  columnGetSearchPro = (): ISearchProReportInput => {
+    return this._searchReqPro;
   }
   /*API CALLS*/
   getSearchTypes = (): Search[] => {
@@ -293,16 +308,16 @@ export class SearchService {
     return this.validationNull(searchReq) && this.validationNumbers(searchReq)
   }
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
+    searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
+    searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
+    this._searchReqPro = searchReq;
     if (isValidateByDate == true || isValidateByDate == false)
       this._isValidateByDate = isValidateByDate;
-    this._searchReqPro = searchReq;
+
     if (this._isValidateByDate) {
       return this.validationNull(searchReq) && this.validationDate(searchReq);
     }
     return this.validationByReadingPeriod(searchReq);
-  }
-  getSearchPro = (): ISearchProReportInput => {
-    return this._searchReqPro;
   }
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {

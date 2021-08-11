@@ -26,6 +26,11 @@ import { UtilsService } from './utils.service';
 export class ImportDynamicService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   importDynamicValue: IImportDynamicDefault;
+  simafaRDPGReq: IImportSimafaReadingProgramsReq = {
+    zoneId: 0,
+    readingPeriodId: 0,
+    year: 1400
+  }
   private _assessPre: IAssessPreDisplayDtoSimafa;
   private _simafaSingleReq: IReadingProgramRes;
   _simafaReadingProgram: IObjectIteratation[] = [
@@ -130,7 +135,9 @@ export class ImportDynamicService {
     })
     this._simafaBatch = a;
   }
-
+  columnGetSimafaRDPG = (): IImportSimafaReadingProgramsReq => {
+    return this.simafaRDPGReq;
+  }
   persentCheck = (val: number): boolean => {
     return this.utilsService.persentCheck(val);
   }
@@ -515,6 +522,18 @@ export class ImportDynamicService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.POSTBODY(ENInterfaces.postImportDynamicCount, importDynamic).toPromise().then(res => {
+          resolve(res)
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  postImportSimafaRDPG = (method: ENInterfaces, body: IImportSimafaReadingProgramsReq): Promise<any> => {
+    this.simafaRDPGReq = body;
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
           resolve(res)
         })
       });

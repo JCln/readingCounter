@@ -71,7 +71,7 @@ export class SimafaSingleComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
-        if (res === '/wr/imp/simafa/rdpg/single') {
+        if (res.includes('/wr/imp/simafa/rdpg/single')) {
           this.classWrapper(true);
         }
       }

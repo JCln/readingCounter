@@ -214,5 +214,6 @@ export interface IENV {
     OSMmapBoxUrl: string,
     SATELLITEMapBoxUrl: string,
     SATELLITEMapAccessToken: string,
-    hasNextBazdid: boolean
+    hasNextBazdid: boolean,
+    mapCenter: [number , number]
 }
