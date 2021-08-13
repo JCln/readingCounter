@@ -1,3 +1,4 @@
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IAPK } from 'interfaces/inon-manage';
@@ -16,6 +17,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
   choosenFileName: string = '';
   fileNameAfterChoose: string = '';
+  progress: number = 0;
 
   uploadForm: any = {
     versionCode: null,
@@ -27,6 +29,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: IAPK[] = [];
   _columns: any[] = [];
   subscription: Subscription[] = [];
+  // subscriptionUpload: Subscription;
 
   constructor(
     private apkService: ApkService,
@@ -45,7 +48,11 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     this.choosenFileName = a.files.item(0).name;
     FileList = event.target.files;
   }
-  uploadFile = async (form: NgForm) => {
+  uploadFile = (form: NgForm, isSubscription?: boolean) => {
+    // if (isSubscription) {
+    //   this.subscriptionUpload.unsubscribe();
+    //   return;
+    // }
     if (!this.screenshotInput) {
       throw new Error("this.screenshotInput is null.");
     }
@@ -58,7 +65,26 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.apkService.checkVertitication(fileInput.files, form.value))
       return;
 
-    await this.apkService.postTicket()
+    this.apkService.postTicket().subscribe((event: HttpEvent<any>) => {
+      switch (event.type) {
+        case HttpEventType.Sent:
+          console.log('Request has been made!');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Response header has been received!');
+          break;
+        case HttpEventType.UploadProgress:
+          this.progress = Math.round(event.loaded / event.total * 100);
+          console.log(`Uploaded! ${this.progress}%`);
+          break;
+        case HttpEventType.Response:
+          console.log('successfull process!', event.body);
+          this.apkService.showSuccessMessage(event.body);
+          setTimeout(() => {
+            this.progress = 0;
+          }, 1500);
+      }
+    })
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh)

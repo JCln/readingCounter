@@ -2,8 +2,9 @@
     <section>
 
         <h1 class="title">ایجاد نسخه جدید</h1>
-        <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
 
+
+        <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
             <div class="_desc">
                 <input class="input_1" type="text" placeholder="نام نسخه " name="versionName"
                     [(ngModel)]="uploadForm.versionName">
@@ -22,8 +23,13 @@
                 <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file"
                     name="screenshot" (change)="onChange($event)" id="files">
 
+                <!-- porgress bar -->
+                <label for="progress"></label>
+                <progress *ngIf="progress > 0" id="progress" [value]="progress" min="0"
+                    max="100">{{progress}}</progress>
+
                 <div class="change_pass">
-                    <button class="btn_2" type="submit">
+                    <button *ngIf="progress == 0" class="btn_2" type="submit">
                         <div class="fa fa-upload"></div>
                         ارسال
                     </button>
@@ -39,19 +45,11 @@
         <h1 class="title">نسخه های گذشته</h1>
         <div class="content">
 
-            <app-prime-table     
-            [dataSource]="dataSource"
-            [_selectedColumns]="_columns"
-            [_rowsNumbers]=5
-            [_rowsPerPage]="[5,10,20]"
-            [_multiSelectEnable]=false
-            [_sortField]="'versionName'"
-            [_checkUpName]="'apk'"
-            [_outputEnabled]=false             
-            (downloadedAPK)="downloadAPK()"
-            (refreshedTable)="classWrapper(true)"
-         > 
-        </app-prime-table>
+            <app-prime-table [dataSource]="dataSource" [_selectedColumns]="_columns" [_rowsNumbers]=5
+                [_rowsPerPage]="[5,10,20]" [_multiSelectEnable]=false [_sortField]="'versionName'"
+                [_checkUpName]="'apk'" [_outputEnabled]=false (downloadedAPK)="downloadAPK()"
+                (refreshedTable)="classWrapper(true)">
+            </app-prime-table>
 
         </div>
 

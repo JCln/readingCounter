@@ -87,6 +87,8 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     const url = this.router.url;
     if (url === '/wr/db')
       return;
+    if (url === '/wr/m/r/apk')
+      return;
     this.spinnerWrapperService.startLoading();
   }
 }

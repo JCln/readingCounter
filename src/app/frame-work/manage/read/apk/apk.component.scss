@@ -113,6 +113,24 @@ small {
   border: 1px solid;
 }
 
+progress {
+  position: relative;
+  width: 100%;
+  padding: $font_2;
+  margin-top: $font_xs;
+
+  &::after {
+    content: attr(value)'%';
+    position: absolute;
+
+    font-size: $font_l;
+    font-weight: 600;
+    color: var(--gray_400);
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 input[type="file"] {
   // display: none;
   position: absolute;
