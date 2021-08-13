@@ -65,7 +65,7 @@ export class ListManagerService {
     { field: 'x', header: 'X', isSelected: false },
     { field: 'gisAccuracy', header: 'دقت', isSelected: false },
     { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-    { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
+    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
     { field: 'masraf', header: 'مصرف', isSelected: false },
     { field: 'eslahType', header: 'اصلاح', isSelected: false },
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },

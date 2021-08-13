@@ -36,6 +36,9 @@ export class InterfaceManagerService {
   POSTBODY = (URL: string, body: object) => {
     return this.mainService.POSTBODY(URL, body);
   }
+  POSTBODYPROGRESS = (URL: string, body: object): Observable<any> => {
+    return this.mainService.POSTBODYProgress(URL, body);
+  }
   POSTSG = (URL: string, uuid: string) => {
     return this.mainService.POSTSG(URL, uuid);
   }

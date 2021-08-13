@@ -5,12 +5,12 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  IImportDataResponse,
-  IImportDynamicDefault,
-  IImportSimafaBatchReq,
-  IImportSimafaReadingProgramsReq,
-  IImportSimafaSingleReq,
-  IReadingProgramRes,
+    IImportDataResponse,
+    IImportDynamicDefault,
+    IImportSimafaBatchReq,
+    IImportSimafaReadingProgramsReq,
+    IImportSimafaSingleReq,
+    IReadingProgramRes,
 } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -102,7 +102,7 @@ export class ImportDynamicService {
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'dateDifference', header: 'طول دوره', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-      { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
+      { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ]
 

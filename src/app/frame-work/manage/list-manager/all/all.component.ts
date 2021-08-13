@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -15,7 +15,7 @@ import { Converter } from 'src/app/classes/converter';
   templateUrl: './all.component.html',
   styleUrls: ['./all.component.scss']
 })
-export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AllComponent implements AfterViewInit, OnDestroy {
   trackId: string;
   isModify: string | boolean;
   subscription: Subscription[] = [];
@@ -86,13 +86,11 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     )
   }
-  ngOnInit(): void {
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
         if (res.includes('/wr/m/l/all/'))
-          this.classWrapper();
+          this.classWrapper(true);
       }
     })
     )

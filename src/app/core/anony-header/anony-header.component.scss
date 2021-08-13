@@ -13,6 +13,10 @@
   ._logo_content {
     width: 4.2rem;
     height: $font_3;
+
+    @media (max-width:550px) {
+      height: 2.3rem;
+    }
   }
 }
 
@@ -28,6 +32,7 @@ li {
   font-size: $font_m;
   font-weight: 600;
   list-style-type: none;
+  line-height: 1;
 
   @media (min-width: 700px) {
     padding-right: 8rem;

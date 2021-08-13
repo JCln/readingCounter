@@ -19,8 +19,8 @@ export class ActivatedProvince implements IENV {
         false,
         [32.669, 51.664]
     );
-    public static readonly ZONE4 = new ActivatedProvince(
-        ENActivateProvinceTitle.ZONE4,
+    public static readonly TEH_ZONE4 = new ActivatedProvince(
+        ENActivateProvinceTitle.TEH_ZONE4,
         'http://81.12.106.167:8081/kontoriNew',
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',

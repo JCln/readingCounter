@@ -82,7 +82,7 @@ export class SearchService {
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'dateDifference', header: 'طول دوره', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-      { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
+      { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ];
   private _searchMosh: IObjectIteratation[] =
@@ -138,7 +138,7 @@ export class SearchService {
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'dateDifference', header: 'طول دوره', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-      { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
+      { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ];
 

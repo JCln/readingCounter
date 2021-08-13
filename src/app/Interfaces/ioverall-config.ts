@@ -188,7 +188,7 @@ export enum ENActivateProvinceTitle {
     DEFAULT = '',
     ESF = 'اصفهان',
     TEH = 'تهران',
-    ZONE4 = 'منطقه 4 تهران',
+    TEH_ZONE4 = 'منطقه 4 تهران',
     TEH_SE = 'جنوب شرقی تهران'
 }
 export enum ENSearch {
