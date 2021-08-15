@@ -91,8 +91,8 @@ export class TrackingManagerService {
     return [
       { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
-      { field: 'overalDistance', header: 'مسافت کل', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل', isSelected: true, readonly: true }
+      { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
+      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true }
 
     ];
   }

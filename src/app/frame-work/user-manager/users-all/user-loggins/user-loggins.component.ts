@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IUserLoggins } from 'interfaces/iuser-manager';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -12,7 +12,7 @@ import { UserLogginsService } from 'services/user-loggins.service';
   templateUrl: './user-loggins.component.html',
   styleUrls: ['./user-loggins.component.scss']
 })
-export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserLogginsComponent implements AfterViewInit, OnDestroy {
   UUID: string = '';
   subscription: Subscription[] = [];
 
@@ -30,22 +30,20 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getRouteParams();
   }
 
-  getDataSource = async () => {
-    this.dataSource = await this.userLogginsService.getLogsDataSource(this.UUID);
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
-  }
   private insertSelectedColumns = () => {
     this._selectCols = this.userLogginsService.columnSelectedUserLogs();
     this._selectedColumns = this.userLogginsService.customizeSelectedColumns(this._selectCols);
   }
   nullSavedSource = () => this.closeTabService.saveDataForUserLoggins = null;
-  private classWrapper = (canRefresh?: boolean) => {
+  private classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.getDataSource();
+    this.dataSource = await this.userLogginsService.getLogsDataSource(this.UUID);
+    this.convertLoginTime();
+
+    if (this.dataSource.length)
+      this.insertSelectedColumns();
   }
   private getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
@@ -56,9 +54,6 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       })
     )
-  }
-  ngOnInit(): void {
-
   }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
@@ -89,5 +84,10 @@ export class UserLogginsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   backToPrevious = () => {
     this.router.navigate(['/wr/mu/all']);
+  }
+  convertLoginTime = () => {
+    this.dataSource.forEach(item => {
+      item.loginDateTime = new Date(item.loginDateTime).toLocaleDateString('fa-IR') + '   ' + new Date(item.loginDateTime).toLocaleTimeString('fa-IR');
+    })
   }
 }

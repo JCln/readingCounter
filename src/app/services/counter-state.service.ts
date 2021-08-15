@@ -26,7 +26,7 @@ export class CounterStateService {
       { field: 'clientOrder', header: 'ترتیب', isSelected: false },
       { field: 'canEnterNumber', header: 'ثبت رقم', isSelected: true, isBoolean: true },
       { field: 'isMane', header: 'مانع', isSelected: true, isBoolean: true },
-      { field: 'canNumberBeLessThanPre', header: 'رقم فعلی کمتر از قبلی', isSelected: false, isBoolean: true },
+      { field: 'canNumberBeLessThanPre', header: 'فعلی کمتر از قبلی', isSelected: false, isBoolean: true },
       { field: 'isTavizi', header: 'تعویضی', isSelected: true, isBoolean: true },
       { field: 'shouldEnterNumber', header: 'اجبار رقم', isSelected: true, isBoolean: true },
       { field: 'isXarab', header: 'خراب', isSelected: true, isBoolean: true },

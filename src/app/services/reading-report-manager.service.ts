@@ -54,7 +54,7 @@ export class ReadingReportManagerService {
     { field: 'standardDeviation', header: 'انحراف از معیار', isSelected: true, readonly: false },
     { field: 'median', header: 'میانه', isSelected: true, readonly: false },
     { field: 'mode', header: 'مٌد', isSelected: true, readonly: false },
-    { field: 'duration', header: 'مدت', isSelected: false, readonly: false }
+    { field: 'duration', header: 'مدت(h)', isSelected: false, readonly: false }
   ];
   private _RRMaster = [
     // { field: 'zoneId', header: 'کد ناحیه', isSelected: true, readonly: false },
@@ -122,7 +122,7 @@ export class ReadingReportManagerService {
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
     // { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
     // { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
-    { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
+    { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
     { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
     { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
     { field: 'faqedCount', header: 'فاقد', isSelected: true, readonly: true },
@@ -138,7 +138,7 @@ export class ReadingReportManagerService {
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
     { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
     { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
-    { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
+    { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
     { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
     { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
     { field: 'faqedCount', header: 'فاقد', isSelected: true, readonly: true },

@@ -84,7 +84,7 @@ export class ListManagerService {
       { field: 'readCount', header: 'تعداد قرائت', isSelected: true, readonly: true },
       { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
       { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
-      { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
+      { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
       { field: 'distance', header: 'فاصله', isSelected: true, readonly: true },
       { field: 'maneCount', header: 'تعداد مانع', isSelected: false, readonly: true },
       { field: 'manePercent', header: 'درصد مانع', isSelected: false, readonly: true },
@@ -101,8 +101,8 @@ export class ListManagerService {
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
       { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
-      { field: 'overalDistance', header: 'مسافت کل', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل', isSelected: true, readonly: true }
+      { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
+      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true }
 
     ];
   }

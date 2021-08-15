@@ -1,7 +1,8 @@
 <app-prime-table     
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" 
+    [dataSource]="dataSource"
+    [_outputEnabled]=false
     [_backToPreviousEnabled]=true
     [_backToPreviousText]="'بازگشت به مدیریت کاربران'"
     (refreshedTable)="refreshTable()"    
