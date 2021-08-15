@@ -29,7 +29,7 @@ export class TimeLineComponent implements OnInit, AfterViewInit {
       { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
       { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
-      { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true, readonly: false },
+      { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, readonly: false },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false },
       { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
       { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false },

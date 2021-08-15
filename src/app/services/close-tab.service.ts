@@ -103,7 +103,7 @@ export class CloseTabService {
       case '/wr/m/r/qr':
         this.saveDataForQotrManager = '';
         break;
-      case '/wr/m/r/cr':
+      case '/wr/m/r/rpt':
         this.saveDataForCounterReport = '';
         break;
       case '/wr/m/r/nob':

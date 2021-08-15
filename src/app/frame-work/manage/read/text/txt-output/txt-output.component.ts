@@ -40,9 +40,14 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.textOutputGET);
+    if (this.closeTabService.saveDataForTextOutput)
+      this.dataSource = this.closeTabService.saveDataForTextOutput;
+
+    else {
+      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.textOutputGET);
+      this.closeTabService.saveDataForTextOutput = this.dataSource;
+    }
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
-    this.closeTabService.saveDataForTextOutput = this.dataSource;
     this.makeIDReadable();
     this.defaultAddStatus();
     this.insertSelectedColumns();

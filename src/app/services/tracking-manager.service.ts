@@ -35,7 +35,7 @@ export class TrackingManagerService {
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
     { field: 'fromDate', header: 'از', isSelected: false },
     { field: 'toDate', header: 'تا', isSelected: false },
-    { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
+    { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
     { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
     { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
@@ -56,7 +56,7 @@ export class TrackingManagerService {
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
     { field: 'fromDate', header: 'از', isSelected: false },
     { field: 'toDate', header: 'تا', isSelected: false },
-    { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: false },
+    { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
     { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
     { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
@@ -67,7 +67,7 @@ export class TrackingManagerService {
   }
   columnSelectedImportedList = (): IObjectIteratation[] => {
     return [
-      { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true, readonly: false, borderize: true },
+      { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, readonly: false, borderize: true },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, borderize: true },
       { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
@@ -190,9 +190,11 @@ export class TrackingManagerService {
       toDate: dbfData.toDate
     }
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOB(ENInterfaces.OutputDBF, a).subscribe(res => {
+      this.interfaceManagerService.POSTBLOB(ENInterfaces.OutputDBF, a).toPromise().then(res => {
         resolve(res);
-      });
+      }).catch(() => {
+        this.utilsService.snackBarMessageFailed(EN_messages.server_noDataFounded);
+      })
     });
   }
   downloadOutputSingle = (single: ITracking): Promise<any> => {

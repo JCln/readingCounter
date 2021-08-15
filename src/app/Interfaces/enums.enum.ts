@@ -5,6 +5,7 @@ export enum EN_messages {
     lessThan_eshterak = 'از اشتراک کمتر از تا اشتراک است!',
     sameLength_notValid = 'مقادیر ابتدا و انتهایی را وارد نمایید',
 
+    server_noDataFounded = 'اطلاعاتی جهت دانلود وجود ندارد',
     lessThan_rate = 'از نرخ کمتر از تا نرخ است!',
     percent_pictures = 'درصد تصویر نمیتواند بیش تر از 100 و کمتر از 0 باشد',
     thereis_no_reader = 'ماموری در این ناحیه انتخاب نشده است',
@@ -82,7 +83,7 @@ export enum EN_messages {
     format_invalid_counterNumber = 'فرمت رقم کنتور اشتباه است',
     format_invalid_counterNumberTimes = 'تعداد ارقام کنتور اشتباه است',
     format_imagePercent = 'فرمت درصد تصویر اشتباه است',    
-    format_alalhesab = 'فرمت علی الحساب اشتباه است',    
+    format_alalhesab = 'فرمت علی‌الحساب اشتباه است',    
 
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',

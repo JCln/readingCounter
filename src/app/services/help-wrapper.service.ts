@@ -46,7 +46,7 @@ export class HelpWrapperService {
       this.messageToShow.title = 'داشبورد';
       this.messageToShow.messageOne = 'گزارش های جامع(قرائت های انجام شده - تصاویر ارسالی- موارد غیرمجاز ثبت شده - گزارشات ثبت شده و ..)';
       this.messageToShow.imgOne = '';
-      this.messageToShow.messageThree = 'عملکرد فرایند قرائت را در دو نمودار رادار و میلیه ای قابل مشاهده و بررسی هستند.';
+      this.messageToShow.messageThree = 'عملکرد فرایند قرائت را در دو نمودار رادار و میله‌ای قابل مشاهده و بررسی هستند.';
       this.messageToShow.messageTwo = 'قسمت کارکرد، مربوط به اطلاعات قرائت به تفکیک روز، هفته، ماه و سال میباشد. ';
       this.messageToShow.imgTwo = '';
       return;
@@ -57,15 +57,6 @@ export class HelpWrapperService {
       this.messageToShow.imgOne = 'assets/imgs/help/edit/edit.JPG';
       this.messageToShow.messageTwo = ' بخش مشاهده کاربران، اطلاعات کلی و ویرایش کاربران در دسترس می باشد. سه آیکن سمت چپ مربوط به ویرایش اطلاعات کاربر، جزئیات ورود های قبلی و تنظیمات بیشتر کاربر می باشد. تنظیمات بیشتر برای فعال سازی، غیرفعال سازی و بازنشانی رمز عبور می باشد.';
       this.messageToShow.messageThree = 'بازنشانی بمعنای تغییر رمز عبور به شماره موبایل کابر است.قفل به معنای دسترسی یا عدم دسترسی کاربر به برنامه می باشد. درصورتی که کاربری به دفعات متعدد به اشتباه نام کاربری و گذرواژه را وارد کند در مدت زمان مشخصی قفل میشود و قادر به ورود نخواهد بود. مدت زمان آن نیز در قسمت سطح دسترسی قابل تنظیم می باشد.فعال یا غیر فعال بودن به معنای دسترسی کاربر به برنامه است و مدت مشخصی ندارد.اطلاعات هر کاربری قابل ویرایش شود.قسمت افزودن کاربر جدید برای معرفی کاربر جدید میباشد. با کامل کردن زیر قسمت های مربوطه(مشخصات کاربر-دسترسی به ناحیه-دسترسی به خدمات ارائه شده در برنامه - نوع یا گروه دسترسی) نسبت به ایجاد کاربر اقدام نمایید.';
-      this.messageToShow.imgTwo = '';
-      return;
-    }
-    else if (currentRoute === '/wr/mu/all/loggins/') {
-      this.messageToShow.title = 'ورود های کاربران';
-      this.messageToShow.messageOne = 'اطلاعات ورود کابران با جزئیات بیشتر قابل مشاهده است ';
-      this.messageToShow.imgOne = '';
-      this.messageToShow.messageTwo = 'از جمله دفعات ورود،  سیستم عامل و نسخه آن، زمان های وارد شده و ..';
-      this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
       return;
     }
@@ -125,19 +116,19 @@ export class HelpWrapperService {
     }
     else if (currentRoute === '/wr/m/r/apk') {
       this.messageToShow.title = 'مدیریت apk';
-      this.messageToShow.messageOne = 'این بخش به دو قسمت نسخه های گذشته و جدید تقسیم میشود. درصورتی که نیاز به استفاده از apk قبلی بود میتوان برروی فایل مربوط به همان سطر کلیک تا به عنوان نسخه جدید درنظر گرفته شود. برای ایجاد نسخه جدید با وارد کردن نام، شماره و فایل نسخه میتوان به ایجاد نسخه جدید اقدام نمود. ';
+      this.messageToShow.messageOne = 'این بخش به دو قسمت نسخه های گذشته و جدید تقسیم میشود. درصورتی که نیاز به استفاده از apk قبلی بود برروی دانلود فایل کلیک نمایید. برای ایجاد نسخه جدید با وارد کردن نام، کد و فایل نسخه به ایجاد نسخه جدید اقدام نمود. ';
       this.messageToShow.imgOne = '';
       this.messageToShow.messageTwo = '';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
       return;
     }
-    else if (currentRoute === '/wr/imd') {
+    else if (currentRoute === '/wr/imp/imd') {
       this.messageToShow.title = 'ایجاد مسیر';
-      this.messageToShow.messageOne = 'این بخش جهت ایجاد مسیر برای مامورین قرائت درنظر گرفته شده است. از دو طریق میتوان مسیری ایجاد کرد. یک: از طریق دوره زمانی دو: بر اساس تاریخ تنها کافیست موارد مربوطه کامل شود تا مسیری ایجاد گردد.';
+      this.messageToShow.messageOne = 'این بخش جهت ایجاد مسیر برای مامورین قرائت درنظر گرفته شده است. به دو طریق میتوان مسیری ایجاد کرد. یک: از طریق دوره زمانی دو: بر اساس تاریخ.';
       this.messageToShow.imgOne = 'assets/imgs/help/tracking/impd1.JPG';
-      this.messageToShow.messageTwo = 'نکته: جهت صدور لیست لازم است دسترسی به "مشاهده دیکشنری" ها در قسمت مدیریت کاربران => مدیریت سامانه ها به کاربر داده شده باشد.';
-      this.messageToShow.messageThree = 'نکته: تا زمانی که پیامی به شکل زیر نمایش داده نشده، مسیری ایجاد نشده است .نکته: امکان ویرایش مقادیر مانند درصد علی الحساب و درصد تصویر وجود دارد.';
+      this.messageToShow.messageTwo = 'تنها کافیست موارد مربوطه کامل شود تا مسیری ایجاد گردد. نکته: جهت صدور لیست لازم است دسترسی به "مشاهده دیکشنری" ها در قسمت مدیریت کاربران => مدیریت سامانه ها به کاربر داده شده باشد.';
+      this.messageToShow.messageThree = 'نکته: تا زمانی که پیامی به شکل بالا نمایش داده نشده، مسیری ایجاد نشده است .نکته: امکان ویرایش مقادیر مانند درصد علی‌الحساب و درصد تصویر وجود دارد.';
       this.messageToShow.imgTwo = 'assets/imgs/help/tracking/impd3.JPG';
       return;
     }
@@ -161,7 +152,7 @@ export class HelpWrapperService {
     }
     else if (currentRoute === '/wr/m/s/fwu' || currentRoute.includes('/wr/m/s/fwu/')) {
       this.messageToShow.title = 'پیگیری درخواست ها';
-      this.messageToShow.messageOne = 'این بخش جهت پیگیری کلیه مسیر/لیست های ایجاد شده ایجاد شده است. ';
+      this.messageToShow.messageOne = 'این بخش جهت پیگیری کلیه مسیر/لیست ها ایجاد شده است. ';
       this.messageToShow.imgOne = '';
       this.messageToShow.messageTwo = 'جزئیات نمایشی بیشتر مانند تاریخ ثبت، نام مامور و وضعیت پیگیری قابل مشاهده هستند.';
       this.messageToShow.messageThree = 'همچنین میتوان مسیر/لیست را به قسمت قبلی بازگشت داد. برای مثال اگر مسیر در وضعیت درحال قرائت باشد میتواند به وضعیت بارگیری شده بازگشت داده شود.';
@@ -238,9 +229,9 @@ export class HelpWrapperService {
     }
     else if (currentRoute.includes('/wr/m/r/formula/')) {
       this.messageToShow.title = 'تعرفه ها';
-      this.messageToShow.messageOne = 'این بخش مربوط به تبصره 2، 3، بودجه و آبها می‌باشد. هر قسمت امکان افزودن دسته ای با استفاده از فایل Excel  و افزودن تکی را دارد. ';
+      this.messageToShow.messageOne = 'امکان ایجاد و تغییر تعرفه در ناحیه ها ایجاد شده است. هر قسمت امکان افزودن تکی و افزودن دسته ای با استفاده از فایل Excel را دارد.';
       this.messageToShow.imgOne = '';
-      this.messageToShow.messageTwo = 'امکان دانلود راهنمای نمونه فایل قابل ارسال و هنچنین ویرایش و حذف هر مورد وجود دارد.';
+      this.messageToShow.messageTwo = 'امکان دانلود راهنمای نمونه فایل قابل ارسال و همچنین ویرایش و حذف هر مورد وجود دارد.';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
       return;
@@ -299,6 +290,15 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = '';
       return;
     }
+    else if (currentRoute.includes('wr/m/s/acme')) {
+      this.messageToShow.title = 'جستجوی تجمیعی';
+      this.messageToShow.messageOne = 'لیست قرائت جستجو شده در این قسمت قابل مشاهده می باشد. درصورتی که عکس(ها) و یا صوتی گرفته شده باشد با کلیک برروی "بررسی عکس/صوت" قابل بررسی می باشد.';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
     else if (currentRoute.includes('exm/details') || currentRoute.includes('mam/trv') || currentRoute.includes('mam/trvch') || currentRoute.includes('mam/karkard') || currentRoute.includes('mam/karkardDaily') || currentRoute.includes('mam/dh') || currentRoute.includes('exm/master') || currentRoute.includes('exm/details')) {
       this.messageToShow.title = 'گزارشات';
       this.messageToShow.messageOne = 'این بخش جهت گزارش گیری از بخش هایی مانند کارکرد روزانه، پیمایشات و .. می باشد. ';
@@ -344,11 +344,29 @@ export class HelpWrapperService {
       this.messageToShow.imgTwo = 'assets/imgs/help/tracking/reading1.JPG';
       return;
     }
+    else if (currentRoute.includes('/wr/imp/simafa/rdpg')) {
+      this.messageToShow.title = 'سیمافا صدور لیست';
+      this.messageToShow.messageOne = 'این بخش جهت ایجاد مسیر برای مامورین قرائت درنظر گرفته شده است. به دو طریق تکی و دسته ای میتوان لیست/مسیر ایجاد کرد.';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = 'برای مسیر تکی کافی است پس از انتخاب موارد(مانند ناحیه) و بارگیری لیست مربوطه، در هر سطر، با کلیک برروی "تکی" نسبت به ایجاد یک مسیر و برای لیست دسته ای برروی "دسته‌ای" کلیک کرده تا به صفحه مربوطه منتقل شوید.';
+      this.messageToShow.messageThree = 'درصورتی که لیست قبلا صادر شده باشد، امکان ایجاد مجدد آن وجود ندارد.';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
     else if (currentRoute.includes('/wr/imp/simafa/rdpg/batch')) {
       this.messageToShow.title = 'سیمافا افزودن لیست دسته‌ای';
       this.messageToShow.messageOne = 'پس از انتخاب تمامی مامور های قرائت در هر سطر(مسیر) برروی ایجاد لیست کلیک کرده تا لیست مربوطه ایجاد شود';
       this.messageToShow.imgOne = '';
       this.messageToShow.messageTwo = '';
+      this.messageToShow.messageThree = '';
+      this.messageToShow.imgTwo = '';
+      return;
+    }
+    else if (currentRoute.includes('/wr/mu/all/loggins/')) {
+      this.messageToShow.title = 'ورود های کاربران';
+      this.messageToShow.messageOne = 'اطلاعات ورود کابران با جزئیات بیشتر قابل مشاهده است ';
+      this.messageToShow.imgOne = '';
+      this.messageToShow.messageTwo = 'از جمله دفعات ورود،  سیستم عامل و نسخه آن، زمان های وارد شده و ..';
       this.messageToShow.messageThree = '';
       this.messageToShow.imgTwo = '';
       return;

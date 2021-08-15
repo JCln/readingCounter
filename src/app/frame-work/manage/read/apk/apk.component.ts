@@ -88,12 +88,15 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh)
-      this.closeTabService.saveDataForAPKManager = '';
+      this.closeTabService.saveDataForAPKManager = null;
 
-    if (this.closeTabService.saveDataForAPKManager)
-      this.dataSource = this.closeTabService.saveDataForAPKManager;
-    else
+    if (this.closeTabService.saveDataForAPKManager === null || !this.closeTabService.saveDataForAPKManager) {
       this.dataSource = await this.apkService.getDataSource();
+      this.closeTabService.saveDataForAPKManager = this.dataSource;
+    }
+    else {
+      this.dataSource = this.closeTabService.saveDataForAPKManager;
+    }
 
     this._columns = this.apkService.columnAPK();
   }
