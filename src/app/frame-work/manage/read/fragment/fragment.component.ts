@@ -86,7 +86,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isNew: true };
   }
   onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+    // this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   onRowEditSave(dataSource: IFragmentMaster, rowIndex: number) {
     this.newRowLimit = 1;

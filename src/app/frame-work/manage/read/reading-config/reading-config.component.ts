@@ -49,6 +49,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
           await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigADD, result);
+          this.refreshTable();
         }
       });
     });
@@ -77,6 +78,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
           await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigEDIT, result);
+          this.refreshTable();
       });
     })
   }

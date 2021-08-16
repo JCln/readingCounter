@@ -44,9 +44,10 @@ export class ZoneBoundComponent implements OnInit, AfterViewInit, OnDestroy {
           }
 
         });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneBoundADD, result);
+          await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneBoundADD, result);
+          this.refreshTable();
         }
       });
     });

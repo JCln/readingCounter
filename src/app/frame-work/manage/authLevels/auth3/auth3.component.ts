@@ -100,7 +100,7 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
+    // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.authsManagerService.verification(dataSource)) {

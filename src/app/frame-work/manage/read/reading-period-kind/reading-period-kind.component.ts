@@ -39,6 +39,7 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
           await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodKindAdd, result);
+          this.refreshTable();
         }
       });
     });

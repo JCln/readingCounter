@@ -44,9 +44,10 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
           }
 
         });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.RegionADD, result);
+          await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.RegionADD, result);
+          this.refreshTable();
         }
       });
     });
@@ -119,6 +120,7 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.RegionEDIT, dataSource['dataSource']);
+    this.refetchTable(dataSource['ri']);
     Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
   }
   onRowEditCancel() {

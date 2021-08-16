@@ -46,7 +46,6 @@ export class PrimeTableEditableComponent {
   @Output() removedRowEditing = new EventEmitter<any>();
   @Output() openedAddDialog = new EventEmitter<any>();
   @Output() newedRowChangedStatus = new EventEmitter<any>();
-  @Output() addedNewRow = new EventEmitter<any>();
   @Output() getedExcelSample = new EventEmitter<any>();
   @Output() openedAddExcelDialog = new EventEmitter<any>();
   @Output() routedToParent = new EventEmitter<any>();
@@ -89,10 +88,7 @@ export class PrimeTableEditableComponent {
   }
   newRowChangedStatus = () => {
     this.newedRowChangedStatus.emit();
-  }
-  addNewRow = () => {
-    this.addedNewRow.emit();
-  }
+  }  
   onRowEditCancelRowEditing = (dataSource: object, ri: number) => {
     this.onRowEditedCancelRowEditing.emit({ dataSource, ri });
   }

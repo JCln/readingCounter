@@ -94,7 +94,7 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     };
   }
   onRowEditInit(dataSource: object) {
-    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
+    // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditCancel(dataSource: object) {
     this.newRowLimit = 1;

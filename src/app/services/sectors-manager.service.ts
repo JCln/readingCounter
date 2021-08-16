@@ -89,13 +89,12 @@ export class SectorsManagerService {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
 
-  sectorsAddEdit = (apiUse: ENInterfaces, value: any) => {
-    console.log(value);
-
-    this.interfaceManagerService.POSTBODY(apiUse, value).subscribe((res: IResponses) => {
-      if (res) {
+  sectorsAddEdit = (apiUse: ENInterfaces, value: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(apiUse, value).toPromise().then((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);
-      }
+        resolve(res);
+      })
     })
   }
   sectorsDelete = (apiUse: ENInterfaces, id: any) => {

@@ -48,6 +48,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
           await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodAdd, result);
+          this.refreshTable();
         }
       });
     });

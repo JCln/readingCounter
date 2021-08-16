@@ -96,7 +96,7 @@ export interface IReadingPeriodKind {
     clientOrder: number
 }
 export interface ICounterState {
-    id: number,
+    id?: number,
     moshtarakinId: number,
     title: string,
     zoneId: number,
@@ -107,7 +107,8 @@ export interface ICounterState {
     isTavizi: boolean,
     shouldEnterNumber: boolean,
     isXarab: boolean,
-    isFaqed: boolean
+    isFaqed: boolean,
+    isNew?: boolean
 }
 // export interface IGridFriendlyFilter {
 //     field: string,

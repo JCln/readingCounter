@@ -8,8 +8,14 @@
     [_rowsPerPage]="[10,20,50,100, 500, 1000]"
     [_numberOfExtraColumns]="[1, 2]"
     [_outputEnabled]=false
+    [_isInRowEditing]=true
+    [newRow]="newRow()"
+    [newRowLimit]="newRowLimit"
     [_selectedColumnsToRemember]="'selectedCounterState'"
     [_sessionName]="'counterstate-session'"
+    (newedRowChangedStatus)="testChangedValue()"
     (refreshedTable)="refreshTable()"     
+    (removedRowEditing)="removeRow($event)"        
+    (onRowEditedSave)="onRowEditSave($event)"
  > 
 </app-prime-table-editable>

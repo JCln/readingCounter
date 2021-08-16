@@ -79,35 +79,32 @@ export class UserRoleComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
+    // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
     this.defaultAddStatus();
     if (!this.userService.verification(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
-        this.dataSource['dataSource'].shift();
+        this.dataSource.shift();
         return;
       }
       this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (dataSource['dataSource'].isNew) {
-      await this.userService.roleAddEdit(ENInterfaces.RoleADD, dataSource['ri']);
+      await this.userService.roleAddEdit(ENInterfaces.RoleADD, dataSource['dataSource']);
     }
     else {
       await this.userService.roleAddEdit(ENInterfaces.RoleEDIT, dataSource['dataSource']);
     }
-    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-
   }
   onRowEditCancel(dataSource: object) {
     this.defaultAddStatus();
-    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-    delete this.dataSource[dataSource['dataSource'].id];
     if (dataSource['dataSource'].isNew) {
       this.dataSource.shift();
       return;
     }
+    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

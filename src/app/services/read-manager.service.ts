@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ITextOutput } from 'interfaces/imanage';
+import { ICounterState, ITextOutput } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
@@ -145,9 +145,47 @@ export class ReadManagerService {
     }
   }
   /* VERIFICATION & VALIDATION */
+  counterStateVertification = (dataSource: ICounterState): boolean => {
+    if (this.utilsService.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (this.utilsService.isNull(dataSource.clientOrder)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_clientOrder);
+      return false;
+    }
+    if (this.utilsService.isNull(dataSource.moshtarakinId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_moshtarakinId);
+      return false;
+    }
+    if (this.utilsService.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+
+    if (this.utilsService.isNaN(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(dataSource.clientOrder)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(dataSource.moshtarakinId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+
+    return true;
+  }
   verification = (dataSource: any): boolean => {
     this.sectionsService.setSectionsValue(dataSource);
     if (!this.sectionsService.sectionVertification())
+      return false;
+    return true;
+  }
+  verificationCounterState = (dataSource: ICounterState): boolean => {
+    if (!this.counterStateVertification(dataSource))
       return false;
     return true;
   }

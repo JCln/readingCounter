@@ -46,6 +46,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
           await this.readManagerService.addOrEditAuths(ENInterfaces.KarbariAdd, result);
+          this.refreshTable();
         }
       });
     });
@@ -100,7 +101,7 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   onRowEditInit(dataSource: object) {
-    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
+    // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: IKarbari) => {
     if (!this.readManagerService.verification(dataSource)) {

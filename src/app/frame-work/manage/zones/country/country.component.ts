@@ -36,6 +36,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
           await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryADD, result);
+          this.refreshTable();
         }
       });
     });
@@ -87,7 +88,7 @@ export class CountryComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
+    // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {

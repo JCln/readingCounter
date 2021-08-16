@@ -138,7 +138,7 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     await this.trackingManagerService.postEditState(ENInterfaces.trackingEditState, { id: dataSource.id, seen: dataSource.seen });
   }
   onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+    // this.clonedProducts[dataSource.id] = { ...dataSource };
   }
   getUserRole = (): boolean => {
     const jwtRole = this.authService.getAuthUser();
