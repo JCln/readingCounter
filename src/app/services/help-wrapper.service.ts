@@ -329,9 +329,9 @@ export class HelpWrapperService {
     else if (currentRoute.includes('/m/r/nob')) {
       this.messageToShow.title = 'نوبتی';
       this.messageToShow.messageOne = 'اطلاعات کلی نوبتی در این بخش قابل مشاهده است';
-      this.messageToShow.imgOne = 'assets/imgs/help/fragment/nob1.JPG';
-      this.messageToShow.messageTwo = 'امکان افزودن، ویرایش، مشاهده جزئیات و حذف هر مورد نیز وجود دارد.';
-      this.messageToShow.messageThree = 'ستون تایید شده به معنای تایید تمامی زیر مجوعه هایی که در قسمت مسیر های هر کدام وجود دارد می باشد. درصورتی که مشکلی در ایجاد و ویرایش وجود داشته باشد سیستم بطور خودکار  پیامی برای اصلاح موارد لازم نمایش خواهد داد. ';
+      this.messageToShow.imgOne = 'با ورود به بخش مدیریت مسیر ها، امکان ایجاد مسیر/ها برای بازه‌/ها اشتراکی وجود دارد.';
+      this.messageToShow.messageTwo = '';
+      this.messageToShow.messageThree = 'امکان افزودن، ویرایش، مشاهده جزئیات و حذف هر مورد نیز وجود دارد. ستون تایید شده به معنای تایید تمامی زیر مجوعه ها در یک مسیر است. درصورتی که مشکلی در ایجاد و ویرایش وجود داشته باشد سیستم بطور خودکار  پیامی برای اصلاح موارد لازم نمایش خواهد داد. ';
       this.messageToShow.imgTwo = 'assets/imgs/help/fragment/nob2.JPG';
       return;
     }

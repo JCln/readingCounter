@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -7,7 +7,7 @@ import { Label } from 'ng2-charts';
   templateUrl: './bar-anlz-prfm.component.html',
   styleUrls: ['./bar-anlz-prfm.component.scss']
 })
-export class BarAnlzPrfmComponent implements AfterViewChecked {
+export class BarAnlzPrfmComponent implements AfterViewInit {
   @Input() barAnalyze: any[];
 
   private defaultOptions = {
@@ -47,9 +47,11 @@ export class BarAnlzPrfmComponent implements AfterViewChecked {
 
   constructor() { }
 
-  ngAfterViewChecked(): void {
-    if (this.barAnalyze)
+  ngAfterViewInit(): void {
+    // async when we have result . could be use of promse function or changeDetectionRef for more explicit way
+    setTimeout(() => {
       this.barChartData = this.barAnalyze;
+    }, 0);
   }
 
 }
