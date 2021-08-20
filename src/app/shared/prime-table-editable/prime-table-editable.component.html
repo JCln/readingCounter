@@ -97,7 +97,8 @@
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
                                     [(ngModel)]="dataSource[_dictionaryName]" placeholder="انتخاب مورد"
-                                    [style]="{'width':'100%'}" optionLabel="title">
+                                    [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
+                                    optionLabel="title">
                                 </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -110,7 +111,8 @@
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_secondDictionaryName}}" [options]="secondDictionary"
                                     [(ngModel)]="dataSource[_secondDictionaryName]" placeholder="انتخاب مورد"
-                                    [style]="{'width':'100%'}" optionLabel="title">
+                                    [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
+                                    optionLabel="title">
                                 </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -123,7 +125,8 @@
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <mat-checkbox [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                                <mat-checkbox [ngClass]="{'mat-checkbox-editable': true}"
+                                    [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                             </ng-template>
                             <ng-template pTemplate="output">
                                 <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>

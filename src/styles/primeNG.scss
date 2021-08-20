@@ -289,14 +289,25 @@
 
   p-cellEditor {
     input {
-      font-size: $font_xs;
-      font-weight: 600;
       width: 100%;
-      border: 1px solid var(--orange_500);
-      box-shadow: 0 0 3px 0 var(--orange_500);
-      border-radius: 10px;
       padding: .3rem;
+      text-align: center;
+      font-size: $font_m;
+      font-weight: 600;
+      outline: 2px dotted var(--orange_500);
+      border-radius: 10px;
       color: var(--blue_700);
+    }
+
+    .mat-checkbox-editable {
+      width: 1.6rem;
+      border: 2px dotted var(--orange_500);
+      padding: 0.25rem 0.5rem 0.5rem 0;
+    }
+
+    .p-dropdown-editable {
+      outline: 2px dotted var(--orange_500);
+      padding: .3rem 0;
     }
   }
 }

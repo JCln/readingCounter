@@ -112,7 +112,7 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     const a = await this.fragmentManagerService.addFragmentMaster(dataSource);
     console.log(a);
-    
+
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();
@@ -120,8 +120,6 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   onRowEditCancel(dataSource: IFragmentMaster, index: number) {
     this.newRowLimit = 1;
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
     if (dataSource.isNew)
       this.dataSource.shift();
     return;
