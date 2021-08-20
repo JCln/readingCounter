@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 
@@ -5,7 +6,20 @@ import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  styleUrls: ['./side-bar.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('closeSubItems', style({
+        minHeight: '3.3rem',
+        height: '3.3rem',
+      })),
+      state('openSubItems', style({
+        minHeight: '10rem',
+        height: 'auto',
+      })),
+      transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
+    ])
+  ]
 })
 export class SideBarComponent implements OnInit {
   @Input() sid_isSmall: boolean;

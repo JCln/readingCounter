@@ -4,6 +4,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { InterceptorService } from '../auth/interceptor.service';
 import { SpinnerInterceptorService } from '../auth/spinner-interceptor.service';
@@ -46,6 +47,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     MatSnackBarModule,
     MatDialogModule,
     SharedThreeModule,
+    BrowserAnimationsModule,
     CoreRoutingModule
   ],
   exports: [
@@ -55,7 +57,9 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     SpinnerComponent,
     SnackBarComponent,
     ClockComponent,
-    SharedThreeModule
+    SharedThreeModule,
+    BrowserAnimationsModule,
+    CoreRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
