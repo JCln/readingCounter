@@ -29,11 +29,12 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>بیشینه تصویر</mat-label>
-            <input matInput type="number" formControlName="maxImagePercent" placeholder="بیشینه تصویر">
+            <input matInput type="number" min="0" max="100" formControlName="maxImagePercent"
+                placeholder="بیشینه تصویر">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>کمینه تصویر</mat-label>
-            <input matInput type="number" formControlName="minImagePercent" placeholder="کمینه تصویر">
+            <input matInput type="number" min="0" max="100" formControlName="minImagePercent" placeholder="کمینه تصویر">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>ثابت مسکونی</mat-label>
@@ -41,7 +42,8 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>درصد مسکونی</mat-label>
-            <input matInput type="number" formControlName="lowPercentBoundMaskooni" placeholder="درصد مسکونی">
+            <input matInput type="number" min="0" max="100" formControlName="lowPercentBoundMaskooni"
+                placeholder="درصد مسکونی">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>بیشینه مسکونی</mat-label>
@@ -49,7 +51,8 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>درصد مسکونی</mat-label>
-            <input matInput type="number" formControlName="highPercentBoundMaskooni" placeholder="درصد مسکونی">
+            <input matInput type="number" min="0" max="100" formControlName="highPercentBoundMaskooni"
+                placeholder="درصد مسکونی">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>ثابت ساخت</mat-label>
@@ -57,7 +60,8 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>درصد ساخت</mat-label>
-            <input matInput type="number" formControlName="lowPercentBoundSaxt" placeholder="درصد ساخت">
+            <input matInput type="number" min="0" max="100" formControlName="lowPercentBoundSaxt"
+                placeholder="درصد ساخت">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>بیشینه محدوده</mat-label>
@@ -65,7 +69,8 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>درصد محدوده</mat-label>
-            <input matInput type="number" formControlName="highPercentBoundSaxt" placeholder="درصد محدوده">
+            <input matInput type="number" min="0" max="100" formControlName="highPercentBoundSaxt"
+                placeholder="درصد محدوده">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>ظرفیت کمینه</mat-label>
@@ -73,7 +78,8 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>درصد ظرفیت</mat-label>
-            <input matInput type="number" formControlName="lowPercentZarfiatBound" placeholder="درصد ظرفیت">
+            <input matInput type="number" min="0" max="100" formControlName="lowPercentZarfiatBound"
+                placeholder="درصد ظرفیت">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>بیشینه ظرفیت</mat-label>
@@ -81,15 +87,17 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>بیشنه درصد ظرفیت</mat-label>
-            <input matInput type="number" formControlName="highPercentZarfiatBound" placeholder="بیشنه درصد ظرفیت">
+            <input matInput type="number" min="0" max="100" formControlName="highPercentZarfiatBound"
+                placeholder="بیشنه درصد ظرفیت">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>مسکونی درصد ..</mat-label>
-            <input matInput type="number" formControlName="lowPercentRateBoundNonMaskooni" placeholder="مسکونی درصد ..">
+            <input matInput type="number" min="0" max="100" formControlName="lowPercentRateBoundNonMaskooni"
+                placeholder="مسکونی درصد ..">
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>درصد مسکونی بیشنه</mat-label>
-            <input matInput type="number" formControlName="highPercentRateBoundNonMaskooni"
+            <input matInput type="number" min="0" max="100" formControlName="highPercentRateBoundNonMaskooni"
                 placeholder="درصد مسکونی بیشنه">
         </mat-form-field>
 

@@ -32,12 +32,12 @@
         <section class="dynamic_content">
             <div class="input_2 this">
                 <div class="_key">درصد علی‌الحساب</div>
-                <input class="_value" type="number" name="alalHesabPercent"
+                <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
                     [(ngModel)]="simafaSingleReq.alalHesabPercent">
             </div>
             <div class="input_2 this">
                 <div class="_key">درصد تصویر</div>
-                <input class="_value" type="number" name="imagePercent" [(ngModel)]="simafaSingleReq.imagePercent">
+                <input class="_value" min="0" max="100" type="number" name="imagePercent" [(ngModel)]="simafaSingleReq.imagePercent">
             </div>
 
         </section>

@@ -7,7 +7,7 @@ import { Imap } from 'interfaces/imap.js';
 import { ITHV } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { MapItemsService } from 'services/DI/map-items.service.js';
+import { MapItemsService } from 'services/DI/map-items.service';
 import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
 import { MapService } from 'services/map.service';

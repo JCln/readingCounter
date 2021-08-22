@@ -35,8 +35,8 @@ export class TrackingManagerService {
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
     { field: 'fromDate', header: 'از', isSelected: false },
     { field: 'toDate', header: 'تا', isSelected: false },
-    { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false },
-    { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
+    { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isNumber: true },
+    { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
     { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
     { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
   ];
