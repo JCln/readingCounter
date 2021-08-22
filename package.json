@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --base-href '/' --outputHashing=all",
-    "bundle-report": "ng build --prod --stats-json && webpack-bundle-analyzer dist/readingcounter/stats.json",
+    "build": "ng build --base-href '/' --outputHashing=all",
+    "bundle-report": "ng build --stats-json && webpack-bundle-analyzer dist/readingcounter/stats.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
