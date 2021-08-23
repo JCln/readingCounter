@@ -70,7 +70,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
           }
 
           this.spinnerWrapperService.stopLoading();
-          return throwError(error);
+          return throwError(() => error);
         })
       )
       .pipe(

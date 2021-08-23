@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -7,7 +7,7 @@ import { Label } from 'ng2-charts';
   templateUrl: './bar-anlz-prfm.component.html',
   styleUrls: ['./bar-anlz-prfm.component.scss']
 })
-export class BarAnlzPrfmComponent implements AfterViewInit {
+export class BarAnlzPrfmComponent implements OnChanges {
   @Input() barAnalyze: any[];
 
   private defaultOptions = {
@@ -47,10 +47,10 @@ export class BarAnlzPrfmComponent implements AfterViewInit {
 
   constructor() { }
 
-  ngAfterViewInit(): void {
-    // async when we have result . could be use of promse function or changeDetectionRef for more explicit way
+  ngOnChanges(): void {
     setTimeout(() => {
-      this.barChartData = this.barAnalyze;
+      if (this.barAnalyze)
+        this.barChartData = this.barAnalyze;
     }, 0);
   }
 

@@ -44,7 +44,7 @@ export class AuthService {
               this.utilsService.snackBarMessageFailed(error.error.message);
             }
           }
-          return throwError(error)
+          return throwError(() => error)
         })
       )
       .subscribe((res: IAuthTokenType) => {

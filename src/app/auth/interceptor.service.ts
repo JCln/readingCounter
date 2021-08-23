@@ -30,7 +30,7 @@ export class InterceptorService implements HttpInterceptor {
           if (
             req.url.includes('login')
           ) {
-            return throwError(error)
+            return throwError(() => error)
           }
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
@@ -43,7 +43,7 @@ export class InterceptorService implements HttpInterceptor {
               }
             }
           }
-          return throwError(error);
+          return throwError(() => error);
         }))
       )
   }
