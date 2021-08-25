@@ -24,16 +24,16 @@
 
   .mat-stepper-horizontal,
   .mat-stepper-vertical {
-    background: var(--white);
+    background: var(--gray_100);
   }
 
   .mat-horizontal-stepper-header-container {
-    height: 4rem;
+    height: 3.5rem;
     direction: rtl;
     border: 2px solid var(--blue_700);
     border-radius: 6rem;
     padding: $font_05;
-    margin-bottom: 1rem;
+    margin-bottom: .25rem;
   }
 
   .mat-step-text-label {
@@ -50,7 +50,7 @@
 
   .mat-horizontal-content-container {
     min-height: 15rem;
-    padding: $font_xxs 0 !important;
+    padding: 0 !important;
   }
 }
 
@@ -64,10 +64,12 @@
 }
 
 .btn_2 {
-  margin: .25rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 2.5rem;
+  margin: 0.1rem .25rem;
+  padding: .25rem;
   background-color: var(--blue_gray_400);
   color: var(--blue_700);
 }
@@ -97,7 +99,7 @@
   .auth_1_item {
     display: grid;
     place-content: center;
-    padding: $font_05;
+    padding: 0.2rem;
     border-radius: $border_5;
     font-size: $font_l;
     font-weight: 600;
@@ -131,21 +133,21 @@
 
 .auth_3 {
   margin: 0;
-  padding: $font_05;
+  padding: 0.25rem;
   border-radius: $border_15;
-  box-shadow: 0px 2px 3px 1.5px var(--gray_400);
+  box-shadow: 0px 1px 3px 1.5px var(--gray_400);
 }
 
-@include media_wrapper(550px, '.auth_3', margin, $font_05 4rem $font_05 $font_xxs);
+@include media_wrapper(550px, '.auth_3', margin, 0 4rem $font_05 $font_xxs);
 
 .auth_4 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   gap: .3rem;
-  background: var(--gray_100);
-  border: 1px solid var(--blue_600);
+  background: var(--white);
+  border: 1px solid var(--gray_100);
   border-radius: $border_5;
-  margin: $font_xxs;
+  margin: $font_05;
 
   .checkboxes {
     display: flex;
@@ -167,7 +169,7 @@
   text-align: center;
   padding: $font_05;
   border-radius: $border_15;
-  margin-bottom: $font_05;
+  margin-bottom: 0;
   font-size: $font_m;
   font-weight: 600;
   color: var(--blue_600);

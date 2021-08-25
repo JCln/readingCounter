@@ -24,9 +24,12 @@ main {
 }
 
 .header {
+  --height: 3rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-radius: $border_15;
+  height: var(--height);
   padding: 0 $font_xs;
   margin-bottom: $font_05;
   background: var(--white);
@@ -42,8 +45,12 @@ main {
 }
 
 ._logo_content {
-  width: 4.3rem;
-  height: 3rem;
+  width: calc(var(--height) - 0.5rem);
+  height: calc(var(--height) - 0.5rem);
+
+  img {
+    border-radius: $border_50;
+  }
 }
 
 .btn_1 {

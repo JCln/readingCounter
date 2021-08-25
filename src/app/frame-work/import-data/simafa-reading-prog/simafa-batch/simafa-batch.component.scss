@@ -37,7 +37,8 @@ section.dynamic_content {
 }
 
 .static_part {
-  border: .15rem solid var(--blue_400);
+  background: var(--white);
+  border: .15rem solid var(--gray_200);
   border-radius: $border_15;
   padding: $font_xxs;
 }
@@ -46,7 +47,11 @@ section.dynamic_content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
   gap: $font_05;
-  margin: $font_xxs;
+  border-radius: $border_15;
+  box-shadow: 0px 0px 2px 1px var(--blue_800);
+  background: var(--white);
+  padding: $font_s;
+  margin-top: $font_05;
 }
 
 ._key,
@@ -161,7 +166,7 @@ hr {
 }
 
 .this {
-  border: 1.5px solid var(--orange_600);
+  border: 2px dotted var(--orange_600);
   animation: pulse-new-button 500ms;
 }
 

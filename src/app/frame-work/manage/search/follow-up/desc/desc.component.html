@@ -92,7 +92,8 @@
                 <ng-container *ngIf="col.field === 'seen'; else elseTemplate">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <mat-checkbox [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                            <mat-checkbox [(ngModel)]="changeHsty[col.field]"
+                                [ngClass]="{'mat-checkbox-editable': true}"></mat-checkbox>
                         </ng-template>
                         <ng-template pTemplate="output">
                             <mat-checkbox [disabled]="true" [(ngModel)]="changeHsty[col.field]"></mat-checkbox>

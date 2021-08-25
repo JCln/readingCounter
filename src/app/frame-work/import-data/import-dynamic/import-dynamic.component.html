@@ -91,9 +91,6 @@
                 <mat-checkbox name="displayRadif" [(ngModel)]="importDynamic.displayRadif">نمایش ش.پرونده
                 </mat-checkbox>
 
-                <mat-checkbox name="showDynamicCount" [(ngModel)]="_showDynamicCount"
-                    (ngModelChange)="setShowDynamicCount($event)">پیش نمایش جزئیات
-                </mat-checkbox>
             </div>
         </section>
         <section *ngIf="canShowEditButton" class="dynamic_content">
@@ -111,8 +108,10 @@
         </section>
 
         <footer>
+            <mat-checkbox name="showDynamicCount" [(ngModel)]="_showDynamicCount"
+                (ngModelChange)="setShowDynamicCount($event)">نمایش تعداد اشتراک
+            </mat-checkbox>
             <button type="submit" class="btn_1">افزودن</button>
-
         </footer>
     </form>
 </main>

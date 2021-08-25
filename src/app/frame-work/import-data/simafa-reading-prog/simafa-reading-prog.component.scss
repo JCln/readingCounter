@@ -6,10 +6,9 @@
 .main {
   direction: rtl;
   background: var(--gray_100);
-  box-shadow: 1px 1px 8px 4px var(--gray_400);
   padding: $font_05;
   border-radius: $border_15;
-  border: 1px solid var(--blue_400);
+  border: .15rem solid var(--gray_200);
 }
 
 section.content {

@@ -300,9 +300,12 @@
     }
 
     .mat-checkbox-editable {
-      width: 1.6rem;
+      display: grid;
+      justify-content: center;
+      margin: auto;
+      width: $font_3;
       border: 2px dotted var(--orange_500);
-      padding: 0.25rem 0.5rem 0.5rem 0;
+      padding: $font_xxs $font_l $font_xxs 0;
     }
 
     .p-dropdown-editable {

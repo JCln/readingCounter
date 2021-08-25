@@ -1,11 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-permission';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { catchError } from 'rxjs/internal/operators/catchError';
 import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { MainService } from 'services/main.service';
@@ -17,8 +13,6 @@ import { JwtService } from './jwt.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private authStatusSource = new BehaviorSubject<boolean>(false);
-  authStatus$ = this.authStatusSource.asObservable();
 
   constructor(
     private mainService: MainService,
@@ -36,29 +30,10 @@ export class AuthService {
   }
   logging = (userData: ICredentials) => {
     const returnUrl = this.utilsService.getRouteParams('returnUrl');
-    this.mainService.POSTBODY('v1/account/login', userData)
-      .pipe(
-        catchError((error: any) => {
-          if (error instanceof HttpErrorResponse) {
-            if (error.status === 401) {
-              this.utilsService.snackBarMessageFailed(error.error.message);
-            }
-          }
-          return throwError(() => error)
-        })
-      )
-      .subscribe((res: IAuthTokenType) => {
-        if (res) {
-          this.saveTolStorage(res);
-          this.savedStatusFromToken();
-          this.routeToReturnUrl(returnUrl);
-
-        }
-        else {
-          this.authStatusSource.next(false);
-        }
-
-      })
+    this.mainService.POSTBODY('v1/account/login', userData).subscribe((res: IAuthTokenType) => {
+      this.saveTolStorage(res);
+      this.routeToReturnUrl(returnUrl);
+    })
   }
   private clearAllSavedData = () => this.closeTabService.cleanAllData();
   private clearDictionaries = () => this.dictionaryWrapperService.cleanDictionaries();
@@ -74,9 +49,6 @@ export class AuthService {
   saveTolStorage = (token: IAuthTokenType) => {
     this.jwtService.saveToLocalStorage(token.access_token);
     this.jwtService.saveToLocalStorageRefresh(token.refresh_token);
-  }
-  savedStatusFromToken = () => {
-    this.authStatusSource.next(true);
   }
   private routeToReturnUrl = (returnUrl: string) => {
     if (!this.utilsService.isNull(returnUrl))
