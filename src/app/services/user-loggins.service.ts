@@ -26,9 +26,9 @@ export class UserLogginsService {
       { field: 'osVersion', header: 'OS Version', isSelected: true },
       // { field: 'userId', header: 'کد کاربر', isSelected: true },
       { field: 'osTitle', header: 'OS', isSelected: true },
-      { field: 'osPlatform', header: 'پلتفرم', isSelected: true },
+      { field: 'osPlatform', header: 'پلتفرم', isSelected: false },
       // { field: 'osShortTitle', header: 'عنوان سیستم عامل', isSelected: false },
-      { field: 'wrongPassword', header: 'گذرواژه', isSelected: true },
+      { field: 'wrongPassword', header: 'گذرواژه', isSelected: false },
       // { field: 'id', header: 'کد', isSelected: false },
       { field: 'userAgent', header: 'userAgent', isSelected: false },
     ];

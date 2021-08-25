@@ -38,8 +38,8 @@ export class ImportDynamicService {
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isNumber: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isNumber: true },
     { field: 'listNumber', header: 'ش لیست', isSelected: true },
-    { field: 'year', header: 'سال', isSelected: true, isNumber: true },
-    { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: true, isSelectOption: true },
+    { field: 'year', header: 'سال', isSelected: false, isNumber: true },
+    { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: false, isSelectOption: true },
   ]
   private _simafaBatch: IObjectIteratation[] = [
     { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },

@@ -38,7 +38,9 @@ export class TrackingManagerService {
     { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isNumber: true },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
     { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
-    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
+    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true },
+    { field: 'description', header: 'توضیحات', isSelected: false }
+
   ];
   private lastStates: IObjectIteratation[] = [
     { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
@@ -59,7 +61,8 @@ export class TrackingManagerService {
     { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
     { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
-    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true }
+    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true },
+    { field: 'description', header: 'توضیحات', isSelected: false }
     // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }
   ]
   columnSelectedMenuDefault = (): IObjectIteratation[] => {

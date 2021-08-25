@@ -20,10 +20,9 @@ export class InterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.jwtService.getAuthorizationToken();
-    if (authToken) {
+    if (authToken)
       req = this.addToken(req, authToken);
-      this.authService.savedStatusFromToken();
-    }
+
     return next.handle(req)
       .pipe(
         catchError((error => {

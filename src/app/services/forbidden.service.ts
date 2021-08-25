@@ -30,16 +30,10 @@ export class ForbiddenService {
       // { field: 'userId', header: 'کاربری', isSelected: false },
       // { field: 'x', header: 'X', isSelected: false },
       // { field: 'y', header: 'Y', isSelected: false },
-      { field: 'gisAccuracy', header: 'دقت مکان یابی', isSelected: false }
+      { field: 'gisAccuracy', header: 'دقت مکان یابی', isSelected: false },
+      { field: 'description', header: 'توضیحات', isSelected: false },
     ];
   }
-  // later  usage
-  // customizeSelectedColumns = () => {
-  //   return this.columnSelectedMenuDefault().filter(items => {
-  //     if (items.isSelected)
-  //       return items
-  //   })
-  // }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,

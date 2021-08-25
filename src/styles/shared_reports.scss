@@ -20,7 +20,8 @@ section.content {
 }
 
 .static_part {
-  border: .15rem solid var(--blue_400);
+  background: var(--white);
+  border: .15rem solid var(--gray_200);
   border-radius: $border_15;
   padding: $font_xxs;
 }

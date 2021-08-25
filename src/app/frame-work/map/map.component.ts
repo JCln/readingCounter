@@ -256,7 +256,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByDatePersian) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByDateDESCPersian)
     }
 
-    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay + 1);
+    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay);
     this.leafletDrawPolylines(delay);
   }
   private extrasConfigOptions = (xyData: any) => {

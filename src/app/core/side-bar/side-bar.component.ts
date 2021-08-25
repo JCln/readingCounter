@@ -14,7 +14,7 @@ import { SidebarItemsService } from 'services/DI/sidebar-items.service';
         height: '3.3rem',
       })),
       state('openSubItems', style({
-        minHeight: '10rem',
+        minHeight: '8rem',
         height: 'auto',
       })),
       transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
