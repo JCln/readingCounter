@@ -12,9 +12,6 @@ export const EnvServiceFactory = () => {
     // In the current implementation, properties from env.js overwrite defaults from the EnvService.
     // If needed, a deep merge can be performed here to merge properties instead of overwriting them.
 
-    // make env.js update
-    makeENVDynamic(browserWindowEnv, env);
-
     if (!browserWindowEnv.enableENV) {
         return env;
     }
@@ -27,12 +24,6 @@ export const EnvServiceFactory = () => {
         return env;
     }
 };
-export const makeENVDynamic = (browserWindowEnv, env) => {
-    for (const key in browserWindowEnv) {
-        if (browserWindowEnv.hasOwnProperty(key))
-            window['__env'][key] = env[key];
-    }
-}
 export const EnvServiceProvider = {
     provide: EnvService,
     useFactory: EnvServiceFactory,
