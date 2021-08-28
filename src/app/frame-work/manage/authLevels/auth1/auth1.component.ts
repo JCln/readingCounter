@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevels } from 'interfaces/iauth-levels';
@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';
 
@@ -15,7 +16,7 @@ import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';
   templateUrl: './auth1.component.html',
   styleUrls: ['./auth1.component.scss']
 })
-export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
+export class Auth1Component extends FactoryONE {
 
   dataSource: IAuthLevels[] = [];
   subscription: Subscription[] = [];
@@ -26,10 +27,12 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private authsManagerService: AuthsManagerService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -55,29 +58,9 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
     }
     this.insertSelectedColumns();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.authsManagerService.columnAuth1();
     this._selectedColumns = this.authsManagerService.customizeSelectedColumns(this._selectCols);
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/al/ap')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
@@ -96,9 +79,6 @@ export class Auth1Component implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
     await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel1EDIT, dataSource['dataSource']);
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

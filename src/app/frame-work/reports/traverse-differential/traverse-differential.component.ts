@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IReadingReportTraverseDifferentialReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
@@ -6,13 +6,14 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-traverse-differential',
   templateUrl: './traverse-differential.component.html',
   styleUrls: ['./traverse-differential.component.scss']
 })
-export class TraverseDifferentialComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TraverseDifferentialComponent extends FactoryONE {
   readingReportReq: IReadingReportTraverseDifferentialReq = {
     zoneId: 0,
     fromDate: '',
@@ -44,10 +45,12 @@ export class TraverseDifferentialComponent implements OnInit, AfterViewInit, OnD
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     public route: ActivatedRoute,
     private closeTabService: CloseTabService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   nullSavedSource = () => this.closeTabService.saveDataForRRTraverseDifferential = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -61,27 +64,6 @@ export class TraverseDifferentialComponent implements OnInit, AfterViewInit, OnD
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.getTraverseDiffrentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/trvch') {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   routeToGridView = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/trvch/res');

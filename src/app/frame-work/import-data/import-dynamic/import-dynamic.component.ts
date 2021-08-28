@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IImportDynamicDefault } from 'interfaces/inon-manage';
 import { ENLocalStorageNames, IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
@@ -7,6 +7,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
 import { LocalClientConfigsService } from 'services/local-client-configs.service';
+import { FactoryONE } from 'src/app/classes/factory';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
 
 
@@ -15,7 +16,7 @@ import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/da
   templateUrl: './import-dynamic.component.html',
   styleUrls: ['./import-dynamic.component.scss']
 })
-export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ImportDynamicComponent extends FactoryONE {
   @ViewChild(DateJalaliComponent) date;
 
   importDynamic: IImportDynamicDefault = {
@@ -64,11 +65,13 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   subscription: Subscription[] = [];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private importDynamicService: ImportDynamicService,
     private closeTabService: CloseTabService,
     private localClientConfigsService: LocalClientConfigsService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   connectToServer = async () => {
     const validation = this.importDynamicService.checkVertification(this.importDynamic, this._isOrderByDate);
@@ -130,6 +133,7 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
+      this.resetToDefaultFormStatus();
       this.nullSavedSource();
     }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
@@ -140,33 +144,11 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
       this.zoneDictionary = [];
     this._showDynamicCount = this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasDynamicCount);
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/imp/imd') {
-          this.resetToDefaultFormStatus();
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
   receiveFromDateJalali = ($event: string) => {
     this.importDynamic.fromDate = $event;
   }
   receiveToDateJalali = ($event: string) => {
     this.importDynamic.toDate = $event;
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   private resetToDefaultFormStatus = () => {
     this._showAlalHesabPercent = false;

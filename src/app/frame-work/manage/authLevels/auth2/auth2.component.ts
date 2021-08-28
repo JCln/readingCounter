@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel2 } from 'interfaces/iauth-levels';
@@ -8,6 +8,7 @@ import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
 
@@ -16,7 +17,7 @@ import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
   templateUrl: './auth2.component.html',
   styleUrls: ['./auth2.component.scss']
 })
-export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
+export class Auth2Component extends FactoryONE {
 
   dataSource: IAuthLevel2[] = [];
   subscription: Subscription[] = [];
@@ -28,10 +29,12 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -66,26 +69,6 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
     Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
     this.insertSelectedColumns();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/al/me')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.authsManagerService.columnAuth2();
     this._selectedColumns = this.authsManagerService.customizeSelectedColumns(this._selectCols);
@@ -118,10 +101,7 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
     Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
   }
   onRowEditCancel() {
-    Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');  
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
+    Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

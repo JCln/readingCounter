@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ICounterState, ICounterStateGridFriendlyResp } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -9,13 +9,14 @@ import { CounterStateService } from 'services/counter-state.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-counter-state',
   templateUrl: './counter-state.component.html',
   styleUrls: ['./counter-state.component.scss']
 })
-export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CounterStateComponent extends FactoryONE {
   gridFriendlyData: any;
   zoneDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
@@ -31,11 +32,12 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
   innerLoading: boolean = false;
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private counterStateService: CounterStateService,
     private readManagerService: ReadManagerService
   ) {
+    super(interactionService)
   }
 
   columnSelectedMenuDefault = () => {
@@ -64,21 +66,6 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.classWrapper();
     this.columnSelectedMenuDefault();
   }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/cs')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    this.subscription.forEach(subscription => subscription.unsubscribe())
-  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }
@@ -87,9 +74,6 @@ export class CounterStateComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {

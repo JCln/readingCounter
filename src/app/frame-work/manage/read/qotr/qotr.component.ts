@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -7,13 +7,14 @@ import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-qotr',
   templateUrl: './qotr.component.html',
   styleUrls: ['./qotr.component.scss']
 })
-export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
+export class QotrComponent extends FactoryONE {
   idFilter = new FormControl('');
   titleFilter = new FormControl('');
   provinceIdFilter = new FormControl('');
@@ -32,10 +33,12 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private dictionaryWrapperService: DictionaryWrapperService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
     zoneDictionary.map(zoneDic => {
@@ -63,21 +66,6 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.closeTabService.saveDataForQotrManager) {
     }
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/qr')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
   createFilter(): (data: any, filter: string) => boolean {
     let filterFunction = function (data, filter): boolean {
       let searchTerms = JSON.parse(filter);
@@ -87,9 +75,5 @@ export class QotrComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     return filterFunction;
   }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe())
-  }
+
 }

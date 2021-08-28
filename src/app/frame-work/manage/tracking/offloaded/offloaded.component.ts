@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -10,13 +10,14 @@ import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-offloaded',
   templateUrl: './offloaded.component.html',
   styleUrls: ['./offloaded.component.scss']
 })
-export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
+export class OffloadedComponent extends FactoryONE {
   subscription: Subscription[] = [];
 
   dataSource: ITracking[] = [];
@@ -24,16 +25,16 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedColumns: any[];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,
     public route: ActivatedRoute,
     private envService: EnvService
   ) {
+    super(interactionService)
   }
 
-  refreshTable = () => this.classWrapper(true);
   nullSavedSource = () => this.closeTabService.saveDataForTrackOffloaded = null;
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   classWrapper = async (canRefresh?: boolean) => {
@@ -64,26 +65,6 @@ export class OffloadedComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     const a = await this.trackingManagerService.downloadOutputSingle(row);
     this.outputManagerService.downloadFile(a);
-  }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/track/offloaded')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

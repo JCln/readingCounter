@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IUserManager } from 'interfaces/iuser-manager';
@@ -8,13 +8,14 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { UsersAllService } from 'services/users-all.service';
 import { UtilsService } from 'services/utils.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-users-all',
   templateUrl: './users-all.component.html',
   styleUrls: ['./users-all.component.scss']
 })
-export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UsersAllComponent extends FactoryONE {
   @ViewChild(Table) UsersAllComponent: Table;
   subscription: Subscription[] = [];
 
@@ -24,12 +25,13 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private router: Router,
     private closeTabService: CloseTabService,
     public usersAllService: UsersAllService,
     private utilsService: UtilsService
   ) {
+    super(interactionService)
   }
 
   routeToEditPage(e) {
@@ -56,29 +58,6 @@ export class UsersAllComponent implements OnInit, AfterViewInit, OnDestroy {
   insertSelectedColumns = () => {
     this._selectCols = this.usersAllService.columnUserAllUsers();
     this._selectedColumns = this.usersAllService.customizeSelectedColumns(this._selectCols);
-  }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/mu/all')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   ActivateUser = (dataSource: IUserManager) => {
     this.usersAllService.Activate(dataSource['dataSource'].id);

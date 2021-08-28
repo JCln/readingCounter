@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IKarbari } from 'interfaces/imanage';
@@ -8,6 +8,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component';
 
@@ -16,7 +17,7 @@ import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component
   templateUrl: './karbari.component.html',
   styleUrls: ['./karbari.component.scss']
 })
-export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
+export class KarbariComponent extends FactoryONE {
 
   dataSource: IKarbari[] = [];
   subscription: Subscription[] = [];
@@ -29,10 +30,12 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -68,26 +71,6 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
     this.insertSelectedColumns();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/kar')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.readManagerService.columnKarbari();
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
@@ -118,9 +101,6 @@ export class KarbariComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.KarbariEdit, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

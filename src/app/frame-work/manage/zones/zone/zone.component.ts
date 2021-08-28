@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IZoneManager } from 'interfaces/inon-manage';
@@ -8,6 +8,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { ZoneAddDgComponent } from './zone-add-dg/zone-add-dg.component';
 
@@ -16,7 +17,7 @@ import { ZoneAddDgComponent } from './zone-add-dg/zone-add-dg.component';
   templateUrl: './zone.component.html',
   styleUrls: ['./zone.component.scss']
 })
-export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ZoneComponent extends FactoryONE {
   dataSource: IZoneManager[] = [];
 
   subscription: Subscription[] = [];
@@ -28,10 +29,12 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -68,26 +71,6 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
 
     Converter.convertIdToTitle(this.dataSource, this.regionDictionary, 'regionId');
     this.insertSelectedColumns();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/zs/z')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe())
   }
   insertSelectedColumns = () => {
     this._selectCols = this.sectorsManagerService.columnZone();
@@ -133,8 +116,6 @@ export class ZoneComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
+
 }
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -8,13 +8,14 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-simafa-batch',
   templateUrl: './simafa-batch.component.html',
   styleUrls: ['./simafa-batch.component.scss']
 })
-export class SimafaBatchComponent implements OnInit, OnDestroy, AfterViewInit {
+export class SimafaBatchComponent extends FactoryONE {
   _fragmentDetailsEshterak: IFragmentDetailsByEshterakReq = {
     fromEshterak: null,
     toEshterak: null,
@@ -46,10 +47,11 @@ export class SimafaBatchComponent implements OnInit, OnDestroy, AfterViewInit {
   subscription: Subscription[] = [];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     public importDynamicService: ImportDynamicService,
     private route: ActivatedRoute
   ) {
+    super(interactionService)
     this.getRouteParams();
   }
 
@@ -83,7 +85,7 @@ export class SimafaBatchComponent implements OnInit, OnDestroy, AfterViewInit {
     this.changeStatusAfterSuccess();
     scrollTo(0, 0);
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
     this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
     if (!this.dataSource) return;
 
@@ -100,25 +102,6 @@ export class SimafaBatchComponent implements OnInit, OnDestroy, AfterViewInit {
     this.columnsToDefault();
     this.classWrapper();
   }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr/imp/simafa/rdpg/batch')) {
-          this.classWrapper();
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => this.classWrapper();
   insertSelectedColumns = () => {
     this._selectCols = this.importDynamicService.columnSimafaBatch();
     this._selectedColumns = this.importDynamicService.customizeSelectedColumns(this._selectCols);

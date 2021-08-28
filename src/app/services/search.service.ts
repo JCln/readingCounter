@@ -325,6 +325,10 @@ export class SearchService {
         item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
       if (item.gisAccuracy)
         item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+      if (item.x)
+        item.x = this.utilsService.getRange(item.x)
+      if (item.y)
+        item.y = this.utilsService.getRange(item.y)
     })
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {

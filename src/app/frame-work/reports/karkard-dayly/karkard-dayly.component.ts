@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IReadingReportReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
   templateUrl: './karkard-dayly.component.html',
   styleUrls: ['./karkard-dayly.component.scss']
 })
-export class KarkardDaylyComponent implements OnInit {
+export class KarkardDaylyComponent extends FactoryONE {
   readingReportReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',
@@ -43,35 +44,16 @@ export class KarkardDaylyComponent implements OnInit {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     public route: ActivatedRoute
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   classWrapper = async () => {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/karkardDaily') {
-          this.classWrapper();
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   routeToChild = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/karkardDaily/res');

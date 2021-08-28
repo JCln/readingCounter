@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-gis',
   templateUrl: './gis.component.html',
   styleUrls: ['./gis.component.scss']
 })
-export class GisComponent implements OnInit {
+export class GisComponent extends FactoryONE {
   gisResponse: IReadingReportGISResponse[] = [];
   readingReportGISReq: IReadingReportGISReq = {
     zoneId: 0,
@@ -72,9 +73,10 @@ export class GisComponent implements OnInit {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService
-    // public route: ActivatedRoute
-  ) { }
+    public interactionService: InteractionService
+  ) {
+    super(interactionService)
+  }
 
   getCounterStateByZoneId = async () => {
     this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportGISReq.zoneId);
@@ -84,27 +86,6 @@ export class GisComponent implements OnInit {
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/gis') {
-          this.classWrapper();
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   receiveFromDateJalali = ($event: string) => {
     this.readingReportGISReq.fromDate = $event;

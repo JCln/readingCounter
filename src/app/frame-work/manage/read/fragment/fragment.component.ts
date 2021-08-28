@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IFragmentMaster } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Table } from 'primeng/table';
@@ -7,6 +7,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Converter } from 'src/app/classes/converter';
   templateUrl: './fragment.component.html',
   styleUrls: ['./fragment.component.scss']
 })
-export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FragmentComponent extends FactoryONE {
   subscription: Subscription[] = [];
 
   table: Table;
@@ -28,10 +29,11 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
   clonedProducts: { [s: string]: IFragmentMaster; } = {};
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService
   ) {
+    super(interactionService)
   }
 
   testChangedValue() {
@@ -59,29 +61,8 @@ export class FragmentComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectCols = this.fragmentManagerService.columnSelectedFragmentMaster();
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res === '/wr/m/r/nob')
-        this.classWrapper(true);
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   defaultAddStatus = () => this.newRowLimit = 1;
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
   newRow(): IFragmentMaster {
     return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isNew: true };
   }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IForbiddenManager } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -6,13 +6,14 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
 import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-forb-res',
   templateUrl: './forb-res.component.html',
   styleUrls: ['./forb-res.component.scss']
 })
-export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ForbResComponent extends FactoryONE {
   @Input() dataSource: IForbiddenManager[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
@@ -23,9 +24,11 @@ export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private forbiddenService: ForbiddenService,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   private insertSelectedColumns = () => {
     this._selectCols = this.forbiddenService.columnSelectedMenuDefault();
@@ -48,29 +51,6 @@ export class ForbResComponent implements OnInit, AfterViewInit, OnDestroy {
     this.forbiddenService.setDynamicPartRanges(this.dataSource);
     if (this.dataSource.length)
       this.insertSelectedColumns();
-  }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/fbn/res')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   backToPrevious = () => {
     this.forbiddenService.backToParent();

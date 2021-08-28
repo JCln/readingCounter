@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IReadingReportReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
@@ -6,13 +6,14 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-traverse',
   templateUrl: './traverse.component.html',
   styleUrls: ['./traverse.component.scss']
 })
-export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TraverseComponent extends FactoryONE {
   readingReportReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',
@@ -43,10 +44,12 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     public route: ActivatedRoute,
     private closeTabService: CloseTabService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   nullSavedSource = () => this.closeTabService.saveDataForRRTraverse = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -56,27 +59,6 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/trv') {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   routeToChild = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/trv/res');

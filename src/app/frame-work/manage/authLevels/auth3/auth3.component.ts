@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel3 } from 'interfaces/iauth-levels';
@@ -8,6 +8,7 @@ import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
 
@@ -17,7 +18,7 @@ import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
   templateUrl: './auth3.component.html',
   styleUrls: ['./auth3.component.scss']
 })
-export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
+export class Auth3Component extends FactoryONE {
 
   dataSource: IAuthLevel3[] = [];
   subscription: Subscription[] = [];
@@ -29,10 +30,12 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -66,26 +69,6 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
 
     Converter.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
     this.insertSelectedColumns();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/al/cr')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   insertSelectedColumns = () => {
     this._selectCols = this.authsManagerService.columnAuth3();
@@ -123,9 +106,6 @@ export class Auth3Component implements OnInit, AfterViewInit, OnDestroy {
     // this.dataSource[index] = this.clonedProducts[dataSource.id];
     // delete this.dataSource[dataSource.id];
     // return;
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

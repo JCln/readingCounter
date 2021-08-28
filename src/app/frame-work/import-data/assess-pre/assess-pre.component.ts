@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -12,6 +12,7 @@ import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { ConfirmTextDialogComponent } from '../../manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { AssesspreDgComponent } from './assesspre-dg/assesspre-dg.component';
@@ -21,7 +22,7 @@ import { AssesspreDgComponent } from './assesspre-dg/assesspre-dg.component';
   templateUrl: './assess-pre.component.html',
   styleUrls: ['./assess-pre.component.scss']
 })
-export class AssessPreComponent implements OnInit {
+export class AssessPreComponent extends FactoryONE {
 
   _empty_message: string = '';
 
@@ -40,14 +41,15 @@ export class AssessPreComponent implements OnInit {
   ref: DynamicDialogRef;
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public importDynamicService: ImportDynamicService,
     public outputManagerService: OutputManagerService,
     private utilsService: UtilsService,
     private dialogService: DialogService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
+    super(interactionService)
   }
 
   insertSelectedColumns = () => {
@@ -97,36 +99,12 @@ export class AssessPreComponent implements OnInit {
     }
     this.converts();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/imp/assesspre') {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   toDefaultVals = () => {
     this.dataSource = [];

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IOutputManager } from 'interfaces/imanage';
 import { IZoneManager } from 'interfaces/inon-manage';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -6,6 +6,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
 
 @Component({
@@ -13,7 +14,7 @@ import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/da
   templateUrl: './dbf-output.component.html',
   styleUrls: ['./dbf-output.component.scss']
 })
-export class DbfOutputComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DbfOutputComponent extends FactoryONE {
   @ViewChild(DateJalaliComponent) date;
   dbfOutput: IOutputManager;
   zoneDictionary: IZoneManager[] = [];
@@ -23,9 +24,10 @@ export class DbfOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private outputManagerService: OutputManagerService,
     private trackingManagerService: TrackingManagerService,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
+    super(interactionService)
     this.dbfOutput = this.outputManagerService.getDBFOutPut;
   }
 
@@ -48,24 +50,4 @@ export class DbfOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dbfOutput.toDate = $event;
   }
 
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/dbf')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
 }

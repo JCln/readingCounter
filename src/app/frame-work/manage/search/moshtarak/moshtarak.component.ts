@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat, ISearchMoshReq } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -9,6 +9,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 import { Search } from 'src/app/classes/search';
 
 
@@ -17,7 +18,7 @@ import { Search } from 'src/app/classes/search';
   templateUrl: './moshtarak.component.html',
   styleUrls: ['./moshtarak.component.scss']
 })
-export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MoshtarakComponent extends FactoryONE {
   searchReq: ISearchMoshReq = {
     zoneId: null,
     searchBy: null,
@@ -41,12 +42,13 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
   qotrDictionary: IDictionaryManager[] = [];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public searchService: SearchService,
     public outputManagerService: OutputManagerService,
     private utilsService: UtilsService
   ) {
+    super(interactionService)
   }
 
   insertSelectedColumns = () => {
@@ -93,9 +95,6 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchType = this.searchService.getSearchTypes();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -105,14 +104,6 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     })
     )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel4 } from 'interfaces/iauth-levels';
@@ -8,6 +8,7 @@ import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
 
@@ -17,7 +18,7 @@ import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
   templateUrl: './auth4.component.html',
   styleUrls: ['./auth4.component.scss']
 })
-export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
+export class Auth4Component extends FactoryONE {
 
   dataSource: IAuthLevel4[] = [];
   subscription: Subscription[] = [];
@@ -30,12 +31,12 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
-  ) { }
-
-
+  ) {
+    super(interactionService)
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -58,7 +59,7 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForAppLevel4) {
+    if (this.closeTabService.saveDataForAppLevel4.length) {
       this.dataSource = this.closeTabService.saveDataForAppLevel4;
     }
     else {
@@ -69,26 +70,6 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
 
     Converter.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
     this.insertSelectedColumns();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/al/ac')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   insertSelectedColumns = () => {
     this._selectCols = this.authsManagerService.columnAuth4();
@@ -123,9 +104,6 @@ export class Auth4Component implements OnInit, AfterViewInit, OnDestroy {
   }
   onRowEditCancel() {
     Converter.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

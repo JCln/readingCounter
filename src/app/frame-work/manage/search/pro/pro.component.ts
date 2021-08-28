@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat, ISearchProReportInput } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -10,6 +10,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { SearchDgComponentComponent } from './search-dg-component/search-dg-component.component';
 
@@ -18,7 +19,7 @@ import { SearchDgComponentComponent } from './search-dg-component/search-dg-comp
   templateUrl: './pro.component.html',
   styleUrls: ['./pro.component.scss']
 })
-export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProComponent extends FactoryONE {
 
   _empty_message: string = '';
 
@@ -37,13 +38,14 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   ref: DynamicDialogRef;
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public searchService: SearchService,
     public outputManagerService: OutputManagerService,
     private utilsService: UtilsService,
     private dialogService: DialogService,
   ) {
+    super(interactionService)
   }
 
   insertSelectedColumns = () => {
@@ -91,36 +93,12 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
     else
       this.connectToServer();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/s/searchPro') {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   toDefaultVals = () => {
     this.dataSource = [];

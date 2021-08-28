@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -11,6 +11,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 import { ImportListDgComponent } from './import-list-dg/import-list-dg.component';
@@ -34,7 +35,7 @@ import { ImportListDgComponent } from './import-list-dg/import-list-dg.component
     ])
   ]
 })
-export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ImportedComponent extends FactoryONE {
   subscription: Subscription[] = [];
 
   dataSource: ITracking[] = [];
@@ -48,13 +49,14 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   ref: DynamicDialogRef;
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialogService: DialogService,
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
   ) {
+    super(interactionService)
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTrackImported = null;
@@ -84,21 +86,6 @@ export class ImportedComponent implements OnInit, AfterViewInit, OnDestroy {
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
-  }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/track/imported')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     if (this.ref) {

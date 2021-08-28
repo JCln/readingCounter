@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITextOutput } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -9,13 +9,14 @@ import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-txt-output',
   templateUrl: './txt-output.component.html',
   styleUrls: ['./txt-output.component.scss']
 })
-export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TxtOutputComponent extends FactoryONE {
   subscription: Subscription[] = [];
 
   table: Table;
@@ -29,11 +30,13 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
   clonedProducts: { [s: string]: ITextOutput; } = {};
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService,
     public outputManagerService: OutputManagerService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   nullSavedSource = () => this.closeTabService.saveDataForTextOutput = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -58,29 +61,9 @@ export class TxtOutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectCols = this.readManagerService.columnTextOutput();
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res.includes('/wr/m/r/txt/out'))
-        this.classWrapper(true);
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refreshTable = () => this.classWrapper(true);
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   newRow(): ITextOutput {
     return {

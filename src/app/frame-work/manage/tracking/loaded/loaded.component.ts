@@ -1,6 +1,6 @@
 import 'jspdf-autotable';
 
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -11,6 +11,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 
@@ -19,7 +20,7 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
   templateUrl: './loaded.component.html',
   styleUrls: ['./loaded.component.scss']
 })
-export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
+export class LoadedComponent extends FactoryONE {
   subscription: Subscription[] = [];
 
   dataSource: ITracking[] = [];
@@ -29,12 +30,13 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedFuckingTest: any[] = [];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
   ) {
+    super(interactionService)
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTrackLoaded = null;
@@ -57,29 +59,6 @@ export class LoadedComponent implements OnInit, AfterViewInit, OnDestroy {
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
-  }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/track/loaded')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   private rowToImported = async (row: string, desc: string, rowIndex: number) => {

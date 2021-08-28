@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -8,13 +8,14 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-simafa-single',
   templateUrl: './simafa-single.component.html',
   styleUrls: ['./simafa-single.component.scss']
 })
-export class SimafaSingleComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SimafaSingleComponent extends FactoryONE {
 
   _readingProgramRes: IReadingProgramRes;
   simafaSingleReq: IImportSimafaSingleReq = {
@@ -36,11 +37,13 @@ export class SimafaSingleComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     public importDynamicService: ImportDynamicService,
     private closeTabService: CloseTabService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   getRouteParams = () => {
     this.simafaSingleReq.readingProgramId = this.route.snapshot.paramMap.get('id');
@@ -64,27 +67,6 @@ export class SimafaSingleComponent implements OnInit, AfterViewInit, OnDestroy {
     this._readingProgramRes = this.importDynamicService.columnSimafaSingle();
     this.getRouteParams();
     this.selectedZoneId();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr/imp/simafa/rdpg/single')) {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   selectedZoneId = async () => {
     this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaSingleReq.zoneId);

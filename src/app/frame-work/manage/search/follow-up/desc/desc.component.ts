@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFollowUp, IFollowUpHistory, IListManagerPD } from 'interfaces/imanage';
@@ -9,6 +9,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { FollowUpService } from './../follow-up.service';
 
@@ -17,7 +18,7 @@ import { FollowUpService } from './../follow-up.service';
   templateUrl: './desc.component.html',
   styleUrls: ['./desc.component.scss']
 })
-export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DescComponent extends FactoryONE {
   trackNumber: string;
   shouldActive: boolean = false;
 
@@ -70,10 +71,11 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
     private closeTabService: CloseTabService,
     public route: ActivatedRoute,
     private router: Router,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private followUpService: FollowUpService,
     private authService: AuthService
   ) {
+    super(interactionService)
     this.getRouteParams();
   }
 
@@ -106,26 +108,9 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     )
   }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr/m/s/fwu/'))
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
     this.getUserRole();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   insertToDesc = () => {
     this._showDesc = this._descView();

@@ -1,5 +1,5 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IAPK } from 'interfaces/inon-manage';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -7,13 +7,14 @@ import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-apk',
   templateUrl: './apk.component.html',
   styleUrls: ['./apk.component.scss']
 })
-export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ApkComponent extends FactoryONE {
   @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
   choosenFileName: string = '';
   fileNameAfterChoose: string = '';
@@ -33,10 +34,12 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private apkService: ApkService,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private outputManagerService: OutputManagerService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   downloadAPK = async () => {
     const a = await this.apkService.getlastAPK();
@@ -99,26 +102,6 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this._columns = this.apkService.columnAPK();
-  }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/apk')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
 
 }

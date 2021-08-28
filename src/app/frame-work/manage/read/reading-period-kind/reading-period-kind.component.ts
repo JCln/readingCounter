@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingPeriodKind } from 'interfaces/imanage';
@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { RpkmAddDgComponent } from './rpkm-add-dg/rpkm-add-dg.component';
 
@@ -14,7 +15,7 @@ import { RpkmAddDgComponent } from './rpkm-add-dg/rpkm-add-dg.component';
   templateUrl: './reading-period-kind.component.html',
   styleUrls: ['./reading-period-kind.component.scss']
 })
-export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ReadingPeriodKindComponent extends FactoryONE {
   dataSource: IReadingPeriodKind[] = [];
   subscription: Subscription[] = [];
 
@@ -25,10 +26,12 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -58,26 +61,6 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
     }
     this.insertSelectedColumns();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/rpk')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.readManagerService.columnReadingPeriodKind();
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
@@ -99,9 +82,6 @@ export class ReadingPeriodKindComponent implements OnInit, AfterViewInit, OnDest
       return;
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodKindEdit, dataSource['dataSource']);
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

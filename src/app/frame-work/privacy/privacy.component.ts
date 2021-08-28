@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IPolicies, IPrivacy } from 'interfaces/inon-manage';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { PrivacyService } from 'services/privacy.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { PrivacyService } from 'services/privacy.service';
   templateUrl: './privacy.component.html',
   styleUrls: ['./privacy.component.scss']
 })
-export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PrivacyComponent extends FactoryONE {
   privacyOptions: IPrivacy;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
 
@@ -35,8 +35,14 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
     canUpdateDeviceId: false
   };
 
-  constructor(private interactionService: InteractionService,
-    private router: Router, private privacyService: PrivacyService, private interfaceManagerService: InterfaceManagerService, private _snackBar: MatSnackBar) { }
+  constructor(
+    public interactionService: InteractionService,
+    private privacyService: PrivacyService,
+    private interfaceManagerService: InterfaceManagerService,
+    private _snackBar: MatSnackBar
+  ) {
+    super(interactionService)
+  }
 
   getPolicies = (): Promise<any> => {
     return new Promise((resolve) => {
@@ -61,14 +67,11 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
     this.policies.passwordContainsNonAlphaNumeric = policies.passwordContainsNonAlphaNumeric;
     this.policies.canUpdateDeviceId = policies.canUpdateDeviceId;
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    this.privacyOptions = this.privacyService.getPrivacyToggle();
     const a = await this.getPolicies();
     this.insertPolicies(a);
 
-  }
-  ngOnInit(): void {
-    this.privacyOptions = this.privacyService.getPrivacyToggle();
-    this.classWrapper();
   }
   plusOrMinus = (value: number) => {
     if (value > this.privacyOptions.maxLength) {
@@ -92,22 +95,6 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
       horizontalPosition: this.horizontalPosition
     });
   }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/privacy')
-          this.ngOnInit();
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
+
 }
 

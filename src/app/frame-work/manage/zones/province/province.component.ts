@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IProvinceManager } from 'interfaces/inon-manage';
@@ -8,6 +8,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.component';
 
@@ -16,7 +17,7 @@ import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.compon
   templateUrl: './province.component.html',
   styleUrls: ['./province.component.scss']
 })
-export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProvinceComponent extends FactoryONE {
   dataSource: IProvinceManager[] = [];
 
   subscription: Subscription[] = [];
@@ -28,10 +29,12 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
-  ) { }
+  ) {
+    super(interactionService)
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -68,26 +71,6 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
 
     Converter.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
     this.insertSelectedColumns();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/zs/p')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe())
   }
   insertSelectedColumns = () => {
     this._selectCols = this.sectorsManagerService.columnProvince();
@@ -133,8 +116,5 @@ export class ProvinceComponent implements OnInit, AfterViewInit, OnDestroy {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
 }
