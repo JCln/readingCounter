@@ -79,8 +79,8 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
   refreshTable = () => {
     this.classWrapper(true);
   }
-  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
-    const title = EN_messages.reson_delete_backtoImported;
+  backToOffloaded = (rowDataAndIndex: object) => {
+    const title = EN_messages.reason_toOffloaded;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: '19rem',

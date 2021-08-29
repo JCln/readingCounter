@@ -102,7 +102,7 @@ export enum EN_messages {
     reason_backToPrev = 'علت بازگشت به مرحله قبلی',
     toImported = 'علت بازگشت به صادر شده',
     toReading = 'علت بازگشت به درحال قرائت',
-    toOffloaded = 'علت بازگشت به بارگذاری شده',
+    reason_toOffloaded = 'علت بازگشت به بارگذاری شده',
     toPrevious = 'علت بازگشت به مرحله قبلی',
 
     call_supportGroup = 'خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید'
