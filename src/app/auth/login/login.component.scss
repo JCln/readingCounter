@@ -1,6 +1,7 @@
 @import 'variable.scss';
 @import 'input.scss';
 @import 'button.scss';
+@import 'tooltip.scss';
 
 .content {
   display: grid;
@@ -77,11 +78,50 @@ main {
   color: var(--blue_900);
   font-size: $font_m;
   font-weight: 600;
-  margin-top: $font_2;
 }
 
 input,
 input:-internal-autofill-selected {
   background-color: var(--white) !important;
   color: var(--blue_700) !important;
+}
+
+
+/* VERSION INFO*/
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: $font_2;
+
+  i {
+    background: var(--white);
+  }
+
+  ._info_each_item {
+    position: absolute;
+    overflow: auto;
+    left: 50%;
+    background: var(--white);
+    transform: translateX(-50%);
+    border-radius: $border_15;
+    padding: $font_05 $font_xs;
+    box-shadow: 0 0 1px 3px var(--gray_400);
+
+    div {
+      display: flex;
+      justify-content: flex-end;
+      color: var(--gray_800);
+      text-align: right;
+      font-size: $font_s;
+      font-weight: 600;
+
+      &::after {
+        content: '\2713';
+        color: var(--green_500);
+        padding: 0 0 0 .3rem;
+      }
+    }
+  }
 }
