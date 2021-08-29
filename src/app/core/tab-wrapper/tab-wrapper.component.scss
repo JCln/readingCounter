@@ -19,7 +19,6 @@ li {
   align-items: center;
   margin: 0.04rem;
   min-width: 3.5rem;
-  height: 2.5rem;
   border: 1.5px solid;
   border-radius: 10px;
   color: var(--blue_700);
@@ -31,11 +30,10 @@ li {
   padding: 0;
 
   @media (min-width: 700px) {
-    padding: 0 $font_05;
-    margin: 0.06rem;
-    height: 3rem;
-    border-radius: $border_15;
-    font-size: $font_m;
+    padding: 0.2rem 0 0;
+    margin: .06rem;
+    border-radius: 15px;
+    font-size: 1.3rem;
     min-width: 9rem;
   }
 

@@ -1,3 +1,9 @@
+@mixin _borders {
+  border-radius: 0;
+  border-right: 1px solid var(--gray_300);
+  padding-right: .2rem;
+}
+
 ._theme_mode {
   margin-left: 0;
   font-size: $font_m;
@@ -15,8 +21,8 @@
   }
 
   .fa-moon {
-    color: white;
-    background: black;
+    color: var(--blue_700);
+    background-color: var(--gray_300);
   }
 
   @media (min-width: 700px) {
@@ -27,5 +33,6 @@
     }
 
     margin-left: $font_xs;
+    @include _borders();
   }
 }

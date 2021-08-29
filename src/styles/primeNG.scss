@@ -16,16 +16,19 @@
   }
 
   .p-datatable .p-datatable-header {
+    display: flex;
+    justify-content: space-between;
     background: var(--white);
     color: var(--gray_800);
     border: 1px solid var(--gray_100);
+    padding: $font_05;
   }
 
   .p-datatable .p-datatable-thead>tr>th,
   .p-datatable .p-datatable-tbody>tr>td {
     text-align: center;
     font-weight: 600;
-    padding: $font_xs .1rem;
+    padding: $font_05 .1rem;
     border: 1px solid var(--gray_200);
   }
 
@@ -205,11 +208,6 @@
 
   .fa-trash-o {
     color: var(--red_600);
-  }
-
-  .p-datatable .p-datatable-header {
-    display: flex;
-    justify-content: space-between;
   }
 
   .header_icons_wrap {
