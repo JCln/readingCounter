@@ -61,6 +61,7 @@ app-side-bar {
 
 app-frame-work {
   width: 100%;
+  transition: all ease-in-out 150ms;
 
   @media (min-width: 550px) {
     width: 71%;

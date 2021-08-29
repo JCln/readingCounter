@@ -88,16 +88,6 @@ ul::-webkit-scrollbar {
     }
   }
 
-  &.active {
-    border: 2px solid var(--blue_500);
-    background: var(--gray_200);
-
-    .on_show,
-    .icons {
-      color: var(--blue_500);
-    }
-
-  }
 }
 
 .sub_item_1 {
