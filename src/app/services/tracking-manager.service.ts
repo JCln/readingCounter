@@ -83,11 +83,12 @@ export class TrackingManagerService {
       { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
       { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
-      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false, borderize: true },
-      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
-      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
+      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false, isSelectOption: true, borderize: true },
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true }
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true },
+      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
+      { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false, isBoolean: true }
     ];
   }
   columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {

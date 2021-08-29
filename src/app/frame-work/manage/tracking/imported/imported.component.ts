@@ -95,9 +95,6 @@ export class ImportedComponent extends FactoryONE {
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
   showMoreDetails = (data: ITracking) => {
     this.ref = this.dialogService.open(ImportListDgComponent, {
       data: data,
