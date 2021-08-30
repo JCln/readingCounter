@@ -1,7 +1,7 @@
 export enum EN_messages {
     passwords_notFetch = 'تعداد ارقام گذرواژه با تایید آن برابر نیست',
     password_notExactly = 'گذرواژه با تایید آن یکی باید باشد',
-    sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد',    
+    sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد',
     lessThan_eshterak = 'از اشتراک کمتر از تا اشتراک است!',
     sameLength_notValid = 'مقادیر ابتدا و انتهایی را وارد نمایید',
 
@@ -84,8 +84,8 @@ export enum EN_messages {
     format_invalid_to_eshterak = 'فرمت  تا اشتراک ناصحیح است',
     format_invalid_counterNumber = 'فرمت رقم کنتور اشتباه است',
     format_invalid_counterNumberTimes = 'تعداد ارقام کنتور اشتباه است',
-    format_imagePercent = 'فرمت درصد تصویر اشتباه است',    
-    format_alalhesab = 'فرمت علی‌الحساب اشتباه است',    
+    format_imagePercent = 'فرمت درصد تصویر اشتباه است',
+    format_alalhesab = 'فرمت علی‌الحساب اشتباه است',
 
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
@@ -105,5 +105,7 @@ export enum EN_messages {
     reason_toOffloaded = 'علت بازگشت به بارگذاری شده',
     toPrevious = 'علت بازگشت به مرحله قبلی',
 
-    call_supportGroup = 'خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید'
+    call_supportGroup = 'خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید',
+    browserSupport_alarm = 'نسخه مرورگر شما برنامه را پشتیبانی نمی‌کند، لطفا مرورگر را بروزرسانی نمایید.',
+    browserSupport_warn = 'برای پشتیبانی بهتر، مرورگر خود را بروزرسانی نمایید',
 }

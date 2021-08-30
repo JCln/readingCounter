@@ -1,0 +1,4 @@
+<section *ngIf="showNotif().isShow" class="accoune_notif" [ngStyle]="{'background-color': showNotif().backgroundColor}">
+    <i *ngIf="showNotif().isClosable" (click)="showNotif().isShow = false" class="pi pi-times-circle"></i>
+    {{showNotif().message}}
+</section>

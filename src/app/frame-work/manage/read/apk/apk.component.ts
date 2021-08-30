@@ -79,7 +79,13 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
           break;
         case HttpEventType.Response:
           console.log('successfull process!', event.body);
-          this.apkService.showSuccessMessage(event.body);
+          console.log(event.body);
+          console.log(event.body.message);
+          console.log(event.ok);
+          console.log(event.status);
+          console.log(event.statusText);
+
+          this.apkService.showSuccessMessage(event.body.message);
           setTimeout(() => {
             this.progress = 0;
           }, 1500);

@@ -65,9 +65,9 @@ export enum ENTrackingRoute {
     migrateToPreState,
 }
 export interface IResponses {
-    isValid: boolean
+    isValid: boolean;
     message: string;
-    status: number
+    status: number;
 }
 export interface ITrueFalseFilter {
     name: string;
@@ -78,7 +78,17 @@ export const TrueFalseFilter: ITrueFalseFilter[] = [
     { name: 'باشد', value: true },
     { name: 'هیچکدام', value: '' }
 ]
-
+export enum ENBrowserStatus {
+    good = 200,
+    warn = 400,
+    alarm = 500
+}
+export interface IBrowserNotif {
+    message: string;
+    backgroundColor: string;
+    isClosable: boolean;
+    isShow: boolean;
+}
 export interface IDictionaryManager {
     readonly id: number | string;
     title: string;
@@ -215,5 +225,5 @@ export interface IENV {
     SATELLITEMapBoxUrl: string,
     SATELLITEMapAccessToken: string,
     hasNextBazdid: boolean,
-    mapCenter: [number , number]
+    mapCenter: [number, number]
 }
