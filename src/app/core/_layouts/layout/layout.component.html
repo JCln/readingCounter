@@ -1,5 +1,6 @@
 <app-header (sidebarEvent)=changeSidebarStatus($event) [sid_isSmall]="sidebarStatus"></app-header>
-<app-tab-wrapper (childPageTitle)="changePageTitle($event)" (childRefresh)="refreshCurrentPage($event)"></app-tab-wrapper>
+<app-tab-wrapper (childPageTitle)="changePageTitle($event)" (childRefresh)="refreshCurrentPage($event)">
+</app-tab-wrapper>
 <div class="ma">
     <app-frame-work [pageTitle]="pageTitle" [refreshPage]="refreshPage"></app-frame-work>
     <app-side-bar (sidebarEvent)=changeSidebarStatus($event) [sid_isSmall]="sidebarStatus"></app-side-bar>

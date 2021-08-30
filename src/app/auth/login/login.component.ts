@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ICredentials } from 'interfaces/iauth-guard-permission';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { infoVersion, infoVersionItems } from 'services/DI/info-version';
+import { BrowserSupportService } from 'services/browser-support.service';
+import { infoVersion } from 'services/DI/info-version';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
@@ -38,7 +39,8 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private browserSupportService: BrowserSupportService
   ) { }
 
   convertNumbers = () => {
@@ -46,6 +48,10 @@ export class LoginComponent {
     this.userData.username = Converter.persianToEngNumbers(this.userData.username);
   }
   logging = () => {
+    if (!this.browserSupportService.isValidBrowserVersion) {
+      this.utilsService.snackBarMessageWarn(EN_messages.browserSupport_alarm);
+      return;
+    }
     this.convertNumbers();
     if (this.utilsService.isNull(this.userData.password) || this.utilsService.isNull(this.userData.username)) {
       this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);

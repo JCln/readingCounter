@@ -19,7 +19,7 @@
         <section class="info">
             <i (click)="showVersionInfo = !showVersionInfo" (click)="getVersionInfos()"
                 class="tooltip _circle_border p_icons pi pi-info">
-                <div class="tooltip_text">نمایش آخرین تغییرات</div>
+                <div [hidden]="showVersionInfo" class="tooltip_text">نمایش آخرین تغییرات</div>
             </i>
             <section class="_info_each_item" [@openClose]="showVersionInfo ? 'openSubItems' : 'closeSubItems'">
                 <div *ngFor="let item of infoVersionItems">

@@ -10,6 +10,7 @@
   height: var(--height);
   position: sticky;
   top: 0;
+  box-shadow: 0 1px 5px 0px var(--blue_700);
 
   ._logo_content {
     width: calc(var(--height) - 0.5rem);
