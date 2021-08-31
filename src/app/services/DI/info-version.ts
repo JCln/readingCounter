@@ -3,17 +3,17 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '1',
-        title: 'آخرین تغییر 1آخرین تغییر',
+        title: 'افزودن رقم قبلی در جزئیات مسیر کارتابل',
         isSelected: true
     },
     {
         id: '2',
-        title: 'آخرین 2',
+        title: 'پیام هشدار یا خطا هنگام بروز نبودن نسخه مرورگر',
         isSelected: true
     },
     {
         id: '3',
-        title: 'تست متن 3',
+        title: 'بهبود ظاهر برنامه در جداول، سرتیتر برنامه، مدیریت کاربران و ..',
         isSelected: true
     }
 

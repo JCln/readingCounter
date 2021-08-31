@@ -48,7 +48,7 @@ export class LoginComponent {
     this.userData.username = Converter.persianToEngNumbers(this.userData.username);
   }
   logging = () => {
-    if (!this.browserSupportService.isValidBrowserVersion) {
+    if (!this.browserSupportService.isValidBrowserVersion()) {
       this.utilsService.snackBarMessageWarn(EN_messages.browserSupport_alarm);
       return;
     }
