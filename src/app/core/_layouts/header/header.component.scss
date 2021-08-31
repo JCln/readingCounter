@@ -22,7 +22,7 @@ ul {
   padding: 0;
 
   @media (min-width:550px) {
-    padding: 0 2rem;
+    padding-right: 2rem;
     width: 84%;
   }
 }
@@ -68,6 +68,5 @@ li {
   @include _borders();
 }
 
-@include media_wrapper(780px, 'li', margin, 0 .5rem);
 @include media_wrapper(550px, '._name', font-size, $font_xs);
 @include media_wrapper(780px, '._name', font-size, $font_m);
