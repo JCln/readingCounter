@@ -20,6 +20,11 @@ export const infoVersionItems: IDictionaryManager[] = [
         id: '2',
         title: 'رفع برخی از تغییرات درخواستی',
         isSelected: true
+    },
+    {
+        id: '2',
+        title: 'رفع ایرادات جزئی',
+        isSelected: true
     }
 
 ]
