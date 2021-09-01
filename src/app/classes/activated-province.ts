@@ -37,7 +37,16 @@ export class ActivatedProvince implements IENV {
         true,
         [35.656051, 51.315435]
     );
-
+    public static readonly TEH_SE_LOCAL = new ActivatedProvince(
+        ENActivateProvinceTitle.TEH_SE,
+        'http://172.28.5.40/kontoriNew',
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
+        'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
+        true,
+        [35.656051, 51.315435]
+    );
+    
     private constructor(
         public readonly headerProvinceTitle: ENActivateProvinceTitle,
         public readonly API_URL: string,
