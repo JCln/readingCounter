@@ -4,15 +4,14 @@
     <form #form="ngForm" (ngSubmit)="editCloseData()" class="content">
         <div class="_desc">
             <div *ngFor="let mainDatas of _selectedDatas">
-                <ng-container
-                    *ngIf="dataSource[mainDatas.field] === true || dataSource[mainDatas.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
+                <ng-container *ngIf="mainDatas.isBoolean; else elseTemplate">
+                    <mat-checkbox class="check_boxes" [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
                         [(ngModel)]="dataSource[mainDatas.field]">
                         {{mainDatas.header}}
                     </mat-checkbox>
                 </ng-container>
                 <ng-template #elseTemplate>
-                    <ng-container *ngIf="mainDatas.field === 'newCounterReaderName';else selectOption">
+                    <ng-container *ngIf="mainDatas.isSelectOption;else selectOption">
                         <div class="input_2" [ngClass]="{coloring_border: mainDatas.borderize}">
                             <div class="_key">مامور جدید</div>
                             <p-dropdown [options]="allCounterReaders" name="newCounterReaderName"

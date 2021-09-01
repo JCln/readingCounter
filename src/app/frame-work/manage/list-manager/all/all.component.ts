@@ -112,7 +112,7 @@ export class AllComponent implements AfterViewInit, OnDestroy {
       if (item.title === object.zoneId)
         zoneId = item.id
     })
-    this.router.navigate(['wr/m/track/offloaded/offloadMfy', zoneId + object.id]);
+    this.router.navigate(['wr/m/track/offloaded/offloadMfy', zoneId + '-' + object.id]);// this is the place
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

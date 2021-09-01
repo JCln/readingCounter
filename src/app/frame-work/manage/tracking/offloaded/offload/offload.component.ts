@@ -125,12 +125,11 @@ export class OffloadComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   private getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(res => {
-        if (!res)
-          return;
+      .subscribe(() => {
         const dynamicRoute = this.route.snapshot.paramMap.get('UUID');
-        this.zoneId = dynamicRoute.substring(0, 6);
-        this.offloadModifyReq.id = dynamicRoute.substring(6, dynamicRoute.length);
+        this.zoneId = dynamicRoute.substring(0, dynamicRoute.indexOf('-'));
+        this.offloadModifyReq.id = dynamicRoute.substring(dynamicRoute.indexOf('-') + 1, dynamicRoute.length);
+        
         this.classWrapper();
       })
     )

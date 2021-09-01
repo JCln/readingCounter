@@ -42,7 +42,7 @@ export class DownloadManagerService {
   downloadForbiddenFileInfo = (targetId: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.GETID(ENInterfaces.downloadFileInfo, targetId).subscribe(res => {
+        this.interfaceManagerService.GETID(ENInterfaces.downloadFileForbidden, targetId).subscribe(res => {
           resolve(res)
         })
       });

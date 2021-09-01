@@ -23,6 +23,15 @@
                         placeholder="انتخاب مورد" (onChange)="getMasterInZone()">
                     </p-dropdown>
                 </span>
+
+                <span class="ui-float-label" [hidden]="_isOrderByDate">
+                    <label for="float-input">سال</label>
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" #year [options]="_years" name="year"
+                        [(ngModel)]="searchReq.year" optionLabel="title" [filter]="true" filterBy="value"
+                        optionValue="value" [showClear]="true" placeholder="انتخاب مورد">
+                    </p-dropdown>
+                </span>
+
                 <span class="ui-float-label" [hidden]="_isOrderByDate">
                     <label for="float-input">نوع دوره</label>
                     <p-dropdown [style]="{minWidth: '100%'}" name="kindId" #kindId
@@ -40,13 +49,6 @@
                     </p-dropdown>
                 </span>
 
-                <span class="ui-float-label" [hidden]="_isOrderByDate">
-                    <label for="float-input">سال</label>
-                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" #year [options]="_years" name="year"
-                        [(ngModel)]="searchReq.year" optionLabel="title" [filter]="true" filterBy="value"
-                        optionValue="value" [showClear]="true" placeholder="انتخاب مورد">
-                    </p-dropdown>
-                </span>
                 <span class="ui-float-label" [hidden]="!_isOrderByDate">
                     <label for="float-input">از</label>
                     <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
@@ -63,35 +65,35 @@
 
         <section class="_more_options">
 
-            <article *ngIf="masrafState">
+            <article>
                 <h3 class="title">وضعیت مصرف</h3>
                 <p-multiSelect [options]="masrafState" name="masraf" [(ngModel)]="searchReq.masrafStates"
                     optionLabel="header" optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده"
                     [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
-            <article *ngIf="counterReportDictionary.length">
+            <article>
                 <h3 class="title">گزارش کنتور</h3>
                 <p-multiSelect [options]="counterReportDictionary" name="counterReport"
                     [(ngModel)]="searchReq.reportIds" optionLabel="title" optionValue="id"
                     selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
-            <article *ngIf="counterStateByZoneIdDictionary.length">
+            <article>
                 <h3 class="title">وضعیت کنتور</h3>
                 <p-multiSelect [options]="counterStateByZoneIdDictionary" name="counterState"
                     [(ngModel)]="searchReq.counterStateIds" optionLabel="title" optionValue="id"
                     selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
-            <article *ngIf="karbariDictionary.length">
+            <article>
                 <h3 class="title">کاربری</h3>
                 <p-multiSelect [options]="karbariDictionary" name="karbari" [(ngModel)]="searchReq.karbariCodes"
                     optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
                     [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
-            <article *ngIf="fragmentMasterIds.length">
+            <article>
                 <h3 class="title">نوبتی ها</h3>
                 <p-multiSelect [options]="fragmentMasterIds" name="fragmentId" [(ngModel)]="searchReq.fragmentMasterIds"
                     optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"

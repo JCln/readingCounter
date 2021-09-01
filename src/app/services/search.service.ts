@@ -228,13 +228,7 @@ export class SearchService {
     }
   }
   /*VALIDATION*/
-  private validationNull = (object: any): boolean => {
-    if (object.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNull(object.zoneId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-        return false;
-      }
-    }
+  private validationNullMosh = (object: ISearchMoshReq): boolean => {
     if (object.hasOwnProperty('searchBy')) {
       if (this.utilsService.isNull(object.searchBy)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
@@ -247,7 +241,15 @@ export class SearchService {
         return false;
       }
     }
-    // for search pro
+    return true;
+  }
+  private validationNullPro = (object: ISearchProReportInput): boolean => {
+    if (object.hasOwnProperty('zoneId')) {
+      if (this.utilsService.isNull(object.zoneId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
     if (object.hasOwnProperty('fromDate')) {
       if (this.utilsService.isNull(object.fromDate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
@@ -290,12 +292,6 @@ export class SearchService {
         return false;
       }
     }
-    if (object.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNaN(object.zoneId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
-        return false;
-      }
-    }
     return true;
   }
   private validationDate = (object: ISearchProReportInput): boolean => {
@@ -305,7 +301,7 @@ export class SearchService {
   }
   /*VERIFICATION*/
   verificationMosh = (searchReq: ISearchMoshReq): boolean => {
-    return this.validationNull(searchReq) && this.validationNumbers(searchReq)
+    return this.validationNullMosh(searchReq) && this.validationNumbers(searchReq)
   }
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
     searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
@@ -315,7 +311,7 @@ export class SearchService {
       this._isValidateByDate = isValidateByDate;
 
     if (this._isValidateByDate) {
-      return this.validationNull(searchReq) && this.validationDate(searchReq);
+      return this.validationNullPro(searchReq) && this.validationDate(searchReq);
     }
     return this.validationByReadingPeriod(searchReq);
   }

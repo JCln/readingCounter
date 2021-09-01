@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IEditTracking, IListManagerPD, IOutputManager, ITracking } from 'interfaces/imanage';
+import { IEditTracking, IFollowUpHistory, IListManagerPD, IOutputManager, ITracking } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -83,9 +83,10 @@ export class TrackingManagerService {
       { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
       { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
-      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false, borderize: true },
+      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, isSelectOption: true, readonly: false, borderize: true },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
       { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
+      { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
       { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true }
     ];
@@ -395,7 +396,7 @@ export class TrackingManagerService {
         return items
     })
   }
-  routeToLMAll = (row: ITracking) => {
+  routeToLMAll = (row: ITracking | IFollowUpHistory) => {
     this.router.navigate(['wr/m/l/all', false, row.id]);
   }
   routeToOffloadModify = (dataSource: ITracking) => {

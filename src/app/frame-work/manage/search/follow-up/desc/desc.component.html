@@ -59,8 +59,9 @@
             <div class="left_side">
             </div>
             <div class="left_side">
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                <i (click)="routeToLMAll(changeHsty[changeHsty.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-list">
+                    <div class="tooltip_text">مشاهده لیست قرائت</div>
                 </i>
                 <i (click)="trackingManagerService.backToParent()"
                     class="tooltip _circle_border p_icons pi pi-arrow-left">
@@ -69,6 +70,9 @@
                 <i (click)="toPreStatus(changeHsty[changeHsty.length-1])"
                     class="tooltip _circle_border p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به قبلی</div>
+                </i>
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
             </div>
         </div>

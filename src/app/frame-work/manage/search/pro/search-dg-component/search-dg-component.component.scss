@@ -5,7 +5,8 @@
 
 form {
   font-family: $font_family;
-  margin: $font_3 0;
+  margin: 0;
+  --gray_300: rgb(73, 95, 120);
 }
 
 .main_content {
@@ -14,13 +15,15 @@ form {
   background: var(--gray_100);
   box-shadow: 1px 1px 8px 4px var(--gray_200);
   text-align: center;
-  padding: $font_xs 0.2rem $font_xs 0.2rem;
+  padding: .5rem 0 5rem 0.2rem;
   border-radius: $border_15;
   gap: .2rem;
 }
 
 ._toselect {
   grid-column: 1/5;
+  background: var(--white);
+  border: $border_5;
 
   .__content {
     gap: $font_05;
@@ -36,7 +39,7 @@ form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   justify-content: center;
-  background-color: var(--gray_400);
+  background-color: var(--white);
   border-radius: 5px;
 
   @media (max-width: 780px) {
@@ -92,7 +95,7 @@ article {
   justify-content: center;
   align-items: center;
   display: flex;
-  margin: $font_s auto;
+  margin: $font_05 auto;
   font-family: $font_family;
 }
 

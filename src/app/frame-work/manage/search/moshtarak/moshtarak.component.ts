@@ -56,10 +56,10 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
   converts = () => {
     this._empty_message = EN_messages.notFound;
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.insertSelectedColumns();
     this.searchService.setDynamicPartRanges(this.dataSource);
@@ -68,8 +68,10 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.searchService.verificationMosh(this.searchReq))
       return;
     this.dataSource = await this.searchService.searchMoshterakin(this.searchReq);
-    this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
-    this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
+    if (this.searchReq.zoneId) {
+      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
+      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
+    }
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 

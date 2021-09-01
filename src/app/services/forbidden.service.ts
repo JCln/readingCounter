@@ -19,6 +19,7 @@ export class ForbiddenService {
   /* COLUMNS */
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
+      // { field: 'userId', header: 'کاربری', isSelected: true },
       { field: 'zoneId', header: 'ناحیه', isSelected: true },
       { field: 'preEshterak', header: 'اشتراک قبلی', isSelected: true },
       { field: 'nextEshterak', header: 'اشتراک بعدی', isSelected: true },
@@ -27,9 +28,8 @@ export class ForbiddenService {
       { field: 'tedadVahed', header: 'تعداد واحد', isSelected: true },
       { field: 'imageCount', header: 'تعداد تصاویر', isSelected: false },
       { field: 'postalCode', header: 'کد پستی', isSelected: true },
-      // { field: 'userId', header: 'کاربری', isSelected: false },
-      // { field: 'x', header: 'X', isSelected: false },
-      // { field: 'y', header: 'Y', isSelected: false },
+      { field: 'x', header: 'X', isSelected: false },
+      { field: 'y', header: 'Y', isSelected: false },
       { field: 'gisAccuracy', header: 'دقت مکان یابی', isSelected: false },
       { field: 'description', header: 'توضیحات', isSelected: false },
     ];
@@ -61,6 +61,12 @@ export class ForbiddenService {
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
+  }
+  getUserCounterReaders = (zoneId: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
+        resolve(res))
+    });
   }
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();

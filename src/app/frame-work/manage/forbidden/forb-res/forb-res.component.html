@@ -9,6 +9,7 @@
     [_numberOfExtraColumns]="[1]"
     [_backToPreviousEnabled]=true
     [_backToPreviousText]="'بازگشت به جستجو غیرمجاز'"
+    (backedToPrevious)="backToPrevious()"
     (refreshedTable)="refreshTable()"
     (showedPictures)="showPictures($event)"
  > 

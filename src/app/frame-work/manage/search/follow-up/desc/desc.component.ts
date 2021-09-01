@@ -134,6 +134,9 @@ export class DescComponent implements OnInit, AfterViewInit, OnDestroy {
   showInMap = () => {
     this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[0].insertDateJalali);
   }
+  routeToLMAll = (row: IFollowUpHistory) => {
+    this.trackingManagerService.routeToLMAll(row);
+  }
   onRowEditSave = async (dataSource: IFollowUpHistory) => {
     await this.trackingManagerService.postEditState(ENInterfaces.trackingEditState, { id: dataSource.id, seen: dataSource.seen });
   }
