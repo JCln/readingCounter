@@ -180,6 +180,7 @@ export enum ENSelectedColumnVariables {
     selectedReadingPeriodKind = '_readingPeriodKind',
     selectedTextOutput = '_textOutput',
     selectedKarbari = '_karbari',
+    selectedForbidden = '_forbidden',
 }
 export enum ENOffloadModifyType {
     callAnnounce = 'اعلام تلفنی',
