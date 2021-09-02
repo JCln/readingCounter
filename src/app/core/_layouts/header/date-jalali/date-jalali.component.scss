@@ -7,7 +7,7 @@
     border: none;
     border-radius: 15px;
     height: 30px;
-    width: 6rem !important;
+    width: 5.5rem !important;
     outline: none;
     text-align: center;
     padding: 1.1rem 0;
@@ -17,9 +17,9 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 
-    @media (min-width:550px) {
-      width: auto !important;
-    }
+    // @media (min-width:550px) {
+    //   width: auto !important;
+    // }
   }
 
   #datepicker.ui-widget-content {

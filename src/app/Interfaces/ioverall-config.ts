@@ -161,6 +161,7 @@ export enum ENSelectedColumnVariables {
     selectedListManagerAll = '_listManagerAll',
     selectedListManagerMosh = '_searchReqMosh',
     selectedListManagerPro = '_searchReqPro',
+    selectedSearchManagerSimple = '_searchSimple',
     selectedAuth2 = '_auth2',
     selectedAuth3 = '_auth3',
     selectedAuth4 = '_auth4',

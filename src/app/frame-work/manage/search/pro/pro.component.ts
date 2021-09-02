@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat, ISearchProReportInput } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -62,7 +63,7 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    this.dataSource = await this.searchService.searchPro(this.searchReq);
+    this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchPro, this.searchReq);
     this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
     this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
     this.karbariDictionary = await this.searchService.getKarbariDictionary();

@@ -41,6 +41,7 @@ export class PrimeTableComponent {
   @Output() backedToImportedConfirmDialog = new EventEmitter<any>();
   @Output() routedToLMPayDay = new EventEmitter<any>();
   @Output() routedToLMAll = new EventEmitter<any>();
+  @Output() routedToFollowUp = new EventEmitter<any>();
   @Output() showedMoreDetails = new EventEmitter<any>();
   @Output() firstConfirmedDialog = new EventEmitter<any>();
   @Output() showedInMap = new EventEmitter<any>();
@@ -97,6 +98,9 @@ export class PrimeTableComponent {
   }
   routeToLMAll = (dataSource: object) => {
     this.routedToLMAll.emit(dataSource);
+  }
+  routeToFollowUp = (dataSource: object) => {
+    this.routedToFollowUp.emit(dataSource);
   }
   showMoreDetails = (dataSource: object) => {
     this.showedMoreDetails.emit(dataSource);

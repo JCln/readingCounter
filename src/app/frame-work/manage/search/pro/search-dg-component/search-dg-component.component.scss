@@ -6,7 +6,6 @@
 form {
   font-family: $font_family;
   margin: 0;
-  --gray_300: rgb(73, 95, 120);
 }
 
 .main_content {
@@ -62,7 +61,7 @@ app-date-jalali {
   height: 2.8rem;
   background: var(--white);
   border-radius: 9px;
-  border: 1px solid var(--gray_300);
+  border: 1px solid var(--gray_300_spec);
 }
 
 span label {
@@ -76,7 +75,7 @@ span label {
   font-weight: 600;
   padding: .3rem 0.1rem;
   border-radius: 7px;
-  background: var(--gray_300);
+  background: var(--gray_300_spec);
 }
 
 .title {
@@ -87,7 +86,7 @@ span label {
 article {
   padding: $font_05;
   border-radius: $border_15;
-  background-color: var(--gray_300);
+  background-color: var(--gray_300_spec);
   margin: 0.1rem;
 }
 
@@ -143,14 +142,14 @@ hr {
 
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: var(--blue_gray_300);
+    color: var(--blue_gray_300_spec);
   }
 }
 
 // dialog conf
 :host ::ng-deep {
   .p-dialog .p-dialog-header {
-    background-color: var(--blue_gray_300);
+    background-color: var(--blue_gray_300_spec);
     direction: rtl;
   }
 }

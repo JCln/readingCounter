@@ -1,4 +1,4 @@
-@import 'variable';
+@import 'variable.scss';
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
@@ -9,74 +9,40 @@
   box-shadow: 1px 1px 8px 4px var(--gray_400);
   padding: $font_05;
   border-radius: $border_15;
-  min-height: 35rem;
+  border: 1px solid var(--blue_400);
 }
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 17rem));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
   gap: $font_05;
   align-items: center;
 }
 
-.static_part {
-  background: var(--white);
-  border: .15rem solid var(--gray_200);
-  border-radius: $border_15;
-  padding: $font_xxs;
+.tooltip {
+  cursor: pointer;
 }
 
-._key,
-._value {
-  font-size: $font_m;
-  font-weight: 800;
+.input_1 {
+  border-radius: 10px;
+  min-width: 100%;
 }
 
-._value {
+.btn_2_o {
+  font-family: $font_family;
   display: flex;
   align-items: center;
-  justify-content: center;
-  direction: ltr;
-  border: none;
-  color: var(--blue_700);
-  text-align: center;
-  width: 100%;
-}
-
-.btn_1 {
-  color: var(--white);
-  background-color: var(--orange_500);
+  justify-content: space-evenly;
 }
 
 h2 {
   color: var(--gray_600);
 }
 
-footer {
-  margin-top: $font_2;
-  text-align: center;
-}
-
-hr {
-  margin: 0 auto;
-  background-color: var(--blue_700);
-  height: .2rem;
-  margin-bottom: $font_xxs;
-}
-
-.radio_group {
-  // display: flex;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(7rem, auto));
-  justify-content: center;
-}
-
-.radio_button {
-  font-size: $font_s;
-  font-weight: 700;
-  font-family: inherit;
-  color: var(--gray_600);
-  margin: 0 2rem;
+h3 {
+  color: var(--blue_500);
+  font-size: 1.4rem;
+  padding: $font_05;
 }
 
 ::ng-deep {
@@ -102,13 +68,24 @@ hr {
     font-weight: 600;
     color: var(--blue_gray_700);
   }
-}
 
-::ng-deep {
   .mat-radio-label-content {
     padding-right: $font_05 !important;
     color: var(--blue_gray_300);
   }
+}
+
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--gray_600);
+  margin: 0 2rem;
 }
 
 [hidden] {

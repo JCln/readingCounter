@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -61,7 +62,7 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
   connectToServer = async () => {
     if (!this.searchService.verificationMosh(this.searchService.searchReqMosh))
       return;
-    this.dataSource = await this.searchService.searchMoshterakin(this.searchService.searchReqMosh);
+    this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchMoshtarak, this.searchService.searchReqMosh);
     if (this.searchService.searchReqMosh.zoneId) {
       this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchService.searchReqMosh.zoneId);
       this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchService.searchReqMosh.zoneId);
