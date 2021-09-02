@@ -14,13 +14,18 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 14rem));
   gap: $font_05;
+  justify-content: center;
   align-items: center;
 }
 
 .tooltip {
   cursor: pointer;
+}
+
+.order_by {
+  display: flex;
 }
 
 .input_1 {
@@ -33,10 +38,12 @@ section.content {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  margin: auto;
 }
 
 h2 {
   color: var(--gray_600);
+  white-space: nowrap;
 }
 
 h3 {
@@ -73,11 +80,6 @@ h3 {
     padding-right: $font_05 !important;
     color: var(--blue_gray_300);
   }
-}
-
-.radio_group {
-  display: flex;
-  justify-content: space-evenly;
 }
 
 .radio_button {

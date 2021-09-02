@@ -1,5 +1,16 @@
 <main class="main">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="order_by">
+            <h2>صدور بر اساس :</h2>
+            <mat-radio-group aria-labelledby="radio_group" [(ngModel)]="searchService._isOrderByDate"
+                name="_isOrderByDate">
+                <mat-radio-button class="radio_button" *ngFor="let orderType of searchService.searchInOrderTo"
+                    [value]="orderType.isSelected">
+                    {{orderType.title}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </section>
+        <hr>
         <section class="content">
             <div class="input_2">
                 <div class="_key">ناحیه</div>
@@ -10,10 +21,27 @@
                 </mat-select>
             </div>
 
-            <input class="input_1" type="number" placeholder="دوره قرائت" name="readingPeriod"
-                [(ngModel)]="searchService._searchSimpleReq.readingPeriodId">
+            <div class="input_2" [hidden]="searchService._isOrderByDate">
+                <div class="_key">نوع دوره</div>
+                <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                    <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
+                        [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
 
-            <div class="input_2">
+            <div class="input_2" [hidden]="!readingPeriodDictionary.length || searchService._isOrderByDate">
+                <div class="_key">دوره قرائت</div>
+                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq.readingPeriodId"
+                    name="readingPeriodId">
+                    <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                        {{truefalse.title}}
+                    </mat-option>
+                </mat-select>
+            </div>
+
+            <div class="input_2" [hidden]="searchService._isOrderByDate">
                 <div class="_key">سال</div>
                 <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq.year" name="year">
                     <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
@@ -21,14 +49,14 @@
                     </mat-option>
                 </mat-select>
             </div>
-            <div class="input_2">
+            <div class="input_2" [hidden]="!searchService._isOrderByDate">
                 <div class="_key">از</div>
                 <div class="_value">
                     <app-date-jalali name="fromDate" (dateJalEvent)="searchService.receiveFromDateJalali($event)">
                     </app-date-jalali>
                 </div>
             </div>
-            <div class="input_2">
+            <div class="input_2" [hidden]="!searchService._isOrderByDate">
                 <div class="_key">تا</div>
                 <div class="_value">
                     <app-date-jalali name="toDate" (dateJalEvent)="searchService.receiveToDateJalali($event)">
@@ -44,10 +72,10 @@
     </form>
 </main>
 
-<app-prime-table *ngIf="dataSource.length" [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" [_outputFileName]="'simpleSearch'" [_checkUpName]="'simpleSearch'"
-    [_rowsPerPage]="[10,20,50,100, 500, 1000]" [_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
-    [_numberOfExtraColumns]="[1,2,3,4]" [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"
+<app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
+    [_outputFileName]="'simpleSearch'" [_checkUpName]="'simpleSearch'" [_rowsPerPage]="[10,20,50,100, 500, 1000]"
+    [_selectedColumnsToRemember]="'selectedSearchManagerSimple'" [_numberOfExtraColumns]="[1,2,3,4]"
+    [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"
     (routedToLMAll)="searchService.routeToLMAll($event)" (routedToLMPayDay)="searchService.routeToLMPayDay($event)"
     (routedToFollowUp)="searchService.routeToFollowUp($event)"
     (routedToFollowUp)="searchService.routeToFollowUp($event)" (showedInMap)="searchService.showInMap($event)">

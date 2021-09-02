@@ -23,6 +23,8 @@ import { ISearchSimpleReq } from './../Interfaces/imanage';
 })
 export class SearchService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
+  _isOrderByDate: boolean = true;
+
   searchReqPro: ISearchProReportInput = {
     zoneId: null,
     fromDate: '',
@@ -338,7 +340,7 @@ export class SearchService {
     }
     return true;
   }
-  private validationSearchSimple = (object: ISearchSimpleReq): boolean => {
+  private validationSearchSimpleByPeriod = (object: ISearchSimpleReq): boolean => {
     if (this.utilsService.isNull(object.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
@@ -351,14 +353,6 @@ export class SearchService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (this.utilsService.isNull(object.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (this.utilsService.isNull(object.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
     if (this.utilsService.isNaN(object.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
@@ -368,6 +362,25 @@ export class SearchService {
       return false;
     }
     if (this.utilsService.isNaN(object.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    return true;
+  }
+  private validateSearchSimpleByDate = (object: ISearchSimpleReq): boolean => {
+    if (this.utilsService.isNull(object.fromDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (this.utilsService.isNull(object.toDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+    if (this.utilsService.isNull(object.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (this.utilsService.isNaN(object.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
@@ -389,7 +402,11 @@ export class SearchService {
   }
   /*VERIFICATION*/
   verificationSimpleSearch = (searchReq: ISearchSimpleReq): boolean => {
-    return this.validationSearchSimple(searchReq);
+    searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
+    searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
+    if (this._isOrderByDate)
+      return this.validateSearchSimpleByDate(searchReq);
+    return this.validationSearchSimpleByPeriod(searchReq)
   }
   verificationMosh = (searchReq: ISearchMoshReq): boolean => {
     return this.validationNullMosh(searchReq) && this.validationNumbers(searchReq)

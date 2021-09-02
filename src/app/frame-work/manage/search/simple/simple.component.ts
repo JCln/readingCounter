@@ -26,6 +26,9 @@ export class SimpleComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription: Subscription[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
+  readingPeriodKindDictionary: IDictionaryManager[] = [];
+  readingPeriodDictionary: IDictionaryManager[] = [];
+  _selectedKindId: string = '';
 
   constructor(
     private interactionService: InteractionService,
@@ -45,12 +48,14 @@ export class SimpleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.insertSelectedColumns();
   }
   connectToServer = async () => {
+    this.dataSource = [];
     if (!this.searchService.verificationSimpleSearch(this.searchService._searchSimpleReq))
       return;
     this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchSimple, this.searchService._searchSimpleReq);
-    this.converts();
-
-    this.closeTabService.saveDataForSearchSimple = this.dataSource;
+    if (this.dataSource.length) {
+      this.converts();
+      this.closeTabService.saveDataForSearchSimple = this.dataSource;
+    }
   }
   nullSavedSource = () => this.closeTabService.saveDataForSearchSimple = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -63,6 +68,7 @@ export class SimpleComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.receiveYear();
+    this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
   }
   ngOnInit() {
@@ -98,5 +104,8 @@ export class SimpleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   receiveYear = () => {
     this._years = this.searchService.getYears();
+  }
+  getReadingPeriod = async () => {
+    this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this._selectedKindId);
   }
 }
