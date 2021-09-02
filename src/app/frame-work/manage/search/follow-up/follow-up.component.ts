@@ -11,27 +11,25 @@ import { FollowUpService } from './follow-up.service';
   styleUrls: ['./follow-up.component.scss']
 })
 export class FollowUpComponent implements OnInit {
-  trackNumber: number;
-
   constructor(
     private router: Router,
     public route: ActivatedRoute,
     private trackingManagerService: TrackingManagerService,
-    private followUpService: FollowUpService
+    public followUpService: FollowUpService
   ) { }
 
   ngOnInit(): void {
   }
   verification = async () => {
-    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber)) {
-      const dataSource = this.followUpService.setData(await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber));
+    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.followUpService.trackNumber)) {
+      const dataSource = this.followUpService.setData(await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.followUpService.trackNumber));
       if (this.trackingManagerService.isValidationNull(dataSource)) {
         this.routeToChild();
       }
     }
   }
   private routeToChild = () => {
-    this.router.navigate(['wr/m/s/fwu/', this.trackNumber])
+    this.router.navigate(['wr/m/s/fwu/', this.followUpService.trackNumber])
   }
 
 

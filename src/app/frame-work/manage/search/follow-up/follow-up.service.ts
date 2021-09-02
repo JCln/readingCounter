@@ -3,6 +3,7 @@ import { IFollowUp } from 'interfaces/imanage';
 
 @Injectable()
 export class FollowUpService {
+    trackNumber: number;
     private serviceData: IFollowUp;
 
     setData(value: IFollowUp) {
