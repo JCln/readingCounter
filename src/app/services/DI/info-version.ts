@@ -3,27 +3,17 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '1',
-        title: 'امکان مشاهده لیست قرائت در پیگیری',
-        isSelected: true
-    },
-    {
-        id: '1',
-        title: 'افزودن رقم قبلی در جزئیات مسیر کارتابل',
+        title: 'افزودن بخش جستجو',
         isSelected: true
     },
     {
         id: '2',
-        title: 'ناحیه در جستجوی اشتراک اختیاری است',
+        title: 'رفع مشکل بازگشت به حالت اولیه در غیرمجاز',
         isSelected: true
     },
     {
         id: '2',
-        title: 'رفع برخی از تغییرات درخواستی',
-        isSelected: true
-    },
-    {
-        id: '2',
-        title: 'رفع ایرادات جزئی',
+        title: 'رفع برخی ایرادات جزئی',
         isSelected: true
     }
 
