@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ForbiddenService } from 'services/forbidden.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { ReadManagerService } from 'services/read-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { SearchService } from 'services/search.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -70,6 +71,7 @@ export class PrimeTableComponent {
     public listManagerService: ListManagerService,
     public usersAllService: UsersAllService,
     public forbiddenService: ForbiddenService,
+    public readManagerService: ReadManagerService,
     public readingReportManagerService: ReadingReportManagerService
   ) { }
 

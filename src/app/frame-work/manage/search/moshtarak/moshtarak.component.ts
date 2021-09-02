@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOnOffLoadFlat, ISearchMoshReq } from 'interfaces/imanage';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
@@ -18,12 +18,6 @@ import { Search } from 'src/app/classes/search';
   styleUrls: ['./moshtarak.component.scss']
 })
 export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
-  searchReq: ISearchMoshReq = {
-    zoneId: null,
-    searchBy: null,
-    item: '',
-    similar: true
-  }
   dataSource: IOnOffLoadFlat[] = [];
   searchType: Search[];
   searchByText: string = '';
@@ -65,12 +59,12 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    if (!this.searchService.verificationMosh(this.searchReq))
+    if (!this.searchService.verificationMosh(this.searchService.searchReqMosh))
       return;
-    this.dataSource = await this.searchService.searchMoshterakin(this.searchReq);
-    if (this.searchReq.zoneId) {
-      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
-      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
+    this.dataSource = await this.searchService.searchMoshterakin(this.searchService.searchReqMosh);
+    if (this.searchService.searchReqMosh.zoneId) {
+      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchService.searchReqMosh.zoneId);
+      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchService.searchReqMosh.zoneId);
     }
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.qotrDictionary = await this.searchService.getQotrDictionary();

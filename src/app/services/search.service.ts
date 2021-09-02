@@ -3,7 +3,13 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat, ISearchMoshReq, ISearchProReportInput } from 'interfaces/imanage';
-import { IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import {
+  ENSelectedColumnVariables,
+  IMasrafStates,
+  IObjectIteratation,
+  ISearchInOrderTo,
+  ITitleValue,
+} from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -15,6 +21,37 @@ import { Search } from '../classes/search';
   providedIn: 'root'
 })
 export class SearchService {
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
+  searchReqPro: ISearchProReportInput = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    readingPeriodId: null,
+    zoneIds: [],
+    year: 1400,
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    fragmentMasterIds: []
+  }
+  searchInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: true
+    },
+    {
+      title: 'دوره',
+      isSelected: false
+    }
+  ]
+
+  searchReqMosh: ISearchMoshReq = {
+    zoneId: null,
+    searchBy: null,
+    item: '',
+    similar: true
+  }
   private _searchReqPro: ISearchProReportInput = {
     zoneId: null,
     fromDate: '',

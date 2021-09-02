@@ -17,7 +17,7 @@ export class ListManagerService {
   private saveTo: number = 0;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
-  private listManagerAll: IObjectIteratation[] = [
+  private _listManagerAll: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: false },
     { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
     { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -74,7 +74,7 @@ export class ListManagerService {
   ]
 
   columnLMAll = (): IObjectIteratation[] => {
-    return this.listManagerAll;
+    return this._listManagerAll;
   }
   columnSelectedLMPerDay = (): IObjectIteratation[] => {
     return [

@@ -6,7 +6,7 @@
                 <h2>جستجو بر اساس</h2>
                 <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
                     name="_isOrderByDate">
-                    <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"
+                    <mat-radio-button class="radio_button" *ngFor="let orderType of searchService.searchInOrderTo"
                         [value]="orderType.isSelected">
                         {{orderType.title}}
                     </mat-radio-button>
@@ -18,17 +18,18 @@
                 <span class="ui-float-label">
                     <label for="float-input">ناحیه</label>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zone" #zoneId
-                        [options]="zoneDictionary" name="_selectedKindId" [(ngModel)]="searchReq.zoneId"
-                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                        placeholder="انتخاب مورد" (onChange)="getMasterInZone()">
+                        [options]="zoneDictionary" name="_selectedKindId"
+                        [(ngModel)]="searchService.searchReqPro.zoneId" optionLabel="title" [filter]="true"
+                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
+                        (onChange)="getMasterInZone()">
                     </p-dropdown>
                 </span>
 
                 <span class="ui-float-label" [hidden]="_isOrderByDate">
                     <label for="float-input">سال</label>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" #year [options]="_years" name="year"
-                        [(ngModel)]="searchReq.year" optionLabel="title" [filter]="true" filterBy="value"
-                        optionValue="value" [showClear]="true" placeholder="انتخاب مورد">
+                        [(ngModel)]="searchService.searchReqPro.year" optionLabel="title" [filter]="true"
+                        filterBy="value" optionValue="value" [showClear]="true" placeholder="انتخاب مورد">
                     </p-dropdown>
                 </span>
 
@@ -44,8 +45,9 @@
                 <span class="ui-float-label" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
                     <label for="float-input">دوره قرائت</label>
                     <p-dropdown [style]="{minWidth: '100%'}" name="period" #period [options]="readingPeriodDictionary"
-                        name="readingPeriodId" [(ngModel)]="searchReq.readingPeriodId" optionLabel="title"
-                        [filter]="true" filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
+                        name="readingPeriodId" [(ngModel)]="searchService.searchReqPro.readingPeriodId"
+                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        placeholder="انتخاب مورد">
                     </p-dropdown>
                 </span>
 
@@ -67,37 +69,37 @@
 
             <article>
                 <h3 class="title">وضعیت مصرف</h3>
-                <p-multiSelect [options]="masrafState" name="masraf" [(ngModel)]="searchReq.masrafStates"
-                    optionLabel="header" optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده"
-                    [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                <p-multiSelect [options]="masrafState" name="masraf"
+                    [(ngModel)]="searchService.searchReqPro.masrafStates" optionLabel="header" optionValue="value"
+                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article>
                 <h3 class="title">گزارش کنتور</h3>
                 <p-multiSelect [options]="counterReportDictionary" name="counterReport"
-                    [(ngModel)]="searchReq.reportIds" optionLabel="title" optionValue="id"
+                    [(ngModel)]="searchService.searchReqPro.reportIds" optionLabel="title" optionValue="id"
                     selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article>
                 <h3 class="title">وضعیت کنتور</h3>
                 <p-multiSelect [options]="counterStateByZoneIdDictionary" name="counterState"
-                    [(ngModel)]="searchReq.counterStateIds" optionLabel="title" optionValue="id"
+                    [(ngModel)]="searchService.searchReqPro.counterStateIds" optionLabel="title" optionValue="id"
                     selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article>
                 <h3 class="title">کاربری</h3>
-                <p-multiSelect [options]="karbariDictionary" name="karbari" [(ngModel)]="searchReq.karbariCodes"
-                    optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                    [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                <p-multiSelect [options]="karbariDictionary" name="karbari"
+                    [(ngModel)]="searchService.searchReqPro.karbariCodes" optionLabel="title" optionValue="id"
+                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article>
                 <h3 class="title">نوبتی ها</h3>
-                <p-multiSelect [options]="fragmentMasterIds" name="fragmentId" [(ngModel)]="searchReq.fragmentMasterIds"
-                    optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                    [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                <p-multiSelect [options]="fragmentMasterIds" name="fragmentId"
+                    [(ngModel)]="searchService.searchReqPro.fragmentMasterIds" optionLabel="routeTitle" optionValue="id"
+                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
 
