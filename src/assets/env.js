@@ -2,16 +2,16 @@
     window.__env = window.__env || {};
 
     // API url
-    window.__env.headerProvinceTitle = '';
+    window.__env.headerProvinceTitle = 'test';
     window.__env.API_URL = 'https://37.191.92.157/kontoriNew';
     window.__env.OSMmapBoxUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     window.__env.SATELLITEMapBoxUrl = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=';
     window.__env.SATELLITEMapAccessToken = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg';
-    window.__hasNextBazdid = 'false';
-    window.__mapCenter = [32.669, 51.664];
-    window.__browserVersions = {
+    window.__env.hasNextBazdid = false;
+    window.__env.mapCenter = [32.669, 51.664];
+    window.__env.browserVersions = {
         Desktop: {
-            Chrome: { alert: 83, normal: 86 },
+            Chrome: { alert: 83, normal: 186 },
             Firefox: { alert: 80, normal: 83 },
             IE: { alert: 0, normal: 0 },
             opera: { alert: 73, normal: 78 },

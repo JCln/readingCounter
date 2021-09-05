@@ -19,6 +19,7 @@ import { LayoutComponent } from './_layouts/layout/layout.component';
 import { AnonyHeaderComponent } from './anony-header/anony-header.component';
 import { ClockComponent } from './clock/clock.component';
 import { CoreRoutingModule } from './core-routing.module';
+import { NetConnectionComponent } from './net-connection/net-connection.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
@@ -39,6 +40,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     SnackBarComponent,
     ClockComponent,
     AnnouceNotifComponent,
+    NetConnectionComponent,
   ]
   ,
   imports: [
@@ -59,9 +61,12 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     SpinnerComponent,
     SnackBarComponent,
     ClockComponent,
-    AnnouceNotifComponent,
     SharedThreeModule,
+    // components
     BrowserAnimationsModule,
+    AnnouceNotifComponent,
+    NetConnectionComponent,
+
     CoreRoutingModule
   ],
   providers: [

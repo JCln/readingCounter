@@ -1,0 +1,19 @@
+._box {
+  position: fixed;
+  direction: rtl;
+  left: 50%;
+  top: .5rem;
+  transform: translate(-50%);
+
+  text-align: center;
+  width: 16rem;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  background: var(--white);
+  color: var(--blue_400);
+  border: 2px solid var(--blue_400);
+  box-shadow: 1px 0 2px 1px;
+  border-radius: 100vmax;
+  z-index: 600;
+}

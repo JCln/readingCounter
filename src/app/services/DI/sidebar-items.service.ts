@@ -32,8 +32,6 @@ export class SidebarItemsService {
     }
   }
   getTestSideTest = () => {
-    console.log(sidebarItemsTest.addStaticSubRoutes);
-
     return sidebarItemsTest.addStaticSubRoutes;
   }
   /* TAB WRAPPER */

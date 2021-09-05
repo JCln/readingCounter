@@ -16,7 +16,7 @@ export class BrowserSupportService {
     this.browserVersion = parseInt(this.browserNameAndVersion.replace(/^\D+/g, ''));
   }
   isTouchScreen = (): boolean => {
-    var hasTouchScreen = false;
+    let hasTouchScreen = false;
     if ("maxTouchPoints" in navigator) {
       hasTouchScreen = navigator.maxTouchPoints > 0;
     } else if ("msMaxTouchPoints" in navigator) {
