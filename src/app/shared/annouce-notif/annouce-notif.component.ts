@@ -34,7 +34,12 @@ export class AnnouceNotifComponent {
   ) { }
 
   showNotif = (): IBrowserNotif => {
-    const temp = this.browserSupportService.browserStatus();
+    let temp;
+    if (this.browserSupportService.isTouchScreen())
+      temp = this.browserSupportService.statusTouchBrowser();
+    else
+      temp = this.browserSupportService.statusDesktopBrowser();
+
     if (temp == 200)
       return this.notifConfig[2];
 
