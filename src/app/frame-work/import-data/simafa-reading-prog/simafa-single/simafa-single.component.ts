@@ -51,9 +51,7 @@ export class SimafaSingleComponent extends FactoryONE {
     this.simafaSingleReq.year = parseInt(this.route.snapshot.paramMap.get('year'));
     this.simafaSingleReq.readingPeriodId = parseInt(this.route.snapshot.paramMap.get('readingPeriodId'));
   }
-  connectToServer = async () => {
-    console.log(this.simafaSingleReq);
-
+  connectToServer = async (canRefresh?: boolean) => {
     const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaSingleReq);
     if (!validation)
       return;
@@ -71,4 +69,5 @@ export class SimafaSingleComponent extends FactoryONE {
   selectedZoneId = async () => {
     this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaSingleReq.zoneId);
   }
+  ngOnInit(): void { return; }
 }

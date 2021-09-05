@@ -106,9 +106,6 @@ export class AllComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
   toPrePage = () => {
     if (this.isModify) {
       this.router.navigate(['/wr/m/track/offloaded']);
@@ -127,4 +124,5 @@ export class AllComponent extends FactoryONE {
         item.imageCount = false;
     })
   }
+  ngOnInit(): void { return; }
 }

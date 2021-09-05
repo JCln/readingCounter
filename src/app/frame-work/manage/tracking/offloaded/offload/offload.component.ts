@@ -109,7 +109,7 @@ export class OffloadComponent extends FactoryONE {
         const dynamicRoute = this.route.snapshot.paramMap.get('UUID');
         this.zoneId = dynamicRoute.substring(0, dynamicRoute.indexOf('-'));
         this.offloadModifyReq.id = dynamicRoute.substring(dynamicRoute.indexOf('-') + 1, dynamicRoute.length);
-        
+
         this.classWrapper();
       })
     )
@@ -169,4 +169,5 @@ export class OffloadComponent extends FactoryONE {
   toPrePage = () => {
     this.trackingManagerService.backToPreviousPage();
   }
+  ngOnInit(): void { return; }
 }

@@ -74,4 +74,5 @@ export class UserLogginsComponent extends FactoryONE {
       item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
     })
   }
+  ngOnInit(): void { return; }
 }

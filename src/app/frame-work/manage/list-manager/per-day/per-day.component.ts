@@ -83,5 +83,8 @@ export class PerDayComponent extends FactoryONE {
     )
   }
   toPrePage = () => this.router.navigate(['wr/m/track/reading']);
-
+  refreshTable = () => {
+    return;
+  }
+  ngOnInit(): void { return; }
 }

@@ -86,6 +86,7 @@ export class WouiComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
+      this.setToDefault();
     }
     this.dataSource = await this.useAPI();
     this.downloadManagerService.assignToDataSource(this.dataSource);
@@ -118,7 +119,7 @@ export class WouiComponent extends FactoryONE {
     this.downloadURL = window.URL.createObjectURL(res);
     this.testAudio.src = this.downloadURL;
     this.isShowAudioControllers();
-  } 
+  }
   playAudio = () => {
     this.testAudio.play();
     this.testAudio.addEventListener('ended', (event) => {
@@ -151,4 +152,5 @@ export class WouiComponent extends FactoryONE {
     })
   }
   toPrePage = () => this._location.back();
+  ngOnInit(): void { return; }
 }

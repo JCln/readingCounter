@@ -64,7 +64,6 @@ export class FragmentDetailsComponent extends FactoryONE {
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refreshTable = () => this.classWrapper(true);
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   newRow(): IFragmentDetails {
     return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId, isNew: true };
@@ -127,4 +126,5 @@ export class FragmentDetailsComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   routeToParent = () => this.router.navigate(['/wr/m/r/nob']);
+  ngOnInit(): void { return; }
 }
