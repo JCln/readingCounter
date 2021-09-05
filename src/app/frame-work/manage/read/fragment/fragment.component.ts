@@ -33,7 +33,7 @@ export class FragmentComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   testChangedValue() {

@@ -10,9 +10,10 @@
     [_rowsPerPage]="[10,25,50]"
     [_rowsNumbers]=10
     [_selectedColumnsToRemember]="'selectedlastStates'"
-    [_numberOfExtraColumns]=[1]
+    [_numberOfExtraColumns]="[1 , 2]"
     [_sessionName]="'last-states-session'"
     (showedInMap)="showInMap($event)"   
     (refreshedTable)="refreshTable()"
+    (routedToLMAll)="trackingManagerService.routeToLMAll($event)"
  > 
 </app-prime-table>

@@ -48,7 +48,7 @@ export class MoshtarakComponent extends FactoryONE {
     public outputManagerService: OutputManagerService,
     private utilsService: UtilsService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   insertSelectedColumns = () => {

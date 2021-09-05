@@ -38,7 +38,7 @@ export class ApkComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private outputManagerService: OutputManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   downloadAPK = async () => {

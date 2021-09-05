@@ -27,7 +27,7 @@ export class DbfOutputComponent extends FactoryONE {
     public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
-    super(interactionService)
+    super(interactionService);
     this.dbfOutput = this.outputManagerService.getDBFOutPut;
   }
 

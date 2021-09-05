@@ -31,7 +31,7 @@ export class FinishedComponent extends FactoryONE {
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));

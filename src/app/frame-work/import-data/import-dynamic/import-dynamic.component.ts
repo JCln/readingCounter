@@ -70,7 +70,7 @@ export class ImportDynamicComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private localClientConfigsService: LocalClientConfigsService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   connectToServer = async () => {

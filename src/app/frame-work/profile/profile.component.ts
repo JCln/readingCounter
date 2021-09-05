@@ -22,7 +22,7 @@ export class ProfileComponent extends FactoryONE {
     public interactionService: InteractionService,
     private profileService: ProfileService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   classWrapper = async (canRefresh?: boolean) => {

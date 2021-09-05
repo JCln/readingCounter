@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -11,13 +11,14 @@ import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-simafa-reading-prog',
   templateUrl: './simafa-reading-prog.component.html',
   styleUrls: ['./simafa-reading-prog.component.scss']
 })
-export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SimafaReadingProgComponent extends FactoryONE {
   importSimafaReadingProgram: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
@@ -43,12 +44,14 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
   subscription: Subscription[] = [];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private importDynamicService: ImportDynamicService,
     public outputManagerService: OutputManagerService,
     public route: ActivatedRoute
-  ) { }
+  ) {
+    super(interactionService);
+  }
 
   connectToServer = async () => {
     if (!this.importDynamicService.checkSimafaVertification(this.importSimafaReadingProgram))
@@ -86,9 +89,6 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
     this._years = this.importDynamicService.getYears();
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
   refreshTabStatus = () => {
     this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
       if (res) {
@@ -98,14 +98,6 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
       }
     })
     )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

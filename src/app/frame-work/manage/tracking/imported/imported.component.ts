@@ -56,7 +56,7 @@ export class ImportedComponent extends FactoryONE {
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTrackImported = null;

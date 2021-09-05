@@ -75,7 +75,7 @@ export class DescComponent extends FactoryONE {
     private followUpService: FollowUpService,
     private authService: AuthService
   ) {
-    super(interactionService)
+    super(interactionService);
     this.getRouteParams();
   }
 

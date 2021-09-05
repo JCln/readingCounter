@@ -75,7 +75,7 @@ export class GisComponent extends FactoryONE {
     private readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   getCounterStateByZoneId = async () => {

@@ -35,7 +35,7 @@ export class PerDayComponent extends FactoryONE {
     private route: ActivatedRoute,
     private dateJalaliService: DateJalaliService
   ) {
-    super(interactionService)
+    super(interactionService);
     this.getRouteParams();
   }
 

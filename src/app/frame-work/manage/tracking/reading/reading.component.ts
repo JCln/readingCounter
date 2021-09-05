@@ -40,9 +40,6 @@ export class ReadingComponent extends FactoryONE {
   routeToLMPayDay = (row: ITracking) => {
     this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
   }
-  routeToLMAll = (row: ITracking) => {
-    this.trackingManagerService.routeToLMAll(row);
-  }
   private rowToImported = async (row: string, desc: string, rowIndex: number) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row, desc);
     this.refetchTable(rowIndex);

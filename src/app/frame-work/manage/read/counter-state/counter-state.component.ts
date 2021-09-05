@@ -37,7 +37,7 @@ export class CounterStateComponent extends FactoryONE {
     private counterStateService: CounterStateService,
     private readManagerService: ReadManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   columnSelectedMenuDefault = () => {

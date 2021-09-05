@@ -45,7 +45,7 @@ export class ProComponent extends FactoryONE {
     private utilsService: UtilsService,
     private dialogService: DialogService,
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   insertSelectedColumns = () => {

@@ -151,12 +151,13 @@
                 </i>
             </td>
             <td *ngIf="_outputFileName== 'reading'" (click)="routeToLMPayDay(dataSource)">
-                <span class="ui-column-title">مشاهده مامور (ها)</span>
+                <span class="ui-column-title">اطلاعات روزانه</span>
                 <i class="tooltip p_icons pi pi-folder-open">
-                    <div class="tooltip_text">مشاهده مامور(ها)</div>
+                    <div class="tooltip_text">اطلاعات روزانه</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'reading' || _outputFileName== 'imported'" (click)="routeToLMAll(dataSource)">
+            <td *ngIf="_outputFileName== 'reading' || _outputFileName== 'imported' || _outputFileName=='lastStates'"
+                (click)="routeToLMAll(dataSource)">
                 <span class="ui-column-title">مشاهده لیست قرائت</span>
                 <i class="tooltip p_icons pi pi-list">
                     <div class="tooltip_text_right">مشاهده لیست قرائت</div>

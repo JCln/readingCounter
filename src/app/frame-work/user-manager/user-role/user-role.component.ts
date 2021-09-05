@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IRoleManager } from 'interfaces/iuser-manager';
@@ -7,13 +7,14 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { UsersAllService } from 'services/users-all.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-user-role',
   templateUrl: './user-role.component.html',
   styleUrls: ['./user-role.component.scss']
 })
-export class UserRoleComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserRoleComponent extends FactoryONE {
   dataSource: IRoleManager[] = [];
 
   subscription: Subscription[] = [];
@@ -26,10 +27,12 @@ export class UserRoleComponent implements OnInit, AfterViewInit, OnDestroy {
   newRowLimit: number = 1;
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private userService: UsersAllService
-  ) { }
+  ) {
+    super(interactionService);
+  }
 
   nullSavedSource = () => this.closeTabService.saveDataForRoleManager = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -44,26 +47,6 @@ export class UserRoleComponent implements OnInit, AfterViewInit, OnDestroy {
       this.closeTabService.saveDataForRoleManager = this.dataSource;
     }
     this.insertSelectedColumns();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/mu/role')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe())
   }
   insertSelectedColumns = () => {
     this._selectCols = this.userService.columnUserRoles();
@@ -112,9 +95,6 @@ export class UserRoleComponent implements OnInit, AfterViewInit, OnDestroy {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   newRow(): IRoleManager {
     return {

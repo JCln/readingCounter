@@ -214,9 +214,8 @@ export enum ENInterfaces {
 
 
     /* NON MANAGER INTERFACES */
-    getPolicies = `V1.Test/Policy/Active/`,
-    editPolicies = 'V1.Test/Policy/Edit', //post body
-    addPolicies = 'V1.Test/Policy/Add',
+    getPolicies = 'V1/Policy/Active',
+    editPolicies = 'V1/Policy/Edit',
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',

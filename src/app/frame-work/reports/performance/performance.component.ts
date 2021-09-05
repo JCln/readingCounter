@@ -46,7 +46,7 @@ export class PerformanceComponent extends FactoryONE {
     public interactionService: InteractionService,
     public route: ActivatedRoute
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   classWrapper = async () => {

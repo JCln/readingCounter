@@ -10,7 +10,9 @@
 }
 
 ._value {
+  display: flex;
   justify-content: center;
+  align-items: center;
   padding: $font_05 $font_xs;
   background: var(--white);
   border: 2px solid var(--blue_600);

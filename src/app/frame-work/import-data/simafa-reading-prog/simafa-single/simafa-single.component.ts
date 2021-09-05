@@ -42,7 +42,7 @@ export class SimafaSingleComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private route: ActivatedRoute
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   getRouteParams = () => {

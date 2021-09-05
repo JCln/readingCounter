@@ -33,7 +33,7 @@ export class RegionComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   openAddDialog = () => {

@@ -51,7 +51,7 @@ export class SimafaBatchComponent extends FactoryONE {
     public importDynamicService: ImportDynamicService,
     private route: ActivatedRoute
   ) {
-    super(interactionService)
+    super(interactionService);
     this.getRouteParams();
   }
 

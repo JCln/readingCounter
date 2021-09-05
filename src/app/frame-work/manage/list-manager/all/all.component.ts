@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -9,13 +9,14 @@ import { InteractionService } from 'services/interaction.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-all',
   templateUrl: './all.component.html',
   styleUrls: ['./all.component.scss']
 })
-export class AllComponent implements AfterViewInit, OnDestroy {
+export class AllComponent extends FactoryONE {
   trackId: string;
   isModify: string | boolean;
   subscription: Subscription[] = [];
@@ -31,13 +32,14 @@ export class AllComponent implements AfterViewInit, OnDestroy {
   _selectedColumns: any[];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     public listManagerService: ListManagerService,
     public outputManagerService: OutputManagerService,
     private route: ActivatedRoute,
     private router: Router,
     private _location: Location
   ) {
+    super(interactionService);
     this.getRouteParams();
   }
 
@@ -85,23 +87,6 @@ export class AllComponent implements AfterViewInit, OnDestroy {
       this.classWrapper();
     })
     )
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr/m/l/all/'))
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   routeToWoui = (object: IOnOffLoadFlat) => {
     this.router.navigate(['wr/m/track/woui', false, object.id]);

@@ -49,7 +49,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
     public route: ActivatedRoute,
     private closeTabService: CloseTabService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForRRTraverseDifferential = null;

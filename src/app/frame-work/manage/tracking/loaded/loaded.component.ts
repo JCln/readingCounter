@@ -36,7 +36,7 @@ export class LoadedComponent extends FactoryONE {
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTrackLoaded = null;

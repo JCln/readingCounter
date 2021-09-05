@@ -34,7 +34,7 @@ export class KarbariComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   openAddDialog = () => {

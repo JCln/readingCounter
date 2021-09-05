@@ -1,18 +1,20 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IUserLoggins } from 'interfaces/iuser-manager';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
+import { DateJalaliService } from 'services/date-jalali.service';
 import { InteractionService } from 'services/interaction.service';
 import { UserLogginsService } from 'services/user-loggins.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-user-loggins',
   templateUrl: './user-loggins.component.html',
   styleUrls: ['./user-loggins.component.scss']
 })
-export class UserLogginsComponent implements AfterViewInit, OnDestroy {
+export class UserLogginsComponent extends FactoryONE {
   UUID: string = '';
   subscription: Subscription[] = [];
 
@@ -21,12 +23,14 @@ export class UserLogginsComponent implements AfterViewInit, OnDestroy {
   _selectCols: any[];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private userLogginsService: UserLogginsService,
+    private dateJalaliService: DateJalaliService,
     private router: Router,
     private route: ActivatedRoute,
   ) {
+    super(interactionService);
     this.getRouteParams();
   }
 
@@ -35,7 +39,7 @@ export class UserLogginsComponent implements AfterViewInit, OnDestroy {
     this._selectedColumns = this.userLogginsService.customizeSelectedColumns(this._selectCols);
   }
   nullSavedSource = () => this.closeTabService.saveDataForUserLoggins = null;
-  private classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
@@ -55,26 +59,6 @@ export class UserLogginsComponent implements AfterViewInit, OnDestroy {
       })
     )
   }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr/mu/all/loggins/'))
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }
@@ -87,7 +71,7 @@ export class UserLogginsComponent implements AfterViewInit, OnDestroy {
   }
   convertLoginTime = () => {
     this.dataSource.forEach(item => {
-      item.loginDateTime = new Date(item.loginDateTime).toLocaleDateString('fa-IR') + '   ' + new Date(item.loginDateTime).toLocaleTimeString('fa-IR');
+      item.loginDateTime = this.dateJalaliService.getDate(item.loginDateTime) + '   ' + this.dateJalaliService.getTime(item.loginDateTime);
     })
   }
 }

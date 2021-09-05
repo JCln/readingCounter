@@ -8,10 +8,12 @@
                     تعداد دفعات ورود با Captcha
                     <div class="plus_minus">
                         <div class="plus" (click)="plusOrMinus(policies.minPasswordLength + 1)">
-                            <i class="fa fa-plus"></i></div>
+                            <i class="fa fa-plus"></i>
+                        </div>
                         <div class="_value"> {{policies.minPasswordLength}}</div>
                         <div class="minus" (click)="plusOrMinus(policies.minPasswordLength - 1)">
-                            <i class="fa fa-minus"></i></div>
+                            <i class="fa fa-minus"></i>
+                        </div>
                     </div>
             </div>
         </div>
@@ -25,15 +27,17 @@
                 <span>
                     <ul>
                         <li class="number_vals">
-                            lockInvalidAttempts"
+                            lockInvalidAttempts
                             <div class="plus_minus">
                                 <div class="plus"
                                     (click)="policies.lockInvalidAttempts = policies.lockInvalidAttempts + 1">
-                                    <i class="fa fa-plus"></i></div>
+                                    <i class="fa fa-plus"></i>
+                                </div>
                                 <div class="_value"> {{policies.lockInvalidAttempts}}</div>
                                 <div class="minus"
                                     (click)="policies.lockInvalidAttempts = policies.lockInvalidAttempts - 1">
-                                    <i class="fa fa-minus"></i></div>
+                                    <i class="fa fa-minus"></i>
+                                </div>
                             </div>
                         </li>
                         <li class="number_vals">
@@ -95,11 +99,13 @@
                             <div class="plus_minus">
                                 <div class="plus"
                                     (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts + 1">
-                                    <i class="fa fa-plus"></i></div>
+                                    <i class="fa fa-plus"></i>
+                                </div>
                                 <div class="_value"> {{policies.requireCaptchaInvalidAttempts}}</div>
                                 <div class="minus"
                                     (click)="policies.requireCaptchaInvalidAttempts = policies.requireCaptchaInvalidAttempts - 1">
-                                    <i class="fa fa-minus"></i></div>
+                                    <i class="fa fa-minus"></i>
+                                </div>
                             </div>
                         </li>
                         <li>
@@ -108,15 +114,17 @@
                             </mat-checkbox>
                         </li>
                         <li class="number_vals">
-                            reacaptcha
+                            recaptcha
                             <div class="plus_minus">
                                 <div class="plus"
                                     (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts + 1">
-                                    <i class="fa fa-plus"></i></div>
+                                    <i class="fa fa-plus"></i>
+                                </div>
                                 <div class="_value"> {{policies.requireRecaptchaInvalidAttempts}}</div>
                                 <div class="minus"
                                     (click)="policies.requireRecaptchaInvalidAttempts= policies.requireRecaptchaInvalidAttempts - 1">
-                                    <i class="fa fa-minus"></i></div>
+                                    <i class="fa fa-minus"></i>
+                                </div>
                             </div>
                         </li>
 
@@ -130,5 +138,5 @@
 </div>
 
 <section class="btns">
-    <button (click)="addPolicy()" class="btn_1">ذخیره تغییرات</button>
+    <button (click)="securityService.editPolicy(policies)" class="btn_1">ذخیره تغییرات</button>
 </section>

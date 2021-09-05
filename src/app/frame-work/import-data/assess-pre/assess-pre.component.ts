@@ -49,7 +49,7 @@ export class AssessPreComponent extends FactoryONE {
     private dialogService: DialogService,
     private dialog: MatDialog
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   insertSelectedColumns = () => {

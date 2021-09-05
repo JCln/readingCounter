@@ -27,7 +27,7 @@ export class ForbResComponent extends FactoryONE {
     public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   private insertSelectedColumns = () => {

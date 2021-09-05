@@ -2,11 +2,6 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 
-export enum ENFactory {
-    firstType = 'firstType',
-    secondType = 'secondType'
-}
-
 @Component({
     template: ''
 })
@@ -14,17 +9,16 @@ export abstract class FactoryONE implements OnInit, AfterViewInit, OnDestroy {
     subscription: Subscription[] = [];
 
     constructor(
-        public interactionService: InteractionService,
-        // private closeTabService: CloseTabService,
+        public interactionService: InteractionService
     ) { }
 
     abstract classWrapper(canRefresh?: boolean): void;
+
     refreshTabStatus = () => {
         this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-            if (res) {
-                //  if (res === '/wr/m/al/ac')
-                // this.classWrapper(true);
-            }
+            console.log(res.includes(Factory.refreshTabStatus()));
+            if (res.includes(Factory.refreshTabStatus()))
+                this.classWrapper(true);
         })
         )
     }
@@ -44,14 +38,20 @@ export abstract class FactoryONE implements OnInit, AfterViewInit, OnDestroy {
     }
 }
 export class Factory {
-    constructor(type: ENFactory) { //, closeTabServiceName: string
-        if (type == "firstType") {
-            let temp: any;
-            for (var member in FactoryONE)
-                temp += member;
-
-            console.log(temp);
-            return temp;
-        }
+    static refreshTabStatus = () => {
+        const tempRoute = window.location.pathname;
+        if (tempRoute)
+            return tempRoute;
+        return null;
     }
+    // constructor(type: ENFactory) { //, closeTabServiceName: string
+    //     if (type == "firstType") {
+    //         let temp: any;
+    //         for (var member in FactoryONE)
+    //             temp += member;
+
+    //         console.log(temp);
+    //         return temp;
+    //     }
+    // }
 }

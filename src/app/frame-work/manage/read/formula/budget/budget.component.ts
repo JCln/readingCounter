@@ -39,7 +39,7 @@ export class BudgetComponent extends FactoryONE {
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   /* TODO// show dialog box to add excel file*/

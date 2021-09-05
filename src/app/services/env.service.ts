@@ -13,6 +13,7 @@ export class EnvService implements IENV {
   SATELLITEMapAccessToken = this.temp.SATELLITEMapAccessToken;
   hasNextBazdid = this.temp.hasNextBazdid;
   mapCenter = this.temp.mapCenter;
+  browserVersions = this.temp.browserVersions;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

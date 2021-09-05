@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { IFollowUp, IFollowUpHistory } from 'interfaces/imanage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 
@@ -7,7 +7,7 @@ import { IObjectIteratation } from 'interfaces/ioverall-config';
   templateUrl: './time-line.component.html',
   styleUrls: ['./time-line.component.scss']
 })
-export class TimeLineComponent implements OnInit, AfterViewInit {
+export class TimeLineComponent implements AfterViewInit {
   @Input() dataSource: IFollowUp;
   changeHistory: IFollowUpHistory[] = [];
 
@@ -50,8 +50,6 @@ export class TimeLineComponent implements OnInit, AfterViewInit {
     this._selectCols = this.customizeSelectedColumns();
   }
 
-  ngOnInit(): void {
-  }
   ngAfterViewInit(): void {
     this.changeHistory = this.dataSource.changeHistory;
 

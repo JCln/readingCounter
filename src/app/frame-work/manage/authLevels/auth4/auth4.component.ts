@@ -35,7 +35,7 @@ export class Auth4Component extends FactoryONE {
     private closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   openAddDialog = () => {
@@ -59,7 +59,7 @@ export class Auth4Component extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForAppLevel4.length) {
+    if (this.closeTabService.saveDataForAppLevel4) {
       this.dataSource = this.closeTabService.saveDataForAppLevel4;
     }
     else {

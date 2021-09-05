@@ -35,7 +35,7 @@ export class TxtOutputComponent extends FactoryONE {
     public readManagerService: ReadManagerService,
     public outputManagerService: OutputManagerService
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTextOutput = null;

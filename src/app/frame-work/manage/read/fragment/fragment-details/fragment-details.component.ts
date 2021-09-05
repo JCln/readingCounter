@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { IFragmentDetails } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { InteractionService } from 'services/interaction.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { InteractionService } from 'services/interaction.service';
   templateUrl: './fragment-details.component.html',
   styleUrls: ['./fragment-details.component.scss']
 })
-export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FragmentDetailsComponent extends FactoryONE {
   subscription: Subscription[] = [];
 
   table: Table;
@@ -29,15 +30,16 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
   clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
     private router: Router
   ) {
+    super(interactionService);
     this.getRouteParams();
   }
-  nullSavedSource = () => this.closeTabService.saveDataForFragmentNOBDetails = null;
 
+  nullSavedSource = () => this.closeTabService.saveDataForFragmentNOBDetails = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
@@ -59,25 +61,6 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     })
     )
   }
-  ngOnInit(): void {
-
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res.includes('/wr/m/r/nob/'))
-        this.classWrapper(true);
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-
   testChangedValue() {
     this.newRowLimit = 2;
   }

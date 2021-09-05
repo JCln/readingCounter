@@ -33,7 +33,7 @@ export class DisposalHoursComponent extends FactoryONE {
     public interactionService: InteractionService,
     public route: ActivatedRoute
   ) {
-    super(interactionService)
+    super(interactionService);
   }
 
   classWrapper = async (canRefresh?: boolean) => {

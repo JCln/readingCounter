@@ -218,6 +218,10 @@ export interface Theme {
     name: string,
     properties: any
 }
+export interface IENV_BROWSER_SETUP {
+    alert: number,
+    normal: number
+}
 export interface IENV {
     headerProvinceTitle: string,
     API_URL: string,
@@ -225,5 +229,21 @@ export interface IENV {
     SATELLITEMapBoxUrl: string,
     SATELLITEMapAccessToken: string,
     hasNextBazdid: boolean,
-    mapCenter: [number, number]
+    mapCenter: [number, number],
+    browserVersions: {
+        Desktop: {
+            Chrome: IENV_BROWSER_SETUP,
+            Firefox: IENV_BROWSER_SETUP,
+            IE: IENV_BROWSER_SETUP,
+            opera: IENV_BROWSER_SETUP,
+            safari: IENV_BROWSER_SETUP,
+        }
+        Touch: {
+            Chrome: IENV_BROWSER_SETUP,
+            Firefox: IENV_BROWSER_SETUP,
+            IE: IENV_BROWSER_SETUP,
+            opera: IENV_BROWSER_SETUP,
+            safari: IENV_BROWSER_SETUP,
+        }
+    }
 }
