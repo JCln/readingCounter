@@ -17,6 +17,7 @@ export class ForbResComponent extends FactoryONE {
   @Input() dataSource: IForbiddenManager[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
+  userCounterReaders: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
 
   _selectCols: any[] = [];
@@ -39,15 +40,19 @@ export class ForbResComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    // if (this.closeTabService.saveDataForForbidden) {
-    //   this.dataSource = this.closeTabService.saveDataForForbidden;
-    // }
-    // else {
-    this.dataSource = await this.forbiddenService.getDataSource();
-    this.closeTabService.saveDataForForbidden = this.dataSource;
-    // }
+    if (this.closeTabService.saveDataForForbidden) {
+      this.dataSource = this.closeTabService.saveDataForForbidden;
+    }
+    else {
+      this.dataSource = await this.forbiddenService.getDataSource();
+      this.closeTabService.saveDataForForbidden = this.dataSource;
+    }
+    console.log(this.dataSource);
+
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
+    // this.userCounterReaders = await this.forbiddenService.getUserCounterReaders();
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    // Converter.convertIdToTitle(this.dataSource, this.userCounterReaders, 'userId');
     this.forbiddenService.setDynamicPartRanges(this.dataSource);
     if (this.dataSource.length)
       this.insertSelectedColumns();

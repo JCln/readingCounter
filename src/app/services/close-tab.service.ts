@@ -61,6 +61,7 @@ export class CloseTabService {
   saveDataForFollowUp: any;
   saveDataForSearchMoshtarakin: any;
   saveDataForSearchPro: any;
+  saveDataForSearchSimple: any;
   // list manager
   saveDataForLMPD: any;
   saveDataForLMAll: any;
@@ -222,6 +223,9 @@ export class CloseTabService {
       case '/wr/m/s/searchPro':
         this.saveDataForSearchPro = '';
         break;
+      case '/wr/m/s/simple':
+        this.saveDataForSearchSimple = '';
+        break;
       // 
       case '/wr/privacy':
         break;
@@ -322,6 +326,7 @@ export class CloseTabService {
     this.saveDictionaryForAllUsers = '';
     this.saveDataForSearchMoshtarakin = '';
     this.saveDataForSearchPro = '';
+    this.saveDataForSearchSimple = '';
     this.saveDataForEditUsers = '';
     this.saveDictionaryForEditUsers = '';
     this.saveDataForForAddUsers = '';

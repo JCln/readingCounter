@@ -3,17 +3,17 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '1',
-        title: 'آخرین تغییر 1آخرین تغییر',
+        title: 'افزودن بخش جستجو',
         isSelected: true
     },
     {
         id: '2',
-        title: 'آخرین 2',
+        title: 'رفع مشکل بازگشت به حالت اولیه در غیرمجاز',
         isSelected: true
     },
     {
-        id: '3',
-        title: 'تست متن 3',
+        id: '2',
+        title: 'رفع برخی ایرادات جزئی',
         isSelected: true
     }
 

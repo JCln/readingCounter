@@ -4,7 +4,8 @@
 
             <div class="input_2">
                 <div class="_key">نوع جستجو</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchReq.searchBy" name="searchType">
+                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService.searchReqMosh.searchBy"
+                    name="searchType">
                     <mat-option *ngFor="let truefalse of searchType" [value]="truefalse.id">
                         {{truefalse.searchBy}}
                     </mat-option>
@@ -12,17 +13,18 @@
             </div>
             <div class="input_2">
                 <div class="_key">ناحیه</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchReq.zoneId" name="zoneId">
+                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService.searchReqMosh.zoneId" name="zoneId">
                     <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
                         {{truefalse.title}}
                     </mat-option>
                 </mat-select>
             </div>
             <input class="input_1" type="number" placeholder="مقدار را وارد نمایید " name="counterNumber"
-                [(ngModel)]="searchReq.item" autofocus>
+                [(ngModel)]="searchService.searchReqMosh.item" autofocus>
 
             <div class="check_boxes">
-                <mat-checkbox name="similar" [(ngModel)]="searchReq.similar">جستجوی موارد مشابه</mat-checkbox>
+                <mat-checkbox name="similar" [(ngModel)]="searchService.searchReqMosh.similar">جستجوی موارد مشابه
+                </mat-checkbox>
             </div>
             <button type="submit" class="tooltip btn_2_o">
                 <i class="pi pi-search"></i>
@@ -32,15 +34,15 @@
     </form>
 </main>
 
-<app-prime-table  *ngIf="dataSource.length"   
+<app-prime-table *ngIf="dataSource.length" 
     [_selectCols]="_selectCols"
     [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" 
+    [dataSource]="dataSource"
     [_outputFileName]="'allReads'"
     [_checkUpName]="'search_moshtarak'"
-    [_rowsPerPage]="[10,20,50,100, 500, 1000]"
-    [_numberOfExtraColumns]="[1]"
+    [_rowsPerPage]="[10,20,50,100, 500, 1000]" 
+    [_selectedColumnsToRemember]="'selectedListManagerMosh'"
+    [_numberOfExtraColumns]="[1]" 
     [_sessionName]="'moshtarak-session'"
-    (refreshedTable)="refreshTable()"    
- > 
+    (refreshedTable)="refreshTable()">
 </app-prime-table>

@@ -53,7 +53,10 @@ $border_15: 10px;
 
 ._key,
 ._value {
-  padding: $font_05 $font_05 $font_05 0.3rem;
+  display: grid;
+  align-items: center;
+  height: 2.6rem;
+  min-height: 85%;
   font-size: $font_s;
   font-weight: 600;
   height: 2.6rem;

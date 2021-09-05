@@ -119,6 +119,9 @@ export class DescComponent extends FactoryONE {
   showInMap = () => {
     this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[0].insertDateJalali);
   }
+  routeToLMAll = (row: IFollowUpHistory) => {
+    this.trackingManagerService.routeToLMAll(row);
+  }
   onRowEditSave = async (dataSource: IFollowUpHistory) => {
     await this.trackingManagerService.postEditState(ENInterfaces.trackingEditState, { id: dataSource.id, seen: dataSource.seen });
   }

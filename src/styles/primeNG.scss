@@ -24,6 +24,10 @@
     padding: $font_05;
   }
 
+  .p-dialog .p-dialog-header {
+    padding: .5rem;
+  }
+
   .p-datatable .p-datatable-thead>tr>th,
   .p-datatable .p-datatable-tbody>tr>td {
     text-align: center;
@@ -115,6 +119,10 @@
 
   .p-dropdown-panel .p-dropdown-items {
     background: var(--gray_100);
+  }
+
+  .p-dropdown .p-dropdown-clear-icon {
+    right: 0.357rem;
   }
 
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {

@@ -158,7 +158,10 @@ export enum ENSelectedColumnVariables {
     selectedTracks = 'menuDefault',
     selectedlastStates = 'lastStates',
     selectedUsersAll = '_usersAll',
-    selectedListManagerAll = 'listManagerAll',
+    selectedListManagerAll = '_listManagerAll',
+    selectedListManagerMosh = '_searchReqMosh',
+    selectedListManagerPro = '_searchReqPro',
+    selectedSearchManagerSimple = '_searchSimple',
     selectedAuth2 = '_auth2',
     selectedAuth3 = '_auth3',
     selectedAuth4 = '_auth4',
@@ -180,6 +183,7 @@ export enum ENSelectedColumnVariables {
     selectedReadingPeriodKind = '_readingPeriodKind',
     selectedTextOutput = '_textOutput',
     selectedKarbari = '_karbari',
+    selectedForbidden = '_forbidden',
 }
 export enum ENOffloadModifyType {
     callAnnounce = 'اعلام تلفنی',

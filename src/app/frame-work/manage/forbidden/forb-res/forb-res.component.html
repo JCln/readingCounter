@@ -8,7 +8,9 @@
     [_rowsPerPage]="[10,25,50]"
     [_numberOfExtraColumns]="[1]"
     [_backToPreviousEnabled]=true
+    [_selectedColumnsToRemember]="'selectedForbidden'"
     [_backToPreviousText]="'بازگشت به جستجو غیرمجاز'"
+    (backedToPrevious)="backToPrevious()"
     (refreshedTable)="refreshTable()"
     (showedPictures)="showPictures($event)"
  > 

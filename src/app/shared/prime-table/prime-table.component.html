@@ -18,14 +18,20 @@
             (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == '_outputFileName'" [options]="_selectCols"
+        <p-multiSelect
+            *ngIf="_multiSelectEnable && _checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'simpleSearch' "
+            [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
+            (ngModelChange)="searchService.setColumnsChanges(searchService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'allComponent'" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'readingConfig'" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
+            (ngModelChange)="readManagerService.setColumnsChanges(readManagerService.ENSelectedColumnVariables.selectedReadingConfigDefault ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'userAll'" [options]="_selectCols"
@@ -34,8 +40,14 @@
             optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
             placeholder="ستون ها">
         </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'forbidden'" [options]="_selectCols"
+            [(ngModel)]="selectedColumns"
+            (ngModelChange)="forbiddenService.setColumnsChanges(forbiddenService.ENSelectedColumnVariables.selectedForbidden ,$event)"
+            optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
+            placeholder="ستون ها">
+        </p-multiSelect>
         <p-multiSelect
-            *ngIf="_multiSelectEnable && (_checkUpName == 'simafa-readingProg' || _outputFileName == 'allReads' || _checkUpName == 'user-loggins' || _checkUpName == 'forbidden')"
+            *ngIf="_multiSelectEnable && (_checkUpName == 'simafa-readingProg' || _checkUpName == 'user-loggins')"
             [options]="_selectCols" [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
@@ -156,7 +168,20 @@
                     <div class="tooltip_text">اطلاعات روزانه</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'reading' || _outputFileName== 'imported' || _outputFileName=='lastStates'"
+            <td *ngIf="_checkUpName == 'simpleSearch' || _outputFileName== 'reading' || _outputFileName== 'imported' || _outputFileName=='lastStates'"
+                (click)="routeToFollowUp(dataSource)">
+                <span class="ui-column-title">مشاهده در پیگیری موردی</span>
+                <i class="tooltip p_icons pi pi-search-plus">
+                    <div class="tooltip_text_right">مشاهده در پیگیری موردی</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'simpleSearch'" (click)="routeToLMPayDay(dataSource)">
+                <span class="ui-column-title">اطلاعات مکانی/قرائت</span>
+                <i class="tooltip p_icons pi pi-folder-open">
+                    <div class="tooltip_text_right">اطلاعات مکانی/قرائت</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName== 'reading' || _outputFileName== 'imported' || _checkUpName == 'simpleSearch'"
                 (click)="routeToLMAll(dataSource)">
                 <span class="ui-column-title">مشاهده لیست قرائت</span>
                 <i class="tooltip p_icons pi pi-list">
@@ -181,20 +206,16 @@
                     <div class="tooltip_text_right">حذف مسیر</div>
                 </i>
             </td>
-            <td *ngIf="dataSource.hasMap && _checkUpName == 'lastStates'"
+
+            <td *ngIf="dataSource.hasMap &&( _checkUpName == 'lastStates' || _checkUpName == 'simpleSearch')"
                 (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
             </td>
-            <!-- <td *ngIf="dataSource.hasMap && _checkUpName == 'desc'" (click)="showInMapDESC()">
-                <span class="ui-column-title">مشاهده روی نقشه</span>
-                <i class="tooltip p_icons pi pi-map-marker">
-                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
-                </i>
-            </td> -->
-            <td *ngIf="!dataSource.hasMap && (_checkUpName == 'lastStates' || _checkUpName == 'desc')">
+            <td
+                *ngIf="!dataSource.hasMap && (_checkUpName == 'lastStates' || _checkUpName == 'desc' || _checkUpName == 'simpleSearch')">
             </td>
             <td *ngIf="_outputFileName == 'finished'" (click)="backToImportedConfirmDialog(dataSource.id,ri)">
                 <span class="ui-column-title">بازگشت به بارگذاری شده</span>

@@ -5,7 +5,7 @@
 
 form {
   font-family: $font_family;
-  margin: $font_3 0;
+  margin: 0;
 }
 
 .main_content {
@@ -14,13 +14,15 @@ form {
   background: var(--gray_100);
   box-shadow: 1px 1px 8px 4px var(--gray_200);
   text-align: center;
-  padding: $font_xs 0.2rem $font_xs 0.2rem;
+  padding: .5rem 0 5rem 0.2rem;
   border-radius: $border_15;
   gap: .2rem;
 }
 
 ._toselect {
   grid-column: 1/5;
+  background: var(--white);
+  border: $border_5;
 
   .__content {
     gap: $font_05;
@@ -36,7 +38,7 @@ form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   justify-content: center;
-  background-color: var(--gray_400);
+  background-color: var(--white);
   border-radius: 5px;
 
   @media (max-width: 780px) {
@@ -59,7 +61,7 @@ app-date-jalali {
   height: 2.8rem;
   background: var(--white);
   border-radius: 9px;
-  border: 1px solid var(--gray_300);
+  border: 1px solid var(--gray_300_spec);
 }
 
 span label {
@@ -73,7 +75,7 @@ span label {
   font-weight: 600;
   padding: .3rem 0.1rem;
   border-radius: 7px;
-  background: var(--gray_300);
+  background: var(--gray_300_spec);
 }
 
 .title {
@@ -84,7 +86,7 @@ span label {
 article {
   padding: $font_05;
   border-radius: $border_15;
-  background-color: var(--gray_300);
+  background-color: var(--gray_300_spec);
   margin: 0.1rem;
 }
 
@@ -92,7 +94,7 @@ article {
   justify-content: center;
   align-items: center;
   display: flex;
-  margin: $font_s auto;
+  margin: $font_05 auto;
   font-family: $font_family;
 }
 
@@ -140,14 +142,14 @@ hr {
 
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: var(--blue_gray_300);
+    color: var(--blue_gray_300_spec);
   }
 }
 
 // dialog conf
 :host ::ng-deep {
   .p-dialog .p-dialog-header {
-    background-color: var(--blue_gray_300);
+    background-color: var(--blue_gray_300_spec);
     direction: rtl;
   }
 }

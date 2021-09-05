@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOnOffLoadFlat, ISearchMoshReq } from 'interfaces/imanage';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
@@ -18,13 +19,8 @@ import { Search } from 'src/app/classes/search';
   templateUrl: './moshtarak.component.html',
   styleUrls: ['./moshtarak.component.scss']
 })
+
 export class MoshtarakComponent extends FactoryONE {
-  searchReq: ISearchMoshReq = {
-    zoneId: null,
-    searchBy: null,
-    item: '',
-    similar: true
-  }
   dataSource: IOnOffLoadFlat[] = [];
   searchType: Search[];
   searchByText: string = '';
@@ -58,20 +54,22 @@ export class MoshtarakComponent extends FactoryONE {
   converts = () => {
     this._empty_message = EN_messages.notFound;
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.insertSelectedColumns();
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    if (!this.searchService.verificationMosh(this.searchReq))
+    if (!this.searchService.verificationMosh(this.searchService.searchReqMosh))
       return;
-    this.dataSource = await this.searchService.searchMoshterakin(this.searchReq);
-    this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
-    this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
+    this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchMoshtarak, this.searchService.searchReqMosh);
+    if (this.searchService.searchReqMosh.zoneId) {
+      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchService.searchReqMosh.zoneId);
+      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchService.searchReqMosh.zoneId);
+    }
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 

@@ -145,6 +145,7 @@ export enum ENInterfaces {
 
     ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
     ListSearchPro = 'V1/List/Search/Pro',
+    ListSearchSimple = 'V1/Tracking/Search/Simple',
     ListTraverse = 'V1/List/Offloaded/Traverse',
     ListTraverseDifferential = 'V1/List/Offloaded/TraverseDifferential',
     ListTraverseDifferentialDictionary = 'V1/List/TraverseDifferential/Dictionary',
@@ -195,7 +196,7 @@ export enum ENInterfaces {
     CounterReportEdit = 'V1/CounterReport/Edit',
     CounterReportAdd = 'V1/CounterReport/Add',
     CounterReportDICTIONARY = 'V1/CounterReport/Dictionary',
-    CounterReportByZoneIdDICTIONARY = `/V1/CounterReport/DictionaryByZoneId/`,
+    CounterReportByZoneIdDICTIONARY = `V1/CounterReport/DictionaryByZoneId/`,
 
     counterReadersByZoneId = `V1/User/CounterReaders/`,
 
