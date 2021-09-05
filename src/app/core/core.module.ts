@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { ErrorHandler, NgModule, Optional, SkipSelf } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GlobalErrorHandlerService } from 'services/global-error-handler.service';
 
 import { InterceptorService } from '../auth/interceptor.service';
 import { SpinnerInterceptorService } from '../auth/spinner-interceptor.service';
@@ -72,6 +73,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
   ]
 })
 export class CoreModule {
