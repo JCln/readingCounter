@@ -12,7 +12,7 @@ export class ActivatedProvince implements IENV {
         {
             Desktop: {
                 Chrome: { alert: 70, normal: 86 },
-                Firefox: { alert: 80, normal: 83 },
+                 Firefox: { alert: 72, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },
                 safari: { alert: 10, normal: 10 },
@@ -37,7 +37,7 @@ export class ActivatedProvince implements IENV {
         {
             Desktop: {
                 Chrome: { alert: 70, normal: 86 },
-                Firefox: { alert: 80, normal: 83 },
+                 Firefox: { alert: 72, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },
                 safari: { alert: 10, normal: 10 },
@@ -62,7 +62,7 @@ export class ActivatedProvince implements IENV {
         {
             Desktop: {
                 Chrome: { alert: 70, normal: 86 },
-                Firefox: { alert: 80, normal: 83 },
+                 Firefox: { alert: 72, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },
                 safari: { alert: 10, normal: 10 },
@@ -87,7 +87,7 @@ export class ActivatedProvince implements IENV {
         {
             Desktop: {
                 Chrome: { alert: 70, normal: 86 },
-                Firefox: { alert: 80, normal: 83 },
+                 Firefox: { alert: 72, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },
                 safari: { alert: 10, normal: 10 },
@@ -112,7 +112,7 @@ export class ActivatedProvince implements IENV {
         {
             Desktop: {
                 Chrome: { alert: 70, normal: 86 },
-                Firefox: { alert: 80, normal: 83 },
+                 Firefox: { alert: 72, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },
                 safari: { alert: 10, normal: 10 },
