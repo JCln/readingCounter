@@ -1,0 +1,11 @@
+<main>
+    <h2 (click)="cancelClick()" class="pi pi-times"></h2>
+    <div>
+        <app-offload [onOffloadId]="dataSource.id" [zoneId]="dataSource.zoneId" [preDate]="dataSource.preDate"
+            [description]="dataSource.description" [preNumber]="dataSource.preNumber" [id]="dataSource.id">
+        </app-offload>
+
+        <section class="next" (click)="nextClick()"></section>
+        <section class="prev" (click)="prevClick()"></section>
+    </div>
+</main>

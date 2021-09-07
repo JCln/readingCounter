@@ -1,19 +1,29 @@
-
-<app-prime-table     
-[_selectCols]="_selectCols" 
-[_selectedColumns]="selectedColumns"
-[dataSource]="dataSource" 
-[_outputFileName]="'allReads'"
-[_checkUpName]="'allComponent'"
-[_selectedColumnsToRemember]="'selectedListManagerAll'"
-[_numberOfExtraColumns]="[1]"
-[_rowsPerPage]="[10,20,50,100, 500, 1000]"
-[_sessionName]="'allComponent'"
-[_backToPreviousEnabled]=true
-[_allComponentIsModify]="isModify"
-[_backToPreviousText]="'بازگشت به صفحه قبلی'"
-(refreshedTable)="refreshTable()"
-(backedToPrevious)="toPrePage()"
-(routedToOffload)="routeToOffload($event)"
-> 
-</app-prime-table>
+<main style="position: relative; ">
+    <app-prime-table [hidden]="showCarousel" 
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="'allReads'"
+    [_checkUpName]="'allComponent'"
+    [_selectedColumnsToRemember]="'selectedListManagerAll'"
+    [_numberOfExtraColumns]="[1]"
+    [_rowsPerPage]="[10,20,50,100, 500, 1000]"
+    [_sessionName]="'allComponent'"
+    [_backToPreviousEnabled]=true
+    [_allComponentIsModify]="isModify"
+    [_backToPreviousText]="'بازگشت به صفحه قبلی'"
+    (refreshedTable)="refreshTable()"
+    (backedToPrevious)="toPrePage()"
+    (routedToOffload)="routeToOffload($event)"
+    > 
+    </app-prime-table>
+    
+    <app-carousel *ngIf="showCarousel" 
+    [dataSource]="carouselDataSource"
+    (cancelClicked)="carouselCancelClicked()"
+    (prevClicked)="carouselPrevItem()"
+    (nextClicked)="carouselNextItem()"
+    >
+    <app-offload></app-offload>
+    </app-carousel>
+</main>

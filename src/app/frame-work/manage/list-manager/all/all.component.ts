@@ -21,6 +21,10 @@ export class AllComponent extends FactoryONE {
   isModify: string | boolean;
   subscription: Subscription[] = [];
 
+  carouselDataSource: IOnOffLoadFlat;
+  showCarousel: boolean = false;
+
+  rowIndex: number = 0;
   dataSource: IOnOffLoadFlat[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
@@ -49,6 +53,7 @@ export class AllComponent extends FactoryONE {
     }
 
     this.dataSource = await this.listManagerService.getLMAll(this.trackId);
+    this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
     if (!this.dataSource.length)
       return;
@@ -64,7 +69,7 @@ export class AllComponent extends FactoryONE {
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     }
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    // Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
@@ -91,13 +96,30 @@ export class AllComponent extends FactoryONE {
   routeToWoui = (object: IOnOffLoadFlat) => {
     this.router.navigate(['wr/m/track/woui', false, object.id]);
   }
-  routeToOffload = (object: IOnOffLoadFlat) => {
-    let zoneId;
-    this.zoneDictionary.map(item => {
-      if (item.title === object.zoneId)
-        zoneId = item.id
-    })
-    this.router.navigate(['wr/m/track/offloaded/offloadMfy', zoneId + '-' + object.id]);// this is the place
+  routeToOffload = (event: object) => {
+    this.carouselDataSource = event['dataSource'];
+    this.rowIndex = event['ri'];
+    this.showCarousel = true;
+  }
+  carouselNextItem = () => {
+    this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
+    this.carouselDataSource = this.dataSource[this.rowIndex];
+  }
+  carouselPrevItem = () => {
+    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length - 1 : this.rowIndex--;
+    this.carouselDataSource = this.dataSource[this.rowIndex];
+  }
+  // convertTitleToId = (dataSource: any): any => {
+  // this.carouselDataSource.zoneId = this.convertTitleToId(this.dataSource[this.rowIndex].zoneId)
+  //   return this.zoneDictionary.find(item => {
+  //     if (item.title === dataSource) {
+  //       console.log(item.id);
+  //       return item.id;
+  //     }
+  //   })
+  // }
+  carouselCancelClicked = () => {
+    this.showCarousel = false;
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

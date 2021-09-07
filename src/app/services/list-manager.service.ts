@@ -22,7 +22,7 @@ export class ListManagerService {
     { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
     { field: 'radif', header: 'ش.پرونده', isSelected: false },
     { field: 'eshterak', header: 'اشتراک', isSelected: true },
-    { field: 'zoneId', header: 'ناحیه', isSelected: false },
+    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
     { field: 'qeraatCode', header: 'قرائت', isSelected: false },
     { field: 'firstName', header: 'نام', isSelected: true },
     { field: 'sureName', header: 'نام خانوادگی', isSelected: true },

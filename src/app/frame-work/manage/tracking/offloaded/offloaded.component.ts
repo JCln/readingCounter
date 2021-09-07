@@ -46,8 +46,6 @@ export class OffloadedComponent extends FactoryONE {
     }
     else {
       this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
-      console.log(this.dataSource);
-
       this.closeTabService.saveDataForTrackOffloaded = this.dataSource;
     }
 

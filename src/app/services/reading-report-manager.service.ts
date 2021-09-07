@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-    IReadingReportGISReq,
-    IReadingReportReq,
-    IReadingReportTraverseDifferentialReq,
-    IReadingReportWithZoneIDsReq,
+  IReadingReportGISReq,
+  IReadingReportReq,
+  IReadingReportTraverseDifferentialReq,
+  IReadingReportWithZoneIDsReq,
 } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -122,9 +122,9 @@ export class ReadingReportManagerService {
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
     // { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
     // { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true },
-    { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true, ltr: true },
+    { field: 'duration', header: 'مدت(h)', isSelected: false, readonly: true },
     { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
     { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
     { field: 'faqedCount', header: 'فاقد', isSelected: true, readonly: true },

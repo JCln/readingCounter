@@ -11,7 +11,7 @@ export class ActivatedProvince implements IENV {
         [32.669, 51.664],
         {
             Desktop: {
-                Chrome: { alert: 83, normal: 86 },
+                Chrome: { alert: 70, normal: 86 },
                 Firefox: { alert: 80, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },
@@ -36,7 +36,7 @@ export class ActivatedProvince implements IENV {
         [32.669, 51.664],
         {
             Desktop: {
-                Chrome: { alert: 83, normal: 86 },
+                Chrome: { alert: 70, normal: 86 },
                 Firefox: { alert: 80, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },
@@ -61,7 +61,7 @@ export class ActivatedProvince implements IENV {
         [35.7501, 51.5255],
         {
             Desktop: {
-                Chrome: { alert: 83, normal: 86 },
+                Chrome: { alert: 70, normal: 86 },
                 Firefox: { alert: 80, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },
@@ -86,7 +86,7 @@ export class ActivatedProvince implements IENV {
         [35.656051, 51.315435],
         {
             Desktop: {
-                Chrome: { alert: 83, normal: 86 },
+                Chrome: { alert: 70, normal: 86 },
                 Firefox: { alert: 80, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },
@@ -111,7 +111,7 @@ export class ActivatedProvince implements IENV {
         [35.656051, 51.315435],
         {
             Desktop: {
-                Chrome: { alert: 83, normal: 86 },
+                Chrome: { alert: 70, normal: 86 },
                 Firefox: { alert: 80, normal: 83 },
                 IE: { alert: 0, normal: 0 },
                 opera: { alert: 73, normal: 78 },

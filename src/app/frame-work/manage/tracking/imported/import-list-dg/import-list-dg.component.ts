@@ -33,14 +33,11 @@ export class ImportListDgComponent implements OnInit {
   ngOnInit(): void {
     this.counterWrapper();
   }
-  editCloseData() {
-    console.log(this.selectedCounterReader.id);
-    if (this.selectedCounterReader) {
-
+  editCloseData = () => {
+    if (typeof this.selectedCounterReader !== 'undefined' || this.selectedCounterReader) {
       this.dataSource.counterReaderId = this.selectedCounterReader.id;
-
     }
-    // this.ref.close(this.dataSource);
+    this.ref.close(this.dataSource);
   }
 
 }

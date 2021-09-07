@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
+import { IReadingConfigDefault } from 'interfaces/imanage';
 import { IImportDataResponse, IImportSimafaSingleReq, IReadingProgramRes } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -20,8 +21,8 @@ export class SimafaSingleComponent extends FactoryONE {
   _readingProgramRes: IReadingProgramRes;
   simafaSingleReq: IImportSimafaSingleReq = {
     zoneId: 0,
-    alalHesabPercent: 5,
-    imagePercent: 5,
+    alalHesabPercent: null,
+    imagePercent: null,
     hasPreNumber: false,
     displayBillId: false,
     displayRadif: false,
@@ -32,6 +33,7 @@ export class SimafaSingleComponent extends FactoryONE {
   }
   _showAlalHesabPercent: boolean = false;
 
+  readingConfigDefault: IReadingConfigDefault;
   userCounterReaderDictionary: IDictionaryManager[] = [];
   dataSource: IImportDataResponse;
   subscription: Subscription[] = [];
@@ -65,9 +67,20 @@ export class SimafaSingleComponent extends FactoryONE {
     this._readingProgramRes = this.importDynamicService.columnSimafaSingle();
     this.getRouteParams();
     this.selectedZoneId();
+
+    this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.simafaSingleReq.zoneId);
+    this.insertReadingConfigDefaults(this.readingConfigDefault);
   }
   selectedZoneId = async () => {
     this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaSingleReq.zoneId);
   }
-  ngOnInit(): void { return; }
+  private insertReadingConfigDefaults = (rcd: IReadingConfigDefault) => {
+    this.simafaSingleReq.hasPreNumber = rcd.defaultHasPreNumber;
+    this.simafaSingleReq.displayBillId = rcd.displayBillId;
+    this.simafaSingleReq.displayRadif = rcd.displayRadif;
+    this.simafaSingleReq.imagePercent = rcd.defaultImagePercent;
+    this.simafaSingleReq.alalHesabPercent = rcd.defaultAlalHesab;
+    console.log(this.simafaSingleReq);
+
+  }
 }

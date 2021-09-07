@@ -5,9 +5,10 @@
     [_outputFileName]="'finished'"
     [_checkUpName]="'finished'"
     [_sortField]="'insertDateJalali'"
-    [_numberOfExtraColumns]="[1]"
+    [_numberOfExtraColumns]="[1,2]"
     [_selectedColumnsToRemember]="'selectedTracks'"
     [_sessionName]="'finished-session'"
     (refreshedTable)="refreshTable()"
+    (downloadedOutputSingle)="downloadOutputSingle($event)"        
  > 
 </app-prime-table>

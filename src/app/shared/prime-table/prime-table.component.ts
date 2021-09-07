@@ -135,8 +135,8 @@ export class PrimeTableComponent {
   showSearchOptionsDialog = () => {
     this.showSearchedOptionsDialog.emit();
   }
-  routeToOffload = ($event) => {
-    this.routedToOffload.emit($event);
+  routeToOffload = (dataSource: object, ri: number) => {
+    this.routedToOffload.emit({ dataSource, ri });
   }
   openAddDialog = () => {
     this.openedAddDialog.emit();

@@ -168,8 +168,7 @@
                     <div class="tooltip_text">اطلاعات روزانه</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'simpleSearch' || _outputFileName== 'imported' || _outputFileName=='lastStates'"
-                (click)="routeToFollowUp(dataSource)">
+            <td *ngIf="_checkUpName == 'simpleSearch'" (click)="routeToFollowUp(dataSource)">
                 <span class="ui-column-title">مشاهده در پیگیری موردی</span>
                 <i class="tooltip p_icons pi pi-search-plus">
                     <div class="tooltip_text_right">مشاهده در پیگیری موردی</div>
@@ -195,9 +194,9 @@
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'imported'" (click)="showMoreDetails(dataSource)">
-                <span class="ui-column-title">مشاهده جزئیات</span>
-                <i class="tooltip p_icons pi pi-info-circle">
-                    <div class="tooltip_text">مشاهده جزئیات</div>
+                <span class="ui-column-title">مشاهده جزئیات وویرایش</span>
+                <i class="tooltip p_icons pi pi-pencil">
+                    <div class="tooltip_text">مشاهده جزئیات و ویرایش</div>
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'imported'" (click)="firstConfirmDialog(dataSource.id, ri)">
@@ -221,6 +220,12 @@
                 <span class="ui-column-title">بازگشت به بارگذاری شده</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به بارگذاری شده</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'finished'" (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود مجدد فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">دانلود مجدد فایل</div>
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'offloaded'" (click)="downloadOutputSingle(dataSource)">
@@ -260,7 +265,7 @@
             </td>
             <td *ngIf="_outputFileName == 'allReads' &&  _allComponentIsModify">
                 <span class="ui-column-title">اصلاح</span>
-                <i (click)="routeToOffload(dataSource)" class="tooltip p_icons pi pi-pencil">
+                <i (click)="routeToOffload(dataSource,ri)" class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>
                 </i>
             </td>

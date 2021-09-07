@@ -5,9 +5,11 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/imanage';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
+import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
@@ -29,7 +31,8 @@ export class FinishedComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog,
-    public outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService,
+    private envService: EnvService
   ) {
     super(interactionService);
   }
@@ -74,6 +77,22 @@ export class FinishedComponent extends FactoryONE {
         }
       })
     })
+  }
+  downloadOutputSingle = async (row: ITracking) => {
+    if (this.envService.hasNextBazdid) {
+      this.hasNextBazdid(row);
+      return;
+    }
+    const a = await this.trackingManagerService.downloadOutputSingle(row);
+    this.outputManagerService.downloadFile(a);
+  }
+  hasNextBazdid = async (row: ITracking) => {
+    let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
+    hasbazdid = Converter.persianToEngNumbers(hasbazdid);
+    if (hasbazdid) {
+      const a = await this.trackingManagerService.downloadOutputSingleWithENV(row, hasbazdid);
+      this.outputManagerService.downloadFile(a);
+    }
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

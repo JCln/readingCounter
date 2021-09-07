@@ -65,13 +65,14 @@ export class TrackingManagerService {
     { field: 'description', header: 'توضیحات', isSelected: false }
     // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }
   ]
+  private offloadZoneIdDictionary: any = [];
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return this.menuDefault;
   }
   columnSelectedImportedList = (): IObjectIteratation[] => {
     return [
-      { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, readonly: false, borderize: true },
-      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, borderize: true },
+      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
+      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true },
       { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
       { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true },
@@ -83,12 +84,12 @@ export class TrackingManagerService {
       { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
       { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
-      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, isSelectOption: true, readonly: false, borderize: true },      
-      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true },
+      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, isSelectOption: true, readonly: false, borderize: true },
+      { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, readonly: false, borderize: true },
+      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, borderize: true },
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
       { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
       { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
-      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false, isBoolean: true }
     ];
   }
   columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
@@ -282,6 +283,17 @@ export class TrackingManagerService {
   }
   getCounterStatesDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
+  }
+  getCounterStatesDictionarySaved = (zoneId: number): Promise<any> => {
+    if (!this.utilsService.isNull(this.offloadZoneIdDictionary))
+      return this.offloadZoneIdDictionary;
+
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId).subscribe(res => {
+        this.offloadZoneIdDictionary = res;
+        resolve(res);
+      })
+    })
   }
   postOffloadModifyEdited = (body: IOffloadModifyReq) => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
