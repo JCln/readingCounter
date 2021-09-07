@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ICounterReport } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
@@ -18,9 +17,7 @@ import { CrAddDgComponent } from './cr-add-dg/cr-add-dg.component';
   styleUrls: ['./counter-report.component.scss']
 })
 export class CounterReportComponent extends FactoryONE {
-
   dataSource: ICounterReport[] = [];
-  subscription: Subscription[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: ICounterReport; } = {};

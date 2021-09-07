@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IUserManager } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { UsersAllService } from 'services/users-all.service';
@@ -17,7 +16,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class UsersAllComponent extends FactoryONE {
   @ViewChild(Table) UsersAllComponent: Table;
-  subscription: Subscription[] = [];
+ 
 
   dataSource: IUserManager[] = [];
   _selectedColumns: any[];

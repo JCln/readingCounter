@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel2 } from 'interfaces/iauth-levels';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
@@ -19,8 +18,7 @@ import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
 })
 export class Auth2Component extends FactoryONE {
 
-  dataSource: IAuthLevel2[] = [];
-  subscription: Subscription[] = [];
+  dataSource: IAuthLevel2[] = [];  
 
   authLevel1Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel2; } = {};

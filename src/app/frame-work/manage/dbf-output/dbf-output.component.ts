@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IOutputManager } from 'interfaces/imanage';
 import { IZoneManager } from 'interfaces/inon-manage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -18,8 +17,6 @@ export class DbfOutputComponent extends FactoryONE {
   @ViewChild(DateJalaliComponent) date;
   dbfOutput: IOutputManager;
   zoneDictionary: IZoneManager[] = [];
-
-  subscription: Subscription[] = [];
 
   constructor(
     private outputManagerService: OutputManagerService,

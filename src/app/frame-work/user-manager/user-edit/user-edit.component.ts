@@ -3,7 +3,6 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { appItems, IRoleItems, IUserInfo } from 'interfaces/iuser-manager';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -20,7 +19,7 @@ export class UserEditComponent extends FactoryONE {
   personalizeInfo: IUserInfo;
   provinceItemsData: any;
   dataSource: any;
-  subscription: Subscription[] = [];
+ 
 
   addUserData: appItems[] = [];
   // add role config

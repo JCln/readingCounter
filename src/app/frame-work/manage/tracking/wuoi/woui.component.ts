@@ -4,7 +4,6 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/imanage';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { InteractionService } from 'services/interaction.service';
@@ -37,7 +36,7 @@ export class WouiComponent extends FactoryONE {
   viewerOpen: boolean[] = [false];
   ref: DynamicDialogRef;
 
-  subscription: Subscription[] = [];
+ 
 
   constructor(
     private route: ActivatedRoute,

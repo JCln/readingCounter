@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/imanage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -20,7 +19,7 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
   styleUrls: ['./reading.component.scss']
 })
 export class ReadingComponent extends FactoryONE {
-  subscription: Subscription[] = [];
+ 
 
   dataSource: ITracking[] = [];
   _selectCols: any = [];

@@ -4,7 +4,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat, ISearchProReportInput } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -26,8 +25,6 @@ export class ProComponent extends FactoryONE {
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
-
-  subscription: Subscription[] = [];
 
   dataSource: IOnOffLoadFlat[] = [];
   searchReq: ISearchProReportInput;

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IListManagerPD, IListManagerPDHistory } from 'interfaces/imanage';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { InteractionService } from 'services/interaction.service';
@@ -18,7 +17,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class PerDayComponent extends FactoryONE {
   trackNumber: string;
-  subscription: Subscription[] = [];
 
   dataSource: IListManagerPD;
   offLoadPerDayHistory: IListManagerPDHistory[] = [];

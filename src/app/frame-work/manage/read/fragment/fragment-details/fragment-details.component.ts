@@ -4,7 +4,6 @@ import { IFragmentDetails } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Table } from 'primeng/table';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { InteractionService } from 'services/interaction.service';
@@ -17,8 +16,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./fragment-details.component.scss']
 })
 export class FragmentDetailsComponent extends FactoryONE {
-  subscription: Subscription[] = [];
-
   table: Table;
   newRowLimit: number = 1;
 

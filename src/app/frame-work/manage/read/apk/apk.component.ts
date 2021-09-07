@@ -2,7 +2,6 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IAPK } from 'interfaces/inon-manage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
@@ -29,8 +28,6 @@ export class ApkComponent extends FactoryONE {
 
   dataSource: IAPK[] = [];
   _columns: any[] = [];
-  subscription: Subscription[] = [];
-  // subscriptionUpload: Subscription;
 
   constructor(
     private apkService: ApkService,

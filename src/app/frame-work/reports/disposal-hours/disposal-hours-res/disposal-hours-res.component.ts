@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingReportDisposalHours } from 'interfaces/imanage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -13,7 +12,7 @@ import { UtilsService } from 'services/utils.service';
 })
 export class DisposalHoursResComponent implements OnInit {
   @Input() dataSource: IReadingReportDisposalHours[] = [];
-  subscription: Subscription[] = [];
+ 
 
   _selectCols: any[] = [];
   _selectedColumns: any[];

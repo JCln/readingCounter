@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingConfigDefault } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
@@ -21,7 +20,6 @@ import { RdEditDgComponent } from './rd-edit-dg/rd-edit-dg.component';
 export class ReadingConfigComponent extends FactoryONE {
 
   dataSource: IReadingConfigDefault[] = [];
-  subscription: Subscription[] = [];
 
   editableDataSource = [];
   zoneDictionary: IDictionaryManager[] = [];

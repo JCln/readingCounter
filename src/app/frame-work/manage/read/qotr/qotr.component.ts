@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InteractionService } from 'services/interaction.service';
@@ -20,7 +19,6 @@ export class QotrComponent extends FactoryONE {
   provinceIdFilter = new FormControl('');
   provinceFilter = new FormControl('');
 
-  subscription: Subscription[] = [];
   countryDictionary: IDictionaryManager[] = [];
 
   columnsToDisplay = ['title', 'provinceId', 'province', 'actions'];

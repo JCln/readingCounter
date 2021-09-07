@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IColor, IMessage, ITime } from 'interfaces/inon-manage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { InteractionService } from 'services/interaction.service';
 import { MessageService } from 'services/message.service';
@@ -21,7 +20,7 @@ export class MessagesComponent extends FactoryONE {
   };
   colors: IColor[] = [];
   times: ITime[] = [];
-  subscription: Subscription[] = [];
+ 
 
   testNamesStorage: any;
   allMessages: IMessage[];

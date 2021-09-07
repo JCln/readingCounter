@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAbBahaFormula } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { FormulasService } from 'services/formulas.service';
 import { InteractionService } from 'services/interaction.service';
@@ -22,8 +21,6 @@ import { Tabsare3AddDgComponent } from './tabsare3-add-dg/tabsare3-add-dg.compon
   styleUrls: ['./tabsare3.component.scss']
 })
 export class Tabsare3Component extends FactoryONE {
-  subscription: Subscription[] = [];
-
   dataSource: IAbBahaFormula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariCodeDictionary: IDictionaryManager[] = [];

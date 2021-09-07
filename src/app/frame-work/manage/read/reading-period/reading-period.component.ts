@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingPeriod } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
@@ -20,7 +19,7 @@ import { RpmAddDgComponent } from './rpm-add-dg/rpm-add-dg.component';
 export class ReadingPeriodComponent extends FactoryONE {
 
   dataSource: IReadingPeriod[] = [];
-  subscription: Subscription[] = [];
+ 
 
   zoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];

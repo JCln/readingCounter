@@ -5,7 +5,6 @@ import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { InteractionService } from 'services/interaction.service';
@@ -41,7 +40,7 @@ export class OffloadComponent extends FactoryONE {
   imageFiles: IOnOffLoad[] = [];
   testLoadImage: any[] = [];
 
-  subscription: Subscription[] = [];
+ 
 
   zoneId: string = null;
   modifyType: OffloadModify[];

@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFollowUp, IFollowUpHistory, IListManagerPD } from 'interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -60,7 +59,6 @@ export class DescComponent extends FactoryONE {
     }
   ]
   clonedProducts: { [s: string]: IFollowUpHistory; } = {};
-  subscription: Subscription[] = [];
   dataSource: IFollowUp;
   dataSourceAUX: IListManagerPD;
   changeHsty: IFollowUpHistory[] = [];

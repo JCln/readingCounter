@@ -5,7 +5,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/imanage';
 import { IImportDataResponse, IImportSimafaSingleReq, IReadingProgramRes } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
@@ -36,7 +35,6 @@ export class SimafaSingleComponent extends FactoryONE {
   readingConfigDefault: IReadingConfigDefault;
   userCounterReaderDictionary: IDictionaryManager[] = [];
   dataSource: IImportDataResponse;
-  subscription: Subscription[] = [];
 
   constructor(
     public interactionService: InteractionService,

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -63,7 +62,7 @@ export class GisComponent extends FactoryONE {
   _orderBy: string = '';
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
-  subscription: Subscription[] = [];
+ 
 
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];

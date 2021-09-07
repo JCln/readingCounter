@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IZoneBoundManager } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
@@ -20,7 +19,7 @@ import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.c
 export class ZoneBoundComponent extends FactoryONE {
   dataSource: IZoneBoundManager[] = [];
 
-  subscription: Subscription[] = [];
+ 
   zoneDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];

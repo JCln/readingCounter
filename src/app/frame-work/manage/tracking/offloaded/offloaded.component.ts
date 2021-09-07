@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/imanage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
@@ -18,7 +17,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./offloaded.component.scss']
 })
 export class OffloadedComponent extends FactoryONE {
-  subscription: Subscription[] = [];
+ 
 
   dataSource: ITracking[] = [];
   _selectCols: any[] = [];

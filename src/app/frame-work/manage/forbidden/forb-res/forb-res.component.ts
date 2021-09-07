@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IForbiddenManager } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
 import { InteractionService } from 'services/interaction.service';
@@ -18,7 +17,6 @@ export class ForbResComponent extends FactoryONE {
 
   zoneDictionary: IDictionaryManager[] = [];
   userCounterReaders: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
 
   _selectCols: any[] = [];
   _selectedColumns: any[];

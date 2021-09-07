@@ -3,7 +3,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITextOutput } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Table } from 'primeng/table';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -17,8 +16,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./txt-output.component.scss']
 })
 export class TxtOutputComponent extends FactoryONE {
-  subscription: Subscription[] = [];
-
   table: Table;
   newRowLimit: number = 1;
 

@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IImportDynamicDefault } from 'interfaces/inon-manage';
 import { ENLocalStorageNames, IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
@@ -62,7 +61,6 @@ export class ImportDynamicComponent extends FactoryONE {
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   dataSource: any;
-  subscription: Subscription[] = [];
 
   constructor(
     public interactionService: InteractionService,

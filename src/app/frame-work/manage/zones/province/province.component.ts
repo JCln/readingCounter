@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IProvinceManager } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
@@ -20,7 +19,7 @@ import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.compon
 export class ProvinceComponent extends FactoryONE {
   dataSource: IProvinceManager[] = [];
 
-  subscription: Subscription[] = [];
+ 
   countryDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];

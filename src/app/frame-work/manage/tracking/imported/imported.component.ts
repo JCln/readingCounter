@@ -6,7 +6,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IEditTracking, ITracking } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -36,7 +35,7 @@ import { ImportListDgComponent } from './import-list-dg/import-list-dg.component
   ]
 })
 export class ImportedComponent extends FactoryONE {
-  subscription: Subscription[] = [];
+ 
 
   dataSource: ITracking[] = [];
   filterZoneDictionary: IDictionaryManager[] = [];

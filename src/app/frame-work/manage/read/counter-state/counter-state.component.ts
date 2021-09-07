@@ -3,7 +3,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ICounterState, ICounterStateGridFriendlyResp } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { LazyLoadEvent } from 'primeng/api';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { CounterStateService } from 'services/counter-state.service';
 import { InteractionService } from 'services/interaction.service';
@@ -19,7 +18,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class CounterStateComponent extends FactoryONE {
   gridFriendlyData: any;
   zoneDictionary: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
 
   dataSourceRES: ICounterStateGridFriendlyResp; // grid friendly data for lazyloading
   dataSource: ICounterState[] = [];

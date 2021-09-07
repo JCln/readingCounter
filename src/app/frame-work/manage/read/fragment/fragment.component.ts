@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { IFragmentMaster } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Table } from 'primeng/table';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { InteractionService } from 'services/interaction.service';
@@ -16,8 +15,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./fragment.component.scss']
 })
 export class FragmentComponent extends FactoryONE {
-  subscription: Subscription[] = [];
-
   table: Table;
   newRowLimit: number = 1;
 

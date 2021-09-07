@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { appItems, IAddAUserManager, IAddUserInfos, IRoleItems } from 'interfaces/iuser-manager';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -17,7 +16,7 @@ import { UserInputsComponent } from './user-inputs/user-inputs.component';
 })
 export class UserAddComponent extends FactoryONE {
   dataSource: any;
-  subscription: Subscription[] = [];
+ 
 
   personalizeInfo: IAddAUserManager;
   provinceItemsData: any;

@@ -5,7 +5,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
@@ -28,8 +27,6 @@ export class AssessPreComponent extends FactoryONE {
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
-
-  subscription: Subscription[] = [];
 
   dataSource: IOnOffLoadFlat[] = [];
   assessPreReq: IAssessPreDisplayDtoSimafa;

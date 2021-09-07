@@ -4,7 +4,6 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -19,7 +18,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class AllComponent extends FactoryONE {
   trackId: string;
   isModify: string | boolean;
-  subscription: Subscription[] = [];
 
   carouselDataSource: IOnOffLoadFlat;
   showCarousel: boolean = false;

@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IUserLoggins } from 'interfaces/iuser-manager';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { InteractionService } from 'services/interaction.service';
@@ -16,7 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class UserLogginsComponent extends FactoryONE {
   UUID: string = '';
-  subscription: Subscription[] = [];
+ 
 
   dataSource: IUserLoggins[];
   _selectedColumns: any[];

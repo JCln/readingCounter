@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel4 } from 'interfaces/iauth-levels';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
@@ -21,8 +20,6 @@ import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
 export class Auth4Component extends FactoryONE {
 
   dataSource: IAuthLevel4[] = [];
-  subscription: Subscription[] = [];
-
 
   authLevel3Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel4; } = {};

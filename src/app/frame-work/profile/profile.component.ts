@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { IProfile } from 'interfaces/iuser-manager';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -13,7 +12,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent extends FactoryONE {
-  subscription: Subscription[] = [];
+ 
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];

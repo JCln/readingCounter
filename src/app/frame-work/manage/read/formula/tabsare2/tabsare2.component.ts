@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITabsare2Formula } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { FormulasService } from 'services/formulas.service';
 import { InteractionService } from 'services/interaction.service';
@@ -21,8 +20,6 @@ import { Tabsare2AddDgComponent } from './tabsare2-add-dg/tabsare2-add-dg.compon
   styleUrls: ['./tabsare2.component.scss']
 })
 export class Tabsare2Component extends FactoryONE {
-  subscription: Subscription[] = [];
-
   dataSource: ITabsare2Formula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 

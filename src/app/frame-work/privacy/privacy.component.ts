@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { IPolicies, IPrivacy } from 'interfaces/inon-manage';
 import { ENSnackBarTimes } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { SecurityService } from 'services/security.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
@@ -17,7 +16,7 @@ export class PrivacyComponent extends FactoryONE {
   privacyOptions: IPrivacy;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
 
-  subscription: Subscription[] = [];
+ 
   policies: IPolicies = {
     id: 0,
     enableValidIpCaptcha: false,

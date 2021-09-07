@@ -5,7 +5,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
 import { IBatchImportDataResponse, IImportSimafaBatchReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -44,7 +43,6 @@ export class SimafaBatchComponent extends FactoryONE {
   _selectedColumns: any[];
   _successImportBatchMessage: string = '';
   _canShowImportBatchButton: boolean = true;
-  subscription: Subscription[] = [];
 
   constructor(
     public interactionService: InteractionService,

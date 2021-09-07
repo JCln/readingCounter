@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IRegionManager } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
@@ -20,7 +19,7 @@ import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 export class RegionComponent extends FactoryONE {
   dataSource: IRegionManager[] = [];
 
-  subscription: Subscription[] = [];
+ 
   provinceDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];

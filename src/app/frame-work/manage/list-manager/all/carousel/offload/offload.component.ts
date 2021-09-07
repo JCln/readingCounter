@@ -3,7 +3,6 @@ import { IOnOffLoad } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -44,8 +43,6 @@ export class OffloadComponent implements OnChanges {
 
   imageFiles: IOnOffLoad[] = [];
   testLoadImage: any[] = [];
-
-  subscription: Subscription[] = [];
 
   modifyType: OffloadModify[];
   offloadItems: OffloadModify[];

@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAbBahaFormula } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { FormulasService } from 'services/formulas.service';
 import { InteractionService } from 'services/interaction.service';
@@ -22,8 +21,6 @@ import { WaterAddDgComponent } from './water-add-dg/water-add-dg.component';
   styleUrls: ['./water.component.scss']
 })
 export class WaterComponent extends FactoryONE {
-  subscription: Subscription[] = [];
-
   dataSource: IAbBahaFormula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariCodeDictionary: IDictionaryManager[] = [];

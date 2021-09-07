@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IKarbari } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
@@ -20,8 +19,6 @@ import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component
 export class KarbariComponent extends FactoryONE {
 
   dataSource: IKarbari[] = [];
-  subscription: Subscription[] = [];
-
   provinceDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IKarbari; } = {};
 

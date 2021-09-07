@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAbBahaFormula } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { FormulasService } from 'services/formulas.service';
 import { InteractionService } from 'services/interaction.service';
@@ -22,7 +21,6 @@ import { BudgetAddDgComponent } from './budget-add-dg/budget-add-dg.component';
   styleUrls: ['./budget.component.scss']
 })
 export class BudgetComponent extends FactoryONE {
-  subscription: Subscription[] = [];
 
   dataSource: IAbBahaFormula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
