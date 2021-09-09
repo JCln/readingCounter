@@ -17,7 +17,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./offloaded.component.scss']
 })
 export class OffloadedComponent extends FactoryONE {
- 
+
 
   dataSource: ITracking[] = [];
   _selectCols: any[] = [];
@@ -81,7 +81,7 @@ export class OffloadedComponent extends FactoryONE {
     let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
     hasbazdid = Converter.persianToEngNumbers(hasbazdid);
     if (hasbazdid) {
-      const a = await this.trackingManagerService.downloadOutputSingleWithENV(row, hasbazdid);
+      const a = await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputSINGLE, row, hasbazdid);
       this.outputManagerService.downloadFile(a);
     }
   }

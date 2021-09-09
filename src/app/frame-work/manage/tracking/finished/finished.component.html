@@ -9,6 +9,7 @@
     [_selectedColumnsToRemember]="'selectedTracks'"
     [_sessionName]="'finished-session'"
     (refreshedTable)="refreshTable()"
-    (downloadedOutputSingle)="downloadOutputSingle($event)"        
+    (downloadedOutputSingle)="reDownloadOutputSingle($event)"
+    (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event)"
  > 
 </app-prime-table>

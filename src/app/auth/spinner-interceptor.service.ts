@@ -1,4 +1,4 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
@@ -23,14 +23,13 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     this.showSpinnerConsiderExceptions();
     return next.handle(req)
       .pipe(
-        catchError((error) => {
-          // let errorDesc = error.json();
+        catchError((error: HttpErrorResponse) => {
           if (error.status === 400) {
             if (error.error.message) {
               this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
             }
             else
-              this.snackWrapperService.openSnackBar('مقادیر را بررسی و مجددا امتحان نمایید', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+              this.snackWrapperService.openSnackBar('مقادیر را بررسی و مجددا امتحان نمایید', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
           }
           if (error.status === 401) {
             if (error.error.message)

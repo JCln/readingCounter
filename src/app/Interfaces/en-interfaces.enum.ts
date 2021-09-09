@@ -123,6 +123,7 @@ export enum ENInterfaces {
 
     OutputDBF = 'V1/Output/Dbf',
     OutputSINGLE = 'V1/Output/single',
+    OutputDELAYED = 'V1/Output/Delayed',
     forbidden = 'V1/Forbidden/ByParam',
 
     trackingIMPORTED = 'V1/Tracking/Imported',

@@ -228,12 +228,6 @@
                     <div class="tooltip_text">دانلود مجدد فایل</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName == 'offloaded'" (click)="downloadOutputSingle(dataSource)">
-                <span class="ui-column-title">دانلود فایل</span>
-                <i class="tooltip p_icons pi pi-download">
-                    <div class="tooltip_text">دانلود فایل</div>
-                </i>
-            </td>
             <td *ngIf="_outputFileName == 'offloaded'" (click)="routeToOffloadModify(dataSource)">
                 <span class="ui-column-title">مشاهده (اصلاح) لیست</span>
                 <i class="tooltip p_icons pi pi-info-circle">
@@ -244,6 +238,12 @@
                 <span class="ui-column-title">بازگشت به درحال قرائت</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'offloaded'" (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'forbidden'">

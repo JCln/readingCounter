@@ -213,13 +213,13 @@ export class TrackingManagerService {
 
     });
   }
-  downloadOutputSingleWithENV = (single: ITracking, date: string): Promise<any> => {
+  downloadOutputSingleWithENV = (method: ENInterfaces, single: ITracking, inputData: string): Promise<any> => {
     const a: any = {
       trackingId: single.id,
-      description: date
+      description: inputData
     }
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOBOBSERVE(ENInterfaces.OutputSINGLE, a).subscribe(res => {
+      this.interfaceManagerService.POSTBLOBOBSERVE(method, a).subscribe(res => {
         resolve(res);
       })
     });

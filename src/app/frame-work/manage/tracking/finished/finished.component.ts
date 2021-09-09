@@ -59,7 +59,7 @@ export class FinishedComponent extends FactoryONE {
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   backToImportedConfirmDialog = (rowDataAndIndex: object) => {
-    const title = EN_messages.reson_delete_backtoImported;
+    const title = EN_messages.reason_toOffloaded;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: '19rem',
@@ -75,19 +75,19 @@ export class FinishedComponent extends FactoryONE {
       })
     })
   }
-  downloadOutputSingle = async (row: ITracking) => {
+  reDownloadOutputSingle = async (row: ITracking) => {
     if (this.envService.hasNextBazdid) {
       this.hasNextBazdid(row);
       return;
     }
-    const a = await this.trackingManagerService.downloadOutputSingle(row);
+    const a = await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputDELAYED, row, '');
     this.outputManagerService.downloadFile(a);
   }
   hasNextBazdid = async (row: ITracking) => {
     let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
     hasbazdid = Converter.persianToEngNumbers(hasbazdid);
     if (hasbazdid) {
-      const a = await this.trackingManagerService.downloadOutputSingleWithENV(row, hasbazdid);
+      const a = await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputSINGLE, row, hasbazdid);
       this.outputManagerService.downloadFile(a);
     }
   }
