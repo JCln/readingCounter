@@ -105,7 +105,7 @@ export enum EN_messages {
     reason_toOffloaded = 'علت بازگشت به بارگذاری شده',
     toPrevious = 'علت بازگشت به مرحله قبلی',
 
-    call_supportGroup = 'خطایی رخ دارد، با پشتیبانی تماس حاصل نمایید',
+    call_supportGroup = 'خطای سرور، با پشتیبانی تماس حاصل نمایید',
     browserSupport_alarm = 'نسخه مرورگر شما برنامه را پشتیبانی نمی‌کند، لطفا مرورگر را بروزرسانی نمایید.',
     browserSupport_warn = 'برای پشتیبانی بهتر، مرورگر خود را بروزرسانی نمایید',
 }

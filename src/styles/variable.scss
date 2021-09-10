@@ -70,6 +70,10 @@ a:active {
   }
 }
 
+.coloring_border {
+  border: 1.5px dashed var(--orange_600);
+  animation: pulse-new-button 500ms;
+}
 
 // header icon coloring
 ._xlsx,

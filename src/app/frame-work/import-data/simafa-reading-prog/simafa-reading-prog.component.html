@@ -46,7 +46,7 @@
     </form>
 </main>
 
-<app-prime-table *ngIf="dataSource.length && route.children.length === 0"     
+<app-prime-table *ngIf="route.children.length === 0"     
 [_selectCols]="_selectCols" 
 [_selectedColumns]="selectedColumns"
 [dataSource]="dataSource"

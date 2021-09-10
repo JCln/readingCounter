@@ -2,7 +2,8 @@
     <h2 (click)="cancelClick()" class="pi pi-times"></h2>
     <div>
         <app-offload [onOffloadId]="dataSource.id" [zoneId]="dataSource.zoneId" [preDate]="dataSource.preDate"
-            [description]="dataSource.description" [preNumber]="dataSource.preNumber" [id]="dataSource.id">
+            [description]="dataSource.description" [preNumber]="dataSource.preNumber" [id]="dataSource.id"
+            [counterStateCode]="dataSource.counterStateCode" [counterNumber]="dataSource.counterNumber">
         </app-offload>
 
         <section class="next" (click)="nextClick()"></section>

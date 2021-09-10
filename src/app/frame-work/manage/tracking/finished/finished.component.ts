@@ -87,8 +87,7 @@ export class FinishedComponent extends FactoryONE {
     let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
     hasbazdid = Converter.persianToEngNumbers(hasbazdid);
     if (hasbazdid) {
-      const a = await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputSINGLE, row, hasbazdid);
-      this.outputManagerService.downloadFile(a);
+      this.outputManagerService.downloadFile(await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputDELAYED, row, hasbazdid));
     }
   }
   @Input() get selectedColumns(): any[] {

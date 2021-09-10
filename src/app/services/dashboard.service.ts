@@ -25,7 +25,7 @@ export class DashboardService {
   }
   columnDashboards = (): IObjectIteratation[] => {
     return [
-      { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
+      { field: 'inDayCount', header: 'امروز', isSelected: true, readonly: true },
       { field: 'inWeekCont', header: 'هفته‌جاری', isSelected: true, readonly: true },
       { field: 'inMonthCount', header: 'ماه‌جاری', isSelected: true, readonly: true },
       { field: 'inYearCount', header: 'سال‌جاری', isSelected: true, readonly: false }

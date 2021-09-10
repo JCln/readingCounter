@@ -1,19 +1,16 @@
 <main class="main">
-    <form #form="ngForm" (ngSubmit)="verification()">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="_container">
             <section class="__readonly_s">
-                <input class="input_1" type="number" placeholder="رقم کنتور : " name="counterNumber"
-                    [(ngModel)]="offloadModifyReq.counterNumber" autofocus style="min-width: auto;">
-                <div class="input_2" [hidden]="!counterStatesDictionary.length">
+                <div class="input_2 coloring_border" [hidden]="!counterStatesDictionary.length">
                     <div class="_key">وضعیت کنتور</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.counterStateId"
-                        name="counterStateId">
-                        <mat-option *ngFor="let truefalse of counterStatesDictionary" [value]="truefalse.id">
+                    <mat-select placeholder="انتخاب مورد" [(value)]="counterStateCode" name="counterState">
+                        <mat-option *ngFor="let truefalse of counterStatesDictionary" [value]="truefalse.title">
                             {{truefalse.title}}
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2">
+                <div class="input_2 coloring_border">
                     <div class="_key">نوع اصلاح</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.modifyType" name="modifyType">
                         <mat-option *ngFor="let truefalse of modifyType" [value]="truefalse.id">
@@ -22,16 +19,16 @@
                     </mat-select>
                 </div>
                 <div class="input_2">
-                    <div class="_key">از تاریخ</div>
-                    <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
-                        </app-date-jalali>
-                    </div>
-                </div>
-                <div class="input_2">
                     <div class="_key">تاریخ قبلی</div>
                     <div class="_value">
                         {{preDate}}
+                    </div>
+                </div>
+                <div class="input_2 coloring_border">
+                    <div class="_key">تاریخ فعلی</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        </app-date-jalali>
                     </div>
                 </div>
                 <div class="input_2">
@@ -40,13 +37,20 @@
                         {{preNumber}}
                     </div>
                 </div>
+                <div class="input_2 coloring_border">
+                    <div class="_key">رقم فعلی</div>
+                    <div class="_value">
+                        <input class="_value" type="number" name="counterNumber"
+                            [(ngModel)]="offloadModifyReq.counterNumber">
+                    </div>
+                </div>
                 <div class="input_2">
                     <div class="_key">توضیح مامور</div>
                     <div class="_value">
                         {{description}}
                     </div>
                 </div>
-                <input class="input_1" type="text" placeholder="توضیحات : " name="description"
+                <input class="input_1 coloring_border" type="text" placeholder="توضیحات : " name="description"
                     [(ngModel)]="offloadModifyReq.description">
 
             </section>

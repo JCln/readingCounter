@@ -220,9 +220,9 @@ export class TrackingManagerService {
     }
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBLOBOBSERVE(method, a).subscribe(res => {
-        resolve(res);
+        resolve(res)
       })
-    });
+    })
   }
   // 
   successSnackMessage = (message: string) => {
@@ -281,15 +281,11 @@ export class TrackingManagerService {
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
-  getCounterStatesDictionary = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
-  }
-  getCounterStatesDictionarySaved = (zoneId: number): Promise<any> => {
+  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
     if (!this.utilsService.isNull(this.offloadZoneIdDictionary))
       return this.offloadZoneIdDictionary;
-
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId).subscribe(res => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId).subscribe(res => {
         this.offloadZoneIdDictionary = res;
         resolve(res);
       })

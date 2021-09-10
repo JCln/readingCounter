@@ -1,6 +1,11 @@
 @import 'variable';
 @import 'tooltip.scss';
 
+.tooltip {
+  position: sticky;
+  top: 0;
+}
+
 .viewer_container {
   display: flex;
   justify-content: center;

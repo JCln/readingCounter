@@ -75,7 +75,6 @@ export class SpinnerInterceptorService implements HttpInterceptor {
       .pipe(
         map<HttpEvent<any>, any>((evt: HttpEvent<any>) => {
           if (evt instanceof HttpResponse) {
-            // console.log(evt);
             this.spinnerWrapperService.stopLoading();
           }
           return evt;

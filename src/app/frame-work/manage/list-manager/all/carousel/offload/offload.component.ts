@@ -22,12 +22,14 @@ export class OffloadComponent implements OnChanges {
   @Input() description: string;
   @Input() preNumber: number;
   @Input() id: string;
+  @Input() counterStateCode: any;
+  @Input() counterNumber: string;
 
   offloadModifyReq: IOffloadModifyReq = {
     id: '',
     modifyType: null,
     checkedItems: [],
-    counterStateId: 0,
+    counterStateId: null,
     counterNumber: null,
     jalaliDay: '',
     description: ''
@@ -68,7 +70,7 @@ export class OffloadComponent implements OnChanges {
 
     this.dataSource = await this.downloadManagerService.downloadFileInfo(this.onOffloadId);
 
-    this.counterStatesDictionary = await this.trackingManagerService.getCounterStatesDictionarySaved(parseInt(this.zoneId));
+    this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
@@ -144,8 +146,16 @@ export class OffloadComponent implements OnChanges {
   }
   assignToObject = () => {
     this.offloadModifyReq.id = this.id;
+    const temp = this.convertTitleToId(this.counterStateCode);
+    this.offloadModifyReq.counterStateId = temp.id;
   }
-  verification = () => {
+  convertTitleToId = (dataSource: any): any => {
+    return this.counterStatesDictionary.find(item => {
+      if (item.title === dataSource)
+        return item;
+    })
+  }
+  connectToServer = () => {
     this.checkItems();
     this.assignToObject();
     const verificationCheck = this.trackingManagerService.verificationOffloadModify(this.offloadModifyReq);
