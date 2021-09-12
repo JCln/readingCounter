@@ -60,7 +60,7 @@ export class OffloadedComponent extends FactoryONE {
       this.hasNextBazdid(row);
       return;
     }
-    const a = await this.trackingManagerService.downloadOutputSingle(row);
+    const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputSINGLE, row);
     this.outputManagerService.downloadFile(a);
   }
   @Input() get selectedColumns(): any[] {

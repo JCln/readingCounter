@@ -80,7 +80,7 @@ export class FinishedComponent extends FactoryONE {
       this.hasNextBazdid(row);
       return;
     }
-    const a = await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputDELAYED, row, '');
+    const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputDELAYED, row);
     this.outputManagerService.downloadFile(a);
   }
   hasNextBazdid = async (row: ITracking) => {

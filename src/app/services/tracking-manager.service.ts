@@ -201,12 +201,12 @@ export class TrackingManagerService {
       })
     });
   }
-  downloadOutputSingle = (single: ITracking): Promise<any> => {
+  downloadOutputWithoutDESC = (method: ENInterfaces, single: ITracking): Promise<any> => {
     const a: any = {
       trackingId: single.id
     }
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOBOBSERVE(ENInterfaces.OutputSINGLE, a).subscribe(res => {
+      this.interfaceManagerService.POSTBLOBOBSERVE(method, a).subscribe(res => {
         resolve(res);
       })
 
