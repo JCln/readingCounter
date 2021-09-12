@@ -83,6 +83,7 @@ export enum ENBrowserStatus {
     warn = 400,
     alarm = 500
 }
+<<<<<<< HEAD
 export const ENBrowserInfo = {
     Chrome: { title: 'Google Chrome', url: 'url test' },
     FireFox: { title: 'Mozilla FireFox', url: 'mozilla url' },
@@ -90,6 +91,8 @@ export const ENBrowserInfo = {
     Safari: { title: 'Safari', url: '' },
     IE: { title: 'IE', url: '' },
 }
+=======
+>>>>>>> bf2b824ffb897ef88231002a60a0535aa7961758
 export interface IBrowserNotif {
     message: string;
     backgroundColor: string;
