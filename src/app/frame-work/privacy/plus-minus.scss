@@ -9,12 +9,14 @@
   justify-content: flex-end;
 }
 
-.val {
+._value {
+  display: flex;
   justify-content: center;
+  align-items: center;
   padding: $font_05 $font_xs;
-  background: $white;
-  border: 2px solid $blue_600;
-  color: $blue_700;
+  background: var(--white);
+  border: 2px solid var(--blue_600);
+  color: var(--blue_700);
   border-radius: $border_5;
   font-size: $font_s;
   font-weight: 600;
@@ -29,9 +31,9 @@
   display: grid;
   padding: $font_05;
   margin: .3rem;
-  border: 1px solid $gray_300;
-  background: $white;
-  color: $gray_500;
+  border: 1px solid var(--gray_300);
+  background: var(--white);
+  color: var(--gray_500);
   border-radius: $border_5;
   font-size: $font_s;
   cursor: pointer;

@@ -17,7 +17,6 @@ export class JwtService {
     try {
       return jwt_decode(this.browserStorageService.get(ENAuthTokenType.access_token));
     } catch (error) {
-      // this.removeAllLocalStorage();
       console.error(error);
     }
   }
@@ -65,9 +64,7 @@ export class JwtService {
       }
       return a;
     } catch (error) {
-      // this.removeAllLocalStorage();
       console.error(error);
-
     }
   }
   getRefreshToken = (): string => {
@@ -77,14 +74,17 @@ export class JwtService {
         return null;
       return a;
     } catch (error) {
-      // this.removeAllLocalStorage();
       console.error(error);
     }
   }
   hasStoredAccessAndRefreshTokens(): boolean {
     const accessToken = this.getAuthorizationToken();
     const refreshToken = this.getRefreshToken();
-    return !this.utilsService.isEmptyString(accessToken) && !this.utilsService.isEmptyString(refreshToken);
+    return (!this.utilsService.isEmptyString(accessToken) && !this.utilsService.isEmptyString(refreshToken));
   }
   removeAllLocalStorage = () => this.browserStorageService.removeAll();
+  removeAuthLocalStorage = () => {
+    this.browserStorageService.removeLocal(ENAuthTokenType.access_token);
+    this.browserStorageService.removeLocal(ENAuthTokenType.refresh_token);
+  }
 }

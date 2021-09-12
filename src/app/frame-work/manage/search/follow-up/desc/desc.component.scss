@@ -13,16 +13,16 @@
   text-align: center;
   gap: .5rem;
   margin: $font_xxs 0;
-  background: $gray_100;
-  box-shadow: 1px 1px 8px 4px $gray_400;
+  background: var(--gray_100);
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
   padding: $font_05;
   border-radius: $border_15;
 }
 
 input {
-  color: $gray_500;
+  color: var(--gray_500);
   margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px $gray_400;
+  box-shadow: 1px 1px 8px 1px var(--gray_400);
   text-align: center;
 }
 
@@ -38,17 +38,24 @@ input {
   direction: rtl;
 }
 
+.title {
+  color: var(--blue_400);
+  text-align: center;
+  margin: $font_xs $font_05;
+  font-size: 1.6rem;
+}
+
 ::ng-deep {
   .mat-checkbox-layout .mat-checkbox-label {
     margin: 0 $font_05;
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $gray_600;
+    color: var(--gray_600);
   }
 
   .mat-radio-label-content {
-    color: $gray_600;
+    color: var(--gray_600);
     font-size: $font_s;
     font-weight: 600;
     margin: 0 $font_xs;

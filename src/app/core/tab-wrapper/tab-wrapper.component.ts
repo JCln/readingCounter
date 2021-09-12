@@ -57,7 +57,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   findDynamicRouteStatus = (): ITabWrapperDetectDynamicRoute => {
     if (this.getCurrentDynamicRoute('/wr/m/l/pd/'))
       return {
-        _title: 'مامور(ها)', _dynamicRoute: '/wr/m/l/pd/'
+        _title: 'اطلاعات روزانه', _dynamicRoute: '/wr/m/l/pd/'
       }
     if (this.getCurrentDynamicRoute('/wr/m/l/all/false/'))
       return {

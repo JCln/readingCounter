@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ITextOutput } from 'interfaces/imanage';
+import { ICounterState, ITextOutput } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
@@ -36,32 +36,32 @@ export class ReadManagerService {
     { field: 'isTavizi', header: 'تعویض', isSelected: true, isBoolean: true },
     { field: 'clientOrder', header: 'ترتیب', isSelected: true }
   ]
-  private _readingConfigDefault = [
+  private _readingConfigDefault: IObjectIteratation[] = [
     { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
     { field: 'defaultAlalHesab', header: 'علی‌الحساب', isSelected: true },
     { field: 'minAlalHesab', header: 'علی‌الحساب کمینه', isSelected: false },
     { field: 'maxAlalHesab', header: 'علی‌الحساب بیشینه', isSelected: false },
-    { field: 'defaultImagePercent', header: 'درصد پیشفرض عکس', isSelected: true },
-    { field: 'minImagePercent', header: 'درصد عکس کمینه', isSelected: false },
-    { field: 'maxImagePercent', header: 'درصد عکس بیشینه', isSelected: false },
+    { field: 'defaultImagePercent', header: 'درصد پیشفرض عکس', isSelected: true, isNumber: true },
+    { field: 'minImagePercent', header: 'درصد عکس کمینه', isSelected: false, isNumber: true },
+    { field: 'maxImagePercent', header: 'درصد عکس بیشینه', isSelected: false, isNumber: true },
     // { field: 'defaultHasPreNumber', header: 'ش قبلی پیشفرض', isSelected: false },      
     { field: 'isOnQeraatCode', header: 'کد قرائت باشد', isSelected: false, isBoolean: true },
-    { field: 'displayBillId', header: 'نمایش قبض', isSelected: false, isBoolean: true },
-    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false },
+    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true },
     { field: 'lowConstBoundMaskooni', header: 'ثابت کمینه مسکونی', isSelected: false },
     { field: 'highConstBoundMaskooni', header: 'ثابت بیشینه مسکونی', isSelected: false },
-    { field: 'lowPercentBoundMaskooni', header: 'درصد کمینه مسکونی', isSelected: false },
-    { field: 'highPercentBoundMaskooni', header: 'درصد بیشینه مسکونی', isSelected: false },
-    { field: 'lowPercentBoundSaxt', header: 'درصد کمینه ساخت', isSelected: false },
+    { field: 'lowPercentBoundMaskooni', header: 'درصد کمینه مسکونی', isSelected: false, isNumber: true },
+    { field: 'highPercentBoundMaskooni', header: 'درصد بیشینه مسکونی', isSelected: false, isNumber: true },
+    { field: 'lowPercentBoundSaxt', header: 'درصد کمینه ساخت', isSelected: false, isNumber: true },
     { field: 'lowConstBoundSaxt', header: 'ثابت کمینه ساخت', isSelected: false },
     { field: 'highConstBoundSaxt', header: 'ثابت بیشینه ساخت', isSelected: false },
-    { field: 'highPercentBoundSaxt', header: 'درصد بیشینه ساخت', isSelected: false },
-    { field: 'lowPercentZarfiatBound', header: 'درصد کمینه ظرفیت', isSelected: false },
+    { field: 'highPercentBoundSaxt', header: 'درصد بیشینه ساخت', isSelected: false, isNumber: true },
+    { field: 'lowPercentZarfiatBound', header: 'درصد کمینه ظرفیت', isSelected: false, isNumber: true },
     { field: 'lowConstZarfiatBound', header: 'ثابت کمینه ظرفیت', isSelected: false },
     { field: 'highConstZarfiatBound', header: 'ثابت بیشینه ظرفیت', isSelected: false },
-    { field: 'highPercentZarfiatBound', header: 'درصد بیشنه ظرفیت', isSelected: false },
-    { field: 'lowPercentRateBoundNonMaskooni', header: 'درصد low غیر مسکونی', isSelected: false },
-    { field: 'highPercentRateBoundNonMaskooni', header: 'درصد high غیر مسکونی', isSelected: false }
+    { field: 'highPercentZarfiatBound', header: 'درصد بیشنه ظرفیت', isSelected: false, isNumber: true },
+    { field: 'lowPercentRateBoundNonMaskooni', header: 'درصد low غیر مسکونی', isSelected: false, isNumber: true },
+    { field: 'highPercentRateBoundNonMaskooni', header: 'درصد high غیر مسکونی', isSelected: false, isNumber: true }
   ]
   private _readingPeriod = [
     { field: 'title', header: 'عنوان', isSelected: true },
@@ -145,9 +145,47 @@ export class ReadManagerService {
     }
   }
   /* VERIFICATION & VALIDATION */
+  counterStateVertification = (dataSource: ICounterState): boolean => {
+    if (this.utilsService.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (this.utilsService.isNull(dataSource.clientOrder)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_clientOrder);
+      return false;
+    }
+    if (this.utilsService.isNull(dataSource.moshtarakinId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_moshtarakinId);
+      return false;
+    }
+    if (this.utilsService.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+
+    if (this.utilsService.isNaN(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(dataSource.clientOrder)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(dataSource.moshtarakinId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+
+    return true;
+  }
   verification = (dataSource: any): boolean => {
     this.sectionsService.setSectionsValue(dataSource);
     if (!this.sectionsService.sectionVertification())
+      return false;
+    return true;
+  }
+  verificationCounterState = (dataSource: ICounterState): boolean => {
+    if (!this.counterStateVertification(dataSource))
       return false;
     return true;
   }

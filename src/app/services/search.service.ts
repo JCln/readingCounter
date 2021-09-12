@@ -2,22 +2,80 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOnOffLoadFlat, ISearchMoshReq, ISearchProReportInput } from 'interfaces/imanage';
-import { IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { IOnOffLoadFlat, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/imanage';
+import {
+  ENSelectedColumnVariables,
+  IMasrafStates,
+  IObjectIteratation,
+  ISearchInOrderTo,
+  ITitleValue,
+} from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { Converter } from 'src/app/classes/converter';
 
 import { Search } from '../classes/search';
+import { ISearchSimpleReq } from './../Interfaces/imanage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
+  _isOrderByDate: boolean = true;
 
-  private _searchReq: ISearchProReportInput;
+  searchReqPro: ISearchProReportInput = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    readingPeriodId: null,
+    zoneIds: [],
+    year: 1400,
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    fragmentMasterIds: []
+  }
+  searchInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: true
+    },
+    {
+      title: 'دوره',
+      isSelected: false
+    }
+  ]
+  _years: ITitleValue[] = [];
+  searchReqMosh: ISearchMoshReq = {
+    zoneId: null,
+    searchBy: null,
+    item: '',
+    similar: true
+  }
+  _searchSimpleReq: ISearchSimpleReq = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    readingPeriodId: null,
+    year: 1400
+  }
+  private _searchReqPro: ISearchProReportInput = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    readingPeriodId: null,
+    zoneIds: [],
+    year: 1400,
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    fragmentMasterIds: []
+  }
   private _isValidateByDate: boolean;
-
   private _searchPro: IObjectIteratation[] =
     [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
@@ -71,7 +129,7 @@ export class SearchService {
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'dateDifference', header: 'طول دوره', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-      { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
+      { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ];
   private _searchMosh: IObjectIteratation[] =
@@ -127,9 +185,25 @@ export class SearchService {
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'dateDifference', header: 'طول دوره', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-      { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
+      { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ];
+  private _searchSimple: IObjectIteratation[] = [
+    // { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+    { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+    { field: 'counterReaderName', header: 'مامور', isSelected: true },
+    { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, isNumber: true },
+    { field: 'itemQuantity', header: 'تعداد', isSelected: true, isNumber: true },
+    { field: 'listNumber', header: 'ش لیست', isSelected: true },
+    { field: 'isBazdid', header: 'بازدید', isSelected: true, isBoolean: true },
+    { field: 'isRoosta', header: 'روستا', isSelected: true, isBoolean: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
+    { field: 'fromDate', header: 'از', isSelected: false },
+    { field: 'toDate', header: 'تا', isSelected: false },
+    { field: 'overallQuantity', header: 'کل تعداد', isSelected: false, isNumber: true },
+    { field: 'trackStatusTitle', header: 'وضعیت', isSelected: false }
+  ]
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -142,6 +216,9 @@ export class SearchService {
   columnSearchMoshtarakin = (): IObjectIteratation[] => {
     return this._searchMosh;
   }
+  columnSearchSimple = (): IObjectIteratation[] => {
+    return this._searchSimple;
+  }
   columnSearchPro = (): IObjectIteratation[] => {
     return this._searchPro;
   }
@@ -150,6 +227,9 @@ export class SearchService {
       if (items.isSelected)
         return items
     })
+  }
+  columnGetSearchPro = (): ISearchProReportInput => {
+    return this._searchReqPro;
   }
   /*API CALLS*/
   getSearchTypes = (): Search[] => {
@@ -191,21 +271,10 @@ export class SearchService {
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
-  searchPro = (body: ISearchProReportInput): Promise<any> => {
+  doSearch = (method: ENInterfaces, body: any): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListSearchPro, body).toPromise().then(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  searchMoshterakin = (body: ISearchMoshReq): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.ListSearchMoshtarak, body).toPromise().then(res => {
+        this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
           resolve(res);
         })
       });
@@ -214,13 +283,7 @@ export class SearchService {
     }
   }
   /*VALIDATION*/
-  private validationNull = (object: any): boolean => {
-    if (object.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNull(object.zoneId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-        return false;
-      }
-    }
+  private validationNullMosh = (object: ISearchMoshReq): boolean => {
     if (object.hasOwnProperty('searchBy')) {
       if (this.utilsService.isNull(object.searchBy)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
@@ -233,16 +296,24 @@ export class SearchService {
         return false;
       }
     }
-    // for search pro
-    if (object.hasOwnProperty('fromDate')) {
-      if (this.utilsService.isNull(object.fromDate)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+    return true;
+  }
+  private validationNullPro = (object: ISearchProReportInput): boolean => {
+    if (object.hasOwnProperty('zoneId')) {
+      if (this.utilsService.isNull(object.zoneId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }
     if (object.hasOwnProperty('fromDate')) {
       if (this.utilsService.isNull(object.fromDate)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+        return false;
+      }
+    }
+    if (object.hasOwnProperty('toDate')) {
+      if (this.utilsService.isNull(object.toDate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
       }
     }
@@ -269,15 +340,55 @@ export class SearchService {
     }
     return true;
   }
+  private validationSearchSimpleByPeriod = (object: ISearchSimpleReq): boolean => {
+    if (this.utilsService.isNull(object.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
+      return false;
+    }
+    if (this.utilsService.isNull(object.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
+      return false;
+    }
+    if (this.utilsService.isNull(object.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (this.utilsService.isNaN(object.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(object.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    if (this.utilsService.isNaN(object.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    return true;
+  }
+  private validateSearchSimpleByDate = (object: ISearchSimpleReq): boolean => {
+    if (this.utilsService.isNull(object.fromDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (this.utilsService.isNull(object.toDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+    if (this.utilsService.isNull(object.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (this.utilsService.isNaN(object.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }
+    return true;
+  }
   private validationNumbers = (object: ISearchMoshReq): boolean => {
     if (object.hasOwnProperty('searchBy')) {
       if (this.utilsService.isNaN(object.searchBy)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
-        return false;
-      }
-    }
-    if (object.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNaN(object.zoneId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
         return false;
       }
@@ -290,20 +401,27 @@ export class SearchService {
     return false;
   }
   /*VERIFICATION*/
+  verificationSimpleSearch = (searchReq: ISearchSimpleReq): boolean => {
+    searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
+    searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
+    if (this._isOrderByDate)
+      return this.validateSearchSimpleByDate(searchReq);
+    return this.validationSearchSimpleByPeriod(searchReq)
+  }
   verificationMosh = (searchReq: ISearchMoshReq): boolean => {
-    return this.validationNull(searchReq) && this.validationNumbers(searchReq)
+    return this.validationNullMosh(searchReq) && this.validationNumbers(searchReq)
   }
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
+    searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
+    searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
+    this._searchReqPro = searchReq;
     if (isValidateByDate == true || isValidateByDate == false)
       this._isValidateByDate = isValidateByDate;
-    this._searchReq = searchReq;
+
     if (this._isValidateByDate) {
-      return this.validationNull(searchReq) && this.validationDate(searchReq);
+      return this.validationNullPro(searchReq) && this.validationDate(searchReq);
     }
     return this.validationByReadingPeriod(searchReq);
-  }
-  getSearchPro = (): ISearchProReportInput => {
-    return this._searchReq;
   }
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
@@ -311,6 +429,10 @@ export class SearchService {
         item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
       if (item.gisAccuracy)
         item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+      if (item.x)
+        item.x = this.utilsService.getRange(item.x)
+      if (item.y)
+        item.y = this.utilsService.getRange(item.y)
     })
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
@@ -341,7 +463,29 @@ export class SearchService {
         item.imageCount = false;
     })
   }
+  receiveYear = (): ITitleValue[] => {
+    return this.utilsService.getYears();
+  }
+  receiveFromDateJalali = ($event: string) => {
+    this._searchSimpleReq.fromDate = $event;
+  }
+  receiveToDateJalali = ($event: string) => {
+    this._searchSimpleReq.toDate = $event;
+  }
+
   routeToWoui = (object: IOnOffLoadFlat) => {
     this.router.navigate(['wr/m/track/woui', false, object.id]);
+  }
+  routeToLMAll = (row: ISearchSimpleOutput) => {
+    this.router.navigate(['wr/m/l/all', false, row.trackingId]);
+  }
+  routeToLMPayDay = (row: ISearchSimpleOutput) => {
+    this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
+  }
+  routeToFollowUp = (row: ISearchSimpleOutput) => {
+    this.utilsService.routeToByParams('/wr/m/s/fwu', row.trackNumber);
+  }
+  showInMap = (dataSource: object) => {
+    this.utilsService.routeToByParams('/wr', { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });
   }
 }

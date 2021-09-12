@@ -34,6 +34,7 @@ app-tab-wrapper {
 app-side-bar {
   position: fixed;
   right: 0;
+  top: 6rem;
   width: 0%;
   min-height: 75vh;
   height: 85vh;
@@ -60,6 +61,7 @@ app-side-bar {
 
 app-frame-work {
   width: 100%;
+  transition: all ease-in-out 150ms;
 
   @media (min-width: 550px) {
     width: 71%;
@@ -100,6 +102,7 @@ app-frame-work {
     overflow-x: auto;
     top: 1rem;
     bottom: 0;
+    border-radius: 15px;
   }
 }
 

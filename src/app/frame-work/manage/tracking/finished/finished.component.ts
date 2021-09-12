@@ -1,13 +1,15 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/imanage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
+import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 
@@ -16,25 +18,25 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
   templateUrl: './finished.component.html',
   styleUrls: ['./finished.component.scss']
 })
-export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
-  subscription: Subscription[] = [];
-
+export class FinishedComponent extends FactoryONE {
   dataSource: ITracking[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog,
-    public outputManagerService: OutputManagerService
+    public outputManagerService: OutputManagerService,
+    private envService: EnvService
   ) {
+    super(interactionService);
   }
 
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private rowToOffloaded = async (row: ITracking, desc: string, rowIndex: number) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row.id, desc);
+  private rowToOffloaded = async (row: string, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row, desc);
     this.refetchTable(rowIndex);
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackFinished = null;
@@ -56,46 +58,37 @@ export class FinishedComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/track/finished')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
-  backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
-    const title = EN_messages.reson_delete_backtoImported;
+  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
+    const title = EN_messages.reason_toOffloaded;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: '19rem',
         data: {
           title: title,
           isInput: true,
-          isDelete: true
         }
       });
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.rowToOffloaded(rowData, desc, rowIndex);
+          this.rowToOffloaded(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
         }
       })
     })
+  }
+  reDownloadOutputSingle = async (row: ITracking) => {
+    if (this.envService.hasNextBazdid) {
+      this.hasNextBazdid(row);
+      return;
+    }
+    const a = await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputDELAYED, row, '');
+    this.outputManagerService.downloadFile(a);
+  }
+  hasNextBazdid = async (row: ITracking) => {
+    let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);
+    hasbazdid = Converter.persianToEngNumbers(hasbazdid);
+    if (hasbazdid) {
+      this.outputManagerService.downloadFile(await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputDELAYED, row, hasbazdid));
+    }
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

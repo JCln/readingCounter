@@ -8,10 +8,11 @@ section {
 }
 
 .content {
-  background: $gray_100;
-  box-shadow: 1px 1px 8px 4px $gray_200;
+  background: var(--gray_100);
+  box-shadow: 1px 1px 8px 4px var(--gray_200);
   text-align: center;
   padding: $font_05;
+  margin-bottom: $font_xs;
   justify-content: space-around;
   border-radius: $border_15;
 }
@@ -32,29 +33,35 @@ section {
 }
 
 .title {
-  color: $blue_gray_300;
+  color: var(--blue_gray_300);
   text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
 }
 
-input {
-  color: $gray_500;
-  margin: 0 auto;
-  // box-shadow: 1px 1px 8px 1px $gray_200;
+.btn_2_o {
+  margin: 2rem auto;
 }
 
-.coloring_border {
-  border: 1.5px solid $orange_600;
-  animation: pulse-new-button 500ms;
+input {
+  color: var(--gray_500);
+  margin: 0 auto;
+  // box-shadow: 1px 1px 8px 1px var(--gray_200);
 }
 
 // dialog conf
 :host ::ng-deep {
   .p-dialog .p-dialog-header {
-    background-color: $blue_gray_300;
+    background-color: var(--blue_gray_300);
     direction: rtl;
   }
+}
+
+.check_boxes {
+  border-radius: $border_15;
+  box-shadow: 0px 0px 2px 1px var(--blue_800);
+  background: var(--white);
+  padding: .25rem;
 }
 
 // 
@@ -66,7 +73,7 @@ input {
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: $blue_700;
+      color: var(--blue_700);
       line-height: 2;
       border-radius: $border_15;
       font-family: $font_family;

@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { IFragmentDetails } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { Table } from 'primeng/table';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { InteractionService } from 'services/interaction.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 
 @Component({
@@ -15,9 +15,7 @@ import { InteractionService } from 'services/interaction.service';
   templateUrl: './fragment-details.component.html',
   styleUrls: ['./fragment-details.component.scss']
 })
-export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
-  subscription: Subscription[] = [];
-
+export class FragmentDetailsComponent extends FactoryONE {
   table: Table;
   newRowLimit: number = 1;
 
@@ -29,15 +27,16 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
   clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
     private router: Router
   ) {
+    super(interactionService);
     this.getRouteParams();
   }
-  nullSavedSource = () => this.closeTabService.saveDataForFragmentNOBDetails = null;
 
+  nullSavedSource = () => this.closeTabService.saveDataForFragmentNOBDetails = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
@@ -59,29 +58,9 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     })
     )
   }
-  ngOnInit(): void {
-
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res.includes('/wr/m/r/nob/'))
-        this.classWrapper(true);
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refreshTable = () => this.classWrapper(true);
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   newRow(): IFragmentDetails {
     return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId, isNew: true };
@@ -90,44 +69,46 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     // this.insertSelectedColumns();
     this.clonedProducts[dataSource.fragmentMasterId] = { ...dataSource };
   }
-  onRowEditCancel(dataSource: IFragmentDetails, index: number) {
+  onRowEditCancel(dataSource: object) {
     this.newRowLimit = 1;
-    this.dataSource[index] = this.clonedProducts[dataSource.fragmentMasterId];
-    delete this.dataSource[dataSource.id];
-    if (dataSource.isNew)
+    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+    delete this.dataSource[dataSource['dataSource'].id];
+    if (dataSource['dataSource'].isNew)
       this.dataSource.shift();
     return;
   }
-  removeRow = async (dataSource: IFragmentDetails, index: number) => {
+  removeRow = async (dataSource: object) => {
     this.newRowLimit = 1;
 
-    if (!this.fragmentManagerService.verificationDetails(dataSource))
+    if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource']))
       return;
-    const a = await this.fragmentManagerService.removeFragmentDetails(dataSource);
+    const confirmed = await this.fragmentManagerService.firstConfirmDialog();
+    if (!confirmed) return;
+    const a = await this.fragmentManagerService.removeFragmentDetails(dataSource['dataSource']);
     if (a) {
-      this.dataSource[index] = this.clonedProducts[dataSource.fragmentMasterId];
-      delete this.dataSource[dataSource.id];
-      this.refetchTable(index);
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+      delete this.dataSource[dataSource['dataSource'].id];
+      this.refetchTable(dataSource['ri']);
     }
   }
-  onRowEditSave(dataSource: IFragmentDetails, rowIndex: number) {
+  onRowEditSave(dataSource: object) {
     this.newRowLimit = 1;
-    if (!this.fragmentManagerService.verificationDetails(dataSource)) {
-      if (dataSource.isNew) {
+    if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource'])) {
+      if (dataSource['dataSource'].isNew) {
         this.dataSource.shift();
         return;
       }
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.fragmentMasterId];
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
       return;
     }
-    if (!dataSource.id) {
-      this.onRowAdd(dataSource, rowIndex);
+    if (!dataSource['dataSource'].id) {
+      this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      this.fragmentManagerService.editFragmentDetails(dataSource);
+      this.fragmentManagerService.editFragmentDetails(dataSource['dataSource']);
     }
   }
-  async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
+  private async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
     const a = await this.fragmentManagerService.addFragmentDetails(dataSource);
     if (a) {
       this.refetchTable(rowIndex);
@@ -142,4 +123,5 @@ export class FragmentDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   routeToParent = () => this.router.navigate(['/wr/m/r/nob']);
+  ngOnInit(): void { return; }
 }

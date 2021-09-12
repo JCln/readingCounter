@@ -13,9 +13,9 @@
 
 .charts {
   position: relative;
-  box-shadow: 0px 1px 2px 2px $gray_400;
+  box-shadow: 0px 1px 2px 2px var(--gray_400);
   border-radius: $border_15;
-  background: $gray_100;
+  background: var(--gray_100);
   min-height: 15rem;
   padding: $font_xs;
 }
@@ -25,31 +25,9 @@ canvas {
   height: 100% !important;
 }
 
-.p_icons {
-  color: $blue_gray_300;
-  font-size: $font_m;
-  cursor: pointer;
-}
-
-._circle_border {
-  display: grid !important;
-  place-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  border: 1.5px solid;
-  cursor: pointer;
-
-  &:hover,
-  &:focus,
-  &:active {
-    box-shadow: 0px 0px 1px 1px;
-  }
-}
-
 //  header options 
 .header_options {
-  background-color: $gray_100;
+  background-color: var(--gray_100);
   padding: $font_05 $font_s;
   border-radius: $border_15;
   margin-bottom: $font_05;
@@ -59,7 +37,7 @@ canvas {
   position: absolute;
   right: $font_xs;
   font-family: inherit;
-  color: $gray_600;
+  color: var(--gray_600);
   font-size: $font_s;
   font-weight: 600;
 

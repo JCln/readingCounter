@@ -14,6 +14,18 @@
                         [(ngModel)]="dataSource[item.field]">
                 </ng-template>
             </div>
+            <div class="input_2" *ngFor="let item of _selectColumnsAUX">
+                <div class="_key">{{item.header}}</div>
+                <ng-container
+                    *ngIf="dataSourceAUX[item.field] === true || dataSourceAUX[item.field] === false; else elseTemplate">
+                    <mat-checkbox [disabled]="true" name="item.field" [(ngModel)]="dataSourceAUX[item.field]">
+                        {{item.header}}</mat-checkbox>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                        [(ngModel)]="dataSourceAUX[item.field]">
+                </ng-template>
+            </div>
 
             <div class="check_boxes">
                 <mat-checkbox [disabled]="true" name="isBazdid" [(ngModel)]="dataSource.isBazdid">بازدید
@@ -29,7 +41,7 @@
 </section>
 
 <section class="order_by">
-    <h2>نمایش :</h2>
+    <h2 class="title">نمایش :</h2>
     <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="canShowGraph" name="_isOrderByDate">
         <mat-radio-button class="radio_button" *ngFor="let orderType of showInOrderTo" [value]="orderType.isSelected">
             {{orderType.title}}
@@ -38,7 +50,7 @@
 </section>
 
 <p-table *ngIf="!canShowGraph" sortField="insertDateJalali" [columns]="defColumns" [value]="changeHsty" dir="rtl"
-    styleClass="p-datatable-responsive" [responsive]="true">
+    styleClass="p-datatable-responsive" [responsive]="true" editMode="row" dataKey="id">
 
     <ng-template pTemplate="caption">
         <th>
@@ -47,15 +59,20 @@
             <div class="left_side">
             </div>
             <div class="left_side">
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                <i (click)="routeToLMAll(changeHsty[changeHsty.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-list">
+                    <div class="tooltip_text">مشاهده لیست قرائت</div>
                 </i>
                 <i (click)="trackingManagerService.backToParent()"
                     class="tooltip _circle_border p_icons pi pi-arrow-left">
                     <div class="tooltip_text">بازگشت به پیگیری</div>
                 </i>
-                <i (click)="toPreStatus()" class="tooltip _circle_border p_icons pi pi-step-backward">
+                <i (click)="toPreStatus(changeHsty[changeHsty.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به قبلی</div>
+                </i>
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
             </div>
         </div>
@@ -63,31 +80,50 @@
 
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
+            <th *ngIf="shouldActive" style="width: 4rem"></th>
             <th style="width: 4rem"></th>
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-changeHsty let-columns="columns">
-        <tr>
+    <ng-template pTemplate="body" let-changeHsty let-editing="editing" let-columns="columns">
+        <tr [pEditableRow]="changeHsty">
             <td *ngFor="let col of columns">
                 <span class="ui-column-title">{{col.header}}</span>
-                <ng-container
-                    *ngIf="changeHsty[col.field] === true || changeHsty[col.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                <ng-container *ngIf="col.field === 'seen'; else elseTemplate">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <mat-checkbox [(ngModel)]="changeHsty[col.field]"
+                                [ngClass]="{'mat-checkbox-editable': true}"></mat-checkbox>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <mat-checkbox [disabled]="true" [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                        </ng-template>
+                    </p-cellEditor>
                 </ng-container>
                 <ng-template #elseTemplate>
                     {{changeHsty[col.field]}}
                 </ng-template>
             </td>
-            <td (click)="showInMap(dataSource.trackNumber , changeHsty.insertDateJalali)">
+            <td *ngIf="shouldActive">
+                <span class="ui-column-title">ویرایش</span>
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(changeHsty)"
+                    class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(changeHsty)" class="_save pi pi-check"></i>
+                <i *ngIf="editing" pCancelEditableRow class="_cancel pi pi-times"></i>
+            </td>
+            <td *ngIf="changeHsty.hasMap" (click)="showInMap()">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right"> مشاهده روی نقشه</div>
                 </i>
+            </td>
+            <td *ngIf="!changeHsty.hasMap">
             </td>
         </tr>
     </ng-template>

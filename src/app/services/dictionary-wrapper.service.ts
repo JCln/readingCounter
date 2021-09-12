@@ -319,5 +319,11 @@ export class DictionaryWrapperService {
 
   cleanDictionaries = () => {
     this.zoneDictionary = [];
+    this.regionDictionary = [];
+    this.provinceDictionary = [];
+    this.countryDictionary = [];
+    this.authLev3Dictionary = [];
+    this.authLev2Dictionary = [];
+    this.authLev1Dictionary = [];
   }
 }

@@ -1,0 +1,159 @@
+@import 'primeNG.scss';
+@import 'input.scss';
+@import 'button.scss';
+
+form {
+  font-family: $font_family;
+  margin: $font_3 0;
+  background: var(--gray_100);
+  box-shadow: 1px 1px 8px 4px var(--gray_200);
+}
+
+.main_content {
+  display: grid;
+  direction: rtl;
+  text-align: center;
+  padding: $font_xs 0.2rem $font_xs 0.2rem;
+  border-radius: $border_15;
+  gap: .2rem;
+}
+
+._toselect {
+  grid-column: 1/5;
+
+  .__content {
+    gap: $font_05;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+._to_insert {
+  display: flex;
+  justify-content: center;
+  direction: rtl;
+
+  input {
+    width: auto;
+    min-width: auto;
+    direction: rtl;
+  }
+}
+
+._more_options {
+  grid-column: 5/10;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  justify-content: center;
+  background-color: var(--gray_400);
+  border-radius: 5px;
+
+  @media (max-width: 780px) {
+    margin-top: $font_xs;
+    grid-column: 1/6;
+  }
+
+  @media (max-width: 550px) {
+    margin-top: 2rem;
+  }
+
+}
+
+app-date-jalali {
+  width: 100%;
+  height: 2.8rem;
+  background: var(--white);
+  border-radius: 9px;
+  border: 1px solid var(--gray_300);
+}
+
+span label {
+  margin-left: $font_05;
+}
+
+.ui-float-label {
+  display: grid;
+  font-size: $font_m;
+  font-weight: 600;
+  padding: .3rem 0.1rem;
+  border-radius: 7px;
+  background: var(--gray_300);
+}
+
+.title {
+  color: var(--blue_400);
+  text-align: center;
+}
+
+article {
+  padding: $font_05;
+  border-radius: $border_15;
+  background-color: var(--gray_200);
+  margin: 0.1rem;
+}
+
+.btn_2_o {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: $font_s auto;
+  font-family: $font_family;
+}
+
+hr {
+  margin-bottom: $font_xs;
+}
+
+.p-dropdown {
+  width: 100%;
+  border-radius: 5px;
+  height: 3.35rem;
+}
+
+[hidden] {
+  display: none;
+}
+
+
+// materials 
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--gray_600);
+  margin: 0 2rem;
+}
+
+::ng-deep {
+  .mat-checkbox-layout {
+    .mat-checkbox-label {
+      margin: 0 $font_05;
+      font-size: $font_s;
+      font-weight: 600;
+      color: var(--blue_700);
+      line-height: 2;
+      border-radius: $border_15;
+      font-family: $font_family;
+    }
+  }
+
+  .mat-radio-label-content {
+    padding-right: $font_05 !important;
+    color: var(--blue_gray_300);
+  }
+}
+
+// dialog conf
+:host ::ng-deep {
+  .p-dialog .p-dialog-header {
+    background-color: var(--blue_gray_300);
+    direction: rtl;
+  }
+}

@@ -1,16 +1,15 @@
-@import 'primeNG';
-@import 'tooltip.scss';
+@import 'variable.scss';
 @import 'input.scss';
 @import 'button.scss';
-
+@import '_mat.scss';
 
 .main {
   direction: rtl;
-  background: $gray_100;
-  box-shadow: 1px 1px 8px 4px $gray_400;
+  background: var(--gray_100);
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
   padding: $font_05;
   border-radius: $border_15;
-  border: 1px solid $blue_400;
+  border: 1px solid var(--blue_400);
 }
 
 section.content {
@@ -33,11 +32,11 @@ section.content {
 }
 
 h2 {
-  color: $gray_600;
+  color: var(--gray_600);
 }
 
 h3 {
-  color: $blue_500;
+  color: var(--blue_500);
   font-size: 1.4rem;
   padding: $font_05;
 }
@@ -48,20 +47,6 @@ footer {
 }
 
 ::ng-deep {
-  .mat-select-arrow {
-    color: $gray_100;
-  }
-
-  .mat-select {
-    text-align: center;
-  }
-
-  .mat-select-value {
-    font-family: $font_family;
-    font-size: $font_s;
-    color: $gray_100;
-    font-weight: 600;
-  }
 
   .mat-select-panel .mat-option {
     font-size: 1.2rem;
@@ -75,7 +60,7 @@ footer {
   .mat-option-text {
     font-size: $font_s;
     font-weight: 600;
-    color: $blue_800;
+    color: var(--blue_800);
   }
 
   .mat-checkbox-layout .mat-checkbox-label {
@@ -83,12 +68,12 @@ footer {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $blue_gray_700;
+    color: var(--blue_gray_700);
   }
 
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: $blue_gray_300;
+    color: var(--blue_gray_300);
   }
 }
 
@@ -101,7 +86,7 @@ footer {
   font-size: $font_s;
   font-weight: 700;
   font-family: inherit;
-  color: $gray_600;
+  color: var(--gray_600);
   margin: 0 2rem;
 }
 

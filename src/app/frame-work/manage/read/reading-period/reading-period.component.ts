@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingPeriod } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { RpmAddDgComponent } from './rpm-add-dg/rpm-add-dg.component';
 
@@ -16,10 +16,10 @@ import { RpmAddDgComponent } from './rpm-add-dg/rpm-add-dg.component';
   templateUrl: './reading-period.component.html',
   styleUrls: ['./reading-period.component.scss']
 })
-export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ReadingPeriodComponent extends FactoryONE {
 
   dataSource: IReadingPeriod[] = [];
-  subscription: Subscription[] = [];
+ 
 
   zoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -30,10 +30,12 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
-  ) { }
+  ) {
+    super(interactionService);
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -48,6 +50,7 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
           await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodAdd, result);
+          this.refreshTable();
         }
       });
     });
@@ -71,68 +74,45 @@ export class ReadingPeriodComponent implements OnInit, AfterViewInit, OnDestroy 
     Converter.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
     this.insertSelectedColumns();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/rp')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.readManagerService.columnReadingPeriod();
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IReadingPeriod, rowIndex: number) => {
+  removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodRemove, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.readingPeriodRemove, rowData['dataSource']);
+      this.refetchTable(rowData['ri']);
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IReadingPeriod, rowIndex: number) => {
-    if (!this.readManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  onRowEditSave = async (dataSource: object) => {
+    if (!this.readManagerService.verification(dataSource['dataSource'])) {
+      this.dataSource['ri'] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.zoneId !== 'object') {
+    if (typeof dataSource['dataSource'].zoneId !== 'object') {
       this.zoneDictionary.find(item => {
-        if (item.title === dataSource.zoneId)
-          dataSource.zoneId = item.id
+        if (item.title === dataSource['dataSource'].zoneId)
+          dataSource['dataSource'].zoneId = item.id
       })
     } else {
-      dataSource.zoneId = dataSource.zoneId['id'];
+      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
-    if (typeof dataSource.readingPeriodKindId !== 'object') {
+    if (typeof dataSource['dataSource'].readingPeriodKindId !== 'object') {
       this.readingPeriodKindDictionary.find(item => {
-        if (item.title === dataSource.readingPeriodKindId)
-          dataSource.readingPeriodKindId = item.id
+        if (item.title === dataSource['dataSource'].readingPeriodKindId)
+          dataSource['dataSource'].readingPeriodKindId = item.id
       })
     } else {
-      dataSource.readingPeriodKindId = dataSource.readingPeriodKindId['id'];
+      dataSource['dataSource'].readingPeriodKindId = dataSource['dataSource'].readingPeriodKindId['id'];
     }
-    await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodEdit, dataSource);
+    await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodEdit, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

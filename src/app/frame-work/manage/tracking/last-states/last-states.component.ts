@@ -1,30 +1,29 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITracking } from 'interfaces/imanage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-last-states',
   templateUrl: './last-states.component.html',
   styleUrls: ['./last-states.component.scss']
 })
-export class LastStatesComponent implements OnInit, AfterViewInit, OnDestroy {
-  subscription: Subscription[] = [];
-
+export class LastStatesComponent extends FactoryONE {
   dataSource: ITracking[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService
   ) {
+    super(interactionService);
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForLastStates = null;
@@ -41,38 +40,9 @@ export class LastStatesComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.insertSelectedColumns();
   }
-  customizeSelectedColumns = () => {
-    return this._selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnlastStates();
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
-  }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/track/latest')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -81,8 +51,8 @@ export class LastStatesComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  showInMap = (trackNumber: number, day: string) => {
-    this.trackingManagerService.routeToLMPDXY(trackNumber, day);
+  showInMap = (trackNumberAndDate: object) => {
+    this.trackingManagerService.routeToLMPDXY(trackNumberAndDate['trackNumber'], trackNumberAndDate['insertDateJalali'], null);
   }
 
 }

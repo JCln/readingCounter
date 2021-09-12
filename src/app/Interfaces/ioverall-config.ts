@@ -64,16 +64,10 @@ export enum ENTrackingRoute {
     migrateDataRowToOffloaded,
     migrateToPreState,
 }
-export enum ENTrackingMessage {
-    toImported = 'علت بازگشت به صادر شده',
-    toReading = 'علت بازگشت به درحال قرائت',
-    toOffloaded = 'علت بازگشت به بارگذاری شده',
-    toPrevious = 'علت بازگشت به مرحله قبلی'
-}
 export interface IResponses {
-    isValid: boolean
+    isValid: boolean;
     message: string;
-    status: number
+    status: number;
 }
 export interface ITrueFalseFilter {
     name: string;
@@ -84,7 +78,24 @@ export const TrueFalseFilter: ITrueFalseFilter[] = [
     { name: 'باشد', value: true },
     { name: 'هیچکدام', value: '' }
 ]
-
+export enum ENBrowserStatus {
+    good = 200,
+    warn = 400,
+    alarm = 500
+}
+export const ENBrowserInfo = {
+    Chrome: { title: 'Google Chrome', url: 'url test' },
+    FireFox: { title: 'Mozilla FireFox', url: 'mozilla url' },
+    Opera: { title: 'Opera', url: '' },
+    Safari: { title: 'Safari', url: '' },
+    IE: { title: 'IE', url: '' },
+}
+export interface IBrowserNotif {
+    message: string;
+    backgroundColor: string;
+    isClosable: boolean;
+    isShow: boolean;
+}
 export interface IDictionaryManager {
     readonly id: number | string;
     title: string;
@@ -135,11 +146,29 @@ export interface IOffloadModifyType {
     id: number,
     modifyeType: ENOffloadModifyType
 }
+export enum ENHasImportDynamicCount {
+    hasCount = 'true',
+    hasNotCount = 'false'
+}
+export enum ENLocalStorageNames {
+    hasDynamicCount = 'hasDynamicCount'
+}
+export enum ENThemeName {
+    themeColor = 'themeColor'
+}
+export enum ENThemeColor {
+    light = 0,
+    dark = 1,
+}
 export enum ENSelectedColumnVariables {
+    selectedSimafaBatch = '_simafaBatch',
     selectedTracks = 'menuDefault',
     selectedlastStates = 'lastStates',
     selectedUsersAll = '_usersAll',
-    selectedListManagerAll = 'listManagerAll',
+    selectedListManagerAll = '_listManagerAll',
+    selectedListManagerMosh = '_searchReqMosh',
+    selectedListManagerPro = '_searchReqPro',
+    selectedSearchManagerSimple = '_searchSimple',
     selectedAuth2 = '_auth2',
     selectedAuth3 = '_auth3',
     selectedAuth4 = '_auth4',
@@ -161,6 +190,7 @@ export enum ENSelectedColumnVariables {
     selectedReadingPeriodKind = '_readingPeriodKind',
     selectedTextOutput = '_textOutput',
     selectedKarbari = '_karbari',
+    selectedForbidden = '_forbidden',
 }
 export enum ENOffloadModifyType {
     callAnnounce = 'اعلام تلفنی',
@@ -178,7 +208,9 @@ export enum ENOffloadModifyType {
 export enum ENActivateProvinceTitle {
     DEFAULT = '',
     ESF = 'اصفهان',
-    TEH = 'تهران'
+    TEH = 'تهران',
+    TEH_ZONE4 = 'منطقه 4 تهران',
+    TEH_SE = 'جنوب شرقی تهران'
 }
 export enum ENSearch {
     eshterak = 'اشتراک',
@@ -193,3 +225,36 @@ export const IMasrafStates: ITHV[] = [
     { title: 'zero', header: 'صفر', value: 3 },
     { title: 'inCalculable', header: 'غیرقابل محاسبه', value: 4 }
 ]
+export interface Theme {
+    name: string,
+    properties: any
+}
+export interface IENV_BROWSER_SETUP {
+    alert: number,
+    normal: number
+}
+export interface IENV {
+    headerProvinceTitle: string,
+    API_URL: string,
+    OSMmapBoxUrl: string,
+    SATELLITEMapBoxUrl: string,
+    SATELLITEMapAccessToken: string,
+    hasNextBazdid: boolean,
+    mapCenter: [number, number],
+    browserVersions: {
+        Desktop: {
+            Chrome: IENV_BROWSER_SETUP,
+            Firefox: IENV_BROWSER_SETUP,
+            IE: IENV_BROWSER_SETUP,
+            opera: IENV_BROWSER_SETUP,
+            safari: IENV_BROWSER_SETUP,
+        }
+        Touch: {
+            Chrome: IENV_BROWSER_SETUP,
+            Firefox: IENV_BROWSER_SETUP,
+            IE: IENV_BROWSER_SETUP,
+            opera: IENV_BROWSER_SETUP,
+            safari: IENV_BROWSER_SETUP,
+        }
+    }
+}

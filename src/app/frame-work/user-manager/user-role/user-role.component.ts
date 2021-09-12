@@ -1,22 +1,22 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IRoleManager } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { UsersAllService } from 'services/users-all.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-user-role',
   templateUrl: './user-role.component.html',
   styleUrls: ['./user-role.component.scss']
 })
-export class UserRoleComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserRoleComponent extends FactoryONE {
   dataSource: IRoleManager[] = [];
 
-  subscription: Subscription[] = [];
+ 
   regionDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
@@ -26,10 +26,12 @@ export class UserRoleComponent implements OnInit, AfterViewInit, OnDestroy {
   newRowLimit: number = 1;
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private userService: UsersAllService
-  ) { }
+  ) {
+    super(interactionService);
+  }
 
   nullSavedSource = () => this.closeTabService.saveDataForRoleManager = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -45,69 +47,46 @@ export class UserRoleComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.insertSelectedColumns();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/mu/role')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe())
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.userService.columnUserRoles();
     this._selectedColumns = this.userService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IRoleManager, rowIndex: number) => {
+  removeRow = async (rowData: object) => {
     const a = await this.userService.firstConfirmDialog();
 
     if (a) {
-      await this.userService.deleteSingleRow(ENInterfaces.RoleREMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.userService.deleteSingleRow(ENInterfaces.RoleREMOVE, rowData['dataSource'].id);
+      this.refetchTable(rowData['ri']);
     }
   }
   onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+    // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IRoleManager, rowIndex: number) => {
+  onRowEditSave = async (dataSource: object) => {
     this.defaultAddStatus();
-    if (!this.userService.verification(dataSource)) {
-      if (dataSource.isNew) {
+    if (!this.userService.verification(dataSource['dataSource'])) {
+      if (dataSource['dataSource'].isNew) {
         this.dataSource.shift();
         return;
       }
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (dataSource.isNew) {
-      await this.userService.roleAddEdit(ENInterfaces.RoleADD, dataSource);
+    if (dataSource['dataSource'].isNew) {
+      await this.userService.roleAddEdit(ENInterfaces.RoleADD, dataSource['dataSource']);
     }
     else {
-      await this.userService.roleAddEdit(ENInterfaces.RoleEDIT, dataSource);
+      await this.userService.roleAddEdit(ENInterfaces.RoleEDIT, dataSource['dataSource']);
     }
-    // this.refreshTable();
-    this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
   }
-  onRowEditCancel(dataSource: IRoleManager, index: number) {
+  onRowEditCancel(dataSource: object) {
     this.defaultAddStatus();
-    if (dataSource.isNew) {
+    if (dataSource['dataSource'].isNew) {
       this.dataSource.shift();
       return;
     }
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    // delete this.dataSource[dataSource.id];
+    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -115,9 +94,6 @@ export class UserRoleComponent implements OnInit, AfterViewInit, OnDestroy {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   newRow(): IRoleManager {
     return {

@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel2 } from 'interfaces/iauth-levels';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
 
@@ -16,10 +16,9 @@ import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
   templateUrl: './auth2.component.html',
   styleUrls: ['./auth2.component.scss']
 })
-export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
+export class Auth2Component extends FactoryONE {
 
-  dataSource: IAuthLevel2[] = [];
-  subscription: Subscription[] = [];
+  dataSource: IAuthLevel2[] = [];  
 
   authLevel1Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel2; } = {};
@@ -28,10 +27,12 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
-  ) { }
+  ) {
+    super(interactionService);
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -66,65 +67,39 @@ export class Auth2Component implements OnInit, AfterViewInit, OnDestroy {
     Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
     this.insertSelectedColumns();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/al/me')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.authsManagerService.columnAuth2();
     this._selectedColumns = this.authsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IAuthLevel2, rowIndex: number) => {
+  removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog();
     if (a) {
-      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel2REMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel2REMOVE, rowDataAndIndex['dataSource']);
+      this.refetchTable(rowDataAndIndex['ri']);
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IAuthLevel2, rowIndex: number) => {
+  onRowEditSave = async (dataSource: object) => {
     if (!this.authsManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.authLevel1Id !== 'object') {
+    if (typeof dataSource['dataSource'].authLevel1Id !== 'object') {
       this.authLevel1Dictionary.find(item => {
-        if (item.title === dataSource.authLevel1Id)
-          dataSource.authLevel1Id = item.id
+        if (item.title === dataSource['dataSource'].authLevel1Id)
+          dataSource['dataSource'].authLevel1Id = item.id
       })
     } else {
-      dataSource.authLevel1Id = dataSource.authLevel1Id['id'];
+      dataSource['dataSource'].authLevel1Id = dataSource['dataSource'].authLevel1Id['id'];
     }
-    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel2EDIT, dataSource);
+    await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel2EDIT, dataSource['dataSource']);
     Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
   }
-  onRowEditCancel(dataSource: IAuthLevel2, index: number) {
+  onRowEditCancel() {
     Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
-    // this.dataSource[index] = this.clonedProducts[dataSource.id];
-    // delete this.dataSource[dataSource.id];
-    // return;
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

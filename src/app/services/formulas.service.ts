@@ -33,8 +33,8 @@ export class FormulasService {
 
   /* COLUMNS */
   private _abFormulas = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
+    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true, isSelectOption: true },
     { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
     { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
     { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
@@ -42,8 +42,8 @@ export class FormulasService {
     { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
     { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
   ]
-  private _budgetFormulas = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+  private _budgetFormulas: IObjectIteratation[] = [
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
     { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
     { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
     { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
@@ -52,12 +52,12 @@ export class FormulasService {
     { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
   ]
   private _tabsare2Formulas = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
     { field: 'formula', header: 'فرمول', isSelected: true, readonly: true, ltr: true }
   ]
   private _tabsare3Formulas = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
+    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true, isSelectOption: true },
     { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
     { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
     { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },

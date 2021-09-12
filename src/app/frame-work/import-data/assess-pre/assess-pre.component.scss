@@ -1,0 +1,95 @@
+@import 'variable.scss';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat.scss';
+
+.main {
+  direction: rtl;
+  background: var(--gray_100);
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
+  padding: $font_05;
+  border-radius: $border_15;
+  border: 1px solid var(--blue_400);
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
+  gap: $font_05;
+  align-items: center;
+}
+
+.tooltip {
+  cursor: pointer;
+}
+
+.input_1 {
+  border-radius: 10px;
+}
+
+.btn_2_o {
+  font-family: $font_family;
+}
+
+h2 {
+  color: var(--gray_600);
+}
+
+h3 {
+  color: var(--blue_500);
+  font-size: 1.4rem;
+  padding: $font_05;
+}
+
+footer {
+  margin-top: $font_05;
+  text-align: center;
+}
+
+::ng-deep {
+
+  .mat-select-panel .mat-option {
+    font-size: 1.2rem;
+    line-height: 3em;
+    height: 3em;
+    text-align: right;
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .mat-option-text {
+    font-size: $font_s;
+    font-weight: 600;
+    color: var(--blue_800);
+  }
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 $font_05;
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: var(--blue_gray_700);
+  }
+
+  .mat-radio-label-content {
+    padding-right: $font_05 !important;
+    color: var(--blue_gray_300);
+  }
+}
+
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--gray_600);
+  margin: 0 2rem;
+}
+
+[hidden] {
+  display: none;
+}

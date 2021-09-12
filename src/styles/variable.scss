@@ -1,30 +1,3 @@
-$white: rgb(255, 255, 255);
-$blue_gray_300: rgb(64, 127, 201);
-$blue_gray_400: rgb(176, 189, 209);
-$blue_gray_700: rgb(89, 129, 177);
-$blue_200: rgb(220, 232, 255);
-$blue_400:rgb(17, 111, 255);
-$blue_500: rgb(0, 69, 203);
-$blue_600:rgb(14, 76, 146);
-$blue_700: rgb(41, 81, 124);
-$blue_800: rgb(31, 71, 98);
-$blue_900: rgb(21, 39, 60);
-$gray_100: rgb(242, 243, 244);
-$gray_200: rgb(230, 230, 230);
-$gray_300: rgb(213, 213, 213);
-$gray_400: rgb(203, 203, 203);
-$gray_500: rgb(150, 150, 150);
-$gray_600: rgb(112, 112, 112);
-$gray_700: rgb(92, 92, 92);
-$medium_slate_blue: rgb(125, 131, 255);
-$orange_500: rgb(246, 128, 56);
-$orange_600: rgb(245, 91, 25);
-$green_500: rgb(117, 188, 84);
-$green_600: rgb(75, 140, 56);
-$red_500: rgb(246, 62, 56);
-$red_600: rgb(183, 28, 28);
-$pink_500: rgb(255, 64, 129);
-
 $border_5: 5px;
 $border_15: 15px;
 $border_50: 50%;
@@ -47,7 +20,7 @@ hr {
   width: 80%;
   border: 0;
   height: .14rem;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), $blue_600, rgba(0, 0, 0, 0));
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--blue_600), rgba(0, 0, 0, 0));
 }
 
 .hr_1 {
@@ -82,46 +55,55 @@ a:active {
 
 ::ng-deep {
   .mat-select-placeholder {
-    color: $gray_400;
+    color: var(--gray_800);
     font-size: 1rem;
   }
 
   .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
   .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background-color: $pink_500;
+    background-color: var(--pink_500);
+  }
+
+  .mat-dialog-container {
+    background: var(--white);
+    color: var(--blue_900);
   }
 }
 
+.coloring_border {
+  border: 1.5px dashed var(--orange_600);
+  animation: pulse-new-button 500ms;
+}
 
 // header icon coloring
 ._xlsx,
 ._csv,
 ._pdf {
-  color: $gray_100 !important;
+  color: var(--gray_100) !important;
 }
 
 ._xlsx {
-  background: $green_600;
+  background: var(--green_600);
 }
 
 ._xlsx_download {
-  background: $green_500;
-  color: $white;
+  background: var(--green_500);
+  color: var(--white);
   font-size: $font_m;
 }
 
 ._csv {
-  background: $green_600;
+  background: var(--green_600);
 }
 
 ._pdf {
-  background: $red_500;
+  background: var(--red_500);
 }
 
 // 
 /* BACK ARROW ICON */
 .p_icons {
-  color: $blue_gray_300;
+  color: var(--blue_gray_300);
   font-size: $font_m;
   cursor: pointer;
 }

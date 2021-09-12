@@ -18,31 +18,27 @@ export class DashboardService {
   columnDashboardUserOverall = (): IObjectIteratation[] => {
     return [
       { field: 'all', header: 'مجموع', isSelected: true, readonly: true },
-      { field: 'counterReaders', header: 'ماموران قرائت', isSelected: true, readonly: true },
-      { field: 'readingSupervisors', header: 'ناظران قرائت', isSelected: true, readonly: true },
+      { field: 'counterReaders', header: 'ماموران', isSelected: true, readonly: true },
+      { field: 'readingSupervisors', header: 'ناظران', isSelected: true, readonly: true },
       { field: 'inactiveOrLockeds', header: 'غیرفعال/قفل', isSelected: true, readonly: false }
     ];
   }
   columnDashboards = (): IObjectIteratation[] => {
     return [
-      { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
-      { field: 'inWeekCont', header: 'هفته', isSelected: true, readonly: true },
-      { field: 'inMonthCount', header: 'ماه', isSelected: true, readonly: true },
-      { field: 'inYearCount', header: 'سال', isSelected: true, readonly: false }
+      { field: 'inDayCount', header: 'امروز', isSelected: true, readonly: true },
+      { field: 'inWeekCont', header: 'هفته‌جاری', isSelected: true, readonly: true },
+      { field: 'inMonthCount', header: 'ماه‌جاری', isSelected: true, readonly: true },
+      { field: 'inYearCount', header: 'سال‌جاری', isSelected: true, readonly: false }
     ];
   }
 
   /* CALL API */
   getDashboardDataSource = (method: ENInterfaces): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(method).subscribe(res => {
-          resolve(res);
-        })
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).toPromise().then(res => {
+        resolve(res);
       })
-    } catch (error) {
-      console.error(e => e);
-    }
+    })
   }
   postDashboardAnalyzePerformance = (): Promise<any> => {
     try {

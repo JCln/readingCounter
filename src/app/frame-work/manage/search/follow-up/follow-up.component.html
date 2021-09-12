@@ -1,7 +1,7 @@
 <form #form="ngForm" *ngIf="route.children.length === 0">
     <section class="_center">
-        <input class="input_1" placeholder="شماره پیگیری" type="number" name="trackNumber" [(ngModel)]="trackNumber"
-            autofocus>
+        <input class="input_1" placeholder="شماره پیگیری" type="number" name="trackNumber"
+            [(ngModel)]="followUpService.trackNumber" autofocus>
         <button type="submit" class="btn_1" (click)="verification()">مشاهده </button>
     </section>
 </form>

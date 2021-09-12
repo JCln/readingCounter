@@ -4,15 +4,26 @@
     <form #form="ngForm" (ngSubmit)="editCloseData()" class="content">
         <div class="_desc">
             <div *ngFor="let mainDatas of _selectedDatas">
-                <ng-container
-                    *ngIf="dataSource[mainDatas.field] === true || dataSource[mainDatas.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
-                        [(ngModel)]="dataSource[mainDatas.field]">
-                        {{mainDatas.header}}
-                    </mat-checkbox>
+                <ng-container *ngIf="mainDatas.isBoolean; else elseTemplate">
+                    <ng-container
+                        *ngIf="mainDatas.field === 'isBazdid' || mainDatas.field ===  'isRoosta'; else editableCheckboxes">
+                        <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
+                            [(ngModel)]="dataSource[mainDatas.field]">
+                            {{mainDatas.header}}
+                        </mat-checkbox>
+                    </ng-container>
+                    <ng-template #editableCheckboxes>
+                        <div class="check_boxes">
+                            <mat-checkbox [disabled]="mainDatas.readonly" name="{{mainDatas.field}}"
+                                [(ngModel)]="dataSource[mainDatas.field]">
+                                {{mainDatas.header}}
+                            </mat-checkbox>
+                        </div>
+                    </ng-template>
                 </ng-container>
+
                 <ng-template #elseTemplate>
-                    <ng-container *ngIf="mainDatas.field === 'newCounterReaderName';else selectOption">
+                    <ng-container *ngIf="mainDatas.isSelectOption;else selectOption">
                         <div class="input_2" [ngClass]="{coloring_border: mainDatas.borderize}">
                             <div class="_key">مامور جدید</div>
                             <p-dropdown [options]="allCounterReaders" name="newCounterReaderName"

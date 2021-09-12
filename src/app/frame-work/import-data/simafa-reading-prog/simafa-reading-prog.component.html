@@ -1,0 +1,63 @@
+<main *ngIf="route.children.length === 0" class="main">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">ناحیه</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importSimafaReadingProgram.zoneId" name="zoneId">
+                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2">
+                    <div class="_key">نوع دوره</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                        <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindsDictionary"
+                            [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2" [hidden]="!readingPeriodDictionary.length">
+                    <div class="_key">دوره قرائت</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importSimafaReadingProgram.readingPeriodId"
+                        name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2">
+                    <div class="_key">سال</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importSimafaReadingProgram.year" name="year">
+                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <button type="submit" class="btn_2_o">
+                    مشاهده
+                    <i class="pi pi-list"></i>
+                </button>
+            </section>
+        </section>
+
+    </form>
+</main>
+
+<app-prime-table *ngIf="route.children.length === 0"     
+[_selectCols]="_selectCols" 
+[_selectedColumns]="selectedColumns"
+[dataSource]="dataSource"
+[_outputFileName]="'simafa-readingProg'"
+[_checkUpName]="'simafa-readingProg'"
+[_numberOfExtraColumns]="[1, 2]"
+[_rowsPerPage]="[10,20,50,100, 500, 1000]"
+(refreshedTable)="refreshTable()"
+(routedToBatch)="routeToBatch($event)"
+(routedToSingle)="routeToSingle($event)"
+> 
+</app-prime-table>
+
+<router-outlet></router-outlet>

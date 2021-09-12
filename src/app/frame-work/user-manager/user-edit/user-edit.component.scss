@@ -1,7 +1,7 @@
 @import 'add-edit.scss';
 
 .roles {
-  background: $blue_gray_400;
+  background: var(--blue_gray_400);
   border-radius: $border_5;
   padding: .5rem;
 }
@@ -14,14 +14,14 @@
   padding: 1rem;
   border-radius: $border_15;
   margin-bottom: $font_2;
-  background: $gray_100;
+  background: var(--gray_100);
 }
 
 h2 {
-  color: $gray_700;
+  color: var(--blue_700);
   text-align: right;
 }
 
 .mat-checkbox-layout .mat-checkbox-label {
-  color: $blue_700;
+  color: var(--blue_700);
 }

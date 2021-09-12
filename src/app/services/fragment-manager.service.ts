@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IFragmentDetails, IFragmentMaster } from 'interfaces/imanage';
@@ -6,6 +7,8 @@ import { IDictionaryManager, IObjectIteratation, IResponses } from 'interfaces/i
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -20,16 +23,16 @@ export class FragmentManagerService {
     return [
       { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
       { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
       { field: 'isValidated', header: 'تایید شده', isSelected: true, readonly: true, isBoolean: true },
     ];
   }
   columnSelectedFragmentDetails = (): IObjectIteratation[] => {
     return [
       { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
       { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
       { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }
     ];
@@ -37,7 +40,8 @@ export class FragmentManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private dialog: MatDialog
   ) { }
 
   /* Master */
@@ -184,7 +188,24 @@ export class FragmentManagerService {
 
   /* VERIFICATION */
 
-
+  firstConfirmDialog = (): Promise<any> => {
+    const title = EN_messages.confirm_remove;
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: title,
+          isInput: false,
+          isDelete: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
+        }
+      })
+    })
+  }
   private masterValidation = (): boolean => {
     if (!this.nullValidation(this.fragmentMaster.zoneId, EN_messages.insert_zone))
       return false;
@@ -245,19 +266,19 @@ export class FragmentManagerService {
     return true;
   }
   private detailsValidation = (): boolean => {
-    if (!this.nullValidation(this.fragmentDetails.fragmentMasterId, ('خطا در ارسال مقادیر')))
+    if (!this.nullValidation(this.fragmentDetails.fragmentMasterId, EN_messages.call_supportGroup))
       return false;
-    if (!this.nullValidation(this.fragmentDetails.fromEshterak, 'از اشتراک را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentDetails.fromEshterak, EN_messages.insert_fromEshterak))
       return false;
-    if (!this.nullValidation(this.fragmentDetails.toEshterak, 'تا اشتراک را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentDetails.toEshterak, EN_messages.insert_ToEshterak))
       return false;
-    if (!this.nullValidation(this.fragmentDetails.routeTitle, 'عنوان مسیر را وارد نمایید'))
-      return false;
-
-    if (!this.NANValidation(this.fragmentDetails.fromEshterak, 'فرمت از اشتراک ناصحیح است'))
+    if (!this.nullValidation(this.fragmentDetails.routeTitle, EN_messages.insert_title_route))
       return false;
 
-    if (!this.NANValidation(this.fragmentDetails.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
+    if (!this.NANValidation(this.fragmentDetails.fromEshterak, EN_messages.format_invalid_from_eshterak))
+      return false;
+
+    if (!this.NANValidation(this.fragmentDetails.toEshterak, EN_messages.format_invalid_to_eshterak))
       return false;
     if (!this.utilsService.isFromLowerThanToByString(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);

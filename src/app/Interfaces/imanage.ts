@@ -96,7 +96,7 @@ export interface IReadingPeriodKind {
     clientOrder: number
 }
 export interface ICounterState {
-    id: number,
+    id?: number,
     moshtarakinId: number,
     title: string,
     zoneId: number,
@@ -107,7 +107,8 @@ export interface ICounterState {
     isTavizi: boolean,
     shouldEnterNumber: boolean,
     isXarab: boolean,
-    isFaqed: boolean
+    isFaqed: boolean,
+    isNew?: boolean
 }
 // export interface IGridFriendlyFilter {
 //     field: string,
@@ -181,7 +182,8 @@ export interface ITracking {
     displayRadif: boolean,
     counterReaderId: string,
     counterReaderName: string,
-    stateTitle?: string
+    stateTitle?: string,
+    hasMap: boolean
 }
 export interface IEditTracking {
     id: string,
@@ -405,7 +407,8 @@ export interface IFollowUp {
             seen: boolean,
             counterReaderName: string,
             trackStatusTitle: string,
-            hasDetails: boolean
+            hasDetails: boolean,
+            hasMap: boolean
         }
     ]
 }
@@ -756,6 +759,15 @@ export interface IFragmentDetails {
     orderDigit?: number,
     orderPersian?: string,
     isNew?: boolean
+    // for batch
+    trackNumber?: number,
+    count?: number,
+    counterReaderName?: string
+}
+export interface IFragmentDetailsByEshterakReq {
+    fromEshterak: string,
+    toEshterak: string,
+    zoneId: number
 }
 
 // SEARCH   
@@ -764,6 +776,31 @@ export interface ISearchMoshReq {
     searchBy: number,
     item: string,
     similar: boolean
+}
+export interface ISearchSimpleReq {
+    zoneId: number,
+    fromDate: string,
+    toDate: string,
+    readingPeriodId: string,
+    year: number
+}
+export interface ISearchSimpleOutput {
+    trackingId: string,
+    trackNumber: number,
+    listNumber: string,
+    insertDateJalali: string,
+    zoneId: number,
+    isBazdid: boolean,
+    isRoosta: boolean,
+    fromEshterak: string,
+    toEshterak: string,
+    fromDate: string,
+    toDate: string,
+    overallQuantity: number,
+    itemQuantity: number,
+    counterReaderName: string,
+    trackStatusTitle: string,
+    hasMap: boolean
 }
 export interface ISearchProReportInput {
     zoneId: number,
@@ -777,4 +814,22 @@ export interface ISearchProReportInput {
     masrafStates: number[],
     karbariCodes: number[],
     fragmentMasterIds: string[]
+}
+export interface IAssessPreDisplayDtoSimafa {
+    reportIds: number[],
+    counterStateIds: number[],
+    masrafStates: number[],
+    karbariCodes: number[],
+    listNumber: string,
+    zoneId: number
+}
+export interface IAssessAddDtoSimafa {
+    onOffLoadIds: string[],
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    counterReaderId: string,
+    trackNumber: number
 }

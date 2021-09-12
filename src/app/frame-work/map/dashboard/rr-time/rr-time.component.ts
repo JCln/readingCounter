@@ -19,8 +19,6 @@ export class RrTimeComponent implements OnInit {
 
   classWrapper = async () => {
     this.readingReportTimed = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardReadTimed);
-    console.log(this.readingReportTimed);
-
     this.insertSelectedColumns();
   }
   ngOnInit(): void {

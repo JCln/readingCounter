@@ -2,7 +2,6 @@ import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.j
 
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { IReadingReportGISReq } from 'interfaces/imanage.js';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { ListManagerService } from 'services/list-manager.service';
 
@@ -66,13 +65,17 @@ export class MapService {
   serviceInstantiate = (map: L.Map) => {
     this.map = map;
   }
-  hasMarkerCluster = (body: IReadingReportGISReq): boolean => {
-    return body.isCluster;
-  }
   backToPreviousPage = () => {
     this._location.back();
   }
   getPointerMarks = (a: object): Promise<any> => {
     return this.listManagerService.postLMPDXY(a);
+  }
+  validateGISAccuracy = (temp: any[]): boolean => {
+    let bol: boolean = false;
+    temp.find(item => {
+      return bol = parseInt(item.gisAccuracy) === 0 ? false : true
+    })
+    return bol;
   }
 }

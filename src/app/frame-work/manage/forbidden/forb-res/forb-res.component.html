@@ -1,61 +1,17 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="[10,25,50]"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" #tdv>
-
-    <ng-template pTemplate="caption">
-        <th>
-            <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-                selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-            </p-multiSelect>
-        </th>
-        <div class="header_icons_wrap">
-            <div class="left_side">
-                <i></i>
-            </div>
-            <div class="left_side">
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i>
-                <i (click)="backToPrevious()" class="tooltip _circle_border p_icons pi pi-arrow-left">
-                    <div class="tooltip_text_right">بازگشت به جستجو غیرمجاز</div>
-                </i>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
-            </th>
-            <th style="width: 4rem"></th>
-        </tr>
-        <tr>
-            <th *ngFor="let col of columns">
-                <p-columnFilter matchMode="contains" type="text" field="{{col.field}}"></p-columnFilter>
-            </th>
-            <th style="width: 4rem"></th>
-        </tr>
-    </ng-template>
-
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns">
-                <span class="ui-column-title">{{col.header}}</span>
-                {{dataSource[col.field]}}
-            </td>
-            <td>
-                <span class="ui-column-title">مشاهده عکس(ها)</span>
-                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons fa fa-camera">
-                    <div class="tooltip_text_right">مشاهده عکس(ها)</div>
-                </i>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
-
-<section *ngIf="!dataSource || dataSource.length === 0">
-    <tr class="empty_data">
-        موردی پیدا نشد
-    </tr>
-</section>
+<app-prime-table     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="'forbidden'"
+    [_checkUpName]="'forbidden'"
+    [_rowsNumbers]=10
+    [_rowsPerPage]="[10,25,50]"
+    [_numberOfExtraColumns]="[1]"
+    [_backToPreviousEnabled]=true
+    [_selectedColumnsToRemember]="'selectedForbidden'"
+    [_backToPreviousText]="'بازگشت به جستجو غیرمجاز'"
+    (backedToPrevious)="backToPrevious()"
+    (refreshedTable)="refreshTable()"
+    (showedPictures)="showPictures($event)"
+ > 
+</app-prime-table>

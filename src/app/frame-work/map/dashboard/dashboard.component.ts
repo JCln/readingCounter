@@ -54,12 +54,10 @@ export class DashboardComponent implements OnInit {
           dataArr.map(data => {
             sum += data;
           });
-          console.log(sum);
-
           let percentage = (value * 100 / sum).toFixed(2) + "%";
           return percentage;
         },
-        color: '#fff',
+        color: 'var(--white)',
       }
     },
     tooltips: {
@@ -97,12 +95,10 @@ export class DashboardComponent implements OnInit {
           dataArr.map(data => {
             sum += data;
           });
-          console.log(sum);
-
           let percentage = (value * 100 / sum).toFixed(2) + "%";
           return percentage;
         },
-        color: '#fff',
+        color: 'var(--white)',
       }
     },
     tooltips: {
@@ -180,12 +176,12 @@ export class DashboardComponent implements OnInit {
     this.doughnutTemp.push(this.pieChartDataTwo);
     this.doughnutTemp.push(this.pieChartDataThree);
 
-    console.log(this.doughnutTemp);
-
     this.doughnutChartData = this.doughnutTemp;
 
   }
   receiveAnalyzeData($event) {
-    this._analyzer_interface = $event
+    setTimeout(() => {
+      this._analyzer_interface = $event;
+    }, 0);
   }
 }

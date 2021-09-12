@@ -19,12 +19,5 @@ export class SelectActionComponent {
       t.isSelected = completed
     });
   }
-  // updateAll = (subTask: any[], index: number) => {
-  //   const a = subTask.every(l1 => {
-  //     return l1.isSelected
-  //   })
-  //   // subTask.isSelected = a;
-  //   console.log(a);
 
-  // }
 }

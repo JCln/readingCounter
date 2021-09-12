@@ -211,7 +211,7 @@ export class BarDispersalrateComponent implements OnChanges {
     ]
   }
   ngOnChanges(): void {
-    console.log(this.dataSourceBar);
-    this.createChartObject();
+    if (this.dataSourceBar)
+      this.createChartObject();
   }
 }

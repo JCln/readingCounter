@@ -98,4 +98,4 @@
     </table>
 
 </section>
-<app-bar-dispersalrate [dataSourceBar]="dataSource"></app-bar-dispersalrate>
+<app-bar-dispersalrate *ngIf="dataSource" [dataSourceBar]="dataSource"></app-bar-dispersalrate>

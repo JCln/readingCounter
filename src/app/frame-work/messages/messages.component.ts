@@ -1,17 +1,16 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { IColor, IMessage, ITime } from 'interfaces/inon-manage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { InteractionService } from 'services/interaction.service';
 import { MessageService } from 'services/message.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MessagesComponent extends FactoryONE {
   message: IMessage = {
     title: '',
     text: '',
@@ -21,25 +20,25 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
   };
   colors: IColor[] = [];
   times: ITime[] = [];
-  subscription: Subscription[] = [];
+ 
 
   testNamesStorage: any;
   allMessages: IMessage[];
   getedDataFromLocalStorage: any;
 
   constructor(
-    private interactionService: InteractionService,
-    private router: Router,
+    public interactionService: InteractionService,
     readonly messageService: MessageService,
     private browserStorageService: BrowserStorageService
-  ) { }
+  ) {
+    super(interactionService);
+  }
 
-  ngOnInit(): void {
+  classWrapper = async (canRefresh?: boolean) => {
     this.times = this.messageService.getTimes();
     this.colors = this.messageService.getColors();
     this.getAllPreMessages();
   }
-
   connectToServerConfig = (name: string, message: IMessage) => {
     console.log(this.message);
   }
@@ -72,22 +71,5 @@ export class MessagesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.message.text = localStorageItem.text;
     this.message.canSave = localStorageItem.canSave;
 
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/msge')
-          this.ngOnInit();
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
 }

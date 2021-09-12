@@ -119,9 +119,11 @@ export enum ENInterfaces {
     fragmentDETAILSREMOVE = 'V1/Fragment/Detials/Remove',
     fragmentDETAILSEDIT = 'V1/Fragment/Details/Edit',
     fragmentDETAILSADD = 'V1/Fragment/Details/Add',
+    fragmentDETAILSByEshterak = 'V1/Fragment/Details/ByEshterak',
 
     OutputDBF = 'V1/Output/Dbf',
     OutputSINGLE = 'V1/Output/single',
+    OutputDELAYED = 'V1/Output/Delayed',
     forbidden = 'V1/Forbidden/ByParam',
 
     trackingIMPORTED = 'V1/Tracking/Imported',
@@ -140,9 +142,11 @@ export enum ENInterfaces {
     trackingFOLLOWUP = 'V1/Tracking/FollowUp/?trackNumber=',
     trackingAnalyzeByParam = 'V1/Tracking/Analyze/ByParam',
     trackingPostOffloadModify = 'V1/OffLoad/Modify',
+    trackingEditState = 'V1​/Tracking​/EditState',
 
     ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
     ListSearchPro = 'V1/List/Search/Pro',
+    ListSearchSimple = 'V1/Tracking/Search/Simple',
     ListTraverse = 'V1/List/Offloaded/Traverse',
     ListTraverseDifferential = 'V1/List/Offloaded/TraverseDifferential',
     ListTraverseDifferentialDictionary = 'V1/List/TraverseDifferential/Dictionary',
@@ -193,7 +197,7 @@ export enum ENInterfaces {
     CounterReportEdit = 'V1/CounterReport/Edit',
     CounterReportAdd = 'V1/CounterReport/Add',
     CounterReportDICTIONARY = 'V1/CounterReport/Dictionary',
-    CounterReportByZoneIdDICTIONARY = `/V1/CounterReport/DictionaryByZoneId/`,
+    CounterReportByZoneIdDICTIONARY = `V1/CounterReport/DictionaryByZoneId/`,
 
     counterReadersByZoneId = `V1/User/CounterReaders/`,
 
@@ -212,14 +216,19 @@ export enum ENInterfaces {
 
 
     /* NON MANAGER INTERFACES */
-    getPolicies = `V1.Test/Policy/Active/`,
-    editPolicies = 'V1.Test/Policy/Edit', //post body
-    addPolicies = 'V1.Test/Policy/Add',
+    getPolicies = 'V1/Policy/Active',
+    editPolicies = 'V1/Policy/Edit',
     getSideBar = 'V1/User/SideBar',
-    postImportData = 'V1/Import/Dynamic',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
 
+    postImportData = 'V1/Import/Dynamic',
+    postImportDynamicCount = 'V1/Import/DynamicCount',
+    postSimafaReadingProgram = 'V1/Import/Simafa/ReadingPrograms',
+    postSimafaBatch = 'V1/Import/Simafa/Batch',
+    postSimafaSingle = 'V1/Import/Simafa/single',
+    postSimafaAssessPre = 'V1/Import/Simafa/AssessPre',
+    postSimafaAssessAdd = 'V1​/Import​/Simafa​/AssessAdd',
 
     getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
     getDashboardTraverseTimed = 'V1/List/Dashboard/Traverse/Timed',

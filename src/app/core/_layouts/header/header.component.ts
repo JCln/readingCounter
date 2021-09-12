@@ -1,14 +1,14 @@
-import { AfterContentInit, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, Type } from '@angular/core';
+import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output, Type } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ThemeService } from 'services/theme.service';
 import { AuthService } from 'src/app/auth/auth.service';
-
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterContentInit, OnChanges, OnDestroy {
+export class HeaderComponent implements AfterContentInit, OnChanges {
   private sideBar: boolean;
   @Input() sid_isSmall: boolean;
   @Output() sidebarEvent = new EventEmitter<boolean>();
@@ -18,7 +18,8 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnDestroy {
   displayName: string = '';
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    public themeService: ThemeService
   ) { }
 
   setSidebar = () => {
@@ -26,15 +27,8 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnDestroy {
     this.sidebarEvent.emit(this.sideBar);
   }
   ngAfterContentInit(): void {
-    this.subscription = this.authService.authStatus$.subscribe(res => {
-      if (res) {
-        const authUser = this.authService.getAuthUser();
-        this.displayName = authUser ? authUser.displayName : '';
-      }
-    })
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    const authUser = this.authService.getAuthUser();
+    this.displayName = authUser ? authUser.displayName : '';
   }
   logout = () => {
     this.authService.logout();
@@ -42,4 +36,8 @@ export class HeaderComponent implements AfterContentInit, OnChanges, OnDestroy {
   ngOnChanges(): void {
     this.sideBar = this.sid_isSmall;
   }
+  toggleTheme() {
+    this.themeService.toggleTheme();
+  }
+
 }

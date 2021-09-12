@@ -1,0 +1,48 @@
+@import 'shared_dialog';
+
+.mat-dialog-content {
+  color: var(--gray_700);
+  font-size: $font_s;
+  text-align: right;
+  word-spacing: .3rem;
+}
+
+strong {
+  color: var(--blue_600);
+}
+
+._circle_border {
+  color: var(--green_500);
+  border: 2px solid var(--green_500);
+  margin-left: $font_xs;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+._key_value {
+  columns: 2;
+  text-align: center;
+  column-rule: 1px dashed var(--blue_400);
+  direction: rtl;
+}
+
+._key,
+._value {
+  font-weight: 600;
+}
+
+._key {
+  color: var(--blue_600);
+}
+
+._text {
+  margin-left: $font_xs;
+}
+
+._custom {
+  background: var(--blue_400);
+  color: var(--gray_100);
+}

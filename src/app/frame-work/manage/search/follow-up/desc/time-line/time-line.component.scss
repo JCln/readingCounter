@@ -4,19 +4,19 @@
   display: grid;
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
-  gap: $font_xs;
+  gap: $font_05;
   margin-top: $font_xs;
-  background: $gray_100;
+  background: var(--gray_100);
   padding: $font_xs 0.25rem;
   border-radius: $border_5;
 }
 
 .card {
-  background: $white;
+  background: var(--white);
   text-align: center;
   border-radius: $border_15;
-  box-shadow: 0 0 3px 2px $gray_200;
-  padding: $font_l;
+  box-shadow: 0 0 3px 2px var(--gray_200);
+  padding: $font_l $font_05;
   position: relative;
 }
 
@@ -27,18 +27,18 @@
   position: absolute;
   left: $font_xs;
   top: -$font_xs;
-  background: $blue_400;
-  color: $white;
+  background: var(--blue_400);
+  color: var(--white);
   border-radius: $border_5;
   font-size: $font_l;
   font-weight: 600;
   height: 2rem;
-  width: 2rem;  
+  width: 2rem;
 }
 
 .title {
   font-size: $font_m;
-  color: $blue_700;
+  color: var(--blue_700);
   font-weight: 800;
 }
 
@@ -47,14 +47,15 @@
   margin-bottom: $font_05;
 }
 
-.key {
+._key,
+._value {
   font-size: $font_s;
   font-weight: 600;
-  color: $blue_700;
+  color: var(--blue_700);
 }
 
 .val {
   font-size: $font_m;
   font-weight: 600;
-  color: $blue_900;
+  color: var(--blue_900);
 }

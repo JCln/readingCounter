@@ -18,8 +18,15 @@ export class MediaComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
+
     this.media = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardReadingReportTimed);
-    this.insertSelectedColumns();
+    if (this.media) {      
+      this.insertSelectedColumns();
+      console.log(2);
+    }
+    else
+      console.log(3);
+
   }
   ngOnInit(): void {
     this.classWrapper();

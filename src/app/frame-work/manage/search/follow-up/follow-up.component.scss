@@ -5,11 +5,13 @@
 
 section {
   display: grid;
+  direction: rtl;
   margin: auto;
   padding: 2rem;
-  background: $gray_300;
+  background: var(--gray_300);
   border-radius: $border_15;
   width: 18rem;
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
 }
 
 ._center {
@@ -19,12 +21,12 @@ section {
 
 .input_1 {
   text-align: center;
-  border-color: $blue_600;
+  border-color: var(--blue_600);
   min-width: 16rem;
 }
 
 .btn_1 {
-  color: $white;
+  color: var(--white);
   margin-top: 1rem;
-  background-color: $orange_500;
+  background-color: var(--orange_500);
 }

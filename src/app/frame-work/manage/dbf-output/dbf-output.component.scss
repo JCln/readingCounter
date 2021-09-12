@@ -2,6 +2,7 @@
 @import 'button.scss';
 @import 'input.scss';
 @import 'mixins.scss';
+@import '_mat.scss';
 
 section {
   display: grid;
@@ -10,9 +11,9 @@ section {
   margin: auto;
   padding: $font_xs;
   width: 18rem;
-  background: $gray_100;
+  background: var(--gray_100);
   border-radius: $border_15;
-  box-shadow: 1px 1px 8px 4px $gray_400;
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
 }
 
 .input_2 {
@@ -22,8 +23,8 @@ section {
 
 .btn_1 {
   margin-top: $font_2;
-  color: $white;
-  background-color: $orange_500;
+  color: var(--white);
+  background-color: var(--orange_500);
 }
 
 ._key,
@@ -38,7 +39,7 @@ section {
   justify-content: center;
   direction: ltr;
   border: none;
-  color: $blue_700;
+  color: var(--blue_700);
   text-align: center;
 }
 
@@ -63,21 +64,7 @@ input {
   .mat-option-text {
     font-size: $font_s;
     font-weight: 600;
-    color: $blue_800;
-  }
-
-  .mat-select-arrow {
-    color: $gray_100;
-  }
-
-  .mat-select-value {
-    color: $gray_100;
-    font-family: $font_family;
-    font-weight: 600;
-  }
-
-  .mat-select {
-    text-align: center;
+    color: var(--blue_800);
   }
 
 }

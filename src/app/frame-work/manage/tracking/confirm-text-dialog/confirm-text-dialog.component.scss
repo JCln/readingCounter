@@ -3,7 +3,7 @@
 @import 'input.scss';
 
 .mat-dialog-content {
-  color: $gray_700;
+  color: var(--gray_700);
   font-size: $font_s;
   text-align: right;
   word-spacing: .3rem;
@@ -14,26 +14,28 @@
 }
 
 ._custom {
-  background: $blue_400;
-  color: $gray_100;
+  background: var(--blue_400);
+  color: var(--gray_100);
 }
 
 ._delete_style {
-  background-color: $red_500;
-  border-color: $red_500;
-  color: $white;
+  background-color: var(--red_500);
+  border-color: var(--red_500);
+  color: var(--white);
+  text-align: center;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: $red_600;
-    box-shadow: 0 0 0 3px $red_600;
+    background-color: var(--red_600);
+    box-shadow: 0 0 0 3px var(--red_600);
   }
 }
 
 h2 {
   font-size: $font_m;
   padding: $font_05;
+  text-align: center;
 }
 
 .btn_1,

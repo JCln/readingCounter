@@ -1,25 +1,28 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-all',
   templateUrl: './all.component.html',
   styleUrls: ['./all.component.scss']
 })
-export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AllComponent extends FactoryONE {
   trackId: string;
   isModify: string | boolean;
-  subscription: Subscription[] = [];
 
+  carouselDataSource: IOnOffLoadFlat;
+  showCarousel: boolean = false;
+
+  rowIndex: number = 0;
   dataSource: IOnOffLoadFlat[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
@@ -31,13 +34,14 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectedColumns: any[];
 
   constructor(
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     public listManagerService: ListManagerService,
     public outputManagerService: OutputManagerService,
     private route: ActivatedRoute,
     private router: Router,
     private _location: Location
   ) {
+    super(interactionService);
     this.getRouteParams();
   }
 
@@ -47,6 +51,7 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.dataSource = await this.listManagerService.getLMAll(this.trackId);
+    this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
     if (!this.dataSource.length)
       return;
@@ -56,16 +61,15 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
     const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
-    if (tempZone)
+    if (tempZone) {
       this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    }
 
-
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    // Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.setDynamicRages();
     this.makeHadPicturesToBoolean();
@@ -87,35 +91,36 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
     })
     )
   }
-  ngOnInit(): void {
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr/m/l/all/'))
-          this.classWrapper();
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   routeToWoui = (object: IOnOffLoadFlat) => {
     this.router.navigate(['wr/m/track/woui', false, object.id]);
   }
-  routeToOffload = (object: IOnOffLoadFlat) => {
-    let zoneId;
-    this.zoneDictionary.map(item => {
-      if (item.title === object.zoneId)
-        zoneId = item.id
-    })
-    this.router.navigate(['wr/m/track/offloaded/offloadMfy', zoneId + object.id]);
+  routeToOffload = (event: object) => {
+    this.carouselDataSource = event['dataSource'];
+    this.rowIndex = event['ri'];
+    this.showCarousel = true;
+  }
+  carouselNextItem = () => {
+
+    this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
+    console.log(this.dataSource);
+    this.carouselDataSource = this.dataSource[this.rowIndex];
+  }
+  carouselPrevItem = () => {
+    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length - 1 : this.rowIndex--;
+    console.log(this.dataSource);
+    this.carouselDataSource = this.dataSource[this.rowIndex];
+  }
+  // convertTitleToId = (dataSource: any): any => {
+  // this.carouselDataSource.zoneId = this.convertTitleToId(this.dataSource[this.rowIndex].zoneId)
+  //   return this.zoneDictionary.find(item => {
+  //     if (item.title === dataSource) {
+  //       console.log(item.id);
+  //       return item.id;
+  //     }
+  //   })
+  // }
+  carouselCancelClicked = () => {
+    this.showCarousel = false;
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -123,9 +128,6 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   toPrePage = () => {
     if (this.isModify) {
@@ -145,4 +147,5 @@ export class AllComponent implements OnInit, AfterViewInit, OnDestroy {
         item.imageCount = false;
     })
   }
+  ngOnInit(): void { return; }
 }

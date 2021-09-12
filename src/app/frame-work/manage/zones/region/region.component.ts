@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IRegionManager } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 
@@ -16,10 +16,10 @@ import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
   templateUrl: './region.component.html',
   styleUrls: ['./region.component.scss']
 })
-export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
+export class RegionComponent extends FactoryONE {
   dataSource: IRegionManager[] = [];
 
-  subscription: Subscription[] = [];
+ 
   provinceDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
@@ -28,10 +28,12 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
-  ) { }
+  ) {
+    super(interactionService);
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -44,9 +46,10 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
           }
 
         });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          this.sectorsManagerService.sectorsAddEdit(ENInterfaces.RegionADD, result);
+          await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.RegionADD, result);
+          this.refreshTable();
         }
       });
     });
@@ -68,63 +71,44 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
     Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
     this.insertSelectedColumns();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/zs/r')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe())
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.sectorsManagerService.columnRegion();
     this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IRegionManager, rowIndex: number) => {
+  removeRow = async (rowDataAndIndex: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
 
     if (a) {
-      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.RegionREMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.sectorsManagerService.deleteSingleRow(ENInterfaces.RegionREMOVE, rowDataAndIndex['dataSource']);
+      this.refreshTable();
     }
   }
-  onRowEditInit(dataSource: any) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  onRowEditSave = async (dataSource: IRegionManager, rowIndex: number) => {
-    if (!this.sectorsManagerService.verification(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  onRowEditSave = async (dataSource: object) => {
+    if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.provinceId !== 'object') {
+    if (typeof dataSource['dataSource'].provinceId !== 'object') {
       this.provinceDictionary.find(item => {
-        if (item.title === dataSource.provinceId)
-          dataSource.provinceId = item.id
+        if (item.title === dataSource['dataSource'].provinceId)
+          dataSource['dataSource'].provinceId = item.id
       })
     } else {
-      dataSource.provinceId = dataSource.provinceId['id'];
+      dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
     }
 
-    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.RegionEDIT, dataSource);
+    await this.sectorsManagerService.addOrEditCountry(ENInterfaces.RegionEDIT, dataSource['dataSource']);
+    this.refetchTable(dataSource['ri']);
     Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
   }
-  onRowEditCancel(dataSource: IRegionManager, index: number) {
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
-    return;
+  onRowEditCancel() {
+    // this.dataSource[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];
+    // delete this.dataSource[rowDataAndIndex['dataSource']];
+    // return;
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -132,9 +116,6 @@ export class RegionComponent implements OnInit, AfterViewInit, OnDestroy {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
 }
 

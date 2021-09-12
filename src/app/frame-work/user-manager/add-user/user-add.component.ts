@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { appItems, IAddAUserManager, IAddUserInfos, IRoleItems } from 'interfaces/iuser-manager';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UserAddManagerService } from 'services/user-add-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { UserInputsComponent } from './user-inputs/user-inputs.component';
 
@@ -14,9 +14,9 @@ import { UserInputsComponent } from './user-inputs/user-inputs.component';
   templateUrl: './user-add.component.html',
   styleUrls: ['./user-add.component.scss']
 })
-export class UserAddComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserAddComponent extends FactoryONE {
   dataSource: any;
-  subscription: Subscription[] = [];
+ 
 
   personalizeInfo: IAddAUserManager;
   provinceItemsData: any;
@@ -44,13 +44,13 @@ export class UserAddComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-
   constructor(
     private userAddManagerService: UserAddManagerService,
     private interfaceManagerService: InterfaceManagerService,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
+    super(interactionService);
   }
   addUser = () => {
     this.userAddManagerService.userAddA(this.dataSource, this.userInputWrapper);
@@ -58,12 +58,9 @@ export class UserAddComponent implements OnInit, AfterViewInit, OnDestroy {
   userInputVals = () => {
     this.userInputWrapper = this.userInfos.userInputForm;
   }
-  userRolesVals = () => {
-    this.roleItemsData = this.userInfos.userInputForm;
-  }
   nullSavedSource = () => this.closeTabService.saveDataForForAddUsers = null;
 
-  getUsersDataSource = (canRefresh?: boolean) => {
+  classWrapper = (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
@@ -85,29 +82,6 @@ export class UserAddComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       })
     }
-
-  }
-  ngOnInit(): void {
-    this.getUsersDataSource();
-
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/mu/add')
-          this.getUsersDataSource(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
     this.userInputVals();
   }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-
 }

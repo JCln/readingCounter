@@ -1,25 +1,25 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { appItems, IRoleItems, IUserInfo } from 'interfaces/iuser-manager';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UserEditManagerService } from 'services/user-edit-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']
 })
-export class UserEditComponent implements AfterViewInit, OnDestroy {
+export class UserEditComponent extends FactoryONE {
   UUid: string = '';
   personalizeInfo: IUserInfo;
   provinceItemsData: any;
   dataSource: any;
-  subscription: Subscription[] = [];
+ 
 
   addUserData: appItems[] = [];
   // add role config
@@ -31,16 +31,17 @@ export class UserEditComponent implements AfterViewInit, OnDestroy {
     private interfaceManagerService: InterfaceManagerService,
     private route: ActivatedRoute,
     private router: Router,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
+    super(interactionService);
     this.detectRouteChange();
   }
   addAUser = () => {
     this.editUserManagerService.userEditA(this.UUid, this.dataSource);
   }
   nullSavedSource = () => this.closeTabService.saveDataForEditUsers = null;
-  private classWrapper = async (canRefresh?: boolean) => {
+  classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
@@ -62,24 +63,6 @@ export class UserEditComponent implements AfterViewInit, OnDestroy {
         this.classWrapper();
       })
     )
-  }
-
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr/mu/edit/'))
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
 
 }

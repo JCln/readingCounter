@@ -1,6 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedChartsModule } from 'src/app/shared/shared-charts.module';
-import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { AnalyzeComponent } from './analyze/analyze.component';
 import { BarAnlzPrfmComponent } from './bar-anlz-prfm/bar-anlz-prfm.component';
@@ -10,7 +10,6 @@ import { DashboardComponent } from './dashboard.component';
 import { BarDispersalrateComponent } from './dispersal-rate/bar-dispersalrate/bar-dispersalrate.component';
 import { DispersalRateComponent } from './dispersal-rate/dispersal-rate.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
-import { KarkardGridComponent } from './karkard-grid/karkard-grid.component';
 import { LineReadDailyComponent } from './line-read-daily/line-read-daily.component';
 import { MediaComponent } from './media/media.component';
 import { ReadTimeComponent } from './read-time/read-time.component';
@@ -31,13 +30,12 @@ import { UserOverallComponent } from './user-overall/user-overall.component';
     LineReadDailyComponent,
     TrvTimeComponent,
     CountInStatesComponent,
-    KarkardGridComponent,
     DispersalRateComponent,
     BarDispersalrateComponent,
     UserOverallComponent,
   ],
   imports: [
-    SharedPrimeNgModule,
+    CommonModule,
     SharedChartsModule,
     DashboardRoutingModule
   ]

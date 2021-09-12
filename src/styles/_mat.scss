@@ -1,13 +1,15 @@
 :host::ng-deep {
   .mat-select-value {
     font-family: $font_family;
-    font-size: 1.2rem;
+    font-size: $font_s;
+    color: var(--gray_700);
+    font-weight: 600;
   }
 
   .mat-select-value-text {
     font-family: $font_family;
-    font-size: 1.2rem;
-    color: $gray_600;
+    font-size: $font_s;
+    color: var(--gray_800);
   }
 
   .mat-dialog-container {
@@ -15,23 +17,38 @@
   }
 
   .mat-form-field-infix {
-    font-size: 1.2rem;
+    font-size: $font_s;
     font-weight: 600;
+  }
+
+  .mat-form-field {
+    text-align: right;
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: var(--gray_800);
   }
 
   .mat-select {
     font-family: $font_family;
+    font-weight: 600;
+    text-align: center;
   }
 
   .mat-select-arrow {
-    color: $gray_500;
+    color: var(--blue_400);
   }
 
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: $blue_gray_300;
+    color: var(--gray_800);
     font-family: $font_family;
     font-weight: 600;
+    font-size: $font_s;
+  }
+
+  .mat-radio-outer-circle {
+    border-color: var(--gray_800);
   }
 
   .mat-checkbox-layout .mat-checkbox-label {
@@ -39,6 +56,23 @@
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: $blue_gray_700;
+    color: var(--gray_800);
+  }
+
+  .mat-form-field.mat-focused .mat-form-field-label,
+  .mat-form-field-label {
+    color: var(--gray_800);
+  }
+
+  .mat-input-element {
+    color: var(--blue_700);
+  }
+
+  .mat-checkbox-frame {
+    border-color: var(--gray_500);
+  }
+
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: var(--gray_300);
   }
 }

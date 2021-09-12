@@ -15,35 +15,30 @@ export class UserLogginsService {
 
   columnSelectedUserLogs = (): IObjectIteratation[] => {
     return [
-      { field: 'loginDateTime', header: 'زمان', isSelected: false },
+      { field: 'loginDateTime', header: 'زمان', isSelected: true },
       { field: 'loginIp', header: 'IP', isSelected: true },
-      { field: 'wasSuccessful', header: 'موفق', isSelected: true },
+      { field: 'wasSuccessful', header: 'موفق', isSelected: true, isBoolean: true },
       { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
       { field: 'browserTitle', header: 'عنوان مرورگر', isSelected: true },
       { field: 'browserShortTitle', header: 'عنوان مرورگر', isSelected: false },
-      { field: 'browserEngine', header: 'موتور مرورگر', isSelected: true },
+      { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false },
       { field: 'browserType', header: 'نوع مرورگر', isSelected: false },
-      { field: 'osVersion', header: 'نسخه سیستم عامل', isSelected: true },
+      { field: 'osVersion', header: 'OS Version', isSelected: true },
       // { field: 'userId', header: 'کد کاربر', isSelected: true },
-      { field: 'osTitle', header: 'عنوان سیستم عامل', isSelected: true },
-      { field: 'osPlatform', header: 'پلتفرم', isSelected: true },
+      { field: 'osTitle', header: 'OS', isSelected: true },
+      { field: 'osPlatform', header: 'پلتفرم', isSelected: false },
       // { field: 'osShortTitle', header: 'عنوان سیستم عامل', isSelected: false },
-      { field: 'wrongPassword', header: 'گذرواژه', isSelected: true },
+      { field: 'wrongPassword', header: 'گذرواژه', isSelected: false },
       // { field: 'id', header: 'کد', isSelected: false },
       { field: 'userAgent', header: 'userAgent', isSelected: false },
     ];
   }
   getLogsDataSource = (UUID: string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETID(ENInterfaces.userLOGINS, UUID).subscribe((res: IUserLoggins[]) => {
-          resolve(res)
-        });
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETID(ENInterfaces.userLOGINS, UUID).subscribe((res: IUserLoggins[]) => {
+        resolve(res)
       });
-    } catch (e) {
-      console.error(e);
-
-    }
+    });
   }
   customizeSelectedColumns = (_selectCols: any) => {
     return _selectCols.filter(items => {

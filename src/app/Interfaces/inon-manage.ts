@@ -100,29 +100,69 @@ export interface IImportDynamicDefault {
     fromDate: string,
     toDate: string,
     counterReaderId: string,
-    readingPeriodId: number
+    readingPeriodId: number,
+    kindId?: number,
+    period?: number
 }
-export interface IImportDynamic {
-    fromEshterak: string,
-    toEshterak: string,
+export interface IBatchImportDataResponse {
+    trackNumber: number,
+    count: number,
+    errorCount: number,
+    counterReaderName: string,
+    fragmentDetailId: string,
+    listNumber: string
+}
+export interface IImportDataResponse {
+    trackNumber: number,
+    count: number,
+    errorCount: number,
+    counterReaderName: string
+}
+export interface IImportSimafaBatchReq {
+    routeAndReaderIds: [
+        {
+            routeId: string,
+            counterReaderId: string | number
+        }
+    ],
+    readingProgramId: string,
+    fragmentMasterId: string,
     zoneId: number,
     alalHesabPercent: number,
     imagePercent: number,
     hasPreNumber: boolean,
     displayBillId: boolean,
     displayRadif: boolean,
-    fromDate: string,
-    toDate: string,
+    year: number,
+    readingPeriodId: number
+}
+export interface IImportSimafaSingleReq {
     counterReaderId: string,
-    kindId?: number,
-    period?: number
+    readingProgramId: string,
+    zoneId: number,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    year: number,
+    readingPeriodId: number
 }
-export interface IImportDynamicRes {
-    trackNumber: number,
-    count: number,
-    errorCount: number
+export interface IImportSimafaReadingProgramsReq {
+    readingPeriodId: number,
+    year: number,
+    zoneId: number
 }
-
+export interface IReadingProgramRes {
+    id: string,
+    zoneId: number,
+    fromEshterak: string,
+    toEshterak: string,
+    listNumber: string,
+    year: number,
+    readingPeriodId: number,
+    canContinue: boolean
+}
 export interface IChangePassword {
     oldPassword: string,
     newPassword: string,

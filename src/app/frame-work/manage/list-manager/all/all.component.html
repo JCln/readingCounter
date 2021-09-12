@@ -1,104 +1,29 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true">
-
-    <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <div class="header_icons_wrap">
-            <div class="right_side">
-                <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'allReads')"
-                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
-                    <div class="tooltip_text">دریافت pdf</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'allReads', 'xlsx')"
-                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
-                    <div class="tooltip_text">دریافت Excel</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'allReads', 'csv')"
-                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
-                    <div class="tooltip_text">دریافت CSV</div>
-                </i>
-            </div>
-            <div class="left_side">
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i>
-                <i (click)="toPrePage()" class="tooltip _circle_border p_icons pi pi-arrow-left">
-                    <div class="tooltip_text_right">بازگشت به صفحه قبلی</div>
-                </i>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}" pResizableColumn>
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
-            </th>
-            <th style="width: 4rem"></th>
-        </tr>
-        <tr>
-            <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
-                </p-columnFilter>
-                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
-            </th>
-            <th style="width: 4rem"></th>
-        </tr>
-    </ng-template>
-
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns">
-                <span class="ui-column-title">{{col.header}}</span>
-                <ng-container *ngIf="col.isBoolean; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
-                </ng-container>
-                <ng-template #elseTemplate>
-                    <ng-container *ngIf="col.field === 'masrafStateId';else showText">
-                        <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
-                            <div class="tooltip_text">عادی</div>
-                        </i>
-                        <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
-                            <div class="tooltip_text">پایین</div>
-                        </i>
-                        <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
-                            <div class="tooltip_text">بالا</div>
-                        </i>
-                        <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">0
-                            <div class="tooltip_text">صفر</div>
-                        </i>
-                        <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
-                            <div class="tooltip_text">غیرقابل محاسبه</div>
-                        </i>
-                    </ng-container>
-                    <ng-template #showText>
-                        {{dataSource[col.field]}}
-                    </ng-template>
-                </ng-template>
-            </td>
-            <td *ngIf="!isModify" (click)="routeToWoui(dataSource)">
-                <span class="ui-column-title">بررسی عکس/صوت</span>
-                <i class="tooltip p_icons fas fa-camera">
-                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
-                </i>
-            </td>
-            <td *ngIf="isModify">
-                <span class="ui-column-title">اصلاح</span>
-                <i (click)="routeToOffload(dataSource)" class="tooltip p_icons pi pi-pencil">
-                    <div class="tooltip_text_right">اصلاح</div>
-                </i>
-            </td>
-        </tr>
-    </ng-template>
-
-</p-table>
-
-<section *ngIf="!dataSource || dataSource.length === 0">
-    <tr class="empty_data">
-        موردی پیدا نشد
-    </tr>
-</section>
+<main style="position: relative; ">
+    <app-prime-table [hidden]="showCarousel" 
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="'allReads'"
+    [_checkUpName]="'allComponent'"
+    [_selectedColumnsToRemember]="'selectedListManagerAll'"
+    [_numberOfExtraColumns]="[1]"
+    [_rowsPerPage]="[10,20,50,100, 500, 1000]"
+    [_sessionName]="'allComponent'"
+    [_backToPreviousEnabled]=true
+    [_allComponentIsModify]="isModify"
+    [_backToPreviousText]="'بازگشت به صفحه قبلی'"
+    (refreshedTable)="refreshTable()"
+    (backedToPrevious)="toPrePage()"
+    (routedToOffload)="routeToOffload($event)"
+    > 
+    </app-prime-table>
+    
+    <app-carousel *ngIf="showCarousel" 
+    [dataSource]="carouselDataSource"
+    (cancelClicked)="carouselCancelClicked()"
+    (prevClicked)="carouselPrevItem()"
+    (nextClicked)="carouselNextItem()"
+    >
+    <app-offload></app-offload>
+    </app-carousel>
+</main>

@@ -53,10 +53,15 @@ export class CloseTabService {
   saveDataForOffloadModify: any;
   // import dynamic
   saveDataForImportDynamic: any;
+  saveDataForSimafaBatch: any;
+  saveDataForSimafaReadingPrograms: any;
+  saveDataForAssessPre: any;
+  saveDataForAssessAdd: any;
   // SEARCH
   saveDataForFollowUp: any;
   saveDataForSearchMoshtarakin: any;
   saveDataForSearchPro: any;
+  saveDataForSearchSimple: any;
   // list manager
   saveDataForLMPD: any;
   saveDataForLMAll: any;
@@ -99,7 +104,7 @@ export class CloseTabService {
       case '/wr/m/r/qr':
         this.saveDataForQotrManager = '';
         break;
-      case '/wr/m/r/cr':
+      case '/wr/m/r/rpt':
         this.saveDataForCounterReport = '';
         break;
       case '/wr/m/r/nob':
@@ -173,8 +178,20 @@ export class CloseTabService {
         break;
       case '/wr/m/mrm':
         break;
-      case '/wr/imd':
+      case '/wr/imp/imd':
         this.saveDataForImportDynamic = '';
+        break;
+      case '/wr/imp/assesspre':
+        this.saveDataForAssessPre = '';
+        break;
+      case '/wr/imp/assessadd':
+        this.saveDataForAssessAdd = '';
+        break;
+      case '/wr/imp/simafa/rdpg':
+        this.saveDataForSimafaReadingPrograms = '';
+        break;
+      case '/wr/imp/simafa/batch':
+        this.saveDataForSimafaBatch = '';
         break;
       case '/wr/profile':
         break;
@@ -205,6 +222,9 @@ export class CloseTabService {
         break;
       case '/wr/m/s/searchPro':
         this.saveDataForSearchPro = '';
+        break;
+      case '/wr/m/s/simple':
+        this.saveDataForSearchSimple = '';
         break;
       // 
       case '/wr/privacy':
@@ -306,6 +326,7 @@ export class CloseTabService {
     this.saveDictionaryForAllUsers = '';
     this.saveDataForSearchMoshtarakin = '';
     this.saveDataForSearchPro = '';
+    this.saveDataForSearchSimple = '';
     this.saveDataForEditUsers = '';
     this.saveDictionaryForEditUsers = '';
     this.saveDataForForAddUsers = '';
@@ -325,6 +346,10 @@ export class CloseTabService {
     this.saveDataForLastStates = '';
     this.saveDataForOffloadModify = '';
     this.saveDataForImportDynamic = '';
+    this.saveDataForAssessPre = '';
+    this.saveDataForAssessAdd = '';
+    this.saveDataForSimafaReadingPrograms = '';
+    this.saveDataForSimafaBatch = '';
     this.saveDataForLMPD = '';
     this.saveDataForLMAll = '';
     this.saveDataForLMAll_extra = '';

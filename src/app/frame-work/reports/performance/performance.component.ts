@@ -1,17 +1,17 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IReadingReportWithZoneIDsReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-performance',
   templateUrl: './performance.component.html',
   styleUrls: ['./performance.component.scss']
 })
-export class PerformanceComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PerformanceComponent extends FactoryONE {
   readingReportReq: IReadingReportWithZoneIDsReq = {
     zoneId: 0,
     fromDate: '',
@@ -38,39 +38,20 @@ export class PerformanceComponent implements OnInit, AfterViewInit, OnDestroy {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
+ 
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
+    public interactionService: InteractionService,
     public route: ActivatedRoute
-  ) { }
+  ) {
+    super(interactionService);
+  }
 
   classWrapper = async () => {
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/anlz/prfm') {
-          this.classWrapper();
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   routeToChild = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/anlz/prfm/res');

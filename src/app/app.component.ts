@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
+import { fromEvent, merge, Observable, Observer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { SpinnerWrapperService } from './services/spinner-wrapper.service';
 
@@ -11,6 +13,7 @@ import { SpinnerWrapperService } from './services/spinner-wrapper.service';
 })
 export class AppComponent implements OnInit {
   loadingRouteConfig: boolean = false;
+  netConnectionStatus: boolean = true;
 
   constructor(
     private config: PrimeNGConfig,
@@ -19,11 +22,19 @@ export class AppComponent implements OnInit {
   ) {
 
     this.router.events.subscribe(event => {
-      if (event instanceof RouteConfigLoadStart) {
-        this.spinnerWrapperService.startLoading();
-      } else if (event instanceof RouteConfigLoadEnd) {
-        this.spinnerWrapperService.stopLoading();
-      }
+      this.createOnline$().subscribe(isOnline => {
+        if (isOnline) {
+          this.netConnectionStatus = true;
+
+          if (event instanceof RouteConfigLoadStart) {
+            this.spinnerWrapperService.startLoading();
+          } else if (event instanceof RouteConfigLoadEnd) {
+            this.spinnerWrapperService.stopLoading();
+          }
+        }
+        else
+          this.netConnectionStatus = false;
+      });
     });
   }
 
@@ -58,5 +69,14 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.setTraslateToPrimeNgTable();
+  }
+  createOnline$() {
+    return merge<any>(
+      fromEvent(window, 'offline').pipe(map(() => false)),
+      fromEvent(window, 'online').pipe(map(() => true)),
+      new Observable((sub: Observer<boolean>) => {
+        sub.next(navigator.onLine);
+        sub.complete();
+      }));
   }
 }

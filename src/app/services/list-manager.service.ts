@@ -17,12 +17,12 @@ export class ListManagerService {
   private saveTo: number = 0;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
-  private listManagerAll: IObjectIteratation[] = [
+  private _listManagerAll: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: false },
     { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
     { field: 'radif', header: 'ش.پرونده', isSelected: false },
     { field: 'eshterak', header: 'اشتراک', isSelected: true },
-    { field: 'zoneId', header: 'ناحیه', isSelected: false },
+    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
     { field: 'qeraatCode', header: 'قرائت', isSelected: false },
     { field: 'firstName', header: 'نام', isSelected: true },
     { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
@@ -65,26 +65,27 @@ export class ListManagerService {
     { field: 'x', header: 'X', isSelected: false },
     { field: 'gisAccuracy', header: 'دقت', isSelected: false },
     { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-    { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
+    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
     { field: 'masraf', header: 'مصرف', isSelected: false },
-    { field: 'eslahType', header: 'اصلاح', isSelected: false },
+    // { field: 'eslahType', header: 'اصلاح', isSelected: false },
+    { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },    
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
     { field: 'dateDifference', header: 'طول دوره', isSelected: false },
     { field: 'description', header: 'توضیحات', isSelected: false }
   ]
 
   columnLMAll = (): IObjectIteratation[] => {
-    return this.listManagerAll;
+    return this._listManagerAll;
   }
   columnSelectedLMPerDay = (): IObjectIteratation[] => {
     return [
       { field: 'day', header: 'روز', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
-      { field: 'readCount', header: 'تعداد قرائت', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
       { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
       { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
-      { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
+      { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
       { field: 'distance', header: 'فاصله', isSelected: true, readonly: true },
       { field: 'maneCount', header: 'تعداد مانع', isSelected: false, readonly: true },
       { field: 'manePercent', header: 'درصد مانع', isSelected: false, readonly: true },
@@ -101,8 +102,8 @@ export class ListManagerService {
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
       { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
-      { field: 'overalDistance', header: 'مسافت کل', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل', isSelected: true, readonly: true }
+      { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
+      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true }
 
     ];
   }
@@ -121,12 +122,9 @@ export class ListManagerService {
     this.saveTo === 0 ? this.closeTabService.saveDataForLMAll = null : this.closeTabService.saveDataForLMAll_extra = null
   }
   getLMAll = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
-    // console.log(this.closeTabService.saveDataForLMAll);
-    // if (!this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
-    //   return this.closeTabService.saveDataForLMAll;
     if (this.readingListGUID === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
       return this.closeTabService.saveDataForLMAll;
-    if (this.readingListGUID_extra === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
+    if (this.readingListGUID_extra === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll_extra))
       return this.closeTabService.saveDataForLMAll_extra;
 
     if (this.whereToSave() == 0) {
@@ -198,6 +196,10 @@ export class ListManagerService {
         item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
       if (item.gisAccuracy)
         item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+      if (item.x)
+        item.x = this.utilsService.getRange(item.x)
+      if (item.y)
+        item.y = this.utilsService.getRange(item.y)
     })
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {

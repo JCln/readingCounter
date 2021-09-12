@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
@@ -50,10 +51,10 @@ export class ReadingReportManagerService {
     { field: 'max', header: 'بیشینه', isSelected: true, readonly: false },
     { field: 'average', header: 'میانگین', isSelected: true, readonly: false },
     { field: 'variance', header: 'واریانس', isSelected: true, readonly: false },
-    { field: 'standardDeviation', header: 'انحراف معیار', isSelected: true, readonly: false },
+    { field: 'standardDeviation', header: 'انحراف از معیار', isSelected: true, readonly: false },
     { field: 'median', header: 'میانه', isSelected: true, readonly: false },
     { field: 'mode', header: 'مٌد', isSelected: true, readonly: false },
-    { field: 'duration', header: 'مدت', isSelected: false, readonly: false }
+    { field: 'duration', header: 'مدت(h)', isSelected: false, readonly: false }
   ];
   private _RRMaster = [
     // { field: 'zoneId', header: 'کد ناحیه', isSelected: true, readonly: false },
@@ -121,24 +122,24 @@ export class ReadingReportManagerService {
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
     // { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
     // { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
-    { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
-    { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true, ltr: true },
+    { field: 'duration', header: 'مدت(h)', isSelected: false, readonly: true },
+    { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
     { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
     { field: 'faqedCount', header: 'فاقد', isSelected: true, readonly: true },
     { field: 'maneCount', header: 'مانع', isSelected: true, readonly: true },
     { field: 'xarabCount', header: 'خراب', isSelected: true, readonly: true },
     { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
     { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true }
   ]
   private _RRKarkardDaily = [
     { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
     { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
     { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
-    { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
-    { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
+    { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
+    { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
     { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
     { field: 'faqedCount', header: 'فاقد', isSelected: true, readonly: true },
     { field: 'maneCount', header: 'مانع', isSelected: true, readonly: true },
@@ -152,15 +153,15 @@ export class ReadingReportManagerService {
   private _RRDisposalHours = [
     { field: 'dayJalali', header: 'روز', isSelected: true, readonly: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
-    { field: 'overalCount', header: 'تعداد', isSelected: true, readonly: true },
+    { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
     { field: '_8To10', header: '8 - 10', isSelected: true, readonly: true },
     { field: '_10To12', header: '10 - 12', isSelected: true, readonly: true },
     { field: '_12To14', header: '12 - 14', isSelected: true, readonly: true },
     { field: '_14To16', header: '14 - 16', isSelected: true, readonly: true },
     { field: '_16To18', header: '16 - 18', isSelected: true, readonly: true },
     { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true }
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true }
   ];
 
   columnRRAnalyzeByParam = (): IObjectIteratation[] => {
@@ -193,7 +194,8 @@ export class ReadingReportManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private _location: Location
+    private _location: Location,
+    private router: Router
   ) { }
 
   // CALL APIs
@@ -216,6 +218,15 @@ export class ReadingReportManagerService {
       console.error(error);
     }
 
+  }
+  postRRManagerOnMap = (method: ENInterfaces, val: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
+        if (this.utilsService.isNull(res))
+          this.emptyMessage();
+        resolve(res)
+      })
+    });
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
@@ -349,7 +360,7 @@ export class ReadingReportManagerService {
     this._location.back();
   }
   routeToMapGIS = () => {
-    this.utilsService.routeToByExtras('/wr', { state: { test: this.readingReportGISReq } });
+    this.router.navigate(['/wr', this.readingReportGISReq]);
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

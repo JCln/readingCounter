@@ -55,8 +55,8 @@ export class SectorsManagerService {
       { field: 'title', header: 'عنوان', isSelected: true },
       { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
       // { field: 'govermentalCode', header: 'کشور', isSelected: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, ltr: true },
       // { field: 'fromRadif', header: 'عنوان', isSelected: true },
       // { field: 'toRadif', header: 'کشور', isSelected: true },
       // { field: 'host', header: 'ترتیب', isSelected: true },
@@ -89,13 +89,12 @@ export class SectorsManagerService {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
 
-  sectorsAddEdit = (apiUse: ENInterfaces, value: any) => {
-    console.log(value);
-
-    this.interfaceManagerService.POSTBODY(apiUse, value).subscribe((res: IResponses) => {
-      if (res) {
+  sectorsAddEdit = (apiUse: ENInterfaces, value: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(apiUse, value).toPromise().then((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);
-      }
+        resolve(res);
+      })
     })
   }
   sectorsDelete = (apiUse: ENInterfaces, id: any) => {

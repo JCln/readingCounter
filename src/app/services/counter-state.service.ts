@@ -20,13 +20,13 @@ export class CounterStateService {
 
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return [
-      { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
+      { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: false, isNumber: true },
       { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: true },
-      { field: 'clientOrder', header: 'ترتیب', isSelected: true },
+      { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+      { field: 'clientOrder', header: 'ترتیب', isSelected: false, isNumber: true },
       { field: 'canEnterNumber', header: 'ثبت رقم', isSelected: true, isBoolean: true },
       { field: 'isMane', header: 'مانع', isSelected: true, isBoolean: true },
-      { field: 'canNumberBeLessThanPre', header: 'رقم فعلی کمتر از قبلی', isSelected: false, isBoolean: true },
+      { field: 'canNumberBeLessThanPre', header: 'فعلی کمتر از قبلی', isSelected: false, isBoolean: true },
       { field: 'isTavizi', header: 'تعویضی', isSelected: true, isBoolean: true },
       { field: 'shouldEnterNumber', header: 'اجبار رقم', isSelected: true, isBoolean: true },
       { field: 'isXarab', header: 'خراب', isSelected: true, isBoolean: true },

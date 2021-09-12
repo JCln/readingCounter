@@ -27,7 +27,7 @@
 .hour {
   width: .35rem;
   height: $font_xxs;
-  background: $blue_700;
+  background: var(--blue_700);
 
   @media (min-width: 500px) {
     height: $font_xxs;
@@ -41,7 +41,7 @@
 .minute {
   width: .3rem;
   height: 1.3rem;
-  background: $blue_700;
+  background: var(--blue_700);
 
   @media (min-width: 500px) {
     height: $font_m;
@@ -60,7 +60,7 @@
   transform: translate(50%, -50%);
   width: $font_05;
   height: $font_05;
-  background-color: $blue_700;
+  background-color: var(--blue_700);
   border-radius: 50%;
   vertical-align: middle;
 

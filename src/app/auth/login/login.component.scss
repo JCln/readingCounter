@@ -1,6 +1,7 @@
 @import 'variable.scss';
 @import 'input.scss';
 @import 'button.scss';
+@import 'tooltip.scss';
 
 .content {
   display: grid;
@@ -13,10 +14,10 @@
 main {
   max-width: 23rem;
   text-align: center;
-  padding: 2rem 2rem 1rem;
+  padding: $font_2 $font_2 $font_xs;
   border-radius: $border_15;
-  background: $gray_100;
-  box-shadow: 2px 2px 5px 0px $gray_400;
+  background: var(--gray_100);
+  box-shadow: 2px 2px 5px 0px var(--gray_400);
 
   @media (max-width: 550px) {
     padding: 0 $font_xxs $font_05;
@@ -24,7 +25,7 @@ main {
 }
 
 .input__icons {
-  color: $blue_700;
+  color: var(--blue_700);
 
   i {
     position: absolute;
@@ -38,7 +39,7 @@ main {
 
 .title {
   font-weight: 600;
-  color: $blue_900;
+  color: var(--blue_900);
   font-size: 2.5rem;
   margin-bottom: $font_s;
 
@@ -49,17 +50,17 @@ main {
 
 ._inputs {
   margin-bottom: $font_2;
-  border: $blue_900;
+  border: var(--blue_900);
 
   input::placeholder {
-    color: $blue_700;
+    color: var(--blue_700);
   }
 
   .input_1 {
     text-align: center;
     max-width: 19rem;
     padding: 0 $font_3 0 $font_s;
-    color: $blue_700 !important;
+    color: var(--blue_700) !important;
   }
 }
 
@@ -69,19 +70,58 @@ main {
 }
 
 .btn_1 {
-  color: $white;
-  background: $blue_700;
+  color: var(--white);
+  background: var(--blue_700);
 }
 
 .version {
-  color: $blue_900;
+  color: var(--blue_900);
   font-size: $font_m;
   font-weight: 600;
-  margin-top: $font_2;
 }
 
 input,
 input:-internal-autofill-selected {
-  background-color: $white !important;
-  color: $blue_700 !important;
+  background-color: var(--white) !important;
+  color: var(--blue_700) !important;
+}
+
+
+/* VERSION INFO*/
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: $font_2;
+
+  i {
+    background: var(--white);
+  }
+
+  ._info_each_item {
+    position: absolute;
+    overflow: auto;
+    left: 50%;
+    background: var(--white);
+    transform: translate(-50%, -50%);
+    border-radius: $border_15;
+    padding: $font_05 $font_xs;
+    box-shadow: 0 0 1px 3px var(--gray_400);
+
+    div {
+      display: flex;
+      justify-content: flex-end;
+      color: var(--gray_800);
+      text-align: right;
+      font-size: $font_s;
+      font-weight: 600;
+
+      &::after {
+        content: '\2713';
+        color: var(--green_500);
+        padding: 0 0 0 .3rem;
+      }
+    }
+  }
 }

@@ -1,5 +1,6 @@
 <ul class="ul" [hidden]="sid_isSmall || smallScreen">
-    <li *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)" routerLinkActive="active">
+    <li *ngFor="let item of currentRoute; index as i" (click)="toggleSubItems(item)" routerLinkActive="active"
+        [@openClose]="item.isOpen ? 'openSubItems' : 'closeSubItems'">
         <a class="btn">
             <div class="ul_items">
                 <i class="{{item.cssClass}} icons"></i>
@@ -9,10 +10,11 @@
                 </div>
             </div>
         </a>
-        <div class="sub_item_1" *ngFor="let subItem of item.subItems" (click)="$event.stopPropagation()"
-            [routerLink]="subItem.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-            [hidden]="!item.isOpen">
-            {{subItem.title}}
+        <div *ngIf="item.isOpen">
+            <div class="sub_item_1" *ngFor="let subItem of item.subItems" (click)="$event.stopPropagation()"
+                [routerLink]="subItem.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                {{subItem.title}}
+            </div>
         </div>
     </li>
 </ul>

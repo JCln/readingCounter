@@ -1,0 +1,38 @@
+@mixin _borders {
+  border-radius: 0;
+  border-right: 1px solid var(--gray_300);
+  padding-right: .87rem;
+}
+
+._theme_mode {
+  margin-left: 0;
+  font-size: $font_m;
+  cursor: pointer;
+
+  .fa-sun,
+  .fa-moon {
+    padding: .25rem;
+    box-shadow: 0 0 5px 0px;
+    border-radius: $border_50;
+  }
+
+  .fa-sun {
+    color: yellow;
+  }
+
+  .fa-moon {
+    color: var(--blue_700);
+    background-color: var(--gray_300);
+  }
+
+  @media (min-width: 700px) {
+
+    .fa-sun,
+    .fa-moon {
+      padding: $font_05;
+    }
+
+    margin-left: $font_xs;
+    @include _borders();
+  }
+}

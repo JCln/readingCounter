@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingReportKarkard } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 
@@ -14,7 +13,7 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
 export class KarkardDaylyResComponent implements OnInit {
   dataSource: IReadingReportKarkard[] = [];
   karbariDictionary: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
+ 
 
   _selectCols: any[] = [];
   _selectedColumns: any[];

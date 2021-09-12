@@ -2,8 +2,6 @@
 @import 'button.scss';
 @import 'input.scss';
 @import 'media.scss';
-@import 'primeNG.scss';
-@import 'tooltip.scss';
 
 .over_all {
   display: grid;
@@ -16,8 +14,8 @@
 @include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(25rem, auto)));
 
 .content {
-  background: $gray_100;
-  box-shadow: 1px 1px 8px 4px $gray_400;
+  background: var(--gray_100);
+  box-shadow: 1px 1px 8px 4px var(--gray_400);
   text-align: center;
   padding: $font_2 0;
   border-radius: $border_15;
@@ -35,7 +33,7 @@ input {
 }
 
 .title {
-  color: $blue_400;
+  color: var(--blue_400);
   text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
@@ -44,24 +42,24 @@ input {
 .change_pass {
 
   button {
-    background: $blue_400;
+    background: var(--blue_400);
     margin: $font_2 auto;
-    color: $white;
+    color: var(--white);
     width: 100%;
   }
 }
 
 input {
   text-align: center;
-  color: $gray_500;
+  color: var(--gray_500);
   margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px $gray_400;
+  box-shadow: 1px 1px 8px 1px var(--gray_400);
 }
 
 ._choose_file {
   width: 100%;
-  border: 2px solid $blue_400;
-  color: $blue_400;
+  border: 2px solid var(--blue_400);
+  color: var(--blue_400);
   text-align: center;
   border-radius: 100vmax;
   margin-bottom: 1rem;
@@ -75,18 +73,18 @@ input {
   white-space: nowrap;
   width: 100%;
   padding: .5rem;
-  background-color: $white;
-  color: $gray_600;
+  background-color: var(--white);
+  color: var(--gray_600);
   font-size: 1.3rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 1px 1px 2px 0px $gray_400;
-  border: 1px solid $gray_500;
+  box-shadow: 1px 1px 2px 0px var(--gray_400);
+  border: 1px solid var(--gray_500);
 }
 
 .icon_android,
 small {
-  color: $green_500;
+  color: var(--green_500);
   margin: 0 .4rem;
 }
 
@@ -104,15 +102,33 @@ small {
   padding: .5rem;
   width: 100%;
   max-width: 19rem;
-  background-color: $white;
-  color: $gray_600;
+  background-color: var(--white);
+  color: var(--gray_600);
   text-align: center;
   border-radius: $border_15;
   font-size: 1.3rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 1px 1px 2px 0px $gray_400;
+  box-shadow: 1px 1px 2px 0px var(--gray_400);
   border: 1px solid;
+}
+
+progress {
+  position: relative;
+  width: 100%;
+  padding: $font_2;
+  margin-top: $font_xs;
+
+  &::after {
+    content: attr(value)'%';
+    position: absolute;
+
+    font-size: $font_l;
+    font-weight: 600;
+    color: var(--gray_400);
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 input[type="file"] {

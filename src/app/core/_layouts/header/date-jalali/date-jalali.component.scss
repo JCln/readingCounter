@@ -6,16 +6,20 @@
     font-size: 1.2rem !important;
     border: none;
     border-radius: 15px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     height: 30px;
-    width: auto !important;
+    width: 5.5rem !important;
     outline: none;
     text-align: center;
     padding: 1.1rem 0;
     background: transparent;
-    color: $blue_700 !important;
+    color: var(--blue_700) !important;
     cursor: pointer;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    // @media (min-width:550px) {
+    //   width: auto !important;
+    // }
   }
 
   #datepicker.ui-widget-content {
@@ -37,8 +41,8 @@
   }
 
   .dp-current-location-btn {
-    background: $red_500 !important;
-    border: 1px solid $red_500 !important;
+    background: var(--red_500) !important;
+    border: 1px solid var(--red_500) !important;
   }
 
   .dp-calendar-nav-container-left,
