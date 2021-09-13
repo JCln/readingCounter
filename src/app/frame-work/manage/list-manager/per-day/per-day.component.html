@@ -18,6 +18,22 @@
                     [(ngModel)]="dataSource[mainDatas.field]">
             </div>
         </div>
+        <div class="check_boxes">
+            <mat-checkbox [disabled]="true" name="hasPreNumber" [(ngModel)]="dataSource.hasPreNumber">رقم قبلی
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="displayBillId" [(ngModel)]="dataSource.displayBillId">شناسه قبض
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="displayRadif" [(ngModel)]="dataSource.displayRadif">ش.پرونده
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="isBazdid" [(ngModel)]="dataSource.isBazdid">بازدید
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="isRoosta" [(ngModel)]="dataSource.isRoosta">روستا
+            </mat-checkbox>
+        </div>
     </form>
 
 </section>

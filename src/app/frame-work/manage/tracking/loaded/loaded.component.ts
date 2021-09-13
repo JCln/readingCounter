@@ -20,7 +20,7 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
   styleUrls: ['./loaded.component.scss']
 })
 export class LoadedComponent extends FactoryONE {
- 
+
 
   dataSource: ITracking[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -60,10 +60,6 @@ export class LoadedComponent extends FactoryONE {
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private rowToImported = async (row: string, desc: string, rowIndex: number) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row, desc);
-    this.refetchTable(rowIndex);
-  }
   backToImportedConfirmDialog = (rowDataAndIndex: object) => {
     const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
@@ -74,9 +70,10 @@ export class LoadedComponent extends FactoryONE {
           isInput: true
         }
       });
-      dialogRef.afterClosed().subscribe(desc => {
+      dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          this.rowToImported(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
+          await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, rowDataAndIndex['dataSource'], desc);
+          this.refreshTable();
         }
       })
     })

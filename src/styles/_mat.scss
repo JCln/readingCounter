@@ -76,3 +76,16 @@
     background-color: var(--gray_300);
   }
 }
+
+.radio_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.check_boxes {
+  border-radius: $border_15;
+  box-shadow: 0px 0px 2px 1px var(--blue_800);
+  background: var(--white);
+  padding: $font_s;
+  margin-top: $font_05;
+}

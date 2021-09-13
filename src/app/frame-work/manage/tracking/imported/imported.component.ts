@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -19,24 +18,9 @@ import { ImportListDgComponent } from './import-list-dg/import-list-dg.component
 @Component({
   selector: 'app-imported',
   templateUrl: './imported.component.html',
-  styleUrls: ['./imported.component.scss'],
-  animations: [
-    trigger('rowExpansionTrigger', [
-      state('void', style({
-        transform: 'translateX(-10%)',
-        opacity: 0
-      })),
-      state('active', style({
-        transform: 'translateX(0)',
-        opacity: 1
-      })),
-      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
-    ])
-  ]
+  styleUrls: ['./imported.component.scss']
 })
 export class ImportedComponent extends FactoryONE {
- 
-
   dataSource: ITracking[] = [];
   filterZoneDictionary: IDictionaryManager[] = [];
 
@@ -106,9 +90,6 @@ export class ImportedComponent extends FactoryONE {
     });
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private removeRow = async (rowData: string, desc: string) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowData, desc);
-  }
   firstConfirmDialog = (rowDataAndIndex: object) => {
     const title = EN_messages.reason_deleteRoute;
     return new Promise(() => {
@@ -120,9 +101,10 @@ export class ImportedComponent extends FactoryONE {
           isDelete: true
         }
       });
-      dialogRef.afterClosed().subscribe(desc => {
+      dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          this.removeRow(rowDataAndIndex['dataSource'], desc)
+          await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowDataAndIndex['dataSource'], desc);
+          this.refreshTable();
         }
       })
     })

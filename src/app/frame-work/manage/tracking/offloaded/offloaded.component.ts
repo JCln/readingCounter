@@ -74,8 +74,10 @@ export class OffloadedComponent extends FactoryONE {
     this.trackingManagerService.routeToOffloadModify(dataSource);
   }
   backToReading = async (rowDataAndIndex: object) => {
-    if (await this.trackingManagerService.TESTbackToConfirmDialog(rowDataAndIndex['dataSource'], EN_messages.toReading))
+    if (await this.trackingManagerService.TESTbackToConfirmDialog(rowDataAndIndex['dataSource'], EN_messages.toReading)) {
       this.refetchTable(rowDataAndIndex['ri']);
+      this.refreshTable();
+    }
   }
   hasNextBazdid = async (row: ITracking) => {
     let hasbazdid = await this.trackingManagerService.hasNextBazdidConfirmDialog(EN_messages.insert_nextBazdidDate);

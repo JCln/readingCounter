@@ -262,7 +262,7 @@ export interface IOnOffLoadFlat {
     masrafStateId: number,
     description: string
 }
-export interface IListManagerPD {
+export interface IOffLoadPerDay {
     trackNumber: number,
     listNumber: string,
     counterReaders: string,
@@ -270,6 +270,13 @@ export interface IListManagerPD {
     toEshterak: string,
     overalCount: number,
     readCount: number,
+    maneCount: number,
+    manePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    isBazdid: boolean,
+    isRoosta: boolean,
     overalDistance: number,
     overalDuration: number,
     offLoadPerDayHistory: [

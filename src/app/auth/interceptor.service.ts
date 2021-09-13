@@ -26,28 +26,30 @@ export class InterceptorService implements HttpInterceptor {
     return next.handle(req)
       .pipe(
         catchError((error => {
-          if (
-            req.url.includes('login')
-          ) {
-            return throwError(() => error)
-          }
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
+              if (req.url.includes('login')) {
+                this.showProperMessage(error);
+                return;
+              }
               if (!this.authService.isAuthUserLoggedIn()) {
                 this.authService.goOutInMessage();
                 this.authService.logout();
               }
               else {
-                if (error.error.message)
-                  this.authService.noAccessMessage(error.error.message);
-                else
-                  this.authService.noAccessMessage();
+                this.showProperMessage(error);
               }
             }
           }
           return throwError(() => error);
         }))
       )
+  }
+  private showProperMessage = (error: any) => {
+    if (error.error.message)
+      this.authService.noAccessMessage(error.error.message);
+    else
+      this.authService.noAccessMessage();
   }
   private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
     return req.clone({

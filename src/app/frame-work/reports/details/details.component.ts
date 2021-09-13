@@ -39,7 +39,7 @@ export class DetailsComponent extends FactoryONE {
   karbariDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
- 
+
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
@@ -49,7 +49,7 @@ export class DetailsComponent extends FactoryONE {
     super(interactionService);
   }
 
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();

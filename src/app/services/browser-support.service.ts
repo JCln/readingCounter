@@ -127,6 +127,20 @@ export class BrowserSupportService {
         return ENBrowserStatus.warn;
       return ENBrowserStatus.alarm;
     }
+    if (temp === ENBrowserInfo.Opera.title) {
+      if (this.browserVersion > this.envService.browserVersions.Touch.opera.normal)
+        return ENBrowserStatus.good;
+      if (this.browserVersion > this.envService.browserVersions.Touch.opera.alert && this.browserVersion <= this.envService.browserVersions.Touch.opera.normal)
+        return ENBrowserStatus.warn;
+      return ENBrowserStatus.alarm;
+    }
+    if (temp === ENBrowserInfo.Safari.title) {
+      if (this.browserVersion > this.envService.browserVersions.Touch.safari.normal)
+        return ENBrowserStatus.good;
+      if (this.browserVersion > this.envService.browserVersions.Touch.safari.alert && this.browserVersion <= this.envService.browserVersions.Touch.safari.normal)
+        return ENBrowserStatus.warn;
+      return ENBrowserStatus.alarm;
+    }
     if (temp === ENBrowserInfo.IE.title) {
       return ENBrowserStatus.alarm;
     }

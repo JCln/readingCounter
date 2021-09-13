@@ -1,7 +1,7 @@
 @import 'primeNG.scss';
 @import 'input.scss';
 @import 'button.scss';
-@import 'mat';
+@import 'mat.scss';
 
 form {
   font-family: $font_family;
@@ -114,11 +114,6 @@ hr {
 
 
 // materials 
-.radio_group {
-  display: flex;
-  justify-content: space-evenly;
-}
-
 .radio_button {
   font-size: $font_s;
   font-weight: 700;

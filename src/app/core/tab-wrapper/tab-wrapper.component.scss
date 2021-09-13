@@ -27,7 +27,7 @@ li {
   font-weight: 600;
   background: var(--gray_400);
   cursor: pointer;
-  padding: 0;
+  padding: .2rem;
 
   @media (min-width: 700px) {
     padding: 0.2rem 0 0;

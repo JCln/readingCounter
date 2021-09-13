@@ -1,8 +1,8 @@
-@import 'variable.scss';
+@import 'primeNG';
 @import 'input.scss';
 @import 'button.scss';
-@import 'primeNG';
 @import 'tooltip.scss';
+@import '_mat.scss';
 
 
 .content {
@@ -39,6 +39,17 @@ input {
   color: var(--gray_500);
   margin: 0 auto;
   box-shadow: 1px 1px 8px 1px var(--gray_400);
+}
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
+  justify-content: center;
+  gap: 0.25rem;
+  box-shadow: none;
+  background: inherit;
+  margin-top: 0;
+  padding: $font_05;
 }
 
 /* card content */

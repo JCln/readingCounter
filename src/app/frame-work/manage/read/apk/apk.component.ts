@@ -49,10 +49,6 @@ export class ApkComponent extends FactoryONE {
     FileList = event.target.files;
   }
   uploadFile = (form: NgForm, isSubscription?: boolean) => {
-    // if (isSubscription) {
-    //   this.subscriptionUpload.unsubscribe();
-    //   return;
-    // }
     if (!this.screenshotInput) {
       throw new Error("this.screenshotInput is null.");
     }
@@ -68,23 +64,13 @@ export class ApkComponent extends FactoryONE {
     this.apkService.postTicket().subscribe((event: HttpEvent<any>) => {
       switch (event.type) {
         case HttpEventType.Sent:
-          console.log('Request has been made!');
           break;
         case HttpEventType.ResponseHeader:
-          console.log('Response header has been received!');
           break;
         case HttpEventType.UploadProgress:
           this.progress = Math.round(event.loaded / event.total * 100);
-          console.log(`Uploaded! ${this.progress}%`);
           break;
         case HttpEventType.Response:
-          console.log('successfull process!', event.body);
-          console.log(event.body);
-          console.log(event.body.message);
-          console.log(event.ok);
-          console.log(event.status);
-          console.log(event.statusText);
-
           this.apkService.showSuccessMessage(event.body.message);
           setTimeout(() => {
             this.progress = 0;

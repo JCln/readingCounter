@@ -19,7 +19,7 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
   styleUrls: ['./reading.component.scss']
 })
 export class ReadingComponent extends FactoryONE {
- 
+
 
   dataSource: ITracking[] = [];
   _selectCols: any = [];
@@ -41,7 +41,6 @@ export class ReadingComponent extends FactoryONE {
   }
   private rowToImported = async (row: string, desc: string, rowIndex: number) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row, desc);
-    this.refetchTable(rowIndex);
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackReading = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -63,7 +62,7 @@ export class ReadingComponent extends FactoryONE {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  // refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   backToImportedConfirmDialog = (rowDataAndIndex: object) => {
     const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
@@ -101,8 +100,8 @@ export class ReadingComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          if (await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex['dataSource'], desc))
-            this.refetchTable(rowDataAndIndex['ri']);
+          await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex['dataSource'], desc);
+          this.refreshTable();
         }
       })
     })

@@ -68,7 +68,7 @@ export class ListManagerService {
     { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
     { field: 'masraf', header: 'مصرف', isSelected: false },
     // { field: 'eslahType', header: 'اصلاح', isSelected: false },
-    { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },    
+    { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
     { field: 'dateDifference', header: 'طول دوره', isSelected: false },
     { field: 'description', header: 'توضیحات', isSelected: false }
@@ -103,8 +103,9 @@ export class ListManagerService {
       { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
       { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true }
-
+      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
+      { field: 'maneCount', header: 'مانع', isSelected: true, readonly: true },
+      { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true }
     ];
   }
 

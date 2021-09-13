@@ -38,6 +38,7 @@ export class FinishedComponent extends FactoryONE {
   private rowToOffloaded = async (row: string, desc: string, rowIndex: number) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row, desc);
     this.refetchTable(rowIndex);
+    this.refreshTable();
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackFinished = null;
   classWrapper = async (canRefresh?: boolean) => {

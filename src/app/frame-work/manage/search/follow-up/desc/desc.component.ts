@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IFollowUp, IFollowUpHistory, IListManagerPD } from 'interfaces/imanage';
+import { IFollowUp, IFollowUpHistory, IOffLoadPerDay } from 'interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
@@ -60,7 +60,7 @@ export class DescComponent extends FactoryONE {
   ]
   clonedProducts: { [s: string]: IFollowUpHistory; } = {};
   dataSource: IFollowUp;
-  dataSourceAUX: IListManagerPD;
+  dataSourceAUX: IOffLoadPerDay;
   changeHsty: IFollowUpHistory[] = [];
   _selectColumnsAUX: IObjectIteratation[];
 
@@ -88,7 +88,11 @@ export class DescComponent extends FactoryONE {
     }
 
     this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
-    this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber);
+    if (!this.dataSource)
+      return;
+    // try {
+      // this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber);
+    // } catch (error) { }
 
     this.followUpService.setData(this.dataSource);
     this.dataSource = this.followUpService.getData();
@@ -96,7 +100,8 @@ export class DescComponent extends FactoryONE {
     this.changeHsty = this.dataSource.changeHistory;
     this.closeTabService.saveDataForFollowUp = this.dataSource;
     this.insertToDesc();
-    this.trackingManagerService.setGetRanges(this.dataSourceAUX);
+
+    // this.trackingManagerService.setGetRanges(this.dataSourceAUX);
   }
   getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))

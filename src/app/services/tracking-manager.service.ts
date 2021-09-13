@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IEditTracking, IFollowUpHistory, IListManagerPD, IOutputManager, ITracking } from 'interfaces/imanage';
+import { IEditTracking, IFollowUpHistory, IOffLoadPerDay, IOutputManager, ITracking } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -97,7 +97,14 @@ export class TrackingManagerService {
       { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
       { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true }
+      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
+      { field: 'maneCount', header: 'مانع', isSelected: true, readonly: true },
+      { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true },
+      { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, readonly: true, isBoolean: true },
+      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: true, isBoolean: true },
+      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: true, isBoolean: true },
+      { field: 'isBazdid', header: 'بازدید', isSelected: true, readonly: true, isBoolean: true },
+      { field: 'isRoosta', header: 'روستا', isSelected: true, readonly: true, isBoolean: true }
     ];
   }
   columnlastStates = (): IObjectIteratation[] => {
@@ -413,7 +420,7 @@ export class TrackingManagerService {
   backToParent = () => {
     this.utilsService.routeTo('/wr/m/s/fwu');
   }
-  setGetRanges = (dataSource: IListManagerPD) => {
+  setGetRanges = (dataSource: IOffLoadPerDay) => {
     dataSource.overalDuration = parseFloat(this.utilsService.getRange(dataSource.overalDuration));
     dataSource.overalDistance = parseFloat(this.utilsService.getRange(dataSource.overalDistance));
   }

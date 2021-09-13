@@ -64,11 +64,9 @@ hr {
   margin-bottom: $font_xxs;
 }
 
-.radio_group {
-  // display: flex;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(7rem, auto));
-  justify-content: center;
+.order_by {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .radio_button {

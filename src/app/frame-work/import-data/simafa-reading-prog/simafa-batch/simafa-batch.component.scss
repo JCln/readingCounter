@@ -47,11 +47,6 @@ section.dynamic_content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
   gap: $font_05;
-  border-radius: $border_15;
-  box-shadow: 0px 0px 2px 1px var(--blue_800);
-  background: var(--white);
-  padding: $font_s;
-  margin-top: $font_05;
 }
 
 ._key,
@@ -139,11 +134,6 @@ hr {
   background-color: var(--blue_700);
   height: .2rem;
   margin-bottom: $font_xxs;
-}
-
-.radio_group {
-  display: flex;
-  justify-content: space-evenly;
 }
 
 .radio_button {
