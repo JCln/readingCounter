@@ -569,57 +569,9 @@ export interface IReadingReportChartTraverseDifferential {
     }
 }
 export interface IReadingReportChartKarkard {
-    inProvince: {
-        offloadDayalali: string,
-        fromEshterak: string,
-        toEshterak: string,
-        counterReaderName: string,
-        fromTime: string,
-        toTime: string,
-        duration: number,
-        overalCount: number,
-        adiCount: number,
-        faqedCount: number,
-        maneCount: number,
-        xarabCount: number,
-        tavizCount: number,
-        saierCount: number,
-        areaTitle: string
-    }
-    inRegion: {
-        offloadDayalali: string,
-        fromEshterak: string,
-        toEshterak: string,
-        counterReaderName: string,
-        fromTime: string,
-        toTime: string,
-        duration: number,
-        overalCount: number,
-        adiCount: number,
-        faqedCount: number,
-        maneCount: number,
-        xarabCount: number,
-        tavizCount: number,
-        saierCount: number,
-        areaTitle: string
-    }
-    inZone: {
-        offloadDayalali: string,
-        fromEshterak: string,
-        toEshterak: string,
-        counterReaderName: string,
-        fromTime: string,
-        toTime: string,
-        duration: number,
-        overalCount: number,
-        adiCount: number,
-        faqedCount: number,
-        maneCount: number,
-        xarabCount: number,
-        tavizCount: number,
-        saierCount: number,
-        areaTitle: string
-    }
+    inProvince: IReadingReportKarkard,
+    inRegion: IReadingReportKarkard,
+    inZone: IReadingReportKarkard
 }
 export interface IReadingReportChartReq {
     zoneId: number,
@@ -655,65 +607,25 @@ export interface IReadingReportTraverseDifferentialReq {
         number
     ]
 }
-// export interface IRRChartResWrapper {
-//     inProvince: {
-//         dayJalali: string,
-//         fromEshterak: string,
-//         toEshterak: string,
-//         counterReaderName: string,
-//         overalCount: number,
-//         _8To10: number,
-//         _10To12: number,
-//         _12To14: number,
-//         _14To16: number,
-//         _16To18: number,
-//         saierCount: number,
-//         areaTitle: string
-//     }
+export interface IRRChartResWrapper {
+    dayJalali: string,
+    fromEshterak: string,
+    toEshterak: string,
+    counterReaderName: string,
+    overalCount: number,
+    _8To10: number,
+    _10To12: number,
+    _12To14: number,
+    _14To16: number,
+    _16To18: number,
+    saierCount: number,
+    areaTitle?: string
+}
 // } should test bottom
 export interface IReadingReportChartDisposeRes {
-    inProvince: {
-        dayJalali: string,
-        fromEshterak: string,
-        toEshterak: string,
-        counterReaderName: string,
-        overalCount: number,
-        _8To10: number,
-        _10To12: number,
-        _12To14: number,
-        _14To16: number,
-        _16To18: number,
-        saierCount: number,
-        areaTitle: string
-    }
-    inRegion: {
-        dayJalali: string,
-        fromEshterak: string,
-        toEshterak: string,
-        counterReaderName: string,
-        overalCount: number,
-        _8To10: number,
-        _10To12: number,
-        _12To14: number,
-        _14To16: number,
-        _16To18: number,
-        saierCount: number,
-        areaTitle: string
-    }
-    inZone: {
-        dayJalali: string,
-        fromEshterak: string,
-        toEshterak: string,
-        counterReaderName: string,
-        overalCount: number,
-        _8To10: number,
-        _10To12: number,
-        _12To14: number,
-        _14To16: number,
-        _16To18: number,
-        saierCount: number,
-        areaTitle: string
-    }
+    inProvince: IRRChartResWrapper,
+    inRegion: IRRChartResWrapper,
+    inZone: IRRChartResWrapper
 }
 export interface IReadingReportKarkard {
     offloadDayalali: string,
@@ -730,22 +642,8 @@ export interface IReadingReportKarkard {
     xarabCount: number,
     tavizCount: number,
     saierCount: number
-    // areaTitle?:     
+    areaTitle?: string
 }
-export interface IReadingReportDisposalHours {
-    dayJalali: string,
-    fromEshterak: string,
-    toEshterak: string,
-    counterReaderName: string,
-    overalCount: number,
-    _8To10: number,
-    _10To12: number,
-    _12To14: number,
-    _14To16: number,
-    _16To18: number,
-    saierCount: number
-}
-//
 // fragment manager 
 export interface IFragmentMaster {
     id?: string,

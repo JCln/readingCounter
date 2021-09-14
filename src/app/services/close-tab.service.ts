@@ -40,7 +40,6 @@ export class CloseTabService {
 
   saveDataForEditUsers: any;
   saveDictionaryForEditUsers: any;
-  saveDataForForAddUsers: any;
   saveDictionaryForAddUsers: any;
 
   // track manager
@@ -150,9 +149,6 @@ export class CloseTabService {
       // user manage
       case '/wr/mu/all':
         this.saveDataForAllUsers = '';
-        break;
-      case '/wr/mu/add':
-        this.saveDataForForAddUsers = '';
         break;
       case '/wr/mu/role':
         this.saveDataForRoleManager = '';
@@ -329,7 +325,6 @@ export class CloseTabService {
     this.saveDataForSearchSimple = '';
     this.saveDataForEditUsers = '';
     this.saveDictionaryForEditUsers = '';
-    this.saveDataForForAddUsers = '';
     this.saveDictionaryForAddUsers = '';
     this.saveDataForRoleManager = '';
     this.saveDataForReadingPeriodManager = '';

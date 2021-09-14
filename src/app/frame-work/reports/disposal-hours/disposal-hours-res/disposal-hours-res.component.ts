@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingReportDisposalHours } from 'interfaces/imanage';
+import { IRRChartResWrapper } from 'interfaces/imanage';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -11,8 +11,8 @@ import { UtilsService } from 'services/utils.service';
   styleUrls: ['./disposal-hours-res.component.scss']
 })
 export class DisposalHoursResComponent implements OnInit {
-  @Input() dataSource: IReadingReportDisposalHours[] = [];
- 
+  @Input() dataSource: IRRChartResWrapper[] = [];
+
 
   _selectCols: any[] = [];
   _selectedColumns: any[];

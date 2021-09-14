@@ -5,22 +5,24 @@ import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/iovera
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems } from 'interfaces/iuser-manager';
 
 import { InterfaceManagerService } from './interface-manager.service';
-import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserAddManagerService {
-  dataSource: any;
   selectedPersonalInfos: IAddUserInfos;
 
   constructor(
-    private snackWrapperService: SnackWrapperService,
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService
   ) { }
-
+  // API CALLS 
+  getUserAdd = (): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.userADD).toPromise().then((res) => {
+        resolve(res);
+      });
+    })
+  }
   addAUserPersonalInfo = (personalItems: any) => {
     this.selectedPersonalInfos = personalItems.value;
   }
@@ -88,11 +90,11 @@ export class UserAddManagerService {
   }
   passAndConfirmPass = (vals: IAddAUserManager) => {
     if (!this.utilsService.isSameLength(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar(EN_messages.passwords_notFetch, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.passwords_notFetch, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
     if (!this.utilsService.isExactEqual(vals.password, vals.confirmPassword)) {
-      this.snackWrapperService.openSnackBar(EN_messages.password_notExactly, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessage(EN_messages.password_notExactly, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
     return true;
@@ -109,18 +111,17 @@ export class UserAddManagerService {
         return false;
     return true;
   }
-  connectToServer = (vals: IAddAUserManager) => {
+  private connectToServer = (vals: IAddAUserManager) => {
     if (!this.vertification(vals))
       return false;
     this.interfaceManagerService.POSTBODY(ENInterfaces.userADD, vals).subscribe((res: IResponses) => {
       if (res) {
-        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+        this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
         this.utilsService.routeTo('/wr/mu/all');
       }
     });
   }
   userAddA = (dataSource: IAddUserManager, userInputs: IAddUserInfos) => {
-    this.dataSource = dataSource;
     const vals: IAddAUserManager = {
       selectedRoles: this.getAUserRoleItems(dataSource.roleItems),
       selectedZones: this.getAUserProvince(dataSource.provinceItems),

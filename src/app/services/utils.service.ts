@@ -144,7 +144,7 @@ export class UtilsService {
   snackBarMessageFailed = (message: string) => {
     this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
   }
-  snackBarMessage = (message: EN_messages, time: ENSnackBarTimes, color: ENSnackBarColors) => {
+  snackBarMessage = (message: string, time: ENSnackBarTimes, color: ENSnackBarColors) => {
     this.snackWrapperService.openSnackBar(message, time, color);
   }
 
