@@ -162,6 +162,11 @@ export class HelpWrapperService {
         messageTwo: 'برگشت به صادر شده:  با ارائه دلیل، قابل انجام است',
         messageThree: 'حذف مسیر:  با ارائه دلیل قابل انجام است.',
       }
+    else if (currentRoute === '/wr/policies')
+      return {
+        title: 'تنظیمات امنیتی',
+        messageOne: 'موارد امنیتی مانند حداقل تعداد گذرواژه را تنظیم کنید.',
+      }
   }
   /* DYNAMIC ROUTES */
   private similarIncludeRoute = (currentRoute: string): IHelpWrapper => {

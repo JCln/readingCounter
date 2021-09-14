@@ -83,12 +83,6 @@ li {
   font-family: inherit;
 }
 
-.ag-theme-alpine {
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
 .p-dialog,
 .p-dialog-header,
 .p-dialog-title {
@@ -110,13 +104,6 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
-}
-
-.leaflet-popup-content {
-  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 600;
 }
 
 .leaflet-popup-content {

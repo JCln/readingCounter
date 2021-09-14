@@ -61,16 +61,3 @@ $border_15: 10px;
   font-weight: 600;
   height: 2.6rem;
 }
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-// ////////
