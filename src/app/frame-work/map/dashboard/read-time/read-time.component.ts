@@ -18,7 +18,7 @@ export class ReadTimeComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.readTimed = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardForbiddenTimed);
+    this.readTimed = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardReadingReportTimed);
     this.insertSelectedColumns();
   }
   ngOnInit(): void {

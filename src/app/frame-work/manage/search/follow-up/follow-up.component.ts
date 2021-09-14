@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -10,7 +10,7 @@ import { FollowUpService } from './follow-up.service';
   templateUrl: './follow-up.component.html',
   styleUrls: ['./follow-up.component.scss']
 })
-export class FollowUpComponent implements OnInit {
+export class FollowUpComponent {
   constructor(
     private router: Router,
     public route: ActivatedRoute,
@@ -18,14 +18,11 @@ export class FollowUpComponent implements OnInit {
     public followUpService: FollowUpService
   ) { }
 
-  ngOnInit(): void {
-  }
   verification = async () => {
     if (this.trackingManagerService.verificationFollowUPTrackNumber(this.followUpService.trackNumber)) {
       const dataSource = this.followUpService.setData(await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.followUpService.trackNumber));
-      if (this.trackingManagerService.isValidationNull(dataSource)) {
+      if (this.trackingManagerService.isValidationNull(dataSource))
         this.routeToChild();
-      }
     }
   }
   private routeToChild = () => {

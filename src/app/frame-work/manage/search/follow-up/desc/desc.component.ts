@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFollowUp, IFollowUpHistory, IOffLoadPerDay } from 'interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
-import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -68,7 +67,6 @@ export class DescComponent extends FactoryONE {
     public trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService,
     public route: ActivatedRoute,
-    private router: Router,
     public interactionService: InteractionService,
     private followUpService: FollowUpService,
     private authService: AuthService
@@ -80,44 +78,32 @@ export class DescComponent extends FactoryONE {
   toPreStatus = (dataSource: IFollowUpHistory) => {
     this.trackingManagerService.backToConfirmDialog(dataSource.id);
   }
-  nullSavedSource = () => this.closeTabService.saveDataForFollowUp = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.nullSavedSource();
       this.followUpService.setData(null);
     }
-
-    this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
-    if (!this.dataSource)
-      return;
-    // try {
-      // this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber);
-    // } catch (error) { }
-
-    this.followUpService.setData(this.dataSource);
     this.dataSource = this.followUpService.getData();
+    if (!this.dataSource) {
+      this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
+    }
 
     this.changeHsty = this.dataSource.changeHistory;
-    this.closeTabService.saveDataForFollowUp = this.dataSource;
     this.insertToDesc();
-
-    // this.trackingManagerService.setGetRanges(this.dataSourceAUX);
+    this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber);
+    this.trackingManagerService.setGetRanges(this.dataSourceAUX);
+    if (this.dataSourceAUX)
+      this._selectColumnsAUX = this.trackingManagerService.columnSelectedLMPerDayPositions();
   }
   getRouteParams = () => {
-    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
-        this.classWrapper();
-      })
-    )
+    this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+    this.classWrapper();
   }
   ngAfterViewInit(): void {
     this.refreshTabStatus();
-    this.getUserRole();
   }
   insertToDesc = () => {
     this._showDesc = this._descView();
-    this._selectColumnsAUX = this.trackingManagerService.columnSelectedLMPerDayPositions();
+    this.clearUNUsables();
   }
   showInMap = () => {
     this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[0].insertDateJalali, null);
@@ -146,6 +132,5 @@ export class DescComponent extends FactoryONE {
   }
   ngOnInit(): void {
     this.shouldActive = this.getUserRole();
-    this.clearUNUsables();
   }
 }

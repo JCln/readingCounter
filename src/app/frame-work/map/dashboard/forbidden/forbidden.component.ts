@@ -18,7 +18,7 @@ export class ForbiddenComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.forbidden = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardMediaTimed);
+    this.forbidden = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardForbiddenTimed);
     this.insertSelectedColumns();
   }
   ngOnInit(): void {

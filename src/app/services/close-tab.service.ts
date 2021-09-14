@@ -57,7 +57,6 @@ export class CloseTabService {
   saveDataForAssessPre: any;
   saveDataForAssessAdd: any;
   // SEARCH
-  saveDataForFollowUp: any;
   saveDataForSearchMoshtarakin: any;
   saveDataForSearchPro: any;
   saveDataForSearchSimple: any;
@@ -268,10 +267,6 @@ export class CloseTabService {
       this.saveDataForOffloadModify = '';
       return;
     }
-    if (url.includes('/wr/m/s/fwu')) {
-      this.saveDataForFollowUp = '';
-      return;
-    }
     if (url.includes('/wr/m/l/pd/')) {
       this.saveDataForLMPD = '';
       return;
@@ -337,7 +332,6 @@ export class CloseTabService {
     this.saveDataForTrackReading = '';
     this.saveDataForTrackOffloaded = '';
     this.saveDataForTrackFinished = '';
-    this.saveDataForFollowUp = '';
     this.saveDataForLastStates = '';
     this.saveDataForOffloadModify = '';
     this.saveDataForImportDynamic = '';
