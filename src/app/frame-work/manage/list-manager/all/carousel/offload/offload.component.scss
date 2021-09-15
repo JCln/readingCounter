@@ -125,10 +125,6 @@ footer {
     color: var(--blue_800);
   }
 
-  .check_boxes {
-    padding: .5rem;
-  }
-
   .mat-checkbox-layout .mat-checkbox-label {
     margin: 0 $font_05;
     font-family: $font_family;
@@ -136,6 +132,10 @@ footer {
     font-weight: 600;
     color: var(--blue_gray_700);
   }
+}
+
+.check_boxes {
+  padding: .5rem;
 }
 
 .order_by {
