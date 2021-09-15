@@ -86,7 +86,15 @@
             </button>
         </footer>
     </form>
+    <app-prime-table     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="'traverseDiff'"
+    [_checkUpName]="'rr-traverseDiff'"
+    [_rowsPerPage]="[10,20,50,100, 500]"        
+    [_selectedColumnsToRemember]="'selectedRRTraverseDifferential'"    
+    (refreshedTable)="refreshTable()"
+ > 
+</app-prime-table>
 </main>
-<div>
-    <router-outlet></router-outlet>
-</div>

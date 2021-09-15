@@ -78,6 +78,7 @@ export class CloseTabService {
   saveDataForRRKarkard: any;
   saveDataForRRkarkardDaily: any;
   saveDataForRRMaster: any;
+  saveDataForRRPerformance: any;
   saveDataForRRDetails: any;
   saveDataForRRDisposalHours: any;
   saveDataForRRGIS: any;
@@ -249,6 +250,9 @@ export class CloseTabService {
       case '/wr/rpts/exm/master':
         this.saveDataForRRMaster = '';
         break;
+      case '/wr/rpts/anlz/prfm':
+        this.saveDataForRRPerformance = '';
+        break;
       case '/wr/rpts/exm/details':
         this.saveDataForRRDetails = '';
         break;
@@ -351,6 +355,7 @@ export class CloseTabService {
     this.saveDataForRRKarkard = '';
     this.saveDataForRRkarkardDaily = '';
     this.saveDataForRRMaster = '';
+    this.saveDataForRRPerformance = '';
     this.saveDataForRRDetails = '';
     this.saveDataForRRDisposalHours = '';
     this.saveDataForRRGIS = '';

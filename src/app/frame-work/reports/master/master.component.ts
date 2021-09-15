@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IReadingReportReq } from 'interfaces/imanage';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IReadingReportMaster, IReadingReportReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -30,27 +32,39 @@ export class MasterComponent extends FactoryONE {
       isSelected: false
     }
   ]
+  dataSource: IReadingReportMaster[] = [];
+
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
+
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
- 
+
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
+    private closeTabService: CloseTabService,
     public route: ActivatedRoute
-  ) { 
+  ) {
     super(interactionService);
   }
 
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.saveDataForRRMaster = null;
+      this.verification();
+    }
+
+    if (this.closeTabService.saveDataForRRMaster) {
+      this.dataSource = this.closeTabService.saveDataForRRMaster;
+      this.insertSelectedColumns();
+    }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
-  }
-  routeToChild = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/exm/master/res');
   }
   receiveFromDateJalali = ($event: string) => {
     this.readingReportReq.fromDate = $event;
@@ -68,6 +82,23 @@ export class MasterComponent extends FactoryONE {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '')
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
     if (temp)
-      this.routeToChild();
+      this.connectToServer();
+  }
+
+  insertSelectedColumns = () => {
+    this._selectCols = this.readingReportManagerService.columnRRMaster();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportReq);
+    this.insertSelectedColumns();
+    this.closeTabService.saveDataForRRMaster = this.dataSource;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 }

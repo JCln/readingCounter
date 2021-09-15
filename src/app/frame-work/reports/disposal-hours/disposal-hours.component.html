@@ -10,10 +10,7 @@
                             {{truefalse.title}}
                         </mat-option>
                     </mat-select>
-                </div>
-            </section>
-
-            <section class="content">
+                </div>            
                 <div class="input_2">
                     <div class="_key">از</div>
                     <div class="_value">
@@ -28,19 +25,28 @@
                         </app-date-jalali>
                     </div>
                 </div>
+                <footer class="d_flex_s_around">
+                    <button id="grid_view" type="submit" class="btn_1">
+                        مشاهده لیست
+                        <i class="pi pi-list"></i>
+                    </button>
+                    <button id="chart_view" type="submit" class="btn_1">
+                        مشاهده نمودار
+                        <i class="fa fa-pie-chart"></i>
+                    </button>
+                </footer>
             </section>
-
         </section>
-        <footer class="d_flex_s_around">
-            <button id="grid_view" type="submit" class="btn_1">
-                مشاهده لیست
-                <i class="pi pi-list"></i>
-            </button>
-            <button id="chart_view" type="submit" class="btn_1">
-                مشاهده نمودار
-                <i class="fa fa-pie-chart"></i>
-            </button>
-        </footer>
-    </form>
+    </form>    
+
+    <app-prime-table     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="'disposalHs'"
+    [_checkUpName]="'rr-disposalHs'"    
+    [_selectedColumnsToRemember]="'selectedRRDisposalHours'"    
+    (refreshedTable)="refreshTable()"  
+ > 
+</app-prime-table>
 </main>
-<router-outlet></router-outlet>

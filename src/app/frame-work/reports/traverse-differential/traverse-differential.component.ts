@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IReadingReportTraverseDifferentialReq } from 'interfaces/imanage';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IReadingReportTraverseDifferentialReq, IReadingReportTraverseDifferentialRes } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -32,15 +34,20 @@ export class TraverseDifferentialComponent extends FactoryONE {
       isSelected: false
     }
   ]
+  dataSource: IReadingReportTraverseDifferentialRes[] = [];
+  karbariDictionary: IDictionaryManager[] = [];
+
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
+
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   traverseDiffrentialDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
- 
+
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
@@ -55,17 +62,16 @@ export class TraverseDifferentialComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
+      this.verification();
     }
     if (this.closeTabService.saveDataForRRTraverseDifferential) {
       this.readingReportReq = this.closeTabService.saveDataForRRTraverseDifferential;
+      this.insertSelectedColumns();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.getTraverseDiffrentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
-  }
-  routeToGridView = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/trvch/res');
   }
   routeToChartView = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/trvch/chart');
@@ -86,7 +92,26 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
     const temp = this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportReq, this._isOrderByDate);
     if (temp)
-      document.activeElement.id == 'grid_view' ? this.routeToGridView() : this.routeToChartView();
+      document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
+  }
+
+  insertSelectedColumns = () => {
+    this._selectCols = this.readingReportManagerService.columnRRTraverseDifferential();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportReq);
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.insertSelectedColumns();
+    this.closeTabService.saveDataForRRTraverseDifferential = this.dataSource;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

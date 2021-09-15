@@ -2,13 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { KarkardChartComponent } from './karkard-chart/karkard-chart.component';
-import { KarkardResComponent } from './karkard-res/karkard-res.component';
 import { KarkardComponent } from './karkard.component';
 
 const routes: Routes = [
   {
     path: '', component: KarkardComponent, children: [
-      { path: 'res', component: KarkardResComponent },
       { path: 'chart', component: KarkardChartComponent },
     ]
   }

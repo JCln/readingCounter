@@ -6,12 +6,11 @@ import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
 import { TraverseDifferentialRoutingModule } from './traverse-differential-routing.module';
 import { TraverseDifferentialComponent } from './traverse-differential.component';
-import { TrvchResComponent } from './trvch-res/trvch-res.component';
 import { TrvchChartComponent } from './trvch-chart/trvch-chart.component';
 
 
 @NgModule({
-  declarations: [TraverseDifferentialComponent, TrvchResComponent, TrvchChartComponent],
+  declarations: [TraverseDifferentialComponent, TrvchChartComponent],
   imports: [
     SharedPrimeNgModule,
     SharedModule,

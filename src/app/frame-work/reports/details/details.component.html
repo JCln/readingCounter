@@ -46,10 +46,7 @@
                             {{truefalse.title}}
                         </mat-option>
                     </mat-select>
-                </div>
-            </section>
-
-            <section class="content">
+                </div>            
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
@@ -64,16 +61,23 @@
                         </app-date-jalali>
                     </div>
                 </div>
+                <button type="submit" class="btn_1">
+                    مشاهده لیست
+                    <i class="pi pi-list"></i>
+                </button>
+    
             </section>
-
-        </section>
-        <footer>
-            <button type="submit" class="btn_1">
-                مشاهده لیست
-                <i class="pi pi-list"></i>
-            </button>
-
-        </footer>
+        </section>  
     </form>
+
+    <app-prime-table     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource"
+    [_outputFileName]="'details'"    
+    [_checkUpName]="'rr-details'"
+    [_selectedColumnsToRemember]="'selectedRRDetails'"    
+    (refreshedTable)="refreshTable()"
+ > 
+</app-prime-table>
 </main>
-<router-outlet></router-outlet>

@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-  IReadingReportGISReq,
-  IReadingReportReq,
-  IReadingReportTraverseDifferentialReq,
-  IReadingReportWithZoneIDsReq,
+    IReadingReportGISReq,
+    IReadingReportReq,
+    IReadingReportTraverseDifferentialReq,
+    IReadingReportWithZoneIDsReq,
 } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -179,7 +179,6 @@ export class ReadingReportManagerService {
   columnRRTraverseDifferential = (): IObjectIteratation[] => {
     return this._RRTraverseDifferential;
   }
-
   columnRRKarkard = (): IObjectIteratation[] => {
     return this._RRKarkard;
   }
@@ -199,6 +198,17 @@ export class ReadingReportManagerService {
   ) { }
 
   // CALL APIs
+
+  portRRTest = (method: ENInterfaces, val: object): Promise<any> => {
+    console.log(method, val);
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
+        if (this.utilsService.isNull(res))
+          this.emptyMessage();
+        resolve(res)
+      })
+    });
+  }
   postRRManager = (backTo: string, method: ENInterfaces, validator: string): Promise<any> => {
     console.log(this[validator]);
     if (!this[validator]) {
@@ -355,6 +365,9 @@ export class ReadingReportManagerService {
   }
   routeTo = (route: string) => {
     this.utilsService.routeTo(route);
+  }
+  routeToByObject = (router: string, val: object) => {
+    this.router.navigate([router, val]);
   }
   backToPreviousPage = () => {
     this._location.back();

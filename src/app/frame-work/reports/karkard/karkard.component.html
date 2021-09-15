@@ -1,4 +1,4 @@
-<main class="main" *ngIf="route.children.length === 0">
+<main class="main">
     <form #form="ngForm" (ngSubmit)="verification()">
         <section class="static_part">
             <section class="order_by">
@@ -47,9 +47,6 @@
                         </mat-option>
                     </mat-select>
                 </div>
-            </section>
-
-            <section class="content">
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
@@ -64,21 +61,28 @@
                         </app-date-jalali>
                     </div>
                 </div>
+                <footer class="d_flex_s_around">
+                    <button id="grid_view" type="submit" class="btn_1">
+                        مشاهده لیست
+                        <i class="pi pi-list"></i>
+                    </button>
+                    <button id="chart_view" type="submit" class="btn_1">
+                        مشاهده نمودار
+                        <i class="fa fa-pie-chart"></i>
+                    </button>
+                </footer>
             </section>
-
-        </section>
-        <footer class="d_flex_s_around">
-            <button id="grid_view" type="submit" class="btn_1">
-                مشاهده لیست
-                <i class="pi pi-list"></i>
-            </button>
-            <button id="chart_view" type="submit" class="btn_1">
-                مشاهده نمودار
-                <i class="fa fa-pie-chart"></i>
-            </button>
-        </footer>
+        </section>       
     </form>
+
+    <app-prime-table     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="'karkard'"
+    [_checkUpName]="'rr-karkard'"
+    [_selectedColumnsToRemember]="'selectedRRKarkard'"
+    (refreshedTable)="refreshTable()"    
+ > 
+</app-prime-table>
 </main>
-<div>
-    <router-outlet></router-outlet>
-</div>
