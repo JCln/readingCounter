@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAnalyzeRes, IReadingReportWithZoneIDsReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
@@ -51,8 +50,7 @@ export class PerformanceComponent extends FactoryONE {
     private readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    private utilsService: UtilsService,
-    public route: ActivatedRoute
+    private utilsService: UtilsService
   ) {
     super(interactionService);
   }
@@ -64,7 +62,7 @@ export class PerformanceComponent extends FactoryONE {
       this.setGetRanges();
     }
     if (this.closeTabService.saveDataForRRPerformance) {
-      this.readingReportReq = this.closeTabService.saveDataForRRPerformance;
+      this.dataSource = this.closeTabService.saveDataForRRPerformance;
       this.insertSelectedColumns();
     }
 

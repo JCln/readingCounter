@@ -47,7 +47,7 @@ export class DisposalHoursComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRDisposalHours) {
-      this.readingReportReq = this.closeTabService.saveDataForRRDisposalHours;
+      this.dataSource = this.closeTabService.saveDataForRRDisposalHours;
       this.insertSelectedColumns();
     }
 

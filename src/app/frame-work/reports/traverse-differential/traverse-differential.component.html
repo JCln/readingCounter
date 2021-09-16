@@ -55,9 +55,6 @@
                         </mat-option>
                     </mat-select>
                 </div>
-            </section>
-
-            <section class="content">
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
@@ -72,20 +69,18 @@
                         </app-date-jalali>
                     </div>
                 </div>
+                <button id="grid_view" type="submit" class="btn_1">
+                    مشاهده لیست
+                    <i class="pi pi-list"></i>
+                </button>
+                <button id="chart_view" type="submit" class="btn_1">
+                    مشاهده نمودار
+                    <i class="fa fa-pie-chart"></i>
+                </button>
             </section>
-
-        </section>
-        <footer class="d_flex_s_around">
-            <button id="grid_view" type="submit" class="btn_1">
-                مشاهده لیست
-                <i class="pi pi-list"></i>
-            </button>
-            <button id="chart_view" type="submit" class="btn_1">
-                مشاهده نمودار
-                <i class="fa fa-pie-chart"></i>
-            </button>
-        </footer>
+        </section>                   
     </form>
+
     <app-prime-table     
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
@@ -98,3 +93,4 @@
  > 
 </app-prime-table>
 </main>
+<router-outlet></router-outlet>

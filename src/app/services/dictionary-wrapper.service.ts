@@ -41,7 +41,7 @@ export class DictionaryWrapperService {
     if (!this.utilsService.isNull(this.karbariCodeDictionary))
       return this.karbariCodeDictionary;
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.KarbariDictionary).subscribe(res => {
+      this.interfaceManagerService.GET(ENInterfaces.KarbariDictionaryCode).subscribe(res => {
         this.setKarbariDictionaryCode(res);
         resolve(this.karbariCodeDictionary);
       })

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingReportReq, IReadingReportTraverse } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
@@ -49,8 +48,7 @@ export class TraverseComponent extends FactoryONE {
 
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
-    public interactionService: InteractionService,
-    public route: ActivatedRoute,
+    public interactionService: InteractionService,    
     private closeTabService: CloseTabService
   ) {
     super(interactionService);

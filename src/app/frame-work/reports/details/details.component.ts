@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingReportDetails, IReadingReportReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
@@ -52,8 +51,7 @@ export class DetailsComponent extends FactoryONE {
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
-    private closeTabService: CloseTabService,
-    public route: ActivatedRoute
+    private closeTabService: CloseTabService
   ) {
     super(interactionService);
   }
@@ -64,7 +62,7 @@ export class DetailsComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRDetails) {
-      this.readingReportReq = this.closeTabService.saveDataForRRDetails;
+      this.dataSource = this.closeTabService.saveDataForRRDetails;
       this.insertSelectedColumns();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();

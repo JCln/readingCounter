@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingReportMaster, IReadingReportReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
@@ -47,8 +46,7 @@ export class MasterComponent extends FactoryONE {
   constructor(
     private readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
-    private closeTabService: CloseTabService,
-    public route: ActivatedRoute
+    private closeTabService: CloseTabService    
   ) {
     super(interactionService);
   }

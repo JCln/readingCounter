@@ -65,7 +65,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRTraverseDifferential) {
-      this.readingReportReq = this.closeTabService.saveDataForRRTraverseDifferential;
+      this.dataSource = this.closeTabService.saveDataForRRTraverseDifferential;
       this.insertSelectedColumns();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
