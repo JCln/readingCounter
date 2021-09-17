@@ -102,12 +102,10 @@ export class AllComponent extends FactoryONE {
   carouselNextItem = () => {
 
     this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
-    console.log(this.dataSource);
     this.carouselDataSource = this.dataSource[this.rowIndex];
   }
   carouselPrevItem = () => {
-    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length - 1 : this.rowIndex--;
-    console.log(this.dataSource);
+    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length : this.rowIndex--;
     this.carouselDataSource = this.dataSource[this.rowIndex];
   }
   // convertTitleToId = (dataSource: any): any => {

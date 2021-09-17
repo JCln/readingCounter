@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { DateJalaliService } from 'services/date-jalali.service';
 
 
@@ -7,7 +7,7 @@ import { DateJalaliService } from 'services/date-jalali.service';
   templateUrl: './date-jalali.component.html',
   styleUrls: ['./date-jalali.component.scss']
 })
-export class DateJalaliComponent implements OnInit {
+export class DateJalaliComponent {
   dateObject: any;
   datePickerConfig = {
     format: 'YYYY/MM/DD'
@@ -16,14 +16,11 @@ export class DateJalaliComponent implements OnInit {
   @Output() dateJalEvent = new EventEmitter<any>();
 
   constructor(private dateJalaliService: DateJalaliService) {
+    this.dateObject = this.dateJalaliService.getCurrentDate();
+    this.dateJalEvent.emit(this.dateObject);
   }
 
   sendDateJal = ($event) => {
     this.dateJalEvent.emit($event.inputElementValue);
   }
-  ngOnInit(): void {
-    this.dateObject = this.dateJalaliService.getCurrentDate();
-    this.dateJalEvent.emit(this.dateObject);
-  }
-
 }

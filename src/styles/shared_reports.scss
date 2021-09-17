@@ -14,7 +14,7 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 15rem));
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
   gap: $font_05;
   align-items: center;
 }
