@@ -27,25 +27,15 @@ export class ForbResComponent extends FactoryONE {
     private closeTabService: CloseTabService
   ) {
     super(interactionService);
+    this.classWrapper();
   }
 
   private insertSelectedColumns = () => {
     this._selectCols = this.forbiddenService.columnSelectedMenuDefault();
     this._selectedColumns = this.forbiddenService.customizeSelectedColumns(this._selectCols);
   }
-  nullSavedSource = () => this.closeTabService.saveDataForForbidden = null;
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (this.closeTabService.saveDataForForbidden) {
-      this.dataSource = this.closeTabService.saveDataForForbidden;
-    }
-    else {
-      this.dataSource = await this.forbiddenService.getDataSource();
-      this.closeTabService.saveDataForForbidden = this.dataSource;
-    }
-    console.log(this.dataSource);
+    this.dataSource = await this.forbiddenService.getDataSource();
 
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
     // this.userCounterReaders = await this.forbiddenService.getUserCounterReaders();
@@ -68,5 +58,5 @@ export class ForbResComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-
+  ngOnInit(): void { return; }
 }

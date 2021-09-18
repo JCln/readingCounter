@@ -84,11 +84,11 @@ export enum ENBrowserStatus {
     alarm = 500
 }
 export const ENBrowserInfo = {
-    Chrome: { title: 'Google Chrome', url: 'url test' },
-    FireFox: { title: 'Mozilla FireFox', url: 'mozilla url' },
-    Opera: { title: 'Opera', url: 'Opera' },
-    Safari: { title: 'Safari', url: 'Opera' },
-    IE: { title: 'IE', url: '' },
+    Chrome: { title: 'Google Chrome', url: 'https://browser-update.org/fa/update-browser.html' },
+    FireFox: { title: 'Mozilla FireFox', url: 'https://browser-update.org/fa/update-browser.html' },
+    Opera: { title: 'Opera', url: 'https://browser-update.org/fa/update-browser.html' },
+    Safari: { title: 'Safari', url: 'https://browser-update.org/fa/update-browser.html' },
+    IE: { title: 'IE', url: 'https://browser-update.org/fa/update-browser.html' },
 }
 export interface IBrowserNotif {
     message: string;

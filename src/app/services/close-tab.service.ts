@@ -66,8 +66,6 @@ export class CloseTabService {
   saveDataForLMAll_extra: any;
   // WOUI manager
   saveDataForWOUI: any;
-  // Forbidden manager
-  saveDataForForbidden: any;
   // dbf output manager
   saveDataForOutputDBF: any;
   // number of Logs
@@ -227,10 +225,7 @@ export class CloseTabService {
         break;
       case '/wr/m/l/pd':
         this.saveDataForLMPD = '';
-        break;
-      case '/wr/m/fbn':
-        this.saveDataForForbidden = '';
-        break;
+        break;   
       case '/wr/m/dbf':
         this.saveDataForOutputDBF = '';
         break;
@@ -347,7 +342,6 @@ export class CloseTabService {
     this.saveDataForLMAll = '';
     this.saveDataForLMAll_extra = '';
     this.saveDataForWOUI = '';
-    this.saveDataForForbidden = '';
     this.saveDataForOutputDBF = '';
     this.saveDataForUserLoggins = '';
     this.saveDataForRRTraverse = '';
