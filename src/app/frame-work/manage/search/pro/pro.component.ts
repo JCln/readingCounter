@@ -32,6 +32,7 @@ export class ProComponent extends FactoryONE {
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
 
@@ -56,6 +57,7 @@ export class ProComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
     this.insertSelectedColumns();
@@ -66,6 +68,7 @@ export class ProComponent extends FactoryONE {
     this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
     this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
+    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 
     this.converts();

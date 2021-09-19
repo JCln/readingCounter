@@ -27,6 +27,7 @@ export class ListManagerService {
     { field: 'firstName', header: 'نام', isSelected: true },
     { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
     { field: 'karbariCode', header: 'کاربری', isSelected: true },
+    { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false },
     { field: 'preNumber', header: 'رقم قبلی', isSelected: true },
     { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
     { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
@@ -60,7 +61,6 @@ export class ListManagerService {
     { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
     { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
     { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
-    // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false },
     { field: 'y', header: 'Y', isSelected: false },
     { field: 'x', header: 'X', isSelected: false },
     { field: 'gisAccuracy', header: 'دقت', isSelected: false },
@@ -163,6 +163,9 @@ export class ListManagerService {
   }
   getLMAllZoneDictionary = () => {
     return this.dictionaryWrapperService.getZoneDictionary();
+  }
+  getKarbariDictionaryCode = () => {
+    return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
   getKarbariDictionary = () => {
     return this.dictionaryWrapperService.getKarbariDictionary();

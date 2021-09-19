@@ -88,13 +88,14 @@ export class TraverseDifferentialComponent extends FactoryONE {
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
-  verification = async () => {
+  validation = (): boolean => {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportReq, this._isOrderByDate);
-    if (temp)
+    return this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportReq, this._isOrderByDate);
+  }
+  verification = async () => {
+    if (this.validation())
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
-
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRTraverseDifferential();
     this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
@@ -112,6 +113,10 @@ export class TraverseDifferentialComponent extends FactoryONE {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  refreshTable = () => {
+    if (this.validation())
+      this.connectToServer();
   }
 
 }

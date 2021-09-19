@@ -318,12 +318,28 @@ export class DictionaryWrapperService {
   }
 
   cleanDictionaries = () => {
-    this.zoneDictionary = [];
-    this.regionDictionary = [];
     this.provinceDictionary = [];
+    this.regionDictionary = [];
+    this.zoneDictionary = [];
+    this.zoneBoundDictionary = [];
     this.countryDictionary = [];
-    this.authLev3Dictionary = [];
-    this.authLev2Dictionary = [];
     this.authLev1Dictionary = [];
+    this.authLev2Dictionary = [];
+    this.authLev3Dictionary = [];
+    this.authLev4Dictionary = [];
+    this.counterReportDictionary = [];
+    this.counterReportByZoneDictionary = [];
+    this.counterStateDictionary = [];
+    this.counterStateByZoneIdDictionary = [];
+    this.counterStateByCodeDictionary = [];
+    this.periodKindDictionary = [];
+    this.karbariDictionary = [];
+    this.qotrDictionary = [];
+    this.roleDictionary = [];
+    this.karbariCodeDictionary = [];
+    this.traverseDifferentialDictionary = [];
+  }
+  cleanSingleDictionary = (dicName: string) => {
+    this[dicName] = [];
   }
 }

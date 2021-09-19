@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { SectionsService } from 'services/sections.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class CountryAddDgComponent {
   constructor(
     fb: FormBuilder,
     private dialogRef: MatDialogRef<CountryAddDgComponent>,
-    private sectionsService: SectionsService
+    private sectionsService: SectionsService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) {
     this.form = fb.group({
       id: [''],
@@ -26,6 +28,7 @@ export class CountryAddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
+    this.dictionaryWrapperService.cleanSingleDictionary('countryDictionary');
     this.dialogRef.close(this.form.value);
   }
   close() {

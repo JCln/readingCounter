@@ -26,6 +26,7 @@ export class AllComponent extends FactoryONE {
   dataSource: IOnOffLoadFlat[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
@@ -58,6 +59,7 @@ export class AllComponent extends FactoryONE {
 
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
+    this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
     const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
@@ -69,6 +71,7 @@ export class AllComponent extends FactoryONE {
 
     // Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
     this.setDynamicRages();

@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-    IReadingReportGISReq,
-    IReadingReportReq,
-    IReadingReportTraverseDifferentialReq,
-    IReadingReportWithZoneIDsReq,
+  IReadingReportGISReq,
+  IReadingReportReq,
+  IReadingReportTraverseDifferentialReq,
+  IReadingReportWithZoneIDsReq,
 } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -117,8 +117,9 @@ export class ReadingReportManagerService {
     { field: 'value', header: 'مقدار قدیم', isSelected: true },
     { field: 'newValue', header: 'مقدار جدید', isSelected: true },
   ]
-  private _RRKarkard = [
+  private _RRKarkard: IObjectIteratation[] = [
     // { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
+    { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectOption: true, readonly: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
     // { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
     // { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },

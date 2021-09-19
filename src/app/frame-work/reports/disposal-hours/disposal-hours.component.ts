@@ -62,9 +62,11 @@ export class DisposalHoursComponent extends FactoryONE {
   receiveToDateJalali = ($event: string) => {
     this.readingReportReq.toDate = $event;
   }
+  validation = (): boolean => {
+    return this.readingReportManagerService.verificationRRDisposalHours(this.readingReportReq);
+  }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRDisposalHours(this.readingReportReq);
-    if (temp)
+    if (this.validation())
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
@@ -82,5 +84,9 @@ export class DisposalHoursComponent extends FactoryONE {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  refreshTable = () => {
+    if (this.validation())
+      this.connectToServer();
   }
 }

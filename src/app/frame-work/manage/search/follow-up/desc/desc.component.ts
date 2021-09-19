@@ -88,6 +88,7 @@ export class DescComponent extends FactoryONE {
     }
 
     this.changeHsty = this.dataSource.changeHistory;
+    this.shouldActive = this.getUserRole();
     this.insertToDesc();
     this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber);
     this.trackingManagerService.setGetRanges(this.dataSourceAUX);
@@ -119,7 +120,7 @@ export class DescComponent extends FactoryONE {
   }
   getUserRole = (): boolean => {
     const jwtRole = this.authService.getAuthUser();
-    return jwtRole.roles.includes('admin') ? true : false;
+    return jwtRole.roles.toString().includes('admin') ? true : false;
   }
   clearUNUsables = () => {
     if (!this.shouldActive) {
@@ -130,7 +131,5 @@ export class DescComponent extends FactoryONE {
       return;
     }
   }
-  ngOnInit(): void {
-    this.shouldActive = this.getUserRole();
-  }
+  ngOnInit(): void { return; }
 }

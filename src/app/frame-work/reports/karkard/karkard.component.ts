@@ -88,11 +88,13 @@ export class KarkardComponent extends FactoryONE {
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
-  verification = async () => {
+  validation = (): boolean => {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
-    if (temp)
-      document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
+    return this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
+  }
+  verification = async () => {
+    if (this.validation())
+      document.activeElement.id === 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRKarkard();
@@ -112,4 +114,9 @@ export class KarkardComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+  refreshTable = () => {
+    if (this.validation())
+      this.connectToServer();
+  }
+
 }
