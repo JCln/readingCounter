@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-  IReadingReportGISReq,
-  IReadingReportReq,
-  IReadingReportTraverseDifferentialReq,
-  IReadingReportWithZoneIDsReq,
+    IReadingReportGISReq,
+    IReadingReportReq,
+    IReadingReportTraverseDifferentialReq,
+    IReadingReportWithZoneIDsReq,
 } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -22,6 +23,23 @@ import { Converter } from './../classes/converter';
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   private readingReportReq: IReadingReportReq;
+  masterReq: IReadingReportReq = {
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  };
+  detailsReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
   private readingReportGISReq: IReadingReportGISReq;
   private rRTraverseDiffrential: IReadingReportTraverseDifferentialReq;
   private rRAnalyzeReq: IReadingReportWithZoneIDsReq;
@@ -321,10 +339,12 @@ export class ReadingReportManagerService {
   }
 
   // VerificationS
+  insertToReadingReport = (name: ENReadingReports, val: object) => {
+    this[name] = val;
+  }
   verificationRRShared = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    this.readingReportReq = readingReportReq;
     return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
   verificationRRTraverseDifferential = (readingReportReq: IReadingReportTraverseDifferentialReq, isValidateByDate: boolean): boolean => {

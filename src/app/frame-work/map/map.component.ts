@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IListManagerPDXY, IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/imanage';
 import { Imap } from 'interfaces/imap.js';
 import { ITHV } from 'interfaces/ioverall-config';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { MapItemsService } from 'services/DI/map-items.service';
@@ -280,6 +281,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     else {
       this.router.navigate(['wr/db']);
     }
+    this.changeRouteDetected();
+  }
+  changeRouteDetected = () => {
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(res => {
+        if (!res)
+          return;
+        if (this.router.url == '/wr')
+          this.isShowMap = true;
+      })
+    )
   }
   private removeAllLayers = () => {
     this.layerGroup.clearLayers();

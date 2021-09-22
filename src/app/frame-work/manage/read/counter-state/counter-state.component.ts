@@ -117,6 +117,7 @@ export class CounterStateComponent extends FactoryONE {
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();
+      Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     }
   }
 

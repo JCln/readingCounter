@@ -88,7 +88,7 @@ export class DescComponent extends FactoryONE {
     }
 
     this.changeHsty = this.dataSource.changeHistory;
-    this.shouldActive = this.getUserRole();
+    this.getUserRole();
     this.insertToDesc();
     this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber);
     this.trackingManagerService.setGetRanges(this.dataSourceAUX);
@@ -118,9 +118,9 @@ export class DescComponent extends FactoryONE {
   onRowEditInit(dataSource: any) {
     // this.clonedProducts[dataSource.id] = { ...dataSource };
   }
-  getUserRole = (): boolean => {
+  getUserRole = (): void => {
     const jwtRole = this.authService.getAuthUser();
-    return jwtRole.roles.toString().includes('admin') ? true : false;
+    this.shouldActive = jwtRole.roles.toString().includes('admin') ? true : false;
   }
   clearUNUsables = () => {
     if (!this.shouldActive) {

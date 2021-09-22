@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { SectionsService } from 'services/sections.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class Auth1AddDgComponent {
   constructor(
     fb: FormBuilder,
     private dialogRef: MatDialogRef<Auth1AddDgComponent>,
-    private sectionsService: SectionsService
+    private sectionsService: SectionsService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) {
     this.form = fb.group({
       id: [''],
@@ -29,6 +31,7 @@ export class Auth1AddDgComponent {
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
+    this.dictionaryWrapperService.cleanSingleDictionary('authLev1Dictionary');
     this.dialogRef.close(this.form.value);
   }
   close() {

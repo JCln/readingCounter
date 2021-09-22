@@ -142,7 +142,7 @@ export enum ENInterfaces {
     trackingFOLLOWUP = 'V1/Tracking/FollowUp/?trackNumber=',
     trackingAnalyzeByParam = 'V1/Tracking/Analyze/ByParam',
     trackingPostOffloadModify = 'V1/OffLoad/Modify',
-    trackingEditState = 'V1​/Tracking​/EditState',
+    trackingEditState = 'V1/Tracking/EditState',
 
     ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
     ListSearchPro = 'V1/List/Search/Pro',
