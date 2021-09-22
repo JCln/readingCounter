@@ -1,4 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
 import { DateJalaliComponent } from './../core/_layouts/header/date-jalali/date-jalali.component';
@@ -11,11 +12,13 @@ import { DateJalaliModule } from './../core/_layouts/header/date-jalali/date-jal
     ],
     imports: [
         DateJalaliModule,
+        FormsModule,
         DpDatePickerModule
     ],
     exports: [
         DateJalaliModule,
         DpDatePickerModule,
+        FormsModule,
         DateJalaliComponent
     ]
 })
