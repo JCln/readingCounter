@@ -54,13 +54,13 @@
 
                 <div class="input_2 this" *ngIf="userCounterReader.length">
                     <div class="_key">مامور</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.counterReaderId"
-                        name="counterReaderId">
-                        <mat-option *ngFor="let truefalse of userCounterReader" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
+                        [options]="userCounterReader" name="counter-reader" [(ngModel)]="importDynamic.counterReaderId"
+                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        placeholder="انتخاب مورد">
+                    </p-dropdown>
                 </div>
+
 
             </section>
             <section class="content date_section">

@@ -3,7 +3,7 @@
 :host ::ng-deep {
 
   .p-datatable table {
-    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-family: $font_family;
     font-size: $font_s;
   }
 
@@ -111,10 +111,17 @@
   .p-multiselect-label,
   .p-multiselect-items {
     font-family: $font_family;
-    font-size: $font_m;
+    font-size: $font_s;
     font-weight: 600;
     background: var(--gray_300);
     color: var(--gray_800);
+  }
+
+  .p-dropdown.p-dropdown-clearable .p-dropdown-label {
+    padding-right: 0.25rem;
+    font-family: $font_family;
+    font-size: $font_xs;
+    font-weight: 600;
   }
 
   .p-dropdown-panel .p-dropdown-items {

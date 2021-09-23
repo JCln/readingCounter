@@ -6,12 +6,11 @@
 
                 <div class="input_2 this" *ngIf="userCounterReaderDictionary.length">
                     <div class="_key">مامور</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="simafaSingleReq.counterReaderId"
-                        name="counterReaderId">
-                        <mat-option *ngFor="let truefalse of userCounterReaderDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
+                        [options]="userCounterReaderDictionary" name="counter-reader"
+                        [(ngModel)]="simafaSingleReq.counterReaderId" optionLabel="title" [filter]="true"
+                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
+                    </p-dropdown>
                 </div>
 
             </section>

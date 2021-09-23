@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { SimafaSingleRoutingModule } from './simafa-single-routing.module';
 import { SimafaSingleComponent } from './simafa-single.component';
@@ -8,7 +8,7 @@ import { SimafaSingleComponent } from './simafa-single.component';
 @NgModule({
   declarations: [SimafaSingleComponent],
   imports: [
-    SharedModule,
+    SharedPrimeNgModule,
     SimafaSingleRoutingModule
   ]
 })
