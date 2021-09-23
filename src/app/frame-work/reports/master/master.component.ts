@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingReportMaster, IReadingReportReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { ENReadingReports } from 'interfaces/reading-reports';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -44,9 +45,9 @@ export class MasterComponent extends FactoryONE {
 
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
-    private closeTabService: CloseTabService    
+    private closeTabService: CloseTabService
   ) {
     super(interactionService);
   }
@@ -56,6 +57,8 @@ export class MasterComponent extends FactoryONE {
       this.closeTabService.saveDataForRRMaster = null;
       this.verification();
     }
+    this.readingReportReq = this.readingReportManagerService.masterReq;
+    // console.log(this.readingReportReq);
 
     if (this.closeTabService.saveDataForRRMaster) {
       this.dataSource = this.closeTabService.saveDataForRRMaster;
@@ -65,10 +68,16 @@ export class MasterComponent extends FactoryONE {
     this.receiveYear();
   }
   receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
+    this.readingReportManagerService.masterReq.fromDate = $event;
   }
   receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
+    if (this.readingReportManagerService.masterReq.toDate.length == 0) {
+      this.readingReportReq.toDate = $event;
+      this.readingReportManagerService.masterReq.toDate = $event;
+    }
+    else
+      this.readingReportReq.toDate = this.readingReportManagerService.masterReq.toDate;
+    console.log($event);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -79,8 +88,10 @@ export class MasterComponent extends FactoryONE {
   verification = async () => {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '')
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
-    if (temp)
+    if (temp) {
+      this.readingReportManagerService.insertToReadingReport(ENReadingReports.master, this.readingReportReq);
       this.connectToServer();
+    }
   }
 
   insertSelectedColumns = () => {

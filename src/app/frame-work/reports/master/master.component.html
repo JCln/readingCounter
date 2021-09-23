@@ -42,14 +42,16 @@
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                            [dateObject]="readingReportManagerService.masterReq.fromDate">
                         </app-date-jalali>
                     </div>
                 </div>
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">تا</div>
                     <div class="_value">
-                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
+                            [dateObject]="readingReportManagerService.masterReq.toDate">
                         </app-date-jalali>
                     </div>
                 </div>
@@ -61,13 +63,8 @@
             </section>
         </section>
     </form>
-    <app-prime-table   
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" 
-    [_outputFileName]="'master'"    
-    [_selectedColumnsToRemember]="'selectedRRMaster'"    
-    (refreshedTable)="refreshTable()"      
- > 
-</app-prime-table>
+    <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
+        [_outputFileName]="'master'" [_selectedColumnsToRemember]="'selectedRRMaster'"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
 </main>
