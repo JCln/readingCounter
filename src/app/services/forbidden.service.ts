@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IForbiddenManager, IReadingReportWithZoneIDsReq } from 'interfaces/imanage';
+import { IForbiddenManager, IMostReportInput } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -14,7 +14,7 @@ import { DictionaryWrapperService } from './dictionary-wrapper.service';
   providedIn: 'root'
 })
 export class ForbiddenService {
-  forbiddenReq: IReadingReportWithZoneIDsReq;
+  forbiddenReq: IMostReportInput;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
   /* COLUMNS */
@@ -103,7 +103,7 @@ export class ForbiddenService {
   }
 
   /* VERIFICATION */
-  verificationForbidden = (forbidden: IReadingReportWithZoneIDsReq) => {
+  verificationForbidden = (forbidden: IMostReportInput) => {
     forbidden.fromDate = Converter.persianToEngNumbers(forbidden.fromDate);
     forbidden.toDate = Converter.persianToEngNumbers(forbidden.toDate);
     this.forbiddenReq = forbidden;

@@ -77,6 +77,7 @@ export class CloseTabService {
   saveDataForRRkarkardDaily: any;
   saveDataForRRMaster: any;
   saveDataForRRPerformance: any;
+  saveDataForDMAAnalyze: any;
   saveDataForRRDetails: any;
   saveDataForRRDisposalHours: any;
   saveDataForRRGIS: any;
@@ -85,7 +86,6 @@ export class CloseTabService {
   saveDataForFragmentNOBDetails: any;
   saveDataForTextOutput: any;
   // DASHBOARD
-  // saveDataForDispersalRateTimed: any;
 
 
   // close config and remove data for specific page(component)
@@ -225,7 +225,7 @@ export class CloseTabService {
         break;
       case '/wr/m/l/pd':
         this.saveDataForLMPD = '';
-        break;   
+        break;
       case '/wr/m/dbf':
         this.saveDataForOutputDBF = '';
         break;
@@ -248,6 +248,9 @@ export class CloseTabService {
       case '/wr/rpts/anlz/prfm':
         this.saveDataForRRPerformance = '';
         break;
+      case '/wr/m/dma/cranlz':
+        this.saveDataForDMAAnalyze = '';
+        break;
       case '/wr/rpts/exm/details':
         this.saveDataForRRDetails = '';
         break;
@@ -257,9 +260,6 @@ export class CloseTabService {
       case '/wr/rpts/mam/gis':
         this.saveDataForRRGIS = '';
         break;
-      // case '/wr/db':
-      //   this.saveDataForDispersalRateTimed = '';
-      //   break;
     }
     // listed all of the dynamic routes
     if (url.includes('/wr/m/track/offloaded/offloadMfy/')) {
@@ -350,12 +350,12 @@ export class CloseTabService {
     this.saveDataForRRkarkardDaily = '';
     this.saveDataForRRMaster = '';
     this.saveDataForRRPerformance = '';
+    this.saveDataForDMAAnalyze = '';
     this.saveDataForRRDetails = '';
     this.saveDataForRRDisposalHours = '';
     this.saveDataForRRGIS = '';
     this.saveDataForFragmentNOB = '';
     this.saveDataForFragmentNOBDetails = '';
     this.saveDataForTextOutput = '';
-    // this.saveDataForDispersalRateTimed = '';
   }
 }

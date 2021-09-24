@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IAnalyzeRes, IReadingReportWithZoneIDsReq } from 'interfaces/imanage';
+import { IAnalyzeRes, IMostReportInput } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
@@ -15,7 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./performance.component.scss']
 })
 export class PerformanceComponent extends FactoryONE {
-  readingReportReq: IReadingReportWithZoneIDsReq = {
+  readingReportReq: IMostReportInput = {
     zoneId: 0,
     fromDate: '',
     toDate: '',

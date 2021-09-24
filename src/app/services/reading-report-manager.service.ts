@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-    IReadingReportGISReq,
-    IReadingReportReq,
-    IReadingReportTraverseDifferentialReq,
-    IReadingReportWithZoneIDsReq,
+  IMostReportInput,
+  IReadingReportGISReq,
+  IReadingReportReq,
+  IReadingReportTraverseDifferentialReq,
 } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { ENReadingReports } from 'interfaces/reading-reports';
@@ -42,7 +42,7 @@ export class ReadingReportManagerService {
   }
   private readingReportGISReq: IReadingReportGISReq;
   private rRTraverseDiffrential: IReadingReportTraverseDifferentialReq;
-  private rRAnalyzeReq: IReadingReportWithZoneIDsReq;
+  private rRAnalyzeReq: IMostReportInput;
 
   /* GET*/
 
@@ -55,7 +55,7 @@ export class ReadingReportManagerService {
   getRRGISReq(): IReadingReportGISReq {
     return this.readingReportGISReq;
   }
-  getRRAnalyzeReq(): IReadingReportWithZoneIDsReq {
+  getRRAnalyzeReq(): IMostReportInput {
     return this.rRAnalyzeReq;
   }
 
@@ -365,7 +365,7 @@ export class ReadingReportManagerService {
     this.readingReportGISReq = readingReportGISReq;
     return isValidateByDate ? this.datesValidation(readingReportGISReq) : this.periodValidationGIS()
   }
-  verificationRRAnalyzePerformance = (readingReportReq: IReadingReportWithZoneIDsReq, isValidateByDate: boolean): boolean => {
+  verificationRRAnalyzePerformance = (readingReportReq: IMostReportInput, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     this.rRAnalyzeReq = readingReportReq;

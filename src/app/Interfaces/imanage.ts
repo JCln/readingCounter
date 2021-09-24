@@ -372,7 +372,7 @@ export interface IAnalyzeRes {
         totalSeconds: number
     }
 }
-export interface IReadingReportWithZoneIDsReq {
+export interface IMostReportInput {
     zoneId: number,
     fromDate: string,
     toDate: string,

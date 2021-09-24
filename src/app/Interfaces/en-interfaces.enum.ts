@@ -214,6 +214,8 @@ export enum ENInterfaces {
     QotrEdit = 'V1/Qotr/Edit',
     QotrAdd = 'V1/Qotr/Add',
 
+    dataMiningReadingTime = 'V1/List/Offloaded/ReadingTime',
+
 
     /* NON MANAGER INTERFACES */
     getPolicies = 'V1/Policy/Active',
