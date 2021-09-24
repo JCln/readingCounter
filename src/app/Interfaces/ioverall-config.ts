@@ -173,6 +173,7 @@ export enum ENSelectedColumnVariables {
     selectedAuth3 = '_auth3',
     selectedAuth4 = '_auth4',
     selectedRRAnalyzeByParam = '_RRAnalyzeByParam',
+    selectedDMAnalyze = '_DMAnalyses',
     selectedRRMaster = '_RRMaster',
     selectedRRDetails = '_RRDetails',
     selectedRRTraverse = '_RRTraverse',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IReadingReportWithZoneIDsReq } from 'interfaces/imanage';
+import { IMostReportInput } from 'interfaces/imanage';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
@@ -14,7 +14,7 @@ import { InteractionService } from 'services/interaction.service';
 })
 export class ForbiddenComponent implements OnInit {
 
-  readingReportReq: IReadingReportWithZoneIDsReq = {
+  readingReportReq: IMostReportInput = {
     zoneId: 0,
     fromDate: '',
     toDate: '',
