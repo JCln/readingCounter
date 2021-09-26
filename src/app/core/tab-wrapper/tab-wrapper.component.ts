@@ -54,6 +54,11 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       return route;
     return null;
   }
+  filterTabs = (routerUrl: string): ITabs[] => {
+    return this.tabs.filter((item: any) => {
+      return item.route !== routerUrl
+    })
+  }
   findDynamicRouteStatus = (): ITabWrapperDetectDynamicRoute => {
     if (this.getCurrentDynamicRoute('/wr/m/l/pd/'))
       return {
@@ -195,11 +200,10 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     this.reFetchPageTitle();
   }
   closeButtonClicked = (routerUrl: string) => {
-    const a = this.tabs.filter((item: any) => {
-      return item.route !== routerUrl;
-    })
-    this.tabs = a;
-    this.backToPreviousPage();
+    this.tabs = this.filterTabs(routerUrl);
+    if (this.router.url === routerUrl) {
+      this.backToPreviousPage();
+    }
     this.closeCurrentPage(routerUrl);
   }
   addDashboardTab = () => {
