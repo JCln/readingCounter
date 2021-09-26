@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOnOffLoadFlat, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/imanage';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
   ENSelectedColumnVariables,
   IMasrafStates,
@@ -10,19 +10,21 @@ import {
   ISearchInOrderTo,
   ITitleValue,
 } from 'interfaces/ioverall-config';
+import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { Search } from '../classes/search';
-import { ISearchSimpleReq } from './../Interfaces/imanage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
+  ENSearchs = ENSearchs;
+
   _isOrderByDate: boolean = true;
 
   searchReqPro: ISearchProReportInput = {
@@ -469,13 +471,12 @@ export class SearchService {
   receiveYear = (): ITitleValue[] => {
     return this.utilsService.getYears();
   }
-  receiveFromDateJalali = ($event: string) => {
-    this._searchSimpleReq.fromDate = $event;
+  receiveFromDateJalali = (variable: ENSearchs, $event: string) => {
+    this[variable].fromDate = $event;
   }
-  receiveToDateJalali = ($event: string) => {
-    this._searchSimpleReq.toDate = $event;
+  receiveToDateJalali = (variable: ENSearchs, $event: string) => {
+    this[variable].toDate = $event;
   }
-
   routeToWoui = (object: IOnOffLoadFlat) => {
     this.router.navigate(['wr/m/track/woui', false, object.id]);
   }

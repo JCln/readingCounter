@@ -259,3 +259,6 @@ export interface IENV {
         }
     }
 }
+export enum ENLoginVersion {
+    version = '0.4.2'
+}

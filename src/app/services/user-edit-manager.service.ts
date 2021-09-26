@@ -109,7 +109,8 @@ export class UserEditManagerService {
       mobile: dataSource.userInfo.mobile,
       displayMobile: dataSource.userInfo.displayMobile,
       displayName: dataSource.userInfo.displayName,
-      deviceId: dataSource.userInfo.deviceId
+      deviceId: dataSource.userInfo.deviceId,
+      isActive: dataSource.userInfo.isActive
     }
     this.connectToServer(vals);
   }

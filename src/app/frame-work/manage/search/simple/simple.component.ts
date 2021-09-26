@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ISearchSimpleOutput } from 'interfaces/imanage';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { ISearchSimpleOutput } from 'interfaces/search';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';

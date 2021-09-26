@@ -104,11 +104,7 @@ export class TrvchChartComponent implements OnInit {
     this.pieChartDataRegion.push(this.dataSource.inRegion.emptyCount);
   }
   connectToServer = async () => {
-    if (!this.readingReportManagerService.getRRTrvDifferential()) {
-      this.backToPrevious();
-      return;
-    }
-    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/trvch', ENInterfaces.ListTraverseDifferntialChart, 'rRTraverseDiffrential');
+    this.dataSource = await this.readingReportManagerService.postRRManager(ENInterfaces.ListTraverseDifferntialChart, this.readingReportManagerService.trvchReq);
 
     this.insertToPieChartProvince();
     this.insertToPieChartZone();

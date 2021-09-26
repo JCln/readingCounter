@@ -16,9 +16,11 @@
   padding: 5px 0;
   z-index: 4;
   bottom: 120%;
-  left: -40%;
-  transform: translateX(50%);
-  margin-left: -70px;
+  // left: -40%;
+  left: 50%;
+  // transform: translateX(50%);
+  transform: translateX(-50%);
+  // margin-left: -70px;
   font-weight: 600;
   font-family: $font_family;
   font-size: $font_s;

@@ -86,6 +86,7 @@ export class CloseTabService {
   saveDataForFragmentNOBDetails: any;
   saveDataForTextOutput: any;
   // DASHBOARD
+  saveDataForPolicies: any;
 
 
   // close config and remove data for specific page(component)
@@ -186,6 +187,9 @@ export class CloseTabService {
         break;
       case '/wr/imp/simafa/batch':
         this.saveDataForSimafaBatch = '';
+        break;
+      case '/wr/policies':
+        this.saveDataForPolicies = '';
         break;
       case '/wr/profile':
         break;
@@ -331,6 +335,7 @@ export class CloseTabService {
     this.saveDataForTrackReading = '';
     this.saveDataForTrackOffloaded = '';
     this.saveDataForTrackFinished = '';
+    this.saveDataForPolicies = '';
     this.saveDataForLastStates = '';
     this.saveDataForOffloadModify = '';
     this.saveDataForImportDynamic = '';

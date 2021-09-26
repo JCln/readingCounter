@@ -97,7 +97,6 @@ export class OffloadComponent implements OnChanges {
     const res = await this.downloadManagerService.downloadFile(id);
 
     this.testLoadImage[index] = res;
-    console.log(this.testLoadImage);
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       this.testLoadImage[index] = reader.result;

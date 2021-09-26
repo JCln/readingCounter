@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { IPolicies, IPrivacy } from 'interfaces/inon-manage';
 import { ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SecurityService } from 'services/security.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
@@ -16,7 +17,7 @@ export class PrivacyComponent extends FactoryONE {
   privacyOptions: IPrivacy;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
 
- 
+
   policies: IPolicies = {
     id: 0,
     enableValidIpCaptcha: false,
@@ -36,6 +37,7 @@ export class PrivacyComponent extends FactoryONE {
   constructor(
     public interactionService: InteractionService,
     public securityService: SecurityService,
+    private closeTabService: CloseTabService,
     private snackWrapperService: SnackWrapperService
   ) {
     super(interactionService);
@@ -57,8 +59,22 @@ export class PrivacyComponent extends FactoryONE {
     this.policies.canUpdateDeviceId = policies.canUpdateDeviceId;
   }
   classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.saveDataForPolicies = '';
+    }
+
+    // console.log(this.closeTabService.saveDataForPolicies);
+    // if (this.closeTabService.saveDataForPolicies.id === 0 || !this.closeTabService.saveDataForPolicies) {
+    this.policies = await this.securityService.getPolicy();
+    //   this.closeTabService.saveDataForPolicies = this.policies;
+    //   this.insertPolicies(this.policies);
+    // }
+    // else {
+    //   this.policies = this.closeTabService.saveDataForPolicies;
+    this.insertPolicies(this.policies);
+    // }
+
     this.privacyOptions = this.securityService.getPrivacyToggle();
-    this.insertPolicies(await this.securityService.getPolicy());
   }
   plusOrMinus = (value: number) => {
     if (value > this.privacyOptions.maxLength) {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IMostReportInput } from 'interfaces/imanage';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
@@ -14,25 +13,13 @@ import { InteractionService } from 'services/interaction.service';
 })
 export class ForbiddenComponent implements OnInit {
 
-  readingReportReq: IMostReportInput = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1400,
-    zoneIds: [0]
-  }
-
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   subscription: Subscription[] = [];
 
-
   constructor(
     private interactionService: InteractionService,
-    private forbiddenService: ForbiddenService,
+    public forbiddenService: ForbiddenService,
     public route: ActivatedRoute,
     private closeTabService: CloseTabService
   ) { }
@@ -65,14 +52,8 @@ export class ForbiddenComponent implements OnInit {
   routeToChild = () => {
     this.forbiddenService.routeToChild();
   }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
-  }
   verification = async () => {
-    const temp = this.forbiddenService.verificationForbidden(this.readingReportReq);
+    const temp = this.forbiddenService.verificationForbidden(this.forbiddenService.forbiddenReq);
     if (temp)
       this.routeToChild();
   }

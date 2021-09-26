@@ -2,7 +2,7 @@
     <section>
         <div class="input_2">
             <div class="_key">ناحیه</div>
-            <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.zoneId" name="zoneId">
+            <mat-select placeholder="انتخاب مورد" [(ngModel)]="forbiddenService.forbiddenReq.zoneId" name="zoneId">
                 <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
@@ -11,14 +11,18 @@
         <div class="input_2">
             <div class="_key">از</div>
             <div class="_value">
-                <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                <app-date-jalali name="fromDate"
+                    (dateJalEvent)="forbiddenService.receiveFromDateJalali(forbiddenService.ENForbidden.forbidden, $event)"
+                    [dateObject]="forbiddenService.forbiddenReq.fromDate">
                 </app-date-jalali>
             </div>
         </div>
         <div class="input_2">
             <div class="_key">تا</div>
             <div class="_value">
-                <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                <app-date-jalali name="toDate"
+                    (dateJalEvent)="forbiddenService.receiveToDateJalali(forbiddenService.ENForbidden.forbidden, $event)"
+                    [dateObject]="forbiddenService.forbiddenReq.toDate">
                 </app-date-jalali>
             </div>
         </div>

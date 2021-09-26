@@ -60,12 +60,6 @@ export class DetailsComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
   }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportManagerService.detailsReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportManagerService.detailsReq.toDate = $event;
-  }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }

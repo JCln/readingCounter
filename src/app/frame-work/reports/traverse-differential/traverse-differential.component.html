@@ -15,7 +15,8 @@
             <section class="content">
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.zoneId" name="zoneId">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.trvchReq.zoneId"
+                        name="zoneId">
                         <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
                         </mat-option>
@@ -23,7 +24,8 @@
                 </div>
                 <div class="input_2">
                     <div class="_key">نوع پیمایش</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.traverseType" name="traverseID">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="readingReportManagerService.trvchReq.traverseType" name="traverseID">
                         <mat-option *ngFor="let truefalse of traverseDiffrentialDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
                         </mat-option>
@@ -40,8 +42,8 @@
                 </div>
                 <div class="input_2" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
                     <div class="_key">دوره قرائت</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.readingPeriodId"
-                        name="readingPeriodId">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="readingReportManagerService.trvchReq.readingPeriodId" name="readingPeriodId">
                         <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
                         </mat-option>
@@ -49,7 +51,8 @@
                 </div>
                 <div class="input_2" [hidden]="_isOrderByDate">
                     <div class="_key">سال</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.year" name="year">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.trvchReq.year"
+                        name="year">
                         <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
                             {{truefalse.title}}
                         </mat-option>
@@ -58,14 +61,18 @@
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.trvch, $event)"
+                            [dateObject]="readingReportManagerService.trvchReq.fromDate">
                         </app-date-jalali>
                     </div>
                 </div>
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">تا</div>
                     <div class="_value">
-                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                        <app-date-jalali name="toDate"
+                            (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.trvch, $event)"
+                            [dateObject]="readingReportManagerService.trvchReq.toDate">
                         </app-date-jalali>
                     </div>
                 </div>
@@ -78,19 +85,12 @@
                     <i class="fa fa-pie-chart"></i>
                 </button>
             </section>
-        </section>                   
+        </section>
     </form>
 
-    <app-prime-table     
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" 
-    [_outputFileName]="'traverseDiff'"
-    [_checkUpName]="'rr-traverseDiff'"
-    [_rowsPerPage]="[10,20,50,100, 500]"        
-    [_selectedColumnsToRemember]="'selectedRRTraverseDifferential'"    
-    (refreshedTable)="refreshTable()"
- > 
-</app-prime-table>
+    <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
+        [_outputFileName]="'traverseDiff'" [_checkUpName]="'rr-traverseDiff'" [_rowsPerPage]="[10,20,50,100, 500]"
+        [_selectedColumnsToRemember]="'selectedRRTraverseDifferential'" (refreshedTable)="refreshTable()">
+    </app-prime-table>
 </main>
 <router-outlet></router-outlet>

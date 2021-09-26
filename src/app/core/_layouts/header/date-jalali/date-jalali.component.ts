@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { DateJalaliService } from 'services/date-jalali.service';
 
 
@@ -7,41 +7,24 @@ import { DateJalaliService } from 'services/date-jalali.service';
   templateUrl: './date-jalali.component.html',
   styleUrls: ['./date-jalali.component.scss']
 })
-export class DateJalaliComponent implements OnChanges {
+export class DateJalaliComponent implements AfterViewInit {
   datePickerConfig = {
-    format: 'YYYY/MM/DD'
+    format: 'YYYY/MM/DD',
+    locale: 'fa',
   }
   @Output() dateJalEvent = new EventEmitter<any>();
   @Input() dateObject: string;
 
-  currentDate: string;
-  originalDate: string;
-  placeHolder: string = '';
-
   constructor(private dateJalaliService: DateJalaliService) {
-    this.currentDate = this.dateJalaliService.getCurrentDate();
-
-    // if (!this.dateObject) {
-    //   this.placeHolder = this.currentDate;
-    //   this.originalDate = this.currentDate;
-    //   return;
-    // }
-    // this.originalDate = this.dateObject;
-    // this.placeHolder = this.dateObject;
   }
 
   sendDateJal = ($event) => {
     this.dateJalEvent.emit($event.inputElementValue);
   }
-  ngOnChanges(): void {
-    setTimeout(() => {
-      if (!this.dateObject) {
-        this.dateObject = this.currentDate;
-        return;
-      }
-      this.dateObject = this.dateObject;
-
-    }, 0);
-
+  ngAfterViewInit(): void {
+    if (!this.dateObject || this.dateObject.length === 0) {
+      this.dateObject = this.dateJalaliService.getCurrentDate();
+      return;
+    }
   }
 }

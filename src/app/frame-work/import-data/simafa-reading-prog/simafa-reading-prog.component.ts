@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
-import { IImportSimafaReadingProgramsReq, IReadingProgramRes } from 'interfaces/inon-manage';
+import { IImportSimafaReadingProgramsReq, IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';

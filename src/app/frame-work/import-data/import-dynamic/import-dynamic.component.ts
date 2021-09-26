@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IImportDynamicDefault } from 'interfaces/inon-manage';
+import { IImportDynamicDefault } from 'interfaces/import-data';
 import { ENLocalStorageNames, IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
@@ -64,7 +64,7 @@ export class ImportDynamicComponent extends FactoryONE {
 
   constructor(
     public interactionService: InteractionService,
-    private importDynamicService: ImportDynamicService,
+    public importDynamicService: ImportDynamicService,
     private closeTabService: CloseTabService,
     private localClientConfigsService: LocalClientConfigsService
   ) {
@@ -141,12 +141,6 @@ export class ImportDynamicComponent extends FactoryONE {
     if (!this.importDynamicService.validationZoneDictionary(this.zoneDictionary))
       this.zoneDictionary = [];
     this._showDynamicCount = this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasDynamicCount);
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.importDynamic.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.importDynamic.toDate = $event;
   }
   private resetToDefaultFormStatus = () => {
     this._showAlalHesabPercent = false;

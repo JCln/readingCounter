@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/imanage';
+import { IReadingReportGISResponse } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -12,19 +12,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class GisComponent extends FactoryONE {
   gisResponse: IReadingReportGISResponse[] = [];
-  readingReportGISReq: IReadingReportGISReq = {
-    zoneId: 0,
-    isCounterState: true,
-    counterStateId: 0,
-    isKarbariChange: false,
-    isAhadChange: false,
-    isForbidden: false,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    year: 1400,
-    isCluster: true
-  }
   searchInOrderTo: IDictionaryManager[] = [
     {
       id: 'isCounterState',
@@ -71,14 +58,14 @@ export class GisComponent extends FactoryONE {
   counterStateDictionary: IDictionaryManager[] = [];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService
   ) {
     super(interactionService);
   }
 
   getCounterStateByZoneId = async () => {
-    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportGISReq.zoneId);
+    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
   }
   classWrapper = async (canRefresh?: boolean) => {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
@@ -86,12 +73,7 @@ export class GisComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
   }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportGISReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportGISReq.toDate = $event;
-  }
+
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }
@@ -102,23 +84,23 @@ export class GisComponent extends FactoryONE {
   changeRadio = (event: any) => {
     this.searchInOrderTo.forEach(item => {
       if (item.id !== event.value)
-        this.readingReportGISReq[item.id] = false;
+        this.readingReportManagerService.gisReq[item.id] = false;
       else
-        this.readingReportGISReq[item.id] = true;
+        this.readingReportManagerService.gisReq[item.id] = true;
     })
     console.log(event.value);
 
     event.value === 'isForbidden' ? this._isOrderByDate = true : ''
-    event.value === 'isCounterState' ? this.readingReportGISReq.isCounterState = true : ''
+    event.value === 'isCounterState' ? this.readingReportManagerService.gisReq.isCounterState = true : ''
   }
   makeObject = () => {
-    this._isOrderByDate ? (this.readingReportGISReq.readingPeriodId = null, this.readingReportGISReq.year = 0) : (this.readingReportGISReq.fromDate = '', this.readingReportGISReq.toDate = '');
+    this._isOrderByDate ? (this.readingReportManagerService.gisReq.readingPeriodId = null, this.readingReportManagerService.gisReq.year = 0) : (this.readingReportManagerService.gisReq.fromDate = '', this.readingReportManagerService.gisReq.toDate = '');
   }
   verification = async () => {
     this.makeObject();
-    const temp = this.readingReportManagerService.verificationRRGIS(this.readingReportGISReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRGIS(this.readingReportManagerService.gisReq, this._isOrderByDate);
     if (temp)
-      this.readingReportManagerService.routeToMapGIS();
+      this.readingReportManagerService.routeToMapGIS(this.readingReportManagerService.gisReq);
   }
 
 }

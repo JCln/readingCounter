@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IMostReportInput } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { DataMiningAnalysesService } from 'services/data-mining-analyses.service';
@@ -16,16 +15,6 @@ import { IReadingTimeRes } from 'src/app/Interfaces/data-mining';
   styleUrls: ['./dm-analysis.component.scss']
 })
 export class DmAnalysisComponent extends FactoryONE {
-  dataMiningReq: IMostReportInput = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1400,
-    zoneIds: null
-  }
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -48,7 +37,7 @@ export class DmAnalysisComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-    private dataMiningAnalysesService: DataMiningAnalysesService,
+    public dataMiningAnalysesService: DataMiningAnalysesService,
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private utilsService: UtilsService
@@ -71,12 +60,6 @@ export class DmAnalysisComponent extends FactoryONE {
     this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.getReadingPeriodKindDictionary();
     this.receiveYear();
   }
-  receiveFromDateJalali = ($event: string) => {
-    this.dataMiningReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.dataMiningReq.toDate = $event;
-  }
   receiveYear = () => {
     this._years = this.dataMiningAnalysesService.getYears();
   }
@@ -84,17 +67,17 @@ export class DmAnalysisComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.dataMiningAnalysesService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.dataMiningReq.readingPeriodId = null, this.dataMiningReq.year = 0) : (this.dataMiningReq.fromDate = '', this.dataMiningReq.toDate = '')
-    // const temp = this.dataMiningAnalysesService.verificationRRAnalyzePerformance(this.dataMiningReq, this._isOrderByDate);
-    // if (temp)
-    this.connectToServer();
+    this._isOrderByDate ? (this.dataMiningAnalysesService.dataMiningReq.readingPeriodId = null, this.dataMiningAnalysesService.dataMiningReq.year = 0) : (this.dataMiningAnalysesService.dataMiningReq.fromDate = '', this.dataMiningAnalysesService.dataMiningReq.toDate = '')
+    const temp = this.dataMiningAnalysesService.verification(this.dataMiningAnalysesService.dataMiningReq, this._isOrderByDate);
+    if (temp)
+      this.connectToServer();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.dataMiningAnalysesService.columnDataMiningAnalyses();
     this._selectedColumns = Converter.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
-    this.dataSource = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningReq);
+    this.dataSource = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
     if (this.utilsService.isNull(this.dataSource))
       return;
     this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();

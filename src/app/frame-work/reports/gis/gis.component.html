@@ -25,7 +25,8 @@
             <section class="content">
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.zoneId" name="zoneId">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.gisReq.zoneId"
+                        name="zoneId">
                         <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
                             (click)="getCounterStateByZoneId()">
                             {{truefalse.title}}
@@ -43,17 +44,18 @@
                 </div>
                 <div class="input_2" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
                     <div class="_key">دوره قرائت</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.readingPeriodId"
-                        name="readingPeriodId">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="readingReportManagerService.gisReq.readingPeriodId" name="readingPeriodId">
                         <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2" [hidden]="!readingReportGISReq.isCounterState || !counterStateDictionary.length">
+                <div class="input_2"
+                    [hidden]="!readingReportManagerService.gisReq.isCounterState || !counterStateDictionary.length">
                     <div class="_key">وضعیت کنتور</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.counterStateId"
-                        name="counterStateId">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="readingReportManagerService.gisReq.counterStateId" name="counterStateId">
                         <mat-option *ngFor="let truefalse of counterStateDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
                         </mat-option>
@@ -61,14 +63,14 @@
                 </div>
                 <div class="input_2" [hidden]="_isOrderByDate">
                     <div class="_key">سال</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportGISReq.year"
-                        [(value)]="readingReportGISReq.year" name="year">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.gisReq.year"
+                        [(value)]="readingReportManagerService.gisReq.year" name="year">
                         <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
                             {{truefalse.title}}
                         </mat-option>
                     </mat-select>
                 </div>
-                <mat-checkbox name="isCluster" [(ngModel)]="readingReportGISReq.isCluster">خوشه بندی
+                <mat-checkbox name="isCluster" [(ngModel)]="readingReportManagerService.gisReq.isCluster">خوشه بندی
                 </mat-checkbox>
             </section>
 
@@ -76,14 +78,18 @@
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.gis, $event)"
+                            [dateObject]="readingReportManagerService.gisReq.fromDate">
                         </app-date-jalali>
                     </div>
                 </div>
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">تا</div>
                     <div class="_value">
-                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                        <app-date-jalali name="toDate"
+                            (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.gis, $event)"
+                            [dateObject]="readingReportManagerService.gisReq.toDate">
                         </app-date-jalali>
                     </div>
                 </div>

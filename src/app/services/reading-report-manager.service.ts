@@ -22,7 +22,8 @@ import { Converter } from './../classes/converter';
 })
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  private readingReportReq: IReadingReportReq;
+  ENReadingReports = ENReadingReports;
+
   masterReq: IReadingReportReq = {
     fromDate: '',
     toDate: '',
@@ -40,23 +41,81 @@ export class ReadingReportManagerService {
     reportCode: 0,
     year: 1400
   }
-  private readingReportGISReq: IReadingReportGISReq;
-  private rRTraverseDiffrential: IReadingReportTraverseDifferentialReq;
-  private rRAnalyzeReq: IMostReportInput;
-
+  disposalhoursReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
+  karkardReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
+  karkardDailyReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
+  gisReq: IReadingReportGISReq = {
+    zoneId: 0,
+    isCounterState: true,
+    counterStateId: 0,
+    isKarbariChange: false,
+    isAhadChange: false,
+    isForbidden: false,
+    fromDate: '',
+    toDate: '',
+    readingPeriodId: null,
+    year: 1400,
+    isCluster: true
+  }
+  anlzPrfmReq: IMostReportInput = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400,
+    zoneIds: [0]
+  }
+  trvchReq: IReadingReportTraverseDifferentialReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    readingPeriodId: null,
+    year: 1400,
+    traverseType: 0,
+    zoneIds: null
+  }
+  traverseReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
   /* GET*/
 
-  getRRReq(): IReadingReportReq {
-    return this.readingReportReq;
+  receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
+    this[variable].fromDate = $event;
   }
-  getRRTrvDifferential(): IReadingReportTraverseDifferentialReq {
-    return this.rRTraverseDiffrential;
-  }
-  getRRGISReq(): IReadingReportGISReq {
-    return this.readingReportGISReq;
-  }
-  getRRAnalyzeReq(): IMostReportInput {
-    return this.rRAnalyzeReq;
+  receiveToDateJalali = (variable: ENReadingReports, $event: string) => {
+    this[variable].toDate = $event;
   }
 
   /* COLUMNS*/
@@ -228,25 +287,14 @@ export class ReadingReportManagerService {
       })
     });
   }
-  postRRManager = (backTo: string, method: ENInterfaces, validator: string): Promise<any> => {
-    console.log(this[validator]);
-    if (!this[validator]) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_again);
-      this.routeTo(backTo);
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, this[validator]).subscribe((res) => {
-          if (this.utilsService.isNull(res))
-            this.emptyMessage();
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-
+  postRRManager = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).subscribe((res) => {
+        if (this.utilsService.isNull(res))
+          this.emptyMessage();
+        resolve(res)
+      })
+    });
   }
   postRRManagerOnMap = (method: ENInterfaces, val: object): Promise<any> => {
     return new Promise((resolve) => {
@@ -278,6 +326,12 @@ export class ReadingReportManagerService {
 
 
   private datesValidation = (value: object): boolean => {
+    if (value.hasOwnProperty('zoneId')) {
+      if (this.utilsService.isNull(value['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
     if (value.hasOwnProperty('fromDate')) {
       if (this.utilsService.isNull(value['fromDate'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
@@ -290,15 +344,9 @@ export class ReadingReportManagerService {
         return false;
       }
     }
-    if (value.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNull(value['zoneId'])) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-        return false;
-      }
-    }
     if (value.hasOwnProperty('isCounterState')) {
-      if (this.readingReportGISReq.isCounterState === true) {
-        if (this.utilsService.isNull(this.readingReportGISReq.counterStateId)) {
+      if (this.gisReq.isCounterState === true) {
+        if (this.utilsService.isNull(this.gisReq.counterStateId)) {
           this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
           return false;
         }
@@ -307,6 +355,11 @@ export class ReadingReportManagerService {
     return true;
   }
   private periodValidations = (value: object): boolean => {
+    if (value.hasOwnProperty('zoneId'))
+      if (this.utilsService.isNull(value['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
     if (value.hasOwnProperty('readingPeriodId'))
       if (this.utilsService.isNull(value['readingPeriodId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
@@ -317,20 +370,15 @@ export class ReadingReportManagerService {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
         return false;
       }
-    if (value.hasOwnProperty('zoneId'))
-      if (this.utilsService.isNull(value['zoneId'])) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-        return false;
-      }
     return true;
   }
-  private periodValidationGIS = (): boolean => {
-    if (this.readingReportGISReq.isForbidden === true) {
+  private periodValidationGIS = (readingReportGISReq: IReadingReportGISReq): boolean => {
+    if (readingReportGISReq.isForbidden === true) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_forbiddenByDate);
       return false;
     }
-    if (this.readingReportGISReq.isCounterState === true) {
-      if (this.utilsService.isNull(this.readingReportGISReq.counterStateId)) {
+    if (readingReportGISReq.isCounterState === true) {
+      if (this.utilsService.isNull(readingReportGISReq.counterStateId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
         return false;
       }
@@ -338,10 +386,7 @@ export class ReadingReportManagerService {
     return true;
   }
 
-  // VerificationS
-  insertToReadingReport = (name: ENReadingReports, val: object) => {
-    this[name] = val;
-  }
+  // VerificationS 
   verificationRRShared = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
@@ -350,34 +395,26 @@ export class ReadingReportManagerService {
   verificationRRTraverseDifferential = (readingReportReq: IReadingReportTraverseDifferentialReq, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    this.rRTraverseDiffrential = readingReportReq;
     return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
   verificationRRDisposalHours = (readingReportReq: IReadingReportReq): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    this.readingReportReq = readingReportReq;
     return this.datesValidation(readingReportReq);
   }
   verificationRRGIS = (readingReportGISReq: IReadingReportGISReq, isValidateByDate: boolean): boolean => {
     readingReportGISReq.fromDate = Converter.persianToEngNumbers(readingReportGISReq.fromDate);
     readingReportGISReq.toDate = Converter.persianToEngNumbers(readingReportGISReq.toDate);
-    this.readingReportGISReq = readingReportGISReq;
-    return isValidateByDate ? this.datesValidation(readingReportGISReq) : this.periodValidationGIS()
+    return isValidateByDate ? this.datesValidation(readingReportGISReq) : this.periodValidationGIS(readingReportGISReq)
   }
   verificationRRAnalyzePerformance = (readingReportReq: IMostReportInput, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    this.rRAnalyzeReq = readingReportReq;
     return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
 
   // 
   // snack bar
-  convertDates = () => {
-    this.rRAnalyzeReq.fromDate = Converter.persianToEngNumbers(this.rRAnalyzeReq.fromDate);
-    this.rRAnalyzeReq.toDate = Converter.persianToEngNumbers(this.rRAnalyzeReq.toDate);
-  }
   emptyMessage = () => {
     this.utilsService.snackBarMessageFailed(EN_messages.notFound);
   }
@@ -393,8 +430,8 @@ export class ReadingReportManagerService {
   backToPreviousPage = () => {
     this._location.back();
   }
-  routeToMapGIS = () => {
-    this.router.navigate(['/wr', this.readingReportGISReq]);
+  routeToMapGIS = (readingReportGISReq: IReadingReportGISReq) => {
+    this.router.navigate(['/wr', readingReportGISReq]);
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

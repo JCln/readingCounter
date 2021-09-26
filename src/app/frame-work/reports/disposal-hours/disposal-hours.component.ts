@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingReportReq, IRRChartResWrapper } from 'interfaces/imanage';
+import { IRRChartResWrapper } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
@@ -15,15 +15,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./disposal-hours.component.scss']
 })
 export class DisposalHoursComponent extends FactoryONE {
-  readingReportReq: IReadingReportReq = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1400
-  }
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
@@ -33,7 +24,7 @@ export class DisposalHoursComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public route: ActivatedRoute
@@ -56,21 +47,15 @@ export class DisposalHoursComponent extends FactoryONE {
   routeToChartView = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/dh/chart');
   }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
-  }
   validation = (): boolean => {
-    return this.readingReportManagerService.verificationRRDisposalHours(this.readingReportReq);
+    return this.readingReportManagerService.verificationRRDisposalHours(this.readingReportManagerService.disposalhoursReq);
   }
   verification = async () => {
     if (this.validation())
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalHours, this.readingReportReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalHours, this.readingReportManagerService.disposalhoursReq);
     this.insertSelectedColumns();
     this.closeTabService.saveDataForRRDisposalHours = this.dataSource;
   }

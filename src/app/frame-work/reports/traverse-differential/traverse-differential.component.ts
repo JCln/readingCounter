@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingReportTraverseDifferentialReq, IReadingReportTraverseDifferentialRes } from 'interfaces/imanage';
+import { IReadingReportTraverseDifferentialRes } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
@@ -15,15 +15,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./traverse-differential.component.scss']
 })
 export class TraverseDifferentialComponent extends FactoryONE {
-  readingReportReq: IReadingReportTraverseDifferentialReq = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    year: 1400,
-    traverseType: 0,
-    zoneIds: null
-  }
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -50,7 +41,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
 
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
     public route: ActivatedRoute,
     private closeTabService: CloseTabService
@@ -76,12 +67,6 @@ export class TraverseDifferentialComponent extends FactoryONE {
   routeToChartView = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/trvch/chart');
   }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
-  }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }
@@ -89,8 +74,8 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   validation = (): boolean => {
-    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    return this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportReq, this._isOrderByDate);
+    this._isOrderByDate ? (this.readingReportManagerService.trvchReq.readingPeriodId = null, this.readingReportManagerService.trvchReq.year = 0) : (this.readingReportManagerService.trvchReq.fromDate = '', this.readingReportManagerService.trvchReq.toDate = '');
+    return this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportManagerService.trvchReq, this._isOrderByDate);
   }
   verification = async () => {
     if (this.validation())
@@ -101,7 +86,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportManagerService.trvchReq);
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.insertSelectedColumns();

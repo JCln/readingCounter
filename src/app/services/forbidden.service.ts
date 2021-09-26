@@ -10,13 +10,27 @@ import { Converter } from 'src/app/classes/converter';
 
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
+export enum ENForbidden {
+  forbidden = 'forbiddenReq'
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ForbiddenService {
-  forbiddenReq: IMostReportInput;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
+  ENForbidden = ENForbidden;
 
+  forbiddenReq: IMostReportInput = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400,
+    zoneIds: [0]
+  }
   /* COLUMNS */
   private _forbidden: IObjectIteratation[] = [
     // { field: 'userId', header: 'کاربری', isSelected: true },
@@ -70,6 +84,12 @@ export class ForbiddenService {
         resolve(res))
     });
   }
+  receiveFromDateJalali = (variable: ENForbidden, $event: string) => {
+    this[variable].fromDate = $event;
+  }
+  receiveToDateJalali = (variable: ENForbidden, $event: string) => {
+    this[variable].toDate = $event;
+  }
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();
   }
@@ -106,7 +126,6 @@ export class ForbiddenService {
   verificationForbidden = (forbidden: IMostReportInput) => {
     forbidden.fromDate = Converter.persianToEngNumbers(forbidden.fromDate);
     forbidden.toDate = Converter.persianToEngNumbers(forbidden.toDate);
-    this.forbiddenReq = forbidden;
     return this.datesValidationForbidden();
   }
   setDynamicPartRanges = (dataSource: IForbiddenManager[]) => {

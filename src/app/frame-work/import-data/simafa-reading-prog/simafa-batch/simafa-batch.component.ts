@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
-import { IBatchImportDataResponse, IImportSimafaBatchReq } from 'interfaces/inon-manage';
+import { IBatchImportDataResponse, IImportSimafaBatchReq } from 'interfaces/import-data';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';

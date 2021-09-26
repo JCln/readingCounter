@@ -15,7 +15,8 @@
             <section class="content">
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.zoneId" name="zoneId">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.traverseReq.zoneId"
+                        name="zoneId">
                         <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
                         </mat-option>
@@ -32,8 +33,8 @@
                 </div>
                 <div class="input_2" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
                     <div class="_key">دوره قرائت</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.readingPeriodId"
-                        name="readingPeriodId">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="readingReportManagerService.traverseReq.readingPeriodId" name="readingPeriodId">
                         <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
                         </mat-option>
@@ -41,8 +42,8 @@
                 </div>
                 <div class="input_2" [hidden]="_isOrderByDate">
                     <div class="_key">سال</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.year"
-                        [(value)]="readingReportReq.year" name="year">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.traverseReq.year"
+                        [(value)]="readingReportManagerService.traverseReq.year" name="year">
                         <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
                             {{truefalse.title}}
                         </mat-option>
@@ -52,14 +53,18 @@
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.traverse, $event)"
+                            [dateObject]="readingReportManagerService.traverseReq.fromDate">
                         </app-date-jalali>
                     </div>
                 </div>
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">تا</div>
                     <div class="_value">
-                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                        <app-date-jalali name="toDate"
+                            (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.traverse, $event)"
+                            [dateObject]="readingReportManagerService.traverseReq.toDate">
                         </app-date-jalali>
                     </div>
                 </div>

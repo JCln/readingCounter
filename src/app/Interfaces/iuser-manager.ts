@@ -99,7 +99,8 @@ export interface IAUserEditSave {
     mobile: string,
     displayMobile: boolean,
     displayName: string,
-    deviceId: string
+    deviceId: string,
+    isActive: boolean
 }
 export interface IUserInfo {
     userCode?: number,

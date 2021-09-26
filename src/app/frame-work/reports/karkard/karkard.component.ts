@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingReportKarkard, IReadingReportReq } from 'interfaces/imanage';
+import { IReadingReportKarkard } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
@@ -16,15 +16,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./karkard.component.scss']
 })
 export class KarkardComponent extends FactoryONE {
-  readingReportReq: IReadingReportReq = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1400
-  }
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -42,7 +33,6 @@ export class KarkardComponent extends FactoryONE {
   _selectCols: any[] = [];
   _selectedColumns: any[];
   _isOrderByDate: boolean = true;
-  _canRouteToChild: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -51,7 +41,7 @@ export class KarkardComponent extends FactoryONE {
   readingPeriodDictionary: IDictionaryManager[] = [];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public route: ActivatedRoute
@@ -75,22 +65,15 @@ export class KarkardComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
   }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
-  }
   receiveYear = () => {
-    this._canRouteToChild = true;
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   validation = (): boolean => {
-    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    return this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
+    // this._isOrderByDate ? (this.readingReportManagerService.karkardReq.readingPeriodId = null, this.readingReportManagerService.karkardReq.year = 0) : (this.readingReportManagerService.karkardReq.fromDate = '', this.readingReportManagerService.karkardReq.toDate = '');
+    return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardReq, this._isOrderByDate);
   }
   verification = async () => {
     if (this.validation())
@@ -101,7 +84,7 @@ export class KarkardComponent extends FactoryONE {
     this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListOFFKarkard, this.readingReportReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListOFFKarkard, this.readingReportManagerService.karkardReq);
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.insertSelectedColumns();

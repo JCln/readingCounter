@@ -42,7 +42,8 @@
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.master, $event)"
                             [dateObject]="readingReportManagerService.masterReq.fromDate">
                         </app-date-jalali>
                     </div>
@@ -50,7 +51,8 @@
                 <div class="input_2" [hidden]="!_isOrderByDate">
                     <div class="_key">تا</div>
                     <div class="_value">
-                        <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
+                        <app-date-jalali name="toDate"
+                            (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.master, $event)"
                             [dateObject]="readingReportManagerService.masterReq.toDate">
                         </app-date-jalali>
                     </div>

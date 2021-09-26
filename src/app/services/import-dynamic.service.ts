@@ -5,13 +5,14 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    IImportDataResponse,
-    IImportDynamicDefault,
-    IImportSimafaBatchReq,
-    IImportSimafaReadingProgramsReq,
-    IImportSimafaSingleReq,
-    IReadingProgramRes,
-} from 'interfaces/inon-manage';
+  ENImportDatas,
+  IImportDataResponse,
+  IImportDynamicDefault,
+  IImportSimafaBatchReq,
+  IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
+  IReadingProgramRes,
+} from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -26,6 +27,8 @@ import { UtilsService } from './utils.service';
 export class ImportDynamicService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   importDynamicValue: IImportDynamicDefault;
+  ENImportDatas = ENImportDatas;
+
   simafaRDPGReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
@@ -105,6 +108,20 @@ export class ImportDynamicService {
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ]
+  importDynamicReq: IImportDynamicDefault = {
+    fromEshterak: '',
+    toEshterak: '',
+    zoneId: 0,
+    alalHesabPercent: 0,
+    imagePercent: 0,
+    hasPreNumber: false,
+    displayBillId: false,
+    displayRadif: false,
+    fromDate: null,
+    toDate: null,
+    counterReaderId: '',
+    readingPeriodId: null
+  }
 
   constructor(
     private utilsService: UtilsService,
@@ -137,6 +154,12 @@ export class ImportDynamicService {
   }
   columnGetSimafaRDPG = (): IImportSimafaReadingProgramsReq => {
     return this.simafaRDPGReq;
+  }
+  receiveFromDateJalali = (variable: ENImportDatas, $event: string) => {
+    this[variable].fromDate = $event;
+  }
+  receiveToDateJalali = (variable: ENImportDatas, $event: string) => {
+    this[variable].toDate = $event;
   }
   persentCheck = (val: number): boolean => {
     return this.utilsService.persentCheck(val);

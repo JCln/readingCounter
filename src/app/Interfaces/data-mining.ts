@@ -8,3 +8,6 @@ export interface IReadingTimeRes {
     closedCount: number,
     closedPercent: number
 }
+export enum ENDataMining {
+    dataMining = 'dataMiningReq'
+}

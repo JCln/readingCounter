@@ -2,7 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ICredentials } from 'interfaces/iauth-guard-permission';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { ENLoginVersion, IDictionaryManager } from 'interfaces/ioverall-config';
 import { BrowserSupportService } from 'services/browser-support.service';
 import { infoVersion } from 'services/DI/info-version';
 import { UtilsService } from 'services/utils.service';
@@ -33,6 +33,7 @@ import { AuthService } from './../auth.service';
   ]
 })
 export class LoginComponent {
+  versionNumber = ENLoginVersion.version;
   userData: ICredentials = { username: '', password: '' };
   showVersionInfo: boolean = false;
   infoVersionItems: IDictionaryManager[] = [];

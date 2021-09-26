@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IAnalyzeRes, IMostReportInput } from 'interfaces/imanage';
+import { IAnalyzeRes } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
@@ -15,16 +15,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./performance.component.scss']
 })
 export class PerformanceComponent extends FactoryONE {
-  readingReportReq: IMostReportInput = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1400,
-    zoneIds: [0]
-  }
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -47,7 +37,7 @@ export class PerformanceComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
+    public readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private utilsService: UtilsService
@@ -70,12 +60,6 @@ export class PerformanceComponent extends FactoryONE {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
   }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
-  }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }
@@ -83,8 +67,8 @@ export class PerformanceComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '')
-    const temp = this.readingReportManagerService.verificationRRAnalyzePerformance(this.readingReportReq, this._isOrderByDate);
+    this._isOrderByDate ? (this.readingReportManagerService.anlzPrfmReq.readingPeriodId = null, this.readingReportManagerService.anlzPrfmReq.year = 0) : (this.readingReportManagerService.anlzPrfmReq.fromDate = '', this.readingReportManagerService.anlzPrfmReq.toDate = '')
+    const temp = this.readingReportManagerService.verificationRRAnalyzePerformance(this.readingReportManagerService.anlzPrfmReq, this._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
@@ -93,7 +77,7 @@ export class PerformanceComponent extends FactoryONE {
     this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingAnalyzeByParam, this.readingReportReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingAnalyzeByParam, this.readingReportManagerService.anlzPrfmReq);
     if (this.utilsService.isNull(this.dataSource))
       return;
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();

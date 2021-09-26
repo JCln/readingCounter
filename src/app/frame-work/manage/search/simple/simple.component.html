@@ -52,14 +52,18 @@
             <div class="input_2" [hidden]="!searchService._isOrderByDate">
                 <div class="_key">از</div>
                 <div class="_value">
-                    <app-date-jalali name="fromDate" (dateJalEvent)="searchService.receiveFromDateJalali($event)">
+                    <app-date-jalali name="fromDate"
+                        (dateJalEvent)="searchService.receiveFromDateJalali(searchService.ENSearchs.simple, $event)"
+                        [dateObject]="searchService._searchSimpleReq.fromDate">
                     </app-date-jalali>
                 </div>
             </div>
             <div class="input_2" [hidden]="!searchService._isOrderByDate">
                 <div class="_key">تا</div>
                 <div class="_value">
-                    <app-date-jalali name="toDate" (dateJalEvent)="searchService.receiveToDateJalali($event)">
+                    <app-date-jalali name="toDate"
+                        (dateJalEvent)="searchService.receiveToDateJalali(searchService.ENSearchs.simple, $event)"
+                        [dateObject]="searchService._searchSimpleReq.toDate">
                     </app-date-jalali>
                 </div>
             </div>

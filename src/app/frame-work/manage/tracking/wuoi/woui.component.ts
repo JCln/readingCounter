@@ -36,7 +36,7 @@ export class WouiComponent extends FactoryONE {
   viewerOpen: boolean[] = [false];
   ref: DynamicDialogRef;
 
- 
+
 
   constructor(
     private route: ActivatedRoute,
@@ -95,6 +95,7 @@ export class WouiComponent extends FactoryONE {
 
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
     this.getDownloadListInfo();
+    this.showAllImgs();
   }
   getExactImg = async (id: string, index: number) => {
     if (this.testLoadImage[index])
@@ -111,6 +112,11 @@ export class WouiComponent extends FactoryONE {
     if (this.testLoadImage[index]) {
       reader.readAsDataURL(this.testLoadImage[index]);
     }
+  }
+  showAllImgs = () => {
+    this.imageFiles.forEach((item, i) => {
+      this.getExactImg(item.fileRepositoryId, i);
+    })
   }
   getExactAudio = async (id: string) => {
     const res = await this.downloadManagerService.downloadFile(id);

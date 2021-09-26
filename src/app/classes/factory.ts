@@ -16,7 +16,6 @@ export abstract class FactoryONE implements OnInit, AfterViewInit, OnDestroy {
 
     refreshTabStatus = () => {
         this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-            console.log(res.includes(Factory.refreshTabStatus()));
             if (res.includes(Factory.refreshTabStatus()))
                 this.classWrapper(true);
         })
