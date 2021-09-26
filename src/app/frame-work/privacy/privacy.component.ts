@@ -63,16 +63,16 @@ export class PrivacyComponent extends FactoryONE {
       this.closeTabService.saveDataForPolicies = '';
     }
 
-    // console.log(this.closeTabService.saveDataForPolicies);
-    // if (this.closeTabService.saveDataForPolicies.id === 0 || !this.closeTabService.saveDataForPolicies) {
-    this.policies = await this.securityService.getPolicy();
-    //   this.closeTabService.saveDataForPolicies = this.policies;
-    //   this.insertPolicies(this.policies);
-    // }
-    // else {
-    //   this.policies = this.closeTabService.saveDataForPolicies;
-    this.insertPolicies(this.policies);
-    // }
+    console.log(this.closeTabService.saveDataForPolicies);
+    if (this.closeTabService.saveDataForPolicies) {
+      this.policies = this.closeTabService.saveDataForPolicies;
+      this.insertPolicies(this.policies);
+    }
+    else {
+      this.policies = await this.securityService.getPolicy();
+      this.closeTabService.saveDataForPolicies = this.policies;
+      this.insertPolicies(this.policies);
+    }
 
     this.privacyOptions = this.securityService.getPrivacyToggle();
   }

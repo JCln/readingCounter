@@ -22,7 +22,6 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/web.config",
@@ -60,7 +59,13 @@
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js",
               "src/assets/L.fullscreenGH/dist/Leaflet.fullscreen.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -72,12 +77,6 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": {
-                "scripts": true,
-                "styles": false,
-                "hidden": true,
-                "vendor": true
-              },
               "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
@@ -96,7 +95,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
