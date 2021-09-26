@@ -36,6 +36,8 @@ export class DataMiningAnalysesService {
     { field: 'countSameTime', header: 'تعداد دریافت همزمان', isSelected: true, readonly: true },
     { field: 'closedCount', header: 'تعداد بسته', isSelected: true, readonly: true },
     { field: 'closedPercent', header: 'درصد بسته', isSelected: true, readonly: true },
+    { field: 'disconnectRate', header: 'نرخ قعطی', isSelected: true, readonly: true },
+    { field: 'medianBetweenTwoMinute', header: 'میانه بین دو', isSelected: true, readonly: true },
   ]
 
   constructor(

@@ -220,6 +220,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.map.flyTo([(lat), (lag)], zoom);
   }
+  private panToDes = (lat: number, lag: number) => {
+    if (lat === 0 || lag === 0)
+      return;
+    lat = parseFloat(lat.toString().substring(0, 6));
+    lag = parseFloat(lag.toString().substring(0, 6));
+
+    this.map.panTo([(lat), (lag)]);
+  }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
@@ -230,7 +238,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     xyData.map((items, i) => {
       setTimeout(() => {
         this[method](parseFloat(items.y), parseFloat(items.x), items);
-        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
+        this.panToDes(parseFloat(items.y), parseFloat(items.x));
       }, i * delay);
     })
   }
@@ -243,7 +251,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private getXYMarkerClusterPosition = (xyData: any) => {
     const markers = new L.markerClusterGroup();
     xyData.map((items) => {
-      this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 12);
+      this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 11);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)]).bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       ));

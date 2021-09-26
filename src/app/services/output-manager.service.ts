@@ -14,7 +14,6 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class OutputManagerService {
-  fileUrl;
   dbfOutput: IOutputManager = {
     zoneId: 0,
     fromDate: null,
