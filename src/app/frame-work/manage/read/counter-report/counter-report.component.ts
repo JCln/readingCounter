@@ -78,6 +78,7 @@ export class CounterReportComponent extends FactoryONE {
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.CounterReportRemove, rowDataAndIndex['dataSource']);
       this.refetchTable(rowDataAndIndex['ri']);
+      this.refreshTable();
     }
   }
   onRowEditCancel() {

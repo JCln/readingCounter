@@ -77,6 +77,7 @@ export class CounterStateComponent extends FactoryONE {
     if (a) {
       await this.readManagerService.deleteSingleRow(ENInterfaces.counterStateRemove, rowData['dataSource'].id);
       this.refetchTable(rowData['ri']);
+      this.refreshTable();
     }
   }
   onRowEditSave = async (dataSource: ICounterState) => {
@@ -109,6 +110,8 @@ export class CounterStateComponent extends FactoryONE {
     }
     else {
       await this.readManagerService.addOrEditAuths(ENInterfaces.counterStateEdit, dataSource['dataSource']);
+      this.refreshTable();
+      Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     }
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }

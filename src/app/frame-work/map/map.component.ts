@@ -48,7 +48,7 @@ const myIcon = L.Icon.extend({
   }
 });
 const iconSimple = new myIcon({ iconUrl: 'assets/imgs/leaflet/marker-icon.png' });
-const markerGreen = new defaultIcon({ iconUrl: 'assets/imgs/leaflet/marker_green.png' });
+const markerGreen = new defaultIcon({ iconUrl: 'assets/imgs/leaflet/marker_blue.png' });
 const markerRed = new defaultIcon({ iconUrl: 'assets/imgs/leaflet/marker_red.png' });
 L.Marker.prototype.options.icon = simpleIcon;
 

@@ -80,7 +80,7 @@ export class ProComponent extends FactoryONE {
   nullSavedSource = () => this.closeTabService.saveDataForSearchPro = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.nullSavedSource();
+      // this.nullSavedSource();
       this.connectToServer();
     }
     if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchPro)) {
