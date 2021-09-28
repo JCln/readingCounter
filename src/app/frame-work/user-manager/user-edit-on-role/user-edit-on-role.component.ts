@@ -22,12 +22,11 @@ export class UserEditOnRoleComponent extends FactoryONE {
     super(interactionService);
   }
   connectToServer = () => {
-    this.userEditManagerService.verificationEditOnRole(this.dataSource);
+    this.userEditManagerService.userEditOnRole(this.dataSource);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    // this.dataSource = await this.userEditManagerService.();
-    if (!this.dataSource)
-      return;
+
+    this.dataSource = await this.userEditManagerService.getUserAdd();
 
     this.userRoles = this.dataSource.roleItems;
     this.userActions = this.dataSource.appItems;

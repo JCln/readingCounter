@@ -30,9 +30,7 @@ export class UserAddComponent extends FactoryONE {
   }
   classWrapper = async (canRefresh?: boolean) => {
     this.dataSource = await this.userAddManagerService.getUserAdd();
-    if (this.dataSource)
-
-      this.roleItemsData = this.dataSource.roleItems;
+    this.roleItemsData = this.dataSource.roleItems;
     this.userAppItems = this.dataSource.appItems;
     this.provinceItemsData = this.dataSource.provinceItems;
   }

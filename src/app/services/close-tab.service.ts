@@ -41,6 +41,7 @@ export class CloseTabService {
   saveDataForEditUsers: any;
   saveDictionaryForEditUsers: any;
   saveDictionaryForAddUsers: any;
+  saveDataForEditOnRole: any;
 
   // track manager
   saveDataForTrackImported: any;
@@ -151,6 +152,9 @@ export class CloseTabService {
         break;
       case '/wr/mu/role':
         this.saveDataForRoleManager = '';
+        break;
+      case '/wr/mu/eor':
+        this.saveDataForEditOnRole = '';
         break;
       // zones manage
       case '/wr/m/zs/c':
@@ -322,6 +326,7 @@ export class CloseTabService {
     this.saveDataForSearchPro = '';
     this.saveDataForSearchSimple = '';
     this.saveDataForEditUsers = '';
+    this.saveDataForEditOnRole = '';
     this.saveDictionaryForEditUsers = '';
     this.saveDictionaryForAddUsers = '';
     this.saveDataForRoleManager = '';

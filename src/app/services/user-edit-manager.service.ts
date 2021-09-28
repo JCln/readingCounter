@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
-import { IAUserEditSave, IUserEditManager, IUserEditOnRole } from 'interfaces/iuser-manager';
+import { IAddUserManager, IAUserEditSave, IUserEditManager, IUserEditOnRole } from 'interfaces/iuser-manager';
 
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
@@ -13,6 +13,8 @@ import { UtilsService } from './utils.service';
 })
 export class UserEditManagerService {
   dataSource: IAUserEditSave;
+  userEditOnRoleRoleVal: number;
+
   constructor(
     private snackWrapperService: SnackWrapperService,
     private interfaceManagerService: InterfaceManagerService,
@@ -114,25 +116,40 @@ export class UserEditManagerService {
     }
     this.connectToServer(vals);
   }
+  getUserAdd = (): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.userADD).toPromise().then(res => {
+        resolve(res);
+      });
+    })
+  }
   private connectToServerEditOnRole = (dataSource: IUserEditOnRole) => {
     this.interfaceManagerService.POSTBODY(ENInterfaces.userEditOnRole, dataSource).toPromise().then((res: IResponses) => {
       this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
     });
   }
-  verificationEditOnRole = (dataSource: IUserEditOnRole) => {
-    if (!this.utilsService.isNullWithText(dataSource.roleId[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
+  private verificationEditOnRole = (dataSource: IUserEditOnRole) => {
+    if (this.utilsService.isNull(dataSource.roleId)) {
+      this.utilsService.snackBarMessage(EN_messages.insert_group_access, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
+    }
     if (!this.utilsService.isNullWithText(dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
       return false;
 
     return true;
   }
-  userEditOnRole = (dataSource: IUserEditOnRole) => {
-    console.log(dataSource);
-    if (!this.verificationEditOnRole(dataSource))
+  userEditOnRole = (dataSource: IAddUserManager) => {
+    const val: IUserEditOnRole = {
+      roleId: this.userEditOnRoleRoleVal,
+      selectedActions: this.addAUserActions(dataSource.appItems),
+    }
+    if (!this.verificationEditOnRole(val))
       return;
-    // this.connectToServerEditOnRole(dataSource);
 
+    this.connectToServerEditOnRole(val);
+  }
+  userEditOnRoleInsertRole = (val: any) => {
+    this.userEditOnRoleRoleVal = val;
   }
 
 }

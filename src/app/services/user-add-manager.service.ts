@@ -15,10 +15,11 @@ export class UserAddManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService
   ) { }
+
   // API CALLS 
   getUserAdd = (): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.userADD).toPromise().then((res) => {
+      this.interfaceManagerService.GET(ENInterfaces.userADD).toPromise().then(res => {
         resolve(res);
       });
     })

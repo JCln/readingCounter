@@ -23,7 +23,10 @@ export class DateJalaliService {
     return Converter.persianToEngNumbers(persianDate);
   }
   getTime = (item: any) => {
-    return Converter.persianToEngNumbers(new Date(item).toLocaleTimeString('fa-IR'));
+    let persianTime = new Date(item).toLocaleTimeString('fa-IR');
+    if (persianTime.length == 7)
+      return Converter.persianToEngNumbers(persianTime = 0 + persianTime);
+    return Converter.persianToEngNumbers(persianTime);
   }
   getDate = (item: any) => {
     let persianDate = new Date(item).toLocaleDateString('fa-IR');
