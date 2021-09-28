@@ -96,6 +96,9 @@ export class DmAnalysisComponent extends FactoryONE {
   private setRanges = () => {
     this.dataSource.forEach(item => {
       item.averageBetweenTwoMinute = parseFloat(this.utilsService.getRange(item.averageBetweenTwoMinute));
+      item.disconnectRate = parseFloat(this.utilsService.getRange(item.disconnectRate));
+      item.medianBetweenTwoMinute = parseFloat(this.utilsService.getRange(item.medianBetweenTwoMinute));
+      item.closedPercent = parseFloat(this.utilsService.getRange(item.closedPercent));
     })
   }
 

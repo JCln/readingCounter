@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
-import { IAUserEditSave, IUserEditManager } from 'interfaces/iuser-manager';
+import { IAUserEditSave, IUserEditManager, IUserEditOnRole } from 'interfaces/iuser-manager';
 
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
@@ -114,4 +114,25 @@ export class UserEditManagerService {
     }
     this.connectToServer(vals);
   }
+  private connectToServerEditOnRole = (dataSource: IUserEditOnRole) => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.userEditOnRole, dataSource).toPromise().then((res: IResponses) => {
+      this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+    });
+  }
+  verificationEditOnRole = (dataSource: IUserEditOnRole) => {
+    if (!this.utilsService.isNullWithText(dataSource.roleId[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
+      return false;
+    if (!this.utilsService.isNullWithText(dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
+      return false;
+
+    return true;
+  }
+  userEditOnRole = (dataSource: IUserEditOnRole) => {
+    console.log(dataSource);
+    if (!this.verificationEditOnRole(dataSource))
+      return;
+    // this.connectToServerEditOnRole(dataSource);
+
+  }
+
 }

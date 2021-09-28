@@ -6,7 +6,9 @@ export interface IReadingTimeRes {
     averageBetweenTwoMinute: number,
     countSameTime: number,
     closedCount: number,
-    closedPercent: number
+    closedPercent: number,
+    disconnectRate: number,
+    medianBetweenTwoMinute: number
 }
 export enum ENDataMining {
     dataMining = 'dataMiningReq'

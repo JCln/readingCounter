@@ -1,0 +1,24 @@
+<mat-horizontal-stepper #stepper>
+
+    <mat-step [stepControl]="userActions">
+        <ng-template *ngIf="userActions" matStepLabel>سطح دسترسی به خدمات</ng-template>
+        <app-user-action [userAddData]="userActions"></app-user-action>
+    </mat-step>
+
+    <mat-step [stepControl]="userRoles">
+        <form *ngIf="userRoles" formGroup="userRoles">
+            <ng-template matStepLabel>گروه دسترسی</ng-template>
+            <app-user-role [roleItems]="userRoles"></app-user-role>
+        </form>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>ذخیره</ng-template>
+        <section class="accept">
+            <button class="btn_2 _special" (click)="connectToServer()">ذخیره تغییرات</button>
+            <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+        </section>
+
+    </mat-step>
+
+</mat-horizontal-stepper>

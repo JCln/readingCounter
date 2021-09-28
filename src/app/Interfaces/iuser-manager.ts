@@ -148,7 +148,10 @@ export interface appItems {
         }
     ]
 }
-
+export interface IUserEditOnRole {
+    roleId: number,
+    selectedActions: string[]
+}
 // add user 
 export interface IAddUserManager {
     provinceItems: [

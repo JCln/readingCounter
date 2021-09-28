@@ -1,0 +1,28 @@
+@import 'add-edit.scss';
+
+
+.roles {
+  background: var(--blue_gray_400);
+  border-radius: $border_5;
+  padding: .5rem;
+}
+
+.role_items {
+  direction: rtl;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 12rem));
+  gap: .5rem;
+  padding: 1rem;
+  border-radius: $border_15;
+  margin-bottom: $font_2;
+  background: var(--gray_100);
+}
+
+h2 {
+  color: var(--blue_700);
+  text-align: right;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+  color: var(--blue_700);
+}

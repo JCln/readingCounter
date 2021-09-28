@@ -1,8 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { appItems, IRoleItems } from 'interfaces/iuser-manager';
-import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UserAddManagerService } from 'services/user-add-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -23,9 +21,7 @@ export class UserAddComponent extends FactoryONE {
 
   constructor(
     private userAddManagerService: UserAddManagerService,
-    private interfaceManagerService: InterfaceManagerService,
-    public interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    public interactionService: InteractionService
   ) {
     super(interactionService);
   }

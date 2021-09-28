@@ -29,7 +29,7 @@ export class DataMiningAnalysesService {
   }
   private _DMAnalyses: IObjectIteratation[] = [
     { field: 'counterReader', header: 'مامور', isSelected: true, readonly: true },
-    { field: 'overalCount', header: 'تعداد قرائت شده', isSelected: true, readonly: true },
+    { field: 'overalCount', header: 'تعداد قرائت', isSelected: true, readonly: true },
     { field: 'maxBetweenTwoMinute', header: 'حداکثر زمان بین دو', isSelected: true, readonly: true },
     { field: 'minBetweenTwoMinute', header: 'حداقل زمان بین دو', isSelected: true, readonly: true },
     { field: 'averageBetweenTwoMinute', header: 'میانگین زمان بین دو', isSelected: true, readonly: true },
