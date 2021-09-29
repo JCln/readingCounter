@@ -211,13 +211,13 @@
             <td *ngIf="_outputFileName == 'finished'" (click)="backToImportedConfirmDialog(dataSource.id,ri)">
                 <span class="ui-column-title">بازگشت به بارگذاری شده</span>
                 <i class="tooltip p_icons pi pi-step-backward">
-                    <div class="tooltip_text_right">بازگشت به بارگذاری شده</div>
+                    <div class="tooltip_text">بازگشت به بارگذاری شده</div>
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'finished'" (click)="downloadOutputSingle(dataSource)">
                 <span class="ui-column-title">دانلود مجدد فایل</span>
                 <i class="tooltip p_icons pi pi-download">
-                    <div class="tooltip_text">دانلود مجدد فایل</div>
+                    <div class="tooltip_text_right">دانلود مجدد فایل</div>
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'offloaded'" (click)="routeToOffloadModify(dataSource)">

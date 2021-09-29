@@ -84,6 +84,7 @@ export enum EN_messages {
     format_invalid_to_eshterak = 'فرمت  تا اشتراک ناصحیح است',
     format_invalid_counterNumber = 'فرمت رقم کنتور اشتباه است',
     format_invalid_counterNumberTimes = 'تعداد ارقام کنتور اشتباه است',
+    format_invalidCounts = 'تعداد نویسه توضیحات کمتراز حد مجاز است',
     format_imagePercent = 'فرمت درصد تصویر اشتباه است',
     format_alalhesab = 'فرمت علی‌الحساب اشتباه است',
 

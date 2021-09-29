@@ -1,4 +1,4 @@
-import { IENV } from 'interfaces/ioverall-config';
+import { IENV } from 'interfaces/build';
 
 import { ActivatedProvince } from '../classes/activated-province';
 

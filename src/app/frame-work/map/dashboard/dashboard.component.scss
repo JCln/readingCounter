@@ -43,6 +43,11 @@
   color: var(--blue_500);
   font-weight: 800;
   text-align: center;
+
+  i {
+    margin-left: 0.25rem;
+    font-size: $font_m;
+  }
 }
 
 .title {

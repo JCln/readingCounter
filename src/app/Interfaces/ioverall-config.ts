@@ -134,14 +134,6 @@ export interface ITabWrapperDetectDynamicRoute {
     _title: string,
     _dynamicRoute: string
 }
-
-export interface IActivatedProvinceConfig {
-    headerProvinceTitle: ENActivateProvinceTitle,
-    API_URL: string;
-    OSMmapBoxUrl: string,
-    SATELLITEMapBoxUrl: string,
-    SATELLITEMapAccessToken: string
-}
 export interface IOffloadModifyType {
     id: number,
     modifyeType: ENOffloadModifyType
@@ -206,13 +198,6 @@ export enum ENOffloadModifyType {
     counterHumidity = 'رطوبت کنتور',
     others = 'سایر'
 };
-export enum ENActivateProvinceTitle {
-    DEFAULT = '',
-    ESF = 'اصفهان',
-    TEH = 'تهران',
-    TEH_ZONE4 = 'منطقه 4 تهران',
-    TEH_SE = 'جنوب شرقی تهران'
-}
 export enum ENSearch {
     eshterak = 'اشتراک',
     radif = 'ش پرونده',
@@ -229,35 +214,6 @@ export const IMasrafStates: ITHV[] = [
 export interface Theme {
     name: string,
     properties: any
-}
-export interface IENV_BROWSER_SETUP {
-    alert: number,
-    normal: number
-}
-export interface IENV {
-    headerProvinceTitle: string,
-    API_URL: string,
-    OSMmapBoxUrl: string,
-    SATELLITEMapBoxUrl: string,
-    SATELLITEMapAccessToken: string,
-    hasNextBazdid: boolean,
-    mapCenter: [number, number],
-    browserVersions: {
-        Desktop: {
-            Chrome: IENV_BROWSER_SETUP,
-            Firefox: IENV_BROWSER_SETUP,
-            IE: IENV_BROWSER_SETUP,
-            opera: IENV_BROWSER_SETUP,
-            safari: IENV_BROWSER_SETUP,
-        }
-        Touch: {
-            Chrome: IENV_BROWSER_SETUP,
-            Firefox: IENV_BROWSER_SETUP,
-            IE: IENV_BROWSER_SETUP,
-            opera: IENV_BROWSER_SETUP,
-            safari: IENV_BROWSER_SETUP,
-        }
-    }
 }
 export enum ENLoginVersion {
     version = '0.4.5'
