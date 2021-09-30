@@ -6,8 +6,8 @@
 
 
 .content {
-  background: var(--gray_100);
-  box-shadow: 1px 2px 3px 1px var(--blue_400);
+  background: var(--secondary_1);
+  box-shadow: 1px 2px 3px 1px var(--primary_2);
   text-align: center;
   justify-content: space-around;
   border-radius: $border_15;
@@ -29,16 +29,16 @@
 }
 
 .title {
-  color: var(--blue_400);
+  color: var(--primary_2);
   text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
 }
 
 input {
-  color: var(--gray_500);
+  color: var(--secondary_5);
   margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px var(--gray_400);
+  box-shadow: 1px 1px 8px 1px var(--secondary_4);
 }
 
 .check_boxes {
@@ -59,12 +59,12 @@ input {
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
   gap: $font_05;
-  background: var(--gray_100);
+  background: var(--secondary_1);
   place-content: center;
   padding: $font_xs 0;
   border-radius: $border_15;
 
-  box-shadow: 1px 2px 3px 1px var(--blue_400);
+  box-shadow: 1px 2px 3px 1px var(--primary_2);
 }
 
 .card__content {

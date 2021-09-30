@@ -20,7 +20,7 @@ hr {
   width: 80%;
   border: 0;
   height: .14rem;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--blue_600), rgba(0, 0, 0, 0));
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary_4), rgba(0, 0, 0, 0));
 }
 
 .hr_1 {
@@ -55,7 +55,7 @@ a:active {
 
 ::ng-deep {
   .mat-select-placeholder {
-    color: var(--gray_800);
+    color: var(--secondary_8);
     font-size: 1rem;
   }
 
@@ -66,7 +66,7 @@ a:active {
 
   .mat-dialog-container {
     background: var(--white);
-    color: var(--blue_900);
+    color: var(--primary_7);
   }
 }
 
@@ -79,7 +79,7 @@ a:active {
 ._xlsx,
 ._csv,
 ._pdf {
-  color: var(--gray_100) !important;
+  color: var(--secondary_1) !important;
 }
 
 ._xlsx {
@@ -103,7 +103,7 @@ a:active {
 // 
 /* BACK ARROW ICON */
 .p_icons {
-  color: var(--blue_gray_300);
+  color: var(--thirdy_1);
   font-size: $font_m;
   cursor: pointer;
 }

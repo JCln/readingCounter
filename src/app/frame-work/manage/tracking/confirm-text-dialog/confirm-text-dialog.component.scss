@@ -3,7 +3,7 @@
 @import 'input.scss';
 
 .mat-dialog-content {
-  color: var(--gray_700);
+  color: var(--secondary_7);
   font-size: $font_s;
   text-align: right;
   word-spacing: .3rem;
@@ -14,8 +14,8 @@
 }
 
 ._custom {
-  background: var(--blue_400);
-  color: var(--gray_100);
+  background: var(--primary_2);
+  color: var(--secondary_1);
 }
 
 ._delete_style {

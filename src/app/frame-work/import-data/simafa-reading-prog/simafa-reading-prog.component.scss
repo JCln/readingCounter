@@ -5,10 +5,10 @@
 
 .main {
   direction: rtl;
-  background: var(--gray_100);
+  background: var(--secondary_1);
   padding: $font_05;
   border-radius: $border_15;
-  border: .15rem solid var(--gray_200);
+  border: .15rem solid var(--secondary_2);
 }
 
 section.content {
@@ -35,11 +35,11 @@ section.content {
 }
 
 h2 {
-  color: var(--gray_600);
+  color: var(--secondary_6);
 }
 
 h3 {
-  color: var(--blue_500);
+  color: var(--primary_3);
   font-size: 1.4rem;
   padding: $font_05;
 }
@@ -57,7 +57,7 @@ h3 {
   .mat-option-text {
     font-size: $font_s;
     font-weight: 600;
-    color: var(--blue_800);
+    color: var(--primary_6);
   }
 }
 

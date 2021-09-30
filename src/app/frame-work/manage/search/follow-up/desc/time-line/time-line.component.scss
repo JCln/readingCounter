@@ -6,7 +6,7 @@
   grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
   gap: $font_05;
   margin-top: $font_xs;
-  background: var(--gray_100);
+  background: var(--secondary_1);
   padding: $font_xs 0.25rem;
   border-radius: $border_5;
 }
@@ -15,7 +15,7 @@
   background: var(--white);
   text-align: center;
   border-radius: $border_15;
-  box-shadow: 0 0 3px 2px var(--gray_200);
+  box-shadow: 0 0 3px 2px var(--secondary_2);
   padding: $font_l $font_05;
   position: relative;
 }
@@ -27,7 +27,7 @@
   position: absolute;
   left: $font_xs;
   top: -$font_xs;
-  background: var(--blue_400);
+  background: var(--primary_2);
   color: var(--white);
   border-radius: $border_5;
   font-size: $font_l;
@@ -38,7 +38,7 @@
 
 .title {
   font-size: $font_m;
-  color: var(--blue_700);
+  color: var(--primary_5);
   font-weight: 800;
 }
 
@@ -51,11 +51,11 @@
 ._value {
   font-size: $font_s;
   font-weight: 600;
-  color: var(--blue_700);
+  color: var(--primary_5);
 }
 
 .val {
   font-size: $font_m;
   font-weight: 600;
-  color: var(--blue_900);
+  color: var(--primary_7);
 }

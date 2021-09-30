@@ -8,7 +8,7 @@
   margin: 1rem .2rem;
   height: 100%;
   min-height: 31rem;
-  box-shadow: -1px 2px 5px 5px var(--gray_400);
+  box-shadow: -1px 2px 5px 5px var(--secondary_4);
   position: relative;
 }
 
@@ -75,8 +75,8 @@
     position: relative;
     font-size: $font_m;
     margin: 0 $font_05;
-    color: var(--blue_700);
-    background: var(--gray_300);
+    color: var(--primary_5);
+    background: var(--secondary_3);
     border-radius: $border_50;
     padding: $font_05;
     cursor: pointer;
@@ -118,8 +118,8 @@
   height: 2.5rem;
   padding: 0rem;
   border: 0;
-  background-color: var(--gray_300);
-  color: var(--blue_gray_300);
+  background-color: var(--secondary_3);
+  color: var(--thirdy_1);
 
   i {
     font-size: $font_m;
@@ -139,7 +139,7 @@
   text-align: right;
   direction: rtl;
   border-radius: $border_15;
-  box-shadow: 0px 2px 3px 1px var(--blue_gray_700);
+  box-shadow: 0px 2px 3px 1px var(--thirdy_3);
 
   @media (max-width: 550px) {
     margin: $font_l 0;
@@ -148,11 +148,11 @@
 }
 
 article {
-  background-color: var(--gray_200);
+  background-color: var(--secondary_2);
   border-radius: $border_15;
   margin: $font_2 0 0;
   padding: $font_05;
-  box-shadow: 0 0 2px 1px var(--gray_500);
+  box-shadow: 0 0 2px 1px var(--secondary_5);
 }
 
 ._flex_dr_ric {
@@ -160,13 +160,13 @@ article {
 }
 
 h3 {
-  color: var(--blue_400);
+  color: var(--primary_2);
   margin-bottom: $font_05;
 }
 
 .btn_2 {
   height: 2.5rem;
-  color: var(--gray_600);
+  color: var(--secondary_6);
   margin-top: $font_xs;
 }
 
@@ -175,7 +175,7 @@ h3 {
 
   p {
     font-size: $font_s;
-    color: var(--blue_700);
+    color: var(--primary_5);
     margin: 0 $font_xs;
   }
 }

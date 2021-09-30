@@ -8,10 +8,10 @@ section {
   direction: rtl;
   margin: auto;
   padding: 2rem;
-  background: var(--gray_300);
+  background: var(--secondary_3);
   border-radius: $border_15;
   width: 18rem;
-  box-shadow: 1px 1px 8px 4px var(--gray_400);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
 }
 
 ._center {
@@ -21,7 +21,7 @@ section {
 
 .input_1 {
   text-align: center;
-  border-color: var(--blue_600);
+  border-color: var(--primary_4);
   min-width: 16rem;
 }
 

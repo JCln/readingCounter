@@ -2,14 +2,14 @@
   .mat-select-value {
     font-family: $font_family;
     font-size: $font_s;
-    color: var(--gray_700);
+    color: var(--secondary_7);
     font-weight: 600;
   }
 
   .mat-select-value-text {
     font-family: $font_family;
     font-size: $font_s;
-    color: var(--gray_800);
+    color: var(--secondary_8);
   }
 
   .mat-dialog-container {
@@ -26,7 +26,7 @@
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: var(--gray_800);
+    color: var(--secondary_8);
   }
 
   .mat-select {
@@ -36,19 +36,19 @@
   }
 
   .mat-select-arrow {
-    color: var(--blue_400);
+    color: var(--primary_2);
   }
 
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: var(--gray_800);
+    color: var(--secondary_8);
     font-family: $font_family;
     font-weight: 600;
     font-size: $font_s;
   }
 
   .mat-radio-outer-circle {
-    border-color: var(--gray_800);
+    border-color: var(--secondary_8);
   }
 
   .mat-checkbox-layout .mat-checkbox-label {
@@ -56,24 +56,24 @@
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: var(--gray_800);
+    color: var(--secondary_8);
   }
 
   .mat-form-field.mat-focused .mat-form-field-label,
   .mat-form-field-label {
-    color: var(--gray_800);
+    color: var(--secondary_8);
   }
 
   .mat-input-element {
-    color: var(--blue_700);
+    color: var(--primary_5);
   }
 
   .mat-checkbox-frame {
-    border-color: var(--gray_500);
+    border-color: var(--secondary_5);
   }
 
   .mat-form-field-appearance-fill .mat-form-field-flex {
-    background-color: var(--gray_300);
+    background-color: var(--secondary_3);
   }
 }
 
@@ -84,7 +84,7 @@
 
 .check_boxes {
   border-radius: $border_15;
-  box-shadow: 0px 0px 2px 1px var(--blue_800);
+  box-shadow: 0px 0px 2px 1px var(--primary_6);
   background: var(--white);
   padding: $font_s;
   margin-top: $font_05;

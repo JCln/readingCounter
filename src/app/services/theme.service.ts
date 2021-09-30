@@ -29,15 +29,15 @@ export class ThemeService {
   isDarkTheme(): boolean {
     return this.active.name === dark.name;
   }
-
-  setDarkTheme(): void {
-    this.setActiveTheme(dark);
-    this.saveToLocalStorage(ENThemeName.themeColor, ENThemeColor.dark);
+  private setTheme = (theme: Theme, color: ENThemeColor) => {
+    this.setActiveTheme(theme);
+    this.saveToLocalStorage(ENThemeName.themeColor, color);
   }
-
+  setDarkTheme(): void {
+    this.setTheme(dark, ENThemeColor.dark);
+  }
   setLightTheme(): void {
-    this.setActiveTheme(light);
-    this.saveToLocalStorage(ENThemeName.themeColor, ENThemeColor.light);
+    this.setTheme(light, ENThemeColor.light);
   }
 
   setActiveTheme(theme: Theme): void {

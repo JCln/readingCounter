@@ -8,8 +8,8 @@ section {
 }
 
 .content {
-  background: var(--gray_100);
-  box-shadow: 1px 1px 8px 4px var(--gray_200);
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_2);
   text-align: center;
   padding: $font_05;
   margin-bottom: $font_xs;
@@ -33,7 +33,7 @@ section {
 }
 
 .title {
-  color: var(--blue_gray_300);
+  color: var(--thirdy_1);
   text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
@@ -44,15 +44,15 @@ section {
 }
 
 input {
-  color: var(--gray_500);
+  color: var(--secondary_5);
   margin: 0 auto;
-  // box-shadow: 1px 1px 8px 1px var(--gray_200);
+  // box-shadow: 1px 1px 8px 1px var(--secondary_2);
 }
 
 // dialog conf
 :host ::ng-deep {
   .p-dialog .p-dialog-header {
-    background-color: var(--blue_gray_300);
+    background-color: var(--thirdy_1);
     direction: rtl;
   }
 }
@@ -70,7 +70,7 @@ input {
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: var(--blue_700);
+      color: var(--primary_5);
       line-height: 2;
       border-radius: $border_15;
       font-family: $font_family;

@@ -22,7 +22,7 @@
     padding: $font_xs 0;
     text-align: center;
     border-radius: $border_15;
-    box-shadow: 0px 2px 3px 1px var(--blue_gray_700);
+    box-shadow: 0px 2px 3px 1px var(--thirdy_3);
   }
   
   .bbr {
@@ -33,7 +33,7 @@
     &:hover,
     &:focus,
     &:active {
-      box-shadow: 0px 0px 1px 1px var(--blue_gray_300);
+      box-shadow: 0px 0px 1px 1px var(--thirdy_1);
     }
   }
   

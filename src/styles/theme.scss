@@ -1,6 +1,6 @@
 @mixin _borders {
   border-radius: 0;
-  border-right: 1px solid var(--gray_300);
+  border-right: 1px solid var(--secondary_3);
   padding-right: .87rem;
 }
 
@@ -21,8 +21,8 @@
   }
 
   .fa-moon {
-    color: var(--blue_700);
-    background-color: var(--gray_300);
+    color: var(--primary_5);
+    background-color: var(--secondary_3);
   }
 
   @media (min-width: 700px) {

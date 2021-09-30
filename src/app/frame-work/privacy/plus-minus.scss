@@ -15,8 +15,8 @@
   align-items: center;
   width: 3.5rem;
   background: var(--white);
-  border: 2px solid var(--blue_600);
-  color: var(--blue_700);
+  border: 2px solid var(--primary_4);
+  color: var(--primary_5);
   border-radius: $border_5;
   font-size: $font_s;
   font-weight: 600;
@@ -31,9 +31,9 @@
   display: grid;
   padding: $font_05;
   margin: .3rem;
-  border: 1px solid var(--gray_300);
+  border: 1px solid var(--secondary_3);
   background: var(--white);
-  color: var(--gray_500);
+  color: var(--secondary_5);
   border-radius: $border_5;
   font-size: $font_s;
   cursor: pointer;

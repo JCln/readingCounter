@@ -10,7 +10,7 @@
   background-color: var(--white);
   width: 100%;
   padding: 0.1rem;
-  box-shadow: 0 1px 5px 0px var(--blue_700);
+  box-shadow: 0 1px 5px 0px var(--primary_5);
 }
 
 ul {
@@ -32,7 +32,7 @@ li {
   align-items: center;
   margin: 0 0.25rem;
   border-radius: 15px;
-  color: var(--gray_700);
+  color: var(--secondary_7);
   text-align: center;
   list-style-type: none;
   cursor: pointer;
@@ -44,7 +44,7 @@ li {
 ._name {
   margin-left: auto;
   font-size: $font_xxs;
-  color: var(--blue_700);
+  color: var(--primary_5);
   cursor: auto;
   @include _borders();
 }
@@ -53,13 +53,13 @@ li {
   display: block;
   padding: $font_05;
   border-radius: $border_50;
-  background-color: var(--gray_300);
+  background-color: var(--secondary_3);
   cursor: pointer;
 
   &:hover,
   &:focus,
   &:active {
-    box-shadow: 0px 0px 1px 1px var(--blue_gray_300);
+    box-shadow: 0px 0px 1px 1px var(--thirdy_1);
   }
 
 }

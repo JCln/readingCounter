@@ -6,7 +6,7 @@ main {
 }
 
 ._content {
-  background: var(--blue_gray_400);
+  background: var(--thirdy_2);
   padding: .2rem;
   margin: .2rem;
   border-radius: $border_15;
@@ -28,8 +28,8 @@ main {
   grid-template-columns: repeat(6, 1fr);
 
   .l_1_c {
-    background: var(--blue_200);
-    color: var(--gray_600);
+    background: var(--primary_1);
+    color: var(--secondary_6);
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: .1rem;
@@ -43,14 +43,14 @@ main {
       margin-left: -5px;
       border-width: .5rem;
       border-style: solid;
-      border-color: var(--blue_400) transparent transparent transparent;
+      border-color: var(--primary_2) transparent transparent transparent;
     }
   }
 }
 
 .l_2 {
   .l_2_c {
-    background: var(--gray_100);
+    background: var(--secondary_1);
     margin-bottom: .2rem;
     font-size: 1.5rem;
     font-weight: 600;

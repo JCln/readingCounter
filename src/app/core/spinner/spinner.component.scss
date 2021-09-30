@@ -24,7 +24,7 @@
 
   h2 {
     margin-top: 10rem;
-    color: var(--blue_700);
+    color: var(--primary_5);
 
     .fa-spin,
     .fa-circle-notch {
@@ -44,7 +44,7 @@
   border-radius: 30%;
   left: 25px;
   bottom: 25px;
-  background: var(--blue_700);
+  background: var(--primary_5);
   animation: around2 .8s infinite;
 }
 

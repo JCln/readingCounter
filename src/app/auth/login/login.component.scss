@@ -16,8 +16,8 @@ main {
   text-align: center;
   padding: $font_2 $font_2 $font_xs;
   border-radius: $border_15;
-  background: var(--gray_100);
-  box-shadow: 2px 2px 5px 0px var(--gray_400);
+  background: var(--secondary_1);
+  box-shadow: 2px 2px 5px 0px var(--secondary_4);
 
   @media (max-width: 550px) {
     padding: 0 $font_xxs $font_05;
@@ -25,7 +25,7 @@ main {
 }
 
 .input__icons {
-  color: var(--blue_700);
+  color: var(--primary_5);
 
   i {
     position: absolute;
@@ -39,7 +39,7 @@ main {
 
 .title {
   font-weight: 600;
-  color: var(--blue_900);
+  color: var(--primary_7);
   font-size: 2.5rem;
   margin-bottom: $font_s;
 
@@ -50,17 +50,17 @@ main {
 
 ._inputs {
   margin-bottom: $font_2;
-  border: var(--blue_900);
+  border: var(--primary_7);
 
   input::placeholder {
-    color: var(--blue_700);
+    color: var(--primary_5);
   }
 
   .input_1 {
     text-align: center;
     max-width: 19rem;
     padding: 0 $font_3 0 $font_s;
-    color: var(--blue_700) !important;
+    color: var(--primary_5) !important;
   }
 }
 
@@ -71,11 +71,11 @@ main {
 
 .btn_1 {
   color: var(--white);
-  background: var(--blue_700);
+  background: var(--primary_5);
 }
 
 .version {
-  color: var(--blue_900);
+  color: var(--primary_7);
   font-size: $font_m;
   font-weight: 600;
 }
@@ -83,7 +83,7 @@ main {
 input,
 input:-internal-autofill-selected {
   background-color: var(--white) !important;
-  color: var(--blue_700) !important;
+  color: var(--primary_5) !important;
 }
 
 
@@ -107,12 +107,12 @@ input:-internal-autofill-selected {
     transform: translate(-50%, -50%);
     border-radius: $border_15;
     padding: $font_05 $font_xs;
-    box-shadow: 0 0 1px 3px var(--gray_400);
+    box-shadow: 0 0 1px 3px var(--secondary_4);
 
     div {
       display: flex;
       justify-content: flex-end;
-      color: var(--gray_800);
+      color: var(--secondary_8);
       text-align: right;
       font-size: $font_s;
       font-weight: 600;

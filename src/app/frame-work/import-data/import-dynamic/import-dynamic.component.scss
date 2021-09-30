@@ -5,8 +5,8 @@
 
 .main {
   direction: rtl;
-  background: var(--gray_100);
-  box-shadow: 1px 1px 8px 4px var(--gray_400);
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
   padding: $font_s;
   border-radius: $border_15;
   min-height: 35rem;
@@ -28,8 +28,8 @@ section.dynamic_content {
   grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
   gap: $font_05;
   align-items: center;
-  border: .15rem solid var(--blue_gray_700);
-  box-shadow: 1px 1px 3px 1px var(--blue_gray_700);
+  border: .15rem solid var(--thirdy_3);
+  box-shadow: 1px 1px 3px 1px var(--thirdy_3);
   border-radius: $border_15;
   padding: $font_xxs;
   margin: 1rem 0;
@@ -37,7 +37,7 @@ section.dynamic_content {
 
 .static_part {
   background: var(--white);
-  border: .15rem solid var(--gray_200);
+  border: .15rem solid var(--secondary_2);
   border-radius: $border_15;
   padding: $font_xxs;
 }
@@ -60,7 +60,7 @@ section.dynamic_content {
   justify-content: center;
   direction: ltr;
   border: none;
-  color: var(--blue_700);
+  color: var(--primary_5);
   text-align: center;
   width: 100%;
 }
@@ -71,7 +71,7 @@ section.dynamic_content {
 }
 
 h2 {
-  color: var(--gray_600);
+  color: var(--secondary_6);
   margin-left: 5rem;
 }
 
@@ -94,7 +94,7 @@ footer {
   .mat-option-text {
     font-size: $font_s;
     font-weight: 600;
-    color: var(--blue_800);
+    color: var(--primary_6);
   }
 
   .mat-checkbox-layout .mat-checkbox-label {
@@ -102,7 +102,7 @@ footer {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: var(--blue_gray_700);
+    color: var(--thirdy_3);
   }
 }
 
@@ -113,7 +113,7 @@ footer {
 
 hr {
   margin: 0 auto;
-  background-color: var(--blue_700);
+  background-color: var(--primary_5);
   height: .2rem;
   margin-bottom: $font_xxs;
 }
@@ -122,14 +122,14 @@ hr {
   font-size: $font_s;
   font-weight: 700;
   font-family: inherit;
-  color: var(--gray_600);
+  color: var(--secondary_6);
   margin: 0 2rem;
 }
 
 ::ng-deep {
   .mat-radio-label-content {
     padding-right: $font_05 !important;
-    color: var(--blue_gray_300);
+    color: var(--thirdy_1);
   }
 }
 
