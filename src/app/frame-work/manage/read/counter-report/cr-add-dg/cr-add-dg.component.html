@@ -4,11 +4,6 @@
     <mat-dialog-content>
 
         <mat-form-field appearance="fill">
-            <mat-label>کد</mat-label>
-            <input matInput type="number" formControlName="id" placeholder="کد">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
             <mat-label>کد مشترکین</mat-label>
             <input matInput type="number" formControlName="moshtarakinId" placeholder="کد مشترکین">
         </mat-form-field>
@@ -32,6 +27,7 @@
             <input matInput type="number" formControlName="clientOrder" placeholder="ترتیب">
         </mat-form-field>
 
+        <mat-checkbox formControlName="forProvince">همه نواحی</mat-checkbox>
         <mat-checkbox formControlName="isAhad">آحاد</mat-checkbox>
         <mat-checkbox formControlName="isKarbari">کاربری</mat-checkbox>
         <mat-checkbox formControlName="canNumberBeLessThanPre">فعلی کمتر از قبلی</mat-checkbox>

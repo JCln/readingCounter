@@ -45,7 +45,6 @@ export class CounterReportComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportAdd, result);
           this.refreshTable();
         }
       });
