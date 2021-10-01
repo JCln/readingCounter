@@ -20,32 +20,8 @@ export class DescComponent extends FactoryONE {
   trackNumber: string;
   shouldActive: boolean = false;
 
-  defColumns: IObjectIteratation[] = [
-    { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
-    { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
-    { field: 'counterReaderName', header: 'مامور', isSelected: true },
-    { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true },
-    { field: 'seen', header: 'دیده شده', isSelected: true, isBoolean: true },
-    // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },    
-    // { field: 'hasDetails', header: 'جزئیات' },
-  ]
-  _descView = (): IObjectIteratation[] => {
-    return [
-      { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, readonly: true },
-      { field: 'listNumber', header: 'لیست ', isSelected: true, readonly: true },
-      { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, readonly: true },
-      { field: 'fromDate', header: 'از ', isSelected: true, readonly: true },
-      { field: 'toDate', header: 'تا ', isSelected: true, readonly: true },
-      { field: 'overallQuantity', header: 'کل تعداد ', isSelected: true, readonly: true },
-      { field: 'itemQuantity', header: 'تعداد ', isSelected: true, readonly: true },
-      { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, readonly: true },
-      { field: 'year', header: 'سال', isSelected: true, readonly: true }
-    ];
-  }
-
   _showDesc: IObjectIteratation[] = [];
+  _defColumns: IObjectIteratation[] = [];
   canShowGraph: boolean = false;
   showInOrderTo: ISearchInOrderTo[] = [
     {
@@ -103,7 +79,7 @@ export class DescComponent extends FactoryONE {
     this.refreshTabStatus();
   }
   insertToDesc = () => {
-    this._showDesc = this._descView();
+    this._showDesc = this.trackingManagerService.columnDescView();
     this.clearUNUsables();
   }
   showInMap = () => {
@@ -124,10 +100,10 @@ export class DescComponent extends FactoryONE {
   }
   clearUNUsables = () => {
     if (!this.shouldActive) {
-      const c = this.defColumns.filter(item => {
+      const c = this._defColumns.filter(item => {
         return item.field !== 'seen'
       })
-      this.defColumns = c;
+      this._defColumns = c;
       return;
     }
   }

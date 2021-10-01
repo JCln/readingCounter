@@ -1,4 +1,4 @@
-<section *ngIf="dataSource && route.children.length === 0">
+<section *ngIf="dataSource">
     <form #form="ngForm">
         <section class="contain">
 
@@ -38,7 +38,7 @@
     </mat-radio-group>
 </section>
 
-<p-table *ngIf="!canShowGraph" sortField="insertDateJalali" [columns]="defColumns" [value]="changeHsty" dir="rtl"
+<p-table *ngIf="!canShowGraph" sortField="insertDateJalali" [columns]="_defColumns" [value]="changeHsty" dir="rtl"
     styleClass="p-datatable-responsive" [responsive]="true" editMode="row" dataKey="id">
 
     <ng-template pTemplate="caption">
