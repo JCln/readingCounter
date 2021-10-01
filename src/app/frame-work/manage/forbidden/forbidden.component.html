@@ -1,5 +1,4 @@
-<form #form="ngForm" (ngSubmit)="verification()" *ngIf="route.children.length === 0">
-    <section>
+<form #form="ngForm" (ngSubmit)="verification()">
         <div class="input_2">
             <div class="_key">ناحیه</div>
             <mat-select placeholder="انتخاب مورد" [(ngModel)]="forbiddenService.forbiddenReq.zoneId" name="zoneId">
@@ -32,6 +31,20 @@
                 <i class="pi pi-list"></i>
             </button>
         </footer>
-    </section>
+    
 </form>
-<router-outlet></router-outlet>
+
+<app-prime-table *ngIf="dataSource"    
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="'forbidden'"
+    [_checkUpName]="'forbidden'"
+    [_rowsNumbers]=10
+    [_rowsPerPage]="[10,25,50]"
+    [_numberOfExtraColumns]="[1]"
+    [_selectedColumnsToRemember]="'selectedForbidden'"
+    (refreshedTable)="refreshTable()"
+    (showedPictures)="showPictures($event)"
+ > 
+</app-prime-table>

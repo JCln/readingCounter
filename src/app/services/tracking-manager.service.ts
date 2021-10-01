@@ -22,7 +22,7 @@ export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
 
-  columnDefColumns: IObjectIteratation[] = [
+  columnDefColumns = (): IObjectIteratation[] => [
     { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
     { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true },

@@ -51,6 +51,8 @@ export class CloseTabService {
   saveDataForTrackFinished: any;
   saveDataForLastStates: any;
   saveDataForOffloadModify: any;
+  saveDataForFollowUp: any;
+  saveDataForFollowUpAUX: any;
   // import dynamic
   saveDataForImportDynamic: any;
   saveDataForSimafaBatch: any;
@@ -88,6 +90,7 @@ export class CloseTabService {
   saveDataForTextOutput: any;
   // DASHBOARD
   saveDataForPolicies: any;
+  saveDataForFNB: any;
 
 
   // close config and remove data for specific page(component)
@@ -218,6 +221,10 @@ export class CloseTabService {
       case '/wr/m/track/finished':
         this.saveDataForTrackFinished = '';
         break;
+      case '/wr/m/s/fwu':
+        this.saveDataForFollowUp = '';
+        this.saveDataForFollowUpAUX = '';
+        break;
       // searchs
       case '/wr/m/s/searchMosh':
         this.saveDataForSearchMoshtarakin = '';
@@ -230,6 +237,9 @@ export class CloseTabService {
         break;
       // 
       case '/wr/privacy':
+        break;
+      case '/wr/m/fbn':
+        this.saveDataForFNB = '';
         break;
       case '/wr/m/l/pd':
         this.saveDataForLMPD = '';
@@ -340,6 +350,8 @@ export class CloseTabService {
     this.saveDataForTrackReading = '';
     this.saveDataForTrackOffloaded = '';
     this.saveDataForTrackFinished = '';
+    this.saveDataForFollowUp = '';
+    this.saveDataForFollowUpAUX = '';
     this.saveDataForPolicies = '';
     this.saveDataForLastStates = '';
     this.saveDataForOffloadModify = '';
@@ -367,5 +379,6 @@ export class CloseTabService {
     this.saveDataForFragmentNOB = '';
     this.saveDataForFragmentNOBDetails = '';
     this.saveDataForTextOutput = '';
+    this.saveDataForFNB = '';
   }
 }
