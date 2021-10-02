@@ -15,6 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./traverse-differential.component.scss']
 })
 export class TraverseDifferentialComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',

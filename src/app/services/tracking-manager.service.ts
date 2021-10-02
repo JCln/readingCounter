@@ -20,6 +20,32 @@ import { UtilsService } from './utils.service';
 })
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
+
+
+  columnDefColumns = (): IObjectIteratation[] => [
+    { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
+    { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+    { field: 'counterReaderName', header: 'مامور', isSelected: true },
+    { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true },
+    { field: 'seen', header: 'دیده شده', isSelected: true, isBoolean: true },
+    // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },    
+    // { field: 'hasDetails', header: 'جزئیات' },
+  ]
+  columnDescView = (): IObjectIteratation[] => {
+    return [
+      { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, readonly: true },
+      { field: 'listNumber', header: 'لیست ', isSelected: true, readonly: true },
+      { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, readonly: true },
+      { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, readonly: true },
+      { field: 'fromDate', header: 'از ', isSelected: true, readonly: true },
+      { field: 'toDate', header: 'تا ', isSelected: true, readonly: true },
+      { field: 'overallQuantity', header: 'کل تعداد ', isSelected: true, readonly: true },
+      { field: 'itemQuantity', header: 'تعداد ', isSelected: true, readonly: true },
+      { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, readonly: true },
+      { field: 'year', header: 'سال', isSelected: true, readonly: true }
+    ];
+  }
   private menuDefault: IObjectIteratation[] = [
     { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
     { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },

@@ -14,6 +14,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./traverse.component.scss']
 })
 export class TraverseComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',

@@ -15,6 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./performance.component.scss']
 })
 export class PerformanceComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',

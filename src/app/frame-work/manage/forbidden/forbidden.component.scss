@@ -3,16 +3,18 @@
 @import 'input.scss';
 @import '_mat.scss';
 
-section {
+form {
   display: grid;
   direction: rtl;
   justify-content: center;
   margin: auto;
+  position: relative;
   padding: $font_xs;
   width: 18rem;
   background: var(--secondary_1);
   border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  margin-bottom: $font_xs;
 }
 
 .input_2 {
@@ -66,4 +68,10 @@ input {
     color: var(--primary_6);
   }
 
+}
+
+._collapsable {
+  position: absolute;
+  left: .2rem;
+  top: 0;
 }

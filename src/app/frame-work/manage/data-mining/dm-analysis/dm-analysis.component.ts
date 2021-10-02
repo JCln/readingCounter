@@ -15,6 +15,7 @@ import { IReadingTimeRes } from 'src/app/Interfaces/data-mining';
   styleUrls: ['./dm-analysis.component.scss']
 })
 export class DmAnalysisComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',

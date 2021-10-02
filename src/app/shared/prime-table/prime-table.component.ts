@@ -33,7 +33,10 @@ export class PrimeTableComponent {
   @Input() _checkUpName: string = '';
   @Input() _multiSelectEnable: boolean = true;
   @Input() _allComponentIsModify: boolean = false;
+  @Input() _hasCollapsible: boolean = false;
+  @Input() _isCollaped: boolean = false;
 
+  @Output() collapsed = new EventEmitter<any>();
   @Output() removedRow = new EventEmitter<any>();
   @Output() openedEditDialog = new EventEmitter<any>();
   @Output() refreshedTable = new EventEmitter<boolean>();
@@ -160,6 +163,9 @@ export class PrimeTableComponent {
   }
   removeRow = (dataSource: object, ri: number) => {
     this.removedRow.emit({ dataSource, ri });
+  }
+  collapse = () => {
+    this.collapsed.emit();
   }
   openEditDialog = (dataSource: object) => {
     this.openedEditDialog.emit(dataSource);
