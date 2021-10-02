@@ -8,6 +8,7 @@ form {
   direction: rtl;
   justify-content: center;
   margin: auto;
+  position: relative;
   padding: $font_xs;
   width: 18rem;
   background: var(--secondary_1);
@@ -67,4 +68,10 @@ input {
     color: var(--primary_6);
   }
 
+}
+
+._collapsable {
+  position: absolute;
+  left: .2rem;
+  top: 0;
 }

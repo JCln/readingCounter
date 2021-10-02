@@ -16,6 +16,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./karkard.component.scss']
 })
 export class KarkardComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',

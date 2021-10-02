@@ -15,6 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   dataSource: IReadingReportDetails[] = [];
   karbariDictionary: IDictionaryManager[] = [];
 

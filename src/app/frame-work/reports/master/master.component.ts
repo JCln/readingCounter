@@ -13,6 +13,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./master.component.scss']
 })
 export class MasterComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   readingReportReq: IReadingReportReq = {
     fromDate: '',
     toDate: '',

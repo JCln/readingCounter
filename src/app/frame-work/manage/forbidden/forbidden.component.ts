@@ -13,6 +13,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./forbidden.component.scss']
 })
 export class ForbiddenComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   panelOpenState: boolean = true;
   dataSource: any;
   zoneDictionary: IDictionaryManager[] = [];

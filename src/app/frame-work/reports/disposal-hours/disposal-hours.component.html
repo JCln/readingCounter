@@ -1,51 +1,54 @@
 <main class="main" *ngIf="route.children.length === 0">
-    <form #form="ngForm" (ngSubmit)="verification()">
-        <section class="static_part">
+    <section [hidden]="isCollapsed">
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="static_part">
 
-            <section class="content">
-                <div class="input_2">
-                    <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد"
-                        [(ngModel)]="this.readingReportManagerService.disposalhoursReq.zoneId" name="zoneId">
-                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
-                </div>
-                <div class="input_2">
-                    <div class="_key">از</div>
-                    <div class="_value">
-                        <app-date-jalali name="fromDate"
-                            (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.dh, $event)"
-                            [dateObject]="readingReportManagerService.disposalhoursReq.fromDate">
-                        </app-date-jalali>
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">ناحیه</div>
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="this.readingReportManagerService.disposalhoursReq.zoneId" name="zoneId">
+                            <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
                     </div>
-                </div>
-                <div class="input_2">
-                    <div class="_key">تا</div>
-                    <div class="_value">
-                        <app-date-jalali name="toDate"
-                            (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.dh, $event)"
-                            [dateObject]="readingReportManagerService.disposalhoursReq.toDate">
-                        </app-date-jalali>
+                    <div class="input_2">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.dh, $event)"
+                                [dateObject]="readingReportManagerService.disposalhoursReq.fromDate">
+                            </app-date-jalali>
+                        </div>
                     </div>
-                </div>
-                <button id="grid_view" type="submit" class="btn_1">
-                    مشاهده لیست
-                    <i class="pi pi-list"></i>
-                </button>
-                <button id="chart_view" type="submit" class="btn_1">
-                    مشاهده نمودار
-                    <i class="fa fa-pie-chart"></i>
-                </button>
+                    <div class="input_2">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.dh, $event)"
+                                [dateObject]="readingReportManagerService.disposalhoursReq.toDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <button id="grid_view" type="submit" class="btn_1">
+                        مشاهده لیست
+                        <i class="pi pi-list"></i>
+                    </button>
+                    <button id="chart_view" type="submit" class="btn_1">
+                        مشاهده نمودار
+                        <i class="fa fa-pie-chart"></i>
+                    </button>
 
+                </section>
             </section>
-        </section>
-    </form>
+        </form>
+    </section>
 
     <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
         [_outputFileName]="'disposalHs'" [_checkUpName]="'rr-disposalHs'"
-        [_selectedColumnsToRemember]="'selectedRRDisposalHours'" (refreshedTable)="refreshTable()">
+        [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
+        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>
 <router-outlet></router-outlet>

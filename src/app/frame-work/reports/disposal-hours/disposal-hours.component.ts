@@ -15,6 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./disposal-hours.component.scss']
 })
 export class DisposalHoursComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
