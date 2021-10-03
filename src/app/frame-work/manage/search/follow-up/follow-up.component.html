@@ -1,11 +1,15 @@
-<form class="insert_track" #form="ngForm">
+<i (click)="_isCollapsed = !_isCollapsed" class="tooltip _circle_border p_icons "
+    [ngClass]="_isCollapsed ? 'pi pi-angle-down' : 'pi pi-angle-up'">
+    <div class="tooltip_text_right">{{_isCollapsed? 'باز': 'بسته'}}</div>
+</i>
+<form #form="ngForm" *ngIf="!_isCollapsed" class="insert_track">
     <input class="input_1" placeholder="شماره پیگیری" type="number" name="trackNumber" [(ngModel)]="trackNumber"
         autofocus>
-    <button type="submit" class="btn_1" (click)="connectToServer()">مشاهده </button>
+    <button type="submit" class="btn_1" (click)="connectToServer()">مشاهده</button>
 </form>
 
 <section class="contain" *ngIf="dataSource">
-    <div class="input_2" *ngFor="let item of _showDesc">
+    <div class="input_2" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _showDesc">
         <div class="_key">{{item.header}}</div>
         <ng-container *ngIf="item.isBoolean; else elseTemplate">
             <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSource[item.field]">

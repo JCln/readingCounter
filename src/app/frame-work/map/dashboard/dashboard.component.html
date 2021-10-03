@@ -30,25 +30,25 @@
 <main class="container _unified relative_pos">
     <div class="title_special">کارکرد</div>
     <div class="chart_4 charts pie relative_pos" *ngIf="pieChartDataThree[0]">
-        <div class="title">روزانه</div>
+        <div class="title">امروز</div>
         <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
     <div class="chart_3 charts pie relative_pos" *ngIf="pieChartDataTwo[0]">
-        <div class="title">هفتگی</div>
+        <div class="title">هفته‌جاری</div>
         <canvas baseChart [data]="pieChartDataTwo" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
     <div class="chart_2 charts pie relative_pos" *ngIf="pieChartDataOne[0]">
-        <div class="title">ماهانه</div>
+        <div class="title">ماه‌جاری</div>
         <canvas baseChart [data]="pieChartDataOne" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>
     </div>
     <div class="chart_1 charts pie relative_pos" *ngIf="pieChartData[0]">
-        <div class="title">سالانه</div>
+        <div class="title">سال‌جاری</div>
         <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
         </canvas>

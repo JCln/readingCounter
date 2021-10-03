@@ -77,10 +77,9 @@
 </main>
 
 <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-    [_outputFileName]="'simpleSearch'" [_checkUpName]="'simpleSearch'" [_rowsPerPage]="[10,20,50,100, 500, 1000]"
+    [_outputFileName]="'simpleSearch'" [_checkUpName]="'simpleSearch'"
     [_selectedColumnsToRemember]="'selectedSearchManagerSimple'" [_numberOfExtraColumns]="[1,2,3,4]"
     [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"
     (routedToLMAll)="searchService.routeToLMAll($event)" (routedToLMPayDay)="searchService.routeToLMPayDay($event)"
-    (routedToFollowUp)="searchService.routeToFollowUp($event)"
     (routedToFollowUp)="searchService.routeToFollowUp($event)" (showedInMap)="searchService.showInMap($event)">
 </app-prime-table>

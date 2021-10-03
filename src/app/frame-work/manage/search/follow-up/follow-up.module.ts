@@ -7,7 +7,6 @@ import { FollowUpRoutingModule } from './follow-up-routing.module';
 import { FollowUpComponent } from './follow-up.component';
 import { TimeLineComponent } from './time-line/time-line.component';
 
-
 @NgModule({
   declarations: [FollowUpComponent, TimeLineComponent],
   imports: [

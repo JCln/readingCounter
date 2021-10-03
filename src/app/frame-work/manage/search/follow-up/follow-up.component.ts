@@ -3,6 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IFollowUp, IFollowUpHistory, IOffLoadPerDay } from 'interfaces/imanage';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
+import { FollowUpService } from 'services/follow-up.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -14,6 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./follow-up.component.scss']
 })
 export class FollowUpComponent extends FactoryONE {
+  _isCollapsed: boolean = false;
   trackNumber: number;
   shouldActive: boolean = false;
   _showDesc: IObjectIteratation[] = [];
@@ -40,7 +42,8 @@ export class FollowUpComponent extends FactoryONE {
     private trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService,
     public interactionService: InteractionService,
-    private authService: AuthService
+    private authService: AuthService,
+    private followUpService: FollowUpService
   ) {
     super(interactionService);
     this.classWrapper();
@@ -53,32 +56,44 @@ export class FollowUpComponent extends FactoryONE {
     this.changeHsty = this.dataSource.changeHistory;
     this.getUserRole();
     this.insertToDesc();
-    this.trackingManagerService.setGetRanges(this.dataSourceAUX);
-    this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
-    if (this.dataSourceAUX)
+    if (this.dataSourceAUX) {
+      this.trackingManagerService.setGetRanges(this.dataSourceAUX);
       this._selectColumnsAUX = this.trackingManagerService.columnSelectedLMPerDayPositions();
+    }
   }
   connectToServer = async () => {
-    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber)) {
-      this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
-      this.closeTabService.saveDataForFollowUp = this.dataSource;
-      if (this.trackingManagerService.isValidationNull(this.dataSource))
-        return;
-      this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber.toString());
-      this.dataSourceAUX = this.closeTabService.saveDataForFollowUpAUX;
-    }
+    if (!this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber))
+      return;
+    this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
+    if (this.trackingManagerService.isValidationNull(this.dataSource))
+      return;
+    this.closeTabService.saveDataForFollowUp = this.dataSource;
+    this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber.toString());
+    this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
     this.makeConfigs();
+
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForFollowUp = '';
     }
-    console.log(this.closeTabService.saveDataForFollowUpAUX);
-
+    /** 
+     * it separate data from followUp service and 
+     * simple search route,
+     * it should first call check hasTrackNumber function
+     * then data were saved     
+     */
+    if (this.followUpService.hasTrackNumber()) {
+      this.trackNumber = this.followUpService.getTrackNumber();
+      this.connectToServer();
+      this.followUpService.setTrackNumber(null);
+      return;
+    }
     if (this.closeTabService.saveDataForFollowUp) {
       this.dataSource = this.closeTabService.saveDataForFollowUp;
       this.dataSourceAUX = this.closeTabService.saveDataForFollowUpAUX;
       this.makeConfigs();
+      return;
     }
   }
   onRowEditSave = async (dataSource: IFollowUpHistory) => {
@@ -101,7 +116,7 @@ export class FollowUpComponent extends FactoryONE {
     }
   }
   insertToDesc = () => {
-    this._showDesc = this.trackingManagerService.columnDescView();
+    this._showDesc = this.trackingManagerService.columnFollowUpView();
     this._defColumns = this.trackingManagerService.columnDefColumns();
     this.clearUNUsables();
   }

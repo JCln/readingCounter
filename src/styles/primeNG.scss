@@ -333,6 +333,14 @@
   z-index: 1 !important;
 }
 
+.double_size {
+  grid-column: auto/ span 2;
+
+  @media (max-width:550px) {
+    grid-column: auto;
+  }
+}
+
 /* EDITABLE ROWS*/
 
 

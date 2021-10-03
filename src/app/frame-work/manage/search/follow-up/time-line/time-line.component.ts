@@ -20,7 +20,7 @@ export class TimeLineComponent implements AfterViewInit {
   columnTimeLine = (): IObjectIteratation[] => {
     return [
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true },
+      { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true, icon: 'grid-column: auto/ span 2;' },
       { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, readonly: true },
       { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
       { field: 'year', header: 'سال', isSelected: false, readonly: true },

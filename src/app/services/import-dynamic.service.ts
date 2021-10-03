@@ -40,7 +40,7 @@ export class ImportDynamicService {
     { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isNumber: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isNumber: true },
-    { field: 'listNumber', header: 'ش لیست', isSelected: true },
+    { field: 'listNumber', header: 'ش لیست', isSelected: true, icon: 'grid-column: auto/ span 2;' },
     { field: 'year', header: 'سال', isSelected: false, isNumber: true },
     { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: false, isSelectOption: true },
   ]

@@ -33,10 +33,10 @@ export class DataMiningAnalysesService {
     { field: 'maxBetweenTwoMinute', header: 'حداکثر زمان بین دو', isSelected: true, readonly: true },
     { field: 'minBetweenTwoMinute', header: 'حداقل زمان بین دو', isSelected: true, readonly: true },
     { field: 'averageBetweenTwoMinute', header: 'میانگین زمان بین دو', isSelected: true, readonly: true },
-    { field: 'countSameTime', header: 'تعداد دریافت همزمان', isSelected: true, readonly: true },
+    { field: 'countSameTime', header: 'تعداد دریافت', isSelected: true, readonly: true },
     { field: 'closedCount', header: 'تعداد بسته', isSelected: true, readonly: true },
     { field: 'closedPercent', header: 'درصد بسته', isSelected: true, readonly: true },
-    { field: 'disconnectRate', header: 'نرخ قعطی', isSelected: true, readonly: true },
+    { field: 'disconnectRate', header: 'نرخ قطعی', isSelected: true, readonly: true },
     { field: 'medianBetweenTwoMinute', header: 'میانه بین دو', isSelected: true, readonly: true },
   ]
 

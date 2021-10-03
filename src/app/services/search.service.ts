@@ -17,6 +17,7 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { Search } from '../classes/search';
+import { FollowUpService } from './follow-up.service';
 
 @Injectable({
   providedIn: 'root'
@@ -211,6 +212,7 @@ export class SearchService {
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
+    private followUpService: FollowUpService,
     private router: Router
   ) { }
 
@@ -487,7 +489,8 @@ export class SearchService {
     this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
   }
   routeToFollowUp = (row: ISearchSimpleOutput) => {
-    this.utilsService.routeToByParams('/wr/m/s/fwu', row.trackNumber);
+    this.followUpService.setTrackNumber(row.trackNumber);
+    this.utilsService.routeToByUrl('/wr/m/s/fwu');
   }
   showInMap = (dataSource: object) => {
     this.utilsService.routeToByParams('/wr', { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });

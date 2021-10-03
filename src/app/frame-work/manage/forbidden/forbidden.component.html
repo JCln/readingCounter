@@ -37,8 +37,7 @@
 </section>
 
 <app-prime-table *ngIf="dataSource" [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_rowsNumbers]=10
-    [_rowsPerPage]="[10,25,50]" [_numberOfExtraColumns]="[1]" [_selectedColumnsToRemember]="'selectedForbidden'"
-    [_hasCollapsible]=true [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed"
-    (refreshedTable)="refreshTable()" (showedPictures)="showPictures($event)">
+    [dataSource]="dataSource" [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1]"
+    [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
+    (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()" (showedPictures)="showPictures($event)">
 </app-prime-table>

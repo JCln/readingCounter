@@ -84,9 +84,9 @@
     </section>
 
     <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-        [_outputFileName]="'analysis'" [_checkUpName]="'dm-analysis'" [_rowsPerPage]="[10,25,25]"
-        [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+        [_outputFileName]="'analysis'" [_checkUpName]="'dm-analysis'" [_selectedColumnsToRemember]="'selectedDMAnalyze'"
+        [_hasCollapsible]=true [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 
 </main>
