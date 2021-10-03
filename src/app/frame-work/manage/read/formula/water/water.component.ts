@@ -53,10 +53,8 @@ export class WaterComponent extends FactoryONE {
 
         });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.formulasService.postFormulaAdd(ENInterfaces.FormulaWaterAdd, result);
+        if (result)
           this.refreshTable();
-        }
       });
     });
   }

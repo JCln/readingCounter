@@ -17,7 +17,7 @@ import { CountryAddDgComponent } from './country-add-dg/country-add-dg.component
 export class CountryComponent extends FactoryONE {
 
   dataSource: ICountryManager[] = [];
- 
+
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -36,10 +36,8 @@ export class CountryComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(CountryAddDgComponent, { disableClose: true, minWidth: '19rem' });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryADD, result);
+        if (result)
           this.refreshTable();
-        }
       });
     });
   }

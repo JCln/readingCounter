@@ -19,7 +19,7 @@ import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 export class RegionComponent extends FactoryONE {
   dataSource: IRegionManager[] = [];
 
- 
+
   provinceDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
@@ -47,10 +47,8 @@ export class RegionComponent extends FactoryONE {
 
         });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.RegionADD, result);
+        if (result)
           this.refreshTable();
-        }
       });
     });
   }

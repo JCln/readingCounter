@@ -1,64 +1,64 @@
 <h2 mat-dialog-title>افزودن محدوده</h2>
 
 <form [formGroup]="form" (ngSubmit)="save()">
-    <mat-dialog-content>
+    <main class="_contents">
 
-        <mat-form-field appearance="fill">
-            <mat-label>کد</mat-label>
-            <input matInput type="number" formControlName="id" placeholder="کد">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">کد</div>
+            <input class="_value" type="number" formControlName="id">
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>عنوان</mat-label>
-            <input matInput formControlName="title" placeholder="عنوان">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">عنوان</div>
+            <input class="_value" formControlName="title">
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>ناحیه</mat-label>
+       <div class="input_2">
+            <div class="_key">ناحیه</div>
             <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>کد دولتی</mat-label>
-            <input matInput formControlName="govermentalCode" placeholder="کد دولتی">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>از اشتراک</mat-label>
-            <input matInput formControlName="fromEshterak" placeholder="از اشتراک">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>تا اشتراک</mat-label>
-            <input matInput formControlName="toEshterak" placeholder="تا اشتراک">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>از ش.پرونده</mat-label>
-            <input matInput type="number" formControlName="fromRadif" placeholder="از ش.پرونده">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>تا ش.پرونده</mat-label>
-            <input matInput type="number" formControlName="toRadif" placeholder="تا ش.پرونده">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>هاست</mat-label>
-            <input matInput formControlName="host" placeholder="هاست">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>کاربری</mat-label>
-            <input matInput formControlName="dbUserName" placeholder="کاربری">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>گذرواژه</mat-label>
-            <input matInput formControlName="dbPassword" placeholder="گذرواژه">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>کاتالوگ</mat-label>
-            <input matInput formControlName="dbInitialCatalog" placeholder="کاتالوگ">
-        </mat-form-field>
+        </div>
+        <div class="input_2">
+            <div class="_key">کد دولتی</div>
+            <input class="_value" formControlName="govermentalCode">
+        </div>
+        <div class="input_2">
+            <div class="_key">از اشتراک</div>
+            <input class="_value" formControlName="fromEshterak">
+        </div>
+        <div class="input_2">
+            <div class="_key">تا اشتراک</div>
+            <input class="_value" formControlName="toEshterak">
+        </div>
+        <div class="input_2">
+            <div class="_key">از ش.پرونده</div>
+            <input class="_value" type="number" formControlName="fromRadif">
+        </div>
+        <div class="input_2">
+            <div class="_key">تا ش.پرونده</div>
+            <input class="_value" type="number" formControlName="toRadif">
+        </div>
+        <div class="input_2">
+            <div class="_key">هاست</div>
+            <input class="_value" formControlName="host">
+        </div>
+        <div class="input_2">
+            <div class="_key">کاربری</div>
+            <input class="_value" formControlName="dbUserName">
+        </div>
+        <div class="input_2">
+            <div class="_key">گذرواژه</div>
+            <input class="_value" formControlName="dbPassword">
+        </div>
+        <div class="input_2">
+            <div class="_key">کاتالوگ</div>
+            <input class="_value" formControlName="dbInitialCatalog">
+        </div>
 
-    </mat-dialog-content>
+    </main>
 
     <mat-dialog-actions>
         <button class="btn_2" (click)="close()" type="button">بازگشت</button>

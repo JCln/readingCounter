@@ -18,7 +18,7 @@ import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
 })
 export class Auth2Component extends FactoryONE {
 
-  dataSource: IAuthLevel2[] = [];  
+  dataSource: IAuthLevel2[] = [];
 
   authLevel1Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel2; } = {};
@@ -44,9 +44,8 @@ export class Auth2Component extends FactoryONE {
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel2ADD, result);
-        }
+        if (result)
+          this.refreshTable();
       });
     });
   }
@@ -77,6 +76,7 @@ export class Auth2Component extends FactoryONE {
     if (a) {
       await this.authsManagerService.deleteSingleRow(ENInterfaces.AuthLevel2REMOVE, rowDataAndIndex['dataSource']);
       this.refetchTable(rowDataAndIndex['ri']);
+      this.refreshTable();
     }
   }
   onRowEditInit(dataSource: object) {

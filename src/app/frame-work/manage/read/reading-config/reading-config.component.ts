@@ -48,10 +48,8 @@ export class ReadingConfigComponent extends FactoryONE {
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigADD, result);
-          this.refreshTable();
-        }
+        if (result)           
+          this.refreshTable();        
       });
     });
   }

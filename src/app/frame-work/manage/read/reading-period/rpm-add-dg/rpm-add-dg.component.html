@@ -1,47 +1,45 @@
 <h2 mat-dialog-title>افزودن دوره قرائت</h2>
 
 <form [formGroup]="form" (ngSubmit)="save()">
-    <mat-dialog-content>
+    <main class="_contents">
 
-        <mat-form-field appearance="fill">
-            <mat-label>کد</mat-label>
-            <input matInput type="number" formControlName="id" placeholder="کد">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">کد</div>
+            <input class="_value" type="number" formControlName="id">
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>کد مشترکین</mat-label>
-            <input matInput type="number" formControlName="moshtarakinId" placeholder="کد مشترکین">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">کد مشترکین</div>
+            <input class="_value" type="number" formControlName="moshtarakinId">
+        </div>
+        <div class="input_2">
+            <div class="_key">عنوان</div>
+            <input class="_value" formControlName="title">
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>عنوان</mat-label>
-            <input matInput formControlName="title" placeholder="عنوان">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>ناحیه</mat-label>
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
             <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>ترتیب</mat-label>
-            <input matInput type="number" formControlName="clientOrder" placeholder="ترتیب">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>نوع دوره</mat-label>
+        <div class="input_2">
+            <div class="_key">ترتیب</div>
+            <input class="_value" type="number" formControlName="clientOrder">
+        </div>
+        <div class="input_2">
+            <div class="_key">نوع دوره</div>
             <mat-select placeholder="انتخاب مورد" formControlName="readingPeriodKindId">
                 <mat-option *ngFor="let truefalse of readingPeriodKindId" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </div>
 
-    </mat-dialog-content>
+    </main>
 
     <mat-dialog-actions>
         <button class="btn_2" (click)="close()" type="button">بازگشت</button>

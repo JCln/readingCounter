@@ -55,7 +55,7 @@ export class BudgetComponent extends FactoryONE {
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
-          await this.formulasService.postFormulaAdd(ENInterfaces.FormulaBudgetAdd, result);
+          this.refreshTable();
       });
     });
   }

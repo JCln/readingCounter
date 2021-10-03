@@ -1,23 +1,23 @@
 <h2 mat-dialog-title>افزودن تبصره 2</h2>
 
 <form [formGroup]="form" (ngSubmit)="save()">
-    <mat-dialog-content>
+    <main class="_contents">
 
-        <mat-form-field appearance="fill">
-            <mat-label>ناحیه</mat-label>
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
             <mat-select placeholder="انتخاب مورد" formControlName="zoneId">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>فرمول</mat-label>
-            <input matInput formControlName="formula" placeholder="فرمول">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">فرمول</div>
+            <input class="_value" formControlName="formula">
+        </div>
 
-    </mat-dialog-content>
+    </main>
 
     <mat-dialog-actions>
         <button class="btn_2" (click)="close()" type="button">بازگشت</button>

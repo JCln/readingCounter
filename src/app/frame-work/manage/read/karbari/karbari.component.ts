@@ -44,10 +44,8 @@ export class KarbariComponent extends FactoryONE {
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.readManagerService.addOrEditAuths(ENInterfaces.KarbariAdd, result);
+        if (result)
           this.refreshTable();
-        }
       });
     });
   }

@@ -38,10 +38,8 @@ export class ReadingPeriodKindComponent extends FactoryONE {
         minWidth: '19rem',
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodKindAdd, result);
+        if (result)
           this.refreshTable();
-        }
       });
     });
   }

@@ -45,9 +45,8 @@ export class Auth3Component extends FactoryONE {
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3ADD, result);
-        }
+        if (result)
+          this.refreshTable();
       });
     });
   }

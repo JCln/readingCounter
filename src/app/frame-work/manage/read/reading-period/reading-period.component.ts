@@ -48,10 +48,8 @@ export class ReadingPeriodComponent extends FactoryONE {
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodAdd, result);
-          this.refreshTable();
-        }
+        if (result)          
+          this.refreshTable();        
       });
     });
   }

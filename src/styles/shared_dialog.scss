@@ -1,6 +1,28 @@
 @import 'variable.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'input.scss';
+
+._contents {
+  display: grid;
+  direction: rtl;
+  min-width: 16rem;
+
+  @media (min-width: 550px) {
+    min-width: 20rem;
+  }
+
+  @media (min-width: 780px) {
+    grid-template-columns: repeat(auto-fit, minmax(19rem, auto));
+    gap: .5rem;
+  }
+
+  ._key,
+  ._value {
+    border: 0;
+    font-weight: 800;
+  }
+}
 
 .mat-form-field {
   text-align: center;

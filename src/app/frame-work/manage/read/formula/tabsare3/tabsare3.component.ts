@@ -53,10 +53,8 @@ export class Tabsare3Component extends FactoryONE {
 
         });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.formulasService.postFormulaAdd(ENInterfaces.FormulaTabsare3Add, result);
+        if (result)
           this.refreshTable();
-        }
       });
     });
   }

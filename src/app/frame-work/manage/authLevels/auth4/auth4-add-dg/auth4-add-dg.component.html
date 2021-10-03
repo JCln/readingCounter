@@ -1,39 +1,39 @@
 <h2 mat-dialog-title>افزودن اکشن</h2>
 
 <form [formGroup]="form" (ngSubmit)="save()">
-    <mat-dialog-content>
+    <main class="_contents">
 
-        <mat-form-field appearance="fill">
-            <mat-label>عنوان</mat-label>
-            <input matInput formControlName="title" placeholder="عنوان">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">عنوان</div>
+            <input class="_value" formControlName="title">
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>مقدار</mat-label>
-            <input matInput formControlName="value" placeholder="مقدار">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">مقدار</div>
+            <input class="_value" formControlName="value">
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>کنترلر</mat-label>
+        <div class="input_2">
+            <div class="_key">کنترلر</div>
             <mat-select placeholder="انتخاب مورد" formControlName="authLevel3Id">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>کلاس css</mat-label>
-            <input matInput formControlName="cssClass" placeholder="کلاس css">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">کلاس css</div>
+            <input class="_value" formControlName="cssClass">
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>ترتیب</mat-label>
-            <input matInput type="number" formControlName="logicalOrder" placeholder="ترتیب">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">ترتیب</div>
+            <input class="_value" type="number" formControlName="logicalOrder">
+        </div>
 
         <mat-checkbox formControlName="isSidebar">در سایدبار</mat-checkbox>
-    </mat-dialog-content>
+    </main>
 
     <mat-dialog-actions>
         <button class="btn_2" type="button" (click)="close()">بازگشت</button>

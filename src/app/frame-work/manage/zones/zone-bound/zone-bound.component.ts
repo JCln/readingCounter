@@ -19,7 +19,7 @@ import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.c
 export class ZoneBoundComponent extends FactoryONE {
   dataSource: IZoneBoundManager[] = [];
 
- 
+
   zoneDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
@@ -47,10 +47,8 @@ export class ZoneBoundComponent extends FactoryONE {
 
         });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.sectorsManagerService.sectorsAddEdit(ENInterfaces.ZoneBoundADD, result);
+        if (result)
           this.refreshTable();
-        }
       });
     });
   }

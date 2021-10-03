@@ -32,8 +32,6 @@ export class CrAddDgComponent {
     })
   }
   async save() {
-    console.log(this.form.value);
-
     if (!this.readManagerService.verification(this.form.value))
       return;
     if (!await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportAdd, this.form.value))

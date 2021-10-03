@@ -1,36 +1,35 @@
 <h2 mat-dialog-title>افزودن کاربری</h2>
 <form [formGroup]="form" (ngSubmit)="save()">
-    <mat-dialog-content>
-        <mat-form-field appearance="fill">
-            <mat-label>کد</mat-label>
-            <input matInput type="number" formControlName="id" placeholder="کد">
-        </mat-form-field>
+    <main class="_contents">
+        <div class="input_2">
+            <div class="_key">کد</div>
+            <input class="_value" type="number" formControlName="id">
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>کد مشترک</mat-label>
-            <input matInput type="number" formControlName="moshtarakinId" placeholder="کد">
-        </mat-form-field>
+        <div class="input_2">
+            <div class="_key">کد مشترکین</div>
+            <input class="_value" type="number" formControlName="moshtarakinId">
+        </div>
 
-        <mat-form-field appearance="fill">
-            <mat-label>عنوان</mat-label>
-            <input matInput formControlName="title" placeholder="عنوان">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>استان</mat-label>
+        <div class="input_2">
+            <div class="_key">عنوان</div>
+            <input class="_value" formControlName="title">
+        </div>
+        <div class="input_2">
+            <div class="_key">استان</div>
             <mat-select placeholder="انتخاب مورد" formControlName="provinceId">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </div>
 
         <mat-checkbox formControlName="isMaskooni">مسکونی</mat-checkbox>
         <mat-checkbox formControlName="isTejari">تجاری</mat-checkbox>
         <mat-checkbox formControlName="isSaxt">ساخت</mat-checkbox>
         <mat-checkbox formControlName="hasReadingVibrate">لرزش</mat-checkbox>
 
-    </mat-dialog-content>
+    </main>
 
     <mat-dialog-actions>
         <button class="btn_2" (click)="close()" type="button">بازگشت</button>

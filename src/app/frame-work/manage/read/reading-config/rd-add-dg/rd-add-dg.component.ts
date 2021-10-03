@@ -1,7 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
+import { ReadManagerService } from 'services/read-manager.service';
 import { UtilsService } from 'services/utils.service';
 
 @Component({
@@ -17,7 +19,8 @@ export class RdAddDgComponent {
     fb: FormBuilder,
     private dialogRef: MatDialogRef<RdAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private readManagerService: ReadManagerService
   ) {
     data = data.di;
     this.form = fb.group({
@@ -97,7 +100,7 @@ export class RdAddDgComponent {
       return false;
     return true;
   }
-  save() {
+  async save() {
     if (!this.percentValidate()) {
       this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
       return;
@@ -106,6 +109,9 @@ export class RdAddDgComponent {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return;
     }
+    if (!await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigADD, this.form.value))
+      return;
+
     this.dialogRef.close(this.form.value);
   }
   close() {
