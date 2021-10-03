@@ -216,5 +216,5 @@ export interface Theme {
     properties: any
 }
 export enum ENLoginVersion {
-    version = '0.4.6'
+    version = '0.4.7'
 }
