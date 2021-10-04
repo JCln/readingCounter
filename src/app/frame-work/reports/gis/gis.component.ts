@@ -71,6 +71,7 @@ export class GisComponent extends FactoryONE {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.getCounterStateByZoneId();
     this.receiveYear();
   }
 

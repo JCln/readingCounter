@@ -55,15 +55,16 @@ export class FollowUpComponent extends FactoryONE {
   private makeConfigs = async () => {
     this.changeHsty = this.dataSource.changeHistory;
     this.getUserRole();
-    this.insertToDesc();
     if (this.dataSourceAUX) {
       this.trackingManagerService.setGetRanges(this.dataSourceAUX);
       this._selectColumnsAUX = this.trackingManagerService.columnSelectedLMPerDayPositions();
     }
+    this.insertToDesc();
   }
   connectToServer = async () => {
     if (!this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber))
       return;
+
     this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
     if (this.trackingManagerService.isValidationNull(this.dataSource))
       return;
@@ -85,6 +86,8 @@ export class FollowUpComponent extends FactoryONE {
      */
     if (this.followUpService.hasTrackNumber()) {
       this.trackNumber = this.followUpService.getTrackNumber();
+      console.log(13);
+
       this.connectToServer();
       this.followUpService.setTrackNumber(null);
       return;
@@ -121,13 +124,10 @@ export class FollowUpComponent extends FactoryONE {
     this.clearUNUsables();
   }
   showInMap = () => {
-    this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[0].insertDateJalali, null);
+    this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[this.changeHsty.length - 1].insertDateJalali, this.dataSourceAUX.overalDistance);
   }
   routeToLMAll = (row: IFollowUpHistory) => {
     this.trackingManagerService.routeToLMAll(row);
-  }
-  refreshTable = () => {
-    this.connectToServer();
   }
   ngOnInit(): void { return; }
 

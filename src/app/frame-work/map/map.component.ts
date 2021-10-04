@@ -153,6 +153,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.onShowCounterReader.day = this.route.snapshot.paramMap.get('day');
     this.canShowOptionsButton = true;
     this.markersDataSourceXY = await this.mapService.getPointerMarks(this.onShowCounterReader);
+    console.log(this.markersDataSourceXY);
+    
     if (!this.mapService.validateGISAccuracy(this.markersDataSourceXY)) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
       return;
@@ -176,6 +178,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   private classWrapperCluster = async () => {
     this.extraDataSourceRes = await this.readingReportManagerService.postRRManagerOnMap(ENInterfaces.ListToGis, this.makeClusterRouteObject());
+    console.log(this.extraDataSourceRes);
+    
     if (this.extraDataSourceRes.length === 0) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
       return;

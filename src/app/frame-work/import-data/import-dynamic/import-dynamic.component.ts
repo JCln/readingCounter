@@ -60,8 +60,7 @@ export class ImportDynamicComponent extends FactoryONE {
   readingConfigDefault: string[] = [];
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  dataSource: any;
-
+  
   constructor(
     public interactionService: InteractionService,
     public importDynamicService: ImportDynamicService,

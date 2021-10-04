@@ -37,7 +37,7 @@ export class UserEditComponent extends FactoryONE {
     super(interactionService);
     this.detectRouteChange();
   }
-  addAUser = () => {
+  connectToServer = () => {
     this.editUserManagerService.userEditA(this.UUid, this.dataSource);
   }
   nullSavedSource = () => this.closeTabService.saveDataForEditUsers = null;

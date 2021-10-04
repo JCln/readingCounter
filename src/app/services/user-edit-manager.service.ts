@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
 import { IAddUserManager, IAUserEditSave, IUserEditManager, IUserEditOnRole } from 'interfaces/iuser-manager';
 
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { InterfaceManagerService } from './interface-manager.service';
-import { SnackWrapperService } from './snack-wrapper.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -16,9 +17,9 @@ export class UserEditManagerService {
   userEditOnRoleRoleVal: number;
 
   constructor(
-    private snackWrapperService: SnackWrapperService,
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private dialog: MatDialog
   ) { }
 
   private getAUserProvince = (zoneItems: any): number[] => {
@@ -88,16 +89,18 @@ export class UserEditManagerService {
 
     return true;
   }
-  private connectToServer = (vals: IAUserEditSave) => {
+  private connectToServerEdit = async (vals: IAUserEditSave) => {
     this.dataSource = vals;
     if (!this.vertification())
       return;
-    this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
-      if (res) {
-        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
-        this.utilsService.routeToByUrl('/wr/mu/all');
-      }
-    });
+    if (await this.firstConfirmDialog(EN_messages.confirm_userChange)) {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
+        if (res) {
+          this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
+          this.utilsService.routeToByUrl('/wr/mu/all');
+        }
+      });
+    }
   }
   userEditA = (UUid: string, dataSource: IUserEditManager) => {
     const vals: IAUserEditSave = {
@@ -114,7 +117,7 @@ export class UserEditManagerService {
       deviceId: dataSource.userInfo.deviceId,
       isActive: dataSource.userInfo.isActive
     }
-    this.connectToServer(vals);
+    this.connectToServerEdit(vals);
   }
   getUserAdd = (): Promise<any> => {
     return new Promise((resolve) => {
@@ -138,18 +141,35 @@ export class UserEditManagerService {
 
     return true;
   }
-  userEditOnRole = (dataSource: IAddUserManager) => {
+  userEditOnRole = async (dataSource: IAddUserManager) => {
     const val: IUserEditOnRole = {
       roleId: this.userEditOnRoleRoleVal,
       selectedActions: this.addAUserActions(dataSource.appItems),
     }
     if (!this.verificationEditOnRole(val))
       return;
-
-    this.connectToServerEditOnRole(val);
+    if (await this.firstConfirmDialog(EN_messages.confirm_userGroupChange))
+      this.connectToServerEditOnRole(val);
   }
   userEditOnRoleInsertRole = (val: any) => {
     this.userEditOnRoleRoleVal = val;
+  }
+  firstConfirmDialog = (reason: EN_messages): Promise<any> => {
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: reason,
+          isInput: false,
+          isDelete: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(async desc => {
+        if (desc) {
+          resolve(desc)
+        }
+      })
+    })
   }
 
 }

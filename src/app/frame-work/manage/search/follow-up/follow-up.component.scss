@@ -5,26 +5,29 @@
 @import 'tooltip.scss';
 
 .insert_track {
-  display: grid;
-  justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   direction: rtl;
   margin: auto;
   padding: 2rem;
   background: var(--secondary_3);
   border-radius: $border_15;
-  width: 18rem;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
 }
 
 .input_1 {
   text-align: center;
   border-color: var(--primary_4);
-  min-width: 16rem;
+
+  @media (max-width:550px) {
+    min-width: 17rem;
+  }
 }
 
 .btn_1 {
   color: var(--white);
-  margin-top: 1rem;
   background-color: var(--orange_500);
 }
 
