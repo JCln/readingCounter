@@ -34,6 +34,7 @@ export class TrackingManagerService {
   columnFollowUpView = (): IObjectIteratation[] => {
     return [
       { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, readonly: true },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
       { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
       { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, readonly: true },
       { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, readonly: true },
@@ -121,7 +122,6 @@ export class TrackingManagerService {
   columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
     return [
       { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
-      { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
       { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
       { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
       { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },

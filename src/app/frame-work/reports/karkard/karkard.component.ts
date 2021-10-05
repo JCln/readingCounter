@@ -6,6 +6,7 @@ import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/io
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -45,6 +46,7 @@ export class KarkardComponent extends FactoryONE {
     public readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
+    private utilsService: UtilsService,
     public route: ActivatedRoute
   ) {
     super(interactionService)
@@ -61,6 +63,7 @@ export class KarkardComponent extends FactoryONE {
     if (this.closeTabService.saveDataForRRKarkard) {
       this.dataSource = this.closeTabService.saveDataForRRKarkard;
       this.insertSelectedColumns();
+      this.setGetRanges();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -89,6 +92,7 @@ export class KarkardComponent extends FactoryONE {
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.insertSelectedColumns();
+    this.setGetRanges();
     this.closeTabService.saveDataForRRKarkard = this.dataSource;
   }
   @Input() get selectedColumns(): any[] {
@@ -101,6 +105,11 @@ export class KarkardComponent extends FactoryONE {
   refreshTable = () => {
     if (this.validation())
       this.connectToServer();
+  }
+  private setGetRanges = () => {
+    this.dataSource.forEach(item => {
+      item.duration = parseFloat(this.utilsService.getRange(item.duration));
+    })
   }
 
 }

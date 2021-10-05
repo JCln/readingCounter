@@ -147,6 +147,7 @@ export enum ENInterfaces {
 
     ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
     ListSearchPro = 'V1/List/Search/Pro',
+    ListGetProExcel = 'V1/List/Search/ProExcel',
     ListSearchSimple = 'V1/Tracking/Search/Simple',
     ListTraverse = 'V1/List/Offloaded/Traverse',
     ListTraverseDifferential = 'V1/List/Offloaded/TraverseDifferential',

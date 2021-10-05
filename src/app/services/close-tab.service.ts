@@ -229,7 +229,7 @@ export class CloseTabService {
       case '/wr/m/s/searchMosh':
         this.saveDataForSearchMoshtarakin = '';
         break;
-      case '/wr/m/s/searchPro':
+      case '/wr/m/s/acme':
         this.saveDataForSearchPro = '';
         break;
       case '/wr/m/s/simple':

@@ -111,7 +111,7 @@ export class ProComponent extends FactoryONE {
       rtl: true,
       width: '90%'
     })
-    this.ref.onClose.subscribe((res: ISearchProReportInput) => {
+    this.ref.onClose.subscribe((res) => {
       if (res) {
         this.searchReq = res;
         this.connectToServer();

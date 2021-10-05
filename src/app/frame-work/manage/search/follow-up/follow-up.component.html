@@ -3,8 +3,10 @@
     <div class="tooltip_text_right">{{_isCollapsed? 'باز': 'بسته'}}</div>
 </i>
 <form #form="ngForm" *ngIf="!_isCollapsed" class="insert_track">
-    <input class="input_1" placeholder="شماره پیگیری" type="number" name="trackNumber" [(ngModel)]="trackNumber"
-        autofocus>
+    <div class="input_2">
+        <div class="_key">شماره پیگیری</div>
+        <input class="_value" type="number" name="trackNumber" [(ngModel)]="trackNumber" autofocus>
+    </div>
     <button type="submit" class="btn_1" (click)="connectToServer()">مشاهده</button>
 </form>
 

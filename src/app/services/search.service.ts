@@ -79,6 +79,12 @@ export class SearchService {
     fragmentMasterIds: []
   }
   private _isValidateByDate: boolean;
+  private _searchProExcel: IObjectIteratation[] = [
+    { field: 'billId', header: 'شناسه قبض', isSelected: true },
+    { field: 'trackNumber', header: 'شناسه قبض', isSelected: true },
+    { field: 'radif', header: 'شناسه قبض', isSelected: true },
+    { field: 'eshterak', header: 'شناسه قبض', isSelected: true },
+  ]
   private _searchPro: IObjectIteratation[] =
     [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
@@ -226,6 +232,9 @@ export class SearchService {
   columnSearchPro = (): IObjectIteratation[] => {
     return this._searchPro;
   }
+  columnSearchProExcel = (): IObjectIteratation[] => {
+    return this._searchProExcel;
+  }
   customizeSelectedColumns = (_selectCols: any) => {
     return _selectCols.filter(items => {
       if (items.isSelected)
@@ -282,6 +291,17 @@ export class SearchService {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
+          resolve(res);
+        })
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  getProExcel = (method: ENInterfaces, body: any): Promise<any> => {
+    try {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.POSTBLOB(method, body).toPromise().then(res => {
           resolve(res);
         })
       });

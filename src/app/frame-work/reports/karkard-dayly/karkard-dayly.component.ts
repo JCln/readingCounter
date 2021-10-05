@@ -5,6 +5,7 @@ import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/io
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 
@@ -41,7 +42,8 @@ export class KarkardDaylyComponent extends FactoryONE {
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
     public interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    private utilsService: UtilsService
   ) {
     super(interactionService);
   }
@@ -54,6 +56,7 @@ export class KarkardDaylyComponent extends FactoryONE {
     if (this.closeTabService.saveDataForRRkarkardDaily) {
       this.dataSource = this.closeTabService.saveDataForRRkarkardDaily;
       this.insertSelectedColumns();
+      this.setGetRanges();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -79,6 +82,7 @@ export class KarkardDaylyComponent extends FactoryONE {
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.readingReportManagerService.karkardDailyReq);
     this.insertSelectedColumns();
+    this.setGetRanges();
     this.closeTabService.saveDataForRRkarkardDaily = this.dataSource;
   }
   @Input() get selectedColumns(): any[] {
@@ -87,5 +91,10 @@ export class KarkardDaylyComponent extends FactoryONE {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  private setGetRanges = () => {
+    this.dataSource.forEach(item => {
+      item.duration = parseFloat(this.utilsService.getRange(item.duration));
+    })
   }
 }
