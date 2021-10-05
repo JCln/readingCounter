@@ -55,6 +55,7 @@ export class CloseTabService {
   saveDataForFollowUpAUX: any;
   // import dynamic
   saveDataForImportDynamic: any;
+  saveDataForImportErrors: any;
   saveDataForSimafaBatch: any;
   saveDataForSimafaReadingPrograms: any;
   saveDataForAssessPre: any;
@@ -182,6 +183,9 @@ export class CloseTabService {
         break;
       case '/wr/imp/imd':
         this.saveDataForImportDynamic = '';
+        break;
+      case '/wr/imp/err':
+        this.saveDataForImportErrors = '';
         break;
       case '/wr/imp/assesspre':
         this.saveDataForAssessPre = '';
@@ -356,6 +360,7 @@ export class CloseTabService {
     this.saveDataForLastStates = '';
     this.saveDataForOffloadModify = '';
     this.saveDataForImportDynamic = '';
+    this.saveDataForImportErrors = '';
     this.saveDataForAssessPre = '';
     this.saveDataForAssessAdd = '';
     this.saveDataForSimafaReadingPrograms = '';

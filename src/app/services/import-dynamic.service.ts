@@ -5,13 +5,13 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENImportDatas,
-  IImportDataResponse,
-  IImportDynamicDefault,
-  IImportSimafaBatchReq,
-  IImportSimafaReadingProgramsReq,
-  IImportSimafaSingleReq,
-  IReadingProgramRes,
+    ENImportDatas,
+    IImportDataResponse,
+    IImportDynamicDefault,
+    IImportSimafaBatchReq,
+    IImportSimafaReadingProgramsReq,
+    IImportSimafaSingleReq,
+    IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -108,6 +108,14 @@ export class ImportDynamicService {
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ]
+  private _errors: IObjectIteratation[] = [
+    { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },
+    { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isNumber: true },
+    { field: 'billId', header: 'شناسه قبض', isSelected: true, isNumber: true },
+    { field: 'radif', header: 'ش.پرونده', isSelected: true, isNumber: true },
+    { field: 'errorDescriptoin', header: 'توضیحات', isSelected: true },
+    { field: 'hasError', header: 'خطا', isSelected: true, isBoolean: true }    
+  ]
   importDynamicReq: IImportDynamicDefault = {
     fromEshterak: '',
     toEshterak: '',
@@ -139,6 +147,9 @@ export class ImportDynamicService {
   }
   columnSimafaReadingProgram = (): IObjectIteratation[] => {
     return this._simafaReadingProgram;
+  }
+  columnErrors = (): IObjectIteratation[] => {
+    return this._errors;
   }
   columnSimafaBatch = (): IObjectIteratation[] => {
     return this._simafaBatch;
@@ -574,6 +585,13 @@ export class ImportDynamicService {
     } catch (error) {
       console.error(error);
     }
+  }
+  getDataSource = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).toPromise().then(res => {
+        resolve(res);
+      })
+    })
   }
   getFragmentDetailsByMaster = (zoneId: string) => {
     try {

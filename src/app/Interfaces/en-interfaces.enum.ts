@@ -228,6 +228,7 @@ export enum ENInterfaces {
 
     postImportData = 'V1/Import/Dynamic',
     postImportDynamicCount = 'V1/Import/DynamicCount',
+    getImportErrros = 'V1/Import/ImportErrors',
     postSimafaReadingProgram = 'V1/Import/Simafa/ReadingPrograms',
     postSimafaBatch = 'V1/Import/Simafa/Batch',
     postSimafaSingle = 'V1/Import/Simafa/single',

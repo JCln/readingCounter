@@ -26,7 +26,8 @@ export interface IImportDataResponse {
     trackNumber: number,
     count: number,
     errorCount: number,
-    counterReaderName: string
+    counterReaderName: string,
+    warningCount: number
 }
 export interface IImportSimafaBatchReq {
     routeAndReaderIds: [
@@ -62,6 +63,15 @@ export interface IImportSimafaReadingProgramsReq {
     readingPeriodId: number,
     year: number,
     zoneId: number
+}
+export interface IImportErrors {
+    eshterak: string,
+    qeraatCode: string,
+    billId: string,
+    radif: number,
+    errorDescriptoin: string,
+    hasError: true,
+    warningCount: number
 }
 export interface IReadingProgramRes {
     id: string,
