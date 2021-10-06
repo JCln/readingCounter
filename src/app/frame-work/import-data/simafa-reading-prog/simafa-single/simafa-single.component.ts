@@ -16,7 +16,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./simafa-single.component.scss']
 })
 export class SimafaSingleComponent extends FactoryONE {
-
+  _canShowAddButton: boolean = true;
   _readingProgramRes: IReadingProgramRes;
   simafaSingleReq: IImportSimafaSingleReq = {
     zoneId: 0,
@@ -55,7 +55,12 @@ export class SimafaSingleComponent extends FactoryONE {
     const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaSingleReq);
     if (!validation)
       return;
-    this.importDynamicService.showResDialog(await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaSingle, this.simafaSingleReq), false, EN_messages.importDynamic_created)
+    const a = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaSingle, this.simafaSingleReq);
+    if (a) {
+
+      this.importDynamicService.showResDialog(a, false, EN_messages.importDynamic_created);
+      this._canShowAddButton = false;
+    }
   }
   // nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
   classWrapper = async (canRefresh?: boolean) => {

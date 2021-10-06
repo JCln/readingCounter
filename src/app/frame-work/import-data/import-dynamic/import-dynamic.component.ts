@@ -18,6 +18,7 @@ import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/da
 export class ImportDynamicComponent extends FactoryONE {
   @ViewChild(DateJalaliComponent) date;
 
+  _canShowAddButton: boolean = true;
   importDynamic: IImportDynamicDefault = {
     fromEshterak: '',
     toEshterak: '',
@@ -60,7 +61,7 @@ export class ImportDynamicComponent extends FactoryONE {
   readingConfigDefault: string[] = [];
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  
+
   constructor(
     public interactionService: InteractionService,
     public importDynamicService: ImportDynamicService,
@@ -82,6 +83,7 @@ export class ImportDynamicComponent extends FactoryONE {
     }
     this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic), false, EN_messages.importDynamic_created)
     this.resetToDefaultFormStatus();
+    this._canShowAddButton = false;
   }
   private insertReadingConfigDefaults = (rcd: any) => {
     this.importDynamic.hasPreNumber = rcd.hasPreNumber;

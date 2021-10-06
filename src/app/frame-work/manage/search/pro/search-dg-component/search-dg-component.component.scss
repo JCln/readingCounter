@@ -96,6 +96,7 @@ article {
   display: flex;
   margin: $font_05 auto;
   font-family: $font_family;
+  width: 10rem;
 }
 
 hr {
@@ -120,6 +121,12 @@ hr {
   font-family: inherit;
   color: var(--secondary_6);
   margin: 0 2rem;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $font_xs;
 }
 
 ::ng-deep {
