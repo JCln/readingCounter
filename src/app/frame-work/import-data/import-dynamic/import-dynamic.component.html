@@ -16,7 +16,8 @@
             <section class="content">
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.zoneId" name="zoneId">
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamicService.importDynamicReq.zoneId"
+                        name="zoneId">
                         <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
                             (click)="verificationACounterReaderId()">
                             {{truefalse.title}}
@@ -35,8 +36,8 @@
                 </div>
                 <div class="input_2 this" [hidden]="_isOrderByDate || !readingPeriodDictionary.length">
                     <div class="_key">دوره قرائت</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamic.readingPeriodId"
-                        name="readingPeriodId">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="importDynamicService.importDynamicReq.readingPeriodId" name="readingPeriodId">
                         <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
                         </mat-option>
@@ -45,19 +46,21 @@
 
                 <div class="input_2">
                     <div class="_key">از اشتراک</div>
-                    <input class="_value" name="fromEshterak" [(ngModel)]="importDynamic.fromEshterak">
+                    <input class="_value" name="fromEshterak"
+                        [(ngModel)]="importDynamicService.importDynamicReq.fromEshterak">
                 </div>
                 <div class="input_2">
                     <div class="_key">تا اشتراک</div>
-                    <input class="_value" name="toEshterak" [(ngModel)]="importDynamic.toEshterak">
+                    <input class="_value" name="toEshterak"
+                        [(ngModel)]="importDynamicService.importDynamicReq.toEshterak">
                 </div>
 
                 <div class="input_2 this" *ngIf="userCounterReader.length">
                     <div class="_key">مامور</div>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
-                        [options]="userCounterReader" name="counter-reader" [(ngModel)]="importDynamic.counterReaderId"
-                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                        placeholder="انتخاب مورد">
+                        [options]="userCounterReader" name="counter-reader"
+                        [(ngModel)]="importDynamicService.importDynamicReq.counterReaderId" optionLabel="title"
+                        [filter]="true" filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
                     </p-dropdown>
                 </div>
 
@@ -85,14 +88,17 @@
             </section>
 
             <div class="check_boxes">
-                <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamic.hasPreNumber">شماره قبلی
+                <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamicService.importDynamicReq.hasPreNumber">شماره
+                    قبلی
                 </mat-checkbox>
 
-                <mat-checkbox name="displayBillId" [(ngModel)]="importDynamic.displayBillId">نمایش شناسه
+                <mat-checkbox name="displayBillId" [(ngModel)]="importDynamicService.importDynamicReq.displayBillId">
+                    نمایش شناسه
                     قبض
                 </mat-checkbox>
 
-                <mat-checkbox name="displayRadif" [(ngModel)]="importDynamic.displayRadif">نمایش ش.پرونده
+                <mat-checkbox name="displayRadif" [(ngModel)]="importDynamicService.importDynamicReq.displayRadif">نمایش
+                    ش.پرونده
                 </mat-checkbox>
 
             </div>
@@ -101,12 +107,12 @@
             <div class="input_2 this" [hidden]="!_showAlalHesabPercent">
                 <div class="_key">درصد علی‌الحساب</div>
                 <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
-                    [(ngModel)]="importDynamic.alalHesabPercent">
+                    [(ngModel)]="importDynamicService.importDynamicReq.alalHesabPercent">
             </div>
             <div class="input_2 this" [hidden]="!_showimagePercent">
                 <div class="_key">درصد تصویر</div>
                 <input class="_value" type="number" min="0" max="100" name="imagePercent"
-                    [(ngModel)]="importDynamic.imagePercent">
+                    [(ngModel)]="importDynamicService.importDynamicReq.imagePercent">
             </div>
 
         </section>

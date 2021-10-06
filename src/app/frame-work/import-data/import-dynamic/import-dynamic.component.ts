@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IImportDynamicDefault } from 'interfaces/import-data';
 import { ENLocalStorageNames, IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
@@ -19,20 +18,6 @@ export class ImportDynamicComponent extends FactoryONE {
   @ViewChild(DateJalaliComponent) date;
 
   _canShowAddButton: boolean = true;
-  importDynamic: IImportDynamicDefault = {
-    fromEshterak: '',
-    toEshterak: '',
-    zoneId: 0,
-    alalHesabPercent: 0,
-    imagePercent: 0,
-    hasPreNumber: false,
-    displayBillId: false,
-    displayRadif: false,
-    fromDate: null,
-    toDate: null,
-    counterReaderId: '',
-    readingPeriodId: null
-  }
   isTrueF: ITrueFalse[] = [
     { name: 'نباشد', value: false },
     { name: 'باشد', value: true },
@@ -72,25 +57,25 @@ export class ImportDynamicComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    const validation = this.importDynamicService.checkVertification(this.importDynamic, this._isOrderByDate);
+    const validation = this.importDynamicService.checkVertification(this.importDynamicService.importDynamicReq, this._isOrderByDate);
     if (!validation)
       return;
     if (this._showDynamicCount) {
-      if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicCount(this.importDynamic), true, EN_messages.confirm_createList)) {
-        this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic), false, EN_messages.importDynamic_created)
+      if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicCount(this.importDynamicService.importDynamicReq), true, EN_messages.confirm_createList)) {
+        this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
         return;
       }
     }
-    this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic), false, EN_messages.importDynamic_created)
+    this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
     this.resetToDefaultFormStatus();
     this._canShowAddButton = false;
   }
   private insertReadingConfigDefaults = (rcd: any) => {
-    this.importDynamic.hasPreNumber = rcd.hasPreNumber;
-    this.importDynamic.displayBillId = rcd.displayBillId;
-    this.importDynamic.displayRadif = rcd.displayRadif;
-    this.importDynamic.imagePercent = rcd.defaultImagePercent;
-    this.importDynamic.alalHesabPercent = rcd.defaultAlalHesab;
+    this.importDynamicService.importDynamicReq.hasPreNumber = rcd.hasPreNumber;
+    this.importDynamicService.importDynamicReq.displayBillId = rcd.displayBillId;
+    this.importDynamicService.importDynamicReq.displayRadif = rcd.displayRadif;
+    this.importDynamicService.importDynamicReq.imagePercent = rcd.defaultImagePercent;
+    this.importDynamicService.importDynamicReq.alalHesabPercent = rcd.defaultAlalHesab;
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }
@@ -100,17 +85,17 @@ export class ImportDynamicComponent extends FactoryONE {
     this.canShowEditButton = true;
   }
   verificationACounterReaderId = async () => {
-    if (this.importDynamic.zoneId || this.zoneDictionary) {
+    if (this.importDynamicService.importDynamicReq.zoneId || this.zoneDictionary) {
       this.verificationReadingPeriod();
-      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamic.zoneId);
+      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamicService.importDynamicReq.zoneId);
     }
-    if (!this.importDynamic.zoneId || !this.zoneDictionary)
+    if (!this.importDynamicService.importDynamicReq.zoneId || !this.zoneDictionary)
       return;
     if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault)) {
       this.readingConfigDefault = [];
       return;
     }
-    this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.importDynamic.zoneId);
+    this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.importDynamicService.importDynamicReq.zoneId);
     if (!this.importDynamicService.validationInvalid(this.userCounterReader)) {
       this.userCounterReader = [];
       return;
@@ -121,11 +106,11 @@ export class ImportDynamicComponent extends FactoryONE {
   verificationReadingPeriod = async () => {
     if (this._isOrderByDate)
       return;
-    if (!this.importDynamic.zoneId || !this.zoneDictionary || !this.kindId) {
+    if (!this.importDynamicService.importDynamicReq.zoneId || !this.zoneDictionary || !this.kindId) {
       this.readingPeriodDictionary = [];
       return;
     }
-    this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriod(this.importDynamic.zoneId, this.kindId);
+    this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriod(this.importDynamicService.importDynamicReq.zoneId, this.kindId);
     this.importDynamicService.validationReadingPeriod(this.readingPeriodDictionary);
 
   }
@@ -141,6 +126,7 @@ export class ImportDynamicComponent extends FactoryONE {
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     if (!this.importDynamicService.validationZoneDictionary(this.zoneDictionary))
       this.zoneDictionary = [];
+    this.verificationACounterReaderId();
     this._showDynamicCount = this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasDynamicCount);
   }
   private resetToDefaultFormStatus = () => {
@@ -153,7 +139,7 @@ export class ImportDynamicComponent extends FactoryONE {
     this.readingConfigDefault = [];
     this.userCounterReader = [];
 
-    this.importDynamic = {
+    this.importDynamicService.importDynamicReq = {
       fromEshterak: '',
       toEshterak: '',
       zoneId: 0,
