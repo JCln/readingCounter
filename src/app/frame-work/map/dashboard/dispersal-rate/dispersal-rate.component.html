@@ -134,4 +134,14 @@
     </table>
 
 </section>
-<app-bar-dispersalrate *ngIf="dataSource" [dataSourceBar]="dataSource"></app-bar-dispersalrate>
+
+<section class="content">
+    <section class="collapse">
+        <h3>پراکندگی ساعات قرائت</h3>
+        <i (click)="_isCollapsed = !_isCollapsed" class="tooltip _circle_border p_icons"
+            [ngClass]="_isCollapsed ? 'pi pi-angle-up' : 'pi pi-angle-down'">
+            <div class="tooltip_text">{{_isCollapsed? ' بستن پراکندگی ساعات': 'نمایش پراکندگی ساعات'}}</div>
+        </i>
+    </section>
+    <app-bar-dispersalrate *ngIf="_isCollapsed && dataSource" [dataSourceBar]="dataSource"></app-bar-dispersalrate>
+</section>

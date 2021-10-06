@@ -17,51 +17,73 @@
 
 </main>
 
-<main class="container charts relative_pos">
-    <div class="title">آنالیز عملکرد</div>
-    <div class="chart_analyze_radar">
-        <app-analyze (barAnalyzeEvent)=receiveAnalyzeData($event)></app-analyze>
-    </div>
-    <div class="chart_analyze_bar">
-        <app-bar-anlz-prfm [barAnalyze]="_analyzer_interface"></app-bar-anlz-prfm>
-    </div>
-</main>
+<section class="content">
+    <section class="collapse">
+        <h3>آنالیز عملکرد</h3>
+        <i (click)="_isCollapsedAnalyzePrfm = !_isCollapsedAnalyzePrfm" class="tooltip _circle_border p_icons"
+            [ngClass]="_isCollapsedAnalyzePrfm ? 'pi pi-angle-up' : 'pi pi-angle-down'">
+            <div class="tooltip_text">{{_isCollapsedAnalyzePrfm? 'بستن آنالیز عملکرد': 'نمایش آنالیز عملکرد'}}
+            </div>
+        </i>
+    </section>
+    <main *ngIf="_isCollapsedAnalyzePrfm" class="container charts relative_pos">
+        <div class="chart_analyze_radar">
+            <app-analyze (barAnalyzeEvent)=receiveAnalyzeData($event)></app-analyze>
+        </div>
+        <div class="chart_analyze_bar">
+            <app-bar-anlz-prfm [barAnalyze]="_analyzer_interface"></app-bar-anlz-prfm>
+        </div>
+    </main>
+</section>
 
-<main class="container _unified relative_pos">
-    <div class="title_special">کارکرد</div>
-    <div class="chart_4 charts pie relative_pos" *ngIf="pieChartDataThree[0]">
-        <div class="title">امروز</div>
-        <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"
-            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
-        </canvas>
-    </div>
-    <div class="chart_3 charts pie relative_pos" *ngIf="pieChartDataTwo[0]">
-        <div class="title">هفته‌جاری</div>
-        <canvas baseChart [data]="pieChartDataTwo" [labels]="pieChartLabels" [chartType]="pieChartType"
-            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
-        </canvas>
-    </div>
-    <div class="chart_2 charts pie relative_pos" *ngIf="pieChartDataOne[0]">
-        <div class="title">ماه‌جاری</div>
-        <canvas baseChart [data]="pieChartDataOne" [labels]="pieChartLabels" [chartType]="pieChartType"
-            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
-        </canvas>
-    </div>
-    <div class="chart_1 charts pie relative_pos" *ngIf="pieChartData[0]">
-        <div class="title">سال‌جاری</div>
-        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-            [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor" [legend]="pieChartLegend">
-        </canvas>
-    </div>
+<section class="content">
+    <section class="collapse">
+        <h3>کارکرد</h3>
+        <i (click)="_isCollapsedKarkard = !_isCollapsedKarkard" class="tooltip _circle_border p_icons"
+            [ngClass]="_isCollapsedKarkard ? 'pi pi-angle-up' : 'pi pi-angle-down'">
+            <div class="tooltip_text">{{_isCollapsedKarkard? 'بستن کارکرد': 'نمایش کارکرد'}}</div>
+        </i>
+    </section>
+    <main *ngIf="_isCollapsedKarkard" class="container _unified relative_pos">
+        <!-- <div class="title_special">کارکرد</div> -->
+        <div class="chart_4 charts pie relative_pos" *ngIf="pieChartDataThree[0]">
+            <div class="title">امروز</div>
+            <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+        <div class="chart_3 charts pie relative_pos" *ngIf="pieChartDataTwo[0]">
+            <div class="title">هفته‌جاری</div>
+            <canvas baseChart [data]="pieChartDataTwo" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+        <div class="chart_2 charts pie relative_pos" *ngIf="pieChartDataOne[0]">
+            <div class="title">ماه‌جاری</div>
+            <canvas baseChart [data]="pieChartDataOne" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+        <div class="chart_1 charts pie relative_pos" *ngIf="pieChartData[0]">
+            <div class="title">سال‌جاری</div>
+            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
 
-    <div class="chart_1 charts pie relative_pos">
-        <div class="title">آمار مجموع</div>
-        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
-            [colors]="donutColors" [options]="pieChartOptions" [plugins]="pieChartPlugins">
-        </canvas>
-    </div>
+        <div class="chart_1 charts pie relative_pos">
+            <div class="title">آمار مجموع</div>
+            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+                [colors]="donutColors" [options]="pieChartOptions" [plugins]="pieChartPlugins">
+            </canvas>
+        </div>
 
-</main>
+    </main>
+</section>
 
 <app-trv-time></app-trv-time>
 <app-dispersal-rate></app-dispersal-rate>

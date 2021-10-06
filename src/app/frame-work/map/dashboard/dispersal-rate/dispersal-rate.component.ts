@@ -9,7 +9,7 @@ import { DashboardService } from 'services/dashboard.service';
   styleUrls: ['./dispersal-rate.component.scss']
 })
 export class DispersalRateComponent implements OnInit {
-  _isCollapsed: boolean = true;
+  _isCollapsed: boolean = false;
   dataSource: IDashboardSpecial;
 
   constructor(
