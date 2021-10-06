@@ -11,6 +11,8 @@ import { DashboardService } from 'services/dashboard.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  _isCollapsedKarkard: boolean = false;
+  _isCollapsedAnalyzePrfm: boolean = false;
   karkard: IDashboardKarkardTimed[] = [];
   _analyzer_interface: any[];
   doughnutTemp: any[] = [];

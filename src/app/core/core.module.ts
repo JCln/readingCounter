@@ -41,7 +41,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     SnackBarComponent,
     ClockComponent,
     AnnouceNotifComponent,
-    NetConnectionComponent,
+    NetConnectionComponent
   ]
   ,
   imports: [

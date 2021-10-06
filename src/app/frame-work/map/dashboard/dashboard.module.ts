@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedChartsModule } from 'src/app/shared/shared-charts.module';
+import { SharedCollapseModule } from 'src/app/shared/shared-collapse.module';
 
 import { AnalyzeComponent } from './analyze/analyze.component';
 import { BarAnlzPrfmComponent } from './bar-anlz-prfm/bar-anlz-prfm.component';
@@ -36,6 +37,7 @@ import { UserOverallComponent } from './user-overall/user-overall.component';
   ],
   imports: [
     CommonModule,
+    SharedCollapseModule,
     SharedChartsModule,
     DashboardRoutingModule
   ]
