@@ -20,11 +20,9 @@
 <section class="content">
     <section class="collapse">
         <h3>آنالیز عملکرد</h3>
-        <i (click)="_isCollapsedAnalyzePrfm = !_isCollapsedAnalyzePrfm" class="tooltip _circle_border p_icons"
-            [ngClass]="_isCollapsedAnalyzePrfm ? 'pi pi-angle-up' : 'pi pi-angle-down'">
-            <div class="tooltip_text">{{_isCollapsedAnalyzePrfm? 'بستن آنالیز عملکرد': 'نمایش آنالیز عملکرد'}}
-            </div>
-        </i>
+        <app-collapsable [_isCollapsed]=_isCollapsedAnalyzePrfm [_tooltipText]="'آنالیز عملکرد'"
+            (_clicked)=" _isCollapsedAnalyzePrfm=!_isCollapsedAnalyzePrfm">
+        </app-collapsable>
     </section>
     <main *ngIf="_isCollapsedAnalyzePrfm" class="container charts relative_pos">
         <div class="chart_analyze_radar">
@@ -39,10 +37,9 @@
 <section class="content">
     <section class="collapse">
         <h3>کارکرد</h3>
-        <i (click)="_isCollapsedKarkard = !_isCollapsedKarkard" class="tooltip _circle_border p_icons"
-            [ngClass]="_isCollapsedKarkard ? 'pi pi-angle-up' : 'pi pi-angle-down'">
-            <div class="tooltip_text">{{_isCollapsedKarkard? 'بستن کارکرد': 'نمایش کارکرد'}}</div>
-        </i>
+        <app-collapsable [_isCollapsed]=_isCollapsedKarkard [_tooltipText]="'کارکرد'"
+            (_clicked)="_isCollapsedKarkard = !_isCollapsedKarkard">
+        </app-collapsable>
     </section>
     <main *ngIf="_isCollapsedKarkard" class="container _unified relative_pos">
         <!-- <div class="title_special">کارکرد</div> -->

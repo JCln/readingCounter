@@ -1,9 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-export enum ENPosition {
-  absolute = 'absolute',
-  relative = 'relative'
-}
 @Component({
   selector: 'app-collapsable',
   templateUrl: './collapsable.component.html',
@@ -11,7 +7,11 @@ export enum ENPosition {
 })
 export class CollapsableComponent {
   @Input() _isCollapsed: boolean;
-  @Input() _position: ENPosition = ENPosition.absolute;
+  @Input() _tooltipText: string;
 
-  // @Output() 
+  @Output() _clicked = new EventEmitter<any>();
+
+  click = () => {
+    this._clicked.emit(this._isCollapsed);
+  }
 }

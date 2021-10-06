@@ -1,4 +1,4 @@
-<i (click)="_isCollapsed = !_isCollapsed" class="tooltip _circle_border p_icons">
-    <div class="tooltip_text_right">{{_isCollapsed? 'باز': 'بسته'}}</div>
+<i (click)="click()" class="tooltip _circle_border p_icons"
+    [ngClass]="_isCollapsed ? 'pi pi-angle-up' : 'pi pi-angle-down'">
+    <div class="tooltip_text">{{_isCollapsed? 'بستن '+_tooltipText : 'نمایش '+_tooltipText}}</div>
 </i>
-<!-- [ngClass]="_isCollapsed ? 'pi pi-angle-down' : 'pi pi-angle-up'" -->

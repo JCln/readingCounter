@@ -12,7 +12,6 @@ import { SpinnerInterceptorService } from '../auth/spinner-interceptor.service';
 import { FrameWorkComponent } from './../frame-work/frame-work.component';
 import { AddNewComponent } from './../frame-work/manage/add-new/add-new.component';
 import { AnnouceNotifComponent } from './../shared/annouce-notif/annouce-notif.component';
-import { CollapsableComponent } from './../shared/collapsable/collapsable.component';
 import { SharedThreeModule } from './../shared/shared_three.module';
 import { DropdownComponent } from './_layouts/dropdown/dropdown.component';
 import { HeaderComponent } from './_layouts/header/header.component';
@@ -42,8 +41,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     SnackBarComponent,
     ClockComponent,
     AnnouceNotifComponent,
-    NetConnectionComponent,
-    CollapsableComponent,
+    NetConnectionComponent
   ]
   ,
   imports: [
@@ -69,7 +67,6 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     BrowserAnimationsModule,
     AnnouceNotifComponent,
     NetConnectionComponent,
-    CollapsableComponent,
 
     CoreRoutingModule
   ],
