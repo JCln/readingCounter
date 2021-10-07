@@ -174,8 +174,9 @@ export class DashboardComponent implements OnInit {
     this.addToDougnut();
   }
   addToDougnut = () => {
-    this.doughnutTemp.push(this.pieChartDataOne);
+    this.doughnutTemp.push(this.pieChartData);
     this.doughnutTemp.push(this.pieChartDataTwo);
+    this.doughnutTemp.push(this.pieChartDataThree);
     this.doughnutTemp.push(this.pieChartDataThree);
 
     this.doughnutChartData = this.doughnutTemp;
