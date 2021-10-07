@@ -215,6 +215,13 @@
     }
   }
 
+  .p-datatable .p-datatable-tfoot>tr>td {
+    background-color: var(--white);
+    color: var(--secondary_8);
+    text-align: center;
+    padding: 1rem 0;
+  }
+
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background-color: var(--thirdy_1);
     border-color: var(--thirdy_1);

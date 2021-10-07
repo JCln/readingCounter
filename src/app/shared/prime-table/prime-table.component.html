@@ -337,11 +337,15 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="footer">
+    <ng-template let-dataSource pTemplate="footer">
         <tr *ngIf="_calculableSUM">
-            <td colspan="2">
-                تعداد: {{calcSums()}}
+            <td *ngFor="let col of dataSource">
+                <div *ngIf="col.field == 'itemQuantity'">
+                    جمع:
+                    {{calcSums()}}
+                </div>
             </td>
+            <td *ngFor="let item of _numberOfExtraColumns"></td>
         </tr>
     </ng-template>
 </p-table>
