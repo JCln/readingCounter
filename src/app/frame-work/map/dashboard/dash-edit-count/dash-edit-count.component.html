@@ -1,0 +1,43 @@
+<section class="content" *ngIf="dataSourceEditCount">
+    <section class="collapse">
+        <h1>شاخص ارجاعات</h1>
+    </section>
+
+    <table>
+
+        <thead>
+            <tr>
+                <td></td>
+                <td><strong>امروز</strong></td>
+                <td><strong>هفته جاری</strong></td>
+                <td><strong>ماه جاری</strong></td>
+                <td><strong>سال جاری</strong></td>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>ارجاع نشده</strong></td>
+                <td>{{dataSourceEditCount.daily.unEditCount}}</td>
+                <td>{{dataSourceEditCount.weekly.unEditCount}}</td>
+                <td>{{dataSourceEditCount.monthly.unEditCount}}</td>
+                <td>{{dataSourceEditCount.yearly.unEditCount}}</td>
+            </tr>
+            <tr>
+                <td><strong>ارجاع شده</strong></td>
+                <td>{{dataSourceEditCount.daily.editedCount}}</td>
+                <td>{{dataSourceEditCount.weekly.editedCount}}</td>
+                <td>{{dataSourceEditCount.monthly.editedCount}}</td>
+                <td>{{dataSourceEditCount.yearly.editedCount}}</td>
+            </tr>
+            <tr>
+                <td><strong>%</strong></td>
+                <td>{{dataSourceEditCount.daily.ratio}}</td>
+                <td>{{dataSourceEditCount.weekly.ratio}}</td>
+                <td>{{dataSourceEditCount.monthly.ratio}}</td>
+                <td>{{dataSourceEditCount.yearly.ratio}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</section>

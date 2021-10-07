@@ -1,0 +1,51 @@
+@import '../dashboard.component.scss';
+
+table {
+  background-color: var(--secondary_3);
+  font-family: $font_family;
+  border-collapse: collapse;
+  width: 100%;
+  direction: rtl;
+  text-align: center;
+  font-size: $font_s;
+  font-weight: 500;
+  overflow-x: auto;
+}
+
+table td,
+table th {
+  border: 1px solid var(--white);
+  padding: $font_05;
+  text-align: center;
+  color: var(--secondary_8);
+  direction: ltr;
+  font-size: $font_m;
+  font-weight: 600;
+}
+
+table th {
+  background-color: var(--secondary_5);
+}
+
+table tr {
+  direction: rtl;
+}
+
+table tr:nth-child(even) {
+  background-color: var(--secondary_1);
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: var(--primary_2);
+  color: var(--secondary_4);
+}
+
+strong {
+  font-weight: 800;
+}
+
+._hide_count {
+  display: none;
+}

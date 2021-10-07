@@ -108,6 +108,32 @@ export interface IDashboardKarkardTimed {
     saierCount: number,
     caption: string
 }
+export interface IDashboardEditCountConfig {
+    unEditCount: number,
+    editedCount: number,
+    ratio: number
+}
+export interface IDashboardEditCount {
+    daily: IDashboardEditCountConfig,
+    weekly: IDashboardEditCountConfig,
+    monthly: IDashboardEditCountConfig,
+    yearly: IDashboardEditCountConfig,
+}
+
+export interface IDashboardDateDifferenceConfig {
+    count: number,
+    median: number,
+    average: number,
+    standardDeviation: number,
+    variance: number,
+    mode: number
+}
+export interface IDashboardDateDifference {
+    yesterday: IDashboardDateDifferenceConfig,
+    weekly: IDashboardDateDifferenceConfig,
+    monthly: IDashboardDateDifferenceConfig,
+    annualy: IDashboardDateDifferenceConfig,
+}
 export interface IDashboardTimed {
     inDayCount: number,
     inWeekCont: number,

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IDashboardKarkardTimed } from 'interfaces/inon-manage';
 
 @Component({
@@ -6,12 +6,8 @@ import { IDashboardKarkardTimed } from 'interfaces/inon-manage';
   templateUrl: './dash-karkard-table.component.html',
   styleUrls: ['./dash-karkard-table.component.scss']
 })
-export class DashKarkardTableComponent implements OnInit {
+export class DashKarkardTableComponent {
   @Input() dataSourceTable: IDashboardKarkardTimed[] = [];
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

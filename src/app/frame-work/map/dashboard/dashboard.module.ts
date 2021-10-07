@@ -6,6 +6,9 @@ import { SharedCollapseModule } from 'src/app/shared/shared-collapse.module';
 import { AnalyzeComponent } from './analyze/analyze.component';
 import { BarAnlzPrfmComponent } from './bar-anlz-prfm/bar-anlz-prfm.component';
 import { CountInStatesComponent } from './count-in-states/count-in-states.component';
+import { DashEditCountComponent } from './dash-edit-count/dash-edit-count.component';
+import { DashKarkardTableComponent } from './dash-karkard/dash-karkard-table/dash-karkard-table.component';
+import { DashKarkardComponent } from './dash-karkard/dash-karkard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { BarDispersalrateComponent } from './dispersal-rate/bar-dispersalrate/bar-dispersalrate.component';
@@ -17,8 +20,7 @@ import { ReadTimeComponent } from './read-time/read-time.component';
 import { RrTimeComponent } from './rr-time/rr-time.component';
 import { TrvTimeComponent } from './trv-time/trv-time.component';
 import { UserOverallComponent } from './user-overall/user-overall.component';
-import { DashKarkardComponent } from './dash-karkard/dash-karkard.component';
-import { DashKarkardTableComponent } from './dash-karkard/dash-karkard-table/dash-karkard-table.component';
+import { DashDateDifferenceComponent } from './dash-date-difference/dash-date-difference.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { DashKarkardTableComponent } from './dash-karkard/dash-karkard-table/das
     UserOverallComponent,
     DashKarkardComponent,
     DashKarkardTableComponent,
+    DashEditCountComponent,
+    DashDateDifferenceComponent,
   ],
   imports: [
     CommonModule,

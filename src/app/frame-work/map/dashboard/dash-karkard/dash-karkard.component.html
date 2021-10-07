@@ -6,8 +6,11 @@
     <section class="collapse">
         <h3>جدول</h3>
     </section>
-    <app-dash-karkard-table *ngIf="karkardDataSource" [dataSourceTable]="karkardDataSource">
-    </app-dash-karkard-table>
+
+    <section class="__fixature">
+        <app-dash-karkard-table *ngIf="karkardDataSource" [dataSourceTable]="karkardDataSource">
+        </app-dash-karkard-table>
+    </section>
 
     <section class="collapse">
         <h3>نمودار</h3>
@@ -53,4 +56,5 @@
         </div>
 
     </main>
+
 </section>

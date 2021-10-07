@@ -236,6 +236,8 @@ export enum ENInterfaces {
     postSimafaAssessAdd = 'V1​/Import​/Simafa​/AssessAdd',
 
     getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
+    getDashboardEditCount = 'V1/Tracking/Dashboard/Tracking/EditCount',
+    getDashboardDateDifference = 'V1/List/Dashboard/DateDifference/Timed',
     getDashboardTraverseTimed = 'V1/List/Dashboard/Traverse/Timed',
     getDashboardCountInStates = 'V1/Tracking/Dashboard/CountInStates',
     getDashboardKarkardTimed = 'V1/List/Dashboard/Karkard/Timed',

@@ -7,6 +7,7 @@
   display: grid;
   direction: rtl;
   min-width: 16rem;
+  align-items: center;
 
   @media (min-width: 550px) {
     min-width: 20rem;
