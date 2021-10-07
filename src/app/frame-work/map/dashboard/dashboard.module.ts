@@ -17,6 +17,8 @@ import { ReadTimeComponent } from './read-time/read-time.component';
 import { RrTimeComponent } from './rr-time/rr-time.component';
 import { TrvTimeComponent } from './trv-time/trv-time.component';
 import { UserOverallComponent } from './user-overall/user-overall.component';
+import { DashKarkardComponent } from './dash-karkard/dash-karkard.component';
+import { DashKarkardTableComponent } from './dash-karkard/dash-karkard-table/dash-karkard-table.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { UserOverallComponent } from './user-overall/user-overall.component';
     DispersalRateComponent,
     BarDispersalrateComponent,
     UserOverallComponent,
+    DashKarkardComponent,
+    DashKarkardTableComponent,
   ],
   imports: [
     CommonModule,

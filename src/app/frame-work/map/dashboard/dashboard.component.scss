@@ -58,18 +58,6 @@
   padding: 0 $font_xs;
 }
 
-.title_special {
-  position: absolute;
-  border-radius: $border_5;
-  background: var(--white);
-  right: $font_05;
-  top: 0;
-  font-size: $font_l;
-  color: var(--primary_3);
-  font-weight: 800;
-  z-index: 1;
-}
-
 ._key_value {
   columns: 2;
 }
@@ -100,13 +88,24 @@
   align-items: center;
   grid-gap: 1.3rem;
   gap: 1.3rem;
-  padding: 0 .2rem;
+  padding: .2rem;
   margin-right: 1rem;
+
+  h1 {
+    font-size: 1.87rem;
+    color: var(--primary_2);
+  }
 
   h3 {
     font-size: $font_m;
     color: var(--primary_3);
+    direction: rtl;
+
+    &::before {
+      content: ' - ';
+    }
   }
+
 }
 
 /* CHARTS CONFIG*/

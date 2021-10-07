@@ -1,146 +1,154 @@
-<section *ngIf="dataSource" style="width:100%;overflow-x: auto; margin-top: 1rem; direction: rtl;">
-    <table>
+<section class="content">
+    <section class="collapse">
+        <h1>پراکندگی ساعات قرائت</h1>
+    </section>
+    <section class="collapse">
+        <h3>جدول</h3>
+    </section>
+    <section *ngIf="dataSource" style="width:100%;overflow-x: auto; margin-top: 1rem; direction: rtl;">
 
-        <thead>
-            <tr>
-                <th colspan=1>ساعت</th>
-                <!-- <th colspan=3>{{dataSource.daily.title}}</th>
+        <table>
+
+            <thead>
+                <tr>
+                    <th colspan=1>ساعت</th>
+                    <!-- <th colspan=3>{{dataSource.daily.title}}</th>
                 <th colspan=3>{{dataSource.weekly.title}}</th>
                 <th colspan=3>{{dataSource.monthly.title}}</th>
                 <th colspan=3>{{dataSource.yearly.title}}</th> -->
-                <th colspan=3>امروز</th>
-                <th colspan=3>هفته‌جاری</th>
-                <th colspan=3>ماه‌جاری</th>
-                <th colspan=3>سال‌جاری</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td class="_normal">عادی</td>
-                <td class="_closed">بسته</td>
-                <td class="_percent _border_left">%</td>
-                <td class="_normal">عادی</td>
-                <td class="_closed">بسته</td>
-                <td class="_percent _border_left">%</td>
-                <td class="_normal">عادی</td>
-                <td class="_closed">بسته</td>
-                <td class="_percent _border_left">%</td>
-                <td class="_normal">عادی</td>
-                <td class="_closed">بسته</td>
-                <td class="_percent _border_left">%</td>
-            </tr>
-            <tr>
-                <td class="_hours _border_left">8 - 10</td>
-                <td>{{dataSource.daily._8_10}}</td>
-                <td>{{dataSource.daily._8_10Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.daily._8_10Rate}}</td>
-                <td>{{dataSource.weekly._8_10}}</td>
-                <td>{{dataSource.weekly._8_10Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.weekly._8_10Rate}}</td>
-                <td>{{dataSource.monthly._8_10}}</td>
-                <td>{{dataSource.monthly._8_10Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.monthly._8_10Rate}}</td>
-                <td>{{dataSource.yearly._8_10}}</td>
-                <td>{{dataSource.yearly._8_10Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.yearly._8_10Rate}}</td>
-            </tr>
+                    <th colspan=3>امروز</th>
+                    <th colspan=3>هفته‌جاری</th>
+                    <th colspan=3>ماه‌جاری</th>
+                    <th colspan=3>سال‌جاری</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td class="_normal">عادی</td>
+                    <td class="_closed">بسته</td>
+                    <td class="_percent _border_left">%</td>
+                    <td class="_normal">عادی</td>
+                    <td class="_closed">بسته</td>
+                    <td class="_percent _border_left">%</td>
+                    <td class="_normal">عادی</td>
+                    <td class="_closed">بسته</td>
+                    <td class="_percent _border_left">%</td>
+                    <td class="_normal">عادی</td>
+                    <td class="_closed">بسته</td>
+                    <td class="_percent _border_left">%</td>
+                </tr>
+                <tr>
+                    <td class="_hours _border_left">8 - 10</td>
+                    <td>{{dataSource.daily._8_10}}</td>
+                    <td>{{dataSource.daily._8_10Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.daily._8_10Rate}}</td>
+                    <td>{{dataSource.weekly._8_10}}</td>
+                    <td>{{dataSource.weekly._8_10Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.weekly._8_10Rate}}</td>
+                    <td>{{dataSource.monthly._8_10}}</td>
+                    <td>{{dataSource.monthly._8_10Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.monthly._8_10Rate}}</td>
+                    <td>{{dataSource.yearly._8_10}}</td>
+                    <td>{{dataSource.yearly._8_10Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.yearly._8_10Rate}}</td>
+                </tr>
 
 
-            <tr>
-                <td class="_hours _border_left">10 - 12</td>
-                <td>{{dataSource.daily._10_12}}</td>
-                <td>{{dataSource.daily._10_12Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.daily._10_12Rate}}</td>
-                <td>{{dataSource.weekly._10_12}}</td>
-                <td>{{dataSource.weekly._10_12Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.weekly._10_12Rate}}</td>
-                <td>{{dataSource.monthly._10_12}}</td>
-                <td>{{dataSource.monthly._10_12Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.monthly._10_12Rate}}</td>
-                <td>{{dataSource.yearly._10_12}}</td>
-                <td>{{dataSource.yearly._10_12Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.yearly._10_12Rate}}</td>
-            </tr>
+                <tr>
+                    <td class="_hours _border_left">10 - 12</td>
+                    <td>{{dataSource.daily._10_12}}</td>
+                    <td>{{dataSource.daily._10_12Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.daily._10_12Rate}}</td>
+                    <td>{{dataSource.weekly._10_12}}</td>
+                    <td>{{dataSource.weekly._10_12Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.weekly._10_12Rate}}</td>
+                    <td>{{dataSource.monthly._10_12}}</td>
+                    <td>{{dataSource.monthly._10_12Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.monthly._10_12Rate}}</td>
+                    <td>{{dataSource.yearly._10_12}}</td>
+                    <td>{{dataSource.yearly._10_12Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.yearly._10_12Rate}}</td>
+                </tr>
 
 
-            <tr>
-                <td class="_hours _border_left">12 - 14</td>
-                <td>{{dataSource.daily._12_14}}</td>
-                <td>{{dataSource.daily._12_14Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.daily._12_14Rate}}</td>
-                <td>{{dataSource.weekly._12_14}}</td>
-                <td>{{dataSource.weekly._12_14Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.weekly._12_14Rate}}</td>
-                <td>{{dataSource.monthly._12_14}}</td>
-                <td>{{dataSource.monthly._12_14Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.monthly._12_14Rate}}</td>
-                <td>{{dataSource.yearly._12_14}}</td>
-                <td>{{dataSource.yearly._12_14Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.yearly._12_14Rate}}</td>
-            </tr>
+                <tr>
+                    <td class="_hours _border_left">12 - 14</td>
+                    <td>{{dataSource.daily._12_14}}</td>
+                    <td>{{dataSource.daily._12_14Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.daily._12_14Rate}}</td>
+                    <td>{{dataSource.weekly._12_14}}</td>
+                    <td>{{dataSource.weekly._12_14Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.weekly._12_14Rate}}</td>
+                    <td>{{dataSource.monthly._12_14}}</td>
+                    <td>{{dataSource.monthly._12_14Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.monthly._12_14Rate}}</td>
+                    <td>{{dataSource.yearly._12_14}}</td>
+                    <td>{{dataSource.yearly._12_14Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.yearly._12_14Rate}}</td>
+                </tr>
 
 
-            <tr>
-                <td class="_hours _border_left">14 - 16</td>
-                <td>{{dataSource.daily._14_16}}</td>
-                <td>{{dataSource.daily._14_16Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.daily._14_16Rate}}</td>
-                <td>{{dataSource.weekly._14_16}}</td>
-                <td>{{dataSource.weekly._14_16Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.weekly._14_16Rate}}</td>
-                <td>{{dataSource.monthly._14_16}}</td>
-                <td>{{dataSource.monthly._14_16Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.monthly._14_16Rate}}</td>
-                <td>{{dataSource.yearly._14_16}}</td>
-                <td>{{dataSource.yearly._14_16Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.yearly._14_16Rate}}</td>
-            </tr>
+                <tr>
+                    <td class="_hours _border_left">14 - 16</td>
+                    <td>{{dataSource.daily._14_16}}</td>
+                    <td>{{dataSource.daily._14_16Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.daily._14_16Rate}}</td>
+                    <td>{{dataSource.weekly._14_16}}</td>
+                    <td>{{dataSource.weekly._14_16Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.weekly._14_16Rate}}</td>
+                    <td>{{dataSource.monthly._14_16}}</td>
+                    <td>{{dataSource.monthly._14_16Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.monthly._14_16Rate}}</td>
+                    <td>{{dataSource.yearly._14_16}}</td>
+                    <td>{{dataSource.yearly._14_16Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.yearly._14_16Rate}}</td>
+                </tr>
 
-            <tr>
-                <td class="_hours _border_left">16 - 18</td>
-                <td>{{dataSource.daily._16_18}}</td>
-                <td>{{dataSource.daily._16_18Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.daily._16_18Rate}}</td>
-                <td>{{dataSource.weekly._16_18}}</td>
-                <td>{{dataSource.weekly._16_18Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.weekly._16_18Rate}}</td>
-                <td>{{dataSource.monthly._16_18}}</td>
-                <td>{{dataSource.monthly._16_18Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.monthly._16_18Rate}}</td>
-                <td>{{dataSource.yearly._16_18}}</td>
-                <td>{{dataSource.yearly._16_18Closed}}</td>
-                <td class="_percent _border_left">{{dataSource.yearly._16_18Rate}}</td>
-            </tr>
+                <tr>
+                    <td class="_hours _border_left">16 - 18</td>
+                    <td>{{dataSource.daily._16_18}}</td>
+                    <td>{{dataSource.daily._16_18Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.daily._16_18Rate}}</td>
+                    <td>{{dataSource.weekly._16_18}}</td>
+                    <td>{{dataSource.weekly._16_18Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.weekly._16_18Rate}}</td>
+                    <td>{{dataSource.monthly._16_18}}</td>
+                    <td>{{dataSource.monthly._16_18Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.monthly._16_18Rate}}</td>
+                    <td>{{dataSource.yearly._16_18}}</td>
+                    <td>{{dataSource.yearly._16_18Closed}}</td>
+                    <td class="_percent _border_left">{{dataSource.yearly._16_18Rate}}</td>
+                </tr>
 
-            <tr>
-                <td class="_hours _border_left">سایر</td>
-                <td>{{dataSource.daily.other}}</td>
-                <td>{{dataSource.daily.otherClosed}}</td>
-                <td class="_percent _border_left">{{dataSource.daily.otherRate}}</td>
-                <td>{{dataSource.weekly.other}}</td>
-                <td>{{dataSource.weekly.otherClosed}}</td>
-                <td class="_percent _border_left">{{dataSource.weekly.otherRate}}</td>
-                <td>{{dataSource.monthly.other}}</td>
-                <td>{{dataSource.monthly.otherClosed}}</td>
-                <td class="_percent _border_left">{{dataSource.monthly.otherRate}}</td>
-                <td>{{dataSource.yearly.other}}</td>
-                <td>{{dataSource.yearly.otherClosed}}</td>
-                <td class="_percent _border_left">{{dataSource.yearly.otherRate}}</td>
-            </tr>
+                <tr>
+                    <td class="_hours _border_left">سایر</td>
+                    <td>{{dataSource.daily.other}}</td>
+                    <td>{{dataSource.daily.otherClosed}}</td>
+                    <td class="_percent _border_left">{{dataSource.daily.otherRate}}</td>
+                    <td>{{dataSource.weekly.other}}</td>
+                    <td>{{dataSource.weekly.otherClosed}}</td>
+                    <td class="_percent _border_left">{{dataSource.weekly.otherRate}}</td>
+                    <td>{{dataSource.monthly.other}}</td>
+                    <td>{{dataSource.monthly.otherClosed}}</td>
+                    <td class="_percent _border_left">{{dataSource.monthly.otherRate}}</td>
+                    <td>{{dataSource.yearly.other}}</td>
+                    <td>{{dataSource.yearly.otherClosed}}</td>
+                    <td class="_percent _border_left">{{dataSource.yearly.otherRate}}</td>
+                </tr>
 
-        </tbody>
+            </tbody>
 
-    </table>
+        </table>
 
-</section>
+    </section>
 
-<section class="content">
     <section class="collapse">
-        <h3>پراکندگی ساعات قرائت</h3>
+        <h3>نمودار پراکندگی</h3>
         <app-collapsable [_isCollapsed]=_isCollapsed [_tooltipText]="'پراکندگی ساعات'"
             (_clicked)="_isCollapsed = !_isCollapsed">
         </app-collapsable>
     </section>
     <app-bar-dispersalrate *ngIf="_isCollapsed && dataSource" [dataSourceBar]="dataSource"></app-bar-dispersalrate>
+
 </section>
