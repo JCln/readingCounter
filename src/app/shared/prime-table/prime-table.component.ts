@@ -35,6 +35,7 @@ export class PrimeTableComponent {
   @Input() _allComponentIsModify: boolean = false;
   @Input() _hasCollapsible: boolean = false;
   @Input() _isCollaped: boolean = false;
+  @Input() _calculableSUM: boolean = false;
 
   @Output() collapsed = new EventEmitter<any>();
   @Output() removedRow = new EventEmitter<any>();
@@ -175,5 +176,13 @@ export class PrimeTableComponent {
   }
   routeToSingle = (dataSource: object) => {
     this.routedToSingle.emit(dataSource);
+  }
+
+  calcSums(): number {
+    let total: number = 0;
+    this.dataSource.map(item => {
+      total += item.itemQuantity
+    })
+    return total;
   }
 }
