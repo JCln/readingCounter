@@ -64,6 +64,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
           }
 
           this.spinnerWrapperService.stopLoading();
+          this.spinnerWrapperService.stopLoadingSmallSpinner();
           return throwError(() => error);
         })
       )

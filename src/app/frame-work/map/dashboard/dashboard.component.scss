@@ -4,7 +4,7 @@
 .container {
   display: grid;
   direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(14rem, auto));
   align-items: center;
   gap: 0.3rem;
   border-radius: $border_15;
@@ -51,6 +51,10 @@
   color: var(--primary_3);
   font-weight: 800;
   padding: 0 $font_xs;
+}
+
+._title_special {
+  color: var(--red_500);
 }
 
 ._key_value {
@@ -193,11 +197,15 @@ table tr:nth-child(even) {
   background-color: var(--secondary_1);
 }
 
+table thead tr {
+  background-color: var(--secondary_2);
+}
+
 table th {
   padding-top: 12px;
   padding-bottom: 12px;
-  background-color: var(--primary_2);
-  color: var(--secondary_4);
+  background-color: var(--secondary_2);
+  color: var(--secondary_8);
 }
 
 strong {
@@ -233,7 +241,7 @@ strong {
 }
 
 ._border_left {
-  border-left: 2px solid #0045cbbf !important;
+  border-left: 2px solid rgba(0, 69, 203, 0.749) !important;
 }
 
 ._hours {

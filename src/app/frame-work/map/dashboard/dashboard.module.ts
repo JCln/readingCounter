@@ -21,6 +21,8 @@ import { RrTimeComponent } from './rr-time/rr-time.component';
 import { TrvTimeComponent } from './trv-time/trv-time.component';
 import { UserOverallComponent } from './user-overall/user-overall.component';
 import { DashDateDifferenceComponent } from './dash-date-difference/dash-date-difference.component';
+import { DashUnreadCountComponent } from './dash-unread-count/dash-unread-count.component';
+import { DashMoshtarakCountComponent } from './dash-moshtarak-count/dash-moshtarak-count.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { DashDateDifferenceComponent } from './dash-date-difference/dash-date-di
     DashKarkardTableComponent,
     DashEditCountComponent,
     DashDateDifferenceComponent,
+    DashUnreadCountComponent,
+    DashMoshtarakCountComponent,
   ],
   imports: [
     CommonModule,

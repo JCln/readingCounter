@@ -246,6 +246,8 @@ export enum ENInterfaces {
     getDashboardReadTimed = 'V1/List/Dashboard/Read/Timed',
     getDashboardForbiddenTimed = 'V1/Forbidden/Dashboard/Timed',
     getDashboardReadDaily = 'V1/List/Dashboard/Read/Daily',
+    getDashboardUnReadCount = 'V1/DbQuery/UnreadCount',
+    getDashboardMoshtarakCount = 'V1/DbQuery/MoshtarakCount',
     postDashboardAnalyzePerformance = 'V1/Tracking/Dashboard/Analyze/Performance',
     getDashboardUsersOverall = 'V1/User/Dashboard/Overall',
 }

@@ -108,6 +108,16 @@ export interface IDashboardKarkardTimed {
     saierCount: number,
     caption: string
 }
+export interface IDashboardUnReadCount {
+    value: number,
+    title: string,
+    order: number
+}
+export interface IDashboardMoshtarakCount {
+    value: number,
+    title: string,
+    order: number
+}
 export interface IDashboardEditCountConfig {
     unEditCount: number,
     editedCount: number,
