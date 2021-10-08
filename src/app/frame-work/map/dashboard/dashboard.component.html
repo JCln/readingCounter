@@ -24,7 +24,7 @@
             (_clicked)=" _isCollapsedAnalyzePrfm=!_isCollapsedAnalyzePrfm">
         </app-collapsable>
     </section>
-    <main *ngIf="_isCollapsedAnalyzePrfm" class="container charts relative_pos">
+    <main *ngIf="_isCollapsedAnalyzePrfm" class="container charts relative_pos" style="overflow: auto;">
         <div class="chart_analyze_radar">
             <app-analyze (barAnalyzeEvent)=receiveAnalyzeData($event)></app-analyze>
         </div>

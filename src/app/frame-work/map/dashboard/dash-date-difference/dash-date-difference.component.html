@@ -8,49 +8,54 @@
         <thead>
             <tr>
                 <td></td>
-                <td><strong>میانگین</strong></td>
-                <td><strong>میانه</strong></td>
-                <td><strong>انحراف از معیار</strong></td>
-                <td><strong>واریانس</strong></td>
-                <td><strong>مٌد</strong></td>
+                <td class="_adiCount"><strong>دیروز</strong></td>
+                <td class="_tavizCount"><strong>هفته جاری</strong></td>
+                <td class="_maneCount"><strong>ماه جاری</strong></td>
+                <td class="_saierCount"><strong>سال جاری</strong></td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong>دیروز</strong></td>
+                <td><strong>میانگین</strong></td>
+                <td class="_adiCount">{{dataSourceDateDifference.yesterday.average}}</td>
+                <td class="_tavizCount">{{dataSourceDateDifference.weekly.average}}</td>
+                <td class="_maneCount">{{dataSourceDateDifference.monthly.average}}</td>
+                <td class="_saierCount">{{dataSourceDateDifference.annualy.average}}</td>
+            </tr>
+            <tr>
+                <td><strong>میانه</strong></td>
+                <td class="_adiCount">{{dataSourceDateDifference.yesterday.median}}</td>
+                <td class="_tavizCount">{{dataSourceDateDifference.weekly.median}}</td>
+                <td class="_maneCount">{{dataSourceDateDifference.monthly.median}}</td>
+                <td class="_saierCount">{{dataSourceDateDifference.annualy.median}}</td>
+            </tr>
+            <tr>
+                <td><strong>مٌد</strong></td>
+                <td class="_adiCount">{{dataSourceDateDifference.yesterday.mode}}</td>
+                <td class="_tavizCount">{{dataSourceDateDifference.weekly.mode}}</td>
+                <td class="_maneCount">{{dataSourceDateDifference.monthly.mode}}</td>
+                <td class="_saierCount">{{dataSourceDateDifference.annualy.mode}}</td>
+            </tr>
+            <tr>
+                <td><strong>انحراف از معیار</strong></td>
+                <td class="_adiCount">{{dataSourceDateDifference.yesterday.standardDeviation}}</td>
+                <td class="_tavizCount">{{dataSourceDateDifference.weekly.standardDeviation}}</td>
+                <td class="_maneCount">{{dataSourceDateDifference.monthly.standardDeviation}}</td>
+                <td class="_saierCount">{{dataSourceDateDifference.annualy.standardDeviation}}</td>
+            </tr>
+            <tr>
+                <td><strong>واریانس</strong></td>
+                <td class="_adiCount">{{dataSourceDateDifference.yesterday.variance}}</td>
+                <td class="_tavizCount">{{dataSourceDateDifference.weekly.variance}}</td>
+                <td class="_maneCount">{{dataSourceDateDifference.monthly.variance}}</td>
+                <td class="_saierCount">{{dataSourceDateDifference.annualy.variance}}</td>
+            </tr>
+            <tr>
+                <td class="_hide_count"><strong>count</strong></td>
                 <td class="_hide_count">{{dataSourceDateDifference.yesterday.count}}</td>
-                <td>{{dataSourceDateDifference.yesterday.average}}</td>
-                <td>{{dataSourceDateDifference.yesterday.median}}</td>
-                <td>{{dataSourceDateDifference.yesterday.standardDeviation}}</td>
-                <td>{{dataSourceDateDifference.yesterday.variance}}</td>
-                <td>{{dataSourceDateDifference.yesterday.mode}}</td>
-            </tr>
-            <tr>
-                <td><strong>هفته جاری</strong></td>
                 <td class="_hide_count">{{dataSourceDateDifference.weekly.count}}</td>
-                <td>{{dataSourceDateDifference.weekly.average}}</td>
-                <td>{{dataSourceDateDifference.weekly.median}}</td>
-                <td>{{dataSourceDateDifference.weekly.standardDeviation}}</td>
-                <td>{{dataSourceDateDifference.weekly.variance}}</td>
-                <td>{{dataSourceDateDifference.weekly.mode}}</td>
-            </tr>
-            <tr>
-                <td><strong>ماه جاری</strong></td>
                 <td class="_hide_count">{{dataSourceDateDifference.monthly.count}}</td>
-                <td>{{dataSourceDateDifference.monthly.average}}</td>
-                <td>{{dataSourceDateDifference.monthly.median}}</td>
-                <td>{{dataSourceDateDifference.monthly.standardDeviation}}</td>
-                <td>{{dataSourceDateDifference.monthly.variance}}</td>
-                <td>{{dataSourceDateDifference.monthly.mode}}</td>
-            </tr>
-            <tr>
-                <td><strong>سال جاری</strong></td>
                 <td class="_hide_count">{{dataSourceDateDifference.annualy.count}}</td>
-                <td>{{dataSourceDateDifference.annualy.average}}</td>
-                <td>{{dataSourceDateDifference.annualy.median}}</td>
-                <td>{{dataSourceDateDifference.annualy.standardDeviation}}</td>
-                <td>{{dataSourceDateDifference.annualy.variance}}</td>
-                <td>{{dataSourceDateDifference.annualy.mode}}</td>
             </tr>
         </tbody>
 
