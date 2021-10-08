@@ -4,7 +4,7 @@
         <i *ngIf="!this.themeService.isDarkTheme()" (click)="toggleTheme()" class="fas fa-moon"></i>
     </li>
     <ul>
-        <li class ="_borders">
+        <li class="_borders">
             <app-date-jalali></app-date-jalali>
         </li>
         <li>
@@ -17,6 +17,9 @@
             <span></span>
             <span></span>
             <span></span>
+        </li>
+        <li>
+            <app-small-spinner></app-small-spinner>
         </li>
     </ul>
 

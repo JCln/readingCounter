@@ -30,10 +30,6 @@
   border-radius: $border_15;
   box-shadow: 0 0 3px 2px var(--secondary_2);
   padding: $font_xxs 0;
-
-  // &:nth-child(even) {
-  //   background: var(--secondary_1);
-  // }
 }
 
 ._header {
@@ -110,14 +106,12 @@
 .__fixature {
   width: 100%;
   overflow-x: auto;
-  margin-top: $font_xs;
   direction: rtl;
 }
 
 /* CHARTS CONFIG*/
 
 .charts {
-  // box-shadow: 0px 3px 2px 2px var(--secondary_2);
   border-radius: $border_15;
   background: var(--white);
   min-height: 15rem;
@@ -137,18 +131,9 @@
   min-height: 18rem;
 }
 
-.chart_1 {
-  box-shadow: none;
-}
-
-.chart_2 {
-  box-shadow: none;
-}
-
-.chart_3 {
-  box-shadow: none;
-}
-
+.chart_1,
+.chart_2,
+.chart_3,
 .chart_4 {
   box-shadow: none;
 }

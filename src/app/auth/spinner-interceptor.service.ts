@@ -71,6 +71,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
         map<HttpEvent<any>, any>((evt: HttpEvent<any>) => {
           if (evt instanceof HttpResponse) {
             this.spinnerWrapperService.stopLoading();
+            this.spinnerWrapperService.stopLoadingSmallSpinner();
           }
           return evt;
         })
@@ -78,10 +79,11 @@ export class SpinnerInterceptorService implements HttpInterceptor {
   }
   showSpinnerConsiderExceptions = () => {
     const url = this.router.url;
-    if (url === '/wr/db')
-      return;
-    if (url === '/wr/m/r/apk')
-      return;
-    this.spinnerWrapperService.startLoading();
+    if (url === '/wr/db' || url === '/wr/m/r/apk') {
+      this.spinnerWrapperService.startLoadingSmallSpinner();
+    }
+    else {
+      this.spinnerWrapperService.startLoading();
+    }
   }
 }

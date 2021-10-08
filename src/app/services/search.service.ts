@@ -56,7 +56,7 @@ export class SearchService {
     zoneId: null,
     searchBy: null,
     item: '',
-    similar: true
+    similar: false
   }
   _searchSimpleReq: ISearchSimpleReq = {
     zoneId: null,
