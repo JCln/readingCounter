@@ -1,6 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -149,4 +151,7 @@ export class AllComponent extends FactoryONE {
     })
   }
   ngOnInit(): void { return; }
+  getReadingReportTitles = async ($event) => {
+    this.listManagerService.showResDialog(await this.listManagerService.postById(ENInterfaces.ReadingReportTitles, $event), false, EN_messages.insert_rrDetails);
+  }
 }

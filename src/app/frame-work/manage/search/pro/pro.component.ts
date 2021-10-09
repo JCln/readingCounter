@@ -118,4 +118,7 @@ export class ProComponent extends FactoryONE {
       }
     });
   }
+  getReadingReportTitles = async ($event) => {
+    this.searchService.showResDialog(await this.searchService.postById(ENInterfaces.ReadingReportTitles, $event), false, EN_messages.insert_rrDetails);
+  }
 }

@@ -545,6 +545,6 @@ export class SearchService {
         }
       })
     });
-
   }
+
 }

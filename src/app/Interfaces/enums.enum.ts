@@ -47,6 +47,7 @@ export enum EN_messages {
     insert_listNumber = 'شماره لیست را وارد نمایید',
     insert_title = 'عنوان را وارد نمایید',
     insert_title_route = 'عنوان مسیر را وارد نمایید',
+    insert_rrDetails = 'گزارش بازرسی',
     insert_searchType = 'نوع جستجو وارد نمایید',
     insert_value = 'مقدار وارد نمایید',
     insert_karbariMoshtarakinCode = 'کاربری مشترکین را وارد نمایید',
