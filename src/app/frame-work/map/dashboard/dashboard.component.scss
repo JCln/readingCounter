@@ -99,6 +99,7 @@
     font-size: $font_m;
     color: var(--primary_3);
     direction: rtl;
+    margin: $font_xs;
 
     &::before {
       content: ' - ';
@@ -172,11 +173,11 @@ table {
   font-size: $font_s;
   font-weight: 500;
   overflow-x: auto;
+  border: 1px solid var(--secondary_2);
 }
 
 table td,
 table th {
-  border: 1px solid var(--white);
   padding: $font_05;
   text-align: center;
   color: var(--secondary_8);

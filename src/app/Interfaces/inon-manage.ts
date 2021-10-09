@@ -146,7 +146,7 @@ export interface IDashboardDateDifference {
 }
 export interface IDashboardTimed {
     inDayCount: number,
-    inWeekCont: number,
+    inWeekCount: number,
     inMonthCount: number,
     inYearCount: number
 }

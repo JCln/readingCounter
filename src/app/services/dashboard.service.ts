@@ -4,6 +4,7 @@ import { IAnalyzeRes } from 'interfaces/imanage';
 import { IDashboardKarkardTimed, IDashboardReadDaily } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { UtilsService } from 'services/utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 export class DashboardService {
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService
+    private interfaceManagerService: InterfaceManagerService,
+    private utilsService: UtilsService
   ) { }
 
   /* COLUMNS */
@@ -26,7 +28,7 @@ export class DashboardService {
   columnDashboards = (): IObjectIteratation[] => {
     return [
       { field: 'inDayCount', header: 'امروز', isSelected: true, readonly: true },
-      { field: 'inWeekCont', header: 'هفته‌جاری', isSelected: true, readonly: true },
+      { field: 'inWeekCount', header: 'هفته‌جاری', isSelected: true, readonly: true },
       { field: 'inMonthCount', header: 'ماه‌جاری', isSelected: true, readonly: true },
       { field: 'inYearCount', header: 'سال‌جاری', isSelected: true, readonly: false }
     ];
@@ -95,5 +97,8 @@ export class DashboardService {
       a.push(index + 1);
     })
     return a;
+  }
+  isNullVals = (dataSource: any) => {
+    return !this.utilsService.isNull(dataSource);
   }
 }

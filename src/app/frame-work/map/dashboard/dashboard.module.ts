@@ -23,6 +23,9 @@ import { UserOverallComponent } from './user-overall/user-overall.component';
 import { DashDateDifferenceComponent } from './dash-date-difference/dash-date-difference.component';
 import { DashUnreadCountComponent } from './dash-unread-count/dash-unread-count.component';
 import { DashMoshtarakCountComponent } from './dash-moshtarak-count/dash-moshtarak-count.component';
+import { DashShownReadingsComponent } from './dash-shown-readings/dash-shown-readings.component';
+import { DashNotReaderComponent } from './dash-not-reader/dash-not-reader.component';
+import { DashErrorCountComponent } from './dash-error-count/dash-error-count.component';
 
 
 @NgModule({
@@ -46,6 +49,9 @@ import { DashMoshtarakCountComponent } from './dash-moshtarak-count/dash-moshtar
     DashDateDifferenceComponent,
     DashUnreadCountComponent,
     DashMoshtarakCountComponent,
+    DashShownReadingsComponent,
+    DashNotReaderComponent,
+    DashErrorCountComponent,
   ],
   imports: [
     CommonModule,

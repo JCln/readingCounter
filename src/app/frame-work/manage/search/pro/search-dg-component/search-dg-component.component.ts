@@ -57,7 +57,7 @@ export class SearchDgComponentComponent implements OnInit {
     if (!this.searchService.searchReqPro.zoneId)
       return;
 
-    this.fragmentMasterIds = await this.searchService.getFragmentMasterInZone(this.searchService.searchReqPro.zoneId);
+    this.fragmentMasterIds = await this.searchService.getByQuoteId(ENInterfaces.fragmentMasterInZone, this.searchService.searchReqPro.zoneId);
     this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(this.searchService.searchReqPro.zoneId);
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchService.searchReqPro.zoneId);

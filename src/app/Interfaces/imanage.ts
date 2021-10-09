@@ -641,8 +641,11 @@ export interface IReadingReportKarkard {
     maneCount: number,
     xarabCount: number,
     tavizCount: number,
-    saierCount: number
-    areaTitle?: string
+    saierCount: number,
+    areaTitle?: string,
+    zoneId: number,
+    zoneTitle: string,
+    trackNumber: number
 }
 // fragment manager 
 export interface IFragmentMaster {

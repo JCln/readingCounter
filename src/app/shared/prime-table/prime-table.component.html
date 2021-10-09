@@ -7,7 +7,7 @@
 
         <p-multiSelect
             *ngIf="_multiSelectEnable && (_checkUpName == 'rr-details' || _checkUpName == 'rr-karkard'|| _checkUpName ==  'rr-traverse'
-            || _checkUpName == 'rr-karkardDaily' || _checkUpName == 'rr-disposalHs' || _checkUpName == 'rr-traverseDiff' || _checkUpName == 'rr-analyzePrfm' )"
+            || _checkUpName == 'rr-karkardDaily' || _checkUpName == 'rr-disposalHs' || _checkUpName == 'rr-traverseDiff' || _checkUpName == 'rr-analyzePrfm' || _checkUpName == 'rr-offload-karkard' )"
             [options]=" _selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="readingReportManagerService.setColumnsChanges(readingReportManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
@@ -242,6 +242,12 @@
                     <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </td>
+            <td *ngIf="_checkUpName == 'search_moshtarak'">
+                <span class="ui-column-title">test</span>
+                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons fa fa-camera">
+                    <div class="tooltip_text_right">test</div>
+                </i>
+            </td>
             <td *ngIf="_outputFileName == 'forbidden'">
                 <span class="ui-column-title">مشاهده عکس(ها)</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons fa fa-camera">
@@ -259,9 +265,9 @@
                 <span class="ui-column-title">انتخاب</span>
                 <mat-checkbox [checked]="true" [(ngModel)]="dataSource[ri]"></mat-checkbox>
             </td>
-            <td *ngIf="_outputFileName == 'allReads' &&  _allComponentIsModify">
+            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_outputFileName == 'allReads' &&  _allComponentIsModify">
                 <span class="ui-column-title">اصلاح</span>
-                <i (click)="routeToOffload(dataSource,ri)" class="tooltip p_icons pi pi-pencil">
+                <i class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>
                 </i>
             </td>

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -17,6 +18,7 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { Search } from '../classes/search';
+import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { FollowUpService } from './follow-up.service';
 
 @Injectable({
@@ -219,7 +221,8 @@ export class SearchService {
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) { }
 
   /*COLUMNS*/
@@ -274,9 +277,16 @@ export class SearchService {
   getReadingPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
-  getFragmentMasterInZone = (zoneId: number): Promise<any> => {
+  getByQuoteId = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.fragmentMasterInZone, zoneId).toPromise().then(res => {
+      this.interfaceManagerService.GETByQuote(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
+  postById = (method: ENInterfaces, id: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
         resolve(res);
       })
     });
@@ -514,5 +524,27 @@ export class SearchService {
   }
   showInMap = (dataSource: object) => {
     this.utilsService.routeToByParams('/wr', { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });
+  }
+  showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
+    // disable close mean when dynamic count show decision should make
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+        {
+          disableClose: disableClose,
+          minWidth: '19rem',
+          data: {
+            data: res,
+            title: title
+          }
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (disableClose) {
+          if (result) {
+            resolve(true);
+          }
+        }
+      })
+    });
+
   }
 }

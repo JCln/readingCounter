@@ -53,14 +53,14 @@ export class ActivatedProvince implements IENV {
         BrowserVersions.TEH_SE.value
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
-        ENActivateProvinceTitle.TEH_SE,
-        ENURLs.TEH_SE,
-        ENOSMUrls.TEH_SE,
-        ENSatteliteAccessToken.TEH_SE,
-        ENSatelliteToken.TEH_SE,
-        ENHasNextBazdid.TEH_SE.value,
-        ENMapCenter.TEH_SE.value,
-        BrowserVersions.TEH_SE.value
+        ENActivateProvinceTitle.TEH_SE_LOCAL,
+        ENURLs.TEH_SE_LOCAL,
+        ENOSMUrls.TEH_SE_LOCAL,
+        ENSatteliteAccessToken.TEH_SE_LOCAL,
+        ENSatelliteToken.TEH_SE_LOCAL,
+        ENHasNextBazdid.TEH_SE_LOCAL.value,
+        ENMapCenter.TEH_SE_LOCAL.value,
+        BrowserVersions.TEH_SE_LOCAL.value
     );
 
     private constructor(

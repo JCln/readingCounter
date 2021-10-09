@@ -115,4 +115,7 @@ export class MoshtarakComponent extends FactoryONE {
   toDefaultVals = () => {
     this.dataSource = [];
   }
+  getReadingReportTitles = async ($event) => {
+    this.searchService.showResDialog(await this.searchService.postById(ENInterfaces.ReadingReportTitles, $event), false, 'Test');
+  }
 }

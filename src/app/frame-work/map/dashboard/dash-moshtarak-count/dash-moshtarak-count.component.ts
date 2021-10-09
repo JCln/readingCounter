@@ -10,11 +10,14 @@ import { DashboardService } from 'services/dashboard.service';
 })
 export class DashMoshtarakCountComponent implements OnInit {
   dataSourceMoshtarakCount: IDashboardMoshtarakCount[] = [];
+  _canShow: boolean = false;
 
   constructor(private dashboardService: DashboardService) { }
 
   classWrapper = async () => {
     this.dataSourceMoshtarakCount = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardMoshtarakCount);
+    if (this.dashboardService.isNullVals(this.dataSourceMoshtarakCount))
+      this._canShow = true;
   }
   ngOnInit(): void {
     this.classWrapper();

@@ -171,6 +171,7 @@ export enum ENSelectedColumnVariables {
     selectedRRTraverse = '_RRTraverse',
     selectedRRTraverseDifferential = '_RRTraverseDifferential',
     selectedRRKarkard = '_RRKarkard',
+    selectedRROffloadedKarkard = '_RROffloadedKarkard',
     selectedRRKarkardDaily = '_RRKarkardDaily',
     selectedRRDisposalHours = '_RRDisposalHours',
     selectedAbFormulas = '_abFormulas',

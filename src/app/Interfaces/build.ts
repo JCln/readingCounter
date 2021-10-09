@@ -31,7 +31,8 @@ export enum ENActivateProvinceTitle {
     ESF = 'اصفهان',
     TEH = 'تهران',
     TEH_ZONE4 = 'منطقه 4 تهران',
-    TEH_SE = 'جنوب شرقی تهران'
+    TEH_SE = 'جنوب شرقی تهران',
+    TEH_SE_LOCAL = 'جنوب شرقی تهران'
 }
 export interface IENV_BROWSER_SETUP {
     alert: number,
@@ -69,6 +70,7 @@ export class ENMapCenter {
     static readonly TEH = new ENMapCenter([35.7501, 51.5255]);
     static readonly TEH_ZONE4 = new ENMapCenter([35.656051, 51.315435]);
     static readonly TEH_SE = new ENMapCenter([35.656051, 51.315435]);
+    static readonly TEH_SE_LOCAL = new ENMapCenter([35.656051, 51.315435]);
 
     private constructor(public readonly value: [number, number]) {
     }
@@ -79,6 +81,7 @@ export class ENHasNextBazdid {
     static readonly TEH = new ENHasNextBazdid(true);
     static readonly TEH_ZONE4 = new ENHasNextBazdid(true);
     static readonly TEH_SE = new ENHasNextBazdid(true);
+    static readonly TEH_SE_LOCAL = new ENHasNextBazdid(true);
 
     private constructor(public readonly value: boolean) {
     }
@@ -149,6 +152,22 @@ export class BrowserVersions {
         }
     });
     static readonly TEH_SE = new BrowserVersions({
+        Desktop: {
+            Chrome: { alert: 70, normal: 86 },
+            Firefox: { alert: 72, normal: 83 },
+            IE: { alert: 0, normal: 0 },
+            opera: { alert: 73, normal: 78 },
+            safari: { alert: 10, normal: 10 },
+        },
+        Touch: {
+            Chrome: { alert: 10, normal: 10 },
+            Firefox: { alert: 10, normal: 10 },
+            IE: { alert: 10, normal: 10 },
+            opera: { alert: 55, normal: 63 },
+            safari: { alert: 11, normal: 13 },
+        }
+    });
+    static readonly TEH_SE_LOCAL = new BrowserVersions({
         Desktop: {
             Chrome: { alert: 70, normal: 86 },
             Firefox: { alert: 72, normal: 83 },

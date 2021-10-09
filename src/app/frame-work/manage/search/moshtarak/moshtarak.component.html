@@ -43,5 +43,7 @@
     [_selectedColumnsToRemember]="'selectedListManagerMosh'"
     [_numberOfExtraColumns]="[1]" 
     [_sessionName]="'moshtarak-session'"
-    (refreshedTable)="refreshTable()">
+    (refreshedTable)="refreshTable()"
+    (showedPictures)="getReadingReportTitles($event)"
+    >
 </app-prime-table>

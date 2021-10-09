@@ -15,7 +15,8 @@ import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
-import { Converter } from './../classes/converter';
+import { Converter } from '../classes/converter';
+
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,15 @@ export class ReadingReportManagerService {
     year: 1400
   }
   karkardReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
+  karkardOffloadReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',
     toDate: '',
@@ -228,6 +238,26 @@ export class ReadingReportManagerService {
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true }
   ]
+  private _RROffloadedKarkard = [
+    // { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: true },
+    { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
+    { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
+    { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+    // { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
+    // { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
+    { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
+    { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
+    { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
+    { field: 'faqedCount', header: 'فاقد', isSelected: true, readonly: true },
+    { field: 'maneCount', header: 'مانع', isSelected: true, readonly: true },
+    { field: 'xarabCount', header: 'خراب', isSelected: true, readonly: true },
+    { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
+    { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
+    // { field: 'areaTitle', header: 'سایر', isSelected: true, readonly: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
+    { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
+  ]
   private _RRDisposalHours = [
     { field: 'dayJalali', header: 'روز', isSelected: true, readonly: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
@@ -259,6 +289,9 @@ export class ReadingReportManagerService {
   }
   columnRRKarkard = (): IObjectIteratation[] => {
     return this._RRKarkard;
+  }
+  columnRRKarkardOffloaded = (): IObjectIteratation[] => {
+    return this._RROffloadedKarkard;
   }
   columnRRKarkardDaly = (): IObjectIteratation[] => {
     return this._RRKarkardDaily;

@@ -10,11 +10,14 @@ import { DashboardService } from 'services/dashboard.service';
 })
 export class DashUnreadCountComponent implements OnInit {
   dataSourceUnreadCount: IDashboardUnReadCount[] = [];
+  _canShow: boolean = false;
 
   constructor(private dashboardService: DashboardService) { }
 
   classWrapper = async () => {
     this.dataSourceUnreadCount = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardUnReadCount);
+    if (this.dashboardService.isNullVals(this.dataSourceUnreadCount))
+      this._canShow = true;
   }
   ngOnInit(): void {
     this.classWrapper();

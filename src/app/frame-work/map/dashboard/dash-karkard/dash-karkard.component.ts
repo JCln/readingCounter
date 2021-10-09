@@ -12,7 +12,7 @@ import { DashboardService } from 'services/dashboard.service';
 })
 export class DashKarkardComponent implements OnInit {
   _isCollapsedKarkard: boolean = false;
-  karkardDataSource: IDashboardKarkardTimed[] = [];
+  karkardDataSource: IDashboardKarkardTimed;
   doughnutTemp: any[] = [];
 
   public doughnutChartLabels: Label[] = ['عادی', 'فاقد', 'مانع', 'خراب', 'تعویض', 'سایر'];

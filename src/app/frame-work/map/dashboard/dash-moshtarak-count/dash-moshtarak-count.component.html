@@ -1,22 +1,10 @@
-<section class="media" *ngIf="dataSourceMoshtarakCount">
+<section class="media" *ngIf="_canShow">
     <div class="_header">
         <i class="fas fa-users"></i>
         تعداد انشعاب
     </div>
-    <div class="_key_value">
-        <div class="_key">{{dataSourceMoshtarakCount[0].title}}</div>
-        <div class="_value">{{dataSourceMoshtarakCount[0].value}}</div>
-    </div>
-    <div class="_key_value">
-        <div class="_key">{{dataSourceMoshtarakCount[1].title}}</div>
-        <div class="_value">{{dataSourceMoshtarakCount[1].value}}</div>
-    </div>
-    <div class="_key_value">
-        <div class="_key">{{dataSourceMoshtarakCount[2].title}}</div>
-        <div class="_value">{{dataSourceMoshtarakCount[2].value}}</div>
-    </div>
-    <div class="_key_value">
-        <div class="_key">{{dataSourceMoshtarakCount[3].title}}</div>
-        <div class="_value">{{dataSourceMoshtarakCount[3].value}}</div>
+    <div class="_key_value" *ngFor="let item of dataSourceMoshtarakCount">
+        <div class="_key">{{item.title}}</div>
+        <div class="_value">{{item.value}}</div>
     </div>
 </section>

@@ -16,11 +16,17 @@
     <app-media></app-media>
     <app-forbidden></app-forbidden>
     <app-dash-moshtarak-count></app-dash-moshtarak-count>
+    <app-dash-shown-readings></app-dash-shown-readings>
+    <app-dash-not-reader></app-dash-not-reader>
+    <app-dash-error-count></app-dash-error-count>
 </main>
 
 <section class="content">
     <section class="collapse">
-        <h3>آنالیز عملکرد</h3>
+        <h1>آنالیز عملکرد</h1>
+    </section>
+    <section class="collapse">
+        <h3>نمودار</h3>
         <app-collapsable [_isCollapsed]=_isCollapsedAnalyzePrfm [_tooltipText]="'آنالیز عملکرد'"
             (_clicked)=" _isCollapsedAnalyzePrfm=!_isCollapsedAnalyzePrfm">
         </app-collapsable>

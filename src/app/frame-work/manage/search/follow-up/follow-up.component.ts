@@ -55,10 +55,6 @@ export class FollowUpComponent extends FactoryONE {
   private makeConfigs = async () => {
     this.changeHsty = this.dataSource.changeHistory;
     this.getUserRole();
-    if (this.dataSourceAUX) {
-      this.trackingManagerService.setGetRanges(this.dataSourceAUX);
-      this._selectColumnsAUX = this.trackingManagerService.columnSelectedLMPerDayPositions();
-    }
     this.insertToDesc();
   }
   connectToServer = async () => {
@@ -119,6 +115,10 @@ export class FollowUpComponent extends FactoryONE {
     }
   }
   insertToDesc = () => {
+    if (this.dataSourceAUX) {
+      this.trackingManagerService.setGetRanges(this.dataSourceAUX);
+      this._selectColumnsAUX = this.trackingManagerService.columnSelectedLMPerDayPositions();
+    }
     this._showDesc = this.trackingManagerService.columnFollowUpView();
     this._defColumns = this.trackingManagerService.columnDefColumns();
     this.clearUNUsables();
