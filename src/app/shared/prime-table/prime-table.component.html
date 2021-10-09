@@ -242,10 +242,11 @@
                     <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'search_moshtarak'">
-                <span class="ui-column-title">test</span>
-                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons fa fa-camera">
-                    <div class="tooltip_text_right">test</div>
+            <td
+                *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'allComponent'">
+                <span class="ui-column-title">نمایش گزارش بازرسی</span>
+                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
+                    <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'forbidden'">
