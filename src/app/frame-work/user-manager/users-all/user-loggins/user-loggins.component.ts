@@ -29,7 +29,7 @@ export class UserLogginsComponent extends FactoryONE {
     private router: Router,
     private route: ActivatedRoute,
   ) {
-    super(interactionService);
+    super();
     this.getRouteParams();
   }
 

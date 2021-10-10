@@ -48,7 +48,7 @@ export class WouiComponent extends FactoryONE {
     private router: Router
     // private domSanitizer: DomSanitizer
   ) {
-    super(interactionService);
+    super();
     this.getRouteParams();
   }
 

@@ -1,29 +1,16 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { InteractionService } from 'services/interaction.service';
 
 @Component({
     template: ''
 })
-export abstract class FactoryONE implements OnInit, AfterViewInit, OnDestroy {
+export abstract class FactoryONE implements OnInit, OnDestroy {
     subscription: Subscription[] = [];
 
-    constructor(
-        public interactionService: InteractionService
-    ) { }
+    constructor() { }
 
     abstract classWrapper(canRefresh?: boolean): void;
 
-    refreshTabStatus = () => {
-        this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-            if (res.includes(Factory.refreshTabStatus()))
-                this.classWrapper(true);
-        })
-        )
-    }
-    ngAfterViewInit(): void {
-        this.refreshTabStatus();
-    }
     ngOnDestroy(): void {
         //  for purpose of refresh any time even without new event emiteds
         // we use subscription and not use take or takeUntil

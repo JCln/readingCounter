@@ -49,7 +49,7 @@ export class KarkardComponent extends FactoryONE {
     private utilsService: UtilsService,
     public route: ActivatedRoute
   ) {
-    super(interactionService)
+    super();
   }
 
   routeToChartView = () => {

@@ -21,7 +21,7 @@ export class UserEditOnRoleComponent extends FactoryONE {
     public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
-    super(interactionService);
+    super();
   }
   connectToServer = () => {
     this.userEditManagerService.userEditOnRole(this.dataSource);

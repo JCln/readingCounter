@@ -44,7 +44,7 @@ export class AllComponent extends FactoryONE {
     private router: Router,
     private _location: Location
   ) {
-    super(interactionService);
+    super();
     this.getRouteParams();
   }
 

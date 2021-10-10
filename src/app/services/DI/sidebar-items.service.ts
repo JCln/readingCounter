@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ISidebarItems } from 'interfaces/ioverall-config';
+import { ISidebarItems, ITabs } from 'interfaces/ioverall-config';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -35,4 +35,6 @@ export class SidebarItemsService {
     return sidebarItemsTest.addStaticSubRoutes;
   }
   /* TAB WRAPPER */
+  tabs: ITabs[] = [];
+  
 }

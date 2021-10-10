@@ -15,22 +15,22 @@ import { UtilsService } from 'services/utils.service';
 })
 export class TabWrapperComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = []
-  tabs: ITabs[] = [];
   currentRoute: ITabs[] = [];
   @Output() childPageTitle = new EventEmitter<string>();
 
   constructor(
     private router: Router,
     private utilsService: UtilsService,
-    private sideBarItemsService: SidebarItemsService,
+    public sideBarItemsService: SidebarItemsService,
     private interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
-    this.tabs.push(this.addDashboardTab());
+    if (!this.DoesTabsHaveThisRouteNow())
+      this.sideBarItemsService.tabs.push(this.addDashboardTab());
   }
   reFetchPageTitle = () => {
     let a;
-    this.tabs.map(item => {
+    this.sideBarItemsService.tabs.map(item => {
       if (item.route === this.getRouterUrl())
         a = item.title;
     })
@@ -42,7 +42,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     })
   }
   DoesTabsHaveThisRouteNow = (): ITabs => {
-    const found = this.tabs.find((item: any) => {
+    const found = this.sideBarItemsService.tabs.find((item: any) => {
       return item.route === this.getRouterUrl()
     })
     if (found)
@@ -55,7 +55,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     return null;
   }
   filterTabs = (routerUrl: string): ITabs[] => {
-    return this.tabs.filter((item: any) => {
+    return this.sideBarItemsService.tabs.filter((item: any) => {
       return item.route !== routerUrl
     })
   }
@@ -126,7 +126,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     };
 
     if (this.utilsService.isNull(this.DoesTabsHaveThisRouteNow())) {
-      this.tabs.push(a);
+      this.sideBarItemsService.tabs.push(a);
       this.reFetchPageTitle();
     }
     this.reFetchPageTitle();
@@ -134,7 +134,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   getRouterUrl = (): string => { return this.router.url; }
   staticRouteValidation = () => {
     if (!this.DoesTabsHaveThisRouteNow()) {
-      this.getRouterUrl() === '/wr/profile' ? this.tabs.push(this.addProfileTab()) : ''
+      this.getRouterUrl() === '/wr/profile' ? this.sideBarItemsService.tabs.push(this.addProfileTab()) : ''
     }
   }
   verification = () => {
@@ -145,7 +145,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
         this.reFetchPageTitle();
         return;
       }
-      this.tabs.push(currentRouteFound);
+      this.sideBarItemsService.tabs.push(currentRouteFound);
       this.reFetchPageTitle();
     }
     else
@@ -175,7 +175,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     this.changedRouteListener();
   }
   isLatestTab = () => {
-    const a = this.tabs.map(item => {
+    const a = this.sideBarItemsService.tabs.map(item => {
       return item;
     })
 
@@ -189,7 +189,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     }
   }
   backToPreviousPage = () => {
-    const b = this.tabs.slice(-1).map((item: any) => item.route);
+    const b = this.sideBarItemsService.tabs.slice(-1).map((item: any) => item.route);
     this.router.navigate(b);
     this.reFetchPageTitle();
   }
@@ -200,7 +200,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     this.reFetchPageTitle();
   }
   closeButtonClicked = (routerUrl: string) => {
-    this.tabs = this.filterTabs(routerUrl);
+    this.sideBarItemsService.tabs = this.filterTabs(routerUrl);
     if (this.router.url === routerUrl) {
       this.backToPreviousPage();
     }
@@ -222,11 +222,11 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   closeCurrentPage = (tabRoute: string) => {
     this.closeTabService.setClose(tabRoute);
   }
-  closeAllExeptOne = () => this.tabs.length = 1;
+  closeAllExeptOne = () => this.sideBarItemsService.tabs.length = 1;
   setCloseAllTabs = (): Promise<boolean> => {
     try {
       return new Promise((resolve) => {
-        this.tabs.forEach(val => {
+        this.sideBarItemsService.tabs.forEach(val => {
           return this.closeTabService.setClose(val.route)
         })
         resolve(true)

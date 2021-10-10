@@ -43,7 +43,7 @@ export class PerformanceComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private utilsService: UtilsService
   ) {
-    super(interactionService);
+    super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {

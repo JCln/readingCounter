@@ -30,7 +30,7 @@ export class ForbiddenComponent extends FactoryONE {
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
   ) {
-    super(interactionService);
+    super();
     this.classWrapper();
   }
   makeConfigs = async () => {

@@ -31,7 +31,7 @@ export class OffloadedComponent extends FactoryONE {
     public route: ActivatedRoute,
     private envService: EnvService
   ) {
-    super(interactionService);
+    super();
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTrackOffloaded = null;

@@ -48,7 +48,7 @@ export class SimafaReadingProgComponent extends FactoryONE {
     public outputManagerService: OutputManagerService,
     public route: ActivatedRoute
   ) {
-    super(interactionService);
+    super();
   }
 
   connectToServer = async () => {

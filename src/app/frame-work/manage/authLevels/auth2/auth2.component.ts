@@ -31,7 +31,7 @@ export class Auth2Component extends FactoryONE {
     private closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
   ) {
-    super(interactionService);
+    super();
   }
 
   openAddDialog = () => {

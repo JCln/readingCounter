@@ -32,7 +32,7 @@ export class ZoneComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
-    super(interactionService);
+    super();
   }
 
   openAddDialog = () => {

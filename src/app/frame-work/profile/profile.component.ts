@@ -21,7 +21,7 @@ export class ProfileComponent extends FactoryONE {
     public interactionService: InteractionService,
     private profileService: ProfileService
   ) {
-    super(interactionService);
+    super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {

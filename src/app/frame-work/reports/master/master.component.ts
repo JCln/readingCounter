@@ -49,7 +49,7 @@ export class MasterComponent extends FactoryONE {
     public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
-    super(interactionService);
+    super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {

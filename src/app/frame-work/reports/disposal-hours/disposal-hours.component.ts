@@ -30,7 +30,7 @@ export class DisposalHoursComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     public route: ActivatedRoute
   ) {
-    super(interactionService);
+    super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {

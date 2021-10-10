@@ -45,7 +45,7 @@ export class FollowUpComponent extends FactoryONE {
     private authService: AuthService,
     private followUpService: FollowUpService
   ) {
-    super(interactionService);
+    super();
     this.classWrapper();
   }
 

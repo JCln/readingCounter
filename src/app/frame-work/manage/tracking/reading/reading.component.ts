@@ -33,7 +33,7 @@ export class ReadingComponent extends FactoryONE {
     public outputManagerService: OutputManagerService,
     public interactionService: InteractionService
   ) {
-    super(interactionService);
+    super();
   }
 
   routeToLMPayDay = (row: ITracking) => {

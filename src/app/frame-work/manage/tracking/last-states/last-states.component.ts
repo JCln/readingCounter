@@ -23,7 +23,7 @@ export class LastStatesComponent extends FactoryONE {
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService
   ) {
-    super(interactionService);
+    super();
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForLastStates = null;

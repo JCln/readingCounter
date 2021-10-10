@@ -32,7 +32,7 @@ export class FragmentDetailsComponent extends FactoryONE {
     public fragmentManagerService: FragmentManagerService,
     private router: Router
   ) {
-    super(interactionService);
+    super();
     this.getRouteParams();
   }
 

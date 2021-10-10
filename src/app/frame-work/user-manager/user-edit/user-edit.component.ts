@@ -34,7 +34,7 @@ export class UserEditComponent extends FactoryONE {
     public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
-    super(interactionService);
+    super();
     this.detectRouteChange();
   }
   connectToServer = () => {

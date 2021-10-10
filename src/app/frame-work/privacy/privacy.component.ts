@@ -40,7 +40,7 @@ export class PrivacyComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private snackWrapperService: SnackWrapperService
   ) {
-    super(interactionService);
+    super();
   }
 
   insertPolicies = (policies: IPolicies) => {

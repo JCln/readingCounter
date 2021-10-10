@@ -31,7 +31,7 @@ export class FinishedComponent extends FactoryONE {
     public outputManagerService: OutputManagerService,
     private envService: EnvService
   ) {
-    super(interactionService);
+    super();
   }
 
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));

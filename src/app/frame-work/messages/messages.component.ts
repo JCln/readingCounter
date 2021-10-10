@@ -31,7 +31,7 @@ export class MessagesComponent extends FactoryONE {
     readonly messageService: MessageService,
     private browserStorageService: BrowserStorageService
   ) {
-    super(interactionService);
+    super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {

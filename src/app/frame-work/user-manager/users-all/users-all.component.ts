@@ -30,7 +30,7 @@ export class UsersAllComponent extends FactoryONE {
     public usersAllService: UsersAllService,
     private utilsService: UtilsService
   ) {
-    super(interactionService);
+    super();
   }
 
   routeToEditPage(e) {

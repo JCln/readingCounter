@@ -43,7 +43,7 @@ export class TraverseComponent extends FactoryONE {
     public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
-    super(interactionService);
+    super();
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForRRTraverse = null;

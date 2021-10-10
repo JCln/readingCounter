@@ -35,7 +35,7 @@ export class QotrComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) {
-    super(interactionService);
+    super();
   }
 
   convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {

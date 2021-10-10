@@ -30,7 +30,7 @@ export class UserRoleComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private userService: UsersAllService
   ) {
-    super(interactionService);
+    super();
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForRoleManager = null;

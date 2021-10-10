@@ -23,7 +23,7 @@ export class UserAddComponent extends FactoryONE {
     private userAddManagerService: UserAddManagerService,
     public interactionService: InteractionService
   ) {
-    super(interactionService);
+    super();
   }
   addUser = () => {
     this.userAddManagerService.userAddA(this.dataSource, this.userInfos.userInputForm);

@@ -22,7 +22,7 @@ export class ErrorsComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private importDynamicService: ImportDynamicService,
   ) {
-    super(interactionService);
+    super();
   }
 
   insertSelectedColumns = () => {
