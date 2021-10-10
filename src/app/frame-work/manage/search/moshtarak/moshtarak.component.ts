@@ -54,7 +54,7 @@ export class MoshtarakComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.insertSelectedColumns();
@@ -116,6 +116,12 @@ export class MoshtarakComponent extends FactoryONE {
     this.dataSource = [];
   }
   getReadingReportTitles = async ($event) => {
-    this.searchService.showResDialog(await this.searchService.postById(ENInterfaces.ReadingReportTitles, $event), false, EN_messages.insert_rrDetails);
+    const a = await this.searchService.postById(ENInterfaces.ReadingReportTitles, $event)
+    if (a.length) {
+      this.searchService.showResDialog(a, false, EN_messages.insert_rrDetails);
+      return;
+    }
+    this.searchService.snackEmptyValue();
   }
+
 }

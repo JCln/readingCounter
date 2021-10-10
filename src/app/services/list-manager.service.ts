@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -256,6 +257,9 @@ export class ListManagerService {
         }
       })
     });
+  }
+  snackEmptyValue = () => {
+    this.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
 
 }

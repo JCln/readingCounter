@@ -1,48 +1,13 @@
 @import 'shared_dialog';
 
 .mat-dialog-content {
+  grid-template-columns: 1fr 1fr;
   color: var(--secondary_7);
   font-size: $font_s;
   text-align: right;
-  word-spacing: .3rem;
-}
-
-strong {
-  color: var(--primary_4);
-}
-
-._circle_border {
-  color: var(--green_500);
-  border: 2px solid var(--green_500);
-  margin-left: $font_xs;
 }
 
 h2 {
   display: flex;
   justify-content: center;
-}
-
-._key_value {
-  columns: 2;
-  text-align: center;
-  column-rule: 1px dashed var(--primary_2);
-  direction: rtl;
-}
-
-._key,
-._value {
-  font-weight: 600;
-}
-
-._key {
-  color: var(--primary_4);
-}
-
-._text {
-  margin-left: $font_xs;
-}
-
-._custom {
-  background: var(--primary_2);
-  color: var(--secondary_1);
 }

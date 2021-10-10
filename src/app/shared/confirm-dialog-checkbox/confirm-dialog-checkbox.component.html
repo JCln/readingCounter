@@ -5,13 +5,8 @@
 </h2>
 
 <mat-dialog-content>
-    {{data.data}}
-    <div *ngFor="let item of data.data;index as ri">
-        <!-- <mat-checkbox name="item" [(ngModel)]="item"></mat-checkbox> -->
-        <!-- <mat-checkbox name="item" [(ngModel)]="item[ri]"></mat-checkbox> -->
-        <!-- {{item.data}}
-        dddddd -->
-        {{data.data}}
+    <div *ngFor="let item of data.data">
+        <mat-checkbox [disabled]="true" checked=true>{{item}}</mat-checkbox>
     </div>
 </mat-dialog-content>
 

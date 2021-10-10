@@ -11,10 +11,7 @@ export class ConfirmDialogCheckboxComponent {
   constructor(
     private mdDialogRef: MatDialogRef<ConfirmDialogCheckboxComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    console.log(data);
-    
-  }
+  ) { }
 
   public close(value) {
     this.mdDialogRef.close(value);

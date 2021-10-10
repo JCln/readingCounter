@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ConfirmDialogCheckboxComponent } from './confirm-dialog-checkbox/confirm-dialog-checkbox.component';
@@ -9,10 +11,12 @@ import { ConfirmDialogCheckboxComponent } from './confirm-dialog-checkbox/confir
         ConfirmDialogCheckboxComponent
     ],
     imports: [
+        MatCheckboxModule,
         MatDialogModule,
+        CommonModule
     ],
     exports: [
-        MatDialogModule,
+        ConfirmDialogCheckboxComponent
     ]
 })
 export class SharedConfirmsModule {

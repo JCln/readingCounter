@@ -152,6 +152,11 @@ export class AllComponent extends FactoryONE {
   }
   ngOnInit(): void { return; }
   getReadingReportTitles = async ($event) => {
-    this.listManagerService.showResDialog(await this.listManagerService.postById(ENInterfaces.ReadingReportTitles, $event), false, EN_messages.insert_rrDetails);
+    const a = await this.listManagerService.postById(ENInterfaces.ReadingReportTitles, $event)
+    if (a.length) {
+      this.listManagerService.showResDialog(a, false, EN_messages.insert_rrDetails);
+      return;
+    }
+    this.listManagerService.snackEmptyValue();
   }
 }

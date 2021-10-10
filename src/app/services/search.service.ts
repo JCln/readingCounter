@@ -546,5 +546,8 @@ export class SearchService {
       })
     });
   }
+  snackEmptyValue = () => {
+    this.utilsService.snackBarMessageWarn(EN_messages.notFound);
+  }
 
 }
