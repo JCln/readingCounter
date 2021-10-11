@@ -1,0 +1,10 @@
+<section class="media">
+    <div class="_header">
+        <i class="pi pi-check-square"></i>
+        میانگین دفعات ثبت شده
+    </div>
+    <div class="_key_value" *ngFor="let item of _colshownReading">
+        <div class="_key">{{item.header}}</div>
+        <div class="_value">{{dataSourceAttemptAverage[item.field]}}</div>
+    </div>
+</section>

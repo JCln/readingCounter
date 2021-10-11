@@ -26,6 +26,9 @@ import { DashMoshtarakCountComponent } from './dash-moshtarak-count/dash-moshtar
 import { DashShownReadingsComponent } from './dash-shown-readings/dash-shown-readings.component';
 import { DashNotReaderComponent } from './dash-not-reader/dash-not-reader.component';
 import { DashErrorCountComponent } from './dash-error-count/dash-error-count.component';
+import { DashLockedComponent } from './dash-locked/dash-locked.component';
+import { DashPackAverageComponent } from './dash-pack-average/dash-pack-average.component';
+import { DashAttemptComponent } from './dash-attempt/dash-attempt.component';
 
 
 @NgModule({
@@ -52,6 +55,9 @@ import { DashErrorCountComponent } from './dash-error-count/dash-error-count.com
     DashShownReadingsComponent,
     DashNotReaderComponent,
     DashErrorCountComponent,
+    DashLockedComponent,
+    DashPackAverageComponent,
+    DashAttemptComponent,
   ],
   imports: [
     CommonModule,
