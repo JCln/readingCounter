@@ -5,7 +5,6 @@ import { ITextOutput } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -29,8 +28,7 @@ export class TxtOutputComponent extends FactoryONE {
   constructor(
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public readManagerService: ReadManagerService,
-    public outputManagerService: OutputManagerService
+    public readManagerService: ReadManagerService    
   ) {
     super(interactionService);
   }

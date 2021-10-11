@@ -17,3 +17,31 @@ export interface IAssessAddDtoSimafa {
     counterReaderId: string,
     trackNumber: number
 }
+export interface IReadingConfigDefault {
+    id: number,
+    zoneId: number,
+    defaultAlalHesab: number,
+    maxAlalHesab: number,
+    minAlalHesab: number,
+    defaultImagePercent: number,
+    maxImagePercent: number,
+    minImagePercent: number,
+    defaultHasPreNumber: boolean,
+    isOnQeraatCode: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    lowConstBoundMaskooni: number,
+    lowPercentBoundMaskooni: number,
+    highConstBoundMaskooni: number,
+    highPercentBoundMaskooni: number,
+    lowConstBoundSaxt: number,
+    lowPercentBoundSaxt: number,
+    highConstBoundSaxt: number,
+    highPercentBoundSaxt: number,
+    lowConstZarfiatBound: number,
+    lowPercentZarfiatBound: number,
+    highConstZarfiatBound: number,
+    highPercentZarfiatBound: number,
+    lowPercentRateBoundNonMaskooni: number,
+    highPercentRateBoundNonMaskooni: number
+}

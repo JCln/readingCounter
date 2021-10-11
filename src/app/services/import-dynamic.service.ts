@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
+import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
   ENImportDatas,
@@ -18,7 +19,6 @@ import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
-import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa } from '../Interfaces/iimports';
 import { Converter } from './../classes/converter';
 import { UtilsService } from './utils.service';
 
@@ -231,6 +231,25 @@ export class ImportDynamicService {
   }
   getAssessPre = () => {
     return this._assessPre;
+  }
+  verificationReadingConfigDefault = (val: IReadingConfigDefault, insertedVals: IImportDynamicDefault | IImportSimafaSingleReq): boolean => {
+    if (val.minAlalHesab > insertedVals.alalHesabPercent) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMinAlalHesab);
+      return false;
+    }
+    if (val.minImagePercent > insertedVals.imagePercent) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMinImg);
+      return false;
+    }
+    if (val.maxAlalHesab < insertedVals.alalHesabPercent) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMaxAlalHesab);
+      return false;
+    }
+    if (val.maxImagePercent < insertedVals.imagePercent) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMaxImg);
+      return false;
+    }
+    return true;
   }
   checkVertification = (val: IImportDynamicDefault, _isOrderByDate: boolean): boolean => {
     this.importDynamicValue = val;

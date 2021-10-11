@@ -7,7 +7,6 @@ import { IEditTracking, ITracking } from 'interfaces/itrackings';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -36,8 +35,7 @@ export class ImportedComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialogService: DialogService,
-    private dialog: MatDialog,
-    public outputManagerService: OutputManagerService
+    private dialog: MatDialog    
   ) {
     super(interactionService);
   }

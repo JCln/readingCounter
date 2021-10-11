@@ -9,7 +9,6 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -42,7 +41,6 @@ export class AssessPreComponent extends FactoryONE {
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public importDynamicService: ImportDynamicService,
-    public outputManagerService: OutputManagerService,
     private utilsService: UtilsService,
     private dialogService: DialogService,
     private dialog: MatDialog

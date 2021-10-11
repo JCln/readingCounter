@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
+import { IReadingConfigDefault } from 'interfaces/iimports';
 import { ENLocalStorageNames, IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
@@ -43,7 +44,7 @@ export class ImportDynamicComponent extends FactoryONE {
   kindId: number = 0;
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  readingConfigDefault: string[] = [];
+  readingConfigDefault: IReadingConfigDefault;
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 
@@ -57,6 +58,8 @@ export class ImportDynamicComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
+    if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService.importDynamicReq))
+      return;
     const validation = this.importDynamicService.checkVertification(this.importDynamicService.importDynamicReq, this._isOrderByDate);
     if (!validation)
       return;
@@ -88,13 +91,14 @@ export class ImportDynamicComponent extends FactoryONE {
     if (this.importDynamicService.importDynamicReq.zoneId || this.zoneDictionary) {
       this.verificationReadingPeriod();
       this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamicService.importDynamicReq.zoneId);
+      console.log(this.readingConfigDefault);
+
     }
     if (!this.importDynamicService.importDynamicReq.zoneId || !this.zoneDictionary)
       return;
-    if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault)) {
-      this.readingConfigDefault = [];
+    if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault))
       return;
-    }
+
     this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.importDynamicService.importDynamicReq.zoneId);
     if (!this.importDynamicService.validationInvalid(this.userCounterReader)) {
       this.userCounterReader = [];
@@ -136,7 +140,6 @@ export class ImportDynamicComponent extends FactoryONE {
 
     this.kindId = 0;
     this.readingPeriodDictionary = [];
-    this.readingConfigDefault = [];
     this.userCounterReader = [];
 
     this.importDynamicService.importDynamicReq = {

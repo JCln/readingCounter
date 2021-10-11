@@ -5,7 +5,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -30,7 +29,6 @@ export class ReadingComponent extends FactoryONE {
     public trackingManagerService: TrackingManagerService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
-    public outputManagerService: OutputManagerService,
     public interactionService: InteractionService
   ) {
     super(interactionService);
