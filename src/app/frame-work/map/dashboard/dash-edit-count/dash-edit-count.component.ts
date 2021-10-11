@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDashboardEditCount } from 'interfaces/inon-manage';
+import { IDashboardEditCount } from 'interfaces/idashboard-map';
 import { DashboardService } from 'services/dashboard.service';
 import { UtilsService } from 'services/utils.service';
 

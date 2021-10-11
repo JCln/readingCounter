@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { IListManagerPDHistory, IOffLoadPerDay } from 'interfaces/imanage';
+import { IListManagerPDHistory, IOffLoadPerDay } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';

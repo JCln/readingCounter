@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IFragmentDetails, IFragmentMaster } from 'interfaces/imanage';
 import { IDictionaryManager, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { IFragmentDetails, IFragmentMaster } from '../Interfaces/ireads-manager';
 
 @Injectable({
   providedIn: 'root'

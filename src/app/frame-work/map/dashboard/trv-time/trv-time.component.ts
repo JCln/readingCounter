@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDashboardTraverseTimed } from 'interfaces/inon-manage';
+import { IDashboardTraverseTimed } from 'interfaces/idashboard-map';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
 

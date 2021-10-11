@@ -3,12 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import {
-  IMostReportInput,
-  IReadingReportGISReq,
-  IReadingReportReq,
-  IReadingReportTraverseDifferentialReq,
-} from 'interfaces/imanage';
+import { IMostReportInput } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -16,6 +11,7 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
+import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from '../Interfaces/ireports';
 
 
 @Injectable({

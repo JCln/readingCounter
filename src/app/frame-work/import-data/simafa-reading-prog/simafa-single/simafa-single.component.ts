@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IReadingConfigDefault } from 'interfaces/imanage';
+import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IImportDataResponse, IImportSimafaSingleReq, IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
@@ -52,6 +52,8 @@ export class SimafaSingleComponent extends FactoryONE {
     this.simafaSingleReq.readingPeriodId = parseInt(this.route.snapshot.paramMap.get('readingPeriodId'));
   }
   connectToServer = async (canRefresh?: boolean) => {
+    if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.simafaSingleReq))
+      return;
     const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaSingleReq);
     if (!validation)
       return;

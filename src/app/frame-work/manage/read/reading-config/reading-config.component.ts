@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingConfigDefault } from 'interfaces/imanage';
+import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';

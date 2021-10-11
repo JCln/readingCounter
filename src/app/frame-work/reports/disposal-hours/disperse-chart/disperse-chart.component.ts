@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingReportChartDisposeRes } from 'interfaces/imanage';
+import { IReadingReportChartDisposeRes } from 'interfaces/ireports';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';

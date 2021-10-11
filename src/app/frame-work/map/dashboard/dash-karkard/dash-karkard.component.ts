@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDashboardKarkardTimed } from 'interfaces/inon-manage';
+import { IDashboardKarkardTimed } from 'interfaces/idashboard-map';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, MultiDataSet, SingleDataSet } from 'ng2-charts';
 import { DashboardService } from 'services/dashboard.service';
 

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { IFragmentMaster } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IFragmentMaster } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';

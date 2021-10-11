@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { IDashboardSpecial } from 'interfaces/inon-manage';
+import { IDashboardSpecial } from 'interfaces/idashboard-map';
 import { Label } from 'ng2-charts';
 
 @Component({

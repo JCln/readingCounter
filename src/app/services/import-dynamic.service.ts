@@ -3,15 +3,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
+import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENImportDatas,
-    IImportDataResponse,
-    IImportDynamicDefault,
-    IImportSimafaBatchReq,
-    IImportSimafaReadingProgramsReq,
-    IImportSimafaSingleReq,
-    IReadingProgramRes,
+  ENImportDatas,
+  IImportDataResponse,
+  IImportDynamicDefault,
+  IImportSimafaBatchReq,
+  IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
+  IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -114,7 +115,7 @@ export class ImportDynamicService {
     { field: 'billId', header: 'شناسه قبض', isSelected: true, isNumber: true },
     { field: 'radif', header: 'ش.پرونده', isSelected: true, isNumber: true },
     { field: 'errorDescriptoin', header: 'توضیحات', isSelected: true },
-    { field: 'hasError', header: 'خطا', isSelected: true, isBoolean: true }    
+    { field: 'hasError', header: 'خطا', isSelected: true, isBoolean: true }
   ]
   importDynamicReq: IImportDynamicDefault = {
     fromEshterak: '',
@@ -230,6 +231,25 @@ export class ImportDynamicService {
   }
   getAssessPre = () => {
     return this._assessPre;
+  }
+  verificationReadingConfigDefault = (val: IReadingConfigDefault, insertedVals: IImportDynamicDefault | IImportSimafaSingleReq): boolean => {
+    if (val.minAlalHesab > insertedVals.alalHesabPercent) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMinAlalHesab);
+      return false;
+    }
+    if (val.minImagePercent > insertedVals.imagePercent) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMinImg);
+      return false;
+    }
+    if (val.maxAlalHesab < insertedVals.alalHesabPercent) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMaxAlalHesab);
+      return false;
+    }
+    if (val.maxImagePercent < insertedVals.imagePercent) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMaxImg);
+      return false;
+    }
+    return true;
   }
   checkVertification = (val: IImportDynamicDefault, _isOrderByDate: boolean): boolean => {
     this.importDynamicValue = val;

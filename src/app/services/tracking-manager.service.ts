@@ -4,13 +4,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IEditTracking, IFollowUpHistory, IOffLoadPerDay, IOutputManager, ITracking } from 'interfaces/imanage';
+import { IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { IFollowUpHistory } from '../Interfaces/isearchs';
+import { IEditTracking, IOffLoadPerDay, ITracking } from '../Interfaces/itrackings';
 import { OffloadModify } from './../classes/offload-modify-type';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';

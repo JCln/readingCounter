@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { IFragmentDetails } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IFragmentDetails } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';

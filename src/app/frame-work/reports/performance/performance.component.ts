@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IAnalyzeRes } from 'interfaces/imanage';
+import { IAnalyzeRes } from 'interfaces/idashboard-map';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';

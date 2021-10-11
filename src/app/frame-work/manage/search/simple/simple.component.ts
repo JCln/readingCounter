@@ -5,7 +5,6 @@ import { ISearchSimpleOutput } from 'interfaces/search';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
@@ -33,8 +32,7 @@ export class SimpleComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public searchService: SearchService,
-    public outputManagerService: OutputManagerService,
+    public searchService: SearchService,    
     private utilsService: UtilsService
   ) {
   }

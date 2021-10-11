@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ICounterState, ICounterStateGridFriendlyResp } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { ICounterState, ICounterStateGridFriendlyResp } from 'interfaces/ireads-manager';
 import { LazyLoadEvent } from 'primeng/api';
 import { CloseTabService } from 'services/close-tab.service';
 import { CounterStateService } from 'services/counter-state.service';

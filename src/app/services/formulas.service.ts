@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IAbBahaFormula, ITabsare2Formula } from 'interfaces/imanage';
 import {
   ENSelectedColumnVariables,
   ENSnackBarColors,
@@ -15,6 +14,7 @@ import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
+import { IAbBahaFormula, ITabsare2Formula } from '../Interfaces/ireads-manager';
 
 @Injectable({
   providedIn: 'root'

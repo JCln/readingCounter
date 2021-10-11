@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDashboardMoshtarakCount } from 'interfaces/inon-manage';
+import { IDashboardMoshtarakCount } from 'interfaces/idashboard-map';
 import { DashboardService } from 'services/dashboard.service';
 
 @Component({

@@ -2,13 +2,12 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IFragmentDetailsByEshterakReq } from 'interfaces/imanage';
 import { IImportSimafaReadingProgramsReq, IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IFragmentDetailsByEshterakReq } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -45,7 +44,6 @@ export class SimafaReadingProgComponent extends FactoryONE {
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private importDynamicService: ImportDynamicService,
-    public outputManagerService: OutputManagerService,
     public route: ActivatedRoute
   ) {
     super();

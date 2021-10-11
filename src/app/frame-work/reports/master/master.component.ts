@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingReportMaster, IReadingReportReq } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IReadingReportMaster, IReadingReportReq } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';

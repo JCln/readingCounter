@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IDashboardKarkardTimed } from 'interfaces/inon-manage';
+import { IDashboardKarkardTimed } from 'interfaces/idashboard-map';
 
 @Component({
   selector: 'app-dash-karkard-table',

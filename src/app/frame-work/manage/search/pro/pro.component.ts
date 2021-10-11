@@ -7,7 +7,6 @@ import { ISearchProReportInput } from 'interfaces/search';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
@@ -40,8 +39,7 @@ export class ProComponent extends FactoryONE {
   constructor(
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public searchService: SearchService,
-    public outputManagerService: OutputManagerService,
+    public searchService: SearchService,    
     private utilsService: UtilsService,
     private dialogService: DialogService,
   ) {
