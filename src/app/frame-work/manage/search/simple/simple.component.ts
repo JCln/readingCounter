@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { ISearchSimpleOutput } from 'interfaces/search';
@@ -15,7 +15,7 @@ import { Converter } from 'src/app/classes/converter';
   templateUrl: './simple.component.html',
   styleUrls: ['./simple.component.scss']
 })
-export class SimpleComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SimpleComponent implements OnInit, OnDestroy {
   dataSource: ISearchSimpleOutput[] = [];
   _years: ITitleValue[] = [];
 
@@ -32,7 +32,7 @@ export class SimpleComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public searchService: SearchService,    
+    public searchService: SearchService,
     private utilsService: UtilsService
   ) {
   }
@@ -71,19 +71,6 @@ export class SimpleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnInit() {
     this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/s/simple') {
-          this.connectToServer();
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds

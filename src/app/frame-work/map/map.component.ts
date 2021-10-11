@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -58,7 +58,7 @@ L.Marker.prototype.options.icon = simpleIcon;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MapComponent implements OnInit, OnDestroy {
   extraDataSourceRes: IReadingReportGISResponse[] = [];
 
   private map: L.Map;
@@ -155,7 +155,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.canShowOptionsButton = true;
     this.markersDataSourceXY = await this.mapService.getPointerMarks(this.onShowCounterReader);
     console.log(this.markersDataSourceXY);
-    
+
     if (!this.mapService.validateGISAccuracy(this.markersDataSourceXY)) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
       return;
@@ -180,7 +180,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private classWrapperCluster = async () => {
     this.extraDataSourceRes = await this.readingReportManagerService.postRRManagerOnMap(ENInterfaces.ListToGis, this.makeClusterRouteObject());
     console.log(this.extraDataSourceRes);
-    
+
     if (this.extraDataSourceRes.length === 0) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
       return;
@@ -207,15 +207,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mapService.addButtonsToLeaflet();
     this.removeLayerButtonLeaflet();
     this.myLocationButtonLeaflet();
-  }
-  ngAfterViewInit(): void {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr' || res === '/wr/db')
-          this.ngOnInit();
-      }
-    })
-    )
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
     if (lat === 0 || lag === 0)

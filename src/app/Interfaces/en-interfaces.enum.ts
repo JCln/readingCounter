@@ -255,4 +255,7 @@ export enum ENInterfaces {
     getDashboardMoshtarakCount = 'V1/DbQuery/MoshtarakCount',
     postDashboardAnalyzePerformance = 'V1/Tracking/Dashboard/Analyze/Performance',
     getDashboardUsersOverall = 'V1/User/Dashboard/Overall',
+    getDashboardAttemptAverage = 'V1/List/Dashboard/Attempt/Timed',
+    getDashboardLockedCount = 'V1/List/Dashboard/Locked/Timed',
+    getDashboardPackageAverage = 'V1/Tracking/Dashboard/Tracking/PackAverage',
 }

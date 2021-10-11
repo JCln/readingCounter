@@ -24,12 +24,6 @@ export abstract class FactoryONE implements OnInit, OnDestroy {
     }
 }
 export class Factory {
-    static refreshTabStatus = () => {
-        const tempRoute = window.location.pathname;
-        if (tempRoute)
-            return tempRoute;
-        return null;
-    }
     // constructor(type: ENFactory) { //, closeTabServiceName: string
     //     if (type == "firstType") {
     //         let temp: any;

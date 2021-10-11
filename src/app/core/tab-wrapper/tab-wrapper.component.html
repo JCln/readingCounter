@@ -1,10 +1,10 @@
-<div class="_remove_all tooltip" *ngIf="sideBarItemsService.tabs.length > 1">
+<div class="_remove_all tooltip" *ngIf="closeTabService.tabs.length > 1">
     <span class="pi pi-times" (click)="closeAllTabs()"></span>
     <div class="tooltip_text_right">حذف همه تب ها</div>
 </div>
 <section>
     <ul>
-        <li *ngFor="let tab of sideBarItemsService.tabs" [routerLink]="['/'+ tab.route]" routerLinkActive="active"
+        <li *ngFor="let tab of closeTabService.tabs" [routerLink]="['/'+ tab.route]" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">
             <i *ngIf="tab.isRefreshable" (click)="refreshCurrentPage(tab.route)" class="fa fa-refresh"></i>
             {{tab.title}}

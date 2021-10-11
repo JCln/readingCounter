@@ -36,7 +36,7 @@ export class MoshtarakComponent extends FactoryONE {
   constructor(
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public searchService: SearchService,    
+    public searchService: SearchService,
     private utilsService: UtilsService
   ) {
     super();
@@ -89,16 +89,6 @@ export class MoshtarakComponent extends FactoryONE {
 
     this.searchType = this.searchService.getSearchTypes();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/s/searchMosh') {
-          this.connectToServer();
-        }
-      }
-    })
-    )
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

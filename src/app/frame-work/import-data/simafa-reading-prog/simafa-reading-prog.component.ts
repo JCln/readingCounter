@@ -85,16 +85,6 @@ export class SimafaReadingProgComponent extends FactoryONE {
     this._years = this.importDynamicService.getYears();
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/imp/simafa/rdpg') {
-          this.connectToServer();
-        }
-      }
-    })
-    )
-  }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }

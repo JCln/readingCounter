@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { ITabs } from 'interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CloseTabService {
+  /* TAB WRAPPER */
+  tabs: ITabs[] = [];
 
   // Formular s 
   saveDataForWaterFormula: any;
@@ -94,301 +97,100 @@ export class CloseTabService {
   saveDataForPolicies: any;
   saveDataForFNB: any;
 
+  private val: any[] = [
+    { id: 1, req: '', value: 'saveDataForKarbari', value_2: '', url: '/wr/m/r/kar' },
+    { id: 1, req: '', value: 'saveDataForCounterState', value_2: '', url: '/wr/m/r/cs' },
+    { id: 1, req: '', value: 'saveDataForQotrManager', value_2: '', url: '/wr/m/r/qr' },
+    { id: 1, req: '', value: 'saveDataForCounterReport', value_2: '', url: '/wr/m/r/rpt' },
+    { id: 1, req: '', value: 'saveDataForFragmentNOB', value_2: '', url: '/wr/m/r/nob' },
+    { id: 1, req: '', value: 'saveDataForTextOutput', value_2: '', url: '/wr/m/r/txt/out' },
+    { id: 1, req: '', value: 'saveDataForAPKManager', value_2: '', url: '/wr/m/r/apk' },
+    { id: 1, req: '', value: 'saveDataForReadingPeriodManager', value_2: '', url: '/wr/m/r/rpm' },
+    { id: 1, req: '', value: 'saveDataForReadingPeriodKindManager', value_2: '', url: '/wr/m/r/rpkm' },
+    { id: 1, req: '', value: 'saveDataForWaterFormula', value_2: '', url: '/wr/m/r/formula/ab' },
+    { id: 1, req: '', value: 'saveDataForBadgetFormula', value_2: '', url: '/wr/m/r/formula/budget' },
+    { id: 1, req: '', value: 'saveDataForTabsare2Formula', value_2: '', url: '/wr/m/r/formula/tabsare2' },
+    { id: 1, req: '', value: 'saveDataForTabsare3Formula', value_2: '', url: '/wr/m/r/formula/tabsare3' },
+    { id: 1, req: '', value: 'saveDataForAppLevel1', value_2: '', url: '/wr/m/al/ap' },
+    { id: 1, req: '', value: 'saveDataForAppLevel2', value_2: '', url: '/wr/m/al/me' },
+    { id: 1, req: '', value: 'saveDataForAppLevel3', value_2: '', url: '/wr/m/al/cr' },
+    { id: 1, req: '', value: 'saveDataForAppLevel4', value_2: '', url: '/wr/m/al/ac' },
+    { id: 1, req: '', value: 'saveDataForAllUsers', value_2: '', url: '/wr/mu/all' },
+    { id: 1, req: '', value: 'saveDataForRoleManager', value_2: '', url: '/wr/mu/role' },
+    { id: 1, req: '', value: 'saveDataForEditOnRole', value_2: '', url: '/wr/mu/eor' },
+    { id: 1, req: '', value: 'saveDataForCountry', value_2: '', url: '/wr/m/zs/c' },
+    { id: 1, req: '', value: 'saveDataForProvince', value_2: '', url: '/wr/m/zs/p' },
+    { id: 1, req: '', value: 'saveDataForRegion', value_2: '', url: '/wr/m/zs/r' },
+    { id: 1, req: '', value: 'saveDataForZone', value_2: '', url: '/wr/m/zs/z' },
+    { id: 1, req: '', value: 'saveDataForZoneBound', value_2: '', url: '/wr/m/zs/zb' },
+    { id: 1, req: '', value: '', value_2: '', url: '/wr/m/ms' },
+    { id: 1, req: '', value: '', value_2: '', url: '/wr/m/mrm' },
+    { id: 1, req: '', value: 'saveDataForImportDynamic', value_2: '', url: '/wr/imp/imd' },
+    { id: 1, req: '', value: 'saveDataForImportErrors', value_2: '', url: '/wr/imp/err' },
+    { id: 1, req: '', value: 'saveDataForAssessPre', value_2: '', url: '/wr/imp/assesspre' },
+    { id: 1, req: '', value: 'saveDataForAssessAdd', value_2: '', url: '/wr/imp/assessadd' },
+    { id: 1, req: '', value: 'saveDataForSimafaReadingPrograms', value_2: '', url: '/wr/imp/simafa/rdpg' },
+    { id: 1, req: '', value: 'saveDataForSimafaBatch', value_2: '', url: '/wr/imp/simafa/batch' },
+    { id: 1, req: '', value: 'saveDataForPolicies', value_2: '', url: '/wr/policies' },
+    { id: 1, req: '', value: ';', value_2: '', url: '/wr/profile' },
+    { id: 1, req: '', value: ';', value_2: '', url: '/wr/msge' },
+    { id: 1, req: '', value: 'saveDataForTrackImported', value_2: '', url: '/wr/m/track/imported' },
+    { id: 1, req: '', value: 'saveDataForTrackLoaded', value_2: '', url: '/wr/m/track/loaded' },
+    { id: 1, req: '', value: 'saveDataForTrackReading', value_2: '', url: '/wr/m/track/reading' },
+    { id: 1, req: '', value: 'saveDataForLastStates', value_2: '', url: '/wr/m/track/latest' },
+    { id: 1, req: '', value: 'saveDataForTrackOffloaded', value_2: '', url: '/wr/m/track/offloaded' },
+    { id: 1, req: '', value: 'saveDataForTrackFinished', value_2: '', url: '/wr/m/track/finished' },
+    { id: 1, req: '', value: 'saveDataForFollowUp', value_2: 'saveDataForFollowUpAUX', url: '/wr/m/s/fwu' },
+    { id: 1, req: '', value: 'saveDataForSearchMoshtarakin', value_2: '', url: '/wr/m/s/searchMosh' },
+    { id: 1, req: '', value: 'saveDataForSearchPro', value_2: '', url: '/wr/m/s/acme' },
+    { id: 1, req: '', value: 'saveDataForSearchSimple', value_2: '', url: '/wr/m/s/simple' },
+    { id: 1, req: '', value: '', value_2: '', url: '/wr/privacy' },
+    { id: 1, req: '', value: 'saveDataForFNB', value_2: '', url: '/wr/m/fbn' },
+    { id: 1, req: '', value: 'saveDataForLMPD', value_2: '', url: '/wr/m/l/pd' },
+    { id: 1, req: '', value: 'saveDataForOutputDBF', value_2: '', url: '/wr/m/dbf' },
+    { id: 1, req: '', value: 'saveDataForRRTraverse', value_2: '', url: '/wr/rpts/mam/trv' },
+    { id: 1, req: '', value: 'saveDataForRRTraverseDifferential', value_2: '', url: '/wr/rpts/mam/trvch' },
+    { id: 1, req: '', value: 'saveDataForRRDisposalHours', value_2: '', url: '/wr/rpts/mam/dh' },
+    { id: 1, req: '', value: 'saveDataForRRKarkard', value_2: '', url: '/wr/rpts/mam/karkard' },
+    { id: 1, req: '', value: 'saveDataForRROffloadedKarkard', value_2: '', url: '/wr/rpts/mam/offkarkard' },
+    { id: 1, req: '', value: 'saveDataForRRMaster', value_2: '', url: '/wr/rpts/exm/master' },
+    { id: 1, req: '', value: 'saveDataForRRPerformance', value_2: '', url: '/wr/rpts/anlz/prfm' },
+    { id: 1, req: '', value: 'saveDataForDMAAnalyze', value_2: '', url: '/wr/m/dma/cranlz' },
+    { id: 2, req: '', value: 'saveDataForRRDetails', value_2: '', url: '/wr/rpts/exm/details' },
+    { id: 2, req: '', value: 'saveDataForRRkarkardDaily', value_2: '', url: '/wr/rpts/exm/karkardDaily' },
+    { id: 2, req: '', value: 'saveDataForRRGIS', value_2: '', url: '/wr/rpts/mam/gis' },
+    { id: 2, req: '', value: 'saveDataForOffloadModify', value_2: '', url: '/wr/m/track/offloaded/offloadMfy/' },
+    { id: 2, req: '', value: 'saveDataForLMPD', value_2: '', url: '/wr/m/l/pd/' },
+    { id: 2, req: '', value: 'saveDataForLMAll', value_2: 'saveDataForLMAll_extra', url: '/wr/m/l/all/' },
+    { id: 2, req: '', value: 'saveDataForEditUsers', value_2: '', url: '/wr/mu/edit/' },
+    { id: 2, req: '', value: 'saveDataForWOUI', value_2: '', url: '/wr/m/track/woui/' },
+    { id: 2, req: '', value: 'saveDataForUserLoggins', value_2: '', url: '/wr/mu/all/loggins/' },
+    { id: 2, req: '', value: 'saveDataForFragmentNOBDetails', value_2: '', url: '/wr/m/r/nob/' },
+  ]
 
-  // close config and remove data for specific page(component)
-  setClose = (url: string) => {
-    switch (url) {
-      // reading manage 
-      case '/wr/m/r/kar':
-        this.saveDataForKarbari = '';
-        break;
-      case '/wr/m/r/cs':
-        this.saveDataForCounterState = '';
-        break;
-      case '/wr/m/r/qr':
-        this.saveDataForQotrManager = '';
-        break;
-      case '/wr/m/r/rpt':
-        this.saveDataForCounterReport = '';
-        break;
-      case '/wr/m/r/nob':
-        this.saveDataForFragmentNOB = '';
-        break;
-      case '/wr/m/r/txt/out':
-        this.saveDataForTextOutput = '';
-        break;
-      case '/wr/m/r/apk':
-        this.saveDataForAPKManager = '';
-        break;
-      case '/wr/m/r/rpm':
-        this.saveDataForReadingPeriodManager = '';
-        break;
-      case '/wr/m/r/rpkm':
-        this.saveDataForReadingPeriodKindManager = '';
-        break;
-      case '/wr/m/r/formula/ab':
-        this.saveDataForWaterFormula = '';
-        break;
-      case '/wr/m/r/formula/budget':
-        this.saveDataForBadgetFormula = '';
-        break;
-      case '/wr/m/r/formula/tabsare2':
-        this.saveDataForTabsare2Formula = '';
-        break;
-      case '/wr/m/r/formula/tabsare3':
-        this.saveDataForTabsare3Formula = '';
-        break;
-      // auths manage
-      case '/wr/m/al/ap':
-        this.saveDataForAppLevel1 = '';
-        break;
-      case '/wr/m/al/me':
-        this.saveDataForAppLevel2 = '';
-        break;
-      case '/wr/m/al/cr':
-        this.saveDataForAppLevel3 = '';
-        break;
-      case '/wr/m/al/ac':
-        this.saveDataForAppLevel4 = '';
-        break;
-      // user manage
-      case '/wr/mu/all':
-        this.saveDataForAllUsers = '';
-        break;
-      case '/wr/mu/role':
-        this.saveDataForRoleManager = '';
-        break;
-      case '/wr/mu/eor':
-        this.saveDataForEditOnRole = '';
-        break;
-      // zones manage
-      case '/wr/m/zs/c':
-        this.saveDataForCountry = '';
-        break;
-      case '/wr/m/zs/p':
-        this.saveDataForProvince = '';
-        break;
-      case '/wr/m/zs/r':
-        this.saveDataForRegion = '';
-        break;
-      case '/wr/m/zs/z':
-        this.saveDataForZone = '';
-        break;
-      case '/wr/m/zs/zb':
-        this.saveDataForZoneBound = '';
-        break;
-      // ////     
-      case '/wr/m/ms':
-        break;
-      case '/wr/m/mrm':
-        break;
-      case '/wr/imp/imd':
-        this.saveDataForImportDynamic = '';
-        break;
-      case '/wr/imp/err':
-        this.saveDataForImportErrors = '';
-        break;
-      case '/wr/imp/assesspre':
-        this.saveDataForAssessPre = '';
-        break;
-      case '/wr/imp/assessadd':
-        this.saveDataForAssessAdd = '';
-        break;
-      case '/wr/imp/simafa/rdpg':
-        this.saveDataForSimafaReadingPrograms = '';
-        break;
-      case '/wr/imp/simafa/batch':
-        this.saveDataForSimafaBatch = '';
-        break;
-      case '/wr/policies':
-        this.saveDataForPolicies = '';
-        break;
-      case '/wr/profile':
-        break;
-      case '/wr/msge':
-        break;
-      //  trackings
-      case '/wr/m/track/imported':
-        this.saveDataForTrackImported = '';
-        break;
-      case '/wr/m/track/loaded':
-        this.saveDataForTrackLoaded = '';
-        break;
-      case '/wr/m/track/reading':
-        this.saveDataForTrackReading = '';
-        break;
-      case '/wr/m/track/latest':
-        this.saveDataForLastStates = '';
-        break;
-      case '/wr/m/track/offloaded':
-        this.saveDataForTrackOffloaded = '';
-        break;
-      case '/wr/m/track/finished':
-        this.saveDataForTrackFinished = '';
-        break;
-      case '/wr/m/s/fwu':
-        this.saveDataForFollowUp = '';
-        this.saveDataForFollowUpAUX = '';
-        break;
-      // searchs
-      case '/wr/m/s/searchMosh':
-        this.saveDataForSearchMoshtarakin = '';
-        break;
-      case '/wr/m/s/acme':
-        this.saveDataForSearchPro = '';
-        break;
-      case '/wr/m/s/simple':
-        this.saveDataForSearchSimple = '';
-        break;
-      // 
-      case '/wr/privacy':
-        break;
-      case '/wr/m/fbn':
-        this.saveDataForFNB = '';
-        break;
-      case '/wr/m/l/pd':
-        this.saveDataForLMPD = '';
-        break;
-      case '/wr/m/dbf':
-        this.saveDataForOutputDBF = '';
-        break;
-      // reading reports
-      case '/wr/rpts/mam/trv':
-        this.saveDataForRRTraverse = '';
-        break;
-      case '/wr/rpts/mam/trvch':
-        this.saveDataForRRTraverseDifferential = '';
-        break;
-      case '/wr/rpts/mam/dh':
-        this.saveDataForRRDisposalHours = '';
-        break;
-      case '/wr/rpts/mam/karkard':
-        this.saveDataForRRKarkard = '';
-        break;
-      case '/wr/rpts/mam/offkarkard':
-        this.saveDataForRROffloadedKarkard = '';
-        break;
-      case '/wr/rpts/exm/master':
-        this.saveDataForRRMaster = '';
-        break;
-      case '/wr/rpts/anlz/prfm':
-        this.saveDataForRRPerformance = '';
-        break;
-      case '/wr/m/dma/cranlz':
-        this.saveDataForDMAAnalyze = '';
-        break;
-      case '/wr/rpts/exm/details':
-        this.saveDataForRRDetails = '';
-        break;
-      case '/wr/rpts/exm/karkardDaily':
-        this.saveDataForRRkarkardDaily = '';
-        break;
-      case '/wr/rpts/mam/gis':
-        this.saveDataForRRGIS = '';
-        break;
-    }
-    // listed all of the dynamic routes
-    if (url.includes('/wr/m/track/offloaded/offloadMfy/')) {
-      this.saveDataForOffloadModify = '';
-      return;
-    }
-    if (url.includes('/wr/m/l/pd/')) {
-      this.saveDataForLMPD = '';
-      return;
-    }
-    if (url.includes('/wr/m/l/all/')) {
-      this.saveDataForLMAll = '';
-      this.saveDataForLMAll_extra = '';
-      return;
-    }
-    if (url.includes('/wr/mu/edit/')) {
-      this.saveDataForEditUsers = '';
-      return;
-    }
-    if (url.includes('/wr/m/track/woui/')) {
-      this.saveDataForWOUI = '';
-      return;
-    }
-    if (url.includes('/wr/mu/all/loggins/')) {
-      this.saveDataForUserLoggins = '';
-      return;
-    }
-    if (url.includes('/wr/m/r/nob/')) {
-      this.saveDataForFragmentNOBDetails = '';
-      return;
-    }
+  cleanArrays = () => {
+    this.tabs = [];
   }
-  // 
-
   cleanAllData = () => {
-    this.saveDataForWaterFormula = '';
-    this.saveDataForBadgetFormula = '';
-    this.saveDataForTabsare2Formula = '';
-    this.saveDataForTabsare3Formula = '';
-    this.saveDataForAppLevel1 = '';
-    this.saveDataForAppLevel2 = '';
-    this.saveDataForAppLevel3 = '';
-    this.saveDataForAppLevel4 = '';
-    this.saveDataForCounterState = '';
-    this.saveDataForKarbari = '';
-    this.saveDataForReadingConfig = '';
-    this.saveDictionaryForReadingConfig = '';
-    this.saveDataForCountry = '';
-    this.saveDataForProvince = '';
-    this.saveDataForRegion = '';
-    this.saveDataForZone = '';
-    this.saveDataForZoneBound = '';
-    this.saveDataForAllUsers = '';
-    this.saveDictionaryForAllUsers = '';
-    this.saveDataForSearchMoshtarakin = '';
-    this.saveDataForSearchPro = '';
-    this.saveDataForSearchSimple = '';
-    this.saveDataForEditUsers = '';
-    this.saveDataForEditOnRole = '';
-    this.saveDictionaryForEditUsers = '';
-    this.saveDictionaryForAddUsers = '';
-    this.saveDataForRoleManager = '';
-    this.saveDataForReadingPeriodManager = '';
-    this.saveDataForReadingPeriodKindManager = '';
-    this.saveDataForAPKManager = '';
-    this.saveDataForCounterReport = '';
-    this.saveDataForQotrManager = '';
-    this.saveDataForTrackImported = '';
-    this.saveDataForTrackLoaded = '';
-    this.saveDataForTrackReading = '';
-    this.saveDataForTrackOffloaded = '';
-    this.saveDataForTrackFinished = '';
-    this.saveDataForFollowUp = '';
-    this.saveDataForFollowUpAUX = '';
-    this.saveDataForPolicies = '';
-    this.saveDataForLastStates = '';
-    this.saveDataForOffloadModify = '';
-    this.saveDataForImportDynamic = '';
-    this.saveDataForImportErrors = '';
-    this.saveDataForAssessPre = '';
-    this.saveDataForAssessAdd = '';
-    this.saveDataForSimafaReadingPrograms = '';
-    this.saveDataForSimafaBatch = '';
-    this.saveDataForLMPD = '';
-    this.saveDataForLMAll = '';
-    this.saveDataForLMAll_extra = '';
-    this.saveDataForWOUI = '';
-    this.saveDataForOutputDBF = '';
-    this.saveDataForUserLoggins = '';
-    this.saveDataForRRTraverse = '';
-    this.saveDataForRRTraverseDifferential = '';
-    this.saveDataForRRKarkard = '';
-    this.saveDataForRROffloadedKarkard = '';
-    this.saveDataForRRkarkardDaily = '';
-    this.saveDataForRRMaster = '';
-    this.saveDataForRRPerformance = '';
-    this.saveDataForDMAAnalyze = '';
-    this.saveDataForRRDetails = '';
-    this.saveDataForRRDisposalHours = '';
-    this.saveDataForRRGIS = '';
-    this.saveDataForFragmentNOB = '';
-    this.saveDataForFragmentNOBDetails = '';
-    this.saveDataForTextOutput = '';
-    this.saveDataForFNB = '';
+    for (let index = 0; index < this.val.length; index++) {
+      this[this.val[index].value] = '';
+    }
+    this.cleanArrays();
+  }
+  cleanData = (url: string) => {
+    this.val.find(item => {
+      if (item.url === url) {
+        console.log(item.value);
+        this[item.value] = '';
+        this[item.value_2] = '';
+      }
+      else {
+        if (item.url.includes(url)) {
+          this[item.value] = '';
+          this[item.value_2] = '';
+        }
+      }
+    })
+
   }
 }
