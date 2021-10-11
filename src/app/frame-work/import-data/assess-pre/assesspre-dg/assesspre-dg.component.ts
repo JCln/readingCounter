@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IAssessPreDisplayDtoSimafa } from 'interfaces/imanage';
+import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
 import { IDictionaryManager, ITHV } from 'interfaces/ioverall-config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ImportDynamicService } from 'services/import-dynamic.service';

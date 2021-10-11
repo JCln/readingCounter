@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/imanage';
+import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';

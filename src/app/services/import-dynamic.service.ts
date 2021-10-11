@@ -3,21 +3,22 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IOnOffLoadFlat } from 'interfaces/imanage';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENImportDatas,
-    IImportDataResponse,
-    IImportDynamicDefault,
-    IImportSimafaBatchReq,
-    IImportSimafaReadingProgramsReq,
-    IImportSimafaSingleReq,
-    IReadingProgramRes,
+  ENImportDatas,
+  IImportDataResponse,
+  IImportDynamicDefault,
+  IImportSimafaBatchReq,
+  IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
+  IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
+import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa } from '../Interfaces/iimports';
 import { Converter } from './../classes/converter';
 import { UtilsService } from './utils.service';
 
@@ -114,7 +115,7 @@ export class ImportDynamicService {
     { field: 'billId', header: 'شناسه قبض', isSelected: true, isNumber: true },
     { field: 'radif', header: 'ش.پرونده', isSelected: true, isNumber: true },
     { field: 'errorDescriptoin', header: 'توضیحات', isSelected: true },
-    { field: 'hasError', header: 'خطا', isSelected: true, isBoolean: true }    
+    { field: 'hasError', header: 'خطا', isSelected: true, isBoolean: true }
   ]
   importDynamicReq: IImportDynamicDefault = {
     fromEshterak: '',

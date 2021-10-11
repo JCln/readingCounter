@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/imanage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 @Injectable({

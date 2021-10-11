@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { ENDataMining } from 'interfaces/data-mining';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IMostReportInput, IReadingReportReq } from 'interfaces/imanage';
+import { IMostReportInput } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { IReadingReportReq } from 'interfaces/ireports';
 
 import { Converter } from '../classes/converter';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';

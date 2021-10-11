@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ICounterStateGridFriendlyReq } from 'interfaces/imanage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { LazyLoadEvent } from 'primeng/api';
 import { Observable } from 'rxjs/internal/Observable';
 
+import { ICounterStateGridFriendlyReq } from '../Interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 

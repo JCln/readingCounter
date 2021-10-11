@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ICountryManager } from 'interfaces/inon-manage';
+import { ICountryManager } from 'interfaces/izones';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';

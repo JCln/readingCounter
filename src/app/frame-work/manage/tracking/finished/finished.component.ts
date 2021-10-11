@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ITracking } from 'interfaces/imanage';
+import { ITracking } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';

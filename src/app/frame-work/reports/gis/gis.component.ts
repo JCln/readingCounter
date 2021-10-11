@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IReadingReportGISResponse } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IReadingReportGISResponse } from 'interfaces/ireports';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';

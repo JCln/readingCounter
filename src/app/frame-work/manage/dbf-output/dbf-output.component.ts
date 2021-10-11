@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IOutputManager } from 'interfaces/imanage';
-import { IZoneManager } from 'interfaces/inon-manage';
+import { IZoneManager } from 'interfaces/izones';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
