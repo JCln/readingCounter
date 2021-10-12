@@ -12,7 +12,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent extends FactoryONE {
- 
+
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];

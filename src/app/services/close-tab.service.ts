@@ -89,13 +89,12 @@ export class CloseTabService {
   saveDataForRRDetails: any;
   saveDataForRRDisposalHours: any;
   saveDataForRRGIS: any;
-  // managers
   saveDataForFragmentNOB: any;
   saveDataForFragmentNOBDetails: any;
   saveDataForTextOutput: any;
-  // DASHBOARD
   saveDataForPolicies: any;
   saveDataForFNB: any;
+  saveDataForProfile: any;
 
   private val: any[] = [
     { id: 1, req: '', value: 'saveDataForKarbari', value_2: '', url: '/wr/m/r/kar' },
@@ -123,8 +122,8 @@ export class CloseTabService {
     { id: 1, req: '', value: 'saveDataForRegion', value_2: '', url: '/wr/m/zs/r' },
     { id: 1, req: '', value: 'saveDataForZone', value_2: '', url: '/wr/m/zs/z' },
     { id: 1, req: '', value: 'saveDataForZoneBound', value_2: '', url: '/wr/m/zs/zb' },
-    { id: 1, req: '', value: '', value_2: '', url: '/wr/m/ms' },
-    { id: 1, req: '', value: '', value_2: '', url: '/wr/m/mrm' },
+    // { id: 1, req: '', value: '', value_2: '', url: '/wr/m/ms' },
+    // { id: 1, req: '', value: '', value_2: '', url: '/wr/m/mrm' },
     { id: 1, req: '', value: 'saveDataForImportDynamic', value_2: '', url: '/wr/imp/imd' },
     { id: 1, req: '', value: 'saveDataForImportErrors', value_2: '', url: '/wr/imp/err' },
     { id: 1, req: '', value: 'saveDataForAssessPre', value_2: '', url: '/wr/imp/assesspre' },
@@ -132,8 +131,8 @@ export class CloseTabService {
     { id: 1, req: '', value: 'saveDataForSimafaReadingPrograms', value_2: '', url: '/wr/imp/simafa/rdpg' },
     { id: 1, req: '', value: 'saveDataForSimafaBatch', value_2: '', url: '/wr/imp/simafa/batch' },
     { id: 1, req: '', value: 'saveDataForPolicies', value_2: '', url: '/wr/policies' },
-    { id: 1, req: '', value: ';', value_2: '', url: '/wr/profile' },
-    { id: 1, req: '', value: ';', value_2: '', url: '/wr/msge' },
+    { id: 1, req: '', value: 'saveDataForProfile', value_2: '', url: '/wr/profile' },
+    // { id: 1, req: '', value: ';', value_2: '', url: '/wr/msge' },
     { id: 1, req: '', value: 'saveDataForTrackImported', value_2: '', url: '/wr/m/track/imported' },
     { id: 1, req: '', value: 'saveDataForTrackLoaded', value_2: '', url: '/wr/m/track/loaded' },
     { id: 1, req: '', value: 'saveDataForTrackReading', value_2: '', url: '/wr/m/track/reading' },
@@ -144,7 +143,7 @@ export class CloseTabService {
     { id: 1, req: '', value: 'saveDataForSearchMoshtarakin', value_2: '', url: '/wr/m/s/searchMosh' },
     { id: 1, req: '', value: 'saveDataForSearchPro', value_2: '', url: '/wr/m/s/acme' },
     { id: 1, req: '', value: 'saveDataForSearchSimple', value_2: '', url: '/wr/m/s/simple' },
-    { id: 1, req: '', value: '', value_2: '', url: '/wr/privacy' },
+    // { id: 1, req: '', value: '', value_2: '', url: '/wr/privacy' },
     { id: 1, req: '', value: 'saveDataForFNB', value_2: '', url: '/wr/m/fbn' },
     { id: 1, req: '', value: 'saveDataForLMPD', value_2: '', url: '/wr/m/l/pd' },
     { id: 1, req: '', value: 'saveDataForOutputDBF', value_2: '', url: '/wr/m/dbf' },
