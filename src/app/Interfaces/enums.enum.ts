@@ -24,6 +24,7 @@ export enum EN_messages {
     insert_reading_time = 'دوره قرائتی ایجاد و سپس امتحان نمایید',
     insert_reader = 'یک مامور انتخاب نمایید',
     insert_karbaricode = 'کد کاربری را وارد نمایید',
+    insert_assessAdd = 'حداقل یکی از موارد باید انتخاب شود',
     insert_karbari = 'نام کاربری را وارد نمایید',
     insert_password = 'گذرواژه را وارد نمایید',
     insert_confirm_pass = 'تکرار گذرواژه را وارد نمایید',

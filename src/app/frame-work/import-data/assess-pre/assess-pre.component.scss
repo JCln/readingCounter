@@ -1,4 +1,4 @@
-@import 'variable.scss';
+@import 'primeNG';
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
@@ -10,13 +10,6 @@
   padding: $font_05;
   border-radius: $border_15;
   border: 1px solid var(--primary_2);
-}
-
-section.content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
-  gap: $font_05;
-  align-items: center;
 }
 
 .tooltip {
@@ -91,12 +84,10 @@ footer {
 
 section.dynamic_content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 15rem));
   gap: $font_05;
   align-items: center;
   border-radius: $border_15;
-  padding: $font_xxs;
-  margin: 1rem 0;
 }
 
 .static_part {
@@ -111,6 +102,7 @@ section.dynamic_content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
   gap: $font_05;
+  padding: 0.25rem;
 }
 
 ._key,

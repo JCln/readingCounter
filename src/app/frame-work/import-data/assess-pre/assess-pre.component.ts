@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
+import { IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -13,7 +13,6 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
-import { ConfirmTextDialogComponent } from '../../manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { AssesspreDgComponent } from './assesspre-dg/assesspre-dg.component';
 
 @Component({
@@ -28,6 +27,7 @@ export class AssessPreComponent extends FactoryONE {
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
+  readingConfigDefault: IReadingConfigDefault;
   dataSource: IOnOffLoadFlat[] = [];
   assessPreReq: IAssessPreDisplayDtoSimafa;
   zoneDictionary: IDictionaryManager[] = [];
@@ -53,6 +53,13 @@ export class AssessPreComponent extends FactoryONE {
     this._selectCols = this.importDynamicService.columnAssessPre();
     this._selectedColumns = this.importDynamicService.customizeSelectedColumns(this._selectCols);
   }
+  insertReadingConfigDefaults = (rcd: IReadingConfigDefault) => {
+    this.importDynamicService._assessAddReq.hasPreNumber = rcd.defaultHasPreNumber;
+    this.importDynamicService._assessAddReq.displayBillId = rcd.displayBillId;
+    this.importDynamicService._assessAddReq.displayRadif = rcd.displayRadif;
+    this.importDynamicService._assessAddReq.alalHesabPercent = rcd.defaultAlalHesab;
+    this.importDynamicService._assessAddReq.imagePercent = rcd.defaultImagePercent;
+  }
   converts = () => {
     this._empty_message = EN_messages.notFound;
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
@@ -67,12 +74,14 @@ export class AssessPreComponent extends FactoryONE {
   connectToServer = async () => {
     this.dataSource = await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessPre, this.assessPreReq);
     this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.assessPreReq.zoneId);
+    this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.assessPreReq.zoneId);
     this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.assessPreReq.zoneId);
     this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.assessPreReq.zoneId);
     this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
     this.qotrDictionary = await this.importDynamicService.getQotrDictionary();
 
     this.converts();
+    this.insertReadingConfigDefaults(this.readingConfigDefault);
     this.importDynamicService.makeHadPicturesToBoolean(this.dataSource);
 
     this.closeTabService.saveDataForAssessPre = this.dataSource;
@@ -118,23 +127,6 @@ export class AssessPreComponent extends FactoryONE {
       }
     });
   }
-  backToImportedConfirmDialog = () => {
-    const title = EN_messages.confirm_send;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          // this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessAdd, this.)
-        }
-      })
-    })
-  }
   getOnOffLoadIdsFromDataSource = () => {
     let a: any[] = [];
     this.dataSource.map(item => {
@@ -144,7 +136,11 @@ export class AssessPreComponent extends FactoryONE {
     this.importDynamicService._assessAddReq.onOffLoadIds = a;
   }
   registerAssessAdd = async () => {
+    if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService._assessAddReq))
+      return;
     this.getOnOffLoadIdsFromDataSource();
+    if (!this.importDynamicService.verificationAssessAdd(this.importDynamicService._assessAddReq))
+      return;
     this.importDynamicService.showResDialog(await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created)
   }
   getReadingReportTitles = async ($event) => {

@@ -73,12 +73,12 @@
                     class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
-                <i *ngIf="_checkUpName == 'assess_pre'" (click)="registerAssessAdd()"
-                    class="tooltip _circle_border p_icons pi pi-check-circle">
-                    <div class="tooltip_text">ثبت بازدید</div>
-                </i>
             </div>
             <div class="left_side">
+                <i *ngIf="_checkUpName == 'assess_pre'" (click)="registerAssessAdd()"
+                    class="tooltip _circle_border p_icons pi pi-check">
+                    <div class="tooltip_text">ثبت بازدید</div>
+                </i>
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
                 </i>
@@ -129,7 +129,8 @@
                         <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                     </ng-container>
                     <ng-template #editableBooleans>
-                        <mat-checkbox [disabled]="false" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                        <mat-checkbox name="editableCheckbox" [checked]="true" [(ngModel)]="dataSource[col.field]">
+                        </mat-checkbox>
                     </ng-template>
                 </ng-container>
                 <ng-template #elseTemplate>

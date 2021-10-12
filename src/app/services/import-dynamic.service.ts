@@ -6,13 +6,13 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENImportDatas,
-  IImportDataResponse,
-  IImportDynamicDefault,
-  IImportSimafaBatchReq,
-  IImportSimafaReadingProgramsReq,
-  IImportSimafaSingleReq,
-  IReadingProgramRes,
+    ENImportDatas,
+    IImportDataResponse,
+    IImportDynamicDefault,
+    IImportSimafaBatchReq,
+    IImportSimafaReadingProgramsReq,
+    IImportSimafaSingleReq,
+    IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -246,7 +246,7 @@ export class ImportDynamicService {
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     return this.validationNull(searchReq);
   }
-  verificationReadingConfigDefault = (val: IReadingConfigDefault, insertedVals: IImportDynamicDefault | IImportSimafaSingleReq): boolean => {
+  verificationReadingConfigDefault = (val: IReadingConfigDefault, insertedVals: IImportDynamicDefault | IImportSimafaSingleReq | IAssessAddDtoSimafa): boolean => {
     if (val.minAlalHesab > insertedVals.alalHesabPercent) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMinAlalHesab);
       return false;
@@ -464,6 +464,17 @@ export class ImportDynamicService {
   validationZoneDictionary = (val: any): boolean => {
     if (!this.validationOnNull(val)) {
       this.utilsService.snackBarMessageFailed(EN_messages.not_found_zoneId);
+      return false;
+    }
+    return true;
+  }
+  verificationAssessAdd = (assessData: IAssessAddDtoSimafa): boolean => {
+    if (this.utilsService.isNull(assessData.onOffLoadIds[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_assessAdd);
+      return false;
+    }
+    if (this.utilsService.isNull(assessData.counterReaderId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_reader);
       return false;
     }
     return true;
