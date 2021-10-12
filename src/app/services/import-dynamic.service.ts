@@ -35,7 +35,6 @@ export class ImportDynamicService {
     readingPeriodId: 0,
     year: 1400
   }
-  private _assessPre: IAssessPreDisplayDtoSimafa;
   private _simafaSingleReq: IReadingProgramRes;
   _simafaReadingProgram: IObjectIteratation[] = [
     { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
@@ -107,8 +106,19 @@ export class ImportDynamicService {
       { field: 'dateDifference', header: 'طول دوره', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
-      { field: 'description', header: 'توضیحات', isSelected: false }
+      { field: 'description', header: 'توضیحات', isSelected: false },
+      { field: 'isSelected', header: 'انتخاب', isSelected: true, isBoolean: true }
     ]
+  _assessAddReq: IAssessAddDtoSimafa = {
+    onOffLoadIds: [],
+    alalHesabPercent: 0,
+    imagePercent: 0,
+    hasPreNumber: true,
+    displayBillId: true,
+    displayRadif: true,
+    counterReaderId: ''
+  }
+
   private _errors: IObjectIteratation[] = [
     { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },
     { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isNumber: true },
@@ -130,6 +140,14 @@ export class ImportDynamicService {
     toDate: null,
     counterReaderId: '',
     readingPeriodId: null
+  }
+  AssessPreReq: IAssessPreDisplayDtoSimafa = {
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    zoneId: null,
+    listNumber: ''
   }
 
   constructor(
@@ -226,11 +244,7 @@ export class ImportDynamicService {
     this.router.navigate(['/wr/imp/simafa/rdpg/batch', object]);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
-    this._assessPre = searchReq;
     return this.validationNull(searchReq);
-  }
-  getAssessPre = () => {
-    return this._assessPre;
   }
   verificationReadingConfigDefault = (val: IReadingConfigDefault, insertedVals: IImportDynamicDefault | IImportSimafaSingleReq): boolean => {
     if (val.minAlalHesab > insertedVals.alalHesabPercent) {
@@ -494,6 +508,13 @@ export class ImportDynamicService {
         resolve(res))
     });
   }
+  postById = (method: ENInterfaces, id: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
   getUserCounterReaders = (zoneId: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
@@ -546,7 +567,7 @@ export class ImportDynamicService {
   getMasrafStates = () => {
     return IMasrafStates;
   }
-  postAssess = (method: ENInterfaces, object: IAssessPreDisplayDtoSimafa): Promise<any> => {
+  postAssess = (method: ENInterfaces, object: object): Promise<any> => {
     try {
       return new Promise((resolve) => {
         this.interfaceManagerService.POSTBODY(method, object).subscribe(res => {
@@ -649,19 +670,6 @@ export class ImportDynamicService {
         item.imageCount = false;
     })
   }
-  makeAssessAddReq = (dataReq: IAssessAddDtoSimafa): IAssessAddDtoSimafa => {
-    const temp: IAssessAddDtoSimafa = {
-      onOffLoadIds: [],
-      alalHesabPercent: 0,
-      imagePercent: 0,
-      hasPreNumber: true,
-      displayBillId: true,
-      displayRadif: true,
-      counterReaderId: '',
-      trackNumber: 0
-    }
-    return temp;
-  }
   /* OTHERS */
 
   setSimafaSingleReq = (dataSourceReq: IReadingProgramRes) => {
@@ -680,6 +688,9 @@ export class ImportDynamicService {
           old.isSelected = true;
       })
     })
+  }
+  snackEmptyValue = () => {
+    this.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
 
 }

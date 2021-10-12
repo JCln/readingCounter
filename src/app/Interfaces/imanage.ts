@@ -90,7 +90,8 @@ export interface IOnOffLoadFlat {
     counterNumberShown: boolean,
     excludedForBazdid: boolean,
     masrafStateId: number,
-    description: string
+    description: string,
+    isSelected?: boolean
 }
 export interface IOutputManager {
     zoneId: number,

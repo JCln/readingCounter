@@ -14,8 +14,7 @@ export interface IAssessAddDtoSimafa {
     hasPreNumber: boolean,
     displayBillId: boolean,
     displayRadif: boolean,
-    counterReaderId: string,
-    trackNumber: number
+    counterReaderId: string
 }
 export interface IReadingConfigDefault {
     id: number,

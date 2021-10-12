@@ -235,7 +235,7 @@ export enum ENInterfaces {
     postSimafaBatch = 'V1/Import/Simafa/Batch',
     postSimafaSingle = 'V1/Import/Simafa/single',
     postSimafaAssessPre = 'V1/Import/Simafa/AssessPre',
-    postSimafaAssessAdd = 'V1​/Import​/Simafa​/AssessAdd',
+    postSimafaAssessAdd = 'V1/Import/Simafa/AssessAdd',
 
     getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
     getDashboardEditCount = 'V1/Tracking/Dashboard/Tracking/EditCount',

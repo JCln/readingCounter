@@ -73,6 +73,10 @@
                     class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
+                <i *ngIf="_checkUpName == 'assess_pre'" (click)="registerAssessAdd()"
+                    class="tooltip _circle_border p_icons pi pi-check-circle">
+                    <div class="tooltip_text">ثبت بازدید</div>
+                </i>
             </div>
             <div class="left_side">
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
@@ -121,7 +125,12 @@
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isBoolean; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                    <ng-container *ngIf="col.field !== 'isSelected'; else editableBooleans">
+                        <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                    </ng-container>
+                    <ng-template #editableBooleans>
+                        <mat-checkbox [disabled]="false" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
+                    </ng-template>
                 </ng-container>
                 <ng-template #elseTemplate>
                     <ng-container *ngIf="col.field == 'masrafStateId'; else showText">
@@ -243,7 +252,7 @@
                 </i>
             </td>
             <td
-                *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'allComponent'">
+                *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'allComponent' || _checkUpName == 'assess_pre'">
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
@@ -261,10 +270,6 @@
                 <i class="tooltip p_icons fas fa-camera">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
-            </td>
-            <td *ngIf="_checkUpName == 'assess_pre'">
-                <span class="ui-column-title">انتخاب</span>
-                <mat-checkbox [checked]="true" [(ngModel)]="dataSource[ri]"></mat-checkbox>
             </td>
             <td (click)="routeToOffload(dataSource,ri)" *ngIf="_outputFileName == 'allReads' &&  _allComponentIsModify">
                 <span class="ui-column-title">اصلاح</span>

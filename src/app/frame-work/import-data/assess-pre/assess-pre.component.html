@@ -1,12 +1,52 @@
+<form #form="ngForm" (ngSubmit)="connectToServer()">
+    <section class="static_part">
 
-<app-prime-table     
-[_selectCols]="_selectCols" 
-[_selectedColumns]="selectedColumns"
-[dataSource]="dataSource" 
-[_outputFileName]="'assess_pre'"
-[_checkUpName]="'assess_pre'"
-[_numberOfExtraColumns]="[1]"
-[_sessionName]="'assess_pre'"
-(refreshedTable)="refreshTable()" 
-> 
+        <section class="content">
+
+            <div class="input_2 this" *ngIf="userCounterReaderDictionary.length">
+                <div class="_key">مامور</div>
+                <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
+                    [options]="userCounterReaderDictionary" name="counter-reader"
+                    [(ngModel)]="importDynamicService._assessAddReq.counterReaderId" optionLabel="title" [filter]="true"
+                    filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
+                </p-dropdown>
+            </div>
+
+        </section>
+
+        <div class="check_boxes">
+            <mat-checkbox name="hasPreNumber" [(ngModel)]="importDynamicService._assessAddReq.hasPreNumber">شماره قبلی
+            </mat-checkbox>
+
+            <mat-checkbox name="displayBillId" [(ngModel)]="importDynamicService._assessAddReq.displayBillId">
+                نمایش شناسه قبض
+            </mat-checkbox>
+
+            <mat-checkbox name="displayRadif" [(ngModel)]="importDynamicService._assessAddReq.displayRadif">نمایش
+                ش.پرونده
+            </mat-checkbox>
+
+        </div>
+
+        <section class="dynamic_content">
+            <div class="input_2 this">
+                <div class="_key">درصد علی‌الحساب</div>
+                <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
+                    [(ngModel)]="importDynamicService._assessAddReq.alalHesabPercent">
+            </div>
+            <div class="input_2 this">
+                <div class="_key">درصد تصویر</div>
+                <input class="_value" min="0" max="100" type="number" name="imagePercent"
+                    [(ngModel)]="importDynamicService._assessAddReq.imagePercent">
+            </div>
+        </section>
+
+    </section>
+</form>
+
+<app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
+    [_outputFileName]="'assess_pre'" [_checkUpName]="'assess_pre'" [_numberOfExtraColumns]="[1]"
+    [_sessionName]="'assess_pre'" (refreshedTable)="refreshTable()"
+    (showSearchedOptionsDialog)="showSearchOptionsDialog()" (registeredAssess)="registerAssessAdd()"
+    (showedPictures)="getReadingReportTitles($event)">
 </app-prime-table>

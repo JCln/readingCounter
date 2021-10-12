@@ -35,6 +35,7 @@ export class AssessPreComponent extends FactoryONE {
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
+  userCounterReaderDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
 
   constructor(
@@ -64,9 +65,8 @@ export class AssessPreComponent extends FactoryONE {
     this.importDynamicService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    console.log(this.assessPreReq);
-
     this.dataSource = await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessPre, this.assessPreReq);
+    this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.assessPreReq.zoneId);
     this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.assessPreReq.zoneId);
     this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.assessPreReq.zoneId);
     this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
@@ -82,7 +82,7 @@ export class AssessPreComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
       // is there any value to call apis
-      if (this.importDynamicService.getAssessPre().listNumber !== '') {
+      if (this.importDynamicService.AssessPreReq.listNumber !== '') {
         this.connectToServer();
         return;
       }
@@ -134,5 +134,25 @@ export class AssessPreComponent extends FactoryONE {
         }
       })
     })
+  }
+  getOnOffLoadIdsFromDataSource = () => {
+    let a: any[] = [];
+    this.dataSource.map(item => {
+      if (item.isSelected)
+        a.push(item.id);
+    })
+    this.importDynamicService._assessAddReq.onOffLoadIds = a;
+  }
+  registerAssessAdd = async () => {
+    this.getOnOffLoadIdsFromDataSource();
+    this.importDynamicService.showResDialog(await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created)
+  }
+  getReadingReportTitles = async ($event) => {
+    const a = await this.importDynamicService.postById(ENInterfaces.ReadingReportTitles, $event)
+    if (a.length) {
+      this.importDynamicService.showResDialog(a, false, EN_messages.insert_rrDetails);
+      return;
+    }
+    this.importDynamicService.snackEmptyValue();
   }
 }

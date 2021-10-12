@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
 import { IDictionaryManager, ITHV } from 'interfaces/ioverall-config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ImportDynamicService } from 'services/import-dynamic.service';
@@ -10,15 +9,6 @@ import { ImportDynamicService } from 'services/import-dynamic.service';
   styleUrls: ['./assesspre-dg.component.scss']
 })
 export class AssesspreDgComponent implements OnInit {
-  AssessPreReq: IAssessPreDisplayDtoSimafa = {
-    reportIds: [],
-    counterStateIds: [],
-    masrafStates: [],
-    karbariCodes: [],
-    zoneId: null,
-    listNumber: ''
-  }
-
   zoneDictionary: IDictionaryManager[] = [];
   counterStateByZoneIdDictionary: IDictionaryManager[] = [];
   counterReportDictionary: IDictionaryManager[] = [];
@@ -28,13 +18,10 @@ export class AssesspreDgComponent implements OnInit {
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private importDynamicService: ImportDynamicService
+    public importDynamicService: ImportDynamicService
   ) {
   }
   classWrapper = async () => {
-    if (this.AssessPreReq.listNumber = '') {
-      this.AssessPreReq = this.importDynamicService.getAssessPre();
-    }
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     this.masrafState = this.importDynamicService.getMasrafStates();
   }
@@ -42,16 +29,16 @@ export class AssesspreDgComponent implements OnInit {
     this.classWrapper();
   }
   getMasterInZone = async () => {
-    console.log(this.AssessPreReq.zoneId);
-    if (!this.AssessPreReq.zoneId)
+    console.log(this.importDynamicService.AssessPreReq.zoneId);
+    if (!this.importDynamicService.AssessPreReq.zoneId)
       return;
 
-    this.counterReportDictionary = await this.importDynamicService.getCounterReportByZoneDictionary(this.AssessPreReq.zoneId);
+    this.counterReportDictionary = await this.importDynamicService.getCounterReportByZoneDictionary(this.importDynamicService.AssessPreReq.zoneId);
     this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
-    this.counterStateByZoneIdDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.AssessPreReq.zoneId);
+    this.counterStateByZoneIdDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.importDynamicService.AssessPreReq.zoneId);
   }
   editCloseData() {
-    if (this.importDynamicService.verificationAssessPre(this.AssessPreReq))
-      this.ref.close(this.AssessPreReq);
+    if (this.importDynamicService.verificationAssessPre(this.importDynamicService.AssessPreReq))
+      this.ref.close(this.importDynamicService.AssessPreReq);
   }
 }

@@ -54,6 +54,7 @@ export class PrimeTableComponent {
   @Output() backedToReading = new EventEmitter<any>();
   @Output() backedToPrevious = new EventEmitter<any>();
   @Output() downloadedAPK = new EventEmitter<any>();
+  @Output() registeredAssess = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
   @Output() showSearchedOptionsDialog = new EventEmitter<any>();
   @Output() routedToOffload = new EventEmitter<any>();
@@ -128,6 +129,9 @@ export class PrimeTableComponent {
   }
   downloadAPK = () => {
     this.downloadedAPK.emit();
+  }
+  registerAssessAdd = () => {
+    this.registeredAssess.emit();
   }
   showPictures = ($event) => {
     this.showedPictures.emit($event);

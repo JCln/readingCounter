@@ -88,3 +88,49 @@ footer {
 [hidden] {
   display: none;
 }
+
+section.dynamic_content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
+  gap: $font_05;
+  align-items: center;
+  border-radius: $border_15;
+  padding: $font_xxs;
+  margin: 1rem 0;
+}
+
+.static_part {
+  background: var(--white);
+  border: .15rem solid var(--secondary_2);
+  border-radius: $border_15;
+  padding: $font_xxs;
+  direction: rtl;
+}
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
+  gap: $font_05;
+}
+
+._key,
+._value {
+  font-size: $font_m;
+  font-weight: 800;
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: var(--primary_5);
+  text-align: center;
+  width: 100%;
+}
+
+.btn_1 {
+  color: var(--white);
+  background-color: var(--orange_500);
+}
