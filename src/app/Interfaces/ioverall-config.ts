@@ -158,6 +158,7 @@ export enum ENSelectedColumnVariables {
     selectedlastStates = 'lastStates',
     selectedUsersAll = '_usersAll',
     selectedListManagerAll = '_listManagerAll',
+    selectedListManagerAssess = '_assessPreColumns',
     selectedListManagerMosh = '_searchReqMosh',
     selectedListManagerPro = '_searchReqPro',
     selectedSearchManagerSimple = '_searchSimple',

@@ -10,10 +10,12 @@
     [_backToPreviousEnabled]=true
     [_allComponentIsModify]="isModify"
     [_backToPreviousText]="'بازگشت به صفحه قبلی'"
+    [_isCustomSort]=true
+    (customedSort)="customSort($event)"
     (refreshedTable)="refreshTable()"
     (backedToPrevious)="toPrePage()"
     (routedToOffload)="routeToOffload($event)"
-    (showedPictures)="getReadingReportTitles($event)"
+    (showedPictures)="getReadingReportTitles($event)"    
     > 
     </app-prime-table>
     

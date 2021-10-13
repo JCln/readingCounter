@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ForbiddenService } from 'services/forbidden.service';
+import { ImportDynamicService } from 'services/import-dynamic.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadManagerService } from 'services/read-manager.service';
@@ -37,7 +38,9 @@ export class PrimeTableComponent {
   @Input() _canShowButton: boolean = true;
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
+  @Input() _isCustomSort: boolean = false;
 
+  @Output() customedSort = new EventEmitter<any>();
   @Output() collapsed = new EventEmitter<any>();
   @Output() removedRow = new EventEmitter<any>();
   @Output() openedEditDialog = new EventEmitter<any>();
@@ -78,7 +81,8 @@ export class PrimeTableComponent {
     public usersAllService: UsersAllService,
     public forbiddenService: ForbiddenService,
     public readManagerService: ReadManagerService,
-    public readingReportManagerService: ReadingReportManagerService
+    public readingReportManagerService: ReadingReportManagerService,
+    public importDynamicService: ImportDynamicService
   ) { }
 
   @Input() get selectedColumns(): any[] {
@@ -178,6 +182,9 @@ export class PrimeTableComponent {
   }
   routeToBatch = (dataSource: object) => {
     this.routedToBatch.emit(dataSource);
+  }
+  customSort = (dataSource: any) => {
+    this.customedSort.emit(dataSource);
   }
   routeToSingle = (dataSource: object) => {
     this.routedToSingle.emit(dataSource);

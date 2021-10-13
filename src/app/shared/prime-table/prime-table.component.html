@@ -2,7 +2,7 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]=_sortOrder
-    [sortMode]="_sortMode">
+    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)">
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
 
         <p-multiSelect
@@ -32,6 +32,11 @@
         <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'readingConfig'" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="readManagerService.setColumnsChanges(readManagerService.ENSelectedColumnVariables.selectedReadingConfigDefault ,$event)"
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'assess_pre'" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" optionLabel="header"
+            (ngModelChange)="readManagerService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'userAll'" [options]="_selectCols"
