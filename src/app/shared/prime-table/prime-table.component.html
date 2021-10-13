@@ -75,7 +75,7 @@
                 </i>
             </div>
             <div class="left_side">
-                <i *ngIf="_checkUpName == 'assess_pre'" (click)="registerAssessAdd()"
+                <i *ngIf="_checkUpName == 'assess_pre' && _canShowButton" (click)="registerAssessAdd()"
                     class="tooltip _circle_border p_icons pi pi-check">
                     <div class="tooltip_text">ثبت بازدید</div>
                 </i>

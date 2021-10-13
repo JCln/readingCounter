@@ -40,7 +40,7 @@
 </form>
 
 <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-    [_outputFileName]="'assess_pre'" [_checkUpName]="'assess_pre'" [_numberOfExtraColumns]="[1]"
+    [_outputFileName]="'assess_pre'" [_checkUpName]="'assess_pre'" [_numberOfExtraColumns]="[1]" [_canShowButton]="_canShowAssessButton"
     [_sessionName]="'assess_pre'" (refreshedTable)="refreshTable()"
     (showSearchedOptionsDialog)="showSearchOptionsDialog()" (registeredAssess)="registerAssessAdd()"
     (showedPictures)="getReadingReportTitles($event)">

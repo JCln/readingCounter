@@ -34,6 +34,7 @@ export class PrimeTableComponent {
   @Input() _multiSelectEnable: boolean = true;
   @Input() _allComponentIsModify: boolean = false;
   @Input() _hasCollapsible: boolean = false;
+  @Input() _canShowButton: boolean = true;
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
 

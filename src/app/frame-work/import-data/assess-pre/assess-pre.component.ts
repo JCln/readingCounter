@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
@@ -37,14 +36,14 @@ export class AssessPreComponent extends FactoryONE {
   qotrDictionary: IDictionaryManager[] = [];
   userCounterReaderDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
+  _canShowAssessButton: boolean = true;
 
   constructor(
     public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public importDynamicService: ImportDynamicService,
     private utilsService: UtilsService,
-    private dialogService: DialogService,
-    private dialog: MatDialog
+    private dialogService: DialogService
   ) {
     super();
   }
@@ -73,6 +72,7 @@ export class AssessPreComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.dataSource = await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessPre, this.assessPreReq);
+    this.makeDataSourceOptionsChecked();
     this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.assessPreReq.zoneId);
     this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.assessPreReq.zoneId);
     this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.assessPreReq.zoneId);
@@ -141,7 +141,8 @@ export class AssessPreComponent extends FactoryONE {
     this.getOnOffLoadIdsFromDataSource();
     if (!this.importDynamicService.verificationAssessAdd(this.importDynamicService._assessAddReq))
       return;
-    this.importDynamicService.showResDialog(await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created)
+    this.importDynamicService.showResDialog(await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created);
+    this._canShowAssessButton = false;
   }
   getReadingReportTitles = async ($event) => {
     const a = await this.importDynamicService.postById(ENInterfaces.ReadingReportTitles, $event)
@@ -150,5 +151,10 @@ export class AssessPreComponent extends FactoryONE {
       return;
     }
     this.importDynamicService.snackEmptyValue();
+  }
+  makeDataSourceOptionsChecked = () => {
+    this.dataSource.forEach(item => {
+      item.isSelected = true;
+    })
   }
 }
