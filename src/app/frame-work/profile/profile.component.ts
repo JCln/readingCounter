@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { IProfile } from 'interfaces/iuser-manager';
+import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -19,13 +20,24 @@ export class ProfileComponent extends FactoryONE {
 
   constructor(
     public interactionService: InteractionService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private closeTabService: CloseTabService
   ) {
     super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {
-    this.myInfoDataSource = await this.profileService.getMyInfoDataSource();
+    if (canRefresh) {
+      this.closeTabService.saveDataForProfile;
+    }
+    if (this.closeTabService.saveDataForProfile) {
+      this.myInfoDataSource = this.closeTabService.saveDataForProfile;
+    }
+    else {
+      this.myInfoDataSource = await this.profileService.getMyInfoDataSource();
+      this.closeTabService.saveDataForProfile = this.myInfoDataSource;
+    }
+
     this.getSelectedColumns();
   }
   toDefaultPassword = () => {
