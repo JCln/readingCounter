@@ -7,6 +7,7 @@ import { BrowserSupportService } from 'services/browser-support.service';
 import { infoVersion } from 'services/DI/info-version';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
+import { MathS } from 'src/app/classes/math-s';
 
 import { AuthService } from './../auth.service';
 
@@ -54,7 +55,7 @@ export class LoginComponent {
       return;
     }
     this.convertNumbers();
-    if (this.utilsService.isNull(this.userData.password) || this.utilsService.isNull(this.userData.username)) {
+    if (MathS.isNull(this.userData.password) || MathS.isNull(this.userData.username)) {
       this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
       return;
     }

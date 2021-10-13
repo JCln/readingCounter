@@ -7,6 +7,7 @@ import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
+import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 
 @Injectable({
@@ -31,19 +32,19 @@ export class ProfileService {
     ];
   }
   verification = (password: IChangePassword) => {
-    if (this.utilsService.isNull(password.oldPassword)) {
+    if (MathS.isNull(password.oldPassword)) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
       return false;
     }
-    if (this.utilsService.isNull(password.newPassword)) {
+    if (MathS.isNull(password.newPassword)) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
       return false;
     }
-    if (this.utilsService.isNull(password.confirmPassword)) {
+    if (MathS.isNull(password.confirmPassword)) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
       return false;
     }
-    if (!this.utilsService.isSameLength(password.newPassword, password.confirmPassword)) {
+    if (!MathS.isSameLength(password.newPassword, password.confirmPassword)) {
       this.utilsService.snackBarMessageWarn(EN_messages.passwords_notFetch);
       return false;
     }

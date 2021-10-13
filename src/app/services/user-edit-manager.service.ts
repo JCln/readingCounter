@@ -5,6 +5,7 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
 import { IAddUserManager, IAUserEditSave, IUserEditManager, IUserEditOnRole } from 'interfaces/iuser-manager';
 
+import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
@@ -40,7 +41,7 @@ export class UserEditManagerService {
       if (ids.isSelected)
         a.push(ids.id);
     });
-    if (this.utilsService.isNull(a))
+    if (MathS.isNull(a))
       return [0];
     return a;
   }
@@ -60,19 +61,19 @@ export class UserEditManagerService {
     return selectedActions;
   }
   checkEmptyUserInfos = () => {
-    if (!this.utilsService.isNullWithText(this.dataSource.firstName, EN_messages.insert_name, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(this.dataSource.firstName, EN_messages.insert_name, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.sureName, EN_messages.insert_surename, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(this.dataSource.sureName, EN_messages.insert_surename, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.mobile, EN_messages.insert_mobile, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(this.dataSource.mobile, EN_messages.insert_mobile, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.displayName, EN_messages.insert_showName, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(this.dataSource.displayName, EN_messages.insert_showName, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.selectedRoles[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(this.dataSource.selectedRoles[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(this.dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(this.dataSource.selectedZones[1], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(this.dataSource.selectedZones[1], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
       return false;
 
     return true;
@@ -81,10 +82,10 @@ export class UserEditManagerService {
     if (!this.checkEmptyUserInfos()) {
       return false;
     }
-    if (!this.utilsService.mobileValidation(this.dataSource.mobile))
+    if (!MathS.mobileValidation(this.dataSource.mobile))
       return false;
-    if (!this.utilsService.isNull(this.dataSource.email))
-      if (!this.utilsService.isEmailValid(this.dataSource.email))
+    if (!MathS.isNull(this.dataSource.email))
+      if (!MathS.isEmailValid(this.dataSource.email))
         return false;
 
     return true;
@@ -132,11 +133,11 @@ export class UserEditManagerService {
     });
   }
   private verificationEditOnRole = (dataSource: IUserEditOnRole) => {
-    if (this.utilsService.isNull(dataSource.roleId)) {
+    if (MathS.isNull(dataSource.roleId)) {
       this.utilsService.snackBarMessage(EN_messages.insert_group_access, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
-    if (!this.utilsService.isNullWithText(dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
       return false;
 
     return true;

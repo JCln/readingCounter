@@ -4,6 +4,7 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems } from 'interfaces/iuser-manager';
 
+import { MathS } from '../classes/math-s';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 
@@ -45,7 +46,7 @@ export class UserAddManagerService {
       if (ids.isSelected)
         a.push(ids.id);
     });
-    if (this.utilsService.isNull(a))
+    if (MathS.isNull(a))
       return [];
     return a;
   }
@@ -65,36 +66,36 @@ export class UserAddManagerService {
     return selectedActions;
   }
   checkEmptyUserInfos = (vals: IAddAUserManager) => {
-    if (!this.utilsService.isNullWithText(vals.userCode, EN_messages.insert_karbaricode, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.userCode, EN_messages.insert_karbaricode, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.username, EN_messages.insert_karbari, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.username, EN_messages.insert_karbari, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.password, EN_messages.insert_password, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.password, EN_messages.insert_password, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.confirmPassword, EN_messages.insert_confirm_pass, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.confirmPassword, EN_messages.insert_confirm_pass, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.firstName, EN_messages.insert_name, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.firstName, EN_messages.insert_name, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.sureName, EN_messages.insert_surename, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.sureName, EN_messages.insert_surename, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.mobile, EN_messages.insert_mobile, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.mobile, EN_messages.insert_mobile, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.displayName, EN_messages.insert_showName, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.displayName, EN_messages.insert_showName, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.selectedRoles[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.selectedRoles[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
       return false;
-    if (!this.utilsService.isNullWithText(vals.selectedZones[0], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
+    if (!MathS.isNullWithText(vals.selectedZones[0], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
       return false;
     return true;
   }
   passAndConfirmPass = (vals: IAddAUserManager) => {
-    if (!this.utilsService.isSameLength(vals.password, vals.confirmPassword)) {
+    if (!MathS.isSameLength(vals.password, vals.confirmPassword)) {
       this.utilsService.snackBarMessage(EN_messages.passwords_notFetch, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
-    if (!this.utilsService.isExactEqual(vals.password, vals.confirmPassword)) {
+    if (!MathS.isExactEqual(vals.password, vals.confirmPassword)) {
       this.utilsService.snackBarMessage(EN_messages.password_notExactly, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
       return false;
     }
@@ -105,10 +106,10 @@ export class UserAddManagerService {
       return false;
     if (!this.checkEmptyUserInfos(vals))
       return false;
-    if (!this.utilsService.mobileValidation(vals.mobile))
+    if (!MathS.mobileValidation(vals.mobile))
       return false;
-    if (!this.utilsService.isNull(vals.email))
-      if (!this.utilsService.isEmailValid(vals.email))
+    if (!MathS.isNull(vals.email))
+      if (!MathS.isEmailValid(vals.email))
         return false;
     return true;
   }

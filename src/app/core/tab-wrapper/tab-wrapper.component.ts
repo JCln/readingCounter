@@ -7,6 +7,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 import { InteractionService } from 'services/interaction.service';
 import { UtilsService } from 'services/utils.service';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-tab-wrapper',
@@ -111,7 +112,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       _dynamicRoute: ''
     }
     dRoute = this.findDynamicRouteStatus();
-    if (this.utilsService.isNull(dRoute))
+    if (MathS.isNull(dRoute))
       return;
     else {
       lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
@@ -125,7 +126,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };
 
-    if (this.utilsService.isNull(this.DoesTabsHaveThisRouteNow())) {
+    if (MathS.isNull(this.DoesTabsHaveThisRouteNow())) {
       this.closeTabService.tabs.push(a);
       this.reFetchPageTitle();
     }
@@ -179,7 +180,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       return item;
     })
 
-    if (this.utilsService.isNull(a[0])) {
+    if (MathS.isNull(a[0])) {
       this.router.navigateByUrl('/wr');
       this.reFetchPageTitle();
     }

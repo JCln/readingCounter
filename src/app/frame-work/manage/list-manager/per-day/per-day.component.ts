@@ -8,6 +8,7 @@ import { InteractionService } from 'services/interaction.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -47,15 +48,15 @@ export class PerDayComponent extends FactoryONE {
     this.dateJalaliService.sortByDate(this.offLoadPerDayHistory, 'day');
   }
   private setGetRanges = () => {
-    this.dataSource.overalDuration = parseFloat(this.utilsService.getRange(this.dataSource.overalDuration));
-    this.dataSource.overalDistance = parseFloat(this.utilsService.getRange(this.dataSource.overalDistance));
+    this.dataSource.overalDuration = parseFloat(MathS.getRange(this.dataSource.overalDuration));
+    this.dataSource.overalDistance = parseFloat(MathS.getRange(this.dataSource.overalDistance));
   }
   private setDynamicPartRanges = () => {
     this.offLoadPerDayHistory.forEach(item => {
       if (item.duration > 0)
-        item.duration = parseFloat(this.utilsService.getRange(item.duration))
+        item.duration = parseFloat(MathS.getRange(item.duration))
       if (item.distance > 0)
-        item.distance = parseFloat(this.utilsService.getRange(item.distance))
+        item.distance = parseFloat(MathS.getRange(item.distance))
     })
   }
   nullSavedSource = () => this.closeTabService.saveDataForLMPD = null;

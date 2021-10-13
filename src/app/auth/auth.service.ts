@@ -8,6 +8,7 @@ import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { MainService } from 'services/main.service';
 import { UtilsService } from 'services/utils.service';
 
+import { MathS } from '../classes/math-s';
 import { JwtService } from './jwt.service';
 
 @Injectable({
@@ -52,7 +53,7 @@ export class AuthService {
     this.jwtService.saveToLocalStorageRefresh(token.refresh_token);
   }
   private routeToReturnUrl = (returnUrl: string) => {
-    if (!this.utilsService.isNull(returnUrl))
+    if (!MathS.isNull(returnUrl))
       this.utilsService.routeTo(returnUrl);
     else
       this.utilsService.routeTo('/wr');
@@ -76,7 +77,7 @@ export class AuthService {
     });
   }
   noAccessMessage = (errorMessage?: string) => {
-    if (this.utilsService.isNull(errorMessage))
+    if (MathS.isNull(errorMessage))
       this.utilsService.snackBarMessageWarn(EN_messages.access_denied);
     else
       this.utilsService.snackBarMessageWarn(errorMessage);

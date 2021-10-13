@@ -4,6 +4,8 @@ import * as jwt_decode from 'jwt-decode';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { UtilsService } from 'services/utils.service';
 
+import { MathS } from '../classes/math-s';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +24,7 @@ export class JwtService {
   }
   getAccessTokenExpirationDateUtc(): Date {
     const decoded = this.getDecodedAccessToken();
-    if (this.utilsService.isEmptyString(decoded)) {
+    if (MathS.isEmptyString(decoded)) {
       return null;
     }
     const date = new Date(0); // The 0 sets the date to the epoch
@@ -80,7 +82,7 @@ export class JwtService {
   hasStoredAccessAndRefreshTokens(): boolean {
     const accessToken = this.getAuthorizationToken();
     const refreshToken = this.getRefreshToken();
-    return (!this.utilsService.isEmptyString(accessToken) && !this.utilsService.isEmptyString(refreshToken));
+    return (!MathS.isEmptyString(accessToken) && !MathS.isEmptyString(refreshToken));
   }
   removeAllLocalStorage = () => this.browserStorageService.removeAll();
   removeAuthLocalStorage = () => {

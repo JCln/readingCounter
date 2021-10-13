@@ -7,6 +7,7 @@ import { InteractionService } from 'services/interaction.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 import { IReadingTimeRes } from 'src/app/Interfaces/data-mining';
 
 @Component({
@@ -79,7 +80,7 @@ export class DmAnalysisComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.dataSource = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
-    if (this.utilsService.isNull(this.dataSource))
+    if (MathS.isNull(this.dataSource))
       return;
     this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
     this.insertSelectedColumns();
@@ -96,10 +97,10 @@ export class DmAnalysisComponent extends FactoryONE {
   }
   private setRanges = () => {
     this.dataSource.forEach(item => {
-      item.averageBetweenTwoMinute = parseFloat(this.utilsService.getRange(item.averageBetweenTwoMinute));
-      item.disconnectRate = parseFloat(this.utilsService.getRange(item.disconnectRate));
-      item.medianBetweenTwoMinute = parseFloat(this.utilsService.getRange(item.medianBetweenTwoMinute));
-      item.closedPercent = parseFloat(this.utilsService.getRange(item.closedPercent));
+      item.averageBetweenTwoMinute = parseFloat(MathS.getRange(item.averageBetweenTwoMinute));
+      item.disconnectRate = parseFloat(MathS.getRange(item.disconnectRate));
+      item.medianBetweenTwoMinute = parseFloat(MathS.getRange(item.medianBetweenTwoMinute));
+      item.closedPercent = parseFloat(MathS.getRange(item.closedPercent));
     })
   }
 

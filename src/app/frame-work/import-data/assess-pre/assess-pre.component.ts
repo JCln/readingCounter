@@ -11,6 +11,7 @@ import { InteractionService } from 'services/interaction.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 import { AssesspreDgComponent } from './assesspre-dg/assesspre-dg.component';
 
@@ -96,7 +97,7 @@ export class AssessPreComponent extends FactoryONE {
         return;
       }
     }
-    if (this.utilsService.isNull(this.closeTabService.saveDataForAssessPre)) {
+    if (MathS.isNull(this.closeTabService.saveDataForAssessPre)) {
       this.showSearchOptionsDialog();
     }
     else {

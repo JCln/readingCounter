@@ -8,6 +8,7 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
+import { MathS } from '../classes/math-s';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 export enum ENForbidden {
@@ -107,15 +108,15 @@ export class ForbiddenService {
   }
   /* VALIDATION */
   private datesValidationForbidden = (): boolean => {
-    if (this.utilsService.isNull(this.forbiddenReq.zoneId)) {
+    if (MathS.isNull(this.forbiddenReq.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (this.utilsService.isNull(this.forbiddenReq.fromDate)) {
+    if (MathS.isNull(this.forbiddenReq.fromDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
-    if (this.utilsService.isNull(this.forbiddenReq.toDate)) {
+    if (MathS.isNull(this.forbiddenReq.toDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
@@ -131,7 +132,7 @@ export class ForbiddenService {
   setDynamicPartRanges = (dataSource: IForbiddenManager[]) => {
     dataSource.forEach(item => {
       if (item.gisAccuracy)
-        item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+        item.gisAccuracy = MathS.getRange(item.gisAccuracy)
     })
   }
   customizeSelectedColumns = (_selectCols: any) => {

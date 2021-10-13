@@ -9,6 +9,7 @@ import { SearchService } from 'services/search.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 import { Search } from 'src/app/classes/search';
 
 @Component({
@@ -80,7 +81,7 @@ export class MoshtarakComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
+    if (!MathS.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
       this.dataSource = this.closeTabService.saveDataForSearchMoshtarakin;
       this.converts();
     }

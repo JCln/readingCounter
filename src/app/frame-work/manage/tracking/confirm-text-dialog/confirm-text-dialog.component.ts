@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EN_messages } from 'interfaces/enums.enum';
 import { UtilsService } from 'services/utils.service';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-confirm-text-dialog',
@@ -19,11 +20,11 @@ export class ConfirmTextDialogComponent {
   ) { }
 
   public confirm() {
-    if (this.utilsService.isNullTextValidation(this.userInputText)) {
+    if (MathS.isNullTextValidation(this.userInputText)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_desc);
       return;
     }
-    if (!this.utilsService.isLowerThanMinLength(this.userInputText, 6)) {
+    if (!MathS.isLowerThanMinLength(this.userInputText, 6)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalidCounts);
       return;
     }
@@ -33,7 +34,7 @@ export class ConfirmTextDialogComponent {
   }
   public confirmWithoutText = () => {
     if (this.data.isSelectableDate) {
-      if (this.utilsService.isNull(this._selectedDate)) {
+      if (MathS.isNull(this._selectedDate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
         return;
       }

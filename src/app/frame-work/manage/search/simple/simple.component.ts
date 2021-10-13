@@ -8,6 +8,7 @@ import { InteractionService } from 'services/interaction.service';
 import { SearchService } from 'services/search.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -60,7 +61,7 @@ export class SimpleComponent implements OnInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchSimple)) {
+    if (!MathS.isNull(this.closeTabService.saveDataForSearchSimple)) {
       this.dataSource = this.closeTabService.saveDataForSearchSimple;
       this.converts();
     }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EN_messages } from 'interfaces/enums.enum';
 import { UtilsService } from 'services/utils.service';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-rd-edit-dg',
@@ -53,50 +54,50 @@ export class RdEditDgComponent {
     })
   }
   private percentValidate = (): boolean => {
-    if (!this.utilsService.persentCheck(this.form.value.defaultAlalHesab))
+    if (!MathS.persentCheck(this.form.value.defaultAlalHesab))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.maxAlalHesab))
+    if (!MathS.persentCheck(this.form.value.maxAlalHesab))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.minAlalHesab))
+    if (!MathS.persentCheck(this.form.value.minAlalHesab))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.defaultImagePercent))
+    if (!MathS.persentCheck(this.form.value.defaultImagePercent))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.maxImagePercent))
+    if (!MathS.persentCheck(this.form.value.maxImagePercent))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.minImagePercent))
+    if (!MathS.persentCheck(this.form.value.minImagePercent))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.lowConstBoundMaskooni))
+    if (!MathS.persentCheck(this.form.value.lowConstBoundMaskooni))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.lowPercentBoundMaskooni))
+    if (!MathS.persentCheck(this.form.value.lowPercentBoundMaskooni))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.highConstBoundMaskooni))
+    if (!MathS.persentCheck(this.form.value.highConstBoundMaskooni))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.highPercentBoundMaskooni))
+    if (!MathS.persentCheck(this.form.value.highPercentBoundMaskooni))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.lowConstBoundSaxt))
+    if (!MathS.persentCheck(this.form.value.lowConstBoundSaxt))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.lowPercentBoundSaxt))
+    if (!MathS.persentCheck(this.form.value.lowPercentBoundSaxt))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.highConstBoundSaxt))
+    if (!MathS.persentCheck(this.form.value.highConstBoundSaxt))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.highPercentBoundSaxt))
+    if (!MathS.persentCheck(this.form.value.highPercentBoundSaxt))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.lowConstZarfiatBound))
+    if (!MathS.persentCheck(this.form.value.lowConstZarfiatBound))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.lowPercentZarfiatBound))
+    if (!MathS.persentCheck(this.form.value.lowPercentZarfiatBound))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.highConstZarfiatBound))
+    if (!MathS.persentCheck(this.form.value.highConstZarfiatBound))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.highPercentZarfiatBound))
+    if (!MathS.persentCheck(this.form.value.highPercentZarfiatBound))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.lowPercentRateBoundNonMaskooni))
+    if (!MathS.persentCheck(this.form.value.lowPercentRateBoundNonMaskooni))
       return false;
-    if (!this.utilsService.persentCheck(this.form.value.highPercentRateBoundNonMaskooni))
+    if (!MathS.persentCheck(this.form.value.highPercentRateBoundNonMaskooni))
       return false;
     return true;
   }
   private zoneValidate = (): boolean => {
-    if (this.utilsService.isNull(this.form.value.zoneId))
+    if (MathS.isNull(this.form.value.zoneId))
       return false;
     return true;
   }

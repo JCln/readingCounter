@@ -6,18 +6,19 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENImportDatas,
-    IImportDataResponse,
-    IImportDynamicDefault,
-    IImportSimafaBatchReq,
-    IImportSimafaReadingProgramsReq,
-    IImportSimafaSingleReq,
-    IReadingProgramRes,
+  ENImportDatas,
+  IImportDataResponse,
+  IImportDynamicDefault,
+  IImportSimafaBatchReq,
+  IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
+  IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
+import { MathS } from '../classes/math-s';
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { Converter } from './../classes/converter';
 import { UtilsService } from './utils.service';
@@ -192,7 +193,7 @@ export class ImportDynamicService {
     this[variable].toDate = $event;
   }
   persentCheck = (val: number): boolean => {
-    return this.utilsService.persentCheck(val);
+    return MathS.persentCheck(val);
   }
   persentOfalalHesab = (): boolean => {
     if (this.persentCheck(this.importDynamicValue.alalHesabPercent))
@@ -205,14 +206,14 @@ export class ImportDynamicService {
     return false;
   }
   validationOnNull = (val: any): boolean => {
-    if (this.utilsService.isNull(val))
+    if (MathS.isNull(val))
       return false;
     return true;
   }
   noRouteToImportMessage = () => this.utilsService.snackBarMessageWarn(EN_messages.import_NoRouteAvailable);
 
   private NANValidation = (sth: string, message?: EN_messages): boolean => {
-    if (this.utilsService.isNaN(sth)) {
+    if (MathS.isNaN(sth)) {
       if (message)
         this.utilsService.snackBarMessageWarn(message);
       return false;
@@ -221,13 +222,13 @@ export class ImportDynamicService {
   }
   private validationNull = (object: any): boolean => {
     if (object.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNull(object.zoneId)) {
+      if (MathS.isNull(object.zoneId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }
     if (object.hasOwnProperty('listNumber')) {
-      if (this.utilsService.isNull(object.listNumber)) {
+      if (MathS.isNull(object.listNumber)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_listNumber);
         return false;
       }
@@ -267,7 +268,7 @@ export class ImportDynamicService {
   }
   checkVertification = (val: IImportDynamicDefault, _isOrderByDate: boolean): boolean => {
     this.importDynamicValue = val;
-    if (!this.utilsService.isSameLength(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
+    if (!MathS.isSameLength(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.sameLength_eshterak);
       return false;
     }
@@ -277,11 +278,11 @@ export class ImportDynamicService {
     if (!this.NANValidation(this.importDynamicValue.fromEshterak, EN_messages.format_invalid_to_eshterak))
       return false;
 
-    if (!this.utilsService.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 15)) {
+    if (!MathS.lengthControl(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak, 5, 15)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
       return false;
     }
-    if (!this.utilsService.isFromLowerThanToByString(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
+    if (!MathS.isFromLowerThanToByString(this.importDynamicValue.fromEshterak, this.importDynamicValue.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
       return false;
     }
@@ -308,27 +309,27 @@ export class ImportDynamicService {
     return true;
   }
   checkSimafaVertification = (val: IImportSimafaReadingProgramsReq): boolean => {
-    if (this.utilsService.isNull(val.zoneId)) {
+    if (MathS.isNull(val.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (this.utilsService.isNull(val.readingPeriodId)) {
+    if (MathS.isNull(val.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
-    if (this.utilsService.isNull(val.year)) {
+    if (MathS.isNull(val.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
-    if (this.utilsService.isNaN(val.zoneId)) {
+    if (MathS.isNaN(val.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (this.utilsService.isNaN(val.readingPeriodId)) {
+    if (MathS.isNaN(val.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
-    if (this.utilsService.isNaN(val.year)) {
+    if (MathS.isNaN(val.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
@@ -336,36 +337,36 @@ export class ImportDynamicService {
     return true;
   }
   validateSimafaBatch = (val: IImportSimafaBatchReq): boolean => {
-    if (this.utilsService.isNull(val.zoneId)) {
+    if (MathS.isNull(val.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNull(val.readingPeriodId)) {
+    if (MathS.isNull(val.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNull(val.year)) {
+    if (MathS.isNull(val.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNull(val.readingProgramId)) {
+    if (MathS.isNull(val.readingProgramId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNull(val.fragmentMasterId)) {
+    if (MathS.isNull(val.fragmentMasterId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
 
-    if (this.utilsService.isNaN(val.zoneId)) {
+    if (MathS.isNaN(val.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNaN(val.readingPeriodId)) {
+    if (MathS.isNaN(val.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNaN(val.year)) {
+    if (MathS.isNaN(val.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
@@ -390,43 +391,43 @@ export class ImportDynamicService {
   }
   checkSimafaSingleVertification = (val: IImportSimafaSingleReq): boolean => {
     // call support group because inserted in previous section and readonly
-    if (this.utilsService.isNull(val.readingProgramId)) {
+    if (MathS.isNull(val.readingProgramId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNull(val.zoneId)) {
+    if (MathS.isNull(val.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNull(val.year)) {
+    if (MathS.isNull(val.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNull(val.readingPeriodId)) {
+    if (MathS.isNull(val.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNull(val.counterReaderId)) {
+    if (MathS.isNull(val.counterReaderId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_reader);
       return false;
     }
-    if (this.utilsService.isNaN(val.zoneId)) {
+    if (MathS.isNaN(val.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNaN(val.readingPeriodId)) {
+    if (MathS.isNaN(val.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
-    if (this.utilsService.isNaN(val.year)) {
+    if (MathS.isNaN(val.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNaN(val.alalHesabPercent)) {
+    if (MathS.isNaN(val.alalHesabPercent)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_alalhesab);
       return false;
     }
-    if (this.utilsService.isNaN(val.imagePercent)) {
+    if (MathS.isNaN(val.imagePercent)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_imagePercent);
       return false;
     }
@@ -469,11 +470,11 @@ export class ImportDynamicService {
     return true;
   }
   verificationAssessAdd = (assessData: IAssessAddDtoSimafa): boolean => {
-    if (this.utilsService.isNull(assessData.onOffLoadIds[0])) {
+    if (MathS.isNull(assessData.onOffLoadIds[0])) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_assessAdd);
       return false;
     }
-    if (this.utilsService.isNull(assessData.counterReaderId)) {
+    if (MathS.isNull(assessData.counterReaderId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_reader);
       return false;
     }
@@ -668,9 +669,9 @@ export class ImportDynamicService {
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
       if (item.newRate > 0)
-        item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
+        item.newRate = parseFloat(MathS.getRange(item.newRate))
       if (item.gisAccuracy)
-        item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+        item.gisAccuracy = MathS.getRange(item.gisAccuracy)
     })
   }
   makeHadPicturesToBoolean = (dataSource: any) => {

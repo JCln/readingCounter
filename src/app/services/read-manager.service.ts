@@ -4,6 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 
+import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { ICounterState, ITextOutput } from '../Interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -146,32 +147,32 @@ export class ReadManagerService {
   }
   /* VERIFICATION & VALIDATION */
   counterStateVertification = (dataSource: ICounterState): boolean => {
-    if (this.utilsService.isNull(dataSource.zoneId)) {
+    if (MathS.isNull(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (this.utilsService.isNull(dataSource.clientOrder)) {
+    if (MathS.isNull(dataSource.clientOrder)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_clientOrder);
       return false;
     }
-    if (this.utilsService.isNullZero(dataSource.moshtarakinId)) {
+    if (MathS.isNullZero(dataSource.moshtarakinId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_moshtarakinId);
       return false;
     }
-    if (this.utilsService.isNull(dataSource.title)) {
+    if (MathS.isNull(dataSource.title)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
       return false;
     }
 
-    if (this.utilsService.isNaN(dataSource.zoneId)) {
+    if (MathS.isNaN(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNaN(dataSource.clientOrder)) {
+    if (MathS.isNaN(dataSource.clientOrder)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNaN(dataSource.moshtarakinId)) {
+    if (MathS.isNaN(dataSource.moshtarakinId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }

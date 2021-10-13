@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
+import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -46,15 +47,15 @@ export class ApkService {
     });
   }
   isNull = (): boolean => {
-    if (this.utilsService.isNull(this.desc.versionName)) {
+    if (MathS.isNull(this.desc.versionName)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_versionName, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
-    if (this.utilsService.isNull(this.desc.versionCode)) {
+    if (MathS.isNull(this.desc.versionCode)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_versionCode, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
-    if (this.utilsService.isNull(this.fileForm)) {
+    if (MathS.isNull(this.fileForm)) {
       this.snackWrapperService.openSnackBar(EN_messages.should_insert_APK, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }

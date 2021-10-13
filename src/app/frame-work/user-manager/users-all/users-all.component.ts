@@ -8,6 +8,7 @@ import { InteractionService } from 'services/interaction.service';
 import { UsersAllService } from 'services/users-all.service';
 import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-users-all',
@@ -44,7 +45,7 @@ export class UsersAllComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.utilsService.isNull(this.closeTabService.saveDataForAllUsers)) {
+    if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
       this.dataSource = await this.usersAllService.connectToServer(ENInterfaces.userGET);
       this.closeTabService.saveDataForAllUsers = this.dataSource;
     }

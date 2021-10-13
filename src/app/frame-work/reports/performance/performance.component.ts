@@ -8,6 +8,7 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-performance',
@@ -79,7 +80,7 @@ export class PerformanceComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingAnalyzeByParam, this.readingReportManagerService.anlzPrfmReq);
-    if (this.utilsService.isNull(this.dataSource))
+    if (MathS.isNull(this.dataSource))
       return;
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.insertSelectedColumns();
@@ -96,13 +97,13 @@ export class PerformanceComponent extends FactoryONE {
   }
   private setGetRanges = () => {
     this.dataSource.forEach(item => {
-      item.average = parseFloat(this.utilsService.getRange(item.average));
-      item.max = parseFloat(this.utilsService.getRange(item.max));
-      item.median = parseFloat(this.utilsService.getRange(item.median));
-      item.min = parseFloat(this.utilsService.getRange(item.min));
-      item.mode = parseFloat(this.utilsService.getRange(item.mode));
-      item.variance = parseFloat(this.utilsService.getRange(item.variance));
-      item.standardDeviation = parseFloat(this.utilsService.getRange(item.standardDeviation));
+      item.average = parseFloat(MathS.getRange(item.average));
+      item.max = parseFloat(MathS.getRange(item.max));
+      item.median = parseFloat(MathS.getRange(item.median));
+      item.min = parseFloat(MathS.getRange(item.min));
+      item.mode = parseFloat(MathS.getRange(item.mode));
+      item.variance = parseFloat(MathS.getRange(item.variance));
+      item.standardDeviation = parseFloat(MathS.getRange(item.standardDeviation));
     })
   }
 }

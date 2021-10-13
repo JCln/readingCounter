@@ -15,6 +15,7 @@ import { InteractionService } from 'services/interaction.service';
 import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { MathS } from 'src/app/classes/math-s';
 
 
 declare let L;
@@ -190,7 +191,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private getRouteParams = () => {
     this.onShowCounterReader.distance = this.route.snapshot.paramMap.get('distance');
 
-    if (!this.utilsService.isNull(this.onShowCounterReader.distance)) {
+    if (!MathS.isNull(this.onShowCounterReader.distance)) {
       this.classWrapper();
       return;
     }
@@ -322,7 +323,7 @@ export class MapComponent implements OnInit, OnDestroy {
       );
   }
   private findMyLocationLeaflet = (e) => {
-    const radius = parseFloat(this.utilsService.getRange(e.accuracy));
+    const radius = parseFloat(MathS.getRange(e.accuracy));
     L.marker(e.latlng, { icon: iconSimple }).addTo(this.layerGroup)
       .bindPopup("شما در حدود تقریبی " + radius + " متر از این مکان قرار دارید").openPopup();
 

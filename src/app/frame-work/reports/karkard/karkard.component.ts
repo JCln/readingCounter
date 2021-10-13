@@ -9,6 +9,7 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -108,7 +109,7 @@ export class KarkardComponent extends FactoryONE {
   }
   private setGetRanges = () => {
     this.dataSource.forEach(item => {
-      item.duration = parseFloat(this.utilsService.getRange(item.duration));
+      item.duration = parseFloat(MathS.getRange(item.duration));
     })
   }
 

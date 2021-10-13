@@ -11,6 +11,7 @@ import { SearchService } from 'services/search.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 import { SearchDgComponentComponent } from './search-dg-component/search-dg-component.component';
 
@@ -81,12 +82,12 @@ export class ProComponent extends FactoryONE {
       // this.nullSavedSource();
       this.connectToServer();
     }
-    if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchPro)) {
+    if (!MathS.isNull(this.closeTabService.saveDataForSearchPro)) {
       this.dataSource = this.closeTabService.saveDataForSearchPro;
       this.converts();
       return;
     }
-    if (this.utilsService.isNull(this.searchReq)) {
+    if (MathS.isNull(this.searchReq)) {
       this.showSearchOptionsDialog();
       this.toDefaultVals();
     }

@@ -11,6 +11,7 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
+import { MathS } from '../classes/math-s';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from '../Interfaces/ireports';
 
 
@@ -310,7 +311,7 @@ export class ReadingReportManagerService {
     console.log(method, val);
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
-        if (this.utilsService.isNull(res))
+        if (MathS.isNull(res))
           this.emptyMessage();
         resolve(res)
       })
@@ -319,7 +320,7 @@ export class ReadingReportManagerService {
   postRRManager = (method: ENInterfaces, body: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, body).subscribe((res) => {
-        if (this.utilsService.isNull(res))
+        if (MathS.isNull(res))
           this.emptyMessage();
         resolve(res)
       })
@@ -328,7 +329,7 @@ export class ReadingReportManagerService {
   postRRManagerOnMap = (method: ENInterfaces, val: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
-        if (this.utilsService.isNull(res))
+        if (MathS.isNull(res))
           this.emptyMessage();
         resolve(res)
       })
@@ -356,26 +357,26 @@ export class ReadingReportManagerService {
 
   private datesValidation = (value: object): boolean => {
     if (value.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNull(value['zoneId'])) {
+      if (MathS.isNull(value['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }
     if (value.hasOwnProperty('fromDate')) {
-      if (this.utilsService.isNull(value['fromDate'])) {
+      if (MathS.isNull(value['fromDate'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
     }
     if (value.hasOwnProperty('toDate')) {
-      if (this.utilsService.isNull(value['toDate'])) {
+      if (MathS.isNull(value['toDate'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
       }
     }
     if (value.hasOwnProperty('isCounterState')) {
       if (this.gisReq.isCounterState === true) {
-        if (this.utilsService.isNull(this.gisReq.counterStateId)) {
+        if (MathS.isNull(this.gisReq.counterStateId)) {
           this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
           return false;
         }
@@ -385,17 +386,17 @@ export class ReadingReportManagerService {
   }
   private periodValidations = (value: object): boolean => {
     if (value.hasOwnProperty('zoneId'))
-      if (this.utilsService.isNull(value['zoneId'])) {
+      if (MathS.isNull(value['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     if (value.hasOwnProperty('readingPeriodId'))
-      if (this.utilsService.isNull(value['readingPeriodId'])) {
+      if (MathS.isNull(value['readingPeriodId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
         return false;
       }
     if (value.hasOwnProperty('year'))
-      if (this.utilsService.isNull(value['year'])) {
+      if (MathS.isNull(value['year'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
         return false;
       }
@@ -407,7 +408,7 @@ export class ReadingReportManagerService {
       return false;
     }
     if (readingReportGISReq.isCounterState === true) {
-      if (this.utilsService.isNull(readingReportGISReq.counterStateId)) {
+      if (MathS.isNull(readingReportGISReq.counterStateId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_counterState);
         return false;
       }

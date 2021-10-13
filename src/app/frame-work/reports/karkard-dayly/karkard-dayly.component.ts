@@ -7,6 +7,7 @@ import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -94,7 +95,7 @@ export class KarkardDaylyComponent extends FactoryONE {
   }
   private setGetRanges = () => {
     this.dataSource.forEach(item => {
-      item.duration = parseFloat(this.utilsService.getRange(item.duration));
+      item.duration = parseFloat(MathS.getRange(item.duration));
     })
   }
 }

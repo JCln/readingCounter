@@ -7,6 +7,7 @@ import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'inte
 import { IReadingReportReq } from 'interfaces/ireports';
 
 import { Converter } from '../classes/converter';
+import { MathS } from '../classes/math-s';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
@@ -80,19 +81,19 @@ export class DataMiningAnalysesService {
   /* VALIDATIONS AND VERIFICATIONS*/
   private datesValidation = (value: object): boolean => {
     if (value.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNull(value['zoneId'])) {
+      if (MathS.isNull(value['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }
     if (value.hasOwnProperty('fromDate')) {
-      if (this.utilsService.isNull(value['fromDate'])) {
+      if (MathS.isNull(value['fromDate'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
     }
     if (value.hasOwnProperty('toDate')) {
-      if (this.utilsService.isNull(value['toDate'])) {
+      if (MathS.isNull(value['toDate'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
       }
@@ -101,17 +102,17 @@ export class DataMiningAnalysesService {
   }
   private periodValidations = (value: object): boolean => {
     if (value.hasOwnProperty('zoneId'))
-      if (this.utilsService.isNull(value['zoneId'])) {
+      if (MathS.isNull(value['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     if (value.hasOwnProperty('readingPeriodId'))
-      if (this.utilsService.isNull(value['readingPeriodId'])) {
+      if (MathS.isNull(value['readingPeriodId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
         return false;
       }
     if (value.hasOwnProperty('year'))
-      if (this.utilsService.isNull(value['year'])) {
+      if (MathS.isNull(value['year'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
         return false;
       }

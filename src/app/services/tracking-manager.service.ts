@@ -10,6 +10,7 @@ import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'inter
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { Converter } from 'src/app/classes/converter';
 
+import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IFollowUpHistory } from '../Interfaces/isearchs';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../Interfaces/itrackings';
@@ -316,7 +317,7 @@ export class TrackingManagerService {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
-    if (!this.utilsService.isNull(this.offloadZoneIdDictionary))
+    if (!MathS.isNull(this.offloadZoneIdDictionary))
       return this.offloadZoneIdDictionary;
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId).subscribe(res => {
@@ -359,7 +360,7 @@ export class TrackingManagerService {
   /*VALIDATION */
   private showWarnMessage = (message: string) => this.utilsService.snackBarMessageWarn(message);
   isValidationNull = (elem: any): boolean => {
-    if (this.utilsService.isNull(elem))
+    if (MathS.isNull(elem))
       return true;
     return false;
   }
@@ -372,7 +373,7 @@ export class TrackingManagerService {
       this.showWarnMessage(EN_messages.insert_date);
       return false;
     }
-    if (this.utilsService.isNullZero(object.modifyType)) {
+    if (MathS.isNullZero(object.modifyType)) {
       this.showWarnMessage(EN_messages.insert_modify_type);
       return false;
     }
@@ -380,7 +381,7 @@ export class TrackingManagerService {
       this.showWarnMessage(EN_messages.format_invalid_counterNumber);
       return false;
     }
-    if (!this.utilsService.lengthControl(object.counterNumber, object.counterNumber, 1, 7)) {
+    if (!MathS.lengthControl(object.counterNumber, object.counterNumber, 1, 7)) {
       this.showWarnMessage(EN_messages.format_invalid_counterNumberTimes);
       return false;
     }
@@ -391,11 +392,11 @@ export class TrackingManagerService {
       this.showWarnMessage(EN_messages.insert_trackNumber);
       return false;
     }
-    if (this.utilsService.isNaN(id)) {
+    if (MathS.isNaN(id)) {
       this.showWarnMessage(EN_messages.format_invalid_trackNumber);
       return false;
     }
-    if (!this.utilsService.isLowerThanMinLength(id, 2) || !this.utilsService.isLowerThanMaxLength(id, 10)) {
+    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
       this.showWarnMessage(EN_messages.format_invalid_trackNumbersLength);
       return false;
     }
@@ -449,8 +450,8 @@ export class TrackingManagerService {
     this.utilsService.routeTo('/wr/m/s/fwu');
   }
   setGetRanges = (dataSource: IOffLoadPerDay) => {
-    dataSource.overalDuration = parseFloat(this.utilsService.getRange(dataSource.overalDuration));
-    dataSource.overalDistance = parseFloat(this.utilsService.getRange(dataSource.overalDistance));
+    dataSource.overalDuration = parseFloat(MathS.getRange(dataSource.overalDuration));
+    dataSource.overalDistance = parseFloat(MathS.getRange(dataSource.overalDistance));
   }
 
 }

@@ -6,6 +6,7 @@ import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
+import { MathS } from '../classes/math-s';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { CloseTabService } from './close-tab.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -127,9 +128,9 @@ export class ListManagerService {
     this.saveTo === 0 ? this.closeTabService.saveDataForLMAll = null : this.closeTabService.saveDataForLMAll_extra = null
   }
   getLMAll = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
-    if (this.readingListGUID === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
+    if (this.readingListGUID === trackingId && !MathS.isNull(this.closeTabService.saveDataForLMAll))
       return this.closeTabService.saveDataForLMAll;
-    if (this.readingListGUID_extra === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll_extra))
+    if (this.readingListGUID_extra === trackingId && !MathS.isNull(this.closeTabService.saveDataForLMAll_extra))
       return this.closeTabService.saveDataForLMAll_extra;
 
     if (this.whereToSave() == 0) {
@@ -208,13 +209,13 @@ export class ListManagerService {
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
       if (item.newRate > 0)
-        item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
+        item.newRate = parseFloat(MathS.getRange(item.newRate))
       if (item.gisAccuracy)
-        item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+        item.gisAccuracy = MathS.getRange(item.gisAccuracy)
       if (item.x)
-        item.x = this.utilsService.getRange(item.x)
+        item.x = MathS.getRange(item.x)
       if (item.y)
-        item.y = this.utilsService.getRange(item.y)
+        item.y = MathS.getRange(item.y)
     })
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {

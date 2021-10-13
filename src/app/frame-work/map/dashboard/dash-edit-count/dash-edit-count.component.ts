@@ -3,6 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardEditCount } from 'interfaces/idashboard-map';
 import { DashboardService } from 'services/dashboard.service';
 import { UtilsService } from 'services/utils.service';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-dash-edit-count',
@@ -25,10 +26,10 @@ export class DashEditCountComponent implements OnInit {
     this.classWrapper();
   }
   setRanges = () => {
-    this.dataSourceEditCount.daily.ratio = +this.utilsService.getRange(this.dataSourceEditCount.daily.ratio);
-    this.dataSourceEditCount.weekly.ratio = +this.utilsService.getRange(this.dataSourceEditCount.weekly.ratio);
-    this.dataSourceEditCount.monthly.ratio = +this.utilsService.getRange(this.dataSourceEditCount.monthly.ratio);
-    this.dataSourceEditCount.yearly.ratio = +this.utilsService.getRange(this.dataSourceEditCount.yearly.ratio);
+    this.dataSourceEditCount.daily.ratio = +MathS.getRange(this.dataSourceEditCount.daily.ratio);
+    this.dataSourceEditCount.weekly.ratio = +MathS.getRange(this.dataSourceEditCount.weekly.ratio);
+    this.dataSourceEditCount.monthly.ratio = +MathS.getRange(this.dataSourceEditCount.monthly.ratio);
+    this.dataSourceEditCount.yearly.ratio = +MathS.getRange(this.dataSourceEditCount.yearly.ratio);
   }
 
 }

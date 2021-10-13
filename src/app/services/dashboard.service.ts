@@ -4,6 +4,7 @@ import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
+import { MathS } from '../classes/math-s';
 import { IAnalyzeRes, IDashboardKarkardTimed, IDashboardReadDaily } from '../Interfaces/idashboard-map';
 
 @Injectable({
@@ -99,6 +100,6 @@ export class DashboardService {
     return a;
   }
   isNullVals = (dataSource: any) => {
-    return !this.utilsService.isNull(dataSource);
+    return !MathS.isNull(dataSource);
   }
 }

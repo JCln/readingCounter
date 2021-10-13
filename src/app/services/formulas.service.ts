@@ -14,6 +14,7 @@ import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
+import { MathS } from '../classes/math-s';
 import { IAbBahaFormula, ITabsare2Formula } from '../Interfaces/ireads-manager';
 
 @Injectable({
@@ -169,11 +170,11 @@ export class FormulasService {
   }
   /* VALIDATION */
   isNull = (): boolean => {
-    if (this.utilsService.isNull(this.desc.rows)) {
+    if (MathS.isNull(this.desc.rows)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_excelRows, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
-    if (this.utilsService.isNull(this.fileForm)) {
+    if (MathS.isNull(this.fileForm)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_excelFile, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
@@ -194,60 +195,60 @@ export class FormulasService {
     return true;
   }
   validationEditableRow = (dataSource: object): boolean => {
-    if (this.utilsService.isNull(dataSource['id'])) {
+    if (MathS.isNull(dataSource['id'])) {
       this.snackWrapperService.openSnackBar(EN_messages.call_supportGroup, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (this.utilsService.hasOwnProperty(dataSource['zoneId'])) {
-      if (this.utilsService.isNull(dataSource['zoneId'])) {
+      if (MathS.isNull(dataSource['zoneId'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_zone, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['karbariMoshtarakinCode'])) {
-      if (this.utilsService.isNull(dataSource['karbariMoshtarakinCode'])) {
+      if (MathS.isNull(dataSource['karbariMoshtarakinCode'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_karbariMoshtarakinCode, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['fromDate'])) {
-      if (this.utilsService.isNull(dataSource['fromDate'])) {
+      if (MathS.isNull(dataSource['fromDate'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_fromDate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['toDate'])) {
-      if (this.utilsService.isNull(dataSource['toDate'])) {
+      if (MathS.isNull(dataSource['toDate'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_toDate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['fromRate'])) {
-      if (this.utilsService.isNull(dataSource['fromRate'])) {
+      if (MathS.isNull(dataSource['fromRate'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_fromRate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['toRate'])) {
-      if (this.utilsService.isNull(dataSource['toRate'])) {
+      if (MathS.isNull(dataSource['toRate'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_toRate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['abFormula'])) {
-      if (this.utilsService.isNull(dataSource['abFormula'])) {
+      if (MathS.isNull(dataSource['abFormula'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_abFormula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['fazelabFormula'])) {
-      if (this.utilsService.isNull(dataSource['fazelabFormula'])) {
+      if (MathS.isNull(dataSource['fazelabFormula'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_fazelabFormula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['formula'])) {
-      if (this.utilsService.isNull(dataSource['formula'])) {
+      if (MathS.isNull(dataSource['formula'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_formula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
@@ -256,7 +257,7 @@ export class FormulasService {
   }
   validationRate = (dataSource: IAbBahaFormula): boolean => {
 
-    if (!this.utilsService.isFromLowerThanTo(dataSource.fromRate, dataSource.toRate)) {
+    if (!MathS.isFromLowerThanTo(dataSource.fromRate, dataSource.toRate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.lessThan_rate);
       return false;
     }
@@ -264,13 +265,13 @@ export class FormulasService {
   }
   private fromToValidation = (dynamicValue: any): boolean => {
     if (dynamicValue.hasOwnProperty('toDate')) {
-      if (!this.utilsService.lengthControl(dynamicValue.toDate, dynamicValue.toDate, 9, 10)) {
+      if (!MathS.lengthControl(dynamicValue.toDate, dynamicValue.toDate, 9, 10)) {
         this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
         return false;
       }
     }
     if (dynamicValue.hasOwnProperty('fromDate')) {
-      if (!this.utilsService.lengthControl(dynamicValue.fromDate, dynamicValue.fromDate, 9, 10)) {
+      if (!MathS.lengthControl(dynamicValue.fromDate, dynamicValue.fromDate, 9, 10)) {
         this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
         return false;
       }

@@ -17,6 +17,7 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
+import { MathS } from '../classes/math-s';
 import { Search } from '../classes/search';
 import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { FollowUpService } from './follow-up.service';
@@ -322,13 +323,13 @@ export class SearchService {
   /*VALIDATION*/
   private validationNullMosh = (object: ISearchMoshReq): boolean => {
     if (object.hasOwnProperty('searchBy')) {
-      if (this.utilsService.isNull(object.searchBy)) {
+      if (MathS.isNull(object.searchBy)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
         return false;
       }
     }
     if (object.hasOwnProperty('item')) {
-      if (this.utilsService.isNull(object.item)) {
+      if (MathS.isNull(object.item)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
         return false;
       }
@@ -337,19 +338,19 @@ export class SearchService {
   }
   private validationNullPro = (object: ISearchProReportInput): boolean => {
     if (object.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNull(object.zoneId)) {
+      if (MathS.isNull(object.zoneId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }
     if (object.hasOwnProperty('fromDate')) {
-      if (this.utilsService.isNull(object.fromDate)) {
+      if (MathS.isNull(object.fromDate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
     }
     if (object.hasOwnProperty('toDate')) {
-      if (this.utilsService.isNull(object.toDate)) {
+      if (MathS.isNull(object.toDate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
       }
@@ -358,19 +359,19 @@ export class SearchService {
   }
   private validationByReadingPeriod = (object: ISearchProReportInput): boolean => {
     if (object.hasOwnProperty('readingPeriodId')) {
-      if (this.utilsService.isNull(object.readingPeriodId)) {
+      if (MathS.isNull(object.readingPeriodId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
         return false;
       }
     }
     if (object.hasOwnProperty('year')) {
-      if (this.utilsService.isNull(object.year)) {
+      if (MathS.isNull(object.year)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
         return false;
       }
     }
     if (object.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNull(object.zoneId)) {
+      if (MathS.isNull(object.zoneId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
@@ -378,46 +379,46 @@ export class SearchService {
     return true;
   }
   private validationSearchSimpleByPeriod = (object: ISearchSimpleReq): boolean => {
-    if (this.utilsService.isNull(object.readingPeriodId)) {
+    if (MathS.isNull(object.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
-    if (this.utilsService.isNull(object.year)) {
+    if (MathS.isNull(object.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
-    if (this.utilsService.isNull(object.zoneId)) {
+    if (MathS.isNull(object.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (this.utilsService.isNaN(object.zoneId)) {
+    if (MathS.isNaN(object.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNaN(object.year)) {
+    if (MathS.isNaN(object.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-    if (this.utilsService.isNaN(object.readingPeriodId)) {
+    if (MathS.isNaN(object.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
     return true;
   }
   private validateSearchSimpleByDate = (object: ISearchSimpleReq): boolean => {
-    if (this.utilsService.isNull(object.fromDate)) {
+    if (MathS.isNull(object.fromDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
-    if (this.utilsService.isNull(object.toDate)) {
+    if (MathS.isNull(object.toDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
-    if (this.utilsService.isNull(object.zoneId)) {
+    if (MathS.isNull(object.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (this.utilsService.isNaN(object.zoneId)) {
+    if (MathS.isNaN(object.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
@@ -425,7 +426,7 @@ export class SearchService {
   }
   private validationNumbers = (object: ISearchMoshReq): boolean => {
     if (object.hasOwnProperty('searchBy')) {
-      if (this.utilsService.isNaN(object.searchBy)) {
+      if (MathS.isNaN(object.searchBy)) {
         this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
         return false;
       }
@@ -463,13 +464,13 @@ export class SearchService {
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
       if (item.newRate > 0)
-        item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
+        item.newRate = parseFloat(MathS.getRange(item.newRate))
       if (item.gisAccuracy)
-        item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+        item.gisAccuracy = MathS.getRange(item.gisAccuracy)
       if (item.x)
-        item.x = this.utilsService.getRange(item.x)
+        item.x = MathS.getRange(item.x)
       if (item.y)
-        item.y = this.utilsService.getRange(item.y)
+        item.y = MathS.getRange(item.y)
     })
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {

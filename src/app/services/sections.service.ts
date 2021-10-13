@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { EN_messages } from 'interfaces/enums.enum';
 import { UtilsService } from 'services/utils.service';
 
+import { MathS } from '../classes/math-s';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,124 +18,124 @@ export class SectionsService {
 
   private sectionsNullVertificate = (): boolean => {
     if (this.dynamicValue.hasOwnProperty('id')) {
-      if (this.utilsService.isNull(this.dynamicValue.id))
+      if (MathS.isNull(this.dynamicValue.id))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('title')) {
-      if (this.utilsService.isNull(this.dynamicValue.title))
+      if (MathS.isNull(this.dynamicValue.title))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('provinceId')) {
-      if (this.utilsService.isNull(this.dynamicValue.provinceId))
+      if (MathS.isNull(this.dynamicValue.provinceId))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('countryId')) {
-      if (this.utilsService.isNull(this.dynamicValue.countryId))
+      if (MathS.isNull(this.dynamicValue.countryId))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('regionId')) {
-      if (this.utilsService.isNull(this.dynamicValue.regionId))
+      if (MathS.isNull(this.dynamicValue.regionId))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('zoneId')) {
-      if (this.utilsService.isNull(this.dynamicValue.zoneId))
+      if (MathS.isNull(this.dynamicValue.zoneId))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('logicalOrder')) {
-      if (this.utilsService.isNull(this.dynamicValue.logicalOrder))
+      if (MathS.isNull(this.dynamicValue.logicalOrder))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('govermentalCode')) {
-      if (this.utilsService.isNull(this.dynamicValue.govermentalCode))
+      if (MathS.isNull(this.dynamicValue.govermentalCode))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('fromEshterak')) {
-      if (this.utilsService.isNull(this.dynamicValue.fromEshterak))
+      if (MathS.isNull(this.dynamicValue.fromEshterak))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('toEshterak')) {
-      if (this.utilsService.isNull(this.dynamicValue.toEshterak))
+      if (MathS.isNull(this.dynamicValue.toEshterak))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('fromRadif')) {
-      if (this.utilsService.isNull(this.dynamicValue.fromRadif))
+      if (MathS.isNull(this.dynamicValue.fromRadif))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('toRadif')) {
-      if (this.utilsService.isNull(this.dynamicValue.toRadif))
+      if (MathS.isNull(this.dynamicValue.toRadif))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('host')) {
-      if (this.utilsService.isNull(this.dynamicValue.host))
+      if (MathS.isNull(this.dynamicValue.host))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('dbUserName')) {
-      if (this.utilsService.isNull(this.dynamicValue.dbUserName))
+      if (MathS.isNull(this.dynamicValue.dbUserName))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('dbPassword')) {
-      if (this.utilsService.isNull(this.dynamicValue.dbPassword))
+      if (MathS.isNull(this.dynamicValue.dbPassword))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('dbInitialCatalog')) {
-      if (this.utilsService.isNull(this.dynamicValue.dbInitialCatalog))
+      if (MathS.isNull(this.dynamicValue.dbInitialCatalog))
         return false;
     }
     // periods
     if (this.dynamicValue.hasOwnProperty('moshtarakinId')) {
-      if (this.utilsService.isNull(this.dynamicValue.moshtarakinId))
+      if (MathS.isNull(this.dynamicValue.moshtarakinId))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('readingPeriodKindId')) {
-      if (this.utilsService.isNull(this.dynamicValue.readingPeriodKindId))
+      if (MathS.isNull(this.dynamicValue.readingPeriodKindId))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('clientOrder')) {
-      if (this.utilsService.isNull(this.dynamicValue.clientOrder))
+      if (MathS.isNull(this.dynamicValue.clientOrder))
         return false;
     }
     // 
     // formulas
     if (this.dynamicValue.hasOwnProperty('karbariMoshtarakinCode')) {
-      if (this.utilsService.isNull(this.dynamicValue.karbariMoshtarakinCode))
+      if (MathS.isNull(this.dynamicValue.karbariMoshtarakinCode))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('fromDate')) {
-      if (this.utilsService.isNull(this.dynamicValue.fromDate))
+      if (MathS.isNull(this.dynamicValue.fromDate))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('toDate')) {
-      if (this.utilsService.isNull(this.dynamicValue.toDate))
+      if (MathS.isNull(this.dynamicValue.toDate))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('fromRate')) {
-      if (this.utilsService.isNull(this.dynamicValue.fromRate))
+      if (MathS.isNull(this.dynamicValue.fromRate))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('toRate')) {
-      if (this.utilsService.isNull(this.dynamicValue.toRate))
+      if (MathS.isNull(this.dynamicValue.toRate))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('abFormula')) {
-      if (this.utilsService.isNull(this.dynamicValue.abFormula))
+      if (MathS.isNull(this.dynamicValue.abFormula))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('fazelabFormula')) {
-      if (this.utilsService.isNull(this.dynamicValue.fazelabFormula))
+      if (MathS.isNull(this.dynamicValue.fazelabFormula))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('formula')) {
-      if (this.utilsService.isNull(this.dynamicValue.formula))
+      if (MathS.isNull(this.dynamicValue.formula))
         return false;
     }
     // users        
     if (this.dynamicValue.hasOwnProperty('titleUnicode')) {
-      if (this.utilsService.isNull(this.dynamicValue.titleUnicode))
+      if (MathS.isNull(this.dynamicValue.titleUnicode))
         return false;
     }
     //   // reading managers
     if (this.dynamicValue.hasOwnProperty('itemTitle')) {
-      if (this.utilsService.isNull(this.dynamicValue.itemTitle))
+      if (MathS.isNull(this.dynamicValue.itemTitle))
         return false;
     }
 
@@ -142,21 +144,21 @@ export class SectionsService {
   private fromToValidation = (): boolean => {
     if (this.dynamicValue.hasOwnProperty('toEshterak')) {
       const a = this.dynamicValue;
-      if (!this.utilsService.lengthControl(a.fromEshterak, a.toEshterak, 5, 15)) {
+      if (!MathS.lengthControl(a.fromEshterak, a.toEshterak, 5, 15)) {
         this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
         return false;
       }
     }
     if (this.dynamicValue.hasOwnProperty('toDate')) {
       const a = this.dynamicValue;
-      if (!this.utilsService.lengthControl(a.toDate, a.toDate, 9, 10)) {
+      if (!MathS.lengthControl(a.toDate, a.toDate, 9, 10)) {
         this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
         return false;
       }
     }
     if (this.dynamicValue.hasOwnProperty('fromDate')) {
       const a = this.dynamicValue;
-      if (!this.utilsService.lengthControl(a.fromDate, a.fromDate, 9, 10)) {
+      if (!MathS.lengthControl(a.fromDate, a.fromDate, 9, 10)) {
         this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
         return false;
       }
@@ -166,16 +168,16 @@ export class SectionsService {
   private isFromLowerThanTo = (): boolean => {
     if (this.dynamicValue.hasOwnProperty('toEshterak')) {
       const a = this.dynamicValue;
-      if (!this.utilsService.isFromLowerThanTo(a.fromEshterak, a.toEshterak)) {
+      if (!MathS.isFromLowerThanTo(a.fromEshterak, a.toEshterak)) {
         this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
         return false;
       }
     }
     if (this.dynamicValue.hasOwnProperty('toRate')) {
       const a = this.dynamicValue;
-      console.log(this.utilsService.isFromLowerThanTo(a.fromRate, a.toRate));
+      console.log(MathS.isFromLowerThanTo(a.fromRate, a.toRate));
 
-      if (!this.utilsService.isFromLowerThanTo(a.fromRate, a.toRate)) {
+      if (!MathS.isFromLowerThanTo(a.fromRate, a.toRate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.lessThan_rate);
         return false;
       }
@@ -187,23 +189,23 @@ export class SectionsService {
     console.log(this.dynamicValue.endIndex);
 
     if (this.dynamicValue.hasOwnProperty('endIndex')) {
-      if (this.utilsService.isNaN(this.dynamicValue.endIndex))
+      if (MathS.isNaN(this.dynamicValue.endIndex))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('startIndex')) {
-      if (this.utilsService.isNaN(this.dynamicValue.startIndex))
+      if (MathS.isNaN(this.dynamicValue.startIndex))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('length')) {
-      if (this.utilsService.isNaN(this.dynamicValue['length']))
+      if (MathS.isNaN(this.dynamicValue['length']))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('fromEshterak')) {
-      if (this.utilsService.isNaN(this.dynamicValue['fromEshterak']))
+      if (MathS.isNaN(this.dynamicValue['fromEshterak']))
         return false;
     }
     if (this.dynamicValue.hasOwnProperty('toEshterak')) {
-      if (this.utilsService.isNaN(this.dynamicValue['toEshterak']))
+      if (MathS.isNaN(this.dynamicValue['toEshterak']))
         return false;
     }
     return true;
@@ -236,161 +238,5 @@ export class SectionsService {
   setNewForm = (v: any) => {
     this.form[v] = new FormControl('');
   }
-  // createFormGroup = (): FormGroup => {
-  //   if (this.dynamicValue.hasOwnProperty('id')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.id))
-  //       this.setNewForm(this.dynamicValue.id);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('title')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.title))
-  //       this.setNewForm(this.dynamicValue.title);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('provinceId')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.provinceId))
-  //       this.setNewForm(this.dynamicValue.provinceId);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('countryId')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.countryId))
-  //       this.setNewForm(this.dynamicValue.countryId);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('regionId')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.regionId))
-  //       this.setNewForm(this.dynamicValue.regionId);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('zoneId')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.zoneId))
-  //       this.setNewForm(this.dynamicValue.zoneId);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('logicalOrder')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.logicalOrder))
-  //       this.setNewForm(this.dynamicValue.logicalOrder);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('govermentalCode')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.govermentalCode))
-  //       this.setNewForm(this.dynamicValue.govermentalCode);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('fromEshterak')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.fromEshterak))
-  //       this.setNewForm(this.dynamicValue.fromEshterak);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('toEshterak')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.toEshterak))
-  //       this.setNewForm(this.dynamicValue.toEshterak);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('fromRadif')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.fromRadif))
-  //       this.setNewForm(this.dynamicValue.fromRadif);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('toRadif')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.toRadif))
-  //       this.setNewForm(this.dynamicValue.toRadif);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('host')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.host))
-  //       this.setNewForm(this.dynamicValue.host);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('dbUserName')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.dbUserName))
-  //       this.setNewForm(this.dynamicValue.dbUserName);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('dbPassword')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.dbPassword))
-  //       this.setNewForm(this.dynamicValue.dbPassword);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('dbInitialCatalog')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.dbInitialCatalog))
-  //       this.setNewForm(this.dynamicValue.dbInitialCatalog);
-  //   }
-  //   // auth level parts
-  //   if (this.dynamicValue.hasOwnProperty('authLevel3Id')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.authLevel3Id))
-  //       this.setNewForm(this.dynamicValue.authLevel3Id);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('value')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.value))
-  //       this.setNewForm(this.dynamicValue.value);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('authLevel1Id')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.authLevel1Id))
-  //       this.setNewForm(this.dynamicValue.authLevel1Id);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('authLevel2Id')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.authLevel2Id))
-  //       this.setNewForm(this.dynamicValue.authLevel2Id);
-  //   }
-  //   // if (this.dynamicValue.hasOwnProperty('route')) {
-  //   //   if (!this.utilsService.isNull(this.dynamicValue.route))
-  //   //     this.setNewForm(this.dynamicValue.route);
-  //   // }
-  //   // 
-  //   // periods
-  //   if (this.dynamicValue.hasOwnProperty('moshtarakinId')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.moshtarakinId))
-  //       this.setNewForm(this.dynamicValue.moshtarakinId);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('readingPeriodKindId')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.readingPeriodKindId))
-  //       this.setNewForm(this.dynamicValue.readingPeriodKindId);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('clientOrder')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.clientOrder))
-  //       this.setNewForm(this.dynamicValue.clientOrder);
-  //   }
-  //   // 
-  //   // formulas
-  //   if (this.dynamicValue.hasOwnProperty('karbariMoshtarakinCode')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.karbariMoshtarakinCode))
-  //       this.setNewForm(this.dynamicValue.karbariMoshtarakinCode);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('fromDate')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.fromDate))
-  //       this.setNewForm(this.dynamicValue.fromDate);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('toDate')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.toDate))
-  //       this.setNewForm(this.dynamicValue.toDate);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('fromRate')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.fromRate))
-  //       this.setNewForm(this.dynamicValue.fromRate);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('toRate')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.toRate))
-  //       this.setNewForm(this.dynamicValue.toRate);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('abFormula')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.abFormula))
-  //       this.setNewForm(this.dynamicValue.abFormula);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('fazelabFormula')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.fazelabFormula))
-  //       this.setNewForm(this.dynamicValue.fazelabFormula);
-  //   }
-
-  //   // reading managers
-  //   if (this.dynamicValue.hasOwnProperty('columnId')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.columnId))
-  //       this.setNewForm(this.dynamicValue.columnId);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('itemTitle')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.itemTitle))
-  //       this.setNewForm(this.dynamicValue.itemTitle);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('startIndex')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.startIndex))
-  //       this.setNewForm(this.dynamicValue.startIndex);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('endIndex')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue.endIndex))
-  //       this.setNewForm(this.dynamicValue.endIndex);
-  //   }
-  //   if (this.dynamicValue.hasOwnProperty('length')) {
-  //     if (!this.utilsService.isNull(this.dynamicValue['length']))
-  //       this.setNewForm(this.dynamicValue.length);
-  //   }
-
-  //   return this.form.value;
-  // }
-
 
 }
