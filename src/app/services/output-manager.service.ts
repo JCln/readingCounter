@@ -30,16 +30,16 @@ export class OutputManagerService {
     return this.dbfOutput;
   }
 
-  checkVertification = (val: IOutputManager): boolean => {
-    if (MathS.isNullTextValidation(val.fromDate)) {
+  checkVertification = (dataSource: IOutputManager): boolean => {
+    if (MathS.isNullTextValidation(dataSource.fromDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
-    if (MathS.isNullTextValidation(val.toDate)) {
+    if (MathS.isNullTextValidation(dataSource.toDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
-    if (MathS.isNull(val.zoneId)) {
+    if (MathS.isNull(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }

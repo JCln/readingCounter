@@ -321,57 +321,57 @@ export class SearchService {
     }
   }
   /*VALIDATION*/
-  private validationNullMosh = (object: ISearchMoshReq): boolean => {
-    if (object.hasOwnProperty('searchBy')) {
-      if (MathS.isNull(object.searchBy)) {
+  private validationNullMosh = (dataSource: ISearchMoshReq): boolean => {
+    if (dataSource.hasOwnProperty('searchBy')) {
+      if (MathS.isNull(dataSource.searchBy)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
         return false;
       }
     }
-    if (object.hasOwnProperty('item')) {
-      if (MathS.isNull(object.item)) {
+    if (dataSource.hasOwnProperty('item')) {
+      if (MathS.isNull(dataSource.item)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
         return false;
       }
     }
     return true;
   }
-  private validationNullPro = (object: ISearchProReportInput): boolean => {
-    if (object.hasOwnProperty('zoneId')) {
-      if (MathS.isNull(object.zoneId)) {
+  private validationNullPro = (dataSource: ISearchProReportInput): boolean => {
+    if (dataSource.hasOwnProperty('zoneId')) {
+      if (MathS.isNull(dataSource.zoneId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }
-    if (object.hasOwnProperty('fromDate')) {
-      if (MathS.isNull(object.fromDate)) {
+    if (dataSource.hasOwnProperty('fromDate')) {
+      if (MathS.isNull(dataSource.fromDate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
     }
-    if (object.hasOwnProperty('toDate')) {
-      if (MathS.isNull(object.toDate)) {
+    if (dataSource.hasOwnProperty('toDate')) {
+      if (MathS.isNull(dataSource.toDate)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
       }
     }
     return true;
   }
-  private validationByReadingPeriod = (object: ISearchProReportInput): boolean => {
-    if (object.hasOwnProperty('readingPeriodId')) {
-      if (MathS.isNull(object.readingPeriodId)) {
+  private validationByReadingPeriod = (dataSource: ISearchProReportInput): boolean => {
+    if (dataSource.hasOwnProperty('readingPeriodId')) {
+      if (MathS.isNull(dataSource.readingPeriodId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
         return false;
       }
     }
-    if (object.hasOwnProperty('year')) {
-      if (MathS.isNull(object.year)) {
+    if (dataSource.hasOwnProperty('year')) {
+      if (MathS.isNull(dataSource.year)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
         return false;
       }
     }
-    if (object.hasOwnProperty('zoneId')) {
-      if (MathS.isNull(object.zoneId)) {
+    if (dataSource.hasOwnProperty('zoneId')) {
+      if (MathS.isNull(dataSource.zoneId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }

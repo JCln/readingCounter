@@ -66,7 +66,7 @@ export class WaterComponent extends FactoryONE {
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          await this.formulasService.postExcelFile('postAbBahaFormulaAddExcel');
+          await this.formulasService.postExcelFile(ENInterfaces.FormulaWaterAddExcel);
           this.refreshTable();
         }
       });

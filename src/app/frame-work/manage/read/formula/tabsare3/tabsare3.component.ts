@@ -66,7 +66,7 @@ export class Tabsare3Component extends FactoryONE {
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {
-          await this.formulasService.postExcelFile('postTabsare3FormulaAddExcel');
+          await this.formulasService.postExcelFile(ENInterfaces.FormulaTabsare3AddExcel);
           this.refreshTable();
         }
       });

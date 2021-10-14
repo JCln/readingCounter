@@ -79,40 +79,40 @@ export class DataMiningAnalysesService {
     });
   }
   /* VALIDATIONS AND VERIFICATIONS*/
-  private datesValidation = (value: object): boolean => {
-    if (value.hasOwnProperty('zoneId')) {
-      if (MathS.isNull(value['zoneId'])) {
+  private datesValidation = (dataSource: object): boolean => {
+    if (dataSource.hasOwnProperty('zoneId')) {
+      if (MathS.isNull(dataSource['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }
-    if (value.hasOwnProperty('fromDate')) {
-      if (MathS.isNull(value['fromDate'])) {
+    if (dataSource.hasOwnProperty('fromDate')) {
+      if (MathS.isNull(dataSource['fromDate'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
       }
     }
-    if (value.hasOwnProperty('toDate')) {
-      if (MathS.isNull(value['toDate'])) {
+    if (dataSource.hasOwnProperty('toDate')) {
+      if (MathS.isNull(dataSource['toDate'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
       }
     }
     return true;
   }
-  private periodValidations = (value: object): boolean => {
-    if (value.hasOwnProperty('zoneId'))
-      if (MathS.isNull(value['zoneId'])) {
+  private periodValidations = (dataSource: object): boolean => {
+    if (dataSource.hasOwnProperty('zoneId'))
+      if (MathS.isNull(dataSource['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
-    if (value.hasOwnProperty('readingPeriodId'))
-      if (MathS.isNull(value['readingPeriodId'])) {
+    if (dataSource.hasOwnProperty('readingPeriodId'))
+      if (MathS.isNull(dataSource['readingPeriodId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
         return false;
       }
-    if (value.hasOwnProperty('year'))
-      if (MathS.isNull(value['year'])) {
+    if (dataSource.hasOwnProperty('year'))
+      if (MathS.isNull(dataSource['year'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
         return false;
       }

@@ -93,12 +93,12 @@ export class FormulasService {
       console.error(error);
     }
   }
-  postFormulaAdd = (method: ENInterfaces, body: object) => {
-    body['fromDate'] = Converter.persianToEngNumbers(body['fromDate']);
-    body['toDate'] = Converter.persianToEngNumbers(body['toDate']);
+  postFormulaAdd = (method: ENInterfaces, dataSource: object) => {
+    dataSource['fromDate'] = Converter.persianToEngNumbers(dataSource['fromDate']);
+    dataSource['toDate'] = Converter.persianToEngNumbers(dataSource['toDate']);
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(method, dataSource).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -106,11 +106,6 @@ export class FormulasService {
     } catch (error) {
       console.error(error);
     }
-  }
-  private postAbBahaFormulaAddExcel = (body: object) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaWaterAddExcel, body).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    })
   }
   postFormulaRemove = (method: ENInterfaces, UUID: string): Promise<any> => {
     try {
@@ -131,31 +126,21 @@ export class FormulasService {
       })
     });
   }
-  private postBudgetFormulaAddExcel = (body: object) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetAddExcel, body).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    })
-  }
-  private postTabsare3FormulaAddExcel = (body: object) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3AddExcel, body).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    });
-  }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
   getKarbariCodeDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
-  postExcelFile = async (method: string) => {
+  postExcelFile = async (method: ENInterfaces) => {
     const formData: FormData = new FormData();
-
-    console.log(this.fileForm);
 
     formData.append('file', this.fileForm[0]);
     formData.append('rows', this.desc.rows);
 
-    await this[method](formData);
+    this.interfaceManagerService.POSTBODY(method, formData).toPromise().then((res: IResponses) => {
+      this.utilsService.snackBarMessageSuccess(res.message);
+    })
   }
   getExcelSample = (method: ENInterfaces): Promise<any> => {
     try {

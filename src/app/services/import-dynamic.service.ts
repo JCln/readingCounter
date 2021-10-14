@@ -308,28 +308,28 @@ export class ImportDynamicService {
     }
     return true;
   }
-  checkSimafaVertification = (val: IImportSimafaReadingProgramsReq): boolean => {
-    if (MathS.isNull(val.zoneId)) {
+  checkSimafaVertification = (dataSource: IImportSimafaReadingProgramsReq): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (MathS.isNull(val.readingPeriodId)) {
+    if (MathS.isNull(dataSource.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
-    if (MathS.isNull(val.year)) {
+    if (MathS.isNull(dataSource.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }
-    if (MathS.isNaN(val.zoneId)) {
+    if (MathS.isNaN(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (MathS.isNaN(val.readingPeriodId)) {
+    if (MathS.isNaN(dataSource.readingPeriodId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
       return false;
     }
-    if (MathS.isNaN(val.year)) {
+    if (MathS.isNaN(dataSource.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
       return false;
     }

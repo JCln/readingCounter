@@ -67,7 +67,7 @@ export class BudgetComponent extends FactoryONE {
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result)
-          this.formulasService.postExcelFile('postBudgetFormulaAddExcel')
+          this.formulasService.postExcelFile(ENInterfaces.FormulaBudgetAddExcel);
       });
     });
   }
