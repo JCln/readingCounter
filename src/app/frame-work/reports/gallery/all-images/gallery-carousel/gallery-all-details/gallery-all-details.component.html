@@ -1,0 +1,56 @@
+<main class="main">
+    <form #form="ngForm">
+        <section class="_container">
+            <section class="__readonly_s">
+                <div class="input_2">
+                    <div class="_key">نام‌و نام‌خانوادگی</div>
+                    <div class="_value">
+                        {{firstName}}{{sureName}}
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">ش پرونده</div>
+                    <div class="_value">
+                        {{radif}}
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">اشتراک</div>
+                    <div class="_value">
+                        {{eshterak}}
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">توضیحات</div>
+                    <div class="_value">
+                        {{sizeInByte}}
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">توضیحات</div>
+                    <div class="_value">
+                        {{imageDescription}}
+                    </div>
+                </div>
+
+            </section>
+            <div class="__slider">
+                <div class="_img_content">
+                    <div class="tooltip img_wrapper">
+
+                        <div *ngIf="!allImages" class="__img_bound">
+                            <img src="assets/imgs/soundvid/2.png" alt="whatever">
+                        </div>
+                        <div *ngIf="allImages">
+                            <img src="{{allImages}}" alt="whatever">
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!allImages">
+                    <h2 class="not_found_header">فاقد تصویر</h2>
+                </div>
+            </div>
+        </section>
+
+    </form>
+</main>

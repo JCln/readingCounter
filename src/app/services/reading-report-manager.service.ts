@@ -307,6 +307,13 @@ export class ReadingReportManagerService {
 
   // CALL APIs
 
+  getDataSource = (method: ENInterfaces, id: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(method, id).subscribe((res) => {
+        resolve(res)
+      })
+    });
+  }
   portRRTest = (method: ENInterfaces, val: object): Promise<any> => {
     console.log(method, val);
     return new Promise((resolve) => {

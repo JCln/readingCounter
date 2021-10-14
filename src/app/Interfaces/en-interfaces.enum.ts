@@ -164,6 +164,7 @@ export enum ENInterfaces {
     ListToGis = 'V1/List/Offloaded/Gis',
     ListDispersalHours = 'V1/List/Offloaded/DispersalHours',
     ListDispersalChart = 'V1/List/Offloaded/DispersalChart',
+    ListAllImages = `V1/List/OffLoaded/AllImages/`,
 
 
     readingPeriodAll = 'V1/readingPeriod/All',
@@ -258,4 +259,6 @@ export enum ENInterfaces {
     getDashboardAttemptAverage = 'V1/List/Dashboard/Attempt/Timed',
     getDashboardLockedCount = 'V1/List/Dashboard/Locked/Timed',
     getDashboardPackageAverage = 'V1/Tracking/Dashboard/Tracking/PackAverage',
+    getDashboardXY = 'V1/List/Dashboard/XY/Timed',
+    getDashboardDateDiffUnClose = 'V1/List/Dashboard/DateDifferenceUnClosed/Timed',
 }

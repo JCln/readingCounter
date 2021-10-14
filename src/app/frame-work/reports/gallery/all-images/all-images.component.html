@@ -1,0 +1,28 @@
+<main style="position: relative;">
+
+    <div class="content">
+        <div *ngFor="let item of allImages.imageUrlAndInfos; index as ri" class="tooltip _images">
+
+            <div *ngIf="!allImages[ri]" class="tooltip_text">بارگیری تصویر {{ri+1}}</div>
+            <div *ngIf="allImages[ri]" class="tooltip_text">بزرگنمایی {{ri+1}}</div>
+
+            <div *ngIf="allImages[ri]" class="__img_bound_real">
+                <img (click)="routeToOffload(item , ri ,allImages[ri])" src="{{allImages[ri]}}" alt="whatever">
+            </div>
+            <div *ngIf="!allImages[ri]" class="__img_bound">
+                <img src="assets/imgs/soundvid/2.png" alt="whatever">
+            </div>
+        </div>
+
+        <div class="not_found_header" *ngIf="!allImages.imageCount">
+            <h2>فاقد تصویر</h2>
+        </div>
+    </div>
+
+    <app-gallery-carousel *ngIf="showCarousel" [dataSource]="carouselAllImages"
+        (cancelClicked)="carouselCancelClicked()" (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
+        <app-gallery-all-details></app-gallery-all-details>
+
+    </app-gallery-carousel>
+
+</main>

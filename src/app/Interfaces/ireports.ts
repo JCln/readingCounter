@@ -184,3 +184,21 @@ export interface IRRChartResWrapper {
     saierCount: number,
     areaTitle?: string
 }
+export interface IImageUrlAndInfos {
+    fileRepositorayId: string,
+    onOffLoadId: string,
+    radif: number,
+    eshterak: string,
+    firstName: string,
+    sureName: string,
+    imageDescription: string,
+    sizeInByte: number,
+    imageUrl?:any
+}
+export interface IImageUrlInfoWrapper {
+    trackNumber: number,
+    itemCount: number,
+    imageCount: number,
+    distinctImageCount: number,
+    imageUrlAndInfos: IImageUrlAndInfos[]
+}

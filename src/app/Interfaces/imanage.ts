@@ -81,6 +81,11 @@ export interface IOnOffLoadFlat {
     offLoadTime: string,
     y: string,
     x: string,
+    d1: string,
+    d2: string,
+    counterStatePosition: number,
+    attemptCount: number,
+    isLocked: boolean,
     gisAccuracy: string,
     imageCount: number | boolean,
     masraf: number,
@@ -91,6 +96,7 @@ export interface IOnOffLoadFlat {
     excludedForBazdid: boolean,
     masrafStateId: number,
     description: string,
+
     isSelected?: boolean
 }
 export interface IOutputManager {

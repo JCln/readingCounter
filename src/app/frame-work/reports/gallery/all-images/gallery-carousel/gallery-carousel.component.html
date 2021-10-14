@@ -1,0 +1,18 @@
+<main>
+    <h2 (click)="cancelClick()" class="pi pi-times"></h2>
+    <div>
+        <app-gallery-all-details
+        [firstName]="dataSource.firstName"
+        [sureName]="dataSource.sureName"
+        [eshterak]="dataSource.eshterak"
+        [imageDescription]="dataSource.imageDescription"
+        [description]="dataSource.imageDescription"
+        [radif]="dataSource.radif"
+        [sizeInByte]="dataSource.sizeInByte"
+        [allImages]="dataSource.imageUrl"
+        ></app-gallery-all-details>        
+
+        <section class="next" (click)="nextClick()"></section>
+        <section class="prev" (click)="prevClick()"></section>
+    </div>
+</main>

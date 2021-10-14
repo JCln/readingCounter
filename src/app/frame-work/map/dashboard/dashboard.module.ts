@@ -29,6 +29,8 @@ import { DashErrorCountComponent } from './dash-error-count/dash-error-count.com
 import { DashLockedComponent } from './dash-locked/dash-locked.component';
 import { DashPackAverageComponent } from './dash-pack-average/dash-pack-average.component';
 import { DashAttemptComponent } from './dash-attempt/dash-attempt.component';
+import { DashXyComponent } from './dash-xy/dash-xy.component';
+import { DashDateDiffUncloseComponent } from './dash-date-diff-unclose/dash-date-diff-unclose.component';
 
 
 @NgModule({
@@ -58,6 +60,8 @@ import { DashAttemptComponent } from './dash-attempt/dash-attempt.component';
     DashLockedComponent,
     DashPackAverageComponent,
     DashAttemptComponent,
+    DashXyComponent,
+    DashDateDiffUncloseComponent,
   ],
   imports: [
     CommonModule,
