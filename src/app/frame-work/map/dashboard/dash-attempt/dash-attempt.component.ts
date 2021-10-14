@@ -3,7 +3,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardTimed } from 'interfaces/idashboard-map';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
-import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
@@ -16,8 +15,7 @@ export class DashAttemptComponent implements OnInit {
   _colshownReading: IObjectIteratation[] = [];
 
   constructor(
-    private dashboardService: DashboardService,
-    private utilsService: UtilsService
+    private dashboardService: DashboardService
   ) { }
 
   classWrapper = async () => {

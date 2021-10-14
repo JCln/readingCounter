@@ -4,7 +4,6 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IRoleManager } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -26,7 +25,7 @@ export class UserRoleComponent extends FactoryONE {
   newRowLimit: number = 1;
 
   constructor(
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService,
     private userService: UsersAllService
   ) {

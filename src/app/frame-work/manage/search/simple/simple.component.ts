@@ -4,9 +4,7 @@ import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { ISearchSimpleOutput } from 'interfaces/search';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { SearchService } from 'services/search.service';
-import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { MathS } from 'src/app/classes/math-s';
 
@@ -31,10 +29,8 @@ export class SimpleComponent implements OnInit, OnDestroy {
   _selectedKindId: string = '';
 
   constructor(
-    private interactionService: InteractionService,
     private closeTabService: CloseTabService,
-    public searchService: SearchService,
-    private utilsService: UtilsService
+    public searchService: SearchService
   ) {
   }
 

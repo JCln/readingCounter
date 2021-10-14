@@ -59,7 +59,7 @@ export class SearchDgComponentComponent implements OnInit {
 
     this.fragmentMasterIds = await this.searchService.getByQuoteId(ENInterfaces.fragmentMasterInZone, this.searchService.searchReqPro.zoneId);
     this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(this.searchService.searchReqPro.zoneId);
-    this.karbariDictionary = await this.searchService.getKarbariDictionary();
+    this.karbariDictionary = await this.searchService.getKarbariDictionaryCode();
     this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchService.searchReqPro.zoneId);
   }
   getReadingPeriod = async () => {

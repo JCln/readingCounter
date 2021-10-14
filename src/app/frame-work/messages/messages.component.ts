@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IColor, IMessage, ITime } from 'interfaces/inon-manage';
 import { BrowserStorageService } from 'services/browser-storage.service';
-import { InteractionService } from 'services/interaction.service';
 import { MessageService } from 'services/message.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -27,7 +26,7 @@ export class MessagesComponent extends FactoryONE {
   getedDataFromLocalStorage: any;
 
   constructor(
-    public interactionService: InteractionService,
+     
     readonly messageService: MessageService,
     private browserStorageService: BrowserStorageService
   ) {

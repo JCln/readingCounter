@@ -4,9 +4,7 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { SearchService } from 'services/search.service';
-import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -35,10 +33,9 @@ export class MoshtarakComponent extends FactoryONE {
   qotrDictionary: IDictionaryManager[] = [];
 
   constructor(
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService,
-    public searchService: SearchService,
-    private utilsService: UtilsService
+    public searchService: SearchService  
   ) {
     super();
   }

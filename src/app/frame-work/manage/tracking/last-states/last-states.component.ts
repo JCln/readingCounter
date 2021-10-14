@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITracking } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -18,7 +17,7 @@ export class LastStatesComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService

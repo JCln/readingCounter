@@ -5,7 +5,6 @@ import { IAuthLevel4 } from 'interfaces/iauth-levels';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -28,7 +27,6 @@ export class Auth4Component extends FactoryONE {
 
   constructor(
     private dialog: MatDialog,
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
   ) {

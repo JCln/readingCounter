@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -31,7 +30,6 @@ export class QotrComponent extends FactoryONE {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) {

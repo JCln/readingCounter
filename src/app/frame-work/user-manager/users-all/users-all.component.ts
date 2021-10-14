@@ -4,9 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IUserManager } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { UsersAllService } from 'services/users-all.service';
-import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
@@ -17,7 +15,7 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class UsersAllComponent extends FactoryONE {
   @ViewChild(Table) UsersAllComponent: Table;
- 
+
 
   dataSource: IUserManager[] = [];
   _selectedColumns: any[];
@@ -25,11 +23,10 @@ export class UsersAllComponent extends FactoryONE {
 
   constructor(
     private route: ActivatedRoute,
-    public interactionService: InteractionService,
+     
     private router: Router,
     private closeTabService: CloseTabService,
-    public usersAllService: UsersAllService,
-    private utilsService: UtilsService
+    public usersAllService: UsersAllService
   ) {
     super();
   }

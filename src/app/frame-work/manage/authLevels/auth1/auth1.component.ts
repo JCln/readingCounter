@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevels } from 'interfaces/iauth-levels';
 import { AuthsManagerService } from 'services/auths-manager.service';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';
@@ -25,7 +24,6 @@ export class Auth1Component extends FactoryONE {
 
   constructor(
     private dialog: MatDialog,
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private authsManagerService: AuthsManagerService
   ) {

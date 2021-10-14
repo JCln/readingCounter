@@ -7,7 +7,6 @@ import { IImportDataResponse, IImportSimafaSingleReq, IReadingProgramRes } from 
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
-import { InteractionService } from 'services/interaction.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -37,7 +36,6 @@ export class SimafaSingleComponent extends FactoryONE {
   dataSource: IImportDataResponse;
 
   constructor(
-    public interactionService: InteractionService,
     public importDynamicService: ImportDynamicService,
     private closeTabService: CloseTabService,
     private route: ActivatedRoute

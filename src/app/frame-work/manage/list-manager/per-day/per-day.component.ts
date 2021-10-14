@@ -4,7 +4,6 @@ import { IListManagerPDHistory, IOffLoadPerDay } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { InteractionService } from 'services/interaction.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -26,7 +25,6 @@ export class PerDayComponent extends FactoryONE {
   _selectMainDatas: any[];
 
   constructor(
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private listManagerService: ListManagerService,
     private utilsService: UtilsService,

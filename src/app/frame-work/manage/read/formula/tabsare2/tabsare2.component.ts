@@ -5,7 +5,6 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ITabsare2Formula } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { FormulasService } from 'services/formulas.service';
-import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -25,7 +24,6 @@ export class Tabsare2Component extends FactoryONE {
   clonedProducts: { [s: string]: ITabsare2Formula; } = {};
 
   constructor(
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public formulasService: FormulasService,
     private dialog: MatDialog

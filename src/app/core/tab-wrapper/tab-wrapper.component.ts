@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 import { InteractionService } from 'services/interaction.service';
-import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
@@ -21,7 +20,6 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private utilsService: UtilsService,
     private sideBarItemsService: SidebarItemsService,
     private interactionService: InteractionService,
     public closeTabService: CloseTabService

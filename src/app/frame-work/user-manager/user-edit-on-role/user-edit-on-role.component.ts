@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { appItems, IRoleItems } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { UserEditManagerService } from 'services/user-edit-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -18,7 +17,7 @@ export class UserEditOnRoleComponent extends FactoryONE {
 
   constructor(
     private userEditManagerService: UserEditManagerService,
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService
   ) {
     super();

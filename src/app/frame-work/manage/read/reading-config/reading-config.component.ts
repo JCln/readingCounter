@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -30,7 +29,6 @@ export class ReadingConfigComponent extends FactoryONE {
 
   constructor(
     private dialog: MatDialog,
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {
@@ -48,8 +46,8 @@ export class ReadingConfigComponent extends FactoryONE {
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result)           
-          this.refreshTable();        
+        if (result)
+          this.refreshTable();
       });
     });
   }

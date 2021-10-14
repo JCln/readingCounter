@@ -5,7 +5,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
-import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -24,7 +23,7 @@ export class OffloadedComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,

@@ -7,7 +7,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ITracking } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -28,7 +27,7 @@ export class LoadedComponent extends FactoryONE {
   selectedFuckingTest: any[] = [];
 
   constructor(
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog    

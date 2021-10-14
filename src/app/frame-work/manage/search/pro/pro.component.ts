@@ -6,9 +6,7 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ISearchProReportInput } from 'interfaces/search';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { SearchService } from 'services/search.service';
-import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -38,10 +36,8 @@ export class ProComponent extends FactoryONE {
   ref: DynamicDialogRef;
 
   constructor(
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public searchService: SearchService,    
-    private utilsService: UtilsService,
     private dialogService: DialogService,
   ) {
     super();

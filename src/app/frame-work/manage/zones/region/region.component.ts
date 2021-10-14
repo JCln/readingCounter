@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IRegionManager } from 'interfaces/izones';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { SectorsManagerService } from 'services/sectors-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -28,7 +27,7 @@ export class RegionComponent extends FactoryONE {
 
   constructor(
     private dialog: MatDialog,
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {

@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { MapItemsService } from 'services/DI/map-items.service';
 import { EnvService } from 'services/env.service';
-import { InteractionService } from 'services/interaction.service';
 import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -95,7 +94,6 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(
     public mapService: MapService,
     readonly mapItemsService: MapItemsService,
-    private readonly interactionService: InteractionService,
     private readingReportManagerService: ReadingReportManagerService,
     public route: ActivatedRoute,
     private router: Router,

@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ICounterReport } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -27,7 +26,6 @@ export class CounterReportComponent extends FactoryONE {
 
   constructor(
     private dialog: MatDialog,
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {

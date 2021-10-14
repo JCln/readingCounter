@@ -3,7 +3,6 @@ import { IChangePassword } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { IProfile } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -19,7 +18,7 @@ export class ProfileComponent extends FactoryONE {
   _selectCols: IObjectIteratation[];
 
   constructor(
-    public interactionService: InteractionService,
+     
     private profileService: ProfileService,
     private closeTabService: CloseTabService
   ) {

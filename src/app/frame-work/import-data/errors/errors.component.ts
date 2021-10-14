@@ -3,7 +3,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IImportErrors } from 'interfaces/import-data';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
-import { InteractionService } from 'services/interaction.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -18,7 +17,6 @@ export class ErrorsComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private importDynamicService: ImportDynamicService,
   ) {

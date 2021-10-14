@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { appItems, IRoleItems } from 'interfaces/iuser-manager';
-import { InteractionService } from 'services/interaction.service';
+import { CloseTabService } from 'services/close-tab.service';
 import { UserAddManagerService } from 'services/user-add-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -21,7 +21,8 @@ export class UserAddComponent extends FactoryONE {
 
   constructor(
     private userAddManagerService: UserAddManagerService,
-    public interactionService: InteractionService
+     
+    private closeTabService: CloseTabService
   ) {
     super();
   }
@@ -29,7 +30,17 @@ export class UserAddComponent extends FactoryONE {
     this.userAddManagerService.userAddA(this.dataSource, this.userInfos.userInputForm);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    this.dataSource = await this.userAddManagerService.getUserAdd();
+    if (canRefresh) {
+      this.closeTabService.saveDataForAddUsers = null;
+    }
+    if (this.closeTabService.saveDataForAddUsers) {
+      this.dataSource = this.closeTabService.saveDataForAddUsers;
+    }
+    else {
+      this.dataSource = await this.userAddManagerService.getUserAdd();
+      this.closeTabService.saveDataForAddUsers = this.dataSource;
+    }
+
     this.roleItemsData = this.dataSource.roleItems;
     this.userAppItems = this.dataSource.appItems;
     this.provinceItemsData = this.dataSource.provinceItems;

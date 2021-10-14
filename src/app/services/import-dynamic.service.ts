@@ -508,6 +508,9 @@ export class ImportDynamicService {
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
+  getKarbariByCodeDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getkarbariCodeDictionary();
+  }
   getCounterReportByZoneDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterReportByZoneIdDictionary(zoneId);
   }

@@ -4,7 +4,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { appItems, IRoleItems, IUserInfo } from 'interfaces/iuser-manager';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UserEditManagerService } from 'services/user-edit-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -31,7 +30,7 @@ export class UserEditComponent extends FactoryONE {
     private interfaceManagerService: InterfaceManagerService,
     private route: ActivatedRoute,
     private router: Router,
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService
   ) {
     super();

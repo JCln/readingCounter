@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 import { IAPK } from 'interfaces/inon-manage';
 import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -31,7 +30,6 @@ export class ApkComponent extends FactoryONE {
 
   constructor(
     private apkService: ApkService,
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private outputManagerService: OutputManagerService
   ) {

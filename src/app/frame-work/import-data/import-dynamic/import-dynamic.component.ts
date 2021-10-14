@@ -4,7 +4,6 @@ import { IReadingConfigDefault } from 'interfaces/iimports';
 import { ENLocalStorageNames, IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
-import { InteractionService } from 'services/interaction.service';
 import { LocalClientConfigsService } from 'services/local-client-configs.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
@@ -49,7 +48,6 @@ export class ImportDynamicComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
 
   constructor(
-    public interactionService: InteractionService,
     public importDynamicService: ImportDynamicService,
     private closeTabService: CloseTabService,
     private localClientConfigsService: LocalClientConfigsService

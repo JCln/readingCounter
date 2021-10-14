@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IOutputManager } from 'interfaces/imanage';
 import { IZoneManager } from 'interfaces/izones';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -21,7 +20,6 @@ export class DbfOutputComponent extends FactoryONE {
   constructor(
     private outputManagerService: OutputManagerService,
     private trackingManagerService: TrackingManagerService,
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService
   ) {
     super();

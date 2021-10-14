@@ -6,7 +6,6 @@ import { Table } from 'primeng/table';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
-import { InteractionService } from 'services/interaction.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 
@@ -27,7 +26,6 @@ export class FragmentDetailsComponent extends FactoryONE {
   clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
     private router: Router

@@ -3,7 +3,6 @@ import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
-import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -27,7 +26,6 @@ export class ForbiddenComponent extends FactoryONE {
 
   constructor(
     public forbiddenService: ForbiddenService,
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
   ) {
     super();

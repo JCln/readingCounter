@@ -7,8 +7,6 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
-import { InteractionService } from 'services/interaction.service';
-import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -34,16 +32,15 @@ export class AssessPreComponent extends FactoryONE {
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   userCounterReaderDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
   _canShowAssessButton: boolean = true;
 
   constructor(
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public importDynamicService: ImportDynamicService,
-    private utilsService: UtilsService,
     private dialogService: DialogService
   ) {
     super();
@@ -66,6 +63,7 @@ export class AssessPreComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
     this.insertSelectedColumns();
@@ -79,6 +77,7 @@ export class AssessPreComponent extends FactoryONE {
     this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.assessPreReq.zoneId);
     this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.assessPreReq.zoneId);
     this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
+    this.karbariDictionary = await this.importDynamicService.getKarbariByCodeDictionary();
     this.qotrDictionary = await this.importDynamicService.getQotrDictionary();
 
     this.converts();

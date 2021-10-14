@@ -5,7 +5,6 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IAbBahaFormula } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { FormulasService } from 'services/formulas.service';
-import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -29,7 +28,6 @@ export class BudgetComponent extends FactoryONE {
   clonedProducts: { [s: string]: IAbBahaFormula; } = {};
 
   constructor(
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public formulasService: FormulasService,
     private dialog: MatDialog,

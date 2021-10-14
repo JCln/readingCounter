@@ -4,7 +4,6 @@ import { IUserLoggins } from 'interfaces/iuser-manager';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { InteractionService } from 'services/interaction.service';
 import { UserLogginsService } from 'services/user-loggins.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -22,7 +21,7 @@ export class UserLogginsComponent extends FactoryONE {
   _selectCols: any[];
 
   constructor(
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService,
     private userLogginsService: UserLogginsService,
     private dateJalaliService: DateJalaliService,

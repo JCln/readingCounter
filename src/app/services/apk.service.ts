@@ -7,7 +7,6 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { MathS } from '../classes/math-s';
-import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +17,7 @@ export class ApkService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private snackWrapperService: SnackWrapperService,
-    private utilsService: UtilsService
+    private snackWrapperService: SnackWrapperService
   ) { }
 
   /* COLUMNS */

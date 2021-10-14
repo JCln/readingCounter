@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
 
@@ -11,8 +10,7 @@ import { MathS } from '../classes/math-s';
 export class DictionaryWrapperService {
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService
+    private interfaceManagerService: InterfaceManagerService
   ) { }
 
   private provinceDictionary: any = [];

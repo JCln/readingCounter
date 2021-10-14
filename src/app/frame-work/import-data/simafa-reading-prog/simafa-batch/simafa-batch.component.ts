@@ -6,7 +6,6 @@ import { IBatchImportDataResponse, IImportSimafaBatchReq } from 'interfaces/impo
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/ireads-manager';
 import { ImportDynamicService } from 'services/import-dynamic.service';
-import { InteractionService } from 'services/interaction.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -45,7 +44,6 @@ export class SimafaBatchComponent extends FactoryONE {
   _canShowImportBatchButton: boolean = true;
 
   constructor(
-    public interactionService: InteractionService,
     public importDynamicService: ImportDynamicService,
     private route: ActivatedRoute
   ) {

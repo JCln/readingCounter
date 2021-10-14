@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingPeriodKind } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -24,7 +23,6 @@ export class ReadingPeriodKindComponent extends FactoryONE {
 
   constructor(
     private dialog: MatDialog,
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {

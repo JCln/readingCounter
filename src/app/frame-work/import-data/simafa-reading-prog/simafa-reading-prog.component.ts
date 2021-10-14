@@ -7,7 +7,6 @@ import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IFragmentDetailsByEshterakReq } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
-import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -41,7 +40,6 @@ export class SimafaReadingProgComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-    public interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private importDynamicService: ImportDynamicService,
     public route: ActivatedRoute

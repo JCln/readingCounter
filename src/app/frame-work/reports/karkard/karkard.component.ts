@@ -4,9 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportKarkard } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
-import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -45,9 +43,8 @@ export class KarkardComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    public interactionService: InteractionService,
+     
     private closeTabService: CloseTabService,
-    private utilsService: UtilsService,
     public route: ActivatedRoute
   ) {
     super();

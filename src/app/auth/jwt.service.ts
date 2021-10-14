@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ENAuthTokenType } from 'interfaces/iauth-guard-permission';
 import * as jwt_decode from 'jwt-decode';
 import { BrowserStorageService } from 'services/browser-storage.service';
-import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
 
@@ -11,8 +10,7 @@ import { MathS } from '../classes/math-s';
 })
 export class JwtService {
   constructor(
-    private browserStorageService: BrowserStorageService,
-    private utilsService: UtilsService
+    private browserStorageService: BrowserStorageService    
   ) { }
 
   getDecodedAccessToken(): any {

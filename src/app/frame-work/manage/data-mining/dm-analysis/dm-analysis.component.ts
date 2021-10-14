@@ -3,8 +3,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { DataMiningAnalysesService } from 'services/data-mining-analyses.service';
-import { InteractionService } from 'services/interaction.service';
-import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -40,9 +38,7 @@ export class DmAnalysisComponent extends FactoryONE {
 
   constructor(
     public dataMiningAnalysesService: DataMiningAnalysesService,
-    public interactionService: InteractionService,
-    private closeTabService: CloseTabService,
-    private utilsService: UtilsService
+    private closeTabService: CloseTabService
   ) {
     super();
   }

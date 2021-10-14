@@ -7,7 +7,6 @@ import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { SortEvent } from 'primeng/api';
 import { filter } from 'rxjs/internal/operators/filter';
-import { InteractionService } from 'services/interaction.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -37,7 +36,6 @@ export class AllComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-    public interactionService: InteractionService,
     public listManagerService: ListManagerService,
     private route: ActivatedRoute,
     private router: Router,

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDashboardDateDifference } from 'interfaces/idashboard-map';
 import { DashboardService } from 'services/dashboard.service';
-import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
@@ -14,8 +13,7 @@ export class DashDateDifferenceComponent implements OnInit {
   dataSourceDateDifference: IDashboardDateDifference;
 
   constructor(
-    private dashboardService: DashboardService,
-    private utilsService: UtilsService
+    private dashboardService: DashboardService
   ) { }
 
   classWrapper = async () => {

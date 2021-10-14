@@ -6,7 +6,6 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { DownloadManagerService } from 'services/download-manager.service';
-import { InteractionService } from 'services/interaction.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
@@ -42,7 +41,7 @@ export class WouiComponent extends FactoryONE {
     private route: ActivatedRoute,
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
-    public interactionService: InteractionService,
+     
     private dialogService: DialogService,
     private _location: Location,
     private router: Router

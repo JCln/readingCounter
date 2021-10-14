@@ -5,7 +5,6 @@ import { IFollowUp, IFollowUpHistory } from 'interfaces/isearchs';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { FollowUpService } from 'services/follow-up.service';
-import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -42,7 +41,7 @@ export class FollowUpComponent extends FactoryONE {
   constructor(
     private trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService,
-    public interactionService: InteractionService,
+     
     private authService: AuthService,
     private followUpService: FollowUpService
   ) {

@@ -34,7 +34,7 @@ export class AssesspreDgComponent implements OnInit {
       return;
 
     this.counterReportDictionary = await this.importDynamicService.getCounterReportByZoneDictionary(this.importDynamicService.AssessPreReq.zoneId);
-    this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
+    this.karbariDictionary = await this.importDynamicService.getKarbariByCodeDictionary();
     this.counterStateByZoneIdDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.importDynamicService.AssessPreReq.zoneId);
   }
   editCloseData() {

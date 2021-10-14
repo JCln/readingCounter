@@ -3,7 +3,6 @@ import { MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { IPolicies, IPrivacy } from 'interfaces/inon-manage';
 import { ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { SecurityService } from 'services/security.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -35,7 +34,7 @@ export class PrivacyComponent extends FactoryONE {
   };
 
   constructor(
-    public interactionService: InteractionService,
+     
     public securityService: SecurityService,
     private closeTabService: CloseTabService,
     private snackWrapperService: SnackWrapperService

@@ -23,7 +23,6 @@ export class CloseTabService {
   saveDataForCounterState: any;
   saveDataForKarbari: any;
   saveDataForReadingConfig: any;
-  saveDictionaryForReadingConfig: any;
   saveDataForReadingPeriodManager: any;
   saveDataForReadingPeriodKindManager: any;
   saveDataForAPKManager: any;
@@ -38,13 +37,11 @@ export class CloseTabService {
   saveDataForZoneBound: any;
 
   saveDataForAllUsers: any;
-  saveDictionaryForAllUsers: any;
-  saveDataForRoleManager: any;
-
   saveDataForEditUsers: any;
-  saveDictionaryForEditUsers: any;
-  saveDictionaryForAddUsers: any;
+  saveDataForRoleManager: any;
+  saveDataForUserLoggins: any;
   saveDataForEditOnRole: any;
+  saveDataForAddUsers: any;
 
   // track manager
   saveDataForTrackImported: any;
@@ -75,8 +72,6 @@ export class CloseTabService {
   saveDataForWOUI: any;
   // dbf output manager
   saveDataForOutputDBF: any;
-  // number of Logs
-  saveDataForUserLoggins: any;
   // reading reports 
   saveDataForRRTraverse: any;
   saveDataForRRTraverseDifferential: any;
@@ -104,7 +99,7 @@ export class CloseTabService {
     { id: 1, req: '', value: 'saveDataForFragmentNOB', value_2: '', url: '/wr/m/r/nob' },
     { id: 1, req: '', value: 'saveDataForTextOutput', value_2: '', url: '/wr/m/r/txt/out' },
     { id: 1, req: '', value: 'saveDataForAPKManager', value_2: '', url: '/wr/m/r/apk' },
-    { id: 1, req: '', value: 'saveDataForReadingPeriodManager', value_2: '', url: '/wr/m/r/rpm' },
+    { id: 1, req: '', value: 'saveDataForReadingConfig', value_2: '', url: '/wr/m/r/rcd' },
     { id: 1, req: '', value: 'saveDataForReadingPeriodKindManager', value_2: '', url: '/wr/m/r/rpkm' },
     { id: 1, req: '', value: 'saveDataForWaterFormula', value_2: '', url: '/wr/m/r/formula/ab' },
     { id: 1, req: '', value: 'saveDataForBadgetFormula', value_2: '', url: '/wr/m/r/formula/budget' },
@@ -115,6 +110,7 @@ export class CloseTabService {
     { id: 1, req: '', value: 'saveDataForAppLevel3', value_2: '', url: '/wr/m/al/cr' },
     { id: 1, req: '', value: 'saveDataForAppLevel4', value_2: '', url: '/wr/m/al/ac' },
     { id: 1, req: '', value: 'saveDataForAllUsers', value_2: '', url: '/wr/mu/all' },
+    { id: 1, req: '', value: 'saveDataForAddUsers', value_2: '', url: '/wr/mu/add' },
     { id: 1, req: '', value: 'saveDataForRoleManager', value_2: '', url: '/wr/mu/role' },
     { id: 1, req: '', value: 'saveDataForEditOnRole', value_2: '', url: '/wr/mu/eor' },
     { id: 1, req: '', value: 'saveDataForCountry', value_2: '', url: '/wr/m/zs/c' },
