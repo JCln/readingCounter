@@ -19,6 +19,13 @@ export interface ISidebarItems {
         }
     ]
 }
+export interface ISidebarVals {
+    readonly id: number,
+    req?: any;
+    value: any;
+    value_2: any;
+    readonly url: string
+}
 export interface ITabs {
     title: string;
     isClosable: boolean;

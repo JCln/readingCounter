@@ -206,7 +206,7 @@ export enum ENInterfaces {
 
     ReadingReportMasterWithParam = 'V1/ReadingReport/Master/WithParam',
     ReadingReportDETAILSWithParam = 'V1/ReadingReport/Details/WithParam',
-    ReadingReportTitles = `V1/ReadingReport/Titles/`,
+    ReadingReportTitles = `V1/ReadingReport/Titles`,
 
     APKPreList = 'V1/APK/PreList',
     APKLast = 'V1/APK/Last',

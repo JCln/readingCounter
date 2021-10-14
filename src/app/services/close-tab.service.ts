@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ITabs } from 'interfaces/ioverall-config';
+import { ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +62,7 @@ export class CloseTabService {
   saveDataForAssessAdd: any;
   // SEARCH
   saveDataForSearchMoshtarakin: any;
+  saveDataForSearchMoshtarakinReq: any;
   saveDataForSearchPro: any;
   saveDataForSearchSimple: any;
   // list manager
@@ -91,7 +92,7 @@ export class CloseTabService {
   saveDataForFNB: any;
   saveDataForProfile: any;
 
-  private val: any[] = [
+  private val: ISidebarVals[] = [
     { id: 1, req: '', value: 'saveDataForKarbari', value_2: '', url: '/wr/m/r/kar' },
     { id: 1, req: '', value: 'saveDataForCounterState', value_2: '', url: '/wr/m/r/cs' },
     { id: 1, req: '', value: 'saveDataForQotrManager', value_2: '', url: '/wr/m/r/qr' },
@@ -136,7 +137,7 @@ export class CloseTabService {
     { id: 1, req: '', value: 'saveDataForTrackOffloaded', value_2: '', url: '/wr/m/track/offloaded' },
     { id: 1, req: '', value: 'saveDataForTrackFinished', value_2: '', url: '/wr/m/track/finished' },
     { id: 1, req: '', value: 'saveDataForFollowUp', value_2: 'saveDataForFollowUpAUX', url: '/wr/m/s/fwu' },
-    { id: 1, req: '', value: 'saveDataForSearchMoshtarakin', value_2: '', url: '/wr/m/s/searchMosh' },
+    { id: 13, req: 'saveDataForSearchMoshtarakinReq', value: 'saveDataForSearchMoshtarakin', value_2: '', url: '/wr/m/s/searchMosh' },
     { id: 1, req: '', value: 'saveDataForSearchPro', value_2: '', url: '/wr/m/s/acme' },
     { id: 1, req: '', value: 'saveDataForSearchSimple', value_2: '', url: '/wr/m/s/simple' },
     // { id: 1, req: '', value: '', value_2: '', url: '/wr/privacy' },
@@ -169,23 +170,33 @@ export class CloseTabService {
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = '';
+      this[this.val[index].req] = '';
     }
     this.cleanArrays();
   }
   cleanData = (url: string) => {
     this.val.find(item => {
       if (item.url === url) {
-        console.log(item.value);
         this[item.value] = '';
+        this[item.req] = '';
         this[item.value_2] = '';
       }
       else {
-        if (item.url.includes(url)) {
+        if (url.includes(item.url)) {
           this[item.value] = '';
+          this[item.req] = '';
           this[item.value_2] = '';
         }
       }
     })
-
+  }
+  cleanById = (id: number) => {
+    this.val.find(item => {
+      if (item.id == id) {
+        item.req = '';
+        item.value = '';
+        item.value_2 = ''
+      }
+    })
   }
 }
