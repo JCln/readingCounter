@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ITabsare2Formula } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
@@ -10,7 +9,6 @@ import { InteractionService } from 'services/interaction.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
-import { ConfirmTextDialogComponent } from '../../../tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { Tabsare2AddDgComponent } from './tabsare2-add-dg/tabsare2-add-dg.component';
 
 @Component({
@@ -82,23 +80,10 @@ export class Tabsare2Component extends FactoryONE {
     this.refetchTable(rowIndex);
   }
 
-  firstConfirmDialog = (rowData: ITabsare2Formula) => {
-    const title = EN_messages.confirm_remove;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.removeRow(rowData['dataSource'], rowData['ri']);
-        }
-      })
-    })
+  firstConfirmDialog = async (rowData: ITabsare2Formula) => {
+    const a = await this.formulasService.firstConfirmDialog();
+    if (a)
+      this.removeRow(rowData['dataSource'], rowData['ri']);
   }
   onRowEditInit(dataSource: object) {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };

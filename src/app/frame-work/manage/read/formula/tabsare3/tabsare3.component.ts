@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IAbBahaFormula } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
@@ -11,7 +10,6 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
-import { ConfirmTextDialogComponent } from '../../../tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { AddExcelFileComponent } from '../add-excel-file/add-excel-file.component';
 import { Tabsare3AddDgComponent } from './tabsare3-add-dg/tabsare3-add-dg.component';
 
@@ -103,23 +101,10 @@ export class Tabsare3Component extends FactoryONE {
     this.refetchTable(rowIndex);
   }
 
-  firstConfirmDialog = (rowData: IAbBahaFormula) => {
-    const title = EN_messages.confirm_remove;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.removeRow(rowData['dataSource'], rowData['ri']);
-        }
-      })
-    })
+  firstConfirmDialog = async (rowData: IAbBahaFormula) => {
+    const a = await this.formulasService.firstConfirmDialog();
+    if (a)
+      this.removeRow(rowData['dataSource'], rowData['ri']);
   }
   onRowEditInit(dataSource: object) {
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };

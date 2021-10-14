@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
@@ -15,6 +16,7 @@ import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IAbBahaFormula, ITabsare2Formula } from '../Interfaces/ireads-manager';
 
 @Injectable({
@@ -29,7 +31,8 @@ export class FormulasService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private dialog: MatDialog
   ) { }
 
   /* COLUMNS */
@@ -313,6 +316,24 @@ export class FormulasService {
     return _selectCols.filter(items => {
       if (items.isSelected)
         return items
+    })
+  }
+  firstConfirmDialog = (): Promise<any> => {
+    const title = EN_messages.confirm_remove;
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: title,
+          isInput: false,
+          isDelete: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
+        }
+      })
     })
   }
 
