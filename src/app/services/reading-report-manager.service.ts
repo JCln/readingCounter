@@ -1,10 +1,13 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
+import { IImportDataResponse } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -12,7 +15,7 @@ import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
-import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from '../Interfaces/ireports';
+import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
 
 
 @Injectable({
@@ -49,6 +52,24 @@ export class ReadingReportManagerService {
     year: 1400
   }
   karkardReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
+  lockedReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
+  preNumberShownReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',
     toDate: '',
@@ -268,6 +289,118 @@ export class ReadingReportManagerService {
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true }
   ];
+  private _RRPreNumberShown: IObjectIteratation[] = [
+    { field: 'billId', header: 'شناسه قبض', isSelected: false },
+    { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
+    { field: 'radif', header: 'ش.پرونده', isSelected: false },
+    { field: 'eshterak', header: 'اشتراک', isSelected: true },
+    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
+    { field: 'qeraatCode', header: 'قرائت', isSelected: false },
+    { field: 'firstName', header: 'نام', isSelected: true },
+    { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
+    { field: 'karbariCode', header: 'کاربری', isSelected: true },
+    { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false },
+    { field: 'preNumber', header: 'رقم قبلی', isSelected: true },
+    { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
+    { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
+    { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true },
+    { field: 'counterStateCode', header: 'وضعیت کنتور', isSelected: true },
+    { field: 'address', header: 'آدرس', isSelected: false },
+    { field: 'pelak', header: 'پلاک', isSelected: false },
+    { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
+    { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false },
+    { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false },
+    { field: 'qotrCode', header: 'قطر', isSelected: false },
+    // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
+    { field: 'postalCode', header: 'کد پستی', isSelected: false },
+    { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
+    { field: 'preCounterStateCode', header: 'وضعیت قرائت قبلی', isSelected: false },
+    { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
+    // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
+    { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
+    { field: 'tavizDate', header: 'تاریخ تعویض', isSelected: false },
+    { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
+    { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
+    { field: 'mobile', header: 'موبایل', isSelected: false },
+    { field: 'hazf', header: 'حذف', isSelected: false },
+    { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
+    { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
+    { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false },
+    { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false },
+    { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false },
+    { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false },
+    { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false },
+    { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
+    { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
+    { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
+    { field: 'y', header: 'Y', isSelected: false },
+    { field: 'x', header: 'X', isSelected: false },
+    { field: 'gisAccuracy', header: 'دقت', isSelected: false },
+    { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
+    { field: 'masraf', header: 'مصرف', isSelected: false },
+    // { field: 'eslahType', header: 'اصلاح', isSelected: false },
+    { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },
+    { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
+    { field: 'dateDifference', header: 'طول دوره', isSelected: false },
+    { field: 'description', header: 'توضیحات', isSelected: false }
+  ]
+  private _RRLocked: IObjectIteratation[] = [
+    { field: 'billId', header: 'شناسه قبض', isSelected: false },
+    { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
+    { field: 'radif', header: 'ش.پرونده', isSelected: false },
+    { field: 'eshterak', header: 'اشتراک', isSelected: true },
+    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
+    { field: 'qeraatCode', header: 'قرائت', isSelected: false },
+    { field: 'firstName', header: 'نام', isSelected: true },
+    { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
+    { field: 'karbariCode', header: 'کاربری', isSelected: true },
+    { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false },
+    { field: 'preNumber', header: 'رقم قبلی', isSelected: true },
+    { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
+    { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
+    { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true },
+    { field: 'counterStateCode', header: 'وضعیت کنتور', isSelected: true },
+    { field: 'address', header: 'آدرس', isSelected: false },
+    { field: 'pelak', header: 'پلاک', isSelected: false },
+    { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
+    { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false },
+    { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false },
+    { field: 'qotrCode', header: 'قطر', isSelected: false },
+    // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
+    { field: 'postalCode', header: 'کد پستی', isSelected: false },
+    { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
+    { field: 'preCounterStateCode', header: 'وضعیت قرائت قبلی', isSelected: false },
+    { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
+    // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
+    { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
+    { field: 'tavizDate', header: 'تاریخ تعویض', isSelected: false },
+    { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
+    { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
+    { field: 'mobile', header: 'موبایل', isSelected: false },
+    { field: 'hazf', header: 'حذف', isSelected: false },
+    { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
+    { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
+    { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false },
+    { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false },
+    { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false },
+    { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false },
+    { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false },
+    { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
+    { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
+    { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
+    { field: 'y', header: 'Y', isSelected: false },
+    { field: 'x', header: 'X', isSelected: false },
+    { field: 'gisAccuracy', header: 'دقت', isSelected: false },
+    { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
+    { field: 'masraf', header: 'مصرف', isSelected: false },
+    // { field: 'eslahType', header: 'اصلاح', isSelected: false },
+    { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },
+    { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
+    { field: 'dateDifference', header: 'طول دوره', isSelected: false },
+    { field: 'description', header: 'توضیحات', isSelected: false }
+  ]
 
   columnRRAnalyzeByParam = (): IObjectIteratation[] => {
     return this._RRAnalyzeByParam;
@@ -293,6 +426,12 @@ export class ReadingReportManagerService {
   columnRRKarkardDaly = (): IObjectIteratation[] => {
     return this._RRKarkardDaily;
   }
+  columnRRLocked = (): IObjectIteratation[] => {
+    return this._RRLocked;
+  }
+  columnRRPreNumberShown = (): IObjectIteratation[] => {
+    return this._RRPreNumberShown;
+  }
   columnRRDisposalHours = (): IObjectIteratation[] => {
     return this._RRDisposalHours;
   }
@@ -301,6 +440,7 @@ export class ReadingReportManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
+    private dialog: MatDialog,
     private _location: Location,
     private router: Router
   ) { }
@@ -315,25 +455,6 @@ export class ReadingReportManagerService {
     });
   }
   portRRTest = (method: ENInterfaces, val: object): Promise<any> => {
-    console.log(method, val);
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
-        if (MathS.isNull(res))
-          this.emptyMessage();
-        resolve(res)
-      })
-    });
-  }
-  postRRManager = (method: ENInterfaces, body: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).subscribe((res) => {
-        if (MathS.isNull(res))
-          this.emptyMessage();
-        resolve(res)
-      })
-    });
-  }
-  postRRManagerOnMap = (method: ENInterfaces, val: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {
         if (MathS.isNull(res))
@@ -424,7 +545,7 @@ export class ReadingReportManagerService {
   }
 
   // VerificationS 
-  verificationRRShared = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
+  verificationRRShared = (readingReportReq: any, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
     return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
@@ -490,4 +611,39 @@ export class ReadingReportManagerService {
         return items
     })
   }
+  postById = (method: ENInterfaces, id: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
+  showResDialog = (res: IImportDataResponse, disableClose: boolean, title: string): Promise<any> => {
+    // disable close mean when dynamic count show decision should make
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent,
+        {
+          disableClose: disableClose,
+          minWidth: '19rem',
+          data: {
+            data: res,
+            title: title,
+            isConfirm: disableClose
+          }
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (disableClose) {
+          if (result) {
+            resolve(true);
+          }
+        }
+      })
+    });
+
+  }
+  snackEmptyValue = () => {
+    this.utilsService.snackBarMessageWarn(EN_messages.notFound);
+  }
+
+
 }

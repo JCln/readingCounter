@@ -22,7 +22,7 @@ export interface ISidebarItems {
 export interface ISidebarVals {
     readonly id: number,
     req?: any;
-    value: any;
+    value: ENEssentialsToSave;
     value_2: any;
     readonly url: string
 }
@@ -33,6 +33,75 @@ export interface ITabs {
     route: string;
     cssClass: string;
     logicalOrder: number;
+}
+export enum ENEssentialsToSave {
+    saveDataForKarbari = 'saveDataForKarbari',
+    saveDataForCounterState = 'saveDataForCounterState',
+    saveDataForQotrManager = 'saveDataForQotrManager',
+    saveDataForCounterReport = 'saveDataForCounterReport',
+    saveDataForFragmentNOB = 'saveDataForFragmentNOB',
+    saveDataForTextOutput = 'saveDataForTextOutput',
+    saveDataForAPKManager = 'saveDataForAPKManager',
+    saveDataForReadingConfig = 'saveDataForReadingConfig',
+    saveDataForReadingPeriodKindManager = 'saveDataForReadingPeriodKindManager',
+    saveDataForWaterFormula = 'saveDataForWaterFormula',
+    saveDataForBadgetFormula = 'saveDataForBadgetFormula',
+    saveDataForTabsare2Formula = 'saveDataForTabsare2Formula',
+    saveDataForTabsare3Formula = 'saveDataForTabsare3Formula',
+    saveDataForAppLevel1 = 'saveDataForAppLevel1',
+    saveDataForAppLevel2 = 'saveDataForAppLevel2',
+    saveDataForAppLevel3 = 'saveDataForAppLevel3',
+    saveDataForAppLevel4 = 'saveDataForAppLevel4',
+    saveDataForAllUsers = 'saveDataForAllUsers',
+    saveDataForAddUsers = 'saveDataForAddUsers',
+    saveDataForRoleManager = 'saveDataForRoleManager',
+    saveDataForEditOnRole = 'saveDataForEditOnRole',
+    saveDataForCountry = 'saveDataForCountry',
+    saveDataForProvince = 'saveDataForProvince',
+    saveDataForRegion = 'saveDataForRegion',
+    saveDataForZone = 'saveDataForZone',
+    saveDataForZoneBound = 'saveDataForZoneBound',
+    saveDataForImportDynamic = 'saveDataForImportDynamic',
+    saveDataForImportErrors = 'saveDataForImportErrors',
+    saveDataForAssessPre = 'saveDataForAssessPre',
+    saveDataForAssessAdd = 'saveDataForAssessAdd',
+    saveDataForSimafaReadingPrograms = 'saveDataForSimafaReadingPrograms',
+    saveDataForSimafaBatch = 'saveDataForSimafaBatch',
+    saveDataForPolicies = 'saveDataForPolicies',
+    saveDataForProfile = 'saveDataForProfile',
+    saveDataForTrackImported = 'saveDataForTrackImported',
+    saveDataForTrackLoaded = 'saveDataForTrackLoaded',
+    saveDataForTrackReading = 'saveDataForTrackReading',
+    saveDataForLastStates = 'saveDataForLastStates',
+    saveDataForTrackOffloaded = 'saveDataForTrackOffloaded',
+    saveDataForTrackFinished = 'saveDataForTrackFinished',
+    saveDataForFollowUp = 'saveDataForFollowUp',
+    rSearchMoshtarakinReq = 'rSearchMoshtarakinReq',
+    saveDataForSearchMoshtarakin = 'saveDataForSearchMoshtarakin',
+    saveDataForSearchPro = 'saveDataForSearchPro',
+    saveDataForSearchSimple = 'saveDataForSearchSimple',
+    saveDataForFNB = 'saveDataForFNB',
+    saveDataForLMPD = 'saveDataForLMPD',
+    saveDataForOutputDBF = 'saveDataForOutputDBF',
+    saveDataForRRTraverse = 'saveDataForRRTraverse',
+    saveDataForRRTraverseDifferential = 'saveDataForRRTraverseDifferential',
+    saveDataForRRDisposalHours = 'saveDataForRRDisposalHours',
+    saveDataForRRKarkard = 'saveDataForRRKarkard',
+    saveDataForRRPreNumShown = 'saveDataForRRPreNumShown',
+    saveDataForRRLocked = 'saveDataForRRLocked',
+    saveDataForRROffloadedKarkard = 'saveDataForRROffloadedKarkard',
+    saveDataForRRMaster = 'saveDataForRRMaster',
+    saveDataForRRPerformance = 'saveDataForRRPerformance',
+    saveDataForDMAAnalyze = 'saveDataForDMAAnalyze',
+    saveDataForRRDetails = 'saveDataForRRDetails',
+    saveDataForRRkarkardDaily = 'saveDataForRRkarkardDaily',
+    saveDataForRRGIS = 'saveDataForRRGIS',
+    saveDataForOffloadModify = 'saveDataForOffloadModify',
+    saveDataForLMAll = 'saveDataForLMAll',
+    saveDataForEditUsers = 'saveDataForEditUsers',
+    saveDataForWOUI = 'saveDataForWOUI',
+    saveDataForUserLoggins = 'saveDataForUserLoggins',
+    saveDataForFragmentNOBDetails = 'saveDataForFragmentNOBDetails',
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -179,6 +248,8 @@ export enum ENSelectedColumnVariables {
     selectedRRTraverse = '_RRTraverse',
     selectedRRTraverseDifferential = '_RRTraverseDifferential',
     selectedRRKarkard = '_RRKarkard',
+    selectedRRLocked = '_RRLocked',
+    selectedRRPreNumShown = '_RRPreNumberShown',
     selectedRROffloadedKarkard = '_RROffloadedKarkard',
     selectedRRKarkardDaily = '_RRKarkardDaily',
     selectedRRDisposalHours = '_RRDisposalHours',

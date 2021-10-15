@@ -177,7 +177,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
   private classWrapperCluster = async () => {
-    this.extraDataSourceRes = await this.readingReportManagerService.postRRManagerOnMap(ENInterfaces.ListToGis, this.makeClusterRouteObject());
+    this.extraDataSourceRes = await this.readingReportManagerService.portRRTest(ENInterfaces.ListToGis, this.makeClusterRouteObject());
     console.log(this.extraDataSourceRes);
 
     if (this.extraDataSourceRes.length === 0) {

@@ -4,6 +4,8 @@ export enum ENReadingReports {
     traverse = 'traverseReq',
     trvch = 'trvchReq',
     karkard = 'karkardReq',
+    Locked = 'lockedReq',
+    preNumShown = 'preNumberShownReq',
     offloadKarkard = 'karkardOffloadReq',
     karkardDaily = 'karkardDailyReq',
     gis = 'gisReq',
