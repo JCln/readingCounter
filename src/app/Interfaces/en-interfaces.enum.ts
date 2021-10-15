@@ -165,6 +165,8 @@ export enum ENInterfaces {
     ListDispersalHours = 'V1/List/Offloaded/DispersalHours',
     ListDispersalChart = 'V1/List/Offloaded/DispersalChart',
     ListAllImages = `V1/List/OffLoaded/AllImages/`,
+    ListRRLocked = 'V1/List/Offloaded/Locked',
+    ListRRPreNumberShown = 'V1/List/Offloaded/PreNumberShown',
 
 
     readingPeriodAll = 'V1/readingPeriod/All',

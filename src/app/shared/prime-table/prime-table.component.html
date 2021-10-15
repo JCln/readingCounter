@@ -7,7 +7,7 @@
 
         <p-multiSelect
             *ngIf="_multiSelectEnable && (_checkUpName == 'rr-details' || _checkUpName == 'rr-karkard'|| _checkUpName ==  'rr-traverse'
-            || _checkUpName == 'rr-karkardDaily' || _checkUpName == 'rr-disposalHs' || _checkUpName == 'rr-traverseDiff' || _checkUpName == 'rr-analyzePrfm' || _checkUpName == 'rr-offload-karkard' )"
+            || _checkUpName == 'rr-karkardDaily' || _checkUpName == 'rr-disposalHs' || _checkUpName == 'rr-traverseDiff' || _checkUpName == 'rr-analyzePrfm' || _checkUpName == 'rr-offload-karkard' || _checkUpName == 'rr-locked' || _checkUpName == 'rr-preNumber' )"
             [options]=" _selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="readingReportManagerService.setColumnsChanges(readingReportManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
@@ -258,7 +258,7 @@
                 </i>
             </td>
             <td
-                *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'allComponent' || _checkUpName == 'assess_pre'">
+                *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'allComponent' || _checkUpName == 'assess_pre' || _checkUpName == 'rr-locked' || _checkUpName == 'rr-preNumber'">
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>

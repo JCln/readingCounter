@@ -105,7 +105,7 @@ export class DisperseChartComponent implements OnInit, OnDestroy {
     this.pieChartDataZone.push(this.dataSource.inZone._16To18);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.postRRManager(ENInterfaces.ListDispersalChart, this.readingReportManagerService.disposalhoursReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalChart, this.readingReportManagerService.disposalhoursReq);
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();
