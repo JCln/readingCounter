@@ -1,4 +1,5 @@
 <main class="main">
+
     <form #form="ngForm">
         <section class="_container">
             <section class="__readonly_s">
@@ -35,19 +36,24 @@
 
             </section>
             <div class="__slider">
-                <div class="_img_content">
-                    <div class="tooltip img_wrapper">
-
-                        <div *ngIf="!allImages" class="__img_bound">
-                            <img src="assets/imgs/soundvid/2.png" alt="whatever">
-                        </div>
-                        <div *ngIf="allImages">
-                            <img src="{{allImages}}" alt="whatever">
-                        </div>
+                <div class="img_wrapper">
+                    <section class="__icons">
+                        <i (click)="rotateRightImg()" class="tooltip _circle_border fa fa-rotate-right">
+                            <div class="tooltip_text_right">چرخش به راست</div>
+                        </i>
+                        <i (click)="rotateLeftImg()" class="tooltip _circle_border fa fa-rotate-left">
+                            <div class="tooltip_text_right">چرخش به چپ</div>
+                        </i>
+                        <i (click)="downloadImg(allImages)" class="tooltip _circle_border pi pi-download">
+                            <div class="tooltip_text_right">ذخیره تصویر</div>
+                        </i>
+                    </section>
+                    <div *ngIf="!allImages" class="__img_bound">
+                        <img src="assets/imgs/soundvid/2.png" alt="whatever">
                     </div>
-                </div>
-                <div *ngIf="!allImages">
-                    <h2 class="not_found_header">فاقد تصویر</h2>
+                    <div *ngIf="allImages">
+                        <img class="main-img" src="{{allImages}}" alt="whatever">
+                    </div>
                 </div>
             </div>
         </section>

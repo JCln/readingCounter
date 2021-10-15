@@ -10,6 +10,8 @@ const routes: Routes = [
   { path: 'mam/karkardDaily', loadChildren: () => import('./karkard-dayly/karkard-dayly.module').then(karkardDayly => karkardDayly.KarkardDaylyModule) },
   { path: 'mam/offkarkard', loadChildren: () => import('./rr-offload-karkard/rr-offload-karkard.module').then(offloadKarkard => offloadKarkard.RrOffloadKarkardModule) },
   { path: 'mam/dh', loadChildren: () => import('./disposal-hours/disposal-hours.module').then(disposalHours => disposalHours.DisposalHoursModule) },
+  // { path: 'mam/locked', loadChildren: () => import('./disposal-hours/disposal-hours.module').then(disposalHours => disposalHours.DisposalHoursModule) },
+  // { path: 'mam/preNumber', loadChildren: () => import('./disposal-hours/disposal-hours.module').then(disposalHours => disposalHours.DisposalHoursModule) },
   { path: 'mam/gis', loadChildren: () => import('./gis/gis.module').then(GIS => GIS.GisModule) },
   { path: 'anlz/prfm', loadChildren: () => import('./performance/performance.module').then(analysePerformance => analysePerformance.PerformanceModule) },
   { path: 'gallery', loadChildren: () => import('./gallery/gallery.module').then(gallery => gallery.GalleryModule) }

@@ -1,10 +1,42 @@
 @import 'variable';
 @import 'tooltip';
+@import 'input';
+@import 'button';
+
+
+.insert_track {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  direction: rtl;
+  margin: auto;
+  padding: 2rem;
+  background: var(--secondary_1);
+  border-radius: $border_15;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+}
+
+.input_1 {
+  text-align: center;
+  border-color: var(--primary_4);
+
+  @media (max-width:550px) {
+    min-width: 17rem;
+  }
+}
+
+.btn_1 {
+  color: var(--white);
+  background-color: var(--orange_500);
+  max-width: 16rem;
+}
 
 .content {
   display: grid;
   direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 22rem));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 21rem));
+  justify-content: center;
   gap: $font_05;
   background: var(--secondary_1);
 }
@@ -31,6 +63,10 @@
   &:active,
   &:focus {
     box-shadow: 0px 0px 1px 2px var(--thirdy_1);
+  }
+
+  .not_found_header {
+    color: var(--primary_4);
   }
 
 }

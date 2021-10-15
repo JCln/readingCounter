@@ -490,4 +490,23 @@ export class ReadingReportManagerService {
         return items
     })
   }
+  private followUPValidation = (id: number): boolean => {
+    if (MathS.isNull(id)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_trackNumber);
+      return false;
+    }
+    if (MathS.isNaN(id)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumber);
+      return false;
+    }
+    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumbersLength);
+      return false;
+    }
+    return true;
+  }
+  verificationFollowUPTrackNumber = (id: number): boolean => {
+    return this.followUPValidation(id);
+  }
+
 }

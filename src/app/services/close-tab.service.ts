@@ -91,6 +91,7 @@ export class CloseTabService {
   saveDataForPolicies: any;
   saveDataForFNB: any;
   saveDataForProfile: any;
+  saveDataForRRGalleryReq: any;
 
   private val: ISidebarVals[] = [
     { id: 1, req: '', value: 'saveDataForKarbari', value_2: '', url: '/wr/m/r/kar' },
@@ -155,6 +156,7 @@ export class CloseTabService {
     { id: 2, req: '', value: 'saveDataForRRDetails', value_2: '', url: '/wr/rpts/exm/details' },
     { id: 2, req: '', value: 'saveDataForRRkarkardDaily', value_2: '', url: '/wr/rpts/exm/karkardDaily' },
     { id: 2, req: '', value: 'saveDataForRRGIS', value_2: '', url: '/wr/rpts/mam/gis' },
+    { id: 2, req: 'saveDataForRRGalleryReq', value: '', value_2: '', url: '/wr/rpts/gallery/ai' },
     { id: 2, req: '', value: 'saveDataForOffloadModify', value_2: '', url: '/wr/m/track/offloaded/offloadMfy/' },
     { id: 2, req: '', value: 'saveDataForLMPD', value_2: '', url: '/wr/m/l/pd/' },
     { id: 2, req: '', value: 'saveDataForLMAll', value_2: 'saveDataForLMAll_extra', url: '/wr/m/l/all/' },

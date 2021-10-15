@@ -153,7 +153,6 @@ export class MapComponent implements OnInit, OnDestroy {
     this.onShowCounterReader.day = this.route.snapshot.paramMap.get('day');
     this.canShowOptionsButton = true;
     this.markersDataSourceXY = await this.mapService.getPointerMarks(this.onShowCounterReader);
-    console.log(this.markersDataSourceXY);
 
     if (!this.mapService.validateGISAccuracy(this.markersDataSourceXY)) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);

@@ -17,9 +17,9 @@
 
 section._container {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
+  grid-template-columns: 35% 65%;
   margin-top: $font_05;
-  gap: .5rem;
+  gap: .2rem;
 }
 
 .__checks,
@@ -51,7 +51,7 @@ section._container {
   align-items: center;
 
   @media (min-width: 550px) {
-    grid-column: 5 / 7;
+    grid-column: 2 / -1;
   }
 }
 
@@ -61,15 +61,9 @@ section._container {
   grid-row: 1 / -1;
 
   @media (min-width: 550px) {
+    align-self: flex-start;
     grid-column: 1 / 2;
   }
-}
-
-._img_content {
-  display: grid;
-  direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
-  gap: .25rem;
 }
 
 ._key,
@@ -192,17 +186,12 @@ hr {
 
 // slider
 .img_wrapper {
+  position: relative;
   border-radius: $border_15;
   border: 2px solid var(--thirdy_1);
   position: relative;
   margin: .4rem 0;
   cursor: pointer;
-
-  &:hover,
-  &:active,
-  &:focus {
-    box-shadow: 0px 0px 1px 2px var(--thirdy_1);
-  }
 }
 
 .__img_bound {
@@ -229,8 +218,8 @@ img {
   border-radius: $border_5;
 }
 
-.not_found_header {
-  color: var(--primary_4);
+._input_2 {
+  min-width: 19rem;
 }
 
 .tooltip .tooltip_text {
@@ -239,6 +228,17 @@ img {
   bottom: 110%;
 }
 
-.header_icons_wrap {
-  margin-bottom: .5rem;
+.__icons {
+  display: flex;
+  position: absolute;
+  top: -2rem;
+  left: .5rem;
+
+  i {
+    background-color: var(--secondary_1);
+    color: var(--thirdy_1);
+    font-size: $font_m;
+    margin: .25rem;
+    cursor: pointer;
+  }
 }

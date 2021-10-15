@@ -1,11 +1,11 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-gallery-all-details',
   templateUrl: './gallery-all-details.component.html',
   styleUrls: ['./gallery-all-details.component.scss']
 })
-export class GalleryAllDetailsComponent implements OnChanges {
+export class GalleryAllDetailsComponent {
 
   @Input() eshterak: string;
   @Input() imageDescription: string;
@@ -16,21 +16,25 @@ export class GalleryAllDetailsComponent implements OnChanges {
   @Input() sizeInByte: number;
 
   @Input() allImages: any;
+  degree: number = 0;
 
-  constructor(
-  ) { }
-
-  classWrapper = async (canRefresh?: boolean) => {
-    // this.imageFiles = [];
-    // this.allImages = [];
-
-
-    // this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
-    // this.downloadManagerService.assignToDataSource(this.dataSource);
-    // this.modifyType = this.trackingManagerService.getOffloadModifyType();
-    // this.offloadItems = this.trackingManagerService.getOffloadItems();
+  constructor() { }
+  
+  downloadImg = (src: string) => {
+    const link = document.createElement('a');
+    link.href = src;
+    link.download = `${new Date().toLocaleDateString()}.jpg`;
+    link.click();
   }
-  ngOnChanges(): void {
-    this.classWrapper();
+  rotateRightImg = () => {
+    const a = document.querySelector('.main-img') as HTMLElement;
+    this.degree += 90;
+    a.style.transform = `rotate(${this.degree + 'deg'}`;
   }
+  rotateLeftImg = () => {
+    const a = document.querySelector('.main-img') as HTMLElement;
+    this.degree -= 90;
+    a.style.transform = `rotate(${this.degree + 'deg'}`;
+  }
+
 }

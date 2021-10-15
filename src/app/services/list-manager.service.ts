@@ -74,7 +74,7 @@ export class ListManagerService {
     // { field: 'eslahType', header: 'اصلاح', isSelected: false },
     { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
-    { field: 'dateDifference', header: 'طول دوره', isSelected: false },
+    { field: 'dateDifference', header: 'مدت', isSelected: false },
     { field: 'description', header: 'توضیحات', isSelected: false }
   ]
 

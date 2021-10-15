@@ -73,8 +73,8 @@ export class MapService {
   }
   validateGISAccuracy = (temp: any[]): boolean => {
     let bol: boolean = false;
-    temp.every(item => {
-      return bol = parseInt(item.gisAccuracy) === 0 ? false : true
+    temp.find(item => {
+      return bol = parseInt(item.gisAccuracy) > 0 ? true : false
     })
 
     return bol;

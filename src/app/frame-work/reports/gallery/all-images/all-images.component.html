@@ -1,26 +1,56 @@
+<i (click)="_isCollapsed = !_isCollapsed" class="tooltip _circle_border p_icons "
+    [ngClass]="_isCollapsed ? 'pi pi-angle-down' : 'pi pi-angle-up'">
+    <div class="tooltip_text_right">{{_isCollapsed? 'باز': 'بسته'}}</div>
+</i>
+
+<form #form="ngForm" *ngIf="!_isCollapsed" class="insert_track" (ngSubmit)="connectToServer()">
+    <div class="input_2">
+        <div class="_key">شماره پیگیری</div>
+        <input class="_value" type="number" name="trackNumber" [(ngModel)]="trackNumber">
+    </div>
+    <button type="submit" class="btn_1">مشاهده</button>
+</form>
+
+<section *ngIf="allImagesDataSource">
+    <div class="input_2">
+        <div class="_key">تعداد تصاویر</div>
+        <input class="_value" name="itemCount" [(ngModel)]="allImagesDataSource.itemCount">
+    </div>
+
+    <div class="input_2">
+        <div class="_key">تعداد </div>
+        <input class="_value" name="imageCount" [(ngModel)]="allImagesDataSource.imageCount">
+    </div>
+
+    <div class="input_2">
+        <div class="_key">distinct</div>
+        <input class="_value" name="distinctImageCount" [(ngModel)]="allImagesDataSource.distinctImageCount">
+    </div>
+</section>
 <main style="position: relative;">
 
     <div class="content">
-        <div *ngFor="let item of allImages.imageUrlAndInfos; index as ri" class="tooltip _images">
+        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="tooltip _images">
 
-            <div *ngIf="!allImages[ri]" class="tooltip_text">بارگیری تصویر {{ri+1}}</div>
-            <div *ngIf="allImages[ri]" class="tooltip_text">بزرگنمایی {{ri+1}}</div>
+            <div *ngIf="!allImagesDataSource[ri]" class="tooltip_text">بارگیری تصویر {{ri+1}}</div>
+            <div *ngIf="allImagesDataSource[ri]" class="tooltip_text">بزرگنمایی {{ri+1}}</div>
 
-            <div *ngIf="allImages[ri]" class="__img_bound_real">
-                <img (click)="routeToOffload(item , ri ,allImages[ri])" src="{{allImages[ri]}}" alt="whatever">
+            <div *ngIf="allImagesDataSource[ri]" class="__img_bound_real">
+                <img (click)="routeToOffload(item , ri)" src="{{allImagesDataSource[ri]}}" alt="whatever">
             </div>
-            <div *ngIf="!allImages[ri]" class="__img_bound">
-                <img src="assets/imgs/soundvid/2.png" alt="whatever">
+            <div *ngIf="!allImagesDataSource[ri]" class="__img_bound">
+                <img src="assets/imgs/soundvid/2.png" alt="whatever"> 
+                <!-- loading="lazy" -->
             </div>
         </div>
 
-        <div class="not_found_header" *ngIf="!allImages.imageCount">
+        <div class="not_found_header" *ngIf="!allImagesDataSource.imageCount">
             <h2>فاقد تصویر</h2>
         </div>
     </div>
 
-    <app-gallery-carousel *ngIf="showCarousel" [dataSource]="carouselAllImages"
-        (cancelClicked)="carouselCancelClicked()" (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
+    <app-gallery-carousel *ngIf="showCarousel" [dataSource]="carouselImage" (cancelClicked)="carouselCancelClicked()"
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
         <app-gallery-all-details></app-gallery-all-details>
 
     </app-gallery-carousel>

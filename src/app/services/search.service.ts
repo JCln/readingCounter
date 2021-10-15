@@ -139,7 +139,7 @@ export class SearchService {
       { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
-      { field: 'dateDifference', header: 'طول دوره', isSelected: false },
+      { field: 'dateDifference', header: 'مدت', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
@@ -195,7 +195,7 @@ export class SearchService {
       { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
-      { field: 'dateDifference', header: 'طول دوره', isSelected: false },
+      { field: 'dateDifference', header: 'مدت', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }

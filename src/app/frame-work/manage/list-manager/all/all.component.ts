@@ -102,7 +102,6 @@ export class AllComponent extends FactoryONE {
     this.showCarousel = true;
   }
   carouselNextItem = () => {
-
     this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
     this.carouselDataSource = this.dataSource[this.rowIndex];
   }

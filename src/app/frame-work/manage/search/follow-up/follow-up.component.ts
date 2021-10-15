@@ -81,9 +81,7 @@ export class FollowUpComponent extends FactoryONE {
      * then data were saved     
      */
     if (this.followUpService.hasTrackNumber()) {
-      this.trackNumber = this.followUpService.getTrackNumber();
-      console.log(13);
-
+      this.trackNumber = this.followUpService.getTrackNumber();      
       this.connectToServer();
       this.followUpService.setTrackNumber(null);
       return;
