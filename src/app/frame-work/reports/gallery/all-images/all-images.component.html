@@ -27,7 +27,7 @@
         <input class="_value" name="distinctImageCount" [(ngModel)]="allImagesDataSource.distinctImageCount">
     </div>
 </section>
-<main style="position: relative;">
+<main *ngIf="allImagesDataSource" style="position: relative;">
 
     <div class="content">
         <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="tooltip _images">
@@ -36,16 +36,12 @@
             <div *ngIf="allImagesDataSource[ri]" class="tooltip_text">بزرگنمایی {{ri+1}}</div>
 
             <div *ngIf="allImagesDataSource[ri]" class="__img_bound_real">
-                <img (click)="routeToOffload(item , ri)" src="{{allImagesDataSource[ri]}}" alt="whatever">
+                <img (click)="routeToOffload(item , ri)" loading="lazy" src="{{allImagesDataSource[ri]}}"
+                    alt="whatever">
             </div>
             <div *ngIf="!allImagesDataSource[ri]" class="__img_bound">
-                <img src="assets/imgs/soundvid/2.png" alt="whatever"> 
-                <!-- loading="lazy" -->
+                <img src="assets/imgs/soundvid/2.png" alt="whatever">
             </div>
-        </div>
-
-        <div class="not_found_header" *ngIf="!allImagesDataSource.imageCount">
-            <h2>فاقد تصویر</h2>
         </div>
     </div>
 
@@ -55,4 +51,7 @@
 
     </app-gallery-carousel>
 
+    <div class="not_found_header" *ngIf="!allImagesDataSource.imageCount">
+        <h2>فاقد تصویر</h2>
+    </div>
 </main>
