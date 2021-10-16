@@ -139,6 +139,7 @@ export class SearchService {
       { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
+      { field: 'offLoadTime', header: 'زمان', isSelected: false },
       { field: 'dateDifference', header: 'مدت', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
@@ -195,6 +196,7 @@ export class SearchService {
       { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
+      { field: 'offLoadTime', header: 'زمان', isSelected: false },
       { field: 'dateDifference', header: 'مدت', isSelected: false },
       { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
@@ -510,7 +512,7 @@ export class SearchService {
   receiveToDateJalali = (variable: ENSearchs, $event: string) => {
     this[variable].toDate = $event;
   }
-  routeToWoui = (object: IOnOffLoadFlat) => {
+  routeToWoui = (object: any) => {
     this.router.navigate(['wr/m/track/woui', false, object.id]);
   }
   routeToLMAll = (row: ISearchSimpleOutput) => {

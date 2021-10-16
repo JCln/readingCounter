@@ -66,6 +66,7 @@ export interface IReadingReportMaster {
     itemCount: number
 }
 export interface IReadingReportDetails {
+    id: string,
     billId: number,
     radif: number,
     eshterak: number,
@@ -86,6 +87,7 @@ export interface IReadingReportDetails {
     possibleCounterSerial: string
 }
 export interface IReadingReportTraverse {
+    id: string
     billId: string,
     radif: number,
     eshterak: string,
@@ -149,6 +151,7 @@ export interface IReadingReportChartReq {
     ]
 }
 export interface IReadingReportTraverseDifferentialRes {
+    id: string,
     billId: string,
     radif: number,
     eshterak: string,
@@ -193,7 +196,7 @@ export interface IImageUrlAndInfos {
     sureName: string,
     imageDescription: string,
     sizeInByte: number,
-    imageUrl?:any
+    imageUrl?: any
 }
 export interface IImageUrlInfoWrapper {
     trackNumber: number,

@@ -21,9 +21,9 @@ export interface ISidebarItems {
 }
 export interface ISidebarVals {
     readonly id: number,
-    req?: any;
+    req?: ENEssentialsToSave;
     value: ENEssentialsToSave;
-    value_2: any;
+    value_2?: ENEssentialsToSave;
     readonly url: string
 }
 export interface ITabs {
@@ -76,6 +76,7 @@ export enum ENEssentialsToSave {
     saveDataForTrackOffloaded = 'saveDataForTrackOffloaded',
     saveDataForTrackFinished = 'saveDataForTrackFinished',
     saveDataForFollowUp = 'saveDataForFollowUp',
+    saveDataForFollowUpAUX = 'saveDataForFollowUpAUX',
     rSearchMoshtarakinReq = 'rSearchMoshtarakinReq',
     saveDataForSearchMoshtarakin = 'saveDataForSearchMoshtarakin',
     saveDataForSearchPro = 'saveDataForSearchPro',
@@ -98,10 +99,13 @@ export enum ENEssentialsToSave {
     saveDataForRRGIS = 'saveDataForRRGIS',
     saveDataForOffloadModify = 'saveDataForOffloadModify',
     saveDataForLMAll = 'saveDataForLMAll',
+    saveDataForLMAll_extra = 'saveDataForLMAll_extra',
     saveDataForEditUsers = 'saveDataForEditUsers',
     saveDataForWOUI = 'saveDataForWOUI',
     saveDataForUserLoggins = 'saveDataForUserLoggins',
     saveDataForFragmentNOBDetails = 'saveDataForFragmentNOBDetails',
+    saveDataForRRGallery = 'saveDataForRRGallery',
+    saveDataForRRGalleryReq = 'saveDataForRRGalleryReq',
 }
 export interface ITestSidebar {
     routerUrl: string;

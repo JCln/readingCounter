@@ -342,7 +342,8 @@ export class ReadingReportManagerService {
     // { field: 'eslahType', header: 'اصلاح', isSelected: false },
     { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
-    { field: 'dateDifference', header: 'طول دوره', isSelected: false },
+    { field: 'offLoadTime', header: 'زمان', isSelected: false },
+    { field: 'dateDifference', header: 'مدت', isSelected: false },
     { field: 'description', header: 'توضیحات', isSelected: false }
   ]
   private _RRLocked: IObjectIteratation[] = [
@@ -392,13 +393,14 @@ export class ReadingReportManagerService {
     { field: 'y', header: 'Y', isSelected: false },
     { field: 'x', header: 'X', isSelected: false },
     { field: 'gisAccuracy', header: 'دقت', isSelected: false },
-    { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
     { field: 'masraf', header: 'مصرف', isSelected: false },
     // { field: 'eslahType', header: 'اصلاح', isSelected: false },
     { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
-    { field: 'dateDifference', header: 'طول دوره', isSelected: false },
+    { field: 'offLoadTime', header: 'زمان', isSelected: false },
+    { field: 'dateDifference', header: 'مدت', isSelected: false },
+    { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
     { field: 'description', header: 'توضیحات', isSelected: false }
   ]
 
@@ -643,6 +645,24 @@ export class ReadingReportManagerService {
   }
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
+  }
+  private followUPValidation = (id: number): boolean => {
+    if (MathS.isNull(id)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_trackNumber);
+      return false;
+    }
+    if (MathS.isNaN(id)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumber);
+      return false;
+    }
+    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_trackNumbersLength);
+      return false;
+    }
+    return true;
+  }
+  verificationFollowUPTrackNumber = (id: number): boolean => {
+    return this.followUPValidation(id);
   }
 
 
