@@ -87,8 +87,8 @@
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
                 </i>
-                <i *ngIf="_hasCollapsible" (click)="collapse()" class="tooltip _circle_border p_icons "
-                    [ngClass]="_isCollaped ? 'pi pi-angle-down' : 'pi pi-angle-up'">
+                <i *ngIf="_hasCollapsible" (click)="collapse()" class="tooltip _circle_border p_icons"
+                    [ngClass]="_isCollaped ? 'pi pi-chevron-down' : 'pi pi-chevron-up'">
                     <div class="tooltip_text_right">{{_isCollaped? 'باز': 'بسته'}}</div>
                 </i>
                 <i *ngIf="_backToPreviousEnabled" (click)="backToPrevious()"
