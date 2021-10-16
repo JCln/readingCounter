@@ -34,8 +34,8 @@ export class ForbiddenService {
   }
   /* COLUMNS */
   private _forbidden: IObjectIteratation[] = [
-    // { field: 'userId', header: 'کاربری', isSelected: true },
     { field: 'zoneId', header: 'ناحیه', isSelected: true },
+    { field: 'displayName', header: 'مامور', isSelected: true },
     { field: 'preEshterak', header: 'اشتراک قبلی', isSelected: true },
     { field: 'nextEshterak', header: 'اشتراک بعدی', isSelected: true },
     { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
@@ -46,7 +46,9 @@ export class ForbiddenService {
     { field: 'x', header: 'X', isSelected: false },
     { field: 'y', header: 'Y', isSelected: false },
     { field: 'gisAccuracy', header: 'دقت مکان یابی', isSelected: false },
-    { field: 'description', header: 'توضیحات', isSelected: false }
+    { field: 'description', header: 'توضیحات', isSelected: false },
+    // { field: 'userId', header: 'کاربری', isSelected: true },    
+    // { field: 'insertDateTime', header: 'توضیحات', isSelected: false }    
   ]
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
     return this._forbidden;

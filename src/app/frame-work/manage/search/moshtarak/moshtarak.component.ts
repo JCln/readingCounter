@@ -33,9 +33,9 @@ export class MoshtarakComponent extends FactoryONE {
   qotrDictionary: IDictionaryManager[] = [];
 
   constructor(
-     
+
     private closeTabService: CloseTabService,
-    public searchService: SearchService  
+    public searchService: SearchService
   ) {
     super();
   }
@@ -44,13 +44,25 @@ export class MoshtarakComponent extends FactoryONE {
     this._selectCols = this.searchService.columnSearchMoshtarakin();
     this._selectedColumns = this.searchService.customizeSelectedColumns(this._selectCols);
   }
-  converts = () => {
+  converts = async () => {
     this._empty_message = EN_messages.notFound;
+
+    if (this.searchService.searchReqMosh.zoneId) {
+      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchService.searchReqMosh.zoneId);
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    }
+    this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
+    this.karbariDictionary = await this.searchService.getKarbariDictionary();
+    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
+    this.qotrDictionary = await this.searchService.getQotrDictionary();
+
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.insertSelectedColumns();
@@ -60,14 +72,6 @@ export class MoshtarakComponent extends FactoryONE {
     if (!this.searchService.verificationMosh(this.searchService.searchReqMosh))
       return;
     this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchMoshtarak, this.searchService.searchReqMosh);
-    if (this.searchService.searchReqMosh.zoneId) {
-      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchService.searchReqMosh.zoneId);
-      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchService.searchReqMosh.zoneId);
-    }
-    this.karbariDictionary = await this.searchService.getKarbariDictionary();
-    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
-    this.qotrDictionary = await this.searchService.getQotrDictionary();
-
     this.converts();
     this.searchService.makeHadPicturesToBoolean(this.dataSource);
 

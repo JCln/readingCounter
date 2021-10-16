@@ -62,8 +62,9 @@ export class AllImagesComponent extends FactoryONE {
     this.allImagesDataSource[index] = res;
     let reader = new FileReader();
     reader.addEventListener("load", () => {
-      this.allImagesDataSource[index] = reader.result;
+      // this.allImagesDataSource[index] = reader.result;
       this.allImagesDataSource.imageUrlAndInfos[index].imageUrl = reader.result;
+      this.closeTabService.saveDataForRRGallery[index] = reader.result;
     }, false);
     if (this.allImagesDataSource[index]) {
       reader.readAsDataURL(this.allImagesDataSource[index]);
@@ -72,19 +73,17 @@ export class AllImagesComponent extends FactoryONE {
 
 
   routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number) => {
+    scrollTo(0, 0);
     this.carouselImage = dataSource;
     this.rowIndex = rowIndex;
     this.showCarousel = true;
   }
   carouselNextItem = () => {
     this.rowIndex > this.allImagesDataSource.imageUrlAndInfos.length - 2 ? this.rowIndex = 0 : this.rowIndex++;
-    console.log(this.allImagesDataSource.imageUrlAndInfos[this.rowIndex]);
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
   }
   carouselPrevItem = () => {
     this.rowIndex < 1 ? this.rowIndex = this.allImagesDataSource.imageUrlAndInfos.length - 1 : this.rowIndex--;
-    console.log(this.allImagesDataSource.imageUrlAndInfos[this.rowIndex]);
-
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
   }
   carouselCancelClicked = () => {

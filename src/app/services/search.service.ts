@@ -91,6 +91,7 @@ export class SearchService {
   private _searchPro: IObjectIteratation[] =
     [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
       { field: 'radif', header: 'ش.پرونده', isSelected: false },
       { field: 'eshterak', header: 'اشتراک', isSelected: true },
@@ -114,9 +115,9 @@ export class SearchService {
       { field: 'postalCode', header: 'کد پستی', isSelected: false },
       { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
       { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
-      { field: 'counterStateCode', header: 'وضعیت فعلی', isSelected: true },
+      { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false },
+      { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true },
       { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
-      // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
       { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
       { field: 'tavizDate', header: 'تاریخ تعویض', isSelected: false },
       { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
@@ -133,21 +134,22 @@ export class SearchService {
       { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
       { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
       { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
+      { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+      { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'y', header: 'Y', isSelected: false },
       { field: 'x', header: 'X', isSelected: false },
       { field: 'gisAccuracy', header: 'دقت', isSelected: false },
-      { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'offLoadTime', header: 'زمان', isSelected: false },
       { field: 'dateDifference', header: 'مدت', isSelected: false },
-      { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ];
   private _searchMosh: IObjectIteratation[] =
     [
       { field: 'billId', header: 'شناسه قبض', isSelected: false },
+      { field: 'counterReaderName', header: 'مامور', isSelected: true },
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
       { field: 'radif', header: 'ش.پرونده', isSelected: false },
       { field: 'eshterak', header: 'اشتراک', isSelected: true },
@@ -171,9 +173,9 @@ export class SearchService {
       { field: 'postalCode', header: 'کد پستی', isSelected: false },
       { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
       { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
-      { field: 'counterStateCode', header: 'وضعیت فعلی', isSelected: true },
+      { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false },
+      { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true },
       { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
-      // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
       { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
       { field: 'tavizDate', header: 'تاریخ تعویض', isSelected: false },
       { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
@@ -190,15 +192,15 @@ export class SearchService {
       { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
       { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
       { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
+      { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+      { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'y', header: 'Y', isSelected: false },
       { field: 'x', header: 'X', isSelected: false },
       { field: 'gisAccuracy', header: 'دقت', isSelected: false },
-      { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'offLoadTime', header: 'زمان', isSelected: false },
       { field: 'dateDifference', header: 'مدت', isSelected: false },
-      { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false }
     ];
@@ -299,6 +301,9 @@ export class SearchService {
   }
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getKarbariDictionary();
+  }
+  getCounterStateDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateDictionary();
   }
   doSearch = (method: ENInterfaces, body: any): Promise<any> => {
     try {
@@ -473,6 +478,7 @@ export class SearchService {
         item.x = MathS.getRange(item.x)
       if (item.y)
         item.y = MathS.getRange(item.y)
+      item.preAverage = +MathS.getRange(item.preAverage);
     })
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {

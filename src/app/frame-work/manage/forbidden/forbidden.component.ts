@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IForbiddenManager } from 'interfaces/imanage';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
@@ -14,7 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class ForbiddenComponent extends FactoryONE {
   isCollapsed: boolean = false;
   panelOpenState: boolean = true;
-  dataSource: any;
+  dataSource: IForbiddenManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   userCounterReaders: IDictionaryManager[] = [];
 

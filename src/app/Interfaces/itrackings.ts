@@ -12,6 +12,7 @@ export interface ITracking {
     toEshterak: string,
     fromDate: string,
     toDate: string,
+    insertTime: string,
     itemQuantity: number,
     alalHesabPercent: number,
     imagePercent: number,

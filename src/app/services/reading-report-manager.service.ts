@@ -213,6 +213,7 @@ export class ReadingReportManagerService {
   ]
   private _RRTraverseDifferential = [
     { field: 'billId', header: 'شناسه قبض', isSelected: false },
+    { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
     { field: 'radif', header: 'ش.پرونده', isSelected: false },
     { field: 'eshterak', header: 'اشتراک', isSelected: true },
     { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true },
@@ -258,7 +259,7 @@ export class ReadingReportManagerService {
   ]
   private _RROffloadedKarkard = [
     // { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: true },
-    { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
+    { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
     { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
     { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
     // { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
@@ -304,7 +305,9 @@ export class ReadingReportManagerService {
     { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
     { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
     { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true },
-    { field: 'counterStateCode', header: 'وضعیت کنتور', isSelected: true },
+    { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
+    { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false },
+    { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true },
     { field: 'address', header: 'آدرس', isSelected: false },
     { field: 'pelak', header: 'پلاک', isSelected: false },
     { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
@@ -314,7 +317,6 @@ export class ReadingReportManagerService {
     // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
     { field: 'postalCode', header: 'کد پستی', isSelected: false },
     { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
-    { field: 'preCounterStateCode', header: 'وضعیت قرائت قبلی', isSelected: false },
     { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
     // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
     { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
@@ -333,12 +335,12 @@ export class ReadingReportManagerService {
     { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
     { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
     { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
+    { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+    { field: 'masraf', header: 'مصرف', isSelected: true },
     { field: 'y', header: 'Y', isSelected: false },
     { field: 'x', header: 'X', isSelected: false },
     { field: 'gisAccuracy', header: 'دقت', isSelected: false },
-    { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
     { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
-    { field: 'masraf', header: 'مصرف', isSelected: false },
     // { field: 'eslahType', header: 'اصلاح', isSelected: false },
     { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
@@ -361,7 +363,9 @@ export class ReadingReportManagerService {
     { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
     { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
     { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true },
-    { field: 'counterStateCode', header: 'وضعیت کنتور', isSelected: true },
+    { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
+    { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false },
+    { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true },
     { field: 'address', header: 'آدرس', isSelected: false },
     { field: 'pelak', header: 'پلاک', isSelected: false },
     { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
@@ -371,7 +375,6 @@ export class ReadingReportManagerService {
     // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
     { field: 'postalCode', header: 'کد پستی', isSelected: false },
     { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
-    { field: 'preCounterStateCode', header: 'وضعیت قرائت قبلی', isSelected: false },
     { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
     // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
     { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
@@ -468,6 +471,9 @@ export class ReadingReportManagerService {
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
   }
+  getKarbariDictionaryCode = (): Promise<any> => {
+    return this.dictionaryWrapperService.getkarbariCodeDictionary();
+  }
   getReadingPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
@@ -483,6 +489,18 @@ export class ReadingReportManagerService {
   getTraverseDiffrentialDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getTraverseDifferentialDictionary();
   }
+  getCounterReportByZoneDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterReportByZoneIdDictionary(zoneId);
+  }
+  getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
+  }
+  getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
+  }
+  getQotrDictionary = () => {
+    return this.dictionaryWrapperService.getQotrDictionary();
+  }  
 
 
   private datesValidation = (dataSource: object): boolean => {

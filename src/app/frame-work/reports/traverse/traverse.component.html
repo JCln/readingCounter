@@ -78,7 +78,8 @@
     </section>
 
     <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-        [_outputFileName]="'allReads'" [_checkUpName]="'rr-traverse'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+        [_numberOfExtraColumns]="[1]" [_outputFileName]="'allReads'" [_checkUpName]="'rr-traverse'"
+        [_hasCollapsible]=true [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

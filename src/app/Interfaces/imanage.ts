@@ -2,7 +2,8 @@
 export interface IForbiddenManager {
     gisAccuracy: string,
     id: string,
-    imageCount: number
+    displayName: string,
+    imageCount: number,
     insertDateJalali: string,
     insertDateTime: string,
     insertTime: string,

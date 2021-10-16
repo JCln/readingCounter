@@ -5,7 +5,9 @@ import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-rr-pre-number-shown',
@@ -27,10 +29,15 @@ export class RrPreNumberShownComponent extends FactoryONE {
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
+
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
+  counterStateDictionary: IDictionaryManager[] = [];
+  counterStateByCodeDictionary: IDictionaryManager[] = [];
+  karbariDictionaryCode: IDictionaryManager[] = [];
+  qotrDictionary: IDictionaryManager[] = [];
 
   dataSource: IOnOffLoadFlat[] = [];
 
@@ -50,7 +57,7 @@ export class RrPreNumberShownComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRRPreNumShown) {
       this.dataSource = this.closeTabService.saveDataForRRPreNumShown;
-      this.insertSelectedColumns();
+      this.converts();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -68,14 +75,34 @@ export class RrPreNumberShownComponent extends FactoryONE {
     if (temp)
       this.connectToServer();
   }
+  converts = async () => {
+    const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
+    if (tempZone) {
+      this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
+      this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
+    }
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
+    this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+
+    this.insertSelectedColumns();
+    this.setDynamicRages();
+  }
   insertSelectedColumns = () => {
     this._selectCols = this.readingReportManagerService.columnRRPreNumberShown();
     this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.readingReportManagerService.preNumberShownReq);
-    this.insertSelectedColumns();
+    this.converts();
     this.closeTabService.saveDataForRRPreNumShown = this.dataSource;
   }
   @Input() get selectedColumns(): any[] {
@@ -93,6 +120,14 @@ export class RrPreNumberShownComponent extends FactoryONE {
     }
     this.readingReportManagerService.snackEmptyValue();
   }
-
+  setDynamicRages = () => {
+    this.dataSource.forEach(item => {
+      item.preAverage = +MathS.getRange(item.preAverage);
+      item.x = MathS.getRange(item.x);
+      item.y = MathS.getRange(item.y);
+      item.gisAccuracy = MathS.getRange(item.gisAccuracy);
+      item.newRate = +MathS.getRange(item.newRate);
+    })
+  }
 
 }

@@ -61,13 +61,14 @@ export class AllComponent extends FactoryONE {
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
+    
+    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
     if (tempZone) {
       this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     }
-
     // Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');

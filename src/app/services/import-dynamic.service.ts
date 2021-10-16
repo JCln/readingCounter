@@ -6,13 +6,13 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENImportDatas,
-  IImportDataResponse,
-  IImportDynamicDefault,
-  IImportSimafaBatchReq,
-  IImportSimafaReadingProgramsReq,
-  IImportSimafaSingleReq,
-  IReadingProgramRes,
+    ENImportDatas,
+    IImportDataResponse,
+    IImportDynamicDefault,
+    IImportSimafaBatchReq,
+    IImportSimafaReadingProgramsReq,
+    IImportSimafaSingleReq,
+    IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -78,7 +78,8 @@ export class ImportDynamicService {
       { field: 'postalCode', header: 'کد پستی', isSelected: false },
       { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
       { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
-      { field: 'counterStateCode', header: 'وضعیت فعلی', isSelected: true },
+      { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false },
+      { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true },
       { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
       // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
       { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
@@ -98,15 +99,15 @@ export class ImportDynamicService {
       { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
       { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
       // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false },
+      { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+      { field: 'masraf', header: 'مصرف', isSelected: true },
       { field: 'y', header: 'Y', isSelected: false },
       { field: 'x', header: 'X', isSelected: false },
       { field: 'gisAccuracy', header: 'دقت', isSelected: false },
-      { field: 'masraf', header: 'مصرف', isSelected: false },
       { field: 'eslahType', header: 'اصلاح', isSelected: false },
       { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
       { field: 'offLoadTime', header: 'زمان', isSelected: false },
       { field: 'dateDifference', header: 'مدت', isSelected: false },
-      { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
       { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
       { field: 'description', header: 'توضیحات', isSelected: false },
       { field: 'isSelected', header: 'انتخاب', isSelected: true, isBoolean: true }
