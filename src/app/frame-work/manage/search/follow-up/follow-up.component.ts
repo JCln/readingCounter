@@ -122,7 +122,7 @@ export class FollowUpComponent extends FactoryONE {
     this.clearUNUsables();
   }
   showInMap = () => {
-    this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[this.changeHsty.length - 1].insertDateJalali, this.dataSourceAUX.overalDistance);
+    this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[this.changeHsty.length - 1].insertDateJalali, this.dataSourceAUX.overalDistance, true);
   }
   routeToLMAll = (row: IFollowUpHistory) => {
     this.trackingManagerService.routeToLMAll(row);

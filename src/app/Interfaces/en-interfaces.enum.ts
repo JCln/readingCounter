@@ -158,6 +158,7 @@ export enum ENInterfaces {
     ListTraverseDifferntialChart = 'V1/List/Offloaded/TraverseDifferntialChart',
     ListOffloadedPERDAY = `V1/List/OffLoaded/PerDay/`,
     ListPerDayXY = 'V1/List/OffLoaded/PerDayXY',
+    ListXY = `V1/List/OffLoaded/XY`,
     ListOffloadedALL = `V1/List/OffLoaded/All/`,
     ListDictionary = 'V1/List/TraverseDifferential/Dictionary',
     ListKarkardDaily = 'V1/List/Offloaded/KarkardDaily',

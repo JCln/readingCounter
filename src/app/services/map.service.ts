@@ -2,6 +2,7 @@ import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.j
 
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { ListManagerService } from 'services/list-manager.service';
 
@@ -70,6 +71,9 @@ export class MapService {
   }
   getPointerMarks = (a: object): Promise<any> => {
     return this.listManagerService.postLMPDXY(a);
+  }
+  getXY = (a: string): Promise<any> => {
+    return this.listManagerService.postById(ENInterfaces.ListXY, parseInt(a));
   }
   validateGISAccuracy = (temp: any[]): boolean => {
     let bol: boolean = false;

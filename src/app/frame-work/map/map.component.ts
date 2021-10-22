@@ -87,7 +87,7 @@ export class MapComponent implements OnInit, OnDestroy {
   ]
   _isOrderInAsc: boolean = false;
   onShowCounterReader = {
-    trackNumber: '', day: '', distance: null
+    trackNumber: '', day: '', distance: null, isPerday: null
   }
   _isCluster: boolean;
 
@@ -151,14 +151,19 @@ export class MapComponent implements OnInit, OnDestroy {
   private classWrapper = async () => {
     this.onShowCounterReader.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
     this.onShowCounterReader.day = this.route.snapshot.paramMap.get('day');
+    this.onShowCounterReader.isPerday = this.route.snapshot.paramMap.get('isPerday');
     this.canShowOptionsButton = true;
-    this.markersDataSourceXY = await this.mapService.getPointerMarks(this.onShowCounterReader);
+
+    if (this.onShowCounterReader.isPerday)
+      this.markersDataSourceXY = await this.mapService.getXY(this.onShowCounterReader.trackNumber);
+    else
+      this.markersDataSourceXY = await this.mapService.getPointerMarks(this.onShowCounterReader);
 
     if (!this.mapService.validateGISAccuracy(this.markersDataSourceXY)) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
       return;
     }
-    this.mapConfigOptions(0);
+    this.mapConfigOptions(200);
   }
   private makeClusterRouteObject = (): IReadingReportGISReq => {
     return {
@@ -177,7 +182,6 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   private classWrapperCluster = async () => {
     this.extraDataSourceRes = await this.readingReportManagerService.portRRTest(ENInterfaces.ListToGis, this.makeClusterRouteObject());
-    console.log(this.extraDataSourceRes);
 
     if (this.extraDataSourceRes.length === 0) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);

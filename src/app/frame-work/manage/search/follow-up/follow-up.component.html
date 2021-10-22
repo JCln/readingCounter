@@ -1,7 +1,5 @@
-<i (click)="_isCollapsed = !_isCollapsed" class="tooltip _circle_border p_icons "
-    [ngClass]="_isCollapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up'">
-    <div class="tooltip_text_right">{{_isCollapsed? 'باز': 'بسته'}}</div>
-</i>
+<app-collapsable [_isCollapsed]=_isCollapsed (_clicked)=" _isCollapsed = !_isCollapsed">
+</app-collapsable>
 <form #form="ngForm" *ngIf="!_isCollapsed" class="insert_track">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>

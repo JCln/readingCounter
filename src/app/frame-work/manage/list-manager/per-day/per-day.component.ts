@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IListManagerPDHistory, IOffLoadPerDay } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
@@ -62,7 +63,7 @@ export class PerDayComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.listManagerService.getLMPD(parseInt(this.trackNumber));
+    this.dataSource = await this.listManagerService.getLM(ENInterfaces.ListOffloadedPERDAY, parseInt(this.trackNumber));
     this.offLoadPerDayHistory = this.dataSource.offLoadPerDayHistory;
 
     this.setGetRanges();

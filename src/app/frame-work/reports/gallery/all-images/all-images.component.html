@@ -1,8 +1,5 @@
-<i (click)="_isCollapsed = !_isCollapsed" class="tooltip _circle_border p_icons "
-    [ngClass]="_isCollapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up'">
-    <div class="tooltip_text_right">{{_isCollapsed? 'باز': 'بسته'}}</div>
-</i>
-
+<app-collapsable [_isCollapsed]=_isCollapsed (_clicked)=" _isCollapsed = !_isCollapsed">
+</app-collapsable>
 <form #form="ngForm" *ngIf="!_isCollapsed" class="insert_track" (ngSubmit)="connectToServer()">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
@@ -29,14 +26,11 @@
 <main *ngIf="allImagesDataSource" style="position: relative;">
 
     <div class="content">
-        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="tooltip _images">
-
-            <div *ngIf="!allImagesDataSource[ri]" class="tooltip_text">بارگیری تصویر {{ri+1}}</div>
-            <div *ngIf="allImagesDataSource[ri]" class="tooltip_text">بزرگنمایی {{ri+1}}</div>
+        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
 
             <div *ngIf="allImagesDataSource[ri]" class="__img_bound_real">
                 <img (click)="routeToOffload(item , ri)" src="{{item.imageUrl}}" alt="whatever">
-                <div class="__hiddens">
+                <div class="__hiddens" *ngIf="item.onOffLoadId">
                     <p>{{item.eshterak}}</p>
                     <p>{{item.firstName}}</p>
                     <p>{{item.sureName}}</p>

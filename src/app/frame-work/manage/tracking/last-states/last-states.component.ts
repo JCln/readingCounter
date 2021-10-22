@@ -17,7 +17,6 @@ export class LastStatesComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-     
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService
@@ -51,7 +50,7 @@ export class LastStatesComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   showInMap = (trackNumberAndDate: object) => {
-    this.trackingManagerService.routeToLMPDXY(trackNumberAndDate['trackNumber'], trackNumberAndDate['insertDateJalali'], null);
+    this.trackingManagerService.routeToLMPDXY(trackNumberAndDate['trackNumber'], trackNumberAndDate['insertDateJalali'], null, true);
   }
 
 }

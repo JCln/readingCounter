@@ -43,7 +43,6 @@ export class AllImagesComponent extends FactoryONE {
     JUST add to closeTabService.saveDataForRRGalleryReq from other
     components to process images
      */
-
     if (this.closeTabService.saveDataForRRGalleryReq) {
       this.trackNumber = this.closeTabService.saveDataForRRGalleryReq;
       this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.trackNumber);
@@ -57,12 +56,13 @@ export class AllImagesComponent extends FactoryONE {
       this.getExactImg(item.fileRepositorayId, i);
     })
   }
+  getImageDataSource = async (id: string): Promise<any> => {
+    return await this.downloadManagerService.downloadFile(id);
+  }
   getExactImg = async (id: string, index: number) => {
-    const res = await this.downloadManagerService.downloadFile(id);
-    this.allImagesDataSource[index] = res;
+    this.allImagesDataSource[index] = this.getImageDataSource(id);
     let reader = new FileReader();
     reader.addEventListener("load", () => {
-      // this.allImagesDataSource[index] = reader.result;
       this.allImagesDataSource.imageUrlAndInfos[index].imageUrl = reader.result;
       this.closeTabService.saveDataForRRGallery[index] = reader.result;
     }, false);

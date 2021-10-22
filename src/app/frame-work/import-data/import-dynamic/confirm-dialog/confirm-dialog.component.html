@@ -11,7 +11,7 @@
         <div class="_key">تعداد</div>
         <div class="_value"><strong>{{data.data.count}}</strong></div>
     </div>
-    <div class="_key_value">
+    <div class="_key_value" *ngIf="!data.isConfirm">
         <div class="_key">شماره پیگیری</div>
         <div class="_value"><strong>{{data.data.trackNumber}}</strong></div>
     </div>

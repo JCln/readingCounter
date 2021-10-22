@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { SharedCollapseModule } from 'src/app/shared/shared-collapse.module';
 import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 
 import { AllImagesRoutingModule } from './all-images-routing.module';
@@ -15,6 +16,7 @@ import { GalleryCarouselComponent } from './gallery-carousel/gallery-carousel.co
   ],
   imports: [
     SharedTwoModule,
+    SharedCollapseModule,
     AllImagesRoutingModule
   ]
 })

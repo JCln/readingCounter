@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { SharedCollapseModule } from 'src/app/shared/shared-collapse.module';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -13,6 +14,7 @@ import { TimeLineComponent } from './time-line/time-line.component';
     SharedPrimeNgModule,
     SharedModule,
     SharedTwoModule,
+    SharedCollapseModule,
     FollowUpRoutingModule
   ]
 })

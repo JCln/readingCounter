@@ -185,9 +185,9 @@ export class ListManagerService {
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
   }
-  getLMPD = (trackNumber: number): Promise<any> => {
+  getLM = (method: ENInterfaces, trackNumber: number): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedPERDAY, trackNumber).subscribe(res => {
+      this.interfaceManagerService.GETByQuote(method, trackNumber).subscribe(res => {
         resolve(res);
       })
     })

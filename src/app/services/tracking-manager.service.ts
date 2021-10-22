@@ -427,8 +427,8 @@ export class TrackingManagerService {
       })
     })
   }
-  routeToLMPDXY = (trackNumber: number, day: string, distance: number) => {
-    this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance });
+  routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
+    this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
   customizeSelectedColumns = (_selectCols: any) => {
     return _selectCols.filter(items => {
