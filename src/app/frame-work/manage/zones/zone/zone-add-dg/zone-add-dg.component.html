@@ -14,11 +14,16 @@
         </div>
         <div class="input_2">
             <div class="_key">منطقه</div>
-            <mat-select placeholder="انتخاب مورد" formControlName="regionId">
+            <div class="_value">
+                <p-dropdown [options]="data.di" formControlName="regionId" filter="true" placeholder="انتخاب مورد"
+                    optionLabel="title" [showClear]="true" optionValue="id">
+                </p-dropdown>
+            </div>
+            <!-- <mat-select placeholder="انتخاب مورد" formControlName="regionId">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
-            </mat-select>
+            </mat-select> -->
         </div>
 
         <div class="input_2">

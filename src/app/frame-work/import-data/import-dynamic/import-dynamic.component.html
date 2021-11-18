@@ -16,13 +16,13 @@
             <section class="content">
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importDynamicService.importDynamicReq.zoneId"
-                        name="zoneId">
-                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
+                    <div class="_value">
+                        <p-dropdown [options]="zoneDictionary"
+                            [(ngModel)]="importDynamicService.importDynamicReq.zoneId" filter="true"
+                            placeholder="انتخاب مورد" optionLabel="title" [showClear]="true" optionValue="id"
                             (click)="verificationACounterReaderId()">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                        </p-dropdown>
+                    </div>
                 </div>
                 <!-- when zone id and kind id get -->
                 <div class="input_2" [hidden]="_isOrderByDate || !readingPeriodKindsDictionary.length">

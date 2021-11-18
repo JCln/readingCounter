@@ -132,6 +132,10 @@
     right: 0.357rem;
   }
 
+  .p-dropdown-items-wrapper {
+    position: fixed;
+  }
+
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
     background: var(--secondary_1);
     color: var(--secondary_8);
