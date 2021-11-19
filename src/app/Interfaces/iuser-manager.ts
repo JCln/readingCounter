@@ -99,7 +99,8 @@ export interface IAUserEditSave {
     mobile: string,
     displayMobile: boolean,
     displayName: string,
-    deviceId: string
+    deviceId: string,
+    isActive: boolean
 }
 export interface IUserInfo {
     userCode?: number,
@@ -147,7 +148,10 @@ export interface appItems {
         }
     ]
 }
-
+export interface IUserEditOnRole {
+    roleId: number,
+    selectedActions: string[]
+}
 // add user 
 export interface IAddUserManager {
     provinceItems: [

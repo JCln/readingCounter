@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IReadingReportReq } from 'interfaces/imanage';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { IReadingReportKarkard } from 'interfaces/ireports';
+import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -11,16 +15,8 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
   templateUrl: './karkard.component.html',
   styleUrls: ['./karkard.component.scss']
 })
-export class KarkardComponent implements OnInit {
-  readingReportReq: IReadingReportReq = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1400
-  }
+export class KarkardComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -31,53 +27,87 @@ export class KarkardComponent implements OnInit {
       isSelected: false
     }
   ]
+
+  dataSource: IReadingReportKarkard[] = [];
+  karbariDictionary: IDictionaryManager[] = [];
+
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
   _isOrderByDate: boolean = true;
-  _canRouteToChild: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
-    // private interactionService: InteractionService,
+    public readingReportManagerService: ReadingReportManagerService,
+     
+    private closeTabService: CloseTabService,
     public route: ActivatedRoute
-  ) { }
-
-  routeToGridView = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/karkard/res');
+  ) {
+    super();
   }
+
   routeToChartView = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/karkard/chart');
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.saveDataForRRKarkard = null;
+      this.verification();
+    }
+    if (this.closeTabService.saveDataForRRKarkard) {
+      this.dataSource = this.closeTabService.saveDataForRRKarkard;
+      this.insertSelectedColumns();
+      this.setGetRanges();
+    }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
-  }
   receiveYear = () => {
-    this._canRouteToChild = true;
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
-  verification = async () => {
-    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
-    if (temp)
-      document.activeElement.id == 'grid_view' ? this.routeToGridView() : this.routeToChartView();
+  validation = (): boolean => {
+    // this._isOrderByDate ? (this.readingReportManagerService.karkardReq.readingPeriodId = null, this.readingReportManagerService.karkardReq.year = 0) : (this.readingReportManagerService.karkardReq.fromDate = '', this.readingReportManagerService.karkardReq.toDate = '');
+    return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardReq, this._isOrderByDate);
   }
+  verification = async () => {
+    if (this.validation())
+      document.activeElement.id === 'grid_view' ? this.connectToServer() : this.routeToChartView();
+  }
+  insertSelectedColumns = () => {
+    this._selectCols = this.readingReportManagerService.columnRRKarkard();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListOFFKarkard, this.readingReportManagerService.karkardReq);
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.insertSelectedColumns();
+    this.setGetRanges();
+    this.closeTabService.saveDataForRRKarkard = this.dataSource;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  refreshTable = () => {
+    if (this.validation())
+      this.connectToServer();
+  }
+  private setGetRanges = () => {
+    this.dataSource.forEach(item => {
+      item.duration = parseFloat(MathS.getRange(item.duration));
+    })
+  }
+
 }

@@ -1,21 +1,22 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IAPK } from 'interfaces/inon-manage';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-apk',
   templateUrl: './apk.component.html',
   styleUrls: ['./apk.component.scss']
 })
-export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ApkComponent extends FactoryONE {
   @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
   choosenFileName: string = '';
   fileNameAfterChoose: string = '';
+  progress: number = 0;
 
   uploadForm: any = {
     versionCode: null,
@@ -26,14 +27,14 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dataSource: IAPK[] = [];
   _columns: any[] = [];
-  subscription: Subscription[] = [];
 
   constructor(
     private apkService: ApkService,
-    private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private outputManagerService: OutputManagerService
-  ) { }
+  ) {
+    super();
+  }
 
   downloadAPK = async () => {
     const a = await this.apkService.getlastAPK();
@@ -45,7 +46,7 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     this.choosenFileName = a.files.item(0).name;
     FileList = event.target.files;
   }
-  uploadFile = async (form: NgForm) => {
+  uploadFile = (form: NgForm, isSubscription?: boolean) => {
     if (!this.screenshotInput) {
       throw new Error("this.screenshotInput is null.");
     }
@@ -58,38 +59,36 @@ export class ApkComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.apkService.checkVertitication(fileInput.files, form.value))
       return;
 
-    await this.apkService.postTicket()
+    this.apkService.postTicket().subscribe((event: HttpEvent<any>) => {
+      switch (event.type) {
+        case HttpEventType.Sent:
+          break;
+        case HttpEventType.ResponseHeader:
+          break;
+        case HttpEventType.UploadProgress:
+          this.progress = Math.round(event.loaded / event.total * 100);
+          break;
+        case HttpEventType.Response:
+          this.apkService.showSuccessMessage(event.body.message);
+          setTimeout(() => {
+            this.progress = 0;
+          }, 1500);
+      }
+    })
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh)
-      this.closeTabService.saveDataForAPKManager = '';
+      this.closeTabService.saveDataForAPKManager = null;
 
-    if (this.closeTabService.saveDataForAPKManager)
-      this.dataSource = this.closeTabService.saveDataForAPKManager;
-    else
+    if (this.closeTabService.saveDataForAPKManager === null || !this.closeTabService.saveDataForAPKManager) {
       this.dataSource = await this.apkService.getDataSource();
+      this.closeTabService.saveDataForAPKManager = this.dataSource;
+    }
+    else {
+      this.dataSource = this.closeTabService.saveDataForAPKManager;
+    }
 
     this._columns = this.apkService.columnAPK();
-  }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/apk')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
 
 }

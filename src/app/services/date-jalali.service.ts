@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Converter } from 'src/app/classes/converter';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,28 @@ export class DateJalaliService {
     if (persianDate.split('/')[2].length == 1) {
       persianDate = persianDate.substring(0, 8) + 0 + persianDate.substr(8);
     }
+    return Converter.persianToEngNumbers(persianDate);
+  }
+  getTime = (item: any) => {
+    let persianTime = new Date(item).toLocaleTimeString('fa-IR');
+    if (persianTime.length == 7)
+      return Converter.persianToEngNumbers(persianTime = 0 + persianTime);
+    return Converter.persianToEngNumbers(persianTime);
+  }
+  getDate = (item: any) => {
+    let persianDate = new Date(item).toLocaleDateString('fa-IR');
 
-    return persianDate;
+    if (persianDate.length == 10)
+      return persianDate;
+    // add 0 to month
+    if (persianDate.split('/')[1].length == 1) {
+      persianDate = persianDate.substring(0, 5) + 0 + persianDate.substr(5);
+    }
+    // add 0 to day
+    if (persianDate.split('/')[2].length == 1) {
+      persianDate = persianDate.substring(0, 8) + 0 + persianDate.substr(8);
+    }
+    return Converter.persianToEngNumbers(persianDate);
   }
   sortByDate = (data: any, toSort: any) => {
     return data.sort((a, b) => {

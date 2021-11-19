@@ -1,50 +1,43 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { IProfile } from 'interfaces/iuser-manager';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { InteractionService } from 'services/interaction.service';
+import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, AfterViewInit, OnDestroy {
-  subscription: Subscription[] = [];
+export class ProfileComponent extends FactoryONE {
+
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];
 
   constructor(
-    private interactionService: InteractionService,
-    private profileService: ProfileService
-  ) { }
+     
+    private profileService: ProfileService,
+    private closeTabService: CloseTabService
+  ) {
+    super();
+  }
 
-  classWrapper = async () => {
-    this.myInfoDataSource = await this.profileService.getMyInfoDataSource();
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.saveDataForProfile;
+    }
+    if (this.closeTabService.saveDataForProfile) {
+      this.myInfoDataSource = this.closeTabService.saveDataForProfile;
+    }
+    else {
+      this.myInfoDataSource = await this.profileService.getMyInfoDataSource();
+      this.closeTabService.saveDataForProfile = this.myInfoDataSource;
+    }
+
     this.getSelectedColumns();
-  }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/profile')
-          this.ngOnInit();
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   toDefaultPassword = () => {
     this.password.confirmPassword = '';

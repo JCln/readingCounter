@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ReadManagerService } from 'services/read-manager.service';
 
 @Component({
   selector: 'app-cr-add-dg',
@@ -12,15 +14,16 @@ export class CrAddDgComponent {
 
   constructor(
     fb: FormBuilder,
+    private readManagerService: ReadManagerService,
     private dialogRef: MatDialogRef<CrAddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     data = data.di;
     this.form = fb.group({
-      id: [''],
       moshtarakinId: [''],
       title: [''],
       zoneId: data.zoneId,
+      forProvince: false,
       isAhad: false,
       isKarbari: false,
       canNumberBeLessThanPre: false,
@@ -28,7 +31,11 @@ export class CrAddDgComponent {
       clientOrder: ['']
     })
   }
-  save() {
+  async save() {
+    if (!this.readManagerService.verification(this.form.value))
+      return;
+    if (!await this.readManagerService.addOrEditAuths(ENInterfaces.CounterReportAdd, this.form.value))
+      return;
     this.dialogRef.close(this.form.value);
   }
   close() {

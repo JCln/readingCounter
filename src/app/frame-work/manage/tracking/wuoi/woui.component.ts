@@ -1,13 +1,12 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/imanage';
+import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { DownloadManagerService } from 'services/download-manager.service';
-import { InteractionService } from 'services/interaction.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 
@@ -16,7 +15,7 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
   templateUrl: './woui.component.html',
   styleUrls: ['./woui.component.scss']
 })
-export class WouiComponent implements AfterViewInit, OnDestroy {
+export class WouiComponent extends FactoryONE {
   targetFile = {
     id: '',
     isForbidden: false
@@ -36,18 +35,19 @@ export class WouiComponent implements AfterViewInit, OnDestroy {
   viewerOpen: boolean[] = [false];
   ref: DynamicDialogRef;
 
-  subscription: Subscription[] = [];
+
 
   constructor(
     private route: ActivatedRoute,
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
-    private interactionService: InteractionService,
+     
     private dialogService: DialogService,
     private _location: Location,
     private router: Router
     // private domSanitizer: DomSanitizer
   ) {
+    super();
     this.getRouteParams();
   }
 
@@ -84,6 +84,7 @@ export class WouiComponent implements AfterViewInit, OnDestroy {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
+      this.setToDefault();
     }
     this.dataSource = await this.useAPI();
     this.downloadManagerService.assignToDataSource(this.dataSource);
@@ -93,23 +94,7 @@ export class WouiComponent implements AfterViewInit, OnDestroy {
 
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
     this.getDownloadListInfo();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res.includes('/wr/m/track/woui'))
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
+    this.showAllImgs();
   }
   getExactImg = async (id: string, index: number) => {
     if (this.testLoadImage[index])
@@ -126,6 +111,11 @@ export class WouiComponent implements AfterViewInit, OnDestroy {
     if (this.testLoadImage[index]) {
       reader.readAsDataURL(this.testLoadImage[index]);
     }
+  }
+  showAllImgs = () => {
+    this.imageFiles.forEach((item, i) => {
+      this.getExactImg(item.fileRepositoryId, i);
+    })
   }
   getExactAudio = async (id: string) => {
     const res = await this.downloadManagerService.downloadFile(id);
@@ -166,4 +156,5 @@ export class WouiComponent implements AfterViewInit, OnDestroy {
     })
   }
   toPrePage = () => this._location.back();
+  ngOnInit(): void { return; }
 }

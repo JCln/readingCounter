@@ -24,7 +24,6 @@ export const EnvServiceFactory = () => {
         return env;
     }
 };
-
 export const EnvServiceProvider = {
     provide: EnvService,
     useFactory: EnvServiceFactory,

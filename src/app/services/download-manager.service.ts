@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/imanage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 @Injectable({
@@ -42,7 +42,7 @@ export class DownloadManagerService {
   downloadForbiddenFileInfo = (targetId: string): Promise<any> => {
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.GETID(ENInterfaces.downloadFileInfo, targetId).subscribe(res => {
+        this.interfaceManagerService.GETID(ENInterfaces.downloadFileForbidden, targetId).subscribe(res => {
           resolve(res)
         })
       });

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IReadingReportReq } from 'interfaces/imanage';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { InteractionService } from 'services/interaction.service';
+import { IRRChartResWrapper } from 'interfaces/ireports';
+import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 
 @Component({
@@ -12,66 +13,65 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
   templateUrl: './disposal-hours.component.html',
   styleUrls: ['./disposal-hours.component.scss']
 })
-export class DisposalHoursComponent implements OnInit {
-  readingReportReq: IReadingReportReq = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1400
-  }
+export class DisposalHoursComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
+
+  dataSource: IRRChartResWrapper[] = [];
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
+    public readingReportManagerService: ReadingReportManagerService,
+     
+    private closeTabService: CloseTabService,
     public route: ActivatedRoute
-  ) { }
+  ) {
+    super();
+  }
 
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.saveDataForRRDisposalHours = null;
+      this.verification();
+    }
+    if (this.closeTabService.saveDataForRRDisposalHours) {
+      this.dataSource = this.closeTabService.saveDataForRRDisposalHours;
+      this.insertSelectedColumns();
+    }
+
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  routeToGridView = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/dh/res');
   }
   routeToChartView = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/dh/chart');
   }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/dh') {
-          this.classWrapper();
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
+  validation = (): boolean => {
+    return this.readingReportManagerService.verificationRRDisposalHours(this.readingReportManagerService.disposalhoursReq);
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRDisposalHours(this.readingReportReq);
-    if (temp)
-      document.activeElement.id == 'grid_view' ? this.routeToGridView() : this.routeToChartView();
+    if (this.validation())
+      document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
+  }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalHours, this.readingReportManagerService.disposalhoursReq);
+    this.insertSelectedColumns();
+    this.closeTabService.saveDataForRRDisposalHours = this.dataSource;
+  }
+  insertSelectedColumns = () => {
+    this._selectCols = this.readingReportManagerService.columnRRDisposalHours();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  refreshTable = () => {
+    if (this.validation())
+      this.connectToServer();
   }
 }

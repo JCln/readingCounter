@@ -1,30 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/imanage';
+import { Component } from '@angular/core';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { IReadingReportGISResponse } from 'interfaces/ireports';
 import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-gis',
   templateUrl: './gis.component.html',
   styleUrls: ['./gis.component.scss']
 })
-export class GisComponent implements OnInit {
+export class GisComponent extends FactoryONE {
   gisResponse: IReadingReportGISResponse[] = [];
-  readingReportGISReq: IReadingReportGISReq = {
-    zoneId: 0,
-    isCounterState: true,
-    counterStateId: 0,
-    isKarbariChange: false,
-    isAhadChange: false,
-    isForbidden: false,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    year: 1400,
-    isCluster: true
-  }
   searchInOrderTo: IDictionaryManager[] = [
     {
       id: 'isCounterState',
@@ -62,7 +49,7 @@ export class GisComponent implements OnInit {
   _orderBy: string = '';
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
-  subscription: Subscription[] = [];
+
 
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
@@ -71,47 +58,23 @@ export class GisComponent implements OnInit {
   counterStateDictionary: IDictionaryManager[] = [];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService
-    // public route: ActivatedRoute
-  ) { }
+    public readingReportManagerService: ReadingReportManagerService,
+    public interactionService: InteractionService
+  ) {
+    super();
+  }
 
   getCounterStateByZoneId = async () => {
-    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportGISReq.zoneId);
+    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
   }
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.getCounterStateByZoneId();
     this.receiveYear();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/gis') {
-          this.classWrapper();
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportGISReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportGISReq.toDate = $event;
-  }
+
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }
@@ -122,23 +85,23 @@ export class GisComponent implements OnInit {
   changeRadio = (event: any) => {
     this.searchInOrderTo.forEach(item => {
       if (item.id !== event.value)
-        this.readingReportGISReq[item.id] = false;
+        this.readingReportManagerService.gisReq[item.id] = false;
       else
-        this.readingReportGISReq[item.id] = true;
+        this.readingReportManagerService.gisReq[item.id] = true;
     })
     console.log(event.value);
 
     event.value === 'isForbidden' ? this._isOrderByDate = true : ''
-    event.value === 'isCounterState' ? this.readingReportGISReq.isCounterState = true : ''
+    event.value === 'isCounterState' ? this.readingReportManagerService.gisReq.isCounterState = true : ''
   }
   makeObject = () => {
-    this._isOrderByDate ? (this.readingReportGISReq.readingPeriodId = null, this.readingReportGISReq.year = 0) : (this.readingReportGISReq.fromDate = '', this.readingReportGISReq.toDate = '');
+    this._isOrderByDate ? (this.readingReportManagerService.gisReq.readingPeriodId = null, this.readingReportManagerService.gisReq.year = 0) : (this.readingReportManagerService.gisReq.fromDate = '', this.readingReportManagerService.gisReq.toDate = '');
   }
   verification = async () => {
     this.makeObject();
-    const temp = this.readingReportManagerService.verificationRRGIS(this.readingReportGISReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRGIS(this.readingReportManagerService.gisReq, this._isOrderByDate);
     if (temp)
-      this.readingReportManagerService.routeToMapGIS();
+      this.readingReportManagerService.routeToMapGIS(this.readingReportManagerService.gisReq);
   }
 
 }

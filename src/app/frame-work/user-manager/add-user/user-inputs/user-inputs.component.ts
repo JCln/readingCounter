@@ -18,7 +18,7 @@ export class UserInputsComponent {
     mobile: '',
     displayMobile: false,
     displayName: '',
-    isActive: false,
+    isActive: true,
     deviceId: ''
   };
 

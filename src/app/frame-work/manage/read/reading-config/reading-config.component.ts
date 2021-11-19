@@ -1,13 +1,12 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingConfigDefault } from 'interfaces/imanage';
+import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { RdAddDgComponent } from './rd-add-dg/rd-add-dg.component';
 import { RdEditDgComponent } from './rd-edit-dg/rd-edit-dg.component';
@@ -17,10 +16,9 @@ import { RdEditDgComponent } from './rd-edit-dg/rd-edit-dg.component';
   templateUrl: './reading-config.component.html',
   styleUrls: ['./reading-config.component.scss']
 })
-export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ReadingConfigComponent extends FactoryONE {
 
   dataSource: IReadingConfigDefault[] = [];
-  subscription: Subscription[] = [];
 
   editableDataSource = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -31,10 +29,11 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
 
   constructor(
     private dialog: MatDialog,
-    private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
-  ) { }
+  ) {
+    super();
+  }
 
   openAddDialog = () => {
     return new Promise(() => {
@@ -47,9 +46,8 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigADD, result);
-        }
+        if (result)
+          this.refreshTable();
       });
     });
   }
@@ -61,7 +59,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     })
     return a;
   }
-  openEditDialog = (row: any) => {
+  openEditDialog = (row: object) => {
     const editable = this.getEditableSource(row).zoneId;
     return new Promise(() => {
       const dialogRef = this.dialog.open(RdEditDgComponent, {
@@ -77,6 +75,7 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
           await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigEDIT, result);
+        this.refreshTable();
       });
     })
   }
@@ -99,40 +98,17 @@ export class ReadingConfigComponent implements OnInit, AfterViewInit, OnDestroy 
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.insertSelectedColumns();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/rcd')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
   insertSelectedColumns = () => {
     this._selectCols = this.readManagerService.columnReadingConfigDefault();
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  removeRow = async (rowData: IReadingConfigDefault, rowIndex: number) => {
+  removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
-      await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData.id);
-      this.refetchTable(rowIndex);
+      await this.readManagerService.deleteSingleRow(ENInterfaces.ReadingConfigREMOVE, rowData['dataSource']);
+      this.refetchTable(rowData['ri']);
     }
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

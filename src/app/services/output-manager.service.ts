@@ -8,13 +8,13 @@ import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
 
 import { font } from '../../assets/pdfjs/BLotus-normal';
+import { MathS } from '../classes/math-s';
 import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OutputManagerService {
-  fileUrl;
   dbfOutput: IOutputManager = {
     zoneId: 0,
     fromDate: null,
@@ -30,16 +30,16 @@ export class OutputManagerService {
     return this.dbfOutput;
   }
 
-  checkVertification = (val: IOutputManager): boolean => {
-    if (this.utilsService.isNullTextValidation(val.fromDate)) {
+  checkVertification = (dataSource: IOutputManager): boolean => {
+    if (MathS.isNullTextValidation(dataSource.fromDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
       return false;
     }
-    if (this.utilsService.isNullTextValidation(val.toDate)) {
+    if (MathS.isNullTextValidation(dataSource.toDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
-    if (this.utilsService.isNull(val.zoneId)) {
+    if (MathS.isNull(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
@@ -65,7 +65,7 @@ export class OutputManagerService {
   exportPDF = (dataSource: any[], _selectCols: IObjectIteratation[], fileName: string) => {
     /* TO CREATE DEEP COPY */
     let originDataSource = JSON.parse(JSON.stringify(dataSource));
-    if (this.utilsService.isNull(originDataSource)) {
+    if (MathS.isNull(originDataSource)) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
       return;
     }
@@ -169,7 +169,7 @@ export class OutputManagerService {
     })
   }
   isNullData = (dataSource: any): boolean => {
-    if (this.utilsService.isNull(dataSource)) {
+    if (MathS.isNull(dataSource)) {
       this.utilsService.snackBarMessageWarn(EN_messages.notFoundToExport);
       return false;
     }

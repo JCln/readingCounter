@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ChartDataSets, ChartType, RadialChartOptions } from 'chart.js';
-import { IAnalyzeRes } from 'interfaces/imanage';
+import { IAnalyzeRes } from 'interfaces/idashboard-map';
 import { Label } from 'ng2-charts';
 import { DashboardService } from 'services/dashboard.service';
 
@@ -55,18 +55,18 @@ export class AnalyzeComponent implements OnInit {
 
   classWrapper = async () => {
     this.analyzePerformance = await this.dashboardService.postDashboardAnalyzePerformance();
-    this.assignToChart();
+    this.radarChartData = this.assignToChart();
+    this.barAnalyzeEvent.emit(this.radarChartData);
   }
   ngOnInit(): void {
     this.classWrapper();
   }
-  assignToChart = () => {
+  assignToChart = (): any[] => {
     let temp = [];
     this.analyzePerformance.forEach((item, index) => {
       temp.push({ data: this.dashboardService.getElementOfArrOfObjectsAnalyze(this.analyzePerformance[index]), label: item.statusTitle, stack: 'a' });
     })
 
-    this.radarChartData = temp;
-    this.barAnalyzeEvent.emit(temp);
+    return temp;
   }
 }

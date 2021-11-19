@@ -1,0 +1,17 @@
+<h2>گروه دسترسی</h2>
+
+<mat-radio-group class="radio_group role_items" aria-labelledby="radio_group" [(ngModel)]="selectedRole"
+    name="_orderBy">
+    <mat-radio-button class="radio_button" *ngFor="let orderType of roleItems" [value]="orderType.id"
+        (change)="changeRadio($event)">
+        {{orderType.title}}
+    </mat-radio-button>
+</mat-radio-group>
+
+<div class="accept">
+    <button class="btn_2" matStepperNext>
+        <i class="fa fa-long-arrow-left"></i>
+        صفحه بعد
+    </button>
+    <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+</div>

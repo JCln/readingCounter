@@ -1,17 +1,13 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
-import { ITabsare2Formula } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { ITabsare2Formula } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { FormulasService } from 'services/formulas.service';
-import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
-import { ConfirmTextDialogComponent } from '../../../tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { Tabsare2AddDgComponent } from './tabsare2-add-dg/tabsare2-add-dg.component';
 
 @Component({
@@ -19,9 +15,7 @@ import { Tabsare2AddDgComponent } from './tabsare2-add-dg/tabsare2-add-dg.compon
   templateUrl: './tabsare2.component.html',
   styleUrls: ['./tabsare2.component.scss']
 })
-export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
-  subscription: Subscription[] = [];
-
+export class Tabsare2Component extends FactoryONE {
   dataSource: ITabsare2Formula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 
@@ -30,12 +24,11 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
   clonedProducts: { [s: string]: ITabsare2Formula; } = {};
 
   constructor(
-    private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public formulasService: FormulasService,
-    private dialog: MatDialog,
-    public outputManagerService: OutputManagerService
+    private dialog: MatDialog
   ) {
+    super();
   }
 
   /* TODO// show dialog box to add excel file*/
@@ -51,10 +44,8 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
 
         });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result) {
-          await this.formulasService.postFormulaAdd(ENInterfaces.FormulaTabsare2Add, result);
+        if (result)
           this.refreshTable();
-        }
       });
     });
   }
@@ -81,78 +72,39 @@ export class Tabsare2Component implements OnInit, AfterViewInit, OnDestroy {
     this._selectCols = this.formulasService.columnTabsare2Formulas();
     this._selectedColumns = this.formulasService.customizeSelectedColumns(this._selectCols);
   }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/r/formula/tabsare2')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  private removeRow = async (rowData: ITabsare2Formula, rowIndex: number) => {
-    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaTabsare2Remove, rowData.id);
+  private removeRow = async (rowData: string, rowIndex: number) => {
+    await this.formulasService.postFormulaRemove(ENInterfaces.FormulaTabsare2Remove, rowData);
     this.refetchTable(rowIndex);
   }
 
-  firstConfirmDialog = (rowData: ITabsare2Formula, rowIndex: number) => {
-    const title = EN_messages.confirm_remove;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.removeRow(rowData, rowIndex)
-        }
-      })
-    })
+  firstConfirmDialog = async (rowData: ITabsare2Formula) => {
+    const a = await this.formulasService.firstConfirmDialog();
+    if (a)
+      this.removeRow(rowData['dataSource'], rowData['ri']);
   }
-  onRowEditInit(dataSource: ITabsare2Formula) {
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+  onRowEditInit(dataSource: object) {
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
   }
-  async onRowEditSave(dataSource: ITabsare2Formula, rowIndex: number) {
-    if (!this.formulasService.verificationEditedRowTabsare2(dataSource)) {
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+  async onRowEditSave(dataSource: ITabsare2Formula) {
+    if (!this.formulasService.verificationEditedRowTabsare2(dataSource['dataSource'])) {
+      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
-    if (typeof dataSource.zoneId !== 'object') {
+    if (typeof dataSource['dataSource'].zoneId !== 'object') {
       this.zoneDictionary.find(item => {
-        if (item.title === dataSource.zoneId)
-          dataSource.zoneId = item.id
+        if (item.title === dataSource['dataSource'].zoneId)
+          dataSource['dataSource'].zoneId = item.id
       })
     } else {
-      dataSource.zoneId = dataSource.zoneId['id'];
+      dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
+
     await this.formulasService.postFormulaEdit(ENInterfaces.FormulaTabsare2Edit, dataSource);
-    this.clonedProducts[dataSource.id] = { ...dataSource };
+    this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
-  onRowEditCancel(dataSource: ITabsare2Formula, index: number) {
-    this.dataSource[index] = this.clonedProducts[dataSource.id];
-    delete this.dataSource[dataSource.id];
-    return;
-  }
+  onRowEditCancel() { }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }

@@ -1,0 +1,24 @@
+<section class="media">
+    <div class="_header">
+        <i class="material-icons">
+            speaker_notes_off
+        </i>
+        تاکنون قرائت نشده
+    </div>
+    <div class="_key_value" *ngIf="_canShow">
+        <div class="_key">دو ماه</div>
+        <div class="_value">{{dataSourceUnreadCount[0].value}}</div>
+    </div>
+    <div class="_key_value" *ngIf="_canShow">
+        <div class="_key">6 ماه</div>
+        <div class="_value">{{dataSourceUnreadCount[1].value}}</div>
+    </div>
+    <div class="_key_value" *ngIf="_canShow">
+        <div class="_key">سالانه</div>
+        <div class="_value">{{dataSourceUnreadCount[2].value}}</div>
+    </div>
+    <div class="_key_value" *ngIf="_canShow">
+        <div class="_key">از ابتدا</div>
+        <div class="_value">{{dataSourceUnreadCount[3].value}}</div>
+    </div>
+</section>

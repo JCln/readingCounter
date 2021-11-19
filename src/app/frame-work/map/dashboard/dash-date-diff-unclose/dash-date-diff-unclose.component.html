@@ -1,0 +1,63 @@
+<section class="content" *ngIf="dataSourceDateDifference">
+    <section class="collapse">
+        <h1>مدت قرائت بدون احتساب بسته(روز)</h1>
+    </section>
+
+    <table>
+
+        <thead>
+            <tr>
+                <td></td>
+                <td class="_o_light_blue"><strong>دیروز</strong></td>
+                <td class="_o_light_orange"><strong>هفته جاری</strong></td>
+                <td class="_o_light_gray"><strong>ماه جاری</strong></td>
+                <td class="_o_light_purple"><strong>سال جاری</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>میانگین</strong></td>
+                <td class="_o_light_blue">{{dataSourceDateDifference.yesterday.average}}</td>
+                <td class="_o_light_orange">{{dataSourceDateDifference.weekly.average}}</td>
+                <td class="_o_light_gray">{{dataSourceDateDifference.monthly.average}}</td>
+                <td class="_o_light_purple">{{dataSourceDateDifference.annualy.average}}</td>
+            </tr>
+            <tr>
+                <td><strong>میانه</strong></td>
+                <td class="_o_light_blue">{{dataSourceDateDifference.yesterday.median}}</td>
+                <td class="_o_light_orange">{{dataSourceDateDifference.weekly.median}}</td>
+                <td class="_o_light_gray">{{dataSourceDateDifference.monthly.median}}</td>
+                <td class="_o_light_purple">{{dataSourceDateDifference.annualy.median}}</td>
+            </tr>
+            <tr>
+                <td><strong>مٌد</strong></td>
+                <td class="_o_light_blue">{{dataSourceDateDifference.yesterday.mode}}</td>
+                <td class="_o_light_orange">{{dataSourceDateDifference.weekly.mode}}</td>
+                <td class="_o_light_gray">{{dataSourceDateDifference.monthly.mode}}</td>
+                <td class="_o_light_purple">{{dataSourceDateDifference.annualy.mode}}</td>
+            </tr>
+            <tr>
+                <td><strong>انحراف از معیار</strong></td>
+                <td class="_o_light_blue">{{dataSourceDateDifference.yesterday.standardDeviation}}</td>
+                <td class="_o_light_orange">{{dataSourceDateDifference.weekly.standardDeviation}}</td>
+                <td class="_o_light_gray">{{dataSourceDateDifference.monthly.standardDeviation}}</td>
+                <td class="_o_light_purple">{{dataSourceDateDifference.annualy.standardDeviation}}</td>
+            </tr>
+            <tr>
+                <td><strong>واریانس</strong></td>
+                <td class="_o_light_blue">{{dataSourceDateDifference.yesterday.variance}}</td>
+                <td class="_o_light_orange">{{dataSourceDateDifference.weekly.variance}}</td>
+                <td class="_o_light_gray">{{dataSourceDateDifference.monthly.variance}}</td>
+                <td class="_o_light_purple">{{dataSourceDateDifference.annualy.variance}}</td>
+            </tr>
+            <tr>
+                <td class="_hide_count"><strong>count</strong></td>
+                <td class="_hide_count">{{dataSourceDateDifference.yesterday.count}}</td>
+                <td class="_hide_count">{{dataSourceDateDifference.weekly.count}}</td>
+                <td class="_hide_count">{{dataSourceDateDifference.monthly.count}}</td>
+                <td class="_hide_count">{{dataSourceDateDifference.annualy.count}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</section>

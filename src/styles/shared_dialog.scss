@@ -1,13 +1,36 @@
-@import 'variable.scss';
+@import 'primeNG.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'input.scss';
+
+._contents {
+  display: grid;
+  direction: rtl;
+  min-width: 16rem;
+  align-items: center;
+
+  @media (min-width: 550px) {
+    min-width: 20rem;
+  }
+
+  @media (min-width: 780px) {
+    grid-template-columns: repeat(auto-fit, minmax(19rem, auto));
+    gap: .5rem;
+  }
+
+  ._key,
+  ._value {
+    border: 0;
+    font-weight: 800;
+  }
+}
 
 .mat-form-field {
   text-align: center;
   font-family: $font_family;
   font-size: $font_s;
   font-weight: 600;
-  color: var(--gray_600);
+  color: var(--secondary_6);
 }
 
 .mat-dialog-content {
@@ -48,19 +71,19 @@
   &:hover,
   &:focus,
   &:active {
-    box-shadow: 1px 1px 2px 3px var(--gray_400);
+    box-shadow: 1px 1px 2px 3px var(--secondary_4);
   }
 }
 
 ._custom {
-  background: var(--blue_400);
-  color: var(--gray_100);
+  background: var(--primary_2);
+  color: var(--secondary_1);
 
   &:hover,
   &:focus,
   &:active {
-    background-color: var(--blue_500);
-    box-shadow: 0 0 0 3px var(--blue_500);
+    background-color: var(--primary_3);
+    box-shadow: 0 0 0 3px var(--primary_3);
   }
 }
 
@@ -69,24 +92,24 @@ h2 {
   font-family: $font_family;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--blue_400);
-  border: 2px solid var(--blue_400);
+  color: var(--primary_2);
+  border: 2px solid var(--primary_2);
   border-radius: 15px;
   padding: 1rem;
 }
 
 .mat-dialog-container {
-  border: 1px solid var(--blue_400);
+  border: 1px solid var(--primary_2);
 }
 
 ._blue_dark {
-  color: var(--blue_700);
-  border: 2px solid var(--blue_700);
+  color: var(--primary_5);
+  border: 2px solid var(--primary_5);
 }
 
 button._blue_dark {
-  background-color: var(--blue_700);
-  color: var(--gray_100);
+  background-color: var(--primary_5);
+  color: var(--secondary_1);
 }
 
 ::ng-deep {
@@ -96,7 +119,7 @@ button._blue_dark {
     font-family: $font_family;
     font-size: $font_s;
     font-weight: 600;
-    color: var(--gray_600);
+    color: var(--secondary_6);
   }
 
 }

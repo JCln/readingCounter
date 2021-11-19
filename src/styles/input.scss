@@ -8,7 +8,7 @@ $border_15: 10px;
   margin: .25rem 0;
   text-align: center;
   font-size: 1.2rem;
-  color: var(--blue_600);
+  color: var(--primary_4);
   border-radius: 2rem;
   font-weight: 600;
   border: 1px solid;
@@ -22,8 +22,8 @@ $border_15: 10px;
 // key value input
 .input_2 {
   border-radius: $border_15;
-  background: var(--gray_300);
-  color: var(--gray_300);
+  background: var(--secondary_3);
+  color: var(--secondary_3);
   display: flex;
   align-items: center;
   margin: .25rem 0;
@@ -31,7 +31,7 @@ $border_15: 10px;
 }
 
 ._key {
-  color: var(--blue_400);
+  color: var(--primary_2);
   text-align: left;
   padding-right: .5rem;
   display: flex;
@@ -48,26 +48,16 @@ $border_15: 10px;
   flex: 1;
   text-align: center;
   background: var(--white);
-  color: var(--blue_600);
+  color: var(--primary_4);
 }
 
 ._key,
 ._value {
-  padding: $font_05 $font_05 $font_05 0.3rem;
+  display: grid;
+  align-items: center;
+  height: 2.6rem;
+  min-height: 85%;
   font-size: $font_s;
   font-weight: 600;
   height: 2.6rem;
 }
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-// ////////

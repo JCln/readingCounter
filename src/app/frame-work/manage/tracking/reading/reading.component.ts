@@ -1,15 +1,13 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ITracking } from 'interfaces/imanage';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { ITracking } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 
@@ -19,32 +17,28 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
   templateUrl: './reading.component.html',
   styleUrls: ['./reading.component.scss']
 })
-export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
-  subscription: Subscription[] = [];
+export class ReadingComponent extends FactoryONE {
+
 
   dataSource: ITracking[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
 
   constructor(
-    private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
-    public outputManagerService: OutputManagerService,
-    private router: Router
-  ) { }
+    public interactionService: InteractionService
+  ) {
+    super();
+  }
 
   routeToLMPayDay = (row: ITracking) => {
     this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
   }
-  routeToLMAll = (row: ITracking) => {
-    this.router.navigate(['wr/m/l/all', false, row.id]);
-  }
-  private rowToImported = async (row: ITracking, desc: string, rowIndex: number) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row.id, desc);
-    this.refetchTable(rowIndex);
+  private rowToImported = async (row: string, desc: string, rowIndex: number) => {
+    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row, desc);
   }
   nullSavedSource = () => this.closeTabService.saveDataForTrackReading = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -66,31 +60,8 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
-  ngOnInit(): void {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/track/reading')
-          this.classWrapper(true);
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
-  }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  backToImportedConfirmDialog = (rowData: ITracking, rowIndex: number) => {
+  // refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
     const title = EN_messages.reson_delete_backtoImported;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -102,7 +73,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       })
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
-          this.rowToImported(rowData, desc, rowIndex);
+          this.rowToImported(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
         }
       })
     })
@@ -114,7 +85,7 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  forceOffload = (rowData: ITracking, rowIndex: number) => {
+  forceOffload = (rowDataAndIndex: object) => {
     const title = EN_messages.reason_forceOffload;
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
@@ -127,8 +98,8 @@ export class ReadingComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          if (await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowData.id, desc))
-            this.refetchTable(rowIndex);
+          await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex['dataSource'], desc);
+          this.refreshTable();
         }
       })
     })

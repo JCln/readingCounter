@@ -1,0 +1,10 @@
+<section class="media" *ngIf="_canShow">
+    <div class="_header">
+        <i class="fas fa-users"></i>
+        تعداد انشعاب
+    </div>
+    <div class="_key_value" *ngFor="let item of dataSourceMoshtarakCount">
+        <div class="_key">{{item.title}}</div>
+        <div class="_value">{{item.value}}</div>
+    </div>
+</section>

@@ -1,0 +1,33 @@
+.accoune_notif {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: fixed;
+  direction: rtl;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 7px;
+  color: var(--fix_gray_light);
+  text-align: center;
+  font-size: 1.1rem;
+  z-index: 600;
+
+  i {
+    margin-left: 1rem;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  a {
+    transform: translateY(.17rem);
+    font-size: 1rem;
+    vertical-align: middle;
+    color: white;
+  }
+
+  @media (min-width:550px) {
+    font-size: 1.2rem;
+  }
+}

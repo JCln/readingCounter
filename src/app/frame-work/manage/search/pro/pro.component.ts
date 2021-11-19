@@ -1,15 +1,15 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOnOffLoadFlat, ISearchProReportInput } from 'interfaces/imanage';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { ISearchProReportInput } from 'interfaces/search';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
-import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 import { SearchDgComponentComponent } from './search-dg-component/search-dg-component.component';
 
@@ -18,14 +18,12 @@ import { SearchDgComponentComponent } from './search-dg-component/search-dg-comp
   templateUrl: './pro.component.html',
   styleUrls: ['./pro.component.scss']
 })
-export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProComponent extends FactoryONE {
 
   _empty_message: string = '';
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
-
-  subscription: Subscription[] = [];
 
   dataSource: IOnOffLoadFlat[] = [];
   searchReq: ISearchProReportInput;
@@ -33,17 +31,16 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
 
   constructor(
-    private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     public searchService: SearchService,
-    public outputManagerService: OutputManagerService,
-    private utilsService: UtilsService,
     private dialogService: DialogService,
   ) {
+    super();
   }
 
   insertSelectedColumns = () => {
@@ -53,19 +50,22 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   converts = () => {
     this._empty_message = EN_messages.notFound;
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
     this.insertSelectedColumns();
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    this.dataSource = await this.searchService.searchPro(this.searchReq);
+    this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchPro, this.searchReq);
     this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
     this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
+    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 
     this.converts();
@@ -75,49 +75,21 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   nullSavedSource = () => this.closeTabService.saveDataForSearchPro = null;
   classWrapper = async (canRefresh?: boolean) => {
-    if (this.utilsService.isNull(this.searchReq)) {
-      this.searchReq = this.searchService.getSearchPro();
-      if (this.utilsService.isNull(this.searchReq)) {
-        this.showSearchOptionsDialog();
-        return;
-      }
-    }
     if (canRefresh) {
-      this.nullSavedSource();
-
-      if (this.searchService.verificationPro(this.searchReq))
-        this.connectToServer();
+      // this.nullSavedSource();
+      this.connectToServer();
     }
-    else {
-      if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchPro)) {
-        this.dataSource = this.closeTabService.saveDataForSearchPro;
-        this.converts();
-      }
-      else
-        this.toDefaultVals();
+    if (!MathS.isNull(this.closeTabService.saveDataForSearchPro)) {
+      this.dataSource = this.closeTabService.saveDataForSearchPro;
+      this.converts();
+      return;
     }
-
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/s/searchPro') {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
+    if (MathS.isNull(this.searchReq)) {
+      this.showSearchOptionsDialog();
+      this.toDefaultVals();
+    }
+    else
+      this.connectToServer();
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -125,9 +97,6 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  refreshTable = () => {
-    this.classWrapper(true);
   }
   toDefaultVals = () => {
     this.dataSource = [];
@@ -138,11 +107,19 @@ export class ProComponent implements OnInit, AfterViewInit, OnDestroy {
       rtl: true,
       width: '90%'
     })
-    this.ref.onClose.subscribe((res: ISearchProReportInput) => {
+    this.ref.onClose.subscribe((res) => {
       if (res) {
         this.searchReq = res;
         this.connectToServer();
       }
     });
+  }
+  getReadingReportTitles = async ($event) => {
+    const a = await this.searchService.postById(ENInterfaces.ReadingReportTitles, $event)
+    if (a.length) {
+      this.searchService.showResDialog(a, false, EN_messages.insert_rrDetails);
+      return;
+    }
+    this.searchService.snackEmptyValue();
   }
 }

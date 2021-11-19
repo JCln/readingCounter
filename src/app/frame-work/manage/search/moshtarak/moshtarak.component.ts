@@ -1,29 +1,22 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOnOffLoadFlat, ISearchMoshReq } from 'interfaces/imanage';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
-import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 import { Search } from 'src/app/classes/search';
-
 
 @Component({
   selector: 'app-moshtarak',
   templateUrl: './moshtarak.component.html',
   styleUrls: ['./moshtarak.component.scss']
 })
-export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
-  searchReq: ISearchMoshReq = {
-    zoneId: null,
-    searchBy: null,
-    item: '',
-    similar: true
-  }
+
+export class MoshtarakComponent extends FactoryONE {
   dataSource: IOnOffLoadFlat[] = [];
   searchType: Search[];
   searchByText: string = '';
@@ -32,47 +25,53 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
-  subscription: Subscription[] = [];
-
   zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
 
   constructor(
-    private interactionService: InteractionService,
+
     private closeTabService: CloseTabService,
-    public searchService: SearchService,
-    public outputManagerService: OutputManagerService,
-    private utilsService: UtilsService
+    public searchService: SearchService
   ) {
+    super();
   }
 
   insertSelectedColumns = () => {
     this._selectCols = this.searchService.columnSearchMoshtarakin();
     this._selectedColumns = this.searchService.customizeSelectedColumns(this._selectCols);
   }
-  converts = () => {
+  converts = async () => {
     this._empty_message = EN_messages.notFound;
+
+    if (this.searchService.searchReqMosh.zoneId) {
+      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchService.searchReqMosh.zoneId);
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    }
+    this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
+    this.karbariDictionary = await this.searchService.getKarbariDictionary();
+    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
+    this.qotrDictionary = await this.searchService.getQotrDictionary();
+
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
     this.insertSelectedColumns();
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    if (!this.searchService.verificationMosh(this.searchReq))
+    if (!this.searchService.verificationMosh(this.searchService.searchReqMosh))
       return;
-    this.dataSource = await this.searchService.searchMoshterakin(this.searchReq);
-    this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
-    this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
-    this.karbariDictionary = await this.searchService.getKarbariDictionary();
-    this.qotrDictionary = await this.searchService.getQotrDictionary();
-
+    this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchMoshtarak, this.searchService.searchReqMosh);
     this.converts();
     this.searchService.makeHadPicturesToBoolean(this.dataSource);
 
@@ -83,7 +82,7 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (!this.utilsService.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
+    if (!MathS.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
       this.dataSource = this.closeTabService.saveDataForSearchMoshtarakin;
       this.converts();
     }
@@ -92,27 +91,6 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.searchType = this.searchService.getSearchTypes();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/m/s/searchMosh') {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -127,4 +105,13 @@ export class MoshtarakComponent implements OnInit, AfterViewInit, OnDestroy {
   toDefaultVals = () => {
     this.dataSource = [];
   }
+  getReadingReportTitles = async ($event) => {
+    const a = await this.searchService.postById(ENInterfaces.ReadingReportTitles, $event)
+    if (a.length) {
+      this.searchService.showResDialog(a, false, EN_messages.insert_rrDetails);
+      return;
+    }
+    this.searchService.snackEmptyValue();
+  }
+
 }

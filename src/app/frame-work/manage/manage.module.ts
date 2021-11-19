@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
-import { SharedModule } from './../../shared/shared.module';
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { ManageRoutingModule } from './manage-routing.module';
 
 @NgModule({
-  declarations: [DeleteDialogComponent],
+  declarations: [],
   imports: [
     SharedModule,
     ManageRoutingModule

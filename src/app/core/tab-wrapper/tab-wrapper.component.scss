@@ -19,23 +19,21 @@ li {
   align-items: center;
   margin: 0.04rem;
   min-width: 3.5rem;
-  height: 2.5rem;
   border: 1.5px solid;
   border-radius: 10px;
-  color: var(--blue_700);
+  color: var(--primary_5);
   list-style-type: none;
   font-size: 1.1rem;
   font-weight: 600;
-  background: var(--gray_400);
+  background: var(--secondary_4);
   cursor: pointer;
-  padding: 0;
+  padding: .2rem;
 
   @media (min-width: 700px) {
-    padding: 0 $font_05;
-    margin: 0.06rem;
-    height: 3rem;
-    border-radius: $border_15;
-    font-size: $font_m;
+    padding: 0.2rem 0 0;
+    margin: .06rem;
+    border-radius: 15px;
+    font-size: 1.3rem;
     min-width: 9rem;
   }
 
@@ -49,13 +47,13 @@ li {
     height: 2.2rem;
     margin-right: auto;
     border-radius: 2rem;
-    color: var(--gray_600);
+    color: var(--secondary_6);
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
     &:hover {
-      color: var(--blue_gray_300);
-      background: var(--gray_400);
+      color: var(--thirdy_1);
+      background: var(--secondary_4);
     }
   }
 
@@ -69,18 +67,18 @@ li {
     height: 2.2rem;
     margin-left: auto;
     border-radius: 2rem;
-    color: var(--gray_600);
+    color: var(--secondary_6);
     opacity: 0;
     transition: opacity 50ms ease-in-out;
 
     &:hover {
       color: var(--red_500);
-      background: var(--gray_400);
+      background: var(--secondary_4);
     }
   }
 
   &:hover {
-    background: var(--gray_300);
+    background: var(--secondary_3);
 
     .fa {
       opacity: 1;
@@ -98,12 +96,12 @@ li::before {
   border-radius: 15px;
   height: .3rem;
   width: 90%;
-  background: var(--blue_500);
+  background: var(--primary_3);
 }
 
 li.active {
-  color: var(--blue_500);
-  background: var(--gray_100);
+  color: var(--primary_3);
+  background: var(--secondary_1);
   border: 1.5px solid;
   border-top: none;
 }

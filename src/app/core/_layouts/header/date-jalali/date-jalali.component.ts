@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { DateJalaliService } from 'services/date-jalali.service';
 
 
@@ -7,13 +7,13 @@ import { DateJalaliService } from 'services/date-jalali.service';
   templateUrl: './date-jalali.component.html',
   styleUrls: ['./date-jalali.component.scss']
 })
-export class DateJalaliComponent implements OnInit {
-  dateObject: any;
+export class DateJalaliComponent implements AfterViewInit {
   datePickerConfig = {
-    format: 'YYYY/MM/DD'
+    format: 'YYYY/MM/DD',
+    locale: 'fa',
   }
-
   @Output() dateJalEvent = new EventEmitter<any>();
+  @Input() dateObject: string;
 
   constructor(private dateJalaliService: DateJalaliService) {
   }
@@ -21,9 +21,10 @@ export class DateJalaliComponent implements OnInit {
   sendDateJal = ($event) => {
     this.dateJalEvent.emit($event.inputElementValue);
   }
-  ngOnInit(): void {
-    this.dateObject = this.dateJalaliService.getCurrentDate();
-    this.dateJalEvent.emit(this.dateObject);
+  ngAfterViewInit(): void {
+    if (!this.dateObject || this.dateObject.length === 0) {
+      this.dateObject = this.dateJalaliService.getCurrentDate();
+      return;
+    }
   }
-
 }

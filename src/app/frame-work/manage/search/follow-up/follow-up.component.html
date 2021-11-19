@@ -1,8 +1,128 @@
-<form #form="ngForm" *ngIf="route.children.length === 0">
-    <section class="_center">
-        <input class="input_1" placeholder="شماره پیگیری" type="number" name="trackNumber" [(ngModel)]="trackNumber"
-            autofocus>
-        <button type="submit" class="btn_1" (click)="verification()">مشاهده </button>
-    </section>
+<app-collapsable [_isCollapsed]=_isCollapsed (_clicked)=" _isCollapsed = !_isCollapsed">
+</app-collapsable>
+<form #form="ngForm" *ngIf="!_isCollapsed" class="insert_track">
+    <div class="input_2">
+        <div class="_key">شماره پیگیری</div>
+        <input class="_value" type="number" name="trackNumber" [(ngModel)]="trackNumber" autofocus>
+    </div>
+    <button type="submit" class="btn_1" (click)="connectToServer()">مشاهده</button>
 </form>
-<router-outlet></router-outlet>
+
+<section class="contain" *ngIf="dataSource">
+    <div class="input_2" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _showDesc">
+        <div class="_key">{{item.header}}</div>
+        <ng-container *ngIf="item.isBoolean; else elseTemplate">
+            <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSource[item.field]">
+                {{item.header}}</mat-checkbox>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}" [(ngModel)]="dataSource[item.field]">
+        </ng-template>
+    </div>
+    <div class="input_2" *ngFor="let item of _selectColumnsAUX" [ngClass]="{'double_size':item.icon}">
+        <ng-container *ngIf="item.isBoolean; else elseTemplate">
+            <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
+                {{item.header}}</mat-checkbox>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <div class="_key">{{item.header}}</div>
+            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                [(ngModel)]="dataSourceAUX[item.field]">
+        </ng-template>
+    </div>
+</section>
+
+<section *ngIf="dataSource" class="order_by">
+    <h2 class="title">نمایش :</h2>
+    <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="canShowGraph" name="_isOrderByDate">
+        <mat-radio-button class="radio_button" *ngFor="let orderType of showInOrderTo" [value]="orderType.isSelected">
+            {{orderType.title}}
+        </mat-radio-button>
+    </mat-radio-group>
+</section>
+
+<p-table *ngIf="!canShowGraph && dataSource" sortField="insertDateJalali" [columns]="_defColumns" [value]="changeHsty"
+    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" editMode="row" dataKey="id">
+
+    <ng-template pTemplate="caption">
+        <th>
+        </th>
+        <div class="header_icons_wrap">
+            <div class="left_side">
+            </div>
+            <div class="left_side">
+                <i (click)="routeToLMAll(changeHsty[changeHsty.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-list">
+                    <div class="tooltip_text">مشاهده لیست قرائت</div>
+                </i>
+                <i (click)="toPreStatus(changeHsty[changeHsty.length-1])"
+                    class="tooltip _circle_border p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به قبلی</div>
+                </i>
+                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
+                </i>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                {{col.header}}
+            </th>
+            <th *ngIf="shouldActive" style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-changeHsty let-editing="editing" let-columns="columns">
+        <tr [pEditableRow]="changeHsty">
+            <td *ngFor="let col of columns">
+                <span class="ui-column-title">{{col.header}}</span>
+                <ng-container *ngIf="col.field === 'seen'; else elseTemplate">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <mat-checkbox [(ngModel)]="changeHsty[col.field]"
+                                [ngClass]="{'mat-checkbox-editable': true}">
+                            </mat-checkbox>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <mat-checkbox [disabled]="true" [(ngModel)]="changeHsty[col.field]"></mat-checkbox>
+                        </ng-template>
+                    </p-cellEditor>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    {{changeHsty[col.field]}}
+                </ng-template>
+            </td>
+            <td *ngIf="shouldActive">
+                <span class="ui-column-title">ویرایش</span>
+                <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(changeHsty)"
+                    class="tooltip _edit pi pi-pencil">
+                    <div class="tooltip_text">ویرایش</div>
+                </i>
+                <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(changeHsty)" class="_save pi pi-check"></i>
+                <i *ngIf="editing" pCancelEditableRow class="_cancel pi pi-times"></i>
+            </td>
+            <td *ngIf="changeHsty.hasMap" (click)="showInMap()">
+                <span class="ui-column-title">مشاهده روی نقشه</span>
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                </i>
+            </td>
+            <td *ngIf="!changeHsty.hasMap">
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" *ngIf="!dataSource">
+        <tr>
+            <td [attr.colspan]="dataSource">
+                موردی پیدا نشد
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<!-- could implement by lazy load route -->
+<app-time-line *ngIf="canShowGraph" [dataSource]="dataSource"></app-time-line>

@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { ENSelectedColumnVariables, IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
+import { MathS } from '../classes/math-s';
+import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { CloseTabService } from './close-tab.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
@@ -17,21 +21,24 @@ export class ListManagerService {
   private saveTo: number = 0;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
-  private listManagerAll: IObjectIteratation[] = [
+  private _listManagerAll: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: false },
     { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
     { field: 'radif', header: 'ش.پرونده', isSelected: false },
     { field: 'eshterak', header: 'اشتراک', isSelected: true },
-    { field: 'zoneId', header: 'ناحیه', isSelected: false },
+    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
     { field: 'qeraatCode', header: 'قرائت', isSelected: false },
     { field: 'firstName', header: 'نام', isSelected: true },
     { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
     { field: 'karbariCode', header: 'کاربری', isSelected: true },
+    { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false },
     { field: 'preNumber', header: 'رقم قبلی', isSelected: true },
     { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
     { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
     { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true },
-    { field: 'counterStateCode', header: 'وضعیت کنتور', isSelected: true },
+    { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
+    { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false },
+    { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true },
     { field: 'address', header: 'آدرس', isSelected: false },
     { field: 'pelak', header: 'پلاک', isSelected: false },
     { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
@@ -41,9 +48,7 @@ export class ListManagerService {
     // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
     { field: 'postalCode', header: 'کد پستی', isSelected: false },
     { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
-    { field: 'preCounterStateCode', header: 'وضعیت قرائت قبلی', isSelected: false },
     { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
-    // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
     { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
     { field: 'tavizDate', header: 'تاریخ تعویض', isSelected: false },
     { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
@@ -60,32 +65,33 @@ export class ListManagerService {
     { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
     { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
     { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
-    // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false },
     { field: 'y', header: 'Y', isSelected: false },
     { field: 'x', header: 'X', isSelected: false },
     { field: 'gisAccuracy', header: 'دقت', isSelected: false },
     { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-    { field: 'imageCount', header: 'تعداد تصویر', isSelected: true, isBoolean: true },
+    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
     { field: 'masraf', header: 'مصرف', isSelected: false },
-    { field: 'eslahType', header: 'اصلاح', isSelected: false },
+    // { field: 'eslahType', header: 'اصلاح', isSelected: false },
+    { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true },
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
-    { field: 'dateDifference', header: 'طول دوره', isSelected: false },
+    { field: 'offLoadTime', header: 'زمان', isSelected: false },
+    { field: 'dateDifference', header: 'مدت', isSelected: false },
     { field: 'description', header: 'توضیحات', isSelected: false }
   ]
 
   columnLMAll = (): IObjectIteratation[] => {
-    return this.listManagerAll;
+    return this._listManagerAll;
   }
   columnSelectedLMPerDay = (): IObjectIteratation[] => {
     return [
       { field: 'day', header: 'روز', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
-      { field: 'readCount', header: 'تعداد قرائت', isSelected: true, readonly: true },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
       { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
       { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
-      { field: 'duration', header: 'مدت', isSelected: true, readonly: true },
-      { field: 'distance', header: 'فاصله', isSelected: true, readonly: true },
+      { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
+      { field: 'distance', header: 'مسافت', isSelected: true, readonly: true },
       { field: 'maneCount', header: 'تعداد مانع', isSelected: false, readonly: true },
       { field: 'manePercent', header: 'درصد مانع', isSelected: false, readonly: true },
       { field: 'xarabFaqedCount', header: 'تعداد فاقد/خراب', isSelected: false, readonly: true },
@@ -95,15 +101,16 @@ export class ListManagerService {
   columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
     return [
       { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true },
+      { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
       { field: 'counterReaders', header: 'مامور(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
       { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
-      { field: 'overalDistance', header: 'مسافت کل', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل', isSelected: true, readonly: true }
-
+      { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
+      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
+      { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
+      { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true }
     ];
   }
 
@@ -111,7 +118,8 @@ export class ListManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private closeTabService: CloseTabService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private dialog: MatDialog,
   ) { }
 
   whereToSave = (): number => {
@@ -121,9 +129,9 @@ export class ListManagerService {
     this.saveTo === 0 ? this.closeTabService.saveDataForLMAll = null : this.closeTabService.saveDataForLMAll_extra = null
   }
   getLMAll = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
-    if (this.readingListGUID === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll))
+    if (this.readingListGUID === trackingId && !MathS.isNull(this.closeTabService.saveDataForLMAll))
       return this.closeTabService.saveDataForLMAll;
-    if (this.readingListGUID_extra === trackingId && !this.utilsService.isNull(this.closeTabService.saveDataForLMAll_extra))
+    if (this.readingListGUID_extra === trackingId && !MathS.isNull(this.closeTabService.saveDataForLMAll_extra))
       return this.closeTabService.saveDataForLMAll_extra;
 
     if (this.whereToSave() == 0) {
@@ -162,6 +170,9 @@ export class ListManagerService {
   getLMAllZoneDictionary = () => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
+  getKarbariDictionaryCode = () => {
+    return this.dictionaryWrapperService.getkarbariCodeDictionary();
+  }
   getKarbariDictionary = () => {
     return this.dictionaryWrapperService.getKarbariDictionary();
   }
@@ -174,9 +185,9 @@ export class ListManagerService {
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
   }
-  getLMPD = (trackNumber: number): Promise<any> => {
+  getLM = (method: ENInterfaces, trackNumber: number): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedPERDAY, trackNumber).subscribe(res => {
+      this.interfaceManagerService.GETByQuote(method, trackNumber).subscribe(res => {
         resolve(res);
       })
     })
@@ -188,13 +199,24 @@ export class ListManagerService {
       })
     });
   }
+  postById = (method: ENInterfaces, id: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
       if (item.newRate > 0)
-        item.newRate = parseFloat(this.utilsService.getRange(item.newRate))
+        item.newRate = parseFloat(MathS.getRange(item.newRate))
       if (item.gisAccuracy)
-        item.gisAccuracy = this.utilsService.getRange(item.gisAccuracy)
+        item.gisAccuracy = MathS.getRange(item.gisAccuracy)
+      if (item.x)
+        item.x = MathS.getRange(item.x)
+      if (item.y)
+        item.y = MathS.getRange(item.y)
     })
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
@@ -216,6 +238,30 @@ export class ListManagerService {
       if (items.isSelected)
         return items
     })
+  }
+  showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
+    // disable close mean when dynamic count show decision should make
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+        {
+          disableClose: disableClose,
+          minWidth: '19rem',
+          data: {
+            data: res,
+            title: title
+          }
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (disableClose) {
+          if (result) {
+            resolve(true);
+          }
+        }
+      })
+    });
+  }
+  snackEmptyValue = () => {
+    this.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
 
 }

@@ -1,80 +1,18 @@
-<p-table id="tdm" sortField="insertDateJalali" [columns]="selectedColumns" [value]="dataSource" [paginator]="true"
-    [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از{first} تا {last} از {totalRecords} مورد
-" [rowsPerPageOptions]="[10,25,50]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" stateKey="last-states-session">
-
-    <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables.selectedlastStates ,$event)"
-            selectedItemsLabel=" ستون انتخاب شده{0}" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <div class="header_icons_wrap">
-            <div class="right_side">
-                <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'lastStates')"
-                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
-                    <div class="tooltip_text">دریافت pdf</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'lastStates', 'xlsx')"
-                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
-                    <div class="tooltip_text">دریافت Excel</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'lastStates', 'csv')"
-                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
-                    <div class="tooltip_text">دریافت CSV</div>
-                </i>
-            </div>
-            <div class="left_side">
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
-            </th>
-            <th style="width: 4rem"></th>
-        </tr>
-        <tr>
-            <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
-                </p-columnFilter>
-                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
-            </th>
-            <th style="width: 4rem"></th>
-        </tr>
-    </ng-template>
-
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns">
-                <span class="ui-column-title">{{col.header}}</span>
-                <ng-container
-                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
-                </ng-container>
-                <ng-template #elseTemplate>
-                    {{dataSource[col.field]}}
-                </ng-template>
-            </td>
-            <td *ngIf="dataSource.hasMap" (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
-                <span class="ui-column-title">مشاهده روی نقشه</span>
-                <i class="tooltip p_icons pi pi-map-marker">
-                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
-                </i>
-            </td>
-            <td *ngIf="!dataSource.hasMap">
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage" *ngIf="!dataSource || dataSource.length === 0">
-        <tr>
-            <td [attr.colspan]="dataSource.length">
-                موردی پیدا نشد
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+<app-prime-table     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="'lastStates'"
+    [_checkUpName]="'lastStates'"
+    [_sortField]="'insertDateJalali'"
+    [_sortOrder]=-1
+    [_sortMode]="'single'"  
+    [_calculableSUM]=true  
+    [_selectedColumnsToRemember]="'selectedlastStates'"
+    [_numberOfExtraColumns]="[1]"
+    [_sessionName]="'last-states-session'"
+    (showedInMap)="showInMap($event)"   
+    (refreshedTable)="refreshTable()"
+    (routedToLMAll)="trackingManagerService.routeToLMAll($event)"
+ > 
+</app-prime-table>

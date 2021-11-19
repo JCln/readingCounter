@@ -1,96 +1,19 @@
-<p-table *ngIf="route.children.length === 0" sortField="insertDateJalali" [columns]="selectedColumns"
-    [value]="dataSource" [paginator]="true" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rows]="20"
-    [rowsPerPageOptions]="[20,50,100, 500, 1000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" stateKey="offloaded-session">
+<app-prime-table *ngIf="route.children.length === 0"     
+    [_selectCols]="_selectCols" 
+    [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" 
+    [_outputFileName]="'offloaded'"
+    [_checkUpName]="'offloaded'"
+    [_sortField]="'insertDateJalali'"    
+    [_numberOfExtraColumns]="[1, 2, 3]"
+    [_calculableSUM]=true
+    [_selectedColumnsToRemember]="'selectedTracks'"
+    [_sessionName]="'offloaded-session'"
+    (refreshedTable)="refreshTable()"
+    (downloadedOutputSingle)="downloadOutputSingle($event)"        
+    (routeedToOffloadModify)="routeToOffloadModify($event)"        
+    (backedToReading)="backToReading($event)"        
+ > 
+</app-prime-table>
 
-    <ng-template pTemplate="caption">
-        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables.selectedTracks ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <div class="header_icons_wrap">
-            <div class="right_side">
-                <i (click)="outputManagerService.exportPDF(dataSource, _selectCols, 'offloaded')"
-                    class="tooltip _circle_border p_icons pi pi-file-pdf _pdf">
-                    <div class="tooltip_text">دریافت pdf</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'offloaded', 'xlsx')"
-                    class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
-                    <div class="tooltip_text">دریافت Excel</div>
-                </i>
-                <i (click)="outputManagerService.export(dataSource, _selectCols, 'offloaded', 'csv')"
-                    class="tooltip _circle_border p_icons fas fa-file-csv _csv">
-                    <div class="tooltip_text">دریافت CSV</div>
-                </i>
-            </div>
-            <div class="left_side">
-                <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
-                </i>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
-            </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-        <tr>
-            <th *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
-                </p-columnFilter>
-                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
-            </th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-            <th style="width: 4rem"></th>
-        </tr>
-    </ng-template>
-
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-ri="rowIndex">
-        <tr>
-            <td *ngFor="let col of columns">
-                <span class="ui-column-title">{{col.header}}</span>
-                <ng-container
-                    *ngIf="dataSource[col.field] === true || dataSource[col.field] === false; else elseTemplate">
-                    <mat-checkbox [disabled]="true" [(ngModel)]="dataSource[col.field]"></mat-checkbox>
-                </ng-container>
-                <ng-template #elseTemplate>
-                    {{dataSource[col.field]}}
-                </ng-template>
-            </td>
-            <td (click)="downloadOutputSingle(dataSource)">
-                <span class="ui-column-title">دانلود فایل</span>
-                <i class="tooltip p_icons pi pi-download">
-                    <div class="tooltip_text">دانلود فایل</div>
-                </i>
-            </td>
-            <td>
-                <span class="ui-column-title">مشاهده (اصلاح) لیست</span>
-                <i (click)="routeToOffloadModify(dataSource)" class="tooltip p_icons pi pi-info-circle">
-                    <div class="tooltip_text_right">مشاهده(اصلاح) لیست</div>
-                </i>
-            </td>
-            <td>
-                <span class="ui-column-title">بازگشت به درحال قرائت</span>
-                <i (click)="backToReading(dataSource,ri)" class="tooltip p_icons pi pi-step-backward">
-                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
-                </i>
-            </td>
-        </tr>
-    </ng-template>
-
-</p-table>
-
-<section *ngIf="!dataSource || dataSource.length === 0">
-    <tr class="empty_data">
-        موردی پیدا نشد
-    </tr>
-</section>
 <router-outlet></router-outlet>

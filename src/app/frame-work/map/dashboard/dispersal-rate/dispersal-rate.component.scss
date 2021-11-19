@@ -1,63 +1,13 @@
-@import 'variable';
-
-table {
-  background-color: var(--gray_300);
-  font-family: $font_family;
-  border-collapse: collapse;
-  width: 100%;
-  direction: rtl;
-  text-align: center;
-  font-size: $font_s;
-  font-weight: 500;
-  overflow-x: auto;
-}
-
-table td,
-table th {
-  border: 1px solid var(--white);
-  padding: $font_05;
-  text-align: center;
-  color: var(--gray_800);
-  direction: ltr;
-  font-size: $font_m;
-  font-weight: 600;
-}
-
-table th {
-  background-color: var(--gray_500);
-}
-
-table tr {
-  direction: rtl;
-}
-
-table tr:nth-child(even) {
-  background-color: var(--gray_100);
-}
-
-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  background-color: var(--blue_400);
-  color: var(--gray_400);
-}
+@import '../../dashboard/dashboard.component.scss';
 
 ._normal {
-  background: rgba(117, 188, 84, 0.6);
+  background: rgba(117, 188, 84, 0.25);
 }
 
 ._closed {
-  background: rgba(246, 62, 56, 0.6);
+  background: rgba(246, 62, 56, 0.4);
 }
 
 ._percent {
-  background: rgba(246, 152, 56, 0.8);
-}
-
-._border_left {
-  border-left: 2px solid #0045cbbf !important;
-}
-
-._hours {
-  background-color: var(--gray_400);
+  background: rgba(246, 152, 56, 0.25);
 }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingReportChartDisposeRes } from 'interfaces/imanage';
+import { IReadingReportChartDisposeRes } from 'interfaces/ireports';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -105,12 +105,7 @@ export class DisperseChartComponent implements OnInit, OnDestroy {
     this.pieChartDataZone.push(this.dataSource.inZone._16To18);
   }
   connectToServer = async () => {
-    if (!this.readingReportManagerService.getRRReq()) {
-      this.backToPrevious();
-      return;
-    }
-
-    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/dh', ENInterfaces.ListDispersalChart, 'readingReportReq');
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalChart, this.readingReportManagerService.disposalhoursReq);
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();

@@ -3,7 +3,7 @@
 @import 'input.scss';
 
 .mat-dialog-content {
-  color: var(--gray_700);
+  color: var(--secondary_7);
   font-size: $font_s;
   text-align: right;
   word-spacing: .3rem;
@@ -14,14 +14,15 @@
 }
 
 ._custom {
-  background: var(--blue_400);
-  color: var(--gray_100);
+  background: var(--primary_2);
+  color: var(--secondary_1);
 }
 
 ._delete_style {
   background-color: var(--red_500);
   border-color: var(--red_500);
   color: var(--white);
+  text-align: center;
 
   &:hover,
   &:focus,
@@ -34,6 +35,7 @@
 h2 {
   font-size: $font_m;
   padding: $font_05;
+  text-align: center;
 }
 
 .btn_1,

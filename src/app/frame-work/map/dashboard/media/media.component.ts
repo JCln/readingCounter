@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDashboardTimed } from 'interfaces/inon-manage';
+import { IDashboardTimed } from 'interfaces/idashboard-map';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
 
@@ -18,8 +18,10 @@ export class MediaComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.media = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardReadingReportTimed);
-    this.insertSelectedColumns();
+    this.media = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardMediaTimed);
+    if (this.media) {
+      this.insertSelectedColumns();
+    }
   }
   ngOnInit(): void {
     this.classWrapper();

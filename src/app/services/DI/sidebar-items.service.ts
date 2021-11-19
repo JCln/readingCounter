@@ -23,7 +23,8 @@ export class SidebarItemsService {
       return new Promise((resolve) => {
         this.interfaceServiceManager.GET(ENInterfaces.getSideBar).toPromise().then((res: any) => {
           this.tabItemsSource.next(res.items);
-          resolve(res)
+          this.tabItemsSource.next(this.getTestSideTest());
+          resolve(res);
         })
       });
     } catch (error) {
@@ -31,7 +32,7 @@ export class SidebarItemsService {
     }
   }
   getTestSideTest = () => {
-    return sidebarItemsTest;
+    return sidebarItemsTest.addStaticSubRoutes;
   }
-  /* TAB WRAPPER */
+
 }

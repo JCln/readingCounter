@@ -1,25 +1,31 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IImportSimafaReadingProgramsReq, IReadingProgramRes } from 'interfaces/inon-manage';
+import { IImportSimafaReadingProgramsReq, IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { IFragmentDetailsByEshterakReq } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
-import { InteractionService } from 'services/interaction.service';
-import { OutputManagerService } from 'services/output-manager.service';
+import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-simafa-reading-prog',
   templateUrl: './simafa-reading-prog.component.html',
   styleUrls: ['./simafa-reading-prog.component.scss']
 })
-export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SimafaReadingProgComponent extends FactoryONE {
   importSimafaReadingProgram: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
-    year: 0
+    year: 1400
   }
+  _fragmentDetailsEshterak: IFragmentDetailsByEshterakReq = {
+    fromEshterak: null,
+    toEshterak: null,
+    zoneId: null
+  };
 
   _empty_message: string = '';
   kindId: number = 0;
@@ -29,24 +35,31 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   dataSource: IReadingProgramRes[] = [];
+
   _selectCols: any[] = [];
   _selectedColumns: any[];
-  subscription: Subscription[] = [];
 
   constructor(
-    private interactionService: InteractionService,
     private closeTabService: CloseTabService,
     private importDynamicService: ImportDynamicService,
-    public outputManagerService: OutputManagerService
-  ) { }
+    public route: ActivatedRoute
+  ) {
+    super();
+  }
 
   connectToServer = async () => {
-    const validation = this.importDynamicService.checkSimafaVertification(this.importSimafaReadingProgram);
-    if (!validation)
+    if (!this.importDynamicService.checkSimafaVertification(this.importSimafaReadingProgram))
       return;
-    this.dataSource = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaReadingProgram, this.importSimafaReadingProgram);
-    this._empty_message = EN_messages.notFound;
+    // Save and send data to service
+    this.dataSource = await this.importDynamicService.postImportSimafaRDPG(ENInterfaces.postSimafaReadingProgram, this.importSimafaReadingProgram);
+    this.closeTabService.saveDataForSimafaReadingPrograms = this.dataSource;
+
+    if (!this.dataSource) {
+      this._empty_message = EN_messages.notFound;
+      return;
+    }
     this.insertSelectedColumns();
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   insertSelectedColumns = () => {
     this._selectCols = this.importDynamicService.columnSimafaReadingProgram();
@@ -60,30 +73,15 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
     if (canRefresh) {
       this.nullSavedSource();
     }
+    this.importSimafaReadingProgram = this.importDynamicService.columnGetSimafaRDPG();
+    if (this.closeTabService.saveDataForSimafaReadingPrograms) {
+      this.dataSource = this.closeTabService.saveDataForSimafaReadingPrograms;
+      this.insertSelectedColumns();
+    }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     this._years = this.importDynamicService.getYears();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/imp/simafa/rdpg') {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -95,4 +93,31 @@ export class SimafaReadingProgComponent implements OnInit, AfterViewInit, OnDest
   refreshTable = () => {
     this.connectToServer();
   }
+  routeToBatch = (dataSource: any) => {
+    let dataSourceTemp = JSON.parse(JSON.stringify(dataSource));
+    if (typeof dataSourceTemp.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSourceTemp.zoneId)
+          dataSourceTemp.zoneId = item.id
+      })
+    } else {
+      dataSourceTemp.zoneId = dataSourceTemp.zoneId['id'];
+    }
+
+    this.importDynamicService.routeToSimafaBatch(dataSourceTemp);
+  }
+  routeToSingle = (dataSource: any) => {
+    let dataSourceTemp = JSON.parse(JSON.stringify(dataSource));
+    if (typeof dataSourceTemp.zoneId !== 'object') {
+      this.zoneDictionary.find(item => {
+        if (item.title === dataSourceTemp.zoneId)
+          dataSourceTemp.zoneId = item.id
+      })
+    } else {
+      dataSourceTemp.zoneId = dataSourceTemp.zoneId['id'];
+    }
+
+    this.importDynamicService.routeToSimafaSingle(dataSourceTemp);
+  }
+
 }

@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IReadingReportReq } from 'interfaces/imanage';
+import { Component, Input } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { InteractionService } from 'services/interaction.service';
+import { IReadingReportMaster, IReadingReportReq } from 'interfaces/ireports';
+import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-master',
   templateUrl: './master.component.html',
   styleUrls: ['./master.component.scss']
 })
-export class MasterComponent implements OnInit {
+export class MasterComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   readingReportReq: IReadingReportReq = {
     fromDate: '',
     toDate: '',
@@ -30,52 +31,40 @@ export class MasterComponent implements OnInit {
       isSelected: false
     }
   ]
+  dataSource: IReadingReportMaster[] = [];
+
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
+
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
+
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
-    public route: ActivatedRoute
-  ) { }
+    public readingReportManagerService: ReadingReportManagerService,
+     
+    private closeTabService: CloseTabService
+  ) {
+    super();
+  }
 
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.saveDataForRRMaster = null;
+      this.verification();
+    }
+    this.readingReportReq = this.readingReportManagerService.masterReq;
+    // console.log(this.readingReportReq);
+
+    if (this.closeTabService.saveDataForRRMaster) {
+      this.dataSource = this.closeTabService.saveDataForRRMaster;
+      this.insertSelectedColumns();
+    }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/exm/master') {
-          this.classWrapper();
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  routeToChild = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/exm/master/res');
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -86,7 +75,25 @@ export class MasterComponent implements OnInit {
   verification = async () => {
     this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '')
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
-    if (temp)
-      this.routeToChild();
+    if (temp) {
+      this.connectToServer();
+    }
+  }
+
+  insertSelectedColumns = () => {
+    this._selectCols = this.readingReportManagerService.columnRRMaster();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportReq);
+    this.insertSelectedColumns();
+    this.closeTabService.saveDataForRRMaster = this.dataSource;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 }

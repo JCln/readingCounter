@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingReportChartKarkard } from 'interfaces/imanage';
+import { IReadingReportChartKarkard } from 'interfaces/ireports';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -130,11 +130,7 @@ export class KarkardChartComponent implements OnInit {
     this.pieChartDataRegion.push(this.dataSource.inRegion.xarabCount);
   }
   connectToServer = async () => {
-    if (!this.readingReportManagerService.getRRReq()) {
-      this.backToPrevious();
-      return;
-    }
-    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/karkard', ENInterfaces.ListKarkardChart, 'readingReportReq');
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardChart, this.readingReportManagerService.karkardReq);
     this.insertToPieChartProvince();
     this.insertToPieChartZone();
     this.insertToPieChartRegion();

@@ -1,6 +1,6 @@
 @import 'add-edit.scss';
 
-main {
+form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
   gap: .87rem;

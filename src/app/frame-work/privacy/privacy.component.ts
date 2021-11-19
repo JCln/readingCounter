@@ -1,24 +1,22 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { Component } from '@angular/core';
+import { MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { IPolicies, IPrivacy } from 'interfaces/inon-manage';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { InteractionService } from 'services/interaction.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
-import { PrivacyService } from 'services/privacy.service';
-
+import { ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { CloseTabService } from 'services/close-tab.service';
+import { SecurityService } from 'services/security.service';
+import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-privacy',
   templateUrl: './privacy.component.html',
   styleUrls: ['./privacy.component.scss']
 })
-export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PrivacyComponent extends FactoryONE {
   privacyOptions: IPrivacy;
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
 
-  subscription: Subscription[] = [];
+
   policies: IPolicies = {
     id: 0,
     enableValidIpCaptcha: false,
@@ -35,17 +33,15 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
     canUpdateDeviceId: false
   };
 
-  constructor(private interactionService: InteractionService,
-    private router: Router, private privacyService: PrivacyService, private interfaceManagerService: InterfaceManagerService, private _snackBar: MatSnackBar) { }
-
-  getPolicies = (): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.getPolicies, true).subscribe((res: IPolicies) => {
-        if (res)
-          resolve(res);
-      })
-    });
+  constructor(
+     
+    public securityService: SecurityService,
+    private closeTabService: CloseTabService,
+    private snackWrapperService: SnackWrapperService
+  ) {
+    super();
   }
+
   insertPolicies = (policies: IPolicies) => {
     this.policies.id = policies.id;
     this.policies.enableValidIpCaptcha = policies.enableValidIpCaptcha;
@@ -61,14 +57,23 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
     this.policies.passwordContainsNonAlphaNumeric = policies.passwordContainsNonAlphaNumeric;
     this.policies.canUpdateDeviceId = policies.canUpdateDeviceId;
   }
-  classWrapper = async () => {
-    const a = await this.getPolicies();
-    this.insertPolicies(a);
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.saveDataForPolicies = '';
+    }
 
-  }
-  ngOnInit(): void {
-    this.privacyOptions = this.privacyService.getPrivacyToggle();
-    this.classWrapper();
+    console.log(this.closeTabService.saveDataForPolicies);
+    if (this.closeTabService.saveDataForPolicies) {
+      this.policies = this.closeTabService.saveDataForPolicies;
+      this.insertPolicies(this.policies);
+    }
+    else {
+      this.policies = await this.securityService.getPolicy();
+      this.closeTabService.saveDataForPolicies = this.policies;
+      this.insertPolicies(this.policies);
+    }
+
+    this.privacyOptions = this.securityService.getPrivacyToggle();
   }
   plusOrMinus = (value: number) => {
     if (value > this.privacyOptions.maxLength) {
@@ -77,37 +82,15 @@ export class PrivacyComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (value < this.privacyOptions.minLength) {
-      this.openSnackBar('حداقل تعداد 4 حرف می‌باشد', 2000);
+      this.openSnackBar('حداقل تعداد 4 می‌باشد', 2000);
       return;
     }
     this.policies.minPasswordLength = value;
 
   }
-  addPolicy = () => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.addPolicies, this.policies);
+  openSnackBar(message: string, duration: ENSnackBarTimes) {
+    this.snackWrapperService.openSnackBar(message, duration);
   }
-  openSnackBar(message: string, duration: number) {
-    this._snackBar.open(message, 'بازگشت', {
-      duration: duration,
-      horizontalPosition: this.horizontalPosition
-    });
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/privacy')
-          this.ngOnInit();
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
+
 }
 

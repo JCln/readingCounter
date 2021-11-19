@@ -1,15 +1,12 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { catchError } from 'rxjs/internal/operators/catchError';
-import { map } from 'rxjs/internal/operators/map';
+import { ENSnackBarColors, ENSnackBarTimes, IObjectIteratation } from 'interfaces/ioverall-config';
+import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
-import { UtilsService } from './utils.service';
+import { MathS } from '../classes/math-s';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +17,7 @@ export class ApkService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private snackWrapperService: SnackWrapperService,
-    private utilsService: UtilsService
+    private snackWrapperService: SnackWrapperService
   ) { }
 
   /* COLUMNS */
@@ -49,15 +45,15 @@ export class ApkService {
     });
   }
   isNull = (): boolean => {
-    if (this.utilsService.isNull(this.desc.versionName)) {
+    if (MathS.isNull(this.desc.versionName)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_versionName, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
-    if (this.utilsService.isNull(this.desc.versionCode)) {
+    if (MathS.isNull(this.desc.versionCode)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_versionCode, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
-    if (this.utilsService.isNull(this.fileForm)) {
+    if (MathS.isNull(this.fileForm)) {
       this.snackWrapperService.openSnackBar(EN_messages.should_insert_APK, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
@@ -93,7 +89,7 @@ export class ApkService {
       return false;
     return true;
   }
-  postTicket(): Promise<void> {
+  postTicket = (): Observable<any> => {
     const formData: FormData = new FormData();
 
     formData.append('file', this.fileForm[0]);
@@ -101,15 +97,9 @@ export class ApkService {
     formData.append('versionName', this.desc.versionName);
     formData.append('description', this.desc.description);
 
-    return this.interfaceManagerService.POSTBODY(ENInterfaces.APKUpload, formData)
-      .pipe(
-        map(response => response || {}),
-        catchError((error: HttpErrorResponse) => {
-          console.error("observable error: ", error);
-          return throwError(error);
-        })
-      ).toPromise().then((res: IResponses) => {
-        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.threeMili, ENSnackBarColors.success);
-      });
+    return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.APKUpload, formData);
+  }
+  showSuccessMessage = (message: string) => {
+    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
   }
 }

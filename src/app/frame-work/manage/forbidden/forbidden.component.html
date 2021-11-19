@@ -1,8 +1,8 @@
-<form #form="ngForm" (ngSubmit)="verification()" *ngIf="route.children.length === 0">
-    <section>
+<section [hidden]="isCollapsed">
+    <form #form="ngForm" (ngSubmit)="verification()">
         <div class="input_2">
             <div class="_key">ناحیه</div>
-            <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.zoneId" name="zoneId">
+            <mat-select placeholder="انتخاب مورد" [(ngModel)]="forbiddenService.forbiddenReq.zoneId" name="zoneId">
                 <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
@@ -11,14 +11,18 @@
         <div class="input_2">
             <div class="_key">از</div>
             <div class="_value">
-                <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                <app-date-jalali name="fromDate"
+                    (dateJalEvent)="forbiddenService.receiveFromDateJalali(forbiddenService.ENForbidden.forbidden, $event)"
+                    [dateObject]="forbiddenService.forbiddenReq.fromDate">
                 </app-date-jalali>
             </div>
         </div>
         <div class="input_2">
             <div class="_key">تا</div>
             <div class="_value">
-                <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                <app-date-jalali name="toDate"
+                    (dateJalEvent)="forbiddenService.receiveToDateJalali(forbiddenService.ENForbidden.forbidden, $event)"
+                    [dateObject]="forbiddenService.forbiddenReq.toDate">
                 </app-date-jalali>
             </div>
         </div>
@@ -28,6 +32,12 @@
                 <i class="pi pi-list"></i>
             </button>
         </footer>
-    </section>
-</form>
-<router-outlet></router-outlet>
+
+    </form>
+</section>
+
+<app-prime-table *ngIf="dataSource" [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1]"
+    [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
+    (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()" (showedPictures)="showPictures($event)">
+</app-prime-table>

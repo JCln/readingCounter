@@ -4,11 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OffloadedComponent } from './offloaded.component';
 
 const routes: Routes = [
-  {
-    path: '', component: OffloadedComponent, children: [
-      { path: 'offloadMfy/:UUID', loadChildren: () => import('./offload/offload.module').then(offloadModify => offloadModify.OffloadModule) }
-    ]
-  }
+  { path: '', component: OffloadedComponent }
 ];
 
 @NgModule({

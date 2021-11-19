@@ -1,25 +1,27 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IListManagerPDXY, IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/imanage';
-import { Imap, IMapTrackDesc } from 'interfaces/imap.js';
+import { Imap } from 'interfaces/imap.js';
 import { ITHV } from 'interfaces/ioverall-config';
+import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
+import { IListManagerPDXY } from 'interfaces/itrackings';
+import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { MapItemsService } from 'services/DI/map-items.service.js';
+import { MapItemsService } from 'services/DI/map-items.service';
 import { EnvService } from 'services/env.service';
-import { InteractionService } from 'services/interaction.service';
 import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { MathS } from 'src/app/classes/math-s';
 
 
 declare let L;
 
-const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
-const iconUrl = 'assets/leaflet/images/marker-icon.png';
-const shadowUrl = 'assets/leaflet/images/marker-shadow.png';
+const iconRetinaUrl = 'assets/imgs/leaflet/marker-icon-2x.png';
+const iconUrl = 'assets/imgs/leaflet/marker-icon.png';
+const shadowUrl = 'assets/imgs/leaflet/marker-shadow.png';
 
 const simpleIcon = L.icon({
   iconRetinaUrl,
@@ -46,9 +48,9 @@ const myIcon = L.Icon.extend({
     shadowSize: [41, 41]
   }
 });
-const iconSimple = new myIcon({ iconUrl: 'assets/leaflet/images/marker-icon.png' });
-const markerGreen = new defaultIcon({ iconUrl: 'assets/leaflet/images/marker_green.png' });
-const markerRed = new defaultIcon({ iconUrl: 'assets/leaflet/images/marker_red.png' });
+const iconSimple = new myIcon({ iconUrl: 'assets/imgs/leaflet/marker-icon.png' });
+const markerGreen = new defaultIcon({ iconUrl: 'assets/imgs/leaflet/marker_blue.png' });
+const markerRed = new defaultIcon({ iconUrl: 'assets/imgs/leaflet/marker_red.png' });
 L.Marker.prototype.options.icon = simpleIcon;
 
 @Component({
@@ -56,8 +58,7 @@ L.Marker.prototype.options.icon = simpleIcon;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
-  private extrasNavigation: IReadingReportGISReq;
+export class MapComponent implements OnInit, OnDestroy {
   extraDataSourceRes: IReadingReportGISResponse[] = [];
 
   private map: L.Map;
@@ -69,7 +70,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   isShowMap: boolean = true;
   canShowOptionsButton: boolean = false;
   isShowMapConfig: boolean = false;
-  subscription: Subscription;
+  subscription: Subscription[] = [];
 
   _selectedOrderId: number = 0;
   orderGroup: ITHV[] = [
@@ -85,20 +86,22 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ]
   _isOrderInAsc: boolean = false;
+  onShowCounterReader = {
+    trackNumber: '', day: '', distance: null, isPerday: null
+  }
+  _isCluster: boolean;
 
   constructor(
     public mapService: MapService,
     readonly mapItemsService: MapItemsService,
-    private readonly interactionService: InteractionService,
     private readingReportManagerService: ReadingReportManagerService,
     public route: ActivatedRoute,
     private router: Router,
     private utilsService: UtilsService,
     private envService: EnvService,
     private dateJalaliService: DateJalaliService
-  ) {
-    this.extrasNavigation = this.getRouterExtras();
-  }
+  ) { }
+
   private getMapItems = () => {
     this.mapItems = this.mapItemsService.getMapItems();
   }
@@ -114,7 +117,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // only one of base layers should be added to the map at instantiation
     this.map = L.map('map', {
-      center: [32.669, 51.664],
+      center: this.envService.mapCenter,
       zoom: 15,
       minZoom: 4,
       layers: [streets, this.layerGroup]
@@ -145,45 +148,67 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       }, i * delay);
     })
   }
-  private getRouteParams = (): IMapTrackDesc => {
-    const a = this.route.snapshot.paramMap.get('trackNumber');
-    const b = this.route.snapshot.paramMap.get('day');
-    return { trackNumber: a, day: b };
-  }
   private classWrapper = async () => {
-    const a: IMapTrackDesc = this.getRouteParams();
-    if (this.utilsService.isNull(a.trackNumber))
-      return;
+    this.onShowCounterReader.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+    this.onShowCounterReader.day = this.route.snapshot.paramMap.get('day');
+    this.onShowCounterReader.isPerday = this.route.snapshot.paramMap.get('isPerday');
     this.canShowOptionsButton = true;
-    this.markersDataSourceXY = await this.mapService.getPointerMarks(a);
-    this.mapConfigOptions(0);
-  }
-  private classWrapperWithExtras = async () => {
-    this.extraDataSourceRes = await this.readingReportManagerService.postRRManager('wr/rpts/mam/gis', ENInterfaces.ListToGis, 'readingReportGISReq');
-    if (!this.extraDataSourceRes.length) {
-      this.utilsService.snackBarMessageFailed(EN_messages.notFound);
+
+    if (this.onShowCounterReader.isPerday)
+      this.markersDataSourceXY = await this.mapService.getXY(this.onShowCounterReader.trackNumber);
+    else
+      this.markersDataSourceXY = await this.mapService.getPointerMarks(this.onShowCounterReader);
+
+    if (!this.mapService.validateGISAccuracy(this.markersDataSourceXY)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.notFound);
       return;
     }
-    this.mapService.hasMarkerCluster(this.extrasNavigation) ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes);
+    this.mapConfigOptions(200);
+  }
+  private makeClusterRouteObject = (): IReadingReportGISReq => {
+    return {
+      zoneId: parseInt(this.route.snapshot.paramMap.get('zoneId')),
+      isCounterState: this.route.snapshot.paramMap.get('isCounterState') === 'true' ? true : false,
+      counterStateId: parseInt(this.route.snapshot.paramMap.get('counterStateId')),
+      isKarbariChange: this.route.snapshot.paramMap.get('isKarbariChange') === 'true' ? true : false,
+      isAhadChange: this.route.snapshot.paramMap.get('isAhadChange') === 'true' ? true : false,
+      isForbidden: this.route.snapshot.paramMap.get('isForbidden') === 'true' ? true : false,
+      readingPeriodId: parseInt(this.route.snapshot.paramMap.get('readingPeriodId')),
+      year: parseInt(this.route.snapshot.paramMap.get('year')),
+      fromDate: this.route.snapshot.paramMap.get('fromDate'),
+      toDate: this.route.snapshot.paramMap.get('toDate'),
+      isCluster: this.route.snapshot.paramMap.get('isCluster') === 'true' ? true : false,
+    }
+  }
+  private classWrapperCluster = async () => {
+    this.extraDataSourceRes = await this.readingReportManagerService.portRRTest(ENInterfaces.ListToGis, this.makeClusterRouteObject());
+
+    if (this.extraDataSourceRes.length === 0) {
+      this.utilsService.snackBarMessageWarn(EN_messages.notFound);
+      return;
+    }
+    this._isCluster ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes);
+  }
+  private getRouteParams = () => {
+    this.onShowCounterReader.distance = this.route.snapshot.paramMap.get('distance');
+
+    if (!MathS.isNull(this.onShowCounterReader.distance)) {
+      this.classWrapper();
+      return;
+    }
+    this._isCluster = this.route.snapshot.paramMap.get('isCluster') == 'true' ? true :
+      this.route.snapshot.paramMap.get('isCluster') == 'false' ? false : null
+    if (this._isCluster == false || this._isCluster == true)
+      this.classWrapperCluster();
   }
   ngOnInit(): void {
     this.getMapItems();
     this.initMap();
-    if (this.extrasNavigation) {
-      this.classWrapperWithExtras();
-    }
-    else {
-      this.classWrapper();
-    }
-    this.addButtonsToLeaflet();
-  }
-  ngAfterViewInit(): void {
-    this.subscription = this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr' || res === '/wr/db')
-          this.ngOnInit();
-      }
-    })
+    this.getRouteParams();
+    this.mapService.serviceInstantiate(this.map);
+    this.mapService.addButtonsToLeaflet();
+    this.removeLayerButtonLeaflet();
+    this.myLocationButtonLeaflet();
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
     if (lat === 0 || lag === 0)
@@ -193,29 +218,30 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.map.flyTo([(lat), (lag)], zoom);
   }
-  private addButtonsToLeaflet = () => {
-    this.mapService.serviceInstantiate(this.map);
-    this.mapService.addButtonsToLeaflet();
-    this.removeLayerButtonLeaflet();
-    this.myLocationButtonLeaflet();
+  private panToDes = (lat: number, lag: number) => {
+    if (lat === 0 || lag === 0)
+      return;
+    lat = parseFloat(lat.toString().substring(0, 6));
+    lag = parseFloat(lag.toString().substring(0, 6));
+
+    this.map.panTo([(lat), (lag)]);
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
-    this.subscription.unsubscribe();
+    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
-
   // get X Y positions
   private getXYPosition = (method: string, xyData: any, delay?: number) => {
     xyData.map((items, i) => {
       setTimeout(() => {
         this[method](parseFloat(items.y), parseFloat(items.x), items);
-        this.flyToDes(parseFloat(items.y), parseFloat(items.x), 16);
+        this.panToDes(parseFloat(items.y), parseFloat(items.x));
       }, i * delay);
     })
   }
   private markingOnMapNClusterNDelay = (method: string, xyData: any) => {
-    this.flyToDes(32.66, 51.66, 12);
+    this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 12);
     xyData.map((items, i) => {
       this[method](parseFloat(items.y), parseFloat(items.x), items);
     })
@@ -223,7 +249,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   private getXYMarkerClusterPosition = (xyData: any) => {
     const markers = new L.markerClusterGroup();
     xyData.map((items) => {
-      this.flyToDes(32.66, 51.66, 12);
+      this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 11);
       markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)]).bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       ));
@@ -242,7 +268,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByDatePersian) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByDateDESCPersian)
     }
 
-    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay + 10);
+    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay);
     this.leafletDrawPolylines(delay);
   }
   private extrasConfigOptions = (xyData: any) => {
@@ -261,6 +287,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     else {
       this.router.navigate(['wr/db']);
     }
+    this.changeRouteDetected();
+  }
+  changeRouteDetected = () => {
+    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(res => {
+        if (!res)
+          return;
+        if (this.router.url == '/wr')
+          this.isShowMap = true;
+      })
+    )
   }
   private removeAllLayers = () => {
     this.layerGroup.clearLayers();
@@ -287,7 +324,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       );
   }
   private findMyLocationLeaflet = (e) => {
-    const radius = parseFloat(this.utilsService.getRange(e.accuracy));
+    const radius = parseFloat(MathS.getRange(e.accuracy));
     L.marker(e.latlng, { icon: iconSimple }).addTo(this.layerGroup)
       .bindPopup("شما در حدود تقریبی " + radius + " متر از این مکان قرار دارید").openPopup();
 
@@ -303,12 +340,5 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       this.map.on('locationfound', this.findMyLocationLeaflet);
       this.map.on('locationerror', this.onLocationError);
     }, 'مکان من').addTo(this.map);
-  }
-  getRouterExtras = (): any => {
-    try {
-      return this.router.getCurrentNavigation().extras.state.test;
-    } catch (error) {
-      console.error(error);
-    }
   }
 }

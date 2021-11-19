@@ -19,6 +19,13 @@ export interface ISidebarItems {
         }
     ]
 }
+export interface ISidebarVals {
+    readonly id: number,
+    req?: ENEssentialsToSave;
+    value: ENEssentialsToSave;
+    value_2?: ENEssentialsToSave;
+    readonly url: string
+}
 export interface ITabs {
     title: string;
     isClosable: boolean;
@@ -26,6 +33,79 @@ export interface ITabs {
     route: string;
     cssClass: string;
     logicalOrder: number;
+}
+export enum ENEssentialsToSave {
+    saveDataForKarbari = 'saveDataForKarbari',
+    saveDataForCounterState = 'saveDataForCounterState',
+    saveDataForQotrManager = 'saveDataForQotrManager',
+    saveDataForCounterReport = 'saveDataForCounterReport',
+    saveDataForFragmentNOB = 'saveDataForFragmentNOB',
+    saveDataForTextOutput = 'saveDataForTextOutput',
+    saveDataForAPKManager = 'saveDataForAPKManager',
+    saveDataForReadingConfig = 'saveDataForReadingConfig',
+    saveDataForReadingPeriodKindManager = 'saveDataForReadingPeriodKindManager',
+    saveDataForWaterFormula = 'saveDataForWaterFormula',
+    saveDataForBadgetFormula = 'saveDataForBadgetFormula',
+    saveDataForTabsare2Formula = 'saveDataForTabsare2Formula',
+    saveDataForTabsare3Formula = 'saveDataForTabsare3Formula',
+    saveDataForAppLevel1 = 'saveDataForAppLevel1',
+    saveDataForAppLevel2 = 'saveDataForAppLevel2',
+    saveDataForAppLevel3 = 'saveDataForAppLevel3',
+    saveDataForAppLevel4 = 'saveDataForAppLevel4',
+    saveDataForAllUsers = 'saveDataForAllUsers',
+    saveDataForAddUsers = 'saveDataForAddUsers',
+    saveDataForRoleManager = 'saveDataForRoleManager',
+    saveDataForEditOnRole = 'saveDataForEditOnRole',
+    saveDataForCountry = 'saveDataForCountry',
+    saveDataForProvince = 'saveDataForProvince',
+    saveDataForRegion = 'saveDataForRegion',
+    saveDataForZone = 'saveDataForZone',
+    saveDataForZoneBound = 'saveDataForZoneBound',
+    saveDataForImportDynamic = 'saveDataForImportDynamic',
+    saveDataForImportErrors = 'saveDataForImportErrors',
+    saveDataForAssessPre = 'saveDataForAssessPre',
+    saveDataForAssessAdd = 'saveDataForAssessAdd',
+    saveDataForSimafaReadingPrograms = 'saveDataForSimafaReadingPrograms',
+    saveDataForSimafaBatch = 'saveDataForSimafaBatch',
+    saveDataForPolicies = 'saveDataForPolicies',
+    saveDataForProfile = 'saveDataForProfile',
+    saveDataForTrackImported = 'saveDataForTrackImported',
+    saveDataForTrackLoaded = 'saveDataForTrackLoaded',
+    saveDataForTrackReading = 'saveDataForTrackReading',
+    saveDataForLastStates = 'saveDataForLastStates',
+    saveDataForTrackOffloaded = 'saveDataForTrackOffloaded',
+    saveDataForTrackFinished = 'saveDataForTrackFinished',
+    saveDataForFollowUp = 'saveDataForFollowUp',
+    saveDataForFollowUpAUX = 'saveDataForFollowUpAUX',
+    rSearchMoshtarakinReq = 'rSearchMoshtarakinReq',
+    saveDataForSearchMoshtarakin = 'saveDataForSearchMoshtarakin',
+    saveDataForSearchPro = 'saveDataForSearchPro',
+    saveDataForSearchSimple = 'saveDataForSearchSimple',
+    saveDataForFNB = 'saveDataForFNB',
+    saveDataForLMPD = 'saveDataForLMPD',
+    saveDataForOutputDBF = 'saveDataForOutputDBF',
+    saveDataForRRTraverse = 'saveDataForRRTraverse',
+    saveDataForRRTraverseDifferential = 'saveDataForRRTraverseDifferential',
+    saveDataForRRDisposalHours = 'saveDataForRRDisposalHours',
+    saveDataForRRKarkard = 'saveDataForRRKarkard',
+    saveDataForRRPreNumShown = 'saveDataForRRPreNumShown',
+    saveDataForRRLocked = 'saveDataForRRLocked',
+    saveDataForRROffloadedKarkard = 'saveDataForRROffloadedKarkard',
+    saveDataForRRMaster = 'saveDataForRRMaster',
+    saveDataForRRPerformance = 'saveDataForRRPerformance',
+    saveDataForDMAAnalyze = 'saveDataForDMAAnalyze',
+    saveDataForRRDetails = 'saveDataForRRDetails',
+    saveDataForRRkarkardDaily = 'saveDataForRRkarkardDaily',
+    saveDataForRRGIS = 'saveDataForRRGIS',
+    saveDataForOffloadModify = 'saveDataForOffloadModify',
+    saveDataForLMAll = 'saveDataForLMAll',
+    saveDataForLMAll_extra = 'saveDataForLMAll_extra',
+    saveDataForEditUsers = 'saveDataForEditUsers',
+    saveDataForWOUI = 'saveDataForWOUI',
+    saveDataForUserLoggins = 'saveDataForUserLoggins',
+    saveDataForFragmentNOBDetails = 'saveDataForFragmentNOBDetails',
+    saveDataForRRGallery = 'saveDataForRRGallery',
+    saveDataForRRGalleryReq = 'saveDataForRRGalleryReq',
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -64,16 +144,10 @@ export enum ENTrackingRoute {
     migrateDataRowToOffloaded,
     migrateToPreState,
 }
-export enum ENTrackingMessage {
-    toImported = 'علت بازگشت به صادر شده',
-    toReading = 'علت بازگشت به درحال قرائت',
-    toOffloaded = 'علت بازگشت به بارگذاری شده',
-    toPrevious = 'علت بازگشت به مرحله قبلی'
-}
 export interface IResponses {
-    isValid: boolean
+    isValid: boolean;
     message: string;
-    status: number
+    status: number;
 }
 export interface ITrueFalseFilter {
     name: string;
@@ -84,7 +158,24 @@ export const TrueFalseFilter: ITrueFalseFilter[] = [
     { name: 'باشد', value: true },
     { name: 'هیچکدام', value: '' }
 ]
-
+export enum ENBrowserStatus {
+    good = 200,
+    warn = 400,
+    alarm = 500
+}
+export const ENBrowserInfo = {
+    Chrome: { title: 'Google Chrome', url: 'https://browser-update.org/fa/update-browser.html' },
+    FireFox: { title: 'Mozilla FireFox', url: 'https://browser-update.org/fa/update-browser.html' },
+    Opera: { title: 'Opera', url: 'https://browser-update.org/fa/update-browser.html' },
+    Safari: { title: 'Safari', url: 'https://browser-update.org/fa/update-browser.html' },
+    IE: { title: 'IE', url: 'https://browser-update.org/fa/update-browser.html' },
+}
+export interface IBrowserNotif {
+    message: string;
+    backgroundColor: string;
+    isClosable: boolean;
+    isShow: boolean;
+}
 export interface IDictionaryManager {
     readonly id: number | string;
     title: string;
@@ -123,14 +214,6 @@ export interface ITabWrapperDetectDynamicRoute {
     _title: string,
     _dynamicRoute: string
 }
-
-export interface IActivatedProvinceConfig {
-    headerProvinceTitle: ENActivateProvinceTitle,
-    API_URL: string;
-    OSMmapBoxUrl: string,
-    SATELLITEMapBoxUrl: string,
-    SATELLITEMapAccessToken: string
-}
 export interface IOffloadModifyType {
     id: number,
     modifyeType: ENOffloadModifyType
@@ -150,19 +233,28 @@ export enum ENThemeColor {
     dark = 1,
 }
 export enum ENSelectedColumnVariables {
+    selectedSimafaBatch = '_simafaBatch',
     selectedTracks = 'menuDefault',
     selectedlastStates = 'lastStates',
     selectedUsersAll = '_usersAll',
-    selectedListManagerAll = 'listManagerAll',
+    selectedListManagerAll = '_listManagerAll',
+    selectedListManagerAssess = '_assessPreColumns',
+    selectedListManagerMosh = '_searchReqMosh',
+    selectedListManagerPro = '_searchReqPro',
+    selectedSearchManagerSimple = '_searchSimple',
     selectedAuth2 = '_auth2',
     selectedAuth3 = '_auth3',
     selectedAuth4 = '_auth4',
     selectedRRAnalyzeByParam = '_RRAnalyzeByParam',
+    selectedDMAnalyze = '_DMAnalyses',
     selectedRRMaster = '_RRMaster',
     selectedRRDetails = '_RRDetails',
     selectedRRTraverse = '_RRTraverse',
     selectedRRTraverseDifferential = '_RRTraverseDifferential',
     selectedRRKarkard = '_RRKarkard',
+    selectedRRLocked = '_RRLocked',
+    selectedRRPreNumShown = '_RRPreNumberShown',
+    selectedRROffloadedKarkard = '_RROffloadedKarkard',
     selectedRRKarkardDaily = '_RRKarkardDaily',
     selectedRRDisposalHours = '_RRDisposalHours',
     selectedAbFormulas = '_abFormulas',
@@ -175,6 +267,7 @@ export enum ENSelectedColumnVariables {
     selectedReadingPeriodKind = '_readingPeriodKind',
     selectedTextOutput = '_textOutput',
     selectedKarbari = '_karbari',
+    selectedForbidden = '_forbidden',
 }
 export enum ENOffloadModifyType {
     callAnnounce = 'اعلام تلفنی',
@@ -189,12 +282,6 @@ export enum ENOffloadModifyType {
     counterHumidity = 'رطوبت کنتور',
     others = 'سایر'
 };
-export enum ENActivateProvinceTitle {
-    DEFAULT = '',
-    ESF = 'اصفهان',
-    TEH = 'تهران',
-    ZONE4 = 'منطقه 4'
-}
 export enum ENSearch {
     eshterak = 'اشتراک',
     radif = 'ش پرونده',
@@ -211,4 +298,7 @@ export const IMasrafStates: ITHV[] = [
 export interface Theme {
     name: string,
     properties: any
+}
+export enum ENLoginVersion {
+    version = '0.5.3'
 }

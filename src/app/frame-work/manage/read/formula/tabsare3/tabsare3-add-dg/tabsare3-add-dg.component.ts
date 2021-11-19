@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { FormulasService } from 'services/formulas.service';
 import { SectionsService } from 'services/sections.service';
 
 @Component({
@@ -15,6 +17,7 @@ export class Tabsare3AddDgComponent {
   constructor(fb: FormBuilder,
     private dialogRef: MatDialogRef<Tabsare3AddDgComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private formulasService: FormulasService,
     private sectionsService: SectionsService
   ) {
 
@@ -38,11 +41,14 @@ export class Tabsare3AddDgComponent {
     this.form.get('toDate').setValue($event);
   }
 
-  save() {
+  async save() {
     this.sectionsService.setSectionsValue(this.form.value);
     if (!this.sectionsService.sectionVertification()) {
       return;
     }
+    if (!await this.formulasService.postFormulaAdd(ENInterfaces.FormulaTabsare3Add, this.form.value))
+      return;
+
     this.dialogRef.close(this.form.value);
   }
   close() {

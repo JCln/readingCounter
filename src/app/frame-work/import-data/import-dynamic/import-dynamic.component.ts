@@ -1,12 +1,11 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IImportDynamicDefault } from 'interfaces/inon-manage';
+import { IReadingConfigDefault } from 'interfaces/iimports';
 import { ENLocalStorageNames, IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
-import { InteractionService } from 'services/interaction.service';
 import { LocalClientConfigsService } from 'services/local-client-configs.service';
+import { FactoryONE } from 'src/app/classes/factory';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
 
 
@@ -15,23 +14,10 @@ import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/da
   templateUrl: './import-dynamic.component.html',
   styleUrls: ['./import-dynamic.component.scss']
 })
-export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ImportDynamicComponent extends FactoryONE {
   @ViewChild(DateJalaliComponent) date;
 
-  importDynamic: IImportDynamicDefault = {
-    fromEshterak: '',
-    toEshterak: '',
-    zoneId: 0,
-    alalHesabPercent: 0,
-    imagePercent: 0,
-    hasPreNumber: false,
-    displayBillId: false,
-    displayRadif: false,
-    fromDate: null,
-    toDate: null,
-    counterReaderId: '',
-    readingPeriodId: null
-  }
+  _canShowAddButton: boolean = true;
   isTrueF: ITrueFalse[] = [
     { name: 'نباشد', value: false },
     { name: 'باشد', value: true },
@@ -57,38 +43,40 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   kindId: number = 0;
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  readingConfigDefault: string[] = [];
+  readingConfigDefault: IReadingConfigDefault;
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  dataSource: any;
-  subscription: Subscription[] = [];
 
   constructor(
-    private interactionService: InteractionService,
-    private importDynamicService: ImportDynamicService,
+    public importDynamicService: ImportDynamicService,
     private closeTabService: CloseTabService,
     private localClientConfigsService: LocalClientConfigsService
-  ) { }
+  ) {
+    super();
+  }
 
   connectToServer = async () => {
-    const validation = this.importDynamicService.checkVertification(this.importDynamic, this._isOrderByDate);
+    if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService.importDynamicReq))
+      return;
+    const validation = this.importDynamicService.checkVertification(this.importDynamicService.importDynamicReq, this._isOrderByDate);
     if (!validation)
       return;
     if (this._showDynamicCount) {
-      if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicCount(this.importDynamic), true, EN_messages.confirm_createList)) {
-        this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic), false, EN_messages.importDynamic_created)
+      if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicCount(this.importDynamicService.importDynamicReq), true, EN_messages.confirm_createList)) {
+        this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
         return;
       }
     }
-    this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamic), false, EN_messages.importDynamic_created)
+    this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
     this.resetToDefaultFormStatus();
+    this._canShowAddButton = false;
   }
   private insertReadingConfigDefaults = (rcd: any) => {
-    this.importDynamic.hasPreNumber = rcd.hasPreNumber;
-    this.importDynamic.displayBillId = rcd.displayBillId;
-    this.importDynamic.displayRadif = rcd.displayRadif;
-    this.importDynamic.imagePercent = rcd.defaultImagePercent;
-    this.importDynamic.alalHesabPercent = rcd.defaultAlalHesab;
+    this.importDynamicService.importDynamicReq.hasPreNumber = rcd.hasPreNumber;
+    this.importDynamicService.importDynamicReq.displayBillId = rcd.displayBillId;
+    this.importDynamicService.importDynamicReq.displayRadif = rcd.displayRadif;
+    this.importDynamicService.importDynamicReq.imagePercent = rcd.defaultImagePercent;
+    this.importDynamicService.importDynamicReq.alalHesabPercent = rcd.defaultAlalHesab;
     this._showimagePercent = true;
     this._showAlalHesabPercent = true;
   }
@@ -98,17 +86,18 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this.canShowEditButton = true;
   }
   verificationACounterReaderId = async () => {
-    if (this.importDynamic.zoneId || this.zoneDictionary) {
+    if (this.importDynamicService.importDynamicReq.zoneId || this.zoneDictionary) {
       this.verificationReadingPeriod();
-      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamic.zoneId);
+      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamicService.importDynamicReq.zoneId);
+      console.log(this.readingConfigDefault);
+
     }
-    if (!this.importDynamic.zoneId || !this.zoneDictionary)
+    if (!this.importDynamicService.importDynamicReq.zoneId || !this.zoneDictionary)
       return;
-    if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault)) {
-      this.readingConfigDefault = [];
+    if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault))
       return;
-    }
-    this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.importDynamic.zoneId);
+
+    this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.importDynamicService.importDynamicReq.zoneId);
     if (!this.importDynamicService.validationInvalid(this.userCounterReader)) {
       this.userCounterReader = [];
       return;
@@ -119,17 +108,18 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
   verificationReadingPeriod = async () => {
     if (this._isOrderByDate)
       return;
-    if (!this.importDynamic.zoneId || !this.zoneDictionary || !this.kindId) {
+    if (!this.importDynamicService.importDynamicReq.zoneId || !this.zoneDictionary || !this.kindId) {
       this.readingPeriodDictionary = [];
       return;
     }
-    this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriod(this.importDynamic.zoneId, this.kindId);
+    this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriod(this.importDynamicService.importDynamicReq.zoneId, this.kindId);
     this.importDynamicService.validationReadingPeriod(this.readingPeriodDictionary);
 
   }
   nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
+      this.resetToDefaultFormStatus();
       this.nullSavedSource();
     }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
@@ -138,35 +128,8 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     if (!this.importDynamicService.validationZoneDictionary(this.zoneDictionary))
       this.zoneDictionary = [];
+    this.verificationACounterReaderId();
     this._showDynamicCount = this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasDynamicCount);
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/imp/imd') {
-          this.resetToDefaultFormStatus();
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.importDynamic.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.importDynamic.toDate = $event;
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
   }
   private resetToDefaultFormStatus = () => {
     this._showAlalHesabPercent = false;
@@ -175,10 +138,9 @@ export class ImportDynamicComponent implements OnInit, AfterViewInit, OnDestroy 
 
     this.kindId = 0;
     this.readingPeriodDictionary = [];
-    this.readingConfigDefault = [];
     this.userCounterReader = [];
 
-    this.importDynamic = {
+    this.importDynamicService.importDynamicReq = {
       fromEshterak: '',
       toEshterak: '',
       zoneId: 0,

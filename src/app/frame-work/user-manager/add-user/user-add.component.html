@@ -1,7 +1,7 @@
 <mat-horizontal-stepper #stepper>
 
-    <mat-step [stepControl]="userDetails">
-        <form [formGroup]="userDetails">
+    <mat-step [stepControl]="userInfos">
+        <form [formGroup]="userInfos">
             <ng-template matStepLabel>مشخصات کاربر</ng-template>
             <app-user-inputs style="direction: rtl;"></app-user-inputs>
         </form>

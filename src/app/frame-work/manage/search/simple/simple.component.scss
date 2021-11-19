@@ -1,0 +1,95 @@
+@import 'variable.scss';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat.scss';
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  padding: $font_05;
+  border-radius: $border_15;
+  border: 1px solid var(--primary_2);
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 14rem));
+  gap: $font_05;
+  justify-content: center;
+  align-items: center;
+}
+
+.tooltip {
+  cursor: pointer;
+}
+
+.order_by {
+  display: flex;
+}
+
+.input_1 {
+  border-radius: 10px;
+  min-width: 100%;
+}
+
+.btn_2_o {
+  font-family: $font_family;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+h2 {
+  color: var(--secondary_6);
+  white-space: nowrap;
+}
+
+h3 {
+  color: var(--primary_3);
+  font-size: 1.4rem;
+  padding: $font_05;
+}
+
+::ng-deep {
+  .mat-select-panel .mat-option {
+    font-size: 1.2rem;
+    line-height: 3em;
+    height: 3em;
+    text-align: right;
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .mat-option-text {
+    font-size: $font_s;
+    font-weight: 600;
+    color: var(--primary_6);
+  }
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 $font_05;
+    font-family: $font_family;
+    font-size: $font_s;
+    font-weight: 600;
+    color: var(--thirdy_3);
+  }
+
+  .mat-radio-label-content {
+    padding-right: $font_05 !important;
+    color: var(--thirdy_1);
+  }
+}
+
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--secondary_6);
+  margin: 0 2rem;
+}
+
+[hidden] {
+  display: none;
+}

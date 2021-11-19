@@ -2,15 +2,11 @@
 
 
 .btn_1 {
-  color: var(--gray_100);
+  color: var(--secondary_1);
 }
 
 h2 {
   white-space: nowrap;
-}
-
-.radio_group {
-  flex-wrap: wrap;
 }
 
 // materials 
@@ -20,7 +16,7 @@ h2 {
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: var(--blue_700);
+      color: var(--primary_5);
       line-height: 2;
       border-radius: $border_15;
       font-family: $font_family;
@@ -29,7 +25,7 @@ h2 {
 
   .mat-horizontal-stepper-header-container {
     direction: rtl;
-    border: 2px solid var(--blue_700);
+    border: 2px solid var(--primary_5);
     border-radius: 6rem;
     padding: $font_05;
     margin-bottom: 1rem;
@@ -57,8 +53,8 @@ h2 {
 
 // 
 ._special {
-  background-color: var(--blue_400);
-  color: var(--gray_100);
+  background-color: var(--primary_2);
+  color: var(--secondary_1);
 }
 
 .accept {

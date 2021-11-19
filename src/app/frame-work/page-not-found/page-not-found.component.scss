@@ -11,8 +11,8 @@ main {
   min-height: 15rem;
 
   border-radius: $border_15;
-  background: var(--gray_100);
-  box-shadow: 1px 1px 8px 4px var(--gray_400);
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
 }
 
 button {
@@ -26,5 +26,5 @@ footer {
 }
 
 .title {
-  color: var(--gray_800);
+  color: var(--secondary_8);
 }

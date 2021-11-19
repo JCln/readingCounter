@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IReadingReportChartTraverseDifferential } from 'interfaces/imanage';
+import { IReadingReportChartTraverseDifferential } from 'interfaces/ireports';
 import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -104,11 +104,7 @@ export class TrvchChartComponent implements OnInit {
     this.pieChartDataRegion.push(this.dataSource.inRegion.emptyCount);
   }
   connectToServer = async () => {
-    if (!this.readingReportManagerService.getRRTrvDifferential()) {
-      this.backToPrevious();
-      return;
-    }
-    this.dataSource = await this.readingReportManagerService.postRRManager('wr/rpts/mam/trvch', ENInterfaces.ListTraverseDifferntialChart, 'rRTraverseDiffrential');
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferntialChart, this.readingReportManagerService.trvchReq);
 
     this.insertToPieChartProvince();
     this.insertToPieChartZone();

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ITracking } from 'interfaces/imanage';
 import { IDictionaryManager, IObjectIteratation } from 'interfaces/ioverall-config';
+import { ITracking } from 'interfaces/itrackings';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 
@@ -33,9 +33,10 @@ export class ImportListDgComponent implements OnInit {
   ngOnInit(): void {
     this.counterWrapper();
   }
-  editCloseData() {
-    if (this.selectedCounterReader)
+  editCloseData = () => {
+    if (typeof this.selectedCounterReader !== 'undefined' || this.selectedCounterReader) {
       this.dataSource.counterReaderId = this.selectedCounterReader.id;
+    }
     this.ref.close(this.dataSource);
   }
 

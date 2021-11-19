@@ -2,17 +2,27 @@
 @import 'theme';
 
 .header {
+  --height: 3rem;
   display: flex;
   align-items: center;
   overflow: hidden;
   background-color: var(--white);
-  height: $font_3;
+  height: var(--height);
   position: sticky;
   top: 0;
+  box-shadow: 0 1px 5px 0px var(--primary_5);
 
   ._logo_content {
-    width: 4.2rem;
-    height: $font_3;
+    width: calc(var(--height) - 0.5rem);
+    height: calc(var(--height) - 0.5rem);
+
+    img {
+      border-radius: $border_50;
+    }
+
+    @media (max-width:550px) {
+      height: 2.3rem;
+    }
   }
 }
 
@@ -21,13 +31,14 @@ ul {
 }
 
 ._title {
-  color: var(--gray_800);
+  color: var(--secondary_8);
 }
 
 li {
   font-size: $font_m;
   font-weight: 600;
   list-style-type: none;
+  line-height: 1;
 
   @media (min-width: 700px) {
     padding-right: 8rem;

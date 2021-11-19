@@ -50,8 +50,8 @@ export class AuthsManagerService {
   private _auth4: IObjectIteratation[] = [
     { field: 'title', header: 'عنوان', isSelected: true },
     { field: 'authLevel3Id', header: 'کنترلر', isSelected: true, isSelectOption: true },
-    { field: 'value', header: 'مقدار', isSelected: false },
-    { field: 'cssClass', header: 'کلاس css', isSelected: false },
+    { field: 'value', header: 'مقدار', isSelected: false, ltr: true },
+    { field: 'cssClass', header: 'کلاس css', isSelected: false, ltr: true },
     { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
     { field: 'isSidebar', header: 'در سایدبار', isSelected: false, isBoolean: true }
   ];

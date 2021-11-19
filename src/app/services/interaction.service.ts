@@ -1,27 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Observable } from 'rxjs/internal/Observable';
+import { Router } from '@angular/router';
+import { CloseTabService } from 'services/close-tab.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InteractionService {
-  private refreshSource = new BehaviorSubject<string>('');
-  private closeSource = new BehaviorSubject<string>('');
+  constructor(private closeTabService: CloseTabService, private router: Router) { }
 
-  constructor() { }
-
-  // refrsh config
-  getRefreshedPage = (): Observable<string> => {
-    return this.refreshSource.asObservable();
+  setRefresh = async (url: string) => {
+    this.closeTabService.cleanData(url);
+    this.router.navigateByUrl('/wr', { skipLocationChange: true }).then(() =>
+      this.router.navigate([url]));
   }
-  setRefresh = (url: string) => {
-    this.refreshSource.next(url);
-  }
-  // 
-  // close config
-  getClosedPage = (): Observable<string> => {
-    return this.closeSource.asObservable();
-  }
-  // 
 }

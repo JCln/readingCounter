@@ -1,0 +1,9 @@
+<section *ngIf="showNotif().isShow" class="accoune_notif" [ngStyle]="{'background-color': showNotif().backgroundColor}">
+    <i *ngIf="showNotif().isClosable" (click)="showNotif().isShow = false" class="pi pi-times-circle"></i>
+    {{showNotif().message}}
+    <a target="_blank" [href]="browserSupportService.getBrowserInfo()['url']">
+        <i>{{browserSupportService.getBrowserName()}}({{browserSupportService.getBrowserVersion()}})
+        </i>
+    </a>
+    خود را بروزرسانی نمایید
+</section>

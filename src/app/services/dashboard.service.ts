@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IAnalyzeRes } from 'interfaces/imanage';
-import { IDashboardKarkardTimed, IDashboardReadDaily } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { UtilsService } from 'services/utils.service';
+
+import { MathS } from '../classes/math-s';
+import { IAnalyzeRes, IDashboardKarkardTimed, IDashboardReadDaily } from '../Interfaces/idashboard-map';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,8 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 export class DashboardService {
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService
+    private interfaceManagerService: InterfaceManagerService,
+    private utilsService: UtilsService
   ) { }
 
   /* COLUMNS */
@@ -25,24 +28,20 @@ export class DashboardService {
   }
   columnDashboards = (): IObjectIteratation[] => {
     return [
-      { field: 'inDayCount', header: 'روز', isSelected: true, readonly: true },
-      { field: 'inWeekCont', header: 'هفته', isSelected: true, readonly: true },
-      { field: 'inMonthCount', header: 'ماه', isSelected: true, readonly: true },
-      { field: 'inYearCount', header: 'سال', isSelected: true, readonly: false }
+      { field: 'inDayCount', header: 'امروز', isSelected: true, readonly: true },
+      { field: 'inWeekCount', header: 'هفته‌جاری', isSelected: true, readonly: true },
+      { field: 'inMonthCount', header: 'ماه‌جاری', isSelected: true, readonly: true },
+      { field: 'inYearCount', header: 'سال‌جاری', isSelected: true, readonly: false }
     ];
   }
 
   /* CALL API */
   getDashboardDataSource = (method: ENInterfaces): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(method).subscribe(res => {
-          resolve(res);
-        })
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).toPromise().then(res => {
+        resolve(res);
       })
-    } catch (error) {
-      console.error(e => e);
-    }
+    })
   }
   postDashboardAnalyzePerformance = (): Promise<any> => {
     try {
@@ -99,5 +98,8 @@ export class DashboardService {
       a.push(index + 1);
     })
     return a;
+  }
+  isNullVals = (dataSource: any) => {
+    return !MathS.isNull(dataSource);
   }
 }

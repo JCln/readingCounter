@@ -1,0 +1,56 @@
+<app-collapsable [_isCollapsed]=_isCollapsed (_clicked)=" _isCollapsed = !_isCollapsed">
+</app-collapsable>
+<form #form="ngForm" *ngIf="!_isCollapsed" class="insert_track" (ngSubmit)="connectToServer()">
+    <div class="input_2">
+        <div class="_key">شماره پیگیری</div>
+        <input class="_value" type="number" name="trackNumber" [(ngModel)]="trackNumber">
+    </div>
+    <button type="submit" class="btn_1">مشاهده</button>
+</form>
+
+<section *ngIf="allImagesDataSource" class="_descriptions">
+    <div class="input_2">
+        <div class="_key">تعداد اشتراک دارای عکس</div>
+        <input readonly="true" class="_value" name="distinctImageCount"
+            [(ngModel)]="allImagesDataSource.distinctImageCount">
+    </div>
+    <div class="input_2">
+        <div class="_key">تعداد تصاویر</div>
+        <input readonly="true" class="_value" name="imageCount" [(ngModel)]="allImagesDataSource.imageCount">
+    </div>
+    <div class="input_2">
+        <div class="_key">تعداد اشتراک</div>
+        <input readonly="true" class="_value" name="itemCount" [(ngModel)]="allImagesDataSource.itemCount">
+    </div>
+</section>
+<main *ngIf="allImagesDataSource" style="position: relative;">
+
+    <div class="content">
+        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
+
+            <div *ngIf="allImagesDataSource[ri]" class="__img_bound_real">
+                <img (click)="routeToOffload(item , ri)" src="{{item.imageUrl}}" alt="whatever">
+                <div class="__hiddens" *ngIf="item.onOffLoadId">
+                    <p>{{item.eshterak}}</p>
+                    <p>{{item.firstName}}</p>
+                    <p>{{item.sureName}}</p>
+                    <p>{{item.imageDescription}}</p>
+                </div>
+            </div>
+
+            <div *ngIf="!allImagesDataSource[ri]" class="__img_bound">
+                <img src="assets/imgs/soundvid/2.png" alt="whatever">
+            </div>
+        </div>
+    </div>
+
+    <app-gallery-carousel *ngIf="showCarousel" [dataSource]="carouselImage" (cancelClicked)="carouselCancelClicked()"
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
+        <app-gallery-all-details></app-gallery-all-details>
+
+    </app-gallery-carousel>
+
+    <div class="not_found_header" *ngIf="!allImagesDataSource.imageCount">
+        <h2>فاقد تصویر</h2>
+    </div>
+</main>

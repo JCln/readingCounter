@@ -1,0 +1,60 @@
+<section class="content" *ngIf="karkardDataSource">
+    <section class="collapse">
+        <h1>کارکرد</h1>
+    </section>
+
+    <section class="collapse">
+        <h3>جدول</h3>
+    </section>
+
+    <section class="__fixature">
+        <app-dash-karkard-table [dataSourceTable]="karkardDataSource">
+        </app-dash-karkard-table>
+    </section>
+
+    <section class="collapse">
+        <h3>نمودار</h3>
+        <app-collapsable [_isCollapsed]=_isCollapsedKarkard [_tooltipText]="'کارکرد'"
+            (_clicked)="_isCollapsedKarkard = !_isCollapsedKarkard">
+        </app-collapsable>
+    </section>
+    <main *ngIf="_isCollapsedKarkard" class="container _unified relative_pos">
+        <div class="chart_4 charts pie relative_pos" *ngIf="pieChartDataThree[0]">
+            <div class="title">امروز</div>
+            <canvas baseChart [data]="pieChartDataThree" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+        <div class="chart_3 charts pie relative_pos" *ngIf="pieChartDataTwo[0]">
+            <div class="title">هفته‌جاری</div>
+            <canvas baseChart [data]="pieChartDataTwo" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+        <div class="chart_2 charts pie relative_pos" *ngIf="pieChartDataOne[0]">
+            <div class="title">ماه‌جاری</div>
+            <canvas baseChart [data]="pieChartDataOne" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+        <div class="chart_1 charts pie relative_pos" *ngIf="pieChartData[0]">
+            <div class="title">سال‌جاری</div>
+            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColor"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+
+        <div class="chart_1 charts pie relative_pos">
+            <div class="title">آمار مجموع</div>
+            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+                [colors]="donutColors" [options]="pieChartOptions" [plugins]="pieChartPlugins">
+            </canvas>
+        </div>
+
+    </main>
+
+</section>

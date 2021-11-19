@@ -5,7 +5,7 @@
 @import '_mat';
 
 .btn_1 {
-  color: var(--gray_100);
+  color: var(--secondary_1);
 }
 
 /* materials */
@@ -15,7 +15,7 @@
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: var(--blue_500);
+      color: var(--primary_3);
       line-height: 2;
       border-radius: $border_15;
       font-family: $font_family;
@@ -24,23 +24,23 @@
 
   .mat-stepper-horizontal,
   .mat-stepper-vertical {
-    background: var(--white);
+    background: var(--secondary_1);
   }
 
   .mat-horizontal-stepper-header-container {
-    height: 4rem;
+    height: 3.5rem;
     direction: rtl;
-    border: 2px solid var(--blue_700);
+    border: 2px solid var(--primary_5);
     border-radius: 6rem;
     padding: $font_05;
-    margin-bottom: 1rem;
+    margin-bottom: .25rem;
   }
 
   .mat-step-text-label {
     font-size: 1.2rem;
     padding-right: $font_05;
     font-weight: 600;
-    color: var(--gray_800);
+    color: var(--secondary_8);
   }
 
   .mat-horizontal-stepper-header .mat-step-icon {
@@ -50,7 +50,7 @@
 
   .mat-horizontal-content-container {
     min-height: 15rem;
-    padding: $font_xxs 0 !important;
+    padding: 0 !important;
   }
 }
 
@@ -64,17 +64,19 @@
 }
 
 .btn_2 {
-  margin: .25rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--blue_gray_400);
-  color: var(--blue_700);
+  height: 2.5rem;
+  margin: 0.1rem .25rem;
+  padding: .25rem;
+  background-color: var(--thirdy_2);
+  color: var(--primary_5);
 }
 
 ._special {
-  background-color: var(--blue_400);
-  color: var(--gray_100);
+  background-color: var(--primary_2);
+  color: var(--secondary_1);
 }
 
 
@@ -92,18 +94,18 @@
   top: 0;
   z-index: 1;
   background-color: var(--white);
-  box-shadow: 0px 0px 2px 2px var(--blue_gray_400);
+  box-shadow: 0px 0px 2px 2px var(--thirdy_2);
 
   .auth_1_item {
     display: grid;
     place-content: center;
-    padding: $font_05;
+    padding: 0.2rem;
     border-radius: $border_5;
     font-size: $font_l;
     font-weight: 600;
-    background: var(--blue_gray_400);
-    color: var(--blue_700);
-    box-shadow: 1px 1px 3px 0px var(--blue_gray_400);
+    background: var(--thirdy_2);
+    color: var(--primary_5);
+    box-shadow: 1px 1px 3px 0px var(--thirdy_2);
     cursor: pointer;
   }
 
@@ -119,8 +121,8 @@
 
 // active auth1 tab
 .active_tab {
-  background-color: var(--blue_600) !important;
-  color: var(--gray_100) !important;
+  background-color: var(--primary_4) !important;
+  color: var(--secondary_1) !important;
 }
 
 .auth_2 {
@@ -131,21 +133,21 @@
 
 .auth_3 {
   margin: 0;
-  padding: $font_05;
+  padding: 0.25rem;
   border-radius: $border_15;
-  box-shadow: 0px 2px 3px 1.5px var(--gray_400);
+  box-shadow: 0px 1px 3px 1.5px var(--secondary_4);
 }
 
-@include media_wrapper(550px, '.auth_3', margin, $font_05 4rem $font_05 $font_xxs);
+@include media_wrapper(550px, '.auth_3', margin, 0 4rem $font_05 $font_xxs);
 
 .auth_4 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
   gap: .3rem;
-  background: var(--gray_100);
-  border: 1px solid var(--blue_600);
+  background: var(--white);
+  border: 1px solid var(--secondary_1);
   border-radius: $border_5;
-  margin: $font_xxs;
+  margin: $font_05;
 
   .checkboxes {
     display: flex;
@@ -156,7 +158,7 @@
 
 .text {
   padding: 0 $font_05;
-  color: var(--blue_600);
+  color: var(--primary_4);
   font-size: $font_l;
   font-weight: 600;
 }
@@ -167,16 +169,16 @@
   text-align: center;
   padding: $font_05;
   border-radius: $border_15;
-  margin-bottom: $font_05;
+  margin-bottom: 0;
   font-size: $font_m;
   font-weight: 600;
-  color: var(--blue_600);
-  background: var(--gray_300);
+  color: var(--primary_4);
+  background: var(--secondary_3);
 }
 
 .accept {
   display: flex;
-  box-shadow: 0 -3px 2px -1px var(--blue_gray_400);
+  box-shadow: 0 -3px 2px -1px var(--thirdy_2);
 }
 
 ._double_size {
@@ -194,7 +196,7 @@
 .separator::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid var(--blue_600);
+  border-bottom: 1px solid var(--primary_4);
 }
 
 .separator:not(:empty)::after {

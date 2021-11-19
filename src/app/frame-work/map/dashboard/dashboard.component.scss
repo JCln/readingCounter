@@ -1,15 +1,13 @@
 @import 'variable';
+@import 'tooltip';
 
 .container {
   display: grid;
   direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(14rem, auto));
   align-items: center;
   gap: 0.3rem;
-  margin-top: $font_xs;
-  background: var(--gray_100);
   border-radius: $border_15;
-  overflow: auto;
 }
 
 .grid_double {
@@ -18,7 +16,7 @@
   grid-template-columns: 1fr;
   align-items: center;
   gap: 0.3rem;
-  margin-top: $font_xs;
+  margin: .25rem 0;
 
   @media (min-width:780px) {
     grid-template-columns: 1fr 1fr;
@@ -30,40 +28,35 @@
   background: var(--white);
   text-align: center;
   border-radius: $border_15;
-  box-shadow: 0 0 3px 2px var(--gray_200);
+  box-shadow: 0 0 3px 2px var(--secondary_2);
   padding: $font_xxs 0;
-
-  // &:nth-child(even) {
-  //   background: var(--gray_100);
-  // }
 }
 
 ._header {
   font-size: $font_m;
-  color: var(--blue_500);
+  color: var(--primary_3);
   font-weight: 800;
   text-align: center;
+  width: 100%;
+
+  i {
+    margin-left: 0.25rem;
+    font-size: $font_m;
+    vertical-align: middle;
+  }
 }
 
 .title {
   top: $font_2;
   position: absolute;
   font-size: $font_m;
-  color: var(--blue_500);
+  color: var(--primary_3);
   font-weight: 800;
   padding: 0 $font_xs;
 }
 
-.title_special {
-  position: absolute;
-  border-radius: $border_5;
-  background: var(--white);
-  right: $font_05;
-  top: 0;
-  font-size: $font_l;
-  color: var(--blue_500);
-  font-weight: 800;
-  z-index: 1;
+._title_special {
+  color: var(--red_500);
 }
 
 ._key_value {
@@ -73,19 +66,60 @@
 ._key {
   font-size: $font_s;
   font-weight: 600;
-  color: var(--blue_700);
+  color: var(--primary_5);
 }
 
 ._value {
   font-size: $font_l;
   font-weight: 600;
-  color: var(--blue_700);
+  color: var(--primary_5);
+  direction: ltr;
+}
+
+.content {
+  border-radius: $border_15;
+  background: var(--white);
+  padding: .25rem 0;
+  box-shadow: 0px 0px 2px 2px var(--secondary_2);
+  margin: .25rem 0;
+}
+
+.collapse {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  grid-gap: 1.3rem;
+  gap: 1.3rem;
+  padding: .2rem;
+  margin-right: 1rem;
+
+  h1 {
+    font-size: 1.87rem;
+    color: var(--primary_2);
+  }
+
+  h3 {
+    font-size: $font_m;
+    color: var(--primary_3);
+    direction: rtl;
+    margin: $font_xs;
+
+    &::before {
+      content: ' - ';
+    }
+  }
+
+}
+
+.__fixature {
+  width: 100%;
+  overflow-x: auto;
+  direction: rtl;
 }
 
 /* CHARTS CONFIG*/
 
 .charts {
-  box-shadow: 0px 1px 2px 2px var(--gray_200);
   border-radius: $border_15;
   background: var(--white);
   min-height: 15rem;
@@ -105,18 +139,9 @@
   min-height: 18rem;
 }
 
-.chart_1 {
-  box-shadow: none;
-}
-
-.chart_2 {
-  box-shadow: none;
-}
-
-.chart_3 {
-  box-shadow: none;
-}
-
+.chart_1,
+.chart_2,
+.chart_3,
 .chart_4 {
   box-shadow: none;
 }
@@ -138,4 +163,83 @@
 ._unified {
   background-color: var(--white);
   grid-template-columns: repeat(auto-fit, minmax(15rem, auto))
+}
+
+/* tables */
+
+table {
+  font-family: $font_family;
+  border-collapse: collapse;
+  width: 100%;
+  direction: rtl;
+  text-align: center;
+  font-size: $font_s;
+  font-weight: 500;
+  overflow-x: auto;
+  border: 1px solid var(--secondary_2);
+}
+
+table td,
+table th {
+  padding: $font_05;
+  text-align: center;
+  color: var(--secondary_8);
+  direction: ltr;
+  font-size: $font_m;
+  font-weight: 600;
+}
+
+table th {
+  background-color: var(--secondary_5);
+}
+
+table tr {
+  direction: rtl;
+}
+
+table tr:nth-child(even) {
+  background-color: var(--secondary_1);
+}
+
+table thead tr {
+  background-color: var(--secondary_2);
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: var(--secondary_2);
+  color: var(--secondary_8);
+}
+
+strong {
+  font-weight: 800;
+}
+
+._hide_count {
+  display: none;
+}
+
+._o_light_blue {
+  background: rgba(0, 61, 184, 0.15);
+}
+
+._o_light_orange {
+  background: rgba(246, 128, 56, 0.15);
+}
+
+._o_light_gray {
+  background: rgba(150, 148, 148, 0.15);
+}
+
+._o_light_purple {
+  background: rgba(125, 131, 255, 0.15);
+}
+
+._border_left {
+  border-left: 2px solid rgba(0, 69, 203, 0.749) !important;
+}
+
+._hours {
+  background-color: var(--secondary_4);
 }

@@ -9,7 +9,7 @@
 </div>
 <section>
 
-    <h1 class="title">اطلاعات مکانی</h1>
+    <h1 class="title">اطلاعات کلی</h1>
     <form #form="ngForm" class="content">
         <div class="_desc">
             <div class="input_2" [ngClass]="{'double_size':mainDatas.icon}" *ngFor="let mainDatas of _selectMainDatas">
@@ -18,11 +18,27 @@
                     [(ngModel)]="dataSource[mainDatas.field]">
             </div>
         </div>
+        <div class="check_boxes">
+            <mat-checkbox [disabled]="true" name="hasPreNumber" [(ngModel)]="dataSource.hasPreNumber">رقم قبلی
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="displayBillId" [(ngModel)]="dataSource.displayBillId">شناسه قبض
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="displayRadif" [(ngModel)]="dataSource.displayRadif">ش.پرونده
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="isBazdid" [(ngModel)]="dataSource.isBazdid">بازدید
+            </mat-checkbox>
+
+            <mat-checkbox [disabled]="true" name="isRoosta" [(ngModel)]="dataSource.isRoosta">روستا
+            </mat-checkbox>
+        </div>
     </form>
 
 </section>
 
-<h1 class="title">اطلاعات قرائت</h1>
+<h1 class="title">اطلاعات روزانه قرائت</h1>
 <section>
     <main *ngFor="let history of offLoadPerDayHistory" class="card_wrapper">
         <div class="card__content" *ngFor="let item of _selectCols">

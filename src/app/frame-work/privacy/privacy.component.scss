@@ -18,9 +18,9 @@
 
 .content {
   padding: $font_2 0.2rem;
-  background: var(--gray_100);
+  background: var(--secondary_1);
   border-radius: 10px;
-  box-shadow: 1px 1px 8px 4px var(--gray_400);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
 }
 
 ._desc {
@@ -31,16 +31,16 @@
 }
 
 .title {
-  color: var(--gray_500);
+  color: var(--secondary_5);
   text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
 }
 
 input {
-  color: var(--gray_500);
+  color: var(--secondary_5);
   margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px var(--gray_400);
+  box-shadow: 1px 1px 8px 1px var(--secondary_4);
 }
 
 // radio buttons
@@ -55,7 +55,7 @@ input {
 }
 
 .over_all_result {
-  color: var(--blue_400);
+  color: var(--primary_2);
   font-size: $font_s;
   font-weight: 600;
   margin-top: $font_2;
@@ -66,7 +66,7 @@ input {
 ::ng-deep {
 
   .mat-radio-label-content {
-    color: var(--gray_600);
+    color: var(--secondary_6);
     font-size: $font_s;
     font-weight: 600;
     margin-right: 1rem;
@@ -75,7 +75,7 @@ input {
 
   .example-radio-button {
     margin: 4px;
-    background: var(--gray_100);
+    background: var(--secondary_1);
     padding: $font_xxs;
     border-radius: $border_15;
   }
@@ -87,7 +87,7 @@ input {
       margin: 0 $font_05;
       font-size: $font_s;
       font-weight: 600;
-      color: var(--gray_600);
+      color: var(--secondary_6);
       line-height: 2;
       border-radius: $border_15;
       font-family: $font_family;
@@ -98,15 +98,17 @@ input {
 
 ul {
   list-style-type: none;
-  margin-top: 4px;
+  margin: 0;
+  padding: 0.25rem;
 }
 
 .number_vals {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: $font_s;
   font-weight: 600;
-  color: var(--gray_600);
+  color: var(--secondary_6);
 }
 
 ._checkbox {
@@ -120,6 +122,6 @@ ul {
 }
 
 .btn_1 {
-  color: var(--gray_100);
+  color: var(--secondary_1);
   margin: $font_05;
 }

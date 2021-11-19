@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IReadingReportReq } from 'interfaces/imanage';
+import { Component, Input } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { InteractionService } from 'services/interaction.service';
+import { IReadingReportKarkard } from 'interfaces/ireports';
+import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -12,16 +13,8 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
   templateUrl: './karkard-dayly.component.html',
   styleUrls: ['./karkard-dayly.component.scss']
 })
-export class KarkardDaylyComponent implements OnInit {
-  readingReportReq: IReadingReportReq = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1400
-  }
+export class KarkardDaylyComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -39,48 +32,33 @@ export class KarkardDaylyComponent implements OnInit {
   karbariDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
+
+  dataSource: IReadingReportKarkard[] = [];
+
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
-    public route: ActivatedRoute
-  ) { }
+    public readingReportManagerService: ReadingReportManagerService,
+     
+    private closeTabService: CloseTabService
+  ) {
+    super();
+  }
 
-  classWrapper = async () => {
+  classWrapper = async (canRefresh?: boolean) => {
+    if (canRefresh) {
+      this.closeTabService.saveDataForRRkarkardDaily = null;
+      this.verification();
+    }
+    if (this.closeTabService.saveDataForRRkarkardDaily) {
+      this.dataSource = this.closeTabService.saveDataForRRkarkardDaily;
+      this.insertSelectedColumns();
+      this.setGetRanges();
+    }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/karkardDaily') {
-          this.classWrapper();
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  routeToChild = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/karkardDaily/res');
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -89,9 +67,32 @@ export class KarkardDaylyComponent implements OnInit {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
+    this._isOrderByDate ? (this.readingReportManagerService.karkardDailyReq.readingPeriodId = null, this.readingReportManagerService.karkardDailyReq.year = 0) : (this.readingReportManagerService.karkardDailyReq.fromDate = '', this.readingReportManagerService.karkardDailyReq.toDate = '');
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardDailyReq, this._isOrderByDate);
     if (temp)
-      this.routeToChild();
+      this.connectToServer();
+  }
+
+  insertSelectedColumns = () => {
+    this._selectCols = this.readingReportManagerService.columnRRKarkardDaly();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.readingReportManagerService.karkardDailyReq);
+    this.insertSelectedColumns();
+    this.setGetRanges();
+    this.closeTabService.saveDataForRRkarkardDaily = this.dataSource;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  private setGetRanges = () => {
+    this.dataSource.forEach(item => {
+      item.duration = parseFloat(MathS.getRange(item.duration));
+    })
   }
 }

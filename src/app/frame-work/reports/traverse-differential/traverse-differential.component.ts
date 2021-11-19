@@ -1,27 +1,20 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IReadingReportTraverseDifferentialReq } from 'interfaces/imanage';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { IReadingReportTraverseDifferentialRes } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-traverse-differential',
   templateUrl: './traverse-differential.component.html',
   styleUrls: ['./traverse-differential.component.scss']
 })
-export class TraverseDifferentialComponent implements OnInit, AfterViewInit, OnDestroy {
-  readingReportReq: IReadingReportTraverseDifferentialReq = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    year: 1400,
-    traverseType: 0,
-    zoneIds: null
-  }
+export class TraverseDifferentialComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -32,68 +25,47 @@ export class TraverseDifferentialComponent implements OnInit, AfterViewInit, OnD
       isSelected: false
     }
   ]
+  dataSource: IReadingReportTraverseDifferentialRes[] = [];
+  karbariDictionary: IDictionaryManager[] = [];
+
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
+
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   traverseDiffrentialDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
+
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
+    public readingReportManagerService: ReadingReportManagerService,
+     
     public route: ActivatedRoute,
     private closeTabService: CloseTabService
-  ) { }
+  ) {
+    super();
+  }
 
   nullSavedSource = () => this.closeTabService.saveDataForRRTraverseDifferential = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
+      this.verification();
     }
     if (this.closeTabService.saveDataForRRTraverseDifferential) {
-      this.readingReportReq = this.closeTabService.saveDataForRRTraverseDifferential;
+      this.dataSource = this.closeTabService.saveDataForRRTraverseDifferential;
+      this.insertSelectedColumns();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.getTraverseDiffrentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
   }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/trvch') {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  routeToGridView = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/trvch/res');
-  }
   routeToChartView = () => {
     this.readingReportManagerService.routeTo('/wr/rpts/mam/trvch/chart');
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -101,11 +73,35 @@ export class TraverseDifferentialComponent implements OnInit, AfterViewInit, OnD
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
+  validation = (): boolean => {
+    this._isOrderByDate ? (this.readingReportManagerService.trvchReq.readingPeriodId = null, this.readingReportManagerService.trvchReq.year = 0) : (this.readingReportManagerService.trvchReq.fromDate = '', this.readingReportManagerService.trvchReq.toDate = '');
+    return this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportManagerService.trvchReq, this._isOrderByDate);
+  }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportReq, this._isOrderByDate);
-    if (temp)
-      document.activeElement.id == 'grid_view' ? this.routeToGridView() : this.routeToChartView();
+    if (this.validation())
+      document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
+  }
+  insertSelectedColumns = () => {
+    this._selectCols = this.readingReportManagerService.columnRRTraverseDifferential();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportManagerService.trvchReq);
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.insertSelectedColumns();
+    this.closeTabService.saveDataForRRTraverseDifferential = this.dataSource;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  refreshTable = () => {
+    if (this.validation())
+      this.connectToServer();
   }
 
 }

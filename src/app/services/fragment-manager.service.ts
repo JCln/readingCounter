@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IFragmentDetails, IFragmentMaster } from 'interfaces/imanage';
 import { IDictionaryManager, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+
+import { MathS } from '../classes/math-s';
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { IFragmentDetails, IFragmentMaster } from '../Interfaces/ireads-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -20,16 +24,16 @@ export class FragmentManagerService {
     return [
       { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
       { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
       { field: 'isValidated', header: 'تایید شده', isSelected: true, readonly: true, isBoolean: true },
     ];
   }
   columnSelectedFragmentDetails = (): IObjectIteratation[] => {
     return [
       { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
       { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
       { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }
     ];
@@ -37,7 +41,8 @@ export class FragmentManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private dialog: MatDialog
   ) { }
 
   /* Master */
@@ -166,7 +171,7 @@ export class FragmentManagerService {
 
   /* VALIDATION */
   private nullValidation = (sth: string | number, message?: string): boolean => {
-    if (this.utilsService.isNull(sth)) {
+    if (MathS.isNull(sth)) {
       if (message)
         this.utilsService.snackBarMessageWarn(message);
       return false;
@@ -174,7 +179,7 @@ export class FragmentManagerService {
     return true;
   }
   private NANValidation = (sth: string, message?: string): boolean => {
-    if (this.utilsService.isNaN(sth)) {
+    if (MathS.isNaN(sth)) {
       if (message)
         this.utilsService.snackBarMessageWarn(message);
       return false;
@@ -184,7 +189,24 @@ export class FragmentManagerService {
 
   /* VERIFICATION */
 
-
+  firstConfirmDialog = (): Promise<any> => {
+    const title = EN_messages.confirm_remove;
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: title,
+          isInput: false,
+          isDelete: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
+        }
+      })
+    })
+  }
   private masterValidation = (): boolean => {
     if (!this.nullValidation(this.fragmentMaster.zoneId, EN_messages.insert_zone))
       return false;
@@ -200,17 +222,17 @@ export class FragmentManagerService {
     if (!this.NANValidation(this.fragmentMaster.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
       return false;
 
-    if (!this.utilsService.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
+    if (!MathS.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.sameLength_eshterak);
       return false;
     }
 
-    if (!this.utilsService.isFromLowerThanToByString(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
+    if (!MathS.isFromLowerThanToByString(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
       return false;
     }
 
-    if (!this.utilsService.lengthControl(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak, 5, 15)) {
+    if (!MathS.lengthControl(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak, 5, 15)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
       return false;
     }
@@ -231,15 +253,15 @@ export class FragmentManagerService {
     if (!this.NANValidation(fragmentMaster.fromEshterak))
       return false;
 
-    if (!this.utilsService.isSameLength(fragmentMaster.fromEshterak, fragmentMaster.toEshterak)) {
+    if (!MathS.isSameLength(fragmentMaster.fromEshterak, fragmentMaster.toEshterak)) {
       return false;
     }
 
-    if (!this.utilsService.isFromLowerThanToByString(fragmentMaster.fromEshterak, fragmentMaster.toEshterak)) {
+    if (!MathS.isFromLowerThanToByString(fragmentMaster.fromEshterak, fragmentMaster.toEshterak)) {
       return false;
     }
 
-    if (!this.utilsService.lengthControl(fragmentMaster.fromEshterak, fragmentMaster.toEshterak, 5, 15)) {
+    if (!MathS.lengthControl(fragmentMaster.fromEshterak, fragmentMaster.toEshterak, 5, 15)) {
       return false;
     }
     return true;
@@ -259,17 +281,17 @@ export class FragmentManagerService {
 
     if (!this.NANValidation(this.fragmentDetails.toEshterak, EN_messages.format_invalid_to_eshterak))
       return false;
-    if (!this.utilsService.isFromLowerThanToByString(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
+    if (!MathS.isFromLowerThanToByString(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
       return false;
     }
 
-    if (!this.utilsService.isSameLength(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
+    if (!MathS.isSameLength(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.sameLength_eshterak);
       return false;
     }
 
-    if (!this.utilsService.lengthControl(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak, 5, 15)) {
+    if (!MathS.lengthControl(this.fragmentDetails.fromEshterak, this.fragmentDetails.toEshterak, 5, 15)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
       return false;
     }
@@ -290,11 +312,11 @@ export class FragmentManagerService {
     if (!this.NANValidation(fragmentDetails.toEshterak))
       return false;
 
-    if (!this.utilsService.isFromLowerThanToByString(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
+    if (!MathS.isFromLowerThanToByString(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
       return false;
-    if (!this.utilsService.isSameLength(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
+    if (!MathS.isSameLength(fragmentDetails.fromEshterak, fragmentDetails.toEshterak))
       return false;
-    if (!this.utilsService.lengthControl(fragmentDetails.fromEshterak, fragmentDetails.toEshterak, 5, 15))
+    if (!MathS.lengthControl(fragmentDetails.fromEshterak, fragmentDetails.toEshterak, 5, 15))
       return false;
     return true;
   }

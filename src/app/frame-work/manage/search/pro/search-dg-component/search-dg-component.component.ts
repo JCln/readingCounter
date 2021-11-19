@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ISearchProReportInput } from 'interfaces/imanage';
-import { IDictionaryManager, ISearchInOrderTo, ITHV, ITitleValue } from 'interfaces/ioverall-config';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { IDictionaryManager, ITHV, ITitleValue } from 'interfaces/ioverall-config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DateJalaliService } from 'services/date-jalali.service';
+import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
 
 @Component({
@@ -10,30 +12,6 @@ import { SearchService } from 'services/search.service';
   styleUrls: ['./search-dg-component.component.scss']
 })
 export class SearchDgComponentComponent implements OnInit {
-  searchReq: ISearchProReportInput = {
-    zoneId: null,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    zoneIds: [],
-    year: 1400,
-    reportIds: [],
-    counterStateIds: [],
-    masrafStates: [],
-    karbariCodes: [],
-    fragmentMasterIds: []
-  }
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-
   readingPeriodDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -51,45 +29,50 @@ export class SearchDgComponentComponent implements OnInit {
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private searchService: SearchService
+    public searchService: SearchService,
+    private outputManagerService: OutputManagerService,
+    private dateJalaliService: DateJalaliService
   ) {
   }
   classWrapper = async () => {
-    if (!this.searchService.verificationPro(this.searchReq))
-      this.searchReq = this.searchService.getSearchPro();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
     this.masrafState = this.searchService.getMasrafStates();
     this.receiveYear();
+    this.searchService.searchReqPro = this.searchService.columnGetSearchPro();
   }
   ngOnInit(): void {
     this.classWrapper();
   }
   receiveFromDateJalali = ($event: string) => {
-    this.searchReq.fromDate = $event;
+    this.searchService.searchReqPro.fromDate = $event;
   }
   receiveToDateJalali = ($event: string) => {
-    this.searchReq.toDate = $event;
+    this.searchService.searchReqPro.toDate = $event;
   }
   receiveYear = () => {
     this._years = this.searchService.getYears();
   }
   getMasterInZone = async () => {
-    console.log(this.searchReq.zoneId);
-    if (!this.searchReq.zoneId)
+    if (!this.searchService.searchReqPro.zoneId)
       return;
 
-    this.fragmentMasterIds = await this.searchService.getFragmentMasterInZone(this.searchReq.zoneId);
-    this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(this.searchReq.zoneId);
-    this.karbariDictionary = await this.searchService.getKarbariDictionary();
-    this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
+    this.fragmentMasterIds = await this.searchService.getByQuoteId(ENInterfaces.fragmentMasterInZone, this.searchService.searchReqPro.zoneId);
+    this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(this.searchService.searchReqPro.zoneId);
+    this.karbariDictionary = await this.searchService.getKarbariDictionaryCode();
+    this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchService.searchReqPro.zoneId);
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this._selectedKindId);
   }
-  editCloseData() {
-    if (!this.searchService.verificationPro(this.searchReq, this._isOrderByDate))
+  async editCloseData() {
+    if (!this.searchService.verificationPro(this.searchService.searchReqPro, this._isOrderByDate))
       return;
-    this.ref.close(this.searchReq);
+    if (document.activeElement.id == 'excel_download') {
+      this.outputManagerService.saveAsExcelABuffer(await this.searchService.getProExcel(ENInterfaces.ListGetProExcel, this.searchService.searchReqPro), this.dateJalaliService.getCurrentDate());
+      this.ref.close(false);
+      return;
+    }
+    this.ref.close(this.searchService.searchReqPro);
   }
 }

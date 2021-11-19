@@ -2,28 +2,27 @@ import { Injectable } from '@angular/core';
 import { ENAuthTokenType } from 'interfaces/iauth-guard-permission';
 import * as jwt_decode from 'jwt-decode';
 import { BrowserStorageService } from 'services/browser-storage.service';
-import { UtilsService } from 'services/utils.service';
+
+import { MathS } from '../classes/math-s';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtService {
   constructor(
-    private browserStorageService: BrowserStorageService,
-    private utilsService: UtilsService
+    private browserStorageService: BrowserStorageService    
   ) { }
 
   getDecodedAccessToken(): any {
     try {
       return jwt_decode(this.browserStorageService.get(ENAuthTokenType.access_token));
     } catch (error) {
-      // this.removeAllLocalStorage();
       console.error(error);
     }
   }
   getAccessTokenExpirationDateUtc(): Date {
     const decoded = this.getDecodedAccessToken();
-    if (this.utilsService.isEmptyString(decoded)) {
+    if (MathS.isEmptyString(decoded)) {
       return null;
     }
     const date = new Date(0); // The 0 sets the date to the epoch
@@ -65,9 +64,7 @@ export class JwtService {
       }
       return a;
     } catch (error) {
-      // this.removeAllLocalStorage();
       console.error(error);
-
     }
   }
   getRefreshToken = (): string => {
@@ -77,14 +74,13 @@ export class JwtService {
         return null;
       return a;
     } catch (error) {
-      // this.removeAllLocalStorage();
       console.error(error);
     }
   }
   hasStoredAccessAndRefreshTokens(): boolean {
     const accessToken = this.getAuthorizationToken();
     const refreshToken = this.getRefreshToken();
-    return !this.utilsService.isEmptyString(accessToken) && !this.utilsService.isEmptyString(refreshToken);
+    return (!MathS.isEmptyString(accessToken) && !MathS.isEmptyString(refreshToken));
   }
   removeAllLocalStorage = () => this.browserStorageService.removeAll();
   removeAuthLocalStorage = () => {

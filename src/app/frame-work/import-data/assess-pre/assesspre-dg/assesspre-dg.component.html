@@ -3,7 +3,8 @@
     <div class="_to_insert">
         <div class="input_2">
             <div class="_key">ش لیست : </div>
-            <input class="_value" type="number" name="listNumber" [(ngModel)]="AssessPreReq.listNumber" autofocus>
+            <input class="_value" name="listNumber" [(ngModel)]="importDynamicService.AssessPreReq.listNumber"
+                autofocus>
         </div>
     </div>
 
@@ -13,9 +14,10 @@
                 <span class="ui-float-label">
                     <label for="float-input">ناحیه</label>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zone" #zoneId
-                        [options]="zoneDictionary" name="_selectedKindId" [(ngModel)]="AssessPreReq.zoneId"
-                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                        placeholder="انتخاب مورد" (onChange)="getMasterInZone()">
+                        [options]="zoneDictionary" name="_selectedKindId"
+                        [(ngModel)]="importDynamicService.AssessPreReq.zoneId" optionLabel="title" [filter]="true"
+                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
+                        (onChange)="getMasterInZone()">
                     </p-dropdown>
                 </span>
             </section>
@@ -25,30 +27,31 @@
 
             <article *ngIf="masrafState">
                 <h3 class="title">وضعیت مصرف</h3>
-                <p-multiSelect [options]="masrafState" name="masraf" [(ngModel)]="AssessPreReq.masrafStates"
-                    optionLabel="header" optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده"
-                    [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                <p-multiSelect [options]="masrafState" name="masraf"
+                    [(ngModel)]="importDynamicService.AssessPreReq.masrafStates" optionLabel="header"
+                    optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article *ngIf="counterReportDictionary.length">
                 <h3 class="title">گزارش کنتور</h3>
                 <p-multiSelect [options]="counterReportDictionary" name="counterReport"
-                    [(ngModel)]="AssessPreReq.reportIds" optionLabel="title" optionValue="id"
+                    [(ngModel)]="importDynamicService.AssessPreReq.reportIds" optionLabel="title" optionValue="id"
                     selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article *ngIf="counterStateByZoneIdDictionary.length">
                 <h3 class="title">وضعیت کنتور</h3>
                 <p-multiSelect [options]="counterStateByZoneIdDictionary" name="counterState"
-                    [(ngModel)]="AssessPreReq.counterStateIds" optionLabel="title" optionValue="id"
+                    [(ngModel)]="importDynamicService.AssessPreReq.counterStateIds" optionLabel="title" optionValue="id"
                     selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article *ngIf="karbariDictionary.length">
                 <h3 class="title">کاربری</h3>
-                <p-multiSelect [options]="karbariDictionary" name="karbari" [(ngModel)]="AssessPreReq.karbariCodes"
-                    optionLabel="title" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                    [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                <p-multiSelect [options]="karbariDictionary" name="karbari"
+                    [(ngModel)]="importDynamicService.AssessPreReq.karbariCodes" optionLabel="title" optionValue="id"
+                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
 

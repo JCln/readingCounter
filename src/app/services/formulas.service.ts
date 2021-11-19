@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IAbBahaFormula, ITabsare2Formula } from 'interfaces/imanage';
 import {
   ENSelectedColumnVariables,
   ENSnackBarColors,
@@ -15,6 +15,9 @@ import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
+import { MathS } from '../classes/math-s';
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { IAbBahaFormula, ITabsare2Formula } from '../Interfaces/ireads-manager';
 
 @Injectable({
   providedIn: 'root'
@@ -28,13 +31,14 @@ export class FormulasService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private dialog: MatDialog
   ) { }
 
   /* COLUMNS */
   private _abFormulas = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
+    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true, isSelectOption: true },
     { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
     { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
     { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
@@ -42,8 +46,8 @@ export class FormulasService {
     { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
     { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
   ]
-  private _budgetFormulas = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+  private _budgetFormulas: IObjectIteratation[] = [
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
     { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
     { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
     { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
@@ -52,12 +56,12 @@ export class FormulasService {
     { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
   ]
   private _tabsare2Formulas = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
     { field: 'formula', header: 'فرمول', isSelected: true, readonly: true, ltr: true }
   ]
   private _tabsare3Formulas = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
+    { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
+    { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true, isSelectOption: true },
     { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
     { field: 'toDate', header: 'تا', isSelected: true, readonly: true },
     { field: 'fromRate', header: 'از نرخ', isSelected: true, readonly: true },
@@ -92,12 +96,12 @@ export class FormulasService {
       console.error(error);
     }
   }
-  postFormulaAdd = (method: ENInterfaces, body: object) => {
-    body['fromDate'] = Converter.persianToEngNumbers(body['fromDate']);
-    body['toDate'] = Converter.persianToEngNumbers(body['toDate']);
+  postFormulaAdd = (method: ENInterfaces, dataSource: object) => {
+    dataSource['fromDate'] = Converter.persianToEngNumbers(dataSource['fromDate']);
+    dataSource['toDate'] = Converter.persianToEngNumbers(dataSource['toDate']);
     try {
       return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
+        this.interfaceManagerService.POSTBODY(method, dataSource).toPromise().then((res: IResponses) => {
           this.utilsService.snackBarMessageSuccess(res.message);
           resolve(res);
         })
@@ -105,11 +109,6 @@ export class FormulasService {
     } catch (error) {
       console.error(error);
     }
-  }
-  private postAbBahaFormulaAddExcel = (body: object) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaWaterAddExcel, body).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    })
   }
   postFormulaRemove = (method: ENInterfaces, UUID: string): Promise<any> => {
     try {
@@ -130,31 +129,21 @@ export class FormulasService {
       })
     });
   }
-  private postBudgetFormulaAddExcel = (body: object) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaBudgetAddExcel, body).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    })
-  }
-  private postTabsare3FormulaAddExcel = (body: object) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.FormulaTabsare3AddExcel, body).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessageSuccess(res.message);
-    });
-  }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
   getKarbariCodeDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
-  postExcelFile = async (method: string) => {
+  postExcelFile = async (method: ENInterfaces) => {
     const formData: FormData = new FormData();
-
-    console.log(this.fileForm);
 
     formData.append('file', this.fileForm[0]);
     formData.append('rows', this.desc.rows);
 
-    await this[method](formData);
+    this.interfaceManagerService.POSTBODY(method, formData).toPromise().then((res: IResponses) => {
+      this.utilsService.snackBarMessageSuccess(res.message);
+    })
   }
   getExcelSample = (method: ENInterfaces): Promise<any> => {
     try {
@@ -169,11 +158,11 @@ export class FormulasService {
   }
   /* VALIDATION */
   isNull = (): boolean => {
-    if (this.utilsService.isNull(this.desc.rows)) {
+    if (MathS.isNull(this.desc.rows)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_excelRows, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
-    if (this.utilsService.isNull(this.fileForm)) {
+    if (MathS.isNull(this.fileForm)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_excelFile, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
@@ -194,60 +183,60 @@ export class FormulasService {
     return true;
   }
   validationEditableRow = (dataSource: object): boolean => {
-    if (this.utilsService.isNull(dataSource['id'])) {
+    if (MathS.isNull(dataSource['id'])) {
       this.snackWrapperService.openSnackBar(EN_messages.call_supportGroup, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
       return false;
     }
     if (this.utilsService.hasOwnProperty(dataSource['zoneId'])) {
-      if (this.utilsService.isNull(dataSource['zoneId'])) {
+      if (MathS.isNull(dataSource['zoneId'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_zone, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['karbariMoshtarakinCode'])) {
-      if (this.utilsService.isNull(dataSource['karbariMoshtarakinCode'])) {
+      if (MathS.isNull(dataSource['karbariMoshtarakinCode'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_karbariMoshtarakinCode, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['fromDate'])) {
-      if (this.utilsService.isNull(dataSource['fromDate'])) {
+      if (MathS.isNull(dataSource['fromDate'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_fromDate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['toDate'])) {
-      if (this.utilsService.isNull(dataSource['toDate'])) {
+      if (MathS.isNull(dataSource['toDate'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_toDate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['fromRate'])) {
-      if (this.utilsService.isNull(dataSource['fromRate'])) {
+      if (MathS.isNull(dataSource['fromRate'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_fromRate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['toRate'])) {
-      if (this.utilsService.isNull(dataSource['toRate'])) {
+      if (MathS.isNull(dataSource['toRate'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_toRate, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['abFormula'])) {
-      if (this.utilsService.isNull(dataSource['abFormula'])) {
+      if (MathS.isNull(dataSource['abFormula'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_abFormula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['fazelabFormula'])) {
-      if (this.utilsService.isNull(dataSource['fazelabFormula'])) {
+      if (MathS.isNull(dataSource['fazelabFormula'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_fazelabFormula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
     }
     if (this.utilsService.hasOwnProperty(dataSource['formula'])) {
-      if (this.utilsService.isNull(dataSource['formula'])) {
+      if (MathS.isNull(dataSource['formula'])) {
         this.snackWrapperService.openSnackBar(EN_messages.insert_formula, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
         return false;
       }
@@ -256,7 +245,7 @@ export class FormulasService {
   }
   validationRate = (dataSource: IAbBahaFormula): boolean => {
 
-    if (!this.utilsService.isFromLowerThanTo(dataSource.fromRate, dataSource.toRate)) {
+    if (!MathS.isFromLowerThanTo(dataSource.fromRate, dataSource.toRate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.lessThan_rate);
       return false;
     }
@@ -264,13 +253,13 @@ export class FormulasService {
   }
   private fromToValidation = (dynamicValue: any): boolean => {
     if (dynamicValue.hasOwnProperty('toDate')) {
-      if (!this.utilsService.lengthControl(dynamicValue.toDate, dynamicValue.toDate, 9, 10)) {
+      if (!MathS.lengthControl(dynamicValue.toDate, dynamicValue.toDate, 9, 10)) {
         this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
         return false;
       }
     }
     if (dynamicValue.hasOwnProperty('fromDate')) {
-      if (!this.utilsService.lengthControl(dynamicValue.fromDate, dynamicValue.fromDate, 9, 10)) {
+      if (!MathS.lengthControl(dynamicValue.fromDate, dynamicValue.fromDate, 9, 10)) {
         this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_date);
         return false;
       }
@@ -327,6 +316,24 @@ export class FormulasService {
     return _selectCols.filter(items => {
       if (items.isSelected)
         return items
+    })
+  }
+  firstConfirmDialog = (): Promise<any> => {
+    const title = EN_messages.confirm_remove;
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: title,
+          isInput: false,
+          isDelete: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
+        }
+      })
     })
   }
 

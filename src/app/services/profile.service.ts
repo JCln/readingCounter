@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+
+import { MathS } from '../classes/math-s';
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +17,8 @@ export class ProfileService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private dialog: MatDialog
   ) { }
 
   columnSelectedProfile = (): IObjectIteratation[] => {
@@ -27,31 +32,33 @@ export class ProfileService {
     ];
   }
   verification = (password: IChangePassword) => {
-    if (this.utilsService.isNull(password.oldPassword)) {
+    if (MathS.isNull(password.oldPassword)) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
       return false;
     }
-    if (this.utilsService.isNull(password.newPassword)) {
+    if (MathS.isNull(password.newPassword)) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
       return false;
     }
-    if (this.utilsService.isNull(password.confirmPassword)) {
+    if (MathS.isNull(password.confirmPassword)) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
       return false;
     }
-    if (!this.utilsService.isSameLength(password.newPassword, password.confirmPassword)) {
+    if (!MathS.isSameLength(password.newPassword, password.confirmPassword)) {
       this.utilsService.snackBarMessageWarn(EN_messages.passwords_notFetch);
       return false;
     }
     return true;
   }
-  changePassword = (password: IChangePassword) => {
+  changePassword = async (password: IChangePassword) => {
     if (!this.verification(password))
       return;
-    return this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message);
-    });
+    if (await this.firstConfirmDialog(EN_messages.confirm_passwordChange)) {
+      return this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe((res: IResponses) => {
+        if (res)
+          this.utilsService.snackBarMessageSuccess(res.message);
+      });
+    }
   }
   getMyInfoDataSource = (): Promise<any> => {
     try {
@@ -64,5 +71,22 @@ export class ProfileService {
       console.error(e);
 
     }
+  }
+  firstConfirmDialog = (reason: EN_messages): Promise<any> => {
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: reason,
+          isInput: false,
+          isDelete: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(async desc => {
+        if (desc) {
+          resolve(desc)
+        }
+      })
+    })
   }
 }

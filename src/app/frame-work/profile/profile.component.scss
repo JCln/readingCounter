@@ -7,7 +7,7 @@
   grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
   direction: rtl;
   justify-content: center;
-  gap: 3rem;
+  gap: $font_2;
 }
 
 main {
@@ -18,7 +18,7 @@ main {
 
   .fa-user {
     font-size: 4rem;
-    color: var(--gray_400);
+    color: var(--secondary_4);
     background: var(--white);
     border-radius: $border_50;
     height: 7rem;
@@ -34,6 +34,7 @@ main {
 
 ._key {
   min-width: 8.5rem;
+  text-align: right;
 }
 
 ._value {
@@ -44,8 +45,8 @@ main {
 }
 
 .content {
-  background: var(--gray_100);
-  box-shadow: 1px 1px 8px 4px var(--gray_400);
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
   text-align: center;
   padding: $font_2 0;
   justify-content: space-around;
@@ -63,8 +64,8 @@ main {
 }
 
 .title {
-  color: var(--blue_400);
-  text-align: right;
+  color: var(--primary_2);
+  text-align: center;
   margin: $font_xs $font_05;
   font-size: 1.6rem;
 }
@@ -73,7 +74,7 @@ main {
   text-align: center;
 
   button {
-    background: var(--blue_400);
+    background: var(--primary_2);
     margin: $font_2;
     color: var(--white);
   }
@@ -81,7 +82,7 @@ main {
 
 .input_2 {
   min-width: 100%;
-  color: var(--gray_500);
+  color: var(--secondary_5);
   margin-bottom: $font_05;
-  box-shadow: 1px 1px 8px 1px var(--gray_400);
+  box-shadow: 1px 1px 8px 1px var(--secondary_4);
 }

@@ -9,6 +9,14 @@ export class Converter {
             })
         });
     }
+    static convertTitleToId = (dataSource: any, dictionary: IDictionaryManager[], toConvert: string): any => {
+        dictionary.map(dictionary => {
+            dataSource.map(dataSource => {
+                if (dictionary.title == dataSource[toConvert])
+                    dataSource[toConvert] = dictionary.id;
+            })
+        });
+    }
     static persianToEngNumbers = (str) => {
         if (str == null || typeof str === 'undefined' || !str) return;
         const persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
@@ -16,5 +24,11 @@ export class Converter {
             str = str.replace(persianNumbers[i], i);
         }
         return str;
+    }
+    static customizeSelectedColumns = (_selectCols: any) => {
+        return _selectCols.filter(items => {
+            if (items.isSelected)
+                return items
+        })
     }
 }

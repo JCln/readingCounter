@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDashboardTimed } from 'interfaces/inon-manage';
+import { IDashboardTimed } from 'interfaces/idashboard-map';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
 
@@ -19,8 +19,6 @@ export class RrTimeComponent implements OnInit {
 
   classWrapper = async () => {
     this.readingReportTimed = await this.dashboardService.getDashboardDataSource(ENInterfaces.getDashboardReadTimed);
-    console.log(this.readingReportTimed);
-
     this.insertSelectedColumns();
   }
   ngOnInit(): void {

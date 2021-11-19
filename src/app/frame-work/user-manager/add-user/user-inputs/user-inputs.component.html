@@ -1,4 +1,4 @@
-<main>
+<form #form="ngForm">
     <mat-form-field appearance="fill">
         <mat-label>نام</mat-label>
         <input matInput [(ngModel)]="userInputForm.firstName" name="firstName" placeholder="نام را وارد نمایید"
@@ -61,8 +61,8 @@
         <mat-checkbox [(ngModel)]="userInputForm.isActive" name="isActive">کاربر فعال باشد؟</mat-checkbox>
     </div>
 
-</main>
+</form>
 <button type="submit" class="btn_2" matStepperNext>
-    صفحه بعد
     <i class="fa fa-long-arrow-left"></i>
+    صفحه بعد
 </button>

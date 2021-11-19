@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 import { InteractionService } from 'services/interaction.service';
-import { UtilsService } from 'services/utils.service';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-tab-wrapper',
@@ -15,22 +15,21 @@ import { UtilsService } from 'services/utils.service';
 })
 export class TabWrapperComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = []
-  tabs: ITabs[] = [];
   currentRoute: ITabs[] = [];
   @Output() childPageTitle = new EventEmitter<string>();
 
   constructor(
     private router: Router,
-    private utilsService: UtilsService,
     private sideBarItemsService: SidebarItemsService,
     private interactionService: InteractionService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
-    this.tabs.push(this.addDashboardTab());
+    if (!this.DoesTabsHaveThisRouteNow())
+      this.closeTabService.tabs.push(this.addDashboardTab());
   }
   reFetchPageTitle = () => {
     let a;
-    this.tabs.map(item => {
+    this.closeTabService.tabs.map(item => {
       if (item.route === this.getRouterUrl())
         a = item.title;
     })
@@ -42,7 +41,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     })
   }
   DoesTabsHaveThisRouteNow = (): ITabs => {
-    const found = this.tabs.find((item: any) => {
+    const found = this.closeTabService.tabs.find((item: any) => {
       return item.route === this.getRouterUrl()
     })
     if (found)
@@ -54,10 +53,15 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       return route;
     return null;
   }
+  filterTabs = (routerUrl: string): ITabs[] => {
+    return this.closeTabService.tabs.filter((item: any) => {
+      return item.route !== routerUrl
+    })
+  }
   findDynamicRouteStatus = (): ITabWrapperDetectDynamicRoute => {
     if (this.getCurrentDynamicRoute('/wr/m/l/pd/'))
       return {
-        _title: 'مامور(ها)', _dynamicRoute: '/wr/m/l/pd/'
+        _title: 'اطلاعات روزانه', _dynamicRoute: '/wr/m/l/pd/'
       }
     if (this.getCurrentDynamicRoute('/wr/m/l/all/false/'))
       return {
@@ -106,7 +110,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       _dynamicRoute: ''
     }
     dRoute = this.findDynamicRouteStatus();
-    if (this.utilsService.isNull(dRoute))
+    if (MathS.isNull(dRoute))
       return;
     else {
       lastUrlPart = this.router.url.split('/').pop().substring(0, 5);
@@ -120,8 +124,8 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       route: `${dRoute._dynamicRoute}${completeRoutePart}`, title: `${dRoute._title}${lastUrlPart}`, cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     };
 
-    if (this.utilsService.isNull(this.DoesTabsHaveThisRouteNow())) {
-      this.tabs.push(a);
+    if (MathS.isNull(this.DoesTabsHaveThisRouteNow())) {
+      this.closeTabService.tabs.push(a);
       this.reFetchPageTitle();
     }
     this.reFetchPageTitle();
@@ -129,7 +133,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   getRouterUrl = (): string => { return this.router.url; }
   staticRouteValidation = () => {
     if (!this.DoesTabsHaveThisRouteNow()) {
-      this.getRouterUrl() === '/wr/profile' ? this.tabs.push(this.addProfileTab()) : ''
+      this.getRouterUrl() === '/wr/profile' ? this.closeTabService.tabs.push(this.addProfileTab()) : ''
     }
   }
   verification = () => {
@@ -140,7 +144,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
         this.reFetchPageTitle();
         return;
       }
-      this.tabs.push(currentRouteFound);
+      this.closeTabService.tabs.push(currentRouteFound);
       this.reFetchPageTitle();
     }
     else
@@ -170,11 +174,11 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     this.changedRouteListener();
   }
   isLatestTab = () => {
-    const a = this.tabs.map(item => {
+    const a = this.closeTabService.tabs.map(item => {
       return item;
     })
 
-    if (this.utilsService.isNull(a[0])) {
+    if (MathS.isNull(a[0])) {
       this.router.navigateByUrl('/wr');
       this.reFetchPageTitle();
     }
@@ -184,7 +188,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     }
   }
   backToPreviousPage = () => {
-    const b = this.tabs.slice(-1).map((item: any) => item.route);
+    const b = this.closeTabService.tabs.slice(-1).map((item: any) => item.route);
     this.router.navigate(b);
     this.reFetchPageTitle();
   }
@@ -195,11 +199,10 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     this.reFetchPageTitle();
   }
   closeButtonClicked = (routerUrl: string) => {
-    const a = this.tabs.filter((item: any) => {
-      return item.route !== routerUrl;
-    })
-    this.tabs = a;
-    this.backToPreviousPage();
+    this.closeTabService.tabs = this.filterTabs(routerUrl);
+    if (this.router.url === routerUrl) {
+      this.backToPreviousPage();
+    }
     this.closeCurrentPage(routerUrl);
   }
   addDashboardTab = () => {
@@ -216,14 +219,14 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     this.interactionService.setRefresh(tabRoute);
   }
   closeCurrentPage = (tabRoute: string) => {
-    this.closeTabService.setClose(tabRoute);
+    this.closeTabService.cleanData(tabRoute);
   }
-  closeAllExeptOne = () => this.tabs.length = 1;
+  closeAllExeptOne = () => this.closeTabService.tabs.length = 1;
   setCloseAllTabs = (): Promise<boolean> => {
     try {
       return new Promise((resolve) => {
-        this.tabs.forEach(val => {
-          return this.closeTabService.setClose(val.route)
+        this.closeTabService.tabs.forEach(val => {
+          return this.closeTabService.cleanData(val.route)
         })
         resolve(true)
       });

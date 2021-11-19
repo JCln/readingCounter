@@ -1,27 +1,19 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IReadingReportReq } from 'interfaces/imanage';
+import { Component, Input } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { IReadingReportTraverse } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
+import { Converter } from 'src/app/classes/converter';
+import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-traverse',
   templateUrl: './traverse.component.html',
   styleUrls: ['./traverse.component.scss']
 })
-export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
-  readingReportReq: IReadingReportReq = {
-    zoneId: 0,
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1400
-  }
+export class TraverseComponent extends FactoryONE {
+  isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -39,53 +31,33 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
   karbariDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-  subscription: Subscription[] = [];
+
+  dataSource: IReadingReportTraverse[] = [];
+
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
 
   constructor(
-    private readingReportManagerService: ReadingReportManagerService,
-    private interactionService: InteractionService,
-    public route: ActivatedRoute,
+    public readingReportManagerService: ReadingReportManagerService,
+     
     private closeTabService: CloseTabService
-  ) { }
+  ) {
+    super();
+  }
 
   nullSavedSource = () => this.closeTabService.saveDataForRRTraverse = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
+      this.verification();
+    }
+    if (this.closeTabService.saveDataForRRTraverse) {
+      this.dataSource = this.closeTabService.saveDataForRRTraverse;
+      this.insertSelectedColumns();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
-  }
-  ngOnInit() {
-    this.classWrapper();
-  }
-  refreshTabStatus = () => {
-    this.subscription.push(this.interactionService.getRefreshedPage().subscribe((res: string) => {
-      if (res) {
-        if (res === '/wr/rpts/mam/trv') {
-          this.classWrapper(true);
-        }
-      }
-    })
-    )
-  }
-  ngAfterViewInit(): void {
-    this.refreshTabStatus();
-  }
-  ngOnDestroy(): void {
-    //  for purpose of refresh any time even without new event emiteds
-    // we use subscription and not use take or takeUntil
-    this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  routeToChild = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/trv/res');
-  }
-  receiveFromDateJalali = ($event: string) => {
-    this.readingReportReq.fromDate = $event;
-  }
-  receiveToDateJalali = ($event: string) => {
-    this.readingReportReq.toDate = $event;
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -94,10 +66,27 @@ export class TraverseComponent implements OnInit, AfterViewInit, OnDestroy {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
+    this._isOrderByDate ? (this.readingReportManagerService.traverseReq.readingPeriodId = null, this.readingReportManagerService.traverseReq.year = 0) : (this.readingReportManagerService.traverseReq.fromDate = '', this.readingReportManagerService.traverseReq.toDate = '');
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.traverseReq, this._isOrderByDate);
     if (temp)
-      this.routeToChild();
+      this.connectToServer();
   }
-
+  insertSelectedColumns = () => {
+    this._selectCols = this.readingReportManagerService.columnRRTraverse();
+    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
+  }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverse, this.readingReportManagerService.traverseReq);
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.insertSelectedColumns();
+    this.closeTabService.saveDataForRRTraverse = this.dataSource;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
 }

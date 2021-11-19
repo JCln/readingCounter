@@ -1,12 +1,17 @@
 <div class="header">
     <div class="_logo_content">
-        <img src="assets/imgs/header/logo.png" alt="">
+        <img src="assets/imgs/header/logo.jpg" alt="">
     </div>
     <li class="_theme_mode">
         <i *ngIf="this.themeService.isDarkTheme()" (click)="toggleTheme()" class="fas fa-sun"></i>
         <i *ngIf="!this.themeService.isDarkTheme()" (click)="toggleTheme()" class="fas fa-moon"></i>
     </li>
     <ul>
-        <li class="_title">سامانه جامع قرائت کنتور آبفا {{provinceName}}</li>
+        <li class="_title">
+            <strong>
+                آبان-
+            </strong>
+            سامانه قرائت کنتور آبفا {{provinceName}}
+        </li>
     </ul>
 </div>

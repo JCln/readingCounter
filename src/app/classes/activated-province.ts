@@ -1,33 +1,66 @@
-import { ENActivateProvinceTitle } from 'interfaces/ioverall-config';
+import {
+    BrowserVersions,
+    ENActivateProvinceTitle,
+    ENHasNextBazdid,
+    ENMapCenter,
+    ENOSMUrls,
+    ENSatelliteToken,
+    ENSatteliteAccessToken,
+    ENURLs,
+    IENV,
+    IENV_BROWSER_SETUP,
+} from 'interfaces/build';
 
-export class ActivatedProvince {
+export class ActivatedProvince implements IENV {
     public static readonly DEFAULT = new ActivatedProvince(
         ENActivateProvinceTitle.DEFAULT,
-        'https://37.191.92.157/kontoriNew',
-        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
-        'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg'
+        ENURLs.DEFAULT,
+        ENOSMUrls.DEFAULT,
+        ENSatteliteAccessToken.DEFAULT,
+        ENSatelliteToken.DEFAULT,
+        ENHasNextBazdid.DEFAULT.value,
+        ENMapCenter.DEFAULT.value,
+        BrowserVersions.DEFAULT.value
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
-        'https://37.191.92.157/kontoriNew',
-        'http://172.18.12.242/osm_tiles/{z}/{x}/{y}.png',
-        'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
-        'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg'
+        ENURLs.ESF,
+        ENOSMUrls.ESF,
+        ENSatteliteAccessToken.ESF,
+        ENSatelliteToken.ESF,
+        ENHasNextBazdid.ESF.value,
+        ENMapCenter.ESF.value,
+        BrowserVersions.ESF.value
     );
-    public static readonly TEH = new ActivatedProvince(
-        ENActivateProvinceTitle.TEH,
-        'https://37.191.92.157/kontoriNew',
-        'https://{s}.tile.openstreetmap11.org/{z}/{x}/{y}.png',
-        'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
-        'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg'
+    public static readonly TEH_ZONE4 = new ActivatedProvince(
+        ENActivateProvinceTitle.TEH_ZONE4,
+        ENURLs.TEH_ZONE4,
+        ENOSMUrls.TEH_ZONE4,
+        ENSatteliteAccessToken.TEH_ZONE4,
+        ENSatelliteToken.TEH_ZONE4,
+        ENHasNextBazdid.TEH_ZONE4.value,
+        ENMapCenter.TEH_ZONE4.value,
+        BrowserVersions.TEH_ZONE4.value
     );
-    public static readonly ZONE4 = new ActivatedProvince(
-        ENActivateProvinceTitle.ZONE4,
-        'http://81.12.106.167:8081/kontoriNew',
-        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
-        'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg'
+    public static readonly TEH_SE = new ActivatedProvince(
+        ENActivateProvinceTitle.TEH_SE,
+        ENURLs.TEH_SE,
+        ENOSMUrls.TEH_SE,
+        ENSatteliteAccessToken.TEH_SE,
+        ENSatelliteToken.TEH_SE,
+        ENHasNextBazdid.TEH_SE.value,
+        ENMapCenter.TEH_SE.value,
+        BrowserVersions.TEH_SE.value
+    );
+    public static readonly TEH_SE_LOCAL = new ActivatedProvince(
+        ENActivateProvinceTitle.TEH_SE_LOCAL,
+        ENURLs.TEH_SE_LOCAL,
+        ENOSMUrls.TEH_SE_LOCAL,
+        ENSatteliteAccessToken.TEH_SE_LOCAL,
+        ENSatelliteToken.TEH_SE_LOCAL,
+        ENHasNextBazdid.TEH_SE_LOCAL.value,
+        ENMapCenter.TEH_SE_LOCAL.value,
+        BrowserVersions.TEH_SE_LOCAL.value
     );
 
     private constructor(
@@ -36,7 +69,24 @@ export class ActivatedProvince {
         public readonly OSMmapBoxUrl: string,
         public readonly SATELLITEMapBoxUrl: string,
         public readonly SATELLITEMapAccessToken: string,
-
+        public readonly hasNextBazdid: boolean,
+        public readonly mapCenter: [number, number],
+        public readonly browserVersions: {
+            Desktop: {
+                Chrome: IENV_BROWSER_SETUP,
+                Firefox: IENV_BROWSER_SETUP,
+                IE: IENV_BROWSER_SETUP,
+                opera: IENV_BROWSER_SETUP,
+                safari: IENV_BROWSER_SETUP,
+            },
+            Touch: {
+                Chrome: IENV_BROWSER_SETUP,
+                Firefox: IENV_BROWSER_SETUP,
+                IE: IENV_BROWSER_SETUP,
+                opera: IENV_BROWSER_SETUP,
+                safari: IENV_BROWSER_SETUP,
+            }
+        }
     ) { }
 
     public getActiveProvince = (provinceName: ENActivateProvinceTitle): any => {

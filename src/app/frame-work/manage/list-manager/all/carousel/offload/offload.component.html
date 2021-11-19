@@ -1,0 +1,142 @@
+<main class="main">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="_container">
+            <section class="__readonly_s">
+                <div class="input_2">
+                    <div class="_key">نام‌و نام‌خانوادگی</div>
+                    <div class="_value">
+                        {{firstName}}{{sureName}}
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">ش پرونده</div>
+                    <div class="_value">
+                        {{radif}}
+                    </div>
+                </div>
+                <div class="input_2 coloring_border" [hidden]="!counterStatesDictionary.length">
+                    <div class="_key">وضعیت کنتور</div>
+                    <mat-select placeholder="انتخاب مورد" [(value)]="counterStateCode" name="counterState">
+                        <mat-option *ngFor="let truefalse of counterStatesDictionary" [value]="truefalse.title">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2 coloring_border">
+                    <div class="_key">نوع اصلاح</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="offloadModifyReq.modifyType" name="modifyType">
+                        <mat-option *ngFor="let truefalse of modifyType" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2">
+                    <div class="_key">تاریخ قبلی</div>
+                    <div class="_value">
+                        {{preDate}}
+                    </div>
+                </div>
+                <div class="input_2 coloring_border">
+                    <div class="_key">تاریخ فعلی</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">رقم قبلی</div>
+                    <div class="_value">
+                        {{preNumber}}
+                    </div>
+                </div>
+                <div class="input_2 coloring_border">
+                    <div class="_key">رقم فعلی</div>
+                    <div class="_value">
+                        <input class="_value" type="number" name="counterNumber"
+                            [(ngModel)]="offloadModifyReq.counterNumber">
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">توضیح مامور</div>
+                    <div class="_value">
+                        {{description}}
+                    </div>
+                </div>
+                <input class="input_1 coloring_border" type="text" placeholder="توضیحات : " name="description"
+                    [(ngModel)]="offloadModifyReq.description">
+
+            </section>
+            <div class="__slider">
+                <div *ngIf="testLoadImage.length" class="_img_content">
+                    <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
+                        <div class="__img_counter">{{i+1}}</div>
+
+                        <!-- tooltip -->
+                        <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
+                        <!--   -->
+
+                        <div *ngIf="testLoadImage[i]" class="__img_bound">
+                            <img (click)="showBigImage(testLoadImage[i])" src="{{testLoadImage[i]}}" alt="whatever">
+                        </div>
+                        <div *ngIf="!testLoadImage[i]" class="__img_bound">
+                            <img src="assets/imgs/soundvid/2.png" alt="whatever">
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!testLoadImage.length">
+                    <h2 class="not_found_header">فاقد تصویر</h2>
+                </div>
+            </div>
+            <div class="__slider">
+                <div *ngIf="audioFiles.length" class="_main_audio">
+                    <h1 class="title">صدای ضبط شده</h1>
+                    <hr>
+                    <div *ngFor="let item of audioFiles">
+                        <button [hidden]="showAudioControllers" (click)="getExactAudio(item.fileRepositoryId)">
+                            <i class="tooltip pi pi-cloud-download">
+                                <div class="tooltip_text">بارگیری</div>
+                            </i>
+                        </button>
+                        <button [hidden]="!showAudioControllers" (click)="downloadAudio()">
+                            <i class="tooltip pi pi-download">
+                                <div class="tooltip_text">ذخیره صوت</div>
+                            </i>
+                        </button>
+                        <button [hidden]="!showAudioControllers" (click)="isPlaying = !isPlaying">
+                            <i *ngIf="isPlaying" (click)="pauseAudio()" class="tooltip pi pi-pause">
+                                <div class="tooltip_text">توقف صوت</div>
+                            </i>
+                            <i *ngIf="!isPlaying" (click)="playAudio()" class="tooltip pi pi-play">
+                                <div class="tooltip_text">پخش صوت</div>
+                            </i>
+                        </button>
+                        <button [hidden]="!showAudioControllers" (click)="rePlayAudio()">
+                            <i class="tooltip pi pi-replay">
+                                <div class="tooltip_text">پخش مجدد</div>
+                            </i>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <div *ngIf="!audioFiles.length">
+                        <h2 class="not_found_header">فاقد صوت</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="__checks">
+                <h3>موارد</h3>
+                <div class="check_boxes" *ngFor="let item of offloadItems">
+                    <mat-checkbox name="hasPreNumber" [(ngModel)]="item.isSelected">
+                        {{item.title}}
+                    </mat-checkbox>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <button type="submit" class="btn_1">
+                اصلاح
+            </button>
+        </footer>
+    </form>
+</main>

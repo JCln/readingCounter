@@ -16,6 +16,17 @@
             </section>
             <button class="btn_1" type="submit">ورود</button>
         </form>
-        <div class="version"> 0.1.1 نسخه نرم افزار</div>
+        <section class="info">
+            <i (click)="showVersionInfo = !showVersionInfo" (click)="getVersionInfos()"
+                class="tooltip _circle_border p_icons pi pi-info">
+                <div [hidden]="showVersionInfo" class="tooltip_text">نمایش آخرین تغییرات</div>
+            </i>
+            <section class="_info_each_item" [@openClose]="showVersionInfo ? 'openSubItems' : 'closeSubItems'">
+                <div *ngFor="let item of infoVersionItems">
+                    {{item.title}}
+                </div>
+            </section>
+            <div class="version">{{versionNumber}} نسخه نرم افزار</div>
+        </section>
     </main>
 </section>
