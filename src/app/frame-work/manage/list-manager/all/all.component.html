@@ -3,7 +3,7 @@
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
-    [_outputFileName]="'allReads'"
+    [_outputFileName]="'all-lists'"
     [_checkUpName]="'allComponent'"
     [_selectedColumnsToRemember]="'selectedListManagerAll'"
     [_numberOfExtraColumns]="[1 , 2]"    
@@ -15,6 +15,7 @@
     (refreshedTable)="refreshTable()"
     (backedToPrevious)="toPrePage()"
     (routedToOffload)="routeToOffload($event)"
+    (showedWOUIAsCarousel)="routeToWoui($event)"
     (showedPictures)="getReadingReportTitles($event)"    
     > 
     </app-prime-table>
@@ -27,4 +28,13 @@
     >
     <app-offload></app-offload>
     </app-carousel>
+
+    <app-carousel-woum *ngIf="showWouImages" 
+    [dataSource]="woumInfosDataSource"
+    (cancelClicked)="carouselCancelClicked()"
+    (prevClicked)="carouselWOUMPrevItem()"
+    (nextClicked)="carouselWOUMNextItem()"
+    >
+    <app-woum></app-woum>
+    </app-carousel-woum>
 </main>

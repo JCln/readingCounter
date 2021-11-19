@@ -270,6 +270,13 @@
                     <div class="tooltip_text_right">مشاهده عکس(ها)</div>
                 </i>
             </td>
+            <td *ngIf="(_outputFileName == 'all-lists')&& !_allComponentIsModify"
+                (click)="showWOUIAsCarousel(dataSource,ri)">
+                <span class="ui-column-title">بررسی عکس/صوت</span>
+                <i class="tooltip p_icons fas fa-camera">
+                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                </i>
+            </td>
             <td *ngIf="(_outputFileName == 'allReads')&& !_allComponentIsModify"
                 (click)="searchService.routeToWoui(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
@@ -277,7 +284,8 @@
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
-            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_outputFileName == 'allReads' &&  _allComponentIsModify">
+            <td (click)="routeToOffload(dataSource,ri)"
+                *ngIf="_outputFileName == 'all-lists' &&  _allComponentIsModify">
                 <span class="ui-column-title">اصلاح</span>
                 <i class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>

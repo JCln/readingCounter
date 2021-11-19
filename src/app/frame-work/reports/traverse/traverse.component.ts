@@ -77,7 +77,7 @@ export class TraverseComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverse, this.readingReportManagerService.traverseReq);
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.insertSelectedColumns();
     this.closeTabService.saveDataForRRTraverse = this.dataSource;

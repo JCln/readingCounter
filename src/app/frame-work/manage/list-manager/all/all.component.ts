@@ -21,7 +21,9 @@ export class AllComponent extends FactoryONE {
   isModify: string | boolean;
 
   carouselDataSource: IOnOffLoadFlat;
+  woumInfosDataSource: IOnOffLoadFlat;
   showCarousel: boolean = false;
+  showWouImages: boolean = false;
 
   rowIndex: number = 0;
   dataSource: IOnOffLoadFlat[] = [];
@@ -61,7 +63,7 @@ export class AllComponent extends FactoryONE {
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
-    
+
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
     if (tempZone) {
@@ -94,9 +96,6 @@ export class AllComponent extends FactoryONE {
     })
     )
   }
-  routeToWoui = (object: IOnOffLoadFlat) => {
-    this.router.navigate(['wr/m/track/woui', false, object.id]);
-  }
   routeToOffload = (event: object) => {
     this.carouselDataSource = event['dataSource'];
     this.rowIndex = event['ri'];
@@ -121,6 +120,7 @@ export class AllComponent extends FactoryONE {
   // }
   carouselCancelClicked = () => {
     this.showCarousel = false;
+    this.showWouImages = false;
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -175,6 +175,24 @@ export class AllComponent extends FactoryONE {
 
       return (event.order * result);
     });
+  }
+
+  /*
+  water officer upload carousel images
+  */
+  routeToWoui = (object: any) => {
+    this.woumInfosDataSource = object['dataSource'];
+    this.rowIndex = object['ri'];
+    this.showWouImages = true;
+    scrollTo(0, 0);
+  }
+  carouselWOUMNextItem = () => {
+    this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
+    this.woumInfosDataSource = this.dataSource[this.rowIndex];
+  }
+  carouselWOUMPrevItem = () => {
+    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length : this.rowIndex--;
+    this.woumInfosDataSource = this.dataSource[this.rowIndex];
   }
 
 

@@ -48,6 +48,7 @@ export class PrimeTableComponent {
   @Output() forcedOffload = new EventEmitter<any>();
   @Output() backedToImportedConfirmDialog = new EventEmitter<any>();
   @Output() routedToLMPayDay = new EventEmitter<any>();
+  @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() routedToLMAll = new EventEmitter<any>();
   @Output() routedToFollowUp = new EventEmitter<any>();
   @Output() showedMoreDetails = new EventEmitter<any>();
@@ -104,6 +105,9 @@ export class PrimeTableComponent {
   }
   routeToLMPayDay = (dataSource: object) => {
     this.routedToLMPayDay.emit(dataSource);
+  }
+  showWOUIAsCarousel = (dataSource: any, ri: number) => {
+    this.showedWOUIAsCarousel.emit({ dataSource, ri });
   }
   routeToLMAll = (dataSource: object) => {
     this.routedToLMAll.emit(dataSource);
