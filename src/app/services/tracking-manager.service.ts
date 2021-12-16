@@ -67,8 +67,8 @@ export class TrackingManagerService {
     { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
     { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isNumber: true },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
-    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
-    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true },
+    { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
     { field: 'description', header: 'توضیحات', isSelected: false }
 
   ];
@@ -91,8 +91,8 @@ export class TrackingManagerService {
     { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
     { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false },
     { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-    { field: 'displayBillId', header: 'شناسه قبض', isSelected: false, isBoolean: true },
-    { field: 'displayRadif', header: 'ش.پرونده', isSelected: false, isBoolean: true },
+    { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
     { field: 'description', header: 'توضیحات', isSelected: false }
     // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }
   ]
@@ -118,8 +118,8 @@ export class TrackingManagerService {
       { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
       { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, readonly: false, borderize: true },
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, borderize: true },
-      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
-      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
+      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
+      { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
       { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
     ];
   }
@@ -132,8 +132,8 @@ export class TrackingManagerService {
       { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
       { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true },
       { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: true, isBoolean: true },
+      { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: true, isBoolean: true },
+      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: true, isBoolean: true },
       { field: 'isBazdid', header: 'بازدید', isSelected: true, readonly: true, isBoolean: true },
       { field: 'isRoosta', header: 'روستا', isSelected: true, readonly: true, isBoolean: true }
     ];
