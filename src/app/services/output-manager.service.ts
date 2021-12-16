@@ -149,7 +149,8 @@ export class OutputManagerService {
 
     const worksheet = XLSX.utils.json_to_sheet(datas.data);
     var range = XLSX.utils.decode_range(worksheet['!ref']);
-    for (var C = range.s.r; C <= range.e.r; ++C) {
+
+    for (var C = range.s.r; C <= range.e.c; ++C) {
       var address = XLSX.utils.encode_col(C) + "1"; // <-- first row, column number C
       if (!worksheet[address]) continue;
       worksheet[address].v = datas.headers[C];

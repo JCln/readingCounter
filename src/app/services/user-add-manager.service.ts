@@ -66,56 +66,73 @@ export class UserAddManagerService {
     return selectedActions;
   }
   checkEmptyUserInfos = (vals: IAddAUserManager) => {
-    if (!MathS.isNullWithText(vals.userCode, EN_messages.insert_karbaricode, ENSnackBarColors.warn))
+    if (MathS.isNull(vals.userCode)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_karbaricode);
       return false;
-    if (!MathS.isNullWithText(vals.username, EN_messages.insert_karbari, ENSnackBarColors.warn))
+    }
+    if (MathS.isNull(vals.username)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_karbari);
       return false;
-    if (!MathS.isNullWithText(vals.password, EN_messages.insert_password, ENSnackBarColors.warn))
+    }
+    if (MathS.isNull(vals.password)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_password);
       return false;
-    if (!MathS.isNullWithText(vals.confirmPassword, EN_messages.insert_confirm_pass, ENSnackBarColors.warn))
+    }
+    if (MathS.isNull(vals.confirmPassword)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_confirm_pass);
       return false;
-    if (!MathS.isNullWithText(vals.firstName, EN_messages.insert_name, ENSnackBarColors.warn))
-      return false;
-    if (!MathS.isNullWithText(vals.sureName, EN_messages.insert_surename, ENSnackBarColors.warn))
-      return false;
-    if (!MathS.isNullWithText(vals.mobile, EN_messages.insert_mobile, ENSnackBarColors.warn))
-      return false;
-    if (!MathS.isNullWithText(vals.displayName, EN_messages.insert_showName, ENSnackBarColors.warn))
-      return false;
-    if (!MathS.isNullWithText(vals.selectedRoles[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
-      return false;
-    if (!MathS.isNullWithText(vals.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
-      return false;
-    if (!MathS.isNullWithText(vals.selectedZones[0], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
-      return false;
-    return true;
-  }
-  passAndConfirmPass = (vals: IAddAUserManager) => {
+    }
     if (!MathS.isSameLength(vals.password, vals.confirmPassword)) {
-      this.utilsService.snackBarMessage(EN_messages.passwords_notFetch, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.passwords_notFetch);
       return false;
     }
     if (!MathS.isExactEqual(vals.password, vals.confirmPassword)) {
-      this.utilsService.snackBarMessage(EN_messages.password_notExactly, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+      this.utilsService.snackBarMessageWarn(EN_messages.password_notExactly)
       return false;
     }
-    return true;
-  }
-  vertification = (vals: IAddAUserManager) => {
-    if (!this.passAndConfirmPass(vals))
+    if (MathS.isNull(vals.firstName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_name);
       return false;
-    if (!this.checkEmptyUserInfos(vals))
+    }
+    if (MathS.isNull(vals.sureName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_surename);
       return false;
-    if (!MathS.mobileValidation(vals.mobile))
+    }
+    if (MathS.isNull(vals.mobile)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_mobile);
       return false;
-    if (!MathS.isNull(vals.email))
-      if (!MathS.isEmailValid(vals.email))
-        return false;
+    }
+    if (!MathS.mobileValidation(vals.mobile)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalid_mobile);
+      return false;
+    }
+    if (MathS.isNull(vals.displayName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_showName);
+      return false;
+    }
+    if (!MathS.isNull(vals.email) && !MathS.isEmailValid(vals.email)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalid_email);
+      return false;
+    }
+    if (MathS.isNull(vals.selectedRoles[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_group_access);
+      return false;
+    }
+    if (MathS.isNull(vals.selectedActions[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
+      return false;
+    }
+    if (MathS.isNull(vals.selectedZones[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_roleAccess);
+      return false;
+    }
+
     return true;
   }
   private connectToServer = (vals: IAddAUserManager) => {
-    if (!this.vertification(vals))
+    if (!this.checkEmptyUserInfos(vals))
       return false;
+
     this.interfaceManagerService.POSTBODY(ENInterfaces.userADD, vals).subscribe((res: IResponses) => {
       if (res) {
         this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);

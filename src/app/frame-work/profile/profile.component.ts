@@ -18,7 +18,6 @@ export class ProfileComponent extends FactoryONE {
   _selectCols: IObjectIteratation[];
 
   constructor(
-     
     private profileService: ProfileService,
     private closeTabService: CloseTabService
   ) {
@@ -39,14 +38,8 @@ export class ProfileComponent extends FactoryONE {
 
     this.getSelectedColumns();
   }
-  toDefaultPassword = () => {
-    this.password.confirmPassword = '';
-    this.password.newPassword = '';
-    this.password.oldPassword = '';
-  }
   changePassword = () => {
     this.profileService.changePassword(this.password);
-    this.toDefaultPassword();
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnSelectedProfile();

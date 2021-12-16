@@ -44,21 +44,17 @@ export class ProfileService {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
       return false;
     }
-    if (!MathS.isSameLength(password.newPassword, password.confirmPassword)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.passwords_notFetch);
+    if (!MathS.isExactEqual(password.newPassword, password.confirmPassword)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.password_notExactly);
       return false;
     }
     return true;
   }
-  changePassword = async (password: IChangePassword) => {
-    if (!this.verification(password))
+  changePassword = (password: IChangePassword) => {
+    if (!this.verification(password)) {
       return;
-    if (await this.firstConfirmDialog(EN_messages.confirm_passwordChange)) {
-      return this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe((res: IResponses) => {
-        if (res)
-          this.utilsService.snackBarMessageSuccess(res.message);
-      });
     }
+    this.firstConfirmDialog(EN_messages.confirm_yourPassword, password);
   }
   getMyInfoDataSource = (): Promise<any> => {
     try {
@@ -72,8 +68,8 @@ export class ProfileService {
 
     }
   }
-  firstConfirmDialog = (reason: EN_messages): Promise<any> => {
-    return new Promise((resolve) => {
+  firstConfirmDialog = (reason: EN_messages, password: any): Promise<any> => {
+    return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: '19rem',
         data: {
@@ -84,7 +80,10 @@ export class ProfileService {
       });
       dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          resolve(desc)
+          this.interfaceManagerService.POSTBODY(ENInterfaces.changePassword, password).subscribe((res: IResponses) => {
+            if (res)
+              this.utilsService.snackBarMessageSuccess(res.message);
+          });
         }
       })
     })
