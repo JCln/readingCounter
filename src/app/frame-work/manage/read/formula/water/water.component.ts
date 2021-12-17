@@ -85,13 +85,6 @@ export class WaterComponent extends FactoryONE {
 
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.formulasService.columnAbFormulas();
-    this._selectedColumns = this.formulasService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   private removeRow = async (rowData: string, rowIndex: number) => {

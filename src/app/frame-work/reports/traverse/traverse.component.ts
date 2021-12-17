@@ -39,7 +39,7 @@ export class TraverseComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-     
+
     private closeTabService: CloseTabService
   ) {
     super();
@@ -53,7 +53,6 @@ export class TraverseComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRRTraverse) {
       this.dataSource = this.closeTabService.saveDataForRRTraverse;
-      this.insertSelectedColumns();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -71,15 +70,10 @@ export class TraverseComponent extends FactoryONE {
     if (temp)
       this.connectToServer();
   }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRTraverse();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverse, this.readingReportManagerService.traverseReq);
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    this.insertSelectedColumns();
     this.closeTabService.saveDataForRRTraverse = this.dataSource;
   }
   @Input() get selectedColumns(): any[] {

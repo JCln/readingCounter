@@ -41,7 +41,7 @@ export class DetailsComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-     
+
     private closeTabService: CloseTabService
   ) {
     super();
@@ -54,7 +54,6 @@ export class DetailsComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRRDetails) {
       this.dataSource = this.closeTabService.saveDataForRRDetails;
-      this.insertSelectedColumns();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -76,13 +75,7 @@ export class DetailsComponent extends FactoryONE {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportDETAILSWithParam, this.readingReportManagerService.detailsReq);
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    this.insertSelectedColumns();
     this.closeTabService.saveDataForRRDetails = this.dataSource;
-  }
-
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRDetails();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

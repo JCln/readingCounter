@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthsManagerService } from 'services/auths-manager.service';
+import { BrowserStorageService } from 'services/browser-storage.service';
 import { FormulasService } from 'services/formulas.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
+import { ColumnManager } from 'src/app/classes/column-manager';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-prime-table-editable',
@@ -56,7 +59,9 @@ export class PrimeTableEditableComponent {
     public trackingManagerService: TrackingManagerService,
     public readManagerService: ReadManagerService,
     public formulasService: FormulasService,
-    public authsManagerService: AuthsManagerService
+    public authsManagerService: AuthsManagerService,
+    private browserStorageService: BrowserStorageService,
+    private columnManager: ColumnManager
   ) { }
 
   @Input() get selectedColumns(): any[] {
@@ -102,5 +107,34 @@ export class PrimeTableEditableComponent {
   }
   routeToParent = () => {
     this.routedToParent.emit();
+  }
+  saveColumns() {
+    let newArray: any[] = [];
+    for (let i = 0; i < this._selectCols.length; i++) {
+      let element = this._selectCols[i];
+      element.isSelected = false;
+      newArray.push(element);
+      for (let j = 0; j < this._selectedColumns.length; j++) {
+        if (this._selectCols[i].field == this._selectedColumns[j].field) {
+          element.isSelected = true;
+          newArray[i].isSelected = true;
+        }
+      }
+    }
+
+    this.browserStorageService.set(this._outputFileName, newArray);
+  }
+  ngOnChanges(): void {
+
+    if (!MathS.isNull(this._outputFileName)) {
+
+      if (this.browserStorageService.isExists(this._outputFileName)) {
+        this._selectCols = this.browserStorageService.get(this._outputFileName);
+      }
+      else {
+        this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
+      }
+      this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+    }
   }
 }

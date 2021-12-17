@@ -81,7 +81,6 @@ export class RrLockedComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
-    this.insertSelectedColumns();
     this.setDynamicRages();
   }
   receiveYear = () => {
@@ -97,10 +96,6 @@ export class RrLockedComponent extends FactoryONE {
       this.connectToServer();
   }
 
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRLocked();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.readingReportManagerService.lockedReq);
     this.converts();

@@ -3,22 +3,17 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'امکانات جدید داشبورد',
+        title: 'خروجی جداول',
         isSelected: true
     },
     {
         id: '2',
-        title: 'بخش های گالری، کارکرد بارگذاری، نمایش با رقم قبلی، و دیگر امکانات',
+        title: 'ذخیره ستون ها',
         isSelected: true
     },
     {
         id: '2',
         title: 'رفع برخی ایرادات',
-        isSelected: true
-    },
-    {
-        id: '2',
-        title: 'بهبود عملکرد برنامه',
         isSelected: true
     },
 ]

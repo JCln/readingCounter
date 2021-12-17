@@ -61,12 +61,7 @@ export class Auth2Component extends FactoryONE {
     }
     this.authLevel1Dictionary = await this.authsManagerService.getAuthLevel1Dictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.authsManagerService.columnAuth2();
-    this._selectedColumns = this.authsManagerService.customizeSelectedColumns(this._selectCols);
+    Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');  
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {

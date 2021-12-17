@@ -84,13 +84,6 @@ export class BudgetComponent extends FactoryONE {
 
     Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.formulasService.columnBudgetFormulas();
-    this._selectedColumns = this.formulasService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   private removeRow = async (rowData: string, rowIndex: number) => {

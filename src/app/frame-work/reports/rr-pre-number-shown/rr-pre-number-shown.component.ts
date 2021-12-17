@@ -93,12 +93,7 @@ export class RrPreNumberShownComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
-    this.insertSelectedColumns();
     this.setDynamicRages();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRPreNumberShown();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.readingReportManagerService.preNumberShownReq);

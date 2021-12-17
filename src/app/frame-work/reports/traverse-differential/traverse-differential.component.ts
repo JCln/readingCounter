@@ -57,7 +57,6 @@ export class TraverseDifferentialComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRRTraverseDifferential) {
       this.dataSource = this.closeTabService.saveDataForRRTraverseDifferential;
-      this.insertSelectedColumns();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.getTraverseDiffrentialDictionary();
@@ -81,19 +80,14 @@ export class TraverseDifferentialComponent extends FactoryONE {
     if (this.validation())
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRTraverseDifferential();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportManagerService.trvchReq);
     this.karbariDictionaryByCode = await this.readingReportManagerService.getKarbariDictionaryCode();
-    
+
     if (this.readingReportManagerService.trvchReq.traverseType == 0) {
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryByCode, 'newValue');
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryByCode, 'value');
     }
-    this.insertSelectedColumns();
     this.closeTabService.saveDataForRRTraverseDifferential = this.dataSource;
   }
   @Input() get selectedColumns(): any[] {

@@ -46,14 +46,10 @@ export class TxtOutputComponent extends FactoryONE {
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
     this.makeIDReadable();
     this.defaultAddStatus();
-    this.insertSelectedColumns();
+    // this.insertSelectedColumns(); // more checkups need
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   defaultAddStatus = () => this.newRowLimit = 1;
-  insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnTextOutput();
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
-  }
   testChangedValue() {
     this.newRowLimit = 2;
   }

@@ -45,7 +45,7 @@ export class MasterComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-     
+
     private closeTabService: CloseTabService
   ) {
     super();
@@ -61,7 +61,6 @@ export class MasterComponent extends FactoryONE {
 
     if (this.closeTabService.saveDataForRRMaster) {
       this.dataSource = this.closeTabService.saveDataForRRMaster;
-      this.insertSelectedColumns();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
@@ -80,13 +79,8 @@ export class MasterComponent extends FactoryONE {
     }
   }
 
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRMaster();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportReq);
-    this.insertSelectedColumns();
     this.closeTabService.saveDataForRRMaster = this.dataSource;
   }
   @Input() get selectedColumns(): any[] {

@@ -53,11 +53,6 @@ export class ReadingPeriodKindComponent extends FactoryONE {
       this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.readingPeriodKindAll);
       this.closeTabService.saveDataForReadingPeriodKindManager = this.dataSource;
     }
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnReadingPeriodKind();
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: object) => {

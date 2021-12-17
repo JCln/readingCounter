@@ -23,7 +23,7 @@ export class OffloadedComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-     
+
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,
@@ -46,13 +46,6 @@ export class OffloadedComponent extends FactoryONE {
       this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
       this.closeTabService.saveDataForTrackOffloaded = this.dataSource;
     }
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   downloadOutputSingle = async (row: ITracking) => {
     if (this.envService.hasNextBazdid) {

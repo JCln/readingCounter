@@ -30,11 +30,11 @@ export class ImportedComponent extends FactoryONE {
   ref: DynamicDialogRef;
 
   constructor(
-     
+
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialogService: DialogService,
-    private dialog: MatDialog    
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -52,9 +52,6 @@ export class ImportedComponent extends FactoryONE {
       this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
       this.closeTabService.saveDataForTrackImported = this.dataSource;
     }
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
   }
   onRowEditInit(product: any) {
     console.log(product);
@@ -62,10 +59,6 @@ export class ImportedComponent extends FactoryONE {
   private onRowEditSave(rowData: IEditTracking) {
     this.trackingManagerService.postEditingTrack(rowData);
     this.refreshTable();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   ngOnDestroy(): void {
     if (this.ref) {

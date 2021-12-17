@@ -43,7 +43,7 @@ export class KarkardComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-     
+
     private closeTabService: CloseTabService,
     public route: ActivatedRoute
   ) {
@@ -60,7 +60,6 @@ export class KarkardComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRRKarkard) {
       this.dataSource = this.closeTabService.saveDataForRRKarkard;
-      this.insertSelectedColumns();
       this.setGetRanges();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
@@ -81,15 +80,10 @@ export class KarkardComponent extends FactoryONE {
     if (this.validation())
       document.activeElement.id === 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRKarkard();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListOFFKarkard, this.readingReportManagerService.karkardReq);
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    this.insertSelectedColumns();
     this.setGetRanges();
     this.closeTabService.saveDataForRRKarkard = this.dataSource;
   }

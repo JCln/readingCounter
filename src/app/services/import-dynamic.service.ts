@@ -6,13 +6,13 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENImportDatas,
-    IImportDataResponse,
-    IImportDynamicDefault,
-    IImportSimafaBatchReq,
-    IImportSimafaReadingProgramsReq,
-    IImportSimafaSingleReq,
-    IReadingProgramRes,
+  ENImportDatas,
+  IImportDataResponse,
+  IImportDynamicDefault,
+  IImportSimafaBatchReq,
+  IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
+  IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -35,6 +35,15 @@ export class ImportDynamicService {
     zoneId: 0,
     readingPeriodId: 0,
     year: 1400
+  }
+  _assessAddReq: IAssessAddDtoSimafa = {
+    onOffLoadIds: [],
+    alalHesabPercent: 0,
+    imagePercent: 0,
+    hasPreNumber: true,
+    displayBillId: true,
+    displayRadif: true,
+    counterReaderId: ''
   }
   private _simafaSingleReq: IReadingProgramRes;
   _simafaReadingProgram: IObjectIteratation[] = [
@@ -112,15 +121,6 @@ export class ImportDynamicService {
       { field: 'description', header: 'توضیحات', isSelected: false },
       { field: 'isSelected', header: 'انتخاب', isSelected: true, isBoolean: true }
     ]
-  _assessAddReq: IAssessAddDtoSimafa = {
-    onOffLoadIds: [],
-    alalHesabPercent: 0,
-    imagePercent: 0,
-    hasPreNumber: true,
-    displayBillId: true,
-    displayRadif: true,
-    counterReaderId: ''
-  }
 
   private _errors: IObjectIteratation[] = [
     { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },

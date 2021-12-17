@@ -40,7 +40,7 @@ export class KarkardDaylyComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-     
+
     private closeTabService: CloseTabService
   ) {
     super();
@@ -53,7 +53,6 @@ export class KarkardDaylyComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRRkarkardDaily) {
       this.dataSource = this.closeTabService.saveDataForRRkarkardDaily;
-      this.insertSelectedColumns();
       this.setGetRanges();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
@@ -73,13 +72,8 @@ export class KarkardDaylyComponent extends FactoryONE {
       this.connectToServer();
   }
 
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRKarkardDaly();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.readingReportManagerService.karkardDailyReq);
-    this.insertSelectedColumns();
     this.setGetRanges();
     this.closeTabService.saveDataForRRkarkardDaily = this.dataSource;
   }

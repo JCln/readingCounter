@@ -49,57 +49,8 @@ export class TrackingManagerService {
       { field: 'year', header: 'سال', isSelected: true, readonly: true }
     ];
   }
-  private menuDefault: IObjectIteratation[] = [
-    { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
-    { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-    { field: 'counterReaderName', header: 'مامور', isSelected: true },
-    { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
-    { field: 'listNumber', header: 'ش لیست', isSelected: true },
-    { field: 'itemQuantity', header: 'تعداد', isSelected: true },
-    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-    { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
-    // { field: 'year', header: 'سال', isSelected: false },
-    { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
-    { field: 'fromDate', header: 'از', isSelected: false },
-    { field: 'toDate', header: 'تا', isSelected: false },
-    { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
-    { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isNumber: true },
-    { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
-    { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
-    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-    { field: 'description', header: 'توضیحات', isSelected: false }
-
-  ];
-  private lastStates: IObjectIteratation[] = [
-    { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
-    { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-    { field: 'counterReaderName', header: 'مامور', isSelected: true },
-    { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
-    { field: 'listNumber', header: 'ش لیست', isSelected: true },
-    { field: 'itemQuantity', header: 'تعداد', isSelected: true },
-    { field: 'stateTitle', header: 'مرحله', isSelected: true },
-    { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
-    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-    // { field: 'year', header: 'سال', isSelected: false },
-    { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
-    { field: 'fromDate', header: 'از', isSelected: false },
-    { field: 'toDate', header: 'تا', isSelected: false },
-    { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
-    { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false },
-    { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-    { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
-    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-    { field: 'description', header: 'توضیحات', isSelected: false }
-    // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }
-  ]
-  private offloadZoneIdDictionary: any = [];
-  columnSelectedMenuDefault = (): IObjectIteratation[] => {
-    return this.menuDefault;
-  }
+ 
+  private offloadZoneIdDictionary: any = [];   
   columnSelectedImportedList = (): IObjectIteratation[] => {
     return [
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
@@ -137,9 +88,6 @@ export class TrackingManagerService {
       { field: 'isBazdid', header: 'بازدید', isSelected: true, readonly: true, isBoolean: true },
       { field: 'isRoosta', header: 'روستا', isSelected: true, readonly: true, isBoolean: true }
     ];
-  }
-  columnlastStates = (): IObjectIteratation[] => {
-    return this.lastStates;
   }
   getOffloadModifyType = (): OffloadModify[] => {
     return [

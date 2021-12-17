@@ -25,7 +25,7 @@ export class DisposalHoursComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-     
+
     private closeTabService: CloseTabService,
     public route: ActivatedRoute
   ) {
@@ -39,7 +39,6 @@ export class DisposalHoursComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRRDisposalHours) {
       this.dataSource = this.closeTabService.saveDataForRRDisposalHours;
-      this.insertSelectedColumns();
     }
 
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -56,12 +55,7 @@ export class DisposalHoursComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalHours, this.readingReportManagerService.disposalhoursReq);
-    this.insertSelectedColumns();
     this.closeTabService.saveDataForRRDisposalHours = this.dataSource;
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRDisposalHours();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

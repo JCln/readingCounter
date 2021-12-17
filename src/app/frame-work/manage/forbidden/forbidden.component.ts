@@ -36,10 +36,7 @@ export class ForbiddenComponent extends FactoryONE {
     this.forbiddenService.setDynamicPartRanges(this.dataSource);
 
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');    
   }
   connectToServer = async () => {
     this.dataSource = await this.forbiddenService.getDataSource();
@@ -60,11 +57,7 @@ export class ForbiddenComponent extends FactoryONE {
     const temp = this.forbiddenService.verificationForbidden(this.forbiddenService.forbiddenReq);
     if (temp)
       this.connectToServer();
-  }
-  private insertSelectedColumns = () => {
-    this._selectCols = this.forbiddenService.columnSelectedMenuDefault();
-    this._selectedColumns = this.forbiddenService.customizeSelectedColumns(this._selectCols);
-  }
+  } 
   backToPrevious = () => {
     this.forbiddenService.backToParent();
   }

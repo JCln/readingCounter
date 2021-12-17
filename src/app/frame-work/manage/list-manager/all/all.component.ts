@@ -70,18 +70,13 @@ export class AllComponent extends FactoryONE {
       this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    }    
+    }
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
     this.setDynamicRages();
     this.makeHadPicturesToBoolean();
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.listManagerService.columnLMAll();
-    this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
   }
   isFromOffloadPage = () => {
     this.trackId = this.route.snapshot.paramMap.get('trackingId');

@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { element } from 'protractor';
+import { BrowserStorageService } from 'services/browser-storage.service';
 import { DataMiningAnalysesService } from 'services/data-mining-analyses.service';
 import { ForbiddenService } from 'services/forbidden.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
@@ -9,13 +12,16 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
 import { SearchService } from 'services/search.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { UsersAllService } from 'services/users-all.service';
+import { ColumnManager } from 'src/app/classes/column-manager';
+import { MathS } from 'src/app/classes/math-s';
+
 
 @Component({
   selector: 'app-prime-table',
   templateUrl: './prime-table.component.html',
   styleUrls: ['./prime-table.component.scss']
 })
-export class PrimeTableComponent {
+export class PrimeTableComponent implements OnChanges {
   @Input() dataSource: any[] = [];
   @Input() _selectCols: any = [];
   @Input() _selectedColumns: any[];
@@ -85,7 +91,9 @@ export class PrimeTableComponent {
     public readManagerService: ReadManagerService,
     public readingReportManagerService: ReadingReportManagerService,
     public importDynamicService: ImportDynamicService,
-    public dataMiningAnalysesService: DataMiningAnalysesService
+    public dataMiningAnalysesService: DataMiningAnalysesService,
+    public browserStorageService: BrowserStorageService,
+    private columnManager: ColumnManager
   ) { }
 
   @Input() get selectedColumns(): any[] {
@@ -98,6 +106,49 @@ export class PrimeTableComponent {
 
   refreshTable() {
     this.refreshedTable.emit(true);
+  }
+  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
+    // convert all items to false
+    this[variableName].forEach(old => {
+      old.isSelected = false;
+    })
+
+    // merge new values
+    this[variableName].find(old => {
+      newValues.find(newVals => {
+        if (newVals.field == old.field)
+          old.isSelected = true;
+      })
+    })
+  }
+  saveColumns() {
+    let newArray: any[] = [];
+    for (let i = 0; i < this._selectCols.length; i++) {
+      let element = this._selectCols[i];
+      element.isSelected = false;
+      newArray.push(element);
+      for (let j = 0; j < this._selectedColumns.length; j++) {
+        if (this._selectCols[i].field == this._selectedColumns[j].field) {
+          element.isSelected = true;
+          newArray[i].isSelected = true;
+        }
+      }
+    }
+
+    this.browserStorageService.set(this._outputFileName, newArray);
+  }
+  ngOnChanges(): void {
+
+    if (!MathS.isNull(this._outputFileName)) {
+
+      if (this.browserStorageService.isExists(this._outputFileName)) {
+        this._selectCols = this.browserStorageService.get(this._outputFileName);
+      }
+      else {
+        this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
+      }
+      this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+    }
   }
   forceOffload = (dataSource: object, ri: number) => {
     this.forcedOffload.emit({ dataSource, ri });

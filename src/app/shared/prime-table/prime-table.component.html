@@ -89,6 +89,9 @@
                     class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
+                <i class="tooltip _circle_border p_icons _save_columns fa fa-save" (click)="saveColumns()">
+                    <div class="tooltip_text">ذخیره ستونها</div>
+                </i>
             </div>
             <div class="left_side">
                 <i *ngIf="_checkUpName == 'assess_pre' && _canShowButton" (click)="registerAssessAdd()"
@@ -288,8 +291,15 @@
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
-            <td *ngIf="(_outputFileName == 'allReads')&& !_allComponentIsModify"
-                (click)="searchService.routeToWoui(dataSource)">
+            <td *ngIf="(
+                _outputFileName == 'search-pro' 
+            || _outputFileName == 'search-mosh'
+            || _outputFileName == 'rr-details'
+            || _outputFileName == 'rr-locked'
+            || _outputFileName == 'rr-preNumber'
+            || _outputFileName == 'trv'
+            || _outputFileName == 'trv-diff'            
+            )&& !_allComponentIsModify" (click)="searchService.routeToWoui(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>

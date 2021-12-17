@@ -23,7 +23,7 @@ export class UsersAllComponent extends FactoryONE {
 
   constructor(
     private route: ActivatedRoute,
-     
+
     private router: Router,
     private closeTabService: CloseTabService,
     public usersAllService: UsersAllService
@@ -49,12 +49,6 @@ export class UsersAllComponent extends FactoryONE {
     else {
       this.dataSource = this.closeTabService.saveDataForAllUsers;
     }
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.usersAllService.columnUserAllUsers();
-    this._selectedColumns = this.usersAllService.customizeSelectedColumns(this._selectCols);
   }
   ActivateUser = (dataSource: IUserManager) => {
     this.usersAllService.Activate(dataSource['dataSource'].id);

@@ -63,11 +63,6 @@ export class CounterReportComponent extends FactoryONE {
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
 
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnCounterReport();
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
