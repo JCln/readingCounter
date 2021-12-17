@@ -19,7 +19,7 @@
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <p-multiSelect
-            *ngIf="_multiSelectEnable && _checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'simpleSearch' "
+            *ngIf="_multiSelectEnable && (_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'simpleSearch') "
             [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="searchService.setColumnsChanges(searchService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
@@ -51,9 +51,20 @@
             optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
             placeholder="ستون ها">
         </p-multiSelect>
-        <p-multiSelect
-            *ngIf="_multiSelectEnable && (_checkUpName == 'simafa-readingProg' || _checkUpName == 'user-loggins')"
-            [options]="_selectCols" [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
+        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'dm-analysis'" [options]="_selectCols"
+            [(ngModel)]="selectedColumns"
+            (ngModelChange)="dataMiningAnalysesService.setColumnsChanges(dataMiningAnalysesService.ENSelectedColumnVariables.selectedDMAnalyze ,$event)"
+            optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
+            placeholder="ستون ها">
+        </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && (_checkUpName == 'simafa-readingProg')" [options]="_selectCols"
+            [(ngModel)]="selectedColumns"
+            (ngModelChange)="importDynamicService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+            name={{_checkUpName}} optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده"
+            [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && (_checkUpName == 'user-loggins')" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
 

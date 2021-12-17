@@ -16,9 +16,14 @@
             (ngModelChange)="formulasService.setColumnsChanges(formulasService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
+        <p-multiSelect *ngIf="_multiSelectEnable && (_checkUpName == 'counterState')" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
         <p-multiSelect
-            *ngIf="_multiSelectEnable && (_checkUpName == 'auth2' || _checkUpName == 'auth3' || _checkUpName == 'auth4' || _checkUpName == 'counterState')"
-            [options]="_selectCols" [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
+            *ngIf="_multiSelectEnable && (_checkUpName == 'auth1' || _checkUpName == 'auth2' || _checkUpName == 'auth3' || _checkUpName == 'auth4')"
+            [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
+            (ngModelChange)="authsManagerService.setColumnsChanges(authsManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
         <div class="header_icons_wrap">

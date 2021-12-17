@@ -5,11 +5,11 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENSelectedColumnVariables,
-    IMasrafStates,
-    IObjectIteratation,
-    ISearchInOrderTo,
-    ITitleValue,
+  ENSelectedColumnVariables,
+  IMasrafStates,
+  IObjectIteratation,
+  ISearchInOrderTo,
+  ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -472,12 +472,6 @@ export class SearchService {
     dataSource.forEach(item => {
       if (item.newRate > 0)
         item.newRate = parseFloat(MathS.getRange(item.newRate))
-      if (item.gisAccuracy)
-        item.gisAccuracy = MathS.getRange(item.gisAccuracy)
-      if (item.x)
-        item.x = MathS.getRange(item.x)
-      if (item.y)
-        item.y = MathS.getRange(item.y)
       item.preAverage = +MathS.getRange(item.preAverage);
     })
   }

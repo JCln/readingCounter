@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AuthsManagerService } from 'services/auths-manager.service';
 import { FormulasService } from 'services/formulas.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ReadManagerService } from 'services/read-manager.service';
@@ -54,7 +55,8 @@ export class PrimeTableEditableComponent {
     public outputManagerService: OutputManagerService,
     public trackingManagerService: TrackingManagerService,
     public readManagerService: ReadManagerService,
-    public formulasService: FormulasService
+    public formulasService: FormulasService,
+    public authsManagerService: AuthsManagerService
   ) { }
 
   @Input() get selectedColumns(): any[] {

@@ -239,9 +239,10 @@ export enum ENSelectedColumnVariables {
     selectedUsersAll = '_usersAll',
     selectedListManagerAll = '_listManagerAll',
     selectedListManagerAssess = '_assessPreColumns',
-    selectedListManagerMosh = '_searchReqMosh',
-    selectedListManagerPro = '_searchReqPro',
+    selectedListManagerMosh = '_searchMosh',
+    selectedListManagerPro = '_searchPro',
     selectedSearchManagerSimple = '_searchSimple',
+    selectedAuth1 = '_auth1',
     selectedAuth2 = '_auth2',
     selectedAuth3 = '_auth3',
     selectedAuth4 = '_auth4',
@@ -268,6 +269,7 @@ export enum ENSelectedColumnVariables {
     selectedTextOutput = '_textOutput',
     selectedKarbari = '_karbari',
     selectedForbidden = '_forbidden',
+    selectedSimafaReadingProgram ='_simafaReadingProgram',
 }
 export enum ENOffloadModifyType {
     callAnnounce = 'اعلام تلفنی',

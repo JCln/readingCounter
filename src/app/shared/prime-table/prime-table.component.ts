@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DataMiningAnalysesService } from 'services/data-mining-analyses.service';
 import { ForbiddenService } from 'services/forbidden.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { ListManagerService } from 'services/list-manager.service';
@@ -83,7 +84,8 @@ export class PrimeTableComponent {
     public forbiddenService: ForbiddenService,
     public readManagerService: ReadManagerService,
     public readingReportManagerService: ReadingReportManagerService,
-    public importDynamicService: ImportDynamicService
+    public importDynamicService: ImportDynamicService,
+    public dataMiningAnalysesService: DataMiningAnalysesService
   ) { }
 
   @Input() get selectedColumns(): any[] {

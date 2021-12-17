@@ -211,12 +211,6 @@ export class ListManagerService {
     dataSource.forEach(item => {
       if (item.newRate > 0)
         item.newRate = parseFloat(MathS.getRange(item.newRate))
-      if (item.gisAccuracy)
-        item.gisAccuracy = MathS.getRange(item.gisAccuracy)
-      if (item.x)
-        item.x = MathS.getRange(item.x)
-      if (item.y)
-        item.y = MathS.getRange(item.y)
     })
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {

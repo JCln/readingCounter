@@ -26,7 +26,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
     }
   ]
   dataSource: IReadingReportTraverseDifferentialRes[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
+  karbariDictionaryByCode: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -42,7 +42,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-     
+
     public route: ActivatedRoute,
     private closeTabService: CloseTabService
   ) {
@@ -87,8 +87,12 @@ export class TraverseDifferentialComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportManagerService.trvchReq);
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.karbariDictionaryByCode = await this.readingReportManagerService.getKarbariDictionaryCode();
+    
+    if (this.readingReportManagerService.trvchReq.traverseType == 0) {
+      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryByCode, 'newValue');
+      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryByCode, 'value');
+    }
     this.insertSelectedColumns();
     this.closeTabService.saveDataForRRTraverseDifferential = this.dataSource;
   }

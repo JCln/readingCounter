@@ -151,10 +151,6 @@ export class ReadManagerService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
     }
-    if (MathS.isNull(dataSource.clientOrder)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_clientOrder);
-      return false;
-    }
     if (MathS.isNullZero(dataSource.moshtarakinId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_moshtarakinId);
       return false;

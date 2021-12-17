@@ -30,10 +30,10 @@ export class DictionaryWrapperService {
   private counterStateByZoneIdDictionary: any = [];
   private counterStateByCodeDictionary: any = [];
   private periodKindDictionary: any = [];
-  private karbariDictionary: any = [];
   private qotrDictionary: any = [];
   private roleDictionary: any = [];
-
+  
+  private karbariDictionary: any = [];
   private karbariCodeDictionary: any = [];
   private traverseDifferentialDictionary: any = [];
 
