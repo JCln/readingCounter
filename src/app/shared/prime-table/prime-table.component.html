@@ -5,66 +5,9 @@
     [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)">
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
 
-        <p-multiSelect
-            *ngIf="_multiSelectEnable && (_checkUpName == 'rr-details' || _checkUpName == 'rr-karkard'|| _checkUpName ==  'rr-traverse'
-            || _checkUpName == 'rr-karkardDaily' || _checkUpName == 'rr-disposalHs' || _checkUpName == 'rr-traverseDiff' || _checkUpName == 'rr-analyzePrfm' || _checkUpName == 'rr-offload-karkard' || _checkUpName == 'rr-locked' || _checkUpName == 'rr-preNumber' )"
-            [options]=" _selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="readingReportManagerService.setColumnsChanges(readingReportManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect
-            *ngIf="_multiSelectEnable && _checkUpName == 'reading' || _checkUpName == 'finished'|| _checkUpName == 'offloaded'|| _checkUpName == 'loaded'|| _checkUpName == 'imported' || _checkUpName == 'lastStates' "
-            [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="trackingManagerService.setColumnsChanges(trackingManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect
-            *ngIf="_multiSelectEnable && (_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'simpleSearch') "
-            [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="searchService.setColumnsChanges(searchService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'allComponent'" [options]="_selectCols"
-            [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="listManagerService.setColumnsChanges(listManagerService.ENSelectedColumnVariables.selectedListManagerAll ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'readingConfig'" [options]="_selectCols"
-            [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="readManagerService.setColumnsChanges(readManagerService.ENSelectedColumnVariables.selectedReadingConfigDefault ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'assess_pre'" [options]="_selectCols"
-            [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="readManagerService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'userAll'" [options]="_selectCols"
-            [(ngModel)]="selectedColumns"
-            (ngModelChange)="usersAllService.setColumnsChanges(usersAllService.ENSelectedColumnVariables.selectedUsersAll ,$event)"
-            optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
-            placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'forbidden'" [options]="_selectCols"
-            [(ngModel)]="selectedColumns"
-            (ngModelChange)="forbiddenService.setColumnsChanges(forbiddenService.ENSelectedColumnVariables.selectedForbidden ,$event)"
-            optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
-            placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && _checkUpName == 'dm-analysis'" [options]="_selectCols"
-            [(ngModel)]="selectedColumns"
-            (ngModelChange)="dataMiningAnalysesService.setColumnsChanges(dataMiningAnalysesService.ENSelectedColumnVariables.selectedDMAnalyze ,$event)"
-            optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}"
-            placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && (_checkUpName == 'simafa-readingProg')" [options]="_selectCols"
-            [(ngModel)]="selectedColumns"
-            (ngModelChange)="importDynamicService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            name={{_checkUpName}} optionLabel="header" selectedItemsLabel="{0} ستون انتخاب شده"
-            [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && (_checkUpName == 'user-loggins')" [options]="_selectCols"
-            [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
+        <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            optionLabel="header"
+            (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
 
@@ -89,9 +32,14 @@
                     class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
-                <i class="tooltip _circle_border p_icons _save_columns fa fa-save" (click)="saveColumns()">
-                    <div class="tooltip_text">ذخیره ستونها</div>
-                </i>
+                <button class="fa_icons _circle_border p_icons _save_columns" *ngIf="_hasSaveColumns">
+                    <i *ngIf="_showSavedColumnButton" (click)="saveColumns()" class="tooltip fa fa-save">
+                        <div class="tooltip_text">ذخیره ستونها</div>
+                    </i>
+                    <i *ngIf="!_showSavedColumnButton" (click)="resetSavedColumns()" class="tooltip pi pi-refresh">
+                        <div class="tooltip_text">بازنشانی ستونها</div>
+                    </i>
+                </button>
             </div>
             <div class="left_side">
                 <i *ngIf="_checkUpName == 'assess_pre' && _canShowButton" (click)="registerAssessAdd()"

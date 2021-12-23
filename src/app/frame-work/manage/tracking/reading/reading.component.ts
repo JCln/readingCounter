@@ -8,7 +8,6 @@ import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { UtilsService } from 'services/utils.service';
-import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
@@ -21,7 +20,6 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
 })
 export class ReadingComponent extends FactoryONE {
 
-
   dataSource: ITracking[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
@@ -32,8 +30,7 @@ export class ReadingComponent extends FactoryONE {
     private utilsService: UtilsService,
     private dialog: MatDialog,
     public interactionService: InteractionService,
-    public browserStorageService: BrowserStorageService,
-    private ColumnManager: ColumnManager
+    public browserStorageService: BrowserStorageService
   ) {
     super();
   }

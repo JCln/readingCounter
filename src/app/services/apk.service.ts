@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSnackBarColors, ENSnackBarTimes, IObjectIteratation } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
@@ -20,14 +20,6 @@ export class ApkService {
     private snackWrapperService: SnackWrapperService
   ) { }
 
-  /* COLUMNS */
-  columnAPK = (): IObjectIteratation[] => {
-    return [
-      { field: 'versionName', header: 'نام نسخه', isSelected: true },
-      { field: 'versionCode', header: 'نسخه', isSelected: true },
-      // { field: 'fileRepositoryId', header: 'دانلود فایل', isSelected: true }
-    ]
-  }
   getDataSource = (): any => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GET(ENInterfaces.APKPreList).subscribe(res => {

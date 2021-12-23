@@ -1,10 +1,12 @@
 <app-prime-table     
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
+    [_hasSaveColumns]=false
     [dataSource]="dataSource"
-    [_outputEnabled]=false 
-    [_outputFileName]="'errors'"
+    [_outputEnabled]=false    
+    [_hasSaveColumns]=false
     [_checkUpName]="'errors'" 
+    [_outputFileName]="'errors'"    
     (refreshedTable)="refreshTable()"
  > 
 </app-prime-table>

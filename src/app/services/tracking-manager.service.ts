@@ -23,7 +23,7 @@ import { UtilsService } from './utils.service';
 })
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-
+  private offloadZoneIdDictionary: any = [];
 
   columnDefColumns = (): IObjectIteratation[] => [
     { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
@@ -49,8 +49,7 @@ export class TrackingManagerService {
       { field: 'year', header: 'سال', isSelected: true, readonly: true }
     ];
   }
- 
-  private offloadZoneIdDictionary: any = [];   
+
   columnSelectedImportedList = (): IObjectIteratation[] => {
     return [
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },

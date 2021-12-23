@@ -234,12 +234,17 @@ export enum ENThemeColor {
 }
 export enum ENSelectedColumnVariables {
     selectedSimafaBatch = '_simafaBatch',
-    selectedTracks = 'menuDefault',
+    selectedTrackReading = 'reading',
+    selectedTrackLoaded = 'loaded',
+    selectedTrackFinished = 'finished',
+    selectedTrackOffloaded = 'offloaded',
+    selectedTrackImported = 'imported',
     selectedlastStates = 'lastStates',
     selectedUsersAll = '_usersAll',
     selectedListManagerAll = '_listManagerAll',
     selectedListManagerAssess = '_assessPreColumns',
     selectedListManagerMosh = '_searchMosh',
+    selectedCounterState = '_counterState',
     selectedListManagerPro = '_searchPro',
     selectedSearchManagerSimple = '_searchSimple',
     selectedAuth1 = '_auth1',
@@ -269,7 +274,8 @@ export enum ENSelectedColumnVariables {
     selectedTextOutput = '_textOutput',
     selectedKarbari = '_karbari',
     selectedForbidden = '_forbidden',
-    selectedSimafaReadingProgram ='_simafaReadingProgram',
+    selectedErrors = '_errors',
+    selectedSimafaReadingProgram = '_simafaReadingProgram',
 }
 export enum ENOffloadModifyType {
     callAnnounce = 'اعلام تلفنی',

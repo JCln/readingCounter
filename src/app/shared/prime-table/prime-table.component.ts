@@ -1,17 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { element } from 'protractor';
 import { BrowserStorageService } from 'services/browser-storage.service';
-import { DataMiningAnalysesService } from 'services/data-mining-analyses.service';
-import { ForbiddenService } from 'services/forbidden.service';
-import { ImportDynamicService } from 'services/import-dynamic.service';
-import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { ReadManagerService } from 'services/read-manager.service';
-import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { SearchService } from 'services/search.service';
-import { TrackingManagerService } from 'services/tracking-manager.service';
-import { UsersAllService } from 'services/users-all.service';
+import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { MathS } from 'src/app/classes/math-s';
 
@@ -22,6 +16,9 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./prime-table.component.scss']
 })
 export class PrimeTableComponent implements OnChanges {
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
+
+
   @Input() dataSource: any[] = [];
   @Input() _selectCols: any = [];
   @Input() _selectedColumns: any[];
@@ -46,6 +43,7 @@ export class PrimeTableComponent implements OnChanges {
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
   @Input() _isCustomSort: boolean = false;
+  @Input() _hasSaveColumns: boolean = true;
 
   @Output() customedSort = new EventEmitter<any>();
   @Output() collapsed = new EventEmitter<any>();
@@ -80,20 +78,14 @@ export class PrimeTableComponent implements OnChanges {
   @Output() toPredStatus = new EventEmitter<any>();
   @Output() routedToSingle = new EventEmitter<any>();
   @Output() routedToBatch = new EventEmitter<any>();
+  _showSavedColumnButton: boolean;
 
   constructor(
     public outputManagerService: OutputManagerService,
-    public trackingManagerService: TrackingManagerService,
-    public searchService: SearchService,
-    public listManagerService: ListManagerService,
-    public usersAllService: UsersAllService,
-    public forbiddenService: ForbiddenService,
-    public readManagerService: ReadManagerService,
-    public readingReportManagerService: ReadingReportManagerService,
-    public importDynamicService: ImportDynamicService,
-    public dataMiningAnalysesService: DataMiningAnalysesService,
     public browserStorageService: BrowserStorageService,
-    private columnManager: ColumnManager
+    public searchService: SearchService,
+    public columnManager: ColumnManager,
+    private utilsService: UtilsService
   ) { }
 
   @Input() get selectedColumns(): any[] {
@@ -106,20 +98,6 @@ export class PrimeTableComponent implements OnChanges {
 
   refreshTable() {
     this.refreshedTable.emit(true);
-  }
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
   }
   saveColumns() {
     let newArray: any[] = [];
@@ -136,18 +114,32 @@ export class PrimeTableComponent implements OnChanges {
     }
 
     this.browserStorageService.set(this._outputFileName, newArray);
+    this.utilsService.snackBarMessageSuccess(EN_messages.tableSaved);
+    if (!this.browserStorageService.isExists(this._outputFileName))
+      this._showSavedColumnButton = true;
   }
   ngOnChanges(): void {
-
     if (!MathS.isNull(this._outputFileName)) {
 
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.get(this._outputFileName);
+        this._showSavedColumnButton = false;
       }
       else {
         this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
+        this._showSavedColumnButton = true;
       }
       this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+    }
+  }
+
+  resetSavedColumns = () => {
+    if (!MathS.isNull(this._outputFileName)) {
+      if (this.browserStorageService.isExists(this._outputFileName)) {
+        this.browserStorageService.removeLocal(this._outputFileName);
+        this._showSavedColumnButton = true;
+        this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
+      }
     }
   }
   forceOffload = (dataSource: object, ri: number) => {

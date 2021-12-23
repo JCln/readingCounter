@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AuthsManagerService } from 'services/auths-manager.service';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { BrowserStorageService } from 'services/browser-storage.service';
-import { FormulasService } from 'services/formulas.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { ReadManagerService } from 'services/read-manager.service';
-import { TrackingManagerService } from 'services/tracking-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { MathS } from 'src/app/classes/math-s';
 
@@ -14,6 +13,8 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./prime-table-editable.component.scss']
 })
 export class PrimeTableEditableComponent {
+  ENSelectedColumnVariables = ENSelectedColumnVariables;
+
   @Input() dataSource: any[] = [];
   @Input() _selectCols: any = [];
   @Input() _selectedColumns: any[];
@@ -53,15 +54,15 @@ export class PrimeTableEditableComponent {
   @Output() getedExcelSample = new EventEmitter<any>();
   @Output() openedAddExcelDialog = new EventEmitter<any>();
   @Output() routedToParent = new EventEmitter<any>();
+  @Input() _hasSaveColumns: boolean = true;
+
+  _showSavedColumnButton: boolean = false;
 
   constructor(
     public outputManagerService: OutputManagerService,
-    public trackingManagerService: TrackingManagerService,
-    public readManagerService: ReadManagerService,
-    public formulasService: FormulasService,
-    public authsManagerService: AuthsManagerService,
     private browserStorageService: BrowserStorageService,
-    private columnManager: ColumnManager
+    public columnManager: ColumnManager,
+    private utilsService: UtilsService
   ) { }
 
   @Input() get selectedColumns(): any[] {
@@ -123,18 +124,32 @@ export class PrimeTableEditableComponent {
     }
 
     this.browserStorageService.set(this._outputFileName, newArray);
+    this.utilsService.snackBarMessageSuccess(EN_messages.tableSaved);
+    if (!this.browserStorageService.isExists(this._outputFileName))
+      this._showSavedColumnButton = true;
   }
   ngOnChanges(): void {
-
     if (!MathS.isNull(this._outputFileName)) {
 
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.get(this._outputFileName);
+        this._showSavedColumnButton = false;
       }
       else {
         this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
+        this._showSavedColumnButton = true;
       }
       this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+    }
+  }
+
+  resetSavedColumns = () => {
+    if (!MathS.isNull(this._outputFileName)) {
+      if (this.browserStorageService.isExists(this._outputFileName)) {
+        this.browserStorageService.removeLocal(this._outputFileName);
+        this._showSavedColumnButton = true;
+        this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
+      }
     }
   }
 }

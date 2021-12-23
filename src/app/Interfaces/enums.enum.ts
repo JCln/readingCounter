@@ -94,6 +94,9 @@ export enum EN_messages {
     format_imagePercent = 'فرمت درصد تصویر اشتباه است',
     format_alalhesab = 'فرمت علی‌الحساب اشتباه است',
 
+    tableSaved = 'ذخیره ستونها انجام شد',
+    tableResetSaved = 'بازنشانی ستونها انجام شد',
+
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
 

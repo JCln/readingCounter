@@ -5,27 +5,12 @@
     dataKey="id" #dtable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
-        <p-multiSelect *ngIf="_multiSelectEnable && (_checkUpName=='karbari' || _checkUpName=='periodKind')"
-            [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="readManagerService.setColumnsChanges(readManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
+        <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
+            optionLabel="header"
+            (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
-        <p-multiSelect
-            *ngIf="_multiSelectEnable && (_checkUpName=='abBaha' || _checkUpName=='tabsare3' || _checkUpName=='Budget')"
-            [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="formulasService.setColumnsChanges(formulasService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect *ngIf="_multiSelectEnable && (_checkUpName == 'counterState')" [options]="_selectCols"
-            [(ngModel)]="selectedColumns" name={{_checkUpName}} optionLabel="header"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <p-multiSelect
-            *ngIf="_multiSelectEnable && (_checkUpName == 'auth1' || _checkUpName == 'auth2' || _checkUpName == 'auth3' || _checkUpName == 'auth4')"
-            [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            (ngModelChange)="authsManagerService.setColumnsChanges(authsManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
+
         <div class="header_icons_wrap">
             <div class="right_side">
                 <i *ngIf="_checkUpName == 'zoneBound' || _checkUpName == 'zone' || _checkUpName == 'region' || _checkUpName == 'province' || _checkUpName == 'country' || _checkUpName == 'karbari' || _checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3' || _checkUpName == 'tabsare2' ||  _checkUpName == 'auth1'||  _checkUpName == 'auth2'||  _checkUpName == 'auth3'||  _checkUpName == 'auth4'|| _checkUpName=='periodKind' "
@@ -55,9 +40,14 @@
                     (click)="getExcelSample()" class="tooltip _circle_border _xlsx_download pi pi-download">
                     <div class="tooltip_text">دانلود نمونه فایلExcel</div>
                 </i>
-                <i class="tooltip _circle_border p_icons _save_columns fa fa-save" (click)="saveColumns()">
-                    <div class="tooltip_text">ذخیره ستونها</div>
-                </i>
+                <button class="fa_icons _circle_border p_icons _save_columns" *ngIf="_hasSaveColumns">
+                    <i *ngIf="_showSavedColumnButton" (click)="saveColumns()" class="tooltip fa fa-save">
+                        <div class="tooltip_text">ذخیره ستونها</div>
+                    </i>
+                    <i *ngIf="!_showSavedColumnButton" (click)="resetSavedColumns()" class="tooltip pi pi-refresh">
+                        <div class="tooltip_text">بازنشانی ستونها</div>
+                    </i>
+                </button>
             </div>
             <div class="left_side">
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
