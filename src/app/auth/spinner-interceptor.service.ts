@@ -88,7 +88,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
   }
   showSpinnerConsiderExceptions = () => {
     const url = this.router.url;
-    if (url === '/wr/db' || url === '/wr/m/r/apk') {
+    if (url === '/wr/db' || url === '/wr/m/r/apk' || url === '/wr/offline/txtout') {
       this.spinnerWrapperService.startLoadingSmallSpinner();
     }
     else {

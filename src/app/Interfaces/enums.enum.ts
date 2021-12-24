@@ -30,6 +30,7 @@ export enum EN_messages {
     insert_confirm_pass = 'تکرار گذرواژه را وارد نمایید',
     insert_name = 'نام را وارد نمایید',
     insert_surename = 'نام خانوادگی را وارد نمایید',
+    insert_userName = 'نام کاربری را وارد نمایید',
     insert_mobile = 'شماره موبایل را وارد نمایید',
     insert_showName = 'نام قابل نمایش را وارد نمایید',
     insert_work = 'خدمتی را مشخص نمایید',
@@ -50,7 +51,7 @@ export enum EN_messages {
     insert_title_route = 'عنوان مسیر را وارد نمایید',
     insert_rrDetails = 'گزارش بازرسی',
     insert_searchType = 'نوع جستجو وارد نمایید',
-    insert_value = 'مقدار وارد نمایید',
+    insert_value = 'مقداری وارد نمایید',
     insert_karbariMoshtarakinCode = 'کاربری مشترکین را وارد نمایید',
     insert_moshtarakinId = 'کد مشترکین را وارد نمایید',
     insert_counterState = 'وضعیت کنتور را مشخص نمایید',
@@ -76,6 +77,7 @@ export enum EN_messages {
     format_invalid_trackNumbersLength = 'تعداد ارقام شماره پیگیری اشتباه است',
     format_invalid_numberLengths = 'تعداد ارقام وارد شده اشتباه است',
     should_insert_APK = 'فرمت ارسالی باید فایل apk باشد',
+    should_insert_ZIP = 'فرمت ارسالی باید فایل zip باشد',
     format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
     format_invalid = 'فرمت ناصحیح است',
     format_invalid_excel = 'فرمت ارسالی باید فایل excel باشد',
@@ -96,6 +98,7 @@ export enum EN_messages {
 
     tableSaved = 'ذخیره ستونها انجام شد',
     tableResetSaved = 'بازنشانی ستونها انجام شد',
+    done = 'انجام شد',
 
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',

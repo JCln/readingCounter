@@ -122,11 +122,11 @@ export class ImportDynamicService {
       { field: 'isSelected', header: 'انتخاب', isSelected: true, isBoolean: true }
     ]
 
- 
+
   importDynamicReq: IImportDynamicDefault = {
     fromEshterak: '',
     toEshterak: '',
-    zoneId: 0,
+    zoneId: null,
     alalHesabPercent: 0,
     imagePercent: 0,
     hasPreNumber: false,
@@ -698,6 +698,9 @@ export class ImportDynamicService {
   }
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
+  }
+  snackMessage = (message: EN_messages) => {
+    this.utilsService.snackBarMessageWarn(message);
   }
 
 }

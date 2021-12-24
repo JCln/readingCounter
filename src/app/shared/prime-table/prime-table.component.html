@@ -32,14 +32,14 @@
                     class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
-                <button class="fa_icons _circle_border p_icons _save_columns" *ngIf="_hasSaveColumns">
-                    <i *ngIf="_showSavedColumnButton" (click)="saveColumns()" class="tooltip fa fa-save">
-                        <div class="tooltip_text">ذخیره ستونها</div>
-                    </i>
-                    <i *ngIf="!_showSavedColumnButton" (click)="resetSavedColumns()" class="tooltip pi pi-refresh">
-                        <div class="tooltip_text">بازنشانی ستونها</div>
-                    </i>
-                </button>
+                <i *ngIf="_hasSaveColumns" (click)="saveColumns()"
+                    class="tooltip fa_icons _circle_border p_icons _save_columns fa fa-save">
+                    <div class="tooltip_text">ذخیره ستونها</div>
+                </i>
+                <i *ngIf="_hasSaveColumns" (click)="resetSavedColumns()"
+                    class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-refresh">
+                    <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
+                </i>
             </div>
             <div class="left_side">
                 <i *ngIf="_checkUpName == 'assess_pre' && _canShowButton" (click)="registerAssessAdd()"

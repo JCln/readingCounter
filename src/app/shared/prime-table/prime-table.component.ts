@@ -141,6 +141,8 @@ export class PrimeTableComponent implements OnChanges {
         this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
       }
     }
+    else
+      this.utilsService.snackBarMessageWarn(EN_messages.done);
   }
   forceOffload = (dataSource: object, ri: number) => {
     this.forcedOffload.emit({ dataSource, ri });

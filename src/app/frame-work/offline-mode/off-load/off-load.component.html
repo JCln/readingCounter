@@ -1,0 +1,20 @@
+<section>
+
+    <h1 class="title">دریافت فایل تکست</h1>
+
+
+    <form #form="ngForm" (ngSubmit)="downloadTextFile()" class="content">
+        <div class="_desc">
+            <input class="input_1" type="text" placeholder="نام کاربری" name="userName" [(ngModel)]="userName">
+
+            <div class="change_pass">
+                <button class="btn_2" type="submit">
+                    <div class="fa fa-download"></div>
+                    دریافت
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</section>
