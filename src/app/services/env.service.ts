@@ -4,12 +4,7 @@ import { ActivatedProvince } from '../classes/activated-province';
 
 export class EnvService implements IENV {
 
-<<<<<<< HEAD
-  temp = ActivatedProvince.TEH_SE_LOCAL;
-=======
   temp = ActivatedProvince.DEFAULT;
->>>>>>> DEV
-
   headerProvinceTitle = this.temp.headerProvinceTitle;
   API_URL = this.temp.API_URL;
   OSMmapBoxUrl = this.temp.OSMmapBoxUrl;
