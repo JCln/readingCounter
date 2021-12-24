@@ -33,8 +33,8 @@ export class TimeLineComponent implements AfterViewInit {
       { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, isNumber: true },
       { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
       { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, readonly: false },
-      { field: 'displayBillId', header: 'شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
-      { field: 'displayRadif', header: 'ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
+      { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
+      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
       { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
       { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true }
     ];

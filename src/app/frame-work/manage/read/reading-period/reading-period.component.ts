@@ -18,7 +18,7 @@ import { RpmAddDgComponent } from './rpm-add-dg/rpm-add-dg.component';
 export class ReadingPeriodComponent extends FactoryONE {
 
   dataSource: IReadingPeriod[] = [];
- 
+
 
   zoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -46,8 +46,8 @@ export class ReadingPeriodComponent extends FactoryONE {
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result)          
-          this.refreshTable();        
+        if (result)
+          this.refreshTable();
       });
     });
   }
@@ -68,11 +68,6 @@ export class ReadingPeriodComponent extends FactoryONE {
 
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnReadingPeriod();
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: object) => {

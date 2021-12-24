@@ -38,7 +38,7 @@ export class PerformanceComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-     
+
     private closeTabService: CloseTabService
   ) {
     super();
@@ -52,7 +52,6 @@ export class PerformanceComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRRPerformance) {
       this.dataSource = this.closeTabService.saveDataForRRPerformance;
-      this.insertSelectedColumns();
     }
 
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -71,16 +70,11 @@ export class PerformanceComponent extends FactoryONE {
     if (temp)
       this.connectToServer();
   }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRAnalyzeByParam();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingAnalyzeByParam, this.readingReportManagerService.anlzPrfmReq);
     if (MathS.isNull(this.dataSource))
       return;
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
-    this.insertSelectedColumns();
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.setGetRanges();
     this.closeTabService.saveDataForRRPerformance = this.dataSource;

@@ -40,10 +40,6 @@ export class MoshtarakComponent extends FactoryONE {
     super();
   }
 
-  insertSelectedColumns = () => {
-    this._selectCols = this.searchService.columnSearchMoshtarakin();
-    this._selectedColumns = this.searchService.customizeSelectedColumns(this._selectCols);
-  }
   converts = async () => {
     this._empty_message = EN_messages.notFound;
 
@@ -65,7 +61,6 @@ export class MoshtarakComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
-    this.insertSelectedColumns();
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {

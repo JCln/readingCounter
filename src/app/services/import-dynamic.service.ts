@@ -36,6 +36,15 @@ export class ImportDynamicService {
     readingPeriodId: 0,
     year: 1400
   }
+  _assessAddReq: IAssessAddDtoSimafa = {
+    onOffLoadIds: [],
+    alalHesabPercent: 0,
+    imagePercent: 0,
+    hasPreNumber: true,
+    displayBillId: true,
+    displayRadif: true,
+    counterReaderId: ''
+  }
   private _simafaSingleReq: IReadingProgramRes;
   _simafaReadingProgram: IObjectIteratation[] = [
     { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
@@ -112,28 +121,12 @@ export class ImportDynamicService {
       { field: 'description', header: 'توضیحات', isSelected: false },
       { field: 'isSelected', header: 'انتخاب', isSelected: true, isBoolean: true }
     ]
-  _assessAddReq: IAssessAddDtoSimafa = {
-    onOffLoadIds: [],
-    alalHesabPercent: 0,
-    imagePercent: 0,
-    hasPreNumber: true,
-    displayBillId: true,
-    displayRadif: true,
-    counterReaderId: ''
-  }
 
-  private _errors: IObjectIteratation[] = [
-    { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },
-    { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isNumber: true },
-    { field: 'billId', header: 'شناسه قبض', isSelected: true, isNumber: true },
-    { field: 'radif', header: 'ش.پرونده', isSelected: true, isNumber: true },
-    { field: 'errorDescriptoin', header: 'توضیحات', isSelected: true },
-    { field: 'hasError', header: 'خطا', isSelected: true, isBoolean: true }
-  ]
+
   importDynamicReq: IImportDynamicDefault = {
     fromEshterak: '',
     toEshterak: '',
-    zoneId: 0,
+    zoneId: null,
     alalHesabPercent: 0,
     imagePercent: 0,
     hasPreNumber: false,
@@ -169,9 +162,6 @@ export class ImportDynamicService {
   }
   columnSimafaReadingProgram = (): IObjectIteratation[] => {
     return this._simafaReadingProgram;
-  }
-  columnErrors = (): IObjectIteratation[] => {
-    return this._errors;
   }
   columnSimafaBatch = (): IObjectIteratation[] => {
     return this._simafaBatch;
@@ -708,6 +698,9 @@ export class ImportDynamicService {
   }
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
+  }
+  snackMessage = (message: EN_messages) => {
+    this.utilsService.snackBarMessageWarn(message);
   }
 
 }

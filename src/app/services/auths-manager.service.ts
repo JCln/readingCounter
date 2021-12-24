@@ -24,50 +24,6 @@ export class AuthsManagerService {
     private sectionsService: SectionsService
   ) { }
 
-  /* COLUMNS */
-  private _auth1: IObjectIteratation[] = [
-    { field: 'title', header: 'عنوان', isSelected: true },
-    { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
-    { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true }
-  ];
-  private _auth2: IObjectIteratation[] = [
-    { field: 'title', header: 'عنوان', isSelected: true },
-    { field: 'authLevel1Id', header: 'app', isSelected: true, isSelectOption: true },
-    { field: 'cssClass', header: 'کلاس css', isSelected: false },
-    { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
-    { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
-  ];
-  private _auth3: IObjectIteratation[] = [
-    { field: 'title', header: 'عنوان', isSelected: true },
-    { field: 'authLevel2Id', header: 'ماژول', isSelected: true, isSelectOption: true },
-    { field: 'cssClass', header: 'کلاس css', isSelected: false },
-    { field: 'route', header: 'مسیر', isSelected: true, ltr: true },
-    { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
-    { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
-    { field: 'isClosable', header: 'قابل بستن', isSelected: false, isBoolean: true },
-    { field: 'isRefreshable', header: 'قابل refresh', isSelected: false, isBoolean: true }
-  ];
-  private _auth4: IObjectIteratation[] = [
-    { field: 'title', header: 'عنوان', isSelected: true },
-    { field: 'authLevel3Id', header: 'کنترلر', isSelected: true, isSelectOption: true },
-    { field: 'value', header: 'مقدار', isSelected: false, ltr: true },
-    { field: 'cssClass', header: 'کلاس css', isSelected: false, ltr: true },
-    { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
-    { field: 'isSidebar', header: 'در سایدبار', isSelected: false, isBoolean: true }
-  ];
-
-  columnAuth1 = (): IObjectIteratation[] => {
-    return this._auth1;
-  }
-  columnAuth2 = (): IObjectIteratation[] => {
-    return this._auth2;
-  }
-  columnAuth3 = (): IObjectIteratation[] => {
-    return this._auth3;
-  }
-  columnAuth4 = (): IObjectIteratation[] => {
-    return this._auth4;
-  }
   /* API CALSS */
   getAuth1DataSource = (): Promise<any> => {
     try {

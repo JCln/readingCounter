@@ -215,6 +215,8 @@ export enum ENInterfaces {
     APKPreList = 'V1/APK/PreList',
     APKLast = 'V1/APK/Last',
     APKUpload = 'V1/APK/Upload',
+    offloadManual = 'V1/Manual/OffLoad',
+    loadManual = `V1/Load/Manual`,
 
     QotrAll = 'V1/Qotr/All',
     QotrDictionary = 'V1/Qotr/Dictionary',

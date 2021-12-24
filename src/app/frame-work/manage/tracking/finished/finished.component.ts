@@ -23,7 +23,7 @@ export class FinishedComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-     
+
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog,
@@ -51,12 +51,6 @@ export class FinishedComponent extends FactoryONE {
       this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingFINISHED);
       this.closeTabService.saveDataForTrackFinished = this.dataSource;
     }
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   backToImportedConfirmDialog = (rowDataAndIndex: object) => {
     const title = EN_messages.reason_toOffloaded;

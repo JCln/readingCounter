@@ -36,11 +36,6 @@ export class LastStatesComponent extends FactoryONE {
       this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingLASTSTATES);
       this.closeTabService.saveDataForLastStates = this.dataSource;
     }
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.trackingManagerService.columnlastStates();
-    this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

@@ -17,9 +17,9 @@
                 <div class="input_2" [hidden]="!zoneDictionary.length">
                     <div class="_key">ناحیه</div>
                     <div class="_value">
-                        <p-dropdown [options]="zoneDictionary"
-                            [(ngModel)]="importDynamicService.importDynamicReq.zoneId" filter="true"
-                            placeholder="انتخاب مورد" optionLabel="title" [showClear]="true" optionValue="id"
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="this.importDynamicService.importDynamicReq.zoneId" placeholder="انتخاب مورد"
+                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true"
                             (click)="verificationACounterReaderId()">
                         </p-dropdown>
                     </div>

@@ -24,6 +24,11 @@ export class BrowserStorageService {
     }
     return a;
   }
+  isExists(key: string): boolean {
+    if (!this.isLocalStorageSupported) return false;
+    if (this.localStorage.getItem(key) == null || this.localStorage.getItem(key) == undefined) return false;
+    return true;
+  }
   set(key: string, value: any): boolean {
     if (this.isLocalStorageSupported) {
       this.localStorage.setItem(key, JSON.stringify(value));

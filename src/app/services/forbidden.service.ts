@@ -32,28 +32,7 @@ export class ForbiddenService {
     year: 1400,
     zoneIds: [0]
   }
-  /* COLUMNS */
-  private _forbidden: IObjectIteratation[] = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true },
-    { field: 'displayName', header: 'مامور', isSelected: true },
-    { field: 'preEshterak', header: 'اشتراک قبلی', isSelected: true },
-    { field: 'nextEshterak', header: 'اشتراک بعدی', isSelected: true },
-    { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-    { field: 'insertTime', header: 'زمان ثبت', isSelected: true },
-    { field: 'tedadVahed', header: 'تعداد واحد', isSelected: true },
-    { field: 'imageCount', header: 'تعداد تصاویر', isSelected: false },
-    { field: 'postalCode', header: 'کد پستی', isSelected: true },
-    { field: 'x', header: 'X', isSelected: false },
-    { field: 'y', header: 'Y', isSelected: false },
-    { field: 'gisAccuracy', header: 'دقت مکان یابی', isSelected: false },
-    { field: 'description', header: 'توضیحات', isSelected: false },
-    // { field: 'userId', header: 'کاربری', isSelected: true },    
-    // { field: 'insertDateTime', header: 'توضیحات', isSelected: false }    
-  ]
-  columnSelectedMenuDefault = (): IObjectIteratation[] => {
-    return this._forbidden;
-  }
-
+ 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,

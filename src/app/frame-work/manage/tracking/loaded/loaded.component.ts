@@ -27,10 +27,10 @@ export class LoadedComponent extends FactoryONE {
   selectedFuckingTest: any[] = [];
 
   constructor(
-     
+
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    private dialog: MatDialog    
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -49,12 +49,6 @@ export class LoadedComponent extends FactoryONE {
     }
     this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
 
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   backToImportedConfirmDialog = (rowDataAndIndex: object) => {

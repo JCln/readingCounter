@@ -29,19 +29,6 @@ export class DataMiningAnalysesService {
     year: 1400,
     zoneIds: null
   }
-  private _DMAnalyses: IObjectIteratation[] = [
-    { field: 'counterReader', header: 'مامور', isSelected: true, readonly: true },
-    { field: 'overalCount', header: 'تعداد قرائت', isSelected: true, readonly: true },
-    { field: 'maxBetweenTwoMinute', header: 'حداکثر زمان بین دو', isSelected: true, readonly: true },
-    { field: 'minBetweenTwoMinute', header: 'حداقل زمان بین دو', isSelected: true, readonly: true },
-    { field: 'averageBetweenTwoMinute', header: 'میانگین زمان بین دو', isSelected: true, readonly: true },
-    { field: 'countSameTime', header: 'تعداد دریافت', isSelected: true, readonly: true },
-    { field: 'closedCount', header: 'تعداد بسته', isSelected: true, readonly: true },
-    { field: 'closedPercent', header: 'درصد بسته', isSelected: true, readonly: true },
-    { field: 'disconnectRate', header: 'نرخ قطعی', isSelected: true, readonly: true },
-    { field: 'medianBetweenTwoMinute', header: 'میانه بین دو', isSelected: true, readonly: true },
-  ]
-
   constructor(
     private utilsService: UtilsService,
     private interfaceManagerService: InterfaceManagerService,
@@ -49,9 +36,6 @@ export class DataMiningAnalysesService {
   ) { }
 
   /*COLUMNS */
-  columnDataMiningAnalyses = (): IObjectIteratation[] => {
-    return this._DMAnalyses;
-  }
   receiveFromDateJalali = (variable: ENDataMining, $event: string) => {
     this[variable].fromDate = $event;
   }

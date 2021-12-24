@@ -23,10 +23,6 @@ export class ErrorsComponent extends FactoryONE {
     super();
   }
 
-  insertSelectedColumns = () => {
-    this._selectCols = this.importDynamicService.columnErrors();
-    this._selectedColumns = this.importDynamicService.customizeSelectedColumns(this._selectCols);
-  }
   nullSavedSource = () => this.closeTabService.saveDataForImportErrors = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -39,7 +35,7 @@ export class ErrorsComponent extends FactoryONE {
       this.dataSource = await this.importDynamicService.getDataSource(ENInterfaces.getImportErrros);
       this.closeTabService.saveDataForImportErrors = this.dataSource;
     }
-    this.insertSelectedColumns();
+
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

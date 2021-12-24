@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-  ENSelectedColumnVariables,
-  ENSnackBarColors,
-  ENSnackBarTimes,
-  IObjectIteratation,
-  IResponses,
+    ENSelectedColumnVariables,
+    ENSnackBarColors,
+    ENSnackBarTimes,
+    IObjectIteratation,
+    IResponses,
 } from 'interfaces/ioverall-config';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
@@ -20,14 +20,7 @@ import { SectionsService } from './sections.service';
 })
 export class UsersAllService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  private _usersAll = [
-    { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },
-    { field: 'username', header: 'نام کاربری', isSelected: true, ltr: false },
-    { field: 'userCode', header: 'کد کاربری', isSelected: false, ltr: false },
-    { field: 'mobile', header: 'موبایل', isSelected: true, ltr: true },
-    { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
-    { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true }
-  ]
+
   private _userRoles = [
     { field: 'title', header: 'عنوان', isSelected: true },
     // { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
@@ -44,9 +37,6 @@ export class UsersAllService {
   /* COLUMNS */
   columnUserRoles = (): IObjectIteratation[] => {
     return this._userRoles;
-  }
-  columnUserAllUsers = (): IObjectIteratation[] => {
-    return this._usersAll;
   }
   customizeSelectedColumns = (_selectCols: any[]) => {
     return _selectCols.filter(items => {

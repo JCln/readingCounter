@@ -50,12 +50,7 @@ export class Auth1Component extends FactoryONE {
     else {
       this.dataSource = await this.authsManagerService.getAuth1DataSource();
       this.closeTabService.saveDataForAppLevel1 = this.dataSource;
-    }
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.authsManagerService.columnAuth1();
-    this._selectedColumns = this.authsManagerService.customizeSelectedColumns(this._selectCols);
+    }    
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {

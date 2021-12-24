@@ -61,13 +61,8 @@ export class KarbariComponent extends FactoryONE {
     }
     this.provinceDictionary = await this.readManagerService.getProvinceDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readManagerService.columnKarbari();
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
-  }
+    Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');   
+  } 
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();

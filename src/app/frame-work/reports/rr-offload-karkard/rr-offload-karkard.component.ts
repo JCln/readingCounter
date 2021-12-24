@@ -41,7 +41,7 @@ export class RrOffloadKarkardComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-     
+
     private closeTabService: CloseTabService
   ) {
     super();
@@ -54,7 +54,6 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRROffloadedKarkard) {
       this.dataSource = this.closeTabService.saveDataForRROffloadedKarkard;
-      this.insertSelectedColumns();
       this.setGetRanges();
     }
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
@@ -75,15 +74,10 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     if (this.validation())
       this.connectToServer();
   }
-  insertSelectedColumns = () => {
-    this._selectCols = this.readingReportManagerService.columnRRKarkardOffloaded();
-    this._selectedColumns = this.readingReportManagerService.customizeSelectedColumns(this._selectCols);
-  }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardOffloaded, this.readingReportManagerService.karkardOffloadReq);
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    this.insertSelectedColumns();
     this.setGetRanges();
     this.closeTabService.saveDataForRROffloadedKarkard = this.dataSource;
   }

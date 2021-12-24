@@ -43,10 +43,6 @@ export class ProComponent extends FactoryONE {
     super();
   }
 
-  insertSelectedColumns = () => {
-    this._selectCols = this.searchService.columnSearchPro();
-    this._selectedColumns = this.searchService.customizeSelectedColumns(this._selectCols);
-  }
   converts = () => {
     this._empty_message = EN_messages.notFound;
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
@@ -57,7 +53,6 @@ export class ProComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
-    this.insertSelectedColumns();
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {

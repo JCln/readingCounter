@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
+import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -19,7 +20,6 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
 })
 export class ReadingComponent extends FactoryONE {
 
-
   dataSource: ITracking[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
@@ -29,7 +29,8 @@ export class ReadingComponent extends FactoryONE {
     public trackingManagerService: TrackingManagerService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
-    public interactionService: InteractionService
+    public interactionService: InteractionService,
+    public browserStorageService: BrowserStorageService
   ) {
     super();
   }
@@ -52,13 +53,6 @@ export class ReadingComponent extends FactoryONE {
       this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingREADING);
       this.closeTabService.saveDataForTrackReading = this.dataSource;
     }
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.trackingManagerService.columnSelectedMenuDefault();
-    this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   // refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   backToImportedConfirmDialog = (rowDataAndIndex: object) => {

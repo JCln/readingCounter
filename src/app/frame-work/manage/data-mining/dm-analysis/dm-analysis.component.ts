@@ -50,7 +50,7 @@ export class DmAnalysisComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForDMAAnalyze) {
       this.dataSource = this.closeTabService.saveDataForDMAAnalyze;
-      this.insertSelectedColumns();
+      // this.insertSelectedColumns(); /* TO CHECKOUT THIS FUNC */
       this.setRanges();
     }
 
@@ -70,16 +70,11 @@ export class DmAnalysisComponent extends FactoryONE {
     if (temp)
       this.connectToServer();
   }
-  insertSelectedColumns = () => {
-    this._selectCols = this.dataMiningAnalysesService.columnDataMiningAnalyses();
-    this._selectedColumns = Converter.customizeSelectedColumns(this._selectCols);
-  }
   connectToServer = async () => {
     this.dataSource = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
     if (MathS.isNull(this.dataSource))
       return;
     this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
-    this.insertSelectedColumns();
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.setRanges();
     this.closeTabService.saveDataForDMAAnalyze = this.dataSource;

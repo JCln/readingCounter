@@ -66,7 +66,6 @@ export class WoumComponent implements OnChanges {
     this.audioFiles = [];
     this.dataSource = [];
     this.testLoadImage = [];
-    console.log(this.id);
 
     if (!this.id)
       return;

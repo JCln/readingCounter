@@ -34,13 +34,8 @@ export class SimpleComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  insertSelectedColumns = () => {
-    this._selectCols = this.searchService.columnSearchSimple();
-    this._selectedColumns = this.searchService.customizeSelectedColumns(this._selectCols);
-  }
   converts = async () => {
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.insertSelectedColumns();
   }
   connectToServer = async () => {
     this.dataSource = [];

@@ -250,9 +250,9 @@ export class MapComponent implements OnInit, OnDestroy {
     const markers = new L.markerClusterGroup();
     xyData.map((items) => {
       this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 11);
-      markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)]).bindPopup(
-        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
-      ));
+      markers.addLayer(L.marker([parseFloat(items.y), parseFloat(items.x)])
+        .bindPopup(`${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+        ));
     })
     this.layerGroup.addLayer(markers);
   }
@@ -311,9 +311,7 @@ export class MapComponent implements OnInit, OnDestroy {
     if (lat === 0)
       return;
     L.marker([lat, lng], { weight: 4, radius: 3, icon: items.counterStateTitle === 'بسته' ? markerRed : markerGreen }).addTo(this.layerGroup)
-      .bindPopup(
-        `${items.firstName}` + `${items.sureName} <br> ${items.eshterak}`,
-      );
+      .bindPopup(`${items.firstName}` + `${items.sureName} <br> ${items.eshterak} <br> ${items.time}`);
   }
   private markWithoutCluster = (lat: number, lng: number, items) => {
     if (lat === 0)

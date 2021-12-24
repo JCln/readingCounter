@@ -46,10 +46,6 @@ export class AssessPreComponent extends FactoryONE {
     super();
   }
 
-  insertSelectedColumns = () => {
-    this._selectCols = this.importDynamicService.columnAssessPre();
-    this._selectedColumns = this.importDynamicService.customizeSelectedColumns(this._selectCols);
-  }
   insertReadingConfigDefaults = (rcd: IReadingConfigDefault) => {
     this.importDynamicService._assessAddReq.hasPreNumber = rcd.defaultHasPreNumber;
     this.importDynamicService._assessAddReq.displayBillId = rcd.displayBillId;
@@ -67,7 +63,6 @@ export class AssessPreComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
-    this.insertSelectedColumns();
     this.importDynamicService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {

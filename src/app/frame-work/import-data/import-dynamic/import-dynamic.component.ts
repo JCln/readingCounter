@@ -8,6 +8,8 @@ import { LocalClientConfigsService } from 'services/local-client-configs.service
 import { FactoryONE } from 'src/app/classes/factory';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
 
+import { MathS } from './../../../classes/math-s';
+
 
 @Component({
   selector: 'app-import-dynamic',
@@ -56,20 +58,26 @@ export class ImportDynamicComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService.importDynamicReq))
-      return;
-    const validation = this.importDynamicService.checkVertification(this.importDynamicService.importDynamicReq, this._isOrderByDate);
-    if (!validation)
-      return;
-    if (this._showDynamicCount) {
-      if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicCount(this.importDynamicService.importDynamicReq), true, EN_messages.confirm_createList)) {
-        this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
+    if (!MathS.isNull(this.importDynamicService.importDynamicReq.zoneId)) {
+
+      if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService.importDynamicReq))
         return;
+      const validation = this.importDynamicService.checkVertification(this.importDynamicService.importDynamicReq, this._isOrderByDate);
+      if (!validation)
+        return;
+      if (this._showDynamicCount) {
+        if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicCount(this.importDynamicService.importDynamicReq), true, EN_messages.confirm_createList)) {
+          this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
+          return;
+        }
       }
+      this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
+      this.resetToDefaultFormStatus();
+      this._canShowAddButton = false;
     }
-    this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
-    this.resetToDefaultFormStatus();
-    this._canShowAddButton = false;
+    else {
+      this.importDynamicService.snackMessage(EN_messages.insert_zone);
+    }
   }
   private insertReadingConfigDefaults = (rcd: any) => {
     this.importDynamicService.importDynamicReq.hasPreNumber = rcd.hasPreNumber;
@@ -86,6 +94,8 @@ export class ImportDynamicComponent extends FactoryONE {
     this.canShowEditButton = true;
   }
   verificationACounterReaderId = async () => {
+    if (MathS.isNull(this.importDynamicService.importDynamicReq.zoneId))
+      return;
     if (this.importDynamicService.importDynamicReq.zoneId || this.zoneDictionary) {
       this.verificationReadingPeriod();
       this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamicService.importDynamicReq.zoneId);
