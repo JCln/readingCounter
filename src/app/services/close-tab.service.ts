@@ -21,6 +21,7 @@ export class CloseTabService {
   saveDataForAppLevel4: any;
 
   saveDataForCounterState: any;
+  saveDataForImageAttribution: any;
   saveDataForKarbari: any;
   saveDataForReadingConfig: any;
   saveDataForReadingPeriodManager: any;
@@ -89,6 +90,7 @@ export class CloseTabService {
   saveDataForRRGIS: any;
   saveDataForFragmentNOB: any;
   saveDataForFragmentNOBDetails: any;
+  
   saveDataForTextOutput: any;
   saveDataForPolicies: any;
   saveDataForFNB: any;
@@ -97,6 +99,7 @@ export class CloseTabService {
   saveDataForRRGalleryReq: any;
 
   private val: ISidebarVals[] = [
+    { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: '/wr/m/r/imgattr' },
     { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: '/wr/m/r/kar' },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: '/wr/m/r/cs' },
     { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: '/wr/m/r/qr' },

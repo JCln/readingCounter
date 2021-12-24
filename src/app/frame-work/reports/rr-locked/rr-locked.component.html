@@ -16,12 +16,10 @@
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.lockedReq.zoneId" name="zoneId">
-                            <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="readingReportManagerService.lockedReq.zoneId" placeholder="انتخاب مورد"
+                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
                     </div>
                     <div class="input_2" [hidden]="_isOrderByDate">
                         <div class="_key">نوع دوره</div>
@@ -35,8 +33,7 @@
                     <div class="input_2" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
                         <div class="_key">دوره قرائت</div>
                         <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.lockedReq.readingPeriodId"
-                            name="readingPeriodId">
+                            [(ngModel)]="readingReportManagerService.lockedReq.readingPeriodId" name="readingPeriodId">
                             <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                                 {{truefalse.title}}
                             </mat-option>
@@ -44,8 +41,8 @@
                     </div>
                     <div class="input_2" [hidden]="_isOrderByDate">
                         <div class="_key">سال</div>
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.lockedReq.year" name="year">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.lockedReq.year"
+                            name="year">
                             <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
                                 {{truefalse.title}}
                             </mat-option>
@@ -80,20 +77,10 @@
         </form>
     </section>
 
-<app-prime-table     
-[_selectCols]="_selectCols" 
-[_selectedColumns]="selectedColumns"
-[dataSource]="dataSource" 
-[_outputFileName]="'rr-locked'"
-[_checkUpName]="'rr-locked'"
-[_numberOfExtraColumns]="[1,2]"
-[_sessionName]="'rr-locked'"
-[_selectedColumnsToRemember]="'selectedRRLocked'"
-[_hasCollapsible]=true 
-[_isCollaped]="isCollapsed"
-(collapsed)="isCollapsed = !isCollapsed" 
-(refreshedTable)="refreshTable()"
-(showedPictures)="getReadingReportTitles($event)"
-> 
-</app-prime-table>
+    <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
+        [_outputFileName]="'rr-locked'" [_checkUpName]="'rr-locked'" [_numberOfExtraColumns]="[1,2]"
+        [_sessionName]="'rr-locked'" [_selectedColumnsToRemember]="'selectedRRLocked'" [_hasCollapsible]=true
+        [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()"
+        (showedPictures)="getReadingReportTitles($event)">
+    </app-prime-table>
 </main>

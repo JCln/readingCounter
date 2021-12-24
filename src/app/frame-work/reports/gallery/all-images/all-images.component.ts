@@ -14,6 +14,7 @@ import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/Interfaces/irep
 export class AllImagesComponent extends FactoryONE {
 
   allImagesDataSource: IImageUrlInfoWrapper;
+  imgsOriginUrl: any[] = [];
 
   carouselImage: IImageUrlAndInfos;
   showCarousel: boolean = false;
@@ -56,25 +57,24 @@ export class AllImagesComponent extends FactoryONE {
       this.getExactImg(item.fileRepositorayId, i);
     })
   }
-  getImageDataSource = async (id: string): Promise<any> => {
-    return await this.downloadManagerService.downloadFile(id);
-  }
   getExactImg = async (id: string, index: number) => {
-    this.allImagesDataSource[index] = this.getImageDataSource(id);
+    this.imgsOriginUrl[index] = await this.downloadManagerService.downloadFile(id);
     let reader = new FileReader();
     reader.addEventListener("load", () => {
+      this.imgsOriginUrl[index] = reader.result;
+      // this.closeTabService.saveDataForRRGallery[index] = reader.result;
       this.allImagesDataSource.imageUrlAndInfos[index].imageUrl = reader.result;
-      this.closeTabService.saveDataForRRGallery[index] = reader.result;
     }, false);
-    if (this.allImagesDataSource[index]) {
-      reader.readAsDataURL(this.allImagesDataSource[index]);
+    if (this.imgsOriginUrl[index]) {
+      reader.readAsDataURL(this.imgsOriginUrl[index]);
+      reader.readAsDataURL(this.allImagesDataSource.imageUrlAndInfos[index].imageUrl);
     }
   }
 
 
   routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number) => {
-    scrollTo(0, 0);
     this.carouselImage = dataSource;
+    scrollTo(0, 0);
     this.rowIndex = rowIndex;
     this.showCarousel = true;
   }

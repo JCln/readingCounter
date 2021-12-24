@@ -39,3 +39,4 @@ export class Factory {
     //     }
     // }
 }
+export class FactorySharedPrime { }

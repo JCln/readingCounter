@@ -10,6 +10,10 @@
 
 <section *ngIf="allImagesDataSource" class="_descriptions">
     <div class="input_2">
+        <div class="_key">شماره پیگیری</div>
+        <input readonly="true" class="_value" type="number" name="trackNumber" [(ngModel)]="trackNumber">
+    </div>
+    <div class="input_2">
         <div class="_key">تعداد اشتراک دارای عکس</div>
         <input readonly="true" class="_value" name="distinctImageCount"
             [(ngModel)]="allImagesDataSource.distinctImageCount">
@@ -28,8 +32,8 @@
     <div class="content">
         <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
 
-            <div *ngIf="allImagesDataSource[ri]" class="__img_bound_real">
-                <img (click)="routeToOffload(item , ri)" src="{{item.imageUrl}}" alt="whatever">
+            <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
+                <img (click)="routeToOffload(item , ri)" src="{{imgsOriginUrl[ri]}}" alt="whatever">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
                     <p>{{item.eshterak}}</p>
                     <p>{{item.firstName}}</p>
@@ -38,15 +42,20 @@
                 </div>
             </div>
 
-            <div *ngIf="!allImagesDataSource[ri]" class="__img_bound">
+            <div *ngIf="!imgsOriginUrl[ri]" class="__img_bound">
                 <img src="assets/imgs/soundvid/2.png" alt="whatever">
             </div>
         </div>
     </div>
 
-    <app-gallery-carousel *ngIf="showCarousel" [dataSource]="carouselImage" (cancelClicked)="carouselCancelClicked()"
-        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
-        <app-gallery-all-details></app-gallery-all-details>
+    <app-gallery-carousel 
+    *ngIf="showCarousel" 
+    [dataSource]="carouselImage" 
+    (cancelClicked)="carouselCancelClicked()"
+    (prevClicked)="carouselPrevItem()" 
+    (nextClicked)="carouselNextItem()"
+    >
+    <app-gallery-all-details></app-gallery-all-details>
 
     </app-gallery-carousel>
 

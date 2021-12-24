@@ -73,41 +73,8 @@ export class PrimeTableEditableComponent {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
-  onRowEditInit = (dataSource: object) => {
-    this.onRowEditedInit.emit(dataSource);
-  }
-  onRowEditSave = (dataSource: object, ri: number) => {
-    this.onRowEditedSave.emit({ dataSource, ri });
-  }
-  onRowEditCancel = (dataSource: object, ri: number) => {
-    this.onRowEditedCancel.emit({ dataSource, ri });
-  }
-  removeRow = (dataSource: object, ri: number) => {
-    this.removedRow.emit({ dataSource, ri });
-  }
-  removeRowEditing = (dataSource: object, ri: number) => {
-    this.removedRowEditing.emit({ dataSource, ri })
-  }
   refreshTable() {
     this.refreshedTable.emit(true);
-  }
-  openAddDialog = () => {
-    this.openedAddDialog.emit();
-  }
-  newRowChangedStatus = () => {
-    this.newedRowChangedStatus.emit();
-  }
-  onRowEditCancelRowEditing = (dataSource: object, ri: number) => {
-    this.onRowEditedCancelRowEditing.emit({ dataSource, ri });
-  }
-  getExcelSample = () => {
-    this.getedExcelSample.emit();
-  }
-  openAddExcelDialog = () => {
-    this.openedAddExcelDialog.emit();
-  }
-  routeToParent = () => {
-    this.routedToParent.emit();
   }
   saveColumns() {
     let newArray: any[] = [];
@@ -151,5 +118,42 @@ export class PrimeTableEditableComponent {
         this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
       }
     }
+    else
+      this.utilsService.snackBarMessageWarn(EN_messages.done);
   }
+
+  onRowEditInit = (dataSource: object) => {
+    this.onRowEditedInit.emit(dataSource);
+  }
+  onRowEditSave = (dataSource: object, ri: number) => {
+    this.onRowEditedSave.emit({ dataSource, ri });
+  }
+  onRowEditCancel = (dataSource: object, ri: number) => {
+    this.onRowEditedCancel.emit({ dataSource, ri });
+  }
+  removeRow = (dataSource: object, ri: number) => {
+    this.removedRow.emit({ dataSource, ri });
+  }
+  removeRowEditing = (dataSource: object, ri: number) => {
+    this.removedRowEditing.emit({ dataSource, ri })
+  }
+  openAddDialog = () => {
+    this.openedAddDialog.emit();
+  }
+  newRowChangedStatus = () => {
+    this.newedRowChangedStatus.emit();
+  }
+  onRowEditCancelRowEditing = (dataSource: object, ri: number) => {
+    this.onRowEditedCancelRowEditing.emit({ dataSource, ri });
+  }
+  getExcelSample = () => {
+    this.getedExcelSample.emit();
+  }
+  openAddExcelDialog = () => {
+    this.openedAddExcelDialog.emit();
+  }
+  routeToParent = () => {
+    this.routedToParent.emit();
+  }
+
 }

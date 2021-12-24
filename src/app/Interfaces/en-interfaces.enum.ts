@@ -212,6 +212,11 @@ export enum ENInterfaces {
     ReadingReportDETAILSWithParam = 'V1/ReadingReport/Details/WithParam',
     ReadingReportTitles = `V1/ReadingReport/Titles`,
 
+    imageAttributionGet = 'V1/ImageAttribution/All',
+    imageAttributionRemove = 'V1/ImageAttribution/Remove',
+    imageAttributionEdit = 'V1/ImageAttribution/Edit',
+    imageAttributionAdd = 'V1/ImageAttribution/Add',
+
     APKPreList = 'V1/APK/PreList',
     APKLast = 'V1/APK/Last',
     APKUpload = 'V1/APK/Upload',

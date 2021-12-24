@@ -36,6 +36,7 @@ export interface ITabs {
 }
 export enum ENEssentialsToSave {
     saveDataForKarbari = 'saveDataForKarbari',
+    saveDataForImageAttribution = 'saveDataForImageAttribution',
     saveDataForCounterState = 'saveDataForCounterState',
     saveDataForQotrManager = 'saveDataForQotrManager',
     saveDataForCounterReport = 'saveDataForCounterReport',
@@ -271,7 +272,8 @@ export enum ENSelectedColumnVariables {
     selectedReadingConfigDefault = '_readingConfigDefault',
     selectedReadingPeriod = '_readingPeriod',
     selectedReadingPeriodKind = '_readingPeriodKind',
-    selectedTextOutput = '_textOutput',
+    selectedImageAttribution = 'imgattr',
+    selectedTextOutput = 'textOutput',
     selectedKarbari = '_karbari',
     selectedForbidden = '_forbidden',
     selectedErrors = '_errors',
