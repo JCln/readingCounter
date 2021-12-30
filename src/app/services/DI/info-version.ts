@@ -13,6 +13,11 @@ export const infoVersionItems: IDictionaryManager[] = [
     },
     {
         id: '2',
+        title: 'گالری',
+        isSelected: true
+    },
+    {
+        id: '2',
         title: 'رفع برخی ایرادات',
         isSelected: true
     },
