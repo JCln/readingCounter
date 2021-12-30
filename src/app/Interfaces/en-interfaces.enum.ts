@@ -248,6 +248,10 @@ export enum ENInterfaces {
     postSimafaAssessPre = 'V1/Import/Simafa/AssessPre',
     postSimafaAssessAdd = 'V1/Import/Simafa/AssessAdd',
 
+    postToolsRandomImages = 'V1/List/OffLoaded/RandomImages',
+    getImageAttributionAll = `V1/ImageAttributionFile/All`,
+    getImageAttributionAddOrEdit = 'V1/ImageAttributionFile/AddOrEdit',
+
     getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
     getDashboardEditCount = 'V1/Tracking/Dashboard/Tracking/EditCount',
     getDashboardDateDifference = 'V1/List/Dashboard/DateDifference/Timed',

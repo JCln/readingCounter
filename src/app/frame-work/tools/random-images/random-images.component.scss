@@ -1,0 +1,132 @@
+@import 'primeNG';
+@import 'tooltip';
+@import 'input';
+@import 'button';
+
+
+.insert_track {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  direction: rtl;
+  margin: auto;
+  padding: 2rem;
+  background: var(--secondary_1);
+  border-radius: $border_15;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+}
+
+.input_1 {
+  text-align: center;
+  border-color: var(--primary_4);
+
+  @media (max-width:550px) {
+    min-width: 17rem;
+  }
+}
+
+.input_2 {
+  direction: rtl;
+}
+
+._value {
+  border: none;
+}
+
+.btn_1 {
+  color: var(--white);
+  background-color: var(--orange_500);
+  max-width: 16rem;
+}
+
+._container {
+  position: relative;
+  margin: auto $font_3;
+}
+
+.content {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 21rem));
+  justify-content: center;
+  gap: $font_05;
+  background: var(--secondary_1);
+}
+
+._descriptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  gap: .5rem;
+}
+
+._images {
+  border-radius: $border_15;
+  box-shadow: 0px 2px 3px 1px var(--secondary_4);
+  border: 2px solid var(--thirdy_1);
+  cursor: pointer;
+
+  .__img_bound {
+    padding: $font_3
+  }
+
+  .__img_bound_real {
+    padding: .25rem;
+    position: relative;
+
+    .__hiddens {
+      position: absolute;
+      visibility: hidden;
+      width: 0%;
+      right: 0;
+      border-radius: 7px;
+      top: 0;
+      bottom: 0;
+      background-color: var(--white);
+      opacity: .8;
+      border-left: 2px solid var(--primary_3);
+      padding: .25rem;
+      transition: width ease-in-out 150ms;
+
+      p {
+        color: var(--primary_3);
+        font-size: $font_m;
+        padding-right: $font_xxs;
+      }
+    }
+
+    &:hover {
+      .__hiddens {
+        width: 45%;
+        visibility: visible;
+      }
+    }
+
+  }
+
+  img {
+    max-height: 20rem;
+    border-radius: $border_15;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 1px 2px var(--thirdy_1);
+  }
+
+
+}
+
+.not_found_header {
+  text-align: center;
+  color: var(--primary_4);
+  font-size: 1.3rem;
+  background: var(--white);
+  border-radius: 100vmax;
+}
+
+.center_footer {
+  text-align: center;
+  margin-top: $font_xs;
+}

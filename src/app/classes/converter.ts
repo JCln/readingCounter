@@ -31,4 +31,12 @@ export class Converter {
                 return items;
         })
     }
+    static customizeSelectedOptionsId = (_selectCols: any): number[] => {
+        let selecties: number[] = [];
+        for (let index = 0; index < _selectCols.length; index++) {
+            if (_selectCols[index].isSelected)
+                selecties.push(_selectCols[index].id)
+        }
+        return selecties;
+    }
 }

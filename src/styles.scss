@@ -80,7 +80,7 @@ button,
 input,
 li {
   outline: none;
-  font-family: inherit;
+  font-family: BLotus, "Blotus", tahoma, Sans-Serif;
 }
 
 .p-dialog,
@@ -121,9 +121,69 @@ input[type=number] {
   }
 }
 
-
 :host ::ng-deep {
   .p-datatable-responsive .p-datatable-tbody>tr>td .p-column-title {
     display: none;
   }
+
+  .p-dropdown .p-dropdown-label {
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .p-dropdown {
+    height: 2.8rem;
+    border-radius: 10px;
+    background: var(--white);
+  }
+
+  .p-dropdown-panel .p-dropdown-header {
+    background: var(--secondary_3);
+    color: var(--secondary_8);
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item,
+  .p-dropdown .p-dropdown-label.p-placeholder,
+  .p-multiselect .p-multiselect-label.p-placeholder,
+  .p-multiselect-label,
+  .p-multiselect-items {
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif !important;
+    font-size: 1.2rem;
+    font-weight: 600 !important;
+    background: var(--secondary_3);
+    color: var(--secondary_8);
+  }
+
+  .p-dropdown .p-dropdown-label.p-placeholder {
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .p-dropdown.p-dropdown-clearable .p-dropdown-label {
+    padding-right: 0.25rem;
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .p-dropdown-item {
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-weight: 600;
+  }
+
+  .p-dropdown-panel .p-dropdown-items {
+    background: var(--secondary_1);
+  }
+
+  .p-dropdown .p-dropdown-clear-icon {
+    right: 0.357rem;
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+    background: var(--secondary_1);
+    color: var(--secondary_8);
+  }
+
 }

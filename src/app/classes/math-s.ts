@@ -109,5 +109,11 @@ export class MathS {
         }
         return true;
     }
+    static isExactLengthYouNeed = (value: string | number, long: number): boolean => {
+        if (value.toString().trim().length === long) {
+            return true;
+        }
+        return false;
+    }
 
 }

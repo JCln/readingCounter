@@ -37,14 +37,13 @@ export class ImageAttributionComponent extends FactoryONE {
 
     this.closeTabService.saveDataForImageAttribution = this.dataSource;
     this.defaultAddStatus();
-    // this.insertSelectedColumns();
+    this.insertSelectedColumns();
   }
   defaultAddStatus = () => this.newRowLimit = 1;
-  // insertSelectedColumns = () => {
-
-  //   this._selectCols = [{ field: 'title', header: 'عنوان', isSelected: true }];
-  //   this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
-  // }
+  insertSelectedColumns = () => {
+    this._selectCols = [{ field: 'title', header: 'عنوان', isSelected: true }];
+    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
+  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
