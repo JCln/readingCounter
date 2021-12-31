@@ -156,8 +156,19 @@ export class ColumnManager {
         // { field: 'zoneId', header: 'کد ناحیه', isSelected: true, readonly: false },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, readonly: true },
         { field: 'reportTitle', header: 'عنوان گزارش', isSelected: true, readonly: true },
-        { field: 'reportId', header: 'گزارش', isSelected: true, readonly: true },
+        // { field: 'reportId', header: 'گزارش', isSelected: true, readonly: true },
         { field: 'itemCount', header: 'تعداد', isSelected: true, readonly: true }
+    ]
+    private _imageAttrResult = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'itemTitle', header: 'عنوان گزارش', isSelected: true, readonly: true },
+        { field: 'itemQuantity', header: 'تعداد', isSelected: true, readonly: false },
+        // { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
+    ]
+    private _imageAttrAnalyze = [
+        { field: 'itemTitle', header: 'عنوان گزارش', isSelected: true, readonly: true },
+        { field: 'itemQuantity', header: 'تعداد', isSelected: true, readonly: true },
     ]
     private _RRDetails = [
         { field: 'billId', header: 'ش قبض', isSelected: false, readonly: true },
@@ -513,6 +524,67 @@ export class ColumnManager {
             { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
             { field: 'description', header: 'توضیحات', isSelected: false }
         ];
+
+    private assess_pre: IObjectIteratation[] =
+        [
+            { field: 'billId', header: 'شناسه قبض', isSelected: false },
+            { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
+            { field: 'radif', header: 'ش.پرونده', isSelected: false },
+            { field: 'eshterak', header: 'اشتراک', isSelected: true },
+            { field: 'zoneId', header: 'ناحیه', isSelected: false },
+            { field: 'qeraatCode', header: 'قرائت', isSelected: false },
+            { field: 'firstName', header: 'نام', isSelected: true },
+            { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
+            { field: 'karbariCode', header: 'کاربری', isSelected: true },
+            { field: 'preNumber', header: 'رقم قبلی', isSelected: true },
+            { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
+            { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
+            { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true },
+            { field: 'address', header: 'آدرس', isSelected: false },
+            { field: 'pelak', header: 'پلاک', isSelected: false },
+            { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
+            { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false },
+            { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false },
+            { field: 'qotrCode', header: 'قطر', isSelected: false },
+            // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
+            { field: 'postalCode', header: 'کد پستی', isSelected: false },
+            { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
+            { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
+            { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false },
+            { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true },
+            { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
+            // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
+            { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
+            { field: 'tavizDate', header: 'تاریخ تعویض', isSelected: false },
+            { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
+            { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
+            { field: 'mobile', header: 'موبایل', isSelected: false },
+            { field: 'hazf', header: 'حذف', isSelected: false },
+            { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
+            { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
+            { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false },
+            { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false },
+            { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false },
+            { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false },
+            { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false },
+            { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
+            { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
+            { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
+            // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false },
+            { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
+            { field: 'masraf', header: 'مصرف', isSelected: true },
+            { field: 'y', header: 'Y', isSelected: false },
+            { field: 'x', header: 'X', isSelected: false },
+            { field: 'gisAccuracy', header: 'دقت', isSelected: false },
+            { field: 'eslahType', header: 'اصلاح', isSelected: false },
+            { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
+            { field: 'offLoadTime', header: 'زمان', isSelected: false },
+            { field: 'dateDifference', header: 'مدت', isSelected: false },
+            { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
+            { field: 'description', header: 'توضیحات', isSelected: false },
+            { field: 'isSelected', header: 'انتخاب', isSelected: true, isBoolean: true }
+        ]
+
     private _searchSimple: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
@@ -846,7 +918,7 @@ export class ColumnManager {
     }
     columnTextOutput = (): IObjectIteratation[] => {
         console.log(this.textOutput);
-        
+
         return this.textOutput;
     }
     columnKarbari = (): IObjectIteratation[] => {
@@ -902,6 +974,12 @@ export class ColumnManager {
     }
     columnRRMaster = (): IObjectIteratation[] => {
         return this._RRMaster;
+    }
+    columnImgAttrResult = (): IObjectIteratation[] => {
+        return this._imageAttrResult;
+    }
+    columnImgAttrAnalyze = (): IObjectIteratation[] => {
+        return this._imageAttrAnalyze;
     }
     columnRRDetails = (): IObjectIteratation[] => {
         return this._RRDetails;
@@ -960,12 +1038,21 @@ export class ColumnManager {
             { field: 'isRoosta', header: 'روستا', isSelected: true, readonly: true, isBoolean: true }
         ];
     }
+    columnAssessPre = (): IObjectIteratation[] => {
+        return this.assess_pre;
+    }
 
 
     columnSelectedMenus = (name: string): IObjectIteratation[] => {
         switch (name) {
             case 'counterReport':
                 return this.columnCounterReport();
+            case '_imageAttrResult':
+                return this.columnImgAttrResult();
+            case '_imageAttrAnalyze':
+                return this.columnImgAttrAnalyze();
+            case 'assess_pre':
+                return this.columnAssessPre();
             case 'imgattr':
                 return this.columnImageAttribution();
             case 'readingPeriod':

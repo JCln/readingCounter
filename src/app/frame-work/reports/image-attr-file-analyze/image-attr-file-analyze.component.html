@@ -1,0 +1,53 @@
+<main class="main">
+    <section [hidden]="isCollapsed">
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="static_part">
+
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">ناحیه</div>
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="readingReportManagerService.imgAttrAnalyzeReq.zoneId" placeholder="انتخاب مورد"
+                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
+                    <div class="input_2" [hidden]="!_isOrderByDate">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.imgAttrAnalyze, $event)"
+                                [dateObject]="readingReportManagerService.imgAttrAnalyzeReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="!_isOrderByDate">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.imgAttrAnalyze, $event)"
+                                [dateObject]="readingReportManagerService.imgAttrAnalyzeReq.toDate">
+                            </app-date-jalali>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn_1">
+                        مشاهده لیست
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
+        [_outputFileName]="'_imageAttrAnalyze'" [_checkUpName]="'_imageAttrAnalyze'"
+        [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
+        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+    </app-prime-table>
+</main>
+
+<!-- <section *ngIf="dataSource">
+    <app-pie-img-attr-anlz [dataSource]="dataSource"></app-pie-img-attr-anlz> -->
+<!-- <app-bar-img-attr-anlz [dataSource]="dataSource"></app-bar-img-attr-anlz> -->
+<!-- </section> -->

@@ -142,6 +142,8 @@ export enum ENInterfaces {
     trackingREMOVE = 'V1/Tracking/Remove',
     trackingFOLLOWUP = 'V1/Tracking/FollowUp/?trackNumber=',
     trackingAnalyzeByParam = 'V1/Tracking/Analyze/ByParam',
+    ImageAttributionResult = 'V1/ImageAttributionFile/Result',
+    ImageAttributionAnalyze = 'V1/ImageAttributionFile/Analyze',
     trackingPostOffloadModify = 'V1/OffLoad/Modify',
     trackingEditState = 'V1/Tracking/EditState',
 

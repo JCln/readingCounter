@@ -10,11 +10,11 @@ const routes: Routes = [
   { path: 'mam/karkardDaily', loadChildren: () => import('./karkard-dayly/karkard-dayly.module').then(karkardDayly => karkardDayly.KarkardDaylyModule) },
   { path: 'mam/offkarkard', loadChildren: () => import('./rr-offload-karkard/rr-offload-karkard.module').then(offloadKarkard => offloadKarkard.RrOffloadKarkardModule) },
   { path: 'mam/dh', loadChildren: () => import('./disposal-hours/disposal-hours.module').then(disposalHours => disposalHours.DisposalHoursModule) },
-  // { path: 'mam/locked', loadChildren: () => import('./disposal-hours/disposal-hours.module').then(disposalHours => disposalHours.DisposalHoursModule) },
-  // { path: 'mam/preNumber', loadChildren: () => import('./disposal-hours/disposal-hours.module').then(disposalHours => disposalHours.DisposalHoursModule) },
   { path: 'mam/gis', loadChildren: () => import('./gis/gis.module').then(GIS => GIS.GisModule) },
   { path: 'mam/locked', loadChildren: () => import('./rr-locked/rr-locked.module').then(locked => locked.RrLockedModule) },
   { path: 'mam/pns', loadChildren: () => import('./rr-pre-number-shown/rr-pre-number-shown.module').then(preNumberShown => preNumberShown.RrPreNumberShownModule) },
+  { path: 'anlzfile/result', loadChildren: () => import('./image-attr-file-result/image-attr-file-result.module').then(imageAttributionFileResult => imageAttributionFileResult.ImageAttrFileResultModule) },
+  { path: 'anlzfile/analyze', loadChildren: () => import('./image-attr-file-analyze/image-attr-file-analyze.module').then(imageAttributionFileAnalyze => imageAttributionFileAnalyze.ImageAttrFileAnalyzeModule) },
   { path: 'anlz/prfm', loadChildren: () => import('./performance/performance.module').then(analysePerformance => analysePerformance.PerformanceModule) },
   { path: 'gallery', loadChildren: () => import('./gallery/gallery.module').then(gallery => gallery.GalleryModule) }
 ];

@@ -90,6 +90,9 @@ export class MathS {
             return false;
         return true;
     }
+    static trimation = (val: string) => {
+        return val.trim();
+    }
     // private pushOrPopFromMobileNumber = (mobileNum: string | number) => {
     //   // unshift to array just allowed so => string to array and then to string should converted
     //   const arrayString = [];

@@ -3,24 +3,19 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'خروجی جداول',
+        title: 'ثبت کیفیت تصاویر',
         isSelected: true
     },
     {
         id: '2',
-        title: 'ذخیره ستون ها',
+        title: 'بهبود بخش بازدید',
         isSelected: true
     },
     {
         id: '2',
-        title: 'گالری',
+        title: 'توصیف تصاویر',
         isSelected: true
-    },
-    {
-        id: '2',
-        title: 'رفع برخی ایرادات',
-        isSelected: true
-    },
+    }   
 ]
 export class infoVersion {
 

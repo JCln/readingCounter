@@ -1,3 +1,13 @@
+<app-collapsable [_isCollapsed]=_isCollapsed (_clicked)=" _isCollapsed = !_isCollapsed">
+</app-collapsable>
+<form #form="ngForm" *ngIf="!_isCollapsed" (ngSubmit)="showSearchOptionsDialog()" class="insert_track">
+    <div class="input_2">
+        <div class="_key">شماره لیست</div>
+        <input class="_value" name="listNumber" [(ngModel)]="importDynamicService.AssessPreReq.listNumber">
+    </div>
+    <button type="submit" class="btn_1">مشاهده</button>
+</form>
+
 <form #form="ngForm" *ngIf="dataSource.length" (ngSubmit)="connectToServer()">
     <section class="static_part">
 
@@ -39,9 +49,9 @@
     </section>
 </form>
 
-<app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-    [_outputFileName]="'assess_pre'" [_checkUpName]="'assess_pre'" [_numberOfExtraColumns]="[1]" [_canShowButton]="_canShowAssessButton"
-    [_selectedColumnsToRemember]="'selectedListManagerAssess'"
+<app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="_selectedColumns" [dataSource]="dataSource"
+    [_outputFileName]="'assess_pre'" [_checkUpName]="'assess_pre'" [_numberOfExtraColumns]="[1]"
+    [_canShowButton]="_canShowAssessButton" [_selectedColumnsToRemember]="'selectedListManagerAssess'"
     [_sessionName]="'assess_pre'" (refreshedTable)="refreshTable()"
     (showSearchedOptionsDialog)="showSearchOptionsDialog()" (registeredAssess)="registerAssessAdd()"
     (showedPictures)="getReadingReportTitles($event)">

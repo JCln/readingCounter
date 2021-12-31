@@ -37,6 +37,8 @@ export interface ITabs {
 export enum ENEssentialsToSave {
     saveDataForKarbari = 'saveDataForKarbari',
     saveDataForImageAttribution = 'saveDataForImageAttribution',
+    saveDataForImageAttrResult = 'saveDataForImageAttrResult',
+    saveDataForImageAttrAnalyze = 'saveDataForImageAttrAnalyze',
     saveDataForCounterState = 'saveDataForCounterState',
     saveDataForQotrManager = 'saveDataForQotrManager',
     saveDataForCounterReport = 'saveDataForCounterReport',
@@ -234,6 +236,8 @@ export enum ENThemeColor {
     dark = 1,
 }
 export enum ENSelectedColumnVariables {
+    selectedImageAttrResult = '_imageAttrResult',
+    selectedImageAttrAnalyze = '_imageAttrAnalyze',
     selectedSimafaBatch = '_simafaBatch',
     selectedTrackReading = 'reading',
     selectedTrackLoaded = 'loaded',
@@ -243,7 +247,7 @@ export enum ENSelectedColumnVariables {
     selectedlastStates = 'lastStates',
     selectedUsersAll = '_usersAll',
     selectedListManagerAll = '_listManagerAll',
-    selectedListManagerAssess = '_assessPreColumns',
+    selectedListManagerAssess = 'assess_pre',
     selectedListManagerMosh = '_searchMosh',
     selectedCounterState = '_counterState',
     selectedListManagerPro = '_searchPro',
@@ -310,5 +314,5 @@ export interface Theme {
     properties: any
 }
 export enum ENLoginVersion {
-    version = '0.5.6'
+    version = '0.5.7'
 }

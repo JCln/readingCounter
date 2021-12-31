@@ -6,13 +6,13 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENImportDatas,
-    IImportDataResponse,
-    IImportDynamicDefault,
-    IImportSimafaBatchReq,
-    IImportSimafaReadingProgramsReq,
-    IImportSimafaSingleReq,
-    IReadingProgramRes,
+  ENImportDatas,
+  IImportDataResponse,
+  IImportDynamicDefault,
+  IImportSimafaBatchReq,
+  IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
+  IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -20,6 +20,7 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { Converter } from './../classes/converter';
 import { UtilsService } from './utils.service';
 
@@ -62,66 +63,6 @@ export class ImportDynamicService {
     { field: 'orderPersian', header: 'فارسی', isSelected: false, readonly: true, isBoolean: true },
     { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true }
   ]
-  private _assessPreColumns: IObjectIteratation[] =
-    [
-      { field: 'billId', header: 'شناسه قبض', isSelected: false },
-      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
-      { field: 'radif', header: 'ش.پرونده', isSelected: false },
-      { field: 'eshterak', header: 'اشتراک', isSelected: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: false },
-      { field: 'qeraatCode', header: 'قرائت', isSelected: false },
-      { field: 'firstName', header: 'نام', isSelected: true },
-      { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
-      { field: 'karbariCode', header: 'کاربری', isSelected: true },
-      { field: 'preNumber', header: 'رقم قبلی', isSelected: true },
-      { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
-      { field: 'preDate', header: 'تاریخ قبلی', isSelected: false },
-      { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true },
-      { field: 'address', header: 'آدرس', isSelected: false },
-      { field: 'pelak', header: 'پلاک', isSelected: false },
-      { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false },
-      { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false },
-      { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false },
-      { field: 'qotrCode', header: 'قطر', isSelected: false },
-      // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
-      { field: 'postalCode', header: 'کد پستی', isSelected: false },
-      { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },
-      { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false },
-      { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false },
-      { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true },
-      { field: 'counterSerial', header: 'سریال کنتور', isSelected: false },
-      // { field: 'counterStateId', header: 'کد وضعیت کنتور', isSelected: false },      
-      { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false },
-      { field: 'tavizDate', header: 'تاریخ تعویض', isSelected: false },
-      { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
-      { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
-      { field: 'mobile', header: 'موبایل', isSelected: false },
-      { field: 'hazf', header: 'حذف', isSelected: false },
-      { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
-      { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
-      { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false },
-      { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false },
-      { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false },
-      { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false },
-      { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false },
-      { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false },
-      { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false },
-      { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false },
-      // { field: 'possibleKarbariCode', header: 'کد کاربری پیمایش', isSelected: false },
-      { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
-      { field: 'masraf', header: 'مصرف', isSelected: true },
-      { field: 'y', header: 'Y', isSelected: false },
-      { field: 'x', header: 'X', isSelected: false },
-      { field: 'gisAccuracy', header: 'دقت', isSelected: false },
-      { field: 'eslahType', header: 'اصلاح', isSelected: false },
-      { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
-      { field: 'offLoadTime', header: 'زمان', isSelected: false },
-      { field: 'dateDifference', header: 'مدت', isSelected: false },
-      { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
-      { field: 'description', header: 'توضیحات', isSelected: false },
-      { field: 'isSelected', header: 'انتخاب', isSelected: true, isBoolean: true }
-    ]
-
 
   importDynamicReq: IImportDynamicDefault = {
     fromEshterak: '',
@@ -154,9 +95,6 @@ export class ImportDynamicService {
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
-  columnAssessPre = (): IObjectIteratation[] => {
-    return this._assessPreColumns;
-  }
   columnSimafaSingle = () => {
     return this._simafaSingleReq;
   }
@@ -495,7 +433,27 @@ export class ImportDynamicService {
     });
 
   }
-
+  showCheckboxDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
+    // disable close mean when dynamic count show decision should make
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
+        {
+          disableClose: disableClose,
+          minWidth: '19rem',
+          data: {
+            data: res,
+            title: title
+          }
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (disableClose) {
+          if (result) {
+            resolve(true);
+          }
+        }
+      })
+    });
+  }
   /*API CALLS */
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { IImportDataResponse } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
@@ -15,7 +14,7 @@ import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
-import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 
 
 @Injectable({
@@ -26,6 +25,22 @@ export class ReadingReportManagerService {
   ENReadingReports = ENReadingReports;
 
   masterReq: IReadingReportReq = {
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  };
+  imgAttrResultReq: IReadingReportReq = {
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  };
+  imgAttrAnalyzeReq: IReadingReportReq = {
     fromDate: '',
     toDate: '',
     counterReaderId: '',
@@ -146,7 +161,7 @@ export class ReadingReportManagerService {
     this[variable].toDate = $event;
   }
 
-  
+
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -207,7 +222,7 @@ export class ReadingReportManagerService {
   }
   getQotrDictionary = () => {
     return this.dictionaryWrapperService.getQotrDictionary();
-  }  
+  }
 
 
   private datesValidation = (dataSource: object): boolean => {
@@ -345,17 +360,16 @@ export class ReadingReportManagerService {
       })
     });
   }
-  showResDialog = (res: IImportDataResponse, disableClose: boolean, title: string): Promise<any> => {
+  showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogComponent,
+      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '19rem',
           data: {
             data: res,
-            title: title,
-            isConfirm: disableClose
+            title: title
           }
         });
       dialogRef.afterClosed().subscribe(async result => {
@@ -366,7 +380,6 @@ export class ReadingReportManagerService {
         }
       })
     });
-
   }
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
