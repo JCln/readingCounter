@@ -25,7 +25,7 @@ export class CounterStateService {
       { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
       { field: 'clientOrder', header: 'ترتیب', isSelected: false, isNumber: true },
       { field: 'forProvince', header: 'همه نواحی', isSelected: false, isBoolean: true },
-      { field: 'canEnterNumber', header: 'ثبت رقم', isSelected: true, isBoolean: true },
+      { field: 'canEnterNumber', header: 'رقم اختیاری', isSelected: true, isBoolean: true },
       { field: 'isMane', header: 'مانع', isSelected: true, isBoolean: true },
       { field: 'canNumberBeLessThanPre', header: 'فعلی کمتر از قبلی', isSelected: false, isBoolean: true },
       { field: 'isTavizi', header: 'تعویضی', isSelected: true, isBoolean: true },

@@ -4,6 +4,7 @@ import { IImageAttributionResult, IReadingReportReq } from 'interfaces/ireports'
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-image-attr-file-result',
@@ -20,6 +21,7 @@ export class ImageAttrFileResultComponent extends FactoryONE {
     reportCode: 0,
     year: 1400
   }
+  chartColors:any;
   dataSource: IImageAttributionResult[] = [];
 
   _selectCols: any[] = [];
@@ -56,6 +58,7 @@ export class ImageAttrFileResultComponent extends FactoryONE {
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionResult, this.readingReportReq);
     this.closeTabService.saveDataForImageAttrResult = this.dataSource;
+    this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.dataSource.length) }]    
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

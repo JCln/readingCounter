@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { IImageAttributionAnalyze } from 'interfaces/ireports';
-import { Color, Label } from 'ng2-charts';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-bar-img-attr-anlz',
@@ -10,6 +10,7 @@ import { Color, Label } from 'ng2-charts';
 })
 export class BarImgAttrAnlzComponent implements OnChanges {
   @Input() dataSource: IImageAttributionAnalyze[];
+  @Input() chartColors: any[];
 
   private defaultOptions = {
     fontFamily: 'Blotus',
@@ -18,10 +19,6 @@ export class BarImgAttrAnlzComponent implements OnChanges {
     fontColor: 'rgb(112, 112, 112)',
     beginAtZero: true
   }
-  public barChartColors: Color[] = [
-    { backgroundColor: 'red' }
-  ]
-
   public barChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -51,19 +48,17 @@ export class BarImgAttrAnlzComponent implements OnChanges {
   public barChartData: ChartDataSets[] = [];
 
   ngOnChanges(): void {
-    let temp: any[] = [];
-    let labels: any[] = [];
+    let temp = [];
+    let labels = [];
+    this.barChartLabels = [];
+    this.barChartData = [];
+
     this.dataSource.forEach(item => {
       temp.push(item.itemQuantity);
       labels.push(item.itemTitle);
     })
-    console.log(labels);
-
-    this.barChartLabels.push(labels);
+    this.barChartLabels = labels;
     this.barChartData.push({ data: temp, label: 'مقدار' })
-
-    // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-    // this.barChartData.push({ data: [28, 48], label: ['Series B'] })
   }
 
 }

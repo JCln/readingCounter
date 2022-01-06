@@ -10,6 +10,7 @@ import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataS
 })
 export class PieImgAttrAnlzComponent implements OnChanges {
   @Input() dataSource: IImageAttributionAnalyze[];
+  @Input() chartColors: any[];
 
   private defaultOptions = {
     fontFamily: 'Blotus',
@@ -25,11 +26,21 @@ export class PieImgAttrAnlzComponent implements OnChanges {
       display: true,
       position: 'right',
       labels: this.defaultOptions
+    },
+    tooltips: {
+      footerFontFamily: 'Blotus',
+      bodyFontFamily: 'Blotus',
+      titleFontFamily: 'Blotus',
+      bodyFontSize: 18,
+      titleFontSize: 18,
+      footerFontSize: 18,
+      bodyFontStyle: 'bold',
+      enabled: true,
     }
   };
   public pieChartLabels: Label[] = [];
   public pieChartDataZone: SingleDataSet = [];
-  public pieChartType: ChartType = 'pie';  
+  public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
   // 
@@ -40,6 +51,7 @@ export class PieImgAttrAnlzComponent implements OnChanges {
   }
   connectToServer = () => {
     this.pieChartDataZone = [];
+    this.pieChartLabels = [];
     this.dataSource.forEach(item => {
       this.pieChartDataZone.push(item.itemQuantity);
       this.pieChartLabels.push([item.itemTitle]);

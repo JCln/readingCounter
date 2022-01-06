@@ -5,6 +5,7 @@ import { IImageAttributionAnalyze } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-image-attr-file-analyze',
@@ -14,6 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class ImageAttrFileAnalyzeComponent extends FactoryONE {
   isCollapsed: boolean = false;
   dataSource: IImageAttributionAnalyze[] = [];
+  chartColors: any[];
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -46,6 +48,7 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionAnalyze, this.readingReportManagerService.imgAttrAnalyzeReq);
     this.closeTabService.saveDataForImageAttrAnalyze = this.dataSource;
+    this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.dataSource.length) }]
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

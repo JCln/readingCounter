@@ -47,7 +47,9 @@
     </app-prime-table>
 </main>
 
-<!-- <section *ngIf="dataSource">
-    <app-pie-img-attr-anlz [dataSource]="dataSource"></app-pie-img-attr-anlz> -->
-<!-- <app-bar-img-attr-anlz [dataSource]="dataSource"></app-bar-img-attr-anlz> -->
-<!-- </section> -->
+<section class="_charts" *ngIf="dataSource[0]">
+    <app-pie-img-attr-anlz [dataSource]="dataSource" [chartColors]="chartColors">
+    </app-pie-img-attr-anlz>
+    <app-bar-img-attr-anlz [dataSource]="dataSource" [chartColors]="chartColors">
+    </app-bar-img-attr-anlz>
+</section>

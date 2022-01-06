@@ -293,6 +293,7 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true }
     ];
     private _RRPreNumberShown: IObjectIteratation[] = [
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -351,6 +352,7 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false }
     ]
     private _RRLocked: IObjectIteratation[] = [
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },
