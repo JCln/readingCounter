@@ -17,6 +17,12 @@ export class Converter {
             })
         });
     }
+    static convertTitleToIdByName = (name: any, dictionary: IDictionaryManager[]): any => {
+        return dictionary.map(dictionary => {
+            if (dictionary.title == name)
+                return dictionary.id;
+        });
+    }
     static persianToEngNumbers = (str) => {
         if (str == null || typeof str === 'undefined' || !str) return;
         const persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];

@@ -35,7 +35,7 @@ export class FragmentManagerService {
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
       { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
-      { field: 'orderPersian', header: 'فارسی', isSelected: true, readonly: true, isBoolean: true }
+      { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, readonly: true }
     ];
   }
   constructor(

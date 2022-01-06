@@ -3,13 +3,17 @@ import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
+import { CarouselWoumComponent } from './carousel-woum/carousel-woum.component';
+import { WoumComponent } from './carousel-woum/woum/woum.component';
 import { RrPreNumberShownRoutingModule } from './rr-pre-number-shown-routing.module';
 import { RrPreNumberShownComponent } from './rr-pre-number-shown.component';
 
 
 @NgModule({
   declarations: [
-    RrPreNumberShownComponent
+    RrPreNumberShownComponent,
+    CarouselWoumComponent,
+    WoumComponent,
   ],
   imports: [
     SharedPrimeNgModule,

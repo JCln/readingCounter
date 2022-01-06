@@ -3,6 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { SortEvent } from 'primeng/api';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -40,6 +41,9 @@ export class RrPreNumberShownComponent extends FactoryONE {
   qotrDictionary: IDictionaryManager[] = [];
 
   dataSource: IOnOffLoadFlat[] = [];
+  rowIndex: number = 0;
+  woumInfosDataSource: IOnOffLoadFlat;
+  showWouImages: boolean = false;
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -80,15 +84,15 @@ export class RrPreNumberShownComponent extends FactoryONE {
     if (tempZone) {
       this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
       this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    // Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
@@ -124,5 +128,41 @@ export class RrPreNumberShownComponent extends FactoryONE {
       item.newRate = +MathS.getRange(item.newRate);
     })
   }
+  carouselCancelClicked = () => {
+    this.showWouImages = false;
+  }
+  routeToWoui = (object: any) => {
+    this.woumInfosDataSource = object['dataSource'];
+    this.rowIndex = object['ri'];
+    this.showWouImages = true;
+    scrollTo(0, 0);
+  }
+  carouselWOUMNextItem = () => {
+    this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
+    this.woumInfosDataSource = this.dataSource[this.rowIndex];
+  }
+  carouselWOUMPrevItem = () => {
+    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length : this.rowIndex--;
+    this.woumInfosDataSource = this.dataSource[this.rowIndex];
+  }
+  customSort(event: SortEvent) {
+    event.data.sort((data1, data2) => {
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
 
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+      return (event.order * result);
+    });
+  }
 }

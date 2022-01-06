@@ -232,7 +232,7 @@
                     <div class="tooltip_text_right">مشاهده عکس(ها)</div>
                 </i>
             </td>
-            <td *ngIf="(_outputFileName == 'all-lists')&& !_allComponentIsModify"
+            <td *ngIf="(_outputFileName == 'all-lists' || _outputFileName == 'rr-preNumber'|| _outputFileName == 'rr-locked')&& !_allComponentIsModify"
                 (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
@@ -242,9 +242,7 @@
             <td *ngIf="(
                 _outputFileName == 'search-pro' 
             || _outputFileName == 'search-mosh'
-            || _outputFileName == 'rr-details'
-            || _outputFileName == 'rr-locked'
-            || _outputFileName == 'rr-preNumber'
+            || _outputFileName == 'rr-details'            
             || _outputFileName == 'trv'
             || _outputFileName == 'trv-diff'            
             )&& !_allComponentIsModify" (click)="searchService.routeToWoui(dataSource)">
