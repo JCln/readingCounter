@@ -226,7 +226,18 @@ export enum ENHasImportDynamicCount {
     hasNotCount = 'false'
 }
 export enum ENLocalStorageNames {
-    hasDynamicCount = 'hasDynamicCount'
+    hasDynamicCount = 'hasDynamicCount',
+    mapAnimationStartFrom = 'mapAnimationStartFrom'
+}
+export enum ENRandomNumbers {
+    zero = 0,
+    five = 5,
+    ten = 10,
+    twenty = 20,
+    thirdy = 30,
+    forthy = 40,
+    fifty = 50,
+    twoHundred = 200,
 }
 export enum ENThemeName {
     themeColor = 'themeColor'

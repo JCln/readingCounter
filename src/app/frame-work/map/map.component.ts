@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { Imap } from 'interfaces/imap.js';
-import { ITHV } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
 import { IListManagerPDXY } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -66,7 +66,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private layerGroup = new L.FeatureGroup();
   private markersDataSourceXY: IListManagerPDXY[] = [];
 
-  polyline_configs: number;
+  polyline_configs: number = null;
   isShowMap: boolean = true;
   canShowOptionsButton: boolean = false;
   isShowMapConfig: boolean = false;
@@ -163,7 +163,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
       return;
     }
-    this.mapConfigOptions(200);
+    this.mapConfigOptions(this.mapService.getFromLocalStorage());
   }
   private makeClusterRouteObject = (): IReadingReportGISReq => {
     return {
@@ -256,9 +256,12 @@ export class MapComponent implements OnInit, OnDestroy {
     })
     this.layerGroup.addLayer(markers);
   }
-  // 
 
   mapConfigOptions = (delay: number) => {
+    if (this.polyline_configs)
+      this.mapService.saveToLocalStorage(this.polyline_configs);
+    if (this.polyline_configs == 0)
+      this.mapService.saveToLocalStorage(ENRandomNumbers.zero);
     this.removeAllLayers();
 
     if (this._selectedOrderId === 0) {

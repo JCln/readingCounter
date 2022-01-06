@@ -33,6 +33,8 @@ export class AllImagesComponent extends FactoryONE {
   connectToServer = async () => {
     if (!this.readingReportManagerService.verificationFollowUPTrackNumber(this.trackNumber))
       return;
+    this.imgsOriginUrl = [];
+    this.allImagesDataSource = null;
 
     this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.trackNumber);
     this.closeTabService.saveDataForRRGalleryReq = this.trackNumber;
@@ -46,9 +48,9 @@ export class AllImagesComponent extends FactoryONE {
      */
     if (this.closeTabService.saveDataForRRGalleryReq) {
       this.trackNumber = this.closeTabService.saveDataForRRGalleryReq;
-      this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.trackNumber);
-      this.showAllImgs();
       this._isCollapsed = true;
+      // this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.trackNumber);
+      // this.showAllImgs();
     }
 
   }

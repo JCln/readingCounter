@@ -3,8 +3,11 @@ import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.j
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { DateJalaliService } from 'services/date-jalali.service';
+import { ENLocalStorageNames } from 'interfaces/ioverall-config';
+import { BrowserStorageService } from 'services/browser-storage.service';
 import { ListManagerService } from 'services/list-manager.service';
+
+import { ENRandomNumbers } from './../Interfaces/ioverall-config';
 
 declare let L;
 
@@ -31,7 +34,7 @@ export class MapService {
 
   constructor(
     private listManagerService: ListManagerService,
-    private dateJalaliService: DateJalaliService,
+    private browserStorageService: BrowserStorageService,
     private _location: Location
   ) { }
 
@@ -51,7 +54,20 @@ export class MapService {
       this.addInvalidateMap();
     }, 'بارگزاری مجدد نقشه').addTo(this.map);
   }
-
+  saveToLocalStorage = (numberLen: ENRandomNumbers) => {
+    this.browserStorageService.set(ENLocalStorageNames.mapAnimationStartFrom, numberLen);
+  }
+  isAnimationExistsInLocal = (): boolean => {
+    return this.browserStorageService.isExists(ENLocalStorageNames.mapAnimationStartFrom);
+  }
+  getFromLocalStorage = (): ENRandomNumbers => {
+    const a = this.browserStorageService.get(ENLocalStorageNames.mapAnimationStartFrom);
+    if (a === null || a === 'undefined') {
+      this.saveToLocalStorage(ENRandomNumbers.twoHundred);
+      return ENRandomNumbers.twoHundred;
+    }
+    return a;
+  }
   easyprintButtonLeaflet = () => {
     L.easyPrint({
       position: 'bottomleft',
