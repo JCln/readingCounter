@@ -62,9 +62,13 @@ main {
   border: none;
   cursor: pointer;
 
-  .pi-question {
+  i {
     color: var(--white);
     font-size: $font_s;
     font-weight: 600;
   }
+}
+
+._screen {
+  background: var(--thirdy_3);
 }

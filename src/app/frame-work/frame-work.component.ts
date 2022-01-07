@@ -11,6 +11,9 @@ import { ThemeService } from 'services/theme.service';
   styleUrls: ['./frame-work.component.scss']
 })
 export class FrameWorkComponent {
+  elem = document.documentElement;
+  _isFullScreen: boolean = false;
+
   @Input() pageTitle: string = '';
   @Input() refreshPage: boolean;
 
@@ -25,5 +28,14 @@ export class FrameWorkComponent {
     this.helpWrapperService.openDialog();
   }
   // ///////
+  openFullscreen() {
+    if (this.elem.requestFullscreen) {
+      this.elem.requestFullscreen();
+    }
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+    this._isFullScreen = !this._isFullScreen;
+  }
 
 }

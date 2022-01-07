@@ -1,5 +1,6 @@
-@import 'variable';
+@import 'primeNG';
 @import 'tooltip';
+@import 'input.scss';
 
 .container {
   display: grid;
@@ -8,6 +9,13 @@
   align-items: center;
   gap: 0.3rem;
   border-radius: $border_15;
+}
+
+.input_2 {
+  margin-left: auto;
+  direction: rtl;
+  width: 19rem;
+  background: var(--white);
 }
 
 .grid_double {
