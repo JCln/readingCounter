@@ -163,7 +163,8 @@ export class MapComponent implements OnInit, OnDestroy {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
       return;
     }
-    this.mapConfigOptions(this.mapService.getFromLocalStorage());
+    this.polyline_configs = this.mapService.getFromLocalStorage();
+    this.mapConfigOptions(this.mapService.getFromLocalStorage(), true);
   }
   private makeClusterRouteObject = (): IReadingReportGISReq => {
     return {
@@ -240,6 +241,12 @@ export class MapComponent implements OnInit, OnDestroy {
       }, i * delay);
     })
   }
+  private drawXYPosition = (method: string, xyData: any) => {
+    this.panToDes(parseFloat(xyData[0].y), parseFloat(xyData[0].x));
+    xyData.map((items) => {
+      this[method](parseFloat(items.y), parseFloat(items.x), items);
+    })
+  }
   private markingOnMapNClusterNDelay = (method: string, xyData: any) => {
     this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 12);
     xyData.map((items, i) => {
@@ -257,12 +264,12 @@ export class MapComponent implements OnInit, OnDestroy {
     this.layerGroup.addLayer(markers);
   }
 
-  mapConfigOptions = (delay: number) => {
+  mapConfigOptions = (delay: number, isFirstTime: boolean) => {
+    this.removeAllLayers();
     if (this.polyline_configs)
       this.mapService.saveToLocalStorage(this.polyline_configs);
     if (this.polyline_configs == 0)
       this.mapService.saveToLocalStorage(ENRandomNumbers.zero);
-    this.removeAllLayers();
 
     if (this._selectedOrderId === 0) {
       this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterak) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterakDESC)
@@ -270,9 +277,13 @@ export class MapComponent implements OnInit, OnDestroy {
     else {
       this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByDatePersian) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByDateDESCPersian)
     }
-
-    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay);
-    this.leafletDrawPolylines(delay);
+    if (isFirstTime) {
+      this.drawXYPosition('circleToLeaflet', this.markersDataSourceXY);
+    }
+    else {
+      this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay);
+      this.leafletDrawPolylines(delay);
+    }
   }
   private extrasConfigOptions = (xyData: any) => {
     this.removeAllLayers();
