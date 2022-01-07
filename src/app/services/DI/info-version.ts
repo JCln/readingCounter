@@ -3,19 +3,19 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'ثبت کیفیت تصاویر',
+        title: 'داشبورد منطقه ای',
         isSelected: true
     },
     {
         id: '2',
-        title: 'بهبود بخش بازدید',
+        title: 'چارت کیفیت تصاویر',
         isSelected: true
     },
     {
         id: '2',
-        title: 'توصیف تصاویر',
+        title: 'گزارش وضعیت کنتور',
         isSelected: true
-    }   
+    }
 ]
 export class infoVersion {
 

@@ -29,11 +29,11 @@ export class FrameWorkComponent {
   }
   // ///////
   openFullscreen() {
-    if (this.elem.requestFullscreen) {
-      this.elem.requestFullscreen();
-    }
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
+    if (document.fullscreenElement) {
+      document.exitFullscreen()
+        .catch((err) => console.error(err))
+    } else {
+      document.documentElement.requestFullscreen();
     }
     this._isFullScreen = !this._isFullScreen;
   }
