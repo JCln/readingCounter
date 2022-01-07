@@ -190,6 +190,7 @@ export enum ENInterfaces {
     KarbariRemove = 'V1/Karbari/Remove',
     KarbariEdit = 'V1/Karbari/Edit',
     KarbariAdd = 'V1/Karbari/Add',
+    rrInStatePost = 'V1/List/Offloaded/InState',
 
     counterStateAll = 'V1/CounterState/All',
     counterStateDictionary = 'V1/CounterState/Dictionary',

@@ -152,6 +152,15 @@ export class ReadingReportManagerService {
     reportCode: 0,
     year: 1400
   }
+  inStateReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
   /* GET*/
 
   receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
@@ -187,6 +196,13 @@ export class ReadingReportManagerService {
         if (MathS.isNull(res))
           this.emptyMessage();
         resolve(res)
+      })
+    });
+  }
+  postExcel = (method: ENInterfaces, body: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBLOB(method, body).toPromise().then(res => {
+        resolve(res);
       })
     });
   }

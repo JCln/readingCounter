@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'anlzfile/result', loadChildren: () => import('./image-attr-file-result/image-attr-file-result.module').then(imageAttributionFileResult => imageAttributionFileResult.ImageAttrFileResultModule) },
   { path: 'anlzfile/analyze', loadChildren: () => import('./image-attr-file-analyze/image-attr-file-analyze.module').then(imageAttributionFileAnalyze => imageAttributionFileAnalyze.ImageAttrFileAnalyzeModule) },
   { path: 'anlz/prfm', loadChildren: () => import('./performance/performance.module').then(analysePerformance => analysePerformance.PerformanceModule) },
-  { path: 'gallery', loadChildren: () => import('./gallery/gallery.module').then(gallery => gallery.GalleryModule) }
+  { path: 'gallery', loadChildren: () => import('./gallery/gallery.module').then(gallery => gallery.GalleryModule) },
+  { path: 'inState', loadChildren: () => import('./rr-instate/rr-instate.module').then(inState => inState.RrInstateModule) },
 ];
 
 @NgModule({

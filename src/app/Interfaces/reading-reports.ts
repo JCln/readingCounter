@@ -1,5 +1,6 @@
 export enum ENReadingReports {
     master = 'masterReq',
+    inState = 'inStateReq',
     details = 'detailsReq',
     traverse = 'traverseReq',
     trvch = 'trvchReq',
