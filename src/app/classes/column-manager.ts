@@ -6,10 +6,10 @@ import { IObjectIteratation } from 'interfaces/ioverall-config';
 })
 export class ColumnManager {
 
-    private imgattr: IObjectIteratation[] = [
+    imgattr: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
     ];
-    private reading: IObjectIteratation[] = [
+    reading: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -32,7 +32,7 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false }
 
     ];
-    private finished: IObjectIteratation[] = [
+    finished: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -55,7 +55,7 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false }
 
     ];
-    private loaded: IObjectIteratation[] = [
+    loaded: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -78,7 +78,7 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false }
 
     ];
-    private offloaded: IObjectIteratation[] = [
+    offloaded: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -101,7 +101,7 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false }
 
     ];
-    private imported: IObjectIteratation[] = [
+    imported: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -124,7 +124,31 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false }
 
     ];
-    private _counterState: IObjectIteratation[] = [
+    lastStates: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true },
+        { field: 'itemQuantity', header: 'تعداد', isSelected: true },
+        { field: 'stateTitle', header: 'مرحله', isSelected: true },
+        { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
+        // { field: 'zoneId', header: 'ناحیه', isSelected: false },
+        // { field: 'year', header: 'سال', isSelected: false },
+        { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
+        { field: 'fromDate', header: 'از', isSelected: false },
+        { field: 'toDate', header: 'تا', isSelected: false },
+        { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
+        { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false },
+        { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
+        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
+        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
+        { field: 'description', header: 'توضیحات', isSelected: false }
+        // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }        
+    ];
+    counterState: IObjectIteratation[] = [
         { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: false, isNumber: true },
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
@@ -138,7 +162,7 @@ export class ColumnManager {
         { field: 'isXarab', header: 'خراب', isSelected: true, isBoolean: true },
         { field: 'isFaqed', header: 'فاقد', isSelected: true, isBoolean: true }
     ]
-    private _RRAnalyzeByParam = [
+    analyzePrfm = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: false },
         // { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true, readonly: false },
         // { field: 'regionTitle', header: 'منطقه', isSelected: false, readonly: false },
@@ -152,25 +176,25 @@ export class ColumnManager {
         { field: 'mode', header: 'مٌد', isSelected: true, readonly: false },
         { field: 'duration', header: 'مدت(h)', isSelected: false, readonly: false }
     ];
-    private _RRMaster = [
+    master = [
         // { field: 'zoneId', header: 'کد ناحیه', isSelected: true, readonly: false },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, readonly: true },
         { field: 'reportTitle', header: 'عنوان گزارش', isSelected: true, readonly: true },
         // { field: 'reportId', header: 'گزارش', isSelected: true, readonly: true },
         { field: 'itemCount', header: 'تعداد', isSelected: true, readonly: true }
     ]
-    private _imageAttrResult = [
+    _imageAttrResult = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, readonly: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
         { field: 'itemTitle', header: 'عنوان گزارش', isSelected: true, readonly: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, readonly: false },
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
     ]
-    private _imageAttrAnalyze = [
+    _imageAttrAnalyze = [
         { field: 'itemTitle', header: 'عنوان گزارش', isSelected: true, readonly: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, readonly: true },
     ]
-    private _RRDetails = [
+    rrDetails = [
         { field: 'billId', header: 'ش قبض', isSelected: false, readonly: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true },
@@ -190,7 +214,7 @@ export class ColumnManager {
         { field: 'counterSerial', header: 'سریال کنتور', isSelected: false, readonly: true },
         { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, readonly: true }
     ]
-    private _RRTraverse = [
+    trv = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true },
@@ -213,7 +237,7 @@ export class ColumnManager {
         { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, readonly: true },
         { field: 'possibleEmpty', header: 'خالی پیمایش', isSelected: false, readonly: true }
     ]
-    private _RRTraverseDifferential = [
+    trvDiff = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -225,7 +249,7 @@ export class ColumnManager {
         { field: 'value', header: 'مقدار قدیم', isSelected: true },
         { field: 'newValue', header: 'مقدار جدید', isSelected: true },
     ]
-    private _RRKarkard: IObjectIteratation[] = [
+    karkard: IObjectIteratation[] = [
         // { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectOption: true, readonly: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
@@ -242,7 +266,7 @@ export class ColumnManager {
         { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
         { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
     ]
-    private _RRKarkardDaily = [
+    karkardDaily = [
         { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
         { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
@@ -259,7 +283,7 @@ export class ColumnManager {
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true }
     ]
-    private _RROffloadedKarkard = [
+    karkardOffload = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
         { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
@@ -279,7 +303,7 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
     ]
-    private _RRDisposalHours = [
+    disposalHs = [
         { field: 'dayJalali', header: 'روز', isSelected: true, readonly: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
         { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
@@ -292,7 +316,7 @@ export class ColumnManager {
         { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true }
     ];
-    private _RRPreNumberShown: IObjectIteratation[] = [
+    rrPreNumber: IObjectIteratation[] = [
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -351,7 +375,7 @@ export class ColumnManager {
         { field: 'dateDifference', header: 'مدت', isSelected: false },
         { field: 'description', header: 'توضیحات', isSelected: false }
     ]
-    private _RRLocked: IObjectIteratation[] = [
+    rrLocked: IObjectIteratation[] = [
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -410,7 +434,7 @@ export class ColumnManager {
         { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false }
     ]
-    private _searchPro: IObjectIteratation[] =
+    searchPro: IObjectIteratation[] =
         [
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -468,7 +492,7 @@ export class ColumnManager {
             { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
             { field: 'description', header: 'توضیحات', isSelected: false }
         ];
-    private _searchMosh: IObjectIteratation[] =
+    searchMosh: IObjectIteratation[] =
         [
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -527,7 +551,7 @@ export class ColumnManager {
             { field: 'description', header: 'توضیحات', isSelected: false }
         ];
 
-    private assess_pre: IObjectIteratation[] =
+    assess_pre: IObjectIteratation[] =
         [
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -587,7 +611,7 @@ export class ColumnManager {
             { field: 'isSelected', header: 'انتخاب', isSelected: true, isBoolean: true }
         ]
 
-    private _searchSimple: IObjectIteratation[] = [
+    simpleSearch: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -603,19 +627,19 @@ export class ColumnManager {
         { field: 'overallQuantity', header: 'کل تعداد', isSelected: false, isNumber: true },
         { field: 'trackStatusTitle', header: 'وضعیت', isSelected: false }
     ]
-    private _auth1: IObjectIteratation[] = [
+    auth1: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
         { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true }
     ];
-    private _auth2: IObjectIteratation[] = [
+    auth2: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'authLevel1Id', header: 'app', isSelected: true, isSelectOption: true },
         { field: 'cssClass', header: 'کلاس css', isSelected: false },
         { field: 'inSidebar', header: 'سایدبار', isSelected: false, isBoolean: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
     ];
-    private _auth3: IObjectIteratation[] = [
+    auth3: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'authLevel2Id', header: 'ماژول', isSelected: true, isSelectOption: true },
         { field: 'cssClass', header: 'کلاس css', isSelected: false },
@@ -625,7 +649,7 @@ export class ColumnManager {
         { field: 'isClosable', header: 'قابل بستن', isSelected: false, isBoolean: true },
         { field: 'isRefreshable', header: 'قابل refresh', isSelected: false, isBoolean: true }
     ];
-    private _auth4: IObjectIteratation[] = [
+    auth4: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'authLevel3Id', header: 'کنترلر', isSelected: true, isSelectOption: true },
         { field: 'value', header: 'مقدار', isSelected: false, ltr: true },
@@ -633,7 +657,7 @@ export class ColumnManager {
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
         { field: 'isSidebar', header: 'در سایدبار', isSelected: false, isBoolean: true }
     ];
-    private _DMAnalyses: IObjectIteratation[] = [
+    analysis: IObjectIteratation[] = [
         { field: 'counterReader', header: 'مامور', isSelected: true, readonly: true },
         { field: 'overalCount', header: 'تعداد قرائت', isSelected: true, readonly: true },
         { field: 'maxBetweenTwoMinute', header: 'حداکثر زمان بین دو', isSelected: true, readonly: true },
@@ -645,7 +669,7 @@ export class ColumnManager {
         { field: 'disconnectRate', header: 'نرخ قطعی', isSelected: true, readonly: true },
         { field: 'medianBetweenTwoMinute', header: 'میانه بین دو', isSelected: true, readonly: true },
     ]
-    private _forbidden: IObjectIteratation[] = [
+    forbidden: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true },
         { field: 'displayName', header: 'مامور', isSelected: true },
         { field: 'preEshterak', header: 'اشتراک قبلی', isSelected: true },
@@ -662,7 +686,7 @@ export class ColumnManager {
         // { field: 'userId', header: 'کاربری', isSelected: true },    
         // { field: 'insertDateTime', header: 'توضیحات', isSelected: false }    
     ]
-    private _abFormulas = [
+    abBaha = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
         { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true, isSelectOption: true },
         { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
@@ -672,7 +696,7 @@ export class ColumnManager {
         { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
         { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
     ]
-    private _budgetFormulas: IObjectIteratation[] = [
+    Budget: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
         { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true },
         { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
@@ -681,11 +705,11 @@ export class ColumnManager {
         { field: 'toRate', header: 'تا نرخ', isSelected: true, readonly: true },
         { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
     ]
-    private _tabsare2Formulas = [
+    tabsare2 = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
         { field: 'formula', header: 'فرمول', isSelected: true, readonly: true, ltr: true }
     ]
-    private _tabsare3Formulas = [
+    tabsare3 = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
         { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true, isSelectOption: true },
         { field: 'fromDate', header: 'از', isSelected: true, readonly: true },
@@ -696,7 +720,7 @@ export class ColumnManager {
         { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
         { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
     ]
-    private _listManagerAll: IObjectIteratation[] = [
+    allLists: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -753,7 +777,7 @@ export class ColumnManager {
         { field: 'dateDifference', header: 'مدت', isSelected: false },
         { field: 'description', header: 'توضیحات', isSelected: false }
     ]
-    private _counterReport = [
+    counterReport = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
@@ -763,7 +787,7 @@ export class ColumnManager {
         { field: 'isTavizi', header: 'تعویض', isSelected: true, isBoolean: true },
         { field: 'clientOrder', header: 'ترتیب', isSelected: true }
     ]
-    private _readingConfigDefault: IObjectIteratation[] = [
+    readingConfigDefault: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'defaultAlalHesab', header: 'علی‌الحساب', isSelected: true },
         { field: 'minAlalHesab', header: 'علی‌الحساب کمینه', isSelected: false },
@@ -790,20 +814,20 @@ export class ColumnManager {
         { field: 'lowPercentRateBoundNonMaskooni', header: 'درصد low غیر مسکونی', isSelected: false, isNumber: true },
         { field: 'highPercentRateBoundNonMaskooni', header: 'درصد high غیر مسکونی', isSelected: false, isNumber: true }
     ]
-    private _readingPeriod = [
+    readingPeriod = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'readingPeriodKindId', header: 'نوع دوره', isSelected: true, isSelectOption: true },
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
         { field: 'clientOrder', header: 'ترتیب', isSelected: true }
     ]
-    private _readingPeriodKind = [
+    periodKind = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
         { field: 'clientOrder', header: 'ترتیب', isSelected: true },
         { field: 'isEnabled', header: 'فعال', isSelected: true, isBoolean: true },
     ]
-    private textOutput: IObjectIteratation[] = [
+    textOutput: IObjectIteratation[] = [
         { field: 'id', header: 'کد', isSelected: true, isNumber: true },
         { field: 'itemTitle', header: 'عنوان', isSelected: true },
         // { field: 'columnId', header: '', isSelected: true },
@@ -812,7 +836,7 @@ export class ColumnManager {
         { field: 'endIndex', header: 'انتها', isSelected: true, isNumber: true },
         { field: 'length', header: 'طول', isSelected: true, isNumber: true }
     ]
-    private _karbari = [
+    karbari = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'provinceId', header: 'استان', isSelected: true, isSelectOption: true },
         { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: true },
@@ -821,7 +845,7 @@ export class ColumnManager {
         { field: 'isSaxt', header: 'ساخت', isSelected: true, isBoolean: true },
         { field: 'hasReadingVibrate', header: 'لرزش', isSelected: true, isBoolean: true }
     ]
-    private _usersAll = [
+    userAll = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },
         { field: 'username', header: 'نام کاربری', isSelected: true, ltr: false },
         { field: 'userCode', header: 'کد کاربری', isSelected: false, ltr: false },
@@ -829,7 +853,7 @@ export class ColumnManager {
         { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true }
     ]
-    private _errors: IObjectIteratation[] = [
+    errors: IObjectIteratation[] = [
         { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },
         { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isNumber: true },
         { field: 'billId', header: 'شناسه قبض', isSelected: true, isNumber: true },
@@ -837,314 +861,14 @@ export class ColumnManager {
         { field: 'errorDescriptoin', header: 'توضیحات', isSelected: true },
         { field: 'hasError', header: 'خطا', isSelected: true, isBoolean: true }
     ]
-    private _apk: IObjectIteratation[] = [
+    apk: IObjectIteratation[] = [
         { field: 'versionName', header: 'نام نسخه', isSelected: true },
         { field: 'versionCode', header: 'نسخه', isSelected: true },
         // { field: 'fileRepositoryId', header: 'دانلود فایل', isSelected: true }
     ]
 
-
-    columnDefColumns = (): IObjectIteratation[] => [
-        { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
-        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
-        { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true },
-        { field: 'seen', header: 'دیده شده', isSelected: true, isBoolean: true },
-        // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },    
-        // { field: 'hasDetails', header: 'جزئیات' },
-    ]
-    columnFollowUpView = (): IObjectIteratation[] => {
-        return [
-            { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, readonly: true },
-            { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
-            { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, readonly: true },
-            { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, readonly: true },
-            { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, readonly: true },
-            { field: 'fromDate', header: 'از ', isSelected: true, readonly: true },
-            { field: 'toDate', header: 'تا ', isSelected: true, readonly: true },
-            { field: 'overallQuantity', header: 'کل تعداد ', isSelected: true, readonly: true },
-            { field: 'itemQuantity', header: 'تعداد ', isSelected: true, readonly: true },
-            { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, readonly: true },
-            { field: 'year', header: 'سال', isSelected: true, readonly: true }
-        ];
-    }
-    columnLastState = (): IObjectIteratation[] => {
-        return [
-            { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
-            { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-            { field: 'counterReaderName', header: 'مامور', isSelected: true },
-            { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
-            { field: 'listNumber', header: 'ش لیست', isSelected: true },
-            { field: 'itemQuantity', header: 'تعداد', isSelected: true },
-            { field: 'stateTitle', header: 'مرحله', isSelected: true },
-            { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
-            // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-            // { field: 'year', header: 'سال', isSelected: false },
-            { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
-            { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
-            { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
-            { field: 'fromDate', header: 'از', isSelected: false },
-            { field: 'toDate', header: 'تا', isSelected: false },
-            { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
-            { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false },
-            { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
-            { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
-            { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-            { field: 'description', header: 'توضیحات', isSelected: false }
-            // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }
-        ]
-    }
-    columnCounterState = (): IObjectIteratation[] => {
-        return this._counterState;
-    }
-    columnImageAttribution = (): IObjectIteratation[] => {
-        return this.imgattr;
-    }
-    columnAPK = (): IObjectIteratation[] => {
-        return this._apk;
-    }
-    columnUserAllUsers = (): IObjectIteratation[] => {
-        return this._usersAll;
-    }
-    columnCounterReport = (): IObjectIteratation[] => {
-        return this._counterReport;
-    }
-    columnReadingConfigDefault = (): IObjectIteratation[] => {
-        return this._readingConfigDefault;
-    }
-    columnReadingPeriod = (): IObjectIteratation[] => {
-        return this._readingPeriod;
-    }
-    columnReadingPeriodKind = (): IObjectIteratation[] => {
-        return this._readingPeriodKind;
-    }
-    columnTextOutput = (): IObjectIteratation[] => {
-        console.log(this.textOutput);
-
-        return this.textOutput;
-    }
-    columnKarbari = (): IObjectIteratation[] => {
-        return this._karbari;
-    }
-    columnLMAll = (): IObjectIteratation[] => {
-        return this._listManagerAll;
-    }
-    columnAbFormulas = (): IObjectIteratation[] => {
-        return this._abFormulas;
-    }
-    columnBudgetFormulas = (): IObjectIteratation[] => {
-        return this._budgetFormulas;
-    }
-    columnTabsare2Formulas = (): IObjectIteratation[] => {
-        return this._tabsare2Formulas;
-    }
-    columnTabsare3Formulas = (): IObjectIteratation[] => {
-        return this._tabsare3Formulas;
-    }
-    columnDataMiningAnalyses = (): IObjectIteratation[] => {
-        return this._DMAnalyses;
-    }
-    columnAuth1 = (): IObjectIteratation[] => {
-        return this._auth1;
-    }
-    columnAuth2 = (): IObjectIteratation[] => {
-        return this._auth2;
-    }
-    columnAuth3 = (): IObjectIteratation[] => {
-        return this._auth3;
-    }
-    columnAuth4 = (): IObjectIteratation[] => {
-        return this._auth4;
-    }
-    columnForbidden = (): IObjectIteratation[] => {
-        return this._forbidden;
-    }
-    columnSearchMoshtarakin = (): IObjectIteratation[] => {
-        return this._searchMosh;
-    }
-    columnSearchSimple = (): IObjectIteratation[] => {
-        return this._searchSimple;
-    }
-    columnSearchPro = (): IObjectIteratation[] => {
-        return this._searchPro;
-    }
-    columnErrors = (): IObjectIteratation[] => {
-        return this._errors;
-    }
-    columnRRAnalyzeByParam = (): IObjectIteratation[] => {
-        return this._RRAnalyzeByParam;
-    }
-    columnRRMaster = (): IObjectIteratation[] => {
-        return this._RRMaster;
-    }
-    columnImgAttrResult = (): IObjectIteratation[] => {
-        return this._imageAttrResult;
-    }
-    columnImgAttrAnalyze = (): IObjectIteratation[] => {
-        return this._imageAttrAnalyze;
-    }
-    columnRRDetails = (): IObjectIteratation[] => {
-        return this._RRDetails;
-    }
-    columnRRTraverse = (): IObjectIteratation[] => {
-        return this._RRTraverse;
-    }
-    columnRRTraverseDifferential = (): IObjectIteratation[] => {
-        return this._RRTraverseDifferential;
-    }
-    columnRRKarkard = (): IObjectIteratation[] => {
-        return this._RRKarkard;
-    }
-    columnRRKarkardOffloaded = (): IObjectIteratation[] => {
-        return this._RROffloadedKarkard;
-    }
-    columnRRKarkardDaly = (): IObjectIteratation[] => {
-        return this._RRKarkardDaily;
-    }
-    columnRRLocked = (): IObjectIteratation[] => {
-        return this._RRLocked;
-    }
-    columnRRPreNumberShown = (): IObjectIteratation[] => {
-        return this._RRPreNumberShown;
-    }
-    columnRRDisposalHours = (): IObjectIteratation[] => {
-        return this._RRDisposalHours;
-    }
-    columnTrackReading = (): IObjectIteratation[] => {
-        return this.reading;
-    }
-    columnTrackOffloaded = (): IObjectIteratation[] => {
-        return this.offloaded;
-    }
-    columnTrackLoaded = (): IObjectIteratation[] => {
-        return this.loaded;
-    }
-    columnTrackImported = (): IObjectIteratation[] => {
-        return this.imported;
-    }
-    columnTrackFinished = (): IObjectIteratation[] => {
-        return this.finished;
-    }
-    columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
-        return [
-            { field: 'counterReaders', header: 'مامور', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
-            { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
-            { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
-            { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
-            { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
-            { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true },
-            { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, readonly: true, isBoolean: true },
-            { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: true, isBoolean: true },
-            { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: true, isBoolean: true },
-            { field: 'isBazdid', header: 'بازدید', isSelected: true, readonly: true, isBoolean: true },
-            { field: 'isRoosta', header: 'روستا', isSelected: true, readonly: true, isBoolean: true }
-        ];
-    }
-    columnAssessPre = (): IObjectIteratation[] => {
-        return this.assess_pre;
-    }
-
-
     columnSelectedMenus = (name: string): IObjectIteratation[] => {
-        switch (name) {
-            case 'counterReport':
-                return this.columnCounterReport();
-            case '_imageAttrResult':
-                return this.columnImgAttrResult();
-            case '_imageAttrAnalyze':
-                return this.columnImgAttrAnalyze();
-            case 'assess_pre':
-                return this.columnAssessPre();
-            case 'imgattr':
-                return this.columnImageAttribution();
-            case 'readingPeriod':
-                return this.columnReadingPeriod();
-            case 'readingConfigDefault':
-                return this.columnReadingConfigDefault();
-            case 'apk':
-                return this.columnAPK();
-            case 'periodKind':
-                return this.columnReadingPeriodKind();
-            case 'karbari':
-                return this.columnKarbari();
-            case 'reading':
-                return this.columnTrackReading();
-            case 'finished':
-                return this.columnTrackFinished();
-            case 'lastStates':
-                return this.columnLastState();
-            case 'loaded':
-                return this.columnTrackLoaded();
-            case 'offloaded':
-                return this.columnTrackOffloaded();
-            case 'imported':
-                return this.columnTrackImported();
-            case 'counterState':
-                return this.columnCounterState();
-            case 'analysis':
-                return this.columnDataMiningAnalyses();
-            case 'karkard':
-                return this.columnRRKarkard();
-            case 'forbidden':
-                return this.columnForbidden();
-            case 'all-lists':
-                return this.columnLMAll();
-            case 'Budget':
-                return this.columnBudgetFormulas();
-            case 'tabsare2':
-                return this.columnTabsare2Formulas();
-            case 'tabsare3':
-                return this.columnTabsare3Formulas();
-            case 'abBaha':
-                return this.columnAbFormulas();
-            case 'textOutput':
-                return this.columnTextOutput();
-            case 'search-mosh':
-                return this.columnSearchMoshtarakin();
-            case 'search-pro':
-                return this.columnSearchPro();
-            case 'simpleSearch':
-                return this.columnSearchSimple();
-            case 'karkard':
-                return this.columnRRKarkard();
-            case 'karkardDaily':
-                return this.columnRRKarkardDaly();
-            case 'master':
-                return this.columnRRMaster();
-            case 'analyzePrfm':
-                return this.columnRRAnalyzeByParam();
-            case 'karkard-offload':
-                return this.columnRRKarkardOffloaded();
-            case 'trv-diff':
-                return this.columnRRTraverseDifferential();
-            case 'trv':
-                return this.columnRRTraverse();
-            case 'rr-preNumber':
-                return this.columnRRPreNumberShown();
-            case 'rr-locked':
-                return this.columnRRLocked();
-            case 'rr-details':
-                return this.columnRRDetails();
-            case 'disposalHs':
-                return this.columnRRDisposalHours();
-            case 'auth1':
-                return this.columnAuth1();
-            case 'auth2':
-                return this.columnAuth2();
-            case 'auth3':
-                return this.columnAuth3();
-            case 'auth4':
-                return this.columnAuth4();
-            case 'analysis':
-                return this.columnDataMiningAnalyses();
-            case 'userAll':
-                return this.columnUserAllUsers();
-            case 'errors':
-                return this.columnErrors();
-
-            default:
-                break;
-        }
+        return this[name];
     }
 
     customizeSelectedColumns = (_selectCols: any) => {
