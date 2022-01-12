@@ -3,13 +3,14 @@ import { ENThemeColor, ENThemeName, Theme } from 'interfaces/ioverall-config';
 import { BrowserStorageService } from 'services/browser-storage.service';
 
 import { dark, light } from '../theme/themes';
+import { purple } from './../theme/themes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
   private active: Theme = light;
-  private availableThemes: Theme[] = [light, dark];
+  private availableThemes: Theme[] = [light, dark, purple];
 
   constructor(
     private browserStorageService: BrowserStorageService
@@ -36,11 +37,14 @@ export class ThemeService {
   setDarkTheme(): void {
     this.setTheme(dark, ENThemeColor.dark);
   }
+  setPurpleTheme(): void {
+    this.setTheme(purple, ENThemeColor.purple);
+  }
   setLightTheme(): void {
     this.setTheme(light, ENThemeColor.light);
   }
 
-  setActiveTheme(theme: Theme): void {
+  private setActiveTheme(theme: Theme): void {
     this.active = theme;
 
     Object.keys(this.active.properties).forEach(property => {
@@ -54,18 +58,33 @@ export class ThemeService {
   private saveToLocalStorage = (name: ENThemeName, color: ENThemeColor) => {
     this.browserStorageService.set(name, color);
   }
-
+  private getLastColor = (): ENThemeColor => {
+    return this.browserStorageService.get(ENThemeName.themeColor);
+  }
   private getFromLocalStorage = (name: ENThemeName) => {
     const a = this.browserStorageService.get(name);
     if (a === null) {
       this.setLightTheme();
       return;
     }
-    a === 0 ? this.setLightTheme() : this.setDarkTheme()
+    this.setThemeColor(this.getLastColor());
   }
+  setThemeColor = (colorName: ENThemeColor) => {
+    switch (colorName) {
+      case ENThemeColor.purple:
+        this.setPurpleTheme();
+        break;
+      case ENThemeColor.dark:
+        this.setDarkTheme();
+        break;
+      case ENThemeColor.light:
+        this.setLightTheme();
+        break;
 
-  toggleTheme = () => {
-    this.isDarkTheme() ? this.setLightTheme() : this.setDarkTheme();
+      default:
+        this.setLightTheme();
+        break;
+    }
   }
   themeStatus = () => this.getFromLocalStorage(ENThemeName.themeColor);
 }

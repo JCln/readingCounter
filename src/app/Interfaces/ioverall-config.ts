@@ -245,6 +245,7 @@ export enum ENThemeName {
 export enum ENThemeColor {
     light = 0,
     dark = 1,
+    purple = 2,
 }
 export enum ENSelectedColumnVariables {
     selectedImageAttrResult = '_imageAttrResult',

@@ -1,7 +1,11 @@
 <div class="header">
     <li class="_theme_mode">
-        <i *ngIf="this.themeService.isDarkTheme()" (click)="toggleTheme()" class="fas fa-sun"></i>
-        <i *ngIf="!this.themeService.isDarkTheme()" (click)="toggleTheme()" class="fas fa-moon"></i>
+        <i (click)="_showColorPalete = !_showColorPalete" class="tooltip _circle_border p_icons fas fa-moon">
+        </i>
+        <i *ngFor="let item of testColors" (click)="changeColor(item.color)" class="fas fa-sun"
+            [ngClass]="{'background-color':item.colorName}"
+            [@openClose]="_showColorPalete ? 'openSubItems' : 'closeSubItems'">
+        </i>
     </li>
     <ul>
         <li class="_borders">

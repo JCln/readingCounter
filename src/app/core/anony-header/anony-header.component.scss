@@ -26,6 +26,40 @@
   }
 }
 
+._color_palete {
+  border-radius: 100vmax;
+  padding: .5rem;
+  color: var(--primary_5);
+  background-color: var(--secondary_3);
+}
+
+.info {
+  ._info_each_item {
+    overflow: auto;
+    left: 50%;
+    background: var(--white);
+    transform: translate(-50%, -50%);
+    border-radius: $border_15;
+    padding: $font_05 $font_xs;
+    box-shadow: 0 0 1px 3px var(--secondary_4);
+
+    div {
+      display: flex;
+      justify-content: flex-end;
+      color: var(--secondary_8);
+      text-align: right;
+      font-size: $font_s;
+      font-weight: 600;
+
+      &::after {
+        content: '\2713';
+        color: var(--green_500);
+        padding: 0 0 0 .3rem;
+      }
+    }
+  }
+}
+
 ul {
   margin-left: auto;
 }

@@ -3,8 +3,14 @@
         <img src="assets/imgs/header/logo.jpg" alt="">
     </div>
     <li class="_theme_mode">
-        <i *ngIf="this.themeService.isDarkTheme()" (click)="toggleTheme()" class="fas fa-sun"></i>
-        <i *ngIf="!this.themeService.isDarkTheme()" (click)="toggleTheme()" class="fas fa-moon"></i>
+        <section class="info">
+            <i (click)="_showColorPalete = !_showColorPalete" class="pi pi-palette _color_palete">
+                <div *ngFor="let item of testColors" (click)="changeColor(item.color)" class="_info_each_item"
+                    [ngStyle]="{'background-color':item.colorName}"
+                    [@openClose]="_showColorPalete ? 'openSubItems' : 'closeSubItems'">
+                </div>
+            </i>
+        </section>
     </li>
     <ul>
         <li class="_title">

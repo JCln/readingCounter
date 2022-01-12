@@ -9,30 +9,30 @@
   font-size: $font_m;
   cursor: pointer;
 
-  .fa-sun,
-  .fa-moon {
-    padding: .25rem;
-    box-shadow: 0 0 5px 0px;
-    border-radius: $border_50;
-  }
+  // .fa-sun,
+  // .fa-moon {
+  //   padding: .25rem;
+  //   box-shadow: 0 0 5px 0px;
+  //   border-radius: $border_50;
+  // }
 
-  .fa-sun {
-    color: yellow;
-  }
+  // .fa-sun {
+  //   color: yellow;
+  // }
 
-  .fa-moon {
-    color: var(--primary_5);
-    background-color: var(--secondary_3);
-  }
+  // .fa-moon {
+  //   color: var(--primary_5);
+  //   background-color: var(--secondary_3);
+  // }
 
-  @media (min-width: 700px) {
+  // @media (min-width: 700px) {
 
-    .fa-sun,
-    .fa-moon {
-      padding: $font_05;
-    }
+  //   .fa-sun,
+  //   .fa-moon {
+  //     padding: $font_05;
+  //   }
 
-    margin-left: $font_xs;
-    @include _borders();
-  }
+  //   margin-left: $font_xs;
+  //   @include _borders();
+  // }
 }
