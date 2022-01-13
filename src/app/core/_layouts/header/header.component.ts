@@ -11,16 +11,10 @@ import { AuthService } from 'src/app/auth/auth.service';
   animations: [
     trigger('openClose', [
       state('closeSubItems', style({
-        height: '0',
-        width: '0',
-        opacity: '0',
-        visibility: 'hidden'
+        display: 'none'
       })),
       state('openSubItems', style({
-        opacity: '1',
-        maxHeight: '15rem',
-        width: '19rem',
-        visibility: 'visible'
+        display: 'inline'
       })),
       transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
     ])

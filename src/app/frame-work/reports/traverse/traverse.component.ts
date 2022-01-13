@@ -29,6 +29,7 @@ export class TraverseComponent extends FactoryONE {
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  karbariByCodeDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
 
@@ -72,8 +73,10 @@ export class TraverseComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverse, this.readingReportManagerService.traverseReq);
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    this.karbariByCodeDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
+    Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'karbariCode');
     this.closeTabService.saveDataForRRTraverse = this.dataSource;
   }
   @Input() get selectedColumns(): any[] {

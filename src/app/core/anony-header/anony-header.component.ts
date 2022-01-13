@@ -23,10 +23,9 @@ export class AnonyHeaderComponent {
   provinceName: string;
   _showColorPalete: boolean = false;
   testColors = [
-    { id: 1, color: 0, colorName: 'blue' },
-    { id: 2, color: 1, colorName: 'red' },
-    { id: 3, color: 2, colorName: 'green' },
-    { id: 4, color: 3, colorName: 'yellow' },
+    { id: 1, color: 0, colorName: 'white' },
+    { id: 2, color: 1, colorName: 'gray' },
+    { id: 3, color: 2, colorName: 'purple' },    
   ];
 
   constructor(
@@ -37,8 +36,6 @@ export class AnonyHeaderComponent {
   }
 
   changeColor = (id: number) => {
-    console.log(id);
-
     this.themeService.setThemeColor(id);
   }
 

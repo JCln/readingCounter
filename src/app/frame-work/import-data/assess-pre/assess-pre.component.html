@@ -49,10 +49,19 @@
     </section>
 </form>
 
-<app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="_selectedColumns" [dataSource]="dataSource"
-    [_outputFileName]="'assess_pre'" [_checkUpName]="'assess_pre'" [_numberOfExtraColumns]="[1]"
-    [_canShowButton]="_canShowAssessButton" [_selectedColumnsToRemember]="'selectedListManagerAssess'"
-    [_sessionName]="'assess_pre'" (refreshedTable)="refreshTable()"
-    (showSearchedOptionsDialog)="showSearchOptionsDialog()" (registeredAssess)="registerAssessAdd()"
-    (showedPictures)="getReadingReportTitles($event)">
+<app-prime-table 
+[_selectCols]="_selectCols" 
+[_selectedColumns]="_selectedColumns" 
+[dataSource]="dataSource"    
+[_outputFileName]="'assess_pre'" 
+[_checkUpName]="'assess_pre'" 
+[_numberOfExtraColumns]="[1]"
+[_canShowButton]="_canShowAssessButton" 
+[_selectedColumnsToRemember]="'selectedListManagerAssess'"
+[_sessionName]="'assess_pre'" 
+(refreshedTable)="refreshTable()"
+(showSearchedOptionsDialog)="showSearchOptionsDialog()" 
+(registeredAssess)="registerAssessAdd()"
+(showedPictures)="getReadingReportTitles($event)"
+>
 </app-prime-table>

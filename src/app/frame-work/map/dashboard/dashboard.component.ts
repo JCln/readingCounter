@@ -25,7 +25,7 @@ export class DashboardComponent {
     this.getZoneDictionary();
   }
   getZoneDictionary = async () => {
-    this.zoneDictionary = await this.dashboardService.getZoneDictionary();
+    this.zoneDictionary = JSON.parse(JSON.stringify(await this.dashboardService.getZoneDictionary()));
     if (this.zoneDictionary[0].id !== 0)
       this.zoneDictionary.unshift({ id: 0, title: 'مناطق مجاز', isSelected: true })
   }

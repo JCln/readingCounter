@@ -60,7 +60,7 @@ export class AssessPreComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
@@ -74,7 +74,7 @@ export class AssessPreComponent extends FactoryONE {
     this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.assessPreReq.zoneId);
     this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.assessPreReq.zoneId);
     this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
-    this.karbariDictionary = await this.importDynamicService.getKarbariByCodeDictionary();
+    this.karbariDictionaryCode = await this.importDynamicService.getKarbariByCodeDictionary();
     this.qotrDictionary = await this.importDynamicService.getQotrDictionary();
 
     this.converts();

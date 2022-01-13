@@ -71,7 +71,7 @@ export const dark: Theme = {
 };
 
 export const purple: Theme = {
-    name: "dark",
+    name: "purple",
     properties: {
         "--white": "rgb(21, 39, 60)",
         "--thirdy_1": "rgb(108 ,117 ,125)",
