@@ -6,7 +6,7 @@
     [_outputFileName]="'allLists'"
     [_checkUpName]="'allComponent'"
     [_selectedColumnsToRemember]="'selectedListManagerAll'"
-    [_numberOfExtraColumns]="[1 , 2]"    
+    [_numberOfExtraColumns]="[1,2,3]"    
     [_backToPreviousEnabled]=true
     [_allComponentIsModify]="isModify"
     [_backToPreviousText]="'بازگشت به صفحه قبلی'"
@@ -16,7 +16,8 @@
     (backedToPrevious)="toPrePage()"
     (routedToOffload)="routeToOffload($event)"
     (showedWOUIAsCarousel)="routeToWoui($event)"
-    (showedPictures)="getReadingReportTitles($event)"    
+    (showedPictures)="getReadingReportTitles($event)" 
+    (showedInMapSingle)="listManagerService.showInMapSingle($event)"   
     > 
     </app-prime-table>
     

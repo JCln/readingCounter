@@ -90,6 +90,7 @@ export class MapComponent implements OnInit, OnDestroy {
     trackNumber: '', day: '', distance: null, isPerday: null
   }
   _isCluster: boolean;
+  _isSingle: boolean;
 
   constructor(
     public mapService: MapService,
@@ -196,6 +197,16 @@ export class MapComponent implements OnInit, OnDestroy {
     if (!MathS.isNull(this.onShowCounterReader.distance)) {
       this.classWrapper();
       return;
+    }
+    this._isSingle = this.route.snapshot.paramMap.get('isSingle') == 'true' ? true : false;
+    if (this._isSingle) {
+      const x = this.route.snapshot.paramMap.get('x');
+      const y = this.route.snapshot.paramMap.get('y');
+      const firstName = this.route.snapshot.paramMap.get('firstName');
+      const trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+      const sureName = this.route.snapshot.paramMap.get('sureName');
+      const eshterak = this.route.snapshot.paramMap.get('eshterak');
+      this.markSingle({ x: x, y: y, firstName: firstName, sureName: sureName, eshterak: eshterak, trackNumber: trackNumber });
     }
     this._isCluster = this.route.snapshot.paramMap.get('isCluster') == 'true' ? true :
       this.route.snapshot.paramMap.get('isCluster') == 'false' ? false : null
@@ -333,6 +344,13 @@ export class MapComponent implements OnInit, OnDestroy {
     L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+      );
+  }
+  private markSingle = (items: any) => {
+    this.flyToDes(items.y, items.x, 12);
+    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
+      .bindPopup(
+        `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${'ش.پ :' + items.trackNumber}`
       );
   }
   private findMyLocationLeaflet = (e) => {

@@ -57,6 +57,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() showedMoreDetails = new EventEmitter<any>();
   @Output() firstConfirmedDialog = new EventEmitter<any>();
   @Output() showedInMap = new EventEmitter<any>();
+  @Output() showedInMapSingle = new EventEmitter<any>();
   @Output() downloadedOutputSingle = new EventEmitter<any>();
   @Output() routeedToOffloadModify = new EventEmitter<any>();
   @Output() backedToReading = new EventEmitter<any>();
@@ -120,6 +121,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   showInMap = (trackNumber, insertDateJalali) => {
     this.showedInMap.emit({ trackNumber, insertDateJalali });
+  }
+  showInMapSingle = (dataSource: object) => {
+    this.showedInMapSingle.emit(dataSource);
   }
   downloadOutputSingle = (dataSource: object) => {
     this.downloadedOutputSingle.emit(dataSource);

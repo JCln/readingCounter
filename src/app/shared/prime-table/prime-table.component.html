@@ -178,7 +178,13 @@
                     <div class="tooltip_text_right">حذف مسیر</div>
                 </i>
             </td>
-
+            <td *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'allComponent'"
+                (click)="showInMapSingle(dataSource)">
+                <span class="ui-column-title">مشاهده روی نقشه</span>
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                </i>
+            </td>
             <td *ngIf="dataSource.hasMap &&( _checkUpName == 'lastStates' || _checkUpName == 'simpleSearch')"
                 (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
