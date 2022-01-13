@@ -35,6 +35,7 @@ export interface ITabs {
     logicalOrder: number;
 }
 export enum ENEssentialsToSave {
+    saveDataForToolsExcelViewer = 'saveDataForToolsExcelViewer',
     saveDataForKarbari = 'saveDataForKarbari',
     saveDataForImageAttribution = 'saveDataForImageAttribution',
     saveDataForImageAttrResult = 'saveDataForImageAttrResult',
@@ -248,6 +249,7 @@ export enum ENThemeColor {
     purple = 2,
 }
 export enum ENSelectedColumnVariables {
+    selectedRRExcelView = 'excelDynamic',
     selectedImageAttrResult = '_imageAttrResult',
     selectedImageAttrAnalyze = '_imageAttrAnalyze',
     selectedSimafaBatch = '_simafaBatch',

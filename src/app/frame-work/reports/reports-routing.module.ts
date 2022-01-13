@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'anlz/prfm', loadChildren: () => import('./performance/performance.module').then(analysePerformance => analysePerformance.PerformanceModule) },
   { path: 'gallery', loadChildren: () => import('./gallery/gallery.module').then(gallery => gallery.GalleryModule) },
   { path: 'inState', loadChildren: () => import('./rr-instate/rr-instate.module').then(inState => inState.RrInstateModule) },
+  { path: 'exlview', loadChildren: () => import('./rr-excel-dynamic-viewer/rr-excel-dynamic-viewer.module').then(excelDynamicViewer => excelDynamicViewer.RrExcelDynamicViewerModule) },
 ];
 
 @NgModule({

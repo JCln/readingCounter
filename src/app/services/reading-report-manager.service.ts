@@ -190,6 +190,13 @@ export class ReadingReportManagerService {
       })
     });
   }
+  dataSourceGET = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe((res) => {
+        resolve(res)
+      })
+    });
+  }
   portRRTest = (method: ENInterfaces, val: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {

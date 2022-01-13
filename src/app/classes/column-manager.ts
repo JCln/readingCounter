@@ -6,6 +6,14 @@ import { IObjectIteratation } from 'interfaces/ioverall-config';
 })
 export class ColumnManager {
 
+    excelDynamic: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'description', header: 'توضیحات', isSelected: true },
+        { field: 'url', header: 'URL', isSelected: true },
+        { field: 'acceptVerb', header: 'متد', isSelected: true },
+        // { field: 'jsonInfo', header: 'اطلاعات JSON', isSelected: true },
+        { field: 'paramSendType', header: 'نوع فرم', isSelected: true }
+    ];
     imgattr: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
     ];

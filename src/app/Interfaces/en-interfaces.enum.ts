@@ -255,6 +255,11 @@ export enum ENInterfaces {
     getImageAttributionAll = `V1/ImageAttributionFile/All`,
     getImageAttributionAddOrEdit = 'V1/ImageAttributionFile/AddOrEdit',
 
+    editToolsDynamicExcel = 'V1/DynamicExcel/Edit',
+    getToolsDynamicExcel = 'V1/DynamicExcel/All',
+    addToolsDynamicExcel = 'V1/DynamicExcel/Add',
+    removeToolsDynamicExcel = 'V1/DynamicExcel/Remove',
+
     getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
     getDashboardEditCount = 'V1/Tracking/Dashboard/Tracking/EditCount',
     getDashboardDateDifference = 'V1/List/Dashboard/DateDifference/Timed',

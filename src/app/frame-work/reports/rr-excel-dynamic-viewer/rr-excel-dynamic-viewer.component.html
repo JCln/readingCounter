@@ -1,0 +1,9 @@
+<app-prime-table     
+    [_selectCols]="_selectCols" 
+    [dataSource]="dataSource" 
+    [_outputFileName]="'excelDynamic'"
+    [_checkUpName]="'excelDynamic'"    
+    [_selectedColumnsToRemember]="'selectedRRExcelView'"    
+    (refreshedTable)="refreshTable()"    
+ > 
+</app-prime-table>

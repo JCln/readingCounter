@@ -4,6 +4,7 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
 
 import { MathS } from '../classes/math-s';
+import { IDynamicExcelReq } from '../Interfaces/itools';
 import { IRandomImages } from '../Interfaces/tools';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -27,6 +28,18 @@ export class ToolsService {
     day: '',
     zoneId: null
   }
+  public dynamicReq: IDynamicExcelReq = {
+    id: 0,
+    title: '',
+    description: '',
+    url: '',
+    acceptVerb: '',
+    jsonInfo: '',
+    paramSendType: '',
+    // createDateTime: '',
+    // isActive: false
+  }
+
   getUserCounterReaders = (zoneId: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>

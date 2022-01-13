@@ -94,6 +94,7 @@ export class CloseTabService {
   saveDataForFragmentNOBDetails: any;
 
   saveDataForTextOutput: any;
+  saveDataForToolsExcelViewer: any;
   saveDataForPolicies: any;
   saveDataForFNB: any;
   saveDataForProfile: any;
@@ -101,6 +102,7 @@ export class CloseTabService {
   saveDataForRRGalleryReq: any;
 
   private val: ISidebarVals[] = [
+    { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: '/wr/rpts/tools/excelviewer' },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: '/wr/m/r/imgattr' },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: '/wr/rpts/anlzfile/result' },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: '/wr/rpts/anlzfile/analyze' },
