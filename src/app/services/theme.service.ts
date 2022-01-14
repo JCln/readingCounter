@@ -11,6 +11,12 @@ import { purple } from './../theme/themes';
 export class ThemeService {
   private active: Theme = light;
   private availableThemes: Theme[] = [light, dark, purple];
+  private colors = [
+    { id: 1, color: 0, colorName: 'white' },
+    { id: 2, color: 1, colorName: 'rgb(14, 76, 146)' },
+    // { id: 3, color: 2, colorName: 'purple' },
+  ];
+
 
   constructor(
     private browserStorageService: BrowserStorageService
@@ -18,7 +24,9 @@ export class ThemeService {
     this.themeStatus();
   }
 
-
+  getColors = () => {
+    return this.colors;
+  }
   getAvailableThemes(): Theme[] {
     return this.availableThemes;
   }

@@ -36,6 +36,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Input() _dictionaryName: string = '';
   @Input() _secondDictionaryName: string = '';
 
+  @Input() _hasSaveColumns: boolean = true;
   @Input() newRow: object;
   @Input() newRowLimit: number;
   @Input() dictionary = new EventEmitter<any>();
@@ -53,7 +54,6 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Output() getedExcelSample = new EventEmitter<any>();
   @Output() openedAddExcelDialog = new EventEmitter<any>();
   @Output() routedToParent = new EventEmitter<any>();
-  @Input() _hasSaveColumns: boolean = true;
 
   constructor(
     public outputManagerService: OutputManagerService,

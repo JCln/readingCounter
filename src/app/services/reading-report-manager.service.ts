@@ -14,6 +14,10 @@ import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import {
+  ConfirmDialogExcelViewComponent,
+} from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 
 
@@ -171,7 +175,6 @@ export class ReadingReportManagerService {
   }
 
 
-
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
@@ -183,7 +186,7 @@ export class ReadingReportManagerService {
 
   // CALL APIs
 
-  getDataSource = (method: ENInterfaces, id: number): Promise<any> => {
+  getDataSource = (method: ENInterfaces, id: any): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(method, id).subscribe((res) => {
         resolve(res)
@@ -341,6 +344,9 @@ export class ReadingReportManagerService {
   emptyMessage = () => {
     this.utilsService.snackBarMessageFailed(EN_messages.notFound);
   }
+  successSnackMessage = (message: string) => {
+    this.utilsService.snackBarMessageSuccess(message);
+  }
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();
   }
@@ -404,8 +410,53 @@ export class ReadingReportManagerService {
       })
     });
   }
+  showResDialogDynamic = (res: any, options: any): Promise<any> => {
+    // disable close mean when dynamic count show decision should make
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmDialogExcelViewComponent,
+        {
+          disableClose: options.disableClose,
+          minWidth: '90%',
+          data: {
+            data: res,
+            title: options.title,
+            buttonText: options.buttonText,
+            buttonColor: options.buttonColor
+          }
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        console.log(result);
+
+        if (result) {
+          resolve(result);
+        }
+      })
+    });
+  }
+  firstConfirmDialogRemove = () => {
+    const title = EN_messages.confirm_remove;
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: title,
+          isInput: false,
+          isDelete: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(async desc => {
+        if (desc) {
+          resolve(true);
+        }
+      })
+    })
+  }
+
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
+  }
+  snackWarn = (message: string) => {
+    this.utilsService.snackBarMessageWarn(message);
   }
   private followUPValidation = (id: number): boolean => {
     if (MathS.isNull(id)) {

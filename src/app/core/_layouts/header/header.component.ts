@@ -33,13 +33,6 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
     public themeService: ThemeService
   ) { }
 
-  testColors = [
-    { id: 1, color: 0, colorName: 'blue' },
-    { id: 2, color: 1, colorName: 'red' },
-    { id: 3, color: 2, colorName: 'green' },
-    { id: 4, color: 3, colorName: 'yellow' },
-  ];
-
   setSidebar = () => {
     this.sideBar = !this.sideBar;
     this.sidebarEvent.emit(this.sideBar);

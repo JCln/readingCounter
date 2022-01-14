@@ -10,13 +10,30 @@
 }
 
 .content {
+  display: grid;
   background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  box-shadow: 1px 1px 1px 4px var(--secondary_4);
   text-align: center;
-  padding: 2rem 0;
-  min-height: 20rem;
+  padding: $font_s 0.2rem;
+  min-height: 15rem;
   border-radius: $border_15;
+
+  .double_size {
+    grid-column: auto/ span 2;
+    flex-wrap: wrap;
+
+    @media (min-width: 550px) {
+      width: 20rem;
+    }
+  }
+
+  .inner_boundry {
+    display: grid;
+    font-size: $font_s;
+    text-align: right;
+  }
 }
+
 
 .title {
   top: $font_2;
@@ -37,7 +54,7 @@
   font-size: $font_l;
   font-weight: 600;
   color: var(--primary_5);
-  direction: ltr;
+  border: none;
 }
 
 .input_2 {
@@ -45,4 +62,18 @@
   color: var(--secondary_5);
   margin-bottom: $font_05;
   box-shadow: 1px 1px 8px 1px var(--secondary_4);
+}
+
+.p-field-checkbox {
+  display: flex;
+  align-items: center;
+
+  label {
+    font-size: $font_m;
+    font-weight: 600;
+  }
+}
+
+footer {
+  margin-top: $font_s;
 }

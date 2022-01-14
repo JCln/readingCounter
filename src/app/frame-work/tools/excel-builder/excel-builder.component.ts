@@ -1,16 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ToolsService } from 'services/tools.service';
-import {
-  ENAcceptVerb,
-  ENJsonInfo,
-  ENParamSendType,
-  IAcceptVerb,
-  IJsonInfo,
-  IParamSendType,
-} from 'src/app/Interfaces/itools';
+import { ENAcceptVerb, IAcceptVerb, IJsonInfo, IParamSendType } from 'src/app/Interfaces/itools';
 
-import { ENInterfaces } from './../../../Interfaces/en-interfaces.enum';
 
 @Component({
   selector: 'app-excel-builder',
@@ -22,25 +15,10 @@ export class ExcelBuilderComponent implements OnInit {
   _selectedParamSendType: ENAcceptVerb;
   _selectedJsonInfo: ENAcceptVerb;
 
-  methods: IAcceptVerb[] = [
-    { id: 1, name: 'DELETE', method: ENAcceptVerb.DELETE },
-    { id: 2, name: 'PUT', method: ENAcceptVerb.PUT },
-    { id: 3, name: 'POST', method: ENAcceptVerb.POST },
-    { id: 4, name: 'GET', method: ENAcceptVerb.GET },
-  ];
-  jsonInfo: IJsonInfo[] = [
-    { id: 1, name: 'fromDate', value: ENJsonInfo.fromDate },
-    { id: 2, name: 'toDate', value: ENJsonInfo.toDate },
-    { id: 3, name: 'karbari', value: ENJsonInfo.karbari },
-    { id: 4, name: 'masraf', value: ENJsonInfo.masraf },
-    { id: 5, name: 'zoneId', value: ENJsonInfo.zoneId },
-  ];
-  paramSendType: IParamSendType[] = [
-    { id: 1, name: 'fromBody ', type: ENParamSendType.fromBody },
-    { id: 2, name: 'fromForm ', type: ENParamSendType.fromForm },
-    { id: 3, name: 'fromQuery ', type: ENParamSendType.fromQuery },
-    { id: 4, name: 'fromURI ', type: ENParamSendType.fromURI },
-  ];
+  methods: IAcceptVerb[] = this.toolsService.methods;
+  jsonInfo: IJsonInfo[] = this.toolsService.jsonInfo;
+  paramSendType: IParamSendType[] = this.toolsService.paramSendType;
+
   constructor(
     public toolsService: ToolsService
   ) { }
@@ -56,8 +34,8 @@ export class ExcelBuilderComponent implements OnInit {
     this.toolsService.dynamicReq.acceptVerb = this._selectedMethod;
     this.toolsService.dynamicReq.paramSendType = this._selectedParamSendType;
 
-    console.log(this.toolsService.dynamicReq);
-    this.connectToServer();
+    if (this.toolsService.verificationExcelBuilder(this.toolsService.dynamicReq))
+      this.connectToServer();
 
   }
 

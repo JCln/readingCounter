@@ -12,4 +12,9 @@
 
 <mat-dialog-actions>
     <button class="btn_2" (click)="cancel()">بازگشت</button>
+    
+    <button *ngIf="data.buttonText" [ngStyle]="{'background-color': data.buttonColor}" class="btn_2"
+        (click)="confirm()">
+        <i class="pi pi-file-excel"></i>
+    </button>
 </mat-dialog-actions>

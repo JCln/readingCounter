@@ -269,10 +269,17 @@
                     <div class="tooltip_text">ویرایش</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'readingConfig'" class="edit_button" (click)="removeRow(dataSource , ri)">
+            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'excelDynamic'" class="edit_button"
+                (click)="removeRow(dataSource , ri)">
                 <span class="ui-column-title">حذف مورد</span>
                 <i class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مورد</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'excelDynamic'" class="edit_button" (click)="downloadExcel(dataSource)">
+                <span class="ui-column-title">دانلود Excel</span>
+                <i class="tooltip p_icons pi pi-file-excel">
+                    <div class="tooltip_text_right">دانلود Excel</div>
                 </i>
             </td>
             <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (click)="routeToEditPage(dataSource.id)">

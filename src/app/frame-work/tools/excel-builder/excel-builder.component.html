@@ -1,27 +1,27 @@
 <form #form="ngForm" (ngSubmit)="verification()">
     <div class="container">
-        <div class="content">
-            <div class="title">عنوان1</div>
+        <div class="content triple_size">
+            <div class="title">عنوانی وارد نمایید</div>
 
             <div class="input_2">
-                <div class="_key">title</div>
+                <div class="_key">عنوان</div>
                 <input class="_value" type="text" name="title" [(ngModel)]="toolsService.dynamicReq.title">
             </div>
 
-            <div class="title">desc</div>
+            <div class="title">توضیحاتی وارد نمایید</div>
             <div class="input_2">
-                <div class="_key">desc</div>
+                <div class="_key">توضیحات</div>
                 <input class="_value" type="text" name="desc" [(ngModel)]="toolsService.dynamicReq.description">
             </div>
 
-            <div class="title">url</div>
+            <div class="title">آدرس API مدنظر را وارد نمایید</div>
             <div class="input_2">
                 <div class="_key">url</div>
-                <input class="_value" type="text" name="url" [(ngModel)]="toolsService.dynamicReq.url">
+                <input class="_value d_ltr" type="text" name="url" [(ngModel)]="toolsService.dynamicReq.url">
             </div>
         </div>
         <div class="content">
-            <div class="title">Chckboxes</div>
+            <div class="title"> اطلاعات مورد نیاز برای ساخت</div>
             <div *ngFor="let category of jsonInfo" class="p-field-checkbox">
                 <p-checkbox name="{{category.name}}" value="{{category.value}}" [value]="category.value"
                     [(ngModel)]="_selectedJsonInfo" [inputId]="category.key"></p-checkbox>
@@ -29,27 +29,31 @@
             </div>
         </div>
         <div class="content">
-            <div class="title">paramSendTye</div>
-            <div *ngFor="let item of paramSendType">
-                <div class="p-field-radiobutton">
-                    <p-radioButton name="{{item.name}}" value="{{item.type}}" [(ngModel)]="_selectedParamSendType"
-                        inputId="type"></p-radioButton>
-                    <label for="{{item.name}}">{{item.name}}</label>
+            <div class="title">ساختار پارامترها</div>
+            <section class="inner_boundry">
+                <div *ngFor="let item of paramSendType">
+                    <div class="p-field-radiobutton">
+                        <p-radioButton name="{{item.name}}" value="{{item.type}}" [(ngModel)]="_selectedParamSendType"
+                            inputId="type"></p-radioButton>
+                        <label for="{{item.name}}">{{item.name}}</label>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
         <div class="content">
-            <div class="title">METHODS</div>
-            <div *ngFor="let item of methods">
-                <div class="p-field-radiobutton">
-                    <p-radioButton name="{{item.name}}" value="{{item.method}}" [(ngModel)]="_selectedMethod"
-                        inputId="methodKind"></p-radioButton>
-                    <label for="{{item.name}}">{{item.name}}</label>
+            <div class="title">متد مورد نیاز</div>
+            <section class="inner_boundry">
+                <div *ngFor="let item of methods">
+                    <div class="p-field-radiobutton">
+                        <p-radioButton name="{{item.name}}" value="{{item.method}}" [(ngModel)]="_selectedMethod"
+                            inputId="methodKind"></p-radioButton>
+                        <label for="{{item.name}}">{{item.name}}</label>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
     <footer>
-        <button type="submit">ثبت</button>
+        <button class="btn_2_o" type="submit">ثبت</button>
     </footer>
 </form>

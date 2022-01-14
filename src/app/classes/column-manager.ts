@@ -9,10 +9,10 @@ export class ColumnManager {
     excelDynamic: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'description', header: 'توضیحات', isSelected: true },
-        { field: 'url', header: 'URL', isSelected: true },
-        { field: 'acceptVerb', header: 'متد', isSelected: true },
-        // { field: 'jsonInfo', header: 'اطلاعات JSON', isSelected: true },
-        { field: 'paramSendType', header: 'نوع فرم', isSelected: true }
+        { field: 'url', header: 'URL', isSelected: false },
+        { field: 'acceptVerb', header: 'متد', isSelected: false },
+        // { field: 'jsonInfo', header: 'اطلاعات JSON', isSelected: false },
+        { field: 'paramSendType', header: 'نوع فرم', isSelected: false }
     ];
     imgattr: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },

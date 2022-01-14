@@ -13,8 +13,11 @@ export enum ENParamSendType {
 export enum ENJsonInfo {
     fromDate = 'fromDate',
     toDate = 'toDate',
+    jalaliDate = 'jalaliDate',
     zoneId = 'zoneId',
     karbari = 'karbari',
+    fromMasraf = 'fromMasraf',
+    toMasraf = 'toMasraf',
     masraf = 'masraf',
 }
 export interface IJsonInfo {

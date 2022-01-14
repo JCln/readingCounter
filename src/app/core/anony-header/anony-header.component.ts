@@ -22,11 +22,6 @@ import { ThemeService } from 'services/theme.service';
 export class AnonyHeaderComponent {
   provinceName: string;
   _showColorPalete: boolean = false;
-  testColors = [
-    { id: 1, color: 0, colorName: 'white' },
-    { id: 2, color: 1, colorName: 'gray' },
-    { id: 3, color: 2, colorName: 'purple' },    
-  ];
 
   constructor(
     private envService: EnvService,

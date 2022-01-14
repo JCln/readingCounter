@@ -77,6 +77,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() toPredStatus = new EventEmitter<any>();
   @Output() routedToSingle = new EventEmitter<any>();
   @Output() routedToBatch = new EventEmitter<any>();
+  @Output() downloadedExcel = new EventEmitter<any>();
 
   constructor(
     public outputManagerService: OutputManagerService,
@@ -125,6 +126,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   showInMapSingle = (dataSource: object) => {
     this.showedInMapSingle.emit(dataSource);
   }
+  downloadExcel = (dataSource: object) => {
+    this.downloadedExcel.emit(dataSource);
+  }  
   downloadOutputSingle = (dataSource: object) => {
     this.downloadedOutputSingle.emit(dataSource);
   }

@@ -2,8 +2,11 @@
     [_selectCols]="_selectCols" 
     [dataSource]="dataSource" 
     [_outputFileName]="'excelDynamic'"
+    [_numberOfExtraColumns]="[1,2]"
     [_checkUpName]="'excelDynamic'"    
     [_selectedColumnsToRemember]="'selectedRRExcelView'"    
     (refreshedTable)="refreshTable()"    
+    (downloadedExcel)="downloadExcel($event)"
+    (removedRow)="removeRow($event)"    
  > 
 </app-prime-table>
