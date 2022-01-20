@@ -4,10 +4,10 @@ export const light: Theme = {
     name: "light",
     properties: {
         "--white": "rgb(255, 255, 255)",
+        "--fix_gray_light": "rgb(248 ,249 ,250)",
         "--thirdy_1": "rgb(64, 127, 201)",
         "--thirdy_2": "rgb(176, 189, 209)",
         "--thirdy_3": "rgb(89, 129, 177)",
-        "--fix_gray_light": "rgb(248 249 250)",
         "--fix_2": " green",
         "--primary_1": " rgb(220, 232, 255)",
         "--primary_2": "rgb(17, 111, 255)",
@@ -39,12 +39,12 @@ export const dark: Theme = {
     name: "dark",
     properties: {
         "--white": "rgb(21, 39, 60)",
+        "--fix_gray_light": "rgb(248 ,249 ,250)",
         "--thirdy_1": "rgb(108 ,117 ,125)",
         "--thirdy_2": "rgb(14, 76, 146)",
         "--thirdy_3": "",
         "--fix_2": " green",
         "--blue_100": " lightgreen",
-        "--fix_gray_light": "rgb(248 249 250)",
         "--primary_1": " rgb(0, 69, 203)",
         "--primary_2": "rgb(203,203,203)",
         "--primary_3": "rgb(220, 232, 255)",
@@ -74,6 +74,7 @@ export const purple: Theme = {
     name: "purple",
     properties: {
         "--white": "rgb(31 25 78)",
+        "--fix_gray_light": "rgb(248 ,249 ,250)",
         "--thirdy_1": " rgb(89, 77, 179)",
         "--thirdy_2": " rgb(66, 54, 150)",
         "--thirdy_3": " rgb(177, 167, 190)",

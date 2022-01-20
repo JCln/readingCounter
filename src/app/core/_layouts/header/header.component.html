@@ -2,8 +2,8 @@
     <li class="_theme_mode">
         <section class="info">
             <i (click)="_showColorPalete = !_showColorPalete" class="pi pi-palette _color_palete">
-                <div *ngFor="let item of themeService.getColors()" (click)="changeColor(item.color)" class="_info_each_item"
-                    [ngStyle]="{'background-color':item.colorName}"
+                <div *ngFor="let item of themeService.getColors()" (click)="changeColor(item.color)"
+                    class="_info_each_item" [ngStyle]="{'background-color':item.colorName}"
                     [@openClose]="_showColorPalete ? 'openSubItems' : 'closeSubItems'">
                 </div>
             </i>
@@ -14,7 +14,30 @@
             <app-date-jalali></app-date-jalali>
         </li>
         <li>
-            <app-dropdown (isLogout)=logout()></app-dropdown>
+            <app-dropdown (isLogout)="logout()"></app-dropdown>
+        </li>
+        <li class="_status" [ngSwitch]="signalRService.getConnectionStatus()">
+            <div class="tooltip">
+                <i class="pi pi-times-circle" *ngSwitchCase="'Disconnected'">
+                    <div class="tooltip_text_bottom">{{ENHubMessages.Disconnected}}</div>
+                </i>
+            </div>
+            <div class="tooltip">
+                <i class="pi pi-spin pi-spinner" *ngSwitchCase="'Connecting'"></i>
+                <div class="tooltip_text_bottom">{{ENHubMessages.Connecting}}</div>
+            </div>
+            <div class="tooltip">
+                <i class="Disconnecting pi pi-spin pi-spinner" *ngSwitchCase="'Disconnecting'"></i>
+                <div class="tooltip_text_bottom">{{ENHubMessages.Disconnecting}}</div>
+            </div>
+            <div class="tooltip">
+                <i class="Reconnecting pi pi-spin pi-spinner" *ngSwitchCase="'Reconnecting'"></i>
+                <div class="tooltip_text_bottom">{{ENHubMessages.Reconnecting}}</div>
+            </div>
+            <div class="tooltip">
+                <i class="pi pi-check-circle" *ngSwitchCase="'Connected'"></i>
+                <div class="tooltip_text_bottom">{{ENHubMessages.Connected}}</div>
+            </div>
         </li>
         <li class="_name">
             {{displayName}}

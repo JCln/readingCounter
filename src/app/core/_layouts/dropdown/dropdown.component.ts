@@ -7,10 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class DropdownComponent {
   @Output() isLogout = new EventEmitter<boolean>();
-  // close drop down if clicks outside of it
-  closeDropDown = () => {
 
-  }
   logout = () => {
     this.isLogout.emit(true);
   }

@@ -13,11 +13,10 @@
             </div>
             <div class="input_2">
                 <div class="_key">ناحیه</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService.searchReqMosh.zoneId" name="zoneId">
-                    <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
+                <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="searchService.searchReqMosh.zoneId"
+                    placeholder="انتخاب مورد" [style]="{'max-width': '9rem','width':'100%'}" optionValue="id" optionLabel="title"
+                    filter="true">
+                </p-dropdown>
             </div>
             <input class="input_1" type="number" placeholder="مقدار را وارد نمایید " name="counterNumber"
                 [(ngModel)]="searchService.searchReqMosh.item" autofocus>
@@ -34,17 +33,9 @@
     </form>
 </main>
 
-<app-prime-table 
-    [_selectCols]="_selectCols"
-    [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource"
-    [_outputFileName]="'searchMosh'"
-    [_checkUpName]="'search_moshtarak'"
-    [_selectedColumnsToRemember]="'selectedListManagerMosh'"
-    [_numberOfExtraColumns]="[1,2,3]" 
-    [_sessionName]="'moshtarak-session'"
-    (refreshedTable)="refreshTable()"
-    (showedPictures)="getReadingReportTitles($event)"
-    (showedInMapSingle)="searchService.showInMapSingle($event)"
-    >
+<app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
+    [_outputFileName]="'searchMosh'" [_checkUpName]="'search_moshtarak'"
+    [_selectedColumnsToRemember]="'selectedListManagerMosh'" [_numberOfExtraColumns]="[1,2,3]"
+    [_sessionName]="'moshtarak-session'" (refreshedTable)="refreshTable()"
+    (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="searchService.showInMapSingle($event)">
 </app-prime-table>

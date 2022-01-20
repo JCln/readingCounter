@@ -123,6 +123,14 @@ export interface ISnackBar {
     duration: number;
     backColor?: string;
 }
+
+export enum ENHubMessages {
+    Disconnected = 'اتصال از سامانه لحظه قطع می‌باشد',
+    Connecting = 'درحال اتصال به سامانه لحظه',
+    Disconnecting = 'درحال قطع ارتباط',
+    Reconnecting = 'درحال اتصال به سامانه لحظه',
+    Connected = 'متصل به سامانه لحظه'
+}
 export enum ENSnackBarColors {
     warn = 'snack_warn',
     danger = 'snack_danger',

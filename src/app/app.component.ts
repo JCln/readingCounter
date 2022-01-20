@@ -3,9 +3,8 @@ import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/route
 import { PrimeNGConfig } from 'primeng/api';
 import { fromEvent, merge, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { ThemeService } from 'services/theme.service';
-
-import { SpinnerWrapperService } from './services/spinner-wrapper.service';
 
 @Component({
   selector: 'app-root',
