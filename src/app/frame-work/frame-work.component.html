@@ -1,4 +1,8 @@
-<main role="main" [ngClass]="this.themeService.isDarkTheme() ? 'darkBackground' : 'lightBackground'">
+<main role="main" [ngClass]="{
+    'lightBackground':this.themeService.getActiveTheme().name == 'light',    
+    'darkBackground':this.themeService.getActiveTheme().name == 'dark',
+    'purpleBackground':this.themeService.getActiveTheme().name == 'purple'
+}">
     <div class="header">
         <div class="_logo_content">
             <img src="assets/imgs/header/logo.jpg" alt="">

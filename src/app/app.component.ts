@@ -3,6 +3,7 @@ import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/route
 import { PrimeNGConfig } from 'primeng/api';
 import { fromEvent, merge, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ThemeService } from 'services/theme.service';
 
 import { SpinnerWrapperService } from './services/spinner-wrapper.service';
 
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   constructor(
     private config: PrimeNGConfig,
     private router: Router,
+    public themeService: ThemeService,
     private spinnerWrapperService: SpinnerWrapperService
   ) {
 
