@@ -192,6 +192,9 @@ export enum ENInterfaces {
     KarbariAdd = 'V1/Karbari/Add',
     rrInStatePost = 'V1/List/Offloaded/InState',
 
+    signalRStartConnection = '/notifyHub',
+    signalRBroadcastMessage = '/broadcast',
+
     counterStateAll = 'V1/CounterState/All',
     counterStateDictionary = 'V1/CounterState/Dictionary',
     counterStateDictionaryByZoneId = `V1/CounterState/DictionaryByZoneId/`,

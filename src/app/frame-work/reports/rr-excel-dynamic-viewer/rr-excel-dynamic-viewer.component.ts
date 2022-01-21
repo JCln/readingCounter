@@ -19,7 +19,6 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
   _selectCols: any = [];
   _selectedColumns: any[];
 
-  shouldActive: boolean = false;
   constructor(
     private closeTabService: CloseTabService,
     public readingReportManagerService: ReadingReportManagerService,
@@ -56,12 +55,12 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
       this.outputManagerService.downloadFile(res, '.xlsx');
     }
   }
-  getUserRole = (): void => {
+  getUserRole = (): boolean => {
     const jwtRole = this.authService.getAuthUser();
-    this.shouldActive = jwtRole.roles.toString().includes('admin') ? true : false;
+    return jwtRole.roles.toString().includes('admin') ? true : false;
   }
   removeRow = async (id: number) => {
-    if (this.shouldActive) {
+    if (this.getUserRole()) {
 
       if (await this.readingReportManagerService.firstConfirmDialogRemove()) {
         const a = await this.readingReportManagerService.postById(ENInterfaces.removeToolsDynamicExcel, id['dataSource'].id);
@@ -75,8 +74,5 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
       this.readingReportManagerService.snackWarn(EN_messages.access_denied);
     }
   }
-  // editRow = async (body: object) => {
-  // const a = this.readingReportManagerService.openEditDialog(body);  
-  // }
 
 }

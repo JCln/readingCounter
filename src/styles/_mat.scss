@@ -64,6 +64,20 @@
     color: var(--secondary_8);
   }
 
+  .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    color: var(--thirdy_3);
+  }
+
+  .mat-button-toggle-checked {
+    color: var(--secondary_7) !important;
+    border-bottom: .3rem solid var(--primary_4) !important;
+    box-shadow: 2px 2px 2px 2px var(--secondary_3) !important;
+  }
+
+  .mat-button-toggle-appearance-standard {
+    background: var(--secondary_1);
+  }
+
   .mat-input-element {
     color: var(--primary_5);
   }

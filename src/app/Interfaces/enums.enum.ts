@@ -49,6 +49,9 @@ export enum EN_messages {
     insert_zone = 'ناحیه ای وارد نمایید',
     insert_listNumber = 'شماره لیست را وارد نمایید',
     insert_title = 'عنوان را وارد نمایید',
+    insert_text = 'متن را وارد نمایید',
+    insert_colorName = 'رنگ را مشخص نمایید',
+    insert_showTime = 'زمان نمایش را وارد نمایید',
     insert_url = 'آدرس URL  را وارد نمایید',
     insert_title_route = 'عنوان مسیر را وارد نمایید',
     insert_rrDetails = 'گزارش بازرسی',
@@ -107,6 +110,7 @@ export enum EN_messages {
     tableSaved = 'ذخیره ستونها انجام شد',
     tableResetSaved = 'بازنشانی ستونها انجام شد',
     done = 'انجام شد',
+    doneBroadcast = 'پیام مخابره شد',
 
     allowed_forbiddenByDate = 'مشاهده غیر مجاز تنها با تاریخ امکان پذیر است',
     allowed_empty = 'مقادیر نمیتواند خالی باشند',
@@ -130,6 +134,13 @@ export enum EN_messages {
     toReading = 'علت بازگشت به درحال قرائت',
     reason_toOffloaded = 'علت بازگشت به بارگذاری شده',
     toPrevious = 'علت بازگشت به مرحله قبلی',
+
+    broadTitle1 = 'قطع سامانه',
+    broadTitle2 = 'رفرش مجددا',
+    broadTitle3 = 'تماس با راهبر',
+    broadMessage1 = 'همکار گرامی سامانه به دلیل بروزرسانی مدت کوتاهی قطع خواهد شد',
+    broadMessage2 = 'لطفا یکبار از سامانه خارج و سپس یکبار صفحه را رفرش نمایید',
+    broadMessage3 = 'همکار گرامی خسته نباشید، باتوجه به بروزرسانی نسخه نرم‌افزار درصورت بروز هرگونه مشکل با راهبر سامانه تماس حاصل نمایید',
 
     call_supportGroup = 'خطای سرور، با پشتیبانی تماس حاصل نمایید',
     browserSupport_alarm = 'نسخه مرورگر شما برنامه را پشتیبانی نمی‌کند',

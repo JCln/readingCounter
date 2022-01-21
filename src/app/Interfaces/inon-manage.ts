@@ -1,3 +1,5 @@
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
+
 export interface IPolicies {
     id: number,
     enableValidIpCaptcha: boolean,
@@ -34,9 +36,9 @@ export interface IUploadAPK {
 }
 export interface IMessage {
     title: string;
-    text: string;
+    message: string;
     color: string;
-    showTime: number;
+    showTime: ENRandomNumbers;
     canSave: boolean;
 }
 

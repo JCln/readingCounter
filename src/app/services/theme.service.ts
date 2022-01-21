@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ENThemeColor, ENThemeName, Theme } from 'interfaces/ioverall-config';
 import { BrowserStorageService } from 'services/browser-storage.service';
 
-import { dark, light } from '../theme/themes';
+import { bedge, dark, light } from '../theme/themes';
 import { purple } from './../theme/themes';
 
 @Injectable({
@@ -10,13 +10,13 @@ import { purple } from './../theme/themes';
 })
 export class ThemeService {
   private active: Theme = light;
-  private availableThemes: Theme[] = [light, dark, purple];
+  private availableThemes: Theme[] = [light, dark, purple, bedge];
   private colors = [
     { id: 1, color: 0, colorName: 'white' },
     { id: 2, color: 1, colorName: 'rgb(14, 76, 146)' },
     { id: 3, color: 2, colorName: 'purple' },
+    // { id: 4, color: 3, colorName: 'rgb(146, 134, 123)' },
   ];
-
 
   constructor(
     private browserStorageService: BrowserStorageService
@@ -30,14 +30,10 @@ export class ThemeService {
   getAvailableThemes(): Theme[] {
     return this.availableThemes;
   }
-
   getActiveTheme(): Theme {
     return this.active;
   }
 
-  isDarkTheme(): boolean {
-    return this.active.name === dark.name;
-  }
   private setTheme = (theme: Theme, color: ENThemeColor) => {
     this.setActiveTheme(theme);
     this.saveToLocalStorage(ENThemeName.themeColor, color);
@@ -50,6 +46,9 @@ export class ThemeService {
   }
   setLightTheme(): void {
     this.setTheme(light, ENThemeColor.light);
+  }
+  setBedgeTheme(): void {
+    this.setTheme(bedge, ENThemeColor.bedge);
   }
 
   private setActiveTheme(theme: Theme): void {
@@ -87,6 +86,9 @@ export class ThemeService {
         break;
       case ENThemeColor.light:
         this.setLightTheme();
+        break;
+      case ENThemeColor.bedge:
+        this.setBedgeTheme();
         break;
 
       default:

@@ -255,6 +255,7 @@ export enum ENThemeColor {
     light = 0,
     dark = 1,
     purple = 2,
+    bedge = 3,
 }
 export enum ENSelectedColumnVariables {
     selectedRRExcelView = 'excelDynamic',

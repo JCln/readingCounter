@@ -73,7 +73,7 @@ export const dark: Theme = {
 export const purple: Theme = {
     name: "purple",
     properties: {
-        "--white": "rgb(31 25 78)",
+        "--white": "rgb(31 ,25 ,78)",
         "--fix_gray_light": "rgb(248 ,249 ,250)",
         "--thirdy_1": " rgb(89, 77, 179)",
         "--thirdy_2": " rgb(66, 54, 150)",
@@ -91,6 +91,40 @@ export const purple: Theme = {
         "--secondary_3": " rgb(17, 10, 66)",
         "--secondary_4": " rgb(11, 6, 46)",
         "--secondary_5": " orange",
+        "--secondary_6": " rgb(125, 131, 255)",
+        "--secondary_7": " rgb(54, 43, 130)",
+        "--secondary_8": " rgb(177, 167, 190)",
+        "--orange_500": " rgb(246, 128, 56)",
+        "--orange_600": " rgb(245, 91, 25)",
+        "--green_500": " rgb(117, 188, 84)",
+        "--green_600": " rgb(75, 140, 56)",
+        "--red_500": " rgb(246, 62, 56)",
+        "--red_600": " rgb(246, 62, 56)",
+        "--pink_500": " rgb(255, 64, 129)"
+    }
+};
+
+export const bedge: Theme = {
+    name: "bedge",
+    properties: {
+        "--white": "rgb(57, 53, 50)",
+        "--fix_gray_light": "rgb(248, 249, 250)",
+        "--thirdy_1": " rgb(226, 222, 213)",
+        "--thirdy_2": " rgb(146, 134, 123)",
+        "--thirdy_3": " rgb(221, 229, 242)",
+        "--thirdy_4": "rgb(221, 229, 242)",
+        "--primary_1": " rgb(168, 178, 189)",
+        "--primary_2": " rgb(221, 229, 242)",
+        "--primary_3": " rgb(168, 178, 189)",
+        "--primary_4": " rgb(28, 212, 236)",
+        "--primary_5": " rgb(226, 222, 213)",
+        "--primary_6": " rgb(146, 134, 123)",
+        "--primary_7": " rgb(57, 53, 50)",
+        "--secondary_1": " rgb(177, 167, 190)",
+        "--secondary_2": " rgb(221, 229, 242)",
+        "--secondary_3": " rgb(168, 178, 189)",
+        "--secondary_4": " rgb(221, 229, 242)",
+        "--secondary_5": " rgb(168, 178, 189)",
         "--secondary_6": " rgb(125, 131, 255)",
         "--secondary_7": " rgb(54, 43, 130)",
         "--secondary_8": " rgb(177, 167, 190)",
