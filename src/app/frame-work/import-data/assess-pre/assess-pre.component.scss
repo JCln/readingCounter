@@ -12,6 +12,19 @@
   border: 1px solid var(--primary_2);
 }
 
+.insert_track {
+  direction: rtl;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: $font_05;
+
+  .input_2 {
+    width: 19rem;
+  }
+}
+
 .tooltip {
   cursor: pointer;
 }

@@ -16,12 +16,10 @@
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
-                        <mat-select placeholder="انتخاب مورد"
-                            [(ngModel)]="readingReportManagerService.traverseReq.zoneId" name="zoneId">
-                            <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                                {{truefalse.title}}
-                            </mat-option>
-                        </mat-select>
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="readingReportManagerService.traverseReq.zoneId" placeholder="انتخاب مورد"
+                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
                     </div>
                     <div class="input_2" [hidden]="_isOrderByDate">
                         <div class="_key">نوع دوره</div>
@@ -78,8 +76,7 @@
     </section>
 
     <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-        [_numberOfExtraColumns]="[1]" [_outputFileName]="'trv'" [_checkUpName]="'rr-traverse'"
-        [_hasCollapsible]=true [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed"
-        (refreshedTable)="refreshTable()">
+        [_numberOfExtraColumns]="[1]" [_selectedColumnsToRemember]="'selectedRRTraverse'" [_outputFileName]="'trv'" [_checkUpName]="'rr-traverse'" [_hasCollapsible]=true
+        [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

@@ -1,5 +1,6 @@
 export enum ENReadingReports {
     master = 'masterReq',
+    inState = 'inStateReq',
     details = 'detailsReq',
     traverse = 'traverseReq',
     trvch = 'trvchReq',
@@ -11,4 +12,6 @@ export enum ENReadingReports {
     gis = 'gisReq',
     dh = 'disposalhoursReq',
     anlzPrfm = 'anlzPrfmReq',
+    imgAttrResult = 'imgAttrResultReq',
+    imgAttrAnalyze = 'imgAttrAnalyzeReq',
 }

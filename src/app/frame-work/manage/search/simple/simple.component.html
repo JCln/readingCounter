@@ -14,11 +14,10 @@
         <section class="content">
             <div class="input_2">
                 <div class="_key">ناحیه</div>
-                <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService._searchSimpleReq.zoneId" name="zoneId">
-                    <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                        {{truefalse.title}}
-                    </mat-option>
-                </mat-select>
+                <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="searchService._searchSimpleReq.zoneId"
+                    placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id" optionLabel="title"
+                    filter="true">
+                </p-dropdown>
             </div>
 
             <div class="input_2" [hidden]="searchService._isOrderByDate">

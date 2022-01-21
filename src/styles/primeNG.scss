@@ -153,6 +153,32 @@
     margin-left: 0.3rem;
   }
 
+  p-checkbox {
+    align-items: center;
+    display: inline-flex;
+    vertical-align: middle;
+    padding-left: 1rem;
+
+    label {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+  }
+
+  p-radiobutton {
+    padding-left: 1rem;
+  }
+
+  .p-field-radiobutton {
+    display: flex;
+    align-items: center;
+
+    label {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+  }
+
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled):hover {
     background: var(--secondary_1);
     color: var(--secondary_8);
@@ -341,6 +367,14 @@
 }
 
 .double_size {
+  grid-column: auto/ span 2;
+
+  @media (max-width:550px) {
+    grid-column: auto;
+  }
+}
+
+.triple_size {
   grid-column: auto/ span 2;
 
   @media (max-width:550px) {

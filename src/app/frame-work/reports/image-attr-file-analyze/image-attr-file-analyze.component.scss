@@ -1,0 +1,7 @@
+@import 'shared_reports';
+
+._charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40%, 50%));
+  margin-bottom: $font_3;
+}

@@ -21,6 +21,7 @@ import { AssesspreDgComponent } from './assesspre-dg/assesspre-dg.component';
 export class AssessPreComponent extends FactoryONE {
 
   _empty_message: string = '';
+  _isCollapsed: boolean = false;
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -59,7 +60,7 @@ export class AssessPreComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
@@ -73,7 +74,7 @@ export class AssessPreComponent extends FactoryONE {
     this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.assessPreReq.zoneId);
     this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.assessPreReq.zoneId);
     this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
-    this.karbariDictionary = await this.importDynamicService.getKarbariByCodeDictionary();
+    this.karbariDictionaryCode = await this.importDynamicService.getKarbariByCodeDictionary();
     this.qotrDictionary = await this.importDynamicService.getQotrDictionary();
 
     this.converts();
@@ -83,6 +84,14 @@ export class AssessPreComponent extends FactoryONE {
     this.closeTabService.saveDataForAssessPre = this.dataSource;
   }
   nullSavedSource = () => this.closeTabService.saveDataForAssessPre = null;
+  canOpenSearchDialog = () => {
+    if (MathS.isNull(this.importDynamicService.AssessPreReq.listNumber)) {
+      this.importDynamicService.snackMessage(EN_messages.insert_listNumber);
+      return false;
+    }
+    this.importDynamicService.AssessPreReq.listNumber = MathS.trimation(this.importDynamicService.AssessPreReq.listNumber);
+    return true;
+  }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
@@ -112,16 +121,18 @@ export class AssessPreComponent extends FactoryONE {
   }
 
   showSearchOptionsDialog = () => {
-    this.ref = this.dialogService.open(AssesspreDgComponent, {
-      rtl: true,
-      width: '90%'
-    })
-    this.ref.onClose.subscribe((res: IAssessPreDisplayDtoSimafa) => {
-      if (res) {
-        this.assessPreReq = res;
-        this.connectToServer();
-      }
-    });
+    if (this.canOpenSearchDialog()) {
+      this.ref = this.dialogService.open(AssesspreDgComponent, {
+        rtl: true,
+        width: '90%'
+      })
+      this.ref.onClose.subscribe((res: IAssessPreDisplayDtoSimafa) => {
+        if (res) {
+          this.assessPreReq = res;
+          this.connectToServer();
+        }
+      });
+    }
   }
   getOnOffLoadIdsFromDataSource = () => {
     let a: any[] = [];
@@ -143,7 +154,7 @@ export class AssessPreComponent extends FactoryONE {
   getReadingReportTitles = async ($event) => {
     const a = await this.importDynamicService.postById(ENInterfaces.ReadingReportTitles, $event)
     if (a.length) {
-      this.importDynamicService.showResDialog(a, false, EN_messages.insert_rrDetails);
+      this.importDynamicService.showCheckboxDialog(a, false, EN_messages.insert_rrDetails);
       return;
     }
     this.importDynamicService.snackEmptyValue();

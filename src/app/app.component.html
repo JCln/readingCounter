@@ -1,4 +1,8 @@
-<div class="polygon" role="main">
+<div class="polygon" [ngClass]="{
+  'lightBackground':themeService.getActiveTheme().name == 'light',    
+  'darkBackground':themeService.getActiveTheme().name == 'dark',
+  'purpleBackground':themeService.getActiveTheme().name == 'purple'
+}" role="main">
   <app-clock></app-clock>
   <router-outlet></router-outlet>
 </div>

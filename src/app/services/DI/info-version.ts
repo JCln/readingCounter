@@ -3,19 +3,14 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'خروجی جداول',
+        title: 'گزارش ساز اکسل',
         isSelected: true
-    },
+    },        
     {
         id: '2',
-        title: 'ذخیره ستون ها',
+        title: 'مکانمند شدن جستجوها و لیست',
         isSelected: true
-    },
-    {
-        id: '2',
-        title: 'رفع برخی ایرادات',
-        isSelected: true
-    },
+    },        
 ]
 export class infoVersion {
 

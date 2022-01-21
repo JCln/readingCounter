@@ -35,7 +35,11 @@ export interface ITabs {
     logicalOrder: number;
 }
 export enum ENEssentialsToSave {
+    saveDataForToolsExcelViewer = 'saveDataForToolsExcelViewer',
     saveDataForKarbari = 'saveDataForKarbari',
+    saveDataForImageAttribution = 'saveDataForImageAttribution',
+    saveDataForImageAttrResult = 'saveDataForImageAttrResult',
+    saveDataForImageAttrAnalyze = 'saveDataForImageAttrAnalyze',
     saveDataForCounterState = 'saveDataForCounterState',
     saveDataForQotrManager = 'saveDataForQotrManager',
     saveDataForCounterReport = 'saveDataForCounterReport',
@@ -223,7 +227,18 @@ export enum ENHasImportDynamicCount {
     hasNotCount = 'false'
 }
 export enum ENLocalStorageNames {
-    hasDynamicCount = 'hasDynamicCount'
+    hasDynamicCount = 'hasDynamicCount',
+    mapAnimationStartFrom = 'mapAnimationStartFrom'
+}
+export enum ENRandomNumbers {
+    zero = 0,
+    five = 5,
+    ten = 10,
+    twenty = 20,
+    thirdy = 30,
+    forthy = 40,
+    fifty = 50,
+    twoHundred = 200,
 }
 export enum ENThemeName {
     themeColor = 'themeColor'
@@ -231,8 +246,12 @@ export enum ENThemeName {
 export enum ENThemeColor {
     light = 0,
     dark = 1,
+    purple = 2,
 }
 export enum ENSelectedColumnVariables {
+    selectedRRExcelView = 'excelDynamic',
+    selectedImageAttrResult = '_imageAttrResult',
+    selectedImageAttrAnalyze = '_imageAttrAnalyze',
     selectedSimafaBatch = '_simafaBatch',
     selectedTrackReading = 'reading',
     selectedTrackLoaded = 'loaded',
@@ -240,41 +259,42 @@ export enum ENSelectedColumnVariables {
     selectedTrackOffloaded = 'offloaded',
     selectedTrackImported = 'imported',
     selectedlastStates = 'lastStates',
-    selectedUsersAll = '_usersAll',
-    selectedListManagerAll = '_listManagerAll',
-    selectedListManagerAssess = '_assessPreColumns',
-    selectedListManagerMosh = '_searchMosh',
-    selectedCounterState = '_counterState',
-    selectedListManagerPro = '_searchPro',
-    selectedSearchManagerSimple = '_searchSimple',
-    selectedAuth1 = '_auth1',
-    selectedAuth2 = '_auth2',
-    selectedAuth3 = '_auth3',
-    selectedAuth4 = '_auth4',
-    selectedRRAnalyzeByParam = '_RRAnalyzeByParam',
-    selectedDMAnalyze = '_DMAnalyses',
-    selectedRRMaster = '_RRMaster',
-    selectedRRDetails = '_RRDetails',
-    selectedRRTraverse = '_RRTraverse',
-    selectedRRTraverseDifferential = '_RRTraverseDifferential',
-    selectedRRKarkard = '_RRKarkard',
-    selectedRRLocked = '_RRLocked',
-    selectedRRPreNumShown = '_RRPreNumberShown',
-    selectedRROffloadedKarkard = '_RROffloadedKarkard',
-    selectedRRKarkardDaily = '_RRKarkardDaily',
-    selectedRRDisposalHours = '_RRDisposalHours',
-    selectedAbFormulas = '_abFormulas',
-    selectedBudgetFormulas = '_budgetFormulas',
-    selectedTabsare2Formulas = '_tabsare2Formulas',
-    selectedTabsare3Formulas = '_tabsare3Formulas',
-    selectedCounterReport = '_counterReport',
-    selectedReadingConfigDefault = '_readingConfigDefault',
-    selectedReadingPeriod = '_readingPeriod',
-    selectedReadingPeriodKind = '_readingPeriodKind',
-    selectedTextOutput = '_textOutput',
-    selectedKarbari = '_karbari',
-    selectedForbidden = '_forbidden',
-    selectedErrors = '_errors',
+    selectedUsersAll = 'userAll',
+    selectedListManagerAll = 'allLists',
+    selectedListManagerAssess = 'assess_pre',
+    selectedListManagerMosh = 'searchMosh',
+    selectedCounterState = 'counterState',
+    selectedListManagerPro = 'searchPro',
+    selectedSearchManagerSimple = 'simpleSearch',
+    selectedAuth1 = 'auth1',
+    selectedAuth2 = 'auth2',
+    selectedAuth3 = 'auth3',
+    selectedAuth4 = 'auth4',
+    selectedRRAnalyzeByParam = 'analyzePrfm',
+    selectedDMAnalyze = 'analysis',
+    selectedRRMaster = 'master',
+    selectedRRDetails = 'rrDetails',
+    selectedRRTraverse = 'trv',
+    selectedRRTraverseDifferential = 'trvDiff',
+    selectedRRKarkard = 'karkard',
+    selectedRRLocked = 'rrLocked',
+    selectedRRPreNumShown = 'rrPreNumber',
+    selectedRROffloadedKarkard = 'karkardOffload',
+    selectedRRKarkardDaily = 'karkardDaily',
+    selectedRRDisposalHours = 'disposalHs',
+    selectedAbFormulas = 'abBaha',
+    selectedBudgetFormulas = 'Budget',
+    selectedTabsare2Formulas = 'tabsare2',
+    selectedTabsare3Formulas = 'tabsare3',
+    selectedCounterReport = 'counterReport',
+    selectedReadingConfigDefault = 'readingConfigDefault',
+    selectedReadingPeriod = 'readingPeriod',
+    selectedReadingPeriodKind = 'periodKind',
+    selectedImageAttribution = 'imgattr',
+    selectedTextOutput = 'textOutput',
+    selectedKarbari = 'karbari',
+    selectedForbidden = 'forbidden',
+    selectedErrors = 'errors',
     selectedSimafaReadingProgram = '_simafaReadingProgram',
 }
 export enum ENOffloadModifyType {
@@ -308,5 +328,5 @@ export interface Theme {
     properties: any
 }
 export enum ENLoginVersion {
-    version = '0.5.5'
+    version = '0.5.9'
 }

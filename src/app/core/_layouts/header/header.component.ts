@@ -1,21 +1,32 @@
-import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output, Type } from '@angular/core';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { ENThemeColor } from 'interfaces/ioverall-config';
 import { ThemeService } from 'services/theme.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('closeSubItems', style({
+        display: 'none'
+      })),
+      state('openSubItems', style({
+        display: 'inline'
+      })),
+      transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
+    ])
+  ]
 })
 export class HeaderComponent implements AfterContentInit, OnChanges {
   private sideBar: boolean;
   @Input() sid_isSmall: boolean;
   @Output() sidebarEvent = new EventEmitter<boolean>();
-  DateJalaliComponent?: Type<any>;
-  subscription: Subscription;
 
   displayName: string = '';
+  _showColorPalete: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -36,8 +47,8 @@ export class HeaderComponent implements AfterContentInit, OnChanges {
   ngOnChanges(): void {
     this.sideBar = this.sid_isSmall;
   }
-  toggleTheme() {
-    this.themeService.toggleTheme();
+  changeColor = (id: ENThemeColor) => {
+    this.themeService.setThemeColor(id);
   }
 
 }

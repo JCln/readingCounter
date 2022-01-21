@@ -1,0 +1,34 @@
+<form #form="ngForm" (ngSubmit)="connectToServer()">
+    <section class="content">
+
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <p-dropdown name="zones" [options]="zoneDictionary"
+                [(ngModel)]="readingReportManagerService.inStateReq.zoneId" placeholder="انتخاب مورد"
+                [style]="{minWidth: '10rem',width:'100%'}" optionValue="id" optionLabel="title" filter="true">
+            </p-dropdown>
+        </div>
+        <div class="input_2">
+            <div class="_key">از</div>
+            <div class="_value">
+                <app-date-jalali name="fromDate"
+                    (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.inState, $event)"
+                    [dateObject]="readingReportManagerService.inStateReq.fromDate">
+                </app-date-jalali>
+            </div>
+        </div>
+        <div class="input_2">
+            <div class="_key">تا</div>
+            <div class="_value">
+                <app-date-jalali name="toDate"
+                    (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.inState, $event)"
+                    [dateObject]="readingReportManagerService.inStateReq.toDate">
+                </app-date-jalali>
+            </div>
+        </div>
+        <button type="submit" class="tooltip btn_2_o">
+            <i class="pi pi-file-excel"></i>
+            Excel دانلود
+        </button>
+    </section>
+</form>

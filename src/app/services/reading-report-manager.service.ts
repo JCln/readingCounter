@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { IImportDataResponse } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
@@ -15,7 +14,11 @@ import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
-import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import {
+  ConfirmDialogExcelViewComponent,
+} from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
+import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 
 
 @Injectable({
@@ -26,6 +29,22 @@ export class ReadingReportManagerService {
   ENReadingReports = ENReadingReports;
 
   masterReq: IReadingReportReq = {
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  };
+  imgAttrResultReq: IReadingReportReq = {
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  };
+  imgAttrAnalyzeReq: IReadingReportReq = {
     fromDate: '',
     toDate: '',
     counterReaderId: '',
@@ -137,6 +156,15 @@ export class ReadingReportManagerService {
     reportCode: 0,
     year: 1400
   }
+  inStateReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: 1400
+  }
   /* GET*/
 
   receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
@@ -146,7 +174,6 @@ export class ReadingReportManagerService {
     this[variable].toDate = $event;
   }
 
-  
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -159,9 +186,16 @@ export class ReadingReportManagerService {
 
   // CALL APIs
 
-  getDataSource = (method: ENInterfaces, id: number): Promise<any> => {
+  getDataSource = (method: ENInterfaces, id: any): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(method, id).subscribe((res) => {
+        resolve(res)
+      })
+    });
+  }
+  dataSourceGET = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe((res) => {
         resolve(res)
       })
     });
@@ -172,6 +206,13 @@ export class ReadingReportManagerService {
         if (MathS.isNull(res))
           this.emptyMessage();
         resolve(res)
+      })
+    });
+  }
+  postExcel = (method: ENInterfaces, body: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBLOB(method, body).toPromise().then(res => {
+        resolve(res);
       })
     });
   }
@@ -207,7 +248,7 @@ export class ReadingReportManagerService {
   }
   getQotrDictionary = () => {
     return this.dictionaryWrapperService.getQotrDictionary();
-  }  
+  }
 
 
   private datesValidation = (dataSource: object): boolean => {
@@ -303,6 +344,9 @@ export class ReadingReportManagerService {
   emptyMessage = () => {
     this.utilsService.snackBarMessageFailed(EN_messages.notFound);
   }
+  successSnackMessage = (message: string) => {
+    this.utilsService.snackBarMessageSuccess(message);
+  }
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();
   }
@@ -345,17 +389,16 @@ export class ReadingReportManagerService {
       })
     });
   }
-  showResDialog = (res: IImportDataResponse, disableClose: boolean, title: string): Promise<any> => {
+  showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmDialogComponent,
+      const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
           minWidth: '19rem',
           data: {
             data: res,
-            title: title,
-            isConfirm: disableClose
+            title: title
           }
         });
       dialogRef.afterClosed().subscribe(async result => {
@@ -366,10 +409,54 @@ export class ReadingReportManagerService {
         }
       })
     });
-
   }
+  showResDialogDynamic = (res: any, options: any): Promise<any> => {
+    // disable close mean when dynamic count show decision should make
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmDialogExcelViewComponent,
+        {
+          disableClose: options.disableClose,
+          minWidth: '90%',
+          data: {
+            data: res,
+            title: options.title,
+            buttonText: options.buttonText,
+            buttonColor: options.buttonColor
+          }
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        console.log(result);
+
+        if (result) {
+          resolve(result);
+        }
+      })
+    });
+  }
+  firstConfirmDialogRemove = () => {
+    const title = EN_messages.confirm_remove;
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: title,
+          isInput: false,
+          isDelete: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(async desc => {
+        if (desc) {
+          resolve(true);
+        }
+      })
+    })
+  }
+
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
+  }
+  snackWarn = (message: string) => {
+    this.utilsService.snackBarMessageWarn(message);
   }
   private followUPValidation = (id: number): boolean => {
     if (MathS.isNull(id)) {

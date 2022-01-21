@@ -69,6 +69,11 @@ export interface IFragmentDetails {
     count?: number,
     counterReaderName?: string
 }
+export interface IImageAttribution {
+    id?: number,
+    title: string,
+    isNew?: boolean
+}
 export interface ICounterState {
     id?: number,
     moshtarakinId: number,
@@ -163,10 +168,11 @@ export interface ITabsare2Formula {
 // 
 export interface ITextOutput {
     id?: any,
+    columnId?: number,
     zoneId: number | string,
     itemTitle: string,
     startIndex: any,
     endIndex: any,
     length: any,
-    isNew: boolean
+    isNew?: boolean
 }

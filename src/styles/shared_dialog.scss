@@ -112,6 +112,10 @@ button._blue_dark {
   color: var(--secondary_1);
 }
 
+._double_size {
+  grid-column: auto/ span 2;
+}
+
 ::ng-deep {
 
   .mat-checkbox-layout .mat-checkbox-label {

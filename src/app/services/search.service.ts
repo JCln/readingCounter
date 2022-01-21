@@ -5,6 +5,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
+  ENRandomNumbers,
   ENSelectedColumnVariables,
   IMasrafStates,
   IObjectIteratation,
@@ -386,6 +387,13 @@ export class SearchService {
   }
   showInMap = (dataSource: object) => {
     this.utilsService.routeToByParams('/wr', { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });
+  }
+  showInMapSingle = (dataSource: any) => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return;
+    }
+    this.utilsService.routeToByParams('/wr', { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make

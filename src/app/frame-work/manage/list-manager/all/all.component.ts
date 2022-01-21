@@ -103,15 +103,6 @@ export class AllComponent extends FactoryONE {
     this.rowIndex < 1 ? this.rowIndex = this.dataSource.length : this.rowIndex--;
     this.carouselDataSource = this.dataSource[this.rowIndex];
   }
-  // convertTitleToId = (dataSource: any): any => {
-  // this.carouselDataSource.zoneId = this.convertTitleToId(this.dataSource[this.rowIndex].zoneId)
-  //   return this.zoneDictionary.find(item => {
-  //     if (item.title === dataSource) {
-  //       console.log(item.id);
-  //       return item.id;
-  //     }
-  //   })
-  // }
   carouselCancelClicked = () => {
     this.showCarousel = false;
     this.showWouImages = false;

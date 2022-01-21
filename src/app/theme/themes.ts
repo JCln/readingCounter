@@ -69,19 +69,36 @@ export const dark: Theme = {
         "--pink_500": "rgb(255, 64, 129)",
     }
 };
-// "--foreground-default": "#5C7D99",
-        // "--foreground-secondary": "#A3B9CC",
-        // "--foreground-tertiary": "#F4FAFF",
-        // "--foreground-quaternary": "#E5E5E5",
-        // "--foreground-light": "#FFFFFF",
-        // "--background-default": "#797C80",
-        // "--background-secondary": "#41474D",
-        // "--background-tertiary": "#08090A",
-        // "--background-light": "#41474D",
-        // "--primary-default": "#5DFDCB",
-        // "--primary-dark": "#24B286",
-        // "--primary-light": "#B2FFE7",
-        // "--error-default": "#EF3E36",
-        // "--error-dark": "#800600",
-        // "--error-light": "#FFCECC",
-        // "--background-tertiary-shadow": "0 1px 3px 0 rgba(8, 9, 10, 0.5)"
+
+export const purple: Theme = {
+    name: "purple",
+    properties: {
+        "--white": "rgb(31 25 78)",
+        "--thirdy_1": " rgb(89, 77, 179)",
+        "--thirdy_2": " rgb(66, 54, 150)",
+        "--thirdy_3": " rgb(177, 167, 190)",
+        "--thirdy_4": " ",
+        "--primary_1": " rgb(127 ,108 ,153)",
+        "--primary_2": " rgb(157, 143, 175)",
+        "--primary_3": " rgb(239, 220, 255)",
+        "--primary_4": " rgb(242, 243, 244)",
+        "--primary_5": " rgb(177, 167, 190)",
+        "--primary_6": " rgb(82, 63, 114)",
+        "--primary_7": " rgb(177, 167, 190)",
+        "--secondary_1": " rgb(63 ,49, 82)",
+        "--secondary_2": " rgb(34 ,29, 72)",
+        "--secondary_3": " rgb(17, 10, 66)",
+        "--secondary_4": " rgb(11, 6, 46)",
+        "--secondary_5": " orange",
+        "--secondary_6": " rgb(125, 131, 255)",
+        "--secondary_7": " rgb(54, 43, 130)",
+        "--secondary_8": " rgb(177, 167, 190)",
+        "--orange_500": " rgb(246, 128, 56)",
+        "--orange_600": " rgb(245, 91, 25)",
+        "--green_500": " rgb(117, 188, 84)",
+        "--green_600": " rgb(75, 140, 56)",
+        "--red_500": " rgb(246, 62, 56)",
+        "--red_600": " rgb(246, 62, 56)",
+        "--pink_500": " rgb(255, 64, 129)"
+    }
+};

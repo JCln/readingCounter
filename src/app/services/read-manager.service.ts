@@ -6,7 +6,7 @@ import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'inter
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { ICounterState, ITextOutput } from '../Interfaces/ireads-manager';
+import { ICounterState, IImageAttribution, ITextOutput } from '../Interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
@@ -95,6 +95,13 @@ export class ReadManagerService {
       return false;
     return true;
   }
+  verificationImageAttribution = (dataSource: IImageAttribution): boolean => {
+    if (MathS.isNull(dataSource.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    return true;
+  }
   verificationCounterState = (dataSource: ICounterState): boolean => {
     if (!this.counterStateVertification(dataSource))
       return false;
@@ -138,6 +145,14 @@ export class ReadManagerService {
   deleteSingleRow = (place: ENInterfaces, id: number) => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POST(place, id).subscribe((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(true);
+      })
+    });
+  }
+  deleteSingleRowByObject = (place: ENInterfaces, object: object) => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(place, object).subscribe((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);
         resolve(true);
       })

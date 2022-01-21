@@ -142,6 +142,8 @@ export enum ENInterfaces {
     trackingREMOVE = 'V1/Tracking/Remove',
     trackingFOLLOWUP = 'V1/Tracking/FollowUp/?trackNumber=',
     trackingAnalyzeByParam = 'V1/Tracking/Analyze/ByParam',
+    ImageAttributionResult = 'V1/ImageAttributionFile/Result',
+    ImageAttributionAnalyze = 'V1/ImageAttributionFile/Analyze',
     trackingPostOffloadModify = 'V1/OffLoad/Modify',
     trackingEditState = 'V1/Tracking/EditState',
 
@@ -188,6 +190,7 @@ export enum ENInterfaces {
     KarbariRemove = 'V1/Karbari/Remove',
     KarbariEdit = 'V1/Karbari/Edit',
     KarbariAdd = 'V1/Karbari/Add',
+    rrInStatePost = 'V1/List/Offloaded/InState',
 
     counterStateAll = 'V1/CounterState/All',
     counterStateDictionary = 'V1/CounterState/Dictionary',
@@ -211,6 +214,11 @@ export enum ENInterfaces {
     ReadingReportMasterWithParam = 'V1/ReadingReport/Master/WithParam',
     ReadingReportDETAILSWithParam = 'V1/ReadingReport/Details/WithParam',
     ReadingReportTitles = `V1/ReadingReport/Titles`,
+
+    imageAttributionGet = 'V1/ImageAttribution/All',
+    imageAttributionRemove = 'V1/ImageAttribution/Remove',
+    imageAttributionEdit = 'V1/ImageAttribution/Edit',
+    imageAttributionAdd = 'V1/ImageAttribution/Add',
 
     APKPreList = 'V1/APK/PreList',
     APKLast = 'V1/APK/Last',
@@ -242,6 +250,15 @@ export enum ENInterfaces {
     postSimafaSingle = 'V1/Import/Simafa/single',
     postSimafaAssessPre = 'V1/Import/Simafa/AssessPre',
     postSimafaAssessAdd = 'V1/Import/Simafa/AssessAdd',
+
+    postToolsRandomImages = 'V1/List/OffLoaded/RandomImages',
+    getImageAttributionAll = `V1/ImageAttributionFile/All`,
+    getImageAttributionAddOrEdit = 'V1/ImageAttributionFile/AddOrEdit',
+
+    editToolsDynamicExcel = 'V1/DynamicExcel/Edit',
+    getToolsDynamicExcel = 'V1/DynamicExcel/All',
+    addToolsDynamicExcel = 'V1/DynamicExcel/Add',
+    removeToolsDynamicExcel = 'V1/DynamicExcel/Remove',
 
     getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
     getDashboardEditCount = 'V1/Tracking/Dashboard/Tracking/EditCount',

@@ -1,4 +1,8 @@
-<main role="main" [ngClass]="this.themeService.isDarkTheme() ? 'darkBackground' : 'lightBackground'">
+<main role="main" [ngClass]="{
+    'lightBackground':this.themeService.getActiveTheme().name == 'light',    
+    'darkBackground':this.themeService.getActiveTheme().name == 'dark',
+    'purpleBackground':this.themeService.getActiveTheme().name == 'purple'
+}">
     <div class="header">
         <div class="_logo_content">
             <img src="assets/imgs/header/logo.jpg" alt="">
@@ -7,6 +11,9 @@
             <div class="title">{{pageTitle}}</div>
             <button (click)="openDialog()" class="btn_1 d_grid_center">
                 <i class="pi pi-question"></i>
+            </button>
+            <button (click)="openFullscreen()" class="btn_1 d_grid_center _screen">
+                <i [ngClass]="_isFullScreen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"></i>
             </button>
         </h2>
     </div>

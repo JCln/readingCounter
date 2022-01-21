@@ -10,6 +10,11 @@
   background: url('/assets/imgs/framework/bbd.jpg') #365475;
 }
 
+.purpleBackground {
+  background-image: url('/assets/imgs/framework/bbp.jpg');
+}
+
+
 main {
   width: auto;
   min-height: 84vh;
@@ -62,9 +67,13 @@ main {
   border: none;
   cursor: pointer;
 
-  .pi-question {
+  i {
     color: var(--white);
     font-size: $font_s;
     font-weight: 600;
   }
+}
+
+._screen {
+  background: var(--thirdy_3);
 }

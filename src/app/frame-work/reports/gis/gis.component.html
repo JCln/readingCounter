@@ -25,13 +25,11 @@
             <section class="content">
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.gisReq.zoneId"
-                        name="zoneId">
-                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id"
-                            (click)="getCounterStateByZoneId()">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="readingReportManagerService.gisReq.zoneId" placeholder="انتخاب مورد"
+                        [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true"
+                        (onChange)="getCounterStateByZoneId()">
+                    </p-dropdown>
                 </div>
                 <div class="input_2" [hidden]="_isOrderByDate">
                     <div class="_key">نوع دوره</div>

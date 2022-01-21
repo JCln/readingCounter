@@ -1,0 +1,81 @@
+<section [hidden]="isCollapsed">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+            <section class="content">
+                <div class="input_2" [hidden]="!zoneDictionary.length">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="toolsService.randomImages.zoneId" placeholder="انتخاب مورد"
+                            [style]="{minWidth: '10rem',width:'100%'}" optionValue="id" optionLabel="title"
+                            filter="true" (click)="verificationACounterReaderId()">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="input_2" *ngIf="userCounterReader.length">
+                    <div class="_key">مامور</div>
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
+                        [options]="userCounterReader" name="counter-reader"
+                        [(ngModel)]="toolsService.randomImages.userId" optionLabel="title" [filter]="true"
+                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
+                    </p-dropdown>
+                </div>
+                <div class="input_2">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="toolsService.receiveFromDateJalali($event)"
+                            [dateObject]="toolsService.randomImages.day">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">تعداد</div>
+
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="quantity" [filter]="true"
+                        placeholder="عدد تصادفی" [options]="_quantity" [(ngModel)]="toolsService.randomImages.quantity"
+                        [editable]="true" optionValue="value" optionLabel="title">
+                    </p-dropdown>
+                </div>
+
+            </section>
+        </section>
+        <footer class="center_footer">
+            <button type="submit" class="btn_1">
+                مشاهده
+                <i class="pi pi-image"></i>
+            </button>
+        </footer>
+    </form>
+</section>
+
+<main *ngIf="allImagesDataSource" style="position: relative;">
+
+    <div class="content">
+        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
+
+            <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
+                <img src="{{imgsOriginUrl[ri]}}" alt="whatever" (click)="routeToOffload(item , ri)">
+                <div class="__hiddens" *ngIf="item.onOffLoadId">
+                    <p>{{item.eshterak}}</p>
+                    <p>{{item.firstName}}</p>
+                    <p>{{item.sureName}}</p>
+                    <p>{{item.imageDescription}}</p>
+                </div>
+            </div>
+
+            <div *ngIf="!imgsOriginUrl[ri]" class="__img_bound">
+                <img src="assets/imgs/soundvid/2.png" alt="whatever">
+            </div>
+        </div>
+    </div>
+
+    <app-random-image-carousel *ngIf="showCarousel" [dataSource]="carouselImage"
+        (cancelClicked)="carouselCancelClicked()" (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
+        <app-random-image-carousel-details></app-random-image-carousel-details>
+
+    </app-random-image-carousel>
+
+    <div class="not_found_header" *ngIf="!allImagesDataSource.imageCount">
+        <h2>فاقد تصویر</h2>
+    </div>
+</main>

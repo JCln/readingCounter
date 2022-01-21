@@ -1,5 +1,31 @@
 @import 'variable';
 
+.lightBackground::after {
+  background: url('/assets/imgs/framework/bb.jpg');
+}
+
+.darkBackground::after {
+  background: url('/assets/imgs/framework/bbd.jpg') #365475;
+}
+
+.purpleBackground::after {
+  background: url('/assets/imgs/framework/bbp.jpg');
+}
+
+
+
+.lightBackground::before {
+  background: var(--secondary_1);
+}
+
+.darkBackground::before {
+  background-color: var(--white);
+}
+
+.purpleBackground::before {
+  background: var(--primary_1);
+}
+
 .polygon {
   width: 100%;
   height: 100%;
@@ -10,7 +36,6 @@
 .polygon::after {
   content: '';
   position: fixed;
-  background: url('/assets/imgs/framework/bbd.jpg') #365475;
   clip-path: polygon(0 0, calc(100% - 20vw) 0%, calc(100% - 70vw) 100%, 0 100%);
   top: 0;
   bottom: 0;
@@ -22,7 +47,6 @@
 .polygon::before {
   content: '';
   position: fixed;
-  background: url('/assets/imgs/framework/bb.jpg') var(--secondary_1);
   clip-path: polygon(calc(100% - 20vw) 0, 100% 0, 100% 100%, calc(100% - 70vw) 100%);
   top: 0;
   bottom: 0;

@@ -21,6 +21,7 @@ export class CloseTabService {
   saveDataForAppLevel4: any;
 
   saveDataForCounterState: any;
+  saveDataForImageAttribution: any;
   saveDataForKarbari: any;
   saveDataForReadingConfig: any;
   saveDataForReadingPeriodManager: any;
@@ -82,6 +83,8 @@ export class CloseTabService {
   saveDataForRRPreNumShown: any;
   saveDataForRRLocked: any;
   saveDataForRRMaster: any;
+  saveDataForImageAttrResult: any;
+  saveDataForImageAttrAnalyze: any;
   saveDataForRRPerformance: any;
   saveDataForDMAAnalyze: any;
   saveDataForRRDetails: any;
@@ -89,7 +92,9 @@ export class CloseTabService {
   saveDataForRRGIS: any;
   saveDataForFragmentNOB: any;
   saveDataForFragmentNOBDetails: any;
+
   saveDataForTextOutput: any;
+  saveDataForToolsExcelViewer: any;
   saveDataForPolicies: any;
   saveDataForFNB: any;
   saveDataForProfile: any;
@@ -97,6 +102,10 @@ export class CloseTabService {
   saveDataForRRGalleryReq: any;
 
   private val: ISidebarVals[] = [
+    { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: '/wr/rpts/tools/excelviewer' },
+    { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: '/wr/m/r/imgattr' },
+    { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: '/wr/rpts/anlzfile/result' },
+    { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: '/wr/rpts/anlzfile/analyze' },
     { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: '/wr/m/r/kar' },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: '/wr/m/r/cs' },
     { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: '/wr/m/r/qr' },

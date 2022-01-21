@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
 import { IAnalyzeRes, IDashboardKarkardTimed, IDashboardReadDaily } from '../Interfaces/idashboard-map';
@@ -11,10 +11,11 @@ import { IAnalyzeRes, IDashboardKarkardTimed, IDashboardReadDaily } from '../Int
   providedIn: 'root'
 })
 export class DashboardService {
+  _selectedZone: number = 0;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   /* COLUMNS */
@@ -37,22 +38,40 @@ export class DashboardService {
 
   /* CALL API */
   getDashboardDataSource = (method: ENInterfaces): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).toPromise().then(res => {
-        resolve(res);
+    if (MathS.isNull(this._selectedZone)) {
+
+      return new Promise((resolve) => {
+        this.interfaceManagerService.GET(method).toPromise().then(res => {
+          resolve(res);
+        })
       })
-    })
+    } else {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.GETByQuote(method, '?zoneId=' + this._selectedZone).toPromise().then(res => {
+          resolve(res);
+        })
+      })
+    }
   }
   postDashboardAnalyzePerformance = (): Promise<any> => {
-    try {
+    if (MathS.isNull(this._selectedZone)) {
+
       return new Promise((resolve) => {
         this.interfaceManagerService.POST(ENInterfaces.postDashboardAnalyzePerformance).subscribe(res => {
           resolve(res);
         })
       })
-    } catch (error) {
-      console.error(e => e);
     }
+    else {
+      return new Promise((resolve) => {
+        this.interfaceManagerService.GETByQuote(ENInterfaces.postDashboardAnalyzePerformance, '?zoneId=' + this._selectedZone).toPromise().then(res => {
+          resolve(res);
+        })
+      })
+    }
+  }
+  getZoneDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getZoneDictionary();
   }
 
   /* CONFIGS */

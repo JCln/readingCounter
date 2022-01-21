@@ -4,11 +4,10 @@
             <section class="content">
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importSimafaReadingProgram.zoneId" name="zoneId">
-                        <mat-option *ngFor="let truefalse of zoneDictionary" [value]="truefalse.id">
-                            {{truefalse.title}}
-                        </mat-option>
-                    </mat-select>
+                    <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="importSimafaReadingProgram.zoneId"
+                        placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id" optionLabel="title"
+                        filter="true">
+                    </p-dropdown>
                 </div>
                 <div class="input_2">
                     <div class="_key">نوع دوره</div>
@@ -46,18 +45,10 @@
     </form>
 </main>
 
-<app-prime-table *ngIf="route.children.length === 0"     
-[_selectCols]="_selectCols" 
-[_selectedColumns]="selectedColumns"
-[dataSource]="dataSource"
-[_outputFileName]="'simafa-readingProg'"
-[_checkUpName]="'simafa-readingProg'"
-[_selectedColumnsToRemember]="'selectedSimafaReadingProgram'"
-[_numberOfExtraColumns]="[1, 2]"
-(refreshedTable)="refreshTable()"
-(routedToBatch)="routeToBatch($event)"
-(routedToSingle)="routeToSingle($event)"
-> 
+<app-prime-table *ngIf="route.children.length === 0" [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" [_outputFileName]="'simafa-readingProg'" [_checkUpName]="'simafa-readingProg'"
+    [_selectedColumnsToRemember]="'selectedSimafaReadingProgram'" [_numberOfExtraColumns]="[1, 2]"
+    (refreshedTable)="refreshTable()" (routedToBatch)="routeToBatch($event)" (routedToSingle)="routeToSingle($event)">
 </app-prime-table>
 
 <router-outlet></router-outlet>

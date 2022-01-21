@@ -37,7 +37,7 @@
                     <div class="tooltip_text">ذخیره ستونها</div>
                 </i>
                 <i *ngIf="_hasSaveColumns" (click)="resetSavedColumns()"
-                    class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-refresh">
+                    class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
                     <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
                 </i>
             </div>
@@ -178,7 +178,13 @@
                     <div class="tooltip_text_right">حذف مسیر</div>
                 </i>
             </td>
-
+            <td *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'allComponent'"
+                (click)="showInMapSingle(dataSource)">
+                <span class="ui-column-title">مشاهده روی نقشه</span>
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                </i>
+            </td>
             <td *ngIf="dataSource.hasMap &&( _checkUpName == 'lastStates' || _checkUpName == 'simpleSearch')"
                 (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
@@ -232,7 +238,7 @@
                     <div class="tooltip_text_right">مشاهده عکس(ها)</div>
                 </i>
             </td>
-            <td *ngIf="(_outputFileName == 'all-lists')&& !_allComponentIsModify"
+            <td *ngIf="(_outputFileName == 'allLists' || _outputFileName == 'rrPreNumber'|| _outputFileName == 'rrLocked')&& !_allComponentIsModify"
                 (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
@@ -240,21 +246,18 @@
                 </i>
             </td>
             <td *ngIf="(
-                _outputFileName == 'search-pro' 
-            || _outputFileName == 'search-mosh'
-            || _outputFileName == 'rr-details'
-            || _outputFileName == 'rr-locked'
-            || _outputFileName == 'rr-preNumber'
+                _outputFileName == 'searchPro' 
+            || _outputFileName == 'searchMosh'
+            || _outputFileName == 'rrDetails'            
             || _outputFileName == 'trv'
-            || _outputFileName == 'trv-diff'            
+            || _outputFileName == 'trvDiff'            
             )&& !_allComponentIsModify" (click)="searchService.routeToWoui(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
-            <td (click)="routeToOffload(dataSource,ri)"
-                *ngIf="_outputFileName == 'all-lists' &&  _allComponentIsModify">
+            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_outputFileName == 'allLists' &&  _allComponentIsModify">
                 <span class="ui-column-title">اصلاح</span>
                 <i class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>
@@ -266,10 +269,17 @@
                     <div class="tooltip_text">ویرایش</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'readingConfig'" class="edit_button" (click)="removeRow(dataSource , ri)">
+            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'excelDynamic'" class="edit_button"
+                (click)="removeRow(dataSource , ri)">
                 <span class="ui-column-title">حذف مورد</span>
                 <i class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مورد</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'excelDynamic'" class="edit_button" (click)="downloadExcel(dataSource)">
+                <span class="ui-column-title">دانلود Excel</span>
+                <i class="tooltip p_icons pi pi-file-excel">
+                    <div class="tooltip_text_right">دانلود Excel</div>
                 </i>
             </td>
             <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (click)="routeToEditPage(dataSource.id)">

@@ -5,7 +5,7 @@
             <section class="__readonly_s">
                 <div class="input_2">
                     <div class="_key">نام‌ و نام‌خانوادگی</div>
-                    <div class="_value">
+                    <div class="_value" style="overflow-y: auto;">
                         {{firstName}}{{sureName}}
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="input_2">
                     <div class="_key">توضیحات</div>
-                    <div class="_value">
+                    <div class="_value" style="overflow-y: auto;">
                         {{imageDescription}}
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div *ngIf="!allImages" class="__img_bound">
                         <img src="assets/imgs/soundvid/2.png" alt="whatever">
                     </div>
-                    <div *ngIf="allImages">
+                    <div *ngIf="allImages" class="__img_origin_bound">
                         <img class="main-img" src="{{allImages}}" alt="whatever">
                     </div>
                 </div>

@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>
+    <div class="_text d_rtl">
+        {{data.title}}
+    </div>
+</h2>
+<form #form="ngForm" (ngSubmit)="confirm()">
+    <mat-dialog-content>
+
+        <div class="input_2" *ngIf="data.data.includes('zoneId')">
+            <div class="_key">ناحیه</div>
+            <p-dropdown name="zones" [options]="zoneDictionary" placeholder="انتخاب مورد"
+                [(ngModel)]="_content['zoneId']" [style]="{minWidth: '10rem',width:'100%'}" optionValue="id"
+                optionLabel="title" filter="true">
+            </p-dropdown>
+        </div>
+        <div class="input_2" *ngIf="data.data.includes('karbari')">
+            <div class="_key">کاربری</div>
+            <p-dropdown name="karbari" [options]="karbariByCodeDictionary" placeholder="انتخاب مورد"
+                [(ngModel)]="_content['karbari']" [style]="{minWidth: '10rem',width:'100%'}" optionValue="id"
+                optionLabel="title" filter="true">
+            </p-dropdown>
+        </div>
+        <div class="input_2" *ngIf="data.data.includes('fromDate')">
+            <div class="_key">از</div>
+            <div class="_value">
+                <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+        <div class="input_2" *ngIf="data.data.includes('toDate')">
+            <div class="_key">تا</div>
+            <div class="_value">
+                <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+        <div class="input_2" *ngIf="data.data.includes('jalaliDate')">
+            <div class="_key">تاریخ</div>
+            <div class="_value">
+                <app-date-jalali name="jalaliDate" (dateJalEvent)="receivejalaliDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+        <div class="input_2" *ngIf="data.data.includes('fromMasraf')">
+            <div class="_key">از مصرف</div>
+            <div class="_value">
+                <input class="_value" type="number" name="fromMasraf" [(ngModel)]="_content['fromMasraf']">
+            </div>
+        </div>
+        <div class="input_2" *ngIf="data.data.includes('toMasraf')">
+            <div class="_key">تا مصرف</div>
+            <div class="_value">
+                <input class="_value" type="number" name="toMasraf" [(ngModel)]="_content['toMasraf']">
+            </div>
+        </div>
+        <div class="input_2" *ngIf="data.data.includes('masraf')">
+            <div class="_key">مصرف</div>
+            <div class="_value">
+                <input class="_value" type="number" name="masraf" [(ngModel)]="_content['masraf']">
+            </div>
+        </div>
+    </mat-dialog-content>
+
+</form>
+
+<footer>
+    <button class="btn_2" (click)="cancel()">بازگشت</button>
+
+    <button *ngIf="data.buttonText.length" [ngStyle]="{'background-color': data.buttonColor}" class="tooltip btn_2_o"
+        (click)="confirm()">
+        <i class="pi pi-file-excel"></i>
+        {{data.buttonText}}
+    </button>
+</footer>

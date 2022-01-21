@@ -26,6 +26,13 @@ export class UtilsService {
       { title: '1401', value: 1401 }
     ];
   }
+  getQuantity = (): ITitleValue[] => {
+    return [
+      { title: '10', value: 10 },
+      { title: '20', value: 20 },
+      { title: '30', value: 30 }
+    ];
+  }
 
   // snack bar
   snackBarMessageSuccess = (message: string) => {

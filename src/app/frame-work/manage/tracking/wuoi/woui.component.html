@@ -71,7 +71,7 @@
                 <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
                 <!--   -->
                 <div *ngIf="testLoadImage[i]" class="__img_bound">
-                    <img (click)="showBigImage(testLoadImage[i])" src="{{testLoadImage[i]}}" alt="whatever">
+                    <img (click)="showBigImage(testLoadImage[i])" src="{{testLoadImage[i]}}" alt="تصویر">
                 </div>
                 <div *ngIf="!testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
                     <img src="assets/imgs/soundvid/2.png" alt="whatever">

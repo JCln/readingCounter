@@ -2,18 +2,23 @@
     [_selectCols]="_selectCols" 
     [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
-    [_outputFileName]="'textOutput'"
-    [_dictionaryName]="'zoneId'"
-    [dictionary]="zoneDictionary"    
+    [_outputEnabled]=false 
     [_numberOfExtraColumns]="[1, 2]"
-    [_isInRowEditing]=true
-    [newRow]="newRow()"
-    [newRowLimit]="newRowLimit"
-    (refreshedTable)="refreshTable()"
+    [_outputFileName]="'textOutput'"
+    [_checkUpName]="'textOutput'"
+    
+    [dictionary]="zoneDictionary"
+    [_dictionaryName]="'zoneId'"
+    [_selectedColumnsToRemember]="'selectedTextOutput'"
+    (refreshedTable)="refreshTable()"    
     (newedRowChangedStatus)="testChangedValue()"
-    (onRowEditedSave)="onRowEditSave($event)"
-    (onRowEditCancelRowEditing)="onRowEditCancel($event)"
+    (removedRow)="removeRow($event)"    
     (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditCancelRowEditing)="onRowEditCancel($event)"
     (removedRowEditing)="removeRow($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
  > 
 </app-prime-table-editable>
+
+    
+        <!-- [_isInRowEditing]=true -->

@@ -50,7 +50,8 @@
             <mat-checkbox name="orderInAsc" [(ngModel)]="_isOrderInAsc">بلی</mat-checkbox>
             <br>
         </article>
-        <button class="btn_2" (click)="mapConfigOptions(polyline_configs)"
+        <!--is first time to drawXY positions-->
+        <button class="btn_2" (click)="mapConfigOptions(polyline_configs, false)"
             (click)="isShowMapConfig = false">نمایش</button>
     </div>
     <div id="map"></div>

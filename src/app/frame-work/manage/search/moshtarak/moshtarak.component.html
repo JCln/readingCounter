@@ -38,12 +38,13 @@
     [_selectCols]="_selectCols"
     [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource"
-    [_outputFileName]="'search-mosh'"
+    [_outputFileName]="'searchMosh'"
     [_checkUpName]="'search_moshtarak'"
     [_selectedColumnsToRemember]="'selectedListManagerMosh'"
-    [_numberOfExtraColumns]="[1,2]" 
+    [_numberOfExtraColumns]="[1,2,3]" 
     [_sessionName]="'moshtarak-session'"
     (refreshedTable)="refreshTable()"
     (showedPictures)="getReadingReportTitles($event)"
+    (showedInMapSingle)="searchService.showInMapSingle($event)"
     >
 </app-prime-table>

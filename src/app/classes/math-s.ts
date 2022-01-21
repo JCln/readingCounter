@@ -90,6 +90,17 @@ export class MathS {
             return false;
         return true;
     }
+    static trimation = (val: string) => {
+        return val.trim();
+    }
+    static getRandomColors(len: number): string[] {
+        let colors = [];
+        for (let index = 0; index < len; index++) {
+          let color = '#' + (Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString());
+          colors.push(color);
+        }
+        return colors;
+      }
     // private pushOrPopFromMobileNumber = (mobileNum: string | number) => {
     //   // unshift to array just allowed so => string to array and then to string should converted
     //   const arrayString = [];
@@ -108,6 +119,12 @@ export class MathS {
             return false;
         }
         return true;
+    }
+    static isExactLengthYouNeed = (value: string | number, long: number): boolean => {
+        if (value.toString().trim().length === long) {
+            return true;
+        }
+        return false;
     }
 
 }

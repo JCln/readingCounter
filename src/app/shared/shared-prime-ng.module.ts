@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 
@@ -21,9 +23,11 @@ import { PrimeTableComponent } from './prime-table/prime-table.component';
     TableModule,
     MatCheckboxModule,
     MultiSelectModule,
+    CheckboxModule,
     DropdownModule,
     SliderModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    RadioButtonModule,
   ],
   exports: [
     PrimeTableComponent,
@@ -33,11 +37,13 @@ import { PrimeTableComponent } from './prime-table/prime-table.component';
     TableModule,
     MatCheckboxModule,
     MultiSelectModule,
+    CheckboxModule,
     DropdownModule,
     SliderModule,
     DynamicDialogModule,
     AddRowDirective,
     ReactiveFormsModule,
+    RadioButtonModule,
   ],
   entryComponents: [
     ImageViewerComponent,

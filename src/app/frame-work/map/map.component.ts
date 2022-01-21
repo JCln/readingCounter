@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { Imap } from 'interfaces/imap.js';
-import { ITHV } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
 import { IListManagerPDXY } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -66,7 +66,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private layerGroup = new L.FeatureGroup();
   private markersDataSourceXY: IListManagerPDXY[] = [];
 
-  polyline_configs: number;
+  polyline_configs: number = null;
   isShowMap: boolean = true;
   canShowOptionsButton: boolean = false;
   isShowMapConfig: boolean = false;
@@ -90,6 +90,7 @@ export class MapComponent implements OnInit, OnDestroy {
     trackNumber: '', day: '', distance: null, isPerday: null
   }
   _isCluster: boolean;
+  _isSingle: boolean;
 
   constructor(
     public mapService: MapService,
@@ -163,7 +164,8 @@ export class MapComponent implements OnInit, OnDestroy {
       this.utilsService.snackBarMessageWarn(EN_messages.notFound);
       return;
     }
-    this.mapConfigOptions(200);
+    this.polyline_configs = this.mapService.getFromLocalStorage();
+    this.mapConfigOptions(this.mapService.getFromLocalStorage(), true);
   }
   private makeClusterRouteObject = (): IReadingReportGISReq => {
     return {
@@ -195,6 +197,16 @@ export class MapComponent implements OnInit, OnDestroy {
     if (!MathS.isNull(this.onShowCounterReader.distance)) {
       this.classWrapper();
       return;
+    }
+    this._isSingle = this.route.snapshot.paramMap.get('isSingle') == 'true' ? true : false;
+    if (this._isSingle) {
+      const x = this.route.snapshot.paramMap.get('x');
+      const y = this.route.snapshot.paramMap.get('y');
+      const firstName = this.route.snapshot.paramMap.get('firstName');
+      const trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+      const sureName = this.route.snapshot.paramMap.get('sureName');
+      const eshterak = this.route.snapshot.paramMap.get('eshterak');
+      this.markSingle({ x: x, y: y, firstName: firstName, sureName: sureName, eshterak: eshterak, trackNumber: trackNumber });
     }
     this._isCluster = this.route.snapshot.paramMap.get('isCluster') == 'true' ? true :
       this.route.snapshot.paramMap.get('isCluster') == 'false' ? false : null
@@ -240,6 +252,12 @@ export class MapComponent implements OnInit, OnDestroy {
       }, i * delay);
     })
   }
+  private drawXYPosition = (method: string, xyData: any) => {
+    this.panToDes(parseFloat(xyData[0].y), parseFloat(xyData[0].x));
+    xyData.map((items) => {
+      this[method](parseFloat(items.y), parseFloat(items.x), items);
+    })
+  }
   private markingOnMapNClusterNDelay = (method: string, xyData: any) => {
     this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 12);
     xyData.map((items, i) => {
@@ -256,10 +274,13 @@ export class MapComponent implements OnInit, OnDestroy {
     })
     this.layerGroup.addLayer(markers);
   }
-  // 
 
-  mapConfigOptions = (delay: number) => {
+  mapConfigOptions = (delay: number, isFirstTime: boolean) => {
     this.removeAllLayers();
+    if (this.polyline_configs)
+      this.mapService.saveToLocalStorage(this.polyline_configs);
+    if (this.polyline_configs == 0)
+      this.mapService.saveToLocalStorage(ENRandomNumbers.zero);
 
     if (this._selectedOrderId === 0) {
       this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterak) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterakDESC)
@@ -267,9 +288,13 @@ export class MapComponent implements OnInit, OnDestroy {
     else {
       this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByDatePersian) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByDateDESCPersian)
     }
-
-    this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay);
-    this.leafletDrawPolylines(delay);
+    if (isFirstTime) {
+      this.drawXYPosition('circleToLeaflet', this.markersDataSourceXY);
+    }
+    else {
+      this.getXYPosition('circleToLeaflet', this.markersDataSourceXY, delay);
+      this.leafletDrawPolylines(delay);
+    }
   }
   private extrasConfigOptions = (xyData: any) => {
     this.removeAllLayers();
@@ -319,6 +344,13 @@ export class MapComponent implements OnInit, OnDestroy {
     L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+      );
+  }
+  private markSingle = (items: any) => {
+    this.flyToDes(items.y, items.x, 12);
+    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
+      .bindPopup(
+        `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${'ش.پ :' + items.trackNumber}`
       );
   }
   private findMyLocationLeaflet = (e) => {

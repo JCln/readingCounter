@@ -62,6 +62,16 @@ export class ActivatedProvince implements IENV {
         ENMapCenter.TEH_SE_LOCAL.value,
         BrowserVersions.TEH_SE_LOCAL.value
     );
+    public static readonly KERMANSHAH = new ActivatedProvince(
+        ENActivateProvinceTitle.KERMANSHAH,
+        ENURLs.KERMANSHAH,
+        ENOSMUrls.KERMANSHAH,
+        ENSatteliteAccessToken.KERMANSHAH,
+        ENSatelliteToken.KERMANSHAH,
+        ENHasNextBazdid.KERMANSHAH.value,
+        ENMapCenter.KERMANSHAH.value,
+        BrowserVersions.KERMANSHAH.value
+    );
 
     private constructor(
         public readonly headerProvinceTitle: ENActivateProvinceTitle,

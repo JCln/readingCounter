@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
-import { ENSelectedColumnVariables, IObjectIteratation } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { MathS } from '../classes/math-s';
@@ -196,5 +196,11 @@ export class ListManagerService {
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
-
+  showInMapSingle = (dataSource: any) => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return;
+    }
+    this.utilsService.routeToByParams('/wr', { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
+  }
 }

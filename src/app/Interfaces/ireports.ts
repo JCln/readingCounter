@@ -65,6 +65,17 @@ export interface IReadingReportMaster {
     reportTitle: string,
     itemCount: number
 }
+export interface IImageAttributionAnalyze {
+    itemQuantity: number,
+    itemTitle: string,
+}
+export interface IImageAttributionResult {
+    itemQuantity: number,
+    itemTitle: string,
+    zoneId: number,
+    zoneTitle: string,
+    counterReaderName: string
+}
 export interface IReadingReportDetails {
     id: string,
     billId: number,
