@@ -15,7 +15,7 @@ export class ThemeService {
     { id: 1, color: 0, colorName: 'white' },
     { id: 2, color: 1, colorName: 'rgb(14, 76, 146)' },
     { id: 3, color: 2, colorName: 'purple' },
-    // { id: 4, color: 3, colorName: 'rgb(146, 134, 123)' },
+    { id: 4, color: 3, colorName: 'rgb(21, 43, 66)' },
   ];
 
   constructor(

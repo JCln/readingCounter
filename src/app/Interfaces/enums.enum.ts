@@ -121,6 +121,7 @@ export enum EN_messages {
     confirm_yourPassword = 'تا زمان ورود مجدد، شما امکان ادامه فعالیت را نخواهد داشت. آیا از تغییر گذرواژه اطمینان دارید؟',
     confirm_remove = 'از حذف  مورد اطمینان دارید؟',
     confirm_createList = ' لیست صادر شود؟',
+    isNotValidatedFragment = 'نوبتی تایید نشده است',
     importDynamic_created = 'لیست صادر شد',
     gisAccuracy_insufficient = 'دقت نقطه ناکافی است',
     import_simafaBatch = 'لیست صادر شده بصورت زیر است:',

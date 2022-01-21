@@ -122,6 +122,11 @@ export enum ENInterfaces {
     fragmentDETAILSADD = 'V1/Fragment/Details/Add',
     fragmentDETAILSByEshterak = 'V1/Fragment/Details/ByEshterak',
 
+    automaticImportAll = 'V1/AutomaticImport/All',
+    automaticImportEdit = 'V1/AutomaticImport/Edit',
+    automaticImportAdd = 'V1/AutomaticImport/Add',
+    automaticImportRemove = 'V1/AutomaticImport/Remove',
+
     OutputDBF = 'V1/Output/Dbf',
     OutputSINGLE = 'V1/Output/single',
     OutputDELAYED = 'V1/Output/Delayed',

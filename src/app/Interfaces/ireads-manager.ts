@@ -45,6 +45,29 @@ export interface IFragmentDetailsByEshterakReq {
     toEshterak: string,
     zoneId: number
 }
+export interface IAutomaticImportAddEditI {
+    id: number,
+    fragmentMasterId: string,
+    readingPeriodKindId: number,
+    startDay: string,
+    endDay: string,
+    startTime: string
+}
+export interface IAutomaticImport {
+    id: string,
+    fragmentMasterId: string,
+    readingPeriodId: number,
+    jobDescription: string,
+    dueDateTime: string,
+    dueJalaliDay: string,
+    dueTime: string,
+    delayedJobId: string,
+    executionCount: number,
+    executionResult: string,
+    successExecution: boolean,
+    isActive: boolean,
+    createDateTime: string
+}
 export interface IFragmentMaster {
     id?: string,
     zoneId: number,

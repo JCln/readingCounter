@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IDictionaryManager, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import {
+  ENSnackBarColors,
+  ENSnackBarTimes,
+  IDictionaryManager,
+  IObjectIteratation,
+  IResponses,
+} from 'interfaces/ioverall-config';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -45,65 +51,38 @@ export class FragmentManagerService {
     private dialog: MatDialog
   ) { }
 
-  /* Master */
-  getDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.fragmentMASTERALL).subscribe(res => {
-          resolve(res);
-        })
+  getAutomaticDataSource = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe(res => {
+        resolve(res);
       })
-    } catch (error) {
-      console.error(e => e);
-    }
-  }
-  addFragmentMaster = (body: IFragmentMaster): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTERADD, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message);
-            resolve(res);
-          }
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  editFragmentMaster = (body: IFragmentMaster) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTEREDIT, body).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message)
     })
   }
-  removeFragmentMaster = (body: IFragmentMaster): Promise<boolean> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTERREMOVE, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message);
-            resolve(true);
-          }
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  getDataSource = (method: ENInterfaces): Promise<any> => {
+    console.log(1);
+    console.log(method);
+
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe(res => {
+        resolve(res);
+      })
+    })
   }
-  isValidateMaster = (body: IFragmentMaster): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTERVALIDATE, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message);
-            resolve(res);
-          }
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  postBody = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).subscribe((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    })
+  }
+  postByQuote = (method: ENInterfaces, id: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTSG(method, id).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    })
   }
   /* Details */
   getFragmentDetails = (masterId: string): Promise<any> => {
@@ -121,45 +100,14 @@ export class FragmentManagerService {
       console.error(e => e);
     }
   }
-  addFragmentDetails = (body: IFragmentDetails): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSADD, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message);
-            resolve(res);
-          }
-        })
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  editFragmentDetails = (body: IFragmentDetails) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSEDIT, body).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message)
-    })
-  }
-  removeFragmentDetails = (body: IFragmentDetails): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSREMOVE, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message)
-            resolve(true);
-          }
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
   getRouteParams = () => {
     return this.utilsService.getRouteBySplit('/');
   }
   routeToFragmentDetails = (route: string) => {
     this.utilsService.routeToByParams('/wr/m/r/nob/', route);
+  }
+  routeToAutomaticImport = () => {
+    this.utilsService.routeTo('/wr/m/r/nob/autoImport');
   }
   routeToFragmentMaster = () => {
     this.utilsService.routeTo('/wr/m/r/nob');
@@ -185,6 +133,9 @@ export class FragmentManagerService {
       return false;
     }
     return true;
+  }
+  showSnack = (message: string, color: ENSnackBarColors) => {
+    this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);
   }
 
   /* VERIFICATION */

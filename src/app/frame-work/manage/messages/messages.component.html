@@ -30,13 +30,13 @@
 
                 </div>
             </div>
-            <!-- <div class="can_save">
-                <mat-checkbox [(ngModel)]="newMessage.canSave">این پیام و تنظیمات آن ذخیره شود؟</mat-checkbox>
-                <div class="_save_this" *ngIf="newMessage.canSave">
+            <div class="can_save">
+                <!-- <mat-checkbox [(ngModel)]="newMessage.canSave">این پیام و تنظیمات آن ذخیره شود؟</mat-checkbox> -->
+                <div class="_save_this">
                     <p>عنوانی برای پیام وارد کنید: </p>
                     <input type="text" class="input_1" [(ngModel)]="newMessage.title">
                 </div>
-            </div> -->
+            </div>
             <div class="send">
                 <button (click)="connectToServer()" class="btn_2">ارسال و مشاهده</button>
             </div>
@@ -47,7 +47,7 @@
         <div class="static_height">
             <div class="main_content" *ngFor="let item of allMessages"
                 [ngStyle]="{'border': '.15rem solid'+item.color}">
-                <div class="_text" [ngStyle]="{'color': item.color}">{{item.text}}</div>
+                <div class="_text" [ngStyle]="{'color': item.color}">{{item.message}}</div>
                 <!-- <div class="fa fa-close remove_a_item d_flex_center" (click)="removeItem(item)"></div> -->
                 <div class="_details">
                     <div class="__time">

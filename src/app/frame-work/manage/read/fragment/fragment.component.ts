@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentMaster } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
@@ -43,7 +45,7 @@ export class FragmentComponent extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForFragmentNOB;
     }
     else {
-      this.dataSource = await this.fragmentManagerService.getDataSource();
+      this.dataSource = await this.fragmentManagerService.getDataSource(ENInterfaces.fragmentMASTERALL);
       this.closeTabService.saveDataForFragmentNOB = this.dataSource;
     }
     this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
@@ -79,14 +81,14 @@ export class FragmentComponent extends FactoryONE {
       this.onRowAdd(dataSource, rowIndex);
     }
     else {
-      this.fragmentManagerService.editFragmentMaster(dataSource);
+      this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTEREDIT, dataSource);
     }
     this.refreshTable();
   }
   async onRowAdd(dataSource: IFragmentMaster, rowIndex: number) {
     if (!this.fragmentManagerService.verificationMaster(dataSource))
       return;
-    const a = await this.fragmentManagerService.addFragmentMaster(dataSource);
+    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
     console.log(a);
 
     if (a) {
@@ -107,16 +109,17 @@ export class FragmentComponent extends FactoryONE {
       return;
     const confirmed = await this.fragmentManagerService.firstConfirmDialog();
     if (!confirmed) return;
-    const a = await this.fragmentManagerService.removeFragmentMaster(obj2);
+    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, obj2);
     if (a)
       this.refetchTable(rowIndex);
   }
+
   getIsValidateRow = async (dataSource: IFragmentMaster) => {
     const obj2 = { ...dataSource };
     obj2.zoneId = 1;
     if (!this.fragmentManagerService.verificationMaster(obj2))
       return;
-    this.fragmentManagerService.isValidateMaster(obj2);
+    this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, obj2);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -124,5 +127,13 @@ export class FragmentComponent extends FactoryONE {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  routeToAutomaticImport = (isValidated: boolean) => {
+    if (isValidated) {
+      this.fragmentManagerService.routeToAutomaticImport();
+    }
+    else {
+      this.fragmentManagerService.showSnack(EN_messages.isNotValidatedFragment, ENSnackBarColors.warn);
+    }
   }
 }

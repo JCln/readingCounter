@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentDetails } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
@@ -82,7 +83,7 @@ export class FragmentDetailsComponent extends FactoryONE {
       return;
     const confirmed = await this.fragmentManagerService.firstConfirmDialog();
     if (!confirmed) return;
-    const a = await this.fragmentManagerService.removeFragmentDetails(dataSource['dataSource']);
+    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSREMOVE, dataSource['dataSource']);
     if (a) {
       this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
       delete this.dataSource[dataSource['dataSource'].id];
@@ -103,11 +104,11 @@ export class FragmentDetailsComponent extends FactoryONE {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      this.fragmentManagerService.editFragmentDetails(dataSource['dataSource']);
+      this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSEDIT, dataSource['dataSource']);
     }
   }
   private async onRowAdd(dataSource: IFragmentDetails, rowIndex: number) {
-    const a = await this.fragmentManagerService.addFragmentDetails(dataSource);
+    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSADD, dataSource);
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();

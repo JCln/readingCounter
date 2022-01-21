@@ -14,6 +14,19 @@ export class ColumnManager {
         // { field: 'jsonInfo', header: 'اطلاعات JSON', isSelected: false },
         { field: 'paramSendType', header: 'نوع فرم', isSelected: false }
     ];
+    automaticImport: IObjectIteratation[] = [
+        // { field: 'readingPeriodId', header: '', isSelected: true },
+        { field: 'jobDescription', header: 'توضیحات', isSelected: true },
+        // { field: 'dueDateTime', header: '', isSelected: false },
+        { field: 'dueJalaliDay', header: 'روز اجرا', isSelected: true },
+        { field: 'dueTime', header: 'زمان اجرا', isSelected: true },
+        // { field: 'delayedJobId', header: '', isSelected: true },
+        { field: 'executionCount', header: 'دفعات اجرا', isSelected: false },
+        { field: 'executionResult', header: 'نتیجه اجرا', isSelected: false },
+        { field: 'successExecution', header: 'اجرای موفق', isSelected: true, isBoolean: true },
+        // { field: 'isActive', header: '', isSelected: true },
+        // { field: 'createDateTime', header: '', isSelected: false },
+    ];
     imgattr: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
     ];

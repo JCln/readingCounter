@@ -48,6 +48,7 @@
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
+            <th style="width: 4rem"></th>
         </tr>
         <tr>
             <th>
@@ -65,6 +66,7 @@
             <th>
                 <p-columnFilter type="boolean" field="isValidated"></p-columnFilter>
             </th>
+            <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
             <th style="width: 4rem"></th>
@@ -147,6 +149,13 @@
                 <i *ngIf="!editing" (click)="fragmentManagerService.routeToFragmentDetails(dataSource.id)"
                     class="tooltip p_icons pi pi-info-circle">
                     <div class="tooltip_text_right">مدیریت مسیرها</div>
+                </i>
+            </td>
+            <td>
+                <span class="ui-column-title">صدور لیست خودکار</span>
+                <i *ngIf="!editing" (click)="routeToAutomaticImport(dataSource.isValidated)"
+                    class="tooltip p_icons pi pi-directions-alt">
+                    <div class="tooltip_text">صدور لیست خودکار</div>
                 </i>
             </td>
             <td>

@@ -44,6 +44,7 @@ export enum ENEssentialsToSave {
     saveDataForQotrManager = 'saveDataForQotrManager',
     saveDataForCounterReport = 'saveDataForCounterReport',
     saveDataForFragmentNOB = 'saveDataForFragmentNOB',
+    saveDataForAutomaticImport = 'saveDataForAutomaticImport',
     saveDataForTextOutput = 'saveDataForTextOutput',
     saveDataForAPKManager = 'saveDataForAPKManager',
     saveDataForReadingConfig = 'saveDataForReadingConfig',
@@ -259,6 +260,7 @@ export enum ENThemeColor {
 }
 export enum ENSelectedColumnVariables {
     selectedRRExcelView = 'excelDynamic',
+    selectedRAutoImport = 'automaticImport',
     selectedImageAttrResult = '_imageAttrResult',
     selectedImageAttrAnalyze = '_imageAttrAnalyze',
     selectedSimafaBatch = '_simafaBatch',

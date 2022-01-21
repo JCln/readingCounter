@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>افزودن مسیر خودکار</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <main class="_contents">
+
+        <div class="input_2">
+            <div class="_key">عنوان</div>
+            <input class="_value" formControlName="title">
+        </div>
+
+        <div class="input_2 _double_size">
+            <div class="_key">مقدار</div>
+            <input class="_value d_ltr" formControlName="value">
+        </div>
+
+        <div class="input_2">
+            <div class="_key">دوره قرائت</div>
+            <mat-select placeholder="انتخاب مورد" formControlName="readingPeriodKindId">
+                <mat-option *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </div>
+        <div class="input_2">
+            <div class="_key">از</div>
+            <div class="_value">
+                <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+        <div class="input_2">
+            <div class="_key">تا</div>
+            <div class="_value">
+                <app-date-jalali name="endDay" (dateJalEvent)="receiveToDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+        <div class="input_2">
+            <div class="_key">از زمان</div>
+            <div class="_value">
+                <app-date-jalali name="startTime" (dateJalEvent)="receiveStartTimeJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+
+
+
+
+    </main>
+
+    <mat-dialog-actions>
+        <button class="btn_2" type="button" (click)="close()">بازگشت</button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
+    </mat-dialog-actions>
+</form>

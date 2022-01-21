@@ -33,18 +33,7 @@ export abstract class FactoryONE implements OnInit, OnDestroy {
         this.classWrapper(true);
     }
 }
-export class Factory {
-    // constructor(type: ENFactory) { //, closeTabServiceName: string
-    //     if (type == "firstType") {
-    //         let temp: any;
-    //         for (var member in FactoryONE)
-    //             temp += member;
 
-    //         console.log(temp);
-    //         return temp;
-    //     }
-    // }
-}
 @Component({
     template: ''
 })

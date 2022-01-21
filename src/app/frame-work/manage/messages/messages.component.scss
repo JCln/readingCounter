@@ -153,24 +153,24 @@ h2 {
 //   margin: $font_2 0;
 // }
 
-// ._save_this {
-//   display: flex;
-//   align-items: center;
-//   margin: 1rem;
+._save_this {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
 
-//   .input_1 {
-//     min-width: auto;
-//     border: none;
-//     color: var(--secondary_5);
-//     background: var(--secondary_1);
-//   }
+  .input_1 {
+    min-width: auto;
+    border: none;
+    color: var(--secondary_5);
+    background: var(--secondary_1);
+  }
 
-//   p {
-//     color: var(--secondary_5);
-//     font-size: $font_s;
-//     margin-left: $font_05;
-//   }
-// }
+  p {
+    color: var(--secondary_5);
+    font-size: $font_s;
+    margin-left: $font_05;
+  }
+}
 
 // //////////
 

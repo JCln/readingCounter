@@ -5,7 +5,8 @@ import { FragmentComponent } from './fragment.component';
 
 const routes: Routes = [
   { path: '', component: FragmentComponent },
-  { path: ':masterId', loadChildren: () => import('./fragment-details/fragment-details.module').then(fragmentDetails => fragmentDetails.FragmentDetailsModule) }
+  { path: 'autoImport', loadChildren: () => import('./automatic-import/automatic-import.module').then(automaticImport => automaticImport.AutomaticImportModule) },
+  { path: ':masterId', loadChildren: () => import('./fragment-details/fragment-details.module').then(fragmentDetails => fragmentDetails.FragmentDetailsModule) },
 ];
 
 @NgModule({
