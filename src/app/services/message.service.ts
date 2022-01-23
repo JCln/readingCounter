@@ -14,8 +14,8 @@ export class MessageService {
   message: IMessage = {
     title: '',
     message: '',
-    color: '',
-    showTime: 0,
+    color: ENSnackBarColors.info,
+    time: 0,
     canSave: true
   };
 
@@ -38,7 +38,7 @@ export class MessageService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_text);
       return false;
     }
-    if (MathS.isNull(body.showTime)) {
+    if (MathS.isNull(body.time)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_showTime);
       return false;
     }
@@ -48,11 +48,11 @@ export class MessageService {
     }
     return true;
   }
-  setColor = (color: string) => {
+  setColor = (color: ENSnackBarColors) => {
     this.message.color = color;
   }
   setTime = (showTime: number) => {
-    this.message.showTime = showTime;
+    this.message.time = showTime;
   }
   setText = (text: string) => {
     this.message.message = text;

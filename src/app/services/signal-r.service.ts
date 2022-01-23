@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
+import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 
 import { JwtService } from '../auth/jwt.service';
+import { SnackWrapperService } from './snack-wrapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,8 @@ export class SignalRService {
 
   constructor(
     private envService: EnvService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private snackBarService: SnackWrapperService
   ) { }
 
   public startConnection = () => {
@@ -30,16 +33,25 @@ export class SignalRService {
       .catch(err => console.log('Error while starting connection: ' + err));
 
     this.receiveMessage();
+    this.broadcastMessage();
+  }
+  public disconnectConnection = () => {
+    this.hubConnection.stop();
   }
   sendSimpleMessage = () => {
-    this.hubConnection.send("sendMessage", 'username', 'test');
+    this.hubConnection.send(ENInterfaces.signalRSendMessage, 'username', 'test');
   }
   sendBroadcastMessage = (method: ENInterfaces, data: IMessage) => {
-    this.hubConnection.send(method, data);
+    this.hubConnection.send(method, data.time, data.title, data.message, data.color);
   }
   private receiveMessage = () => {
-    this.hubConnection.on('receiveMessage', (user: string, message: string) => {
-      alert(user + '  ' + message);
+    this.hubConnection.on(ENInterfaces.signalRReceiveMessage, (user: string, message: string) => {
+      this.snackBarService.openSnackBarSignal(user + '   ' + message, ENSnackBarTimes.tenMili);
+    });
+  }
+  private broadcastMessage = () => {
+    this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
+      this.snackBarService.openSnackBarSignal(title + '\n' + message, time, color);
     });
   }
   getConnectionStatus = (): any => {

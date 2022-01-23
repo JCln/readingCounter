@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'track', loadChildren: () => import('./tracking/tracking.module').then(trackingManager => trackingManager.TrackingModule) },
   { path: 's', loadChildren: () => import('./search/search.module').then(searchManager => searchManager.SearchModule) },
   { path: 'ms', loadChildren: () => import('./manage-server/manage-server.module').then(ms => ms.ManageServerModule) },
+  { path: 'mserr', loadChildren: () => import('./server-errors/server-errors.module').then(manageServerErrors => manageServerErrors.ServerErrorsModule) },
   { path: 'msge', loadChildren: () => import('./messages/messages.module').then(msge => msge.MessagesModule) },
   { path: 'policies', loadChildren: () => import('./privacy/privacy.module').then(pr => pr.PrivacyModule) },
   { path: 'l', loadChildren: () => import('./list-manager/list-manager.module').then(listManagerModule => listManagerModule.ListManagerModule) },

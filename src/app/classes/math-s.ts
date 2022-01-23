@@ -59,7 +59,7 @@ export class MathS {
     }
     static isSameLength = (from: string, to: string): boolean => {
         if (from === null || to === null) {
-            return;
+            return false;
         }
         if (from.toString().trim().length === to.toString().trim().length)
             return true;
@@ -115,7 +115,7 @@ export class MathS {
     //   return false;
     // }
     static mobileValidation = (mobile: string | number): boolean => {
-        if (mobile.toString().length !== 11) {
+        if (mobile.toString().trim().length !== 11) {
             return false;
         }
         return true;

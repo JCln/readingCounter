@@ -28,7 +28,7 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
-                <i *ngIf="_checkUpName == 'readingConfig'" (click)="openAddDialog()"
+                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport'" (click)="openAddDialog()"
                     class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
@@ -178,6 +178,18 @@
                     <div class="tooltip_text_right">حذف مسیر</div>
                 </i>
             </td>
+            <td *ngIf="_outputFileName == 'serverErrors'" (click)="connectToElmah(dataSource.errorId)">
+                <span class="ui-column-title">نمایش</span>
+                <i class="tooltip p_icons pi pi-link">
+                    <div class="tooltip_text_right">نمایش</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'automaticImport'" (click)="firstConfirmDialog(dataSource.id, ri)">
+                <span class="ui-column-title">حذف نوبتی</span>
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف نوبتی</div>
+                </i>
+            </td>
             <td *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'allComponent'"
                 (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
@@ -263,7 +275,7 @@
                     <div class="tooltip_text_right">اصلاح</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'readingConfig'" class="edit_button" (click)="openEditDialog(dataSource)">
+            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport'" class="edit_button" (click)="openEditDialog(dataSource)">
                 <span class="ui-column-title">ویرایش</span>
                 <i class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>

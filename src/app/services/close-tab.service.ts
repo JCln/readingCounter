@@ -55,6 +55,7 @@ export class CloseTabService {
   saveDataForFollowUp: any;
   saveDataForFollowUpAUX: any;
   // import dynamic
+  saveDataForAutomaticImport: any;
   saveDataForImportDynamic: any;
   saveDataForImportErrors: any;
   saveDataForSimafaBatch: any;
@@ -111,6 +112,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: '/wr/m/r/qr' },
     { id: 1, value: ENEssentialsToSave.saveDataForCounterReport, url: '/wr/m/r/rpt' },
     { id: 1, value: ENEssentialsToSave.saveDataForFragmentNOB, url: '/wr/m/r/nob' },
+    { id: 1, value: ENEssentialsToSave.saveDataForAutomaticImport, url: '/wr/m/r/nob/autoImport' },
     { id: 1, value: ENEssentialsToSave.saveDataForTextOutput, url: '/wr/m/r/txt/out' },
     { id: 1, value: ENEssentialsToSave.saveDataForAPKManager, url: '/wr/m/r/apk' },
     { id: 1, value: ENEssentialsToSave.saveDataForReadingConfig, url: '/wr/m/r/rcd' },

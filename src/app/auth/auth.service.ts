@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { MainService } from 'services/main.service';
+import { SignalRService } from 'services/signal-r.service';
 import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
@@ -21,6 +22,7 @@ export class AuthService {
     private jwtService: JwtService,
     private utilsService: UtilsService,
     private closeTabService: CloseTabService,
+    private signalRService: SignalRService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
@@ -43,6 +45,7 @@ export class AuthService {
     const refreshToken = this.jwtService.getRefreshToken();
     this.clearAllSavedData();
     this.clearDictionaries();
+    this.signalRService.disconnectConnection();
     this.mainService.POSTBODY('V1/Account/Logout', { refreshToken }).subscribe(() => {
       this.jwtService.removeAuthLocalStorage();
       this.utilsService.routeTo('/login');

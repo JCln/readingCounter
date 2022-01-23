@@ -1,3 +1,4 @@
+import { ENClientServerErrors } from './ioverall-config';
 
 export interface IForbiddenManager {
     gisAccuracy: string,
@@ -28,11 +29,27 @@ export interface IMostReportInput {
         number
     ]
 }
+export enum ENManageServers {
+    serverDelete = 'serverDelete',
+    linkToHangfire = 'linkToHangfire',
+    linkToHealthCheck = 'linkToHealthCheck'
+}
+export interface IManageServerErrors {
+    name: string,
+    errorType: ENClientServerErrors
+}
+export interface IManageServerErrorsRes {
+    errorId: string,
+    message: string,
+    statusCode: number,
+    username: string
+}
 export interface IManageServer {
     name: string;
     icon: string;
     background: string;
     color?: string;
+    clickFunction?: ENManageServers;
 }
 export interface IOnOffLoadFlat {
     id: string,

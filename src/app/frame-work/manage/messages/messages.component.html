@@ -2,6 +2,10 @@
     <main>
         <h1>جزئیات پیام</h1>
         <div class="content">
+            <div class="_save_this">
+                <h2>عنوان</h2>
+                <input type="text" class="input_1" [(ngModel)]="newMessage.title">
+            </div>
             <div class="text">
                 <h2>متن</h2>
                 <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="newMessage.message"></textarea>
@@ -11,8 +15,9 @@
                 <div class="t_separator">
                     <mat-button-toggle-group>
                         <mat-button-toggle class="btn_2" *ngFor="let item of times"
-                            (click)="newMessage.showTime = item.value">
-                            {{item.value}}</mat-button-toggle>
+                            (click)="newMessage.time = item.value">
+                            {{item.title}}
+                        </mat-button-toggle>
                     </mat-button-toggle-group>
                 </div>
             </div>
@@ -20,23 +25,16 @@
                 <h2>رنگ</h2>
                 <div class="c_separator">
 
-                    <mat-button-toggle-group #group="matButtonToggleGroup" value="message.color">
+                    <mat-button-toggle-group #group="matButtonToggleGroup" value="newMessage.color">
                         <mat-button-toggle class="btn_2" *ngFor="let item of colors"
-                            [ngStyle]="{'border': '.1rem solid'+ item.background , 'color':item.background}"
-                            value="item.background" (click)="newMessage.color = item.background">
-                            {{item.value}}
+                            [ngStyle]="{'color':item.background}" [(ngModel)]="item.background"
+                            (click)="newMessage.color = item.value">
+                            {{item.text}}
                         </mat-button-toggle>
                     </mat-button-toggle-group>
 
                 </div>
             </div>
-            <!-- <div class="can_save">
-                <mat-checkbox [(ngModel)]="newMessage.canSave">این پیام و تنظیمات آن ذخیره شود؟</mat-checkbox>
-                <div class="_save_this" *ngIf="newMessage.canSave">
-                    <p>عنوانی برای پیام وارد کنید: </p>
-                    <input type="text" class="input_1" [(ngModel)]="newMessage.title">
-                </div>
-            </div> -->
             <div class="send">
                 <button (click)="connectToServer()" class="btn_2">ارسال و مشاهده</button>
             </div>
@@ -46,20 +44,16 @@
         <h1>استفاده از پیام های پیش‌فرض</h1>
         <div class="static_height">
             <div class="main_content" *ngFor="let item of allMessages"
-                [ngStyle]="{'border': '.15rem solid'+item.color}">
-                <div class="_text" [ngStyle]="{'color': item.color}">{{item.text}}</div>
-                <!-- <div class="fa fa-close remove_a_item d_flex_center" (click)="removeItem(item)"></div> -->
+                [ngStyle]="{'border': '.15rem solid'+item.exactColor}">
+                <div class="_text" [ngStyle]="{'color': item.exactColor}">{{item.message}}</div>
                 <div class="_details">
                     <div class="__time">
-                        {{item.showTime}}
+                        {{item.text}}
                         ثانیه
                     </div>
                     <button class="btn_2" (click)="copyPreMessageToCurrent(item)">استفاده</button>
                 </div>
             </div>
-            <!-- <div class="_delete_pres">
-                <button id="btn" class="btn_2" (click)="clearAllStorage()">حذف همه</button> 
-            </div> -->
         </div>
     </main>
 </div>

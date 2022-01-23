@@ -1,4 +1,4 @@
-import { ENRandomNumbers } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarColorsExact, ENSnackBarTimes } from 'interfaces/ioverall-config';
 
 export interface IPolicies {
     id: number,
@@ -37,19 +37,23 @@ export interface IUploadAPK {
 export interface IMessage {
     title: string;
     message: string;
-    color: string;
-    showTime: ENRandomNumbers;
+    color: ENSnackBarColors;
+    time: ENSnackBarTimes;
     canSave: boolean;
+    text?: ENRandomNumbers;
+    exactColor?: ENSnackBarColorsExact;
 }
 
 export interface IColor {
-    value: string;
+    text: string,
+    value: ENSnackBarColors;
     isClicked: boolean;
-    background: string;
+    background: ENSnackBarColorsExact;
 }
 
 export interface ITime {
-    value: number;
+    value: ENSnackBarTimes;
+    title: ENRandomNumbers;
     isClicked: boolean;
 }
 export interface IChangePassword {

@@ -122,6 +122,11 @@ export enum ENInterfaces {
     fragmentDETAILSADD = 'V1/Fragment/Details/Add',
     fragmentDETAILSByEshterak = 'V1/Fragment/Details/ByEshterak',
 
+    automaticImportAll = 'V1/AutomaticImport/All',
+    automaticImportEdit = 'V1/AutomaticImport/Edit',
+    automaticImportAdd = 'V1/AutomaticImport/Add',
+    automaticImportRemove = 'V1/AutomaticImport/Remove',
+
     OutputDBF = 'V1/Output/Dbf',
     OutputSINGLE = 'V1/Output/single',
     OutputDELAYED = 'V1/Output/Delayed',
@@ -193,7 +198,15 @@ export enum ENInterfaces {
     rrInStatePost = 'V1/List/Offloaded/InState',
 
     signalRStartConnection = '/notifyHub',
-    signalRBroadcastMessage = '/broadcast',
+    signalRBroadcastMessage = 'broadcast',
+    signalRSendMessage = 'sendMessage',
+    signalRReceiveMessage = 'receiveMessage',
+
+    serverManagerDelete = 'V1/Server/Delete',
+    serverManagerErrors = 'V1/Server/Errors',
+    serverManagerHangFire = '/main/admin/hangFire?access_token=',
+    serverManagerHealthCheck = '/healthchecks-ui',
+    serverManagerErrorsElmah = '/elmah/detail/',
 
     counterStateAll = 'V1/CounterState/All',
     counterStateDictionary = 'V1/CounterState/Dictionary',

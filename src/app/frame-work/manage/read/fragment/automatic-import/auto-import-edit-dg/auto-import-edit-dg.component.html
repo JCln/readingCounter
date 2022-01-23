@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>ویرایش مسیر خودکار</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <main class="_contents">
+
+        <div class="input_2">
+            <div class="_key">دوره قرائت</div>
+            <mat-select placeholder="انتخاب مورد" [(value)]="selectedPeriodKindId" name="readingPeriodKindId">
+                <mat-option *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.title">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </div>
+
+        <div class="input_2">
+            <div class="_key">از</div>
+            <div class="_value">
+                <app-date-jalali name="startDay" (dateJalEvent)="receiveFromDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+        <div class="input_2">
+            <div class="_key">تا</div>
+            <div class="_value">
+                <app-date-jalali name="endDay" (dateJalEvent)="receiveToDateJalali($event)">
+                </app-date-jalali>
+            </div>
+        </div>
+        <div class="input_2">
+            <div class="_key">از زمان</div>
+            <div class="_value">
+                <app-time-jalali name="startTime" [timeObject]="form.value.startTime" (dateJalEvent)="receiveStartTimeJalali($event)">
+                </app-time-jalali>
+            </div>
+        </div>
+
+        <div class="input_2">
+            <div class="_key">درصد علی الحساب</div>
+            <input class="_value d_ltr" formControlName="alalHesabPercent">
+        </div>
+        <div class="input_2">
+            <div class="_key">درصد تصویر</div>
+            <input class="_value d_ltr" formControlName="imagePercent">
+        </div>
+
+        <mat-checkbox formControlName="hasPreNumber">شماره قبلی</mat-checkbox>
+        <mat-checkbox formControlName="displayBillId">شناسه قبض</mat-checkbox>
+        <mat-checkbox formControlName="displayRadif">ش پرونده</mat-checkbox>
+
+    </main>
+
+    <mat-dialog-actions>
+        <button class="btn_2" type="button" (click)="close()">بازگشت</button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
+    </mat-dialog-actions>
+
+</form>

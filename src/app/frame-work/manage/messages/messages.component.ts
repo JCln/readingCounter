@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IColor, IMessage, ITime } from 'interfaces/inon-manage';
+import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { MessageService } from 'services/message.service';
 import { SignalRService } from 'services/signal-r.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -14,8 +15,8 @@ export class MessagesComponent extends FactoryONE {
   newMessage: IMessage = {
     title: '',
     message: '',
-    color: '',
-    showTime: 0,
+    color: ENSnackBarColors.info,
+    time: 0,
     canSave: true
   };
   colors: IColor[] = [];
@@ -30,12 +31,8 @@ export class MessagesComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    console.log(this.newMessage);
-    console.log(this.messageService.verificationBroadcastMessage(this.newMessage));
-
     if (this.messageService.verificationBroadcastMessage(this.newMessage)) {
       this.signalRService.sendBroadcastMessage(ENInterfaces.signalRBroadcastMessage, this.newMessage);
-      // this.messageService.showSnack(EN_messages.doneBroadcast, ENSnackBarColors.success);
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
@@ -44,9 +41,11 @@ export class MessagesComponent extends FactoryONE {
     this.allMessages = this.messageService.getMessages();
   }
   copyPreMessageToCurrent = (name: IMessage) => {
+    console.log(name);
+
     this.newMessage.title = name.title;
     this.newMessage.color = name.color;
-    this.newMessage.showTime = name.showTime;
+    this.newMessage.time = name.time;
     this.newMessage.message = name.message;
     this.newMessage.canSave = name.canSave;
 

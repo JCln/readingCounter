@@ -12,6 +12,10 @@
   background: url('/assets/imgs/framework/bbp.jpg');
 }
 
+.pinkyBackground::after {
+  background: url('/assets/imgs/framework/bbpink.jpg');
+}
+
 
 
 .lightBackground::before {
@@ -24,6 +28,10 @@
 
 .purpleBackground::before {
   background: var(--primary_1);
+}
+
+.pinkyBackground::before {
+  background: var(--primary_2);
 }
 
 .polygon {

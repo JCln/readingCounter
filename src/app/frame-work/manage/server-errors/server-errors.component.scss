@@ -1,0 +1,30 @@
+@import 'primeNG';
+@import 'button';
+@import 'input';
+
+.insert_track {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  direction: rtl;
+  padding: 2rem;
+  background: var(--secondary_1);
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+}
+
+.input_2 {
+  display: flex;
+  align-items: center;
+  width: 18rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary_2);
+}
+
+.btn_1 {
+  color: var(--white);
+  background-color: var(--orange_500);
+  max-width: 16rem;
+}

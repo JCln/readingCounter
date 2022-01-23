@@ -1,0 +1,26 @@
+<app-collapsable [_isCollapsed]=manageServerService._isCollapsed
+    (_clicked)="manageServerService._isCollapsed = !manageServerService._isCollapsed">
+</app-collapsable>
+
+<form #form="ngForm" *ngIf="!manageServerService._isCollapsed" class="insert_track">
+    <div class="input_2">
+        <div class="_key">انتخاب نوع خطا</div>
+        <div class="_value">
+            <p-multiSelect [options]="manageServerService.serverErrors" name="errors" [(ngModel)]="selectedErrors"
+                optionLabel="name" optionValue="errorType" selectedItemsLabel="{0} مورد انتخاب شده"
+                [style]="{'max-width': '10rem', 'minWidth': '100%'}" placeholder="انتخاب مورد">
+            </p-multiSelect>
+        </div>
+    </div>
+    <button type="submit" class="btn_2_o" (click)="connectToServer()">مشاهده</button>
+</form>
+
+<app-prime-table 
+[dataSource]="dataSource" 
+[_outputFileName]="'serverErrors'"
+[_numberOfExtraColumns]="[1]" 
+[_checkUpName]="'serverErrors'"
+[_selectedColumnsToRemember]="'selectedServerErrors'" 
+(clickedElmah)="linkToElmah($event)"
+(refreshedTable)="refreshTable()">
+</app-prime-table>

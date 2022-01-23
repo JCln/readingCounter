@@ -44,6 +44,7 @@ export enum ENEssentialsToSave {
     saveDataForQotrManager = 'saveDataForQotrManager',
     saveDataForCounterReport = 'saveDataForCounterReport',
     saveDataForFragmentNOB = 'saveDataForFragmentNOB',
+    saveDataForAutomaticImport = 'saveDataForAutomaticImport',
     saveDataForTextOutput = 'saveDataForTextOutput',
     saveDataForAPKManager = 'saveDataForAPKManager',
     saveDataForReadingConfig = 'saveDataForReadingConfig',
@@ -120,8 +121,13 @@ export interface ITestSidebar {
 }
 export interface ISnackBar {
     message: string;
-    duration: number;
-    backColor?: string;
+    duration: ENSnackBarTimes;
+    backColor?: ENSnackBarColors;
+}
+export interface ISnackBarSignal {
+    message: string;
+    duration: ENSnackBarTimes;
+    backColor?: ENSnackBarColors;
 }
 
 export enum ENHubMessages {
@@ -131,17 +137,34 @@ export enum ENHubMessages {
     Reconnecting = 'درحال اتصال به سامانه لحظه',
     Connected = 'متصل به سامانه لحظه'
 }
+export enum ENColorText {
+    blue = 'آبی',
+    green = 'سبز',
+    orange = 'نارنجی',
+    red = 'قرمز',
+}
 export enum ENSnackBarColors {
     warn = 'snack_warn',
     danger = 'snack_danger',
     success = 'snack_success',
+    info = 'snack_info',
+}
+export enum ENSnackBarColorsExact {
+    warn = 'rgb(246, 128, 56)',
+    danger = ' rgb(183, 28, 28)',
+    success = 'rgb(75, 140, 56)',
+    info = 'rgb(17, 111, 255)',
 }
 export enum ENSnackBarTimes {
     threeMili = 3000,
     fourMili = 4000,
     fiveMili = 5000,
     sevenMili = 7000,
-    tenMili = 10000
+    tenMili = 10000,
+    fifteenMili = 15000,
+    twentyMili = 20000,
+    thirdyMili = 30000,
+    fiftyMili = 50000
 }
 export enum ENStorageColumnKey {
     all_users_session = 'all_users_session'
@@ -242,6 +265,7 @@ export enum ENRandomNumbers {
     zero = 0,
     five = 5,
     ten = 10,
+    fifteen = 15,
     twenty = 20,
     thirdy = 30,
     forthy = 40,
@@ -259,6 +283,7 @@ export enum ENThemeColor {
 }
 export enum ENSelectedColumnVariables {
     selectedRRExcelView = 'excelDynamic',
+    selectedRAutoImport = 'automaticImport',
     selectedImageAttrResult = '_imageAttrResult',
     selectedImageAttrAnalyze = '_imageAttrAnalyze',
     selectedSimafaBatch = '_simafaBatch',
@@ -304,6 +329,7 @@ export enum ENSelectedColumnVariables {
     selectedKarbari = 'karbari',
     selectedForbidden = 'forbidden',
     selectedErrors = 'errors',
+    selectedServerErrors= 'serverErrors',
     selectedSimafaReadingProgram = '_simafaReadingProgram',
 }
 export enum ENOffloadModifyType {
@@ -332,6 +358,22 @@ export const IMasrafStates: ITHV[] = [
     { title: 'zero', header: 'صفر', value: 3 },
     { title: 'inCalculable', header: 'غیرقابل محاسبه', value: 4 }
 ]
+export enum ENClientServerErrors {
+    'cs400' = 400,
+    'cs401' = 401,
+    'cs403' = 403,
+    'cs404' = 404,
+    'cs405' = 405,
+    'cs408' = 408,
+    'cs409' = 409,
+    'cs410' = 410,
+    'cs422' = 422,
+    'cs0' = 0,
+    'cs500' = 500,
+    'cs501' = 501,
+    'cs502' = 502,
+    'cs504' = 504,
+}
 export interface Theme {
     name: string,
     properties: any

@@ -14,6 +14,25 @@ export class ColumnManager {
         // { field: 'jsonInfo', header: 'اطلاعات JSON', isSelected: false },
         { field: 'paramSendType', header: 'نوع فرم', isSelected: false }
     ];
+    automaticImport: IObjectIteratation[] = [
+        { field: 'jobDescription', header: 'توضیحات', isSelected: true },
+        { field: 'dueJalaliDay', header: 'روز اجرا', isSelected: true },
+        { field: 'dueTime', header: 'زمان اجرا', isSelected: true },
+        { field: 'executionCount', header: 'دفعات اجرا', isSelected: false, isNumber: true },
+        { field: 'executionResult', header: 'نتیجه اجرا', isSelected: false, isNumber: true },
+        { field: 'successExecution', header: 'اجرای موفق', isSelected: true, isBoolean: true },
+        // { field: 'dueDateTime', header: '', isSelected: false },
+        // { field: 'readingPeriodId', header: '', isSelected: true },
+        // { field: 'delayedJobId', header: '', isSelected: true },
+        // { field: 'isActive', header: '', isSelected: true },
+        // { field: 'createDateTime', header: '', isSelected: false },
+    ];
+    serverErrors: IObjectIteratation[] = [                                
+        // { field: 'errorId', header: 'عنوان', isSelected: true },
+        { field: 'message', header: 'پیام', isSelected: true },
+        { field: 'statusCode', header: 'کد', isSelected: true },
+        { field: 'username', header: 'نام کاربری', isSelected: true },        
+    ]
     imgattr: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
     ];

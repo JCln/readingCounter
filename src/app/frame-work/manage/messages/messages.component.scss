@@ -144,33 +144,19 @@ h2 {
   color: var(--primary_5);
 }
 
-._delete_pres {
-  text-align: center;
-  margin-top: $font_2;
+._save_this {
+
+  .input_1 {
+    text-align: right;
+    min-width: auto;
+    width: 100%;
+    border: none;
+    border-radius: $border_15;
+    color: var(--secondary_5);
+    background: var(--secondary_1);
+  }
+
 }
-
-// .can_save {
-//   margin: $font_2 0;
-// }
-
-// ._save_this {
-//   display: flex;
-//   align-items: center;
-//   margin: 1rem;
-
-//   .input_1 {
-//     min-width: auto;
-//     border: none;
-//     color: var(--secondary_5);
-//     background: var(--secondary_1);
-//   }
-
-//   p {
-//     color: var(--secondary_5);
-//     font-size: $font_s;
-//     margin-left: $font_05;
-//   }
-// }
 
 // //////////
 

@@ -63,6 +63,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() backedToReading = new EventEmitter<any>();
   @Output() backedToPrevious = new EventEmitter<any>();
   @Output() downloadedAPK = new EventEmitter<any>();
+  @Output() clickedElmah = new EventEmitter<any>();
   @Output() registeredAssess = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
   @Output() showSearchedOptionsDialog = new EventEmitter<any>();
@@ -128,7 +129,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   downloadExcel = (dataSource: object) => {
     this.downloadedExcel.emit(dataSource);
-  }  
+  }
   downloadOutputSingle = (dataSource: object) => {
     this.downloadedOutputSingle.emit(dataSource);
   }
@@ -143,6 +144,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   downloadAPK = () => {
     this.downloadedAPK.emit();
+  }
+  connectToElmah = (dataSource: string) => {
+    this.clickedElmah.emit(dataSource);
   }
   registerAssessAdd = () => {
     this.registeredAssess.emit();
