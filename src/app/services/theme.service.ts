@@ -14,8 +14,8 @@ export class ThemeService {
   private colors = [
     { id: 1, color: 0, colorName: 'white' },
     { id: 2, color: 1, colorName: 'rgb(14, 76, 146)' },
-    { id: 3, color: 2, colorName: 'purple' },
-    { id: 4, color: 3, colorName: 'rgb(21, 43, 66)' },
+    { id: 3, color: 2, colorName: 'rgb(127 ,108, 153)' },
+    { id: 4, color: 3, colorName: 'rgb(93 ,80 ,110)' },
   ];
 
   constructor(
