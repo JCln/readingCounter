@@ -28,8 +28,8 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
-                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport'" (click)="openAddDialog()"
-                    class="tooltip _circle_border p_icons fa fa-plus">
+                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport'"
+                    (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
                 <i *ngIf="_hasSaveColumns" (click)="saveColumns()"
@@ -61,8 +61,8 @@
                     class="tooltip _circle_border p_icons fa fa-inbox">
                     <div class="tooltip_text">دانلود فایل</div>
                 </i>
-                <i *ngIf="_checkUpName == 'search_acme' || _checkUpName == 'assess_pre'"
-                    (click)="showSearchOptionsDialog()" class="tooltip _circle_border p_icons pi pi-search">
+                <i *ngIf="_checkUpName == 'search_acme'" (click)="showSearchOptionsDialog()"
+                    class="tooltip _circle_border p_icons pi pi-search">
                     <div class="tooltip_text">جستجو</div>
                 </i>
             </div>
@@ -275,7 +275,8 @@
                     <div class="tooltip_text_right">اصلاح</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport'" class="edit_button" (click)="openEditDialog(dataSource)">
+            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport'" class="edit_button"
+                (click)="openEditDialog(dataSource)">
                 <span class="ui-column-title">ویرایش</span>
                 <i class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>

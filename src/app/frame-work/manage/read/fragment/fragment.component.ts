@@ -1,13 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentMaster } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 
 @Component({
@@ -132,18 +134,14 @@ export class FragmentComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   routeToAutomaticImport = (dataSource: any) => {
-    this.fragmentMasterId = dataSource.id;
-    // console.log(this.fragmentMasterId);
-    // if (this.fragmentMasterId) {
-
-    //   if (dataSource.isValidated) {
-    //     this.fragmentManagerService.routeToAutomaticImport();
-    //   }
-    //   else {
-    //     this.fragmentManagerService.showSnack(EN_messages.isNotValidatedFragment, ENSnackBarColors.warn);
-    //   }
-    // } else {
-    //   this.fragmentManagerService.showSnack(EN_messages.try_again, ENSnackBarColors.warn);
-    // }
+    dataSource.id = MathS.trimation(dataSource.id);
+    if (!MathS.isNull(dataSource.id)) {
+      if (dataSource.isValidated) {
+        this.fragmentMasterId = dataSource.id;
+      }
+      else {
+        this.fragmentManagerService.showSnack(EN_messages.isNotValidatedFragment, ENSnackBarColors.warn);
+      }
+    }
   }
 }

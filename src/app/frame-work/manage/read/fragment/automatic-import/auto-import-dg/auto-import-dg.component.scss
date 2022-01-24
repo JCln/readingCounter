@@ -1,1 +1,14 @@
 @import 'shared_dialog.scss';
+
+._contents {
+  display: grid;
+  direction: rtl;
+  font-family: $font_family;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, auto));
+  gap: .25rem;
+}
+
+h2 {
+  text-align: center;
+  font-family: $font_family;
+}

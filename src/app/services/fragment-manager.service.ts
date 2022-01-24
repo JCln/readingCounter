@@ -53,9 +53,9 @@ export class FragmentManagerService {
     private dialog: MatDialog
   ) { }
 
-  getAutomaticDataSource = (method: ENInterfaces): Promise<any> => {
+  getDataSourceByQuote = (method: ENInterfaces, id: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).subscribe(res => {
+      this.interfaceManagerService.GETByQuote(method, id).subscribe(res => {
         resolve(res);
       })
     })
@@ -300,6 +300,22 @@ export class FragmentManagerService {
     }
     if (MathS.isNull(body.readingPeriodKindId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriodKind);
+      return false;
+    }
+    if (!MathS.persentCheck(body.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_alalhesab);
+      return false;
+    }
+    if (!MathS.persentCheck(body.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_pictures);
+      return false;
+    }
+    if (MathS.isNaN(body.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_alalhesab);
+      return false;
+    }
+    if (MathS.isNaN(body.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_imagePercent);
       return false;
     }
     return true;

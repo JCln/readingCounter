@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class AutoImportEditDgComponent {
     console.log(data);
     this.readingPeriodKindDictionary = data.dictionary;
     console.log(data.body.readingPeriodId);
-    
+
     this.selectedPeriodKindId = data.body.readingPeriodId;
 
     this.form = fb.group({
@@ -38,22 +38,17 @@ export class AutoImportEditDgComponent {
       imagePercent: data.body.imagePercent,
       hasPreNumber: data.body.hasPreNumber,
       displayBillId: data.body.displayBillId,
-      displayRadif: data.body.displayRadife
+      displayRadif: data.body.displayRadif
     })
   }
   async save() {
     console.log(this.form.value);
     if (this.fragmentManagerService.verificationAutoImportAdd(this.form.value)) {
       const temp = await this.fragmentManagerService.postBody(ENInterfaces.automaticImportEdit, this.form.value);
-      console.log(temp);
-
-      // if (temp) {
-      //   console.log(temp);
-
-      //   this.fragmentManagerService.showSnack(temp.message, ENSnackBarColors.success);
-
-      //   this.dialogRef.close(this.form.value);
-      // }
+      if (temp) {
+        this.fragmentManagerService.showSnack(temp.message, ENSnackBarColors.success);
+        this.dialogRef.close(this.form.value);
+      }
     }
   }
   close() {

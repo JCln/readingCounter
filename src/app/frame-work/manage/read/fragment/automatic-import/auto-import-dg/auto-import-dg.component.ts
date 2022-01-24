@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
+import { IAutomaticImportAddEdit } from 'interfaces/ireads-manager';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 
 @Component({
@@ -10,53 +10,56 @@ import { FragmentManagerService } from 'services/fragment-manager.service';
   templateUrl: './auto-import-dg.component.html',
   styleUrls: ['./auto-import-dg.component.scss']
 })
-export class AutoImportDgComponent {
-  form: FormGroup;
+export class AutoImportDgComponent implements OnInit {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
+  dataReq: IAutomaticImportAddEdit = {
+    fragmentMasterId: '',
+    readingPeriodKindId: null,
+    startDay: '',
+    endDay: '',
+    startTime: '',
+    alalHesabPercent: null,
+    imagePercent: null,
+    hasPreNumber: false,
+    displayBillId: false,
+    displayRadif: false,
+  };
 
   constructor(
-    fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<AutoImportDgComponent>,
+    public ref: DynamicDialogRef,
+    public config: DynamicDialogConfig,
+    private cdr: ChangeDetectorRef,
     private fragmentManagerService: FragmentManagerService,
-  ) {
-    console.log(data);
-    console.log(data.fragmentMasterId);
+  ) { }
+  ngOnInit(): void {
+    console.log(this.config.data);
 
-    this.readingPeriodKindDictionary = data.dictionary;
-
-    this.form = fb.group({
-      fragmentMasterId: data.fragmentMasterId,
-      readingPeriodKindId: [''],
-      startDay: [''],
-      endDay: ['',],
-      startTime: [''],
-    })
+    this.readingPeriodKindDictionary = this.config.data.dictionary;
+    this.dataReq.fragmentMasterId = this.config.data.fragmentMasterId;
   }
   async save() {
-    console.log(this.form.value);
-    if (this.fragmentManagerService.verificationAutoImportAdd(this.form.value)) {
-      const temp = await this.fragmentManagerService.postBody(ENInterfaces.automaticImportAdd, this.form.value);
+    if (this.fragmentManagerService.verificationAutoImportAdd(this.dataReq)) {
+      const temp = await this.fragmentManagerService.postBody(ENInterfaces.automaticImportAdd, this.dataReq);
       if (temp) {
         console.log(temp);
 
         this.fragmentManagerService.showSnack(temp.message, ENSnackBarColors.success);
 
-        this.dialogRef.close(this.form.value);
+        this.ref.close(this.dataReq);
       }
     }
   }
   close() {
-    this.dialogRef.close();
+    this.ref.close();
   }
-  receiveFromDateJalali = ($event: string) => {
-    this.form.value.startDay = $event;
+  receiveStartDayJalali = (event: string) => {
+    this.dataReq.startDay = event;
   }
-  receiveToDateJalali = ($event: string) => {
-    this.form.value.endDay = $event;
+  receiveEndDayJalali = (event: string) => {
+    this.dataReq.endDay = event;
   }
-  receiveStartTimeJalali = ($event: string) => {
-    this.form.value.startTime = $event;
+  receiveStartTimeJalali = (event: string) => {
+    this.dataReq.startTime = event;
   }
 
 }

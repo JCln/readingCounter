@@ -123,6 +123,7 @@ export enum ENInterfaces {
     fragmentDETAILSByEshterak = 'V1/Fragment/Details/ByEshterak',
 
     automaticImportAll = 'V1/AutomaticImport/All',
+    automaticImportByFragment = 'V1/AutomaticImport/ByFragment/',
     automaticImportEdit = 'V1/AutomaticImport/Edit',
     automaticImportAdd = 'V1/AutomaticImport/Add',
     automaticImportRemove = 'V1/AutomaticImport/Remove',

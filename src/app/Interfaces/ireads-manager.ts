@@ -46,12 +46,17 @@ export interface IFragmentDetailsByEshterakReq {
     zoneId: number
 }
 export interface IAutomaticImportAddEdit {
-    id: number,
+    id?: string,
     fragmentMasterId: string,
     readingPeriodKindId: number,
     startDay: string,
     endDay: string,
-    startTime: string
+    startTime: string,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean
 }
 export interface IAutomaticImport {
     id: string,

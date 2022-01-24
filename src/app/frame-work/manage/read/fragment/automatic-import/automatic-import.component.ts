@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IAutomaticImport } from 'interfaces/ireads-manager';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -15,57 +16,52 @@ import { AutoImportEditDgComponent } from './auto-import-edit-dg/auto-import-edi
   templateUrl: './automatic-import.component.html',
   styleUrls: ['./automatic-import.component.scss']
 })
-export class AutomaticImportComponent extends FactoryONE implements OnChanges {
+export class AutomaticImportComponent extends FactoryONE {
 
   @Input() fragmentMasterId: string;
+  @Output() fragmentLatestValue = new EventEmitter<any>();
 
   dataSource: IAutomaticImport[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
+  ref: DynamicDialogRef;
 
   constructor(
     private closeTabService: CloseTabService,
     private fragmentManagerService: FragmentManagerService,
     private dialog: MatDialog,
+    private dialogService: DialogService,
   ) {
     super();
   }
-  ngOnChanges(): void {
-    console.log(this.fragmentMasterId);
-
+ 
+  fragmentToNull = () => {
+    //available to back to previous page by makeFragment null;
+    this.fragmentMasterId = '';
+    this.fragmentLatestValue.emit(this.fragmentMasterId);
   }
-  nullSavedSource = () => this.closeTabService.saveDataForAutomaticImport = null;
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
-    }
-    if (this.closeTabService.saveDataForAutomaticImport) {
-      this.dataSource = this.closeTabService.saveDataForAutomaticImport;
-    }
-    else {
-      this.dataSource = await this.fragmentManagerService.getAutomaticDataSource(ENInterfaces.automaticImportAll);
-      this.readingPeriodKindDictionary = await this.fragmentManagerService.getPeriodKindDictionary();
-      this.closeTabService.saveDataForAutomaticImport = this.dataSource;
-    }
+    this.dataSource = await this.fragmentManagerService.getDataSourceByQuote(ENInterfaces.automaticImportByFragment, this.fragmentMasterId);
+    this.readingPeriodKindDictionary = await this.fragmentManagerService.getPeriodKindDictionary();
+    this.closeTabService.saveDataForAutomaticImport = this.dataSource;
   }
   removeRow = async (id: string) => {
     if (await this.fragmentManagerService.firstConfirmDialog()) {
       await this.fragmentManagerService.postByQuote(ENInterfaces.automaticImportRemove, id['dataSource']);
+      this.refreshTable();
     }
   }
   openAddDialog = () => {
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(AutoImportDgComponent, {
-        disableClose: true,
-        minWidth: '19rem',
-        data: {
-          dictionary: this.readingPeriodKindDictionary,
-          fragmentMasterId: this.fragmentMasterId
-        }
-      });
-      dialogRef.afterClosed().subscribe(async result => {
-        if (result)
-          this.refreshTable();
-      });
+    this.ref = this.dialogService.open(AutoImportDgComponent, {
+      data: {
+        dictionary: this.readingPeriodKindDictionary,
+        fragmentMasterId: this.fragmentMasterId
+      },
+      rtl: true,
+      width: '70%'
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        this.refreshTable();
     });
   }
   openEditDialog = (body: object) => {
