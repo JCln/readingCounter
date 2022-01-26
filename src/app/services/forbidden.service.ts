@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IForbiddenManager, IMostReportInput } from 'interfaces/imanage';
-import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
@@ -32,7 +32,7 @@ export class ForbiddenService {
     year: 1400,
     zoneIds: [0]
   }
- 
+
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
@@ -135,6 +135,21 @@ export class ForbiddenService {
           old.isSelected = true;
       })
     })
+  }
+  showInMapSingle = (dataSource: any) => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return;
+    }
+    this.utilsService.routeToByParams('/wr', {
+      x: dataSource.x,
+      y: dataSource.y,
+      postalCode: dataSource.postalCode,
+      preEshterak: dataSource.preEshterak,
+      nextEshterak: dataSource.nextEshterak,
+      isSingle: true,
+      isForbidden: true
+    });
   }
 
 }

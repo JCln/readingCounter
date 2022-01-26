@@ -145,7 +145,7 @@
 
     <section class="collapse">
         <h3>نمودار پراکندگی</h3>
-        <app-collapsable [_isCollapsed]=_isCollapsed [_tooltipText]="'پراکندگی ساعات'"
+        <app-collapsable [_isReversed]="true" [_isCollapsed]=_isCollapsed [_tooltipText]="'پراکندگی ساعات'"
             (_clicked)="_isCollapsed = !_isCollapsed">
         </app-collapsable>
     </section>

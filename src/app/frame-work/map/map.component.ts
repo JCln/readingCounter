@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { Imap } from 'interfaces/imap.js';
-import { ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames, ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
 import { IListManagerPDXY } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -60,7 +60,6 @@ L.Marker.prototype.options.icon = simpleIcon;
 })
 export class MapComponent implements OnInit, OnDestroy {
   extraDataSourceRes: IReadingReportGISResponse[] = [];
-
   private map: L.Map;
   private mapItems: Imap[];
   private layerGroup = new L.FeatureGroup();
@@ -73,6 +72,23 @@ export class MapComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
 
   _selectedOrderId: number = 0;
+
+  streets = L.tileLayer(this.envService.OSMmapBoxUrl);
+  streetsDark = L.tileLayer(this.envService.OSMDarkmapBoxUrl);
+  satellite = L.tileLayer(this.envService.SATELLITEMapBoxUrl + this.envService.SATELLITEMapAccessToken);
+
+  baseMaps = {
+    "Satellite": this.satellite,
+    "OSM": this.streets,
+    // "ESRI": esri
+  };
+  auxBaseMap = {
+    "OSMDark": this.streetsDark,
+  }
+  overlays = {
+    "لایه ها": this.layerGroup
+  };
+
   orderGroup: ITHV[] = [
     {
       title: 'eshterak',
@@ -91,6 +107,8 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   _isCluster: boolean;
   _isSingle: boolean;
+  souldUseDarkMap: boolean = false;
+  _isDarkModeMap: boolean;
 
   constructor(
     public mapService: MapService,
@@ -106,34 +124,52 @@ export class MapComponent implements OnInit, OnDestroy {
   private getMapItems = () => {
     this.mapItems = this.mapItemsService.getMapItems();
   }
-  private initMap = () => {
-    const OSM = this.mapItems[0];
-    const SATELLITE = this.mapItems[1];
-    // const Esri = this.mapItems[2];
-    const
-      streets = L.tileLayer(this.envService.OSMmapBoxUrl),
-      satellite = L.tileLayer(this.envService.SATELLITEMapBoxUrl + this.envService.SATELLITEMapAccessToken)
-    // esri = L.tileLayer(
-    //   Esri.mapBoxUrl)
-
+  private setMapColor = (): boolean => {
+    if (this.envService.hasDarkOSMMap) {
+      this.souldUseDarkMap = true;
+      return this.mapService.getFromLocalMapColorMode();
+    }
+    // if NOT Allow to use colorMode return false for default color 
+    this.souldUseDarkMap = false;
+    return false;
+  }
+  private initMapColor = (): any => {
+    this._isDarkModeMap = this.setMapColor();
+    if (this._isDarkModeMap) {
+      return this.streetsDark;
+    }
+    return this.streets;
+  }
+  private initMapStatus = (): object => {
+    if (this.setMapColor())
+      return this.auxBaseMap;
+    return this.baseMaps;
+  }
+  toggleMapView = () => {
+    this._isDarkModeMap = !this._isDarkModeMap;
+    if (this._isDarkModeMap) {
+      this.map.removeLayer(this.streets);
+      this.map.addLayer(this.auxBaseMap.OSMDark);
+    }
+    else {
+      this.map.removeLayer(this.streetsDark);
+      this.map.addLayer(this.baseMaps.OSM);
+    }
+    this.mapService.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, this._isDarkModeMap);
+  }
+  initMap = () => {
     // only one of base layers should be added to the map at instantiation
+    //   OSM = this.mapItems[0];
+    // SATELLITE = this.mapItems[1];
+
     this.map = L.map('map', {
       center: this.envService.mapCenter,
       zoom: 15,
       minZoom: 4,
-      layers: [streets, this.layerGroup]
+      layers: [this.initMapColor(), this.layerGroup]
     });
 
-    const baseMaps = {
-      "Satellite": satellite,
-      "OSM": streets,
-      // "ESRI": esri
-    };
-    const overlays = {
-      "لایه ها": this.layerGroup
-    };
-
-    L.control.layers(baseMaps, overlays).addTo(this.map);
+    L.control.layers(this.initMapStatus(), this.overlays).addTo(this.map);
   }
   private leafletDrawPolylines = (delay: number) => {
     const lines = [];
@@ -191,6 +227,36 @@ export class MapComponent implements OnInit, OnDestroy {
     }
     this._isCluster ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes);
   }
+  private forbiddenMarkSingleLocation = (x: string, y: string) => {
+    const postalCode = this.route.snapshot.paramMap.get('postalCode');
+    const nextEshterak = this.route.snapshot.paramMap.get('nextEshterak');
+    const preEshterak = this.route.snapshot.paramMap.get('preEshterak');
+    this.markSingleForbidden({ x: x, y: y, postalCode: postalCode, preEshterak: preEshterak, nextEshterak: nextEshterak });
+  }
+  private simpleMarkSingleLocation = (x: string, y: string) => {
+    const trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+    const sureName = this.route.snapshot.paramMap.get('sureName');
+    const eshterak = this.route.snapshot.paramMap.get('eshterak');
+    const firstName = this.route.snapshot.paramMap.get('firstName');
+    this.markSingle({ x: x, y: y, firstName: firstName, sureName: sureName, eshterak: eshterak, trackNumber: trackNumber });
+  }
+  private singleMarksManager = () => {
+    const _isForbidden = this.route.snapshot.paramMap.get('isForbidden') == 'true' ? true : false;
+    const x = this.route.snapshot.paramMap.get('x');
+    const y = this.route.snapshot.paramMap.get('y');
+
+    if (_isForbidden) {
+      this.forbiddenMarkSingleLocation(x, y);
+    } else {
+      this.simpleMarkSingleLocation(x, y);
+    }
+  }
+  private clusterManager = () => {
+    this._isCluster = this.route.snapshot.paramMap.get('isCluster') == 'true' ? true :
+      this.route.snapshot.paramMap.get('isCluster') == 'false' ? false : null;
+    if (this._isCluster == false || this._isCluster == true)
+      this.classWrapperCluster();
+  }
   private getRouteParams = () => {
     this.onShowCounterReader.distance = this.route.snapshot.paramMap.get('distance');
 
@@ -200,18 +266,11 @@ export class MapComponent implements OnInit, OnDestroy {
     }
     this._isSingle = this.route.snapshot.paramMap.get('isSingle') == 'true' ? true : false;
     if (this._isSingle) {
-      const x = this.route.snapshot.paramMap.get('x');
-      const y = this.route.snapshot.paramMap.get('y');
-      const firstName = this.route.snapshot.paramMap.get('firstName');
-      const trackNumber = this.route.snapshot.paramMap.get('trackNumber');
-      const sureName = this.route.snapshot.paramMap.get('sureName');
-      const eshterak = this.route.snapshot.paramMap.get('eshterak');
-      this.markSingle({ x: x, y: y, firstName: firstName, sureName: sureName, eshterak: eshterak, trackNumber: trackNumber });
+      this.singleMarksManager();
     }
-    this._isCluster = this.route.snapshot.paramMap.get('isCluster') == 'true' ? true :
-      this.route.snapshot.paramMap.get('isCluster') == 'false' ? false : null
-    if (this._isCluster == false || this._isCluster == true)
-      this.classWrapperCluster();
+    else {
+      this.clusterManager();
+    }
   }
   ngOnInit(): void {
     this.getMapItems();
@@ -278,9 +337,9 @@ export class MapComponent implements OnInit, OnDestroy {
   mapConfigOptions = (delay: number, isFirstTime: boolean) => {
     this.removeAllLayers();
     if (this.polyline_configs)
-      this.mapService.saveToLocalStorage(this.polyline_configs);
+      this.mapService.saveToLocalStorage(ENLocalStorageNames.mapAnimationStartFrom, this.polyline_configs);
     if (this.polyline_configs == 0)
-      this.mapService.saveToLocalStorage(ENRandomNumbers.zero);
+      this.mapService.saveToLocalStorage(ENLocalStorageNames.mapAnimationStartFrom, ENRandomNumbers.zero);
 
     if (this._selectedOrderId === 0) {
       this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterak) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterakDESC)
@@ -351,6 +410,13 @@ export class MapComponent implements OnInit, OnDestroy {
     L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
       .bindPopup(
         `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${'ش.پ :' + items.trackNumber}`
+      );
+  }
+  private markSingleForbidden = (items: any) => {
+    this.flyToDes(items.y, items.x, 12);
+    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
+      .bindPopup(
+        `${'کد پستی :' + items.postalCode} <br>` + `${'اشتراک قبلی :' + items.preEshterak} <br> ${'اشتراک بعدی :' + items.nextEshterak}`
       );
   }
   private findMyLocationLeaflet = (e) => {

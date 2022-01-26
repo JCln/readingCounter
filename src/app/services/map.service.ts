@@ -54,8 +54,8 @@ export class MapService {
       this.addInvalidateMap();
     }, 'بارگزاری مجدد نقشه').addTo(this.map);
   }
-  saveToLocalStorage = (numberLen: ENRandomNumbers) => {
-    this.browserStorageService.set(ENLocalStorageNames.mapAnimationStartFrom, numberLen);
+  saveToLocalStorage = (localStorageName: ENLocalStorageNames, numberLen: any) => {
+    this.browserStorageService.set(localStorageName, numberLen);
   }
   isAnimationExistsInLocal = (): boolean => {
     return this.browserStorageService.isExists(ENLocalStorageNames.mapAnimationStartFrom);
@@ -63,8 +63,16 @@ export class MapService {
   getFromLocalStorage = (): ENRandomNumbers => {
     const a = this.browserStorageService.get(ENLocalStorageNames.mapAnimationStartFrom);
     if (a === null || a === 'undefined') {
-      this.saveToLocalStorage(ENRandomNumbers.twoHundred);
+      this.saveToLocalStorage(ENLocalStorageNames.mapAnimationStartFrom, ENRandomNumbers.twoHundred);
       return ENRandomNumbers.twoHundred;
+    }
+    return a;
+  }
+  getFromLocalMapColorMode = (): boolean => {
+    const a = this.browserStorageService.get(ENLocalStorageNames.isDarkModeMap);
+    if (a === null || a === 'undefined') {
+      this.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, false);
+      return false;
     }
     return a;
   }

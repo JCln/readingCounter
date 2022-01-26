@@ -35,7 +35,8 @@
 </section>
 
 <app-prime-table *ngIf="dataSource" [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1]"
-    [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-    (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()" (showedPictures)="showPictures($event)">
+    [dataSource]="dataSource" [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'"
+    [_numberOfExtraColumns]="[1,2]" [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true
+    [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()"
+    (showedPictures)="showPictures($event)" (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
 </app-prime-table>

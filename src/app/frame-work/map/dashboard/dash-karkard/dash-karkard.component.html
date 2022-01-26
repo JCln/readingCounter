@@ -14,7 +14,7 @@
 
     <section class="collapse">
         <h3>نمودار</h3>
-        <app-collapsable [_isCollapsed]=_isCollapsedKarkard [_tooltipText]="'کارکرد'"
+        <app-collapsable [_isReversed]="true" [_isCollapsed]=_isCollapsedKarkard [_tooltipText]="'کارکرد'"
             (_clicked)="_isCollapsedKarkard = !_isCollapsedKarkard">
         </app-collapsable>
     </section>

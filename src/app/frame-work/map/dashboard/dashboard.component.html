@@ -39,7 +39,7 @@
     </section>
     <section class="collapse">
         <h3>نمودار</h3>
-        <app-collapsable [_isCollapsed]=_isCollapsedAnalyzePrfm [_tooltipText]="'آنالیز عملکرد'"
+        <app-collapsable [_isReversed]="true" [_isCollapsed]="_isCollapsedAnalyzePrfm" [_tooltipText]="'آنالیز عملکرد'"
             (_clicked)=" _isCollapsedAnalyzePrfm=!_isCollapsedAnalyzePrfm">
         </app-collapsable>
     </section>

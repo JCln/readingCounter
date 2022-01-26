@@ -131,11 +131,11 @@ export interface ISnackBarSignal {
 }
 
 export enum ENHubMessages {
-    Disconnected = 'اتصال از سامانه لحظه قطع می‌باشد',
-    Connecting = 'درحال اتصال به سامانه لحظه',
-    Disconnecting = 'درحال قطع ارتباط',
-    Reconnecting = 'درحال اتصال به سامانه لحظه',
-    Connected = 'متصل به سامانه لحظه'
+    Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
+    Connecting = 'درحال اتصال به سامانه «لحظه»',
+    Disconnecting = 'درحال قطع ارتباط از سامانه «لحظه»',
+    Reconnecting = 'درحال اتصال به سامانه «لحظه»',
+    Connected = 'متصل به سامانه «لحظه»'
 }
 export enum ENColorText {
     blue = 'آبی',
@@ -259,7 +259,8 @@ export enum ENHasImportDynamicCount {
 }
 export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
-    mapAnimationStartFrom = 'mapAnimationStartFrom'
+    mapAnimationStartFrom = 'mapAnimationStartFrom',
+    isDarkModeMap = 'isDarkModeMap'
 }
 export enum ENRandomNumbers {
     zero = 0,
@@ -329,7 +330,7 @@ export enum ENSelectedColumnVariables {
     selectedKarbari = 'karbari',
     selectedForbidden = 'forbidden',
     selectedErrors = 'errors',
-    selectedServerErrors= 'serverErrors',
+    selectedServerErrors = 'serverErrors',
     selectedSimafaReadingProgram = '_simafaReadingProgram',
 }
 export enum ENOffloadModifyType {

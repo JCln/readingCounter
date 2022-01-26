@@ -190,7 +190,7 @@
                     <div class="tooltip_text_right">حذف نوبتی</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'allComponent'"
+            <td *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'allComponent' || _checkUpName =='forbidden'"
                 (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">

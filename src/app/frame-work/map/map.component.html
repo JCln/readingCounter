@@ -14,6 +14,15 @@
         </label>
         <input type="radio" id="_dash" name="radio">
     </div>
+    <div class="unit_theme" (click)="toggleMapView()" *ngIf="souldUseDarkMap">
+        <i *ngIf="!_isDarkModeMap" class="pi pi-moon tooltip">
+            <div class="tooltip_text_right">پس‌زمینه تیره</div>
+        </i>
+        <i *ngIf="_isDarkModeMap" class="pi pi-sun tooltip">
+            <div class="tooltip_text_right">پس‌زمینه روشن</div>
+        </i>
+    </div>
+
 
     <section class="_options">
         <div class="_flex_dr_ric" [hidden]="!canShowOptionsButton || !isShowMap">

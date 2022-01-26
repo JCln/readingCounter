@@ -1,4 +1,8 @@
-<i (click)="click()" class="tooltip _circle_border p_icons"
+<i *ngIf="!_isReversed" (click)="click()" class="tooltip _circle_border p_icons"
     [ngClass]="_isCollapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-up'">
     <div class="tooltip_text">{{_isCollapsed? 'نمایش '+_tooltipText : 'بستن '+_tooltipText}}</div>
+</i>
+<i *ngIf="_isReversed" (click)="click()" class="tooltip _circle_border p_icons"
+    [ngClass]="_isCollapsed ? 'pi pi-chevron-up' : 'pi pi-chevron-down'">
+    <div class="tooltip_text">{{_isCollapsed? 'بستن '+_tooltipText : 'نمایش '+_tooltipText}}</div>
 </i>
