@@ -75,7 +75,7 @@
 }
 
 ._special {
-  background-color: var(--primary_2);
+  background-color: var(--primary_3);
   color: var(--secondary_1);
 }
 
@@ -106,6 +106,7 @@
     background: var(--thirdy_2);
     color: var(--primary_5);
     box-shadow: 1px 1px 3px 0px var(--thirdy_2);
+    border: 1px solid var(--secondary_3);
     cursor: pointer;
   }
 

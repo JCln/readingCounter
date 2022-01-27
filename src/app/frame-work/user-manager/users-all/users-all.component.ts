@@ -2,6 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IUserManager } from 'interfaces/iuser-manager';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { UsersAllService } from 'services/users-all.service';
@@ -32,10 +33,10 @@ export class UsersAllComponent extends FactoryONE {
   }
 
   routeToEditPage(e) {
-    this.router.navigate(['../edit', e], { relativeTo: this.route.parent })
+    this.router.navigate([EN_Routes.edit, e], { relativeTo: this.route.parent })
   }
   routeToLoggs(e: string) {
-    this.router.navigate(['./loggins', e], { relativeTo: this.route.parent })
+    this.router.navigate([EN_Routes.loggins, e], { relativeTo: this.route.parent })
   }
   nullSavedSource = () => this.closeTabService.saveDataForAllUsers = null;
   classWrapper = async (canRefresh?: boolean) => {

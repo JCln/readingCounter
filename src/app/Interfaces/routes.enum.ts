@@ -100,7 +100,10 @@ export enum EN_Routes {
     'wrmtrackoffloadedoffloadMfy' = '/wr/m/track/offloaded/offloadMfy',
     'wrmtrack' = '/wr/m/track',
     'wrmuallloggins' = '/wr/mu/all/loggins/',
+    'wrmusearch' = '/wr/mu/search',
     'wrimpsimafardpgsingle' = '/wr/imp/simafa/rdpg/single',
     'wrimpsimafardpgbatch' = '/wr/imp/simafa/rdpg/batch',
     'wr' = '/wr',
+    'edit' = '../edit',
+    'loggins' = './loggins',
 }

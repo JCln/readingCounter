@@ -879,6 +879,14 @@ export class ColumnManager {
         { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true }
     ]
+    userSearch: IObjectIteratation[] = [
+        { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },
+        { field: 'username', header: 'نام کاربری', isSelected: true, ltr: false },
+        { field: 'userCode', header: 'کد کاربری', isSelected: false, ltr: false },
+        { field: 'mobile', header: 'موبایل', isSelected: true, ltr: true },
+        { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
+        { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true }
+    ]
     errors: IObjectIteratation[] = [
         { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },
         { field: 'qeraatCode', header: 'کد قرائت', isSelected: false, isNumber: true },

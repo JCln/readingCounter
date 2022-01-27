@@ -295,19 +295,19 @@
                     <div class="tooltip_text_right">دانلود Excel</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (click)="routeToEditPage(dataSource.id)">
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button" (click)="routeToEditPage(dataSource.id)">
                 <span class="ui-column-title">مشاهده/ویرایش کاربر</span>
                 <i class="tooltip p_icons pi pi-user-edit">
                     <div class="tooltip_text">مشاهده/ویرایش کاربر</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (click)="routeToLoggs(dataSource.id)">
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button" (click)="routeToLoggs(dataSource.id)">
                 <span class="ui-column-title">مشاهده ورودها</span>
                 <i class="tooltip p_icons pi pi-sign-in">
                     <div class="tooltip_text">مشاهده ورودها</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (mouseover)="showExactConfig(ri)"
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button" (mouseover)="showExactConfig(ri)"
                 (mouseout)="showExactConfig(ri)">
                 <span class="ui-column-title">تغییر وضعیت</span>
                 <i class="tooltip _map_frame_show p_icons pi pi-ellipsis-h">

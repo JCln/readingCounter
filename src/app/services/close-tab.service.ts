@@ -45,6 +45,8 @@ export class CloseTabService {
   saveDataForUserLoggins: any;
   saveDataForEditOnRole: any;
   saveDataForAddUsers: any;
+  saveDataForUserSearch: any;
+  saveDataForUserSearchRes: any;
 
   // track manager
   saveDataForTrackImported: any;
@@ -107,6 +109,7 @@ export class CloseTabService {
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrrptstoolsexcelviewer },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
+    { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, url: EN_Routes.wrmusearch },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.wrrptsanlzfileanalyze },
     { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: EN_Routes.wrmrkar },
@@ -191,6 +194,7 @@ export class CloseTabService {
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = '';
+      this[this.val[index].value_2] = '';
       this[this.val[index].req] = '';
     }
     this.cleanArrays();

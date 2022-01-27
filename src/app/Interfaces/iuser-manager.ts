@@ -271,6 +271,11 @@ export interface IAddUserInfos {
     isActive: boolean,
     deviceId: string
 }
+export interface ISearchUsersManager {
+    selectedRoles: any[],
+    selectedZones: number[],
+    selectedActions: string[]
+}
 //
 // my info (profile)
 export interface IProfile {

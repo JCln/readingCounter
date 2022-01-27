@@ -1,0 +1,50 @@
+<mat-horizontal-stepper #stepper>
+
+    <mat-step [stepControl]="provinceItemsData">
+        <form *ngIf="provinceItemsData" [formGroup]="provinceItemsData">
+            <ng-template matStepLabel>دسترسی به ناحیه</ng-template>
+            <app-select-zone [provinceItemsData]="provinceItemsData"></app-select-zone>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="userAppItems">
+        <ng-template *ngIf="userAppItems" matStepLabel>سطح دسترسی به خدمات</ng-template>
+        <app-select-action [userAddData]="userAppItems"></app-select-action>
+    </mat-step>
+
+    <mat-step [stepControl]="roleItemsData">
+        <form *ngIf="roleItemsData" formGroup="roleItemsData">
+            <ng-template matStepLabel>گروه دسترسی</ng-template>
+            <app-select-roles [roleItems]="roleItemsData"></app-select-roles>
+        </form>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>نمایش</ng-template>
+        <section class="accept">
+            <button class="btn_2 _special" (click)="searchUsers()">نمایش کاربران</button>
+            <button class="btn_2" matStepperPrevious>صفحه قبل</button>
+        </section>
+
+    </mat-step>
+
+</mat-horizontal-stepper>
+
+
+<app-prime-table
+[dataSource]="dataSourceRes"
+[_numberOfExtraColumns]="[1 , 2 , 3]"
+[_sessionName]="'user-search-session'"
+[_sortMode]="'multiple'"
+[_outputFileName]="'userSearch'"
+[_selectedColumnsToRemember]="'selectedUsersSearch'"
+[_outputEnabled]=false
+[_checkUpName]="'userSearch'"
+(refreshedTable)="refreshTable()"
+(routedToEditPage)="routeToEditPage($event)"
+(routedToLoggs)="routeToLoggs($event)"
+(showedExactConfig)="showExactConfig($event)"
+(ActivatedUser)="ActivateUser($event)"
+(DeActivatedUser)="DeActivateUser($event)"
+(resetedPasswordUser)="resetPasswordUser($event)"
+></app-prime-table>

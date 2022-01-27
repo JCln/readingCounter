@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
-import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems } from 'interfaces/iuser-manager';
+import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems, ISearchUsersManager } from 'interfaces/iuser-manager';
 
 import { MathS } from '../classes/math-s';
 import { EN_Routes } from '../Interfaces/routes.enum';
@@ -11,7 +11,7 @@ import { UtilsService } from './utils.service';
 
 @Injectable()
 export class UserAddManagerService {
-  selectedPersonalInfos: IAddUserInfos;
+  selectedPersonalInfos: IAddUserInfos;  
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -22,6 +22,13 @@ export class UserAddManagerService {
   getUserAdd = (): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GET(ENInterfaces.userADD).toPromise().then(res => {
+        resolve(res);
+      });
+    })
+  }
+  postUserBody = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
         resolve(res);
       });
     })
@@ -130,6 +137,7 @@ export class UserAddManagerService {
 
     return true;
   }
+
   private connectToServer = (vals: IAddAUserManager) => {
     if (!this.checkEmptyUserInfos(vals))
       return false;
@@ -160,5 +168,13 @@ export class UserAddManagerService {
       isActive: userInputs.isActive
     }
     this.connectToServer(vals);
+  }
+  userSearchConnectToServer = (dataSource: any): ISearchUsersManager => {
+    const vals: ISearchUsersManager = {
+      selectedRoles: this.getAUserRoleItems(dataSource.roleItems),
+      selectedZones: this.getAUserProvince(dataSource.provinceItems),
+      selectedActions: this.addAUserActions(dataSource.appItems),
+    }
+    return vals;
   }
 }
