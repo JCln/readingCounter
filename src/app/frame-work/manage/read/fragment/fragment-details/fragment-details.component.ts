@@ -8,6 +8,7 @@ import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 
 @Component({
@@ -121,6 +122,6 @@ export class FragmentDetailsComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  routeToParent = () => this.router.navigate(['/wr/m/r/nob']);
+  routeToParent = () => this.router.navigate([EN_Routes.wrmrnob]);
   ngOnInit(): void { return; }
 }

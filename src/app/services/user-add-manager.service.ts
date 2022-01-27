@@ -5,6 +5,7 @@ import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/iovera
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems } from 'interfaces/iuser-manager';
 
 import { MathS } from '../classes/math-s';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 
@@ -136,7 +137,7 @@ export class UserAddManagerService {
     this.interfaceManagerService.POSTBODY(ENInterfaces.userADD, vals).subscribe((res: IResponses) => {
       if (res) {
         this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
-        this.utilsService.routeTo('/wr/mu/all');
+        this.utilsService.routeTo(EN_Routes.wrmuall);
       }
     });
   }

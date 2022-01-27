@@ -18,6 +18,7 @@ import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confir
 import {
   ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 
 
@@ -360,7 +361,7 @@ export class ReadingReportManagerService {
     this._location.back();
   }
   routeToMapGIS = (readingReportGISReq: IReadingReportGISReq) => {
-    this.router.navigate(['/wr', readingReportGISReq]);
+    this.router.navigate([EN_Routes.wr, readingReportGISReq]);
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

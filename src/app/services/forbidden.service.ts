@@ -9,6 +9,7 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 export enum ENForbidden {
@@ -76,13 +77,13 @@ export class ForbiddenService {
     return this.utilsService.getYears();
   }
   routeToWOUI = (UUID: string, isForbidden: boolean) => {
-    this.router.navigate(['wr/m/track/woui', isForbidden, UUID]);
+    this.router.navigate([EN_Routes.wrmtrackwoui, isForbidden, UUID]);
   }
   routeToChild = () => {
-    this.utilsService.routeTo('wr/m/fbn/res');
+    this.utilsService.routeTo(EN_Routes.wrmfbnres);
   }
   backToParent = () => {
-    this.utilsService.routeTo('wr/m/fbn');
+    this.utilsService.routeTo(EN_Routes.wrmfbn);
   }
   emptyMessage = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.try_again);
@@ -141,7 +142,7 @@ export class ForbiddenService {
       this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
       return;
     }
-    this.utilsService.routeToByParams('/wr', {
+    this.utilsService.routeToByParams(EN_Routes.wr, {
       x: dataSource.x,
       y: dataSource.y,
       postalCode: dataSource.postalCode,

@@ -7,6 +7,7 @@ import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation } from '
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { MathS } from '../classes/math-s';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { CloseTabService } from './close-tab.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -201,6 +202,6 @@ export class ListManagerService {
       this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
       return;
     }
-    this.utilsService.routeToByParams('/wr', { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
+    this.utilsService.routeToByParams(EN_Routes.wr, { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
   }
 }

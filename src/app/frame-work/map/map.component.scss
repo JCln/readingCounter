@@ -83,20 +83,6 @@
   }
 }
 
-.unit_theme {
-  display: flex;
-  align-items: center;
-
-  i {
-    font-size: $font_l;
-    color: var(--primary_5);
-    background: var(--secondary_3);
-    border-radius: $border_50;
-    padding: $font_05;
-    cursor: pointer;
-  }
-}
-
 .clickable_dash {
 
   &::after {

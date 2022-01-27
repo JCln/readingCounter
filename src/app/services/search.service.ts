@@ -20,6 +20,7 @@ import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { Search } from '../classes/search';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { FollowUpService } from './follow-up.service';
 
@@ -373,27 +374,27 @@ export class SearchService {
     this[variable].toDate = $event;
   }
   routeToWoui = (object: any) => {
-    this.router.navigate(['wr/m/track/woui', false, object.id]);
+    this.router.navigate([EN_Routes.wrmtrackwoui, false, object.id]);
   }
   routeToLMAll = (row: ISearchSimpleOutput) => {
-    this.router.navigate(['wr/m/l/all', false, row.trackingId]);
+    this.router.navigate([EN_Routes.wrmlall, false, row.trackingId]);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
-    this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
+    this.utilsService.routeToByParams(EN_Routes.wrmlpd, row.trackNumber);
   }
   routeToFollowUp = (row: ISearchSimpleOutput) => {
     this.followUpService.setTrackNumber(row.trackNumber);
-    this.utilsService.routeToByUrl('/wr/m/s/fwu');
+    this.utilsService.routeToByUrl(EN_Routes.wrmsfwu);
   }
   showInMap = (dataSource: object) => {
-    this.utilsService.routeToByParams('/wr', { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });
+    this.utilsService.routeToByParams(EN_Routes.wr, { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });
   }
   showInMapSingle = (dataSource: any) => {
     if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
       this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
       return;
     }
-    this.utilsService.routeToByParams('/wr', { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
+    this.utilsService.routeToByParams(EN_Routes.wr, { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make

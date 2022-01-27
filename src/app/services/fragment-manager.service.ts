@@ -18,6 +18,7 @@ import { MathS } from 'src/app/classes/math-s';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IFragmentDetails, IFragmentMaster } from '../Interfaces/ireads-manager';
+import { EN_Routes } from '../Interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -103,13 +104,13 @@ export class FragmentManagerService {
     return this.utilsService.getRouteBySplit('/');
   }
   routeToFragmentDetails = (route: string) => {
-    this.utilsService.routeToByParams('/wr/m/r/nob/', route);
+    this.utilsService.routeToByParams(EN_Routes['wrmrnob/'], route);
   }
   routeToAutomaticImport = () => {
-    this.utilsService.routeTo('/wr/m/r/nob/autoImport');
+    this.utilsService.routeTo(EN_Routes.wrmrnobautoImport);
   }
   routeToFragmentMaster = () => {
-    this.utilsService.routeTo('/wr/m/r/nob');
+    this.utilsService.routeTo(EN_Routes.wrmrnob);
   }
   /**/
   getZoneDictionary = (): Promise<any> => {

@@ -80,7 +80,7 @@ export class PerDayComponent extends FactoryONE {
       })
     )
   }
-  toPrePage = () => this.router.navigate(['wr/m/track/reading']);
+  toPrePage = () => this.router.navigate(['m/track/reading']);
   refreshTable = () => {
     return;
   }

@@ -15,6 +15,7 @@ import {
   IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
@@ -166,13 +167,13 @@ export class ImportDynamicService {
     return true;
   }
   routeToWoui = (object: IOnOffLoadFlat) => {
-    this.router.navigate(['wr/m/track/woui', false, object.id]);
+    this.router.navigate([EN_Routes.wrmtrackwoui, false, object.id]);
   }
   routeToSimafaSingle = (object: IReadingProgramRes) => {
-    this.router.navigate(['/wr/imp/simafa/rdpg/single', object]);
+    this.router.navigate([EN_Routes.wrimpsimafardpgsingle, object]);
   }
   routeToSimafaBatch = (object: IReadingProgramRes) => {
-    this.router.navigate(['/wr/imp/simafa/rdpg/batch', object]);
+    this.router.navigate([EN_Routes.wrimpsimafardpgbatch, object]);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     return this.validationNull(searchReq);

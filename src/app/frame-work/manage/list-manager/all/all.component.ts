@@ -10,6 +10,7 @@ import { filter } from 'rxjs/internal/operators/filter';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 @Component({
   selector: 'app-all',
@@ -116,7 +117,7 @@ export class AllComponent extends FactoryONE {
   }
   toPrePage = () => {
     if (this.isModify) {
-      this.router.navigate(['/wr/m/track/offloaded']);
+      this.router.navigate([EN_Routes.wrmtrackoffloaded]);
       return;
     }
     this._location.back();

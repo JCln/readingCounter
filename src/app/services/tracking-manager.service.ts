@@ -14,6 +14,7 @@ import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IFollowUpHistory } from '../Interfaces/isearchs';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../Interfaces/itrackings';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { OffloadModify } from './../classes/offload-modify-type';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
@@ -384,10 +385,10 @@ export class TrackingManagerService {
     })
   }
   routeToLMAll = (row: ITracking | IFollowUpHistory) => {
-    this.router.navigate(['wr/m/l/all', false, row.id]);
+    this.router.navigate([EN_Routes.wrmlall, false, row.id]);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
-    this.router.navigate(['wr/m/l/all', true, dataSource.id]);
+    this.router.navigate([EN_Routes.wrmlall, true, dataSource.id]);
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);
@@ -396,7 +397,7 @@ export class TrackingManagerService {
     this._location.back();
   }
   backToParent = () => {
-    this.utilsService.routeTo('/wr/m/s/fwu');
+    this.utilsService.routeTo(EN_Routes.wrmsfwu);
   }
   setGetRanges = (dataSource: IOffLoadPerDay) => {
     dataSource.overalDuration = parseFloat(MathS.getRange(dataSource.overalDuration));

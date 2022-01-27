@@ -8,6 +8,8 @@ import { map } from 'rxjs/internal/operators/map';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 
+import { EN_Routes } from '../Interfaces/routes.enum';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -88,7 +90,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
   }
   showSpinnerConsiderExceptions = () => {
     const url = this.router.url;
-    if (url === '/wr/db' || url === '/wr/m/r/apk' || url === '/wr/offline/txtout') {
+    if (url === EN_Routes.wrdb || url === EN_Routes.wrmrapk || url === EN_Routes.wrofflinetxtout) {
       this.spinnerWrapperService.startLoadingSmallSpinner();
     }
     else {

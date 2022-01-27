@@ -15,6 +15,7 @@ import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 
 declare let L;
@@ -77,14 +78,6 @@ export class MapComponent implements OnInit, OnDestroy {
   streetsDark = L.tileLayer(this.envService.OSMDarkmapBoxUrl);
   satellite = L.tileLayer(this.envService.SATELLITEMapBoxUrl + this.envService.SATELLITEMapAccessToken);
 
-  baseMaps = {
-    "Satellite": this.satellite,
-    "OSM": this.streets,
-    // "ESRI": esri
-  };
-  auxBaseMap = {
-    "OSMDark": this.streetsDark,
-  }
   overlays = {
     "لایه ها": this.layerGroup
   };
@@ -107,8 +100,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   _isCluster: boolean;
   _isSingle: boolean;
-  souldUseDarkMap: boolean = false;
-  _isDarkModeMap: boolean;
+  _currentColorMode: boolean;
 
   constructor(
     public mapService: MapService,
@@ -124,38 +116,35 @@ export class MapComponent implements OnInit, OnDestroy {
   private getMapItems = () => {
     this.mapItems = this.mapItemsService.getMapItems();
   }
-  private setMapColor = (): boolean => {
+  private canUseMultiMapColors = (): boolean => {
     if (this.envService.hasDarkOSMMap) {
-      this.souldUseDarkMap = true;
-      return this.mapService.getFromLocalMapColorMode();
+      return true;
     }
-    // if NOT Allow to use colorMode return false for default color 
-    this.souldUseDarkMap = false;
     return false;
   }
+  private lastSelectedMapColor = (): boolean => {
+    return this.mapService.getFromLocalMapColorMode();
+  }
+  private getBaseMap = (): object => {
+    if (this.canUseMultiMapColors()) {
+      return {
+        "OSMDark": this.streetsDark,
+        "OSM": this.streets,
+        "Satellite": this.satellite,
+      }
+    }
+    else {
+      return {
+        "OSM": this.streets,
+        "Satellite": this.satellite,
+      }
+    }
+  }
   private initMapColor = (): any => {
-    this._isDarkModeMap = this.setMapColor();
-    if (this._isDarkModeMap) {
+    if (this.lastSelectedMapColor()) {
       return this.streetsDark;
     }
     return this.streets;
-  }
-  private initMapStatus = (): object => {
-    if (this.setMapColor())
-      return this.auxBaseMap;
-    return this.baseMaps;
-  }
-  toggleMapView = () => {
-    this._isDarkModeMap = !this._isDarkModeMap;
-    if (this._isDarkModeMap) {
-      this.map.removeLayer(this.streets);
-      this.map.addLayer(this.auxBaseMap.OSMDark);
-    }
-    else {
-      this.map.removeLayer(this.streetsDark);
-      this.map.addLayer(this.baseMaps.OSM);
-    }
-    this.mapService.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, this._isDarkModeMap);
   }
   initMap = () => {
     // only one of base layers should be added to the map at instantiation
@@ -169,7 +158,7 @@ export class MapComponent implements OnInit, OnDestroy {
       layers: [this.initMapColor(), this.layerGroup]
     });
 
-    L.control.layers(this.initMapStatus(), this.overlays).addTo(this.map);
+    L.control.layers(this.getBaseMap(), this.overlays).addTo(this.map);
   }
   private leafletDrawPolylines = (delay: number) => {
     const lines = [];
@@ -280,6 +269,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.mapService.addButtonsToLeaflet();
     this.removeLayerButtonLeaflet();
     this.myLocationButtonLeaflet();
+    this.toggleMapView();
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
     if (lat === 0 || lag === 0)
@@ -369,7 +359,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this.router.navigate(['../wr']);
     }
     else {
-      this.router.navigate(['wr/db']);
+      this.router.navigate([EN_Routes.wrdb]);
     }
     this.changeRouteDetected();
   }
@@ -378,7 +368,7 @@ export class MapComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         if (!res)
           return;
-        if (this.router.url == '/wr')
+        if (this.router.url == EN_Routes.wr)
           this.isShowMap = true;
       })
     )
@@ -437,4 +427,21 @@ export class MapComponent implements OnInit, OnDestroy {
       this.map.on('locationerror', this.onLocationError);
     }, 'مکان من').addTo(this.map);
   }
+  toggleMapView = () => {
+    if (this.canUseMultiMapColors()) {
+      L.easyButton('pi pi-moon', () => {
+        this._currentColorMode = !this._currentColorMode;
+        if (this._currentColorMode) {
+          this.map.removeLayer(this.streets);
+          this.map.addLayer(this.streetsDark);
+        }
+        else {
+          this.map.removeLayer(this.streetsDark);
+          this.map.addLayer(this.streets);
+        }
+        this.mapService.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, this._currentColorMode);
+      }, this._currentColorMode ? 'پس‌زمینه تیره' : 'پس‌زمینه روشن').addTo(this.map);
+    }
+  }
+
 }

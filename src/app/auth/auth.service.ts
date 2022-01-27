@@ -10,6 +10,7 @@ import { SignalRService } from 'services/signal-r.service';
 import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { JwtService } from './jwt.service';
 
 @Injectable({
@@ -59,7 +60,7 @@ export class AuthService {
     if (!MathS.isNull(returnUrl))
       this.utilsService.routeTo(returnUrl);
     else
-      this.utilsService.routeTo('/wr');
+      this.utilsService.routeTo(EN_Routes.wr);
   }
   isAuthUserLoggedIn(): boolean {
     return (this.jwtService.hasStoredAccessAndRefreshTokens() &&

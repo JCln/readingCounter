@@ -6,6 +6,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { UserLogginsService } from 'services/user-loggins.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 @Component({
   selector: 'app-user-loggins',
@@ -14,14 +15,14 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class UserLogginsComponent extends FactoryONE {
   UUID: string = '';
- 
+
 
   dataSource: IUserLoggins[];
   _selectedColumns: any[];
   _selectCols: any[];
 
   constructor(
-     
+
     private closeTabService: CloseTabService,
     private userLogginsService: UserLogginsService,
     private dateJalaliService: DateJalaliService,
@@ -65,7 +66,7 @@ export class UserLogginsComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   backToPrevious = () => {
-    this.router.navigate(['/wr/mu/all']);
+    this.router.navigate([EN_Routes.wrmuall]);
   }
   convertLoginTime = () => {
     this.dataSource.forEach(item => {

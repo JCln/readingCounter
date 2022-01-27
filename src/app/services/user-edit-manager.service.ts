@@ -7,6 +7,7 @@ import { IAddUserManager, IAUserEditSave, IUserEditManager, IUserEditOnRole } fr
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 
@@ -98,7 +99,7 @@ export class UserEditManagerService {
       this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
         if (res) {
           this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
-          this.utilsService.routeToByUrl('/wr/mu/all');
+          this.utilsService.routeToByUrl(EN_Routes.wrmuall);
         }
       });
     }
