@@ -34,6 +34,9 @@ export class SignalRService {
 
     this.receiveMessage();
     this.broadcastMessage();
+    //   connection.onclose(async () => {
+    //     await start();
+    // });
   }
   public disconnectConnection = () => {
     this.hubConnection.stop();
@@ -43,6 +46,14 @@ export class SignalRService {
   }
   sendBroadcastMessage = (method: ENInterfaces, data: IMessage) => {
     this.hubConnection.send(method, data.time, data.title, data.message, data.color);
+  }
+  reconnectManualy = async () => {
+    try {
+      await this.hubConnection.start();
+      console.log("SignalR Connected.");
+    } catch (err) {
+      console.log(err);
+    }
   }
   private receiveMessage = () => {
     this.hubConnection.on(ENInterfaces.signalRReceiveMessage, (user: string, message: string) => {

@@ -5,12 +5,14 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { SortEvent } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { EN_Routes } from 'src/app/Interfaces/routes.enum';
+
+import { MapDgComponent } from './map-dg/map-dg.component';
 
 @Component({
   selector: 'app-all',
@@ -25,6 +27,7 @@ export class AllComponent extends FactoryONE {
   woumInfosDataSource: IOnOffLoadFlat;
   showCarousel: boolean = false;
   showWouImages: boolean = false;
+  ref: DynamicDialogRef;
 
   rowIndex: number = 0;
   dataSource: IOnOffLoadFlat[] = [];
@@ -42,7 +45,8 @@ export class AllComponent extends FactoryONE {
     public listManagerService: ListManagerService,
     private route: ActivatedRoute,
     private router: Router,
-    private _location: Location
+    private _location: Location,
+    private dialogService: DialogService,
   ) {
     super();
     this.getRouteParams();
@@ -142,26 +146,6 @@ export class AllComponent extends FactoryONE {
     }
     this.listManagerService.snackEmptyValue();
   }
-  customSort(event: SortEvent) {
-    event.data.sort((data1, data2) => {
-      let value1 = data1[event.field];
-      let value2 = data2[event.field];
-      let result = null;
-
-      if (value1 == null && value2 != null)
-        result = -1;
-      else if (value1 != null && value2 == null)
-        result = 1;
-      else if (value1 == null && value2 == null)
-        result = 0;
-      else if (typeof value1 === 'string' && typeof value2 === 'string')
-        result = value1.localeCompare(value2);
-      else
-        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
-
-      return (event.order * result);
-    });
-  }
 
   /*
   water officer upload carousel images
@@ -180,6 +164,17 @@ export class AllComponent extends FactoryONE {
     this.rowIndex < 1 ? this.rowIndex = this.dataSource.length : this.rowIndex--;
     this.woumInfosDataSource = this.dataSource[this.rowIndex];
   }
-
+  openMapDialog = (dataSource: any) => {
+    if (this.listManagerService.showInMapSingleValidation(dataSource))
+      this.ref = this.dialogService.open(MapDgComponent, {
+        data: dataSource,
+        rtl: true,
+        width: '70%'
+      })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        this.refreshTable();
+    });
+  }
 
 }

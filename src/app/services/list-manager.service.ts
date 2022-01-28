@@ -4,10 +4,10 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation } from 'interfaces/ioverall-config';
+import { SortEvent } from 'primeng/api';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { MathS } from '../classes/math-s';
-import { EN_Routes } from '../Interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { CloseTabService } from './close-tab.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -59,7 +59,7 @@ export class ListManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private closeTabService: CloseTabService,
     private utilsService: UtilsService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) { }
 
   whereToSave = (): number => {
@@ -194,14 +194,34 @@ export class ListManagerService {
       })
     });
   }
+  customSort(event: SortEvent) {
+    event.data.sort((data1, data2) => {
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
+
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+      return (event.order * result);
+    });
+  }
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
-  showInMapSingle = (dataSource: any) => {
+  showInMapSingleValidation = (dataSource: any): boolean => {
     if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
       this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
-      return;
+      return false;
     }
-    this.utilsService.routeToByParams(EN_Routes.wr, { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
+    return true;
   }
 }

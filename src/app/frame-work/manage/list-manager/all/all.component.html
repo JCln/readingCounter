@@ -11,13 +11,13 @@
     [_allComponentIsModify]="isModify"
     [_backToPreviousText]="'بازگشت به صفحه قبلی'"
     [_isCustomSort]=true
-    (customedSort)="customSort($event)"
+    (customedSort)="listManagerService.customSort($event)"
     (refreshedTable)="refreshTable()"
     (backedToPrevious)="toPrePage()"
     (routedToOffload)="routeToOffload($event)"
     (showedWOUIAsCarousel)="routeToWoui($event)"
     (showedPictures)="getReadingReportTitles($event)" 
-    (showedInMapSingle)="listManagerService.showInMapSingle($event)"   
+    (showedInMapSingle)="openMapDialog($event)"   
     > 
     </app-prime-table>
     

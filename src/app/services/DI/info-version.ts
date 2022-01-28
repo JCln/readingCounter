@@ -3,7 +3,22 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'مسیرهای خودکار',
+        title: 'درخواست های داشبورد',
+        isSelected: true
+    },
+    {
+        id: '2',
+        title: 'جستجوی پیشرفته کاربران',
+        isSelected: true
+    },
+    {
+        id: '2',
+        title: 'نقشه در لیست',
+        isSelected: true
+    },
+    {
+        id: '2',
+        title: 'نقشه در غیرمجاز',
         isSelected: true
     },
     {

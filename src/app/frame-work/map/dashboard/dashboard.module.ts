@@ -33,6 +33,10 @@ import { ReadTimeComponent } from './read-time/read-time.component';
 import { RrTimeComponent } from './rr-time/rr-time.component';
 import { TrvTimeComponent } from './trv-time/trv-time.component';
 import { UserOverallComponent } from './user-overall/user-overall.component';
+import { DashRequestLogCountComponent } from './dash-request-log-count/dash-request-log-count.component';
+import { DashRequestRateComponent } from './dash-request-rate/dash-request-rate.component';
+import { DashQueryRateComponent } from './dash-query-rate/dash-query-rate.component';
+import { DashQueryCountComponent } from './dash-query-count/dash-query-count.component';
 
 
 @NgModule({
@@ -64,6 +68,10 @@ import { UserOverallComponent } from './user-overall/user-overall.component';
     DashAttemptComponent,
     DashXyComponent,
     DashDateDiffUncloseComponent,
+    DashRequestLogCountComponent,
+    DashRequestRateComponent,
+    DashQueryRateComponent,
+    DashQueryCountComponent,
   ],
   imports: [
     CommonModule,

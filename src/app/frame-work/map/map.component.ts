@@ -9,7 +9,6 @@ import { IListManagerPDXY } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { MapItemsService } from 'services/DI/map-items.service';
 import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -74,14 +73,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
   _selectedOrderId: number = 0;
 
-  streets = L.tileLayer(this.envService.OSMmapBoxUrl);
-  streetsDark = L.tileLayer(this.envService.OSMDarkmapBoxUrl);
-  satellite = L.tileLayer(this.envService.SATELLITEMapBoxUrl + this.envService.SATELLITEMapAccessToken);
-
-  overlays = {
-    "لایه ها": this.layerGroup
-  };
-
   orderGroup: ITHV[] = [
     {
       title: 'eshterak',
@@ -104,7 +95,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
   constructor(
     public mapService: MapService,
-    readonly mapItemsService: MapItemsService,
     private readingReportManagerService: ReadingReportManagerService,
     public route: ActivatedRoute,
     private router: Router,
@@ -114,37 +104,12 @@ export class MapComponent implements OnInit, OnDestroy {
   ) { }
 
   private getMapItems = () => {
-    this.mapItems = this.mapItemsService.getMapItems();
+    this.mapItems = this.mapService.getMapItems();
   }
-  private canUseMultiMapColors = (): boolean => {
-    if (this.envService.hasDarkOSMMap) {
-      return true;
-    }
-    return false;
-  }
-  private lastSelectedMapColor = (): boolean => {
-    return this.mapService.getFromLocalMapColorMode();
-  }
-  private getBaseMap = (): object => {
-    if (this.canUseMultiMapColors()) {
-      return {
-        "OSMDark": this.streetsDark,
-        "OSM": this.streets,
-        "Satellite": this.satellite,
-      }
-    }
-    else {
-      return {
-        "OSM": this.streets,
-        "Satellite": this.satellite,
-      }
-    }
-  }
-  private initMapColor = (): any => {
-    if (this.lastSelectedMapColor()) {
-      return this.streetsDark;
-    }
-    return this.streets;
+  private getOverlays = () => {
+    return {
+      "لایه ها": this.layerGroup
+    };
   }
   initMap = () => {
     // only one of base layers should be added to the map at instantiation
@@ -155,10 +120,10 @@ export class MapComponent implements OnInit, OnDestroy {
       center: this.envService.mapCenter,
       zoom: 15,
       minZoom: 4,
-      layers: [this.initMapColor(), this.layerGroup]
+      layers: [this.mapService.initMapColor(), this.layerGroup]
     });
 
-    L.control.layers(this.getBaseMap(), this.overlays).addTo(this.map);
+    L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
   }
   private leafletDrawPolylines = (delay: number) => {
     const lines = [];
@@ -428,16 +393,16 @@ export class MapComponent implements OnInit, OnDestroy {
     }, 'مکان من').addTo(this.map);
   }
   toggleMapView = () => {
-    if (this.canUseMultiMapColors()) {
+    if (this.mapService.canUseMultiMapColors()) {
       L.easyButton('pi pi-moon', () => {
         this._currentColorMode = !this._currentColorMode;
         if (this._currentColorMode) {
-          this.map.removeLayer(this.streets);
-          this.map.addLayer(this.streetsDark);
+          this.map.removeLayer(this.mapService.getLightStreetsUrl());
+          this.map.addLayer(this.mapService.getDarkStreetsUrl());
         }
         else {
-          this.map.removeLayer(this.streetsDark);
-          this.map.addLayer(this.streets);
+          this.map.removeLayer(this.mapService.getDarkStreetsUrl());
+          this.map.addLayer(this.mapService.getLightStreetsUrl());
         }
         this.mapService.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, this._currentColorMode);
       }, this._currentColorMode ? 'پس‌زمینه تیره' : 'پس‌زمینه روشن').addTo(this.map);

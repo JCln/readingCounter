@@ -4,6 +4,7 @@
 @import 'hamburger';
 @import 'theme';
 @import 'tooltip';
+@import 'button';
 
 .header {
   display: flex;
@@ -100,6 +101,12 @@ li {
   .Reconnecting {
     color: var(--orange_500);
   }
+}
+
+.btn_2_o {
+  height: inherit;
+  width: 5rem;
+  font-size: 1rem;
 }
 
 @include media_wrapper(550px, '._name', font-size, $font_xs);

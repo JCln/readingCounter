@@ -9,6 +9,7 @@ import { CarouselWoumComponent } from './carousel-woum/carousel-woum.component';
 import { WoumComponent } from './carousel-woum/woum/woum.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { OffloadComponent } from './carousel/offload/offload.component';
+import { MapDgComponent } from './map-dg/map-dg.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { OffloadComponent } from './carousel/offload/offload.component';
     CarouselComponent,
     OffloadComponent,
     WoumComponent,
-    CarouselWoumComponent
+    CarouselWoumComponent,
+    MapDgComponent
   ],
   imports: [
     SharedPrimeNgModule,
