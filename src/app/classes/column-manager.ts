@@ -27,11 +27,11 @@ export class ColumnManager {
         // { field: 'isActive', header: '', isSelected: true },
         // { field: 'createDateTime', header: '', isSelected: false },
     ];
-    serverErrors: IObjectIteratation[] = [                                
+    serverErrors: IObjectIteratation[] = [
         // { field: 'errorId', header: 'عنوان', isSelected: true },
         { field: 'message', header: 'پیام', isSelected: true },
         { field: 'statusCode', header: 'کد', isSelected: true },
-        { field: 'username', header: 'نام کاربری', isSelected: true },        
+        { field: 'username', header: 'نام کاربری', isSelected: true },
     ]
     imgattr: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
@@ -652,6 +652,24 @@ export class ColumnManager {
         { field: 'overallQuantity', header: 'کل تعداد', isSelected: false, isNumber: true },
         { field: 'trackStatusTitle', header: 'وضعیت', isSelected: false }
     ]
+    userLogs: IObjectIteratation[] = [
+        { field: 'loginDateTime', header: 'زمان', isSelected: true },
+        { field: 'loginIp', header: 'IP', isSelected: true },
+        { field: 'wasSuccessful', header: 'موفق', isSelected: true, isBoolean: true },
+        { field: 'browserVersion', header: 'نسخه مرورگر', isSelected: true },
+        { field: 'browserTitle', header: 'عنوان مرورگر', isSelected: true },
+        { field: 'browserShortTitle', header: 'عنوان مرورگر', isSelected: false },
+        { field: 'browserEngine', header: 'موتور مرورگر', isSelected: false },
+        { field: 'browserType', header: 'نوع مرورگر', isSelected: false },
+        { field: 'osVersion', header: 'OS Version', isSelected: true },
+        // { field: 'userId', header: 'کد کاربر', isSelected: true },
+        { field: 'osTitle', header: 'OS', isSelected: true },
+        { field: 'osPlatform', header: 'پلتفرم', isSelected: false },
+        // { field: 'osShortTitle', header: 'عنوان سیستم عامل', isSelected: false },
+        { field: 'wrongPassword', header: 'گذرواژه', isSelected: false },
+        // { field: 'id', header: 'کد', isSelected: false },
+        { field: 'userAgent', header: 'userAgent', isSelected: false },
+    ];
     auth1: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'logicalOrder', header: 'ترتیب', isSelected: true },

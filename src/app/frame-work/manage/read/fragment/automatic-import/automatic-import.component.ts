@@ -19,10 +19,13 @@ import { AutoImportEditDgComponent } from './auto-import-edit-dg/auto-import-edi
 export class AutomaticImportComponent extends FactoryONE {
 
   @Input() fragmentMasterId: string;
+  @Input() zoneId: any;
   @Output() fragmentLatestValue = new EventEmitter<any>();
 
   dataSource: IAutomaticImport[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
+  userCounterReader: IDictionaryManager[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
 
   constructor(
@@ -33,7 +36,7 @@ export class AutomaticImportComponent extends FactoryONE {
   ) {
     super();
   }
- 
+
   fragmentToNull = () => {
     //available to back to previous page by makeFragment null;
     this.fragmentMasterId = '';
@@ -42,6 +45,13 @@ export class AutomaticImportComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     this.dataSource = await this.fragmentManagerService.getDataSourceByQuote(ENInterfaces.automaticImportByFragment, this.fragmentMasterId);
     this.readingPeriodKindDictionary = await this.fragmentManagerService.getPeriodKindDictionary();
+    this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
+    this.zoneDictionary.find(item => {
+      if (item.title === this.zoneId)
+        this.zoneId = item.id
+    })
+
+    this.userCounterReader = await this.fragmentManagerService.getUserCounterReaders(this.zoneId);
     this.closeTabService.saveDataForAutomaticImport = this.dataSource;
   }
   removeRow = async (id: string) => {
@@ -54,7 +64,8 @@ export class AutomaticImportComponent extends FactoryONE {
     this.ref = this.dialogService.open(AutoImportDgComponent, {
       data: {
         dictionary: this.readingPeriodKindDictionary,
-        fragmentMasterId: this.fragmentMasterId
+        fragmentMasterId: this.fragmentMasterId,
+        counterReaders: this.userCounterReader
       },
       rtl: true,
       width: '70%'

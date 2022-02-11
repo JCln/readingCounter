@@ -105,10 +105,10 @@ export class ENHasNextBazdid {
 export class ENHasDarkOSMMap {
     static readonly DEFAULT = new ENHasDarkOSMMap(true);
     static readonly ESF = new ENHasDarkOSMMap(false);
-    static readonly TEH = new ENHasDarkOSMMap(true);
-    static readonly TEH_ZONE4 = new ENHasDarkOSMMap(true);
-    static readonly TEH_SE = new ENHasDarkOSMMap(true);
-    static readonly TEH_SE_LOCAL = new ENHasDarkOSMMap(true);
+    static readonly TEH = new ENHasDarkOSMMap(false);
+    static readonly TEH_ZONE4 = new ENHasDarkOSMMap(false);
+    static readonly TEH_SE = new ENHasDarkOSMMap(false);
+    static readonly TEH_SE_LOCAL = new ENHasDarkOSMMap(false);
     static readonly KERMANSHAH = new ENHasDarkOSMMap(false);
 
     private constructor(public readonly value: boolean) {

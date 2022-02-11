@@ -33,10 +33,6 @@ export class UserLogginsComponent extends FactoryONE {
     this.getRouteParams();
   }
 
-  private insertSelectedColumns = () => {
-    this._selectCols = this.userLogginsService.columnSelectedUserLogs();
-    this._selectedColumns = this.userLogginsService.customizeSelectedColumns(this._selectCols);
-  }
   nullSavedSource = () => this.closeTabService.saveDataForUserLoggins = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -44,9 +40,6 @@ export class UserLogginsComponent extends FactoryONE {
     }
     this.dataSource = await this.userLogginsService.getLogsDataSource(this.UUID);
     this.convertLoginTime();
-
-    if (this.dataSource.length)
-      this.insertSelectedColumns();
   }
   private getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))

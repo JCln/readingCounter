@@ -176,6 +176,6 @@
     </section>
 </main>
 
-<app-automatic-import *ngIf="fragmentMasterId" [fragmentMasterId]="fragmentMasterId"
+<app-automatic-import *ngIf="fragmentMasterId" [fragmentMasterId]="fragmentMasterId" [zoneId]="zoneId"
     (fragmentLatestValue)="fragmentMasterId = $event">
 </app-automatic-import>

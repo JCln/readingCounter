@@ -52,6 +52,7 @@ export interface IAutomaticImportAddEdit {
     startDay: string,
     endDay: string,
     startTime: string,
+    counterReaderId: string,
     alalHesabPercent: number,
     imagePercent: number,
     hasPreNumber: boolean,

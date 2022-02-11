@@ -29,6 +29,7 @@ export class FragmentComponent extends FactoryONE {
   clonedProducts: { [s: string]: IFragmentMaster; } = {};
 
   fragmentMasterId: string = '';
+  zoneId: number = 0;
 
   constructor(
     private closeTabService: CloseTabService,
@@ -138,6 +139,7 @@ export class FragmentComponent extends FactoryONE {
     if (!MathS.isNull(dataSource.id)) {
       if (dataSource.isValidated) {
         this.fragmentMasterId = dataSource.id;
+        this.zoneId = dataSource.zoneId;
       }
       else {
         this.fragmentManagerService.showSnack(EN_messages.isNotValidatedFragment, ENSnackBarColors.warn);

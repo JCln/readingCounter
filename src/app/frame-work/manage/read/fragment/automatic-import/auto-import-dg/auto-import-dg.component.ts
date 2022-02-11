@@ -12,12 +12,15 @@ import { FragmentManagerService } from 'services/fragment-manager.service';
 })
 export class AutoImportDgComponent implements OnInit {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
+  userCounterReaderDictionary: IDictionaryManager[] = [];
+
   dataReq: IAutomaticImportAddEdit = {
     fragmentMasterId: '',
     readingPeriodKindId: null,
     startDay: '',
     endDay: '',
     startTime: '',
+    counterReaderId: null,
     alalHesabPercent: null,
     imagePercent: null,
     hasPreNumber: false,
@@ -36,6 +39,10 @@ export class AutoImportDgComponent implements OnInit {
 
     this.readingPeriodKindDictionary = this.config.data.dictionary;
     this.dataReq.fragmentMasterId = this.config.data.fragmentMasterId;
+    this.userCounterReaderDictionary = this.config.data.counterReaders;
+    if (this.userCounterReaderDictionary[0].id !== 0)
+      this.userCounterReaderDictionary.unshift({ id: 0, title: 'تنظیم اتوماتیک', isSelected: true })
+    this.cdr.detectChanges();
   }
   async save() {
     if (this.fragmentManagerService.verificationAutoImportAdd(this.dataReq)) {

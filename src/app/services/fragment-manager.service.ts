@@ -119,7 +119,13 @@ export class FragmentManagerService {
   getPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
-
+  getUserCounterReaders = (zoneId: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
+        resolve(res))
+    });
+  }
+  
   /* VALIDATION */
   private nullValidation = (sth: string | number, message?: string): boolean => {
     if (MathS.isNull(sth)) {

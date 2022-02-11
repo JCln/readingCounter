@@ -5,13 +5,21 @@
     <main class="_contents">
 
         <div class="input_2">
+            <div class="_key">مامور قرائت</div>
+            <mat-select placeholder="تنظیم اتوماتیک" formControlName="dataReq.counterReaderId" >
+                <mat-option *ngFor="let truefalse of userCounterReaderDictionary" [value]="truefalse.id">
+                    {{truefalse.title}}
+                </mat-option>
+            </mat-select>
+        </div>
+        <div class="input_2">
             <div class="_key">دوره قرائت</div>
             <mat-select placeholder="انتخاب مورد" name="periodKind" [(ngModel)]="dataReq.readingPeriodKindId">
                 <mat-option *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
-        </div>
+        </div>        
         <div class="input_2">
             <div class="_key">از</div>
             <div class="_value">
