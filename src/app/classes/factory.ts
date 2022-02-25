@@ -44,6 +44,7 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _selectCols: any = [];
     @Input() _selectedColumns: any[];
     @Input() _outputFileName: string;
+    @Input() _tooltipText: string;
 
     constructor(
         public browserStorageService: BrowserStorageService,

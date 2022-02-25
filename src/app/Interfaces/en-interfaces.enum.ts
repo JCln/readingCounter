@@ -210,6 +210,12 @@ export enum ENInterfaces {
     serverManagerHealthCheck = '/healthchecks-ui',
     serverManagerErrorsElmah = '/elmah/detail/',
 
+    dynamicReportManagerAll = 'V1/DynamicReport/All',
+    dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',
+    dynamicReportManagerDisplayLinkAdd = '/DynamicReportManagerMvc/DisplayDesigner?access_token=',
+    dynamicReportManagerDisplayLink = '/DynamicReportManagerMvc/DisplayViewer',
+    dynamicReportManagerDisplayLinkEdit = '/DynamicReportManagerMvc/DisplayDesigner',    
+
     counterStateAll = 'V1/CounterState/All',
     counterStateDictionary = 'V1/CounterState/Dictionary',
     counterStateDictionaryByZoneId = `V1/CounterState/DictionaryByZoneId/`,

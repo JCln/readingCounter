@@ -20,6 +20,8 @@ import {
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { EN_Routes } from '../Interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
+import { JwtService } from './../auth/jwt.service';
+import { EnvService } from './env.service';
 
 
 @Injectable({
@@ -182,7 +184,9 @@ export class ReadingReportManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private dialog: MatDialog,
     private _location: Location,
-    private router: Router
+    private router: Router,
+    private envService: EnvService,
+    private jwtService: JwtService
   ) { }
 
   // CALL APIs
@@ -190,6 +194,13 @@ export class ReadingReportManagerService {
   getDataSource = (method: ENInterfaces, id: any): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(method, id).subscribe((res) => {
+        resolve(res)
+      })
+    });
+  }
+  postDataSource = (method: ENInterfaces, id: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POST(method, id).subscribe((res) => {
         resolve(res)
       })
     });
@@ -353,6 +364,15 @@ export class ReadingReportManagerService {
   }
   routeTo = (route: string) => {
     this.utilsService.routeTo(route);
+  }
+  linkToStimulsoftAdd = () => {
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.jwtService.getAuthorizationToken(), '_blank');
+  }
+  linkToStimulsoftEdit = (body: any) => {
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.jwtService.getAuthorizationToken(), '_blank');
+  }
+  linkToStimulsoftView = (body: any) => {
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.jwtService.getAuthorizationToken(), '_blank');
   }
   routeToByObject = (router: string, val: object) => {
     this.router.navigate([router, val]);

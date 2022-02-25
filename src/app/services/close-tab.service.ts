@@ -100,6 +100,7 @@ export class CloseTabService {
 
   saveDataForTextOutput: any;
   saveDataForToolsExcelViewer: any;
+  saveDataForDynamicReports: any;
   saveDataForPolicies: any;
   saveDataForFNB: any;
   saveDataForProfile: any;
@@ -108,6 +109,7 @@ export class CloseTabService {
 
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrrptstoolsexcelviewer },
+    { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamicReportManager },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, url: EN_Routes.wrmusearch },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },

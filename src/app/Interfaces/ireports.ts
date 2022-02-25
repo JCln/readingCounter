@@ -216,3 +216,13 @@ export interface IImageUrlInfoWrapper {
     distinctImageCount: number,
     imageUrlAndInfos: IImageUrlAndInfos[]
 }
+export interface IDynamicReportsRes {
+    id: number,
+    name: string,
+    alias: string,
+    auther: string,
+    fileName: string,
+    description: string,
+    username: string,
+    insertDateJalali: string,
+}

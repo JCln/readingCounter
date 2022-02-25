@@ -74,6 +74,7 @@ export enum EN_Routes {
     'wrrptsgalleryai' = '/wr/rpts/gallery/ai',
     'wrmdmacranlz' = '/wr/m/dma/cranlz',
     'wrrptsexmdetails' = '/wr/rpts/exm/details',
+    'wrRptsDynamicReportManager'= '/wr/rpts/dyrpts',
     'wrrptsexmkarkardDaily' = '/wr/rpts/exm/karkardDaily',
     'wrrptsmamgis' = '/wr/rpts/mam/gis',
     'wrmtrackoffloadedoffloadMfy/' = '/wr/m/track/offloaded/offloadMfy/',

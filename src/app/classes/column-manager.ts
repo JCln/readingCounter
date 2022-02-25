@@ -752,6 +752,15 @@ export class ColumnManager {
         { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
         { field: 'formula', header: 'فرمول', isSelected: true, readonly: true, ltr: true }
     ]
+    dynamicReport: IObjectIteratation[] = [
+        { field: 'name', header: 'نام', isSelected: false },
+        { field: 'alias', header: 'نام گزارش', isSelected: true },
+        { field: 'auther', header: 'مولف', isSelected: true },
+        // { field: 'fileName', header: 'نام فایل', isSelected: true },
+        { field: 'description', header: 'توضیحات', isSelected: false },
+        { field: 'username', header: 'کاربر', isSelected: true, ltr: true },
+        { field: 'insertDateJalali', header: 'تاریخ ایجاد', isSelected: true }
+    ];
     tabsare3: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true, isSelectOption: true },
         { field: 'karbariMoshtarakinCode', header: 'کاربری مشترکین', isSelected: true, readonly: true, isSelectOption: true },

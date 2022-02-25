@@ -125,7 +125,7 @@ export class FragmentManagerService {
         resolve(res))
     });
   }
-  
+
   /* VALIDATION */
   private nullValidation = (sth: string | number, message?: string): boolean => {
     if (MathS.isNull(sth)) {
@@ -170,16 +170,16 @@ export class FragmentManagerService {
   private masterValidation = (): boolean => {
     if (!this.nullValidation(this.fragmentMaster.zoneId, EN_messages.insert_zone))
       return false;
-    if (!this.nullValidation(this.fragmentMaster.fromEshterak, 'از اشتراک را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentMaster.fromEshterak, EN_messages.insert_fromEshterak))
       return false;
-    if (!this.nullValidation(this.fragmentMaster.toEshterak, 'تا اشتراک را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentMaster.toEshterak, EN_messages.insert_ToEshterak))
       return false;
-    if (!this.nullValidation(this.fragmentMaster.routeTitle, 'عنوان مسیر را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentMaster.routeTitle, EN_messages.insert_title_route))
       return false;
 
-    if (!this.NANValidation(this.fragmentMaster.fromEshterak, 'فرمت از اشتراک ناصحیح است'))
+    if (!this.NANValidation(this.fragmentMaster.fromEshterak, EN_messages.format_invalid_from_eshterak))
       return false;
-    if (!this.NANValidation(this.fragmentMaster.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
+    if (!this.NANValidation(this.fragmentMaster.fromEshterak, EN_messages.format_invalid_to_eshterak))
       return false;
 
     if (!MathS.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {

@@ -41,7 +41,7 @@ export class FollowUpComponent extends FactoryONE {
   constructor(
     private trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService,
-     
+
     private authService: AuthService,
     private followUpService: FollowUpService
   ) {
@@ -73,6 +73,7 @@ export class FollowUpComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForFollowUp = '';
+      this.connectToServer();
     }
     /** 
      * it separate data from followUp service and 
@@ -81,7 +82,7 @@ export class FollowUpComponent extends FactoryONE {
      * then data were saved     
      */
     if (this.followUpService.hasTrackNumber()) {
-      this.trackNumber = this.followUpService.getTrackNumber();      
+      this.trackNumber = this.followUpService.getTrackNumber();
       this.connectToServer();
       this.followUpService.setTrackNumber(null);
       return;

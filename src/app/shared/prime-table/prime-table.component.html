@@ -28,7 +28,7 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
-                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport'"
+                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport' || _checkUpName == 'dynamicReport'"
                     (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
@@ -167,9 +167,9 @@
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'imported'" (click)="showMoreDetails(dataSource)">
-                <span class="ui-column-title">مشاهده جزئیات وویرایش</span>
+                <span class="ui-column-title">{{_tooltipText}}</span>
                 <i class="tooltip p_icons pi pi-pencil">
-                    <div class="tooltip_text">مشاهده جزئیات و ویرایش</div>
+                    <div class="tooltip_text">{{_tooltipText}}</div>
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'imported'" (click)="firstConfirmDialog(dataSource.id, ri)">
@@ -275,11 +275,23 @@
                     <div class="tooltip_text_right">اصلاح</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport'" class="edit_button"
-                (click)="openEditDialog(dataSource)">
+            <td *ngIf="_checkUpName == 'dynamicReport'" class="edit_button" (click)="downloadExcel(dataSource)">
+                <span class="ui-column-title">مشاهده</span>
+                <i class="tooltip p_icons pi pi-eye">
+                    <div class="tooltip_text_right">مشاهده</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport' ||_checkUpName == 'dynamicReport'"
+                class="edit_button" (click)="openEditDialog(dataSource)">
                 <span class="ui-column-title">ویرایش</span>
                 <i class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName== 'dynamicReport'" (click)="showMoreDetails(dataSource)">
+                <span class="ui-column-title">حذف</span>
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف</div>
                 </i>
             </td>
             <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'excelDynamic'" class="edit_button"
@@ -295,20 +307,22 @@
                     <div class="tooltip_text_right">دانلود Excel</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button" (click)="routeToEditPage(dataSource.id)">
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+                (click)="routeToEditPage(dataSource.id)">
                 <span class="ui-column-title">مشاهده/ویرایش کاربر</span>
                 <i class="tooltip p_icons pi pi-user-edit">
                     <div class="tooltip_text">مشاهده/ویرایش کاربر</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button" (click)="routeToLoggs(dataSource.id)">
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+                (click)="routeToLoggs(dataSource.id)">
                 <span class="ui-column-title">مشاهده ورودها</span>
                 <i class="tooltip p_icons pi pi-sign-in">
                     <div class="tooltip_text">مشاهده ورودها</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button" (mouseover)="showExactConfig(ri)"
-                (mouseout)="showExactConfig(ri)">
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+                (mouseover)="showExactConfig(ri)" (mouseout)="showExactConfig(ri)">
                 <span class="ui-column-title">تغییر وضعیت</span>
                 <i class="tooltip _map_frame_show p_icons pi pi-ellipsis-h">
                     <div class="tooltip_text">تغییر وضعیت</div>
