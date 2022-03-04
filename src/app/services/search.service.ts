@@ -13,6 +13,7 @@ import {
   ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
+import { AllListsService } from 'services/all-lists.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -96,6 +97,7 @@ export class SearchService {
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
+    private allListsService: AllListsService,
     private router: Router,
     private dialog: MatDialog,
   ) { }
@@ -377,7 +379,8 @@ export class SearchService {
     this.router.navigate([EN_Routes.wrmtrackwoui, false, object.id]);
   }
   routeToLMAll = (row: ISearchSimpleOutput) => {
-    this.router.navigate([EN_Routes.wrmlall, false, row.trackingId]);
+    this.allListsService.GUid = row.trackingId;
+    this.router.navigate([EN_Routes.wrmlall, false]);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
     this.utilsService.routeToByParams(EN_Routes.wrmlpd, row.trackNumber);

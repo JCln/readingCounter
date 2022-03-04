@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { filter } from 'rxjs/internal/operators/filter';
+import { AllListsService } from 'services/all-lists.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -20,8 +20,7 @@ import { MapDgComponent } from './map-dg/map-dg.component';
   styleUrls: ['./all.component.scss']
 })
 export class AllComponent extends FactoryONE {
-  trackId: string;
-  isModify: string | boolean;
+  isModify: boolean;
 
   carouselDataSource: IOnOffLoadFlat;
   woumInfosDataSource: IOnOffLoadFlat;
@@ -38,30 +37,36 @@ export class AllComponent extends FactoryONE {
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   constructor(
     public listManagerService: ListManagerService,
-    private route: ActivatedRoute,
     private router: Router,
     private _location: Location,
     private dialogService: DialogService,
+    private allListsService: AllListsService
   ) {
     super();
-    this.getRouteParams();
   }
 
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.listManagerService.nullSavedAllLMSource();
+    this.isFromOffloadPage();
+    if (this.isModify) {
+      if (!this.allListsService.GUid_Modify) {
+        this.router.navigateByUrl(EN_Routes.wrmtrackoffloaded);
+      }
+      else {
+        this.dataSource = await this.listManagerService.getLMAll(this.allListsService.GUid_Modify);
+      }
+    }
+    else {
+      if (!this.allListsService.GUid) {
+        this._location.back();
+      }
+      else {
+        this.dataSource = await this.listManagerService.getLMAll(this.allListsService.GUid);
+      }
     }
 
-    this.dataSource = await this.listManagerService.getLMAll(this.trackId);
     this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
-
-    if (!this.dataSource.length)
-      return;
 
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
@@ -84,16 +89,11 @@ export class AllComponent extends FactoryONE {
     this.makeHadPicturesToBoolean();
   }
   isFromOffloadPage = () => {
-    this.trackId = this.route.snapshot.paramMap.get('trackingId');
-    this.isModify = this.route.snapshot.paramMap.get('isModify');
-    this.isModify = this.isModify.toLocaleLowerCase() === 'true' ? true : false;
-  }
-  getRouteParams = () => {
-    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      this.isFromOffloadPage();
-      this.classWrapper();
-    })
-    )
+    if (this.router.url.toLocaleLowerCase().includes('true'))
+      this.isModify = true;
+    else {
+      this.isModify = false;
+    }
   }
   routeToOffload = (event: object) => {
     this.carouselDataSource = event['dataSource'];
@@ -111,13 +111,6 @@ export class AllComponent extends FactoryONE {
   carouselCancelClicked = () => {
     this.showCarousel = false;
     this.showWouImages = false;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   toPrePage = () => {
     if (this.isModify) {
@@ -137,7 +130,6 @@ export class AllComponent extends FactoryONE {
         item.imageCount = false;
     })
   }
-  ngOnInit(): void { return; }
   getReadingReportTitles = async ($event) => {
     const a = await this.listManagerService.postById(ENInterfaces.ReadingReportTitles, $event)
     if (a.length) {

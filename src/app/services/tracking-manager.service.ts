@@ -16,6 +16,7 @@ import { IFollowUpHistory } from '../Interfaces/isearchs';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../Interfaces/itrackings';
 import { EN_Routes } from '../Interfaces/routes.enum';
 import { OffloadModify } from './../classes/offload-modify-type';
+import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
 
@@ -116,6 +117,7 @@ export class TrackingManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private _location: Location,
     private dialog: MatDialog,
+    private allListsService: AllListsService,
     private router: Router
   ) { }
 
@@ -385,10 +387,12 @@ export class TrackingManagerService {
     })
   }
   routeToLMAll = (row: ITracking | IFollowUpHistory) => {
-    this.router.navigate([EN_Routes.wrmlall, false, row.id]);
+    this.allListsService.GUid = row.id;
+    this.router.navigate([EN_Routes.wrmlall, false]);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
-    this.router.navigate([EN_Routes.wrmlall, true, dataSource.id]);
+    this.allListsService.GUid_Modify = dataSource.id;
+    this.router.navigate([EN_Routes.wrmlall, true]);
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);

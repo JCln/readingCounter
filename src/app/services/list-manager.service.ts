@@ -68,44 +68,33 @@ export class ListManagerService {
   nullSavedAllLMSource = () => {
     this.saveTo === 0 ? this.closeTabService.saveDataForLMAll = null : this.closeTabService.saveDataForLMAll_extra = null
   }
-  getLMAll = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
-    if (this.readingListGUID === trackingId && !MathS.isNull(this.closeTabService.saveDataForLMAll))
-      return this.closeTabService.saveDataForLMAll;
-    if (this.readingListGUID_extra === trackingId && !MathS.isNull(this.closeTabService.saveDataForLMAll_extra))
-      return this.closeTabService.saveDataForLMAll_extra;
-
-    if (this.whereToSave() == 0) {
-      this.readingListGUID = trackingId;
-      return this.getLMAllFirst(trackingId);
+  getLMAll = async (trackingId: string): Promise<any> => {
+    if (window.location.href.includes('true')) {
+      if (this.readingListGUID === trackingId)
+        return this.closeTabService.saveDataForLMAll;
+      else {
+        this.readingListGUID = trackingId;
+        this.closeTabService.saveDataForLMAll = await this.getLMAllDataSource(trackingId);
+        return this.closeTabService.saveDataForLMAll;
+      }
     }
     else {
-      this.readingListGUID_extra = trackingId;
-      return this.getLMAllExtra(trackingId);
+      if (this.readingListGUID_extra === trackingId)
+        return this.closeTabService.saveDataForLMAll_extra;
+      else {
+        this.readingListGUID_extra = trackingId;
+        this.closeTabService.saveDataForLMAll_extra = await this.getLMAllDataSource(trackingId);
+        console.log(this.closeTabService.saveDataForLMAll_extra);
+        return this.closeTabService.saveDataForLMAll_extra;
+      }
     }
   }
-  getLMAllFirst = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedALL, trackingId).subscribe(res => {
-          this.closeTabService.saveDataForLMAll = res;
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getLMAllExtra = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedALL, trackingId).subscribe(res => {
-          this.closeTabService.saveDataForLMAll_extra = res;
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  getLMAllDataSource = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedALL, trackingId).subscribe(res => {
+        resolve(res);
+      })
+    });
   }
   getLMAllZoneDictionary = () => {
     return this.dictionaryWrapperService.getZoneDictionary();

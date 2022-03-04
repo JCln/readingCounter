@@ -9,8 +9,8 @@ export const sidebarItemsTest = {
                 { route: EN_Routes.wrrptsmamdhchart, title: 'چ_پراکندگی ساعت', isClosable: true, isRefreshable: false, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrrptsmamtrvchchart, title: 'چ_پیمایش تغییرات', isClosable: true, isRefreshable: false, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrmms, title: 'مدیریت سرور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: EN_Routes.wrmlallfalse, title: 'اصلاح', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
-                { route: EN_Routes.wrmlalltrue, title: 'لیست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.wrmlallfalse, title: 'لیست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.wrmlalltrue, title: 'اصلاح', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
             ]
         }
     ]

@@ -1,6 +1,6 @@
 export enum EN_Routes {
-    'wrmlallfalse' = '/wr/m/l/all/false/',
-    'wrmlalltrue' = '/wr/m/l/all/true/',
+    'wrmlallfalse' = '/wr/m/l/all/false',
+    'wrmlalltrue' = '/wr/m/l/all/true',
     'wrmsfwu' = '/wr/m/s/fwu',
     'wrmsfwu/' = '/wr/m/s/fwu/',
     'wrmtrackwouifalse' = '/wr/m/track/woui/false/',
