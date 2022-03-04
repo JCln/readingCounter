@@ -6,20 +6,18 @@
 
         <div class="input_2">
             <div class="_key">مامور قرائت</div>
-            <mat-select placeholder="تنظیم اتوماتیک" formControlName="dataReq.counterReaderId" >
-                <mat-option *ngFor="let truefalse of userCounterReaderDictionary" [value]="truefalse.id">
-                    {{truefalse.title}}
-                </mat-option>
-            </mat-select>
+            <p-dropdown name="userCounters" [options]="userCounterReaderDictionary"
+                [(ngModel)]="dataReq.counterReaderId" placeholder="تنظیم اتوماتیک"
+                [style]="{'min-width':'10rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+            </p-dropdown>
         </div>
         <div class="input_2">
             <div class="_key">دوره قرائت</div>
-            <mat-select placeholder="انتخاب مورد" name="periodKind" [(ngModel)]="dataReq.readingPeriodKindId">
-                <mat-option *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
-                    {{truefalse.title}}
-                </mat-option>
-            </mat-select>
-        </div>        
+            <p-dropdown name="userCounters" [options]="readingPeriodKindDictionary"
+                [(ngModel)]="dataReq.readingPeriodKindId" placeholder="انتخاب مورد"
+                [style]="{'min-width':'10rem', 'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+            </p-dropdown>
+        </div>
         <div class="input_2">
             <div class="_key">از</div>
             <div class="_value">

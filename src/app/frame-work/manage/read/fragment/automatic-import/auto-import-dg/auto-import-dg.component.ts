@@ -11,8 +11,8 @@ import { FragmentManagerService } from 'services/fragment-manager.service';
   styleUrls: ['./auto-import-dg.component.scss']
 })
 export class AutoImportDgComponent implements OnInit {
-  readingPeriodKindDictionary: IDictionaryManager[] = [];
-  userCounterReaderDictionary: IDictionaryManager[] = [];
+  readingPeriodKindDictionary: IDictionaryManager[];
+  userCounterReaderDictionary: IDictionaryManager[];
 
   dataReq: IAutomaticImportAddEdit = {
     fragmentMasterId: '',
@@ -35,8 +35,6 @@ export class AutoImportDgComponent implements OnInit {
     private fragmentManagerService: FragmentManagerService,
   ) { }
   ngOnInit(): void {
-    console.log(this.config.data);
-
     this.readingPeriodKindDictionary = this.config.data.dictionary;
     this.dataReq.fragmentMasterId = this.config.data.fragmentMasterId;
     this.userCounterReaderDictionary = this.config.data.counterReaders;
@@ -48,10 +46,7 @@ export class AutoImportDgComponent implements OnInit {
     if (this.fragmentManagerService.verificationAutoImportAdd(this.dataReq)) {
       const temp = await this.fragmentManagerService.postBody(ENInterfaces.automaticImportAdd, this.dataReq);
       if (temp) {
-        console.log(temp);
-
         this.fragmentManagerService.showSnack(temp.message, ENSnackBarColors.success);
-
         this.ref.close(this.dataReq);
       }
     }

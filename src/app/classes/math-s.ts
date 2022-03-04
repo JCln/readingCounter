@@ -25,6 +25,8 @@ export class MathS {
         return true;
     }
     static persentCheck = (val: number): boolean => {
+        if (!val)
+            return false;
         if (val < 0 || val > 100)
             return false;
         return true;
