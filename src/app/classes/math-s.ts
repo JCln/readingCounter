@@ -1,5 +1,4 @@
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 
 export class MathS {
 
@@ -17,25 +16,6 @@ export class MathS {
     }
     static isNullTextValidation(value: string): boolean {
         return typeof value.trim() === 'undefined' || !value || value.trim().length === 0 || value.trim() === null;
-    }
-    static isNullWithText = (value: any, text: string, color: ENSnackBarColors): boolean => {
-        const snackWrapperService = new SnackWrapperService;
-        if (typeof value === 'undefined' || !value || value.length === 0) {
-            snackWrapperService.openSnackBar(text, 3000, color);
-            return false;
-        }
-        return true;
-    }
-    static plusOrMinus = (value: number, maxLength: number, minLength: number) => {
-        const snackWrapperService = new SnackWrapperService;
-        if (value > maxLength) {
-            snackWrapperService.openSnackBar(`حداکثر تعداد ${maxLength} می‌باشد`, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
-            return;
-        }
-        if (value < minLength) {
-            snackWrapperService.openSnackBar(`حداقل تعداد ${minLength} می‌باشد`, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
-            return;
-        }
     }
     static isEmailValid = (email: string): boolean => {
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -96,11 +76,11 @@ export class MathS {
     static getRandomColors(len: number): string[] {
         let colors = [];
         for (let index = 0; index < len; index++) {
-          let color = '#' + (Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString());
-          colors.push(color);
+            let color = '#' + (Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString());
+            colors.push(color);
         }
         return colors;
-      }
+    }
     // private pushOrPopFromMobileNumber = (mobileNum: string | number) => {
     //   // unshift to array just allowed so => string to array and then to string should converted
     //   const arrayString = [];
@@ -115,7 +95,7 @@ export class MathS {
     //   return false;
     // }
     static mobileValidation = (mobile: string | number): boolean => {
-        if (mobile.toString().trim().length !== 11) {
+        if (mobile.toString().trim().length !== ENRandomNumbers.eleven) {
             return false;
         }
         return true;

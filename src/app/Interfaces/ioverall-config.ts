@@ -269,6 +269,7 @@ export enum ENRandomNumbers {
     zero = 0,
     five = 5,
     ten = 10,
+    eleven = 11,
     fifteen = 15,
     twenty = 20,
     thirdy = 30,
