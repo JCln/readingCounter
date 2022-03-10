@@ -1,13 +1,13 @@
 <main style="position: relative; ">
     <app-prime-table [hidden]="showCarousel" 
     [dataSource]="dataSource" 
-    [_outputFileName]="'allLists'"
+    [_outputFileName]="'ModifyList'"
     [_checkUpName]="'allComponent'"
-    [_sessionName]="'allLists'"
-    [_selectedColumnsToRemember]="'selectedListManagerAll'"
+    [_sessionName]="'modifyLists'"
+    [_selectedColumnsToRemember]="'selectedListManagerModify'"
     [_numberOfExtraColumns]="[1,2,3]"    
     [_backToPreviousEnabled]=true
-    [_allComponentIsModify]="false"
+    [_allComponentIsModify]="true"
     [_backToPreviousText]="'بازگشت به صفحه قبلی'"
     [_isCustomSort]=true
     (customedSort)="listManagerService.customSort($event)"
@@ -19,7 +19,16 @@
     (showedInMapSingle)="openMapDialog($event)"   
     > 
     </app-prime-table>
-        
+    
+    <app-carousel *ngIf="showCarousel" 
+    [dataSource]="carouselDataSource"
+    (cancelClicked)="carouselCancelClicked()"
+    (prevClicked)="carouselPrevItem()"
+    (nextClicked)="carouselNextItem()"
+    >
+    <app-offload></app-offload>
+    </app-carousel>
+
     <!-- <app-carousel-woum *ngIf="showWouImages" 
     [dataSource]="woumInfosDataSource"
     (cancelClicked)="carouselCancelClicked()"

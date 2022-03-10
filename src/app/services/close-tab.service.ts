@@ -75,6 +75,7 @@ export class CloseTabService {
   saveDataForLMPD: any;
   saveDataForLMAll: any;
   saveDataForLMAll_extra: any;
+  saveDataForLMModify: any;
   // WOUI manager
   saveDataForWOUI: any;
   // dbf output manager
@@ -177,17 +178,13 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
     { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
     { id: 2, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes['wrmlpd/'] },
-    { id: 2, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes['wrmlall/'] },
-    { id: 2, value: ENEssentialsToSave.saveDataForLMAll_extra, url: EN_Routes['wrmlall/'] },
+    { id: 2, value: ENEssentialsToSave.saveDataForLMAll, value_2: ENEssentialsToSave.saveDataForLMAll_extra, url: EN_Routes['wrmlall/'] },
+    { id: 2, value: ENEssentialsToSave.saveDataForLMModify, url: EN_Routes.wrmlalltrue },
     { id: 2, value: ENEssentialsToSave.saveDataForEditUsers, url: EN_Routes.wrmuedit },
     { id: 2, value: ENEssentialsToSave.saveDataForWOUI, url: EN_Routes.wrmtrackwoui },
     { id: 2, value: ENEssentialsToSave.saveDataForUserLoggins, url: EN_Routes.wrmuallloggins },
     { id: 2, value: ENEssentialsToSave.saveDataForFragmentNOBDetails, url: EN_Routes.wrmrnob },
     { id: 13, req: ENEssentialsToSave.rSearchMoshtarakinReq, value: ENEssentialsToSave.saveDataForSearchMoshtarakin, url: EN_Routes.wrmssearchMosh },
-    // { id: 1,  value: '',  url: EN_Routes.wrmms' },
-    // { id: 1,  value: '',  url: EN_Routes.wrmmrm' },
-    // { id: 1,  value: ';',  url: EN_Routes.wrmsge' },
-    // { id: 1,  value: '',  url: EN_Routes.wrprivacy' },
   ]
 
   cleanArrays = () => {

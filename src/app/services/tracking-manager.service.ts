@@ -388,11 +388,11 @@ export class TrackingManagerService {
   }
   routeToLMAll = (row: ITracking | IFollowUpHistory) => {
     this.allListsService.GUid = row.id;
-    this.router.navigate([EN_Routes.wrmlall, false]);
+    this.router.navigate([EN_Routes.wrmlallfalse]);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
     this.allListsService.GUid_Modify = dataSource.id;
-    this.router.navigate([EN_Routes.wrmlall, true]);
+    this.router.navigate([EN_Routes.wrmlalltrue]);
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);

@@ -74,7 +74,7 @@ export class ListManagerService {
         return this.closeTabService.saveDataForLMAll;
       else {
         this.readingListGUID = trackingId;
-        this.closeTabService.saveDataForLMAll = await this.getLMAllDataSource(trackingId);
+        this.closeTabService.saveDataForLMAll = await this.getLMDataSource(trackingId);
         return this.closeTabService.saveDataForLMAll;
       }
     }
@@ -83,13 +83,13 @@ export class ListManagerService {
         return this.closeTabService.saveDataForLMAll_extra;
       else {
         this.readingListGUID_extra = trackingId;
-        this.closeTabService.saveDataForLMAll_extra = await this.getLMAllDataSource(trackingId);
+        this.closeTabService.saveDataForLMAll_extra = await this.getLMDataSource(trackingId);
         console.log(this.closeTabService.saveDataForLMAll_extra);
         return this.closeTabService.saveDataForLMAll_extra;
       }
     }
   }
-  getLMAllDataSource = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
+  getLMDataSource = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedALL, trackingId).subscribe(res => {
         resolve(res);
