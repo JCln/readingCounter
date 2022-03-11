@@ -1,31 +1,31 @@
+<section>
+    <div class="overall-info">
+        <div class="input_2">
+            <div class="_key">ش.پیگیری</div>
+            <input [readOnly]="true" class="_value" name="trackNumber" [(ngModel)]="pageSignTrackNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">ش.لیست</div>
+            <input [readOnly]="true" class="_value" name="listNumber"
+                [(ngModel)]="allListsService.allLists_pageSign.listNumber">
+        </div>
+    </div>
+</section>
+
 <main style="position: relative; ">
-    <app-prime-table [hidden]="showCarousel" 
-    [dataSource]="dataSource" 
-    [_outputFileName]="'allLists'"
-    [_checkUpName]="'allComponent'"
-    [_sessionName]="'allLists'"
-    [_selectedColumnsToRemember]="'selectedListManagerAll'"
-    [_numberOfExtraColumns]="[1,2,3]"    
-    [_backToPreviousEnabled]=true
-    [_allComponentIsModify]="false"
-    [_backToPreviousText]="'بازگشت به صفحه قبلی'"
-    [_isCustomSort]=true
-    (customedSort)="listManagerService.customSort($event)"
-    (refreshedTable)="refreshTable()"
-    (backedToPrevious)="toPrePage()"
-    (routedToOffload)="routeToOffload($event)"
-    (showedWOUIAsCarousel)="routeToWoui($event)"
-    (showedPictures)="getReadingReportTitles($event)" 
-    (showedInMapSingle)="openMapDialog($event)"   
-    > 
+    <app-prime-table [hidden]="showCarousel" [dataSource]="dataSource" [_outputFileName]="'allLists'"
+        [_checkUpName]="'allComponent'" [_sessionName]="'allLists'"
+        [_selectedColumnsToRemember]="'selectedListManagerAll'" [_numberOfExtraColumns]="[1,2,3]"
+        [_backToPreviousEnabled]=true [_allComponentIsModify]="false" [_backToPreviousText]="'بازگشت به صفحه قبلی'"
+        [_isCustomSort]=true (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
+        (backedToPrevious)="toPrePage()" (routedToOffload)="routeToOffload($event)"
+        (filteredEvent)="filteredTableEvent($event)" (showedWOUIAsCarousel)="routeToWoui($event)"
+        (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
     </app-prime-table>
-        
-    <!-- <app-carousel-woum *ngIf="showWouImages" 
-    [dataSource]="woumInfosDataSource"
-    (cancelClicked)="carouselCancelClicked()"
-    (prevClicked)="carouselWOUMPrevItem()"
-    (nextClicked)="carouselWOUMNextItem()"
-    >
-    <app-woum></app-woum>
-    </app-carousel-woum> -->
+
+    <app-carousel-woum *ngIf="showWouImages" [dataSource]="woumInfosDataSource"
+        (cancelClicked)="carouselCancelClicked()" (prevClicked)="carouselWOUMPrevItem()"
+        (nextClicked)="carouselWOUMNextItem()">
+        <app-woum></app-woum>
+    </app-carousel-woum>
 </main>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
@@ -44,6 +45,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _hasSaveColumns: boolean = true;
 
   @Output() customedSort = new EventEmitter<any>();
+  @Output() filteredEvent = new EventEmitter<any>();
   @Output() collapsed = new EventEmitter<any>();
   @Output() removedRow = new EventEmitter<any>();
   @Output() openedEditDialog = new EventEmitter<any>();
@@ -96,6 +98,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
 
   refreshTable() {
     this.refreshedTable.emit(true);
+  }
+  filterEventTable(e: Table) {
+    this.filteredEvent.emit(e.filteredValue);
   }
   forceOffload = (dataSource: object, ri: number) => {
     this.forcedOffload.emit({ dataSource, ri });
@@ -202,7 +207,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   routeToSingle = (dataSource: object) => {
     this.routedToSingle.emit(dataSource);
   }
-
   calcSums(): number {
     let total: number = 0;
     this.dataSource.map(item => {

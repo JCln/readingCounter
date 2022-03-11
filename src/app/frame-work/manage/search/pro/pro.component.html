@@ -1,15 +1,14 @@
 
 <app-prime-table     
-[_selectCols]="_selectCols" 
-[_selectedColumns]="selectedColumns"
 [dataSource]="dataSource" 
 [_outputFileName]="'searchPro'"
 [_checkUpName]="'search_acme'"
-[_numberOfExtraColumns]="[1,2]"
+[_numberOfExtraColumns]="[1,2,3]"
 [_sessionName]="'search_acme'"
 [_selectedColumnsToRemember]="'selectedListManagerPro'"
 (refreshedTable)="refreshTable()"
 (showedPictures)="getReadingReportTitles($event)"
+(showedInMapSingle)="openMapDialog($event)"
 (showSearchedOptionsDialog)= "showSearchOptionsDialog()"
 > 
 </app-prime-table>

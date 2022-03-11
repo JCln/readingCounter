@@ -104,7 +104,7 @@ export enum ENInterfaces {
     userGET = 'V1/User/All',
     userEDIT = 'V1/user/Edit',
     userADD = 'V1/user/Add',
-    userSearch = '/V1/User/Search',
+    userSearch = 'V1/User/Search',
     userLOGINS = 'V1/User/Logins',
     userEditOnRole = 'V1/User/EditOnRole',
     userRESETPASS = 'V1/User/ResetPassword',

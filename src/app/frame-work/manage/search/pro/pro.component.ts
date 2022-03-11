@@ -1,16 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { ISearchProReportInput } from 'interfaces/search';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
-import { MathS } from 'src/app/classes/math-s';
 
+import { MapDgComponent } from '../../list-manager/all/map-dg/map-dg.component';
 import { SearchDgComponentComponent } from './search-dg-component/search-dg-component.component';
 
 @Component({
@@ -22,11 +21,7 @@ export class ProComponent extends FactoryONE {
 
   _empty_message: string = '';
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   dataSource: IOnOffLoadFlat[] = [];
-  searchReq: ISearchProReportInput;
   zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
@@ -43,8 +38,14 @@ export class ProComponent extends FactoryONE {
     super();
   }
 
-  converts = () => {
-    this._empty_message = EN_messages.notFound;
+  converts = async () => {
+    // this._empty_message = EN_messages.notFound;
+    this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.closeTabService.saveDataForSearchProReq.zoneId);
+    this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.closeTabService.saveDataForSearchProReq.zoneId);
+    this.karbariDictionary = await this.searchService.getKarbariDictionary();
+    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
+    this.qotrDictionary = await this.searchService.getQotrDictionary();
+
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
@@ -52,50 +53,48 @@ export class ProComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-
     this.searchService.setDynamicPartRanges(this.dataSource);
+    this.searchService.makeHadPicturesToBoolean(this.dataSource);
   }
-  connectToServer = async () => {
-    this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchPro, this.searchReq);
-    this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.searchReq.zoneId);
-    this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchReq.zoneId);
-    this.karbariDictionary = await this.searchService.getKarbariDictionary();
-    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
-    this.qotrDictionary = await this.searchService.getQotrDictionary();
+  classWrapper = async (canRefresh?: boolean) => {
+
+    if (canRefresh) {
+      this.closeTabService.saveDataForSearchPro = null;
+    }
+    if (this.closeTabService.saveDataForSearchPro) {
+      this.dataSource = this.closeTabService.saveDataForSearchPro;
+    }
+    else {
+      if (this.closeTabService.saveDataForSearchProReq) {
+        this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchPro, this.closeTabService.saveDataForSearchProReq);
+        this.closeTabService.saveDataForSearchPro = this.dataSource;
+      }
+      else {
+        this.showSearchOptionsDialog();
+      }
+    }
 
     this.converts();
-    this.searchService.makeHadPicturesToBoolean(this.dataSource);
 
-    this.closeTabService.saveDataForSearchPro = this.dataSource;
+    // if (canRefresh) {
+    //   // this.nullSavedSource();
+    //   this.connectToServer();
+    // }
+    // if (!MathS.isNull(this.closeTabService.saveDataForSearchPro)) {
+    //   this.dataSource = this.closeTabService.saveDataForSearchPro;
+    //   this.converts();
+    //   return;
+    // }
+    // if (MathS.isNull(this.searchReq)) {
+    //   this.showSearchOptionsDialog();
+    //   this.toDefaultVals();
+    // }
+    // else
+    //   this.connectToServer();
   }
-  nullSavedSource = () => this.closeTabService.saveDataForSearchPro = null;
-  classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      // this.nullSavedSource();
-      this.connectToServer();
-    }
-    if (!MathS.isNull(this.closeTabService.saveDataForSearchPro)) {
-      this.dataSource = this.closeTabService.saveDataForSearchPro;
-      this.converts();
-      return;
-    }
-    if (MathS.isNull(this.searchReq)) {
-      this.showSearchOptionsDialog();
-      this.toDefaultVals();
-    }
-    else
-      this.connectToServer();
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  toDefaultVals = () => {
-    this.dataSource = [];
-  }
+  // toDefaultVals = () => {
+  //   this.dataSource = [];
+  // }
 
   showSearchOptionsDialog = () => {
     this.ref = this.dialogService.open(SearchDgComponentComponent, {
@@ -104,8 +103,8 @@ export class ProComponent extends FactoryONE {
     })
     this.ref.onClose.subscribe((res) => {
       if (res) {
-        this.searchReq = res;
-        this.connectToServer();
+        this.closeTabService.saveDataForSearchProReq = res;
+        this.classWrapper();
       }
     });
   }
@@ -116,5 +115,17 @@ export class ProComponent extends FactoryONE {
       return;
     }
     this.searchService.snackEmptyValue();
+  }
+  openMapDialog = (dataSource: any) => {
+    if (this.searchService.showInMapSingleValidation(dataSource))
+      this.ref = this.dialogService.open(MapDgComponent, {
+        data: dataSource,
+        rtl: true,
+        width: '70%'
+      })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        this.classWrapper();
+    });
   }
 }

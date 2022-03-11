@@ -79,12 +79,10 @@
 
     <app-prime-table 
     [hidden]="showWouImages"
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns" 
     [dataSource]="dataSource"
     [_outputFileName]="'rrLocked'" 
     [_checkUpName]="'rr-locked'" 
-    [_numberOfExtraColumns]="[1,2]"
+    [_numberOfExtraColumns]="[1,2,3]"
     [_sessionName]="'rr-locked'" 
     [_selectedColumnsToRemember]="'selectedRRLocked'" 
     [_isCustomSort]=true
@@ -93,6 +91,8 @@
     [_isCollaped]="isCollapsed" 
     (collapsed)="isCollapsed = !isCollapsed" 
     (refreshedTable)="refreshTable()"
+    (showedInMapSingle)="openMapDialog($event)"
+    (filteredEvent)="filteredTableEvent($event)"
     (showedWOUIAsCarousel)="routeToWoui($event)"    
     (showedPictures)="getReadingReportTitles($event)"
     >
@@ -101,8 +101,8 @@
     <app-carousel-woum *ngIf="showWouImages" 
     [dataSource]="woumInfosDataSource"
     (cancelClicked)="carouselCancelClicked()"
-    (prevClicked)="carouselWOUMPrevItem()"
-    (nextClicked)="carouselWOUMNextItem()"
+    (prevClicked)="carouselPrevItem()"
+    (nextClicked)="carouselNextItem()"
     >
     <app-woum></app-woum>
     </app-carousel-woum>

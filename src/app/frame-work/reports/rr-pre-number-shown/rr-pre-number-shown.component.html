@@ -79,17 +79,17 @@
     </section>
 
     <app-prime-table [hidden]="showWouImages"
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns" 
     [dataSource]="dataSource"
     [_outputFileName]="'rrPreNumber'" 
     [_checkUpName]="'rr-preNumber'" 
-    [_numberOfExtraColumns]="[1,2]"        
+    [_numberOfExtraColumns]="[1,2,3]"        
     [_sessionName]="'rr-preNumber'" 
     [_selectedColumnsToRemember]="'selectedRRPreNumShown'" 
     [_isCustomSort]=true
     (customedSort)="customSort($event)"
     (refreshedTable)="refreshTable()"
+    (showedInMapSingle)="openMapDialog($event)"
+    (filteredEvent)="filteredTableEvent($event)"
     (showedPictures)="getReadingReportTitles($event)"
     (showedWOUIAsCarousel)="routeToWoui($event)"    
     >

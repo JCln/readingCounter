@@ -69,12 +69,14 @@ export class CloseTabService {
   // SEARCH
   saveDataForSearchMoshtarakin: any;
   saveDataForSearchMoshtarakinReq: any;
+  saveDataForSearchProReq: any;
   saveDataForSearchPro: any;
   saveDataForSearchSimple: any;
   // list manager
   saveDataForLMPD: any;
+  saveDataForLMAllReq: any;
   saveDataForLMAll: any;
-  saveDataForLMAll_extra: any;
+  saveDataForLMModifyReq: any;
   saveDataForLMModify: any;
   // WOUI manager
   saveDataForWOUI: any;
@@ -157,7 +159,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished },
     { id: 1, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, url: EN_Routes.wrmsfwu },
-    { id: 1, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },
+    { id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },
     { id: 1, value: ENEssentialsToSave.saveDataForSearchSimple, url: EN_Routes.wrmssimple },
     { id: 1, value: ENEssentialsToSave.saveDataForFNB, url: EN_Routes.wrmfbn },
     { id: 1, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes.wrmlpd },
@@ -178,8 +180,8 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
     { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
     { id: 2, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes['wrmlpd/'] },
-    { id: 2, value: ENEssentialsToSave.saveDataForLMAll, value_2: ENEssentialsToSave.saveDataForLMAll_extra, url: EN_Routes['wrmlall/'] },
-    { id: 2, value: ENEssentialsToSave.saveDataForLMModify, url: EN_Routes.wrmlalltrue },
+    { id: 2, req: ENEssentialsToSave.saveDataForLMAllReq, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes['wrmlall/'] },
+    { id: 2, req: ENEssentialsToSave.saveDataForLMModifyReq, value: ENEssentialsToSave.saveDataForLMModify, url: EN_Routes.wrmlalltrue },
     { id: 2, value: ENEssentialsToSave.saveDataForEditUsers, url: EN_Routes.wrmuedit },
     { id: 2, value: ENEssentialsToSave.saveDataForWOUI, url: EN_Routes.wrmtrackwoui },
     { id: 2, value: ENEssentialsToSave.saveDataForUserLoggins, url: EN_Routes.wrmuallloggins },

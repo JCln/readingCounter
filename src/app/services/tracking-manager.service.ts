@@ -12,7 +12,6 @@ import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { IFollowUpHistory } from '../Interfaces/isearchs';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../Interfaces/itrackings';
 import { EN_Routes } from '../Interfaces/routes.enum';
 import { OffloadModify } from './../classes/offload-modify-type';
@@ -380,18 +379,14 @@ export class TrackingManagerService {
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
-  customizeSelectedColumns = (_selectCols: any) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
-  routeToLMAll = (row: ITracking | IFollowUpHistory) => {
-    this.allListsService.GUid = row.id;
+  routeToLMAll = (row: any) => {
+    this.allListsService.allLists_pageSign.GUid = row.id;
+    this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.router.navigate([EN_Routes.wrmlallfalse]);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
-    this.allListsService.GUid_Modify = dataSource.id;
+    this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
+    this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
     this.router.navigate([EN_Routes.wrmlalltrue]);
   }
   routeTo = (route: string, UUID: string) => {

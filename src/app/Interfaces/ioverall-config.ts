@@ -85,6 +85,7 @@ export enum ENEssentialsToSave {
     saveDataForFollowUpAUX = 'saveDataForFollowUpAUX',
     rSearchMoshtarakinReq = 'rSearchMoshtarakinReq',
     saveDataForSearchMoshtarakin = 'saveDataForSearchMoshtarakin',
+    saveDataForSearchProReq = 'saveDataForSearchProReq',
     saveDataForSearchPro = 'saveDataForSearchPro',
     saveDataForSearchSimple = 'saveDataForSearchSimple',
     saveDataForUserSearch = 'saveDataForUserSearch',
@@ -106,8 +107,10 @@ export enum ENEssentialsToSave {
     saveDataForRRkarkardDaily = 'saveDataForRRkarkardDaily',
     saveDataForRRGIS = 'saveDataForRRGIS',
     saveDataForOffloadModify = 'saveDataForOffloadModify',
-    saveDataForLMAll = 'saveDataForLMAll',
+    saveDataForLMModifyReq = 'saveDataForLMModifyReq',
     saveDataForLMModify = 'saveDataForLMModify',
+    saveDataForLMAll = 'saveDataForLMAll',
+    saveDataForLMAllReq = 'saveDataForLMAllReq',
     saveDataForLMAll_extra = 'saveDataForLMAll_extra',
     saveDataForEditUsers = 'saveDataForEditUsers',
     saveDataForWOUI = 'saveDataForWOUI',
@@ -389,5 +392,5 @@ export interface Theme {
     properties: any
 }
 export enum ENLoginVersion {
-    version = '0.6.4'
+    version = '0.6.5'
 }

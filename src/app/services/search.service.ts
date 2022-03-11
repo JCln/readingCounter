@@ -5,12 +5,12 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENRandomNumbers,
-  ENSelectedColumnVariables,
-  IMasrafStates,
-  IObjectIteratation,
-  ISearchInOrderTo,
-  ITitleValue,
+    ENRandomNumbers,
+    ENSelectedColumnVariables,
+    IMasrafStates,
+    IObjectIteratation,
+    ISearchInOrderTo,
+    ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
@@ -169,15 +169,11 @@ export class SearchService {
     return this.dictionaryWrapperService.getCounterStateDictionary();
   }
   doSearch = (method: ENInterfaces, body: any): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
+        resolve(res);
+      })
+    });
   }
   getProExcel = (method: ENInterfaces, body: any): Promise<any> => {
     try {
@@ -379,7 +375,8 @@ export class SearchService {
     this.router.navigate([EN_Routes.wrmtrackwoui, false, object.id]);
   }
   routeToLMAll = (row: ISearchSimpleOutput) => {
-    this.allListsService.GUid = row.trackingId;
+    this.allListsService.allLists_pageSign.GUid = row.trackingId;
+    this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.router.navigate([EN_Routes.wrmlall, false]);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
@@ -423,5 +420,11 @@ export class SearchService {
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
-
+  showInMapSingleValidation = (dataSource: any): boolean => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return false;
+    }
+    return true;
+  }
 }

@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -21,16 +20,17 @@ import { MapDgComponent } from '../all/map-dg/map-dg.component';
   styleUrls: ['./list-modify.component.scss']
 })
 export class ListModifyComponent extends FactoryONE {
-  isModify: boolean;
-
-  carouselDataSource: IOnOffLoadFlat;
+  dataSource: IOnOffLoadFlat[] = [];
   woumInfosDataSource: IOnOffLoadFlat;
+  carouselDataSource: IOnOffLoadFlat;
+  filterableDataSource: IOnOffLoadFlat[] = [];
+
+  pageSignTrackNumber: number = null;
   showCarousel: boolean = false;
   showWouImages: boolean = false;
   ref: DynamicDialogRef;
 
   rowIndex: number = 0;
-  dataSource: IOnOffLoadFlat[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
@@ -41,30 +41,32 @@ export class ListModifyComponent extends FactoryONE {
   constructor(
     public listManagerService: ListManagerService,
     private router: Router,
-    private _location: Location,
     private dialogService: DialogService,
     private closeTabService: CloseTabService,
-    private allListsService: AllListsService
+    public allListsService: AllListsService
   ) {
     super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {
 
-    if (!this.allListsService.GUid_Modify) {
+    if (!this.allListsService.modifyLists_pageSign.GUid) {
       this.router.navigateByUrl(EN_Routes.wrmtrackoffloaded);
     }
     else {
       if (canRefresh) {
         this.closeTabService.saveDataForLMModify = null;
       }
-      if (this.closeTabService.saveDataForLMModify) {
+      console.log(this.closeTabService.saveDataForLMModify);
+      if (this.closeTabService.saveDataForLMModifyReq === this.allListsService.modifyLists_pageSign.GUid && this.closeTabService.saveDataForLMModify) {
         this.dataSource = this.closeTabService.saveDataForLMModify;
       }
       else {
-        this.dataSource = await this.listManagerService.getLMDataSource(this.allListsService.GUid_Modify);
+        this.dataSource = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.modifyLists_pageSign.GUid);
+        this.closeTabService.saveDataForLMModifyReq = this.allListsService.modifyLists_pageSign.GUid;
+        this.closeTabService.saveDataForLMModify = this.dataSource;
       }
-
+      this.assignToPageSign();
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
       this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
@@ -88,18 +90,21 @@ export class ListModifyComponent extends FactoryONE {
       this.makeHadPicturesToBoolean();
     }
   }
+  filteredTableEvent = (e: any) => {
+    this.filterableDataSource = e;
+  }
   routeToOffload = (event: object) => {
     this.carouselDataSource = event['dataSource'];
     this.rowIndex = event['ri'];
     this.showCarousel = true;
   }
   carouselNextItem = () => {
-    this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
-    this.carouselDataSource = this.dataSource[this.rowIndex];
+    this.rowIndex >= this.filterableDataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
+    this.carouselDataSource = this.filterableDataSource[this.rowIndex];
   }
   carouselPrevItem = () => {
-    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length : this.rowIndex--;
-    this.carouselDataSource = this.dataSource[this.rowIndex];
+    this.rowIndex < 1 ? this.rowIndex = this.filterableDataSource.length - 1 : this.rowIndex--;
+    this.carouselDataSource = this.filterableDataSource[this.rowIndex];
   }
   carouselCancelClicked = () => {
     this.showCarousel = false;
@@ -138,11 +143,11 @@ export class ListModifyComponent extends FactoryONE {
     scrollTo(0, 0);
   }
   carouselWOUMNextItem = () => {
-    this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
+    this.rowIndex >= this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
     this.woumInfosDataSource = this.dataSource[this.rowIndex];
   }
   carouselWOUMPrevItem = () => {
-    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length : this.rowIndex--;
+    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length - 1 : this.rowIndex--;
     this.woumInfosDataSource = this.dataSource[this.rowIndex];
   }
   openMapDialog = (dataSource: any) => {
@@ -157,5 +162,7 @@ export class ListModifyComponent extends FactoryONE {
         this.refreshTable();
     });
   }
-
+  assignToPageSign = () => {
+    this.pageSignTrackNumber = this.dataSource[0].trackNumber;
+  }
 }

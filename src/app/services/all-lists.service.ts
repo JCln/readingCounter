@@ -5,7 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class AllListsService {
 
-  GUid: string;
-  GUid_Modify: string;
+  allLists_pageSign = {
+    GUid: null,
+    listNumber: null
+  };
+  modifyLists_pageSign = {
+    GUid: null,
+    listNumber: null
+  };
 
 }

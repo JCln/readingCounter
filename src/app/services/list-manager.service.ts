@@ -9,7 +9,6 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
-import { CloseTabService } from './close-tab.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
 
@@ -17,8 +16,6 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ListManagerService {
-  private readingListGUID: string;
-  private readingListGUID_extra: string;
   private saveTo: number = 0;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
@@ -57,45 +54,10 @@ export class ListManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private closeTabService: CloseTabService,
     private utilsService: UtilsService,
     private dialog: MatDialog
   ) { }
 
-  whereToSave = (): number => {
-    return this.saveTo == 0 ? this.saveTo = 1 : this.saveTo = 0
-  }
-  nullSavedAllLMSource = () => {
-    this.saveTo === 0 ? this.closeTabService.saveDataForLMAll = null : this.closeTabService.saveDataForLMAll_extra = null
-  }
-  getLMAll = async (trackingId: string): Promise<any> => {
-    if (window.location.href.includes('true')) {
-      if (this.readingListGUID === trackingId)
-        return this.closeTabService.saveDataForLMAll;
-      else {
-        this.readingListGUID = trackingId;
-        this.closeTabService.saveDataForLMAll = await this.getLMDataSource(trackingId);
-        return this.closeTabService.saveDataForLMAll;
-      }
-    }
-    else {
-      if (this.readingListGUID_extra === trackingId)
-        return this.closeTabService.saveDataForLMAll_extra;
-      else {
-        this.readingListGUID_extra = trackingId;
-        this.closeTabService.saveDataForLMAll_extra = await this.getLMDataSource(trackingId);
-        console.log(this.closeTabService.saveDataForLMAll_extra);
-        return this.closeTabService.saveDataForLMAll_extra;
-      }
-    }
-  }
-  getLMDataSource = (trackingId: string): Promise<any> | IOnOffLoadFlat[] => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.ListOffloadedALL, trackingId).subscribe(res => {
-        resolve(res);
-      })
-    });
-  }
   getLMAllZoneDictionary = () => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
@@ -114,7 +76,7 @@ export class ListManagerService {
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
   }
-  getLM = (method: ENInterfaces, trackNumber: number): Promise<any> => {
+  getLM = (method: ENInterfaces, trackNumber: number | string): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(method, trackNumber).subscribe(res => {
         resolve(res);

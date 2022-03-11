@@ -1,1 +1,13 @@
+@import 'variable';
+@import 'input.scss';
 
+.overall-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 23rem));
+  gap: .25rem;
+  direction: rtl;
+
+  @media (min-width: 550px) {
+    justify-content: center;
+  }
+}

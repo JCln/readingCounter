@@ -75,7 +75,7 @@ export class RandomImagesComponent extends FactoryONE {
     this.showCarousel = true;
   }
   carouselNextItem = () => {
-    this.rowIndex > this.allImagesDataSource.imageUrlAndInfos.length - 2 ? this.rowIndex = 0 : this.rowIndex++;
+    this.rowIndex >= this.allImagesDataSource.imageUrlAndInfos.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
   }
   carouselPrevItem = () => {

@@ -1,14 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { SortEvent } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+
+import { MapDgComponent } from '../../manage/list-manager/all/map-dg/map-dg.component';
 
 @Component({
   selector: 'app-rr-locked',
@@ -44,12 +47,12 @@ export class RrLockedComponent extends FactoryONE {
   qotrDictionary: IDictionaryManager[] = [];
 
   dataSource: IOnOffLoadFlat[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
+  filterableDataSource: IOnOffLoadFlat[] = [];
+  ref: DynamicDialogRef;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
+    private dialogService: DialogService,
     private closeTabService: CloseTabService
   ) {
     super();
@@ -105,13 +108,6 @@ export class RrLockedComponent extends FactoryONE {
     this.converts();
     this.closeTabService.saveDataForRRLocked = this.dataSource;
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
   getReadingReportTitles = async ($event) => {
     const a = await this.readingReportManagerService.postById(ENInterfaces.ReadingReportTitles, $event)
     if (a.length) {
@@ -138,13 +134,16 @@ export class RrLockedComponent extends FactoryONE {
     this.showWouImages = true;
     scrollTo(0, 0);
   }
-  carouselWOUMNextItem = () => {
-    this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
-    this.woumInfosDataSource = this.dataSource[this.rowIndex];
+  filteredTableEvent = (e: any) => {
+    this.filterableDataSource = e;
   }
-  carouselWOUMPrevItem = () => {
-    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length : this.rowIndex--;
-    this.woumInfosDataSource = this.dataSource[this.rowIndex];
+  carouselNextItem = () => {
+    this.rowIndex >= this.filterableDataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
+    this.woumInfosDataSource = this.filterableDataSource[this.rowIndex];
+  }
+  carouselPrevItem = () => {
+    this.rowIndex < 1 ? this.rowIndex = this.filterableDataSource.length - 1 : this.rowIndex--;
+    this.woumInfosDataSource = this.filterableDataSource[this.rowIndex];
   }
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {
@@ -164,6 +163,18 @@ export class RrLockedComponent extends FactoryONE {
         result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
 
       return (event.order * result);
+    });
+  }
+  openMapDialog = (dataSource: any) => {
+    if (this.readingReportManagerService.showInMapSingleValidation(dataSource))
+      this.ref = this.dialogService.open(MapDgComponent, {
+        data: dataSource,
+        rtl: true,
+        width: '70%'
+      })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        this.classWrapper();
     });
   }
 }

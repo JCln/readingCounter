@@ -1,3 +1,18 @@
+<section>
+    <div class="overall-info">
+        <div class="input_2">
+            <div class="_key">ش.پیگیری</div>
+            <input [readOnly]="true" class="_value" name="trackNumber"
+                [(ngModel)]="pageSignTrackNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">ش.لیست</div>
+            <input [readOnly]="true" class="_value" name="listNumber"
+                [(ngModel)]="allListsService.modifyLists_pageSign.listNumber">
+        </div>
+    </div>
+</section>
+
 <main style="position: relative; ">
     <app-prime-table [hidden]="showCarousel" 
     [dataSource]="dataSource" 
@@ -14,6 +29,7 @@
     (refreshedTable)="refreshTable()"
     (backedToPrevious)="toPrePage()"
     (routedToOffload)="routeToOffload($event)"
+    (filteredEvent)="filteredTableEvent($event)"
     (showedWOUIAsCarousel)="routeToWoui($event)"
     (showedPictures)="getReadingReportTitles($event)" 
     (showedInMapSingle)="openMapDialog($event)"   
@@ -29,12 +45,12 @@
     <app-offload></app-offload>
     </app-carousel>
 
-    <!-- <app-carousel-woum *ngIf="showWouImages" 
+    <app-carousel-woum *ngIf="showWouImages" 
     [dataSource]="woumInfosDataSource"
     (cancelClicked)="carouselCancelClicked()"
     (prevClicked)="carouselWOUMPrevItem()"
     (nextClicked)="carouselWOUMNextItem()"
     >
     <app-woum></app-woum>
-    </app-carousel-woum> -->
+    </app-carousel-woum>
 </main>

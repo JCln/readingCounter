@@ -2,7 +2,8 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]=_sortOrder
-    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)">
+    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
+    (onFilter)="filterEventTable($event)">
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
 
         <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -190,18 +191,22 @@
                     <div class="tooltip_text_right">حذف نوبتی</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'allComponent' || _checkUpName =='forbidden'"
-                (click)="showInMapSingle(dataSource)">
+            <td *ngIf="_checkUpName == 'search_moshtarak' ||
+             _checkUpName == 'allComponent' ||
+             _checkUpName =='forbidden' ||            
+             _checkUpName =='search_acme'||
+             _checkUpName =='rr-preNumber'||
+             _checkUpName =='rr-locked'" (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
-                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                    <div class="tooltip_text_right">مشاهده روی نقشه</div>
                 </i>
             </td>
             <td *ngIf="dataSource.hasMap &&( _checkUpName == 'lastStates' || _checkUpName == 'simpleSearch')"
                 (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
-                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                    <div class="tooltip_text_right">مشاهده روی نقشه</div>
                 </i>
             </td>
             <td
@@ -269,7 +274,7 @@
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
-            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_outputFileName == 'allLists' &&  _allComponentIsModify">
+            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_allComponentIsModify">
                 <span class="ui-column-title">اصلاح</span>
                 <i class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>

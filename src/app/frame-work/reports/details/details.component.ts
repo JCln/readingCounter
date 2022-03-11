@@ -42,7 +42,6 @@ export class DetailsComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-
     private closeTabService: CloseTabService
   ) {
     super();

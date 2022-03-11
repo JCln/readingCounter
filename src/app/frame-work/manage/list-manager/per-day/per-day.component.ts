@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IListManagerPDHistory, IOffLoadPerDay } from 'interfaces/itrackings';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
@@ -80,7 +81,7 @@ export class PerDayComponent extends FactoryONE {
       })
     )
   }
-  toPrePage = () => this.router.navigate(['m/track/reading']);
+  toPrePage = () => this.router.navigate([EN_Routes.wrmtrackreading]);
   refreshTable = () => {
     return;
   }

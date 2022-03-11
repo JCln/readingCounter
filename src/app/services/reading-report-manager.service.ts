@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -382,27 +382,7 @@ export class ReadingReportManagerService {
   }
   routeToMapGIS = (readingReportGISReq: IReadingReportGISReq) => {
     this.router.navigate([EN_Routes.wr, readingReportGISReq]);
-  }
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
-  }
-  customizeSelectedColumns = (_selectCols: any) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
+  } 
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POST(method, id).toPromise().then(res => {
@@ -497,6 +477,12 @@ export class ReadingReportManagerService {
   verificationFollowUPTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
   }
-
+  showInMapSingleValidation = (dataSource: any): boolean => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return false;
+    }
+    return true;
+  }
 
 }

@@ -75,12 +75,14 @@
   font-size: $font_s;
   font-weight: 600;
   color: var(--primary_5);
+  text-align: center;
 }
 
 ._value {
   font-size: $font_l;
   font-weight: 600;
   color: var(--primary_5);
+  max-width: 95%;
   direction: ltr;
 }
 
