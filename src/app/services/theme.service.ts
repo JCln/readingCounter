@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ENThemeColor, ENThemeName, Theme } from 'interfaces/ioverall-config';
 import { BrowserStorageService } from 'services/browser-storage.service';
 
-import { bedge, dark, light } from '../theme/themes';
+import { bedge, corporate, dark, light } from '../theme/themes';
 import { purple } from './../theme/themes';
 
 @Injectable({
@@ -10,12 +10,13 @@ import { purple } from './../theme/themes';
 })
 export class ThemeService {
   private active: Theme = light;
-  private availableThemes: Theme[] = [light, dark, purple, bedge];
+  private availableThemes: Theme[] = [light, dark, purple, bedge, corporate];
   private colors = [
     { id: 1, color: 0, colorName: 'white' },
     { id: 2, color: 1, colorName: 'rgb(14, 76, 146)' },
     { id: 3, color: 2, colorName: 'rgb(127 ,108, 153)' },
     { id: 4, color: 3, colorName: 'rgb(93 ,80 ,110)' },
+    // { id: 5, color: 4, colorName: 'rgb(247 ,249 ,252)' },
   ];
 
   constructor(
@@ -46,6 +47,9 @@ export class ThemeService {
   }
   setLightTheme(): void {
     this.setTheme(light, ENThemeColor.light);
+  }
+  setCorporateTheme(): void {
+    this.setTheme(corporate, ENThemeColor.corporate);
   }
   setBedgeTheme(): void {
     this.setTheme(bedge, ENThemeColor.bedge);
@@ -89,6 +93,9 @@ export class ThemeService {
         break;
       case ENThemeColor.bedge:
         this.setBedgeTheme();
+        break;
+      case ENThemeColor.corporate:
+        this.setCorporateTheme();
         break;
 
       default:

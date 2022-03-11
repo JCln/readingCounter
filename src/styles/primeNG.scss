@@ -37,11 +37,11 @@
   }
 
   .p-datatable .p-datatable-tbody>tr {
-    background-color: var(--white);
+    background-color: var(--even_grid_rows);
     color: var(--secondary_8);
 
     &:nth-child(even) {
-      background-color: var(--secondary_3);
+      background-color: var(--odd_grid_rows);
     }
   }
 

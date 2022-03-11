@@ -286,6 +286,7 @@ export enum ENThemeColor {
     dark = 1,
     purple = 2,
     bedge = 3,
+    corporate = 4,
 }
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',
