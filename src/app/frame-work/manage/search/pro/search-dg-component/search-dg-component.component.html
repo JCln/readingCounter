@@ -19,7 +19,7 @@
                     <label for="float-input">ناحیه</label>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zone" #zoneId
                         [options]="zoneDictionary" name="_selectedKindId"
-                        [(ngModel)]="searchService.searchReqPro.zoneId" optionLabel="title" [filter]="true"
+                        [(ngModel)]="closeTabService.saveDataForSearchProReq.zoneId" optionLabel="title" [filter]="true"
                         filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
                         (onChange)="getMasterInZone()">
                     </p-dropdown>
@@ -28,7 +28,7 @@
                 <span class="ui-float-label" [hidden]="_isOrderByDate">
                     <label for="float-input">سال</label>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" #year [options]="_years" name="year"
-                        [(ngModel)]="searchService.searchReqPro.year" optionLabel="title" [filter]="true"
+                        [(ngModel)]="closeTabService.saveDataForSearchProReq.year" optionLabel="title" [filter]="true"
                         filterBy="value" optionValue="value" [showClear]="true" placeholder="انتخاب مورد">
                     </p-dropdown>
                 </span>
@@ -45,7 +45,7 @@
                 <span class="ui-float-label" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
                     <label for="float-input">دوره قرائت</label>
                     <p-dropdown [style]="{minWidth: '100%'}" name="period" #period [options]="readingPeriodDictionary"
-                        name="readingPeriodId" [(ngModel)]="searchService.searchReqPro.readingPeriodId"
+                        name="readingPeriodId" [(ngModel)]="closeTabService.saveDataForSearchProReq.readingPeriodId"
                         optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
                         placeholder="انتخاب مورد">
                     </p-dropdown>
@@ -70,36 +70,40 @@
             <article>
                 <h3 class="title">وضعیت مصرف</h3>
                 <p-multiSelect [options]="masrafState" name="masraf"
-                    [(ngModel)]="searchService.searchReqPro.masrafStates" optionLabel="header" optionValue="value"
-                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.masrafStates" optionLabel="header"
+                    optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article>
                 <h3 class="title">گزارش کنتور</h3>
                 <p-multiSelect [options]="counterReportDictionary" name="counterReport"
-                    [(ngModel)]="searchService.searchReqPro.reportIds" optionLabel="title" optionValue="id"
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.reportIds" optionLabel="title" optionValue="id"
                     selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article>
                 <h3 class="title">وضعیت کنتور</h3>
                 <p-multiSelect [options]="counterStateByZoneIdDictionary" name="counterState"
-                    [(ngModel)]="searchService.searchReqPro.counterStateIds" optionLabel="title" optionValue="id"
-                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.counterStateIds" optionLabel="title"
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article>
                 <h3 class="title">کاربری</h3>
                 <p-multiSelect [options]="karbariDictionary" name="karbari"
-                    [(ngModel)]="searchService.searchReqPro.karbariCodes" optionLabel="title" optionValue="id"
-                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.karbariCodes" optionLabel="title"
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
             <article>
                 <h3 class="title">نوبتی ها</h3>
                 <p-multiSelect [options]="fragmentMasterIds" name="fragmentId"
-                    [(ngModel)]="searchService.searchReqPro.fragmentMasterIds" optionLabel="routeTitle" optionValue="id"
-                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.fragmentMasterIds" optionLabel="routeTitle"
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
 

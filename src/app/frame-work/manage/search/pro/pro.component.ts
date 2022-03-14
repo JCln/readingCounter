@@ -31,7 +31,7 @@ export class ProComponent extends FactoryONE {
   ref: DynamicDialogRef;
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public searchService: SearchService,
     private dialogService: DialogService,
   ) {
@@ -76,25 +76,7 @@ export class ProComponent extends FactoryONE {
 
     this.converts();
 
-    // if (canRefresh) {
-    //   // this.nullSavedSource();
-    //   this.connectToServer();
-    // }
-    // if (!MathS.isNull(this.closeTabService.saveDataForSearchPro)) {
-    //   this.dataSource = this.closeTabService.saveDataForSearchPro;
-    //   this.converts();
-    //   return;
-    // }
-    // if (MathS.isNull(this.searchReq)) {
-    //   this.showSearchOptionsDialog();
-    //   this.toDefaultVals();
-    // }
-    // else
-    //   this.connectToServer();
   }
-  // toDefaultVals = () => {
-  //   this.dataSource = [];
-  // }
 
   showSearchOptionsDialog = () => {
     this.ref = this.dialogService.open(SearchDgComponentComponent, {
@@ -104,7 +86,7 @@ export class ProComponent extends FactoryONE {
     this.ref.onClose.subscribe((res) => {
       if (res) {
         this.closeTabService.saveDataForSearchProReq = res;
-        this.classWrapper();
+        this.classWrapper(true);
       }
     });
   }

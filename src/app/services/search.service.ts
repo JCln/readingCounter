@@ -5,12 +5,12 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENRandomNumbers,
-    ENSelectedColumnVariables,
-    IMasrafStates,
-    IObjectIteratation,
-    ISearchInOrderTo,
-    ITitleValue,
+  ENRandomNumbers,
+  ENSelectedColumnVariables,
+  IMasrafStates,
+  IObjectIteratation,
+  ISearchInOrderTo,
+  ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
@@ -34,19 +34,6 @@ export class SearchService {
 
   _isOrderByDate: boolean = true;
 
-  searchReqPro: ISearchProReportInput = {
-    zoneId: null,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    zoneIds: [],
-    year: 1400,
-    reportIds: [],
-    counterStateIds: [],
-    masrafStates: [],
-    karbariCodes: [],
-    fragmentMasterIds: []
-  }
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -71,20 +58,6 @@ export class SearchService {
     readingPeriodId: null,
     year: 1400
   }
-  private _searchReqPro: ISearchProReportInput = {
-    zoneId: null,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    zoneIds: [],
-    year: 1400,
-    reportIds: [],
-    counterStateIds: [],
-    masrafStates: [],
-    karbariCodes: [],
-    fragmentMasterIds: []
-  }
-  private _isValidateByDate: boolean;
   private _searchProExcel: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: true },
     { field: 'trackNumber', header: 'شناسه قبض', isSelected: true },
@@ -105,15 +78,6 @@ export class SearchService {
   /*COLUMNS*/
   columnSearchProExcel = (): IObjectIteratation[] => {
     return this._searchProExcel;
-  }
-  customizeSelectedColumns = (_selectCols: any) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
-  columnGetSearchPro = (): ISearchProReportInput => {
-    return this._searchReqPro;
   }
   /*API CALLS*/
   getSearchTypes = (): Search[] => {
@@ -318,14 +282,13 @@ export class SearchService {
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
     searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
     searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
-    this._searchReqPro = searchReq;
-    if (isValidateByDate == true || isValidateByDate == false)
-      this._isValidateByDate = isValidateByDate;
 
-    if (this._isValidateByDate) {
+    if (isValidateByDate) {
       return this.validationNullPro(searchReq) && this.validationDate(searchReq);
     }
-    return this.validationByReadingPeriod(searchReq);
+    else {
+      return this.validationByReadingPeriod(searchReq);
+    }
   }
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {

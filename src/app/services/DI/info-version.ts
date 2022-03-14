@@ -10,6 +10,11 @@ export const infoVersionItems: IDictionaryManager[] = [
         id: '2',
         title: 'نوبتی',
         isSelected: true
+    },
+    {
+        id: '2',
+        title: 'رفع برخی ایرادات',
+        isSelected: true
     }
 ]
 export class infoVersion {

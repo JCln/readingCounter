@@ -25,7 +25,10 @@ export class DictionaryWrapperService {
   private authLev4Dictionary: any = [];
 
   private counterReportDictionary: any = [];
-  private counterReportByZoneDictionary: any = [];
+  private counterReportByZoneDictionary = {
+    dictionary: null,
+    zoneId: null
+  };
   private counterStateDictionary: any = [];
   private counterStateByZoneIdDictionary = {
     dictionary: null,
@@ -164,10 +167,12 @@ export class DictionaryWrapperService {
     });
   }
   getCounterReportByZoneIdDictionary(zoneId: number): Promise<any> {
+    if (this.counterReportByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.counterReportByZoneDictionary.dictionary))
+      return this.counterReportByZoneDictionary.dictionary;
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.CounterReportByZoneIdDICTIONARY, zoneId).subscribe(res => {
-        this.setCounterReportByZoneDictionary(res);
-        resolve(this.counterReportByZoneDictionary);
+        this.setCounterReportByZoneDictionary(res, zoneId);
+        resolve(res);
       })
     });
   }
@@ -183,22 +188,22 @@ export class DictionaryWrapperService {
 
   }
   getCounterStateByZoneIdDictionary(zoneId: number): Promise<any> {
-    if (this.counterStateByZoneIdDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByZoneIdDictionary))
+    if (this.counterStateByZoneIdDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByZoneIdDictionary.dictionary))
       return this.counterStateByZoneIdDictionary.dictionary;
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId).subscribe(res => {
         this.setCounterStateByZoneIdDictionary(res, zoneId);
-        resolve(this.counterStateByZoneIdDictionary);
+        resolve(res);
       })
     })
   }
   getCounterStateByCodeDictionary(zoneId: number): Promise<any> {
-    if (this.counterStateByCodeDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByCodeDictionary))
+    if (this.counterStateByCodeDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByCodeDictionary.dictionary))
       return this.counterStateByCodeDictionary.dictionary;
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId).subscribe(res => {
         this.setCounterStateByCodeDictionary(res, zoneId);
-        resolve(this.counterStateByCodeDictionary);
+        resolve(res);
       })
     });
   }
@@ -299,8 +304,9 @@ export class DictionaryWrapperService {
   private setCounterReportDictionary(v: any) {
     this.counterReportDictionary = v;
   }
-  private setCounterReportByZoneDictionary(v: any) {
-    this.counterReportByZoneDictionary = v;
+  private setCounterReportByZoneDictionary(v: any, id: number) {
+    this.counterReportByZoneDictionary.dictionary = v;
+    this.counterReportByZoneDictionary.zoneId = id;
   }
   private setCounterStateDictionary(v: any) {
     this.counterStateDictionary = v;
@@ -340,7 +346,8 @@ export class DictionaryWrapperService {
     this.authLev3Dictionary = [];
     this.authLev4Dictionary = [];
     this.counterReportDictionary = [];
-    this.counterReportByZoneDictionary = [];
+    this.counterReportByZoneDictionary.dictionary = [];
+    this.counterReportByZoneDictionary.zoneId = null;
     this.counterStateDictionary = [];
     this.counterStateByZoneIdDictionary.dictionary = [];
     this.counterStateByZoneIdDictionary.zoneId = null;

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
+import { ISearchProReportInput } from 'interfaces/search';
 
 import { EN_Routes } from '../Interfaces/routes.enum';
 
@@ -69,7 +70,19 @@ export class CloseTabService {
   // SEARCH
   saveDataForSearchMoshtarakin: any;
   saveDataForSearchMoshtarakinReq: any;
-  saveDataForSearchProReq: any;
+  saveDataForSearchProReq: ISearchProReportInput = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    readingPeriodId: null,
+    zoneIds: [],
+    year: 1400,
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    fragmentMasterIds: []
+  }
   saveDataForSearchPro: any;
   saveDataForSearchSimple: any;
   // list manager
