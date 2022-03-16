@@ -197,6 +197,7 @@
              _checkUpName =='search_acme'||
              _checkUpName =='searchPro'||
              _checkUpName =='rr-preNumber'||
+             _checkUpName =='assess_pre'||
              _checkUpName =='rr-locked'" (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
@@ -268,6 +269,7 @@
             || _outputFileName == 'searchMosh'
             || _outputFileName == 'rrDetails'            
             || _outputFileName == 'trv'
+            || _outputFileName == 'assess_pre'
             || _outputFileName == 'trvDiff'            
             )&& !_allComponentIsModify" (click)="searchService.routeToWoui(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>

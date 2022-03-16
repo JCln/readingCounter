@@ -120,10 +120,7 @@ export class FragmentManagerService {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
-        resolve(res))
-    });
+    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
   }
 
   /* VALIDATION */

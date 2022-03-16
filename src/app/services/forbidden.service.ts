@@ -62,10 +62,7 @@ export class ForbiddenService {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
   getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
-        resolve(res))
-    });
+    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
   }
   receiveFromDateJalali = (variable: ENForbidden, $event: string) => {
     this[variable].fromDate = $event;

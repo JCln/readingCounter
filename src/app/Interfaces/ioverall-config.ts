@@ -70,6 +70,7 @@ export enum ENEssentialsToSave {
     saveDataForImportDynamic = 'saveDataForImportDynamic',
     saveDataForImportErrors = 'saveDataForImportErrors',
     saveDataForAssessPre = 'saveDataForAssessPre',
+    saveDataForAssessPreReq = 'saveDataForAssessPre',
     saveDataForAssessAdd = 'saveDataForAssessAdd',
     saveDataForSimafaReadingPrograms = 'saveDataForSimafaReadingPrograms',
     saveDataForSimafaBatch = 'saveDataForSimafaBatch',

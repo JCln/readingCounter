@@ -1,11 +1,67 @@
-<app-collapsable [_isCollapsed]=_isCollapsed (_clicked)=" _isCollapsed = !_isCollapsed">
+<app-collapsable [_isReversed]="true" [_isCollapsed]=importDynamicService._assessPreCollapse
+    (_clicked)="importDynamicService._assessPreCollapse = !importDynamicService._assessPreCollapse">
 </app-collapsable>
-<form #form="ngForm" *ngIf="!_isCollapsed" (ngSubmit)="showSearchOptionsDialog()" class="insert_track">
-    <div class="input_2">
-        <div class="_key">شماره لیست</div>
-        <input class="_value" name="listNumber" [(ngModel)]="importDynamicService.AssessPreReq.listNumber">
-    </div>
-    <button type="submit" class="btn_1">مشاهده</button>
+
+<form #form="ngForm" *ngIf="importDynamicService._assessPreCollapse" (ngSubmit)="editCloseData()" class="insert_track">
+
+    <main class="main_content">
+        <section class="_toselect">
+            <div class="input_2">
+                <div class="_key">شماره لیست</div>
+                <input class="_value" name="listNumber"
+                    [(ngModel)]="closeTabService.saveDataForAssessPreReq.listNumber">
+            </div>
+            <section class="__content">
+                <span class="ui-float-label">
+                    <label for="float-input">ناحیه</label>
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zone" #zoneId
+                        [options]="zoneDictionary" name="_selectedKindId"
+                        [(ngModel)]="closeTabService.saveDataForAssessPreReq.zoneId" optionLabel="title" [filter]="true"
+                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
+                        (onChange)="getMasterInZone()">
+                    </p-dropdown>
+                </span>
+            </section>
+        </section>
+
+        <section class="_more_options">
+
+            <article *ngIf="masrafState">
+                <h3 class="title">وضعیت مصرف</h3>
+                <p-multiSelect [options]="masrafState" name="masraf"
+                    [(ngModel)]="closeTabService.saveDataForAssessPreReq.masrafStates" optionLabel="header"
+                    optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+            <article *ngIf="counterReportDictionary.length">
+                <h3 class="title">گزارش کنتور</h3>
+                <p-multiSelect [options]="counterReportDictionary" name="counterReport"
+                    [(ngModel)]="closeTabService.saveDataForAssessPreReq.reportIds" optionLabel="title" optionValue="id"
+                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+            <article *ngIf="counterStateByZoneIdDictionary.length">
+                <h3 class="title">وضعیت کنتور</h3>
+                <p-multiSelect [options]="counterStateByZoneIdDictionary" name="counterState"
+                    [(ngModel)]="closeTabService.saveDataForAssessPreReq.counterStateIds" optionLabel="title"
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+            <article *ngIf="karbariDictionary.length">
+                <h3 class="title">کاربری</h3>
+                <p-multiSelect [options]="karbariDictionary" name="karbari"
+                    [(ngModel)]="closeTabService.saveDataForAssessPreReq.karbariCodes" optionLabel="title"
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+
+        </section>
+
+    </main>
+    <button class="btn_2_o" type="submit">جستجو</button>
 </form>
 
 <form #form="ngForm" *ngIf="dataSource.length" (ngSubmit)="connectToServer()">
@@ -49,19 +105,9 @@
     </section>
 </form>
 
-<app-prime-table 
-[_selectCols]="_selectCols" 
-[_selectedColumns]="_selectedColumns" 
-[dataSource]="dataSource"    
-[_outputFileName]="'assess_pre'" 
-[_checkUpName]="'assess_pre'" 
-[_numberOfExtraColumns]="[1]"
-[_canShowButton]="_canShowAssessButton" 
-[_selectedColumnsToRemember]="'selectedListManagerAssess'"
-[_sessionName]="'assess_pre'" 
-(refreshedTable)="refreshTable()"
-(showSearchedOptionsDialog)="showSearchOptionsDialog()" 
-(registeredAssess)="registerAssessAdd()"
-(showedPictures)="getReadingReportTitles($event)"
->
+<app-prime-table [dataSource]="dataSource" [_outputFileName]="'assess_pre'" [_checkUpName]="'assess_pre'"
+    [_numberOfExtraColumns]="[1, 2, 3]" [_canShowButton]="_canShowAssessButton"
+    [_selectedColumnsToRemember]="'selectedListManagerAssess'" [_sessionName]="'assess_pre'"
+    (refreshedTable)="refreshTable()" (registeredAssess)="registerAssessAdd()"
+    (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>

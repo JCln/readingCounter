@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import { ISearchProReportInput } from 'interfaces/search';
 
@@ -65,6 +66,14 @@ export class CloseTabService {
   saveDataForImportErrors: any;
   saveDataForSimafaBatch: any;
   saveDataForSimafaReadingPrograms: any;
+  saveDataForAssessPreReq: IAssessPreDisplayDtoSimafa = {
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    zoneId: null,
+    listNumber: ''
+  };
   saveDataForAssessPre: any;
   saveDataForAssessAdd: any;
   // SEARCH
@@ -159,7 +168,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForZoneBound, url: EN_Routes.wrmzszb },
     { id: 1, value: ENEssentialsToSave.saveDataForImportDynamic, url: EN_Routes.wrimpimd },
     { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: EN_Routes.wrimperr },
-    { id: 1, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
+    { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
     { id: 1, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg },
     { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafabatch },

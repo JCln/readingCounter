@@ -29,6 +29,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ImportDynamicService {
+  _assessPreCollapse: boolean = true;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   importDynamicValue: IImportDynamicDefault;
   ENImportDatas = ENImportDatas;
@@ -78,14 +79,6 @@ export class ImportDynamicService {
     toDate: null,
     counterReaderId: '',
     readingPeriodId: null
-  }
-  AssessPreReq: IAssessPreDisplayDtoSimafa = {
-    reportIds: [],
-    counterStateIds: [],
-    masrafStates: [],
-    karbariCodes: [],
-    zoneId: null,
-    listNumber: ''
   }
 
   constructor(
@@ -482,10 +475,7 @@ export class ImportDynamicService {
     });
   }
   getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
-        resolve(res))
-    });
+    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
   }
   getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
@@ -520,15 +510,7 @@ export class ImportDynamicService {
     }
   }
   getReadingConfigDefaults = (zoneId: number): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.readingConfigDefaultByZoneId, zoneId).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch {
-      console.error(e => e);
-    }
+    return this.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(zoneId);
   }
   getMasrafStates = () => {
     return IMasrafStates;

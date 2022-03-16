@@ -1,17 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
+import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITHV } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
+import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
-import { AssesspreDgComponent } from './assesspre-dg/assesspre-dg.component';
+import { MapDgComponent } from '../../manage/list-manager/all/map-dg/map-dg.component';
 
 @Component({
   selector: 'app-assess-pre',
@@ -20,29 +21,28 @@ import { AssesspreDgComponent } from './assesspre-dg/assesspre-dg.component';
 })
 export class AssessPreComponent extends FactoryONE {
 
-  _empty_message: string = '';
-  _isCollapsed: boolean = false;
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   readingConfigDefault: IReadingConfigDefault;
+  masrafState: ITHV[] = []
   dataSource: IOnOffLoadFlat[] = [];
-  assessPreReq: IAssessPreDisplayDtoSimafa;
+  ref: DynamicDialogRef;
+
   zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
+  counterReportDictionary: IDictionaryManager[] = [];
+  counterStateByZoneIdDictionary: IDictionaryManager[] = [];
+
   userCounterReaderDictionary: IDictionaryManager[] = [];
-  ref: DynamicDialogRef;
   _canShowAssessButton: boolean = true;
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public importDynamicService: ImportDynamicService,
-    private dialogService: DialogService
+    private listManagerService: ListManagerService,
+    private dialogService: DialogService,
   ) {
     super();
   }
@@ -55,7 +55,6 @@ export class AssessPreComponent extends FactoryONE {
     this.importDynamicService._assessAddReq.imagePercent = rcd.defaultImagePercent;
   }
   converts = () => {
-    this._empty_message = EN_messages.notFound;
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
@@ -67,16 +66,13 @@ export class AssessPreComponent extends FactoryONE {
     this.importDynamicService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    this.dataSource = await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessPre, this.assessPreReq);
+    this.dataSource = await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
     this.makeDataSourceOptionsChecked();
-    this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.assessPreReq.zoneId);
-    this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.assessPreReq.zoneId);
-    this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.assessPreReq.zoneId);
-    this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.assessPreReq.zoneId);
-    this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
+
     this.karbariDictionaryCode = await this.importDynamicService.getKarbariByCodeDictionary();
     this.qotrDictionary = await this.importDynamicService.getQotrDictionary();
 
+    this.getMasterInZone();
     this.converts();
     this.insertReadingConfigDefaults(this.readingConfigDefault);
     this.importDynamicService.makeHadPicturesToBoolean(this.dataSource);
@@ -85,54 +81,41 @@ export class AssessPreComponent extends FactoryONE {
   }
   nullSavedSource = () => this.closeTabService.saveDataForAssessPre = null;
   canOpenSearchDialog = () => {
-    if (MathS.isNull(this.importDynamicService.AssessPreReq.listNumber)) {
+    if (MathS.isNull(this.closeTabService.saveDataForAssessPreReq.listNumber)) {
       this.importDynamicService.snackMessage(EN_messages.insert_listNumber);
       return false;
     }
-    this.importDynamicService.AssessPreReq.listNumber = MathS.trimation(this.importDynamicService.AssessPreReq.listNumber);
+    this.closeTabService.saveDataForAssessPreReq.listNumber = MathS.trimation(this.closeTabService.saveDataForAssessPreReq.listNumber);
     return true;
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.nullSavedSource();
-      // is there any value to call apis
-      if (this.importDynamicService.AssessPreReq.listNumber !== '') {
-        this.connectToServer();
-        return;
-      }
+      this.closeTabService.saveDataForAssessPre = null;
     }
-    if (MathS.isNull(this.closeTabService.saveDataForAssessPre)) {
-      this.showSearchOptionsDialog();
-    }
-    else {
+    if (this.closeTabService.saveDataForAssessPre) {
       this.dataSource = this.closeTabService.saveDataForAssessPre;
     }
-    this.converts();
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  toDefaultVals = () => {
-    this.dataSource = [];
-  }
 
-  showSearchOptionsDialog = () => {
-    if (this.canOpenSearchDialog()) {
-      this.ref = this.dialogService.open(AssesspreDgComponent, {
-        rtl: true,
-        width: '90%'
-      })
-      this.ref.onClose.subscribe((res: IAssessPreDisplayDtoSimafa) => {
-        if (res) {
-          this.assessPreReq = res;
-          this.connectToServer();
-        }
-      });
+    this.getMasterInZone();
+  }
+  getMasterInZone = async () => {
+    this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
+    this.masrafState = this.importDynamicService.getMasrafStates();
+    this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();
+
+    if (this.closeTabService.saveDataForAssessPreReq.zoneId) {
+      this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.counterStateDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.counterStateByCodeDictionary = await this.importDynamicService.getCounterStateByCodeDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.counterReportDictionary = await this.importDynamicService.getCounterReportByZoneDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
+      this.counterStateByZoneIdDictionary = await this.importDynamicService.getCounterStateByZoneDictionary(this.closeTabService.saveDataForAssessPreReq.zoneId);
     }
+  }
+  editCloseData() {
+    this.closeTabService.saveDataForAssessPreReq.listNumber = MathS.trimation(this.closeTabService.saveDataForAssessPreReq.listNumber);
+    if (this.importDynamicService.verificationAssessPre(this.closeTabService.saveDataForAssessPreReq))
+      this.connectToServer();
   }
   getOnOffLoadIdsFromDataSource = () => {
     let a: any[] = [];
@@ -164,4 +147,17 @@ export class AssessPreComponent extends FactoryONE {
       item.isSelected = true;
     })
   }
+  openMapDialog = (dataSource: any) => {
+    if (this.listManagerService.showInMapSingleValidation(dataSource))
+      this.ref = this.dialogService.open(MapDgComponent, {
+        data: dataSource,
+        rtl: true,
+        width: '70%'
+      })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        this.refreshTable();
+    });
+  }
+
 }
