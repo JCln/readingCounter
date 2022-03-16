@@ -308,6 +308,7 @@ export enum ENSelectedColumnVariables {
     selectedlastStates = 'lastStates',
     selectedUsersAll = 'userAll',
     selectedListManagerAll = 'allLists',
+    selectedGeneralModify = 'generalListModify',
     selectedListManagerModify = 'ModifyList',
     selectedListManagerAssess = 'assess_pre',
     selectedListManagerMosh = 'searchMosh',

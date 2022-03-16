@@ -232,6 +232,12 @@
                     <div class="tooltip_text_right">مشاهده(اصلاح) لیست</div>
                 </i>
             </td>
+            <td *ngIf="_outputFileName == 'offloaded'" (click)="routeToOffloadGeneralModify(dataSource)">
+                <span class="ui-column-title">مشاهده (اصلاح) کلی لیست</span>
+                <i class="tooltip p_icons pi pi-info-circle">
+                    <div class="tooltip_text_right">مشاهده(اصلاح) کلی لیست</div>
+                </i>
+            </td>
             <td *ngIf="_outputFileName == 'offloaded'" (click)="backToReading(dataSource.id,ri)">
                 <span class="ui-column-title">بازگشت به درحال قرائت</span>
                 <i class="tooltip p_icons pi pi-step-backward">

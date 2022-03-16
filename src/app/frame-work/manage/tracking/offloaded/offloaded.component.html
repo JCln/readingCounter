@@ -5,13 +5,14 @@
     [_outputFileName]="'offloaded'"
     [_checkUpName]="'offloaded'"
     [_sortField]="'insertDateJalali'"    
-    [_numberOfExtraColumns]="[1, 2, 3]"
+    [_numberOfExtraColumns]="[1, 2, 3 , 4]"
     [_calculableSUM]=true
     [_selectedColumnsToRemember]="'selectedTrackOffloaded'"
     [_sessionName]="'offloaded-session'"
     (refreshedTable)="refreshTable()"
     (downloadedOutputSingle)="downloadOutputSingle($event)"        
     (routeedToOffloadModify)="routeToOffloadModify($event)"        
+    (routedToOffloadGeneralModify)="routeToOffloadGeneralModify($event)"        
     (backedToReading)="backToReading($event)"        
  > 
 </app-prime-table>

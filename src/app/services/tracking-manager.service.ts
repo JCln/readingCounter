@@ -389,6 +389,11 @@ export class TrackingManagerService {
     this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
     this.router.navigate([EN_Routes.wrmlalltrue]);
   }
+  routeToOffloadGeneralModify = (dataSource: ITracking) => {
+    this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
+    this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
+    this.router.navigate([EN_Routes.wrmlGeneralModify]);
+  }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);
   }

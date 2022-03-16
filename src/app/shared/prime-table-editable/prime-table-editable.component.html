@@ -1,8 +1,9 @@
 <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder" editMode="row"
-    dataKey="id" #dtable>
+    stateStorage="session" (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort"
+    (sortFunction)="customSort($event)" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
+    editMode="row" dataKey="id" #dtable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -149,6 +150,30 @@
                         </ng-template>
                     </ng-template>
                 </ng-template>
+            </td>
+            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_checkUpName =='generalListModify'">
+                <span class="ui-column-title">اصلاح کلی</span>
+                <i class="tooltip p_icons pi pi-pencil">
+                    <div class="tooltip_text_right">اصلاح کلی</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName =='generalListModify'" (click)="showInMapSingle(dataSource)">
+                <span class="ui-column-title">مشاهده روی نقشه</span>
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right">مشاهده روی نقشه</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'generalListModify'" (click)="showWOUIAsCarousel(dataSource,ri)">
+                <span class="ui-column-title">بررسی عکس/صوت</span>
+                <i class="tooltip p_icons fas fa-camera">
+                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'generalListModify'">
+                <span class="ui-column-title">نمایش گزارش بازرسی</span>
+                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
+                    <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
+                </i>
             </td>
             <td>
                 <span class="ui-column-title">ویرایش</span>

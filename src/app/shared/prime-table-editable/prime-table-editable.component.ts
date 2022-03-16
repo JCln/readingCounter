@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -35,6 +36,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Input() _isInRowEditing: boolean = false;
   @Input() _dictionaryName: string = '';
   @Input() _secondDictionaryName: string = '';
+  @Input() _isCustomSort: boolean = false;
 
   @Input() _hasSaveColumns: boolean = true;
   @Input() newRow: object;
@@ -42,6 +44,13 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Input() dictionary = new EventEmitter<any>();
   @Input() secondDictionary = new EventEmitter<any>();
 
+  @Output() backedToPrevious = new EventEmitter<any>();
+  @Output() filteredEvent = new EventEmitter<any>();
+  @Output() showedWOUIAsCarousel = new EventEmitter<any>();
+  @Output() showedInMapSingle = new EventEmitter<any>();
+  @Output() showedPictures = new EventEmitter<any>();
+  @Output() routedToOffload = new EventEmitter<any>();
+  @Output() customedSort = new EventEmitter<any>();
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() onRowEditedInit = new EventEmitter<any>();
   @Output() onRowEditedSave = new EventEmitter<any>();
@@ -103,6 +112,27 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   routeToParent = () => {
     this.routedToParent.emit();
+  }
+  backToPrevious = () => {
+    this.backedToPrevious.emit(true);
+  }
+  routeToOffload = (dataSource: object, ri: number) => {
+    this.routedToOffload.emit({ dataSource, ri });
+  }
+  filterEventTable(e: Table) {
+    this.filteredEvent.emit(e.filteredValue);
+  }
+  showWOUIAsCarousel = (dataSource: any, ri: number) => {
+    this.showedWOUIAsCarousel.emit({ dataSource, ri });
+  }
+  showPictures = ($event) => {
+    this.showedPictures.emit($event);
+  }
+  showInMapSingle = (dataSource: object) => {
+    this.showedInMapSingle.emit(dataSource);
+  }
+  customSort = (dataSource: any) => {
+    this.customedSort.emit(dataSource);
   }
 
 }

@@ -65,6 +65,9 @@ export class OffloadedComponent extends FactoryONE {
   routeToOffloadModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadModify(dataSource);
   }
+  routeToOffloadGeneralModify = (dataSource: ITracking) => {
+    this.trackingManagerService.routeToOffloadGeneralModify(dataSource);
+  }
   backToReading = async (rowDataAndIndex: object) => {
     if (await this.trackingManagerService.TESTbackToConfirmDialog(rowDataAndIndex['dataSource'], EN_messages.toReading)) {
       this.refetchTable(rowDataAndIndex['ri']);

@@ -1,0 +1,39 @@
+<section>
+    <div class="overall-info">
+        <div class="input_2">
+            <div class="_key">ش.پیگیری</div>
+            <input [readOnly]="true" class="_value" name="trackNumber"
+                [(ngModel)]="pageSignTrackNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">ش.لیست</div>
+            <input [readOnly]="true" class="_value" name="listNumber"
+                [(ngModel)]="allListsService.modifyLists_pageSign.listNumber">
+        </div>
+    </div>
+</section>
+
+<main style="position: relative; ">
+    <app-prime-table-editable [hidden]="showCarousel" 
+    [dataSource]="dataSource" 
+    [_outputFileName]="'generalListModify'"
+    [_checkUpName]="'generalListModify'"
+    [_sessionName]="'generalListModify'"
+    [_selectedColumnsToRemember]="'selectedGeneralModify'"
+    [_numberOfExtraColumns]="[1,2,3]"    
+    [_backToPreviousEnabled]=true
+    [_backToPreviousText]="'بازگشت به صفحه قبلی'"
+    (customedSort)="listManagerService.customSort($event)"
+    (refreshedTable)="refreshTable()"
+    (backedToPrevious)="toPrePage()"
+    (routedToOffload)="routeToOffload($event)"
+    (filteredEvent)="filteredTableEvent($event)"
+    (showedWOUIAsCarousel)="routeToWoui($event)"
+    (showedPictures)="getReadingReportTitles($event)" 
+    (showedInMapSingle)="openMapDialog($event)"   
+    (onRowEditedInit)="onRowEditInit($event)"
+    (onRowEditedSave)="onRowEditSave($event)"
+    (onRowEditedCancel)="onRowEditCancel()"    
+    > 
+    </app-prime-table-editable>    
+</main>
