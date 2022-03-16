@@ -195,6 +195,7 @@
              _checkUpName == 'allComponent' ||
              _checkUpName =='forbidden' ||            
              _checkUpName =='search_acme'||
+             _checkUpName =='searchPro'||
              _checkUpName =='rr-preNumber'||
              _checkUpName =='rr-locked'" (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
@@ -243,7 +244,7 @@
                 </i>
             </td>
             <td
-                *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'allComponent' || _checkUpName == 'assess_pre' || _checkUpName == 'rr-locked' || _checkUpName == 'rr-preNumber'">
+                *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme'|| _checkUpName == 'searchPro' || _checkUpName == 'allComponent' || _checkUpName == 'assess_pre' || _checkUpName == 'rr-locked' || _checkUpName == 'rr-preNumber'">
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>

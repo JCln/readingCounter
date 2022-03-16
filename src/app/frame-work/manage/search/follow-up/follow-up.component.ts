@@ -58,17 +58,16 @@ export class FollowUpComponent extends FactoryONE {
     this.insertToDesc();
   }
   connectToServer = async () => {
-    if (!this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber))
-      return;
+    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber)) {
+      this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
+      if (this.trackingManagerService.isValidationNull(this.dataSource))
+        return;
+      this.closeTabService.saveDataForFollowUp = this.dataSource;
+      this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber.toString());
+      this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
+      this.makeConfigs();
 
-    this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
-    if (this.trackingManagerService.isValidationNull(this.dataSource))
-      return;
-    this.closeTabService.saveDataForFollowUp = this.dataSource;
-    this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber.toString());
-    this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
-    this.makeConfigs();
-
+    }
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -126,6 +125,7 @@ export class FollowUpComponent extends FactoryONE {
     this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[this.changeHsty.length - 1].insertDateJalali, this.dataSourceAUX.overalDistance, true);
   }
   routeToLMAll = (row: IFollowUpHistory) => {
+    row.listNumber = this.dataSourceAUX.listNumber;
     this.trackingManagerService.routeToLMAll(row);
   }
   ngOnInit(): void { return; }

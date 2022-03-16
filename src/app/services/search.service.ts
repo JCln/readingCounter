@@ -29,6 +29,7 @@ import { FollowUpService } from './follow-up.service';
   providedIn: 'root'
 })
 export class SearchService {
+  _searchProCollapse: boolean = true;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
 
@@ -109,12 +110,8 @@ export class SearchService {
   getReadingPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
-  getByQuoteId = (method: ENInterfaces, id: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, id).toPromise().then(res => {
-        resolve(res);
-      })
-    });
+  getFragmentMasterDictionary = (zoneId: number) => {
+    return this.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(zoneId);
   }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
@@ -295,20 +292,6 @@ export class SearchService {
       if (item.newRate > 0)
         item.newRate = parseFloat(MathS.getRange(item.newRate))
       item.preAverage = +MathS.getRange(item.preAverage);
-    })
-  }
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
     })
   }
   getYears = (): ITitleValue[] => {

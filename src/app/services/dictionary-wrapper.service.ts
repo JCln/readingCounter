@@ -29,6 +29,10 @@ export class DictionaryWrapperService {
     dictionary: null,
     zoneId: null
   };
+  private fragmentMasterByZoneDictionary = {
+    dictionary: null,
+    zoneId: null
+  };
   private counterStateDictionary: any = [];
   private counterStateByZoneIdDictionary = {
     dictionary: null,
@@ -176,6 +180,17 @@ export class DictionaryWrapperService {
       })
     });
   }
+  getFragmentMasterByZoneIdDictionary(zoneId: number): Promise<any> {
+    if (this.fragmentMasterByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.fragmentMasterByZoneDictionary.dictionary))
+      return this.fragmentMasterByZoneDictionary.dictionary;
+
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.fragmentMasterInZone, zoneId).toPromise().then(res => {
+        this.setFragmentMasterByZoneDictionary(res, zoneId);
+        resolve(res);
+      })
+    });
+  }
   getCounterStateDictionary(): Promise<any> {
     if (!MathS.isNull(this.counterStateDictionary))
       return this.counterStateDictionary;
@@ -307,6 +322,10 @@ export class DictionaryWrapperService {
   private setCounterReportByZoneDictionary(v: any, id: number) {
     this.counterReportByZoneDictionary.dictionary = v;
     this.counterReportByZoneDictionary.zoneId = id;
+  }
+  private setFragmentMasterByZoneDictionary(v: any, id: number) {
+    this.fragmentMasterByZoneDictionary.dictionary = v;
+    this.fragmentMasterByZoneDictionary.zoneId = id;
   }
   private setCounterStateDictionary(v: any) {
     this.counterStateDictionary = v;

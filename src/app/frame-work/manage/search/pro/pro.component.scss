@@ -1,4 +1,4 @@
-@import 'variable.scss';
+@import 'primeNG.scss';
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
@@ -29,10 +29,6 @@ section.content {
 
 .btn_2_o {
   font-family: $font_family;
-}
-
-h2 {
-  color: var(--secondary_6);
 }
 
 h3 {
@@ -87,4 +83,157 @@ footer {
 
 [hidden] {
   display: none;
+}
+
+form {
+  font-family: $font_family;
+  margin: 0;
+}
+
+.main_content {
+  display: grid;
+  direction: rtl;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_2);
+  text-align: center;
+  padding: .5rem 0 5rem 0.2rem;
+  border-radius: $border_15;
+  gap: .2rem;
+}
+
+._toselect {
+  grid-column: 1/5;
+  background: var(--white);
+  border: $border_5;
+
+  .__content {
+    gap: $font_05;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+._more_options {
+  grid-column: 5/10;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  justify-content: center;
+  background-color: var(--white);
+  border-radius: 5px;
+
+  @media (max-width: 780px) {
+    margin-top: $font_xs;
+    grid-column: 1/6;
+  }
+
+  @media (max-width: 550px) {
+    margin-top: 2rem;
+  }
+
+}
+
+h2 {
+  color: var(--primary_3);
+}
+
+app-date-jalali {
+  width: 100%;
+  height: 2.8rem;
+  background: var(--white);
+  border-radius: 9px;
+  border: 1px solid var(--secondary_3_spec);
+}
+
+span label {
+  margin-left: $font_05;
+  color: var(--secondary_8);
+}
+
+.ui-float-label {
+  display: grid;
+  font-size: $font_m;
+  font-weight: 600;
+  padding: .3rem 0.1rem;
+  border-radius: 7px;
+  background: var(--secondary_3_spec);
+}
+
+.title {
+  color: var(--primary_2);
+  text-align: center;
+}
+
+article {
+  padding: $font_05;
+  border-radius: $border_15;
+  background-color: var(--secondary_3_spec);
+  margin: 0.1rem;
+}
+
+.btn_2_o {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: $font_05 auto;
+  font-family: $font_family;
+  width: 10rem;
+}
+
+hr {
+  margin-bottom: $font_xs;
+}
+
+.p-dropdown {
+  width: 100%;
+  border-radius: 5px;
+  height: 3.35rem;
+}
+
+[hidden] {
+  display: none;
+}
+
+
+// materials 
+.radio_button {
+  font-size: $font_s;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--secondary_6);
+  margin: 0 2rem;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $font_xs;
+}
+
+::ng-deep {
+  .mat-checkbox-layout {
+    .mat-checkbox-label {
+      margin: 0 $font_05;
+      font-size: $font_s;
+      font-weight: 600;
+      color: var(--primary_5);
+      line-height: 2;
+      border-radius: $border_15;
+      font-family: $font_family;
+    }
+  }
+
+  .mat-radio-label-content {
+    padding-right: $font_05 !important;
+    color: var(--thirdy_1_spec);
+  }
+}
+
+// dialog conf
+:host ::ng-deep {
+  .p-dialog .p-dialog-header {
+    background-color: var(--thirdy_1_spec);
+    direction: rtl;
+  }
 }

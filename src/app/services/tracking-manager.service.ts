@@ -380,6 +380,8 @@ export class TrackingManagerService {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
   routeToLMAll = (row: any) => {
+    console.log(row);
+    
     this.allListsService.allLists_pageSign.GUid = row.id;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.router.navigate([EN_Routes.wrmlallfalse]);

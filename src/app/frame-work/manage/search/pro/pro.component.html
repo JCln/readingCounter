@@ -1,14 +1,134 @@
+<app-collapsable [_isReversed]="true" [_isCollapsed]=searchService._searchProCollapse
+    (_clicked)=" searchService._searchProCollapse = !searchService._searchProCollapse">
+</app-collapsable>
 
-<app-prime-table     
-[dataSource]="dataSource" 
-[_outputFileName]="'searchPro'"
-[_checkUpName]="'search_acme'"
-[_numberOfExtraColumns]="[1,2,3]"
-[_sessionName]="'search_acme'"
-[_selectedColumnsToRemember]="'selectedListManagerPro'"
-(refreshedTable)="refreshTable()"
-(showedPictures)="getReadingReportTitles($event)"
-(showedInMapSingle)="openMapDialog($event)"
-(showSearchedOptionsDialog)= "showSearchOptionsDialog()"
-> 
+<form #form="ngForm" *ngIf="searchService._searchProCollapse" (ngSubmit)="connectToServer()">
+    <main class="main_content">
+        <section class="_toselect">
+
+            <section class="order_by">
+                <h2>جستجو بر اساس</h2>
+                <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
+                    name="_isOrderByDate">
+                    <mat-radio-button class="radio_button" *ngFor="let orderType of searchService.searchInOrderTo"
+                        [value]="orderType.isSelected">
+                        {{orderType.title}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </section>
+            <hr>
+
+            <section class="__content">
+                <span class="ui-float-label">
+                    <label for="float-input">ناحیه</label>
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zone" #zoneId
+                        [options]="zoneDictionary" name="_selectedKindId"
+                        [(ngModel)]="closeTabService.saveDataForSearchProReq.zoneId" optionLabel="title" [filter]="true"
+                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
+                        (onChange)="getMasterInZone()">
+                    </p-dropdown>
+                </span>
+
+                <span class="ui-float-label" [hidden]="_isOrderByDate">
+                    <label for="float-input">سال</label>
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" #year [options]="_years" name="year"
+                        [(ngModel)]="closeTabService.saveDataForSearchProReq.year" optionLabel="title" [filter]="true"
+                        filterBy="value" optionValue="value" [showClear]="true" placeholder="انتخاب مورد">
+                    </p-dropdown>
+                </span>
+
+                <span class="ui-float-label" [hidden]="_isOrderByDate">
+                    <label for="float-input">نوع دوره</label>
+                    <p-dropdown [style]="{minWidth: '100%'}" name="kindId" #kindId
+                        [options]="readingPeriodKindDictionary" name="_selectedKindId" [(ngModel)]="_selectedKindId"
+                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        placeholder="انتخاب مورد" (onChange)="getReadingPeriod()">
+                    </p-dropdown>
+                </span>
+
+                <span class="ui-float-label" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
+                    <label for="float-input">دوره قرائت</label>
+                    <p-dropdown [style]="{minWidth: '100%'}" name="period" #period [options]="readingPeriodDictionary"
+                        name="readingPeriodId" [(ngModel)]="closeTabService.saveDataForSearchProReq.readingPeriodId"
+                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        placeholder="انتخاب مورد">
+                    </p-dropdown>
+                </span>
+
+                <span class="ui-float-label" [hidden]="!_isOrderByDate">
+                    <label for="float-input">از</label>
+                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                    </app-date-jalali>
+                </span>
+                <span class="ui-float-label" [hidden]="!_isOrderByDate">
+                    <label for="float-input">تا</label>
+                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                    </app-date-jalali>
+                </span>
+
+            </section>
+        </section>
+
+        <section class="_more_options">
+
+            <article>
+                <h3 class="title">وضعیت مصرف</h3>
+                <p-multiSelect [options]="masrafState" name="masraf"
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.masrafStates" optionLabel="header"
+                    optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+            <article>
+                <h3 class="title">گزارش کنتور</h3>
+                <p-multiSelect [options]="counterReportDictionary" name="counterReport"
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.reportIds" optionLabel="title" optionValue="id"
+                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+            <article>
+                <h3 class="title">وضعیت کنتور</h3>
+                <p-multiSelect [options]="counterStateByZoneIdDictionary" name="counterState"
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.counterStateIds" optionLabel="title"
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+            <article>
+                <h3 class="title">کاربری</h3>
+                <p-multiSelect [options]="karbariDictionary" name="karbari"
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.karbariCodes" optionLabel="title"
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+            <article>
+                <h3 class="title">نوبتی ها</h3>
+                <p-multiSelect [options]="fragmentMasterIds" name="fragmentId"
+                    [(ngModel)]="closeTabService.saveDataForSearchProReq.fragmentMasterIds" optionLabel="routeTitle"
+                    optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
+                    placeholder="انتخاب مورد">
+                </p-multiSelect>
+            </article>
+
+        </section>
+
+    </main>
+    <footer>
+        <button type="submit" id="grid_view" class="btn_2_o">
+            <i class="pi pi-search"></i>
+            جستجو
+        </button>
+        <button type="submit" id="excel_download" class="btn_2_o">
+            <i class="pi pi-file-excel"></i>
+            Excel دانلود
+        </button>
+    </footer>
+
+</form>
+
+<app-prime-table [dataSource]="dataSource" [_outputFileName]="'searchPro'" [_checkUpName]="'searchPro'"
+    [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'search_acme'"
+    [_selectedColumnsToRemember]="'selectedListManagerPro'" (refreshedTable)="refreshTable()"
+    (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>
