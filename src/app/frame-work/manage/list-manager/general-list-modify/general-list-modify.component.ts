@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
+import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
@@ -10,6 +11,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 import { MapDgComponent } from '../all/map-dg/map-dg.component';
@@ -24,11 +26,14 @@ export class GeneralListModifyComponent extends FactoryONE {
   woumInfosDataSource: IOnOffLoadFlat;
   carouselDataSource: IOnOffLoadFlat;
   filterableDataSource: IOnOffLoadFlat[] = [];
+  clonedProducts: object = {};
 
   pageSignTrackNumber: number = null;
   showCarousel: boolean = false;
   showWouImages: boolean = false;
   ref: DynamicDialogRef;
+  _selectCols: any[] = [];
+  _selectedColumns: any[];
 
   rowIndex: number = 0;
   zoneDictionary: IDictionaryManager[] = [];
@@ -37,6 +42,18 @@ export class GeneralListModifyComponent extends FactoryONE {
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
+  counterStateByZoneDictionary: IDictionaryManager[] = [];
+
+  modifyType: OffloadModify[];
+  offloadModifyReq: IOffloadModifyReq = {
+    id: '',
+    modifyType: null,
+    checkedItems: [],
+    counterStateId: null,
+    counterNumber: null,
+    jalaliDay: '',
+    description: ''
+  }
 
   constructor(
     public listManagerService: ListManagerService,
@@ -48,55 +65,53 @@ export class GeneralListModifyComponent extends FactoryONE {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
+  updateOnChangedCounterState = async (val: any) => {
+    this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val.value);
+    this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
+    this.closeTabService.saveDataForLMGeneralModify = this.dataSource;
+    this.assignToPageSign();
 
-    if (!this.allListsService.modifyLists_pageSign.GUid) {
+    this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
+    this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
+    this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
+    this.qotrDictionary = await this.listManagerService.getQotrDictionary();
+    this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
+    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
+
+    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+
+  }
+  classWrapper = async (canRefresh?: boolean) => {
+    if (!this.allListsService.generalModifyLists_pageSign.GUid) {
       this.router.navigateByUrl(EN_Routes.wrmtrackoffloaded);
     }
     else {
+      this.counterStateByZoneDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
       if (canRefresh) {
-        this.closeTabService.saveDataForLMModify = null;
+        this.closeTabService.saveDataForLMGeneralModify = null;
       }
-      console.log(this.closeTabService.saveDataForLMModify);
-      if (this.closeTabService.saveDataForLMModifyReq === this.allListsService.modifyLists_pageSign.GUid && this.closeTabService.saveDataForLMModify) {
-        this.dataSource = this.closeTabService.saveDataForLMModify;
+      if (this.closeTabService.saveDataForLMGeneralModifyReq === this.allListsService.generalModifyLists_pageSign.GUid && this.closeTabService.saveDataForLMGeneralModify) {
+        this.dataSource = this.closeTabService.saveDataForLMGeneralModify;
       }
-      else {
-        this.dataSource = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.modifyLists_pageSign.GUid);
-        this.closeTabService.saveDataForLMModifyReq = this.allListsService.modifyLists_pageSign.GUid;
-        this.closeTabService.saveDataForLMModify = this.dataSource;
-      }
-      this.assignToPageSign();
+      this.insertSelectedColumns();
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
-
-      this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
-      this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
-      this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
-      this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-      this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
-
-      Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-      const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
-      if (tempZone) {
-        this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
-        Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-        Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-      }
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-      Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
       this.setDynamicRages();
       this.makeHadPicturesToBoolean();
     }
   }
+  insertSelectedColumns = () => {
+    this.modifyType = this.listManagerService.getOffloadModifyType();
+    this._selectCols = this.listManagerService.generalListModify();
+    this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
+  }
   filteredTableEvent = (e: any) => {
     this.filterableDataSource = e;
-  }
-  routeToOffload = (event: object) => {
-    this.carouselDataSource = event['dataSource'];
-    this.rowIndex = event['ri'];
-    this.showCarousel = true;
   }
   carouselNextItem = () => {
     this.rowIndex >= this.filterableDataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
@@ -132,13 +147,37 @@ export class GeneralListModifyComponent extends FactoryONE {
     }
     this.listManagerService.snackEmptyValue();
   }
+  convertTitleToId = (dataSource: any): any => {
+    return this.counterStateDictionary.find(item => {
+      if (item.title === dataSource)
+        return item;
+    })
+  }
   onRowEditInit(dataSource: object) {
-    // this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
+    this.clonedProducts = dataSource;
+    console.log(this.clonedProducts);
+
+  }
+  onRowEditCancel(dataSource: any) {
+    console.log(dataSource);
+    console.log(dataSource['dataSource']);
+
+    //  this.clonedProducts;
   }
   async onRowEditSave(dataSource: any) {
-  }
-  onRowEditCancel() { }
+    // TODO editSingleLine
+    dataSource = dataSource['dataSource'];
 
+    this.offloadModifyReq.id = dataSource.id;
+    this.offloadModifyReq.counterStateId = this.convertTitleToId(dataSource.counterStateCode).id;
+    this.offloadModifyReq.jalaliDay = dataSource.offloadDateJalali;
+    this.offloadModifyReq.counterNumber = dataSource.counterNumber;
+    this.offloadModifyReq.description = dataSource.description;
+
+    if (this.listManagerService.offloadModifyValidation(this.offloadModifyReq)) {
+      await this.listManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+    }
+  }
   /*
   water officer upload carousel images
   */
@@ -146,7 +185,6 @@ export class GeneralListModifyComponent extends FactoryONE {
     this.woumInfosDataSource = object['dataSource'];
     this.rowIndex = object['ri'];
     this.showWouImages = true;
-    scrollTo(0, 0);
   }
   carouselWOUMNextItem = () => {
     this.rowIndex >= this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
@@ -170,6 +208,13 @@ export class GeneralListModifyComponent extends FactoryONE {
   }
   assignToPageSign = () => {
     this.pageSignTrackNumber = this.dataSource[0].trackNumber;
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

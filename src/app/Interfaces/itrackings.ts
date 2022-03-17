@@ -1,5 +1,6 @@
 export interface ITracking {
     id: string,
+    groupId: string,
     trackNumber: number,
     listNumber: null,
     insertDateJalali: string,

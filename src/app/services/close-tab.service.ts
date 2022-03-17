@@ -100,6 +100,8 @@ export class CloseTabService {
   saveDataForLMAll: any;
   saveDataForLMModifyReq: any;
   saveDataForLMModify: any;
+  saveDataForLMGeneralModifyReq: any;
+  saveDataForLMGeneralModify: any;
   // WOUI manager
   saveDataForWOUI: any;
   // dbf output manager

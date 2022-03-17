@@ -1,5 +1,6 @@
 @import 'variable';
 @import 'input.scss';
+@import '_mat.scss';
 
 .overall-info {
   display: grid;
@@ -10,4 +11,10 @@
   @media (min-width: 550px) {
     justify-content: center;
   }
+}
+
+.radios {
+  display: flex;
+  direction: rtl;
+  flex-wrap: wrap;
 }

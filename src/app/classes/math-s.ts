@@ -34,7 +34,7 @@ export class MathS {
     static getRange = (val: any): string => {
         return val.toString().substring(0, 5);
     }
-    static isExactEqual = (first: string, second: string): boolean => {
+    static isExactEqual = (first: string, second: any): boolean => {
         if (first.trim() === second.trim())
             return true;
         return false;

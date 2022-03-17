@@ -70,7 +70,7 @@ export interface IOnOffLoadFlat {
     sifoonQotrCode: number,
     fatherName: string,
     oldRadif: string,
-    oldEshterak:string,
+    oldEshterak: string,
     postalCode: string,
     preNumber: number,
     preDate: string,

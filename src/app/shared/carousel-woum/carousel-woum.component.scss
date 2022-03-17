@@ -1,14 +1,16 @@
 @import 'variable';
 
 main {
-  position: absolute;
+  position: fixed;
   direction: ltr;
+  top: 50%;
+  transform: translateY(-50%);
   background: var(--white);
-  inset: 0;
-  width: 100%;
+  width: 83%;
   height: 40rem;
   border-radius: $border_15;
   z-index: 3;
+
 
   .prev,
   .next {

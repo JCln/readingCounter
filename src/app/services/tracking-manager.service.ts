@@ -92,7 +92,8 @@ export class TrackingManagerService {
   getOffloadModifyType = (): OffloadModify[] => {
     return [
       OffloadModify.callAnnounce,
-      OffloadModify.wrongReading
+      OffloadModify.wrongReading,
+      OffloadModify.bazresi
     ]
   }
   getOffloadItems = (): OffloadModify[] => {
@@ -101,7 +102,6 @@ export class TrackingManagerService {
       OffloadModify.longDistance,
       OffloadModify.intenseLight,
       OffloadModify.counterStatesNotMatch,
-      OffloadModify.wrongReading,
       OffloadModify.occasion,
       OffloadModify.inappropriate,
       OffloadModify.doorPicture,
@@ -390,8 +390,10 @@ export class TrackingManagerService {
     this.router.navigate([EN_Routes.wrmlalltrue]);
   }
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
-    this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
-    this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.generalModifyLists_pageSign.GUid = dataSource.id;
+    this.allListsService.generalModifyLists_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.generalModifyLists_pageSign.groupId = dataSource.groupId;
+    this.allListsService.generalModifyLists_pageSign.zoneId = dataSource.zoneId;
     this.router.navigate([EN_Routes.wrmlGeneralModify]);
   }
   routeTo = (route: string, UUID: string) => {

@@ -48,8 +48,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Output() filteredEvent = new EventEmitter<any>();
   @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() showedInMapSingle = new EventEmitter<any>();
-  @Output() showedPictures = new EventEmitter<any>();
-  @Output() routedToOffload = new EventEmitter<any>();
+  @Output() showedPictures = new EventEmitter<any>();  
   @Output() customedSort = new EventEmitter<any>();
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() onRowEditedInit = new EventEmitter<any>();
@@ -115,9 +114,6 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   backToPrevious = () => {
     this.backedToPrevious.emit(true);
-  }
-  routeToOffload = (dataSource: object, ri: number) => {
-    this.routedToOffload.emit({ dataSource, ri });
   }
   filterEventTable(e: Table) {
     this.filteredEvent.emit(e.filteredValue);

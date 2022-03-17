@@ -90,8 +90,9 @@
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isSelectOption;else selectOption">
+                    <!-- to use double dictionaries add dictionary name to "col.field !== 'name'" -->
                     <ng-container
-                        *ngIf="(col.field !== 'karbariMoshtarakinCode' && col.field !== 'readingPeriodKindId'); else secondDict">
+                        *ngIf="(col.field !== 'karbariMoshtarakinCode' && col.field !== 'readingPeriodKindId' && col.field !== 'modifyType'); else secondDict">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
@@ -124,7 +125,7 @@
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <mat-checkbox [ngClass]="{'mat-checkbox-editable': true}"
+                                <mat-checkbox [disabled]="col.readonly" [ngClass]="{'mat-checkbox-editable': true}"
                                     [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -134,14 +135,36 @@
                     </ng-container>
                     <ng-template #elseTemplate>
                         <ng-container
-                            *ngIf="col.field === 'orderDigit'|| col.field === 'orderPersian'; else editableForm">
-                            {{dataSource[col.field]}}
+                            *ngIf="col.field == 'masrafStateId' && _checkUpName =='generalListModify'; else digits">
+                            <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
+                                <div class="tooltip_text">عادی</div>
+                            </i>
+                            <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
+                                <div class="tooltip_text">پایین</div>
+                            </i>
+                            <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
+                                <div class="tooltip_text">بالا</div>
+                            </i>
+                            <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">0
+                                <div class="tooltip_text">صفر</div>
+                            </i>
+                            <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
+                                <div class="tooltip_text">غیرقابل محاسبه</div>
+                            </i>
                         </ng-container>
+
+                        <ng-template #digits>
+                            <ng-container
+                                *ngIf="col.field === 'orderDigit'|| col.field === 'orderPersian'; else editableForm">
+                                {{dataSource[col.field]}}
+                            </ng-container>
+                        </ng-template>
+
                         <ng-template #editableForm>
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <input pInputText [type]="col.isNumber ? 'number': 'text'"
-                                        [(ngModel)]="dataSource[col.field]">
+                                        [(ngModel)]="dataSource[col.field]" [readOnly]="col.readonly">
                                 </ng-template>
                                 <ng-template pTemplate="output">
                                     {{dataSource[col.field]}}
@@ -151,19 +174,13 @@
                     </ng-template>
                 </ng-template>
             </td>
-            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_checkUpName =='generalListModify'">
-                <span class="ui-column-title">اصلاح کلی</span>
-                <i class="tooltip p_icons pi pi-pencil">
-                    <div class="tooltip_text_right">اصلاح کلی</div>
-                </i>
-            </td>
             <td *ngIf="_checkUpName =='generalListModify'" (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right">مشاهده روی نقشه</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName == 'generalListModify'" (click)="showWOUIAsCarousel(dataSource,ri)">
+            <td *ngIf="_checkUpName == 'generalListModify'" (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
@@ -190,7 +207,7 @@
                     (click)="onRowEditCancelRowEditing(dataSource, ri)" class="_cancel pi pi-times">
                 </i>
             </td>
-            <td>
+            <td *ngIf="_checkUpName != 'generalListModify'">
                 <span class="ui-column-title">حذف مورد</span>
                 <i *ngIf="!_isInRowEditing" (click)="removeRow(dataSource.id , ri)"
                     class="tooltip p_icons fa fa-trash-o">

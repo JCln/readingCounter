@@ -11,6 +11,7 @@ export const sidebarItemsTest = {
                 { route: EN_Routes.wrmms, title: 'مدیریت سرور', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrmlallfalse, title: 'لیست', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
                 { route: EN_Routes.wrmlalltrue, title: 'اصلاح', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
+                { route: EN_Routes.wrmlGeneralModify, title: 'اصلاح کلی', isClosable: true, isRefreshable: true, cssClass: '', logicalOrder: 2 },
             ]
         }
     ]

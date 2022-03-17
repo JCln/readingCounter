@@ -54,7 +54,7 @@ export class AllComponent extends FactoryONE {
     else {
       if (canRefresh) {
         this.closeTabService.saveDataForLMAll = null;
-      }      
+      }
       if (this.closeTabService.saveDataForLMAllReq === this.allListsService.allLists_pageSign.GUid && this.closeTabService.saveDataForLMAll) {
         this.dataSource = this.closeTabService.saveDataForLMAll;
       }
@@ -139,7 +139,6 @@ export class AllComponent extends FactoryONE {
     this.woumInfosDataSource = object['dataSource'];
     this.rowIndex = object['ri'];
     this.showWouImages = true;
-    scrollTo(0, 0);
   }
   carouselWOUMNextItem = () => {
     this.rowIndex >= this.filterableDataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;

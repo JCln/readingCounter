@@ -31,8 +31,7 @@ export class RrLockedComponent extends FactoryONE {
     }
   ]
   rowIndex: number = 0;
-  woumInfosDataSource: IOnOffLoadFlat;
-  showWouImages: boolean = false;
+  woumInfosDataSource: IOnOffLoadFlat;  
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
@@ -126,13 +125,12 @@ export class RrLockedComponent extends FactoryONE {
     })
   }
   carouselCancelClicked = () => {
-    this.showWouImages = false;
+    // this.showWouImages = false;
   }
   routeToWoui = (object: any) => {
     this.woumInfosDataSource = object['dataSource'];
     this.rowIndex = object['ri'];
-    this.showWouImages = true;
-    scrollTo(0, 0);
+    // this.showWouImages = true;
   }
   filteredTableEvent = (e: any) => {
     this.filterableDataSource = e;
