@@ -92,6 +92,7 @@ export class ProComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForSearchPro = null;
+      this.closeTabService.saveDataForSearchProReq = null;
     }
     if (this.closeTabService.saveDataForSearchPro) {
       this.dataSource = this.closeTabService.saveDataForSearchPro;

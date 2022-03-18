@@ -77,8 +77,7 @@
         </form>
     </section>
 
-    <app-prime-table 
-    [hidden]="showWouImages"
+    <app-prime-table     
     [dataSource]="dataSource"
     [_outputFileName]="'rrLocked'" 
     [_checkUpName]="'rr-locked'" 
@@ -98,7 +97,7 @@
     >
     </app-prime-table>
     
-    <app-carousel-woum *ngIf="showWouImages" 
+    <app-carousel-woum
     [dataSource]="woumInfosDataSource"
     (cancelClicked)="carouselCancelClicked()"
     (prevClicked)="carouselPrevItem()"

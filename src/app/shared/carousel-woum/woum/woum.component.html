@@ -2,7 +2,7 @@
     <div class="overall-info">
         <div class="input_2">
             <div class="_key">نام و نام خانوادگی</div>
-            <input [readOnly]="true" class="_value" name="names" [(ngModel)]="firstName + sureName">
+            <input [readOnly]="true" class="_value" name="names" [(ngModel)]="firstName.trim() + ' '+ sureName">
         </div>
         <div class="input_2" *ngFor="let item of interationOnOverallInfo">
             <div class="_key">{{item.header}}</div>

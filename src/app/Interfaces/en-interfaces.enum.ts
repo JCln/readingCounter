@@ -144,6 +144,7 @@ export enum ENInterfaces {
     trackingToIMPORTED = 'V1/Tracking/ToImported',
     trackingToREADING = 'V1/Tracking/ToReading',
     trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
+    trackingToOFFLOADEDGeneralModify = 'V1/List/OffLoaded/AllInGroup/',
     trackingPRE = 'V1/Tracking/Pre',
     trackingFinishReadiED = 'V1/Tracking/FinishReading',
     trackingREMOVE = 'V1/Tracking/Remove',

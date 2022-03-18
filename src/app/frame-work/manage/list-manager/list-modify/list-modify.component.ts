@@ -56,6 +56,7 @@ export class ListModifyComponent extends FactoryONE {
     else {
       if (canRefresh) {
         this.closeTabService.saveDataForLMModify = null;
+        this.closeTabService.saveDataForLMModifyReq = null;
       }
       console.log(this.closeTabService.saveDataForLMModify);
       if (this.closeTabService.saveDataForLMModifyReq === this.allListsService.modifyLists_pageSign.GUid && this.closeTabService.saveDataForLMModify) {

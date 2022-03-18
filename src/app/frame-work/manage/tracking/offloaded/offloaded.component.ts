@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -19,9 +19,7 @@ export class OffloadedComponent extends FactoryONE {
 
 
   dataSource: ITracking[] = [];
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
+  
   constructor(
 
     private closeTabService: CloseTabService,
@@ -54,13 +52,6 @@ export class OffloadedComponent extends FactoryONE {
     }
     const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputSINGLE, row);
     this.outputManagerService.downloadFile(a);
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   routeToOffloadModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadModify(dataSource);

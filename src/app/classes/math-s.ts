@@ -11,6 +11,7 @@ export class MathS {
     static isNull(value: any): boolean {
         return value === undefined || value === null || typeof value === 'undefined' || !value || value.length === 0;
     }
+    // to validate zero numbers
     static isNullZero(value: any): boolean {
         return typeof value === 'undefined' || value === null || value.length === 0;
     }
@@ -34,7 +35,7 @@ export class MathS {
     static getRange = (val: any): string => {
         return val.toString().substring(0, 5);
     }
-    static isExactEqual = (first: string, second: string): boolean => {
+    static isExactEqual = (first: string, second: any): boolean => {
         if (first.trim() === second.trim())
             return true;
         return false;

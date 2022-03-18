@@ -50,3 +50,13 @@
   width: 10rem;
   height: 4rem;
 }
+
+[disabled] {
+  border: none;
+}
+
+[readOnly] {
+  outline: none;
+  border: none;
+  color: inherit;
+}

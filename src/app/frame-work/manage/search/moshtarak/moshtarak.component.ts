@@ -72,10 +72,10 @@ export class MoshtarakComponent extends FactoryONE {
 
     this.closeTabService.saveDataForSearchMoshtarakin = this.dataSource;
   }
-  nullSavedSource = () => this.closeTabService.saveDataForSearchMoshtarakin = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.nullSavedSource();
+      this.closeTabService.saveDataForSearchMoshtarakin = null;
+      this.closeTabService.saveDataForSearchMoshtarakinReq = null;
     }
     if (!MathS.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
       this.dataSource = this.closeTabService.saveDataForSearchMoshtarakin;

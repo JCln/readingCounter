@@ -91,6 +91,7 @@ export class AssessPreComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForAssessPre = null;
+      this.closeTabService.saveDataForAssessPreReq = null;
     }
     if (this.closeTabService.saveDataForAssessPre) {
       this.dataSource = this.closeTabService.saveDataForAssessPre;
