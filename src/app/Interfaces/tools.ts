@@ -9,3 +9,8 @@ export interface ImageAttributionFile {
     fileRepositoryId: string,
     onOffLoadId: string
 }
+
+export interface IDownloadFileAllImages {
+    zoneId: number,
+    day: string
+}

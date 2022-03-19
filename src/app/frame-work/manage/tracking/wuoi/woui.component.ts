@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -41,7 +42,6 @@ export class WouiComponent extends FactoryONE {
     private route: ActivatedRoute,
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
-     
     private dialogService: DialogService,
     private _location: Location,
     private router: Router
@@ -73,8 +73,8 @@ export class WouiComponent extends FactoryONE {
   private useAPI = (): Promise<any> => {
     return new Promise((resolve) => {
       this.targetFile.isForbidden ?
-        resolve(this.downloadManagerService.downloadForbiddenFileInfo(this.targetFile.id)) :
-        resolve(this.downloadManagerService.downloadFileInfo(this.targetFile.id));
+        resolve(this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileForbidden, this.targetFile.id)) :
+        resolve(this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.targetFile.id));
     });
   }
   getDownloadListInfo = () => {

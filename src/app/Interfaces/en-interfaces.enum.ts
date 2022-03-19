@@ -176,6 +176,7 @@ export enum ENInterfaces {
     ListDispersalHours = 'V1/List/Offloaded/DispersalHours',
     ListDispersalChart = 'V1/List/Offloaded/DispersalChart',
     ListAllImages = `V1/List/OffLoaded/AllImages/`,
+    downloadFileAllImages = '/V1/Download/File/AllImages?access_token=',
     ListRRLocked = 'V1/List/Offloaded/Locked',
     ListRRPreNumberShown = 'V1/List/Offloaded/PreNumberShown',
 
@@ -215,7 +216,7 @@ export enum ENInterfaces {
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',
     dynamicReportManagerDisplayLinkAdd = '/DynamicReportManagerMvc/DisplayDesigner?access_token=',
     dynamicReportManagerDisplayLink = '/DynamicReportManagerMvc/DisplayViewer',
-    dynamicReportManagerDisplayLinkEdit = '/DynamicReportManagerMvc/DisplayDesigner',    
+    dynamicReportManagerDisplayLinkEdit = '/DynamicReportManagerMvc/DisplayDesigner',
 
     counterStateAll = 'V1/CounterState/All',
     counterStateDictionary = 'V1/CounterState/Dictionary',
@@ -286,6 +287,7 @@ export enum ENInterfaces {
     removeToolsDynamicExcel = 'V1/DynamicExcel/Remove',
 
     getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
+    getCounterReaderLocations = 'V1/List/Latest/Locations',
     getDashboardEditCount = 'V1/Tracking/Dashboard/Tracking/EditCount',
     getDashboardDateDifference = 'V1/List/Dashboard/DateDifference/Timed',
     getDashboardTraverseTimed = 'V1/List/Dashboard/Traverse/Timed',

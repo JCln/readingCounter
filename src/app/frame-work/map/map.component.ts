@@ -14,6 +14,7 @@ import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
+import { IGisXYResponse } from 'src/app/Interfaces/idashboard-map';
 import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 
@@ -274,7 +275,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   private markingOnMapNClusterNDelay = (method: string, xyData: any) => {
     this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 12);
-    xyData.map((items, i) => {
+    xyData.map((items) => {
       this[method](parseFloat(items.y), parseFloat(items.x), items);
     })
   }
@@ -287,6 +288,9 @@ export class MapComponent implements OnInit, OnDestroy {
         ));
     })
     this.layerGroup.addLayer(markers);
+  }
+  showCounterReadersLocations = (dataSource: IGisXYResponse[]) => {
+    this.markingOnMapNClusterNDelay('markWithoutClusterColorized', dataSource);
   }
 
   mapConfigOptions = (delay: number, isFirstTime: boolean) => {
@@ -356,6 +360,14 @@ export class MapComponent implements OnInit, OnDestroy {
     if (lat === 0)
       return;
     L.circleMarker([lat, lng], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
+      .bindPopup(
+        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+      );
+  }
+  private markWithoutClusterColorized = (lat: number, lng: number, items) => {
+    if (lat === 0)
+      return;
+    L.circleMarker([lat, lng], { weight: 5, radius: 4, color: MathS.getRandomColors(1) }).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );

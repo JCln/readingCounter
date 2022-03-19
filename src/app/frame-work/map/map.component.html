@@ -15,6 +15,7 @@
         <input type="radio" id="_dash" name="radio">
     </div>
 
+    <app-locations (sendlocations)="showCounterReadersLocations($event)"></app-locations>
     <section class="_options">
         <div class="_flex_dr_ric" [hidden]="!canShowOptionsButton || !isShowMap">
             <button class="polyline_switch tooltip" (click)="isShowMapConfig = !isShowMapConfig">

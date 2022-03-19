@@ -13,7 +13,6 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./random-images.component.scss']
 })
 export class RandomImagesComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _quantity: ITitleValue[] = [];

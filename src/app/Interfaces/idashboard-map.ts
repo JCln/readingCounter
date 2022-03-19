@@ -120,3 +120,11 @@ export interface IDashboardSpecial {
     monthly: IDashboardTimedItem,
     yearly: IDashboardTimedItem
 }
+export interface IGisXYResponse {
+    x: string,
+    y: string,
+    gisAccuracy: string,
+    info1: string,
+    info2: string,
+    info3: string
+}

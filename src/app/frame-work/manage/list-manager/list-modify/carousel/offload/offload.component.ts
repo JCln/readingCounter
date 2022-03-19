@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IOnOffLoad } from 'interfaces/itrackings';
@@ -69,7 +70,7 @@ export class OffloadComponent implements OnChanges {
     if (!this.onOffloadId)
       return;
 
-    this.dataSource = await this.downloadManagerService.downloadFileInfo(this.onOffloadId);
+    this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.onOffloadId);
 
     this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
     this.downloadManagerService.assignToDataSource(this.dataSource);

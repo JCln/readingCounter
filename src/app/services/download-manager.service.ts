@@ -27,16 +27,9 @@ export class DownloadManagerService {
   ) { }
 
   // calls
-  downloadFileInfo = (targetId: string): Promise<any> => {
+  downloadFileInfo = (method: ENInterfaces, targetId: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(ENInterfaces.downloadFileInfo, targetId).subscribe(res => {
-        resolve(res)
-      })
-    });
-  }
-  downloadForbiddenFileInfo = (targetId: string): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(ENInterfaces.downloadFileForbidden, targetId).subscribe(res => {
+      this.interfaceManagerService.GETID(method, targetId).subscribe(res => {
         resolve(res)
       })
     });
