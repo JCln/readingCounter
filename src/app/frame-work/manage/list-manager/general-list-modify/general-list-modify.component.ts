@@ -26,7 +26,7 @@ export class GeneralListModifyComponent extends FactoryONE {
   dataSource: IOnOffLoadFlat[] = [];
   carouselDataSource: IOnOffLoadFlat;
   filterableDataSource: IOnOffLoadFlat[] = [];
-  clonedProducts: object = {};
+  clonedProducts: { [s: string]: object; } = {};
   counterStateValue: number;
 
   pageSignTrackNumber: number = null;
@@ -50,7 +50,7 @@ export class GeneralListModifyComponent extends FactoryONE {
     id: '',
     modifyType: null,
     checkedItems: [],
-    counterStateId: null,
+    counterStateId: 0,
     counterNumber: null,
     jalaliDay: '',
     description: ''
@@ -156,79 +156,74 @@ export class GeneralListModifyComponent extends FactoryONE {
     }
     this.listManagerService.snackEmptyValue();
   }
-  convertTitleToId = (dataSource: any, dictionary: any): any => {
-    return this[dictionary].find(item => {
-      if (item.title === dataSource)
-        return item.id;
-    })
-  }
   onRowEditInit(dataSource: object) {
-    this.clonedProducts = dataSource;
+    this.clonedProducts = { dataSource };
   }
   onRowEditCancel(dataSource: any) {
     if (typeof dataSource['dataSource'].counterStateId == 'object') {
-      dataSource['dataSource'].counterStateId = '';
+      dataSource['dataSource'].counterStateId = null;
     }
     if (typeof dataSource['dataSource'].modifyType == 'object') {
-      dataSource['dataSource'].modifyType = '';
+      dataSource['dataSource'].modifyType = null;
     }
   }
+  convertTitleToId = (dataSource: any): any => {
+    return this.counterStateByZoneDictionary.find(item => {
+      if (item.title === dataSource)
+        return item;
+    })
+  }
+  convertTitleToIdByModifyType = (dataSource: any): any => {
+    return this.modifyType.find(item => {
+      if (item.title === dataSource)
+        return item;
+    })
+  }
   toMakeObjectClean = (dataSource: any) => {
-    console.log(typeof dataSource.counterStateId);
-    console.log(typeof dataSource.modifyType);
-
     if (typeof dataSource.counterStateId == 'string') {
-      console.log(this.convertTitleToId(dataSource.counterStateId, this.counterStateByZoneDictionary));
-      
-      this.offloadModifyReq.counterStateId = this.convertTitleToId(dataSource.counterStateId, this.counterStateByZoneDictionary);
+      this.offloadModifyReq.counterStateId = this.convertTitleToId(dataSource.counterStateId).id;
     }
     if (typeof dataSource.counterStateId == 'object') {
-      dataSource.counterStateId = dataSource.counterStateId.title;
+      this.offloadModifyReq.counterStateId = dataSource.counterStateId['id'];
+      dataSource.counterStateId = dataSource.counterStateId['title'];
     }
     if (typeof dataSource.modifyType == 'object') {
       dataSource.modifyType = dataSource.modifyType.title;
     }
     if (typeof dataSource.modifyType == 'string') {
-      this.offloadModifyReq.modifyType = this.convertTitleToId(dataSource.modifyType, this.modifyType);
+      this.offloadModifyReq.modifyType = this.convertTitleToIdByModifyType(dataSource.modifyType).id;
     }
   }
   async onRowEditSave(dataSource: any) {
     // TODO editSingleLine
+    this.offloadModifyReq = JSON.parse(JSON.stringify(this.offloadModifyReq));
     dataSource = dataSource['dataSource'];
-    console.log(dataSource.modifyType);
-    console.log(dataSource.counterStateId);
-console.log(!MathS.isNull(dataSource.modifyType) && !MathS.isNull(dataSource.counterStateId));
 
     if (!MathS.isNull(dataSource.modifyType) && !MathS.isNull(dataSource.counterStateId)) {
       this.offloadModifyReq.id = dataSource.id;
       this.offloadModifyReq.counterNumber = dataSource.counterNumber;
       this.offloadModifyReq.description = dataSource.description;
       this.offloadModifyReq.modifyType = dataSource.modifyType.id;
-      this.offloadModifyReq.counterStateId = dataSource.counterStateId.id;
 
       // if not clicked by user use default date val
       if (MathS.isNull(this.offloadModifyReq.jalaliDay))
         this.offloadModifyReq.jalaliDay = dataSource.offloadDateJalali;
 
-      console.log(this.offloadModifyReq);
       this.toMakeObjectClean(dataSource);
-      console.log(this.offloadModifyReq);
 
-      console.log(this.listManagerService.offloadModifyValidation(this.offloadModifyReq));
-      
-      // if (this.listManagerService.offloadModifyValidation(this.offloadModifyReq)) {
-      //   const serverValidation = await this.listManagerService.postOffloadModifyEdited(this.offloadModifyReq);
-      //   if (serverValidation) {
-      //     console.log('do nothing');
-      //   }
-      //   else {
-      //     dataSource = this.clonedProducts;
-      //   }
-      // }
+      if (this.listManagerService.offloadModifyValidation(this.offloadModifyReq)) {
+        const serverValidation = await this.listManagerService.postOffloadModifyEdited(this.offloadModifyReq);
+        if (serverValidation) {
+          console.log('do nothing');
+        }
+        else {
+          this.onRowEditCancel(dataSource);
+        }
+      }
     }
     else {
-      console.log(1);
-
+      this.toMakeObjectClean(dataSource);
+      this.onRowEditCancel(dataSource);
       this.listManagerService.showSnackWarn(EN_messages.insert_modify_type);
     }
   }

@@ -235,7 +235,11 @@ export class ListManagerService {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(ENInterfaces.trackingPostOffloadModify, body).toPromise().then((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);
+        console.log(res);
+
         resolve(res);
+      }).catch(() => {
+        resolve(false);
       })
     });
   }
