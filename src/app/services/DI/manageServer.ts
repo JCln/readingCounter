@@ -4,7 +4,7 @@ import { ENClientServerErrors } from 'interfaces/ioverall-config';
 export const serverTasts: IManageServer[] = [
 
     { name: 'ریست IIS', icon: 'fa fa-repeat', background: '#F68038', color: '', },
-    { name: 'ریست اپلیکیشن', icon: 'fa fa-desktop', background: '#969696', color: '', },
+    { name: 'ریست اپلیکیشن', clickFunction: ENManageServers.resetApp, icon: 'fa fa-desktop', background: '#969696', color: '', },
     { name: 'حذف خطاها', clickFunction: ENManageServers.serverDelete, icon: 'fa fa-eraser', background: '#006c75', color: '', },
     { name: 'آفلاین کردن اًپ', icon: 'fa fa-stop-circle', background: '#0057a2', color: '', },
     { name: 'Jobs', clickFunction: ENManageServers.linkToHangfire, icon: 'pi pi-clock', background: '#4b8c38', color: '', },

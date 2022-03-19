@@ -32,7 +32,8 @@ export interface IMostReportInput {
 export enum ENManageServers {
     serverDelete = 'serverDelete',
     linkToHangfire = 'linkToHangfire',
-    linkToHealthCheck = 'linkToHealthCheck'
+    linkToHealthCheck = 'linkToHealthCheck',
+    resetApp = 'resetApp'
 }
 export interface IManageServerErrors {
     name: string,

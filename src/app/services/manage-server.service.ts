@@ -27,9 +27,9 @@ export class ManageServerService {
   getManageServerItems = () => {
     return serverTasts;
   }
-  postDataServer = (): Promise<any> => {
+  postDataServer = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(ENInterfaces.serverManagerDelete).toPromise().then(res => {
+      this.interfaceManagerService.POST(method).toPromise().then(res => {
         resolve(res);
       })
     });

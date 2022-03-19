@@ -142,6 +142,7 @@ export enum ENInterfaces {
     trackingLASTSTATES = 'V1/Tracking/LastStates',
     trackingEDIT = 'V1/Tracking/Edit',
     trackingToIMPORTED = 'V1/Tracking/ToImported',
+    trackingToImportedFromLoad = 'V1/Tracking/ToImportedFromLoad',
     trackingToREADING = 'V1/Tracking/ToReading',
     trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
     trackingToOFFLOADEDGeneralModify = 'V1/List/OffLoaded/AllInGroup/',
@@ -211,6 +212,7 @@ export enum ENInterfaces {
     serverManagerHangFire = '/main/admin/hangFire?access_token=',
     serverManagerHealthCheck = '/healthchecks-ui',
     serverManagerErrorsElmah = '/elmah/detail/',
+    serverManagerResetApp = 'V1/Server/ResetApp',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',

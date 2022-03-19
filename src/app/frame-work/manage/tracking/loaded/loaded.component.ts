@@ -63,7 +63,7 @@ export class LoadedComponent extends FactoryONE {
       });
       dialogRef.afterClosed().subscribe(async desc => {
         if (desc) {
-          await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, rowDataAndIndex['dataSource'], desc);
+          await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToImportedFromLoad, rowDataAndIndex['dataSource'], desc);
           this.refreshTable();
         }
       })

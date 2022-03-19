@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENManageServers, IManageServer } from 'interfaces/imanage';
 import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ManageServerService } from 'services/manage-server.service';
@@ -24,9 +25,11 @@ export class ManageServerComponent implements OnInit {
       this.linkToHangfire();
     if (clickFunction == ENManageServers.linkToHealthCheck)
       this.linkToHealthCheck();
+    if (clickFunction == ENManageServers.resetApp)
+      this.resetApp();
   }
   serverDelete = async () => {
-    const temp: any = await this.manageServerService.postDataServer();
+    const temp: any = await this.manageServerService.postDataServer(ENInterfaces.serverManagerDelete);
     if (temp)
       this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
   }
@@ -35,6 +38,11 @@ export class ManageServerComponent implements OnInit {
   }
   linkToHealthCheck = () => {
     this.manageServerService.linkToHealthCheck();
+  }
+  resetApp = async () => {
+    const temp = await this.manageServerService.postDataServer(ENInterfaces.serverManagerResetApp);
+    if (temp)
+      this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
   }
 
 }
