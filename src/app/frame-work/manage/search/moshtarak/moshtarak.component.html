@@ -6,7 +6,8 @@
                 <div class="_key">نوع جستجو</div>
                 <mat-select placeholder="انتخاب مورد" [(ngModel)]="searchService.searchReqMosh.searchBy"
                     name="searchType">
-                    <mat-option *ngFor="let truefalse of searchType" [value]="truefalse.id">
+                    <mat-option (click)="_searchByInfo = truefalse.searchBy" *ngFor="let truefalse of searchType"
+                        [value]="truefalse.id">
                         {{truefalse.searchBy}}
                     </mat-option>
                 </mat-select>
@@ -14,11 +15,11 @@
             <div class="input_2">
                 <div class="_key">ناحیه</div>
                 <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="searchService.searchReqMosh.zoneId"
-                    placeholder="انتخاب مورد" [style]="{'max-width': '9rem','width':'100%'}" optionValue="id" optionLabel="title"
-                    filter="true">
+                    placeholder="انتخاب مورد" [style]="{'max-width': '9rem','width':'100%'}" optionValue="id"
+                    optionLabel="title" filter="true">
                 </p-dropdown>
             </div>
-            <input class="input_1" type="number" placeholder="مقدار را وارد نمایید " name="counterNumber"
+            <input class="input_1" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="counterNumber"
                 [(ngModel)]="searchService.searchReqMosh.item" autofocus>
 
             <div class="check_boxes">
@@ -33,8 +34,8 @@
     </form>
 </main>
 
-<app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-    [_outputFileName]="'searchMosh'" [_checkUpName]="'search_moshtarak'"
+<app-prime-table *ngIf="dataSource.length" [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns"
+    [dataSource]="dataSource" [_outputFileName]="'searchMosh'" [_checkUpName]="'search_moshtarak'"
     [_selectedColumnsToRemember]="'selectedListManagerMosh'" [_numberOfExtraColumns]="[1,2,3]"
     [_sessionName]="'moshtarak-session'" (refreshedTable)="refreshTable()"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="searchService.showInMapSingle($event)">

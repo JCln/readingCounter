@@ -21,6 +21,7 @@ export class MoshtarakComponent extends FactoryONE {
   searchType: Search[];
   searchByText: string = '';
   _empty_message: string = '';
+  _searchByInfo: string = 'مقدار';
 
   _selectCols: any[] = [];
   _selectedColumns: any[];
