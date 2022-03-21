@@ -16,6 +16,7 @@ import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 import { MapDgComponent } from '../all/map-dg/map-dg.component';
+import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 
 @Component({
   selector: 'app-general-list-modify',
@@ -71,7 +72,6 @@ export class GeneralListModifyComponent extends FactoryONE {
     this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
     this.closeTabService.saveDataForLMGeneralModify = this.dataSource;
     this.assignToPageSign();
-
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
@@ -103,6 +103,7 @@ export class GeneralListModifyComponent extends FactoryONE {
       this.insertSelectedColumns();
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
+      this.assignToPageSign();
       this.setDynamicRages();
       this.makeHadPicturesToBoolean();
     }
@@ -261,5 +262,18 @@ export class GeneralListModifyComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-
+  openMoshtarakinDialog = (dataSource: any) => {
+    this.ref = this.dialogService.open(ListSearchMoshDgComponent, {
+      data: {
+        eshterak: dataSource.eshterak,
+        zoneId: dataSource.zoneId
+      },
+      rtl: true,
+      width: '90%'
+    })
+    this.ref.onClose.subscribe((res: any) => {
+      if (res)
+        console.log(res);
+    });
+  }
 }

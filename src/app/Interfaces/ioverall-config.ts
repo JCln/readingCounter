@@ -314,6 +314,7 @@ export enum ENSelectedColumnVariables {
     selectedListManagerModify = 'ModifyList',
     selectedListManagerAssess = 'assess_pre',
     selectedListManagerMosh = 'searchMosh',
+    selectedListManagerMoshDialog = 'searchMoshDialog',
     selectedCounterState = 'counterState',
     selectedListManagerPro = 'searchPro',
     selectedSearchManagerSimple = 'simpleSearch',

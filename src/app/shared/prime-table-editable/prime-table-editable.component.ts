@@ -63,6 +63,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Output() getedExcelSample = new EventEmitter<any>();
   @Output() openedAddExcelDialog = new EventEmitter<any>();
   @Output() routedToParent = new EventEmitter<any>();
+  @Output() openedMoshtarakinDialog = new EventEmitter<any>();
 
   constructor(
     public outputManagerService: OutputManagerService,
@@ -134,4 +135,8 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   receiveDateJalali = (event: string, ri: number) => {
     this.receivedDateJalali.emit(event);
   }
+  openMoshtarakinDialog = (dataSource: object) => {
+    this.openedMoshtarakinDialog.emit(dataSource);
+  }
+  
 }

@@ -49,6 +49,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() collapsed = new EventEmitter<any>();
   @Output() removedRow = new EventEmitter<any>();
   @Output() openedEditDialog = new EventEmitter<any>();
+  @Output() openedMoshtarakinDialog = new EventEmitter<any>();
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() forcedOffload = new EventEmitter<any>();
   @Output() backedToImportedConfirmDialog = new EventEmitter<any>();
@@ -201,6 +202,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   openEditDialog = (dataSource: object) => {
     this.openedEditDialog.emit(dataSource);
+  }
+  openMoshtarakinDialog = (dataSource: object) => {
+    this.openedMoshtarakinDialog.emit(dataSource);
   }
   routeToBatch = (dataSource: object) => {
     this.routedToBatch.emit(dataSource);

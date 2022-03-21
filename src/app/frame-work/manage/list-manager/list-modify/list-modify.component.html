@@ -20,7 +20,7 @@
     [_checkUpName]="'allComponent'"
     [_sessionName]="'modifyLists'"
     [_selectedColumnsToRemember]="'selectedListManagerModify'"
-    [_numberOfExtraColumns]="[1,2,3]"    
+    [_numberOfExtraColumns]="[1,2,3,4]"    
     [_backToPreviousEnabled]=true
     [_allComponentIsModify]="true"
     [_backToPreviousText]="'بازگشت به صفحه قبلی'"
@@ -30,6 +30,7 @@
     (backedToPrevious)="toPrePage()"
     (routedToOffload)="routeToOffload($event)"
     (filteredEvent)="filteredTableEvent($event)"
+    (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
     (showedWOUIAsCarousel)="routeToWoui($event)"
     (showedPictures)="getReadingReportTitles($event)" 
     (showedInMapSingle)="openMapDialog($event)"   

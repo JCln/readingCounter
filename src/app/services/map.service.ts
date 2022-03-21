@@ -150,7 +150,7 @@ export class MapService {
     this._location.back();
   }
   getPointerMarks = (a: object): Promise<any> => {
-    return this.listManagerService.postLMPDXY(a);
+    return this.listManagerService.postBodyDataSource(ENInterfaces.ListPerDayXY, a);
   }
   getXY = (a: string): Promise<any> => {
     return this.listManagerService.postById(ENInterfaces.ListXY, parseInt(a));

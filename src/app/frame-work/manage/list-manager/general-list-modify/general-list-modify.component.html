@@ -36,7 +36,7 @@
     [dictionary]="counterStateByZoneDictionary" 
     [_secondDictionaryName]="'modifyType'"
     [secondDictionary]="modifyType" 
-    [_numberOfExtraColumns]="[1,2,3,4]" 
+    [_numberOfExtraColumns]="[1,2,3,4,5]" 
     [_backToPreviousEnabled]=true 
     [_backToPreviousText]="'بازگشت به صفحه قبلی'"
     [_isInRowEditing]="true"
@@ -49,6 +49,7 @@
     (showedWOUIAsCarousel)="routeToWoui($event)" 
     (showedPictures)="getReadingReportTitles($event)"
     (showedInMapSingle)="openMapDialog($event)" 
+    (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
     (onRowEditedInit)="onRowEditInit($event)"
     (onRowEditedSave)="onRowEditSave($event)" 
     (onRowEditedCancelRowEditing)="onRowEditCancel($event)">

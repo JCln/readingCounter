@@ -4,6 +4,12 @@ export interface ISearchMoshReq {
     item: string,
     similar: boolean
 }
+export interface ISearchMoshReqDialog {
+    zoneId: number,
+    searchBy: number,
+    item: number,
+    similar: boolean
+}
 export interface ISearchSimpleReq {
     zoneId: number,
     fromDate: string,

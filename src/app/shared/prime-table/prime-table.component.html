@@ -191,6 +191,12 @@
                     <div class="tooltip_text_right">حذف نوبتی</div>
                 </i>
             </td>
+            <td *ngIf="_outputFileName =='ModifyList'" (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده مشترکین</span>
+                <i class="tooltip p_icons pi pi-list">
+                    <div class="tooltip_text">مشاهده مشترکین</div>
+                </i>
+            </td>
             <td *ngIf="_checkUpName == 'search_moshtarak' ||
              _checkUpName == 'allComponent' ||
              _checkUpName =='forbidden' ||            
@@ -273,6 +279,7 @@
             <td *ngIf="(
                 _outputFileName == 'searchPro' 
             || _outputFileName == 'searchMosh'
+            || _outputFileName == 'searchMoshDialog'
             || _outputFileName == 'rrDetails'            
             || _outputFileName == 'trv'
             || _outputFileName == 'assess_pre'

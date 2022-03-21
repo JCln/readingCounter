@@ -210,6 +210,12 @@
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
                 </i>
             </td>
+            <td *ngIf="_checkUpName == 'generalListModify'" (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده مشترکین</span>
+                <i class="tooltip p_icons pi pi-list">
+                    <div class="tooltip_text">مشاهده مشترکین</div>
+                </i>
+            </td>
             <td>
                 <span class="ui-column-title">ویرایش</span>
                 <i *ngIf="!editing" pInitEditableRow (click)="onRowEditInit(dataSource)"

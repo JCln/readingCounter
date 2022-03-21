@@ -5,7 +5,10 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
-import { SortEvent } from 'primeng/api';
+import { EN_Routes } from 'interfaces/routes.enum';
+import { ISearchMoshReqDialog } from 'interfaces/search';
+import { SortEvent } from 'primeng/api/sortevent';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { Converter } from '../classes/converter';
@@ -20,6 +23,7 @@ import { UtilsService } from './utils.service';
 })
 export class ListManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
+  ref: DynamicDialogRef;
 
   generalListModify = (): IObjectIteratation[] => {
     return [
@@ -115,12 +119,27 @@ export class ListManagerService {
       { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true }
     ];
   }
+  searchReqMoshDialog: ISearchMoshReqDialog = {
+    // searchBy: 1  => eshterak
+    zoneId: null,
+    searchBy: 1,
+    item: null,
+    similar: false
+  }
 
+  // getSearchTypes = (): Search[] => {
+  //   return [
+  //     Search.eshterak,
+  //     Search.radif,
+  //     Search.readCode,
+  //     Search.billId,
+  //   ]
+  // }
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) { }
 
   getLMAllZoneDictionary = () => {
@@ -151,9 +170,9 @@ export class ListManagerService {
       })
     })
   }
-  postLMPDXY = (body: object): Promise<any> => {
+  postBodyDataSource = (method: ENInterfaces, body: object): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.ListPerDayXY, body).toPromise().then(res => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
         resolve(res);
       })
     });
@@ -276,6 +295,57 @@ export class ListManagerService {
   }
   showSnackWarn = (message: string) => {
     this.utilsService.snackBarMessageWarn(message);
+  }
+  // moshtarak dialog
+  private validationNullMosh = (dataSource: ISearchMoshReqDialog): boolean => {
+    if (dataSource.hasOwnProperty('searchBy')) {
+      if (MathS.isNull(dataSource.searchBy)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('item')) {
+      if (MathS.isNull(dataSource.item)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+        return false;
+      }
+    }
+    return true;
+  }
+  private validationNumbers = (object: ISearchMoshReqDialog): boolean => {
+    if (object.hasOwnProperty('searchBy')) {
+      if (MathS.isNaN(object.searchBy)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+        return false;
+      }
+    }
+    return true;
+  }
+  verificationMosh = (searchReq: ISearchMoshReqDialog): boolean => {
+    return this.validationNullMosh(searchReq) && this.validationNumbers(searchReq)
+  }
+  makeHadPicturesToBoolean = (dataSource: any) => {
+    dataSource.forEach(item => {
+      if (item.imageCount > 0)
+        item.imageCount = true;
+      else
+        item.imageCount = false;
+    })
+  }
+  getReadingReportTitles = async ($event) => {
+    const a = await this.postById(ENInterfaces.ReadingReportTitles, $event)
+    if (a.length) {
+      this.showResDialog(a, false, EN_messages.insert_rrDetails);
+      return;
+    }
+    this.snackEmptyValue();
+  }
+  showInMapSingle = (dataSource: any) => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return;
+    }
+    this.utilsService.routeToByParams(EN_Routes.wr, { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
   }
 
 }

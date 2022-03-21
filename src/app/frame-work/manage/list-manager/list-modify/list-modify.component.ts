@@ -13,6 +13,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 import { MapDgComponent } from '../all/map-dg/map-dg.component';
+import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 
 @Component({
   selector: 'app-list-modify',
@@ -165,5 +166,19 @@ export class ListModifyComponent extends FactoryONE {
   }
   assignToPageSign = () => {
     this.pageSignTrackNumber = this.dataSource[0].trackNumber;
+  }
+  openMoshtarakinDialog = (dataSource: any) => {
+    this.ref = this.dialogService.open(ListSearchMoshDgComponent, {
+      data: {
+        eshterak: dataSource.eshterak,
+        zoneId: dataSource.zoneId
+      },
+      rtl: true,
+      width: '90%'
+    })
+    this.ref.onClose.subscribe((res: any) => {
+      if (res)
+        console.log(res);
+    });
   }
 }
