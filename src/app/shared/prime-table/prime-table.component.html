@@ -76,7 +76,7 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 4rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
@@ -84,7 +84,7 @@
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 4rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
     </ng-template>
 

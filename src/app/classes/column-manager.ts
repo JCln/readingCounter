@@ -615,6 +615,7 @@ export class ColumnManager {
             { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false },
             { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false },
             { field: 'qotrCode', header: 'قطر', isSelected: false },
+            { field: 'modifyType', header: 'اصلاح', isSelected: true, isBoolean: true },
             // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false },
             { field: 'postalCode', header: 'کد پستی', isSelected: false },
             { field: 'preAverage', header: 'میانگین قبلی', isSelected: false },

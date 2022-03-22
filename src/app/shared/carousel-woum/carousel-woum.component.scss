@@ -3,7 +3,7 @@
 main {
   position: fixed;
   direction: ltr;
-  top: 50%;
+  top: 60%;
   transform: translateY(-50%);
   background: var(--white);
   box-shadow: 0 0 5px 0px var(--secondary_5);
@@ -11,6 +11,12 @@ main {
   min-height: 40rem;
   border-radius: $border_15;
   z-index: 3;
+
+  @media (max-width: 700px) {
+    top: 100%;
+    width: calc(100% - 32%);
+    z-index: 10000;
+  }
 
 
   .prev,
