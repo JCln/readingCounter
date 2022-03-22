@@ -36,7 +36,7 @@
     [dictionary]="counterStateByZoneDictionary" 
     [_secondDictionaryName]="'modifyType'"
     [secondDictionary]="modifyType" 
-    [_numberOfExtraColumns]="[1,2,3,4,5]" 
+    [_numberOfExtraColumns]="[1,2,3,4,5,6]" 
     [_backToPreviousEnabled]=true 
     [_backToPreviousText]="'بازگشت به صفحه قبلی'"
     [_isInRowEditing]="true"
@@ -52,6 +52,7 @@
     (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
     (onRowEditedInit)="onRowEditInit($event)"
     (onRowEditedSave)="onRowEditSave($event)" 
+    (openedBriefKardexDialog)="openBriefKardexDialog($event)"
     (onRowEditedCancelRowEditing)="onRowEditCancel($event)">
     </app-prime-table-editable>
 

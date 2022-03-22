@@ -54,6 +54,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() forcedOffload = new EventEmitter<any>();
   @Output() backedToImportedConfirmDialog = new EventEmitter<any>();
   @Output() routedToLMPayDay = new EventEmitter<any>();
+  @Output() openedBriefKardexDialog = new EventEmitter<any>();
   @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() routedToLMAll = new EventEmitter<any>();
   @Output() routedToFollowUp = new EventEmitter<any>();
@@ -112,6 +113,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   routeToLMPayDay = (dataSource: object) => {
     this.routedToLMPayDay.emit(dataSource);
+  }
+  openBriefKardexDialog = (dataSource: object) => {
+    this.openedBriefKardexDialog.emit(dataSource);
   }
   showWOUIAsCarousel = (dataSource: any, ri: number) => {
     this.showedWOUIAsCarousel.emit({ dataSource, ri });

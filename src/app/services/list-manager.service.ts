@@ -176,9 +176,16 @@ export class ListManagerService {
       })
     });
   }
-  postById = (method: ENInterfaces, id: number): Promise<any> => {
+  postById = (method: ENInterfaces, id?: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
+  postByQueue = (method: ENInterfaces, id: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTSG(method, id).toPromise().then(res => {
         resolve(res);
       })
     });

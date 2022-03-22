@@ -198,6 +198,12 @@
                     <div class="tooltip_text">مشاهده سابقه</div>
                 </i>
             </td>
+            <td *ngIf="_checkUpName == 'generalListModify'" (click)="openBriefKardexDialog(dataSource)">
+                <span class="ui-column-title">خلاصه کاردکس</span>
+                <i class="tooltip p_icons pi pi-list">
+                    <div class="tooltip_text">خلاصه کاردکس</div>
+                </i>
+            </td>
             <td *ngIf="_checkUpName =='generalListModify'" (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">

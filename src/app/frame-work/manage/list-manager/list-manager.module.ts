@@ -8,13 +8,15 @@ import { MapDgComponent } from './all/map-dg/map-dg.component';
 import { ListManagerRoutingModule } from './list-manager-routing.module';
 import { ListSearchMoshDgComponent } from './list-search-mosh-dg/list-search-mosh-dg.component';
 import { ListSearchMoshWoumComponent } from './list-search-mosh-dg/list-search-mosh-woum/list-search-mosh-woum.component';
+import { BriefKardexComponent } from './brief-kardex/brief-kardex.component';
 
 
 @NgModule({
   declarations: [
     MapDgComponent,
     ListSearchMoshDgComponent,
-    ListSearchMoshWoumComponent
+    ListSearchMoshWoumComponent,
+    BriefKardexComponent
   ],
   imports: [
     SharedPrimeNgModule,

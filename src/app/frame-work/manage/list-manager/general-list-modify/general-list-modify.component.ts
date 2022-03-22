@@ -15,6 +15,7 @@ import { MathS } from 'src/app/classes/math-s';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
+import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 
 @Component({
@@ -115,7 +116,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   }
   toPrePage = () => {
     this.router.navigate([EN_Routes.wrmtrackoffloaded]);
-  } 
+  }
   onRowEditInit(dataSource: object) {
     this.clonedProducts = { dataSource };
   }
@@ -207,6 +208,20 @@ export class GeneralListModifyComponent extends AllListsFactory {
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {
       data: {
         eshterak: dataSource.eshterak,
+        zoneId: dataSource.zoneId
+      },
+      rtl: true,
+      width: '90%'
+    })
+    this.ref.onClose.subscribe((res: any) => {
+      if (res)
+        console.log(res);
+    });
+  }
+  openBriefKardexDialog = (dataSource: any) => {
+    this.ref = this.dialogService.open(BriefKardexComponent, {
+      data: {
+        radif: dataSource.radif,
         zoneId: dataSource.zoneId
       },
       rtl: true,

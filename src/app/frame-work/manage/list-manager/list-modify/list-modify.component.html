@@ -20,7 +20,7 @@
     [_checkUpName]="'allComponent'"
     [_sessionName]="'modifyLists'"
     [_selectedColumnsToRemember]="'selectedListManagerModify'"
-    [_numberOfExtraColumns]="[1,2,3,4]"    
+    [_numberOfExtraColumns]="[1,2,3,4,5]"    
     [_backToPreviousEnabled]=true
     [_allComponentIsModify]="true"
     [_backToPreviousText]="'بازگشت به صفحه قبلی'"
@@ -33,6 +33,7 @@
     (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
     (showedWOUIAsCarousel)="doShowCarousel($event,'showWouImages')"
     (showedPictures)="getReadingReportTitles($event)" 
+    (openedBriefKardexDialog)="openBriefKardexDialog($event)"
     (showedInMapSingle)="openMapDialog($event)"   
     > 
     </app-prime-table>

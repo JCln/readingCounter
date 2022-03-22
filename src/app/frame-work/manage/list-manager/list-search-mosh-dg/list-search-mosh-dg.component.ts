@@ -8,6 +8,7 @@ import { Converter } from 'src/app/classes/converter';
 import { Search } from 'src/app/classes/search';
 
 import { MapDgComponent } from '../all/map-dg/map-dg.component';
+import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
 import { ListSearchMoshWoumComponent } from './list-search-mosh-woum/list-search-mosh-woum.component';
 
 @Component({
@@ -95,6 +96,20 @@ export class ListSearchMoshDgComponent implements OnInit {
       if (res)
         console.log(res);
 
+    });
+  }
+  openBriefKardexDialog = (dataSource: any) => {
+    this.ref = this.dialogService.open(BriefKardexComponent, {
+      data: {
+        radif: dataSource.radif,
+        zoneId: dataSource.zoneId
+      },
+      rtl: true,
+      width: '90%'
+    })
+    this.ref.onClose.subscribe((res: any) => {
+      if (res)
+        console.log(res);
     });
   }
   refreshTable = () => {

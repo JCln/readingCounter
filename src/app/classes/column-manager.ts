@@ -650,6 +650,14 @@ export class ColumnManager {
             { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
             { field: 'description', header: 'توضیحات', isSelected: false }
         ];
+    briefKardex: IObjectIteratation[] =
+        [
+            // { field: 'kardexItemType', header: 'نوع کارکس', isSelected: false },
+            { field: 'jalaliDay', header: 'تاریخ', isSelected: true },
+            { field: 'description', header: 'ش پیگیری', isSelected: true },
+            { field: 'counterStateTitle', header: 'توضیحات', isSelected: true },
+            { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
+        ];
     assess_pre: IObjectIteratation[] =
         [
             { field: 'billId', header: 'شناسه قبض', isSelected: false },

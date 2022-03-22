@@ -147,6 +147,7 @@ export enum ENInterfaces {
     trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
     trackingToOFFLOADEDGeneralModify = 'V1/List/OffLoaded/AllInGroup/',
     trackingPRE = 'V1/Tracking/Pre',
+    trackingBriefKardex = 'V1/AbBahaReport',
     trackingFinishReadiED = 'V1/Tracking/FinishReading',
     trackingREMOVE = 'V1/Tracking/Remove',
     trackingFOLLOWUP = 'V1/Tracking/FollowUp/?trackNumber=',
@@ -262,13 +263,13 @@ export enum ENInterfaces {
 
     dataMiningReadingTime = 'V1/List/Offloaded/ReadingTime',
 
-
     /* NON MANAGER INTERFACES */
     getPolicies = 'V1/Policy/Active',
     editPolicies = 'V1/Policy/Edit',
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
+    chat = '/V1/Chat/Index?accessToken=',
 
     postImportData = 'V1/Import/Dynamic',
     postImportDynamicCount = 'V1/Import/DynamicCount',

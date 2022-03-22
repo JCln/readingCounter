@@ -197,6 +197,12 @@
                     <div class="tooltip_text">مشاهده سابقه</div>
                 </i>
             </td>
+            <td *ngIf="_outputFileName =='ModifyList'" (click)="openBriefKardexDialog(dataSource)">
+                <span class="ui-column-title">خلاصه کاردکس</span>
+                <i class="tooltip p_icons pi pi-list">
+                    <div class="tooltip_text">خلاصه کاردکس</div>
+                </i>
+            </td>
             <td *ngIf="_checkUpName == 'search_moshtarak' ||
              _checkUpName == 'allComponent' ||
              _checkUpName =='forbidden' ||            

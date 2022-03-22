@@ -12,6 +12,7 @@ import { AllListsFactory } from 'src/app/classes/factory';
 import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
+import { BriefKardexComponent } from './../brief-kardex/brief-kardex.component';
 
 @Component({
   selector: 'app-list-modify',
@@ -85,7 +86,7 @@ export class ListModifyComponent extends AllListsFactory {
   }
   toPrePage = () => {
     this.router.navigate([EN_Routes.wrmtrackoffloaded]);
-  } 
+  }
   /*
   water officer upload carousel images
   */
@@ -96,6 +97,20 @@ export class ListModifyComponent extends AllListsFactory {
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {
       data: {
         eshterak: dataSource.eshterak,
+        zoneId: dataSource.zoneId
+      },
+      rtl: true,
+      width: '90%'
+    })
+    this.ref.onClose.subscribe((res: any) => {
+      if (res)
+        console.log(res);
+    });
+  }
+  openBriefKardexDialog = (dataSource: any) => {
+    this.ref = this.dialogService.open(BriefKardexComponent, {
+      data: {
+        radif: dataSource.radif,
         zoneId: dataSource.zoneId
       },
       rtl: true,

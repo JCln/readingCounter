@@ -49,6 +49,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() showedInMapSingle = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
+  @Output() openedBriefKardexDialog = new EventEmitter<any>();
   @Output() customedSort = new EventEmitter<any>();
   @Output() receivedDateJalali = new EventEmitter<any>();
   @Output() refreshedTable = new EventEmitter<boolean>();
@@ -80,6 +81,9 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
 
   refreshTable() {
     this.refreshedTable.emit(true);
+  }
+  openBriefKardexDialog = (dataSource: object) => {
+    this.openedBriefKardexDialog.emit(dataSource);
   }
   onRowEditInit = (dataSource: object) => {
     this.onRowEditedInit.emit(dataSource);

@@ -52,6 +52,13 @@ export interface IManageServer {
     color?: string;
     clickFunction?: ENManageServers;
 }
+export interface IBriefKardex {
+    kardexItemType: number;
+    jalaliDay: string;
+    description: string;
+    counterStateTitle: string;
+    counterNumber: number;
+}
 export interface IOnOffLoadFlat {
     id: string,
     trackNumber: number,

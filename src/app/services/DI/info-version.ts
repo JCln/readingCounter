@@ -3,17 +3,17 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'لیست قرائت',
-        isSelected: true
-    },    
-    {
-        id: '2',
-        title: 'نوبتی',
+        title: 'اصلاح لیست',
         isSelected: true
     },
     {
         id: '2',
-        title: 'رفع برخی ایرادات',
+        title: 'مدیا',
+        isSelected: true
+    },
+    {
+        id: '2',
+        title: 'جستجو تجمیعی و مشترک',
         isSelected: true
     }
 ]

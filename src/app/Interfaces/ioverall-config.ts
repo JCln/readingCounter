@@ -315,6 +315,7 @@ export enum ENSelectedColumnVariables {
     selectedListManagerAssess = 'assess_pre',
     selectedListManagerMosh = 'searchMosh',
     selectedListManagerMoshDialog = 'searchMoshDialog',
+    selectedListManagerBriefKardexDialog = 'briefKardex',
     selectedCounterState = 'counterState',
     selectedListManagerPro = 'searchPro',
     selectedSearchManagerSimple = 'simpleSearch',
@@ -398,5 +399,5 @@ export interface Theme {
     properties: any
 }
 export enum ENLoginVersion {
-    version = '0.6.6'
+    version = '0.7.0'
 }
