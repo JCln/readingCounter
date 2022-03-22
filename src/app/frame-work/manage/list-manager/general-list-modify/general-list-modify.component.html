@@ -46,7 +46,7 @@
     (refreshedTable)="refreshTable()"
     (backedToPrevious)="toPrePage()" 
     (filteredEvent)="filteredTableEvent($event)"
-    (showedWOUIAsCarousel)="routeToWoui($event)" 
+    (showedWOUIAsCarousel)="doShowCarousel($event,'showCarousel')" 
     (showedPictures)="getReadingReportTitles($event)"
     (showedInMapSingle)="openMapDialog($event)" 
     (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
@@ -55,7 +55,7 @@
     (onRowEditedCancelRowEditing)="onRowEditCancel($event)">
     </app-prime-table-editable>
 
-    <app-carousel-woum *ngIf="showWouImages" [dataSource]="carouselDataSource"
+    <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource"
         (cancelClicked)="carouselCancelClicked()" (prevClicked)="carouselPrevItem()"
         (nextClicked)="carouselNextItem()">
         <app-woum></app-woum>

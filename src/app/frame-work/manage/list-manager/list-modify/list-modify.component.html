@@ -14,7 +14,7 @@
 </section>
 
 <main style="position: relative; ">
-    <app-prime-table [hidden]="showCarousel" 
+    <app-prime-table
     [dataSource]="dataSource" 
     [_outputFileName]="'ModifyList'"
     [_checkUpName]="'allComponent'"
@@ -28,10 +28,10 @@
     (customedSort)="listManagerService.customSort($event)"
     (refreshedTable)="refreshTable()"
     (backedToPrevious)="toPrePage()"
-    (routedToOffload)="routeToOffload($event)"
+    (routedToOffload)="doShowCarousel($event,'showCarousel')"
     (filteredEvent)="filteredTableEvent($event)"
     (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
-    (showedWOUIAsCarousel)="routeToWoui($event)"
+    (showedWOUIAsCarousel)="doShowCarousel($event,'showWouImages')"
     (showedPictures)="getReadingReportTitles($event)" 
     (showedInMapSingle)="openMapDialog($event)"   
     > 
@@ -47,10 +47,10 @@
     </app-carousel>
 
     <app-carousel-woum *ngIf="showWouImages" 
-    [dataSource]="woumInfosDataSource"
+    [dataSource]="carouselDataSource"
     (cancelClicked)="carouselCancelClicked()"
-    (prevClicked)="carouselWOUMPrevItem()"
-    (nextClicked)="carouselWOUMNextItem()"
+    (prevClicked)="carouselPrevItem()"
+    (nextClicked)="carouselNextItem()"
     >
     <app-woum></app-woum>
     </app-carousel-woum>

@@ -188,6 +188,10 @@ export class ListManagerService {
     dataSource.forEach(item => {
       if (item.newRate > 0)
         item.newRate = parseFloat(MathS.getRange(item.newRate))
+      item.preAverage = +MathS.getRange(item.preAverage);
+      item.x = MathS.getRange(item.x);
+      item.y = MathS.getRange(item.y);
+      item.gisAccuracy = MathS.getRange(item.gisAccuracy);
     })
   }
   customizeSelectedColumns = (_selectCols: any[]) => {
@@ -241,7 +245,7 @@ export class ListManagerService {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
   showInMapSingleValidation = (dataSource: any): boolean => {
-    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseInt(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred || MathS.isNull(parseInt(dataSource.gisAccuracy))) {
       this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
       return false;
     }

@@ -92,13 +92,13 @@
     (refreshedTable)="refreshTable()"
     (showedInMapSingle)="openMapDialog($event)"
     (filteredEvent)="filteredTableEvent($event)"
-    (showedWOUIAsCarousel)="routeToWoui($event)"    
+    (showedWOUIAsCarousel)="doShowCarousel($event,'showCarousel')"
     (showedPictures)="getReadingReportTitles($event)"
     >
     </app-prime-table>
     
     <app-carousel-woum
-    [dataSource]="woumInfosDataSource"
+    [dataSource]="carouselDataSource"
     (cancelClicked)="carouselCancelClicked()"
     (prevClicked)="carouselPrevItem()"
     (nextClicked)="carouselNextItem()"

@@ -5,17 +5,16 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
-import { FactoryONE } from 'src/app/classes/factory';
+import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
-import { MapDgComponent } from '../all/map-dg/map-dg.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 
 @Component({
@@ -23,21 +22,15 @@ import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mo
   templateUrl: './general-list-modify.component.html',
   styleUrls: ['./general-list-modify.component.scss']
 })
-export class GeneralListModifyComponent extends FactoryONE {
+export class GeneralListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
-  carouselDataSource: IOnOffLoadFlat;
-  filterableDataSource: IOnOffLoadFlat[] = [];
   clonedProducts: { [s: string]: object; } = {};
   counterStateValue: number;
 
   pageSignTrackNumber: number = null;
-  showCarousel: boolean = false;
-  showWouImages: boolean = false;
-  ref: DynamicDialogRef;
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
-  rowIndex: number = 0;
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
@@ -60,11 +53,11 @@ export class GeneralListModifyComponent extends FactoryONE {
   constructor(
     public listManagerService: ListManagerService,
     private router: Router,
-    private dialogService: DialogService,
+    public dialogService: DialogService,
     private closeTabService: CloseTabService,
     public allListsService: AllListsService
   ) {
-    super();
+    super(dialogService, listManagerService);
   }
 
   updateOnChangedCounterState = async (val: any) => {
@@ -104,8 +97,8 @@ export class GeneralListModifyComponent extends FactoryONE {
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
       this.assignToPageSign();
-      this.setDynamicRages();
-      this.makeHadPicturesToBoolean();
+      this.listManagerService.setDynamicPartRanges(this.dataSource);
+      this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     }
   }
   refreshTable = () => {
@@ -120,43 +113,9 @@ export class GeneralListModifyComponent extends FactoryONE {
     this._selectCols = this.listManagerService.generalListModify();
     this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
   }
-  filteredTableEvent = (e: any) => {
-    this.filterableDataSource = e;
-  }
-  carouselNextItem = () => {
-    this.rowIndex >= this.filterableDataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
-    this.carouselDataSource = this.filterableDataSource[this.rowIndex];
-  }
-  carouselPrevItem = () => {
-    this.rowIndex < 1 ? this.rowIndex = this.filterableDataSource.length - 1 : this.rowIndex--;
-    this.carouselDataSource = this.filterableDataSource[this.rowIndex];
-  }
-  carouselCancelClicked = () => {
-    this.showCarousel = false;
-    this.showWouImages = false;
-  }
   toPrePage = () => {
     this.router.navigate([EN_Routes.wrmtrackoffloaded]);
-  }
-  setDynamicRages = () => {
-    this.listManagerService.setDynamicPartRanges(this.dataSource);
-  }
-  makeHadPicturesToBoolean = () => {
-    this.dataSource.forEach(item => {
-      if (item.imageCount > 0)
-        item.imageCount = true;
-      else
-        item.imageCount = false;
-    })
-  }
-  getReadingReportTitles = async ($event) => {
-    const a = await this.listManagerService.postById(ENInterfaces.ReadingReportTitles, $event)
-    if (a.length) {
-      this.listManagerService.showResDialog(a, false, EN_messages.insert_rrDetails);
-      return;
-    }
-    this.listManagerService.snackEmptyValue();
-  }
+  } 
   onRowEditInit(dataSource: object) {
     this.clonedProducts = { dataSource };
   }
@@ -199,8 +158,7 @@ export class GeneralListModifyComponent extends FactoryONE {
     // TODO editSingleLine
     this.offloadModifyReq = JSON.parse(JSON.stringify(this.offloadModifyReq));
     dataSource = dataSource['dataSource'];
-
-    if (!MathS.isNull(dataSource.modifyType) && !MathS.isNull(dataSource.counterStateId)) {
+    if (dataSource.modifyType !== null) {
       this.offloadModifyReq.id = dataSource.id;
       this.offloadModifyReq.counterNumber = dataSource.counterNumber;
       this.offloadModifyReq.description = dataSource.description;
@@ -235,11 +193,6 @@ export class GeneralListModifyComponent extends FactoryONE {
   /*
   water officer upload carousel images
   */
-  routeToWoui = (object: any) => {
-    this.carouselDataSource = object['dataSource'];
-    this.rowIndex = object['ri'];
-    this.showWouImages = true;
-  }
   assignToPageSign = () => {
     this.pageSignTrackNumber = this.dataSource[0].trackNumber;
   }
@@ -262,18 +215,6 @@ export class GeneralListModifyComponent extends FactoryONE {
     this.ref.onClose.subscribe((res: any) => {
       if (res)
         console.log(res);
-    });
-  }
-  openMapDialog = (dataSource: any) => {
-    if (this.listManagerService.showInMapSingleValidation(dataSource))
-      this.ref = this.dialogService.open(MapDgComponent, {
-        data: dataSource,
-        rtl: true,
-        width: '70%'
-      })
-    this.ref.onClose.subscribe(async res => {
-      if (res)
-        this.refreshTable();
     });
   }
 

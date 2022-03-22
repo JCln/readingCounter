@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
-import { FactoryONE } from 'src/app/classes/factory';
+import { AllListsFactory } from 'src/app/classes/factory';
 import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
-import { MapDgComponent } from '../all/map-dg/map-dg.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 
 @Component({
@@ -20,33 +18,26 @@ import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mo
   templateUrl: './list-modify.component.html',
   styleUrls: ['./list-modify.component.scss']
 })
-export class ListModifyComponent extends FactoryONE {
+export class ListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
-  woumInfosDataSource: IOnOffLoadFlat;
-  carouselDataSource: IOnOffLoadFlat;
-  filterableDataSource: IOnOffLoadFlat[] = [];
 
   pageSignTrackNumber: number = null;
-  showCarousel: boolean = false;
-  showWouImages: boolean = false;
-  ref: DynamicDialogRef;
-
-  rowIndex: number = 0;
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
+  showWouImages: boolean = false;
 
   constructor(
     public listManagerService: ListManagerService,
     private router: Router,
-    private dialogService: DialogService,
+    public dialogService: DialogService,
     private closeTabService: CloseTabService,
     public allListsService: AllListsService
   ) {
-    super();
+    super(dialogService, listManagerService);
   }
 
   classWrapper = async (canRefresh?: boolean) => {
@@ -88,82 +79,16 @@ export class ListModifyComponent extends FactoryONE {
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
-      this.setDynamicRages();
-      this.makeHadPicturesToBoolean();
+      this.listManagerService.setDynamicPartRanges(this.dataSource);
+      this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     }
-  }
-  filteredTableEvent = (e: any) => {
-    this.filterableDataSource = e;
-  }
-  routeToOffload = (event: object) => {
-    this.carouselDataSource = event['dataSource'];
-    this.rowIndex = event['ri'];
-    this.showCarousel = true;
-  }
-  carouselNextItem = () => {
-    this.rowIndex >= this.filterableDataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
-    this.carouselDataSource = this.filterableDataSource[this.rowIndex];
-  }
-  carouselPrevItem = () => {
-    this.rowIndex < 1 ? this.rowIndex = this.filterableDataSource.length - 1 : this.rowIndex--;
-    this.carouselDataSource = this.filterableDataSource[this.rowIndex];
-  }
-  carouselCancelClicked = () => {
-    this.showCarousel = false;
-    this.showWouImages = false;
   }
   toPrePage = () => {
     this.router.navigate([EN_Routes.wrmtrackoffloaded]);
-  }
-  setDynamicRages = () => {
-    this.listManagerService.setDynamicPartRanges(this.dataSource);
-  }
-  makeHadPicturesToBoolean = () => {
-    this.dataSource.forEach(item => {
-      if (item.imageCount > 0)
-        item.imageCount = true;
-      else
-        item.imageCount = false;
-    })
-  }
-  getReadingReportTitles = async ($event) => {
-    const a = await this.listManagerService.postById(ENInterfaces.ReadingReportTitles, $event)
-    if (a.length) {
-      this.listManagerService.showResDialog(a, false, EN_messages.insert_rrDetails);
-      return;
-    }
-    this.listManagerService.snackEmptyValue();
-  }
-
+  } 
   /*
   water officer upload carousel images
   */
-  routeToWoui = (object: any) => {
-    this.woumInfosDataSource = object['dataSource'];
-    this.rowIndex = object['ri'];
-    this.showWouImages = true;
-    scrollTo(0, 0);
-  }
-  carouselWOUMNextItem = () => {
-    this.rowIndex >= this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
-    this.woumInfosDataSource = this.dataSource[this.rowIndex];
-  }
-  carouselWOUMPrevItem = () => {
-    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length - 1 : this.rowIndex--;
-    this.woumInfosDataSource = this.dataSource[this.rowIndex];
-  }
-  openMapDialog = (dataSource: any) => {
-    if (this.listManagerService.showInMapSingleValidation(dataSource))
-      this.ref = this.dialogService.open(MapDgComponent, {
-        data: dataSource,
-        rtl: true,
-        width: '70%'
-      })
-    this.ref.onClose.subscribe(async res => {
-      if (res)
-        this.refreshTable();
-    });
-  }
   assignToPageSign = () => {
     this.pageSignTrackNumber = this.dataSource[0].trackNumber;
   }
@@ -180,5 +105,9 @@ export class ListModifyComponent extends FactoryONE {
       if (res)
         console.log(res);
     });
+  }
+  carouselCancelClicked = () => {
+    this.showCarousel = false;
+    this.showWouImages = false;
   }
 }

@@ -192,9 +192,9 @@
                 </i>
             </td>
             <td *ngIf="_outputFileName =='ModifyList'" (click)="openMoshtarakinDialog(dataSource)">
-                <span class="ui-column-title">مشاهده مشترکین</span>
+                <span class="ui-column-title">مشاهده سابقه</span>
                 <i class="tooltip p_icons pi pi-users">
-                    <div class="tooltip_text">مشاهده مشترکین</div>
+                    <div class="tooltip_text">مشاهده سابقه</div>
                 </i>
             </td>
             <td *ngIf="_checkUpName == 'search_moshtarak' ||
@@ -269,7 +269,7 @@
                     <div class="tooltip_text_right">مشاهده عکس(ها)</div>
                 </i>
             </td>
-            <td *ngIf="(_outputFileName == 'allLists' || _outputFileName == 'rrPreNumber'|| _outputFileName == 'rrLocked')&& !_allComponentIsModify"
+            <td *ngIf="(_outputFileName == 'allLists' || _outputFileName == 'rrPreNumber'|| _outputFileName == 'rrLocked'|| _outputFileName == 'rrLocked' || _outputFileName == 'searchMoshDialog')&& !_allComponentIsModify"
                 (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
@@ -278,8 +278,7 @@
             </td>
             <td *ngIf="(
                 _outputFileName == 'searchPro' 
-            || _outputFileName == 'searchMosh'
-            || _outputFileName == 'searchMoshDialog'
+            || _outputFileName == 'searchMosh'            
             || _outputFileName == 'rrDetails'            
             || _outputFileName == 'trv'
             || _outputFileName == 'assess_pre'

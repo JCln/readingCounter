@@ -133,10 +133,12 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     this.customedSort.emit(dataSource);
   }
   receiveDateJalali = (event: string, ri: number) => {
+    // it may work only for General modify component
+    this.dataSource[ri].offloadDateJalali = event;
     this.receivedDateJalali.emit(event);
   }
   openMoshtarakinDialog = (dataSource: object) => {
     this.openedMoshtarakinDialog.emit(dataSource);
   }
-  
+
 }

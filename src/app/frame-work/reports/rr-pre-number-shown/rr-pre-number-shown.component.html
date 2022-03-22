@@ -78,7 +78,7 @@
         </form>
     </section>
 
-    <app-prime-table [hidden]="showWouImages"
+    <app-prime-table [hidden]="showCarousel"
     [dataSource]="dataSource"
     [_outputFileName]="'rrPreNumber'" 
     [_checkUpName]="'rr-preNumber'" 
@@ -91,15 +91,15 @@
     (showedInMapSingle)="openMapDialog($event)"
     (filteredEvent)="filteredTableEvent($event)"
     (showedPictures)="getReadingReportTitles($event)"
-    (showedWOUIAsCarousel)="routeToWoui($event)"    
+    (showedWOUIAsCarousel)="doShowCarousel($event,'showCarousel')" 
     >
     </app-prime-table>    
     
-    <app-carousel-woum *ngIf="showWouImages" 
-    [dataSource]="woumInfosDataSource"
+    <app-carousel-woum *ngIf="showCarousel" 
+    [dataSource]="carouselDataSource"
     (cancelClicked)="carouselCancelClicked()"
-    (prevClicked)="carouselWOUMPrevItem()"
-    (nextClicked)="carouselWOUMNextItem()"
+    (prevClicked)="carouselPrevItem()"
+    (nextClicked)="carouselNextItem()"
     >
     <app-woum></app-woum>
     </app-carousel-woum>

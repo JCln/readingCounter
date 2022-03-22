@@ -165,7 +165,7 @@
                             <ng-container *ngIf="col.field == 'offloadDateJalali'; else editableForm">
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">
-                                        <app-date-jalali name="date" (dateJalEvent)="dataSource[col.field]"
+                                        <app-date-jalali name="date" (dateJalEvent)="receiveDateJalali($event , ri)"
                                             [dateObject]="dataSource[col.field]">
                                         </app-date-jalali>
                                     </ng-template>
@@ -192,6 +192,12 @@
                     </ng-template>
                 </ng-template>
             </td>
+            <td *ngIf="_checkUpName == 'generalListModify'" (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده سابقه</span>
+                <i class="tooltip p_icons pi pi-users">
+                    <div class="tooltip_text">مشاهده سابقه</div>
+                </i>
+            </td>
             <td *ngIf="_checkUpName =='generalListModify'" (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
@@ -208,12 +214,6 @@
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
-                </i>
-            </td>
-            <td *ngIf="_checkUpName == 'generalListModify'" (click)="openMoshtarakinDialog(dataSource)">
-                <span class="ui-column-title">مشاهده مشترکین</span>
-                <i class="tooltip p_icons pi pi-users">
-                    <div class="tooltip_text">مشاهده مشترکین</div>
                 </i>
             </td>
             <td>

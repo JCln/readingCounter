@@ -13,8 +13,18 @@
   }
 }
 
-.radio_group {
-  display: grid;
-  direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(5rem, 7rem));
+.radios {
+  background: var(--white);
+  border-radius: $border_15 $border_15 0 0;
+
+  .radio_group {
+    justify-content: flex-start;
+    display: flex;
+    direction: rtl;
+    flex-wrap: wrap;
+
+    .mat-radio-button {
+      margin-left: $font_05;
+    }
+  }
 }

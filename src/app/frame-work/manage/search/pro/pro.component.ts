@@ -6,12 +6,12 @@ import { IDictionaryManager, ITHV, ITitleValue } from 'interfaces/ioverall-confi
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
+import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { MapDgComponent } from '../../list-manager/all/map-dg/map-dg.component';
-import { OutputManagerService } from './../../../../services/output-manager.service';
 
 @Component({
   selector: 'app-pro',

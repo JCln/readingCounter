@@ -16,7 +16,7 @@ import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import {
-  ConfirmDialogExcelViewComponent,
+    ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { EN_Routes } from '../Interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
@@ -382,7 +382,7 @@ export class ReadingReportManagerService {
   }
   routeToMapGIS = (readingReportGISReq: IReadingReportGISReq) => {
     this.router.navigate([EN_Routes.wr, readingReportGISReq]);
-  } 
+  }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POST(method, id).toPromise().then(res => {
@@ -478,7 +478,7 @@ export class ReadingReportManagerService {
     return this.followUPValidation(id);
   }
   showInMapSingleValidation = (dataSource: any): boolean => {
-    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseInt(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred || MathS.isNull(parseInt(dataSource.gisAccuracy))) {
       this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
       return false;
     }

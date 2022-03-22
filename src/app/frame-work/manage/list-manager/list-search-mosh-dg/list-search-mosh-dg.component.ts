@@ -8,6 +8,7 @@ import { Converter } from 'src/app/classes/converter';
 import { Search } from 'src/app/classes/search';
 
 import { MapDgComponent } from '../all/map-dg/map-dg.component';
+import { ListSearchMoshWoumComponent } from './list-search-mosh-woum/list-search-mosh-woum.component';
 
 @Component({
   selector: 'app-list-search-mosh-dg',
@@ -76,8 +77,20 @@ export class ListSearchMoshDgComponent implements OnInit {
       this.ref = this.dialogService.open(MapDgComponent, {
         data: dataSource,
         rtl: true,
-        width: '70%'
+        width: '80%'
       })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
+  openWOUMDialog = (dataSource: any) => {
+    this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+      data: dataSource,
+      rtl: true,
+      width: '80%'
+    })
     this.ref.onClose.subscribe(async res => {
       if (res)
         console.log(res);
