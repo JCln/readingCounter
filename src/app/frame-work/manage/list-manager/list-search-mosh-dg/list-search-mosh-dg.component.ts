@@ -2,10 +2,12 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { Search } from 'src/app/classes/search';
+
+import { MapDgComponent } from '../all/map-dg/map-dg.component';
 
 @Component({
   selector: 'app-list-search-mosh-dg',
@@ -21,13 +23,13 @@ export class ListSearchMoshDgComponent implements OnInit {
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   searchType: Search[];
-  // _searchByInfo: string = 'مقدار';
 
   constructor(
     public listManagerService: ListManagerService,
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private cdr: ChangeDetectorRef,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -69,5 +71,22 @@ export class ListSearchMoshDgComponent implements OnInit {
   close() {
     this.ref.close();
   }
+  openMapDialog = (dataSource: any) => {
+    if (this.listManagerService.showInMapSingleValidation(dataSource))
+      this.ref = this.dialogService.open(MapDgComponent, {
+        data: dataSource,
+        rtl: true,
+        width: '70%'
+      })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
+  refreshTable = () => {
+    this.connectToServer();
+  }
+
 
 }

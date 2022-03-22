@@ -3,12 +3,15 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { Search } from 'src/app/classes/search';
+
+import { MapDgComponent } from '../../list-manager/all/map-dg/map-dg.component';
 
 @Component({
   selector: 'app-moshtarak',
@@ -21,6 +24,7 @@ export class MoshtarakComponent extends FactoryONE {
   searchType: Search[];
   searchByText: string = '';
   _empty_message: string = '';
+  ref: DynamicDialogRef;
   _searchByInfo: string = 'مقدار';
 
   _selectCols: any[] = [];
@@ -36,7 +40,8 @@ export class MoshtarakComponent extends FactoryONE {
   constructor(
 
     private closeTabService: CloseTabService,
-    public searchService: SearchService
+    public searchService: SearchService,
+    private dialogService: DialogService
   ) {
     super();
   }
@@ -86,7 +91,7 @@ export class MoshtarakComponent extends FactoryONE {
       this.toDefaultVals();
 
     this.searchType = this.searchService.getSearchTypes();
-    this.zoneDictionary = await this.searchService.getZoneDictionary();
+    this.getZoneDictionary();
   }
   refreshTable = () => {
     this.connectToServer();
@@ -102,5 +107,23 @@ export class MoshtarakComponent extends FactoryONE {
     }
     this.searchService.snackEmptyValue();
   }
+  openMapDialog = (dataSource: any) => {
+    if (this.searchService.showInMapSingleValidation(dataSource))
+      this.ref = this.dialogService.open(MapDgComponent, {
+        data: dataSource,
+        rtl: true,
+        width: '70%'
+      })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        this.refreshTable();
+    });
+  }
+  getZoneDictionary = async () => {
+    this.zoneDictionary = JSON.parse(JSON.stringify(await this.searchService.getZoneDictionary()));
+    if (this.zoneDictionary[0].id !== 0)
+      this.zoneDictionary.unshift({ id: 0, title: 'مناطق مجاز', isSelected: true })
+  }
+
 
 }

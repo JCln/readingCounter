@@ -240,18 +240,6 @@ export class GeneralListModifyComponent extends FactoryONE {
     this.rowIndex = object['ri'];
     this.showWouImages = true;
   }
-  openMapDialog = (dataSource: any) => {
-    if (this.listManagerService.showInMapSingleValidation(dataSource))
-      this.ref = this.dialogService.open(MapDgComponent, {
-        data: dataSource,
-        rtl: true,
-        width: '70%'
-      })
-    this.ref.onClose.subscribe(async res => {
-      if (res)
-        this.refreshTable();
-    });
-  }
   assignToPageSign = () => {
     this.pageSignTrackNumber = this.dataSource[0].trackNumber;
   }
@@ -276,4 +264,17 @@ export class GeneralListModifyComponent extends FactoryONE {
         console.log(res);
     });
   }
+  openMapDialog = (dataSource: any) => {
+    if (this.listManagerService.showInMapSingleValidation(dataSource))
+      this.ref = this.dialogService.open(MapDgComponent, {
+        data: dataSource,
+        rtl: true,
+        width: '70%'
+      })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        this.refreshTable();
+    });
+  }
+
 }

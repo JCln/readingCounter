@@ -5,7 +5,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
-import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchMoshReqDialog } from 'interfaces/search';
 import { SortEvent } from 'primeng/api/sortevent';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -339,13 +338,6 @@ export class ListManagerService {
       return;
     }
     this.snackEmptyValue();
-  }
-  showInMapSingle = (dataSource: any) => {
-    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
-      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
-      return;
-    }
-    this.utilsService.routeToByParams(EN_Routes.wr, { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
   }
 
 }

@@ -5,12 +5,12 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENRandomNumbers,
-  ENSelectedColumnVariables,
-  IMasrafStates,
-  IObjectIteratation,
-  ISearchInOrderTo,
-  ITitleValue,
+    ENRandomNumbers,
+    ENSelectedColumnVariables,
+    IMasrafStates,
+    IObjectIteratation,
+    ISearchInOrderTo,
+    ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
@@ -334,13 +334,6 @@ export class SearchService {
   }
   showInMap = (dataSource: object) => {
     this.utilsService.routeToByParams(EN_Routes.wr, { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });
-  }
-  showInMapSingle = (dataSource: any) => {
-    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
-      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
-      return;
-    }
-    this.utilsService.routeToByParams(EN_Routes.wr, { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make

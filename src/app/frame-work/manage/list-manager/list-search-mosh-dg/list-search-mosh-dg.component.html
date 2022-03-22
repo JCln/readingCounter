@@ -5,7 +5,7 @@
                 <div class="_key">ناحیه</div>
                 <p-dropdown name="zones" [options]="zoneDictionary"
                     [(ngModel)]="listManagerService.searchReqMoshDialog.zoneId" placeholder="انتخاب مورد"
-                    [style]="{'max-width': '9rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                    [style]="{'min-width': '9rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
                 </p-dropdown>
             </div>
             <input class="input_1" type="number" placeholder="اشتراک را وارد نمایید " name="counterNumber"
@@ -22,5 +22,5 @@
 <app-prime-table *ngIf="dataSource.length" [dataSource]="dataSource" [_outputFileName]="'searchMoshDialog'"
     [_checkUpName]="'search_moshtarak'" [_selectedColumnsToRemember]="'selectedListManagerMoshDialog'"
     [_numberOfExtraColumns]="[1,2,3]" (showedPictures)="listManagerService.getReadingReportTitles($event)"
-    (showedInMapSingle)="listManagerService.showInMapSingle($event)">
+    (showedInMapSingle)="openMapDialog($event)" (refreshedTable)="refreshTable()">
 </app-prime-table>

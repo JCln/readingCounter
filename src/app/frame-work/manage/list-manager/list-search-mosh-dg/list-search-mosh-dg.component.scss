@@ -4,10 +4,12 @@
 @import '_mat.scss';
 
 .main {
-  direction: rtl;
+  font-family: $font_family;
   background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  padding: $font_05;
+  direction: rtl;
+  margin-bottom: .25rem;
+  box-shadow: 1px 1px 8px 1px var(--secondary_4);
+  padding: 0.25rem;
   border-radius: $border_15;
   border: 1px solid var(--primary_2);
 }
