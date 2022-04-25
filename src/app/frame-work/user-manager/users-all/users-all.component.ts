@@ -63,6 +63,10 @@ export class UsersAllComponent extends FactoryONE {
     this.usersAllService.resetPassword(dataSource['dataSource'].id);
     this.refetchTable(dataSource['ri']);
   }
+  unLockUser = (dataSource: object) => {
+    this.usersAllService.unlockUser(dataSource['dataSource'].id);
+    this.refetchTable(dataSource['ri']);
+  }
   showExactConfig = (index: number) => {
     let a = document.querySelectorAll('.more_configs');
     a[index].classList.toggle('showConfigs');

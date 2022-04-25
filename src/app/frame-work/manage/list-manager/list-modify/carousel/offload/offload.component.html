@@ -16,7 +16,7 @@
                 </div>
                 <div class="input_2 coloring_border" [hidden]="!counterStatesDictionary.length">
                     <div class="_key">وضعیت کنتور</div>
-                    <mat-select placeholder="انتخاب مورد" [(value)]="counterStateCode" name="counterState">
+                    <mat-select placeholder="انتخاب مورد" [(value)]="counterStateId" name="counterState">
                         <mat-option *ngFor="let truefalse of counterStatesDictionary" [value]="truefalse.title">
                             {{truefalse.title}}
                         </mat-option>

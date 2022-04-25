@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -29,9 +29,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   counterStateValue: number;
 
   pageSignTrackNumber: number = null;
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
+  
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
@@ -110,9 +108,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
     }
   }
   insertSelectedColumns = () => {
-    this.modifyType = this.listManagerService.getOffloadModifyType();
-    this._selectCols = this.listManagerService.generalListModify();
-    this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
+    this.modifyType = this.listManagerService.getOffloadModifyType();    
   }
   toPrePage = () => {
     this.router.navigate([EN_Routes.wrmtrackoffloaded]);
@@ -196,13 +192,6 @@ export class GeneralListModifyComponent extends AllListsFactory {
   */
   assignToPageSign = () => {
     this.pageSignTrackNumber = this.dataSource[0].trackNumber;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   openMoshtarakinDialog = (dataSource: any) => {
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {

@@ -22,7 +22,7 @@ export class OffloadComponent implements OnChanges {
   @Input() description: string;
   @Input() preNumber: number;
   @Input() id: string;
-  @Input() counterStateCode: any;
+  @Input() counterStateId: any;
   @Input() counterNumber: string;
   @Input() firstName: string;
   @Input() sureName: string;
@@ -72,7 +72,7 @@ export class OffloadComponent implements OnChanges {
 
     this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.onOffloadId);
 
-    this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
+    this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByIdDictionary(parseInt(this.zoneId));
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
@@ -147,7 +147,7 @@ export class OffloadComponent implements OnChanges {
   }
   assignToObject = () => {
     this.offloadModifyReq.id = this.id;
-    const temp = this.convertTitleToId(this.counterStateCode);
+    const temp = this.convertTitleToId(this.counterStateId);
     this.offloadModifyReq.counterStateId = temp.id;
   }
   convertTitleToId = (dataSource: any): any => {

@@ -108,6 +108,7 @@ export enum ENInterfaces {
     userLOGINS = 'V1/User/Logins',
     userEditOnRole = 'V1/User/EditOnRole',
     userRESETPASS = 'V1/User/ResetPassword',
+    unlockUser = 'V1/User/Unlock',
     userACTIVATE = 'V1/User/Activate',
     userDEACTIVATE = 'V1/User/Deactivate',
 

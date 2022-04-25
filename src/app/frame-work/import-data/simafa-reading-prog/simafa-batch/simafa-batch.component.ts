@@ -66,7 +66,6 @@ export class SimafaBatchComponent extends FactoryONE {
     this._canShowImportBatchButton = false;
   }
   connectToServer = async () => {
-    console.log(this.simafaBatchReq);
     if (!this.dataSource || this.dataSource.length == 0) {
       this.importDynamicService.noRouteToImportMessage();
       return;

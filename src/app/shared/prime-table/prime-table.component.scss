@@ -17,12 +17,20 @@
   top: -3rem;
   z-index: 100;
   background: var(--white);
-  width: 9rem;
   margin: $font_xs;
-  padding: $font_xs 0;
+  padding: $font_xs 0.2rem;
   text-align: center;
   border-radius: $border_15;
   box-shadow: 0px 2px 3px 1px var(--thirdy_3);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1.5rem;
+    height: 5rem;
+    width: 12rem;
+  }
 }
 
 .bbr {

@@ -80,6 +80,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() ActivatedUser = new EventEmitter<any>();
   @Output() DeActivatedUser = new EventEmitter<any>();
   @Output() resetedPasswordUser = new EventEmitter<any>();
+  @Output() unlockedUser = new EventEmitter<any>();
   @Output() toPredStatus = new EventEmitter<any>();
   @Output() routedToSingle = new EventEmitter<any>();
   @Output() routedToBatch = new EventEmitter<any>();
@@ -194,6 +195,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   resetPasswordUser = (dataSource: object, ri: number) => {
     this.resetedPasswordUser.emit({ dataSource, ri });
+  }
+  unLockUser = (dataSource: object, ri: number) => {
+    this.unlockedUser.emit({ dataSource, ri });
   }
   toPreStatus = (val: any) => {
     this.toPredStatus.emit(val);

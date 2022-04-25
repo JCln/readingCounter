@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-    ENSelectedColumnVariables,
-    ENSnackBarColors,
-    ENSnackBarTimes,
-    IObjectIteratation,
-    IResponses,
+  ENSelectedColumnVariables,
+  ENSnackBarColors,
+  ENSnackBarTimes,
+  IObjectIteratation,
+  IResponses,
 } from 'interfaces/ioverall-config';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
@@ -67,6 +67,17 @@ export class UsersAllService {
       this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
     });
   }
+  unlockUser = (UUID: string) => {
+    return this.interfaceManagerService.POSTSG(ENInterfaces.unlockUser, UUID).toPromise().then((res: IResponses) => {
+      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+    });
+  }
+  /*TODO: REFACTOR and remove olds */
+  // changeUserStatus = (method: ENInterfaces UUID: string) => {
+  //   this.interfaceManagerService.POSTSG(ENInterfaces.userACTIVATE, UUID).toPromise().then((res: IResponses) => {
+  //     this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+  //   });
+  // }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false
     this[variableName].forEach(old => {

@@ -61,8 +61,8 @@ export class ImportDynamicService {
     { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
-    { field: 'orderDigit', header: 'ترتیب', isSelected: false, readonly: true },
-    { field: 'orderPersian', header: 'فارسی', isSelected: false, readonly: true, isBoolean: true },
+    { field: 'orderDigit', header: 'ترتیب عددی', isSelected: false, readonly: true },
+    { field: 'orderPersian', header: 'ترتیب', isSelected: false, readonly: true },
     { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true }
   ]
 

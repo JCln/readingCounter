@@ -24,7 +24,6 @@ import { UtilsService } from './utils.service';
 })
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  private offloadZoneIdDictionary: any = [];
 
   columnDefColumns = (): IObjectIteratation[] => [
     { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
@@ -268,14 +267,10 @@ export class TrackingManagerService {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
-    if (!MathS.isNull(this.offloadZoneIdDictionary))
-      return this.offloadZoneIdDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId).subscribe(res => {
-        this.offloadZoneIdDictionary = res;
-        resolve(res);
-      })
-    })
+    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
+  }
+  getCounterStateByIdDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   postOffloadModifyEdited = (body: IOffloadModifyReq) => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
