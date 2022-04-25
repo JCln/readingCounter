@@ -85,7 +85,7 @@ export class CloseTabService {
     toDate: '',
     readingPeriodId: null,
     zoneIds: [],
-    year: 1400,
+    year: 1401,
     reportIds: [],
     counterStateIds: [],
     masrafStates: [],

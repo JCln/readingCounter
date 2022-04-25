@@ -3,19 +3,23 @@
 main {
   position: fixed;
   direction: ltr;
-  top: 60%;
+  // top: 60%;
+  margin: auto;
   transform: translateY(-50%);
   background: var(--white);
   box-shadow: 0 0 5px 0px var(--secondary_5);
   width: calc(100% - 22%);
   min-height: 40rem;
   border-radius: $border_15;
-  z-index: 3;
+  // z-index: 10000;
+
+  // position: absolute;
+  // inset: 0;
+  // width: 100%;
 
   @media (max-width: 700px) {
     top: 100%;
     width: calc(100% - 32%);
-    z-index: 10000;
   }
 
 

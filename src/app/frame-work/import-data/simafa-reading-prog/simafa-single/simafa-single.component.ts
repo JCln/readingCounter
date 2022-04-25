@@ -26,7 +26,7 @@ export class SimafaSingleComponent extends FactoryONE {
     displayRadif: false,
     counterReaderId: '',
     readingPeriodId: null,
-    year: 1400,
+    year: 1401,
     readingProgramId: ''
   }
   _showAlalHesabPercent: boolean = false;

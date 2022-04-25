@@ -19,7 +19,7 @@ export class SimafaReadingProgComponent extends FactoryONE {
   importSimafaReadingProgram: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
-    year: 1400
+    year: 1401
   }
   _fragmentDetailsEshterak: IFragmentDetailsByEshterakReq = {
     fromEshterak: null,

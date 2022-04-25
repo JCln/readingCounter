@@ -16,7 +16,7 @@ import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import {
-    ConfirmDialogExcelViewComponent,
+  ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { EN_Routes } from '../Interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
@@ -37,7 +37,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   };
   imgAttrResultReq: IReadingReportReq = {
     fromDate: '',
@@ -45,7 +45,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   };
   imgAttrAnalyzeReq: IReadingReportReq = {
     fromDate: '',
@@ -53,7 +53,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   };
   detailsReq: IReadingReportReq = {
     zoneId: 0,
@@ -62,7 +62,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   disposalhoursReq: IReadingReportReq = {
     zoneId: 0,
@@ -71,7 +71,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   karkardReq: IReadingReportReq = {
     zoneId: 0,
@@ -80,7 +80,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   lockedReq: IReadingReportReq = {
     zoneId: 0,
@@ -89,7 +89,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   preNumberShownReq: IReadingReportReq = {
     zoneId: 0,
@@ -98,7 +98,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   karkardOffloadReq: IReadingReportReq = {
     zoneId: 0,
@@ -107,7 +107,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   karkardDailyReq: IReadingReportReq = {
     zoneId: 0,
@@ -116,7 +116,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   gisReq: IReadingReportGISReq = {
     zoneId: 0,
@@ -128,7 +128,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1400,
+    year: 1401,
     isCluster: true
   }
   anlzPrfmReq: IMostReportInput = {
@@ -138,7 +138,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400,
+    year: 1401,
     zoneIds: [0]
   }
   trvchReq: IReadingReportTraverseDifferentialReq = {
@@ -146,7 +146,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1400,
+    year: 1401,
     traverseType: 0,
     zoneIds: null
   }
@@ -157,7 +157,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   inStateReq: IReadingReportReq = {
     zoneId: 0,
@@ -166,7 +166,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   /* GET*/
 

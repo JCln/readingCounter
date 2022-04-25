@@ -290,6 +290,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.layerGroup.addLayer(markers);
   }
   showCounterReadersLocations = (dataSource: IGisXYResponse[]) => {
+    this.removeAllLayers();
     this.markingOnMapNClusterNDelay('markWithoutClusterColorized', dataSource);
   }
 

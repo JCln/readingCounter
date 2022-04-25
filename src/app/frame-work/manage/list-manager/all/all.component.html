@@ -14,13 +14,22 @@
 
 <main style="position: relative; ">
     <app-prime-table [hidden]="showCarousel" [dataSource]="dataSource" [_outputFileName]="'allLists'"
-        [_checkUpName]="'allComponent'" [_sessionName]="'allLists'"
-        [_selectedColumnsToRemember]="'selectedListManagerAll'" [_numberOfExtraColumns]="[1,2,3]"
-        [_backToPreviousEnabled]=true [_allComponentIsModify]="false" [_backToPreviousText]="'بازگشت به صفحه قبلی'"
-        [_isCustomSort]=true (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
-        (backedToPrevious)="toPrePage()" (routedToOffload)="doShowCarousel($event,'showCarousel')"
-        (filteredEvent)="filteredTableEvent($event)" (showedWOUIAsCarousel)="doShowCarousel($event,'showCarousel')"
-        (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
+        [_checkUpName]="'allComponent'" 
+        [_sessionName]="'allLists'"
+        [_selectedColumnsToRemember]="'selectedListManagerAll'" 
+        [_numberOfExtraColumns]="[1,2,3]"
+        [_backToPreviousEnabled]=true 
+        [_allComponentIsModify]="false" 
+        [_backToPreviousText]="'بازگشت به صفحه قبلی'"
+        [_isCustomSort]=true 
+        (customedSort)="listManagerService.customSort($event)" 
+        (refreshedTable)="refreshTable()"
+        (backedToPrevious)="toPrePage()"
+        (filteredEvent)="filteredTableEvent($event)"
+        (showedWOUIAsCarousel)="doShowCarousel($event)"
+        (routedToOffload)="routeToOffload($event)"
+        (showedPictures)="getReadingReportTitles($event)"
+        (showedInMapSingle)="openMapDialog($event)">
     </app-prime-table>
 
     <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"

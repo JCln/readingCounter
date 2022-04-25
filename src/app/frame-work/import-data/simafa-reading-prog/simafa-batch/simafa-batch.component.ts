@@ -29,7 +29,7 @@ export class SimafaBatchComponent extends FactoryONE {
     displayBillId: false,
     displayRadif: false,
     readingPeriodId: null,
-    year: 1400,
+    year: 1401,
     readingProgramId: ''
   }
 

@@ -37,7 +37,7 @@ export class ImportDynamicService {
   simafaRDPGReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
-    year: 1400
+    year: 1401
   }
   _assessAddReq: IAssessAddDtoSimafa = {
     onOffLoadIds: [],

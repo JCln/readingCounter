@@ -10,6 +10,9 @@ import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
+import {
+    ListSearchMoshWoumComponent,
+} from '../frame-work/manage/list-manager/list-search-mosh-dg/list-search-mosh-woum/list-search-mosh-woum.component';
 import { MathS } from './math-s';
 
 @Component({
@@ -147,10 +150,29 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
     filteredTableEvent = (e: any) => {
         this.filterableDataSource = e;
     }
-    doShowCarousel = (object: any, toShow: string) => {
-        this.carouselDataSource = object['dataSource'];
-        this.rowIndex = object['ri'];
-        this[toShow] = true;
+    doShowCarousel = (dataSource: any, showOffloadDialog?: boolean) => {
+        if (showOffloadDialog) {
+            // this.showWouImages = false;
+            this.showCarousel = true;
+            return;
+        }
+        this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+            data: dataSource,
+            rtl: true,
+            width: '80%'
+        })
+        this.ref.onClose.subscribe(async res => {
+            if (res)
+                console.log(res);
+
+        });
+    }
+    routeToOffload = (event: object) => {
+        console.log(event);
+        
+        this.carouselDataSource = event['dataSource'];
+        this.rowIndex = event['ri'];
+        this.showCarousel = true;
     }
     carouselNextItem = () => {
         this.rowIndex >= this.filterableDataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
