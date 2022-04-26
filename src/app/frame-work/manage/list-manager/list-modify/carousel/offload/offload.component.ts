@@ -7,7 +7,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
-import { ImageViewerComponent } from 'src/app/frame-work/manage/tracking/wuoi/image-viewer/image-viewer.component';
+import { ImageViewerComponent } from 'src/app/shared/carousel-woum/woum/image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-offload',

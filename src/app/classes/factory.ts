@@ -150,12 +150,7 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
     filteredTableEvent = (e: any) => {
         this.filterableDataSource = e;
     }
-    doShowCarousel = (dataSource: any, showOffloadDialog?: boolean) => {
-        if (showOffloadDialog) {
-            // this.showWouImages = false;
-            this.showCarousel = true;
-            return;
-        }
+    doShowCarousel = (dataSource: any) => {     
         this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
             data: dataSource,
             rtl: true,
@@ -168,8 +163,6 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
         });
     }
     routeToOffload = (event: object) => {
-        console.log(event);
-        
         this.carouselDataSource = event['dataSource'];
         this.rowIndex = event['ri'];
         this.showCarousel = true;

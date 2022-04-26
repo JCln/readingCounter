@@ -6,13 +6,13 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENImportDatas,
-  IImportDataResponse,
-  IImportDynamicDefault,
-  IImportSimafaBatchReq,
-  IImportSimafaReadingProgramsReq,
-  IImportSimafaSingleReq,
-  IReadingProgramRes,
+    ENImportDatas,
+    IImportDataResponse,
+    IImportDynamicDefault,
+    IImportSimafaBatchReq,
+    IImportSimafaReadingProgramsReq,
+    IImportSimafaSingleReq,
+    IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
@@ -49,14 +49,7 @@ export class ImportDynamicService {
     counterReaderId: ''
   }
   private _simafaSingleReq: IReadingProgramRes;
-  _simafaReadingProgram: IObjectIteratation[] = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isNumber: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isNumber: true },
-    { field: 'listNumber', header: 'ش لیست', isSelected: true, icon: 'grid-column: auto/ span 2;' },
-    { field: 'year', header: 'سال', isSelected: false, isNumber: true },
-    { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: false, isSelectOption: true },
-  ]
+
   private _simafaBatch: IObjectIteratation[] = [
     { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
@@ -91,9 +84,6 @@ export class ImportDynamicService {
 
   columnSimafaSingle = () => {
     return this._simafaSingleReq;
-  }
-  columnSimafaReadingProgram = (): IObjectIteratation[] => {
-    return this._simafaReadingProgram;
   }
   columnSimafaBatch = (): IObjectIteratation[] => {
     return this._simafaBatch;

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { IUserLoggins } from 'interfaces/iuser-manager';
 import { filter } from 'rxjs/internal/operators/filter';
@@ -15,11 +15,7 @@ import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 })
 export class UserLogginsComponent extends FactoryONE {
   UUID: string = '';
-
-
   dataSource: IUserLoggins[];
-  _selectedColumns: any[];
-  _selectCols: any[];
 
   constructor(
 
@@ -50,13 +46,6 @@ export class UserLogginsComponent extends FactoryONE {
         }
       })
     )
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   backToPrevious = () => {
     this.router.navigate([EN_Routes.wrmuall]);

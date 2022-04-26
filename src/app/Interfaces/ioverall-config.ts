@@ -349,7 +349,7 @@ export enum ENSelectedColumnVariables {
     selectedForbidden = 'forbidden',
     selectedErrors = 'errors',
     selectedServerErrors = 'serverErrors',
-    selectedSimafaReadingProgram = '_simafaReadingProgram',
+    selectedSimafaReadingProgram = 'simafaReadingProgram',
 }
 export enum ENOffloadModifyType {
     callAnnounce = 'اعلام تلفنی',
@@ -399,5 +399,5 @@ export interface Theme {
     properties: any
 }
 export enum ENLoginVersion {
-    version = '0.7.1'
+    version = '0.7.2'
 }

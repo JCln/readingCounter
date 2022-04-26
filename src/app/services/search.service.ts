@@ -5,12 +5,12 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENRandomNumbers,
-  ENSelectedColumnVariables,
-  IMasrafStates,
-  IObjectIteratation,
-  ISearchInOrderTo,
-  ITitleValue,
+    ENRandomNumbers,
+    ENSelectedColumnVariables,
+    IMasrafStates,
+    IObjectIteratation,
+    ISearchInOrderTo,
+    ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
@@ -48,7 +48,7 @@ export class SearchService {
   _years: ITitleValue[] = [];
   searchReqMosh: ISearchMoshReq = {
     zoneId: null,
-    searchBy: null,
+    searchBy: 1,
     item: '',
     similar: false
   }

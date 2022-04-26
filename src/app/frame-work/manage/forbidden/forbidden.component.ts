@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { IForbiddenManager } from 'interfaces/imanage';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -18,9 +18,6 @@ export class ForbiddenComponent extends FactoryONE {
   dataSource: IForbiddenManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   userCounterReaders: IDictionaryManager[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   _years: ITitleValue[] = [];
   subscription: Subscription[] = [];
@@ -63,13 +60,6 @@ export class ForbiddenComponent extends FactoryONE {
   }
   showPictures = (forbiddenId: string) => {
     this.forbiddenService.routeToWOUI(forbiddenId, true);
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   ngOnInit(): void { return; }
   refreshTable = () => {

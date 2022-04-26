@@ -3,6 +3,7 @@ export interface IUserManager {
     userCode: number;
     username: string;
     mobile: string;
+    lockTimeSpan: string;
     displayName: string;
     isActive: boolean;
     isLocked: boolean;

@@ -11,13 +11,13 @@ import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
-import { ImageViewerComponent } from '../frame-work/manage/tracking/wuoi/image-viewer/image-viewer.component';
 import { AddRowDirective } from './../directives/add-row.directive';
+import { ImageViewerComponent } from './carousel-woum/woum/image-viewer/image-viewer.component';
 import { PrimeTableEditableComponent } from './prime-table-editable/prime-table-editable.component';
 import { PrimeTableComponent } from './prime-table/prime-table.component';
 
 @NgModule({
-  declarations: [AddRowDirective, ImageViewerComponent, PrimeTableComponent, PrimeTableEditableComponent],
+  declarations: [AddRowDirective, PrimeTableComponent, PrimeTableEditableComponent, ImageViewerComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -23,12 +23,8 @@ export class MoshtarakComponent extends FactoryONE {
   dataSource: IOnOffLoadFlat[] = [];
   searchType: Search[];
   searchByText: string = '';
-  _empty_message: string = '';
   ref: DynamicDialogRef;
   _searchByInfo: string = 'مقدار';
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -47,8 +43,6 @@ export class MoshtarakComponent extends FactoryONE {
   }
 
   converts = async () => {
-    this._empty_message = EN_messages.notFound;
-
     if (this.searchService.searchReqMosh.zoneId) {
       this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchService.searchReqMosh.zoneId);
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');

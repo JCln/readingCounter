@@ -8,8 +8,7 @@ import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-
-import { ImageViewerComponent } from './image-viewer/image-viewer.component';
+import { ImageViewerComponent } from 'src/app/shared/carousel-woum/woum/image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-woui',

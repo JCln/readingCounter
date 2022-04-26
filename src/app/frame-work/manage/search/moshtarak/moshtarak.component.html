@@ -34,9 +34,15 @@
     </form>
 </main>
 
-<app-prime-table *ngIf="dataSource.length" [_selectCols]="_selectCols" [dataSource]="dataSource"
-    [_outputFileName]="'searchMosh'" [_checkUpName]="'search_moshtarak'"
-    [_selectedColumnsToRemember]="'selectedListManagerMosh'" [_numberOfExtraColumns]="[1,2,3]"
-    [_sessionName]="'moshtarak-session'" (refreshedTable)="refreshTable()"
-    (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
+<app-prime-table  
+[dataSource]="dataSource"    
+[_outputFileName]="'searchMosh'" 
+[_checkUpName]="'search_moshtarak'"
+[_selectedColumnsToRemember]="'selectedListManagerMosh'" 
+[_numberOfExtraColumns]="[1,2,3]"
+[_sessionName]="'moshtarak-session'"
+(refreshedTable)="refreshTable()"
+(showedPictures)="getReadingReportTitles($event)"
+(showedInMapSingle)="openMapDialog($event)"
+>
 </app-prime-table>

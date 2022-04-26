@@ -79,6 +79,9 @@ export class AssessPreComponent extends FactoryONE {
 
     this.closeTabService.saveDataForAssessPre = this.dataSource;
   }
+  refreshTable = () => {
+    this.connectToServer();
+  };
   nullSavedSource = () => this.closeTabService.saveDataForAssessPre = null;
   canOpenSearchDialog = () => {
     if (MathS.isNull(this.closeTabService.saveDataForAssessPreReq.listNumber)) {

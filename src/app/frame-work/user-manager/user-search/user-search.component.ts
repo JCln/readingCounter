@@ -67,13 +67,13 @@ export class UserSearchComponent extends FactoryONE {
     this.router.navigate([EN_Routes.wrmuallloggins, e])
   }
   ActivateUser = (dataSource: IUserManager) => {
-    this.usersAllService.Activate(dataSource['dataSource'].id);
+    this.usersAllService.changeUserStatus(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
   }
   DeActivateUser = (dataSource: object) => {
-    this.usersAllService.DeActivate(dataSource['dataSource'].id);
+    this.usersAllService.changeUserStatus(ENInterfaces.userDEACTIVATE, dataSource['dataSource'].id);
   }
   resetPasswordUser = (dataSource: object) => {
-    this.usersAllService.resetPassword(dataSource['dataSource'].id);
+    this.usersAllService.changeUserStatus(ENInterfaces.userRESETPASS, dataSource['dataSource'].id);
   }
 
 }

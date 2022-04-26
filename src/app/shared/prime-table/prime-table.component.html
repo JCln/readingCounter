@@ -4,8 +4,8 @@
     stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]=_sortOrder
     [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
     (onFilter)="filterEventTable($event)">
-    <ng-template pTemplate="caption" *ngIf="_captionEnabled">
 
+    <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
             optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"

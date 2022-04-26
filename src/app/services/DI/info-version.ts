@@ -8,6 +8,11 @@ export const infoVersionItems: IDictionaryManager[] = [
     },
     {
         id: '2',
+        title: 'امکانات جدید',
+        isSelected: true
+    },    
+    {
+        id: '2',
         title: 'رفع برخی ایرادات',
         isSelected: true
     },    

@@ -52,32 +52,11 @@ export class UsersAllService {
       })
     });
   }
-  Activate = (UUID: string) => {
-    this.interfaceManagerService.POSTSG(ENInterfaces.userACTIVATE, UUID).toPromise().then((res: IResponses) => {
+  changeUserStatus = (method: ENInterfaces, UUID: string) => {
+    this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
       this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
     });
   }
-  DeActivate = (UUID: string) => {
-    this.interfaceManagerService.POSTSG(ENInterfaces.userDEACTIVATE, UUID).toPromise().then((res: IResponses) => {
-      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-    });
-  }
-  resetPassword = (UUID: string) => {
-    return this.interfaceManagerService.POSTSG(ENInterfaces.userRESETPASS, UUID).toPromise().then((res: IResponses) => {
-      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-    });
-  }
-  unlockUser = (UUID: string) => {
-    return this.interfaceManagerService.POSTSG(ENInterfaces.unlockUser, UUID).toPromise().then((res: IResponses) => {
-      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-    });
-  }
-  /*TODO: REFACTOR and remove olds */
-  // changeUserStatus = (method: ENInterfaces UUID: string) => {
-  //   this.interfaceManagerService.POSTSG(ENInterfaces.userACTIVATE, UUID).toPromise().then((res: IResponses) => {
-  //     this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-  //   });
-  // }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false
     this[variableName].forEach(old => {
