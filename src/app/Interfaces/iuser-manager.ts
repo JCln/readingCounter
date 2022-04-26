@@ -3,6 +3,7 @@ export interface IUserManager {
     userCode: number;
     username: string;
     mobile: string;
+    lockTimeSpan: string;
     displayName: string;
     isActive: boolean;
     isLocked: boolean;
@@ -270,6 +271,11 @@ export interface IAddUserInfos {
     displayName: string,
     isActive: boolean,
     deviceId: string
+}
+export interface ISearchUsersManager {
+    selectedRoles: any[],
+    selectedZones: number[],
+    selectedActions: string[]
 }
 //
 // my info (profile)

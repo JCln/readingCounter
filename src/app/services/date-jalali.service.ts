@@ -7,6 +7,15 @@ import { Converter } from 'src/app/classes/converter';
 export class DateJalaliService {
   constructor() { }
 
+  getCurrentTime = () => {
+    let persianTime = new Date().toLocaleTimeString('fa-IR', {
+      hour12: false,
+      hour: "numeric",
+      minute: "numeric"
+    });
+
+    return Converter.persianToEngNumbers(persianTime);
+  }
   getCurrentDate = () => {
     let persianDate = new Date().toLocaleDateString('fa-IR');
 

@@ -41,7 +41,7 @@ export class FollowUpComponent extends FactoryONE {
   constructor(
     private trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService,
-     
+
     private authService: AuthService,
     private followUpService: FollowUpService
   ) {
@@ -58,21 +58,21 @@ export class FollowUpComponent extends FactoryONE {
     this.insertToDesc();
   }
   connectToServer = async () => {
-    if (!this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber))
-      return;
+    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber)) {
+      this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
+      if (this.trackingManagerService.isValidationNull(this.dataSource))
+        return;
+      this.closeTabService.saveDataForFollowUp = this.dataSource;
+      this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber.toString());
+      this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
+      this.makeConfigs();
 
-    this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
-    if (this.trackingManagerService.isValidationNull(this.dataSource))
-      return;
-    this.closeTabService.saveDataForFollowUp = this.dataSource;
-    this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber.toString());
-    this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
-    this.makeConfigs();
-
+    }
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForFollowUp = '';
+      this.connectToServer();
     }
     /** 
      * it separate data from followUp service and 
@@ -81,7 +81,7 @@ export class FollowUpComponent extends FactoryONE {
      * then data were saved     
      */
     if (this.followUpService.hasTrackNumber()) {
-      this.trackNumber = this.followUpService.getTrackNumber();      
+      this.trackNumber = this.followUpService.getTrackNumber();
       this.connectToServer();
       this.followUpService.setTrackNumber(null);
       return;
@@ -125,6 +125,7 @@ export class FollowUpComponent extends FactoryONE {
     this.trackingManagerService.routeToLMPDXY(this.dataSource.trackNumber, this.dataSource.changeHistory[this.changeHsty.length - 1].insertDateJalali, this.dataSourceAUX.overalDistance, true);
   }
   routeToLMAll = (row: IFollowUpHistory) => {
+    row.listNumber = this.dataSourceAUX.listNumber;
     this.trackingManagerService.routeToLMAll(row);
   }
   ngOnInit(): void { return; }

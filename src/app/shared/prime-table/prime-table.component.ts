@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
@@ -44,13 +45,16 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _hasSaveColumns: boolean = true;
 
   @Output() customedSort = new EventEmitter<any>();
+  @Output() filteredEvent = new EventEmitter<any>();
   @Output() collapsed = new EventEmitter<any>();
   @Output() removedRow = new EventEmitter<any>();
   @Output() openedEditDialog = new EventEmitter<any>();
+  @Output() openedMoshtarakinDialog = new EventEmitter<any>();
   @Output() refreshedTable = new EventEmitter<boolean>();
   @Output() forcedOffload = new EventEmitter<any>();
   @Output() backedToImportedConfirmDialog = new EventEmitter<any>();
   @Output() routedToLMPayDay = new EventEmitter<any>();
+  @Output() openedBriefKardexDialog = new EventEmitter<any>();
   @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() routedToLMAll = new EventEmitter<any>();
   @Output() routedToFollowUp = new EventEmitter<any>();
@@ -60,9 +64,11 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() showedInMapSingle = new EventEmitter<any>();
   @Output() downloadedOutputSingle = new EventEmitter<any>();
   @Output() routeedToOffloadModify = new EventEmitter<any>();
+  @Output() routedToOffloadGeneralModify = new EventEmitter<any>();
   @Output() backedToReading = new EventEmitter<any>();
   @Output() backedToPrevious = new EventEmitter<any>();
   @Output() downloadedAPK = new EventEmitter<any>();
+  @Output() clickedElmah = new EventEmitter<any>();
   @Output() registeredAssess = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
   @Output() showSearchedOptionsDialog = new EventEmitter<any>();
@@ -74,6 +80,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() ActivatedUser = new EventEmitter<any>();
   @Output() DeActivatedUser = new EventEmitter<any>();
   @Output() resetedPasswordUser = new EventEmitter<any>();
+  @Output() unlockedUser = new EventEmitter<any>();
   @Output() toPredStatus = new EventEmitter<any>();
   @Output() routedToSingle = new EventEmitter<any>();
   @Output() routedToBatch = new EventEmitter<any>();
@@ -96,6 +103,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   refreshTable() {
     this.refreshedTable.emit(true);
   }
+  filterEventTable(e: Table) {
+    this.filteredEvent.emit(e.filteredValue);
+  }
   forceOffload = (dataSource: object, ri: number) => {
     this.forcedOffload.emit({ dataSource, ri });
   }
@@ -104,6 +114,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   routeToLMPayDay = (dataSource: object) => {
     this.routedToLMPayDay.emit(dataSource);
+  }
+  openBriefKardexDialog = (dataSource: object) => {
+    this.openedBriefKardexDialog.emit(dataSource);
   }
   showWOUIAsCarousel = (dataSource: any, ri: number) => {
     this.showedWOUIAsCarousel.emit({ dataSource, ri });
@@ -128,12 +141,15 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   downloadExcel = (dataSource: object) => {
     this.downloadedExcel.emit(dataSource);
-  }  
+  }
   downloadOutputSingle = (dataSource: object) => {
     this.downloadedOutputSingle.emit(dataSource);
   }
   routeToOffloadModify = (dataSource: object) => {
     this.routeedToOffloadModify.emit(dataSource);
+  }
+  routeToOffloadGeneralModify = (dataSource: object) => {
+    this.routedToOffloadGeneralModify.emit(dataSource);
   }
   backToReading = (dataSource: object, ri: number) => {
     this.backedToReading.emit({ dataSource, ri });
@@ -143,6 +159,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   downloadAPK = () => {
     this.downloadedAPK.emit();
+  }
+  connectToElmah = (dataSource: string) => {
+    this.clickedElmah.emit(dataSource);
   }
   registerAssessAdd = () => {
     this.registeredAssess.emit();
@@ -177,6 +196,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   resetPasswordUser = (dataSource: object, ri: number) => {
     this.resetedPasswordUser.emit({ dataSource, ri });
   }
+  unLockUser = (dataSource: object, ri: number) => {
+    this.unlockedUser.emit({ dataSource, ri });
+  }
   toPreStatus = (val: any) => {
     this.toPredStatus.emit(val);
   }
@@ -189,6 +211,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   openEditDialog = (dataSource: object) => {
     this.openedEditDialog.emit(dataSource);
   }
+  openMoshtarakinDialog = (dataSource: object) => {
+    this.openedMoshtarakinDialog.emit(dataSource);
+  }
   routeToBatch = (dataSource: object) => {
     this.routedToBatch.emit(dataSource);
   }
@@ -198,7 +223,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   routeToSingle = (dataSource: object) => {
     this.routedToSingle.emit(dataSource);
   }
-
   calcSums(): number {
     let total: number = 0;
     this.dataSource.map(item => {

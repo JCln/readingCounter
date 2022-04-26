@@ -2,9 +2,10 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]=_sortOrder
-    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)">
-    <ng-template pTemplate="caption" *ngIf="_captionEnabled">
+    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
+    (onFilter)="filterEventTable($event)">
 
+    <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
             optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
@@ -28,8 +29,8 @@
                     class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                     <div class="tooltip_text">دریافت CSV</div>
                 </i>
-                <i *ngIf="_checkUpName == 'readingConfig'" (click)="openAddDialog()"
-                    class="tooltip _circle_border p_icons fa fa-plus">
+                <i *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport' || _checkUpName == 'dynamicReport'"
+                    (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
                 <i *ngIf="_hasSaveColumns" (click)="saveColumns()"
@@ -61,8 +62,8 @@
                     class="tooltip _circle_border p_icons fa fa-inbox">
                     <div class="tooltip_text">دانلود فایل</div>
                 </i>
-                <i *ngIf="_checkUpName == 'search_acme' || _checkUpName == 'assess_pre'"
-                    (click)="showSearchOptionsDialog()" class="tooltip _circle_border p_icons pi pi-search">
+                <i *ngIf="_checkUpName == 'search_acme'" (click)="showSearchOptionsDialog()"
+                    class="tooltip _circle_border p_icons pi pi-search">
                     <div class="tooltip_text">جستجو</div>
                 </i>
             </div>
@@ -75,7 +76,7 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 4rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
@@ -83,7 +84,7 @@
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 4rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
     </ng-template>
 
@@ -167,9 +168,9 @@
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'imported'" (click)="showMoreDetails(dataSource)">
-                <span class="ui-column-title">مشاهده جزئیات وویرایش</span>
+                <span class="ui-column-title">{{_tooltipText}}</span>
                 <i class="tooltip p_icons pi pi-pencil">
-                    <div class="tooltip_text">مشاهده جزئیات و ویرایش</div>
+                    <div class="tooltip_text">{{_tooltipText}}</div>
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'imported'" (click)="firstConfirmDialog(dataSource.id, ri)">
@@ -178,18 +179,48 @@
                     <div class="tooltip_text_right">حذف مسیر</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'allComponent'"
-                (click)="showInMapSingle(dataSource)">
+            <td *ngIf="_outputFileName == 'serverErrors'" (click)="connectToElmah(dataSource.errorId)">
+                <span class="ui-column-title">نمایش</span>
+                <i class="tooltip p_icons pi pi-link">
+                    <div class="tooltip_text_right">نمایش</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'automaticImport'" (click)="firstConfirmDialog(dataSource.id, ri)">
+                <span class="ui-column-title">حذف نوبتی</span>
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف نوبتی</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName =='ModifyList'" (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده سابقه</span>
+                <i class="tooltip p_icons pi pi-users">
+                    <div class="tooltip_text">مشاهده سابقه</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName =='ModifyList'" (click)="openBriefKardexDialog(dataSource)">
+                <span class="ui-column-title">خلاصه کاردکس</span>
+                <i class="tooltip p_icons pi pi-list">
+                    <div class="tooltip_text">خلاصه کاردکس</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'search_moshtarak' ||
+             _checkUpName == 'allComponent' ||
+             _checkUpName =='forbidden' ||            
+             _checkUpName =='search_acme'||
+             _checkUpName =='searchPro'||
+             _checkUpName =='rr-preNumber'||
+             _checkUpName =='assess_pre'||
+             _checkUpName =='rr-locked'" (click)="showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
-                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                    <div class="tooltip_text_right">مشاهده روی نقشه</div>
                 </i>
             </td>
             <td *ngIf="dataSource.hasMap &&( _checkUpName == 'lastStates' || _checkUpName == 'simpleSearch')"
                 (click)="showInMap(dataSource.trackNumber , dataSource.insertDateJalali)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
-                    <div class="tooltip_text_right"> مشاهده روی نقشه</div>
+                    <div class="tooltip_text_right">مشاهده روی نقشه</div>
                 </i>
             </td>
             <td
@@ -213,6 +244,12 @@
                     <div class="tooltip_text_right">مشاهده(اصلاح) لیست</div>
                 </i>
             </td>
+            <td *ngIf="_outputFileName == 'offloaded'" (click)="routeToOffloadGeneralModify(dataSource)">
+                <span class="ui-column-title">مشاهده (اصلاح) کلی لیست</span>
+                <i class="tooltip p_icons pi pi-info">
+                    <div class="tooltip_text_right">مشاهده(اصلاح) کلی لیست</div>
+                </i>
+            </td>
             <td *ngIf="_outputFileName == 'offloaded'" (click)="backToReading(dataSource.id,ri)">
                 <span class="ui-column-title">بازگشت به درحال قرائت</span>
                 <i class="tooltip p_icons pi pi-step-backward">
@@ -226,7 +263,7 @@
                 </i>
             </td>
             <td
-                *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme' || _checkUpName == 'allComponent' || _checkUpName == 'assess_pre' || _checkUpName == 'rr-locked' || _checkUpName == 'rr-preNumber'">
+                *ngIf="_checkUpName == 'search_moshtarak' || _checkUpName == 'search_acme'|| _checkUpName == 'searchPro' || _checkUpName == 'allComponent' || _checkUpName == 'assess_pre' || _checkUpName == 'rr-locked' || _checkUpName == 'rr-preNumber'">
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
@@ -238,7 +275,7 @@
                     <div class="tooltip_text_right">مشاهده عکس(ها)</div>
                 </i>
             </td>
-            <td *ngIf="(_outputFileName == 'allLists' || _outputFileName == 'rrPreNumber'|| _outputFileName == 'rrLocked')&& !_allComponentIsModify"
+            <td *ngIf="(_outputFileName == 'allLists' || _outputFileName == 'rrPreNumber'|| _outputFileName == 'rrLocked'|| _outputFileName == 'rrLocked' || _outputFileName == 'searchMoshDialog')&& !_allComponentIsModify"
                 (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera">
@@ -247,9 +284,10 @@
             </td>
             <td *ngIf="(
                 _outputFileName == 'searchPro' 
-            || _outputFileName == 'searchMosh'
+            || _outputFileName == 'searchMosh'            
             || _outputFileName == 'rrDetails'            
             || _outputFileName == 'trv'
+            || _outputFileName == 'assess_pre'
             || _outputFileName == 'trvDiff'            
             )&& !_allComponentIsModify" (click)="searchService.routeToWoui(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
@@ -257,16 +295,29 @@
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
-            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_outputFileName == 'allLists' &&  _allComponentIsModify">
+            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_allComponentIsModify">
                 <span class="ui-column-title">اصلاح</span>
                 <i class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'readingConfig'" class="edit_button" (click)="openEditDialog(dataSource)">
+            <td *ngIf="_checkUpName == 'dynamicReport'" class="edit_button" (click)="downloadExcel(dataSource)">
+                <span class="ui-column-title">مشاهده</span>
+                <i class="tooltip p_icons pi pi-eye">
+                    <div class="tooltip_text_right">مشاهده</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'automaticImport' ||_checkUpName == 'dynamicReport'"
+                class="edit_button" (click)="openEditDialog(dataSource)">
                 <span class="ui-column-title">ویرایش</span>
                 <i class="tooltip _edit pi pi-pencil">
                     <div class="tooltip_text">ویرایش</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName== 'dynamicReport'" (click)="showMoreDetails(dataSource)">
+                <span class="ui-column-title">حذف</span>
+                <i class="tooltip p_icons fa fa-trash-o">
+                    <div class="tooltip_text_right">حذف</div>
                 </i>
             </td>
             <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'excelDynamic'" class="edit_button"
@@ -282,20 +333,22 @@
                     <div class="tooltip_text_right">دانلود Excel</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (click)="routeToEditPage(dataSource.id)">
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+                (click)="routeToEditPage(dataSource.id)">
                 <span class="ui-column-title">مشاهده/ویرایش کاربر</span>
                 <i class="tooltip p_icons pi pi-user-edit">
                     <div class="tooltip_text">مشاهده/ویرایش کاربر</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (click)="routeToLoggs(dataSource.id)">
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+                (click)="routeToLoggs(dataSource.id)">
                 <span class="ui-column-title">مشاهده ورودها</span>
                 <i class="tooltip p_icons pi pi-sign-in">
                     <div class="tooltip_text">مشاهده ورودها</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'userAll'" class="edit_button" (mouseover)="showExactConfig(ri)"
-                (mouseout)="showExactConfig(ri)">
+            <td *ngIf="_checkUpName == 'userAll' || _checkUpName == 'userSearch'" class="edit_button"
+                (mouseover)="showExactConfig(ri)" (mouseout)="showExactConfig(ri)">
                 <span class="ui-column-title">تغییر وضعیت</span>
                 <i class="tooltip _map_frame_show p_icons pi pi-ellipsis-h">
                     <div class="tooltip_text">تغییر وضعیت</div>
@@ -310,6 +363,9 @@
                         </i>
                         <i class="bbr tooltip p_icons pi pi-refresh" (click)="resetPasswordUser(dataSource,ri)">
                             <div class="tooltip_text">بازنشانی گذرواژه</div>
+                        </i>
+                        <i class="bbr tooltip p_icons pi pi-check" (click)="unLockUser(dataSource,ri)">
+                            <div class="tooltip_text">Unlock</div>
                         </i>
                     </div>
                 </div>

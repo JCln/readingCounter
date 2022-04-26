@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IForbiddenManager, IMostReportInput } from 'interfaces/imanage';
-import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 export enum ENForbidden {
@@ -29,10 +30,10 @@ export class ForbiddenService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400,
+    year: 1401,
     zoneIds: [0]
   }
- 
+
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
@@ -61,10 +62,7 @@ export class ForbiddenService {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
   getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
-        resolve(res))
-    });
+    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
   }
   receiveFromDateJalali = (variable: ENForbidden, $event: string) => {
     this[variable].fromDate = $event;
@@ -76,13 +74,13 @@ export class ForbiddenService {
     return this.utilsService.getYears();
   }
   routeToWOUI = (UUID: string, isForbidden: boolean) => {
-    this.router.navigate(['wr/m/track/woui', isForbidden, UUID]);
+    this.router.navigate([EN_Routes.wrmtrackwoui, isForbidden, UUID]);
   }
   routeToChild = () => {
-    this.utilsService.routeTo('wr/m/fbn/res');
+    this.utilsService.routeTo(EN_Routes.wrmfbnres);
   }
   backToParent = () => {
-    this.utilsService.routeTo('wr/m/fbn');
+    this.utilsService.routeTo(EN_Routes.wrmfbn);
   }
   emptyMessage = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.try_again);
@@ -135,6 +133,21 @@ export class ForbiddenService {
           old.isSelected = true;
       })
     })
+  }
+  showInMapSingle = (dataSource: any) => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return;
+    }
+    this.utilsService.routeToByParams(EN_Routes.wr, {
+      x: dataSource.x,
+      y: dataSource.y,
+      postalCode: dataSource.postalCode,
+      preEshterak: dataSource.preEshterak,
+      nextEshterak: dataSource.nextEshterak,
+      isSingle: true,
+      isForbidden: true
+    });
   }
 
 }

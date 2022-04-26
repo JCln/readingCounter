@@ -104,9 +104,11 @@ export enum ENInterfaces {
     userGET = 'V1/User/All',
     userEDIT = 'V1/user/Edit',
     userADD = 'V1/user/Add',
+    userSearch = 'V1/User/Search',
     userLOGINS = 'V1/User/Logins',
     userEditOnRole = 'V1/User/EditOnRole',
     userRESETPASS = 'V1/User/ResetPassword',
+    unlockUser = 'V1/User/Unlock',
     userACTIVATE = 'V1/User/Activate',
     userDEACTIVATE = 'V1/User/Deactivate',
 
@@ -122,6 +124,12 @@ export enum ENInterfaces {
     fragmentDETAILSADD = 'V1/Fragment/Details/Add',
     fragmentDETAILSByEshterak = 'V1/Fragment/Details/ByEshterak',
 
+    automaticImportAll = 'V1/AutomaticImport/All',
+    automaticImportByFragment = 'V1/AutomaticImport/ByFragment/',
+    automaticImportEdit = 'V1/AutomaticImport/Edit',
+    automaticImportAdd = 'V1/AutomaticImport/Add',
+    automaticImportRemove = 'V1/AutomaticImport/Remove',
+
     OutputDBF = 'V1/Output/Dbf',
     OutputSINGLE = 'V1/Output/single',
     OutputDELAYED = 'V1/Output/Delayed',
@@ -135,9 +143,12 @@ export enum ENInterfaces {
     trackingLASTSTATES = 'V1/Tracking/LastStates',
     trackingEDIT = 'V1/Tracking/Edit',
     trackingToIMPORTED = 'V1/Tracking/ToImported',
+    trackingToImportedFromLoad = 'V1/Tracking/ToImportedFromLoad',
     trackingToREADING = 'V1/Tracking/ToReading',
     trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
+    trackingToOFFLOADEDGeneralModify = 'V1/List/OffLoaded/AllInGroup/',
     trackingPRE = 'V1/Tracking/Pre',
+    trackingBriefKardex = 'V1/AbBahaReport',
     trackingFinishReadiED = 'V1/Tracking/FinishReading',
     trackingREMOVE = 'V1/Tracking/Remove',
     trackingFOLLOWUP = 'V1/Tracking/FollowUp/?trackNumber=',
@@ -168,6 +179,7 @@ export enum ENInterfaces {
     ListDispersalHours = 'V1/List/Offloaded/DispersalHours',
     ListDispersalChart = 'V1/List/Offloaded/DispersalChart',
     ListAllImages = `V1/List/OffLoaded/AllImages/`,
+    downloadFileAllImages = '/V1/Download/File/AllImages?access_token=',
     ListRRLocked = 'V1/List/Offloaded/Locked',
     ListRRPreNumberShown = 'V1/List/Offloaded/PreNumberShown',
 
@@ -191,6 +203,24 @@ export enum ENInterfaces {
     KarbariEdit = 'V1/Karbari/Edit',
     KarbariAdd = 'V1/Karbari/Add',
     rrInStatePost = 'V1/List/Offloaded/InState',
+
+    signalRStartConnection = '/notifyHub',
+    signalRBroadcastMessage = 'broadcast',
+    signalRSendMessage = 'sendMessage',
+    signalRReceiveMessage = 'receiveMessage',
+
+    serverManagerDelete = 'V1/Server/Delete',
+    serverManagerErrors = 'V1/Server/Errors',
+    serverManagerHangFire = '/main/admin/hangFire?access_token=',
+    serverManagerHealthCheck = '/healthchecks-ui',
+    serverManagerErrorsElmah = '/elmah/detail/',
+    serverManagerResetApp = 'V1/Server/ResetApp',
+
+    dynamicReportManagerAll = 'V1/DynamicReport/All',
+    dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',
+    dynamicReportManagerDisplayLinkAdd = '/DynamicReportManagerMvc/DisplayDesigner?access_token=',
+    dynamicReportManagerDisplayLink = '/DynamicReportManagerMvc/DisplayViewer',
+    dynamicReportManagerDisplayLinkEdit = '/DynamicReportManagerMvc/DisplayDesigner',
 
     counterStateAll = 'V1/CounterState/All',
     counterStateDictionary = 'V1/CounterState/Dictionary',
@@ -234,13 +264,13 @@ export enum ENInterfaces {
 
     dataMiningReadingTime = 'V1/List/Offloaded/ReadingTime',
 
-
     /* NON MANAGER INTERFACES */
     getPolicies = 'V1/Policy/Active',
     editPolicies = 'V1/Policy/Edit',
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
+    chat = '/V1/Chat/Index?accessToken=',
 
     postImportData = 'V1/Import/Dynamic',
     postImportDynamicCount = 'V1/Import/DynamicCount',
@@ -261,6 +291,7 @@ export enum ENInterfaces {
     removeToolsDynamicExcel = 'V1/DynamicExcel/Remove',
 
     getDashboardDispersalRateTimed = 'V1/List/Dashboard/DispersalRate/Timed',
+    getCounterReaderLocations = 'V1/List/Latest/Locations',
     getDashboardEditCount = 'V1/Tracking/Dashboard/Tracking/EditCount',
     getDashboardDateDifference = 'V1/List/Dashboard/DateDifference/Timed',
     getDashboardTraverseTimed = 'V1/List/Dashboard/Traverse/Timed',
@@ -273,6 +304,10 @@ export enum ENInterfaces {
     getDashboardReadTimed = 'V1/List/Dashboard/Read/Timed',
     getDashboardErrorCount = 'V1/DbQuery/ErrorCount',
     getDashboardForbiddenTimed = 'V1/Forbidden/Dashboard/Timed',
+    getDashboardRequestLogCount = 'V1/RequestLog/Dashboard/Request/Count',
+    getDashboardRequestRate = 'V1/RequestLog/Dashboard/Request/Rate',
+    getDashboardQueryCount = 'V1/RequestLog/Dashboard/Query/Count',
+    getDashboardQueryRate = 'V1/RequestLog/Dashboard/Query/Rate',
     getDashboardReadDaily = 'V1/List/Dashboard/Read/Daily',
     getDashboardUnReadCount = 'V1/DbQuery/UnreadCount',
     getDashboardMoshtarakCount = 'V1/DbQuery/MoshtarakCount',

@@ -2,14 +2,23 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IDictionaryManager, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import {
+  ENRandomNumbers,
+  ENSnackBarColors,
+  ENSnackBarTimes,
+  IDictionaryManager,
+  IObjectIteratation,
+  IResponses,
+} from 'interfaces/ioverall-config';
+import { IAutomaticImportAddEdit } from 'interfaces/ireads-manager';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { MathS } from 'src/app/classes/math-s';
 
-import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IFragmentDetails, IFragmentMaster } from '../Interfaces/ireads-manager';
+import { EN_Routes } from '../Interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +40,8 @@ export class FragmentManagerService {
   }
   columnSelectedFragmentDetails = (): IObjectIteratation[] => {
     return [
-      { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+      { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: false },
+      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: false, ltr: true },
       { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
       { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
       { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, readonly: true }
@@ -45,65 +54,35 @@ export class FragmentManagerService {
     private dialog: MatDialog
   ) { }
 
-  /* Master */
-  getDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.fragmentMASTERALL).subscribe(res => {
-          resolve(res);
-        })
+  getDataSourceByQuote = (method: ENInterfaces, id: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(method, id).subscribe(res => {
+        resolve(res);
       })
-    } catch (error) {
-      console.error(e => e);
-    }
-  }
-  addFragmentMaster = (body: IFragmentMaster): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTERADD, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message);
-            resolve(res);
-          }
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  editFragmentMaster = (body: IFragmentMaster) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTEREDIT, body).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message)
     })
   }
-  removeFragmentMaster = (body: IFragmentMaster): Promise<boolean> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTERREMOVE, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message);
-            resolve(true);
-          }
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  getDataSource = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe(res => {
+        resolve(res);
+      })
+    })
   }
-  isValidateMaster = (body: IFragmentMaster): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentMASTERVALIDATE, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message);
-            resolve(res);
-          }
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  postBody = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).subscribe((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    })
+  }
+  postByQuote = (method: ENInterfaces, id: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTSG(method, id).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    })
   }
   /* Details */
   getFragmentDetails = (masterId: string): Promise<any> => {
@@ -121,52 +100,27 @@ export class FragmentManagerService {
       console.error(e => e);
     }
   }
-  addFragmentDetails = (body: IFragmentDetails): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSADD, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message);
-            resolve(res);
-          }
-        })
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  editFragmentDetails = (body: IFragmentDetails) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSEDIT, body).subscribe((res: IResponses) => {
-      if (res)
-        this.utilsService.snackBarMessageSuccess(res.message)
-    })
-  }
-  removeFragmentDetails = (body: IFragmentDetails): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSREMOVE, body).subscribe((res: IResponses) => {
-          if (res) {
-            this.utilsService.snackBarMessageSuccess(res.message)
-            resolve(true);
-          }
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
   getRouteParams = () => {
     return this.utilsService.getRouteBySplit('/');
   }
   routeToFragmentDetails = (route: string) => {
-    this.utilsService.routeToByParams('/wr/m/r/nob/', route);
+    this.utilsService.routeToByParams(EN_Routes['wrmrnob/'], route);
+  }
+  routeToAutomaticImport = () => {
+    this.utilsService.routeTo(EN_Routes.wrmrnobautoImport);
   }
   routeToFragmentMaster = () => {
-    this.utilsService.routeTo('/wr/m/r/nob');
+    this.utilsService.routeTo(EN_Routes.wrmrnob);
   }
   /**/
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
+  }
+  getPeriodKindDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getPeriodKindDictionary();
+  }
+  getUserCounterReaders = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
   }
 
   /* VALIDATION */
@@ -185,6 +139,9 @@ export class FragmentManagerService {
       return false;
     }
     return true;
+  }
+  showSnack = (message: string, color: ENSnackBarColors) => {
+    this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);
   }
 
   /* VERIFICATION */
@@ -210,16 +167,16 @@ export class FragmentManagerService {
   private masterValidation = (): boolean => {
     if (!this.nullValidation(this.fragmentMaster.zoneId, EN_messages.insert_zone))
       return false;
-    if (!this.nullValidation(this.fragmentMaster.fromEshterak, 'از اشتراک را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentMaster.fromEshterak, EN_messages.insert_fromEshterak))
       return false;
-    if (!this.nullValidation(this.fragmentMaster.toEshterak, 'تا اشتراک را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentMaster.toEshterak, EN_messages.insert_ToEshterak))
       return false;
-    if (!this.nullValidation(this.fragmentMaster.routeTitle, 'عنوان مسیر را وارد نمایید'))
+    if (!this.nullValidation(this.fragmentMaster.routeTitle, EN_messages.insert_title_route))
       return false;
 
-    if (!this.NANValidation(this.fragmentMaster.fromEshterak, 'فرمت از اشتراک ناصحیح است'))
+    if (!this.NANValidation(this.fragmentMaster.fromEshterak, EN_messages.format_invalid_from_eshterak))
       return false;
-    if (!this.NANValidation(this.fragmentMaster.fromEshterak, 'فرمت  تا اشتراک ناصحیح است'))
+    if (!this.NANValidation(this.fragmentMaster.fromEshterak, EN_messages.format_invalid_to_eshterak))
       return false;
 
     if (!MathS.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
@@ -320,7 +277,53 @@ export class FragmentManagerService {
       return false;
     return true;
   }
-
+  verificationAutoImportAdd = (body: IAutomaticImportAddEdit): boolean => {
+    if (MathS.isNull(body.startDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_startDay);
+      return false;
+    }
+    if (MathS.isNull(body.endDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_endDay);
+      return false;
+    }
+    if (MathS.isNull(body.startTime)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_startTime);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.startTime, ENRandomNumbers.five)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthEndTime);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.startDay, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(body.endDay, ENRandomNumbers.ten)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
+      return false;
+    }
+    if (MathS.isNull(body.readingPeriodKindId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriodKind);
+      return false;
+    }
+    if (!MathS.persentCheck(body.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_alalhesab);
+      return false;
+    }
+    if (!MathS.persentCheck(body.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_pictures);
+      return false;
+    }
+    if (MathS.isNaN(body.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_alalhesab);
+      return false;
+    }
+    if (MathS.isNaN(body.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_imagePercent);
+      return false;
+    }
+    return true;
+  }
   verificationMaster = (fragmentMaster: IFragmentMaster): boolean => {
     this.fragmentMaster = fragmentMaster;
     return this.masterValidation();

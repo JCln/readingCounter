@@ -12,10 +12,18 @@
   background: url('/assets/imgs/framework/bbp.jpg');
 }
 
+.pinkyBackground::after {
+  background: url('/assets/imgs/framework/bbpink.jpg');
+}
+
+.corporateBackground::after {
+  background: var(--secondary_2);
+}
+
 
 
 .lightBackground::before {
-  background: var(--secondary_1);
+  background: var(--login_right_background);
 }
 
 .darkBackground::before {
@@ -24,6 +32,14 @@
 
 .purpleBackground::before {
   background: var(--primary_1);
+}
+
+.pinkyBackground::before {
+  background: var(--primary_2);
+}
+
+.corporateBackground::before {
+  background: var(--secondary_2);
 }
 
 .polygon {

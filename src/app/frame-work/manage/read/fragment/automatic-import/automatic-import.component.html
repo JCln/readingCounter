@@ -1,0 +1,16 @@
+<app-prime-table     
+    [dataSource]="dataSource" 
+    [_outputFileName]="'automaticImport'"
+    [_checkUpName]="'automaticImport'"    
+    [_numberOfExtraColumns]="[1, 2]"
+    [_sessionName]="'automaticImport-session'"
+    [_selectedColumnsToRemember]="'selectedRAutoImport'"        
+    [_backToPreviousEnabled]=true
+    [_backToPreviousText]="'بازگشت'"
+    (backedToPrevious)="fragmentToNull()"
+    (refreshedTable)="refreshTable()"    
+    (firstConfirmedDialog)="removeRow($event)"
+    (openedAddDialog)="openAddDialog()"
+    (openedEditDialog)="openEditDialog($event)"
+ > 
+</app-prime-table>

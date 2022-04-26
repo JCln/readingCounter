@@ -76,7 +76,7 @@
 }
 
 ._custom {
-  background: var(--primary_2);
+  background: var(--primary_4);
   color: var(--secondary_1);
 
   &:hover,
@@ -92,8 +92,8 @@ h2 {
   font-family: $font_family;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--primary_2);
-  border: 2px solid var(--primary_2);
+  color: var(--primary_4);
+  border: 2px solid var(--primary_4);
   border-radius: 15px;
   padding: 1rem;
 }

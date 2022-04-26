@@ -25,14 +25,35 @@ export class DictionaryWrapperService {
   private authLev4Dictionary: any = [];
 
   private counterReportDictionary: any = [];
-  private counterReportByZoneDictionary: any = [];
+  private counterReportByZoneDictionary = {
+    dictionary: null,
+    zoneId: null
+  };
+  private userCounterReadersByZoneDictionary = {
+    dictionary: null,
+    zoneId: null
+  };
+  private readingConfigDefaultByZoneDictionary = {
+    dictionary: null,
+    zoneId: null
+  };
+  private fragmentMasterByZoneDictionary = {
+    dictionary: null,
+    zoneId: null
+  };
   private counterStateDictionary: any = [];
-  private counterStateByZoneIdDictionary: any = [];
-  private counterStateByCodeDictionary: any = [];
+  private counterStateByZoneIdDictionary = {
+    dictionary: null,
+    zoneId: null
+  }
+  private counterStateByCodeDictionary = {
+    dictionary: null,
+    zoneId: null
+  }
   private periodKindDictionary: any = [];
   private qotrDictionary: any = [];
   private roleDictionary: any = [];
-  
+
   private karbariDictionary: any = [];
   private karbariCodeDictionary: any = [];
   private traverseDifferentialDictionary: any = [];
@@ -158,10 +179,43 @@ export class DictionaryWrapperService {
     });
   }
   getCounterReportByZoneIdDictionary(zoneId: number): Promise<any> {
+    if (this.counterReportByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.counterReportByZoneDictionary.dictionary))
+      return this.counterReportByZoneDictionary.dictionary;
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.CounterReportByZoneIdDICTIONARY, zoneId).subscribe(res => {
-        this.setCounterReportByZoneDictionary(res);
-        resolve(this.counterReportByZoneDictionary);
+        this.setCounterReportByZoneDictionary(res, zoneId);
+        resolve(res);
+      })
+    });
+  }
+  getUserCounterReaderDictionary = (zoneId: number): Promise<any> => {
+    if (this.userCounterReadersByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.userCounterReadersByZoneDictionary.dictionary))
+      return this.userCounterReadersByZoneDictionary.dictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res => {
+        this.setUserCounterReadersByZoneDictionary(res, zoneId);
+        resolve(res)
+      })
+    });
+  }
+  getReadingConfigDefaultByZoneIdDictionary = (zoneId: number): Promise<any> => {
+    if (this.readingConfigDefaultByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.readingConfigDefaultByZoneDictionary.dictionary))
+      return this.readingConfigDefaultByZoneDictionary.dictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.readingConfigDefaultByZoneId, zoneId).subscribe(res => {
+        this.setReadingConfigDefaultByZoneDictionary(res, zoneId);
+        resolve(res);
+      })
+    });
+  }
+  getFragmentMasterByZoneIdDictionary(zoneId: number): Promise<any> {
+    if (this.fragmentMasterByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.fragmentMasterByZoneDictionary.dictionary))
+      return this.fragmentMasterByZoneDictionary.dictionary;
+
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.fragmentMasterInZone, zoneId).toPromise().then(res => {
+        this.setFragmentMasterByZoneDictionary(res, zoneId);
+        resolve(res);
       })
     });
   }
@@ -177,18 +231,22 @@ export class DictionaryWrapperService {
 
   }
   getCounterStateByZoneIdDictionary(zoneId: number): Promise<any> {
+    if (this.counterStateByZoneIdDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByZoneIdDictionary.dictionary))
+      return this.counterStateByZoneIdDictionary.dictionary;
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId).subscribe(res => {
-        this.setCounterStateByZoneIdDictionary(res);
-        resolve(this.counterStateByZoneIdDictionary);
+        this.setCounterStateByZoneIdDictionary(res, zoneId);
+        resolve(res);
       })
     })
   }
   getCounterStateByCodeDictionary(zoneId: number): Promise<any> {
+    if (this.counterStateByCodeDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByCodeDictionary.dictionary))
+      return this.counterStateByCodeDictionary.dictionary;
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId).subscribe(res => {
-        this.setCounterStateByCodeDictionary(res);
-        resolve(this.counterStateByCodeDictionary);
+        this.setCounterStateByCodeDictionary(res, zoneId);
+        resolve(res);
       })
     });
   }
@@ -289,17 +347,32 @@ export class DictionaryWrapperService {
   private setCounterReportDictionary(v: any) {
     this.counterReportDictionary = v;
   }
-  private setCounterReportByZoneDictionary(v: any) {
-    this.counterReportByZoneDictionary = v;
+  private setCounterReportByZoneDictionary(v: any, id: number) {
+    this.counterReportByZoneDictionary.dictionary = v;
+    this.counterReportByZoneDictionary.zoneId = id;
+  }
+  private setReadingConfigDefaultByZoneDictionary(v: any, id: number) {
+    this.readingConfigDefaultByZoneDictionary.dictionary = v;
+    this.readingConfigDefaultByZoneDictionary.zoneId = id;
+  }
+  private setUserCounterReadersByZoneDictionary(v: any, id: number) {
+    this.userCounterReadersByZoneDictionary.dictionary = v;
+    this.userCounterReadersByZoneDictionary.zoneId = id;
+  }
+  private setFragmentMasterByZoneDictionary(v: any, id: number) {
+    this.fragmentMasterByZoneDictionary.dictionary = v;
+    this.fragmentMasterByZoneDictionary.zoneId = id;
   }
   private setCounterStateDictionary(v: any) {
     this.counterStateDictionary = v;
   }
-  private setCounterStateByZoneIdDictionary(v: any) {
-    this.counterStateByZoneIdDictionary = v;
+  private setCounterStateByZoneIdDictionary(v: any, id: number) {
+    this.counterStateByZoneIdDictionary.dictionary = v;
+    this.counterStateByZoneIdDictionary.zoneId = id;
   }
-  private setCounterStateByCodeDictionary(v: any) {
-    this.counterStateByCodeDictionary = v;
+  private setCounterStateByCodeDictionary(v: any, id: number) {
+    this.counterStateByCodeDictionary.dictionary = v;
+    this.counterStateByCodeDictionary.zoneId = id;
   }
   private setPeriodKindDictionary(v: any) {
     this.periodKindDictionary = v;
@@ -328,10 +401,19 @@ export class DictionaryWrapperService {
     this.authLev3Dictionary = [];
     this.authLev4Dictionary = [];
     this.counterReportDictionary = [];
-    this.counterReportByZoneDictionary = [];
+    this.counterReportByZoneDictionary.dictionary = [];
+    this.counterReportByZoneDictionary.zoneId = null;
+    this.readingConfigDefaultByZoneDictionary.dictionary = [];
+    this.readingConfigDefaultByZoneDictionary.zoneId = null;
+    this.userCounterReadersByZoneDictionary.dictionary = [];
+    this.userCounterReadersByZoneDictionary.zoneId = null;
+    this.fragmentMasterByZoneDictionary.dictionary = [];
+    this.fragmentMasterByZoneDictionary.zoneId = null;
     this.counterStateDictionary = [];
-    this.counterStateByZoneIdDictionary = [];
-    this.counterStateByCodeDictionary = [];
+    this.counterStateByZoneIdDictionary.dictionary = [];
+    this.counterStateByZoneIdDictionary.zoneId = null;
+    this.counterStateByCodeDictionary.dictionary = [];
+    this.counterStateByCodeDictionary.zoneId = null;
     this.periodKindDictionary = [];
     this.karbariDictionary = [];
     this.qotrDictionary = [];

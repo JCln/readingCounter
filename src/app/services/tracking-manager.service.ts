@@ -12,9 +12,10 @@ import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { IFollowUpHistory } from '../Interfaces/isearchs';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../Interfaces/itrackings';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { OffloadModify } from './../classes/offload-modify-type';
+import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { UtilsService } from './utils.service';
 
@@ -23,7 +24,6 @@ import { UtilsService } from './utils.service';
 })
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  private offloadZoneIdDictionary: any = [];
 
   columnDefColumns = (): IObjectIteratation[] => [
     { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
@@ -91,7 +91,8 @@ export class TrackingManagerService {
   getOffloadModifyType = (): OffloadModify[] => {
     return [
       OffloadModify.callAnnounce,
-      OffloadModify.wrongReading
+      OffloadModify.wrongReading,
+      OffloadModify.bazresi
     ]
   }
   getOffloadItems = (): OffloadModify[] => {
@@ -100,7 +101,6 @@ export class TrackingManagerService {
       OffloadModify.longDistance,
       OffloadModify.intenseLight,
       OffloadModify.counterStatesNotMatch,
-      OffloadModify.wrongReading,
       OffloadModify.occasion,
       OffloadModify.inappropriate,
       OffloadModify.doorPicture,
@@ -115,6 +115,7 @@ export class TrackingManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private _location: Location,
     private dialog: MatDialog,
+    private allListsService: AllListsService,
     private router: Router
   ) { }
 
@@ -266,14 +267,10 @@ export class TrackingManagerService {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
-    if (!MathS.isNull(this.offloadZoneIdDictionary))
-      return this.offloadZoneIdDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId).subscribe(res => {
-        this.offloadZoneIdDictionary = res;
-        resolve(res);
-      })
-    })
+    return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
+  }
+  getCounterStateByIdDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
   postOffloadModifyEdited = (body: IOffloadModifyReq) => {
     body.jalaliDay = Converter.persianToEngNumbers(body.jalaliDay);
@@ -377,17 +374,22 @@ export class TrackingManagerService {
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
-  customizeSelectedColumns = (_selectCols: any) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
-  routeToLMAll = (row: ITracking | IFollowUpHistory) => {
-    this.router.navigate(['wr/m/l/all', false, row.id]);
+  routeToLMAll = (row: any) => {
+    this.allListsService.allLists_pageSign.GUid = row.id;
+    this.allListsService.allLists_pageSign.listNumber = row.listNumber;
+    this.router.navigate([EN_Routes.wrmlallfalse]);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
-    this.router.navigate(['wr/m/l/all', true, dataSource.id]);
+    this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
+    this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
+    this.router.navigate([EN_Routes.wrmlalltrue]);
+  }
+  routeToOffloadGeneralModify = (dataSource: ITracking) => {
+    this.allListsService.generalModifyLists_pageSign.GUid = dataSource.id;
+    this.allListsService.generalModifyLists_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.generalModifyLists_pageSign.groupId = dataSource.groupId;
+    this.allListsService.generalModifyLists_pageSign.zoneId = dataSource.zoneId;
+    this.router.navigate([EN_Routes.wrmlGeneralModify]);
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);
@@ -396,7 +398,7 @@ export class TrackingManagerService {
     this._location.back();
   }
   backToParent = () => {
-    this.utilsService.routeTo('/wr/m/s/fwu');
+    this.utilsService.routeTo(EN_Routes.wrmsfwu);
   }
   setGetRanges = (dataSource: IOffLoadPerDay) => {
     dataSource.overalDuration = parseFloat(MathS.getRange(dataSource.overalDuration));

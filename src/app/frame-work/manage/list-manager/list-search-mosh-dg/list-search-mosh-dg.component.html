@@ -1,0 +1,26 @@
+<main class="main">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="content">
+            <div class="input_2">
+                <div class="_key">ناحیه</div>
+                <p-dropdown name="zones" [options]="zoneDictionary"
+                    [(ngModel)]="listManagerService.searchReqMoshDialog.zoneId" placeholder="انتخاب مورد"
+                    [style]="{'min-width': '9rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                </p-dropdown>
+            </div>
+            <input class="input_1" type="number" placeholder="اشتراک را وارد نمایید " name="counterNumber"
+                [(ngModel)]="listManagerService.searchReqMoshDialog.item" autofocus>
+
+            <button type="submit" class="tooltip btn_2_o">
+                <i class="pi pi-search"></i>
+                جستجو
+            </button>
+        </section>
+    </form>
+</main>
+
+<app-prime-table *ngIf="dataSource.length" [dataSource]="dataSource" [_outputFileName]="'searchMoshDialog'"
+    [_checkUpName]="'search_moshtarak'" [_selectedColumnsToRemember]="'selectedListManagerMoshDialog'"
+    [_numberOfExtraColumns]="[1,2,3]" (showedPictures)="listManagerService.getReadingReportTitles($event)"
+    (showedInMapSingle)="openMapDialog($event)" (refreshedTable)="refreshTable()" (showedWOUIAsCarousel)="openWOUMDialog($event)">
+</app-prime-table>

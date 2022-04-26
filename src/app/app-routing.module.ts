@@ -5,6 +5,7 @@ import { GuardService } from './auth/guard.service';
 import { LoginComponent } from './auth/login/login.component';
 import { HfcComponent } from './core/_layouts/hfc/hfc.component';
 import { LayoutComponent } from './core/_layouts/layout/layout.component';
+import { PageNotFoundComponent } from './frame-work/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -18,8 +19,9 @@ const routes: Routes = [
     path: '', canActivate: [GuardService], component: LayoutComponent, children: [
       { path: 'wr', loadChildren: () => import('./frame-work/frame-work.module').then(fr => fr.FrameWorkModule) }
     ]
-  }
-
+  },
+  { path: 'pnf', component: PageNotFoundComponent },
+  { path: '**', redirectTo: 'pnf', pathMatch: 'full' }
 ];
 
 @NgModule({

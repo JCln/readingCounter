@@ -35,6 +35,7 @@ export interface ITabs {
     logicalOrder: number;
 }
 export enum ENEssentialsToSave {
+    saveDataForDynamicReports = 'saveDataForDynamicReports',
     saveDataForToolsExcelViewer = 'saveDataForToolsExcelViewer',
     saveDataForKarbari = 'saveDataForKarbari',
     saveDataForImageAttribution = 'saveDataForImageAttribution',
@@ -44,6 +45,7 @@ export enum ENEssentialsToSave {
     saveDataForQotrManager = 'saveDataForQotrManager',
     saveDataForCounterReport = 'saveDataForCounterReport',
     saveDataForFragmentNOB = 'saveDataForFragmentNOB',
+    saveDataForAutomaticImport = 'saveDataForAutomaticImport',
     saveDataForTextOutput = 'saveDataForTextOutput',
     saveDataForAPKManager = 'saveDataForAPKManager',
     saveDataForReadingConfig = 'saveDataForReadingConfig',
@@ -68,6 +70,7 @@ export enum ENEssentialsToSave {
     saveDataForImportDynamic = 'saveDataForImportDynamic',
     saveDataForImportErrors = 'saveDataForImportErrors',
     saveDataForAssessPre = 'saveDataForAssessPre',
+    saveDataForAssessPreReq = 'saveDataForAssessPre',
     saveDataForAssessAdd = 'saveDataForAssessAdd',
     saveDataForSimafaReadingPrograms = 'saveDataForSimafaReadingPrograms',
     saveDataForSimafaBatch = 'saveDataForSimafaBatch',
@@ -83,8 +86,11 @@ export enum ENEssentialsToSave {
     saveDataForFollowUpAUX = 'saveDataForFollowUpAUX',
     rSearchMoshtarakinReq = 'rSearchMoshtarakinReq',
     saveDataForSearchMoshtarakin = 'saveDataForSearchMoshtarakin',
+    saveDataForSearchProReq = 'saveDataForSearchProReq',
     saveDataForSearchPro = 'saveDataForSearchPro',
     saveDataForSearchSimple = 'saveDataForSearchSimple',
+    saveDataForUserSearch = 'saveDataForUserSearch',
+    saveDataForUserSearchRes = 'saveDataForUserSearchRes',
     saveDataForFNB = 'saveDataForFNB',
     saveDataForLMPD = 'saveDataForLMPD',
     saveDataForOutputDBF = 'saveDataForOutputDBF',
@@ -101,8 +107,13 @@ export enum ENEssentialsToSave {
     saveDataForRRDetails = 'saveDataForRRDetails',
     saveDataForRRkarkardDaily = 'saveDataForRRkarkardDaily',
     saveDataForRRGIS = 'saveDataForRRGIS',
+    saveDataForLMGeneralModify = 'saveDataForLMGeneralModify',
+    saveDataForLMGeneralModifyReq = 'saveDataForLMGeneralModifyReq',
     saveDataForOffloadModify = 'saveDataForOffloadModify',
+    saveDataForLMModifyReq = 'saveDataForLMModifyReq',
+    saveDataForLMModify = 'saveDataForLMModify',
     saveDataForLMAll = 'saveDataForLMAll',
+    saveDataForLMAllReq = 'saveDataForLMAllReq',
     saveDataForLMAll_extra = 'saveDataForLMAll_extra',
     saveDataForEditUsers = 'saveDataForEditUsers',
     saveDataForWOUI = 'saveDataForWOUI',
@@ -120,20 +131,50 @@ export interface ITestSidebar {
 }
 export interface ISnackBar {
     message: string;
-    duration: number;
-    backColor?: string;
+    duration: ENSnackBarTimes;
+    backColor?: ENSnackBarColors;
+}
+export interface ISnackBarSignal {
+    message: string;
+    duration: ENSnackBarTimes;
+    backColor?: ENSnackBarColors;
+}
+
+export enum ENHubMessages {
+    Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
+    Connecting = 'درحال اتصال به سامانه «لحظه»',
+    Disconnecting = 'درحال قطع ارتباط از سامانه «لحظه»',
+    Reconnecting = 'درحال اتصال به سامانه «لحظه»',
+    Connected = 'متصل به سامانه «لحظه»'
+}
+export enum ENColorText {
+    blue = 'آبی',
+    green = 'سبز',
+    orange = 'نارنجی',
+    red = 'قرمز',
 }
 export enum ENSnackBarColors {
     warn = 'snack_warn',
     danger = 'snack_danger',
     success = 'snack_success',
+    info = 'snack_info',
+}
+export enum ENSnackBarColorsExact {
+    warn = 'rgb(246, 128, 56)',
+    danger = ' rgb(183, 28, 28)',
+    success = 'rgb(75, 140, 56)',
+    info = 'rgb(17, 111, 255)',
 }
 export enum ENSnackBarTimes {
     threeMili = 3000,
     fourMili = 4000,
     fiveMili = 5000,
     sevenMili = 7000,
-    tenMili = 10000
+    tenMili = 10000,
+    fifteenMili = 15000,
+    twentyMili = 20000,
+    thirdyMili = 30000,
+    fiftyMili = 50000
 }
 export enum ENStorageColumnKey {
     all_users_session = 'all_users_session'
@@ -228,12 +269,15 @@ export enum ENHasImportDynamicCount {
 }
 export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
-    mapAnimationStartFrom = 'mapAnimationStartFrom'
+    mapAnimationStartFrom = 'mapAnimationStartFrom',
+    isDarkModeMap = 'isDarkModeMap'
 }
 export enum ENRandomNumbers {
     zero = 0,
     five = 5,
     ten = 10,
+    eleven = 11,
+    fifteen = 15,
     twenty = 20,
     thirdy = 30,
     forthy = 40,
@@ -247,11 +291,16 @@ export enum ENThemeColor {
     light = 0,
     dark = 1,
     purple = 2,
+    bedge = 3,
+    corporate = 4,
 }
 export enum ENSelectedColumnVariables {
+    selectedRRDynamicReport = 'dynamicReport',
     selectedRRExcelView = 'excelDynamic',
+    selectedRAutoImport = 'automaticImport',
     selectedImageAttrResult = '_imageAttrResult',
     selectedImageAttrAnalyze = '_imageAttrAnalyze',
+    selectedUsersSearch = 'selectedUsersSearch',
     selectedSimafaBatch = '_simafaBatch',
     selectedTrackReading = 'reading',
     selectedTrackLoaded = 'loaded',
@@ -261,8 +310,12 @@ export enum ENSelectedColumnVariables {
     selectedlastStates = 'lastStates',
     selectedUsersAll = 'userAll',
     selectedListManagerAll = 'allLists',
+    selectedGeneralModify = 'generalListModify',
+    selectedListManagerModify = 'ModifyList',
     selectedListManagerAssess = 'assess_pre',
     selectedListManagerMosh = 'searchMosh',
+    selectedListManagerMoshDialog = 'searchMoshDialog',
+    selectedListManagerBriefKardexDialog = 'briefKardex',
     selectedCounterState = 'counterState',
     selectedListManagerPro = 'searchPro',
     selectedSearchManagerSimple = 'simpleSearch',
@@ -295,7 +348,8 @@ export enum ENSelectedColumnVariables {
     selectedKarbari = 'karbari',
     selectedForbidden = 'forbidden',
     selectedErrors = 'errors',
-    selectedSimafaReadingProgram = '_simafaReadingProgram',
+    selectedServerErrors = 'serverErrors',
+    selectedSimafaReadingProgram = 'simafaReadingProgram',
 }
 export enum ENOffloadModifyType {
     callAnnounce = 'اعلام تلفنی',
@@ -303,7 +357,8 @@ export enum ENOffloadModifyType {
     intenseLight = 'نور صفحه آبی',
     longDistance = 'نور زیاد',
     counterStatesNotMatch = 'عکس از فاصله دور',
-    wrongReading = 'عدم تطابق رقم فعلی با رقم کنتور',
+    wrongReading = 'اشتباه قرائت',
+    bazresi = 'بازرسی',
     occasion = 'مناسب',
     inappropriate = 'نا مناسب',
     doorPicture = 'عکس درب',
@@ -323,10 +378,26 @@ export const IMasrafStates: ITHV[] = [
     { title: 'zero', header: 'صفر', value: 3 },
     { title: 'inCalculable', header: 'غیرقابل محاسبه', value: 4 }
 ]
+export enum ENClientServerErrors {
+    'cs400' = 400,
+    'cs401' = 401,
+    'cs403' = 403,
+    'cs404' = 404,
+    'cs405' = 405,
+    'cs408' = 408,
+    'cs409' = 409,
+    'cs410' = 410,
+    'cs422' = 422,
+    'cs0' = 0,
+    'cs500' = 500,
+    'cs501' = 501,
+    'cs502' = 502,
+    'cs504' = 504,
+}
 export interface Theme {
     name: string,
     properties: any
 }
 export enum ENLoginVersion {
-    version = '0.5.9'
+    version = '0.7.2'
 }

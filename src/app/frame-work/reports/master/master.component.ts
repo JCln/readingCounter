@@ -19,7 +19,7 @@ export class MasterComponent extends FactoryONE {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   searchInOrderTo: ISearchInOrderTo[] = [
     {

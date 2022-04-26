@@ -3,18 +3,19 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { Imap } from 'interfaces/imap.js';
-import { ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames, ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
 import { IListManagerPDXY } from 'interfaces/itrackings';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DateJalaliService } from 'services/date-jalali.service';
-import { MapItemsService } from 'services/DI/map-items.service';
 import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
+import { IGisXYResponse } from 'src/app/Interfaces/idashboard-map';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 
 declare let L;
@@ -60,7 +61,6 @@ L.Marker.prototype.options.icon = simpleIcon;
 })
 export class MapComponent implements OnInit, OnDestroy {
   extraDataSourceRes: IReadingReportGISResponse[] = [];
-
   private map: L.Map;
   private mapItems: Imap[];
   private layerGroup = new L.FeatureGroup();
@@ -73,6 +73,7 @@ export class MapComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
 
   _selectedOrderId: number = 0;
+
   orderGroup: ITHV[] = [
     {
       title: 'eshterak',
@@ -91,10 +92,10 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   _isCluster: boolean;
   _isSingle: boolean;
+  _currentColorMode: boolean;
 
   constructor(
     public mapService: MapService,
-    readonly mapItemsService: MapItemsService,
     private readingReportManagerService: ReadingReportManagerService,
     public route: ActivatedRoute,
     private router: Router,
@@ -104,36 +105,26 @@ export class MapComponent implements OnInit, OnDestroy {
   ) { }
 
   private getMapItems = () => {
-    this.mapItems = this.mapItemsService.getMapItems();
+    this.mapItems = this.mapService.getMapItems();
   }
-  private initMap = () => {
-    const OSM = this.mapItems[0];
-    const SATELLITE = this.mapItems[1];
-    // const Esri = this.mapItems[2];
-    const
-      streets = L.tileLayer(this.envService.OSMmapBoxUrl),
-      satellite = L.tileLayer(this.envService.SATELLITEMapBoxUrl + this.envService.SATELLITEMapAccessToken)
-    // esri = L.tileLayer(
-    //   Esri.mapBoxUrl)
-
+  private getOverlays = () => {
+    return {
+      "لایه ها": this.layerGroup
+    };
+  }
+  initMap = () => {
     // only one of base layers should be added to the map at instantiation
+    //   OSM = this.mapItems[0];
+    // SATELLITE = this.mapItems[1];
+
     this.map = L.map('map', {
       center: this.envService.mapCenter,
       zoom: 15,
       minZoom: 4,
-      layers: [streets, this.layerGroup]
+      layers: [this.mapService.initMapColor(), this.layerGroup]
     });
 
-    const baseMaps = {
-      "Satellite": satellite,
-      "OSM": streets,
-      // "ESRI": esri
-    };
-    const overlays = {
-      "لایه ها": this.layerGroup
-    };
-
-    L.control.layers(baseMaps, overlays).addTo(this.map);
+    L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
   }
   private leafletDrawPolylines = (delay: number) => {
     const lines = [];
@@ -191,6 +182,36 @@ export class MapComponent implements OnInit, OnDestroy {
     }
     this._isCluster ? this.extrasConfigOptionsCluster(this.extraDataSourceRes) : this.extrasConfigOptions(this.extraDataSourceRes);
   }
+  private forbiddenMarkSingleLocation = (x: string, y: string) => {
+    const postalCode = this.route.snapshot.paramMap.get('postalCode');
+    const nextEshterak = this.route.snapshot.paramMap.get('nextEshterak');
+    const preEshterak = this.route.snapshot.paramMap.get('preEshterak');
+    this.markSingleForbidden({ x: x, y: y, postalCode: postalCode, preEshterak: preEshterak, nextEshterak: nextEshterak });
+  }
+  private simpleMarkSingleLocation = (x: string, y: string) => {
+    const trackNumber = this.route.snapshot.paramMap.get('trackNumber');
+    const sureName = this.route.snapshot.paramMap.get('sureName');
+    const eshterak = this.route.snapshot.paramMap.get('eshterak');
+    const firstName = this.route.snapshot.paramMap.get('firstName');
+    this.markSingle({ x: x, y: y, firstName: firstName, sureName: sureName, eshterak: eshterak, trackNumber: trackNumber });
+  }
+  private singleMarksManager = () => {
+    const _isForbidden = this.route.snapshot.paramMap.get('isForbidden') == 'true' ? true : false;
+    const x = this.route.snapshot.paramMap.get('x');
+    const y = this.route.snapshot.paramMap.get('y');
+
+    if (_isForbidden) {
+      this.forbiddenMarkSingleLocation(x, y);
+    } else {
+      this.simpleMarkSingleLocation(x, y);
+    }
+  }
+  private clusterManager = () => {
+    this._isCluster = this.route.snapshot.paramMap.get('isCluster') == 'true' ? true :
+      this.route.snapshot.paramMap.get('isCluster') == 'false' ? false : null;
+    if (this._isCluster == false || this._isCluster == true)
+      this.classWrapperCluster();
+  }
   private getRouteParams = () => {
     this.onShowCounterReader.distance = this.route.snapshot.paramMap.get('distance');
 
@@ -200,18 +221,11 @@ export class MapComponent implements OnInit, OnDestroy {
     }
     this._isSingle = this.route.snapshot.paramMap.get('isSingle') == 'true' ? true : false;
     if (this._isSingle) {
-      const x = this.route.snapshot.paramMap.get('x');
-      const y = this.route.snapshot.paramMap.get('y');
-      const firstName = this.route.snapshot.paramMap.get('firstName');
-      const trackNumber = this.route.snapshot.paramMap.get('trackNumber');
-      const sureName = this.route.snapshot.paramMap.get('sureName');
-      const eshterak = this.route.snapshot.paramMap.get('eshterak');
-      this.markSingle({ x: x, y: y, firstName: firstName, sureName: sureName, eshterak: eshterak, trackNumber: trackNumber });
+      this.singleMarksManager();
     }
-    this._isCluster = this.route.snapshot.paramMap.get('isCluster') == 'true' ? true :
-      this.route.snapshot.paramMap.get('isCluster') == 'false' ? false : null
-    if (this._isCluster == false || this._isCluster == true)
-      this.classWrapperCluster();
+    else {
+      this.clusterManager();
+    }
   }
   ngOnInit(): void {
     this.getMapItems();
@@ -221,6 +235,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.mapService.addButtonsToLeaflet();
     this.removeLayerButtonLeaflet();
     this.myLocationButtonLeaflet();
+    this.toggleMapView();
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
     if (lat === 0 || lag === 0)
@@ -260,7 +275,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   private markingOnMapNClusterNDelay = (method: string, xyData: any) => {
     this.flyToDes(this.envService.mapCenter[0], this.envService.mapCenter[1], 12);
-    xyData.map((items, i) => {
+    xyData.map((items) => {
       this[method](parseFloat(items.y), parseFloat(items.x), items);
     })
   }
@@ -274,13 +289,17 @@ export class MapComponent implements OnInit, OnDestroy {
     })
     this.layerGroup.addLayer(markers);
   }
+  showCounterReadersLocations = (dataSource: IGisXYResponse[]) => {
+    this.removeAllLayers();
+    this.markingOnMapNClusterNDelay('markWithoutClusterColorized', dataSource);
+  }
 
   mapConfigOptions = (delay: number, isFirstTime: boolean) => {
     this.removeAllLayers();
     if (this.polyline_configs)
-      this.mapService.saveToLocalStorage(this.polyline_configs);
+      this.mapService.saveToLocalStorage(ENLocalStorageNames.mapAnimationStartFrom, this.polyline_configs);
     if (this.polyline_configs == 0)
-      this.mapService.saveToLocalStorage(ENRandomNumbers.zero);
+      this.mapService.saveToLocalStorage(ENLocalStorageNames.mapAnimationStartFrom, ENRandomNumbers.zero);
 
     if (this._selectedOrderId === 0) {
       this._isOrderInAsc ? this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterak) : this.markersDataSourceXY.sort(this.dateJalaliService.sortByEshterakDESC)
@@ -310,7 +329,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this.router.navigate(['../wr']);
     }
     else {
-      this.router.navigate(['wr/db']);
+      this.router.navigate([EN_Routes.wrdb]);
     }
     this.changeRouteDetected();
   }
@@ -319,7 +338,7 @@ export class MapComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         if (!res)
           return;
-        if (this.router.url == '/wr')
+        if (this.router.url == EN_Routes.wr)
           this.isShowMap = true;
       })
     )
@@ -346,11 +365,26 @@ export class MapComponent implements OnInit, OnDestroy {
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );
   }
+  private markWithoutClusterColorized = (lat: number, lng: number, items) => {
+    if (lat === 0)
+      return;
+    L.circleMarker([lat, lng], { weight: 5, radius: 4, color: MathS.getRandomColors(1) }).addTo(this.layerGroup)
+      .bindPopup(
+        `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
+      );
+  }
   private markSingle = (items: any) => {
     this.flyToDes(items.y, items.x, 12);
     L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
       .bindPopup(
         `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${'ش.پ :' + items.trackNumber}`
+      );
+  }
+  private markSingleForbidden = (items: any) => {
+    this.flyToDes(items.y, items.x, 12);
+    L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
+      .bindPopup(
+        `${'کد پستی :' + items.postalCode} <br>` + `${'اشتراک قبلی :' + items.preEshterak} <br> ${'اشتراک بعدی :' + items.nextEshterak}`
       );
   }
   private findMyLocationLeaflet = (e) => {
@@ -371,4 +405,21 @@ export class MapComponent implements OnInit, OnDestroy {
       this.map.on('locationerror', this.onLocationError);
     }, 'مکان من').addTo(this.map);
   }
+  toggleMapView = () => {
+    if (this.mapService.canUseMultiMapColors()) {
+      L.easyButton('pi pi-moon', () => {
+        this._currentColorMode = !this._currentColorMode;
+        if (this._currentColorMode) {
+          this.map.removeLayer(this.mapService.getLightStreetsUrl());
+          this.map.addLayer(this.mapService.getDarkStreetsUrl());
+        }
+        else {
+          this.map.removeLayer(this.mapService.getDarkStreetsUrl());
+          this.map.addLayer(this.mapService.getLightStreetsUrl());
+        }
+        this.mapService.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, this._currentColorMode);
+      }, this._currentColorMode ? 'پس‌زمینه تیره' : 'پس‌زمینه روشن').addTo(this.map);
+    }
+  }
+
 }

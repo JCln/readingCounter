@@ -1,3 +1,5 @@
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarColorsExact, ENSnackBarTimes } from 'interfaces/ioverall-config';
+
 export interface IPolicies {
     id: number,
     enableValidIpCaptcha: boolean,
@@ -34,20 +36,24 @@ export interface IUploadAPK {
 }
 export interface IMessage {
     title: string;
-    text: string;
-    color: string;
-    showTime: number;
+    message: string;
+    color: ENSnackBarColors;
+    time: ENSnackBarTimes;
     canSave: boolean;
+    text?: ENRandomNumbers;
+    exactColor?: ENSnackBarColorsExact;
 }
 
 export interface IColor {
-    value: string;
+    text: string,
+    value: ENSnackBarColors;
     isClicked: boolean;
-    background: string;
+    background: ENSnackBarColorsExact;
 }
 
 export interface ITime {
-    value: number;
+    value: ENSnackBarTimes;
+    title: ENRandomNumbers;
     isClicked: boolean;
 }
 export interface IChangePassword {

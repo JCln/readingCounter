@@ -1,14 +1,14 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'interfaces/itrackings';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-
-import { ImageViewerComponent } from './image-viewer/image-viewer.component';
+import { ImageViewerComponent } from 'src/app/shared/carousel-woum/woum/image-viewer/image-viewer.component';
 
 @Component({
   selector: 'app-woui',
@@ -41,7 +41,6 @@ export class WouiComponent extends FactoryONE {
     private route: ActivatedRoute,
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
-     
     private dialogService: DialogService,
     private _location: Location,
     private router: Router
@@ -73,8 +72,8 @@ export class WouiComponent extends FactoryONE {
   private useAPI = (): Promise<any> => {
     return new Promise((resolve) => {
       this.targetFile.isForbidden ?
-        resolve(this.downloadManagerService.downloadForbiddenFileInfo(this.targetFile.id)) :
-        resolve(this.downloadManagerService.downloadFileInfo(this.targetFile.id));
+        resolve(this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileForbidden, this.targetFile.id)) :
+        resolve(this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.targetFile.id));
     });
   }
   getDownloadListInfo = () => {

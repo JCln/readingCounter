@@ -13,7 +13,6 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./random-images.component.scss']
 })
 export class RandomImagesComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _quantity: ITitleValue[] = [];
@@ -75,7 +74,7 @@ export class RandomImagesComponent extends FactoryONE {
     this.showCarousel = true;
   }
   carouselNextItem = () => {
-    this.rowIndex > this.allImagesDataSource.imageUrlAndInfos.length - 2 ? this.rowIndex = 0 : this.rowIndex++;
+    this.rowIndex >= this.allImagesDataSource.imageUrlAndInfos.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
   }
   carouselPrevItem = () => {

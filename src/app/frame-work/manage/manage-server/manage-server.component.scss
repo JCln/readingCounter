@@ -1,4 +1,5 @@
 @import 'variable';
+@import 'button';
 
 section {
   display: grid;
@@ -9,9 +10,17 @@ section {
 }
 
 .items {
+  position: relative;
   border-radius: $border_15;
   padding: $font_s;
   cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: 2px solid var(--primary_3);
+  }
+
 }
 
 .icons {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -9,9 +9,9 @@ import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
-
 
 @Component({
   selector: 'app-reading',
@@ -21,8 +21,6 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
 export class ReadingComponent extends FactoryONE {
 
   dataSource: ITracking[] = [];
-  _selectCols: any = [];
-  _selectedColumns: any[];
 
   constructor(
     private closeTabService: CloseTabService,
@@ -36,7 +34,7 @@ export class ReadingComponent extends FactoryONE {
   }
 
   routeToLMPayDay = (row: ITracking) => {
-    this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
+    this.utilsService.routeToByParams(EN_Routes.wrmlpd, row.trackNumber);
   }
   private rowToImported = async (row: string, desc: string, rowIndex: number) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row, desc);
@@ -71,13 +69,6 @@ export class ReadingComponent extends FactoryONE {
         }
       })
     })
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   forceOffload = (rowDataAndIndex: object) => {
     const title = EN_messages.reason_forceOffload;

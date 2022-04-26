@@ -1,13 +1,14 @@
 <app-prime-table     
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource"
+    [_outputFileName]="'userLogs'"
     [_outputEnabled]=false
     [_hasSaveColumns]=false
     [_backToPreviousEnabled]=true
     [_checkUpName]= "'user-loggins'"
+    [_sortField]="'loginDateTime'"
     [_backToPreviousText]="'بازگشت به مدیریت کاربران'"
     (refreshedTable)="refreshTable()"    
     (backedToPrevious)="backToPrevious()"
- > 
+    > 
 </app-prime-table>
+<!-- [_sortOrder]=-1 -->

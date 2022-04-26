@@ -1,14 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { Search } from 'src/app/classes/search';
+
+import { MapDgComponent } from '../../list-manager/all/map-dg/map-dg.component';
 
 @Component({
   selector: 'app-moshtarak',
@@ -20,10 +23,8 @@ export class MoshtarakComponent extends FactoryONE {
   dataSource: IOnOffLoadFlat[] = [];
   searchType: Search[];
   searchByText: string = '';
-  _empty_message: string = '';
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
+  ref: DynamicDialogRef;
+  _searchByInfo: string = 'مقدار';
 
   zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -35,14 +36,13 @@ export class MoshtarakComponent extends FactoryONE {
   constructor(
 
     private closeTabService: CloseTabService,
-    public searchService: SearchService
+    public searchService: SearchService,
+    private dialogService: DialogService
   ) {
     super();
   }
 
   converts = async () => {
-    this._empty_message = EN_messages.notFound;
-
     if (this.searchService.searchReqMosh.zoneId) {
       this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchService.searchReqMosh.zoneId);
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
@@ -72,10 +72,10 @@ export class MoshtarakComponent extends FactoryONE {
 
     this.closeTabService.saveDataForSearchMoshtarakin = this.dataSource;
   }
-  nullSavedSource = () => this.closeTabService.saveDataForSearchMoshtarakin = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.nullSavedSource();
+      this.closeTabService.saveDataForSearchMoshtarakin = null;
+      this.closeTabService.saveDataForSearchMoshtarakinReq = null;
     }
     if (!MathS.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
       this.dataSource = this.closeTabService.saveDataForSearchMoshtarakin;
@@ -85,14 +85,7 @@ export class MoshtarakComponent extends FactoryONE {
       this.toDefaultVals();
 
     this.searchType = this.searchService.getSearchTypes();
-    this.zoneDictionary = await this.searchService.getZoneDictionary();
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+    this.getZoneDictionary();
   }
   refreshTable = () => {
     this.connectToServer();
@@ -108,5 +101,23 @@ export class MoshtarakComponent extends FactoryONE {
     }
     this.searchService.snackEmptyValue();
   }
+  openMapDialog = (dataSource: any) => {
+    if (this.searchService.showInMapSingleValidation(dataSource))
+      this.ref = this.dialogService.open(MapDgComponent, {
+        data: dataSource,
+        rtl: true,
+        width: '70%'
+      })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        this.refreshTable();
+    });
+  }
+  getZoneDictionary = async () => {
+    this.zoneDictionary = JSON.parse(JSON.stringify(await this.searchService.getZoneDictionary()));
+    if (this.zoneDictionary[0].id !== 0)
+      this.zoneDictionary.unshift({ id: 0, title: 'مناطق مجاز', isSelected: true })
+  }
+
 
 }

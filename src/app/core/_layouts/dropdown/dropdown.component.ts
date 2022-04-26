@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EnvService } from 'services/env.service';
+import { JwtService } from 'src/app/auth/jwt.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -7,12 +10,17 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class DropdownComponent {
   @Output() isLogout = new EventEmitter<boolean>();
-  // close drop down if clicks outside of it
-  closeDropDown = () => {
 
-  }
+  constructor(
+    private envService: EnvService,
+    private jwtService: JwtService
+  ) { }
+
   logout = () => {
     this.isLogout.emit(true);
+  }
+  linkToChat = () => {
+    window.open(this.envService.API_URL + ENInterfaces.chat + this.jwtService.getAuthorizationToken(), '_blank');
   }
 
 }

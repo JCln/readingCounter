@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
+import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
+import { ISearchProReportInput } from 'interfaces/search';
+
+import { EN_Routes } from '../Interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +47,8 @@ export class CloseTabService {
   saveDataForUserLoggins: any;
   saveDataForEditOnRole: any;
   saveDataForAddUsers: any;
+  saveDataForUserSearch: any;
+  saveDataForUserSearchRes: any;
 
   // track manager
   saveDataForTrackImported: any;
@@ -55,21 +61,47 @@ export class CloseTabService {
   saveDataForFollowUp: any;
   saveDataForFollowUpAUX: any;
   // import dynamic
+  saveDataForAutomaticImport: any;
   saveDataForImportDynamic: any;
   saveDataForImportErrors: any;
   saveDataForSimafaBatch: any;
   saveDataForSimafaReadingPrograms: any;
+  saveDataForAssessPreReq: IAssessPreDisplayDtoSimafa = {
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    zoneId: null,
+    listNumber: ''
+  };
   saveDataForAssessPre: any;
   saveDataForAssessAdd: any;
   // SEARCH
   saveDataForSearchMoshtarakin: any;
   saveDataForSearchMoshtarakinReq: any;
+  saveDataForSearchProReq: ISearchProReportInput = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    readingPeriodId: null,
+    zoneIds: [],
+    year: 1401,
+    reportIds: [],
+    counterStateIds: [],
+    masrafStates: [],
+    karbariCodes: [],
+    fragmentMasterIds: []
+  }
   saveDataForSearchPro: any;
   saveDataForSearchSimple: any;
   // list manager
   saveDataForLMPD: any;
+  saveDataForLMAllReq: any;
   saveDataForLMAll: any;
-  saveDataForLMAll_extra: any;
+  saveDataForLMModifyReq: any;
+  saveDataForLMModify: any;
+  saveDataForLMGeneralModifyReq: any;
+  saveDataForLMGeneralModify: any;
   // WOUI manager
   saveDataForWOUI: any;
   // dbf output manager
@@ -95,6 +127,7 @@ export class CloseTabService {
 
   saveDataForTextOutput: any;
   saveDataForToolsExcelViewer: any;
+  saveDataForDynamicReports: any;
   saveDataForPolicies: any;
   saveDataForFNB: any;
   saveDataForProfile: any;
@@ -102,83 +135,84 @@ export class CloseTabService {
   saveDataForRRGalleryReq: any;
 
   private val: ISidebarVals[] = [
-    { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: '/wr/rpts/tools/excelviewer' },
-    { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: '/wr/m/r/imgattr' },
-    { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: '/wr/rpts/anlzfile/result' },
-    { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: '/wr/rpts/anlzfile/analyze' },
-    { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: '/wr/m/r/kar' },
-    { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: '/wr/m/r/cs' },
-    { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: '/wr/m/r/qr' },
-    { id: 1, value: ENEssentialsToSave.saveDataForCounterReport, url: '/wr/m/r/rpt' },
-    { id: 1, value: ENEssentialsToSave.saveDataForFragmentNOB, url: '/wr/m/r/nob' },
-    { id: 1, value: ENEssentialsToSave.saveDataForTextOutput, url: '/wr/m/r/txt/out' },
-    { id: 1, value: ENEssentialsToSave.saveDataForAPKManager, url: '/wr/m/r/apk' },
-    { id: 1, value: ENEssentialsToSave.saveDataForReadingConfig, url: '/wr/m/r/rcd' },
-    { id: 1, value: ENEssentialsToSave.saveDataForReadingPeriodKindManager, url: '/wr/m/r/rpkm' },
-    { id: 1, value: ENEssentialsToSave.saveDataForWaterFormula, url: '/wr/m/r/formula/ab' },
-    { id: 1, value: ENEssentialsToSave.saveDataForBadgetFormula, url: '/wr/m/r/formula/budget' },
-    { id: 1, value: ENEssentialsToSave.saveDataForTabsare2Formula, url: '/wr/m/r/formula/tabsare2' },
-    { id: 1, value: ENEssentialsToSave.saveDataForTabsare3Formula, url: '/wr/m/r/formula/tabsare3' },
-    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel1, url: '/wr/m/al/ap' },
-    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel2, url: '/wr/m/al/me' },
-    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel3, url: '/wr/m/al/cr' },
-    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: '/wr/m/al/ac' },
-    { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: '/wr/mu/all' },
-    { id: 1, value: ENEssentialsToSave.saveDataForAddUsers, url: '/wr/mu/add' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: '/wr/mu/role' },
-    { id: 1, value: ENEssentialsToSave.saveDataForEditOnRole, url: '/wr/mu/eor' },
-    { id: 1, value: ENEssentialsToSave.saveDataForCountry, url: '/wr/m/zs/c' },
-    { id: 1, value: ENEssentialsToSave.saveDataForProvince, url: '/wr/m/zs/p' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRegion, url: '/wr/m/zs/r' },
-    { id: 1, value: ENEssentialsToSave.saveDataForZone, url: '/wr/m/zs/z' },
-    { id: 1, value: ENEssentialsToSave.saveDataForZoneBound, url: '/wr/m/zs/zb' },
-    { id: 1, value: ENEssentialsToSave.saveDataForImportDynamic, url: '/wr/imp/imd' },
-    { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: '/wr/imp/err' },
-    { id: 1, value: ENEssentialsToSave.saveDataForAssessPre, url: '/wr/imp/assesspre' },
-    { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: '/wr/imp/assessadd' },
-    { id: 1, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: '/wr/imp/simafa/rdpg' },
-    { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: '/wr/imp/simafa/batch' },
-    { id: 1, value: ENEssentialsToSave.saveDataForPolicies, url: '/wr/policies' },
-    { id: 1, value: ENEssentialsToSave.saveDataForProfile, url: '/wr/profile' },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: '/wr/m/track/imported' },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: '/wr/m/track/loaded' },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: '/wr/m/track/reading' },
-    { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: '/wr/m/track/latest' },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: '/wr/m/track/offloaded' },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: '/wr/m/track/finished' },
-    { id: 1, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, url: '/wr/m/s/fwu' },
-    { id: 1, value: ENEssentialsToSave.saveDataForSearchPro, url: '/wr/m/s/acme' },
-    { id: 1, value: ENEssentialsToSave.saveDataForSearchSimple, url: '/wr/m/s/simple' },
-    { id: 1, value: ENEssentialsToSave.saveDataForFNB, url: '/wr/m/fbn' },
-    { id: 1, value: ENEssentialsToSave.saveDataForLMPD, url: '/wr/m/l/pd' },
-    { id: 1, value: ENEssentialsToSave.saveDataForOutputDBF, url: '/wr/m/dbf' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRTraverse, url: '/wr/rpts/mam/trv' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRTraverseDifferential, url: '/wr/rpts/mam/trvch' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRDisposalHours, url: '/wr/rpts/mam/dh' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRKarkard, url: '/wr/rpts/mam/karkard' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRPreNumShown, url: '/wr/rpts/mam/pns' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRLocked, url: '/wr/rpts/mam/locked' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRROffloadedKarkard, url: '/wr/rpts/mam/offkarkard' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRMaster, url: '/wr/rpts/exm/master' },
-    { id: 1, value: ENEssentialsToSave.saveDataForRRPerformance, url: '/wr/rpts/anlz/prfm' },
-    { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, url: '/wr/rpts/gallery/ai' },
-    { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: '/wr/m/dma/cranlz' },
-    { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: '/wr/rpts/exm/details' },
-    { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: '/wr/rpts/exm/karkardDaily' },
-    { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: '/wr/rpts/mam/gis' },
-    { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: '/wr/m/track/offloaded/offloadMfy/' },
-    { id: 2, value: ENEssentialsToSave.saveDataForLMPD, url: '/wr/m/l/pd/' },
-    { id: 2, value: ENEssentialsToSave.saveDataForLMAll, url: '/wr/m/l/all/' },
-    { id: 2, value: ENEssentialsToSave.saveDataForLMAll_extra, url: '/wr/m/l/all/' },
-    { id: 2, value: ENEssentialsToSave.saveDataForEditUsers, url: '/wr/mu/edit/' },
-    { id: 2, value: ENEssentialsToSave.saveDataForWOUI, url: '/wr/m/track/woui/' },
-    { id: 2, value: ENEssentialsToSave.saveDataForUserLoggins, url: '/wr/mu/all/loggins/' },
-    { id: 2, value: ENEssentialsToSave.saveDataForFragmentNOBDetails, url: '/wr/m/r/nob/' },
-    { id: 13, req: ENEssentialsToSave.rSearchMoshtarakinReq, value: ENEssentialsToSave.saveDataForSearchMoshtarakin, url: '/wr/m/s/searchMosh' },
-    // { id: 1,  value: '',  url: '/wr/m/ms' },
-    // { id: 1,  value: '',  url: '/wr/m/mrm' },
-    // { id: 1,  value: ';',  url: '/wr/msge' },
-    // { id: 1,  value: '',  url: '/wr/privacy' },
+    { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrrptstoolsexcelviewer },
+    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
+    { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamicReportManager },
+    { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
+    { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, url: EN_Routes.wrmusearch },
+    { id: 1, value: ENEssentialsToSave.saveDataForImageAttrResult, url: EN_Routes.wrrptsanlzfileresult },
+    { id: 1, value: ENEssentialsToSave.saveDataForImageAttrAnalyze, url: EN_Routes.wrrptsanlzfileanalyze },
+    { id: 1, value: ENEssentialsToSave.saveDataForKarbari, url: EN_Routes.wrmrkar },
+    { id: 1, value: ENEssentialsToSave.saveDataForCounterState, url: EN_Routes.wrmrcs },
+    { id: 1, value: ENEssentialsToSave.saveDataForQotrManager, url: EN_Routes.wrmrqr },
+    { id: 1, value: ENEssentialsToSave.saveDataForCounterReport, url: EN_Routes.wrmrrpt },
+    { id: 1, value: ENEssentialsToSave.saveDataForFragmentNOB, url: EN_Routes.wrmrnob },
+    { id: 1, value: ENEssentialsToSave.saveDataForAutomaticImport, url: EN_Routes.wrmrnobautoImport },
+    { id: 1, value: ENEssentialsToSave.saveDataForTextOutput, url: EN_Routes.wrmrtxtout },
+    { id: 1, value: ENEssentialsToSave.saveDataForAPKManager, url: EN_Routes.wrmrapk },
+    { id: 1, value: ENEssentialsToSave.saveDataForReadingConfig, url: EN_Routes.wrmrrcd },
+    { id: 1, value: ENEssentialsToSave.saveDataForReadingPeriodKindManager, url: EN_Routes.wrmrrpkm },
+    { id: 1, value: ENEssentialsToSave.saveDataForWaterFormula, url: EN_Routes.wrmrformulaab },
+    { id: 1, value: ENEssentialsToSave.saveDataForBadgetFormula, url: EN_Routes.wrmrformulabudget },
+    { id: 1, value: ENEssentialsToSave.saveDataForTabsare2Formula, url: EN_Routes.wrmrformulatabsare2 },
+    { id: 1, value: ENEssentialsToSave.saveDataForTabsare3Formula, url: EN_Routes.wrmrformulatabsare3 },
+    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel1, url: EN_Routes.wrmalap },
+    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel2, url: EN_Routes.wrmalme },
+    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel3, url: EN_Routes.wrmalcr },
+    { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: EN_Routes.wrmalac },
+    { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.wrmuall },
+    { id: 1, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
+    { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: EN_Routes.wrmurole },
+    { id: 1, value: ENEssentialsToSave.saveDataForEditOnRole, url: EN_Routes.wrmueor },
+    { id: 1, value: ENEssentialsToSave.saveDataForCountry, url: EN_Routes.wrmzsc },
+    { id: 1, value: ENEssentialsToSave.saveDataForProvince, url: EN_Routes.wrmzsp },
+    { id: 1, value: ENEssentialsToSave.saveDataForRegion, url: EN_Routes.wrmzsr },
+    { id: 1, value: ENEssentialsToSave.saveDataForZone, url: EN_Routes.wrmzsz },
+    { id: 1, value: ENEssentialsToSave.saveDataForZoneBound, url: EN_Routes.wrmzszb },
+    { id: 1, value: ENEssentialsToSave.saveDataForImportDynamic, url: EN_Routes.wrimpimd },
+    { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: EN_Routes.wrimperr },
+    { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
+    { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
+    { id: 1, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg },
+    { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafabatch },
+    { id: 1, value: ENEssentialsToSave.saveDataForPolicies, url: EN_Routes.wrpolicies },
+    { id: 1, value: ENEssentialsToSave.saveDataForProfile, url: EN_Routes.wrprofile },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackLoaded, url: EN_Routes.wrmtrackloaded },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading },
+    { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished },
+    { id: 1, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, url: EN_Routes.wrmsfwu },
+    { id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },
+    { id: 1, value: ENEssentialsToSave.saveDataForSearchSimple, url: EN_Routes.wrmssimple },
+    { id: 1, value: ENEssentialsToSave.saveDataForFNB, url: EN_Routes.wrmfbn },
+    { id: 1, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes.wrmlpd },
+    { id: 1, value: ENEssentialsToSave.saveDataForOutputDBF, url: EN_Routes.wrmdbf },
+    { id: 1, value: ENEssentialsToSave.saveDataForRRTraverse, url: EN_Routes.wrrptsmamtrv },
+    { id: 1, value: ENEssentialsToSave.saveDataForRRTraverseDifferential, url: EN_Routes.wrrptsmamtrvch },
+    { id: 1, value: ENEssentialsToSave.saveDataForRRDisposalHours, url: EN_Routes.wrrptsmamdh },
+    { id: 1, value: ENEssentialsToSave.saveDataForRRKarkard, url: EN_Routes.wrrptsmamkarkard },
+    { id: 1, value: ENEssentialsToSave.saveDataForRRPreNumShown, url: EN_Routes.wrrptsmampns },
+    { id: 1, value: ENEssentialsToSave.saveDataForRRLocked, url: EN_Routes.wrrptsmamlocked },
+    { id: 1, value: ENEssentialsToSave.saveDataForRROffloadedKarkard, url: EN_Routes.wrrptsmamoffkarkard },
+    { id: 1, value: ENEssentialsToSave.saveDataForRRMaster, url: EN_Routes.wrrptsexmmaster },
+    { id: 1, value: ENEssentialsToSave.saveDataForRRPerformance, url: EN_Routes.wrrptsanlzprfm },
+    { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, url: EN_Routes.wrrptsgalleryai },
+    { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
+    { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
+    { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.wrrptsexmkarkardDaily },
+    { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
+    { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
+    { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
+    { id: 2, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes['wrmlpd/'] },
+    { id: 2, req: ENEssentialsToSave.saveDataForLMAllReq, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes['wrmlall/'] },
+    { id: 2, req: ENEssentialsToSave.saveDataForLMModifyReq, value: ENEssentialsToSave.saveDataForLMModify, url: EN_Routes.wrmlalltrue },
+    { id: 2, value: ENEssentialsToSave.saveDataForEditUsers, url: EN_Routes.wrmuedit },
+    { id: 2, value: ENEssentialsToSave.saveDataForWOUI, url: EN_Routes.wrmtrackwoui },
+    { id: 2, value: ENEssentialsToSave.saveDataForUserLoggins, url: EN_Routes.wrmuallloggins },
+    { id: 2, value: ENEssentialsToSave.saveDataForFragmentNOBDetails, url: EN_Routes.wrmrnob },
+    { id: 13, req: ENEssentialsToSave.rSearchMoshtarakinReq, value: ENEssentialsToSave.saveDataForSearchMoshtarakin, url: EN_Routes.wrmssearchMosh },
   ]
 
   cleanArrays = () => {
@@ -187,6 +221,7 @@ export class CloseTabService {
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = '';
+      this[this.val[index].value_2] = '';
       this[this.val[index].req] = '';
     }
     this.cleanArrays();

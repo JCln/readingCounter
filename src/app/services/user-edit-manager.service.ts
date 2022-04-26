@@ -7,6 +7,7 @@ import { IAddUserManager, IAUserEditSave, IUserEditManager, IUserEditOnRole } fr
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 
@@ -61,20 +62,34 @@ export class UserEditManagerService {
     return selectedActions;
   }
   checkEmptyUserInfos = () => {
-    if (!MathS.isNullWithText(this.dataSource.firstName, EN_messages.insert_name, ENSnackBarColors.warn))
+    if (MathS.isNull(this.dataSource.firstName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_name);
       return false;
-    if (!MathS.isNullWithText(this.dataSource.sureName, EN_messages.insert_surename, ENSnackBarColors.warn))
+    }
+    if (MathS.isNull(this.dataSource.sureName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_surename);
       return false;
-    if (!MathS.isNullWithText(this.dataSource.mobile, EN_messages.insert_mobile, ENSnackBarColors.warn))
+    }
+    if (MathS.isNull(this.dataSource.mobile)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_mobile);
       return false;
-    if (!MathS.isNullWithText(this.dataSource.displayName, EN_messages.insert_showName, ENSnackBarColors.warn))
+    }
+    if (MathS.isNull(this.dataSource.displayName)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_showName);
       return false;
-    if (!MathS.isNullWithText(this.dataSource.selectedRoles[0], EN_messages.insert_group_access, ENSnackBarColors.warn))
+    }
+    if (MathS.isNull(this.dataSource.selectedRoles[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_group_access);
       return false;
-    if (!MathS.isNullWithText(this.dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
+    }
+    if (MathS.isNull(this.dataSource.selectedActions[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
       return false;
-    if (!MathS.isNullWithText(this.dataSource.selectedZones[1], EN_messages.insert_roleAccess, ENSnackBarColors.warn))
+    }
+    if (MathS.isNull(this.dataSource.selectedZones[1])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_roleAccess);
       return false;
+    }
 
     return true;
   }
@@ -82,11 +97,15 @@ export class UserEditManagerService {
     if (!this.checkEmptyUserInfos()) {
       return false;
     }
-    if (!MathS.mobileValidation(this.dataSource.mobile))
+    if (!MathS.mobileValidation(this.dataSource.mobile)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.invalid_mobile);
       return false;
+    }
     if (!MathS.isNull(this.dataSource.email))
-      if (!MathS.isEmailValid(this.dataSource.email))
+      if (!MathS.isEmailValid(this.dataSource.email)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.invalid_email);
         return false;
+      }
 
     return true;
   }
@@ -98,7 +117,7 @@ export class UserEditManagerService {
       this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
         if (res) {
           this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
-          this.utilsService.routeToByUrl('/wr/mu/all');
+          this.utilsService.routeToByUrl(EN_Routes.wrmuall);
         }
       });
     }
@@ -137,8 +156,10 @@ export class UserEditManagerService {
       this.utilsService.snackBarMessage(EN_messages.insert_group_access, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
-    if (!MathS.isNullWithText(dataSource.selectedActions[0], EN_messages.insert_work, ENSnackBarColors.warn))
+    if (MathS.isNull(dataSource.selectedActions[0])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
       return false;
+    }
 
     return true;
   }

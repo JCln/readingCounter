@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { MatRadioModule } from '@angular/material/radio';
-import { MapItemsService } from 'services/DI/map-items.service';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
+import { MapOptionModule } from './map-option/map-option.module';
 import { MapRoutingModule } from './map-routing.module';
 import { MapComponent } from './map.component';
 
@@ -12,8 +12,8 @@ import { MapComponent } from './map.component';
   imports: [
     SharedPrimeNgModule,
     MatRadioModule,
+    MapOptionModule,
     MapRoutingModule
-  ],
-  providers: [MapItemsService]
+  ]
 })
 export class MapModule { }

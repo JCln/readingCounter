@@ -1,21 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { SortEvent } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
+import { ListManagerService } from 'services/list-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
-import { FactoryONE } from 'src/app/classes/factory';
-import { MathS } from 'src/app/classes/math-s';
+import { AllListsFactory } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-rr-pre-number-shown',
   templateUrl: './rr-pre-number-shown.component.html',
   styleUrls: ['./rr-pre-number-shown.component.scss']
 })
-export class RrPreNumberShownComponent extends FactoryONE {
+export class RrPreNumberShownComponent extends AllListsFactory {
   isCollapsed: boolean = false;
   searchInOrderTo: ISearchInOrderTo[] = [
     {
@@ -41,18 +41,14 @@ export class RrPreNumberShownComponent extends FactoryONE {
   qotrDictionary: IDictionaryManager[] = [];
 
   dataSource: IOnOffLoadFlat[] = [];
-  rowIndex: number = 0;
-  woumInfosDataSource: IOnOffLoadFlat;
-  showWouImages: boolean = false;
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    public dialogService: DialogService,
+    public listManagerService: ListManagerService
   ) {
-    super();
+    super(dialogService, listManagerService);
   }
 
   classWrapper = async (canRefresh?: boolean) => {
@@ -97,54 +93,13 @@ export class RrPreNumberShownComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
-    this.setDynamicRages();
+    this.listManagerService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.readingReportManagerService.preNumberShownReq);
     this.converts();
     this.closeTabService.saveDataForRRPreNumShown = this.dataSource;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-  getReadingReportTitles = async ($event) => {
-    const a = await this.readingReportManagerService.postById(ENInterfaces.ReadingReportTitles, $event)
-    if (a.length) {
-      this.readingReportManagerService.showResDialog(a, false, EN_messages.insert_rrDetails);
-      return;
-    }
-    this.readingReportManagerService.snackEmptyValue();
-  }
-  setDynamicRages = () => {
-    this.dataSource.forEach(item => {
-      item.preAverage = +MathS.getRange(item.preAverage);
-      item.x = MathS.getRange(item.x);
-      item.y = MathS.getRange(item.y);
-      item.gisAccuracy = MathS.getRange(item.gisAccuracy);
-      item.newRate = +MathS.getRange(item.newRate);
-    })
-  }
-  carouselCancelClicked = () => {
-    this.showWouImages = false;
-  }
-  routeToWoui = (object: any) => {
-    this.woumInfosDataSource = object['dataSource'];
-    this.rowIndex = object['ri'];
-    this.showWouImages = true;
-    scrollTo(0, 0);
-  }
-  carouselWOUMNextItem = () => {
-    this.rowIndex > this.dataSource.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
-    this.woumInfosDataSource = this.dataSource[this.rowIndex];
-  }
-  carouselWOUMPrevItem = () => {
-    this.rowIndex < 1 ? this.rowIndex = this.dataSource.length : this.rowIndex--;
-    this.woumInfosDataSource = this.dataSource[this.rowIndex];
-  }
+  } 
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {
       let value1 = data1[event.field];
@@ -165,4 +120,5 @@ export class RrPreNumberShownComponent extends FactoryONE {
       return (event.order * result);
     });
   }
+
 }

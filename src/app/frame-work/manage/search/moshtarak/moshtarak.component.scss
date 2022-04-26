@@ -1,4 +1,4 @@
-@import 'variable.scss';
+@import 'primeNG';
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
@@ -14,7 +14,7 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
   gap: $font_05;
   align-items: center;
 }

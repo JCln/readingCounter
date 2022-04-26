@@ -2,24 +2,24 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 
-import { DateJalaliComponent } from './../core/_layouts/header/date-jalali/date-jalali.component';
-import { DateJalaliModule } from './../core/_layouts/header/date-jalali/date-jalali.module';
+import { DateJalaliComponent } from '../core/_layouts/header/date-jalali/date-jalali.component';
+import { TimeJalaliComponent } from '../core/_layouts/header/time-jalali/time-jalali.component';
 
 
 @NgModule({
     declarations: [
-        DateJalaliComponent
+        DateJalaliComponent,
+        TimeJalaliComponent
     ],
     imports: [
-        DateJalaliModule,
         FormsModule,
         DpDatePickerModule
     ],
     exports: [
-        DateJalaliModule,
+        TimeJalaliComponent,
+        DateJalaliComponent,
         DpDatePickerModule,
         FormsModule,
-        DateJalaliComponent
     ]
 })
 export class SharedThreeModule {

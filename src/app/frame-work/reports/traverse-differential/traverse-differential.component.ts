@@ -7,6 +7,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 @Component({
   selector: 'app-traverse-differential',
@@ -64,7 +65,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this.receiveYear();
   }
   routeToChartView = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/trvch/chart');
+    this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamtrvchchart);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();

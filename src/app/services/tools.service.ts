@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
@@ -14,7 +13,7 @@ import {
   IJsonInfo,
   IParamSendType,
 } from '../Interfaces/itools';
-import { IRandomImages } from '../Interfaces/tools';
+import { IDownloadFileAllImages, IRandomImages } from '../Interfaces/tools';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
@@ -23,15 +22,19 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ToolsService {
-
+  _isCollapseFileDownloadImage: boolean = false;
+  _isCollapsedRandomImages: boolean = false;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
-    private dialog: MatDialog,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
+  public fileDownloadAllImages: IDownloadFileAllImages = {
+    zoneId: null,
+    day: ''
+  }
   public randomImages: IRandomImages = {
     userId: '',
     quantity: null,
@@ -73,10 +76,7 @@ export class ToolsService {
   ];
 
   getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
-        resolve(res))
-    });
+    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
@@ -88,6 +88,9 @@ export class ToolsService {
   }
   receiveFromDateJalali = ($event: string) => {
     this.randomImages.day = $event;
+  }
+  receiveDateJalali = (event: string) => {
+    this.fileDownloadAllImages.day = event;
   }
   getQuantity = (): ITitleValue[] => {
     return this.utilsService.getQuantity();
@@ -103,6 +106,18 @@ export class ToolsService {
       this.interfaceManagerService.GETID(api, body).toPromise().then(res =>
         resolve(res))
     });
+  }
+  validationDownloadAllImages = (dataSource: IDownloadFileAllImages): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.day)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
+      return false;
+    }
+
+    return true;
   }
   verificationExcelBuilder = (dataSource: IDynamicExcelReq) => {
     if (MathS.isNull(dataSource.title)) {

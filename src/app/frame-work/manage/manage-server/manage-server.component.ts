@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IManageServer } from 'interfaces/imanage';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { ENManageServers, IManageServer } from 'interfaces/imanage';
+import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ManageServerService } from 'services/manage-server.service';
 
 
@@ -14,10 +16,33 @@ export class ManageServerComponent implements OnInit {
   constructor(private manageServerService: ManageServerService) { }
 
   ngOnInit(): void {
-    console.log(1);
-    console.log(this.manageTasks);
-
     this.manageTasks = this.manageServerService.getManageServerItems();
+  }
+  manageFuncs = (clickFunction: ENManageServers) => {
+    if (clickFunction == ENManageServers.serverDelete)
+      this.serverDelete();
+    if (clickFunction == ENManageServers.linkToHangfire)
+      this.linkToHangfire();
+    if (clickFunction == ENManageServers.linkToHealthCheck)
+      this.linkToHealthCheck();
+    if (clickFunction == ENManageServers.resetApp)
+      this.resetApp();
+  }
+  serverDelete = async () => {
+    const temp: any = await this.manageServerService.postDataServer(ENInterfaces.serverManagerDelete);
+    if (temp)
+      this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
+  }
+  linkToHangfire = () => {
+    this.manageServerService.linkToHangFire();
+  }
+  linkToHealthCheck = () => {
+    this.manageServerService.linkToHealthCheck();
+  }
+  resetApp = async () => {
+    const temp = await this.manageServerService.postDataServer(ENInterfaces.serverManagerResetApp);
+    if (temp)
+      this.manageServerService.showSnack(temp.message, ENSnackBarColors.success);
   }
 
 }

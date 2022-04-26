@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
 import { InteractionService } from 'services/interaction.service';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,7 +31,7 @@ export class DashboardComponent {
       this.zoneDictionary.unshift({ id: 0, title: 'مناطق مجاز', isSelected: true })
   }
   refreshPageToRebuild = () => {
-    this.interactionService.setRefresh('/wr/db');
+    this.interactionService.setRefresh(EN_Routes.wrdb);
   }
 
 }

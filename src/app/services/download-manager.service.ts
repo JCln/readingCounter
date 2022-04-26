@@ -27,39 +27,19 @@ export class DownloadManagerService {
   ) { }
 
   // calls
-  downloadFileInfo = (targetId: string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETID(ENInterfaces.downloadFileInfo, targetId).subscribe(res => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-
-    }
-  }
-  downloadForbiddenFileInfo = (targetId: string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETID(ENInterfaces.downloadFileForbidden, targetId).subscribe(res => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+  downloadFileInfo = (method: ENInterfaces, targetId: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETID(method, targetId).subscribe(res => {
+        resolve(res)
+      })
+    });
   }
   downloadFile = (fileRepositoryId: string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETBLOB(ENInterfaces.downloadFileGET, fileRepositoryId).subscribe(res => {
-          resolve(res)
-        });
-      })
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETBLOB(ENInterfaces.downloadFileGET, fileRepositoryId).subscribe(res => {
+        resolve(res)
+      });
+    })
   }
 
   // 

@@ -26,7 +26,7 @@ export class DataMiningAnalysesService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400,
+    year: 1401,
     zoneIds: null
   }
   constructor(

@@ -1,0 +1,37 @@
+@import 'primeNG';
+@import 'input';
+@import 'button';
+
+.input_2 {
+  direction: rtl;
+}
+
+._value {
+  border: none;
+}
+
+.btn_1 {
+  color: var(--white);
+  background-color: var(--orange_500);
+  max-width: 16rem;
+}
+
+._container {
+  position: relative;
+  margin: auto $font_3;
+}
+
+.content {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 21rem));
+  justify-content: center;
+  gap: $font_05;
+  background: var(--secondary_1);
+}
+
+
+.center_footer {
+  text-align: center;
+  margin-top: $font_xs;
+}

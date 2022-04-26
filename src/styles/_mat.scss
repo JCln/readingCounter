@@ -36,7 +36,7 @@
   }
 
   .mat-select-arrow {
-    color: var(--primary_2);
+    color: var(--primary_3);
   }
 
   .mat-radio-label-content {
@@ -62,6 +62,15 @@
   .mat-form-field.mat-focused .mat-form-field-label,
   .mat-form-field-label {
     color: var(--secondary_8);
+  }
+
+  .mat-button-toggle-checked {
+    border-bottom: .3rem solid var(--primary_4) !important;
+    box-shadow: 2px 2px 2px 2px var(--secondary_3) !important;
+  }
+
+  .mat-button-toggle-appearance-standard {
+    background: var(--secondary_1);
   }
 
   .mat-input-element {

@@ -32,6 +32,17 @@
     <app-dash-attempt></app-dash-attempt>
     <app-dash-xy></app-dash-xy>
 </main>
+<section class="content">
+    <section class="collapse">
+        <h1>درخواست ها</h1>
+    </section>
+    <main class="container">
+        <app-dash-request-log-count></app-dash-request-log-count>
+        <app-dash-request-rate></app-dash-request-rate>
+        <app-dash-query-count></app-dash-query-count>
+        <app-dash-query-rate></app-dash-query-rate>
+    </main>
+</section>
 
 <section class="content">
     <section class="collapse">
@@ -39,7 +50,7 @@
     </section>
     <section class="collapse">
         <h3>نمودار</h3>
-        <app-collapsable [_isCollapsed]=_isCollapsedAnalyzePrfm [_tooltipText]="'آنالیز عملکرد'"
+        <app-collapsable [_isReversed]="true" [_isCollapsed]="_isCollapsedAnalyzePrfm" [_tooltipText]="'آنالیز عملکرد'"
             (_clicked)=" _isCollapsedAnalyzePrfm=!_isCollapsedAnalyzePrfm">
         </app-collapsable>
     </section>

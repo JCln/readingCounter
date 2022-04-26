@@ -34,5 +34,6 @@ export interface IFollowUpHistory {
     seen: boolean,
     counterReaderName: string,
     trackStatusTitle: string,
-    hasDetails: boolean
+    hasDetails: boolean,
+    listNumber?: string
 }

@@ -2,7 +2,7 @@ export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
     ESF = 'https://37.191.92.157/kontoriNew',
     TEH_ZONE4 = 'http://81.12.106.167:8081/kontoriNew',
-    TEH_SE = 'http://5.160.85.228:9098/kontoriNew',
+    TEH_SE = 'http://46.209.181.2:9098/kontoriNew',
     TEH_SE_LOCAL = 'http://172.28.5.40/kontoriNew',
     KERMANSHAH = 'http://46.225.241.211:25123/kontoriNew'
 }
@@ -13,6 +13,14 @@ export enum ENOSMUrls {
     TEH_SE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     TEH_SE_LOCAL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     KERMANSHAH = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+}
+export enum ENOSMUrlsDark {
+    DEFAULT = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+    ESF = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+    TEH_ZONE4 = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+    TEH_SE = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+    TEH_SE_LOCAL = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+    KERMANSHAH = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
 }
 export enum ENSatteliteAccessToken {
     DEFAULT = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
@@ -63,6 +71,7 @@ export interface IENV {
     headerProvinceTitle: string,
     API_URL: string,
     OSMmapBoxUrl: string,
+    OSMDarkmapBoxUrl: string,
     SATELLITEMapBoxUrl: string,
     SATELLITEMapAccessToken: string,
     hasNextBazdid: boolean,
@@ -89,6 +98,18 @@ export class ENHasNextBazdid {
     static readonly TEH_SE = new ENHasNextBazdid(true);
     static readonly TEH_SE_LOCAL = new ENHasNextBazdid(true);
     static readonly KERMANSHAH = new ENHasNextBazdid(false);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class ENHasDarkOSMMap {
+    static readonly DEFAULT = new ENHasDarkOSMMap(true);
+    static readonly ESF = new ENHasDarkOSMMap(false);
+    static readonly TEH = new ENHasDarkOSMMap(false);
+    static readonly TEH_ZONE4 = new ENHasDarkOSMMap(false);
+    static readonly TEH_SE = new ENHasDarkOSMMap(false);
+    static readonly TEH_SE_LOCAL = new ENHasDarkOSMMap(false);
+    static readonly KERMANSHAH = new ENHasDarkOSMMap(false);
 
     private constructor(public readonly value: boolean) {
     }

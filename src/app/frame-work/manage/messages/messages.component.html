@@ -1,0 +1,59 @@
+<div class="over_all">
+    <main>
+        <h1>جزئیات پیام</h1>
+        <div class="content">
+            <div class="_save_this">
+                <h2>عنوان</h2>
+                <input type="text" class="input_1" [(ngModel)]="newMessage.title">
+            </div>
+            <div class="text">
+                <h2>متن</h2>
+                <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="newMessage.message"></textarea>
+            </div>
+            <div class="time">
+                <h2>زمان (s)</h2>
+                <div class="t_separator">
+                    <mat-button-toggle-group>
+                        <mat-button-toggle class="btn_2" *ngFor="let item of times"
+                            (click)="newMessage.time = item.value">
+                            {{item.title}}
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+            <div class="color">
+                <h2>رنگ</h2>
+                <div class="c_separator">
+
+                    <mat-button-toggle-group #group="matButtonToggleGroup" value="newMessage.color">
+                        <mat-button-toggle class="btn_2" *ngFor="let item of colors"
+                            [ngStyle]="{'color':item.background}" [(ngModel)]="item.background"
+                            (click)="newMessage.color = item.value">
+                            {{item.text}}
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+
+                </div>
+            </div>
+            <div class="send">
+                <button (click)="connectToServer()" class="btn_2">ارسال و مشاهده</button>
+            </div>
+        </div>
+    </main>
+    <main>
+        <h1>استفاده از پیام های پیش‌فرض</h1>
+        <div class="static_height">
+            <div class="main_content" *ngFor="let item of allMessages"
+                [ngStyle]="{'border': '.15rem solid'+item.exactColor}">
+                <div class="_text" [ngStyle]="{'color': item.exactColor}">{{item.message}}</div>
+                <div class="_details">
+                    <div class="__time">
+                        {{item.text}}
+                        ثانیه
+                    </div>
+                    <button class="btn_2" (click)="copyPreMessageToCurrent(item)">استفاده</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

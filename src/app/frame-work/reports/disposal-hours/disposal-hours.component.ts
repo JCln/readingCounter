@@ -6,6 +6,7 @@ import { IRRChartResWrapper } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 
 @Component({
@@ -44,7 +45,7 @@ export class DisposalHoursComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
   }
   routeToChartView = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/dh/chart');
+    this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamdhchart);
   }
   validation = (): boolean => {
     return this.readingReportManagerService.verificationRRDisposalHours(this.readingReportManagerService.disposalhoursReq);

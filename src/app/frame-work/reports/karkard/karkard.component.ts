@@ -8,6 +8,7 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
+import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 
 @Component({
@@ -51,7 +52,7 @@ export class KarkardComponent extends FactoryONE {
   }
 
   routeToChartView = () => {
-    this.readingReportManagerService.routeTo('/wr/rpts/mam/karkard/chart');
+    this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamkarkardchart);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {

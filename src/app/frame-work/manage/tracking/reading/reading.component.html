@@ -1,11 +1,8 @@
 <app-prime-table     
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
     [_outputFileName]="'reading'"
     [_checkUpName]="'reading'"    
     [_numberOfExtraColumns]="[1, 2, 3, 4]"
-    [_sortField]="'insertDateJalali'"
     [_sessionName]="'reading-session'"
     [_selectedColumnsToRemember]="'selectedTrackReading'"    
     [_calculableSUM]=true
@@ -16,3 +13,4 @@
     (routedToLMAll)="trackingManagerService.routeToLMAll($event)"
  > 
 </app-prime-table>
+<!-- state saving correctly but for default sortField it may not happenning -->

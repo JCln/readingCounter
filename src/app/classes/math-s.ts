@@ -1,5 +1,4 @@
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
-import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 
 export class MathS {
 
@@ -12,30 +11,12 @@ export class MathS {
     static isNull(value: any): boolean {
         return value === undefined || value === null || typeof value === 'undefined' || !value || value.length === 0;
     }
+    // to validate zero numbers
     static isNullZero(value: any): boolean {
         return typeof value === 'undefined' || value === null || value.length === 0;
     }
     static isNullTextValidation(value: string): boolean {
         return typeof value.trim() === 'undefined' || !value || value.trim().length === 0 || value.trim() === null;
-    }
-    static isNullWithText = (value: any, text: string, color: ENSnackBarColors): boolean => {
-        const snackWrapperService = new SnackWrapperService;
-        if (typeof value === 'undefined' || !value || value.length === 0) {
-            snackWrapperService.openSnackBar(text, 3000, color);
-            return false;
-        }
-        return true;
-    }
-    static plusOrMinus = (value: number, maxLength: number, minLength: number) => {
-        const snackWrapperService = new SnackWrapperService;
-        if (value > maxLength) {
-            snackWrapperService.openSnackBar(`حداکثر تعداد ${maxLength} می‌باشد`, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
-            return;
-        }
-        if (value < minLength) {
-            snackWrapperService.openSnackBar(`حداقل تعداد ${minLength} می‌باشد`, ENSnackBarTimes.threeMili, ENSnackBarColors.warn);
-            return;
-        }
     }
     static isEmailValid = (email: string): boolean => {
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -45,6 +26,8 @@ export class MathS {
         return true;
     }
     static persentCheck = (val: number): boolean => {
+        if (!val)
+            return false;
         if (val < 0 || val > 100)
             return false;
         return true;
@@ -52,14 +35,14 @@ export class MathS {
     static getRange = (val: any): string => {
         return val.toString().substring(0, 5);
     }
-    static isExactEqual = (first: string, second: string): boolean => {
+    static isExactEqual = (first: string, second: any): boolean => {
         if (first.trim() === second.trim())
             return true;
         return false;
     }
     static isSameLength = (from: string, to: string): boolean => {
         if (from === null || to === null) {
-            return;
+            return false;
         }
         if (from.toString().trim().length === to.toString().trim().length)
             return true;
@@ -96,11 +79,11 @@ export class MathS {
     static getRandomColors(len: number): string[] {
         let colors = [];
         for (let index = 0; index < len; index++) {
-          let color = '#' + (Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString());
-          colors.push(color);
+            let color = '#' + (Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString() + Math.round(Math.random() * 100).toString());
+            colors.push(color);
         }
         return colors;
-      }
+    }
     // private pushOrPopFromMobileNumber = (mobileNum: string | number) => {
     //   // unshift to array just allowed so => string to array and then to string should converted
     //   const arrayString = [];
@@ -115,7 +98,7 @@ export class MathS {
     //   return false;
     // }
     static mobileValidation = (mobile: string | number): boolean => {
-        if (mobile.toString().length !== 11) {
+        if (mobile.toString().trim().length !== ENRandomNumbers.eleven) {
             return false;
         }
         return true;

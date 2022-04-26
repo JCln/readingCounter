@@ -78,28 +78,28 @@
         </form>
     </section>
 
-    <app-prime-table [hidden]="showWouImages"
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns" 
+    <app-prime-table [hidden]="showCarousel"
     [dataSource]="dataSource"
     [_outputFileName]="'rrPreNumber'" 
     [_checkUpName]="'rr-preNumber'" 
-    [_numberOfExtraColumns]="[1,2]"        
+    [_numberOfExtraColumns]="[1,2,3]"        
     [_sessionName]="'rr-preNumber'" 
     [_selectedColumnsToRemember]="'selectedRRPreNumShown'" 
     [_isCustomSort]=true
     (customedSort)="customSort($event)"
     (refreshedTable)="refreshTable()"
+    (showedInMapSingle)="openMapDialog($event)"
+    (filteredEvent)="filteredTableEvent($event)"
     (showedPictures)="getReadingReportTitles($event)"
-    (showedWOUIAsCarousel)="routeToWoui($event)"    
+    (showedWOUIAsCarousel)="doShowCarousel($event)" 
     >
     </app-prime-table>    
     
-    <app-carousel-woum *ngIf="showWouImages" 
-    [dataSource]="woumInfosDataSource"
+    <app-carousel-woum *ngIf="showCarousel" 
+    [dataSource]="carouselDataSource"
     (cancelClicked)="carouselCancelClicked()"
-    (prevClicked)="carouselWOUMPrevItem()"
-    (nextClicked)="carouselWOUMNextItem()"
+    (prevClicked)="carouselPrevItem()"
+    (nextClicked)="carouselNextItem()"
     >
     <app-woum></app-woum>
     </app-carousel-woum>

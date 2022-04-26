@@ -5,9 +5,11 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENLocalStorageNames } from 'interfaces/ioverall-config';
 import { BrowserStorageService } from 'services/browser-storage.service';
+import { EnvService } from 'services/env.service';
 import { ListManagerService } from 'services/list-manager.service';
 
 import { ENRandomNumbers } from './../Interfaces/ioverall-config';
+import { map } from './DI/map';
 
 declare let L;
 
@@ -32,12 +34,66 @@ L.Marker.prototype.options.icon = defaultIcon;
 export class MapService {
   private map: L.Map;
 
+  streets = L.tileLayer(this.envService.OSMmapBoxUrl);
+  streetsDark = L.tileLayer(this.envService.OSMDarkmapBoxUrl);
+  satellite = L.tileLayer(this.envService.SATELLITEMapBoxUrl + this.envService.SATELLITEMapAccessToken);
+
   constructor(
     private listManagerService: ListManagerService,
     private browserStorageService: BrowserStorageService,
-    private _location: Location
+    private _location: Location,
+    private envService: EnvService
   ) { }
 
+  getMapItems = () => {
+    return map;
+  }
+  getBaseMap = (): object => {
+    if (this.canUseMultiMapColors()) {
+      return this.getDarkUrls();
+    }
+    else {
+      return this.getLightUrls();
+    }
+  }
+  private lastSelectedMapColor = (): boolean => {
+    if (this.canUseMultiMapColors()) {
+      return this.getFromLocalMapColorMode();
+    }
+    return false;
+  }
+  initMapColor = (): any => {
+    if (this.lastSelectedMapColor()) {
+      return this.getDarkStreetsUrl();
+    }
+    return this.getLightStreetsUrl();
+  }
+
+  getDarkStreetsUrl = (): any => {
+    return L.tileLayer(this.envService.OSMDarkmapBoxUrl);
+  }
+  getLightStreetsUrl = (): any => {
+    return L.tileLayer(this.envService.OSMmapBoxUrl);
+  }
+  getDarkUrls = (): object => {
+    return {
+      "OSMDark": this.streetsDark,
+      "OSM": this.streets,
+      "Satellite": this.satellite,
+    }
+  }
+  getLightUrls = (): object => {
+    return {
+      "OSM": this.streets,
+      "Satellite": this.satellite,
+    }
+  }
+  canUseMultiMapColors = (): boolean => {
+    if (this.envService.hasDarkOSMMap) {
+      return true;
+    }
+    return false;
+  }
   addMarkerCluster = (map: L.Map, latlng: any) => {
     const markers = L.markerClusterGroup();
     markers.addLayer(L.marker(latlng));
@@ -54,8 +110,8 @@ export class MapService {
       this.addInvalidateMap();
     }, 'بارگزاری مجدد نقشه').addTo(this.map);
   }
-  saveToLocalStorage = (numberLen: ENRandomNumbers) => {
-    this.browserStorageService.set(ENLocalStorageNames.mapAnimationStartFrom, numberLen);
+  saveToLocalStorage = (localStorageName: ENLocalStorageNames, numberLen: any) => {
+    this.browserStorageService.set(localStorageName, numberLen);
   }
   isAnimationExistsInLocal = (): boolean => {
     return this.browserStorageService.isExists(ENLocalStorageNames.mapAnimationStartFrom);
@@ -63,8 +119,16 @@ export class MapService {
   getFromLocalStorage = (): ENRandomNumbers => {
     const a = this.browserStorageService.get(ENLocalStorageNames.mapAnimationStartFrom);
     if (a === null || a === 'undefined') {
-      this.saveToLocalStorage(ENRandomNumbers.twoHundred);
+      this.saveToLocalStorage(ENLocalStorageNames.mapAnimationStartFrom, ENRandomNumbers.twoHundred);
       return ENRandomNumbers.twoHundred;
+    }
+    return a;
+  }
+  getFromLocalMapColorMode = (): boolean => {
+    const a = this.browserStorageService.get(ENLocalStorageNames.isDarkModeMap);
+    if (a === null || a === 'undefined') {
+      this.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, false);
+      return false;
     }
     return a;
   }
@@ -86,7 +150,7 @@ export class MapService {
     this._location.back();
   }
   getPointerMarks = (a: object): Promise<any> => {
-    return this.listManagerService.postLMPDXY(a);
+    return this.listManagerService.postBodyDataSource(ENInterfaces.ListPerDayXY, a);
   }
   getXY = (a: string): Promise<any> => {
     return this.listManagerService.postById(ENInterfaces.ListXY, parseInt(a));

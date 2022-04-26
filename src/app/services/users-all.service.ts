@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
-    ENSelectedColumnVariables,
-    ENSnackBarColors,
-    ENSnackBarTimes,
-    IObjectIteratation,
-    IResponses,
+  ENSelectedColumnVariables,
+  ENSnackBarColors,
+  ENSnackBarTimes,
+  IObjectIteratation,
+  IResponses,
 } from 'interfaces/ioverall-config';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
@@ -52,18 +52,8 @@ export class UsersAllService {
       })
     });
   }
-  Activate = (UUID: string) => {
-    this.interfaceManagerService.POSTSG(ENInterfaces.userACTIVATE, UUID).toPromise().then((res: IResponses) => {
-      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-    });
-  }
-  DeActivate = (UUID: string) => {
-    this.interfaceManagerService.POSTSG(ENInterfaces.userDEACTIVATE, UUID).toPromise().then((res: IResponses) => {
-      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-    });
-  }
-  resetPassword = (UUID: string) => {
-    return this.interfaceManagerService.POSTSG(ENInterfaces.userRESETPASS, UUID).toPromise().then((res: IResponses) => {
+  changeUserStatus = (method: ENInterfaces, UUID: string) => {
+    this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
       this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
     });
   }

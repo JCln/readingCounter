@@ -19,7 +19,7 @@ export class ImageAttrFileResultComponent extends FactoryONE {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   chartColors:any;
   dataSource: IImageAttributionResult[] = [];

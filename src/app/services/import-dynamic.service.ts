@@ -6,15 +6,16 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENImportDatas,
-  IImportDataResponse,
-  IImportDynamicDefault,
-  IImportSimafaBatchReq,
-  IImportSimafaReadingProgramsReq,
-  IImportSimafaSingleReq,
-  IReadingProgramRes,
+    ENImportDatas,
+    IImportDataResponse,
+    IImportDynamicDefault,
+    IImportSimafaBatchReq,
+    IImportSimafaReadingProgramsReq,
+    IImportSimafaSingleReq,
+    IReadingProgramRes,
 } from 'interfaces/import-data';
 import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
@@ -28,6 +29,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ImportDynamicService {
+  _assessPreCollapse: boolean = true;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   importDynamicValue: IImportDynamicDefault;
   ENImportDatas = ENImportDatas;
@@ -35,7 +37,7 @@ export class ImportDynamicService {
   simafaRDPGReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
-    year: 1400
+    year: 1401
   }
   _assessAddReq: IAssessAddDtoSimafa = {
     onOffLoadIds: [],
@@ -47,20 +49,13 @@ export class ImportDynamicService {
     counterReaderId: ''
   }
   private _simafaSingleReq: IReadingProgramRes;
-  _simafaReadingProgram: IObjectIteratation[] = [
-    { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, isNumber: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, isNumber: true },
-    { field: 'listNumber', header: 'ش لیست', isSelected: true, icon: 'grid-column: auto/ span 2;' },
-    { field: 'year', header: 'سال', isSelected: false, isNumber: true },
-    { field: 'readingPeriodId', header: 'دوره قرائت', isSelected: false, isSelectOption: true },
-  ]
+
   private _simafaBatch: IObjectIteratation[] = [
     { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false },
-    { field: 'orderDigit', header: 'ترتیب', isSelected: false, readonly: true },
-    { field: 'orderPersian', header: 'فارسی', isSelected: false, readonly: true, isBoolean: true },
+    { field: 'orderDigit', header: 'ترتیب عددی', isSelected: false, readonly: true },
+    { field: 'orderPersian', header: 'ترتیب', isSelected: false, readonly: true },
     { field: 'routeAndReaderIds', header: 'مامور', isSelected: true, readonly: false, isSelectOption: true }
   ]
 
@@ -78,14 +73,6 @@ export class ImportDynamicService {
     counterReaderId: '',
     readingPeriodId: null
   }
-  AssessPreReq: IAssessPreDisplayDtoSimafa = {
-    reportIds: [],
-    counterStateIds: [],
-    masrafStates: [],
-    karbariCodes: [],
-    zoneId: null,
-    listNumber: ''
-  }
 
   constructor(
     private utilsService: UtilsService,
@@ -97,9 +84,6 @@ export class ImportDynamicService {
 
   columnSimafaSingle = () => {
     return this._simafaSingleReq;
-  }
-  columnSimafaReadingProgram = (): IObjectIteratation[] => {
-    return this._simafaReadingProgram;
   }
   columnSimafaBatch = (): IObjectIteratation[] => {
     return this._simafaBatch;
@@ -166,13 +150,13 @@ export class ImportDynamicService {
     return true;
   }
   routeToWoui = (object: IOnOffLoadFlat) => {
-    this.router.navigate(['wr/m/track/woui', false, object.id]);
+    this.router.navigate([EN_Routes.wrmtrackwoui, false, object.id]);
   }
   routeToSimafaSingle = (object: IReadingProgramRes) => {
-    this.router.navigate(['/wr/imp/simafa/rdpg/single', object]);
+    this.router.navigate([EN_Routes.wrimpsimafardpgsingle, object]);
   }
   routeToSimafaBatch = (object: IReadingProgramRes) => {
-    this.router.navigate(['/wr/imp/simafa/rdpg/batch', object]);
+    this.router.navigate([EN_Routes.wrimpsimafardpgbatch, object]);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     return this.validationNull(searchReq);
@@ -481,10 +465,7 @@ export class ImportDynamicService {
     });
   }
   getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(ENInterfaces.counterReadersByZoneId, zoneId).toPromise().then(res =>
-        resolve(res))
-    });
+    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
   }
   getCounterStateByZoneDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
@@ -519,15 +500,7 @@ export class ImportDynamicService {
     }
   }
   getReadingConfigDefaults = (zoneId: number): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(ENInterfaces.readingConfigDefaultByZoneId, zoneId).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch {
-      console.error(e => e);
-    }
+    return this.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(zoneId);
   }
   getMasrafStates = () => {
     return IMasrafStates;

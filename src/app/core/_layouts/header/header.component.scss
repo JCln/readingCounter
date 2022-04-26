@@ -3,6 +3,8 @@
 @import 'media.scss';
 @import 'hamburger';
 @import 'theme';
+@import 'tooltip';
+@import 'button';
 
 .header {
   display: flex;
@@ -67,6 +69,44 @@ li {
 
 ._borders {
   @include _borders();
+}
+
+._status {
+  .tooltip .tooltip_text_bottom {
+    width: 10rem;
+    font-size: $font_xs;
+  }
+
+  i {
+    font-size: $font_l;
+    vertical-align: middle;
+  }
+
+  .pi-spinner {
+    color: var(--fix_gray_light);
+  }
+
+  .pi-check-circle {
+    color: var(--green_600);
+  }
+
+  .pi-times-circle {
+    color: var(--red_600);
+  }
+
+  .Disconnecting {
+    color: var(--orange_600);
+  }
+
+  .Reconnecting {
+    color: var(--orange_500);
+  }
+}
+
+.btn_2_o {
+  height: inherit;
+  width: 5rem;
+  font-size: 1rem;
 }
 
 @include media_wrapper(550px, '._name', font-size, $font_xs);

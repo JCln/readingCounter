@@ -1,8 +1,9 @@
 <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder" editMode="row"
-    dataKey="id" #dtable>
+    stateStorage="session" (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort"
+    (sortFunction)="customSort($event)" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
+    editMode="row" dataKey="id" #dtable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -17,8 +18,9 @@
                     (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
-                <i *ngIf="_isInRowEditing" appAddRow [table]="dtable" [newRow]="newRow" [newRowLimit]="newRowLimit"
-                    (click)="newRowChangedStatus()" class="tooltip _circle_border p_icons fa fa-plus">
+                <i *ngIf="_isInRowEditing && _checkUpName !== 'generalListModify'" appAddRow [table]="dtable"
+                    [newRow]="newRow" [newRowLimit]="newRowLimit" (click)="newRowChangedStatus()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن</div>
                 </i>
                 <i *ngIf="_outputEnabled"
@@ -70,7 +72,7 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 4rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
@@ -78,19 +80,19 @@
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 4rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
     </ng-template>
 
     <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-editing="editing" let-columns="columns"
         let-ri=rowIndex>
-
         <tr [pEditableRow]="dataSource">
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>
                 <ng-container *ngIf="col.isSelectOption;else selectOption">
+                    <!-- to use double dictionaries add dictionary name to "col.field !== 'name'" -->
                     <ng-container
-                        *ngIf="(col.field !== 'karbariMoshtarakinCode' && col.field !== 'readingPeriodKindId'); else secondDict">
+                        *ngIf="(col.field !== 'karbariMoshtarakinCode' && col.field !== 'readingPeriodKindId' && col.field !== 'modifyType'); else secondDict">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
@@ -105,25 +107,26 @@
                         </p-cellEditor>
                     </ng-container>
                     <ng-template #secondDict>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <p-dropdown name="{{_secondDictionaryName}}" [options]="secondDictionary"
-                                    [(ngModel)]="dataSource[_secondDictionaryName]" placeholder="انتخاب مورد"
-                                    [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
-                                    optionLabel="title">
-                                </p-dropdown>
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{dataSource[_secondDictionaryName]}}
-                            </ng-template>
-                        </p-cellEditor>
+                        <ng-container>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [options]="secondDictionary" [(ngModel)]="dataSource[col.field]"
+                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}"
+                                        [ngClass]="{'p-dropdown-editable': true}" optionLabel="title">
+                                    </p-dropdown>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{dataSource[col.field]}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </ng-container>
                     </ng-template>
                 </ng-container>
                 <ng-template #selectOption>
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <mat-checkbox [ngClass]="{'mat-checkbox-editable': true}"
+                                <mat-checkbox [disabled]="col.readonly" [ngClass]="{'mat-checkbox-editable': true}"
                                     [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -133,22 +136,91 @@
                     </ng-container>
                     <ng-template #elseTemplate>
                         <ng-container
-                            *ngIf="col.field === 'orderDigit'|| col.field === 'orderPersian'; else editableForm">
-                            {{dataSource[col.field]}}
+                            *ngIf="col.field == 'masrafStateId' && _checkUpName =='generalListModify'; else digits">
+                            <i *ngIf="dataSource[col.field] === 0" class="tooltip pi pi-check">
+                                <div class="tooltip_text">عادی</div>
+                            </i>
+                            <i *ngIf="dataSource[col.field] === 1" class="tooltip pi pi-arrow-down">
+                                <div class="tooltip_text">پایین</div>
+                            </i>
+                            <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
+                                <div class="tooltip_text">بالا</div>
+                            </i>
+                            <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">0
+                                <div class="tooltip_text">صفر</div>
+                            </i>
+                            <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
+                                <div class="tooltip_text">غیرقابل محاسبه</div>
+                            </i>
                         </ng-container>
+
+                        <ng-template #digits>
+                            <ng-container
+                                *ngIf="col.field === 'orderDigit'|| col.field === 'orderPersian'; else dateForm">
+                                {{dataSource[col.field]}}
+                            </ng-container>
+                        </ng-template>
+
+                        <ng-template #dateForm>
+                            <ng-container *ngIf="col.field == 'offloadDateJalali'; else editableForm">
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <app-date-jalali name="date" (dateJalEvent)="receiveDateJalali($event , ri)"
+                                            [dateObject]="dataSource[col.field]">
+                                        </app-date-jalali>
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{dataSource[col.field]}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </ng-container>
+                        </ng-template>
+
                         <ng-template #editableForm>
-                            <p-cellEditor>
-                                <ng-template pTemplate="input">
-                                    <input pInputText [type]="col.isNumber ? 'number': 'text'"
-                                        [(ngModel)]="dataSource[col.field]">
-                                </ng-template>
-                                <ng-template pTemplate="output">
-                                    {{dataSource[col.field]}}
-                                </ng-template>
-                            </p-cellEditor>
+                            <ng-container>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText [type]="col.isNumber ? 'number': 'text'"
+                                            [(ngModel)]="dataSource[col.field]" [readOnly]="col.readonly">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{dataSource[col.field]}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </ng-container>
                         </ng-template>
                     </ng-template>
                 </ng-template>
+            </td>
+            <td *ngIf="_checkUpName == 'generalListModify'" (click)="openMoshtarakinDialog(dataSource)">
+                <span class="ui-column-title">مشاهده سابقه</span>
+                <i class="tooltip p_icons pi pi-users">
+                    <div class="tooltip_text">مشاهده سابقه</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'generalListModify'" (click)="openBriefKardexDialog(dataSource)">
+                <span class="ui-column-title">خلاصه کاردکس</span>
+                <i class="tooltip p_icons pi pi-list">
+                    <div class="tooltip_text">خلاصه کاردکس</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName =='generalListModify'" (click)="showInMapSingle(dataSource)">
+                <span class="ui-column-title">مشاهده روی نقشه</span>
+                <i class="tooltip p_icons pi pi-map-marker">
+                    <div class="tooltip_text_right">مشاهده روی نقشه</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'generalListModify'" (click)="showWOUIAsCarousel(dataSource,ri)">
+                <span class="ui-column-title">بررسی عکس/صوت</span>
+                <i class="tooltip p_icons fas fa-camera">
+                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'generalListModify'">
+                <span class="ui-column-title">نمایش گزارش بازرسی</span>
+                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
+                    <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
+                </i>
             </td>
             <td>
                 <span class="ui-column-title">ویرایش</span>
@@ -165,7 +237,7 @@
                     (click)="onRowEditCancelRowEditing(dataSource, ri)" class="_cancel pi pi-times">
                 </i>
             </td>
-            <td>
+            <td *ngIf="_checkUpName != 'generalListModify'">
                 <span class="ui-column-title">حذف مورد</span>
                 <i *ngIf="!_isInRowEditing" (click)="removeRow(dataSource.id , ri)"
                     class="tooltip p_icons fa fa-trash-o">

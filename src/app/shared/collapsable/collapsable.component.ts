@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CollapsableComponent {
   @Input() _isCollapsed: boolean;
+  @Input() _isReversed: boolean = false;
   @Input() _tooltipText: string = '';
 
   @Output() _clicked = new EventEmitter<any>();

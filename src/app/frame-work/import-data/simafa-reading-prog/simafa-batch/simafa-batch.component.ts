@@ -29,7 +29,7 @@ export class SimafaBatchComponent extends FactoryONE {
     displayBillId: false,
     displayRadif: false,
     readingPeriodId: null,
-    year: 1400,
+    year: 1401,
     readingProgramId: ''
   }
 
@@ -66,7 +66,6 @@ export class SimafaBatchComponent extends FactoryONE {
     this._canShowImportBatchButton = false;
   }
   connectToServer = async () => {
-    console.log(this.simafaBatchReq);
     if (!this.dataSource || this.dataSource.length == 0) {
       this.importDynamicService.noRouteToImportMessage();
       return;

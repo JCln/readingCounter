@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -19,7 +19,7 @@ export class SimafaReadingProgComponent extends FactoryONE {
   importSimafaReadingProgram: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
-    year: 1400
+    year: 1401
   }
   _fragmentDetailsEshterak: IFragmentDetailsByEshterakReq = {
     fromEshterak: null,
@@ -35,9 +35,6 @@ export class SimafaReadingProgComponent extends FactoryONE {
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   dataSource: IReadingProgramRes[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private closeTabService: CloseTabService,
@@ -58,12 +55,7 @@ export class SimafaReadingProgComponent extends FactoryONE {
       this._empty_message = EN_messages.notFound;
       return;
     }
-    this.insertSelectedColumns();
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.importDynamicService.columnSimafaReadingProgram();
-    this._selectedColumns = this.importDynamicService.customizeSelectedColumns(this._selectCols);
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriodDictionary(this._selectedKindId);
@@ -76,19 +68,11 @@ export class SimafaReadingProgComponent extends FactoryONE {
     this.importSimafaReadingProgram = this.importDynamicService.columnGetSimafaRDPG();
     if (this.closeTabService.saveDataForSimafaReadingPrograms) {
       this.dataSource = this.closeTabService.saveDataForSimafaReadingPrograms;
-      this.insertSelectedColumns();
     }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     this._years = this.importDynamicService.getYears();
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   refreshTable = () => {
     this.connectToServer();

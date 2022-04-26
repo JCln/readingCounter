@@ -49,6 +49,9 @@ export class MainService {
     else
       return this.http.post(this.environment.API_URL + '/' + URL, '');
   }
+  POSTARRAY = (URL: string, arr: any[]) => {
+    return this.http.post(this.environment.API_URL + '/' + URL, arr);
+  }
   POSTSG = (URL: string, ID?: string) => {
     return this.http.post(this.environment.API_URL + '/' + URL + '/' + ID, '');
   }

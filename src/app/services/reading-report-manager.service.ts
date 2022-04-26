@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -18,7 +18,10 @@ import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confir
 import {
   ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
+import { JwtService } from './../auth/jwt.service';
+import { EnvService } from './env.service';
 
 
 @Injectable({
@@ -34,7 +37,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   };
   imgAttrResultReq: IReadingReportReq = {
     fromDate: '',
@@ -42,7 +45,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   };
   imgAttrAnalyzeReq: IReadingReportReq = {
     fromDate: '',
@@ -50,7 +53,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   };
   detailsReq: IReadingReportReq = {
     zoneId: 0,
@@ -59,7 +62,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   disposalhoursReq: IReadingReportReq = {
     zoneId: 0,
@@ -68,7 +71,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   karkardReq: IReadingReportReq = {
     zoneId: 0,
@@ -77,7 +80,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   lockedReq: IReadingReportReq = {
     zoneId: 0,
@@ -86,7 +89,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   preNumberShownReq: IReadingReportReq = {
     zoneId: 0,
@@ -95,7 +98,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   karkardOffloadReq: IReadingReportReq = {
     zoneId: 0,
@@ -104,7 +107,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   karkardDailyReq: IReadingReportReq = {
     zoneId: 0,
@@ -113,7 +116,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   gisReq: IReadingReportGISReq = {
     zoneId: 0,
@@ -125,7 +128,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1400,
+    year: 1401,
     isCluster: true
   }
   anlzPrfmReq: IMostReportInput = {
@@ -135,7 +138,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400,
+    year: 1401,
     zoneIds: [0]
   }
   trvchReq: IReadingReportTraverseDifferentialReq = {
@@ -143,7 +146,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1400,
+    year: 1401,
     traverseType: 0,
     zoneIds: null
   }
@@ -154,7 +157,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   inStateReq: IReadingReportReq = {
     zoneId: 0,
@@ -163,7 +166,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1400
+    year: 1401
   }
   /* GET*/
 
@@ -181,7 +184,9 @@ export class ReadingReportManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private dialog: MatDialog,
     private _location: Location,
-    private router: Router
+    private router: Router,
+    private envService: EnvService,
+    private jwtService: JwtService
   ) { }
 
   // CALL APIs
@@ -189,6 +194,13 @@ export class ReadingReportManagerService {
   getDataSource = (method: ENInterfaces, id: any): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(method, id).subscribe((res) => {
+        resolve(res)
+      })
+    });
+  }
+  postDataSource = (method: ENInterfaces, id: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POST(method, id).subscribe((res) => {
         resolve(res)
       })
     });
@@ -353,6 +365,15 @@ export class ReadingReportManagerService {
   routeTo = (route: string) => {
     this.utilsService.routeTo(route);
   }
+  linkToStimulsoftAdd = () => {
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.jwtService.getAuthorizationToken(), '_blank');
+  }
+  linkToStimulsoftEdit = (body: any) => {
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.jwtService.getAuthorizationToken(), '_blank');
+  }
+  linkToStimulsoftView = (body: any) => {
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.jwtService.getAuthorizationToken(), '_blank');
+  }
   routeToByObject = (router: string, val: object) => {
     this.router.navigate([router, val]);
   }
@@ -360,27 +381,7 @@ export class ReadingReportManagerService {
     this._location.back();
   }
   routeToMapGIS = (readingReportGISReq: IReadingReportGISReq) => {
-    this.router.navigate(['/wr', readingReportGISReq]);
-  }
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
-  }
-  customizeSelectedColumns = (_selectCols: any) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
+    this.router.navigate([EN_Routes.wr, readingReportGISReq]);
   }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
@@ -476,6 +477,12 @@ export class ReadingReportManagerService {
   verificationFollowUPTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
   }
-
+  showInMapSingleValidation = (dataSource: any): boolean => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseInt(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred || MathS.isNull(parseInt(dataSource.gisAccuracy))) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return false;
+    }
+    return true;
+  }
 
 }

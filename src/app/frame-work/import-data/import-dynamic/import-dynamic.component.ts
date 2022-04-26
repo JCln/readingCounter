@@ -6,10 +6,8 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { LocalClientConfigsService } from 'services/local-client-configs.service';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/date-jalali.component';
-
-import { MathS } from './../../../classes/math-s';
-
 
 @Component({
   selector: 'app-import-dynamic',

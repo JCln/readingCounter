@@ -5,14 +5,15 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENRandomNumbers,
-  ENSelectedColumnVariables,
-  IMasrafStates,
-  IObjectIteratation,
-  ISearchInOrderTo,
-  ITitleValue,
+    ENRandomNumbers,
+    ENSelectedColumnVariables,
+    IMasrafStates,
+    IObjectIteratation,
+    ISearchInOrderTo,
+    ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
+import { AllListsService } from 'services/all-lists.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
@@ -20,6 +21,7 @@ import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { Search } from '../classes/search';
+import { EN_Routes } from '../Interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { FollowUpService } from './follow-up.service';
 
@@ -27,24 +29,12 @@ import { FollowUpService } from './follow-up.service';
   providedIn: 'root'
 })
 export class SearchService {
+  _searchProCollapse: boolean = true;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
 
   _isOrderByDate: boolean = true;
 
-  searchReqPro: ISearchProReportInput = {
-    zoneId: null,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    zoneIds: [],
-    year: 1400,
-    reportIds: [],
-    counterStateIds: [],
-    masrafStates: [],
-    karbariCodes: [],
-    fragmentMasterIds: []
-  }
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
@@ -58,7 +48,7 @@ export class SearchService {
   _years: ITitleValue[] = [];
   searchReqMosh: ISearchMoshReq = {
     zoneId: null,
-    searchBy: null,
+    searchBy: 1,
     item: '',
     similar: false
   }
@@ -67,22 +57,8 @@ export class SearchService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1400
+    year: 1401
   }
-  private _searchReqPro: ISearchProReportInput = {
-    zoneId: null,
-    fromDate: '',
-    toDate: '',
-    readingPeriodId: null,
-    zoneIds: [],
-    year: 1400,
-    reportIds: [],
-    counterStateIds: [],
-    masrafStates: [],
-    karbariCodes: [],
-    fragmentMasterIds: []
-  }
-  private _isValidateByDate: boolean;
   private _searchProExcel: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: true },
     { field: 'trackNumber', header: 'شناسه قبض', isSelected: true },
@@ -95,6 +71,7 @@ export class SearchService {
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
+    private allListsService: AllListsService,
     private router: Router,
     private dialog: MatDialog,
   ) { }
@@ -102,15 +79,6 @@ export class SearchService {
   /*COLUMNS*/
   columnSearchProExcel = (): IObjectIteratation[] => {
     return this._searchProExcel;
-  }
-  customizeSelectedColumns = (_selectCols: any) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
-  columnGetSearchPro = (): ISearchProReportInput => {
-    return this._searchReqPro;
   }
   /*API CALLS*/
   getSearchTypes = (): Search[] => {
@@ -142,12 +110,8 @@ export class SearchService {
   getReadingPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
-  getByQuoteId = (method: ENInterfaces, id: number): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, id).toPromise().then(res => {
-        resolve(res);
-      })
-    });
+  getFragmentMasterDictionary = (zoneId: number) => {
+    return this.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(zoneId);
   }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
@@ -166,15 +130,11 @@ export class SearchService {
     return this.dictionaryWrapperService.getCounterStateDictionary();
   }
   doSearch = (method: ENInterfaces, body: any): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
+        resolve(res);
+      })
+    });
   }
   getProExcel = (method: ENInterfaces, body: any): Promise<any> => {
     try {
@@ -319,34 +279,19 @@ export class SearchService {
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
     searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
     searchReq.toDate = Converter.persianToEngNumbers(searchReq.toDate);
-    this._searchReqPro = searchReq;
-    if (isValidateByDate == true || isValidateByDate == false)
-      this._isValidateByDate = isValidateByDate;
 
-    if (this._isValidateByDate) {
+    if (isValidateByDate) {
       return this.validationNullPro(searchReq) && this.validationDate(searchReq);
     }
-    return this.validationByReadingPeriod(searchReq);
+    else {
+      return this.validationByReadingPeriod(searchReq);
+    }
   }
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     dataSource.forEach(item => {
       if (item.newRate > 0)
         item.newRate = parseFloat(MathS.getRange(item.newRate))
       item.preAverage = +MathS.getRange(item.preAverage);
-    })
-  }
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
     })
   }
   getYears = (): ITitleValue[] => {
@@ -373,27 +318,22 @@ export class SearchService {
     this[variable].toDate = $event;
   }
   routeToWoui = (object: any) => {
-    this.router.navigate(['wr/m/track/woui', false, object.id]);
+    this.router.navigate([EN_Routes.wrmtrackwoui, false, object.id]);
   }
   routeToLMAll = (row: ISearchSimpleOutput) => {
-    this.router.navigate(['wr/m/l/all', false, row.trackingId]);
+    this.allListsService.allLists_pageSign.GUid = row.trackingId;
+    this.allListsService.allLists_pageSign.listNumber = row.listNumber;
+    this.router.navigate([EN_Routes.wrmlall, false]);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
-    this.utilsService.routeToByParams('wr/m/l/pd', row.trackNumber);
+    this.utilsService.routeToByParams(EN_Routes.wrmlpd, row.trackNumber);
   }
   routeToFollowUp = (row: ISearchSimpleOutput) => {
     this.followUpService.setTrackNumber(row.trackNumber);
-    this.utilsService.routeToByUrl('/wr/m/s/fwu');
+    this.utilsService.routeToByUrl(EN_Routes.wrmsfwu);
   }
   showInMap = (dataSource: object) => {
-    this.utilsService.routeToByParams('/wr', { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });
-  }
-  showInMapSingle = (dataSource: any) => {
-    if (MathS.isNull(dataSource.gisAccuracy) || parseFloat(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred) {
-      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
-      return;
-    }
-    this.utilsService.routeToByParams('/wr', { x: dataSource.x, y: dataSource.y, firstName: dataSource.firstName, sureName: dataSource.sureName, eshterak: dataSource.eshterak, trackNumber: dataSource.trackNumber, isSingle: true });
+    this.utilsService.routeToByParams(EN_Routes.wr, { trackNumber: dataSource['trackNumber'], day: dataSource['insertDateJalali'], distance: dataSource['overalDistance'] });
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
@@ -419,5 +359,11 @@ export class SearchService {
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
-
+  showInMapSingleValidation = (dataSource: any): boolean => {
+    if (MathS.isNull(dataSource.gisAccuracy) || parseInt(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred || MathS.isNull(parseInt(dataSource.gisAccuracy))) {
+      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
+      return false;
+    }
+    return true;
+  }
 }

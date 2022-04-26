@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ITabs, ITabWrapperDetectDynamicRoute } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { filter } from 'rxjs/internal/operators/filter';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
@@ -59,45 +60,45 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     })
   }
   findDynamicRouteStatus = (): ITabWrapperDetectDynamicRoute => {
-    if (this.getCurrentDynamicRoute('/wr/m/l/pd/'))
+    if (this.getCurrentDynamicRoute(EN_Routes['wrmlpd/']))
       return {
-        _title: 'اطلاعات روزانه', _dynamicRoute: '/wr/m/l/pd/'
+        _title: 'اطلاعات روزانه', _dynamicRoute: EN_Routes['wrmlpd/']
       }
-    if (this.getCurrentDynamicRoute('/wr/m/l/all/false/'))
+    if (this.getCurrentDynamicRoute(EN_Routes.wrmlallfalse))
       return {
-        _title: 'لیست', _dynamicRoute: '/wr/m/l/all/false/'
+        _title: 'لیست', _dynamicRoute: EN_Routes.wrmlallfalse
       }
-    if (this.getCurrentDynamicRoute('/wr/m/l/all/true/'))
+    if (this.getCurrentDynamicRoute(EN_Routes.wrmlalltrue))
       return {
-        _title: 'لیست', _dynamicRoute: '/wr/m/l/all/true/'
+        _title: 'لیست', _dynamicRoute: EN_Routes.wrmlalltrue
       }
-    if (this.getCurrentDynamicRoute('/wr/mu/edit/'))
+    if (this.getCurrentDynamicRoute(EN_Routes['wrmuedit/']))
       return {
-        _title: 'ویرایش', _dynamicRoute: '/wr/mu/edit/'
+        _title: 'ویرایش', _dynamicRoute: EN_Routes['wrmuedit/']
       }
-    if (this.getCurrentDynamicRoute('/wr/m/s/fwu/'))
+    if (this.getCurrentDynamicRoute(EN_Routes['wrmsfwu/']))
       return {
-        _title: 'پیگیری', _dynamicRoute: '/wr/m/s/fwu/'
+        _title: 'پیگیری', _dynamicRoute: EN_Routes['wrmsfwu/']
       }
-    if (this.getCurrentDynamicRoute('/wr/mu/all/loggins/'))
+    if (this.getCurrentDynamicRoute(EN_Routes.wrmuallloggins))
       return {
-        _title: 'ورود', _dynamicRoute: '/wr/mu/all/loggins/'
+        _title: 'ورود', _dynamicRoute: EN_Routes.wrmuallloggins
       }
-    if (this.getCurrentDynamicRoute('/wr/m/r/nob/'))
+    if (this.getCurrentDynamicRoute(EN_Routes['wrmrnob/']))
       return {
-        _title: 'نوبتی', _dynamicRoute: '/wr/m/r/nob/'
+        _title: 'نوبتی', _dynamicRoute: EN_Routes['wrmrnob/']
       }
-    if (this.getCurrentDynamicRoute('/wr/m/track/woui/false/'))
+    if (this.getCurrentDynamicRoute(EN_Routes.wrmtrackwouifalse))
       return {
-        _title: 'صوت/تصویر', _dynamicRoute: '/wr/m/track/woui/false/'
+        _title: 'صوت/تصویر', _dynamicRoute: EN_Routes.wrmtrackwouifalse
       }
-    if (this.getCurrentDynamicRoute('/wr/m/track/woui/true/'))
+    if (this.getCurrentDynamicRoute(EN_Routes.wrmtrackwouitrue))
       return {
-        _title: 'غیر مجاز', _dynamicRoute: '/wr/m/track/woui/true/'
+        _title: 'غیر مجاز', _dynamicRoute: EN_Routes.wrmtrackwouitrue
       }
-    if (this.getCurrentDynamicRoute('/wr/m/track/offloaded/offloadMfy/'))
+    if (this.getCurrentDynamicRoute(EN_Routes['wrmtrackoffloadedoffloadMfy/']))
       return {
-        _title: 'اصلاح', _dynamicRoute: '/wr/m/track/offloaded/offloadMfy/'
+        _title: 'اصلاح', _dynamicRoute: EN_Routes['wrmtrackoffloadedoffloadMfy/']
       }
     return null;
   }
@@ -133,7 +134,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   getRouterUrl = (): string => { return this.router.url; }
   staticRouteValidation = () => {
     if (!this.DoesTabsHaveThisRouteNow()) {
-      this.getRouterUrl() === '/wr/profile' ? this.closeTabService.tabs.push(this.addProfileTab()) : ''
+      this.getRouterUrl() === EN_Routes.wrprofile ? this.closeTabService.tabs.push(this.addProfileTab()) : ''
     }
   }
   verification = () => {
@@ -179,7 +180,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     })
 
     if (MathS.isNull(a[0])) {
-      this.router.navigateByUrl('/wr');
+      this.router.navigateByUrl(EN_Routes.wr);
       this.reFetchPageTitle();
     }
     else {
@@ -194,7 +195,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   }
   closeAllTabs = async () => {
     await this.setCloseAllTabs();
-    this.router.navigateByUrl('/wr');
+    this.router.navigateByUrl(EN_Routes.wr);
     this.closeAllExeptOne();
     this.reFetchPageTitle();
   }
@@ -207,12 +208,12 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
   }
   addDashboardTab = () => {
     return {
-      route: '/wr', title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
+      route: EN_Routes.wr, title: 'نقشه/داشبورد', cssClass: '', logicalOrder: 0, isClosable: false, isRefreshable: false
     };
   }
   addProfileTab = () => {
     return {
-      route: '/wr/profile', title: 'تنظیمات کاربری', cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
+      route: EN_Routes.wrprofile, title: 'تنظیمات کاربری', cssClass: '', logicalOrder: 0, isClosable: true, isRefreshable: true
     }
   }
   refreshCurrentPage = (tabRoute: string) => {

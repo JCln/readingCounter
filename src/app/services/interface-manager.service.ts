@@ -33,6 +33,9 @@ export class InterfaceManagerService {
       return this.mainService.POST(URL, id);
     return this.mainService.POST(URL);
   }
+  POSTARRAYS = (URL: string, arr: any[]) => {
+    return this.mainService.POSTARRAY(URL, arr);
+  }
   POSTBODY = (URL: string, body: object) => {
     return this.mainService.POSTBODY(URL, body);
   }

@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'gallery', loadChildren: () => import('./gallery/gallery.module').then(gallery => gallery.GalleryModule) },
   { path: 'inState', loadChildren: () => import('./rr-instate/rr-instate.module').then(inState => inState.RrInstateModule) },
   { path: 'exlview', loadChildren: () => import('./rr-excel-dynamic-viewer/rr-excel-dynamic-viewer.module').then(excelDynamicViewer => excelDynamicViewer.RrExcelDynamicViewerModule) },
+  { path: 'dynamic', loadChildren: () => import('./rr-dynamic-report/rr-dynamic-report.module').then(dynamicReportManager => dynamicReportManager.RrDynamicReportModule) },
 ];
 
 @NgModule({

@@ -1,0 +1,14 @@
+<app-prime-table     
+    [dataSource]="dataSource" 
+    [_outputFileName]="'dynamicReport'"
+    [_checkUpName]="'dynamicReport'"    
+    [_tooltipText]="''"
+    [_numberOfExtraColumns]="[1, 2 , 3]"
+    [_selectedColumnsToRemember]="'selectedRRDynamicReport'"    
+    (refreshedTable)="refreshTable()"
+    (showedMoreDetails)="removeRow($event)"
+    (openedAddDialog)="readingReportManagerService.linkToStimulsoftAdd()"
+    (downloadedExcel)="readingReportManagerService.linkToStimulsoftView($event)"
+    (openedEditDialog)="readingReportManagerService.linkToStimulsoftEdit($event)"    
+ > 
+</app-prime-table>
