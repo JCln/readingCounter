@@ -8,14 +8,9 @@ export const infoVersionItems: IDictionaryManager[] = [
     },
     {
         id: '2',
-        title: 'امکانات جدید',
+        title: 'سامانه لحظه',
         isSelected: true
-    },    
-    {
-        id: '2',
-        title: 'رفع برخی ایرادات',
-        isSelected: true
-    },    
+    },
 ]
 export class infoVersion {
 
