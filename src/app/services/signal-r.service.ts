@@ -4,6 +4,8 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
+import { InteractionService } from 'services/interaction.service';
+import { ILatestReads } from 'src/app/Interfaces/imoment';
 
 import { JwtService } from '../auth/jwt.service';
 import { SnackWrapperService } from './snack-wrapper.service';
@@ -17,7 +19,8 @@ export class SignalRService {
   constructor(
     private envService: EnvService,
     private jwtService: JwtService,
-    private snackBarService: SnackWrapperService
+    private snackBarService: SnackWrapperService,
+    private interactionService: InteractionService
   ) { }
 
   public startConnection = () => {
@@ -34,9 +37,7 @@ export class SignalRService {
 
     this.receiveMessage();
     this.broadcastMessage();
-    //   connection.onclose(async () => {
-    //     await start();
-    // });
+    this.momentAddReadingRow();
   }
   public disconnectConnection = () => {
     this.hubConnection.stop();
@@ -64,6 +65,11 @@ export class SignalRService {
     this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
       this.snackBarService.openSnackBarSignal(title + '\n' + message, time, color);
     });
+  }
+  private momentAddReadingRow = () => {
+    this.hubConnection.on(ENInterfaces.signalRMomentSystemAddReadingRow, (r: ILatestReads) => {
+      this.interactionService.startLoading(r);
+    })
   }
   getConnectionStatus = (): any => {
     return this.hubConnection.state;

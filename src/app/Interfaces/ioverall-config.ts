@@ -36,6 +36,7 @@ export interface ITabs {
 }
 export enum ENEssentialsToSave {
     saveDataForDynamicReports = 'saveDataForDynamicReports',
+    saveDataForMomentLastRead = 'saveDataForMomentLastRead',
     saveDataForToolsExcelViewer = 'saveDataForToolsExcelViewer',
     saveDataForKarbari = 'saveDataForKarbari',
     saveDataForImageAttribution = 'saveDataForImageAttribution',

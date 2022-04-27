@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'm', loadChildren: () => import('./manage/manage.module').then(m => m.ManageModule) },
   { path: 'mu', loadChildren: () => import('./user-manager/user-manager.module').then(userManager => userManager.UserManagerModule) },
   { path: 'tools', loadChildren: () => import('./tools/tools.module').then(tools => tools.ToolsModule) },
-  { path: 'offline', loadChildren: () => import('./offline-mode/offline-mode.module').then(offlineMode => offlineMode.OfflineModeModule) }
+  { path: 'offline', loadChildren: () => import('./offline-mode/offline-mode.module').then(offlineMode => offlineMode.OfflineModeModule) },
+  { path: 'flash', loadChildren: () => import('./moment-system/moment-system.module').then(momentSystem => momentSystem.MomentSystemModule) },
 ];
 
 @NgModule({

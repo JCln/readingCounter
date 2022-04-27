@@ -206,6 +206,7 @@ export enum ENInterfaces {
 
     signalRStartConnection = '/notifyHub',
     signalRBroadcastMessage = 'broadcast',
+    signalRMomentSystemAddReadingRow = 'AddReadingRow',
     signalRSendMessage = 'sendMessage',
     signalRReceiveMessage = 'receiveMessage',
 

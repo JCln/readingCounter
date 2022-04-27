@@ -33,6 +33,22 @@ export class ColumnManager {
         { field: 'statusCode', header: 'کد', isSelected: true },
         { field: 'username', header: 'نام کاربری', isSelected: true },
     ]
+    momentLs: IObjectIteratation[] = [
+        // { field: 'id', header: 'id', isSelected: false },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
+        { field: 'counterStateTitle', header: 'وضعیت کنتور', isSelected: true },
+        { field: 'gisAccuracy', header: 'دقت', isSelected: false },
+        { field: 'x', header: 'X', isSelected: false },
+        { field: 'y', header: 'Y', isSelected: false },
+        { field: 'billId', header: 'ش.قبض', isSelected: false },
+        { field: 'radif', header: 'ش پرونده', isSelected: true },
+        { field: 'eshterak', header: 'اشتراک', isSelected: true },
+        { field: 'qeraatCode', header: 'کد قرائت', isSelected: false },
+        { field: 'firstName', header: 'نام', isSelected: true },
+        { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
+    ]
     imgattr: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
     ];
@@ -655,8 +671,8 @@ export class ColumnManager {
         [
             // { field: 'kardexItemType', header: 'نوع کارکس', isSelected: false },
             { field: 'jalaliDay', header: 'تاریخ', isSelected: true },
-            { field: 'description', header: 'ش پیگیری', isSelected: true },
-            { field: 'counterStateTitle', header: 'توضیحات', isSelected: true },
+            { field: 'description', header: 'توضیحات', isSelected: true },
+            { field: 'counterStateTitle', header: 'وضعیت کنتور', isSelected: true },
             { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
         ];
     assess_pre: IObjectIteratation[] =
