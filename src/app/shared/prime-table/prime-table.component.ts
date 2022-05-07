@@ -17,32 +17,14 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
 export class PrimeTableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
-
-  @Input() dataSource: any[] = [];
-  @Input() _selectCols: any = [];
-  @Input() _selectedColumns: any[];
-  @Input() _outputFileName: string;
-  @Input() _rowsPerPage: number[] = [10, 100, 1000, 5000];
-  @Input() _rowsNumbers = 10;
-  @Input() _numberOfExtraColumns: number[];
-  @Input() _sessionName: string;
-  @Input() _selectedColumnsToRemember: string;
-  @Input() _backToPreviousText: string;
-  @Input() _captionEnabled: boolean = true;
-  @Input() _sortField: string = '';
   @Input() _sortOrder: number = -1;
   @Input() _sortMode: string = 'single';
-  @Input() _outputEnabled: boolean = true;
-  @Input() _backToPreviousEnabled: boolean = false;
-  @Input() _checkUpName: string = '';
-  @Input() _multiSelectEnable: boolean = true;
+  @Input() _isSortable: boolean = true;
   @Input() _allComponentIsModify: boolean = false;
   @Input() _hasCollapsible: boolean = false;
   @Input() _canShowButton: boolean = true;
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
-  @Input() _isCustomSort: boolean = false;
-  @Input() _hasSaveColumns: boolean = true;
 
   @Output() customedSort = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
@@ -62,7 +44,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() firstConfirmedDialog = new EventEmitter<any>();
   @Output() showedInMap = new EventEmitter<any>();
   @Output() showedInMapSingle = new EventEmitter<any>();
-  @Output() downloadedOutputSingle = new EventEmitter<any>();
+  @Output() downloadedOutputSingle = new EventEmitter<any>();  
   @Output() routeedToOffloadModify = new EventEmitter<any>();
   @Output() routedToOffloadGeneralModify = new EventEmitter<any>();
   @Output() backedToReading = new EventEmitter<any>();

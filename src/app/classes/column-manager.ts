@@ -238,7 +238,7 @@ export class ColumnManager {
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, readonly: true },
     ]
     rrDetails: IObjectIteratation[] = [
-        { field: 'billId', header: 'ش قبض', isSelected: false, readonly: true },
+        { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true },
         { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: true },

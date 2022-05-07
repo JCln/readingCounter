@@ -4,10 +4,9 @@ import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { LatestReadsRoutingModule } from './latest-reads-routing.module';
 import { LatestReadsComponent } from './latest-reads.component';
 
-
 @NgModule({
   declarations: [
-    LatestReadsComponent
+    LatestReadsComponent,
   ],
   imports: [
     SharedPrimeNgModule,

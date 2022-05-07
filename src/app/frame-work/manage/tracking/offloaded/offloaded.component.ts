@@ -19,7 +19,7 @@ export class OffloadedComponent extends FactoryONE {
 
 
   dataSource: ITracking[] = [];
-  
+
   constructor(
 
     private closeTabService: CloseTabService,

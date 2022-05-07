@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
+import { Subject } from 'rxjs/internal/Subject';
 import { CloseTabService } from 'services/close-tab.service';
 
 import { EN_Routes } from '../Interfaces/routes.enum';
@@ -12,7 +12,7 @@ import { EN_Routes } from '../Interfaces/routes.enum';
 export class InteractionService {
   constructor(private closeTabService: CloseTabService, private router: Router) { }
 
-  private latestReads = new BehaviorSubject<any>({});  
+  private latestReads = new Subject<any>();  
 
   private loading(latestReads: any) {
     this.latestReads.next(latestReads);

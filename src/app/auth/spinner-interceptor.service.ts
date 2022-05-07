@@ -30,7 +30,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
             if (error.status === ENClientServerErrors.cs400) {
               if (error.error.message) {
-                this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fifteenMili, ENSnackBarColors.danger);
               }
               else
                 this.snackWrapperService.openSnackBar('مقادیر را بررسی و مجددا امتحان نمایید', ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);

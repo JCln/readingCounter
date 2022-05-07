@@ -42,6 +42,7 @@ export class AllComponent extends AllListsFactory {
     }
 
     else {
+      this.assignToPageSign();
       this.pageSignTrackNumber = this.allListsService.allLists_pageSign.trackNumber;
       if (canRefresh) {
         this.closeTabService.saveDataForLMAll = null;
@@ -57,7 +58,6 @@ export class AllComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMAllReq = this.allListsService.allLists_pageSign.GUid;
         this.closeTabService.saveDataForLMAll = this.dataSource;
       }
-      // this.assignToPageSign();
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
       this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
@@ -85,7 +85,7 @@ export class AllComponent extends AllListsFactory {
     this._location.back();
   }
   assignToPageSign = () => {
-    this.pageSignTrackNumber = this.dataSource[0].trackNumber;
+    this.pageSignTrackNumber = this.allListsService.allLists_pageSign.trackNumber;
   }
 
 }

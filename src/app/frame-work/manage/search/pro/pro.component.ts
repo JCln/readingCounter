@@ -1,24 +1,22 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ITHV, ITitleValue } from 'interfaces/ioverall-config';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
+import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
-import { FactoryONE } from 'src/app/classes/factory';
-
-import { MapDgComponent } from '../../list-manager/all/map-dg/map-dg.component';
+import { AllListsFactory } from 'src/app/classes/factory';
 
 @Component({
   selector: 'app-pro',
   templateUrl: './pro.component.html',
   styleUrls: ['./pro.component.scss']
 })
-export class ProComponent extends FactoryONE {
+export class ProComponent extends AllListsFactory {
 
   _empty_message: string = '';
 
@@ -29,9 +27,7 @@ export class ProComponent extends FactoryONE {
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
-  ref: DynamicDialogRef;
-
-
+  
   readingPeriodDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   counterStateByZoneIdDictionary: IDictionaryManager[] = [];
@@ -48,11 +44,12 @@ export class ProComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public searchService: SearchService,
-    private dialogService: DialogService,
     private outputManagerService: OutputManagerService,
-    private dateJalaliService: DateJalaliService
+    private dateJalaliService: DateJalaliService,
+    public dialogService: DialogService,
+    public listManagerService: ListManagerService
   ) {
-    super();
+    super(dialogService, listManagerService);
   }
 
   converts = async () => {
@@ -103,26 +100,6 @@ export class ProComponent extends FactoryONE {
     this.formDefinition();
   }
 
-  getReadingReportTitles = async ($event: any) => {
-    const a = await this.searchService.postById(ENInterfaces.ReadingReportTitles, $event)
-    if (a.length) {
-      this.searchService.showResDialog(a, false, EN_messages.insert_rrDetails);
-      return;
-    }
-    this.searchService.snackEmptyValue();
-  }
-  openMapDialog = (dataSource: any) => {
-    if (this.searchService.showInMapSingleValidation(dataSource))
-      this.ref = this.dialogService.open(MapDgComponent, {
-        data: dataSource,
-        rtl: true,
-        width: '70%'
-      })
-    this.ref.onClose.subscribe(async res => {
-      if (res)
-        this.classWrapper();
-    });
-  }
   getMasterInZone = async () => {
     if (this.closeTabService.saveDataForSearchProReq.zoneId) {
       this.fragmentMasterIds = await this.searchService.getFragmentMasterDictionary(this.closeTabService.saveDataForSearchProReq.zoneId);

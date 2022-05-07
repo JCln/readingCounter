@@ -41,12 +41,17 @@ export class ListModifyComponent extends AllListsFactory {
     super(dialogService, listManagerService);
   }
 
+  assignToPageSign = () => {
+    this.pageSignTrackNumber = this.allListsService.modifyLists_pageSign.trackNumber;
+  }
+
   classWrapper = async (canRefresh?: boolean) => {
 
     if (!this.allListsService.modifyLists_pageSign.GUid) {
       this.router.navigateByUrl(EN_Routes.wrmtrackoffloaded);
     }
     else {
+      this.assignToPageSign();
       if (canRefresh) {
         this.closeTabService.saveDataForLMModify = null;
         this.closeTabService.saveDataForLMModifyReq = null;
@@ -60,7 +65,6 @@ export class ListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMModifyReq = this.allListsService.modifyLists_pageSign.GUid;
         this.closeTabService.saveDataForLMModify = this.dataSource;
       }
-      this.assignToPageSign();
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
       this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
@@ -86,12 +90,6 @@ export class ListModifyComponent extends AllListsFactory {
   }
   toPrePage = () => {
     this.router.navigate([EN_Routes.wrmtrackoffloaded]);
-  }
-  /*
-  water officer upload carousel images
-  */
-  assignToPageSign = () => {
-    this.pageSignTrackNumber = this.dataSource[0].trackNumber;
   }
   openMoshtarakinDialog = (dataSource: any) => {
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {

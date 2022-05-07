@@ -21,7 +21,13 @@ export class ListSearchMoshWoumComponent implements OnInit {
   classWrapper = async () => {
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.dataSource = this.config.data.dataSource;
-    this.dataSource.zoneId = this.convertTitleToId(this.dataSource.zoneId).id;
+    // for latest reads component there is no zoneId element so The ifElse needed
+    if (this.dataSource.zoneId) {
+      this.dataSource.zoneId = this.convertTitleToId(this.dataSource.zoneId).id;
+    }
+    else {
+      this.dataSource.zoneId = this.convertTitleToId(this.dataSource.zoneTitle).id;
+    }
   }
   ngOnInit(): void {
     this.classWrapper();

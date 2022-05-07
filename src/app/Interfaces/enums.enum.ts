@@ -116,6 +116,7 @@ export enum EN_messages {
 
     tableSaved = 'ذخیره ستونها انجام شد',
     tableResetSaved = 'بازنشانی ستونها انجام شد',
+    tableDefaultColumnOrder = 'ستونها درحالت پیشفرض قرار دارند',
     done = 'انجام شد',
     doneBroadcast = 'پیام مخابره شد',
 

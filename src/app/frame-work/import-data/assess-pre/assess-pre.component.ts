@@ -4,12 +4,12 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ITHV } from 'interfaces/ioverall-config';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
-import { FactoryONE } from 'src/app/classes/factory';
+import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
 import { MapDgComponent } from '../../manage/list-manager/all/map-dg/map-dg.component';
@@ -19,12 +19,11 @@ import { MapDgComponent } from '../../manage/list-manager/all/map-dg/map-dg.comp
   templateUrl: './assess-pre.component.html',
   styleUrls: ['./assess-pre.component.scss']
 })
-export class AssessPreComponent extends FactoryONE {
+export class AssessPreComponent extends AllListsFactory {
 
   readingConfigDefault: IReadingConfigDefault;
   masrafState: ITHV[] = []
   dataSource: IOnOffLoadFlat[] = [];
-  ref: DynamicDialogRef;
 
   zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -41,10 +40,10 @@ export class AssessPreComponent extends FactoryONE {
   constructor(
     public closeTabService: CloseTabService,
     public importDynamicService: ImportDynamicService,
-    private listManagerService: ListManagerService,
-    private dialogService: DialogService,
+    public listManagerService: ListManagerService,
+    public dialogService: DialogService,
   ) {
-    super();
+    super(dialogService, listManagerService);
   }
 
   insertReadingConfigDefaults = (rcd: IReadingConfigDefault) => {

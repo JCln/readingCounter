@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
+import { ListManagerService } from 'services/list-manager.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
-import { FactoryONE } from 'src/app/classes/factory';
+import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { Search } from 'src/app/classes/search';
-
-import { MapDgComponent } from '../../list-manager/all/map-dg/map-dg.component';
 
 @Component({
   selector: 'app-moshtarak',
@@ -19,11 +17,10 @@ import { MapDgComponent } from '../../list-manager/all/map-dg/map-dg.component';
   styleUrls: ['./moshtarak.component.scss']
 })
 
-export class MoshtarakComponent extends FactoryONE {
+export class MoshtarakComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
   searchType: Search[];
   searchByText: string = '';
-  ref: DynamicDialogRef;
   _searchByInfo: string = 'مقدار';
 
   zoneDictionary: IDictionaryManager[] = [];
@@ -37,9 +34,10 @@ export class MoshtarakComponent extends FactoryONE {
 
     private closeTabService: CloseTabService,
     public searchService: SearchService,
-    private dialogService: DialogService
+    public dialogService: DialogService,
+    public listManagerService: ListManagerService
   ) {
-    super();
+    super(dialogService, listManagerService);
   }
 
   converts = async () => {
@@ -92,26 +90,6 @@ export class MoshtarakComponent extends FactoryONE {
   }
   toDefaultVals = () => {
     this.dataSource = [];
-  }
-  getReadingReportTitles = async ($event) => {
-    const a = await this.searchService.postById(ENInterfaces.ReadingReportTitles, $event)
-    if (a.length) {
-      this.searchService.showResDialog(a, false, EN_messages.insert_rrDetails);
-      return;
-    }
-    this.searchService.snackEmptyValue();
-  }
-  openMapDialog = (dataSource: any) => {
-    if (this.searchService.showInMapSingleValidation(dataSource))
-      this.ref = this.dialogService.open(MapDgComponent, {
-        data: dataSource,
-        rtl: true,
-        width: '70%'
-      })
-    this.ref.onClose.subscribe(async res => {
-      if (res)
-        this.refreshTable();
-    });
   }
   getZoneDictionary = async () => {
     this.zoneDictionary = JSON.parse(JSON.stringify(await this.searchService.getZoneDictionary()));

@@ -192,10 +192,9 @@ export class TrackingManagerService {
       trackingId: single.id
     }
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOBOBSERVE(method, a).subscribe(res => {
+      this.interfaceManagerService.POSTBLOBOBSERVE(method, a).toPromise().then(res => {
         resolve(res);
       })
-
     });
   }
   downloadOutputSingleWithENV = (method: ENInterfaces, single: ITracking, inputData: string): Promise<any> => {
@@ -304,7 +303,7 @@ export class TrackingManagerService {
   }
 
   /*VALIDATION */
-  private showWarnMessage = (message: string) => this.utilsService.snackBarMessageWarn(message);
+  showWarnMessage = (message: string) => this.utilsService.snackBarMessageWarn(message);
   isValidationNull = (elem: any): boolean => {
     if (MathS.isNull(elem))
       return true;
@@ -356,32 +355,19 @@ export class TrackingManagerService {
   verificationFollowUPTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
   }
-  /* OTHER */
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
-  }
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
   routeToLMAll = (row: any) => {
     this.allListsService.allLists_pageSign.GUid = row.id;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
+    this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.router.navigate([EN_Routes.wrmlallfalse]);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
     this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
     this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.modifyLists_pageSign.trackNumber = dataSource.trackNumber;
     this.router.navigate([EN_Routes.wrmlalltrue]);
   }
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
@@ -389,6 +375,7 @@ export class TrackingManagerService {
     this.allListsService.generalModifyLists_pageSign.listNumber = dataSource.listNumber;
     this.allListsService.generalModifyLists_pageSign.groupId = dataSource.groupId;
     this.allListsService.generalModifyLists_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.generalModifyLists_pageSign.trackNumber = dataSource.trackNumber;
     this.router.navigate([EN_Routes.wrmlGeneralModify]);
   }
   routeTo = (route: string, UUID: string) => {

@@ -108,6 +108,6 @@
 <app-prime-table *ngIf="dataSource.length" [dataSource]="dataSource" [_outputFileName]="'assess_pre'" [_checkUpName]="'assess_pre'"
     [_numberOfExtraColumns]="[1, 2, 3]" [_canShowButton]="_canShowAssessButton"
     [_selectedColumnsToRemember]="'selectedListManagerAssess'" [_sessionName]="'assess_pre'"
-    (refreshedTable)="refreshTable()" (registeredAssess)="registerAssessAdd()"
+    (refreshedTable)="refreshTable()" (registeredAssess)="registerAssessAdd()" (showedWOUIAsCarousel)="doShowCarousel($event)"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>

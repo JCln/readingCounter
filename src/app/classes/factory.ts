@@ -11,7 +11,7 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
 import {
-    ListSearchMoshWoumComponent,
+  ListSearchMoshWoumComponent,
 } from '../frame-work/manage/list-manager/list-search-mosh-dg/list-search-mosh-woum/list-search-mosh-woum.component';
 import { MathS } from './math-s';
 
@@ -52,7 +52,21 @@ export class FactorySharedPrime implements OnChanges {
     @Input() _selectCols: any = [];
     @Input() _selectedColumns: any[];
     @Input() _outputFileName: string;
+    @Input() _rowsPerPage: number[] = [10, 100, 1000, 5000];
     @Input() _tooltipText: string;
+    @Input() _numberOfExtraColumns: number[];
+    @Input() _sessionName: string;
+    @Input() _rowsNumbers = 10;
+    @Input() _selectedColumnsToRemember: string;
+    @Input() _backToPreviousText: string;
+    @Input() _captionEnabled: boolean = true;
+    @Input() _sortField: string = '';
+    @Input() _outputEnabled: boolean = true;
+    @Input() _backToPreviousEnabled: boolean = false;
+    @Input() _checkUpName: string = '';
+    @Input() _multiSelectEnable: boolean = true;
+    @Input() _isCustomSort: boolean = false;
+    @Input() _hasSaveColumns: boolean = true;
 
     constructor(
         public browserStorageService: BrowserStorageService,
@@ -108,6 +122,8 @@ export class FactorySharedPrime implements OnChanges {
                 this.browserStorageService.removeLocal(this._outputFileName);
                 this._showSavedColumnButton = true;
                 this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
+            } else {
+                this.utilsService.snackBarMessageSuccess(EN_messages.tableDefaultColumnOrder);
             }
         }
         else
@@ -150,7 +166,7 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
     filteredTableEvent = (e: any) => {
         this.filterableDataSource = e;
     }
-    doShowCarousel = (dataSource: any) => {     
+    doShowCarousel = (dataSource: any) => {
         this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
             data: dataSource,
             rtl: true,

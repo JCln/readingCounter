@@ -125,7 +125,8 @@ export interface IOnOffLoadFlat {
     excludedForBazdid: boolean,
     masrafStateId: number,
     description: string,
-    isSelected?: boolean
+    isSelected?: boolean,
+    zoneTitle?: string
 }
 export interface IOutputManager {
     zoneId: number,

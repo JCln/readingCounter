@@ -19,6 +19,12 @@
                 [value]="orderType.id" (change)="updateOnChangedCounterState($event)">
                 {{orderType.title}}
             </mat-radio-button>
+            <mat-radio-button class="radio_button" [value]="-11" (change)="updateOnChangedCounterState($event)">
+                دارای رقم مشکوک
+            </mat-radio-button>
+            <mat-radio-button class="radio_button" [value]="-10" (change)="updateOnChangedCounterState($event)">
+                خراب،فاقد مشکوک
+            </mat-radio-button>
         </mat-radio-group>
     </div>
 </section>

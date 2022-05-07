@@ -48,7 +48,6 @@ export class MapDgComponent implements OnInit {
       "لایه ها": this.layerGroup
     };
   }
-
   initMap = () => {
     this.map = L.map('map', {
       center: this.envService.mapCenter,
@@ -65,16 +64,10 @@ export class MapDgComponent implements OnInit {
   ngOnInit(): void {
     this.getMapItems();
     this.initMap();
-
-    console.log(this.config.data);
     const x = this.config.data.x;
     const y = this.config.data.y;
-
     this.simpleMarkSingleLocation(x, y);
   }
-  // async save() {  
-  //   this.ref.close();
-  // }
   close() {
     this.ref.close();
   }

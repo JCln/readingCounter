@@ -1,65 +1,86 @@
 import { Component } from '@angular/core';
+import { Imap } from 'interfaces/imap';
 import { ENRandomNumbers } from 'interfaces/ioverall-config';
+import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
+import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
-import { FactoryONE } from 'src/app/classes/factory';
+import { ListManagerService } from 'services/list-manager.service';
+import { MapService } from 'services/map.service';
+import { AllListsFactory } from 'src/app/classes/factory';
 import { ILatestReads } from 'src/app/Interfaces/imoment';
 
+declare let L;
 @Component({
   selector: 'app-latest-reads',
   templateUrl: './latest-reads.component.html',
   styleUrls: ['./latest-reads.component.scss']
 })
-export class LatestReadsComponent extends FactoryONE {
-  tempData =
-    {
-      id: 'id',
-      zoneTitle: 'esfahan',
-      counterReaderName: 'counterReaderName1',
-      counterNumber: 10,
-      counterStateTitle: 'counterStateTitle',
-      gisAccuracy: 'gisAccuracy',
-      x: '13929.4',
-      y: '1392.3',
-      billId: 'billId',
-      radif: 22,
-      eshterak: 'eshterak',
-      qeraatCode: 'qeraatCode',
-      firstName: 'firstName',
-      sureName: 'stringsureName'
-    }
-  tempData2 =
-    {
-      id: 'id',
-      zoneTitle: 'tse',
-      counterReaderName: 'counterReaderName1',
-      counterNumber: 2,
-      counterStateTitle: 'counterStateTitle',
-      gisAccuracy: 'gisAccuracy',
-      x: '13929.4',
-      y: '1392.3',
-      billId: 'billId',
-      radif: 22,
-      eshterak: 'eshterak',
-      qeraatCode: 'qeraatCode',
-      firstName: 'firstName',
-      sureName: 'stringsureName'
-    }
-  dataSource: ILatestReads[] = [];
+export class LatestReadsComponent extends AllListsFactory {
+  dataSource2: ILatestReads[] = [];
 
   constructor(
+    private interactionService: InteractionService,
+    public listManagerService: ListManagerService,
+    public dialogService: DialogService,
     private closeTabService: CloseTabService,
-    private interactionService: InteractionService
+    private envService: EnvService,
+    private mapService: MapService
   ) {
-    super();
+    super(dialogService, listManagerService);
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForTrackReading = null;
+  /* TODO save latest data according to last view and show updating rows  */
   classWrapper = async (canRefresh?: boolean) => {
+    this.getMapItems();
+    this.initMap();
+
+    if (this.closeTabService.saveDataForMomentLastRead) {
+      this.dataSource2 = this.closeTabService.saveDataForMomentLastRead;
+      this.markMultipleLocations(this.dataSource2);
+    }
     this.interactionService.getMomentLatestReads.subscribe(res => {
-      this.dataSource.unshift(res);
-      if (this.dataSource.length > ENRandomNumbers.twenty)
-        this.dataSource.pop();
+      this.dataSource2.unshift(res);
+      if (this.dataSource2.length > ENRandomNumbers.twenty)
+        this.dataSource2.pop();
+      this.updateTableData();
     })
   }
+  updateTableData = () => {
+    this.closeTabService.saveDataForMomentLastRead = this.dataSource2;
+    this.markMultipleLocations(this.dataSource2);
+  }
+
+  private layerGroup2 = new L.FeatureGroup();
+  private map2: L.Map;
+
+  private mapItems2: Imap[];
+
+  private markMultipleLocations = (xyData: any) => {
+    xyData.map((items) => {
+      if (items.y > ENRandomNumbers.zero) {
+        L.marker([items.y, items.x]).addTo(this.layerGroup2)
+      }
+    })
+  }
+  private getOverlays = () => {
+    return {
+      "لایه ها": this.layerGroup2
+    };
+  }
+
+  initMap = () => {
+    this.map2 = L.map('map2', {
+      center: this.envService.mapCenter,
+      zoom: 8,
+      minZoom: 4,
+      layers: [this.mapService.initMapColor(), this.layerGroup2]
+    });
+
+    L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map2);
+  }
+  private getMapItems = () => {
+    this.mapItems2 = this.mapService.getMapItems();
+  }
+
 }

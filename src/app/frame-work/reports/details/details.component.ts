@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportDetails } from 'interfaces/ireports';
@@ -18,9 +18,6 @@ export class DetailsComponent extends FactoryONE {
   dataSource: IReadingReportDetails[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariByCodeDictionary: IDictionaryManager[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   searchInOrderTo: ISearchInOrderTo[] = [
     {
@@ -79,11 +76,5 @@ export class DetailsComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'karbariCode');
     this.closeTabService.saveDataForRRDetails = this.dataSource;
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

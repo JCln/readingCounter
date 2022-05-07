@@ -29,7 +29,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   counterStateValue: number;
 
   pageSignTrackNumber: number = null;
-  
+
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
@@ -62,8 +62,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   updateOnChangedCounterState = async (val: any) => {
     this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val.value);
     this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
-    this.closeTabService.saveDataForLMGeneralModify = this.dataSource;
-    this.assignToPageSign();
+    this.closeTabService.saveDataForLMGeneralModify = this.dataSource;    
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
@@ -84,6 +83,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
       this.router.navigateByUrl(EN_Routes.wrmtrackoffloaded);
     }
     else {
+      this.assignToPageSign();
       this.counterStateByZoneDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
       if (canRefresh) {
         this.closeTabService.saveDataForLMGeneralModify = null;
@@ -95,7 +95,6 @@ export class GeneralListModifyComponent extends AllListsFactory {
       this.insertSelectedColumns();
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
-      this.assignToPageSign();
       this.listManagerService.setDynamicPartRanges(this.dataSource);
       this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     }
@@ -108,7 +107,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
     }
   }
   insertSelectedColumns = () => {
-    this.modifyType = this.listManagerService.getOffloadModifyType();    
+    this.modifyType = this.listManagerService.getOffloadModifyType();
   }
   toPrePage = () => {
     this.router.navigate([EN_Routes.wrmtrackoffloaded]);
@@ -191,7 +190,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   water officer upload carousel images
   */
   assignToPageSign = () => {
-    this.pageSignTrackNumber = this.dataSource[0].trackNumber;
+    this.pageSignTrackNumber = this.allListsService.generalModifyLists_pageSign.trackNumber;
   }
   openMoshtarakinDialog = (dataSource: any) => {
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {

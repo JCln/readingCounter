@@ -368,7 +368,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private markWithoutClusterColorized = (lat: number, lng: number, items) => {
     if (lat === 0)
       return;
-    L.circleMarker([lat, lng], { weight: 5, radius: 4, color: MathS.getRandomColors(1) }).addTo(this.layerGroup)
+    L.marker([lat, lng]).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );
