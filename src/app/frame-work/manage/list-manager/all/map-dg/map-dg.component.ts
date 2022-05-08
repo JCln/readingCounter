@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Imap } from 'interfaces/imap';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
@@ -51,8 +52,9 @@ export class MapDgComponent implements OnInit {
   initMap = () => {
     this.map = L.map('map', {
       center: this.envService.mapCenter,
-      zoom: 15,
-      minZoom: 4,
+      zoom: ENRandomNumbers.fifteen,
+      minZoom: ENRandomNumbers.four,
+      maxZoom: ENRandomNumbers.eighteen,
       layers: [this.mapService.initMapColor(), this.layerGroup]
     });
 

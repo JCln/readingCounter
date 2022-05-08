@@ -275,10 +275,14 @@ export enum ENLocalStorageNames {
 }
 export enum ENRandomNumbers {
     zero = 0,
+    three = 3,
+    four = 4,
     five = 5,
+    eight = 8,
     ten = 10,
     eleven = 11,
     fifteen = 15,
+    eighteen = 18,
     twenty = 20,
     thirdy = 30,
     forthy = 40,

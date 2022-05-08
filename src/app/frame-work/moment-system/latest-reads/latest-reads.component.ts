@@ -72,8 +72,9 @@ export class LatestReadsComponent extends AllListsFactory {
   initMap = () => {
     this.map2 = L.map('map2', {
       center: this.envService.mapCenter,
-      zoom: 8,
-      minZoom: 4,
+      zoom: ENRandomNumbers.eight,
+      minZoom: ENRandomNumbers.four,
+      maxZoom: ENRandomNumbers.eighteen,
       layers: [this.mapService.initMapColor(), this.layerGroup2]
     });
 

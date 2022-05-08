@@ -28,7 +28,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
         catchError((error: HttpErrorResponse) => {
           try {
 
-            if (error.status === ENClientServerErrors.cs400) {
+            if (error.status === ENClientServerErrors.cs400 && !(error.error instanceof Blob)) {
               if (error.error.message) {
                 this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fifteenMili, ENSnackBarColors.danger);
               }

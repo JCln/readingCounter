@@ -89,5 +89,8 @@ export class AuthService {
   goOutInMessage = () => {
     this.utilsService.snackBarMessage(EN_messages.accedd_denied_relogin, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
   }
+  snackMessage = (message: EN_messages) => {
+    this.utilsService.snackBarMessage(message, ENSnackBarTimes.twentyMili, ENSnackBarColors.danger)
+  }
 
 }

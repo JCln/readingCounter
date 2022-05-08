@@ -119,8 +119,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.map = L.map('map', {
       center: this.envService.mapCenter,
-      zoom: 15,
-      minZoom: 4,
+      zoom: ENRandomNumbers.fifteen,
+      minZoom: ENRandomNumbers.four,
+      maxZoom: ENRandomNumbers.eighteen,
       layers: [this.mapService.initMapColor(), this.layerGroup]
     });
 
