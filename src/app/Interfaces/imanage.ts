@@ -126,7 +126,8 @@ export interface IOnOffLoadFlat {
     masrafStateId: number,
     description: string,
     isSelected?: boolean,
-    zoneTitle?: string
+    zoneTitle?: string,
+    modifyType?:any//for general list modify
 }
 export interface IOutputManager {
     zoneId: number,

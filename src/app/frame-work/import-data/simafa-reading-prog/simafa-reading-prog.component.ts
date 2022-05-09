@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IImportSimafaReadingProgramsReq, IReadingProgramRes } from 'interfaces/import-data';
+import { IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IFragmentDetailsByEshterakReq } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
@@ -16,11 +16,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./simafa-reading-prog.component.scss']
 })
 export class SimafaReadingProgComponent extends FactoryONE {
-  importSimafaReadingProgram: IImportSimafaReadingProgramsReq = {
-    zoneId: 0,
-    readingPeriodId: 0,
-    year: 1401
-  }
   _fragmentDetailsEshterak: IFragmentDetailsByEshterakReq = {
     fromEshterak: null,
     toEshterak: null,
@@ -30,14 +25,13 @@ export class SimafaReadingProgComponent extends FactoryONE {
   _empty_message: string = '';
   kindId: number = 0;
   _years: ITitleValue[] = [];
-  _selectedKindId: string = '';
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   dataSource: IReadingProgramRes[] = [];
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private importDynamicService: ImportDynamicService,
     public route: ActivatedRoute
   ) {
@@ -45,10 +39,10 @@ export class SimafaReadingProgComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    if (!this.importDynamicService.checkSimafaVertification(this.importSimafaReadingProgram))
+    if (!this.importDynamicService.checkSimafaVertification(this.closeTabService.importSimafaReadingProgramReq))
       return;
     // Save and send data to service
-    this.dataSource = await this.importDynamicService.postImportSimafaRDPG(ENInterfaces.postSimafaReadingProgram, this.importSimafaReadingProgram);
+    this.dataSource = await this.importDynamicService.postImportSimafaRDPG(ENInterfaces.postSimafaReadingProgram, this.closeTabService.importSimafaReadingProgramReq);
     this.closeTabService.saveDataForSimafaReadingPrograms = this.dataSource;
 
     if (!this.dataSource) {
@@ -58,16 +52,17 @@ export class SimafaReadingProgComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriodDictionary(this.closeTabService.importSimafaReadingProgramReq.kindId);
   }
   nullSavedSource = () => this.closeTabService.saveDataForSimafaReadingPrograms = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.importSimafaReadingProgram = this.importDynamicService.columnGetSimafaRDPG();
+    this.closeTabService.importSimafaReadingProgramReq = this.importDynamicService.columnGetSimafaRDPG();
     if (this.closeTabService.saveDataForSimafaReadingPrograms) {
       this.dataSource = this.closeTabService.saveDataForSimafaReadingPrograms;
+      this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriodDictionary(this.closeTabService.importSimafaReadingProgramReq.kindId);
     }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();

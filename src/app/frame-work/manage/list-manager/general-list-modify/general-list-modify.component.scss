@@ -16,6 +16,7 @@
 .radios {
   background: var(--white);
   border-radius: $border_15 $border_15 0 0;
+  padding: 0 0.2rem;
 
   .radio_group {
     justify-content: flex-start;

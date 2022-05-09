@@ -27,7 +27,7 @@ export class ProComponent extends AllListsFactory {
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
-  
+
   readingPeriodDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   counterStateByZoneIdDictionary: IDictionaryManager[] = [];
@@ -76,7 +76,7 @@ export class ProComponent extends AllListsFactory {
     this.zoneDictionary = await this.searchService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
     this.masrafState = this.searchService.getMasrafStates();
-    this.searchService.receiveYear();
+    this._years = this.searchService.receiveYear();
     this.getMasterInZone();
   }
   callApi = async () => {

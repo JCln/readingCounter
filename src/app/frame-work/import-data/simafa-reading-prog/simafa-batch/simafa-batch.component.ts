@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IBatchImportDataResponse, IImportSimafaBatchReq } from 'interfaces/import-data';
+import { IReadingConfigDefault } from 'interfaces/iimports';
+import { IBatchImportDataResponse } from 'interfaces/import-data';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { IFragmentDetails, IFragmentDetailsByEshterakReq } from 'interfaces/ireads-manager';
+import { IFragmentDetails } from 'interfaces/ireads-manager';
+import { AllImportsService } from 'services/all-imports.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -14,30 +15,12 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./simafa-batch.component.scss']
 })
 export class SimafaBatchComponent extends FactoryONE {
-  _fragmentDetailsEshterak: IFragmentDetailsByEshterakReq = {
-    fromEshterak: null,
-    toEshterak: null,
-    zoneId: null
-  };
-  simafaBatchReq: IImportSimafaBatchReq = {
-    routeAndReaderIds: [{ routeId: null, counterReaderId: null }],
-    fragmentMasterId: '',
-    zoneId: 0,
-    alalHesabPercent: 5,
-    imagePercent: 5,
-    hasPreNumber: false,
-    displayBillId: false,
-    displayRadif: false,
-    readingPeriodId: null,
-    year: 1401,
-    readingProgramId: ''
-  }
-
 
   userCounterReaderDictionary: IDictionaryManager[] = [];
   dataSource: IFragmentDetails[] = [];
   _batchResponse: IBatchImportDataResponse[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  readingConfigDefault: IReadingConfigDefault;
   _selectCols: any = [];
   _selectedColumns: any[];
   _successImportBatchMessage: string = '';
@@ -45,22 +28,11 @@ export class SimafaBatchComponent extends FactoryONE {
 
   constructor(
     public importDynamicService: ImportDynamicService,
-    private route: ActivatedRoute
+    public allImportsService: AllImportsService
   ) {
     super();
-    this.getRouteParams();
   }
 
-  getRouteParams = () => {
-    this.simafaBatchReq.readingProgramId = this.route.snapshot.paramMap.get('id');
-    this.simafaBatchReq.readingPeriodId = parseInt(this.route.snapshot.paramMap.get('readingPeriodId'));
-    this.simafaBatchReq.zoneId = parseInt(this.route.snapshot.paramMap.get('zoneId'));
-    this.simafaBatchReq.year = parseInt(this.route.snapshot.paramMap.get('year'));
-
-    this._fragmentDetailsEshterak.fromEshterak = this.route.snapshot.paramMap.get('fromEshterak');
-    this._fragmentDetailsEshterak.toEshterak = this.route.snapshot.paramMap.get('toEshterak');
-    this._fragmentDetailsEshterak.zoneId = parseInt(this.route.snapshot.paramMap.get('zoneId'));
-  }
   changeStatusAfterSuccess = () => {
     this._successImportBatchMessage = EN_messages.import_simafaBatch;
     this._canShowImportBatchButton = false;
@@ -70,28 +42,41 @@ export class SimafaBatchComponent extends FactoryONE {
       this.importDynamicService.noRouteToImportMessage();
       return;
     }
-    const validation = this.importDynamicService.verificationSimafaBatch(this.simafaBatchReq);
-    if (!validation)
-      return;
-    this._batchResponse = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.simafaBatchReq);
-    this.insertColumnsToTableAfterSuccess();
-    this.assignBatchResToDataSource();
-    this.insertSelectedColumns();
-    this.changeStatusAfterSuccess();
-    scrollTo(0, 0);
+    const validation = this.importDynamicService.verificationSimafaBatch(this.allImportsService.allImports_batch);
+    if (validation) {
+      this._batchResponse = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.allImportsService.allImports_batch);
+      this.insertColumnsToTableAfterSuccess();
+      this.assignBatchResToDataSource();
+      this.insertSelectedColumns();
+      this.changeStatusAfterSuccess();
+      scrollTo(0, 0);
+    }
+  }
+  assingIdToRouteId = () => {
+    this.dataSource.forEach((item, index) => {
+      this.allImportsService.allImports_batch.routeAndReaderIds[index].routeId = item.id;
+    })
   }
   classWrapper = async (canRefresh?: boolean) => {
-    this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(this._fragmentDetailsEshterak);
-    if (!this.dataSource) return;
+    this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(
+      {
+        fromEshterak: this.allImportsService.allImports_batch.fromEshterak,
+        toEshterak: this.allImportsService.allImports_batch.toEshterak,
+        zoneId: this.allImportsService.allImports_batch.zoneId
+      }
+    );
+    if (this.dataSource) {
+      for (let index = 1; index < this.dataSource.length && this.allImportsService.allImports_batch.routeAndReaderIds.length < this.dataSource.length; index++) {
+        this.allImportsService.allImports_batch.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
+      }
+      this.allImportsService.allImports_batch.fragmentMasterId = this.dataSource[0].fragmentMasterId;
+      this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.allImportsService.allImports_batch.zoneId);
+      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.allImportsService.allImports_batch.zoneId);
 
-    for (let index = 1; index < this.dataSource.length; index++) {
-      this.simafaBatchReq.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
+      this.assingIdToRouteId();
+      this.insertReadingConfigDefaults(this.readingConfigDefault);
+      this.insertSelectedColumns();
     }
-    this.simafaBatchReq.fragmentMasterId = this.dataSource[0].fragmentMasterId;
-    this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.simafaBatchReq.zoneId);
-
-    this.insertSelectedColumns();
-    this.assingIdToRouteId();
   }
   ngOnInit() {
     this.columnsToDefault();
@@ -108,13 +93,8 @@ export class SimafaBatchComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  assingIdToRouteId = () => {
-    this.dataSource.forEach((item, index) => {
-      this.simafaBatchReq.routeAndReaderIds[index].routeId = item.id;
-    })
-  }
   assignBatchResToDataSource = () => {
-    this.simafaBatchReq.routeAndReaderIds.forEach((simafaBatchItem, index) => {
+    this.allImportsService.allImports_batch.routeAndReaderIds.forEach((simafaBatchItem, index) => {
       this._batchResponse.forEach(batchRes => {
 
         if (batchRes.fragmentDetailId === simafaBatchItem.routeId) {
@@ -132,5 +112,12 @@ export class SimafaBatchComponent extends FactoryONE {
   }
   columnsToDefault = () => {
     this.importDynamicService.columnRemoveSimafaBatch();
+  }
+  private insertReadingConfigDefaults = (rcd: any) => {
+    this.allImportsService.allImports_batch.hasPreNumber = rcd.hasPreNumber;
+    this.allImportsService.allImports_batch.displayBillId = rcd.displayBillId;
+    this.allImportsService.allImports_batch.displayRadif = rcd.displayRadif;
+    this.allImportsService.allImports_batch.imagePercent = rcd.defaultImagePercent;
+    this.allImportsService.allImports_batch.alalHesabPercent = rcd.defaultAlalHesab;
   }
 }

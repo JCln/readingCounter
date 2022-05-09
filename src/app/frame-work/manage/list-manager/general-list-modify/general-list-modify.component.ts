@@ -62,7 +62,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   updateOnChangedCounterState = async (val: any) => {
     this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val.value);
     this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
-    this.closeTabService.saveDataForLMGeneralModify = this.dataSource;    
+    this.closeTabService.saveDataForLMGeneralModify = this.dataSource;
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
@@ -150,11 +150,16 @@ export class GeneralListModifyComponent extends AllListsFactory {
       this.offloadModifyReq.modifyType = this.convertTitleToIdByModifyType(dataSource.modifyType).id;
     }
   }
-  async onRowEditSave(dataSource: any) {
+  async onRowEditSave(dataSource: IOnOffLoadFlat) {
     // TODO editSingleLine
     this.offloadModifyReq = JSON.parse(JSON.stringify(this.offloadModifyReq));
     dataSource = dataSource['dataSource'];
-    if (dataSource.modifyType !== null) {
+    if (dataSource.modifyType === null || dataSource.modifyType === undefined) {
+      this.listManagerService.showSnackWarn(EN_messages.insert_modify_type);
+      this.toMakeObjectClean(dataSource);
+      this.onRowEditCancel(dataSource);
+    }
+    else {
       this.offloadModifyReq.id = dataSource.id;
       this.offloadModifyReq.counterNumber = dataSource.counterNumber;
       this.offloadModifyReq.description = dataSource.description;
@@ -175,11 +180,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
           this.onRowEditCancel(dataSource);
         }
       }
-    }
-    else {
-      this.toMakeObjectClean(dataSource);
-      this.onRowEditCancel(dataSource);
-      this.listManagerService.showSnackWarn(EN_messages.insert_modify_type);
+
     }
   }
   receiveTableDate = (event: any) => {

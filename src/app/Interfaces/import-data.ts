@@ -45,7 +45,12 @@ export interface IImportSimafaBatchReq {
     displayBillId: boolean,
     displayRadif: boolean,
     year: number,
-    readingPeriodId: number
+    readingPeriodId?: number,
+    canContinue?: boolean,
+    fromEshterak?: string,
+    id?: string,
+    listNumber?: string,
+    toEshterak?: string,
 }
 export interface IImportSimafaSingleReq {
     counterReaderId: string,
@@ -62,7 +67,8 @@ export interface IImportSimafaSingleReq {
 export interface IImportSimafaReadingProgramsReq {
     readingPeriodId: number,
     year: number,
-    zoneId: number
+    zoneId: number,
+    kindId?: string
 }
 export interface IImportErrors {
     eshterak: string,

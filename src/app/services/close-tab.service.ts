@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
+import { IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import { ISearchProReportInput } from 'interfaces/search';
 
@@ -65,6 +66,12 @@ export class CloseTabService {
   saveDataForImportDynamic: any;
   saveDataForImportErrors: any;
   saveDataForSimafaBatch: any;
+  importSimafaReadingProgramReq: IImportSimafaReadingProgramsReq = {
+    zoneId: 0,
+    readingPeriodId: 0,
+    year: 1401,
+    kindId: null
+  }
   saveDataForSimafaReadingPrograms: any;
   saveDataForAssessPreReq: IAssessPreDisplayDtoSimafa = {
     reportIds: [],
@@ -175,8 +182,8 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: EN_Routes.wrimperr },
     { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
-    { id: 1, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg },
-    { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafabatch },
+    { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafardpgbatch },
+    { id: 1, req: ENEssentialsToSave.importSimafaReadingProgramReq, value: ENEssentialsToSave.saveDataForSimafaReadingPrograms, url: EN_Routes.wrimpsimafardpg },
     { id: 1, value: ENEssentialsToSave.saveDataForPolicies, url: EN_Routes.wrpolicies },
     { id: 1, value: ENEssentialsToSave.saveDataForProfile, url: EN_Routes.wrprofile },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackImported, url: EN_Routes.wrmtrackimported },

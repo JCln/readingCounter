@@ -74,6 +74,7 @@ export enum ENEssentialsToSave {
     saveDataForAssessPreReq = 'saveDataForAssessPre',
     saveDataForAssessAdd = 'saveDataForAssessAdd',
     saveDataForSimafaReadingPrograms = 'saveDataForSimafaReadingPrograms',
+    importSimafaReadingProgramReq = 'importSimafaReadingProgramReq',
     saveDataForSimafaBatch = 'saveDataForSimafaBatch',
     saveDataForPolicies = 'saveDataForPolicies',
     saveDataForProfile = 'saveDataForProfile',

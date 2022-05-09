@@ -23,6 +23,7 @@ import { MathS } from '../classes/math-s';
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { Converter } from './../classes/converter';
+import { AllImportsService } from './all-imports.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -76,6 +77,7 @@ export class ImportDynamicService {
 
   constructor(
     private utilsService: UtilsService,
+    private allImportsService: AllImportsService,
     private dialog: MatDialog,
     private router: Router,
     private interfaceManagerService: InterfaceManagerService,
@@ -156,7 +158,15 @@ export class ImportDynamicService {
     this.router.navigate([EN_Routes.wrimpsimafardpgsingle, object]);
   }
   routeToSimafaBatch = (object: IReadingProgramRes) => {
-    this.router.navigate([EN_Routes.wrimpsimafardpgbatch, object]);
+    this.allImportsService.allImports_batch.readingProgramId = object.id;
+    this.allImportsService.allImports_batch.zoneId = object.zoneId;
+    this.allImportsService.allImports_batch.fromEshterak = object.fromEshterak;
+    this.allImportsService.allImports_batch.toEshterak = object.toEshterak;
+    this.allImportsService.allImports_batch.listNumber = object.listNumber;
+    this.allImportsService.allImports_batch.year = object.year;
+    this.allImportsService.allImports_batch.readingPeriodId = object.readingPeriodId;
+    this.allImportsService.allImports_batch.canContinue = object.canContinue;
+    this.router.navigate([EN_Routes.wrimpsimafardpgbatch]);
   }
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     return this.validationNull(searchReq);
@@ -263,6 +273,7 @@ export class ImportDynamicService {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
+
     if (MathS.isNull(val.readingProgramId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
@@ -271,7 +282,6 @@ export class ImportDynamicService {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
     }
-
     if (MathS.isNaN(val.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
@@ -282,6 +292,22 @@ export class ImportDynamicService {
     }
     if (MathS.isNaN(val.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
+    }   
+    if (MathS.isNaN(val.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_alalhesab);
+      return false;
+    }
+    if (MathS.isNaN(val.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_imagePercent);
+      return false;
+    }
+    if (!MathS.persentCheck(val.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_alalhesab);
+      return false;
+    }
+    if (!MathS.persentCheck(val.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_pictures);
       return false;
     }
 
