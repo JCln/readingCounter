@@ -8,7 +8,12 @@ export const infoVersionItems: IDictionaryManager[] = [
     },
     {
         id: '2',
-        title: 'سامانه لحظه',
+        title: 'بهبود عملکرد برنامه',
+        isSelected: true
+    },
+    {
+        id: '2',
+        title: 'قطر کنتور',
         isSelected: true
     },
 ]
