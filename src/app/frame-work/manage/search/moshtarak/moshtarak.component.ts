@@ -42,11 +42,13 @@ export class MoshtarakComponent extends AllListsFactory {
 
   converts = async () => {
     if (this.searchService.searchReqMosh.zoneId) {
-      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.searchService.searchReqMosh.zoneId);
-      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeShowAllDictionary(this.searchService.searchReqMosh.zoneId);
+      this.counterStateDictionary = await this.searchService.getCounterStateByZoneShowAllDictionary(this.searchService.searchReqMosh.zoneId);
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     }
-    this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
+    else {
+      this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
+    }
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
@@ -56,8 +58,6 @@ export class MoshtarakComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.searchService.setDynamicPartRanges(this.dataSource);
   }

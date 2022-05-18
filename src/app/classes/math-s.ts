@@ -28,12 +28,12 @@ export class MathS {
     static persentCheck = (val: number): boolean => {
         if (val === undefined || val === null)
             return false;
-        if (val < 0 || val > 100)
+        if (val < ENRandomNumbers.zero || val > ENRandomNumbers.oneHundred)
             return false;
         return true;
     }
     static getRange = (val: any): string => {
-        return val.toString().substring(0, 5);
+        return val.toString().substring(ENRandomNumbers.zero, ENRandomNumbers.five);
     }
     static isExactEqual = (first: string, second: any): boolean => {
         if (first.trim() === second.trim())

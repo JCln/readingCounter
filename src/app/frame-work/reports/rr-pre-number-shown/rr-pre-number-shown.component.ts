@@ -81,7 +81,6 @@ export class RrPreNumberShownComponent extends AllListsFactory {
       this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
       this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
     }
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
@@ -99,7 +98,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.readingReportManagerService.preNumberShownReq);
     this.converts();
     this.closeTabService.saveDataForRRPreNumShown = this.dataSource;
-  } 
+  }
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {
       let value1 = data1[event.field];

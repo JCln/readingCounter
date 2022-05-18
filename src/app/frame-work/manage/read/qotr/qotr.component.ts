@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
-import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ReadManagerService } from 'services/read-manager.service';
+import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+
 
 @Component({
   selector: 'app-qotr',
@@ -13,63 +13,33 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./qotr.component.scss']
 })
 export class QotrComponent extends FactoryONE {
-  idFilter = new FormControl('');
-  titleFilter = new FormControl('');
-  provinceIdFilter = new FormControl('');
-  provinceFilter = new FormControl('');
 
-  countryDictionary: IDictionaryManager[] = [];
-
-  columnsToDisplay = ['title', 'provinceId', 'province', 'actions'];
-  filterValues = {
-    id: '',
-    title: '',
-    provinceId: '',
-    province: ''
-  };
+  dataSource: any[] = [];
+  provinceDictionary: IDictionaryManager[] = [];
 
   constructor(
-    private interfaceManagerService: InterfaceManagerService,
     private closeTabService: CloseTabService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    public readManagerService: ReadManagerService
   ) {
     super();
   }
 
-  convertIdToTitle = (dataSource: any[], zoneDictionary: IDictionaryManager[]) => {
-    zoneDictionary.map(zoneDic => {
-      dataSource.map(dataSource => {
-        if (zoneDic.id === dataSource.provinceId)
-          dataSource.provinceId = zoneDic.title;
-      })
-    });
-  }
-  getProvinceDictionary = (): any => {
-    return this.dictionaryWrapperService.getProvinceDictionary();
-  }
-  getDataSource = (): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.QotrAll).subscribe(res => {
-        resolve(res);
-      })
-    })
-  }
   nullSavedSource = () => this.closeTabService.saveDataForQotrManager = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
     if (this.closeTabService.saveDataForQotrManager) {
+      this.dataSource = this.closeTabService.saveDataForQotrManager;
     }
-  }
-  createFilter(): (data: any, filter: string) => boolean {
-    let filterFunction = function (data, filter): boolean {
-      let searchTerms = JSON.parse(filter);
-      return data.title.toLowerCase().indexOf(searchTerms.title) !== -1
-        && data.provinceId.toString().toLowerCase().indexOf(searchTerms.provinceId) !== -1
-        && data.province.toLowerCase().indexOf(searchTerms.province) !== -1
+    else {
+      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.QotrAll);
+      this.closeTabService.saveDataForQotrManager = this.dataSource;
     }
-    return filterFunction;
+    this.provinceDictionary = await this.readManagerService.getProvinceDictionary();
+
+    Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
   }
+
 
 }

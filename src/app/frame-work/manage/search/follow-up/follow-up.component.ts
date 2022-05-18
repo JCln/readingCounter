@@ -15,12 +15,9 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./follow-up.component.scss']
 })
 export class FollowUpComponent extends FactoryONE {
-  _isCollapsed: boolean = false;
-  trackNumber: number;
   shouldActive: boolean = false;
   _showDesc: IObjectIteratation[] = [];
   _defColumns: any[];
-  canShowGraph: boolean = false;
   showInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'گراف',
@@ -40,8 +37,7 @@ export class FollowUpComponent extends FactoryONE {
 
   constructor(
     private trackingManagerService: TrackingManagerService,
-    private closeTabService: CloseTabService,
-
+    public closeTabService: CloseTabService,
     private authService: AuthService,
     private followUpService: FollowUpService
   ) {
@@ -58,12 +54,12 @@ export class FollowUpComponent extends FactoryONE {
     this.insertToDesc();
   }
   connectToServer = async () => {
-    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber)) {
-      this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
+    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.closeTabService.saveDataForFollowUpReq.trackNumber)) {
+      this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.closeTabService.saveDataForFollowUpReq.trackNumber);
       if (this.trackingManagerService.isValidationNull(this.dataSource))
         return;
       this.closeTabService.saveDataForFollowUp = this.dataSource;
-      this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber.toString());
+      this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.closeTabService.saveDataForFollowUpReq.trackNumber.toString());
       this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
       this.makeConfigs();
 
@@ -81,7 +77,7 @@ export class FollowUpComponent extends FactoryONE {
      * then data were saved     
      */
     if (this.followUpService.hasTrackNumber()) {
-      this.trackNumber = this.followUpService.getTrackNumber();
+      this.closeTabService.saveDataForFollowUpReq.trackNumber = this.followUpService.getTrackNumber();
       this.connectToServer();
       this.followUpService.setTrackNumber(null);
       return;

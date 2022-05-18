@@ -5,11 +5,8 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
-import { InteractionService } from 'services/interaction.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
-import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 
@@ -25,17 +22,12 @@ export class ReadingComponent extends FactoryONE {
   constructor(
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    private utilsService: UtilsService,
     private dialog: MatDialog,
-    public interactionService: InteractionService,
     public browserStorageService: BrowserStorageService
   ) {
     super();
   }
 
-  routeToLMPayDay = (row: ITracking) => {
-    this.utilsService.routeToByParams(EN_Routes.wrmlpd, row.trackNumber);
-  }
   private rowToImported = async (row: string, desc: string, rowIndex: number) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row, desc);
   }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IForbiddenManager, IMostReportInput } from 'interfaces/imanage';
-import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables, IGetYears, ITitleValue } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
@@ -71,7 +71,7 @@ export class ForbiddenService {
     this[variable].toDate = $event;
   }
   getYears = (): ITitleValue[] => {
-    return this.utilsService.getYears();
+    return IGetYears();
   }
   routeToWOUI = (UUID: string, isForbidden: boolean) => {
     this.router.navigate([EN_Routes.wrmtrackwoui, isForbidden, UUID]);
@@ -112,26 +112,6 @@ export class ForbiddenService {
     dataSource.forEach(item => {
       if (item.gisAccuracy)
         item.gisAccuracy = MathS.getRange(item.gisAccuracy)
-    })
-  }
-  customizeSelectedColumns = (_selectCols: any) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
     })
   }
   showInMapSingle = (dataSource: any) => {

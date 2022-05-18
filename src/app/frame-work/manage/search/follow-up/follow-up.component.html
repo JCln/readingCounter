@@ -1,9 +1,11 @@
-<app-collapsable [_isCollapsed]=_isCollapsed (_clicked)=" _isCollapsed = !_isCollapsed">
+<app-collapsable [_isCollapsed]=closeTabService.saveDataForFollowUpReq._isCollapsed
+    (_clicked)=" closeTabService.saveDataForFollowUpReq._isCollapsed = !closeTabService.saveDataForFollowUpReq._isCollapsed">
 </app-collapsable>
-<form #form="ngForm" *ngIf="!_isCollapsed" class="insert_track">
+<form #form="ngForm" *ngIf="!closeTabService.saveDataForFollowUpReq._isCollapsed" class="insert_track">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
-        <input class="_value" type="number" name="trackNumber" [(ngModel)]="trackNumber" autofocus>
+        <input class="_value" type="number" name="trackNumber"
+            [(ngModel)]="closeTabService.saveDataForFollowUpReq.trackNumber" autofocus>
     </div>
     <button type="submit" class="btn_1" (click)="connectToServer()">مشاهده</button>
 </form>
@@ -34,15 +36,17 @@
 
 <section *ngIf="dataSource" class="order_by">
     <h2 class="title">نمایش :</h2>
-    <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="canShowGraph" name="_isOrderByDate">
+    <mat-radio-group class="radio_group" aria-labelledby="radio_group"
+        [(ngModel)]="closeTabService.saveDataForFollowUpReq.canShowGraph" name="_isOrderByDate">
         <mat-radio-button class="radio_button" *ngFor="let orderType of showInOrderTo" [value]="orderType.isSelected">
             {{orderType.title}}
         </mat-radio-button>
     </mat-radio-group>
 </section>
 
-<p-table *ngIf="!canShowGraph && dataSource" sortField="insertDateJalali" [columns]="_defColumns" [value]="changeHsty"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" editMode="row" dataKey="id">
+<p-table *ngIf="!closeTabService.saveDataForFollowUpReq.canShowGraph && dataSource" sortField="insertDateJalali"
+    [columns]="_defColumns" [value]="changeHsty" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
+    editMode="row" dataKey="id">
 
     <ng-template pTemplate="caption">
         <th>
@@ -125,4 +129,4 @@
     </ng-template>
 </p-table>
 <!-- could implement by lazy load route -->
-<app-time-line *ngIf="canShowGraph" [dataSource]="dataSource"></app-time-line>
+<app-time-line *ngIf="closeTabService.saveDataForFollowUpReq.canShowGraph" [dataSource]="dataSource"></app-time-line>

@@ -358,6 +358,9 @@ export class TrackingManagerService {
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
+  routeToLMPayDay = (row: ITracking) => {
+    this.utilsService.routeToByParams(EN_Routes.wrmlpd, row.trackNumber);
+  }
   routeToLMAll = (row: any) => {
     this.allListsService.allLists_pageSign.GUid = row.id;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;

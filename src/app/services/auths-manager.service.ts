@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
 import { SectionsService } from 'services/sections.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
@@ -115,32 +115,12 @@ export class AuthsManagerService {
       })
     });
   }
-  customizeSelectedColumns = (_selectCols: any[]) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
   /* VERIFICATION & VALIDATION */
   verification = (dataSource: any): boolean => {
     this.sectionsService.setSectionsValue(dataSource);
     if (!this.sectionsService.sectionVertification())
       return false;
     return true;
-  }
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
   }
 
 }

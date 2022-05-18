@@ -6,6 +6,7 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
   ENSelectedColumnVariables,
+  IGetYears,
   IMasrafStates,
   IObjectIteratation,
   ISearchInOrderTo,
@@ -99,6 +100,12 @@ export class SearchService {
   }
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
+  }
+  getCounterStateByCodeShowAllDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(zoneId);
+  }
+  getCounterStateByZoneShowAllDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(zoneId);
   }
   getQotrDictionary = () => {
     return this.dictionaryWrapperService.getQotrDictionary();
@@ -294,7 +301,7 @@ export class SearchService {
     })
   }
   getYears = (): ITitleValue[] => {
-    return this.utilsService.getYears();
+    return IGetYears();
   }
   getMasrafStates = () => {
     return IMasrafStates;
@@ -308,7 +315,7 @@ export class SearchService {
     })
   }
   receiveYear = (): ITitleValue[] => {
-    return this.utilsService.getYears();
+    return IGetYears();
   }
   receiveFromDateJalali = (variable: ENSearchs, $event: string) => {
     this[variable].fromDate = $event;

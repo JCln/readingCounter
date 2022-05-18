@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 @Injectable({
@@ -14,26 +14,6 @@ export class UtilsService {
     private route: ActivatedRoute,
     private snackWrapperService: SnackWrapperService
   ) { }
-
-  getYears = (): ITitleValue[] => {
-    return [
-      { title: '1401', value: 1401 },
-      { title: '1400', value: 1400 },
-      { title: '1399', value: 1399 },
-      { title: '1398', value: 1398 },
-      { title: '1397', value: 1397 },
-      { title: '1396', value: 1396 },
-      { title: '1395', value: 1395 },
-      { title: '1402', value: 1402 }
-    ];
-  }
-  getQuantity = (): ITitleValue[] => {
-    return [
-      { title: '10', value: 10 },
-      { title: '20', value: 20 },
-      { title: '30', value: 30 }
-    ];
-  }
 
   // snack bar
   snackBarMessageSuccess = (message: string) => {

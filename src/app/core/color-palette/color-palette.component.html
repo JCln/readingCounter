@@ -1,0 +1,10 @@
+<section class="info">
+    <i (click)="_showColorPalete = !_showColorPalete" class="pi pi-palette _color_palete">
+        <div class="test">
+            <div *ngFor="let item of themeService.getColors()" (click)="changeColor(item.color)"
+                class="_info_each_item" [ngStyle]="{'background-color':item.colorName}"
+                [@openClose]="_showColorPalete ? 'openSubItems' : 'closeSubItems'">
+            </div>
+        </div>
+    </i>
+</section>

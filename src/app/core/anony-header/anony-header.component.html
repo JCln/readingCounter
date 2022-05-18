@@ -3,14 +3,7 @@
         <img src="assets/imgs/header/logo.jpg" alt="">
     </div>
     <li class="_theme_mode">
-        <section class="info">
-            <i (click)="_showColorPalete = !_showColorPalete" class="pi pi-palette _color_palete">
-                <div *ngFor="let item of themeService.getColors()" (click)="changeColor(item.color)" class="_info_each_item"
-                    [ngStyle]="{'background-color':item.colorName}"
-                    [@openClose]="_showColorPalete ? 'openSubItems' : 'closeSubItems'">
-                </div>
-            </i>
-        </section>
+        <app-color-palette></app-color-palette>
     </li>
     <ul>
         <li class="_title">

@@ -85,6 +85,7 @@ export enum ENEssentialsToSave {
     saveDataForTrackOffloaded = 'saveDataForTrackOffloaded',
     saveDataForTrackFinished = 'saveDataForTrackFinished',
     saveDataForFollowUp = 'saveDataForFollowUp',
+    saveDataForFollowUpReq = 'saveDataForFollowUpReq',
     saveDataForFollowUpAUX = 'saveDataForFollowUpAUX',
     rSearchMoshtarakinReq = 'rSearchMoshtarakinReq',
     saveDataForSearchMoshtarakin = 'saveDataForSearchMoshtarakin',
@@ -205,6 +206,18 @@ export const TrueFalseFilter: ITrueFalseFilter[] = [
     { name: 'باشد', value: true },
     { name: 'هیچکدام', value: '' }
 ]
+export const IGetYears = (): ITitleValue[] => {
+    return [
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ];
+}
 export enum ENBrowserStatus {
     good = 200,
     warn = 400,
@@ -288,6 +301,7 @@ export enum ENRandomNumbers {
     thirdy = 30,
     forthy = 40,
     fifty = 50,
+    oneHundred = 100,
     twoHundred = 200,
 }
 export enum ENThemeName {
@@ -352,6 +366,7 @@ export enum ENSelectedColumnVariables {
     selectedImageAttribution = 'imgattr',
     selectedTextOutput = 'textOutput',
     selectedKarbari = 'karbari',
+    selectedQotr = 'qotr',
     selectedForbidden = 'forbidden',
     selectedErrors = 'errors',
     selectedServerErrors = 'serverErrors',

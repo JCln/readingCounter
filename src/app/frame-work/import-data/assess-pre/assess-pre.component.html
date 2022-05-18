@@ -41,9 +41,9 @@
                     selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
-            <article *ngIf="counterStateByZoneIdDictionary.length">
+            <article *ngIf="counterStateDictionary.length">
                 <h3 class="title">وضعیت کنتور</h3>
-                <p-multiSelect [options]="counterStateByZoneIdDictionary" name="counterState"
+                <p-multiSelect [options]="counterStateDictionary" name="counterState"
                     [(ngModel)]="closeTabService.saveDataForAssessPreReq.counterStateIds" optionLabel="title"
                     optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
                     placeholder="انتخاب مورد">

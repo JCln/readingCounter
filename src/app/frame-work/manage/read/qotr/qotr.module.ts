@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { QotrRoutingModule } from './qotr-routing.module';
 import { QotrComponent } from './qotr.component';
@@ -8,7 +8,7 @@ import { QotrComponent } from './qotr.component';
 @NgModule({
   declarations: [QotrComponent],
   imports: [
-    SharedModule,
+    SharedPrimeNgModule,
     QotrRoutingModule
   ]
 })

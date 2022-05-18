@@ -23,7 +23,7 @@ export class ListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
 
   pageSignTrackNumber: number = null;
-  zoneDictionary: IDictionaryManager[] = [];
+  // zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
@@ -67,18 +67,18 @@ export class ListModifyComponent extends AllListsFactory {
       }
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
-      this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
+      // this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
       this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-      this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
-
+      
       Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
       const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
       if (tempZone) {
         this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
-        Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
+        this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
         Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+        Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
       }
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');

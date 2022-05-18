@@ -26,6 +26,7 @@ import { SmallSpinnerComponent } from './small-spinner/small-spinner.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
+import { ColorPaletteComponent } from './color-palette/color-palette.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     ClockComponent,
     AnnouceNotifComponent,
     NetConnectionComponent,
-    SmallSpinnerComponent
+    SmallSpinnerComponent,
+    ColorPaletteComponent
   ]
   ,
   imports: [

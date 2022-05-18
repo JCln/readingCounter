@@ -10,23 +10,36 @@
   cursor: pointer;
 }
 
-._color_palete {
-  border-radius: 100vmax;
-  padding: .6rem;
-  font-size: 1.3rem;
-  color: var(--primary_5);
-  background-color: var(--primary_1);
-}
 
 .info {
-  ._info_each_item {
-    overflow: auto;
-    left: 50%;
-    background: var(--white);
-    transform: translate(-50%, -50%);
+
+  ._color_palete {
+    display: flex;
+    position: relative;
+    border-radius: 100vmax;
+    padding: .4rem;
+    font-size: 1.3rem;
+    place-content: center;
+    color: var(--primary_5);
+    background-color: var(--primary_1);
+  }
+
+  .test {
+    display: grid;
+    position: absolute;
+    gap: .25rem;
+    top: 2rem;
+    left: 0;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: var(--primary_1);
     border-radius: $border_15;
-    padding: $font_05 $font_xs;
-    box-shadow: 0 0 1px 3px var(--secondary_4);
+  }
+
+  ._info_each_item {
+    border-radius: 15px;
+    border: 1px solid var(--secondary_4);
+    padding: 0.5rem 1rem;
+    margin: .1rem;
 
     div {
       display: flex;

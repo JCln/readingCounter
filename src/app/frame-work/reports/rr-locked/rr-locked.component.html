@@ -77,7 +77,7 @@
         </form>
     </section>
 
-    <app-prime-table     
+    <app-prime-table [hidden]="showCarousel"
     [dataSource]="dataSource"
     [_outputFileName]="'rrLocked'" 
     [_checkUpName]="'rr-locked'" 
@@ -97,7 +97,7 @@
     >
     </app-prime-table>
     
-    <app-carousel-woum
+    <app-carousel-woum *ngIf="showCarousel"
     [dataSource]="carouselDataSource"
     (cancelClicked)="carouselCancelClicked()"
     (prevClicked)="carouselPrevItem()"

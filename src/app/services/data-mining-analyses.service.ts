@@ -3,7 +3,7 @@ import { ENDataMining } from 'interfaces/data-mining';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IGetYears, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportReq } from 'interfaces/ireports';
 
 import { Converter } from '../classes/converter';
@@ -44,7 +44,7 @@ export class DataMiningAnalysesService {
   }
   /*API CALLS & CALLS*/
   getYears = (): ITitleValue[] => {
-    return this.utilsService.getYears();
+    return IGetYears();
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
@@ -108,19 +108,5 @@ export class DataMiningAnalysesService {
     return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
 
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
-  }
 
 }

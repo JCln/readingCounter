@@ -50,6 +50,14 @@ export class DictionaryWrapperService {
     dictionary: null,
     zoneId: null
   }
+  private counterStateByCodeShowAllDictionary = {
+    dictionary: null,
+    zoneId: null
+  }
+  private counterStateByZoneShowAllDictionary = {
+    dictionary: null,
+    zoneId: null
+  }
   private periodKindDictionary: any = [];
   private qotrDictionary: any = [];
   private roleDictionary: any = [];
@@ -240,6 +248,26 @@ export class DictionaryWrapperService {
       })
     })
   }
+  getCounterStateByCodeShowAllDictionary(zoneId: number): Promise<any> {
+    if (this.counterStateByCodeShowAllDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByCodeShowAllDictionary.dictionary))
+      return this.counterStateByCodeShowAllDictionary.dictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByCode, zoneId + '?showAll=true').subscribe(res => {
+        this.setCounterStateByCodeShowAllDictionary(res, zoneId);
+        resolve(res);
+      })
+    });
+  }
+  getCounterStateByZoneShowAllDictionary(zoneId: number): Promise<any> {
+    if (this.counterStateByZoneShowAllDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByZoneShowAllDictionary.dictionary))
+      return this.counterStateByZoneShowAllDictionary.dictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryByZoneId, zoneId + '?showAll=true').subscribe(res => {
+        this.setCounterStateByZoneShowAllDictionary(res, zoneId);
+        resolve(res);
+      })
+    });
+  }
   getCounterStateByCodeDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByCodeDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByCodeDictionary.dictionary))
       return this.counterStateByCodeDictionary.dictionary;
@@ -370,9 +398,17 @@ export class DictionaryWrapperService {
     this.counterStateByZoneIdDictionary.dictionary = v;
     this.counterStateByZoneIdDictionary.zoneId = id;
   }
+  private setCounterStateByZoneShowAllDictionary(v: any, id: number) {
+    this.counterStateByZoneShowAllDictionary.dictionary = v;
+    this.counterStateByZoneShowAllDictionary.zoneId = id;
+  }
   private setCounterStateByCodeDictionary(v: any, id: number) {
     this.counterStateByCodeDictionary.dictionary = v;
     this.counterStateByCodeDictionary.zoneId = id;
+  }
+  private setCounterStateByCodeShowAllDictionary(v: any, id: number) {
+    this.counterStateByCodeShowAllDictionary.dictionary = v;
+    this.counterStateByCodeShowAllDictionary.zoneId = id;
   }
   private setPeriodKindDictionary(v: any) {
     this.periodKindDictionary = v;

@@ -93,7 +93,11 @@ export class ToolsService {
     this.fileDownloadAllImages.day = event;
   }
   getQuantity = (): ITitleValue[] => {
-    return this.utilsService.getQuantity();
+    return [
+      { title: '10', value: 10 },
+      { title: '20', value: 20 },
+      { title: '30', value: 30 }
+    ];
   }
   postDataSource = (api: ENInterfaces, body: object): Promise<any> => {
     return new Promise((resolve) => {

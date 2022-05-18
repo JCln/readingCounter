@@ -272,7 +272,7 @@ hr {
 
 form {
   font-family: $font_family;
-  margin: $font_3 0;
+  margin: $font_s 0 $font_3;
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_2);
 }

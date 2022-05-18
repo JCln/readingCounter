@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENRandomNumbers, ENSelectedColumnVariables, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables, IGetYears, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -360,7 +360,7 @@ export class ReadingReportManagerService {
     this.utilsService.snackBarMessageSuccess(message);
   }
   getYears = (): ITitleValue[] => {
-    return this.utilsService.getYears();
+    return IGetYears();
   }
   routeTo = (route: string) => {
     this.utilsService.routeTo(route);
