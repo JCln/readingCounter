@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel4 } from 'interfaces/iauth-levels';
@@ -22,8 +22,6 @@ export class Auth4Component extends FactoryONE {
 
   authLevel3Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel4; } = {};
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private dialog: MatDialog,
@@ -62,7 +60,7 @@ export class Auth4Component extends FactoryONE {
     }
     this.authLevel3Dictionary = await this.authsManagerService.getAuthLevel3Dictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');  
+    Converter.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
@@ -94,11 +92,5 @@ export class Auth4Component extends FactoryONE {
   onRowEditCancel() {
     Converter.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

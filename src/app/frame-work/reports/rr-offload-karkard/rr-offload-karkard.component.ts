@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportKarkard } from 'interfaces/ireports';
@@ -29,8 +29,6 @@ export class RrOffloadKarkardComponent extends FactoryONE {
   dataSource: IReadingReportKarkard[] = [];
   karbariDictionary: IDictionaryManager[] = [];
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
@@ -80,13 +78,6 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.setGetRanges();
     this.closeTabService.saveDataForRROffloadedKarkard = this.dataSource;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   refreshTable = () => {
     if (this.validation())

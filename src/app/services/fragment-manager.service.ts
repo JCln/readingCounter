@@ -341,10 +341,6 @@ export class FragmentManagerService {
     })
     return a;
   }
-  setZoneDictionary = (zoneDic: IDictionaryManager[]) => {
-    if (!this.zoneDictionary)
-      this.zoneDictionary = zoneDic;
-  }
   customizeSelectedColumns = (_selectCols: any) => {
     return _selectCols.filter(items => {
       if (items.isSelected)

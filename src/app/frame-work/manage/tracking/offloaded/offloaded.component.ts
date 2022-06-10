@@ -60,8 +60,9 @@ export class OffloadedComponent extends FactoryONE {
     this.trackingManagerService.routeToOffloadGeneralModify(dataSource);
   }
   backToReading = async (rowDataAndIndex: object) => {
-    if (await this.trackingManagerService.TESTbackToConfirmDialog(rowDataAndIndex['dataSource'], EN_messages.toReading)) {
-      this.refetchTable(rowDataAndIndex['ri']);
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.toReading, true, false);
+    if (desc) {
+      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToREADING, rowDataAndIndex['dataSource'], desc);
       this.refreshTable();
     }
   }

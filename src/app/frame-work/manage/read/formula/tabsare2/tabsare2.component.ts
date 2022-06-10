@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -18,9 +18,6 @@ import { Tabsare2AddDgComponent } from './tabsare2-add-dg/tabsare2-add-dg.compon
 export class Tabsare2Component extends FactoryONE {
   dataSource: ITabsare2Formula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
   clonedProducts: { [s: string]: ITabsare2Formula; } = {};
 
   constructor(
@@ -98,12 +95,5 @@ export class Tabsare2Component extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel() { }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
 
 }

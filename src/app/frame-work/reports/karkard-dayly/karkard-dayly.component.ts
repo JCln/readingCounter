@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportKarkard } from 'interfaces/ireports';
@@ -34,9 +34,6 @@ export class KarkardDaylyComponent extends FactoryONE {
   readingPeriodDictionary: IDictionaryManager[] = [];
 
   dataSource: IReadingReportKarkard[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -76,13 +73,6 @@ export class KarkardDaylyComponent extends FactoryONE {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.readingReportManagerService.karkardDailyReq);
     this.setGetRanges();
     this.closeTabService.saveDataForRRkarkardDaily = this.dataSource;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   private setGetRanges = () => {
     this.dataSource.forEach(item => {

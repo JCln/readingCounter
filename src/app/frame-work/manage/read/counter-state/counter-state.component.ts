@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ICounterState, ICounterStateGridFriendlyResp } from 'interfaces/ireads-manager';
-import { LazyLoadEvent } from 'primeng/api';
 import { CloseTabService } from 'services/close-tab.service';
 import { CounterStateService } from 'services/counter-state.service';
 import { ReadManagerService } from 'services/read-manager.service';
@@ -22,11 +21,9 @@ export class CounterStateComponent extends FactoryONE {
   dataSource: ICounterState[] = [];
   clonedProducts: { [s: string]: ICounterState; } = {};
   newRowLimit: number = 1;
-
+  innerLoading: boolean = false;
   _selectCols: any[];
   _selectedColumns: any[];
-
-  innerLoading: boolean = false;
 
   constructor(
     private closeTabService: CloseTabService,
@@ -36,13 +33,9 @@ export class CounterStateComponent extends FactoryONE {
     super();
   }
 
-  columnSelectedMenuDefault = () => {
-    this._selectCols = this.counterStateService.columnSelectedMenuDefault();
-    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
-  }
-  sendGridFriendlyDataSource = (event: LazyLoadEvent): any => {
-    this.dataSource = this.counterStateService.getGridFriendlyDataSource(event);
-  }
+  // sendGridFriendlyDataSource = (event: LazyLoadEvent): any => {
+  //   this.dataSource = this.counterStateService.getGridFriendlyDataSource(event);
+  // }
   nullSavedSource = () => this.closeTabService.saveDataForCounterState = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -58,6 +51,10 @@ export class CounterStateComponent extends FactoryONE {
     this.zoneDictionary = await this.counterStateService.getZoneDictionary();
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
+  columnSelectedMenuDefault = () => {
+    this._selectCols = this.counterStateService.columnSelectedMenuDefault();
+    this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
+  }
   ngOnInit(): void {
     this.classWrapper();
     this.columnSelectedMenuDefault();
@@ -68,6 +65,7 @@ export class CounterStateComponent extends FactoryONE {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: object) => {

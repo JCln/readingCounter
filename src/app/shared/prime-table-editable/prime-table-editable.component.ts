@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -14,16 +15,16 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
 })
 export class PrimeTableEditableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  
-  
+
+
   @Input() _sortBy: string;
   @Input() _sortOrder: string = '';
   @Input() _isInRowEditing: boolean = false;
   @Input() _dictionaryName: string = '';
-  @Input() _secondDictionaryName: string = '';  
+  @Input() _secondDictionaryName: string = '';
   @Input() newRow: object;
   @Input() dictionary = new EventEmitter<any>();
-  @Input() newRowLimit: number;  
+  @Input() newRowLimit: number;
   @Input() secondDictionary = new EventEmitter<any>();
 
   @Output() backedToPrevious = new EventEmitter<any>();
@@ -52,12 +53,14 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
     public columnManager: ColumnManager,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public config: PrimeNGConfig
   ) {
     super(
       browserStorageService,
       utilsService,
-      columnManager
+      columnManager,
+      config
     );
   }
 

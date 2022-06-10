@@ -4,4 +4,8 @@
 .btn_2_o {
   width: 100%;
   height: inherit;
+
+  @media (max-width: 780px) {
+    font-size: $font_xs;
+  }
 }

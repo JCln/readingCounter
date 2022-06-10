@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
@@ -7,8 +6,6 @@ import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-
-import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 
 @Component({
   selector: 'app-reading',
@@ -22,7 +19,6 @@ export class ReadingComponent extends FactoryONE {
   constructor(
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    private dialog: MatDialog,
     public browserStorageService: BrowserStorageService
   ) {
     super();
@@ -45,41 +41,18 @@ export class ReadingComponent extends FactoryONE {
     }
   }
   // refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
-    const title = EN_messages.reson_delete_backtoImported;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: true
-        }
-      })
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.rowToImported(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
-        }
-      })
-    })
+  backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reson_delete_backtoImported, true, false);
+    if (desc) {
+      this.rowToImported(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
+    }
   }
-  forceOffload = (rowDataAndIndex: object) => {
-    const title = EN_messages.reason_forceOffload;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: true,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(async desc => {
-        if (desc) {
-          await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex['dataSource'], desc);
-          this.refreshTable();
-        }
-      })
-    })
+  forceOffload = async (rowDataAndIndex: object) => {
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_forceOffload, true, true);
+    if (desc) {
+      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingFinishReadiED, rowDataAndIndex['dataSource'], desc);
+      this.refreshTable();
+    }
   }
 
 }

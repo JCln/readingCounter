@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -21,9 +21,6 @@ export class Tabsare3Component extends FactoryONE {
   dataSource: IAbBahaFormula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariCodeDictionary: IDictionaryManager[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
   clonedProducts: { [s: string]: IAbBahaFormula; } = {};
 
   constructor(
@@ -127,13 +124,6 @@ export class Tabsare3Component extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel() { }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
   getExcelSample = async () => {
     this.outputManagerService.saveAsExcelABuffer(await this.formulasService.getExcelSample(ENInterfaces.FormulaTabsare3ExcelSample), 'tabsare3Sample');
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ICountryManager } from 'interfaces/izones';
@@ -17,14 +17,11 @@ export class CountryComponent extends FactoryONE {
 
   dataSource: ICountryManager[] = [];
 
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
   clonedProducts: { [s: string]: ICountryManager; } = {};
 
   constructor(
     private dialog: MatDialog,
-     
+
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
@@ -51,12 +48,7 @@ export class CountryComponent extends FactoryONE {
     else {
       this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.CountryGET);
       this.closeTabService.saveDataForCountry = this.dataSource;
-    }
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.sectorsManagerService.columnCountry();
-    this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
+    }   
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: object) => {
@@ -81,11 +73,5 @@ export class CountryComponent extends FactoryONE {
     // delete this.dataSource[dataSource['dataSource'].id];
     // return;
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

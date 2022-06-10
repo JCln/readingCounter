@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAnalyzeRes } from 'interfaces/idashboard-map';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
@@ -32,9 +32,6 @@ export class PerformanceComponent extends FactoryONE {
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   dataSource: IAnalyzeRes[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -78,13 +75,6 @@ export class PerformanceComponent extends FactoryONE {
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     this.setGetRanges();
     this.closeTabService.saveDataForRRPerformance = this.dataSource;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   private setGetRanges = () => {
     this.dataSource.forEach(item => {

@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
+import { PrimeNGConfig } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BrowserStorageService } from 'services/browser-storage.service';
@@ -11,7 +12,7 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
 import {
-  ListSearchMoshWoumComponent,
+    ListSearchMoshWoumComponent,
 } from '../frame-work/manage/list-manager/list-search-mosh-dg/list-search-mosh-woum/list-search-mosh-woum.component';
 import { MathS } from './math-s';
 
@@ -72,7 +73,10 @@ export class FactorySharedPrime implements OnChanges {
         public browserStorageService: BrowserStorageService,
         public utilsService: UtilsService,
         public columnManager: ColumnManager,
-    ) { }
+        public config: PrimeNGConfig,
+    ) {
+        this.setTraslateToPrimeNgTable();
+    }
 
     @Input() get selectedColumns(): any[] {
         return this._selectedColumns;
@@ -128,6 +132,35 @@ export class FactorySharedPrime implements OnChanges {
         }
         else
             this.utilsService.snackBarMessageWarn(EN_messages.done);
+    }
+    setTraslateToPrimeNgTable = () => {
+        this.config.setTranslation({
+            'accept': 'تایید',
+            'reject': 'بازگشت',
+            'startsWith': ' شروع با',
+            'contains': 'شامل باشد',
+            'notContains': ' شامل نباشد',
+            'endsWith': ' پایان با',
+            'equals': 'برابر',
+            'notEquals': 'نا برابر',
+            'lt': ' کمتر از',
+            'lte': 'کمتر یا برابر',
+            'gt': 'بزرگتر',
+            'gte': 'بزرگتر یا برابر',
+            'is': 'باشد',
+            'isNot': 'نباشد',
+            'before': 'قبل',
+            'after': 'بعد',
+            'clear': 'پاک کردن',
+            'apply': 'تایید',
+            'matchAll': 'مطابقت با همه',
+            'matchAny': ' مطابقت',
+            'addRule': 'جستجو براساس',
+            'removeRule': 'حذف جستجو',
+            'choose': ' انتخاب',
+            'upload': 'ارسال',
+            'cancel': 'بازگشت'
+        });
     }
 
 }

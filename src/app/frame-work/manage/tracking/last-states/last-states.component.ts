@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ITracking } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
@@ -13,9 +13,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class LastStatesComponent extends FactoryONE {
   dataSource: ITracking[] = [];
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
+  
   constructor(
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
@@ -36,13 +34,6 @@ export class LastStatesComponent extends FactoryONE {
       this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingLASTSTATES);
       this.closeTabService.saveDataForLastStates = this.dataSource;
     }
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   showInMap = (trackNumberAndDate: object) => {
     this.trackingManagerService.routeToLMPDXY(trackNumberAndDate['trackNumber'], trackNumberAndDate['insertDateJalali'], null, true);

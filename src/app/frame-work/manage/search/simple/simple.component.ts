@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { ISearchSimpleOutput } from 'interfaces/search';
@@ -8,7 +8,6 @@ import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
 import { MathS } from 'src/app/classes/math-s';
 
-
 @Component({
   selector: 'app-simple',
   templateUrl: './simple.component.html',
@@ -17,10 +16,6 @@ import { MathS } from 'src/app/classes/math-s';
 export class SimpleComponent implements OnInit, OnDestroy {
   dataSource: ISearchSimpleOutput[] = [];
   _years: ITitleValue[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   subscription: Subscription[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
@@ -68,13 +63,6 @@ export class SimpleComponent implements OnInit, OnDestroy {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   refreshTable = () => {
     this.connectToServer();

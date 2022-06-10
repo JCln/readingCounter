@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevels } from 'interfaces/iauth-levels';
@@ -19,8 +19,6 @@ export class Auth1Component extends FactoryONE {
   dataSource: IAuthLevels[] = [];
 
   clonedProducts: { [s: string]: IAuthLevels; } = {};
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private dialog: MatDialog,
@@ -50,7 +48,7 @@ export class Auth1Component extends FactoryONE {
     else {
       this.dataSource = await this.authsManagerService.getAuth1DataSource();
       this.closeTabService.saveDataForAppLevel1 = this.dataSource;
-    }    
+    }
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
@@ -69,13 +67,6 @@ export class Auth1Component extends FactoryONE {
       return;
     }
     await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel1EDIT, dataSource['dataSource']);
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

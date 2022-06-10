@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
@@ -28,9 +28,6 @@ export class TraverseDifferentialComponent extends FactoryONE {
   ]
   dataSource: IReadingReportTraverseDifferentialRes[] = [];
   karbariDictionaryByCode: IDictionaryManager[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
@@ -90,13 +87,6 @@ export class TraverseDifferentialComponent extends FactoryONE {
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryByCode, 'value');
     }
     this.closeTabService.saveDataForRRTraverseDifferential = this.dataSource;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   refreshTable = () => {
     if (this.validation())

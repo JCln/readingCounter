@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IImportErrors } from 'interfaces/import-data';
 import { CloseTabService } from 'services/close-tab.service';
@@ -12,9 +12,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class ErrorsComponent extends FactoryONE {
   dataSource: IImportErrors[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private closeTabService: CloseTabService,
@@ -36,13 +33,6 @@ export class ErrorsComponent extends FactoryONE {
       this.closeTabService.saveDataForImportErrors = this.dataSource;
     }
 
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

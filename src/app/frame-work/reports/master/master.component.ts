@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportMaster, IReadingReportReq } from 'interfaces/ireports';
@@ -32,9 +32,6 @@ export class MasterComponent extends FactoryONE {
     }
   ]
   dataSource: IReadingReportMaster[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
@@ -82,12 +79,5 @@ export class MasterComponent extends FactoryONE {
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportReq);
     this.closeTabService.saveDataForRRMaster = this.dataSource;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+  }  
 }

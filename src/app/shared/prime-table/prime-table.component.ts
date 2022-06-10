@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { PrimeNGConfig } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -73,12 +74,14 @@ export class PrimeTableComponent extends FactorySharedPrime {
     public browserStorageService: BrowserStorageService,
     public searchService: SearchService,
     public columnManager: ColumnManager,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public config: PrimeNGConfig,
   ) {
     super(
       browserStorageService,
       utilsService,
-      columnManager
+      columnManager,
+      config
     );
   }
 

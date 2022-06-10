@@ -1,5 +1,5 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IAPK } from 'interfaces/inon-manage';
 import { ApkService } from 'services/apk.service';
@@ -17,9 +17,7 @@ export class ApkComponent extends FactoryONE {
   choosenFileName: string = '';
   fileNameAfterChoose: string = '';
   progress: number = 0;
-  _selectedColumns: any[];
-  _selectCols: any = [];
-
+  
   uploadForm: any = {
     versionCode: null,
     versionName: '',
@@ -89,12 +87,5 @@ export class ApkComponent extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForAPKManager;
     }        
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
-
+ 
 }

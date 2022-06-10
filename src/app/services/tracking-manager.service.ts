@@ -119,6 +119,25 @@ export class TrackingManagerService {
     private router: Router
   ) { }
 
+  firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: message,
+          isInput: isInput,
+          isDelete: isDelete
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
+        }
+      })
+    })
+  }
+
+
   getDataSource = (method: ENInterfaces): Promise<any> => {
     try {
       return new Promise((resolve) => {
@@ -208,7 +227,6 @@ export class TrackingManagerService {
       })
     })
   }
-  // 
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
   }
@@ -225,23 +243,6 @@ export class TrackingManagerService {
       dialogRef.afterClosed().subscribe(desc => {
         if (desc) {
           this.migrateOrRemoveTask(ENInterfaces.trackingPRE, trackNumber, desc);
-        }
-      })
-    })
-  }
-  TESTbackToConfirmDialog = (trackNumber: string, message: EN_messages): Promise<any> => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: message,
-          isInput: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.migrateOrRemoveTask(ENInterfaces.trackingToREADING, trackNumber, desc);
-          resolve(true);
         }
       })
     })

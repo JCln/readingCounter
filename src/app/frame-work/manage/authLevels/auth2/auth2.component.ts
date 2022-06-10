@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel2 } from 'interfaces/iauth-levels';
@@ -21,9 +21,7 @@ export class Auth2Component extends FactoryONE {
 
   authLevel1Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel2; } = {};
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
+ 
   constructor(
     private dialog: MatDialog,
     private closeTabService: CloseTabService,
@@ -93,13 +91,6 @@ export class Auth2Component extends FactoryONE {
   }
   onRowEditCancel() {
     Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

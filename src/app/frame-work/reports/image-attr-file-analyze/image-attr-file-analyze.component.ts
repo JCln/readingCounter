@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IImageAttributionAnalyze } from 'interfaces/ireports';
@@ -16,9 +16,6 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
   isCollapsed: boolean = false;
   dataSource: IImageAttributionAnalyze[] = [];
   chartColors: any[];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   _isOrderByDate: boolean = true;
   zoneDictionary: IDictionaryManager[] = [];
@@ -50,11 +47,5 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
     this.closeTabService.saveDataForImageAttrAnalyze = this.dataSource;
     this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.dataSource.length) }]
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

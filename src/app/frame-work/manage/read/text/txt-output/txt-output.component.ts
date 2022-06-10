@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ITextOutput } from 'interfaces/ireads-manager';
@@ -18,9 +18,6 @@ export class TxtOutputComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: ITextOutput; } = {};
   newRowLimit: number = 1;
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private closeTabService: CloseTabService,
@@ -109,11 +106,5 @@ export class TxtOutputComponent extends FactoryONE {
       this.refreshTable();
     }
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

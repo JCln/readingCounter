@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { IResponses } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
@@ -22,49 +22,7 @@ export class SectorsManagerService {
     private dialog: MatDialog,
     private sectionsService: SectionsService
   ) { }
-  /*COLUMNS */
-  columnCountry = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true }
-    ]
-  }
-  columnProvince = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'countryId', header: 'کشور', isSelected: true, isSelectOption: true },
-      { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
-    ]
-  }
-  columnRegion = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'provinceId', header: 'استان', isSelected: true, isSelectOption: true },
-      { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
-    ]
-  }
-  columnZone = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'regionId', header: 'منطقه', isSelected: true, isSelectOption: true },
-      { field: 'isMetro', header: 'شهری', isSelected: true, isBoolean: true },
-      { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
-    ]
-  }
-  columnZoneBound = (): IObjectIteratation[] => {
-    return [
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-      // { field: 'govermentalCode', header: 'کشور', isSelected: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, ltr: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, ltr: true },
-      // { field: 'fromRadif', header: 'عنوان', isSelected: true },
-      // { field: 'toRadif', header: 'کشور', isSelected: true },
-      // { field: 'host', header: 'ترتیب', isSelected: true },
-      // { field: 'dbUserName', header: 'ترتیب', isSelected: true },
-      // { field: 'dbPassword', header: 'ترتیب', isSelected: true },
-      // { field: 'dbInitialCatalog', header: 'ترتیب', isSelected: true }
-    ]
-  }
+
   /*API CALLS */
   getSectorsDataSource = (method: ENInterfaces): any => {
     return new Promise((resolve) => {
@@ -128,12 +86,6 @@ export class SectorsManagerService {
           resolve(desc);
         }
       })
-    })
-  }
-  customizeSelectedColumns = (_selectCols: any[]) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
     })
   }
   /*FOR COUNTRY */

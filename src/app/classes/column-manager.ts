@@ -191,20 +191,20 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false }
         // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }        
     ];
-    counterState: IObjectIteratation[] = [
-        { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: false, isNumber: true },
-        { field: 'title', header: 'عنوان', isSelected: true },
-        { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-        { field: 'clientOrder', header: 'ترتیب', isSelected: false, isNumber: true },
-        { field: 'forProvince', header: 'همه نواحی', isSelected: false, isBoolean: true },
-        { field: 'canEnterNumber', header: 'ثبت رقم', isSelected: true, isBoolean: true },
-        { field: 'isMane', header: 'مانع', isSelected: true, isBoolean: true },
-        { field: 'canNumberBeLessThanPre', header: 'فعلی کمتر از قبلی', isSelected: false, isBoolean: true },
-        { field: 'isTavizi', header: 'تعویضی', isSelected: true, isBoolean: true },
-        { field: 'shouldEnterNumber', header: 'اجبار رقم', isSelected: true, isBoolean: true },
-        { field: 'isXarab', header: 'خراب', isSelected: true, isBoolean: true },
-        { field: 'isFaqed', header: 'فاقد', isSelected: true, isBoolean: true }
-    ]
+    // counterState: IObjectIteratation[] = [
+    //     { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: false, isNumber: true },
+    //     { field: 'title', header: 'عنوان', isSelected: true },
+    //     { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+    //     { field: 'clientOrder', header: 'ترتیب', isSelected: false, isNumber: true },
+    //     { field: 'forProvince', header: 'همه نواحی', isSelected: false, isBoolean: true },
+    //     { field: 'canEnterNumber', header: 'رقم اختیاری', isSelected: true, isBoolean: true },
+    //     { field: 'isMane', header: 'مانع', isSelected: true, isBoolean: true },
+    //     { field: 'canNumberBeLessThanPre', header: 'فعلی کمتر از قبلی', isSelected: false, isBoolean: true },
+    //     { field: 'isTavizi', header: 'تعویضی', isSelected: true, isBoolean: true },
+    //     { field: 'shouldEnterNumber', header: 'اجبار رقم', isSelected: true, isBoolean: true },
+    //     { field: 'isXarab', header: 'خراب', isSelected: true, isBoolean: true },
+    //     { field: 'isFaqed', header: 'فاقد', isSelected: true, isBoolean: true }
+    // ];
     analyzePrfm: IObjectIteratation[] = [
         // { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: false },
         // { field: 'zoneTitle', header: 'عنوان ناحیه', isSelected: true, readonly: false },
@@ -236,6 +236,13 @@ export class ColumnManager {
     _imageAttrAnalyze: IObjectIteratation[] = [
         { field: 'itemTitle', header: 'عنوان گزارش', isSelected: true, readonly: true },
         { field: 'itemQuantity', header: 'تعداد', isSelected: true, readonly: true },
+    ]
+    fragmentDetails: IObjectIteratation[] = [
+        { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: false },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: false, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
+        { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
+        { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, readonly: true }
     ]
     rrDetails: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
@@ -397,6 +404,8 @@ export class ColumnManager {
         { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
         { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
         { field: 'mobile', header: 'موبایل', isSelected: false },
+        { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
+        { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
         { field: 'hazf', header: 'حذف', isSelected: false },
         { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
         { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
@@ -459,6 +468,8 @@ export class ColumnManager {
         { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
         { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
         { field: 'mobile', header: 'موبایل', isSelected: false },
+        { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
+        { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
         { field: 'hazf', header: 'حذف', isSelected: false },
         { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
         { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
@@ -521,6 +532,8 @@ export class ColumnManager {
             { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
             { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
             { field: 'mobile', header: 'موبایل', isSelected: false },
+            { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
+            { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
             { field: 'hazf', header: 'حذف', isSelected: false },
             { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
             { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
@@ -582,6 +595,8 @@ export class ColumnManager {
             { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
             { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
             { field: 'mobile', header: 'موبایل', isSelected: false },
+            { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
+            { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
             { field: 'hazf', header: 'حذف', isSelected: false },
             { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
             { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
@@ -644,6 +659,8 @@ export class ColumnManager {
             { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
             { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
             { field: 'mobile', header: 'موبایل', isSelected: false },
+            { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
+            { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
             { field: 'hazf', header: 'حذف', isSelected: false },
             { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
             { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
@@ -712,6 +729,8 @@ export class ColumnManager {
             { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
             { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
             { field: 'mobile', header: 'موبایل', isSelected: false },
+            { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
+            { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
             { field: 'hazf', header: 'حذف', isSelected: false },
             { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
             { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
@@ -793,6 +812,44 @@ export class ColumnManager {
         { field: 'isClosable', header: 'قابل بستن', isSelected: false, isBoolean: true },
         { field: 'isRefreshable', header: 'قابل refresh', isSelected: false, isBoolean: true }
     ];
+    country: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true }
+    ]
+    province: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'countryId', header: 'کشور', isSelected: true, isSelectOption: true },
+        { field: 'logicalOrder', header: 'ترتیب', isSelected: true },
+    ]
+    region: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'provinceId', header: 'استان', isSelected: true, isSelectOption: true },
+        { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
+    ]
+    zone: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'regionId', header: 'منطقه', isSelected: true, isSelectOption: true },
+        { field: 'isMetro', header: 'شهری', isSelected: true, isBoolean: true },
+        { field: 'logicalOrder', header: 'ترتیب', isSelected: true }
+    ]
+    zoneBound: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        // { field: 'govermentalCode', header: 'کشور', isSelected: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, ltr: true },
+        // { field: 'fromRadif', header: 'عنوان', isSelected: true },
+        // { field: 'toRadif', header: 'کشور', isSelected: true },
+        // { field: 'host', header: 'ترتیب', isSelected: true },
+        // { field: 'dbUserName', header: 'ترتیب', isSelected: true },
+        // { field: 'dbPassword', header: 'ترتیب', isSelected: true },
+        // { field: 'dbInitialCatalog', header: 'ترتیب', isSelected: true }        
+    ]
+    userRoles: IObjectIteratation[] = [
+        { field: 'title', header: 'عنوان', isSelected: true },
+        // { field: 'isActive', header: 'فعال', isSelected: true, isBoolean: true },
+        { field: 'needDeviceIdLogin', header: 'سریال اجباری', isSelected: true, isBoolean: true },
+        { field: 'titleUnicode', header: 'عنوان فارسی', isSelected: true }
+    ]
     auth4: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'authLevel3Id', header: 'کنترلر', isSelected: true, isSelectOption: true },
@@ -918,6 +975,8 @@ export class ColumnManager {
         { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
         { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
         { field: 'mobile', header: 'موبایل', isSelected: false },
+        { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
+        { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
         { field: 'hazf', header: 'حذف', isSelected: false },
         { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
         { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },
@@ -978,6 +1037,8 @@ export class ColumnManager {
         { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, readonly: true },
         { field: 'zarfiat', header: 'ظرفیت', isSelected: false, readonly: true },
         { field: 'mobile', header: 'موبایل', isSelected: false, readonly: true },
+        { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
+        { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
         { field: 'hazf', header: 'حذف', isSelected: false, readonly: true },
         { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true, readonly: true },
         { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, readonly: true },
@@ -1040,6 +1101,8 @@ export class ColumnManager {
         { field: 'tavizNumber', header: 'ش تعویض', isSelected: false },
         { field: 'zarfiat', header: 'ظرفیت', isSelected: false },
         { field: 'mobile', header: 'موبایل', isSelected: false },
+        { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
+        { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
         { field: 'hazf', header: 'حذف', isSelected: false },
         { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true },
         { field: 'errorDescription', header: 'توضیح خطا', isSelected: false },

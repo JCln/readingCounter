@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel3 } from 'interfaces/iauth-levels';
@@ -22,8 +22,6 @@ export class Auth3Component extends FactoryONE {
 
   authLevel2Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel3; } = {};
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private dialog: MatDialog,
@@ -96,13 +94,6 @@ export class Auth3Component extends FactoryONE {
     // this.dataSource[index] = this.clonedProducts[dataSource.id];
     // delete this.dataSource[dataSource.id];
     // return;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

@@ -1,6 +1,6 @@
 import 'jspdf-autotable';
 
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
@@ -10,8 +10,6 @@ import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
-import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
-
 @Component({
   selector: 'app-loaded',
   templateUrl: './loaded.component.html',
@@ -19,15 +17,10 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
 })
 export class LoadedComponent extends FactoryONE {
 
-
   dataSource: ITracking[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-  selectedFuckingTest: any[] = [];
 
   constructor(
-
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialog: MatDialog
@@ -51,29 +44,12 @@ export class LoadedComponent extends FactoryONE {
 
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
-    const title = EN_messages.reson_delete_backtoImported;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(async desc => {
-        if (desc) {
-          await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToImportedFromLoad, rowDataAndIndex['dataSource'], desc);
-          this.refreshTable();
-        }
-      })
-    })
+  backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
+    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reson_delete_backtoImported, true, false);
+    if (a) {
+      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToImportedFromLoad, rowDataAndIndex['dataSource'], a);
+      this.refreshTable();
+    }
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

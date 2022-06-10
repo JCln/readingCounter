@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -18,16 +18,12 @@ import { RegionAddDgComponent } from './region-add-dg/region-add-dg.component';
 export class RegionComponent extends FactoryONE {
   dataSource: IRegionManager[] = [];
 
-
   provinceDictionary: IDictionaryManager[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
   clonedProducts: { [s: string]: IRegionManager; } = {};
 
   constructor(
     private dialog: MatDialog,
-     
+
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
@@ -66,11 +62,6 @@ export class RegionComponent extends FactoryONE {
     this.provinceDictionary = await this.sectorsManagerService.getProvinceDictionary();
 
     Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.sectorsManagerService.columnRegion();
-    this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
@@ -107,12 +98,6 @@ export class RegionComponent extends FactoryONE {
     // delete this.dataSource[rowDataAndIndex['dataSource']];
     // return;
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }
 

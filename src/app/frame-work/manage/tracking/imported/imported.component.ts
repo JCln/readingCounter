@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -9,7 +8,6 @@ import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
-import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
 import { ImportListDgComponent } from './import-list-dg/import-list-dg.component';
 
 
@@ -21,20 +19,13 @@ import { ImportListDgComponent } from './import-list-dg/import-list-dg.component
 export class ImportedComponent extends FactoryONE {
   dataSource: ITracking[] = [];
   filterZoneDictionary: IDictionaryManager[] = [];
-
-  selectedFuckingTest: any[] = []
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-  _selectedInnerColumns: any[];
-
   ref: DynamicDialogRef;
 
   constructor(
 
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    private dialogService: DialogService,
-    private dialog: MatDialog
+    private dialogService: DialogService
   ) {
     super();
   }
@@ -80,31 +71,12 @@ export class ImportedComponent extends FactoryONE {
     });
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
-  firstConfirmDialog = (rowDataAndIndex: object) => {
-    const title = EN_messages.reason_deleteRoute;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: true,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(async desc => {
-        if (desc) {
-          await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowDataAndIndex['dataSource'], desc);
-          this.refreshTable();
-        }
-      })
-    })
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  firstConfirmDialog = async (rowDataAndIndex: object) => {
+    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_deleteRoute, true, true);
+    if (a) {
+      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingREMOVE, rowDataAndIndex['dataSource'], a);
+      this.refreshTable();
+    }
   }
   routeToLMAll = (row: ITracking) => {
     this.trackingManagerService.routeToLMAll(row);

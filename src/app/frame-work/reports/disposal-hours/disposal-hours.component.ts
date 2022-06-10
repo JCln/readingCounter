@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -21,9 +21,7 @@ export class DisposalHoursComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
 
   dataSource: IRRChartResWrapper[] = [];
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
+  
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
 
@@ -57,13 +55,6 @@ export class DisposalHoursComponent extends FactoryONE {
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalHours, this.readingReportManagerService.disposalhoursReq);
     this.closeTabService.saveDataForRRDisposalHours = this.dataSource;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   refreshTable = () => {
     if (this.validation())

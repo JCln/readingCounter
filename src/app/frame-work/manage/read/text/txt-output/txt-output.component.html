@@ -1,12 +1,9 @@
 <app-prime-table-editable     
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
     [_outputEnabled]=false 
     [_numberOfExtraColumns]="[1, 2]"
     [_outputFileName]="'textOutput'"
-    [_checkUpName]="'textOutput'"
-    
+    [_checkUpName]="'textOutput'"    
     [dictionary]="zoneDictionary"
     [_dictionaryName]="'zoneId'"
     [_selectedColumnsToRemember]="'selectedTextOutput'"
@@ -19,6 +16,4 @@
     (onRowEditedSave)="onRowEditSave($event)"
  > 
 </app-prime-table-editable>
-
-    
-        <!-- [_isInRowEditing]=true -->
+<!-- [_isInRowEditing]=true -->

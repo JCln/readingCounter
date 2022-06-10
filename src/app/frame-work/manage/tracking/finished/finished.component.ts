@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
@@ -10,8 +9,6 @@ import { TrackingManagerService } from 'services/tracking-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
-import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
-
 @Component({
   selector: 'app-finished',
   templateUrl: './finished.component.html',
@@ -19,14 +16,10 @@ import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-
 })
 export class FinishedComponent extends FactoryONE {
   dataSource: ITracking[] = [];
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
-
     private closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    private dialog: MatDialog,
     public outputManagerService: OutputManagerService,
     private envService: EnvService
   ) {
@@ -52,22 +45,11 @@ export class FinishedComponent extends FactoryONE {
       this.closeTabService.saveDataForTrackFinished = this.dataSource;
     }
   }
-  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
-    const title = EN_messages.reason_toOffloaded;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: true,
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.rowToOffloaded(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
-        }
-      })
-    })
+  backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_toOffloaded, true, false);
+    if (desc) {
+      this.rowToOffloaded(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
+    }
   }
   reDownloadOutputSingle = async (row: ITracking) => {
     if (this.envService.hasNextBazdid) {
@@ -83,13 +65,6 @@ export class FinishedComponent extends FactoryONE {
     if (hasbazdid) {
       this.outputManagerService.downloadFile(await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputDELAYED, row, hasbazdid));
     }
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

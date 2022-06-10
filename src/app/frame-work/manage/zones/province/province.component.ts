@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -18,16 +18,12 @@ import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.compon
 export class ProvinceComponent extends FactoryONE {
   dataSource: IProvinceManager[] = [];
 
-
   countryDictionary: IDictionaryManager[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
   clonedProducts: { [s: string]: IProvinceManager; } = {};
 
   constructor(
     private dialog: MatDialog,
-     
+
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
@@ -66,11 +62,6 @@ export class ProvinceComponent extends FactoryONE {
     this.countryDictionary = await this.sectorsManagerService.getCountryDictionary();
 
     Converter.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.sectorsManagerService.columnProvince();
-    this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: object) => {
@@ -106,11 +97,5 @@ export class ProvinceComponent extends FactoryONE {
     // delete this.dataSource[dataSource['dataSource'].id];
     // return;
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

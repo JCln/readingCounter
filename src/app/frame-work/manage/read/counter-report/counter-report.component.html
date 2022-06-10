@@ -1,12 +1,10 @@
 <app-prime-table-editable     
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
     [dataSource]="dataSource" 
     [_checkUpName]="'auth4'"
+    [_outputFileName]="'counterReport'"
     [_dictionaryName]="'zoneId'"
     [dictionary]="zoneDictionary"    
     [_numberOfExtraColumns]="[1, 2]"
-    [_outputFileName]="'counterReport'"
     [_selectedColumnsToRemember]="'selectedCounterReport'"
     (refreshedTable)="refreshTable()"
     (openedAddDialog)="openAddDialog()"

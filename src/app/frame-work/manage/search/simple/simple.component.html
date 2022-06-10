@@ -75,7 +75,7 @@
     </form>
 </main>
 
-<app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
+<app-prime-table [dataSource]="dataSource"
     [_outputFileName]="'simpleSearch'" [_checkUpName]="'simpleSearch'"
     [_selectedColumnsToRemember]="'selectedSearchManagerSimple'" [_numberOfExtraColumns]="[1,2,3,4]"
     [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"

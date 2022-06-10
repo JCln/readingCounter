@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -17,17 +17,13 @@ import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.c
 })
 export class ZoneBoundComponent extends FactoryONE {
   dataSource: IZoneBoundManager[] = [];
-
-
   zoneDictionary: IDictionaryManager[] = [];
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
   clonedProducts: { [s: string]: IZoneBoundManager; } = {};
 
   constructor(
     private dialog: MatDialog,
-     
+
     private closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
@@ -66,11 +62,6 @@ export class ZoneBoundComponent extends FactoryONE {
     this.zoneDictionary = await this.sectorsManagerService.getZoneDictionary();
 
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.insertSelectedColumns();
-  }
-  insertSelectedColumns = () => {
-    this._selectCols = this.sectorsManagerService.columnZoneBound();
-    this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
@@ -105,11 +96,5 @@ export class ZoneBoundComponent extends FactoryONE {
     // delete this.dataSource[rowDataAndIndex['dataSource']];
     // return;
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

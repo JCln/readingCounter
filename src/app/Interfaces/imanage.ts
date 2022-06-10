@@ -127,6 +127,8 @@ export interface IOnOffLoadFlat {
     description: string,
     isSelected?: boolean,
     zoneTitle?: string,
+    readingReportTitles: string,
+    mobiles: string,
     modifyType?:any//for general list modify
 }
 export interface IOutputManager {
