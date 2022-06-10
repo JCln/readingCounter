@@ -40,7 +40,11 @@
                 </i>
                 <i *ngIf="_outputEnabled && (_outputFileName == 'abBaha' || _outputFileName == 'Budget' || _outputFileName == 'tabsare3')"
                     (click)="getExcelSample()" class="tooltip _circle_border _xlsx_download pi pi-download">
-                    <div class="tooltip_text">دانلود نمونه فایلExcel</div>
+                    <div class="tooltip_text">دانلود نمونه فایل Excel</div>
+                </i>
+                <i *ngIf="_checkUpName == 'generalListModify'" (click)="getExcelSample()"
+                    class="tooltip _circle_border _xlsx_download pi pi-download">
+                    <div class="tooltip_text">دریافت فایل Excel</div>
                 </i>
                 <i *ngIf="_hasSaveColumns" (click)="saveColumns()"
                     class="tooltip fa_icons _circle_border p_icons _save_columns fa fa-save">
@@ -177,7 +181,15 @@
                         </ng-template>
 
                         <ng-template #editableForm>
-                            <ng-container>
+                            <ng-container *ngIf="col.enableTooltip; else simpleText">
+                                <div class="tooltip">
+                                    {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                                    dataSource[col.field].toString().split(' ')[0] :
+                                    ''}}
+                                    <div class="tooltip_text">{{dataSource[col.field]}}</div>
+                                </div>
+                            </ng-container>
+                            <ng-template #simpleText>
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">
                                         <input pInputText [type]="col.isNumber ? 'number': 'text'"
@@ -187,7 +199,8 @@
                                         {{dataSource[col.field]}}
                                     </ng-template>
                                 </p-cellEditor>
-                            </ng-container>
+                            </ng-template>
+
                         </ng-template>
                     </ng-template>
                 </ng-template>

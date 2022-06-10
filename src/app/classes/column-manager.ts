@@ -8,7 +8,7 @@ export class ColumnManager {
 
     excelDynamic: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
-        { field: 'description', header: 'توضیحات', isSelected: true },
+        { field: 'description', header: 'توضیحات', isSelected: true, enableTooltip: true },
         { field: 'url', header: 'URL', isSelected: false },
         { field: 'acceptVerb', header: 'متد', isSelected: false },
         // { field: 'jsonInfo', header: 'اطلاعات JSON', isSelected: false },
@@ -72,7 +72,7 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
 
     ];
     finished: IObjectIteratation[] = [
@@ -95,7 +95,7 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
 
     ];
     loaded: IObjectIteratation[] = [
@@ -118,7 +118,7 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
 
     ];
     offloaded: IObjectIteratation[] = [
@@ -141,7 +141,7 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
 
     ];
     imported: IObjectIteratation[] = [
@@ -164,7 +164,7 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
 
     ];
     lastStates: IObjectIteratation[] = [
@@ -188,7 +188,7 @@ export class ColumnManager {
         { field: 'imagePercent', header: 'درصد تصویر', isSelected: false },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
         // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }        
     ];
     // counterState: IObjectIteratation[] = [
@@ -295,7 +295,7 @@ export class ColumnManager {
         { field: 'fulName', header: 'نام و نام خانوادگی', isSelected: true },
         { field: 'address', header: 'آدرس', isSelected: false },
         { field: 'offloadDateJalali', header: 'روز', isSelected: true },
-        { field: 'description', header: 'توضیحات', isSelected: false, readonly: false },
+        { field: 'description', header: 'توضیحات', isSelected: false, readonly: false, enableTooltip: true },
         { field: 'value', header: 'مقدار قدیم', isSelected: true },
         { field: 'newValue', header: 'مقدار جدید', isSelected: true },
     ]
@@ -428,7 +428,7 @@ export class ColumnManager {
         { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
         { field: 'offLoadTime', header: 'زمان', isSelected: false },
         { field: 'dateDifference', header: 'مدت', isSelected: false },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ]
     rrLocked: IObjectIteratation[] = [
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
@@ -492,7 +492,7 @@ export class ColumnManager {
         { field: 'dateDifference', header: 'مدت', isSelected: false },
         { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true },
         { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ]
     searchPro: IObjectIteratation[] =
         [
@@ -555,7 +555,7 @@ export class ColumnManager {
             { field: 'offLoadTime', header: 'زمان', isSelected: false },
             { field: 'dateDifference', header: 'مدت', isSelected: false },
             { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
-            { field: 'description', header: 'توضیحات', isSelected: false }
+            { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
         ];
     searchMosh: IObjectIteratation[] =
         [
@@ -618,7 +618,7 @@ export class ColumnManager {
             { field: 'offLoadTime', header: 'زمان', isSelected: false },
             { field: 'dateDifference', header: 'مدت', isSelected: false },
             { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
-            { field: 'description', header: 'توضیحات', isSelected: false }
+            { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
         ];
     searchMoshDialog: IObjectIteratation[] =
         [
@@ -682,13 +682,13 @@ export class ColumnManager {
             { field: 'offLoadTime', header: 'زمان', isSelected: false },
             { field: 'dateDifference', header: 'مدت', isSelected: false },
             { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
-            { field: 'description', header: 'توضیحات', isSelected: false }
+            { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
         ];
     briefKardex: IObjectIteratation[] =
         [
             // { field: 'kardexItemType', header: 'نوع کارکس', isSelected: false },
             { field: 'jalaliDay', header: 'تاریخ', isSelected: true },
-            { field: 'description', header: 'توضیحات', isSelected: true },
+            { field: 'description', header: 'توضیحات', isSelected: true, enableTooltip: true },
             { field: 'counterStateTitle', header: 'وضعیت کنتور', isSelected: true },
             { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
         ];
@@ -753,7 +753,7 @@ export class ColumnManager {
             { field: 'offLoadTime', header: 'زمان', isSelected: false },
             { field: 'dateDifference', header: 'مدت', isSelected: false },
             { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true },
-            { field: 'description', header: 'توضیحات', isSelected: false },
+            { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true },
             { field: 'isSelected', header: 'انتخاب', isSelected: true, isBoolean: true }
         ]
     simpleSearch: IObjectIteratation[] = [
@@ -883,7 +883,7 @@ export class ColumnManager {
         { field: 'x', header: 'X', isSelected: false },
         { field: 'y', header: 'Y', isSelected: false },
         { field: 'gisAccuracy', header: 'دقت مکان یابی', isSelected: false },
-        { field: 'description', header: 'توضیحات', isSelected: false },
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true },
         // { field: 'userId', header: 'کاربری', isSelected: true },    
         // { field: 'insertDateTime', header: 'توضیحات', isSelected: false }    
     ]
@@ -915,7 +915,7 @@ export class ColumnManager {
         { field: 'alias', header: 'نام گزارش', isSelected: true },
         { field: 'auther', header: 'مولف', isSelected: true },
         // { field: 'fileName', header: 'نام فایل', isSelected: true },
-        { field: 'description', header: 'توضیحات', isSelected: false },
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true },
         { field: 'username', header: 'کاربر', isSelected: true, ltr: true },
         { field: 'insertDateJalali', header: 'تاریخ ایجاد', isSelected: true }
     ];
@@ -999,7 +999,7 @@ export class ColumnManager {
         { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
         { field: 'offLoadTime', header: 'زمان', isSelected: false },
         { field: 'dateDifference', header: 'مدت', isSelected: false },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ]
     generalListModify: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
@@ -1054,15 +1054,15 @@ export class ColumnManager {
         { field: 'x', header: 'X', isSelected: false, readonly: true },
         { field: 'gisAccuracy', header: 'دقت', isSelected: false, readonly: true },
         { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, readonly: true },
-        { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true, readonly: true },
+        { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true, readonly: false },
         { field: 'masraf', header: 'مصرف', isSelected: false, readonly: true },
         // { field: 'eslahType', header: 'اصلاح', isSelected: false , readonly: true},
-        { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true, readonly: true },
+        { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true, readonly: false },
         { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false, readonly: true },
         { field: 'offLoadTime', header: 'زمان', isSelected: false, readonly: true },
         { field: 'dateDifference', header: 'مدت', isSelected: false, readonly: true },
         { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectOption: true, readonly: false },
-        { field: 'description', header: 'توضیحات', isSelected: false, readonly: true }
+        { field: 'description', header: 'توضیحات', isSelected: false, readonly: true, enableTooltip: true }
     ]
 
     ModifyList: IObjectIteratation[] = [
@@ -1125,7 +1125,7 @@ export class ColumnManager {
         { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false },
         { field: 'offLoadTime', header: 'زمان', isSelected: false },
         { field: 'dateDifference', header: 'مدت', isSelected: false },
-        { field: 'description', header: 'توضیحات', isSelected: false }
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ]
     counterReport: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },

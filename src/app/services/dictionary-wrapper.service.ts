@@ -46,6 +46,10 @@ export class DictionaryWrapperService {
     dictionary: null,
     zoneId: null
   }
+  private counterStateForModifyDictionary = {
+    dictionary: null,
+    zoneId: null
+  }
   private counterStateByCodeDictionary = {
     dictionary: null,
     zoneId: null
@@ -238,6 +242,16 @@ export class DictionaryWrapperService {
     });
 
   }
+  getCounterStateForModifyDictionary(zoneId: number): Promise<any> {
+    if (this.counterStateForModifyDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateForModifyDictionary.dictionary))
+      return this.counterStateForModifyDictionary.dictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(ENInterfaces.counterStateDictionaryForModify, zoneId).subscribe(res => {
+        this.setCounterStateForModifyDictionary(res, zoneId);
+        resolve(res);
+      })
+    })
+  }
   getCounterStateByZoneIdDictionary(zoneId: number): Promise<any> {
     if (this.counterStateByZoneIdDictionary.zoneId == zoneId && !MathS.isNull(this.counterStateByZoneIdDictionary.dictionary))
       return this.counterStateByZoneIdDictionary.dictionary;
@@ -402,6 +416,10 @@ export class DictionaryWrapperService {
     this.counterStateByZoneShowAllDictionary.dictionary = v;
     this.counterStateByZoneShowAllDictionary.zoneId = id;
   }
+  private setCounterStateForModifyDictionary(v: any, id: number) {
+    this.counterStateForModifyDictionary.dictionary = v;
+    this.counterStateForModifyDictionary.zoneId = id;
+  }
   private setCounterStateByCodeDictionary(v: any, id: number) {
     this.counterStateByCodeDictionary.dictionary = v;
     this.counterStateByCodeDictionary.zoneId = id;
@@ -450,6 +468,8 @@ export class DictionaryWrapperService {
     this.counterStateByZoneIdDictionary.zoneId = null;
     this.counterStateByCodeDictionary.dictionary = [];
     this.counterStateByCodeDictionary.zoneId = null;
+    this.counterStateForModifyDictionary.dictionary = [];
+    this.counterStateForModifyDictionary.zoneId = null;
     this.periodKindDictionary = [];
     this.karbariDictionary = [];
     this.qotrDictionary = [];

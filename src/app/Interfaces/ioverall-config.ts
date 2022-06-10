@@ -269,6 +269,7 @@ export interface IObjectIteratation {
     isBoolean?: boolean;
     isNumber?: boolean;
     isSelectOption?: boolean;
+    enableTooltip?: boolean;
 }
 export interface ITabWrapperDetectDynamicRoute {
     _title: string,

@@ -99,6 +99,9 @@ export class ListManagerService {
   getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
+  getCounterStateForModifyDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateForModifyDictionary(zoneId);
+  }
   getLM = (method: ENInterfaces | string, trackNumber: number | string): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(method, trackNumber).subscribe(res => {
@@ -120,6 +123,14 @@ export class ListManagerService {
       })
     });
   }
+  getExcel = (method: ENInterfaces, groupId: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETBLOB(method, groupId).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
+
   postByQueue = (method: ENInterfaces, id: any): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTSG(method, id).toPromise().then(res => {

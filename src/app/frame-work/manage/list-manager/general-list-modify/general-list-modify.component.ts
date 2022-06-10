@@ -9,6 +9,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
+import { OutputManagerService } from 'services/output-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -37,6 +38,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   counterStateByZoneDictionary: IDictionaryManager[] = [];
+  counterStateForModifyDictionary: IDictionaryManager[] = [];
 
   modifyType: OffloadModify[];
   offloadModifyReq: IOffloadModifyReq = {
@@ -54,7 +56,8 @@ export class GeneralListModifyComponent extends AllListsFactory {
     private router: Router,
     public dialogService: DialogService,
     private closeTabService: CloseTabService,
-    public allListsService: AllListsService
+    public allListsService: AllListsService,
+    public outputManagerService: OutputManagerService
   ) {
     super(dialogService, listManagerService);
   }
@@ -84,6 +87,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
     else {
       this.assignToPageSign();
       this.counterStateByZoneDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
+      this.counterStateForModifyDictionary = await this.listManagerService.getCounterStateForModifyDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
       if (canRefresh) {
         this.closeTabService.saveDataForLMGeneralModify = null;
         this.closeTabService.saveDataForLMGeneralModifyReq = null;
@@ -219,6 +223,10 @@ export class GeneralListModifyComponent extends AllListsFactory {
       if (res)
         console.log(res);
     });
+  }
+  getExcel = async () => {
+    const res = await this.listManagerService.getExcel(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyLists_pageSign.groupId);
+    this.outputManagerService.downloadFile(res, '.xlsx');
   }
 
 }

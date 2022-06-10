@@ -127,7 +127,17 @@
                         </i>
                     </ng-container>
                     <ng-template #showText>
-                        {{dataSource[col.field]}}
+                        <div class="tooltip" *ngIf="col.enableTooltip">
+                            {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                            dataSource[col.field].toString().split(' ')[0]
+                            : ''}}
+                            <div class="tooltip_text">
+                                {{dataSource[col.field]}}
+                            </div>
+                        </div>
+                        <div *ngIf="!col.enableTooltip">
+                            {{dataSource[col.field]}}
+                        </div>
                     </ng-template>
                 </ng-template>
             </td>

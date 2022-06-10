@@ -29,3 +29,9 @@
     }
   }
 }
+
+.under_zero {
+  border-radius: $border_15;
+  background-color: var(--primary_1);
+  padding: 0 .2rem;
+}
