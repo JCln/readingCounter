@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-permission';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
@@ -31,11 +32,11 @@ export class AuthService {
     return this.jwtService.getRefreshToken();
   }
   refreshToken = (): Observable<any> => {
-    return this.mainService.POSTBODY('V1/Account/Refresh', { 'refreshToken': this.getRefreshToken() })
+    return this.mainService.POSTBODY(ENInterfaces.AuthsAccountRefresh, { 'refreshToken': this.getRefreshToken() })
   }
   logging = (userData: ICredentials) => {
     const returnUrl = this.utilsService.getRouteParams('returnUrl');
-    this.mainService.POSTBODY('v1/account/login', userData).subscribe((res: IAuthTokenType) => {
+    this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).subscribe((res: IAuthTokenType) => {
       this.saveTolStorage(res);
       this.routeToReturnUrl(returnUrl);
     })
@@ -47,7 +48,7 @@ export class AuthService {
     this.clearAllSavedData();
     this.clearDictionaries();
     this.signalRService.disconnectConnection();
-    this.mainService.POSTBODY('V1/Account/Logout', { refreshToken }).subscribe(() => {
+    this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogout, { refreshToken }).subscribe(() => {
       this.jwtService.removeAuthLocalStorage();
       this.utilsService.routeTo('/login');
     })

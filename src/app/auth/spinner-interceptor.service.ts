@@ -70,7 +70,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
               this.snackWrapperService.openSnackBar('پاسخی دریافت نشد', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
             }
 
-            this.spinnerWrapperService.stopLoading();
+            this.spinnerWrapperService.stopPending();
             this.spinnerWrapperService.stopLoadingSmallSpinner();
 
             return throwError(() => error);
@@ -81,7 +81,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
       .pipe(
         map<HttpEvent<any>, any>((evt: HttpEvent<any>) => {
           if (evt instanceof HttpResponse) {
-            this.spinnerWrapperService.stopLoading();
+            this.spinnerWrapperService.stopPending();
             this.spinnerWrapperService.stopLoadingSmallSpinner();
           }
           return evt;
@@ -94,7 +94,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
       this.spinnerWrapperService.startLoadingSmallSpinner();
     }
     else {
-      this.spinnerWrapperService.startLoading();
+      this.spinnerWrapperService.startPending();
     }
   }
 }

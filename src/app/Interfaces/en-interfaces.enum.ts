@@ -1,4 +1,8 @@
 export enum ENInterfaces {
+    AuthsAccountRefresh = 'V1/Account/Refresh',
+    AuthsAccountLogin = 'V1/account/login',
+    AuthsAccountLogout = 'V1/Account/Logout',
+
     AuthLevel4GET = 'V1/AuthLevel4/all',
     AuthLevel4DICTIONARY = 'V1/AuthLevel4/Dictionary',
     AuthLevel4REMOVE = 'V1/AuthLevel4/Remove',
