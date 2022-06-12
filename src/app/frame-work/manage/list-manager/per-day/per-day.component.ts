@@ -39,7 +39,7 @@ export class PerDayComponent extends FactoryONE {
   }
 
   routeToLMPDXY = (day: string) => {
-    this.utilsService.routeToByParams('wr', { trackNumber: this.dataSource.trackNumber, day: day, distance: this.dataSource.overalDistance });
+    this.utilsService.routeToByParams(EN_Routes.wr, { trackNumber: this.dataSource.trackNumber, day: day, distance: this.dataSource.overalDistance });
   }
   private insertSelectedColumns = () => {
     this._selectMainDatas = this.listManagerService.columnSelectedLMPerDayPositions();

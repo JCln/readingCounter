@@ -130,7 +130,8 @@
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <mat-checkbox [disabled]="col.readonly" [ngClass]="{'mat-checkbox-editable': true}"
+                                <mat-checkbox [disabled]="col.readonly"
+                                    [ngClass]="{'mat-checkbox-editable': !col.readonly}"
                                     [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -169,7 +170,8 @@
                             <ng-container *ngIf="col.field == 'offloadDateJalali'; else editableForm">
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">
-                                        <app-date-jalali name="date" (dateJalEvent)="receiveDateJalali($event , ri)"
+                                        <app-date-jalali [ngClass]="{'date-editable': !col.readonly}" name="date"
+                                            (dateJalEvent)="receiveDateJalali($event , ri)"
                                             [dateObject]="dataSource[col.field]">
                                         </app-date-jalali>
                                     </ng-template>
