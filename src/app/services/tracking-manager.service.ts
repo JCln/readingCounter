@@ -25,6 +25,29 @@ import { UtilsService } from './utils.service';
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
+  columnOfflaodedGroup = (): IObjectIteratation[] => [
+    { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+    { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+    { field: 'counterReaderName', header: 'مامور', isSelected: true },
+    { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
+    { field: 'listNumber', header: 'ش لیست', isSelected: true },
+    { field: 'itemQuantity', header: 'تعداد', isSelected: true },
+    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
+    { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
+    // { field: 'year', header: 'سال', isSelected: false },
+    { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
+    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
+    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
+    { field: 'fromDate', header: 'از', isSelected: false },
+    { field: 'toDate', header: 'تا', isSelected: false },
+    { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
+    { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isNumber: true },
+    { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
+    { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
+    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
+    { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
+
+  ];
   columnDefColumns = (): IObjectIteratation[] => [
     { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
     { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
@@ -381,6 +404,14 @@ export class TrackingManagerService {
     this.allListsService.generalModifyLists_pageSign.zoneId = dataSource.zoneId;
     this.allListsService.generalModifyLists_pageSign.trackNumber = dataSource.trackNumber;
     this.router.navigate([EN_Routes.wrmlGeneralModify]);
+  }
+  routeToOffloadGeneralModifyGrouped = (dataSource: ITracking) => {
+    this.allListsService.generalModifyListsGrouped_pageSign.GUid = dataSource.id;
+    this.allListsService.generalModifyListsGrouped_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.generalModifyListsGrouped_pageSign.groupId = dataSource.groupId;
+    this.allListsService.generalModifyListsGrouped_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.generalModifyListsGrouped_pageSign.trackNumber = dataSource.trackNumber;
+    this.router.navigate([EN_Routes.wrmlGeneralGModify]);
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);

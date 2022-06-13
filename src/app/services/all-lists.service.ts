@@ -29,5 +29,12 @@ export class AllListsService {
     zoneId: null,
     trackNumber: null
   };
+  generalModifyListsGrouped_pageSign: IOnOffLoadNessessities = {
+    GUid: null,
+    listNumber: null,
+    groupId: '',
+    zoneId: null,
+    trackNumber: null
+  };
 
 }

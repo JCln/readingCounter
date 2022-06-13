@@ -56,6 +56,7 @@ export class CloseTabService {
   saveDataForTrackLoaded: any;
   saveDataForTrackReading: any;
   saveDataForTrackOffloaded: any;
+  saveDataForTrackOffloadedGroup: any;
   saveDataForTrackFinished: any;
   saveDataForLastStates: any;
   saveDataForOffloadModify: any;
@@ -114,6 +115,8 @@ export class CloseTabService {
   saveDataForLMModify: any;
   saveDataForLMGeneralModifyReq: any;
   saveDataForLMGeneralModify: any;
+  saveDataForLMGeneralGroupModifyReq: any;
+  saveDataForLMGeneralGroupModify: any;
   // WOUI manager
   saveDataForWOUI: any;
   // dbf output manager
@@ -150,7 +153,8 @@ export class CloseTabService {
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrrptstoolsexcelviewer },
     { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr },
-    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
+    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralGModify },
+    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, url: EN_Routes.wrmlGeneralModify },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamicReportManager },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, url: EN_Routes.wrmusearch },
@@ -196,6 +200,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading },
     { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
+    { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished },
     { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, url: EN_Routes.wrmsfwu },
     { id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },
