@@ -57,6 +57,9 @@ export class CloseTabService {
   saveDataForTrackReading: any;
   saveDataForTrackOffloaded: any;
   saveDataForTrackOffloadedGroup: any;
+  offloadedGroupReq = {
+    _selectedAggregate: ''
+  }
   saveDataForTrackFinished: any;
   saveDataForLastStates: any;
   saveDataForOffloadModify: any;
@@ -200,7 +203,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading },
     { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
-    { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloaded },
+    { id: 1, req: ENEssentialsToSave.offloadedGroupReq, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloaded },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished },
     { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, url: EN_Routes.wrmsfwu },
     { id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },

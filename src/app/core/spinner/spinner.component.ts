@@ -14,8 +14,6 @@ export class SpinnerComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinnerWrapper.loadingStatus$.subscribe((res: any) => {
-      console.log(res);
-
       if (res.isNetwork) {
         this.networkReq = res.value;
         this.notification = false;

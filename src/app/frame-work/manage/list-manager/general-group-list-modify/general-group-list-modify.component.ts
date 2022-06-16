@@ -124,9 +124,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
     this.modifyType = this.listManagerService.getOffloadModifyType();
   }
-  toPrePage = () => {
-    this.router.navigate([EN_Routes.wrmtrackoffloaded]);
-  }
+  // toPrePage = () => {
+  //   this.router.navigate([EN_Routes.wrmtrackoffloadedGroup]);
+  // }
   onRowEditInit(dataSource: object) {
     this.clonedProducts = { dataSource };
   }
@@ -197,6 +197,25 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       }
 
     }
+  }
+  uploadAll = async () => {
+    const temp: IOffloadModifyReq[] = [];
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (this.dataSource[index].modifyType !== null || this.dataSource[index].modifyType !== undefined) {
+        temp.push({
+          id: this.dataSource[index].id,
+          modifyType: this.dataSource[index].modifyType,
+          checkedItems: [],
+          counterStateId: this.dataSource[index].counterStateId,
+          counterNumber: this.dataSource[index].counterNumber,
+          jalaliDay: this.dataSource[index].offloadDateJalali,
+          description: this.dataSource[index].description
+        })
+      }
+      console.log(temp);
+      
+    }
+    // to upload valid data to server and get valid response
   }
   receiveDateJalali = (event: any) => {
     // to make date updated to latest change by user

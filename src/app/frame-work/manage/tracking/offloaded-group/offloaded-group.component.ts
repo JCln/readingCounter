@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
@@ -21,13 +20,25 @@ export class OffloadedGroupComponent extends FactoryONE {
   _selectCols: any = [];
   _selectedColumns: any[];
   rowGroupMetadata: any;
+  canShowTable: boolean = true;
+  _canShowGroupBorder: boolean = false;
+  aggregateOptions = [
+    { field: 'zoneTitle', header: 'ناحیه' },
+    { field: 'insertDateJalali', header: 'تاریخ' },
+    { field: 'counterReaderName', header: 'مامور' },
+    { field: 'listNumber', header: 'ش لیست' },
+    { field: 'itemQuantity', header: 'تعداد' },
+    { field: 'year', header: 'سال' },
+    { field: 'fromDate', header: 'از' },
+    { field: 'toDate', header: 'تا' },
+    { field: 'alalHesabPercent', header: 'درصد علی‌الحساب' },
+    { field: 'imagePercent', header: 'درصد تصویر' }
+  ]
 
   constructor(
-
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,
-    public route: ActivatedRoute,
     private envService: EnvService
   ) {
     super();
@@ -47,7 +58,7 @@ export class OffloadedGroupComponent extends FactoryONE {
       this.closeTabService.saveDataForTrackOffloadedGroup = this.dataSource;
     }
     this.insertSelectedColumns();
-    this.updateRowGroupMetaData();
+    this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
   }
   downloadOutputSingle = async (row: ITracking) => {
     if (this.envService.hasNextBazdid) {
@@ -80,13 +91,7 @@ export class OffloadedGroupComponent extends FactoryONE {
   }
   insertSelectedColumns = () => {
     this._selectCols = this.trackingManagerService.columnOfflaodedGroup();
-    this._selectedColumns = this.customizeSelectedColumns(this._selectCols);
-  }
-  customizeSelectedColumns = (_selectCols: any) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
+    this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -95,24 +100,34 @@ export class OffloadedGroupComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
+  refreshTableAfterGrouping = (val: any) => {
+    if (val) {
+      this.updateRowGroupMetaData();
+      this.canShowTable = false;
+      setTimeout(() => this.canShowTable = true, 0);
+      this._canShowGroupBorder = true;
+    }
+    else {
+      this._canShowGroupBorder = false;
+    }
+  }
   onSort() {
     this.updateRowGroupMetaData();
   }
-
   updateRowGroupMetaData() {
     this.rowGroupMetadata = {};
 
     if (this.dataSource) {
       for (let i = 0; i < this.dataSource.length; i++) {
         let rowData = this.dataSource[i];
-        let representativeName = rowData.zoneTitle;
+        let representativeName = rowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
 
         if (i == 0) {
           this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
         }
         else {
           let previousRowData = this.dataSource[i - 1];
-          let previousRowGroup = previousRowData.zoneTitle;
+          let previousRowGroup = previousRowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
           if (representativeName === previousRowGroup)
             this.rowGroupMetadata[representativeName].size++;
           else

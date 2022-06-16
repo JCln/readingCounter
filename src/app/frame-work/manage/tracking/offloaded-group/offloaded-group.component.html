@@ -1,14 +1,25 @@
-<p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+<section class="content">
+    <div class="input_2">
+        <div class="_key">گروه‌بندی</div>
+        <p-dropdown name="zones" [options]="aggregateOptions"
+            [(ngModel)]="closeTabService.offloadedGroupReq._selectedAggregate" placeholder="انتخاب مورد"
+            [style]="{'min-width':'10rem','width':'100%'}" optionValue="field" optionLabel="header" filter="true"
+            (onChange)="refreshTableAfterGrouping(closeTabService.offloadedGroupReq._selectedAggregate)">
+        </p-dropdown>
+    </div>
+</section>
+<!-- sort field must be applied to group working -->
+<p-table *ngIf="canShowTable" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    stateStorage="session" sortField="zoneTitle" sortMode="single" (onSort)="onSort()">
+    [sortField]="closeTabService.offloadedGroupReq._selectedAggregate" stateStorage="session" stateKey="offloaded-group"
+    sortMode="single" (onSort)="onSort()" customSort="true" (sortFunction)="trackingManagerService.customSort($event)">
 
     <ng-template pTemplate="caption">
-        <!-- <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" name="selectOptions"
-                    optionLabel="header"
-                    (ngModelChange)="importDynamicService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables.selectedSimafaBatch ,$event)"
-                    selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-                </p-multiSelect> -->
+        <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" name="selectOptions" optionLabel="header"
+            (ngModelChange)="trackingManagerService.setColumnsChanges('dataSource' ,$event)"
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+        </p-multiSelect>
         <div class="header_icons_wrap">
             <div class="right_side">
             </div>
@@ -18,17 +29,19 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns">
+            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
             <th style="width: 2.5rem" *ngFor="let item of [1,2,3,4]"></th>
         </tr>
     </ng-template>
 
-    <ng-template hidden="!dataSource" pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
-        <tr class="_anything" *ngIf="rowGroupMetadata[dataSource.zoneTitle].index === ri">
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
+        <tr class="_anything"
+            *ngIf="_canShowGroupBorder && rowGroupMetadata[dataSource[closeTabService.offloadedGroupReq._selectedAggregate]].index === ri">
             <td>
-                <span>{{dataSource.zoneTitle}}</span>
+                <span>{{dataSource[closeTabService.offloadedGroupReq._selectedAggregate]}}</span>
             </td>
         </tr>
         <tr>

@@ -1,6 +1,17 @@
 @import 'primeNG';
+@import 'input';
 @import 'tooltip';
 
 ._anything {
-  background: var(--primary_1) !important;
+  background: var(--primary_3) !important;
+  border: 2px solid var(--primary_3) !important;
+  color: var(--white) !important;
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 19rem));
+  direction: rtl;
+  gap: $font_05;
+  align-items: center;
 }

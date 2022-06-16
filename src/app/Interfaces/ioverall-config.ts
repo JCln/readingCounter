@@ -84,6 +84,7 @@ export enum ENEssentialsToSave {
     saveDataForLastStates = 'saveDataForLastStates',
     saveDataForTrackOffloaded = 'saveDataForTrackOffloaded',
     saveDataForTrackOffloadedGroup = 'saveDataForTrackOffloadedGroup',
+    offloadedGroupReq = 'offloadedGroupReq',
     saveDataForTrackFinished = 'saveDataForTrackFinished',
     saveDataForFollowUp = 'saveDataForFollowUp',
     saveDataForFollowUpReq = 'saveDataForFollowUpReq',
