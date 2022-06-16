@@ -151,7 +151,7 @@ export enum ENInterfaces {
     trackingToREADING = 'V1/Tracking/ToReading',
     trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
     trackingToOFFLOADEDGeneralModify = 'V1/List/OffLoaded/AllInGroup/',
-    trackingToOffloadedGeneralGroupModify = 'test group batch',
+    trackingToOffloadedGroupModifyBatch = 'V1/OffLoad/ModifyBatch',
     GeneralModifyAllExcelInGroup = 'V1/List/OffLoaded/AllExcelInGroup/',
     trackingPRE = 'V1/Tracking/Pre',
     trackingBriefKardex = 'V1/AbBahaReport',

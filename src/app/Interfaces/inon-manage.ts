@@ -70,3 +70,14 @@ export interface IOffloadModifyReq {
     jalaliDay: string,
     description: string
 }
+export interface IBatchModifyRes {
+    doneCount: number,
+    errorCount: number,
+    detailsInfo: [
+        {
+            onOffLoadId: string,
+            hasError: boolean,
+            errorDescription: string
+        }
+    ]
+}

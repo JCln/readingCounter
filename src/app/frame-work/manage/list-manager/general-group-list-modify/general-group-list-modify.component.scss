@@ -36,3 +36,44 @@
   background-color: var(--primary_1);
   padding: 0 .2rem;
 }
+
+.borderize {
+  position: relative;
+  border: 2px solid var(--red_500);
+  border-radius: $border_15;
+}
+
+.error_info {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  top: -1rem;
+  z-index: 100;
+  background: var(--white);
+  padding: $font_05 0.2rem;
+  text-align: center;
+  border-radius: $border_15;
+  box-shadow: 0px 2px 3px 1px var(--thirdy_3);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1.5rem;
+    height: 5rem;
+    width: 12rem;
+  }
+}
+
+.info_icon {
+  padding: $font_05;
+  background-color: var(--red_600);
+  border-radius: $border_50;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0px 0px 1px 1px var(--thirdy_1);
+  }
+}
