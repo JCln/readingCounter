@@ -83,7 +83,7 @@ export enum EN_messages {
     insert_trackNumber = 'شماره پیگیری را وارد نمایید',
     insert_clientOrder = 'ترتیب نمایش را وارد نمایید',
     insert_modify_type = 'نوع اصلاح را وارد نمایید',
-    no_modifyFound = 'نوع اصلاح مشخص نشده است',
+    no_modifyFound = 'تغییری ایجاد نشده است',
     abbrMessage = 'خلاصه تغییرات بصورت زیر است',
     insert_number = 'مقدار عددی وارد نمایید',
     insert_fromEshterak = 'از اشتراک را وارد نمایید',

@@ -129,9 +129,10 @@ export interface IOnOffLoadFlat {
     zoneTitle?: string,
     readingReportTitles: string,
     mobiles: string,
+    balance: number,
     modifyType?: any//for general list modify
     modify?: any//for general group list modify,
-    editedHasError?: boolean// to make alert in the table
+    editedShowHasError?: boolean// to make alert in the table
     editedErrorDescription?: string// to make alert in the table
 }
 export interface IOutputManager {

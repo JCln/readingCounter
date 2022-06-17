@@ -41,10 +41,16 @@ export class PerDayComponent extends FactoryONE {
   routeToLMPDXY = (day: string) => {
     this.utilsService.routeToByParams(EN_Routes.wr, { trackNumber: this.dataSource.trackNumber, day: day, distance: this.dataSource.overalDistance });
   }
+  customizeSelectedColumns = (_selectCols: any) => {
+    return _selectCols.filter(items => {
+      if (items.isSelected)
+        return items
+    })
+  }
   private insertSelectedColumns = () => {
     this._selectMainDatas = this.listManagerService.columnSelectedLMPerDayPositions();
     this._selectCols = this.listManagerService.columnSelectedLMPerDay();
-    this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
+    this._selectedColumns = this.customizeSelectedColumns(this._selectCols);
     this.dateJalaliService.sortByDate(this.offLoadPerDayHistory, 'day');
   }
   private setGetRanges = () => {

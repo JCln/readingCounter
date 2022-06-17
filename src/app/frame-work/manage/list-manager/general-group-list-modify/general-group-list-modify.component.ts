@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENSelectedColumnVariables, IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
 import { BrowserStorageService } from 'services/browser-storage.service';
@@ -30,7 +29,6 @@ import { GeneralGroupInfoResComponent } from './general-group-info-res/general-g
 })
 export class GeneralGroupListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
-  ENSelectedColumnVariables: ENSelectedColumnVariables;
 
   _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];
   _rowsPerPage: number[] = [10, 100, 1000, 5000];
@@ -66,7 +64,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
 
   constructor(
     public listManagerService: ListManagerService,
-    private router: Router,
     public dialogService: DialogService,
     private closeTabService: CloseTabService,
     public allListsService: AllListsService,
@@ -77,7 +74,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   ) {
     super(dialogService, listManagerService);
   }
-
   updateOnChangedCounterState = async (val: any) => {
     this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val.value);
     this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
@@ -98,7 +94,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
-      this.router.navigateByUrl(EN_Routes.wrmtrackoffloadedGroup);
+      this.utilsService.routeTo(EN_Routes.wrmtrackoffloadedGroup);
     }
     else {
       this.assignToPageSign();
@@ -111,6 +107,13 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       if (this.closeTabService.saveDataForLMGeneralGroupModifyReq === this.allListsService.generalModifyListsGrouped_pageSign.GUid && this.closeTabService.saveDataForLMGeneralGroupModify) {
         this.dataSource = this.closeTabService.saveDataForLMGeneralGroupModify;
       }
+      if (this.browserStorageService.isExists(this._outputFileName)) {
+        this._selectCols = this.browserStorageService.get(this._outputFileName);
+      }
+      else {
+        this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
+      }
+      this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
       this.insertSelectedColumns();
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
@@ -126,8 +129,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.listManagerService.generalGroupListModify();
-    this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
     this.modifyType = this.listManagerService.getOffloadModifyType();
   }
   // toPrePage = () => {
@@ -156,7 +157,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
           }
           else {
             // successful
-            this.dataSource[j].editedHasError = true;
+            this.dataSource[j].editedShowHasError = true;
             this.dataSource[j].modify = null;
           }
         }

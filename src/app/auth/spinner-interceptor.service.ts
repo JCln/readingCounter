@@ -69,6 +69,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             if (error.status === ENClientServerErrors.cs504) {
               this.snackWrapperService.openSnackBar('پاسخی دریافت نشد', ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
             }
+            else {
+              this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fifteenMili, ENSnackBarColors.danger);
+            }
 
             this.spinnerWrapperService.stopPending();
             this.spinnerWrapperService.stopLoadingSmallSpinner();

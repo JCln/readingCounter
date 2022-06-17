@@ -24,73 +24,6 @@ export class ListManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ref: DynamicDialogRef;
 
-  generalGroupListModifyItems: IObjectIteratation[] = [
-    { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true, icon: '' },
-    { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true, icon: '' },
-    { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true, icon: '' },
-    { field: 'eshterak', header: 'اشتراک', isSelected: true, readonly: true, icon: '' },
-    // { field: 'zoneId', header: 'ناحیه', isSelected: false , readonly: true, icon: ''},
-    { field: 'qeraatCode', header: 'قرائت', isSelected: false, readonly: true, icon: '' },
-    { field: 'firstName', header: 'نام', isSelected: true, readonly: true, icon: '' },
-    { field: 'sureName', header: 'نام خانوادگی', isSelected: true, readonly: true, icon: '' },
-    { field: 'fatherName', header: 'نام پدر', isSelected: false, readonly: true, icon: '' },
-    { field: 'oldRadif', header: 'ش.پرونده قدیم', isSelected: false, readonly: true, icon: '' },
-    { field: 'oldEshterak', header: 'اشتراک قدیم', isSelected: false, readonly: true, icon: '' },
-    { field: 'karbariCode', header: 'کاربری', isSelected: true, readonly: true, icon: '' },
-    { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, readonly: true, icon: '' },
-    { field: 'preNumber', header: 'رقم قبلی', isSelected: true, readonly: true, icon: '' },
-    { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, readonly: false, icon: '_editable' },
-    { field: 'preDate', header: 'تاریخ قبلی', isSelected: false, readonly: true, icon: '' },
-    { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true, readonly: false, icon: '_editable' },
-    { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false, readonly: true, icon: '' },
-    // { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false, readonly: true , icon: ''},
-    { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true, isSelectOption: true, readonly: false, icon: '_editable' },
-    { field: 'address', header: 'آدرس', isSelected: false, readonly: true, icon: '' },
-    { field: 'pelak', header: 'پلاک', isSelected: false, readonly: true, icon: '' },
-    { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, readonly: true, icon: '' },
-    { field: 'ahadTejariOrFari', header: 'تجاری/فرعی', isSelected: false, readonly: true, icon: '' },
-    { field: 'ahadSaierOrAbBaha', header: 'آب بها', isSelected: false, readonly: true, icon: '' },
-    { field: 'qotrCode', header: 'قطر', isSelected: false, readonly: true, icon: '' },
-    // { field: 'sifoonQotrCode', header: 'قطر سیفون', isSelected: false , readonly: true, icon: ''},
-    { field: 'postalCode', header: 'کد پستی', isSelected: false, readonly: true, icon: '' },
-    { field: 'preAverage', header: 'میانگین قبلی', isSelected: false, readonly: true, icon: '' },
-    { field: 'counterSerial', header: 'سریال کنتور', isSelected: false, readonly: true, icon: '' },
-    { field: 'counterInstallDate', header: 'تاریخ نصب', isSelected: false, readonly: true, icon: '' },
-    { field: 'tavizDate', header: 'تاریخ تعویض', isSelected: false, readonly: true, icon: '' },
-    { field: 'tavizNumber', header: 'ش تعویض', isSelected: false, readonly: true, icon: '' },
-    { field: 'zarfiat', header: 'ظرفیت', isSelected: false, readonly: true, icon: '' },
-    { field: 'mobile', header: 'موبایل', isSelected: false, readonly: true, icon: '' },
-    { field: 'mobiles', header: 'موبایل‌ها', isSelected: false },
-    { field: 'readingReportTitles', header: 'گزارش بازرسی', isSelected: false },
-    { field: 'hazf', header: 'حذف', isSelected: false, readonly: true, icon: '' },
-    { field: 'hasError', header: 'خطا', isSelected: false, isBoolean: true, readonly: true, icon: '' },
-    { field: 'errorDescription', header: 'توضیح خطا', isSelected: false, readonly: true, icon: '' },
-    { field: 'possibleAddress', header: 'آدرس پیمایش', isSelected: false, readonly: true, icon: '' },
-    { field: 'possibleCounterSerial', header: 'سریال پیمایش', isSelected: false, readonly: true, icon: '' },
-    { field: 'possibleEshterak', header: 'اشتراک پیمایش', isSelected: false, readonly: true, icon: '' },
-    { field: 'possibleMobile', header: 'موبایل پیمایش', isSelected: false, readonly: true, icon: '' },
-    { field: 'possiblePhoneNumber', header: 'تلفن پیمایش', isSelected: false, readonly: true, icon: '' },
-    { field: 'possibleAhadMaskooniOrAsli', header: 'مسکونی/اصلی پیمایش', isSelected: false, readonly: true, icon: '' },
-    { field: 'possibleAhadTejariOrFari', header: 'تجاری/فرعی پیمایش', isSelected: false, readonly: true, icon: '' },
-    { field: 'possibleAhadSaierOrAbBaha', header: 'آحاد/سایر/آبها پیمایش', isSelected: false, readonly: true, icon: '' },
-    { field: 'y', header: 'Y', isSelected: false, readonly: true, icon: '' },
-    { field: 'x', header: 'X', isSelected: false, readonly: true, icon: '' },
-    { field: 'gisAccuracy', header: 'دقت', isSelected: false, readonly: true, icon: '' },
-    { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, readonly: true, icon: '' },
-    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true, readonly: true, icon: '' },
-    { field: 'masraf', header: 'مصرف', isSelected: false, readonly: true, icon: '' },
-    // { field: 'eslahType', header: 'اصلاح', isSelected: false , readonly: true, icon: ''},
-    { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true, readonly: true, icon: '' },
-    { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false, readonly: true, icon: '' },
-    { field: 'offLoadTime', header: 'زمان', isSelected: false, readonly: true, icon: '' },
-    { field: 'dateDifference', header: 'مدت', isSelected: false, readonly: true, icon: '' },
-    { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectOption: true, readonly: false, icon: '_editable' },
-    { field: 'description', header: 'توضیحات', isSelected: false, readonly: true, enableTooltip: true, icon: '_editable' }
-  ]
-  generalGroupListModify = (): IObjectIteratation[] => {
-    return this.generalGroupListModifyItems;
-  }
-
   columnSelectedLMPerDay = (): IObjectIteratation[] => {
     return [
       { field: 'day', header: 'روز', isSelected: true, readonly: true },
@@ -220,12 +153,6 @@ export class ListManagerService {
       item.x = MathS.getRange(item.x);
       item.y = MathS.getRange(item.y);
       item.gisAccuracy = MathS.getRange(item.gisAccuracy);
-    })
-  }
-  customizeSelectedColumns = (_selectCols: any[]) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
     })
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
