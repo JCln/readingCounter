@@ -39,12 +39,12 @@ export class ListManagerService {
     { field: 'karbariCode', header: 'کاربری', isSelected: true, readonly: true, icon: '' },
     { field: 'possibleKarbariCode', header: 'کاربری پیمایش', isSelected: false, readonly: true, icon: '' },
     { field: 'preNumber', header: 'رقم قبلی', isSelected: true, readonly: true, icon: '' },
-    { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, readonly: false, icon: '' },
+    { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, readonly: false, icon: '_editable' },
     { field: 'preDate', header: 'تاریخ قبلی', isSelected: false, readonly: true, icon: '' },
-    { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true, readonly: false, icon: '' },
+    { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true, readonly: false, icon: '_editable' },
     { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false, readonly: true, icon: '' },
     // { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false, readonly: true , icon: ''},
-    { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true, isSelectOption: true, readonly: false, icon: '' },
+    { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true, isSelectOption: true, readonly: false, icon: '_editable' },
     { field: 'address', header: 'آدرس', isSelected: false, readonly: true, icon: '' },
     { field: 'pelak', header: 'پلاک', isSelected: false, readonly: true, icon: '' },
     { field: 'ahadMaskooniOrAsli', header: 'مسکونی/اصلی', isSelected: false, readonly: true, icon: '' },
@@ -77,15 +77,15 @@ export class ListManagerService {
     { field: 'x', header: 'X', isSelected: false, readonly: true, icon: '' },
     { field: 'gisAccuracy', header: 'دقت', isSelected: false, readonly: true, icon: '' },
     { field: 'masrafStateId', header: 'وضعیت مصرف', isSelected: true, readonly: true, icon: '' },
-    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true, readonly: false, icon: '' },
+    { field: 'imageCount', header: 'تصویر', isSelected: true, isBoolean: true, readonly: true, icon: '' },
     { field: 'masraf', header: 'مصرف', isSelected: false, readonly: true, icon: '' },
     // { field: 'eslahType', header: 'اصلاح', isSelected: false , readonly: true, icon: ''},
-    { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true, readonly: false, icon: '' },
+    { field: 'excludedForEslah', header: 'اصلاح', isSelected: true, isBoolean: true, readonly: true, icon: '' },
     { field: 'newRate', header: 'میانگین مصرف جدید', isSelected: false, readonly: true, icon: '' },
     { field: 'offLoadTime', header: 'زمان', isSelected: false, readonly: true, icon: '' },
     { field: 'dateDifference', header: 'مدت', isSelected: false, readonly: true, icon: '' },
-    { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectOption: true, readonly: false, icon: '' },
-    { field: 'description', header: 'توضیحات', isSelected: false, readonly: true, enableTooltip: true, icon: '' }
+    { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectOption: true, readonly: false, icon: '_editable' },
+    { field: 'description', header: 'توضیحات', isSelected: false, readonly: true, enableTooltip: true, icon: '_editable' }
   ]
   generalGroupListModify = (): IObjectIteratation[] => {
     return this.generalGroupListModifyItems;

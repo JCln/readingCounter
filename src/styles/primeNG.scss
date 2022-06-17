@@ -49,6 +49,10 @@
     word-break: break-word;
   }
 
+  ._editable {
+    background-color: var(--light_1);
+  }
+
   .p-inputtext {
     background: var(--white);
     border: 1px solid var(--primary_2);

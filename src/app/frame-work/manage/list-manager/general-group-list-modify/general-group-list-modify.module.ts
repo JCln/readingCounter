@@ -6,11 +6,13 @@ import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
 import { GeneralGroupListModifyRoutingModule } from './general-group-list-modify-routing.module';
 import { GeneralGroupListModifyComponent } from './general-group-list-modify.component';
+import { GeneralGroupInfoResComponent } from './general-group-info-res/general-group-info-res.component';
 
 
 @NgModule({
   declarations: [
-    GeneralGroupListModifyComponent
+    GeneralGroupListModifyComponent,
+    GeneralGroupInfoResComponent
   ],
   imports: [
     SharedPrimeNgModule,

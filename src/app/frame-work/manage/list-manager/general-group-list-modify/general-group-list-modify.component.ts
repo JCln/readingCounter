@@ -7,9 +7,11 @@ import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
+import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
@@ -19,6 +21,7 @@ import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
+import { GeneralGroupInfoResComponent } from './general-group-info-res/general-group-info-res.component';
 
 @Component({
   selector: 'app-general-group-list-modify',
@@ -29,10 +32,11 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
   ENSelectedColumnVariables: ENSelectedColumnVariables;
 
-  _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5];
+  _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];
   _rowsPerPage: number[] = [10, 100, 1000, 5000];
   _selectedColumnsToRemember: string = 'selectedGeneralGroupModify';
   _sessionName: string = 'generalGroupModify';
+  _outputFileName: string = 'generalGroupModify';
   _selectCols: any = [];
   _selectedColumns: any[];
 
@@ -67,7 +71,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     private closeTabService: CloseTabService,
     public allListsService: AllListsService,
     public outputManagerService: OutputManagerService,
-    public columnManager: ColumnManager
+    public columnManager: ColumnManager,
+    public browserStorageService: BrowserStorageService,
+    public utilsService: UtilsService
   ) {
     super(dialogService, listManagerService);
   }
@@ -144,26 +150,20 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     for (let index = 0; index < data.detailsInfo.length; index++) {
       for (let j = 0; j < this.dataSource.length; j++) {
         if (data.detailsInfo[index].onOffLoadId === this.dataSource[j].id) {
+          console.log(data.detailsInfo[index].hasError);
           if (data.detailsInfo[index].hasError) {
-            this.dataSource[j].icon = 'success';
             this.dataSource[j].editedErrorDescription = data.detailsInfo[index].errorDescription;
           }
           else {
-            this.dataSource[j].icon = 'redAlert';
-            this.dataSource[j].editedErrorDescription = data.detailsInfo[index].errorDescription;
+            // successful
+            this.dataSource[j].editedHasError = true;
+            this.dataSource[j].modify = null;
           }
         }
       }
 
     }
-    console.log(data);
-
-    // this.listManagerService.generalGroupListModifyItems[0].icon;
-  }
-  showDescriptionError = (error: string, rowIndex: number) => {
-    console.log(error);
-    let a = document.querySelectorAll('.more_configs');
-    a[rowIndex].classList.toggle('error_info');
+    this.openEditedModifyBatch(data);
   }
   uploadAll = async () => {
     const temp: IOffloadModifyReq[] = [];
@@ -180,23 +180,40 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         })
         console.log(temp);
       }
+      else {
+        console.log(this.dataSource[index].modifyType);
+
+        // if (typeof this.dataSource[index].modifyType == 'object') {
+        //   this.dataSource[index].modifyType = this.dataSource[index].modifyType.title;
+        // }
+        // if (typeof this.dataSource[index].modifyType == 'string') {
+        //   this.offloadModifyReq.modifyType = this.convertTitleToIdByModifyType(this.dataSource[index].modifyType).id;
+        // }
+      }
     }
     if (MathS.isNull(temp)) {
       this.listManagerService.showSnackWarn(EN_messages.no_modifyFound);
     } else {
-      this.manageModifyBatchResponse(await this.listManagerService.postArrays(ENInterfaces.trackingToOffloadedGroupModifyBatch, temp));
       // to upload valid data to server and get valid response
+      this.manageModifyBatchResponse(await this.listManagerService.postArrays(ENInterfaces.trackingToOffloadedGroupModifyBatch, temp));
     }
   }
-  receiveDateJalali = (event: any) => {
+  receiveDateJalali = (event: any, rowIndex: number) => {
     // to make date updated to latest change by user
-    this.offloadModifyReq.jalaliDay = event;
+    this.dataSource[rowIndex].offloadDateJalali = event;
+    // this.offloadModifyReq.jalaliDay = event;
   }
-  /*
-  water officer upload carousel images
-  */
   assignToPageSign = () => {
     this.pageSignTrackNumber = this.allListsService.generalModifyListsGrouped_pageSign.trackNumber;
+  }
+  openEditedModifyBatch = (data: IBatchModifyRes) => {
+    this.ref = this.dialogService.open(GeneralGroupInfoResComponent, {
+      data: {
+        doneCount: data.doneCount, errorCount: data.errorCount
+      },
+      rtl: true,
+      width: '70%'
+    })
   }
   openMoshtarakinDialog = (dataSource: any) => {
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {
@@ -236,6 +253,35 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   set selectedColumns(val: any[]) {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  }
+  saveColumns() {
+    let newArray: any[] = [];
+    for (let i = 0; i < this._selectCols.length; i++) {
+      let element = this._selectCols[i];
+      element.isSelected = false;
+      newArray.push(element);
+      for (let j = 0; j < this._selectedColumns.length; j++) {
+        if (this._selectCols[i].field == this._selectedColumns[j].field) {
+          element.isSelected = true;
+          newArray[i].isSelected = true;
+        }
+      }
+    }
+
+    this.browserStorageService.set(this._outputFileName, newArray);
+    this.utilsService.snackBarMessageSuccess(EN_messages.tableSaved);
+  }
+  resetSavedColumns = () => {
+    if (!MathS.isNull(this._outputFileName)) {
+      if (this.browserStorageService.isExists(this._outputFileName)) {
+        this.browserStorageService.removeLocal(this._outputFileName);
+        this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
+      } else {
+        this.utilsService.snackBarMessageSuccess(EN_messages.tableDefaultColumnOrder);
+      }
+    }
+    else
+      this.utilsService.snackBarMessageWarn(EN_messages.done);
   }
 
 }
