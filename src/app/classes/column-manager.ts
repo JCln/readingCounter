@@ -1073,7 +1073,7 @@ export class ColumnManager {
         { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectOption: true, readonly: false },
         { field: 'description', header: 'توضیحات', isSelected: false, readonly: true, enableTooltip: true }
     ]
-    generalGroupListModifyItems: IObjectIteratation[] = [
+    generalGroupModify: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true, icon: '' },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true, icon: '' },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true, icon: '' },
