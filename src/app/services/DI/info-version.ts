@@ -3,19 +3,9 @@ import { IDictionaryManager } from 'interfaces/ioverall-config';
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'اصلاح لیست',
+        title: 'اصلاح لیست(دسته ای)',
         isSelected: true
-    },
-    {
-        id: '2',
-        title: 'بهبود عملکرد برنامه',
-        isSelected: true
-    },
-    {
-        id: '2',
-        title: 'قطر کنتور',
-        isSelected: true
-    },
+    }
 ]
 export class infoVersion {
 
