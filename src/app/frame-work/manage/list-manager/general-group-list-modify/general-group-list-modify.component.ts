@@ -128,6 +128,13 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
     }
   }
+  clickedDropDowns = (event: any, element: string, dataId: any) => {
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (this.dataSource[index].id === dataId) {
+        this.dataSource[index][element] = event.title;
+      }
+    }
+  }
   insertSelectedColumns = () => {
     this.modifyType = this.listManagerService.getOffloadModifyType();
   }
@@ -158,7 +165,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
           else {
             // successful
             this.dataSource[j].editedShowHasError = true;
-            this.dataSource[j].modify = null;
+            this.dataSource[j].modifyType = null;
           }
         }
       }
@@ -168,28 +175,18 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   uploadAll = async () => {
     const temp: IOffloadModifyReq[] = [];
+
     for (let index = 0; index < this.dataSource.length; index++) {
-      if (!MathS.isNull(this.dataSource[index].modify)) {
+      if (!MathS.isNull(this.dataSource[index].modifyType)) {
         temp.push({
           id: this.dataSource[index].id,
-          modifyType: this.dataSource[index].modify.id,
+          modifyType: this.convertTitleToIdByModifyType(this.dataSource[index].modifyType).id,
           checkedItems: [0],
           counterStateId: this.convertTitleToId(this.dataSource[index].counterStateId).id,
           counterNumber: this.dataSource[index].counterNumber,
           jalaliDay: this.dataSource[index].offloadDateJalali,
           description: this.dataSource[index].description
         })
-        console.log(temp);
-      }
-      else {
-        console.log(this.dataSource[index].modifyType);
-
-        // if (typeof this.dataSource[index].modifyType == 'object') {
-        //   this.dataSource[index].modifyType = this.dataSource[index].modifyType.title;
-        // }
-        // if (typeof this.dataSource[index].modifyType == 'string') {
-        //   this.offloadModifyReq.modifyType = this.convertTitleToIdByModifyType(this.dataSource[index].modifyType).id;
-        // }
       }
     }
     if (MathS.isNull(temp)) {
@@ -199,10 +196,13 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.manageModifyBatchResponse(await this.listManagerService.postArrays(ENInterfaces.trackingToOffloadedGroupModifyBatch, temp));
     }
   }
-  receiveDateJalali = (event: any, rowIndex: number) => {
+  receiveDateJalali = (event: any, dataId: string) => {
     // to make date updated to latest change by user
-    this.dataSource[rowIndex].offloadDateJalali = event;
-    // this.offloadModifyReq.jalaliDay = event;
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (this.dataSource[index].id === dataId) {
+        this.dataSource[index].offloadDateJalali = event;
+      }
+    }    
   }
   assignToPageSign = () => {
     this.pageSignTrackNumber = this.allListsService.generalModifyListsGrouped_pageSign.trackNumber;

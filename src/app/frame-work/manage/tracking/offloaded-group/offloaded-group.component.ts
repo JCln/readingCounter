@@ -68,9 +68,6 @@ export class OffloadedGroupComponent extends FactoryONE {
     const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputSINGLE, row);
     this.outputManagerService.downloadFile(a);
   }
-  routeToOffloadModify = (dataSource: ITracking) => {
-    this.trackingManagerService.routeToOffloadModify(dataSource);
-  }
   routeToOffloadGeneralGroupModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadGeneralModifyGrouped(dataSource);
   }
