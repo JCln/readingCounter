@@ -47,6 +47,9 @@ export interface ISearchProReportInput {
     masrafStates: number[],
     karbariCodes: number[],
     fragmentMasterIds: string[]
+
+    _selectedKindId: string,
+    searchByText: string,
 }
 export enum ENSearchs {
     simple = '_searchSimpleReq'

@@ -5,12 +5,12 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-  ENSelectedColumnVariables,
-  IGetYears,
-  IMasrafStates,
-  IObjectIteratation,
-  ISearchInOrderTo,
-  ITitleValue,
+    ENSelectedColumnVariables,
+    IGetYears,
+    IMasrafStates,
+    IObjectIteratation,
+    ISearchInOrderTo,
+    ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
@@ -59,6 +59,7 @@ export class SearchService {
     readingPeriodId: null,
     year: 1401
   }
+  
   private _searchProExcel: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: true },
     { field: 'trackNumber', header: 'شناسه قبض', isSelected: true },
@@ -107,7 +108,7 @@ export class SearchService {
   getCounterStateByZoneShowAllDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(zoneId);
   }
-  getQotrDictionary = () => {
+  getQotrDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getQotrDictionary();
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
@@ -116,7 +117,7 @@ export class SearchService {
   getReadingPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
-  getFragmentMasterDictionary = (zoneId: number) => {
+  getFragmentMasterDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(zoneId);
   }
   postById = (method: ENInterfaces, id: number): Promise<any> => {

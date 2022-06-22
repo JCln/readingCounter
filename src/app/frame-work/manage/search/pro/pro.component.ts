@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ITHV, ITitleValue } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -18,8 +19,6 @@ import { AllListsFactory } from 'src/app/classes/factory';
 })
 export class ProComponent extends AllListsFactory {
 
-  _empty_message: string = '';
-
   dataSource: IOnOffLoadFlat[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -34,11 +33,9 @@ export class ProComponent extends AllListsFactory {
   counterReportDictionary: IDictionaryManager[] = [];
   fragmentMasterIds: any[] = [];
   masrafState: ITHV[] = []
-
+  _selectedZone: any;
   _years: ITitleValue[] = [];
   _isOrderByDate: boolean = true;
-  _selectedKindId: string = '';
-  searchByText: string = '';
 
 
   constructor(
@@ -52,38 +49,51 @@ export class ProComponent extends AllListsFactory {
     super(dialogService, listManagerService);
   }
 
-  converts = async () => {
-    if (this.closeTabService.saveDataForSearchProReq.zoneId) {
-      // this._empty_message = EN_messages.notFound;
-      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this.closeTabService.saveDataForSearchProReq.zoneId);
-      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this.closeTabService.saveDataForSearchProReq.zoneId);
-      this.karbariDictionary = await this.searchService.getKarbariDictionary();
-      this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
-      this.qotrDictionary = await this.searchService.getQotrDictionary();
-
-      Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-      Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');      
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-      Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-      this.searchService.setDynamicPartRanges(this.dataSource);
-      this.searchService.makeHadPicturesToBoolean(this.dataSource);
-    }
-  }
-  formDefinition = async () => {
-    this.zoneDictionary = await this.searchService.getZoneDictionary();
-    this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
-    this.masrafState = this.searchService.getMasrafStates();
-    this._years = this.searchService.receiveYear();
-    this.getMasterInZone();
-  }
   callApi = async () => {
-    if (this.closeTabService.saveDataForSearchProReq.zoneId && this.closeTabService.saveDataForSearchProReq) {
+    if (this.closeTabService.saveDataForSearchProReq.zoneId) {
       this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchPro, this.closeTabService.saveDataForSearchProReq);
       this.closeTabService.saveDataForSearchPro = this.dataSource;
-      this.converts();
+      this.getNesseseriesByZone();
     }
+    else {
+      this.listManagerService.showSnackWarn(EN_messages.insert_zone);
+    }
+  }
+  getNesseseriesByZone = async () => {
+    if (!this._selectedZone) {
+      if (this.closeTabService.saveDataForSearchProReq.zoneId) {
+        this._selectedZone = this.closeTabService.saveDataForSearchProReq.zoneId;
+      }
+    }
+    if (this._selectedZone) {
+      // add latest zone value to "_selectedZone"
+      this.closeTabService.saveDataForSearchProReq.zoneId = this._selectedZone;
+      this.fragmentMasterIds = await this.searchService.getFragmentMasterDictionary(this._selectedZone);
+      this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(this._selectedZone);
+      this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(this._selectedZone);
+      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this._selectedZone);
+      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this._selectedZone);
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    }
+    else {
+      this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
+    }
+    this.zoneDictionary = await this.searchService.getZoneDictionary();
+    this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
+    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
+    this.karbariDictionary = await this.searchService.getKarbariDictionary();
+    this.qotrDictionary = await this.searchService.getQotrDictionary();
+
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+
+    this.searchService.setDynamicPartRanges(this.dataSource);
+    this.searchService.makeHadPicturesToBoolean(this.dataSource);
+    this.masrafState = this.searchService.getMasrafStates();
+    this._years = this.searchService.receiveYear();
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -92,23 +102,12 @@ export class ProComponent extends AllListsFactory {
     }
     if (this.closeTabService.saveDataForSearchPro) {
       this.dataSource = this.closeTabService.saveDataForSearchPro;
+      this._selectedZone = this.closeTabService.saveDataForSearchProReq.zoneId;
     }
-    else {
-      this.callApi();
-    }
-    this.formDefinition();
-  }
-
-  getMasterInZone = async () => {
-    if (this.closeTabService.saveDataForSearchProReq.zoneId) {
-      this.fragmentMasterIds = await this.searchService.getFragmentMasterDictionary(this.closeTabService.saveDataForSearchProReq.zoneId);
-      this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(this.closeTabService.saveDataForSearchProReq.zoneId);
-      this.karbariDictionary = await this.searchService.getKarbariDictionaryCode();
-      this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(this.closeTabService.saveDataForSearchProReq.zoneId);
-    }
+    this.getNesseseriesByZone();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this._selectedKindId);
+    this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this.closeTabService.saveDataForSearchProReq._selectedKindId);
   }
   async connectToServer() {
     if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this._isOrderByDate)) {

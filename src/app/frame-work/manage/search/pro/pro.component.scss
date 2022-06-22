@@ -96,7 +96,7 @@ form {
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_2);
   text-align: center;
-  padding: .5rem 0 5rem 0.2rem;
+  padding: .5rem 0 0.2rem;
   border-radius: $border_15;
   gap: .2rem;
 }
@@ -118,9 +118,10 @@ form {
 ._more_options {
   grid-column: 5/10;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 12rem));
   justify-content: center;
   background-color: var(--white);
+  max-height: 15rem;
   border-radius: 5px;
 
   @media (max-width: 780px) {

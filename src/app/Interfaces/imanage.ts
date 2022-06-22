@@ -132,7 +132,7 @@ export interface IOnOffLoadFlat {
     balance: number,
     modifyType?: any//for general list modify
     modify?: any//for general group list modify,
-    editedShowHasError?: boolean// to make alert in the table
+    isResponseHasError?: boolean// to make alert in the table
     editedErrorDescription?: string// to make alert in the table
 }
 export interface IOutputManager {

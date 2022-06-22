@@ -160,12 +160,16 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         if (data.detailsInfo[index].onOffLoadId === this.dataSource[j].id) {
           console.log(data.detailsInfo[index].hasError);
           if (data.detailsInfo[index].hasError) {
+            // with error[index of dataSource]
+            this.dataSource[j].isResponseHasError = true;
             this.dataSource[j].editedErrorDescription = data.detailsInfo[index].errorDescription;
           }
           else {
             // successful
-            this.dataSource[j].editedShowHasError = true;
+            // possible for last icon remain in table, make sure new icons replace
+            this.dataSource[j].isResponseHasError = false;
             this.dataSource[j].modifyType = null;
+            this.dataSource[j].editedErrorDescription = '';
           }
         }
       }
@@ -202,7 +206,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       if (this.dataSource[index].id === dataId) {
         this.dataSource[index].offloadDateJalali = event;
       }
-    }    
+    }
   }
   assignToPageSign = () => {
     this.pageSignTrackNumber = this.allListsService.generalModifyListsGrouped_pageSign.trackNumber;

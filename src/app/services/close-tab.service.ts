@@ -95,6 +95,7 @@ export class CloseTabService {
   // SEARCH
   saveDataForSearchMoshtarakin: any;
   saveDataForSearchMoshtarakinReq: any;
+  saveDataForSearchPro: any;
   saveDataForSearchProReq: ISearchProReportInput = {
     zoneId: null,
     fromDate: '',
@@ -106,9 +107,10 @@ export class CloseTabService {
     counterStateIds: [],
     masrafStates: [],
     karbariCodes: [],
-    fragmentMasterIds: []
+    fragmentMasterIds: [],
+    _selectedKindId: '',
+    searchByText: '',
   }
-  saveDataForSearchPro: any;
   saveDataForSearchSimple: any;
   // list manager
   saveDataForLMPD: any;
@@ -244,33 +246,29 @@ export class CloseTabService {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = '';
       this[this.val[index].value_2] = '';
-      this[this.val[index].req] = '';
     }
+    // TODO: make null all objects
     this.cleanArrays();
   }
   cleanData = (url: string) => {
     this.val.find(item => {
       if (item.url === url) {
         this[item.value] = '';
-        this[item.req] = '';
+        for (const prop of Object.getOwnPropertyNames(this[item.req])) {
+          delete this[item.req][prop]
+        }
         this[item.value_2] = '';
       }
       else {
         if (url.includes(item.url)) {
           this[item.value] = '';
-          this[item.req] = '';
+          for (const prop of Object.getOwnPropertyNames(this[item.req])) {
+            delete this[item.req][prop]
+          }
           this[item.value_2] = '';
         }
       }
     })
   }
-  cleanById = (id: number) => {
-    this.val.find(item => {
-      if (item.id == id) {
-        item.req = null;
-        item.value = null;
-        item.value_2 = null
-      }
-    })
-  }
+
 }

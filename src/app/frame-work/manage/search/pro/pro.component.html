@@ -21,11 +21,10 @@
             <section class="__content">
                 <span class="ui-float-label">
                     <label for="float-input">ناحیه</label>
-                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zone" #zoneId
-                        [options]="zoneDictionary" name="_selectedKindId"
-                        [(ngModel)]="closeTabService.saveDataForSearchProReq.zoneId" optionLabel="title" [filter]="true"
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zones" #zoneId
+                        [options]="zoneDictionary" [(ngModel)]="_selectedZone" optionLabel="title" [filter]="true"
                         filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
-                        (onChange)="getMasterInZone()">
+                        (onChange)="getNesseseriesByZone()">
                     </p-dropdown>
                 </span>
 
@@ -40,9 +39,10 @@
                 <span class="ui-float-label" [hidden]="_isOrderByDate">
                     <label for="float-input">نوع دوره</label>
                     <p-dropdown [style]="{minWidth: '100%'}" name="kindId" #kindId
-                        [options]="readingPeriodKindDictionary" name="_selectedKindId" [(ngModel)]="_selectedKindId"
-                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                        placeholder="انتخاب مورد" (onChange)="getReadingPeriod()">
+                        [options]="readingPeriodKindDictionary" name="_selectedKindId"
+                        [(ngModel)]="closeTabService.saveDataForSearchProReq._selectedKindId" optionLabel="title"
+                        [filter]="true" filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
+                        (onChange)="getReadingPeriod()">
                     </p-dropdown>
                 </span>
 
@@ -57,12 +57,14 @@
 
                 <span class="ui-float-label" [hidden]="!_isOrderByDate">
                     <label for="float-input">از</label>
-                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                        [dateObject]="closeTabService.saveDataForSearchProReq.fromDate">
                     </app-date-jalali>
                 </span>
                 <span class="ui-float-label" [hidden]="!_isOrderByDate">
                     <label for="float-input">تا</label>
-                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)">
+                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
+                        [dateObject]="closeTabService.saveDataForSearchProReq.toDate">
                     </app-date-jalali>
                 </span>
 
@@ -71,7 +73,7 @@
 
         <section class="_more_options">
 
-            <article>
+            <article *ngIf="masrafState.length">
                 <h3 class="title">وضعیت مصرف</h3>
                 <p-multiSelect [options]="masrafState" name="masraf"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.masrafStates" optionLabel="header"
@@ -79,14 +81,14 @@
                     placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
-            <article>
+            <article *ngIf="counterReportDictionary.length">
                 <h3 class="title">گزارش کنتور</h3>
                 <p-multiSelect [options]="counterReportDictionary" name="counterReport"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.reportIds" optionLabel="title" optionValue="id"
                     selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
-            <article>
+            <article *ngIf="counterStateByZoneIdDictionary.length">
                 <h3 class="title">وضعیت کنتور</h3>
                 <p-multiSelect [options]="counterStateByZoneIdDictionary" name="counterState"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.counterStateIds" optionLabel="title"
@@ -94,7 +96,7 @@
                     placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
-            <article>
+            <article *ngIf="karbariDictionary.length">
                 <h3 class="title">کاربری</h3>
                 <p-multiSelect [options]="karbariDictionary" name="karbari"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.karbariCodes" optionLabel="title"
@@ -102,7 +104,7 @@
                     placeholder="انتخاب مورد">
                 </p-multiSelect>
             </article>
-            <article>
+            <article *ngIf="fragmentMasterIds.length">
                 <h3 class="title">نوبتی ها</h3>
                 <p-multiSelect [options]="fragmentMasterIds" name="fragmentId"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.fragmentMasterIds" optionLabel="routeTitle"
@@ -127,8 +129,9 @@
 
 </form>
 
-<app-prime-table *ngIf="dataSource.length" [dataSource]="dataSource" [_outputFileName]="'searchPro'"
-    [_checkUpName]="'searchPro'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'search_acme'"
+<app-prime-table [dataSource]="dataSource" [_outputFileName]="'searchPro'" [_checkUpName]="'searchPro'"
+    [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'search_acme'"
     [_selectedColumnsToRemember]="'selectedListManagerPro'" (refreshedTable)="refreshTable()"
-    (showedPictures)="getReadingReportTitles($event)" (showedWOUIAsCarousel)="doShowCarousel($event)" (showedInMapSingle)="openMapDialog($event)">
+    (showedPictures)="getReadingReportTitles($event)" (showedWOUIAsCarousel)="doShowCarousel($event)"
+    (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>
