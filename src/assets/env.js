@@ -4,12 +4,10 @@
     // API url
     window.__env.headerProvinceTitle = 'test';
     window.__env.API_URL = 'https://37.191.92.157/kontoriNew';
+    // for map instantiation
     window.__env.OSMmapBoxUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    window.__env.SATELLITEMapBoxUrl = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=';
-    window.__env.SATELLITEMapAccessToken = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg';
+    window.__env.mapUrls = [{ title: 'OSM', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' }, { title: 'OSM_ESF_local', url: 'http://172.18.12.242/osm_tiles/{z}/{x}/{y}.png' }, { title: 'sattelite', url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg' }];
     window.__env.hasNextBazdid = false;
-    window.__env.hasDarkOSMMap = false;
-    window.__env.OSMDarkmapBoxUrl = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png';
     window.__env.mapCenter = [32.669, 51.664];
     window.__env.browserVersions = {
         Desktop: {

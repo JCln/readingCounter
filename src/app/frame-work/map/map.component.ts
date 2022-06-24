@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { Imap } from 'interfaces/imap.js';
 import { ENLocalStorageNames, ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
 import { IListManagerPDXY } from 'interfaces/itrackings';
@@ -62,7 +61,6 @@ L.Marker.prototype.options.icon = simpleIcon;
 export class MapComponent implements OnInit, OnDestroy {
   extraDataSourceRes: IReadingReportGISResponse[] = [];
   private map: L.Map;
-  private mapItems: Imap[];
   private layerGroup = new L.FeatureGroup();
   private markersDataSourceXY: IListManagerPDXY[] = [];
 
@@ -70,8 +68,11 @@ export class MapComponent implements OnInit, OnDestroy {
   isShowMap: boolean = true;
   canShowOptionsButton: boolean = false;
   isShowMapConfig: boolean = false;
+  _isCluster: boolean;
+  _isSingle: boolean;
+  _currentColorMode: boolean;
   subscription: Subscription[] = [];
-
+  _isOrderInAsc: boolean = false;
   _selectedOrderId: number = 0;
 
   orderGroup: ITHV[] = [
@@ -86,13 +87,10 @@ export class MapComponent implements OnInit, OnDestroy {
       value: 1
     }
   ]
-  _isOrderInAsc: boolean = false;
+
   onShowCounterReader = {
     trackNumber: '', day: '', distance: null, isPerday: null
   }
-  _isCluster: boolean;
-  _isSingle: boolean;
-  _currentColorMode: boolean;
 
   constructor(
     public mapService: MapService,
@@ -104,9 +102,6 @@ export class MapComponent implements OnInit, OnDestroy {
     private dateJalaliService: DateJalaliService
   ) { }
 
-  private getMapItems = () => {
-    this.mapItems = this.mapService.getMapItems();
-  }
   private getOverlays = () => {
     return {
       "لایه ها": this.layerGroup
@@ -114,15 +109,12 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   initMap = () => {
     // only one of base layers should be added to the map at instantiation
-    //   OSM = this.mapItems[0];
-    // SATELLITE = this.mapItems[1];
-
     this.map = L.map('map', {
       center: this.envService.mapCenter,
       zoom: ENRandomNumbers.fifteen,
       minZoom: ENRandomNumbers.four,
       maxZoom: ENRandomNumbers.eighteen,
-      layers: [this.mapService.initMapColor(), this.layerGroup]
+      layers: [this.mapService.getLightStreetsUrl(), this.layerGroup]
     });
 
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
@@ -229,14 +221,14 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit(): void {
-    this.getMapItems();
+    // this.getMapItems();
     this.initMap();
     this.getRouteParams();
     this.mapService.serviceInstantiate(this.map);
     this.mapService.addButtonsToLeaflet();
     this.removeLayerButtonLeaflet();
     this.myLocationButtonLeaflet();
-    this.toggleMapView();
+    // this.toggleMapView();
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
     if (lat === 0 || lag === 0)
@@ -406,21 +398,21 @@ export class MapComponent implements OnInit, OnDestroy {
       this.map.on('locationerror', this.onLocationError);
     }, 'مکان من').addTo(this.map);
   }
-  toggleMapView = () => {
-    if (this.mapService.canUseMultiMapColors()) {
-      L.easyButton('pi pi-moon', () => {
-        this._currentColorMode = !this._currentColorMode;
-        if (this._currentColorMode) {
-          this.map.removeLayer(this.mapService.getLightStreetsUrl());
-          this.map.addLayer(this.mapService.getDarkStreetsUrl());
-        }
-        else {
-          this.map.removeLayer(this.mapService.getDarkStreetsUrl());
-          this.map.addLayer(this.mapService.getLightStreetsUrl());
-        }
-        this.mapService.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, this._currentColorMode);
-      }, this._currentColorMode ? 'پس‌زمینه تیره' : 'پس‌زمینه روشن').addTo(this.map);
-    }
-  }
+  // toggleMapView = () => {
+  //   if (this.mapService.canUseMultiMapColors()) {
+  //     L.easyButton('pi pi-moon', () => {
+  //       this._currentColorMode = !this._currentColorMode;
+  //       if (this._currentColorMode) {
+  //         this.map.removeLayer(this.mapService.getLightStreetsUrl());
+  //         this.map.addLayer(this.mapService.getDarkStreetsUrl());
+  //       }
+  //       else {
+  //         this.map.removeLayer(this.mapService.getDarkStreetsUrl());
+  //         this.map.addLayer(this.mapService.getLightStreetsUrl());
+  //       }
+  //       this.mapService.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, this._currentColorMode);
+  //     }, this._currentColorMode ? 'پس‌زمینه تیره' : 'پس‌زمینه روشن').addTo(this.map);
+  //   }
+  // }
 
 }

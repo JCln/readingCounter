@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Imap } from 'interfaces/imap';
 import { ENRandomNumbers } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -32,7 +31,6 @@ export class LatestReadsComponent extends AllListsFactory {
 
   /* TODO save latest data according to last view and show updating rows  */
   classWrapper = async (canRefresh?: boolean) => {
-    this.getMapItems();
     this.initMap();
 
     if (this.closeTabService.saveDataForMomentLastRead) {
@@ -54,7 +52,6 @@ export class LatestReadsComponent extends AllListsFactory {
   private layerGroup2 = new L.FeatureGroup();
   private map2: L.Map;
 
-  private mapItems2: Imap[];
 
   private markMultipleLocations = (xyData: any) => {
     xyData.map((items) => {
@@ -75,13 +72,10 @@ export class LatestReadsComponent extends AllListsFactory {
       zoom: ENRandomNumbers.eight,
       minZoom: ENRandomNumbers.four,
       maxZoom: ENRandomNumbers.eighteen,
-      layers: [this.mapService.initMapColor(), this.layerGroup2]
+      layers: [this.mapService.getLightStreetsUrl(), this.layerGroup2]
     });
 
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map2);
-  }
-  private getMapItems = () => {
-    this.mapItems2 = this.mapService.getMapItems();
   }
 
 }
