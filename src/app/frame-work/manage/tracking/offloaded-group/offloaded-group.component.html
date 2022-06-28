@@ -28,6 +28,7 @@
         </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
+
         <tr>
             <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
@@ -35,6 +36,15 @@
             </th>
             <th style="width: 2.5rem" *ngFor="let item of [1,2,3]"></th>
         </tr>
+        <tr>
+            <th *ngFor="let col of columns">
+                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                </p-columnFilter>
+                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+            </th>
+            <th style="width: 2.5rem" *ngFor="let item of [1,2,3]"></th>
+        </tr>
+
     </ng-template>
 
     <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>

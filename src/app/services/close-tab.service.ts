@@ -58,7 +58,7 @@ export class CloseTabService {
   saveDataForTrackOffloaded: any;
   saveDataForTrackOffloadedGroup: any;
   offloadedGroupReq = {
-    _selectedAggregate: ''
+    _selectedAggregate: 'listNumber'// Default group by
   }
   saveDataForTrackFinished: any;
   saveDataForLastStates: any;

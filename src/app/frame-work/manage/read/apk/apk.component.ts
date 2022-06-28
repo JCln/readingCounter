@@ -1,10 +1,14 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IAPK } from 'interfaces/inon-manage';
+import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -17,7 +21,7 @@ export class ApkComponent extends FactoryONE {
   choosenFileName: string = '';
   fileNameAfterChoose: string = '';
   progress: number = 0;
-  
+
   uploadForm: any = {
     versionCode: null,
     versionName: '',
@@ -25,19 +29,19 @@ export class ApkComponent extends FactoryONE {
     file: File
   }
 
-  dataSource: IAPK[] = [];  
+  dataSource: IAPK[] = [];
 
   constructor(
     private apkService: ApkService,
     private closeTabService: CloseTabService,
-    private outputManagerService: OutputManagerService
+    private outputManagerService: OutputManagerService,
+    private authService: AuthService
   ) {
     super();
   }
 
   downloadAPK = async () => {
     const a = await this.apkService.getlastAPK();
-    console.log(a);
     this.outputManagerService.downloadFile(a, '.apk');
   }
   onChange(event) {
@@ -68,7 +72,7 @@ export class ApkComponent extends FactoryONE {
           this.progress = Math.round(event.loaded / event.total * 100);
           break;
         case HttpEventType.Response:
-          this.apkService.showSuccessMessage(event.body.message);
+          this.apkService.showSuccessMessage(event.body.message, ENSnackBarColors.success);
           setTimeout(() => {
             this.progress = 0;
           }, 1500);
@@ -85,7 +89,27 @@ export class ApkComponent extends FactoryONE {
     }
     else {
       this.dataSource = this.closeTabService.saveDataForAPKManager;
-    }        
+    }
   }
- 
+  getUserRole = (): boolean => {
+    const jwtRole = this.authService.getAuthUser();
+    return jwtRole.roles.toString().includes('admin') ? true : false;
+  }
+  removeRow = async (dataSource: number) => {
+    if (this.getUserRole()) {
+
+      if (await this.apkService.firstConfirmDialogRemove()) {
+        const a = await this.apkService.postById(ENInterfaces.APKRemove, dataSource['dataSource'].id);
+        if (a) {
+          this.apkService.showSuccessMessage(a.message, ENSnackBarColors.success);
+          this.refreshTable();
+        }
+      }
+
+    } else {
+      this.apkService.showSuccessMessage(EN_messages.access_denied, ENSnackBarColors.warn);
+    }
+  }
+
+
 }

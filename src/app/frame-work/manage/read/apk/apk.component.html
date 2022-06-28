@@ -48,6 +48,7 @@
             <app-prime-table 
             [dataSource]="dataSource" 
             [_rowsNumbers]=5
+            [_numberOfExtraColumns]="['1']"
             [_multiSelectEnable]=false 
             [_outputEnabled]=false 
             [_hasSaveColumns]=false
@@ -55,7 +56,9 @@
             [_sortField]="'versionName'"
             [_checkUpName]="'apk'" 
             (downloadedAPK)="downloadAPK()"
-            (refreshedTable)="classWrapper(true)">
+            (removedRow)="removeRow($event)"
+            (refreshedTable)="classWrapper(true)"
+            >
             </app-prime-table>
 
         </div>

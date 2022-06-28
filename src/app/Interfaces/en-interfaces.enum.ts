@@ -261,6 +261,7 @@ export enum ENInterfaces {
     APKPreList = 'V1/APK/PreList',
     APKLast = 'V1/APK/Last',
     APKUpload = 'V1/APK/Upload',
+    APKRemove = `V1/Apk/Remove`,
     offloadManual = 'V1/Manual/OffLoad',
     loadManual = `V1/Load/Manual`,
 

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
@@ -7,6 +8,7 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { MathS } from '../classes/math-s';
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,8 @@ export class ApkService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private dialog: MatDialog,
   ) { }
 
   getDataSource = (): any => {
@@ -81,6 +84,13 @@ export class ApkService {
       return false;
     return true;
   }
+  postById = (method: ENInterfaces, id: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
   postTicket = (): Observable<any> => {
     const formData: FormData = new FormData();
 
@@ -91,7 +101,25 @@ export class ApkService {
 
     return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.APKUpload, formData);
   }
-  showSuccessMessage = (message: string) => {
-    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+  showSuccessMessage = (message: string, color: ENSnackBarColors) => {
+    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.sevenMili, color);
+  }
+  firstConfirmDialogRemove = () => {
+    const title = EN_messages.confirm_remove;
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: '19rem',
+        data: {
+          title: title,
+          isInput: false,
+          isDelete: true
+        }
+      });
+      dialogRef.afterClosed().subscribe(async desc => {
+        if (desc) {
+          resolve(true);
+        }
+      })
+    })
   }
 }

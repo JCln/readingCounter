@@ -1,6 +1,10 @@
 @import 'variable.scss';
 
 ::ng-deep {
+  dp-calendar-nav .dp-nav-btns-container {
+    direction: rtl !important;
+  }
+
   .dp-picker-input {
     font-weight: 600;
     font-size: 1.2rem !important;
@@ -55,4 +59,12 @@
     font-weight: 600;
   }
 
+  // dp-calendar-nav .dp-calendar-nav-left::before,
+  dp-calendar-nav .dp-calendar-nav-right::before {
+    transform: rotate(225deg) !important;
+  }
+
+  dp-calendar-nav .dp-calendar-nav-left::before {
+    transform: rotate(45deg) !important;
+  }
 }

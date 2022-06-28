@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
+import { PrimeNGConfig } from 'primeng/api';
 import { CloseTabService } from 'services/close-tab.service';
 import { EnvService } from 'services/env.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -39,9 +40,11 @@ export class OffloadedGroupComponent extends FactoryONE {
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,
-    private envService: EnvService
+    private envService: EnvService,
+    private config: PrimeNGConfig,
   ) {
     super();
+    this.setTraslateToPrimeNgTable();
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTrackOffloadedGroup = null;
@@ -132,5 +135,34 @@ export class OffloadedGroupComponent extends FactoryONE {
         }
       }
     }
+  }
+  setTraslateToPrimeNgTable = () => {
+    this.config.setTranslation({
+      'accept': 'تایید',
+      'reject': 'بازگشت',
+      'startsWith': ' شروع با',
+      'contains': 'شامل باشد',
+      'notContains': ' شامل نباشد',
+      'endsWith': ' پایان با',
+      'equals': 'برابر',
+      'notEquals': 'نا برابر',
+      'lt': ' کمتر از',
+      'lte': 'کمتر یا برابر',
+      'gt': 'بزرگتر',
+      'gte': 'بزرگتر یا برابر',
+      'is': 'باشد',
+      'isNot': 'نباشد',
+      'before': 'قبل',
+      'after': 'بعد',
+      'clear': 'پاک کردن',
+      'apply': 'تایید',
+      'matchAll': 'مطابقت با همه',
+      'matchAny': ' مطابقت',
+      'addRule': 'جستجو براساس',
+      'removeRule': 'حذف جستجو',
+      'choose': ' انتخاب',
+      'upload': 'ارسال',
+      'cancel': 'بازگشت'
+    });
   }
 }
