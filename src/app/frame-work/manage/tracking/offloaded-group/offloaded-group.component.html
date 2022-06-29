@@ -7,6 +7,10 @@
             (onChange)="refreshTableAfterGrouping(closeTabService.offloadedGroupReq._selectedAggregate)">
         </p-dropdown>
     </div>
+    <button (click)="resetAggregation()" class="btn_2_o">
+        بدون گروه‌بندی
+        <i class="pi pi-refresh"></i>
+    </button>
 </section>
 <!-- sort field must be applied to group working -->
 <p-table *ngIf="canShowTable" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"

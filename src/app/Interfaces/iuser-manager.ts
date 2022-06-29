@@ -303,6 +303,7 @@ export interface IUserLoggins {
     osPlatform: string,
     osShortTitle: string,
     userAgent: string,
-    wrongPassword: string
+    wrongPassword: string,
+    appVersion: string,
 }
 //

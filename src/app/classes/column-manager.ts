@@ -795,6 +795,7 @@ export class ColumnManager {
         { field: 'wrongPassword', header: 'گذرواژه', isSelected: false },
         // { field: 'id', header: 'کد', isSelected: false },
         { field: 'userAgent', header: 'userAgent', isSelected: false },
+        { field: 'appVersion', header: 'نسخه App', isSelected: false },
     ];
     auth1: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },

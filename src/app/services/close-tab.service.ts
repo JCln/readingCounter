@@ -158,8 +158,8 @@ export class CloseTabService {
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrrptstoolsexcelviewer },
     { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr },
-    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralGModify },
-    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, url: EN_Routes.wrmlGeneralModify },
+    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, url: EN_Routes.wrmlGeneralGModify },
+    { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
     { id: 1, value: ENEssentialsToSave.saveDataForDynamicReports, url: EN_Routes.wrRptsDynamicReportManager },
     { id: 1, value: ENEssentialsToSave.saveDataForImageAttribution, url: EN_Routes.wrmrimgattr },
     { id: 1, value: ENEssentialsToSave.saveDataForUserSearch, value_2: ENEssentialsToSave.saveDataForUserSearchRes, url: EN_Routes.wrmusearch },
@@ -205,7 +205,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForTrackReading, url: EN_Routes.wrmtrackreading },
     { id: 1, value: ENEssentialsToSave.saveDataForLastStates, url: EN_Routes.wrmtracklatest },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackOffloaded, url: EN_Routes.wrmtrackoffloaded },
-    { id: 1, req: ENEssentialsToSave.offloadedGroupReq, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloaded },
+    { id: 1, req: ENEssentialsToSave.offloadedGroupReq, value: ENEssentialsToSave.saveDataForTrackOffloadedGroup, url: EN_Routes.wrmtrackoffloadedGroup },
     { id: 1, value: ENEssentialsToSave.saveDataForTrackFinished, url: EN_Routes.wrmtrackfinished },
     { id: 1, req: ENEssentialsToSave.saveDataForFollowUpReq, value: ENEssentialsToSave.saveDataForFollowUp, value_2: ENEssentialsToSave.saveDataForFollowUpAUX, url: EN_Routes.wrmsfwu },
     { id: 1, req: ENEssentialsToSave.saveDataForSearchProReq, value: ENEssentialsToSave.saveDataForSearchPro, url: EN_Routes.wrmsacme },
@@ -250,22 +250,36 @@ export class CloseTabService {
     // TODO: make null all objects
     this.cleanArrays();
   }
+  setAll(obj, val) {
+    /* Duplicated with @Maksim Kalmykov
+        for(index in obj) if(obj.hasOwnProperty(index))
+            obj[index] = val;
+    */
+    Object.keys(obj).forEach(function (index) {
+      console.log(typeof obj[index]);
+
+      obj[index] = val
+    });
+  }
   cleanData = (url: string) => {
     this.val.find(item => {
       if (item.url === url) {
         this[item.value] = '';
-        for (const prop of Object.getOwnPropertyNames(this[item.req])) {
-          delete this[item.req][prop]
-        }
         this[item.value_2] = '';
+        this.setAll(this[item.req], null);
+        console.log(this[item.req]);
       }
       else {
         if (url.includes(item.url)) {
           this[item.value] = '';
-          for (const prop of Object.getOwnPropertyNames(this[item.req])) {
-            delete this[item.req][prop]
-          }
           this[item.value_2] = '';
+          this.setAll(this[item.req], null);
+          console.log(this[item.req]);
+          // for (const prop of Object.getOwnPropertyNames(item.req)) {
+          //   console.log(this[item.req][prop].values);
+          //   console.log(this[item.req][prop].value);
+          // }
+
         }
       }
     })

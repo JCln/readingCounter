@@ -42,7 +42,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   counterStateValue: number;
   pageSignTrackNumber: number = null;
 
-  // zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
@@ -52,15 +51,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   counterStateForModifyDictionary: IDictionaryManager[] = [];
 
   modifyType: OffloadModify[];
-  offloadModifyReq: IOffloadModifyReq = {
-    id: '',
-    modifyType: null,
-    checkedItems: [],
-    counterStateId: 0,
-    counterNumber: null,
-    jalaliDay: '',
-    description: ''
-  }
 
   constructor(
     public listManagerService: ListManagerService,
@@ -78,7 +68,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val.value);
     this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
     this.closeTabService.saveDataForLMGeneralGroupModify = this.dataSource;
-    // this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
@@ -128,6 +117,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
     }
   }
+  // have problem on SHOWING Without this Code for DropDowns
   clickedDropDowns = (event: any, element: string, dataId: any) => {
     for (let index = 0; index < this.dataSource.length; index++) {
       if (this.dataSource[index].id === dataId) {
@@ -138,9 +128,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   insertSelectedColumns = () => {
     this.modifyType = this.listManagerService.getOffloadModifyType();
   }
-  // toPrePage = () => {
-  //   this.router.navigate([EN_Routes.wrmtrackoffloadedGroup]);
-  // }  
   convertTitleToId = (dataSource: any): any => {
     return this.counterStateByZoneDictionary.find(item => {
       if (item.title === dataSource)
@@ -158,7 +145,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     for (let index = 0; index < data.detailsInfo.length; index++) {
       for (let j = 0; j < this.dataSource.length; j++) {
         if (data.detailsInfo[index].onOffLoadId === this.dataSource[j].id) {
-          console.log(data.detailsInfo[index].hasError);
+
+          this.dataSource[j].id = data.detailsInfo[index].newOnOffLoadId;//insert newOnOffLoad to last dataSource Id
           if (data.detailsInfo[index].hasError) {
             // with error[index of dataSource]
             this.dataSource[j].isResponseHasError = true;
@@ -182,6 +170,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
 
     for (let index = 0; index < this.dataSource.length; index++) {
       if (!MathS.isNull(this.dataSource[index].modifyType)) {
+
         temp.push({
           id: this.dataSource[index].id,
           modifyType: this.convertTitleToIdByModifyType(this.dataSource[index].modifyType).id,
@@ -196,6 +185,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     if (MathS.isNull(temp)) {
       this.listManagerService.showSnackWarn(EN_messages.no_modifyFound);
     } else {
+      // TODO: Should convert Arabic Numbers to ENG to counterNumbers
       // to upload valid data to server and get valid response
       this.manageModifyBatchResponse(await this.listManagerService.postArrays(ENInterfaces.trackingToOffloadedGroupModifyBatch, temp));
     }
@@ -217,7 +207,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         doneCount: data.doneCount, errorCount: data.errorCount
       },
       rtl: true,
-      width: '70%'
+      width: '60%',
+      showHeader: false
     })
   }
   openMoshtarakinDialog = (dataSource: any) => {

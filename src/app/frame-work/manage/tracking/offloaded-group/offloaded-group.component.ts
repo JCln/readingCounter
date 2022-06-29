@@ -136,6 +136,10 @@ export class OffloadedGroupComponent extends FactoryONE {
       }
     }
   }
+  resetAggregation = () => {
+    this.closeTabService.offloadedGroupReq._selectedAggregate = '';
+    this.updateRowGroupMetaData();
+  }
   setTraslateToPrimeNgTable = () => {
     this.config.setTranslation({
       'accept': 'تایید',

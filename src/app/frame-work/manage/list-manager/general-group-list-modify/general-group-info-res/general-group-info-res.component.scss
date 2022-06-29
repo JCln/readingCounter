@@ -3,6 +3,9 @@
 main {
   font-family: $font_family;
   font-size: $font_s;
+
+  padding: .5rem;
+  margin: 0.5rem 0;
 }
 
 ._circle_border {
@@ -11,14 +14,16 @@ main {
   margin-left: $font_xs;
 }
 
-h2 {
+h3 {
   display: flex;
   justify-content: center;
+  margin-bottom: $font_xs;
 }
 
 ._key_value {
   columns: 2;
   text-align: center;
+  margin-bottom: $font_05;
   column-rule: 1px dashed var(--primary_2);
   direction: rtl;
 }
@@ -39,4 +44,8 @@ h2 {
 ._custom {
   background: var(--primary_2);
   color: var(--secondary_1);
+}
+
+section {
+  padding: $font_05;
 }

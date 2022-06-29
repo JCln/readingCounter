@@ -76,6 +76,7 @@ export interface IBatchModifyRes {
     detailsInfo: [
         {
             onOffLoadId: string,
+            newOnOffLoadId: string,
             hasError: boolean,
             errorDescription: string
         }

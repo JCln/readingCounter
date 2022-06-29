@@ -1,6 +1,7 @@
 @import 'primeNG';
 @import 'input';
 @import 'tooltip';
+@import 'button';
 
 ._anything {
   background: var(--primary_3) !important;
@@ -14,4 +15,11 @@ section.content {
   direction: rtl;
   gap: $font_05;
   align-items: center;
+}
+
+.btn_2_o {
+  width: 9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
