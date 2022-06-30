@@ -9,6 +9,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-offloaded',
@@ -59,6 +60,17 @@ export class OffloadedComponent extends FactoryONE {
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadGeneralModify(dataSource);
   }
+  routeToAssessPre = (dataSource: ITracking) => {
+    if (MathS.isNull(this.closeTabService.saveDataForAssessPreReq.listNumber)) {
+      this.trackingManagerService.showWarnMessage(EN_messages.no_listNumberExist);
+    }
+    else {
+      this.closeTabService.saveDataForAssessPreReq.zoneId = dataSource.zoneId;
+      this.closeTabService.saveDataForAssessPreReq.listNumber = dataSource.listNumber;
+      this.trackingManagerService.routeToAssessPre();
+    }
+  }
+
   backToReading = async (rowDataAndIndex: object) => {
     const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.toReading, true, false);
     if (desc) {

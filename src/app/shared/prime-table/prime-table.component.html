@@ -280,6 +280,12 @@
                     <div class="tooltip_text">دانلود فایل</div>
                 </i>
             </td>
+            <td *ngIf="_outputFileName == 'offloaded'" (click)="routeToLMAll(dataSource)">
+                <span class="ui-column-title">بازدید</span>
+                <i class="tooltip p_icons pi pi-eye">
+                    <div class="tooltip_text">بازدید</div>
+                </i>
+            </td>
             <td *ngIf="
                 _checkUpName == 'search_moshtarak' || 
                 _checkUpName == 'moment-ls' || 
@@ -351,8 +357,8 @@
                     <div class="tooltip_text_right">حذف</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'excelDynamic' || _checkUpName == 'apk'" class="edit_button"
-                (click)="removeRow(dataSource , ri)">
+            <td *ngIf="_checkUpName == 'readingConfig' || _checkUpName == 'excelDynamic' || _checkUpName == 'apk'"
+                class="edit_button" (click)="removeRow(dataSource , ri)">
                 <span class="ui-column-title">حذف مورد</span>
                 <i class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مورد</div>

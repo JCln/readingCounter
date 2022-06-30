@@ -445,6 +445,9 @@ export class TrackingManagerService {
     this.allListsService.generalModifyLists_pageSign.trackNumber = dataSource.trackNumber;
     this.router.navigate([EN_Routes.wrmlGeneralModify]);
   }
+  routeToAssessPre = () => {
+    this.router.navigate([EN_Routes.wrimpassesspre]);
+  }
   routeToOffloadGeneralModifyGrouped = (dataSource: ITracking) => {
     this.allListsService.generalModifyListsGrouped_pageSign.GUid = dataSource.id;
     this.allListsService.generalModifyListsGrouped_pageSign.listNumber = dataSource.listNumber;

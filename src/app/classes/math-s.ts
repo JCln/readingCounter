@@ -73,7 +73,7 @@ export class MathS {
             return false;
         return true;
     }
-    static trimation = (val: string) => {
+    static trimation = (val: string): string => {
         return val.trim();
     }
     static getRandomColors(len: number): string[] {

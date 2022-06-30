@@ -54,6 +54,7 @@ export enum EN_messages {
     insert_quantity = 'تعدادی وارد نمایید',
     insert_zone = 'ناحیه ای وارد نمایید',
     insert_listNumber = 'شماره لیست را وارد نمایید',
+    no_listNumberExist = 'شماره لیستی برای نمایش بازدید وجود ندارد',
     insert_title = 'عنوان را وارد نمایید',
     insert_text = 'متن را وارد نمایید',
     insert_colorName = 'رنگ را مشخص نمایید',

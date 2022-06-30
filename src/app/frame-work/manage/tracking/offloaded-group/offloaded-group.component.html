@@ -38,7 +38,7 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 2.5rem" *ngFor="let item of [1,2,3]"></th>
+            <th style="width: 2.5rem" *ngFor="let item of [1,2,3,4]"></th>
         </tr>
         <tr>
             <th *ngFor="let col of columns">
@@ -46,7 +46,7 @@
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 2.5rem" *ngFor="let item of [1,2,3]"></th>
+            <th style="width: 2.5rem" *ngFor="let item of [1,2,3,4]"></th>
         </tr>
 
     </ng-template>
@@ -85,6 +85,12 @@
                 <span class="ui-column-title">دانلود فایل</span>
                 <i class="tooltip p_icons pi pi-download">
                     <div class="tooltip_text">دانلود فایل</div>
+                </i>
+            </td>
+            <td (click)="routeToAssessPre(dataSource)">
+                <span class="ui-column-title">بازدید</span>
+                <i class="tooltip p_icons pi pi-eye">
+                    <div class="tooltip_text">بازدید</div>
                 </i>
             </td>
         </tr>

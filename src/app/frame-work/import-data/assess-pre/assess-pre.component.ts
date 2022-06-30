@@ -80,14 +80,6 @@ export class AssessPreComponent extends AllListsFactory {
     this.connectToServer();
   };
   nullSavedSource = () => this.closeTabService.saveDataForAssessPre = null;
-  canOpenSearchDialog = () => {
-    if (MathS.isNull(this.closeTabService.saveDataForAssessPreReq.listNumber)) {
-      this.importDynamicService.snackMessage(EN_messages.insert_listNumber);
-      return false;
-    }
-    this.closeTabService.saveDataForAssessPreReq.listNumber = MathS.trimation(this.closeTabService.saveDataForAssessPreReq.listNumber);
-    return true;
-  }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForAssessPre = null;

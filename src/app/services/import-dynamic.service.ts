@@ -142,7 +142,7 @@ export class ImportDynamicService {
     }
     return true;
   }
-  private validationNull = (object: any): boolean => {
+  private validationNull = (object: IAssessPreDisplayDtoSimafa): boolean => {
     if (object.hasOwnProperty('zoneId')) {
       if (MathS.isNull(object.zoneId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
@@ -299,7 +299,7 @@ export class ImportDynamicService {
     if (MathS.isNaN(val.year)) {
       this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
       return false;
-    }   
+    }
     if (MathS.isNaN(val.alalHesabPercent)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_alalhesab);
       return false;
