@@ -11,6 +11,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 
 import { AddExcelFileComponent } from './../add-excel-file/add-excel-file.component';
 import { WaterAddDgComponent } from './water-add-dg/water-add-dg.component';
+import { WaterBatchAddDgComponent } from './water-batch-add-dg/water-batch-add-dg.component';
 
 @Component({
   selector: 'app-water',
@@ -63,6 +64,19 @@ export class WaterComponent extends FactoryONE {
           await this.formulasService.postExcelFile(ENInterfaces.FormulaWaterAddExcel);
           this.refreshTable();
         }
+      });
+    });
+  }
+  openBatchAddDialog = () => {
+    return new Promise(() => {
+      const dialogRef = this.dialog.open(WaterBatchAddDgComponent,
+        {
+          minWidth: '70%',
+          direction: 'rtl',
+        });
+      dialogRef.afterClosed().subscribe(async result => {
+        if (result)
+          this.refreshTable();
       });
     });
   }

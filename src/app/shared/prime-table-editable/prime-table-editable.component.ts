@@ -43,6 +43,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Output() removedRow = new EventEmitter<any>();
   @Output() removedRowEditing = new EventEmitter<any>();
   @Output() openedAddDialog = new EventEmitter<any>();
+  @Output() openedBatchedAddDialog = new EventEmitter<any>();
   @Output() newedRowChangedStatus = new EventEmitter<any>();
   @Output() getedExcelSample = new EventEmitter<any>();
   @Output() openedAddExcelDialog = new EventEmitter<any>();
@@ -63,7 +64,13 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
       config
     );
   }
-
+  clickedDropDowns = (event: any, element: string, dataId: any) => {
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (this.dataSource[index].id === dataId) {
+        this.dataSource[index][element] = event.title;
+      }
+    }
+  }
   refreshTable() {
     this.refreshedTable.emit(true);
   }
@@ -87,6 +94,9 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   openAddDialog = () => {
     this.openedAddDialog.emit();
+  }
+  openBatchAddDialog = () => {
+    this.openedBatchedAddDialog.emit();
   }
   newRowChangedStatus = () => {
     this.newedRowChangedStatus.emit();
