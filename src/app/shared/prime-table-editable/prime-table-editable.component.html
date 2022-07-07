@@ -18,6 +18,10 @@
                     (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
+                <i *ngIf="_checkUpName == 'abBaha' " (click)="openBatchAddDialog()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن دسته ای</div>
+                </i>
                 <i *ngIf="_isInRowEditing && _checkUpName !== 'generalListModify'" appAddRow [table]="dtable"
                     [newRow]="newRow" [newRowLimit]="newRowLimit" (click)="newRowChangedStatus()"
                     class="tooltip _circle_border p_icons fa fa-plus">
@@ -102,7 +106,8 @@
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
                                     [(ngModel)]="dataSource[_dictionaryName]" placeholder="انتخاب مورد"
                                     [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
-                                    optionLabel="title">
+                                    optionLabel="title"
+                                    (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
                                 </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -116,7 +121,8 @@
                                 <ng-template pTemplate="input">
                                     <p-dropdown [options]="secondDictionary" [(ngModel)]="dataSource[col.field]"
                                         placeholder="انتخاب مورد" [style]="{'width':'100%'}"
-                                        [ngClass]="{'p-dropdown-editable': true}" optionLabel="title">
+                                        [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                        (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
                                     </p-dropdown>
                                 </ng-template>
                                 <ng-template pTemplate="output">

@@ -251,15 +251,17 @@ export class CloseTabService {
     this.cleanArrays();
   }
   setAll(obj, val) {
-    /* Duplicated with @Maksim Kalmykov
-        for(index in obj) if(obj.hasOwnProperty(index))
-            obj[index] = val;
-    */
-    Object.keys(obj).forEach(function (index) {
-      console.log(typeof obj[index]);
-
-      obj[index] = val
-    });
+    if (typeof obj === 'string') {
+      obj = '';
+    }
+    if (typeof obj === 'boolean') {
+      obj = false;
+    }
+    else {
+      Object.keys(obj).forEach(function (index) {
+        obj[index] = val
+      });
+    }
   }
   cleanData = (url: string) => {
     this.val.find(item => {
@@ -267,19 +269,12 @@ export class CloseTabService {
         this[item.value] = '';
         this[item.value_2] = '';
         this.setAll(this[item.req], null);
-        console.log(this[item.req]);
       }
       else {
         if (url.includes(item.url)) {
           this[item.value] = '';
           this[item.value_2] = '';
           this.setAll(this[item.req], null);
-          console.log(this[item.req]);
-          // for (const prop of Object.getOwnPropertyNames(item.req)) {
-          //   console.log(this[item.req][prop].values);
-          //   console.log(this[item.req][prop].value);
-          // }
-
         }
       }
     })

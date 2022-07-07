@@ -72,6 +72,17 @@ export class FragmentComponent extends FactoryONE {
   onRowEditInit(dataSource: any) {
     // this.clonedProducts[dataSource.id] = { ...dataSource };
   }
+  clickedDropDowns = (event: any, element: string, dataId: any) => {
+
+    for (let index = 0; index < this.dataSource.length; index++) {
+      console.log(index + ' : ' + this.dataSource[index][element]);
+      if (this.dataSource[index].id === dataId) {
+        console.log(index + ' : ' + this.dataSource[index][element]);
+
+        this.dataSource[index][element] = event.title;
+      }
+    }
+  }
   onRowEditSave(dataSource: IFragmentMaster, rowIndex: number) {
     this.newRowLimit = 1;
     if (!this.fragmentManagerService.verificationMaster(dataSource)) {

@@ -48,9 +48,6 @@
                     <i (click)="getExcel()" class="tooltip _circle_border _xlsx_download pi pi-download">
                         <div class="tooltip_text">دریافت فایل Excel</div>
                     </i>
-                    <i (click)="uploadAll()" class="tooltip _circle_border pi_icons pi pi-save">
-                        <div class="tooltip_text">ذخیره همه تغییرات</div>
-                    </i>
                     <i (click)="saveColumns()" class="tooltip fa_icons _circle_border p_icons _save_columns fa fa-save">
                         <div class="tooltip_text">ذخیره ستونها</div>
                     </i>
@@ -62,6 +59,9 @@
                 <div class="left_side">
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                         <div class="tooltip_text">بارگیری مجدد جدول</div>
+                    </i>
+                    <i (click)="uploadAll()" class="tooltip _circle_border _save_all pi_icons pi pi-save">
+                        <div class="tooltip_text">ذخیره همه تغییرات</div>
                     </i>
                 </div>
             </div>
