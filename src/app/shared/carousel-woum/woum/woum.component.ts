@@ -4,6 +4,7 @@ import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DownloadManagerService } from 'services/download-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
 import { IOnOffLoad, IOverAllWOUIInfo } from 'src/app/Interfaces/itrackings';
@@ -38,7 +39,20 @@ export class WoumComponent implements OnChanges {
     description: ''
   }
   dataSource: IOnOffLoad[] = [];
-
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1
+    }
+  ];
   testAudio = new Audio();
   audioFiles: IOnOffLoad[] = [];
   downloadURL: string = '';
@@ -60,7 +74,8 @@ export class WoumComponent implements OnChanges {
   constructor(
     private downloadManagerService: DownloadManagerService,
     private trackingManagerService: TrackingManagerService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    public profileService: ProfileService
   ) { }
 
   classWrapper = async (canRefresh?: boolean) => {
@@ -108,6 +123,8 @@ export class WoumComponent implements OnChanges {
     if (this.testLoadImage[index]) {
       reader.readAsDataURL(this.testLoadImage[index]);
     }
+    console.log(this.testLoadImage);
+
   }
   getDownloadListInfo = () => {
     this.interationOnOverallInfo = this.downloadManagerService.getDownloadListInfo();

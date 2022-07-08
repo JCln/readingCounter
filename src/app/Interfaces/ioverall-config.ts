@@ -283,14 +283,14 @@ export interface IOffloadModifyType {
     id: number,
     modifyeType: ENOffloadModifyType
 }
-export enum ENHasImportDynamicCount {
+export enum ENHasCount {
     hasCount = 'true',
     hasNotCount = 'false'
 }
 export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
     mapAnimationStartFrom = 'mapAnimationStartFrom',
-    isDarkModeMap = 'isDarkModeMap'
+    shouldUseCarouselGallery = 'shouldUseCarouselGallery'
 }
 export enum ENRandomNumbers {
     zero = 0,

@@ -20,7 +20,7 @@
 </section>
 
 
-<main class="control_wrapper">
+<main class="control_wrapper" *ngIf="!profileService.getUseCarouselMedia()">
     <section class="content" *ngIf="!targetFile.isForbidden">
         <h1 class="title">صدای ضبط شده</h1>
         <hr>
@@ -83,4 +83,7 @@
         </div>
 
     </section>
+</main>
+<main *ngIf="profileService.getUseCarouselMedia()">
+    <h1>Second View</h1>
 </main>

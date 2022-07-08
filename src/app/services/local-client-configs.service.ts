@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ENHasImportDynamicCount, ENLocalStorageNames } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames } from 'interfaces/ioverall-config';
 
 import { BrowserStorageService } from './browser-storage.service';
 
@@ -10,16 +10,16 @@ export class LocalClientConfigsService {
 
   constructor(private browserStorageService: BrowserStorageService) { }
 
-  saveToLocalStorage = (name: ENLocalStorageNames, hasDynamicCount: ENHasImportDynamicCount) => {
-    this.browserStorageService.set(name, hasDynamicCount);
+  saveToLocalStorage = (name: ENLocalStorageNames, hasCount: boolean) => {
+    this.browserStorageService.set(name, hasCount);
   }
 
-  getFromLocalStorage = (name: ENLocalStorageNames): boolean => {
+  getFromLocalStorage = (name: ENLocalStorageNames, defaultVal: boolean): boolean => {
     const a = this.browserStorageService.get(name);
     if (a === null) {
-      this.saveToLocalStorage(ENLocalStorageNames.hasDynamicCount, ENHasImportDynamicCount.hasCount)
+      this.saveToLocalStorage(name, defaultVal)
       // return default value
-      return true;
+      return defaultVal;
     }
     return a;
   }

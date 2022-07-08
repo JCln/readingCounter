@@ -7,6 +7,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { DownloadManagerService } from 'services/download-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { ImageViewerComponent } from 'src/app/shared/carousel-woum/woum/image-viewer/image-viewer.component';
 
@@ -43,7 +44,8 @@ export class WouiComponent extends FactoryONE {
     private closeTabService: CloseTabService,
     private dialogService: DialogService,
     private _location: Location,
-    private router: Router
+    private router: Router,
+    public profileService: ProfileService
     // private domSanitizer: DomSanitizer
   ) {
     super();
@@ -92,6 +94,7 @@ export class WouiComponent extends FactoryONE {
     this.imageFiles = this.downloadManagerService.separateImageFiles();
 
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
+    console.log(this.profileService.getUseCarouselMedia());
     this.getDownloadListInfo();
     this.showAllImgs();
   }

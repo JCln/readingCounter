@@ -137,7 +137,7 @@ export class ImportDynamicComponent extends FactoryONE {
     if (!this.importDynamicService.validationZoneDictionary(this.zoneDictionary))
       this.zoneDictionary = [];
     this.verificationACounterReaderId();
-    this._showDynamicCount = this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasDynamicCount);
+    this._showDynamicCount = this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasDynamicCount, true);
   }
   private resetToDefaultFormStatus = () => {
     this._showAlalHesabPercent = false;

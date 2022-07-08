@@ -37,4 +37,13 @@
         </form>
 
     </section>
+
+    <section class="content">
+
+        <h1 class="title">نمایش تصاویر بطور گروهی</h1>
+        <p-selectButton [options]="stateOptions" [(ngModel)]="showCarouselVal" optionLabel="label" optionValue="value"
+            (onChange)="setValueOfShowCarouselMedia(showCarouselVal)">
+        </p-selectButton>
+
+    </section>
 </div>

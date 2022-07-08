@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { IProfile } from 'interfaces/iuser-manager';
@@ -14,6 +15,8 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class ProfileComponent extends FactoryONE {
 
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
+  stateOptions: any[] = [{ label: 'خیر', value: false }, { label: 'بله', value: true }];
+  showCarouselVal: boolean;
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];
 
@@ -37,12 +40,21 @@ export class ProfileComponent extends FactoryONE {
     }
 
     this.getSelectedColumns();
+    this.getValueOfShowCarouselMedia();
   }
   changePassword = () => {
     this.profileService.changePassword(this.password);
   }
   getSelectedColumns = () => {
     this._selectCols = this.profileService.columnSelectedProfile();
+  }
+  getValueOfShowCarouselMedia = () => {
+    this.showCarouselVal = this.profileService.getUseCarouselMedia();
+  }
+  setValueOfShowCarouselMedia = (val) => {
+    this.profileService.setUseCarouselMedia(val);
+    val ? this.profileService.showMessage(EN_messages.carouselShowEnabled) : this.profileService.showMessage(EN_messages.carouselShowDisabled);
+
   }
 
 }

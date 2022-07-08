@@ -3,12 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
-import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { LocalClientConfigsService } from './local-client-configs.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,16 @@ export class ProfileService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private localClientConfigsService: LocalClientConfigsService
   ) { }
 
+  getUseCarouselMedia = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, false);
+  }
+  setUseCarouselMedia = (useCarousel: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, useCarousel);
+  }
   columnSelectedProfile = (): IObjectIteratation[] => {
     return [
       { field: 'firstName', header: 'نام', isSelected: false, readonly: true },
@@ -50,6 +58,9 @@ export class ProfileService {
     }
     return true;
   }
+  showMessage = (message: string) => {
+    this.utilsService.snackBarMessageSuccess(message);
+  }
   changePassword = (password: IChangePassword) => {
     if (!this.verification(password)) {
       return;
@@ -57,16 +68,11 @@ export class ProfileService {
     this.firstConfirmDialog(EN_messages.confirm_yourPassword, password);
   }
   getMyInfoDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.getMyProfile).subscribe((res: IResponses) => {
-          resolve(res)
-        });
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.getMyProfile).subscribe((res: IResponses) => {
+        resolve(res)
       });
-    } catch (e) {
-      console.error(e);
-
-    }
+    });
   }
   firstConfirmDialog = (reason: EN_messages, password: any): Promise<any> => {
     return new Promise(() => {

@@ -120,6 +120,8 @@ export enum EN_messages {
     tableSaved = 'ذخیره ستونها انجام شد',
     tableResetSaved = 'بازنشانی ستونها انجام شد',
     tableDefaultColumnOrder = 'ستونها درحالت پیشفرض قرار دارند',
+    carouselShowEnabled = 'نمایش تصاویر بطور گروهی خواهد بود',
+    carouselShowDisabled = 'نمایش تصاویر بطور دستی خواهد بود',
     done = 'انجام شد',
     doneBroadcast = 'پیام مخابره شد',
 
