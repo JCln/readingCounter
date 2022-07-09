@@ -79,21 +79,19 @@
     </section>
 </main>
 <main *ngIf="profileService.getUseCarouselMedia()">
-    <div *ngFor="let item of imageFiles; index as i">
-        <p-galleria [(value)]="imageFiles" [responsiveOptions]="responsiveOptions"
-            [containerStyle]="{'max-width': '640px'}" [numVisible]="2">
-            <ng-template pTemplate="item" let-item>
-                <img src="{{testLoadImage[i]}}" style="width: 100%; display: block;" />
-            </ng-template>
-            <!-- <ng-template pTemplate="thumbnail" let-item>
+    <p-galleria [value]="testGallery">
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item.src" style="width: 100%; display: block;" />
+        </ng-template>
+        <!-- <ng-template pTemplate="thumbnail" let-item>
             <div class="grid grid-nogutter justify-content-center">
                 <img [src]="item" style="display: block;" />
             </div>
         </ng-template> -->
-            <!-- <ng-template pTemplate="caption" let-item>
+        <!-- <ng-template pTemplate="caption" let-item>
             <h4 style="margin-bottom: .5rem; color: #ffffff;">{{item.title}}</h4>
             <p>{{item.alt}}</p>
         </ng-template> -->
-        </p-galleria>
-    </div>
+    </p-galleria>
+
 </main>

@@ -25,10 +25,18 @@ export class WoumComponent implements OnChanges {
   @Input() id: string;
   @Input() counterStateCode: any;
   @Input() counterNumber: string;
+  @Input() eshterak: string;
+  @Input() counterStateId: string;
   @Input() firstName: string;
   @Input() sureName: string;
   @Input() radif: number;
-
+  testGallery = {
+    data: [
+      { src: 'assets/imgs/help/wr1.PNG' },
+      { src: 'assets/imgs/help/ARE.PNG' },
+      { src: 'assets/imgs/help/wr1.PNG' },
+    ]
+  }
   offloadModifyReq: IOffloadModifyReq = {
     id: '',
     modifyType: null,
