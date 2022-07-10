@@ -23,5 +23,8 @@ export class LocalClientConfigsService {
     }
     return a;
   }
+  getValue = (name: ENLocalStorageNames): any => {
+    return this.browserStorageService.get(name);
+  }
 
 }

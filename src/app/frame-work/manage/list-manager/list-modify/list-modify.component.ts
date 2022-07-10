@@ -65,13 +65,15 @@ export class ListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMModifyReq = this.allListsService.modifyLists_pageSign.GUid;
         this.closeTabService.saveDataForLMModify = this.dataSource;
       }
+      // setDynamics should implement before new instance of dataSource create
+      this.listManagerService.setDynamicPartRanges(this.dataSource);
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
       // this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
       this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-      
+
       Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
       const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
       if (tempZone) {
@@ -84,7 +86,6 @@ export class ListModifyComponent extends AllListsFactory {
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
-      this.listManagerService.setDynamicPartRanges(this.dataSource);
       this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     }
   }

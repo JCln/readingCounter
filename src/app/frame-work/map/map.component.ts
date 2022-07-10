@@ -398,21 +398,5 @@ export class MapComponent implements OnInit, OnDestroy {
       this.map.on('locationerror', this.onLocationError);
     }, 'مکان من').addTo(this.map);
   }
-  // toggleMapView = () => {
-  //   if (this.mapService.canUseMultiMapColors()) {
-  //     L.easyButton('pi pi-moon', () => {
-  //       this._currentColorMode = !this._currentColorMode;
-  //       if (this._currentColorMode) {
-  //         this.map.removeLayer(this.mapService.getLightStreetsUrl());
-  //         this.map.addLayer(this.mapService.getDarkStreetsUrl());
-  //       }
-  //       else {
-  //         this.map.removeLayer(this.mapService.getDarkStreetsUrl());
-  //         this.map.addLayer(this.mapService.getLightStreetsUrl());
-  //       }
-  //       this.mapService.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, this._currentColorMode);
-  //     }, this._currentColorMode ? 'پس‌زمینه تیره' : 'پس‌زمینه روشن').addTo(this.map);
-  //   }
-  // }
 
 }

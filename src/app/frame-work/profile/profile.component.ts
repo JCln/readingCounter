@@ -54,7 +54,6 @@ export class ProfileComponent extends FactoryONE {
   setValueOfShowCarouselMedia = (val) => {
     this.profileService.setUseCarouselMedia(val);
     val ? this.profileService.showMessage(EN_messages.carouselShowEnabled) : this.profileService.showMessage(EN_messages.carouselShowDisabled);
-
   }
 
 }

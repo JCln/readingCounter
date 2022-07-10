@@ -23,6 +23,7 @@ import { UtilsService } from './utils.service';
 export class ListManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ref: DynamicDialogRef;
+  counterStateValue: number;
 
   columnSelectedLMPerDay = (): IObjectIteratation[] => {
     return [
@@ -62,15 +63,6 @@ export class ListManagerService {
     item: null,
     similar: false
   }
-
-  // getSearchTypes = (): Search[] => {
-  //   return [
-  //     Search.eshterak,
-  //     Search.radif,
-  //     Search.readCode,
-  //     Search.billId,
-  //   ]
-  // }
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
@@ -98,6 +90,12 @@ export class ListManagerService {
   }
   getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
+  }
+  getCounterStateByCodeShowAllDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(zoneId);
+  }
+  getCounterStateByZoneShowAllDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(zoneId);
   }
   getCounterStateForModifyDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateForModifyDictionary(zoneId);
@@ -146,14 +144,16 @@ export class ListManagerService {
   }
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
-    dataSource.forEach(item => {
-      if (item.newRate > 0)
-        item.newRate = parseFloat(MathS.getRange(item.newRate))
-      item.preAverage = +MathS.getRange(item.preAverage);
-      item.x = MathS.getRange(item.x);
-      item.y = MathS.getRange(item.y);
-      item.gisAccuracy = MathS.getRange(item.gisAccuracy);
-    })
+    console.log('do nothing for now');
+    
+    // dataSource.forEach(item => {
+    //   if (item.newRate > 0)
+    //     item.newRate = parseFloat(MathS.getRange(item.newRate))
+    //   item.preAverage = +MathS.getRange(item.preAverage);
+    //   item.x = MathS.getRange(item.x);
+    //   item.y = MathS.getRange(item.y);
+    //   item.gisAccuracy = MathS.getRange(item.gisAccuracy);
+    // })
   }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make

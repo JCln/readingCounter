@@ -120,7 +120,10 @@ export class CloseTabService {
   saveDataForLMModify: any;
   saveDataForLMGeneralModifyReq: any;
   saveDataForLMGeneralModify: any;
-  saveDataForLMGeneralGroupModifyReq: any;
+  saveDataForLMGeneralGroupModifyReq: any = {
+    GUid: '',
+    counterStateValue: null
+  };
   saveDataForLMGeneralGroupModify: any;
   // WOUI manager
   saveDataForWOUI: any;
