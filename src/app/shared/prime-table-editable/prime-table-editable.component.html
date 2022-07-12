@@ -18,10 +18,10 @@
                     (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
-                <i *ngIf="_checkUpName == 'abBaha' " (click)="openBatchAddDialog()"
+                <!-- <i *ngIf="_checkUpName == 'abBaha' " (click)="openBatchAddDialog()"
                     class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن دسته ای</div>
-                </i>
+                </i> -->
                 <i *ngIf="_isInRowEditing && _checkUpName !== 'generalListModify'" appAddRow [table]="dtable"
                     [newRow]="newRow" [newRowLimit]="newRowLimit" (click)="newRowChangedStatus()"
                     class="tooltip _circle_border p_icons fa fa-plus">

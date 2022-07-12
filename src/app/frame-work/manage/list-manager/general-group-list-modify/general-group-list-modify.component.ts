@@ -141,7 +141,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     })
   }
   manageModifyBatchResponse = (data: IBatchModifyRes) => {
-    console.log(data);
     for (let index = 0; index < data.detailsInfo.length; index++) {
       for (let j = 0; j < this.dataSource.length; j++) {
         if (data.detailsInfo[index].onOffLoadId === this.dataSource[j].id) {
@@ -212,6 +211,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     })
   }
   openMoshtarakinDialog = (dataSource: any) => {
+    // مشاهده سابقه
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {
       data: {
         eshterak: dataSource.eshterak,

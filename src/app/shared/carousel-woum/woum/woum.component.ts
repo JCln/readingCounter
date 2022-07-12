@@ -83,6 +83,7 @@ export class WoumComponent implements OnChanges {
   fullscreen: boolean = false;
   activeIndex: number = 0;
   onFullScreenListener: any;
+  degree: number = 0;
   @ViewChild('galleria') galleria: Galleria;
 
   counterStatesDictionary: IDictionaryManager[] = [];
@@ -128,21 +129,37 @@ export class WoumComponent implements OnChanges {
   receiveFromDateJalali = ($event: string) => {
     this.offloadModifyReq.jalaliDay = $event;
   }
+  useCarouselMedia = (res, index) => {
+    let unsafeImageUrl = URL.createObjectURL(res);
+    console.log(unsafeImageUrl);
+    // this.testImgUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
+    // this.testImgUrl[index] = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
+    // console.log(this.testImgUrl);
+    this.testImgUrl[index] = unsafeImageUrl;
+  }
+  useSimpleMediaShow = (res, index: number) => {
+    this.testLoadImage[index] = res;
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.testLoadImage[index] = reader.result;
+    }, false);
+    if (this.testLoadImage[index]) {
+      reader.readAsDataURL(this.testLoadImage[index]);
+    }
+  }
   getExactImg = async (id: string, index: number) => {
     if (this.testLoadImage[index])
       return;
     const res = await this.downloadManagerService.downloadFile(id);
 
+    if (this.profileService.getUseCarouselMedia()) {
+      this.useCarouselMedia(res, index);
+    }
+    else {
+      console.log('use simple method');
 
-    console.log(res);
-    console.log(typeof res);
-
-    let unsafeImageUrl = URL.createObjectURL(res);
-    console.log(unsafeImageUrl);
-    // this.testImgUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
-    this.testImgUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
-    console.log(this.testImgUrl);
-
+      this.useSimpleMediaShow(res, index);
+    }
   }
   getDownloadListInfo = () => {
     this.interationOnOverallInfo = this.downloadManagerService.getDownloadListInfo();
@@ -278,7 +295,21 @@ export class WoumComponent implements OnChanges {
     return `custom-galleria ${this.fullscreen ? 'fullscreen' : ''}`;
   }
 
-  fullScreenIcon() {
-    return `pi ${this.fullscreen ? 'pi-window-minimize' : 'pi-window-maximize'}`;
+  downloadImg = (src: any) => {
+    console.log(src);
+    const link = document.createElement('a');
+    link.href = src;
+    link.download = `${new Date().toLocaleDateString()}.jpg`;
+    link.click();
+  }
+  rotateRightImg = () => {
+    const a = document.querySelector('.main_img') as HTMLElement;
+    this.degree += 90;
+    a.style.transform = `rotate(${this.degree + 'deg'}`;
+  }
+  rotateLeftImg = () => {
+    const a = document.querySelector('.main_img') as HTMLElement;    
+    this.degree -= 90;
+    a.style.transform = `rotate(${this.degree + 'deg'}`;
   }
 }
