@@ -245,14 +245,6 @@ export class CloseTabService {
   cleanArrays = () => {
     this.tabs = [];
   }
-  cleanAllData = () => {
-    for (let index = 0; index < this.val.length; index++) {
-      this[this.val[index].value] = '';
-      this[this.val[index].value_2] = '';
-    }
-    // TODO: make null all objects
-    this.cleanArrays();
-  }
   setAll(obj, val) {
     if (typeof obj === 'string') {
       obj = '';
@@ -265,6 +257,15 @@ export class CloseTabService {
         obj[index] = val
       });
     }
+  }
+  cleanAllData = () => {
+    for (let index = 0; index < this.val.length; index++) {
+      this[this.val[index].value] = null;
+      this[this.val[index].value_2] = null;
+      this.setAll(this[this.val[index].req], null);
+    }
+    // TODO: make null all objects
+    this.cleanArrays();
   }
   cleanData = (url: string) => {
     this.val.find(item => {
