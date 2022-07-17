@@ -262,7 +262,7 @@ export class CloseTabService {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = null;
       this[this.val[index].value_2] = null;
-      this.setAll(this[this.val[index].req], null);
+      // this.setAll(this[this.val[index].req], null);
     }
     // TODO: make null all objects
     this.cleanArrays();

@@ -29,6 +29,12 @@ export class ProfileService {
   setUseCarouselMedia = (useCarousel: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, useCarousel);
   }
+  setLocalValue = (name: ENLocalStorageNames, useCarousel: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(name, useCarousel);
+  }
+  getLocalValue = (name: ENLocalStorageNames, deafultVal: boolean): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(name, deafultVal);
+  }
   columnSelectedProfile = (): IObjectIteratation[] => {
     return [
       { field: 'firstName', header: 'نام', isSelected: false, readonly: true },

@@ -96,7 +96,7 @@
 </main>
 <main class="carousel_gallery" *ngIf="profileService.getUseCarouselMedia()">
 
-    <p-galleria #galleria [(value)]="testGallery" [(activeIndex)]="activeIndex" [numVisible]="3"
+    <p-galleria #galleria [value]="testCarouselImages" [(activeIndex)]="activeIndex" [numVisible]="3"
         [containerStyle]="{'max-width':'640px'}" [containerClass]="galleriaClass()" [showThumbnails]="showThumbnails"
         [showItemNavigators]="true" [circular]="true">
 
@@ -114,8 +114,8 @@
             <div class="custom-galleria-footer">
                 <button class="_button pi pi-list" (click)="onThumbnailButtonClick()"></button>
 
-                <span *ngIf="testGallery" class="title-container">
-                    <span>{{activeIndex + 1}}/{{testGallery.length}}</span>
+                <span *ngIf="testCarouselImages" class="title-container">
+                    <span>{{activeIndex + 1}}/{{testCarouselImages.length}}</span>
                     <article *ngIf="fullscreen" class="_options">
                         <i (click)="rotateRightImg()" class="tooltip fa fa-rotate-right">
                             <div class="tooltip_text">چرخش به راست</div>
@@ -123,7 +123,7 @@
                         <i (click)="rotateLeftImg()" class="tooltip fa fa-rotate-left">
                             <div class="tooltip_text">چرخش به چپ</div>
                         </i>
-                        <i (click)="downloadImg(testGallery[activeIndex])" class="tooltip pi pi-download">
+                        <i (click)="downloadImg(testCarouselImages[activeIndex])" class="tooltip pi pi-download">
                             <div class="tooltip_text">ذخیره تصویر</div>
                         </i>
                     </article>
@@ -135,5 +135,6 @@
             </div>
         </ng-template>
 
-    </p-galleria>
+    </p-galleria>    
+    <img [src]="testCarouselImages[0]" alt="whatever">
 </main>

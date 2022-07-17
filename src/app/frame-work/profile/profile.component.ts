@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
-import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames, IObjectIteratation } from 'interfaces/ioverall-config';
 import { IProfile } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
@@ -16,7 +16,10 @@ export class ProfileComponent extends FactoryONE {
 
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
   stateOptions: any[] = [{ label: 'خیر', value: false }, { label: 'بله', value: true }];
-  showCarouselVal: boolean;
+  showStateVals = {
+    groupImgs: false,
+    searchBasedOnDate: false
+  }
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];
 
@@ -49,11 +52,18 @@ export class ProfileComponent extends FactoryONE {
     this._selectCols = this.profileService.columnSelectedProfile();
   }
   getValueOfShowCarouselMedia = () => {
-    this.showCarouselVal = this.profileService.getUseCarouselMedia();
+    this.showStateVals.groupImgs = this.profileService.getUseCarouselMedia();
   }
   setValueOfShowCarouselMedia = (val) => {
     this.profileService.setUseCarouselMedia(val);
     val ? this.profileService.showMessage(EN_messages.carouselShowEnabled) : this.profileService.showMessage(EN_messages.carouselShowDisabled);
+  }
+  getBasedOnDate = () => {
+    this.showStateVals.searchBasedOnDate = this.profileService.getLocalValue(ENLocalStorageNames.shouldUseBaseOnDate, false);
+  }
+  setBasedOnDate = (val) => {
+    this.profileService.setLocalValue(ENLocalStorageNames.shouldUseBaseOnDate, false);
+    val ? this.profileService.showMessage(EN_messages.basedOnDateShowDisabled) : this.profileService.showMessage(EN_messages.basedOnDateShowEnabled);
   }
 
 }

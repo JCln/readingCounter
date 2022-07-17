@@ -24,7 +24,7 @@ export class InterfaceManagerService {
       return this.mainService.GETBLOB(URL, fileRepositoryId);
     return this.mainService.GETBLOB(URL);
   }
-  GETID = (URL: string, uuid: string) => {
+  GETID = (URL: string, uuid: string): Observable<any> => {
     return this.mainService.GETID(uuid, URL);
   }
 
