@@ -95,10 +95,9 @@
     </section>
 </main>
 <main class="carousel_gallery" *ngIf="profileService.getUseCarouselMedia()">
-
-    <p-galleria #galleria [value]="testCarouselImages" [(activeIndex)]="activeIndex" [numVisible]="3"
-        [containerStyle]="{'max-width':'640px'}" [containerClass]="galleriaClass()" [showThumbnails]="showThumbnails"
-        [showItemNavigators]="true" [circular]="true">
+    <p-galleria #galleria [value]="testCarouselImages" [containerStyle]="{'max-width':'640px'}"
+        [containerClass]="galleriaClass()" [showItemNavigators]="true" [(activeIndex)]="activeIndex" [numVisible]="3"
+        [showThumbnails]="showThumbnails" [circular]="true">
 
         <ng-template pTemplate="item" let-item>
             <img class="main_img" [src]="item" [ngClass]="fullscreen ? '_is_fullcreen' : '_is_not_fullscreen'" />
@@ -135,6 +134,5 @@
             </div>
         </ng-template>
 
-    </p-galleria>    
-    <img [src]="testCarouselImages[0]" alt="whatever">
+    </p-galleria>
 </main>

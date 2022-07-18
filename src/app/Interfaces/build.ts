@@ -67,6 +67,8 @@ export interface IENV {
     hasNextBazdid: boolean,
     mapCenter: [number, number],
     browserVersions: IBrowserVersions,
+    years: { title: string, value: number }[],
+    getDeleteDictionary: { id: number, title: string }[],
 }
 export class ENMapCenter {
     static readonly DEFAULT = new ENMapCenter([32.669, 51.664]);
@@ -90,6 +92,90 @@ export class ENMapUrls {
     static readonly KERMANSHAH = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.KERMANSHAH }]);
 
     private constructor(public readonly value: { title: string, url: string }[]) {
+    }
+}
+export class ENYears {
+    static readonly DEFAULT = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly ESF = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly TEH = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly TEH_ZONE4 = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly TEH_SE = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly TEH_SE_LOCAL = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly KERMANSHAH = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+
+    private constructor(public readonly value: { title: string, value: number }[]) {
+    }
+}
+export class getDeleteDictionary {
+    static readonly DEFAULT = new getDeleteDictionary([
+        { id: 0, title: 'testZero' },
+        { id: 2, title: 'testTwo' },
+        { id: 5, title: 'testThree' }
+    ]);
+    private constructor(public readonly value: { id: number, title: string }[]) {
     }
 }
 export class ENHasNextBazdid {

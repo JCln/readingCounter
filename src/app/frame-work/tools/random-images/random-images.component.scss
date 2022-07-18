@@ -51,6 +51,7 @@
   grid-template-columns: repeat(auto-fit, minmax(18rem, 21rem));
   justify-content: center;
   gap: $font_05;
+  margin-top: $font_xs;
   background: var(--secondary_1);
 }
 

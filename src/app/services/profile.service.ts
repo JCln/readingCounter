@@ -15,6 +15,10 @@ import { LocalClientConfigsService } from './local-client-configs.service';
   providedIn: 'root'
 })
 export class ProfileService {
+  showStateVals = {
+    groupImgs: false,
+    searchBasedOnDate: false
+  }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -29,11 +33,11 @@ export class ProfileService {
   setUseCarouselMedia = (useCarousel: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, useCarousel);
   }
-  setLocalValue = (name: ENLocalStorageNames, useCarousel: boolean) => {
-    this.localClientConfigsService.saveToLocalStorage(name, useCarousel);
+  setLocalValue = (useCarousel: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, useCarousel);
   }
-  getLocalValue = (name: ENLocalStorageNames, deafultVal: boolean): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(name, deafultVal);
+  getLocalValue = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
   }
   columnSelectedProfile = (): IObjectIteratation[] => {
     return [

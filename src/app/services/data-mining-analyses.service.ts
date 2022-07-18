@@ -3,7 +3,7 @@ import { ENDataMining } from 'interfaces/data-mining';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENSelectedColumnVariables, IGetYears, ITitleValue } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportReq } from 'interfaces/ireports';
 
 import { Converter } from '../classes/converter';
@@ -44,7 +44,7 @@ export class DataMiningAnalysesService {
   }
   /*API CALLS & CALLS*/
   getYears = (): ITitleValue[] => {
-    return IGetYears();
+    return this.utilsService.IGetYears();
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);

@@ -26,6 +26,7 @@ export class ProComponent extends AllListsFactory {
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
+  deleteDictionary: IDictionaryManager[] = [];
 
   readingPeriodDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -78,22 +79,25 @@ export class ProComponent extends AllListsFactory {
     else {
       this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
     }
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
     this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 
+    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
 
     this.searchService.setDynamicPartRanges(this.dataSource);
     this.searchService.makeHadPicturesToBoolean(this.dataSource);
     this.masrafState = this.searchService.getMasrafStates();
-    this._years = this.searchService.receiveYear();
+    this._years = this.searchService.getYears();
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {

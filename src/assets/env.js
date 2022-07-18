@@ -25,6 +25,21 @@
             safari: { alert: 11, normal: 13 },
         }
     };
+    window.__env.years = [
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ];
+    window.__env.getDeleteDictionary = [
+        { id: 0, title: 'Z' },
+        { id: 2, title: 'TW' },
+        { id: 5, title: 'F' }
+    ];
 
     // Whether or not to enable debug mode
     // Setting this to false will disable console output

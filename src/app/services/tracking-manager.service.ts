@@ -7,15 +7,14 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
-import { JwtService } from 'src/app/auth/jwt.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IEditTracking, IOffLoadPerDay, ITracking } from '../Interfaces/itrackings';
-import { EN_Routes } from '../Interfaces/routes.enum';
 import { OffloadModify } from './../classes/offload-modify-type';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -141,7 +140,6 @@ export class TrackingManagerService {
     private _location: Location,
     private dialog: MatDialog,
     private allListsService: AllListsService,
-    private jwtService: JwtService,
     private router: Router
   ) { }
 
@@ -173,26 +171,6 @@ export class TrackingManagerService {
       });
     } catch (error) {
       console.error(error);
-    }
-  }
-  downloadFileByUrl = (fileRepositoryId: string): any => {
-    // return new Promise((resolve) => {
-    //   this.interfaceManagerService.GETID(ENInterfaces.downloadFileByUrl, fileRepositoryId).subscribe(res => {
-    //     // method, fileRepositoryId + `?access_token=${this.jwtService.getAuthorizationToken()}`
-    //     resolve(res)
-    //   });
-    // })
-    // const a: string = fileRepositoryId + '?access_token=' + this.jwtService.getAuthorizationToken();
-    // console.log(a);
-
-    try {
-      return new Promise((resolve) => {
-        return this.interfaceManagerService.GETBLOB(ENInterfaces.downloadFileByUrl, fileRepositoryId).subscribe(res => {
-          resolve(res);
-        })
-      })
-    } catch (error) {
-      console.error(e => e);
     }
   }
   getDataSourceByQuote = (method: ENInterfaces, insertedInput: number | string): Promise<any> => {

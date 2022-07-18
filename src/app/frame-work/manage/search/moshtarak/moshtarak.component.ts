@@ -24,6 +24,7 @@ export class MoshtarakComponent extends AllListsFactory {
   _searchByInfo: string = 'مقدار';
 
   zoneDictionary: IDictionaryManager[] = [];
+  deleteDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
@@ -49,12 +50,15 @@ export class MoshtarakComponent extends AllListsFactory {
     else {
       this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
     }
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionary = await this.searchService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 
+    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');

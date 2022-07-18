@@ -26,6 +26,7 @@ export class AssessPreComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
+  deleteDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
@@ -53,8 +54,10 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService._assessAddReq.imagePercent = rcd.defaultImagePercent;
   }
   converts = () => {
+    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
@@ -92,6 +95,7 @@ export class AssessPreComponent extends AllListsFactory {
     this.getMasterInZone();
   }
   getMasterInZone = async () => {
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     this.masrafState = this.importDynamicService.getMasrafStates();
     this.karbariDictionary = await this.importDynamicService.getKarbariDictionary();

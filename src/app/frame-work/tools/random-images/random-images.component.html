@@ -32,8 +32,9 @@
                     <div class="_key">تعداد</div>
 
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="quantity" [filter]="true"
-                        placeholder="عدد تصادفی" [options]="_quantity" [(ngModel)]="toolsService.randomImages.quantity"
-                        [editable]="true" optionValue="value" optionLabel="title">
+                        placeholder="تعداد تصاویر" [options]="_quantity"
+                        [(ngModel)]="toolsService.randomImages.quantity" [editable]="true" optionValue="value"
+                        optionLabel="title">
                     </p-dropdown>
                 </div>
 
@@ -54,7 +55,7 @@
         <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
 
             <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
-                <img src="{{imgsOriginUrl[ri]}}" alt="whatever" (click)="routeToOffload(item , ri)">
+                <img src="{{imgsOriginUrl[ri]}}" alt="whatever" loading="lazy" (click)="routeToOffload(item , ri)">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
                     <p>{{item.eshterak}}</p>
                     <p>{{item.firstName}}</p>
@@ -69,7 +70,7 @@
         </div>
     </div>
 
-    <app-random-image-carousel *ngIf="showCarousel" [dataSource]="carouselImage"
+    <app-random-image-carousel *ngIf="toolsService.showCarousel" [dataSource]="carouselImage"
         (cancelClicked)="carouselCancelClicked()" (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
         <app-random-image-carousel-details></app-random-image-carousel-details>
 

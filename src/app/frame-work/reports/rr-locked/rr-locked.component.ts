@@ -33,6 +33,7 @@ export class RrLockedComponent extends AllListsFactory {
 
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  deleteDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -69,12 +70,15 @@ export class RrLockedComponent extends AllListsFactory {
       this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
       this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
     }
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
+    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');

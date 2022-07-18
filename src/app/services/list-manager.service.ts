@@ -70,6 +70,9 @@ export class ListManagerService {
     private dialog: MatDialog,
   ) { }
 
+  getDeleteDictionary = (): any[] => {
+    return this.utilsService.getDeleteDictionary();
+  }
   getLMAllZoneDictionary = async (): Promise<any> => {
     return await this.dictionaryWrapperService.getZoneDictionary();
   }

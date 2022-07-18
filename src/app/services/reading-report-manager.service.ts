@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENRandomNumbers, ENSelectedColumnVariables, IGetYears, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
@@ -30,6 +31,8 @@ import { EnvService } from './env.service';
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENReadingReports = ENReadingReports;
+  isCollapsed: boolean = false;
+  _isOrderByDate: boolean;
 
   masterReq: IReadingReportReq = {
     fromDate: '',
@@ -168,8 +171,37 @@ export class ReadingReportManagerService {
     reportCode: 0,
     year: 1401
   }
+  private searchInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: true
+    },
+    {
+      title: 'دوره',
+      isSelected: false
+    }
+  ]
+  private searchInOrderToReverse: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: false
+    },
+    {
+      title: 'دوره',
+      isSelected: true
+    }
+  ]
   /* GET*/
-
+  getSearchInOrderTo = (): ISearchInOrderTo[] => {
+    if (this.profileService.getLocalValue()) {
+      this._isOrderByDate = false;
+      return this.searchInOrderToReverse;
+    }
+    else {
+      this._isOrderByDate = true;
+      return this.searchInOrderTo;
+    }
+  }
   receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
     this[variable].fromDate = $event;
   }
@@ -186,7 +218,8 @@ export class ReadingReportManagerService {
     private _location: Location,
     private router: Router,
     private envService: EnvService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private profileService: ProfileService
   ) { }
 
   // CALL APIs
@@ -227,6 +260,9 @@ export class ReadingReportManagerService {
         resolve(res);
       })
     });
+  }
+  getDeleteDictionary = (): any[] => {
+    return this.utilsService.getDeleteDictionary();
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
@@ -360,7 +396,7 @@ export class ReadingReportManagerService {
     this.utilsService.snackBarMessageSuccess(message);
   }
   getYears = (): ITitleValue[] => {
-    return IGetYears();
+    return this.utilsService.IGetYears();
   }
   routeTo = (route: string) => {
     this.utilsService.routeTo(route);

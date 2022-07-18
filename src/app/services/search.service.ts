@@ -6,7 +6,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
     ENSelectedColumnVariables,
-    IGetYears,
     IMasrafStates,
     IObjectIteratation,
     ISearchInOrderTo,
@@ -59,7 +58,7 @@ export class SearchService {
     readingPeriodId: null,
     year: 1401
   }
-  
+
   private _searchProExcel: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: true },
     { field: 'trackNumber', header: 'شناسه قبض', isSelected: true },
@@ -302,7 +301,7 @@ export class SearchService {
     })
   }
   getYears = (): ITitleValue[] => {
-    return IGetYears();
+    return this.utilsService.IGetYears();
   }
   getMasrafStates = () => {
     return IMasrafStates;
@@ -314,9 +313,6 @@ export class SearchService {
       else
         item.imageCount = false;
     })
-  }
-  receiveYear = (): ITitleValue[] => {
-    return IGetYears();
   }
   receiveFromDateJalali = (variable: ENSearchs, $event: string) => {
     this[variable].fromDate = $event;
