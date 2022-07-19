@@ -39,6 +39,7 @@ export class ProfileComponent extends FactoryONE {
     }
 
     this.getSelectedColumns();
+    this.getBasedOnDate();
     this.getValueOfShowCarouselMedia();
   }
   changePassword = () => {
@@ -57,7 +58,7 @@ export class ProfileComponent extends FactoryONE {
   getBasedOnDate = () => {
     this.profileService.showStateVals.searchBasedOnDate = this.profileService.getLocalValue();
   }
-  setBasedOnDate = (val) => {
+  setBasedOnDate = (val: any) => {
     this.profileService.setLocalValue(val);
     val ? this.profileService.showMessage(EN_messages.basedOnDateShowDisabled) : this.profileService.showMessage(EN_messages.basedOnDateShowEnabled);
   }

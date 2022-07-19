@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportMaster, IReadingReportReq } from 'interfaces/ireports';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { IReadingReportMaster } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -13,27 +13,8 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class MasterComponent extends FactoryONE {
   isCollapsed: boolean = false;
-  readingReportReq: IReadingReportReq = {
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1401
-  }
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
   dataSource: IReadingReportMaster[] = [];
 
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -53,12 +34,12 @@ export class MasterComponent extends FactoryONE {
       this.closeTabService.saveDataForRRMaster = null;
       this.verification();
     }
-    this.readingReportReq = this.readingReportManagerService.masterReq;
-    // console.log(this.readingReportReq);
 
     if (this.closeTabService.saveDataForRRMaster) {
       this.dataSource = this.closeTabService.saveDataForRRMaster;
     }
+    this.readingReportManagerService.getSearchInOrderTo();
+
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
   }
@@ -69,15 +50,15 @@ export class MasterComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '')
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
+    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.masterReq.readingPeriodId = null, this.readingReportManagerService.masterReq.year = 0) : (this.readingReportManagerService.masterReq.fromDate = '', this.readingReportManagerService.masterReq.toDate = '')
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.masterReq, this.readingReportManagerService._isOrderByDate);
     if (temp) {
       this.connectToServer();
     }
   }
 
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportManagerService.masterReq);
     this.closeTabService.saveDataForRRMaster = this.dataSource;
-  }  
+  }
 }

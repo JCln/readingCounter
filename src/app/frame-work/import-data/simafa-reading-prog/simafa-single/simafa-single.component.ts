@@ -5,8 +5,8 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IImportDataResponse, IImportSimafaSingleReq, IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
+import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -26,7 +26,7 @@ export class SimafaSingleComponent extends FactoryONE {
     displayRadif: false,
     counterReaderId: '',
     readingPeriodId: null,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     readingProgramId: ''
   }
   _showAlalHesabPercent: boolean = false;
@@ -37,7 +37,7 @@ export class SimafaSingleComponent extends FactoryONE {
 
   constructor(
     public importDynamicService: ImportDynamicService,
-    private closeTabService: CloseTabService,
+    private utilsService: UtilsService,
     private route: ActivatedRoute
   ) {
     super();

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { DataMiningAnalysesService } from 'services/data-mining-analyses.service';
 import { Converter } from 'src/app/classes/converter';
@@ -15,17 +15,6 @@ import { IReadingTimeRes } from 'src/app/Interfaces/data-mining';
 })
 export class DmAnalysisComponent extends FactoryONE {
   isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -50,7 +39,7 @@ export class DmAnalysisComponent extends FactoryONE {
       // this.insertSelectedColumns(); /* TO CHECKOUT THIS FUNC */
       this.setRanges();
     }
-
+    this.dataMiningAnalysesService.getSearchInOrderTo();
     this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.getReadingPeriodKindDictionary();
     this.receiveYear();
@@ -62,8 +51,8 @@ export class DmAnalysisComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.dataMiningAnalysesService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.dataMiningAnalysesService.dataMiningReq.readingPeriodId = null, this.dataMiningAnalysesService.dataMiningReq.year = 0) : (this.dataMiningAnalysesService.dataMiningReq.fromDate = '', this.dataMiningAnalysesService.dataMiningReq.toDate = '')
-    const temp = this.dataMiningAnalysesService.verification(this.dataMiningAnalysesService.dataMiningReq, this._isOrderByDate);
+    this.dataMiningAnalysesService._isOrderByDate ? (this.dataMiningAnalysesService.dataMiningReq.readingPeriodId = null, this.dataMiningAnalysesService.dataMiningReq.year = 0) : (this.dataMiningAnalysesService.dataMiningReq.fromDate = '', this.dataMiningAnalysesService.dataMiningReq.toDate = '')
+    const temp = this.dataMiningAnalysesService.verification(this.dataMiningAnalysesService.dataMiningReq, this.dataMiningAnalysesService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }

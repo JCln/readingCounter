@@ -6,18 +6,25 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENImportDatas,
-    IImportDataResponse,
-    IImportDynamicDefault,
-    IImportSimafaBatchReq,
-    IImportSimafaReadingProgramsReq,
-    IImportSimafaSingleReq,
-    IReadingProgramRes,
+  ENImportDatas,
+  IImportDataResponse,
+  IImportDynamicDefault,
+  IImportSimafaBatchReq,
+  IImportSimafaReadingProgramsReq,
+  IImportSimafaSingleReq,
+  IReadingProgramRes,
 } from 'interfaces/import-data';
-import { ENSelectedColumnVariables, IMasrafStates, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import {
+  ENSelectedColumnVariables,
+  IMasrafStates,
+  IObjectIteratation,
+  ISearchInOrderTo,
+  ITitleValue,
+} from 'interfaces/ioverall-config';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ProfileService } from 'services/profile.service';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmDialogComponent } from '../frame-work/import-data/import-dynamic/confirm-dialog/confirm-dialog.component';
@@ -38,7 +45,7 @@ export class ImportDynamicService {
   simafaRDPGReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   _assessAddReq: IAssessAddDtoSimafa = {
     onOffLoadIds: [],
@@ -80,10 +87,42 @@ export class ImportDynamicService {
     private allImportsService: AllImportsService,
     private dialog: MatDialog,
     private router: Router,
+    private profileService: ProfileService,
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
+  _isOrderByDate: boolean = false;
+  searchInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: true
+    },
+    {
+      title: 'دوره',
+      isSelected: false
+    }
+  ]
+  searchInOrderToReverse: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: false
+    },
+    {
+      title: 'دوره',
+      isSelected: true
+    }
+  ]
+  getSearchInOrderTo = (): ISearchInOrderTo[] => {
+    if (this.profileService.getLocalValue()) {
+      this._isOrderByDate = false;
+      return this.searchInOrderToReverse;
+    }
+    else {
+      this._isOrderByDate = true;
+      return this.searchInOrderTo;
+    }
+  }
   columnSimafaSingle = () => {
     return this._simafaSingleReq;
   }

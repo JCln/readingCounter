@@ -14,6 +14,14 @@ export class ColumnManager {
         // { field: 'jsonInfo', header: 'اطلاعات JSON', isSelected: false },
         { field: 'paramSendType', header: 'نوع فرم', isSelected: false }
     ];
+    profile: IObjectIteratation[] = [
+        { field: 'firstName', header: 'نام', isSelected: false, readonly: true },
+        { field: 'sureName', header: 'نام خانوادگی', isSelected: false, readonly: true },
+        { field: 'username', header: 'نام کاربری', isSelected: false, readonly: true },
+        { field: 'email', header: 'ایمیل', isSelected: false, readonly: true },
+        { field: 'displayName', header: 'نام نمایش', isSelected: false, readonly: true },
+        { field: 'userCode', header: 'کد کاربری', isSelected: false, readonly: true }
+    ]
     automaticImport: IObjectIteratation[] = [
         { field: 'jobDescription', header: 'توضیحات', isSelected: true },
         { field: 'dueJalaliDay', header: 'روز اجرا', isSelected: true },

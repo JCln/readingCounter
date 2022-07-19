@@ -32,7 +32,7 @@ export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENReadingReports = ENReadingReports;
   isCollapsed: boolean = false;
-  _isOrderByDate: boolean;
+  _isOrderByDate: boolean = false;
 
   masterReq: IReadingReportReq = {
     fromDate: '',
@@ -40,7 +40,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   };
   imgAttrResultReq: IReadingReportReq = {
     fromDate: '',
@@ -48,7 +48,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   };
   imgAttrAnalyzeReq: IReadingReportReq = {
     fromDate: '',
@@ -56,7 +56,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   };
   detailsReq: IReadingReportReq = {
     zoneId: 0,
@@ -65,7 +65,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   disposalhoursReq: IReadingReportReq = {
     zoneId: 0,
@@ -74,7 +74,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   karkardReq: IReadingReportReq = {
     zoneId: 0,
@@ -83,7 +83,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   lockedReq: IReadingReportReq = {
     zoneId: 0,
@@ -92,7 +92,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   preNumberShownReq: IReadingReportReq = {
     zoneId: 0,
@@ -101,7 +101,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   karkardOffloadReq: IReadingReportReq = {
     zoneId: 0,
@@ -110,7 +110,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   karkardDailyReq: IReadingReportReq = {
     zoneId: 0,
@@ -119,7 +119,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   gisReq: IReadingReportGISReq = {
     zoneId: 0,
@@ -131,7 +131,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     isCluster: true
   }
   anlzPrfmReq: IMostReportInput = {
@@ -141,7 +141,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     zoneIds: [0]
   }
   trvchReq: IReadingReportTraverseDifferentialReq = {
@@ -149,7 +149,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     traverseType: 0,
     zoneIds: null
   }
@@ -160,7 +160,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   inStateReq: IReadingReportReq = {
     zoneId: 0,
@@ -169,9 +169,9 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
-  private searchInOrderTo: ISearchInOrderTo[] = [
+  searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
       isSelected: true
@@ -181,7 +181,7 @@ export class ReadingReportManagerService {
       isSelected: false
     }
   ]
-  private searchInOrderToReverse: ISearchInOrderTo[] = [
+  searchInOrderToReverse: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
       isSelected: false

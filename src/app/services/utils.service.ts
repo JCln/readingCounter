@@ -20,6 +20,9 @@ export class UtilsService {
   IGetYears = (): ITitleValue[] => {
     return this.envService.years;
   }
+  getFirstYear = (): number => {
+    return this.envService.years[0].value;
+  }
   getDeleteDictionary = (): any[] => {
     return this.envService.getDeleteDictionary;
   }

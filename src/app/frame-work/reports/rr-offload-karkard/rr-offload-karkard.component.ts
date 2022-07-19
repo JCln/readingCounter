@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportKarkard } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -15,23 +15,12 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class RrOffloadKarkardComponent extends FactoryONE {
   isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-
   dataSource: IReadingReportKarkard[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
 
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
+
+  karbariDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -54,6 +43,7 @@ export class RrOffloadKarkardComponent extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForRROffloadedKarkard;
       this.setGetRanges();
     }
+    this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
@@ -65,8 +55,7 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   validation = (): boolean => {
-    // this._isOrderByDate ? (this.readingReportManagerService.karkardOffloadReq.readingPeriodId = null, this.readingReportManagerService.karkardOffloadReq.year = 0) : (this.readingReportManagerService.karkardOffloadReq.fromDate = '', this.readingReportManagerService.karkardOffloadReq.toDate = '');
-    return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardOffloadReq, this._isOrderByDate);
+    return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardOffloadReq, this.readingReportManagerService._isOrderByDate);
   }
   verification = async () => {
     if (this.validation())

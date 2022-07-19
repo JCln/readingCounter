@@ -4,9 +4,10 @@
             <section class="static_part">
                 <section class="order_by">
                     <h2>صدور بر اساس :</h2>
-                    <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
-                        name="_isOrderByDate">
-                        <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"
+                    <mat-radio-group class="radio_group" aria-labelledby="radio_group"
+                        [(ngModel)]="readingReportManagerService._isOrderByDate" name="_isOrderByDate">
+                        <mat-radio-button class="radio_button"
+                            *ngFor="let orderType of readingReportManagerService.searchInOrderTo"
                             [value]="orderType.isSelected">
                             {{orderType.title}}
                         </mat-radio-button>
@@ -21,7 +22,7 @@
                             [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
                         </p-dropdown>
                     </div>
-                    <div class="input_2" [hidden]="_isOrderByDate">
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
                             <mat-option (click)="getReadingPeriod()"
@@ -30,7 +31,8 @@
                             </mat-option>
                         </mat-select>
                     </div>
-                    <div class="input_2" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
+                    <div class="input_2"
+                        [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
                         <mat-select placeholder="انتخاب مورد"
                             [(ngModel)]="readingReportManagerService.anlzPrfmReq.readingPeriodId"
@@ -40,7 +42,7 @@
                             </mat-option>
                         </mat-select>
                     </div>
-                    <div class="input_2" [hidden]="_isOrderByDate">
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">سال</div>
                         <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.anlzPrfmReq.year"
                             name="year">
@@ -50,7 +52,7 @@
                         </mat-select>
                     </div>
 
-                    <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
@@ -59,7 +61,7 @@
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
@@ -80,8 +82,7 @@
 
         </form>
     </section>
-    <app-prime-table [dataSource]="dataSource"
-        [_outputFileName]="'analyzePrfm'" [_checkUpName]="'rr-analyzePrfm'"
+    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'analyzePrfm'" [_checkUpName]="'rr-analyzePrfm'"
         [_selectedColumnsToRemember]="'selectedRRAnalyzeByParam'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
         (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
     </app-prime-table>
