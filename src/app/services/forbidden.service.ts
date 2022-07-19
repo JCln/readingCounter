@@ -30,7 +30,7 @@ export class ForbiddenService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     zoneIds: [0]
   }
 

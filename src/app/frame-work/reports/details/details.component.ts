@@ -41,7 +41,6 @@ export class DetailsComponent extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForRRDetails;
     }
     this.readingReportManagerService.getSearchInOrderTo();
-    console.log(this.readingReportManagerService.getSearchInOrderTo());
 
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -54,7 +53,6 @@ export class DetailsComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    // this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.detailsReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();

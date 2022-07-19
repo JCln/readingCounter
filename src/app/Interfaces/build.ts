@@ -171,9 +171,10 @@ export class ENYears {
 }
 export class getDeleteDictionary {
     static readonly DEFAULT = new getDeleteDictionary([
-        { id: 0, title: 'testZero' },
-        { id: 2, title: 'testTwo' },
-        { id: 5, title: 'testThree' }
+        { id: 0, title: 'حذف دائم' },
+        { id: 2, title: 'حذف موقت' },
+        { id: 3, title: 'حذف موقت' },
+        { id: 5, title: 'حذف موقت' }
     ]);
     private constructor(public readonly value: { id: number, title: string }[]) {
     }

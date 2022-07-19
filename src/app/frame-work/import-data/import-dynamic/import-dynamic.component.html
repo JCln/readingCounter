@@ -3,10 +3,10 @@
         <section class="static_part">
             <section class="order_by">
                 <h2>صدور بر اساس :</h2>
-                <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
-                    name="_isOrderByDate">
-                    <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"
-                        [value]="orderType.isSelected">
+                <mat-radio-group class="radio_group" aria-labelledby="radio_group"
+                    [(ngModel)]="importDynamicService._isOrderByDate" name="_isOrderByDate">
+                    <mat-radio-button class="radio_button"
+                        *ngFor="let orderType of importDynamicService.searchInOrderTo" [value]="orderType.isSelected">
                         {{orderType.title}}
                     </mat-radio-button>
                 </mat-radio-group>
@@ -25,7 +25,8 @@
                     </div>
                 </div>
                 <!-- when zone id and kind id get -->
-                <div class="input_2" [hidden]="_isOrderByDate || !readingPeriodKindsDictionary.length">
+                <div class="input_2"
+                    [hidden]="importDynamicService._isOrderByDate || !readingPeriodKindsDictionary.length">
                     <div class="_key">نوع دوره</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
                         <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
@@ -34,7 +35,8 @@
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2 this" [hidden]="_isOrderByDate || !readingPeriodDictionary.length">
+                <div class="input_2 this"
+                    [hidden]="importDynamicService._isOrderByDate || !readingPeriodDictionary.length">
                     <div class="_key">دوره قرائت</div>
                     <mat-select placeholder="انتخاب مورد"
                         [(ngModel)]="importDynamicService.importDynamicReq.readingPeriodId" name="readingPeriodId">
@@ -67,7 +69,7 @@
 
             </section>
             <section class="content date_section">
-                <div class="input_2" [hidden]="!_isOrderByDate">
+                <div class="input_2" [hidden]="!importDynamicService._isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
                         <app-date-jalali name="fromDate"
@@ -76,7 +78,7 @@
                         </app-date-jalali>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="!_isOrderByDate">
+                <div class="input_2" [hidden]="!importDynamicService._isOrderByDate">
                     <div class="_key">تا</div>
                     <div class="_value">
                         <app-date-jalali name="toDate"

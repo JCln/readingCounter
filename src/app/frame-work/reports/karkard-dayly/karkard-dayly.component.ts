@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportKarkard } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -15,17 +15,6 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class KarkardDaylyComponent extends FactoryONE {
   isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -52,6 +41,7 @@ export class KarkardDaylyComponent extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForRRkarkardDaily;
       this.setGetRanges();
     }
+    this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
@@ -63,8 +53,8 @@ export class KarkardDaylyComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportManagerService.karkardDailyReq.readingPeriodId = null, this.readingReportManagerService.karkardDailyReq.year = 0) : (this.readingReportManagerService.karkardDailyReq.fromDate = '', this.readingReportManagerService.karkardDailyReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardDailyReq, this._isOrderByDate);
+    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.karkardDailyReq.readingPeriodId = null, this.readingReportManagerService.karkardDailyReq.year = 0) : (this.readingReportManagerService.karkardDailyReq.fromDate = '', this.readingReportManagerService.karkardDailyReq.toDate = '');
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardDailyReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }

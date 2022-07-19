@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportTraverse } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -14,17 +14,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class TraverseComponent extends FactoryONE {
   isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -52,6 +41,7 @@ export class TraverseComponent extends FactoryONE {
     if (this.closeTabService.saveDataForRRTraverse) {
       this.dataSource = this.closeTabService.saveDataForRRTraverse;
     }
+    this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
@@ -63,8 +53,8 @@ export class TraverseComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportManagerService.traverseReq.readingPeriodId = null, this.readingReportManagerService.traverseReq.year = 0) : (this.readingReportManagerService.traverseReq.fromDate = '', this.readingReportManagerService.traverseReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.traverseReq, this._isOrderByDate);
+    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.traverseReq.readingPeriodId = null, this.readingReportManagerService.traverseReq.year = 0) : (this.readingReportManagerService.traverseReq.fromDate = '', this.readingReportManagerService.traverseReq.toDate = '');
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.traverseReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
