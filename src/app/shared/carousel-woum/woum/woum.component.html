@@ -4,6 +4,22 @@
             <div class="_key">نام و نام خانوادگی</div>
             <input [readOnly]="true" class="_value" name="names" [(ngModel)]="firstName.trim() + ' '+ sureName">
         </div>
+        <div class="input_2">
+            <div class="_key">اشتراک</div>
+            <input [readOnly]="true" class="_value" name="eshterak" [(ngModel)]="eshterak">
+        </div>
+        <div class="input_2">
+            <div class="_key">ش.پرونده</div>
+            <input [readOnly]="true" class="_value" name="radif" [(ngModel)]="radif">
+        </div>
+        <div class="input_2">
+            <div class="_key">رقم فعلی</div>
+            <input [readOnly]="true" class="_value" name="counterNumber" [(ngModel)]="counterNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">وضعیت فعلی</div>
+            <input [readOnly]="true" class="_value" name="counterStateId" [(ngModel)]="counterStateId">
+        </div>
         <div class="input_2" *ngFor="let item of interationOnOverallInfo">
             <div class="_key">{{item.header}}</div>
             <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
@@ -78,20 +94,102 @@
 
     </section>
 </main>
-<main *ngIf="profileService.getUseCarouselMedia()">
-    <p-galleria [value]="testGallery">
+<main class="carousel_gallery" *ngIf="profileService.getUseCarouselMedia()">
+
+    <p-galleria #galleria [(value)]="testGallery" [(activeIndex)]="activeIndex" [numVisible]="3"
+        [containerStyle]="{'max-width':'640px'}" [containerClass]="galleriaClass()" [showThumbnails]="showThumbnails"
+        [showItemNavigators]="true" [circular]="true">
+
         <ng-template pTemplate="item" let-item>
-            <img [src]="item.src" style="width: 100%; display: block;" />
+            <img class="main_img" [src]="item" [ngClass]="fullscreen ? '_is_fullcreen' : '_is_not_fullscreen'" />
         </ng-template>
-        <!-- <ng-template pTemplate="thumbnail" let-item>
-            <div class="grid grid-nogutter justify-content-center">
-                <img [src]="item" style="display: block;" />
+
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="p-grid p-nogutter p-justify-center">
+                <img class="thumbnail_img" [src]="item" />
             </div>
-        </ng-template> -->
-        <!-- <ng-template pTemplate="caption" let-item>
-            <h4 style="margin-bottom: .5rem; color: #ffffff;">{{item.title}}</h4>
-            <p>{{item.alt}}</p>
-        </ng-template> -->
+        </ng-template>
+
+        <ng-template pTemplate="footer" let-item>
+            <div class="custom-galleria-footer">
+                <button type="button" class="pi pi-list" (click)="onThumbnailButtonClick()"></button>
+                <span *ngIf="testGallery" class="title-container">
+                    <span>{{activeIndex + 1}}/{{testGallery.length}}</span>
+                    <!-- <span class="title">{{testGallery[activeIndex]}}</span> -->
+                    <!-- <span>{{images[activeIndex].alt}}</span> -->
+                </span>
+                <button type="button" (click)="toggleFullScreen()"
+                    class="fullscreen-button pi pi-window-maximize"></button>
+            </div>
+        </ng-template>
+
+    </p-galleria>
+</main>
+
+<!-- <main class="carousel_gallery">
+
+    <p-galleria [value]="testGallery" [(activeIndex)]="activeIndex" [showItemNavigators]="true"
+        [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px', 'width': '40rem'}"
+        [baseZIndex]="80" [numVisible]="3" [circular]="true"  [showThumbnails]="true"
+        [containerClass]="galleriaClass()">
+
+        <ng-template pTemplate="item" let-item>
+            <img class="main_img" [src]="item" style="width: 100%; display: block;"
+                [ngStyle]="{'width': !fullscreen ? '100%' : '', 'display': !fullscreen ? 'block' : ''}" />
+        </ng-template>
+
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="p-grid p-nogutter p-justify-center">
+                <img [src]="item" />
+            </div>
+        </ng-template>
+
     </p-galleria>
 
-</main>
+
+
+    <p-galleria [(value)]="testGallery" [(activeIndex)]="activeIndex" [responsiveOptions]="responsiveOptions"
+        [containerStyle]="{'max-width': '850px'}" [numVisible]="7" [circular]="true" [fullScreen]="true"
+        [showItemNavigators]="true" [showThumbnails]="true" [baseZIndex]="80" [containerClass]="galleriaClass()">
+
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item" style="width: 100%; display: block;" />
+        </ng-template>
+
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="p-grid p-nogutter p-justify-center">
+                <img [src]="item" />
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer" let-item>
+            <div class="custom-galleria-footer">
+                <button type="button" icon="pi pi-list" (click)="onThumbnailButtonClick()"></button>
+                <span *ngIf="testGallery" class="title-container">
+                    <span>{{activeIndex + 1}}/{{testGallery.length}}</span>
+                    <span class="title">test</span>
+                    <span>{{testGallery[activeIndex]}}</span>
+                </span>
+                <button type="button" (click)="toggleFullScreen()" class="fullscreen-button"></button>
+            </div>
+        </ng-template>
+    </p-galleria>
+</main> -->
+
+
+<!-- <p-galleria #galleria [(value)]="testGallery" [(activeIndex)]="activeIndex" [numVisible]="5"
+    [containerStyle]="{'max-width':'640px'}" [containerClass]="galleriaClass()" [showThumbnails]="showThumbnails"
+    [showItemNavigators]="true" [showItemNavigatorsOnHover]="true" [circular]="true" [autoPlay]="true"
+    [transitionInterval]="3000">
+  
+    <ng-template pTemplate="footer" let-item>
+        <div class="custom-galleria-footer">
+            <button type="button" pButton icon="pi pi-list" (click)="onThumbnailButtonClick()"></button>
+            <span *ngIf="testGallery" class="title-container">
+                <span>{{activeIndex + 1}}/{{testGallery.length}}</span>
+                <span class="title">{{testGallery[activeIndex].title}}</span>
+            <span>{{testGallery[activeIndex].alt}}</span>
+            </span>
+            <button type="button" pButton (click)="toggleFullScreen()" class="fullscreen-button"></button>
+        </div>
+    </ng-template>
+</p-galleria> -->

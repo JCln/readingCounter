@@ -11,8 +11,8 @@
         </div>
     </div>
     <div class="radios">
-        <mat-radio-group [(ngModel)]="counterStateValue" class="radio_group" aria-labelledby="radio_group"
-            name="counterState">
+        <mat-radio-group [(ngModel)]="listManagerService.counterStateValue" class="radio_group"
+            aria-labelledby="radio_group" name="counterState">
             <mat-radio-button class="radio_button" *ngFor="let orderType of counterStateForModifyDictionary"
                 [value]="orderType.id" (change)="updateOnChangedCounterState($event)"
                 [ngClass]="{'under_zero': orderType.id < 0}">

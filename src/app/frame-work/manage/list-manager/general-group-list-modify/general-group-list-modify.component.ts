@@ -39,7 +39,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   _selectedColumns: any[];
 
   clonedProducts: { [s: string]: object; } = {};
-  counterStateValue: number;
   pageSignTrackNumber: number = null;
 
   karbariDictionary: IDictionaryManager[] = [];
@@ -71,8 +70,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
-    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
 
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
@@ -104,15 +103,16 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       }
       this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
       this.insertSelectedColumns();
+      // setDynamics should implement before new instance of dataSource create
+      this.listManagerService.setDynamicPartRanges(this.dataSource);
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
-      this.listManagerService.setDynamicPartRanges(this.dataSource);
       this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     }
   }
   refreshTable = () => {
-    if (!MathS.isNull(this.counterStateValue))
-      this.updateOnChangedCounterState({ value: this.counterStateValue });
+    if (!MathS.isNull(this.listManagerService.counterStateValue))
+      this.updateOnChangedCounterState({ value: this.listManagerService.counterStateValue });
     else {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
     }
@@ -208,7 +208,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       },
       rtl: true,
       width: '60%',
-      showHeader: false
+      showHeader: true
     })
   }
   openMoshtarakinDialog = (dataSource: any) => {

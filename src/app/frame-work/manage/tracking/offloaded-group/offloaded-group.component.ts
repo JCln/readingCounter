@@ -65,12 +65,15 @@ export class OffloadedGroupComponent extends FactoryONE {
     this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
   }
   downloadOutputSingle = async (row: ITracking) => {
-    if (this.envService.hasNextBazdid) {
-      this.hasNextBazdid(row);
-      return;
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.downloadPermit, false, false);
+    if (desc) {
+      if (this.envService.hasNextBazdid) {
+        this.hasNextBazdid(row);
+        return;
+      }
+      const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputSINGLE, row);
+      this.outputManagerService.downloadFile(a);
     }
-    const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputSINGLE, row);
-    this.outputManagerService.downloadFile(a);
   }
   routeToOffloadGeneralGroupModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadGeneralModifyGrouped(dataSource);

@@ -75,6 +75,7 @@ export enum EN_messages {
     insert_excelRows = 'تعداد سطر های فایل Excel را وارد نمایید',
     download_excel = 'دریافت فایل Excel',
     download_excelButton = 'دریافت Excel',
+    downloadPermit = 'از دانلود فایل اطمینان دارید؟',
     insert_abFormula = 'فرمول آب را وارد نمایید',
     insert_fazelabFormula = 'فرمول فاضلاب را وارد نمایید',
     insert_formula = 'فرمول را وارد نمایید',
