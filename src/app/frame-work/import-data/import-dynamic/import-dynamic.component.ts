@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
-import { ENLocalStorageNames, IDictionaryManager, ISearchInOrderTo, ITrueFalse } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames, IDictionaryManager, ITrueFalse } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { LocalClientConfigsService } from 'services/local-client-configs.service';
@@ -24,17 +24,6 @@ export class ImportDynamicComponent extends FactoryONE {
     { name: 'هیچکدام', value: '' }
   ]
 
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _showAlalHesabPercent: boolean = false;
   _showimagePercent: boolean = false;
   canShowEditButton: boolean = false;
@@ -60,7 +49,7 @@ export class ImportDynamicComponent extends FactoryONE {
 
       if (!this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.importDynamicService.importDynamicReq))
         return;
-      const validation = this.importDynamicService.checkVertification(this.importDynamicService.importDynamicReq, this._isOrderByDate);
+      const validation = this.importDynamicService.checkVertification(this.importDynamicService.importDynamicReq, this.importDynamicService._isOrderByDate);
       if (!validation)
         return;
       if (this._showDynamicCount) {
@@ -114,7 +103,7 @@ export class ImportDynamicComponent extends FactoryONE {
     this.showEditButton();
   }
   verificationReadingPeriod = async () => {
-    if (this._isOrderByDate)
+    if (this.importDynamicService._isOrderByDate)
       return;
     if (!this.importDynamicService.importDynamicReq.zoneId || !this.zoneDictionary || !this.kindId) {
       this.readingPeriodDictionary = [];
@@ -136,6 +125,7 @@ export class ImportDynamicComponent extends FactoryONE {
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     if (!this.importDynamicService.validationZoneDictionary(this.zoneDictionary))
       this.zoneDictionary = [];
+    this.importDynamicService.getSearchInOrderTo();
     this.verificationACounterReaderId();
     this._showDynamicCount = this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasDynamicCount, true);
   }

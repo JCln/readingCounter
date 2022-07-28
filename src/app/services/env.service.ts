@@ -13,6 +13,8 @@ export class EnvService implements IENV {
   hasNextBazdid = this.temp.hasNextBazdid;
   mapCenter = this.temp.mapCenter;
   browserVersions = this.temp.browserVersions;
+  years = this.temp.years;
+  getDeleteDictionary = this.temp.getDeleteDictionary;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

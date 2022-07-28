@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
+import { EnvService } from 'services/env.service';
+import { JwtService } from 'src/app/auth/jwt.service';
 
 import { MathS } from '../classes/math-s';
 import {
@@ -24,11 +26,14 @@ import { UtilsService } from './utils.service';
 export class ToolsService {
   _isCollapseFileDownloadImage: boolean = false;
   _isCollapsedRandomImages: boolean = false;
+  showCarousel: boolean = false;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    private jwtService: JwtService,
+    private envService: EnvService
   ) { }
 
   public fileDownloadAllImages: IDownloadFileAllImages = {
@@ -99,6 +104,12 @@ export class ToolsService {
       { title: '30', value: 30 }
     ];
   }
+  getAuthToken = (): string => {
+    return this.jwtService.getAuthorizationToken();
+  }
+  getApiUrl = (): string => {
+    return this.envService.API_URL;
+  }
   postDataSource = (api: ENInterfaces, body: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(api, body).toPromise().then(res =>
@@ -152,6 +163,10 @@ export class ToolsService {
     return true;
   }
   verificationImageCarousel = (dataSource: IRandomImages) => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
     if (MathS.isNull(dataSource.day)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
       return false;

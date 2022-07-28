@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -17,17 +17,6 @@ import { AllListsFactory } from 'src/app/classes/factory';
 })
 export class RrPreNumberShownComponent extends AllListsFactory {
   isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 
@@ -36,6 +25,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
+  deleteDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
@@ -59,6 +49,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
       this.dataSource = this.closeTabService.saveDataForRRPreNumShown;
       this.converts();
     }
+    this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
@@ -70,8 +61,8 @@ export class RrPreNumberShownComponent extends AllListsFactory {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportManagerService.preNumberShownReq.readingPeriodId = null, this.readingReportManagerService.preNumberShownReq.year = 0) : (this.readingReportManagerService.preNumberShownReq.fromDate = '', this.readingReportManagerService.preNumberShownReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.preNumberShownReq, this._isOrderByDate);
+    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.preNumberShownReq.readingPeriodId = null, this.readingReportManagerService.preNumberShownReq.year = 0) : (this.readingReportManagerService.preNumberShownReq.fromDate = '', this.readingReportManagerService.preNumberShownReq.toDate = '');
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.preNumberShownReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
@@ -82,12 +73,14 @@ export class RrPreNumberShownComponent extends AllListsFactory {
       this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     }
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
-    // Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');

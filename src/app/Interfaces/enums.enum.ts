@@ -123,6 +123,8 @@ export enum EN_messages {
     tableDefaultColumnOrder = 'ستونها درحالت پیشفرض قرار دارند',
     carouselShowEnabled = 'نمایش تصاویر بطور گروهی خواهد بود',
     carouselShowDisabled = 'نمایش تصاویر بطور دستی خواهد بود',
+    basedOnDateShowEnabled = 'جستجو براساس تاریخ خواهد بود',
+    basedOnDateShowDisabled = 'جستجو براساس نوع خواهد بود',
     done = 'انجام شد',
     doneBroadcast = 'پیام مخابره شد',
 
@@ -151,7 +153,7 @@ export enum EN_messages {
     toPrevious = 'علت بازگشت به مرحله قبلی',
 
     broadTitle1 = 'قطع سامانه',
-    broadTitle2 = 'رفرش مجددا',
+    broadTitle2 = 'رفرش صفحه',
     broadTitle3 = 'تماس با راهبر',
     broadMessage1 = 'همکار گرامی سامانه به دلیل بروزرسانی مدت کوتاهی قطع خواهد شد',
     broadMessage2 = 'لطفا یکبار از سامانه خارج و سپس یکبار صفحه را رفرش نمایید',

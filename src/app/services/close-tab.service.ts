@@ -3,6 +3,7 @@ import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
 import { IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import { ISearchProReportInput } from 'interfaces/search';
+import { UtilsService } from 'services/utils.service';
 
 import { EN_Routes } from '../Interfaces/routes.enum';
 
@@ -10,6 +11,7 @@ import { EN_Routes } from '../Interfaces/routes.enum';
   providedIn: 'root'
 })
 export class CloseTabService {
+  constructor(private utilsService: UtilsService) { }
   /* TAB WRAPPER */
   tabs: ITabs[] = [];
 
@@ -78,7 +80,7 @@ export class CloseTabService {
   importSimafaReadingProgramReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     kindId: null
   }
   saveDataForSimafaReadingPrograms: any;
@@ -102,7 +104,7 @@ export class CloseTabService {
     toDate: '',
     readingPeriodId: null,
     zoneIds: [],
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     reportIds: [],
     counterStateIds: [],
     masrafStates: [],
@@ -245,14 +247,6 @@ export class CloseTabService {
   cleanArrays = () => {
     this.tabs = [];
   }
-  cleanAllData = () => {
-    for (let index = 0; index < this.val.length; index++) {
-      this[this.val[index].value] = '';
-      this[this.val[index].value_2] = '';
-    }
-    // TODO: make null all objects
-    this.cleanArrays();
-  }
   setAll(obj, val) {
     if (typeof obj === 'string') {
       obj = '';
@@ -265,6 +259,15 @@ export class CloseTabService {
         obj[index] = val
       });
     }
+  }
+  cleanAllData = () => {
+    for (let index = 0; index < this.val.length; index++) {
+      this[this.val[index].value] = null;
+      this[this.val[index].value_2] = null;
+      // this.setAll(this[this.val[index].req], null);
+    }
+    // TODO: make null all objects
+    this.cleanArrays();
   }
   cleanData = (url: string) => {
     this.val.find(item => {

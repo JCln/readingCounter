@@ -66,6 +66,7 @@ export enum ENInterfaces {
     downloadFileGET = 'V1/Download/File',
     downloadFileInfo = 'V1/Download/File/info',
     downloadFileForbidden = 'V1/Download/File/forbidden',
+    downloadFileByUrl = `V1/Download/File/ByUrl`,
 
     ReadingConfigALL = 'V1/ReadingConfigDefault/All',
     ReadingConfigGET = 'V1/ReadingConfigDefault/Get',

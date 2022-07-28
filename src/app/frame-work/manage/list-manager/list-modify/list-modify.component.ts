@@ -23,10 +23,10 @@ export class ListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
 
   pageSignTrackNumber: number = null;
-  // zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
+  deleteDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   showWouImages: boolean = false;
@@ -69,7 +69,7 @@ export class ListModifyComponent extends AllListsFactory {
       this.listManagerService.setDynamicPartRanges(this.dataSource);
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
-      // this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
+      this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
@@ -82,6 +82,9 @@ export class ListModifyComponent extends AllListsFactory {
         Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
         Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
       }
+
+      Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
+      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');

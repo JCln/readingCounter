@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportDetails } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -14,22 +14,10 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   dataSource: IReadingReportDetails[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariByCodeDictionary: IDictionaryManager[] = [];
 
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -52,6 +40,8 @@ export class DetailsComponent extends FactoryONE {
     if (this.closeTabService.saveDataForRRDetails) {
       this.dataSource = this.closeTabService.saveDataForRRDetails;
     }
+    this.readingReportManagerService.getSearchInOrderTo();
+
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
@@ -63,8 +53,7 @@ export class DetailsComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    // this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.detailsReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.detailsReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
@@ -72,7 +61,7 @@ export class DetailsComponent extends FactoryONE {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportDETAILSWithParam, this.readingReportManagerService.detailsReq);
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();// todo remove karbari
     this.karbariByCodeDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
-    Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'karbariCode');
     this.closeTabService.saveDataForRRDetails = this.dataSource;
   }

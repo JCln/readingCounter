@@ -41,8 +41,16 @@
     <section class="content">
 
         <h1 class="title">نمایش تصاویر بطور گروهی</h1>
-        <p-selectButton [options]="stateOptions" [(ngModel)]="showCarouselVal" optionLabel="label" optionValue="value"
-            (onChange)="setValueOfShowCarouselMedia(showCarouselVal)">
+        <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.groupImgs" optionLabel="label"
+            optionValue="value" (onChange)="setValueOfShowCarouselMedia(profileService.showStateVals.groupImgs)">
+        </p-selectButton>
+
+    </section>
+    <section class="content">
+
+        <h1 class="title">جستجو براساس نوع</h1>
+        <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.searchBasedOnDate" optionLabel="label"
+            optionValue="value" (onChange)="setBasedOnDate(profileService.showStateVals.searchBasedOnDate)">
         </p-selectButton>
 
     </section>

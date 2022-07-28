@@ -210,18 +210,6 @@ export const TrueFalseFilter: ITrueFalseFilter[] = [
     { name: 'باشد', value: true },
     { name: 'هیچکدام', value: '' }
 ]
-export const IGetYears = (): ITitleValue[] => {
-    return [
-        { title: '1401', value: 1401 },
-        { title: '1400', value: 1400 },
-        { title: '1399', value: 1399 },
-        { title: '1398', value: 1398 },
-        { title: '1397', value: 1397 },
-        { title: '1396', value: 1396 },
-        { title: '1395', value: 1395 },
-        { title: '1402', value: 1402 }
-    ];
-}
 export enum ENBrowserStatus {
     good = 200,
     warn = 400,
@@ -290,7 +278,8 @@ export enum ENHasCount {
 export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
     mapAnimationStartFrom = 'mapAnimationStartFrom',
-    shouldUseCarouselGallery = 'shouldUseCarouselGallery'
+    shouldUseCarouselGallery = 'shouldUseCarouselGallery',
+    shouldUseBaseOnDate = 'shouldUseBaseOnDate'
 }
 export enum ENRandomNumbers {
     zero = 0,
@@ -426,5 +415,5 @@ export interface Theme {
     properties: any
 }
 export enum ENLoginVersion {
-    version = '0.8.2'
+    version = '0.8.4'
 }

@@ -6,6 +6,7 @@ import { IChangePassword } from 'interfaces/inon-manage';
 import { ENLocalStorageNames, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
@@ -15,11 +16,16 @@ import { LocalClientConfigsService } from './local-client-configs.service';
   providedIn: 'root'
 })
 export class ProfileService {
+  showStateVals = {
+    groupImgs: false,
+    searchBasedOnDate: false
+  }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
+    private columnManager: ColumnManager,
     private localClientConfigsService: LocalClientConfigsService
   ) { }
 
@@ -29,15 +35,14 @@ export class ProfileService {
   setUseCarouselMedia = (useCarousel: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, useCarousel);
   }
+  setLocalValue = (useCarousel: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, useCarousel);
+  }
+  getLocalValue = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
+  }
   columnSelectedProfile = (): IObjectIteratation[] => {
-    return [
-      { field: 'firstName', header: 'نام', isSelected: false, readonly: true },
-      { field: 'sureName', header: 'نام خانوادگی', isSelected: false, readonly: true },
-      { field: 'username', header: 'نام کاربری', isSelected: false, readonly: true },
-      { field: 'email', header: 'ایمیل', isSelected: false, readonly: true },
-      { field: 'displayName', header: 'نام نمایش', isSelected: false, readonly: true },
-      { field: 'userCode', header: 'کد کاربری', isSelected: false, readonly: true }
-    ];
+    return this.columnManager.profile;
   }
   verification = (password: IChangePassword) => {
     if (MathS.isNull(password.oldPassword)) {

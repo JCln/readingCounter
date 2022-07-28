@@ -3,7 +3,6 @@
 main {
   position: fixed;
   direction: ltr;
-  // top: 60%;
   margin: auto;
   transform: translateY(-50%);
   background: var(--white);
@@ -11,11 +10,6 @@ main {
   width: calc(100% - 22%);
   min-height: 40rem;
   border-radius: $border_15;
-  // z-index: 10000;
-
-  // position: absolute;
-  // inset: 0;
-  // width: 100%;
 
   @media (max-width: 700px) {
     top: 100%;

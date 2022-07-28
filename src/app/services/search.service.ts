@@ -5,12 +5,11 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENSelectedColumnVariables,
-    IGetYears,
-    IMasrafStates,
-    IObjectIteratation,
-    ISearchInOrderTo,
-    ITitleValue,
+  ENSelectedColumnVariables,
+  IMasrafStates,
+  IObjectIteratation,
+  ISearchInOrderTo,
+  ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
@@ -57,9 +56,9 @@ export class SearchService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
-  
+
   private _searchProExcel: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: true },
     { field: 'trackNumber', header: 'شناسه قبض', isSelected: true },
@@ -302,7 +301,7 @@ export class SearchService {
     })
   }
   getYears = (): ITitleValue[] => {
-    return IGetYears();
+    return this.utilsService.IGetYears();
   }
   getMasrafStates = () => {
     return IMasrafStates;
@@ -314,9 +313,6 @@ export class SearchService {
       else
         item.imageCount = false;
     })
-  }
-  receiveYear = (): ITitleValue[] => {
-    return IGetYears();
   }
   receiveFromDateJalali = (variable: ENSearchs, $event: string) => {
     this[variable].fromDate = $event;

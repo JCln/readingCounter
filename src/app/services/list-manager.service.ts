@@ -70,17 +70,20 @@ export class ListManagerService {
     private dialog: MatDialog,
   ) { }
 
-  getLMAllZoneDictionary = () => {
-    return this.dictionaryWrapperService.getZoneDictionary();
+  getDeleteDictionary = (): any[] => {
+    return this.utilsService.getDeleteDictionary();
   }
-  getKarbariDictionaryCode = () => {
-    return this.dictionaryWrapperService.getkarbariCodeDictionary();
+  getLMAllZoneDictionary = async (): Promise<any> => {
+    return await this.dictionaryWrapperService.getZoneDictionary();
   }
-  getKarbariDictionary = () => {
-    return this.dictionaryWrapperService.getKarbariDictionary();
+  getKarbariDictionaryCode = async (): Promise<any> => {
+    return await this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
-  getQotrDictionary = () => {
-    return this.dictionaryWrapperService.getQotrDictionary();
+  getKarbariDictionary = async (): Promise<any> => {
+    return await this.dictionaryWrapperService.getKarbariDictionary();
+  }
+  getQotrDictionary = async (): Promise<any> => {
+    return await this.dictionaryWrapperService.getQotrDictionary();
   }
   getCounterStateDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateDictionary();
@@ -145,7 +148,6 @@ export class ListManagerService {
   /*OTHER */
   setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
     console.log('do nothing for now');
-    
     // dataSource.forEach(item => {
     //   if (item.newRate > 0)
     //     item.newRate = parseFloat(MathS.getRange(item.newRate))

@@ -14,7 +14,7 @@ export class MainService {
 
   GET = (URL: string, base64?: string) => {
     if (base64) {
-      this.http.get(this.environment.API_URL + '/' + URL + '/' + base64).pipe(
+      return this.http.get(this.environment.API_URL + '/' + URL + '/' + base64).pipe(
         retry(1)
       )
     } else {
@@ -26,7 +26,7 @@ export class MainService {
   }
   GETID = (ID: string, URL: string, base64?: string) => {
     if (base64) {
-      this.http.get(this.environment.API_URL + '/' + URL + '/' + base64 + '/' + ID);
+      return this.http.get(this.environment.API_URL + '/' + URL + '/' + base64 + '/' + ID);
     } else {
       return this.http.get<any>(this.environment.API_URL + '/' + URL + '/' + ID);
     }

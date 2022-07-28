@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENRandomNumbers, ENSelectedColumnVariables, IGetYears, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
@@ -30,6 +31,8 @@ import { EnvService } from './env.service';
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENReadingReports = ENReadingReports;
+  isCollapsed: boolean = false;
+  _isOrderByDate: boolean = false;
 
   masterReq: IReadingReportReq = {
     fromDate: '',
@@ -37,7 +40,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   };
   imgAttrResultReq: IReadingReportReq = {
     fromDate: '',
@@ -45,7 +48,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   };
   imgAttrAnalyzeReq: IReadingReportReq = {
     fromDate: '',
@@ -53,7 +56,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   };
   detailsReq: IReadingReportReq = {
     zoneId: 0,
@@ -62,7 +65,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   disposalhoursReq: IReadingReportReq = {
     zoneId: 0,
@@ -71,7 +74,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   karkardReq: IReadingReportReq = {
     zoneId: 0,
@@ -80,7 +83,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   lockedReq: IReadingReportReq = {
     zoneId: 0,
@@ -89,7 +92,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   preNumberShownReq: IReadingReportReq = {
     zoneId: 0,
@@ -98,7 +101,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   karkardOffloadReq: IReadingReportReq = {
     zoneId: 0,
@@ -107,7 +110,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   karkardDailyReq: IReadingReportReq = {
     zoneId: 0,
@@ -116,7 +119,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   gisReq: IReadingReportGISReq = {
     zoneId: 0,
@@ -128,7 +131,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     isCluster: true
   }
   anlzPrfmReq: IMostReportInput = {
@@ -138,7 +141,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     zoneIds: [0]
   }
   trvchReq: IReadingReportTraverseDifferentialReq = {
@@ -146,7 +149,7 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     traverseType: 0,
     zoneIds: null
   }
@@ -157,7 +160,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   inStateReq: IReadingReportReq = {
     zoneId: 0,
@@ -166,10 +169,39 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
+  searchInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: true
+    },
+    {
+      title: 'دوره',
+      isSelected: false
+    }
+  ]
+  searchInOrderToReverse: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: false
+    },
+    {
+      title: 'دوره',
+      isSelected: true
+    }
+  ]
   /* GET*/
-
+  getSearchInOrderTo = (): ISearchInOrderTo[] => {
+    if (this.profileService.getLocalValue()) {
+      this._isOrderByDate = false;
+      return this.searchInOrderToReverse;
+    }
+    else {
+      this._isOrderByDate = true;
+      return this.searchInOrderTo;
+    }
+  }
   receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
     this[variable].fromDate = $event;
   }
@@ -186,7 +218,8 @@ export class ReadingReportManagerService {
     private _location: Location,
     private router: Router,
     private envService: EnvService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private profileService: ProfileService
   ) { }
 
   // CALL APIs
@@ -227,6 +260,9 @@ export class ReadingReportManagerService {
         resolve(res);
       })
     });
+  }
+  getDeleteDictionary = (): any[] => {
+    return this.utilsService.getDeleteDictionary();
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
@@ -360,7 +396,7 @@ export class ReadingReportManagerService {
     this.utilsService.snackBarMessageSuccess(message);
   }
   getYears = (): ITitleValue[] => {
-    return IGetYears();
+    return this.utilsService.IGetYears();
   }
   routeTo = (route: string) => {
     this.utilsService.routeTo(route);

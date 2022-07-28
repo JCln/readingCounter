@@ -42,6 +42,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   pageSignTrackNumber: number = null;
 
   karbariDictionary: IDictionaryManager[] = [];
+  deleteDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -65,6 +66,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   updateOnChangedCounterState = async (val: any) => {
     this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val.value);
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
     this.closeTabService.saveDataForLMGeneralGroupModify = this.dataSource;
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
@@ -73,8 +75,10 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
     this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
 
+    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
@@ -141,7 +145,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     })
   }
   manageModifyBatchResponse = (data: IBatchModifyRes) => {
-    console.log(data);
     for (let index = 0; index < data.detailsInfo.length; index++) {
       for (let j = 0; j < this.dataSource.length; j++) {
         if (data.detailsInfo[index].onOffLoadId === this.dataSource[j].id) {
@@ -212,6 +215,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     })
   }
   openMoshtarakinDialog = (dataSource: any) => {
+    // مشاهده سابقه
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {
       data: {
         eshterak: dataSource.eshterak,

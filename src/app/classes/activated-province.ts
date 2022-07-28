@@ -1,13 +1,15 @@
 import {
-    BrowserVersions,
-    ENActivateProvinceTitle,
-    ENHasNextBazdid,
-    ENMapCenter,
-    ENMapUrls,
-    ENOSMUrls,
-    ENURLs,
-    IENV,
-    IENV_BROWSER_SETUP,
+  BrowserVersions,
+  ENActivateProvinceTitle,
+  ENHasNextBazdid,
+  ENMapCenter,
+  ENMapUrls,
+  ENOSMUrls,
+  ENURLs,
+  ENYears,
+  getDeleteDictionary,
+  IENV,
+  IENV_BROWSER_SETUP,
 } from 'interfaces/build';
 
 export class ActivatedProvince implements IENV {
@@ -18,7 +20,9 @@ export class ActivatedProvince implements IENV {
         ENMapUrls.DEFAULT.value,
         ENHasNextBazdid.DEFAULT.value,
         ENMapCenter.DEFAULT.value,
-        BrowserVersions.DEFAULT.value
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
+        getDeleteDictionary.DEFAULT.value
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
@@ -27,7 +31,9 @@ export class ActivatedProvince implements IENV {
         ENMapUrls.ESF.value,
         ENHasNextBazdid.ESF.value,
         ENMapCenter.ESF.value,
-        BrowserVersions.ESF.value
+        BrowserVersions.ESF.value,
+        ENYears.ESF.value,
+        getDeleteDictionary.DEFAULT.value
     );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
@@ -36,7 +42,9 @@ export class ActivatedProvince implements IENV {
         ENMapUrls.TEH_ZONE4.value,
         ENHasNextBazdid.TEH_ZONE4.value,
         ENMapCenter.TEH_ZONE4.value,
-        BrowserVersions.TEH_ZONE4.value
+        BrowserVersions.TEH_ZONE4.value,
+        ENYears.TEH_ZONE4.value,
+        getDeleteDictionary.DEFAULT.value
     );
     public static readonly TEH_SE = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE,
@@ -45,7 +53,9 @@ export class ActivatedProvince implements IENV {
         ENMapUrls.TEH_SE.value,
         ENHasNextBazdid.TEH_SE.value,
         ENMapCenter.TEH_SE.value,
-        BrowserVersions.TEH_SE.value
+        BrowserVersions.TEH_SE.value,
+        ENYears.TEH_SE.value,
+        getDeleteDictionary.DEFAULT.value
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE_LOCAL,
@@ -54,7 +64,9 @@ export class ActivatedProvince implements IENV {
         ENMapUrls.TEH_SE_LOCAL.value,
         ENHasNextBazdid.TEH_SE_LOCAL.value,
         ENMapCenter.TEH_SE_LOCAL.value,
-        BrowserVersions.TEH_SE_LOCAL.value
+        BrowserVersions.TEH_SE_LOCAL.value,
+        ENYears.TEH_SE_LOCAL.value,
+        getDeleteDictionary.DEFAULT.value
     );
     public static readonly KERMANSHAH = new ActivatedProvince(
         ENActivateProvinceTitle.KERMANSHAH,
@@ -63,7 +75,9 @@ export class ActivatedProvince implements IENV {
         ENMapUrls.KERMANSHAH.value,
         ENHasNextBazdid.KERMANSHAH.value,
         ENMapCenter.KERMANSHAH.value,
-        BrowserVersions.KERMANSHAH.value
+        BrowserVersions.KERMANSHAH.value,
+        ENYears.KERMANSHAH.value,
+        getDeleteDictionary.DEFAULT.value
     );
 
     private constructor(
@@ -88,7 +102,9 @@ export class ActivatedProvince implements IENV {
                 opera: IENV_BROWSER_SETUP,
                 safari: IENV_BROWSER_SETUP,
             }
-        }
+        },
+        public readonly years: { title: string, value: number }[],
+        public readonly getDeleteDictionary: { id: number, title: string }[]
     ) { }
 
     public getActiveProvince = (provinceName: ENActivateProvinceTitle): any => {

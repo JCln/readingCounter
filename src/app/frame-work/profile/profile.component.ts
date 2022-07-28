@@ -16,12 +16,11 @@ export class ProfileComponent extends FactoryONE {
 
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
   stateOptions: any[] = [{ label: 'خیر', value: false }, { label: 'بله', value: true }];
-  showCarouselVal: boolean;
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];
 
   constructor(
-    private profileService: ProfileService,
+    public profileService: ProfileService,
     private closeTabService: CloseTabService
   ) {
     super();
@@ -40,6 +39,7 @@ export class ProfileComponent extends FactoryONE {
     }
 
     this.getSelectedColumns();
+    this.getBasedOnDate();
     this.getValueOfShowCarouselMedia();
   }
   changePassword = () => {
@@ -49,11 +49,18 @@ export class ProfileComponent extends FactoryONE {
     this._selectCols = this.profileService.columnSelectedProfile();
   }
   getValueOfShowCarouselMedia = () => {
-    this.showCarouselVal = this.profileService.getUseCarouselMedia();
+    this.profileService.showStateVals.groupImgs = this.profileService.getUseCarouselMedia();
   }
   setValueOfShowCarouselMedia = (val) => {
     this.profileService.setUseCarouselMedia(val);
     val ? this.profileService.showMessage(EN_messages.carouselShowEnabled) : this.profileService.showMessage(EN_messages.carouselShowDisabled);
+  }
+  getBasedOnDate = () => {
+    this.profileService.showStateVals.searchBasedOnDate = this.profileService.getLocalValue();
+  }
+  setBasedOnDate = (val: any) => {
+    this.profileService.setLocalValue(val);
+    val ? this.profileService.showMessage(EN_messages.basedOnDateShowDisabled) : this.profileService.showMessage(EN_messages.basedOnDateShowEnabled);
   }
 
 }

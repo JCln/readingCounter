@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'interfaces/ireports';
-import { DownloadManagerService } from 'services/download-manager.service';
 import { ToolsService } from 'services/tools.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -16,7 +15,6 @@ export class RandomImagesComponent extends FactoryONE {
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _quantity: ITitleValue[] = [];
-  showCarousel: boolean = false;
   rowIndex: number = 0;
 
   allImagesDataSource: IImageUrlInfoWrapper;
@@ -24,8 +22,7 @@ export class RandomImagesComponent extends FactoryONE {
   imgsOriginUrl: any[] = [];
 
   constructor(
-    public toolsService: ToolsService,
-    private downloadManagerService: DownloadManagerService
+    public toolsService: ToolsService
   ) {
     super();
   }
@@ -55,23 +52,13 @@ export class RandomImagesComponent extends FactoryONE {
     })
   }
   getExactImg = async (id: string, index: number) => {
-    this.imgsOriginUrl[index] = await this.downloadManagerService.downloadFile(id);
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.imgsOriginUrl[index] = reader.result;
-      // this.closeTabService.saveDataForRRGallery[index] = reader.result;
-      this.allImagesDataSource.imageUrlAndInfos[index].imageUrl = reader.result;
-    }, false);
-    if (this.imgsOriginUrl[index]) {
-      reader.readAsDataURL(this.imgsOriginUrl[index]);
-      reader.readAsDataURL(this.allImagesDataSource.imageUrlAndInfos[index].imageUrl);
-    }
+    this.imgsOriginUrl[index] = this.toolsService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.toolsService.getAuthToken();
   }
   routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number) => {
     this.carouselImage = dataSource;
     scrollTo(0, 0);
     this.rowIndex = rowIndex;
-    this.showCarousel = true;
+    this.toolsService.showCarousel = true;
   }
   carouselNextItem = () => {
     this.rowIndex >= this.allImagesDataSource.imageUrlAndInfos.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
@@ -82,7 +69,7 @@ export class RandomImagesComponent extends FactoryONE {
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
   }
   carouselCancelClicked = () => {
-    this.showCarousel = false;
+    this.toolsService.showCarousel = false;
   }
 
 }

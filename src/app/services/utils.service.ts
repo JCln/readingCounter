@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
+import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 @Injectable({
@@ -12,9 +13,19 @@ export class UtilsService {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private envService: EnvService,
     private snackWrapperService: SnackWrapperService
   ) { }
 
+  IGetYears = (): ITitleValue[] => {
+    return this.envService.years;
+  }
+  getFirstYear = (): number => {
+    return this.envService.years[0].value;
+  }
+  getDeleteDictionary = (): any[] => {
+    return this.envService.getDeleteDictionary;
+  }
   // snack bar
   snackBarMessageSuccess = (message: string) => {
     this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
