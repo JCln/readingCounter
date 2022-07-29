@@ -7,8 +7,7 @@ export class EnvService implements IENV {
   temp = ActivatedProvince.DEFAULT;
 
   headerProvinceTitle = this.temp.headerProvinceTitle;
-  API_URL = this.temp.API_URL;
-  OSMmapBoxUrl = this.temp.OSMmapBoxUrl;
+  API_URL = this.temp.API_URL;  
   mapUrls = this.temp.mapUrls;
   hasNextBazdid = this.temp.hasNextBazdid;
   mapCenter = this.temp.mapCenter;

@@ -1,22 +1,20 @@
 import {
-  BrowserVersions,
-  ENActivateProvinceTitle,
-  ENHasNextBazdid,
-  ENMapCenter,
-  ENMapUrls,
-  ENOSMUrls,
-  ENURLs,
-  ENYears,
-  getDeleteDictionary,
-  IENV,
-  IENV_BROWSER_SETUP,
+    BrowserVersions,
+    ENActivateProvinceTitle,
+    ENHasNextBazdid,
+    ENMapCenter,
+    ENMapUrls,
+    ENURLs,
+    ENYears,
+    getDeleteDictionary,
+    IENV,
+    IENV_BROWSER_SETUP,
 } from 'interfaces/build';
 
 export class ActivatedProvince implements IENV {
     public static readonly DEFAULT = new ActivatedProvince(
         ENActivateProvinceTitle.DEFAULT,
-        ENURLs.DEFAULT,
-        ENOSMUrls.DEFAULT,
+        ENURLs.DEFAULT,        
         ENMapUrls.DEFAULT.value,
         ENHasNextBazdid.DEFAULT.value,
         ENMapCenter.DEFAULT.value,
@@ -26,8 +24,7 @@ export class ActivatedProvince implements IENV {
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
-        ENURLs.ESF,
-        ENOSMUrls.ESF_LOCAL,
+        ENURLs.ESF,        
         ENMapUrls.ESF.value,
         ENHasNextBazdid.ESF.value,
         ENMapCenter.ESF.value,
@@ -37,8 +34,7 @@ export class ActivatedProvince implements IENV {
     );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
-        ENURLs.TEH_ZONE4,
-        ENOSMUrls.TEH_ZONE4,
+        ENURLs.TEH_ZONE4,        
         ENMapUrls.TEH_ZONE4.value,
         ENHasNextBazdid.TEH_ZONE4.value,
         ENMapCenter.TEH_ZONE4.value,
@@ -48,8 +44,7 @@ export class ActivatedProvince implements IENV {
     );
     public static readonly TEH_SE = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE,
-        ENURLs.TEH_SE,
-        ENOSMUrls.TEH_SE,
+        ENURLs.TEH_SE,        
         ENMapUrls.TEH_SE.value,
         ENHasNextBazdid.TEH_SE.value,
         ENMapCenter.TEH_SE.value,
@@ -59,8 +54,7 @@ export class ActivatedProvince implements IENV {
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE_LOCAL,
-        ENURLs.TEH_SE_LOCAL,
-        ENOSMUrls.TEH_SE_LOCAL,
+        ENURLs.TEH_SE_LOCAL,        
         ENMapUrls.TEH_SE_LOCAL.value,
         ENHasNextBazdid.TEH_SE_LOCAL.value,
         ENMapCenter.TEH_SE_LOCAL.value,
@@ -70,8 +64,7 @@ export class ActivatedProvince implements IENV {
     );
     public static readonly KERMANSHAH = new ActivatedProvince(
         ENActivateProvinceTitle.KERMANSHAH,
-        ENURLs.KERMANSHAH,
-        ENOSMUrls.KERMANSHAH,
+        ENURLs.KERMANSHAH,        
         ENMapUrls.KERMANSHAH.value,
         ENHasNextBazdid.KERMANSHAH.value,
         ENMapCenter.KERMANSHAH.value,
@@ -82,8 +75,7 @@ export class ActivatedProvince implements IENV {
 
     private constructor(
         public readonly headerProvinceTitle: ENActivateProvinceTitle,
-        public readonly API_URL: string,
-        public readonly OSMmapBoxUrl: string,
+        public readonly API_URL: string,        
         public readonly mapUrls: { title: string, url: string }[],
         public readonly hasNextBazdid: boolean,
         public readonly mapCenter: [number, number],

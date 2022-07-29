@@ -33,17 +33,13 @@ L.Marker.prototype.options.icon = defaultIcon;
 export class MapService {
   private map: L.Map;
 
-  // streets = L.tileLayer(this.envService.OSMmapBoxUrl);
-  // streetsDark = L.tileLayer(this.envService.OSMDarkmapBoxUrl);
-  // satellite = L.tileLayer(this.envService.SATELLITEMapBoxUrl + this.envService.SATELLITEMapAccessToken);
-
   constructor(
     private listManagerService: ListManagerService,
     private browserStorageService: BrowserStorageService,
     private _location: Location,
     private envService: EnvService
   ) { }
- 
+
   getFirstItemUrl = (): any => {
     return L.tileLayer(this.envService.mapUrls[0].url);
   }

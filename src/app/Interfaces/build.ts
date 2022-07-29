@@ -62,7 +62,6 @@ export interface IBrowserVersions {
 export interface IENV {
     headerProvinceTitle: string,
     API_URL: string,
-    OSMmapBoxUrl: string,
     mapUrls: { title: string, url: string }[],
     hasNextBazdid: boolean,
     mapCenter: [number, number],
