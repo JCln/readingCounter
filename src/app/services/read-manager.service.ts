@@ -6,7 +6,7 @@ import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-confi
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { ICounterState, IImageAttribution, ITextOutput } from '../Interfaces/ireads-manager';
+import { ICounterState, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';

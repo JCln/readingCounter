@@ -52,7 +52,7 @@ export class MapDgComponent implements OnInit {
       zoom: ENRandomNumbers.fifteen,
       minZoom: ENRandomNumbers.four,
       maxZoom: ENRandomNumbers.eighteen,
-      layers: [this.mapService.getLightStreetsUrl(), this.layerGroup]
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
     });
 
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);

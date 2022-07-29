@@ -14,7 +14,7 @@ import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { IEditTracking, IOffLoadPerDay, ITracking } from '../Interfaces/itrackings';
+import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
 import { OffloadModify } from './../classes/offload-modify-type';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';

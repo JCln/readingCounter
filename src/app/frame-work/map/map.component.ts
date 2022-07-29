@@ -13,8 +13,8 @@ import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
-import { IGisXYResponse } from 'src/app/Interfaces/idashboard-map';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
+import { IGisXYResponse } from 'src/app/interfaces/idashboard-map';
+import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 
 declare let L;
@@ -114,7 +114,7 @@ export class MapComponent implements OnInit, OnDestroy {
       zoom: ENRandomNumbers.fifteen,
       minZoom: ENRandomNumbers.four,
       maxZoom: ENRandomNumbers.eighteen,
-      layers: [this.mapService.getLightStreetsUrl(), this.layerGroup]
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
     });
 
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);

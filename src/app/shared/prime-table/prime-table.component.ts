@@ -45,7 +45,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() firstConfirmedDialog = new EventEmitter<any>();
   @Output() showedInMap = new EventEmitter<any>();
   @Output() showedInMapSingle = new EventEmitter<any>();
-  @Output() downloadedOutputSingle = new EventEmitter<any>();  
+  @Output() downloadedOutputSingle = new EventEmitter<any>();
   @Output() routeedToOffloadModify = new EventEmitter<any>();
   @Output() routedToOffloadGeneralModify = new EventEmitter<any>();
   @Output() backedToReading = new EventEmitter<any>();
@@ -166,7 +166,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   routeToEditPage = (dataSource: string) => {
     this.routedToEditPage.emit(dataSource);
   }
-  routeToLoggs = (dataSource: string) => {
+  routeToLoggs = (dataSource: object) => {
     this.routedToLoggs.emit(dataSource);
   }
   showExactConfig = (dataSource: number) => {

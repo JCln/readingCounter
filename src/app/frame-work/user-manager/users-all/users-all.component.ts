@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IUserManager } from 'interfaces/iuser-manager';
-import { EN_Routes } from 'interfaces/routes.enum';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
+import { UserLogginsService } from 'services/user-loggins.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -21,9 +20,7 @@ export class UsersAllComponent extends FactoryONE {
   dataSource: IUserManager[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-
-    private router: Router,
+    private userLogginsService: UserLogginsService,
     private closeTabService: CloseTabService,
     public usersAllService: UsersAllService,
     private dateJalaliService: DateJalaliService
@@ -31,11 +28,8 @@ export class UsersAllComponent extends FactoryONE {
     super();
   }
 
-  routeToEditPage(e) {
-    this.router.navigate([EN_Routes.edit, e], { relativeTo: this.route.parent })
-  }
-  routeToLoggs(e: string) {
-    this.router.navigate([EN_Routes.loggins, e], { relativeTo: this.route.parent })
+  routeToLoggs(e: IUserManager) {
+    this.userLogginsService.updateUserLogginsInfo(e);
   }
   nullSavedSource = () => this.closeTabService.saveDataForAllUsers = null;
   classWrapper = async (canRefresh?: boolean) => {

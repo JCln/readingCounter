@@ -7,7 +7,7 @@ import { IAddUserManager, IAUserEditSave, IUserEditManager, IUserEditOnRole } fr
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 

@@ -19,7 +19,7 @@ import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confir
 import {
   ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { JwtService } from './../auth/jwt.service';
 import { EnvService } from './env.service';

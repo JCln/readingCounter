@@ -20,7 +20,7 @@ export class DropdownComponent {
     this.isLogout.emit(true);
   }
   linkToChat = () => {
-    window.open(this.envService.API_URL + ENInterfaces.chat + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.envService.API_URL + '/' + ENInterfaces.chat + this.jwtService.getAuthorizationToken(), '_blank');
   }
 
 }

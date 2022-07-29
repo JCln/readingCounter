@@ -3,7 +3,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
 import { ToolsService } from 'services/tools.service';
 import { Converter } from 'src/app/classes/converter';
-import { ImageAttributionFile } from 'src/app/Interfaces/tools';
+import { ImageAttributionFile } from 'src/app/interfaces/tools';
 
 @Component({
   selector: 'app-random-image-carousel-details',

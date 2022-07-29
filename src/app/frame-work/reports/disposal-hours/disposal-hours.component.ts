@@ -6,7 +6,7 @@ import { IRRChartResWrapper } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
+import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 
 @Component({

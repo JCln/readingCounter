@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IRoleItems, IUserManager } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { UserAddManagerService } from 'services/user-add-manager.service';
+import { UserLogginsService } from 'services/user-loggins.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 @Component({
   selector: 'app-user-search',
@@ -23,10 +22,9 @@ export class UserSearchComponent extends FactoryONE {
   roleItemsData: IRoleItems[] = [];
 
   constructor(
-    public userAddManagerService: UserAddManagerService,
-    private route: ActivatedRoute,
-    private router: Router,
+    public userAddManagerService: UserAddManagerService,    
     public usersAllService: UsersAllService,
+    public userLogginsService: UserLogginsService,
     private closeTabService: CloseTabService
   ) {
     super();
@@ -59,13 +57,7 @@ export class UserSearchComponent extends FactoryONE {
   showExactConfig = (index: number) => {
     let a = document.querySelectorAll('.more_configs');
     a[index].classList.toggle('showConfigs');
-  }
-  routeToEditPage(e) {
-    this.router.navigate([EN_Routes.edit, e], { relativeTo: this.route.parent })
-  }
-  routeToLoggs(e: string) {
-    this.router.navigate([EN_Routes.wrmuallloggins, e])
-  }
+  }  
   ActivateUser = (dataSource: IUserManager) => {
     this.usersAllService.changeUserStatus(ENInterfaces.userACTIVATE, dataSource['dataSource'].id);
   }

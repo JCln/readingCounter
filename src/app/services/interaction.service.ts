@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Subject } from 'rxjs/internal/Subject';
 import { CloseTabService } from 'services/close-tab.service';
 
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'

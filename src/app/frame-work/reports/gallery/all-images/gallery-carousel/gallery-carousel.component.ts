@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IImageUrlAndInfos } from 'src/app/Interfaces/ireports';
+import { IImageUrlAndInfos } from 'src/app/interfaces/ireports';
 
 @Component({
   selector: 'app-gallery-carousel',

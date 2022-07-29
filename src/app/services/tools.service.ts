@@ -14,8 +14,8 @@ import {
   IDynamicExcelReq,
   IJsonInfo,
   IParamSendType,
-} from '../Interfaces/itools';
-import { IDownloadFileAllImages, IRandomImages } from '../Interfaces/tools';
+} from '../interfaces/itools';
+import { IDownloadFileAllImages, IRandomImages } from '../interfaces/tools';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';

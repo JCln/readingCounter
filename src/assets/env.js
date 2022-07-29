@@ -6,7 +6,11 @@
     window.__env.API_URL = 'https://37.191.92.157/kontoriNew';
     // for map instantiation
     window.__env.OSMmapBoxUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    window.__env.mapUrls = [{ title: 'OSM', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' }, { title: 'OSM_ESF_local', url: 'http://172.18.12.242/osm_tiles/{z}/{x}/{y}.png' }, { title: 'sattelite', url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg' }];
+    window.__env.mapUrls = [
+        { title: 'sattelite', url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg' },
+        { title: 'OSM', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' },
+        { title: 'OSM_ESF_local', url: 'http://172.18.12.242/osm_tiles/{z}/{x}/{y}.png' },
+    ];
     window.__env.hasNextBazdid = false;
     window.__env.mapCenter = [32.669, 51.664];
     window.__env.browserVersions = {
@@ -44,5 +48,5 @@
     // Whether or not to enable debug mode
     // Setting this to false will disable console output
     window.__env.enableDebug = true;
-    window.__env.enableENV = false;
+    window.__env.enableENV = true;
 }(this));

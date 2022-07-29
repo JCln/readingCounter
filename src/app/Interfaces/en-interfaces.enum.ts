@@ -186,7 +186,7 @@ export enum ENInterfaces {
     ListDispersalHours = 'V1/List/Offloaded/DispersalHours',
     ListDispersalChart = 'V1/List/Offloaded/DispersalChart',
     ListAllImages = `V1/List/OffLoaded/AllImages/`,
-    downloadFileAllImages = '/V1/Download/File/AllImages?access_token=',
+    downloadFileAllImages = 'V1/Download/File/AllImages?access_token=',
     ListRRLocked = 'V1/List/Offloaded/Locked',
     ListRRPreNumberShown = 'V1/List/Offloaded/PreNumberShown',
 
@@ -234,7 +234,7 @@ export enum ENInterfaces {
     counterStateDictionary = 'V1/CounterState/Dictionary',
     counterStateDictionaryByZoneId = `V1/CounterState/DictionaryByZoneId/`,
     counterStateDictionaryByCode = `V1/CounterState/DictionaryByCode/`,
-    counterStateDictionaryForModify = `/V1/CounterState/DictionaryForModify/`,
+    counterStateDictionaryForModify = `V1/CounterState/DictionaryForModify/`,
     counterStateGridFriendly = 'V1/CounterState/GridFriendly',
     counterStateRemove = 'V1/CounterState/Remove',
     counterStateEdit = 'V1/CounterState/Edit',
@@ -280,7 +280,7 @@ export enum ENInterfaces {
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
-    chat = '/V1/Chat/Index?accessToken=',
+    chat = 'V1/Chat/Index?accessToken=',
 
     postImportData = 'V1/Import/Dynamic',
     postImportDynamicCount = 'V1/Import/DynamicCount',

@@ -5,7 +5,7 @@ import { IMessage } from 'interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { InteractionService } from 'services/interaction.service';
-import { ILatestReads } from 'src/app/Interfaces/imoment';
+import { ILatestReads } from 'src/app/interfaces/imoment';
 
 import { JwtService } from '../auth/jwt.service';
 import { SnackWrapperService } from './snack-wrapper.service';

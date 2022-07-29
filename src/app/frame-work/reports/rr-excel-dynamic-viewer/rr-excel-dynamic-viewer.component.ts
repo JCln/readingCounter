@@ -6,7 +6,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { IDynamicExcelReq } from 'src/app/Interfaces/itools';
+import { IDynamicExcelReq } from 'src/app/interfaces/itools';
 
 @Component({
   selector: 'app-rr-excel-dynamic-viewer',

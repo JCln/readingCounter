@@ -4,7 +4,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { DownloadManagerService } from 'services/download-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/Interfaces/ireports';
+import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/interfaces/ireports';
 
 @Component({
   selector: 'app-all-images',

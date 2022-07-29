@@ -9,7 +9,7 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
+import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 import { BriefKardexComponent } from './../brief-kardex/brief-kardex.component';

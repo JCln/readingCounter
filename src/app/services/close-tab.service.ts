@@ -5,7 +5,7 @@ import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-con
 import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -237,7 +237,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes['wrmlpd/'] },
     { id: 2, req: ENEssentialsToSave.saveDataForLMAllReq, value: ENEssentialsToSave.saveDataForLMAll, url: EN_Routes['wrmlall/'] },
     { id: 2, req: ENEssentialsToSave.saveDataForLMModifyReq, value: ENEssentialsToSave.saveDataForLMModify, url: EN_Routes.wrmlalltrue },
-    { id: 2, value: ENEssentialsToSave.saveDataForEditUsers, url: EN_Routes.wrmuedit },
+    { id: 2, value: ENEssentialsToSave.saveDataForEditUsers, url: EN_Routes['wrmuedit/'] },
     { id: 2, value: ENEssentialsToSave.saveDataForWOUI, url: EN_Routes.wrmtrackwoui },
     { id: 2, value: ENEssentialsToSave.saveDataForUserLoggins, url: EN_Routes.wrmuallloggins },
     { id: 2, value: ENEssentialsToSave.saveDataForFragmentNOBDetails, url: EN_Routes.wrmrnob },
@@ -248,23 +248,25 @@ export class CloseTabService {
     this.tabs = [];
   }
   setAll(obj, val) {
-    if (typeof obj === 'string') {
-      obj = '';
-    }
-    if (typeof obj === 'boolean') {
-      obj = false;
-    }
-    else {
-      Object.keys(obj).forEach(function (index) {
-        obj[index] = val
-      });
+    if (obj) {
+      if (typeof obj === 'string') {
+        obj = '';
+      }
+      if (typeof obj === 'boolean') {
+        obj = false;
+      }
+      else {
+        Object.keys(obj).forEach(function (index) {
+          obj[index] = val
+        });
+      }
     }
   }
   cleanAllData = () => {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = null;
       this[this.val[index].value_2] = null;
-      // this.setAll(this[this.val[index].req], null);
+      this.setAll(this[this.val[index].req], null);
     }
     // TODO: make null all objects
     this.cleanArrays();

@@ -6,7 +6,7 @@ import { DataMiningAnalysesService } from 'services/data-mining-analyses.service
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
-import { IReadingTimeRes } from 'src/app/Interfaces/data-mining';
+import { IReadingTimeRes } from 'src/app/interfaces/data-mining';
 
 @Component({
   selector: 'app-dm-analysis',

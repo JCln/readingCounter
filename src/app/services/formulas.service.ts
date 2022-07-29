@@ -11,7 +11,7 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { IAbBahaFormula, ITabsare2Formula } from '../Interfaces/ireads-manager';
+import { IAbBahaFormula, ITabsare2Formula } from '../interfaces/ireads-manager';
 
 @Injectable({
   providedIn: 'root'

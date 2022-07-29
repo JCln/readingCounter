@@ -41,8 +41,8 @@
 [_outputEnabled]=false
 [_checkUpName]="'userSearch'"
 (refreshedTable)="refreshTable()"
-(routedToEditPage)="routeToEditPage($event)"
-(routedToLoggs)="routeToLoggs($event)"
+(routedToEditPage)="usersAllService.routeToEditPage($event)"
+(routedToLoggs)="userLogginsService.updateUserLogginsInfo($event)"
 (showedExactConfig)="showExactConfig($event)"
 (ActivatedUser)="ActivateUser($event)"
 (DeActivatedUser)="DeActivateUser($event)"

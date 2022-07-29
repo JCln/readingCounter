@@ -8,7 +8,7 @@ import { BrowserStorageService } from 'services/browser-storage.service';
 import { EnvService } from 'services/env.service';
 import { ListManagerService } from 'services/list-manager.service';
 
-import { ENRandomNumbers } from './../Interfaces/ioverall-config';
+import { ENRandomNumbers } from './../interfaces/ioverall-config';
 
 declare let L;
 
@@ -44,8 +44,8 @@ export class MapService {
     private envService: EnvService
   ) { }
  
-  getLightStreetsUrl = (): any => {
-    return L.tileLayer(this.envService.OSMmapBoxUrl);
+  getFirstItemUrl = (): any => {
+    return L.tileLayer(this.envService.mapUrls[0].url);
   }
   getLightUrls = (): object => {
     return (this.getMapUrls().reduce((obj, item) => (obj[item.title] = L.tileLayer(item.url), obj), {}));

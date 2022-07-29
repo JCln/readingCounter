@@ -5,7 +5,7 @@ import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/iovera
 import { IAddAUserManager, IAddUserInfos, IAddUserManager, IRoleItems, ISearchUsersManager } from 'interfaces/iuser-manager';
 
 import { MathS } from '../classes/math-s';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
 

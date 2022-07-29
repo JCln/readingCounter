@@ -17,8 +17,8 @@ import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { IFragmentDetails, IFragmentMaster } from '../Interfaces/ireads-manager';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { IFragmentDetails, IFragmentMaster } from '../interfaces/ireads-manager';
+import { EN_Routes } from '../interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'

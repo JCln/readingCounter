@@ -11,7 +11,7 @@ import { SignalRService } from 'services/signal-r.service';
 import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 import { JwtService } from './jwt.service';
 
 @Injectable({

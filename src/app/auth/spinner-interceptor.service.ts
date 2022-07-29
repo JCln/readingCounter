@@ -8,7 +8,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 
 export enum EN_Mess {
   checkValuesAndTryAgain = 'مقادیر را بررسی و مجددا امتحان نمایید',

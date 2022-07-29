@@ -9,7 +9,7 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
 export enum ENForbidden {

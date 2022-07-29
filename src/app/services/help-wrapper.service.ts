@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 import { AddNewComponent } from '../frame-work/manage/add-new/add-new.component';
-import { EN_Routes } from '../Interfaces/routes.enum';
 
 export interface IHelpWrapper {
   title: string,
@@ -46,7 +46,7 @@ export class HelpWrapperService {
         messageThree: 'عملکرد فرایند قرائت، در دو نمودار رادار و میله‌ای قابل مشاهده و بررسی هستند.',
         messageTwo: 'قسمت کارکرد، مربوط به اطلاعات قرائت به تفکیک روز، هفته، ماه و سال میباشد. ',
       }
-    else if (currentRoute === EN_Routes.wrmuedit || currentRoute === EN_Routes.wrmuall)
+    else if (currentRoute === EN_Routes.wrmuall)
       return {
         title: 'مشاهده و ویرایش کاربران',
         messageOne: 'این بخش شامل قسمت های مشاهده همه کاربران و افزودن کاربر جدید می‌باشد.',

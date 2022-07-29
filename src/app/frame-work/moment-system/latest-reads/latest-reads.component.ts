@@ -7,7 +7,7 @@ import { InteractionService } from 'services/interaction.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { MapService } from 'services/map.service';
 import { AllListsFactory } from 'src/app/classes/factory';
-import { ILatestReads } from 'src/app/Interfaces/imoment';
+import { ILatestReads } from 'src/app/interfaces/imoment';
 
 declare let L;
 @Component({
@@ -72,7 +72,7 @@ export class LatestReadsComponent extends AllListsFactory {
       zoom: ENRandomNumbers.eight,
       minZoom: ENRandomNumbers.four,
       maxZoom: ENRandomNumbers.eighteen,
-      layers: [this.mapService.getLightStreetsUrl(), this.layerGroup2]
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup2]
     });
 
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map2);

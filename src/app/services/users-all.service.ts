@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
@@ -9,6 +10,7 @@ import {
   IObjectIteratation,
   IResponses,
 } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
@@ -31,6 +33,7 @@ export class UsersAllService {
     private interfaceManagerService: InterfaceManagerService,
     private snackWrapperService: SnackWrapperService,
     private sectionsService: SectionsService,
+    private router: Router,
     private dialog: MatDialog
   ) { }
 
@@ -56,6 +59,9 @@ export class UsersAllService {
     this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
       this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
     });
+  }
+  routeToEditPage(e) {
+    this.router.navigate([EN_Routes['wrmuedit/'], e])
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

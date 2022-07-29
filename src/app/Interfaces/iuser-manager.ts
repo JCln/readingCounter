@@ -8,6 +8,12 @@ export interface IUserManager {
     isActive: boolean;
     isLocked: boolean;
 }
+export interface IUserLogginInfo {
+    GUid: string,
+    userCode: number,
+    userName: string,
+    displayName: string,
+}
 export interface IUserEditManager {
     provinceItems: [
         {

@@ -5,7 +5,7 @@ import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 
 import { MathS } from '../classes/math-s';
-import { IAnalyzeRes, IDashboardKarkardTimed, IDashboardReadDaily } from '../Interfaces/idashboard-map';
+import { IAnalyzeRes, IDashboardKarkardTimed, IDashboardReadDaily } from '../interfaces/idashboard-map';
 
 @Injectable({
   providedIn: 'root'

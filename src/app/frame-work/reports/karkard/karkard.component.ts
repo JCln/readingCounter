@@ -8,7 +8,7 @@ import { ReadingReportManagerService } from 'services/reading-report-manager.ser
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
+import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 
 @Component({

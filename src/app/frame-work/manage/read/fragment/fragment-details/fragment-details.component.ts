@@ -8,7 +8,7 @@ import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
+import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 
 @Component({
