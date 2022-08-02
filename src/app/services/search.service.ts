@@ -23,6 +23,7 @@ import { Search } from '../classes/search';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { FollowUpService } from './follow-up.service';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,9 @@ export class SearchService {
   _searchProCollapse: boolean = true;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
+  _years: ITitleValue[] = [];
 
-  _isOrderByDate: boolean = true;
+  _isOrderByDate: boolean = false;
 
   searchInOrderTo: ISearchInOrderTo[] = [
     {
@@ -44,7 +46,16 @@ export class SearchService {
       isSelected: false
     }
   ]
-  _years: ITitleValue[] = [];
+  searchInOrderToReverse: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: false
+    },
+    {
+      title: 'دوره',
+      isSelected: true
+    }
+  ]
   searchReqMosh: ISearchMoshReq = {
     zoneId: null,
     searchBy: 1,
@@ -74,9 +85,20 @@ export class SearchService {
     private allListsService: AllListsService,
     private router: Router,
     private dialog: MatDialog,
+    private profileService: ProfileService
   ) { }
 
-  /*COLUMNS*/
+  // should call "getSEarchInOrderTo" to isOrderByDate work perfectly
+  getSearchInOrderTo = (): ISearchInOrderTo[] => {
+    if (this.profileService.getLocalValue()) {
+      this._isOrderByDate = false;
+      return this.searchInOrderToReverse;
+    }
+    else {
+      this._isOrderByDate = true;
+      return this.searchInOrderTo;
+    }
+  }
   columnSearchProExcel = (): IObjectIteratation[] => {
     return this._searchProExcel;
   }
@@ -301,7 +323,7 @@ export class SearchService {
     })
   }
   getYears = (): ITitleValue[] => {
-    return this.utilsService.IGetYears();
+    return this.utilsService.getYears();
   }
   getMasrafStates = () => {
     return IMasrafStates;

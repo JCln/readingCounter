@@ -24,7 +24,6 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
 
   degree: number = 0;
   dictionary: IDictionaryManager[] = [];
-  _isCollapsed: boolean = false;
   _addOrEdit: ImageAttributionFile = {
     imageAttributionIds: [],
     fileRepositoryId: '',
@@ -33,7 +32,7 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
 
 
   constructor(
-    private toolsService: ToolsService
+    public toolsService: ToolsService
   ) { }
 
   getImageAttributionFile = async () => {

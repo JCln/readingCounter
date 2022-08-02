@@ -134,5 +134,11 @@
             </div>
         </ng-template>
 
+
     </p-galleria>
+    <section *ngIf="!testCarouselImages || testCarouselImages.length === 0">
+        <tr class="empty_data">
+            تصویری پیدا نشد
+        </tr>
+    </section>
 </main>

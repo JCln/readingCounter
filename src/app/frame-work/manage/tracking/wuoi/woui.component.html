@@ -84,6 +84,45 @@
 
     </section>
 </main>
-<main *ngIf="profileService.getUseCarouselMedia()">
-    <h1>Second View</h1>
+<main class="gallery_main" *ngIf="profileService.getUseCarouselMedia()">
+    <p-galleria #galleria [value]="testCarouselImages" [containerStyle]="{'max-width':'640px'}"
+        [containerClass]="galleriaClass()" [showItemNavigators]="true" [(activeIndex)]="activeIndex" [numVisible]="3"
+        [showThumbnails]="showThumbnails" [circular]="true">
+
+        <ng-template pTemplate="item" let-item>
+            <img class="main_img" [src]="item" [ngClass]="fullscreen ? '_is_fullcreen' : '_is_not_fullscreen'" />
+        </ng-template>
+
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="p-grid p-nogutter p-justify-center">
+                <img class="thumbnail_img" [src]="item" />
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer" let-item>
+            <div class="custom-galleria-footer">
+                <button class="_button pi pi-list" (click)="onThumbnailButtonClick()"></button>
+
+                <span *ngIf="testCarouselImages" class="title-container">
+                    <span>{{activeIndex + 1}}/{{testCarouselImages.length}}</span>
+                    <article *ngIf="fullscreen" class="_options">
+                        <i (click)="rotateRightImg()" class="tooltip fa fa-rotate-right">
+                            <div class="tooltip_text">چرخش به راست</div>
+                        </i>
+                        <i (click)="rotateLeftImg()" class="tooltip fa fa-rotate-left">
+                            <div class="tooltip_text">چرخش به چپ</div>
+                        </i>
+                        <i (click)="downloadImg(testCarouselImages[activeIndex])" class="tooltip pi pi-download">
+                            <div class="tooltip_text">ذخیره تصویر</div>
+                        </i>
+                    </article>
+                </span>
+
+                <button (click)="toggleFullScreen()" class="_button fullscreen-button"
+                    [ngClass]="fullscreen ? 'pi pi-window-minimize': 'pi pi-window-maximize'">
+                </button>
+            </div>
+        </ng-template>
+
+    </p-galleria>
 </main>

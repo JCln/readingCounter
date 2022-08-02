@@ -2,8 +2,8 @@
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="order_by">
             <h2>صدور بر اساس :</h2>
-            <mat-radio-group aria-labelledby="radio_group" [(ngModel)]="searchService._isOrderByDate"
-                name="_isOrderByDate">
+            <mat-radio-group class="radio_group" aria-labelledby="radio_group"
+                [(ngModel)]="searchService._isOrderByDate" name="_isOrderByDate">
                 <mat-radio-button class="radio_button" *ngFor="let orderType of searchService.searchInOrderTo"
                     [value]="orderType.isSelected">
                     {{orderType.title}}
@@ -75,8 +75,7 @@
     </form>
 </main>
 
-<app-prime-table [dataSource]="dataSource"
-    [_outputFileName]="'simpleSearch'" [_checkUpName]="'simpleSearch'"
+<app-prime-table [dataSource]="dataSource" [_outputFileName]="'simpleSearch'" [_checkUpName]="'simpleSearch'"
     [_selectedColumnsToRemember]="'selectedSearchManagerSimple'" [_numberOfExtraColumns]="[1,2,3,4]"
     [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"
     (routedToLMAll)="searchService.routeToLMAll($event)" (routedToLMPayDay)="searchService.routeToLMPayDay($event)"

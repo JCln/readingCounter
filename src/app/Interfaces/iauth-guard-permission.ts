@@ -1,6 +1,7 @@
 export interface ICredentials {
     username: string;
     password: string;
+    appVersion: string;
 }
 export enum ENAuthTokenType {
     access_token = 'access_token',

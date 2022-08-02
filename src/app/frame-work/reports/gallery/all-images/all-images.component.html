@@ -1,9 +1,12 @@
-<app-collapsable [_isCollapsed]=_isCollapsed (_clicked)=" _isCollapsed = !_isCollapsed">
+<app-collapsable [_isReversed]="true" [_isCollapsed]=readingReportManagerService._isCollapsedAllImgs
+    (_clicked)=" readingReportManagerService._isCollapsedAllImgs = !readingReportManagerService._isCollapsedAllImgs">
 </app-collapsable>
-<form #form="ngForm" *ngIf="!_isCollapsed" class="insert_track" (ngSubmit)="connectToServer()">
+<form #form="ngForm" *ngIf="readingReportManagerService._isCollapsedAllImgs" class="insert_track"
+    (ngSubmit)="connectToServer()">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
-        <input class="_value" type="number" name="trackNumber" [(ngModel)]="trackNumber">
+        <input class="_value" type="number" name="trackNumber"
+            [(ngModel)]="readingReportManagerService.trackNumberAllImages">
     </div>
     <button type="submit" class="btn_1">مشاهده</button>
 </form>
@@ -11,7 +14,8 @@
 <section *ngIf="allImagesDataSource" class="_descriptions">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
-        <input readonly="true" class="_value" type="number" name="trackNumber" [(ngModel)]="trackNumber">
+        <input readonly="true" class="_value" type="number" name="trackNumber"
+            [(ngModel)]="readingReportManagerService.trackNumberAllImages">
     </div>
     <div class="input_2">
         <div class="_key">تعداد اشتراک دارای عکس</div>
@@ -33,7 +37,8 @@
         <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
 
             <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
-                <img (click)="routeToOffload(item , ri)" src="{{imgsOriginUrl[ri]}}" alt="whatever">
+                <img loading="lazy" src="{{imgsOriginUrl[ri]}}" alt="whatever"
+                    (click)="routeToOffload(item , ri,imgsOriginUrl[ri])">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
                     <p>{{item.eshterak}}</p>
                     <p>{{item.firstName}}</p>
@@ -48,14 +53,9 @@
         </div>
     </div>
 
-    <app-gallery-carousel 
-    *ngIf="showCarousel" 
-    [dataSource]="carouselImage" 
-    (cancelClicked)="carouselCancelClicked()"
-    (prevClicked)="carouselPrevItem()" 
-    (nextClicked)="carouselNextItem()"
-    >
-    <app-gallery-all-details></app-gallery-all-details>
+    <app-gallery-carousel *ngIf="showCarousel" [dataSource]="carouselImage" (cancelClicked)="carouselCancelClicked()"
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
+        <app-gallery-all-details></app-gallery-all-details>
 
     </app-gallery-carousel>
 

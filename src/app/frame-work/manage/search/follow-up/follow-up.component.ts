@@ -122,6 +122,7 @@ export class FollowUpComponent extends FactoryONE {
   }
   routeToLMAll = (row: IFollowUpHistory) => {
     row.listNumber = this.dataSourceAUX.listNumber;
+    row.trackNumber = this.dataSourceAUX.trackNumber;
     this.trackingManagerService.routeToLMAll(row);
   }
   ngOnInit(): void { return; }

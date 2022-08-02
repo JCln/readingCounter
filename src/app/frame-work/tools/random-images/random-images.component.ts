@@ -30,13 +30,15 @@ export class RandomImagesComponent extends FactoryONE {
   classWrapper = async () => {
     this.zoneDictionary = await this.toolsService.getZoneDictionary();
     this._quantity = this.toolsService.getQuantity();
+    this.verificationACounterReaderId();
   }
   verificationACounterReaderId = async () => {
     let temp: IDictionaryManager[] = [];
-    if (!MathS.isNull(this.toolsService.randomImages.zoneId))
+    if (!MathS.isNull(this.toolsService.randomImages.zoneId)) {
       temp = await this.toolsService.getUserCounterReaders(this.toolsService.randomImages.zoneId);
-    if (!MathS.isNull(temp)) {
-      this.userCounterReader = temp;
+      if (!MathS.isNull(temp)) {
+        this.userCounterReader = temp;
+      }
     }
   }
   connectToServer = async () => {
@@ -54,8 +56,9 @@ export class RandomImagesComponent extends FactoryONE {
   getExactImg = async (id: string, index: number) => {
     this.imgsOriginUrl[index] = this.toolsService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.toolsService.getAuthToken();
   }
-  routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number) => {
+  routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number, imgOrigin: any) => {
     this.carouselImage = dataSource;
+    this.carouselImage.imageUrl = imgOrigin;
     scrollTo(0, 0);
     this.rowIndex = rowIndex;
     this.toolsService.showCarousel = true;
@@ -63,10 +66,12 @@ export class RandomImagesComponent extends FactoryONE {
   carouselNextItem = () => {
     this.rowIndex >= this.allImagesDataSource.imageUrlAndInfos.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
+    this.carouselImage.imageUrl = this.imgsOriginUrl[this.rowIndex];
   }
   carouselPrevItem = () => {
     this.rowIndex < 1 ? this.rowIndex = this.allImagesDataSource.imageUrlAndInfos.length - 1 : this.rowIndex--;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
+    this.carouselImage.imageUrl = this.imgsOriginUrl[this.rowIndex];
   }
   carouselCancelClicked = () => {
     this.toolsService.showCarousel = false;

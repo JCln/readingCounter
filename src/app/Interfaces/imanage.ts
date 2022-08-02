@@ -53,11 +53,15 @@ export interface IManageServer {
     clickFunction?: ENManageServers;
 }
 export interface IBriefKardex {
-    kardexItemType: number;
-    jalaliDay: string;
-    description: string;
-    counterStateTitle: string;
-    counterNumber: number;
+    item: string,
+    registerDate: string,
+    preDate: string,
+    currentDate: string,
+    preNumber: number,
+    currentNumber: number,
+    preDebt: number,
+    amount: number,
+    counterStateTitle: string
 }
 export interface IOnOffLoadFlat {
     id: string,

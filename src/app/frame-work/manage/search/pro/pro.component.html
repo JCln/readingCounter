@@ -8,8 +8,8 @@
 
             <section class="order_by">
                 <h2>جستجو بر اساس</h2>
-                <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
-                    name="_isOrderByDate">
+                <mat-radio-group class="radio_group" aria-labelledby="radio_group"
+                    [(ngModel)]="searchService._isOrderByDate" name="_isOrderByDate">
                     <mat-radio-button class="radio_button" *ngFor="let orderType of searchService.searchInOrderTo"
                         [value]="orderType.isSelected">
                         {{orderType.title}}
@@ -28,7 +28,7 @@
                     </p-dropdown>
                 </span>
 
-                <span class="ui-float-label" [hidden]="_isOrderByDate">
+                <span class="ui-float-label" [hidden]="searchService._isOrderByDate">
                     <label for="float-input">سال</label>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" #year [options]="_years" name="year"
                         [(ngModel)]="closeTabService.saveDataForSearchProReq.year" optionLabel="title" [filter]="true"
@@ -36,7 +36,7 @@
                     </p-dropdown>
                 </span>
 
-                <span class="ui-float-label" [hidden]="_isOrderByDate">
+                <span class="ui-float-label" [hidden]="searchService._isOrderByDate">
                     <label for="float-input">نوع دوره</label>
                     <p-dropdown [style]="{minWidth: '100%'}" name="kindId" #kindId
                         [options]="readingPeriodKindDictionary" name="_selectedKindId"
@@ -46,7 +46,7 @@
                     </p-dropdown>
                 </span>
 
-                <span class="ui-float-label" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
+                <span class="ui-float-label" [hidden]="!readingPeriodDictionary.length || searchService._isOrderByDate">
                     <label for="float-input">دوره قرائت</label>
                     <p-dropdown [style]="{minWidth: '100%'}" name="period" #period [options]="readingPeriodDictionary"
                         name="readingPeriodId" [(ngModel)]="closeTabService.saveDataForSearchProReq.readingPeriodId"
@@ -55,13 +55,13 @@
                     </p-dropdown>
                 </span>
 
-                <span class="ui-float-label" [hidden]="!_isOrderByDate">
+                <span class="ui-float-label" [hidden]="!searchService._isOrderByDate">
                     <label for="float-input">از</label>
                     <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
                         [dateObject]="closeTabService.saveDataForSearchProReq.fromDate">
                     </app-date-jalali>
                 </span>
-                <span class="ui-float-label" [hidden]="!_isOrderByDate">
+                <span class="ui-float-label" [hidden]="!searchService._isOrderByDate">
                     <label for="float-input">تا</label>
                     <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
                         [dateObject]="closeTabService.saveDataForSearchProReq.toDate">

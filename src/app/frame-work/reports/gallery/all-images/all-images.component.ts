@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
-import { DownloadManagerService } from 'services/download-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/interfaces/ireports';
@@ -18,28 +17,25 @@ export class AllImagesComponent extends FactoryONE {
 
   carouselImage: IImageUrlAndInfos;
   showCarousel: boolean = false;
-  _isCollapsed: boolean = false;
   rowIndex: number = 0;
-  trackNumber: number;
 
   constructor(
-    private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
-    private readingReportManagerService: ReadingReportManagerService
+    public readingReportManagerService: ReadingReportManagerService
   ) {
     super();
   }
 
   connectToServer = async () => {
-    if (!this.readingReportManagerService.verificationFollowUPTrackNumber(this.trackNumber))
+    if (!this.readingReportManagerService.verificationFollowUPTrackNumber(this.readingReportManagerService.trackNumberAllImages))
       return;
     this.imgsOriginUrl = [];
     this.allImagesDataSource = null;
 
-    this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.trackNumber);
-    this.closeTabService.saveDataForRRGalleryReq = this.trackNumber;
+    this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.readingReportManagerService.trackNumberAllImages);
+    this.closeTabService.saveDataForRRGalleryReq = this.readingReportManagerService.trackNumberAllImages;
     this.showAllImgs();
-    this._isCollapsed = true;
+    this.readingReportManagerService._isCollapsedAllImgs = true;
   }
   classWrapper = async (canRefresh?: boolean) => {
     /* TODO: 
@@ -47,10 +43,8 @@ export class AllImagesComponent extends FactoryONE {
     components to process images
      */
     if (this.closeTabService.saveDataForRRGalleryReq) {
-      this.trackNumber = this.closeTabService.saveDataForRRGalleryReq;
-      this._isCollapsed = true;
-      // this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.trackNumber);
-      // this.showAllImgs();
+      this.readingReportManagerService.trackNumberAllImages = this.closeTabService.saveDataForRRGalleryReq;
+      this.readingReportManagerService._isCollapsedAllImgs = true;
     }
 
   }
@@ -60,22 +54,12 @@ export class AllImagesComponent extends FactoryONE {
     })
   }
   getExactImg = async (id: string, index: number) => {
-    this.imgsOriginUrl[index] = await this.downloadManagerService.downloadFile(id);
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.imgsOriginUrl[index] = reader.result;
-      // this.closeTabService.saveDataForRRGallery[index] = reader.result;
-      this.allImagesDataSource.imageUrlAndInfos[index].imageUrl = reader.result;
-    }, false);
-    if (this.imgsOriginUrl[index]) {
-      reader.readAsDataURL(this.imgsOriginUrl[index]);
-      reader.readAsDataURL(this.allImagesDataSource.imageUrlAndInfos[index].imageUrl);
-    }
+    this.imgsOriginUrl[index] = this.readingReportManagerService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.readingReportManagerService.getAuthToken();
   }
 
-
-  routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number) => {
+  routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number, imgOrig: any) => {
     this.carouselImage = dataSource;
+    this.carouselImage.imageUrl = imgOrig;
     scrollTo(0, 0);
     this.rowIndex = rowIndex;
     this.showCarousel = true;
@@ -83,10 +67,12 @@ export class AllImagesComponent extends FactoryONE {
   carouselNextItem = () => {
     this.rowIndex >= this.allImagesDataSource.imageUrlAndInfos.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
+    this.carouselImage.imageUrl = this.imgsOriginUrl[this.rowIndex];
   }
   carouselPrevItem = () => {
     this.rowIndex < 1 ? this.rowIndex = this.allImagesDataSource.imageUrlAndInfos.length - 1 : this.rowIndex--;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
+    this.carouselImage.imageUrl = this.imgsOriginUrl[this.rowIndex];
   }
   carouselCancelClicked = () => {
     this.showCarousel = false;

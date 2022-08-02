@@ -55,6 +55,7 @@ export class SimpleComponent implements OnInit, OnDestroy {
     this.receiveYear();
     this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
+    this.searchService.getSearchInOrderTo();
   }
   ngOnInit() {
     this.classWrapper();

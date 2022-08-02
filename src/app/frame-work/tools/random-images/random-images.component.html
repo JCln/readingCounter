@@ -55,7 +55,7 @@
         <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
 
             <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
-                <img src="{{imgsOriginUrl[ri]}}" alt="whatever" loading="lazy" (click)="routeToOffload(item , ri)">
+                <img src="{{imgsOriginUrl[ri]}}" alt="whatever" loading="lazy" (click)="routeToOffload(item , ri, imgsOriginUrl[ri])">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
                     <p>{{item.eshterak}}</p>
                     <p>{{item.firstName}}</p>

@@ -190,11 +190,17 @@
 
                         <ng-template #editableForm>
                             <ng-container *ngIf="col.enableTooltip; else simpleText">
-                                <div class="tooltip">
+
+                                <div class="tooltip" *ngIf="col.enableTooltip">
                                     {{dataSource[col.field] && dataSource[col.field].length > 0 ?
-                                    dataSource[col.field].toString().split(' ')[0] :
-                                    ''}}
-                                    <div class="tooltip_text">{{dataSource[col.field]}}</div>
+                                    dataSource[col.field].toString().split(' ')[0]
+                                    : ''}}
+                                    <div class="tooltip_text">
+                                        {{dataSource[col.field]}}
+                                    </div>
+                                </div>
+                                <div *ngIf="!col.enableTooltip">
+                                    {{dataSource[col.field]}}
                                 </div>
                             </ng-container>
                             <ng-template #simpleText>
@@ -233,7 +239,7 @@
             </td>
             <td *ngIf="_checkUpName == 'generalListModify'" (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
-                <i class="tooltip p_icons fas fa-camera">
+                <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>

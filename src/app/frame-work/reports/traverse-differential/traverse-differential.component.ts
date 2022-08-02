@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportTraverseDifferentialRes } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -16,20 +16,9 @@ import { EN_Routes } from 'src/app/interfaces/routes.enum';
 })
 export class TraverseDifferentialComponent extends FactoryONE {
   isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
   dataSource: IReadingReportTraverseDifferentialRes[] = [];
   karbariDictionaryByCode: IDictionaryManager[] = [];
 
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -56,6 +45,8 @@ export class TraverseDifferentialComponent extends FactoryONE {
     if (this.closeTabService.saveDataForRRTraverseDifferential) {
       this.dataSource = this.closeTabService.saveDataForRRTraverseDifferential;
     }
+    this.readingReportManagerService.getSearchInOrderTo();
+    
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.getTraverseDiffrentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -71,8 +62,8 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   validation = (): boolean => {
-    this._isOrderByDate ? (this.readingReportManagerService.trvchReq.readingPeriodId = null, this.readingReportManagerService.trvchReq.year = 0) : (this.readingReportManagerService.trvchReq.fromDate = '', this.readingReportManagerService.trvchReq.toDate = '');
-    return this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportManagerService.trvchReq, this._isOrderByDate);
+    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.trvchReq.readingPeriodId = null, this.readingReportManagerService.trvchReq.year = 0) : (this.readingReportManagerService.trvchReq.fromDate = '', this.readingReportManagerService.trvchReq.toDate = '');
+    return this.readingReportManagerService.verificationRRTraverseDifferential(this.readingReportManagerService.trvchReq, this.readingReportManagerService._isOrderByDate);
   }
   verification = async () => {
     if (this.validation())

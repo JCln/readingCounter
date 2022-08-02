@@ -38,20 +38,23 @@
 
     </section>
 
-    <section class="content">
-
+    <section>
         <h1 class="title">نمایش تصاویر بطور گروهی</h1>
-        <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.groupImgs" optionLabel="label"
-            optionValue="value" (onChange)="setValueOfShowCarouselMedia(profileService.showStateVals.groupImgs)">
-        </p-selectButton>
-
+        <div class="content">
+            <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.groupImgs"
+                optionLabel="label" optionValue="value"
+                (onChange)="setValueOfShowCarouselMedia(profileService.showStateVals.groupImgs)">
+            </p-selectButton>
+        </div>
     </section>
-    <section class="content">
 
-        <h1 class="title">جستجو براساس نوع</h1>
-        <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.searchBasedOnDate" optionLabel="label"
-            optionValue="value" (onChange)="setBasedOnDate(profileService.showStateVals.searchBasedOnDate)">
-        </p-selectButton>
-
+    <section>
+        <h1 class="title">جستجو براساس</h1>
+        <div class="content">
+            <p-selectButton [options]="stateOptionsSearchType"
+                [(ngModel)]="profileService.showStateVals.searchBasedOnDate" optionLabel="label" optionValue="value"
+                (onChange)="setBasedOnDate(profileService.showStateVals.searchBasedOnDate)">
+            </p-selectButton>
+        </div>
     </section>
 </div>

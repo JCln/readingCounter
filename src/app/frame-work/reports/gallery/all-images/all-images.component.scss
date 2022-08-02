@@ -57,6 +57,7 @@
 ._descriptions {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  direction: rtl;
   gap: .5rem;
 }
 

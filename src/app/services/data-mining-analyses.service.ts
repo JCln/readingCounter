@@ -78,7 +78,7 @@ export class DataMiningAnalysesService {
   }
   /*API CALLS & CALLS*/
   getYears = (): ITitleValue[] => {
-    return this.utilsService.IGetYears();
+    return this.utilsService.getYears();
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);

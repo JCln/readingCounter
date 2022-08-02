@@ -318,7 +318,7 @@
             _outputFileName == 'searchMoshDialog'
             )&& !_allComponentIsModify" (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
-                <i class="tooltip p_icons fas fa-camera">
+                <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
@@ -328,7 +328,7 @@
             || _outputFileName == 'trvDiff'            
             )&& !_allComponentIsModify" (click)="searchService.routeToWoui(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
-                <i class="tooltip p_icons fas fa-camera">
+                <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>

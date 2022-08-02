@@ -31,8 +31,10 @@ import { EnvService } from './env.service';
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENReadingReports = ENReadingReports;
+  trackNumberAllImages: number;
   isCollapsed: boolean = false;
   _isOrderByDate: boolean = false;
+  _isCollapsedAllImgs: boolean = true;
 
   masterReq: IReadingReportReq = {
     fromDate: '',
@@ -202,6 +204,12 @@ export class ReadingReportManagerService {
       return this.searchInOrderTo;
     }
   }
+  getApiUrl = (): string => {
+    return this.envService.API_URL;
+  }
+  getAuthToken = (): string => {
+    return this.jwtService.getAuthorizationToken();
+  }
   receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
     this[variable].fromDate = $event;
   }
@@ -347,6 +355,11 @@ export class ReadingReportManagerService {
     return true;
   }
   private periodValidationGIS = (readingReportGISReq: IReadingReportGISReq): boolean => {
+    if (readingReportGISReq.hasOwnProperty('zoneId'))
+      if (MathS.isNull(readingReportGISReq['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
     if (readingReportGISReq.isForbidden === true) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_forbiddenByDate);
       return false;
@@ -396,19 +409,19 @@ export class ReadingReportManagerService {
     this.utilsService.snackBarMessageSuccess(message);
   }
   getYears = (): ITitleValue[] => {
-    return this.utilsService.IGetYears();
+    return this.utilsService.getYears();
   }
   routeTo = (route: string) => {
     this.utilsService.routeTo(route);
   }
   linkToStimulsoftAdd = () => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.getAuthToken(), '_blank');
   }
   linkToStimulsoftEdit = (body: any) => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
   }
   linkToStimulsoftView = (body: any) => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
   }
   routeToByObject = (router: string, val: object) => {
     this.router.navigate([router, val]);

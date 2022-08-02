@@ -16,6 +16,7 @@ export class ProfileComponent extends FactoryONE {
 
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
   stateOptions: any[] = [{ label: 'خیر', value: false }, { label: 'بله', value: true }];
+  stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];
 

@@ -71,7 +71,7 @@ export class ForbiddenService {
     this[variable].toDate = $event;
   }
   getYears = (): ITitleValue[] => {
-    return this.utilsService.IGetYears();
+    return this.utilsService.getYears();
   }
   routeToWOUI = (UUID: string, isForbidden: boolean) => {
     this.router.navigate([EN_Routes.wrmtrackwoui, isForbidden, UUID]);

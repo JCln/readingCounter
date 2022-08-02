@@ -69,7 +69,7 @@ export class CloseTabService {
   saveDataForFollowUpReq = {
     trackNumber: null,
     canShowGraph: false,
-    _isCollapsed: false
+    _isCollapsed: true
   }
   saveDataForFollowUpAUX: any;
   // import dynamic

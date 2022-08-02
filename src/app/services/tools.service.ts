@@ -7,13 +7,13 @@ import { JwtService } from 'src/app/auth/jwt.service';
 
 import { MathS } from '../classes/math-s';
 import {
-  ENAcceptVerb,
-  ENJsonInfo,
-  ENParamSendType,
-  IAcceptVerb,
-  IDynamicExcelReq,
-  IJsonInfo,
-  IParamSendType,
+    ENAcceptVerb,
+    ENJsonInfo,
+    ENParamSendType,
+    IAcceptVerb,
+    IDynamicExcelReq,
+    IJsonInfo,
+    IParamSendType,
 } from '../interfaces/itools';
 import { IDownloadFileAllImages, IRandomImages } from '../interfaces/tools';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -24,6 +24,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ToolsService {
+  _isCollapsedRandomImgCarouDetails: boolean = true;  
   _isCollapseFileDownloadImage: boolean = false;
   _isCollapsedRandomImages: boolean = false;
   showCarousel: boolean = false;

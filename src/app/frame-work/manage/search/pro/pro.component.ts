@@ -36,8 +36,6 @@ export class ProComponent extends AllListsFactory {
   masrafState: ITHV[] = []
   _selectedZone: any;
   _years: ITitleValue[] = [];
-  _isOrderByDate: boolean = true;
-
 
   constructor(
     public closeTabService: CloseTabService,
@@ -109,12 +107,13 @@ export class ProComponent extends AllListsFactory {
       this._selectedZone = this.closeTabService.saveDataForSearchProReq.zoneId;
     }
     this.getNesseseriesByZone();
+    this.searchService.getSearchInOrderTo();
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this.closeTabService.saveDataForSearchProReq._selectedKindId);
   }
   async connectToServer() {
-    if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this._isOrderByDate)) {
+    if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this.searchService._isOrderByDate)) {
       if (document.activeElement.id == 'excel_download') {
         this.outputManagerService.saveAsExcelABuffer(await this.searchService.getProExcel(ENInterfaces.ListGetProExcel, this.closeTabService.saveDataForSearchProReq), this.dateJalaliService.getCurrentDate());
       }

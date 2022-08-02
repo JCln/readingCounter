@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
@@ -17,14 +17,39 @@ export class UtilsService {
     private snackWrapperService: SnackWrapperService
   ) { }
 
-  IGetYears = (): ITitleValue[] => {
+  getYears = (): ITitleValue[] => {
     return this.envService.years;
   }
+  // should use getFirstYear function for Recognizing and performance
   getFirstYear = (): number => {
     return this.envService.years[0].value;
   }
   getDeleteDictionary = (): any[] => {
     return this.envService.getDeleteDictionary;
+  }
+  getSearchInOrderTo = (): ISearchInOrderTo[] => {
+    return [
+      {
+        title: 'تاریخ',
+        isSelected: true
+      },
+      {
+        title: 'دوره',
+        isSelected: false
+      }
+    ]
+  }
+  searchInOrderToReverse = (): ISearchInOrderTo[] => {
+    return [
+      {
+        title: 'تاریخ',
+        isSelected: false
+      },
+      {
+        title: 'دوره',
+        isSelected: true
+      }
+    ]
   }
   // snack bar
   snackBarMessageSuccess = (message: string) => {
@@ -59,11 +84,5 @@ export class UtilsService {
   getRouteBySplit = (spliter: string): string => {
     return this.router.url.split(spliter).pop();
   }
-  //   
-  /* STORAGE CONFIGS*/
-  // cleanColumnStorage = (key: string) => {
-  //   this.browserStorageService.removeSession(key);
-  // }
-  /**/
 
 }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportGISResponse } from 'interfaces/ireports';
-import { InteractionService } from 'services/interaction.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -34,18 +33,6 @@ export class GisComponent extends FactoryONE {
       isSelected: false
     }
   ]
-  dateEvaluate: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    },
-
-  ]
-  _isOrderByDate: boolean = true;
   _orderBy: string = '';
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
@@ -58,8 +45,7 @@ export class GisComponent extends FactoryONE {
   counterStateDictionary: IDictionaryManager[] = [];
 
   constructor(
-    public readingReportManagerService: ReadingReportManagerService,
-    public interactionService: InteractionService
+    public readingReportManagerService: ReadingReportManagerService
   ) {
     super();
   }
@@ -68,11 +54,12 @@ export class GisComponent extends FactoryONE {
     this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
   }
   classWrapper = async (canRefresh?: boolean) => {
+    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.getCounterStateByZoneId();
     this.receiveYear();
+    this.readingReportManagerService.getSearchInOrderTo();
   }
 
   receiveYear = () => {
@@ -91,15 +78,21 @@ export class GisComponent extends FactoryONE {
     })
     console.log(event.value);
 
-    event.value === 'isForbidden' ? this._isOrderByDate = true : ''
+    event.value === 'isForbidden' ? this.readingReportManagerService._isOrderByDate = true : ''
     event.value === 'isCounterState' ? this.readingReportManagerService.gisReq.isCounterState = true : ''
   }
   makeObject = () => {
-    this._isOrderByDate ? (this.readingReportManagerService.gisReq.readingPeriodId = null, this.readingReportManagerService.gisReq.year = 0) : (this.readingReportManagerService.gisReq.fromDate = '', this.readingReportManagerService.gisReq.toDate = '');
+    this.readingReportManagerService._isOrderByDate ?
+      (this.readingReportManagerService.gisReq.readingPeriodId = null,
+        this.readingReportManagerService.gisReq.year = 0
+      ) :
+      (this.readingReportManagerService.gisReq.fromDate = ''
+        , this.readingReportManagerService.gisReq.toDate = ''
+      );
   }
   verification = async () => {
     this.makeObject();
-    const temp = this.readingReportManagerService.verificationRRGIS(this.readingReportManagerService.gisReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRGIS(this.readingReportManagerService.gisReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.readingReportManagerService.routeToMapGIS(this.readingReportManagerService.gisReq);
   }

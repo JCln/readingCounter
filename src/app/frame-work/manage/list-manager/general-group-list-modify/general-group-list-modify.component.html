@@ -221,17 +221,17 @@
                         <div class="tooltip_text_right">مشاهده روی نقشه</div>
                     </i>
                 </td>
-                <!-- for making readable and compatible singleton dataType -->
-                <td (click)="doShowCarousel({dataSource: dataSource})">
-                    <span class="ui-column-title">بررسی عکس/صوت</span>
-                    <i class="tooltip p_icons fas fa-camera">
-                        <div class="tooltip_text_right">بررسی عکس/صوت</div>
-                    </i>
-                </td>
                 <td>
                     <span class="ui-column-title">نمایش گزارش بازرسی</span>
                     <i (click)="getReadingReportTitles(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                         <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
+                    </i>
+                </td>
+                <!-- for making readable and compatible singleton dataType -->
+                <td (click)="doShowCarousel({dataSource: dataSource})">
+                    <span class="ui-column-title">بررسی عکس/صوت</span>
+                    <i [ngClass]="{'_haveimage':dataSource.imageCount}" class="tooltip p_icons fas fa-camera">
+                        <div class="tooltip_text_right">بررسی عکس/صوت</div>
                     </i>
                 </td>
                 <td class="error_info">

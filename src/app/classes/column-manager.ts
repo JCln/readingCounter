@@ -699,11 +699,15 @@ export class ColumnManager {
         ];
     briefKardex: IObjectIteratation[] =
         [
-            // { field: 'kardexItemType', header: 'نوع کارکس', isSelected: false },
-            { field: 'jalaliDay', header: 'تاریخ', isSelected: true },
-            { field: 'description', header: 'توضیحات', isSelected: true, enableTooltip: true },
+            { field: 'item', header: 'شرح', isSelected: true },
             { field: 'counterStateTitle', header: 'وضعیت کنتور', isSelected: true },
-            { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
+            { field: 'registerDate', header: 'تاریخ ثبت', isSelected: true },
+            { field: 'preDate', header: 'تاریخ قبلی', isSelected: true },
+            { field: 'currentDate', header: 'تاریخ فعلی', isSelected: true },
+            { field: 'preNumber', header: 'رقم قبلی', isSelected: true },
+            { field: 'currentNumber', header: 'رقم فعلی', isSelected: true },
+            { field: 'preDebt', header: 'بدهی قبلی', isSelected: true },
+            { field: 'amount', header: 'مبلغ قبض(ریال)', isSelected: true },
         ];
     assess_pre: IObjectIteratation[] =
         [

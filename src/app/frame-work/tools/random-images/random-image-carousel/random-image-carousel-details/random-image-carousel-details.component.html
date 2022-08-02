@@ -3,7 +3,7 @@
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="_container">
             <section class="__readonly_s">
-                <div *ngIf="_isCollapsed">
+                <div *ngIf="toolsService._isCollapsedRandomImgCarouDetails">
                     <div class="input_2">
                         <div class="_key">نام‌ و نام‌خانوادگی</div>
                         <div class="_value" style="overflow-y: auto;">
@@ -35,7 +35,8 @@
                         </div>
                     </div>
                 </div>
-                <app-collapsable [_isCollapsed]=_isCollapsed (_clicked)=" _isCollapsed=!_isCollapsed">
+                <app-collapsable [_isReversed]="true" [_isCollapsed]=toolsService._isCollapsedRandomImgCarouDetails
+                    (_clicked)=" toolsService._isCollapsedRandomImgCarouDetails=!toolsService._isCollapsedRandomImgCarouDetails">
                 </app-collapsable>
 
                 <div class="check_boxes">

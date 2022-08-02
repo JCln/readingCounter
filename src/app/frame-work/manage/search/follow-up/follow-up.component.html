@@ -1,7 +1,7 @@
-<app-collapsable [_isCollapsed]=closeTabService.saveDataForFollowUpReq._isCollapsed
+<app-collapsable [_isReversed]="true" [_isCollapsed]=closeTabService.saveDataForFollowUpReq._isCollapsed
     (_clicked)=" closeTabService.saveDataForFollowUpReq._isCollapsed = !closeTabService.saveDataForFollowUpReq._isCollapsed">
 </app-collapsable>
-<form #form="ngForm" *ngIf="!closeTabService.saveDataForFollowUpReq._isCollapsed" class="insert_track">
+<form #form="ngForm" *ngIf="closeTabService.saveDataForFollowUpReq._isCollapsed" class="insert_track">
     <div class="input_2">
         <div class="_key">شماره پیگیری</div>
         <input class="_value" type="number" name="trackNumber"

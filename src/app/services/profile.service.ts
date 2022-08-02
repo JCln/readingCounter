@@ -6,6 +6,7 @@ import { IChangePassword } from 'interfaces/inon-manage';
 import { ENLocalStorageNames, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MathS } from '../classes/math-s';
@@ -26,9 +27,13 @@ export class ProfileService {
     private utilsService: UtilsService,
     private dialog: MatDialog,
     private columnManager: ColumnManager,
-    private localClientConfigsService: LocalClientConfigsService
+    private localClientConfigsService: LocalClientConfigsService,
+    private jwtService: JwtService
   ) { }
 
+  getToken = (): string => {
+    return this.jwtService.getAuthorizationToken();
+  }
   getUseCarouselMedia = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, false);
   }
