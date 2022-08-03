@@ -68,6 +68,7 @@ export class AssessPreComponent extends AllListsFactory {
   connectToServer = async () => {
     this.dataSource = await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
     this.makeDataSourceOptionsChecked();
+    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
 
     this.karbariDictionaryCode = await this.importDynamicService.getKarbariByCodeDictionary();
     this.qotrDictionary = await this.importDynamicService.getQotrDictionary();

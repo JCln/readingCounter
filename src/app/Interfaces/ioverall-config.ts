@@ -127,6 +127,9 @@ export enum ENEssentialsToSave {
     saveDataForUserLoggins = 'saveDataForUserLoggins',
     saveDataForFragmentNOBDetails = 'saveDataForFragmentNOBDetails',
     saveDataForRRGallery = 'saveDataForRRGallery',
+    saveDataForRandomImgs = 'saveDataForRandomImgs',
+    saveDataForRandomImgsRSFirst = 'saveDataForRandomImgsRSFirst',
+    saveDataForRRGalleryRSFirst = 'saveDataForRRGalleryRSFirst',
     saveDataForRRGalleryReq = 'saveDataForRRGalleryReq',
 }
 export interface ITestSidebar {

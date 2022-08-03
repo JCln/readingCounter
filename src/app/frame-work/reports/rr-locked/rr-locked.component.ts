@@ -90,6 +90,7 @@ export class RrLockedComponent extends AllListsFactory {
 
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.readingReportManagerService.lockedReq);
+    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     this.converts();
     this.closeTabService.saveDataForRRLocked = this.dataSource;
   }

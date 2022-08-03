@@ -13,6 +13,7 @@ export enum EN_Routes {
     'wrrptsmamkarkardchart' = '/wr/rpts/mam/karkard/chart',
     'wrrptsmamtrvchchart' = '/wr/rpts/mam/trvch/chart',
     'wrrptstoolsexcelviewer' = '/wr/rpts/tools/excelviewer',
+    'wrtoolsrandomImg' = '/wr/tools/randomImg',
     'wrflashlr' = '/wr/flash/lr',
     'wrmrimgattr' = '/wr/m/r/imgattr',
     'wrrptsanlzfileresult' = '/wr/rpts/anlzfile/result',

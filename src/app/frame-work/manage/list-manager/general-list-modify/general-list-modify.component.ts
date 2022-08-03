@@ -65,6 +65,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   updateOnChangedCounterState = async (val: any) => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val.value);
+    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
     this.closeTabService.saveDataForLMGeneralModify = this.dataSource;
     this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
@@ -101,8 +102,6 @@ export class GeneralListModifyComponent extends AllListsFactory {
       // setDynamics should implement before new instance of dataSource create
       this.listManagerService.setDynamicPartRanges(this.dataSource);
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
-
-      this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     }
   }
   refreshTable = () => {

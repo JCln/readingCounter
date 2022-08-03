@@ -160,7 +160,7 @@ section.dynamic_content {
 ._more_options {
   grid-column: 5/10;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 12rem));
   justify-content: center;
   background-color: var(--white);
   border-radius: 5px;

@@ -66,6 +66,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   updateOnChangedCounterState = async (val: any) => {
     this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val.value);
+    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
     this.closeTabService.saveDataForLMGeneralGroupModify = this.dataSource;
@@ -110,8 +111,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       // setDynamics should implement before new instance of dataSource create
       this.listManagerService.setDynamicPartRanges(this.dataSource);
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
-
-      this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     }
   }
   refreshTable = () => {

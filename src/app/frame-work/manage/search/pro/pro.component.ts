@@ -51,6 +51,7 @@ export class ProComponent extends AllListsFactory {
   callApi = async () => {
     if (this.closeTabService.saveDataForSearchProReq.zoneId) {
       this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchPro, this.closeTabService.saveDataForSearchProReq);
+      this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
       this.closeTabService.saveDataForSearchPro = this.dataSource;
       this.getNesseseriesByZone();
     }

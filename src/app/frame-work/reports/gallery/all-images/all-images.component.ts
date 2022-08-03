@@ -33,6 +33,7 @@ export class AllImagesComponent extends FactoryONE {
     this.allImagesDataSource = null;
 
     this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.readingReportManagerService.trackNumberAllImages);
+    this.closeTabService.saveDataForRRGalleryRSFirst = this.allImagesDataSource;
     this.closeTabService.saveDataForRRGalleryReq = this.readingReportManagerService.trackNumberAllImages;
     this.showAllImgs();
     this.readingReportManagerService._isCollapsedAllImgs = true;
@@ -42,6 +43,10 @@ export class AllImagesComponent extends FactoryONE {
     JUST add to closeTabService.saveDataForRRGalleryReq from other
     components to process images
      */
+    if (this.closeTabService.saveDataForRRGallery) {
+      this.imgsOriginUrl = this.closeTabService.saveDataForRRGallery;
+      this.allImagesDataSource = this.closeTabService.saveDataForRRGalleryRSFirst;
+    }
     if (this.closeTabService.saveDataForRRGalleryReq) {
       this.readingReportManagerService.trackNumberAllImages = this.closeTabService.saveDataForRRGalleryReq;
       this.readingReportManagerService._isCollapsedAllImgs = true;
@@ -52,6 +57,8 @@ export class AllImagesComponent extends FactoryONE {
     this.allImagesDataSource.imageUrlAndInfos.forEach((item, i) => {
       this.getExactImg(item.fileRepositorayId, i);
     })
+    // to save data
+    this.closeTabService.saveDataForRRGallery = this.imgsOriginUrl;
   }
   getExactImg = async (id: string, index: number) => {
     this.imgsOriginUrl[index] = this.readingReportManagerService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.readingReportManagerService.getAuthToken();

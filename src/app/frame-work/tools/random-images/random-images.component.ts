@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'interfaces/ireports';
+import { CloseTabService } from 'services/close-tab.service';
 import { ToolsService } from 'services/tools.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -22,7 +23,8 @@ export class RandomImagesComponent extends FactoryONE {
   imgsOriginUrl: any[] = [];
 
   constructor(
-    public toolsService: ToolsService
+    public toolsService: ToolsService,
+    private closeTabService: CloseTabService
   ) {
     super();
   }
@@ -31,6 +33,10 @@ export class RandomImagesComponent extends FactoryONE {
     this.zoneDictionary = await this.toolsService.getZoneDictionary();
     this._quantity = this.toolsService.getQuantity();
     this.verificationACounterReaderId();
+    if (this.closeTabService.saveDataForRandomImgs) {
+      this.allImagesDataSource = this.closeTabService.saveDataForRandomImgsRSFirst;
+      this.imgsOriginUrl = this.closeTabService.saveDataForRandomImgs;
+    }
   }
   verificationACounterReaderId = async () => {
     let temp: IDictionaryManager[] = [];
@@ -44,6 +50,7 @@ export class RandomImagesComponent extends FactoryONE {
   connectToServer = async () => {
     if (this.toolsService.verificationImageCarousel(this.toolsService.randomImages)) {
       this.allImagesDataSource = await this.toolsService.postDataSource(ENInterfaces.postToolsRandomImages, this.toolsService.randomImages);
+      this.closeTabService.saveDataForRandomImgsRSFirst = this.allImagesDataSource;
       this.showAllImgs();
     }
   }
@@ -52,6 +59,8 @@ export class RandomImagesComponent extends FactoryONE {
     this.allImagesDataSource.imageUrlAndInfos.forEach((item, i) => {
       this.getExactImg(item.fileRepositorayId, i);
     })
+    // to save data
+    this.closeTabService.saveDataForRandomImgs = this.imgsOriginUrl;
   }
   getExactImg = async (id: string, index: number) => {
     this.imgsOriginUrl[index] = this.toolsService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.toolsService.getAuthToken();

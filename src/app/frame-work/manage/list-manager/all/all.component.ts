@@ -54,7 +54,7 @@ export class AllComponent extends AllListsFactory {
       }
       else {
         this.dataSource = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.allLists_pageSign.GUid);
-        console.log(this.allListsService.allLists_pageSign);
+        this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
 
         this.closeTabService.saveDataForLMAllReq = this.allListsService.allLists_pageSign.GUid;
         this.closeTabService.saveDataForLMAll = this.dataSource;
@@ -82,8 +82,6 @@ export class AllComponent extends AllListsFactory {
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-
-      this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     }
   }
   toPrePage = () => {

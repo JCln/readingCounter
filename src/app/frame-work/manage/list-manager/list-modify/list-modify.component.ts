@@ -56,12 +56,12 @@ export class ListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMModify = null;
         this.closeTabService.saveDataForLMModifyReq = null;
       }
-      console.log(this.closeTabService.saveDataForLMModify);
       if (this.closeTabService.saveDataForLMModifyReq === this.allListsService.modifyLists_pageSign.GUid && this.closeTabService.saveDataForLMModify) {
         this.dataSource = this.closeTabService.saveDataForLMModify;
       }
       else {
         this.dataSource = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.modifyLists_pageSign.GUid);
+        this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
         this.closeTabService.saveDataForLMModifyReq = this.allListsService.modifyLists_pageSign.GUid;
         this.closeTabService.saveDataForLMModify = this.dataSource;
       }
@@ -88,8 +88,6 @@ export class ListModifyComponent extends AllListsFactory {
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-
-      this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     }
   }
   toPrePage = () => {

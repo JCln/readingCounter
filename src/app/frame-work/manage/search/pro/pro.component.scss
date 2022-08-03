@@ -121,7 +121,6 @@ form {
   grid-template-columns: repeat(auto-fit, minmax(10rem, 12rem));
   justify-content: center;
   background-color: var(--white);
-  max-height: 15rem;
   border-radius: 5px;
 
   @media (max-width: 780px) {
