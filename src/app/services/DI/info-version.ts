@@ -7,7 +7,7 @@ export enum ENLoginVersion {
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'اصلاح لیست(دسته ای)',
+        title: 'بهبود عملکرد',
         isSelected: true
     },
     {
