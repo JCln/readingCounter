@@ -958,7 +958,112 @@ export class ColumnManager {
         { field: 'abFormula', header: 'فرمول آب', isSelected: false, readonly: true, ltr: true },
         { field: 'fazelabFormula', header: 'فرمول فاضلاب', isSelected: false, readonly: true, ltr: true },
         { field: 'formula', header: 'فرمول', isSelected: false, readonly: true, ltr: true }
-    ]
+    ];
+    defColumns: IObjectIteratation[] = [
+        { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true },
+        { field: 'seen', header: 'دیده شده', isSelected: true, isBoolean: true },
+        // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },    
+        // { field: 'hasDetails', header: 'جزئیات' },
+    ];
+    followUpView: IObjectIteratation[] = [
+        { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, readonly: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
+        { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, readonly: true },
+        { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, readonly: true },
+        { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, readonly: true },
+        { field: 'fromDate', header: 'از ', isSelected: true, readonly: true },
+        { field: 'toDate', header: 'تا ', isSelected: true, readonly: true },
+        { field: 'overallQuantity', header: 'کل تعداد ', isSelected: true, readonly: true },
+        { field: 'itemQuantity', header: 'تعداد ', isSelected: true, readonly: true },
+        { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, readonly: true },
+        { field: 'year', header: 'سال', isSelected: true, readonly: true }
+    ];
+    importedListDetails: IObjectIteratation[] = [
+        { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
+        { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true },
+        { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
+        { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, isSelectOption: true, readonly: false, borderize: true },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, readonly: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
+        // { field: 'year', header: 'سال', isSelected: false, readonly: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true },
+        { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
+        { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
+        { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
+        { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, readonly: false, borderize: true },
+        { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, borderize: true },
+        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
+        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
+        { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
+    ];
+    LMPerDayPositions: IObjectIteratation[] = [
+        { field: 'counterReaders', header: 'مامور', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
+        { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
+        { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
+        { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
+        { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
+        { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true },
+        { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, readonly: true, isBoolean: true },
+        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: true, isBoolean: true },
+        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: true, isBoolean: true },
+        { field: 'isBazdid', header: 'بازدید', isSelected: true, readonly: true, isBoolean: true },
+        { field: 'isRoosta', header: 'روستا', isSelected: true, readonly: true, isBoolean: true }
+    ];
+    lMPerDay: IObjectIteratation[] = [
+        { field: 'day', header: 'روز', isSelected: true, readonly: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true, ltr: true },
+        { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
+        { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
+        { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
+        { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
+        { field: 'distance', header: 'مسافت', isSelected: true, readonly: true },
+        { field: 'maneCount', header: 'تعداد مانع', isSelected: false, readonly: true },
+        { field: 'manePercent', header: 'درصد مانع', isSelected: false, readonly: true },
+        { field: 'xarabFaqedCount', header: 'تعداد فاقد/خراب', isSelected: false, readonly: true },
+        { field: 'xarabFaqedPercent', header: 'درصد فاقد/خراب', isSelected: false, readonly: true }
+    ];
+    lMPerDayPositions: IObjectIteratation[] = [
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'counterReaders', header: 'مامور(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
+        { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
+        { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
+        { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
+        { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
+        { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
+        { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true }
+    ];
+    offlaodedGroup: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true },
+        { field: 'itemQuantity', header: 'تعداد', isSelected: true },
+        // { field: 'zoneId', header: 'ناحیه', isSelected: false },
+        { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
+        // { field: 'year', header: 'سال', isSelected: false },
+        { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
+        { field: 'fromDate', header: 'از', isSelected: false },
+        { field: 'toDate', header: 'تا', isSelected: false },
+        { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
+        { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isNumber: true },
+        { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
+        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
+        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
+    ];
     allLists: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },

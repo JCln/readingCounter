@@ -94,7 +94,7 @@ export class OffloadedGroupComponent extends FactoryONE {
     }
   }
   insertSelectedColumns = () => {
-    this._selectCols = this.trackingManagerService.columnOfflaodedGroup();
+    this._selectCols = this.trackingManagerService.getColumnOfflaodedGroup();
     this._selectedColumns = this.trackingManagerService.customizeSelectedColumns(this._selectCols);
   }
   @Input() get selectedColumns(): any[] {

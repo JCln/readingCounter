@@ -48,8 +48,8 @@ export class PerDayComponent extends FactoryONE {
     })
   }
   private insertSelectedColumns = () => {
-    this._selectMainDatas = this.listManagerService.columnSelectedLMPerDayPositions();
-    this._selectCols = this.listManagerService.columnSelectedLMPerDay();
+    this._selectMainDatas = this.listManagerService.getLMPerDayPositions();
+    this._selectCols = this.listManagerService.getLMPerDay();
     this._selectedColumns = this.customizeSelectedColumns(this._selectCols);
     this.dateJalaliService.sortByDate(this.offLoadPerDayHistory, 'day');
   }

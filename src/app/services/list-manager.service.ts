@@ -9,6 +9,7 @@ import { ISearchMoshReqDialog } from 'interfaces/search';
 import { SortEvent } from 'primeng/api/sortevent';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
@@ -25,37 +26,6 @@ export class ListManagerService {
   ref: DynamicDialogRef;
   counterStateValue: number;
 
-  columnSelectedLMPerDay = (): IObjectIteratation[] => {
-    return [
-      { field: 'day', header: 'روز', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true, ltr: true },
-      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
-      { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
-      { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
-      { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
-      { field: 'distance', header: 'مسافت', isSelected: true, readonly: true },
-      { field: 'maneCount', header: 'تعداد مانع', isSelected: false, readonly: true },
-      { field: 'manePercent', header: 'درصد مانع', isSelected: false, readonly: true },
-      { field: 'xarabFaqedCount', header: 'تعداد فاقد/خراب', isSelected: false, readonly: true },
-      { field: 'xarabFaqedPercent', header: 'درصد فاقد/خراب', isSelected: false, readonly: true }
-    ];
-  }
-  columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
-    return [
-      { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
-      { field: 'counterReaders', header: 'مامور(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
-      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
-      { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
-      { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
-      { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
-      { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true }
-    ];
-  }
   searchReqMoshDialog: ISearchMoshReqDialog = {
     // searchBy: 1  => eshterak
     zoneId: null,
@@ -68,8 +38,15 @@ export class ListManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
+    private columnManager: ColumnManager
   ) { }
 
+  getLMPerDay = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('lMPerDay');
+  }
+  getLMPerDayPositions = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('lMPerDayPositions');
+  }
   getDeleteDictionary = (): any[] => {
     return this.utilsService.getDeleteDictionary();
   }

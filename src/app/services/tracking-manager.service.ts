@@ -11,6 +11,7 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { JwtService } from 'src/app/auth/jwt.service';
+import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
@@ -35,91 +36,20 @@ export class TrackingManagerService {
     toDate: null
   };
 
-  columnOfflaodedGroup = (): IObjectIteratation[] => [
-    { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
-    { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-    { field: 'counterReaderName', header: 'مامور', isSelected: true },
-    { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
-    { field: 'listNumber', header: 'ش لیست', isSelected: true },
-    { field: 'itemQuantity', header: 'تعداد', isSelected: true },
-    // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-    { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
-    // { field: 'year', header: 'سال', isSelected: false },
-    { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
-    { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
-    { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
-    { field: 'fromDate', header: 'از', isSelected: false },
-    { field: 'toDate', header: 'تا', isSelected: false },
-    { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
-    { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isNumber: true },
-    { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
-    { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
-    { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-    { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
-
-  ];
-  columnDefColumns = (): IObjectIteratation[] => [
-    { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
-    { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
-    { field: 'counterReaderName', header: 'مامور', isSelected: true },
-    { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true },
-    { field: 'seen', header: 'دیده شده', isSelected: true, isBoolean: true },
-    // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },    
-    // { field: 'hasDetails', header: 'جزئیات' },
-  ]
-  columnFollowUpView = (): IObjectIteratation[] => {
-    return [
-      { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, readonly: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
-      { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, readonly: true },
-      { field: 'fromDate', header: 'از ', isSelected: true, readonly: true },
-      { field: 'toDate', header: 'تا ', isSelected: true, readonly: true },
-      { field: 'overallQuantity', header: 'کل تعداد ', isSelected: true, readonly: true },
-      { field: 'itemQuantity', header: 'تعداد ', isSelected: true, readonly: true },
-      { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, readonly: true },
-      { field: 'year', header: 'سال', isSelected: true, readonly: true }
-    ];
+  getColumnDefColumns = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('defColumns');
   }
-
-  columnSelectedImportedList = (): IObjectIteratation[] => {
-    return [
-      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true },
-      { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
-      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, isSelectOption: true, readonly: false, borderize: true },
-      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true },
-      { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, readonly: true },
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
-      // { field: 'year', header: 'سال', isSelected: false, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true },
-      { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
-      { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
-      { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
-      { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, readonly: false, borderize: true },
-      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, borderize: true },
-      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
-      { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
-      { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
-    ];
+  getFollowUpView = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('followUpView');
   }
-  columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
-    return [
-      { field: 'counterReaders', header: 'مامور', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
-      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
-      { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
-      { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
-      { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true },
-      { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'isBazdid', header: 'بازدید', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'isRoosta', header: 'روستا', isSelected: true, readonly: true, isBoolean: true }
-    ];
+  getImportedListDetails = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('importedListDetails');
+  }
+  getColumnOfflaodedGroup = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('offlaodedGroup');
+  }
+  getLMPerDayPositions = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('LMPerDayPositions');
   }
   getOffloadModifyType = (): OffloadModify[] => {
     return [
@@ -154,7 +84,8 @@ export class TrackingManagerService {
     private allListsService: AllListsService,
     private router: Router,
     private envService: EnvService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private columnManager: ColumnManager
   ) { }
 
   firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {

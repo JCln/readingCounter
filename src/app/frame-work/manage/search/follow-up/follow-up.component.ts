@@ -111,10 +111,10 @@ export class FollowUpComponent extends FactoryONE {
   insertToDesc = () => {
     if (this.dataSourceAUX) {
       this.trackingManagerService.setGetRanges(this.dataSourceAUX);
-      this._selectColumnsAUX = this.trackingManagerService.columnSelectedLMPerDayPositions();
+      this._selectColumnsAUX = this.trackingManagerService.getLMPerDayPositions();
     }
-    this._showDesc = this.trackingManagerService.columnFollowUpView();
-    this._defColumns = this.trackingManagerService.columnDefColumns();
+    this._showDesc = this.trackingManagerService.getFollowUpView();
+    this._defColumns = this.trackingManagerService.getColumnDefColumns();
     this.clearUNUsables();
   }
   showInMap = () => {
