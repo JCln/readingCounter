@@ -65,25 +65,26 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     super(dialogService, listManagerService);
   }
   updateOnChangedCounterState = async (val: any) => {
-    this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val.value);
-    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
-    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
-    this.closeTabService.saveDataForLMGeneralGroupModify = this.dataSource;
-    this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
-    this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
-    this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
-    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+    if (val.value) {
+      this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val.value);
+      this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
+      this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+      this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
+      this.closeTabService.saveDataForLMGeneralGroupModify = this.dataSource;
+      this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
+      this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
+      this.qotrDictionary = await this.listManagerService.getQotrDictionary();
+      this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+      this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
 
-    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-
+      Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
+      Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
+      Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
+      Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    }
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
@@ -97,13 +98,16 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMGeneralGroupModify = null;
         this.closeTabService.saveDataForLMGeneralGroupModifyReq = null;
       }
-      if (this.closeTabService.saveDataForLMGeneralGroupModifyReq === this.allListsService.generalModifyListsGrouped_pageSign.GUid && this.closeTabService.saveDataForLMGeneralGroupModify) {
+      console.log(this.closeTabService.saveDataForLMGeneralGroupModifyReq);
+
+      if (this.closeTabService.saveDataForLMGeneralGroupModify && this.closeTabService.saveDataForLMGeneralGroupModifyReq === this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
         this.dataSource = this.closeTabService.saveDataForLMGeneralGroupModify;
+      } else {
+        this.updateOnChangedCounterState({ value: this.listManagerService.counterStateValue });
       }
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.get(this._outputFileName);
-      }
-      else {
+      } else {
         this._selectCols = this.columnManager.columnSelectedMenus(this._outputFileName);
       }
       this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
