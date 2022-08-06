@@ -35,7 +35,6 @@ export class ImageAttrFileResultComponent extends FactoryONE {
     }
   }
   verification = async () => {
-    // this._isOrderByDate ? (this.readingReportManagerService.imgAttrResultReq.readingPeriodId = null, this.readingReportManagerService.imgAttrResultReq.year = 0) : (this.readingReportManagerService.imgAttrResultReq.fromDate = '', this.readingReportManagerService.imgAttrResultReq.toDate = '')
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.imgAttrResultReq, this._isOrderByDate);
     if (temp) {
       this.connectToServer();

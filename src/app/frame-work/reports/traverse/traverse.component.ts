@@ -53,7 +53,6 @@ export class TraverseComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.traverseReq.readingPeriodId = null, this.readingReportManagerService.traverseReq.year = 0) : (this.readingReportManagerService.traverseReq.fromDate = '', this.readingReportManagerService.traverseReq.toDate = '');
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.traverseReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();

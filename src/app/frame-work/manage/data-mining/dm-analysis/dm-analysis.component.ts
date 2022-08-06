@@ -51,7 +51,6 @@ export class DmAnalysisComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.dataMiningAnalysesService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this.dataMiningAnalysesService._isOrderByDate ? (this.dataMiningAnalysesService.dataMiningReq.readingPeriodId = null, this.dataMiningAnalysesService.dataMiningReq.year = 0) : (this.dataMiningAnalysesService.dataMiningReq.fromDate = '', this.dataMiningAnalysesService.dataMiningReq.toDate = '')
     const temp = this.dataMiningAnalysesService.verification(this.dataMiningAnalysesService.dataMiningReq, this.dataMiningAnalysesService._isOrderByDate);
     if (temp)
       this.connectToServer();

@@ -1,4 +1,4 @@
-<section [hidden]="isCollapsed">
+<section [hidden]="forbiddenService._isCollapsedForbidden">
     <form #form="ngForm" (ngSubmit)="verification()">
         <div class="input_2">
             <div class="_key">ناحیه</div>
@@ -36,7 +36,8 @@
 
 <app-prime-table *ngIf="dataSource" [dataSource]="dataSource" [_outputFileName]="'forbidden'"
     [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]" [_selectedColumnsToRemember]="'selectedForbidden'"
-    [_hasCollapsible]=true [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed"
+    [_hasCollapsible]=true [_isCollaped]="forbiddenService._isCollapsedForbidden"
+    (collapsed)="forbiddenService._isCollapsedForbidden = !forbiddenService._isCollapsedForbidden"
     (refreshedTable)="refreshTable()" (showedPictures)="showPictures($event)"
     (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
 </app-prime-table>

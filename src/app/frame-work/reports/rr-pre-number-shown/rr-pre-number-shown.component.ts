@@ -61,7 +61,6 @@ export class RrPreNumberShownComponent extends AllListsFactory {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.preNumberShownReq.readingPeriodId = null, this.readingReportManagerService.preNumberShownReq.year = 0) : (this.readingReportManagerService.preNumberShownReq.fromDate = '', this.readingReportManagerService.preNumberShownReq.toDate = '');
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.preNumberShownReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();

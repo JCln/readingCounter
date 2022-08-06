@@ -61,3 +61,22 @@ $border_15: 10px;
   font-weight: 600;
   height: 2.6rem;
 }
+
+.this {
+  border: 2px dotted var(--orange_600);
+  animation: pulse-new-button 500ms;
+}
+
+@keyframes pulse-new-button {
+  0% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: 0px 0px 3px 0px var(--orange_600);
+  }
+
+  100% {
+    box-shadow: 0px 0px 5px 1px var(--orange_600);
+  }
+}

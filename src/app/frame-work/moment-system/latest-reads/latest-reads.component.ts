@@ -16,6 +16,9 @@ declare let L;
   styleUrls: ['./latest-reads.component.scss']
 })
 export class LatestReadsComponent extends AllListsFactory {
+  private layerGroup2 = new L.FeatureGroup();
+  private map2: L.Map;
+
   dataSource2: ILatestReads[] = [];
 
   constructor(
@@ -48,10 +51,6 @@ export class LatestReadsComponent extends AllListsFactory {
     this.closeTabService.saveDataForMomentLastRead = this.dataSource2;
     this.markMultipleLocations(this.dataSource2);
   }
-
-  private layerGroup2 = new L.FeatureGroup();
-  private map2: L.Map;
-
 
   private markMultipleLocations = (xyData: any) => {
     xyData.map((items) => {

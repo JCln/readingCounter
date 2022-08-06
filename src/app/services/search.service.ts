@@ -213,6 +213,12 @@ export class SearchService {
     return true;
   }
   private validationByReadingPeriod = (dataSource: ISearchProReportInput): boolean => {
+    if (dataSource.hasOwnProperty('zoneId')) {
+      if (MathS.isNull(dataSource.zoneId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
     if (dataSource.hasOwnProperty('readingPeriodId')) {
       if (MathS.isNull(dataSource.readingPeriodId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
@@ -222,12 +228,6 @@ export class SearchService {
     if (dataSource.hasOwnProperty('year')) {
       if (MathS.isNull(dataSource.year)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-        return false;
-      }
-    }
-    if (dataSource.hasOwnProperty('zoneId')) {
-      if (MathS.isNull(dataSource.zoneId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }

@@ -21,7 +21,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _sortOrder: number = -1;
   @Input() _sortMode: string = 'single';
   @Input() _isSortable: boolean = true;
-  @Input() _allComponentIsModify: boolean = false;
   @Input() _hasCollapsible: boolean = false;
   @Input() _canShowButton: boolean = true;
   @Input() _isCollaped: boolean = false;

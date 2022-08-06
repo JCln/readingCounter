@@ -123,7 +123,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
 
     if (MathS.isNull(this.DoesTabsHaveThisRouteNow())) {
       this.closeTabService.tabs.push(a);
-      this.reFetchPageTitle();
+      // this.reFetchPageTitle();
     }
     this.reFetchPageTitle();
   }
@@ -139,13 +139,14 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     if (currentRouteFound) {
       if (this.DoesTabsHaveThisRouteNow()) {
         this.reFetchPageTitle();
-        return;
       }
-      this.closeTabService.tabs.push(currentRouteFound);
-      this.reFetchPageTitle();
-    }
-    else
+      else {
+        this.closeTabService.tabs.push(currentRouteFound);
+        this.reFetchPageTitle();
+      }
+    } else {
       this.dynamicRouteValidation();
+    }
     this.reFetchPageTitle();
   }
   getTabWrapper = async () => {

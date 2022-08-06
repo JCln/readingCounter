@@ -22,6 +22,7 @@ export enum ENForbidden {
 export class ForbiddenService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENForbidden = ENForbidden;
+  _isCollapsedForbidden: boolean = false;
 
   forbiddenReq: IMostReportInput = {
     zoneId: 0,

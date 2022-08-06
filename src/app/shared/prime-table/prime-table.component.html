@@ -308,15 +308,15 @@
             </td>
             <td *ngIf="(
                 _outputFileName == 'allLists' || 
+                _outputFileName == 'ModifyList' || 
             _outputFileName == 'rrPreNumber'|| 
-            _outputFileName == 'rrLocked'|| 
             _outputFileName == 'rrLocked' || 
             _outputFileName == 'searchPro' || 
             _outputFileName == 'searchMosh'||
             _outputFileName == 'assess_pre'||
             _outputFileName == 'momentLs'||
             _outputFileName == 'searchMoshDialog'
-            )&& !_allComponentIsModify" (click)="showWOUIAsCarousel(dataSource,ri)">
+            )" (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
@@ -326,13 +326,13 @@
             _outputFileName == 'rrDetails'            
             || _outputFileName == 'trv'            
             || _outputFileName == 'trvDiff'            
-            )&& !_allComponentIsModify" (click)="searchService.routeToWoui(dataSource)">
+            )" (click)="searchService.routeToWoui(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
-            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_allComponentIsModify">
+            <td (click)="routeToOffload(dataSource,ri)" *ngIf="_outputFileName == 'ModifyList'">
                 <span class="ui-column-title">اصلاح</span>
                 <i class="tooltip p_icons pi pi-pencil">
                     <div class="tooltip_text_right">اصلاح</div>

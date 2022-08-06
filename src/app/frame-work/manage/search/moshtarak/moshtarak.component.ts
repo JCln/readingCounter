@@ -20,8 +20,7 @@ import { Search } from 'src/app/classes/search';
 export class MoshtarakComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
   searchType: Search[];
-  searchByText: string = '';
-  _searchByInfo: string = 'مقدار';
+  _searchByInfo: string = 'اشتراک';
 
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];

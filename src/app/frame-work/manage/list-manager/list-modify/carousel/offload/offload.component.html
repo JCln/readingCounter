@@ -39,7 +39,8 @@
                 <div class="input_2 coloring_border">
                     <div class="_key">تاریخ فعلی</div>
                     <div class="_value">
-                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                            [dateObject]="offloadModifyReq.jalaliDay">
                         </app-date-jalali>
                     </div>
                 </div>

@@ -50,7 +50,6 @@ export class MasterComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.masterReq.readingPeriodId = null, this.readingReportManagerService.masterReq.year = 0) : (this.readingReportManagerService.masterReq.fromDate = '', this.readingReportManagerService.masterReq.toDate = '')
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.masterReq, this.readingReportManagerService._isOrderByDate);
     if (temp) {
       this.connectToServer();

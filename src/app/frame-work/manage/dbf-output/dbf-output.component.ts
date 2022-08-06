@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { IOutputManager } from 'interfaces/imanage';
 import { IZoneManager } from 'interfaces/izones';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -14,23 +13,21 @@ import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/da
 })
 export class DbfOutputComponent extends FactoryONE {
   @ViewChild(DateJalaliComponent) date;
-  dbfOutput: IOutputManager;
   zoneDictionary: IZoneManager[] = [];
 
   constructor(
+    public trackingManagerService: TrackingManagerService,
     private outputManagerService: OutputManagerService,
-    private trackingManagerService: TrackingManagerService,
     private closeTabService: CloseTabService
   ) {
     super();
-    this.dbfOutput = this.outputManagerService.getDBFOutPut;
   }
 
   connectToServer = async () => {
-    if (!this.outputManagerService.checkVertification(this.dbfOutput))
-      return;
-    const res = await this.trackingManagerService.downloadOutputDBF(this.dbfOutput);
-    this.outputManagerService.downloadFile(res, '.dbf');
+    if (this.trackingManagerService.checkVertificationDBF(this.trackingManagerService.dbfOutput)) {
+      const res = await this.trackingManagerService.downloadOutputDBF(this.trackingManagerService.dbfOutput);
+      this.outputManagerService.downloadFile(res, '.dbf');
+    }
   }
   nullSavedSource = () => this.closeTabService.saveDataForOutputDBF = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -39,10 +36,10 @@ export class DbfOutputComponent extends FactoryONE {
     this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
   }
   receiveFromDateJalali = ($event: string) => {
-    this.dbfOutput.fromDate = $event;
+    this.trackingManagerService.dbfOutput.fromDate = $event;
   }
   receiveToDateJalali = ($event: string) => {
-    this.dbfOutput.toDate = $event;
+    this.trackingManagerService.dbfOutput.toDate = $event;
   }
 
 }

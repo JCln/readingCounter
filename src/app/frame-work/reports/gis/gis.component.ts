@@ -81,17 +81,7 @@ export class GisComponent extends FactoryONE {
     event.value === 'isForbidden' ? this.readingReportManagerService._isOrderByDate = true : ''
     event.value === 'isCounterState' ? this.readingReportManagerService.gisReq.isCounterState = true : ''
   }
-  makeObject = () => {
-    this.readingReportManagerService._isOrderByDate ?
-      (this.readingReportManagerService.gisReq.readingPeriodId = null,
-        this.readingReportManagerService.gisReq.year = 0
-      ) :
-      (this.readingReportManagerService.gisReq.fromDate = ''
-        , this.readingReportManagerService.gisReq.toDate = ''
-      );
-  }
   verification = async () => {
-    this.makeObject();
     const temp = this.readingReportManagerService.verificationRRGIS(this.readingReportManagerService.gisReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.readingReportManagerService.routeToMapGIS(this.readingReportManagerService.gisReq);

@@ -13,8 +13,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./forbidden.component.scss']
 })
 export class ForbiddenComponent extends FactoryONE {
-  isCollapsed: boolean = false;
-  panelOpenState: boolean = true;
   dataSource: IForbiddenManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   userCounterReaders: IDictionaryManager[] = [];
@@ -33,7 +31,7 @@ export class ForbiddenComponent extends FactoryONE {
     this.forbiddenService.setDynamicPartRanges(this.dataSource);
 
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');    
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   connectToServer = async () => {
     this.dataSource = await this.forbiddenService.getDataSource();
@@ -54,7 +52,7 @@ export class ForbiddenComponent extends FactoryONE {
     const temp = this.forbiddenService.verificationForbidden(this.forbiddenService.forbiddenReq);
     if (temp)
       this.connectToServer();
-  } 
+  }
   backToPrevious = () => {
     this.forbiddenService.backToParent();
   }

@@ -2,7 +2,6 @@ import 'jspdf-autotable';
 
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOutputManager } from 'interfaces/imanage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
@@ -15,36 +14,12 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class OutputManagerService {
-  dbfOutput: IOutputManager = {
-    zoneId: 0,
-    fromDate: null,
-    toDate: null
-  };
 
   constructor(
     private utilsService: UtilsService
   ) {
   }
 
-  get getDBFOutPut(): IOutputManager {
-    return this.dbfOutput;
-  }
-
-  checkVertification = (dataSource: IOutputManager): boolean => {
-    if (MathS.isNullTextValidation(dataSource.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (MathS.isNullTextValidation(dataSource.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    if (MathS.isNull(dataSource.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    return true;
-  }
   // Exports
   downloadFile(data: any, type?: string) {
     if (type) {

@@ -26,6 +26,13 @@ import { UtilsService } from './utils.service';
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
+
+  dbfOutput: IOutputManager = {
+    zoneId: 0,
+    fromDate: null,
+    toDate: null
+  };
+
   columnOfflaodedGroup = (): IObjectIteratation[] => [
     { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
     { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
@@ -131,6 +138,9 @@ export class TrackingManagerService {
       OffloadModify.counterHumidity,
       OffloadModify.others
     ]
+  }
+  get getDBFOutPut(): IOutputManager {
+    return this.dbfOutput;
   }
 
   constructor(
@@ -372,6 +382,21 @@ export class TrackingManagerService {
     if (MathS.isNull(elem))
       return true;
     return false;
+  }
+  checkVertificationDBF = (dataSource: IOutputManager): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.fromDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(dataSource.toDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+    return true;
   }
   private offloadModifyValidation = (object: IOffloadModifyReq): boolean => {
     if (this.isValidationNull(object.id)) {

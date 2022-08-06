@@ -50,8 +50,7 @@ export class PerformanceComponent extends FactoryONE {
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
-  verification = async () => {
-    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.anlzPrfmReq.readingPeriodId = null, this.readingReportManagerService.anlzPrfmReq.year = 0) : (this.readingReportManagerService.anlzPrfmReq.fromDate = '', this.readingReportManagerService.anlzPrfmReq.toDate = '')
+  verification = async () => {    
     const temp = this.readingReportManagerService.verificationRRAnalyzePerformance(this.readingReportManagerService.anlzPrfmReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();

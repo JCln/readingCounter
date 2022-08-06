@@ -53,7 +53,6 @@ export class KarkardDaylyComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this.readingReportManagerService._isOrderByDate ? (this.readingReportManagerService.karkardDailyReq.readingPeriodId = null, this.readingReportManagerService.karkardDailyReq.year = 0) : (this.readingReportManagerService.karkardDailyReq.fromDate = '', this.readingReportManagerService.karkardDailyReq.toDate = '');
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardDailyReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();
