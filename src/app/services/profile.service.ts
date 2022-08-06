@@ -4,6 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { ENLocalStorageNames, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { JwtService } from 'src/app/auth/jwt.service';
@@ -67,6 +68,9 @@ export class ProfileService {
       return false;
     }
     return true;
+  }
+  routeToForbiden = () => {
+    this.utilsService.routeTo(EN_Routes.wrmfbn);
   }
   showMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);

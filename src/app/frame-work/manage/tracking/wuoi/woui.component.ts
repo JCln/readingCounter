@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -30,7 +29,6 @@ export class WouiComponent extends FactoryONE {
   overAllInfo: IOverAllWOUIInfo;
   interationOnOverallInfo: any[] = [];
 
-  testLoadImage: any[] = [];
   testAudio = new Audio();
   activeIndex: number = 0;
   showAudioControllers: boolean = false;
@@ -38,7 +36,7 @@ export class WouiComponent extends FactoryONE {
   downloadURL: string = '';
   viewerOpen: boolean[] = [false];
   ref: DynamicDialogRef;
-  tempCarousels: string[] = [];
+  private tempCarousels: string[] = [];
   testCarouselImages: string[] = [];
   showThumbnails: boolean;
   fullscreen: boolean = false;
@@ -51,7 +49,6 @@ export class WouiComponent extends FactoryONE {
     private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
     private dialogService: DialogService,
-    private _location: Location,
     private router: Router,
     public profileService: ProfileService,
     private envService: EnvService
@@ -63,7 +60,6 @@ export class WouiComponent extends FactoryONE {
   private setToDefault = () => {
     this.audioFiles = [];
     this.imageFiles = [];
-    this.testLoadImage = [];
   }
   private getRouteParams = () => {
     this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
@@ -109,35 +105,12 @@ export class WouiComponent extends FactoryONE {
   onThumbnailButtonClick() {
     this.showThumbnails = !this.showThumbnails;
   }
-  useCarouselMedia = async (id: string, index: number) => {
+  callApiImgs = async (id: string, index: number) => {
     this.tempCarousels[index] = this.envService.API_URL + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.profileService.getToken();
-  }
-  useSimpleMediaShow = async (id: string, index: number) => {
-    const res = await this.downloadManagerService.downloadFile(id);
-    this.testLoadImage[index] = res;
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.testLoadImage[index] = reader.result;
-    }, false);
-    if (this.testLoadImage[index]) {
-      reader.readAsDataURL(this.testLoadImage[index]);
-    }
-  }
-  getExactImg = async (id: string, index: number) => {
-    if (!this.testLoadImage[index]) {
-      if (this.profileService.getUseCarouselMedia()) {
-        // use CarouselMedia method;      
-        this.useCarouselMedia(id, index);
-      }
-      else {
-        // use simple method;
-        this.useSimpleMediaShow(id, index);
-      }
-    }
   }
   showAllImgs = () => {
     this.imageFiles.forEach((item, i) => {
-      this.getExactImg(item.fileRepositoryId, i);
+      this.callApiImgs(item.fileRepositoryId, i);
     })
     this.testCarouselImages = this.tempCarousels;
 
@@ -181,7 +154,6 @@ export class WouiComponent extends FactoryONE {
       closable: true
     })
   }
-  toPrePage = () => this._location.back();
   ngOnInit(): void { return; }
   onFullScreenChange() {
     this.fullscreen = !this.fullscreen;

@@ -68,23 +68,23 @@
 
             </section>
             <div class="__slider">
-                <div *ngIf="testLoadImage.length" class="_img_content">
+                <div *ngIf="originImages.length" class="_img_content">
                     <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
                         <div class="__img_counter">{{i+1}}</div>
 
                         <!-- tooltip -->
-                        <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
+                        <div *ngIf="originImages[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
                         <!--   -->
 
-                        <div *ngIf="testLoadImage[i]" class="__img_bound">
-                            <img (click)="showBigImage(testLoadImage[i])" src="{{testLoadImage[i]}}" alt="whatever">
+                        <div *ngIf="originImages[i]" class="__img_bound">
+                            <img (click)="showBigImage(originImages[i])" src="{{originImages[i]}}" alt="whatever">
                         </div>
-                        <div *ngIf="!testLoadImage[i]" class="__img_bound">
+                        <div *ngIf="!originImages[i]" class="__img_bound">
                             <img src="assets/imgs/soundvid/2.png" alt="whatever">
                         </div>
                     </div>
                 </div>
-                <div *ngIf="!testLoadImage.length">
+                <div *ngIf="!originImages.length">
                     <h2 class="not_found_header">فاقد تصویر</h2>
                 </div>
             </div>

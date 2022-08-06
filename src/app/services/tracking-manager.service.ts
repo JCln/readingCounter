@@ -10,6 +10,7 @@ import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'inter
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { JwtService } from 'src/app/auth/jwt.service';
 import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
@@ -18,6 +19,7 @@ import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackin
 import { OffloadModify } from './../classes/offload-modify-type';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
+import { EnvService } from './env.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -150,7 +152,9 @@ export class TrackingManagerService {
     private _location: Location,
     private dialog: MatDialog,
     private allListsService: AllListsService,
-    private router: Router
+    private router: Router,
+    private envService: EnvService,
+    private jwtService: JwtService
   ) { }
 
   firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
@@ -171,6 +175,12 @@ export class TrackingManagerService {
     })
   }
 
+  getApiUrl = (): string => {
+    return this.envService.API_URL;
+  }
+  getAuthToken = (): string => {
+    return this.jwtService.getAuthorizationToken();
+  }
 
   getDataSource = (method: ENInterfaces): Promise<any> => {
     try {

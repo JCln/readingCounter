@@ -67,8 +67,7 @@ export class WoumComponent implements OnChanges {
   overAllInfo: IOverAllWOUIInfo;
   interationOnOverallInfo: any[] = [];
 
-  imageFiles: IOnOffLoad[] = [];
-  testLoadImage: any[] = [];
+  imageFiles: IOnOffLoad[] = [];  
 
   modifyType: OffloadModify[];
   offloadItems: OffloadModify[];
@@ -77,7 +76,7 @@ export class WoumComponent implements OnChanges {
   activeIndex: number = 0;
   onFullScreenListener: any;
   degree: number = 0;
-  testCarouselImages: string[] = [];
+  originImages: string[] = [];
   tempCarousels: string[] = [];
   @ViewChild('galleria') galleria: Galleria;
 
@@ -96,8 +95,7 @@ export class WoumComponent implements OnChanges {
   classWrapper = async (canRefresh?: boolean) => {
     this.imageFiles = [];
     this.audioFiles = [];
-    this.dataSource = [];
-    this.testLoadImage = [];
+    this.dataSource = [];    
 
     if (!this.id)
       return;
@@ -113,13 +111,7 @@ export class WoumComponent implements OnChanges {
 
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
     this.getDownloadListInfo();
-    this.imageFiles.forEach((item, index) => {
-      this.getExactImg(item.fileRepositoryId, index);
-    })
-    this.testCarouselImages = this.tempCarousels;
-
-    this.bindDocumentListeners();
-
+    this.showAllImgs();   
   }
   ngOnChanges(): void {
     this.classWrapper();
@@ -127,32 +119,16 @@ export class WoumComponent implements OnChanges {
   receiveFromDateJalali = ($event: string) => {
     this.offloadModifyReq.jalaliDay = $event;
   }
-  useCarouselMedia = async (id: string, index: number) => {
+  callApiImgs = async (id: string, index: number) => {
     this.tempCarousels[index] = this.envService.API_URL + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.jwtService.getAuthorizationToken();
-  }
-  useSimpleMediaShow = async (id: string, index: number) => {
-    const res = await this.downloadManagerService.downloadFile(id);
-    this.testLoadImage[index] = res;
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.testLoadImage[index] = reader.result;
-    }, false);
-    if (this.testLoadImage[index]) {
-      reader.readAsDataURL(this.testLoadImage[index]);
-    }
-  }
-  getExactImg = async (id: string, index: number) => {
-    if (this.testLoadImage[index])
-      return;
+  }  
+  showAllImgs = () => {
+    this.imageFiles.forEach((item, i) => {
+      this.callApiImgs(item.fileRepositoryId, i);
+    })
+    this.originImages = this.tempCarousels;
 
-    if (this.profileService.getUseCarouselMedia()) {
-      // use CarouselMedia method;      
-      this.useCarouselMedia(id, index);
-    }
-    else {
-      // use simple method;
-      this.useSimpleMediaShow(id, index);
-    }
+    this.bindDocumentListeners();
   }
   getDownloadListInfo = () => {
     this.interationOnOverallInfo = this.downloadManagerService.getDownloadListInfo();

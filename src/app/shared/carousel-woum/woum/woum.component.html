@@ -77,13 +77,13 @@
                 <div class="__img_counter">{{i+1}}</div>
 
                 <!-- tooltip -->
-                <div *ngIf="!testLoadImage[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
-                <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
+                <div *ngIf="!originImages[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
+                <div *ngIf="originImages[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
                 <!--   -->
-                <div *ngIf="testLoadImage[i]" class="__img_bound">
-                    <img (click)="showBigImage(testLoadImage[i])" src="{{testLoadImage[i]}}" alt="whatever">
+                <div *ngIf="originImages[i]" class="__img_bound">
+                    <img (click)="showBigImage(originImages[i])" src="{{originImages[i]}}" alt="whatever">
                 </div>
-                <div *ngIf="!testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
+                <div *ngIf="!originImages[i]" class="__img_bound">
                     <img src="assets/imgs/soundvid/2.png" alt="whatever">
                 </div>
             </div>
@@ -95,7 +95,7 @@
     </section>
 </main>
 <main class="carousel_gallery" *ngIf="profileService.getUseCarouselMedia()">
-    <p-galleria #galleria [value]="testCarouselImages" [containerStyle]="{'max-width':'640px'}"
+    <p-galleria #galleria [value]="originImages" [containerStyle]="{'max-width':'640px'}"
         [containerClass]="galleriaClass()" [showItemNavigators]="true" [(activeIndex)]="activeIndex" [numVisible]="3"
         [showThumbnails]="showThumbnails" [circular]="true">
 
@@ -113,8 +113,8 @@
             <div class="custom-galleria-footer">
                 <button class="_button pi pi-list" (click)="onThumbnailButtonClick()"></button>
 
-                <span *ngIf="testCarouselImages" class="title-container">
-                    <span>{{activeIndex + 1}}/{{testCarouselImages.length}}</span>
+                <span *ngIf="originImages" class="title-container">
+                    <span>{{activeIndex + 1}}/{{originImages.length}}</span>
                     <article *ngIf="fullscreen" class="_options">
                         <i (click)="rotateRightImg()" class="tooltip fa fa-rotate-right">
                             <div class="tooltip_text">چرخش به راست</div>
@@ -122,7 +122,7 @@
                         <i (click)="rotateLeftImg()" class="tooltip fa fa-rotate-left">
                             <div class="tooltip_text">چرخش به چپ</div>
                         </i>
-                        <i (click)="downloadImg(testCarouselImages[activeIndex])" class="tooltip pi pi-download">
+                        <i (click)="downloadImg(originImages[activeIndex])" class="tooltip pi pi-download">
                             <div class="tooltip_text">ذخیره تصویر</div>
                         </i>
                     </article>
@@ -136,7 +136,7 @@
 
 
     </p-galleria>
-    <section *ngIf="!testCarouselImages || testCarouselImages.length === 0">
+    <section *ngIf="!originImages || originImages.length === 0">
         <tr class="empty_data">
             تصویری پیدا نشد
         </tr>

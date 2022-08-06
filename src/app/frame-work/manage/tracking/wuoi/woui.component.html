@@ -2,8 +2,8 @@
     <div class="left_side">
     </div>
     <div class="left_side">
-        <div (click)="toPrePage()" class="tooltip _circle_border p_icons pi pi-arrow-left">
-            <div class="tooltip_text_right">بازگشت به صفحه قبلی</div>
+        <div (click)="profileService.routeToForbiden()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+            <div class="tooltip_text_right">بازگشت به غیرمجاز</div>
         </div>
     </div>
 </article>
@@ -67,13 +67,13 @@
                 <div class="__img_counter">{{i+1}}</div>
 
                 <!-- tooltip -->
-                <div *ngIf="!testLoadImage[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
-                <div *ngIf="testLoadImage[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
+                <div *ngIf="!testCarouselImages[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
+                <div *ngIf="testCarouselImages[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
                 <!--   -->
-                <div *ngIf="testLoadImage[i]" class="__img_bound">
-                    <img (click)="showBigImage(testLoadImage[i])" src="{{testLoadImage[i]}}" alt="تصویر">
+                <div *ngIf="testCarouselImages[i]" class="__img_bound">
+                    <img (click)="showBigImage(testCarouselImages[i])" src="{{testCarouselImages[i]}}" alt="تصویر">
                 </div>
-                <div *ngIf="!testLoadImage[i]" (click)="getExactImg(item.fileRepositoryId, i)" class="__img_bound">
+                <div *ngIf="!testCarouselImages[i]" class="__img_bound">
                     <img src="assets/imgs/soundvid/2.png" alt="whatever">
                 </div>
             </div>
