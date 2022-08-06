@@ -55,8 +55,6 @@
 
     <app-gallery-carousel *ngIf="showCarousel" [dataSource]="carouselImage" (cancelClicked)="carouselCancelClicked()"
         (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
-        <app-gallery-all-details></app-gallery-all-details>
-
     </app-gallery-carousel>
 
     <div class="not_found_header" *ngIf="!allImagesDataSource.imageCount">

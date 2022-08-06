@@ -68,7 +68,6 @@ export class RandomImagesComponent extends FactoryONE {
   routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number, imgOrigin: any) => {
     this.carouselImage = dataSource;
     this.carouselImage.imageUrl = imgOrigin;
-    scrollTo(0, 0);
     this.rowIndex = rowIndex;
     this.toolsService.showCarousel = true;
   }
