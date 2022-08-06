@@ -43,6 +43,10 @@ export class AllImagesComponent extends FactoryONE {
     JUST add to closeTabService.saveDataForRRGalleryReq from other
     components to process images
      */
+    if (canRefresh) {
+      this.closeTabService.saveDataForRRGallery = null;
+      this.closeTabService.saveDataForRRGalleryRSFirst = null;
+    }
     if (this.closeTabService.saveDataForRRGallery) {
       this.imgsOriginUrl = this.closeTabService.saveDataForRRGallery;
       this.allImagesDataSource = this.closeTabService.saveDataForRRGalleryRSFirst;
@@ -53,6 +57,9 @@ export class AllImagesComponent extends FactoryONE {
     }
 
   }
+  getExactImg = async (id: string, index: number) => {
+    this.imgsOriginUrl[index] = this.readingReportManagerService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.readingReportManagerService.getAuthToken();
+  }
   showAllImgs = () => {
     this.allImagesDataSource.imageUrlAndInfos.forEach((item, i) => {
       this.getExactImg(item.fileRepositorayId, i);
@@ -60,14 +67,9 @@ export class AllImagesComponent extends FactoryONE {
     // to save data
     this.closeTabService.saveDataForRRGallery = this.imgsOriginUrl;
   }
-  getExactImg = async (id: string, index: number) => {
-    this.imgsOriginUrl[index] = this.readingReportManagerService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.readingReportManagerService.getAuthToken();
-  }
-
   routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number, imgOrig: any) => {
     this.carouselImage = dataSource;
     this.carouselImage.imageUrl = imgOrig;
-    scrollTo(0, 0);
     this.rowIndex = rowIndex;
     this.showCarousel = true;
   }
