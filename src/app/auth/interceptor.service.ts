@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { EMPTY } from 'rxjs/internal/observable/empty';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 
@@ -22,6 +23,13 @@ export class InterceptorService implements HttpInterceptor {
     const authToken = this.jwtService.getAuthorizationToken();
     if (authToken)
       req = this.addToken(req, authToken);
+
+    if (this.authService.getStopReq) {
+      setTimeout(() => {
+        this.authService.setStopReq(false);
+      }, 1000);
+      return EMPTY;
+    }
 
     return next.handle(req)
       .pipe(

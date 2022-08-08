@@ -21,6 +21,7 @@ import { OffloadModify } from './../classes/offload-modify-type';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { EnvService } from './env.service';
+import { PageSignsService } from './page-signs.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -28,7 +29,6 @@ import { UtilsService } from './utils.service';
 })
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-
 
   dbfOutput: IOutputManager = {
     zoneId: 0,
@@ -85,7 +85,8 @@ export class TrackingManagerService {
     private router: Router,
     private envService: EnvService,
     private jwtService: JwtService,
-    private columnManager: ColumnManager
+    private columnManager: ColumnManager,
+    private PageSignsService: PageSignsService
   ) { }
 
   firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
@@ -389,7 +390,8 @@ export class TrackingManagerService {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
   routeToLMPayDay = (row: ITracking) => {
-    this.utilsService.routeToByParams(EN_Routes.wrmlpd, row.trackNumber);
+    this.PageSignsService.perday_pageSign.trackNumber = row.trackNumber;
+    this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
   routeToLMAll = (row: any) => {
     this.allListsService.allLists_pageSign.GUid = row.id;

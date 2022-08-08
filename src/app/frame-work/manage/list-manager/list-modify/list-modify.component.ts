@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -9,7 +8,6 @@ import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
-import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
 import { BriefKardexComponent } from './../brief-kardex/brief-kardex.component';
@@ -33,7 +31,6 @@ export class ListModifyComponent extends AllListsFactory {
 
   constructor(
     public listManagerService: ListManagerService,
-    private router: Router,
     public dialogService: DialogService,
     private closeTabService: CloseTabService,
     public allListsService: AllListsService
@@ -48,7 +45,7 @@ export class ListModifyComponent extends AllListsFactory {
   classWrapper = async (canRefresh?: boolean) => {
 
     if (!this.allListsService.modifyLists_pageSign.GUid) {
-      this.router.navigateByUrl(EN_Routes.wrmtrackoffloaded);
+      this.toPrePage();
     }
     else {
       this.assignToPageSign();
@@ -91,7 +88,7 @@ export class ListModifyComponent extends AllListsFactory {
     }
   }
   toPrePage = () => {
-    this.router.navigate([EN_Routes.wrmtrackoffloaded]);
+    this.listManagerService.routeToOffloaded();
   }
   openMoshtarakinDialog = (dataSource: any) => {
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {

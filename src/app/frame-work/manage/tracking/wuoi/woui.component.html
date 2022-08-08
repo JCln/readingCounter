@@ -71,10 +71,9 @@
                 <div *ngIf="testCarouselImages[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
                 <!--   -->
                 <div *ngIf="testCarouselImages[i]" class="__img_bound">
-                    <img (click)="showBigImage(testCarouselImages[i])" src="{{testCarouselImages[i]}}" alt="تصویر">
-                </div>
-                <div *ngIf="!testCarouselImages[i]" class="__img_bound">
-                    <img src="assets/imgs/soundvid/2.png" alt="whatever">
+                    <img (click)="showBigImage(testCarouselImages[i])"
+                        onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'"
+                        src="{{testCarouselImages[i]}}" alt="تصویر">
                 </div>
             </div>
             <div class="not_found_header" *ngIf="!imageFiles.length">

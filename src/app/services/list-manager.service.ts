@@ -5,6 +5,8 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { IOffLoadPerDay } from 'interfaces/itrackings';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchMoshReqDialog } from 'interfaces/search';
 import { SortEvent } from 'primeng/api/sortevent';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -40,6 +42,16 @@ export class ListManagerService {
     private dialog: MatDialog,
     private columnManager: ColumnManager
   ) { }
+
+  routeToLMPDXY = (dataSource: IOffLoadPerDay, day: string) => {
+    this.utilsService.routeToByParams(EN_Routes.wr, { trackNumber: dataSource.trackNumber, day: day, distance: dataSource.overalDistance });
+  }
+  routeToReading = () => {
+    this.utilsService.routeToByUrl(EN_Routes.wrmtrackreading);
+  }
+  routeToOffloaded = () => {
+    this.utilsService.routeToByUrl(EN_Routes.wrmtrackoffloaded);
+  }
 
   getLMPerDay = (): IObjectIteratation[] => {
     return this.columnManager.columnSelectedMenus('lMPerDay');

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-spinner',
@@ -10,7 +11,7 @@ export class SpinnerComponent implements OnInit {
   notification: boolean = false;
   networkReq: boolean = false;
 
-  constructor(private spinnerWrapper: SpinnerWrapperService) { }
+  constructor(private spinnerWrapper: SpinnerWrapperService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.spinnerWrapper.loadingStatus$.subscribe((res: any) => {
@@ -24,5 +25,11 @@ export class SpinnerComponent implements OnInit {
       }
     }
     )
+  }
+  cancelMe = () => {
+    console.log('To cancel me');
+    this.authService.setStopReq(true);
+    this.notification = false;
+    this.networkReq = false;
   }
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { appItems, IRoleItems } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
-import { UserEditManagerService } from 'services/user-edit-manager.service';
+import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -16,14 +17,13 @@ export class UserEditOnRoleComponent extends FactoryONE {
   userRoles: IRoleItems[] = [];
 
   constructor(
-    private userEditManagerService: UserEditManagerService,
-     
+    private usersAllService: UsersAllService,
     private closeTabService: CloseTabService
   ) {
     super();
   }
   connectToServer = () => {
-    this.userEditManagerService.userEditOnRole(this.dataSource);
+    this.usersAllService.userEditOnRole(this.dataSource);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -33,7 +33,7 @@ export class UserEditOnRoleComponent extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForEditOnRole;
     }
     else {
-      this.dataSource = await this.userEditManagerService.getUserAdd();
+      this.dataSource = await this.usersAllService.connectToServer(ENInterfaces.userADD);
       this.closeTabService.saveDataForEditOnRole = this.dataSource;
     }
 

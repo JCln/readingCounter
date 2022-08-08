@@ -60,10 +60,6 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     })
   }
   findDynamicRouteStatus = (): ITabWrapperDetectDynamicRoute => {
-    if (this.getCurrentDynamicRoute(EN_Routes['wrmlpd/']))
-      return {
-        _title: 'اطلاعات روزانه', _dynamicRoute: EN_Routes['wrmlpd/']
-      }
     if (this.getCurrentDynamicRoute(EN_Routes.wrmlallfalse))
       return {
         _title: 'لیست', _dynamicRoute: EN_Routes.wrmlallfalse
@@ -71,10 +67,6 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     if (this.getCurrentDynamicRoute(EN_Routes.wrmlalltrue))
       return {
         _title: 'لیست', _dynamicRoute: EN_Routes.wrmlalltrue
-      }
-    if (this.getCurrentDynamicRoute(EN_Routes['wrmuedit/']))
-      return {
-        _title: 'ویرایش', _dynamicRoute: EN_Routes['wrmuedit/']
       }
     if (this.getCurrentDynamicRoute(EN_Routes['wrmsfwu/']))
       return {

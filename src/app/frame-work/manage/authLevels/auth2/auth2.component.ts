@@ -54,7 +54,7 @@ export class Auth2Component extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForAppLevel2;
     }
     else {
-      this.dataSource = await this.authsManagerService.getAuth2DataSource();
+      this.dataSource = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel2GET);
       this.closeTabService.saveDataForAppLevel2 = this.dataSource;
     }
     this.authLevel1Dictionary = await this.authsManagerService.getAuthLevel1Dictionary();

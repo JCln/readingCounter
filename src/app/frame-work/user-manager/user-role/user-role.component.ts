@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IRoleManager } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
@@ -15,7 +16,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class UserRoleComponent extends FactoryONE {
   dataSource: IRoleManager[] = [];
 
- 
+
   regionDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
@@ -25,7 +26,7 @@ export class UserRoleComponent extends FactoryONE {
   newRowLimit: number = 1;
 
   constructor(
-     
+
     private closeTabService: CloseTabService,
     private userService: UsersAllService
   ) {
@@ -52,7 +53,7 @@ export class UserRoleComponent extends FactoryONE {
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: object) => {
-    const a = await this.userService.firstConfirmDialog();
+    const a = await this.userService.firstConfirmDialog(EN_messages.confirm_remove);
 
     if (a) {
       await this.userService.deleteSingleRow(ENInterfaces.RoleREMOVE, rowData['dataSource'].id);

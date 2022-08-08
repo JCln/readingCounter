@@ -18,6 +18,7 @@ import { JwtService } from './jwt.service';
   providedIn: 'root'
 })
 export class AuthService {
+  _stopRequest: boolean = false;
 
   constructor(
     private mainService: MainService,
@@ -34,6 +35,21 @@ export class AuthService {
   refreshToken = (): Observable<any> => {
     return this.mainService.POSTBODY(ENInterfaces.AuthsAccountRefresh, { 'refreshToken': this.getRefreshToken() })
   }
+
+  cancelReq = () => {
+    this._stopRequest = true;
+  }
+  resumeReq = () => {
+    this._stopRequest = false;
+  }
+  setStopReq(stopRequest: boolean) {
+    this._stopRequest = stopRequest;
+  }
+
+  get getStopReq(): boolean {
+    return this._stopRequest;
+  }
+
   logging = (userData: ICredentials) => {
     const returnUrl = this.utilsService.getRouteParams('returnUrl');
     this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).subscribe((res: IAuthTokenType) => {

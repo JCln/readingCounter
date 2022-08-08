@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IRoleItems } from 'interfaces/iuser-manager';
-import { UserEditManagerService } from 'services/user-edit-manager.service';
+import { UsersAllService } from 'services/users-all.service';
 
 @Component({
   selector: 'app-user-role',
@@ -12,11 +12,11 @@ export class UserRoleComponent {
   @Input() roleItems: IRoleItems[] = [];
 
   constructor(
-    private userEditManagerService: UserEditManagerService
+    private usersAllService: UsersAllService,
   ) { }
   changeRadio = ($event: any) => {
     this.selectedRole = $event.value;
-    this.userEditManagerService.userEditOnRoleInsertRole(this.selectedRole);
+    this.usersAllService.userEditOnRoleInsertRole(this.selectedRole);
   }
 
 }

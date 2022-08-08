@@ -58,11 +58,9 @@
                             <div class="tooltip_text_right">ذخیره تصویر</div>
                         </i>
                     </section>
-                    <div *ngIf="!allImages" class="__img_bound">
-                        <img src="assets/imgs/soundvid/2.png" alt="whatever">
-                    </div>
                     <div *ngIf="allImages" class="__img_origin_bound">
-                        <img class="main-img" src="{{allImages}}" alt="whatever">
+                        <img class="main-img" onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'"
+                            src="{{allImages}}" alt="تصویر">
                     </div>
                 </div>
             </div>

@@ -46,7 +46,7 @@ export class Auth1Component extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForAppLevel1;
     }
     else {
-      this.dataSource = await this.authsManagerService.getAuth1DataSource();
+      this.dataSource = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel1GET);
       this.closeTabService.saveDataForAppLevel1 = this.dataSource;
     }
   }

@@ -55,7 +55,7 @@ export class Auth4Component extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForAppLevel4;
     }
     else {
-      this.dataSource = await this.authsManagerService.getAuth4DataSource();
+      this.dataSource = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel4GET);
       this.closeTabService.saveDataForAppLevel4 = this.dataSource;
     }
     this.authLevel3Dictionary = await this.authsManagerService.getAuthLevel3Dictionary();

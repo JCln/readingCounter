@@ -120,6 +120,12 @@ export class HelpWrapperService {
         messageTwo: 'اطلاعاتی که توسط مامورین قرائت ثبت شده قابل پیگیری می باشد.',
         messageThree: 'همچنین درصورتی که عکسی ارسال شده باشد با کلیک برروی آیکن مربوطه قابل مشاهده است.',
       }
+    if (currentRoute === EN_Routes.wrmlpd)
+      return {
+        title: 'مامور/ها',
+        messageOne: 'جزئیات بیشتر یک لیست درحال قرائت توسط مامور از جمله اطلاعات قرائت و اطلاعات مکانی قابل مشاهده است.',
+        messageTwo: 'درصورت نیاز به مشاهده موقعیت مکانی مامور و اشتراک های ثبت شده برروی نقشه نیز برروی مشاهده برروی نقشه کلیک نمایید.',
+      }
     else if (currentRoute === EN_Routes.wrmsfwu || currentRoute.includes(EN_Routes['wrmsfwu/']))
       return {
         title: 'پیگیری درخواست ها',
@@ -181,12 +187,6 @@ export class HelpWrapperService {
         title: 'پیگیری درحال قرائت',
         messageOne: 'اشتراک های درحال قرائت با نقطه مشخص شده اند. با کلیک بروی هرکدام اطلاعات اشتراک مشخص میشود.',
         messageTwo: ' درصورت نیاز به مشاهده مسیر طی شده(اشتراک های ثبت شده) برروی زمان نمایش کلیک نمایید. زمان مشاهده براساس میلی ثانیه "ms" است.',
-      }
-    if (currentRoute.includes(EN_Routes['wrmlpd/']))
-      return {
-        title: 'مامور/ها',
-        messageOne: 'جزئیات بیشتر یک لیست درحال قرائت توسط مامور از جمله اطلاعات قرائت و اطلاعات مکانی قابل مشاهده است.',
-        messageTwo: 'درصورت نیاز به مشاهده موقعیت مکانی مامور و اشتراک های ثبت شده برروی نقشه نیز برروی مشاهده برروی نقشه کلیک نمایید.',
       }
     else if (currentRoute.includes(EN_Routes.wrmrformula))
       return {

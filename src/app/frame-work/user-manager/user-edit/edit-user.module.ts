@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
-import { SharedModule } from '../../../shared/shared.module';
 import { SelectActionComponent } from './select-action/select-action.component';
 import { SelectZoneComponent } from './select-zone/select-zone.component';
 import { UserEditRoutingModule } from './user-edit-routing.module';

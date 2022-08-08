@@ -25,51 +25,13 @@ export class AuthsManagerService {
   ) { }
 
   /* API CALSS */
-  getAuth1DataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.AuthLevel1GET).subscribe(res => {
-          resolve(res);
-        })
+  getAPIDataSource = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe(res => {
+        resolve(res);
       })
-    } catch (error) {
-      console.error(error);
-    }
+    })
   }
-  getAuth4DataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.AuthLevel4GET).subscribe(res => {
-          resolve(res);
-        })
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getAuth3DataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.AuthLevel3GET).subscribe(res => {
-          resolve(res);
-        })
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  getAuth2DataSource = (): any => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.AuthLevel2GET).subscribe(res => {
-          resolve(res);
-        })
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   getAuthLevel1Dictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getAuthLev1Dictionary();
   }

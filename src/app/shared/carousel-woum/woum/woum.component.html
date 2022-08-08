@@ -81,10 +81,8 @@
                 <div *ngIf="originImages[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
                 <!--   -->
                 <div *ngIf="originImages[i]" class="__img_bound">
-                    <img (click)="showBigImage(originImages[i])" src="{{originImages[i]}}" alt="whatever">
-                </div>
-                <div *ngIf="!originImages[i]" class="__img_bound">
-                    <img src="assets/imgs/soundvid/2.png" alt="whatever">
+                    <img (click)="showBigImage(originImages[i])" src="{{originImages[i]}}"
+                        onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر">
                 </div>
             </div>
             <div class="not_found_header" *ngIf="!imageFiles.length">

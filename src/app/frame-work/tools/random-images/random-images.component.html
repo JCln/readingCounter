@@ -55,17 +55,14 @@
         <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
 
             <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
-                <img src="{{imgsOriginUrl[ri]}}" alt="whatever" loading="lazy" (click)="routeToOffload(item , ri, imgsOriginUrl[ri])">
+                <img src="{{imgsOriginUrl[ri]}}" onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'"
+                    alt="تصویر" loading="lazy" (click)="routeToOffload(item , ri, imgsOriginUrl[ri])">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
                     <p>{{item.eshterak}}</p>
                     <p>{{item.firstName}}</p>
                     <p>{{item.sureName}}</p>
                     <p>{{item.imageDescription}}</p>
                 </div>
-            </div>
-
-            <div *ngIf="!imgsOriginUrl[ri]" class="__img_bound">
-                <img src="assets/imgs/soundvid/2.png" alt="whatever">
             </div>
         </div>
     </div>
