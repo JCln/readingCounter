@@ -11,9 +11,7 @@ import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
-import {
-    ListSearchMoshWoumComponent,
-} from '../frame-work/manage/list-manager/list-search-mosh-dg/list-search-mosh-woum/list-search-mosh-woum.component';
+import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/list-search-mosh-woum.component';
 import { MathS } from './math-s';
 
 @Component({

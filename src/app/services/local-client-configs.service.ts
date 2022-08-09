@@ -13,7 +13,18 @@ export class LocalClientConfigsService {
   saveToLocalStorage = (name: ENLocalStorageNames, hasCount: boolean) => {
     this.browserStorageService.set(name, hasCount);
   }
-
+  saveToLocalStorageType = (name: ENLocalStorageNames, obj: any) => {
+    this.browserStorageService.set(name, obj);
+  }
+  getFromLocalStorageType = (name: ENLocalStorageNames, defaultVal: any): any => {
+    const a = this.browserStorageService.get(name);
+    if (a === null) {
+      this.saveToLocalStorageType(name, defaultVal)
+      // return default value
+      return defaultVal;
+    }
+    return a;
+  }
   getFromLocalStorage = (name: ENLocalStorageNames, defaultVal: boolean): boolean => {
     const a = this.browserStorageService.get(name);
     if (a === null) {

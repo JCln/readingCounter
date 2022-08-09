@@ -6,10 +6,10 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 import { ListManagerService } from 'services/list-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { Search } from 'src/app/classes/search';
+import { ListSearchMoshWoumComponent } from 'src/app/shared/list-search-mosh-woum/list-search-mosh-woum.component';
 
 import { MapDgComponent } from '../all/map-dg/map-dg.component';
 import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
-import { ListSearchMoshWoumComponent } from './list-search-mosh-woum/list-search-mosh-woum.component';
 
 @Component({
   selector: 'app-list-search-mosh-dg',

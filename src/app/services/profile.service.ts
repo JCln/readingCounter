@@ -15,6 +15,11 @@ import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confir
 import { EnvService } from './env.service';
 import { LocalClientConfigsService } from './local-client-configs.service';
 
+export interface imageOption {
+  width: string,
+  height: string,
+  objectFit: string,
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -23,8 +28,17 @@ export class ProfileService {
     groupImgs: false,
     searchBasedOnDate: false,
     hasCanclableSpinner: false,
+    imgOptions: {
+      width: '100%',
+      height: '100%',
+      objectFit: ''
+    },
   }
-
+  imgOptions = {
+    width: '',
+    height: '',
+    objectFit: ''
+  }
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
@@ -40,6 +54,17 @@ export class ProfileService {
   }
   getUseCarouselMedia = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, false);
+  }
+  getImg = (): any => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.imageOption,
+      {
+        width: '40rem',
+        height: '40rem',
+        objectFit: 'contain'
+      });
+  }
+  setImg = (imageOption: imageOption) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.imageOption, imageOption);
   }
   setUseCarouselMedia = (useCarousel: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, useCarousel);

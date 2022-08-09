@@ -127,6 +127,7 @@ export enum EN_messages {
     basedOnDateShowDisabled = 'جستجو براساس نوع خواهد بود',
     spinnerHasCancelable = 'Spinner غیرفعال است',
     spinnerHasActive = 'Spinner فعال است',
+    imageOptionChanged = 'تنظیم تصاویر انجام شد',
     done = 'انجام شد',
     doneBroadcast = 'پیام مخابره شد',
 

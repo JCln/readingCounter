@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
+import { ProfileService } from 'services/profile.service';
 import { ToolsService } from 'services/tools.service';
 import { Converter } from 'src/app/classes/converter';
 import { ImageAttributionFile } from 'src/app/interfaces/tools';
@@ -32,7 +33,8 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
 
 
   constructor(
-    public toolsService: ToolsService
+    public toolsService: ToolsService,
+    public profileService: ProfileService
   ) { }
 
   getImageAttributionFile = async () => {
@@ -68,4 +70,13 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
     this.degree -= 90;
     a.style.transform = `rotate(${this.degree + 'deg'}`;
   }
+  addStylesToImg = () => {
+    const a = this.profileService.getImg();
+    const img = document.querySelector('.main-img') as HTMLElement;
+
+    img.style.width = a.width;
+    img.style.height = a.height;
+    img.style.objectFit = a.objectFit;
+  }
+
 }

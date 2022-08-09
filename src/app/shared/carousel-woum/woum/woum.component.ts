@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Galleria } from 'primeng/galleria';
 import { DownloadManagerService } from 'services/download-manager.service';
@@ -67,7 +67,7 @@ export class WoumComponent implements OnChanges {
   overAllInfo: IOverAllWOUIInfo;
   interationOnOverallInfo: any[] = [];
 
-  imageFiles: IOnOffLoad[] = [];  
+  imageFiles: IOnOffLoad[] = [];
 
   modifyType: OffloadModify[];
   offloadItems: OffloadModify[];
@@ -95,7 +95,7 @@ export class WoumComponent implements OnChanges {
   classWrapper = async (canRefresh?: boolean) => {
     this.imageFiles = [];
     this.audioFiles = [];
-    this.dataSource = [];    
+    this.dataSource = [];
 
     if (!this.id)
       return;
@@ -111,7 +111,7 @@ export class WoumComponent implements OnChanges {
 
     this.overAllInfo = this.downloadManagerService.getOverAllInfo();
     this.getDownloadListInfo();
-    this.showAllImgs();   
+    this.showAllImgs();
   }
   ngOnChanges(): void {
     this.classWrapper();
@@ -121,7 +121,7 @@ export class WoumComponent implements OnChanges {
   }
   callApiImgs = async (id: string, index: number) => {
     this.tempCarousels[index] = this.envService.API_URL + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.jwtService.getAuthorizationToken();
-  }  
+  }
   showAllImgs = () => {
     this.imageFiles.forEach((item, i) => {
       this.callApiImgs(item.fileRepositoryId, i);
@@ -129,6 +129,13 @@ export class WoumComponent implements OnChanges {
     this.originImages = this.tempCarousels;
 
     this.bindDocumentListeners();
+    this.canShowBigScreen();    
+  }
+  canShowBigScreen = () => {
+    // if image number is one then show on fullScreen
+    if (this.originImages.length === ENRandomNumbers.one) {
+      this.showBigImage(this.originImages[0]);
+    }
   }
   getDownloadListInfo = () => {
     this.interationOnOverallInfo = this.downloadManagerService.getDownloadListInfo();
@@ -267,5 +274,5 @@ export class WoumComponent implements OnChanges {
     const a = document.querySelector('.main_img') as HTMLElement;
     this.degree -= 90;
     a.style.transform = `rotate(${this.degree + 'deg'}`;
-  }
+  }  
 }

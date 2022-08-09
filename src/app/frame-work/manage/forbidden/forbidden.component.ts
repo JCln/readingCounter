@@ -43,8 +43,6 @@ export class ForbiddenComponent extends FactoryONE {
       this.dataSource = this.closeTabService.saveDataForFNB;
       this.makeConfigs();
     }
-    // this.userCounterReaders = await this.forbiddenService.getUserCounterReaders();
-    // Converter.convertIdToTitle(this.dataSource, this.userCounterReaders, 'userId');
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
     this._years = this.forbiddenService.getYears();
   }
@@ -61,7 +59,7 @@ export class ForbiddenComponent extends FactoryONE {
   }
   ngOnInit(): void { return; }
   refreshTable = () => {
-    this.connectToServer();
+    this.verification();
   }
 
 }

@@ -285,10 +285,12 @@ export enum ENLocalStorageNames {
     mapAnimationStartFrom = 'mapAnimationStartFrom',
     shouldUseCarouselGallery = 'shouldUseCarouselGallery',
     shouldUseBaseOnDate = 'shouldUseBaseOnDate',
-    hasCanclableSpinner = 'hasCanclableSpinner'
+    hasCanclableSpinner = 'hasCanclableSpinner',
+    imageOption = 'imageOption',
 }
 export enum ENRandomNumbers {
     zero = 0,
+    one = 1,
     three = 3,
     four = 4,
     five = 5,

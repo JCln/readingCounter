@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-gallery-all-details',
@@ -18,8 +19,10 @@ export class GalleryAllDetailsComponent {
   @Input() allImages: any;
   degree: number = 0;
 
-  constructor() { }
-  
+  constructor(
+    public profileService: ProfileService
+  ) { }
+
   downloadImg = (src: string) => {
     const link = document.createElement('a');
     link.href = src;
@@ -35,6 +38,14 @@ export class GalleryAllDetailsComponent {
     const a = document.querySelector('.main-img') as HTMLElement;
     this.degree -= 90;
     a.style.transform = `rotate(${this.degree + 'deg'}`;
+  }
+  addStylesToImg = () => {
+    const a = this.profileService.getImg();
+    const img = document.querySelector('.main-img') as HTMLElement;
+
+    img.style.width = a.width;
+    img.style.height = a.height;
+    img.style.objectFit = a.objectFit;
   }
 
 }

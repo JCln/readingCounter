@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ProfileService } from 'services/profile.service';
 
 @Component({
   selector: 'app-image-viewer',
@@ -12,11 +13,13 @@ export class ImageViewerComponent implements OnInit {
 
   constructor(
     public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    public profileService: ProfileService
   ) { }
 
   ngOnInit(): void {
     this.imageURL = this.config.data;
+    this.addStylesToImg();
   }
 
   downloadImg = (src: string) => {
@@ -34,6 +37,14 @@ export class ImageViewerComponent implements OnInit {
     const a = document.querySelector('.main-img') as HTMLElement;
     this.degree -= 90;
     a.style.transform = `rotate(${this.degree + 'deg'}`;
+  }
+  addStylesToImg = () => {
+    const a = this.profileService.getImg();
+    const img = document.querySelector('.main-img') as HTMLElement;
+    
+    img.style.width = a.width;
+    img.style.height = a.height;
+    img.style.objectFit = a.objectFit;
   }
 
 }

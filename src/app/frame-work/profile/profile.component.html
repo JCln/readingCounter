@@ -67,4 +67,15 @@
             </p-selectButton>
         </div>
     </section>
+
+    <section>
+        <h1 class="title">اندازه تصویر</h1>
+        <div class="content">
+            <p-selectButton [options]="stateOptionsImageOption" [(ngModel)]="profileService.showStateVals.imgOptions"
+                optionLabel="label" optionValue="value"
+                (onChange)="setValuesOfImg(profileService.showStateVals.imgOptions)">
+            </p-selectButton>
+        </div>
+    </section>
+
 </div>
