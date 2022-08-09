@@ -31,10 +31,32 @@
 
 
 <main class="control_wrapper" *ngIf="!profileService.getUseCarouselMedia()">
+
+    <section class="content">
+        <h1 class="title">تصاویر ارسالی</h1>
+        <hr>
+        <div class="_main_img">
+            <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
+                <div class="__img_counter">{{i+1}}</div>
+
+                <!-- tooltip -->
+                <div *ngIf="!originImages[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
+                <div *ngIf="originImages[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
+                <!--   -->
+                <div *ngIf="originImages[i]" class="__img_bound">
+                    <img (click)="showBigImage(originImages[i])" src="{{originImages[i]}}"
+                        onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر">
+                </div>
+            </div>
+            <div class="not_found_header" *ngIf="!imageFiles.length">
+                <h2>فاقد تصویر</h2>
+            </div>
+        </div>
+    </section>
+
     <section class="content">
         <h1 class="title">صدای ضبط شده</h1>
         <hr>
-
         <div class="_main_audio">
             <div *ngFor="let item of audioFiles; index as i">
                 <button [hidden]="showAudioControllers" (click)="getExactAudio(item.fileRepositoryId)">
@@ -65,32 +87,8 @@
                 <h2>فاقد صوت</h2>
             </div>
         </div>
-
     </section>
 
-    <section class="content">
-        <h1 class="title">تصاویر ارسالی</h1>
-        <hr>
-
-        <div class="_main_img">
-            <div *ngFor="let item of imageFiles; index as i" class="tooltip img_wrapper">
-                <div class="__img_counter">{{i+1}}</div>
-
-                <!-- tooltip -->
-                <div *ngIf="!originImages[i]" class="tooltip_text">بارگیری تصویر {{i+1}}</div>
-                <div *ngIf="originImages[i]" class="tooltip_text">بزرگنمایی {{i+1}}</div>
-                <!--   -->
-                <div *ngIf="originImages[i]" class="__img_bound">
-                    <img (click)="showBigImage(originImages[i])" src="{{originImages[i]}}"
-                        onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر">
-                </div>
-            </div>
-            <div class="not_found_header" *ngIf="!imageFiles.length">
-                <h2>فاقد تصویر</h2>
-            </div>
-        </div>
-
-    </section>
 </main>
 <main class="carousel_gallery" *ngIf="profileService.getUseCarouselMedia()">
     <p-galleria #galleria [value]="originImages" [containerStyle]="{'max-width':'640px'}"

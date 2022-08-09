@@ -1,3 +1,14 @@
+export interface IENV {
+    headerProvinceTitle: string,
+    API_URL: string,
+    mapUrls: { title: string, url: string }[],
+    hasNextBazdid: boolean,
+    mapCenter: [number, number],
+    browserVersions: IBrowserVersions,
+    years: { title: string, value: number }[],
+    getDeleteDictionary: { id: number, title: string }[],
+    hasCanclableSpinner: boolean,
+}
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
     ESF = 'https://37.191.92.157/kontoriNew',
@@ -58,16 +69,6 @@ export interface IBrowserVersions {
         opera: IENV_BROWSER_SETUP,
         safari: IENV_BROWSER_SETUP,
     }
-}
-export interface IENV {
-    headerProvinceTitle: string,
-    API_URL: string,
-    mapUrls: { title: string, url: string }[],
-    hasNextBazdid: boolean,
-    mapCenter: [number, number],
-    browserVersions: IBrowserVersions,
-    years: { title: string, value: number }[],
-    getDeleteDictionary: { id: number, title: string }[],
 }
 export class ENMapCenter {
     static readonly DEFAULT = new ENMapCenter([32.669, 51.664]);
@@ -186,6 +187,18 @@ export class ENHasNextBazdid {
     static readonly TEH_SE = new ENHasNextBazdid(true);
     static readonly TEH_SE_LOCAL = new ENHasNextBazdid(true);
     static readonly KERMANSHAH = new ENHasNextBazdid(false);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class ENHasCanclableSpinner {
+    static readonly DEFAULT = new ENHasCanclableSpinner(true);
+    static readonly ESF = new ENHasCanclableSpinner(false);
+    static readonly TEH = new ENHasCanclableSpinner(false);
+    static readonly TEH_ZONE4 = new ENHasCanclableSpinner(false);
+    static readonly TEH_SE = new ENHasCanclableSpinner(false);
+    static readonly TEH_SE_LOCAL = new ENHasCanclableSpinner(false);
+    static readonly KERMANSHAH = new ENHasCanclableSpinner(false);
 
     private constructor(public readonly value: boolean) {
     }

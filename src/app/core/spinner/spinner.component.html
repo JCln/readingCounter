@@ -1,12 +1,19 @@
 <section class="spinner d_flex_center" *ngIf="notification">
-    <i class="loader"></i>    
-    <button (click)="cancelMe()">CANCEL ME</button>
+    <i class="loader"></i>
+    <button class="_cancel" *ngIf="_hasSpinner" (click)="cancelMe()">
+        لغو درخواست
+        <i class="pi pi-times-circle"></i>
+    </button>
     <h2>
         <i class="fas fa-circle-notch fa-spin"></i>
         لطفا منتظر بمانید
     </h2>
 </section>
+
 <section class="pending_spinner d_flex_center" *ngIf="networkReq">
-    <button (click)="cancelMe()">CANCEL ME</button>
+    <button class="_cancel" *ngIf="_hasSpinner" (click)="cancelMe()">
+        لغو درخواست
+        <i class="pi pi-times-circle"></i>
+    </button>
     <p-progressSpinner strokeWidth="5" fill="var(--surface-ground)" animationDuration="350ms"></p-progressSpinner>
 </section>

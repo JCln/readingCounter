@@ -284,7 +284,8 @@ export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
     mapAnimationStartFrom = 'mapAnimationStartFrom',
     shouldUseCarouselGallery = 'shouldUseCarouselGallery',
-    shouldUseBaseOnDate = 'shouldUseBaseOnDate'
+    shouldUseBaseOnDate = 'shouldUseBaseOnDate',
+    hasCanclableSpinner = 'hasCanclableSpinner'
 }
 export enum ENRandomNumbers {
     zero = 0,

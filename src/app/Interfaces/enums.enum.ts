@@ -125,6 +125,8 @@ export enum EN_messages {
     carouselShowDisabled = 'نمایش تصاویر بطور دستی خواهد بود',
     basedOnDateShowEnabled = 'جستجو براساس تاریخ خواهد بود',
     basedOnDateShowDisabled = 'جستجو براساس نوع خواهد بود',
+    spinnerHasCancelable = 'Spinner غیرفعال است',
+    spinnerHasActive = 'Spinner فعال است',
     done = 'انجام شد',
     doneBroadcast = 'پیام مخابره شد',
 

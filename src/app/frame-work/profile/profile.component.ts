@@ -17,6 +17,7 @@ export class ProfileComponent extends FactoryONE {
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
   stateOptions: any[] = [{ label: 'خیر', value: false }, { label: 'بله', value: true }];
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
+  stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];
 
@@ -41,6 +42,7 @@ export class ProfileComponent extends FactoryONE {
 
     this.getSelectedColumns();
     this.getBasedOnDate();
+    this.getHasCanclableSpinner();
     this.getValueOfShowCarouselMedia();
   }
   changePassword = () => {
@@ -59,9 +61,16 @@ export class ProfileComponent extends FactoryONE {
   getBasedOnDate = () => {
     this.profileService.showStateVals.searchBasedOnDate = this.profileService.getLocalValue();
   }
+  getHasCanclableSpinner = () => {
+    this.profileService.showStateVals.hasCanclableSpinner = this.profileService.getHasCanclableSpinner();
+  }
   setBasedOnDate = (val: any) => {
     this.profileService.setLocalValue(val);
     val ? this.profileService.showMessage(EN_messages.basedOnDateShowDisabled) : this.profileService.showMessage(EN_messages.basedOnDateShowEnabled);
+  }
+  setCanclableSpinner = (val: any) => {
+    this.profileService.setCanclableSpinner(val);
+    val ? this.profileService.showMessage(EN_messages.spinnerHasActive) : this.profileService.showMessage(EN_messages.spinnerHasCancelable);
   }
 
 }

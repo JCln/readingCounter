@@ -12,6 +12,7 @@ import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { EnvService } from './env.service';
 import { LocalClientConfigsService } from './local-client-configs.service';
 
 @Injectable({
@@ -20,7 +21,8 @@ import { LocalClientConfigsService } from './local-client-configs.service';
 export class ProfileService {
   showStateVals = {
     groupImgs: false,
-    searchBasedOnDate: false
+    searchBasedOnDate: false,
+    hasCanclableSpinner: false,
   }
 
   constructor(
@@ -29,7 +31,8 @@ export class ProfileService {
     private dialog: MatDialog,
     private columnManager: ColumnManager,
     private localClientConfigsService: LocalClientConfigsService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private envService: EnvService
   ) { }
 
   getToken = (): string => {
@@ -44,8 +47,14 @@ export class ProfileService {
   setLocalValue = (useCarousel: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, useCarousel);
   }
+  setCanclableSpinner = (hasCanclableSpinner: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.hasCanclableSpinner, hasCanclableSpinner);
+  }
   getLocalValue = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
+  }
+  getHasCanclableSpinner = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.envService.hasCanclableSpinner);
   }
   columnSelectedProfile = (): IObjectIteratation[] => {
     return this.columnManager.profile;
@@ -108,4 +117,5 @@ export class ProfileService {
       })
     })
   }
+
 }

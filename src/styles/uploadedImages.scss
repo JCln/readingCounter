@@ -1,18 +1,16 @@
 .control_wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 23rem));
+  grid-template-rows: 1fr 11rem;
   direction: rtl;
-  justify-content: center;
-  gap: 1rem;
+  gap: $font_05;
 }
 
 .content {
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
   text-align: center;
-  padding: $font_2 0;
+  padding: $font_xs 0;
   border-radius: $border_15;
-  min-height: 30rem;
 }
 
 ._main_audio {
@@ -44,8 +42,8 @@
 }
 
 .__img_bound {
-  height: 9.5rem;
-  width: 9.5rem;
+  height: 17rem;
+  width: 17rem;
   padding: $font_05;
   margin: auto;
 }
