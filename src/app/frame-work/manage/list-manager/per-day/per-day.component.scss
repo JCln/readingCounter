@@ -70,6 +70,8 @@ input {
 .card__content {
   white-space: nowrap;
   direction: inherit;
+  border: 1px solid var(--secondary_3_spec);
+  border-radius: 7px;
 }
 
 .disable_grid_temp {

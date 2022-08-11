@@ -116,6 +116,10 @@ button._blue_dark {
   grid-column: auto/ span 2;
 }
 
+._triple_size {
+  grid-column: auto/ span 3;
+}
+
 ::ng-deep {
 
   .mat-checkbox-layout .mat-checkbox-label {

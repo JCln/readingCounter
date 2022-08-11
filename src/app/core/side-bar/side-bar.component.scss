@@ -31,7 +31,7 @@ nav {
 .title {
   font-size: $font_xs;
   font-weight: 600;
-  color: var(--primary_7);
+  color: var(--sidebar_4);
 }
 
 /* ***** */
@@ -60,12 +60,12 @@ ul::-webkit-scrollbar {
 }
 
 .ul li {
-  background: var(--secondary_4);
+  background: var(--sidebar_3);
   margin-left: .2rem;
   margin-bottom: 0.2rem;
   padding: $font_05 0.1rem;
   border-radius: $font_2 0 0 $font_2;
-  border: 1px solid;
+  border: 1px solid var(--sidebar_3);
   cursor: pointer;
 }
 
@@ -76,7 +76,7 @@ ul::-webkit-scrollbar {
   .btn {
     font-size: $font_m;
     font-weight: 600;
-    color: var(--primary_7);
+    color: var(--sidebar_4);
 
     .on_show {
       display: flex;
@@ -96,8 +96,8 @@ ul::-webkit-scrollbar {
 
 .sub_item_1,
 .sub_item_2 {
-  background: var(--secondary_1);
-  border: 1px solid var(--primary_5);
+  background: var(--sidebar_2);
+  border: 1px solid var(--sidebar_1);
   padding: $font_05 $font_xs $font_05 0.87rem;
   margin: 0.13rem 0.2rem;
   text-align: right;
@@ -106,7 +106,7 @@ ul::-webkit-scrollbar {
   border-radius: $border_15;
   overflow: visible;
 
-  color: var(--primary_5);
+  color: var(--sidebar_1);
   font-size: 1.1rem;
   font-weight: 600;
   outline: none;
@@ -114,14 +114,14 @@ ul::-webkit-scrollbar {
   &:hover,
   &:focus {
     background: linear-gradient(to left, var(--primary_3), rgba(255, 0, 0, 0));
-    color: var(--white);
+    color: var(--sidebar_5);
   }
 }
 
 .active {
   background: linear-gradient(to left, rgba(255, 0, 0, 0), var(--primary_3));
-  color: var(--primary_7);
-  border: 1px solid var(--secondary_4);
+  color: var(--sidebar_4);
+  border: 1px solid var(--sidebar_3);
 }
 
 .ul_items {
@@ -133,7 +133,7 @@ ul::-webkit-scrollbar {
 .ul::after {
   content: '';
   position: absolute;
-  background: var(--secondary_1);
+  background: var(--sidebar_back2);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
   bottom: 0;
@@ -147,7 +147,7 @@ ul::-webkit-scrollbar {
 .ul::before {
   content: '';
   position: absolute;
-  background: var(--primary_5);
+  background: var(--sidebar_back1);
   clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
   top: 0;
   bottom: 0;
@@ -164,7 +164,7 @@ ul::-webkit-scrollbar {
   position: relative;
   cursor: pointer;
   border-radius: $font_2 0 0 $font_2;
-  background: var(--secondary_4);
+  background: var(--sidebar_3);
   margin-bottom: 0.25rem;
   padding: $font_xxs $font_05;
   border: 1px solid;
@@ -192,7 +192,7 @@ ul::-webkit-scrollbar {
     height: 13rem;
     z-index: 4;
     bottom: 0;
-    box-shadow: -3px 0px 3px 0px var(--primary_5);
+    box-shadow: -3px 0px 3px 0px var(--sidebar_1);
     overflow-y: auto;
     overflow-x: hidden;
     -ms-overflow-style: none;
@@ -201,9 +201,9 @@ ul::-webkit-scrollbar {
     h3 {
       font-size: $font_m;
       font-weight: 600;
-      color: var(--primary_7);
+      color: var(--sidebar_4);
       text-align: center;
-      color: var(--primary_7);
+      color: var(--sidebar_4);
     }
 
     & a {
@@ -226,7 +226,7 @@ ul::-webkit-scrollbar {
 
   .li_2 {
     h3 {
-      color: var(--primary_5);
+      color: var(--sidebar_1);
     }
   }
 
@@ -275,7 +275,7 @@ i.icons {
   margin: 0 0.2rem 0 .3rem;
   font-size: $font_l;
   width: 1.87rem;
-  color: var(--primary_5);
+  color: var(--sidebar_1);
 }
 
 @keyframes toggle_side {
@@ -305,7 +305,7 @@ i.icons {
 .pi-angle-up {
   transform: rotate(0);
   transition: transform ease-in-out 150ms;
-  color: var(--primary_5);
+  color: var(--sidebar_1);
 }
 
 //

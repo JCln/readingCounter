@@ -104,7 +104,7 @@
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
-                                    [(ngModel)]="dataSource[_dictionaryName]" placeholder="انتخاب مورد"
+                                    [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
                                     [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
                                     optionLabel="title"
                                     (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
@@ -120,7 +120,7 @@
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <p-dropdown [options]="secondDictionary" [(ngModel)]="dataSource[col.field]"
-                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}"
+                                        [placeholder]="dataSource[col.field]" [style]="{'width':'100%'}"
                                         [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                         (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)">
                                     </p-dropdown>
@@ -257,8 +257,8 @@
                 </i>
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)" class="_save pi pi-check">
                 </i>
-                <i *ngIf="editing && !_isInRowEditing" pCancelEditableRow (click)="onRowEditCancel(dataSource.id, ri)"
-                    class="_cancel pi pi-times">
+                <i *ngIf="editing && !_isInRowEditing" pCancelEditableRow
+                    (click)="onRowEditCancel(dataSource, ri,_dictionaryName)" class="_cancel pi pi-times">
                 </i>
                 <i *ngIf="editing && _isInRowEditing" pCancelEditableRow
                     (click)="onRowEditCancelRowEditing(dataSource, ri)" class="_cancel pi pi-times">

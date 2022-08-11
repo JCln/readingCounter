@@ -15,7 +15,7 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
 })
 export class PrimeTableEditableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-
+  onRowEditing: any;
 
   @Input() _sortBy: string;
   @Input() _sortOrder: string = '';
@@ -78,12 +78,27 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     this.openedBriefKardexDialog.emit(dataSource);
   }
   onRowEditInit = (dataSource: object) => {
+    this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
+    console.log(this.onRowEditing);
     this.onRowEditedInit.emit(dataSource);
   }
   onRowEditSave = (dataSource: object, ri: number) => {
     this.onRowEditedSave.emit({ dataSource, ri });
   }
-  onRowEditCancel = (dataSource: object, ri: number) => {
+  onRowEditCancel = (dataSource: any, ri: number, dictionary: any) => {
+    console.log(dataSource + ' / ' + dictionary);
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (dataSource.id === this.dataSource[index].id) {
+        console.log(dataSource.id);
+        console.log(dataSource);
+        console.log(this.onRowEditing);
+        console.log(this.onRowEditing[dictionary]);
+        console.log(this.onRowEditing.dictionary);
+        this.dataSource[index][dictionary] = this.onRowEditing[dictionary];
+      }
+    }
+    console.log(1);
+
     this.onRowEditedCancel.emit({ dataSource, ri });
   }
   removeRow = (dataSource: object, ri: number) => {

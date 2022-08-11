@@ -46,7 +46,7 @@ p {
   --thirdy_3: rgb(21, 43, 66);
   --thirdy_4: rgb(168, 178, 189);
   --primary_1: rgb(217, 126, 150);
-  --primary_2: rgb(131 ,88 ,62);
+  --primary_2: rgb(131, 88, 62);
   --primary_3: rgb(99, 83, 115);
   --primary_4: rgb(73, 104, 134);
   --primary_5: rgb(21, 43, 66);
@@ -59,7 +59,11 @@ p {
   --secondary_5: orange;
   --secondary_6: rgb(125, 131, 255);
   --secondary_7: rgb(54, 43, 130);
-  --secondary_8: rgb(177, 167, 190);
+  --secondary_8: #0045cb;
+  --sidebar_1: rgb(4, 78, 225);
+  --sidebar_2: lightblue;
+  --sidebar_3: rgb(50, 50, 133);
+  --sidebar_4: rgb(50, 50, 133);
   --light_1: rgb(255, 181, 192);
   --orange_500: rgb(246, 128, 56);
   --orange_600: rgb(245, 91, 25);
@@ -120,7 +124,7 @@ input[type=number] {
 
   .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
   .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background-color: rgb(255, 64, 129);
+    background-color: var(--pink_500);
   }
 }
 

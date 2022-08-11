@@ -48,10 +48,10 @@ main {
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
   text-align: center;
-  padding: $font_2 0;
+  padding: $font_xs 0;
   justify-content: space-around;
   border-radius: $border_15;
-  min-height: 10rem;
+  min-height: 5rem;
 }
 
 ._desc {
@@ -66,7 +66,7 @@ main {
 .title {
   color: var(--primary_3);
   text-align: center;
-  margin: $font_xs $font_05;
+  margin: $font_05;
   font-size: 1.6rem;
 }
 
