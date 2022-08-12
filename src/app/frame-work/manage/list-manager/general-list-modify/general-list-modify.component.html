@@ -33,7 +33,7 @@
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
         (backedToPrevious)="toPrePage()" (filteredEvent)="filteredTableEvent($event)"
         (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)"
-        (showedWOUIAsCarousel)="doShowCarousel($event)" (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
+        (showedWOUIAsCarousel)="doShowCarousel($event.dataSource)" (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
         (onRowEditedInit)="onRowEditInit($event)" (onRowEditedSave)="onRowEditSave($event)"
         (openedBriefKardexDialog)="openBriefKardexDialog($event)"
         (onRowEditedCancelRowEditing)="onRowEditCancel($event)" (getedExcelSample)="getExcel()">

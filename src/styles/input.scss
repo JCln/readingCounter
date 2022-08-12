@@ -28,6 +28,8 @@ $border_15: 10px;
   align-items: center;
   margin: .25rem 0;
   height: 3rem;
+  border: 1px solid var(--secondary_3_spec);
+  border-radius: 7px;
 }
 
 ._key {

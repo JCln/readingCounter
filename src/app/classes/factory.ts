@@ -47,6 +47,9 @@ export abstract class FactoryONE implements OnInit, OnDestroy {
 export class FactorySharedPrime implements OnChanges {
 
     _showSavedColumnButton: boolean;
+    tempOriginDataSource: any[] = [];
+    ref: DynamicDialogRef;
+
     @Input() dataSource: any[] = [];
     @Input() _selectCols: any = [];
     @Input() _selectedColumns: any[];
@@ -72,8 +75,10 @@ export class FactorySharedPrime implements OnChanges {
         public utilsService: UtilsService,
         public columnManager: ColumnManager,
         public config: PrimeNGConfig,
+        public dialogService: DialogService,
     ) {
         this.setTraslateToPrimeNgTable();
+
     }
 
     @Input() get selectedColumns(): any[] {
@@ -83,7 +88,25 @@ export class FactorySharedPrime implements OnChanges {
         //restore original order
         this._selectedColumns = this._selectCols.filter(col => val.includes(col));
     }
-
+    filterCounterState = () => {
+        // if OnOffloadComponent rendering
+        if (this._checkUpName == 'allComponent') {
+            let temp: any[] = [];
+            // should be false on initial(_primeNGHeaderCheckbox) because filter on DataSource happen
+            if (this.columnManager._primeNGHeaderCheckbox) {
+                this.tempOriginDataSource = JSON.parse(JSON.stringify(this.dataSource));
+                for (let index = 0; index < this.dataSource.length; index++) {
+                    if (this.dataSource[index].counterStateId !== null)
+                        temp.push(this.dataSource[index]);
+                }
+                this.dataSource = temp;
+            }
+            else {
+                if (!MathS.isNull(this.tempOriginDataSource))
+                    this.dataSource = this.tempOriginDataSource;
+            }
+        }
+    }
     saveColumns() {
         let newArray: any[] = [];
         for (let i = 0; i < this._selectCols.length; i++) {
@@ -103,7 +126,7 @@ export class FactorySharedPrime implements OnChanges {
         if (!this.browserStorageService.isExists(this._outputFileName))
             this._showSavedColumnButton = true;
     }
-    ngOnChanges(): void {
+    restoreLatestColumnChanges = () => {
         if (!MathS.isNull(this._outputFileName)) {
 
             if (this.browserStorageService.isExists(this._outputFileName)) {
@@ -117,7 +140,6 @@ export class FactorySharedPrime implements OnChanges {
             this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
         }
     }
-
     resetSavedColumns = () => {
         if (!MathS.isNull(this._outputFileName)) {
             if (this.browserStorageService.isExists(this._outputFileName)) {
@@ -130,6 +152,10 @@ export class FactorySharedPrime implements OnChanges {
         }
         else
             this.utilsService.snackBarMessageWarn(EN_messages.done);
+    }
+    ngOnChanges(): void {
+        this.restoreLatestColumnChanges();
+        this.filterCounterState();
     }
     setTraslateToPrimeNgTable = () => {
         this.config.setTranslation({
@@ -158,6 +184,20 @@ export class FactorySharedPrime implements OnChanges {
             'choose': ' انتخاب',
             'upload': 'ارسال',
             'cancel': 'بازگشت'
+        });
+    }
+    doShowCarousel = (dataSource: any) => {
+        console.log(dataSource);
+
+        this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+            data: dataSource,
+            rtl: true,
+            width: '80%'
+        })
+        this.ref.onClose.subscribe(async res => {
+            if (res)
+                console.log(res);
+
         });
     }
 

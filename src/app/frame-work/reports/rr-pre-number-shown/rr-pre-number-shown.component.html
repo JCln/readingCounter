@@ -81,14 +81,13 @@
     </section>
 
     <app-prime-table [hidden]="showCarousel" [dataSource]="dataSource" [_outputFileName]="'rrPreNumber'"
-        [_checkUpName]="'rr-preNumber'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'rr-preNumber'"
+        [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'rr-preNumber'"
         [_selectedColumnsToRemember]="'selectedRRPreNumShown'" [_isCustomSort]=true (customedSort)="customSort($event)"
         (refreshedTable)="refreshTable()" (showedInMapSingle)="openMapDialog($event)"
-        (filteredEvent)="filteredTableEvent($event)" (showedPictures)="getReadingReportTitles($event)"
-        (showedWOUIAsCarousel)="doShowCarousel($event)">
+        (filteredEvent)="filteredTableEvent($event)" (showedPictures)="getReadingReportTitles($event)">
     </app-prime-table>
 
     <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"
-        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">        
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
     </app-carousel-woum>
 </main>

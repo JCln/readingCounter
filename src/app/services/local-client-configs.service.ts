@@ -29,7 +29,6 @@ export class LocalClientConfigsService {
     const a = this.browserStorageService.get(name);
     if (a === null) {
       this.saveToLocalStorage(name, defaultVal)
-      // return default value
       return defaultVal;
     }
     return a;

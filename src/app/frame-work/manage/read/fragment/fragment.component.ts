@@ -30,6 +30,7 @@ export class FragmentComponent extends FactoryONE {
 
   fragmentMasterId: string = '';
   zoneId: number = 0;
+  onRowEditing: IFragmentMaster;
 
   constructor(
     private closeTabService: CloseTabService,
@@ -70,18 +71,7 @@ export class FragmentComponent extends FactoryONE {
     return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isNew: true };
   }
   onRowEditInit(dataSource: any) {
-    // this.clonedProducts[dataSource.id] = { ...dataSource };
-  }
-  clickedDropDowns = (event: any, element: string, dataId: any) => {
-
-    for (let index = 0; index < this.dataSource.length; index++) {
-      console.log(index + ' : ' + this.dataSource[index][element]);
-      if (this.dataSource[index].id === dataId) {
-        console.log(index + ' : ' + this.dataSource[index][element]);
-
-        this.dataSource[index][element] = event.title;
-      }
-    }
+    this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
   }
   onRowEditSave(dataSource: IFragmentMaster, rowIndex: number) {
     this.newRowLimit = 1;
@@ -113,7 +103,12 @@ export class FragmentComponent extends FactoryONE {
       this.refreshTable();
     }
   }
-  onRowEditCancel(dataSource: IFragmentMaster, index: number) {
+  onRowEditCancel(dataSource: IFragmentMaster) {
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (dataSource.id === this.dataSource[index].id) {
+        this.dataSource[index] = this.onRowEditing;
+      }
+    }
     this.newRowLimit = 1;
     if (dataSource.isNew)
       this.dataSource.shift();

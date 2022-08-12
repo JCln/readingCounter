@@ -37,13 +37,12 @@
 <app-prime-table  
 [dataSource]="dataSource"    
 [_outputFileName]="'searchMosh'" 
-[_checkUpName]="'search_moshtarak'"
+[_checkUpName]="'allComponent'"
 [_selectedColumnsToRemember]="'selectedListManagerMosh'" 
 [_numberOfExtraColumns]="[1,2,3]"
 [_sessionName]="'moshtarak-session'"
 (refreshedTable)="refreshTable()"
 (showedPictures)="getReadingReportTitles($event)"
-(showedWOUIAsCarousel)="doShowCarousel($event)"
 (showedInMapSingle)="openMapDialog($event)"
 >
 </app-prime-table>

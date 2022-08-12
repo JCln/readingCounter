@@ -1,22 +1,26 @@
 <section>
     <div class="overall-info">
-        <div class="input_2">
+        <div class="input_2" *ngIf="firstName">
             <div class="_key">نام و نام خانوادگی</div>
             <input [readOnly]="true" class="_value" name="names" [(ngModel)]="firstName.trim() + ' '+ sureName">
         </div>
-        <div class="input_2">
+        <div class="input_2" *ngIf="fulName">
+            <div class="_key">نام و نام خانوادگی</div>
+            <input [readOnly]="true" class="_value" name="names" [(ngModel)]="fulName">
+        </div>
+        <div class="input_2" *ngIf="eshterak">
             <div class="_key">اشتراک</div>
             <input [readOnly]="true" class="_value" name="eshterak" [(ngModel)]="eshterak">
         </div>
-        <div class="input_2">
+        <div class="input_2" *ngIf="radif">
             <div class="_key">ش.پرونده</div>
             <input [readOnly]="true" class="_value" name="radif" [(ngModel)]="radif">
         </div>
-        <div class="input_2">
+        <div class="input_2" *ngIf="counterNumber">
             <div class="_key">رقم فعلی</div>
             <input [readOnly]="true" class="_value" name="counterNumber" [(ngModel)]="counterNumber">
         </div>
-        <div class="input_2">
+        <div class="input_2" *ngIf="counterStateId">
             <div class="_key">وضعیت فعلی</div>
             <input [readOnly]="true" class="_value" name="counterStateId" [(ngModel)]="counterStateId">
         </div>

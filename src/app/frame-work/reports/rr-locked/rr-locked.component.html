@@ -80,12 +80,11 @@
     </section>
 
     <app-prime-table [hidden]="showCarousel" [dataSource]="dataSource" [_outputFileName]="'rrLocked'"
-        [_checkUpName]="'rr-locked'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'rr-locked'"
+        [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'rr-locked'"
         [_selectedColumnsToRemember]="'selectedRRLocked'" [_isCustomSort]=true [_hasCollapsible]=true
         (customedSort)="customSort($event)" [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed"
         (refreshedTable)="refreshTable()" (showedInMapSingle)="openMapDialog($event)"
-        (filteredEvent)="filteredTableEvent($event)" (showedWOUIAsCarousel)="doShowCarousel($event)"
-        (showedPictures)="getReadingReportTitles($event)">
+        (filteredEvent)="filteredTableEvent($event)" (showedPictures)="getReadingReportTitles($event)">
     </app-prime-table>
 
     <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"

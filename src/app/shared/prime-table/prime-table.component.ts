@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { PrimeNGConfig } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { SearchService } from 'services/search.service';
 import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactorySharedPrime } from 'src/app/classes/factory';
@@ -37,7 +37,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() backedToImportedConfirmDialog = new EventEmitter<any>();
   @Output() routedToLMPayDay = new EventEmitter<any>();
   @Output() openedBriefKardexDialog = new EventEmitter<any>();
-  @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() routedToLMAll = new EventEmitter<any>();
   @Output() routedToFollowUp = new EventEmitter<any>();
   @Output() showedMoreDetails = new EventEmitter<any>();
@@ -53,7 +52,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() clickedElmah = new EventEmitter<any>();
   @Output() registeredAssess = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
-  @Output() showSearchedOptionsDialog = new EventEmitter<any>();
   @Output() routedToOffload = new EventEmitter<any>();
   @Output() openedAddDialog = new EventEmitter<any>();
   @Output() routedToEditPage = new EventEmitter<any>();
@@ -70,17 +68,18 @@ export class PrimeTableComponent extends FactorySharedPrime {
 
   constructor(
     public outputManagerService: OutputManagerService,
-    public browserStorageService: BrowserStorageService,
-    public searchService: SearchService,
+    public browserStorageService: BrowserStorageService,    
     public columnManager: ColumnManager,
     public utilsService: UtilsService,
     public config: PrimeNGConfig,
+    public dialogService: DialogService,
   ) {
     super(
       browserStorageService,
       utilsService,
       columnManager,
-      config
+      config,
+      dialogService
     );
   }
 
@@ -101,9 +100,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   openBriefKardexDialog = (dataSource: object) => {
     this.openedBriefKardexDialog.emit(dataSource);
-  }
-  showWOUIAsCarousel = (dataSource: any, ri: number) => {
-    this.showedWOUIAsCarousel.emit({ dataSource, ri });
   }
   routeToLMAll = (dataSource: object) => {
     this.routedToLMAll.emit(dataSource);
@@ -152,9 +148,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   showPictures = ($event) => {
     this.showedPictures.emit($event);
-  }
-  showSearchOptionsDialog = () => {
-    this.showSearchedOptionsDialog.emit();
   }
   routeToOffload = (dataSource: object, ri: number) => {
     this.routedToOffload.emit({ dataSource, ri });
@@ -214,4 +207,5 @@ export class PrimeTableComponent extends FactorySharedPrime {
     })
     return total;
   }
+
 }

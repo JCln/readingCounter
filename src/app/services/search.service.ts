@@ -342,9 +342,6 @@ export class SearchService {
   receiveToDateJalali = (variable: ENSearchs, $event: string) => {
     this[variable].toDate = $event;
   }
-  routeToWoui = (object: any) => {
-    this.router.navigate([EN_Routes.wrmtrackwoui, false, object.id]);
-  }
   routeToLMAll = (row: ISearchSimpleOutput) => {
     this.allListsService.allLists_pageSign.GUid = row.trackingId;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;

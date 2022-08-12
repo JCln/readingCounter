@@ -24,11 +24,11 @@
         (customedSort)="listManagerService.customSort($event)" 
         (refreshedTable)="refreshTable()"
         (backedToPrevious)="toPrePage()"
-        (filteredEvent)="filteredTableEvent($event)"
-        (showedWOUIAsCarousel)="doShowCarousel($event)"
+        (filteredEvent)="filteredTableEvent($event)"        
         (routedToOffload)="routeToOffload($event)"
         (showedPictures)="getReadingReportTitles($event)"
-        (showedInMapSingle)="openMapDialog($event)">
+        (showedInMapSingle)="openMapDialog($event)"
+        >
     </app-prime-table>
 
     <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"

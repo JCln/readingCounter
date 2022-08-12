@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { PrimeNGConfig } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
@@ -15,7 +16,7 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
 })
 export class PrimeTableEditableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-
+  onRowEditing: any;
 
   @Input() _sortBy: string;
   @Input() _sortOrder: string = '';
@@ -55,13 +56,15 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     public browserStorageService: BrowserStorageService,
     public columnManager: ColumnManager,
     public utilsService: UtilsService,
-    public config: PrimeNGConfig
+    public config: PrimeNGConfig,
+    public dialogService: DialogService,
   ) {
     super(
       browserStorageService,
       utilsService,
       columnManager,
-      config
+      config,
+      dialogService
     );
   }
   clickedDropDowns = (event: any, element: string, dataId: any) => {
@@ -78,12 +81,21 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     this.openedBriefKardexDialog.emit(dataSource);
   }
   onRowEditInit = (dataSource: object) => {
+    this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
+    console.log(this.onRowEditing);
     this.onRowEditedInit.emit(dataSource);
   }
   onRowEditSave = (dataSource: object, ri: number) => {
     this.onRowEditedSave.emit({ dataSource, ri });
   }
-  onRowEditCancel = (dataSource: object, ri: number) => {
+  onRowEditCancel = (dataSource: any, ri: number, dictionary: any) => {
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (dataSource.id === this.dataSource[index].id) {
+        this.dataSource[index][dictionary] = this.onRowEditing[dictionary];
+        if (this._secondDictionaryName !== '')
+          this.dataSource[index][this._secondDictionaryName] = this.onRowEditing[this._secondDictionaryName];
+      }
+    }
     this.onRowEditedCancel.emit({ dataSource, ri });
   }
   removeRow = (dataSource: object, ri: number) => {
@@ -101,7 +113,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   newRowChangedStatus = () => {
     this.newedRowChangedStatus.emit();
   }
-  onRowEditCancelRowEditing = (dataSource: object, ri: number) => {
+  onRowEditCancelRowEditing = (dataSource: object, ri: number, secondDictionaryName: any) => {
     this.onRowEditedCancelRowEditing.emit({ dataSource, ri });
   }
   getExcelSample = () => {

@@ -43,9 +43,14 @@
                 </i>
             </div>
             <div class="left_side">
-                <i *ngIf="_checkUpName == 'assess_pre' && _canShowButton" (click)="registerAssessAdd()"
+                <i *ngIf="_outputFileName == 'assess_pre' && _canShowButton" (click)="registerAssessAdd()"
                     class="tooltip _circle_border p_icons pi pi-check">
                     <div class="tooltip_text">ثبت بازدید</div>
+                </i>
+                <i *ngIf="_checkUpName == 'allComponent'" (click)="filterCounterState()">
+                    <label class="font_family" for="binary">نمایش قرائت شده ها</label>
+                    <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
+                    </p-checkbox>
                 </i>
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                     <div class="tooltip_text">بارگیری مجدد جدول</div>
@@ -61,10 +66,6 @@
                 <i *ngIf="_checkUpName== 'apk'" (click)="downloadAPK()"
                     class="tooltip _circle_border p_icons fa fa-inbox">
                     <div class="tooltip_text">دانلود فایل</div>
-                </i>
-                <i *ngIf="_checkUpName == 'search_acme'" (click)="showSearchOptionsDialog()"
-                    class="tooltip _circle_border p_icons pi pi-search">
-                    <div class="tooltip_text">جستجو</div>
                 </i>
             </div>
         </div>
@@ -220,15 +221,10 @@
                     <div class="tooltip_text">خلاصه کاردکس</div>
                 </i>
             </td>
-            <td *ngIf="_checkUpName == 'search_moshtarak' ||
+            <td *ngIf="
              _checkUpName == 'allComponent' ||
-             _checkUpName =='forbidden' ||            
-             _checkUpName =='search_acme'||
-             _checkUpName =='searchPro'||
-             _checkUpName =='rr-preNumber'||
-             _checkUpName =='assess_pre'||
-             _checkUpName =='moment-ls'||
-             _checkUpName =='rr-locked'" (click)="showInMapSingle(dataSource)">
+             _checkUpName =='forbidden' ||             
+             _checkUpName =='moment-ls'" (click)=" showInMapSingle(dataSource)">
                 <span class="ui-column-title">مشاهده روی نقشه</span>
                 <i class="tooltip p_icons pi pi-map-marker">
                     <div class="tooltip_text_right">مشاهده روی نقشه</div>
@@ -286,16 +282,10 @@
                     <div class="tooltip_text">بازدید</div>
                 </i>
             </td>
-            <td *ngIf="
-                _checkUpName == 'search_moshtarak' || 
-                _checkUpName == 'moment-ls' || 
-                _checkUpName == 'search_acme'|| 
-                _checkUpName == 'searchPro' || 
-                _checkUpName == 'allComponent' || 
-                _checkUpName == 'assess_pre' || 
-                _checkUpName == 'rr-locked' || 
-                _checkUpName == 'rr-preNumber'">
-                <span class="ui-column-title">نمایش گزارش بازرسی</span>
+            <td *ngIf="                
+                _checkUpName == 'moment-ls' ||                 
+                _checkUpName == 'allComponent' ">
+                <span class=" ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
                 </i>
@@ -307,26 +297,12 @@
                 </i>
             </td>
             <td *ngIf="(
-                _outputFileName == 'allLists' || 
-                _outputFileName == 'ModifyList' || 
-            _outputFileName == 'rrPreNumber'|| 
-            _outputFileName == 'rrLocked' || 
-            _outputFileName == 'searchPro' || 
-            _outputFileName == 'searchMosh'||
-            _outputFileName == 'assess_pre'||
-            _outputFileName == 'momentLs'||
-            _outputFileName == 'searchMoshDialog'
-            )" (click)="showWOUIAsCarousel(dataSource,ri)">
-                <span class="ui-column-title">بررسی عکس/صوت</span>
-                <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
-                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
-                </i>
-            </td>
-            <td *ngIf="(            
-            _outputFileName == 'rrDetails'            
-            || _outputFileName == 'trv'            
-            || _outputFileName == 'trvDiff'            
-            )" (click)="searchService.routeToWoui(dataSource)">
+                _checkUpName == 'allComponent' ||                                                       
+                _outputFileName == 'momentLs' || 
+                _outputFileName == 'rrDetails' ||
+                _outputFileName == 'trv' ||
+                _outputFileName == 'trvDiff'  
+            )" (click)="doShowCarousel(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>

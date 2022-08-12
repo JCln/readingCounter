@@ -189,10 +189,7 @@ export class ImportDynamicService {
       }
     }
     return true;
-  }
-  routeToWoui = (object: IOnOffLoadFlat) => {
-    this.router.navigate([EN_Routes.wrmtrackwoui, false, object.id]);
-  }
+  }  
   routeToSimafaSingle = (object: IReadingProgramRes) => {
     this.router.navigate([EN_Routes.wrimpsimafardpgsingle, object]);
   }

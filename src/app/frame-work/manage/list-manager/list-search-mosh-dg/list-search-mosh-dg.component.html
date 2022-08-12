@@ -20,7 +20,8 @@
 </main>
 
 <app-prime-table *ngIf="dataSource.length" [dataSource]="dataSource" [_outputFileName]="'searchMoshDialog'"
-    [_checkUpName]="'search_moshtarak'" [_selectedColumnsToRemember]="'selectedListManagerMoshDialog'"
+    [_checkUpName]="'allComponent'" [_selectedColumnsToRemember]="'selectedListManagerMoshDialog'"
     [_numberOfExtraColumns]="[1,2,3]" (showedPictures)="listManagerService.getReadingReportTitles($event)"
-    (showedInMapSingle)="openMapDialog($event)" (refreshedTable)="refreshTable()" (showedWOUIAsCarousel)="openWOUMDialog($event)">
+    (showedInMapSingle)="openMapDialog($event)" (refreshedTable)="refreshTable()"
+    (showedWOUIAsCarousel)="openWOUMDialog($event)">
 </app-prime-table>

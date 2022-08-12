@@ -181,7 +181,7 @@ app-date-jalali {
   height: 2.8rem;
   background: var(--white);
   border-radius: 9px;
-  border: 1px solid var(--secondary_3_spec);
+  border: 1px solid var(--secondary_2);
 }
 
 span label {
@@ -195,7 +195,7 @@ span label {
   font-weight: 600;
   padding: .3rem 0.1rem;
   border-radius: 7px;
-  background: var(--secondary_3_spec);
+  background: var(--secondary_2);
 }
 
 .title {
@@ -206,7 +206,7 @@ span label {
 article {
   padding: $font_05;
   border-radius: $border_15;
-  background-color: var(--secondary_3_spec);
+  background-color: var(--secondary_2);
   margin: 0.1rem;
 }
 

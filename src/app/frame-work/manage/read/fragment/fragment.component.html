@@ -5,9 +5,6 @@
         dataKey="id" editMode="row" stateStorage="session" stateKey="fragment-session">
 
         <ng-template pTemplate="caption">
-            <!-- <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" optionLabel="header"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect> -->
             <i></i>
             <div class="header_icons_wrap">
                 <div class="left_side">
@@ -83,7 +80,7 @@
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
-                                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionLabel="title">
+                                [placeholder]="dataSource.zoneId" [style]="{'width':'100%'}" optionLabel="title">
                             </p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">
@@ -136,7 +133,7 @@
                     </i>
                     <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)"
                         class="_save pi pi-check"></i>
-                    <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource, ri)"
+                    <i *ngIf="editing" pCancelEditableRow (click)="onRowEditCancel(dataSource)"
                         class="_cancel pi pi-times"></i>
                 </td>
                 <td>

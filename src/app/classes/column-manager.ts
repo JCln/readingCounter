@@ -5,6 +5,7 @@ import { IObjectIteratation } from 'interfaces/ioverall-config';
     providedIn: 'root'
 })
 export class ColumnManager {
+    _primeNGHeaderCheckbox: boolean = false;
 
     excelDynamic: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },

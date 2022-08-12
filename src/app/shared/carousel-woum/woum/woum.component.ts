@@ -21,18 +21,20 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 })
 export class WoumComponent implements OnChanges {
 
-  @Input() zoneId: string = null;
-  @Input() preDate: string;
-  @Input() description: string;
-  @Input() preNumber: number;
+  @Input() zoneId?: string = null;
+  @Input() preDate?: string;
+  @Input() description?: string;
+  @Input() preNumber?: number;
   @Input() id: string;
-  @Input() counterStateCode: string;
-  @Input() counterNumber: string;
-  @Input() eshterak: string;
-  @Input() counterStateId: string;
-  @Input() firstName: string;
-  @Input() sureName: string;
+  @Input() counterStateCode?: string;
+  @Input() counterNumber?: string;
+  @Input() eshterak?: string;
+  @Input() counterStateId?: string;
+  @Input() firstName?: string;
+  @Input() sureName?: string;
   @Input() radif: number;
+  // from trv & details , ..
+  @Input() fulName?: string;
 
   offloadModifyReq: IOffloadModifyReq = {
     id: '',
@@ -101,8 +103,9 @@ export class WoumComponent implements OnChanges {
       return;
 
     this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.id);
-
-    this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
+    if (this.zoneId) {
+      this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
+    }
     this.downloadManagerService.assignToDataSource(this.dataSource);
     this.audioFiles = this.downloadManagerService.separateAudioFiles();
     this.imageFiles = this.downloadManagerService.separateImageFiles();
@@ -129,7 +132,7 @@ export class WoumComponent implements OnChanges {
     this.originImages = this.tempCarousels;
 
     this.bindDocumentListeners();
-    this.canShowBigScreen();    
+    this.canShowBigScreen();
   }
   canShowBigScreen = () => {
     // if image number is one then show on fullScreen
@@ -274,5 +277,5 @@ export class WoumComponent implements OnChanges {
     const a = document.querySelector('.main_img') as HTMLElement;
     this.degree -= 90;
     a.style.transform = `rotate(${this.degree + 'deg'}`;
-  }  
+  }
 }
