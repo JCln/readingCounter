@@ -30,6 +30,7 @@
     gap: .25rem;
     top: 2rem;
     left: 0;
+    border: 1px solid;
     grid-template-columns: repeat(2, 1fr);
     background-color: var(--primary_1);
     border-radius: $border_15;
