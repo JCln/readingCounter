@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { ENFontStyle } from 'interfaces/istyles';
 import { IProfile } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
+import { FontService } from 'services/font.service';
 import { imageOption, ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -18,6 +20,12 @@ export class ProfileComponent extends FactoryONE {
   stateOptions: any[] = [{ label: 'خیر', value: false }, { label: 'بله', value: true }];
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateFontStyleOptions: any[] = [
+    { label: 'xxs', value: ENFontStyle.fontXXS },
+    { label: 'xs', value: ENFontStyle.fontXS },
+    { label: 'sm', value: ENFontStyle.fontSM },
+    { label: 's', value: ENFontStyle.fontS }
+  ];
   stateOptionsImageOption: any[] = [
     {
       label: 'تمام صفحه',
@@ -65,7 +73,8 @@ export class ProfileComponent extends FactoryONE {
 
   constructor(
     public profileService: ProfileService,
-    private closeTabService: CloseTabService
+    private closeTabService: CloseTabService,
+    public fontService: FontService
   ) {
     super();
   }
@@ -82,8 +91,9 @@ export class ProfileComponent extends FactoryONE {
       this.closeTabService.saveDataForProfile = this.myInfoDataSource;
     }
 
-    this.getSelectedColumns();
     this.getBasedOnDate();
+    this.getFontStyle();
+    this.getSelectedColumns();
     this.getHasCanclableSpinner();
     this.getValueOfShowCarouselMedia();
   }
@@ -115,6 +125,9 @@ export class ProfileComponent extends FactoryONE {
   getHasCanclableSpinner = () => {
     this.profileService.showStateVals.hasCanclableSpinner = this.profileService.getHasCanclableSpinner();
   }
+  getFontStyle = () => {
+    this.profileService.showStateVals.defaultFontStyle = this.profileService.getFontStyle();
+  }
   setBasedOnDate = (val: any) => {
     this.profileService.setLocalValue(val);
     val ? this.profileService.showMessage(EN_messages.basedOnDateShowDisabled) : this.profileService.showMessage(EN_messages.basedOnDateShowEnabled);
@@ -122,6 +135,11 @@ export class ProfileComponent extends FactoryONE {
   setCanclableSpinner = (val: any) => {
     this.profileService.setCanclableSpinner(val);
     val ? this.profileService.showMessage(EN_messages.spinnerHasActive) : this.profileService.showMessage(EN_messages.spinnerHasCancelable);
+  }
+  setFontStyle = (val: ENFontStyle) => {
+    this.profileService.setFontStyle(val);
+    console.log(val);
+    this.fontService.setFontStyle(val);
   }
 
 }

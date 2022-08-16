@@ -38,6 +38,34 @@ p {
 }
 
 :root {
+  --font_01: 0.1rem;
+  --font_02: 0.2rem;
+  --font_025: 0.25rem;
+  --font_03: 0.3rem;
+  --font_05: 0.5rem;
+  --font_xxs: 0.87rem;
+  --font_xs: 1rem;
+  --font_ss: 1.1rem;
+  --font_s: 1.2rem;
+  --font_m: 1.3rem;
+  --font_m2: 1.4rem;
+  --font_l: 1.5rem;
+  --font_l2: 1.6rem;
+  --font_2: 2rem;
+  --font_22: 2.2rem;
+  --font_23: 2.3rem;
+  --font_25: 2.5rem;
+  --font_26: 2.6rem;
+  --font_28: 2.8rem;
+  --font_3: 3rem;
+  --font_33: 3.3rem;
+  --font_35: 3.5rem;
+  --font_335: 3.35rem;
+  --font_45: 4.5rem;
+  --font_5: 5rem;
+  --font_52: 5.2rem;
+  --font_55: 5.5rem;
+
   --white: rgb(57, 53, 50);
   --fix_gray_light: rgb(248, 249, 250);
   --fix_blue: rgb(17, 111, 255);
@@ -99,7 +127,7 @@ li {
 // ts config
 .cell_conf {
   color: rgb(92, 92, 92);
-  font-size: 1.2rem;
+  font-size: var(--font_s);
 }
 
 input::-webkit-outer-spin-button,
@@ -116,7 +144,7 @@ input[type=number] {
 .leaflet-popup-content {
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: var(--font_s);
   font-weight: 600;
 }
 
@@ -135,7 +163,7 @@ input[type=number] {
 
   .p-dropdown .p-dropdown-label {
     font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: 1rem;
+    font-size: var(--font_xs);
     font-weight: 600;
   }
 
@@ -156,7 +184,7 @@ input[type=number] {
   .p-multiselect-label,
   .p-multiselect-items {
     font-family: BLotus, "Blotus", tahoma, Sans-Serif !important;
-    font-size: 1.2rem;
+    font-size: var(--font_s);
     font-weight: 600 !important;
     background: var(--secondary_3);
     color: var(--secondary_8);
@@ -164,14 +192,14 @@ input[type=number] {
 
   .p-dropdown .p-dropdown-label.p-placeholder {
     font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: 1.2rem;
+    font-size: var(--font_s);
     font-weight: 600;
   }
 
   .p-dropdown.p-dropdown-clearable .p-dropdown-label {
-    padding-right: 0.25rem;
+    padding-right: var(--font_025);
     font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: 1rem;
+    font-size: var(--font_xs);
     font-weight: 600;
   }
 

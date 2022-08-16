@@ -6,8 +6,8 @@ main {
   display: grid;
   text-align: center;
   width: 21rem;
-  margin: 5rem auto;
-  padding: $font_xs;
+  margin: var(--font_5) auto;
+  padding: var(--font_xs);
   min-height: 15rem;
 
   border-radius: $border_15;

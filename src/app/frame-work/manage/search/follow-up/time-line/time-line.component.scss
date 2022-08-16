@@ -4,10 +4,10 @@
   display: grid;
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
-  gap: $font_05;
-  margin-top: $font_xs;
+  gap: var(--font_05);
+  margin-top: var(--font_xs);
   background: var(--secondary_1);
-  padding: $font_xs 0.25rem;
+  padding: var(--font_xs) var(--font_025);
   border-radius: $border_5;
 }
 
@@ -16,7 +16,7 @@
   text-align: center;
   border-radius: $border_15;
   box-shadow: 0 0 3px 2px var(--secondary_2);
-  padding: $font_l $font_05;
+  padding: var(--font_l) var(--font_05);
   position: relative;
 }
 
@@ -25,37 +25,37 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: $font_xs;
-  top: -$font_xs;
+  left: var(--font_xs);
+  top: calc(-1 * var(--font_xs));
   background: var(--primary_2);
   color: var(--white);
   border-radius: $border_5;
-  font-size: $font_l;
+  font-size: var(--font_l);
   font-weight: 600;
   height: 2rem;
   width: 2rem;
 }
 
 .title {
-  font-size: $font_m;
+  font-size: var(--font_m);
   color: var(--primary_5);
   font-weight: 800;
 }
 
 ._key_value {
   columns: 2;
-  margin-bottom: $font_05;
+  margin-bottom: var(--font_05);
 }
 
 ._key,
 ._value {
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 600;
   color: var(--primary_5);
 }
 
 .val {
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 600;
   color: var(--primary_7);
 }

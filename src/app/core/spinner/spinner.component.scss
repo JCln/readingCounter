@@ -18,7 +18,7 @@
     position: absolute;
     left: auto;
     bottom: auto;
-    height: 5rem;
+    height: var(--font_5);
     width: .8rem;
   }
 
@@ -48,7 +48,7 @@
 
 .loader {
   position: relative;
-  height: 1rem;
+  height: var(--font_xs);
   width: 2rem;
   display: block;
   z-index: 10;
@@ -75,7 +75,7 @@
   align-items: center;
   border: 1px solid;
   color: var(--primary_3);
-  transform: translateY(5rem);
+  transform: translateY(var(--font_5));
   background: inherit;
   border-radius: 15px;
   cursor: pointer;

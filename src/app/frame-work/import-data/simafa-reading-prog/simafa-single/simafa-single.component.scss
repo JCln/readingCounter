@@ -7,7 +7,7 @@
   direction: rtl;
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  padding: $font_s;
+  padding: var(--font_s);
   border-radius: $border_15;
   min-height: 35rem;
 }
@@ -15,40 +15,40 @@
 section.content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
-  gap: $font_05;
+  gap: var(--font_05);
   align-items: center;
 }
 
 .date_section {
-  margin: $font_05 0;
+  margin: var(--font_05) 0;
 }
 
 section.dynamic_content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
-  gap: $font_05;
+  gap: var(--font_05);
   align-items: center;
   border-radius: $border_15;
-  padding: $font_xxs;
-  margin: 1rem 0;
+  padding: var(--font_xxs);
+  margin: var(--font_xs) 0;
 }
 
 .static_part {
   background: var(--white);
   border: .15rem solid var(--secondary_2);
   border-radius: $border_15;
-  padding: $font_xxs;
+  padding: var(--font_xxs);
 }
 
 .check_boxes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
-  gap: $font_05;
+  gap: var(--font_05);
 }
 
 ._key,
 ._value {
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 800;
 }
 
@@ -70,18 +70,18 @@ section.dynamic_content {
 
 h3 {
   color: var(--secondary_6);
-  margin-left: 5rem;
+  margin-left: var(--font_5);
 }
 
 footer {
-  margin-top: $font_2;
+  margin-top: var(--font_2);
   text-align: center;
 }
 
 ::ng-deep {
 
   .mat-select-panel .mat-option {
-    font-size: 1.2rem;
+    font-size: var(--font_s);
     line-height: 3em;
     height: 3em;
     text-align: right;
@@ -90,15 +90,15 @@ footer {
   }
 
   .mat-option-text {
-    font-size: $font_s;
+    font-size: var(--font_s);
     font-weight: 600;
     color: var(--primary_6);
   }
 
   .mat-checkbox-layout .mat-checkbox-label {
-    margin: 0 $font_05;
+    margin: 0 var(--font_05);
     font-family: $font_family;
-    font-size: $font_s;
+    font-size: var(--font_s);
     font-weight: 600;
     color: var(--thirdy_3);
   }
@@ -112,12 +112,12 @@ footer {
 hr {
   margin: 0 auto;
   background-color: var(--primary_5);
-  height: .2rem;
-  margin-bottom: $font_xxs;
+  height: var(--font_02);
+  margin-bottom: var(--font_xxs);
 }
 
 .radio_button {
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 700;
   font-family: inherit;
   color: var(--secondary_6);
@@ -126,7 +126,7 @@ hr {
 
 ::ng-deep {
   .mat-radio-label-content {
-    padding-right: $font_05 !important;
+    padding-right: var(--font_05) !important;
     color: var(--thirdy_1);
   }
 }

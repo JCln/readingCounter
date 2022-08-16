@@ -18,8 +18,8 @@
   grid-template-columns: repeat(auto-fit, minmax(15rem, 17rem));
   direction: rtl;
   justify-content: center;
-  gap: $font_05;
-  padding: $font_xs $font_05;
+  gap: var(--font_05);
+  padding: var(--font_xs) var(--font_05);
   border-radius: $border_15;
 }
 
@@ -31,8 +31,8 @@
 .title {
   color: var(--primary_3);
   text-align: center;
-  margin: $font_xs $font_05;
-  font-size: 1.6rem;
+  margin: var(--font_xs) var(--font_05);
+  font-size: var(--font_l2);
 }
 
 input {
@@ -45,11 +45,11 @@ input {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
   justify-content: center;
-  gap: 0.25rem;
+  gap: var(--font_025);
   box-shadow: none;
   background: inherit;
   margin-top: 0;
-  padding: $font_05;
+  padding: var(--font_05);
 }
 
 /* card content */
@@ -58,10 +58,10 @@ input {
   display: grid;
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
-  gap: $font_05;
+  gap: var(--font_05);
   background: var(--secondary_1);
   place-content: center;
-  padding: $font_xs 0;
+  padding: var(--font_xs) 0;
   border-radius: $border_15;
 
   box-shadow: 1px 2px 3px 1px var(--primary_2);
@@ -87,7 +87,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin-top: $font_xs;
+    margin-top: var(--font_xs);
     background: var(--orange_500);
     color: var(--white);
     width: 100%;

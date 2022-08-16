@@ -100,7 +100,7 @@ app-frame-work {
     height: 98vh;
     width: 80%;
     overflow-x: auto;
-    top: 1rem;
+    top: var(--font_xs);
     bottom: 0;
     border-radius: 15px;
   }

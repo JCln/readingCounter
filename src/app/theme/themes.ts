@@ -1,4 +1,4 @@
-import { Theme } from 'interfaces/ioverall-config';
+import { Theme } from 'interfaces/istyles';
 
 export const light: Theme = {
     name: "light",

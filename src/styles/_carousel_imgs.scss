@@ -2,7 +2,7 @@ main {
   position: fixed;
   top: 54%;
   transform: translateY(-50%);
-  left: 1.3rem;
+  left: var(--font_m);
   background: var(--white);
   width: 90%;
   height: 85%;
@@ -16,7 +16,7 @@ main {
     transform: translateY(-50%);
     background: var(--secondary_3);
     height: 10rem;
-    width: $font_2;
+    width: var(--font_2);
     border-radius: 100vmax;
     border: 1px dotted var(--secondary_5);
     cursor: pointer;
@@ -24,7 +24,7 @@ main {
     &::after {
       position: absolute;
       top: 50%;
-      font-size: $font_2;
+      font-size: var(--font_2);
       font-weight: 600;
       color: var(--secondary_5);
       transition: all ease-in-out .15s;
@@ -36,7 +36,7 @@ main {
   }
 
   .next {
-    right: -$font_xs;
+    right: calc(-1 * var(--font_xs));
 
     &::after {
       content: ">";
@@ -50,7 +50,7 @@ main {
   }
 
   .prev {
-    left: -$font_xs;
+    left: calc(-1 * var(--font_xs));
 
     &::after {
       content: "<";
@@ -89,10 +89,10 @@ h2 {
   border: 1px solid;
   border-radius: $border_50;
   color: var(--secondary_6);
-  right: -$font_xs;
-  top: -$font_xs;
-  padding: $font_05;
-  font-size: $font_m;
+  right: calc(-1 * var(--font_xs));
+  top: calc(-1 * var(--font_xs));
+  padding: var(--font_05);
+  font-size: var(--font_m);
   font-weight: 600;
   cursor: pointer;
 }

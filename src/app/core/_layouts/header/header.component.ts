@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { ENHubMessages, ENThemeColor } from 'interfaces/ioverall-config';
+import { ENHubMessages } from 'interfaces/ioverall-config';
+import { ENThemeColor } from 'interfaces/istyles';
 import { SignalRService } from 'services/signal-r.service';
 import { ThemeService } from 'services/theme.service';
 import { AuthService } from 'src/app/auth/auth.service';

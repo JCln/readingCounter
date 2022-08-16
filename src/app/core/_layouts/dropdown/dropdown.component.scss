@@ -4,11 +4,11 @@
   position: relative;
   place-items: center;
   display: grid;
-  width: 2.3rem;
-  height: 2.3rem;
+  width: var(--font_23);
+  height: var(--font_23);
   border-radius: 50%;
   background: var(--secondary_3);
-  font-size: $font_m;
+  font-size: var(--font_m);
 
   &:hover,
   &:focus {
@@ -21,17 +21,17 @@
   display: grid;
   background: none;
   border: none;
-  font-size: $font_l;
+  font-size: var(--font_l);
   color: var(--primary_5);
   cursor: pointer;
 
   &:hover::after {
     content: '';
     position: absolute;
-    width: 5rem;
-    height: 2.3rem;
-    top: 1rem;
-    left: -1rem;
+    width: var(--font_5);
+    height: var(--font_23);
+    top: var(--font_xs);
+    left: calc(-1 * var(--font_xs));
   }
 }
 
@@ -48,7 +48,7 @@
 
 .dropdown-content a {
   color: var(--primary_4);
-  padding: .3rem 1rem;
+  padding: var(--font_03) var(--font_05);
   text-decoration: none;
   display: block;
 

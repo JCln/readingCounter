@@ -8,7 +8,7 @@ ul {
   flex-wrap: wrap;
   direction: rtl;
   border-radius: 15px;
-  margin: .2rem;
+  margin: var(--font_02);
   padding: 0;
 }
 
@@ -18,22 +18,22 @@ li {
   justify-content: center;
   align-items: center;
   margin: 0.04rem;
-  min-width: 3.5rem;
+  min-width: var(--font_35);
   border: 1.5px solid;
   border-radius: 10px;
   color: var(--primary_5);
   list-style-type: none;
-  font-size: 1.1rem;
+  font-size: var(--font_ss);
   font-weight: 600;
   background: var(--secondary_4);
   cursor: pointer;
-  padding: .2rem;
+  padding: var(--font_02);
 
   @media (min-width: 700px) {
-    padding: 0.2rem 0 0;
+    padding: var(--font_02) 0 0;
     margin: .06rem;
     border-radius: 15px;
-    font-size: 1.3rem;
+    font-size: var(--font_m);
     min-width: 9rem;
   }
 
@@ -43,8 +43,8 @@ li {
     left: 0;
     transform: translateY(-50%);
     top: 50%;
-    width: 2.2rem;
-    height: 2.2rem;
+    width: var(--font_22);
+    height: var(--font_22);
     margin-right: auto;
     border-radius: 2rem;
     color: var(--secondary_6);
@@ -63,8 +63,8 @@ li {
     right: 0;
     transform: translateY(-50%);
     top: 50%;
-    width: 2.2rem;
-    height: 2.2rem;
+    width: var(--font_22);
+    height: var(--font_22);
     margin-left: auto;
     border-radius: 2rem;
     color: var(--secondary_6);
@@ -94,7 +94,7 @@ li::before {
   position: absolute;
   top: .06rem;
   border-radius: 15px;
-  height: .3rem;
+  height: var(--font_03);
   width: 90%;
   background: var(--primary_3);
 }
@@ -111,16 +111,16 @@ li.active::before {
 }
 
 ._remove_all {
-  margin: 0 auto 0 .3rem;
+  margin: 0 auto 0 var(--font_03);
   cursor: pointer;
-  max-width: $font_s;
-  max-height: $font_s;
+  max-width: var(--font_s);
+  max-height: var(--font_s);
 
   span {
     border-radius: $border_50;
-    font-size: $font_s;
+    font-size: var(--font_s);
     background: var(--red_500);
-    padding: .3rem;
+    padding: var(--font_03);
     color: var(--white);
 
     &:hover {

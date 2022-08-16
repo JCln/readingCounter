@@ -14,11 +14,11 @@
   display: flex;
   justify-content: space-around;
   left: 2rem;
-  top: -3rem;
+  top: calc(-1 * var(--font_3));
   z-index: 100;
   background: var(--white);
-  margin: $font_xs;
-  padding: $font_xs 0.2rem;
+  margin: var(--font_xs);
+  padding: var(--font_xs) var(--font_02);
   text-align: center;
   border-radius: $border_15;
   box-shadow: 0px 2px 3px 1px var(--thirdy_3);
@@ -27,14 +27,14 @@
     content: '';
     position: absolute;
     top: 0;
-    left: -1.5rem;
-    height: 5rem;
+    left: calc(-1 * var(--font_l));
+    height: var(--font_5);
     width: 12rem;
   }
 }
 
 .bbr {
-  padding: $font_05;
+  padding: var(--font_05);
   background-color: #3686c933;
   border-radius: $border_50;
 

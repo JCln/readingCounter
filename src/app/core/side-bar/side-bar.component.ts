@@ -10,8 +10,8 @@ import { SidebarItemsService } from 'services/DI/sidebar-items.service';
   animations: [
     trigger('openClose', [
       state('closeSubItems', style({
-        minHeight: '3.3rem',
-        height: '3.3rem',
+        minHeight: 'var(--font_33)',
+        height: 'var(--font_33)',
       })),
       state('openSubItems', style({
         minHeight: '8rem',

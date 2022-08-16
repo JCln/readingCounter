@@ -5,7 +5,7 @@
   direction: rtl;
   font-family: $font_family;
   grid-template-columns: repeat(auto-fit, minmax(17rem, auto));
-  gap: .25rem;
+  gap: var(--font_025);
 }
 
 h2 {

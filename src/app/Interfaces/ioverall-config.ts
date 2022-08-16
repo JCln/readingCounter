@@ -287,6 +287,7 @@ export enum ENLocalStorageNames {
     shouldUseBaseOnDate = 'shouldUseBaseOnDate',
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
+    fontStyle = 'fontStyle',
 }
 export enum ENRandomNumbers {
     zero = 0,
@@ -305,16 +306,6 @@ export enum ENRandomNumbers {
     fifty = 50,
     oneHundred = 100,
     twoHundred = 200,
-}
-export enum ENThemeName {
-    themeColor = 'themeColor'
-}
-export enum ENThemeColor {
-    light = 0,
-    dark = 1,
-    purple = 2,
-    bedge = 3,
-    corporate = 4,
 }
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',
@@ -417,8 +408,4 @@ export enum ENClientServerErrors {
     'cs501' = 501,
     'cs502' = 502,
     'cs504' = 504,
-}
-export interface Theme {
-    name: string,
-    properties: any
 }

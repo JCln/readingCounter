@@ -2,7 +2,7 @@
 @import 'theme';
 
 .header {
-  --height: 3rem;
+  --height: var(--font_3);
   display: flex;
   align-items: center;
   // overflow: hidden;
@@ -13,15 +13,15 @@
   box-shadow: 0 1px 5px 0px var(--primary_5);
 
   ._logo_content {
-    width: calc(var(--height) - 0.5rem);
-    height: calc(var(--height) - 0.5rem);
+    width: calc(var(--height) - var(--font_05));
+    height: calc(var(--height) - var(--font_05));
 
     img {
       border-radius: $border_50;
     }
 
     @media (max-width:550px) {
-      height: 2.3rem;
+      height: var(--font_23);
     }
   }
 }
@@ -35,7 +35,7 @@ ul {
 }
 
 li {
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 600;
   list-style-type: none;
   line-height: 1;

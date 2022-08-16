@@ -2,27 +2,27 @@
 
 main {
   font-family: $font_family;
-  font-size: $font_s;
+  font-size: var(--font_s);
 
-  padding: $font_05;
+  padding: var(--font_05);
 }
 
 ._circle_border {
   color: var(--green_500);
   border: 2px solid var(--green_500);
-  margin-left: $font_xs;
+  margin-left: var(--font_xs);
 }
 
 h3 {
   display: flex;
   justify-content: center;
-  margin-bottom: $font_l;
+  margin-bottom: var(--font_l);
 }
 
 ._key_value {
   columns: 2;
   text-align: center;
-  margin-bottom: $font_xs;
+  margin-bottom: var(--font_xs);
   column-rule: 1px dashed var(--primary_2);
   direction: rtl;
 }
@@ -37,7 +37,7 @@ h3 {
 }
 
 ._text {
-  margin-left: $font_xs;
+  margin-left: var(--font_xs);
 }
 
 ._custom {
@@ -46,5 +46,5 @@ h3 {
 }
 
 section {
-  padding: 0 $font_05;
+  padding: 0 var(--font_05);
 }

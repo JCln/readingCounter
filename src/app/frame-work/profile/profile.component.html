@@ -69,6 +69,16 @@
     </section>
 
     <section>
+        <h1 class="title">اندازه فونت</h1>
+        <div class="content">
+            <p-selectButton [options]="stateFontStyleOptions"
+                [(ngModel)]="profileService.showStateVals.defaultFontStyle" optionLabel="label" optionValue="value"
+                (onChange)="setFontStyle(profileService.showStateVals.defaultFontStyle)">
+            </p-selectButton>
+        </div>
+    </section>
+
+    <section>
         <h1 class="title">اندازه تصویر</h1>
         <div class="content">
             <p-selectButton [options]="stateOptionsImageOption" [(ngModel)]="profileService.showStateVals.imgOptions"

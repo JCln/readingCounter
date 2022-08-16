@@ -6,7 +6,7 @@
   display: grid;
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
-  gap: 0.3rem;
+  gap: var(--font_03);
 }
 
 .content {
@@ -14,7 +14,7 @@
   background: var(--secondary_1);
   box-shadow: 1px 1px 1px 4px var(--secondary_4);
   text-align: center;
-  padding: $font_s 0.2rem;
+  padding: var(--font_s) var(--font_02);
   min-height: 15rem;
   border-radius: $border_15;
 
@@ -29,29 +29,29 @@
 
   .inner_boundry {
     display: grid;
-    font-size: $font_s;
+    font-size: var(--font_s);
     text-align: right;
   }
 }
 
 
 .title {
-  top: $font_2;
-  font-size: $font_m;
+  top: var(--font_2);
+  font-size: var(--font_m);
   color: var(--primary_3);
   font-weight: 800;
-  padding: 0 $font_xs;
+  padding: 0 var(--font_xs);
 }
 
 
 ._key {
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 600;
   color: var(--primary_5);
 }
 
 ._value {
-  font-size: $font_l;
+  font-size: var(--font_l);
   font-weight: 600;
   color: var(--primary_5);
   border: none;
@@ -60,7 +60,7 @@
 .input_2 {
   min-width: 100%;
   color: var(--secondary_5);
-  margin-bottom: $font_05;
+  margin-bottom: var(--font_05);
   box-shadow: 1px 1px 8px 1px var(--secondary_4);
 }
 
@@ -70,11 +70,11 @@
 
   label {
     color: var(--thirdy_3);
-    font-size: $font_m;
+    font-size: var(--font_m);
     font-weight: 600;
   }
 }
 
 footer {
-  margin-top: $font_s;
+  margin-top: var(--font_s);
 }

@@ -13,8 +13,8 @@ h2 {
 ::ng-deep {
   .mat-checkbox-layout {
     .mat-checkbox-label {
-      margin: 0 $font_05;
-      font-size: $font_s;
+      margin: 0 var(--font_05);
+      font-size: var(--font_s);
       font-weight: 600;
       color: var(--primary_5);
       line-height: 2;
@@ -27,24 +27,24 @@ h2 {
     direction: rtl;
     border: 2px solid var(--primary_5);
     border-radius: 6rem;
-    padding: $font_05;
-    margin-bottom: 1rem;
+    padding: var(--font_05);
+    margin-bottom: var(--font_xs);
   }
 
   .mat-step-text-label {
-    font-size: 1.2rem;
-    padding-right: $font_05;
+    font-size: var(--font_s);
+    padding-right: var(--font_05);
   }
 
   .mat-horizontal-stepper-header .mat-step-icon {
-    font-size: $font_s;
+    font-size: var(--font_s);
     font-weight: 600;
   }
 }
 
 .mat-stepper-horizontal {
   font-family: $font_family;
-  padding: $font_05;
+  padding: var(--font_05);
 }
 
 .mat-horizontal-content-container {
@@ -62,7 +62,7 @@ h2 {
 }
 
 .btn_2 {
-  margin: .25rem;
+  margin: var(--font_025);
   display: flex;
   justify-content: center;
   align-items: center;

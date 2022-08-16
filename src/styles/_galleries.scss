@@ -2,17 +2,18 @@
   direction: rtl;
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_6);
-  margin: $font_05;
-  padding: 0.25rem;
+  margin: var(--font_05);
+  padding: var(--font_025);
   border-radius: $border_15;
-  min-height: 35rem;
+  height: 80vh;
+  overflow: auto;
 }
 
 section._container {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  margin-top: $font_05;
-  gap: .2rem;
+  margin-top: var(--font_05);
+  gap: var(--font_02);
 
   @media (min-width:550px) {
     grid-template-columns: 2fr 3fr;
@@ -24,7 +25,7 @@ section._container {
 .__readonly_s {
   background: var(--white);
   border-radius: $border_15;
-  padding: 0.2rem;
+  padding: var(--font_02);
   border: 1px solid var(--secondary_3);
 }
 
@@ -85,18 +86,18 @@ h2 {
 
 h3 {
   color: var(--primary_3);
-  font-size: 1.4rem;
-  padding: $font_05;
+  font-size: var(--font_m2);
+  padding: var(--font_05);
 }
 
 footer {
-  margin-top: $font_2;
+  margin-top: var(--font_2);
   text-align: center;
 }
 
 ::ng-deep {
   .mat-select-panel .mat-option {
-    font-size: 1.2rem;
+    font-size: var(--font_s);
     line-height: 3em;
     height: 3em;
     text-align: right;
@@ -105,38 +106,38 @@ footer {
   }
 
   .mat-option-text {
-    font-size: $font_s;
+    font-size: var(--font_s);
     font-weight: 600;
     color: var(--primary_6);
   }
 
   .mat-checkbox-layout .mat-checkbox-label {
-    margin: 0 $font_05;
+    margin: 0 var(--font_05);
     font-family: $font_family;
-    font-size: $font_s;
+    font-size: var(--font_s);
     font-weight: 600;
     color: var(--thirdy_3);
   }
 }
 
 .check_boxes {
-  padding: .5rem;
+  padding: var(--font_05);
 }
 
 .order_by {
   display: flex;
-  margin: $font_xs;
+  margin: var(--font_xs);
 }
 
 hr {
   margin: 0 4rem;
   background-color: var(--primary_5);
-  height: .2rem;
-  margin-bottom: $font_xxs;
+  height: var(--font_02);
+  margin-bottom: var(--font_xxs);
 }
 
 .radio_button {
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 700;
   font-family: inherit;
   color: var(--secondary_6);
@@ -145,7 +146,7 @@ hr {
 
 ::ng-deep {
   .mat-radio-label-content {
-    padding-right: $font_05 !important;
+    padding-right: var(--font_05) !important;
     color: var(--thirdy_1);
   }
 }
@@ -157,14 +158,14 @@ hr {
 ._main_audio {
   display: grid;
   direction: rtl;
-  gap: .2rem;
+  gap: var(--font_02);
 }
 
 .product-item {
   .product-item-content {
     border: 1px solid var(--surface-d);
     border-radius: 3px;
-    margin: .3rem;
+    margin: var(--font_03);
     text-align: center;
     padding: 2rem 0;
   }
@@ -188,19 +189,19 @@ hr {
 .__img_bound {
   height: 9.5rem;
   width: 9.5rem;
-  padding: $font_05;
+  padding: var(--font_05);
   margin: auto;
 }
 
 .__img_counter {
   position: absolute;
-  top: -$font_s;
-  right: $font_05;
+  top: calc(-1 * var(--font_s));
+  right: var(--font_05);
   text-align: center;
   background-color: var(--primary_4);
   color: var(--white);
-  width: 1.5rem;
-  height: 1.5rem;
+  width: var(--font_l);
+  height: var(--font_l);
   border-radius: $border_5;
   font-weight: 600;
 }
@@ -222,19 +223,19 @@ img {
 .__icons {
   display: flex;
   position: absolute;
-  top: -2.5rem;
-  left: .5rem;
+  top: calc(-1 * var(--font_25));
+  left: var(--font_05);
 
   i {
     background-color: var(--secondary_1);
     color: var(--thirdy_1);
-    font-size: $font_m;
-    margin: .25rem;
+    font-size: var(--font_m);
+    margin: var(--font_025);
     cursor: pointer;
   }
 }
 
 .center_footer {
   text-align: center;
-  margin-top: $font_xs;
+  margin-top: var(--font_xs);
 }

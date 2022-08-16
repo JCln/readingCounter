@@ -6,9 +6,9 @@
 .overall-info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 24rem));
-  gap: .5rem;
+  gap: var(--font_05);
   direction: rtl;
-  margin-bottom: $font_xs;
+  margin-bottom: var(--font_xs);
 
   @media (min-width: 550px) {
     justify-content: center;
@@ -38,7 +38,7 @@ main.gallery_main {
 ._is_fullcreen {
   width: 70%;
   height: 80vh;
-  margin-top: 3rem;
+  margin-top: var(--font_3);
 }
 
 ._is_not_fullscreen {
@@ -89,16 +89,16 @@ main.carousel_gallery {
       justify-content: space-evenly;
       background-color: rgba(0, 0, 0, .9);
       color: var(--secondary_4);
-      padding-bottom: $font_xs;
+      padding-bottom: var(--font_xs);
 
       >button {
         background-color: transparent;
         color: var(--secondary_4);
         border: 0 none;
-        font-size: 1.3rem;
+        font-size: var(--font_m);
         font-weight: 600;
         border-radius: 0;
-        margin: .2rem 0;
+        margin: var(--font_02) 0;
         cursor: pointer;
 
         &.fullscreen-button {
@@ -119,8 +119,8 @@ main.carousel_gallery {
         i {
           color: var(--secondary_4);
           border: var(--secondary_4);
-          font-size: $font_xs;
-          margin: .25rem;
+          font-size: var(--font_xs);
+          margin: var(--font_025);
         }
       }
     }

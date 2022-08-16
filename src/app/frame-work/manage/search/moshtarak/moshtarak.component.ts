@@ -65,13 +65,13 @@ export class MoshtarakComponent extends AllListsFactory {
     this.searchService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    if (!this.searchService.verificationMosh(this.searchService.searchReqMosh))
-      return;
-    this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchMoshtarak, this.searchService.searchReqMosh);
-    this.converts();
-    this.searchService.makeHadPicturesToBoolean(this.dataSource);
+    if (this.searchService.verificationMosh(this.searchService.searchReqMosh)) {
+      this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchMoshtarak, this.searchService.searchReqMosh);
+      this.converts();
+      this.searchService.makeHadPicturesToBoolean(this.dataSource);
 
-    this.closeTabService.saveDataForSearchMoshtarakin = this.dataSource;
+      this.closeTabService.saveDataForSearchMoshtarakin = this.dataSource;
+    }
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {

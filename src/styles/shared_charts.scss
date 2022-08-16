@@ -4,7 +4,7 @@
 .container_wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
-  gap: .5rem;
+  gap: var(--font_05);
 
   @media (min-width: 550px) {
     grid-template-columns: repeat(auto-fit, minmax(27rem, auto));
@@ -17,7 +17,7 @@
   border-radius: $border_15;
   background: var(--secondary_1);
   min-height: 15rem;
-  padding: $font_xs;
+  padding: var(--font_xs);
 }
 
 canvas {
@@ -29,17 +29,17 @@ canvas {
 //  header options 
 .header_options {
   background-color: var(--secondary_1);
-  padding: $font_05 $font_s;
+  padding: var(--font_05) var(--font_s);
   border-radius: $border_15;
-  margin-bottom: $font_05;
+  margin-bottom: var(--font_05);
 }
 
 .title {
   position: absolute;
-  right: $font_xs;
+  right: var(--font_xs);
   font-family: inherit;
   color: var(--secondary_6);
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 600;
 
 }

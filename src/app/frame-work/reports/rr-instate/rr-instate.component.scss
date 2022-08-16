@@ -9,7 +9,7 @@ section {
   justify-content: center;
   direction: rtl;
   margin: auto;
-  padding: $font_xs;
+  padding: var(--font_xs);
   width: 18rem;
   background: var(--secondary_1);
   border-radius: $border_15;
@@ -29,7 +29,7 @@ section {
 
 ._key,
 ._value {
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 800;
 }
 

@@ -4,13 +4,13 @@
 
 .mat-dialog-content {
   color: var(--secondary_7);
-  font-size: $font_s;
+  font-size: var(--font_s);
   text-align: right;
-  word-spacing: .3rem;
+  word-spacing: var(--font_03);
 }
 
 .mat-dialog-container {
-  padding: $font_2;
+  padding: var(--font_2);
 }
 
 ._custom {
@@ -33,8 +33,8 @@
 }
 
 h2 {
-  font-size: $font_m;
-  padding: $font_05;
+  font-size: var(--font_m);
+  padding: var(--font_05);
   text-align: center;
 }
 

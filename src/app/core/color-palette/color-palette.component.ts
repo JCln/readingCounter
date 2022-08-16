@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { ENThemeColor } from 'interfaces/ioverall-config';
+import { ENThemeColor } from 'interfaces/istyles';
 import { ThemeService } from 'services/theme.service';
 
 @Component({

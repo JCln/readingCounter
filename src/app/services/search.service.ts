@@ -59,7 +59,7 @@ export class SearchService {
   searchReqMosh: ISearchMoshReq = {
     zoneId: null,
     searchBy: 1,
-    item: '',
+    item: null,
     similar: false
   }
   _searchSimpleReq: ISearchSimpleReq = {
@@ -302,6 +302,9 @@ export class SearchService {
     return this.validationSearchSimpleByPeriod(searchReq)
   }
   verificationMosh = (searchReq: ISearchMoshReq): boolean => {
+    searchReq.item = searchReq.item.trim();
+    console.log(searchReq);
+
     return this.validationNullMosh(searchReq) && this.validationNumbers(searchReq)
   }
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {

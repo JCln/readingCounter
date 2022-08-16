@@ -3,5 +3,5 @@
 ._charts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(40%, 50%));
-  margin-bottom: $font_3;
+  margin-bottom: var(--font_3);
 }

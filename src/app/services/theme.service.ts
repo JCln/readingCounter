@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ENThemeColor, ENThemeName, Theme } from 'interfaces/ioverall-config';
+import { ENThemeColor, ENThemeName, Theme } from 'interfaces/istyles';
 import { BrowserStorageService } from 'services/browser-storage.service';
 
 import { bedge, corporate, dark, light, purple } from '../theme/themes';

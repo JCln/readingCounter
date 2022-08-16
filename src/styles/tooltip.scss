@@ -20,7 +20,7 @@
   transform: translateX(-50%);
   font-weight: 600;
   font-family: $font_family;
-  font-size: $font_s;
+  font-size: var(--font_s);
   line-break: auto;
 }
 
@@ -38,10 +38,10 @@
   z-index: 4;
   left: 10%;
   bottom: 50%;
-  margin-left: 3rem;
+  margin-left: var(--font_3);
   font-weight: 600;
   font-family: $font_family;
-  font-size: $font_s;
+  font-size: var(--font_s);
   line-break: auto;
 }
 
@@ -61,7 +61,7 @@
   top: 50%;
   font-weight: 600;
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-  font-size: 1.2rem;
+  font-size: var(--font_s);
   line-break: auto;
 
   &::after {

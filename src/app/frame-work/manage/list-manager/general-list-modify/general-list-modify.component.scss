@@ -5,7 +5,7 @@
 .overall-info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(19rem, 23rem));
-  gap: .25rem;
+  gap: var(--font_025);
   direction: rtl;
 
   @media (min-width: 550px) {
@@ -16,7 +16,7 @@
 .radios {
   background: var(--white);
   border-radius: $border_15 $border_15 0 0;
-  padding: 0 0.2rem;
+  padding: 0 var(--font_02);
 
   .radio_group {
     justify-content: flex-start;
@@ -25,7 +25,7 @@
     flex-wrap: wrap;
 
     .mat-radio-button {
-      margin-left: $font_05;
+      margin-left: var(--font_05);
     }
   }
 }
@@ -33,5 +33,5 @@
 .under_zero {
   border-radius: $border_15;
   background-color: var(--primary_1);
-  padding: 0 .2rem;
+  padding: 0 var(--font_02);
 }

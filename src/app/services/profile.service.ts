@@ -28,6 +28,7 @@ export class ProfileService {
     groupImgs: false,
     searchBasedOnDate: false,
     hasCanclableSpinner: false,
+    defaultFontStyle: 0,
     imgOptions: {
       width: '100%',
       height: '100%',
@@ -75,11 +76,17 @@ export class ProfileService {
   setCanclableSpinner = (hasCanclableSpinner: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.hasCanclableSpinner, hasCanclableSpinner);
   }
+  setFontStyle = (fontStyle: number) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontStyle, fontStyle);
+  }
   getLocalValue = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
   }
   getHasCanclableSpinner = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.envService.hasCanclableSpinner);
+  }
+  getFontStyle = (): number => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 2);
   }
   columnSelectedProfile = (): IObjectIteratation[] => {
     return this.columnManager.profile;

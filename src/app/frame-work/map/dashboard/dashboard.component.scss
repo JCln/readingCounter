@@ -7,7 +7,7 @@
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(14rem, auto));
   align-items: center;
-  gap: 0.3rem;
+  gap: var(--font_03);
   border-radius: $border_15;
 }
 
@@ -23,8 +23,8 @@
   direction: rtl;
   grid-template-columns: 1fr;
   align-items: center;
-  gap: 0.3rem;
-  margin: .25rem 0;
+  gap: var(--font_03);
+  margin: var(--font_025) 0;
 
   @media (min-width:780px) {
     grid-template-columns: 1fr 1fr;
@@ -37,30 +37,30 @@
   text-align: center;
   border-radius: $border_15;
   box-shadow: 0 0 3px 2px var(--secondary_2);
-  padding: $font_xxs 0;
+  padding: var(--font_xxs) 0;
 }
 
 ._header {
-  font-size: $font_m;
+  font-size: var(--font_m);
   color: var(--primary_3);
   font-weight: 800;
   text-align: center;
   width: 100%;
 
   i {
-    margin-left: 0.25rem;
-    font-size: $font_m;
+    margin-left: var(--font_025);
+    font-size: var(--font_m);
     vertical-align: middle;
   }
 }
 
 .title {
-  top: $font_2;
+  top: var(--font_2);
   position: absolute;
-  font-size: $font_m;
+  font-size: var(--font_m);
   color: var(--primary_3);
   font-weight: 800;
-  padding: 0 $font_xs;
+  padding: 0 var(--font_xs);
 }
 
 ._title_special {
@@ -72,14 +72,14 @@
 }
 
 ._key {
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 600;
   color: var(--primary_5);
   text-align: center;
 }
 
 ._value {
-  font-size: $font_l;
+  font-size: var(--font_l);
   font-weight: 600;
   color: var(--primary_5);
   max-width: 95%;
@@ -89,19 +89,19 @@
 .content {
   border-radius: $border_15;
   background: var(--white);
-  padding: .25rem 0;
+  padding: var(--font_025) 0;
   box-shadow: 0px 0px 2px 2px var(--secondary_2);
-  margin: .25rem 0;
+  margin: var(--font_025) 0;
 }
 
 .collapse {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  grid-gap: 1.3rem;
-  gap: 1.3rem;
-  padding: .2rem;
-  margin-right: 1rem;
+  grid-gap: var(--font_m);
+  gap: var(--font_m);
+  padding: var(--font_02);
+  margin-right: var(--font_xs);
 
   h1 {
     font-size: 1.87rem;
@@ -109,10 +109,10 @@
   }
 
   h3 {
-    font-size: $font_m;
+    font-size: var(--font_m);
     color: var(--primary_3);
     direction: rtl;
-    margin: $font_xs;
+    margin: var(--font_xs);
 
     &::before {
       content: ' - ';
@@ -184,7 +184,7 @@ table {
   width: 100%;
   direction: rtl;
   text-align: center;
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 500;
   overflow-x: auto;
   border: 1px solid var(--secondary_2);
@@ -192,11 +192,11 @@ table {
 
 table td,
 table th {
-  padding: $font_05;
+  padding: var(--font_05);
   text-align: center;
   color: var(--secondary_8);
   direction: ltr;
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 600;
 }
 

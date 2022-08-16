@@ -11,12 +11,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3.5rem;
+  width: var(--font_35);
   background: var(--white);
   border: 2px solid var(--primary_4);
   color: var(--primary_5);
   border-radius: $border_5;
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 600;
 }
 
@@ -27,12 +27,12 @@
 .plus,
 .minus {
   display: grid;
-  padding: $font_05;
-  margin: .3rem;
+  padding: var(--font_05);
+  margin: var(--font_03);
   border: 1px solid var(--secondary_3);
   background: var(--white);
   color: var(--secondary_5);
   border-radius: $border_5;
-  font-size: $font_s;
+  font-size: var(--font_s);
   cursor: pointer;
 }

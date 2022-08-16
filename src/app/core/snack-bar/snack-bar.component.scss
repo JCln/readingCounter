@@ -3,7 +3,7 @@
 ::ng-deep {
   .mat-simple-snackbar {
     font-family: $font_family;
-    font-size: $font_s;
+    font-size: var(--font_s);
     font-weight: 600;
     color: var(--fix_gray_light);
   }
@@ -12,7 +12,7 @@
     position: absolute;
     font-weight: 600;
     color: var(--fix_gray_light);
-    font-size: $font_xs;
+    font-size: var(--font_xs);
     font-family: $font_family;
     max-height: 36px;
     min-width: 0;

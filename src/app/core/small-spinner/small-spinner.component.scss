@@ -1,10 +1,10 @@
 .spinner {
   position: fixed;
-  font-size: 1.3rem;
+  font-size: var(--font_m);
   z-index: 1000;
 
   @media (min-width: 550px) {
-    top: .5rem;
+    top: var(--font_05);
   }
 }
 

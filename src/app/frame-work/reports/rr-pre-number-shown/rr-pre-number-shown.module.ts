@@ -4,15 +4,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SharedCarouselModule } from 'src/app/shared/shared_carousel';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
-import { CarouselWoumComponent } from './carousel-woum/carousel-woum.component';
 import { RrPreNumberShownRoutingModule } from './rr-pre-number-shown-routing.module';
 import { RrPreNumberShownComponent } from './rr-pre-number-shown.component';
 
 
 @NgModule({
   declarations: [
-    RrPreNumberShownComponent,
-    CarouselWoumComponent
+    RrPreNumberShownComponent
   ],
   imports: [
     SharedPrimeNgModule,

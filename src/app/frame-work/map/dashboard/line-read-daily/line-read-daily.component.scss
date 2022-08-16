@@ -1,6 +1,6 @@
 @import '../dashboard.component.scss';
 
 h3 {
-  padding: .2rem .5rem;
+  padding: var(--font_02) var(--font_05);
   color: var(--secondary_5);
 }

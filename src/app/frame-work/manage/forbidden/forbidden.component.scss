@@ -9,12 +9,12 @@ form {
   justify-content: center;
   margin: auto;
   position: relative;
-  padding: $font_xs;
+  padding: var(--font_xs);
   width: 18rem;
   background: var(--secondary_1);
   border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  margin-bottom: $font_xs;
+  margin-bottom: var(--font_xs);
 }
 
 .input_2 {
@@ -23,14 +23,14 @@ form {
 }
 
 .btn_1 {
-  margin-top: $font_2;
+  margin-top: var(--font_2);
   color: var(--white);
   background-color: var(--orange_500);
 }
 
 ._key,
 ._value {
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 800;
 }
 
@@ -54,7 +54,7 @@ input {
 
 ::ng-deep {
   .mat-select-panel .mat-option {
-    font-size: 1.2rem;
+    font-size: var(--font_s);
     line-height: 3em;
     height: 3em;
     text-align: right;
@@ -63,7 +63,7 @@ input {
   }
 
   .mat-option-text {
-    font-size: $font_s;
+    font-size: var(--font_s);
     font-weight: 600;
     color: var(--primary_6);
   }
@@ -72,6 +72,6 @@ input {
 
 ._collapsable {
   position: absolute;
-  left: .2rem;
+  left: var(--font_02);
   top: 0;
 }

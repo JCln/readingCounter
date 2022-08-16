@@ -2,9 +2,9 @@
 
 .mat-dialog-content {
   color: var(--secondary_7);
-  font-size: $font_s;
+  font-size: var(--font_s);
   text-align: right;
-  word-spacing: .3rem;
+  word-spacing: var(--font_03);
 }
 
 strong {
@@ -14,7 +14,7 @@ strong {
 ._circle_border {
   color: var(--green_500);
   border: 2px solid var(--green_500);
-  margin-left: $font_xs;
+  margin-left: var(--font_xs);
 }
 
 h2 {
@@ -39,7 +39,7 @@ h2 {
 }
 
 ._text {
-  margin-left: $font_xs;
+  margin-left: var(--font_xs);
 }
 
 ._custom {

@@ -12,7 +12,7 @@
   position: relative;
   background-color: var(--white);
   width: 100%;
-  padding: 0.1rem;
+  padding: var(--font_01);
   box-shadow: 0 1px 5px 0px var(--primary_5);
 }
 
@@ -33,20 +33,20 @@ ul {
 li {
   display: flex;
   align-items: center;
-  margin: 0 0.25rem;
+  margin: 0 var(--font_025);
   border-radius: 15px;
   color: var(--secondary_7);
   text-align: center;
   list-style-type: none;
   cursor: pointer;
 
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 600;
 }
 
 ._name {
   margin-left: auto;
-  font-size: $font_xxs;
+  font-size: var(--font_xxs);
   color: var(--primary_5);
   cursor: auto;
   @include _borders();
@@ -54,7 +54,7 @@ li {
 
 .menu_toggle {
   display: block;
-  padding: $font_05;
+  padding: var(--font_05);
   border-radius: $border_50;
   background-color: var(--secondary_3);
   cursor: pointer;
@@ -74,11 +74,11 @@ li {
 ._status {
   .tooltip .tooltip_text_bottom {
     width: 10rem;
-    font-size: $font_xs;
+    font-size: var(--font_xs);
   }
 
   i {
-    font-size: $font_l;
+    font-size: var(--font_l);
     vertical-align: middle;
   }
 
@@ -105,9 +105,9 @@ li {
 
 .btn_2_o {
   height: inherit;
-  width: 5rem;
-  font-size: 1rem;
+  width: var(--font_5);
+  font-size: var(--font_xs);
 }
 
-@include media_wrapper(550px, '._name', font-size, $font_xs);
-@include media_wrapper(780px, '._name', font-size, $font_m);
+@include media_wrapper(550px, '._name', font-size, var(--font_xs));
+@include media_wrapper(780px, '._name', font-size, var(--font_m));

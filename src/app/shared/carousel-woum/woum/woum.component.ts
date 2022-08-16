@@ -133,11 +133,22 @@ export class WoumComponent implements OnChanges {
 
     this.bindDocumentListeners();
     this.canShowBigScreen();
+    this.addStylesToImg();
   }
   canShowBigScreen = () => {
     // if image number is one then show on fullScreen
-    if (this.originImages.length === ENRandomNumbers.one) {
+    if (!this.profileService.getUseCarouselMedia() && this.originImages.length === ENRandomNumbers.one) {
       this.showBigImage(this.originImages[0]);
+    }
+  }
+  addStylesToImg = () => {
+    if (this.profileService.getUseCarouselMedia()) {
+      const a = this.profileService.getImg();
+      const img = document.querySelector('.main-img') as HTMLElement;
+      
+      img.style.width = a.width;
+      img.style.height = a.height;
+      img.style.objectFit = a.objectFit;
     }
   }
   getDownloadListInfo = () => {

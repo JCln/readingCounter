@@ -48,7 +48,7 @@
                     <div class="tooltip_text">ثبت بازدید</div>
                 </i>
                 <i *ngIf="_checkUpName == 'allComponent'" (click)="filterCounterState()">
-                    <label class="font_family" for="binary">نمایش قرائت شده ها</label>
+                    <label class="font_family" for="binary">({{dataSource.length}}) نمایش قرائت شده ها</label>
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
                 </i>

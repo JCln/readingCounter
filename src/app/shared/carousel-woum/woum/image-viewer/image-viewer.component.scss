@@ -19,10 +19,10 @@ img {
 
 i {
   color: var(--thirdy_1);
-  font-size: $font_m;
-  margin: $font_05;
+  font-size: var(--font_m);
+  margin: var(--font_05);
   border-radius: $border_50;
-  padding: $font_05;
+  padding: var(--font_05);
   background-color: var(--secondary_1);
   cursor: pointer;
 }

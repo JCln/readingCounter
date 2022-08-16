@@ -5,7 +5,7 @@
 @import '_mat.scss';
 
 .map-frame {
-  margin: 1rem .2rem;
+  margin: var(--font_xs) var(--font_02);
   height: 100%;
   min-height: 70vh;
   box-shadow: -1px 2px 5px 5px var(--secondary_4);
@@ -40,15 +40,15 @@
     cursor: pointer;
     border: 2px solid var(--orange_500);
     border-radius: 100vmax;
-    width: 5rem;
+    width: var(--font_5);
     transition: all ease-in-out 250ms;
 
     &::after {
       content: '';
       display: block;
       margin-left: auto;
-      height: $font_s;
-      width: $font_s;
+      height: var(--font_s);
+      width: var(--font_s);
       border-radius: $border_50;
       background: var(--orange_500);
       transition: all ease-in-out 250ms;
@@ -73,12 +73,12 @@
   label {
     display: flex;
     position: relative;
-    font-size: $font_m;
-    margin: 0 $font_05;
+    font-size: var(--font_m);
+    margin: 0 var(--font_05);
     color: var(--primary_5);
     background: var(--secondary_3);
     border-radius: $border_50;
-    padding: $font_05;
+    padding: var(--font_05);
     cursor: pointer;
   }
 }
@@ -88,9 +88,9 @@
   &::after {
     content: '';
     position: absolute;
-    width: 5.2rem;
-    height: 3rem;
-    top: -.25rem;
+    width: var(--font_52);
+    height: var(--font_3);
+    top: calc(-1 * var(--font_025));
     right: 0;
   }
 }
@@ -100,9 +100,9 @@
   &::after {
     content: '';
     position: absolute;
-    width: 5.5rem;
-    height: 3rem;
-    top: -.25rem;
+    width: var(--font_55);
+    height: var(--font_3);
+    top: calc(-1 * var(--font_025));
     left: 0;
   }
 }
@@ -114,15 +114,15 @@
   justify-content: center;
   align-items: center;
   border-radius: 100vmax;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: var(--font_25);
+  height: var(--font_25);
   padding: 0rem;
   border: 0;
   background-color: var(--secondary_3);
   color: var(--thirdy_1);
 
   i {
-    font-size: $font_m;
+    font-size: var(--font_m);
     font-weight: 600;
   }
 }
@@ -130,19 +130,19 @@
 .polyline_config {
   position: absolute;
   left: 0rem;
-  top: -3rem;
+  top: calc(-1 * var(--font_3));
   z-index: 2;
   background: var(--white);
   width: 20rem;
-  margin: $font_xs;
-  padding: $font_xs;
+  margin: var(--font_xs);
+  padding: var(--font_xs);
   text-align: right;
   direction: rtl;
   border-radius: $border_15;
   box-shadow: 0px 2px 3px 1px var(--thirdy_3);
 
   @media (max-width: 550px) {
-    margin: $font_l 0;
+    margin: var(--font_l) 0;
     width: 18rem;
   }
 }
@@ -150,8 +150,8 @@
 article {
   background-color: var(--secondary_2);
   border-radius: $border_15;
-  margin: $font_2 0 0;
-  padding: $font_05;
+  margin: var(--font_2) 0 0;
+  padding: var(--font_05);
   box-shadow: 0 0 2px 1px var(--secondary_5);
 }
 
@@ -161,22 +161,22 @@ article {
 
 h3 {
   color: var(--primary_3);
-  margin-bottom: $font_05;
+  margin-bottom: var(--font_05);
 }
 
 .btn_2 {
-  height: 2.5rem;
+  height: var(--font_25);
   color: var(--secondary_6);
-  margin-top: $font_xs;
+  margin-top: var(--font_xs);
 }
 
 ._flex_dr_ric {
-  margin: 0 $font_05;
+  margin: 0 var(--font_05);
 
   p {
-    font-size: $font_s;
+    font-size: var(--font_s);
     color: var(--primary_5);
-    margin: 0 $font_xs;
+    margin: 0 var(--font_xs);
   }
 }
 

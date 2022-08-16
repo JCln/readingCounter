@@ -14,13 +14,13 @@
 main {
   max-width: 23rem;
   text-align: center;
-  padding: $font_2 $font_2 $font_xs;
+  padding: var(--font_2) var(--font_2) var(--font_xs);
   border-radius: $border_15;
   background: var(--secondary_1);
   box-shadow: 2px 2px 5px 0px var(--secondary_4);
 
   @media (max-width: 550px) {
-    padding: 0 $font_xxs $font_05;
+    padding: 0 var(--font_xxs) var(--font_05);
   }
 }
 
@@ -31,8 +31,8 @@ main {
     position: absolute;
     transform: translateY(50%);
     vertical-align: middle;
-    margin-left: -2.5rem;
-    font-size: $font_l;
+    margin-left: calc(-1 * var(--font_25));
+    font-size: var(--font_l);
   }
 
 }
@@ -40,16 +40,16 @@ main {
 .title {
   font-weight: 600;
   color: var(--primary_7);
-  font-size: 2.5rem;
-  margin-bottom: $font_s;
+  font-size: var(--font_25);
+  margin-bottom: var(--font_s);
 
   @media (max-width: 550px) {
-    font-size: $font_2;
+    font-size: var(--font_2);
   }
 }
 
 ._inputs {
-  margin-bottom: $font_2;
+  margin-bottom: var(--font_2);
   border: var(--primary_7);
 
   input::placeholder {
@@ -59,7 +59,7 @@ main {
   .input_1 {
     text-align: center;
     max-width: 19rem;
-    padding: 0 $font_3 0 $font_s;
+    padding: 0 var(--font_3) 0 var(--font_s);
     color: var(--primary_5) !important;
   }
 }
@@ -76,7 +76,7 @@ main {
 
 .version {
   color: var(--primary_7);
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 600;
 }
 
@@ -93,7 +93,7 @@ input:-internal-autofill-selected {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: $font_2;
+  margin-top: var(--font_2);
 
   i {
     background: var(--white);
@@ -106,7 +106,7 @@ input:-internal-autofill-selected {
     background: var(--white);
     transform: translate(-50%, -50%);
     border-radius: $border_15;
-    padding: $font_05 $font_xs;
+    padding: var(--font_05) var(--font_xs);
     box-shadow: 0 0 1px 3px var(--secondary_4);
 
     div {
@@ -114,13 +114,13 @@ input:-internal-autofill-selected {
       justify-content: flex-end;
       color: var(--secondary_8);
       text-align: right;
-      font-size: $font_s;
+      font-size: var(--font_s);
       font-weight: 600;
 
       &::after {
         content: '\2713';
         color: var(--green_500);
-        padding: 0 0 0 .3rem;
+        padding: 0 0 0 var(--font_03);
       }
     }
   }
