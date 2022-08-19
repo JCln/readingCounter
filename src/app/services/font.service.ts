@@ -25,6 +25,9 @@ export class FontService {
   getFonts = () => {
     return this.fonts;
   }
+  getActiveFont(): Theme {
+    return this.active;
+  }
 
   private saveToLocalStorage = (name: ENFontName, color: ENFontStyle) => {
     this.browserStorageService.set(name, color);

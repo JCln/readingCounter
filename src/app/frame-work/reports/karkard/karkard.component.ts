@@ -17,8 +17,6 @@ import { EN_Routes } from 'src/app/interfaces/routes.enum';
   styleUrls: ['./karkard.component.scss']
 })
 export class KarkardComponent extends FactoryONE {
-  isCollapsed: boolean = false;
-
   dataSource: IReadingReportKarkard[] = [];
   karbariDictionary: IDictionaryManager[] = [];
 

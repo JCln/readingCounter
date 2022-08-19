@@ -229,7 +229,7 @@ export class HelpWrapperService {
         messageOne: 'کلیه اطلاعات قرائت شده (تخلیه شده) توسط مامور قرائت در این قسمت قابل مشاهده و اصلاح می باشد. برای اصلاح بروی آیکن اصلاح کلیک تا به صفحه اصلاح منتقل شوید',
         imgOne: 'assets/imgs/help/offloadmodify/allmodify.JPG',
       }
-    else if (currentRoute.includes(EN_Routes.wrmlallfalse) || currentRoute.includes(EN_Routes.wrmtrackwouifalse))
+    else if (currentRoute.includes(EN_Routes.wrmlallfalse))
       return {
         title: 'لیست قرائت',
         messageOne: ' لیست قرائت مامور در این قسمت قابل مشاهده می باشد. درصورتی که عکس(ها) و یا صوتی گرفته شده باشد با کلیک برروی "بررسی عکس/صوت" قابل بررسی می باشد.',
@@ -324,7 +324,7 @@ export class HelpWrapperService {
     this.messageToShow.messageThree = currentVal.messageThree;
 
     this.dialog.open(AddNewComponent, {
-      minWidth: '19rem',
+      minWidth: '65vw',
       data: currentVal
     });
   }

@@ -13,8 +13,7 @@ import { IReadingTimeRes } from 'src/app/interfaces/data-mining';
   templateUrl: './dm-analysis.component.html',
   styleUrls: ['./dm-analysis.component.scss']
 })
-export class DmAnalysisComponent extends FactoryONE {
-  isCollapsed: boolean = false;
+export class DmAnalysisComponent extends FactoryONE {  
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];

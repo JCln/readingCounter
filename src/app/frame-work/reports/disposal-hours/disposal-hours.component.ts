@@ -15,13 +15,12 @@ import { EN_Routes } from 'src/app/interfaces/routes.enum';
   styleUrls: ['./disposal-hours.component.scss']
 })
 export class DisposalHoursComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
 
   dataSource: IRRChartResWrapper[] = [];
-  
+
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
 

@@ -35,7 +35,7 @@ export class RegionComponent extends FactoryONE {
       const dialogRef = this.dialog.open(RegionAddDgComponent,
         {
           disableClose: true,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             di: this.provinceDictionary
           }

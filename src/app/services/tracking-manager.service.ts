@@ -86,7 +86,7 @@ export class TrackingManagerService {
     private envService: EnvService,
     private jwtService: JwtService,
     private columnManager: ColumnManager,
-    private PageSignsService: PageSignsService
+    private pageSignsService: PageSignsService
   ) { }
 
   firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
@@ -106,7 +106,6 @@ export class TrackingManagerService {
       })
     })
   }
-
   getApiUrl = (): string => {
     return this.envService.API_URL;
   }
@@ -205,23 +204,6 @@ export class TrackingManagerService {
   }
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
-  }
-  backToConfirmDialog = (trackNumber: string) => {
-    const title = EN_messages.reason_backToPrev;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.migrateOrRemoveTask(ENInterfaces.trackingPRE, trackNumber, desc);
-        }
-      })
-    })
   }
   hasNextBazdidConfirmDialog = (message: EN_messages): Promise<any> => {
     return new Promise(resolve => {
@@ -390,7 +372,7 @@ export class TrackingManagerService {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
   routeToLMPayDay = (row: ITracking) => {
-    this.PageSignsService.perday_pageSign.trackNumber = row.trackNumber;
+    this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
     this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
   routeToLMAll = (row: any) => {

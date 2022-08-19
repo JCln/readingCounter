@@ -33,7 +33,7 @@ export class CounterReportComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(CrAddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           di: this.zoneDictionary
         }

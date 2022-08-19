@@ -16,7 +16,6 @@ import { AllListsFactory } from 'src/app/classes/factory';
   styleUrls: ['./rr-locked.component.scss']
 })
 export class RrLockedComponent extends AllListsFactory {
-  isCollapsed: boolean = false;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 

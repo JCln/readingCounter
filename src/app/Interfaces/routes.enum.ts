@@ -5,8 +5,6 @@ export enum EN_Routes {
     'wrmlGeneralGModify' = '/wr/m/l/generalGList',
     'wrmsfwu' = '/wr/m/s/fwu',
     'wrmsfwu/' = '/wr/m/s/fwu/',
-    'wrmtrackwouifalse' = '/wr/m/track/woui/false/',
-    'wrmtrackwouitrue' = '/wr/m/track/woui/true/',
     'wrofflinetxtout' = '/wr/offline/txtout',
     'wrdb' = '/wr/db',
     'wrrptsmamdhchart' = '/wr/rpts/mam/dh/chart',

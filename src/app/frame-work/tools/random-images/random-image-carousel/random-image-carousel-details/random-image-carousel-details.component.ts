@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
 import { ProfileService } from 'services/profile.service';
@@ -11,7 +11,7 @@ import { ImageAttributionFile } from 'src/app/interfaces/tools';
   templateUrl: './random-image-carousel-details.component.html',
   styleUrls: ['./random-image-carousel-details.component.scss']
 })
-export class RandomImageCarouselDetailsComponent implements OnChanges {
+export class RandomImageCarouselDetailsComponent implements OnChanges, AfterViewInit {
 
   @Input() fileRepositoryId: string;
   @Input() onOffLoadId: string;
@@ -22,6 +22,11 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
   @Input() sizeInByte: string;
   @Input() allImages: any;
   @Input() imageDescription: string;
+  @Input() zoneTitle: string;
+  @Input() trackNumber: number;
+  @Input() counterReaderName: string;
+  @Input() counterNumber: number;
+  @Input() counterStateTitle: string;
 
   degree: number = 0;
   dictionary: IDictionaryManager[] = [];
@@ -78,5 +83,7 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
     img.style.height = a.height;
     img.style.objectFit = a.objectFit;
   }
-
+  ngAfterViewInit(): void {
+    this.addStylesToImg();
+  }
 }

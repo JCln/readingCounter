@@ -1,5 +1,5 @@
 <main class="main">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="readingReportManagerService.isCollapsedImgAttrAnlz">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
 
@@ -40,10 +40,11 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource"
-        [_outputFileName]="'_imageAttrAnalyze'" [_checkUpName]="'_imageAttrAnalyze'"
-        [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'_imageAttrAnalyze'"
+        [_checkUpName]="'_imageAttrAnalyze'" [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedImgAttrAnlz"
+        (collapsed)="readingReportManagerService.isCollapsedImgAttrAnlz = !readingReportManagerService.isCollapsedImgAttrAnlz"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>
 

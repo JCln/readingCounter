@@ -34,7 +34,7 @@ export class Auth2Component extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(Auth2AddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           di: this.authLevel1Dictionary
         }

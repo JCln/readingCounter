@@ -30,7 +30,7 @@ export class ReadingPeriodKindComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(RpkmAddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { ProfileService } from 'services/profile.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { ProfileService } from 'services/profile.service';
   templateUrl: './gallery-all-details.component.html',
   styleUrls: ['./gallery-all-details.component.scss']
 })
-export class GalleryAllDetailsComponent {
+export class GalleryAllDetailsComponent implements AfterViewInit {
 
   @Input() eshterak: string;
   @Input() imageDescription: string;
@@ -15,6 +15,11 @@ export class GalleryAllDetailsComponent {
   @Input() sureName: string;
   @Input() radif: number;
   @Input() sizeInByte: number;
+  @Input() zoneTitle: string;
+  @Input() trackNumber: number;
+  @Input() counterReaderName: string;
+  @Input() counterNumber: number;
+  @Input() counterStateTitle: string;
 
   @Input() allImages: any;
   degree: number = 0;
@@ -46,6 +51,9 @@ export class GalleryAllDetailsComponent {
     img.style.width = a.width;
     img.style.height = a.height;
     img.style.objectFit = a.objectFit;
+  }
+  ngAfterViewInit(): void {
+    this.addStylesToImg();
   }
 
 }

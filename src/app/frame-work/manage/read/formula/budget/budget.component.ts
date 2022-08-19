@@ -40,7 +40,7 @@ export class BudgetComponent extends FactoryONE {
       const dialogRef = this.dialog.open(BudgetAddDgComponent,
         {
           disableClose: true,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             di: this.zoneDictionary,
             karbariCodeDic: this.karbariCodeDictionary
@@ -57,7 +57,7 @@ export class BudgetComponent extends FactoryONE {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
-          minWidth: '19rem',
+          minWidth: '65vw',
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result)

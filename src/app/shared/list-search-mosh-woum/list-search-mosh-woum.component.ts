@@ -11,6 +11,7 @@ import { ListManagerService } from 'services/list-manager.service';
 export class ListSearchMoshWoumComponent implements OnInit {
   dataSource: any;
   zoneDictionary: IDictionaryManager[] = [];
+  _isNotForbidden: boolean;
 
   constructor(
     public listManagerService: ListManagerService,
@@ -19,11 +20,12 @@ export class ListSearchMoshWoumComponent implements OnInit {
 
   classWrapper = async () => {
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
-    console.log(this.config);
+    console.log(this.config.data);
 
-    this.dataSource = this.config.data;
+    this.dataSource = this.config.data._data;
+    this._isNotForbidden = this.config.data._isNotForbidden;
     // for latest reads component there is no zoneId element so The ifElse needed
-    
+
     if (this.dataSource.zoneId || this.dataSource.zoneTitle) {
       if (this.dataSource.zoneId) {
         this.dataSource.zoneId = this.convertTitleToId(this.dataSource.zoneId).id;

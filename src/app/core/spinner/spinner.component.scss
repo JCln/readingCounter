@@ -45,7 +45,6 @@
   transform-origin: center;
 }
 
-
 .loader {
   position: relative;
   height: var(--font_xs);
@@ -75,8 +74,9 @@
   align-items: center;
   border: 1px solid;
   color: var(--primary_3);
-  transform: translateY(var(--font_5));
+  transform: translateX(50%) translateY(7rem);
   background: inherit;
   border-radius: 15px;
+  right: 50%;
   cursor: pointer;
 }

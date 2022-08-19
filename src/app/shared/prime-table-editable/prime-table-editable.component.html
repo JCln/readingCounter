@@ -61,7 +61,7 @@
             </div>
             <div class="left_side">
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
                 <i *ngIf="_checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3'"
                     (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
@@ -157,7 +157,7 @@
                             <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
                                 <div class="tooltip_text">بالا</div>
                             </i>
-                            <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">0
+                            <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">صفر
                                 <div class="tooltip_text">صفر</div>
                             </i>
                             <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!

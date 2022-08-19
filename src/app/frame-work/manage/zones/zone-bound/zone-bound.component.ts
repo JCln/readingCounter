@@ -35,7 +35,7 @@ export class ZoneBoundComponent extends FactoryONE {
       const dialogRef = this.dialog.open(ZoneBoundAddDgComponent,
         {
           disableClose: true,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             di: this.zoneDictionary
           }

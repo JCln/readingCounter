@@ -24,10 +24,9 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ToolsService {
-  _isCollapsedRandomImgCarouDetails: boolean = true;  
+  _isCollapsedRandomImgCarouDetails: boolean = true;
   _isCollapseFileDownloadImage: boolean = false;
   _isCollapsedRandomImages: boolean = false;
-  showCarousel: boolean = false;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,

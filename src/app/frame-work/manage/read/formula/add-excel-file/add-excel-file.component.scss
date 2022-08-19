@@ -17,9 +17,15 @@
 }
 
 ._desc {
-  margin: var(--font_xs) 0;
-  width: 90%;
+  margin: var(--font_xs) auto;
   border-radius: $border_15;
+}
+
+.input_1 {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 19rem;
+  text-align: center;
 }
 
 .title {
@@ -43,12 +49,6 @@ input {
   color: var(--secondary_5);
   margin: 0 auto;
   box-shadow: 1px 1px 8px 1px var(--secondary_4);
-}
-
-.input_1 {
-  margin: 0 auto;
-  width: 19rem;
-  text-align: center;
 }
 
 ._choose_file {

@@ -33,7 +33,7 @@ export class KarbariComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(KarbariAddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           di: this.provinceDictionary
         }

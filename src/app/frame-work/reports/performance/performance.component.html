@@ -1,5 +1,5 @@
 <main class="main">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="readingReportManagerService.isCollapsedPrfm">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
                 <section class="order_by">
@@ -83,7 +83,7 @@
         </form>
     </section>
     <app-prime-table [dataSource]="dataSource" [_outputFileName]="'analyzePrfm'" [_checkUpName]="'rr-analyzePrfm'"
-        [_selectedColumnsToRemember]="'selectedRRAnalyzeByParam'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+        [_selectedColumnsToRemember]="'selectedRRAnalyzeByParam'" [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedPrfm"
+        (collapsed)="readingReportManagerService.isCollapsedPrfm = !readingReportManagerService.isCollapsedPrfm" (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

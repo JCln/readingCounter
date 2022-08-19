@@ -34,7 +34,7 @@ export class Tabsare2Component extends FactoryONE {
       const dialogRef = this.dialog.open(Tabsare2AddDgComponent,
         {
           disableClose: true,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             di: this.zoneDictionary
           }

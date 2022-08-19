@@ -38,7 +38,7 @@ export class Tabsare3Component extends FactoryONE {
       const dialogRef = this.dialog.open(Tabsare3AddDgComponent,
         {
           disableClose: true,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             di: this.zoneDictionary,
             karbariCodeDic: this.karbariCodeDictionary
@@ -55,7 +55,7 @@ export class Tabsare3Component extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
-          minWidth: '19rem',
+          minWidth: '65vw',
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {

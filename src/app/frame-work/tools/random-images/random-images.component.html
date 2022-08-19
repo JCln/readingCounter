@@ -58,18 +58,19 @@
                 <img src="{{imgsOriginUrl[ri]}}" onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'"
                     alt="تصویر" loading="lazy" (click)="routeToOffload(item , ri, imgsOriginUrl[ri])">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
-                    <p>{{item.eshterak}}</p>
-                    <p>{{item.firstName}}</p>
-                    <p>{{item.sureName}}</p>
-                    <p>{{item.radif}}</p>
-                    <p>{{allImagesDataSource.trackNumber}}</p>
+                    <p>اش:{{item.eshterak}}</p>
+                    <p>{{item.zoneTitle}}</p>
+                    <p>{{item.firstName}}{{item.sureName}}</p>
+                    <p>ش.پر:{{item.radif}}</p>
+                    <p>ش.پ:{{item.trackNumber}}</p>
+                    <p>رقم فعلی:{{item.counterNumber}}</p>
                     <p>{{item.imageDescription}}</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <app-random-image-carousel *ngIf="toolsService.showCarousel" [dataSource]="carouselImage"
+    <app-random-image-carousel *ngIf="showCarousel" [dataSource]="carouselImage"
         (cancelClicked)="carouselCancelClicked()" (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
         <app-random-image-carousel-details></app-random-image-carousel-details>
 

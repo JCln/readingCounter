@@ -9,8 +9,7 @@
         <div class="input_2">
             <div class="_key">از</div>
             <div class="_value">
-                <app-date-jalali name="fromDate"
-                    (dateJalEvent)="forbiddenService.receiveFromDateJalali(forbiddenService.ENForbidden.forbidden, $event)"
+                <app-date-jalali name="fromDate" (dateJalEvent)="forbiddenService.receiveFromDateJalali($event)"
                     [dateObject]="forbiddenService.forbiddenReq.fromDate">
                 </app-date-jalali>
             </div>
@@ -18,8 +17,7 @@
         <div class="input_2">
             <div class="_key">تا</div>
             <div class="_value">
-                <app-date-jalali name="toDate"
-                    (dateJalEvent)="forbiddenService.receiveToDateJalali(forbiddenService.ENForbidden.forbidden, $event)"
+                <app-date-jalali name="toDate" (dateJalEvent)="forbiddenService.receiveToDateJalali($event)"
                     [dateObject]="forbiddenService.forbiddenReq.toDate">
                 </app-date-jalali>
             </div>
@@ -38,6 +36,5 @@
     [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]" [_selectedColumnsToRemember]="'selectedForbidden'"
     [_hasCollapsible]=true [_isCollaped]="forbiddenService._isCollapsedForbidden"
     (collapsed)="forbiddenService._isCollapsedForbidden = !forbiddenService._isCollapsedForbidden"
-    (refreshedTable)="refreshTable()" (showedPictures)="showPictures($event)"
-    (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
+    (refreshedTable)="refreshTable()" (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
 </app-prime-table>

@@ -207,6 +207,11 @@ export interface IImageUrlAndInfos {
     sureName: string,
     imageDescription: string,
     sizeInByte: number,
+    zoneTitle: string,
+    counterReaderName: string,
+    counterNumber: number,
+    counterStateTitle: string,
+    trackNumber: number,
     imageUrl?: any
 }
 export interface IImageUrlInfoWrapper {
@@ -214,6 +219,8 @@ export interface IImageUrlInfoWrapper {
     itemCount: number,
     imageCount: number,
     distinctImageCount: number,
+    zoneTitle: string,
+    counterReaderName: string,
     imageUrlAndInfos: IImageUrlAndInfos[]
 }
 export interface IDynamicReportsRes {

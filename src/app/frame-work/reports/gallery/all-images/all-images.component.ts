@@ -36,7 +36,6 @@ export class AllImagesComponent extends FactoryONE {
     this.closeTabService.saveDataForRRGalleryRSFirst = this.allImagesDataSource;
     this.closeTabService.saveDataForRRGalleryReq = this.readingReportManagerService.trackNumberAllImages;
     this.showAllImgs();
-    this.readingReportManagerService._isCollapsedAllImgs = true;
   }
   classWrapper = async (canRefresh?: boolean) => {
     /* TODO: 
@@ -53,7 +52,6 @@ export class AllImagesComponent extends FactoryONE {
     }
     if (this.closeTabService.saveDataForRRGalleryReq) {
       this.readingReportManagerService.trackNumberAllImages = this.closeTabService.saveDataForRRGalleryReq;
-      this.readingReportManagerService._isCollapsedAllImgs = true;
     }
 
   }

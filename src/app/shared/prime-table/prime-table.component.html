@@ -53,7 +53,7 @@
                     </p-checkbox>
                 </i>
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
                 <i *ngIf="_hasCollapsible" (click)="collapse()" class="tooltip _circle_border p_icons"
                     [ngClass]="_isCollaped ? 'pi pi-chevron-down' : 'pi pi-chevron-up'">
@@ -65,7 +65,7 @@
                 </i>
                 <i *ngIf="_checkUpName== 'apk'" (click)="downloadAPK()"
                     class="tooltip _circle_border p_icons fa fa-inbox">
-                    <div class="tooltip_text">دانلود فایل</div>
+                    <div class="tooltip_text_right">دانلود فایل</div>
                 </i>
             </div>
         </div>
@@ -120,7 +120,7 @@
                         <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
                             <div class="tooltip_text">بالا</div>
                         </i>
-                        <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">0
+                        <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">صفر
                             <div class="tooltip_text">صفر</div>
                         </i>
                         <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
@@ -182,7 +182,7 @@
             <td *ngIf="_outputFileName== 'loaded'" (click)="backToImportedConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">بازگشت به صادر شده</span>
                 <i class="tooltip p_icons pi pi-step-backward">
-                    <div class="tooltip_text">بازگشت به صادر شده</div>
+                    <div class="tooltip_text_right">بازگشت به صادر شده</div>
                 </i>
             </td>
             <td *ngIf="_outputFileName == 'imported'" (click)="showMoreDetails(dataSource)">
@@ -279,7 +279,7 @@
             <td *ngIf="_outputFileName == 'offloaded'" (click)="routeToLMAll(dataSource)">
                 <span class="ui-column-title">بازدید</span>
                 <i class="tooltip p_icons pi pi-eye">
-                    <div class="tooltip_text">بازدید</div>
+                    <div class="tooltip_text_right">بازدید</div>
                 </i>
             </td>
             <td *ngIf="                
@@ -290,19 +290,21 @@
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName == 'forbidden'">
-                <span class="ui-column-title">مشاهده عکس(ها)</span>
-                <i (click)="showPictures(dataSource.id)" class="tooltip p_icons fa fa-camera">
-                    <div class="tooltip_text_right">مشاهده عکس(ها)</div>
-                </i>
-            </td>
             <td *ngIf="(
                 _checkUpName == 'allComponent' ||                                                       
                 _outputFileName == 'momentLs' || 
                 _outputFileName == 'rrDetails' ||
                 _outputFileName == 'trv' ||
-                _outputFileName == 'trvDiff'  
-            )" (click)="doShowCarousel(dataSource)">
+                _outputFileName == 'trvDiff'                
+            )" (click)="doShowCarousel(dataSource, true)">
+                <span class="ui-column-title">بررسی عکس/صوت</span>
+                <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
+                    <div class="tooltip_text_right">بررسی عکس/صوت</div>
+                </i>
+            </td>
+            <td *ngIf="(
+                _outputFileName == 'forbidden'  
+            )" (click)="doShowCarouselForbidden(dataSource)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>

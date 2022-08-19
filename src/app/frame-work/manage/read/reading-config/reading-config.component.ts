@@ -36,7 +36,7 @@ export class ReadingConfigComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(RdAddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         width: '100%',
         data: {
           di: this.zoneDictionary
@@ -61,7 +61,7 @@ export class ReadingConfigComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(RdEditDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         width: '100%',
         data: {
           row,

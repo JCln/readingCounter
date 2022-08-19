@@ -157,6 +157,7 @@ input[type=number] {
 }
 
 :host ::ng-deep {
+
   .p-datatable-responsive .p-datatable-tbody>tr>td .p-column-title {
     display: none;
   }
@@ -199,7 +200,7 @@ input[type=number] {
   .p-dropdown.p-dropdown-clearable .p-dropdown-label {
     padding-right: var(--font_025);
     font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-    font-size: var(--font_xs);
+    font-size: var(--font_ss);
     font-weight: 600;
   }
 

@@ -8,6 +8,13 @@
   justify-content: center;
 }
 
+.double_size {
+  grid-column: auto/ span 2;
+
+  @media (max-width:550px) {
+    grid-column: auto;
+  }
+}
 
 .thumbnail_img {
   max-height: 8rem;

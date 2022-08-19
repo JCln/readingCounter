@@ -14,7 +14,6 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./rr-offload-karkard.component.scss']
 })
 export class RrOffloadKarkardComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   dataSource: IReadingReportKarkard[] = [];
 
   _selectedKindId: string = '';

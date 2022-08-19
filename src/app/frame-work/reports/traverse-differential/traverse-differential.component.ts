@@ -15,7 +15,6 @@ import { EN_Routes } from 'src/app/interfaces/routes.enum';
   styleUrls: ['./traverse-differential.component.scss']
 })
 export class TraverseDifferentialComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   dataSource: IReadingReportTraverseDifferentialRes[] = [];
   karbariDictionaryByCode: IDictionaryManager[] = [];
 

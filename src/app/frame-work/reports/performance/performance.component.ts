@@ -14,7 +14,6 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./performance.component.scss']
 })
 export class PerformanceComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -50,7 +49,7 @@ export class PerformanceComponent extends FactoryONE {
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
-  verification = async () => {    
+  verification = async () => {
     const temp = this.readingReportManagerService.verificationRRAnalyzePerformance(this.readingReportManagerService.anlzPrfmReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();

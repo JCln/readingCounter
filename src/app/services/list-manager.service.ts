@@ -152,7 +152,7 @@ export class ListManagerService {
       const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             data: res,
             title: title

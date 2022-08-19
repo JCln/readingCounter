@@ -33,6 +33,7 @@ export class WoumComponent implements OnChanges {
   @Input() firstName?: string;
   @Input() sureName?: string;
   @Input() radif: number;
+  @Input() _isNotForbidden: boolean;
   // from trv & details , ..
   @Input() fulName?: string;
 
@@ -102,7 +103,10 @@ export class WoumComponent implements OnChanges {
     if (!this.id)
       return;
 
-    this.dataSource = await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.id);
+    this.dataSource = this._isNotForbidden ?
+      await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileInfo, this.id) :
+      await this.downloadManagerService.downloadFileInfo(ENInterfaces.downloadFileForbidden, this.id)
+
     if (this.zoneId) {
       this.counterStatesDictionary = await this.trackingManagerService.getCounterStateByCodeDictionary(parseInt(this.zoneId));
     }
@@ -133,22 +137,11 @@ export class WoumComponent implements OnChanges {
 
     this.bindDocumentListeners();
     this.canShowBigScreen();
-    this.addStylesToImg();
   }
   canShowBigScreen = () => {
     // if image number is one then show on fullScreen
     if (!this.profileService.getUseCarouselMedia() && this.originImages.length === ENRandomNumbers.one) {
       this.showBigImage(this.originImages[0]);
-    }
-  }
-  addStylesToImg = () => {
-    if (this.profileService.getUseCarouselMedia()) {
-      const a = this.profileService.getImg();
-      const img = document.querySelector('.main-img') as HTMLElement;
-      
-      img.style.width = a.width;
-      img.style.height = a.height;
-      img.style.objectFit = a.objectFit;
     }
   }
   getDownloadListInfo = () => {

@@ -18,6 +18,10 @@
             [(ngModel)]="readingReportManagerService.trackNumberAllImages">
     </div>
     <div class="input_2">
+        <div class="_key">ناحیه</div>
+        <input readonly="true" class="_value" name="zone" [(ngModel)]="allImagesDataSource.zoneTitle">
+    </div>
+    <div class="input_2">
         <div class="_key">تعداد اشتراک دارای عکس</div>
         <input readonly="true" class="_value" name="distinctImageCount"
             [(ngModel)]="allImagesDataSource.distinctImageCount">
@@ -30,6 +34,10 @@
         <div class="_key">تعداد اشتراک</div>
         <input readonly="true" class="_value" name="itemCount" [(ngModel)]="allImagesDataSource.itemCount">
     </div>
+    <div class="input_2">
+        <div class="_key">مامور</div>
+        <input readonly="true" class="_value" name="counterReader" [(ngModel)]="allImagesDataSource.counterReaderName">
+    </div>
 </section>
 <main *ngIf="allImagesDataSource" style="position: relative;">
 
@@ -41,11 +49,12 @@
                     onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر"
                     (click)="routeToOffload(item , ri,imgsOriginUrl[ri])">
                 <div class="__hiddens" *ngIf="item.onOffLoadId">
-                    <p>{{item.eshterak}}</p>
-                    <p>{{item.firstName}}</p>
-                    <p>{{item.sureName}}</p>
-                    <p>{{item.radif}}</p>
-                    <p>{{allImagesDataSource.trackNumber}}</p>
+                    <p>اش:{{item.eshterak}}</p>
+                    <p>{{item.zoneTitle}}</p>
+                    <p>{{item.firstName}}{{item.sureName}}</p>
+                    <p>ش.پر:{{item.radif}}</p>
+                    <p>ش.پ:{{item.trackNumber}}</p>
+                    <p>رقم فعلی:{{item.counterNumber}}</p>
                     <p>{{item.imageDescription}}</p>
                 </div>
             </div>

@@ -17,6 +17,7 @@ export class RandomImagesComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
   _quantity: ITitleValue[] = [];
   rowIndex: number = 0;
+  showCarousel: boolean = false;
 
   allImagesDataSource: IImageUrlInfoWrapper;
   carouselImage: IImageUrlAndInfos;
@@ -69,7 +70,7 @@ export class RandomImagesComponent extends FactoryONE {
     this.carouselImage = dataSource;
     this.carouselImage.imageUrl = imgOrigin;
     this.rowIndex = rowIndex;
-    this.toolsService.showCarousel = true;
+    this.showCarousel = true;
   }
   carouselNextItem = () => {
     this.rowIndex >= this.allImagesDataSource.imageUrlAndInfos.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
@@ -82,7 +83,7 @@ export class RandomImagesComponent extends FactoryONE {
     this.carouselImage.imageUrl = this.imgsOriginUrl[this.rowIndex];
   }
   carouselCancelClicked = () => {
-    this.toolsService.showCarousel = false;
+    this.showCarousel = false;
   }
 
 }

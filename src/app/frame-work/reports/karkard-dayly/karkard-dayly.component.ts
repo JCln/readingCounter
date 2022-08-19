@@ -14,7 +14,6 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./karkard-dayly.component.scss']
 })
 export class KarkardDaylyComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];

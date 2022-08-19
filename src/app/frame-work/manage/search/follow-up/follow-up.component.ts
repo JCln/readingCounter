@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { IFollowUp, IFollowUpHistory } from 'interfaces/isearchs';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
@@ -45,8 +46,11 @@ export class FollowUpComponent extends FactoryONE {
     this.classWrapper();
   }
 
-  toPreStatus = (dataSource: IFollowUpHistory) => {
-    this.trackingManagerService.backToConfirmDialog(dataSource.id);
+  toPreStatus = async (dataSource: IFollowUpHistory) => {
+    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_backToPrev, true, false);
+    if (a) {
+      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingPRE, dataSource.id, a);
+    }
   }
   private makeConfigs = async () => {
     this.changeHsty = this.dataSource.changeHistory;

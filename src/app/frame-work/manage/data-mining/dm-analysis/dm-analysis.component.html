@@ -1,5 +1,5 @@
 <main class="main">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="dataMiningAnalysesService.isCollapsedCranlz">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
                 <section class="order_by">
@@ -84,8 +84,10 @@
     </section>
 
     <app-prime-table [dataSource]="dataSource" [_outputFileName]="'analysis'" [_checkUpName]="'dm-analysis'"
-        [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+        [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
+        [_isCollaped]="dataMiningAnalysesService.isCollapsedCranlz"
+        (collapsed)="dataMiningAnalysesService.isCollapsedCranlz = !dataMiningAnalysesService.isCollapsedCranlz"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 
 </main>

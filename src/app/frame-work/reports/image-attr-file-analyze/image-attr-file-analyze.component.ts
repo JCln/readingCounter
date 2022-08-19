@@ -13,7 +13,6 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./image-attr-file-analyze.component.scss']
 })
 export class ImageAttrFileAnalyzeComponent extends FactoryONE {
-  isCollapsed: boolean = false;
   dataSource: IImageAttributionAnalyze[] = [];
   chartColors: any[];
 

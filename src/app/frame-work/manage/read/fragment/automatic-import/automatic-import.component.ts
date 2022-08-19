@@ -79,7 +79,7 @@ export class AutomaticImportComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(AutoImportEditDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           dictionary: this.readingPeriodKindDictionary,
           body: body

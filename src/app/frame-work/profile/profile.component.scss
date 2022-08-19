@@ -70,6 +70,13 @@ main {
   font-size: var(--font_l2);
 }
 
+h2.title {
+  color: var(--primary_4);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_l);
+}
+
 .change_pass {
   text-align: center;
 

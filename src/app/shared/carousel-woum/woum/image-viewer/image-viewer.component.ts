@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProfileService } from 'services/profile.service';
 
@@ -7,7 +7,7 @@ import { ProfileService } from 'services/profile.service';
   templateUrl: './image-viewer.component.html',
   styleUrls: ['./image-viewer.component.scss']
 })
-export class ImageViewerComponent implements OnInit {
+export class ImageViewerComponent implements OnInit, AfterViewInit {
   imageURL: string = '';
   degree: number = 0;
 
@@ -19,7 +19,6 @@ export class ImageViewerComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageURL = this.config.data;
-    this.addStylesToImg();
   }
 
   downloadImg = (src: string) => {
@@ -41,11 +40,13 @@ export class ImageViewerComponent implements OnInit {
   addStylesToImg = () => {
     const a = this.profileService.getImg();
     const img = document.querySelector('.main-img') as HTMLElement;
-    
+
     img.style.width = a.width;
     img.style.height = a.height;
     img.style.objectFit = a.objectFit;
   }
-
+  ngAfterViewInit(): void {
+    this.addStylesToImg();
+  }
 }
 

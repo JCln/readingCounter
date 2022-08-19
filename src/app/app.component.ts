@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { fromEvent, merge, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FontService } from 'services/font.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 import { ThemeService } from 'services/theme.service';
 
@@ -11,14 +12,26 @@ import { ThemeService } from 'services/theme.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  loadingRouteConfig: boolean = false;
 
   constructor(
     private router: Router,
     public themeService: ThemeService,
-    private spinnerWrapperService: SpinnerWrapperService
+    private spinnerWrapperService: SpinnerWrapperService,
+    private fontService: FontService
   ) {
-
+    this.spinnerRouterChangeEvent();
+    this.defaultConfigs();
+  }
+  createOnline$() {
+    return merge<any>(
+      fromEvent(window, 'offline').pipe(map(() => false)),
+      fromEvent(window, 'online').pipe(map(() => true)),
+      new Observable((sub: Observer<boolean>) => {
+        sub.next(navigator.onLine);
+        sub.complete();
+      }));
+  }
+  spinnerRouterChangeEvent = () => {
     this.router.events.subscribe(event => {
       this.createOnline$().subscribe(isOnline => {
         if (isOnline) {
@@ -31,14 +44,8 @@ export class AppComponent {
       });
     });
   }
-
-  createOnline$() {
-    return merge<any>(
-      fromEvent(window, 'offline').pipe(map(() => false)),
-      fromEvent(window, 'online').pipe(map(() => true)),
-      new Observable((sub: Observer<boolean>) => {
-        sub.next(navigator.onLine);
-        sub.complete();
-      }));
+  defaultConfigs = () => {
+    this.fontService.getActiveFont();
   }
+
 }

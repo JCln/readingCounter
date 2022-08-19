@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IForbiddenManager, IMostReportInput } from 'interfaces/imanage';
-import { ENRandomNumbers, ENSelectedColumnVariables, ITitleValue } from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
@@ -12,16 +11,11 @@ import { MathS } from '../classes/math-s';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 
-export enum ENForbidden {
-  forbidden = 'forbiddenReq'
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class ForbiddenService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  ENForbidden = ENForbidden;
   _isCollapsedForbidden: boolean = false;
 
   forbiddenReq: IMostReportInput = {
@@ -38,53 +32,25 @@ export class ForbiddenService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private router: Router,
     private utilsService: UtilsService
   ) { }
 
   /* API CALL */
   getDataSource = (): Promise<any> => {
-    if (!this.forbiddenReq) {
-      this.emptyMessage();
-      this.backToParent();
-      return;
-    }
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.forbidden, this.forbiddenReq).subscribe(res => {
-          resolve(res);
-        })
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.forbidden, this.forbiddenReq).subscribe(res => {
+        resolve(res);
       })
-    } catch (error) {
-      console.error(e => e);
-    }
+    })
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
-  getUserCounterReaders = (zoneId: number): Promise<any> => {
-    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
+  receiveFromDateJalali = ($event: string) => {
+    this.forbiddenReq.fromDate = $event;
   }
-  receiveFromDateJalali = (variable: ENForbidden, $event: string) => {
-    this[variable].fromDate = $event;
-  }
-  receiveToDateJalali = (variable: ENForbidden, $event: string) => {
-    this[variable].toDate = $event;
-  }
-  getYears = (): ITitleValue[] => {
-    return this.utilsService.getYears();
-  }
-  routeToWOUI = (UUID: string, isForbidden: boolean) => {
-    this.router.navigate([EN_Routes.wrmtrackwoui, isForbidden, UUID]);
-  }
-  routeToChild = () => {
-    this.utilsService.routeTo(EN_Routes.wrmfbnres);
-  }
-  backToParent = () => {
-    this.utilsService.routeTo(EN_Routes.wrmfbn);
-  }
-  emptyMessage = () => {
-    this.utilsService.snackBarMessageWarn(EN_messages.try_again);
+  receiveToDateJalali = ($event: string) => {
+    this.forbiddenReq.toDate = $event;
   }
   /* VALIDATION */
   private datesValidationForbidden = (): boolean => {

@@ -32,6 +32,16 @@ export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENReadingReports = ENReadingReports;
   trackNumberAllImages: number;
+  isCollapsedPrfm: boolean = false;
+  isCollapsedDH: boolean = false;
+  isCollapsedLocked: boolean = false;
+  isCollapsedOffKarkard: boolean = false;
+  isCollapsedMaster: boolean = false;
+  isCollapsedDaily: boolean = false;
+  isCollapsedKarkard: boolean = false;
+  isCollapsedTrv: boolean = false;
+  isCollapsedImgAttrAnlz: boolean = false;
+  isCollapsedTrvCh: boolean = false;
   isCollapsed: boolean = false;
   _isOrderByDate: boolean = false;
   _isCollapsedAllImgs: boolean = true;
@@ -445,7 +455,7 @@ export class ReadingReportManagerService {
       const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             data: res,
             title: title

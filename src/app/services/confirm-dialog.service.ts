@@ -16,7 +16,7 @@ export class ConfirmDialogService {
 
   open(options) {
     this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      minWidth: '19rem',
+      minWidth: '65vw',
       data: {
         title: options.title,
         message: options.message,

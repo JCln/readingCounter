@@ -1,5 +1,5 @@
 <main class="main">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="readingReportManagerService.isCollapsedDaily">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
                 <section class="order_by">
@@ -81,7 +81,9 @@
     </section>
 
     <app-prime-table [dataSource]="dataSource" [_outputFileName]="'karkardDaily'" [_checkUpName]="'rr-karkardDaily'"
-        [_selectedColumnsToRemember]="'selectedRRKarkardDaily'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+        [_selectedColumnsToRemember]="'selectedRRKarkardDaily'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.isCollapsedDaily"
+        (collapsed)="readingReportManagerService.isCollapsedDaily = !readingReportManagerService.isCollapsedDaily"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

@@ -30,16 +30,12 @@ export class ProfileService {
     hasCanclableSpinner: false,
     defaultFontStyle: 0,
     imgOptions: {
-      width: '100%',
-      height: '100%',
-      objectFit: ''
+      width: '40rem',
+      height: '40rem',
+      objectFit: 'contain'
     },
   }
-  imgOptions = {
-    width: '',
-    height: '',
-    objectFit: ''
-  }
+
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
@@ -132,7 +128,7 @@ export class ProfileService {
   firstConfirmDialog = (reason: EN_messages, password: any): Promise<any> => {
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           title: reason,
           isInput: false,

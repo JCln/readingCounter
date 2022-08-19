@@ -186,19 +186,23 @@ export class FactorySharedPrime implements OnChanges {
             'cancel': 'بازگشت'
         });
     }
-    doShowCarousel = (dataSource: any) => {
+    doShowCarousel = (dataSource: any, _isNotForbidden?: boolean) => {
         console.log(dataSource);
 
         this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-            data: dataSource,
+            data: { _data: dataSource, _isNotForbidden: _isNotForbidden },
             rtl: true,
-            width: '80%'
+            width: '80%',
         })
         this.ref.onClose.subscribe(async res => {
             if (res)
                 console.log(res);
 
         });
+    }
+    doShowCarouselForbidden = (dataSource: any) => {
+        // To make imageWrapper config Dialog for forbidden
+        this.doShowCarousel(dataSource, false);
     }
 
 }
@@ -239,7 +243,8 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
     }
     doShowCarousel = (dataSource: any) => {
         this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-            data: dataSource,
+
+            data: { _data: dataSource, _isNotForbidden: true },
             rtl: true,
             width: '80%'
         })

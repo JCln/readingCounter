@@ -23,6 +23,7 @@ import { Search } from '../classes/search';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { FollowUpService } from './follow-up.service';
+import { PageSignsService } from './page-signs.service';
 import { ProfileService } from './profile.service';
 
 @Injectable({
@@ -85,6 +86,7 @@ export class SearchService {
     private allListsService: AllListsService,
     private router: Router,
     private dialog: MatDialog,
+    private pageSignsService: PageSignsService,
     private profileService: ProfileService
   ) { }
 
@@ -351,7 +353,8 @@ export class SearchService {
     this.router.navigate([EN_Routes.wrmlall, false]);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
-    this.utilsService.routeToByParams(EN_Routes.wrmlpd, row.trackNumber);
+    this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
+    this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
   routeToFollowUp = (row: ISearchSimpleOutput) => {
     this.followUpService.setTrackNumber(row.trackNumber);
@@ -366,7 +369,7 @@ export class SearchService {
       const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             data: res,
             title: title

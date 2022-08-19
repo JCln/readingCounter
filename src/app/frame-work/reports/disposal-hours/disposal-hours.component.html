@@ -1,5 +1,5 @@
 <main class="main" *ngIf="route.children.length === 0">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="readingReportManagerService.isCollapsedDH">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
 
@@ -43,10 +43,11 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource"
-        [_outputFileName]="'disposalHs'" [_checkUpName]="'rr-disposalHs'"
-        [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'disposalHs'" [_checkUpName]="'rr-disposalHs'"
+        [_selectedColumnsToRemember]="'selectedRRDisposalHours'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.isCollapsedDH"
+        (collapsed)="readingReportManagerService.isCollapsedDH = !readingReportManagerService.isCollapsedDH"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>
 <router-outlet></router-outlet>

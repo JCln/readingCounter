@@ -40,7 +40,7 @@ export class WaterComponent extends FactoryONE {
       const dialogRef = this.dialog.open(WaterAddDgComponent,
         {
           disableClose: true,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             di: this.zoneDictionary,
             karbariCodeDic: this.karbariCodeDictionary
@@ -57,7 +57,7 @@ export class WaterComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
-          minWidth: '19rem',
+          minWidth: '65vw',
         });
       dialogRef.afterClosed().subscribe(async result => {
         if (result) {

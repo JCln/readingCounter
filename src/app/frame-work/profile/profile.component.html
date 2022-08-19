@@ -39,11 +39,17 @@
     </section>
 
     <section>
-        <h1 class="title">نمایش تصاویر بطور گروهی</h1>
+        <h1 class="title">تصاویر</h1>
         <div class="content">
+            <h2 class="title">نمایش تصاویر</h2>
             <p-selectButton [options]="stateOptions" [(ngModel)]="profileService.showStateVals.groupImgs"
                 optionLabel="label" optionValue="value"
                 (onChange)="setValueOfShowCarouselMedia(profileService.showStateVals.groupImgs)">
+            </p-selectButton>
+            <h2 class="title">اندازه تصاویر</h2>
+            <p-selectButton [options]="stateOptionsImageOption" [(ngModel)]="profileService.showStateVals.imgOptions"
+                optionLabel="label" optionValue="value"
+                (onChange)="setValuesOfImg(profileService.showStateVals.imgOptions)">
             </p-selectButton>
         </div>
     </section>
@@ -74,16 +80,6 @@
             <p-selectButton [options]="stateFontStyleOptions"
                 [(ngModel)]="profileService.showStateVals.defaultFontStyle" optionLabel="label" optionValue="value"
                 (onChange)="setFontStyle(profileService.showStateVals.defaultFontStyle)">
-            </p-selectButton>
-        </div>
-    </section>
-
-    <section>
-        <h1 class="title">اندازه تصویر</h1>
-        <div class="content">
-            <p-selectButton [options]="stateOptionsImageOption" [(ngModel)]="profileService.showStateVals.imgOptions"
-                optionLabel="label" optionValue="value"
-                (onChange)="setValuesOfImg(profileService.showStateVals.imgOptions)">
             </p-selectButton>
         </div>
     </section>

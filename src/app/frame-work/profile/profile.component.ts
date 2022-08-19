@@ -17,7 +17,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class ProfileComponent extends FactoryONE {
 
   password: IChangePassword = { oldPassword: '', newPassword: '', confirmPassword: '' };
-  stateOptions: any[] = [{ label: 'خیر', value: false }, { label: 'بله', value: true }];
+  stateOptions: any[] = [{ label: 'تکی', value: false }, { label: 'گروهی', value: true }];
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
@@ -67,6 +67,14 @@ export class ProfileComponent extends FactoryONE {
         objectFit: 'none'
       }
     },
+    {
+      label: 'حداکثر اندازه',
+      value: {
+        width: '100%',
+        height: '100%',
+        objectFit: 'contain'
+      }
+    },
   ];
   myInfoDataSource: IProfile;
   _selectCols: IObjectIteratation[];
@@ -107,8 +115,6 @@ export class ProfileComponent extends FactoryONE {
     this.profileService.showStateVals.imgOptions = this.profileService.getImg();
   }
   setValuesOfImg = (val: imageOption) => {
-    console.log(val);
-
     this.profileService.setImg(val);
     this.profileService.showMessage(EN_messages.imageOptionChanged);
   }

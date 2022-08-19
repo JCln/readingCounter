@@ -46,3 +46,8 @@ h2 {
 .input_1 {
   border-radius: $border_15;
 }
+
+.input_box {
+  display: flex;
+  justify-content: center;
+}

@@ -1,5 +1,5 @@
 <main class="main" *ngIf="route.children.length === 0">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="readingReportManagerService.isCollapsedTrvCh">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
                 <section class="order_by">
@@ -92,7 +92,8 @@
 
     <app-prime-table [dataSource]="dataSource" [_outputFileName]="'trvDiff'" [_checkUpName]="'rr-traverseDiff'"
         [_numberOfExtraColumns]="[1]" [_selectedColumnsToRemember]="'selectedRRTraverseDifferential'"
-        [_hasCollapsible]=true [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedTrvCh"
+        (collapsed)="readingReportManagerService.isCollapsedTrvCh = !readingReportManagerService.isCollapsedTrvCh"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

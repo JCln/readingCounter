@@ -12,8 +12,7 @@ import { FactoryONE } from 'src/app/classes/factory';
   templateUrl: './traverse.component.html',
   styleUrls: ['./traverse.component.scss']
 })
-export class TraverseComponent extends FactoryONE {
-  isCollapsed: boolean = false;
+export class TraverseComponent extends FactoryONE {  
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];

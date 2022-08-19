@@ -1,5 +1,5 @@
 <main class="main">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="readingReportManagerService.isCollapsedOffKarkard">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
                 <section class="order_by">
@@ -80,7 +80,7 @@
 
     <app-prime-table [dataSource]="dataSource" [_outputFileName]="'karkardOffload'"
         [_checkUpName]="'rr-offload-karkard'" [_selectedColumnsToRemember]="'selectedRROffloadedKarkard'"
-        [_hasCollapsible]=true [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedOffKarkard" (collapsed)="readingReportManagerService.isCollapsedOffKarkard = !readingReportManagerService.isCollapsedOffKarkard"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

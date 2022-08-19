@@ -36,7 +36,7 @@ export class ReadingPeriodComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(RpmAddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           di: this.zoneDictionary,
           rpkmId: this.readingPeriodKindDictionary

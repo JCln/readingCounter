@@ -1,8 +1,8 @@
 <h2 mat-dialog-title [ngClass]="{'_delete_style': data?.isDelete }">{{data.title}}</h2>
-
-<input *ngIf="data.isInput" class="input_1" type="text" placeholder="توضیحات را وارد نمایید"
-    [(ngModel)]="userInputText">
-
+<div class="input_box">
+    <input *ngIf="data.isInput" class="input_1" type="text" placeholder="توضیحات را وارد نمایید"
+        [(ngModel)]="userInputText">
+</div>
 <div *ngIf="data?.isSelectableDate" style="min-height: 20rem">
     <app-date-jalali name="date" (dateJalEvent)="receiveFromDateJalali($event)">
     </app-date-jalali>
