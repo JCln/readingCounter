@@ -39,17 +39,17 @@ export class SimafaReadingProgComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    if (!this.importDynamicService.checkSimafaVertification(this.closeTabService.importSimafaReadingProgramReq))
-      return;
-    // Save and send data to service
-    this.dataSource = await this.importDynamicService.postImportSimafaRDPG(ENInterfaces.postSimafaReadingProgram, this.closeTabService.importSimafaReadingProgramReq);
-    this.closeTabService.saveDataForSimafaReadingPrograms = this.dataSource;
+    if (this.importDynamicService.checkSimafaVertification(this.closeTabService.importSimafaReadingProgramReq)) {
+      // Save and send data to service
+      this.dataSource = await this.importDynamicService.postImportSimafaRDPG(ENInterfaces.postSimafaReadingProgram, this.closeTabService.importSimafaReadingProgramReq);
+      this.closeTabService.saveDataForSimafaReadingPrograms = this.dataSource;
 
-    if (!this.dataSource) {
-      this._empty_message = EN_messages.notFound;
-      return;
+      if (!this.dataSource) {
+        this._empty_message = EN_messages.notFound;
+        return;
+      }
+      Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
     }
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriodDictionary(this.closeTabService.importSimafaReadingProgramReq.kindId);
@@ -62,7 +62,7 @@ export class SimafaReadingProgComponent extends FactoryONE {
     this.closeTabService.importSimafaReadingProgramReq = this.importDynamicService.columnGetSimafaRDPG();
     if (this.closeTabService.saveDataForSimafaReadingPrograms) {
       this.dataSource = this.closeTabService.saveDataForSimafaReadingPrograms;
-      this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriodDictionary(this.closeTabService.importSimafaReadingProgramReq.kindId);
+      this.getReadingPeriod();
     }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();

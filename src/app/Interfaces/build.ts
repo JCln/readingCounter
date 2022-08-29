@@ -8,6 +8,7 @@ export interface IENV {
     years: { title: string, value: number }[],
     getDeleteDictionary: { id: number, title: string }[],
     hasCanclableSpinner: boolean,
+    timeout: number
 }
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
@@ -81,6 +82,9 @@ export class ENMapCenter {
 
     private constructor(public readonly value: [number, number]) {
     }
+}
+export class timeout {
+    static time = 2000;
 }
 export class ENMapUrls {
     static readonly DEFAULT = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.DEFAULT }, { title: 'sattelite', url: ENSatteliteAccessToken.DEFAULT + ENSatelliteToken.DEFAULT }]);

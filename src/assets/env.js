@@ -44,6 +44,7 @@
         { id: 5, title: 'F' }
     ];
     window.__env.hasCanclableSpinner = false;
+    window.__env.timeout = 18000;
 
     // Whether or not to enable debug mode
     // Setting this to false will disable console output

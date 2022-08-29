@@ -20,6 +20,9 @@ export class SpinnerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.spinnerJob();
+  }
+  spinnerJob = () => {
     this.spinnerWrapper.loadingStatus$.subscribe((res: any) => {
       this._hasSpinner = this.profileService.getHasCanclableSpinner() ? true : false;
 

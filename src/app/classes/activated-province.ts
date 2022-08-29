@@ -1,15 +1,16 @@
 import {
-    BrowserVersions,
-    ENActivateProvinceTitle,
-    ENHasCanclableSpinner,
-    ENHasNextBazdid,
-    ENMapCenter,
-    ENMapUrls,
-    ENURLs,
-    ENYears,
-    getDeleteDictionary,
-    IENV,
-    IENV_BROWSER_SETUP,
+  BrowserVersions,
+  ENActivateProvinceTitle,
+  ENHasCanclableSpinner,
+  ENHasNextBazdid,
+  ENMapCenter,
+  ENMapUrls,
+  ENURLs,
+  ENYears,
+  getDeleteDictionary,
+  IENV,
+  IENV_BROWSER_SETUP,
+  timeout,
 } from 'interfaces/build';
 
 export class ActivatedProvince implements IENV {
@@ -23,6 +24,7 @@ export class ActivatedProvince implements IENV {
         ENYears.DEFAULT.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        timeout.time
     );
     public static readonly ESF = new ActivatedProvince(
         ENActivateProvinceTitle.ESF,
@@ -34,6 +36,7 @@ export class ActivatedProvince implements IENV {
         ENYears.ESF.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        timeout.time
     );
     public static readonly TEH_ZONE4 = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_ZONE4,
@@ -45,6 +48,7 @@ export class ActivatedProvince implements IENV {
         ENYears.TEH_ZONE4.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        timeout.time
     );
     public static readonly TEH_SE = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE,
@@ -56,6 +60,7 @@ export class ActivatedProvince implements IENV {
         ENYears.TEH_SE.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        timeout.time
     );
     public static readonly TEH_SE_LOCAL = new ActivatedProvince(
         ENActivateProvinceTitle.TEH_SE_LOCAL,
@@ -67,6 +72,7 @@ export class ActivatedProvince implements IENV {
         ENYears.TEH_SE_LOCAL.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        timeout.time
     );
     public static readonly KERMANSHAH = new ActivatedProvince(
         ENActivateProvinceTitle.KERMANSHAH,
@@ -78,6 +84,7 @@ export class ActivatedProvince implements IENV {
         ENYears.KERMANSHAH.value,
         getDeleteDictionary.DEFAULT.value,
         ENHasCanclableSpinner.DEFAULT.value,
+        timeout.time
     );
 
     private constructor(
@@ -105,6 +112,7 @@ export class ActivatedProvince implements IENV {
         public readonly years: { title: string, value: number }[],
         public readonly getDeleteDictionary: { id: number, title: string }[],
         public readonly hasCanclableSpinner: boolean,
+        public timeout: number,
     ) { }
 
     public getActiveProvince = (provinceName: ENActivateProvinceTitle): any => {

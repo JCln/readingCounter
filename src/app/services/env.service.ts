@@ -15,6 +15,7 @@ export class EnvService implements IENV {
   years = this.temp.years;
   getDeleteDictionary = this.temp.getDeleteDictionary;
   hasCanclableSpinner = this.temp.hasCanclableSpinner;
+  timeout = this.temp.timeout;
 
   // Whether or not to enable debug mode
   public enableDebug = true;
