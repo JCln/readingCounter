@@ -81,7 +81,7 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.envService.hasCanclableSpinner);
   }
   getFontStyle = (): number => {
-    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 2);
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 3);
   }
   columnSelectedProfile = (): IObjectIteratation[] => {
     return this.columnManager.profile;

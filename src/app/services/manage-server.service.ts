@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IManageServerErrors } from 'interfaces/imanage';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { IManageServerErrors } from 'interfaces/iserver-manager';
 
 import { JwtService } from '../auth/jwt.service';
 import { serverErrors, serverTasts } from './DI/manageServer';

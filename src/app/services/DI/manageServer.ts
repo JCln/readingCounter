@@ -1,5 +1,4 @@
-import { ENManageServers, IManageServer, IManageServerErrors } from 'interfaces/imanage';
-import { ENClientServerErrors } from 'interfaces/ioverall-config';
+import { ENClientServerErrors, ENManageServers, IManageServer, IManageServerErrors } from 'interfaces/iserver-manager';
 
 export const serverTasts: IManageServer[] = [
 

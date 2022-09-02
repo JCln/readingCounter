@@ -19,17 +19,11 @@
 }
 
 ._delete_style {
+  direction: rtl;
   background-color: var(--red_500);
   border-color: var(--red_500);
   color: var(--white);
   text-align: center;
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--red_600);
-    box-shadow: 0 0 0 3px var(--red_600);
-  }
 }
 
 h2 {

@@ -1,4 +1,4 @@
-import { ENClientServerErrors } from './ioverall-config';
+import { IDictionaryManager } from './ioverall-config';
 
 export interface IForbiddenManager {
     gisAccuracy: string,
@@ -28,29 +28,6 @@ export interface IMostReportInput {
     zoneIds: [
         number
     ]
-}
-export enum ENManageServers {
-    serverDelete = 'serverDelete',
-    linkToHangfire = 'linkToHangfire',
-    linkToHealthCheck = 'linkToHealthCheck',
-    resetApp = 'resetApp'
-}
-export interface IManageServerErrors {
-    name: string,
-    errorType: ENClientServerErrors
-}
-export interface IManageServerErrorsRes {
-    errorId: string,
-    message: string,
-    statusCode: number,
-    username: string
-}
-export interface IManageServer {
-    name: string;
-    icon: string;
-    background: string;
-    color?: string;
-    clickFunction?: ENManageServers;
 }
 export interface IBriefKardex {
     item: string,
@@ -99,7 +76,8 @@ export interface IOnOffLoadFlat {
     errorDescription: string,
     zoneId: number | string,
     counterNumber: number,
-    counterStateId: number,
+    counterStateId: any,
+    tempCounterState: IDictionaryManager;
     counterStateCode: number,
     possibleAddress: string,
     possibleCounterSerial: string,

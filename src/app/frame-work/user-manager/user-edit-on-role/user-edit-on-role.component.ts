@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { appItems, IRoleItems } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { UsersAllService } from 'services/users-all.service';
@@ -36,7 +37,7 @@ export class UserEditOnRoleComponent extends FactoryONE {
       this.dataSource = await this.usersAllService.connectToServer(ENInterfaces.userADD);
       this.closeTabService.saveDataForEditOnRole = this.dataSource;
     }
-
+    this.usersAllService.firstConfirmDialog(EN_messages.confirmUserGroupChange1, EN_messages.confirmUserGroupChange2);
     this.userRoles = this.dataSource.roleItems;
     this.userActions = this.dataSource.appItems;
   }

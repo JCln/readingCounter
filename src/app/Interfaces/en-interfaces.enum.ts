@@ -153,7 +153,7 @@ export enum ENInterfaces {
     trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
     trackingToOFFLOADEDGeneralModify = 'V1/List/OffLoaded/AllInGroup/',
     trackingToOffloadedGroupModifyBatch = 'V1/OffLoad/ModifyBatch',
-    GeneralModifyAllExcelInGroup = 'V1/List/OffLoaded/AllExcelInGroup/',
+    GeneralModifyAllExcelInGroup = 'V1/List/OffLoaded/AllExcelInGroup',
     trackingPRE = 'V1/Tracking/Pre',
     trackingBriefKardex = 'V1/AbBahaReport',
     trackingFinishReadiED = 'V1/Tracking/FinishReading',
@@ -223,6 +223,7 @@ export enum ENInterfaces {
     serverManagerHealthCheck = '/healthchecks-ui',
     serverManagerErrorsElmah = '/elmah/detail/',
     serverManagerResetApp = 'V1/Server/ResetApp',
+    serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',

@@ -25,6 +25,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _canShowButton: boolean = true;
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
+  @Input() _calcName: string = '';
 
   @Output() customedSort = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
@@ -68,7 +69,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
 
   constructor(
     public outputManagerService: OutputManagerService,
-    public browserStorageService: BrowserStorageService,    
+    public browserStorageService: BrowserStorageService,
     public columnManager: ColumnManager,
     public utilsService: UtilsService,
     public config: PrimeNGConfig,
@@ -203,7 +204,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   calcSums(): number {
     let total: number = 0;
     this.dataSource.map(item => {
-      total += item.itemQuantity
+      total += item[this._calcName]
     })
     return total;
   }

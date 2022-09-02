@@ -1,7 +1,8 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ENClientServerErrors, ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { ENClientServerErrors } from 'interfaces/iserver-manager';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';

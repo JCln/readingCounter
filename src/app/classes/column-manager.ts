@@ -1210,7 +1210,7 @@ export class ColumnManager {
         { field: 'counterNumber', header: 'رقم فعلی', isSelected: true, readonly: false, icon: '_editable' },
         { field: 'preDate', header: 'تاریخ قبلی', isSelected: false, readonly: true, icon: '' },
         { field: 'offloadDateJalali', header: 'تاریخ فعلی', isSelected: true, readonly: false, icon: '_editable' },
-        { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false, readonly: true, icon: '' },
+        { field: 'preCounterStateCode', header: 'وضعیت قبلی', isSelected: false, isSelectOption: true, readonly: true, icon: '' },
         // { field: 'counterStateCode', header: 'وضعیت فعلی(مشترکین)', isSelected: false, readonly: true , icon: ''},
         { field: 'counterStateId', header: 'وضعیت فعلی', isSelected: true, isSelectOption: true, readonly: false, icon: '_editable' },
         { field: 'address', header: 'آدرس', isSelected: false, readonly: true, icon: '' },

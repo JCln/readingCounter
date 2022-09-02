@@ -21,10 +21,10 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
-    { label: 'xxs', value: ENFontStyle.fontXXS },
-    { label: 'xs', value: ENFontStyle.fontXS },
-    { label: 'sm', value: ENFontStyle.fontSM },
-    { label: 's', value: ENFontStyle.fontS }
+    { label: 'کوچکتر', value: ENFontStyle.fontXXS },
+    { label: 'کوچک', value: ENFontStyle.fontXS },
+    { label: 'متوسط', value: ENFontStyle.fontSM },
+    { label: 'بزرگ', value: ENFontStyle.fontS }
   ];
   stateOptionsImageOption: any[] = [
     {

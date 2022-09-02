@@ -29,6 +29,8 @@ import { GeneralGroupInfoResComponent } from './general-group-info-res/general-g
 })
 export class GeneralGroupListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
+  // should place only in component because overright totalNum needs for dynamic use
+  tempMainDataSource = { totalNum: 0, data: [] };
 
   _numberOfExtraColumns: number[] = [1, 2, 3, 4, 5, 6];
   _rowsPerPage: number[] = [10, 100, 1000, 5000];
@@ -51,6 +53,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   counterStateForModifyDictionary: IDictionaryManager[] = [];
 
   modifyType: OffloadModify[];
+  tempFilter = { first: [], second: [] };
 
   constructor(
     public listManagerService: ListManagerService,
@@ -67,6 +70,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   updateOnChangedCounterState = async (val: any) => {
     if (val.value) {
       this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val.value);
+      console.log(this.dataSource.length);
       this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
@@ -76,6 +80,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
       this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
+      this.resetDataSourceView();
 
       Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
       Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
@@ -102,6 +107,14 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
 
       if (this.closeTabService.saveDataForLMGeneralGroupModify && this.closeTabService.saveDataForLMGeneralGroupModifyReq === this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
         this.dataSource = this.closeTabService.saveDataForLMGeneralGroupModify;
+        // for (let index = 0; index < this.dataSource.length; index++) {
+        //   for (let index = 0; index < this.counterStateByZoneDictionary.length; index++) {
+        //     if (this.counterStateByZoneDictionary[index].id == this.dataSource[index].counterStateId) {
+        //       this.dataSource[index].tempCounterState = this.counterStateByZoneDictionary[index];
+        //     }
+
+        //   }
+        // }
       } else {
         this.updateOnChangedCounterState({ value: this.listManagerService.counterStateValue });
       }
@@ -122,6 +135,75 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.updateOnChangedCounterState({ value: this.listManagerService.counterStateValue });
     else {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
+    }
+  }
+  resetDataSourceView = () => {
+    // on each change of ChangedCounterState
+    this.tempMainDataSource.totalNum = 0;
+  }
+  filterOptions = (e: any, toFilter: string, filterValid: number) => {
+    if (filterValid == 1) {
+      if (MathS.isNull(e.value)) {
+        this.tempFilter.first = [];
+      }
+      if (!this.tempFilter.first.includes(e.value)) {
+        this.tempFilter.first = e.value;
+      }
+    }
+    if (filterValid == 2) {
+      if (MathS.isNull(e.value)) {
+        this.tempFilter.second = [];
+      }
+      if (!this.tempFilter.second.includes(e.value)) {
+        this.tempFilter.second = e.value;
+      }
+    }
+    console.log(this.tempFilter);
+
+    if (this.tempMainDataSource.totalNum == 0) {
+      // for single use only on each 'component init'
+      this.tempMainDataSource.data = JSON.parse(JSON.stringify(this.dataSource));
+      this.tempMainDataSource.totalNum = 1;
+    }
+    let tempDataSource: any[] = [];
+    let tempDataSource2: any[] = [];
+    if (this.tempFilter.first.length > 0) {
+      for (let i = 0; i < this.tempMainDataSource.data.length; i++) {
+        for (let j = 0; j < this.tempFilter.first.length; j++) {
+          if (this.tempFilter.first[j] == this.tempMainDataSource.data[i]['counterStateId']) {
+            tempDataSource.push(this.tempMainDataSource.data[i]);
+          }
+        }
+      }
+    }
+    else {
+      tempDataSource = this.tempMainDataSource.data;
+    }
+    console.log(tempDataSource);
+    if (this.tempFilter.second.length > 0) {
+      if (!MathS.isNull(tempDataSource)) {
+        for (let i = 0; i < tempDataSource.length; i++) {
+          for (let j = 0; j < this.tempFilter.second.length; j++) {
+            if (this.tempFilter.second[j] == tempDataSource[i]['preCounterStateCode']) {
+              tempDataSource2.push(tempDataSource[i]);
+            }
+          }
+        }
+      }
+      else {
+        this.dataSource = tempDataSource;
+      }
+    }
+    // if tempDataSource is null but filter is not null
+    else {
+      this.dataSource = tempDataSource;
+    }
+
+    if (!MathS.isNull(tempDataSource2)) {
+      this.dataSource = tempDataSource2;
+    }
+    if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
+      this.dataSource = this.tempMainDataSource.data;
     }
   }
   // have problem on SHOWING Without this Code for DropDowns

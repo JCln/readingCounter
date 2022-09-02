@@ -71,7 +71,9 @@
         </form>
     </section>
     <app-prime-table [dataSource]="dataSource" [_outputFileName]="'master'"
-        [_selectedColumnsToRemember]="'selectedRRMaster'" [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedMaster"
-        (collapsed)="readingReportManagerService.isCollapsedMaster = !readingReportManagerService.isCollapsedMaster" (refreshedTable)="refreshTable()">
+        [_selectedColumnsToRemember]="'selectedRRMaster'" [_calculableSUM]=true [_calcName]="'itemCount'"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedMaster"
+        (collapsed)="readingReportManagerService.isCollapsedMaster = !readingReportManagerService.isCollapsedMaster"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

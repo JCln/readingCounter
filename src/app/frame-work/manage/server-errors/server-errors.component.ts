@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IManageServerErrorsRes } from 'interfaces/imanage';
+import { IManageServerErrorsRes } from 'interfaces/iserver-manager';
 import { ManageServerService } from 'services/manage-server.service';
 import { FactoryONE } from 'src/app/classes/factory';
 

@@ -124,7 +124,7 @@ export enum ENEssentialsToSave {
     saveDataForLMAllReq = 'saveDataForLMAllReq',
     saveDataForLMAll_extra = 'saveDataForLMAll_extra',
     saveDataForEditUsers = 'saveDataForEditUsers',
-    saveDataForEditUsersGUID = 'saveDataForEditUsersGUID',    
+    saveDataForEditUsersGUID = 'saveDataForEditUsersGUID',
     saveDataForUserLoggins = 'saveDataForUserLoggins',
     saveDataForFragmentNOBDetails = 'saveDataForFragmentNOBDetails',
     saveDataForRRGallery = 'saveDataForRRGallery',
@@ -392,19 +392,3 @@ export const IMasrafStates: ITHV[] = [
     { title: 'zero', header: 'صفر', value: 3 },
     { title: 'inCalculable', header: 'غیرقابل محاسبه', value: 4 }
 ]
-export enum ENClientServerErrors {
-    'cs400' = 400,
-    'cs401' = 401,
-    'cs403' = 403,
-    'cs404' = 404,
-    'cs405' = 405,
-    'cs408' = 408,
-    'cs409' = 409,
-    'cs410' = 410,
-    'cs422' = 422,
-    'cs0' = 0,
-    'cs500' = 500,
-    'cs501' = 501,
-    'cs502' = 502,
-    'cs504' = 504,
-}

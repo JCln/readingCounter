@@ -107,12 +107,13 @@ export class UsersAllService {
       })
     });
   }
-  firstConfirmDialog = (reason: EN_messages): Promise<any> => {
+  firstConfirmDialog = (reason: EN_messages, reasonTwo?: EN_messages): Promise<any> => {
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: '19rem',
         data: {
           title: reason,
+          title2: reasonTwo,
           isInput: false,
           isDelete: true
         }
@@ -283,7 +284,7 @@ export class UsersAllService {
   }
   userEditOnRoleInsertRole = (val: any) => {
     this.userEditOnRoleRoleVal = val;
-  }  
+  }
 
 
 }

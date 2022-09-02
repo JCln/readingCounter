@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENManageServers, IManageServer } from 'interfaces/imanage';
 import { ENSnackBarColors } from 'interfaces/ioverall-config';
+import { ENManageServers, IManageServer } from 'interfaces/iserver-manager';
 import { ManageServerService } from 'services/manage-server.service';
 
 
