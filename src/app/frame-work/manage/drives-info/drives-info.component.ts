@@ -21,5 +21,15 @@ export class DrivesInfoComponent implements OnInit {
   ngOnInit(): void {
     this.classWrapper();
   }
+  getPieChartData = () => {
+    for (let index = 0; index < this.dataSource.length; index++) {
+      console.log(this.dataSource);
+
+      // this.pieChartData[index].push(this.dataSource[index].freePercent);
+      // this.pieChartData[index].push(this.dataSource[index].usedPercent);
+      // console.log(this.pieChartData);
+    }
+
+  }
 
 }

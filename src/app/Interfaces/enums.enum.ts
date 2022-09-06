@@ -41,6 +41,7 @@ export enum EN_messages {
     insert_group_access = 'گروه دسترسی را مشخص نمایید',
     insert_again = 'مجددا مقادیر را وارد نمایید',
     insert_fromDate = 'از تاریخ خالی است',
+    insert_statusId = 'وضعیت فعلی خالی است',
     insert_startDay = 'روز شروع اجرا خالی است',
     insert_endDay = 'روز پایان اجرا خالی است',
     insert_startTime = 'زمان شروع خالی است',

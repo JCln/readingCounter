@@ -164,6 +164,8 @@ export enum ENInterfaces {
     ImageAttributionAnalyze = 'V1/ImageAttributionFile/Analyze',
     trackingPostOffloadModify = 'V1/OffLoad/Modify',
     trackingEditState = 'V1/Tracking/EditState',
+    trackingStatesDictionary = 'V1/Tracking/States/Dictionary',
+    trackingUserKarkard = 'V1/Tracking/UserKarkard',
 
     ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
     ListSearchPro = 'V1/List/Search/Pro',
@@ -224,6 +226,7 @@ export enum ENInterfaces {
     serverManagerErrorsElmah = '/elmah/detail/',
     serverManagerResetApp = 'V1/Server/ResetApp',
     serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
+    serverManagerRequestLog = 'V1/RequestLog/List',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',

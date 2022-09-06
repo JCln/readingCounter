@@ -1,0 +1,41 @@
+<main class="main">
+    <section >
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="static_part">
+                <section class="content">
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
+                                [dateObject]="readingReportManagerService.detailsReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
+                                [dateObject]="readingReportManagerService.detailsReq.toDate">
+                            </app-date-jalali>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn_1">
+                        مشاهده لیست
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'rrDetails'" [_checkUpName]="'rr-details'"
+        [_numberOfExtraColumns]="[1]" [_selectedColumnsToRemember]="'selectedRRDetails'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.isCollapsedDetails"
+        (collapsed)="readingReportManagerService.isCollapsedDetails = !readingReportManagerService.isCollapsedDetails"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
+</main>

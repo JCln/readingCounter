@@ -253,6 +253,29 @@ export class ColumnManager {
         { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
         { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, readonly: true }
     ]
+    rrUserKarkard: IObjectIteratation[] = [
+        // { field: 'userId', header: 'کد کاربر', isSelected: true },
+        { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
+        // { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: false, isSelectOption: true, readonly: true },
+        { field: 'trackNumber', header: 'شماره پیگیری', isSelected: true, isNumber: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+        // { field: 'insertDateTime', header: 'مامور', isSelected: true, readonly: true },
+        { field: 'isBazdid', header: 'بازدید', isSelected: true, isBoolean: true },
+        { field: 'isRoosta', header: 'روستا', isSelected: true, isBoolean: true },
+        { field: 'year', header: 'سال', isSelected: false, readonly: true },
+        { field: 'overallQuantity', header: 'کل تعداد', isSelected: false, isNumber: true },
+        { field: 'itemQuantity', header: 'تعداد', isSelected: true, isNumber: true },
+        { field: 'alalHesabPercent', header: 'درصد علی الحساب', isSelected: true, readonly: true },
+        { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: true },
+        { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
+        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
+        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
+        { field: 'description', header: 'توضیحات', isSelected: false, readonly: true },
+    ]
     rrDetails: IObjectIteratation[] = [
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },

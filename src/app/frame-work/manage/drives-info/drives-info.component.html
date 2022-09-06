@@ -2,39 +2,39 @@
     <div *ngFor="let item of dataSource">
         <h1 class="title">{{item.driveName}} {{item.volumeLabel}}</h1>
         <div class="content">
-            <div class="_desc">
-                <div class="_key_value">
-                    <div class="_key">درصد</div>
-                    <div class="_value"> {{item.freePercent}}</div>
-                </div>
-                <div class="_key_value">
-                    <div class="_key">فضای آزاد</div>
-                    <div class="_value">{{item.freeSpaceGb}}</div>
-                </div>
-                <div class="_key_value">
-                    <div class="_key">فضای کل</div>
-                    <div class="_value">{{item.totalSpaceGb}}</div>
-                </div>
-                <div class="_key_value">
-                    <div class="_key">فضای استفاده شده</div>
-                    <div class="_value">{{item.usedSpaceGb}}</div>
-                </div>
-                <div class="_key_value">
-                    <div class="_key">فضای در دسترس</div>
-                    <div class="_value">{{item.avaialableSpaceGb}}</div>
-                </div>
-                <div class="_key_value">
-                    <div class="_key">فضای اشغالی</div>
-                    <div class="_value">{{item.reservedSpaceMb}}</div>
-                </div>
-                <div class="_key_value">
-                    <div class="_key">درصد استفاده شده</div>
-                    <div class="_value">{{item.usedPercent}}</div>
-                </div>
+            <div class="_key_value">
+                <div class="_key">درصد فضای آزاد</div>
+                <div class="_value"> {{item.freePercent}}</div>
             </div>
+            <div class="_key_value">
+                <div class="_key">فضای آزاد (GB)</div>
+                <div class="_value">{{item.freeSpaceGb}}</div>
+            </div>
+            <div class="_key_value">
+                <div class="_key">فضای کل(GB)</div>
+                <div class="_value">{{item.totalSpaceGb}}</div>
+            </div>
+            <div class="_key_value">
+                <div class="_key">فضای استفاده شده(GB)</div>
+                <div class="_value">{{item.usedSpaceGb}}</div>
+            </div>
+            <div class="_key_value">
+                <div class="_key">فضای در دسترس</div>
+                <div class="_value">{{item.avaialableSpaceGb}}(GB)</div>
+            </div>
+            <div class="_key_value">
+                <div class="_key">فضای اشغالی(MB)</div>
+                <div class="_value">{{item.reservedSpaceMb}}</div>
+            </div>
+            <div class="_key_value">
+                <div class="_key">درصد استفاده شده</div>
+                <div class="_value">{{item.usedPercent}}</div>
+            </div>
+
+            <section class="_charts">
+                <app-drive-info-pie [dataSource]="dataSource"></app-drive-info-pie>
+            </section>
         </div>
-        <section class="_charts">
-            <app-drive-info-pie [dataSource]="dataSource"></app-drive-info-pie>
-        </section>
+
     </div>
 </main>

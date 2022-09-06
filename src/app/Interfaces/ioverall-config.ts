@@ -111,6 +111,7 @@ export enum ENEssentialsToSave {
     saveDataForRRPerformance = 'saveDataForRRPerformance',
     saveDataForDMAAnalyze = 'saveDataForDMAAnalyze',
     saveDataForRRDetails = 'saveDataForRRDetails',
+    saveDataForUserKarkard = 'saveDataForUserKarkard',
     saveDataForRRkarkardDaily = 'saveDataForRRkarkardDaily',
     saveDataForRRGIS = 'saveDataForRRGIS',
     saveDataForLMGeneralModify = 'saveDataForLMGeneralModify',
@@ -132,6 +133,8 @@ export enum ENEssentialsToSave {
     saveDataForRandomImgsRSFirst = 'saveDataForRandomImgsRSFirst',
     saveDataForRRGalleryRSFirst = 'saveDataForRRGalleryRSFirst',
     saveDataForRRGalleryReq = 'saveDataForRRGalleryReq',
+    saveDataForRequestLog = 'saveDataForRequestLog',
+    saveDataForServerErrors = 'saveDataForServerErrors',
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -340,6 +343,7 @@ export enum ENSelectedColumnVariables {
     selectedDMAnalyze = 'analysis',
     selectedRRMaster = 'master',
     selectedRRDetails = 'rrDetails',
+    selectedrrUserKarkard = 'rrUserKarkard',
     selectedRRTraverse = 'trv',
     selectedRRTraverseDifferential = 'trvDiff',
     selectedRRKarkard = 'karkard',

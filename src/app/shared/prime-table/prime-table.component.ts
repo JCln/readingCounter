@@ -5,6 +5,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactorySharedPrime } from 'src/app/classes/factory';
@@ -26,6 +27,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
   @Input() _calcName: string = '';
+  @Input() _hasAggregating: boolean = false;
 
   @Output() customedSort = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
@@ -74,6 +76,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
     public utilsService: UtilsService,
     public config: PrimeNGConfig,
     public dialogService: DialogService,
+    public readingReportManagerService: ReadingReportManagerService
   ) {
     super(
       browserStorageService,

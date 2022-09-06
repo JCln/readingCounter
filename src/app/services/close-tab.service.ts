@@ -58,6 +58,7 @@ export class CloseTabService {
   saveDataForTrackImported: any;
   saveDataForTrackLoaded: any;
   saveDataForTrackReading: any;
+  saveDataForUserKarkard: any;
   saveDataForTrackOffloaded: any;
   saveDataForTrackOffloadedGroup: any;
   offloadedGroupReq = {
@@ -145,6 +146,15 @@ export class CloseTabService {
   saveDataForRRPerformance: any;
   saveDataForDMAAnalyze: any;
   saveDataForRRDetails: any;
+  saveDataForRequestLog: any = {
+    dataSource: [],
+    input: {
+      jalaliDay: '',
+      fromtime: '',
+      toTime: ''
+    }
+  }
+  saveDataForServerErrors: any;
   saveDataForRRDisposalHours: any;
   saveDataForRRGIS: any;
   saveDataForFragmentNOB: any;
@@ -234,6 +244,9 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, url: EN_Routes.wrrptsgalleryai },
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
+    { id: 2, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
+    { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.wrmmserr },
+    { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
     { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.wrrptsexmkarkardDaily },
     { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },

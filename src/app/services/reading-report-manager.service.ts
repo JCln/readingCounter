@@ -6,7 +6,12 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
 import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
+import {
+  IReadingReportGISReq,
+  IReadingReportReq,
+  IReadingReportTraverseDifferentialReq,
+  IUserKarkardInput,
+} from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
@@ -42,7 +47,8 @@ export class ReadingReportManagerService {
   isCollapsedTrv: boolean = false;
   isCollapsedImgAttrAnlz: boolean = false;
   isCollapsedTrvCh: boolean = false;
-  isCollapsed: boolean = false;
+  isCollapsedDetails: boolean = false;
+  isCollapsedUserKarkard: boolean = false;
   _isOrderByDate: boolean = false;
   _isCollapsedAllImgs: boolean = true;
 
@@ -52,7 +58,8 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: this.utilsService.getFirstYear()
+    year: this.utilsService.getFirstYear(),
+    _selectedAggregate: ''// Default group by
   };
   imgAttrResultReq: IReadingReportReq = {
     fromDate: '',
@@ -69,6 +76,12 @@ export class ReadingReportManagerService {
     readingPeriodId: null,
     reportCode: 0,
     year: this.utilsService.getFirstYear()
+  };
+  userKarkardReq: IUserKarkardInput = {
+    fromDate: '',
+    toDate: '',
+    zoneId: 0,
+    statusId: 0
   };
   detailsReq: IReadingReportReq = {
     zoneId: 0,
@@ -297,6 +310,9 @@ export class ReadingReportManagerService {
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getKarbariDictionary();
   }
+  getTrackingStatesDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getTrackingStatesDictionary();
+  }
   getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
@@ -321,6 +337,12 @@ export class ReadingReportManagerService {
     if (dataSource.hasOwnProperty('zoneId')) {
       if (MathS.isNull(dataSource['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('statusId')) {
+      if (MathS.isNull(dataSource['statusId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_statusId);
         return false;
       }
     }
@@ -384,15 +406,20 @@ export class ReadingReportManagerService {
   }
 
   // VerificationS 
-  verificationRRShared = (readingReportReq: any, isValidateByDate: boolean): boolean => {
+  verificationUserKarkard = (readingReportReq: IUserKarkardInput): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
+    return this.datesValidation(readingReportReq);
+  }
+  verificationRRShared = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
+    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
+    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
+    return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
   verificationRRTraverseDifferential = (readingReportReq: IReadingReportTraverseDifferentialReq, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
+    return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
   verificationRRDisposalHours = (readingReportReq: IReadingReportReq): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
@@ -402,12 +429,12 @@ export class ReadingReportManagerService {
   verificationRRGIS = (readingReportGISReq: IReadingReportGISReq, isValidateByDate: boolean): boolean => {
     readingReportGISReq.fromDate = Converter.persianToEngNumbers(readingReportGISReq.fromDate);
     readingReportGISReq.toDate = Converter.persianToEngNumbers(readingReportGISReq.toDate);
-    return isValidateByDate ? this.datesValidation(readingReportGISReq) : this.periodValidationGIS(readingReportGISReq)
+    return isValidateByDate ? (readingReportGISReq.readingPeriodId = null, this.datesValidation(readingReportGISReq)) : this.periodValidationGIS(readingReportGISReq)
   }
   verificationRRAnalyzePerformance = (readingReportReq: IMostReportInput, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
+    return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
 
   // 

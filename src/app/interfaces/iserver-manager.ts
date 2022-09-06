@@ -15,6 +15,15 @@ export enum ENClientServerErrors {
     'cs502' = 502,
     'cs504' = 504,
 }
+export interface IRequestLog {
+    id: number,
+    userDisplayName: string,
+    path: string,
+    controllerAction: string,
+    requestDateJalali: string,
+    requestTime: string,
+    ip: string
+}
 export interface IManageServerErrorsRes {
     errorId: string,
     message: string,

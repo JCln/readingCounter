@@ -35,7 +35,37 @@ export interface IReadingReportReq {
     counterReaderId: string,
     readingPeriodId: number,
     reportCode: number,
-    year: number
+    year: number,
+    _selectedAggregate?: string,
+}
+export interface IUserKarkardInput {
+    zoneId: number,
+    fromDate: string,
+    toDate: string,
+    statusId: number,
+}
+export interface IUserKarkard {
+    userId: string,
+    userDisplayName: string,
+    zoneId: number,
+    zoneTitle: string,
+    trackNumber: number,
+    fromEshterak: string,
+    toEshterak: string,
+    counterReaderName: string,
+    insertDateJalali: string,
+    insertDateTime: string,
+    isBazdid: boolean,
+    year: number,
+    isRoosta: boolean,
+    overallQuantity: number,
+    itemQuantity: number,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    description: string
 }
 export interface IReadingReportGISReq {
     zoneId: number,

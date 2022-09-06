@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { EnvService } from 'services/env.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 
@@ -10,6 +11,7 @@ import { JwtService } from 'src/app/auth/jwt.service';
 })
 export class DropdownComponent {
   @Output() isLogout = new EventEmitter<boolean>();
+  routeToProfile = EN_Routes.wrprofile;
 
   constructor(
     private envService: EnvService,

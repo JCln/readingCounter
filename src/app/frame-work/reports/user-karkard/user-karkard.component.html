@@ -1,0 +1,56 @@
+<main class="main">
+    <section [hidden]="readingReportManagerService.isCollapsedUserKarkard">
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="static_part">
+                <hr>
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">ناحیه</div>
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="readingReportManagerService.userKarkardReq.zoneId" placeholder="انتخاب مورد"
+                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">وضعیت فعلی</div>
+                        <p-dropdown name="trackingStates" [options]="trackingStatesDictionary"
+                            [(ngModel)]="readingReportManagerService.userKarkardReq.statusId" placeholder="انتخاب مورد"
+                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                        </p-dropdown>
+                    </div>
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
+                                [dateObject]="readingReportManagerService.detailsReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
+                                [dateObject]="readingReportManagerService.detailsReq.toDate">
+                            </app-date-jalali>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn_1">
+                        مشاهده لیست
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+            </section>
+        </form>
+    </section>
+
+    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'rrUserKarkard'" [_checkUpName]="'rr-user-karkard'"
+        [_selectedColumnsToRemember]="'selectedrrUserKarkard'" [_hasCollapsible]=true
+        [_isCollaped]="readingReportManagerService.isCollapsedUserKarkard"
+        (collapsed)="readingReportManagerService.isCollapsedUserKarkard = !readingReportManagerService.isCollapsedUserKarkard"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
+</main>

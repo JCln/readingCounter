@@ -15,7 +15,6 @@
   padding: var(--font_xs) 0;
   justify-content: space-around;
   border-radius: $border_15;
-  min-height: var(--font_5);
 }
 
 .title {
@@ -28,7 +27,7 @@
 
 ._charts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(40%, 50%));
+  grid-template-columns: 1fr;
   margin-bottom: var(--font_3);
 }
 

@@ -3,19 +3,36 @@
 @import 'input.scss';
 @import '_mat.scss';
 
-form {
-  display: grid;
+
+.main {
   direction: rtl;
-  justify-content: center;
-  margin: auto;
-  position: relative;
-  padding: var(--font_xs);
-  width: 18rem;
   background: var(--secondary_1);
-  border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  margin-bottom: var(--font_xs);
+  padding: var(--font_05);
+  border-radius: $border_15;
+  border: 1px solid var(--primary_2);
 }
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+  gap: var(--font_05);
+  align-items: center;
+}
+
+// form {
+//   display: grid;
+//   direction: rtl;
+//   justify-content: center;
+//   margin: auto;
+//   position: relative;
+//   padding: var(--font_xs);
+//   width: 18rem;
+//   background: var(--secondary_1);
+//   border-radius: $border_15;
+//   box-shadow: 1px 1px 8px 4px var(--secondary_4);
+//   margin-bottom: var(--font_xs);
+// }
 
 .input_2 {
   text-align: center;

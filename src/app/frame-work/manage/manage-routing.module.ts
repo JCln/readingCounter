@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'dbf', loadChildren: () => import('./dbf-output/dbf-output.module').then(dbf => dbf.DbfOutputModule) },
   { path: 'fbn', loadChildren: () => import('./forbidden/forbidden.module').then(forbidden => forbidden.ForbiddenModule) },
   { path: 'dma', loadChildren: () => import('./data-mining/data-mining.module').then(dataMining => dataMining.DataMiningModule) },
+  { path: 'requestLog', loadChildren: () => import('./request-log/request-log.module').then(requestLog => requestLog.RequestLogModule) },
 ];
 
 @NgModule({

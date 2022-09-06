@@ -23,6 +23,7 @@ export class DictionaryWrapperService {
   private authLev2Dictionary: any = [];
   private authLev3Dictionary: any = [];
   private authLev4Dictionary: any = [];
+  private trackingStatesDictionary: any = [];
 
   private counterReportDictionary: any = [];
   private counterReportByZoneDictionary = {
@@ -165,6 +166,17 @@ export class DictionaryWrapperService {
       this.interfaceManagerService.GET(ENInterfaces.AuthLevel4DICTIONARY).subscribe(res => {
         this.setAuthLev4Dictionary(res);
         resolve(this.authLev4Dictionary);
+      })
+    });
+
+  }
+  getTrackingStatesDictionary(): Promise<any> {
+    if (!MathS.isNull(this.trackingStatesDictionary))
+      return this.trackingStatesDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.trackingStatesDictionary).subscribe(res => {
+        this.setTrackingStatesDictionary(res);
+        resolve(this.trackingStatesDictionary);
       })
     });
 
@@ -385,6 +397,9 @@ export class DictionaryWrapperService {
   }
   private setAuthLev4Dictionary(v: any) {
     this.authLev4Dictionary = v;
+  }
+  private setTrackingStatesDictionary(v: any) {
+    this.trackingStatesDictionary = v;
   }
   private setCounterReportDictionary(v: any) {
     this.counterReportDictionary = v;
