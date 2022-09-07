@@ -1,41 +1,46 @@
 <main class="main">
-    <section >
+    <section>
         <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="static_part">
-                <section class="content">
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
-                        <div class="_key">از</div>
-                        <div class="_value">
-                            <app-date-jalali name="fromDate"
-                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
-                                [dateObject]="readingReportManagerService.detailsReq.fromDate">
-                            </app-date-jalali>
-                        </div>
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                            [dateObject]="closeTabService.saveDataForRequestLog.input.jalaliDay">
+                        </app-date-jalali>
                     </div>
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
-                        <div class="_key">تا</div>
-                        <div class="_value">
-                            <app-date-jalali name="toDate"
-                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
-                                [dateObject]="readingReportManagerService.detailsReq.toDate">
-                            </app-date-jalali>
-
-                        </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">از زمان</div>
+                    <div class="_value">
+                        <app-time-jalali name="fromTime"
+                            [timeObject]="closeTabService.saveDataForRequestLog.input.fromTime"
+                            (dateJalEvent)="receiveFromTimeJalali($event)">
+                        </app-time-jalali>
                     </div>
-                    <button type="submit" class="btn_1">
-                        مشاهده لیست
-                        <i class="pi pi-list"></i>
-                    </button>
+                </div>
+                <div class="input_2">
+                    <div class="_key">تا زمان</div>
+                    <div class="_value">
+                        <app-time-jalali name="toTime" [timeObject]="closeTabService.saveDataForRequestLog.input.toTime"
+                            (dateJalEvent)="receiveToTimeJalali($event)">
+                        </app-time-jalali>
+                    </div>
+                </div>
 
-                </section>
+                <button type="submit" class="btn_2_o">
+                    <i class="pi pi-list"></i>
+                    مشاهده لیست
+                </button>
+
             </section>
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'rrDetails'" [_checkUpName]="'rr-details'"
-        [_numberOfExtraColumns]="[1]" [_selectedColumnsToRemember]="'selectedRRDetails'" [_hasCollapsible]=true
-        [_isCollaped]="readingReportManagerService.isCollapsedDetails"
-        (collapsed)="readingReportManagerService.isCollapsedDetails = !readingReportManagerService.isCollapsedDetails"
-        (refreshedTable)="refreshTable()">
-    </app-prime-table>
+    <section>
+        <app-prime-table [dataSource]="dataSource" [_outputFileName]="'requestLog'" [_checkUpName]="'requestlog'"
+            [_selectedColumnsToRemember]="'requestLog'" (refreshedTable)="refreshTable()">
+        </app-prime-table>
+    </section>
+
 </main>

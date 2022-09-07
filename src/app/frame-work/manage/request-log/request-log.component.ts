@@ -15,7 +15,7 @@ export class RequestLogComponent extends FactoryONE {
 
   constructor(
     private manageServerService: ManageServerService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -27,18 +27,27 @@ export class RequestLogComponent extends FactoryONE {
     if (this.closeTabService.saveDataForRequestLog.data) {
       this.dataSource = this.closeTabService.saveDataForRequestLog.data;
     }
-    else {
-      this.connectToServer();
-    }
   }
   connectToServer = async () => {
     this.dataSource = await this.manageServerService.postBody(ENInterfaces.serverManagerRequestLog, this.closeTabService.saveDataForRequestLog.input);
     this.closeTabService.saveDataForRequestLog.data = this.dataSource;
   }
   verification = async () => {
+    console.log(this.closeTabService.saveDataForRequestLog.input);
+
     const temp = this.manageServerService.verificationRequestLogInput(this.closeTabService.saveDataForRequestLog.input);
     if (temp)
       this.connectToServer();
   }
+  receiveFromDateJalali = ($event: string) => {
+    this.closeTabService.saveDataForRequestLog.input.jalaliDay = $event;
+  }
+  receiveFromTimeJalali = ($event: string) => {
+    this.closeTabService.saveDataForRequestLog.input.fromTime = $event;
+  }
+  receiveToTimeJalali = ($event: string) => {
+    this.closeTabService.saveDataForRequestLog.input.toTime = $event;
+  }
+
 
 }

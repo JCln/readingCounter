@@ -150,7 +150,7 @@ export class CloseTabService {
     dataSource: [],
     input: {
       jalaliDay: '',
-      fromtime: '',
+      fromTime: '',
       toTime: ''
     }
   }

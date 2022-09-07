@@ -26,17 +26,16 @@ export class UserKarkardComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForUserKarkard = null;
-      this.verification();
     }
     if (this.closeTabService.saveDataForUserKarkard) {
       this.dataSource = this.closeTabService.saveDataForUserKarkard;
     }
-  }
-  connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingUserKarkard, this.readingReportManagerService.userKarkardReq);
     this.trackingStatesDictionary = await this.readingReportManagerService.getTrackingStatesDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
 
+  }
+  connectToServer = async () => {
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingUserKarkard, this.readingReportManagerService.userKarkardReq);
     this.closeTabService.saveDataForUserKarkard = this.dataSource;
   }
   verification = async () => {

@@ -29,9 +29,9 @@ export class ServerErrorsComponent extends FactoryONE {
       this.connectToServer();
     }
   }
-  ngOnInit(): void { }
   connectToServer = async () => {
     this.dataSource = await this.manageServerService.postArray(this.selectedErrors);
+    this.closeTabService.saveDataForServerErrors = this.dataSource;
   }
   linkToElmah = (body: string) => {
     this.manageServerService.linkToElmah(body);

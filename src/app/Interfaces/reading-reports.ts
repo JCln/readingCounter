@@ -2,6 +2,7 @@ export enum ENReadingReports {
     master = 'masterReq',
     inState = 'inStateReq',
     details = 'detailsReq',
+    userKarkardReq = 'userKarkardReq',
     traverse = 'traverseReq',
     trvch = 'trvchReq',
     karkard = 'karkardReq',

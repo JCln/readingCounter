@@ -76,6 +76,12 @@ export class ManageServerService {
         return false;
       }
     }
+    if (body.hasOwnProperty('toTime')) {
+      if (MathS.isNull(body['toTime'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_endTime);
+        return false;
+      }
+    }
     if (!MathS.isExactLengthYouNeed(body['fromTime'], ENRandomNumbers.five)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthEndTime);
       return false;

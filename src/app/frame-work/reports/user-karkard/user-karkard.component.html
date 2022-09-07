@@ -18,21 +18,21 @@
                             [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
                         </p-dropdown>
                     </div>
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
-                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
-                                [dateObject]="readingReportManagerService.detailsReq.fromDate">
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.userKarkardReq, $event)"
+                                [dateObject]="readingReportManagerService.userKarkardReq.fromDate">
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                    <div class="input_2">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
-                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.details, $event)"
-                                [dateObject]="readingReportManagerService.detailsReq.toDate">
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.userKarkardReq, $event)"
+                                [dateObject]="readingReportManagerService.userKarkardReq.toDate">
                             </app-date-jalali>
 
                         </div>

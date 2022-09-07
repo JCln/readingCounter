@@ -1,0 +1,17 @@
+@import 'variable';
+@import 'input';
+@import 'button';
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  padding: var(--font_05);
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+  gap: var(--font_05);
+  align-items: center;
+}

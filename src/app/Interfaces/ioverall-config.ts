@@ -343,6 +343,7 @@ export enum ENSelectedColumnVariables {
     selectedDMAnalyze = 'analysis',
     selectedRRMaster = 'master',
     selectedRRDetails = 'rrDetails',
+    selectedRRRequestLog = 'requestLog',
     selectedrrUserKarkard = 'rrUserKarkard',
     selectedRRTraverse = 'trv',
     selectedRRTraverseDifferential = 'trvDiff',

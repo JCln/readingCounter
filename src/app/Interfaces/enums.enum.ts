@@ -45,6 +45,7 @@ export enum EN_messages {
     insert_startDay = 'روز شروع اجرا خالی است',
     insert_endDay = 'روز پایان اجرا خالی است',
     insert_startTime = 'زمان شروع خالی است',
+    insert_endTime = 'زمان پایان خالی است',
     insert_toDate = 'تا تاریخ خالی است',
     insert_date = 'تاریخ را وارد نمایید',
     insert_fromRate = 'از نرخ را وارد نمایید',
