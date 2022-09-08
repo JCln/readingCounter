@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'primeng/api';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
@@ -12,7 +11,6 @@ import { RequestLogComponent } from './request-log.component';
     RequestLogComponent
   ],
   imports: [
-    SharedModule,
     SharedThreeModule,
     SharedPrimeNgModule,
     RequestLogRoutingModule

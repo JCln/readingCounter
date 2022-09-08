@@ -10,6 +10,7 @@ import { ManageServerService } from 'services/manage-server.service';
 })
 export class DrivesInfoComponent implements OnInit {
   dataSource: IManageDrivesInfo[] = [];
+  temp: any[] = [];
 
   constructor(
     private manageServerService: ManageServerService
@@ -17,19 +18,23 @@ export class DrivesInfoComponent implements OnInit {
 
   classWrapper = async () => {
     this.dataSource = await this.manageServerService.postDataServer(ENInterfaces.serverManagerDrivesInfo);
+    this.doSth();
   }
   ngOnInit(): void {
     this.classWrapper();
   }
-  getPieChartData = () => {
+  getObjectParameters = (sth: any): any[] => {
+    let b = [];
+    b.push(sth.freePercent);
+    b.push(sth.usedPercent);
+    return b;
+  }
+  doSth = () => {
     for (let index = 0; index < this.dataSource.length; index++) {
-      console.log(this.dataSource);
-
-      // this.pieChartData[index].push(this.dataSource[index].freePercent);
-      // this.pieChartData[index].push(this.dataSource[index].usedPercent);
-      // console.log(this.pieChartData);
+      this.temp[index] = this.getObjectParameters(this.dataSource[index])
     }
 
   }
+
 
 }

@@ -1,16 +1,16 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
-import { IManageDrivesInfo } from 'interfaces/iserver-manager';
-import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet } from 'ng2-charts';
 
 @Component({
   selector: 'app-drive-info-pie',
   templateUrl: './drive-info-pie.component.html',
   styleUrls: ['./drive-info-pie.component.scss']
 })
-export class DriveInfoPieComponent implements OnChanges {
-  @Input() dataSource: IManageDrivesInfo[];
+export class DriveInfoPieComponent implements AfterViewInit {
+  @Input() dataSource: any[];
   @Input() chartColors: any[];
+
 
   private defaultOptions = {
     fontFamily: 'Blotus',
@@ -71,7 +71,7 @@ export class DriveInfoPieComponent implements OnChanges {
     }
   };
   public pieChartLabels: Label[] = [['درصد فضای آزاد'], ['درصد استفاده شده']];
-  public pieChartData: any = []; // should attention to code changed ": SingleDataSet = [];"
+  public pieChartData: SingleDataSet[] = [[26.8, 73.2]]; // should attention to code changed ": SingleDataSet = [];"
   public pieChartType: ChartType = 'pie';
   pieChartColor: any = [
     {
@@ -92,38 +92,11 @@ export class DriveInfoPieComponent implements OnChanges {
   constructor() {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
-    if (this.dataSource)
-      this.getPieChartData();
-  }
-  getObjectParameters = (sth: any): any[] => {
-    let b = [];
-    b.push(sth.freePercent);
-    b.push(sth.usedPercent);
-    console.log(b);
-
-    return b;
-  }
-  getPieChartData = () => {
-    for (let index = 0; index < this.dataSource.length; index++) {
-      console.log(this.dataSource);
-
-      this.pieChartData[index].push(this.dataSource[index].freePercent);
-      this.pieChartData[index].push(this.dataSource[index].usedPercent);
-      console.log(this.pieChartData);
-    }
-
   }
 
-  ngOnChanges(): void {
-    let temp: any[];
-    for (let index = 0; index < this.dataSource.length; index++) {
-      console.log(this.dataSource);
 
-      this.pieChartData[index].push(this.dataSource[index].freePercent);
-      this.pieChartData[index].push(this.dataSource[index].usedPercent);
-      console.log(this.pieChartData);
-    }
-
+  ngAfterViewInit(): void {
+    this.pieChartData = this.dataSource;
   }
 
 }

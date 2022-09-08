@@ -1,20 +1,20 @@
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 
 export enum ENLoginVersion {
-    version = '0.9.0'
+    version = '0.9.2'
 }
 
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'بهبود عملکرد',
+        title: 'حافظه- رهگیری درخواست- کارکرد کاربر',
         isSelected: true
-    },    
+    },
     {
         id: '2',
-        title: 'تنظیمات کاربری',
+        title: 'بهبود عملکرد',
         isSelected: true
-    }
+    },
 ]
 export class infoVersion {
 

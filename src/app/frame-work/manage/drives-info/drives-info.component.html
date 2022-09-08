@@ -1,5 +1,5 @@
 <main class="over_all">
-    <div *ngFor="let item of dataSource">
+    <div *ngFor="let item of dataSource, index as i">
         <h1 class="title">{{item.driveName}} {{item.volumeLabel}}</h1>
         <div class="content">
             <div class="_key_value">
@@ -19,8 +19,8 @@
                 <div class="_value">{{item.usedSpaceGb}}</div>
             </div>
             <div class="_key_value">
-                <div class="_key">فضای در دسترس</div>
-                <div class="_value">{{item.avaialableSpaceGb}}(GB)</div>
+                <div class="_key">فضای در دسترس(GB)</div>
+                <div class="_value">{{item.avaialableSpaceGb}}</div>
             </div>
             <div class="_key_value">
                 <div class="_key">فضای اشغالی(MB)</div>
@@ -31,8 +31,8 @@
                 <div class="_value">{{item.usedPercent}}</div>
             </div>
 
-            <section class="_charts">
-                <app-drive-info-pie [dataSource]="dataSource"></app-drive-info-pie>
+            <section class="_charts" *ngIf="dataSource">
+                <app-drive-info-pie [dataSource]="temp[i]"></app-drive-info-pie>
             </section>
         </div>
 

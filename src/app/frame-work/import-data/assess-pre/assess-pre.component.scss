@@ -144,7 +144,7 @@ section.dynamic_content {
 }
 
 ._toselect {
-  grid-column: 1/5;
+  grid-column: 1/4;
   background: var(--white);
   border: $border_5;
 
@@ -158,7 +158,7 @@ section.dynamic_content {
 }
 
 ._more_options {
-  grid-column: 5/10;
+  grid-column: 4/10;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 12rem));
   justify-content: center;

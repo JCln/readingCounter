@@ -1,7 +1,7 @@
 <main class="container_wrapper">
-    <div class="charts" *ngFor="let item of pieChartData">
+    <div class="charts">
         <div class="title">نمودار</div>
-        <canvas baseChart [data]="item" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions"
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions"
             [plugins]="pieChartPlugins" [legend]="pieChartLegend" [colors]="chartColors">
         </canvas>
     </div>

@@ -134,6 +134,7 @@ export enum ENEssentialsToSave {
     saveDataForRRGalleryRSFirst = 'saveDataForRRGalleryRSFirst',
     saveDataForRRGalleryReq = 'saveDataForRRGalleryReq',
     saveDataForRequestLog = 'saveDataForRequestLog',
+    saveDataForRequestLogReq = 'saveDataForRequestLogReq',
     saveDataForServerErrors = 'saveDataForServerErrors',
 }
 export interface ITestSidebar {

@@ -146,13 +146,15 @@ export class CloseTabService {
   saveDataForRRPerformance: any;
   saveDataForDMAAnalyze: any;
   saveDataForRRDetails: any;
-  saveDataForRequestLog: any = {
-    dataSource: [],
-    input: {
-      jalaliDay: '',
-      fromTime: '',
-      toTime: ''
-    }
+  saveDataForRequestLog: any;
+  saveDataForRequestLogReq: any = {
+    jalaliDay: '',
+    fromTimeH: '',
+    fromTimeM: '',
+    fromTime: '',
+    toTimeH: '',
+    toTimeM: '',
+    toTime: ''
   }
   saveDataForServerErrors: any;
   saveDataForRRDisposalHours: any;
@@ -244,7 +246,7 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.saveDataForRRGalleryReq, value: ENEssentialsToSave.saveDataForRRGallery, value_2: ENEssentialsToSave.saveDataForRRGalleryRSFirst, url: EN_Routes.wrrptsgalleryai },
     { id: 1, value: ENEssentialsToSave.saveDataForDMAAnalyze, url: EN_Routes.wrmdmacranlz },
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
-    { id: 2, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
+    { id: 2, req: ENEssentialsToSave.saveDataForRequestLogReq, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.wrmmserr },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
     { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.wrrptsexmkarkardDaily },
