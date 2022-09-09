@@ -27,11 +27,11 @@ export class DriveInfoPieComponent implements AfterViewInit {
       labels: this.defaultOptions
     },
     plugins: {
-      // labels: {
-      //   render: 'percentage',
-      //   fontColor: ['green', 'white', 'red'],
-      //   precision: 2
-      // },
+      labels: {
+        render: 'percentage',
+        fontColor: ['green', 'white', 'red'],
+        precision: 2
+      },
       datalabels: {
         formatter: (value, ctx) => {
           let sum = 0;
