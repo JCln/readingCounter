@@ -85,4 +85,11 @@ export class DownloadManagerService {
     this.backToDefaultValues();
     this.getOverAllSize();
   }
+  downloadImg = (src: any) => {
+    const link = document.createElement('a');
+    link.href = src;
+    link.target = '_blank';
+    link.download = `${new Date().toLocaleDateString()}.jpg`;
+    link.click();
+  }
 }

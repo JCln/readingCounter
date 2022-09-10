@@ -34,17 +34,17 @@ export class MasterComponent extends FactoryONE {
     super();
   }
 
-  refreshTableAfterGrouping = (val: any) => {
-    if (val) {
-      this.updateRowGroupMetaData();
-      this.canShowTable = false;
-      setTimeout(() => this.canShowTable = true, 0);
-      this._canShowGroupBorder = true;
-    }
-    else {
-      this._canShowGroupBorder = false;
-    }
-  }
+  // refreshTableAfterGrouping = (val: any) => {
+  //   if (val) {
+  //     this.updateRowGroupMetaData();
+  //     this.canShowTable = false;
+  //     setTimeout(() => this.canShowTable = true, 0);
+  //     this._canShowGroupBorder = true;
+  //   }
+  //   else {
+  //     this._canShowGroupBorder = false;
+  //   }
+  // }
 
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -59,7 +59,7 @@ export class MasterComponent extends FactoryONE {
 
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
-    this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
+    // this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -78,30 +78,30 @@ export class MasterComponent extends FactoryONE {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportManagerService.masterReq);
     this.closeTabService.saveDataForRRMaster = this.dataSource;
   }
-  updateRowGroupMetaData() {
-    this.rowGroupMetadata = {};
+  // updateRowGroupMetaData() {
+  //   this.rowGroupMetadata = {};
 
-    if (this.dataSource) {
-      for (let i = 0; i < this.dataSource.length; i++) {
-        let rowData = this.dataSource[i];
-        let representativeName = rowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
+  //   if (this.dataSource) {
+  //     for (let i = 0; i < this.dataSource.length; i++) {
+  //       let rowData = this.dataSource[i];
+  //       let representativeName = rowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
 
-        if (i == 0) {
-          this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
-        }
-        else {
-          let previousRowData = this.dataSource[i - 1];
-          let previousRowGroup = previousRowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
-          if (representativeName === previousRowGroup)
-            this.rowGroupMetadata[representativeName].size++;
-          else
-            this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
-        }
-      }
-    }
-  }
-  resetAggregation = () => {
-    this.closeTabService.offloadedGroupReq._selectedAggregate = '';
-    this.updateRowGroupMetaData();
-  }
+  //       if (i == 0) {
+  //         this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+  //       }
+  //       else {
+  //         let previousRowData = this.dataSource[i - 1];
+  //         let previousRowGroup = previousRowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
+  //         if (representativeName === previousRowGroup)
+  //           this.rowGroupMetadata[representativeName].size++;
+  //         else
+  //           this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+  //       }
+  //     }
+  //   }
+  // }
+  // resetAggregation = () => {
+  //   this.closeTabService.offloadedGroupReq._selectedAggregate = '';
+  //   this.updateRowGroupMetaData();
+  // }
 }

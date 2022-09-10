@@ -1,10 +1,15 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 import { EMPTY } from 'rxjs/internal/observable/empty';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { InteractionService } from 'services/interaction.service';
+import { SnackWrapperService } from 'services/snack-wrapper.service';
 
+import { MathS } from '../classes/math-s';
 import { AuthService } from './auth.service';
 import { JwtService } from './jwt.service';
 
@@ -16,7 +21,9 @@ export class InterceptorService implements HttpInterceptor {
 
   constructor(
     private jwtService: JwtService,
-    private authService: AuthService
+    private authService: AuthService,
+    private interactionService: InteractionService,
+    private snackWrapperService: SnackWrapperService
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -24,12 +31,12 @@ export class InterceptorService implements HttpInterceptor {
     if (authToken)
       req = this.addToken(req, authToken);
 
-    if (this.authService.getStopReq) {
-      setTimeout(() => {
-        this.authService.setStopReq(false);
-      }, 1000);
-      return EMPTY;
-    }
+    this.interactionService.getNetRequestStatus().subscribe(res => {
+      if (res) {
+        this.interactionService.setNetRequestStatus(true);
+        return EMPTY;
+      }
+    })
 
     return next.handle(req)
       .pipe(
@@ -41,7 +48,7 @@ export class InterceptorService implements HttpInterceptor {
                 return;
               }
               if (!this.authService.isAuthUserLoggedIn()) {
-                this.authService.goOutInMessage();
+                this.goOutInMessage();
                 this.authService.logout();
               }
               else {
@@ -65,7 +72,7 @@ export class InterceptorService implements HttpInterceptor {
                     statusText: error.statusText,
                     url: error.url
                   }));
-                  this.authService.snackMessage(errmsg.message);
+                  this.snackMessage(errmsg.message);
                 } catch (e) {
                   reject(error);
                 }
@@ -82,9 +89,9 @@ export class InterceptorService implements HttpInterceptor {
   }
   private showProperMessage = (error: any) => {
     if (error.error.message)
-      this.authService.noAccessMessage(error.error.message);
+      this.noAccessMessage(error.error.message);
     else
-      this.authService.noAccessMessage();
+      this.noAccessMessage();
   }
   private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
     return req.clone({
@@ -92,5 +99,17 @@ export class InterceptorService implements HttpInterceptor {
     });
   }
 
+  noAccessMessage = (errorMessage?: string) => {
+    if (MathS.isNull(errorMessage))
+      this.snackWrapperService.openSnackBar(EN_messages.access_denied, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+    else
+      this.snackWrapperService.openSnackBar(errorMessage, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+  }
+  goOutInMessage = () => {
+    this.snackWrapperService.openSnackBar(EN_messages.accedd_denied_relogin, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
+  }
+  snackMessage = (message: EN_messages) => {
+    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.twentyMili, ENSnackBarColors.danger);
+  }
 }
 

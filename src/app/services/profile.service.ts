@@ -4,6 +4,7 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { ENLocalStorageNames, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { DownloadManagerService } from 'services/download-manager.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { JwtService } from 'src/app/auth/jwt.service';
@@ -27,7 +28,7 @@ export class ProfileService {
     groupImgs: false,
     searchBasedOnDate: false,
     hasCanclableSpinner: false,
-    defaultFontStyle: 0,
+    defaultFontStyle: 3,
     imgOptions: {
       width: '40rem',
       height: '40rem',
@@ -42,7 +43,8 @@ export class ProfileService {
     private columnManager: ColumnManager,
     private localClientConfigsService: LocalClientConfigsService,
     private jwtService: JwtService,
-    private envService: EnvService
+    private envService: EnvService,
+    private downloadManagerService: DownloadManagerService
   ) { }
 
   getToken = (): string => {
@@ -58,6 +60,9 @@ export class ProfileService {
         height: '40rem',
         objectFit: 'contain'
       });
+  }
+  downloadImg = (src: any) => {
+    this.downloadManagerService.downloadImg(src);
   }
   setImg = (imageOption: imageOption) => {
     this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.imageOption, imageOption);
@@ -113,9 +118,9 @@ export class ProfileService {
       this.firstConfirmDialog(EN_messages.confirm_yourPassword, password);
     }
   }
-  getMyInfoDataSource = (): Promise<any> => {
+  getMyInfoDataSource = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.getMyProfile).subscribe((res: IResponses) => {
+      this.interfaceManagerService.GET(method).subscribe((res: IResponses) => {
         resolve(res)
       });
     });

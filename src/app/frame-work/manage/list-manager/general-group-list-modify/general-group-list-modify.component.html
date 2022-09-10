@@ -57,6 +57,11 @@
                     </i>
                 </div>
                 <div class="left_side">
+                    <i (click)="filterCounterState()">
+                        <label class="font_family" for="binary">({{dataSource.length}}) نمایش قرائت شده ها</label>
+                        <p-checkbox [(ngModel)]="columnManager._generalGroupHeaderCheckbox" [binary]="true">
+                        </p-checkbox>
+                    </i>
                     <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
                         <div class="tooltip_text">بارگیری مجدد جدول</div>
                     </i>

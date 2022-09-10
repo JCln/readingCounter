@@ -266,12 +266,6 @@ export class WoumComponent implements OnChanges {
   galleriaClass() {
     return `custom-galleria ${this.fullscreen ? 'fullscreen' : ''}`;
   }
-  downloadImg = (src: any) => {
-    const link = document.createElement('a');
-    link.href = src;
-    link.download = `${new Date().toLocaleDateString()}.jpg`;
-    link.click();
-  }
   rotateRightImg = () => {
     const a = document.querySelector('.main_img') as HTMLElement;
     this.degree += 90;

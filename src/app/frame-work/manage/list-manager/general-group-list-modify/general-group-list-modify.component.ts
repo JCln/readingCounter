@@ -29,6 +29,7 @@ import { GeneralGroupInfoResComponent } from './general-group-info-res/general-g
 })
 export class GeneralGroupListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
+  tempOriginDataSource: any[] = [];
   // should place only in component because overright totalNum needs for dynamic use
   tempMainDataSource = { totalNum: 0, data: [] };
 
@@ -327,6 +328,23 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       if (res)
         console.log(res);
     });
+  }
+  filterCounterState = () => {
+    // if OnOffloadComponent rendering
+    let temp: any[] = [];
+    // should be false on initial(_generalGroupHeaderCheckbox) because filter on DataSource happen
+    if (this.columnManager._generalGroupHeaderCheckbox) {
+      this.tempOriginDataSource = JSON.parse(JSON.stringify(this.dataSource));
+      for (let index = 0; index < this.dataSource.length; index++) {
+        if (this.dataSource[index].counterStateId !== null)
+          temp.push(this.dataSource[index]);
+      }
+      this.dataSource = temp;
+    }
+    else {
+      if (!MathS.isNull(this.tempOriginDataSource))
+        this.dataSource = this.tempOriginDataSource;
+    }
   }
   getExcel = async () => {
     const res = await this.listManagerService.getExcel(ENInterfaces.GeneralModifyAllExcelInGroup, this.allListsService.generalModifyListsGrouped_pageSign.groupId);

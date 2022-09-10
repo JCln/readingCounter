@@ -285,6 +285,7 @@ export enum ENInterfaces {
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
     chat = 'V1/Chat/Index?accessToken=',
+    settingsLicense = 'V1/ApiSettings/License',
 
     postImportData = 'V1/Import/Dynamic',
     postImportDynamicCount = 'V1/Import/DynamicCount',

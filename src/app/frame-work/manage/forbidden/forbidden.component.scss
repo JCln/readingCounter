@@ -4,7 +4,7 @@
 @import '_mat.scss';
 
 
-.main {
+main {
   direction: rtl;
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
@@ -15,24 +15,11 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 16rem));
   gap: var(--font_05);
+  justify-content: center;
   align-items: center;
 }
-
-// form {
-//   display: grid;
-//   direction: rtl;
-//   justify-content: center;
-//   margin: auto;
-//   position: relative;
-//   padding: var(--font_xs);
-//   width: 18rem;
-//   background: var(--secondary_1);
-//   border-radius: $border_15;
-//   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-//   margin-bottom: var(--font_xs);
-// }
 
 .input_2 {
   text-align: center;
@@ -40,7 +27,6 @@ section.content {
 }
 
 .btn_1 {
-  margin-top: var(--font_2);
   color: var(--white);
   background-color: var(--orange_500);
 }

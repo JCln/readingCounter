@@ -1,8 +1,8 @@
-@import 'variable';
+@import 'shared_reports';
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 21rem));
   direction: rtl;
   justify-content: center;
   gap: var(--font_2);
@@ -15,5 +15,66 @@
   padding: var(--font_xs) 0;
   justify-content: space-around;
   border-radius: $border_15;
-  min-height: var(--font_5);
+}
+
+.title {
+  direction: ltr;
+  color: var(--primary_3);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_l2);
+}
+
+._charts {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: var(--font_3);
+}
+
+._key_value {
+  columns: 2;
+}
+
+._key {
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--primary_5);
+  text-align: center;
+}
+
+._value {
+  font-size: var(--font_l);
+  font-weight: 600;
+  color: var(--primary_5);
+  background-color: inherit;
+  max-width: 95%;
+  direction: ltr;
+}
+
+._coin {
+  font-size: var(--font_55);
+  text-align: center;
+  background-color: var(--fix_dark);
+  box-shadow: 0 0 1px 1px var(--fix_dark);
+  border-radius: $border_15;
+
+  ._base {
+    color: white;
+  }
+
+  ._diamond {
+    color: #b9f2ff;
+  }
+
+  ._bronze {
+    color: rgb(205, 127, 50);
+  }
+
+  ._silver {
+    color: silver;
+  }
+
+  ._gold {
+    color: gold;
+  }
 }

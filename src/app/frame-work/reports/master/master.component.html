@@ -70,7 +70,7 @@
             </section>
         </form>
     </section>
-    <section class="content">
+    <!-- <section class="content">
         <div class="input_2">
             <div class="_key">گروه‌بندی</div>
             <p-dropdown name="zones" [options]="aggregateOptions"
@@ -83,7 +83,7 @@
             بدون گروه‌بندی
             <i class="pi pi-refresh"></i>
         </button>
-    </section>
+    </section> -->
     <app-prime-table *ngIf="canShowTable" [dataSource]="dataSource" [_outputFileName]="'master'"
         [_selectedColumnsToRemember]="'selectedRRMaster'" [_calculableSUM]=true [_calcName]="'itemCount'"
         [_hasCollapsible]=true [_hasAggregating]=true [_isCollaped]="readingReportManagerService.isCollapsedMaster"

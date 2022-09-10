@@ -12,6 +12,7 @@ import { JwtService } from 'src/app/auth/jwt.service';
 export class DropdownComponent {
   @Output() isLogout = new EventEmitter<boolean>();
   routeToProfile = EN_Routes.wrprofile;
+  routeToLicense = EN_Routes.wrLicense;
 
   constructor(
     private envService: EnvService,

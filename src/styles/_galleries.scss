@@ -223,7 +223,7 @@ img {
 .__icons {
   display: flex;
   position: absolute;
-  top: calc(-1 * var(--font_25));
+  top: var(--font_05);
   left: var(--font_05);
 
   i {

@@ -37,7 +37,7 @@ export class OutputManagerService {
       FileSaver.saveAs(blob, fileName);
     })
   }
-  getValidatedTableData = (dataSource: any[], _selectCols: IObjectIteratation[]): any => {
+  getValidatedTableData = (dataSource: any[], _selectCols: any[]): any => {
     const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
     const validColNames = [];
     const validHeaders = [];
@@ -61,7 +61,13 @@ export class OutputManagerService {
       const newElement = {};
       for (let i = 0; i < validColNames.length; i++) {
         const key = validColNames[i];
-        const value = currentelement[validColNames[i]];
+        let value = currentelement[validColNames[i]];
+
+        if (value == true)
+          value = 'بله';
+        if (value == false)
+          value = 'خیر';
+
         newElement[key] = value != undefined && value != null ? value : '';
       }
       return Object.values(newElement);

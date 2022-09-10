@@ -284,15 +284,7 @@ export interface ISearchUsersManager {
     selectedActions: string[]
 }
 //
-// my info (profile)
-export interface IProfile {
-    firstName: string,
-    sureName: string,
-    username: string,
-    email: string,
-    displayName: string,
-    userCode: number
-}
+
 export interface IUserLoggins {
     id: string,
     userId: string,

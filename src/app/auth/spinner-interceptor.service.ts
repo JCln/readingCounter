@@ -45,45 +45,51 @@ export class SpinnerInterceptorService implements HttpInterceptor {
               }
               else
                 this.snackWrapperService.openSnackBar(EN_Mess.checkValuesAndTryAgain, ENSnackBarTimes.sevenMili, ENSnackBarColors.warn);
+
             }
             //401 handling in authService
-            if (error.status === ENClientServerErrors.cs403) {
-              this.snackWrapperService.openSnackBar(EN_Mess.youHaveNotAccess, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
-            }
-            if (error.status === ENClientServerErrors.cs404) {
-              if (error.error.message)
-                this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
-              else
-                this.snackWrapperService.openSnackBar(EN_Mess.dataNotFound, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
-            }
-            if (error.status === ENClientServerErrors.cs405) {
-              this.snackWrapperService.openSnackBar(error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
-            }
-            if (error.status === ENClientServerErrors.cs408) {
-              this.snackWrapperService.openSnackBar(EN_Mess.timeOut, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
-            }
-            if (error.status === ENClientServerErrors.cs409) {
-              this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
-            }
-            if (error.status === ENClientServerErrors.cs410) {
-              this.snackWrapperService.openSnackBar(EN_Mess.dataNotFoundOrDeleted, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
-            }
-            if (error.status === ENClientServerErrors.cs422) {
-              this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
-            }
-            if (error.status === ENClientServerErrors.cs0) {
-              this.snackWrapperService.openSnackBar(EN_Mess.checkNetwork, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
-            }
-            if (error.status === ENClientServerErrors.cs500 || error.status === ENClientServerErrors.cs502) {
-              this.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
-            }
-            if (error.status === ENClientServerErrors.cs504) {
-              this.snackWrapperService.openSnackBar(EN_Mess.notResponse, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
-            }
-            else {
-              this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fifteenMili, ENSnackBarColors.danger);
-            }
+            switch (error.status) {
+              case ENClientServerErrors.cs403:
+                this.snackWrapperService.openSnackBar(EN_Mess.youHaveNotAccess, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs404:
+                if (error.error.message)
+                  this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                else
+                  this.snackWrapperService.openSnackBar(EN_Mess.dataNotFound, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs405:
+                this.snackWrapperService.openSnackBar(error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs408:
+                this.snackWrapperService.openSnackBar(EN_Mess.timeOut, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs409:
+                this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs410:
+                this.snackWrapperService.openSnackBar(EN_Mess.dataNotFoundOrDeleted, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs422:
+                this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fourMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs0:
+                this.snackWrapperService.openSnackBar(EN_Mess.checkNetwork, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs500:
+                this.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs502:
+                this.snackWrapperService.openSnackBar(EN_Mess.serviceError, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                break;
+              case ENClientServerErrors.cs504:
+                this.snackWrapperService.openSnackBar(EN_Mess.notResponse, ENSnackBarTimes.sevenMili, ENSnackBarColors.danger);
+                break;
 
+              default:
+                this.snackWrapperService.openSnackBar(error.error.message, ENSnackBarTimes.fifteenMili, ENSnackBarColors.danger);
+                break;
+            }
             this.spinnerWrapperService.stopPending();
             this.spinnerWrapperService.stopLoadingSmallSpinner();
 

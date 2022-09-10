@@ -6,6 +6,7 @@ import { IObjectIteratation } from 'interfaces/ioverall-config';
 })
 export class ColumnManager {
     _primeNGHeaderCheckbox: boolean = false;
+    _generalGroupHeaderCheckbox: boolean = false;
 
     excelDynamic: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
@@ -279,8 +280,8 @@ export class ColumnManager {
     requestLog: IObjectIteratation[] = [
         // { field: 'id', header: 'id', isSelected: true },        
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
-        { field: 'path', header: 'path', isSelected: true },
-        { field: 'controllerAction', header: 'action', isSelected: true },
+        { field: 'path', header: 'path', isSelected: true, ltr: true },
+        { field: 'controllerAction', header: 'action', isSelected: true, ltr: true },
         { field: 'requestDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'requestTime', header: 'زمان', isSelected: true },
         { field: 'ip', header: 'IP', isSelected: true },

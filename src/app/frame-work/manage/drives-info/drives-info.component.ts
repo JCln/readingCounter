@@ -17,7 +17,7 @@ export class DrivesInfoComponent implements OnInit {
   ) { }
 
   classWrapper = async () => {
-    this.dataSource = await this.manageServerService.postDataServer(ENInterfaces.serverManagerDrivesInfo);
+    this.dataSource = await this.manageServerService.GETDataServer(ENInterfaces.serverManagerDrivesInfo);
     this.doSth();
   }
   ngOnInit(): void {

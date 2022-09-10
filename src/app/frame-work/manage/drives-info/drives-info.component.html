@@ -7,8 +7,8 @@
                 <div class="_value"> {{item.freePercent}}</div>
             </div>
             <div class="_key_value">
-                <div class="_key">فضای آزاد (GB)</div>
-                <div class="_value">{{item.freeSpaceGb}}</div>
+                <div class="_key">درصد استفاده شده</div>
+                <div class="_value">{{item.usedPercent}}</div>
             </div>
             <div class="_key_value">
                 <div class="_key">فضای کل(GB)</div>
@@ -19,16 +19,16 @@
                 <div class="_value">{{item.usedSpaceGb}}</div>
             </div>
             <div class="_key_value">
+                <div class="_key">فضای آزاد (GB)</div>
+                <div class="_value">{{item.freeSpaceGb}}</div>
+            </div>
+            <div class="_key_value">
                 <div class="_key">فضای در دسترس(GB)</div>
                 <div class="_value">{{item.avaialableSpaceGb}}</div>
             </div>
             <div class="_key_value">
-                <div class="_key">فضای اشغالی(MB)</div>
+                <div class="_key">فضای رزرو(MB)</div>
                 <div class="_value">{{item.reservedSpaceMb}}</div>
-            </div>
-            <div class="_key_value">
-                <div class="_key">درصد استفاده شده</div>
-                <div class="_value">{{item.usedPercent}}</div>
             </div>
 
             <section class="_charts" *ngIf="dataSource">

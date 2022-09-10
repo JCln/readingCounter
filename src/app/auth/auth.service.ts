@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
 import { IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-permission';
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -18,7 +16,6 @@ import { JwtService } from './jwt.service';
   providedIn: 'root'
 })
 export class AuthService {
-  _stopRequest: boolean = false;
 
   constructor(
     private mainService: MainService,
@@ -35,21 +32,6 @@ export class AuthService {
   refreshToken = (): Observable<any> => {
     return this.mainService.POSTBODY(ENInterfaces.AuthsAccountRefresh, { 'refreshToken': this.getRefreshToken() })
   }
-
-  cancelReq = () => {
-    this._stopRequest = true;
-  }
-  resumeReq = () => {
-    this._stopRequest = false;
-  }
-  setStopReq(stopRequest: boolean) {
-    this._stopRequest = stopRequest;
-  }
-
-  get getStopReq(): boolean {
-    return this._stopRequest;
-  }
-
   logging = (userData: ICredentials) => {
     const returnUrl = this.utilsService.getRouteParams('returnUrl');
     this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).subscribe((res: IAuthTokenType) => {
@@ -96,18 +78,6 @@ export class AuthService {
       displayName: decodedToken["DisplayName"],
       roles: roles
     });
-  }
-  noAccessMessage = (errorMessage?: string) => {
-    if (MathS.isNull(errorMessage))
-      this.utilsService.snackBarMessageWarn(EN_messages.access_denied);
-    else
-      this.utilsService.snackBarMessageWarn(errorMessage);
-  }
-  goOutInMessage = () => {
-    this.utilsService.snackBarMessage(EN_messages.accedd_denied_relogin, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
-  }
-  snackMessage = (message: EN_messages) => {
-    this.utilsService.snackBarMessage(message, ENSnackBarTimes.twentyMili, ENSnackBarColors.danger)
   }
 
 }

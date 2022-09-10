@@ -78,7 +78,7 @@ export class FontService {
         this.setFontS();
         break;
       default:
-        this.setFontS();
+        this.setFontSM();
         break;
     }
   }

@@ -36,6 +36,13 @@ export class ManageServerService {
       })
     });
   }
+  GETDataServer = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
   postBody = (method: ENInterfaces, val: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, val).subscribe((res) => {

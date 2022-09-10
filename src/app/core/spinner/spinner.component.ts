@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { InteractionService } from 'services/interaction.service';
 import { ProfileService } from 'services/profile.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
-import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-spinner',
@@ -15,8 +15,8 @@ export class SpinnerComponent implements OnInit {
 
   constructor(
     private spinnerWrapper: SpinnerWrapperService,
-    private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private interactionService: InteractionService
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class SpinnerComponent implements OnInit {
     )
   }
   cancelMe = () => {
-    this.authService.setStopReq(true);
+    this.interactionService.setNetRequestStatus(true);
     this.notification = false;
     this.networkReq = false;
   }

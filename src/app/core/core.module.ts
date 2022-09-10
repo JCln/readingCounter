@@ -10,7 +10,6 @@ import { GlobalErrorHandlerService } from 'services/global-error-handler.service
 
 import { InterceptorService } from '../auth/interceptor.service';
 import { SpinnerInterceptorService } from '../auth/spinner-interceptor.service';
-import { TimeoutInterceptorService } from '../auth/timeout-interceptor.service';
 import { FrameWorkComponent } from './../frame-work/frame-work.component';
 import { AddNewComponent } from './../frame-work/manage/add-new/add-new.component';
 import { AnnouceNotifComponent } from './../shared/annouce-notif/annouce-notif.component';
@@ -79,7 +78,6 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptorService, multi: true },
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
   ]
 })

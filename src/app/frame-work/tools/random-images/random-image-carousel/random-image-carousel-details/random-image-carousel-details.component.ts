@@ -59,12 +59,6 @@ export class RandomImageCarouselDetailsComponent implements OnChanges, AfterView
       this.toolsService.showSnack(res.message, ENSnackBarColors.success);
 
   }
-  downloadImg = (src: string) => {
-    const link = document.createElement('a');
-    link.href = src;
-    link.download = `${new Date().toLocaleDateString()}.jpg`;
-    link.click();
-  }
   rotateRightImg = () => {
     const a = document.querySelector('.main-img') as HTMLElement;
     this.degree += 90;

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { IProfile } from 'interfaces/isettings';
 import { ENFontStyle } from 'interfaces/istyles';
-import { IProfile } from 'interfaces/iuser-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { FontService } from 'services/font.service';
 import { imageOption, ProfileService } from 'services/profile.service';
@@ -95,7 +96,7 @@ export class ProfileComponent extends FactoryONE {
       this.myInfoDataSource = this.closeTabService.saveDataForProfile;
     }
     else {
-      this.myInfoDataSource = await this.profileService.getMyInfoDataSource();
+      this.myInfoDataSource = await this.profileService.getMyInfoDataSource(ENInterfaces.getMyProfile);
       this.closeTabService.saveDataForProfile = this.myInfoDataSource;
     }
 

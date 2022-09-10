@@ -84,7 +84,8 @@ export class ENMapCenter {
     }
 }
 export class timeout {
-    static time = 18000;
+    // static time = 18000;
+    static time = 2000;
 }
 export class ENMapUrls {
     static readonly DEFAULT = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.DEFAULT }, { title: 'sattelite', url: ENSatteliteAccessToken.DEFAULT + ENSatelliteToken.DEFAULT }]);

@@ -7,13 +7,13 @@ import { JwtService } from 'src/app/auth/jwt.service';
 
 import { MathS } from '../classes/math-s';
 import {
-    ENAcceptVerb,
-    ENJsonInfo,
-    ENParamSendType,
-    IAcceptVerb,
-    IDynamicExcelReq,
-    IJsonInfo,
-    IParamSendType,
+  ENAcceptVerb,
+  ENJsonInfo,
+  ENParamSendType,
+  IAcceptVerb,
+  IDynamicExcelReq,
+  IJsonInfo,
+  IParamSendType,
 } from '../interfaces/itools';
 import { IDownloadFileAllImages, IRandomImages } from '../interfaces/tools';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -173,6 +173,10 @@ export class ToolsService {
     }
     if (MathS.isNull(dataSource.quantity)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_quantity);
+      return false;
+    }
+    if (MathS.isNaN(dataSource.quantity)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_numberLengths);
       return false;
     }
     if (MathS.isNull(dataSource.userId)) {

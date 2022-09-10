@@ -74,7 +74,8 @@
                         <i (click)="rotateLeftImg()" class="tooltip _circle_border fa fa-rotate-left">
                             <div class="tooltip_text_right">چرخش به چپ</div>
                         </i>
-                        <i (click)="downloadImg(allImages)" class="tooltip _circle_border pi pi-download">
+                        <i (click)="profileService.downloadImg(allImages)"
+                            class="tooltip _circle_border pi pi-download">
                             <div class="tooltip_text_right">ذخیره تصویر</div>
                         </i>
                     </section>
