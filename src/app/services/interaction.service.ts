@@ -20,7 +20,7 @@ export class InteractionService {
   private netRequestSource = new BehaviorSubject<boolean>(false);
 
 
-  getNetRequestStatus = (): Observable<any> => {
+  getNetRequestStatus$ = (): Observable<any> => {
     return this.netRequestSource.asObservable();
   }
   setNetRequestStatus(canceled: boolean) {

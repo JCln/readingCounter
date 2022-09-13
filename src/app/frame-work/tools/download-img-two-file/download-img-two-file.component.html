@@ -1,0 +1,44 @@
+<app-collapsable [_isCollapsed]=toolsService._isCollapseFileDownloadImageTwo
+    (_clicked)=" toolsService._isCollapseFileDownloadImageTwo = !toolsService._isCollapseFileDownloadImageTwo">
+</app-collapsable>
+
+<section [hidden]="toolsService._isCollapseFileDownloadImageTwo">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+            <section class="content">
+                <div class="input_2" [hidden]="!zoneDictionary.length">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="toolsService.fileDownloadAllImagesTwo2.zoneId" placeholder="انتخاب مورد"
+                            [style]="{minWidth: '10rem',width:'100%'}" optionValue="id" optionLabel="title"
+                            filter="true">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">از تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="toolsService.receiveFromDateJalali2($event)"
+                            [dateObject]="toolsService.fileDownloadAllImagesTwo2.fromDay">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">تا تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="toDate" (dateJalEvent)="toolsService.receiveToDateJalali2($event)"
+                            [dateObject]="toolsService.fileDownloadAllImagesTwo2.toDay">
+                        </app-date-jalali>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <footer class="center_footer">
+            <button type="submit" class="btn_1">
+                دانلود تصاویر
+                <i class="fa fa-file-zip-o"></i>
+            </button>
+        </footer>
+    </form>
+</section>

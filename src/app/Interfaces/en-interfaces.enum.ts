@@ -189,6 +189,7 @@ export enum ENInterfaces {
     ListDispersalChart = 'V1/List/Offloaded/DispersalChart',
     ListAllImages = `V1/List/OffLoaded/AllImages/`,
     downloadFileAllImages = 'V1/Download/File/AllImages?access_token=',
+    downloadFileAllImagesTWO = 'V1/Download/File/AllImages2?access_token=',
     ListRRLocked = 'V1/List/Offloaded/Locked',
     ListRRPreNumberShown = 'V1/List/Offloaded/PreNumberShown',
 

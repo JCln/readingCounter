@@ -21,7 +21,7 @@ export enum EN_Routes {
     'wrmrqr' = '/wr/m/r/qr',
     'wrmrrpt' = '/wr/m/r/rpt',
     'wrmrnob' = '/wr/m/r/nob',
-    'wrmrnob/' = '/wr/m/r/nob/',
+    'wrmrnobDetail' = '/wr/m/r/nob/detail',
     'wrmrnobautoImport' = '/wr/m/r/nob/autoImport',
     'wrmrtxtout' = '/wr/m/r/txt/out',
     'wrmrapk' = '/wr/m/r/apk',

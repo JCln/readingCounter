@@ -14,3 +14,8 @@ export interface IDownloadFileAllImages {
     zoneId: number,
     day: string
 }
+export interface IDownloadFileAllImagesTwo {
+    zoneId: number,
+    fromDay: string,
+    toDay: string,
+}

@@ -128,6 +128,7 @@ export enum ENEssentialsToSave {
     saveDataForEditUsersGUID = 'saveDataForEditUsersGUID',
     saveDataForUserLoggins = 'saveDataForUserLoggins',
     saveDataForFragmentNOBDetails = 'saveDataForFragmentNOBDetails',
+    fragmentNOBDetailsGUID = 'fragmentNOBDetailsGUID',
     saveDataForRRGallery = 'saveDataForRRGallery',
     saveDataForRandomImgs = 'saveDataForRandomImgs',
     saveDataForRandomImgsRSFirst = 'saveDataForRandomImgsRSFirst',

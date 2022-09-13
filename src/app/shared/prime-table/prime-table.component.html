@@ -97,12 +97,6 @@
     </ng-template>
 
     <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
-        <!-- <tr ngIf="_hasAggregating" class="_anything"
-            *ngIf="_canShowGroupBorder && rowGroupMetadata[dataSource[readingReportManagerService.masterReq._selectedAggregate]].index === ri">
-            <td>
-                <span>{{dataSource[readingReportManagerService.masterReq._selectedAggregate]}}</span>
-            </td>
-        </tr> -->
         <tr>
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>

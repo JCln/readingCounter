@@ -37,6 +37,7 @@ export interface IReadingReportReq {
     reportCode: number,
     year: number,
     _selectedAggregate?: string,
+    beginFromImported?: boolean,
 }
 export interface IUserKarkardInput {
     zoneId: number,

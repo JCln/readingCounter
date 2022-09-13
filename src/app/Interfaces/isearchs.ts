@@ -12,6 +12,8 @@ export interface IFollowUp {
     itemQuantity: number,
     readingPeriodTitle: string,
     year: number,
+    alalHesabPercent: number,
+    imagePercent: number,
     changeHistory: [
         {
             id: string,

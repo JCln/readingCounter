@@ -38,7 +38,7 @@ export class SpinnerComponent implements OnInit {
     )
   }
   cancelMe = () => {
-    this.interactionService.setNetRequestStatus(true);
+    // this.interactionService.setNetRequestStatus(true);
     this.notification = false;
     this.networkReq = false;
   }

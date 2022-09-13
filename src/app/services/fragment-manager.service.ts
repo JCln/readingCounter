@@ -28,6 +28,9 @@ export class FragmentManagerService {
   fragmentDetails: IFragmentDetails;
 
   zoneDictionary: IDictionaryManager[] = [];
+  fragmentDetails_pageSign = {
+    GUid: null
+  };
 
   columnSelectedFragmentMaster = (): IObjectIteratation[] => {
     return [
@@ -104,7 +107,10 @@ export class FragmentManagerService {
     return this.utilsService.getRouteBySplit('/');
   }
   routeToFragmentDetails = (route: string) => {
-    this.utilsService.routeToByParams(EN_Routes['wrmrnob/'], route);
+    this.fragmentDetails_pageSign.GUid = route;    
+    console.log(route);
+
+    this.utilsService.routeToByUrl(EN_Routes.wrmrnobDetail);
   }
   routeToAutomaticImport = () => {
     this.utilsService.routeTo(EN_Routes.wrmrnobautoImport);

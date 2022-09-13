@@ -70,7 +70,9 @@
                             </app-date-jalali>
                         </div>
                     </div>
-
+                    <mat-checkbox name="beginFromImported"
+                        [(ngModel)]="readingReportManagerService.karkardDailyReq.beginFromImported">نمایش همه
+                    </mat-checkbox>
                     <button type="submit" class="btn_1">
                         مشاهده لیست
                         <i class="pi pi-list"></i>

@@ -1,14 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentDetails } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
-import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 
 @Component({
@@ -24,46 +21,55 @@ export class FragmentDetailsComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
-  _masterId: string = '';
   clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
     private closeTabService: CloseTabService,
-    public fragmentManagerService: FragmentManagerService,
-    private router: Router
+    public fragmentManagerService: FragmentManagerService
   ) {
     super();
-    this.getRouteParams();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForFragmentNOBDetails = null;
+  nullSavedSource = () => {
+    this.closeTabService.saveDataForFragmentNOBDetails = null;
+    this.closeTabService.fragmentNOBDetailsGUID = null;
+  }
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
+    console.log(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
+    if (!this.fragmentManagerService.fragmentDetails_pageSign.GUid) {
+      this.fragmentManagerService.routeToFragmentMaster();
     }
-    this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
-    this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
-    this.defaultAddStatus();
-    this.insertSelectedColumns();
+
+    else {
+      console.log(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
+      if (canRefresh) {
+        this.nullSavedSource();
+      }
+      console.log(this.closeTabService.fragmentNOBDetailsGUID);
+
+      if (this.closeTabService.fragmentNOBDetailsGUID === this.fragmentManagerService.fragmentDetails_pageSign.GUid && this.closeTabService.saveDataForFragmentNOBDetails) {
+        this.dataSource = this.closeTabService.saveDataForFragmentNOBDetails;
+      }
+      else {
+        this.dataSource = await this.fragmentManagerService.getFragmentDetails(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
+        this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
+        this.closeTabService.fragmentNOBDetailsGUID = this.fragmentManagerService.fragmentDetails_pageSign.GUid;
+      }
+      this.defaultAddStatus();
+      this.insertSelectedColumns();
+    }
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
     this._selectCols = this.fragmentManagerService.columnSelectedFragmentDetails();
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
-  private getRouteParams = () => {
-    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      this._masterId = this.fragmentManagerService.getRouteParams();
-      this.classWrapper();
-    })
-    )
-  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   newRow(): IFragmentDetails {
-    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId, isNew: true };
+    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this.fragmentManagerService.fragmentDetails_pageSign.GUid, isNew: true };
   }
   onRowEditInit(dataSource: IFragmentDetails) {
     // this.insertSelectedColumns();
@@ -122,6 +128,5 @@ export class FragmentDetailsComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  routeToParent = () => this.router.navigate([EN_Routes.wrmrnob]);
-  ngOnInit(): void { return; }
+
 }

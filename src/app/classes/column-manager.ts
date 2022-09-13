@@ -409,7 +409,8 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true }
     ];
     rrPreNumber: IObjectIteratation[] = [
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -474,7 +475,8 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ]
     rrLocked: IObjectIteratation[] = [
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -540,6 +542,8 @@ export class ColumnManager {
     ]
     searchPro: IObjectIteratation[] =
         [
+            { field: 'counterReaderName', header: 'مامور', isSelected: false },
+            { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'counterReaderName', header: 'مامور', isSelected: true },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -604,6 +608,8 @@ export class ColumnManager {
         ];
     searchMosh: IObjectIteratation[] =
         [
+            { field: 'counterReaderName', header: 'مامور', isSelected: false },
+            { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'counterReaderName', header: 'مامور', isSelected: true },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -668,6 +674,8 @@ export class ColumnManager {
         ];
     searchMoshDialog: IObjectIteratation[] =
         [
+            { field: 'counterReaderName', header: 'مامور', isSelected: false },
+            { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'counterReaderName', header: 'مامور', isSelected: true },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -745,6 +753,8 @@ export class ColumnManager {
         ];
     assess_pre: IObjectIteratation[] =
         [
+            { field: 'counterReaderName', header: 'مامور', isSelected: false },
+            { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
             { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -995,6 +1005,7 @@ export class ColumnManager {
     ];
     defColumns: IObjectIteratation[] = [
         { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
+        { field: 'insertTime', header: 'زمان', isSelected: true },
         { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true },
@@ -1010,7 +1021,7 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, readonly: true },
         { field: 'fromDate', header: 'از ', isSelected: true, readonly: true },
         { field: 'toDate', header: 'تا ', isSelected: true, readonly: true },
-        { field: 'overallQuantity', header: 'کل تعداد ', isSelected: true, readonly: true },
+        { field: 'overallQuantity', header: 'تعداد کل', isSelected: true, readonly: true },
         { field: 'itemQuantity', header: 'تعداد ', isSelected: true, readonly: true },
         { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, readonly: true },
         { field: 'year', header: 'سال', isSelected: true, readonly: true }
@@ -1036,18 +1047,32 @@ export class ColumnManager {
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
         { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
     ];
+    // For Follow UP component
     LMPerDayPositions: IObjectIteratation[] = [
         { field: 'counterReaders', header: 'مامور', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
         { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
         { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
         { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
         { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
-        { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true },
+        { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true, enableTooltip: true },
         { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, readonly: true, isBoolean: true },
         { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: true, isBoolean: true },
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: true, isBoolean: true },
         { field: 'isBazdid', header: 'بازدید', isSelected: true, readonly: true, isBoolean: true },
         { field: 'isRoosta', header: 'روستا', isSelected: true, readonly: true, isBoolean: true }
+    ];
+    lMPerDayPositions: IObjectIteratation[] = [
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'counterReaders', header: 'مامور(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
+        { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
+        { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
+        { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
+        { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
+        { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
+        { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true, enableTooltip: true }
     ];
     lMPerDay: IObjectIteratation[] = [
         { field: 'day', header: 'روز', isSelected: true, readonly: true },
@@ -1062,19 +1087,6 @@ export class ColumnManager {
         { field: 'manePercent', header: 'درصد مانع', isSelected: false, readonly: true },
         { field: 'xarabFaqedCount', header: 'تعداد فاقد/خراب', isSelected: false, readonly: true },
         { field: 'xarabFaqedPercent', header: 'درصد فاقد/خراب', isSelected: false, readonly: true }
-    ];
-    lMPerDayPositions: IObjectIteratation[] = [
-        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
-        { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
-        { field: 'counterReaders', header: 'مامور(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
-        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
-        { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
-        { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
-        { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
-        { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
-        { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
-        { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true }
     ];
     offlaodedGroup: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
@@ -1099,6 +1111,8 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ];
     allLists: IObjectIteratation[] = [
+        { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -1290,6 +1304,8 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, readonly: true, enableTooltip: true, icon: '_editable' }
     ]
     ModifyList: IObjectIteratation[] = [
+        { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
         { field: 'radif', header: 'ش.پرونده', isSelected: false },

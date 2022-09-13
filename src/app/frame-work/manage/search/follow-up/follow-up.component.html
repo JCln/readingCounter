@@ -28,8 +28,13 @@
         </ng-container>
         <ng-template #elseTemplate>
             <div class="_key">{{item.header}}</div>
-            <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
-                [(ngModel)]="dataSourceAUX[item.field]">
+            <div class="tooltip">
+                <input [readOnly]="item.readonly" class="_value" name="{{item.field}}"
+                    [(ngModel)]="dataSourceAUX[item.field]">
+                <div *ngIf="item.enableTooltip" class="tooltip_text">
+                    درصد مانع صادر شده {{dataSource['alalHesabPercent']}}
+                </div>
+            </div>
         </ng-template>
     </div>
 </section>

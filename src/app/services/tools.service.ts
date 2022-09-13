@@ -15,7 +15,7 @@ import {
   IJsonInfo,
   IParamSendType,
 } from '../interfaces/itools';
-import { IDownloadFileAllImages, IRandomImages } from '../interfaces/tools';
+import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IRandomImages } from '../interfaces/tools';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
@@ -26,6 +26,7 @@ import { UtilsService } from './utils.service';
 export class ToolsService {
   _isCollapsedRandomImgCarouDetails: boolean = true;
   _isCollapseFileDownloadImage: boolean = false;
+  _isCollapseFileDownloadImageTwo: boolean = false;
   _isCollapsedRandomImages: boolean = false;
 
   constructor(
@@ -39,6 +40,11 @@ export class ToolsService {
   public fileDownloadAllImages: IDownloadFileAllImages = {
     zoneId: null,
     day: ''
+  }
+  public fileDownloadAllImagesTwo2: IDownloadFileAllImagesTwo = {
+    zoneId: null,
+    fromDay: '',
+    toDay: ''
   }
   public randomImages: IRandomImages = {
     userId: '',
@@ -97,6 +103,12 @@ export class ToolsService {
   receiveDateJalali = (event: string) => {
     this.fileDownloadAllImages.day = event;
   }
+  receiveFromDateJalali2 = (event: string) => {
+    this.fileDownloadAllImagesTwo2.fromDay = event;
+  }
+  receiveToDateJalali2 = (event: string) => {
+    this.fileDownloadAllImagesTwo2.toDay = event;
+  }
   getQuantity = (): ITitleValue[] => {
     return [
       { title: '10', value: 10 },
@@ -129,6 +141,22 @@ export class ToolsService {
     }
     if (MathS.isNull(dataSource.day)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
+      return false;
+    }
+
+    return true;
+  }
+  validationDownloadAllImagesTwo2 = (dataSource: IDownloadFileAllImagesTwo): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.fromDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(dataSource.toDay)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
       return false;
     }
 

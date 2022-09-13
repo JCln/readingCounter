@@ -137,16 +137,9 @@
                         class="_cancel pi pi-times"></i>
                 </td>
                 <td>
-                    <span class="ui-column-title">حذف مورد</span>
-                    <i *ngIf="!editing" (click)="removeFragmentMaster(dataSource,ri)"
-                        class="tooltip p_icons fa fa-trash-o">
-                        <div class="tooltip_text">حذف</div>
-                    </i>
-                </td>
-                <td>
                     <span class="ui-column-title">مدیریت مسیرها</span>
                     <i *ngIf="!editing" (click)="fragmentManagerService.routeToFragmentDetails(dataSource.id)"
-                        class="tooltip p_icons pi pi-info-circle">
+                        class="tooltip p_icons pi pi-info">
                         <div class="tooltip_text_right">مدیریت مسیرها</div>
                     </i>
                 </td>
@@ -159,8 +152,18 @@
                 </td>
                 <td>
                     <span class="ui-column-title">تایید نوبتی</span>
-                    <i *ngIf="!editing" class="tooltip p_icons pi pi-check" (click)="getIsValidateRow(dataSource)">
-                        <div class="tooltip_text_right">تایید نوبتی</div>
+                    <i *ngIf="!editing" class="tooltip p_icons"
+                        [ngClass]="dataSource.isValidated ? 'pi pi-check-circle' : 'pi pi-info-circle'"
+                        (click)="getIsValidateRow(dataSource)">
+                        <div class="tooltip_text_right">{{dataSource.isValidated ? 'نوبتی تایید شده': 'تایید نوبتی'}}
+                        </div>
+                    </i>
+                </td>
+                <td>
+                    <span class="ui-column-title">حذف مورد</span>
+                    <i *ngIf="!editing" (click)="removeFragmentMaster(dataSource,ri)"
+                        class="tooltip p_icons fa fa-trash-o">
+                        <div class="tooltip_text">حذف</div>
                     </i>
                 </td>
             </tr>

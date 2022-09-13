@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
-import { EMPTY } from 'rxjs/internal/observable/empty';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { InteractionService } from 'services/interaction.service';
@@ -31,12 +30,15 @@ export class InterceptorService implements HttpInterceptor {
     if (authToken)
       req = this.addToken(req, authToken);
 
-    this.interactionService.getNetRequestStatus().subscribe(res => {
-      if (res) {
-        this.interactionService.setNetRequestStatus(true);
-        return EMPTY;
-      }
-    })
+    // this.interactionService.getNetRequestStatus$().subscribe(res => {
+    //   if (res == true) {
+    //     console.log(res);
+    //     setTimeout(() => {
+    //       this.interactionService.setNetRequestStatus(false);
+    //     }, 2000);
+    //     return EMPTY;
+    //   }
+    // })
 
     return next.handle(req)
       .pipe(

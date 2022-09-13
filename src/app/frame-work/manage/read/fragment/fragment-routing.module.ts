@@ -7,7 +7,7 @@ import { FragmentComponent } from './fragment.component';
 const routes: Routes = [
   { path: '', component: FragmentComponent },
   { path: 'autoImport', component: AutomaticImportComponent },
-  { path: ':masterId', loadChildren: () => import('./fragment-details/fragment-details.module').then(fragmentDetails => fragmentDetails.FragmentDetailsModule) },
+  { path: 'detail', loadChildren: () => import('./fragment-details/fragment-details.module').then(fragmentDetails => fragmentDetails.FragmentDetailsModule) },
 ];
 
 @NgModule({

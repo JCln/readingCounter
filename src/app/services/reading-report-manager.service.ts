@@ -144,6 +144,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
+    beginFromImported: true,
     year: this.utilsService.getFirstYear()
   }
   gisReq: IReadingReportGISReq = {
