@@ -22,6 +22,21 @@ export interface IBatchImportDataResponse {
     fragmentDetailId: string,
     listNumber: string
 }
+export interface IFileExcelReq {
+    zoneId: number,
+    year: number,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    counterReaderId: string;
+    readingPeriodId: string;
+    listNumber: string;
+    skipErrors: boolean;
+    description: string;
+    file: any
+}
 export interface IImportDataResponse {
     trackNumber: number,
     count: number,

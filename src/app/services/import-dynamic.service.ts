@@ -7,6 +7,7 @@ import { IAssessAddDtoSimafa, IAssessPreDisplayDtoSimafa, IReadingConfigDefault 
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
   ENImportDatas,
+  IFileExcelReq,
   IImportDataResponse,
   IImportDynamicDefault,
   IImportSimafaBatchReq,
@@ -18,6 +19,7 @@ import {
   ENSelectedColumnVariables,
   IMasrafStates,
   IObjectIteratation,
+  IResponses,
   ISearchInOrderTo,
   ITitleValue,
 } from 'interfaces/ioverall-config';
@@ -189,7 +191,7 @@ export class ImportDynamicService {
       }
     }
     return true;
-  }  
+  }
   routeToSimafaSingle = (object: IReadingProgramRes) => {
     this.router.navigate([EN_Routes.wrimpsimafardpgsingle, object]);
   }
@@ -207,7 +209,7 @@ export class ImportDynamicService {
   verificationAssessPre = (searchReq: IAssessPreDisplayDtoSimafa): boolean => {
     return this.validationNull(searchReq);
   }
-  verificationReadingConfigDefault = (val: IReadingConfigDefault, insertedVals: IImportDynamicDefault | IImportSimafaSingleReq | IAssessAddDtoSimafa): boolean => {
+  verificationReadingConfigDefault = (val: IReadingConfigDefault, insertedVals: any): boolean => {
     if (val.minAlalHesab > insertedVals.alalHesabPercent) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_defaultMinAlalHesab);
       return false;
@@ -294,6 +296,64 @@ export class ImportDynamicService {
       return false;
     }
 
+    return true;
+  }
+  verificationExcelFile = (fileForm: FileList): boolean => {
+    if (MathS.isNull(fileForm)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_excelFile);
+      return false;
+    }
+    if (fileForm[0].name.split('.').pop() !== 'xlsx') {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_excel);
+      return false;
+    }
+    return true;
+  }
+  postExcelFile = async (method: ENInterfaces, value: any, fileForm: FileList) => {
+    const formData: FormData = new FormData();
+
+    formData.append('alalHesabPercent', value.alalHesabPercent);
+    formData.append('zoneId', value.zoneId);
+    formData.append('imagePercent', value.imagePercent);
+    formData.append('counterReaderId', value.counterReaderId);
+    formData.append('description', value.description);
+    formData.append('displayBillId', value.displayBillId);
+    formData.append('hasPreNumber', value.hasPreNumber);
+    formData.append('listNumber', value.listNumber);
+    formData.append('readingPeriodId', value.readingPeriodId);
+    formData.append('displayRadif', value.displayRadif);
+    formData.append('year', value.year);
+    formData.append('skipErrors', value.skipErrors);
+    formData.append('file', fileForm[0]);
+
+    console.log(formData);
+
+    this.interfaceManagerService.POSTBODY(method, formData).toPromise().then((res: IResponses) => {
+      this.utilsService.snackBarMessageSuccess(res.message);
+    })
+  }
+  checkExcelFileVertification = (val: IFileExcelReq): boolean => {
+
+    if (!MathS.persentCheck(val.alalHesabPercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_alalhesab);
+      return false;
+    }
+    if (!MathS.persentCheck(val.imagePercent)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.percent_pictures);
+      return false;
+    }
+    if (MathS.isNull(val.readingPeriodId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_reading_time);
+      return false;
+    }
+    if (MathS.isNull(val.year)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
+      return false;
+    }
+    if (MathS.isNull(val.counterReaderId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_reader);
+      return false;
+    }
     return true;
   }
   validateSimafaBatch = (val: IImportSimafaBatchReq): boolean => {
@@ -551,15 +611,18 @@ export class ImportDynamicService {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getReadingPeriod = (zoneId: number, kindId: number): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, zoneId, kindId).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch {
-      console.error(e => e);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuoteTriple(ENInterfaces.readingPeriodDictionaryByZoneIdAndKindId, zoneId, kindId).subscribe(res => {
+        resolve(res);
+      })
+    });
+  }
+  getExcelSample = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETBLOB(method).toPromise().then(res => {
+        resolve(res);
+      })
+    });
   }
   getReadingConfigDefaults = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getReadingConfigDefaultByZoneIdDictionary(zoneId);
@@ -568,64 +631,44 @@ export class ImportDynamicService {
     return IMasrafStates;
   }
   postAssess = (method: ENInterfaces, object: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, object).subscribe(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(e => e);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, object).subscribe(res => {
+        resolve(res);
+      })
+    });
   }
   postImportDynamicData = (importDynamic: IImportDynamicDefault): Promise<any> => {
     importDynamic.fromDate = Converter.persianToEngNumbers(importDynamic.fromDate);
     importDynamic.toDate = Converter.persianToEngNumbers(importDynamic.toDate);
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.postImportData, importDynamic).toPromise().then(res => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.postImportData, importDynamic).toPromise().then(res => {
+        resolve(res)
+      })
+    });
   }
   postImportDynamicCount = (importDynamic: IImportDynamicDefault): Promise<any> => {
     importDynamic.fromDate = Converter.persianToEngNumbers(importDynamic.fromDate);
     importDynamic.toDate = Converter.persianToEngNumbers(importDynamic.toDate);
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(ENInterfaces.postImportDynamicCount, importDynamic).toPromise().then(res => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(ENInterfaces.postImportDynamicCount, importDynamic).toPromise().then(res => {
+        resolve(res)
+      })
+    });
   }
   postImportSimafaRDPG = (method: ENInterfaces, body: IImportSimafaReadingProgramsReq): Promise<any> => {
     this.simafaRDPGReq = body;
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
+        resolve(res)
+      })
+    });
   }
   postImportSimafa = (method: ENInterfaces, body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
+        resolve(res)
+      })
+    });
   }
   getDataSource = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
@@ -635,15 +678,11 @@ export class ImportDynamicService {
     })
   }
   getFragmentDetailsByMaster = (zoneId: string) => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETID(ENInterfaces.fragmentMasterInZone, zoneId).subscribe(res => {
-          resolve(res);
-        })
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETID(ENInterfaces.fragmentMasterInZone, zoneId).subscribe(res => {
+        resolve(res);
       })
-    } catch (error) {
-      console.error(e => e);
-    }
+    })
   }
   getYears = (): ITitleValue[] => {
     return this.utilsService.getYears();

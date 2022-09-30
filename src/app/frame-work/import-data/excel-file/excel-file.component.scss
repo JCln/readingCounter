@@ -1,0 +1,231 @@
+@import 'primeNG';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat.scss';
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  padding: var(--font_s);
+  border-radius: $border_15;
+  min-height: 35rem;
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
+  gap: var(--font_05);
+  align-items: center;
+}
+
+.date_section {
+  margin: var(--font_05) 0;
+}
+
+section.dynamic_content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
+  gap: var(--font_05);
+  align-items: center;
+  border: .15rem solid var(--thirdy_3);
+  box-shadow: 1px 1px 3px 1px var(--thirdy_3);
+  border-radius: $border_15;
+  padding: var(--font_xxs);
+  margin: var(--font_xs) 0;
+}
+
+.static_part {
+  background: var(--white);
+  border: .15rem solid var(--secondary_2);
+  border-radius: $border_15;
+  padding: var(--font_xxs);
+}
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
+  gap: var(--font_05);
+}
+
+._key,
+._value {
+  font-size: var(--font_m);
+  font-weight: 800;
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: var(--primary_5);
+  text-align: center;
+  width: 100%;
+}
+
+.btn_1 {
+  color: var(--white);
+  background-color: var(--orange_500);
+}
+
+h2 {
+  color: var(--secondary_6);
+  margin-left: var(--font_5);
+}
+
+footer {
+  margin-top: var(--font_2);
+  text-align: center;
+
+  button {
+    margin: var(--font_01) 0;
+  }
+}
+
+::ng-deep {
+
+  .mat-select-panel .mat-option {
+    font-size: var(--font_s);
+    line-height: 3em;
+    height: 3em;
+    text-align: right;
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .mat-option-text {
+    font-size: var(--font_s);
+    font-weight: 600;
+    color: var(--primary_6);
+  }
+
+  .mat-checkbox-layout .mat-checkbox-label {
+    margin: 0 var(--font_05);
+    font-family: $font_family;
+    font-size: var(--font_s);
+    font-weight: 600;
+    color: var(--thirdy_3);
+  }
+}
+
+.order_by {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+hr {
+  margin: 0 auto;
+  background-color: var(--primary_5);
+  height: var(--font_02);
+  margin-bottom: var(--font_xxs);
+}
+
+.radio_button {
+  font-size: var(--font_s);
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--secondary_6);
+  margin: 0 2rem;
+}
+
+::ng-deep {
+  .mat-radio-label-content {
+    padding-right: var(--font_05) !important;
+    color: var(--thirdy_1);
+  }
+}
+
+[hidden] {
+  display: none;
+}
+
+._choose_file {
+  width: 100%;
+  border: 2px solid var(--primary_2);
+  color: var(--primary_2);
+  text-align: center;
+  border-radius: 100vmax;
+  margin-bottom: var(--font_xs);
+}
+
+.not_choosen_file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  white-space: nowrap;
+  width: 100%;
+  padding: var(--font_05);
+  background-color: var(--white);
+  color: var(--secondary_6);
+  font-size: var(--font_m);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px 0px var(--secondary_4);
+  border: 1px solid var(--secondary_5);
+}
+
+.icon_android,
+small {
+  color: var(--green_500);
+  margin: 0 .4rem;
+}
+
+.icon_android {
+  font-size: var(--font_25);
+}
+
+.label_choose_file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: var(--font_05);
+  width: 100%;
+  max-width: 19rem;
+  background-color: var(--white);
+  color: var(--secondary_6);
+  text-align: center;
+  border-radius: $border_15;
+  font-size: var(--font_m);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px 0px var(--secondary_4);
+  border: 1px solid;
+}
+
+input[type="file"] {
+  // display: none;
+  position: absolute;
+  left: -99999rem;
+}
+
+.__custom {
+  height: var(--font_25);
+  border: 1px solid var(--primary_2);
+  width: auto;
+  color: var(--primary_2);
+  min-width: 4rem;
+}
+
+span,
+small {
+  color: var(--green_500);
+  margin: 0 .4rem;
+}
+
+span {
+  font-size: var(--font_25);
+}
+
+.double_size {
+  grid-column: auto/ span 2;
+
+  @media (max-width:550px) {
+    grid-column: auto;
+  }
+}

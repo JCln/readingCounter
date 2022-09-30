@@ -67,7 +67,7 @@ export class ImportDynamicComponent extends FactoryONE {
     }
   }
   private insertReadingConfigDefaults = (rcd: any) => {
-    this.importDynamicService.importDynamicReq.hasPreNumber = rcd.hasPreNumber;
+    this.importDynamicService.importDynamicReq.hasPreNumber = rcd.defaultHasPreNumber;
     this.importDynamicService.importDynamicReq.displayBillId = rcd.displayBillId;
     this.importDynamicService.importDynamicReq.displayRadif = rcd.displayRadif;
     this.importDynamicService.importDynamicReq.imagePercent = rcd.defaultImagePercent;

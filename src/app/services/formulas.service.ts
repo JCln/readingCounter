@@ -91,15 +91,11 @@ export class FormulasService {
     })
   }
   getExcelSample = (method: ENInterfaces): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETBLOB(method).toPromise().then(res => {
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETBLOB(method).toPromise().then(res => {
+        resolve(res);
+      })
+    });
   }
   /* VALIDATION */
   isNull = (): boolean => {
@@ -242,7 +238,7 @@ export class FormulasService {
     if (!this.validationEditableRow(dataSource))
       return false;
     return true;
-  } 
+  }
   firstConfirmDialog = (): Promise<any> => {
     const title = EN_messages.confirm_remove;
     return new Promise((resolve) => {

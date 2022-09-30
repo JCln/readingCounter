@@ -6,6 +6,7 @@ import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 
 import { EN_Routes } from '../interfaces/routes.enum';
+import { IFileExcelReq } from './../interfaces/import-data';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,22 @@ export class CloseTabService {
     readingPeriodId: 0,
     year: this.utilsService.getFirstYear(),
     kindId: null
+  }
+  saveDataForImportDataFileExcel: any;
+  saveDataForImportDataFileExcelReq: IFileExcelReq = {
+    zoneId: 0,
+    alalHesabPercent: 0,
+    imagePercent: 0,
+    hasPreNumber: false,
+    displayBillId: false,
+    displayRadif: false,
+    skipErrors: false,
+    counterReaderId: '',
+    readingPeriodId: '',
+    listNumber: '',
+    description: '',
+    year: this.utilsService.getFirstYear(),
+    file: File
   }
   saveDataForSimafaReadingPrograms: any;
   saveDataForAssessPreReq: IAssessPreDisplayDtoSimafa = {
@@ -215,6 +232,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForZone, url: EN_Routes.wrmzsz },
     { id: 1, value: ENEssentialsToSave.saveDataForZoneBound, url: EN_Routes.wrmzszb },
     { id: 1, value: ENEssentialsToSave.saveDataForImportDynamic, url: EN_Routes.wrimpimd },
+    { id: 1, req: ENEssentialsToSave.saveDataForImportDataFileExcelReq, value: ENEssentialsToSave.saveDataForImportDataFileExcel, url: EN_Routes.wrimpFileExcel },
     { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: EN_Routes.wrimperr },
     { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },

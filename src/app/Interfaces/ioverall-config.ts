@@ -69,6 +69,8 @@ export enum ENEssentialsToSave {
     saveDataForZone = 'saveDataForZone',
     saveDataForZoneBound = 'saveDataForZoneBound',
     saveDataForImportDynamic = 'saveDataForImportDynamic',
+    saveDataForImportDataFileExcel = 'saveDataForImportDataFileExcel',
+    saveDataForImportDataFileExcelReq = 'saveDataForImportDataFileExcelReq',
     saveDataForImportErrors = 'saveDataForImportErrors',
     saveDataForAssessPre = 'saveDataForAssessPre',
     saveDataForAssessPreReq = 'saveDataForAssessPre',

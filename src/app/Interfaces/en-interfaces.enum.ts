@@ -297,6 +297,9 @@ export enum ENInterfaces {
     postSimafaAssessPre = 'V1/Import/Simafa/AssessPre',
     postSimafaAssessAdd = 'V1/Import/Simafa/AssessAdd',
 
+    getImportDataFileExcelSample = 'V1/Import/File/ExcelSample',
+    postImportDataFileExcel = 'V1/Import/File/Excel',
+
     postToolsRandomImages = 'V1/List/OffLoaded/RandomImages',
     getImageAttributionAll = `V1/ImageAttributionFile/All`,
     getImageAttributionAddOrEdit = 'V1/ImageAttributionFile/AddOrEdit',

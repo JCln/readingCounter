@@ -45,6 +45,7 @@ export enum EN_Routes {
     'wrmzsz' = '/wr/m/zs/z',
     'wrmzszb' = '/wr/m/zs/zb',
     'wrimpimd' = '/wr/imp/imd',
+    'wrimpFileExcel' = '/wr/imp/fileExcel',
     'wrimperr' = '/wr/imp/err',
     'wrimpassesspre' = '/wr/imp/assesspre',
     'wrimpassessadd' = '/wr/imp/assessadd',
