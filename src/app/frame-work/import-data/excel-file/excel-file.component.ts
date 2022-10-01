@@ -41,24 +41,19 @@ export class ExcelFileComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    if (document.activeElement.id == 'sampleExl') {
-      this.getExcelSample();
-    }
-    else {
-      if (!MathS.isNull(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId)) {
+    if (!MathS.isNull(this.closeTabService.saveDataForImportDataFileExcelReq.zoneId)) {
 
-        if (this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.closeTabService.saveDataForImportDataFileExcelReq)) {
-          console.log(this.closeTabService.saveDataForImportDataFileExcelReq);
-          const validation = this.importDynamicService.checkExcelFileVertification(this.closeTabService.saveDataForImportDataFileExcelReq);
-          if (validation) {
-            this.uploadFile(this.closeTabService.saveDataForImportDataFileExcelReq);
-            // this._canShowAddButton = false;
-          }
+      if (this.importDynamicService.verificationReadingConfigDefault(this.readingConfigDefault, this.closeTabService.saveDataForImportDataFileExcelReq)) {
+        console.log(this.closeTabService.saveDataForImportDataFileExcelReq);
+        const validation = this.importDynamicService.checkExcelFileVertification(this.closeTabService.saveDataForImportDataFileExcelReq);
+        if (validation) {
+          this.uploadFile(this.closeTabService.saveDataForImportDataFileExcelReq);
+          // this._canShowAddButton = false;
         }
       }
-      else {
-        this.importDynamicService.snackMessage(EN_messages.insert_zone);
-      }
+    }
+    else {
+      this.importDynamicService.snackMessage(EN_messages.insert_zone);
     }
   }
   private insertReadingConfigDefaults = (rcd: any) => {
@@ -122,7 +117,7 @@ export class ExcelFileComponent extends FactoryONE {
       }
     }
   }
-  private getExcelSample = async () => {
+  getExcelSample = async () => {
     this.outputManagerService.saveAsExcelABuffer(await this.importDynamicService.getExcelSample(ENInterfaces.getImportDataFileExcelSample), 'importDataFSample');
   }
 

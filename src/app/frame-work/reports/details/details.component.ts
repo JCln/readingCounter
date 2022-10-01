@@ -61,7 +61,7 @@ export class DetailsComponent extends FactoryONE {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportDETAILSWithParam, this.readingReportManagerService.detailsReq);
     this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();// todo remove karbari
     this.karbariByCodeDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'karbariCode');
     this.closeTabService.saveDataForRRDetails = this.dataSource;
   }

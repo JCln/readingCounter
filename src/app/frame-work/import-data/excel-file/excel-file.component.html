@@ -53,14 +53,14 @@
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2 ">
+                <div class="input_2 double_size">
                     <div class="_key">ش لیست</div>
                     <input class="_value double_size" name="listNumber"
                         [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.listNumber">
                 </div>
-                <div class="input_2 ">
+                <div class="input_2 double_size">
                     <div class="_key">توضیحات</div>
-                    <input class="_value double_size" name="desc"
+                    <input class="_value" name="desc"
                         [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.description">
                 </div>
 
@@ -86,9 +86,13 @@
                 </mat-checkbox>
                 <mat-checkbox name="skipErrors"
                     [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.skipErrors">
-                    skip errors
+                    نادیده گرفتن خطا
                 </mat-checkbox>
 
+                <i id="sampleExl" (click)="getExcelSample()"
+                    class="tooltip _circle_border _xlsx_download pi pi-download">
+                    <div class="tooltip_text">دانلود نمونه فایل Excel</div>
+                </i>
             </div>
         </section>
         <section *ngIf="canShowEditButton" class="dynamic_content">
@@ -118,9 +122,6 @@
 
         <footer>
             <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
-            <button id="sampleExl" type="submit" class="btn_1"><span class="pi pi-file-excel"></span>
-                دانلود نمونه فایل Excel
-            </button>
         </footer>
     </form>
 </main>

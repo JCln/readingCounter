@@ -2,6 +2,7 @@
 @import 'input.scss';
 @import 'button.scss';
 @import '_mat.scss';
+@import 'tooltip.scss';
 
 .main {
   direction: rtl;
@@ -44,7 +45,8 @@ section.dynamic_content {
 
 .check_boxes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 12rem));
+  align-items: center;
   gap: var(--font_05);
 }
 
