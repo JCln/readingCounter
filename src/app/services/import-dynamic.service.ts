@@ -470,37 +470,9 @@ export class ImportDynamicService {
 
     return true;
   }
-  validationInvalid = (val: any): boolean => {
+  validationInvalid = (val: any, message: EN_messages): boolean => {
     if (!this.validationOnNull(val)) {
-      this.utilsService.snackBarMessageFailed(EN_messages.thereis_no_reader);
-      return false;
-    }
-    return true;
-  }
-  validationReadingPeriod = (val: any): boolean => {
-    if (!this.validationOnNull(val)) {
-      this.utilsService.snackBarMessageFailed(EN_messages.not_found_period);
-      return false;
-    }
-    return true;
-  }
-  validationReadingConfigDefault = (val: any): boolean => {
-    if (!this.validationOnNull(val)) {
-      this.utilsService.snackBarMessageFailed(EN_messages.thereis_no_default);
-      return false;
-    }
-    return true;
-  }
-  validationPeriodKind = (val: any): boolean => {
-    if (!this.validationOnNull(val)) {
-      this.utilsService.snackBarMessageFailed(EN_messages.thereis_no_type);
-      return false;
-    }
-    return true;
-  }
-  validationZoneDictionary = (val: any): boolean => {
-    if (!this.validationOnNull(val)) {
-      this.utilsService.snackBarMessageFailed(EN_messages.not_found_zoneId);
+      this.utilsService.snackBarMessageFailed(message);
       return false;
     }
     return true;

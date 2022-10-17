@@ -81,26 +81,22 @@ export class ImportDynamicComponent extends FactoryONE {
     this.canShowEditButton = true;
   }
   verificationACounterReaderId = async () => {
-    if (MathS.isNull(this.importDynamicService.importDynamicReq.zoneId))
-      return;
-    if (this.importDynamicService.importDynamicReq.zoneId || this.zoneDictionary) {
-      this.verificationReadingPeriod();
-      this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamicService.importDynamicReq.zoneId);
-      console.log(this.readingConfigDefault);
+    if (!MathS.isNull(this.importDynamicService.importDynamicReq.zoneId)) {
+      if (this.zoneDictionary) {
+        this.verificationReadingPeriod();
+        this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.importDynamicService.importDynamicReq.zoneId);
+      }
+      if (!this.importDynamicService.validationInvalid(this.readingConfigDefault, EN_messages.thereis_no_default))
+        return;
 
+      this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.importDynamicService.importDynamicReq.zoneId);
+      if (!this.importDynamicService.validationInvalid(this.userCounterReader, EN_messages.thereis_no_reader)) {
+        this.userCounterReader = [];
+        return;
+      }
+      this.insertReadingConfigDefaults(this.readingConfigDefault);
+      this.showEditButton();
     }
-    if (!this.importDynamicService.importDynamicReq.zoneId || !this.zoneDictionary)
-      return;
-    if (!this.importDynamicService.validationReadingConfigDefault(this.readingConfigDefault))
-      return;
-
-    this.userCounterReader = await this.importDynamicService.getUserCounterReaders(this.importDynamicService.importDynamicReq.zoneId);
-    if (!this.importDynamicService.validationInvalid(this.userCounterReader)) {
-      this.userCounterReader = [];
-      return;
-    }
-    this.insertReadingConfigDefaults(this.readingConfigDefault);
-    this.showEditButton();
   }
   verificationReadingPeriod = async () => {
     if (this.importDynamicService._isOrderByDate)
@@ -110,7 +106,7 @@ export class ImportDynamicComponent extends FactoryONE {
       return;
     }
     this.readingPeriodDictionary = await this.importDynamicService.getReadingPeriod(this.importDynamicService.importDynamicReq.zoneId, this.kindId);
-    this.importDynamicService.validationReadingPeriod(this.readingPeriodDictionary);
+    this.importDynamicService.validationInvalid(this.readingPeriodDictionary, EN_messages.not_found_period);
 
   }
   nullSavedSource = () => this.closeTabService.saveDataForImportDynamic = null;
@@ -120,10 +116,10 @@ export class ImportDynamicComponent extends FactoryONE {
       this.nullSavedSource();
     }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
-    if (!this.importDynamicService.validationPeriodKind(this.readingPeriodKindsDictionary))
+    if (!this.importDynamicService.validationInvalid(this.readingPeriodKindsDictionary, EN_messages.thereis_no_type))
       this.readingPeriodKindsDictionary = [];
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
-    if (!this.importDynamicService.validationZoneDictionary(this.zoneDictionary))
+    if (!this.importDynamicService.validationInvalid(this.zoneDictionary, EN_messages.not_found_zoneId))
       this.zoneDictionary = [];
     this.importDynamicService.getSearchInOrderTo();
     this.verificationACounterReaderId();
