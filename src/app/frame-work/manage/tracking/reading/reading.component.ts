@@ -24,9 +24,6 @@ export class ReadingComponent extends FactoryONE {
     super();
   }
 
-  private rowToImported = async (row: string, desc: string, rowIndex: number) => {
-    await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, row, desc);
-  }
   nullSavedSource = () => this.closeTabService.saveDataForTrackReading = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -44,7 +41,7 @@ export class ReadingComponent extends FactoryONE {
   backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
     const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reson_delete_backtoImported, true, false);
     if (desc) {
-      this.rowToImported(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
+      await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToIMPORTED, rowDataAndIndex['dataSource'], desc);
     }
   }
   forceOffload = async (rowDataAndIndex: object) => {

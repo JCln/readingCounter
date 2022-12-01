@@ -62,12 +62,7 @@ export class OutputManagerService {
       for (let i = 0; i < validColNames.length; i++) {
         const key = validColNames[i];
         let value = currentelement[validColNames[i]];
-
-        if (value == true)
-          value = 'بله';
-        if (value == false)
-          value = 'خیر';
-
+        
         newElement[key] = value != undefined && value != null ? value : '';
       }
       return Object.values(newElement);

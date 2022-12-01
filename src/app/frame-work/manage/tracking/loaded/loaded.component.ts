@@ -1,7 +1,6 @@
 import 'jspdf-autotable';
 
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -22,8 +21,7 @@ export class LoadedComponent extends FactoryONE {
 
   constructor(
     private closeTabService: CloseTabService,
-    public trackingManagerService: TrackingManagerService,
-    private dialog: MatDialog
+    public trackingManagerService: TrackingManagerService    
   ) {
     super();
   }
