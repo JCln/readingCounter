@@ -56,7 +56,6 @@ export class MoshtarakComponent extends AllListsFactory {
 
     Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');

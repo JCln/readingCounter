@@ -4,7 +4,6 @@ import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportKarkard } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
-import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
@@ -19,7 +18,6 @@ export class RrOffloadKarkardComponent extends FactoryONE {
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 
-  karbariDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 
   readingPeriodKindDictionary: IDictionaryManager[] = [];
@@ -62,8 +60,6 @@ export class RrOffloadKarkardComponent extends FactoryONE {
   }
   connectToServer = async () => {
     this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardOffloaded, this.readingReportManagerService.karkardOffloadReq);
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
     this.setGetRanges();
     this.closeTabService.saveDataForRROffloadedKarkard = this.dataSource;
   }

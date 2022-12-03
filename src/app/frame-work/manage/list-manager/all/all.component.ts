@@ -79,7 +79,6 @@ export class AllComponent extends AllListsFactory {
       }
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
       Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
       Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
     }
