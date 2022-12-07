@@ -25,6 +25,8 @@ export class DictionaryWrapperService {
   private authLev4Dictionary: any = [];
   private trackingStatesDictionary: any = [];
 
+  private imageAttributionAllDictionary: any = [];
+
   private counterReportDictionary: any = [];
   private counterReportByZoneDictionary = {
     dictionary: null,
@@ -169,6 +171,16 @@ export class DictionaryWrapperService {
       })
     });
 
+  }
+  getImageAttrAllDictionary(): Promise<any> {
+    if (!MathS.isNull(this.imageAttributionAllDictionary))
+      return this.imageAttributionAllDictionary;
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(ENInterfaces.imageAttributionGet).subscribe(res => {
+        this.setImgAttributionDictionary(res);
+        resolve(this.imageAttributionAllDictionary);
+      })
+    });
   }
   getTrackingStatesDictionary(): Promise<any> {
     if (!MathS.isNull(this.trackingStatesDictionary))
@@ -397,6 +409,9 @@ export class DictionaryWrapperService {
   }
   private setAuthLev4Dictionary(v: any) {
     this.authLev4Dictionary = v;
+  }
+  private setImgAttributionDictionary(v: any) {
+    this.imageAttributionAllDictionary = v;
   }
   private setTrackingStatesDictionary(v: any) {
     this.trackingStatesDictionary = v;

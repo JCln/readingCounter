@@ -44,7 +44,7 @@ export class SimafaBatchComponent extends FactoryONE {
     }
     const validation = this.importDynamicService.verificationSimafaBatch(this.allImportsService.allImports_batch);
     if (validation) {
-      this._batchResponse = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaBatch, this.allImportsService.allImports_batch);
+      this._batchResponse = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaBatch, this.allImportsService.allImports_batch);
       this.insertColumnsToTableAfterSuccess();
       this.assignBatchResToDataSource();
       this.insertSelectedColumns();
@@ -58,7 +58,7 @@ export class SimafaBatchComponent extends FactoryONE {
     })
   }
   classWrapper = async (canRefresh?: boolean) => {
-    this.dataSource = await this.importDynamicService.postFragmentDetailsByEshterak(
+    this.dataSource = await this.importDynamicService.postBodyServer(ENInterfaces.fragmentDETAILSByEshterak,
       {
         fromEshterak: this.allImportsService.allImports_batch.fromEshterak,
         toEshterak: this.allImportsService.allImports_batch.toEshterak,

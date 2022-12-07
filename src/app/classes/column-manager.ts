@@ -395,6 +395,26 @@ export class ColumnManager {
         { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
         { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
     ]
+    fragmentKarkard: IObjectIteratation[] = [
+        // { field: 'zoneId', header: 'ناحیه', isSelected: false, readonly: true },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
+        { field: 'offloadDayalali', header: 'روز', isSelected: true, readonly: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
+        // { field: 'fromTime', header: 'از', isSelected: true, readonly: true },
+        // { field: 'toTime', header: 'تا', isSelected: true, readonly: true },
+        { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
+        { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
+        { field: 'adiCount', header: 'عادی', isSelected: true, readonly: true },
+        { field: 'faqedCount', header: 'فاقد', isSelected: true, readonly: true },
+        { field: 'maneCount', header: 'مانع', isSelected: true, readonly: true },
+        { field: 'xarabCount', header: 'خراب', isSelected: true, readonly: true },
+        { field: 'tavizCount', header: 'تعویض', isSelected: true, readonly: true },
+        { field: 'saierCount', header: 'سایر', isSelected: true, readonly: true },
+        // { field: 'areaTitle', header: 'سایر', isSelected: true, readonly: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
+    ]
     disposalHs: IObjectIteratation[] = [
         { field: 'dayJalali', header: 'روز', isSelected: true, readonly: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true, readonly: true },
@@ -1449,7 +1469,8 @@ export class ColumnManager {
         { field: 'mobile', header: 'موبایل', isSelected: true, ltr: true },
         { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true },
-        { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, ltr: true }
+        { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, ltr: true },
+        { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false }
     ]
     userSearch: IObjectIteratation[] = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },

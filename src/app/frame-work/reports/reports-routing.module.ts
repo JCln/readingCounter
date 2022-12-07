@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'mam/trv', loadChildren: () => import('./traverse/traverse.module').then(traverse => traverse.TraverseModule) },
   { path: 'mam/trvch', loadChildren: () => import('./traverse-differential/traverse-differential.module').then(traverseDiffrential => traverseDiffrential.TraverseDifferentialModule) },
   { path: 'mam/karkard', loadChildren: () => import('./karkard/karkard.module').then(karkard => karkard.KarkardModule) },
+  { path: 'mam/fragment', loadChildren: () => import('./rr-fragment/rr-fragment.module').then(fragment => fragment.RrFragmentModule) },
   { path: 'mam/karkardDaily', loadChildren: () => import('./karkard-dayly/karkard-dayly.module').then(karkardDayly => karkardDayly.KarkardDaylyModule) },
   { path: 'mam/offkarkard', loadChildren: () => import('./rr-offload-karkard/rr-offload-karkard.module').then(offloadKarkard => offloadKarkard.RrOffloadKarkardModule) },
   { path: 'mam/dh', loadChildren: () => import('./disposal-hours/disposal-hours.module').then(disposalHours => disposalHours.DisposalHoursModule) },

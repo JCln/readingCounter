@@ -12,6 +12,7 @@ export enum EN_Routes {
     'wrrptsmamtrvchchart' = '/wr/rpts/mam/trvch/chart',
     'wrrptstoolsexcelviewer' = '/wr/rpts/tools/excelviewer',
     'wrtoolsrandomImg' = '/wr/tools/randomImg',
+    'wrToolsResultDetails' = '/wr/tools/resultDetails',
     'wrflashlr' = '/wr/flash/lr',
     'wrmrimgattr' = '/wr/m/r/imgattr',
     'wrrptsanlzfileresult' = '/wr/rpts/anlzfile/result',
@@ -74,6 +75,7 @@ export enum EN_Routes {
     'wrrptsmampns' = '/wr/rpts/mam/pns',
     'wrrptsmamlocked' = '/wr/rpts/mam/locked',
     'wrrptsmamoffkarkard' = '/wr/rpts/mam/offkarkard',
+    'wrRptsMamFragment' = '/wr/rpts/mam/fragment',
     'wrrptsexmmaster' = '/wr/rpts/exm/master',
     'wrrptsanlzprfm' = '/wr/rpts/anlz/prfm',
     'wrrptsgalleryai' = '/wr/rpts/gallery/ai',
@@ -107,6 +109,7 @@ export enum EN_Routes {
     'wrmtrackoffloadedoffloadMfy' = '/wr/m/track/offloaded/offloadMfy',
     'wrmtrack' = '/wr/m/track',
     'wrmuallloggins' = '/wr/mu/all/loggins',
+    'login' = '/login',
     'wrmusearch' = '/wr/mu/search',
     'wr' = '/wr',
 }

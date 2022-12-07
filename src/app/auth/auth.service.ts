@@ -34,7 +34,7 @@ export class AuthService {
   }
   logging = (userData: ICredentials) => {
     const returnUrl = this.utilsService.getRouteParams('returnUrl');
-    this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).subscribe((res: IAuthTokenType) => {
+    this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).toPromise().then((res: IAuthTokenType) => {
       this.saveTolStorage(res);
       this.routeToReturnUrl(returnUrl);
     })
@@ -46,9 +46,9 @@ export class AuthService {
     this.clearAllSavedData();
     this.clearDictionaries();
     this.signalRService.disconnectConnection();
-    this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogout, { refreshToken }).subscribe(() => {
+    this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogout, { refreshToken }).toPromise().then(() => {
       this.jwtService.removeAuthLocalStorage();
-      this.utilsService.routeTo('/login');
+      this.utilsService.routeTo(EN_Routes.login);
     })
   }
   saveTolStorage = (token: IAuthTokenType) => {

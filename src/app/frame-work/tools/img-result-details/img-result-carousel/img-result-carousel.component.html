@@ -1,0 +1,30 @@
+<main>
+    <h2 (click)="cancelClick()" class="pi pi-times"></h2>
+    <div>
+        <app-img-result-details-carousel
+        [eshterak]="dataSource.eshterak"
+        [imageDescription]="dataSource.imageDescription"
+        [allImages]="dataSource.imageUrl"
+        [fileRepositoryId]="dataSource.fileRepositorayId"
+        [onOffLoadId]="dataSource.onOffLoadId"
+        [firstName]="dataSource.firstName"
+        [sureName]="dataSource.sureName"
+        [radif]="dataSource.radif"
+        [sizeInByte]="dataSource.sizeInByte"
+        [zoneTitle]="dataSource.zoneTitle"
+        [trackNumber]="dataSource.trackNumber"
+        [counterReaderName]="dataSource.counterReaderName"
+        [counterNumber]="dataSource.counterNumber"
+        [counterStateTitle]="dataSource.counterStateTitle"
+        >
+        </app-img-result-details-carousel>        
+
+        <section class="next" (click)="nextClick()"></section>
+        <section class="prev" (click)="prevClick()"></section>
+    </div>
+</main>
+
+
+
+
+

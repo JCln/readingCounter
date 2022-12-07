@@ -15,7 +15,7 @@ import {
   IJsonInfo,
   IParamSendType,
 } from '../interfaces/itools';
-import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IRandomImages } from '../interfaces/tools';
+import { IDownloadFileAllImages, IDownloadFileAllImagesTwo, IImageResultDetails, IRandomImages } from '../interfaces/tools';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
@@ -28,6 +28,7 @@ export class ToolsService {
   _isCollapseFileDownloadImage: boolean = false;
   _isCollapseFileDownloadImageTwo: boolean = false;
   _isCollapsedRandomImages: boolean = false;
+  _isCollapsedImageAttrDetails: boolean = false;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -51,6 +52,12 @@ export class ToolsService {
     quantity: null,
     day: '',
     zoneId: null
+  }
+  public imgResultDetails: IImageResultDetails = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    imageAttributionIds: []
   }
   public dynamicReq: IDynamicExcelReq = {
     id: 0,
@@ -92,6 +99,9 @@ export class ToolsService {
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
+  getImageAttributionAllDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getImageAttrAllDictionary();
+  }
   validationOnNull = (val: any): boolean => {
     if (MathS.isNull(val))
       return false;
@@ -108,6 +118,12 @@ export class ToolsService {
   }
   receiveToDateJalali2 = (event: string) => {
     this.fileDownloadAllImagesTwo2.toDay = event;
+  }
+  receiveFromDateJalaliImgResult = (event: string) => {
+    this.imgResultDetails.fromDate = event;
+  }
+  receiveToDateJalaliImgResult = (event: string) => {
+    this.imgResultDetails.toDate = event;
   }
   getQuantity = (): ITitleValue[] => {
     return [
@@ -213,6 +229,31 @@ export class ToolsService {
     }
 
     if (!MathS.isExactLengthYouNeed(dataSource.day, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
+      return false;
+    }
+
+    return true;
+  }
+  verificationImageResultDetails = (dataSource: IImageResultDetails) => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.fromDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(dataSource.toDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+
+    if (!MathS.isExactLengthYouNeed(dataSource.fromDate, 10)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
+      return false;
+    }
+    if (!MathS.isExactLengthYouNeed(dataSource.toDate, 10)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_isNotExactLengthNumber);
       return false;
     }

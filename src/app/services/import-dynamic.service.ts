@@ -545,12 +545,6 @@ export class ImportDynamicService {
   getQotrDictionary = () => {
     return this.dictionaryWrapperService.getQotrDictionary();
   }
-  postFragmentDetailsByEshterak = (val: object): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.fragmentDETAILSByEshterak, val).toPromise().then(res =>
-        resolve(res))
-    });
-  }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POST(method, id).toPromise().then(res => {
@@ -602,40 +596,24 @@ export class ImportDynamicService {
   getMasrafStates = () => {
     return IMasrafStates;
   }
-  postAssess = (method: ENInterfaces, object: object): Promise<any> => {
+  postBodyServer = (method: ENInterfaces, object: object): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, object).subscribe(res => {
+      this.interfaceManagerService.POSTBODY(method, object).toPromise().then(res => {
         resolve(res);
       })
     });
   }
-  postImportDynamicData = (importDynamic: IImportDynamicDefault): Promise<any> => {
+  postImportDynamicData = (method: ENInterfaces, importDynamic: IImportDynamicDefault): Promise<any> => {
     importDynamic.fromDate = Converter.persianToEngNumbers(importDynamic.fromDate);
     importDynamic.toDate = Converter.persianToEngNumbers(importDynamic.toDate);
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.postImportData, importDynamic).toPromise().then(res => {
-        resolve(res)
-      })
-    });
-  }
-  postImportDynamicCount = (importDynamic: IImportDynamicDefault): Promise<any> => {
-    importDynamic.fromDate = Converter.persianToEngNumbers(importDynamic.fromDate);
-    importDynamic.toDate = Converter.persianToEngNumbers(importDynamic.toDate);
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.postImportDynamicCount, importDynamic).toPromise().then(res => {
+      this.interfaceManagerService.POSTBODY(method, importDynamic).toPromise().then(res => {
         resolve(res)
       })
     });
   }
   postImportSimafaRDPG = (method: ENInterfaces, body: IImportSimafaReadingProgramsReq): Promise<any> => {
     this.simafaRDPGReq = body;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
-        resolve(res)
-      })
-    });
-  }
-  postImportSimafa = (method: ENInterfaces, body: object): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, body).toPromise().then(res => {
         resolve(res)

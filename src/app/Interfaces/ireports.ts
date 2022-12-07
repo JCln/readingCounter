@@ -38,6 +38,8 @@ export interface IReadingReportReq {
     year: number,
     _selectedAggregate?: string,
     beginFromImported?: boolean,
+    isCollapsed?: boolean,
+    fragmentMasterIds?: number[]
 }
 export interface IUserKarkardInput {
     zoneId: number,

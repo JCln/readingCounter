@@ -9,6 +9,7 @@ export enum ENReadingReports {
     Locked = 'lockedReq',
     preNumShown = 'preNumberShownReq',
     offloadKarkard = 'karkardOffloadReq',
+    fragmentKarkard = 'rrFragmentKarkardReq',
     karkardDaily = 'karkardDailyReq',
     gis = 'gisReq',
     dh = 'disposalhoursReq',
@@ -16,3 +17,4 @@ export enum ENReadingReports {
     imgAttrResult = 'imgAttrResultReq',
     imgAttrAnalyze = 'imgAttrAnalyzeReq',
 }
+

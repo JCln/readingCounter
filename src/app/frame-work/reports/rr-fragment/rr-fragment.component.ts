@@ -8,35 +8,36 @@ import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
-  selector: 'app-rr-offload-karkard',
-  templateUrl: './rr-offload-karkard.component.html',
-  styleUrls: ['./rr-offload-karkard.component.scss']
+  selector: 'app-rr-fragment',
+  templateUrl: './rr-fragment.component.html',
+  styleUrls: ['./rr-fragment.component.scss']
 })
-export class RrOffloadKarkardComponent extends FactoryONE {
+export class RrFragmentComponent extends FactoryONE {
   dataSource: IReadingReportKarkard[] = [];
 
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
 
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
-      this.closeTabService.saveDataForRROffloadedKarkard = null;
+      this.closeTabService.saveDataForRRFragment = null;
       this.verification();
     }
-    if (this.closeTabService.saveDataForRROffloadedKarkard) {
-      this.dataSource = this.closeTabService.saveDataForRROffloadedKarkard;
+    if (this.closeTabService.saveDataForRRFragment) {
+      this.dataSource = this.closeTabService.saveDataForRRFragment;
       this.setGetRanges();
     }
     this.readingReportManagerService.getSearchInOrderTo();
@@ -48,19 +49,27 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     this._years = this.readingReportManagerService.getYears();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+    this.getFragmentByZone();
+    if (this._selectedKindId)
+      this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
+  }
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.rrFragmentKarkardReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.rrFragmentKarkardReq.zoneId);
   }
   validation = (): boolean => {
-    return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardOffloadReq, this.readingReportManagerService._isOrderByDate);
+    console.log(this.readingReportManagerService.rrFragmentKarkardReq);
+
+    return this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.rrFragmentKarkardReq, this.readingReportManagerService._isOrderByDate);
   }
   verification = async () => {
     if (this.validation())
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardOffloaded, this.readingReportManagerService.karkardOffloadReq);
+    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardByFragment, this.readingReportManagerService.rrFragmentKarkardReq);
     this.setGetRanges();
-    this.closeTabService.saveDataForRROffloadedKarkard = this.dataSource;
+    this.closeTabService.saveDataForRRFragment = this.dataSource;
   }
   refreshTable = () => {
     if (this.validation())

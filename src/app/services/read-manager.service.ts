@@ -33,6 +33,9 @@ export class ReadManagerService {
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
+  getImageAttrAllDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getImageAttrAllDictionary();
+  }
   getReadingPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }

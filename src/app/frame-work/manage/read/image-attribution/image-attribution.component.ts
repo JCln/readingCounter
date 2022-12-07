@@ -32,10 +32,13 @@ export class ImageAttributionComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.imageAttributionGet);
-    console.log(this.dataSource);
-
-    this.closeTabService.saveDataForImageAttribution = this.dataSource;
+    if (this.closeTabService.saveDataForImageAttribution) {
+      this.dataSource = this.closeTabService.saveDataForImageAttribution;
+    }
+    else {
+      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.imageAttributionGet);
+      this.closeTabService.saveDataForImageAttribution = this.dataSource;
+    }
     this.defaultAddStatus();
     this.insertSelectedColumns();
   }

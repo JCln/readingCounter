@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
 import { ENLocalStorageNames, IDictionaryManager, ITrueFalse } from 'interfaces/ioverall-config';
@@ -53,12 +54,12 @@ export class ImportDynamicComponent extends FactoryONE {
       if (!validation)
         return;
       if (this._showDynamicCount) {
-        if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicCount(this.importDynamicService.importDynamicReq), true, EN_messages.confirm_createList)) {
-          this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
+        if (await this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportDynamicCount, this.importDynamicService.importDynamicReq), true, EN_messages.confirm_createList)) {
+          this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportData, this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
           return;
         }
       }
-      this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
+      this.importDynamicService.showResDialog(await this.importDynamicService.postImportDynamicData(ENInterfaces.postImportData, this.importDynamicService.importDynamicReq), false, EN_messages.importDynamic_created)
       this.resetToDefaultFormStatus();
       this._canShowAddButton = false;
     }

@@ -176,6 +176,7 @@ export enum ENInterfaces {
     ListTraverseDifferentialDictionary = 'V1/List/TraverseDifferential/Dictionary',
     ListOFFKarkard = 'V1/List/Offloaded/Karkard',
     ListKarkardOffloaded = 'V1/List/Offloaded/KarkardOffloaded',
+    ListKarkardByFragment = 'V1/List/Offloaded/KarkardByFragment',
     ListKarkardChart = 'V1/List/Offloaded/KarkardChart',
     ListTraverseDifferntialChart = 'V1/List/Offloaded/TraverseDifferntialChart',
     ListOffloadedPERDAY = `V1/List/OffLoaded/PerDay/`,
@@ -301,6 +302,7 @@ export enum ENInterfaces {
     postImportDataFileExcel = 'V1/Import/File/Excel',
 
     postToolsRandomImages = 'V1/List/OffLoaded/RandomImages',
+    postImgAttrResultDetails = 'V1/ImageAttributionFile/ResultDetails',
     getImageAttributionAll = `V1/ImageAttributionFile/All`,
     getImageAttributionAddOrEdit = 'V1/ImageAttributionFile/AddOrEdit',
 

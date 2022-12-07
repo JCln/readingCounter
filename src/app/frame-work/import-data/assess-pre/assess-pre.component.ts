@@ -66,7 +66,7 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
-    this.dataSource = await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
+    this.dataSource = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
     this.makeDataSourceOptionsChecked();
     this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
 
@@ -128,7 +128,7 @@ export class AssessPreComponent extends AllListsFactory {
     this.getOnOffLoadIdsFromDataSource();
     if (!this.importDynamicService.verificationAssessAdd(this.importDynamicService._assessAddReq))
       return;
-    this.importDynamicService.showResDialog(await this.importDynamicService.postAssess(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created);
+    this.importDynamicService.showResDialog(await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaAssessAdd, this.importDynamicService._assessAddReq), false, EN_messages.importDynamic_created);
     this._canShowAssessButton = false;
   }
   getReadingReportTitles = async ($event) => {

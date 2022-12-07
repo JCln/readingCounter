@@ -19,3 +19,9 @@ export interface IDownloadFileAllImagesTwo {
     fromDay: string,
     toDay: string,
 }
+export interface IImageResultDetails {
+    zoneId: number,
+    fromDate: string,
+    toDate: string,
+    imageAttributionIds: number[]
+}

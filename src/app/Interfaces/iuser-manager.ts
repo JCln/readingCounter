@@ -7,6 +7,7 @@ export interface IUserManager {
     displayName: string;
     isActive: boolean;
     isLocked: boolean;
+    defaultZoneTitle: string;
 }
 export interface IUserLogginInfo {
     GUid: string,

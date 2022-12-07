@@ -128,6 +128,17 @@ export class ReadingReportManagerService {
     reportCode: 0,
     year: this.utilsService.getFirstYear()
   }
+  rrFragmentKarkardReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    isCollapsed: false,
+    fragmentMasterIds: []
+  }
   karkardOffloadReq: IReadingReportReq = {
     zoneId: 0,
     fromDate: '',
@@ -307,6 +318,9 @@ export class ReadingReportManagerService {
   }
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
+  }
+  getFragmentMasterByZoneDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(zoneId);
   }
   getKarbariDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getKarbariDictionary();
