@@ -20,7 +20,6 @@ import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import {
   ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
@@ -536,22 +535,13 @@ export class ReadingReportManagerService {
     });
   }
   firstConfirmDialogRemove = () => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(async desc => {
-        if (desc) {
-          resolve(true);
-        }
-      })
-    })
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
 
   snackEmptyValue = () => {

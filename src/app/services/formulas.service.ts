@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, IResponses } from 'interfaces/ioverall-config';
@@ -10,7 +9,6 @@ import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IAbBahaFormula, ITabsare2Formula } from '../interfaces/ireads-manager';
 
 @Injectable({
@@ -25,7 +23,6 @@ export class FormulasService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
     private snackWrapperService: SnackWrapperService,
-    private dialog: MatDialog
   ) { }
 
   /* API CALLS */
@@ -240,22 +237,13 @@ export class FormulasService {
     return true;
   }
   firstConfirmDialog = (): Promise<any> => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
 
 }

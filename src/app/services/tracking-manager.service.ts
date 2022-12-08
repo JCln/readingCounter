@@ -90,21 +90,13 @@ export class TrackingManagerService {
   ) { }
 
   firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: message,
-          isInput: isInput,
-          isDelete: isDelete
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: message,
+      minWidth: '19rem',
+      isInput: isInput,
+      isDelete: isDelete
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
   getApiUrl = (): string => {
     return this.envService.API_URL;

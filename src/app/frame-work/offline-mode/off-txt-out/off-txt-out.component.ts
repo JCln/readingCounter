@@ -1,7 +1,6 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { CloseTabService } from 'services/close-tab.service';
 import { OfflineModeService } from 'services/offline-mode.service';
 
 @Component({
@@ -20,8 +19,7 @@ export class OffTxtOutComponent {
   }
 
   constructor(
-    private offlineModeService: OfflineModeService,
-    private closeTabService: CloseTabService
+    private offlineModeService: OfflineModeService    
   ) { }
 
   onChange(event) {
@@ -39,10 +37,10 @@ export class OffTxtOutComponent {
       return;
     }
 
-    if (!this.offlineModeService.checkVertitication(fileInput.files, form.value))
+    if (!this.offlineModeService.checkVertiticationOfflineTxtOut(fileInput.files, form.value))
       return;
 
-    this.offlineModeService.postTicket().subscribe((event: HttpEvent<any>) => {
+    this.offlineModeService.postTicketOfflineTxtOut().subscribe((event: HttpEvent<any>) => {
       switch (event.type) {
         case HttpEventType.Sent:
           break;

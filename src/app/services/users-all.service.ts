@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
@@ -14,7 +13,6 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { MathS } from '../classes/math-s';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
 import { UtilsService } from './utils.service';
@@ -44,7 +42,6 @@ export class UsersAllService {
     private snackWrapperService: SnackWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
-    private dialog: MatDialog
   ) { }
 
   /* COLUMNS */
@@ -108,22 +105,14 @@ export class UsersAllService {
     });
   }
   firstConfirmDialog = (reason: EN_messages, reasonTwo?: EN_messages): Promise<any> => {
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: reason,
-          title2: reasonTwo,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(async desc => {
-        if (desc) {
-          resolve(desc)
-        }
-      })
-    })
+    const a = {
+      messageTitle: reason,
+      messageTitle2: reasonTwo,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
 
   /* VALIDATION & VERIFICATION */

@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+
+export interface IDialogMessage {
+  messageTitle: string,
+  messageTitleTwo?: string,
+  minWidth: string,
+  isInput: boolean,
+  isDelete: boolean,
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +24,7 @@ export class UtilsService {
     private router: Router,
     private route: ActivatedRoute,
     private envService: EnvService,
+    private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService
   ) { }
 
@@ -64,7 +75,24 @@ export class UtilsService {
   snackBarMessage = (message: string, time: ENSnackBarTimes, color: ENSnackBarColors) => {
     this.snackWrapperService.openSnackBar(message, time, color);
   }
-
+  firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: config.minWidth,
+        data: {
+          title: config.messageTitle,
+          title2: config.messageTitleTwo,
+          isInput: config.isInput,
+          isDelete: config.isDelete,
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
+        }
+      })
+    })
+  }
   // routing
   routeToByUrl = (router: string) => {
     this.router.navigateByUrl(router);

@@ -5,7 +5,6 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
 import { SectionsService } from 'services/sections.service';
 
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { UtilsService } from './utils.service';
@@ -52,22 +51,13 @@ export class AuthsManagerService {
     });
   }
   firstConfirmDialog = (): Promise<any> => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
   deleteSingleRow = (place: ENInterfaces, id: number) => {
     return new Promise((resolve) => {

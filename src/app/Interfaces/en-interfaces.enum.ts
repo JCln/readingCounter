@@ -270,6 +270,7 @@ export enum ENInterfaces {
     APKUpload = 'V1/APK/Upload',
     APKRemove = `V1/Apk/Remove`,
     offloadManual = 'V1/Manual/OffLoad',
+    fileUploadSingle = 'V1/Upload/Single',
     loadManual = `V1/Load/Manual`,
 
     QotrAll = 'V1/Qotr/All',

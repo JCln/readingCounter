@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
 
 import { MathS } from '../classes/math-s';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { ICounterState, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -23,7 +21,6 @@ export class ReadManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
-    private dialog: MatDialog
   ) { }
 
   /* API CALLS */
@@ -120,22 +117,13 @@ export class ReadManagerService {
     });
   }
   firstConfirmDialog = (): Promise<any> => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
   deleteSingleRow = (place: ENInterfaces, id: number) => {
     return new Promise((resolve) => {

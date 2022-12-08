@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
@@ -16,7 +15,6 @@ import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { IFragmentDetails, IFragmentMaster } from '../interfaces/ireads-manager';
 import { EN_Routes } from '../interfaces/routes.enum';
 
@@ -53,8 +51,7 @@ export class FragmentManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
-    private dialog: MatDialog
+    private utilsService: UtilsService
   ) { }
 
   getDataSourceByQuote = (method: ENInterfaces, id: string): Promise<any> => {
@@ -107,7 +104,7 @@ export class FragmentManagerService {
     return this.utilsService.getRouteBySplit('/');
   }
   routeToFragmentDetails = (route: string) => {
-    this.fragmentDetails_pageSign.GUid = route;    
+    this.fragmentDetails_pageSign.GUid = route;
     console.log(route);
 
     this.utilsService.routeToByUrl(EN_Routes.wrmrnobDetail);
@@ -153,22 +150,13 @@ export class FragmentManagerService {
   /* VERIFICATION */
 
   firstConfirmDialog = (): Promise<any> => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
   private masterValidation = (): boolean => {
     if (!this.nullValidation(this.fragmentMaster.zoneId, EN_messages.insert_zone))

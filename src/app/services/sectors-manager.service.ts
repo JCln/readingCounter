@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IResponses } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
@@ -18,8 +16,7 @@ export class SectorsManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,
-    private dialog: MatDialog,
+    private utilsService: UtilsService,  
     private sectionsService: SectionsService
   ) { }
 
@@ -71,22 +68,13 @@ export class SectorsManagerService {
     });
   }
   firstConfirmDialog = (): Promise<any> => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
   /*FOR COUNTRY */
   addOrEditCountry = (place: ENInterfaces, result: object): Promise<any> => {
