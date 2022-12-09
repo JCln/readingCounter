@@ -28,6 +28,22 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _calculableSUM: boolean = false;
   @Input() _calcName: string = '';
   @Input() _hasAggregating: boolean = false;
+  // Aggregationing
+  rowGroupMetadata: any;
+  canShowTable: boolean = true;
+  _canShowGroupBorder: boolean = false;
+  // aggregateOptions = [
+  //     { field: 'zoneTitle', header: 'ناحیه' },
+  //     { field: 'insertDateJalali', header: 'تاریخ' },
+  //     { field: 'counterReaderName', header: 'مامور' },
+  //     { field: 'listNumber', header: 'ش لیست' },
+  //     { field: 'itemQuantity', header: 'تعداد' },
+  //     { field: 'year', header: 'سال' },
+  //     { field: 'fromDate', header: 'از' },
+  //     { field: 'toDate', header: 'تا' },
+  //     { field: 'alalHesabPercent', header: 'درصد علی‌الحساب' },
+  //     { field: 'imagePercent', header: 'درصد تصویر' }
+  //   ]
 
   @Output() customedSort = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
@@ -210,6 +226,47 @@ export class PrimeTableComponent extends FactorySharedPrime {
       total += item[this._calcName]
     })
     return total;
+  }
+  updateRowGroupMetaData() {
+    this.rowGroupMetadata = {};
+    this._sortField = this.columnManager._selectedAggregate;
+
+    if (this.dataSource) {
+      for (let i = 0; i < this.dataSource.length; i++) {
+        let rowData = this.dataSource[i];
+        let representativeName = rowData[this.columnManager._selectedAggregate];
+
+        if (i == 0) {
+          this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+        }
+        else {
+          let previousRowData = this.dataSource[i - 1];
+          let previousRowGroup = previousRowData[this.columnManager._selectedAggregate];
+          if (representativeName === previousRowGroup)
+            this.rowGroupMetadata[representativeName].size++;
+          else
+            this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+        }
+      }
+    }
+  }
+  resetAggregation = () => {
+    this.columnManager._selectedAggregate = '';
+    this.updateRowGroupMetaData();
+  }
+  refreshTableAfterGrouping = (val: any) => {
+    if (val) {
+      this.updateRowGroupMetaData();
+      this.canShowTable = false;
+      setTimeout(() => this.canShowTable = true, 0);
+      this._canShowGroupBorder = true;
+    }
+    else {
+      this._canShowGroupBorder = false;
+    }
+  }
+  onSort() {
+    this.updateRowGroupMetaData();
   }
 
 }

@@ -8,6 +8,8 @@ export class ColumnManager {
     _primeNGHeaderCheckbox: boolean = false;
     _generalGroupHeaderCheckbox: boolean = false;
 
+    _selectedAggregate = '';
+
     excelDynamic: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'description', header: 'توضیحات', isSelected: true, enableTooltip: true },
