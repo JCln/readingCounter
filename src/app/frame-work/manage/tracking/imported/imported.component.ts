@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IEditTracking, ITracking } from 'interfaces/itrackings';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -18,7 +17,6 @@ import { ImportListDgComponent } from './import-list-dg/import-list-dg.component
 })
 export class ImportedComponent extends FactoryONE {
   dataSource: ITracking[] = [];
-  filterZoneDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
 
   constructor(
@@ -40,7 +38,6 @@ export class ImportedComponent extends FactoryONE {
     }
     else {
       this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingIMPORTED);
-      this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
       this.closeTabService.saveDataForTrackImported = this.dataSource;
     }
   }

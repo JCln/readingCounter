@@ -3,7 +3,7 @@
         <div class="_key">گروه‌بندی</div>
         <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="columnManager._selectedAggregate"
             placeholder="انتخاب مورد" [style]="{'min-width':'10rem','width':'100%'}" optionValue="field"
-            optionLabel="header" filter="true" (onChange)="refreshTableAfterGrouping(columnManager._selectedAggregate)">
+            optionLabel="header" filter="true" (onClick)="updateRowGroupMetaData(columnManager._selectedAggregate)">
         </p-dropdown>
     </div>
     <button (click)="resetAggregation()" class="btn_2_o">
@@ -17,7 +17,8 @@
     currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
     dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session" [stateKey]="_sessionName"
     [sortField]="_sortField" [sortOrder]=_sortOrder [sortMode]="_sortMode" [customSort]="_isCustomSort"
-    (sortFunction)="customSort($event)" (onSort)="onSort()" (onFilter)="filterEventTable($event)">
+    (sortFunction)="customSort($event)" (onSort)="onSort(columnManager._selectedAggregate)"
+    (onFilter)="filterEventTable($event)">
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -111,8 +112,8 @@
     </ng-template>
 
     <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
-        <tr class="_anything"
-            *ngIf="_canShowGroupBorder && rowGroupMetadata[dataSource[columnManager._selectedAggregate]].index === ri">
+        <!-- *ngIf="rowGroupMetadata[dataSource[columnManager._selectedAggregate]].index === ri" -->
+        <tr class="_anything">
             <td>
                 <span>{{dataSource[columnManager._selectedAggregate]}}</span>
             </td>

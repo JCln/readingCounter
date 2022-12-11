@@ -29,21 +29,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _calcName: string = '';
   @Input() _hasAggregating: boolean = false;
   // Aggregationing
-  rowGroupMetadata: any;
+  rowGroupMetadata = {};
   canShowTable: boolean = true;
   _canShowGroupBorder: boolean = false;
-  // aggregateOptions = [
-  //     { field: 'zoneTitle', header: 'ناحیه' },
-  //     { field: 'insertDateJalali', header: 'تاریخ' },
-  //     { field: 'counterReaderName', header: 'مامور' },
-  //     { field: 'listNumber', header: 'ش لیست' },
-  //     { field: 'itemQuantity', header: 'تعداد' },
-  //     { field: 'year', header: 'سال' },
-  //     { field: 'fromDate', header: 'از' },
-  //     { field: 'toDate', header: 'تا' },
-  //     { field: 'alalHesabPercent', header: 'درصد علی‌الحساب' },
-  //     { field: 'imagePercent', header: 'درصد تصویر' }
-  //   ]
 
   @Output() customedSort = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
@@ -227,21 +215,23 @@ export class PrimeTableComponent extends FactorySharedPrime {
     })
     return total;
   }
-  updateRowGroupMetaData() {
+  updateRowGroupMetaData(toAggregate: string) {
     this.rowGroupMetadata = {};
-    this._sortField = this.columnManager._selectedAggregate;
+    console.log(toAggregate);
+
+    this._sortField = toAggregate;
 
     if (this.dataSource) {
       for (let i = 0; i < this.dataSource.length; i++) {
         let rowData = this.dataSource[i];
-        let representativeName = rowData[this.columnManager._selectedAggregate];
+        let representativeName = rowData[toAggregate];
 
         if (i == 0) {
           this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
         }
         else {
           let previousRowData = this.dataSource[i - 1];
-          let previousRowGroup = previousRowData[this.columnManager._selectedAggregate];
+          let previousRowGroup = previousRowData[toAggregate];
           if (representativeName === previousRowGroup)
             this.rowGroupMetadata[representativeName].size++;
           else
@@ -249,24 +239,27 @@ export class PrimeTableComponent extends FactorySharedPrime {
         }
       }
     }
+    this.refreshTableAfterGrouping(toAggregate);
   }
   resetAggregation = () => {
-    this.columnManager._selectedAggregate = '';
-    this.updateRowGroupMetaData();
+    // this.columnManager._selectedAggregate = '';
+    this.updateRowGroupMetaData('');
   }
-  refreshTableAfterGrouping = (val: any) => {
+  refreshTableAfterGrouping = (val: string) => {
+
     if (val) {
-      this.updateRowGroupMetaData();
-      this.canShowTable = false;
-      setTimeout(() => this.canShowTable = true, 0);
+      // this.canShowTable = false;
+      // this.updateRowGroupMetaData(val);
+      // setTimeout(() => this.canShowTable = true, 10);
       this._canShowGroupBorder = true;
     }
     else {
       this._canShowGroupBorder = false;
     }
+
   }
-  onSort() {
-    this.updateRowGroupMetaData();
+  onSort(toAggregate: string) {
+    this.updateRowGroupMetaData(toAggregate);
   }
 
 }
