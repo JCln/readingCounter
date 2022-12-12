@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { OfflineModeService } from 'services/offline-mode.service';
 import { OutputManagerService } from 'services/output-manager.service';
 
@@ -8,18 +9,36 @@ import { OutputManagerService } from 'services/output-manager.service';
   styleUrls: ['./off-load.component.scss']
 })
 export class OffLoadComponent {
-  userName: string = '';
+
+  userCounterReaderDictionary: IDictionaryManager[] = [];
+  zoneDictionary: IDictionaryManager[] = [];
 
   constructor(
-    private offlineModeService: OfflineModeService,
+    public offlineModeService: OfflineModeService,
     private outputManagerService: OutputManagerService
-  ) { }
+  ) {
+    this.classWrapper();
+  }
+  // classWrapper is not Overritten
+  classWrapper = () => {
+    this.getZoneDictionary();
 
+    if (this.offlineModeService.loadForm.zoneId)
+      this.getCounterReader();
+  }
 
   downloadTextFile = async () => {
-    if (this.offlineModeService.vertificationLoadManual(this.userName)) {
-      const a = await this.offlineModeService.getOfflineManual(this.userName);
+    if (this.offlineModeService.vertificationLoadManual()) {
+      const a = await this.offlineModeService.getOfflineManual(this.offlineModeService.loadForm.counterReaderId);
       this.outputManagerService.downloadFile(a, '.txt');
+    }
+  }
+  getZoneDictionary = async () => {
+    this.zoneDictionary = await this.offlineModeService.getZoneDictionary();
+  }
+  getCounterReader = async () => {
+    if (this.offlineModeService.loadForm.zoneId) {
+      this.userCounterReaderDictionary = await this.offlineModeService.getUserCounterReaders(this.offlineModeService.loadForm.zoneId);
     }
   }
 

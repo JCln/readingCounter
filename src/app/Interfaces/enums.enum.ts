@@ -56,6 +56,7 @@ export enum EN_messages {
     insert_year = 'سالی وارد نمایید',
     insert_quantity = 'تعدادی وارد نمایید',
     insert_zone = 'ناحیه ای وارد نمایید',
+    insert_CounterReader = 'ماموری انتخاب نمایید',
     insert_listNumber = 'شماره لیست را وارد نمایید',
     no_listNumberExist = 'شماره لیستی برای نمایش بازدید وجود ندارد',
     insert_title = 'عنوان را وارد نمایید',

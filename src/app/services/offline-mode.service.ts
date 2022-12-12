@@ -5,6 +5,7 @@ import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { MathS } from '../classes/math-s';
+import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SnackWrapperService } from './snack-wrapper.service';
 
@@ -15,17 +16,27 @@ import { SnackWrapperService } from './snack-wrapper.service';
 export class OfflineModeService {
   private fileForm: FileList;
   private desc: any;
+  txtOutUploadForm: any = {
+    file: File
+  }
+  loadForm = {
+    zoneId: 0,
+    counterReaderId: ''
+  }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
-  isNull = (): boolean => {
-    // if (MathS.isNull(this.desc.userName)) {
-    //   this.snackWrapperService.openSnackBar(EN_messages.insert_userName, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
-    //   return false;
-    // }
+  getZoneDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getZoneDictionary();
+  }
+  getUserCounterReaders = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getUserCounterReaderDictionary(zoneId);
+  }
+  isNull = (): boolean => { 
     if (MathS.isNull(this.fileForm)) {
       this.snackWrapperService.openSnackBar(EN_messages.should_insert_ZIP, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
@@ -46,11 +57,16 @@ export class OfflineModeService {
       return false;
     return true;
   }
-  vertificationLoadManual = (userNameQuery: string): boolean => {
-    if (MathS.isNull(userNameQuery)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_value, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+  vertificationLoadManual = (): boolean => {
+    if (MathS.isNull(this.loadForm.zoneId)) {
+      this.snackWrapperService.openSnackBar(EN_messages.insert_zone, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
+    if (MathS.isNull(this.loadForm.counterReaderId)) {
+      this.snackWrapperService.openSnackBar(EN_messages.insert_CounterReader, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
+
     return true;
   }
   checkVertiticationOfflineTxtOut = (filesList: FileList, data: any): boolean => {
@@ -74,7 +90,7 @@ export class OfflineModeService {
   }
   getOfflineManual = (userName: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETBLOB(ENInterfaces.loadManual + '?userName=' + userName).toPromise().then(res => {
+      this.interfaceManagerService.GETBLOB(ENInterfaces.loadManual + '?userId=' + userName).toPromise().then(res => {
         resolve(res);
       })
     });

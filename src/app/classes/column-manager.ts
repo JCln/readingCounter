@@ -1470,7 +1470,8 @@ export class ColumnManager {
         { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true },
         { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, ltr: true },
-        { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false }
+        { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false },
+        { field: 'deviceId', header: 'سریال', isSelected: false }
     ]
     userSearch: IObjectIteratation[] = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },

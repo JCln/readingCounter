@@ -12,7 +12,7 @@
                         </p-dropdown>
                     </div>
                 </div>
-                <div class="input_2" *ngIf="userCounterReader.length">
+                <div class="input_2" [hidden]="!userCounterReader.length">
                     <div class="_key">مامور</div>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
                         [options]="userCounterReader" name="counter-reader"
