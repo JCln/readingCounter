@@ -321,6 +321,7 @@ export enum ENInterfaces {
     getDashboardShownReadings = 'V1/List/Dashboard/ShownReadings/Timed',
     getDashboardKarkardTimed = 'V1/List/Dashboard/Karkard/Timed',
     getDashboardMediaTimed = 'V1/List/Dashboard/Media/Timed',
+    getLatestOnOffloadId = 'V1/List/Latest/OnOffLoadId',
     getDashboardNotReader = 'V1/Tracking/Dashboard/Tracking/NotReader',
     getDashboardReadingReportTimed = 'V1/ReadingReport/Dashboard/Timed',
     getDashboardReadTimed = 'V1/List/Dashboard/Read/Timed',

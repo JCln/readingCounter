@@ -78,6 +78,7 @@ export class ApkService {
     return true;
   }
   checkVertitication = (filesList: FileList, data: any): boolean => {
+    // ToDo: insert to values, not working perfectly unless
     this.fileForm = filesList;
     this.desc = data;
     if (!this.vertification())

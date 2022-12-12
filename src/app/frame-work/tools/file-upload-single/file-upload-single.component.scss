@@ -1,4 +1,5 @@
 @import 'variable';
+@import '_mat.scss';
 @import 'button.scss';
 @import 'input.scss';
 @import 'media.scss';
@@ -14,12 +15,13 @@
 @include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(25rem, auto)));
 
 .content {
-  background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  direction: rtl;
   text-align: center;
+  min-height: 25rem;
+  background: var(--secondary_1);
   padding: var(--font_2) 0;
   border-radius: $border_15;
-  min-height: 25rem;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
 }
 
 input {
@@ -84,7 +86,7 @@ input {
 
 .icon_android,
 small {
-  color: var(--green_500);
+  color: var(--red_600);
   margin: 0 .4rem;
 }
 
