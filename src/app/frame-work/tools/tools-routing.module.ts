@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'excelBuild', loadChildren: () => import('./excel-builder/excel-builder.module').then(excelBuilder => excelBuilder.ExcelBuilderModule) },
   { path: 'downloadAI', loadChildren: () => import('./download-img-file/download-img-file.module').then(downloadFileAllImages => downloadFileAllImages.DownloadImgFileModule) },
   { path: 'downloadAITwo', loadChildren: () => import('./download-img-two-file/download-img-two-file.module').then(downloadFileAllImagesTWO2 => downloadFileAllImagesTWO2.DownloadImgTwoFileModule) },
+  { path: 'uploadSingle', loadChildren: () => import('./file-upload-single/file-upload-single.module').then(fileUploadSingle => fileUploadSingle.FileUploadSingleModule) },
 ];
 
 @NgModule({

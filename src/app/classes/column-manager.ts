@@ -432,6 +432,7 @@ export class ColumnManager {
     ];
     rrPreNumber: IObjectIteratation[] = [
         { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
         { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -498,6 +499,7 @@ export class ColumnManager {
     ]
     rrLocked: IObjectIteratation[] = [
         { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
         { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -565,9 +567,9 @@ export class ColumnManager {
     searchPro: IObjectIteratation[] =
         [
             { field: 'counterReaderName', header: 'مامور', isSelected: false },
+            { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
             { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
-            { field: 'counterReaderName', header: 'مامور', isSelected: true },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
             { field: 'radif', header: 'ش.پرونده', isSelected: false },
             { field: 'eshterak', header: 'اشتراک', isSelected: true },
@@ -631,9 +633,9 @@ export class ColumnManager {
     searchMosh: IObjectIteratation[] =
         [
             { field: 'counterReaderName', header: 'مامور', isSelected: false },
+            { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
             { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
-            { field: 'counterReaderName', header: 'مامور', isSelected: true },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
             { field: 'radif', header: 'ش.پرونده', isSelected: false },
             { field: 'eshterak', header: 'اشتراک', isSelected: true },
@@ -698,8 +700,8 @@ export class ColumnManager {
         [
             { field: 'counterReaderName', header: 'مامور', isSelected: false },
             { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
-            { field: 'billId', header: 'شناسه قبض', isSelected: false },
-            { field: 'counterReaderName', header: 'مامور', isSelected: true },
+            { field: 'billId', header: 'شناسه قبض', isSelected: false },            
+            { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
             { field: 'radif', header: 'ش.پرونده', isSelected: false },
             { field: 'eshterak', header: 'اشتراک', isSelected: true },
@@ -776,6 +778,7 @@ export class ColumnManager {
     assess_pre: IObjectIteratation[] =
         [
             { field: 'counterReaderName', header: 'مامور', isSelected: false },
+            { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
             { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
             { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -1134,6 +1137,7 @@ export class ColumnManager {
     ];
     allLists: IObjectIteratation[] = [
         { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
         { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -1327,6 +1331,7 @@ export class ColumnManager {
     ]
     ModifyList: IObjectIteratation[] = [
         { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
         { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
@@ -1472,7 +1477,8 @@ export class ColumnManager {
         { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
         { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true },
         { field: 'lockTimeSpan', header: 'زمان قفل', isSelected: false, ltr: true },
-        { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false }
+        { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false },
+        { field: 'deviceId', header: 'سریال', isSelected: false }
     ]
     userSearch: IObjectIteratation[] = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },
