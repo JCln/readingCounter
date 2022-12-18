@@ -698,7 +698,7 @@ export class ColumnManager {
         [
             { field: 'counterReaderName', header: 'مامور', isSelected: false },
             { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
-            { field: 'billId', header: 'شناسه قبض', isSelected: false },            
+            { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
             { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -1403,6 +1403,34 @@ export class ColumnManager {
         { field: 'isTavizi', header: 'تعویض', isSelected: true, isBoolean: true },
         { field: 'clientOrder', header: 'ترتیب', isSelected: true }
     ]
+    karkarAllStatesDto: IObjectIteratation[] = [
+        { field: 'offloadDayalali', header: 'روز', isSelected: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'duration', header: 'زمان', isSelected: true, isNumber: true },
+        { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
+        { field: 'c1', header: '1', isSelected: true },
+        { field: 'c2', header: '1', isSelected: true },
+        { field: 'c3', header: '1', isSelected: true },
+        { field: 'c4', header: '1', isSelected: true },
+        { field: 'c5', header: '1', isSelected: true, isNumber: true },
+        { field: 'c6', header: '1', isSelected: true, isNumber: true },
+        { field: 'c7', header: '1', isSelected: true, isNumber: true },
+        { field: 'c8', header: '1', isSelected: true, isNumber: true },
+        { field: 'c9', header: '1', isSelected: true, isNumber: true },
+        { field: 'c10', header: '1', isSelected: true, isNumber: true },
+        { field: 'c11', header: '1', isSelected: true, isNumber: true },
+        { field: 'c12', header: '1', isSelected: true, isNumber: true },
+
+        // counterStateAndCounts: [
+        //   {
+        //     counterStateTitle: string,
+        //     count: 0
+        //   }
+        // ]
+    ]
     readingConfigDefault: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'defaultAlalHesab', header: 'علی‌الحساب', isSelected: true },
@@ -1484,7 +1512,9 @@ export class ColumnManager {
         { field: 'userCode', header: 'کد کاربری', isSelected: false, ltr: false },
         { field: 'mobile', header: 'موبایل', isSelected: true, ltr: true },
         { field: 'isActive', header: 'فعال', isSelected: true, ltr: false, isBoolean: true },
-        { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true }
+        { field: 'isLocked', header: 'قفل', isSelected: true, ltr: false, isBoolean: true },
+        { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false },
+        { field: 'deviceId', header: 'سریال', isSelected: false }
     ]
     errors: IObjectIteratation[] = [
         { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },

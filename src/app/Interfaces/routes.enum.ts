@@ -72,6 +72,7 @@ export enum EN_Routes {
     'wrrptsmamtrvch' = '/wr/rpts/mam/trvch',
     'wrrptsmamdh' = '/wr/rpts/mam/dh',
     'wrrptsmamkarkard' = '/wr/rpts/mam/karkard',
+    'wrrptsmamKarkardAllStates' = '/wr/rpts/mam/karkardAllStates',
     'wrrptsmampns' = '/wr/rpts/mam/pns',
     'wrrptsmamlocked' = '/wr/rpts/mam/locked',
     'wrrptsmamoffkarkard' = '/wr/rpts/mam/offkarkard',

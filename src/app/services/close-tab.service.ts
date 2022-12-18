@@ -62,6 +62,7 @@ export class CloseTabService {
   saveDataForUserKarkard: any;
   saveDataForTrackOffloaded: any;
   saveDataForTrackOffloadedGroup: any;
+  saveDataForKarkardAllStates: any;
   offloadedGroupReq = {
     _selectedAggregate: 'listNumber'// Default group by
   }
@@ -260,6 +261,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForRRTraverse, url: EN_Routes.wrrptsmamtrv },
     { id: 1, value: ENEssentialsToSave.saveDataForRRTraverseDifferential, url: EN_Routes.wrrptsmamtrvch },
     { id: 1, value: ENEssentialsToSave.saveDataForRRDisposalHours, url: EN_Routes.wrrptsmamdh },
+    { id: 1, value: ENEssentialsToSave.saveDataForKarkardAllStates, url: EN_Routes.wrrptsmamKarkardAllStates },
     { id: 1, value: ENEssentialsToSave.saveDataForRRKarkard, url: EN_Routes.wrrptsmamkarkard },
     { id: 1, value: ENEssentialsToSave.saveDataForRRPreNumShown, url: EN_Routes.wrrptsmampns },
     { id: 1, value: ENEssentialsToSave.saveDataForRRLocked, url: EN_Routes.wrrptsmamlocked },

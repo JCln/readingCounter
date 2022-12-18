@@ -6,6 +6,7 @@ export enum ENReadingReports {
     traverse = 'traverseReq',
     trvch = 'trvchReq',
     karkard = 'karkardReq',
+    karkardAllStates = 'offKarkardAllStatesReq',
     Locked = 'lockedReq',
     preNumShown = 'preNumberShownReq',
     offloadKarkard = 'karkardOffloadReq',

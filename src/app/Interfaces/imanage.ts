@@ -27,7 +27,10 @@ export interface IMostReportInput {
     reportCode: number,
     zoneIds: [
         number
-    ]
+    ],
+    beginFromImported?: boolean,
+    fragmentMasterIds?: string[],
+    isCollapsed?: boolean
 }
 export interface IBriefKardex {
     item: string,

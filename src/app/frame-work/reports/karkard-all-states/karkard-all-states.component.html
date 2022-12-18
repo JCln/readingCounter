@@ -1,0 +1,144 @@
+<main class="main">
+    <section [hidden]="readingReportManagerService.offKarkardAllStatesReq.isCollapsed">
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="static_part">
+                <section class="order_by">
+                    <h2>جستجو بر اساس :</h2>
+                    <mat-radio-group class="radio_group" aria-labelledby="radio_group"
+                        [(ngModel)]="readingReportManagerService._isOrderByDate" name="_isOrderByDate">
+                        <mat-radio-button class="radio_button"
+                            *ngFor="let orderType of readingReportManagerService.searchInOrderTo"
+                            [value]="orderType.isSelected">
+                            {{orderType.title}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </section>
+                <hr>
+                <section class="content">
+                    <div class="input_2">
+                        <div class="_key">ناحیه</div>
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.zoneId"
+                            placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id" optionLabel="title"
+                            filter="true">
+                        </p-dropdown>
+                    </div>
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                        <div class="_key">نوع دوره</div>
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                            <mat-option (click)="getReadingPeriod()"
+                                *ngFor="let truefalse of readingPeriodKindDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                    <div class="input_2"
+                        [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
+                        <div class="_key">دوره قرائت</div>
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.readingPeriodId"
+                            name="readingPeriodId">
+                            <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
+                        <div class="_key">سال</div>
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="readingReportManagerService.offKarkardAllStatesReq.year" name="year">
+                            <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                                {{truefalse.title}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">از</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="readingReportManagerService.receiveFromDateJalali(readingReportManagerService.ENReadingReports.karkardAllStates, $event)"
+                                [dateObject]="readingReportManagerService.offKarkardAllStatesReq.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
+                        <div class="_key">تا</div>
+                        <div class="_value">
+                            <app-date-jalali name="toDate"
+                                (dateJalEvent)="readingReportManagerService.receiveToDateJalali(readingReportManagerService.ENReadingReports.karkardAllStates, $event)"
+                                [dateObject]="readingReportManagerService.offKarkardAllStatesReq.toDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn_1">
+                        مشاهده لیست
+                        <i class="pi pi-list"></i>
+                    </button>
+
+                </section>
+
+            </section>
+
+        </form>
+    </section>
+
+    <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+        [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+        [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
+        stateStorage="session" stateKey="karkard-allstates">
+
+        <ng-template pTemplate="caption">
+            <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" name="selectOptions"
+                optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
+                selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+            </p-multiSelect>
+            <div class="header_icons_wrap">
+                <div class="right_side">
+                </div>
+                <div class="left_side">
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+
+            <tr>
+                <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+                    <p-sortIcon field="{{col.field}}"></p-sortIcon>
+                    {{col.header}}
+                </th>
+            </tr>
+            <tr>
+                <th *ngFor="let col of columns">
+                    <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
+                </th>
+            </tr>
+
+        </ng-template>
+
+        <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
+            <tr>
+                <td *ngFor="let col of columns">
+                    <span class="ui-column-title">{{col.header}}</span>
+                    <ng-container *ngIf="col.isBoolean; else simple">
+                        <mat-checkbox [disabled]="true" name="isBoolean" [(ngModel)]="dataSource[col.field]">
+                        </mat-checkbox>
+                    </ng-container>
+                    <ng-template #simple>
+                        {{dataSource[col.field]}}
+                    </ng-template>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+    <section *ngIf="!dataSource">
+        <tr class="empty_data">
+            موردی پیدا نشد
+        </tr>
+    </section>
+</main>
