@@ -15,6 +15,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class KarkardAllStatesComponent extends FactoryONE {
   dataSource: IKarkardAllStatesDto[] = [];//
   tempData: IKarkardAllStatesDto[] = [];
+  header: any[] = [];
 
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
@@ -38,18 +39,21 @@ export class KarkardAllStatesComponent extends FactoryONE {
       this.closeTabService.saveDataForKarkardAllStates = null;
     }
     if (this.closeTabService.saveDataForKarkardAllStates) {
-      this.insertSelectedColumns();
       this.dataSource = this.closeTabService.saveDataForKarkardAllStates;
+      this._selectCols = this.closeTabService.saveDataForKarkardAllStatesTWO;
+      this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
     }
+
     this.readingReportManagerService.getSearchInOrderTo();
+    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
 
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
-    this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
   }
   insertSelectedColumns = () => {
     this._selectCols = this.getCounterStateHeaders(this.tempData);
     this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
+    this.closeTabService.saveDataForKarkardAllStatesTWO = this._selectCols;
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -72,7 +76,6 @@ export class KarkardAllStatesComponent extends FactoryONE {
   }
 
   getCounterStateHeaders = (data: any): any => {
-
     let c = [
       { field: 'offloadDayalali', header: 'روز', isSelected: true },
       { field: 'fromEshterak', header: 'از اشتراک', isSelected: false },
@@ -86,7 +89,6 @@ export class KarkardAllStatesComponent extends FactoryONE {
     for (let index = 0; index < data[0].counterStateAndCounts.length; index++) {
       c.push({ field: 'c' + index, header: data[0].counterStateAndCounts[index].counterStateTitle, isSelected: true });
     }
-
     return c;
   }
   getCounterStateData = (data: any) => {

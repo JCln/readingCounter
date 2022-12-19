@@ -29,7 +29,7 @@ $border_15: 10px;
   margin: var(--font_025) 0;
   height: var(--font_3);
   border: 1px solid var(--secondary_3_spec);
-  border-radius: 7px;
+  border-radius: $border_7;
 }
 
 ._key {

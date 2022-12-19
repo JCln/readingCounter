@@ -107,6 +107,7 @@ export enum ENEssentialsToSave {
     saveDataForRRDisposalHours = 'saveDataForRRDisposalHours',
     saveDataForRRKarkard = 'saveDataForRRKarkard',
     saveDataForKarkardAllStates = 'saveDataForKarkardAllStates',
+    saveDataForKarkardAllStatesTWO = 'saveDataForKarkardAllStatesTWO',
     saveDataForRRPreNumShown = 'saveDataForRRPreNumShown',
     saveDataForRRLocked = 'saveDataForRRLocked',
     saveDataForRROffloadedKarkard = 'saveDataForRROffloadedKarkard',

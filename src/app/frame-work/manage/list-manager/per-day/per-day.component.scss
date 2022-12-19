@@ -71,7 +71,7 @@ input {
   white-space: nowrap;
   direction: inherit;
   border: 1px solid var(--secondary_3_spec);
-  border-radius: 7px;
+  border-radius: $border_7;
 }
 
 .disable_grid_temp {

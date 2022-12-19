@@ -15,16 +15,18 @@
         <div class="_key">{{item.header}}</div>
         <ng-container *ngIf="item.isBoolean; else elseTemplate">
             <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSource[item.field]">
-                {{item.header}}</mat-checkbox>
+                {{item.header}}
+            </mat-checkbox>
         </ng-container>
         <ng-template #elseTemplate>
             <input [readOnly]="item.readonly" class="_value" name="{{item.field}}" [(ngModel)]="dataSource[item.field]">
         </ng-template>
     </div>
-    <div class="input_2" *ngFor="let item of _selectColumnsAUX" [ngClass]="{'double_size':item.icon}">
+    <div class="input_2" [ngClass]="{'double_size':item.icon}" *ngFor="let item of _selectColumnsAUX">
         <ng-container *ngIf="item.isBoolean; else elseTemplate">
             <mat-checkbox [disabled]="true" name="{{item.field}}" [(ngModel)]="dataSourceAUX[item.field]">
-                {{item.header}}</mat-checkbox>
+                {{item.header}}
+            </mat-checkbox>
         </ng-container>
         <ng-template #elseTemplate>
             <div class="_key">{{item.header}}</div>
