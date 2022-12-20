@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
 import { IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
+import { IWaterMarkConfig } from 'interfaces/isettings';
 import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 
@@ -175,6 +176,19 @@ export class CloseTabService {
     toTimeH: '',
     toTimeM: '',
     toTime: ''
+  }
+  saveDataForWaterMark: IWaterMarkConfig = {
+    id: '',
+    r: 255,
+    g: 255,
+    b: 255,
+    a: 0,
+    fontSize: 16,
+    x: 0,
+    y: 0,
+    userDisplayName: '',
+    insertDateTime: '',
+    shouldActiveDisplayName: false
   }
   saveDataForServerErrors: any;
   saveDataForRRDisposalHours: any;

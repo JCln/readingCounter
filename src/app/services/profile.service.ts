@@ -120,7 +120,14 @@ export class ProfileService {
   }
   getMyInfoDataSource = (method: ENInterfaces): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GET(method).subscribe((res: IResponses) => {
+      this.interfaceManagerService.GET(method).subscribe((res) => {
+        resolve(res)
+      });
+    });
+  }
+  postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).subscribe((res) => {
         resolve(res)
       });
     });

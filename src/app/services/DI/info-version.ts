@@ -1,18 +1,13 @@
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 
 export enum ENLoginVersion {
-    version = '0.9.5'
+    version = '0.9.6'
 }
 
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'آپلود تصویر',
-        isSelected: true
-    },
-    {
-        id: '2',
-        title: 'نتیجه پایش',
+        title: 'waterMark',
         isSelected: true
     },
 ]

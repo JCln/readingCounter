@@ -287,6 +287,8 @@ export enum ENInterfaces {
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
+    getWaterMarkConfig = 'V1/WaterMark/Get',
+    postWaterMarkConfig = 'V1/WaterMark/AddOrEdit',
     chat = 'V1/Chat/Index?accessToken=',
     settingsLicense = 'V1/ApiSettings/License',
 

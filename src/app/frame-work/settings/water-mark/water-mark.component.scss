@@ -1,5 +1,19 @@
+@import 'variable';
+@import 'input';
+@import 'button';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
+  justify-content: center;
+  gap: var(--font_2);
+}
+
+.content {
+  direction: rtl;
+}
+
 .mobile {
-  margin-top: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,5 +110,13 @@
 p {
   position: absolute;
   margin-top: 1rem;
-  color: white;
+  margin-left: .5rem;
+  font-weight: 600;
+}
+
+.btn_1 {
+  max-width: 100%;
+  margin-top: var(--font_l);
+  color: var(--white);
+  background-color: var(--orange_500);
 }

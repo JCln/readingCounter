@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedTwoModule } from 'src/app/shared/shared-two.module';
 
 import { WaterMarkRoutingModule } from './water-mark-routing.module';
 import { WaterMarkComponent } from './water-mark.component';
@@ -10,7 +10,7 @@ import { WaterMarkComponent } from './water-mark.component';
     WaterMarkComponent
   ],
   imports: [
-    CommonModule,
+    SharedTwoModule,
     WaterMarkRoutingModule
   ]
 })

@@ -71,7 +71,7 @@
   &:hover,
   &:focus,
   &:active {
-    box-shadow: 1px 1px 2px 3px var(--secondary_4);
+    box-shadow: 0px 1px 0px 2px var(--secondary_5);
   }
 }
 
@@ -82,8 +82,8 @@
   &:hover,
   &:focus,
   &:active {
-    background-color: var(--primary_3);
-    box-shadow: 0 0 0 3px var(--primary_3);
+    color: var(--primary_3);
+    box-shadow: 0 1px 0 2px var(--primary_3);
   }
 }
 
