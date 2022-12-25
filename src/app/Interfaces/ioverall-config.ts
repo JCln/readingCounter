@@ -38,6 +38,7 @@ export enum ENEssentialsToSave {
     saveDataForDynamicReports = 'saveDataForDynamicReports',
     saveDataForMomentLastRead = 'saveDataForMomentLastRead',
     saveDataForToolsExcelViewer = 'saveDataForToolsExcelViewer',
+    saveDataForWaterMark = 'saveDataForWaterMark',
     saveDataForKarbari = 'saveDataForKarbari',
     saveDataForImageAttribution = 'saveDataForImageAttribution',
     saveDataForImageAttrResult = 'saveDataForImageAttrResult',

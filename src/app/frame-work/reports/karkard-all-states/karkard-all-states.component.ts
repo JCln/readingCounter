@@ -20,6 +20,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   _selectCols: any = [];
@@ -62,7 +63,10 @@ export class KarkardAllStatesComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.offKarkardAllStatesReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.offKarkardAllStatesReq.zoneId);
+  }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
   }
