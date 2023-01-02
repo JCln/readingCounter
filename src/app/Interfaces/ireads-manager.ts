@@ -113,6 +113,7 @@ export interface ICounterState {
     isMane: boolean,
     canNumberBeLessThanPre: boolean,
     isTavizi: boolean,
+    hasImage: boolean,
     shouldEnterNumber: boolean,
     isXarab: boolean,
     isFaqed: boolean,

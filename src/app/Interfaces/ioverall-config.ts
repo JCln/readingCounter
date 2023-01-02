@@ -73,6 +73,8 @@ export enum ENEssentialsToSave {
     saveDataForImportDataFileExcel = 'saveDataForImportDataFileExcel',
     saveDataForImportDataFileExcelReq = 'saveDataForImportDataFileExcelReq',
     saveDataForImportErrors = 'saveDataForImportErrors',
+    saveDataForImportErrorsByTrackNumber = 'saveDataForImportErrorsByTrackNumber',
+    saveDataForImportErrorsByTrackNumberReq = 'saveDataForImportErrorsByTrackNumberReq',
     saveDataForAssessPre = 'saveDataForAssessPre',
     saveDataForAssessPreReq = 'saveDataForAssessPre',
     saveDataForAssessAdd = 'saveDataForAssessAdd',
@@ -379,6 +381,7 @@ export enum ENSelectedColumnVariables {
     selectedQotr = 'qotr',
     selectedForbidden = 'forbidden',
     selectedErrors = 'errors',
+    selectedErrorsByTrackNumber = 'errorsByTrackNumber',
     selectedServerErrors = 'serverErrors',
     selectedSimafaReadingProgram = 'simafaReadingProgram',
 }

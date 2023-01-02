@@ -49,6 +49,7 @@ export enum EN_Routes {
     'wrimpimd' = '/wr/imp/imd',
     'wrimpFileExcel' = '/wr/imp/fileExcel',
     'wrimperr' = '/wr/imp/err',
+    'wrImportErrByTrackNumber' = '/wr/imp/errByTrackNumber',
     'wrimpassesspre' = '/wr/imp/assesspre',
     'wrimpassessadd' = '/wr/imp/assessadd',
     'wrimpsimafardpg' = '/wr/imp/simafa/rdpg',

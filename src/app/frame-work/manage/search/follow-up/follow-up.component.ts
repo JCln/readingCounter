@@ -58,7 +58,7 @@ export class FollowUpComponent extends FactoryONE {
     this.insertToDesc();
   }
   connectToServer = async () => {
-    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.closeTabService.saveDataForFollowUpReq.trackNumber)) {
+    if (this.trackingManagerService.verificationTrackNumber(this.closeTabService.saveDataForFollowUpReq.trackNumber)) {
       this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.closeTabService.saveDataForFollowUpReq.trackNumber);
       if (this.trackingManagerService.isValidationNull(this.dataSource))
         return;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
+import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
@@ -12,7 +13,8 @@ export class CounterStateService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private dictionaryWrapperService: DictionaryWrapperService
+    private dictionaryWrapperService: DictionaryWrapperService,
+    private columnManager: ColumnManager
   ) { }
 
   // gridFriendlyDefaultReq = {
@@ -107,20 +109,7 @@ export class CounterStateService {
   //   return this.interfaceManagerService.POSTBODY(ENInterfaces.counterStateGridFriendly, event);
   // }
   columnSelectedMenuDefault = (): IObjectIteratation[] => {
-    return [
-      { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: false, isNumber: true },
-      { field: 'title', header: 'عنوان', isSelected: true },
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
-      { field: 'clientOrder', header: 'ترتیب', isSelected: false, isNumber: true },
-      { field: 'forProvince', header: 'همه نواحی', isSelected: false, isBoolean: true },
-      { field: 'canEnterNumber', header: 'رقم اختیاری', isSelected: true, isBoolean: true },
-      { field: 'isMane', header: 'مانع', isSelected: true, isBoolean: true },
-      { field: 'canNumberBeLessThanPre', header: 'فعلی کمتر از قبلی', isSelected: false, isBoolean: true },
-      { field: 'isTavizi', header: 'تعویضی', isSelected: true, isBoolean: true },
-      { field: 'shouldEnterNumber', header: 'اجبار رقم', isSelected: true, isBoolean: true },
-      { field: 'isXarab', header: 'خراب', isSelected: true, isBoolean: true },
-      { field: 'isFaqed', header: 'فاقد', isSelected: true, isBoolean: true }
-    ];
+    return this.columnManager.columnSelectedMenus('counterStateDto');
   }
   getGridFriendlyDataSourceDefault = (): any => {
     return new Promise(resolve => {

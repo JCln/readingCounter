@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { ICounterState, ICounterStateGridFriendlyResp } from 'interfaces/ireads-manager';
+import { ICounterState } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { CounterStateService } from 'services/counter-state.service';
 import { ReadManagerService } from 'services/read-manager.service';
@@ -14,14 +14,12 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./counter-state.component.scss']
 })
 export class CounterStateComponent extends FactoryONE {
-  gridFriendlyData: any;
   zoneDictionary: IDictionaryManager[] = [];
 
-  dataSourceRES: ICounterStateGridFriendlyResp; // grid friendly data for lazyloading
   dataSource: ICounterState[] = [];
   clonedProducts: { [s: string]: ICounterState; } = {};
   newRowLimit: number = 1;
-  innerLoading: boolean = false;
+  // innerLoading: boolean = false;
   _selectCols: any[];
   _selectedColumns: any[];
 
@@ -121,7 +119,7 @@ export class CounterStateComponent extends FactoryONE {
   }
 
   newRow(): ICounterState {
-    return { moshtarakinId: null, title: '', zoneId: null, clientOrder: null, canEnterNumber: false, isMane: false, canNumberBeLessThanPre: false, isTavizi: false, shouldEnterNumber: false, isXarab: false, isFaqed: false, isNew: true };
+    return { moshtarakinId: null, title: '', zoneId: null, clientOrder: null, canEnterNumber: false, isMane: false, canNumberBeLessThanPre: false, isTavizi: false, shouldEnterNumber: false, isXarab: false, isFaqed: false, hasImage: false, isNew: true };
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   testChangedValue() { this.newRowLimit = 2; }

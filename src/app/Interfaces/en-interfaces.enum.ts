@@ -293,6 +293,7 @@ export enum ENInterfaces {
     settingsLicense = 'V1/ApiSettings/License',
 
     postImportData = 'V1/Import/Dynamic',
+    postImportErrorsByTrackNumber = 'V1/Import/ImportErrorsByTrackNumber',
     postImportDynamicCount = 'V1/Import/DynamicCount',
     getImportErrros = 'V1/Import/ImportErrors',
     postSimafaReadingProgram = 'V1/Import/Simafa/ReadingPrograms',

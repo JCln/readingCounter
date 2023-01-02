@@ -82,6 +82,11 @@ export class CloseTabService {
   saveDataForAutomaticImport: any;
   saveDataForImportDynamic: any;
   saveDataForImportErrors: any;
+  saveDataForImportErrorsByTrackNumber: any;
+  saveDataForImportErrorsByTrackNumberReq = {
+    trackNumber: null,
+    _isCollapsed: true
+  }
   saveDataForSimafaBatch: any;
   importSimafaReadingProgramReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
@@ -255,6 +260,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForImportDynamic, url: EN_Routes.wrimpimd },
     { id: 1, req: ENEssentialsToSave.saveDataForImportDataFileExcelReq, value: ENEssentialsToSave.saveDataForImportDataFileExcel, url: EN_Routes.wrimpFileExcel },
     { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: EN_Routes.wrimperr },
+    { id: 1, req: ENEssentialsToSave.saveDataForImportErrorsByTrackNumberReq, value: ENEssentialsToSave.saveDataForImportErrorsByTrackNumber, url: EN_Routes.wrImportErrByTrackNumber },
     { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
     { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafardpgbatch },
@@ -327,7 +333,9 @@ export class CloseTabService {
       this[this.val[index].value_2] = null;
       this.setAll(this[this.val[index].req], null);
     }
-    // TODO: make null all objects
+    /* TODO: make null all objects
+    should separate objects and array of objects
+*/
     this.cleanArrays();
   }
   cleanData = (url: string) => {

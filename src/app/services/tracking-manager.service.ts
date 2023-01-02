@@ -347,7 +347,7 @@ export class TrackingManagerService {
   verificationOffloadModify = (object: IOffloadModifyReq): boolean => {
     return this.offloadModifyValidation(object);
   }
-  verificationFollowUPTrackNumber = (id: number): boolean => {
+  verificationTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
   }
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
