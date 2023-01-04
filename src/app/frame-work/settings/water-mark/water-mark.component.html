@@ -36,14 +36,18 @@
         </div>
         <div class="input_2">
             <div class="_key">X</div>
-            <input class="_value" type="number" name="x" [(ngModel)]="closeTabService.saveDataForWaterMark.x">
+            <input class="_value" (ngModelChange)="changeXPosition($event)" type="number" name="x"
+                [(ngModel)]="closeTabService.saveDataForWaterMark.x">
         </div>
         <div class="input_2">
             <div class="_key">Y</div>
-            <input class="_value" type="number" name="y" [(ngModel)]="closeTabService.saveDataForWaterMark.y">
+            <input class="_value" (ngModelChange)="changeYPosition($event)" type="number" name="y"
+                [(ngModel)]="closeTabService.saveDataForWaterMark.y">
         </div>
-        <div class="input_2" *ngIf="closeTabService.saveDataForWaterMark.shouldActiveDisplayName">
-            <div class="_key">Username</div>
+        <div class="input_2">
+            <div class="_key tooltip" style="cursor: pointer;">کاربر
+                <div class="tooltip_text_right">آخرین کاربر تغییر دهنده</div>
+            </div>
             <input disabled="true" class="_value" name="userDisplay"
                 [(ngModel)]="closeTabService.saveDataForWaterMark.userDisplayName">
         </div>

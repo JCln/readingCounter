@@ -192,8 +192,7 @@ export class CloseTabService {
     x: 0,
     y: 0,
     userDisplayName: '',
-    insertDateTime: '',
-    shouldActiveDisplayName: false
+    insertDateTime: ''
   }
   saveDataForServerErrors: any;
   saveDataForRRDisposalHours: any;

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -15,8 +14,7 @@ export class WaterMarkComponent extends FactoryONE {
 
   constructor(
     private profileService: ProfileService,
-    public closeTabService: CloseTabService,
-    private authService: AuthService
+    public closeTabService: CloseTabService
   ) {
     super()
   }
@@ -48,11 +46,16 @@ export class WaterMarkComponent extends FactoryONE {
       this.closeTabService.saveDataForWaterMark = await this.profileService.getMyInfoDataSource(ENInterfaces.getWaterMarkConfig);
 
       if (this.closeTabService.saveDataForWaterMark.id) {
-        this.getUserRole();
         this.changeTextColorByServerRes();
       }
     }
 
+  }
+  changeXPosition = (val: any) => {
+    document.querySelector('p').style.left = (val / 5).toString() + 'px';
+  }
+  changeYPosition = (val: any) => {
+    document.querySelector('p').style.top = (val / 5).toString() + 'px';
   }
   changeFontSize = (val: any) => {
     document.querySelector('p').style.fontSize = val.toString() + 'px';
@@ -60,10 +63,6 @@ export class WaterMarkComponent extends FactoryONE {
   textColorState = () => {
     const waterMarkColor = `rgba(${this.rgba.toString()})`
     document.getElementById('text-color').style.color = waterMarkColor;
-  }
-  getUserRole = (): void => {
-    const jwtRole = this.authService.getAuthUser();
-    this.closeTabService.saveDataForWaterMark.shouldActiveDisplayName = jwtRole.roles.toString().includes('admin') ? true : false
   }
 
 }

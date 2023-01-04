@@ -21,6 +21,5 @@ export interface IWaterMarkConfig {
     x: number,
     y: number,
     userDisplayName: string,
-    insertDateTime: string,
-    shouldActiveDisplayName: boolean
+    insertDateTime: string    
 }
