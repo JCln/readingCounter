@@ -229,6 +229,7 @@ export enum ENInterfaces {
     serverManagerResetApp = 'V1/Server/ResetApp',
     serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
     serverManagerRequestLog = 'V1/RequestLog/List',
+    serverManagerOSInfo = 'V1/Server/OsInfo',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',

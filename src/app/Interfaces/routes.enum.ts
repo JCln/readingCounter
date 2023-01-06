@@ -95,6 +95,7 @@ export enum EN_Routes {
     'wr;trackNumber=' = '/wr;trackNumber=',
     'wrmms' = '/wr/m/ms',
     'wrmmserr' = '/wr/m/mserr',
+    'serverOSInfo' = '/wr/m/osInfo',
     'wrmRequestLogs' = '/wr/m/requestLog',
     'wrmmrm' = '/wr/m/mrm',
     'wrmsge' = '/wr/msge',

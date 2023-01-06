@@ -58,3 +58,11 @@ export interface IManageDrivesInfo {
     freePercent: number,
     usedPercent: number
 }
+export interface IServerOSInfo {
+    cpuCoreCount: number,
+    version: string,
+    servicePack: string,
+    elapsedDateTime: string,
+    isOs64: boolean,
+    systemDateTime: string,
+}

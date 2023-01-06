@@ -147,6 +147,7 @@ export enum ENEssentialsToSave {
     saveDataForRequestLog = 'saveDataForRequestLog',
     saveDataForRequestLogReq = 'saveDataForRequestLogReq',
     saveDataForServerErrors = 'saveDataForServerErrors',
+    saveDataForOSInfo = 'saveDataForOSInfo',
 }
 export interface ITestSidebar {
     routerUrl: string;

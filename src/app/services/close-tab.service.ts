@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
 import { IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
+import { IServerOSInfo } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig } from 'interfaces/isettings';
 import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
@@ -194,6 +195,14 @@ export class CloseTabService {
     userDisplayName: '',
     insertDateTime: ''
   }
+  saveDataForOSInfo: IServerOSInfo = {
+    cpuCoreCount: null,
+    version: '',
+    servicePack: '',
+    elapsedDateTime: '',
+    isOs64: true,
+    systemDateTime: '',
+  }
   saveDataForServerErrors: any;
   saveDataForRRDisposalHours: any;
   saveDataForRRGIS: any;
@@ -295,6 +304,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogReq, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.wrmmserr },
+    { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
     { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.wrrptsexmkarkardDaily },
     { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
