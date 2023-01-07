@@ -1,41 +1,39 @@
 <main class="main">
-    <section [hidden]="closeTabService.saveDataForUserKarkardSummaryReq.isCollapsed">
-        <form #form="ngForm" (ngSubmit)="verification()">
-            <section class="content">
-                <div class="input_2">
-                    <div class="_key">ناحیه</div>
-                    <p-dropdown name="zones" [options]="zoneDictionary"
-                        [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId" placeholder="انتخاب مورد"
-                        [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true"
-                        (onChange)="getFragmentByZone()">
-                    </p-dropdown>
-                </div>
+    <form #form="ngForm" (ngSubmit)="verification()">
+        <section class="content">
+            <div class="input_2">
+                <div class="_key">ناحیه</div>
+                <p-dropdown name="zones" [options]="zoneDictionary"
+                    [(ngModel)]="closeTabService.saveDataForUserKarkardSummaryReq.zoneId" placeholder="انتخاب مورد"
+                    [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                </p-dropdown>
+            </div>
+            <div class="input_2">
                 <div class="_key">از</div>
                 <div class="_value">
-                    <app-date-jalali name="fromDate"
-                        (dateJalEvent)="trackingManagerService.receiveFromDateJalali(closeTabService.ENReadingReports.karkardAllStates, $event)"
+                    <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
                         [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.fromDate">
                     </app-date-jalali>
                 </div>
-
+            </div>
+            <div class="input_2">
                 <div class="_key">تا</div>
                 <div class="_value">
-                    <app-date-jalali name="toDate"
-                        (dateJalEvent)="trackingManagerService.receiveToDateJalali(closeTabService.ENReadingReports.karkardAllStates, $event)"
+                    <app-date-jalali name="toDate" (dateJalEvent)="receiveToDateJalali($event)"
                         [dateObject]="closeTabService.saveDataForUserKarkardSummaryReq.toDate">
                     </app-date-jalali>
                 </div>
+            </div>
 
-                <button type="submit" class="btn_1">
-                    مشاهده لیست
-                    <i class="pi pi-list"></i>
-                </button>
+            <button type="submit" class="btn_1">
+                مشاهده لیست
+                <i class="pi pi-list"></i>
+            </button>
 
-            </section>
+        </section>
 
 
-        </form>
-    </section>
+    </form>
 
     <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
         [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"

@@ -34,13 +34,14 @@ export class UserKarkardSummaryComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForUserKarkardSummary = null;
+      this.closeTabService.saveDataForUserKarkardSummaryTwo = null;
     }
     if (this.closeTabService.saveDataForUserKarkardSummary) {
       this.dataSource = this.closeTabService.saveDataForUserKarkardSummary;
       this._selectCols = this.closeTabService.saveDataForUserKarkardSummaryTwo;
       this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
     }
-  
+
     this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
   }
   insertSelectedColumns = () => {
@@ -68,7 +69,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
       { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },
     ]
     for (let index = 0; index < data[0].trackingStages.length; index++) {
-      c.push({ field: 'c' + index, header: data[0].trackingStages[index].counterStateTitle, isSelected: true });
+      c.push({ field: 'c' + index, header: data[0].trackingStages[index].title, isSelected: true });
     }
     return c;
   }
@@ -80,7 +81,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
       {
         zoneTitle: data[index].zoneTitle,
         userDisplayName: data[index].userDisplayName,
-        overalCount: data[index].overalCount,        
+        overalCount: data[index].overalCount,
       };
       for (let j = 0; j < data[index].trackingStages.length; j++) {
         a['c' + j] = data[index].trackingStages[j].count
@@ -98,6 +99,14 @@ export class UserKarkardSummaryComponent extends FactoryONE {
 
     this.closeTabService.saveDataForUserKarkardSummary = this.dataSource;
   }
+  receiveFromDateJalali = ($event: string) => {
+    this.closeTabService.saveDataForUserKarkardSummaryReq.fromDate = $event;
+  }
+  receiveToDateJalali = ($event: string) => {
+    this.closeTabService.saveDataForUserKarkardSummaryReq.toDate = $event;
+  }
+
+
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false
     this[variableName].forEach(old => {
