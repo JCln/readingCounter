@@ -63,6 +63,13 @@ export class CloseTabService {
   saveDataForTrackReading: any;
   saveDataForUserKarkard: any;
   saveDataForTrackOffloaded: any;
+  saveDataForUserKarkardSummaryReq = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+  };
+  saveDataForUserKarkardSummary: any;
+  saveDataForUserKarkardSummaryTwo: any;
   saveDataForTrackOffloadedGroup: any;
   saveDataForKarkardAllStates: any;
   saveDataForKarkardAllStatesTWO: any;
@@ -306,6 +313,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.wrmmserr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
+    { id: 2, req:ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, url: EN_Routes.userKarkardSummary },
     { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.wrrptsexmkarkardDaily },
     { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },

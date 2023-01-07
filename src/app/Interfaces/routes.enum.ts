@@ -110,6 +110,7 @@ export enum EN_Routes {
     'wrmrformula' = '/wr/m/r/formula/',
     'wrmal' = '/wr/m/al/',
     'wrmuedit' = '/wr/mu/edit',
+    'userKarkardSummary' = '/wr/mu/userSummary',
     'wrmtrackoffloadedoffloadMfy' = '/wr/m/track/offloaded/offloadMfy',
     'wrmtrack' = '/wr/m/track',
     'wrmuallloggins' = '/wr/mu/all/loggins',

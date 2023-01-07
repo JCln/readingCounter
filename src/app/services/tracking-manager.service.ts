@@ -130,6 +130,13 @@ export class TrackingManagerService {
       })
     })
   }
+  postBody = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise(resolve => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
+        resolve(res);
+      })
+    });
+  }
   migrateOrRemoveTask = (method: ENInterfaces, trackNumber: string, desc: string): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBODY(method, { trackingId: trackNumber, description: desc }).toPromise().then((res: IResponses) => {
@@ -400,6 +407,21 @@ export class TrackingManagerService {
   setGetRanges = (dataSource: IOffLoadPerDay) => {
     dataSource.overalDuration = parseFloat(MathS.getRange(dataSource.overalDuration));
     dataSource.overalDistance = parseFloat(MathS.getRange(dataSource.overalDistance));
+  }
+  userKarkardValidation = (dataSource: object): boolean => {
+    if (MathS.isNull(dataSource['zoneId'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource['fromDate'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(dataSource['toDate'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+    return true;
   }
 
 }

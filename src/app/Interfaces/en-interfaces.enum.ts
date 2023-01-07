@@ -116,6 +116,7 @@ export enum ENInterfaces {
     unlockUser = 'V1/User/Unlock',
     userACTIVATE = 'V1/User/Activate',
     userDEACTIVATE = 'V1/User/Deactivate',
+    postUserKarkardSummary = 'V1/Tracking/UserKarkardSummary',
 
     fragmentMASTERALL = 'V1/Fragment/Master/All',
     fragmentMASTERREMOVE = 'V1/Fragment/Master/Remove',

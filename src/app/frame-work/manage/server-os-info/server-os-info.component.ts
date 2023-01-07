@@ -13,8 +13,7 @@ export class ServerOsInfoComponent extends FactoryONE {
 
   constructor(
     public manageServerService: ManageServerService,
-    public closeTabService: CloseTabService,
-    // private dateJalaliService: DateJalaliService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
