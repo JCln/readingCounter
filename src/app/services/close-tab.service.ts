@@ -235,7 +235,7 @@ export class CloseTabService {
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, url: EN_Routes.wrtoolsrandomImg },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, url: EN_Routes.wrToolsResultDetails },
-    { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrrptstoolsexcelviewer },
+    { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrExcelviewer },
     { id: 1, value: ENEssentialsToSave.saveDataForWaterMark, url: EN_Routes.wrSettingsWaterMark },
     { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr },
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, url: EN_Routes.wrmlGeneralGModify },
@@ -314,7 +314,7 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
     { id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, url: EN_Routes.userKarkardSummary },
-    { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.wrrptsexmkarkardDaily },
+    { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.rptskarkardDaily },
     { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
     { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
