@@ -194,6 +194,12 @@ export class HelpWrapperService {
         title: 'کاربر خلاصه عملکرد',
         messageOne: 'امکان نمایش عملکرد کاربر براساس تعداد مطابق با عملیات کارتابل وجود دارد. مثلا ماموری در بازه زمانی دو روز دوبار بارگیری و دوبار بارگذاری کرده است.',
       }
+    else if (currentRoute === EN_Routes.wrSettingsWaterMark)
+      return {
+        title: 'واتر مارک',
+        messageOne: 'جزئیات هر تصویری که بر روی آن قرار گرفته قابل ویرایش است',
+        messageTwo: 'توجه نمایید که فاصله از چپ و بالا بطور تقریبی نمایش داده میشود',
+      }
   }
   /* DYNAMIC ROUTES */
   private similarIncludeRoute = (currentRoute: string): IHelpWrapper => {
@@ -264,13 +270,23 @@ export class HelpWrapperService {
       return {
         title: 'همه وضعیت های قرائت شده',
         messageOne: 'گزارشی از کلیه وضعیت های قابل ثبت توسط مامور را ارائه میکند. انتخاب نوبتی اختیاری است.',
-      }    
+      }
     else if (currentRoute === EN_Routes.serverOSInfo)
       return {
         title: 'اطلاعات سرور در حال استفاده',
         messageOne: 'زمان فعالیت: از آخرین زمانی که خاموش یا ریست شده است تا کنون محاسبه میشود',
         messageTwo: 'زمان: زمان فعلی سرور است'
-      }    
+      }
+    else if (currentRoute === EN_Routes.downloadAI)
+      return {
+        title: 'دانلود روزانه',
+        messageOne: 'دانلود کل تصاویر گرفته شده در یک روز',
+      }
+    else if (currentRoute === EN_Routes.uploadSingle)
+      return {
+        title: 'آپلود تکی',
+        messageOne: 'برای اضافه کردن تصویر به شماره اشتراک قابل استفاده است'
+      }
     else if (currentRoute.includes(EN_Routes.wrrptsexmdetails)
       || currentRoute.includes(EN_Routes.wrrptsmamtrv)
       || currentRoute.includes(EN_Routes.wrrptsmamtrvch)

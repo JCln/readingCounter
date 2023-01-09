@@ -90,6 +90,8 @@ export enum EN_Routes {
     'wrrptsmamgis' = '/wr/rpts/mam/gis',
     'wrmtrackoffloadedoffloadMfy/' = '/wr/m/track/offloaded/offloadMfy/',
     'wrmlall' = 'wr/m/l/all',
+    'downloadAI' = 'wr/tools/downloadAI',
+    'uploadSingle' = 'wr/tools/uploadSingle',
     'wrmtrackwoui/' = '/wr/m/track/woui/',
     'wrmtrackwoui' = '/wr/m/track/woui',
     'wr;trackNumber=' = '/wr;trackNumber=',
