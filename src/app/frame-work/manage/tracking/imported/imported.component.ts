@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IEditTracking, ITracking } from 'interfaces/itrackings';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -17,13 +16,11 @@ import { ImportListDgComponent } from './import-list-dg/import-list-dg.component
   styleUrls: ['./imported.component.scss']
 })
 export class ImportedComponent extends FactoryONE {
-  dataSource: ITracking[] = [];
-  filterZoneDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
 
   constructor(
 
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     private dialogService: DialogService
   ) {
@@ -35,13 +32,8 @@ export class ImportedComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTrackImported) {
-      this.dataSource = this.closeTabService.saveDataForTrackImported;
-    }
-    else {
-      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingIMPORTED);
-      this.filterZoneDictionary = await this.trackingManagerService.getZoneDictionary();
-      this.closeTabService.saveDataForTrackImported = this.dataSource;
+    if (!this.closeTabService.saveDataForTrackImported) {
+      this.closeTabService.saveDataForTrackImported = await this.trackingManagerService.getDataSource(ENInterfaces.trackingIMPORTED);
     }
   }
   onRowEditInit(product: any) {
@@ -70,7 +62,6 @@ export class ImportedComponent extends FactoryONE {
         this.onRowEditSave(res);
     });
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   firstConfirmDialog = async (rowDataAndIndex: object) => {
     const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_deleteRoute, true, true);
     if (a) {

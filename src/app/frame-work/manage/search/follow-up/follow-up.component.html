@@ -53,7 +53,8 @@
 
 <p-table *ngIf="!closeTabService.saveDataForFollowUpReq.canShowGraph && dataSource" sortField="insertDateJalali"
     [columns]="_defColumns" [value]="changeHsty" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    editMode="row" dataKey="id" [resizableColumns]="true" [reorderableColumns]="true">
+    editMode="row" dataKey="id" [resizableColumns]="trackingManagerService.getLocalResizable()"
+    [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
 
     <ng-template pTemplate="caption">
         <th>

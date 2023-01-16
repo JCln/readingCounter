@@ -18,7 +18,8 @@
     [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     [sortField]="closeTabService.offloadedGroupReq._selectedAggregate" stateStorage="session" stateKey="offloaded-group"
     sortMode="single" (onSort)="onSort()" customSort="true" (sortFunction)="trackingManagerService.customSort($event)"
-    [resizableColumns]="true" [reorderableColumns]="true">
+    [resizableColumns]="trackingManagerService.getLocalResizable()"
+    [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" name="selectOptions" optionLabel="header"
@@ -39,7 +40,8 @@
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th pResizableColumn pReorderableColumn style="width: 2.5rem" *ngFor="let item of [1,2,3,4]"></th>
+            <th pResizableColumn pReorderableColumn style="width: 2.5rem"
+                *ngFor="let item of trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"></th>
         </tr>
         <tr>
             <th pResizableColumn pReorderableColumn *ngFor="let col of columns">
@@ -47,7 +49,8 @@
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th pResizableColumn pReorderableColumn style="width: 2.5rem" *ngFor="let item of [1,2,3,4]"></th>
+            <th pResizableColumn pReorderableColumn style="width: 2.5rem"
+                *ngFor="let item of trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"></th>
         </tr>
 
     </ng-template>
@@ -76,7 +79,7 @@
                     <div class="tooltip_text_right">اصلاح کلی لیست(دسته‌ای)</div>
                 </i>
             </td>
-            <td (click)="backToReading(dataSource)">
+            <td *ngIf="!trackingManagerService.denyTracking()" (click)="backToReading(dataSource)">
                 <span class="ui-column-title">بازگشت به درحال قرائت</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به درحال قرائت</div>

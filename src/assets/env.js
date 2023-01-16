@@ -45,6 +45,8 @@
     ];
     window.__env.hasCanclableSpinner = false;
     window.__env.timeout = 18000;
+    window.__env.reSizableTable = false;
+    window.__env.reOrderableTable = false;
 
     // Whether or not to enable debug mode
     // Setting this to false will disable console output

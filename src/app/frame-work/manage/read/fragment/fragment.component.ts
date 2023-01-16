@@ -7,6 +7,7 @@ import { IFragmentMaster } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -35,13 +36,20 @@ export class FragmentComponent extends FactoryONE {
   constructor(
     private closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private profileService: ProfileService
   ) {
     super();
   }
 
   testChangedValue() {
     this.newRowLimit = 2;
+  }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
   }
   nullSavedSource = () => this.closeTabService.saveDataForFragmentNOB = null;
   classWrapper = async (canRefresh?: boolean) => {

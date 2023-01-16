@@ -26,7 +26,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
   constructor(
     public trackingManagerService: TrackingManagerService,
     public closeTabService: CloseTabService,
-    private columnManager: ColumnManager
+    private columnManager: ColumnManager,
   ) {
     super();
   }
@@ -105,8 +105,6 @@ export class UserKarkardSummaryComponent extends FactoryONE {
   receiveToDateJalali = ($event: string) => {
     this.closeTabService.saveDataForUserKarkardSummaryReq.toDate = $event;
   }
-
-
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false
     this[variableName].forEach(old => {

@@ -6,6 +6,7 @@ export enum EN_Routes {
     'wrmsfwu' = '/wr/m/s/fwu',
     'wrmsfwu/' = '/wr/m/s/fwu/',
     'wrofflinetxtout' = '/wr/offline/txtout',
+    'offlineLoad' = '/wr/offline/load',
     'wrdb' = '/wr/db',
     'wrrptsmamdhchart' = '/wr/rpts/mam/dh/chart',
     'wrrptsmamkarkardchart' = '/wr/rpts/mam/karkard/chart',

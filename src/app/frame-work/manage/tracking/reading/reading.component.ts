@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ITracking } from 'interfaces/itrackings';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -13,11 +12,8 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./reading.component.scss']
 })
 export class ReadingComponent extends FactoryONE {
-
-  dataSource: ITracking[] = [];
-
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public browserStorageService: BrowserStorageService
   ) {
@@ -29,12 +25,8 @@ export class ReadingComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTrackReading) {
-      this.dataSource = this.closeTabService.saveDataForTrackReading;
-    }
-    else {
-      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingREADING);
-      this.closeTabService.saveDataForTrackReading = this.dataSource;
+    if (!this.closeTabService.saveDataForTrackReading) {
+      this.closeTabService.saveDataForTrackReading = await this.trackingManagerService.getDataSource(ENInterfaces.trackingREADING);
     }
   }
   // refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));

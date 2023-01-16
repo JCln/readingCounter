@@ -150,7 +150,8 @@ export class HelpWrapperService {
       return {
         title: 'تنظیمات کاربری',
         messageOne: 'مشخصات کاربری شما در این قسمت قابل مشاهده است، درصورت نیاز به تغییر گذرواژه با وارد کردن گذرواژه فعلی و گذرواژه مدنظر نسبت به تغییر آن اقدام نمایید.',
-        messageTwo: 'توجه شود که اگر گذرواژه شما قبلا بازنشانی شده باشد، گذرواژه،شماره موبایل شما خواهد بود. ',
+        messageTwo: 'توجه شود که اگر گذرواژه شما قبلا بازنشانی شده باشد، گذرواژه، شماره موبایل شما خواهد بود. ',
+        messageThree: 'سایر تنظیمات جهت ذخیره تغییرات کاربران در مراجعات بعدی به برنامه درنظر گرفته شده است',
       }
     else if (currentRoute === EN_Routes.wrmtrackreading)
       return {
@@ -187,7 +188,7 @@ export class HelpWrapperService {
     else if (currentRoute === EN_Routes.wrpolicies)
       return {
         title: 'تنظیمات امنیتی',
-        messageOne: 'موارد امنیتی مانند حداقل تعداد گذرواژه را تنظیم کنید.',
+        messageOne: 'موارد امنیتی مانند حداقل تعداد گذرواژه را تنظیم نمایید.',
       }
     else if (currentRoute === EN_Routes.userKarkardSummary)
       return {
@@ -265,6 +266,16 @@ export class HelpWrapperService {
       return {
         title: 'گزارش لیست مامور',
         messageOne: 'اشتراک های قرائت شده را با جزئیات نمایش میدهد. تیک نمایش همه برای نمایش لیست پس از قرائت است و توسط مامور بارگذاری انجام شده است.',
+      }
+    else if (currentRoute === EN_Routes.wrofflinetxtout)
+      return {
+        title: 'بارگذاری اطلاعات مامور',
+        messageOne: 'کلیه اطلاعاتی که توسط مامور ثبت شده و در فرآیند ارسال با مشکل مواجه شده ارسال نمایید(لیست میتواند تصویر، صوت، غیرمجاز یا هر داده دیگری نیز باشد)',
+      }
+    else if (currentRoute === EN_Routes.offlineLoad)
+      return {
+        title: 'بارگیری اطلاعات مامور',
+        messageOne: 'ماموری که در دریافت لیست صادر شده با مشکل مواجه شده باشد، فایلی که در این قسمت دریافت میکند را به گوشی خود منتقل و فرایند قرائت را انجام میدهد',
       }
     else if (currentRoute === EN_Routes.wrrptsmamKarkardAllStates)
       return {

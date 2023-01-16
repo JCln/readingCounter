@@ -15,10 +15,9 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./finished.component.scss']
 })
 export class FinishedComponent extends FactoryONE {
-  dataSource: ITracking[] = [];
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,
     private envService: EnvService
@@ -26,7 +25,7 @@ export class FinishedComponent extends FactoryONE {
     super();
   }
 
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForTrackFinished = this.closeTabService.saveDataForTrackFinished.slice(0, index).concat(this.closeTabService.saveDataForTrackFinished.slice(index + 1));
   private rowToOffloaded = async (row: string, desc: string, rowIndex: number) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row, desc);
     this.refetchTable(rowIndex);
@@ -37,12 +36,8 @@ export class FinishedComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTrackFinished) {
-      this.dataSource = this.closeTabService.saveDataForTrackFinished;
-    }
-    else {
-      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingFINISHED);
-      this.closeTabService.saveDataForTrackFinished = this.dataSource;
+    if (!this.closeTabService.saveDataForTrackFinished) {
+      this.closeTabService.saveDataForTrackFinished = await this.trackingManagerService.getDataSource(ENInterfaces.trackingFINISHED);
     }
   }
   backToImportedConfirmDialog = async (rowDataAndIndex: object) => {

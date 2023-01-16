@@ -251,6 +251,12 @@ export class ReadingReportManagerService {
       return this.searchInOrderTo;
     }
   }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
+  }
   getApiUrl = (): string => {
     return this.envService.API_URL;
   }

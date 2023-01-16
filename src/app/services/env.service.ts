@@ -16,6 +16,8 @@ export class EnvService implements IENV {
   getDeleteDictionary = this.temp.getDeleteDictionary;
   hasCanclableSpinner = this.temp.hasCanclableSpinner;
   timeout = this.temp.timeout;
+  reSizableTable = this.temp.reSizableTable;
+  reOrderableTable = this.temp.reOrderableTable;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

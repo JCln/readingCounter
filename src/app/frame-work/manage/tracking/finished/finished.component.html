@@ -1,9 +1,10 @@
 <app-prime-table     
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForTrackFinished" 
     [_outputFileName]="'finished'"
     [_checkUpName]="'finished'"
     [_sortField]="'insertDateJalali'"
     [_numberOfExtraColumns]="[1,2]"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1]: [1,2]"
     [_calculableSUM]=true
     [_selectedColumnsToRemember]="'selectedTrackFinished'"
     [_sessionName]="'finished-session'"
