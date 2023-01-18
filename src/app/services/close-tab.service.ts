@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
+import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
 import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
-import { IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
+import { IFileExcelReq, IImportErrors, IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import { IServerOSInfo } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig } from 'interfaces/isettings';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
-
-import { EN_Routes } from '../interfaces/routes.enum';
-import { IFileExcelReq } from './../interfaces/import-data';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +24,10 @@ export class CloseTabService {
   saveDataForTabsare3Formula: any;
   // 
   // save data when route change 
-  saveDataForAppLevel1: any;
-  saveDataForAppLevel2: any;
-  saveDataForAppLevel3: any;
-  saveDataForAppLevel4: any;
+  saveDataForAppLevel1: IAuthLevels[] = [];
+  saveDataForAppLevel2: IAuthLevel2[] = [];
+  saveDataForAppLevel3: IAuthLevel3[] = [];
+  saveDataForAppLevel4: IAuthLevel4[] = [];
 
   saveDataForCounterState: any;
   saveDataForImageAttribution: any;
@@ -66,7 +65,7 @@ export class CloseTabService {
   saveDataForUserKarkardSummaryReq = {
     zoneId: null,
     fromDate: '',
-    toDate: ''    
+    toDate: ''
   };
   saveDataForUserKarkardSummary: any;
   saveDataForUserKarkardSummaryTwo: any;
@@ -89,7 +88,7 @@ export class CloseTabService {
   // import dynamic
   saveDataForAutomaticImport: any;
   saveDataForImportDynamic: any;
-  saveDataForImportErrors: any;
+  saveDataForImportErrors: IImportErrors[] = [];
   saveDataForImportErrorsByTrackNumber: any;
   saveDataForImportErrorsByTrackNumberReq = {
     trackNumber: null,
