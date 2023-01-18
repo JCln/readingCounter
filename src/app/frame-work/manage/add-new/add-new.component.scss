@@ -19,6 +19,13 @@
   width: 50%;
   max-width: 8rem;
   font-size: var(--font_s);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--primary_1);
+    background: var(--secondary_5);    
+  }
 }
 
 h2 {

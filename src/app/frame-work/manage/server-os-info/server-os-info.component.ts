@@ -18,13 +18,13 @@ export class ServerOsInfoComponent extends FactoryONE {
     super();
   }
 
+  connectToServer = async () => {
+    this.closeTabService.saveDataForOSInfo = await this.manageServerService.GETDataServer(ENInterfaces.serverManagerOSInfo);
+  }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.closeTabService.saveDataForOSInfo.cpuCoreCount) {
       this.connectToServer();
     }
-  }
-  connectToServer = async () => {
-    this.closeTabService.saveDataForOSInfo = await this.manageServerService.GETDataServer(ENInterfaces.serverManagerOSInfo);
   }
 
 }
