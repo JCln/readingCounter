@@ -84,4 +84,24 @@
         </div>
     </section>
 
+    <section>
+        <h1 class="title">امکان تغییر اندازه ستونها در جدول</h1>
+        <div class="content">
+            <p-selectButton [options]="stateOptionsResizableTable"
+                [(ngModel)]="profileService.showStateVals.reSizableTable" optionLabel="label" optionValue="value"
+                (onChange)="setResizableTable(profileService.showStateVals.reSizableTable)">
+            </p-selectButton>
+        </div>
+    </section>
+
+    <section>
+        <h1 class="title">امکان جابجایی ستونها در جدول</h1>
+        <div class="content">
+            <p-selectButton [options]="stateOptionsReordersableTable"
+                [(ngModel)]="profileService.showStateVals.reOrderableTable" optionLabel="label" optionValue="value"
+                (onChange)="setReOrderableTable(profileService.showStateVals.reOrderableTable)">
+            </p-selectButton>
+        </div>
+    </section>
+
 </div>

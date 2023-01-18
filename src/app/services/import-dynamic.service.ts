@@ -699,5 +699,11 @@ export class ImportDynamicService {
   snackMessage = (message: EN_messages) => {
     this.utilsService.snackBarMessageWarn(message);
   }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
+  }
 
 }

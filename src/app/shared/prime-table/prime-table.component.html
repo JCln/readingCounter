@@ -3,7 +3,7 @@
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]=_sortOrder
     [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
-    (onFilter)="filterEventTable($event)" [resizableColumns]="true" [reorderableColumns]="true">
+    (onFilter)="filterEventTable($event)" [resizableColumns]=_reSizebleTable [reorderableColumns]=_reOrderableTable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -145,13 +145,13 @@
                     </ng-template>
                 </ng-template>
             </td>
-            <td *ngIf="_outputFileName== 'reading'" (click)="forceOffload(dataSource.id, ri)">
+            <td *ngIf="_outputFileName== 'reading' && !denyTracking()" (click)="forceOffload(dataSource.id, ri)">
                 <span class="ui-column-title">اتمام قرائت</span>
                 <i class="tooltip p_icons pi pi-ban _important">
                     <div class="tooltip_text">اتمام قرائت</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'reading'" (click)="backToImportedConfirmDialog(dataSource.id, ri)">
+            <td *ngIf="_outputFileName== 'reading' && !denyTracking()" (click)="backToImportedConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">بازگشت به صادر شده</span>
                 <i class="tooltip p_icons pi pi-fast-backward">
                     <div class="tooltip_text">بازگشت به صادر شده</div>
@@ -182,7 +182,7 @@
                     <div class="tooltip_text_right">مشاهده لیست قرائت</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'loaded'" (click)="backToImportedConfirmDialog(dataSource.id, ri)">
+            <td *ngIf="_outputFileName== 'loaded' && !denyTracking()" (click)="backToImportedConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">بازگشت به صادر شده</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به صادر شده</div>
@@ -194,7 +194,7 @@
                     <div class="tooltip_text">{{_tooltipText}}</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName == 'imported'" (click)="firstConfirmDialog(dataSource.id, ri)">
+            <td *ngIf="_outputFileName == 'imported' && !denyTracking()" (click)="firstConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">حذف مسیر</span>
                 <i class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مسیر</div>
@@ -243,7 +243,7 @@
             <td
                 *ngIf="!dataSource.hasMap && (_checkUpName == 'lastStates' || _checkUpName == 'desc' || _checkUpName == 'simpleSearch')">
             </td>
-            <td *ngIf="_outputFileName == 'finished'" (click)="backToImportedConfirmDialog(dataSource.id,ri)">
+            <td *ngIf="_outputFileName == 'finished' && !denyTracking()" (click)="backToImportedConfirmDialog(dataSource.id,ri)">
                 <span class="ui-column-title">بازگشت به بارگذاری شده</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text">بازگشت به بارگذاری شده</div>
@@ -267,7 +267,7 @@
                     <div class="tooltip_text_right">اصلاح کلی لیست</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName == 'offloaded'" (click)="backToReading(dataSource.id,ri)">
+            <td *ngIf="_outputFileName == 'offloaded' && !denyTracking()" (click)="backToReading(dataSource.id,ri)">
                 <span class="ui-column-title">بازگشت به درحال قرائت</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به درحال قرائت</div>

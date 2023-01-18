@@ -1,9 +1,9 @@
 <app-prime-table *ngIf="route.children.length === 0"     
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForTrackOffloaded" 
     [_outputFileName]="'offloaded'"
     [_checkUpName]="'offloaded'"
     [_sortField]="'insertDateJalali'"    
-    [_numberOfExtraColumns]="[1, 2, 3 , 4, 5]"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3,4]: [1,2,3,4,5]"
     [_calculableSUM]=true
     [_selectedColumnsToRemember]="'selectedTrackOffloaded'"
     [_sessionName]="'offloaded-session'"

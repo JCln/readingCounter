@@ -306,6 +306,8 @@ export enum ENLocalStorageNames {
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
     fontStyle = 'fontStyle',
+    reSizableTable = 'reSizableTable',
+    reOrderableTable = 'reOrderableTable',
 }
 export enum ENRandomNumbers {
     zero = 0,

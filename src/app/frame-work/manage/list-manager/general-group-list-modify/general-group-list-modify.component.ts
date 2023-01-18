@@ -10,6 +10,7 @@ import { BrowserStorageService } from 'services/browser-storage.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';
@@ -64,7 +65,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     public outputManagerService: OutputManagerService,
     public columnManager: ColumnManager,
     public browserStorageService: BrowserStorageService,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public profileService: ProfileService
   ) {
     super(dialogService, listManagerService);
   }
@@ -384,6 +386,12 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     }
     else
       this.utilsService.snackBarMessageWarn(EN_messages.done);
+  }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
   }
 
 }

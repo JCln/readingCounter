@@ -50,16 +50,18 @@ export class LoginComponent {
     this.userData.username = Converter.persianToEngNumbers(this.userData.username);
   }
   logging = () => {
-    if (!this.browserSupportService.isValidBrowserVersion()) {
+    if (this.browserSupportService.isValidBrowserVersion()) {
+      this.convertNumbers();
+      if (MathS.isNull(this.userData.password) || MathS.isNull(this.userData.username)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
+      }
+      else {
+        this.authService.logging(this.userData);
+      }
+    }
+    else {
       this.utilsService.snackBarMessageWarn(EN_messages.browserSupport_alarm);
-      return;
     }
-    this.convertNumbers();
-    if (MathS.isNull(this.userData.password) || MathS.isNull(this.userData.username)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
-      return;
-    }
-    this.authService.logging(this.userData);
   }
   getVersionInfos = () => {
     this.infoVersionItems = infoVersion.getInfoItems();

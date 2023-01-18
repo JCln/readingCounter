@@ -9,6 +9,8 @@ import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'inter
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ProfileService } from 'services/profile.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';
@@ -84,7 +86,9 @@ export class TrackingManagerService {
     private envService: EnvService,
     private jwtService: JwtService,
     private columnManager: ColumnManager,
-    private pageSignsService: PageSignsService
+    private pageSignsService: PageSignsService,
+    private profileService: ProfileService,
+    private authService: AuthService
   ) { }
 
   firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
@@ -296,6 +300,10 @@ export class TrackingManagerService {
       return true;
     return false;
   }
+  denyTracking = (): boolean => {
+    const jwtRole = this.authService.getAuthUser();
+    return jwtRole.roles.toString().includes('denytracking') ? true : false;
+  }
   checkVertificationDBF = (dataSource: IOutputManager): boolean => {
     if (MathS.isNull(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
@@ -422,6 +430,12 @@ export class TrackingManagerService {
       return false;
     }
     return true;
+  }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
   }
 
 }

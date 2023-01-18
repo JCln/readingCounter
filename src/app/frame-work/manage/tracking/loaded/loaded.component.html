@@ -1,10 +1,11 @@
 <app-prime-table     
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForTrackLoaded" 
     [_outputFileName]="'loaded'"
     [_checkUpName]="'loaded'"
     [_sortField]="'insertDateJalali'"
     [_calculableSUM]=true
     [_numberOfExtraColumns]="[1]"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? []: [1]"
     [_selectedColumnsToRemember]="'selectedTrackLoaded'"
     [_sessionName]="'loaded-session'"
     (refreshedTable)="refreshTable()"

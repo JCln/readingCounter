@@ -37,7 +37,7 @@ export class FollowUpComponent extends FactoryONE {
 
 
   constructor(
-    private trackingManagerService: TrackingManagerService,
+    public trackingManagerService: TrackingManagerService,
     public closeTabService: CloseTabService,
     private authService: AuthService,
     private followUpService: FollowUpService

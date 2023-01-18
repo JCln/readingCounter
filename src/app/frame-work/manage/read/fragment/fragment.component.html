@@ -2,8 +2,8 @@
     <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
         [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="[10,25,50]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" #dt
-        dataKey="id" editMode="row" stateStorage="session" stateKey="fragment-session" [resizableColumns]="true"
-        [reorderableColumns]="true">
+        dataKey="id" editMode="row" stateStorage="session" stateKey="fragment-session"
+        [resizableColumns]="getLocalResizable()" [reorderableColumns]="getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
             <i></i>
