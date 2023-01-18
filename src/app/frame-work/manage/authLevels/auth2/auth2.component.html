@@ -1,5 +1,5 @@
 <app-prime-table-editable     
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForAppLevel2" 
     [_checkUpName]="'auth2'"
     [_outputFileName]="'auth2'"
     [_dictionaryName]="'authLevel1Id'"
@@ -10,7 +10,7 @@
     [_sessionName]="'auth2-session'"
     (refreshedTable)="refreshTable()"
     (openedAddDialog)="openAddDialog()"
-    (dropDownChanges)="dataSource['authLevel1Id']"
+    (dropDownChanges)="closeTabService.saveDataForAppLevel2['authLevel1Id']"
     (removedRow)="removeRow($event)"
     (onRowEditedCancel)="onRowEditCancel()"
     (onRowEditedInit)="onRowEditInit($event)"

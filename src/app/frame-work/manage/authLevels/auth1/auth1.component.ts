@@ -20,7 +20,7 @@ export class Auth1Component extends FactoryONE {
 
   constructor(
     private dialog: MatDialog,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private authsManagerService: AuthsManagerService
   ) {
     super();

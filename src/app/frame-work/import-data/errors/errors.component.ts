@@ -12,7 +12,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class ErrorsComponent extends FactoryONE {
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private importDynamicService: ImportDynamicService,
   ) {
     super();

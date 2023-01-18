@@ -24,10 +24,10 @@ export class CloseTabService {
   saveDataForTabsare3Formula: any;
   // 
   // save data when route change 
-  saveDataForAppLevel1: IAuthLevels[] = [];
-  saveDataForAppLevel2: IAuthLevel2[] = [];
-  saveDataForAppLevel3: IAuthLevel3[] = [];
-  saveDataForAppLevel4: IAuthLevel4[] = [];
+  saveDataForAppLevel1: IAuthLevels[];
+  saveDataForAppLevel2: IAuthLevel2[];
+  saveDataForAppLevel3: IAuthLevel3[];
+  saveDataForAppLevel4: IAuthLevel4[];
 
   saveDataForCounterState: any;
   saveDataForImageAttribution: any;
@@ -88,7 +88,7 @@ export class CloseTabService {
   // import dynamic
   saveDataForAutomaticImport: any;
   saveDataForImportDynamic: any;
-  saveDataForImportErrors: IImportErrors[] = [];
+  saveDataForImportErrors: IImportErrors[];
   saveDataForImportErrorsByTrackNumber: any;
   saveDataForImportErrorsByTrackNumberReq = {
     trackNumber: null,
