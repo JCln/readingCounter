@@ -169,19 +169,12 @@ export interface ISnackBarSignal {
     duration: ENSnackBarTimes;
     backColor?: ENSnackBarColors;
 }
-
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
     Connecting = 'درحال اتصال به سامانه «لحظه»',
     Disconnecting = 'درحال قطع ارتباط از سامانه «لحظه»',
     Reconnecting = 'درحال اتصال به سامانه «لحظه»',
     Connected = 'متصل به سامانه «لحظه»'
-}
-export enum ENColorText {
-    blue = 'آبی',
-    green = 'سبز',
-    orange = 'نارنجی',
-    red = 'قرمز',
 }
 export enum ENSnackBarColors {
     warn = 'snack_warn',
@@ -238,6 +231,25 @@ export enum ENBrowserStatus {
     warn = 400,
     alarm = 500
 }
+export enum ENRandomNumbers {
+    zero = 0,
+    one = 1,
+    three = 3,
+    four = 4,
+    five = 5,
+    eight = 8,
+    ten = 10,
+    eleven = 11,
+    fifteen = 15,
+    eighteen = 18,
+    twenty = 20,
+    thirdy = 30,
+    forthy = 40,
+    fifty = 50,
+    oneHundred = 100,
+    twoHundred = 200,
+}
+
 export const ENBrowserInfo = {
     Chrome: { title: 'Google Chrome', url: 'https://browser-update.org/fa/update-browser.html' },
     FireFox: { title: 'Mozilla FireFox', url: 'https://browser-update.org/fa/update-browser.html' },
@@ -308,24 +320,6 @@ export enum ENLocalStorageNames {
     fontStyle = 'fontStyle',
     reSizableTable = 'reSizableTable',
     reOrderableTable = 'reOrderableTable',
-}
-export enum ENRandomNumbers {
-    zero = 0,
-    one = 1,
-    three = 3,
-    four = 4,
-    five = 5,
-    eight = 8,
-    ten = 10,
-    eleven = 11,
-    fifteen = 15,
-    eighteen = 18,
-    twenty = 20,
-    thirdy = 30,
-    forthy = 40,
-    fifty = 50,
-    oneHundred = 100,
-    twoHundred = 200,
 }
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',

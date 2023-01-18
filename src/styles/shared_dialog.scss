@@ -47,7 +47,7 @@
 
 .mat-dialog-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .mat-checkbox {
@@ -71,19 +71,20 @@
   &:hover,
   &:focus,
   &:active {
+    background: var(--secondary_5);
     box-shadow: 0px 1px 0px 2px var(--secondary_5);
   }
 }
 
 ._custom {
-  background: var(--primary_4);
-  color: var(--secondary_1);
 
   &:hover,
   &:focus,
   &:active {
     color: var(--primary_1);
-    box-shadow: 0 1px 0 2px var(--primary_3);
+    background: var(--primary_2);
+
+    // box-shadow: 0 1px 0 2px var(--primary_3);
   }
 }
 

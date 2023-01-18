@@ -3,12 +3,11 @@ import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.j
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENLocalStorageNames } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { EnvService } from 'services/env.service';
 import { ListManagerService } from 'services/list-manager.service';
 
-import { ENRandomNumbers } from './../interfaces/ioverall-config';
 
 declare let L;
 

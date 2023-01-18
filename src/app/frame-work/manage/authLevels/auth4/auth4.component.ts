@@ -18,14 +18,12 @@ import { Auth4AddDgComponent } from './auth4-add-dg/auth4-add-dg.component';
 })
 export class Auth4Component extends FactoryONE {
 
-  dataSource: IAuthLevel4[] = [];
-
   authLevel3Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel4; } = {};
 
   constructor(
     private dialog: MatDialog,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
   ) {
     super();
@@ -51,18 +49,14 @@ export class Auth4Component extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForAppLevel4) {
-      this.dataSource = this.closeTabService.saveDataForAppLevel4;
+    if (!this.closeTabService.saveDataForAppLevel4) {
+      this.closeTabService.saveDataForAppLevel4 = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel4GET);
     }
-    else {
-      this.dataSource = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel4GET);
-      this.closeTabService.saveDataForAppLevel4 = this.dataSource;
-    }
-    this.authLevel3Dictionary = await this.authsManagerService.getAuthLevel3Dictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
+    this.authLevel3Dictionary = await this.authsManagerService.getAuthLevel3Dictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel4, this.authLevel3Dictionary, 'authLevel3Id');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel4 = this.closeTabService.saveDataForAppLevel4.slice(0, index).concat(this.closeTabService.saveDataForAppLevel4.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog();
     if (a) {
@@ -75,7 +69,7 @@ export class Auth4Component extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.authsManagerService.verification(dataSource)) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForAppLevel4[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].authLevel3Id !== 'object') {
@@ -87,10 +81,10 @@ export class Auth4Component extends FactoryONE {
       dataSource['dataSource'].authLevel3Id = dataSource['dataSource'].authLevel3Id['id'];
     }
     await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel4EDIT, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel4, this.authLevel3Dictionary, 'authLevel3Id');
   }
   onRowEditCancel() {
-    Converter.convertIdToTitle(this.dataSource, this.authLevel3Dictionary, 'authLevel3Id');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel4, this.authLevel3Dictionary, 'authLevel3Id');
   }
 
 }
