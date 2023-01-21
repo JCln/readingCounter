@@ -7,10 +7,19 @@ import { CloseTabService } from 'services/close-tab.service';
 
 import { EN_Routes } from '../interfaces/routes.enum';
 
+interface IAggregateInterface {
+  _selectedAggregate: string,
+  _canShowGroupBorder: boolean
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class InteractionService {
+  rowGroupMetadata = {};
+  _canShowGroupBorder: boolean = false;
+  _selectedAggregate = '';
+
   constructor(
     private closeTabService: CloseTabService,
     private router: Router
@@ -18,7 +27,14 @@ export class InteractionService {
 
   private latestReads = new Subject<any>();
   private netRequestSource = new BehaviorSubject<boolean>(false);
+  private selectedAggregate = new BehaviorSubject<IAggregateInterface>({ _selectedAggregate: '', _canShowGroupBorder: false });
 
+  setSelectedAgg(selectedAggregate: IAggregateInterface) {
+    this.selectedAggregate.next(selectedAggregate);
+  }
+  get getselectedAggregate(): Observable<IAggregateInterface> {
+    return this.selectedAggregate.asObservable();
+  }
 
   getNetRequestStatus$ = (): Observable<any> => {
     return this.netRequestSource.asObservable();

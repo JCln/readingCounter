@@ -23,6 +23,8 @@ export interface ITracking {
     counterReaderId: string,
     counterReaderName: string,
     stateTitle?: string,
+    fragmentMasterTitle: string,
+    fragmentDetailTitle: string,
     hasMap: boolean
 }
 export interface IEditTracking {

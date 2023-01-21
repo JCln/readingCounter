@@ -46,10 +46,10 @@ export class TrackingManagerService {
     return this.columnManager.columnSelectedMenus('importedListDetails');
   }
   getColumnOfflaodedGroup = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('offlaodedGroup');
+    return this.columnManager.columnSelectedMenus('offloadedGroup');
   }
-  getLMPerDayPositions = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('LMPerDayPositions');
+  getLMPerDayFollowUpPositions = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('LMPerDayFollowUpPositions');
   }
   getOffloadModifyType = (): OffloadModify[] => {
     return [

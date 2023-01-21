@@ -61,7 +61,8 @@ export class SearchService {
     zoneId: null,
     searchBy: 1,
     item: null,
-    similar: false
+    similar: false,
+    showAll: false
   }
   _searchSimpleReq: ISearchSimpleReq = {
     zoneId: null,
@@ -179,17 +180,13 @@ export class SearchService {
   }
   /*VALIDATION*/
   private validationNullMosh = (dataSource: ISearchMoshReq): boolean => {
-    if (dataSource.hasOwnProperty('searchBy')) {
-      if (MathS.isNull(dataSource.searchBy)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
-        return false;
-      }
+    if (MathS.isNull(dataSource.searchBy)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
+      return false;
     }
-    if (dataSource.hasOwnProperty('item')) {
-      if (MathS.isNull(dataSource.item)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
-        return false;
-      }
+    if (MathS.isNull(dataSource.item)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+      return false;
     }
     return true;
   }
@@ -282,11 +279,9 @@ export class SearchService {
     return true;
   }
   private validationNumbers = (object: ISearchMoshReq): boolean => {
-    if (object.hasOwnProperty('searchBy')) {
-      if (MathS.isNaN(object.searchBy)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
-        return false;
-      }
+    if (MathS.isNaN(object.searchBy)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
     }
     return true;
   }
@@ -304,10 +299,10 @@ export class SearchService {
     return this.validationSearchSimpleByPeriod(searchReq)
   }
   verificationMosh = (searchReq: ISearchMoshReq): boolean => {
-    searchReq.item = searchReq.item.trim();
-    console.log(searchReq);
-
-    return this.validationNullMosh(searchReq) && this.validationNumbers(searchReq)
+    if (this.validationNullMosh(searchReq)) {
+      searchReq.item = searchReq.item.trim();
+      return this.validationNumbers(searchReq);
+    }
   }
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
     searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);

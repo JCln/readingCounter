@@ -2,7 +2,8 @@ export interface ISearchMoshReq {
     zoneId: number,
     searchBy: number,
     item: string,
-    similar: boolean
+    similar: boolean,
+    showAll: boolean
 }
 export interface ISearchMoshReqDialog {
     zoneId: number,

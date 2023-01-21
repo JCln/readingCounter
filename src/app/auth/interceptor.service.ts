@@ -5,7 +5,6 @@ import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { InteractionService } from 'services/interaction.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { MathS } from '../classes/math-s';
@@ -21,7 +20,6 @@ export class InterceptorService implements HttpInterceptor {
   constructor(
     private jwtService: JwtService,
     private authService: AuthService,
-    private interactionService: InteractionService,
     private snackWrapperService: SnackWrapperService
   ) { }
 

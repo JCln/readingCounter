@@ -8,8 +8,6 @@ export class ColumnManager {
     _primeNGHeaderCheckbox: boolean = false;
     _generalGroupHeaderCheckbox: boolean = false;
 
-    _selectedAggregate = '';
-
     excelDynamic: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'description', header: 'توضیحات', isSelected: true, enableTooltip: true },
@@ -66,6 +64,8 @@ export class ColumnManager {
     ];
     reading: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
@@ -89,6 +89,8 @@ export class ColumnManager {
     ];
     finished: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
@@ -112,6 +114,8 @@ export class ColumnManager {
     ];
     loaded: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
@@ -135,6 +139,8 @@ export class ColumnManager {
     ];
     offloaded: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
@@ -158,6 +164,8 @@ export class ColumnManager {
     ];
     imported: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
@@ -181,6 +189,8 @@ export class ColumnManager {
     ];
     lastStates: IObjectIteratation[] = [
         { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
         { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
         { field: 'counterReaderName', header: 'مامور', isSelected: true },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
@@ -202,6 +212,30 @@ export class ColumnManager {
         { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
         { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
         // { field: 'hasMap', header: 'نقشه', isSelected: true, isBoolean: true }        
+    ];
+    offloadedGroup: IObjectIteratation[] = [
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
+        { field: 'fragmentMasterTitle', header: 'نام نوبتی', isSelected: false },
+        { field: 'fragmentDetailTitle', header: 'مسیر', isSelected: false },
+        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
+        { field: 'listNumber', header: 'ش لیست', isSelected: true },
+        { field: 'itemQuantity', header: 'تعداد', isSelected: true },
+        // { field: 'zoneId', header: 'ناحیه', isSelected: false },
+        { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
+        // { field: 'year', header: 'سال', isSelected: false },
+        { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
+        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
+        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
+        { field: 'fromDate', header: 'از', isSelected: false },
+        { field: 'toDate', header: 'تا', isSelected: false },
+        { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
+        { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isNumber: true },
+        { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
+        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
+        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
+        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ];
     // counterState: IObjectIteratation[] = [
     //     { field: 'moshtarakinId', header: 'کد مشترکین', isSelected: false, isNumber: true },
@@ -700,7 +734,7 @@ export class ColumnManager {
         [
             { field: 'counterReaderName', header: 'مامور', isSelected: false },
             { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
-            { field: 'billId', header: 'شناسه قبض', isSelected: false },            
+            { field: 'billId', header: 'شناسه قبض', isSelected: false },
             { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
             { field: 'trackNumber', header: 'ش پیگیری', isSelected: false },
             { field: 'radif', header: 'ش.پرونده', isSelected: false },
@@ -1073,7 +1107,7 @@ export class ColumnManager {
         { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
     ];
     // For Follow UP component
-    LMPerDayPositions: IObjectIteratation[] = [
+    LMPerDayFollowUpPositions: IObjectIteratation[] = [
         { field: 'counterReaders', header: 'مامور', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
         { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
         { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
@@ -1112,28 +1146,6 @@ export class ColumnManager {
         { field: 'manePercent', header: 'درصد مانع', isSelected: false, readonly: true },
         { field: 'xarabFaqedCount', header: 'تعداد فاقد/خراب', isSelected: false, readonly: true },
         { field: 'xarabFaqedPercent', header: 'درصد فاقد/خراب', isSelected: false, readonly: true }
-    ];
-    offlaodedGroup: IObjectIteratation[] = [
-        { field: 'zoneTitle', header: 'ناحیه', isSelected: true, isSelectOption: true },
-        { field: 'insertDateJalali', header: 'تاریخ', isSelected: true },
-        { field: 'counterReaderName', header: 'مامور', isSelected: true },
-        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
-        { field: 'listNumber', header: 'ش لیست', isSelected: true },
-        { field: 'itemQuantity', header: 'تعداد', isSelected: true },
-        // { field: 'zoneId', header: 'ناحیه', isSelected: false },
-        { field: 'isBazdid', header: 'بازدید', isSelected: false, isBoolean: true },
-        // { field: 'year', header: 'سال', isSelected: false },
-        { field: 'isRoosta', header: 'روستایی', isSelected: false, isBoolean: true },
-        { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, ltr: true },
-        { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, ltr: true },
-        { field: 'fromDate', header: 'از', isSelected: false },
-        { field: 'toDate', header: 'تا', isSelected: false },
-        { field: 'insertTime', header: 'زمان ثبت', isSelected: false },
-        { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: false, isNumber: true },
-        { field: 'imagePercent', header: 'درصد تصویر', isSelected: false, isNumber: true },
-        { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: false, isBoolean: true },
-        { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: false, isBoolean: true },
-        { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ];
     allLists: IObjectIteratation[] = [
         { field: 'counterReaderName', header: 'مامور', isSelected: false },
@@ -1266,6 +1278,9 @@ export class ColumnManager {
         { field: 'description', header: 'توضیحات', isSelected: false, readonly: true, enableTooltip: true }
     ]
     generalGroupModify: IObjectIteratation[] = [
+        { field: 'counterReaderName', header: 'مامور', isSelected: false },
+        { field: 'counterReaderCode', header: 'کد مامور', isSelected: false },
+        { field: 'offloaderDisplayName', header: 'مامور/ اصلاح کننده', isSelected: false },
         { field: 'billId', header: 'شناسه قبض', isSelected: false, readonly: true, icon: '' },
         { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true, icon: '' },
         { field: 'radif', header: 'ش.پرونده', isSelected: false, readonly: true, icon: '' },
