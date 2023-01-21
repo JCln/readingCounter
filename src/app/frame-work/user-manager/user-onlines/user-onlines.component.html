@@ -1,0 +1,9 @@
+<app-prime-table     
+    [dataSource]="closeTabService.saveDataForUserOnlines" 
+    [_outputFileName]="'userOnlines'"
+    [_checkUpName]="'userOnlines'"
+    [_selectedColumnsToRemember]="'selectedUserOnlines'"
+    [_sessionName]="'userOnline-session'"
+    (refreshedTable)="refreshTable()"    
+ > 
+</app-prime-table>

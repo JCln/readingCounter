@@ -106,6 +106,8 @@ export class ActivatedProvince implements IENV {
         ENURLs.REY,
         ENMapUrls.REY.value,
         ENHasNextBazdid.REY.value,
+        resizableTable.DEFAULT.value,
+        reorderableTable.DEFAULT.value,
         ENMapCenter.REY.value,
         BrowserVersions.DEFAULT.value,
         ENYears.DEFAULT.value,

@@ -20,8 +20,7 @@ export class UserAddComponent extends FactoryONE {
   @ViewChild(UserInputsComponent) userInfos: any;
 
   constructor(
-    private userAddManagerService: UserAddManagerService,
-     
+    private userAddManagerService: UserAddManagerService,     
     private closeTabService: CloseTabService
   ) {
     super();

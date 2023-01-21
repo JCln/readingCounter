@@ -5,7 +5,6 @@
     [_sortField]="'insertDateJalali'"
     [_calculableSUM]=true
     [_hasAggregating] = true
-    [_numberOfExtraColumns]="[1]"
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? []: [1]"
     [_selectedColumnsToRemember]="'selectedTrackLoaded'"
     [_sessionName]="'loaded-session'"

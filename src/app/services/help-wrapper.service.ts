@@ -195,6 +195,12 @@ export class HelpWrapperService {
         title: 'کاربر خلاصه عملکرد',
         messageOne: 'امکان نمایش عملکرد کاربر براساس تعداد مطابق با عملیات کارتابل وجود دارد. مثلا ماموری در بازه زمانی دو روز دوبار بارگیری و دوبار بارگذاری کرده است.',
       }
+    else if (currentRoute === EN_Routes.userOnlines)
+      return {
+        title: 'کاربران آنلاین',
+        messageOne: 'مشاهده کاربرانی که درحال حاضر به سامانه متصل هستند.',
+        messageTwo: 'زمان به معنای آخرین ورود کاربران تاکنون است.',
+      }
     else if (currentRoute === EN_Routes.wrSettingsWaterMark)
       return {
         title: 'واتر مارک',

@@ -1540,6 +1540,11 @@ export class ColumnManager {
         { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: false },
         { field: 'deviceId', header: 'سریال', isSelected: false }
     ]
+    userOnlines: IObjectIteratation[] = [
+        { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },
+        { field: 'defaultZoneTitle', header: 'ناحیه پیشفرض', isSelected: true },
+        { field: 'connectDateTime', header: 'زمان', isSelected: true },
+    ]
     userSearch: IObjectIteratation[] = [
         { field: 'displayName', header: 'نام نمایش', isSelected: true, ltr: false },
         { field: 'username', header: 'نام کاربری', isSelected: true, ltr: false },

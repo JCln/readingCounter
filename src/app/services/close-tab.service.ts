@@ -5,6 +5,7 @@ import { IFileExcelReq, IImportErrors, IImportSimafaReadingProgramsReq } from 'i
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import { IServerOSInfo } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig } from 'interfaces/isettings';
+import { IUserOnlines } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
@@ -47,6 +48,7 @@ export class CloseTabService {
   saveDataForZoneBound: any;
 
   saveDataForAllUsers: any;
+  saveDataForUserOnlines: IUserOnlines[];
   saveDataForEditUsers: any;
   saveDataForEditUsersGUID: string;
   saveDataForRoleManager: any;
@@ -263,6 +265,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel3, url: EN_Routes.wrmalcr },
     { id: 1, value: ENEssentialsToSave.saveDataForAppLevel4, url: EN_Routes.wrmalac },
     { id: 1, value: ENEssentialsToSave.saveDataForAllUsers, url: EN_Routes.wrmuall },
+    { id: 1, value: ENEssentialsToSave.saveDataForUserOnlines, url: EN_Routes.userOnlines },
     { id: 1, value: ENEssentialsToSave.saveDataForAddUsers, url: EN_Routes.wrmuadd },
     { id: 1, value: ENEssentialsToSave.saveDataForRoleManager, url: EN_Routes.wrmurole },
     { id: 1, value: ENEssentialsToSave.saveDataForEditOnRole, url: EN_Routes.wrmueor },

@@ -89,6 +89,11 @@ export interface IUserEditManager {
         deviceId: string
     }
 }
+export interface IUserOnlines {
+    displayName: string,
+    defaultZoneTitle: string,
+    connectDateTime: string
+}
 export interface IRoleManager {
     id?: number;
     title: string;

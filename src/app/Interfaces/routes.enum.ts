@@ -85,6 +85,7 @@ export enum EN_Routes {
     'wrrptsgalleryai' = '/wr/rpts/gallery/ai',
     'wrmdmacranlz' = '/wr/m/dma/cranlz',
     'wrrptsexmdetails' = '/wr/rpts/exm/details',
+    'userOnlines' = '/wr/mu/userOnlines',
     'wrrptsexmuserKarkard' = '/wr/rpts/exm/userKarkard',
     'wrRptsDynamicReportManager' = '/wr/rpts/dyrpts',
     'rptskarkardDaily' = '/wr/rpts/mam/karkardDaily',
