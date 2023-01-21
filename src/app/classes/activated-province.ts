@@ -86,6 +86,19 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         timeout.time
     );
+    // ZONE 6 TEHRAN
+    public static readonly REY = new ActivatedProvince(
+        ENActivateProvinceTitle.REY,
+        ENURLs.REY,
+        ENMapUrls.REY.value,
+        ENHasNextBazdid.REY.value,
+        ENMapCenter.REY.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
+        getDeleteDictionary.DEFAULT.value,
+        ENHasCanclableSpinner.DEFAULT.value,
+        timeout.time
+    );
 
     private constructor(
         public readonly headerProvinceTitle: ENActivateProvinceTitle,

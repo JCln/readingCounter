@@ -1,23 +1,17 @@
-<section *ngIf="_hasAggregating" class="content">
+<!-- <section *ngIf="_hasAggregating" class="content">
     <div class="input_2">
         <div class="_key">گروه‌بندی</div>
-        <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="columnManager._selectedAggregate"
-            placeholder="انتخاب مورد" [style]="{'min-width':'10rem','width':'100%'}" optionValue="field"
-            optionLabel="header" filter="true" (onClick)="updateRowGroupMetaData(columnManager._selectedAggregate)">
-        </p-dropdown>
+        <p-checkbox [(ngModel)]="interactionService._agg.flag" [binary]="true" (onChange)="onSort()">
+            گروه‌بندی
+        </p-checkbox>
     </div>
-    <button (click)="resetAggregation()" class="btn_2_o">
-        بدون گروه‌بندی
-        <i class="pi pi-refresh"></i>
-    </button>
-</section>
+</section> -->
 
-<p-table *ngIf="canShowTable" id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true"
-    [rows]=_rowsNumbers [showCurrentPageReport]="true"
-    currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
-    dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session" [stateKey]="_sessionName"
-    [sortField]="_sortField" [sortOrder]=_sortOrder [sortMode]="_sortMode" [customSort]="_isCustomSort"
-    (sortFunction)="customSort($event)" (onSort)="onSort(columnManager._selectedAggregate)"
+<p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
+    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
+    stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
+    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
     (onFilter)="filterEventTable($event)">
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
@@ -62,7 +56,8 @@
                     class="tooltip _circle_border p_icons pi pi-check">
                     <div class="tooltip_text">ثبت بازدید</div>
                 </i>
-                <i *ngIf="_checkUpName == 'allComponent'" (click)="filterCounterState()">
+                <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh'"
+                    (click)="filterCounterState()">
                     <label class="font_family" for="binary">({{dataSource.length}}) نمایش قرائت شده ها</label>
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
                     </p-checkbox>
@@ -111,13 +106,13 @@
         </tr>
     </ng-template>
 
-    <ng-template hidden="!dataSource.length" pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
-        <!-- *ngIf="rowGroupMetadata[dataSource[columnManager._selectedAggregate]].index === ri" -->
-        <tr class="_anything">
+    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
+        <!-- <tr class="_anything"
+            *ngIf="_hasAggregating && interactionService._agg.canShowGroupBorder == 1 && interactionService._agg.rowGroupMetadata[dataSource[interactionService._agg.selectedAggregate]].index === ri">
             <td>
-                <span>{{dataSource[columnManager._selectedAggregate]}}</span>
+                <span>{{dataSource[interactionService._agg.selectedAggregate]}}</span>
             </td>
-        </tr>
+        </tr> -->
         <tr>
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>

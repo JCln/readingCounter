@@ -92,7 +92,6 @@ section.content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 19rem));
   direction: rtl;
-  gap: var(--font_05);
   align-items: center;
 }
 

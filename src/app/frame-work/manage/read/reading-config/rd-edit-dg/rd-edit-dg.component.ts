@@ -94,6 +94,7 @@ export class RdEditDgComponent {
       return false;
     if (!MathS.persentCheck(this.form.value.highPercentRateBoundNonMaskooni))
       return false;
+
     return true;
   }
   private zoneValidate = (): boolean => {

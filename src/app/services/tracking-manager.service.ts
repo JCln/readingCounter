@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
@@ -82,7 +81,6 @@ export class TrackingManagerService {
     private _location: Location,
     private dialog: MatDialog,
     private allListsService: AllListsService,
-    private router: Router,
     private envService: EnvService,
     private jwtService: JwtService,
     private columnManager: ColumnManager,
@@ -371,13 +369,13 @@ export class TrackingManagerService {
     this.allListsService.allLists_pageSign.GUid = row.id;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
-    this.router.navigate([EN_Routes.wrmlallfalse]);
+    this.utilsService.routeTo(EN_Routes.wrmlallfalse);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
     this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
     this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
     this.allListsService.modifyLists_pageSign.trackNumber = dataSource.trackNumber;
-    this.router.navigate([EN_Routes.wrmlalltrue]);
+    this.utilsService.routeTo(EN_Routes.wrmlalltrue);
   }
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
     this.allListsService.generalModifyLists_pageSign.GUid = dataSource.id;
@@ -385,10 +383,10 @@ export class TrackingManagerService {
     this.allListsService.generalModifyLists_pageSign.groupId = dataSource.groupId;
     this.allListsService.generalModifyLists_pageSign.zoneId = dataSource.zoneId;
     this.allListsService.generalModifyLists_pageSign.trackNumber = dataSource.trackNumber;
-    this.router.navigate([EN_Routes.wrmlGeneralModify]);
+    this.utilsService.routeTo(EN_Routes.wrmlGeneralModify);
   }
   routeToAssessPre = () => {
-    this.router.navigate([EN_Routes.wrimpassesspre]);
+    this.utilsService.routeTo(EN_Routes.wrimpassesspre);
   }
   routeToOffloadGeneralModifyGrouped = (dataSource: ITracking) => {
     this.allListsService.generalModifyListsGrouped_pageSign.GUid = dataSource.id;
@@ -396,7 +394,7 @@ export class TrackingManagerService {
     this.allListsService.generalModifyListsGrouped_pageSign.groupId = dataSource.groupId;
     this.allListsService.generalModifyListsGrouped_pageSign.zoneId = dataSource.zoneId;
     this.allListsService.generalModifyListsGrouped_pageSign.trackNumber = dataSource.trackNumber;
-    this.router.navigate([EN_Routes.wrmlGeneralGModify]);
+    this.utilsService.routeTo(EN_Routes.wrmlGeneralGModify);
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);

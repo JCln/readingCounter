@@ -70,9 +70,11 @@ export class ReadingConfigComponent extends FactoryONE {
         }
       });
       dialogRef.afterClosed().subscribe(async result => {
-        if (result)
-          await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigEDIT, result);
-        this.refreshTable();
+        if (result) {
+          if (await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigEDIT, result)) {
+            this.refreshTable();
+          }
+        }
       });
     })
   }
@@ -92,7 +94,7 @@ export class ReadingConfigComponent extends FactoryONE {
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
     this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');  
+    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
   }
   refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   removeRow = async (rowData: object) => {
@@ -102,5 +104,5 @@ export class ReadingConfigComponent extends FactoryONE {
       this.refetchTable(rowData['ri']);
     }
   }
- 
+
 }

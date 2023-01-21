@@ -104,16 +104,17 @@ export class RdAddDgComponent {
   async save() {
     if (!this.percentValidate()) {
       this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
-      return;
     }
-    if (!this.zoneValidate()) {
+    else if (!this.zoneValidate()) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return;
     }
-    if (!await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigADD, this.form.value))
-      return;
+    else {
+      const a = await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigADD, this.form.value)
+      if (a) {
+        this.dialogRef.close(this.form.value);
+      }
+    }
 
-    this.dialogRef.close(this.form.value);
   }
   close() {
     this.dialogRef.close();

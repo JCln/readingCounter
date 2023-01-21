@@ -16,7 +16,8 @@ export enum ENURLs {
     TEH_ZONE4 = 'http://81.12.106.167:8081/kontoriNew',
     TEH_SE = 'http://46.209.181.2:9098/kontoriNew',
     TEH_SE_LOCAL = 'http://172.28.5.40/kontoriNew',
-    KERMANSHAH = 'http://46.225.241.211:25123/kontoriNew'
+    KERMANSHAH = 'http://46.225.241.211:25123/kontoriNew',
+    REY = 'http://85.133.190.221:4121/kontoriNew'
 }
 export enum ENOSMUrls {
     DEFAULT = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -24,7 +25,8 @@ export enum ENOSMUrls {
     TEH_ZONE4 = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     TEH_SE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     TEH_SE_LOCAL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    KERMANSHAH = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    KERMANSHAH = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    REY = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 }
 export enum ENSatteliteAccessToken {
     DEFAULT = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
@@ -32,7 +34,8 @@ export enum ENSatteliteAccessToken {
     TEH_ZONE4 = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
     TEH_SE = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
     TEH_SE_LOCAL = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
-    KERMANSHAH = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token='
+    KERMANSHAH = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
+    REY = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
 }
 export enum ENSatelliteToken {
     DEFAULT = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
@@ -40,7 +43,8 @@ export enum ENSatelliteToken {
     TEH_ZONE4 = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
     TEH_SE = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
     TEH_SE_LOCAL = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
-    KERMANSHAH = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg'
+    KERMANSHAH = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
+    REY = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',    
 }
 export enum ENActivateProvinceTitle {
     DEFAULT = '',
@@ -49,7 +53,8 @@ export enum ENActivateProvinceTitle {
     TEH_ZONE4 = 'منطقه 4 تهران',
     TEH_SE = 'جنوب شرقی تهران',
     TEH_SE_LOCAL = 'جنوب شرقی تهران',
-    KERMANSHAH = 'کرمانشاه'
+    KERMANSHAH = 'کرمانشاه',
+    REY = 'منطقه 6 تهران'
 }
 export interface IENV_BROWSER_SETUP {
     alert: number,
@@ -79,6 +84,7 @@ export class ENMapCenter {
     static readonly TEH_SE = new ENMapCenter([35.656051, 51.315435]);
     static readonly TEH_SE_LOCAL = new ENMapCenter([35.656051, 51.315435]);
     static readonly KERMANSHAH = new ENMapCenter([34.3277, 47.0778]);
+    static readonly REY = new ENMapCenter([35.5770, 51.4625]);
 
     private constructor(public readonly value: [number, number]) {
     }
@@ -95,6 +101,7 @@ export class ENMapUrls {
     static readonly TEH_SE = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE }]);
     static readonly TEH_SE_LOCAL = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE_LOCAL }]);
     static readonly KERMANSHAH = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.KERMANSHAH }]);
+    static readonly REY = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.REY }]);
 
     private constructor(public readonly value: { title: string, url: string }[]) {
     }
@@ -192,6 +199,7 @@ export class ENHasNextBazdid {
     static readonly TEH_SE = new ENHasNextBazdid(true);
     static readonly TEH_SE_LOCAL = new ENHasNextBazdid(true);
     static readonly KERMANSHAH = new ENHasNextBazdid(false);
+    static readonly REY = new ENHasNextBazdid(false);
 
     private constructor(public readonly value: boolean) {
     }

@@ -4,8 +4,8 @@ import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
+import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactorySharedPrime } from 'src/app/classes/factory';
@@ -28,10 +28,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _calculableSUM: boolean = false;
   @Input() _calcName: string = '';
   @Input() _hasAggregating: boolean = false;
-  // Aggregationing
-  rowGroupMetadata = {};
-  canShowTable: boolean = true;
-  _canShowGroupBorder: boolean = false;
 
   @Output() customedSort = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
@@ -80,7 +76,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
     public utilsService: UtilsService,
     public config: PrimeNGConfig,
     public dialogService: DialogService,
-    public readingReportManagerService: ReadingReportManagerService
+    public interactionService: InteractionService
   ) {
     super(
       browserStorageService,
@@ -215,51 +211,45 @@ export class PrimeTableComponent extends FactorySharedPrime {
     })
     return total;
   }
-  updateRowGroupMetaData(toAggregate: string) {
-    this.rowGroupMetadata = {};
-    console.log(toAggregate);
+  // refreshTableAfterGrouping = () => {
+  //   this.interactionService._agg.canShowGroupBorder = 2;
+  //   setTimeout(() => {
+  //     this.interactionService._agg.canShowGroupBorder = 1;
+  //   }, 10);
+  // }
+  // updateRowGroupMetaData(toAggregate: string) {
+  //   this.interactionService._agg.rowGroupMetadata = {};
 
-    this._sortField = toAggregate;
+  //   if (this.dataSource) {
+  //     for (let i = 0; i < this.dataSource.length; i++) {
 
-    if (this.dataSource) {
-      for (let i = 0; i < this.dataSource.length; i++) {
-        let rowData = this.dataSource[i];
-        let representativeName = rowData[toAggregate];
+  //       let rowData = this.dataSource[i];
+  //       let representativeName = rowData[toAggregate];
 
-        if (i == 0) {
-          this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
-        }
-        else {
-          let previousRowData = this.dataSource[i - 1];
-          let previousRowGroup = previousRowData[toAggregate];
-          if (representativeName === previousRowGroup)
-            this.rowGroupMetadata[representativeName].size++;
-          else
-            this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
-        }
-      }
-    }
-    this.refreshTableAfterGrouping(toAggregate);
-  }
-  resetAggregation = () => {
-    // this.columnManager._selectedAggregate = '';
-    this.updateRowGroupMetaData('');
-  }
-  refreshTableAfterGrouping = (val: string) => {
+  //       if (i == 0) {
+  //         this.interactionService._agg.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+  //       }
+  //       else {
+  //         let previousRowData = this.dataSource[i - 1];
+  //         let previousRowGroup = previousRowData[toAggregate];
+  //         if (representativeName === previousRowGroup)
+  //           this.interactionService._agg.rowGroupMetadata[representativeName].size++;
+  //         else
+  //           this.interactionService._agg.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+  //       }
+  //     }
+  //   }
+  // }
+  // onSort() {
 
-    if (val) {
-      // this.canShowTable = false;
-      // this.updateRowGroupMetaData(val);
-      // setTimeout(() => this.canShowTable = true, 10);
-      this._canShowGroupBorder = true;
-    }
-    else {
-      this._canShowGroupBorder = false;
-    }
-
-  }
-  onSort(toAggregate: string) {
-    this.updateRowGroupMetaData(toAggregate);
-  }
+  //   if (this.interactionService._agg.flag) {
+  //     this._sortField = this.interactionService._agg.selectedAggregate;
+  //     this.updateRowGroupMetaData(this.interactionService._agg.selectedAggregate);
+  //   }
+  //   else {
+  //     this.updateRowGroupMetaData('');
+  //   }
+  //   this.refreshTableAfterGrouping();
+  // }
 
 }
