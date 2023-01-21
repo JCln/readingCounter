@@ -12,6 +12,11 @@ export const infoVersionItems: IDictionaryManager[] = [
     },
     {
         id: '2',
+        title: 'خطای صدور',
+        isSelected: true
+    },
+    {
+        id: '2',
         title: 'بهبود عملکرد برنامه',
         isSelected: true
     },
