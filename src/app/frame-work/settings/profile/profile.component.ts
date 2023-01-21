@@ -21,6 +21,8 @@ export class ProfileComponent extends FactoryONE {
   stateOptions: any[] = [{ label: 'تکی', value: false }, { label: 'گروهی', value: true }];
   stateOptionsSearchType: any[] = [{ label: 'تاریخ', value: false }, { label: 'دوره', value: true }];
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsResizableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
     { label: 'کوچکتر', value: ENFontStyle.fontXXS },
     { label: 'کوچک', value: ENFontStyle.fontXS },
@@ -129,6 +131,12 @@ export class ProfileComponent extends FactoryONE {
   getBasedOnDate = () => {
     this.profileService.showStateVals.searchBasedOnDate = this.profileService.getLocalValue();
   }
+  getReSizable = () => {
+    this.profileService.showStateVals.reSizableTable = this.profileService.getLocalResizable();
+  }
+  getReOrderable = () => {
+    this.profileService.showStateVals.reOrderableTable = this.profileService.getLocalReOrderable();
+  }
   getHasCanclableSpinner = () => {
     this.profileService.showStateVals.hasCanclableSpinner = this.profileService.getHasCanclableSpinner();
   }
@@ -145,8 +153,15 @@ export class ProfileComponent extends FactoryONE {
   }
   setFontStyle = (val: ENFontStyle) => {
     this.profileService.setFontStyle(val);
-    console.log(val);
     this.fontService.setFontStyle(val);
+  }
+  setResizableTable = (val: any) => {
+    this.profileService.setLocalReSizable(val);
+    val ? this.profileService.showMessage(EN_messages.possibleResizableDisabled) : this.profileService.showMessage(EN_messages.possibleResizableEnabled);
+  }
+  setReOrderableTable = (val: any) => {
+    this.profileService.setLocalReOrderable(val);
+    val ? this.profileService.showMessage(EN_messages.possibleReOrderableDisabled) : this.profileService.showMessage(EN_messages.possibleReOrderableEnabled);
   }
 
 }

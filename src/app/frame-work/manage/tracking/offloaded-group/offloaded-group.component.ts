@@ -42,7 +42,7 @@ export class OffloadedGroupComponent extends FactoryONE {
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,
     private envService: EnvService,
-    private config: PrimeNGConfig,
+    private config: PrimeNGConfig
   ) {
     super();
     this.setTraslateToPrimeNgTable();
@@ -60,8 +60,6 @@ export class OffloadedGroupComponent extends FactoryONE {
     else {
       this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
       this.closeTabService.saveDataForTrackOffloadedGroup = this.dataSource;
-      console.log(this.closeTabService.saveDataForTrackOffloadedGroup);
-      
     }
     this.insertSelectedColumns();
     this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
@@ -177,7 +175,7 @@ export class OffloadedGroupComponent extends FactoryONE {
   }
   routeToAssessPre = (dataSource: ITracking) => {
     console.log(dataSource);
-    
+
     if (MathS.isNull(dataSource.listNumber)) {
       this.trackingManagerService.showWarnMessage(EN_messages.no_listNumberExist);
     }

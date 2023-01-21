@@ -306,4 +306,15 @@ export interface IUserLoggins {
     wrongPassword: string,
     appVersion: string,
 }
-//
+export interface IUserKarkardSummary {
+    zoneTitle: string,
+    userDisplayName: string,
+    overalCount: number,
+    trackingStages: [
+        {
+            id: number,
+            title: string,
+            count: number
+        }
+    ]
+}

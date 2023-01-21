@@ -4,9 +4,11 @@ import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
-import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { ProfileService } from 'services/profile.service';
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactorySharedPrime } from 'src/app/classes/factory';
 
@@ -76,14 +78,18 @@ export class PrimeTableComponent extends FactorySharedPrime {
     public utilsService: UtilsService,
     public config: PrimeNGConfig,
     public dialogService: DialogService,
-    public interactionService: InteractionService
+    public readingReportManagerService: ReadingReportManagerService,
+    public profileService: ProfileService,
+    public authService: AuthService
   ) {
     super(
       browserStorageService,
       utilsService,
       columnManager,
       config,
-      dialogService
+      dialogService,
+      profileService,
+      authService
     );
   }
 

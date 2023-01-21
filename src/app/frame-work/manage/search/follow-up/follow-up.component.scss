@@ -13,7 +13,7 @@
 
 .contain {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 14rem));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 14.5rem));
   align-items: center;
   justify-content: center;
   direction: rtl;
@@ -35,6 +35,8 @@ input {
 
 ._value {
   border: 0;
+  border-radius: $border_7;
+  min-width: fit-content;
   width: 100%;
 }
 

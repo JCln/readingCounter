@@ -150,7 +150,8 @@ export class HelpWrapperService {
       return {
         title: 'تنظیمات کاربری',
         messageOne: 'مشخصات کاربری شما در این قسمت قابل مشاهده است، درصورت نیاز به تغییر گذرواژه با وارد کردن گذرواژه فعلی و گذرواژه مدنظر نسبت به تغییر آن اقدام نمایید.',
-        messageTwo: 'توجه شود که اگر گذرواژه شما قبلا بازنشانی شده باشد، گذرواژه،شماره موبایل شما خواهد بود. ',
+        messageTwo: 'توجه شود که اگر گذرواژه شما قبلا بازنشانی شده باشد، گذرواژه، شماره موبایل شما خواهد بود. ',
+        messageThree: 'سایر تنظیمات جهت ذخیره تغییرات کاربران در مراجعات بعدی به برنامه درنظر گرفته شده است',
       }
     else if (currentRoute === EN_Routes.wrmtrackreading)
       return {
@@ -174,10 +175,31 @@ export class HelpWrapperService {
         messageTwo: 'برگشت به صادر شده:  با ارائه دلیل، قابل انجام است',
         messageThree: 'حذف مسیر:  با ارائه دلیل قابل انجام است.',
       }
+    else if (currentRoute === EN_Routes.wrflashlr)
+      return {
+        title: 'آخرین قرائت ماموران',
+        messageOne: 'با هر قرائت توسط مامور یک نقطه روی نقشه زده خواهد شد و در جدول جزئیات آنرا خواهید دید.',
+      }
+    else if (currentRoute === EN_Routes.realtimeMessage)
+      return {
+        title: 'پیام به کاربران آنلاین',
+        messageOne: 'میتوان با تنظیمات زیر پیامی به کاربران ارسال کرد. متن پیشفرضی درنظر گرفته شده که با کلیک روی دکمه استفاده قابل ویرایش نیز می باشد.',
+      }
     else if (currentRoute === EN_Routes.wrpolicies)
       return {
         title: 'تنظیمات امنیتی',
-        messageOne: 'موارد امنیتی مانند حداقل تعداد گذرواژه را تنظیم کنید.',
+        messageOne: 'موارد امنیتی مانند حداقل تعداد گذرواژه را تنظیم نمایید.',
+      }
+    else if (currentRoute === EN_Routes.userKarkardSummary)
+      return {
+        title: 'کاربر خلاصه عملکرد',
+        messageOne: 'امکان نمایش عملکرد کاربر براساس تعداد مطابق با عملیات کارتابل وجود دارد. مثلا ماموری در بازه زمانی دو روز دوبار بارگیری و دوبار بارگذاری کرده است.',
+      }
+    else if (currentRoute === EN_Routes.wrSettingsWaterMark)
+      return {
+        title: 'واتر مارک',
+        messageOne: 'جزئیات هر تصویری که بر روی آن قرار گرفته قابل ویرایش است',
+        messageTwo: 'توجه نمایید که فاصله از چپ و بالا بطور تقریبی نمایش داده میشود',
       }
   }
   /* DYNAMIC ROUTES */
@@ -240,14 +262,50 @@ export class HelpWrapperService {
         title: 'جستجوی تجمیعی',
         messageOne: 'لیست قرائت جستجو شده در این قسمت قابل مشاهده می باشد. درصورتی که عکس(ها) و یا صوتی گرفته شده باشد با کلیک برروی "بررسی عکس/صوت" قابل بررسی می باشد.',
       }
+    else if (currentRoute === EN_Routes.rptskarkardDaily)
+      return {
+        title: 'گزارش لیست مامور',
+        messageOne: 'اشتراک های قرائت شده را با جزئیات نمایش میدهد. تیک نمایش همه برای نمایش لیست پس از قرائت است و توسط مامور بارگذاری انجام شده است.',
+      }
+    else if (currentRoute === EN_Routes.wrofflinetxtout)
+      return {
+        title: 'بارگذاری اطلاعات مامور',
+        messageOne: 'کلیه اطلاعاتی که توسط مامور ثبت شده و در فرآیند ارسال با مشکل مواجه شده ارسال نمایید(لیست میتواند تصویر، صوت، غیرمجاز یا هر داده دیگری نیز باشد)',
+      }
+    else if (currentRoute === EN_Routes.offlineLoad)
+      return {
+        title: 'بارگیری اطلاعات مامور',
+        messageOne: 'ماموری که در دریافت لیست صادر شده با مشکل مواجه شده باشد، فایلی که در این قسمت دریافت میکند را به گوشی خود منتقل و فرایند قرائت را انجام میدهد',
+      }
+    else if (currentRoute === EN_Routes.wrrptsmamKarkardAllStates)
+      return {
+        title: 'همه وضعیت های قرائت شده',
+        messageOne: 'گزارشی از کلیه وضعیت های قابل ثبت توسط مامور را ارائه میکند. انتخاب نوبتی اختیاری است.',
+      }
+    else if (currentRoute === EN_Routes.serverOSInfo)
+      return {
+        title: 'اطلاعات سرور در حال استفاده',
+        messageOne: 'زمان فعالیت: از آخرین زمانی که خاموش یا ریست شده است تا کنون محاسبه میشود',
+        messageTwo: 'زمان: زمان فعلی سرور است'
+      }
+    else if (currentRoute === EN_Routes.downloadAI)
+      return {
+        title: 'دانلود روزانه',
+        messageOne: 'دانلود کل تصاویر گرفته شده در یک روز',
+      }
+    else if (currentRoute === EN_Routes.uploadSingle)
+      return {
+        title: 'آپلود تکی',
+        messageOne: 'برای اضافه کردن تصویر به شماره اشتراک قابل استفاده است'
+      }
     else if (currentRoute.includes(EN_Routes.wrrptsexmdetails)
       || currentRoute.includes(EN_Routes.wrrptsmamtrv)
       || currentRoute.includes(EN_Routes.wrrptsmamtrvch)
       || currentRoute.includes(EN_Routes.wrrptsmamkarkard)
-      || currentRoute.includes(EN_Routes.wrrptsexmkarkardDaily)
       || currentRoute.includes(EN_Routes.wrrptsmamdh)
       || currentRoute.includes(EN_Routes.wrrptsexmmaster)
       || currentRoute.includes(EN_Routes.wrrptsexmdetails)
+      || currentRoute.includes(EN_Routes.wrmdmacranlz)
       || currentRoute.includes(EN_Routes.wrrptsmamoffkarkard))
       return {
         title: 'گزارشات',

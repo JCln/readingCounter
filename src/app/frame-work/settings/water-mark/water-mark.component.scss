@@ -1,0 +1,123 @@
+@import 'variable';
+@import 'input';
+@import 'button';
+@import 'tooltip';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
+  justify-content: center;
+  gap: var(--font_2);
+}
+
+.content {
+  direction: rtl;
+}
+
+.mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 331px;
+  height: 616px;
+  background: #1a1a58;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.phone-mirror {
+  position: relative;
+  width: 313px;
+  height: 600px;
+  background-color: rgb(26, 25, 25);
+  border-radius: 30px;
+}
+
+.topWrapper {
+  position: relative;
+  width: 130px;
+  height: 20px;
+  margin: 0px auto 0 auto;
+  float: left;
+  left: 30%;
+  background-color: #232526;
+  border-radius: 0 0 45px 45px;
+}
+
+.line-rec {
+  position: relative;
+  width: 60px;
+  height: 6px;
+  margin: 0px auto 0 auto;
+  float: left;
+  left: 20%;
+  top: 4px;
+  background-color: rgb(83, 83, 82);
+  border-radius: 5px;
+  border: 1px solid rgb(214, 214, 214);
+}
+
+.camera {
+  position: relative;
+  float: left;
+  margin-right: 8px;
+  left: 18%;
+  width: 11px;
+  height: 11px;
+  top: 1px;
+  background-color: rgb(83, 83, 82);
+  border-radius: 30px;
+  border: 1px solid rgb(214, 214, 214);
+}
+
+.buttons {
+  background-color: black;
+  width: 100%;
+  height: 30px;
+  border-radius: 0 0 45px 45px;
+}
+
+.iconBattery {
+  top: 4px;
+  position: absolute;
+  right: 0;
+  transform: translateX(67px);
+  width: 20px;
+  height: 9px;
+  background-color: #777777;
+  border-radius: 1px;
+  box-shadow:
+    0 0 0 1px white,
+    0 0 0 2px #666666;
+}
+
+.iconBattery::after {
+  content: '';
+  position: absolute;
+  background-color: #777777;
+  width: 2px;
+  height: 5px;
+  left: 23px;
+  top: 2px;
+  border-radius: 0px 2px 2px 0px;
+}
+
+p {
+  position: absolute;
+  margin-top: 1rem;
+  margin-left: .5rem;
+  font-weight: 600;
+}
+
+.btn_1 {
+  max-width: 100%;
+  margin-top: var(--font_l);
+  color: var(--white);
+  background-color: var(--orange_500);
+}

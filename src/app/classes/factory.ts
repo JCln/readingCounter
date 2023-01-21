@@ -7,7 +7,9 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { ListManagerService } from 'services/list-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
@@ -47,6 +49,8 @@ export abstract class FactoryONE implements OnInit, OnDestroy {
 export class FactorySharedPrime implements OnChanges {
 
     _showSavedColumnButton: boolean;
+    _reOrderableTable: boolean;
+    _reSizebleTable: boolean;
     tempOriginDataSource: any[] = [];
     ref: DynamicDialogRef;
 
@@ -76,9 +80,11 @@ export class FactorySharedPrime implements OnChanges {
         public columnManager: ColumnManager,
         public config: PrimeNGConfig,
         public dialogService: DialogService,
+        public profileService: ProfileService,
+        public authService: AuthService
     ) {
         this.setTraslateToPrimeNgTable();
-
+        this.getResizReOrderable();
     }
 
     @Input() get selectedColumns(): any[] {
@@ -203,6 +209,14 @@ export class FactorySharedPrime implements OnChanges {
     doShowCarouselForbidden = (dataSource: any) => {
         // To make imageWrapper config Dialog for forbidden
         this.doShowCarousel(dataSource, false);
+    }
+    getResizReOrderable = () => {
+        this._reSizebleTable = this.profileService.getLocalResizable();
+        this._reOrderableTable = this.profileService.getLocalReOrderable();
+    }
+    denyTracking = (): boolean => {
+        const jwtRole = this.authService.getAuthUser();
+        return jwtRole.roles.toString().includes('denytracking') ? true : false;
     }
 
 }

@@ -39,7 +39,23 @@ export interface IReadingReportReq {
     _selectedAggregate?: string,
     beginFromImported?: boolean,
     isCollapsed?: boolean,
-    fragmentMasterIds?: number[]
+    fragmentMasterIds?: string[]
+}
+export interface IKarkardAllStatesDto {
+    offloadDayalali: string,
+    fromEshterak: string,
+    toEshterak: string,
+    counterReaderName: string,
+    duration: number,
+    overalCount: number,
+    zoneTitle: string,
+    trackNumber: number,
+    counterStateAndCounts: [
+        {
+            counterStateTitle: string,
+            count: number
+        }
+    ]
 }
 export interface IUserKarkardInput {
     zoneId: number,

@@ -488,6 +488,21 @@ export class ImportDynamicService {
     }
     return true;
   }
+  verificationTrackNumber = (id: number): boolean => {
+    if (MathS.isNull(id)) {
+      this.snackMessage(EN_messages.insert_trackNumber);
+      return false;
+    }
+    if (MathS.isNaN(id)) {
+      this.snackMessage(EN_messages.format_invalid_trackNumber);
+      return false;
+    }
+    if (!MathS.isLowerThanMinLength(id, 2) || !MathS.isLowerThanMaxLength(id, 10)) {
+      this.snackMessage(EN_messages.format_invalid_trackNumbersLength);
+      return false;
+    }
+    return true;
+  }
   showResDialog = (res: IImportDataResponse, disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
@@ -627,9 +642,9 @@ export class ImportDynamicService {
       })
     })
   }
-  getFragmentDetailsByMaster = (zoneId: string) => {
+  getById = (method: ENInterfaces, id: number) => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETID(ENInterfaces.fragmentMasterInZone, zoneId).subscribe(res => {
+      this.interfaceManagerService.GETID(method, id.toString()).subscribe(res => {
         resolve(res);
       })
     })
@@ -683,6 +698,12 @@ export class ImportDynamicService {
   }
   snackMessage = (message: EN_messages) => {
     this.utilsService.snackBarMessageWarn(message);
+  }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
   }
 
 }

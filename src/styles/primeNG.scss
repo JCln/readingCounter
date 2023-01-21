@@ -209,7 +209,7 @@
   }
 
   .p-multiselect {
-    border-radius: 7px;
+    border-radius: $border_7;
     background: var(--white);
   }
 
@@ -320,8 +320,7 @@
   .p-datatable-resizable .p-datatable-tfoot>tr>td,
   .p-datatable-resizable .p-datatable-thead>tr>th {
     overflow: inherit;
-    white-space: normal;
-    background-color: var(--secondary_8);
+    white-space: normal;    
   }
 
   .p-datatable .p-datatable-thead>tr>th {

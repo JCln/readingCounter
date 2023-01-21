@@ -180,6 +180,19 @@ export class ReadingReportManagerService {
     year: this.utilsService.getFirstYear(),
     zoneIds: [0]
   }
+  offKarkardAllStatesReq: IMostReportInput = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    zoneIds: [0],
+    beginFromImported: false,
+    fragmentMasterIds: [],
+    isCollapsed: false
+  }
   trvchReq: IReadingReportTraverseDifferentialReq = {
     zoneId: 0,
     fromDate: '',
@@ -237,6 +250,12 @@ export class ReadingReportManagerService {
       this._isOrderByDate = true;
       return this.searchInOrderTo;
     }
+  }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
   }
   getApiUrl = (): string => {
     return this.envService.API_URL;

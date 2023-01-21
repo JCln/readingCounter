@@ -17,7 +17,9 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     [sortField]="closeTabService.offloadedGroupReq._selectedAggregate" stateStorage="session" stateKey="offloaded-group"
-    sortMode="single" (onSort)="onSort()" customSort="true" (sortFunction)="trackingManagerService.customSort($event)">
+    sortMode="single" (onSort)="onSort()" customSort="true" (sortFunction)="trackingManagerService.customSort($event)"
+    [resizableColumns]="trackingManagerService.getLocalResizable()"
+    [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
 
     <ng-template pTemplate="caption">
         <p-multiSelect [options]="_selectCols" [(ngModel)]="selectedColumns" name="selectOptions" optionLabel="header"
@@ -34,19 +36,21 @@
     <ng-template pTemplate="header" let-columns>
 
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th pResizableColumn pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 2.5rem" *ngFor="let item of [1,2,3,4]"></th>
+            <th pResizableColumn pReorderableColumn style="width: 2.5rem"
+                *ngFor="let item of trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"></th>
         </tr>
         <tr>
-            <th *ngFor="let col of columns">
+            <th pResizableColumn pReorderableColumn *ngFor="let col of columns">
                 <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 2.5rem" *ngFor="let item of [1,2,3,4]"></th>
+            <th pResizableColumn pReorderableColumn style="width: 2.5rem"
+                *ngFor="let item of trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"></th>
         </tr>
 
     </ng-template>
@@ -75,7 +79,7 @@
                     <div class="tooltip_text_right">اصلاح کلی لیست(دسته‌ای)</div>
                 </i>
             </td>
-            <td (click)="backToReading(dataSource)">
+            <td *ngIf="!trackingManagerService.denyTracking()" (click)="backToReading(dataSource)">
                 <span class="ui-column-title">بازگشت به درحال قرائت</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به درحال قرائت</div>

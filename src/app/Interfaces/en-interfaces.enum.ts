@@ -116,6 +116,7 @@ export enum ENInterfaces {
     unlockUser = 'V1/User/Unlock',
     userACTIVATE = 'V1/User/Activate',
     userDEACTIVATE = 'V1/User/Deactivate',
+    postUserKarkardSummary = 'V1/Tracking/UserKarkardSummary',
 
     fragmentMASTERALL = 'V1/Fragment/Master/All',
     fragmentMASTERREMOVE = 'V1/Fragment/Master/Remove',
@@ -229,6 +230,7 @@ export enum ENInterfaces {
     serverManagerResetApp = 'V1/Server/ResetApp',
     serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
     serverManagerRequestLog = 'V1/RequestLog/List',
+    serverManagerOSInfo = 'V1/Server/OsInfo',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',
@@ -287,10 +289,13 @@ export enum ENInterfaces {
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
+    getWaterMarkConfig = 'V1/WaterMark/Get',
+    postWaterMarkConfig = 'V1/WaterMark/AddOrEdit',
     chat = 'V1/Chat/Index?accessToken=',
     settingsLicense = 'V1/ApiSettings/License',
 
     postImportData = 'V1/Import/Dynamic',
+    postImportErrorsByTrackNumber = 'V1/Import/ImportErrorsByTrackNumber',
     postImportDynamicCount = 'V1/Import/DynamicCount',
     getImportErrros = 'V1/Import/ImportErrors',
     postSimafaReadingProgram = 'V1/Import/Simafa/ReadingPrograms',
@@ -322,6 +327,7 @@ export enum ENInterfaces {
     getDashboardKarkardTimed = 'V1/List/Dashboard/Karkard/Timed',
     getDashboardMediaTimed = 'V1/List/Dashboard/Media/Timed',
     getLatestOnOffloadId = 'V1/List/Latest/OnOffLoadId',
+    postKarkardAllStates = 'V1/List/Offloaded/KarkardAllStates',
     getDashboardNotReader = 'V1/Tracking/Dashboard/Tracking/NotReader',
     getDashboardReadingReportTimed = 'V1/ReadingReport/Dashboard/Timed',
     getDashboardReadTimed = 'V1/List/Dashboard/Read/Timed',

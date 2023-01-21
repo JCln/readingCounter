@@ -1,4 +1,5 @@
 $border_5: 5px;
+$border_7: 7px;
 $border_15: 15px;
 $border_50: 50%;
 
@@ -166,6 +167,11 @@ a:active {
 ._save_columns {
   background-color: var(--thirdy_4);
   color: var(--white) !important;
+}
+
+._custom {
+  background: var(--primary_4);
+  color: var(--secondary_1);
 }
 
 // 

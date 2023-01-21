@@ -1,8 +1,8 @@
 <app-prime-table     
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForTrackReading" 
     [_outputFileName]="'reading'"
     [_checkUpName]="'reading'"    
-    [_numberOfExtraColumns]="[1, 2, 3, 4]"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3,4]"
     [_sessionName]="'reading-session'"
     [_selectedColumnsToRemember]="'selectedTrackReading'"    
     [_calculableSUM]=true

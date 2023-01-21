@@ -3,6 +3,8 @@ export interface IENV {
     API_URL: string,
     mapUrls: { title: string, url: string }[],
     hasNextBazdid: boolean,
+    reSizableTable: boolean,
+    reOrderableTable: boolean,
     mapCenter: [number, number],
     browserVersions: IBrowserVersions,
     years: { title: string, value: number }[],
@@ -200,6 +202,18 @@ export class ENHasNextBazdid {
     static readonly TEH_SE_LOCAL = new ENHasNextBazdid(true);
     static readonly KERMANSHAH = new ENHasNextBazdid(false);
     static readonly REY = new ENHasNextBazdid(false);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class resizableTable {
+    static readonly DEFAULT = new resizableTable(false);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class reorderableTable {
+    static readonly DEFAULT = new reorderableTable(false);
 
     private constructor(public readonly value: boolean) {
     }

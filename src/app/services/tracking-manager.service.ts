@@ -9,6 +9,8 @@ import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'inter
 import { EN_Routes } from 'interfaces/routes.enum';
 import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ProfileService } from 'services/profile.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';
@@ -84,7 +86,9 @@ export class TrackingManagerService {
     private envService: EnvService,
     private jwtService: JwtService,
     private columnManager: ColumnManager,
-    private pageSignsService: PageSignsService
+    private pageSignsService: PageSignsService,
+    private profileService: ProfileService,
+    private authService: AuthService
   ) { }
 
   firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
@@ -104,26 +108,18 @@ export class TrackingManagerService {
   }
 
   getDataSource = (method: ENInterfaces): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(method).subscribe(res => {
-          resolve(res);
-        });
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe(res => {
+        resolve(res);
       });
-    } catch (error) {
-      console.error(error);
-    }
+    });
   }
   getDataSourceByQuote = (method: ENInterfaces, insertedInput: number | string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(method, insertedInput).subscribe(res => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(method, insertedInput).subscribe(res => {
+        resolve(res)
+      })
+    });
   }
   postEditingTrack = (rowData: IEditTracking) => {
     this.interfaceManagerService.POSTBODY(ENInterfaces.trackingEDIT, this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {
@@ -137,6 +133,13 @@ export class TrackingManagerService {
         resolve(res);
       })
     })
+  }
+  postBody = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise(resolve => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
+        resolve(res);
+      })
+    });
   }
   migrateOrRemoveTask = (method: ENInterfaces, trackNumber: string, desc: string): Promise<any> => {
     return new Promise((resolve) => {
@@ -297,6 +300,10 @@ export class TrackingManagerService {
       return true;
     return false;
   }
+  denyTracking = (): boolean => {
+    const jwtRole = this.authService.getAuthUser();
+    return jwtRole.roles.toString().includes('denytracking') ? true : false;
+  }
   checkVertificationDBF = (dataSource: IOutputManager): boolean => {
     if (MathS.isNull(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
@@ -355,7 +362,7 @@ export class TrackingManagerService {
   verificationOffloadModify = (object: IOffloadModifyReq): boolean => {
     return this.offloadModifyValidation(object);
   }
-  verificationFollowUPTrackNumber = (id: number): boolean => {
+  verificationTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
   }
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
@@ -408,6 +415,27 @@ export class TrackingManagerService {
   setGetRanges = (dataSource: IOffLoadPerDay) => {
     dataSource.overalDuration = parseFloat(MathS.getRange(dataSource.overalDuration));
     dataSource.overalDistance = parseFloat(MathS.getRange(dataSource.overalDistance));
+  }
+  userKarkardValidation = (dataSource: object): boolean => {
+    if (MathS.isNull(dataSource['zoneId'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource['fromDate'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(dataSource['toDate'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+    return true;
+  }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
   }
 
 }

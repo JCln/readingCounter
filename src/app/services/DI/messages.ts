@@ -1,12 +1,13 @@
 import { EN_messages } from 'interfaces/enums.enum';
 import { IColor, IMessage, ITime } from 'interfaces/inon-manage';
-import {
-    ENColorText,
-    ENRandomNumbers,
-    ENSnackBarColors,
-    ENSnackBarColorsExact,
-    ENSnackBarTimes,
-} from 'interfaces/ioverall-config';
+import { ENRandomNumbers, ENSnackBarColors, ENSnackBarColorsExact, ENSnackBarTimes } from 'interfaces/ioverall-config';
+
+export enum ENColorText {
+    blue = 'آبی',
+    green = 'سبز',
+    orange = 'نارنجی',
+    red = 'قرمز',
+}
 
 export const broadcastMessages: IMessage[] = [
     { title: EN_messages.broadTitle1, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage1, exactColor: ENSnackBarColorsExact.info, color: ENSnackBarColors.info, time: ENSnackBarTimes.twentyMili, canSave: true },

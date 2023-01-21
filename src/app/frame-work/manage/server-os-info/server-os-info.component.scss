@@ -1,0 +1,53 @@
+@import 'variable';
+@import 'button.scss';
+@import 'input.scss';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
+  direction: rtl;
+  justify-content: center;
+  gap: var(--font_2);
+}
+
+section {
+  display: grid;
+  background: var(--secondary_2);
+  border: 1px solid var(--secondary_4);
+  border-radius: $border_7;
+  box-shadow: 0 1px 0 0 var(--secondary_4);
+}
+
+.title {
+  display: grid;
+  align-items: center;
+  color: var(--secondary_5);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_l2);
+}
+
+h1 {
+  i {
+    font-size: var(--font_3);
+  }
+}
+
+h2.title {
+  color: var(--primary_4);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_l);
+}
+
+// @Override values value
+._value {
+  height: var(--font_5);
+  max-width: 98%;
+  color: var(--primary_3);
+  font-size: var(--font_22);
+}
+
+.eng_lang {
+  font-family: initial;
+}

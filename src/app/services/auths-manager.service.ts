@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
@@ -19,7 +18,6 @@ export class AuthsManagerService {
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
-    private dialog: MatDialog,
     private sectionsService: SectionsService
   ) { }
 

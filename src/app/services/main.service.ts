@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { retry } from 'rxjs/operators';
 
 import { EnvService } from './env.service';
 
@@ -15,13 +14,13 @@ export class MainService {
   GET = (URL: string, base64?: string) => {
     if (base64) {
       return this.http.get(this.environment.API_URL + '/' + URL + '/' + base64).pipe(
-        retry(1)
       )
     } else {
-      return this.http.get(this.environment.API_URL + '/' + URL).pipe(
-        retry(1), // retry failed request up to 1
-        // catchError(err => this.errorHandler.errorHandler(err))
-      )
+      return this.http.get(this.environment.API_URL + '/' + URL)
+      // .pipe(
+      // retry(1) retry failed request up to 1
+      // catchError(err => this.errorHandler.errorHandler(err))
+      // )
     }
   }
   GETID = (ID: string, URL: string, base64?: string) => {
@@ -61,11 +60,7 @@ export class MainService {
   POSTBODYProgress = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body, { reportProgress: true, observe: 'events' });
   }
-  PUT = (URL: string, body: object): any => {
-  }
   DELETE = (URL: string, id: number) => {
-    return this.http.delete(this.environment.API_URL + '/' + URL + '/' + id).pipe(
-      retry(1)
-    );
+    return this.http.delete(this.environment.API_URL + '/' + URL + '/' + id);
   }
 }

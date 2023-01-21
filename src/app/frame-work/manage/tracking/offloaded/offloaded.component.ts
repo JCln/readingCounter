@@ -18,12 +18,9 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class OffloadedComponent extends FactoryONE {
 
-
-  dataSource: ITracking[] = [];
-
   constructor(
 
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService,
     public route: ActivatedRoute,
@@ -33,17 +30,12 @@ export class OffloadedComponent extends FactoryONE {
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTrackOffloaded = null;
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTrackOffloaded) {
-      this.dataSource = this.closeTabService.saveDataForTrackOffloaded;
-    }
-    else {
-      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
-      this.closeTabService.saveDataForTrackOffloaded = this.dataSource;
+    if (!this.closeTabService.saveDataForTrackOffloaded) {
+      this.closeTabService.saveDataForTrackOffloaded = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
     }
   }
   downloadOutputSingle = async (row: ITracking) => {

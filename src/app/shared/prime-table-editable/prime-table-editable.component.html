@@ -3,7 +3,7 @@
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort"
     (sortFunction)="customSort($event)" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]=_sortOrder
-    editMode="row" dataKey="id" #dtable>
+    editMode="row" dataKey="id" [resizableColumns]=_reSizebleTable [reorderableColumns]=_reOrderableTable #dtable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -76,19 +76,19 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th pResizableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th pResizableColumn style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
         <tr>
-            <th *ngFor="let col of columns">
+            <th pResizableColumn *ngFor="let col of columns">
                 <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th pResizableColumn style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
     </ng-template>
 

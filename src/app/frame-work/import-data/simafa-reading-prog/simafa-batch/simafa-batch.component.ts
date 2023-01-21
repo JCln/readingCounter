@@ -28,7 +28,7 @@ export class SimafaBatchComponent extends FactoryONE {
 
   constructor(
     public importDynamicService: ImportDynamicService,
-    public allImportsService: AllImportsService
+    public allImportsService: AllImportsService,
   ) {
     super();
   }

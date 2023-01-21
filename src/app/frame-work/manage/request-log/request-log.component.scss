@@ -26,13 +26,13 @@ section.content {
   min-height: 85%;
   justify-content: center;
   border: 1px solid var(--secondary_3_spec);
-  border-radius: 7px;
+  border-radius: $border_7;
 
   .t_value {
     width: var(--font_3);
     border: 1px solid blue;
     height: inherit;
-    border-radius: 7px;
+    border-radius: $border_7;
     text-align: center;
     font-size: var(--font_m);
     font-weight: 600;

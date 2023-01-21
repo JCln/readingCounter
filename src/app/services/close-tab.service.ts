@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
 import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
-import { IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
+import { IFileExcelReq, IImportErrors, IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
+import { IServerOSInfo } from 'interfaces/iserver-manager';
+import { IWaterMarkConfig } from 'interfaces/isettings';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
-
-import { EN_Routes } from '../interfaces/routes.enum';
-import { IFileExcelReq } from './../interfaces/import-data';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,10 @@ export class CloseTabService {
   saveDataForTabsare3Formula: any;
   // 
   // save data when route change 
-  saveDataForAppLevel1: any;
-  saveDataForAppLevel2: any;
-  saveDataForAppLevel3: any;
-  saveDataForAppLevel4: any;
+  saveDataForAppLevel1: IAuthLevels[];
+  saveDataForAppLevel2: IAuthLevel2[];
+  saveDataForAppLevel3: IAuthLevel3[];
+  saveDataForAppLevel4: IAuthLevel4[];
 
   saveDataForCounterState: any;
   saveDataForImageAttribution: any;
@@ -61,7 +62,16 @@ export class CloseTabService {
   saveDataForTrackReading: any;
   saveDataForUserKarkard: any;
   saveDataForTrackOffloaded: any;
+  saveDataForUserKarkardSummaryReq = {
+    zoneId: null,
+    fromDate: '',
+    toDate: ''
+  };
+  saveDataForUserKarkardSummary: any;
+  saveDataForUserKarkardSummaryTwo: any;
   saveDataForTrackOffloadedGroup: any;
+  saveDataForKarkardAllStates: any;
+  saveDataForKarkardAllStatesTWO: any;
   offloadedGroupReq = {
     _selectedAggregate: 'listNumber'// Default group by
   }
@@ -78,7 +88,12 @@ export class CloseTabService {
   // import dynamic
   saveDataForAutomaticImport: any;
   saveDataForImportDynamic: any;
-  saveDataForImportErrors: any;
+  saveDataForImportErrors: IImportErrors[];
+  saveDataForImportErrorsByTrackNumber: any;
+  saveDataForImportErrorsByTrackNumberReq = {
+    trackNumber: null,
+    _isCollapsed: true
+  }
   saveDataForSimafaBatch: any;
   importSimafaReadingProgramReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
@@ -174,6 +189,26 @@ export class CloseTabService {
     toTimeM: '',
     toTime: ''
   }
+  saveDataForWaterMark: IWaterMarkConfig = {
+    id: '',
+    r: 255,
+    g: 255,
+    b: 255,
+    a: 1,
+    fontSize: 16,
+    x: 0,
+    y: 0,
+    userDisplayName: '',
+    insertDateTime: ''
+  }
+  saveDataForOSInfo: IServerOSInfo = {
+    cpuCoreCount: null,
+    version: '',
+    servicePack: '',
+    elapsedDateTime: '',
+    isOs64: true,
+    systemDateTime: '',
+  }
   saveDataForServerErrors: any;
   saveDataForRRDisposalHours: any;
   saveDataForRRGIS: any;
@@ -199,7 +234,8 @@ export class CloseTabService {
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, url: EN_Routes.wrtoolsrandomImg },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, url: EN_Routes.wrToolsResultDetails },
-    { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrrptstoolsexcelviewer },
+    { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrExcelviewer },
+    { id: 1, value: ENEssentialsToSave.saveDataForWaterMark, url: EN_Routes.wrSettingsWaterMark },
     { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr },
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralGroupModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralGroupModify, url: EN_Routes.wrmlGeneralGModify },
     { id: 1, req: ENEssentialsToSave.saveDataForLMGeneralModifyReq, value: ENEssentialsToSave.saveDataForLMGeneralModify, url: EN_Routes.wrmlGeneralModify },
@@ -238,6 +274,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForImportDynamic, url: EN_Routes.wrimpimd },
     { id: 1, req: ENEssentialsToSave.saveDataForImportDataFileExcelReq, value: ENEssentialsToSave.saveDataForImportDataFileExcel, url: EN_Routes.wrimpFileExcel },
     { id: 1, value: ENEssentialsToSave.saveDataForImportErrors, url: EN_Routes.wrimperr },
+    { id: 1, req: ENEssentialsToSave.saveDataForImportErrorsByTrackNumberReq, value: ENEssentialsToSave.saveDataForImportErrorsByTrackNumber, url: EN_Routes.wrImportErrByTrackNumber },
     { id: 1, req: ENEssentialsToSave.saveDataForAssessPreReq, value: ENEssentialsToSave.saveDataForAssessPre, url: EN_Routes.wrimpassesspre },
     { id: 1, value: ENEssentialsToSave.saveDataForAssessAdd, url: EN_Routes.wrimpassessadd },
     { id: 1, value: ENEssentialsToSave.saveDataForSimafaBatch, url: EN_Routes.wrimpsimafardpgbatch },
@@ -260,6 +297,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForRRTraverse, url: EN_Routes.wrrptsmamtrv },
     { id: 1, value: ENEssentialsToSave.saveDataForRRTraverseDifferential, url: EN_Routes.wrrptsmamtrvch },
     { id: 1, value: ENEssentialsToSave.saveDataForRRDisposalHours, url: EN_Routes.wrrptsmamdh },
+    { id: 1, value: ENEssentialsToSave.saveDataForKarkardAllStates, value_2: ENEssentialsToSave.saveDataForKarkardAllStatesTWO, url: EN_Routes.wrrptsmamKarkardAllStates },
     { id: 1, value: ENEssentialsToSave.saveDataForRRKarkard, url: EN_Routes.wrrptsmamkarkard },
     { id: 1, value: ENEssentialsToSave.saveDataForRRPreNumShown, url: EN_Routes.wrrptsmampns },
     { id: 1, value: ENEssentialsToSave.saveDataForRRLocked, url: EN_Routes.wrrptsmamlocked },
@@ -272,8 +310,10 @@ export class CloseTabService {
     { id: 2, value: ENEssentialsToSave.saveDataForRRDetails, url: EN_Routes.wrrptsexmdetails },
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogReq, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.wrmmserr },
+    { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
-    { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.wrrptsexmkarkardDaily },
+    { id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, url: EN_Routes.userKarkardSummary },
+    { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.rptskarkardDaily },
     { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
     { id: 2, value: ENEssentialsToSave.saveDataForRRGIS, url: EN_Routes.wrrptsmamgis },
     { id: 2, value: ENEssentialsToSave.saveDataForOffloadModify, url: EN_Routes.wrmtrackoffloadedoffloadMfy },
@@ -309,7 +349,9 @@ export class CloseTabService {
       this[this.val[index].value_2] = null;
       this.setAll(this[this.val[index].req], null);
     }
-    // TODO: make null all objects
+    /* TODO: make null all objects
+    should separate objects and array of objects
+*/
     this.cleanArrays();
   }
   cleanData = (url: string) => {

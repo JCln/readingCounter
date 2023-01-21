@@ -38,6 +38,7 @@ export enum ENEssentialsToSave {
     saveDataForDynamicReports = 'saveDataForDynamicReports',
     saveDataForMomentLastRead = 'saveDataForMomentLastRead',
     saveDataForToolsExcelViewer = 'saveDataForToolsExcelViewer',
+    saveDataForWaterMark = 'saveDataForWaterMark',
     saveDataForKarbari = 'saveDataForKarbari',
     saveDataForImageAttribution = 'saveDataForImageAttribution',
     saveDataForImageAttrResult = 'saveDataForImageAttrResult',
@@ -72,6 +73,8 @@ export enum ENEssentialsToSave {
     saveDataForImportDataFileExcel = 'saveDataForImportDataFileExcel',
     saveDataForImportDataFileExcelReq = 'saveDataForImportDataFileExcelReq',
     saveDataForImportErrors = 'saveDataForImportErrors',
+    saveDataForImportErrorsByTrackNumber = 'saveDataForImportErrorsByTrackNumber',
+    saveDataForImportErrorsByTrackNumberReq = 'saveDataForImportErrorsByTrackNumberReq',
     saveDataForAssessPre = 'saveDataForAssessPre',
     saveDataForAssessPreReq = 'saveDataForAssessPre',
     saveDataForAssessAdd = 'saveDataForAssessAdd',
@@ -106,6 +109,8 @@ export enum ENEssentialsToSave {
     saveDataForRRTraverseDifferential = 'saveDataForRRTraverseDifferential',
     saveDataForRRDisposalHours = 'saveDataForRRDisposalHours',
     saveDataForRRKarkard = 'saveDataForRRKarkard',
+    saveDataForKarkardAllStates = 'saveDataForKarkardAllStates',
+    saveDataForKarkardAllStatesTWO = 'saveDataForKarkardAllStatesTWO',
     saveDataForRRPreNumShown = 'saveDataForRRPreNumShown',
     saveDataForRRLocked = 'saveDataForRRLocked',
     saveDataForRROffloadedKarkard = 'saveDataForRROffloadedKarkard',
@@ -115,6 +120,9 @@ export enum ENEssentialsToSave {
     saveDataForDMAAnalyze = 'saveDataForDMAAnalyze',
     saveDataForRRDetails = 'saveDataForRRDetails',
     saveDataForUserKarkard = 'saveDataForUserKarkard',
+    saveDataForUserKarkardSummaryTwo = 'saveDataForUserKarkardSummaryTwo',
+    saveDataForUserKarkardSummary = 'saveDataForUserKarkardSummary',
+    saveDataForUserKarkardSummaryReq = 'saveDataForUserKarkardSummaryReq',
     saveDataForRRkarkardDaily = 'saveDataForRRkarkardDaily',
     saveDataForRRGIS = 'saveDataForRRGIS',
     saveDataForLMGeneralModify = 'saveDataForLMGeneralModify',
@@ -142,6 +150,7 @@ export enum ENEssentialsToSave {
     saveDataForRequestLog = 'saveDataForRequestLog',
     saveDataForRequestLogReq = 'saveDataForRequestLogReq',
     saveDataForServerErrors = 'saveDataForServerErrors',
+    saveDataForOSInfo = 'saveDataForOSInfo',
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -160,19 +169,12 @@ export interface ISnackBarSignal {
     duration: ENSnackBarTimes;
     backColor?: ENSnackBarColors;
 }
-
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
     Connecting = 'درحال اتصال به سامانه «لحظه»',
     Disconnecting = 'درحال قطع ارتباط از سامانه «لحظه»',
     Reconnecting = 'درحال اتصال به سامانه «لحظه»',
     Connected = 'متصل به سامانه «لحظه»'
-}
-export enum ENColorText {
-    blue = 'آبی',
-    green = 'سبز',
-    orange = 'نارنجی',
-    red = 'قرمز',
 }
 export enum ENSnackBarColors {
     warn = 'snack_warn',
@@ -229,6 +231,25 @@ export enum ENBrowserStatus {
     warn = 400,
     alarm = 500
 }
+export enum ENRandomNumbers {
+    zero = 0,
+    one = 1,
+    three = 3,
+    four = 4,
+    five = 5,
+    eight = 8,
+    ten = 10,
+    eleven = 11,
+    fifteen = 15,
+    eighteen = 18,
+    twenty = 20,
+    thirdy = 30,
+    forthy = 40,
+    fifty = 50,
+    oneHundred = 100,
+    twoHundred = 200,
+}
+
 export const ENBrowserInfo = {
     Chrome: { title: 'Google Chrome', url: 'https://browser-update.org/fa/update-browser.html' },
     FireFox: { title: 'Mozilla FireFox', url: 'https://browser-update.org/fa/update-browser.html' },
@@ -297,24 +318,8 @@ export enum ENLocalStorageNames {
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
     fontStyle = 'fontStyle',
-}
-export enum ENRandomNumbers {
-    zero = 0,
-    one = 1,
-    three = 3,
-    four = 4,
-    five = 5,
-    eight = 8,
-    ten = 10,
-    eleven = 11,
-    fifteen = 15,
-    eighteen = 18,
-    twenty = 20,
-    thirdy = 30,
-    forthy = 40,
-    fifty = 50,
-    oneHundred = 100,
-    twoHundred = 200,
+    reSizableTable = 'reSizableTable',
+    reOrderableTable = 'reOrderableTable',
 }
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',
@@ -355,6 +360,7 @@ export enum ENSelectedColumnVariables {
     selectedRRTraverse = 'trv',
     selectedRRTraverseDifferential = 'trvDiff',
     selectedRRKarkard = 'karkard',
+    selectedRRKarkardAllStates = 'offKarkardAllStatesReq',
     selectedRRLocked = 'rrLocked',
     selectedRRPreNumShown = 'rrPreNumber',
     selectedRROffloadedKarkard = 'karkardOffload',
@@ -375,6 +381,7 @@ export enum ENSelectedColumnVariables {
     selectedQotr = 'qotr',
     selectedForbidden = 'forbidden',
     selectedErrors = 'errors',
+    selectedErrorsByTrackNumber = 'errorsByTrackNumber',
     selectedServerErrors = 'serverErrors',
     selectedSimafaReadingProgram = 'simafaReadingProgram',
 }

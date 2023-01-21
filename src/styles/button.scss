@@ -9,6 +9,12 @@
   font-weight: 600;
   border: none;
   cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: var(--orange_600);
+  }
 }
 
 .btn_2 {
@@ -37,4 +43,10 @@
   box-shadow: 1px 1px 2px 0px var(--secondary_4);
   background-color: var(--orange_500);
   color: var(--white);
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: var(--orange_600);
+  }
 }
