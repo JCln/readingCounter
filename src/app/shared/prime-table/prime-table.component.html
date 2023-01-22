@@ -1,18 +1,28 @@
-<!-- <section *ngIf="_hasAggregating" class="content">
+<section *ngIf="_hasAggregating" class="content">
     <div class="input_2">
         <div class="_key">گروه‌بندی</div>
-        <p-checkbox [(ngModel)]="interactionService._agg.flag" [binary]="true" (onChange)="onSort()">
+        <p-checkbox [(ngModel)]="interactionService._agg.flag" [binary]="true" (click)="doAggregate()">
             گروه‌بندی
         </p-checkbox>
+        <!-- 
+            <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="interactionService._agg.selectedAggregate"
+            placeholder="انتخاب مورد" [style]="{'min-width':'10rem','width':'100%'}" optionValue="field"
+            optionLabel="header" filter="true" (onChange)="onSort()">
+        </p-dropdown>
+        <button (click)="resetAggregation()" class="btn_2_o">
+            بدون گروه‌بندی
+            <i class="pi pi-refresh"></i>
+        </button>
+         -->
     </div>
-</section> -->
-
+</section>
+<!-- (onFilter)="filterSort($event)" -->
 <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
-    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSort($event)"
-    (onFilter)="filterEventTable($event)" [resizableColumns]=_reSizebleTable [reorderableColumns]=_reOrderableTable>
+    [sortMode]="_sortMode" [customSort]="_isCustomSort" (sortFunction)="customSortFunction($event)"
+    [resizableColumns]=_reSizebleTable [reorderableColumns]=_reOrderableTable  (onFilter)="filterEventTable($event)">
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
         <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -84,7 +94,8 @@
 
     <ng-template pTemplate="header" let-columns *ngIf="_isSortable">
         <tr>
-            <th pResizableColumn pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th pResizableColumn pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}"
+                pSortableColumnDisabled="{{col.readonly}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
@@ -103,19 +114,20 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns *ngIf="!_isSortable">
         <tr>
-            <th pResizableColumn pReorderableColumn *ngFor="let col of columns">{{col.header}}</th>
+            <th pResizableColumn pReorderableColumn pSortableColumn="{{col.field}}" *ngFor="let col of columns">
+                {{col.header}}</th>
             <th pResizableColumn pReorderableColumn style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns">
             </th>
         </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
-        <!-- <tr class="_anything"
-            *ngIf="_hasAggregating && interactionService._agg.canShowGroupBorder == 1 && interactionService._agg.rowGroupMetadata[dataSource[interactionService._agg.selectedAggregate]].index === ri">
+        <tr class="_anything"
+            *ngIf="_hasAggregating && interactionService._agg.flag && interactionService._agg.rowGroupMetadata[dataSource[interactionService._agg.selectedAggregate]].index === ri">
             <td>
                 <span>{{dataSource[interactionService._agg.selectedAggregate]}}</span>
             </td>
-        </tr> -->
+        </tr>
         <tr>
             <td *ngFor="let col of columns" [ngClass]="{'d_ltr': col.ltr}">
                 <span class="ui-column-title">{{col.header}}</span>
@@ -167,7 +179,8 @@
                     <div class="tooltip_text">اتمام قرائت</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'reading' && !denyTracking()" (click)="backToImportedConfirmDialog(dataSource.id, ri)">
+            <td *ngIf="_outputFileName== 'reading' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">بازگشت به صادر شده</span>
                 <i class="tooltip p_icons pi pi-fast-backward">
                     <div class="tooltip_text">بازگشت به صادر شده</div>
@@ -198,7 +211,8 @@
                     <div class="tooltip_text_right">مشاهده لیست قرائت</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'loaded' && !denyTracking()" (click)="backToImportedConfirmDialog(dataSource.id, ri)">
+            <td *ngIf="_outputFileName== 'loaded' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">بازگشت به صادر شده</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text_right">بازگشت به صادر شده</div>
@@ -210,7 +224,8 @@
                     <div class="tooltip_text">{{_tooltipText}}</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName == 'imported' && !denyTracking()" (click)="firstConfirmDialog(dataSource.id, ri)">
+            <td *ngIf="_outputFileName == 'imported' && !denyTracking()"
+                (click)="firstConfirmDialog(dataSource.id, ri)">
                 <span class="ui-column-title">حذف مسیر</span>
                 <i class="tooltip p_icons fa fa-trash-o">
                     <div class="tooltip_text_right">حذف مسیر</div>
@@ -259,7 +274,8 @@
             <td
                 *ngIf="!dataSource.hasMap && (_checkUpName == 'lastStates' || _checkUpName == 'desc' || _checkUpName == 'simpleSearch')">
             </td>
-            <td *ngIf="_outputFileName == 'finished' && !denyTracking()" (click)="backToImportedConfirmDialog(dataSource.id,ri)">
+            <td *ngIf="_outputFileName == 'finished' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource.id,ri)">
                 <span class="ui-column-title">بازگشت به بارگذاری شده</span>
                 <i class="tooltip p_icons pi pi-step-backward">
                     <div class="tooltip_text">بازگشت به بارگذاری شده</div>
@@ -433,15 +449,19 @@
         </tr>
     </ng-template>
     <ng-template let-dataSource pTemplate="footer">
-        <tr *ngIf="_calculableSUM">
+        <!-- <tr *ngIf="_calculableSUM">
             <td *ngFor="let col of dataSource">
-                <div *ngIf="col.field == _calcName">
+                <div *ngIf="col.field == 'itemQuantity'">
                     جمع:
-                    {{calcSums()}}
+                    {{calcSums('itemQuantity')}}
+                </div>
+                <div *ngIf="col.field == 'itemCount'">
+                    جمع:
+                    {{calcSums('itemCount')}}
                 </div>
             </td>
             <td *ngFor="let item of _numberOfExtraColumns"></td>
-        </tr>
+        </tr> -->
     </ng-template>
 </p-table>
 

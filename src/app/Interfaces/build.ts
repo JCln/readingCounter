@@ -19,7 +19,10 @@ export enum ENURLs {
     TEH_SE = 'http://46.209.181.2:9098/kontoriNew',
     TEH_SE_LOCAL = 'http://172.28.5.40/kontoriNew',
     KERMANSHAH = 'http://46.225.241.211:25123/kontoriNew',
-    REY = 'http://85.133.190.221:4121/kontoriNew'
+    REY = 'http://85.133.190.221:4121/kontoriNew',
+    TSW = 'http://81.90.148.25:880/kontoriNew',
+    TEH1 = 'http://217.146.220.33:50012/kontoriNew',
+
 }
 export enum ENOSMUrls {
     DEFAULT = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -46,7 +49,7 @@ export enum ENSatelliteToken {
     TEH_SE = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
     TEH_SE_LOCAL = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
     KERMANSHAH = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
-    REY = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',    
+    REY = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
 }
 export enum ENActivateProvinceTitle {
     DEFAULT = '',
@@ -56,7 +59,9 @@ export enum ENActivateProvinceTitle {
     TEH_SE = 'جنوب شرقی تهران',
     TEH_SE_LOCAL = 'جنوب شرقی تهران',
     KERMANSHAH = 'کرمانشاه',
-    REY = 'منطقه 6 تهران'
+    REY = 'منطقه 6 تهران',
+    TSW = 'جنوب غربی تهران',
+    TEH1 = 'منطقه 1 تهران'
 }
 export interface IENV_BROWSER_SETUP {
     alert: number,
@@ -87,6 +92,7 @@ export class ENMapCenter {
     static readonly TEH_SE_LOCAL = new ENMapCenter([35.656051, 51.315435]);
     static readonly KERMANSHAH = new ENMapCenter([34.3277, 47.0778]);
     static readonly REY = new ENMapCenter([35.5770, 51.4625]);
+    static readonly TSW = new ENMapCenter([35.5770, 51.4625]);
 
     private constructor(public readonly value: [number, number]) {
     }
@@ -103,7 +109,7 @@ export class ENMapUrls {
     static readonly TEH_SE = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE }]);
     static readonly TEH_SE_LOCAL = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE_LOCAL }]);
     static readonly KERMANSHAH = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.KERMANSHAH }]);
-    static readonly REY = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.REY }]);
+    static readonly REY = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.REY }]);    
 
     private constructor(public readonly value: { title: string, url: string }[]) {
     }

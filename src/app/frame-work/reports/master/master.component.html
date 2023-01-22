@@ -70,23 +70,9 @@
             </section>
         </form>
     </section>
-    <!-- <section class="content">
-        <div class="input_2">
-            <div class="_key">گروه‌بندی</div>
-            <p-dropdown name="zones" [options]="aggregateOptions"
-                [(ngModel)]="closeTabService.offloadedGroupReq._selectedAggregate" placeholder="انتخاب مورد"
-                [style]="{'min-width':'10rem','width':'100%'}" optionValue="field" optionLabel="header" filter="true"
-                (onChange)="refreshTableAfterGrouping(closeTabService.offloadedGroupReq._selectedAggregate)">
-            </p-dropdown>
-        </div>
-        <button (click)="resetAggregation()" class="btn_2_o">
-            بدون گروه‌بندی
-            <i class="pi pi-refresh"></i>
-        </button>
-    </section> -->
     <app-prime-table *ngIf="canShowTable" [dataSource]="dataSource" [_outputFileName]="'master'"
-        [_selectedColumnsToRemember]="'selectedRRMaster'" [_calculableSUM]=true [_calcName]="'itemCount'"
-        [_hasCollapsible]=true [_hasAggregating]=true [_isCollaped]="readingReportManagerService.isCollapsedMaster"
+        [_selectedColumnsToRemember]="'selectedRRMaster'" [_calculableSUM]=true [_hasCollapsible]=true
+        [_hasAggregating]=true [_isCollaped]="readingReportManagerService.isCollapsedMaster"
         (collapsed)="readingReportManagerService.isCollapsedMaster = !readingReportManagerService.isCollapsedMaster"
         (refreshedTable)="refreshTable()">
     </app-prime-table>

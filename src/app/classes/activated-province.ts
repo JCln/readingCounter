@@ -115,6 +115,34 @@ export class ActivatedProvince implements IENV {
         ENHasCanclableSpinner.DEFAULT.value,
         timeout.time
     );
+    public static readonly TSW = new ActivatedProvince(
+        ENActivateProvinceTitle.TSW,
+        ENURLs.TSW,
+        ENMapUrls.REY.value,
+        ENHasNextBazdid.REY.value,
+        resizableTable.DEFAULT.value,
+        reorderableTable.DEFAULT.value,
+        ENMapCenter.TSW.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
+        getDeleteDictionary.DEFAULT.value,
+        ENHasCanclableSpinner.DEFAULT.value,
+        timeout.time
+    );
+    public static readonly TEH1 = new ActivatedProvince(
+        ENActivateProvinceTitle.TEH1,
+        ENURLs.TEH1,
+        ENMapUrls.DEFAULT.value,
+        ENHasNextBazdid.DEFAULT.value,
+        resizableTable.DEFAULT.value,
+        reorderableTable.DEFAULT.value,
+        ENMapCenter.DEFAULT.value,
+        BrowserVersions.DEFAULT.value,
+        ENYears.DEFAULT.value,
+        getDeleteDictionary.DEFAULT.value,
+        ENHasCanclableSpinner.DEFAULT.value,
+        timeout.time
+    );
 
     private constructor(
         public readonly headerProvinceTitle: ENActivateProvinceTitle,

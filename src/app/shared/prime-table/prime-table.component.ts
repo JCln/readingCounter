@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
 import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
+import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -16,9 +17,10 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
 @Component({
   selector: 'app-prime-table',
   templateUrl: './prime-table.component.html',
-  styleUrls: ['./prime-table.component.scss']
+  styleUrls: ['./prime-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimeTableComponent extends FactorySharedPrime {
+export class PrimeTableComponent extends FactorySharedPrime implements AfterViewInit {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
   @Input() _sortOrder: number = -1;
@@ -28,7 +30,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _canShowButton: boolean = true;
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
-  @Input() _calcName: string = '';
   @Input() _hasAggregating: boolean = false;
 
   @Output() customedSort = new EventEmitter<any>();
@@ -80,7 +81,8 @@ export class PrimeTableComponent extends FactorySharedPrime {
     public dialogService: DialogService,
     public readingReportManagerService: ReadingReportManagerService,
     public profileService: ProfileService,
-    public authService: AuthService
+    public authService: AuthService,
+    public interactionService: InteractionService
   ) {
     super(
       browserStorageService,
@@ -92,7 +94,11 @@ export class PrimeTableComponent extends FactorySharedPrime {
       authService
     );
   }
-
+  ngAfterViewInit(): void {
+    if (this.dataSource) {
+      this.doAggregate();
+    }
+  }
   refreshTable() {
     this.refreshedTable.emit(true);
   }
@@ -204,58 +210,85 @@ export class PrimeTableComponent extends FactorySharedPrime {
   routeToBatch = (dataSource: object) => {
     this.routedToBatch.emit(dataSource);
   }
-  customSort = (dataSource: any) => {
-    this.customedSort.emit(dataSource);
-  }
   routeToSingle = (dataSource: object) => {
     this.routedToSingle.emit(dataSource);
   }
-  calcSums(): number {
-    let total: number = 0;
-    this.dataSource.map(item => {
-      total += item[this._calcName]
-    })
-    return total;
+  calcSums(param: string): number {
+    if (this.dataSource) {
+      let total: number = 0;
+      for (let index = 0; index < this.dataSource.length; index++) {
+        total += this.dataSource[index][param];
+      }
+      return total;
+    }
   }
-  // refreshTableAfterGrouping = () => {
-  //   this.interactionService._agg.canShowGroupBorder = 2;
-  //   setTimeout(() => {
-  //     this.interactionService._agg.canShowGroupBorder = 1;
-  //   }, 10);
+  updateRowGroupMetaData(toAggregate: string) {
+    this.interactionService._agg.rowGroupMetadata = {};
+
+    if (this.dataSource) {
+      for (let i = 0; i < this.dataSource.length; i++) {
+
+        let rowData = this.dataSource[i];
+        let representativeName = rowData[toAggregate];
+
+        if (i == 0) {
+          this.interactionService._agg.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+        }
+        else {
+          let previousRowData = this.dataSource[i - 1];
+          let previousRowGroup = previousRowData[toAggregate];
+          if (representativeName === previousRowGroup)
+            this.interactionService._agg.rowGroupMetadata[representativeName].size++;
+          else
+            this.interactionService._agg.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+        }
+      }
+    }
+  }
+
+  doAggregate = () => {
+    const _agg = this.interactionService._agg.selectedAggregate;
+    if (_agg) {
+      this.updateRowGroupMetaData(_agg);
+    }
+    else {
+      this.updateRowGroupMetaData('');
+    }
+  }
+  // customSort = (dataSource: any) => {
+  //   this.customedSort.emit(dataSource);
   // }
-  // updateRowGroupMetaData(toAggregate: string) {
-  //   this.interactionService._agg.rowGroupMetadata = {};
 
-  //   if (this.dataSource) {
-  //     for (let i = 0; i < this.dataSource.length; i++) {
+  customSortFunction(event: any) {
+    // for cases that just need custom sort event emit
+    if (this._hasAggregating) {
+      this.customedSort.emit(event);
+    }
+    else {
+      this.doCustomSort(event);
+      this.doAggregate();
+    }
+  }
+  doCustomSort = (event: any) => {
+    event.data.sort((data1, data2) => {
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
 
-  //       let rowData = this.dataSource[i];
-  //       let representativeName = rowData[toAggregate];
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+      console.log(event.order * result);
 
-  //       if (i == 0) {
-  //         this.interactionService._agg.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
-  //       }
-  //       else {
-  //         let previousRowData = this.dataSource[i - 1];
-  //         let previousRowGroup = previousRowData[toAggregate];
-  //         if (representativeName === previousRowGroup)
-  //           this.interactionService._agg.rowGroupMetadata[representativeName].size++;
-  //         else
-  //           this.interactionService._agg.rowGroupMetadata[representativeName] = { index: i, size: 1 };
-  //       }
-  //     }
-  //   }
-  // }
-  // onSort() {
-
-  //   if (this.interactionService._agg.flag) {
-  //     this._sortField = this.interactionService._agg.selectedAggregate;
-  //     this.updateRowGroupMetaData(this.interactionService._agg.selectedAggregate);
-  //   }
-  //   else {
-  //     this.updateRowGroupMetaData('');
-  //   }
-  //   this.refreshTableAfterGrouping();
-  // }
+      return (event.order * result);
+    });
+  }
 
 }

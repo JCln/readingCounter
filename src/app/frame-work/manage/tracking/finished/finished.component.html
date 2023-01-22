@@ -6,6 +6,7 @@
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1]: [1,2]"
     [_calculableSUM]=true
     [_hasAggregating] = true
+    [_isCustomSort]=true
     [_selectedColumnsToRemember]="'selectedTrackFinished'"
     [_sessionName]="'finished-session'"
     (refreshedTable)="refreshTable()"

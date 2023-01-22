@@ -24,8 +24,6 @@ export class MasterComponent extends FactoryONE {
     { field: 'itemCount', header: 'تعداد' },
   ];
   canShowTable: boolean = true;
-  _canShowGroupBorder: boolean = false;
-
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -33,18 +31,6 @@ export class MasterComponent extends FactoryONE {
   ) {
     super();
   }
-
-  // refreshTableAfterGrouping = (val: any) => {
-  //   if (val) {
-  //     this.updateRowGroupMetaData();
-  //     this.canShowTable = false;
-  //     setTimeout(() => this.canShowTable = true, 0);
-  //     this._canShowGroupBorder = true;
-  //   }
-  //   else {
-  //     this._canShowGroupBorder = false;
-  //   }
-  // }
 
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
