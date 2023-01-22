@@ -4,7 +4,6 @@ import { PrimeNGConfig } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
-import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { ProfileService } from 'services/profile.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -81,8 +80,7 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
     public dialogService: DialogService,
     public readingReportManagerService: ReadingReportManagerService,
     public profileService: ProfileService,
-    public authService: AuthService,
-    public interactionService: InteractionService
+    public authService: AuthService
   ) {
     super(
       browserStorageService,
@@ -226,7 +224,7 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
     }
   }
   updateRowGroupMetaData(toAggregate: string) {
-    this.interactionService._agg.rowGroupMetadata = {};
+    this.profileService._agg.rowGroupMetadata = {};
 
     if (this.dataSource) {
       for (let i = 0; i < this.dataSource.length; i++) {
@@ -235,22 +233,22 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
         let representativeName = rowData[toAggregate];
 
         if (i == 0) {
-          this.interactionService._agg.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+          this.profileService._agg.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
         }
         else {
           let previousRowData = this.dataSource[i - 1];
           let previousRowGroup = previousRowData[toAggregate];
           if (representativeName === previousRowGroup)
-            this.interactionService._agg.rowGroupMetadata[representativeName].size++;
+            this.profileService._agg.rowGroupMetadata[representativeName].size++;
           else
-            this.interactionService._agg.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+            this.profileService._agg.rowGroupMetadata[representativeName] = { index: i, size: 1 };
         }
       }
     }
   }
 
   doAggregate = () => {
-    const _agg = this.interactionService._agg.selectedAggregate;
+    const _agg = this.profileService._agg.selectedAggregate;
     if (_agg) {
       this.updateRowGroupMetaData(_agg);
     }

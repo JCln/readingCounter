@@ -103,5 +103,15 @@
             </p-selectButton>
         </div>
     </section>
+    <section>
+        <h1 class="title">گروه‌بندی پیشفرض در کارتابل</h1>
+        <div class="content">
+            <p-selectButton [options]="stateOptionsAggregateTracks"
+                [(ngModel)]="profileService.showStateVals.defaultAggregateTracks" optionLabel="label"
+                optionValue="value"
+                (onChange)="setDefaultAggregateTracks(profileService.showStateVals.defaultAggregateTracks)">
+            </p-selectButton>
+        </div>
+    </section>
 
 </div>

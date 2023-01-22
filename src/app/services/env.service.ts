@@ -18,6 +18,7 @@ export class EnvService implements IENV {
   timeout = this.temp.timeout;
   reSizableTable = this.temp.reSizableTable;
   reOrderableTable = this.temp.reOrderableTable;
+  defaultAggregateTracks = this.temp.defaultAggregateTracks;
 
   // Whether or not to enable debug mode
   public enableDebug = true;

@@ -10,7 +10,8 @@ export interface IENV {
     years: { title: string, value: number }[],
     getDeleteDictionary: { id: number, title: string }[],
     hasCanclableSpinner: boolean,
-    timeout: number
+    timeout: number,
+    defaultAggregateTracks: boolean,
 }
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
@@ -109,7 +110,7 @@ export class ENMapUrls {
     static readonly TEH_SE = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE }]);
     static readonly TEH_SE_LOCAL = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE_LOCAL }]);
     static readonly KERMANSHAH = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.KERMANSHAH }]);
-    static readonly REY = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.REY }]);    
+    static readonly REY = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.REY }]);
 
     private constructor(public readonly value: { title: string, url: string }[]) {
     }
@@ -220,6 +221,12 @@ export class resizableTable {
 }
 export class reorderableTable {
     static readonly DEFAULT = new reorderableTable(false);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class defaultAggregateTracks {
+    static readonly DEFAULT = new defaultAggregateTracks(true);
 
     private constructor(public readonly value: boolean) {
     }

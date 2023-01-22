@@ -136,6 +136,8 @@ export enum EN_messages {
     possibleResizableDisabled = 'تغییر اندازه ستونها غیرفعال است',
     possibleReOrderableEnabled = 'تغییر ترتیب ستونها فعال است',
     possibleReOrderableDisabled = 'تغییر ترتیب ستونها غیرفعال است',
+    possibledefaultAggregateTracksEnabled = 'گروه‌بندی در کارتابل بطور پیشفرض فعال است',
+    possibledefaultAggregateTracksDisabled = 'گروه‌بندی در کارتابل بطور پیشفرض غیرفعال است',
     spinnerHasCancelable = 'امکان لغو درخواست غیر فعال است',
     spinnerHasActive = 'امکان لغو درخواست فعال است',
     imageOptionChanged = 'تنظیم تصاویر انجام شد',

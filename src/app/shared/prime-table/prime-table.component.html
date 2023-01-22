@@ -1,11 +1,11 @@
 <section *ngIf="_hasAggregating" class="content">
     <div class="input_2">
         <div class="_key">گروه‌بندی</div>
-        <p-checkbox [(ngModel)]="interactionService._agg.flag" [binary]="true" (click)="doAggregate()">
+        <p-checkbox [(ngModel)]="profileService._agg.flag" [binary]="true" (click)="doAggregate()">
             گروه‌بندی
         </p-checkbox>
         <!-- 
-            <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="interactionService._agg.selectedAggregate"
+            <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="profileService._agg.selectedAggregate"
             placeholder="انتخاب مورد" [style]="{'min-width':'10rem','width':'100%'}" optionValue="field"
             optionLabel="header" filter="true" (onChange)="onSort()">
         </p-dropdown>
@@ -123,9 +123,9 @@
 
     <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
         <tr class="_anything"
-            *ngIf="_hasAggregating && interactionService._agg.flag && interactionService._agg.rowGroupMetadata[dataSource[interactionService._agg.selectedAggregate]].index === ri">
+            *ngIf="_hasAggregating && profileService._agg.flag && profileService._agg.rowGroupMetadata[dataSource[profileService._agg.selectedAggregate]].index === ri">
             <td>
-                <span>{{dataSource[interactionService._agg.selectedAggregate]}}</span>
+                <span>{{dataSource[profileService._agg.selectedAggregate]}}</span>
             </td>
         </tr>
         <tr>
