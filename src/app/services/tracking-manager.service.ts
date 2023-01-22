@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
@@ -79,8 +78,7 @@ export class TrackingManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService,
-    private _location: Location,
+    private dictionaryWrapperService: DictionaryWrapperService,    
     private dialog: MatDialog,
     private allListsService: AllListsService,
     private envService: EnvService,
@@ -405,12 +403,6 @@ export class TrackingManagerService {
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);
-  }
-  backToPreviousPage = () => {
-    this._location.back();
-  }
-  backToParent = () => {
-    this.utilsService.routeTo(EN_Routes.wrmsfwu);
   }
   setGetRanges = (dataSource: IOffLoadPerDay) => {
     dataSource.overalDuration = parseFloat(MathS.getRange(dataSource.overalDuration));

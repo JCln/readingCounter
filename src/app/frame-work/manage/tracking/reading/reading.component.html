@@ -2,11 +2,12 @@
     [dataSource]="closeTabService.saveDataForTrackReading" 
     [_outputFileName]="'reading'"
     [_checkUpName]="'reading'"    
+    [_sortField]="'insertDateJalali'"
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3,4]"
     [_sessionName]="'reading-session'"
     [_selectedColumnsToRemember]="'selectedTrackReading'"    
-    [_calculableSUM]=true
-    [_calcName]="'itemQuantity'"
+    [_calculableSUM]=true    
+    [_isCustomSort]=true
     [_hasAggregating] = true
     (refreshedTable)="refreshTable()"
     (forcedOffload)="forceOffload($event)"

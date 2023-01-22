@@ -12,12 +12,11 @@ import { EN_Routes } from '../interfaces/routes.enum';
 })
 export class InteractionService {
 
-  // _agg = {
-  //   rowGroupMetadata: {},
-  //   canShowGroupBorder: 1,
-  //   selectedAggregate: 'listNumber',
-  //   flag: true
-  // }
+  _agg = {
+    rowGroupMetadata: {},
+    selectedAggregate: 'listNumber',
+    flag: true
+  }
 
   constructor(
     private closeTabService: CloseTabService,
