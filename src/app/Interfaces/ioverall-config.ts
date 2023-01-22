@@ -321,6 +321,7 @@ export enum ENLocalStorageNames {
     fontStyle = 'fontStyle',
     reSizableTable = 'reSizableTable',
     reOrderableTable = 'reOrderableTable',
+    defaultAggregateTracks = 'defaultAggregateTracks',
 }
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',

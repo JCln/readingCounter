@@ -23,6 +23,7 @@ export class ProfileComponent extends FactoryONE {
   stateOptionsSpinner: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsReordersableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateOptionsResizableTable: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
+  stateOptionsAggregateTracks: any[] = [{ label: 'فعال', value: true }, { label: 'غیرفعال', value: false }];
   stateFontStyleOptions: any[] = [
     { label: 'کوچکتر', value: ENFontStyle.fontXXS },
     { label: 'کوچک', value: ENFontStyle.fontXS },
@@ -137,6 +138,9 @@ export class ProfileComponent extends FactoryONE {
   getReOrderable = () => {
     this.profileService.showStateVals.reOrderableTable = this.profileService.getLocalReOrderable();
   }
+  getDefaultAggregationTrackings = () => {
+    this.profileService.showStateVals.defaultAggregateTracks = this.profileService.getLocalDefaultAggregateTracks();
+  }
   getHasCanclableSpinner = () => {
     this.profileService.showStateVals.hasCanclableSpinner = this.profileService.getHasCanclableSpinner();
   }
@@ -157,11 +161,15 @@ export class ProfileComponent extends FactoryONE {
   }
   setResizableTable = (val: any) => {
     this.profileService.setLocalReSizable(val);
-    val ? this.profileService.showMessage(EN_messages.possibleResizableDisabled) : this.profileService.showMessage(EN_messages.possibleResizableEnabled);
+    val ? this.profileService.showMessage(EN_messages.possibleResizableEnabled) : this.profileService.showMessage(EN_messages.possibleResizableDisabled);
   }
   setReOrderableTable = (val: any) => {
     this.profileService.setLocalReOrderable(val);
-    val ? this.profileService.showMessage(EN_messages.possibleReOrderableDisabled) : this.profileService.showMessage(EN_messages.possibleReOrderableEnabled);
+    val ? this.profileService.showMessage(EN_messages.possibleReOrderableEnabled) : this.profileService.showMessage(EN_messages.possibleReOrderableDisabled);
+  }
+  setDefaultAggregateTracks = (val: any) => {
+    this.profileService.setLocaldefaultAggregateTracks(val);
+    val ? this.profileService.showMessage(EN_messages.possibledefaultAggregateTracksEnabled) : this.profileService.showMessage(EN_messages.possibledefaultAggregateTracksDisabled);
   }
 
 }

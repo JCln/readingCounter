@@ -174,8 +174,6 @@ export class OffloadedGroupComponent extends FactoryONE {
     });
   }
   routeToAssessPre = (dataSource: ITracking) => {
-    console.log(dataSource);
-
     if (MathS.isNull(dataSource.listNumber)) {
       this.trackingManagerService.showWarnMessage(EN_messages.no_listNumberExist);
     }

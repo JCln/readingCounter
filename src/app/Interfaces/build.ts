@@ -10,7 +10,8 @@ export interface IENV {
     years: { title: string, value: number }[],
     getDeleteDictionary: { id: number, title: string }[],
     hasCanclableSpinner: boolean,
-    timeout: number
+    timeout: number,
+    defaultAggregateTracks: boolean,
 }
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
@@ -220,6 +221,12 @@ export class resizableTable {
 }
 export class reorderableTable {
     static readonly DEFAULT = new reorderableTable(false);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class defaultAggregateTracks {
+    static readonly DEFAULT = new defaultAggregateTracks(true);
 
     private constructor(public readonly value: boolean) {
     }

@@ -108,6 +108,9 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
   forceOffload = (dataSource: object, ri: number) => {
     this.forcedOffload.emit({ dataSource, ri });
   }
+  customSort = (dataSource: any) => {
+    this.customedSort.emit(dataSource);
+  }
   backToImportedConfirmDialog = (dataSource: object, ri: number) => {
     this.backedToImportedConfirmDialog.emit({ dataSource, ri });
   }
@@ -223,7 +226,7 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
     }
   }
   updateRowGroupMetaData(toAggregate: string) {
-    this.interactionService._agg.rowGroupMetadata = {};
+    this.profileService._agg.rowGroupMetadata = {};
 
     if (this.dataSource) {
       for (let i = 0; i < this.dataSource.length; i++) {
@@ -232,41 +235,27 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
         let representativeName = rowData[toAggregate];
 
         if (i == 0) {
-          this.interactionService._agg.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+          this.profileService._agg.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
         }
         else {
           let previousRowData = this.dataSource[i - 1];
           let previousRowGroup = previousRowData[toAggregate];
           if (representativeName === previousRowGroup)
-            this.interactionService._agg.rowGroupMetadata[representativeName].size++;
+            this.profileService._agg.rowGroupMetadata[representativeName].size++;
           else
-            this.interactionService._agg.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+            this.profileService._agg.rowGroupMetadata[representativeName] = { index: i, size: 1 };
         }
       }
     }
   }
 
   doAggregate = () => {
-    const _agg = this.interactionService._agg.selectedAggregate;
+    const _agg = this.profileService._agg.selectedAggregate;
     if (_agg) {
       this.updateRowGroupMetaData(_agg);
     }
     else {
       this.updateRowGroupMetaData('');
-    }
-  }
-  // customSort = (dataSource: any) => {
-  //   this.customedSort.emit(dataSource);
-  // }
-
-  customSortFunction(event: any) {
-    // for cases that just need custom sort event emit
-    if (this._hasAggregating) {
-      this.customedSort.emit(event);
-    }
-    else {
-      this.doCustomSort(event);
-      this.doAggregate();
     }
   }
   doCustomSort = (event: any) => {
@@ -285,10 +274,14 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
         result = value1.localeCompare(value2);
       else
         result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
-      console.log(event.order * result);
 
       return (event.order * result);
     });
+  }
+  customSortFunction(event: any) {
+    // for cases that just need custom sort event emit    
+    this.doCustomSort(event);
+    this.doAggregate();
   }
 
 }

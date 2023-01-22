@@ -31,6 +31,7 @@ export class ProfileService {
     defaultFontStyle: 3,
     reSizableTable: false,
     reOrderableTable: false,
+    defaultAggregateTracks: true,
     imgOptions: {
       width: '40rem',
       height: '40rem',
@@ -72,14 +73,17 @@ export class ProfileService {
   setUseCarouselMedia = (useCarousel: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, useCarousel);
   }
-  setLocalValue = (useCarousel: boolean) => {
-    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, useCarousel);
+  setLocalValue = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, bol);
   }
-  setLocalReSizable = (useCarousel: boolean) => {
-    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.reSizableTable, useCarousel);
+  setLocalReSizable = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.reSizableTable, bol);
   }
-  setLocalReOrderable = (useCarousel: boolean) => {
-    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.reOrderableTable, useCarousel);
+  setLocalReOrderable = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.reOrderableTable, bol);
+  }
+  setLocaldefaultAggregateTracks = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.defaultAggregateTracks, bol);
   }
   setCanclableSpinner = (hasCanclableSpinner: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.hasCanclableSpinner, hasCanclableSpinner);
@@ -95,6 +99,9 @@ export class ProfileService {
   }
   getLocalReOrderable = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, false);
+  }
+  getLocalDefaultAggregateTracks = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, true);
   }
   getHasCanclableSpinner = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.envService.hasCanclableSpinner);
@@ -165,6 +172,12 @@ export class ProfileService {
         }
       })
     })
+  }
+  // TODO: get access aggregating from trackingManager(کارتابل)
+  _agg = {
+    rowGroupMetadata: {},
+    selectedAggregate: 'listNumber',
+    flag: this.getLocalDefaultAggregateTracks()
   }
 
 }
