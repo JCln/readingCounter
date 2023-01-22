@@ -56,7 +56,7 @@ export class ImportDynamicService {
     hasPreNumber: true,
     displayBillId: true,
     displayRadif: true,
-    counterReaderId: ''
+    counterReaderId: ''    
   }
   private _simafaSingleReq: IReadingProgramRes;
 

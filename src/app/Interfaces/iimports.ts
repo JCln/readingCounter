@@ -5,7 +5,8 @@ export interface IAssessPreDisplayDtoSimafa {
     masrafStates: number[],
     karbariCodes: number[],
     listNumber: string,
-    zoneId: number
+    zoneId: number,
+    noImages: boolean
 }
 export interface IAssessAddDtoSimafa {
     onOffLoadIds: string[],

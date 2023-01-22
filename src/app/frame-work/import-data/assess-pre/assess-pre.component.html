@@ -11,6 +11,9 @@
                 <input class="_value" name="listNumber"
                     [(ngModel)]="closeTabService.saveDataForAssessPreReq.listNumber">
             </div>
+            <mat-checkbox name="noImages" [(ngModel)]="closeTabService.saveDataForAssessPreReq.noImages">
+                عکس ندارد
+            </mat-checkbox>
             <section class="__content">
                 <span class="ui-float-label">
                     <label for="float-input">ناحیه</label>
@@ -99,7 +102,6 @@
             <mat-checkbox name="displayRadif" [(ngModel)]="importDynamicService._assessAddReq.displayRadif">نمایش
                 ش.پرونده
             </mat-checkbox>
-
         </div>
 
     </section>

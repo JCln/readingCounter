@@ -126,7 +126,8 @@ export class CloseTabService {
     masrafStates: [],
     karbariCodes: [],
     zoneId: null,
-    listNumber: ''
+    listNumber: '',
+    noImages: false
   };
   saveDataForAssessPre: any;
   saveDataForAssessAdd: any;
