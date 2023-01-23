@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
 import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
+import { ILatestReads } from 'interfaces/imoment';
 import { IFileExcelReq, IImportErrors, IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import { IServerOSInfo } from 'interfaces/iserver-manager';
@@ -225,7 +226,7 @@ export class CloseTabService {
   saveDataForPolicies: any;
   saveDataForFNB: any;
   saveDataForProfile: any;
-  saveDataForMomentLastRead: any[] = [];
+  saveDataForMomentLastRead: ILatestReads[] = [];
   saveDataForRRGallery: any;
   saveDataForRRGalleryRSFirst: any;
   saveDataForRRGalleryReq: any;

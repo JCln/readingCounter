@@ -7,7 +7,6 @@ import { InteractionService } from 'services/interaction.service';
 import { ListManagerService } from 'services/list-manager.service';
 import { MapService } from 'services/map.service';
 import { AllListsFactory } from 'src/app/classes/factory';
-import { ILatestReads } from 'src/app/interfaces/imoment';
 
 declare let L;
 @Component({
@@ -19,39 +18,23 @@ export class LatestReadsComponent extends AllListsFactory {
   private layerGroup2 = new L.FeatureGroup();
   private map2: L.Map;
 
-  dataSource2: ILatestReads[] = [];
-
   constructor(
     private interactionService: InteractionService,
     public listManagerService: ListManagerService,
     public dialogService: DialogService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private envService: EnvService,
-    private mapService: MapService
+    private mapService: MapService    
   ) {
     super(dialogService, listManagerService);
   }
 
   /* TODO save latest data according to last view and show updating rows  */
-  classWrapper = async (canRefresh?: boolean) => {
-    this.initMap();
-
-    if (this.closeTabService.saveDataForMomentLastRead) {
-      this.dataSource2 = this.closeTabService.saveDataForMomentLastRead;
-      this.markMultipleLocations(this.dataSource2);
-    }
-    this.interactionService.getMomentLatestReads.subscribe(res => {
-      this.dataSource2.unshift(res);
-      if (this.dataSource2.length > ENRandomNumbers.twenty)
-        this.dataSource2.pop();
-      this.updateTableData();
-    })
+  private getOverlays = () => {
+    return {
+      "لایه ها": this.layerGroup2
+    };
   }
-  updateTableData = () => {
-    this.closeTabService.saveDataForMomentLastRead = this.dataSource2;
-    this.markMultipleLocations(this.dataSource2);
-  }
-
   private markMultipleLocations = (xyData: any) => {
     xyData.map((items) => {
       if (items.y > ENRandomNumbers.zero) {
@@ -59,10 +42,9 @@ export class LatestReadsComponent extends AllListsFactory {
       }
     })
   }
-  private getOverlays = () => {
-    return {
-      "لایه ها": this.layerGroup2
-    };
+  updateTableData = () => {
+    this.markMultipleLocations(this.closeTabService.saveDataForMomentLastRead);
+    this.closeTabService.saveDataForMomentLastRead = this.closeTabService.saveDataForMomentLastRead.slice();
   }
 
   initMap = () => {
@@ -75,6 +57,20 @@ export class LatestReadsComponent extends AllListsFactory {
     });
 
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map2);
+  }
+
+  classWrapper = async (canRefresh?: boolean) => {
+    this.initMap();
+
+    if (this.closeTabService.saveDataForMomentLastRead) {
+      this.markMultipleLocations(this.closeTabService.saveDataForMomentLastRead);
+    }
+    this.interactionService.getMomentLatestReads.subscribe(res => {
+      this.closeTabService.saveDataForMomentLastRead.unshift(res);
+      if (this.closeTabService.saveDataForMomentLastRead.length > ENRandomNumbers.twenty)
+        this.closeTabService.saveDataForMomentLastRead.pop();
+      this.updateTableData();
+    })
   }
 
 }
