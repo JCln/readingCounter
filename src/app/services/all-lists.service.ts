@@ -5,7 +5,8 @@ export interface IOnOffLoadNessessities {
   listNumber: string,
   trackNumber: number,
   groupId?: string,
-  zoneId?: number
+  zoneId?: number,
+  zoneTitle?: string
 }
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AllListsService {
   allLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,
-    trackNumber: null
+    trackNumber: null,
+    zoneTitle: ''
   };
   modifyLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,

@@ -345,6 +345,8 @@ export class SearchService {
   routeToLMAll = (row: ISearchSimpleOutput) => {
     this.allListsService.allLists_pageSign.GUid = row.trackingId;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
+    console.log(row.zoneId);
+
     this.router.navigate([EN_Routes.wrmlall, false]);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {

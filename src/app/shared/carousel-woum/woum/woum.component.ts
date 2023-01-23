@@ -100,8 +100,6 @@ export class WoumComponent implements OnChanges {
     this.audioFiles = [];
     this.dataSource = [];
 
-    console.log(this.id);
-    
     if (!this.id)
       return;
 

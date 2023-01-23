@@ -12,6 +12,8 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 
+import { ITracking } from './../interfaces/itrackings';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -61,11 +63,11 @@ export class CloseTabService {
   saveDataForUserSearchRes: any;
 
   // track manager
-  saveDataForTrackImported: any;
-  saveDataForTrackLoaded: any;
-  saveDataForTrackReading: any;
+  saveDataForTrackImported: ITracking[];
+  saveDataForTrackLoaded: ITracking[];
+  saveDataForTrackReading: ITracking[];
   saveDataForUserKarkard: any;
-  saveDataForTrackOffloaded: any;
+  saveDataForTrackOffloaded: ITracking[];
   saveDataForUserKarkardSummaryReq = {
     zoneId: null,
     fromDate: '',
@@ -79,7 +81,7 @@ export class CloseTabService {
   offloadedGroupReq = {
     _selectedAggregate: 'listNumber'// Default group by
   }
-  saveDataForTrackFinished: any;
+  saveDataForTrackFinished: ITracking[];
   saveDataForLastStates: any;
   saveDataForOffloadModify: any;
   saveDataForFollowUp: any;
