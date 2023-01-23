@@ -44,7 +44,7 @@ export class ImgResultDetailsCarouselComponent implements OnChanges, AfterViewIn
 
   getImageAttributionFile = async () => {
     if (this.fileRepositoryId)
-      this.dictionary = (await this.toolsService.getDataSource(ENInterfaces.getImageAttributionAll, this.fileRepositoryId)).dictionary;
+      this.dictionary = (await this.toolsService.getDataSourceById(ENInterfaces.getImageAttributionAll, this.fileRepositoryId)).dictionary;
   }
   ngOnChanges(): void {
     this.getImageAttributionFile();

@@ -1425,6 +1425,23 @@ export class ColumnManager {
         { field: 'dateDifference', header: 'مدت', isSelected: false },
         { field: 'description', header: 'توضیحات', isSelected: false, enableTooltip: true }
     ]
+    imgResultGridBased: IObjectIteratation[] = [
+        // { field: 'fileRepositorayId', header: '', isSelected: true, isNumber: true },
+        // { field: 'onOffLoadId', header: '', isSelected: true, isNumber: true },
+        { field: 'zoneTitle', header: 'ناحیه', isSelected: false },
+        { field: 'trackNumber', header: 'ش پیگیری', isSelected: true },
+        { field: 'radif', header: 'ش.پرونده', isSelected: true, isNumber: true },
+        { field: 'eshterak', header: 'اشتراک', isSelected: true, isNumber: true },
+        { field: 'firstName', header: 'نام', isSelected: true },
+        { field: 'sureName', header: 'نام خانوادگی', isSelected: true },
+        { field: 'counterReaderName', header: 'مامور', isSelected: true },
+        { field: 'counterNumber', header: 'رقم فعلی', isSelected: true },
+        { field: 'counterStateTitle', header: 'وضعیت کنتور', isSelected: true },
+        { field: 'imageAttrTitle', header: 'آیتم', isSelected: true },
+        { field: 'operatorName', header: 'کاربر', isSelected: false },
+        { field: 'sizeInByte', header: 'اندازه(بایت)', isSelected: false },
+        { field: 'imageDescription', header: 'توضیحات', isSelected: false },
+    ]
     counterReport: IObjectIteratation[] = [
         { field: 'title', header: 'عنوان', isSelected: true },
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
@@ -1435,35 +1452,6 @@ export class ColumnManager {
         { field: 'isTavizi', header: 'تعویض', isSelected: true, isBoolean: true },
         { field: 'clientOrder', header: 'ترتیب', isSelected: true }
     ]
-    // karkarAllStatesDto: IObjectIteratation[] = [
-    // implemented Dynamicly in component itself
-    //     { field: 'offloadDayalali', header: 'روز', isSelected: true },
-    //     { field: 'fromEshterak', header: 'از اشتراک', isSelected: true },
-    //     { field: 'toEshterak', header: 'تا اشتراک', isSelected: true },
-    //     { field: 'counterReaderName', header: 'مامور', isSelected: true },
-    //     { field: 'duration', header: 'زمان', isSelected: true, isNumber: true },
-    //     { field: 'overalCount', header: 'تعداد کل', isSelected: true, isNumber: true },
-    //     { field: 'zoneTitle', header: 'ناحیه', isSelected: true },
-    //     { field: 'c1', header: '1', isSelected: true },
-    //     { field: 'c2', header: '1', isSelected: true },
-    //     { field: 'c3', header: '1', isSelected: true },
-    //     { field: 'c4', header: '1', isSelected: true },
-    //     { field: 'c5', header: '1', isSelected: true, isNumber: true },
-    //     { field: 'c6', header: '1', isSelected: true, isNumber: true },
-    //     { field: 'c7', header: '1', isSelected: true, isNumber: true },
-    //     { field: 'c8', header: '1', isSelected: true, isNumber: true },
-    //     { field: 'c9', header: '1', isSelected: true, isNumber: true },
-    //     { field: 'c10', header: '1', isSelected: true, isNumber: true },
-    //     { field: 'c11', header: '1', isSelected: true, isNumber: true },
-    //     { field: 'c12', header: '1', isSelected: true, isNumber: true },
-
-    //     // counterStateAndCounts: [
-    //     //   {
-    //     //     counterStateTitle: string,
-    //     //     count: 0
-    //     //   }
-    //     // ]
-    // ]
     readingConfigDefault: IObjectIteratation[] = [
         { field: 'zoneId', header: 'ناحیه', isSelected: true, isSelectOption: true },
         { field: 'defaultAlalHesab', header: 'علی‌الحساب پیشفرض', isSelected: true },

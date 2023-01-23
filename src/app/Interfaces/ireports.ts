@@ -261,7 +261,9 @@ export interface IImageUrlAndInfos {
     counterNumber: number,
     counterStateTitle: string,
     trackNumber: number,
-    imageUrl?: any
+    imageUrl?: any,
+    imageAttrTitle?: string,
+    operatorName: string
 }
 export interface IImageUrlInfoWrapper {
     trackNumber: number,

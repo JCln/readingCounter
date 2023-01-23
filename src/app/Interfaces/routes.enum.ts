@@ -15,6 +15,7 @@ export enum EN_Routes {
     'wrSettingsWaterMark' = '/wr/settings/waterMark',
     'wrtoolsrandomImg' = '/wr/tools/randomImg',
     'wrToolsResultDetails' = '/wr/tools/resultDetails',
+    'toolsResultDetailsGridBased' = '/wr/tools/rdGridBased',
     'wrflashlr' = '/wr/flash/lr',
     'wrmrimgattr' = '/wr/m/r/imgattr',
     'wrrptsanlzfileresult' = '/wr/rpts/anlzfile/result',

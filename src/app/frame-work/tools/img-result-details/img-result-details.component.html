@@ -14,7 +14,7 @@
                 </div>
                 <div class="input_2" *ngIf="imageAttrAllDictionary.length">
                     <div class="_key">توصیف تصویر</div>
-                    <p-multiSelect [options]="imageAttrAllDictionary" name="imgAttr"
+                    <p-multiSelect [maxSelectedLabels]="2" [options]="imageAttrAllDictionary" name="imgAttr"
                         [(ngModel)]="toolsService.imgResultDetails.imageAttributionIds" optionLabel="title"
                         optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '200px'}"
                         placeholder="انتخاب مورد">

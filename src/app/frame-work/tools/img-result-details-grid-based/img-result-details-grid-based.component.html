@@ -1,0 +1,63 @@
+<main class="main">
+    <section [hidden]="toolsService._isCollapsedImageAttrGridBased">
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="static_part">
+                <section class="content">
+                    <div class="input_2" [hidden]="!zoneDictionary.length">
+                        <div class="_key">ناحیه</div>
+                        <div class="_value">
+                            <p-dropdown name="zones" [options]="zoneDictionary"
+                                [(ngModel)]="toolsService.imgResultDetailsGridBased.zoneId" placeholder="انتخاب مورد"
+                                [style]="{minWidth: '10rem',width:'100%'}" optionValue="id" optionLabel="title"
+                                filter="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="input_2" *ngIf="imageAttrAllDictionary.length">
+                        <div class="_key">توصیف تصویر</div>
+                        <p-multiSelect [maxSelectedLabels]="2" [options]="imageAttrAllDictionary" name="imgAttr"
+                            [(ngModel)]="toolsService.imgResultDetailsGridBased.imageAttributionIds" optionLabel="title"
+                            optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '200px'}"
+                            placeholder="انتخاب مورد">
+                        </p-multiSelect>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">از تاریخ</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="toolsService.receiveFromDateJalaliD(toolsService.ENReadingReports.imgResultDetailsGridBased, $event)"
+                                [dateObject]="toolsService.imgResultDetailsGridBased.fromDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">تا تاریخ</div>
+                        <div class="_value">
+                            <app-date-jalali name="fromDate"
+                                (dateJalEvent)="toolsService.receiveToDateJalaliD(toolsService.ENReadingReports.imgResultDetailsGridBased,$event)"
+                                [dateObject]="toolsService.imgResultDetailsGridBased.toDate">
+                            </app-date-jalali>
+                        </div>
+                    </div>
+
+                </section>
+            </section>
+            <footer class="center_footer">
+                <button type="submit" class="btn_1">
+                    مشاهده
+                    <i class="pi pi-list"></i>
+                </button>
+            </footer>
+        </form>
+    </section>
+
+    <app-prime-table [dataSource]="closeTabService.saveDataForImgResultDetailsGridBased"
+        [_outputFileName]="'imgResultGridBased'" [_checkUpName]="'imgResultGridBased'"
+        [_sessionName]="'imgResultGridBased-session'" [_numberOfExtraColumns]="[1]"
+        [_selectedColumnsToRemember]="'selectedToolsImgRDGridBased'" [_hasCollapsible]=true
+        [_isCollaped]="toolsService._isCollapsedImageAttrGridBased"
+        (collapsed)="toolsService._isCollapsedImageAttrGridBased = !toolsService._isCollapsedImageAttrGridBased"
+        (refreshedTable)="refreshTable()">
+    </app-prime-table>
+
+</main>

@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'downloadAI', loadChildren: () => import('./download-img-file/download-img-file.module').then(downloadFileAllImages => downloadFileAllImages.DownloadImgFileModule) },
   { path: 'downloadAITwo', loadChildren: () => import('./download-img-two-file/download-img-two-file.module').then(downloadFileAllImagesTWO2 => downloadFileAllImagesTWO2.DownloadImgTwoFileModule) },
   { path: 'uploadSingle', loadChildren: () => import('./file-upload-single/file-upload-single.module').then(fileUploadSingle => fileUploadSingle.FileUploadSingleModule) },
+  { path: 'rdGridBased', loadChildren: () => import('./img-result-details-grid-based/img-result-details-grid-based.module').then(imgResultsDetailsGridBased => imgResultsDetailsGridBased.ImgResultDetailsGridBasedModule) },
 ];
 
 @NgModule({

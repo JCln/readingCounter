@@ -310,6 +310,7 @@ export enum ENInterfaces {
 
     postToolsRandomImages = 'V1/List/OffLoaded/RandomImages',
     postImgAttrResultDetails = 'V1/ImageAttributionFile/ResultDetails',
+    postImgAttrResultDetailsGridBased = 'V1/ImageAttributionFile/ResultDetailsGridBased',
     getImageAttributionAll = `V1/ImageAttributionFile/All`,
     getImageAttributionAddOrEdit = 'V1/ImageAttributionFile/AddOrEdit',
 

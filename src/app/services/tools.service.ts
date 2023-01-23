@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
+import { ENReadingReports } from 'interfaces/reading-reports';
 import { EnvService } from 'services/env.service';
 import { JwtService } from 'src/app/auth/jwt.service';
 
@@ -24,11 +25,13 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class ToolsService {
+  ENReadingReports = ENReadingReports;
   _isCollapsedRandomImgCarouDetails: boolean = true;
   _isCollapseFileDownloadImage: boolean = false;
   _isCollapseFileDownloadImageTwo: boolean = false;
   _isCollapsedRandomImages: boolean = false;
   _isCollapsedImageAttrDetails: boolean = false;
+  _isCollapsedImageAttrGridBased: boolean = false;
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
@@ -54,6 +57,12 @@ export class ToolsService {
     zoneId: null
   }
   public imgResultDetails: IImageResultDetails = {
+    zoneId: null,
+    fromDate: '',
+    toDate: '',
+    imageAttributionIds: []
+  }
+  public imgResultDetailsGridBased: IImageResultDetails = {
     zoneId: null,
     fromDate: '',
     toDate: '',
@@ -119,6 +128,19 @@ export class ToolsService {
   receiveToDateJalali2 = (event: string) => {
     this.fileDownloadAllImagesTwo2.toDay = event;
   }
+  /* to make Dates to work property 
+  1- need to assign the exact name of the property
+  2- name value exists in enum 
+  3- the object which have variable live in this service and no other place because use 
+  for e.g this[name].fromDate = event;
+  */
+  receiveFromDateJalaliD = (variable: ENReadingReports, $event: string) => {
+    this[variable].fromDate = $event;
+  }
+  receiveToDateJalaliD = (variable: ENReadingReports, $event: string) => {
+    this[variable].toDate = $event;
+  }
+
   receiveFromDateJalaliImgResult = (event: string) => {
     this.imgResultDetails.fromDate = event;
   }
@@ -144,7 +166,7 @@ export class ToolsService {
         resolve(res))
     });
   }
-  getDataSource = (api: ENInterfaces, body: string): Promise<any> => {
+  getDataSourceById = (api: ENInterfaces, body: string): Promise<any> => {
     return new Promise((resolve) => {
       this.interfaceManagerService.GETID(api, body).toPromise().then(res =>
         resolve(res))

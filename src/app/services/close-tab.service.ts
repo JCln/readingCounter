@@ -4,6 +4,7 @@ import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
 import { ILatestReads } from 'interfaces/imoment';
 import { IFileExcelReq, IImportErrors, IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
+import { IImageUrlAndInfos } from 'interfaces/ireports';
 import { IServerOSInfo } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig } from 'interfaces/isettings';
 import { IUserOnlines } from 'interfaces/iuser-manager';
@@ -231,6 +232,7 @@ export class CloseTabService {
   saveDataForRRGalleryRSFirst: any;
   saveDataForRRGalleryReq: any;
   saveDataForRandomImgs: any;
+  saveDataForImgResultDetailsGridBased: IImageUrlAndInfos[];
   saveDataForRandomImgsRSFirst: any;
   saveDataForImgResultDetailsRes: any;
   saveDataForImgResultDetailsResFirst: any;
@@ -238,6 +240,7 @@ export class CloseTabService {
   private val: ISidebarVals[] = [
     { id: 1, value: ENEssentialsToSave.saveDataForRandomImgs, value_2: ENEssentialsToSave.saveDataForRandomImgsRSFirst, url: EN_Routes.wrtoolsrandomImg },
     { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsRes, value_2: ENEssentialsToSave.saveDataForImgResultDetailsResFirst, url: EN_Routes.wrToolsResultDetails },
+    { id: 1, value: ENEssentialsToSave.saveDataForImgResultDetailsGridBased, url: EN_Routes.toolsResultDetailsGridBased },
     { id: 1, value: ENEssentialsToSave.saveDataForToolsExcelViewer, url: EN_Routes.wrExcelviewer },
     { id: 1, value: ENEssentialsToSave.saveDataForWaterMark, url: EN_Routes.wrSettingsWaterMark },
     { id: 1, value: ENEssentialsToSave.saveDataForMomentLastRead, url: EN_Routes.wrflashlr },

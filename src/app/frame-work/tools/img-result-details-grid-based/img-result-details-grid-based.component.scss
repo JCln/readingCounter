@@ -1,0 +1,6 @@
+@import 'shared_reports';
+@import 'primeNG';
+
+section.content {
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 21rem));
+}

@@ -152,6 +152,7 @@ export enum ENEssentialsToSave {
     saveDataForRequestLogReq = 'saveDataForRequestLogReq',
     saveDataForServerErrors = 'saveDataForServerErrors',
     saveDataForOSInfo = 'saveDataForOSInfo',
+    saveDataForImgResultDetailsGridBased = 'saveDataForImgResultDetailsGridBased'
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -332,6 +333,7 @@ export enum ENSelectedColumnVariables {
     selectedUsersSearch = 'selectedUsersSearch',
     selectedSimafaBatch = '_simafaBatch',
     selectedTrackReading = 'reading',
+    selectedToolsImgRDGridBased = 'imgResultGridBased',
     selectedTrackLoaded = 'loaded',
     selectedTrackFinished = 'finished',
     selectedTrackOffloaded = 'offloaded',

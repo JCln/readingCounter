@@ -24,8 +24,13 @@ export class ListSearchMoshWoumComponent implements OnInit {
 
     this.dataSource = this.config.data._data;
     this._isNotForbidden = this.config.data._isNotForbidden;
-    // for latest reads component there is no zoneId element so The ifElse needed
 
+    // for gridBased which doesn't have id should assign fileRepositorayId
+    if (!this.dataSource.id) {
+      this.dataSource.id = this.dataSource['onOffLoadId'];
+    }
+
+    // for latest reads component there is no zoneId element so The ifElse needed
     if (this.dataSource.zoneId || this.dataSource.zoneTitle) {
       if (this.dataSource.zoneId) {
         this.dataSource.zoneId = this.convertTitleToId(this.dataSource.zoneId).id;

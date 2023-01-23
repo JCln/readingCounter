@@ -23,8 +23,8 @@
     [reorderableColumns]=_reOrderableTable (onFilter)="filterEventTable($event)">
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
-        <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
-            optionLabel="header"
+        <p-multiSelect [maxSelectedLabels]="2" *ngIf="_multiSelectEnable" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
             selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
         </p-multiSelect>
@@ -328,7 +328,8 @@
                 _outputFileName == 'momentLs' || 
                 _outputFileName == 'rrDetails' ||
                 _outputFileName == 'trv' ||
-                _outputFileName == 'trvDiff'                
+                _outputFileName == 'trvDiff' || 
+                _outputFileName == 'imgResultGridBased'                
             )" (click)="doShowCarousel(dataSource, true)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
                 <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
