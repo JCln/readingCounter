@@ -108,6 +108,9 @@ export class ProfileComponent extends FactoryONE {
     this.getSelectedColumns();
     this.getHasCanclableSpinner();
     this.getValueOfShowCarouselMedia();
+    this.getDefaultAggregationTrackings();
+    this.getReSizable();
+    this.getReOrderable();
   }
   changePassword = () => {
     this.profileService.changePassword(this.password);
@@ -139,7 +142,7 @@ export class ProfileComponent extends FactoryONE {
     this.profileService.showStateVals.reOrderableTable = this.profileService.getLocalReOrderable();
   }
   getDefaultAggregationTrackings = () => {
-    this.profileService.showStateVals.defaultAggregateTracks = this.profileService.getLocalDefaultAggregateTracks();
+    this.profileService._agg.flag = this.profileService.getLocalDefaultAggregateTracks();
   }
   getHasCanclableSpinner = () => {
     this.profileService.showStateVals.hasCanclableSpinner = this.profileService.getHasCanclableSpinner();

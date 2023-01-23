@@ -31,7 +31,6 @@ export class ProfileService {
     defaultFontStyle: 3,
     reSizableTable: false,
     reOrderableTable: false,
-    defaultAggregateTracks: true,
     imgOptions: {
       width: '40rem',
       height: '40rem',
@@ -95,13 +94,13 @@ export class ProfileService {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
   }
   getLocalResizable = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reSizableTable, false);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reSizableTable, this.envService.defaultAggregateTracks);
   }
   getLocalReOrderable = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, false);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.envService.defaultAggregateTracks);
   }
   getLocalDefaultAggregateTracks = (): boolean => {
-    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, true);
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, this.envService.defaultAggregateTracks);
   }
   getHasCanclableSpinner = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.envService.hasCanclableSpinner);
