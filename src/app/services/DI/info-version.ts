@@ -1,7 +1,7 @@
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 
 export enum ENLoginVersion {
-    version = '0.9.92'
+    version = '0.9.93'
 }
 
 export const infoVersionItems: IDictionaryManager[] = [
@@ -22,7 +22,7 @@ export const infoVersionItems: IDictionaryManager[] = [
     },
     {
         id: '2',
-        title: 'بهبود عملکرد برنامه',
+        title: 'نتیجه پایش(جدول)',
         isSelected: true
     },
 ]
