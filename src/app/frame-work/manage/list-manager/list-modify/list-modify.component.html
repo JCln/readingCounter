@@ -3,53 +3,39 @@
         <div class="input_2">
             <div class="_key">ش.پیگیری</div>
             <input [readOnly]="true" class="_value" name="trackNumber"
-                [(ngModel)]="pageSignTrackNumber">
+                [(ngModel)]="allListsService.modifyLists_pageSign.trackNumber">
         </div>
         <div class="input_2">
             <div class="_key">ش.لیست</div>
-            <input [readOnly]="true" class="_value" name="listNumber"
+            <input [readOnly]="true" class="_value _bigger_input" name="listNumber"
                 [(ngModel)]="allListsService.modifyLists_pageSign.listNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <input [readOnly]="true" class="_value" name="zone"
+                [(ngModel)]="allListsService.modifyLists_pageSign.zoneTitle">
         </div>
     </div>
 </section>
 
 <main style="position: relative; ">
-    <app-prime-table
-    [dataSource]="dataSource" 
-    [_outputFileName]="'ModifyList'"
-    [_checkUpName]="'allComponent'"
-    [_sessionName]="'modifyLists'"
-    [_selectedColumnsToRemember]="'selectedListManagerModify'"
-    [_numberOfExtraColumns]="[1,2,3,4,5,6]"    
-    [_backToPreviousEnabled]=true
-    [_backToPreviousText]="'بازگشت به صفحه قبلی'"
-    [_isCustomSort]=true
-    (customedSort)="listManagerService.customSort($event)"
-    (refreshedTable)="refreshTable()"
-    (backedToPrevious)="toPrePage()"
-    (routedToOffload)="routeToOffload($event)"
-    (filteredEvent)="filteredTableEvent($event)"
-    (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"        
-    (showedPictures)="getReadingReportTitles($event)" 
-    (openedBriefKardexDialog)="openBriefKardexDialog($event)"
-    (showedInMapSingle)="openMapDialog($event)"   
-    > 
+    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'ModifyList'" [_checkUpName]="'allComponent'"
+        [_sessionName]="'modifyLists'" [_selectedColumnsToRemember]="'selectedListManagerModify'"
+        [_numberOfExtraColumns]="[1,2,3,4,5,6]" [_backToPreviousEnabled]=true
+        [_backToPreviousText]="'بازگشت به صفحه قبلی'" [_isCustomSort]=true
+        (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
+        (backedToPrevious)="toPrePage()" (routedToOffload)="routeToOffload($event)"
+        (filteredEvent)="filteredTableEvent($event)" (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
+        (showedPictures)="getReadingReportTitles($event)" (openedBriefKardexDialog)="openBriefKardexDialog($event)"
+        (showedInMapSingle)="openMapDialog($event)">
     </app-prime-table>
-    
-    <app-carousel *ngIf="showCarousel" 
-    [dataSource]="carouselDataSource"
-    (cancelClicked)="carouselCancelClicked()"
-    (prevClicked)="carouselPrevItem()"
-    (nextClicked)="carouselNextItem()"
-    >
-    <app-offload></app-offload>
+
+    <app-carousel *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
+        <app-offload></app-offload>
     </app-carousel>
 
-    <app-carousel-woum *ngIf="showWouImages" 
-    [dataSource]="carouselDataSource"
-    (cancelClicked)="carouselCancelClicked()"
-    (prevClicked)="carouselPrevItem()"
-    (nextClicked)="carouselNextItem()"
-    >    
+    <app-carousel-woum *ngIf="showWouImages" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
     </app-carousel-woum>
 </main>

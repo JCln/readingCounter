@@ -10,9 +10,9 @@ export enum ENColorText {
 }
 
 export const broadcastMessages: IMessage[] = [
-    { title: EN_messages.broadTitle1, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage1, exactColor: ENSnackBarColorsExact.info, color: ENSnackBarColors.info, time: ENSnackBarTimes.twentyMili, canSave: true },
-    { title: EN_messages.broadTitle2, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage2, exactColor: ENSnackBarColorsExact.warn, color: ENSnackBarColors.warn, time: ENSnackBarTimes.twentyMili, canSave: true },
-    { title: EN_messages.broadTitle3, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage3, exactColor: ENSnackBarColorsExact.success, color: ENSnackBarColors.success, time: ENSnackBarTimes.twentyMili, canSave: true }
+    { title: EN_messages.broadTitle1, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage1, exactColor: ENSnackBarColorsExact.info, color: ENSnackBarColors.info, seconds: ENSnackBarTimes.twentyMili, canSave: true },
+    { title: EN_messages.broadTitle2, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage2, exactColor: ENSnackBarColorsExact.warn, color: ENSnackBarColors.warn, seconds: ENSnackBarTimes.twentyMili, canSave: true },
+    { title: EN_messages.broadTitle3, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage3, exactColor: ENSnackBarColorsExact.success, color: ENSnackBarColors.success, seconds: ENSnackBarTimes.twentyMili, canSave: true }
 ]
 
 export const times: ITime[] = [

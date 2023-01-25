@@ -15,7 +15,7 @@
                 <div class="t_separator">
                     <mat-button-toggle-group>
                         <mat-button-toggle class="btn_2" *ngFor="let item of times"
-                            (click)="newMessage.time = item.value">
+                            (click)="newMessage.seconds = item.value">
                             {{item.title}}
                         </mat-button-toggle>
                     </mat-button-toggle-group>

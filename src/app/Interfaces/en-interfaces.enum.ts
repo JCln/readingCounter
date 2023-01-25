@@ -218,7 +218,8 @@ export enum ENInterfaces {
     rrInStatePost = 'V1/List/Offloaded/InState',
 
     signalRStartConnection = '/notifyHub',
-    signalRBroadcastMessage = 'broadcast',
+    // signalRBroadcastMessage = 'broadcast',
+    signalRBroadcastMessage = 'V1/NotifyManager/Broadcast/TextWithTimer',
     signalRMomentSystemAddReadingRow = 'AddReadingRow',
     signalRSendMessage = 'sendMessage',
     signalRReceiveMessage = 'receiveMessage',

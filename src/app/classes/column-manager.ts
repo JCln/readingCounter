@@ -1357,7 +1357,7 @@ export class ColumnManager {
         { field: 'offLoadTime', header: 'زمان', isSelected: false, readonly: true, icon: '' },
         { field: 'dateDifference', header: 'مدت', isSelected: false, readonly: true, icon: '' },
         { field: 'modifyType', header: 'نوع اصلاح', isSelected: true, isSelectOption: true, readonly: false, icon: '_editable' },
-        { field: 'description', header: 'توضیحات', isSelected: false, readonly: true, enableTooltip: true, icon: '_editable' }
+        { field: 'description', header: 'توضیحات', isSelected: false, readonly: false, enableTooltip: true, icon: '_editable' }
     ]
     ModifyList: IObjectIteratation[] = [
         { field: 'counterReaderName', header: 'مامور', isSelected: false },

@@ -15,7 +15,7 @@ export class MessageService {
     title: '',
     message: '',
     color: ENSnackBarColors.info,
-    time: 0,
+    seconds: 0,
     canSave: true
   };
 
@@ -38,7 +38,7 @@ export class MessageService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_text);
       return false;
     }
-    if (MathS.isNull(body.time)) {
+    if (MathS.isNull(body.seconds)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_showTime);
       return false;
     }
@@ -52,7 +52,7 @@ export class MessageService {
     this.message.color = color;
   }
   setTime = (showTime: number) => {
-    this.message.time = showTime;
+    this.message.seconds = showTime;
   }
   setText = (text: string) => {
     this.message.message = text;

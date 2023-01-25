@@ -29,8 +29,6 @@ export class GeneralListModifyComponent extends AllListsFactory {
   clonedProducts: { [s: string]: object; } = {};
   counterStateValue: number;
 
-  pageSignTrackNumber: number = null;
-
   deleteDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
@@ -87,7 +85,6 @@ export class GeneralListModifyComponent extends AllListsFactory {
       this.router.navigateByUrl(EN_Routes.wrmtrackoffloaded);
     }
     else {
-      this.assignToPageSign();
       this.counterStateByZoneDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
       this.counterStateForModifyDictionary = await this.listManagerService.getCounterStateForModifyDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
       if (canRefresh) {
@@ -194,9 +191,6 @@ export class GeneralListModifyComponent extends AllListsFactory {
   /*
   water officer upload carousel images
   */
-  assignToPageSign = () => {
-    this.pageSignTrackNumber = this.allListsService.generalModifyLists_pageSign.trackNumber;
-  }
   openMoshtarakinDialog = (dataSource: any) => {
     this.ref = this.dialogService.open(ListSearchMoshDgComponent, {
       data: {

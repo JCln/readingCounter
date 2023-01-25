@@ -22,6 +22,10 @@
     }
   }
 
+  .mat-step-header {
+    height: 100%;
+  }
+
   .mat-stepper-horizontal,
   .mat-stepper-vertical {
     background: var(--secondary_1);

@@ -78,7 +78,7 @@ export class TrackingManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private dictionaryWrapperService: DictionaryWrapperService,    
+    private dictionaryWrapperService: DictionaryWrapperService,
     private dialog: MatDialog,
     private allListsService: AllListsService,
     private envService: EnvService,
@@ -374,12 +374,14 @@ export class TrackingManagerService {
     this.allListsService.allLists_pageSign.GUid = row.id;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
     this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
+    this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
     this.utilsService.routeTo(EN_Routes.wrmlallfalse);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
     this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
     this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
     this.allListsService.modifyLists_pageSign.trackNumber = dataSource.trackNumber;
+    this.allListsService.modifyLists_pageSign.zoneTitle = dataSource.zoneTitle;
     this.utilsService.routeTo(EN_Routes.wrmlalltrue);
   }
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
@@ -387,6 +389,7 @@ export class TrackingManagerService {
     this.allListsService.generalModifyLists_pageSign.listNumber = dataSource.listNumber;
     this.allListsService.generalModifyLists_pageSign.groupId = dataSource.groupId;
     this.allListsService.generalModifyLists_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.generalModifyLists_pageSign.zoneTitle = dataSource.zoneTitle;
     this.allListsService.generalModifyLists_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.wrmlGeneralModify);
   }
@@ -398,6 +401,7 @@ export class TrackingManagerService {
     this.allListsService.generalModifyListsGrouped_pageSign.listNumber = dataSource.listNumber;
     this.allListsService.generalModifyListsGrouped_pageSign.groupId = dataSource.groupId;
     this.allListsService.generalModifyListsGrouped_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.generalModifyListsGrouped_pageSign.zoneTitle = dataSource.zoneTitle;
     this.allListsService.generalModifyListsGrouped_pageSign.trackNumber = dataSource.trackNumber;
     this.utilsService.routeTo(EN_Routes.wrmlGeneralGModify);
   }

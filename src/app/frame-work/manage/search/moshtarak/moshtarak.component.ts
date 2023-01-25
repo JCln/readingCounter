@@ -11,6 +11,8 @@ import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { Search } from 'src/app/classes/search';
 
+import { BriefKardexComponent } from '../../list-manager/brief-kardex/brief-kardex.component';
+
 @Component({
   selector: 'app-moshtarak',
   templateUrl: './moshtarak.component.html',
@@ -96,6 +98,26 @@ export class MoshtarakComponent extends AllListsFactory {
     if (this.zoneDictionary[0].id !== 0)
       this.zoneDictionary.unshift({ id: 0, title: 'مناطق مجاز', isSelected: true })
   }
-
+  convertTitleToId = (dataSource: any): any => {
+    return this.zoneDictionary.find(item => {
+      if (item.title === dataSource)
+        return item;
+    })
+  }
+  openBriefKardexDialog = (dataSource: any) => {
+    const temp = this.convertTitleToId(dataSource.zoneId);
+    this.ref = this.dialogService.open(BriefKardexComponent, {
+      data: {
+        radif: dataSource.radif,
+        zoneId: temp.id
+      },
+      rtl: true,
+      width: '90%'
+    })
+    this.ref.onClose.subscribe((res: any) => {
+      if (res)
+        console.log(res);
+    });
+  }
 
 }

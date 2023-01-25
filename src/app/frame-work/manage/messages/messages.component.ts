@@ -16,7 +16,7 @@ export class MessagesComponent extends FactoryONE {
     title: '',
     message: '',
     color: ENSnackBarColors.info,
-    time: 0,
+    seconds: 0,
     canSave: true
   };
   colors: IColor[] = [];
@@ -41,11 +41,9 @@ export class MessagesComponent extends FactoryONE {
     this.allMessages = this.messageService.getMessages();
   }
   copyPreMessageToCurrent = (name: IMessage) => {
-    console.log(name);
-
     this.newMessage.title = name.title;
     this.newMessage.color = name.color;
-    this.newMessage.time = name.time;
+    this.newMessage.seconds = name.seconds;
     this.newMessage.message = name.message;
     this.newMessage.canSave = name.canSave;
 

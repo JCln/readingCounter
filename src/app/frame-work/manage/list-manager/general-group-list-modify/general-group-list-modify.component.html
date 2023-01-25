@@ -2,12 +2,18 @@
     <div class="overall-info">
         <div class="input_2">
             <div class="_key">ش.پیگیری</div>
-            <input [readOnly]="true" class="_value" name="trackNumber" [(ngModel)]="pageSignTrackNumber">
+            <input [readOnly]="true" class="_value" name="trackNumber"
+                [(ngModel)]="allListsService.generalModifyListsGrouped_pageSign.trackNumber">
         </div>
         <div class="input_2">
             <div class="_key">ش.لیست</div>
-            <input [readOnly]="true" class="_value" name="listNumber"
+            <input [readOnly]="true" class="_value _bigger_input" name="listNumber"
                 [(ngModel)]="allListsService.generalModifyListsGrouped_pageSign.listNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <input [readOnly]="true" class="_value" name="zone"
+                [(ngModel)]="allListsService.generalModifyListsGrouped_pageSign.zoneTitle">
         </div>
     </div>
     <div class="radios">
@@ -219,11 +225,23 @@
 
                             <ng-template #editableForm>
                                 <ng-container *ngIf="col.enableTooltip; else simpleText">
-                                    <div class="tooltip">
-                                        {{dataSource[col.field] && dataSource[col.field].length > 0 ?
-                                        dataSource[col.field].toString().split(' ')[0] :
-                                        ''}}
-                                        <div class="tooltip_text">{{dataSource[col.field]}}</div>
+                                    <div *ngIf="col.icon">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText [(ngModel)]="dataSource[col.field]">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{dataSource[col.field]}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </div>
+                                    <div *ngIf="!col.icon">
+                                        <div class="tooltip">
+                                            {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                                            dataSource[col.field].toString().split(' ')[0] :
+                                            ''}}
+                                            <div class="tooltip_text">{{dataSource[col.field]}}</div>
+                                        </div>
                                     </div>
                                 </ng-container>
                                 <ng-template #simpleText>

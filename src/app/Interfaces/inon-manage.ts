@@ -38,7 +38,7 @@ export interface IMessage {
     title: string;
     message: string;
     color: ENSnackBarColors;
-    time: ENSnackBarTimes;
+    seconds: ENSnackBarTimes;
     canSave: boolean;
     text?: ENRandomNumbers;
     exactColor?: ENSnackBarColorsExact;

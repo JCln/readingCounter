@@ -43,7 +43,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   _selectedColumns: any[];
 
   clonedProducts: { [s: string]: object; } = {};
-  pageSignTrackNumber: number = null;
 
   karbariDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
@@ -98,7 +97,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.utilsService.routeTo(EN_Routes.wrmtrackoffloadedGroup);
     }
     else {
-      this.assignToPageSign();
       this.counterStateByZoneDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       this.counterStateForModifyDictionary = await this.listManagerService.getCounterStateForModifyDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       if (canRefresh) {
@@ -287,9 +285,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         this.dataSource[index].offloadDateJalali = event;
       }
     }
-  }
-  assignToPageSign = () => {
-    this.pageSignTrackNumber = this.allListsService.generalModifyListsGrouped_pageSign.trackNumber;
   }
   openEditedModifyBatch = (data: IBatchModifyRes) => {
     this.ref = this.dialogService.open(GeneralGroupInfoResComponent, {

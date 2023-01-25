@@ -20,7 +20,6 @@ import { BriefKardexComponent } from './../brief-kardex/brief-kardex.component';
 export class ListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
 
-  pageSignTrackNumber: number = null;
   karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
@@ -38,9 +37,6 @@ export class ListModifyComponent extends AllListsFactory {
     super(dialogService, listManagerService);
   }
 
-  assignToPageSign = () => {
-    this.pageSignTrackNumber = this.allListsService.modifyLists_pageSign.trackNumber;
-  }
 
   classWrapper = async (canRefresh?: boolean) => {
 
@@ -48,7 +44,6 @@ export class ListModifyComponent extends AllListsFactory {
       this.toPrePage();
     }
     else {
-      this.assignToPageSign();
       if (canRefresh) {
         this.closeTabService.saveDataForLMModify = null;
         this.closeTabService.saveDataForLMModifyReq = null;

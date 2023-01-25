@@ -343,11 +343,11 @@ export class SearchService {
     this[variable].toDate = $event;
   }
   routeToLMAll = (row: ISearchSimpleOutput) => {
+    this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.allListsService.allLists_pageSign.GUid = row.trackingId;
+    this.allListsService.allLists_pageSign.zoneTitle = row.zoneId.toString();
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
-    console.log(row.zoneId);
-
-    this.router.navigate([EN_Routes.wrmlall, false]);
+    this.utilsService.routeToByParams(EN_Routes.wrmlall, false);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
     this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;

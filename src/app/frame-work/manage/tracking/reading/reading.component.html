@@ -2,7 +2,7 @@
     [dataSource]="closeTabService.saveDataForTrackReading" 
     [_outputFileName]="'reading'"
     [_checkUpName]="'reading'"    
-    [_sortField]="'insertDateJalali'"
+    [_sortField]="'listNumber'"
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3,4]"
     [_sessionName]="'reading-session'"
     [_selectedColumnsToRemember]="'selectedTrackReading'"    
@@ -11,6 +11,7 @@
     [_hasAggregating] = true
     (refreshedTable)="refreshTable()"
     (forcedOffload)="forceOffload($event)"
+    (customedSort)="trackingManagerService.customSort($event)"
     (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event)"
     (routedToLMPayDay)="trackingManagerService.routeToLMPayDay($event)"
     (routedToLMAll)="trackingManagerService.routeToLMAll($event)"

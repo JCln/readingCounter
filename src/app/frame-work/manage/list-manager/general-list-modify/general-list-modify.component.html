@@ -2,12 +2,18 @@
     <div class="overall-info">
         <div class="input_2">
             <div class="_key">ش.پیگیری</div>
-            <input [readOnly]="true" class="_value" name="trackNumber" [(ngModel)]="pageSignTrackNumber">
+            <input [readOnly]="true" class="_value" name="trackNumber"
+                [(ngModel)]="allListsService.generalModifyLists_pageSign.trackNumber">
         </div>
         <div class="input_2">
             <div class="_key">ش.لیست</div>
-            <input [readOnly]="true" class="_value" name="listNumber"
+            <input [readOnly]="true" class="_value _bigger_input" name="listNumber"
                 [(ngModel)]="allListsService.generalModifyLists_pageSign.listNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <input [readOnly]="true" class="_value" name="zone"
+                [(ngModel)]="allListsService.generalModifyLists_pageSign.zoneTitle">
         </div>
     </div>
     <div class="radios">
@@ -15,7 +21,7 @@
             name="counterState">
             <mat-radio-button class="radio_button" *ngFor="let orderType of counterStateForModifyDictionary"
                 [value]="orderType.id" (change)="updateOnChangedCounterState($event)"
-                [ngClass]="{'under_zero': orderType.id < 0}">                
+                [ngClass]="{'under_zero': orderType.id < 0}">
                 {{orderType.title}}
             </mat-radio-button>
         </mat-radio-group>
@@ -33,13 +39,13 @@
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
         (backedToPrevious)="toPrePage()" (filteredEvent)="filteredTableEvent($event)"
         (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)"
-        (showedWOUIAsCarousel)="doShowCarousel($event.dataSource)" (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
-        (onRowEditedInit)="onRowEditInit($event)" (onRowEditedSave)="onRowEditSave($event)"
-        (openedBriefKardexDialog)="openBriefKardexDialog($event)"
+        (showedWOUIAsCarousel)="doShowCarousel($event.dataSource)"
+        (openedMoshtarakinDialog)="openMoshtarakinDialog($event)" (onRowEditedInit)="onRowEditInit($event)"
+        (onRowEditedSave)="onRowEditSave($event)" (openedBriefKardexDialog)="openBriefKardexDialog($event)"
         (onRowEditedCancelRowEditing)="onRowEditCancel($event)" (getedExcelSample)="getExcel()">
     </app-prime-table-editable>
 
     <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"
-        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">        
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
     </app-carousel-woum>
 </main>

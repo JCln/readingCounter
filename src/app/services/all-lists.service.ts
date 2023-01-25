@@ -22,13 +22,15 @@ export class AllListsService {
   modifyLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,
-    trackNumber: null
+    trackNumber: null,
+    zoneTitle: '',
   };
   generalModifyLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,
     groupId: '',
     zoneId: null,
+    zoneTitle: '',
     trackNumber: null
   };
   generalModifyListsGrouped_pageSign: IOnOffLoadNessessities = {
@@ -36,7 +38,8 @@ export class AllListsService {
     listNumber: null,
     groupId: '',
     zoneId: null,
-    trackNumber: null
+    trackNumber: null,
+    zoneTitle: ''
   };
 
 }

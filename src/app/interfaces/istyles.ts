@@ -4,8 +4,8 @@ export enum ENFontName {
 export enum ENFontStyle {
     fontXXS = 0,
     fontXS = 1,
-    fontSM = 3,
-    fontS = 2,
+    fontSM = 2,
+    fontS = 3,
 }
 
 export enum ENThemeName {

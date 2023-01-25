@@ -2,11 +2,12 @@
     <div class="overall-info">
         <div class="input_2">
             <div class="_key">ش.پیگیری</div>
-            <input [readOnly]="true" class="_value" name="trackNumber" [(ngModel)]="pageSignTrackNumber">
+            <input [readOnly]="true" class="_value" name="trackNumber"
+                [(ngModel)]="allListsService.allLists_pageSign.trackNumber">
         </div>
         <div class="input_2">
             <div class="_key">ش.لیست</div>
-            <input [readOnly]="true" class="_value" name="listNumber"
+            <input [readOnly]="true" class="_value _bigger_input" name="listNumber"
                 [(ngModel)]="allListsService.allLists_pageSign.listNumber">
         </div>
         <div class="input_2">
@@ -19,24 +20,16 @@
 
 <main style="position: relative; ">
     <app-prime-table [hidden]="showCarousel" [dataSource]="dataSource" [_outputFileName]="'allLists'"
-        [_checkUpName]="'allComponent'" 
-        [_sessionName]="'allLists'"
-        [_selectedColumnsToRemember]="'selectedListManagerAll'" 
-        [_numberOfExtraColumns]="[1,2,3]"
-        [_backToPreviousEnabled]=true 
-        [_backToPreviousText]="'بازگشت به صفحه قبلی'"
-        [_isCustomSort]=true 
-        (customedSort)="listManagerService.customSort($event)" 
-        (refreshedTable)="refreshTable()"
-        (backedToPrevious)="toPrePage()"
-        (filteredEvent)="filteredTableEvent($event)"        
-        (routedToOffload)="routeToOffload($event)"
-        (showedPictures)="getReadingReportTitles($event)"
-        (showedInMapSingle)="openMapDialog($event)"
-        >
+        [_checkUpName]="'allComponent'" [_sessionName]="'allLists'"
+        [_selectedColumnsToRemember]="'selectedListManagerAll'" [_numberOfExtraColumns]="[1,2,3]"
+        [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت به صفحه قبلی'" [_isCustomSort]=true
+        (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
+        (backedToPrevious)="toPrePage()" (filteredEvent)="filteredTableEvent($event)"
+        (routedToOffload)="routeToOffload($event)" (showedPictures)="getReadingReportTitles($event)"
+        (showedInMapSingle)="openMapDialog($event)">
     </app-prime-table>
 
     <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"
-        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">        
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
     </app-carousel-woum>
 </main>

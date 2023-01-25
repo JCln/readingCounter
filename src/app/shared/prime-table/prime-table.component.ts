@@ -226,33 +226,61 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
     }
   }
   updateRowGroupMetaData(toAggregate: string) {
-    this.profileService._agg.rowGroupMetadata = {};
+    // this.profileService._agg.rowGroupMetadata = {};
+    let tempRowGroupMeta = {};
+    console.log(this.dataSource);
+
 
     if (this.dataSource) {
       for (let i = 0; i < this.dataSource.length; i++) {
 
-        let rowData = this.dataSource[i];
-        let representativeName = rowData[toAggregate];
+        let rowData = this.dataSource[i][toAggregate];
 
         if (i == 0) {
-          this.profileService._agg.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+          tempRowGroupMeta[rowData] = { index: 0, size: 1 };
         }
         else {
-          let previousRowData = this.dataSource[i - 1];
-          let previousRowGroup = previousRowData[toAggregate];
-          if (representativeName === previousRowGroup)
-            this.profileService._agg.rowGroupMetadata[representativeName].size++;
+          let previousRowData = this.dataSource[i - 1][toAggregate];
+          if (rowData === previousRowData)
+            tempRowGroupMeta[rowData].size++;
           else
-            this.profileService._agg.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+            tempRowGroupMeta[rowData] = { index: i, size: 1 };
         }
       }
     }
+    console.log(tempRowGroupMeta);
+    this.profileService._agg.rowGroupMetadata = tempRowGroupMeta;
+
   }
+  // updateRowGroupMetaDataOrigin(toAggregate: string) {
+  //   this.profileService._agg.rowGroupMetadata = {};
+
+  //   if (this.dataSource) {
+  //     for (let i = 0; i < this.dataSource.length; i++) {
+
+  //       let rowData = this.dataSource[i];
+  //       let representativeName = rowData[toAggregate];
+
+  //       if (i == 0) {
+  //         this.profileService._agg.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+  //       }
+  //       else {
+  //         let previousRowData = this.dataSource[i - 1];
+  //         let previousRowGroup = previousRowData[toAggregate];
+  //         if (representativeName === previousRowGroup)
+  //           this.profileService._agg.rowGroupMetadata[representativeName].size++;
+  //         else
+  //           this.profileService._agg.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+  //       }
+  //     }
+  //   }
+  // }
 
   doAggregate = () => {
-    const _agg = this.profileService._agg.selectedAggregate;
+    const _agg = this.profileService._agg.flag;
+
     if (_agg) {
-      this.updateRowGroupMetaData(_agg);
+      this.updateRowGroupMetaData(this.profileService._agg.selectedAggregate);
     }
     else {
       this.updateRowGroupMetaData('');
@@ -279,9 +307,21 @@ export class PrimeTableComponent extends FactorySharedPrime implements AfterView
     });
   }
   customSortFunction(event: any) {
-    // for cases that just need custom sort event emit    
+    // if (
+    //   event.field == 'counterReaderName' ||
+    //   event.field == 'stateTitle' ||
+    //   event.field == 'insertDateJalali' ||
+    //   event.field == 'itemQuantity'
+    // ) {
+    //   this.profileService._agg.flag = false;
+    //   // this.doCustomSort(event);
+    // }
+    // else {
+    //   // for cases that just need custom sort event emit    
+    //   this.profileService._agg.flag = true;
     this.doCustomSort(event);
     this.doAggregate();
+    // }
   }
 
 }

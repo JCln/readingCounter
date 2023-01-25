@@ -17,8 +17,6 @@ import { AllListsFactory } from 'src/app/classes/factory';
 })
 export class AllComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
-  pageSignTrackNumber: number = null;
-
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
@@ -43,8 +41,6 @@ export class AllComponent extends AllListsFactory {
     }
 
     else {
-      this.assignToPageSign();
-      this.pageSignTrackNumber = this.allListsService.allLists_pageSign.trackNumber;
       if (canRefresh) {
         this.closeTabService.saveDataForLMAll = null;
         this.closeTabService.saveDataForLMAllReq = null;
@@ -85,9 +81,6 @@ export class AllComponent extends AllListsFactory {
   }
   toPrePage = () => {
     this._location.back();
-  }
-  assignToPageSign = () => {
-    this.pageSignTrackNumber = this.allListsService.allLists_pageSign.trackNumber;
   }
 
 }

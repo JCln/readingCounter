@@ -11,6 +11,7 @@ import { ISearchMoshReqDialog } from 'interfaces/search';
 import { SortEvent } from 'primeng/api/sortevent';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { Converter } from '../classes/converter';
@@ -40,6 +41,7 @@ export class ListManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
+    private authService: AuthService,
     private columnManager: ColumnManager
   ) { }
 
@@ -52,7 +54,10 @@ export class ListManagerService {
   routeToOffloaded = () => {
     this.utilsService.routeToByUrl(EN_Routes.wrmtrackoffloaded);
   }
-
+  denyTracking = (): boolean => {
+    const jwtRole = this.authService.getAuthUser();
+    return jwtRole.roles.toString().includes('denytracking') ? true : false;
+  }
   getLMPerDay = (): IObjectIteratation[] => {
     return this.columnManager.columnSelectedMenus('lMPerDay');
   }
