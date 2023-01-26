@@ -62,9 +62,12 @@ export class UsersAllService {
       })
     });
   }
+  snackBarMessageSuccess = (res: IResponses) => {
+    this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
+  }
   changeUserStatus = (method: ENInterfaces, UUID: string) => {
     this.interfaceManagerService.POSTSG(method, UUID).toPromise().then((res: IResponses) => {
-      this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+      this.snackBarMessageSuccess(res);
     });
   }
   routeToUsersAll = () => {
@@ -88,18 +91,10 @@ export class UsersAllService {
       })
     })
   }
-  roleAddEdit = (apiUse: ENInterfaces, value: any): Promise<any> => {
-    return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBODY(apiUse, value).subscribe((res: IResponses) => {
-        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
-        resolve(res);
-      })
-    });
-  }
   deleteSingleRow = (place: ENInterfaces, id: number) => {
     return new Promise((resolve) => {
       this.interfaceManagerService.POST(place, id).subscribe((res: IResponses) => {
-        this.snackWrapperService.openSnackBar(res.message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
+        this.snackBarMessageSuccess(res);
         resolve(true);
       })
     });
@@ -244,9 +239,11 @@ export class UsersAllService {
       });
     })
   }
-  private connectToServerEditOnRole = (dataSource: IUserEditOnRole) => {
-    this.interfaceManagerService.POSTBODY(ENInterfaces.userEditOnRole, dataSource).toPromise().then((res: IResponses) => {
-      this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+  postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise(resolve => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: any) => {
+        resolve(res);
+      });
     });
   }
   private verificationEditOnRole = (dataSource: IUserEditOnRole) => {
@@ -268,8 +265,11 @@ export class UsersAllService {
     }
     if (!this.verificationEditOnRole(val))
       return;
-    if (await this.firstConfirmDialog(EN_messages.confirm_userGroupChange))
-      this.connectToServerEditOnRole(val);
+    if (await this.firstConfirmDialog(EN_messages.confirm_userGroupChange)) {
+      const res = await this.postDataSource(ENInterfaces.userEditOnRole, val);
+      if (res)
+        this.snackBarMessageSuccess(res);
+    }
   }
   userEditOnRoleInsertRole = (val: any) => {
     this.userEditOnRoleRoleVal = val;

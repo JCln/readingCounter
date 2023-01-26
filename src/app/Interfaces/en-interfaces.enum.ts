@@ -220,7 +220,11 @@ export enum ENInterfaces {
     signalRStartConnection = '/notifyHub',
     // signalRBroadcastMessage = 'broadcast',
     signalRBroadcastMessage = 'V1/NotifyManager/Broadcast/TextWithTimer',
+    signalRNotifDirectImage = 'V1/NotifyManager/Direct/Image',
+    signalRNotifDirectText = 'V1/NotifyManager/Direct/Text',
     signalRMomentSystemAddReadingRow = 'AddReadingRow',
+    receiveTextWithTimer = 'receiveTextWithTimer',
+    ReceiveImageWithCaption = 'receiveImageWithCaption',
     signalRSendMessage = 'sendMessage',
     signalRReceiveMessage = 'receiveMessage',
 

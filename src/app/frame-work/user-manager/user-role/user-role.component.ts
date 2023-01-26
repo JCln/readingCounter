@@ -74,10 +74,14 @@ export class UserRoleComponent extends FactoryONE {
       return;
     }
     if (dataSource['dataSource'].isNew) {
-      await this.userService.roleAddEdit(ENInterfaces.RoleADD, dataSource['dataSource']);
+      const res = await this.userService.postDataSource(ENInterfaces.RoleADD, dataSource['dataSource']);
+      if (res)
+        this.userService.snackBarMessageSuccess(res);
     }
     else {
-      await this.userService.roleAddEdit(ENInterfaces.RoleEDIT, dataSource['dataSource']);
+      const res = await this.userService.postDataSource(ENInterfaces.RoleEDIT, dataSource['dataSource']);
+      if (res)
+        this.userService.snackBarMessageSuccess(res);
     }
   }
   onRowEditCancel(dataSource: object) {

@@ -39,7 +39,6 @@ export class SignalRService {
       .catch(err => console.log('Error while starting connection: ' + err));
 
     this.receiveMessage();
-    // this.broadcastMessage();
     this.receiveTextWithTimer();
     this.momentAddReadingRow();
   }
@@ -54,11 +53,7 @@ export class SignalRService {
     return new Promise(() => {
       this.interfaceManagerService.POSTBODY(method, a).toPromise();
     });
-    // this.hubConnection.send(method, { seconds: val.time, title: val.title, text: val.message, color: val.color });
   }
-  // sendBroadcastMessage = (method: ENInterfaces, data: IMessage) => {
-  //   this.hubConnection.send(method, data.time, data.title, data.message, data.color);
-  // }
   reconnectManualy = async () => {
     try {
       await this.hubConnection.start();
@@ -67,27 +62,18 @@ export class SignalRService {
       console.log(err);
     }
   }
+  /* TODO:
+  Implement Call server our Methods
+*/
   private receiveMessage = () => {
     this.hubConnection.on(ENInterfaces.signalRReceiveMessage, (user: string, message: string) => {
       this.snackBarService.openSnackBarSignal(user + '   ' + message, ENSnackBarTimes.tenMili);
     });
   }
-  /* TODO:
-    Implement Call server our Methods
-  */
-  // private broadcastMessage = () => {
-  //   this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
-  //     this.snackBarService.openSnackBarSignal(title + '\n' + message, time, color);
-  //   });
-  // }
   receiveTextWithTimer = () => {
-    this.hubConnection.on('receiveTextWithTimer', (a: IMessage) => {
+    this.hubConnection.on(ENInterfaces.receiveTextWithTimer, (a: IMessage) => {
       this.snackBarService.openSnackBarSignal(a.title + '\n' + a.text, a.seconds, a.color);
     });
-
-    // this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
-    //   this.snackBarService.openSnackBarSignal(title + '\n' + message, time, color);
-    // });
   }
 
   private momentAddReadingRow = () => {
@@ -99,3 +85,13 @@ export class SignalRService {
     return this.hubConnection.state;
   }
 }
+// To Send Data to Server ACross WebSocket
+  // sendBroadcastMessage = (method: ENInterfaces, data: IMessage) => {
+  //   this.hubConnection.send(method, data.time, data.title, data.message, data.color);
+  // }
+
+  // private broadcastMessage = () => {
+  //   this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
+  //     this.snackBarService.openSnackBarSignal(title + '\n' + message, time, color);
+  //   });
+  // }
