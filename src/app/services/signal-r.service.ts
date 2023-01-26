@@ -31,7 +31,7 @@ export class SignalRService {
       .withUrl(this.envService.API_URL + ENInterfaces.signalRStartConnection, authToken)
       .withAutomaticReconnect()
       // .configureLogging(signalR.LogLevel.Information)
-      .configureLogging(signalR.LogLevel.Debug)
+      // .configureLogging(signalR.LogLevel.Debug)
       .build();
     this.hubConnection
       .start()

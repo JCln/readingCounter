@@ -24,7 +24,7 @@ export class LatestReadsComponent extends AllListsFactory {
     public dialogService: DialogService,
     public closeTabService: CloseTabService,
     private envService: EnvService,
-    private mapService: MapService    
+    private mapService: MapService
   ) {
     super(dialogService, listManagerService);
   }
@@ -39,6 +39,8 @@ export class LatestReadsComponent extends AllListsFactory {
     xyData.map((items) => {
       if (items.y > ENRandomNumbers.zero) {
         L.marker([items.y, items.x]).addTo(this.layerGroup2)
+          .bindPopup(`${items.zoneTitle} <br> ${items.counterReaderName} <br>` + `=${items.eshterak} <br> ${items.radif}`
+          );
       }
     })
   }
@@ -67,6 +69,8 @@ export class LatestReadsComponent extends AllListsFactory {
     }
     this.interactionService.getMomentLatestReads.subscribe(res => {
       this.closeTabService.saveDataForMomentLastRead.unshift(res);
+      console.log(this.closeTabService.saveDataForMomentLastRead);
+
       if (this.closeTabService.saveDataForMomentLastRead.length > ENRandomNumbers.twenty)
         this.closeTabService.saveDataForMomentLastRead.pop();
       this.updateTableData();
