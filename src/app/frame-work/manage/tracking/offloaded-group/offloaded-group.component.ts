@@ -119,26 +119,27 @@ export class OffloadedGroupComponent extends FactoryONE {
     this.updateRowGroupMetaData();
   }
   updateRowGroupMetaData() {
-    this.rowGroupMetadata = {};
+    const toAggregate = this.closeTabService.offloadedGroupReq._selectedAggregate;
+    let tempRowGroupMeta = {};
 
     if (this.dataSource) {
       for (let i = 0; i < this.dataSource.length; i++) {
-        let rowData = this.dataSource[i];
-        let representativeName = rowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
+
+        let rowData = this.dataSource[i][toAggregate];
 
         if (i == 0) {
-          this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+          tempRowGroupMeta[rowData] = { index: 0, size: 1 };
         }
         else {
-          let previousRowData = this.dataSource[i - 1];
-          let previousRowGroup = previousRowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
-          if (representativeName === previousRowGroup)
-            this.rowGroupMetadata[representativeName].size++;
+          let previousRowData = this.dataSource[i - 1][toAggregate];
+          if (rowData === previousRowData)
+            tempRowGroupMeta[rowData].size++;
           else
-            this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+            tempRowGroupMeta[rowData] = { index: i, size: 1 };
         }
       }
     }
+    this.rowGroupMetadata = tempRowGroupMeta;
   }
   resetAggregation = () => {
     this.closeTabService.offloadedGroupReq._selectedAggregate = '';

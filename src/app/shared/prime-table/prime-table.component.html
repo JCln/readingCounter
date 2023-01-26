@@ -1,17 +1,17 @@
-<section *ngIf="_hasAggregating" class="content">
+<section *ngIf="_hasAggregating && profileService._agg.flag" class="content">
     <div class="input_2">
-        <div class="_key">گروه‌بندی</div>
+        <!-- <div class="_key">گروه‌بندی</div>
         <p-checkbox [(ngModel)]="profileService._agg.flag" [binary]="true" (click)="doAggregate()">
             گروه‌بندی
-        </p-checkbox>
-        <!-- <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="profileService._agg.selectedAggregate"
+        </p-checkbox> -->
+        <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="profileService._agg.selectedAggregate"
             placeholder="انتخاب مورد" [style]="{'min-width':'10rem','width':'100%'}" optionValue="field"
-            optionLabel="header" filter="true" (onChange)="onSort()">
+            optionLabel="header" filter="true" (onChange)="doAggregate()">
         </p-dropdown>
         <button (click)="resetAggregation()" class="btn_2_o">
             بدون گروه‌بندی
             <i class="pi pi-refresh"></i>
-        </button> -->
+        </button>
     </div>
 </section>
 <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
@@ -202,7 +202,8 @@
                     <div class="tooltip_text_right">اطلاعات روزانه</div>
                 </i>
             </td>
-            <td *ngIf="_outputFileName== 'reading' || _outputFileName== 'imported' || _checkUpName == 'simpleSearch'"
+            <!-- _outputFileName== 'reading' || -->
+            <td *ngIf=" _outputFileName== 'imported' || _checkUpName == 'simpleSearch'"
                 (click)="routeToLMAll(dataSource)">
                 <span class="ui-column-title">مشاهده لیست قرائت</span>
                 <i class="tooltip p_icons pi pi-list">
@@ -444,6 +445,13 @@
                 <span class="ui-column-title">لیست قبلا صادر شده</span>
                 <i class="tooltip p_icons pi pi-ban" style="color: rgb(246, 62, 56);">
                     <div class="tooltip_text">لیست قبلا صادر شده</div>
+                </i>
+            </td>
+            <!-- Just then name to triger Event  -->
+            <td *ngIf="_outputFileName == 'userOnlines'" (click)="routeToLMAll(dataSource)">
+                <span class="ui-column-title">پیام به کاربر</span>
+                <i class="tooltip p_icons pi pi-envelope">
+                    <div class="tooltip_text_right">پیام به کاربر</div>
                 </i>
             </td>
         </tr>

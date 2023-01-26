@@ -29,7 +29,6 @@ export class ReadingComponent extends FactoryONE {
       this.closeTabService.saveDataForTrackReading = await this.trackingManagerService.getDataSource(ENInterfaces.trackingREADING);
     }
   }
-  // refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
     const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reson_delete_backtoImported, true, false);
     if (desc) {

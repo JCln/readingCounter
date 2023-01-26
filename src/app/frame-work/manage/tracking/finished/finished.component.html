@@ -2,7 +2,6 @@
     [dataSource]="closeTabService.saveDataForTrackFinished" 
     [_outputFileName]="'finished'"
     [_checkUpName]="'finished'"
-    [_sortField]="'listNumber'"
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1]: [1,2]"
     [_calculableSUM]=true
     [_hasAggregating] = true

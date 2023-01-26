@@ -2,12 +2,12 @@
     [dataSource]="closeTabService.saveDataForTrackImported" 
     [_outputFileName]="'imported'"
     [_checkUpName]="'imported'"
-    [_sortField]="'listNumber'"
     [_tooltipText]="'مشاهده جزئیات و ویرایش'"
     [_calculableSUM]=true    
     [_hasAggregating] = true
     [_isCustomSort]=true
     [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3]"
+    (customedSort)="trackingManagerService.customSort($event)"
     [_sessionName]="'imported-session'"
     [_selectedColumnsToRemember]="'selectedTrackImported'"
     (refreshedTable)="refreshTable()"

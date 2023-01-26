@@ -2,13 +2,13 @@
     [dataSource]="dataSource" 
     [_outputFileName]="'lastStates'"
     [_checkUpName]="'lastStates'"
-    [_sortField]="'listNumber'"
     [_calculableSUM]=true  
     [_hasAggregating] = true
     [_isCustomSort]=true
     [_selectedColumnsToRemember]="'selectedlastStates'"
     [_numberOfExtraColumns]="[1]"
     [_sessionName]="'last-states-session'"
+    (customedSort)="trackingManagerService.customSort($event)"
     (showedInMap)="showInMap($event)"   
     (refreshedTable)="refreshTable()"
     (routedToLMAll)="trackingManagerService.routeToLMAll($event)"

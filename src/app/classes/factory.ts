@@ -193,9 +193,7 @@ export class FactorySharedPrime implements OnChanges {
         });
     }
     doShowCarousel = (dataSource: any, _isNotForbidden?: boolean) => {
-        console.log(dataSource);
-
-        this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+         this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
             data: { _data: dataSource, _isNotForbidden: _isNotForbidden },
             rtl: true,
             width: '80%',
