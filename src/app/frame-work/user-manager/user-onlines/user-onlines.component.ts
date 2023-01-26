@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
+
+import { UserOnlinesDgComponent } from './user-onlines-dg/user-onlines-dg.component';
 
 @Component({
   selector: 'app-user-onlines',
@@ -11,10 +14,13 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./user-onlines.component.scss']
 })
 export class UserOnlinesComponent extends FactoryONE {
+  ref: DynamicDialogRef;
+
   constructor(
     public closeTabService: CloseTabService,
     private userService: UsersAllService,
-    private dateJalaliService: DateJalaliService
+    private dateJalaliService: DateJalaliService,
+    private dialogService: DialogService
   ) {
     super();
   }
@@ -34,4 +40,19 @@ export class UserOnlinesComponent extends FactoryONE {
       item.connectDateTime = this.dateJalaliService.getDate(item.connectDateTime) + '   ' + this.dateJalaliService.getTime(item.connectDateTime);
     })
   }
+  textMessageToAContact = (value: any, body: object) => {
+    console.log(value);
+
+    this.ref = this.dialogService.open(UserOnlinesDgComponent, {
+      data: { _data: value, body: body },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
+
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ITracking } from 'interfaces/itrackings';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
@@ -12,10 +11,9 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./last-states.component.scss']
 })
 export class LastStatesComponent extends FactoryONE {
-  dataSource: ITracking[] = [];
-  
+
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
     public outputManagerService: OutputManagerService
   ) {
@@ -27,12 +25,8 @@ export class LastStatesComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForLastStates) {
-      this.dataSource = this.closeTabService.saveDataForLastStates;
-    }
-    else {
-      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingLASTSTATES);
-      this.closeTabService.saveDataForLastStates = this.dataSource;
+    if (!this.closeTabService.saveDataForLastStates) {
+      this.closeTabService.saveDataForLastStates = await this.trackingManagerService.getDataSource(ENInterfaces.trackingLASTSTATES);
     }
   }
   showInMap = (trackNumberAndDate: object) => {

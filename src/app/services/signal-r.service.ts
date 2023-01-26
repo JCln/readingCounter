@@ -31,7 +31,7 @@ export class SignalRService {
       .withUrl(this.envService.API_URL + ENInterfaces.signalRStartConnection, authToken)
       .withAutomaticReconnect()
       // .configureLogging(signalR.LogLevel.Information)
-      // .configureLogging(signalR.LogLevel.Debug)
+      .configureLogging(signalR.LogLevel.Debug)
       .build();
     this.hubConnection
       .start()
@@ -40,6 +40,7 @@ export class SignalRService {
 
     this.receiveMessage();
     this.receiveTextWithTimer();
+    this.ReceiveDirectMessage();
     this.momentAddReadingRow();
   }
   public disconnectConnection = () => {
@@ -72,6 +73,11 @@ export class SignalRService {
   }
   receiveTextWithTimer = () => {
     this.hubConnection.on(ENInterfaces.receiveTextWithTimer, (a: IMessage) => {
+      this.snackBarService.openSnackBarSignal(a.title + '\n' + a.text, a.seconds, a.color);
+    });
+  }
+  ReceiveDirectMessage = () => {
+    this.hubConnection.on(ENInterfaces.ReceiveDirectMessage, (a: IMessage) => {
       this.snackBarService.openSnackBarSignal(a.title + '\n' + a.text, a.seconds, a.color);
     });
   }

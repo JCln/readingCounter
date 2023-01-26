@@ -1,0 +1,9 @@
+<form #form="ngForm" class="insert_track" (ngSubmit)="postDataSource()">
+
+    <div class="input_2">
+        <div class="_key">متن پیام</div>
+        <input class="_value" name="text" [(ngModel)]="object.text">
+        <button type="submit" class="btn_1">ارسال</button>
+    </div>
+
+</form>
