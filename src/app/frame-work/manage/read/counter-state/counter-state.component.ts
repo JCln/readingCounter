@@ -16,7 +16,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class CounterStateComponent extends FactoryONE {
   zoneDictionary: IDictionaryManager[] = [];
 
-  dataSource: ICounterState[] = [];
   clonedProducts: { [s: string]: ICounterState; } = {};
   newRowLimit: number = 1;
   // innerLoading: boolean = false;
@@ -24,7 +23,7 @@ export class CounterStateComponent extends FactoryONE {
   _selectedColumns: any[];
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private counterStateService: CounterStateService,
     private readManagerService: ReadManagerService
   ) {
@@ -32,22 +31,18 @@ export class CounterStateComponent extends FactoryONE {
   }
 
   // sendGridFriendlyDataSource = (event: LazyLoadEvent): any => {
-  //   this.dataSource = this.counterStateService.getGridFriendlyDataSource(event);
+  //   this.closeTabService.saveDataForCounterState = this.counterStateService.getGridFriendlyDataSource(event);
   // }
   nullSavedSource = () => this.closeTabService.saveDataForCounterState = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForCounterState) {
-      this.dataSource = this.closeTabService.saveDataForCounterState;
-    }
-    else {
-      this.dataSource = await this.counterStateService.getGridFriendlyDataSourceDefault();
-      this.closeTabService.saveDataForCounterState = this.dataSource;
+    if (!this.closeTabService.saveDataForCounterState) {
+      this.closeTabService.saveDataForCounterState = await this.counterStateService.getGridFriendlyDataSourceDefault();
     }
     this.zoneDictionary = await this.counterStateService.getZoneDictionary();
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
   }
   columnSelectedMenuDefault = () => {
     this._selectCols = this.counterStateService.columnSelectedMenuDefault();
@@ -65,7 +60,7 @@ export class CounterStateComponent extends FactoryONE {
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
 
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForCounterState = this.closeTabService.saveDataForCounterState.slice(0, index).concat(this.closeTabService.saveDataForCounterState.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
@@ -92,10 +87,10 @@ export class CounterStateComponent extends FactoryONE {
 
     if (!this.readManagerService.verificationCounterState(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
-        this.dataSource.shift();
+        this.closeTabService.saveDataForCounterState.shift();
         return;
       }
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForCounterState[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
 
@@ -105,16 +100,16 @@ export class CounterStateComponent extends FactoryONE {
     else {
       await this.readManagerService.addOrEditAuths(ENInterfaces.counterStateEdit, dataSource['dataSource']);
       this.refreshTable();
-      Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
     }
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
   }
   private async onRowAdd(dataSource: ICounterState, rowIndex: number) {
     const a = await this.readManagerService.postTextOutputDATA(ENInterfaces.counterStateAdd, dataSource);
     if (a) {
       this.refetchTable(rowIndex);
       this.refreshTable();
-      Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
     }
   }
 

@@ -1,5 +1,5 @@
 <main *ngIf="route.children.length === 0 && !fragmentMasterId" class="main">
-    <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    <p-table [columns]="selectedColumns" [value]="closeTabService.saveDataForFragmentNOB" [paginator]="true" [rows]="10"
         [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="[10,25,50]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" #dt
         dataKey="id" editMode="row" stateStorage="session" stateKey="fragment-session"
@@ -170,7 +170,7 @@
             </tr>
         </ng-template>
     </p-table>
-    <section *ngIf="!dataSource || dataSource.length === 0">
+    <section *ngIf="!closeTabService.saveDataForFragmentNOB || closeTabService.saveDataForFragmentNOB.length === 0">
         <tr class="empty_data">
             موردی پیدا نشد
         </tr>

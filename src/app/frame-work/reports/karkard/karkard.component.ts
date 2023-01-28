@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportKarkard } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -16,8 +15,6 @@ import { EN_Routes } from 'src/app/interfaces/routes.enum';
   styleUrls: ['./karkard.component.scss']
 })
 export class KarkardComponent extends FactoryONE {
-  dataSource: IReadingReportKarkard[] = [];
-
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
@@ -28,7 +25,7 @@ export class KarkardComponent extends FactoryONE {
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
 
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public route: ActivatedRoute
   ) {
     super();
@@ -43,7 +40,6 @@ export class KarkardComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRKarkard) {
-      this.dataSource = this.closeTabService.saveDataForRRKarkard;
       this.setGetRanges();
     }
     this.readingReportManagerService.getSearchInOrderTo();
@@ -65,16 +61,16 @@ export class KarkardComponent extends FactoryONE {
       document.activeElement.id === 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListOFFKarkard, this.readingReportManagerService.karkardReq);
+    this.closeTabService.saveDataForRRKarkard = await this.readingReportManagerService.portRRTest(ENInterfaces.ListOFFKarkard, this.readingReportManagerService.karkardReq);
     this.setGetRanges();
-    this.closeTabService.saveDataForRRKarkard = this.dataSource;
+    this.closeTabService.saveDataForRRKarkard = this.closeTabService.saveDataForRRKarkard;
   }
   refreshTable = () => {
     if (this.validation())
       this.connectToServer();
   }
   private setGetRanges = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForRRKarkard.forEach(item => {
       item.duration = parseFloat(MathS.getRange(item.duration));
     })
   }

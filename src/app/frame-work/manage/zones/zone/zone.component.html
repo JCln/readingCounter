@@ -1,5 +1,5 @@
 <app-prime-table-editable     
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForZone" 
     [_checkUpName]="'zone'"
     [_dictionaryName]="'regionId'"
     [_outputFileName]="'zone'"
@@ -9,7 +9,7 @@
     [dictionary]="regionDictionary"
     (refreshedTable)="refreshTable()"
     (openedAddDialog)="openAddDialog()"
-    (dropDownChanges)="dataSource['regionId']"
+    (dropDownChanges)="closeTabService.saveDataForZone['regionId']"
     (removedRow)="removeRow($event)"
     (onRowEditedCancel)="onRowEditCancel()"
     (onRowEditedInit)="onRowEditInit($event)"

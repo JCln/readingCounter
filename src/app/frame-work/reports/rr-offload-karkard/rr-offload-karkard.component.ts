@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportKarkard } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -13,8 +12,6 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./rr-offload-karkard.component.scss']
 })
 export class RrOffloadKarkardComponent extends FactoryONE {
-  dataSource: IReadingReportKarkard[] = [];
-
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 
@@ -25,7 +22,7 @@ export class RrOffloadKarkardComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -36,7 +33,6 @@ export class RrOffloadKarkardComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForRROffloadedKarkard) {
-      this.dataSource = this.closeTabService.saveDataForRROffloadedKarkard;
       this.setGetRanges();
     }
     this.readingReportManagerService.getSearchInOrderTo();
@@ -58,16 +54,15 @@ export class RrOffloadKarkardComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardOffloaded, this.readingReportManagerService.karkardOffloadReq);
+    this.closeTabService.saveDataForRROffloadedKarkard = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardOffloaded, this.readingReportManagerService.karkardOffloadReq);
     this.setGetRanges();
-    this.closeTabService.saveDataForRROffloadedKarkard = this.dataSource;
   }
   refreshTable = () => {
     if (this.validation())
       this.connectToServer();
   }
   private setGetRanges = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForRROffloadedKarkard.forEach(item => {
       item.duration = parseFloat(MathS.getRange(item.duration));
     })
   }

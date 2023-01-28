@@ -14,11 +14,10 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class QotrComponent extends FactoryONE {
 
-  dataSource: any[] = [];
   provinceDictionary: IDictionaryManager[] = [];
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {
     super();
@@ -29,16 +28,12 @@ export class QotrComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForQotrManager) {
-      this.dataSource = this.closeTabService.saveDataForQotrManager;
-    }
-    else {
-      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.QotrAll);
-      this.closeTabService.saveDataForQotrManager = this.dataSource;
+    if (!this.closeTabService.saveDataForQotrManager) {
+      this.closeTabService.saveDataForQotrManager = await this.readManagerService.getDataSource(ENInterfaces.QotrAll);
     }
     this.provinceDictionary = await this.readManagerService.getProvinceDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForQotrManager, this.provinceDictionary, 'provinceId');
   }
 
 

@@ -30,7 +30,6 @@ export class GeneralListModifyComponent extends AllListsFactory {
   counterStateValue: number;
 
   deleteDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -66,7 +65,6 @@ export class GeneralListModifyComponent extends AllListsFactory {
     this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
     this.closeTabService.saveDataForLMGeneralModify = this.dataSource;
-    this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);

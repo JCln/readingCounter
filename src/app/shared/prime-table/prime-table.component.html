@@ -1,9 +1,5 @@
 <section *ngIf="_hasAggregating && profileService._agg.flag" class="content">
     <div class="input_2">
-        <!-- <div class="_key">گروه‌بندی</div>
-        <p-checkbox [(ngModel)]="profileService._agg.flag" [binary]="true" (click)="doAggregate()">
-            گروه‌بندی
-        </p-checkbox> -->
         <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="profileService._agg.selectedAggregate"
             placeholder="انتخاب مورد" [style]="{'min-width':'10rem','width':'100%'}" optionValue="field"
             optionLabel="header" filter="true" (onChange)="doAggregate()">
@@ -64,7 +60,7 @@
                     class="tooltip _circle_border p_icons pi pi-check">
                     <div class="tooltip_text">ثبت بازدید</div>
                 </i>
-                <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh'"
+                <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
                     (click)="filterCounterState()">
                     <label class="font_family" for="binary">({{dataSource.length}}) نمایش قرائت شده ها</label>
                     <p-checkbox [(ngModel)]="columnManager._primeNGHeaderCheckbox" [binary]="true">
@@ -202,8 +198,7 @@
                     <div class="tooltip_text_right">اطلاعات روزانه</div>
                 </i>
             </td>
-            <!-- _outputFileName== 'reading' || -->
-            <td *ngIf=" _outputFileName== 'imported' || _checkUpName == 'simpleSearch'"
+            <td *ngIf="_outputFileName== 'reading' || _outputFileName== 'imported' || _checkUpName == 'simpleSearch'"
                 (click)="routeToLMAll(dataSource)">
                 <span class="ui-column-title">مشاهده لیست قرائت</span>
                 <i class="tooltip p_icons pi pi-list">

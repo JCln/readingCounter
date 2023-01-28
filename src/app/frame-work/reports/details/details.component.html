@@ -79,7 +79,7 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'rrDetails'" [_checkUpName]="'rr-details'"
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRDetails" [_outputFileName]="'rrDetails'" [_checkUpName]="'rr-details'"
         [_numberOfExtraColumns]="[1]" [_selectedColumnsToRemember]="'selectedRRDetails'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.isCollapsedDetails"
         (collapsed)="readingReportManagerService.isCollapsedDetails = !readingReportManagerService.isCollapsedDetails"

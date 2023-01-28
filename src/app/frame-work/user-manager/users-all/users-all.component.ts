@@ -17,11 +17,9 @@ import { MathS } from 'src/app/classes/math-s';
 export class UsersAllComponent extends FactoryONE {
   @ViewChild(Table) UsersAllComponent: Table;
 
-  dataSource: IUserManager[] = [];
-
   constructor(
     private userLogginsService: UserLogginsService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public usersAllService: UsersAllService,
     private dateJalaliService: DateJalaliService
   ) {
@@ -37,11 +35,7 @@ export class UsersAllComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
-      this.dataSource = await this.usersAllService.connectToServer(ENInterfaces.userGET);
-      this.closeTabService.saveDataForAllUsers = this.dataSource;
-    }
-    else {
-      this.dataSource = this.closeTabService.saveDataForAllUsers;
+      this.closeTabService.saveDataForAllUsers = await this.usersAllService.connectToServer(ENInterfaces.userGET);
     }
     this.convertLoginTime();
   }
@@ -66,10 +60,10 @@ export class UsersAllComponent extends FactoryONE {
     a[index].classList.toggle('showConfigs');
   }
   convertLoginTime = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForAllUsers.forEach(item => {
       item.lockTimeSpan = this.dateJalaliService.getDate(item.lockTimeSpan) + '   ' + this.dateJalaliService.getTime(item.lockTimeSpan);
     })
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForAllUsers = this.closeTabService.saveDataForAllUsers.slice(0, index).concat(this.closeTabService.saveDataForAllUsers.slice(index + 1));
 
 }

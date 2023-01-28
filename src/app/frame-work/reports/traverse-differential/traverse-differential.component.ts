@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportTraverseDifferentialRes } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -15,7 +14,6 @@ import { EN_Routes } from 'src/app/interfaces/routes.enum';
   styleUrls: ['./traverse-differential.component.scss']
 })
 export class TraverseDifferentialComponent extends FactoryONE {
-  dataSource: IReadingReportTraverseDifferentialRes[] = [];
   karbariDictionaryByCode: IDictionaryManager[] = [];
 
   _selectedKindId: string = '';
@@ -28,9 +26,8 @@ export class TraverseDifferentialComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-
     public route: ActivatedRoute,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -41,11 +38,8 @@ export class TraverseDifferentialComponent extends FactoryONE {
       this.nullSavedSource();
       this.verification();
     }
-    if (this.closeTabService.saveDataForRRTraverseDifferential) {
-      this.dataSource = this.closeTabService.saveDataForRRTraverseDifferential;
-    }
-    this.readingReportManagerService.getSearchInOrderTo();
 
+    this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.getTraverseDiffrentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -68,14 +62,13 @@ export class TraverseDifferentialComponent extends FactoryONE {
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportManagerService.trvchReq);
+    this.closeTabService.saveDataForRRTraverseDifferential = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverseDifferential, this.readingReportManagerService.trvchReq);
     this.karbariDictionaryByCode = await this.readingReportManagerService.getKarbariDictionaryCode();
 
     if (this.readingReportManagerService.trvchReq.traverseType == 0) {
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryByCode, 'newValue');
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryByCode, 'value');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverseDifferential, this.karbariDictionaryByCode, 'newValue');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverseDifferential, this.karbariDictionaryByCode, 'value');
     }
-    this.closeTabService.saveDataForRRTraverseDifferential = this.dataSource;
   }
   refreshTable = () => {
     if (this.validation())

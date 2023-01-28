@@ -82,9 +82,9 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'karkardDaily'" [_checkUpName]="'rr-karkardDaily'"
-        [_selectedColumnsToRemember]="'selectedRRKarkardDaily'" [_hasCollapsible]=true
-        [_isCollaped]="readingReportManagerService.isCollapsedDaily"
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRkarkardDaily" [_outputFileName]="'karkardDaily'"
+        [_checkUpName]="'rr-karkardDaily'" [_selectedColumnsToRemember]="'selectedRRKarkardDaily'"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedDaily"
         (collapsed)="readingReportManagerService.isCollapsedDaily = !readingReportManagerService.isCollapsedDaily"
         (refreshedTable)="refreshTable()">
     </app-prime-table>

@@ -19,14 +19,13 @@ import { WaterBatchAddDgComponent } from './water-batch-add-dg/water-batch-add-d
   styleUrls: ['./water.component.scss']
 })
 export class WaterComponent extends FactoryONE {
-  dataSource: IAbBahaFormula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariCodeDictionary: IDictionaryManager[] = [];
 
   clonedProducts: { [s: string]: IAbBahaFormula; } = {};
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public formulasService: FormulasService,
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
@@ -85,20 +84,16 @@ export class WaterComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForWaterFormula) {
-      this.dataSource = this.closeTabService.saveDataForWaterFormula;
-    }
-    else {
-      this.dataSource = await this.formulasService.getFormulaAll(ENInterfaces.FormulaWaterAll);
-      this.closeTabService.saveDataForWaterFormula = this.dataSource;
+    if (!this.closeTabService.saveDataForWaterFormula) {
+      this.closeTabService.saveDataForWaterFormula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaWaterAll);
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForWaterFormula, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForWaterFormula, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForWaterFormula = this.closeTabService.saveDataForWaterFormula.slice(0, index).concat(this.closeTabService.saveDataForWaterFormula.slice(index + 1));
   private removeRow = async (rowData: string, rowIndex: number) => {
     await this.formulasService.postFormulaRemove(ENInterfaces.FormulaWaterRemove, rowData);
     this.refetchTable(rowIndex);
@@ -114,7 +109,7 @@ export class WaterComponent extends FactoryONE {
   }
   async onRowEditSave(dataSource: object) {
     if (!this.formulasService.verificationEditedRow(dataSource['dataSource'])) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForWaterFormula[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].zoneId !== 'object') {
@@ -135,8 +130,8 @@ export class WaterComponent extends FactoryONE {
     }
 
     await this.formulasService.postFormulaEdit(ENInterfaces.FormulaWaterEdit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForWaterFormula, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForWaterFormula, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
   }
   onRowEditCancel() { }
   getExcelSample = async () => {

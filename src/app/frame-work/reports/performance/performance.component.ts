@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IAnalyzeRes } from 'interfaces/idashboard-map';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
@@ -19,12 +18,10 @@ export class PerformanceComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  dataSource: IAnalyzeRes[] = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -34,9 +31,6 @@ export class PerformanceComponent extends FactoryONE {
       this.closeTabService.saveDataForRRPerformance = null;
       this.verification();
       this.setGetRanges();
-    }
-    if (this.closeTabService.saveDataForRRPerformance) {
-      this.dataSource = this.closeTabService.saveDataForRRPerformance;
     }
     this.readingReportManagerService.getSearchInOrderTo();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
@@ -55,16 +49,16 @@ export class PerformanceComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingAnalyzeByParam, this.readingReportManagerService.anlzPrfmReq);
-    if (MathS.isNull(this.dataSource))
+    this.closeTabService.saveDataForRRPerformance = await this.readingReportManagerService.portRRTest(ENInterfaces.trackingAnalyzeByParam, this.readingReportManagerService.anlzPrfmReq);
+    if (MathS.isNull(this.closeTabService.saveDataForRRPerformance))
       return;
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPerformance, this.zoneDictionary, 'zoneId');
     this.setGetRanges();
-    this.closeTabService.saveDataForRRPerformance = this.dataSource;
+    this.closeTabService.saveDataForRRPerformance = this.closeTabService.saveDataForRRPerformance;
   }
   private setGetRanges = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForRRPerformance.forEach(item => {
       item.average = parseFloat(MathS.getRange(item.average));
       item.max = parseFloat(MathS.getRange(item.max));
       item.median = parseFloat(MathS.getRange(item.median));

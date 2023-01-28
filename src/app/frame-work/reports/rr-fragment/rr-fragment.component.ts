@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportKarkard } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -13,8 +12,6 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./rr-fragment.component.scss']
 })
 export class RrFragmentComponent extends FactoryONE {
-  dataSource: IReadingReportKarkard[] = [];
-
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 
@@ -37,7 +34,6 @@ export class RrFragmentComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRFragment) {
-      this.dataSource = this.closeTabService.saveDataForRRFragment;
       this.setGetRanges();
     }
     this.readingReportManagerService.getSearchInOrderTo();
@@ -66,16 +62,15 @@ export class RrFragmentComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardByFragment, this.readingReportManagerService.rrFragmentKarkardReq);
+    this.closeTabService.saveDataForRRFragment = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardByFragment, this.readingReportManagerService.rrFragmentKarkardReq);
     this.setGetRanges();
-    this.closeTabService.saveDataForRRFragment = this.dataSource;
   }
   refreshTable = () => {
     if (this.validation())
       this.connectToServer();
   }
   private setGetRanges = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForRRFragment.forEach(item => {
       item.duration = parseFloat(MathS.getRange(item.duration));
     })
   }

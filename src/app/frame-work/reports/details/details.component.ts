@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportDetails } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -14,8 +13,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent extends FactoryONE {
-  dataSource: IReadingReportDetails[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   karbariByCodeDictionary: IDictionaryManager[] = [];
 
   _selectedKindId: string = '';
@@ -27,7 +24,7 @@ export class DetailsComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -36,9 +33,6 @@ export class DetailsComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForRRDetails = null;
       this.verification();
-    }
-    if (this.closeTabService.saveDataForRRDetails) {
-      this.dataSource = this.closeTabService.saveDataForRRDetails;
     }
     this.readingReportManagerService.getSearchInOrderTo();
 
@@ -58,12 +52,10 @@ export class DetailsComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportDETAILSWithParam, this.readingReportManagerService.detailsReq);
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();// todo remove karbari
+    this.closeTabService.saveDataForRRDetails = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportDETAILSWithParam, this.readingReportManagerService.detailsReq);
     this.karbariByCodeDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
-    Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'possibleKarbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'karbariCode');
-    this.closeTabService.saveDataForRRDetails = this.dataSource;
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.karbariByCodeDictionary, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRDetails, this.karbariByCodeDictionary, 'karbariCode');
   }
 
 }

@@ -20,7 +20,6 @@ import { BriefKardexComponent } from './../brief-kardex/brief-kardex.component';
 export class ListModifyComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
 
-  karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
@@ -62,7 +61,6 @@ export class ListModifyComponent extends AllListsFactory {
       this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
 
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-      this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
 

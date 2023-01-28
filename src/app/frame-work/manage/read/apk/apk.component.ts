@@ -3,7 +3,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IAPK } from 'interfaces/inon-manage';
 import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
@@ -29,11 +28,9 @@ export class ApkComponent extends FactoryONE {
     file: File
   }
 
-  dataSource: IAPK[] = [];
-
   constructor(
     private apkService: ApkService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private outputManagerService: OutputManagerService,
     private authService: AuthService
   ) {
@@ -84,11 +81,7 @@ export class ApkComponent extends FactoryONE {
       this.closeTabService.saveDataForAPKManager = null;
 
     if (this.closeTabService.saveDataForAPKManager === null || !this.closeTabService.saveDataForAPKManager) {
-      this.dataSource = await this.apkService.getDataSource();
-      this.closeTabService.saveDataForAPKManager = this.dataSource;
-    }
-    else {
-      this.dataSource = this.closeTabService.saveDataForAPKManager;
+      this.closeTabService.saveDataForAPKManager = await this.apkService.getDataSource();
     }
   }
   getUserRole = (): boolean => {

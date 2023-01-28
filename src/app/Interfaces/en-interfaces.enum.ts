@@ -210,7 +210,7 @@ export enum ENInterfaces {
     readingPeriodKindRemove = 'V1/readingPeriodKind/Remove',
 
     KarbariAll = 'V1/Karbari/All',
-    KarbariDictionary = 'V1/Karbari/Dictionary',
+    // KarbariDictionary = 'V1/Karbari/Dictionary',
     KarbariDictionaryCode = 'V1/Karbari/DictionaryCode',
     KarbariRemove = 'V1/Karbari/Remove',
     KarbariEdit = 'V1/Karbari/Edit',

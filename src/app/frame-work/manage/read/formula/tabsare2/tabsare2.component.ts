@@ -16,12 +16,11 @@ import { Tabsare2AddDgComponent } from './tabsare2-add-dg/tabsare2-add-dg.compon
   styleUrls: ['./tabsare2.component.scss']
 })
 export class Tabsare2Component extends FactoryONE {
-  dataSource: ITabsare2Formula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: ITabsare2Formula; } = {};
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public formulasService: FormulasService,
     private dialog: MatDialog
   ) {
@@ -51,18 +50,14 @@ export class Tabsare2Component extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTabsare2Formula) {
-      this.dataSource = this.closeTabService.saveDataForTabsare2Formula;
-    }
-    else {
-      this.dataSource = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare2All);
-      this.closeTabService.saveDataForTabsare2Formula = this.dataSource;
+    if (!this.closeTabService.saveDataForTabsare2Formula) {
+      this.closeTabService.saveDataForTabsare2Formula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare2All);
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare2Formula, this.zoneDictionary, 'zoneId');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForTabsare2Formula = this.closeTabService.saveDataForTabsare2Formula.slice(0, index).concat(this.closeTabService.saveDataForTabsare2Formula.slice(index + 1));
   private removeRow = async (rowData: string, rowIndex: number) => {
     await this.formulasService.postFormulaRemove(ENInterfaces.FormulaTabsare2Remove, rowData);
     this.refetchTable(rowIndex);
@@ -78,7 +73,7 @@ export class Tabsare2Component extends FactoryONE {
   }
   async onRowEditSave(dataSource: ITabsare2Formula) {
     if (!this.formulasService.verificationEditedRowTabsare2(dataSource['dataSource'])) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForTabsare2Formula[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].zoneId !== 'object') {
@@ -92,7 +87,7 @@ export class Tabsare2Component extends FactoryONE {
 
     await this.formulasService.postFormulaEdit(ENInterfaces.FormulaTabsare2Edit, dataSource);
     this.clonedProducts[dataSource['dataSource'].id] = { ...dataSource['dataSource'] };
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare2Formula, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel() { }
 

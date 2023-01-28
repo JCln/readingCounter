@@ -47,8 +47,8 @@ export interface ISearchProReportInput {
     counterStateIds: number[],
     masrafStates: number[],
     karbariCodes: number[],
-    fragmentMasterIds: string[]
-
+    fragmentMasterIds: string[],
+    showAll: boolean,
     _selectedKindId: string,
     searchByText: string,
 }

@@ -81,8 +81,8 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'karkard'" [_checkUpName]="'rr-karkard'"
-        [_selectedColumnsToRemember]="'selectedRRKarkard'" [_hasCollapsible]=true
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRKarkard" [_outputFileName]="'karkard'"
+        [_checkUpName]="'rr-karkard'" [_selectedColumnsToRemember]="'selectedRRKarkard'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.isCollapsedKarkard"
         (collapsed)="readingReportManagerService.isCollapsedKarkard = !readingReportManagerService.isCollapsedKarkard"
         (refreshedTable)="refreshTable()">

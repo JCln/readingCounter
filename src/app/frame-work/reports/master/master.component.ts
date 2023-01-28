@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportMaster } from 'interfaces/ireports';
+import { SortEvent } from 'primeng/api';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -12,7 +12,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./master.component.scss']
 })
 export class MasterComponent extends FactoryONE {
-  dataSource: IReadingReportMaster[] = [];
   rowGroupMetadata: any;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
@@ -38,11 +37,7 @@ export class MasterComponent extends FactoryONE {
       this.verification();
     }
 
-    if (this.closeTabService.saveDataForRRMaster) {
-      this.dataSource = this.closeTabService.saveDataForRRMaster;
-    }
     this.readingReportManagerService.getSearchInOrderTo();
-
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
     // this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
@@ -61,33 +56,26 @@ export class MasterComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportManagerService.masterReq);
-    this.closeTabService.saveDataForRRMaster = this.dataSource;
+    this.closeTabService.saveDataForRRMaster = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportManagerService.masterReq);
   }
-  // updateRowGroupMetaData() {
-  //   this.rowGroupMetadata = {};
+  customSort(event: SortEvent) {
+    event.data.sort((data1, data2) => {
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
 
-  //   if (this.dataSource) {
-  //     for (let i = 0; i < this.dataSource.length; i++) {
-  //       let rowData = this.dataSource[i];
-  //       let representativeName = rowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
 
-  //       if (i == 0) {
-  //         this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
-  //       }
-  //       else {
-  //         let previousRowData = this.dataSource[i - 1];
-  //         let previousRowGroup = previousRowData[this.closeTabService.offloadedGroupReq._selectedAggregate];
-  //         if (representativeName === previousRowGroup)
-  //           this.rowGroupMetadata[representativeName].size++;
-  //         else
-  //           this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
-  //       }
-  //     }
-  //   }
-  // }
-  // resetAggregation = () => {
-  //   this.closeTabService.offloadedGroupReq._selectedAggregate = '';
-  //   this.updateRowGroupMetaData();
-  // }
+      return (event.order * result);
+    });
+  }
 }

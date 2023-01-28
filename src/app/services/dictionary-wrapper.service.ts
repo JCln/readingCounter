@@ -69,7 +69,6 @@ export class DictionaryWrapperService {
   private qotrDictionary: any = [];
   private roleDictionary: any = [];
 
-  private karbariDictionary: any = [];
   private karbariCodeDictionary: any = [];
   private traverseDifferentialDictionary: any = [];
 
@@ -334,17 +333,6 @@ export class DictionaryWrapperService {
       })
     });
   }
-  getKarbariDictionary(): Promise<any> {
-    if (!MathS.isNull(this.karbariDictionary))
-      return this.karbariDictionary;
-    return new Promise((resolve) => {
-      this.interfaceManagerService.GET(ENInterfaces.KarbariDictionary).subscribe(res => {
-        this.setKarbariDictionary(res);
-        resolve(this.karbariDictionary);
-      })
-    });
-
-  }
   getQotrDictionary(): Promise<any> {
     if (!MathS.isNull(this.qotrDictionary))
       return this.qotrDictionary;
@@ -461,9 +449,6 @@ export class DictionaryWrapperService {
   private setPeriodKindDictionary(v: any) {
     this.periodKindDictionary = v;
   }
-  private setKarbariDictionary(v: any) {
-    this.karbariDictionary = v;
-  }
   private setQotrDictionary(v: any) {
     this.qotrDictionary = v;
   }
@@ -501,7 +486,6 @@ export class DictionaryWrapperService {
     this.counterStateForModifyDictionary.dictionary = [];
     this.counterStateForModifyDictionary.zoneId = null;
     this.periodKindDictionary = [];
-    this.karbariDictionary = [];
     this.qotrDictionary = [];
     this.roleDictionary = [];
     this.karbariCodeDictionary = [];

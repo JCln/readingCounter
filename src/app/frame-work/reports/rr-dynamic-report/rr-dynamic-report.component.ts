@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDynamicReportsRes } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -12,10 +11,8 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class RrDynamicReportComponent extends FactoryONE {
 
-  dataSource: IDynamicReportsRes[] = [];
-
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public readingReportManagerService: ReadingReportManagerService
   ) {
     super();
@@ -26,12 +23,8 @@ export class RrDynamicReportComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForDynamicReports) {
-      this.dataSource = this.closeTabService.saveDataForDynamicReports;
-    }
-    else {
-      this.dataSource = await this.readingReportManagerService.dataSourceGET(ENInterfaces.dynamicReportManagerAll);
-      this.closeTabService.saveDataForDynamicReports = this.dataSource;
+    if (!this.closeTabService.saveDataForDynamicReports) {
+      this.closeTabService.saveDataForDynamicReports = await this.readingReportManagerService.dataSourceGET(ENInterfaces.dynamicReportManagerAll);
     }
   }
   removeRow = async (dataSource: any) => {

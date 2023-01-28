@@ -1,6 +1,6 @@
 <section>
     <div class="overall-info">
-        <div class="input_2 double_size" *ngIf="firstName">
+        <div class="input_2 double_size" *ngIf="firstName || sureName">
             <div class="_key">نام و نام خانوادگی</div>
             <input [readOnly]="true" class="_value" name="names" [(ngModel)]="firstName.trim() + ' '+ sureName">
         </div>

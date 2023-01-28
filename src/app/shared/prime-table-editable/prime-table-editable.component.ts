@@ -21,7 +21,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   onRowEditing: any;
 
   @Input() _sortBy: string;
-  @Input() _sortOrder: string = '';
+  @Input() _sortOrder: number = 1;
   @Input() _isInRowEditing: boolean = false;
   @Input() _dictionaryName: string = '';
   @Input() _secondDictionaryName: string = '';

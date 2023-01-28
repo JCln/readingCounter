@@ -77,7 +77,7 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_numberOfExtraColumns]="[1]"
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRTraverse" [_numberOfExtraColumns]="[1]"
         [_selectedColumnsToRemember]="'selectedRRTraverse'" [_outputFileName]="'trv'" [_checkUpName]="'rr-traverse'"
         [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedTrv"
         (collapsed)="readingReportManagerService.isCollapsedTrv = !readingReportManagerService.isCollapsedTrv"

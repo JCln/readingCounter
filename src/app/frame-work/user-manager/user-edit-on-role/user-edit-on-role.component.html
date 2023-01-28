@@ -1,15 +1,16 @@
 <mat-horizontal-stepper #stepper>
 
-    <mat-step [stepControl]="userRoles">
-        <form *ngIf="userRoles" formGroup="userRoles">
+    <mat-step [stepControl]="closeTabService.saveDataForEditOnRole.roleItems">
+        <form *ngIf="closeTabService.saveDataForEditOnRole.roleItems" formGroup="userRoles">
             <ng-template matStepLabel>گروه دسترسی</ng-template>
-            <app-user-role [roleItems]="userRoles"></app-user-role>
+            <app-user-role [roleItems]="closeTabService.saveDataForEditOnRole.roleItems"></app-user-role>
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="userActions">
-        <ng-template *ngIf="userActions" matStepLabel>سطح دسترسی به خدمات</ng-template>
-        <app-user-action [userAddData]="userActions"></app-user-action>
+    <mat-step [stepControl]="closeTabService.saveDataForEditOnRole.appItems">
+        <ng-template *ngIf="closeTabService.saveDataForEditOnRole.appItems" matStepLabel>سطح دسترسی به
+            خدمات</ng-template>
+        <app-user-action [userAddData]="closeTabService.saveDataForEditOnRole.appItems"></app-user-action>
     </mat-step>
 
     <mat-step>

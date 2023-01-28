@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportKarkard } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -21,12 +20,9 @@ export class KarkardDaylyComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
 
-  dataSource: IReadingReportKarkard[] = [];
-
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -37,7 +33,6 @@ export class KarkardDaylyComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRkarkardDaily) {
-      this.dataSource = this.closeTabService.saveDataForRRkarkardDaily;
       this.setGetRanges();
     }
     this.readingReportManagerService.getSearchInOrderTo();
@@ -58,12 +53,11 @@ export class KarkardDaylyComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.readingReportManagerService.karkardDailyReq);
+    this.closeTabService.saveDataForRRkarkardDaily = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.readingReportManagerService.karkardDailyReq);
     this.setGetRanges();
-    this.closeTabService.saveDataForRRkarkardDaily = this.dataSource;
   }
   private setGetRanges = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForRRkarkardDaily.forEach(item => {
       item.duration = parseFloat(MathS.getRange(item.duration));
     })
   }

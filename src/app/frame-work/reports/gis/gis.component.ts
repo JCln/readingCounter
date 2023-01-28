@@ -39,7 +39,6 @@ export class GisComponent extends FactoryONE {
 
 
   zoneDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -56,7 +55,6 @@ export class GisComponent extends FactoryONE {
   classWrapper = async (canRefresh?: boolean) => {
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.getCounterStateByZoneId();
     this.receiveYear();
     this.readingReportManagerService.getSearchInOrderTo();

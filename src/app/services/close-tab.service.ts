@@ -1,18 +1,49 @@
 import { Injectable } from '@angular/core';
 import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
-import { IAssessPreDisplayDtoSimafa } from 'interfaces/iimports';
+import { IAnalyzeRes } from 'interfaces/idashboard-map';
+import { IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
+import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { ILatestReads } from 'interfaces/imoment';
 import { IFileExcelReq, IImportErrors, IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
+import { IAPK } from 'interfaces/inon-manage';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
-import { IImageUrlAndInfos } from 'interfaces/ireports';
-import { IServerOSInfo } from 'interfaces/iserver-manager';
+import {
+  IAbBahaFormula,
+  ICounterReport,
+  ICounterState,
+  IFragmentMaster,
+  IImageAttribution,
+  IKarbari,
+  IReadingPeriod,
+  IReadingPeriodKind,
+  ITabsare2Formula,
+  ITextOutput,
+} from 'interfaces/ireads-manager';
+import {
+  IDynamicReportsRes,
+  IImageAttributionAnalyze,
+  IImageAttributionResult,
+  IImageUrlAndInfos,
+  IKarkardAllStatesDto,
+  IReadingReportDetails,
+  IReadingReportKarkard,
+  IReadingReportMaster,
+  IReadingReportTraverse,
+  IReadingReportTraverseDifferentialRes,
+  IRRChartResWrapper,
+  IUserKarkard,
+} from 'interfaces/ireports';
+import { IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
 import { IWaterMarkConfig } from 'interfaces/isettings';
-import { IUserOnlines } from 'interfaces/iuser-manager';
+import { IDynamicExcelReq } from 'interfaces/itools';
+import { IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
+import { ICountryManager, IProvinceManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 
 import { ITracking } from './../interfaces/itrackings';
+import { IRegionManager, IZoneBoundManager, IZoneManager } from './../interfaces/izones';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +54,10 @@ export class CloseTabService {
   tabs: ITabs[] = [];
 
   // Formular s 
-  saveDataForWaterFormula: any;
-  saveDataForBadgetFormula: any;
-  saveDataForTabsare2Formula: any;
-  saveDataForTabsare3Formula: any;
+  saveDataForWaterFormula: IAbBahaFormula[];
+  saveDataForBadgetFormula: IAbBahaFormula[];
+  saveDataForTabsare2Formula: ITabsare2Formula[];
+  saveDataForTabsare3Formula: IAbBahaFormula[];
   // 
   // save data when route change 
   saveDataForAppLevel1: IAuthLevels[];
@@ -34,24 +65,24 @@ export class CloseTabService {
   saveDataForAppLevel3: IAuthLevel3[];
   saveDataForAppLevel4: IAuthLevel4[];
 
-  saveDataForCounterState: any;
-  saveDataForImageAttribution: any;
-  saveDataForKarbari: any;
-  saveDataForReadingConfig: any;
-  saveDataForReadingPeriodManager: any;
-  saveDataForReadingPeriodKindManager: any;
-  saveDataForAPKManager: any;
-  saveDataForCounterReport: any;
+  saveDataForCounterState: ICounterState[];
+  saveDataForImageAttribution: IImageAttribution[];
+  saveDataForKarbari: IKarbari[];
+  saveDataForReadingConfig: IReadingConfigDefault[];
+  saveDataForReadingPeriodManager: IReadingPeriod[];
+  saveDataForReadingPeriodKindManager: IReadingPeriodKind[];
+  saveDataForAPKManager: IAPK[];
+  saveDataForCounterReport: ICounterReport[];
   saveDataForQotrManager: any;
 
   // zones
-  saveDataForCountry: any;
-  saveDataForProvince: any;
-  saveDataForRegion: any;
-  saveDataForZone: any;
-  saveDataForZoneBound: any;
+  saveDataForCountry: ICountryManager[];
+  saveDataForProvince: IProvinceManager[];
+  saveDataForRegion: IRegionManager[];
+  saveDataForZone: IZoneManager[];
+  saveDataForZoneBound: IZoneBoundManager[];
 
-  saveDataForAllUsers: any;
+  saveDataForAllUsers: IUserManager[];
   saveDataForUserOnlines: IUserOnlines[];
   saveDataForEditUsers: any;
   saveDataForEditUsersGUID: string;
@@ -66,7 +97,7 @@ export class CloseTabService {
   saveDataForTrackImported: ITracking[];
   saveDataForTrackLoaded: ITracking[];
   saveDataForTrackReading: ITracking[];
-  saveDataForUserKarkard: any;
+  saveDataForUserKarkard: IUserKarkard[];
   saveDataForTrackOffloaded: ITracking[];
   saveDataForUserKarkardSummaryReq = {
     zoneId: null,
@@ -76,7 +107,7 @@ export class CloseTabService {
   saveDataForUserKarkardSummary: any;
   saveDataForUserKarkardSummaryTwo: any;
   saveDataForTrackOffloadedGroup: any;
-  saveDataForKarkardAllStates: any;
+  saveDataForKarkardAllStates: IKarkardAllStatesDto[];
   saveDataForKarkardAllStatesTWO: any;
   offloadedGroupReq = {
     _selectedAggregate: 'listNumber'// Default group by
@@ -153,6 +184,7 @@ export class CloseTabService {
     fragmentMasterIds: [],
     _selectedKindId: '',
     searchByText: '',
+    showAll: false
   }
   saveDataForSearchSimple: any;
   // list manager
@@ -172,21 +204,21 @@ export class CloseTabService {
   // dbf output manager
   saveDataForOutputDBF: any;
   // reading reports 
-  saveDataForRRTraverse: any;
-  saveDataForRRTraverseDifferential: any;
-  saveDataForRRKarkard: any;
-  saveDataForRROffloadedKarkard: any;
-  saveDataForRRFragment: any;
-  saveDataForRRkarkardDaily: any;
-  saveDataForRRPreNumShown: any;
-  saveDataForRRLocked: any;
-  saveDataForRRMaster: any;
-  saveDataForImageAttrResult: any;
-  saveDataForImageAttrAnalyze: any;
-  saveDataForRRPerformance: any;
+  saveDataForRRTraverse: IReadingReportTraverse[];
+  saveDataForRRTraverseDifferential: IReadingReportTraverseDifferentialRes[];
+  saveDataForRRKarkard: IReadingReportKarkard[];
+  saveDataForRROffloadedKarkard: IReadingReportKarkard[];
+  saveDataForRRFragment: IReadingReportKarkard[];
+  saveDataForRRkarkardDaily: IReadingReportKarkard[];
+  saveDataForRRPreNumShown: IOnOffLoadFlat[];
+  saveDataForRRLocked: IOnOffLoadFlat[];
+  saveDataForRRMaster: IReadingReportMaster[];
+  saveDataForImageAttrResult: IImageAttributionResult[];
+  saveDataForImageAttrAnalyze: IImageAttributionAnalyze[];
+  saveDataForRRPerformance: IAnalyzeRes[];
   saveDataForDMAAnalyze: any;
-  saveDataForRRDetails: any;
-  saveDataForRequestLog: any;
+  saveDataForRRDetails: IReadingReportDetails[];
+  saveDataForRequestLog: IRequestLog[];
   saveDataForRequestLogReq: any = {
     jalaliDay: '',
     fromTimeH: '',
@@ -216,16 +248,16 @@ export class CloseTabService {
     isOs64: true,
     systemDateTime: '',
   }
-  saveDataForServerErrors: any;
-  saveDataForRRDisposalHours: any;
+  saveDataForServerErrors: IManageServerErrorsRes[];
+  saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
-  saveDataForFragmentNOB: any;
+  saveDataForFragmentNOB: IFragmentMaster[];
   saveDataForFragmentNOBDetails: any;
   fragmentNOBDetailsGUID: any;
 
-  saveDataForTextOutput: any;
-  saveDataForToolsExcelViewer: any;
-  saveDataForDynamicReports: any;
+  saveDataForTextOutput: ITextOutput[];
+  saveDataForToolsExcelViewer: IDynamicExcelReq[];
+  saveDataForDynamicReports: IDynamicReportsRes[];
   saveDataForPolicies: any;
   saveDataForFNB: any;
   saveDataForProfile: any;
@@ -357,7 +389,10 @@ export class CloseTabService {
     for (let index = 0; index < this.val.length; index++) {
       this[this.val[index].value] = null;
       this[this.val[index].value_2] = null;
-      this.setAll(this[this.val[index].req], null);
+      /* commented due to unValid values after refresh page
+      TODO body request vals have to back to defualt values after refresh page happended
+       */
+      // this.setAll(this[this.val[index].req], null);
     }
     /* TODO: make null all objects
     should separate objects and array of objects
@@ -369,13 +404,13 @@ export class CloseTabService {
       if (item.url === url) {
         this[item.value] = '';
         this[item.value_2] = '';
-        this.setAll(this[item.req], null);
+        // this.setAll(this[item.req], null);
       }
       else {
         if (url.includes(item.url)) {
           this[item.value] = '';
           this[item.value_2] = '';
-          this.setAll(this[item.req], null);
+          // this.setAll(this[item.req], null);
         }
       }
     })

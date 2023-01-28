@@ -20,7 +20,6 @@ export class RrLockedComponent extends AllListsFactory {
   _years: ITitleValue[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -60,7 +59,6 @@ export class RrLockedComponent extends AllListsFactory {
       this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
     }
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
@@ -79,7 +77,7 @@ export class RrLockedComponent extends AllListsFactory {
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
-  verification = async () => {    
+  verification = async () => {
     const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.lockedReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();

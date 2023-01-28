@@ -22,7 +22,6 @@ export class FragmentComponent extends FactoryONE {
   table: Table;
   newRowLimit: number = 1;
 
-  dataSource: IFragmentMaster[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
@@ -34,7 +33,7 @@ export class FragmentComponent extends FactoryONE {
   onRowEditing: IFragmentMaster;
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService,
     public route: ActivatedRoute,
     private profileService: ProfileService
@@ -56,17 +55,13 @@ export class FragmentComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForFragmentNOB) {
-      this.dataSource = this.closeTabService.saveDataForFragmentNOB;
-    }
-    else {
-      this.dataSource = await this.fragmentManagerService.getDataSource(ENInterfaces.fragmentMASTERALL);
-      this.closeTabService.saveDataForFragmentNOB = this.dataSource;
+    if (!this.closeTabService.saveDataForFragmentNOB) {
+      this.closeTabService.saveDataForFragmentNOB = await this.fragmentManagerService.getDataSource(ENInterfaces.fragmentMASTERALL);
     }
     this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForFragmentNOB, this.zoneDictionary, 'zoneId');
     this.defaultAddStatus();
-    if (this.dataSource.length)
+    if (this.closeTabService.saveDataForFragmentNOB.length)
       this.insertSelectedColumns();
   }
   insertSelectedColumns = () => {
@@ -74,7 +69,7 @@ export class FragmentComponent extends FactoryONE {
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
   defaultAddStatus = () => this.newRowLimit = 1;
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForFragmentNOB = this.closeTabService.saveDataForFragmentNOB.slice(0, index).concat(this.closeTabService.saveDataForFragmentNOB.slice(index + 1));
   newRow(): IFragmentMaster {
     return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isNew: true };
   }
@@ -85,10 +80,10 @@ export class FragmentComponent extends FactoryONE {
     this.newRowLimit = 1;
     if (!this.fragmentManagerService.verificationMaster(dataSource)) {
       if (dataSource.isNew) {
-        this.dataSource.shift();
+        this.closeTabService.saveDataForFragmentNOB.shift();
         return;
       }
-      this.dataSource[rowIndex] = this.clonedProducts[dataSource.id];
+      this.closeTabService.saveDataForFragmentNOB[rowIndex] = this.clonedProducts[dataSource.id];
       return;
     }
     dataSource.zoneId = dataSource.zoneId['id'];
@@ -112,14 +107,14 @@ export class FragmentComponent extends FactoryONE {
     }
   }
   onRowEditCancel(dataSource: IFragmentMaster) {
-    for (let index = 0; index < this.dataSource.length; index++) {
-      if (dataSource.id === this.dataSource[index].id) {
-        this.dataSource[index] = this.onRowEditing;
+    for (let index = 0; index < this.closeTabService.saveDataForFragmentNOB.length; index++) {
+      if (dataSource.id === this.closeTabService.saveDataForFragmentNOB[index].id) {
+        this.closeTabService.saveDataForFragmentNOB[index] = this.onRowEditing;
       }
     }
     this.newRowLimit = 1;
     if (dataSource.isNew)
-      this.dataSource.shift();
+      this.closeTabService.saveDataForFragmentNOB.shift();
     return;
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster, rowIndex: number) => {

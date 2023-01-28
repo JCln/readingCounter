@@ -17,16 +17,13 @@ import { RpmAddDgComponent } from './rpm-add-dg/rpm-add-dg.component';
 })
 export class ReadingPeriodComponent extends FactoryONE {
 
-  dataSource: IReadingPeriod[] = [];
-
-
   zoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IReadingPeriod; } = {};
 
   constructor(
     private dialog: MatDialog,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {
     super();
@@ -53,20 +50,16 @@ export class ReadingPeriodComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForReadingPeriodManager) {
-      this.dataSource = this.closeTabService.saveDataForReadingPeriodManager;
-    }
-    else {
-      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.readingPeriodAll);
-      this.closeTabService.saveDataForReadingPeriodManager = this.dataSource;
+    if (!this.closeTabService.saveDataForReadingPeriodManager) {
+      this.closeTabService.saveDataForReadingPeriodManager = await this.readManagerService.getDataSource(ENInterfaces.readingPeriodAll);
     }
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readManagerService.getReadingPeriodKindDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingPeriodManager, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingPeriodManager, this.readingPeriodKindDictionary, 'readingPeriodKindId');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForReadingPeriodManager = this.closeTabService.saveDataForReadingPeriodManager.slice(0, index).concat(this.closeTabService.saveDataForReadingPeriodManager.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
@@ -79,7 +72,7 @@ export class ReadingPeriodComponent extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.readManagerService.verification(dataSource['dataSource'])) {
-      this.dataSource['ri'] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForReadingPeriodManager['ri'] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].zoneId !== 'object') {
@@ -99,8 +92,8 @@ export class ReadingPeriodComponent extends FactoryONE {
       dataSource['dataSource'].readingPeriodKindId = dataSource['dataSource'].readingPeriodKindId['id'];
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodEdit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.readingPeriodKindDictionary, 'readingPeriodKindId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingPeriodManager, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingPeriodManager, this.readingPeriodKindDictionary, 'readingPeriodKindId');
   }
 
 }

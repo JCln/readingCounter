@@ -16,7 +16,7 @@
 </form>
 
 <app-prime-table 
-[dataSource]="dataSource" 
+[dataSource]="closeTabService.saveDataForServerErrors" 
 [_outputFileName]="'serverErrors'"
 [_numberOfExtraColumns]="[1]" 
 [_checkUpName]="'serverErrors'"

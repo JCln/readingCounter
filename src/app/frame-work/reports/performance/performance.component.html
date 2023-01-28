@@ -82,8 +82,10 @@
 
         </form>
     </section>
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'analyzePrfm'" [_checkUpName]="'rr-analyzePrfm'"
-        [_selectedColumnsToRemember]="'selectedRRAnalyzeByParam'" [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedPrfm"
-        (collapsed)="readingReportManagerService.isCollapsedPrfm = !readingReportManagerService.isCollapsedPrfm" (refreshedTable)="refreshTable()">
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRPerformance" [_outputFileName]="'analyzePrfm'"
+        [_checkUpName]="'rr-analyzePrfm'" [_selectedColumnsToRemember]="'selectedRRAnalyzeByParam'"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedPrfm"
+        (collapsed)="readingReportManagerService.isCollapsedPrfm = !readingReportManagerService.isCollapsedPrfm"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

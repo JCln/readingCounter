@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IRequestLog } from 'interfaces/iserver-manager';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { ManageServerService } from 'services/manage-server.service';
@@ -12,8 +11,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./request-log.component.scss']
 })
 export class RequestLogComponent extends FactoryONE {
-  dataSource: IRequestLog[] = [];
-
   constructor(
     private manageServerService: ManageServerService,
     public closeTabService: CloseTabService,
@@ -26,9 +23,6 @@ export class RequestLogComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForRequestLog = null;
     }
-    if (this.closeTabService.saveDataForRequestLog) {
-      this.dataSource = this.closeTabService.saveDataForRequestLog;
-    }
     this.insertToTimes();
   }
   insertToTimes = () => {
@@ -39,8 +33,7 @@ export class RequestLogComponent extends FactoryONE {
     this.closeTabService.saveDataForRequestLogReq.toTimeH = temp.toString().split(':').shift();
   }
   connectToServer = async () => {
-    this.dataSource = await this.manageServerService.postBody(ENInterfaces.serverManagerRequestLog, this.closeTabService.saveDataForRequestLogReq);
-    this.closeTabService.saveDataForRequestLog = this.dataSource;
+    this.closeTabService.saveDataForRequestLog = await this.manageServerService.postBody(ENInterfaces.serverManagerRequestLog, this.closeTabService.saveDataForRequestLogReq);
   }
   verification = async () => {
 

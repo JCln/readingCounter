@@ -40,7 +40,7 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'_imageAttrAnalyze'"
+    <app-prime-table [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [_outputFileName]="'_imageAttrAnalyze'"
         [_checkUpName]="'_imageAttrAnalyze'" [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'"
         [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedImgAttrAnlz"
         (collapsed)="readingReportManagerService.isCollapsedImgAttrAnlz = !readingReportManagerService.isCollapsedImgAttrAnlz"
@@ -48,9 +48,9 @@
     </app-prime-table>
 </main>
 
-<section class="_charts" *ngIf="dataSource[0]">
-    <app-pie-img-attr-anlz [dataSource]="dataSource" [chartColors]="chartColors">
+<section class="_charts" *ngIf="closeTabService.saveDataForImageAttrAnalyze[0]">
+    <app-pie-img-attr-anlz [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [chartColors]="chartColors">
     </app-pie-img-attr-anlz>
-    <app-bar-img-attr-anlz [dataSource]="dataSource" [chartColors]="chartColors">
+    <app-bar-img-attr-anlz [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [chartColors]="chartColors">
     </app-bar-img-attr-anlz>
 </section>

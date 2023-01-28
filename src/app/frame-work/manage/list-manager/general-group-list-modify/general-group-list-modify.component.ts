@@ -44,7 +44,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
 
   clonedProducts: { [s: string]: object; } = {};
 
-  karbariDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
@@ -77,7 +76,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
       this.closeTabService.saveDataForLMGeneralGroupModify = this.dataSource;
-      this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
       this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);

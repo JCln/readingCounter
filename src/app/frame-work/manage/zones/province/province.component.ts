@@ -16,15 +16,12 @@ import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.compon
   styleUrls: ['./province.component.scss']
 })
 export class ProvinceComponent extends FactoryONE {
-  dataSource: IProvinceManager[] = [];
-
   countryDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IProvinceManager; } = {};
 
   constructor(
     private dialog: MatDialog,
-
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
     super();
@@ -52,18 +49,14 @@ export class ProvinceComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForProvince) {
-      this.dataSource = this.closeTabService.saveDataForProvince;
-    }
-    else {
-      this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ProvinceGET);
-      this.closeTabService.saveDataForProvince = this.dataSource;
+    if (!this.closeTabService.saveDataForProvince) {
+      this.closeTabService.saveDataForProvince = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ProvinceGET);
     }
     this.countryDictionary = await this.sectorsManagerService.getCountryDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForProvince = this.closeTabService.saveDataForProvince.slice(0, index).concat(this.closeTabService.saveDataForProvince.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
     if (a) {
@@ -76,7 +69,7 @@ export class ProvinceComponent extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForProvince[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].countryId !== 'object') {
@@ -90,11 +83,11 @@ export class ProvinceComponent extends FactoryONE {
 
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ProvinceEDIT, dataSource['dataSource']);
 
-    Converter.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
   }
   onRowEditCancel() {
-    // this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-    // delete this.dataSource[dataSource['dataSource'].id];
+    // this.closeTabService.saveDataForProvince[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+    // delete this.closeTabService.saveDataForProvince[dataSource['dataSource'].id];
     // return;
   }
 

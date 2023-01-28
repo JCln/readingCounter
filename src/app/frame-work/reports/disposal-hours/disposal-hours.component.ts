@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { IRRChartResWrapper } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -19,12 +18,9 @@ export class DisposalHoursComponent extends FactoryONE {
   _selectedKindId: string = '';
   zoneDictionary: IDictionaryManager[] = [];
 
-  dataSource: IRRChartResWrapper[] = [];
-
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public route: ActivatedRoute
   ) {
     super();
@@ -35,10 +31,6 @@ export class DisposalHoursComponent extends FactoryONE {
       this.closeTabService.saveDataForRRDisposalHours = null;
       this.verification();
     }
-    if (this.closeTabService.saveDataForRRDisposalHours) {
-      this.dataSource = this.closeTabService.saveDataForRRDisposalHours;
-    }
-
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
   }
   routeToChartView = () => {
@@ -52,8 +44,7 @@ export class DisposalHoursComponent extends FactoryONE {
       document.activeElement.id == 'grid_view' ? this.connectToServer() : this.routeToChartView();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalHours, this.readingReportManagerService.disposalhoursReq);
-    this.closeTabService.saveDataForRRDisposalHours = this.dataSource;
+    this.closeTabService.saveDataForRRDisposalHours = await this.readingReportManagerService.portRRTest(ENInterfaces.ListDispersalHours, this.readingReportManagerService.disposalhoursReq);
   }
   refreshTable = () => {
     if (this.validation())

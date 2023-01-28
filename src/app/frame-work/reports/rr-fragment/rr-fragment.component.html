@@ -87,7 +87,7 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'fragmentKarkard'"
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRFragment" [_outputFileName]="'fragmentKarkard'"
         [_checkUpName]="'rr-fragment-karkard'" [_selectedColumnsToRemember]="'selectedRRFragment'"
         [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.rrFragmentKarkardReq.isCollapsed"
         (collapsed)="readingReportManagerService.rrFragmentKarkardReq.isCollapsed= !readingReportManagerService.rrFragmentKarkardReq.isCollapsed"

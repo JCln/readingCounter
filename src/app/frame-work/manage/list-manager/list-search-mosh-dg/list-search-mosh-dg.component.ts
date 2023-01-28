@@ -17,7 +17,6 @@ import { MapDgComponent } from '../all/map-dg/map-dg.component';
 export class ListSearchMoshDgComponent implements OnInit {
   dataSource: IOnOffLoadFlat[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
@@ -43,7 +42,6 @@ export class ListSearchMoshDgComponent implements OnInit {
   converts = async () => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
-    this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     if (this.listManagerService.searchReqMoshDialog.zoneId) {

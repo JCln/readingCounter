@@ -13,15 +13,13 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class ImageAttributionComponent extends FactoryONE {
   newRowLimit: number = 1;
 
-  dataSource: IImageAttribution[] = [];
-
   _selectCols: any[] = [];
   _selectedColumns: any[];
 
   clonedProducts: { [s: string]: IImageAttribution; } = {};
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public readManagerService: ReadManagerService,
   ) {
     super();
@@ -32,12 +30,8 @@ export class ImageAttributionComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForImageAttribution) {
-      this.dataSource = this.closeTabService.saveDataForImageAttribution;
-    }
-    else {
-      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.imageAttributionGet);
-      this.closeTabService.saveDataForImageAttribution = this.dataSource;
+    if (!this.closeTabService.saveDataForImageAttribution) {
+      this.closeTabService.saveDataForImageAttribution = await this.readManagerService.getDataSource(ENInterfaces.imageAttributionGet);
     }
     this.defaultAddStatus();
     this.insertSelectedColumns();
@@ -50,7 +44,7 @@ export class ImageAttributionComponent extends FactoryONE {
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForImageAttribution = this.closeTabService.saveDataForImageAttribution.slice(0, index).concat(this.closeTabService.saveDataForImageAttribution.slice(index + 1));
   newRow(): IImageAttribution {
     return {
       title: '',
@@ -63,10 +57,10 @@ export class ImageAttributionComponent extends FactoryONE {
   }
   onRowEditCancel(dataSource: object) {
     this.newRowLimit = 1;
-    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-    delete this.dataSource[dataSource['dataSource'].id];
+    this.closeTabService.saveDataForImageAttribution[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+    delete this.closeTabService.saveDataForImageAttribution[dataSource['dataSource'].id];
     if (dataSource['dataSource'].isNew)
-      this.dataSource.shift();
+      this.closeTabService.saveDataForImageAttribution.shift();
     return;
   }
   removeRow = async (dataSource: IImageAttribution) => {
@@ -80,8 +74,8 @@ export class ImageAttributionComponent extends FactoryONE {
     const a = await this.readManagerService.deleteSingleRowByObject(ENInterfaces.imageAttributionRemove, dataSource['dataSource']);
 
     if (a) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-      delete this.dataSource[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForImageAttribution[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      delete this.closeTabService.saveDataForImageAttribution[dataSource['dataSource'].id];
       this.refetchTable(dataSource['ri']);
     }
   }
@@ -89,17 +83,20 @@ export class ImageAttributionComponent extends FactoryONE {
     this.newRowLimit = 1;
     if (!this.readManagerService.verificationImageAttribution(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
-        this.dataSource.shift();
+        this.closeTabService.saveDataForImageAttribution.shift();
         return;
       }
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+      this.closeTabService.saveDataForImageAttribution[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
       return;
     }
     if (!dataSource['dataSource'].id) {
       this.onRowAdd(dataSource['dataSource'], dataSource['ri']);
     }
     else {
-      this.readManagerService.addOrEditAuths(ENInterfaces.imageAttributionEdit, dataSource['dataSource']);
+      const a = this.readManagerService.addOrEditAuths(ENInterfaces.imageAttributionEdit, dataSource['dataSource']);
+      if (a) {
+        this.refreshTable();
+      }
     }
   }
   private async onRowAdd(dataSource: IImageAttribution, rowIndex: number) {

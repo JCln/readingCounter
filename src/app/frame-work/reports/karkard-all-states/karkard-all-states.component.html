@@ -92,16 +92,17 @@
         </form>
     </section>
 
-    <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
-        [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
+    <p-table [columns]="selectedColumns" [value]="closeTabService.saveDataForKarkardAllStates" [paginator]="true"
+        [rows]="10" [showCurrentPageReport]="true"
+        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
         stateStorage="session" stateKey="karkard-allstates"
         [resizableColumns]="readingReportManagerService.getLocalResizable()"
         [reorderableColumns]="readingReportManagerService.getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
-            <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns" name="selectOptions"
-                optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
+            <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+                name="selectOptions" optionLabel="header" (ngModelChange)="setColumnsChanges('dataSource' ,$event)"
                 selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
             </p-multiSelect>
             <div class="header_icons_wrap">
@@ -146,7 +147,7 @@
 
     </p-table>
 
-    <section *ngIf="!dataSource">
+    <section *ngIf="!closeTabService.saveDataForKarkardAllStates">
         <tr class="empty_data">
             موردی پیدا نشد
         </tr>

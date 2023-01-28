@@ -18,13 +18,12 @@ import { Tabsare3AddDgComponent } from './tabsare3-add-dg/tabsare3-add-dg.compon
   styleUrls: ['./tabsare3.component.scss']
 })
 export class Tabsare3Component extends FactoryONE {
-  dataSource: IAbBahaFormula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariCodeDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAbBahaFormula; } = {};
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public formulasService: FormulasService,
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
@@ -70,20 +69,16 @@ export class Tabsare3Component extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTabsare3Formula) {
-      this.dataSource = this.closeTabService.saveDataForTabsare3Formula;
-    }
-    else {
-      this.dataSource = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare3All);
-      this.closeTabService.saveDataForTabsare3Formula = this.dataSource;
+    if (!this.closeTabService.saveDataForTabsare3Formula) {
+      this.closeTabService.saveDataForTabsare3Formula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaTabsare3All);
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare3Formula, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare3Formula, this.zoneDictionary, 'zoneId');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForTabsare3Formula = this.closeTabService.saveDataForTabsare3Formula.slice(0, index).concat(this.closeTabService.saveDataForTabsare3Formula.slice(index + 1));
   private removeRow = async (rowData: string, rowIndex: number) => {
     await this.formulasService.postFormulaRemove(ENInterfaces.FormulaTabsare3Remove, rowData);
     this.refetchTable(rowIndex);
@@ -99,7 +94,7 @@ export class Tabsare3Component extends FactoryONE {
   }
   async onRowEditSave(dataSource: IAbBahaFormula) {
     if (!this.formulasService.verificationEditedRow(dataSource['dataSource'])) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForTabsare3Formula[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].zoneId !== 'object') {
@@ -120,8 +115,8 @@ export class Tabsare3Component extends FactoryONE {
     }
 
     await this.formulasService.postFormulaEdit(ENInterfaces.FormulaTabsare3Edit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare3Formula, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare3Formula, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel() { }
   getExcelSample = async () => {

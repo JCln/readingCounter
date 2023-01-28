@@ -5,7 +5,7 @@
 
 .over_all {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 29rem));
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 23rem));
   justify-content: center;
   gap: var(--font_2);
 }

@@ -15,14 +15,12 @@ import { CountryAddDgComponent } from './country-add-dg/country-add-dg.component
 })
 export class CountryComponent extends FactoryONE {
 
-  dataSource: ICountryManager[] = [];
-
   clonedProducts: { [s: string]: ICountryManager; } = {};
 
   constructor(
     private dialog: MatDialog,
 
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
     super();
@@ -42,15 +40,11 @@ export class CountryComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForCountry) {
-      this.dataSource = this.closeTabService.saveDataForCountry;
+    if (!this.closeTabService.saveDataForCountry) {
+      this.closeTabService.saveDataForCountry = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.CountryGET);
     }
-    else {
-      this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.CountryGET);
-      this.closeTabService.saveDataForCountry = this.dataSource;
-    }   
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForCountry = this.closeTabService.saveDataForCountry.slice(0, index).concat(this.closeTabService.saveDataForCountry.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
     if (a) {
@@ -63,7 +57,7 @@ export class CountryComponent extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForCountry[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.CountryEDIT, dataSource['dataSource']);

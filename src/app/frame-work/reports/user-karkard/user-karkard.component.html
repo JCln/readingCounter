@@ -47,7 +47,7 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'rrUserKarkard'" [_checkUpName]="'rr-user-karkard'"
+    <app-prime-table [dataSource]="closeTabService.saveDataForUserKarkard" [_outputFileName]="'rrUserKarkard'" [_checkUpName]="'rr-user-karkard'"
         [_selectedColumnsToRemember]="'selectedrrUserKarkard'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.isCollapsedUserKarkard"
         (collapsed)="readingReportManagerService.isCollapsedUserKarkard = !readingReportManagerService.isCollapsedUserKarkard"

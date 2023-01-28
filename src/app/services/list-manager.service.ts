@@ -73,9 +73,6 @@ export class ListManagerService {
   getKarbariDictionaryCode = async (): Promise<any> => {
     return await this.dictionaryWrapperService.getkarbariCodeDictionary();
   }
-  getKarbariDictionary = async (): Promise<any> => {
-    return await this.dictionaryWrapperService.getKarbariDictionary();
-  }
   getQotrDictionary = async (): Promise<any> => {
     return await this.dictionaryWrapperService.getQotrDictionary();
   }

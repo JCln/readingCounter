@@ -82,7 +82,7 @@ export class ProComponent extends AllListsFactory {
     this.zoneDictionary = await this.searchService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
     this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
-    this.karbariDictionary = await this.searchService.getKarbariDictionary();
+    this.karbariDictionary = await this.searchService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 
     Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');

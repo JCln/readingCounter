@@ -2,7 +2,7 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort"
-    (sortFunction)="customSort($event)" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]=_sortOrder
+    (sortFunction)="customSort($event)" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
     editMode="row" dataKey="id" [resizableColumns]=_reSizebleTable [reorderableColumns]=_reOrderableTable #dtable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">

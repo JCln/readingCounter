@@ -24,7 +24,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   canShowTable: boolean = true;
 
-  @Input() _sortOrder: number = -1;
+  @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
   @Input() _isSortable: boolean = true;
   @Input() _hasCollapsible: boolean = false;
@@ -261,12 +261,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
     else {
       this.updateRowGroupMetaData('');
     }
-  }
-  // multipleSort = (values: any) => {
-  //   let first = this.profileService._agg.selectedAggregate;
-  //   // const second = 
-  //   values.sort((a, b) => a.first.localeCompare(b.first) || b.price - a.price);
-  // }
+  } 
   doCustomSort = (event: any) => {
     event.data.sort((data1, data2) => {
       let value1 = data1[event.field];

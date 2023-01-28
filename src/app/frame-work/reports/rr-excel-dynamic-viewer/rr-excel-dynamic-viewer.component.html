@@ -1,6 +1,6 @@
 <app-prime-table     
     [_selectCols]="_selectCols" 
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForToolsExcelViewer" 
     [_outputFileName]="'excelDynamic'"
     [_numberOfExtraColumns]="[1,2]"
     [_checkUpName]="'excelDynamic'"    

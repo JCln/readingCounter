@@ -340,9 +340,6 @@ export class ReadingReportManagerService {
   getFragmentMasterByZoneDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(zoneId);
   }
-  getKarbariDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getKarbariDictionary();
-  }
   getTrackingStatesDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getTrackingStatesDictionary();
   }

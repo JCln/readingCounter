@@ -13,7 +13,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./karkard-all-states.component.scss']
 })
 export class KarkardAllStatesComponent extends FactoryONE {
-  dataSource: IKarkardAllStatesDto[] = [];//
   tempData: IKarkardAllStatesDto[] = [];
   header: any[] = [];
 
@@ -29,7 +28,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private columnManager: ColumnManager
   ) {
     super();
@@ -40,7 +39,6 @@ export class KarkardAllStatesComponent extends FactoryONE {
       this.closeTabService.saveDataForKarkardAllStates = null;
     }
     if (this.closeTabService.saveDataForKarkardAllStates) {
-      this.dataSource = this.closeTabService.saveDataForKarkardAllStates;
       this._selectCols = this.closeTabService.saveDataForKarkardAllStatesTWO;
       this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
     }
@@ -122,9 +120,7 @@ export class KarkardAllStatesComponent extends FactoryONE {
 
     this.tempData = await this.readingReportManagerService.portRRTest(ENInterfaces.postKarkardAllStates, this.readingReportManagerService.offKarkardAllStatesReq);
     this.insertSelectedColumns();
-    this.dataSource = this.getCounterStateData(this.tempData);
-
-    this.closeTabService.saveDataForKarkardAllStates = this.dataSource;
+    this.closeTabService.saveDataForKarkardAllStates = this.getCounterStateData(this.tempData);
   }
   setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
     // convert all items to false

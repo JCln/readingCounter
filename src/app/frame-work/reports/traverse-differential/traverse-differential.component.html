@@ -90,7 +90,7 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'trvDiff'" [_checkUpName]="'rr-traverseDiff'"
+    <app-prime-table [dataSource]="closeTabService.saveDataForRRTraverseDifferential" [_outputFileName]="'trvDiff'" [_checkUpName]="'rr-traverseDiff'"
         [_numberOfExtraColumns]="[1]" [_selectedColumnsToRemember]="'selectedRRTraverseDifferential'"
         [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedTrvCh"
         (collapsed)="readingReportManagerService.isCollapsedTrvCh = !readingReportManagerService.isCollapsedTrvCh"

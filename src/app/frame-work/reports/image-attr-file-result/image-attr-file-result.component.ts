@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IImageAttributionResult } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -14,13 +13,11 @@ import { MathS } from 'src/app/classes/math-s';
 export class ImageAttrFileResultComponent extends FactoryONE {
   isCollapsed: boolean = false;
   chartColors: any;
-  dataSource: IImageAttributionResult[] = [];
   _isOrderByDate: boolean = true;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -29,9 +26,6 @@ export class ImageAttrFileResultComponent extends FactoryONE {
     if (canRefresh) {
       this.closeTabService.saveDataForImageAttrResult = null;
       this.verification();
-    }
-    if (this.closeTabService.saveDataForImageAttrResult) {
-      this.dataSource = this.closeTabService.saveDataForImageAttrResult;
     }
   }
   verification = async () => {
@@ -42,9 +36,8 @@ export class ImageAttrFileResultComponent extends FactoryONE {
   }
 
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionResult, this.readingReportManagerService.imgAttrResultReq);
-    this.closeTabService.saveDataForImageAttrResult = this.dataSource;
-    this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.dataSource.length) }]
+    this.closeTabService.saveDataForImageAttrResult = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionResult, this.readingReportManagerService.imgAttrResultReq);
+    this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.closeTabService.saveDataForImageAttrResult.length) }]
   }
 
 }

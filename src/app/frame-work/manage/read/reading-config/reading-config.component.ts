@@ -18,15 +18,13 @@ import { RdEditDgComponent } from './rd-edit-dg/rd-edit-dg.component';
 })
 export class ReadingConfigComponent extends FactoryONE {
 
-  dataSource: IReadingConfigDefault[] = [];
-
   editableDataSource = [];
   zoneDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IReadingConfigDefault; } = {};
 
   constructor(
     private dialog: MatDialog,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {
     super();
@@ -84,19 +82,15 @@ export class ReadingConfigComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForReadingConfig) {
-      this.dataSource = this.closeTabService.saveDataForReadingConfig;
-    }
-    else {
-      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.ReadingConfigALL);
-      this.closeTabService.saveDataForReadingConfig = this.dataSource;
+    if (!this.closeTabService.saveDataForReadingConfig) {
+      this.closeTabService.saveDataForReadingConfig = await this.readManagerService.getDataSource(ENInterfaces.ReadingConfigALL);
     }
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
-    this.editableDataSource = JSON.parse(JSON.stringify(this.dataSource));
+    this.editableDataSource = JSON.parse(JSON.stringify(this.closeTabService.saveDataForReadingConfig));
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingConfig, this.zoneDictionary, 'zoneId');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForReadingConfig = this.closeTabService.saveDataForReadingConfig.slice(0, index).concat(this.closeTabService.saveDataForReadingConfig.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {

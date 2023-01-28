@@ -19,7 +19,6 @@ export class AllComponent extends AllListsFactory {
   dataSource: IOnOffLoadFlat[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -61,7 +60,6 @@ export class AllComponent extends AllListsFactory {
 
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
-      this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
 

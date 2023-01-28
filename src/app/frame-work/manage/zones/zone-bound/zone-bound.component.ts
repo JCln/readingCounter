@@ -16,15 +16,13 @@ import { ZoneBoundAddDgComponent } from './zone-bound-add-dg/zone-bound-add-dg.c
   styleUrls: ['./zone-bound.component.scss']
 })
 export class ZoneBoundComponent extends FactoryONE {
-  dataSource: IZoneBoundManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 
   clonedProducts: { [s: string]: IZoneBoundManager; } = {};
 
   constructor(
     private dialog: MatDialog,
-
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
     super();
@@ -52,18 +50,14 @@ export class ZoneBoundComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForZoneBound) {
-      this.dataSource = this.closeTabService.saveDataForZoneBound;
-    }
-    else {
-      this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ZoneBoundGET);
-      this.closeTabService.saveDataForZoneBound = this.dataSource;
+    if (!this.closeTabService.saveDataForZoneBound) {
+      this.closeTabService.saveDataForZoneBound = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ZoneBoundGET);
     }
     this.zoneDictionary = await this.sectorsManagerService.getZoneDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForZoneBound, this.zoneDictionary, 'zoneId');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForZoneBound = this.closeTabService.saveDataForZoneBound.slice(0, index).concat(this.closeTabService.saveDataForZoneBound.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
 
@@ -77,7 +71,7 @@ export class ZoneBoundComponent extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForZoneBound[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].zoneId !== 'object') {
@@ -89,11 +83,11 @@ export class ZoneBoundComponent extends FactoryONE {
       dataSource['dataSource'].zoneId = dataSource['dataSource'].zoneId['id'];
     }
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ZoneBoundEDIT, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForZoneBound, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel() {
-    // this.dataSource[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];
-    // delete this.dataSource[rowDataAndIndex['dataSource']];
+    // this.closeTabService.saveDataForZoneBound[rowDataAndIndex['ri']] = this.clonedProducts[rowDataAndIndex['dataSource']];
+    // delete this.closeTabService.saveDataForZoneBound[rowDataAndIndex['dataSource']];
     // return;
   }
 

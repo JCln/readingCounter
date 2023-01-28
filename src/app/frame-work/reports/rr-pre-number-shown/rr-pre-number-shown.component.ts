@@ -20,7 +20,6 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   _years: ITitleValue[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -72,7 +71,6 @@ export class RrPreNumberShownComponent extends AllListsFactory {
       Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
     }
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
@@ -89,6 +87,6 @@ export class RrPreNumberShownComponent extends AllListsFactory {
     this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
     this.converts();
     this.closeTabService.saveDataForRRPreNumShown = this.dataSource;
-  }  
+  }
 
 }
