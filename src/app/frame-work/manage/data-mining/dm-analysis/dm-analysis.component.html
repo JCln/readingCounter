@@ -83,8 +83,8 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'analysis'" [_checkUpName]="'dm-analysis'"
-        [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
+    <app-prime-table [dataSource]="closeTabService.saveDataForDMAAnalyze" [_outputFileName]="'analysis'"
+        [_checkUpName]="'dm-analysis'" [_selectedColumnsToRemember]="'selectedDMAnalyze'" [_hasCollapsible]=true
         [_isCollaped]="dataMiningAnalysesService.isCollapsedCranlz"
         (collapsed)="dataMiningAnalysesService.isCollapsedCranlz = !dataMiningAnalysesService.isCollapsedCranlz"
         (refreshedTable)="refreshTable()">

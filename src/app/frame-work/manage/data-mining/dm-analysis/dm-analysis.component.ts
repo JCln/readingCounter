@@ -6,24 +6,22 @@ import { DataMiningAnalysesService } from 'services/data-mining-analyses.service
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
-import { IReadingTimeRes } from 'src/app/interfaces/data-mining';
 
 @Component({
   selector: 'app-dm-analysis',
   templateUrl: './dm-analysis.component.html',
   styleUrls: ['./dm-analysis.component.scss']
 })
-export class DmAnalysisComponent extends FactoryONE {  
+export class DmAnalysisComponent extends FactoryONE {
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  dataSource: IReadingTimeRes[] = [];
 
   constructor(
     public dataMiningAnalysesService: DataMiningAnalysesService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -34,7 +32,6 @@ export class DmAnalysisComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForDMAAnalyze) {
-      this.dataSource = this.closeTabService.saveDataForDMAAnalyze;
       // this.insertSelectedColumns(); /* TO CHECKOUT THIS FUNC */
       this.setRanges();
     }
@@ -55,17 +52,16 @@ export class DmAnalysisComponent extends FactoryONE {
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.dataSource = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
-    if (MathS.isNull(this.dataSource))
-      return;
-    this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.setRanges();
-    this.closeTabService.saveDataForDMAAnalyze = this.dataSource;
+    this.closeTabService.saveDataForDMAAnalyze = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
+    if (!MathS.isNull(this.closeTabService.saveDataForDMAAnalyze)) {
+      this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
+      Converter.convertIdToTitle(this.closeTabService.saveDataForDMAAnalyze, this.zoneDictionary, 'zoneId');
+      this.setRanges();
+    }
   }
 
   private setRanges = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForDMAAnalyze.forEach(item => {
       item.averageBetweenTwoMinute = parseFloat(MathS.getRange(item.averageBetweenTwoMinute));
       item.disconnectRate = parseFloat(MathS.getRange(item.disconnectRate));
       item.medianBetweenTwoMinute = parseFloat(MathS.getRange(item.medianBetweenTwoMinute));

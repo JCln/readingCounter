@@ -21,7 +21,7 @@
 
 ._main_img {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 18rem));
   justify-content: center;
   direction: rtl;
   gap: var(--font_02);

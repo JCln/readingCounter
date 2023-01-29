@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -8,7 +7,6 @@ import { ListManagerService } from 'services/list-manager.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
-import { MathS } from 'src/app/classes/math-s';
 import { Search } from 'src/app/classes/search';
 
 import { BriefKardexComponent } from '../../list-manager/brief-kardex/brief-kardex.component';
@@ -20,7 +18,6 @@ import { BriefKardexComponent } from '../../list-manager/brief-kardex/brief-kard
 })
 
 export class MoshtarakComponent extends AllListsFactory {
-  dataSource: IOnOffLoadFlat[] = [];
   searchType: Search[];
   _searchByInfo: string = 'اشتراک';
 
@@ -32,8 +29,7 @@ export class MoshtarakComponent extends AllListsFactory {
   qotrDictionary: IDictionaryManager[] = [];
 
   constructor(
-
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public searchService: SearchService,
     public dialogService: DialogService,
     public listManagerService: ListManagerService
@@ -45,7 +41,7 @@ export class MoshtarakComponent extends AllListsFactory {
     if (this.searchService.searchReqMosh.zoneId) {
       this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeShowAllDictionary(this.searchService.searchReqMosh.zoneId);
       this.counterStateDictionary = await this.searchService.getCounterStateByZoneShowAllDictionary(this.searchService.searchReqMosh.zoneId);
-      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.counterStateByCodeDictionary, 'preCounterStateCode');
     }
     else {
       this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
@@ -54,22 +50,20 @@ export class MoshtarakComponent extends AllListsFactory {
     this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.deleteDictionary, 'hazf');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.karbariDictionaryCode, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.counterStateDictionary, 'counterStateId');
 
-    this.searchService.setDynamicPartRanges(this.dataSource);
+    this.searchService.setDynamicPartRanges(this.closeTabService.saveDataForSearchMoshtarakin);
   }
   connectToServer = async () => {
     if (this.searchService.verificationMosh(this.searchService.searchReqMosh)) {
-      this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchMoshtarak, this.searchService.searchReqMosh);
+      this.closeTabService.saveDataForSearchMoshtarakin = await this.searchService.doSearch(ENInterfaces.ListSearchMoshtarak, this.searchService.searchReqMosh);
       this.converts();
-      this.searchService.makeHadPicturesToBoolean(this.dataSource);
-
-      this.closeTabService.saveDataForSearchMoshtarakin = this.dataSource;
+      this.searchService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchMoshtarakin);
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
@@ -77,8 +71,7 @@ export class MoshtarakComponent extends AllListsFactory {
       this.closeTabService.saveDataForSearchMoshtarakin = null;
       this.closeTabService.saveDataForSearchMoshtarakinReq = null;
     }
-    if (!MathS.isNull(this.closeTabService.saveDataForSearchMoshtarakin)) {
-      this.dataSource = this.closeTabService.saveDataForSearchMoshtarakin;
+    if (this.closeTabService.saveDataForSearchMoshtarakin) {
       this.converts();
     }
     else
@@ -91,7 +84,7 @@ export class MoshtarakComponent extends AllListsFactory {
     this.connectToServer();
   }
   toDefaultVals = () => {
-    this.dataSource = [];
+    this.closeTabService.saveDataForSearchMoshtarakin = [];
   }
   getZoneDictionary = async () => {
     this.zoneDictionary = JSON.parse(JSON.stringify(await this.searchService.getZoneDictionary()));

@@ -39,6 +39,7 @@ export class ReadingReportManagerService {
   isCollapsedPrfm: boolean = false;
   isCollapsedDH: boolean = false;
   isCollapsedLocked: boolean = false;
+  isCollapsedPreNumberShown: boolean = false;
   isCollapsedOffKarkard: boolean = false;
   isCollapsedMaster: boolean = false;
   isCollapsedDaily: boolean = false;

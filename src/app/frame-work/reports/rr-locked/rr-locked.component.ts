@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -28,12 +27,10 @@ export class RrLockedComponent extends AllListsFactory {
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
 
-  dataSource: IOnOffLoadFlat[] = [];
-
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
     public dialogService: DialogService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public listManagerService: ListManagerService
   ) {
     super(dialogService, listManagerService);
@@ -44,7 +41,6 @@ export class RrLockedComponent extends AllListsFactory {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRLocked) {
-      this.dataSource = this.closeTabService.saveDataForRRLocked;
       this.converts();
     }
     this.readingReportManagerService.getSearchInOrderTo();
@@ -53,7 +49,7 @@ export class RrLockedComponent extends AllListsFactory {
     this.receiveYear();
   }
   converts = async () => {
-    const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
+    const tempZone: number = parseInt(this.closeTabService.saveDataForRRLocked[0].zoneId.toString());
     if (tempZone) {
       this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
       this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
@@ -62,14 +58,14 @@ export class RrLockedComponent extends AllListsFactory {
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.deleteDictionary, 'hazf');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.karbariDictionaryCode, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.qotrDictionary, 'qotrCode');
 
-    this.listManagerService.setDynamicPartRanges(this.dataSource);
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -84,10 +80,9 @@ export class RrLockedComponent extends AllListsFactory {
   }
 
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.readingReportManagerService.lockedReq);
-    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
-    this.converts();
-    this.closeTabService.saveDataForRRLocked = this.dataSource;
+    this.closeTabService.saveDataForRRLocked = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.readingReportManagerService.lockedReq);
+    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRLocked);
+    this.converts();    
   }
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {

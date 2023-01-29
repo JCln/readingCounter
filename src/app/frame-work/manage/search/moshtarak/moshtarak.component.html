@@ -37,7 +37,7 @@
     </form>
 </main>
 
-<app-prime-table [dataSource]="dataSource" [_outputFileName]="'searchMosh'" [_checkUpName]="'allComponent'"
+<app-prime-table [dataSource]="closeTabService.saveDataForSearchMoshtarakin" [_outputFileName]="'searchMosh'" [_checkUpName]="'allComponent'"
     [_selectedColumnsToRemember]="'selectedListManagerMosh'" [_numberOfExtraColumns]="[1,2,3,4]"
     [_sessionName]="'moshtarak-session'" (refreshedTable)="refreshTable()"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)"

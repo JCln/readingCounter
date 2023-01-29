@@ -133,8 +133,8 @@
 
 </form>
 
-<app-prime-table [dataSource]="dataSource" [_outputFileName]="'searchPro'" [_checkUpName]="'allComponent'"
-    [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'search_acme'"
+<app-prime-table [dataSource]="closeTabService.saveDataForSearchPro" [_outputFileName]="'searchPro'"
+    [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'search_acme'"
     [_selectedColumnsToRemember]="'selectedListManagerPro'" (refreshedTable)="refreshTable()"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>

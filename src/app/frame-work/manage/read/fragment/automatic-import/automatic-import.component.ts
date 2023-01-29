@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { IAutomaticImport } from 'interfaces/ireads-manager';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
@@ -22,14 +21,13 @@ export class AutomaticImportComponent extends FactoryONE {
   @Input() zoneId: any;
   @Output() fragmentLatestValue = new EventEmitter<any>();
 
-  dataSource: IAutomaticImport[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   userCounterReader: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   ref: DynamicDialogRef;
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private fragmentManagerService: FragmentManagerService,
     private dialog: MatDialog,
     private dialogService: DialogService,
@@ -43,7 +41,7 @@ export class AutomaticImportComponent extends FactoryONE {
     this.fragmentLatestValue.emit(this.fragmentMasterId);
   }
   classWrapper = async (canRefresh?: boolean) => {
-    this.dataSource = await this.fragmentManagerService.getDataSourceByQuote(ENInterfaces.automaticImportByFragment, this.fragmentMasterId);
+    this.closeTabService.saveDataForAutomaticImport = await this.fragmentManagerService.getDataSourceByQuote(ENInterfaces.automaticImportByFragment, this.fragmentMasterId);
     this.readingPeriodKindDictionary = await this.fragmentManagerService.getPeriodKindDictionary();
     this.zoneDictionary = await this.fragmentManagerService.getZoneDictionary();
     this.zoneDictionary.find(item => {
@@ -52,7 +50,6 @@ export class AutomaticImportComponent extends FactoryONE {
     })
 
     this.userCounterReader = await this.fragmentManagerService.getUserCounterReaders(this.zoneId);
-    this.closeTabService.saveDataForAutomaticImport = this.dataSource;
   }
   removeRow = async (id: string) => {
     if (await this.fragmentManagerService.firstConfirmDialog()) {

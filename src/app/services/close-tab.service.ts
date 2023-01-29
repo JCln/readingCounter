@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IReadingTimeRes } from 'interfaces/data-mining';
 import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
 import { IAnalyzeRes } from 'interfaces/idashboard-map';
 import { IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
@@ -9,8 +10,10 @@ import { IAPK } from 'interfaces/inon-manage';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import {
   IAbBahaFormula,
+  IAutomaticImport,
   ICounterReport,
   ICounterState,
+  IFragmentDetails,
   IFragmentMaster,
   IImageAttribution,
   IKarbari,
@@ -33,8 +36,8 @@ import {
   IRRChartResWrapper,
   IUserKarkard,
 } from 'interfaces/ireports';
-import { IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
-import { IWaterMarkConfig } from 'interfaces/isettings';
+import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
+import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
 import { IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
 import { ICountryManager, IProvinceManager } from 'interfaces/izones';
@@ -42,7 +45,7 @@ import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchProReportInput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 
-import { ITracking } from './../interfaces/itrackings';
+import { IOffLoadPerDay, ITracking } from './../interfaces/itrackings';
 import { IRegionManager, IZoneBoundManager, IZoneManager } from './../interfaces/izones';
 
 @Injectable({
@@ -123,7 +126,7 @@ export class CloseTabService {
   }
   saveDataForFollowUpAUX: any;
   // import dynamic
-  saveDataForAutomaticImport: any;
+  saveDataForAutomaticImport: IAutomaticImport[];
   saveDataForImportDynamic: any;
   saveDataForImportErrors: IImportErrors[];
   saveDataForImportErrorsByTrackNumber: any;
@@ -167,9 +170,9 @@ export class CloseTabService {
   saveDataForAssessPre: any;
   saveDataForAssessAdd: any;
   // SEARCH
-  saveDataForSearchMoshtarakin: any;
+  saveDataForSearchMoshtarakin: IOnOffLoadFlat[];
   saveDataForSearchMoshtarakinReq: any;
-  saveDataForSearchPro: any;
+  saveDataForSearchPro: IOnOffLoadFlat[] = [];
   saveDataForSearchProReq: ISearchProReportInput = {
     zoneId: null,
     fromDate: '',
@@ -188,14 +191,14 @@ export class CloseTabService {
   }
   saveDataForSearchSimple: any;
   // list manager
-  saveDataForLMPD: any;
+  saveDataForLMPD: IOffLoadPerDay;
   saveDataForLMPDTrackNumber: number;
   saveDataForLMAllReq: any;
-  saveDataForLMAll: any;
+  saveDataForLMAll: IOnOffLoadFlat[];
   saveDataForLMModifyReq: any;
-  saveDataForLMModify: any;
+  saveDataForLMModify: IOnOffLoadFlat[];
   saveDataForLMGeneralModifyReq: any;
-  saveDataForLMGeneralModify: any;
+  saveDataForLMGeneralModify: IOnOffLoadFlat[];
   saveDataForLMGeneralGroupModifyReq: any = {
     GUid: '',
     counterStateValue: null
@@ -210,13 +213,13 @@ export class CloseTabService {
   saveDataForRROffloadedKarkard: IReadingReportKarkard[];
   saveDataForRRFragment: IReadingReportKarkard[];
   saveDataForRRkarkardDaily: IReadingReportKarkard[];
-  saveDataForRRPreNumShown: IOnOffLoadFlat[];
-  saveDataForRRLocked: IOnOffLoadFlat[];
+  saveDataForRRPreNumShown: IOnOffLoadFlat[] = [];
+  saveDataForRRLocked: IOnOffLoadFlat[] = [];
   saveDataForRRMaster: IReadingReportMaster[];
   saveDataForImageAttrResult: IImageAttributionResult[];
   saveDataForImageAttrAnalyze: IImageAttributionAnalyze[];
   saveDataForRRPerformance: IAnalyzeRes[];
-  saveDataForDMAAnalyze: any;
+  saveDataForDMAAnalyze: IReadingTimeRes[];
   saveDataForRRDetails: IReadingReportDetails[];
   saveDataForRequestLog: IRequestLog[];
   saveDataForRequestLogReq: any = {
@@ -248,11 +251,13 @@ export class CloseTabService {
     isOs64: true,
     systemDateTime: '',
   }
+  saveDataForMsDriveInfo: IManageDrivesInfo[];
   saveDataForServerErrors: IManageServerErrorsRes[];
+  license: ILicenseInfo;
   saveDataForRRDisposalHours: IRRChartResWrapper[];
   saveDataForRRGIS: any;
   saveDataForFragmentNOB: IFragmentMaster[];
-  saveDataForFragmentNOBDetails: any;
+  saveDataForFragmentNOBDetails: IFragmentDetails[];
   fragmentNOBDetailsGUID: any;
 
   saveDataForTextOutput: ITextOutput[];
@@ -353,6 +358,8 @@ export class CloseTabService {
     { id: 2, req: ENEssentialsToSave.saveDataForRequestLogReq, value: ENEssentialsToSave.saveDataForRequestLog, url: EN_Routes.wrmRequestLogs },
     { id: 2, value: ENEssentialsToSave.saveDataForServerErrors, url: EN_Routes.wrmmserr },
     { id: 2, value: ENEssentialsToSave.saveDataForOSInfo, url: EN_Routes.serverOSInfo },
+    { id: 2, value: ENEssentialsToSave.license, url: EN_Routes.wrLicense },
+    { id: 2, value: ENEssentialsToSave.saveDataForMsDriveInfo, url: EN_Routes.driveInfo },
     { id: 2, value: ENEssentialsToSave.saveDataForUserKarkard, url: EN_Routes.wrrptsexmuserKarkard },
     { id: 2, req: ENEssentialsToSave.saveDataForUserKarkardSummaryReq, value: ENEssentialsToSave.saveDataForUserKarkardSummary, value_2: ENEssentialsToSave.saveDataForUserKarkardSummaryTwo, url: EN_Routes.userKarkardSummary },
     { id: 2, value: ENEssentialsToSave.saveDataForRRkarkardDaily, url: EN_Routes.rptskarkardDaily },

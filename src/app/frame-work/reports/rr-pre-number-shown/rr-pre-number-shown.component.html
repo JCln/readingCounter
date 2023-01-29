@@ -1,5 +1,5 @@
 <main class="main" style="position: relative;">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="readingReportManagerService.isCollapsedPreNumberShown">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
                 <section class="order_by">
@@ -80,9 +80,12 @@
         </form>
     </section>
 
-    <app-prime-table [hidden]="showCarousel" [dataSource]="dataSource" [_outputFileName]="'rrPreNumber'"
+    <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForRRPreNumShown" [_outputFileName]="'rrPreNumber'"
         [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'rr-preNumber'"
         [_selectedColumnsToRemember]="'selectedRRPreNumShown'" [_isCustomSort]=true
+        [_isCollaped]="readingReportManagerService.isCollapsedPreNumberShown"
+        [_hasCollapsible]=true
+        (collapsed)="readingReportManagerService.isCollapsedPreNumberShown = !readingReportManagerService.isCollapsedPreNumberShown"
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
         (showedInMapSingle)="openMapDialog($event)" (filteredEvent)="filteredTableEvent($event)"
         (showedPictures)="getReadingReportTitles($event)">

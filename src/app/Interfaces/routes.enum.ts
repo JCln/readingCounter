@@ -8,6 +8,7 @@ export enum EN_Routes {
     'wrofflinetxtout' = '/wr/offline/txtout',
     'offlineLoad' = '/wr/offline/load',
     'wrdb' = '/wr/db',
+    'driveInfo' = '/wr/m/msdriveinfo',
     'wrrptsmamdhchart' = '/wr/rpts/mam/dh/chart',
     'wrrptsmamkarkardchart' = '/wr/rpts/mam/karkard/chart',
     'wrrptsmamtrvchchart' = '/wr/rpts/mam/trvch/chart',

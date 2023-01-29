@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
@@ -14,7 +13,6 @@ import { Converter } from 'src/app/classes/converter';
 import { AllListsFactory } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 import { OffloadModify } from 'src/app/classes/offload-modify-type';
-import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
 import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mosh-dg.component';
@@ -25,7 +23,6 @@ import { ListSearchMoshDgComponent } from '../list-search-mosh-dg/list-search-mo
   styleUrls: ['./general-list-modify.component.scss']
 })
 export class GeneralListModifyComponent extends AllListsFactory {
-  dataSource: IOnOffLoadFlat[] = [];
   clonedProducts: { [s: string]: object; } = {};
   counterStateValue: number;
 
@@ -50,9 +47,8 @@ export class GeneralListModifyComponent extends AllListsFactory {
 
   constructor(
     public listManagerService: ListManagerService,
-    private router: Router,
     public dialogService: DialogService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public allListsService: AllListsService,
     public outputManagerService: OutputManagerService
   ) {
@@ -61,26 +57,25 @@ export class GeneralListModifyComponent extends AllListsFactory {
 
   updateOnChangedCounterState = async (val: any) => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val.value);
-    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
+    this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val.value);
+    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralModify);
     this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
-    this.closeTabService.saveDataForLMGeneralModify = this.dataSource;
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
     this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
     this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
 
-    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.deleteDictionary, 'hazf');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.karbariDictionaryCode, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.qotrDictionary, 'qotrCode');
 
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.generalModifyLists_pageSign.GUid) {
-      this.router.navigateByUrl(EN_Routes.wrmtrackoffloaded);
+      this.toPrePage();
     }
     else {
       this.counterStateByZoneDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
@@ -89,13 +84,10 @@ export class GeneralListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMGeneralModify = null;
         this.closeTabService.saveDataForLMGeneralModifyReq = null;
       }
-      if (this.closeTabService.saveDataForLMGeneralModifyReq === this.allListsService.generalModifyLists_pageSign.GUid && this.closeTabService.saveDataForLMGeneralModify) {
-        this.dataSource = this.closeTabService.saveDataForLMGeneralModify;
-      }
       this.insertSelectedColumns();
       // setDynamics should implement before new instance of dataSource create
-      this.listManagerService.setDynamicPartRanges(this.dataSource);
-      this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
+      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMGeneralModify);
+      this.closeTabService.saveDataForLMGeneralModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralModify));
     }
   }
   refreshTable = () => {
@@ -109,7 +101,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
     this.modifyType = this.listManagerService.getOffloadModifyType();
   }
   toPrePage = () => {
-    this.router.navigate([EN_Routes.wrmtrackoffloaded]);
+    this.listManagerService.routeToOffloaded();
   }
   onRowEditInit(dataSource: object) {
     this.clonedProducts = { dataSource };

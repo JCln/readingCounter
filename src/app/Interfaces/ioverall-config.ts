@@ -152,6 +152,8 @@ export enum ENEssentialsToSave {
     saveDataForRequestLogReq = 'saveDataForRequestLogReq',
     saveDataForServerErrors = 'saveDataForServerErrors',
     saveDataForOSInfo = 'saveDataForOSInfo',
+    license = 'license',
+    saveDataForMsDriveInfo = 'saveDataForMsDriveInfo',
     saveDataForImgResultDetailsGridBased = 'saveDataForImgResultDetailsGridBased'
 }
 export interface ITestSidebar {

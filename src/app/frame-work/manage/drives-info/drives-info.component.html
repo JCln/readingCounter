@@ -1,5 +1,5 @@
 <main class="over_all">
-    <div *ngFor="let item of dataSource, index as i">
+    <div *ngFor="let item of closeTabService.saveDataForMsDriveInfo, index as i">
         <h1 class="title">{{item.driveName}} {{item.volumeLabel}}</h1>
         <div class="content">
             <div class="_key_value">
@@ -31,7 +31,7 @@
                 <div class="_value">{{item.reservedSpaceMb}}</div>
             </div>
 
-            <section class="_charts" *ngIf="dataSource">
+            <section class="_charts" *ngIf="closeTabService.saveDataForMsDriveInfo">
                 <app-drive-info-pie [dataSource]="temp[i]"></app-drive-info-pie>
             </section>
         </div>

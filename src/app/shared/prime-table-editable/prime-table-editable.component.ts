@@ -30,7 +30,6 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Input() newRowLimit: number;
   @Input() secondDictionary = new EventEmitter<any>();
 
-  @Output() backedToPrevious = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
   @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() showedInMapSingle = new EventEmitter<any>();
@@ -130,9 +129,6 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   routeToParent = () => {
     this.routedToParent.emit();
-  }
-  backToPrevious = () => {
-    this.backedToPrevious.emit(true);
   }
   filterEventTable(e: Table) {
     this.filteredEvent.emit(e.filteredValue);

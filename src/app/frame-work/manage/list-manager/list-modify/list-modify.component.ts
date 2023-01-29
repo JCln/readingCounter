@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
@@ -18,8 +17,6 @@ import { BriefKardexComponent } from './../brief-kardex/brief-kardex.component';
   styleUrls: ['./list-modify.component.scss']
 })
 export class ListModifyComponent extends AllListsFactory {
-  dataSource: IOnOffLoadFlat[] = [];
-
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
@@ -30,12 +27,11 @@ export class ListModifyComponent extends AllListsFactory {
   constructor(
     public listManagerService: ListManagerService,
     public dialogService: DialogService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public allListsService: AllListsService
   ) {
     super(dialogService, listManagerService);
   }
-
 
   classWrapper = async (canRefresh?: boolean) => {
 
@@ -47,36 +43,32 @@ export class ListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMModify = null;
         this.closeTabService.saveDataForLMModifyReq = null;
       }
-      if (this.closeTabService.saveDataForLMModifyReq === this.allListsService.modifyLists_pageSign.GUid && this.closeTabService.saveDataForLMModify) {
-        this.dataSource = this.closeTabService.saveDataForLMModify;
-      }
-      else {
-        this.dataSource = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.modifyLists_pageSign.GUid);
-        this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
+      if (this.closeTabService.saveDataForLMModifyReq != this.allListsService.modifyLists_pageSign.GUid || !this.closeTabService.saveDataForLMModify) {
+        this.closeTabService.saveDataForLMModify = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.modifyLists_pageSign.GUid);
+        this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMModify);
         this.closeTabService.saveDataForLMModifyReq = this.allListsService.modifyLists_pageSign.GUid;
-        this.closeTabService.saveDataForLMModify = this.dataSource;
       }
       // setDynamics should implement before new instance of dataSource create
-      this.listManagerService.setDynamicPartRanges(this.dataSource);
-      this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
+      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMModify);
+      this.closeTabService.saveDataForLMModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMModify));
 
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
 
-      Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-      const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.counterStateDictionary, 'counterStateId');
+      const tempZone: number = parseInt(this.closeTabService.saveDataForLMModify[0].zoneId.toString());
       if (tempZone) {
         this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
         this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
-        Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-        Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+        Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.counterStateByCodeDictionary, 'preCounterStateCode');
+        Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.counterStateDictionary, 'counterStateId');
       }
 
-      Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-      Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.deleteDictionary, 'hazf');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.karbariDictionaryCode, 'possibleKarbariCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.karbariDictionaryCode, 'karbariCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.qotrDictionary, 'qotrCode');
     }
   }
   toPrePage = () => {

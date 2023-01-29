@@ -17,14 +17,13 @@ export class FragmentDetailsComponent extends FactoryONE {
   table: Table;
   newRowLimit: number = 1;
 
-  dataSource: IFragmentDetails[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
   clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public fragmentManagerService: FragmentManagerService
   ) {
     super();
@@ -47,12 +46,11 @@ export class FragmentDetailsComponent extends FactoryONE {
       }
       console.log(this.closeTabService.fragmentNOBDetailsGUID);
 
-      if (this.closeTabService.fragmentNOBDetailsGUID === this.fragmentManagerService.fragmentDetails_pageSign.GUid && this.closeTabService.saveDataForFragmentNOBDetails) {
-        this.dataSource = this.closeTabService.saveDataForFragmentNOBDetails;
-      }
-      else {
-        this.dataSource = await this.fragmentManagerService.getFragmentDetails(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
-        this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
+      if (
+        this.closeTabService.fragmentNOBDetailsGUID != this.fragmentManagerService.fragmentDetails_pageSign.GUid ||
+        !this.closeTabService.saveDataForFragmentNOBDetails
+      ) {
+        this.closeTabService.saveDataForFragmentNOBDetails = await this.fragmentManagerService.getFragmentDetails(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
         this.closeTabService.fragmentNOBDetailsGUID = this.fragmentManagerService.fragmentDetails_pageSign.GUid;
       }
       this.defaultAddStatus();
@@ -67,7 +65,7 @@ export class FragmentDetailsComponent extends FactoryONE {
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForFragmentNOBDetails = this.closeTabService.saveDataForFragmentNOBDetails.slice(0, index).concat(this.closeTabService.saveDataForFragmentNOBDetails.slice(index + 1));
   newRow(): IFragmentDetails {
     return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this.fragmentManagerService.fragmentDetails_pageSign.GUid, isNew: true };
   }
@@ -77,10 +75,10 @@ export class FragmentDetailsComponent extends FactoryONE {
   }
   onRowEditCancel(dataSource: object) {
     this.newRowLimit = 1;
-    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
-    delete this.dataSource[dataSource['dataSource'].id];
+    this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+    delete this.closeTabService.saveDataForFragmentNOBDetails[dataSource['dataSource'].id];
     if (dataSource['dataSource'].isNew)
-      this.dataSource.shift();
+      this.closeTabService.saveDataForFragmentNOBDetails.shift();
     return;
   }
   removeRow = async (dataSource: object) => {
@@ -92,8 +90,8 @@ export class FragmentDetailsComponent extends FactoryONE {
     if (!confirmed) return;
     const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSREMOVE, dataSource['dataSource']);
     if (a) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
-      delete this.dataSource[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+      delete this.closeTabService.saveDataForFragmentNOBDetails[dataSource['dataSource'].id];
       this.refetchTable(dataSource['ri']);
     }
   }
@@ -101,10 +99,10 @@ export class FragmentDetailsComponent extends FactoryONE {
     this.newRowLimit = 1;
     if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
-        this.dataSource.shift();
+        this.closeTabService.saveDataForFragmentNOBDetails.shift();
         return;
       }
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+      this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
       return;
     }
     if (!dataSource['dataSource'].id) {

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -15,7 +14,6 @@ import { AllListsFactory } from 'src/app/classes/factory';
   styleUrls: ['./rr-pre-number-shown.component.scss']
 })
 export class RrPreNumberShownComponent extends AllListsFactory {
-  isCollapsed: boolean = false;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 
@@ -28,11 +26,9 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
 
-  dataSource: IOnOffLoadFlat[] = [];
-
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public dialogService: DialogService,
     public listManagerService: ListManagerService
   ) {
@@ -44,7 +40,7 @@ export class RrPreNumberShownComponent extends AllListsFactory {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRPreNumShown) {
-      this.dataSource = this.closeTabService.saveDataForRRPreNumShown;
+      this.closeTabService.saveDataForRRPreNumShown = this.closeTabService.saveDataForRRPreNumShown;
       this.converts();
     }
     this.readingReportManagerService.getSearchInOrderTo();
@@ -64,29 +60,28 @@ export class RrPreNumberShownComponent extends AllListsFactory {
       this.connectToServer();
   }
   converts = async () => {
-    const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
+    const tempZone: number = parseInt(this.closeTabService.saveDataForRRPreNumShown[0].zoneId.toString());
     if (tempZone) {
       this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
       this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
-      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.counterStateByCodeDictionary, 'preCounterStateCode');
     }
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.deleteDictionary, 'hazf');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.karbariDictionaryCode, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.qotrDictionary, 'qotrCode');
 
-    this.listManagerService.setDynamicPartRanges(this.dataSource);
+    this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRPreNumShown);
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.readingReportManagerService.preNumberShownReq);
-    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
+    this.closeTabService.saveDataForRRPreNumShown = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRPreNumberShown, this.readingReportManagerService.preNumberShownReq);
+    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRPreNumShown);
     this.converts();
-    this.closeTabService.saveDataForRRPreNumShown = this.dataSource;
   }
 
 }

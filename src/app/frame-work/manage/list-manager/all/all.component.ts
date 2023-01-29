@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AllListsService } from 'services/all-lists.service';
@@ -16,7 +15,6 @@ import { AllListsFactory } from 'src/app/classes/factory';
   styleUrls: ['./all.component.scss']
 })
 export class AllComponent extends AllListsFactory {
-  dataSource: IOnOffLoadFlat[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
@@ -29,7 +27,7 @@ export class AllComponent extends AllListsFactory {
     private _location: Location,
     public dialogService: DialogService,
     public allListsService: AllListsService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super(dialogService, listManagerService);
   }
@@ -44,37 +42,33 @@ export class AllComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMAll = null;
         this.closeTabService.saveDataForLMAllReq = null;
       }
-      if (this.closeTabService.saveDataForLMAllReq === this.allListsService.allLists_pageSign.GUid && this.closeTabService.saveDataForLMAll) {
-        this.dataSource = this.closeTabService.saveDataForLMAll;
-      }
-      else {
-        this.dataSource = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.allLists_pageSign.GUid);
-        this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
 
+      if (!this.closeTabService.saveDataForLMAll || this.closeTabService.saveDataForLMAllReq != this.allListsService.allLists_pageSign.GUid) {
+        this.closeTabService.saveDataForLMAll = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.allLists_pageSign.GUid);
+        this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMAll);
         this.closeTabService.saveDataForLMAllReq = this.allListsService.allLists_pageSign.GUid;
-        this.closeTabService.saveDataForLMAll = this.dataSource;
       }
       // setDynamics should implement before new instance of dataSource create
-      this.listManagerService.setDynamicPartRanges(this.dataSource);
-      this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
+      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMAll);
+      this.closeTabService.saveDataForLMAll = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMAll));
 
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
 
-      const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
+      const tempZone: number = parseInt(this.closeTabService.saveDataForLMAll[0].zoneId.toString());
       console.log(tempZone);
       if (tempZone) {
         this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
         this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
-        Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-        Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
+        Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.counterStateByCodeDictionary, 'preCounterStateCode');
+        Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.counterStateDictionary, 'counterStateId');
       }
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
-      Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-      Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'possibleKarbariCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.deleteDictionary, 'hazf');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'karbariCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.qotrDictionary, 'qotrCode');
     }
   }
   toPrePage = () => {

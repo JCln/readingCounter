@@ -19,7 +19,7 @@
 </section>
 
 <main style="position: relative; ">
-    <app-prime-table [dataSource]="dataSource" [_outputFileName]="'ModifyList'" [_checkUpName]="'allComponent'"
+    <app-prime-table [dataSource]="closeTabService.saveDataForLMModify" [_outputFileName]="'ModifyList'" [_checkUpName]="'allComponent'"
         [_sessionName]="'modifyLists'" [_selectedColumnsToRemember]="'selectedListManagerModify'"
         [_numberOfExtraColumns]="[1,2,3,4,5,6]" [_backToPreviousEnabled]=true
         [_backToPreviousText]="'بازگشت به صفحه قبلی'" [_isCustomSort]=true

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ILicenseInfo } from 'interfaces/isettings';
+import { CloseTabService } from 'services/close-tab.service';
 import { ProfileService } from 'services/profile.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -10,16 +10,16 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./license.component.scss']
 })
 export class LicenseComponent extends FactoryONE {
-  dataSource: ILicenseInfo;
-
   constructor(
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    public closeTabService: CloseTabService
   ) {
     super();
   }
 
   classWrapper = async (canRefresh?: boolean) => {
-    this.dataSource = await this.profileService.getMyInfoDataSource(ENInterfaces.settingsLicense);
+    if (!this.closeTabService.license)
+      this.closeTabService.license = await this.profileService.getMyInfoDataSource(ENInterfaces.settingsLicense);
   }
   ngOnInit(): void {
     this.classWrapper();

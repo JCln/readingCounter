@@ -244,6 +244,8 @@ export class DictionaryWrapperService {
     });
   }
   getFragmentMasterByZoneIdDictionary = (zoneId: number): Promise<any> => {
+    console.log(this.fragmentMasterByZoneDictionary.zoneId == zoneId && !this.fragmentMasterByZoneDictionary.dictionary);
+
     if (this.fragmentMasterByZoneDictionary.zoneId == zoneId && !MathS.isNull(this.fragmentMasterByZoneDictionary.dictionary))
       return this.fragmentMasterByZoneDictionary.dictionary;
 

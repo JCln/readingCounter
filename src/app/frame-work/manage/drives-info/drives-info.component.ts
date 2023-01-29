@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IManageDrivesInfo } from 'interfaces/iserver-manager';
+import { CloseTabService } from 'services/close-tab.service';
 import { ManageServerService } from 'services/manage-server.service';
 
 @Component({
@@ -9,15 +9,17 @@ import { ManageServerService } from 'services/manage-server.service';
   styleUrls: ['./drives-info.component.scss']
 })
 export class DrivesInfoComponent implements OnInit {
-  dataSource: IManageDrivesInfo[] = [];
   temp: any[] = [];
 
   constructor(
-    private manageServerService: ManageServerService
+    private manageServerService: ManageServerService,
+    public closeTabService: CloseTabService
   ) { }
 
   classWrapper = async () => {
-    this.dataSource = await this.manageServerService.GETDataServer(ENInterfaces.serverManagerDrivesInfo);
+    if (!this.closeTabService.saveDataForMsDriveInfo) {
+      this.closeTabService.saveDataForMsDriveInfo = await this.manageServerService.GETDataServer(ENInterfaces.serverManagerDrivesInfo);
+    }
     this.doSth();
   }
   ngOnInit(): void {
@@ -30,8 +32,8 @@ export class DrivesInfoComponent implements OnInit {
     return b;
   }
   doSth = () => {
-    for (let index = 0; index < this.dataSource.length; index++) {
-      this.temp[index] = this.getObjectParameters(this.dataSource[index])
+    for (let index = 0; index < this.closeTabService.saveDataForMsDriveInfo.length; index++) {
+      this.temp[index] = this.getObjectParameters(this.closeTabService.saveDataForMsDriveInfo[index])
     }
 
   }
