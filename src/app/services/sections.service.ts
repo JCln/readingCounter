@@ -18,125 +18,189 @@ export class SectionsService {
 
   private sectionsNullVertificate = (): boolean => {
     if (this.dynamicValue.hasOwnProperty('id')) {
-      if (MathS.isNull(this.dynamicValue.id))
+      if (MathS.isNull(this.dynamicValue.id)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_Id);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('title')) {
-      if (MathS.isNull(this.dynamicValue.title))
+      if (MathS.isNull(this.dynamicValue.title)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
         return false;
+      }
+    }
+    if (this.dynamicValue.hasOwnProperty('days')) {
+      if (MathS.isNull(this.dynamicValue.days)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_days);
+        return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('provinceId')) {
-      if (MathS.isNull(this.dynamicValue.provinceId))
+      if (MathS.isNull(this.dynamicValue.provinceId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_provinceId);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('countryId')) {
-      if (MathS.isNull(this.dynamicValue.countryId))
+      if (MathS.isNull(this.dynamicValue.countryId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_countryId);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('regionId')) {
-      if (MathS.isNull(this.dynamicValue.regionId))
+      if (MathS.isNull(this.dynamicValue.regionId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_regionId);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('zoneId')) {
-      if (MathS.isNull(this.dynamicValue.zoneId))
+      if (MathS.isNull(this.dynamicValue.zoneId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zoneId);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('logicalOrder')) {
-      if (MathS.isNull(this.dynamicValue.logicalOrder))
+      if (MathS.isNull(this.dynamicValue.logicalOrder)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_logicalOrder);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('govermentalCode')) {
-      if (MathS.isNull(this.dynamicValue.govermentalCode))
+      if (MathS.isNull(this.dynamicValue.govermentalCode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_govermentalCode);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('fromEshterak')) {
-      if (MathS.isNull(this.dynamicValue.fromEshterak))
+      if (MathS.isNull(this.dynamicValue.fromEshterak)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromEshterak);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('toEshterak')) {
-      if (MathS.isNull(this.dynamicValue.toEshterak))
+      if (MathS.isNull(this.dynamicValue.toEshterak)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_ToEshterak);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('fromRadif')) {
-      if (MathS.isNull(this.dynamicValue.fromRadif))
+      if (MathS.isNull(this.dynamicValue.fromRadif)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_radif);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('toRadif')) {
-      if (MathS.isNull(this.dynamicValue.toRadif))
+      if (MathS.isNull(this.dynamicValue.toRadif)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_radif);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('host')) {
-      if (MathS.isNull(this.dynamicValue.host))
+      if (MathS.isNull(this.dynamicValue.host)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_host);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('dbUserName')) {
-      if (MathS.isNull(this.dynamicValue.dbUserName))
+      if (MathS.isNull(this.dynamicValue.dbUserName)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_userName);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('dbPassword')) {
-      if (MathS.isNull(this.dynamicValue.dbPassword))
+      if (MathS.isNull(this.dynamicValue.dbPassword)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_password);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('dbInitialCatalog')) {
-      if (MathS.isNull(this.dynamicValue.dbInitialCatalog))
+      if (MathS.isNull(this.dynamicValue.dbInitialCatalog)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_catalog);
         return false;
+      }
     }
     // periods
     if (this.dynamicValue.hasOwnProperty('moshtarakinId')) {
-      if (MathS.isNull(this.dynamicValue.moshtarakinId))
+      if (MathS.isNull(this.dynamicValue.moshtarakinId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_moshtarakinId);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('readingPeriodKindId')) {
-      if (MathS.isNull(this.dynamicValue.readingPeriodKindId))
+      if (MathS.isNull(this.dynamicValue.readingPeriodKindId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriodKind);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('clientOrder')) {
-      if (MathS.isNull(this.dynamicValue.clientOrder))
+      if (MathS.isNull(this.dynamicValue.clientOrder)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_clientOrder);
         return false;
+      }
     }
     // 
     // formulas
     if (this.dynamicValue.hasOwnProperty('karbariMoshtarakinCode')) {
-      if (MathS.isNull(this.dynamicValue.karbariMoshtarakinCode))
+      if (MathS.isNull(this.dynamicValue.karbariMoshtarakinCode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_karbariMoshtarakinCode);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('fromDate')) {
-      if (MathS.isNull(this.dynamicValue.fromDate))
+      if (MathS.isNull(this.dynamicValue.fromDate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('toDate')) {
-      if (MathS.isNull(this.dynamicValue.toDate))
+      if (MathS.isNull(this.dynamicValue.toDate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('fromRate')) {
-      if (MathS.isNull(this.dynamicValue.fromRate))
+      if (MathS.isNull(this.dynamicValue.fromRate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fromRate);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('toRate')) {
-      if (MathS.isNull(this.dynamicValue.toRate))
+      if (MathS.isNull(this.dynamicValue.toRate)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_toRate);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('abFormula')) {
-      if (MathS.isNull(this.dynamicValue.abFormula))
+      if (MathS.isNull(this.dynamicValue.abFormula)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_abFormula);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('fazelabFormula')) {
-      if (MathS.isNull(this.dynamicValue.fazelabFormula))
+      if (MathS.isNull(this.dynamicValue.fazelabFormula)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_fazelabFormula);
         return false;
+      }
     }
     if (this.dynamicValue.hasOwnProperty('formula')) {
-      if (MathS.isNull(this.dynamicValue.formula))
+      if (MathS.isNull(this.dynamicValue.formula)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_formula);
         return false;
+      }
     }
     // users        
     if (this.dynamicValue.hasOwnProperty('titleUnicode')) {
-      if (MathS.isNull(this.dynamicValue.titleUnicode))
+      if (MathS.isNull(this.dynamicValue.titleUnicode)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
         return false;
+      }
     }
     //   // reading managers
     if (this.dynamicValue.hasOwnProperty('itemTitle')) {
-      if (MathS.isNull(this.dynamicValue.itemTitle))
+      if (MathS.isNull(this.dynamicValue.itemTitle)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
         return false;
+      }
     }
 
     return true;
@@ -218,10 +282,8 @@ export class SectionsService {
     return true;
   }
   sectionVertification(): boolean {
-    if (!this.sectionsNullVertificate()) {
-      this.utilsService.snackBarMessageWarn(EN_messages.allowed_empty);
+    if (!this.sectionsNullVertificate())
       return false;
-    }
     if (!this.fromToValidation())
       return false;
     if (!this.isFromLowerThanTo())

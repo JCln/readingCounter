@@ -175,7 +175,8 @@ export interface IReadingPeriodKind {
     moshtarakinId: number,
     readingPeriodKindId: number,
     zoneId: number | string,
-    clientOrder: number
+    clientOrder: number,
+    days: number
 }
 // ab baha formular manager
 export interface IAbBahaFormula {
