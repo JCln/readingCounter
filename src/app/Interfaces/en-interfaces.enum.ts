@@ -225,7 +225,7 @@ export enum ENInterfaces {
     signalRMomentSystemAddReadingRow = 'AddReadingRow',
     receiveTextWithTimer = 'receiveTextWithTimer',
     ReceiveImageWithCaption = 'receiveImageWithCaption',
-    ReceiveDirectMessage = 'ReceiveDirectMessage',
+    ReceiveDirectMessage = 'receiveDirectMessage',
     signalRSendMessage = 'sendMessage',
     signalRReceiveMessage = 'receiveMessage',
 

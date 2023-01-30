@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IDictionaryManager, ITHV } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -23,7 +22,6 @@ export class AssessPreComponent extends AllListsFactory {
 
   readingConfigDefault: IReadingConfigDefault;
   masrafState: ITHV[] = []
-  dataSource: IOnOffLoadFlat[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
@@ -54,20 +52,19 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService._assessAddReq.imagePercent = rcd.defaultImagePercent;
   }
   converts = () => {
-    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.deleteDictionary, 'hazf');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.counterStateByCodeDictionary, 'preCounterStateCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.karbariDictionaryCode, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.karbariDictionaryCode, 'karbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.qotrDictionary, 'qotrCode');
 
-    this.importDynamicService.setDynamicPartRanges(this.dataSource);
+    this.importDynamicService.setDynamicPartRanges(this.closeTabService.saveDataForAssessPre);
   }
   connectToServer = async () => {
-    this.dataSource = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
+    this.closeTabService.saveDataForAssessPre = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaAssessPre, this.closeTabService.saveDataForAssessPreReq);
     this.makeDataSourceOptionsChecked();
-    this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
 
     this.karbariDictionaryCode = await this.importDynamicService.getKarbariByCodeDictionary();
     this.qotrDictionary = await this.importDynamicService.getQotrDictionary();
@@ -75,9 +72,7 @@ export class AssessPreComponent extends AllListsFactory {
     this.getMasterInZone();
     this.converts();
     this.insertReadingConfigDefaults(this.readingConfigDefault);
-    this.importDynamicService.makeHadPicturesToBoolean(this.dataSource);
-
-    this.closeTabService.saveDataForAssessPre = this.dataSource;
+    this.importDynamicService.makeHadPicturesToBoolean(this.closeTabService.saveDataForAssessPre);
   }
   refreshTable = () => {
     this.connectToServer();
@@ -86,12 +81,7 @@ export class AssessPreComponent extends AllListsFactory {
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForAssessPre = null;
-      this.closeTabService.saveDataForAssessPreReq = null;
     }
-    if (this.closeTabService.saveDataForAssessPre) {
-      this.dataSource = this.closeTabService.saveDataForAssessPre;
-    }
-
     this.getMasterInZone();
   }
   getMasterInZone = async () => {
@@ -115,7 +105,7 @@ export class AssessPreComponent extends AllListsFactory {
   }
   getOnOffLoadIdsFromDataSource = () => {
     let a: any[] = [];
-    this.dataSource.map(item => {
+    this.closeTabService.saveDataForAssessPre.map(item => {
       if (item.isSelected)
         a.push(item.id);
     })
@@ -139,7 +129,7 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService.snackEmptyValue();
   }
   makeDataSourceOptionsChecked = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForAssessPre.forEach(item => {
       item.isSelected = true;
     })
   }

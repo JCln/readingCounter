@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { IForbiddenManager } from 'interfaces/imanage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ForbiddenService } from 'services/forbidden.service';
@@ -12,29 +11,23 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./forbidden.component.scss']
 })
 export class ForbiddenComponent extends FactoryONE {
-  dataSource: IForbiddenManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
 
   constructor(
     public forbiddenService: ForbiddenService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
   ) {
     super();
   }
   connectToServer = async () => {
-    this.dataSource = await this.forbiddenService.getDataSource();
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.forbiddenService.setDynamicPartRanges(this.dataSource);
-    this.closeTabService.saveDataForFNB = this.dataSource;
+    this.closeTabService.saveDataForFNB = await this.forbiddenService.getDataSource();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForFNB, this.zoneDictionary, 'zoneId');
+    this.forbiddenService.setDynamicPartRanges(this.closeTabService.saveDataForFNB);
   }
   classWrapper = async (canRefresh: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForFNB = null;
     }
-    if (this.closeTabService.saveDataForFNB) {
-      this.dataSource = this.closeTabService.saveDataForFNB;
-    }
-
     this.zoneDictionary = await this.forbiddenService.getZoneDictionary();
   }
   verification = async () => {

@@ -16,6 +16,7 @@ export class TraverseComponent extends FactoryONE {
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariByCodeDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
 
@@ -35,7 +36,12 @@ export class TraverseComponent extends FactoryONE {
     this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.getFragmentByZone();
     this.receiveYear();
+  }
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.traverseReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.traverseReq.zoneId);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();

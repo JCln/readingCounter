@@ -21,6 +21,7 @@ export class KarkardComponent extends FactoryONE {
 
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
@@ -45,7 +46,12 @@ export class KarkardComponent extends FactoryONE {
     this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.getFragmentByZone();
     this.receiveYear();
+  }
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.karkardReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.karkardReq.zoneId);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IFragmentDetailsByEshterakReq } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
@@ -28,7 +27,6 @@ export class SimafaReadingProgComponent extends FactoryONE {
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  dataSource: IReadingProgramRes[] = [];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -41,14 +39,13 @@ export class SimafaReadingProgComponent extends FactoryONE {
   connectToServer = async () => {
     if (this.importDynamicService.checkSimafaVertification(this.closeTabService.importSimafaReadingProgramReq)) {
       // Save and send data to service
-      this.dataSource = await this.importDynamicService.postImportSimafaRDPG(ENInterfaces.postSimafaReadingProgram, this.closeTabService.importSimafaReadingProgramReq);
-      this.closeTabService.saveDataForSimafaReadingPrograms = this.dataSource;
+      this.closeTabService.saveDataForSimafaReadingPrograms = await this.importDynamicService.postImportSimafaRDPG(ENInterfaces.postSimafaReadingProgram, this.closeTabService.importSimafaReadingProgramReq);
 
-      if (!this.dataSource) {
+      if (!this.closeTabService.saveDataForSimafaReadingPrograms) {
         this._empty_message = EN_messages.notFound;
         return;
       }
-      Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForSimafaReadingPrograms, this.zoneDictionary, 'zoneId');
     }
   }
   getReadingPeriod = async () => {
@@ -61,13 +58,12 @@ export class SimafaReadingProgComponent extends FactoryONE {
     }
     this.closeTabService.importSimafaReadingProgramReq = this.importDynamicService.columnGetSimafaRDPG();
     if (this.closeTabService.saveDataForSimafaReadingPrograms) {
-      this.dataSource = this.closeTabService.saveDataForSimafaReadingPrograms;
       this.getReadingPeriod();
     }
     this.readingPeriodKindsDictionary = await this.importDynamicService.getReadingPeriodsKindDictionary();
     this.zoneDictionary = await this.importDynamicService.getZoneDictionary();
     this._years = this.importDynamicService.getYears();
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSimafaReadingPrograms, this.zoneDictionary, 'zoneId');
   }
   refreshTable = () => {
     this.connectToServer();

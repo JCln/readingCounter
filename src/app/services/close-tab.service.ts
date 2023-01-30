@@ -3,9 +3,15 @@ import { IReadingTimeRes } from 'interfaces/data-mining';
 import { IAuthLevel2, IAuthLevel3, IAuthLevel4, IAuthLevels } from 'interfaces/iauth-levels';
 import { IAnalyzeRes } from 'interfaces/idashboard-map';
 import { IAssessPreDisplayDtoSimafa, IReadingConfigDefault } from 'interfaces/iimports';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
+import { IForbiddenManager, IOnOffLoadFlat } from 'interfaces/imanage';
 import { ILatestReads } from 'interfaces/imoment';
-import { IFileExcelReq, IImportErrors, IImportSimafaReadingProgramsReq } from 'interfaces/import-data';
+import {
+  IFileExcelReq,
+  IImportErrors,
+  IImportSimafaBatchReq,
+  IImportSimafaReadingProgramsReq,
+  IReadingProgramRes,
+} from 'interfaces/import-data';
 import { IAPK } from 'interfaces/inon-manage';
 import { ENEssentialsToSave, ISidebarVals, ITabs } from 'interfaces/ioverall-config';
 import {
@@ -39,10 +45,10 @@ import {
 import { IManageDrivesInfo, IManageServerErrorsRes, IRequestLog, IServerOSInfo } from 'interfaces/iserver-manager';
 import { ILicenseInfo, IWaterMarkConfig } from 'interfaces/isettings';
 import { IDynamicExcelReq } from 'interfaces/itools';
-import { IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
+import { IRoleManager, IUserManager, IUserOnlines } from 'interfaces/iuser-manager';
 import { ICountryManager, IProvinceManager } from 'interfaces/izones';
 import { EN_Routes } from 'interfaces/routes.enum';
-import { ISearchProReportInput } from 'interfaces/search';
+import { ISearchProReportInput, ISearchSimpleOutput } from 'interfaces/search';
 import { UtilsService } from 'services/utils.service';
 
 import { IOffLoadPerDay, ITracking } from './../interfaces/itrackings';
@@ -89,7 +95,7 @@ export class CloseTabService {
   saveDataForUserOnlines: IUserOnlines[];
   saveDataForEditUsers: any;
   saveDataForEditUsersGUID: string;
-  saveDataForRoleManager: any;
+  saveDataForRoleManager: IRoleManager[];
   saveDataForUserLoggins: any;
   saveDataForEditOnRole: any;
   saveDataForAddUsers: any;
@@ -109,7 +115,7 @@ export class CloseTabService {
   };
   saveDataForUserKarkardSummary: any;
   saveDataForUserKarkardSummaryTwo: any;
-  saveDataForTrackOffloadedGroup: any;
+  saveDataForTrackOffloadedGroup: ITracking[];
   saveDataForKarkardAllStates: IKarkardAllStatesDto[];
   saveDataForKarkardAllStatesTWO: any;
   offloadedGroupReq = {
@@ -134,7 +140,25 @@ export class CloseTabService {
     trackNumber: null,
     _isCollapsed: true
   }
-  saveDataForSimafaBatch: any;
+  saveDataForSimafaBatch: IFragmentDetails[];
+  allImports_batch: IImportSimafaBatchReq = {
+    routeAndReaderIds: [{ routeId: null, counterReaderId: null }],
+    canContinue: false,
+    fromEshterak: '',
+    id: '',
+    listNumber: '',
+    readingPeriodId: null,
+    toEshterak: '',
+    year: this.utilsService.getFirstYear(),
+    zoneId: null,
+    fragmentMasterId: '',
+    alalHesabPercent: 5,
+    imagePercent: 5,
+    readingProgramId: '',
+    hasPreNumber: false,
+    displayBillId: false,
+    displayRadif: false,
+  };
   importSimafaReadingProgramReq: IImportSimafaReadingProgramsReq = {
     zoneId: 0,
     readingPeriodId: 0,
@@ -157,7 +181,7 @@ export class CloseTabService {
     year: this.utilsService.getFirstYear(),
     file: File
   }
-  saveDataForSimafaReadingPrograms: any;
+  saveDataForSimafaReadingPrograms: IReadingProgramRes[];
   saveDataForAssessPreReq: IAssessPreDisplayDtoSimafa = {
     reportIds: [],
     counterStateIds: [],
@@ -167,7 +191,7 @@ export class CloseTabService {
     listNumber: '',
     noImages: false
   };
-  saveDataForAssessPre: any;
+  saveDataForAssessPre: IOnOffLoadFlat[];
   saveDataForAssessAdd: any;
   // SEARCH
   saveDataForSearchMoshtarakin: IOnOffLoadFlat[];
@@ -189,7 +213,7 @@ export class CloseTabService {
     searchByText: '',
     showAll: false
   }
-  saveDataForSearchSimple: any;
+  saveDataForSearchSimple: ISearchSimpleOutput[];
   // list manager
   saveDataForLMPD: IOffLoadPerDay;
   saveDataForLMPDTrackNumber: number;
@@ -264,7 +288,7 @@ export class CloseTabService {
   saveDataForToolsExcelViewer: IDynamicExcelReq[];
   saveDataForDynamicReports: IDynamicReportsRes[];
   saveDataForPolicies: any;
-  saveDataForFNB: any;
+  saveDataForFNB: IForbiddenManager[];
   saveDataForProfile: any;
   saveDataForMomentLastRead: ILatestReads[] = [];
   saveDataForRRGallery: any;

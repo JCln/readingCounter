@@ -18,7 +18,6 @@ import { MathS } from 'src/app/classes/math-s';
 })
 export class OffloadedGroupComponent extends FactoryONE {
 
-  dataSource: ITracking[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
   rowGroupMetadata: any;
@@ -49,17 +48,13 @@ export class OffloadedGroupComponent extends FactoryONE {
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTrackOffloadedGroup = null;
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForTrackOffloadedGroup = this.closeTabService.saveDataForTrackOffloadedGroup.slice(0, index).concat(this.closeTabService.saveDataForTrackOffloadedGroup.slice(index + 1));
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTrackOffloadedGroup) {
-      this.dataSource = this.closeTabService.saveDataForTrackOffloadedGroup;
-    }
-    else {
-      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
-      this.closeTabService.saveDataForTrackOffloadedGroup = this.dataSource;
+    if (!this.closeTabService.saveDataForTrackOffloadedGroup) {
+      this.closeTabService.saveDataForTrackOffloadedGroup = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
     }
     this.insertSelectedColumns();
     this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
@@ -122,16 +117,16 @@ export class OffloadedGroupComponent extends FactoryONE {
     const toAggregate = this.closeTabService.offloadedGroupReq._selectedAggregate;
     let tempRowGroupMeta = {};
 
-    if (this.dataSource) {
-      for (let i = 0; i < this.dataSource.length; i++) {
+    if (this.closeTabService.saveDataForTrackOffloadedGroup) {
+      for (let i = 0; i < this.closeTabService.saveDataForTrackOffloadedGroup.length; i++) {
 
-        let rowData = this.dataSource[i][toAggregate];
+        let rowData = this.closeTabService.saveDataForTrackOffloadedGroup[i][toAggregate];
 
         if (i == 0) {
           tempRowGroupMeta[rowData] = { index: 0, size: 1 };
         }
         else {
-          let previousRowData = this.dataSource[i - 1][toAggregate];
+          let previousRowData = this.closeTabService.saveDataForTrackOffloadedGroup[i - 1][toAggregate];
           if (rowData === previousRowData)
             tempRowGroupMeta[rowData].size++;
           else

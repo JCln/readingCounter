@@ -13,7 +13,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./user-karkard-summary.component.scss']
 })
 export class UserKarkardSummaryComponent extends FactoryONE {
-  dataSource: IUserKarkardSummary[] = [];//
   tempData: IUserKarkardSummary[] = [];
   header: any[] = [];
 
@@ -37,7 +36,6 @@ export class UserKarkardSummaryComponent extends FactoryONE {
       this.closeTabService.saveDataForUserKarkardSummaryTwo = null;
     }
     if (this.closeTabService.saveDataForUserKarkardSummary) {
-      this.dataSource = this.closeTabService.saveDataForUserKarkardSummary;
       this._selectCols = this.closeTabService.saveDataForUserKarkardSummaryTwo;
       this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
     }
@@ -95,9 +93,7 @@ export class UserKarkardSummaryComponent extends FactoryONE {
 
     this.tempData = await this.trackingManagerService.postBody(ENInterfaces.postUserKarkardSummary, this.closeTabService.saveDataForUserKarkardSummaryReq);
     this.insertSelectedColumns();
-    this.dataSource = this.getCounterStateData(this.tempData);
-
-    this.closeTabService.saveDataForUserKarkardSummary = this.dataSource;
+    this.closeTabService.saveDataForUserKarkardSummary = this.getCounterStateData(this.tempData);
   }
   receiveFromDateJalali = ($event: string) => {
     this.closeTabService.saveDataForUserKarkardSummaryReq.fromDate = $event;

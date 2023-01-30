@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { ENSelectedColumnVariables, IResponses } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 
+import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
 import { ICounterState, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
@@ -21,8 +22,12 @@ export class ReadManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
+    private columnManager: ColumnManager
   ) { }
 
+  columnSelectedMenuDefault = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('counterStateDto');
+  }
   /* API CALLS */
   getProvinceDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getProvinceDictionary();
@@ -147,4 +152,5 @@ export class ReadManagerService {
         return items
     })
   }
+
 }

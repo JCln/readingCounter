@@ -38,6 +38,7 @@ export class SignalRService {
       .then(() => console.log('Connection started'))
       .catch(err => console.log('Error while starting connection: ' + err));
 
+    console.log(1);
     this.receiveMessage();
     this.receiveTextWithTimer();
     this.ReceiveDirectMessage();
@@ -78,7 +79,7 @@ export class SignalRService {
   }
   ReceiveDirectMessage = () => {
     this.hubConnection.on(ENInterfaces.ReceiveDirectMessage, (a: IMessage) => {
-      this.snackBarService.openSnackBarSignal(a.title + '\n' + a.text, a.seconds, a.color);
+      this.snackBarService.openToastSignal(a);
     });
   }
 

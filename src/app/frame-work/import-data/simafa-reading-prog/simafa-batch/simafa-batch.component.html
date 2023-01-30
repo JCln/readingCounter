@@ -47,7 +47,7 @@
             <i class="pi pi-check p_icons _circle_border"></i>
         </h2>
 
-        <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+        <p-table id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForSimafaBatch" [paginator]="true" [rows]="10"
             [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
             [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive"
             [responsive]="true" stateStorage="session" stateKey="simafa-batchsession" dataKey="id"
@@ -55,8 +55,8 @@
             [reorderableColumns]="importDynamicService.getLocalReOrderable()">
 
             <ng-template pTemplate="caption">
-                <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns" name="selectOptions"
-                    optionLabel="header"
+                <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
+                    name="selectOptions" optionLabel="header"
                     (ngModelChange)="importDynamicService.setColumnsChanges(importDynamicService.ENSelectedColumnVariables.selectedSimafaBatch ,$event)"
                     selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
                 </p-multiSelect>
@@ -90,7 +90,7 @@
                                     <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
                                         [(ngModel)]="allImportsService.allImports_batch.routeAndReaderIds[ri].counterReaderId"
                                         placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id"
-                                        optionLabel="title">
+                                        optionLabel="title" [filter]="true" [showClear]="true">
                                     </p-dropdown>
                                 </div>
                             </ng-container>
@@ -104,7 +104,7 @@
 
         </p-table>
 
-        <section *ngIf="!dataSource">
+        <section *ngIf="!closeTabService.saveDataForSimafaBatch">
             <tr class="empty_data">
                 موردی پیدا نشد
             </tr>

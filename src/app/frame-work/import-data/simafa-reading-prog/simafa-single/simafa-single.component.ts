@@ -83,7 +83,5 @@ export class SimafaSingleComponent extends FactoryONE {
     this.simafaSingleReq.displayRadif = rcd.displayRadif;
     this.simafaSingleReq.imagePercent = rcd.defaultImagePercent;
     this.simafaSingleReq.alalHesabPercent = rcd.defaultAlalHesab;
-    console.log(this.simafaSingleReq);
-
   }
 }

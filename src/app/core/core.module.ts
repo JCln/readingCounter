@@ -6,6 +6,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ToastModule } from 'primeng/toast';
 import { GlobalErrorHandlerService } from 'services/global-error-handler.service';
 
 import { InterceptorService } from '../auth/interceptor.service';
@@ -72,6 +73,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     // components
     BrowserAnimationsModule,
     AnnouceNotifComponent,
+    ToastModule,
 
     CoreRoutingModule
   ],

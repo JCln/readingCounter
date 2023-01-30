@@ -19,8 +19,17 @@
                         <div class="_key">ناحیه</div>
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="readingReportManagerService.karkardOffloadReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true"
+                            (onChange)="getFragmentByZone()">
                         </p-dropdown>
+                    </div>
+                    <div class="input_2">
+                        <div class="_key">نوبتی</div>
+                        <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
+                            [(ngModel)]="readingReportManagerService.karkardOffloadReq.fragmentMasterIds"
+                            optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
+                            [style]="{minWidth: '150px'}" placeholder="انتخاب مورد">
+                        </p-multiSelect>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
@@ -80,7 +89,8 @@
 
     <app-prime-table [dataSource]="closeTabService.saveDataForRROffloadedKarkard" [_outputFileName]="'karkardOffload'"
         [_checkUpName]="'rr-offload-karkard'" [_selectedColumnsToRemember]="'selectedRROffloadedKarkard'"
-        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedOffKarkard" (collapsed)="readingReportManagerService.isCollapsedOffKarkard = !readingReportManagerService.isCollapsedOffKarkard"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedOffKarkard"
+        (collapsed)="readingReportManagerService.isCollapsedOffKarkard = !readingReportManagerService.isCollapsedOffKarkard"
         (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

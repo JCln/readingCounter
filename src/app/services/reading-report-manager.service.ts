@@ -7,10 +7,10 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
 import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import {
-  IReadingReportGISReq,
-  IReadingReportReq,
-  IReadingReportTraverseDifferentialReq,
-  IUserKarkardInput,
+    IReadingReportGISReq,
+    IReadingReportReq,
+    IReadingReportTraverseDifferentialReq,
+    IUserKarkardInput,
 } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -21,7 +21,7 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import {
-  ConfirmDialogExcelViewComponent,
+    ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
@@ -108,7 +108,8 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: this.utilsService.getFirstYear()
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
   }
   lockedReq: IReadingReportReq = {
     zoneId: 0,
@@ -146,7 +147,8 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: this.utilsService.getFirstYear()
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
   }
   karkardDailyReq: IReadingReportReq = {
     zoneId: 0,
@@ -156,7 +158,8 @@ export class ReadingReportManagerService {
     readingPeriodId: null,
     reportCode: 0,
     beginFromImported: true,
-    year: this.utilsService.getFirstYear()
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
   }
   gisReq: IReadingReportGISReq = {
     zoneId: 0,
@@ -201,7 +204,8 @@ export class ReadingReportManagerService {
     readingPeriodId: null,
     year: this.utilsService.getFirstYear(),
     traverseType: 0,
-    zoneIds: null
+    zoneIds: null,
+    fragmentMasterIds: []
   }
   traverseReq: IReadingReportReq = {
     zoneId: 0,
@@ -210,7 +214,8 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: this.utilsService.getFirstYear()
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
   }
   inStateReq: IReadingReportReq = {
     zoneId: 0,

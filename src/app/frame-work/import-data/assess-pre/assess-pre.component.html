@@ -67,7 +67,7 @@
     <button class="btn_2_o" type="submit">جستجو</button>
 </form>
 
-<form #form="ngForm" *ngIf="dataSource.length" (ngSubmit)="connectToServer()">
+<form #form="ngForm" *ngIf="closeTabService.saveDataForAssessPre" (ngSubmit)="connectToServer()">
     <section class="static_part">
 
         <section class="dynamic_content">
@@ -107,7 +107,7 @@
     </section>
 </form>
 
-<app-prime-table *ngIf="dataSource.length" [dataSource]="dataSource" [_outputFileName]="'assess_pre'"
+<app-prime-table *ngIf="closeTabService.saveDataForAssessPre" [dataSource]="closeTabService.saveDataForAssessPre" [_outputFileName]="'assess_pre'"
     [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1, 2, 3]" [_canShowButton]="_canShowAssessButton"
     [_selectedColumnsToRemember]="'selectedListManagerAssess'" [_sessionName]="'assess_pre'"
     (refreshedTable)="refreshTable()" (registeredAssess)="registerAssessAdd()"

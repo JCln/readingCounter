@@ -39,6 +39,7 @@ export class RrFragmentComponent extends FactoryONE {
     this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.getFragmentByZone();
     this.receiveYear();
   }
   receiveYear = () => {

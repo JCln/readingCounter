@@ -9,7 +9,7 @@ import { Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataS
 })
 export class DriveInfoPieComponent implements AfterViewInit {
   @Input() dataSource: any[];
-  @Input() chartColors: any[];
+  public chartColors: any[] = [{ backgroundColor: ["#6FC8CE", "#FF7360"] }];
 
 
   private defaultOptions = {
@@ -73,18 +73,19 @@ export class DriveInfoPieComponent implements AfterViewInit {
   public pieChartLabels: Label[] = [['درصد فضای آزاد'], ['درصد استفاده شده']];
   public pieChartData: SingleDataSet[] = [[26.8, 73.2]]; // should attention to code changed ": SingleDataSet = [];"
   public pieChartType: ChartType = 'pie';
-  pieChartColor: any = [
-    {
-      backgroundColor: [
-        'rgb(0, 69, 203)',
-        'rgb(117, 188, 84)',
-        'rgba(139, 136, 136, 0.9)',
-        'rgb(246, 62, 56)',
-        'rgb(246, 128, 56)',
-        'rgb(125, 131, 255)'
-      ]
-    }
-  ]
+
+  // pieChartColor: any = [
+  //   {
+  //     backgroundColor: [
+  //       'rgb(125, 131, 255)',
+  //       'rgb(117, 188, 84)',
+  //       'rgb(0, 69, 203)',
+  //       'rgb(246, 62, 56)',
+  //       'rgb(246, 128, 56)',
+  //       'rgba(139, 136, 136, 0.9)',
+  //     ]
+  //   }
+  // ]
   public pieChartLegend = true;
   public pieChartPlugins = [];
   // 
@@ -97,6 +98,7 @@ export class DriveInfoPieComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.pieChartData = this.dataSource;
+    this.chartColors = ['rgb(246, 62, 56)', 'rgb(246, 128, 56)']
   }
 
 }

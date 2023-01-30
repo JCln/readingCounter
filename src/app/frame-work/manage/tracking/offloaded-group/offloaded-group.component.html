@@ -13,7 +13,7 @@
     </button>
 </section>
 <!-- sort field must be applied to group working -->
-<p-table *ngIf="canShowTable" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+<p-table *ngIf="canShowTable" [columns]="selectedColumns" [value]="closeTabService.saveDataForTrackOffloadedGroup" [paginator]="true" [rows]="10"
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     [sortField]="closeTabService.offloadedGroupReq._selectedAggregate" stateStorage="session" stateKey="offloaded-group"
@@ -102,7 +102,7 @@
 
 </p-table>
 
-<section *ngIf="!dataSource">
+<section *ngIf="!closeTabService.saveDataForTrackOffloadedGroup">
     <tr class="empty_data">
         موردی پیدا نشد
     </tr>

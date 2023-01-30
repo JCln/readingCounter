@@ -1,17 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISnackBar, ISnackBarSignal } from 'interfaces/ioverall-config';
+import { MessageService } from 'primeng/api';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-snack-bar',
   templateUrl: './snack-bar.component.html',
-  styleUrls: ['./snack-bar.component.scss']
+  styleUrls: ['./snack-bar.component.scss'],
+  providers: [MessageService]
 })
 export class SnackBarComponent implements OnInit {
 
-  constructor(private _snackBar: MatSnackBar, private snackWrapperService: SnackWrapperService) { }
+  constructor(
+    private _snackBar: MatSnackBar,
+    private snackWrapperService: SnackWrapperService,
+    private messageService: MessageService
+  ) { }
 
   openSnackBar(snack: ISnackBar) {
     if (!MathS.isNull(snack.message)) {
@@ -49,9 +55,17 @@ export class SnackBarComponent implements OnInit {
       }
     })
   }
+  toast = () => {
+    this.snackWrapperService.toastStatusSignal.subscribe(res => {
+      if (res) {
+        this.messageService.add({ severity: 'info', summary: res.message, detail: res.text, sticky: true });
+      }
+    })
+  }
   ngOnInit(): void {
     this.snackSimple();
     this.snackSignal();
+    this.toast();
   }
 
 }

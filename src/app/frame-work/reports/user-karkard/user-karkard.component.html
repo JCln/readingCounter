@@ -15,7 +15,7 @@
                         <div class="_key">وضعیت کارتابل</div>
                         <p-dropdown name="trackingStates" [options]="trackingStatesDictionary"
                             [(ngModel)]="readingReportManagerService.userKarkardReq.statusId" placeholder="انتخاب مورد"
-                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                            [style]="{'width':'7.5rem'}" optionValue="id" optionLabel="title" filter="true">
                         </p-dropdown>
                     </div>
                     <div class="input_2">
@@ -47,8 +47,8 @@
         </form>
     </section>
 
-    <app-prime-table [dataSource]="closeTabService.saveDataForUserKarkard" [_outputFileName]="'rrUserKarkard'" [_checkUpName]="'rr-user-karkard'"
-        [_selectedColumnsToRemember]="'selectedrrUserKarkard'" [_hasCollapsible]=true
+    <app-prime-table [dataSource]="closeTabService.saveDataForUserKarkard" [_outputFileName]="'rrUserKarkard'"
+        [_checkUpName]="'rr-user-karkard'" [_selectedColumnsToRemember]="'selectedrrUserKarkard'" [_hasCollapsible]=true
         [_isCollaped]="readingReportManagerService.isCollapsedUserKarkard"
         (collapsed)="readingReportManagerService.isCollapsedUserKarkard = !readingReportManagerService.isCollapsedUserKarkard"
         (refreshedTable)="refreshTable()">

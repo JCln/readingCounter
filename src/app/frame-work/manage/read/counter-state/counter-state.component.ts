@@ -3,7 +3,6 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ICounterState } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
-import { CounterStateService } from 'services/counter-state.service';
 import { ReadManagerService } from 'services/read-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -18,34 +17,29 @@ export class CounterStateComponent extends FactoryONE {
 
   clonedProducts: { [s: string]: ICounterState; } = {};
   newRowLimit: number = 1;
-  // innerLoading: boolean = false;
   _selectCols: any[];
   _selectedColumns: any[];
 
   constructor(
     public closeTabService: CloseTabService,
-    private counterStateService: CounterStateService,
     private readManagerService: ReadManagerService
   ) {
     super();
   }
 
-  // sendGridFriendlyDataSource = (event: LazyLoadEvent): any => {
-  //   this.closeTabService.saveDataForCounterState = this.counterStateService.getGridFriendlyDataSource(event);
-  // }
   nullSavedSource = () => this.closeTabService.saveDataForCounterState = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
     if (!this.closeTabService.saveDataForCounterState) {
-      this.closeTabService.saveDataForCounterState = await this.counterStateService.getGridFriendlyDataSourceDefault();
+      this.closeTabService.saveDataForCounterState = await this.readManagerService.getDataSource(ENInterfaces.counterStateAll);
     }
-    this.zoneDictionary = await this.counterStateService.getZoneDictionary();
+    this.zoneDictionary = await this.readManagerService.getZoneDictionary();
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
   }
   columnSelectedMenuDefault = () => {
-    this._selectCols = this.counterStateService.columnSelectedMenuDefault();
+    this._selectCols = this.readManagerService.columnSelectedMenuDefault();
     this._selectedColumns = this.readManagerService.customizeSelectedColumns(this._selectCols);
   }
   ngOnInit(): void {

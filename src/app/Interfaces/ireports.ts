@@ -231,7 +231,8 @@ export interface IReadingReportTraverseDifferentialReq {
     traverseType: number,
     zoneIds: [
         number
-    ]
+    ],
+    fragmentMasterIds: []
 }
 export interface IRRChartResWrapper {
     dayJalali: string,

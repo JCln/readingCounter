@@ -35,7 +35,7 @@
 
     </form>
 
-    <p-table [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
+    <p-table [columns]="selectedColumns" [value]="closeTabService.saveDataForUserKarkardSummary" [paginator]="true" [rows]="10"
         [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
         [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
         stateStorage="session" stateKey="karkard-allstates"
@@ -89,7 +89,7 @@
 
     </p-table>
 
-    <section *ngIf="!dataSource">
+    <section *ngIf="!closeTabService.saveDataForUserKarkardSummary">
         <tr class="empty_data">
             موردی پیدا نشد
         </tr>

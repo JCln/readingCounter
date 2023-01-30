@@ -19,6 +19,7 @@ export class TraverseDifferentialComponent extends FactoryONE {
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
   traverseDiffrentialDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -43,10 +44,15 @@ export class TraverseDifferentialComponent extends FactoryONE {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.traverseDiffrentialDictionary = await this.readingReportManagerService.getTraverseDiffrentialDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.getFragmentByZone();
     this.receiveYear();
   }
   routeToChartView = () => {
     this.readingReportManagerService.routeTo(EN_Routes.wrrptsmamtrvchchart);
+  }
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.trvchReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.trvchReq.zoneId);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();

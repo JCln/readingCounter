@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENRandomNumbers, ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { IColor } from 'interfaces/inon-manage';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { MessageService } from 'services/message.service';
 import { UsersAllService } from 'services/users-all.service';
 
 @Component({
@@ -10,30 +11,33 @@ import { UsersAllService } from 'services/users-all.service';
   styleUrls: ['./user-onlines-dg.component.scss']
 })
 export class UserOnlinesDgComponent implements OnInit {
+  colors: IColor[] = [];
   object = {
     userId: '',
     title: '',
-    message: '',
-    color: ENSnackBarColors.info,
-    seconds: ENSnackBarTimes.fiveMili,
-    canSave: true,
-    text: ENRandomNumbers.four
+    text: '',
+    color: ''
   };
 
   constructor(
     public config: DynamicDialogConfig,
     private userService: UsersAllService,
+    private messageService: MessageService
   ) { }
 
   classWrapper = async () => {
     const a = this.config.data._data;
     this.object.userId = a.userId;
+    this.getColors();
   }
   ngOnInit(): void {
     this.classWrapper();
   }
   postDataSource = () => {
+    if (!this.object.color)
+      this.object.color = this.colors[0].value;
+
     this.userService.postDataSource(ENInterfaces.signalRNotifDirectText, this.object);
   }
-
+  getColors = () => { this.colors = this.messageService.getColors(); }
 }

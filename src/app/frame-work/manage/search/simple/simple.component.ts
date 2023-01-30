@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { ISearchSimpleOutput } from 'interfaces/search';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { SearchService } from 'services/search.service';
@@ -14,7 +13,6 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./simple.component.scss']
 })
 export class SimpleComponent implements OnInit, OnDestroy {
-  dataSource: ISearchSimpleOutput[] = [];
   _years: ITitleValue[] = [];
   subscription: Subscription[] = [];
 
@@ -24,22 +22,21 @@ export class SimpleComponent implements OnInit, OnDestroy {
   _selectedKindId: string = '';
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public searchService: SearchService
   ) {
   }
 
   converts = async () => {
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchSimple, this.zoneDictionary, 'zoneId');
   }
   connectToServer = async () => {
-    this.dataSource = [];
+    this.closeTabService.saveDataForSearchSimple = [];
     if (!this.searchService.verificationSimpleSearch(this.searchService._searchSimpleReq))
       return;
-    this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchSimple, this.searchService._searchSimpleReq);
-    if (this.dataSource.length) {
+    this.closeTabService.saveDataForSearchSimple = await this.searchService.doSearch(ENInterfaces.ListSearchSimple, this.searchService._searchSimpleReq);
+    if (this.closeTabService.saveDataForSearchSimple.length) {
       this.converts();
-      this.closeTabService.saveDataForSearchSimple = this.dataSource;
     }
   }
   nullSavedSource = () => this.closeTabService.saveDataForSearchSimple = null;
@@ -48,7 +45,6 @@ export class SimpleComponent implements OnInit, OnDestroy {
       this.nullSavedSource();
     }
     if (!MathS.isNull(this.closeTabService.saveDataForSearchSimple)) {
-      this.dataSource = this.closeTabService.saveDataForSearchSimple;
       this.converts();
     }
 

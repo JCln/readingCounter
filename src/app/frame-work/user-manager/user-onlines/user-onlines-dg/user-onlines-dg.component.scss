@@ -1,0 +1,106 @@
+@import 'primeNG.scss';
+@import 'button.scss';
+
+
+section {
+  direction: rtl;
+  font-family: $font_family;
+  border-radius: 7px;
+  background: var(--secondary_1);
+  padding: .5rem;
+  margin-bottom: .2rem;
+}
+
+.over_all {
+  direction: rtl;
+  font-family: $font_family;
+  width: 90%;
+  margin: auto;
+
+  .content {
+    background: var(--secondary_3);
+    border-radius: $border_15;
+    margin: auto;
+    padding: var(--font_xs);
+  }
+
+  input {
+    border: 0;
+    direction: rtl;
+    text-align: right;
+    border-right: 2px solid var(--primary_1);
+    border-radius: 7px;
+    height: 3rem;
+    width: 100%;
+    font-weight: 600;
+    font-size: var(--font_s);
+  }
+
+  ._value2 {
+    height: 5rem;
+  }
+
+  .text {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .send {
+    text-align: center;
+    margin: var(--font_2) 0 var(--font_05);
+
+    .btn_2 {
+      color: var(--primary_2);
+      width: 10.5rem;
+    }
+  }
+
+  ._key {
+    text-align: right;
+  }
+
+  .c_separator {
+    .btn_2 {
+      color: var(--secondary_1);
+    }
+  }
+
+  .c_separator {
+    direction: rtl;
+
+    .btn_2 {
+      width: var(--font_5);
+      font-family: inherit;
+    }
+  }
+
+  .hr_2 {
+    margin: 0;
+  }
+
+  h2 {
+    text-align: center;
+    color: var(--primary_5);
+  }
+
+  h3 {
+    text-align: right;
+    color: var(--primary_5);
+  }
+
+}
+
+// //////////
+
+.mat-button-toggle-group-appearance-standard {
+  border: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--font_3), var(--font_5)));
+  gap: var(--font_03);
+  padding: var(--font_02);
+}
+
+.p-dialog .p-dialog-header {
+  padding: var(--font_025) !important;
+}

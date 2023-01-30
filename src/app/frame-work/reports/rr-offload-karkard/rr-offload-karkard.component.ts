@@ -16,6 +16,7 @@ export class RrOffloadKarkardComponent extends FactoryONE {
   _years: ITitleValue[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
 
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -38,7 +39,12 @@ export class RrOffloadKarkardComponent extends FactoryONE {
     this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.getFragmentByZone();
     this.receiveYear();
+  }
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.karkardOffloadReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.karkardOffloadReq.zoneId);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();

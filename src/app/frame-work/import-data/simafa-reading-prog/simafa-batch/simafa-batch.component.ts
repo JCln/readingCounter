@@ -4,8 +4,8 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IBatchImportDataResponse } from 'interfaces/import-data';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { IFragmentDetails } from 'interfaces/ireads-manager';
 import { AllImportsService } from 'services/all-imports.service';
+import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -17,7 +17,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class SimafaBatchComponent extends FactoryONE {
 
   userCounterReaderDictionary: IDictionaryManager[] = [];
-  dataSource: IFragmentDetails[] = [];
   _batchResponse: IBatchImportDataResponse[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   readingConfigDefault: IReadingConfigDefault;
@@ -29,6 +28,7 @@ export class SimafaBatchComponent extends FactoryONE {
   constructor(
     public importDynamicService: ImportDynamicService,
     public allImportsService: AllImportsService,
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -38,38 +38,39 @@ export class SimafaBatchComponent extends FactoryONE {
     this._canShowImportBatchButton = false;
   }
   connectToServer = async () => {
-    if (!this.dataSource || this.dataSource.length == 0) {
+    if (!this.closeTabService.saveDataForSimafaBatch || this.closeTabService.saveDataForSimafaBatch.length == 0) {
       this.importDynamicService.noRouteToImportMessage();
-      return;
     }
-    const validation = this.importDynamicService.verificationSimafaBatch(this.allImportsService.allImports_batch);
-    if (validation) {
-      this._batchResponse = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaBatch, this.allImportsService.allImports_batch);
-      this.insertColumnsToTableAfterSuccess();
-      this.assignBatchResToDataSource();
-      this.insertSelectedColumns();
-      this.changeStatusAfterSuccess();
-      scrollTo(0, 0);
+    else {
+      const validation = this.importDynamicService.verificationSimafaBatch(this.allImportsService.allImports_batch);
+      if (validation) {
+        this._batchResponse = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaBatch, this.allImportsService.allImports_batch);
+        this.insertColumnsToTableAfterSuccess();
+        this.assignBatchResToDataSource();
+        this.insertSelectedColumns();
+        this.changeStatusAfterSuccess();
+        scrollTo(0, 0);
+      }
     }
   }
   assingIdToRouteId = () => {
-    this.dataSource.forEach((item, index) => {
+    this.closeTabService.saveDataForSimafaBatch.forEach((item, index) => {
       this.allImportsService.allImports_batch.routeAndReaderIds[index].routeId = item.id;
     })
   }
   classWrapper = async (canRefresh?: boolean) => {
-    this.dataSource = await this.importDynamicService.postBodyServer(ENInterfaces.fragmentDETAILSByEshterak,
+    this.closeTabService.saveDataForSimafaBatch = await this.importDynamicService.postBodyServer(ENInterfaces.fragmentDETAILSByEshterak,
       {
         fromEshterak: this.allImportsService.allImports_batch.fromEshterak,
         toEshterak: this.allImportsService.allImports_batch.toEshterak,
         zoneId: this.allImportsService.allImports_batch.zoneId
       }
     );
-    if (this.dataSource) {
-      for (let index = 1; index < this.dataSource.length && this.allImportsService.allImports_batch.routeAndReaderIds.length < this.dataSource.length; index++) {
+    if (this.closeTabService.saveDataForSimafaBatch) {
+      for (let index = 1; index < this.closeTabService.saveDataForSimafaBatch.length && this.allImportsService.allImports_batch.routeAndReaderIds.length < this.closeTabService.saveDataForSimafaBatch.length; index++) {
         this.allImportsService.allImports_batch.routeAndReaderIds.push({ routeId: null, counterReaderId: null })
       }
-      this.allImportsService.allImports_batch.fragmentMasterId = this.dataSource[0].fragmentMasterId;
+      this.allImportsService.allImports_batch.fragmentMasterId = this.closeTabService.saveDataForSimafaBatch[0].fragmentMasterId;
       this.userCounterReaderDictionary = await this.importDynamicService.getUserCounterReaders(this.allImportsService.allImports_batch.zoneId);
       this.readingConfigDefault = await this.importDynamicService.getReadingConfigDefaults(this.allImportsService.allImports_batch.zoneId);
 
@@ -98,9 +99,9 @@ export class SimafaBatchComponent extends FactoryONE {
       this._batchResponse.forEach(batchRes => {
 
         if (batchRes.fragmentDetailId === simafaBatchItem.routeId) {
-          this.dataSource[index].count = batchRes.count;
-          this.dataSource[index].trackNumber = batchRes.trackNumber;
-          this.dataSource[index].counterReaderName = batchRes.counterReaderName;
+          this.closeTabService.saveDataForSimafaBatch[index].count = batchRes.count;
+          this.closeTabService.saveDataForSimafaBatch[index].trackNumber = batchRes.trackNumber;
+          this.closeTabService.saveDataForSimafaBatch[index].counterReaderName = batchRes.counterReaderName;
         }
 
       })
@@ -114,7 +115,9 @@ export class SimafaBatchComponent extends FactoryONE {
     this.importDynamicService.columnRemoveSimafaBatch();
   }
   private insertReadingConfigDefaults = (rcd: any) => {
-    this.allImportsService.allImports_batch.hasPreNumber = rcd.hasPreNumber;
+    console.log(rcd);
+
+    this.allImportsService.allImports_batch.hasPreNumber = rcd.defaultHasPreNumber;
     this.allImportsService.allImports_batch.displayBillId = rcd.displayBillId;
     this.allImportsService.allImports_batch.displayRadif = rcd.displayRadif;
     this.allImportsService.allImports_batch.imagePercent = rcd.defaultImagePercent;

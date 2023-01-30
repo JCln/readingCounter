@@ -33,9 +33,10 @@
     </form>
 </main>
 
-<app-prime-table *ngIf="dataSource" [dataSource]="dataSource" [_outputFileName]="'forbidden'"
-    [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]" [_selectedColumnsToRemember]="'selectedForbidden'"
-    [_hasCollapsible]=true [_isCollaped]="forbiddenService._isCollapsedForbidden"
+<app-prime-table *ngIf="closeTabService.saveDataForFNB" [dataSource]="closeTabService.saveDataForFNB"
+    [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]"
+    [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true
+    [_isCollaped]="forbiddenService._isCollapsedForbidden"
     (collapsed)="forbiddenService._isCollapsedForbidden = !forbiddenService._isCollapsedForbidden"
     (refreshedTable)="refreshTable()" (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
 </app-prime-table>
