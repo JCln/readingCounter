@@ -186,6 +186,12 @@ export enum ENSnackBarColors {
     success = 'snack_success',
     info = 'snack_info',
 }
+export enum ENToastColors {
+    warn = 'warn',
+    error = 'error',
+    success = 'success',
+    info = 'info',
+}
 export enum ENSnackBarColorsExact {
     warn = 'rgb(246, 128, 56)',
     danger = ' rgb(183, 28, 28)',

@@ -5,7 +5,7 @@ import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 
-import { broadcastMessages, colors, times } from './DI/messages';
+import { broadcastMessages, colors, times, toastColors } from './DI/messages';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,13 @@ export class MessageService {
     seconds: 0,
     canSave: true
   };
+  toastMessageReq = {
+    userId: '',
+    title: '',
+    text: '',
+    color: ''
+  };
+
 
   constructor(
     private utilsService: UtilsService
@@ -28,6 +35,7 @@ export class MessageService {
   getMessages = () => { return broadcastMessages; }
 
   getColors = () => { return colors; }
+  getToastColors = () => { return toastColors; }
 
   verificationBroadcastMessage = (body: IMessage) => {
     if (MathS.isNull(body.title)) {
@@ -40,6 +48,21 @@ export class MessageService {
     }
     if (MathS.isNull(body.seconds)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_showTime);
+      return false;
+    }
+    if (MathS.isNull(body.color)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_colorName);
+      return false;
+    }
+    return true;
+  }
+  verificationDirectMessage = (body: any) => {
+    if (MathS.isNull(body.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    if (MathS.isNull(body.text)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_text);
       return false;
     }
     if (MathS.isNull(body.color)) {

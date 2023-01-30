@@ -8,8 +8,7 @@ import { MathS } from 'src/app/classes/math-s';
 @Component({
   selector: 'app-snack-bar',
   templateUrl: './snack-bar.component.html',
-  styleUrls: ['./snack-bar.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./snack-bar.component.scss']
 })
 export class SnackBarComponent implements OnInit {
 
@@ -56,9 +55,9 @@ export class SnackBarComponent implements OnInit {
     })
   }
   toast = () => {
-    this.snackWrapperService.toastStatusSignal.subscribe(res => {
+    this.snackWrapperService.toastStatusSignal.subscribe((res) => {
       if (res) {
-        this.messageService.add({ severity: 'info', summary: res.message, detail: res.text, sticky: true });
+        this.messageService.add({ severity: res.color, summary: res.title, detail: res.text, sticky: true });
       }
     })
   }

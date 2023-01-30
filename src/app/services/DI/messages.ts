@@ -1,6 +1,12 @@
 import { EN_messages } from 'interfaces/enums.enum';
-import { IColor, IMessage, ITime } from 'interfaces/inon-manage';
-import { ENRandomNumbers, ENSnackBarColors, ENSnackBarColorsExact, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { IColor, IMessage, ITime, IToastColor } from 'interfaces/inon-manage';
+import {
+    ENRandomNumbers,
+    ENSnackBarColors,
+    ENSnackBarColorsExact,
+    ENSnackBarTimes,
+    ENToastColors,
+} from 'interfaces/ioverall-config';
 
 export enum ENColorText {
     blue = 'آبی',
@@ -29,4 +35,10 @@ export const colors: IColor[] = [
     { text: ENColorText.green, value: ENSnackBarColors.success, isClicked: false, background: ENSnackBarColorsExact.success },
     { text: ENColorText.orange, value: ENSnackBarColors.warn, isClicked: false, background: ENSnackBarColorsExact.warn },
     { text: ENColorText.red, value: ENSnackBarColors.danger, isClicked: false, background: ENSnackBarColorsExact.danger }
+]
+export const toastColors: IToastColor[] = [
+    { text: ENColorText.blue, value: ENToastColors.info, isClicked: false, background: ENSnackBarColorsExact.info },
+    { text: ENColorText.green, value: ENToastColors.success, isClicked: false, background: ENSnackBarColorsExact.success },
+    { text: ENColorText.orange, value: ENToastColors.warn, isClicked: false, background: ENSnackBarColorsExact.warn },
+    { text: ENColorText.red, value: ENToastColors.error, isClicked: false, background: ENSnackBarColorsExact.danger }
 ]

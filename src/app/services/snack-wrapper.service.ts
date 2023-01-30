@@ -8,9 +8,6 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class SnackWrapperService {
 
-  constructor(
-  ) { }
-
   private snackBar = new BehaviorSubject<ISnackBar>({ message: '', duration: 0, backColor: ENSnackBarColors.danger });
   private snackBarSignal = new BehaviorSubject<ISnackBarSignal>({ message: '', duration: 0, backColor: ENSnackBarColors.danger });
   private signalToast = new BehaviorSubject<any>({});
@@ -50,8 +47,6 @@ export class SnackWrapperService {
     this.snackSignal(a);
   }
   openToastSignal(body: any) {
-    console.log(body);
-    
     this.toastSignal(body);
   }
 

@@ -5,8 +5,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { ToastModule } from 'primeng/toast';
 import { GlobalErrorHandlerService } from 'services/global-error-handler.service';
 
 import { InterceptorService } from '../auth/interceptor.service';
@@ -73,14 +73,14 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     // components
     BrowserAnimationsModule,
     AnnouceNotifComponent,
-    ToastModule,
 
     CoreRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true },
-    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
+    MessageService
   ]
 })
 export class CoreModule {

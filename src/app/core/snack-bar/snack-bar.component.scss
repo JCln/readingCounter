@@ -39,4 +39,25 @@
   .newline {
     white-space: pre-wrap;
   }
+
+  // toast
+  section {
+    direction: rtl;
+  }
+
+  .p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
+    margin: 0 1rem 0 0;
+  }
+
+  .p-toast .p-toast-message .p-toast-message-content .p-toast-summary {
+    font-family: $font_family;
+    font-size: var(--font_l);
+    font-weight: 700;
+  }
+
+  .p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
+    font-family: $font_family;
+    font-weight: 600;
+  }
+
 }

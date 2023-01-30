@@ -2,32 +2,33 @@
     <h2>جزئیات پیام</h2>
     <section>
         <h3>عنوان</h3>
+        <input class="_value1" name="text" [(ngModel)]="messageService.toastMessageReq.title" autofocus>
         <hr class="hr_2">
-        <input class="_value1" name="text" [(ngModel)]="object.title" focus>
     </section>
 
     <section>
         <h3>متن</h3>
+        <input class="_value2" name="text" [(ngModel)]="messageService.toastMessageReq.text">
         <hr class="hr_2">
-        <input class="_value2" name="text" [(ngModel)]="object.text">
     </section>
 
     <div class="color">
         <h3>رنگ</h3>
-        <hr class="hr_2">
         <div class="c_separator">
 
             <mat-button-toggle-group #group="matButtonToggleGroup" value="object.color">
                 <mat-button-toggle class="btn_2" *ngFor="let item of colors" [ngStyle]="{'color':item.background}"
-                    [(ngModel)]="item.background" (click)="object.color = item.value">
+                    [(ngModel)]="item.background" (click)="messageService.toastMessageReq.color = item.value">
                     {{item.text}}
                 </mat-button-toggle>
             </mat-button-toggle-group>
 
         </div>
+        <hr class="hr_2">
     </div>
+
     <div class="send">
-        <button type="submit" class="btn_2">ارسال و مشاهده</button>
+        <button type="submit" class="btn_2">ارسال پیام</button>
     </div>
 
 </form>

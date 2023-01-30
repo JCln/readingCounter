@@ -50,6 +50,12 @@ export interface IColor {
     isClicked: boolean;
     background: ENSnackBarColorsExact;
 }
+export interface IToastColor {
+    text: string,
+    value: any;
+    isClicked: boolean;
+    background: any;
+}
 
 export interface ITime {
     value: ENSnackBarTimes;

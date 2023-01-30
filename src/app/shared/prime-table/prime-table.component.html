@@ -56,10 +56,6 @@
                 </i>
             </div>
             <div class="left_side">
-                <i *ngIf="_outputFileName == 'assess_pre' && _canShowButton" (click)="registerAssessAdd()"
-                    class="tooltip _circle_border p_icons pi pi-check">
-                    <div class="tooltip_text">ثبت بازدید</div>
-                </i>
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"
                     (click)="filterCounterState()">
                     <label class="font_family" for="binary">({{dataSource.length}}) نمایش قرائت شده ها</label>

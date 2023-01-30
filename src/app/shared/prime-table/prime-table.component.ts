@@ -27,8 +27,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
   @Input() _isSortable: boolean = true;
-  @Input() _hasCollapsible: boolean = false;
-  @Input() _canShowButton: boolean = true;
+  @Input() _hasCollapsible: boolean = false;  
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
   @Input() _hasAggregating: boolean = false;
@@ -57,7 +56,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() backedToPrevious = new EventEmitter<any>();
   @Output() downloadedAPK = new EventEmitter<any>();
   @Output() clickedElmah = new EventEmitter<any>();
-  @Output() registeredAssess = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
   @Output() routedToOffload = new EventEmitter<any>();
   @Output() openedAddDialog = new EventEmitter<any>();
@@ -164,9 +162,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   connectToElmah = (dataSource: string) => {
     this.clickedElmah.emit(dataSource);
-  }
-  registerAssessAdd = () => {
-    this.registeredAssess.emit();
   }
   showPictures = ($event) => {
     this.showedPictures.emit($event);

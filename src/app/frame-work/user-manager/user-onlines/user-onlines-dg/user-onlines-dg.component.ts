@@ -12,32 +12,29 @@ import { UsersAllService } from 'services/users-all.service';
 })
 export class UserOnlinesDgComponent implements OnInit {
   colors: IColor[] = [];
-  object = {
-    userId: '',
-    title: '',
-    text: '',
-    color: ''
-  };
 
   constructor(
     public config: DynamicDialogConfig,
     private userService: UsersAllService,
-    private messageService: MessageService
+    public messageService: MessageService
   ) { }
 
+  getColors = () => {
+    this.colors = this.messageService.getToastColors();
+  }
   classWrapper = async () => {
     const a = this.config.data._data;
-    this.object.userId = a.userId;
+    this.messageService.toastMessageReq.userId = a.userId;
     this.getColors();
   }
   ngOnInit(): void {
     this.classWrapper();
   }
   postDataSource = () => {
-    if (!this.object.color)
-      this.object.color = this.colors[0].value;
-
-    this.userService.postDataSource(ENInterfaces.signalRNotifDirectText, this.object);
+    console.log(this.messageService.toastMessageReq);
+    
+    if (this.messageService.verificationDirectMessage(this.messageService.toastMessageReq)) {
+      this.userService.postDataSource(ENInterfaces.signalRNotifDirectText, this.messageService.toastMessageReq);
+    }
   }
-  getColors = () => { this.colors = this.messageService.getColors(); }
 }
