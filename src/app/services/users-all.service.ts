@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
+import { INotifyDirectImage } from 'interfaces/inon-manage';
 import {
   ENSelectedColumnVariables,
   ENSnackBarColors,
@@ -10,6 +11,7 @@ import {
 } from 'interfaces/ioverall-config';
 import { IAddUserManager, IAUserEditSave, IUserEditManager, IUserEditOnRole } from 'interfaces/iuser-manager';
 import { EN_Routes } from 'interfaces/routes.enum';
+import { Observable } from 'rxjs/internal/Observable';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
 import { MathS } from '../classes/math-s';
@@ -27,6 +29,7 @@ export class UsersAllService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   dataSource: IAUserEditSave;
   userEditOnRoleRoleVal: number;
+  fileImageWithCaptionForm: FileList;
   userEdit_pageSign: IUserEditNessessities = {
     GUid: null,
   };
@@ -274,6 +277,42 @@ export class UsersAllService {
   userEditOnRoleInsertRole = (val: any) => {
     this.userEditOnRoleRoleVal = val;
   }
+  postNotifyDirectImage = (filesList: any, val: INotifyDirectImage): Observable<any> => {
+    const formData: FormData = new FormData();
+    console.log(filesList);
+    console.log(val);
+    console.log();
+    
 
+    formData.append('file', filesList);
+    formData.append('caption', val.caption);
+    formData.append('userId', val.userId);
+    // return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.signalRNotifDirectImage, formData);
+
+    console.log(formData);
+    return;
+  }
+  checkVertiticationNotifDirectImage = (val: INotifyDirectImage): boolean => {
+    if (MathS.isNull(val.caption)) {
+      this.snackWrapperService.openSnackBar(EN_messages.insert_searchType, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
+    if (MathS.isNull(this.fileImageWithCaptionForm)) {
+      this.snackWrapperService.openSnackBar(EN_messages.insert_Image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
+    if (
+      this.fileImageWithCaptionForm[0].name.split('.').pop() === 'jpg'
+      || this.fileImageWithCaptionForm[0].name.split('.').pop() === 'JPG'
+      || this.fileImageWithCaptionForm[0].name.split('.').pop() === 'JPEG'
+      || this.fileImageWithCaptionForm[0].name.split('.').pop() === 'jpeg') {
+      return true;
+    }
+    else {
+      this.snackWrapperService.openSnackBar(EN_messages.should_insert_JPG, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
+    // return true;
+  }
 
 }

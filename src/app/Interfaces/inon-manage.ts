@@ -43,7 +43,12 @@ export interface IMessage {
     text?: ENRandomNumbers;
     exactColor?: ENSnackBarColorsExact;
 }
-
+export interface INotifyDirectImage {
+    file: string,
+    userId: string,
+    caption: string,
+    calls_ReceiveImageWithCaption?: string
+}
 export interface IColor {
     text: string,
     value: ENSnackBarColors;

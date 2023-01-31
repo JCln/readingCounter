@@ -38,10 +38,10 @@ export class SignalRService {
       .then(() => console.log('Connection started'))
       .catch(err => console.log('Error while starting connection: ' + err));
 
-    console.log(1);
     this.receiveMessage();
     this.receiveTextWithTimer();
     this.ReceiveDirectMessage();
+    this.receiveImageWithCaptionMessage();
     this.momentAddReadingRow();
   }
   public disconnectConnection = () => {
@@ -80,6 +80,13 @@ export class SignalRService {
   ReceiveDirectMessage = () => {
     this.hubConnection.on(ENInterfaces.ReceiveDirectMessage, (a: IMessage) => {
       this.snackBarService.openToastSignal(a);
+    });
+  }
+  receiveImageWithCaptionMessage = () => {
+    this.hubConnection.on(ENInterfaces.ReceiveImageWithCaption, (a: IMessage) => {
+      console.log(a);
+
+      // this.snackBarService.openToastSignal(a);
     });
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IMessage } from 'interfaces/inon-manage';
+import { IMessage, INotifyDirectImage } from 'interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
@@ -24,10 +24,15 @@ export class MessageService {
     text: '',
     color: ''
   };
+  toastImageWithCaptionReq: INotifyDirectImage = {
+    file: '',
+    userId: '',
+    caption: ''
+  };
 
 
   constructor(
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
   ) { }
 
   getTimes = () => { return times; }

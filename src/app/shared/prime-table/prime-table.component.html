@@ -445,6 +445,12 @@
                     <div class="tooltip_text_right">پیام به کاربر</div>
                 </i>
             </td>
+            <td *ngIf="_outputFileName == 'userOnlines'" (click)="routeToLoggs(dataSource)">
+                <span class="ui-column-title">ارسال تصویر</span>
+                <i class="tooltip p_icons pi pi-image">
+                    <div class="tooltip_text_right">ارسال تصویر</div>
+                </i>
+            </td>
         </tr>
     </ng-template>
     <ng-template let-dataSource pTemplate="footer">

@@ -7,6 +7,7 @@ import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 import { UserOnlinesDgComponent } from './user-onlines-dg/user-onlines-dg.component';
+import { UserOnlinesImgDgComponent } from './user-onlines-img-dg/user-onlines-img-dg.component';
 
 @Component({
   selector: 'app-user-onlines',
@@ -40,11 +41,21 @@ export class UserOnlinesComponent extends FactoryONE {
       item.connectDateTime = this.dateJalaliService.getDate(item.connectDateTime) + '   ' + this.dateJalaliService.getTime(item.connectDateTime);
     })
   }
-  textMessageToAContact = (value: any, body: object) => {
-    console.log(value);
-
+  textMessageToAContact = (value: any) => {
     this.ref = this.dialogService.open(UserOnlinesDgComponent, {
-      data: { _data: value, body: body },
+      data: { _data: value },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
+  imageToAContact = (value: any) => {
+    this.ref = this.dialogService.open(UserOnlinesImgDgComponent, {
+      data: { _data: value },
       rtl: true,
       width: '80%',
     })

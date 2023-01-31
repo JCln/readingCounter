@@ -135,6 +135,6 @@
 
 <app-prime-table [dataSource]="closeTabService.saveDataForSearchPro" [_outputFileName]="'searchPro'"
     [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'search_acme'"
-    [_selectedColumnsToRemember]="'selectedListManagerPro'" (refreshedTable)="refreshTable()"
+    [_selectedColumnsToRemember]="'selectedListManagerPro'" (refreshedTable)="connectToServer()"
     (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)">
 </app-prime-table>

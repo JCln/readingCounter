@@ -30,11 +30,11 @@ export class UserOnlinesDgComponent implements OnInit {
   ngOnInit(): void {
     this.classWrapper();
   }
-  postDataSource = () => {
-    console.log(this.messageService.toastMessageReq);
-    
+  postDataSource = async () => {
     if (this.messageService.verificationDirectMessage(this.messageService.toastMessageReq)) {
-      this.userService.postDataSource(ENInterfaces.signalRNotifDirectText, this.messageService.toastMessageReq);
+      const a = await this.userService.postDataSource(ENInterfaces.signalRNotifDirectText, this.messageService.toastMessageReq);
+      if (a)
+        this.userService.snackBarMessageSuccess(a);
     }
   }
 }
