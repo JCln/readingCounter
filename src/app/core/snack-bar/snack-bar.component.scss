@@ -40,10 +40,7 @@
     white-space: pre-wrap;
   }
 
-  // toast
-  section {
-    direction: rtl;
-  }
+  // toast  
 
   .p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
     margin: 0 1rem 0 0;
@@ -60,4 +57,8 @@
     font-weight: 600;
   }
 
+}
+
+section {
+  direction: rtl;
 }
