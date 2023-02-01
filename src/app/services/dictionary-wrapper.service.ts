@@ -18,16 +18,20 @@ export class DictionaryWrapperService {
   private zoneDictionary: any = [];
   private zoneBoundDictionary: any = [];
   private countryDictionary: any = [];
-
   private authLev1Dictionary: any = [];
   private authLev2Dictionary: any = [];
   private authLev3Dictionary: any = [];
   private authLev4Dictionary: any = [];
   private trackingStatesDictionary: any = [];
-
+  private periodKindDictionary: any = [];
+  private qotrDictionary: any = [];
+  private roleDictionary: any = [];
+  private karbariCodeDictionary: any = [];
+  private traverseDifferentialDictionary: any = [];
   private imageAttributionAllDictionary: any = [];
-
   private counterReportDictionary: any = [];
+  private counterStateDictionary: any = [];
+
   private counterReportByZoneDictionary = {
     dictionary: null,
     zoneId: null
@@ -44,7 +48,6 @@ export class DictionaryWrapperService {
     dictionary: null,
     zoneId: null
   };
-  private counterStateDictionary: any = [];
   private counterStateByZoneIdDictionary = {
     dictionary: null,
     zoneId: null
@@ -65,12 +68,10 @@ export class DictionaryWrapperService {
     dictionary: null,
     zoneId: null
   }
-  private periodKindDictionary: any = [];
-  private qotrDictionary: any = [];
-  private roleDictionary: any = [];
-
-  private karbariCodeDictionary: any = [];
-  private traverseDifferentialDictionary: any = [];
+  private readingPeriodDictionary = {
+    dictionary: null,
+    kindId: null
+  }
 
   getkarbariCodeDictionary(): Promise<any> {
     if (!MathS.isNull(this.karbariCodeDictionary))
@@ -329,8 +330,11 @@ export class DictionaryWrapperService {
 
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
+    if (this.readingPeriodDictionary.kindId == kindId && !MathS.isNull(this.readingPeriodDictionary.dictionary))
+      return this.readingPeriodDictionary.dictionary;
     return new Promise((resolve) => {
       this.interfaceManagerService.GETByQuote(ENInterfaces.readingPeriodByKindDictionary, kindId).toPromise().then((res: any) => {
+        this.setReadingPeriodDictionary(res, +kindId);
         resolve(res)
       })
     });
@@ -444,6 +448,10 @@ export class DictionaryWrapperService {
     this.counterStateByCodeDictionary.dictionary = v;
     this.counterStateByCodeDictionary.zoneId = id;
   }
+  private setReadingPeriodDictionary(v: any, id: number) {
+    this.readingPeriodDictionary.dictionary = v;
+    this.readingPeriodDictionary.kindId = id;
+  }
   private setCounterStateByCodeShowAllDictionary(v: any, id: number) {
     this.counterStateByCodeShowAllDictionary.dictionary = v;
     this.counterStateByCodeShowAllDictionary.zoneId = id;
@@ -472,6 +480,12 @@ export class DictionaryWrapperService {
     this.authLev3Dictionary = [];
     this.authLev4Dictionary = [];
     this.counterReportDictionary = [];
+    this.periodKindDictionary = [];
+    this.counterStateDictionary = [];
+    this.qotrDictionary = [];
+    this.roleDictionary = [];
+    this.karbariCodeDictionary = [];
+    this.traverseDifferentialDictionary = [];
     this.counterReportByZoneDictionary.dictionary = [];
     this.counterReportByZoneDictionary.zoneId = null;
     this.readingConfigDefaultByZoneDictionary.dictionary = [];
@@ -480,18 +494,19 @@ export class DictionaryWrapperService {
     this.userCounterReadersByZoneDictionary.zoneId = null;
     this.fragmentMasterByZoneDictionary.dictionary = [];
     this.fragmentMasterByZoneDictionary.zoneId = null;
-    this.counterStateDictionary = [];
     this.counterStateByZoneIdDictionary.dictionary = [];
     this.counterStateByZoneIdDictionary.zoneId = null;
     this.counterStateByCodeDictionary.dictionary = [];
     this.counterStateByCodeDictionary.zoneId = null;
     this.counterStateForModifyDictionary.dictionary = [];
     this.counterStateForModifyDictionary.zoneId = null;
-    this.periodKindDictionary = [];
-    this.qotrDictionary = [];
-    this.roleDictionary = [];
-    this.karbariCodeDictionary = [];
-    this.traverseDifferentialDictionary = [];
+    this.readingPeriodDictionary.dictionary = [];
+    this.readingPeriodDictionary.kindId = null;
+    this.counterStateByCodeShowAllDictionary.dictionary = [];
+    this.counterStateByCodeShowAllDictionary.zoneId = null;
+    this.counterStateByZoneShowAllDictionary.dictionary = [];
+    this.counterStateByZoneShowAllDictionary.zoneId = null;
+
   }
   cleanSingleDictionary = (dicName: string) => {
     this[dicName] = [];

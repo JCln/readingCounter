@@ -39,7 +39,7 @@ export class LatestReadsComponent extends AllListsFactory {
     xyData.map((items) => {
       if (items.y > ENRandomNumbers.zero) {
         L.marker([items.y, items.x]).addTo(this.layerGroup2)
-          .bindPopup(`${items.zoneTitle} <br> ${items.counterReaderName} <br>` + `=${items.eshterak} <br> ${items.radif}`
+          .bindPopup(`${items.zoneTitle} <br> ${items.counterReaderName} <br>` + `${items.eshterak} <br> ${items.radif}`
           );
       }
     })

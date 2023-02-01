@@ -110,8 +110,6 @@ export class ExcelFileComponent extends FactoryONE {
 
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
-      console.log(fileInput.files);
-
       if (this.importDynamicService.verificationExcelFile(fileInput.files)) {
         this.importDynamicService.postExcelFile(ENInterfaces.postImportDataFileExcel, form, fileInput.files);
       }

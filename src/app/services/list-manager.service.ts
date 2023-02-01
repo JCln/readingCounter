@@ -4,7 +4,13 @@ import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import {
+  ENRandomNumbers,
+  ENSelectedColumnVariables,
+  IDictionaryManager,
+  IObjectIteratation,
+  IResponses,
+} from 'interfaces/ioverall-config';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
 import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchMoshReqDialog } from 'interfaces/search';
@@ -218,6 +224,13 @@ export class ListManagerService {
       OffloadModify.callAnnounce,
       OffloadModify.wrongReading,
       OffloadModify.bazresi
+    ]
+  }
+  getOffloadModifyTypeSimple = (): IDictionaryManager[] => {
+    return [
+      { id: OffloadModify.callAnnounce.id, title: OffloadModify.callAnnounce.title, isSelected: false },
+      { id: OffloadModify.wrongReading.id, title: OffloadModify.wrongReading.title, isSelected: false },
+      { id: OffloadModify.bazresi.id, title: OffloadModify.bazresi.title, isSelected: false },
     ]
   }
   offloadModifyValidation = (object: IOffloadModifyReq): boolean => {

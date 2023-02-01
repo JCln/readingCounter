@@ -34,6 +34,7 @@ export class ProComponent extends AllListsFactory {
   masrafState: ITHV[] = []
   _selectedZone: any;
   _years: ITitleValue[] = [];
+  eslahType: any[] = [];
 
   constructor(
     public closeTabService: CloseTabService,
@@ -86,6 +87,7 @@ export class ProComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.karbariDictionaryCode, 'possibleKarbariCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.qotrDictionary, 'qotrCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.eslahType, 'eslahType');
 
     this.searchService.setDynamicPartRanges(this.closeTabService.saveDataForSearchPro);
     this.searchService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchPro);
@@ -103,6 +105,10 @@ export class ProComponent extends AllListsFactory {
     }
     this.getNesseseriesByZone();
     this.searchService.getSearchInOrderTo();
+    this.insertSelectedColumns();
+  }
+  insertSelectedColumns = () => {
+    this.eslahType = this.listManagerService.getOffloadModifyTypeSimple();
   }
   getReadingPeriod = async () => {
     this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this.closeTabService.saveDataForSearchProReq._selectedKindId);

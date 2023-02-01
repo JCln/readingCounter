@@ -86,7 +86,7 @@ export class SignalRService {
     this.hubConnection.on(ENInterfaces.ReceiveImageWithCaption, (a: IMessage) => {
       console.log(a);
 
-      // this.snackBarService.openToastSignal(a);
+      this.snackBarService.openToastSignal(a);
     });
   }
 

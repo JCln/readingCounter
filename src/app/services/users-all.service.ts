@@ -29,7 +29,6 @@ export class UsersAllService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   dataSource: IAUserEditSave;
   userEditOnRoleRoleVal: number;
-  fileImageWithCaptionForm: FileList;
   userEdit_pageSign: IUserEditNessessities = {
     GUid: null,
   };
@@ -279,33 +278,29 @@ export class UsersAllService {
   }
   postNotifyDirectImage = (filesList: any, val: INotifyDirectImage): Observable<any> => {
     const formData: FormData = new FormData();
-    console.log(filesList);
-    console.log(val);
-    console.log();
-    
 
-    formData.append('file', filesList);
     formData.append('caption', val.caption);
     formData.append('userId', val.userId);
-    // return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.signalRNotifDirectImage, formData);
+    formData.append('file', filesList[0]);
+    
+    return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.signalRNotifDirectImage, formData);
 
-    console.log(formData);
-    return;
   }
-  checkVertiticationNotifDirectImage = (val: INotifyDirectImage): boolean => {
+  checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage): boolean => {
+
     if (MathS.isNull(val.caption)) {
-      this.snackWrapperService.openSnackBar(EN_messages.insert_searchType, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      this.snackWrapperService.openSnackBar(EN_messages.insert_caption, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
-    if (MathS.isNull(this.fileImageWithCaptionForm)) {
+    if (MathS.isNull(fileForm)) {
       this.snackWrapperService.openSnackBar(EN_messages.insert_Image, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
       return false;
     }
     if (
-      this.fileImageWithCaptionForm[0].name.split('.').pop() === 'jpg'
-      || this.fileImageWithCaptionForm[0].name.split('.').pop() === 'JPG'
-      || this.fileImageWithCaptionForm[0].name.split('.').pop() === 'JPEG'
-      || this.fileImageWithCaptionForm[0].name.split('.').pop() === 'jpeg') {
+      fileForm[0].name.split('.').pop() === 'jpg'
+      || fileForm[0].name.split('.').pop() === 'JPG'
+      || fileForm[0].name.split('.').pop() === 'JPEG'
+      || fileForm[0].name.split('.').pop() === 'jpeg') {
       return true;
     }
     else {

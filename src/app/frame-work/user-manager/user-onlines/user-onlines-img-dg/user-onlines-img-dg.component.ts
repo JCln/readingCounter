@@ -36,6 +36,8 @@ export class UserOnlinesImgDgComponent implements OnInit {
   @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
   choosenFileName: string = '';
   fileNameAfterChoose: string = '';
+
+
   progress: number = 0;
   onChange(event) {
     const a = document.getElementById('files') as any;
@@ -49,8 +51,7 @@ export class UserOnlinesImgDgComponent implements OnInit {
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
 
-      this.usersAllService.fileImageWithCaptionForm = fileInput.files;
-      if (this.usersAllService.checkVertiticationNotifDirectImage(this.messageService.toastImageWithCaptionReq)) {
+      if (this.usersAllService.checkVertiticationNotifDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq)) {
         this.usersAllService.postNotifyDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq).subscribe((event: HttpEvent<any>) => {
           switch (event.type) {
             case HttpEventType.Sent:

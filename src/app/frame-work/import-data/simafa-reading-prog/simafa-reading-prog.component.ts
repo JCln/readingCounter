@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { IFragmentDetailsByEshterakReq } from 'interfaces/ireads-manager';
 import { CloseTabService } from 'services/close-tab.service';
@@ -22,7 +21,6 @@ export class SimafaReadingProgComponent extends FactoryONE {
   };
 
   _empty_message: string = '';
-  kindId: number = 0;
   _years: ITitleValue[] = [];
   readingPeriodKindsDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
@@ -40,11 +38,6 @@ export class SimafaReadingProgComponent extends FactoryONE {
     if (this.importDynamicService.checkSimafaVertification(this.closeTabService.importSimafaReadingProgramReq)) {
       // Save and send data to service
       this.closeTabService.saveDataForSimafaReadingPrograms = await this.importDynamicService.postImportSimafaRDPG(ENInterfaces.postSimafaReadingProgram, this.closeTabService.importSimafaReadingProgramReq);
-
-      if (!this.closeTabService.saveDataForSimafaReadingPrograms) {
-        this._empty_message = EN_messages.notFound;
-        return;
-      }
       Converter.convertIdToTitle(this.closeTabService.saveDataForSimafaReadingPrograms, this.zoneDictionary, 'zoneId');
     }
   }

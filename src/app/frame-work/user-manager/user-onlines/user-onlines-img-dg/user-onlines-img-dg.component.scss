@@ -10,6 +10,7 @@
   direction: rtl;
   justify-content: center;
   gap: var(--font_xs);
+  font-family: $font_family;
 }
 
 @include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(25rem, auto)));
@@ -22,11 +23,6 @@
   padding: var(--font_2) 0;
   border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-}
-
-input {
-  text-align: center;
-  width: 19rem;
 }
 
 ._desc {
@@ -51,10 +47,7 @@ input {
   }
 }
 
-input {
-  text-align: center;
-  color: var(--secondary_5);
-  margin: 0 auto;
+input {  
   box-shadow: 1px 1px 8px 1px var(--secondary_4);
 }
 

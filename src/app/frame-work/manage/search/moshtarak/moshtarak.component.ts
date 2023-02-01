@@ -20,6 +20,7 @@ import { BriefKardexComponent } from '../../list-manager/brief-kardex/brief-kard
 export class MoshtarakComponent extends AllListsFactory {
   searchType: Search[];
   _searchByInfo: string = 'اشتراک';
+  eslahType: any[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
   deleteDictionary: IDictionaryManager[] = [];
@@ -56,6 +57,7 @@ export class MoshtarakComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.karbariDictionaryCode, 'karbariCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.qotrDictionary, 'qotrCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.counterStateDictionary, 'counterStateId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchMoshtarakin, this.eslahType, 'eslahType');
 
     this.searchService.setDynamicPartRanges(this.closeTabService.saveDataForSearchMoshtarakin);
   }
@@ -74,17 +76,16 @@ export class MoshtarakComponent extends AllListsFactory {
     if (this.closeTabService.saveDataForSearchMoshtarakin) {
       this.converts();
     }
-    else
-      this.toDefaultVals();
 
     this.searchType = this.searchService.getSearchTypes();
     this.getZoneDictionary();
+    this.getModifyTypes();
   }
   refreshTable = () => {
     this.connectToServer();
   }
-  toDefaultVals = () => {
-    this.closeTabService.saveDataForSearchMoshtarakin = [];
+  getModifyTypes = () => {
+    this.eslahType = this.listManagerService.getOffloadModifyTypeSimple();
   }
   getZoneDictionary = async () => {
     this.zoneDictionary = JSON.parse(JSON.stringify(await this.searchService.getZoneDictionary()));
