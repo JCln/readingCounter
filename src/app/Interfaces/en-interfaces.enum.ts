@@ -224,7 +224,7 @@ export enum ENInterfaces {
     signalRNotifDirectText = 'V1/NotifyManager/Direct/Text',
     signalRMomentSystemAddReadingRow = 'AddReadingRow',
     receiveTextWithTimer = 'receiveTextWithTimer',
-    ReceiveImageWithCaption = 'receiveImageWithCaption',
+    ReceiveImageWithCaption = 'ReceiveImageWithCaption',
     ReceiveDirectMessage = 'receiveDirectMessage',
     signalRSendMessage = 'sendMessage',
     signalRReceiveMessage = 'receiveMessage',

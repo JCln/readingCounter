@@ -1,3 +1,26 @@
 <section>
-    <p-toast style="font-family: BLotus;"></p-toast>
+    <p-toast position="top-right" key="text" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div class="p-flex p-flex-column">
+                <i class="{{message.icon}} _icon"></i>
+            </div>
+            <div class="_custom_toast">
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+            </div>
+        </ng-template>
+    </p-toast>
+    <p-toast position="top-right" key="image" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div class="p-flex p-flex-column">
+                <i class="{{message.icon}} _icon"></i>
+            </div>
+            <div class="_custom_toast">
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+                <button class="btn_2_o" (click)="openImgDialog(message)">مشاهده</button>
+            </div>
+        </ng-template>
+    </p-toast>
+
 </section>

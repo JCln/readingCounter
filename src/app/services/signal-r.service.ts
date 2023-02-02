@@ -31,7 +31,7 @@ export class SignalRService {
       .withUrl(this.envService.API_URL + ENInterfaces.signalRStartConnection, authToken)
       .withAutomaticReconnect()
       // .configureLogging(signalR.LogLevel.Information)
-      // .configureLogging(signalR.LogLevel.Debug)
+      .configureLogging(signalR.LogLevel.Debug)
       .build();
     this.hubConnection
       .start()
@@ -78,15 +78,31 @@ export class SignalRService {
     });
   }
   ReceiveDirectMessage = () => {
-    this.hubConnection.on(ENInterfaces.ReceiveDirectMessage, (a: IMessage) => {
-      this.snackBarService.openToastSignal(a);
+    this.hubConnection.on(ENInterfaces.ReceiveDirectMessage, (a: any) => {
+      const custom = {
+        severity: a.color,
+        summary: a.title,
+        detail: a.text,
+        sticky: true,
+        icon: 'pi pi-envelope',
+        key: 'text'
+      }
+      this.snackBarService.openToastSignal(custom);
     });
   }
   receiveImageWithCaptionMessage = () => {
-    this.hubConnection.on(ENInterfaces.ReceiveImageWithCaption, (a: IMessage) => {
+    this.hubConnection.on(ENInterfaces.ReceiveImageWithCaption, (a: any) => {
+      const custom = {
+        severity: a.color,
+        summary: a.title,
+        detail: a.text,
+        sticky: true,
+        icon: 'pi pi-image',
+        key: 'image'
+      }
       console.log(a);
-
-      this.snackBarService.openToastSignal(a);
+      
+      this.snackBarService.openToastSignal(custom);
     });
   }
 

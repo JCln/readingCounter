@@ -57,7 +57,8 @@ export class SnackBarComponent implements OnInit {
   toast = () => {
     this.snackWrapperService.toastStatusSignal.subscribe((res) => {
       if (res) {
-        this.messageService.add({ severity: res.color, summary: res.title, detail: res.text, sticky: true });
+        console.log(res);
+        this.messageService.add(res);
       }
     })
   }
@@ -65,6 +66,10 @@ export class SnackBarComponent implements OnInit {
     this.snackSimple();
     this.snackSignal();
     this.toast();
+  }
+  openImgDialog = (body: object) => {
+    console.log(body);
+    
   }
 
 }
