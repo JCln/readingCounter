@@ -35,6 +35,7 @@ export class Auth3AddDgComponent {
     })
   }
   async save() {
+    this.form.value['route'] = this.form.value['route'].trim();
     this.sectionsService.setSectionsValue(this.form.value);
     if (!this.sectionsService.sectionVertification()) {
       return;

@@ -33,15 +33,15 @@ export class Auth4AddDgComponent {
     })
   }
   async save() {
+    this.form.value['value'] = this.form.value['value'].trim();
     this.sectionsService.setSectionsValue(this.form.value);
-    if (!this.sectionsService.sectionVertification()) {
-      return;
-    }
-    if (!await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel4ADD, this.form.value))
-      return;
 
-    this.dictionaryWrapperService.cleanSingleDictionary('authLev4Dictionary');
-    this.dialogRef.close(this.form.value);
+    if (this.sectionsService.sectionVertification()) {
+      if (await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel4ADD, this.form.value)) {
+        this.dictionaryWrapperService.cleanSingleDictionary('authLev4Dictionary');
+        this.dialogRef.close(this.form.value);
+      }
+    }
   }
   close() {
     this.dialogRef.close();
