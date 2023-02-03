@@ -27,7 +27,6 @@ export interface IUserEditNessessities {
 })
 export class UsersAllService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
-  dataSource: IAUserEditSave;
   userEditOnRoleRoleVal: number;
   userEdit_pageSign: IUserEditNessessities = {
     GUid: null,
@@ -156,48 +155,48 @@ export class UsersAllService {
     })
     return selectedActions;
   }
-  checkEmptyUserInfos = () => {
-    if (MathS.isNull(this.dataSource.firstName)) {
+  checkEmptyUserInfos = (dataSource: IAUserEditSave) => {
+    if (MathS.isNull(dataSource.firstName)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_name);
       return false;
     }
-    if (MathS.isNull(this.dataSource.sureName)) {
+    if (MathS.isNull(dataSource.sureName)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_surename);
       return false;
     }
-    if (MathS.isNull(this.dataSource.mobile)) {
+    if (MathS.isNull(dataSource.mobile)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_mobile);
       return false;
     }
-    if (MathS.isNull(this.dataSource.displayName)) {
+    if (MathS.isNull(dataSource.displayName)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_showName);
       return false;
     }
-    if (MathS.isNull(this.dataSource.selectedRoles[0])) {
+    if (MathS.isNull(dataSource.selectedRoles[0])) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_group_access);
       return false;
     }
-    if (MathS.isNull(this.dataSource.selectedActions[0])) {
+    if (MathS.isNull(dataSource.selectedActions[0])) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_work);
       return false;
     }
-    if (MathS.isNull(this.dataSource.selectedZones[1])) {
+    if (MathS.isNull(dataSource.selectedZones[1])) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_roleAccess);
       return false;
     }
 
     return true;
   }
-  vertification = () => {
-    if (!this.checkEmptyUserInfos()) {
+  vertification = (dataSource: IAUserEditSave) => {
+    if (!this.checkEmptyUserInfos(dataSource)) {
       return false;
     }
-    if (!MathS.mobileValidation(this.dataSource.mobile)) {
+    if (!MathS.mobileValidation(dataSource.mobile)) {
       this.utilsService.snackBarMessageWarn(EN_messages.invalid_mobile);
       return false;
     }
-    if (!MathS.isNull(this.dataSource.email))
-      if (!MathS.isEmailValid(this.dataSource.email)) {
+    if (!MathS.isNull(dataSource.email))
+      if (!MathS.isEmailValid(dataSource.email)) {
         this.utilsService.snackBarMessageWarn(EN_messages.invalid_email);
         return false;
       }
@@ -205,17 +204,18 @@ export class UsersAllService {
     return true;
   }
   private connectToServerEdit = async (vals: IAUserEditSave) => {
-    this.dataSource = vals;
-    if (!this.vertification())
-      return;
-    if (await this.firstConfirmDialog(EN_messages.confirm_userChange)) {
-      this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
-        if (res) {
-          this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
-          this.utilsService.routeToByUrl(EN_Routes.wrmuall);
-        }
-      });
+    if (this.vertification(vals)) {
+
+      if (await this.firstConfirmDialog(EN_messages.confirm_userChange)) {
+        this.interfaceManagerService.POSTBODY(ENInterfaces.userEDIT, vals).subscribe((res: IResponses) => {
+          if (res) {
+            this.utilsService.snackBarMessage(res.message, ENSnackBarTimes.fiveMili, ENSnackBarColors.success);
+            this.utilsService.routeToByUrl(EN_Routes.wrmuall);
+          }
+        });
+      }
     }
+
   }
   userEditA = (UUid: string, dataSource: IUserEditManager) => {
     const vals: IAUserEditSave = {
@@ -282,7 +282,7 @@ export class UsersAllService {
     formData.append('caption', val.caption);
     formData.append('userId', val.userId);
     formData.append('file', filesList[0]);
-    
+
     return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.signalRNotifDirectImage, formData);
 
   }
