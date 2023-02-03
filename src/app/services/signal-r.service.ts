@@ -56,6 +56,9 @@ export class SignalRService {
       this.interfaceManagerService.POSTBODY(method, a).toPromise();
     });
   }
+  getConnectionStatus = (): any => {
+    return this.hubConnection.state;
+  }
   reconnectManualy = async () => {
     try {
       await this.hubConnection.start();
@@ -72,12 +75,12 @@ export class SignalRService {
       this.snackBarService.openSnackBarSignal(user + '   ' + message, ENSnackBarTimes.tenMili);
     });
   }
-  receiveTextWithTimer = () => {
+  private receiveTextWithTimer = () => {
     this.hubConnection.on(ENInterfaces.receiveTextWithTimer, (a: IMessage) => {
       this.snackBarService.openSnackBarSignal(a.title + '\n' + a.text, a.seconds, a.color);
     });
   }
-  ReceiveDirectMessage = () => {
+  private ReceiveDirectMessage = () => {
     this.hubConnection.on(ENInterfaces.ReceiveDirectMessage, (a: any) => {
       const custom = {
         severity: a.color,
@@ -90,7 +93,7 @@ export class SignalRService {
       this.snackBarService.openToastSignal(custom);
     });
   }
-  receiveImageWithCaptionMessage = () => {
+  private receiveImageWithCaptionMessage = () => {
     this.hubConnection.on(ENInterfaces.ReceiveImageWithCaption, (a: any) => {
       const custom = {
         severity: a.color,
@@ -101,7 +104,7 @@ export class SignalRService {
         key: 'image'
       }
       console.log(a);
-      
+
       this.snackBarService.openToastSignal(custom);
     });
   }
@@ -110,9 +113,6 @@ export class SignalRService {
     this.hubConnection.on(ENInterfaces.signalRMomentSystemAddReadingRow, (r: ILatestReads) => {
       this.interactionService.startLoading(r);
     })
-  }
-  getConnectionStatus = (): any => {
-    return this.hubConnection.state;
   }
 }
 // To Send Data to Server ACross WebSocket

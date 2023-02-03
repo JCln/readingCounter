@@ -308,6 +308,31 @@
                     <div class="tooltip_text_right">بازدید</div>
                 </i>
             </td>
+            <td *ngIf="_outputFileName == 'offloadedGroup'" (click)="routeToOffloadGeneralModify(dataSource)">
+                <span class="ui-column-title">اصلاح کلی لیست(دسته‌ای)</span>
+                <i class="tooltip p_icons pi pi-info">
+                    <div class="tooltip_text_right">اصلاح کلی لیست(دسته‌ای)</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'offloadedGroup' && !denyTracking()"
+                (click)="backToImportedConfirmDialog(dataSource.id, ri)">
+                <span class="ui-column-title">بازگشت به درحال قرائت</span>
+                <i class="tooltip p_icons pi pi-step-backward">
+                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'offloadedGroup'" (click)="downloadOutputSingle(dataSource)">
+                <span class="ui-column-title">دانلود فایل</span>
+                <i class="tooltip p_icons pi pi-download">
+                    <div class="tooltip_text">دانلود فایل</div>
+                </i>
+            </td>
+            <td *ngIf="_outputFileName == 'offloadedGroup'" (click)="routeToLMAll(dataSource)">
+                <span class="ui-column-title">بازدید</span>
+                <i class="tooltip p_icons pi pi-eye">
+                    <div class="tooltip_text">بازدید</div>
+                </i>
+            </td>
             <td *ngIf="                
                 _checkUpName == 'moment-ls' ||                 
                 _checkUpName == 'allComponent' ">

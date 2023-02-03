@@ -45,9 +45,6 @@ export class TrackingManagerService {
   getImportedListDetails = (): IObjectIteratation[] => {
     return this.columnManager.columnSelectedMenus('importedListDetails');
   }
-  getColumnOfflaodedGroup = (): IObjectIteratation[] => {
-    return this.columnManager.columnSelectedMenus('offloadedGroup');
-  }
   getLMPerDayFollowUpPositions = (): IObjectIteratation[] => {
     return this.columnManager.columnSelectedMenus('LMPerDayFollowUpPositions');
   }
@@ -276,20 +273,6 @@ export class TrackingManagerService {
 
       return (event.order * result);
     });
-  }
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
   }
   /*VALIDATION */
   showWarnMessage = (message: string) => this.utilsService.snackBarMessageWarn(message);

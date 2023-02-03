@@ -345,6 +345,7 @@ export enum ENSelectedColumnVariables {
     selectedTrackLoaded = 'loaded',
     selectedTrackFinished = 'finished',
     selectedTrackOffloaded = 'offloaded',
+    selectedTrackOffloadedGroup = 'offloadedGroup',
     selectedTrackImported = 'imported',
     selectedlastStates = 'lastStates',
     selectedUsersAll = 'userAll',

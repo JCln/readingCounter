@@ -204,7 +204,7 @@ export class HelpWrapperService {
     else if (currentRoute === EN_Routes.wrSettingsWaterMark)
       return {
         title: 'واتر مارک',
-        messageOne: 'جزئیات هر تصویری که بر روی آن قرار گرفته قابل ویرایش است',
+        messageOne: 'جزئیات واترمارک بر روی تصویر(عکس گرفته شده) قابل ویرایش است',
         messageTwo: 'توجه نمایید که فاصله از چپ و بالا بطور تقریبی نمایش داده میشود',
       }
   }

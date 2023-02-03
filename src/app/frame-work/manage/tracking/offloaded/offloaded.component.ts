@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
@@ -22,8 +21,7 @@ export class OffloadedComponent extends FactoryONE {
 
     public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    public outputManagerService: OutputManagerService,
-    public route: ActivatedRoute,
+    public outputManagerService: OutputManagerService,    
     private envService: EnvService
   ) {
     super();

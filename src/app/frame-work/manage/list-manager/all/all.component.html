@@ -19,8 +19,8 @@
 </section>
 
 <main style="position: relative; ">
-    <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForLMAll" [_outputFileName]="'allLists'"
-        [_checkUpName]="'allComponent'" [_sessionName]="'allLists'"
+    <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForLMAll"
+        [_outputFileName]="'allLists'" [_checkUpName]="'allComponent'" [_sessionName]="'allLists'"
         [_selectedColumnsToRemember]="'selectedListManagerAll'" [_numberOfExtraColumns]="[1,2,3]"
         [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت به صفحه قبلی'" [_isCustomSort]=true
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"

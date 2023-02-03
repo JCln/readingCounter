@@ -1,109 +1,18 @@
-<section class="content">
-    <div class="input_2">
-        <div class="_key">گروه‌بندی</div>
-        <p-dropdown name="zones" [options]="aggregateOptions"
-            [(ngModel)]="closeTabService.offloadedGroupReq._selectedAggregate" placeholder="انتخاب مورد"
-            [style]="{'min-width':'10rem','width':'100%'}" optionValue="field" optionLabel="header" filter="true"
-            (onChange)="refreshTableAfterGrouping(closeTabService.offloadedGroupReq._selectedAggregate)">
-        </p-dropdown>
-    </div>
-    <button (click)="resetAggregation()" class="btn_2_o">
-        بدون گروه‌بندی
-        <i class="pi pi-refresh"></i>
-    </button>
-</section>
-<!-- sort field must be applied to group working -->
-<p-table *ngIf="canShowTable" [columns]="selectedColumns" [value]="closeTabService.saveDataForTrackOffloadedGroup" [paginator]="true" [rows]="10"
-    [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-    [rowsPerPageOptions]="[10, 100, 1000, 5000]" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-    [sortField]="closeTabService.offloadedGroupReq._selectedAggregate" stateStorage="session" stateKey="offloaded-group"
-    sortMode="single" (onSort)="onSort()" customSort="true" (sortFunction)="trackingManagerService.customSort($event)"
-    [resizableColumns]="trackingManagerService.getLocalResizable()"
-    [reorderableColumns]="trackingManagerService.getLocalReOrderable()">
-
-    <ng-template pTemplate="caption">
-        <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns" name="selectOptions" optionLabel="header"
-            (ngModelChange)="trackingManagerService.setColumnsChanges('dataSource' ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
-        </p-multiSelect>
-        <div class="header_icons_wrap">
-            <div class="right_side">
-            </div>
-            <div class="left_side">
-            </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-
-        <tr>
-            <th pResizableColumn pReorderableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
-                <p-sortIcon field="{{col.field}}"></p-sortIcon>
-                {{col.header}}
-            </th>
-            <th pResizableColumn pReorderableColumn style="width: 2.5rem"
-                *ngFor="let item of trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"></th>
-        </tr>
-        <tr>
-            <th pResizableColumn pReorderableColumn *ngFor="let col of columns">
-                <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
-                </p-columnFilter>
-                <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
-            </th>
-            <th pResizableColumn pReorderableColumn style="width: 2.5rem"
-                *ngFor="let item of trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"></th>
-        </tr>
-
-    </ng-template>
-
-    <ng-template pTemplate="body" let-dataSource let-columns="columns" let-ri=rowIndex>
-        <tr class="_anything"
-            *ngIf="_canShowGroupBorder && rowGroupMetadata[dataSource[closeTabService.offloadedGroupReq._selectedAggregate]].index === ri">
-            <td>
-                <span>{{dataSource[closeTabService.offloadedGroupReq._selectedAggregate]}}</span>
-            </td>
-        </tr>
-        <tr>
-            <td *ngFor="let col of columns">
-                <span class="ui-column-title">{{col.header}}</span>
-                <ng-container *ngIf="col.isBoolean; else simple">
-                    <mat-checkbox [disabled]="true" name="isBoolean" [(ngModel)]="dataSource[col.field]">
-                    </mat-checkbox>
-                </ng-container>
-                <ng-template #simple>
-                    {{dataSource[col.field]}}
-                </ng-template>
-            </td>
-            <td (click)="routeToOffloadGeneralGroupModify(dataSource)">
-                <span class="ui-column-title">اصلاح کلی لیست(دسته‌ای)</span>
-                <i class="tooltip p_icons pi pi-info">
-                    <div class="tooltip_text_right">اصلاح کلی لیست(دسته‌ای)</div>
-                </i>
-            </td>
-            <td *ngIf="!trackingManagerService.denyTracking()" (click)="backToReading(dataSource)">
-                <span class="ui-column-title">بازگشت به درحال قرائت</span>
-                <i class="tooltip p_icons pi pi-step-backward">
-                    <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
-                </i>
-            </td>
-            <td (click)="downloadOutputSingle(dataSource)">
-                <span class="ui-column-title">دانلود فایل</span>
-                <i class="tooltip p_icons pi pi-download">
-                    <div class="tooltip_text">دانلود فایل</div>
-                </i>
-            </td>
-            <td (click)="routeToAssessPre(dataSource)">
-                <span class="ui-column-title">بازدید</span>
-                <i class="tooltip p_icons pi pi-eye">
-                    <div class="tooltip_text">بازدید</div>
-                </i>
-            </td>
-        </tr>
-    </ng-template>
-
-</p-table>
-
-<section *ngIf="!closeTabService.saveDataForTrackOffloadedGroup">
-    <tr class="empty_data">
-        موردی پیدا نشد
-    </tr>
-</section>
+<app-prime-table 
+    [dataSource]="closeTabService.saveDataForTrackOffloadedGroup" 
+    [_outputFileName]="'offloadedGroup'"
+    [_checkUpName]="'offloadedGroup'"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"
+    [_calculableSUM]=true
+    [_hasAggregating]= true
+    [_isCustomSort]=true
+    [_selectedColumnsToRemember]="'selectedTrackOffloadedGroup'"
+    [_sessionName]="'offloaded-group'"
+    (refreshedTable)="refreshTable()"
+    (customedSort)="trackingManagerService.customSort($event)"
+    (downloadedOutputSingle)="downloadOutputSingle($event)"            
+    (routedToOffloadGeneralModify)="routeToOffloadGeneralGroupModify($event)"        
+    (backedToImportedConfirmDialog)="backToReading($event)"
+    (routedToLMAll)="routeToAssessPre($event)"        
+ > 
+</app-prime-table>

@@ -57,18 +57,18 @@ export class AllComponent extends AllListsFactory {
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
 
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'karbariCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'possibleKarbariCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.deleteDictionary, 'hazf');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.qotrDictionary, 'qotrCode');
+
       const tempZone: number = parseInt(this.closeTabService.saveDataForLMAll[0].zoneId.toString());
-      console.log(tempZone);
       if (tempZone) {
         this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
         this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
         Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.counterStateByCodeDictionary, 'preCounterStateCode');
         Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.counterStateDictionary, 'counterStateId');
       }
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'possibleKarbariCode');
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.deleteDictionary, 'hazf');
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'karbariCode');
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.qotrDictionary, 'qotrCode');
     }
   }
   toPrePage = () => {

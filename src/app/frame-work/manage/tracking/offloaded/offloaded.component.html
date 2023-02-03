@@ -1,4 +1,4 @@
-<app-prime-table *ngIf="route.children.length === 0"     
+<app-prime-table
     [dataSource]="closeTabService.saveDataForTrackOffloaded" 
     [_outputFileName]="'offloaded'"
     [_checkUpName]="'offloaded'"
@@ -17,5 +17,3 @@
     (routedToLMAll)="routeToAssessPre($event)"        
  > 
 </app-prime-table>
-
-<router-outlet></router-outlet>
