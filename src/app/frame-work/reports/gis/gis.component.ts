@@ -42,6 +42,7 @@ export class GisComponent extends FactoryONE {
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService
@@ -52,12 +53,17 @@ export class GisComponent extends FactoryONE {
   getCounterStateByZoneId = async () => {
     this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneIdDictionary(this.readingReportManagerService.gisReq.zoneId);
   }
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.gisReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.gisReq.zoneId);
+  }
   classWrapper = async (canRefresh?: boolean) => {
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.getCounterStateByZoneId();
     this.receiveYear();
     this.readingReportManagerService.getSearchInOrderTo();
+    this.getFragmentByZone();
   }
 
   receiveYear = () => {

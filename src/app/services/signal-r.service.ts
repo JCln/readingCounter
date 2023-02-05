@@ -103,10 +103,9 @@ export class SignalRService {
         icon: 'pi pi-image',
         key: 'image',
         fileRepositoryId: a.fileRepositoryId,
-        sender: a.sender
+        sender: a.sender,
+        caption: a.caption
       }
-      console.log(a);
-
       this.snackBarService.openToastSignal(custom);
     });
   }

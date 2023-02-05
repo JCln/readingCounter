@@ -4,7 +4,11 @@
     <div class="img_wrapper">
 
         <div *ngIf="originImage" class="__img_bound">
-            <img src="{{originImage}}" onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'" alt="تصویر">
+            <figure>
+                <img src="{{originImage}}" onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'"
+                    alt="تصویر">
+                <figcaption>{{config.data.body.caption}}</figcaption>
+            </figure>
         </div>
 
     </div>

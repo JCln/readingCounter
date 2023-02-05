@@ -13,11 +13,12 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent extends FactoryONE {
-  karbariByCodeDictionary: IDictionaryManager[] = [];
 
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  karbariByCodeDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
 
@@ -29,6 +30,10 @@ export class DetailsComponent extends FactoryONE {
     super();
   }
 
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.detailsReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.detailsReq.zoneId);
+  }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForRRDetails = null;
@@ -39,6 +44,7 @@ export class DetailsComponent extends FactoryONE {
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
+    this.getFragmentByZone();
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();

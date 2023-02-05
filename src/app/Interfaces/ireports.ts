@@ -97,7 +97,8 @@ export interface IReadingReportGISReq {
     year: number,
     fromDate: string,
     toDate: string,
-    isCluster: boolean
+    isCluster: boolean,
+    fragmentMasterIds?: string[]
 }
 export interface IReadingReportGISResponse {
     x: string,

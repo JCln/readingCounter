@@ -163,7 +163,7 @@ export class MapComponent implements OnInit, OnDestroy {
       year: parseInt(this.route.snapshot.paramMap.get('year')),
       fromDate: this.route.snapshot.paramMap.get('fromDate'),
       toDate: this.route.snapshot.paramMap.get('toDate'),
-      isCluster: this.route.snapshot.paramMap.get('isCluster') === 'true' ? true : false,
+      isCluster: this.route.snapshot.paramMap.get('isCluster') === 'true' ? true : false
     }
   }
   private classWrapperCluster = async () => {
