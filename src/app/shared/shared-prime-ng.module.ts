@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SliderModule } from 'primeng/slider';
@@ -51,7 +51,7 @@ import { PrimeTableComponent } from './prime-table/prime-table.component';
   entryComponents: [
     ImageViewerComponent,
   ],
-  providers: [DialogService]
+  providers: []
 })
 export class SharedPrimeNgModule {
   static forRoot(): ModuleWithProviders<SharedPrimeNgModule> {

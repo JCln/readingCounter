@@ -5,12 +5,14 @@ import { GalleriaModule } from 'primeng/galleria';
 
 import { CarouselWoumComponent } from './carousel-woum/carousel-woum.component';
 import { WoumComponent } from './carousel-woum/woum/woum.component';
+import { ShowImgDgComponent } from './show-img-dg/show-img-dg.component';
 
 
 @NgModule({
     declarations: [
         CarouselWoumComponent,
-        WoumComponent
+        WoumComponent,
+        ShowImgDgComponent
     ],
     imports: [
         FormsModule,
@@ -20,6 +22,7 @@ import { WoumComponent } from './carousel-woum/woum/woum.component';
     exports: [
         CarouselWoumComponent,
         WoumComponent,
+        ShowImgDgComponent,
         CommonModule,
         FormsModule,
         GalleriaModule

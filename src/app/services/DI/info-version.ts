@@ -1,18 +1,13 @@
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 
 export enum ENLoginVersion {
-    version = '0.9.96'
+    version = '0.9.97'
 }
 
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
-        title: 'نوبتی',
-        isSelected: true
-    },
-    {
-        id: '2',
-        title: 'بهبود عملکرد برنامه',
+        title: 'برخی تغییرات جزئی',
         isSelected: true
     },
     {

@@ -35,7 +35,7 @@ export class MapDgComponent implements OnInit {
     this.flyToDes(items.y, items.x, 12);
     L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
       .bindPopup(
-        `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${'ش.پ :' + items.trackNumber}`
+        `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${items.trackNumber ? 'ش.پ :' + items.trackNumber : ''}`
       );
   }
   private simpleMarkSingleLocation = (x: string, y: string) => {

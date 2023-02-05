@@ -63,7 +63,6 @@ export class LatestReadsComponent extends AllListsFactory {
 
   classWrapper = async (canRefresh?: boolean) => {
     this.initMap();
-
     if (this.closeTabService.saveDataForMomentLastRead) {
       this.markMultipleLocations(this.closeTabService.saveDataForMomentLastRead);
     }

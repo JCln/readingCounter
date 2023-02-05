@@ -6,6 +6,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { GlobalErrorHandlerService } from 'services/global-error-handler.service';
 
@@ -56,6 +57,7 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     MatSnackBarModule,
     MatDialogModule,
     SharedThreeModule,
+
     BrowserAnimationsModule,
     ProgressSpinnerModule,
     CoreRoutingModule
@@ -80,7 +82,8 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true },
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
-    MessageService
+    MessageService,
+    DialogService
   ]
 })
 export class CoreModule {

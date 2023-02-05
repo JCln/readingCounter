@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISnackBar, ISnackBarSignal } from 'interfaces/ioverall-config';
 import { MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { MathS } from 'src/app/classes/math-s';
+import { ShowImgDgComponent } from 'src/app/shared/show-img-dg/show-img-dg.component';
 
 @Component({
   selector: 'app-snack-bar',
@@ -11,11 +13,13 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./snack-bar.component.scss']
 })
 export class SnackBarComponent implements OnInit {
+  ref: DynamicDialogRef;
 
   constructor(
     private _snackBar: MatSnackBar,
     private snackWrapperService: SnackWrapperService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public dialogService: DialogService
   ) { }
 
   openSnackBar(snack: ISnackBar) {
@@ -69,7 +73,16 @@ export class SnackBarComponent implements OnInit {
   }
   openImgDialog = (body: object) => {
     console.log(body);
-    
+    this.ref = this.dialogService.open(ShowImgDgComponent, {
+      data: { body },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
   }
 
 }

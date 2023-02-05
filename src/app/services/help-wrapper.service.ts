@@ -178,7 +178,7 @@ export class HelpWrapperService {
     else if (currentRoute === EN_Routes.wrflashlr)
       return {
         title: 'آخرین قرائت ماموران',
-        messageOne: 'با هر قرائت توسط مامور یک نقطه روی نقشه زده خواهد شد و در جدول جزئیات آنرا خواهید دید.',
+        messageOne: 'اشتراک درحال قرائت برروی نقشه و با جزئیات بیشتر در جدول بطور لحظه‌ای قابل مشاهده است .',
       }
     else if (currentRoute === EN_Routes.realtimeMessage)
       return {
