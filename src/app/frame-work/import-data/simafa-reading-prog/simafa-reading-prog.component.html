@@ -6,7 +6,8 @@
                     <div class="_key">ناحیه</div>
                     <p-dropdown name="zones" [options]="zoneDictionary"
                         [(ngModel)]="closeTabService.importSimafaReadingProgramReq.zoneId" placeholder="انتخاب مورد"
-                        [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                        [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
+                        filter="true">
                     </p-dropdown>
                 </div>
                 <div class="input_2">
@@ -49,9 +50,10 @@
 </main>
 
 <app-prime-table *ngIf="route.children.length === 0" [dataSource]="closeTabService.saveDataForSimafaReadingPrograms"
-    [_outputFileName]="'simafaReadingProgram'" [_checkUpName]="'simafa-readingProg'" [_sessionName]="'simafardpg-session'"
-    [_selectedColumnsToRemember]="'selectedSimafaReadingProgram'" [_numberOfExtraColumns]="[1, 2]"
-    (refreshedTable)="refreshTable()" (routedToBatch)="routeToBatch($event)" (routedToSingle)="routeToSingle($event)">
+    [_outputFileName]="'simafaReadingProgram'" [_checkUpName]="'simafa-readingProg'"
+    [_sessionName]="'simafardpg-session'" [_selectedColumnsToRemember]="'selectedSimafaReadingProgram'"
+    [_numberOfExtraColumns]="[1, 2]" (refreshedTable)="refreshTable()" (routedToBatch)="routeToBatch($event)"
+    (routedToSingle)="routeToSingle($event)">
 </app-prime-table>
 
 <router-outlet></router-outlet>

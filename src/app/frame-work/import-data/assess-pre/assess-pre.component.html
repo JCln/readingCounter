@@ -41,7 +41,8 @@
                 <h3 class="title">گزارش کنتور</h3>
                 <p-multiSelect [maxSelectedLabels]="2" [options]="counterReportDictionary" name="counterReport"
                     [(ngModel)]="closeTabService.saveDataForAssessPreReq.reportIds" optionLabel="title" optionValue="id"
-                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد"
+                    [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
             <article *ngIf="counterStateDictionary.length">
@@ -49,7 +50,7 @@
                 <p-multiSelect [maxSelectedLabels]="2" [options]="counterStateDictionary" name="counterState"
                     [(ngModel)]="closeTabService.saveDataForAssessPreReq.counterStateIds" optionLabel="title"
                     optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                    placeholder="انتخاب مورد">
+                    placeholder="انتخاب مورد" [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
             <article *ngIf="karbariDictionary.length">
@@ -57,7 +58,7 @@
                 <p-multiSelect [maxSelectedLabels]="2" [options]="karbariDictionary" name="karbari"
                     [(ngModel)]="closeTabService.saveDataForAssessPreReq.karbariCodes" optionLabel="title"
                     optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                    placeholder="انتخاب مورد">
+                    placeholder="انتخاب مورد" [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
 

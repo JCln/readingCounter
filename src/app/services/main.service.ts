@@ -13,10 +13,9 @@ export class MainService {
 
   GET = (URL: string, base64?: string) => {
     if (base64) {
-      return this.http.get(this.environment.API_URL + '/' + URL + '/' + base64).pipe(
-      )
+      return this.http.get(this.environment.API_URL + '/' + URL + '/' + base64);
     } else {
-      return this.http.get(this.environment.API_URL + '/' + URL)
+      return this.http.get(this.environment.API_URL + '/' + URL);
       // .pipe(
       // retry(1) retry failed request up to 1
       // catchError(err => this.errorHandler.errorHandler(err))

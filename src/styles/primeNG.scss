@@ -144,6 +144,7 @@
   .p-multiselect-panel .p-multiselect-header {
     background: var(--white);
     color: var(--secondary_8);
+    padding: 0;
   }
 
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
@@ -320,7 +321,7 @@
   .p-datatable-resizable .p-datatable-tfoot>tr>td,
   .p-datatable-resizable .p-datatable-thead>tr>th {
     overflow: inherit;
-    white-space: normal;    
+    white-space: normal;
   }
 
   .p-datatable .p-datatable-thead>tr>th {

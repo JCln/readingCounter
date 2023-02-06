@@ -100,13 +100,14 @@ export class UsersAllService {
       })
     });
   }
-  firstConfirmDialog = (reason: EN_messages, reasonTwo?: EN_messages): Promise<any> => {
+  firstConfirmDialog = (reason: EN_messages, reasonTwo?: EN_messages, doesNotReturnButton?: boolean): Promise<any> => {
     const a = {
       messageTitle: reason,
       messageTitle2: reasonTwo,
       minWidth: '19rem',
       isInput: false,
-      isDelete: true
+      isDelete: true,
+      doesNotReturnButton: doesNotReturnButton
     }
     return this.utilsService.firstConfirmDialog(a);
   }

@@ -130,6 +130,9 @@ a:active {
       color: var(--secondary_8);
     }
 
+    .mat-dialog-actions {
+      justify-content: flex-end;
+    }
   }
 
 }

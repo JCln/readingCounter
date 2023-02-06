@@ -38,14 +38,15 @@ $border_15: 10px;
   padding-right: var(--font_05);
   display: flex;
   align-items: center;
-  margin: auto;
   white-space: nowrap;
+  min-width: var(--font_3);
+  text-align: center;
+  // margin: auto;
 }
 
 ._value {
   border-radius: inherit;
   margin: .2em;
-  max-width: 52%;
   width: 100%;
   flex: 1;
   text-align: center;

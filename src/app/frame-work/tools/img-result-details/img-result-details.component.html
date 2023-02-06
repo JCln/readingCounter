@@ -17,7 +17,7 @@
                     <p-multiSelect [maxSelectedLabels]="2" [options]="imageAttrAllDictionary" name="imgAttr"
                         [(ngModel)]="toolsService.imgResultDetails.imageAttributionIds" optionLabel="title"
                         optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '200px'}"
-                        placeholder="انتخاب مورد">
+                        placeholder="انتخاب مورد" [filter]="true" showClear="true">
                     </p-multiSelect>
                 </div>
                 <div class="input_2">

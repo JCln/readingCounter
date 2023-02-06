@@ -8,8 +8,8 @@
                     <div class="_value">
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.zoneId"
-                            placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id" optionLabel="title"
-                            filter="true" (onChange)="verificationACounterReaderId()">
+                            placeholder="انتخاب مورد" [style]="{minWidth: '10rem','width':'100%'}" optionValue="id"
+                            optionLabel="title" filter="true" (onChange)="verificationACounterReaderId()">
                         </p-dropdown>
                     </div>
                 </div>

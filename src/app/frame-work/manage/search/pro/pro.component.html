@@ -42,7 +42,7 @@
 
                 <span class="ui-float-label" [hidden]="searchService._isOrderByDate">
                     <label for="float-input">نوع دوره</label>
-                    <p-dropdown [style]="{minWidth: '100%'}" name="kindId" #kindId
+                    <p-dropdown [style]="{'minWidth': '10rem','width': '100%'}" name="kindId" #kindId
                         [options]="readingPeriodKindDictionary" name="_selectedKindId"
                         [(ngModel)]="closeTabService.saveDataForSearchProReq._selectedKindId" optionLabel="title"
                         [filter]="true" filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
@@ -52,10 +52,10 @@
 
                 <span class="ui-float-label" [hidden]="!readingPeriodDictionary.length || searchService._isOrderByDate">
                     <label for="float-input">دوره قرائت</label>
-                    <p-dropdown [style]="{minWidth: '100%'}" name="period" #period [options]="readingPeriodDictionary"
-                        name="readingPeriodId" [(ngModel)]="closeTabService.saveDataForSearchProReq.readingPeriodId"
-                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
-                        placeholder="انتخاب مورد">
+                    <p-dropdown [style]="{'minWidth': '10rem','width': '100%'}" name="period" #period
+                        [options]="readingPeriodDictionary" name="readingPeriodId"
+                        [(ngModel)]="closeTabService.saveDataForSearchProReq.readingPeriodId" optionLabel="title"
+                        [filter]="true" filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد">
                     </p-dropdown>
                 </span>
 
@@ -82,14 +82,15 @@
                 <p-multiSelect [maxSelectedLabels]="2" [options]="masrafState" name="masraf"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.masrafStates" optionLabel="header"
                     optionValue="value" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                    placeholder="انتخاب مورد">
+                    placeholder="انتخاب مورد" [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
             <article *ngIf="counterReportDictionary.length">
                 <h3 class="title">گزارش کنتور</h3>
                 <p-multiSelect [maxSelectedLabels]="2" [options]="counterReportDictionary" name="counterReport"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.reportIds" optionLabel="title" optionValue="id"
-                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد">
+                    selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}" placeholder="انتخاب مورد"
+                    [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
             <article *ngIf="counterStateByZoneIdDictionary.length">
@@ -97,7 +98,7 @@
                 <p-multiSelect [maxSelectedLabels]="2" [options]="counterStateByZoneIdDictionary" name="counterState"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.counterStateIds" optionLabel="title"
                     optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                    placeholder="انتخاب مورد">
+                    placeholder="انتخاب مورد" [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
             <article *ngIf="karbariDictionary.length">
@@ -105,7 +106,7 @@
                 <p-multiSelect [maxSelectedLabels]="2" [options]="karbariDictionary" name="karbari"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.karbariCodes" optionLabel="title"
                     optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                    placeholder="انتخاب مورد">
+                    placeholder="انتخاب مورد" [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
             <article *ngIf="fragmentMasterIds.length">
@@ -113,7 +114,7 @@
                 <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentMasterIds" name="fragmentId"
                     [(ngModel)]="closeTabService.saveDataForSearchProReq.fragmentMasterIds" optionLabel="routeTitle"
                     optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '100%'}"
-                    placeholder="انتخاب مورد">
+                    placeholder="انتخاب مورد" [filter]="true" showClear="true">
                 </p-multiSelect>
             </article>
 

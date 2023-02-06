@@ -40,7 +40,8 @@
             <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
                 optionLabel="header"
                 (ngModelChange)="columnManager.setColumnsChanges(listManagerService.ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-                selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+                selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها"
+                [filter]="true" showClear="true">
             </p-multiSelect>
 
             <div class="header_icons_wrap">
@@ -99,7 +100,7 @@
                             <p-multiSelect [maxSelectedLabels]="2" [ngModel]="value"
                                 [options]="counterStateByZoneDictionary"
                                 (onChange)="filterOptions($event,'counterStateId', 1)" optionLabel="title"
-                                optionValue="title">
+                                optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -114,7 +115,7 @@
                             <p-multiSelect [maxSelectedLabels]="2" [ngModel]="value"
                                 [options]="counterStateByCodeDictionary"
                                 (onChange)="filterOptions($event,'preCounterStateCode', 2)" optionLabel="title"
-                                optionValue="title">
+                                optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -140,7 +141,7 @@
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <p-dropdown name="modify" [options]="modifyType" [(ngModel)]="dataSource[col.field]"
-                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}"
+                                        placeholder="انتخاب مورد" [style]="{'minWidth': '10rem','width':'100%'}"
                                         [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                         (onChange)="clickedDropDowns(dataSource[col.field], 'modifyType' , dataSource.id)">
                                     </p-dropdown>
@@ -156,8 +157,8 @@
                                     <ng-template pTemplate="input">
                                         <p-dropdown [options]="counterStateByZoneDictionary"
                                             [(ngModel)]="dataSource[col.field]" placeholder="انتخاب مورد"
-                                            [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
-                                            optionLabel="title"
+                                            [style]="{'minWidth': '10rem','width':'100%'}"
+                                            [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                             (onChange)="clickedDropDowns(dataSource[col.field], 'counterStateId' , dataSource.id)">
                                         </p-dropdown>
                                     </ng-template>

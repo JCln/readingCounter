@@ -13,6 +13,7 @@ export interface IDialogMessage {
   minWidth: string,
   isInput: boolean,
   isDelete: boolean,
+  doesNotReturnButton?: boolean
 }
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,7 @@ export class UtilsService {
     this.snackWrapperService.openSnackBar(message, time, color);
   }
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
+    config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true    
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: config.minWidth,
@@ -84,6 +86,7 @@ export class UtilsService {
           title2: config.messageTitleTwo,
           isInput: config.isInput,
           isDelete: config.isDelete,
+          doesNotReturnButton: config.doesNotReturnButton
         }
       });
       dialogRef.afterClosed().subscribe(desc => {

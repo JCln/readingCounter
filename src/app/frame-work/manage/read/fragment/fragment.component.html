@@ -81,7 +81,8 @@
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
-                                [placeholder]="dataSource.zoneId" [style]="{'width':'100%'}" optionLabel="title">
+                                [placeholder]="dataSource.zoneId" [style]="{'minWidth': '10rem','width':'100%'}"
+                                optionLabel="title">
                             </p-dropdown>
                         </ng-template>
                         <ng-template pTemplate="output">

@@ -19,8 +19,8 @@
                         <div class="_key">ناحیه</div>
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="readingReportManagerService.karkardOffloadReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true"
-                            (onChange)="getFragmentByZone()">
+                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
+                            filter="true" (onChange)="getFragmentByZone()">
                         </p-dropdown>
                     </div>
                     <div class="input_2">
@@ -28,7 +28,7 @@
                         <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
                             [(ngModel)]="readingReportManagerService.karkardOffloadReq.fragmentMasterIds"
                             optionLabel="routeTitle" optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده"
-                            [style]="{minWidth: '150px'}" placeholder="انتخاب مورد">
+                            [style]="{minWidth: '150px'}" placeholder="انتخاب مورد" [filter]="true" showClear="true">
                         </p-multiSelect>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">

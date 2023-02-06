@@ -84,6 +84,10 @@
   .mat-form-field-appearance-fill .mat-form-field-flex {
     background-color: var(--secondary_3);
   }
+
+  .mat-dialog-actions {
+    justify-content: flex-end;
+  }
 }
 
 .radio_group {

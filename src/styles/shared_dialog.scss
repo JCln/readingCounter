@@ -47,7 +47,8 @@
 
 .mat-dialog-actions {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
+  gap: var(--font_xs);
 }
 
 .mat-checkbox {
@@ -72,7 +73,7 @@
   &:focus,
   &:active {
     background: var(--secondary_5);
-    box-shadow: 0px 1px 0px 2px var(--secondary_5);
+    box-shadow: 0px 2px 1px 1px var(--secondary_4);
   }
 }
 
@@ -83,8 +84,6 @@
   &:active {
     color: var(--primary_1);
     background: var(--primary_2);
-
-    // box-shadow: 0 1px 0 2px var(--primary_3);
   }
 }
 
@@ -94,7 +93,6 @@ h2 {
   font-size: var(--font_l);
   font-weight: 600;
   color: var(--primary_4);
-  border: 2px solid var(--primary_4);
   border-radius: 15px;
   padding: var(--font_xs);
 }

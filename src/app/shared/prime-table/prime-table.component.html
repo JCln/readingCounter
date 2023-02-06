@@ -22,7 +22,8 @@
         <p-multiSelect [maxSelectedLabels]="2" *ngIf="_multiSelectEnable" [options]="_selectCols"
             [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها" [filter]="true"
+            showClear="true">
         </p-multiSelect>
 
         <div class="header_icons_wrap">
