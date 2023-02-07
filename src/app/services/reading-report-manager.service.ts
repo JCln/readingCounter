@@ -53,6 +53,7 @@ export class ReadingReportManagerService {
   _isCollapsedAllImgs: boolean = true;
 
   masterReq: IReadingReportReq = {
+    zoneId: null,
     fromDate: '',
     toDate: '',
     counterReaderId: '',
@@ -70,6 +71,7 @@ export class ReadingReportManagerService {
     year: this.utilsService.getFirstYear()
   };
   imgAttrAnalyzeReq: IReadingReportReq = {
+    zoneId: null,
     fromDate: '',
     toDate: '',
     counterReaderId: '',
@@ -80,7 +82,7 @@ export class ReadingReportManagerService {
   userKarkardReq: IUserKarkardInput = {
     fromDate: '',
     toDate: '',
-    zoneId: 0,
+    zoneId: null,
     statusId: 0
   };
   detailsReq: IReadingReportReq = {

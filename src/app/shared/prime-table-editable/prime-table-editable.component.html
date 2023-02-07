@@ -106,8 +106,8 @@
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
                                     [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
-                                    [style]="{'minWidth': '10rem','width':'100%'}"
-                                    [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                    [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
+                                    optionLabel="title"
                                     (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
                                     [filter]="true" [showClear]="true">
                                 </p-dropdown>
@@ -122,8 +122,7 @@
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <p-dropdown [options]="secondDictionary" [(ngModel)]="dataSource[col.field]"
-                                        [placeholder]="dataSource[col.field]"
-                                        [style]="{'minWidth': '10rem','width':'100%'}"
+                                        [placeholder]="dataSource[col.field]" [style]="{'width':'100%'}"
                                         [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                         (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
                                         [filter]="true">

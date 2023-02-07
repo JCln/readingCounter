@@ -241,7 +241,7 @@ export class CloseTabService {
   saveDataForRRLocked: IOnOffLoadFlat[] = [];
   saveDataForRRMaster: IReadingReportMaster[];
   saveDataForImageAttrResult: IImageAttributionResult[];
-  saveDataForImageAttrAnalyze: IImageAttributionAnalyze[];
+  saveDataForImageAttrAnalyze: IImageAttributionAnalyze[] = [];
   saveDataForRRPerformance: IAnalyzeRes[];
   saveDataForDMAAnalyze: IReadingTimeRes[];
   saveDataForRRDetails: IReadingReportDetails[];

@@ -14,7 +14,6 @@ import { MathS } from 'src/app/classes/math-s';
 export class ImageAttrFileAnalyzeComponent extends FactoryONE {
   chartColors: any[];
 
-  _isOrderByDate: boolean = true;
   zoneDictionary: IDictionaryManager[] = [];
 
   constructor(
@@ -32,7 +31,8 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.imgAttrAnalyzeReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.imgAttrAnalyzeReq, true);
+
     if (temp)
       this.connectToServer();
   }

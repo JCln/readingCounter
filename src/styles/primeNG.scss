@@ -32,7 +32,7 @@
   .p-datatable .p-datatable-tbody>tr>td {
     text-align: center;
     font-weight: 600;
-    padding: var(--font_05) var(--font_01);
+    padding: var(--font_01);
     border: 1px solid var(--secondary_2);
   }
 
@@ -335,7 +335,7 @@
 
   footer,
   .footer {
-    text-align: center;
+    text-align: right;
   }
 
   p-cellEditor {

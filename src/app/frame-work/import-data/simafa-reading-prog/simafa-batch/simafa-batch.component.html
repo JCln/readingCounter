@@ -91,7 +91,7 @@
                                 <div *ngIf="!dataSource.counterReaderName">
                                     <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
                                         [(ngModel)]="allImportsService.allImports_batch.routeAndReaderIds[ri].counterReaderId"
-                                        placeholder="انتخاب مورد" [style]="{'minWidth': '10rem','width':'100%'}"
+                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}"
                                         optionValue="id" optionLabel="title" [filter]="true" [showClear]="true">
                                     </p-dropdown>
                                 </div>

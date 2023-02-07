@@ -102,7 +102,7 @@ export class ListManagerService {
   }
   getLM = (method: ENInterfaces | string, trackNumber: number | string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, trackNumber).subscribe(res => {
+      this.interfaceManagerService.GETByQuote(method, trackNumber).toPromise().then(res => {
         resolve(res);
       })
     })

@@ -37,7 +37,7 @@ export class HelpWrapperService {
       return {
         title: 'مشاهده نقشه',
         messageOne: '1-	امکان استفاده از دو لایه ظاهری2-	پرینت نقشه بصورت عمودی و افقی3-	بزرگ و کوچک کردن نقشه4-	بارگذاری مجدد نقشه درصورت خطا در نمایش احتمالی5-	مکان یابی6-	حذف تمامی لایه ها',
-        imgOne: 'assets/imgs/help/wr1.PNG'
+        imgOne: 'assets/imgs/help/wr1.jpg'
       }
     if (currentRoute === EN_Routes.wrdb)
       return {
@@ -85,7 +85,14 @@ export class HelpWrapperService {
         messageTwo: 'برای افزودن یک ناحیه، پس از کلیک برروی گزینه افزودن مطابق تصویر و کامل کردن مقادیر خواسته شده، ناحیه ای ایجاد میشود، نکته حائز اهمیت مقدار منطقه است که یکی از مقادیر موجود در مناطق خودگردان است.',
         messageThree: 'امکان جستجو، ویرایش، حذف و افزودن مطابق تصویر می‌باشد.',
       }
-    else if (currentRoute === EN_Routes.wrmrkar || currentRoute === EN_Routes.wrmrrcd || currentRoute === EN_Routes.wrmrcs || currentRoute === EN_Routes.wrmrrpk || currentRoute === EN_Routes.wrmrrp || currentRoute === EN_Routes.wrmrqtr)
+    else if (
+      currentRoute === EN_Routes.wrmrkar ||
+      currentRoute === EN_Routes.wrmrrcd ||
+      currentRoute === EN_Routes.wrmrcs ||
+      currentRoute === EN_Routes.wrmrrpk ||
+      currentRoute === EN_Routes.wrmrrp ||
+      currentRoute === EN_Routes.wrmrrpt
+    )
       return {
         title: 'مدیریت قرائت',
         messageOne: 'برای مشاهده، شخصی سازی و کنترل بخش های مدیریت قرائت درنظر گرفته شده است. این قسمت شامل کنترل بخش های کاربری، تنظیمات پیش فرض، وضعیت کنتور و ... است.',
@@ -96,6 +103,21 @@ export class HelpWrapperService {
       return {
         title: 'مدیریت apk',
         messageOne: 'این بخش به دو قسمت نسخه های گذشته و جدید تقسیم میشود. درصورتی که نیاز به استفاده از apk قبلی بود برروی دانلود فایل کلیک نمایید. برای ایجاد نسخه جدید با وارد کردن نام، کد و فایل نسخه به ایجاد نسخه جدید اقدام نمود. ',
+      }
+    else if (currentRoute === EN_Routes.wrmrqtr)
+      return {
+        title: 'قطر کنتور',
+        messageOne: 'این بخش جهت مدیریت قطر انشعاب درنظر گرفته شده است',
+      }
+    else if (currentRoute === EN_Routes.wrmrimgattr)
+      return {
+        title: 'توصیف تصاویر',
+        messageOne: 'جهت اصلاح تصاویر در سایر بخش ها، علت اصلاح تصویر در این بخش تعریف می‌شود.',
+      }
+    else if (currentRoute === EN_Routes.wrmrtxtout)
+      return {
+        title: 'تکست خروجی',
+        messageOne: 'مدیریت چیدمان فایل تکست خروجی جهت ادغام با نرم افزار امور مشترکین استفاده می‌شود. ',
       }
     else if (currentRoute === EN_Routes.wrimpimd)
       return {
@@ -339,8 +361,9 @@ export class HelpWrapperService {
         title: 'نوبتی',
         messageOne: 'اطلاعات کلی نوبتی در این بخش قابل مشاهده است',
         imgOne: 'assets/imgs/help/fragment/nob2.JPG',
-        messageTwo: 'با ورود به بخش مدیریت مسیر ها، امکان ایجاد مسیر/ها برای بازه‌/ها اشتراکی وجود دارد.',
-        messageThree: 'امکان افزودن، ویرایش، مشاهده جزئیات و حذف هر مورد نیز وجود دارد. ستون تایید شده به معنای تایید تمامی زیر مجوعه ها در یک مسیر است. درصورتی که مشکلی در ایجاد و ویرایش وجود داشته باشد سیستم بطور خودکار  پیامی برای اصلاح موارد لازم نمایش خواهد داد. ',
+        messageTwo: 'با ورود به بخش مدیریت مسیر ها، امکان ایجاد مسیر/ها برای بازه‌/ها اشتراکی وجود دارد. امکان افزودن، ویرایش، مشاهده جزئیات و حذف هر مورد نیز وجود دارد. ستون تایید شده به معنای تایید تمامی زیر مجوعه ها در یک مسیر است. درصورتی که مشکلی در ایجاد و ویرایش وجود داشته باشد سیستم بطور خودکار  پیامی برای اصلاح موارد لازم نمایش خواهد داد.',
+        imgTwo: 'assets/imgs/help/fragment/autoImport.JPG',
+        messageThree: 'با کلیک برروی صدور لیست خودکار، از این پس برنامه بطور خودکار لیست صادر می‌کند. به این منظور تنها نیاز به تنظیم اولیه اطلاعات مطابق شکل وجود دارد.',
       }
     else if (currentRoute.includes(EN_Routes.wrmtrack))
       return {

@@ -40,7 +40,13 @@ export class FragmentComponent extends FactoryONE {
   ) {
     super();
   }
-
+  clickedDropDowns = (event: any, element: string, dataId: any) => {
+    for (let index = 0; index < this.closeTabService.saveDataForFragmentNOB.length; index++) {
+      if (this.closeTabService.saveDataForFragmentNOB[index].id === dataId) {
+        this.closeTabService.saveDataForFragmentNOB[index][element] = event.title;
+      }
+    }
+  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
@@ -76,34 +82,26 @@ export class FragmentComponent extends FactoryONE {
   onRowEditInit(dataSource: any) {
     this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
   }
-  onRowEditSave(dataSource: IFragmentMaster, rowIndex: number) {
+  onRowEditSave = async (dataSource: IFragmentMaster, rowIndex: number) => {
     this.newRowLimit = 1;
-    if (!this.fragmentManagerService.verificationMaster(dataSource)) {
+    dataSource.zoneId = dataSource.zoneId['id'];
+    if (this.fragmentManagerService.masterValidation(dataSource)) {
       if (dataSource.isNew) {
         this.closeTabService.saveDataForFragmentNOB.shift();
-        return;
-      }
-      this.closeTabService.saveDataForFragmentNOB[rowIndex] = this.clonedProducts[dataSource.id];
-      return;
-    }
-    dataSource.zoneId = dataSource.zoneId['id'];
-    if (!dataSource.id) {
-      this.onRowAdd(dataSource, rowIndex);
-    }
-    else {
-      this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTEREDIT, dataSource);
-    }
-    this.refreshTable();
-  }
-  async onRowAdd(dataSource: IFragmentMaster, rowIndex: number) {
-    if (!this.fragmentManagerService.verificationMaster(dataSource))
-      return;
-    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
-    console.log(a);
+        console.log(dataSource);
 
-    if (a) {
-      this.refetchTable(rowIndex);
-      this.refreshTable();
+        // const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
+        // if (a) {
+        //   this.refetchTable(rowIndex);
+        //   this.refreshTable();
+        // }
+      }
+      else {
+        console.log(dataSource.zoneId);
+        this.closeTabService.saveDataForFragmentNOB[rowIndex] = this.clonedProducts[dataSource.id];
+        // this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTEREDIT, dataSource);
+        this.refreshTable();
+      }
     }
   }
   onRowEditCancel(dataSource: IFragmentMaster) {
@@ -112,29 +110,27 @@ export class FragmentComponent extends FactoryONE {
         this.closeTabService.saveDataForFragmentNOB[index] = this.onRowEditing;
       }
     }
-    this.newRowLimit = 1;
-    if (dataSource.isNew)
-      this.closeTabService.saveDataForFragmentNOB.shift();
-    return;
+    // this.newRowLimit = 1;
+    // if (dataSource.isNew)
+    //   this.closeTabService.saveDataForFragmentNOB.shift();
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster, rowIndex: number) => {
     const obj2 = { ...dataSource };
     obj2.zoneId = 1;
-    if (!this.fragmentManagerService.verificationMaster(obj2))
-      return;
-    const confirmed = await this.fragmentManagerService.firstConfirmDialog();
-    if (!confirmed) return;
-    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, obj2);
-    if (a)
-      this.refetchTable(rowIndex);
+    if (this.fragmentManagerService.masterValidation(obj2)) {
+      if (await this.fragmentManagerService.firstConfirmDialog()) {
+        if (await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, obj2))
+          this.refetchTable(rowIndex);
+      }
+    }
   }
 
   getIsValidateRow = async (dataSource: IFragmentMaster) => {
     const obj2 = { ...dataSource };
     obj2.zoneId = 1;
-    if (!this.fragmentManagerService.verificationMaster(obj2))
-      return;
-    this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, obj2);
+    if (this.fragmentManagerService.masterValidation(obj2)) {
+      this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, obj2);
+    }
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

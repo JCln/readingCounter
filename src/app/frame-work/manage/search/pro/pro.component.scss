@@ -180,7 +180,7 @@ article {
   justify-content: center;
   align-items: center;
   display: flex;
-  margin: var(--font_05) auto;
+  margin: var(--font_05);
   font-family: $font_family;
   width: 10rem;
 }
@@ -212,6 +212,8 @@ hr {
 footer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  direction: rtl;
   gap: var(--font_xs);
 }
 

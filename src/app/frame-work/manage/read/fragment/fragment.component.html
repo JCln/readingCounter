@@ -80,10 +80,13 @@
                     <span class="ui-column-title">ناحیه</span>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <p-dropdown name="zoneId" [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
-                                [placeholder]="dataSource.zoneId" [style]="{'minWidth': '10rem','width':'100%'}"
-                                optionLabel="title">
+                            <p-dropdown [options]="zoneDictionary" [(ngModel)]="dataSource.zoneId"
+                                [placeholder]="dataSource.zoneId" [style]="{'width':'100%'}"
+                                [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                (onChange)="clickedDropDowns(zoneDictionary, 'zoneId' , dataSource.id)"
+                                [filter]="true">
                             </p-dropdown>
+
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{dataSource.zoneId}}
@@ -165,7 +168,7 @@
                     <span class="ui-column-title">حذف مورد</span>
                     <i *ngIf="!editing" (click)="removeFragmentMaster(dataSource,ri)"
                         class="tooltip p_icons fa fa-trash-o">
-                        <div class="tooltip_text">حذف</div>
+                        <div class="tooltip_text_right">حذف</div>
                     </i>
                 </td>
             </tr>
