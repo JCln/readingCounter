@@ -29,12 +29,13 @@
 
     <mat-form-field appearance="fill">
         <mat-label>شناسه دستگاه</mat-label>
-        <input matInput name="deviceId" [(ngModel)]="editInfo.deviceId" placeholder="شناسه دستگاه را وارد نمایید">
+        <input matInput name="deviceId" class="d_ltr" [(ngModel)]="editInfo.deviceId"
+            placeholder="شناسه دستگاه را وارد نمایید">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>کد</mat-label>
-        <input matInput name="userCode" [(ngModel)]="editInfo.userCode" placeholder="کد" readonly>
+        <input matInput name="userCode" class="d_ltr" [(ngModel)]="editInfo.userCode" placeholder="کد" readonly>
     </mat-form-field>
 
     <div class="checkbox_s">

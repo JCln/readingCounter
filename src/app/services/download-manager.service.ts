@@ -36,7 +36,7 @@ export class DownloadManagerService {
   }
   downloadFile = (fileRepositoryId: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETBLOB(ENInterfaces.downloadFileGET, fileRepositoryId).subscribe(res => {
+      this.interfaceManagerService.GETBlobById(ENInterfaces.downloadFileGET, fileRepositoryId).subscribe(res => {
         resolve(res)
       });
     })

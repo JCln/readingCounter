@@ -53,6 +53,7 @@ export class ReadingReportManagerService {
   _isCollapsedAllImgs: boolean = true;
 
   masterReq: IReadingReportReq = {
+    zoneId: null,
     fromDate: '',
     toDate: '',
     counterReaderId: '',
@@ -70,6 +71,7 @@ export class ReadingReportManagerService {
     year: this.utilsService.getFirstYear()
   };
   imgAttrAnalyzeReq: IReadingReportReq = {
+    zoneId: null,
     fromDate: '',
     toDate: '',
     counterReaderId: '',
@@ -80,7 +82,7 @@ export class ReadingReportManagerService {
   userKarkardReq: IUserKarkardInput = {
     fromDate: '',
     toDate: '',
-    zoneId: 0,
+    zoneId: null,
     statusId: 0
   };
   detailsReq: IReadingReportReq = {
@@ -302,7 +304,7 @@ export class ReadingReportManagerService {
   }
   postDataSource = (method: ENInterfaces, id: any): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(method, id).subscribe((res) => {
+      this.interfaceManagerService.POSTById(method, id).subscribe((res) => {
         resolve(res)
       })
     });
@@ -509,7 +511,7 @@ export class ReadingReportManagerService {
   }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
         resolve(res);
       })
     });

@@ -15,7 +15,7 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
   gap: var(--font_05);
   align-items: center;
 }
@@ -26,7 +26,7 @@ section.content {
 
 section.dynamic_content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
   gap: var(--font_05);
   align-items: center;
   border: .15rem solid var(--thirdy_3);

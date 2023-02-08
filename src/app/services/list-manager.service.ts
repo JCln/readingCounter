@@ -102,7 +102,7 @@ export class ListManagerService {
   }
   getLM = (method: ENInterfaces | string, trackNumber: number | string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, trackNumber).subscribe(res => {
+      this.interfaceManagerService.GETByQuote(method, trackNumber).toPromise().then(res => {
         resolve(res);
       })
     })
@@ -116,14 +116,14 @@ export class ListManagerService {
   }
   postById = (method: ENInterfaces, id?: number): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
         resolve(res);
       })
     });
   }
   getExcel = (method: ENInterfaces, groupId: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETBLOB(method, groupId).toPromise().then(res => {
+      this.interfaceManagerService.GETBlobById(method, groupId).toPromise().then(res => {
         resolve(res);
       })
     });

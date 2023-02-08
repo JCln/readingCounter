@@ -106,8 +106,8 @@
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
                                     [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
-                                    [style]="{'minWidth': '10rem','width':'100%'}"
-                                    [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                    [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
+                                    optionLabel="title"
                                     (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
                                     [filter]="true" [showClear]="true">
                                 </p-dropdown>
@@ -122,8 +122,7 @@
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <p-dropdown [options]="secondDictionary" [(ngModel)]="dataSource[col.field]"
-                                        [placeholder]="dataSource[col.field]"
-                                        [style]="{'minWidth': '10rem','width':'100%'}"
+                                        [placeholder]="dataSource[col.field]" [style]="{'width':'100%'}"
                                         [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                         (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
                                         [filter]="true">
@@ -251,6 +250,27 @@
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'fragmentMaster'">
+                <span class="ui-column-title">مدیریت مسیرها</span>
+                <i *ngIf="!editing" (click)="customSort(dataSource.id)" class="tooltip p_icons pi pi-info">
+                    <div class="tooltip_text_right">مدیریت مسیرها</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'fragmentMaster'">
+                <span class="ui-column-title">صدور لیست خودکار</span>
+                <i *ngIf="!editing" (click)="showPictures(dataSource)" class="tooltip p_icons pi pi-directions-alt">
+                    <div class="tooltip_text">صدور لیست خودکار</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'fragmentMaster'">
+                <span class="ui-column-title">تایید نوبتی</span>
+                <i *ngIf="!editing" class="tooltip p_icons"
+                    [ngClass]="dataSource.isValidated ? 'pi pi-check-circle' : 'pi pi-info-circle'"
+                    (click)="showInMapSingle(dataSource)">
+                    <div class="tooltip_text_right">{{dataSource.isValidated ? 'نوبتی تایید شده': 'تایید نوبتی'}}
+                    </div>
                 </i>
             </td>
             <td>

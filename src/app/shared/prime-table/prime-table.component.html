@@ -1,8 +1,8 @@
 <section *ngIf="_hasAggregating && profileService._agg.flag" class="content">
     <div class="input_2">
         <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="profileService._agg.selectedAggregate"
-            placeholder="انتخاب مورد" [style]="{'min-width':'10rem','width':'100%'}" optionValue="field"
-            optionLabel="header" filter="true" (onChange)="doAggregate()">
+            placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="field" optionLabel="header" filter="true"
+            (onChange)="doAggregate()">
         </p-dropdown>
         <button (click)="resetAggregation()" class="btn_2_o">
             بدون گروه‌بندی

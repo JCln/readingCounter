@@ -4,7 +4,6 @@
 @import 'tooltip.scss';
 @import '_mat.scss';
 
-
 .content {
   background: var(--secondary_1);
   box-shadow: 1px 2px 3px 1px var(--primary_2);
@@ -15,7 +14,7 @@
 
 ._desc {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 17rem));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
   direction: rtl;
   justify-content: center;
   gap: var(--font_05);
@@ -33,6 +32,10 @@
   text-align: center;
   margin: var(--font_xs) var(--font_05);
   font-size: var(--font_l2);
+}
+
+.mt-s {
+  margin-top: var(--font_s);
 }
 
 input {
@@ -57,8 +60,9 @@ input {
 .card_wrapper {
   display: grid;
   direction: rtl;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 11rem));
   gap: var(--font_05);
+  margin-bottom: var(--font_xs);
   background: var(--secondary_1);
   place-content: center;
   padding: var(--font_xs) 0;

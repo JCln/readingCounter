@@ -16,7 +16,7 @@ export class SectorsManagerService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private utilsService: UtilsService,  
+    private utilsService: UtilsService,
     private sectionsService: SectionsService
   ) { }
 
@@ -53,7 +53,7 @@ export class SectorsManagerService {
     })
   }
   sectorsDelete = (apiUse: ENInterfaces, id: any) => {
-    this.interfaceManagerService.POST(apiUse, id).subscribe((res: IResponses) => {
+    this.interfaceManagerService.POSTById(apiUse, id).subscribe((res: IResponses) => {
       if (res) {
         this.utilsService.snackBarMessageSuccess(res.message);
       }
@@ -61,7 +61,7 @@ export class SectorsManagerService {
   }
   deleteSingleRow = (place: ENInterfaces, id: number) => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(place, id).subscribe((res: IResponses) => {
+      this.interfaceManagerService.POSTById(place, id).subscribe((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);
         resolve(true);
       })

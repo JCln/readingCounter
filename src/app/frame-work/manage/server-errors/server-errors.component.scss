@@ -17,7 +17,7 @@
 .input_2 {
   display: flex;
   align-items: center;
-  width: 18rem;
+  width: 16rem;
   font-size: var(--font_s);
   font-weight: 600;
   color: var(--primary_2);
@@ -27,4 +27,8 @@
   color: var(--white);
   background-color: var(--orange_500);
   max-width: 16rem;
+}
+
+._value {
+  height: auto;
 }

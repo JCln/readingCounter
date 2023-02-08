@@ -141,7 +141,7 @@
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <p-dropdown name="modify" [options]="modifyType" [(ngModel)]="dataSource[col.field]"
-                                        placeholder="انتخاب مورد" [style]="{'minWidth': '10rem','width':'100%'}"
+                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}"
                                         [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
                                         (onChange)="clickedDropDowns(dataSource[col.field], 'modifyType' , dataSource.id)">
                                     </p-dropdown>
@@ -157,8 +157,8 @@
                                     <ng-template pTemplate="input">
                                         <p-dropdown [options]="counterStateByZoneDictionary"
                                             [(ngModel)]="dataSource[col.field]" placeholder="انتخاب مورد"
-                                            [style]="{'minWidth': '10rem','width':'100%'}"
-                                            [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                            [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
+                                            optionLabel="title"
                                             (onChange)="clickedDropDowns(dataSource[col.field], 'counterStateId' , dataSource.id)">
                                         </p-dropdown>
                                     </ng-template>

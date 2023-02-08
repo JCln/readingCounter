@@ -1,7 +1,7 @@
 export enum EN_messages {
     passwords_notFetch = 'تعداد ارقام گذرواژه با تایید آن برابر نیست',
-    password_notExactly = 'گذرواژه با تایید آن یکی باید باشد',
-    sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشد',
+    password_notExactly = 'گذرواژه با تایید آن باید یکی باشند',
+    sameLength_eshterak = 'تعداد ارقام از اشتراک، تا اشتراک باید برابر باشند',
     lessThan_eshterak = 'از اشتراک کمتر از تا اشتراک است!',
     sameLength_notValid = 'مقادیر ابتدا و انتهایی را وارد نمایید',
 
@@ -116,7 +116,7 @@ export enum EN_messages {
     format_invalid_numberLengths = 'تعداد ارقام وارد شده اشتباه است',
     should_insert_APK = 'فرمت ارسالی باید فایل apk باشد',
     should_insert_ZIP = 'فرمت ارسالی باید فایل zip باشد',
-    should_insert_JPG = 'فرمت ارسالی باید jpg باشد',
+    should_insert_JPG = 'فرمت ارسالی باید jpg و یا jpeg باشد',
     format_invalid_esterak = 'فرمت اشتراک ناصحیح است',
     format_invalid = 'فرمت ناصحیح است',
     format_isNotExactLengthNumber = 'تعداد ارقام تاریخ اشتباه است',

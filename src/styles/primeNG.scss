@@ -32,7 +32,7 @@
   .p-datatable .p-datatable-tbody>tr>td {
     text-align: center;
     font-weight: 600;
-    padding: var(--font_05) var(--font_01);
+    padding: var(--font_01);
     border: 1px solid var(--secondary_2);
   }
 
@@ -62,6 +62,8 @@
 
   .p-datatable .p-datatable-thead>tr>th {
     background-color: var(--secondary_3);
+    color: var(--secondary_8);
+    direction: ltr;
   }
 
   span.ui-column-title {
@@ -324,10 +326,6 @@
     white-space: normal;
   }
 
-  .p-datatable .p-datatable-thead>tr>th {
-    color: var(--secondary_8);
-  }
-
   .p-paginator {
     background: var(--white);
     color: var(--secondary_8);
@@ -335,7 +333,7 @@
 
   footer,
   .footer {
-    text-align: center;
+    text-align: right;
   }
 
   p-cellEditor {

@@ -59,7 +59,7 @@ export class AuthsManagerService {
   }
   deleteSingleRow = (place: ENInterfaces, id: number) => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(place, id).subscribe((res: IResponses) => {
+      this.interfaceManagerService.POSTById(place, id).subscribe((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);
         resolve(true);
       })

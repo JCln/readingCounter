@@ -14,10 +14,11 @@
 </div>
 
 <mat-dialog-actions>
-    <button class="btn_2" *ngIf="data.doesNotReturnButton" (click)="cancel()">بازگشت {{data.doesNotReturnButton}}
-    </button>
+    <button class="btn_2" *ngIf="data.doesNotReturnButton" (click)="cancel()">بازگشت</button>
     <button *ngIf="data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"
-        (click)="confirm()">تایید</button>
+        (click)="confirm()">تایید
+    </button>
     <button *ngIf="!data.isInput" class="btn_2 _custom" [ngClass]="{'_delete_style': data?.isDelete }"
-        (click)="confirmWithoutText()">تایید</button>
+        (click)="confirmWithoutText()">تایید
+    </button>
 </mat-dialog-actions>

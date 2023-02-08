@@ -23,7 +23,7 @@ export class FragmentComponent extends FactoryONE {
   newRowLimit: number = 1;
 
   zoneDictionary: IDictionaryManager[] = [];
-  _selectCols: any[] = [];
+  _selectCols: any[];
   _selectedColumns: any[];
   isAddingNewRow: boolean = false;
   clonedProducts: { [s: string]: IFragmentMaster; } = {};
@@ -40,7 +40,13 @@ export class FragmentComponent extends FactoryONE {
   ) {
     super();
   }
-
+  clickedDropDowns = (event: any, element: string, dataId: any) => {
+    for (let index = 0; index < this.closeTabService.saveDataForFragmentNOB.length; index++) {
+      if (this.closeTabService.saveDataForFragmentNOB[index].id === dataId) {
+        this.closeTabService.saveDataForFragmentNOB[index][element] = event.title;
+      }
+    }
+  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
@@ -69,72 +75,87 @@ export class FragmentComponent extends FactoryONE {
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
   defaultAddStatus = () => this.newRowLimit = 1;
-  refetchTable = (index: number) => this.closeTabService.saveDataForFragmentNOB = this.closeTabService.saveDataForFragmentNOB.slice(0, index).concat(this.closeTabService.saveDataForFragmentNOB.slice(index + 1));
   newRow(): IFragmentMaster {
     return { zoneId: null, routeTitle: '', fromEshterak: '', toEshterak: '', isNew: true };
   }
   onRowEditInit(dataSource: any) {
     this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
   }
-  onRowEditSave(dataSource: IFragmentMaster, rowIndex: number) {
+  convertTitleToId = (data: any): any => {
+    return this.zoneDictionary.find(item => {
+      if (item.title === data)
+        return item;
+    })
+  }
+  onRowEditSave = async (dataSource: IFragmentMaster, rowIndex: number) => {
+    dataSource = dataSource['dataSource'];
+
     this.newRowLimit = 1;
-    if (!this.fragmentManagerService.verificationMaster(dataSource)) {
-      if (dataSource.isNew) {
-        this.closeTabService.saveDataForFragmentNOB.shift();
-        return;
-      }
-      this.closeTabService.saveDataForFragmentNOB[rowIndex] = this.clonedProducts[dataSource.id];
-      return;
+    console.log(dataSource.zoneId);
+    /* TODO: 
+    1- Make first item of dictionary if no value inserted on new row
+    2- eshteraks should convert to english numbers
+    */
+    
+    dataSource.fromEshterak = Converter.persianToEngNumbers(dataSource.fromEshterak);
+    dataSource.toEshterak = Converter.persianToEngNumbers(dataSource.toEshterak);
+
+    if (MathS.isNull(dataSource.zoneId)) {
+      dataSource.zoneId = this.convertTitleToId(this.zoneDictionary[0].title).title;
     }
-    dataSource.zoneId = dataSource.zoneId['id'];
-    if (!dataSource.id) {
-      this.onRowAdd(dataSource, rowIndex);
+    if (this.fragmentManagerService.masterValidation(dataSource)) {
+      // convert a zone to id
+      dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
+
+      if (dataSource.isNew) {
+        console.log(dataSource);
+
+        const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
+        if (a) {
+          this.refreshTable();
+        }
+      }
+      else {
+        this.closeTabService.saveDataForFragmentNOB[rowIndex] = this.clonedProducts[dataSource.id];
+        this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTEREDIT, dataSource);
+        this.refreshTable();
+      }
     }
     else {
-      this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTEREDIT, dataSource);
+      this.shiftFromFirst(dataSource);
     }
-    this.refreshTable();
   }
-  async onRowAdd(dataSource: IFragmentMaster, rowIndex: number) {
-    if (!this.fragmentManagerService.verificationMaster(dataSource))
-      return;
-    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
-    console.log(a);
-
-    if (a) {
-      this.refetchTable(rowIndex);
-      this.refreshTable();
+  shiftFromFirst = (dataSource: IFragmentMaster) => {
+    if (dataSource.isNew) {
+      this.table.value.shift();
     }
   }
   onRowEditCancel(dataSource: IFragmentMaster) {
+    this.newRowLimit = 1;
     for (let index = 0; index < this.closeTabService.saveDataForFragmentNOB.length; index++) {
       if (dataSource.id === this.closeTabService.saveDataForFragmentNOB[index].id) {
         this.closeTabService.saveDataForFragmentNOB[index] = this.onRowEditing;
       }
     }
-    this.newRowLimit = 1;
-    if (dataSource.isNew)
-      this.closeTabService.saveDataForFragmentNOB.shift();
-    return;
+    this.shiftFromFirst(dataSource);
   }
   removeFragmentMaster = async (dataSource: IFragmentMaster, rowIndex: number) => {
-    const obj2 = { ...dataSource };
+    const obj2 = { ...dataSource['dataSource'] };
     obj2.zoneId = 1;
-    if (!this.fragmentManagerService.verificationMaster(obj2))
-      return;
-    const confirmed = await this.fragmentManagerService.firstConfirmDialog();
-    if (!confirmed) return;
-    const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, obj2);
-    if (a)
-      this.refetchTable(rowIndex);
+    if (this.fragmentManagerService.masterValidation(obj2)) {
+      if (await this.fragmentManagerService.firstConfirmDialog()) {
+        if (await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, obj2))
+          this.refreshTable();
+      }
+    }
   }
 
   getIsValidateRow = async (dataSource: IFragmentMaster) => {
-    const obj2 = { ...dataSource };
-    obj2.zoneId = 1;
-    if (!this.fragmentManagerService.verificationMaster(obj2))
-      return;
-    this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, obj2);
+    dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
+
+    if (this.fragmentManagerService.masterValidation(dataSource)) {
+      this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERVALIDATE, dataSource);
+    }
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

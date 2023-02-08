@@ -26,6 +26,8 @@ section.content {
 
 .order_by {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .input_1 {
@@ -33,12 +35,11 @@ section.content {
   min-width: 100%;
 }
 
-.btn_2_o {
-  font-family: $font_family;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: auto;
+.btn_1 {
+  width: 14rem;
+  margin-top: var(--font_l);
+  color: var(--white);
+  background-color: var(--orange_500);
 }
 
 h2 {

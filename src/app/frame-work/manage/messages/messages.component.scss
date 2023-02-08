@@ -13,7 +13,7 @@
 }
 
 .content {
-  background: var(--secondary_3);
+  background: var(--secondary_1);
   border-radius: $border_15;
   margin: auto;
   padding: var(--font_xs);
@@ -26,9 +26,9 @@
 }
 
 textarea {
-  background: var(--secondary_1);
+  background: var(--secondary_3);
   font-size: var(--font_m);
-  color: var(--secondary_5);
+  color: var(--primary_4);
   font-weight: 600;
   text-align: right;
   direction: rtl;
@@ -48,7 +48,7 @@ textarea {
 
 .c_separator {
   .btn_2 {
-    color: var(--secondary_1);
+    color: var(--secondary_3);
   }
 
 }
@@ -84,7 +84,7 @@ textarea {
   height: 80vh;
   overflow: auto;
   padding: var(--font_xs);
-  background: var(--secondary_3);
+  background: var(--secondary_1);
   border-radius: 15px;
 
   #btn {
@@ -95,7 +95,7 @@ textarea {
 
 .main_content {
   position: relative;
-  background: var(--secondary_1);
+  background: var(--secondary_3);
   border-radius: $border_15;
   padding: var(--font_xs);
   margin-bottom: var(--font_05);
@@ -122,7 +122,7 @@ textarea {
     color: var(--secondary_5);
 
     margin: var(--font_03);
-    background-color: var(--secondary_3);
+    background-color: var(--secondary_1);
     border-radius: $border_5;
   }
 
@@ -130,7 +130,7 @@ textarea {
     height: var(--font_25);
     width: 7rem;
     color: var(--primary_2);
-    background: var(--secondary_3);
+    background: var(--secondary_1);
   }
 }
 
@@ -152,8 +152,8 @@ h2 {
     width: 100%;
     border: none;
     border-radius: $border_15;
-    color: var(--secondary_5);
-    background: var(--secondary_1);
+    color: var(--primary_4);
+    background: var(--secondary_3);
   }
 
 }
