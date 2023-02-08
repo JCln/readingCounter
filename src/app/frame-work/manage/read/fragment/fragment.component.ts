@@ -91,12 +91,11 @@ export class FragmentComponent extends FactoryONE {
     dataSource = dataSource['dataSource'];
 
     this.newRowLimit = 1;
-    console.log(dataSource.zoneId);
     /* TODO: 
     1- Make first item of dictionary if no value inserted on new row
     2- eshteraks should convert to english numbers
     */
-    
+
     dataSource.fromEshterak = Converter.persianToEngNumbers(dataSource.fromEshterak);
     dataSource.toEshterak = Converter.persianToEngNumbers(dataSource.toEshterak);
 
@@ -108,8 +107,6 @@ export class FragmentComponent extends FactoryONE {
       dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
 
       if (dataSource.isNew) {
-        console.log(dataSource);
-
         const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERADD, dataSource);
         if (a) {
           this.refreshTable();
@@ -139,12 +136,12 @@ export class FragmentComponent extends FactoryONE {
     }
     this.shiftFromFirst(dataSource);
   }
-  removeFragmentMaster = async (dataSource: IFragmentMaster, rowIndex: number) => {
-    const obj2 = { ...dataSource['dataSource'] };
-    obj2.zoneId = 1;
-    if (this.fragmentManagerService.masterValidation(obj2)) {
+  removeFragmentMaster = async (dataSource: IFragmentMaster) => {
+    dataSource = dataSource['dataSource'];
+    dataSource.zoneId = this.convertTitleToId(dataSource.zoneId).id;
+    if (this.fragmentManagerService.masterValidation(dataSource)) {
       if (await this.fragmentManagerService.firstConfirmDialog()) {
-        if (await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, obj2))
+        if (await this.fragmentManagerService.postBody(ENInterfaces.fragmentMASTERREMOVE, dataSource))
           this.refreshTable();
       }
     }
