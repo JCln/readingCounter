@@ -123,6 +123,11 @@ li {
 .p-dialog-header,
 .p-dialog-title {
   font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+  padding: var(--font_03) !important;
+}
+
+.p-dialog .p-dialog-content {
+  padding: 0 var(--font_05) !important;
 }
 
 // ts config
