@@ -138,6 +138,7 @@ export enum ENInterfaces {
     automaticImportRemove = 'V1/AutomaticImport/Remove',
 
     OutputDBF = 'V1/Output/Dbf',
+    OutputDBFEqamatBagh = 'V1/Output/Dbf1',
     OutputSINGLE = 'V1/Output/single',
     OutputDELAYED = 'V1/Output/Delayed',
     forbidden = 'V1/Forbidden/ByParam',

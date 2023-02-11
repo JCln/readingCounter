@@ -35,6 +35,10 @@ export class TrackingManagerService {
     fromDate: null,
     toDate: null
   };
+  dbfOutputEqamatBagh = {
+    zoneId: 0,
+    date: null,
+  };
 
   getColumnDefColumns = (): IObjectIteratation[] => {
     return this.columnManager.columnSelectedMenus('defColumns');
@@ -169,6 +173,17 @@ export class TrackingManagerService {
       })
     });
   }
+  downloadOutputDBFEqamatBagh = (method: ENInterfaces, dbfData: any): Promise<any> => {
+    dbfData.date = Converter.persianToEngNumbers(dbfData.date);
+
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBLOB(method, dbfData).toPromise().then(res => {
+        resolve(res);
+      }).catch(() => {
+        this.utilsService.snackBarMessageFailed(EN_messages.server_noDataFounded);
+      })
+    });
+  }
   downloadOutputWithoutDESC = (method: ENInterfaces, single: ITracking): Promise<any> => {
     const a: any = {
       trackingId: single.id
@@ -296,6 +311,17 @@ export class TrackingManagerService {
     }
     if (MathS.isNull(dataSource.toDate)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+    return true;
+  }
+  checkVertificationDBFEqamatBagh = (dataSource: any): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.date)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
       return false;
     }
     return true;

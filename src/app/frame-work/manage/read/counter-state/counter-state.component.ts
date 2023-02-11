@@ -94,7 +94,6 @@ export class CounterStateComponent extends FactoryONE {
     else {
       await this.readManagerService.addOrEditAuths(ENInterfaces.counterStateEdit, dataSource['dataSource']);
       this.refreshTable();
-      Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
     }
     Converter.convertIdToTitle(this.closeTabService.saveDataForCounterState, this.zoneDictionary, 'zoneId');
   }

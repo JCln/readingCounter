@@ -14,7 +14,7 @@
   }
 
   @media (min-width: 780px) {
-    grid-template-columns: repeat(auto-fit, minmax(19rem, auto));
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 11rem));
     gap: var(--font_05);
   }
 

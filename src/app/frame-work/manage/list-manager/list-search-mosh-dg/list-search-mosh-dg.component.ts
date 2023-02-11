@@ -44,18 +44,30 @@ export class ListSearchMoshDgComponent implements OnInit {
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-    if (this.listManagerService.searchReqMoshDialog.zoneId) {
-      this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
-      this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
-      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-      Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    }
+    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
+    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
 
-    Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
+
+    this.dataSource =
+      Converter.convertIdsToTitles(
+        this.dataSource,
+        {
+          zoneDictionary: this.zoneDictionary,
+          deleteDictionary: this.deleteDictionary,
+          counterStateDictionary: this.counterStateDictionary,
+          counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+          karbariDictionaryCode: this.karbariDictionaryCode,
+          qotrDictionary: this.qotrDictionary,
+        },
+        {
+          zoneId: 'zoneId',
+          hazf: 'hazf',
+          counterStateId: 'counterStateId',
+          preCounterStateCode: 'preCounterStateCode',
+          possibleKarbariCode: 'possibleKarbariCode',
+          qotrCode: 'qotrCode'
+        })
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
     this.listManagerService.setDynamicPartRanges(this.dataSource);
   }

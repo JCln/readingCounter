@@ -61,20 +61,30 @@ export class RrPreNumberShownComponent extends AllListsFactory {
   }
   converts = async () => {
     const tempZone: number = parseInt(this.closeTabService.saveDataForRRPreNumShown[0].zoneId.toString());
-    if (tempZone) {
-      this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
-      this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
-      Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    }
+    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
+    this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.karbariDictionaryCode, 'possibleKarbariCode');
+    this.closeTabService.saveDataForRRPreNumShown =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForRRPreNumShown,
+        {
+          deleteDictionary: this.deleteDictionary,
+          counterStateDictionary: this.counterStateDictionary,
+          counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+          karbariDictionaryCode: this.karbariDictionaryCode,
+          qotrDictionary: this.qotrDictionary,
+        },
+        {
+          hazf: 'hazf',
+          counterStateId: 'counterStateId',
+          preCounterStateCode: 'preCounterStateCode',
+          possibleKarbariCode: 'possibleKarbariCode',
+          qotrCode: 'qotrCode'
+        })
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRPreNumShown, this.qotrDictionary, 'qotrCode');
 
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRPreNumShown);
   }

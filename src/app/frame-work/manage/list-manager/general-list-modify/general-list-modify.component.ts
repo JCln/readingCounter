@@ -65,13 +65,25 @@ export class GeneralListModifyComponent extends AllListsFactory {
     this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
     this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.allListsService.generalModifyLists_pageSign.zoneId);
 
-    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.karbariDictionaryCode, 'possibleKarbariCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.qotrDictionary, 'qotrCode');
 
+    this.closeTabService.saveDataForLMGeneralModify =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForLMGeneralModify,
+        {
+          deleteDictionary: this.deleteDictionary,
+          counterStateDictionary: this.counterStateDictionary,
+          counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+          karbariDictionaryCode: this.karbariDictionaryCode,
+          qotrDictionary: this.qotrDictionary,
+        },
+        {
+          hazf: 'hazf',
+          counterStateId: 'counterStateId',
+          preCounterStateCode: 'preCounterStateCode',
+          possibleKarbariCode: 'possibleKarbariCode',
+          qotrCode: 'qotrCode'
+        })
+    Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralModify, this.karbariDictionaryCode, 'karbariCode');
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.generalModifyLists_pageSign.GUid) {

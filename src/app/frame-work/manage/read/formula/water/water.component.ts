@@ -90,8 +90,21 @@ export class WaterComponent extends FactoryONE {
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
 
-    Converter.convertIdToTitle(this.closeTabService.saveDataForWaterFormula, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForWaterFormula, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
+    this.toConvert();
+  }
+  toConvert = () => {
+    this.closeTabService.saveDataForWaterFormula =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForWaterFormula,
+        {
+          zoneDictionary: this.zoneDictionary,
+          karbariCodeDictionary: this.karbariCodeDictionary,
+        },
+        {
+          zoneId: 'zoneId',
+          karbariMoshtarakinCode: 'karbariMoshtarakinCode',
+        }
+      )
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForWaterFormula = this.closeTabService.saveDataForWaterFormula.slice(0, index).concat(this.closeTabService.saveDataForWaterFormula.slice(index + 1));
   private removeRow = async (rowData: string, rowIndex: number) => {
@@ -130,8 +143,7 @@ export class WaterComponent extends FactoryONE {
     }
 
     await this.formulasService.postFormulaEdit(ENInterfaces.FormulaWaterEdit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForWaterFormula, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForWaterFormula, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
+    this.toConvert();
   }
   onRowEditCancel() { }
   getExcelSample = async () => {

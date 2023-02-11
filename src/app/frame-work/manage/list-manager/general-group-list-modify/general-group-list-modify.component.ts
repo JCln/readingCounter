@@ -71,7 +71,6 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   updateOnChangedCounterState = async (val: any) => {
     if (val.value) {
       this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val.value);
-      console.log(this.dataSource.length);
       this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
@@ -82,12 +81,25 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
       this.resetDataSourceView();
 
-      Converter.convertIdToTitle(this.dataSource, this.deleteDictionary, 'hazf');
-      Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'possibleKarbariCode');
+
+      this.dataSource =
+        Converter.convertIdsToTitles(
+          this.dataSource,
+          {
+            deleteDictionary: this.deleteDictionary,
+            counterStateDictionary: this.counterStateDictionary,
+            counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+            karbariDictionaryCode: this.karbariDictionaryCode,
+            qotrDictionary: this.qotrDictionary,
+          },
+          {
+            hazf: 'hazf',
+            counterStateId: 'counterStateId',
+            preCounterStateCode: 'preCounterStateCode',
+            possibleKarbariCode: 'possibleKarbariCode',
+            qotrCode: 'qotrCode'
+          })
       Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-      Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
     }
   }
   classWrapper = async (canRefresh?: boolean) => {

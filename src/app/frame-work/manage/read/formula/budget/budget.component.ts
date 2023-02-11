@@ -75,8 +75,21 @@ export class BudgetComponent extends FactoryONE {
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
 
-    Converter.convertIdToTitle(this.closeTabService.saveDataForBadgetFormula, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForBadgetFormula, this.zoneDictionary, 'zoneId');
+    this.toConvert();
+  }
+  toConvert = () => {
+    this.closeTabService.saveDataForBadgetFormula =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForBadgetFormula,
+        {
+          zoneDictionary: this.zoneDictionary,
+          karbariCodeDictionary: this.karbariCodeDictionary,
+        },
+        {
+          zoneId: 'zoneId',
+          karbariMoshtarakinCode: 'karbariMoshtarakinCode',
+        }
+      )
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForBadgetFormula = this.closeTabService.saveDataForBadgetFormula.slice(0, index).concat(this.closeTabService.saveDataForBadgetFormula.slice(index + 1));
   private removeRow = async (rowData: string, rowIndex: number) => {

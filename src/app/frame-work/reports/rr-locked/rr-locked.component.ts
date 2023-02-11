@@ -50,20 +50,31 @@ export class RrLockedComponent extends AllListsFactory {
   }
   converts = async () => {
     const tempZone: number = parseInt(this.closeTabService.saveDataForRRLocked[0].zoneId.toString());
-    if (tempZone) {
-      this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
-      this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
-    }
+    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
+    this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.karbariDictionaryCode, 'possibleKarbariCode');
+
+    this.closeTabService.saveDataForRRLocked =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForRRLocked,
+        {
+          deleteDictionary: this.deleteDictionary,
+          counterStateDictionary: this.counterStateDictionary,
+          counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+          karbariDictionaryCode: this.karbariDictionaryCode,
+          qotrDictionary: this.qotrDictionary,
+        },
+        {
+          hazf: 'hazf',
+          counterStateId: 'counterStateId',
+          preCounterStateCode: 'preCounterStateCode',
+          possibleKarbariCode: 'possibleKarbariCode',
+          qotrCode: 'qotrCode'
+        })
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.qotrDictionary, 'qotrCode');
 
     this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
   }
@@ -82,7 +93,7 @@ export class RrLockedComponent extends AllListsFactory {
   connectToServer = async () => {
     this.closeTabService.saveDataForRRLocked = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.readingReportManagerService.lockedReq);
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRLocked);
-    this.converts();    
+    this.converts();
   }
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {

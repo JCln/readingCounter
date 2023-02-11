@@ -73,6 +73,7 @@ export enum EN_Routes {
     'wrmfbn' = '/wr/m/fbn',
     'wrmlpd' = '/wr/m/l/pd',
     'wrmdbf' = '/wr/m/dbf',
+    'wrDbfEqamatBagh' = '/wr/m/dbfEB',
     'wrrptsmamtrv' = '/wr/rpts/mam/trv',
     'wrrptsmamtrvch' = '/wr/rpts/mam/trvch',
     'wrrptsmamdh' = '/wr/rpts/mam/dh',

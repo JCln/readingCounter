@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'dma', loadChildren: () => import('./data-mining/data-mining.module').then(dataMining => dataMining.DataMiningModule) },
   { path: 'requestLog', loadChildren: () => import('./request-log/request-log.module').then(requestLog => requestLog.RequestLogModule) },
   { path: 'osInfo', loadChildren: () => import('./server-os-info/server-os-info.module').then(osInfo => osInfo.ServerOsInfoModule) },
+  { path: 'dbfEB', loadChildren: () => import('./dbf-output-eqamat-bagh/dbf-output-eqamat-bagh.module').then(dbfOutputEqamatBagh => dbfOutputEqamatBagh.DbfOutputEqamatBaghModule) },
 ];
 
 @NgModule({

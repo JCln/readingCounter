@@ -230,6 +230,7 @@ export class CloseTabService {
   saveDataForLMGeneralGroupModify: any;
   // dbf output manager
   saveDataForOutputDBF: any;
+  saveDataForOutputDBFEqamatBagh: any;
   // reading reports 
   saveDataForRRTraverse: IReadingReportTraverse[];
   saveDataForRRTraverseDifferential: IReadingReportTraverseDifferentialRes[];
@@ -365,6 +366,7 @@ export class CloseTabService {
     { id: 1, value: ENEssentialsToSave.saveDataForFNB, url: EN_Routes.wrmfbn },
     { id: 1, req: ENEssentialsToSave.saveDataForLMPDTrackNumber, value: ENEssentialsToSave.saveDataForLMPD, url: EN_Routes.wrmlpd },
     { id: 1, value: ENEssentialsToSave.saveDataForOutputDBF, url: EN_Routes.wrmdbf },
+    { id: 1, value: ENEssentialsToSave.saveDataForOutputDBFEqamatBagh, url: EN_Routes.wrDbfEqamatBagh },
     { id: 1, value: ENEssentialsToSave.saveDataForRRTraverse, url: EN_Routes.wrrptsmamtrv },
     { id: 1, value: ENEssentialsToSave.saveDataForRRTraverseDifferential, url: EN_Routes.wrrptsmamtrvch },
     { id: 1, value: ENEssentialsToSave.saveDataForRRDisposalHours, url: EN_Routes.wrrptsmamdh },

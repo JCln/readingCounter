@@ -45,6 +45,19 @@ export class ReadingPeriodComponent extends FactoryONE {
       });
     });
   }
+  toConvert = () => {
+    this.closeTabService.saveDataForReadingPeriodManager =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForReadingPeriodManager,
+        {
+          zoneDictionary: this.zoneDictionary,
+          readingPeriodKindDictionary: this.readingPeriodKindDictionary,
+        },
+        {
+          zoneId: 'zoneId',
+          readingPeriodKindId: 'readingPeriodKindId',
+        })
+  }
   nullSavedSource = () => this.closeTabService.saveDataForReadingPeriodManager = null;
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
@@ -56,8 +69,7 @@ export class ReadingPeriodComponent extends FactoryONE {
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.readManagerService.getReadingPeriodKindDictionary();
 
-    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingPeriodManager, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingPeriodManager, this.readingPeriodKindDictionary, 'readingPeriodKindId');
+    this.toConvert();
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForReadingPeriodManager = this.closeTabService.saveDataForReadingPeriodManager.slice(0, index).concat(this.closeTabService.saveDataForReadingPeriodManager.slice(index + 1));
   removeRow = async (rowData: object) => {
@@ -92,8 +104,7 @@ export class ReadingPeriodComponent extends FactoryONE {
       dataSource['dataSource'].readingPeriodKindId = dataSource['dataSource'].readingPeriodKindId['id'];
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodEdit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingPeriodManager, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForReadingPeriodManager, this.readingPeriodKindDictionary, 'readingPeriodKindId');
+    this.toConvert();
   }
 
 }

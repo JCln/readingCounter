@@ -52,13 +52,26 @@ export class AssessPreComponent extends AllListsFactory {
     this.importDynamicService._assessAddReq.imagePercent = rcd.defaultImagePercent;
   }
   converts = () => {
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.deleteDictionary, 'hazf');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.karbariDictionaryCode, 'possibleKarbariCode');
+    this.closeTabService.saveDataForAssessPre =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForAssessPre,
+        {
+          deleteDictionary: this.deleteDictionary,
+          zoneDictionary: this.zoneDictionary,
+          counterStateDictionary: this.counterStateDictionary,
+          counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+          karbariDictionaryCode: this.karbariDictionaryCode,
+          qotrDictionary: this.qotrDictionary,
+        },
+        {
+          hazf: 'hazf',
+          zoneId: 'zoneId',
+          counterStateId: 'counterStateId',
+          preCounterStateCode: 'preCounterStateCode',
+          possibleKarbariCode: 'possibleKarbariCode',
+          qotrCode: 'qotrCode'
+        })
     Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForAssessPre, this.qotrDictionary, 'qotrCode');
 
     this.importDynamicService.setDynamicPartRanges(this.closeTabService.saveDataForAssessPre);
   }

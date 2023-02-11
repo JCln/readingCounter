@@ -31,7 +31,37 @@ export class AllComponent extends AllListsFactory {
   ) {
     super(dialogService, listManagerService);
   }
+  dictionaryWrapps = async () => {
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
+    this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
+    this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
+    this.qotrDictionary = await this.listManagerService.getQotrDictionary();
+    const tempZone: number = parseInt(this.closeTabService.saveDataForLMAll[0].zoneId.toString());
+    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
+    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
 
+    this.closeTabService.saveDataForLMAll =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForLMAll,
+        {
+          deleteDictionary: this.deleteDictionary,
+          zoneDictionary: this.zoneDictionary,
+          counterStateDictionary: this.counterStateDictionary,
+          counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+          karbariDictionaryCode: this.karbariDictionaryCode,
+          qotrDictionary: this.qotrDictionary,
+        },
+        {
+          hazf: 'hazf',
+          zoneId: 'zoneId',
+          counterStateId: 'counterStateId',
+          preCounterStateCode: 'preCounterStateCode',
+          possibleKarbariCode: 'possibleKarbariCode',
+          qotrCode: 'qotrCode'
+        })
+    Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'karbariCode');
+
+  }
   classWrapper = async (canRefresh?: boolean) => {
     if (!this.allListsService.allLists_pageSign.GUid) {
       this._location.back();
@@ -52,23 +82,7 @@ export class AllComponent extends AllListsFactory {
       this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMAll);
       this.closeTabService.saveDataForLMAll = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMAll));
 
-      this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-      this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
-      this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
-      this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'karbariCode');
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'possibleKarbariCode');
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.deleteDictionary, 'hazf');
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.qotrDictionary, 'qotrCode');
-
-      const tempZone: number = parseInt(this.closeTabService.saveDataForLMAll[0].zoneId.toString());
-      if (tempZone) {
-        this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
-        this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
-        Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.counterStateByCodeDictionary, 'preCounterStateCode');
-        Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.counterStateDictionary, 'counterStateId');
-      }
+      this.dictionaryWrapps();
     }
   }
   toPrePage = () => {

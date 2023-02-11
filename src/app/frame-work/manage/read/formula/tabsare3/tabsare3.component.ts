@@ -75,8 +75,21 @@ export class Tabsare3Component extends FactoryONE {
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
 
-    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare3Formula, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare3Formula, this.zoneDictionary, 'zoneId');
+    this.toConvert();
+  }
+  toConvert = () => {
+    this.closeTabService.saveDataForWaterFormula =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForWaterFormula,
+        {
+          zoneDictionary: this.zoneDictionary,
+          karbariCodeDictionary: this.karbariCodeDictionary,
+        },
+        {
+          zoneId: 'zoneId',
+          karbariMoshtarakinCode: 'karbariMoshtarakinCode',
+        }
+      )
   }
   refetchTable = (index: number) => this.closeTabService.saveDataForTabsare3Formula = this.closeTabService.saveDataForTabsare3Formula.slice(0, index).concat(this.closeTabService.saveDataForTabsare3Formula.slice(index + 1));
   private removeRow = async (rowData: string, rowIndex: number) => {
@@ -115,8 +128,7 @@ export class Tabsare3Component extends FactoryONE {
     }
 
     await this.formulasService.postFormulaEdit(ENInterfaces.FormulaTabsare3Edit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare3Formula, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
-    Converter.convertIdToTitle(this.closeTabService.saveDataForTabsare3Formula, this.zoneDictionary, 'zoneId');
+    this.toConvert();
   }
   onRowEditCancel() { }
   getExcelSample = async () => {

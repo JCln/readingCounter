@@ -106,6 +106,7 @@ export enum ENEssentialsToSave {
     saveDataForLMPD = 'saveDataForLMPD',
     saveDataForLMPDTrackNumber = 'saveDataForLMPDTrackNumber',
     saveDataForOutputDBF = 'saveDataForOutputDBF',
+    saveDataForOutputDBFEqamatBagh = 'saveDataForOutputDBFEqamatBagh',
     saveDataForRRTraverse = 'saveDataForRRTraverse',
     saveDataForRRTraverseDifferential = 'saveDataForRRTraverseDifferential',
     saveDataForRRDisposalHours = 'saveDataForRRDisposalHours',

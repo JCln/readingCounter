@@ -55,20 +55,28 @@ export class ListModifyComponent extends AllListsFactory {
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.counterStateDictionary, 'counterStateId');
       const tempZone: number = parseInt(this.closeTabService.saveDataForLMModify[0].zoneId.toString());
-      if (tempZone) {
-        this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
-        this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
-        Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.counterStateByCodeDictionary, 'preCounterStateCode');
-        Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.counterStateDictionary, 'counterStateId');
-      }
+      this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(tempZone);
+      this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(tempZone);
 
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.deleteDictionary, 'hazf');
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.karbariDictionaryCode, 'possibleKarbariCode');
+      this.closeTabService.saveDataForLMModify =
+        Converter.convertIdsToTitles(
+          this.closeTabService.saveDataForLMModify,
+          {
+            deleteDictionary: this.deleteDictionary,
+            counterStateDictionary: this.counterStateDictionary,
+            counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+            karbariDictionaryCode: this.karbariDictionaryCode,
+            qotrDictionary: this.qotrDictionary,
+          },
+          {
+            hazf: 'hazf',
+            counterStateId: 'counterStateId',
+            preCounterStateCode: 'preCounterStateCode',
+            possibleKarbariCode: 'possibleKarbariCode',
+            qotrCode: 'qotrCode'
+          })
       Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.karbariDictionaryCode, 'karbariCode');
-      Converter.convertIdToTitle(this.closeTabService.saveDataForLMModify, this.qotrDictionary, 'qotrCode');
     }
   }
   toPrePage = () => {
