@@ -55,21 +55,3 @@ section {
 input {
   border: none;
 }
-
-::ng-deep {
-  .mat-select-panel .mat-option {
-    font-size: var(--font_s);
-    line-height: 3em;
-    height: 3em;
-    text-align: right;
-    font-family: $font_family;
-    font-weight: 600;
-  }
-
-  .mat-option-text {
-    font-size: var(--font_s);
-    font-weight: 600;
-    color: var(--primary_6);
-  }
-
-}

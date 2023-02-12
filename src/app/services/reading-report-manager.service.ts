@@ -53,7 +53,6 @@ export class ReadingReportManagerService {
   _isCollapsedAllImgs: boolean = true;
 
   masterReq: IReadingReportReq = {
-    zoneId: null,
     fromDate: '',
     toDate: '',
     counterReaderId: '',

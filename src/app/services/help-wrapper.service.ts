@@ -131,9 +131,9 @@ export class HelpWrapperService {
     else if (currentRoute === EN_Routes.wrmdbf)
       return {
         title: 'دانلود خروجی',
-        messageOne: 'برای دریافت فایل های متعدد(dbf) از این بخش میتوان اقدام کرد',
+        messageOne: 'این بخش برای دریافت فایل های متعدد(dbf) طراحی شده است',
         imgOne: 'assets/imgs/help/dbf/dbf.JPG',
-        messageTwo: 'کافی است پس از وارد کردن مقادیر، فایل بارگیری را دریافت نمایید.',
+        messageTwo: 'کافی است پس از وارد کردن مقادیر، برروی دانلود فایل کلیک نمایید.',
       }
     else if (currentRoute === EN_Routes.wrmfbn || currentRoute === EN_Routes.wrmfbnres)
       return {

@@ -27,10 +27,6 @@ section.content {
   border-radius: 10px;
 }
 
-.btn_2_o {
-  font-family: $font_family;
-}
-
 h3 {
   color: var(--primary_3);
   font-size: var(--font_m2);
@@ -40,37 +36,6 @@ h3 {
 footer {
   margin-top: var(--font_05);
   text-align: center;
-}
-
-::ng-deep {
-
-  .mat-select-panel .mat-option {
-    font-size: var(--font_s);
-    line-height: 3em;
-    height: 3em;
-    text-align: right;
-    font-family: inherit;
-    font-weight: 600;
-  }
-
-  .mat-option-text {
-    font-size: var(--font_s);
-    font-weight: 600;
-    color: var(--primary_6);
-  }
-
-  .mat-checkbox-layout .mat-checkbox-label {
-    margin: 0 var(--font_05);
-    font-family: $font_family;
-    font-size: var(--font_s);
-    font-weight: 600;
-    color: var(--thirdy_3);
-  }
-
-  .mat-radio-label-content {
-    padding-right: var(--font_05) !important;
-    color: var(--thirdy_1);
-  }
 }
 
 .radio_button {
@@ -215,25 +180,6 @@ footer {
   justify-content: flex-start;
   direction: rtl;
   gap: var(--font_xs);
-}
-
-::ng-deep {
-  .mat-checkbox-layout {
-    .mat-checkbox-label {
-      margin: 0 var(--font_05);
-      font-size: var(--font_s);
-      font-weight: 600;
-      color: var(--primary_5);
-      line-height: 2;
-      border-radius: $border_15;
-      font-family: $font_family;
-    }
-  }
-
-  .mat-radio-label-content {
-    padding-right: var(--font_05) !important;
-    color: var(--thirdy_1_spec);
-  }
 }
 
 // dialog conf

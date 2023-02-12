@@ -3,12 +3,12 @@
 
 .container_wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 19rem));
   direction: rtl;
   gap: var(--font_05);
 
   @media (min-width: 550px) {
-    grid-template-columns: repeat(auto-fit, minmax(27rem, auto));
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 21rem));
   }
 }
 

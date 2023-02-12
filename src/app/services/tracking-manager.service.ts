@@ -174,8 +174,6 @@ export class TrackingManagerService {
     });
   }
   downloadOutputDBFEqamatBagh = (method: ENInterfaces, dbfData: any): Promise<any> => {
-    dbfData.date = Converter.persianToEngNumbers(dbfData.date);
-
     return new Promise((resolve) => {
       this.interfaceManagerService.POSTBLOB(method, dbfData).toPromise().then(res => {
         resolve(res);

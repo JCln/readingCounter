@@ -219,3 +219,29 @@
   transform: translateX(-50%);
   width: 16rem;
 }
+
+.roles {
+  background: var(--thirdy_2);
+  border-radius: $border_5;
+  padding: var(--font_05);
+}
+
+.role_items {
+  direction: rtl;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 12rem));
+  gap: var(--font_05);
+  padding: var(--font_xs);
+  border-radius: $border_15;
+  margin-bottom: var(--font_2);
+  background: var(--secondary_1);
+}
+
+h2 {
+  color: var(--primary_5);
+  text-align: right;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+  color: var(--primary_5);
+}
