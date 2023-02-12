@@ -15,14 +15,8 @@
     <div class="color">
         <h3>رنگ</h3>
         <div class="c_separator">
-
-            <mat-button-toggle-group #group="matButtonToggleGroup" value="object.color">
-                <mat-button-toggle class="btn_2" *ngFor="let item of colors" [ngStyle]="{'color':item.background}"
-                    [(ngModel)]="item.background" (click)="messageService.toastMessageReq.color = item.value">
-                    {{item.text}}
-                </mat-button-toggle>
-            </mat-button-toggle-group>
-
+            <p-selectButton [options]="colorsT" [(ngModel)]="selectedColor" optionLabel="text">
+            </p-selectButton>
         </div>
         <hr class="hr_2">
     </div>

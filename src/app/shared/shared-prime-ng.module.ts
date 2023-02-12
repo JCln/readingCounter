@@ -7,6 +7,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
@@ -29,6 +30,7 @@ import { PrimeTableComponent } from './prime-table/prime-table.component';
     SliderModule,
     DynamicDialogModule,
     RadioButtonModule,
+    SelectButtonModule,
     SharedThreeModule,
   ],
   exports: [
@@ -46,6 +48,7 @@ import { PrimeTableComponent } from './prime-table/prime-table.component';
     AddRowDirective,
     ReactiveFormsModule,
     RadioButtonModule,
+    SelectButtonModule,
     SharedThreeModule,
   ],
   entryComponents: [

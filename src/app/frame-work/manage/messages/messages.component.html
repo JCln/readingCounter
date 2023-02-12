@@ -4,39 +4,30 @@
         <div class="content">
             <div class="_save_this">
                 <h2>عنوان</h2>
-                <input type="text" class="input_1" [(ngModel)]="newMessage.title">
+                <input type="text" class="input_1" [(ngModel)]="messageService.message.title">
             </div>
             <div class="text">
                 <h2>متن</h2>
-                <textarea name="text" id="text" cols="30" rows="10" [(ngModel)]="newMessage.message"></textarea>
+                <textarea name="text" id="text" cols="30" rows="10"
+                    [(ngModel)]="messageService.message.message"></textarea>
             </div>
             <div class="time">
                 <h2>زمان (ثانیه)</h2>
                 <div class="t_separator">
-                    <mat-button-toggle-group>
-                        <mat-button-toggle class="btn_2" *ngFor="let item of times"
-                            (click)="newMessage.seconds = item.value">
-                            {{item.title}}
-                        </mat-button-toggle>
-                    </mat-button-toggle-group>
+                    <p-selectButton [options]="times" [(ngModel)]="messageService.message.seconds" optionLabel="title"
+                        optionValue="value"></p-selectButton>
                 </div>
-            </div>
-            <div class="color">
-                <h2>رنگ</h2>
-                <div class="c_separator">
-
-                    <mat-button-toggle-group #group="matButtonToggleGroup" value="newMessage.color">
-                        <mat-button-toggle class="btn_2" *ngFor="let item of colors"
-                            [ngStyle]="{'color':item.background}" [(ngModel)]="item.background"
-                            (click)="newMessage.color = item.value">
-                            {{item.text}}
-                        </mat-button-toggle>
-                    </mat-button-toggle-group>
-
+                <div class="color">
+                    <h2>رنگ</h2>
+                    <div class="c_separator">
+                        <p-selectButton [options]="colors" [(ngModel)]="messageService.message.color" optionLabel="text"
+                            optionValue="value">
+                        </p-selectButton>
+                    </div>
                 </div>
-            </div>
-            <div class="send">
-                <button (click)="connectToServer()" class="btn_2">ارسال و مشاهده</button>
+                <div class="send">
+                    <button (click)="connectToServer()" class="btn_2">ارسال و مشاهده</button>
+                </div>
             </div>
         </div>
     </main>

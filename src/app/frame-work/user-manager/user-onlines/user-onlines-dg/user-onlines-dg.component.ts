@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IColor } from 'interfaces/inon-manage';
+import { IToastColor } from 'interfaces/inon-manage';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { MessageService } from 'services/message.service';
 import { UsersAllService } from 'services/users-all.service';
@@ -11,7 +10,8 @@ import { UsersAllService } from 'services/users-all.service';
   styleUrls: ['./user-onlines-dg.component.scss']
 })
 export class UserOnlinesDgComponent implements OnInit {
-  colors: IColor[] = [];
+  colorsT: IToastColor[];
+  selectedColor: any;
 
   constructor(
     public config: DynamicDialogConfig,
@@ -19,22 +19,31 @@ export class UserOnlinesDgComponent implements OnInit {
     public messageService: MessageService
   ) { }
 
-  getColors = () => {
-    this.colors = this.messageService.getToastColors();
-  }
   classWrapper = async () => {
     const a = this.config.data._data;
     this.messageService.toastMessageReq.userId = a.userId;
-    this.getColors();
+
+    this.colorsT = this.messageService.getToastColors();
+    console.log(this.colorsT);
+
   }
   ngOnInit(): void {
     this.classWrapper();
   }
   postDataSource = async () => {
-    if (this.messageService.verificationDirectMessage(this.messageService.toastMessageReq)) {
-      const a = await this.userService.postDataSource(ENInterfaces.signalRNotifDirectText, this.messageService.toastMessageReq);
-      if (a)
-        this.userService.snackBarMessageSuccess(a);
-    }
+    console.log(this.selectedColor);
+    console.log(this.messageService.toastMessageReq);
+
+    // if (this.messageService.verificationDirectMessage(this.messageService.toastMessageReq)) {
+    //   const a = await this.userService.postDataSource(ENInterfaces.signalRNotifDirectText, this.messageService.toastMessageReq);
+    //   if (a)
+    //     this.userService.snackBarMessageSuccess(a);
+    // }
+  }
+  // html ngModel for color not working so this function written
+  changeColor = (color: any) => {
+    console.log(color);
+
+    // this.messageService.toastMessageReq.color = color;
   }
 }

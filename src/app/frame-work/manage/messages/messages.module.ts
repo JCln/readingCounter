@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 
 import { MessagesRoutingModule } from './messages-routing.module';
 import { MessagesComponent } from './messages.component';
@@ -8,7 +8,7 @@ import { MessagesComponent } from './messages.component';
 @NgModule({
   declarations: [MessagesComponent],
   imports: [
-    SharedModule,
+    SharedPrimeNgModule,
     MessagesRoutingModule
   ]
 })

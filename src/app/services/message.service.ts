@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IMessage, INotifyDirectImage } from 'interfaces/inon-manage';
+import { IMessage, INotifyDirectImage, IToastColor } from 'interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
@@ -11,18 +11,19 @@ import { broadcastMessages, colors, times, toastColors } from './DI/messages';
   providedIn: 'root'
 })
 export class MessageService {
+
   message: IMessage = {
     title: '',
     message: '',
     color: ENSnackBarColors.info,
-    seconds: 0,
+    seconds: ENSnackBarTimes.tenMili,
     canSave: true
   };
   toastMessageReq = {
     userId: '',
     title: '',
     text: '',
-    color: ''
+    color: null,
   };
   toastImageWithCaptionReq: INotifyDirectImage = {
     file: '',
@@ -40,7 +41,7 @@ export class MessageService {
   getMessages = () => { return broadcastMessages; }
 
   getColors = () => { return colors; }
-  getToastColors = () => { return toastColors; }
+  getToastColors = (): IToastColor[] => { return toastColors; }
 
   verificationBroadcastMessage = (body: IMessage) => {
     if (MathS.isNull(body.title)) {
@@ -75,15 +76,6 @@ export class MessageService {
       return false;
     }
     return true;
-  }
-  setColor = (color: ENSnackBarColors) => {
-    this.message.color = color;
-  }
-  setTime = (showTime: number) => {
-    this.message.seconds = showTime;
-  }
-  setText = (text: string) => {
-    this.message.message = text;
   }
   showSnack = (message: string, color: ENSnackBarColors) => {
     this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);

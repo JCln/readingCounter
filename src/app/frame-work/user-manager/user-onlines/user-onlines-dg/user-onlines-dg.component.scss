@@ -47,7 +47,6 @@ section {
   }
 
   .send {
-    text-align: center;
     margin: var(--font_2) 0 var(--font_05);
 
     .btn_2 {
@@ -89,16 +88,6 @@ section {
     color: var(--primary_5);
   }
 
-}
-
-// //////////
-
-.mat-button-toggle-group-appearance-standard {
-  border: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--font_3), var(--font_5)));
-  gap: var(--font_03);
-  padding: var(--font_02);
 }
 
 .p-dialog .p-dialog-header {
