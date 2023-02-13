@@ -1,5 +1,4 @@
 @import 'variable.scss';
-@import 'mixins.scss';
 @import 'media';
 
 .lightBackground {
@@ -14,6 +13,16 @@
   background-image: url('/assets/imgs/framework/bbp.jpg');
 }
 
+.d_flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.d_grid_center {
+  display: grid;
+  place-items: center;
+}
 
 main {
   width: auto;

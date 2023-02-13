@@ -155,10 +155,6 @@ article {
   box-shadow: 0 0 2px 1px var(--secondary_5);
 }
 
-._flex_dr_ric {
-  justify-content: center;
-}
-
 h3 {
   color: var(--primary_3);
   margin-bottom: var(--font_05);
@@ -171,6 +167,11 @@ h3 {
 }
 
 ._flex_dr_ric {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 0 var(--font_05);
 
   p {

@@ -1,4 +1,8 @@
-@import "mixins.scss";
+.d_flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .spinner {
   position: fixed;
