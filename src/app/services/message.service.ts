@@ -19,12 +19,6 @@ export class MessageService {
     seconds: ENSnackBarTimes.tenMili,
     canSave: true
   };
-  toastMessageReq = {
-    userId: '',
-    title: '',
-    text: '',
-    color: null,
-  };
   toastImageWithCaptionReq: INotifyDirectImage = {
     file: '',
     userId: '',
