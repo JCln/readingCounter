@@ -1,29 +1,6 @@
-.d_flex_center_column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-._flex_dr_ric {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-}
-._flex_drr_ric {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-}
 .d_flex_center {
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-.d_flex_s_around {
-  display: flex;
-  justify-content: space-around;
   align-items: center;
 }
 

@@ -285,6 +285,7 @@ export interface ITrueFalse {
 export interface ISearchInOrderTo {
     title: string;
     isSelected: boolean;
+    key?: string;
 }
 export interface ITitleValue {
     title: string;

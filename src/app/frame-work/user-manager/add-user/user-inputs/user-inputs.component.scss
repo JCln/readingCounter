@@ -1,11 +1,5 @@
 @import 'add-edit.scss';
 
-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
-  gap: .87rem;
-}
-
 .text_left {
   text-align: left;
   direction: ltr;

@@ -16,7 +16,7 @@ import { ThemeService } from 'services/theme.service';
         display: 'inline',
         padding: '.85rem 1rem'
       })),
-      transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
+      transition('closeSubItems <=> openSubItems', animate('250ms ease-in-out'))
     ])
   ]
 })

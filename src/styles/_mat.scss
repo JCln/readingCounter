@@ -1,4 +1,6 @@
-:host::ng-deep {
+:host,
+:host::ng-deep,
+::ng-deep {
   .mat-select-value {
     font-family: $font_family;
     font-size: var(--font_s);
@@ -16,19 +18,6 @@
     direction: rtl;
   }
 
-  .mat-form-field-infix {
-    font-size: var(--font_s);
-    font-weight: 600;
-  }
-
-  .mat-form-field {
-    text-align: right;
-    font-family: $font_family;
-    font-size: var(--font_s);
-    font-weight: 600;
-    color: var(--secondary_8);
-  }
-
   .mat-select {
     font-family: $font_family;
     font-weight: 600;
@@ -37,6 +26,16 @@
 
   .mat-select-arrow {
     color: var(--primary_3);
+  }
+
+  .mat-select-panel .mat-optgroup-label,
+  .mat-select-panel .mat-option {
+    font-size: var(--font_s);
+    line-height: 3em;
+    height: 3em;
+    text-align: right;
+    font-family: inherit;
+    font-weight: 600;
   }
 
   .mat-select-panel .mat-option {
@@ -85,20 +84,6 @@
     padding-right: var(--font_05) !important;
   }
 
-  .mat-form-field.mat-focused .mat-form-field-label,
-  .mat-form-field-label {
-    color: var(--secondary_8);
-  }
-
-  .mat-button-toggle-checked {
-    border-bottom: var(--font_03) solid var(--primary_4) !important;
-    box-shadow: 2px 2px 2px 2px var(--secondary_3) !important;
-  }
-
-  .mat-button-toggle-appearance-standard {
-    background: var(--secondary_1);
-  }
-
   .mat-input-element {
     color: var(--primary_5);
   }
@@ -107,12 +92,8 @@
     border-color: var(--secondary_5);
   }
 
-  .mat-form-field-appearance-fill .mat-form-field-flex {
-    background-color: var(--secondary_3);
-  }
-
   .mat-dialog-actions {
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 }
 

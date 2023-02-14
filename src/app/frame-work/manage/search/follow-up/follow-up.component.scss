@@ -43,9 +43,12 @@ input {
 
 .order_by {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   direction: rtl;
+  padding: var(--font_xxs);
+  background-color: var(--secondary_1);
+  border-radius: $border_7;
 }
 
 .title {

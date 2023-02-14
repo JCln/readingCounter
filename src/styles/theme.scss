@@ -21,7 +21,7 @@
     font-size: var(--font_m);
     place-content: center;
     color: var(--primary_5);
-    background-color: var(--primary_1);
+    background: var(--primary_1);
   }
 
   .test {
@@ -31,7 +31,7 @@
     top: 2rem;
     left: 0;
     grid-template-columns: repeat(2, 1fr);
-    background-color: var(--primary_1);
+    background: var(--primary_1);
     border-radius: $border_15;
   }
 

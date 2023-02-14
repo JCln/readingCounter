@@ -36,8 +36,7 @@ export class TrackingManagerService {
     toDate: null
   };
   dbfOutputEqamatBagh = {
-    zoneId: 0,
-    date: null,
+    zoneId: 0
   };
 
   getColumnDefColumns = (): IObjectIteratation[] => {
@@ -316,10 +315,6 @@ export class TrackingManagerService {
   checkVertificationDBFEqamatBagh = (dataSource: any): boolean => {
     if (MathS.isNull(dataSource.zoneId)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    if (MathS.isNull(dataSource.date)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_date);
       return false;
     }
     return true;

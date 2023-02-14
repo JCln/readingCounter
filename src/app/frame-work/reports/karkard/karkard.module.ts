@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedChartsModule } from 'src/app/shared/shared-charts.module';
 import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
+import { SharedSortByModule } from 'src/app/shared/shared-sort-by';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SharedThreeModule } from 'src/app/shared/shared_three.module';
 
@@ -15,6 +16,7 @@ import { KarkardComponent } from './karkard.component';
     SharedModule,
     SharedThreeModule,
     SharedChartsModule,
+    SharedSortByModule,
     KarkardRoutingModule
   ]
 })

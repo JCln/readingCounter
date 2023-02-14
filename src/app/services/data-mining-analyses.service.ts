@@ -42,21 +42,25 @@ export class DataMiningAnalysesService {
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
-      isSelected: true
+      isSelected: true,
+      key: 'Date'
     },
     {
       title: 'دوره',
-      isSelected: false
+      isSelected: false,
+      key: 'period'
     }
   ]
   searchInOrderToReverse: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
-      isSelected: false
+      isSelected: false,
+      key: 'Date'
     },
     {
       title: 'دوره',
-      isSelected: true
+      isSelected: true,
+      key: 'period'
     }
   ]
   /* GET*/

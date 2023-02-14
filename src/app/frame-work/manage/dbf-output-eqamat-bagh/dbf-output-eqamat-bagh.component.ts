@@ -15,8 +15,6 @@ import { DateJalaliComponent } from 'src/app/core/_layouts/header/date-jalali/da
 export class DbfOutputEqamatBaghComponent extends FactoryONE {
   @ViewChild(DateJalaliComponent) date;
   zoneDictionary: IDictionaryManager[] = [];
-  dateDictionary: IDictionaryManager[] = [];
-
   constructor(
     public trackingManagerService: TrackingManagerService,
     private outputManagerService: OutputManagerService,
@@ -38,17 +36,6 @@ export class DbfOutputEqamatBaghComponent extends FactoryONE {
     if (canRefresh)
       this.nullSavedSource();
     this.zoneDictionary = await this.trackingManagerService.getZoneDictionary();
-    this.exeptionalDate();
-  }
-  exeptionalDate = () => {
-    this.dateDictionary = [
-      { id: 5, title: 'مرداد', isSelected: false },
-      { id: 6, title: 'شهریور', isSelected: false },
-      { id: 7, title: 'مهر', isSelected: false },
-      { id: 8, title: 'آبان', isSelected: false },
-      { id: 9, title: 'آذر', isSelected: false },
-      { id: 10, title: 'دی', isSelected: false },
-    ]
   }
 
 }

@@ -1,59 +1,51 @@
-<form #form="ngForm">
-    <mat-form-field appearance="fill">
-        <mat-label>نام</mat-label>
-        <input matInput [(ngModel)]="userInputForm.firstName" name="firstName" placeholder="نام را وارد نمایید"
-            required>
-    </mat-form-field>
+<form class="_user-input" #form="ngForm">
+    <div class="input_2">
+        <div class="_key">نام</div>
+        <input class="_value" [(ngModel)]="userInputForm.firstName" name="firstName" required>
+    </div>
 
-    <mat-form-field appearance="fill">
-        <mat-label>نام خانوادگی</mat-label>
-        <input matInput [(ngModel)]="userInputForm.sureName" name="sureName" placeholder="نام خانوادگی را وارد نمایید"
-            required>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>نام کاربری</mat-label>
-        <input matInput [(ngModel)]="userInputForm.username" name="username" placeholder="نام کاربری را وارد نمایید"
-            required>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>کد کاربری</mat-label>
-        <input type="number" matInput [(ngModel)]="userInputForm.userCode" class="text_left" name="userCode"
-            placeholder="کد کاربری را وارد نمایید" required>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>گذرواژه</mat-label>
-        <input matInput [(ngModel)]="userInputForm.password" type="password" name="password"
-            placeholder="گذرواژه را وارد نمایید" required>
-    </mat-form-field>
+    <div class="input_2">
+        <div class="_key">نام خانوادگی</div>
+        <input class="_value" [(ngModel)]="userInputForm.sureName" name="sureName" required>
+    </div>
+    <div class="input_2">
+        <div class="_key">نام کاربری</div>
+        <input class="_value" [(ngModel)]="userInputForm.username" name="username" required>
+    </div>
+    <div class="input_2">
+        <div class="_key">کد کاربری</div>
+        <input class="_value text_left" type="number" [(ngModel)]="userInputForm.userCode" name="userCode" required>
+    </div>
+    <div class="input_2">
+        <div class="_key">گذرواژه</div>
+        <input class="_value" type="password" [(ngModel)]="userInputForm.password" name="password" required>
+    </div>
 
-    <mat-form-field appearance="fill">
-        <mat-label>تکرار گذرواژه</mat-label>
-        <input matInput [(ngModel)]="userInputForm.confirmPassword" type="password" name="confirmPassword"
-            placeholder="گذرواژه را مجددا وارد نمایید" required>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>ایمیل</mat-label>
-        <input matInput [(ngModel)]="userInputForm.email" name="email" class="text_left"
-            placeholder="ایمیل را وارد نمایید">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>موبایل</mat-label>
-        <input matInput [(ngModel)]="userInputForm.mobile" class="text_left dir_left" name="mobile" maxlength=11
-            minlength=11 placeholder="شماره موبایل را وارد نمایید" required>
-    </mat-form-field>
-
-    <mat-form-field class="_double_size tooltip" appearance="fill">
-        <mat-label>نام نمایش</mat-label>
-        <input matInput [(ngModel)]="userInputForm.displayName" name="displayName" placeholder="نام قابل نمایش"
+    <div class="input_2">
+        <div class="_key">تکرار گذرواژه</div>
+        <input class="_value" type="password" [(ngModel)]="userInputForm.confirmPassword" name="confirmPassword"
             required>
+    </div>
+    <div class="input_2">
+        <div class="_key">ایمیل</div>
+        <input class="_value text_left" [(ngModel)]="userInputForm.email" name="email">
+    </div>
+
+    <div class="input_2">
+        <div class="_key">موبایل</div>
+        <input class="_value text_left dir_left" [(ngModel)]="userInputForm.mobile" name="mobile" maxlength=11
+            minlength=11 required>
+    </div>
+
+    <div class="input_2 _double_size tooltip">
+        <div class="_key">نام نمایش</div>
+        <input class="_value" [(ngModel)]="userInputForm.displayName" name="displayName" required>
         <div class="tooltip_text_bottom">این فیلد جهت نمایش نام کاربر در برنامه استفاده می‌شود</div>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>شناسه دستگاه</mat-label>
-        <input matInput [(ngModel)]="userInputForm.deviceId" name="deviceId" placeholder="شناسه دستگاه را وارد نمایید">
-    </mat-form-field>
+    </div>
+    <div class="input_2">
+        <div class="_key">شناسه دستگاه</div>
+        <input class="_value" [(ngModel)]="userInputForm.deviceId" name="deviceId">
+    </div>
 
     <div class="checkbox_s">
         <mat-checkbox [(ngModel)]="userInputForm.displayMobile" name="displayMobile">موبایل نمایش داده شود؟

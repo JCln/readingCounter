@@ -2,17 +2,7 @@
     <section [hidden]="readingReportManagerService.isCollapsedPrfm">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
-                <section class="order_by">
-                    <h2>جستجو بر اساس :</h2>
-                    <mat-radio-group class="radio_group" aria-labelledby="radio_group"
-                        [(ngModel)]="readingReportManagerService._isOrderByDate" name="_isOrderByDate">
-                        <mat-radio-button class="radio_button"
-                            *ngFor="let orderType of readingReportManagerService.searchInOrderTo"
-                            [value]="orderType.isSelected">
-                            {{orderType.title}}
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </section>
+                <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
                     <div class="input_2">
