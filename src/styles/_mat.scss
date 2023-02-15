@@ -53,18 +53,6 @@
     color: var(--primary_6);
   }
 
-  .mat-radio-label-content {
-    padding-right: var(--font_025) !important;
-    color: var(--secondary_8);
-    font-family: $font_family;
-    font-weight: 600;
-    font-size: var(--font_s);
-  }
-
-  .mat-radio-outer-circle {
-    border-color: var(--secondary_8);
-  }
-
   .mat-checkbox-layout .mat-checkbox-label {
     margin: 0 var(--font_05);
     font-family: $font_family;
@@ -73,15 +61,6 @@
     color: var(--secondary_8);
     line-height: 2;
     border-radius: $border_15;
-  }
-
-  .mat-radio-label-content {
-    color: var(--secondary_6);
-    font-size: var(--font_s);
-    font-weight: 600;
-    margin: 0 var(--font_xs);
-    font-family: $font_family;
-    padding-right: var(--font_05) !important;
   }
 
   .mat-input-element {

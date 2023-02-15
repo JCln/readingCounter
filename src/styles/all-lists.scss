@@ -19,23 +19,27 @@
 
 .radios {
   background: var(--white);
-  border-radius: $border_15 $border_15 0 0;
+  border-radius: 10px 10px 0 0;
   padding: 0 var(--font_02);
-
-  .radio_group {
-    justify-content: flex-start;
-    display: flex;
-    direction: rtl;
-    flex-wrap: wrap;
-
-    .mat-radio-button {
-      margin-left: var(--font_05);
-    }
-  }
+  display: flex;
+  flex-wrap: wrap;
+  direction: rtl;
+  gap: var(--font_xxs);
 }
 
 .under_zero {
   border-radius: $border_15;
-  background-color: var(--primary_1);
+  background-color: var(--secondary_1);
   padding: 0 var(--font_02);
+}
+
+.p-field-radiobutton {
+  display: flex;
+  align-items: center;
+  margin: 0;
+
+  label {
+    font-size: var(--font_s);
+    color: var(--primary_3)
+  }
 }

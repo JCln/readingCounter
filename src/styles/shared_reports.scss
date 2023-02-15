@@ -66,15 +66,8 @@ hr {
 
 .order_by {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-}
-
-.radio_button {
-  font-size: var(--font_s);
-  font-weight: 700;
-  font-family: inherit;
-  color: var(--secondary_6);
-  margin: 0 2rem;
 }
 
 [hidden] {

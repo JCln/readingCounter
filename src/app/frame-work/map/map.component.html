@@ -41,12 +41,14 @@
         <p-slider [(ngModel)]="polyline_configs" [max]=3000></p-slider>
         <article>
             <h3>ترتیب براساس :</h3>
-            <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_selectedOrderId"
-                name="_isOrderByTime">
-                <mat-radio-button class="radio_button" *ngFor="let orderType of orderGroup" [value]="orderType.value">
-                    {{orderType.header}}
-                </mat-radio-button>
-            </mat-radio-group>
+            <div *ngFor="let orderType of orderGroup">
+                <div class="p-field-radiobutton">
+                    <p-radioButton name="orderByDate" [value]="orderType.value" [(ngModel)]="_selectedOrderId"
+                        [inputId]="orderType.title">
+                    </p-radioButton>
+                    <label [for]="orderType.title">{{orderType.header}}</label>
+                </div>
+            </div>
             <h3>به ترتیب صعودی؟</h3>
             <mat-checkbox name="orderInAsc" [(ngModel)]="_isOrderInAsc">بلی</mat-checkbox>
             <br>

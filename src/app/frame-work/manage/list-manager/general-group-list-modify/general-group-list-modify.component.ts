@@ -68,9 +68,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   ) {
     super(dialogService, listManagerService);
   }
-  updateOnChangedCounterState = async (val: any) => {
-    if (val.value) {
-      this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val.value);
+  updateOnChangedCounterState = async (val: number) => {
+    if (val) {
+      this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
       this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
@@ -126,7 +126,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         //   }
         // }
       } else {
-        this.updateOnChangedCounterState({ value: this.listManagerService.counterStateValue });
+        this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
       }
       if (this.browserStorageService.isExists(this._outputFileName)) {
         this._selectCols = this.browserStorageService.get(this._outputFileName);
@@ -142,7 +142,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   refreshTable = () => {
     if (!MathS.isNull(this.listManagerService.counterStateValue))
-      this.updateOnChangedCounterState({ value: this.listManagerService.counterStateValue });
+      this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
     else {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
     }

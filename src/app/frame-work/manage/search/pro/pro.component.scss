@@ -38,14 +38,6 @@ footer {
   text-align: center;
 }
 
-.radio_button {
-  font-size: var(--font_s);
-  font-weight: 700;
-  font-family: inherit;
-  color: var(--secondary_6);
-  margin: 0 2rem;
-}
-
 [hidden] {
   display: none;
 }
@@ -164,16 +156,7 @@ hr {
   display: none;
 }
 
-
 // materials 
-.radio_button {
-  font-size: var(--font_s);
-  font-weight: 700;
-  font-family: inherit;
-  color: var(--secondary_6);
-  margin: 0 2rem;
-}
-
 footer {
   display: flex;
   flex-wrap: wrap;
