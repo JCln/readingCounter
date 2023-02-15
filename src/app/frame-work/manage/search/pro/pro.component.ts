@@ -32,7 +32,6 @@ export class ProComponent extends AllListsFactory {
   counterReportDictionary: IDictionaryManager[] = [];
   fragmentMasterIds: IDictionaryManager[] = [];
   masrafState: ITHV[] = []
-  _selectedZone: any;
   _years: ITitleValue[] = [];
   eslahType: any[] = [];
 
@@ -58,28 +57,22 @@ export class ProComponent extends AllListsFactory {
     }
   }
   getNesseseriesByZone = async () => {
-    if (!this._selectedZone) {
-      if (this.closeTabService.saveDataForSearchProReq.zoneId) {
-        this._selectedZone = this.closeTabService.saveDataForSearchProReq.zoneId;
-      }
+    const _zone = this.closeTabService.saveDataForSearchProReq.zoneId;
+    if (!_zone) {
       this.counterStateDictionary = await this.searchService.getCounterStateDictionary();
     }
     else {
-      // add latest zone value to "_selectedZone"
-      this.closeTabService.saveDataForSearchProReq.zoneId = this._selectedZone;
-      this.fragmentMasterIds = await this.searchService.getFragmentMasterDictionary(this._selectedZone);
-      this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(this._selectedZone);
-      this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(this._selectedZone);
-      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(this._selectedZone);
-      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(this._selectedZone);
-      Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.counterStateByCodeDictionary, 'preCounterStateCode');
+      this.fragmentMasterIds = await this.searchService.getFragmentMasterDictionary(_zone);
+      this.counterReportDictionary = await this.searchService.getCounterReportByZoneDictionary(_zone);
+      this.counterStateByZoneIdDictionary = await this.searchService.getCounterStateByZoneDictionary(_zone);
+      this.counterStateDictionary = await this.searchService.getCounterStateByZoneDictionary(_zone);
+      this.counterStateByCodeDictionary = await this.searchService.getCounterStateByCodeDictionary(_zone);
     }
+
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.zoneDictionary = await this.searchService.getZoneDictionary();
-    this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
-    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
-    this.karbariDictionary = await this.searchService.getKarbariDictionaryCode();
+    this.masrafState = this.searchService.getMasrafStates();
     this.qotrDictionary = await this.searchService.getQotrDictionary();
+    this.karbariDictionaryCode = await this.searchService.getKarbariDictionaryCode();
 
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.deleteDictionary, 'hazf');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.zoneDictionary, 'zoneId');
@@ -88,22 +81,23 @@ export class ProComponent extends AllListsFactory {
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.qotrDictionary, 'qotrCode');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.counterStateDictionary, 'counterStateId');
     Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.eslahType, 'eslahType');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchPro, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
     this.searchService.setDynamicPartRanges(this.closeTabService.saveDataForSearchPro);
     this.searchService.makeHadPicturesToBoolean(this.closeTabService.saveDataForSearchPro);
-    this.masrafState = this.searchService.getMasrafStates();
-    this._years = this.searchService.getYears();
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForSearchPro = null;
     }
-    if (this.closeTabService.saveDataForSearchPro) {
-      this._selectedZone = this.closeTabService.saveDataForSearchProReq.zoneId;
-      console.log(this._selectedZone);
-
+    if (this.closeTabService.saveDataForSearchMoshtarakin) {
+      this.getNesseseriesByZone();
     }
-    this.getNesseseriesByZone();
+    this._years = this.searchService.getYears();
+    this.getReadingPeriod();
+    this.zoneDictionary = await this.searchService.getZoneDictionary();
+    this.karbariDictionary = await this.searchService.getKarbariDictionaryCode();
+    this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
     this.searchService.getSearchInOrderTo();
     this.insertSelectedColumns();
   }
@@ -111,7 +105,9 @@ export class ProComponent extends AllListsFactory {
     this.eslahType = this.listManagerService.getOffloadModifyTypeSimple();
   }
   getReadingPeriod = async () => {
-    this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(this.closeTabService.saveDataForSearchProReq._selectedKindId);
+    const a = this.closeTabService.saveDataForSearchProReq._selectedKindId;
+    if (a)
+      this.readingPeriodDictionary = await this.searchService.getReadingPeriodDictionary(a);
   }
   async connectToServer() {
     if (this.searchService.verificationPro(this.closeTabService.saveDataForSearchProReq, this.searchService._isOrderByDate)) {

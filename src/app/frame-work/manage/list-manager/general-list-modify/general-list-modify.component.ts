@@ -57,7 +57,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
 
   updateOnChangedCounterState = async (val: any) => {
     this.deleteDictionary = this.listManagerService.getDeleteDictionary();
-    this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val.value);
+    this.closeTabService.saveDataForLMGeneralModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyLists_pageSign.groupId + '/', val);
     this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralModify);
     this.closeTabService.saveDataForLMGeneralModifyReq = this.allListsService.generalModifyLists_pageSign.GUid;
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
@@ -104,7 +104,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
   }
   refreshTable = () => {
     if (!MathS.isNull(this.counterStateValue))
-      this.updateOnChangedCounterState({ value: this.counterStateValue });
+      this.updateOnChangedCounterState(this.counterStateValue);
     else {
       this.listManagerService.showSnackWarn(EN_messages.insert_counterState);
     }

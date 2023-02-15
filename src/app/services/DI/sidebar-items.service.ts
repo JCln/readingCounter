@@ -18,6 +18,9 @@ export class SidebarItemsService {
   getLatestItems = (): Observable<any> => {
     return this.tabItemsSource.asObservable();
   }
+  getTestSideTest = () => {
+    return sidebarItemsTest.addStaticSubRoutes;
+  }
   getSideBarItems = (): Promise<ISidebarItems> => {
     return new Promise((resolve) => {
       this.interfaceServiceManager.GET(ENInterfaces.getSideBar).toPromise().then((res: any) => {
@@ -26,9 +29,6 @@ export class SidebarItemsService {
         resolve(res);
       })
     });
-  }
-  getTestSideTest = () => {
-    return sidebarItemsTest.addStaticSubRoutes;
   }
 
 }
