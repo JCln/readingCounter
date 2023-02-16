@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IBatchModifyRes, IOffloadModifyReq } from 'interfaces/inon-manage';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -29,7 +28,6 @@ import { GeneralGroupInfoResComponent } from './general-group-info-res/general-g
   styleUrls: ['./general-group-list-modify.component.scss']
 })
 export class GeneralGroupListModifyComponent extends AllListsFactory {
-  dataSource: IOnOffLoadFlat[] = [];
   tempOriginDataSource: any[] = [];
   // should place only in component because overright totalNum needs for dynamic use
   tempMainDataSource = { totalNum: 0, data: [] };
@@ -58,7 +56,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   constructor(
     public listManagerService: ListManagerService,
     public dialogService: DialogService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public allListsService: AllListsService,
     public outputManagerService: OutputManagerService,
     public columnManager: ColumnManager,
@@ -70,11 +68,10 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   updateOnChangedCounterState = async (val: number) => {
     if (val) {
-      this.dataSource = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
-      this.listManagerService.makeHadPicturesToBoolean(this.dataSource);
+      this.closeTabService.saveDataForLMGeneralGroupModify = await this.listManagerService.getLM(ENInterfaces.trackingToOFFLOADEDGeneralModify + this.allListsService.generalModifyListsGrouped_pageSign.groupId + '/', val);
+      this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMGeneralGroupModify);
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();
       this.closeTabService.saveDataForLMGeneralGroupModifyReq = this.allListsService.generalModifyListsGrouped_pageSign.GUid;
-      this.closeTabService.saveDataForLMGeneralGroupModify = this.dataSource;
       this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
       this.qotrDictionary = await this.listManagerService.getQotrDictionary();
       this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeShowAllDictionary(this.allListsService.generalModifyListsGrouped_pageSign.zoneId);
@@ -82,9 +79,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       this.resetDataSourceView();
 
 
-      this.dataSource =
+      this.closeTabService.saveDataForLMGeneralGroupModify =
         Converter.convertIdsToTitles(
-          this.dataSource,
+          this.closeTabService.saveDataForLMGeneralGroupModify,
           {
             deleteDictionary: this.deleteDictionary,
             counterStateDictionary: this.counterStateDictionary,
@@ -99,7 +96,7 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
             possibleKarbariCode: 'possibleKarbariCode',
             qotrCode: 'qotrCode'
           })
-      Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
+      Converter.convertIdToTitle(this.closeTabService.saveDataForLMGeneralGroupModify, this.karbariDictionaryCode, 'karbariCode');
     }
   }
   classWrapper = async (canRefresh?: boolean) => {
@@ -113,19 +110,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMGeneralGroupModify = null;
         this.closeTabService.saveDataForLMGeneralGroupModifyReq = null;
       }
-      console.log(this.closeTabService.saveDataForLMGeneralGroupModifyReq);
 
-      if (this.closeTabService.saveDataForLMGeneralGroupModify && this.closeTabService.saveDataForLMGeneralGroupModifyReq === this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
-        this.dataSource = this.closeTabService.saveDataForLMGeneralGroupModify;
-        // for (let index = 0; index < this.dataSource.length; index++) {
-        //   for (let index = 0; index < this.counterStateByZoneDictionary.length; index++) {
-        //     if (this.counterStateByZoneDictionary[index].id == this.dataSource[index].counterStateId) {
-        //       this.dataSource[index].tempCounterState = this.counterStateByZoneDictionary[index];
-        //     }
-
-        //   }
-        // }
-      } else {
+      if (!this.closeTabService.saveDataForLMGeneralGroupModify || this.closeTabService.saveDataForLMGeneralGroupModifyReq != this.allListsService.generalModifyListsGrouped_pageSign.GUid) {
         this.updateOnChangedCounterState(this.listManagerService.counterStateValue);
       }
       if (this.browserStorageService.isExists(this._outputFileName)) {
@@ -135,9 +121,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
       }
       this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
       this.insertSelectedColumns();
-      // setDynamics should implement before new instance of dataSource create
-      this.listManagerService.setDynamicPartRanges(this.dataSource);
-      this.dataSource = JSON.parse(JSON.stringify(this.dataSource));
+      // setDynamics should implement before new instance of dataSource create      
+      this.closeTabService.saveDataForLMGeneralGroupModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
     }
   }
   refreshTable = () => {
@@ -151,32 +136,8 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     // on each change of ChangedCounterState
     this.tempMainDataSource.totalNum = 0;
   }
-  filterOptions = (e: any, toFilter: string, filterValid: number) => {
-    if (filterValid == 1) {
-      if (MathS.isNull(e.value)) {
-        this.tempFilter.first = [];
-      }
-      if (!this.tempFilter.first.includes(e.value)) {
-        this.tempFilter.first = e.value;
-      }
-    }
-    if (filterValid == 2) {
-      if (MathS.isNull(e.value)) {
-        this.tempFilter.second = [];
-      }
-      if (!this.tempFilter.second.includes(e.value)) {
-        this.tempFilter.second = e.value;
-      }
-    }
-    console.log(this.tempFilter);
-
-    if (this.tempMainDataSource.totalNum == 0) {
-      // for single use only on each 'component init'
-      this.tempMainDataSource.data = JSON.parse(JSON.stringify(this.dataSource));
-      this.tempMainDataSource.totalNum = 1;
-    }
+  filterHelper = (): any => {
     let tempDataSource: any[] = [];
-    let tempDataSource2: any[] = [];
     if (this.tempFilter.first.length > 0) {
       for (let i = 0; i < this.tempMainDataSource.data.length; i++) {
         for (let j = 0; j < this.tempFilter.first.length; j++) {
@@ -185,11 +146,14 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
           }
         }
       }
+      return tempDataSource;
     }
     else {
-      tempDataSource = this.tempMainDataSource.data;
+      return this.tempMainDataSource.data;
     }
-    console.log(tempDataSource);
+  }
+  filterHelp2 = (tempDataSource: any): any => {
+    let tempDataSource2: any[] = [];
     if (this.tempFilter.second.length > 0) {
       if (!MathS.isNull(tempDataSource)) {
         for (let i = 0; i < tempDataSource.length; i++) {
@@ -199,28 +163,49 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
             }
           }
         }
+        return tempDataSource2;
       }
       else {
-        this.dataSource = tempDataSource;
+        this.closeTabService.saveDataForLMGeneralGroupModify = tempDataSource;
       }
     }
     // if tempDataSource is null but filter is not null
     else {
-      this.dataSource = tempDataSource;
+      this.closeTabService.saveDataForLMGeneralGroupModify = tempDataSource;
+    }
+  }
+  filterOptions = (e: any, filterValid: string) => {
+
+    if (MathS.isNull(e.value)) {
+      this.tempFilter[filterValid] = [];
+    }
+    if (!this.tempFilter[filterValid].includes(e.value)) {
+      this.tempFilter[filterValid] = e.value;
     }
 
+    if (this.tempMainDataSource.totalNum == 0) {
+      // for single use only on each 'component init'
+      this.tempMainDataSource.data = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
+      this.tempMainDataSource.totalNum = 1;
+    }
+    let tempDataSource: any[] = [];
+    tempDataSource = this.filterHelper();
+
+    let tempDataSource2: any[] = [];
+    tempDataSource2 = this.filterHelp2(tempDataSource);
+
     if (!MathS.isNull(tempDataSource2)) {
-      this.dataSource = tempDataSource2;
+      this.closeTabService.saveDataForLMGeneralGroupModify = tempDataSource2;
     }
     if (this.tempFilter.first.length == 0 && this.tempFilter.second.length == 0) {
-      this.dataSource = this.tempMainDataSource.data;
+      this.closeTabService.saveDataForLMGeneralGroupModify = this.tempMainDataSource.data;
     }
   }
   // have problem on SHOWING Without this Code for DropDowns
   clickedDropDowns = (event: any, element: string, dataId: any) => {
-    for (let index = 0; index < this.dataSource.length; index++) {
-      if (this.dataSource[index].id === dataId) {
-        this.dataSource[index][element] = event.title;
+    for (let index = 0; index < this.closeTabService.saveDataForLMGeneralGroupModify.length; index++) {
+      if (this.closeTabService.saveDataForLMGeneralGroupModify[index].id === dataId) {
+        this.closeTabService.saveDataForLMGeneralGroupModify[index][element] = event.title;
       }
     }
   }
@@ -241,21 +226,21 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   manageModifyBatchResponse = (data: IBatchModifyRes) => {
     for (let index = 0; index < data.detailsInfo.length; index++) {
-      for (let j = 0; j < this.dataSource.length; j++) {
-        if (data.detailsInfo[index].onOffLoadId === this.dataSource[j].id) {
+      for (let j = 0; j < this.closeTabService.saveDataForLMGeneralGroupModify.length; j++) {
+        if (data.detailsInfo[index].onOffLoadId === this.closeTabService.saveDataForLMGeneralGroupModify[j].id) {
 
-          this.dataSource[j].id = data.detailsInfo[index].newOnOffLoadId;//insert newOnOffLoad to last dataSource Id
+          this.closeTabService.saveDataForLMGeneralGroupModify[j].id = data.detailsInfo[index].newOnOffLoadId;//insert newOnOffLoad to last dataSource Id
           if (data.detailsInfo[index].hasError) {
             // with error[index of dataSource]
-            this.dataSource[j].isResponseHasError = true;
-            this.dataSource[j].editedErrorDescription = data.detailsInfo[index].errorDescription;
+            this.closeTabService.saveDataForLMGeneralGroupModify[j].isResponseHasError = true;
+            this.closeTabService.saveDataForLMGeneralGroupModify[j].editedErrorDescription = data.detailsInfo[index].errorDescription;
           }
           else {
             // successful
             // possible for last icon remain in table, make sure new icons replace
-            this.dataSource[j].isResponseHasError = false;
-            this.dataSource[j].modifyType = null;
-            this.dataSource[j].editedErrorDescription = '';
+            this.closeTabService.saveDataForLMGeneralGroupModify[j].isResponseHasError = false;
+            this.closeTabService.saveDataForLMGeneralGroupModify[j].modifyType = null;
+            this.closeTabService.saveDataForLMGeneralGroupModify[j].editedErrorDescription = '';
           }
         }
       }
@@ -266,17 +251,17 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   uploadAll = async () => {
     const temp: IOffloadModifyReq[] = [];
 
-    for (let index = 0; index < this.dataSource.length; index++) {
-      if (!MathS.isNull(this.dataSource[index].modifyType)) {
+    for (let index = 0; index < this.closeTabService.saveDataForLMGeneralGroupModify.length; index++) {
+      if (!MathS.isNull(this.closeTabService.saveDataForLMGeneralGroupModify[index].modifyType)) {
 
         temp.push({
-          id: this.dataSource[index].id,
-          modifyType: this.convertTitleToIdByModifyType(this.dataSource[index].modifyType).id,
+          id: this.closeTabService.saveDataForLMGeneralGroupModify[index].id,
+          modifyType: this.convertTitleToIdByModifyType(this.closeTabService.saveDataForLMGeneralGroupModify[index].modifyType).id,
           checkedItems: [0],
-          counterStateId: this.convertTitleToId(this.dataSource[index].counterStateId).id,
-          counterNumber: this.dataSource[index].counterNumber,
-          jalaliDay: this.dataSource[index].offloadDateJalali,
-          description: this.dataSource[index].description
+          counterStateId: this.convertTitleToId(this.closeTabService.saveDataForLMGeneralGroupModify[index].counterStateId).id,
+          counterNumber: this.closeTabService.saveDataForLMGeneralGroupModify[index].counterNumber,
+          jalaliDay: this.closeTabService.saveDataForLMGeneralGroupModify[index].offloadDateJalali,
+          description: this.closeTabService.saveDataForLMGeneralGroupModify[index].description
         })
       }
     }
@@ -290,9 +275,9 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
   }
   receiveDateJalali = (event: any, dataId: string) => {
     // to make date updated to latest change by user
-    for (let index = 0; index < this.dataSource.length; index++) {
-      if (this.dataSource[index].id === dataId) {
-        this.dataSource[index].offloadDateJalali = event;
+    for (let index = 0; index < this.closeTabService.saveDataForLMGeneralGroupModify.length; index++) {
+      if (this.closeTabService.saveDataForLMGeneralGroupModify[index].id === dataId) {
+        this.closeTabService.saveDataForLMGeneralGroupModify[index].offloadDateJalali = event;
       }
     }
   }
@@ -340,16 +325,16 @@ export class GeneralGroupListModifyComponent extends AllListsFactory {
     let temp: any[] = [];
     // should be false on initial(_generalGroupHeaderCheckbox) because filter on DataSource happen
     if (this.columnManager._generalGroupHeaderCheckbox) {
-      this.tempOriginDataSource = JSON.parse(JSON.stringify(this.dataSource));
-      for (let index = 0; index < this.dataSource.length; index++) {
-        if (this.dataSource[index].counterStateId !== null)
-          temp.push(this.dataSource[index]);
+      this.tempOriginDataSource = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralGroupModify));
+      for (let index = 0; index < this.closeTabService.saveDataForLMGeneralGroupModify.length; index++) {
+        if (this.closeTabService.saveDataForLMGeneralGroupModify[index].counterStateId !== null)
+          temp.push(this.closeTabService.saveDataForLMGeneralGroupModify[index]);
       }
-      this.dataSource = temp;
+      this.closeTabService.saveDataForLMGeneralGroupModify = temp;
     }
     else {
       if (!MathS.isNull(this.tempOriginDataSource))
-        this.dataSource = this.tempOriginDataSource;
+        this.closeTabService.saveDataForLMGeneralGroupModify = this.tempOriginDataSource;
     }
   }
   getExcel = async () => {

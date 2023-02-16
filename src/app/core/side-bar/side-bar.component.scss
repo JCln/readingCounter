@@ -253,6 +253,14 @@ ul::-webkit-scrollbar {
         top: -7rem;
       }
     }
+
+    ::after {
+      content: '';
+      right: 2.4rem;
+      position: absolute;
+      width: 4rem;
+      min-height: 3rem;
+    }
   }
 
   @media (max-width: 550px) {

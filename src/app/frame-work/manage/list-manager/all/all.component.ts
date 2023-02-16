@@ -79,7 +79,7 @@ export class AllComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMAllReq = this.allListsService.allLists_pageSign.GUid;
       }
       // setDynamics should implement before new instance of dataSource create
-      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMAll);
+      // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMAll);
       this.closeTabService.saveDataForLMAll = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMAll));
 
       this.dictionaryWrapps();

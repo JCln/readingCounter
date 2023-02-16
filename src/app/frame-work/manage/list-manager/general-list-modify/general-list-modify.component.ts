@@ -98,7 +98,7 @@ export class GeneralListModifyComponent extends AllListsFactory {
       }
       this.insertSelectedColumns();
       // setDynamics should implement before new instance of dataSource create
-      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMGeneralModify);
+      // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMGeneralModify);
       this.closeTabService.saveDataForLMGeneralModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMGeneralModify));
     }
   }

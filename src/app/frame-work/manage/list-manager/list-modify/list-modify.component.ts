@@ -49,7 +49,7 @@ export class ListModifyComponent extends AllListsFactory {
         this.closeTabService.saveDataForLMModifyReq = this.allListsService.modifyLists_pageSign.GUid;
       }
       // setDynamics should implement before new instance of dataSource create
-      this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMModify);
+      // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMModify);
       this.closeTabService.saveDataForLMModify = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMModify));
 
       this.deleteDictionary = this.listManagerService.getDeleteDictionary();

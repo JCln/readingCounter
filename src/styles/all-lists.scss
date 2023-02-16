@@ -36,7 +36,7 @@
 .p-field-radiobutton {
   display: flex;
   align-items: center;
-  margin: 0;
+  margin-left: var(--font_xs);
 
   label {
     font-size: var(--font_s);

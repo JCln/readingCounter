@@ -227,7 +227,7 @@ export class CloseTabService {
     GUid: '',
     counterStateValue: null
   };
-  saveDataForLMGeneralGroupModify: IOnOffLoadFlat[];
+  saveDataForLMGeneralGroupModify: IOnOffLoadFlat[] = [];
   // dbf output manager
   saveDataForOutputDBF: any;
   saveDataForOutputDBFEqamatBagh: any;
