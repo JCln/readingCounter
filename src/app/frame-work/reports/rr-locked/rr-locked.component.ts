@@ -76,7 +76,7 @@ export class RrLockedComponent extends AllListsFactory {
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.karbariDictionaryCode, 'karbariCode');
 
-    this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
+    // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();

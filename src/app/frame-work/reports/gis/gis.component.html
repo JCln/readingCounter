@@ -3,24 +3,27 @@
 
         <section class="order_by">
             <h2>نمایش بر اساس :</h2>
-            <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_orderBy" name="_orderBy">
-                <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo" [value]="orderType.id"
-                    (change)="changeRadio($event)">
-                    {{orderType.title}}
-                </mat-radio-button>
-            </mat-radio-group>
+
+            <div *ngFor="let orderType of readingReportManagerService.showGisInOrderTo">
+                <div class="p-field-radiobutton">
+                    <p-radioButton [name]="orderType.id" [value]="orderType.id" [(ngModel)]="readingReportManagerService._orderByGIS"
+                        [inputId]="orderType.key" (onClick)="changeRadio(orderType.id)">
+                    </p-radioButton>
+                    <label [for]="orderType.key">{{orderType.title}}</label>
+                </div>
+            </div>
         </section>
         <hr>
         <section class="static_part">
-            <section class="order_by">
-                <mat-radio-group class="radio_group" aria-labelledby="radio_group"
-                    [(ngModel)]="readingReportManagerService._isOrderByDate" name="_isOrderByDate">
-                    <mat-radio-button class="radio_button"
-                        *ngFor="let orderType of readingReportManagerService.searchInOrderTo"
-                        [value]="orderType.isSelected" [disabled]="_orderBy === 'isForbidden'">
-                        {{orderType.title}}
-                    </mat-radio-button>
-                </mat-radio-group>
+            <section class="order_by" [hidden]="readingReportManagerService._orderByGIS === 'isForbidden'">
+                <div *ngFor="let datePeriod of readingReportManagerService.searchInOrderTo">
+                    <div class="p-field-radiobutton">
+                        <p-radioButton name="orderByDate" [value]="datePeriod.isSelected"
+                            [(ngModel)]="readingReportManagerService._isOrderByDate" [inputId]="datePeriod.key">
+                        </p-radioButton>
+                        <label [for]="datePeriod.key">{{datePeriod.title}}</label>
+                    </div>
+                </div>
             </section>
             <section class="content">
                 <div class="input_2">

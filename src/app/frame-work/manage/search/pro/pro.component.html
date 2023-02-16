@@ -11,14 +11,15 @@
                 </mat-checkbox>
             </div>
             <section class="order_by">
-                <h2>جستجو بر اساس</h2>
-                <mat-radio-group class="radio_group" aria-labelledby="radio_group"
-                    [(ngModel)]="searchService._isOrderByDate" name="_isOrderByDate">
-                    <mat-radio-button class="radio_button" *ngFor="let orderType of searchService.searchInOrderTo"
-                        [value]="orderType.isSelected">
-                        {{orderType.title}}
-                    </mat-radio-button>
-                </mat-radio-group>
+                <h3>جستجو بر اساس :</h3>
+                <div *ngFor="let orderType of searchService.searchInOrderTo">
+                    <div class="p-field-radiobutton">
+                        <p-radioButton name="orderByDate" [value]="orderType.isSelected"
+                            [(ngModel)]="searchService._isOrderByDate" [inputId]="orderType.key">
+                        </p-radioButton>
+                        <label [for]="orderType.key">{{orderType.title}}</label>
+                    </div>
+                </div>
             </section>
             <hr>
 
@@ -26,9 +27,9 @@
                 <span class="ui-float-label">
                     <label for="float-input">ناحیه</label>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zones" #zoneId
-                        [options]="zoneDictionary" [(ngModel)]="_selectedZone" optionLabel="title" [filter]="true"
+                        [options]="zoneDictionary" [(ngModel)]="closeTabService.saveDataForSearchProReq.zoneId" optionLabel="title" [filter]="true"
                         filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
-                        (onChange)="getNesseseriesByZone()">
+                        (onClick)="getNesseseriesByZone()">
                     </p-dropdown>
                 </span>
 
@@ -46,11 +47,11 @@
                         [options]="readingPeriodKindDictionary" name="_selectedKindId"
                         [(ngModel)]="closeTabService.saveDataForSearchProReq._selectedKindId" optionLabel="title"
                         [filter]="true" filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
-                        (onChange)="getReadingPeriod()">
+                        (onClick)="getReadingPeriod()">
                     </p-dropdown>
                 </span>
 
-                <span class="ui-float-label" [hidden]="!readingPeriodDictionary.length || searchService._isOrderByDate">
+                <span class="ui-float-label" [hidden]="searchService._isOrderByDate">
                     <label for="float-input">دوره قرائت</label>
                     <p-dropdown [style]="{'minWidth': '10rem','width': '100%'}" name="period" #period
                         [options]="readingPeriodDictionary" name="readingPeriodId"
@@ -128,7 +129,7 @@
         </button>
         <button type="submit" id="excel_download" class="btn_2_o">
             <i class="pi pi-file-excel"></i>
-            Excel دانلود
+            دانلود Excel
         </button>
     </footer>
 

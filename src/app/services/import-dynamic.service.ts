@@ -56,7 +56,7 @@ export class ImportDynamicService {
     hasPreNumber: true,
     displayBillId: true,
     displayRadif: true,
-    counterReaderId: ''    
+    counterReaderId: ''
   }
   private _simafaSingleReq: IReadingProgramRes;
 
@@ -98,21 +98,25 @@ export class ImportDynamicService {
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
-      isSelected: true
+      isSelected: true,
+      key: 'Date'
     },
     {
       title: 'دوره',
-      isSelected: false
+      isSelected: false,
+      key: 'period'
     }
   ]
   searchInOrderToReverse: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
-      isSelected: false
+      isSelected: false,
+      key: 'Date'
     },
     {
       title: 'دوره',
-      isSelected: true
+      isSelected: true,
+      key: 'period'
     }
   ]
   getSearchInOrderTo = (): ISearchInOrderTo[] => {

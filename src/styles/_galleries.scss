@@ -136,21 +136,6 @@ hr {
   margin-bottom: var(--font_xxs);
 }
 
-.radio_button {
-  font-size: var(--font_s);
-  font-weight: 700;
-  font-family: inherit;
-  color: var(--secondary_6);
-  margin: 0 2rem;
-}
-
-::ng-deep {
-  .mat-radio-label-content {
-    padding-right: var(--font_05) !important;
-    color: var(--thirdy_1);
-  }
-}
-
 [hidden] {
   display: none;
 }

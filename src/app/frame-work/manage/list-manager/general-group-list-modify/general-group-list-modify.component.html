@@ -17,24 +17,26 @@
         </div>
     </div>
     <div class="radios">
-        <mat-radio-group [(ngModel)]="listManagerService.counterStateValue" class="radio_group"
-            aria-labelledby="radio_group" name="counterState">
-            <mat-radio-button class="radio_button" *ngFor="let orderType of counterStateForModifyDictionary"
-                [value]="orderType.id" (change)="updateOnChangedCounterState($event)"
-                [ngClass]="{'under_zero': orderType.id < 0}">
-                {{orderType.title}}
-            </mat-radio-button>
-        </mat-radio-group>
+        <div *ngFor="let orderType of counterStateForModifyDictionary" [ngClass]="{'under_zero': orderType.id < 0}">
+            <div class="p-field-radiobutton">
+                <p-radioButton name="orderByDate" [value]="orderType.id"
+                    [(ngModel)]="listManagerService.counterStateValue" [inputId]="orderType.id"
+                    (onClick)="updateOnChangedCounterState(orderType.id)">
+                </p-radioButton>
+                <label [for]="orderType.id">{{orderType.title}}</label>
+            </div>
+        </div>
     </div>
 </section>
 
 <main style="position: relative; ">
-    <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]="10"
-        [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
-        [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
-        stateStorage="session" (onFilter)="filteredTableEvent($event.filteredValue)"
-        (sortFunction)="listManagerService.customSort($event)" [stateKey]="_sessionName" editMode="row" dataKey="id"
-        [resizableColumns]="getLocalResizable()" [reorderableColumns]="getLocalReOrderable()">
+    <p-table id="tdm" [columns]="selectedColumns" [value]="closeTabService.saveDataForLMGeneralGroupModify"
+        [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+        currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد" [rowsPerPageOptions]="_rowsPerPage"
+        dir="rtl" styleClass="p-datatable-responsive" [responsive]="true" stateStorage="session"
+        (onFilter)="filteredTableEvent($event.filteredValue)" (sortFunction)="listManagerService.customSort($event)"
+        [stateKey]="_sessionName" editMode="row" dataKey="id" [resizableColumns]="getLocalResizable()"
+        [reorderableColumns]="getLocalReOrderable()">
 
         <ng-template pTemplate="caption">
             <p-multiSelect [maxSelectedLabels]="2" [options]="_selectCols" [(ngModel)]="selectedColumns"
@@ -46,11 +48,11 @@
 
             <div class="header_icons_wrap">
                 <div class="right_side">
-                    <i (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'xlsx')"
+                    <i (click)="outputManagerService.export(closeTabService.saveDataForLMGeneralGroupModify, _selectCols, _outputFileName, 'xlsx')"
                         class="tooltip _circle_border p_icons pi pi-file-excel _xlsx">
                         <div class="tooltip_text">دریافت Excel</div>
                     </i>
-                    <i (click)="outputManagerService.export(dataSource, _selectCols, _outputFileName, 'csv')"
+                    <i (click)="outputManagerService.export(closeTabService.saveDataForLMGeneralGroupModify, _selectCols, _outputFileName, 'csv')"
                         class="tooltip _circle_border p_icons fas fa-file-csv _csv">
                         <div class="tooltip_text">دریافت CSV</div>
                     </i>
@@ -67,7 +69,9 @@
                 </div>
                 <div class="left_side">
                     <i (click)="filterCounterState()">
-                        <label class="font_family" for="binary">({{dataSource.length}}) نمایش قرائت شده ها</label>
+                        <label class="font_family"
+                            for="binary">({{closeTabService.saveDataForLMGeneralGroupModify.length}}) نمایش قرائت شده
+                            ها</label>
                         <p-checkbox [(ngModel)]="columnManager._generalGroupHeaderCheckbox" [binary]="true">
                         </p-checkbox>
                     </i>
@@ -98,9 +102,8 @@
                         field="counterStateId" matchMode="in" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="2" [ngModel]="value"
-                                [options]="counterStateByZoneDictionary"
-                                (onChange)="filterOptions($event,'counterStateId', 1)" optionLabel="title"
-                                optionValue="title" [filter]="true" showClear="true">
+                                [options]="counterStateByZoneDictionary" (onChange)="filterOptions($event, 'first')"
+                                optionLabel="title" optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -113,9 +116,8 @@
                         field="counterStateId" matchMode="in" [showMenu]="false">
                         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                             <p-multiSelect [maxSelectedLabels]="2" [ngModel]="value"
-                                [options]="counterStateByCodeDictionary"
-                                (onChange)="filterOptions($event,'preCounterStateCode', 2)" optionLabel="title"
-                                optionValue="title" [filter]="true" showClear="true">
+                                [options]="counterStateByCodeDictionary" (onChange)="filterOptions($event, 'second')"
+                                optionLabel="title" optionValue="title" [filter]="true" showClear="true">
                                 <ng-template let-option pTemplate="item">
                                     <div class="p-multiselect-representative-option">
                                         <span class="ml-1">{{option.title}}</span>
@@ -308,7 +310,8 @@
         (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
     </app-carousel-woum>
 
-    <section *ngIf="!dataSource || dataSource.length === 0">
+    <section
+        *ngIf="!closeTabService.saveDataForLMGeneralGroupModify || closeTabService.saveDataForLMGeneralGroupModify.length === 0">
         <tr class="empty_data">
             موردی پیدا نشد
         </tr>

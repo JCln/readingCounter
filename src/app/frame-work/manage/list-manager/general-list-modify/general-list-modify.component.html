@@ -17,14 +17,15 @@
         </div>
     </div>
     <div class="radios">
-        <mat-radio-group [(ngModel)]="counterStateValue" class="radio_group" aria-labelledby="radio_group"
-            name="counterState">
-            <mat-radio-button class="radio_button" *ngFor="let orderType of counterStateForModifyDictionary"
-                [value]="orderType.id" (change)="updateOnChangedCounterState($event)"
-                [ngClass]="{'under_zero': orderType.id < 0}">
-                {{orderType.title}}
-            </mat-radio-button>
-        </mat-radio-group>
+        <div *ngFor="let orderType of counterStateForModifyDictionary" [ngClass]="{'under_zero': orderType.id < 0}">
+            <div class="p-field-radiobutton">
+                <p-radioButton name="orderByDate" [value]="orderType.id"
+                    [(ngModel)]="listManagerService.counterStateValue" [inputId]="orderType.id"
+                    (onClick)="updateOnChangedCounterState(orderType.id)">
+                </p-radioButton>
+                <label [for]="orderType.id">{{orderType.title}}</label>
+            </div>
+        </div>
     </div>
 </section>
 

@@ -3,13 +3,14 @@
         <section class="static_part">
             <section class="order_by">
                 <h2>صدور بر اساس :</h2>
-                <mat-radio-group class="radio_group" aria-labelledby="radio_group"
-                    [(ngModel)]="importDynamicService._isOrderByDate" name="_isOrderByDate">
-                    <mat-radio-button class="radio_button"
-                        *ngFor="let orderType of importDynamicService.searchInOrderTo" [value]="orderType.isSelected">
-                        {{orderType.title}}
-                    </mat-radio-button>
-                </mat-radio-group>
+                <div *ngFor="let orderType of importDynamicService.searchInOrderTo">
+                    <div class="p-field-radiobutton">
+                        <p-radioButton name="orderByDate" [value]="orderType.isSelected"
+                            [(ngModel)]="importDynamicService._isOrderByDate" [inputId]="orderType.key">
+                        </p-radioButton>
+                        <label [for]="orderType.key">{{orderType.title}}</label>
+                    </div>
+                </div>
             </section>
             <hr>
 

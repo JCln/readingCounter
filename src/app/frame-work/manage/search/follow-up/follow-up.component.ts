@@ -22,11 +22,13 @@ export class FollowUpComponent extends FactoryONE {
   showInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'گراف',
-      isSelected: true
+      isSelected: true,
+      key:'Graph'
     },
     {
       title: 'جدول',
-      isSelected: false
+      isSelected: false,
+      key:'Table'
     }
   ]
   clonedProducts: { [s: string]: IFollowUpHistory; } = {};

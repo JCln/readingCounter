@@ -27,6 +27,12 @@ section.content {
   border-radius: 10px;
 }
 
+.order_by {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 h3 {
   color: var(--primary_3);
   font-size: var(--font_m2);
@@ -36,14 +42,6 @@ h3 {
 footer {
   margin-top: var(--font_05);
   text-align: center;
-}
-
-.radio_button {
-  font-size: var(--font_s);
-  font-weight: 700;
-  font-family: inherit;
-  color: var(--secondary_6);
-  margin: 0 2rem;
 }
 
 [hidden] {
@@ -103,10 +101,6 @@ form {
 
 }
 
-h2 {
-  color: var(--primary_3);
-}
-
 app-date-jalali {
   width: 100%;
   height: var(--font_28);
@@ -164,16 +158,7 @@ hr {
   display: none;
 }
 
-
 // materials 
-.radio_button {
-  font-size: var(--font_s);
-  font-weight: 700;
-  font-family: inherit;
-  color: var(--secondary_6);
-  margin: 0 2rem;
-}
-
 footer {
   display: flex;
   flex-wrap: wrap;

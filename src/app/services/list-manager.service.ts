@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import {
   ENRandomNumbers,
@@ -143,8 +142,8 @@ export class ListManagerService {
     });
   }
   /*OTHER */
-  setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
-    console.log('do nothing for now');
+  // setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
+  //   console.log('do nothing for now');
     // dataSource.forEach(item => {
     //   if (item.newRate > 0)
     //     item.newRate = parseFloat(MathS.getRange(item.newRate))
@@ -153,7 +152,7 @@ export class ListManagerService {
     //   item.y = MathS.getRange(item.y);
     //   item.gisAccuracy = MathS.getRange(item.gisAccuracy);
     // })
-  }
+  // }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {

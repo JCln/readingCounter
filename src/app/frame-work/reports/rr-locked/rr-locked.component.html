@@ -2,24 +2,15 @@
     <section [hidden]="readingReportManagerService.isCollapsedLocked">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
-                <section class="order_by">
-                    <h2>جستجو بر اساس :</h2>
-                    <mat-radio-group class="radio_group" aria-labelledby="radio_group"
-                        [(ngModel)]="readingReportManagerService._isOrderByDate" name="_isOrderByDate">
-                        <mat-radio-button class="radio_button"
-                            *ngFor="let orderType of readingReportManagerService.searchInOrderTo"
-                            [value]="orderType.isSelected">
-                            {{orderType.title}}
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </section>
+                <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="readingReportManagerService.lockedReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
+                            filter="true">
                         </p-dropdown>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
@@ -79,10 +70,10 @@
         </form>
     </section>
 
-    <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForRRLocked" [_outputFileName]="'rrLocked'"
-        [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'rr-locked'"
-        [_selectedColumnsToRemember]="'selectedRRLocked'" [_isCustomSort]=true [_hasCollapsible]=true
-        (customedSort)="listManagerService.customSort($event)"
+    <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForRRLocked"
+        [_outputFileName]="'rrLocked'" [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]"
+        [_sessionName]="'rr-locked'" [_selectedColumnsToRemember]="'selectedRRLocked'" [_isCustomSort]=true
+        [_hasCollapsible]=true (customedSort)="listManagerService.customSort($event)"
         [_isCollaped]="readingReportManagerService.isCollapsedLocked"
         (collapsed)="readingReportManagerService.isCollapsedLocked = !readingReportManagerService.isCollapsedLocked"
         (refreshedTable)="refreshTable()" (showedInMapSingle)="openMapDialog($event)"

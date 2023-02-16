@@ -42,13 +42,14 @@
 </section>
 
 <section *ngIf="dataSource" class="order_by">
-    <h2 class="title">نمایش :</h2>
-    <mat-radio-group class="radio_group" aria-labelledby="radio_group"
-        [(ngModel)]="closeTabService.saveDataForFollowUpReq.canShowGraph" name="_isOrderByDate">
-        <mat-radio-button class="radio_button" *ngFor="let orderType of showInOrderTo" [value]="orderType.isSelected">
-            {{orderType.title}}
-        </mat-radio-button>
-    </mat-radio-group>
+    <div *ngFor="let orderType of showInOrderTo">
+        <div class="p-field-radiobutton">
+            <p-radioButton name="orderByDate" [value]="orderType.isSelected"
+                [(ngModel)]="closeTabService.saveDataForFollowUpReq.canShowGraph" [inputId]="orderType.key">
+            </p-radioButton>
+            <label [for]="orderType.key">{{orderType.title}}</label>
+        </div>
+    </div>
 </section>
 
 <p-table *ngIf="!closeTabService.saveDataForFollowUpReq.canShowGraph && dataSource" sortField="insertDateJalali"

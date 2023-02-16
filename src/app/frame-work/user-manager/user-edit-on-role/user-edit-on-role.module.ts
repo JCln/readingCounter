@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
+import { SharedPrimeNgModule } from 'src/app/shared/shared-prime-ng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { UserEditOnRoleRoutingModule } from './user-edit-on-role-routing.module';
 import { UserActionComponent } from './user-action/user-action.component';
-import { UserRoleComponent } from './user-role/user-role.component';
+import { UserEditOnRoleRoutingModule } from './user-edit-on-role-routing.module';
 import { UserEditOnRoleComponent } from './user-edit-on-role.component';
+import { UserRoleComponent } from './user-role/user-role.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { UserEditOnRoleComponent } from './user-edit-on-role.component';
   ],
   imports: [
     SharedModule,
+    SharedPrimeNgModule,
     UserEditOnRoleRoutingModule
   ]
 })

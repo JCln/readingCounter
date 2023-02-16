@@ -7,10 +7,10 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
 import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import {
-  IReadingReportGISReq,
-  IReadingReportReq,
-  IReadingReportTraverseDifferentialReq,
-  IUserKarkardInput,
+    IReadingReportGISReq,
+    IReadingReportReq,
+    IReadingReportTraverseDifferentialReq,
+    IUserKarkardInput,
 } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -21,7 +21,7 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import {
-  ConfirmDialogExcelViewComponent,
+    ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
@@ -232,23 +232,54 @@ export class ReadingReportManagerService {
   searchInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
-      isSelected: true
+      isSelected: true,
+      key: 'Date'
     },
     {
       title: 'دوره',
-      isSelected: false
+      isSelected: false,
+      key: 'period'
     }
   ]
   searchInOrderToReverse: ISearchInOrderTo[] = [
     {
       title: 'تاریخ',
-      isSelected: false
+      isSelected: false,
+      key: 'Date'
     },
     {
       title: 'دوره',
-      isSelected: true
+      isSelected: true,
+      key: 'period'
     }
   ]
+  showGisInOrderTo: any[] = [
+    {
+      id: 'isCounterState',
+      title: 'وضعیت کنتور',
+      isSelected: true,
+      key: 'A'
+    },
+    {
+      id: 'isForbidden',
+      title: 'غیر مجاز',
+      isSelected: false,
+      key: 'B'
+    },
+    {
+      id: 'isAhadChange',
+      title: 'تغییر آحاد',
+      isSelected: false,
+      key: 'C'
+    },
+    {
+      id: 'isKarbariChange',
+      title: 'تغییر کاربری',
+      isSelected: false,
+      key: 'D'
+    }
+  ]
+  _orderByGIS: string = 'isCounterState';
   /* GET*/
   getSearchInOrderTo = (): ISearchInOrderTo[] => {
     if (this.profileService.getLocalValue()) {

@@ -13,7 +13,7 @@ import { ImportDynamicComponent } from './import-dynamic.component';
   imports: [
     SharedModule,
     SharedPrimeNgModule,
-    SharedThreeModule,
+    SharedThreeModule,    
     ImportDynamicRoutingModule
   ]
 })

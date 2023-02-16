@@ -2,24 +2,15 @@
     <section [hidden]="readingReportManagerService.isCollapsedPreNumberShown">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
-                <section class="order_by">
-                    <h2>جستجو بر اساس :</h2>
-                    <mat-radio-group class="radio_group" aria-labelledby="radio_group"
-                        [(ngModel)]="readingReportManagerService._isOrderByDate" name="_isOrderByDate">
-                        <mat-radio-button class="radio_button"
-                            *ngFor="let orderType of readingReportManagerService.searchInOrderTo"
-                            [value]="orderType.isSelected">
-                            {{orderType.title}}
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </section>
+                <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
                     <div class="input_2">
                         <div class="_key">ناحیه</div>
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="readingReportManagerService.preNumberShownReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
+                            filter="true">
                         </p-dropdown>
                     </div>
                     <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
@@ -80,11 +71,10 @@
         </form>
     </section>
 
-    <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForRRPreNumShown" [_outputFileName]="'rrPreNumber'"
-        [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]" [_sessionName]="'rr-preNumber'"
-        [_selectedColumnsToRemember]="'selectedRRPreNumShown'" [_isCustomSort]=true
-        [_isCollaped]="readingReportManagerService.isCollapsedPreNumberShown"
-        [_hasCollapsible]=true
+    <app-prime-table [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForRRPreNumShown"
+        [_outputFileName]="'rrPreNumber'" [_checkUpName]="'allComponent'" [_numberOfExtraColumns]="[1,2,3]"
+        [_sessionName]="'rr-preNumber'" [_selectedColumnsToRemember]="'selectedRRPreNumShown'" [_isCustomSort]=true
+        [_isCollaped]="readingReportManagerService.isCollapsedPreNumberShown" [_hasCollapsible]=true
         (collapsed)="readingReportManagerService.isCollapsedPreNumberShown = !readingReportManagerService.isCollapsedPreNumberShown"
         (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
         (showedInMapSingle)="openMapDialog($event)" (filteredEvent)="filteredTableEvent($event)"

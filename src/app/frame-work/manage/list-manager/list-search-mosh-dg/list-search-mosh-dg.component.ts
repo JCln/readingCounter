@@ -69,7 +69,7 @@ export class ListSearchMoshDgComponent implements OnInit {
         })
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
 
-    this.listManagerService.setDynamicPartRanges(this.dataSource);
+    // this.listManagerService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
     if (!this.listManagerService.verificationMosh(this.listManagerService.searchReqMoshDialog))

@@ -11,29 +11,6 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class GisComponent extends FactoryONE {
   gisResponse: IReadingReportGISResponse[] = [];
-  searchInOrderTo: IDictionaryManager[] = [
-    {
-      id: 'isCounterState',
-      title: 'وضعیت کنتور',
-      isSelected: false
-    },
-    {
-      id: 'isForbidden',
-      title: 'غیر مجاز',
-      isSelected: false
-    },
-    {
-      id: 'isAhadChange',
-      title: 'تغییر آحاد',
-      isSelected: false
-    },
-    {
-      id: 'isKarbariChange',
-      title: 'تغییر کاربری',
-      isSelected: false
-    }
-  ]
-  _orderBy: string = '';
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 
@@ -74,16 +51,14 @@ export class GisComponent extends FactoryONE {
   }
 
   changeRadio = (event: any) => {
-    this.searchInOrderTo.forEach(item => {
-      if (item.id !== event.value)
-        this.readingReportManagerService.gisReq[item.id] = false;
-      else
+    this.readingReportManagerService.showGisInOrderTo.forEach(item => {
+      if (item.id == event)
         this.readingReportManagerService.gisReq[item.id] = true;
+      else
+        this.readingReportManagerService.gisReq[item.id] = false;
     })
-    console.log(event.value);
-
-    event.value === 'isForbidden' ? this.readingReportManagerService._isOrderByDate = true : ''
-    event.value === 'isCounterState' ? this.readingReportManagerService.gisReq.isCounterState = true : ''
+    event == 'isForbidden' ? this.readingReportManagerService._isOrderByDate = true : ''
+    console.log(this.readingReportManagerService.gisReq);
   }
   verification = async () => {
     const temp = this.readingReportManagerService.verificationRRGIS(this.readingReportManagerService.gisReq, this.readingReportManagerService._isOrderByDate);
