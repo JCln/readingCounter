@@ -31,6 +31,7 @@ export class ProfileService {
     defaultFontStyle: 3,
     reSizableTable: false,
     reOrderableTable: false,
+    notifyPosition: 'bottom-left',
     imgOptions: {
       width: '40rem',
       height: '40rem',
@@ -75,6 +76,9 @@ export class ProfileService {
   setLocalValue = (bol: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, bol);
   }
+  setLocalNotifyPosition = (val: string) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.notifyPosition, val);
+  }
   setLocalReSizable = (bol: boolean) => {
     this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.reSizableTable, bol);
   }
@@ -92,6 +96,9 @@ export class ProfileService {
   }
   getLocalValue = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
+  }
+  getLocalNotifyPosition = (): string => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'bottom-left');
   }
   getLocalResizable = (): boolean => {
     return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reSizableTable, this.envService.defaultAggregateTracks);
