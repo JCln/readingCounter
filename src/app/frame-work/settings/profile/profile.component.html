@@ -83,6 +83,15 @@
             </p-selectButton>
         </div>
     </section>
+    <section>
+        <h1 class="title">مکان اعلان پیام ها</h1>
+        <div class="content">
+            <p-selectButton [options]="notifyPositionOptions" [(ngModel)]="profileService.showStateVals.notifyPosition"
+                optionLabel="label" optionValue="value"
+                (onChange)="setNotifyPosition(profileService.showStateVals.notifyPosition)">
+            </p-selectButton>
+        </div>
+    </section>
 
     <section>
         <h1 class="title">امکان تغییر اندازه ستونها در جدول</h1>

@@ -102,10 +102,11 @@ export class SignalRService {
         detail: '',
         sticky: true,
         icon: 'pi pi-image',
-        key: 'image',
+        key: 'imageOrVideo',
         fileRepositoryId: a.fileRepositoryId,
         sender: a.sender,
-        caption: a.caption
+        caption: a.caption,
+        clickName: 'openImgDialog'
       }
       this.snackBarService.openToastSignal(custom);
     });
@@ -118,10 +119,11 @@ export class SignalRService {
         detail: '',
         sticky: true,
         icon: 'pi pi-video',
-        key: 'video',
+        key: 'imageOrVideo',
         fileRepositoryId: a.fileRepositoryId,
         sender: a.sender,
-        caption: a.caption
+        caption: a.caption,
+        clickName: 'openVideoDialog'
       }
       this.snackBarService.openToastSignal(custom);
     });

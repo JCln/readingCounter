@@ -3,11 +3,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISnackBar, ISnackBarSignal } from 'interfaces/ioverall-config';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ProfileService } from 'services/profile.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { MathS } from 'src/app/classes/math-s';
 import { ShowImgDgComponent } from 'src/app/shared/show-img-dg/show-img-dg.component';
+import { ShowVideoDgComponent } from 'src/app/shared/show-video-dg/show-video-dg.component';
 
-import { ShowVideoDgComponent } from './../../shared/show-video-dg/show-video-dg.component';
 
 @Component({
   selector: 'app-snack-bar',
@@ -21,7 +22,8 @@ export class SnackBarComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private snackWrapperService: SnackWrapperService,
     private messageService: MessageService,
-    public dialogService: DialogService
+    public dialogService: DialogService,
+    public profileService: ProfileService
   ) { }
 
   openSnackBar(snack: ISnackBar) {
@@ -63,7 +65,6 @@ export class SnackBarComponent implements OnInit {
   toast = () => {
     this.snackWrapperService.toastStatusSignal.subscribe((res) => {
       if (res) {
-        console.log(res);
         this.messageService.add(res);
       }
     })
@@ -74,7 +75,6 @@ export class SnackBarComponent implements OnInit {
     this.toast();
   }
   openImgDialog = (body: object) => {
-    console.log(body);
     this.ref = this.dialogService.open(ShowImgDgComponent, {
       data: { body },
       rtl: true,
@@ -87,7 +87,6 @@ export class SnackBarComponent implements OnInit {
     });
   }
   openVideoDialog = (body: object) => {
-    console.log(body);
     this.ref = this.dialogService.open(ShowVideoDgComponent, {
       data: { body },
       rtl: true,
@@ -98,6 +97,21 @@ export class SnackBarComponent implements OnInit {
         console.log(res);
 
     });
+  }
+  openNotifyType = (message: any) => {
+    console.log(message.clickName);
+
+    switch (message.clickName) {
+      case 'openVideoDialog':
+        this.openVideoDialog(message);
+        break;
+      case 'openImgDialog':
+        this.openImgDialog(message);
+        break;
+
+      default:
+        break;
+    }
   }
 
 }

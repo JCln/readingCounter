@@ -154,6 +154,7 @@ export enum EN_messages {
     possibledefaultAggregateTracksDisabled = 'گروه‌بندی در کارتابل بطور پیشفرض غیرفعال است',
     spinnerHasCancelable = 'امکان لغو درخواست غیر فعال است',
     spinnerHasActive = 'امکان لغو درخواست فعال است',
+    notifyPositionChange = 'مکان اعلان پیام‌ها تغییر نمود',
     imageOptionChanged = 'تنظیم تصاویر انجام شد',
     done = 'انجام شد',
     doneBroadcast = 'پیام مخابره شد',
