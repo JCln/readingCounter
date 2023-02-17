@@ -158,5 +158,11 @@ export class AssessPreComponent extends AllListsFactory {
         this.refreshTable();
     });
   }
+  emptyPreviousValuesFromSelectOptions() {
+    this.closeTabService.saveDataForAssessPreReq.masrafStates = [];
+    this.closeTabService.saveDataForAssessPreReq.reportIds = [];
+    this.closeTabService.saveDataForAssessPreReq.counterStateIds = [];
+    this.closeTabService.saveDataForAssessPreReq.karbariCodes = [];
+  }
 
 }

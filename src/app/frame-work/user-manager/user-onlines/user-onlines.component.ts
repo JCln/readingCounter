@@ -8,6 +8,7 @@ import { FactoryONE } from 'src/app/classes/factory';
 
 import { UserOnlinesDgComponent } from './user-onlines-dg/user-onlines-dg.component';
 import { UserOnlinesImgDgComponent } from './user-onlines-img-dg/user-onlines-img-dg.component';
+import { UserOnlinesVideoDgComponent } from './user-onlines-video-dg/user-onlines-video-dg.component';
 
 @Component({
   selector: 'app-user-onlines',
@@ -55,6 +56,18 @@ export class UserOnlinesComponent extends FactoryONE {
   }
   imageToAContact = (value: any) => {
     this.ref = this.dialogService.open(UserOnlinesImgDgComponent, {
+      data: { _data: value },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
+  videoToAContact = (value: any) => {
+    this.ref = this.dialogService.open(UserOnlinesVideoDgComponent, {
       data: { _data: value },
       rtl: true,
       width: '80%',

@@ -7,6 +7,8 @@ import { SnackWrapperService } from 'services/snack-wrapper.service';
 import { MathS } from 'src/app/classes/math-s';
 import { ShowImgDgComponent } from 'src/app/shared/show-img-dg/show-img-dg.component';
 
+import { ShowVideoDgComponent } from './../../shared/show-video-dg/show-video-dg.component';
+
 @Component({
   selector: 'app-snack-bar',
   templateUrl: './snack-bar.component.html',
@@ -74,6 +76,19 @@ export class SnackBarComponent implements OnInit {
   openImgDialog = (body: object) => {
     console.log(body);
     this.ref = this.dialogService.open(ShowImgDgComponent, {
+      data: { body },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
+  openVideoDialog = (body: object) => {
+    console.log(body);
+    this.ref = this.dialogService.open(ShowVideoDgComponent, {
       data: { body },
       rtl: true,
       width: '80%',

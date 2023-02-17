@@ -1,6 +1,6 @@
 <app-prime-table     
     [dataSource]="closeTabService.saveDataForUserOnlines" 
-    [_numberOfExtraColumns]="[1,2]"
+    [_numberOfExtraColumns]="[1,2,3]"
     [_outputFileName]="'userOnlines'"
     [_checkUpName]="'userOnlines'"
     [_selectedColumnsToRemember]="'selectedUserOnlines'"
@@ -8,5 +8,6 @@
     (refreshedTable)="refreshTable()"    
     (routedToLMAll)="textMessageToAContact($event)"
     (routedToLoggs)="imageToAContact($event)"
+    (openedEditDialog)="videoToAContact($event)"
  > 
 </app-prime-table>

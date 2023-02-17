@@ -42,6 +42,7 @@ export class SignalRService {
     this.receiveTextWithTimer();
     this.ReceiveDirectMessage();
     this.receiveImageWithCaptionMessage();
+    this.receiveVideoWithCaptionMessage();
     this.momentAddReadingRow();
   }
   public disconnectConnection = () => {
@@ -102,6 +103,22 @@ export class SignalRService {
         sticky: true,
         icon: 'pi pi-image',
         key: 'image',
+        fileRepositoryId: a.fileRepositoryId,
+        sender: a.sender,
+        caption: a.caption
+      }
+      this.snackBarService.openToastSignal(custom);
+    });
+  }
+  private receiveVideoWithCaptionMessage = () => {
+    this.hubConnection.on(ENInterfaces.ReceiveVideoWithCaption, (a: any) => {
+      const custom = {
+        severity: 'info',
+        summary: 'ویدیویی از',
+        detail: '',
+        sticky: true,
+        icon: 'pi pi-video',
+        key: 'video',
         fileRepositoryId: a.fileRepositoryId,
         sender: a.sender,
         caption: a.caption

@@ -7,10 +7,10 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
 import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import {
-  IReadingReportGISReq,
-  IReadingReportReq,
-  IReadingReportTraverseDifferentialReq,
-  IUserKarkardInput,
+    IReadingReportGISReq,
+    IReadingReportReq,
+    IReadingReportTraverseDifferentialReq,
+    IUserKarkardInput,
 } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -21,7 +21,7 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import {
-  ConfirmDialogExcelViewComponent,
+    ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';

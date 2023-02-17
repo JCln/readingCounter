@@ -5,13 +5,15 @@ import { UserOnlinesDgComponent } from './user-onlines-dg/user-onlines-dg.compon
 import { UserOnlinesImgDgComponent } from './user-onlines-img-dg/user-onlines-img-dg.component';
 import { UserOnlinesRoutingModule } from './user-onlines-routing.module';
 import { UserOnlinesComponent } from './user-onlines.component';
+import { UserOnlinesVideoDgComponent } from './user-onlines-video-dg/user-onlines-video-dg.component';
 
 
 @NgModule({
   declarations: [
     UserOnlinesComponent,
     UserOnlinesDgComponent,
-    UserOnlinesImgDgComponent
+    UserOnlinesImgDgComponent,
+    UserOnlinesVideoDgComponent
   ],
   imports: [
     SharedPrimeNgModule,

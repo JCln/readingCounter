@@ -27,9 +27,9 @@
                 <span class="ui-float-label">
                     <label for="float-input">ناحیه</label>
                     <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zones" #zoneId
-                        [options]="zoneDictionary" [(ngModel)]="closeTabService.saveDataForSearchProReq.zoneId" optionLabel="title" [filter]="true"
-                        filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
-                        (onClick)="getNesseseriesByZone()">
+                        [options]="zoneDictionary" [(ngModel)]="closeTabService.saveDataForSearchProReq.zoneId"
+                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        placeholder="انتخاب مورد" (onClick)="getNesseseriesByZone()" (onChange)="emptyPreviousValuesFromSelectOptions()">
                     </p-dropdown>
                 </span>
 

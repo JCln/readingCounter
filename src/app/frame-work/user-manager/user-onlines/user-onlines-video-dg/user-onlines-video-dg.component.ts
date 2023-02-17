@@ -7,11 +7,11 @@ import { MessageService } from 'services/message.service';
 import { UsersAllService } from 'services/users-all.service';
 
 @Component({
-  selector: 'app-user-onlines-img-dg',
-  templateUrl: './user-onlines-img-dg.component.html',
-  styleUrls: ['./user-onlines-img-dg.component.scss']
+  selector: 'app-user-onlines-video-dg',
+  templateUrl: './user-onlines-video-dg.component.html',
+  styleUrls: ['./user-onlines-video-dg.component.scss']
 })
-export class UserOnlinesImgDgComponent implements OnInit {
+export class UserOnlinesVideoDgComponent implements OnInit {
 
   constructor(
     public config: DynamicDialogConfig,
@@ -21,7 +21,7 @@ export class UserOnlinesImgDgComponent implements OnInit {
 
   classWrapper = async () => {
     const a = this.config.data._data;
-    this.messageService.toastImageWithCaptionReq.userId = a.userId;
+    this.messageService.toastVideoWithCaptionReq.userId = a.userId;
   }
   ngOnInit(): void {
     this.classWrapper();
@@ -44,8 +44,8 @@ export class UserOnlinesImgDgComponent implements OnInit {
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     if (fileInput.files) {
 
-      if (this.usersAllService.checkVertiticationNotifDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq)) {
-        this.usersAllService.postNotifyDirectImage(fileInput.files, this.messageService.toastImageWithCaptionReq).subscribe((event: HttpEvent<any>) => {
+      if (this.usersAllService.checkVertiticationNotifDirectVideo(fileInput.files, this.messageService.toastVideoWithCaptionReq)) {
+        this.usersAllService.postNotifyDirectVideo(fileInput.files, this.messageService.toastVideoWithCaptionReq).subscribe((event: HttpEvent<any>) => {
           switch (event.type) {
             case HttpEventType.Sent:
               break;

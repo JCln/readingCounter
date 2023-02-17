@@ -24,6 +24,11 @@ export class MessageService {
     userId: '',
     caption: ''
   };
+  toastVideoWithCaptionReq: INotifyDirectImage = {
+    file: '',
+    userId: '',
+    caption: ''
+  };
 
 
   constructor(

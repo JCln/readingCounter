@@ -65,7 +65,6 @@ input {
   justify-content: center;
   align-items: center;
   margin: auto;
-  direction: ltr;
   white-space: nowrap;
   width: 100%;
   padding: var(--font_05);
@@ -92,6 +91,7 @@ small {
   display: flex;
   justify-content: center;
   align-items: center;
+  direction: ltr;
   margin: auto;
   white-space: nowrap;
   overflow: hidden;

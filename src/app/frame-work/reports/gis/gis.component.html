@@ -33,7 +33,8 @@
                     <p-dropdown name="zones" [options]="zoneDictionary"
                         [(ngModel)]="readingReportManagerService.gisReq.zoneId" placeholder="انتخاب مورد"
                         [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
-                        filter="true" (onChange)="getCounterStateByZoneId()" (onChange)="getFragmentByZone()">
+                        filter="true" (onChange)="getCounterStateByZoneId()" (onChange)="getFragmentByZone()"
+                        (onChange)="readingReportManagerService.gisReq.fragmentMasterIds = []">
                     </p-dropdown>
                 </div>
                 <div class="input_2">

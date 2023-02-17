@@ -56,7 +56,14 @@ export class ProComponent extends AllListsFactory {
       this.listManagerService.showSnackWarn(EN_messages.insert_zone);
     }
   }
-  getNesseseriesByZone = async () => {
+  emptyPreviousValuesFromSelectOptions = () => {
+    this.closeTabService.saveDataForSearchProReq.masrafStates = [];
+    this.closeTabService.saveDataForSearchProReq.reportIds = [];
+    this.closeTabService.saveDataForSearchProReq.counterStateIds = [];
+    this.closeTabService.saveDataForSearchProReq.karbariCodes = [];
+    this.closeTabService.saveDataForSearchProReq.fragmentMasterIds = [];
+  }
+  getNesseseriesByZone = async () => {    
     const _zone = this.closeTabService.saveDataForSearchProReq.zoneId;
     if (!_zone) {
       this.counterStateDictionary = await this.searchService.getCounterStateDictionary();

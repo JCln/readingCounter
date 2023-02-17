@@ -475,6 +475,12 @@
                     <div class="tooltip_text_right">ارسال تصویر</div>
                 </i>
             </td>
+            <td *ngIf="_outputFileName == 'userOnlines'" (click)="openEditDialog(dataSource)">
+                <span class="ui-column-title">ارسال ویدیو</span>
+                <i class="tooltip p_icons pi pi-video">
+                    <div class="tooltip_text_right">ارسال ویدیو</div>
+                </i>
+            </td>
         </tr>
     </ng-template>
     <ng-template let-dataSource pTemplate="footer">

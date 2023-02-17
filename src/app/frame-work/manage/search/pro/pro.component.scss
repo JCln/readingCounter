@@ -164,6 +164,8 @@ footer {
   justify-content: flex-start;
   direction: rtl;
   gap: var(--font_xs);
+  background: var(--white);
+  border-radius: $border_7;
 }
 
 // dialog conf

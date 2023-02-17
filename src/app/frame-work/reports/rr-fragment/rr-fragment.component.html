@@ -10,7 +10,8 @@
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="readingReportManagerService.rrFragmentKarkardReq.zoneId"
                             placeholder="انتخاب مورد" [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id"
-                            optionLabel="title" filter="true" (onChange)="getFragmentByZone()">
+                            optionLabel="title" filter="true" (onChange)="getFragmentByZone()"
+                            (onChange)="readingReportManagerService.rrFragmentKarkardReq.fragmentMasterIds = []">
                         </p-dropdown>
                     </div>
                     <div class="input_2">

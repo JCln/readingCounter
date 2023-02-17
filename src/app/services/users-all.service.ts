@@ -287,6 +287,16 @@ export class UsersAllService {
     return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.signalRNotifDirectImage, formData);
 
   }
+  postNotifyDirectVideo = (filesList: any, val: INotifyDirectImage): Observable<any> => {
+    const formData: FormData = new FormData();
+
+    formData.append('caption', val.caption);
+    formData.append('userId', val.userId);
+    formData.append('file', filesList[0]);
+
+    return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.signalRNotifDirectVideo, formData);
+
+  }
   checkVertiticationNotifDirectImage = (fileForm: FileList, val: INotifyDirectImage): boolean => {
 
     if (MathS.isNull(val.caption)) {
@@ -310,5 +320,27 @@ export class UsersAllService {
     }
     // return true;
   }
+  checkVertiticationNotifDirectVideo = (fileForm: FileList, val: INotifyDirectImage): boolean => {
 
+    if (MathS.isNull(val.caption)) {
+      this.snackWrapperService.openSnackBar(EN_messages.insert_caption, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
+    if (MathS.isNull(fileForm)) {
+      this.snackWrapperService.openSnackBar(EN_messages.insert_video, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
+    if (
+      fileForm[0].name.split('.').pop() === 'mp4'
+      || fileForm[0].name.split('.').pop() === 'MP4'
+      || fileForm[0].name.split('.').pop() === 'ogg'
+      || fileForm[0].name.split('.').pop() === 'OGG`') {
+      return true;
+    }
+    else {
+      this.snackWrapperService.openSnackBar(EN_messages.should_insert_video, ENSnackBarTimes.fourMili, ENSnackBarColors.warn);
+      return false;
+    }
+    // return true;
+  }
 }

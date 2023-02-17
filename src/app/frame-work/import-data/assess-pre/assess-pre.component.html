@@ -21,7 +21,7 @@
                         [options]="zoneDictionary" name="_selectedKindId"
                         [(ngModel)]="closeTabService.saveDataForAssessPreReq.zoneId" optionLabel="title" [filter]="true"
                         filterBy="title" optionValue="id" [showClear]="true" placeholder="انتخاب مورد"
-                        (onChange)="getMasterInZone()">
+                        (onClick)="getMasterInZone()" (onChange)="emptyPreviousValuesFromSelectOptions()">
                     </p-dropdown>
                 </span>
             </section>
