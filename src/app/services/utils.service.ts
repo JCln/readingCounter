@@ -32,6 +32,9 @@ export class UtilsService {
   getYears = (): ITitleValue[] => {
     return this.envService.years;
   }
+  getAppVersion = (): string => {
+    return this.envService.version;
+  }
   // should use getFirstYear function for Recognizing and performance
   getFirstYear = (): number => {
     return this.envService.years[0].value;
@@ -39,30 +42,31 @@ export class UtilsService {
   getDeleteDictionary = (): any[] => {
     return this.envService.getDeleteDictionary;
   }
-  getSearchInOrderTo = (): ISearchInOrderTo[] => {
-    return [
-      {
-        title: 'تاریخ',
-        isSelected: true
-      },
-      {
-        title: 'دوره',
-        isSelected: false
-      }
-    ]
-  }
-  searchInOrderToReverse = (): ISearchInOrderTo[] => {
-    return [
-      {
-        title: 'تاریخ',
-        isSelected: false
-      },
-      {
-        title: 'دوره',
-        isSelected: true
-      }
-    ]
-  }
+  getSearchInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: true,
+      key: 'Date'
+    },
+    {
+      title: 'دوره',
+      isSelected: false,
+      key: 'period'
+    }
+  ]
+  getSearchInOrderToReverse: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: false,
+      key: 'Date'
+    },
+    {
+      title: 'دوره',
+      isSelected: true,
+      key: 'period'
+    }
+  ]
+
   // snack bar
   snackBarMessageSuccess = (message: string) => {
     this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.fourMili, ENSnackBarColors.success);
@@ -77,7 +81,7 @@ export class UtilsService {
     this.snackWrapperService.openSnackBar(message, time, color);
   }
   firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
-    config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true    
+    config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
         minWidth: config.minWidth,

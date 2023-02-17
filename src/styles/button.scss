@@ -3,7 +3,8 @@
   width: 100%;
   height: var(--font_3);
   text-align: center;
-  background: var(--primary_2);
+  background: var(--thirdy_1);
+  color: var(--white);
   border-radius: 2rem;
   font-size: var(--font_m);
   font-weight: 600;
@@ -13,8 +14,8 @@
   &:hover,
   &:focus,
   &:active {
-    background: var(--orange_600);
-    box-shadow: 0px 0px 2px 1px var(--orange_600);
+    background: var(--primary_4);
+    box-shadow: 0px 0px 2px 1px var(--primary_4);
   }
 }
 
@@ -28,7 +29,13 @@
   font-weight: 600;
   border: none;
   cursor: pointer;
-  box-shadow: 0px 2px 4px 1px var(--secondary_4);
+  box-shadow: 0px 0px 4px 0px var(--secondary_4);
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0px 2px 4px 1px var(--secondary_4);
+  }
 }
 
 .btn_2_o {

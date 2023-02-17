@@ -174,8 +174,24 @@
     }
   }
 
+  .p-button {
+    background: var(--thirdy_1) !important;
+    color: var(--white) !important;
+    border-radius: $border_15 !important;
+    font-family: $font_family !important;
+    font-weight: 600;
+  }
+
+  .p-selectbutton .p-button.p-highlight {
+    background: var(--primary_4) !important;
+  }
+
   p-radiobutton {
     padding-left: var(--font_xxs);
+  }
+
+  .p-buttonset .p-button {
+    margin: var(--font_02) !important;
   }
 
   .p-field-radiobutton {

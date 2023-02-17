@@ -2,7 +2,7 @@
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="order_by">
             <h2>جستجو بر اساس :</h2>
-            <div *ngFor="let orderType of searchService.searchInOrderTo">
+            <div *ngFor="let orderType of searchService.utilsService.getSearchInOrderTo">
                 <div class="p-field-radiobutton">
                     <p-radioButton name="orderByDate" [value]="orderType.isSelected"
                         [(ngModel)]="searchService._isOrderByDate" [inputId]="orderType.key">

@@ -4,7 +4,7 @@
             <section class="static_part">
                 <section class="order_by">
                     <h2>جستجو بر اساس :</h2>
-                    <div *ngFor="let orderType of dataMiningAnalysesService.searchInOrderTo">
+                    <div *ngFor="let orderType of dataMiningAnalysesService.utilsService.getSearchInOrderTo">
                         <div class="p-field-radiobutton">
                             <p-radioButton name="orderByDate" [value]="orderType.isSelected"
                                 [(ngModel)]="dataMiningAnalysesService._isOrderByDate" [inputId]="orderType.key">

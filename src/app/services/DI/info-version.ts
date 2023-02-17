@@ -1,9 +1,5 @@
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 
-export enum ENLoginVersion {
-    version = '0.9.98'
-}
-
 export const infoVersionItems: IDictionaryManager[] = [
     {
         id: '2',
@@ -18,7 +14,6 @@ export const infoVersionItems: IDictionaryManager[] = [
 
 ]
 export class infoVersion {
-
     static getInfoItems = (): IDictionaryManager[] => {
         return infoVersionItems;
     }

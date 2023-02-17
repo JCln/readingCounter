@@ -90,7 +90,6 @@ section.dynamic_content {
 
 .btn_1 {
   color: var(--white);
-  background-color: var(--orange_500);
 }
 
 ._toselect {
@@ -158,15 +157,6 @@ article {
   border-radius: $border_15;
   background-color: var(--secondary_2);
   margin: var(--font_01);
-}
-
-.btn_2_o {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  margin: var(--font_05) auto;
-  font-family: $font_family;
-  width: 10rem;
 }
 
 hr {

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
@@ -37,30 +36,6 @@ export class SearchService {
 
   _isOrderByDate: boolean = false;
 
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true,
-      key: 'Date'
-    },
-    {
-      title: 'دوره',
-      isSelected: false,
-      key: 'period'
-    }
-  ]
-  searchInOrderToReverse: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: false,
-      key: 'Date'
-    },
-    {
-      title: 'دوره',
-      isSelected: true,
-      key: 'period'
-    }
-  ]
   searchReqMosh: ISearchMoshReq = {
     zoneId: null,
     searchBy: 1,
@@ -85,11 +60,10 @@ export class SearchService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
     private allListsService: AllListsService,
-    private router: Router,
     private dialog: MatDialog,
     private pageSignsService: PageSignsService,
     private profileService: ProfileService
@@ -99,11 +73,11 @@ export class SearchService {
   getSearchInOrderTo = (): ISearchInOrderTo[] => {
     if (this.profileService.getLocalValue()) {
       this._isOrderByDate = false;
-      return this.searchInOrderToReverse;
+      return this.utilsService.getSearchInOrderToReverse;
     }
     else {
       this._isOrderByDate = true;
-      return this.searchInOrderTo;
+      return this.utilsService.getSearchInOrderTo;
     }
   }
   columnSearchProExcel = (): IObjectIteratation[] => {

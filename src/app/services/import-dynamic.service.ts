@@ -85,7 +85,7 @@ export class ImportDynamicService {
   }
 
   constructor(
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private allImportsService: AllImportsService,
     private dialog: MatDialog,
     private router: Router,
@@ -95,38 +95,15 @@ export class ImportDynamicService {
   ) { }
 
   _isOrderByDate: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true,
-      key: 'Date'
-    },
-    {
-      title: 'دوره',
-      isSelected: false,
-      key: 'period'
-    }
-  ]
-  searchInOrderToReverse: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: false,
-      key: 'Date'
-    },
-    {
-      title: 'دوره',
-      isSelected: true,
-      key: 'period'
-    }
-  ]
+
   getSearchInOrderTo = (): ISearchInOrderTo[] => {
     if (this.profileService.getLocalValue()) {
       this._isOrderByDate = false;
-      return this.searchInOrderToReverse;
+      return this.utilsService.getSearchInOrderToReverse;
     }
     else {
       this._isOrderByDate = true;
-      return this.searchInOrderTo;
+      return this.utilsService.getSearchInOrderTo;
     }
   }
   columnSimafaSingle = () => {

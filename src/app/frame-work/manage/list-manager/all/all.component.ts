@@ -60,6 +60,7 @@ export class AllComponent extends AllListsFactory {
           qotrCode: 'qotrCode'
         })
     Converter.convertIdToTitle(this.closeTabService.saveDataForLMAll, this.karbariDictionaryCode, 'karbariCode');
+    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMAll);
 
   }
   classWrapper = async (canRefresh?: boolean) => {
@@ -75,12 +76,11 @@ export class AllComponent extends AllListsFactory {
 
       if (!this.closeTabService.saveDataForLMAll || this.closeTabService.saveDataForLMAllReq != this.allListsService.allLists_pageSign.GUid) {
         this.closeTabService.saveDataForLMAll = await this.listManagerService.getLM(ENInterfaces.ListOffloadedALL, this.allListsService.allLists_pageSign.GUid);
-        this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForLMAll);
         this.closeTabService.saveDataForLMAllReq = this.allListsService.allLists_pageSign.GUid;
       }
       // setDynamics should implement before new instance of dataSource create
       // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForLMAll);
-      this.closeTabService.saveDataForLMAll = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMAll));
+      // this.closeTabService.saveDataForLMAll = JSON.parse(JSON.stringify(this.closeTabService.saveDataForLMAll));
 
       this.dictionaryWrapps();
     }

@@ -1,35 +1,22 @@
 @import 'variable';
 @import 'button.scss';
 @import 'input.scss';
-@import 'media.scss';
 
-.over_all {
+
+section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, auto));
   direction: rtl;
-  justify-content: center;
-  gap: var(--font_xs);
-}
-
-@include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(25rem, auto)));
-
-.content {
+  margin: auto;
+  padding: var(--font_xs);
+  width: 18rem;
   background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  text-align: center;
-  padding: var(--font_2) 0;
   border-radius: $border_15;
-  min-height: 25rem;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
 }
 
 input {
   text-align: center;
   width: 19rem;
-}
-
-._desc {
-  display: grid;
-  justify-content: center;
 }
 
 .title {
@@ -39,14 +26,8 @@ input {
   font-size: var(--font_l2);
 }
 
-.change_pass {
-
-  button {
-    background: var(--primary_2);
-    margin: var(--font_2) auto;
-    color: var(--white);
-    width: 100%;
-  }
+.btn_1 {
+  margin-top: var(--font_2);
 }
 
 input {

@@ -1,32 +1,25 @@
-<section>
+<h2 class="title">ارسال فایل</h2>
 
-    <h1 class="title">ارسال فایل</h1>
+<form #form="ngForm" (ngSubmit)="uploadFile(form)">
+    <section>
+        <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
+            <span class="icon_android fa fa-file-zip-o"></span>
+            فایل <small>zip</small> انتخاب نمایید
+        </label>
+        <label *ngIf="choosenFileName" class="label_choose_file" for="files">
+            {{choosenFileName}}
+        </label>
+        <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file" name="screenshot"
+            (change)="onChange($event)" id="files">
 
+        <!-- porgress bar -->
+        <label for="progress"></label>
+        <progress *ngIf="progress > 0" id="progress" [value]="progress" min="0" max="100">{{progress}}</progress>
 
-    <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
-        <div class="_desc">
-            <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
-                <span class="icon_android fa fa-file-zip-o"></span>
-                فایل <small>zip</small> انتخاب نمایید
-            </label>
-            <label *ngIf="choosenFileName" class="label_choose_file" for="files">
-                {{choosenFileName}}
-            </label>
-            <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file"
-                name="screenshot" (change)="onChange($event)" id="files">
+        <button *ngIf="progress == 0" class="btn_1" type="submit">
+            <div class="fa fa-upload"></div>
+            ارسال
+        </button>
 
-            <!-- porgress bar -->
-            <label for="progress"></label>
-            <progress *ngIf="progress > 0" id="progress" [value]="progress" min="0" max="100">{{progress}}</progress>
-
-            <div class="change_pass">
-                <button *ngIf="progress == 0" class="btn_2" type="submit">
-                    <div class="fa fa-upload"></div>
-                    ارسال
-                </button>
-            </div>
-        </div>
-
-    </form>
-
-</section>
+    </section>
+</form>

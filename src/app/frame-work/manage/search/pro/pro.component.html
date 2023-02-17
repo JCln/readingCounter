@@ -12,7 +12,7 @@
             </div>
             <section class="order_by">
                 <h3>جستجو بر اساس :</h3>
-                <div *ngFor="let orderType of searchService.searchInOrderTo">
+                <div *ngFor="let orderType of searchService.utilsService.getSearchInOrderTo">
                     <div class="p-field-radiobutton">
                         <p-radioButton name="orderByDate" [value]="orderType.isSelected"
                             [(ngModel)]="searchService._isOrderByDate" [inputId]="orderType.key">
@@ -123,11 +123,11 @@
 
     </main>
     <footer>
-        <button type="submit" id="grid_view" class="btn_2_o">
+        <button type="submit" id="grid_view" class="btn_1">
             <i class="pi pi-search"></i>
             جستجو
         </button>
-        <button type="submit" id="excel_download" class="btn_2_o">
+        <button type="submit" id="excel_download" class="btn_1">
             <i class="pi pi-file-excel"></i>
             دانلود Excel
         </button>

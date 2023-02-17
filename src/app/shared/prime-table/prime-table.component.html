@@ -1,15 +1,3 @@
-<section *ngIf="_hasAggregating && profileService._agg.flag" class="content">
-    <div class="input_2">
-        <p-dropdown name="zones" [options]="_selectedColumns" [(ngModel)]="profileService._agg.selectedAggregate"
-            placeholder="انتخاب مورد" [style]="{'minWidth':'10rem','width':'100%'}" optionValue="field"
-            optionLabel="header" filter="true" (onChange)="doAggregate()">
-        </p-dropdown>
-        <button (click)="resetAggregation()" class="btn_2_o">
-            بدون گروه‌بندی
-            <i class="pi pi-refresh"></i>
-        </button>
-    </div>
-</section>
 <p-table id="tdm" [columns]="selectedColumns" [value]="dataSource" [paginator]="true" [rows]=_rowsNumbers
     [showCurrentPageReport]="true" currentPageReportTemplate="نمایش از {first} تا{last} از {totalRecords} مورد"
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
@@ -55,6 +43,16 @@
                     class="tooltip fa_icons _circle_border p_icons _save_columns pi pi-reply">
                     <div class="tooltip_text">بازنشانی ستونهای پیشفرض</div>
                 </i>
+                <section *ngIf="_hasAggregating && profileService._agg.flag" class="content">
+                    <p-dropdown name="zones" [options]="_selectedColumns"
+                        [(ngModel)]="profileService._agg.selectedAggregate" placeholder="انتخاب مورد"
+                        [style]="{'min-width':'8rem','width':'100%', 'height': '2rem'}" optionValue="field"
+                        optionLabel="header" filter="true" (onChange)="doAggregate()">
+                    </p-dropdown>
+                    <i (click)="resetAggregation()" class="icon_reset pi pi-refresh tooltip">
+                        <div class="tooltip_text">بدون گروه‌بندی</div>
+                    </i>
+                </section>
             </div>
             <div class="left_side">
                 <i *ngIf="_checkUpName == 'allComponent' && _outputFileName !== 'searchMosh' && _outputFileName !== 'searchPro'"

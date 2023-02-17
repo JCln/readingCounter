@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ export class ApkService {
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private snackWrapperService: SnackWrapperService,
-    private dialog: MatDialog,
+    private utilsService: UtilsService    
   ) { }
 
   getDataSource = (): any => {
@@ -105,22 +104,14 @@ export class ApkService {
   showSuccessMessage = (message: string, color: ENSnackBarColors) => {
     this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.sevenMili, color);
   }
-  firstConfirmDialogRemove = () => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(async desc => {
-        if (desc) {
-          resolve(true);
-        }
-      })
-    })
+  firstConfirmDialog = (): Promise<any> => {
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
+
 }

@@ -90,15 +90,15 @@
 }
 
 section.content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 19rem));
-  direction: rtl;
-  align-items: center;
-}
-
-.btn_2_o {
-  width: 9rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  direction: rtl;
+  gap: 1rem;
+  height: 2rem;
+  background: var(--thirdy_2);
+  border-radius: $border_7;
+
+  .icon_reset {
+    cursor: pointer;
+  }
 }

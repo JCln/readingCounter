@@ -4,12 +4,13 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { ICredentials } from 'interfaces/iauth-guard-permission';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { BrowserSupportService } from 'services/browser-support.service';
-import { ENLoginVersion, infoVersion } from 'services/DI/info-version';
+import { infoVersion } from 'services/DI/info-version';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { MathS } from 'src/app/classes/math-s';
 
-import { AuthService } from './../auth.service';
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -34,8 +35,7 @@ import { AuthService } from './../auth.service';
   ]
 })
 export class LoginComponent {
-  versionNumber = ENLoginVersion.version;
-  userData: ICredentials = { username: '', password: '', appVersion: this.versionNumber };
+  userData: ICredentials = { username: '', password: '', appVersion: this.utilsService.getAppVersion() };
   showVersionInfo: boolean = false;
   infoVersionItems: IDictionaryManager[] = [];
 

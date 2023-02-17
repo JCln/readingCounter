@@ -12,6 +12,7 @@ export interface IENV {
     hasCanclableSpinner: boolean,
     timeout: number,
     defaultAggregateTracks: boolean,
+    version: string,
 }
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
@@ -102,6 +103,9 @@ export class timeout {
     // static time = 18000;
     static time = 2000;
 }
+export class version {
+    static readonly version = 'build: 0.0.0';
+}
 export class ENMapUrls {
     static readonly DEFAULT = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.DEFAULT }, { title: 'sattelite', url: ENSatteliteAccessToken.DEFAULT + ENSatelliteToken.DEFAULT }]);
     static readonly ESF = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.ESF_LOCAL }]);
@@ -110,7 +114,7 @@ export class ENMapUrls {
     static readonly TEH_SE = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE }]);
     static readonly TEH_SE_LOCAL = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE_LOCAL }]);
     static readonly KERMANSHAH = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.KERMANSHAH }]);
-    static readonly REY = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.REY }]);    
+    static readonly REY = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.REY }]);
 
     private constructor(public readonly value: { title: string, url: string }[]) {
     }

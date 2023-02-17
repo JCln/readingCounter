@@ -7,10 +7,10 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
 import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import {
-    IReadingReportGISReq,
-    IReadingReportReq,
-    IReadingReportTraverseDifferentialReq,
-    IUserKarkardInput,
+  IReadingReportGISReq,
+  IReadingReportReq,
+  IReadingReportTraverseDifferentialReq,
+  IUserKarkardInput,
 } from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
@@ -21,7 +21,7 @@ import { UtilsService } from 'services/utils.service';
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import {
-    ConfirmDialogExcelViewComponent,
+  ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
@@ -229,30 +229,7 @@ export class ReadingReportManagerService {
     reportCode: 0,
     year: this.utilsService.getFirstYear()
   }
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true,
-      key: 'Date'
-    },
-    {
-      title: 'دوره',
-      isSelected: false,
-      key: 'period'
-    }
-  ]
-  searchInOrderToReverse: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: false,
-      key: 'Date'
-    },
-    {
-      title: 'دوره',
-      isSelected: true,
-      key: 'period'
-    }
-  ]
+
   showGisInOrderTo: any[] = [
     {
       id: 'isCounterState',
@@ -284,11 +261,11 @@ export class ReadingReportManagerService {
   getSearchInOrderTo = (): ISearchInOrderTo[] => {
     if (this.profileService.getLocalValue()) {
       this._isOrderByDate = false;
-      return this.searchInOrderToReverse;
+      return this.utilsService.getSearchInOrderToReverse;
     }
     else {
       this._isOrderByDate = true;
-      return this.searchInOrderTo;
+      return this.utilsService.getSearchInOrderTo;
     }
   }
   getLocalResizable = (): boolean => {
@@ -313,7 +290,7 @@ export class ReadingReportManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private dialog: MatDialog,
     private _location: Location,

@@ -231,20 +231,22 @@ export class MapComponent implements OnInit, OnDestroy {
     // this.toggleMapView();
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
-    if (lat === 0 || lag === 0)
-      return;
-    lat = parseFloat(lat.toString().substring(0, 6));
-    lag = parseFloat(lag.toString().substring(0, 6));
+    if (lat != 0 || lag != 0) {
 
-    this.map.flyTo([(lat), (lag)], zoom);
+      lat = parseFloat(lat.toString().substring(0, 6));
+      lag = parseFloat(lag.toString().substring(0, 6));
+
+      this.map.flyTo([(lat), (lag)], zoom);
+    }
   }
   private panToDes = (lat: number, lag: number) => {
-    if (lat === 0 || lag === 0)
-      return;
-    lat = parseFloat(lat.toString().substring(0, 6));
-    lag = parseFloat(lag.toString().substring(0, 6));
+    if (lat != 0 || lag != 0) {
 
-    this.map.panTo([(lat), (lag)]);
+      lat = parseFloat(lat.toString().substring(0, 6));
+      lag = parseFloat(lag.toString().substring(0, 6));
+
+      this.map.panTo([(lat), (lag)]);
+    }
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
@@ -256,7 +258,7 @@ export class MapComponent implements OnInit, OnDestroy {
     xyData.map((items, i) => {
       setTimeout(() => {
         this[method](parseFloat(items.y), parseFloat(items.x), items);
-        this.panToDes(parseFloat(items.y), parseFloat(items.x));
+        this.panToDes(items.y, items.x);
       }, i * delay);
     })
   }
@@ -283,6 +285,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.layerGroup.addLayer(markers);
   }
   showCounterReadersLocations = (dataSource: IGisXYResponse[]) => {
+    this.utilsService.routeTo(EN_Routes.wr);
     this.removeAllLayers();
     this.markingOnMapNClusterNDelay('markWithoutClusterColorized', dataSource);
   }
@@ -319,10 +322,10 @@ export class MapComponent implements OnInit, OnDestroy {
   showDashboard = (isShowMap: boolean) => {
     this.isShowMap = isShowMap;
     if (isShowMap) {
-      this.router.navigate(['../wr']);
+      this.utilsService.routeTo(EN_Routes.wr);
     }
     else {
-      this.router.navigate([EN_Routes.wrdb]);
+      this.utilsService.routeTo(EN_Routes.wrdb);
     }
     this.changeRouteDetected();
   }

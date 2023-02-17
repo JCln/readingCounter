@@ -32,46 +32,22 @@ export class DataMiningAnalysesService {
     zoneIds: null
   }
   constructor(
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private profileService: ProfileService,
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
   _isOrderByDate: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true,
-      key: 'Date'
-    },
-    {
-      title: 'دوره',
-      isSelected: false,
-      key: 'period'
-    }
-  ]
-  searchInOrderToReverse: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: false,
-      key: 'Date'
-    },
-    {
-      title: 'دوره',
-      isSelected: true,
-      key: 'period'
-    }
-  ]
   /* GET*/
   getSearchInOrderTo = (): ISearchInOrderTo[] => {
     if (this.profileService.getLocalValue()) {
       this._isOrderByDate = false;
-      return this.searchInOrderToReverse;
+      return this.utilsService.getSearchInOrderToReverse;
     }
     else {
       this._isOrderByDate = true;
-      return this.searchInOrderTo;
+      return this.utilsService.getSearchInOrderTo;
     }
   }
   /*COLUMNS */

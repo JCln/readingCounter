@@ -69,7 +69,8 @@ td.mat-cell {
 
 .mat-dialog-actions {
   display: flex;
-  justify-content: flex-end;
+  direction: rtl;
+  justify-content: flex-start;
 }
 
 .mat-dialog-actions,

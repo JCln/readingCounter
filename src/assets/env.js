@@ -48,7 +48,8 @@
     window.__env.reSizableTable = false;
     window.__env.reOrderableTable = false;
     window.__env.defaultAggregateTracks = false;
-
+    window.__env.version = '1.0.0';
+    
     // Whether or not to enable debug mode
     // Setting this to false will disable console output
     window.__env.enableDebug = true;

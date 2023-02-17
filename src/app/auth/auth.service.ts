@@ -4,7 +4,7 @@ import { IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-
 import { Observable } from 'rxjs/internal/Observable';
 import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { MainService } from 'services/main.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SignalRService } from 'services/signal-r.service';
 import { UtilsService } from 'services/utils.service';
 
@@ -18,7 +18,7 @@ import { JwtService } from './jwt.service';
 export class AuthService {
 
   constructor(
-    private mainService: MainService,
+    private interfaceManagerService: InterfaceManagerService,
     private jwtService: JwtService,
     private utilsService: UtilsService,
     private closeTabService: CloseTabService,
@@ -30,11 +30,11 @@ export class AuthService {
     return this.jwtService.getRefreshToken();
   }
   refreshToken = (): Observable<any> => {
-    return this.mainService.POSTBODY(ENInterfaces.AuthsAccountRefresh, { 'refreshToken': this.getRefreshToken() })
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountRefresh, { 'refreshToken': this.getRefreshToken() })
   }
   logging = (userData: ICredentials) => {
     const returnUrl = this.utilsService.getRouteParams('returnUrl');
-    this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).toPromise().then((res: IAuthTokenType) => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).toPromise().then((res: IAuthTokenType) => {
       this.saveTolStorage(res);
       this.routeToReturnUrl(returnUrl);
     })
@@ -46,7 +46,7 @@ export class AuthService {
     this.clearAllSavedData();
     this.clearDictionaries();
     this.signalRService.disconnectConnection();
-    this.mainService.POSTBODY(ENInterfaces.AuthsAccountLogout, { refreshToken }).toPromise().then(() => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountLogout, { refreshToken }).toPromise().then(() => {
       this.jwtService.removeAuthLocalStorage();
       this.utilsService.routeTo(EN_Routes.login);
     })

@@ -1,4 +1,4 @@
-@import 'variable';
+@import 'primeNG.scss';
 @import 'button.scss';
 @import 'input.scss';
 
@@ -48,7 +48,7 @@ main {
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
   text-align: center;
-  padding: var(--font_xs) 0;
+  padding: var(--font_xxs);
   justify-content: space-around;
   border-radius: $border_15;
   min-height: var(--font_5);
@@ -58,8 +58,8 @@ main {
   display: grid;
   margin: auto;
   padding: var(--font_xs) 0;
-  width: 90%;
-  justify-content: space-around;
+  width: 100%;
+  max-width: 19rem;
   border-radius: $border_15;
 }
 
@@ -92,4 +92,8 @@ h2.title {
   color: var(--secondary_5);
   margin-bottom: var(--font_05);
   box-shadow: 1px 1px 8px 1px var(--secondary_4);
+}
+
+.btn_2 {
+  width: 19rem;
 }
