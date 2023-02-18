@@ -3,6 +3,7 @@
 @import 'button.scss';
 @import '_mat.scss';
 @import 'tooltip.scss';
+@import 'choose-files.scss';
 
 .main {
   direction: rtl;
@@ -98,67 +99,10 @@ hr {
   display: none;
 }
 
-._choose_file {
-  width: 100%;
-  border: 2px solid var(--primary_2);
-  color: var(--primary_2);
-  text-align: center;
-  border-radius: 100vmax;
-  margin-bottom: var(--font_xs);
-}
-
-.not_choosen_file {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  white-space: nowrap;
-  width: 100%;
-  padding: var(--font_05);
-  background-color: var(--white);
-  color: var(--secondary_6);
-  font-size: var(--font_m);
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 1px 1px 2px 0px var(--secondary_4);
-  border: 1px solid var(--secondary_5);
-}
-
 .icon_android,
 small {
   color: var(--green_500);
   margin: 0 .4rem;
-}
-
-.icon_android {
-  font-size: var(--font_25);
-}
-
-.label_choose_file {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  white-space: nowrap;
-  overflow: hidden;
-  padding: var(--font_05);
-  width: 100%;
-  max-width: 19rem;
-  background-color: var(--white);
-  color: var(--secondary_6);
-  text-align: center;
-  border-radius: $border_15;
-  font-size: var(--font_m);
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 1px 1px 2px 0px var(--secondary_4);
-  border: 1px solid;
-}
-
-input[type="file"] {
-  // display: none;
-  position: absolute;
-  left: -99999rem;
 }
 
 .__custom {

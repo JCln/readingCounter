@@ -326,6 +326,7 @@ export enum ENLocalStorageNames {
     mapAnimationStartFrom = 'mapAnimationStartFrom',
     shouldUseCarouselGallery = 'shouldUseCarouselGallery',
     shouldUseBaseOnDate = 'shouldUseBaseOnDate',
+    notifyPosition = 'notifyPosition',
     hasCanclableSpinner = 'hasCanclableSpinner',
     imageOption = 'imageOption',
     fontStyle = 'fontStyle',

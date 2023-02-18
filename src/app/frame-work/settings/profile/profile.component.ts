@@ -30,6 +30,15 @@ export class ProfileComponent extends FactoryONE {
     { label: 'متوسط', value: ENFontStyle.fontSM },
     { label: 'بزرگ', value: ENFontStyle.fontS }
   ];
+  notifyPositionOptions: any[] = [
+    { label: 'بالا راست', value: 'top-right' },
+    { label: 'بالا چپ', value: 'top-left' },
+    { label: 'پایین راست', value: 'bottom-right' },
+    { label: 'پایین چپ', value: 'bottom-left' },
+    { label: 'بالا وسط', value: 'top-center' },
+    { label: 'پایین وسط', value: 'bottom-center' },
+    { label: 'مرکز', value: 'center' }
+  ];
   stateOptionsImageOption: any[] = [
     {
       label: 'تمام صفحه',
@@ -105,6 +114,7 @@ export class ProfileComponent extends FactoryONE {
 
     this.getBasedOnDate();
     this.getFontStyle();
+    this.getNotifyPosition();
     this.getSelectedColumns();
     this.getHasCanclableSpinner();
     this.getValueOfShowCarouselMedia();
@@ -150,6 +160,9 @@ export class ProfileComponent extends FactoryONE {
   getFontStyle = () => {
     this.profileService.showStateVals.defaultFontStyle = this.profileService.getFontStyle();
   }
+  getNotifyPosition = () => {
+    this.profileService.showStateVals.notifyPosition = this.profileService.getLocalNotifyPosition();
+  }
   setBasedOnDate = (val: any) => {
     this.profileService.setLocalValue(val);
     val ? this.profileService.showMessage(EN_messages.basedOnDateShowDisabled) : this.profileService.showMessage(EN_messages.basedOnDateShowEnabled);
@@ -161,6 +174,10 @@ export class ProfileComponent extends FactoryONE {
   setFontStyle = (val: ENFontStyle) => {
     this.profileService.setFontStyle(val);
     this.fontService.setFontStyle(val);
+  }
+  setNotifyPosition = (val: string) => {
+    this.profileService.setLocalNotifyPosition(val);
+    this.profileService.showMessage(EN_messages.notifyPositionChange);
   }
   setResizableTable = (val: any) => {
     this.profileService.setLocalReSizable(val);
