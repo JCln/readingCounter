@@ -10,12 +10,14 @@
 }
 
 .img_wrapper {
-  border-radius: $border_15;
-  border: 2px solid var(--thirdy_1);
   position: relative;
   margin: .4rem 0;
 }
 
+//message caption 
+p {
+  font-style: italic;
+}
 
 .title {
   color: var(--primary_3);
@@ -27,7 +29,8 @@
 hr {
   margin-bottom: var(--font_xs);
 }
+
 .video {
-    width: 100%;
-    height: 80vh;
+  width: 100%;
+  height: 80vh;
 }
