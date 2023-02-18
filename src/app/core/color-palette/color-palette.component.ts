@@ -10,13 +10,19 @@ import { ThemeService } from 'services/theme.service';
   animations: [
     trigger('openClose', [
       state('closeSubItems', style({
-        display: 'none'
+        visibility: 'hidden',
+        height: '0',
+        width: '0',
+        opacity: '0'
       })),
       state('openSubItems', style({
-        display: 'inline',
-        padding: '.85rem 1rem'
+        visibility: 'visible',
+        padding: '.25rem 0.5rem',
+        height: 'auto',
+        width: 'auto',
+        opacity: '1'
       })),
-      transition('closeSubItems <=> openSubItems', animate('250ms ease-in-out'))
+      transition('closeSubItems <=> openSubItems', animate('150ms ease-in-out'))
     ])
   ]
 })
