@@ -1,13 +1,13 @@
 <app-prime-table     
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForTrackImported" 
     [_outputFileName]="'imported'"
     [_checkUpName]="'imported'"
-    [_sortField]="'insertDateJalali'"
     [_tooltipText]="'مشاهده جزئیات و ویرایش'"
     [_calculableSUM]=true    
-    [_numberOfExtraColumns]="[1, 2 , 3]"
+    [_hasAggregating] = true
+    [_isCustomSort]=true
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3]"
+    (customedSort)="trackingManagerService.customSort($event)"
     [_sessionName]="'imported-session'"
     [_selectedColumnsToRemember]="'selectedTrackImported'"
     (refreshedTable)="refreshTable()"

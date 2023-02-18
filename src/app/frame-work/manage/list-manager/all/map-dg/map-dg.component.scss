@@ -5,7 +5,7 @@
   direction: rtl;
   font-family: $font_family;
   grid-template-columns: repeat(auto-fit, minmax(17rem, auto));
-  gap: .25rem;
+  gap: var(--font_025);
 }
 
 h2 {
@@ -14,7 +14,7 @@ h2 {
 }
 
 .map-frame {
-  margin: 1rem .2rem;
+  margin: var(--font_xs) var(--font_02);
   height: 100%;
   min-height: 31rem;
   box-shadow: -1px 2px 5px 5px var(--secondary_4);

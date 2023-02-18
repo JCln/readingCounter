@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { appItems, IRoleItems } from 'interfaces/iuser-manager';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { CloseTabService } from 'services/close-tab.service';
-import { UserEditManagerService } from 'services/user-edit-manager.service';
+import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -10,34 +11,22 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./user-edit-on-role.component.scss']
 })
 export class UserEditOnRoleComponent extends FactoryONE {
-  dataSource: any;
-
-  userActions: appItems[] = [];
-  userRoles: IRoleItems[] = [];
-
   constructor(
-    private userEditManagerService: UserEditManagerService,
-     
-    private closeTabService: CloseTabService
+    private usersAllService: UsersAllService,
+    public closeTabService: CloseTabService
   ) {
     super();
   }
   connectToServer = () => {
-    this.userEditManagerService.userEditOnRole(this.dataSource);
+    this.usersAllService.userEditOnRole(this.closeTabService.saveDataForEditOnRole);
   }
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.closeTabService.saveDataForEditOnRole = '';
     }
-    if (this.closeTabService.saveDataForEditOnRole) {
-      this.dataSource = this.closeTabService.saveDataForEditOnRole;
+    if (!this.closeTabService.saveDataForEditOnRole) {
+      this.closeTabService.saveDataForEditOnRole = await this.usersAllService.connectToServer(ENInterfaces.userADD);
     }
-    else {
-      this.dataSource = await this.userEditManagerService.getUserAdd();
-      this.closeTabService.saveDataForEditOnRole = this.dataSource;
-    }
-
-    this.userRoles = this.dataSource.roleItems;
-    this.userActions = this.dataSource.appItems;
+    this.usersAllService.firstConfirmDialog(EN_messages.confirmUserGroupChange1, EN_messages.confirmUserGroupChange2, false);
   }
 }

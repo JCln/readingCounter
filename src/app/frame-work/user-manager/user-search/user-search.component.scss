@@ -1,1 +1,6 @@
 @import 'add-edit.scss';
+
+.mat-stepper-horizontal {
+  height: 75vh;
+  overflow: auto;
+}

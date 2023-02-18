@@ -1,60 +1,55 @@
-@import 'variable';
+@import 'primeNG';
 @import 'button.scss';
 @import 'input.scss';
-@import 'media.scss';
+@import 'mixins.scss';
+@import '_mat.scss';
 
-.over_all {
+section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, auto));
+  justify-content: center;
   direction: rtl;
-  justify-content: center;
-  gap: $font_xs;
-}
-
-@include media_wrapper(550px, '.over_all', grid-template-columns, repeat(auto-fit, minmax(25rem, auto)));
-
-.content {
+  margin: auto;
+  padding: var(--font_xs);
+  width: 18rem;
   background: var(--secondary_1);
-  box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  text-align: center;
-  padding: $font_2 0;
   border-radius: $border_15;
-  min-height: 25rem;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
 }
 
-input {
+.input_2 {
   text-align: center;
-  width: 19rem;
+  width: 15rem;
 }
 
-._desc {
-  display: grid;
-  justify-content: center;
+.btn_1 {
+  margin-top: var(--font_2);
+}
+
+._key,
+._value {
+  font-size: var(--font_m);
+  font-weight: 800;
 }
 
 .title {
-  color: var(--primary_2);
   text-align: center;
-  margin: $font_xs $font_05;
-  font-size: 1.6rem;
+  color: var(--primary_3);
 }
 
-.change_pass {
-
-  button {
-    background: var(--primary_2);
-    margin: $font_2 auto;
-    color: var(--white);
-    width: 100%;
-  }
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: var(--primary_5);
+  text-align: center;
 }
 
-.icon_android,
-small {
-  color: var(--green_500);
-  margin: 0 .4rem;
+._key {
+  white-space: nowrap;
 }
 
-.icon_android {
-  font-size: 2.5rem;
+input {
+  border: none;
 }

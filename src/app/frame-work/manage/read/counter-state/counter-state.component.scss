@@ -4,7 +4,7 @@
 .ag-header-cell-label {
 
   justify-content: center;
-  margin: .2rem 0;
+  margin: var(--font_02) 0;
   text-align: center;
   border: 2px solid var(--primary_2);
   border-radius: $border_15;
@@ -17,7 +17,7 @@
 
 .ag-theme-alpine {
 
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 600;
   font-family: $font_family;
 }
@@ -26,5 +26,5 @@
 .cell-conf {
   color: var(--primary_2);
   // color: var(--secondary_6);
-  font-size: 1.2rem;
+  font-size: var(--font_s);
 }

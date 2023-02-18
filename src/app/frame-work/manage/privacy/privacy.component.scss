@@ -8,7 +8,7 @@
   grid-template-columns: repeat(auto-fit, minmax(25rem, auto));
   direction: rtl;
   justify-content: center;
-  gap: .5rem;
+  gap: var(--font_05);
 }
 
 .item_3 {
@@ -17,7 +17,7 @@
 }
 
 .content {
-  padding: $font_2 0.2rem;
+  padding: var(--font_2) var(--font_02);
   background: var(--secondary_1);
   border-radius: 10px;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
@@ -33,8 +33,8 @@
 .title {
   color: var(--secondary_5);
   text-align: center;
-  margin: $font_xs $font_05;
-  font-size: 1.6rem;
+  margin: var(--font_xs) var(--font_05);
+  font-size: var(--font_l2);
 }
 
 input {
@@ -56,36 +56,28 @@ input {
 
 .over_all_result {
   color: var(--primary_2);
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 600;
-  margin-top: $font_2;
+  margin-top: var(--font_2);
 }
 
 ////////
 
 ::ng-deep {
 
-  .mat-radio-label-content {
-    color: var(--secondary_6);
-    font-size: $font_s;
-    font-weight: 600;
-    margin-right: 1rem;
-    font-family: $font_family;
-  }
-
   .example-radio-button {
     margin: 4px;
     background: var(--secondary_1);
-    padding: $font_xxs;
+    padding: var(--font_xxs);
     border-radius: $border_15;
   }
 
   .mat-checkbox-layout {
-    margin-bottom: $font_05;
+    margin-bottom: var(--font_05);
 
     .mat-checkbox-label {
-      margin: 0 $font_05;
-      font-size: $font_s;
+      margin: 0 var(--font_05);
+      font-size: var(--font_s);
       font-weight: 600;
       color: var(--secondary_6);
       line-height: 2;
@@ -99,14 +91,14 @@ input {
 ul {
   list-style-type: none;
   margin: 0;
-  padding: 0.25rem;
+  padding: var(--font_025);
 }
 
 .number_vals {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 600;
   color: var(--secondary_6);
 }
@@ -116,12 +108,12 @@ ul {
 }
 
 .btns {
-  margin: $font_xs;
+  margin: var(--font_xs);
   display: flex;
   justify-content: center;
 }
 
 .btn_1 {
   color: var(--secondary_1);
-  margin: $font_05;
+  margin: var(--font_05);
 }

@@ -1,7 +1,5 @@
 <app-prime-table-editable     
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForAppLevel4" 
     [_checkUpName]="'auth4'"
     [_outputFileName]="'auth4'"
     [_dictionaryName]="'authLevel3Id'"
@@ -12,7 +10,7 @@
     [_sessionName]="'auth4-session'"
     (refreshedTable)="refreshTable()"
     (openedAddDialog)="openAddDialog()"
-    (dropDownChanges)="dataSource['authLevel3Id']"
+    (dropDownChanges)="closeTabService.saveDataForAppLevel4['authLevel3Id']"
     (removedRow)="removeRow($event)"
     (onRowEditedCancel)="onRowEditCancel()"
     (onRowEditedInit)="onRowEditInit($event)"

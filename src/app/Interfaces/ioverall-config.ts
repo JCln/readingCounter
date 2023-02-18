@@ -36,7 +36,9 @@ export interface ITabs {
 }
 export enum ENEssentialsToSave {
     saveDataForDynamicReports = 'saveDataForDynamicReports',
+    saveDataForMomentLastRead = 'saveDataForMomentLastRead',
     saveDataForToolsExcelViewer = 'saveDataForToolsExcelViewer',
+    saveDataForWaterMark = 'saveDataForWaterMark',
     saveDataForKarbari = 'saveDataForKarbari',
     saveDataForImageAttribution = 'saveDataForImageAttribution',
     saveDataForImageAttrResult = 'saveDataForImageAttrResult',
@@ -59,6 +61,7 @@ export enum ENEssentialsToSave {
     saveDataForAppLevel3 = 'saveDataForAppLevel3',
     saveDataForAppLevel4 = 'saveDataForAppLevel4',
     saveDataForAllUsers = 'saveDataForAllUsers',
+    saveDataForUserOnlines = 'saveDataForUserOnlines',
     saveDataForAddUsers = 'saveDataForAddUsers',
     saveDataForRoleManager = 'saveDataForRoleManager',
     saveDataForEditOnRole = 'saveDataForEditOnRole',
@@ -68,11 +71,16 @@ export enum ENEssentialsToSave {
     saveDataForZone = 'saveDataForZone',
     saveDataForZoneBound = 'saveDataForZoneBound',
     saveDataForImportDynamic = 'saveDataForImportDynamic',
+    saveDataForImportDataFileExcel = 'saveDataForImportDataFileExcel',
+    saveDataForImportDataFileExcelReq = 'saveDataForImportDataFileExcelReq',
     saveDataForImportErrors = 'saveDataForImportErrors',
+    saveDataForImportErrorsByTrackNumber = 'saveDataForImportErrorsByTrackNumber',
+    saveDataForImportErrorsByTrackNumberReq = 'saveDataForImportErrorsByTrackNumberReq',
     saveDataForAssessPre = 'saveDataForAssessPre',
     saveDataForAssessPreReq = 'saveDataForAssessPre',
     saveDataForAssessAdd = 'saveDataForAssessAdd',
     saveDataForSimafaReadingPrograms = 'saveDataForSimafaReadingPrograms',
+    importSimafaReadingProgramReq = 'importSimafaReadingProgramReq',
     saveDataForSimafaBatch = 'saveDataForSimafaBatch',
     saveDataForPolicies = 'saveDataForPolicies',
     saveDataForProfile = 'saveDataForProfile',
@@ -81,8 +89,11 @@ export enum ENEssentialsToSave {
     saveDataForTrackReading = 'saveDataForTrackReading',
     saveDataForLastStates = 'saveDataForLastStates',
     saveDataForTrackOffloaded = 'saveDataForTrackOffloaded',
+    saveDataForTrackOffloadedGroup = 'saveDataForTrackOffloadedGroup',
+    offloadedGroupReq = 'offloadedGroupReq',
     saveDataForTrackFinished = 'saveDataForTrackFinished',
     saveDataForFollowUp = 'saveDataForFollowUp',
+    saveDataForFollowUpReq = 'saveDataForFollowUpReq',
     saveDataForFollowUpAUX = 'saveDataForFollowUpAUX',
     rSearchMoshtarakinReq = 'rSearchMoshtarakinReq',
     saveDataForSearchMoshtarakin = 'saveDataForSearchMoshtarakin',
@@ -93,34 +104,57 @@ export enum ENEssentialsToSave {
     saveDataForUserSearchRes = 'saveDataForUserSearchRes',
     saveDataForFNB = 'saveDataForFNB',
     saveDataForLMPD = 'saveDataForLMPD',
+    saveDataForLMPDTrackNumber = 'saveDataForLMPDTrackNumber',
     saveDataForOutputDBF = 'saveDataForOutputDBF',
+    saveDataForOutputDBFEqamatBagh = 'saveDataForOutputDBFEqamatBagh',
     saveDataForRRTraverse = 'saveDataForRRTraverse',
     saveDataForRRTraverseDifferential = 'saveDataForRRTraverseDifferential',
     saveDataForRRDisposalHours = 'saveDataForRRDisposalHours',
     saveDataForRRKarkard = 'saveDataForRRKarkard',
+    saveDataForKarkardAllStates = 'saveDataForKarkardAllStates',
+    saveDataForKarkardAllStatesTWO = 'saveDataForKarkardAllStatesTWO',
     saveDataForRRPreNumShown = 'saveDataForRRPreNumShown',
     saveDataForRRLocked = 'saveDataForRRLocked',
     saveDataForRROffloadedKarkard = 'saveDataForRROffloadedKarkard',
+    saveDataForRRFragment = 'saveDataForRRFragment',
     saveDataForRRMaster = 'saveDataForRRMaster',
     saveDataForRRPerformance = 'saveDataForRRPerformance',
     saveDataForDMAAnalyze = 'saveDataForDMAAnalyze',
     saveDataForRRDetails = 'saveDataForRRDetails',
+    saveDataForUserKarkard = 'saveDataForUserKarkard',
+    saveDataForUserKarkardSummaryTwo = 'saveDataForUserKarkardSummaryTwo',
+    saveDataForUserKarkardSummary = 'saveDataForUserKarkardSummary',
+    saveDataForUserKarkardSummaryReq = 'saveDataForUserKarkardSummaryReq',
     saveDataForRRkarkardDaily = 'saveDataForRRkarkardDaily',
     saveDataForRRGIS = 'saveDataForRRGIS',
     saveDataForLMGeneralModify = 'saveDataForLMGeneralModify',
     saveDataForLMGeneralModifyReq = 'saveDataForLMGeneralModifyReq',
+    saveDataForLMGeneralGroupModifyReq = 'saveDataForLMGeneralGroupModifyReq',
+    saveDataForLMGeneralGroupModify = 'saveDataForLMGeneralGroupModify',
     saveDataForOffloadModify = 'saveDataForOffloadModify',
     saveDataForLMModifyReq = 'saveDataForLMModifyReq',
     saveDataForLMModify = 'saveDataForLMModify',
     saveDataForLMAll = 'saveDataForLMAll',
     saveDataForLMAllReq = 'saveDataForLMAllReq',
-    saveDataForLMAll_extra = 'saveDataForLMAll_extra',
     saveDataForEditUsers = 'saveDataForEditUsers',
-    saveDataForWOUI = 'saveDataForWOUI',
+    saveDataForEditUsersGUID = 'saveDataForEditUsersGUID',
     saveDataForUserLoggins = 'saveDataForUserLoggins',
     saveDataForFragmentNOBDetails = 'saveDataForFragmentNOBDetails',
+    fragmentNOBDetailsGUID = 'fragmentNOBDetailsGUID',
     saveDataForRRGallery = 'saveDataForRRGallery',
+    saveDataForRandomImgs = 'saveDataForRandomImgs',
+    saveDataForImgResultDetailsRes = 'saveDataForImgResultDetailsRes',
+    saveDataForImgResultDetailsResFirst = 'saveDataForImgResultDetailsResFirst',
+    saveDataForRandomImgsRSFirst = 'saveDataForRandomImgsRSFirst',
+    saveDataForRRGalleryRSFirst = 'saveDataForRRGalleryRSFirst',
     saveDataForRRGalleryReq = 'saveDataForRRGalleryReq',
+    saveDataForRequestLog = 'saveDataForRequestLog',
+    saveDataForRequestLogReq = 'saveDataForRequestLogReq',
+    saveDataForServerErrors = 'saveDataForServerErrors',
+    saveDataForOSInfo = 'saveDataForOSInfo',
+    license = 'license',
+    saveDataForMsDriveInfo = 'saveDataForMsDriveInfo',
+    saveDataForImgResultDetailsGridBased = 'saveDataForImgResultDetailsGridBased'
 }
 export interface ITestSidebar {
     routerUrl: string;
@@ -139,7 +173,6 @@ export interface ISnackBarSignal {
     duration: ENSnackBarTimes;
     backColor?: ENSnackBarColors;
 }
-
 export enum ENHubMessages {
     Disconnected = 'اتصال از سامانه «لحظه» قطع می‌باشد',
     Connecting = 'درحال اتصال به سامانه «لحظه»',
@@ -147,17 +180,17 @@ export enum ENHubMessages {
     Reconnecting = 'درحال اتصال به سامانه «لحظه»',
     Connected = 'متصل به سامانه «لحظه»'
 }
-export enum ENColorText {
-    blue = 'آبی',
-    green = 'سبز',
-    orange = 'نارنجی',
-    red = 'قرمز',
-}
 export enum ENSnackBarColors {
     warn = 'snack_warn',
     danger = 'snack_danger',
     success = 'snack_success',
     info = 'snack_info',
+}
+export enum ENToastColors {
+    warn = 'warn',
+    error = 'error',
+    success = 'success',
+    info = 'info',
 }
 export enum ENSnackBarColorsExact {
     warn = 'rgb(246, 128, 56)',
@@ -208,6 +241,25 @@ export enum ENBrowserStatus {
     warn = 400,
     alarm = 500
 }
+export enum ENRandomNumbers {
+    zero = 0,
+    one = 1,
+    three = 3,
+    four = 4,
+    five = 5,
+    eight = 8,
+    ten = 10,
+    eleven = 11,
+    fifteen = 15,
+    eighteen = 18,
+    twenty = 20,
+    thirdy = 30,
+    forthy = 40,
+    fifty = 50,
+    oneHundred = 100,
+    twoHundred = 200,
+}
+
 export const ENBrowserInfo = {
     Chrome: { title: 'Google Chrome', url: 'https://browser-update.org/fa/update-browser.html' },
     FireFox: { title: 'Mozilla FireFox', url: 'https://browser-update.org/fa/update-browser.html' },
@@ -233,6 +285,7 @@ export interface ITrueFalse {
 export interface ISearchInOrderTo {
     title: string;
     isSelected: boolean;
+    key?: string;
 }
 export interface ITitleValue {
     title: string;
@@ -254,6 +307,7 @@ export interface IObjectIteratation {
     isBoolean?: boolean;
     isNumber?: boolean;
     isSelectOption?: boolean;
+    enableTooltip?: boolean;
 }
 export interface ITabWrapperDetectDynamicRoute {
     _title: string,
@@ -263,36 +317,22 @@ export interface IOffloadModifyType {
     id: number,
     modifyeType: ENOffloadModifyType
 }
-export enum ENHasImportDynamicCount {
+export enum ENHasCount {
     hasCount = 'true',
     hasNotCount = 'false'
 }
 export enum ENLocalStorageNames {
     hasDynamicCount = 'hasDynamicCount',
     mapAnimationStartFrom = 'mapAnimationStartFrom',
-    isDarkModeMap = 'isDarkModeMap'
-}
-export enum ENRandomNumbers {
-    zero = 0,
-    five = 5,
-    ten = 10,
-    eleven = 11,
-    fifteen = 15,
-    twenty = 20,
-    thirdy = 30,
-    forthy = 40,
-    fifty = 50,
-    twoHundred = 200,
-}
-export enum ENThemeName {
-    themeColor = 'themeColor'
-}
-export enum ENThemeColor {
-    light = 0,
-    dark = 1,
-    purple = 2,
-    bedge = 3,
-    corporate = 4,
+    shouldUseCarouselGallery = 'shouldUseCarouselGallery',
+    shouldUseBaseOnDate = 'shouldUseBaseOnDate',
+    notifyPosition = 'notifyPosition',
+    hasCanclableSpinner = 'hasCanclableSpinner',
+    imageOption = 'imageOption',
+    fontStyle = 'fontStyle',
+    reSizableTable = 'reSizableTable',
+    reOrderableTable = 'reOrderableTable',
+    defaultAggregateTracks = 'defaultAggregateTracks',
 }
 export enum ENSelectedColumnVariables {
     selectedRRDynamicReport = 'dynamicReport',
@@ -303,14 +343,18 @@ export enum ENSelectedColumnVariables {
     selectedUsersSearch = 'selectedUsersSearch',
     selectedSimafaBatch = '_simafaBatch',
     selectedTrackReading = 'reading',
+    selectedToolsImgRDGridBased = 'imgResultGridBased',
     selectedTrackLoaded = 'loaded',
     selectedTrackFinished = 'finished',
     selectedTrackOffloaded = 'offloaded',
+    selectedTrackOffloadedGroup = 'offloadedGroup',
     selectedTrackImported = 'imported',
     selectedlastStates = 'lastStates',
     selectedUsersAll = 'userAll',
+    selectedUserOnlines = 'userOnlines',
     selectedListManagerAll = 'allLists',
     selectedGeneralModify = 'generalListModify',
+    selectedGeneralGroupModify = 'generalGroupModify',
     selectedListManagerModify = 'ModifyList',
     selectedListManagerAssess = 'assess_pre',
     selectedListManagerMosh = 'searchMosh',
@@ -325,14 +369,18 @@ export enum ENSelectedColumnVariables {
     selectedAuth4 = 'auth4',
     selectedRRAnalyzeByParam = 'analyzePrfm',
     selectedDMAnalyze = 'analysis',
-    selectedRRMaster = 'master',
+    selectedRRMaster = '_fragmentMaster',
     selectedRRDetails = 'rrDetails',
+    selectedRRRequestLog = 'requestLog',
+    selectedrrUserKarkard = 'rrUserKarkard',
     selectedRRTraverse = 'trv',
     selectedRRTraverseDifferential = 'trvDiff',
     selectedRRKarkard = 'karkard',
+    selectedRRKarkardAllStates = 'offKarkardAllStatesReq',
     selectedRRLocked = 'rrLocked',
     selectedRRPreNumShown = 'rrPreNumber',
     selectedRROffloadedKarkard = 'karkardOffload',
+    selectedRRFragment = 'rrFragmentKarkardReq',
     selectedRRKarkardDaily = 'karkardDaily',
     selectedRRDisposalHours = 'disposalHs',
     selectedAbFormulas = 'abBaha',
@@ -346,8 +394,10 @@ export enum ENSelectedColumnVariables {
     selectedImageAttribution = 'imgattr',
     selectedTextOutput = 'textOutput',
     selectedKarbari = 'karbari',
+    selectedQotr = 'qotr',
     selectedForbidden = 'forbidden',
     selectedErrors = 'errors',
+    selectedErrorsByTrackNumber = 'errorsByTrackNumber',
     selectedServerErrors = 'serverErrors',
     selectedSimafaReadingProgram = 'simafaReadingProgram',
 }
@@ -378,26 +428,3 @@ export const IMasrafStates: ITHV[] = [
     { title: 'zero', header: 'صفر', value: 3 },
     { title: 'inCalculable', header: 'غیرقابل محاسبه', value: 4 }
 ]
-export enum ENClientServerErrors {
-    'cs400' = 400,
-    'cs401' = 401,
-    'cs403' = 403,
-    'cs404' = 404,
-    'cs405' = 405,
-    'cs408' = 408,
-    'cs409' = 409,
-    'cs410' = 410,
-    'cs422' = 422,
-    'cs0' = 0,
-    'cs500' = 500,
-    'cs501' = 501,
-    'cs502' = 502,
-    'cs504' = 504,
-}
-export interface Theme {
-    name: string,
-    properties: any
-}
-export enum ENLoginVersion {
-    version = '0.7.2'
-}

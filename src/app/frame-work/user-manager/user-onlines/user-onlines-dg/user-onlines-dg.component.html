@@ -1,0 +1,29 @@
+<form #form="ngForm" class="over_all" (ngSubmit)="postDataSource()">
+    <h2>جزئیات پیام</h2>
+    <section>
+        <h3>عنوان</h3>
+        <input class="_value1" name="title" [(ngModel)]="toastMessageReq.title" autofocus>
+        <hr class="hr_2">
+    </section>
+
+    <section>
+        <h3>متن</h3>
+        <input class="_value2" name="text" [(ngModel)]="toastMessageReq.text">
+        <hr class="hr_2">
+    </section>
+
+    <div class="color">
+        <h3>رنگ</h3>
+        <div class="c_separator">
+            <p-selectButton name="colors" [options]="colors" [(ngModel)]="toastMessageReq.color" optionLabel="text"
+                optionValue="value">
+            </p-selectButton>
+        </div>
+        <hr class="hr_2">
+    </div>
+
+    <div class="send">
+        <button type="submit" class="btn_2">ارسال پیام</button>
+    </div>
+
+</form>

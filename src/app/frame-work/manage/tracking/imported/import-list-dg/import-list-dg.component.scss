@@ -11,8 +11,8 @@ section {
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_2);
   text-align: center;
-  padding: $font_05;
-  margin-bottom: $font_xs;
+  padding: var(--font_05);
+  margin-bottom: var(--font_xs);
   justify-content: space-around;
   border-radius: $border_15;
 }
@@ -22,7 +22,7 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(16rem, auto));
   direction: rtl;
   justify-content: center;
-  gap: $font_05;
+  gap: var(--font_05);
   align-items: center;
   border-radius: $border_15;
   text-align: right;
@@ -35,18 +35,17 @@ section {
 .title {
   color: var(--thirdy_1);
   text-align: center;
-  margin: $font_xs $font_05;
-  font-size: 1.6rem;
+  margin: var(--font_xs) var(--font_05);
+  font-size: var(--font_l2);
 }
 
-.btn_2_o {
+.btn_1 {
   margin: 2rem auto;
 }
 
 input {
   color: var(--secondary_5);
   margin: 0 auto;
-  // box-shadow: 1px 1px 8px 1px var(--secondary_2);
 }
 
 // dialog conf
@@ -58,7 +57,7 @@ input {
 }
 
 .check_boxes {
-  padding: .25rem;
+  padding: var(--font_025);
 }
 
 // 
@@ -67,8 +66,8 @@ input {
 ::ng-deep {
   .mat-checkbox-layout {
     .mat-checkbox-label {
-      margin: 0 $font_05;
-      font-size: $font_s;
+      margin: 0 var(--font_05);
+      font-size: var(--font_s);
       font-weight: 600;
       color: var(--primary_5);
       line-height: 2;

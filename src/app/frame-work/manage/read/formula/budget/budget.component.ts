@@ -19,14 +19,13 @@ import { BudgetAddDgComponent } from './budget-add-dg/budget-add-dg.component';
 })
 export class BudgetComponent extends FactoryONE {
 
-  dataSource: IAbBahaFormula[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariCodeDictionary: IDictionaryManager[] = [];
 
   clonedProducts: { [s: string]: IAbBahaFormula; } = {};
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public formulasService: FormulasService,
     private dialog: MatDialog,
     public outputManagerService: OutputManagerService
@@ -40,7 +39,7 @@ export class BudgetComponent extends FactoryONE {
       const dialogRef = this.dialog.open(BudgetAddDgComponent,
         {
           disableClose: true,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             di: this.zoneDictionary,
             karbariCodeDic: this.karbariCodeDictionary
@@ -57,7 +56,7 @@ export class BudgetComponent extends FactoryONE {
     return new Promise(resolve => {
       const dialogRef = this.dialog.open(AddExcelFileComponent,
         {
-          minWidth: '19rem',
+          minWidth: '65vw',
         });
       dialogRef.afterClosed().subscribe(result => {
         if (result)
@@ -70,20 +69,29 @@ export class BudgetComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForBadgetFormula) {
-      this.dataSource = this.closeTabService.saveDataForBadgetFormula;
-    }
-    else {
-      this.dataSource = await this.formulasService.getFormulaAll(ENInterfaces.FormulaBudgetAll);
-      this.closeTabService.saveDataForBadgetFormula = this.dataSource;
+    if (!this.closeTabService.saveDataForBadgetFormula) {
+      this.closeTabService.saveDataForBadgetFormula = await this.formulasService.getFormulaAll(ENInterfaces.FormulaBudgetAll);
     }
     this.zoneDictionary = await this.formulasService.getZoneDictionary();
     this.karbariCodeDictionary = await this.formulasService.getKarbariCodeDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.karbariCodeDictionary, 'karbariMoshtarakinCode');
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    this.toConvert();
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  toConvert = () => {
+    this.closeTabService.saveDataForBadgetFormula =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForBadgetFormula,
+        {
+          zoneDictionary: this.zoneDictionary,
+          karbariCodeDictionary: this.karbariCodeDictionary,
+        },
+        {
+          zoneId: 'zoneId',
+          karbariMoshtarakinCode: 'karbariMoshtarakinCode',
+        }
+      )
+  }
+  refetchTable = (index: number) => this.closeTabService.saveDataForBadgetFormula = this.closeTabService.saveDataForBadgetFormula.slice(0, index).concat(this.closeTabService.saveDataForBadgetFormula.slice(index + 1));
   private removeRow = async (rowData: string, rowIndex: number) => {
     await this.formulasService.postFormulaRemove(ENInterfaces.FormulaBudgetRemove, rowData);
     this.refetchTable(rowIndex);
@@ -99,7 +107,7 @@ export class BudgetComponent extends FactoryONE {
   }
   async onRowEditSave(dataSource: IAbBahaFormula) {
     if (!this.formulasService.verificationEditedRow(dataSource['dataSource'])) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForBadgetFormula[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].zoneId !== 'object') {

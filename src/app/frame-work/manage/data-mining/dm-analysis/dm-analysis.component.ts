@@ -1,12 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { DataMiningAnalysesService } from 'services/data-mining-analyses.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
-import { IReadingTimeRes } from 'src/app/Interfaces/data-mining';
 
 @Component({
   selector: 'app-dm-analysis',
@@ -14,31 +13,15 @@ import { IReadingTimeRes } from 'src/app/Interfaces/data-mining';
   styleUrls: ['./dm-analysis.component.scss']
 })
 export class DmAnalysisComponent extends FactoryONE {
-  isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  dataSource: IReadingTimeRes[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     public dataMiningAnalysesService: DataMiningAnalysesService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -49,11 +32,10 @@ export class DmAnalysisComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForDMAAnalyze) {
-      this.dataSource = this.closeTabService.saveDataForDMAAnalyze;
       // this.insertSelectedColumns(); /* TO CHECKOUT THIS FUNC */
       this.setRanges();
     }
-
+    this.dataMiningAnalysesService.getSearchInOrderTo();
     this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
     this.readingPeriodKindDictionary = await this.dataMiningAnalysesService.getReadingPeriodKindDictionary();
     this.receiveYear();
@@ -65,29 +47,21 @@ export class DmAnalysisComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.dataMiningAnalysesService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.dataMiningAnalysesService.dataMiningReq.readingPeriodId = null, this.dataMiningAnalysesService.dataMiningReq.year = 0) : (this.dataMiningAnalysesService.dataMiningReq.fromDate = '', this.dataMiningAnalysesService.dataMiningReq.toDate = '')
-    const temp = this.dataMiningAnalysesService.verification(this.dataMiningAnalysesService.dataMiningReq, this._isOrderByDate);
+    const temp = this.dataMiningAnalysesService.verification(this.dataMiningAnalysesService.dataMiningReq, this.dataMiningAnalysesService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.dataSource = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
-    if (MathS.isNull(this.dataSource))
-      return;
-    this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    this.setRanges();
-    this.closeTabService.saveDataForDMAAnalyze = this.dataSource;
+    this.closeTabService.saveDataForDMAAnalyze = await this.dataMiningAnalysesService.postDMManager(ENInterfaces.dataMiningReadingTime, this.dataMiningAnalysesService.dataMiningReq);
+    if (!MathS.isNull(this.closeTabService.saveDataForDMAAnalyze)) {
+      this.zoneDictionary = await this.dataMiningAnalysesService.getZoneDictionary();
+      Converter.convertIdToTitle(this.closeTabService.saveDataForDMAAnalyze, this.zoneDictionary, 'zoneId');
+      this.setRanges();
+    }
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
   private setRanges = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForDMAAnalyze.forEach(item => {
       item.averageBetweenTwoMinute = parseFloat(MathS.getRange(item.averageBetweenTwoMinute));
       item.disconnectRate = parseFloat(MathS.getRange(item.disconnectRate));
       item.medianBetweenTwoMinute = parseFloat(MathS.getRange(item.medianBetweenTwoMinute));

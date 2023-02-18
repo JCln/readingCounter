@@ -1,13 +1,13 @@
 @import 'primeNG.scss';
+@import '_mat.scss';
 @import 'input.scss';
 @import 'button.scss';
-@import '_mat.scss';
 
 .main {
   direction: rtl;
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  padding: $font_05;
+  padding: var(--font_05);
   border-radius: $border_15;
   min-height: 35rem;
 }
@@ -15,7 +15,7 @@
 section.content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
-  gap: $font_05;
+  gap: var(--font_05);
   align-items: center;
 }
 
@@ -23,12 +23,12 @@ section.content {
   background: var(--white);
   border: .15rem solid var(--secondary_2);
   border-radius: $border_15;
-  padding: $font_05;
+  padding: var(--font_05);
 }
 
 ._key,
 ._value {
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 800;
 }
 
@@ -45,7 +45,6 @@ section.content {
 
 .btn_1 {
   color: var(--white);
-  background-color: var(--orange_500);
 }
 
 h2 {
@@ -53,60 +52,21 @@ h2 {
 }
 
 footer {
-  margin-top: $font_2;
+  margin-top: var(--font_l);
   text-align: center;
 }
 
 hr {
   margin: 0 auto;
   background-color: var(--primary_5);
-  height: .2rem;
-  margin-bottom: $font_xxs;
+  height: var(--font_02);
+  margin-bottom: var(--font_xxs);
 }
 
 .order_by {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-}
-
-.radio_button {
-  font-size: $font_s;
-  font-weight: 700;
-  font-family: inherit;
-  color: var(--secondary_6);
-  margin: 0 2rem;
-}
-
-::ng-deep {
-  .mat-select-panel .mat-option {
-    font-size: 1.2rem;
-    line-height: 3em;
-    height: 3em;
-    text-align: right;
-    font-family: inherit;
-    font-weight: 600;
-  }
-
-  .mat-option-text {
-    font-size: $font_s;
-    font-weight: 600;
-    color: var(--primary_6);
-  }
-
-  .mat-checkbox-layout .mat-checkbox-label {
-    margin: 0 $font_05;
-    font-family: $font_family;
-    font-size: $font_s;
-    font-weight: 600;
-    color: var(--thirdy_3);
-  }
-}
-
-::ng-deep {
-  .mat-radio-label-content {
-    padding-right: $font_05 !important;
-    color: var(--thirdy_1);
-  }
 }
 
 [hidden] {

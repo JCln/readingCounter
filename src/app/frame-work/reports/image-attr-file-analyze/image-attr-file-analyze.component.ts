@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { IImageAttributionAnalyze } from 'interfaces/ireports';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -13,19 +12,13 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./image-attr-file-analyze.component.scss']
 })
 export class ImageAttrFileAnalyzeComponent extends FactoryONE {
-  isCollapsed: boolean = false;
-  dataSource: IImageAttributionAnalyze[] = [];
   chartColors: any[];
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
-  _isOrderByDate: boolean = true;
   zoneDictionary: IDictionaryManager[] = [];
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -35,26 +28,17 @@ export class ImageAttrFileAnalyzeComponent extends FactoryONE {
       this.closeTabService.saveDataForImageAttrAnalyze = null;
       this.verification();
     }
-    if (this.closeTabService.saveDataForImageAttrAnalyze) {
-      this.dataSource = this.closeTabService.saveDataForImageAttrAnalyze;
-    }
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
   }
   verification = async () => {
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.imgAttrAnalyzeReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.imgAttrAnalyzeReq, true);
+
     if (temp)
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionAnalyze, this.readingReportManagerService.imgAttrAnalyzeReq);
-    this.closeTabService.saveDataForImageAttrAnalyze = this.dataSource;
-    this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.dataSource.length) }]
+    this.closeTabService.saveDataForImageAttrAnalyze = await this.readingReportManagerService.portRRTest(ENInterfaces.ImageAttributionAnalyze, this.readingReportManagerService.imgAttrAnalyzeReq);
+    this.chartColors = [{ backgroundColor: MathS.getRandomColors(this.closeTabService.saveDataForImageAttrAnalyze.length) }]
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

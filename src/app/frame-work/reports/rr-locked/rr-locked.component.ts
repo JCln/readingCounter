@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { SortEvent } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CloseTabService } from 'services/close-tab.service';
@@ -16,23 +15,11 @@ import { AllListsFactory } from 'src/app/classes/factory';
   styleUrls: ['./rr-locked.component.scss']
 })
 export class RrLockedComponent extends AllListsFactory {
-  isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
+  deleteDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
@@ -40,12 +27,10 @@ export class RrLockedComponent extends AllListsFactory {
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
 
-  dataSource: IOnOffLoadFlat[] = [];
-
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
     public dialogService: DialogService,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public listManagerService: ListManagerService
   ) {
     super(dialogService, listManagerService);
@@ -56,32 +41,42 @@ export class RrLockedComponent extends AllListsFactory {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRLocked) {
-      this.dataSource = this.closeTabService.saveDataForRRLocked;
       this.converts();
     }
+    this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
     this.receiveYear();
   }
   converts = async () => {
-    const tempZone: number = parseInt(this.dataSource[0].zoneId.toString());
-    if (tempZone) {
-      this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
-      this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
-    }
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    const tempZone: number = parseInt(this.closeTabService.saveDataForRRLocked[0].zoneId.toString());
+    this.counterStateDictionary = await this.readingReportManagerService.getCounterStateByZoneDictionary(tempZone);
+    this.counterStateByCodeDictionary = await this.readingReportManagerService.getCounterStateByCodeDictionary(tempZone);
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.karbariDictionaryCode = await this.readingReportManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.readingReportManagerService.getQotrDictionary();
 
-    // Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
 
-    this.listManagerService.setDynamicPartRanges(this.dataSource);
+    this.closeTabService.saveDataForRRLocked =
+      Converter.convertIdsToTitles(
+        this.closeTabService.saveDataForRRLocked,
+        {
+          deleteDictionary: this.deleteDictionary,
+          counterStateDictionary: this.counterStateDictionary,
+          counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+          karbariDictionaryCode: this.karbariDictionaryCode,
+          qotrDictionary: this.qotrDictionary,
+        },
+        {
+          hazf: 'hazf',
+          counterStateId: 'counterStateId',
+          preCounterStateCode: 'preCounterStateCode',
+          possibleKarbariCode: 'possibleKarbariCode',
+          qotrCode: 'qotrCode'
+        })
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRLocked, this.karbariDictionaryCode, 'karbariCode');
+
+    // this.listManagerService.setDynamicPartRanges(this.closeTabService.saveDataForRRLocked);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -90,16 +85,15 @@ export class RrLockedComponent extends AllListsFactory {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportManagerService.lockedReq.readingPeriodId = null, this.readingReportManagerService.lockedReq.year = 0) : (this.readingReportManagerService.lockedReq.fromDate = '', this.readingReportManagerService.lockedReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.lockedReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.lockedReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
 
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.readingReportManagerService.lockedReq);
+    this.closeTabService.saveDataForRRLocked = await this.readingReportManagerService.portRRTest(ENInterfaces.ListRRLocked, this.readingReportManagerService.lockedReq);
+    this.listManagerService.makeHadPicturesToBoolean(this.closeTabService.saveDataForRRLocked);
     this.converts();
-    this.closeTabService.saveDataForRRLocked = this.dataSource;
   }
   customSort(event: SortEvent) {
     event.data.sort((data1, data2) => {

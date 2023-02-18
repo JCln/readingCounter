@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel2 } from 'interfaces/iauth-levels';
@@ -17,16 +17,12 @@ import { Auth2AddDgComponent } from './auth2-add-dg/auth2-add-dg.component';
 })
 export class Auth2Component extends FactoryONE {
 
-  dataSource: IAuthLevel2[] = [];
-
   authLevel1Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel2; } = {};
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private dialog: MatDialog,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
   ) {
     super();
@@ -36,7 +32,7 @@ export class Auth2Component extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(Auth2AddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           di: this.authLevel1Dictionary
         }
@@ -52,18 +48,14 @@ export class Auth2Component extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForAppLevel2) {
-      this.dataSource = this.closeTabService.saveDataForAppLevel2;
+    if (!this.closeTabService.saveDataForAppLevel2) {
+      this.closeTabService.saveDataForAppLevel2 = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel2GET);
     }
-    else {
-      this.dataSource = await this.authsManagerService.getAuth2DataSource();
-      this.closeTabService.saveDataForAppLevel2 = this.dataSource;
-    }
-    this.authLevel1Dictionary = await this.authsManagerService.getAuthLevel1Dictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');  
+    this.authLevel1Dictionary = await this.authsManagerService.getAuthLevel1Dictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel2, this.authLevel1Dictionary, 'authLevel1Id');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel2 = this.closeTabService.saveDataForAppLevel2.slice(0, index).concat(this.closeTabService.saveDataForAppLevel2.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog();
     if (a) {
@@ -77,7 +69,7 @@ export class Auth2Component extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.authsManagerService.verification(dataSource)) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForAppLevel2[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].authLevel1Id !== 'object') {
@@ -89,17 +81,10 @@ export class Auth2Component extends FactoryONE {
       dataSource['dataSource'].authLevel1Id = dataSource['dataSource'].authLevel1Id['id'];
     }
     await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel2EDIT, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel2, this.authLevel1Dictionary, 'authLevel1Id');
   }
   onRowEditCancel() {
-    Converter.convertIdToTitle(this.dataSource, this.authLevel1Dictionary, 'authLevel1Id');
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel2, this.authLevel1Dictionary, 'authLevel1Id');
   }
 
 }

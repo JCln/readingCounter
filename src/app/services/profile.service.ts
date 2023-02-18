@@ -3,33 +3,120 @@ import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IChangePassword } from 'interfaces/inon-manage';
-import { IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { DownloadManagerService } from 'services/download-manager.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { JwtService } from 'src/app/auth/jwt.service';
+import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+import { EnvService } from './env.service';
+import { LocalClientConfigsService } from './local-client-configs.service';
 
+export interface imageOption {
+  width: string,
+  height: string,
+  objectFit: string,
+}
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
+  showStateVals = {
+    groupImgs: false,
+    searchBasedOnDate: false,
+    hasCanclableSpinner: false,
+    defaultFontStyle: 3,
+    reSizableTable: false,
+    reOrderableTable: false,
+    notifyPosition: 'bottom-left',
+    imgOptions: {
+      width: '40rem',
+      height: '40rem',
+      objectFit: 'contain'
+    },
+  }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private columnManager: ColumnManager,
+    private localClientConfigsService: LocalClientConfigsService,
+    private jwtService: JwtService,
+    private envService: EnvService,
+    private downloadManagerService: DownloadManagerService
   ) { }
 
+  getToken = (): string => {
+    return this.jwtService.getAuthorizationToken();
+  }
+  getUseCarouselMedia = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, false);
+  }
+  getImg = (): any => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.imageOption,
+      {
+        width: '40rem',
+        height: '40rem',
+        objectFit: 'contain'
+      });
+  }
+  downloadImg = (src: any) => {
+    this.downloadManagerService.downloadImg(src);
+  }
+  setImg = (imageOption: imageOption) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.imageOption, imageOption);
+  }
+  setUseCarouselMedia = (useCarousel: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseCarouselGallery, useCarousel);
+  }
+  setLocalValue = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, bol);
+  }
+  setLocalNotifyPosition = (val: string) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.notifyPosition, val);
+  }
+  setLocalReSizable = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.reSizableTable, bol);
+  }
+  setLocalReOrderable = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.reOrderableTable, bol);
+  }
+  setLocaldefaultAggregateTracks = (bol: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.defaultAggregateTracks, bol);
+  }
+  setCanclableSpinner = (hasCanclableSpinner: boolean) => {
+    this.localClientConfigsService.saveToLocalStorage(ENLocalStorageNames.hasCanclableSpinner, hasCanclableSpinner);
+  }
+  setFontStyle = (fontStyle: number) => {
+    this.localClientConfigsService.saveToLocalStorageType(ENLocalStorageNames.fontStyle, fontStyle);
+  }
+  getLocalValue = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.shouldUseBaseOnDate, false);
+  }
+  getLocalNotifyPosition = (): string => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.notifyPosition, 'bottom-left');
+  }
+  getLocalResizable = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reSizableTable, this.envService.defaultAggregateTracks);
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.reOrderableTable, this.envService.defaultAggregateTracks);
+  }
+  getLocalDefaultAggregateTracks = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.defaultAggregateTracks, this.envService.defaultAggregateTracks);
+  }
+  getHasCanclableSpinner = (): boolean => {
+    return this.localClientConfigsService.getFromLocalStorage(ENLocalStorageNames.hasCanclableSpinner, this.envService.hasCanclableSpinner);
+  }
+  getFontStyle = (): number => {
+    return this.localClientConfigsService.getFromLocalStorageType(ENLocalStorageNames.fontStyle, 3);
+  }
   columnSelectedProfile = (): IObjectIteratation[] => {
-    return [
-      { field: 'firstName', header: 'نام', isSelected: false, readonly: true },
-      { field: 'sureName', header: 'نام خانوادگی', isSelected: false, readonly: true },
-      { field: 'username', header: 'نام کاربری', isSelected: false, readonly: true },
-      { field: 'email', header: 'ایمیل', isSelected: false, readonly: true },
-      { field: 'displayName', header: 'نام نمایش', isSelected: false, readonly: true },
-      { field: 'userCode', header: 'کد کاربری', isSelected: false, readonly: true }
-    ];
+    return this.columnManager.profile;
   }
   verification = (password: IChangePassword) => {
     if (MathS.isNull(password.oldPassword)) {
@@ -50,28 +137,32 @@ export class ProfileService {
     }
     return true;
   }
-  changePassword = (password: IChangePassword) => {
-    if (!this.verification(password)) {
-      return;
-    }
-    this.firstConfirmDialog(EN_messages.confirm_yourPassword, password);
+  showMessage = (message: string) => {
+    this.utilsService.snackBarMessageSuccess(message);
   }
-  getMyInfoDataSource = (): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(ENInterfaces.getMyProfile).subscribe((res: IResponses) => {
-          resolve(res)
-        });
-      });
-    } catch (e) {
-      console.error(e);
-
+  changePassword = (password: IChangePassword) => {
+    if (this.verification(password)) {
+      this.firstConfirmDialog(EN_messages.confirm_yourPassword, password);
     }
+  }
+  getMyInfoDataSource = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe((res) => {
+        resolve(res)
+      });
+    });
+  }
+  postDataSource = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).subscribe((res) => {
+        resolve(res)
+      });
+    });
   }
   firstConfirmDialog = (reason: EN_messages, password: any): Promise<any> => {
     return new Promise(() => {
       const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           title: reason,
           isInput: false,
@@ -88,4 +179,11 @@ export class ProfileService {
       })
     })
   }
+  // TODO: get access aggregating from trackingManager(کارتابل)
+  _agg = {
+    rowGroupMetadata: {},
+    selectedAggregate: 'listNumber',
+    flag: this.getLocalDefaultAggregateTracks()
+  }
+
 }

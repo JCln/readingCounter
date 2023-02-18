@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ENThemeColor, ENThemeName, Theme } from 'interfaces/ioverall-config';
+import { ENThemeColor, ENThemeName, Theme } from 'interfaces/istyles';
 import { BrowserStorageService } from 'services/browser-storage.service';
 
-import { bedge, corporate, dark, light } from '../theme/themes';
-import { purple } from './../theme/themes';
+import { bedge, corporate, dark, light, purple } from '../theme/themes';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,7 @@ export class ThemeService {
     { id: 2, color: 1, colorName: 'rgb(14, 76, 146)' },
     { id: 3, color: 2, colorName: 'rgb(127 ,108, 153)' },
     { id: 4, color: 3, colorName: 'rgb(93 ,80 ,110)' },
-    // { id: 5, color: 4, colorName: 'rgb(247 ,249 ,252)' },
+    { id: 5, color: 4, colorName: '#36a3fa' },
   ];
 
   constructor(

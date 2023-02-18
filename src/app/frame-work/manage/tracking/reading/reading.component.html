@@ -1,15 +1,18 @@
 <app-prime-table     
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForTrackReading" 
     [_outputFileName]="'reading'"
     [_checkUpName]="'reading'"    
-    [_numberOfExtraColumns]="[1, 2, 3, 4]"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2]: [1,2,3,4]"
     [_sessionName]="'reading-session'"
     [_selectedColumnsToRemember]="'selectedTrackReading'"    
-    [_calculableSUM]=true
+    [_calculableSUM]=true    
+    [_isCustomSort]=true
+    [_hasAggregating] = true
     (refreshedTable)="refreshTable()"
     (forcedOffload)="forceOffload($event)"
+    (customedSort)="trackingManagerService.customSort($event)"
     (backedToImportedConfirmDialog)="backToImportedConfirmDialog($event)"
-    (routedToLMPayDay)="routeToLMPayDay($event)"
+    (routedToLMPayDay)="trackingManagerService.routeToLMPayDay($event)"
     (routedToLMAll)="trackingManagerService.routeToLMAll($event)"
  > 
 </app-prime-table>

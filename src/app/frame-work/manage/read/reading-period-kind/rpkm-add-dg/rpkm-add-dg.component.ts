@@ -26,7 +26,8 @@ export class RpkmAddDgComponent {
       title: [''],
       moshtarakinId: [''],
       clientOrder: [''],
-      isEnabled: [false]
+      isEnabled: [false],
+      days: [null]
     })
   }
   async save() {

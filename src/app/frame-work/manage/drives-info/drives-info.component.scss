@@ -1,0 +1,51 @@
+@import 'shared_reports';
+
+.over_all {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 21rem));
+  direction: rtl;
+  justify-content: center;
+  gap: var(--font_2);
+}
+
+.content {
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  text-align: center;
+  padding: var(--font_xs) 0;
+  justify-content: space-around;
+  border-radius: $border_15;
+}
+
+.title {
+  direction: ltr;
+  color: var(--primary_3);
+  text-align: center;
+  margin: var(--font_05);
+  font-size: var(--font_l2);
+}
+
+._charts {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-bottom: var(--font_3);
+}
+
+._key_value {
+  columns: 2;
+}
+
+._key {
+  font-size: var(--font_s);
+  font-weight: 600;
+  color: var(--primary_5);
+  text-align: center;
+}
+
+._value {
+  font-size: var(--font_l);
+  font-weight: 600;
+  color: var(--primary_5);
+  max-width: 95%;
+  direction: ltr;
+}

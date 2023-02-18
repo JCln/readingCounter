@@ -8,7 +8,7 @@
 .mat-dialog-content {
   grid-template-columns: 1fr 1fr;
   color: var(--secondary_7);
-  font-size: $font_s;
+  font-size: var(--font_s);
   text-align: right;
   direction: rtl;
 }
@@ -17,7 +17,7 @@ form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(19rem, auto));
   justify-content: center;
-  gap: 0.3rem;
+  gap: var(--font_03);
 }
 
 h2 {
@@ -31,7 +31,7 @@ section {
   justify-content: center;
   direction: rtl;
   margin: auto;
-  padding: $font_xs;
+  padding: var(--font_xs);
   width: 18rem;
   background: var(--secondary_1);
   border-radius: $border_15;
@@ -51,7 +51,7 @@ section {
 
 ._key,
 ._value {
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 800;
 }
 

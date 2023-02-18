@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IRoleManager } from 'interfaces/iuser-manager';
 import { Table } from 'primeng/table';
@@ -13,9 +14,6 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./user-role.component.scss']
 })
 export class UserRoleComponent extends FactoryONE {
-  dataSource: IRoleManager[] = [];
-
- 
   regionDictionary: IDictionaryManager[] = [];
 
   _selectCols: any[] = [];
@@ -25,8 +23,7 @@ export class UserRoleComponent extends FactoryONE {
   newRowLimit: number = 1;
 
   constructor(
-     
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private userService: UsersAllService
   ) {
     super();
@@ -37,12 +34,8 @@ export class UserRoleComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForRoleManager) {
-      this.dataSource = this.closeTabService.saveDataForRoleManager;
-    }
-    else {
-      this.dataSource = await this.userService.connectToServer(ENInterfaces.RoleGET);
-      this.closeTabService.saveDataForRoleManager = this.dataSource;
+    if (!this.closeTabService.saveDataForRoleManager) {
+      this.closeTabService.saveDataForRoleManager = await this.userService.connectToServer(ENInterfaces.RoleGET);
     }
     this.insertSelectedColumns();
   }
@@ -50,9 +43,9 @@ export class UserRoleComponent extends FactoryONE {
     this._selectCols = this.userService.columnUserRoles();
     this._selectedColumns = this.userService.customizeSelectedColumns(this._selectCols);
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForRoleManager = this.closeTabService.saveDataForRoleManager.slice(0, index).concat(this.closeTabService.saveDataForRoleManager.slice(index + 1));
   removeRow = async (rowData: object) => {
-    const a = await this.userService.firstConfirmDialog();
+    const a = await this.userService.firstConfirmDialog(EN_messages.confirm_remove);
 
     if (a) {
       await this.userService.deleteSingleRow(ENInterfaces.RoleREMOVE, rowData['dataSource'].id);
@@ -66,26 +59,30 @@ export class UserRoleComponent extends FactoryONE {
     this.defaultAddStatus();
     if (!this.userService.verification(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
-        this.dataSource.shift();
+        this.closeTabService.saveDataForRoleManager.shift();
         return;
       }
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForRoleManager[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (dataSource['dataSource'].isNew) {
-      await this.userService.roleAddEdit(ENInterfaces.RoleADD, dataSource['dataSource']);
+      const res = await this.userService.postDataSource(ENInterfaces.RoleADD, dataSource['dataSource']);
+      if (res)
+        this.userService.snackBarMessageSuccess(res);
     }
     else {
-      await this.userService.roleAddEdit(ENInterfaces.RoleEDIT, dataSource['dataSource']);
+      const res = await this.userService.postDataSource(ENInterfaces.RoleEDIT, dataSource['dataSource']);
+      if (res)
+        this.userService.snackBarMessageSuccess(res);
     }
   }
   onRowEditCancel(dataSource: object) {
     this.defaultAddStatus();
     if (dataSource['dataSource'].isNew) {
-      this.dataSource.shift();
+      this.closeTabService.saveDataForRoleManager.shift();
       return;
     }
-    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+    this.closeTabService.saveDataForRoleManager[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;

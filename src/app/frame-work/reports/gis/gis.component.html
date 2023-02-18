@@ -3,35 +3,49 @@
 
         <section class="order_by">
             <h2>نمایش بر اساس :</h2>
-            <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_orderBy" name="_orderBy">
-                <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo" [value]="orderType.id"
-                    (change)="changeRadio($event)">
-                    {{orderType.title}}
-                </mat-radio-button>
-            </mat-radio-group>
+
+            <div *ngFor="let orderType of readingReportManagerService.showGisInOrderTo">
+                <div class="p-field-radiobutton">
+                    <p-radioButton [name]="orderType.id" [value]="orderType.id"
+                        [(ngModel)]="readingReportManagerService._orderByGIS" [inputId]="orderType.key"
+                        (onClick)="changeRadio(orderType.id)">
+                    </p-radioButton>
+                    <label [for]="orderType.key">{{orderType.title}}</label>
+                </div>
+            </div>
         </section>
         <hr>
         <section class="static_part">
-            <section class="order_by">
-                <!-- <h2>نمایش بر اساس :</h2> -->
-                <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
-                    name="isOrderByDate">
-                    <mat-radio-button class="radio_button" *ngFor="let orderType of dateEvaluate"
-                        [value]="orderType.isSelected" [disabled]="_orderBy === 'isForbidden'">
-                        {{orderType.title}}
-                    </mat-radio-button>
-                </mat-radio-group>
+
+            <section class="order_by" [hidden]="readingReportManagerService._orderByGIS == 'isForbidden'">
+                <div *ngFor="let datePeriod of readingReportManagerService.utilsService.getSearchInOrderTo">
+                    <div class="p-field-radiobutton">
+                        <p-radioButton name="orderByDate" [value]="datePeriod.isSelected"
+                            [(ngModel)]="readingReportManagerService._isOrderByDate" [inputId]="datePeriod.key">
+                        </p-radioButton>
+                        <label [for]="datePeriod.key">{{datePeriod.title}}</label>
+                    </div>
+                </div>
             </section>
             <section class="content">
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
                     <p-dropdown name="zones" [options]="zoneDictionary"
                         [(ngModel)]="readingReportManagerService.gisReq.zoneId" placeholder="انتخاب مورد"
-                        [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true"
-                        (onChange)="getCounterStateByZoneId()">
+                        [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
+                        filter="true" (onChange)="getCounterStateByZoneId()" (onChange)="getFragmentByZone()"
+                        (onChange)="readingReportManagerService.gisReq.fragmentMasterIds = []">
                     </p-dropdown>
                 </div>
-                <div class="input_2" [hidden]="_isOrderByDate">
+                <div class="input_2">
+                    <div class="_key">نوبتی</div>
+                    <p-multiSelect [maxSelectedLabels]="2" [options]="fragmentByZoneDictionary" name="masterIds"
+                        [(ngModel)]="readingReportManagerService.gisReq.fragmentMasterIds" optionLabel="routeTitle"
+                        optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '150px'}"
+                        placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                    </p-multiSelect>
+                </div>
+                <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                     <div class="_key">نوع دوره</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
                         <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindDictionary"
@@ -40,7 +54,8 @@
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
+                <div class="input_2"
+                    [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
                     <div class="_key">دوره قرائت</div>
                     <mat-select placeholder="انتخاب مورد"
                         [(ngModel)]="readingReportManagerService.gisReq.readingPeriodId" name="readingPeriodId">
@@ -59,7 +74,7 @@
                         </mat-option>
                     </mat-select>
                 </div>
-                <div class="input_2" [hidden]="_isOrderByDate">
+                <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                     <div class="_key">سال</div>
                     <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.gisReq.year"
                         [(value)]="readingReportManagerService.gisReq.year" name="year">
@@ -73,7 +88,7 @@
             </section>
 
             <section class="content">
-                <div class="input_2" [hidden]="!_isOrderByDate">
+                <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                     <div class="_key">از</div>
                     <div class="_value">
                         <app-date-jalali name="fromDate"
@@ -82,7 +97,7 @@
                         </app-date-jalali>
                     </div>
                 </div>
-                <div class="input_2" [hidden]="!_isOrderByDate">
+                <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                     <div class="_key">تا</div>
                     <div class="_value">
                         <app-date-jalali name="toDate"

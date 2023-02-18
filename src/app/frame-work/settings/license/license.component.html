@@ -1,0 +1,28 @@
+<main class="over_all">
+    <div>
+        <h1 class="title">مشخصات طرح</h1>
+        <div class="_coin">
+            <div *ngIf="closeTabService.license.license == 'Base'">
+                <i class="_base fas fa-coins"></i>
+            </div>
+            <div *ngIf="closeTabService.license.license == 'Diamond'">
+                <i class="_diamond fa fa-diamond"></i>
+            </div>
+            <div *ngIf="closeTabService.license.license == 'Bronze'">
+                <i class="_bronze fas fa-coins"></i>
+            </div>
+            <div *ngIf="closeTabService.license.license == 'Silver'">
+                <i class="_silver fas fa-coins"></i>
+            </div>
+            <div *ngIf="closeTabService.license.license == 'Gold'">
+                <i class="_gold fas fa-coins"></i>
+            </div>
+        </div>
+        <div class="content">
+            <div class="_key_value">
+                <div class="_key">تاریخ انقضا</div>
+                <div class="_value"> {{closeTabService.license.expirationDay}}</div>
+            </div>
+        </div>
+    </div>
+</main>

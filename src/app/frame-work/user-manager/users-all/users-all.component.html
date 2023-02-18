@@ -1,15 +1,14 @@
 <app-prime-table
-[dataSource]="dataSource"
+[dataSource]="closeTabService.saveDataForAllUsers"
 [_numberOfExtraColumns]="[1 , 2 , 3]"
 [_sessionName]="'user-all-session'"
 [_sortMode]="'multiple'"
 [_outputFileName]="'userAll'"
 [_selectedColumnsToRemember]="'selectedUsersAll'"
-[_outputEnabled]=false
-[_hasSaveColumns]=false
+[_hasSaveColumns]=true
 [_checkUpName]="'userAll'"
 (refreshedTable)="refreshTable()"
-(routedToEditPage)="routeToEditPage($event)"
+(routedToEditPage)="usersAllService.routeToEditPage($event)"
 (routedToLoggs)="routeToLoggs($event)"
 (showedExactConfig)="showExactConfig($event)"
 (unlockedUser)="unLockUser($event)"

@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IUserManager } from 'interfaces/iuser-manager';
-import { EN_Routes } from 'interfaces/routes.enum';
 import { Table } from 'primeng/table';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
+import { UserLogginsService } from 'services/user-loggins.service';
 import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
@@ -18,24 +17,17 @@ import { MathS } from 'src/app/classes/math-s';
 export class UsersAllComponent extends FactoryONE {
   @ViewChild(Table) UsersAllComponent: Table;
 
-  dataSource: IUserManager[] = [];
-
   constructor(
-    private route: ActivatedRoute,
-
-    private router: Router,
-    private closeTabService: CloseTabService,
+    private userLogginsService: UserLogginsService,
+    public closeTabService: CloseTabService,
     public usersAllService: UsersAllService,
     private dateJalaliService: DateJalaliService
   ) {
     super();
   }
 
-  routeToEditPage(e) {
-    this.router.navigate([EN_Routes.edit, e], { relativeTo: this.route.parent })
-  }
-  routeToLoggs(e: string) {
-    this.router.navigate([EN_Routes.loggins, e], { relativeTo: this.route.parent })
+  routeToLoggs(e: IUserManager) {
+    this.userLogginsService.updateUserLogginsInfo(e);
   }
   nullSavedSource = () => this.closeTabService.saveDataForAllUsers = null;
   classWrapper = async (canRefresh?: boolean) => {
@@ -43,11 +35,7 @@ export class UsersAllComponent extends FactoryONE {
       this.nullSavedSource();
     }
     if (MathS.isNull(this.closeTabService.saveDataForAllUsers)) {
-      this.dataSource = await this.usersAllService.connectToServer(ENInterfaces.userGET);
-      this.closeTabService.saveDataForAllUsers = this.dataSource;
-    }
-    else {
-      this.dataSource = this.closeTabService.saveDataForAllUsers;
+      this.closeTabService.saveDataForAllUsers = await this.usersAllService.connectToServer(ENInterfaces.userGET);
     }
     this.convertLoginTime();
   }
@@ -72,10 +60,10 @@ export class UsersAllComponent extends FactoryONE {
     a[index].classList.toggle('showConfigs');
   }
   convertLoginTime = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForAllUsers.forEach(item => {
       item.lockTimeSpan = this.dateJalaliService.getDate(item.lockTimeSpan) + '   ' + this.dateJalaliService.getTime(item.lockTimeSpan);
     })
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForAllUsers = this.closeTabService.saveDataForAllUsers.slice(0, index).concat(this.closeTabService.saveDataForAllUsers.slice(index + 1));
 
 }

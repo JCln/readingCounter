@@ -4,7 +4,7 @@
 
   .p-datatable table {
     font-family: $font_family;
-    font-size: $font_s;
+    font-size: var(--font_s);
   }
 
   tr:nth-child(even) {
@@ -21,18 +21,14 @@
     background: var(--white);
     color: var(--secondary_8);
     border: 1px solid var(--secondary_1);
-    padding: $font_05;
-  }
-
-  .p-dialog .p-dialog-header {
-    padding: .25rem;
+    padding: var(--font_05);
   }
 
   .p-datatable .p-datatable-thead>tr>th,
   .p-datatable .p-datatable-tbody>tr>td {
     text-align: center;
     font-weight: 600;
-    padding: $font_05 .1rem;
+    padding: var(--font_01);
     border: 1px solid var(--secondary_2);
   }
 
@@ -49,15 +45,26 @@
     word-break: break-word;
   }
 
+  ._editable {
+    background-color: var(--light_1);
+  }
+
   .p-inputtext {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--white);
     border: 1px solid var(--primary_2);
     color: var(--secondary_8);
     text-align: center;
+    font-family: $font_family;
+    font-weight: 600;
   }
 
   .p-datatable .p-datatable-thead>tr>th {
     background-color: var(--secondary_3);
+    color: var(--secondary_8);
+    direction: ltr;
   }
 
   span.ui-column-title {
@@ -67,7 +74,7 @@
   @media (max-width: 40rem) {
     span.ui-column-title {
       display: inline;
-      padding-right: .5rem;
+      padding-right: var(--font_05);
       float: right;
       margin-left: auto;
     }
@@ -81,7 +88,7 @@
           float: left;
           clear: left;
           border: 0 none;
-          padding-left: .5rem;
+          padding-left: var(--font_05);
 
           .p-column-title {
             padding: .4rem;
@@ -111,16 +118,16 @@
   .p-multiselect-label,
   .p-multiselect-items {
     font-family: $font_family;
-    font-size: $font_s;
+    font-size: var(--font_s);
     font-weight: 600;
     background: var(--secondary_3);
     color: var(--secondary_8);
   }
 
   .p-dropdown.p-dropdown-clearable .p-dropdown-label {
-    padding-right: 0.25rem;
+    padding-right: var(--font_025);
     font-family: $font_family;
-    font-size: $font_xs;
+    font-size: var(--font_ss);
     font-weight: 600;
   }
 
@@ -140,41 +147,60 @@
   .p-multiselect-panel .p-multiselect-header {
     background: var(--white);
     color: var(--secondary_8);
+    padding: 0;
   }
 
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+    font-weight: 600;
     background: var(--secondary_3);
     color: var(--secondary_8);
-    padding: 0.25rem;
+    padding: var(--font_025);
   }
 
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-checkbox {
-    margin-right: 0.25rem;
-    margin-left: 0.3rem;
+    margin-right: var(--font_025);
+    margin-left: var(--font_03);
   }
 
   p-checkbox {
     align-items: center;
     display: inline-flex;
     vertical-align: middle;
-    padding-left: 1rem;
+    padding-left: var(--font_xs);
 
     label {
-      font-size: 1.3rem;
+      font-size: var(--font_m);
       font-weight: 600;
     }
   }
 
+  .p-button {
+    background: var(--thirdy_1) !important;
+    color: var(--white) !important;
+    border-radius: $border_15 !important;
+    font-family: $font_family !important;
+    font-weight: 600;
+  }
+
+  .p-selectbutton .p-button.p-highlight {
+    background: var(--primary_4) !important;
+  }
+
   p-radiobutton {
-    padding-left: 1rem;
+    padding-left: var(--font_xxs);
+  }
+
+  .p-buttonset .p-button {
+    margin: var(--font_02) !important;
   }
 
   .p-field-radiobutton {
     display: flex;
     align-items: center;
+    margin-left: var(--font_3);
 
     label {
-      font-size: 1.3rem;
+      font-size: var(--font_m);
       font-weight: 600;
       color: var(--thirdy_3);
     }
@@ -205,12 +231,12 @@
   }
 
   .p-multiselect {
-    border-radius: 7px;
+    border-radius: $border_7;
     background: var(--white);
   }
 
   .p-dropdown {
-    height: 2.8rem;
+    height: var(--font_28);
     border-radius: 10px;
     background: var(--white);
   }
@@ -246,7 +272,7 @@
     background-color: var(--white);
     color: var(--secondary_8);
     text-align: center;
-    padding: 1rem 0;
+    padding: var(--font_xs) 0;
   }
 
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
@@ -264,7 +290,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0 $font_05;
+    margin: 0 var(--font_05);
     width: 100%;
 
     .right_side {
@@ -272,7 +298,7 @@
       flex-wrap: wrap;
 
       i {
-        margin: 0 .25rem;
+        margin: 0 var(--font_025);
       }
 
       @media (max-width: 550px) {
@@ -280,7 +306,7 @@
         flex-wrap: wrap;
         position: absolute;
         top: 4.4rem;
-        right: 1rem;
+        right: var(--font_xs);
       }
     }
 
@@ -289,7 +315,7 @@
       flex-wrap: wrap;
 
       i {
-        margin: 0 .25rem;
+        margin: 0 var(--font_025);
       }
     }
   }
@@ -317,11 +343,6 @@
   .p-datatable-resizable .p-datatable-thead>tr>th {
     overflow: inherit;
     white-space: normal;
-    background-color: var(--secondary_8);
-  }
-
-  .p-datatable .p-datatable-thead>tr>th {
-    color: var(--secondary_8);
   }
 
   .p-paginator {
@@ -331,15 +352,15 @@
 
   footer,
   .footer {
-    text-align: center;
+    text-align: right;
   }
 
   p-cellEditor {
     input {
       width: 100%;
-      padding: .3rem;
+      padding: var(--font_03);
       text-align: center;
-      font-size: $font_m;
+      font-size: var(--font_m);
       font-weight: 600;
       outline: 2.5px dotted var(--orange_500);
       border-color: var(--primary_2);
@@ -351,15 +372,21 @@
       display: grid;
       justify-content: center;
       margin: auto;
-      width: $font_3;
+      width: var(--font_3);
       border: 2px dotted var(--orange_500);
-      padding: $font_xxs $font_l $font_xxs 0;
+      padding: var(--font_xxs) var(--font_l) var(--font_xxs) 0;
     }
 
     .p-dropdown-editable {
       outline: 2.5px dotted var(--orange_500);
-      padding: .3rem 0;
+      padding: var(--font_03) 0;
     }
+
+    .date-editable {
+      outline: 2.5px dotted var(--orange_500);
+      padding: var(--font_05) 0;
+    }
+
   }
 }
 
@@ -413,7 +440,7 @@
 ._edit,
 ._save,
 ._cancel {
-  padding: 0.3rem;
+  padding: var(--font_03);
   border-radius: $border_50;
   border: 0;
   cursor: pointer;
@@ -423,9 +450,9 @@
   display: flex;
   justify-content: center;
   background: var(--white);
-  padding: $font_3;
+  padding: var(--font_3);
   border-radius: $border_15;
-  font-size: $font_l;
+  font-size: var(--font_l);
   font-weight: 600;
   color: var(--secondary_8);
 }

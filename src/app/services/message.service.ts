@@ -1,26 +1,38 @@
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IMessage } from 'interfaces/inon-manage';
+import { IMessage, INotifyDirectImage, IToastColor } from 'interfaces/inon-manage';
 import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
 
-import { broadcastMessages, colors, times } from './DI/messages';
+import { broadcastMessages, colors, times, toastColors } from './DI/messages';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
+
   message: IMessage = {
     title: '',
     message: '',
     color: ENSnackBarColors.info,
-    time: 0,
+    seconds: ENSnackBarTimes.tenMili,
     canSave: true
   };
+  toastImageWithCaptionReq: INotifyDirectImage = {
+    file: '',
+    userId: '',
+    caption: ''
+  };
+  toastVideoWithCaptionReq: INotifyDirectImage = {
+    file: '',
+    userId: '',
+    caption: ''
+  };
+
 
   constructor(
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
   ) { }
 
   getTimes = () => { return times; }
@@ -28,6 +40,7 @@ export class MessageService {
   getMessages = () => { return broadcastMessages; }
 
   getColors = () => { return colors; }
+  getToastColors = (): IToastColor[] => { return toastColors; }
 
   verificationBroadcastMessage = (body: IMessage) => {
     if (MathS.isNull(body.title)) {
@@ -38,7 +51,7 @@ export class MessageService {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_text);
       return false;
     }
-    if (MathS.isNull(body.time)) {
+    if (MathS.isNull(body.seconds)) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_showTime);
       return false;
     }
@@ -48,14 +61,20 @@ export class MessageService {
     }
     return true;
   }
-  setColor = (color: ENSnackBarColors) => {
-    this.message.color = color;
-  }
-  setTime = (showTime: number) => {
-    this.message.time = showTime;
-  }
-  setText = (text: string) => {
-    this.message.message = text;
+  verificationDirectMessage = (body: any) => {
+    if (MathS.isNull(body.title)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title);
+      return false;
+    }
+    if (MathS.isNull(body.text)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_text);
+      return false;
+    }
+    if (MathS.isNull(body.color)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_colorName);
+      return false;
+    }
+    return true;
   }
   showSnack = (message: string, color: ENSnackBarColors) => {
     this.utilsService.snackBarMessage(message, ENSnackBarTimes.fourMili, color);

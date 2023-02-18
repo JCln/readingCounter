@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
 import {
-    ENRandomNumbers,
-    ENSelectedColumnVariables,
-    IMasrafStates,
-    IObjectIteratation,
-    ISearchInOrderTo,
-    ITitleValue,
+  ENSelectedColumnVariables,
+  IMasrafStates,
+  IObjectIteratation,
+  ISearchInOrderTo,
+  ITitleValue,
 } from 'interfaces/ioverall-config';
 import { ENSearchs, ISearchMoshReq, ISearchProReportInput, ISearchSimpleOutput, ISearchSimpleReq } from 'interfaces/search';
 import { AllListsService } from 'services/all-lists.service';
@@ -21,9 +19,11 @@ import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { Search } from '../classes/search';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from './../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { FollowUpService } from './follow-up.service';
+import { PageSignsService } from './page-signs.service';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,33 +32,25 @@ export class SearchService {
   _searchProCollapse: boolean = true;
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENSearchs = ENSearchs;
-
-  _isOrderByDate: boolean = true;
-
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
   _years: ITitleValue[] = [];
+
+  _isOrderByDate: boolean = false;
+
   searchReqMosh: ISearchMoshReq = {
     zoneId: null,
     searchBy: 1,
-    item: '',
-    similar: false
+    item: null,
+    similar: false,
+    showAll: false
   }
   _searchSimpleReq: ISearchSimpleReq = {
     zoneId: null,
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
+
   private _searchProExcel: IObjectIteratation[] = [
     { field: 'billId', header: 'شناسه قبض', isSelected: true },
     { field: 'trackNumber', header: 'شناسه قبض', isSelected: true },
@@ -68,15 +60,26 @@ export class SearchService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private followUpService: FollowUpService,
     private allListsService: AllListsService,
-    private router: Router,
     private dialog: MatDialog,
+    private pageSignsService: PageSignsService,
+    private profileService: ProfileService
   ) { }
 
-  /*COLUMNS*/
+  // should call "getSEarchInOrderTo" to isOrderByDate work perfectly
+  getSearchInOrderTo = (): ISearchInOrderTo[] => {
+    if (this.profileService.getLocalValue()) {
+      this._isOrderByDate = false;
+      return this.utilsService.getSearchInOrderToReverse;
+    }
+    else {
+      this._isOrderByDate = true;
+      return this.utilsService.getSearchInOrderTo;
+    }
+  }
   columnSearchProExcel = (): IObjectIteratation[] => {
     return this._searchProExcel;
   }
@@ -101,7 +104,13 @@ export class SearchService {
   getCounterStateByCodeDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByCodeDictionary(zoneId);
   }
-  getQotrDictionary = () => {
+  getCounterStateByCodeShowAllDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(zoneId);
+  }
+  getCounterStateByZoneShowAllDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(zoneId);
+  }
+  getQotrDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getQotrDictionary();
   }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
@@ -110,21 +119,18 @@ export class SearchService {
   getReadingPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
-  getFragmentMasterDictionary = (zoneId: number) => {
+  getFragmentMasterDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(zoneId);
   }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
         resolve(res);
       })
     });
   }
   getKarbariDictionaryCode = (): Promise<any> => {
     return this.dictionaryWrapperService.getkarbariCodeDictionary();
-  }
-  getKarbariDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getKarbariDictionary();
   }
   getCounterStateDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateDictionary();
@@ -149,17 +155,13 @@ export class SearchService {
   }
   /*VALIDATION*/
   private validationNullMosh = (dataSource: ISearchMoshReq): boolean => {
-    if (dataSource.hasOwnProperty('searchBy')) {
-      if (MathS.isNull(dataSource.searchBy)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
-        return false;
-      }
+    if (MathS.isNull(dataSource.searchBy)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_searchType);
+      return false;
     }
-    if (dataSource.hasOwnProperty('item')) {
-      if (MathS.isNull(dataSource.item)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
-        return false;
-      }
+    if (MathS.isNull(dataSource.item)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_value);
+      return false;
     }
     return true;
   }
@@ -185,6 +187,12 @@ export class SearchService {
     return true;
   }
   private validationByReadingPeriod = (dataSource: ISearchProReportInput): boolean => {
+    if (dataSource.hasOwnProperty('zoneId')) {
+      if (MathS.isNull(dataSource.zoneId)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
     if (dataSource.hasOwnProperty('readingPeriodId')) {
       if (MathS.isNull(dataSource.readingPeriodId)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_readingPeriod);
@@ -194,12 +202,6 @@ export class SearchService {
     if (dataSource.hasOwnProperty('year')) {
       if (MathS.isNull(dataSource.year)) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_year);
-        return false;
-      }
-    }
-    if (dataSource.hasOwnProperty('zoneId')) {
-      if (MathS.isNull(dataSource.zoneId)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
         return false;
       }
     }
@@ -252,11 +254,9 @@ export class SearchService {
     return true;
   }
   private validationNumbers = (object: ISearchMoshReq): boolean => {
-    if (object.hasOwnProperty('searchBy')) {
-      if (MathS.isNaN(object.searchBy)) {
-        this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
-        return false;
-      }
+    if (MathS.isNaN(object.searchBy)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.call_supportGroup);
+      return false;
     }
     return true;
   }
@@ -274,7 +274,10 @@ export class SearchService {
     return this.validationSearchSimpleByPeriod(searchReq)
   }
   verificationMosh = (searchReq: ISearchMoshReq): boolean => {
-    return this.validationNullMosh(searchReq) && this.validationNumbers(searchReq)
+    if (this.validationNullMosh(searchReq)) {
+      searchReq.item = searchReq.item.trim();
+      return this.validationNumbers(searchReq);
+    }
   }
   verificationPro = (searchReq: ISearchProReportInput, isValidateByDate?: boolean): boolean => {
     searchReq.fromDate = Converter.persianToEngNumbers(searchReq.fromDate);
@@ -308,25 +311,22 @@ export class SearchService {
         item.imageCount = false;
     })
   }
-  receiveYear = (): ITitleValue[] => {
-    return this.utilsService.getYears();
-  }
   receiveFromDateJalali = (variable: ENSearchs, $event: string) => {
     this[variable].fromDate = $event;
   }
   receiveToDateJalali = (variable: ENSearchs, $event: string) => {
     this[variable].toDate = $event;
   }
-  routeToWoui = (object: any) => {
-    this.router.navigate([EN_Routes.wrmtrackwoui, false, object.id]);
-  }
   routeToLMAll = (row: ISearchSimpleOutput) => {
+    this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
     this.allListsService.allLists_pageSign.GUid = row.trackingId;
+    this.allListsService.allLists_pageSign.zoneTitle = row.zoneId.toString();
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
-    this.router.navigate([EN_Routes.wrmlall, false]);
+    this.utilsService.routeToByParams(EN_Routes.wrmlall, false);
   }
   routeToLMPayDay = (row: ISearchSimpleOutput) => {
-    this.utilsService.routeToByParams(EN_Routes.wrmlpd, row.trackNumber);
+    this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
+    this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
   }
   routeToFollowUp = (row: ISearchSimpleOutput) => {
     this.followUpService.setTrackNumber(row.trackNumber);
@@ -341,7 +341,7 @@ export class SearchService {
       const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             data: res,
             title: title
@@ -359,11 +359,5 @@ export class SearchService {
   snackEmptyValue = () => {
     this.utilsService.snackBarMessageWarn(EN_messages.notFound);
   }
-  showInMapSingleValidation = (dataSource: any): boolean => {
-    if (MathS.isNull(dataSource.gisAccuracy) || parseInt(dataSource.gisAccuracy) > ENRandomNumbers.twoHundred || MathS.isNull(parseInt(dataSource.gisAccuracy))) {
-      this.utilsService.snackBarMessageWarn(EN_messages.gisAccuracy_insufficient);
-      return false;
-    }
-    return true;
-  }
+
 }

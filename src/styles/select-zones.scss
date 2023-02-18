@@ -7,8 +7,8 @@ main {
 
 ._content {
   background: var(--thirdy_2);
-  padding: .2rem;
-  margin: .2rem;
+  padding: var(--font_02);
+  margin: var(--font_02);
   border-radius: $border_15;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, auto));
@@ -19,20 +19,20 @@ main {
 .l_2,
 .l_3 {
   border-radius: $border_15;
-  padding: 0.3rem .2rem;
+  padding: var(--font_03) var(--font_02);
 }
 
 .l_1 {
   display: grid;
-  gap: .2rem;
+  gap: var(--font_02);
   grid-template-columns: repeat(6, 1fr);
 
   .l_1_c {
     background: var(--primary_1);
     color: var(--secondary_6);
-    font-size: 1.5rem;
+    font-size: var(--font_l);
     font-weight: 600;
-    margin-bottom: .1rem;
+    margin-bottom: var(--font_01);
     position: relative;
 
     &::after {
@@ -41,7 +41,7 @@ main {
       top: 100%;
       left: 50%;
       margin-left: -5px;
-      border-width: .5rem;
+      border-width: var(--font_05);
       border-style: solid;
       border-color: var(--primary_2) transparent transparent transparent;
     }
@@ -51,8 +51,8 @@ main {
 .l_2 {
   .l_2_c {
     background: var(--secondary_1);
-    margin-bottom: .2rem;
-    font-size: 1.5rem;
+    margin-bottom: var(--font_02);
+    font-size: var(--font_l);
     font-weight: 600;
   }
 }
@@ -64,7 +64,7 @@ main {
   background: var(--white);
 
   .l_3 {
-    font-size: 1.2rem;
+    font-size: var(--font_s);
     font-weight: 500;
   }
 
@@ -75,7 +75,7 @@ main {
 }
 
 .btn_2 {
-  margin: .25rem;
+  margin: var(--font_025);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -104,7 +104,7 @@ main {
   padding: .87rem;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: var(--font_s);
   border: none;
   float: left;
 
@@ -124,5 +124,5 @@ main {
 
 .tooltip_text {
   bottom: -260% !important;
-  left: 3rem !important;
+  left: var(--font_3) !important;
 }

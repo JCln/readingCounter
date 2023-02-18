@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { CloseTabService } from 'services/close-tab.service';
-import { DownloadManagerService } from 'services/download-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/Interfaces/ireports';
+import { IImageUrlAndInfos, IImageUrlInfoWrapper } from 'src/app/interfaces/ireports';
 
 @Component({
   selector: 'app-all-images',
@@ -18,75 +17,69 @@ export class AllImagesComponent extends FactoryONE {
 
   carouselImage: IImageUrlAndInfos;
   showCarousel: boolean = false;
-  _isCollapsed: boolean = false;
   rowIndex: number = 0;
-  trackNumber: number;
 
   constructor(
-    private downloadManagerService: DownloadManagerService,
     private closeTabService: CloseTabService,
-    private readingReportManagerService: ReadingReportManagerService
+    public readingReportManagerService: ReadingReportManagerService
   ) {
     super();
   }
 
   connectToServer = async () => {
-    if (!this.readingReportManagerService.verificationFollowUPTrackNumber(this.trackNumber))
+    if (!this.readingReportManagerService.verificationFollowUPTrackNumber(this.readingReportManagerService.trackNumberAllImages))
       return;
     this.imgsOriginUrl = [];
     this.allImagesDataSource = null;
 
-    this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.trackNumber);
-    this.closeTabService.saveDataForRRGalleryReq = this.trackNumber;
+    this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.readingReportManagerService.trackNumberAllImages);
+    this.closeTabService.saveDataForRRGalleryRSFirst = this.allImagesDataSource;
+    this.closeTabService.saveDataForRRGalleryReq = this.readingReportManagerService.trackNumberAllImages;
     this.showAllImgs();
-    this._isCollapsed = true;
   }
   classWrapper = async (canRefresh?: boolean) => {
     /* TODO: 
     JUST add to closeTabService.saveDataForRRGalleryReq from other
     components to process images
      */
+    if (canRefresh) {
+      this.closeTabService.saveDataForRRGallery = null;
+      this.closeTabService.saveDataForRRGalleryRSFirst = null;
+    }
+    if (this.closeTabService.saveDataForRRGallery) {
+      this.imgsOriginUrl = this.closeTabService.saveDataForRRGallery;
+      this.allImagesDataSource = this.closeTabService.saveDataForRRGalleryRSFirst;
+    }
     if (this.closeTabService.saveDataForRRGalleryReq) {
-      this.trackNumber = this.closeTabService.saveDataForRRGalleryReq;
-      this._isCollapsed = true;
-      // this.allImagesDataSource = await this.readingReportManagerService.getDataSource(ENInterfaces.ListAllImages, this.trackNumber);
-      // this.showAllImgs();
+      this.readingReportManagerService.trackNumberAllImages = this.closeTabService.saveDataForRRGalleryReq;
     }
 
+  }
+  getExactImg = async (id: string, index: number) => {
+    this.imgsOriginUrl[index] = this.readingReportManagerService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.readingReportManagerService.getAuthToken();
   }
   showAllImgs = () => {
     this.allImagesDataSource.imageUrlAndInfos.forEach((item, i) => {
       this.getExactImg(item.fileRepositorayId, i);
     })
+    // to save data
+    this.closeTabService.saveDataForRRGallery = this.imgsOriginUrl;
   }
-  getExactImg = async (id: string, index: number) => {
-    this.imgsOriginUrl[index] = await this.downloadManagerService.downloadFile(id);
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.imgsOriginUrl[index] = reader.result;
-      // this.closeTabService.saveDataForRRGallery[index] = reader.result;
-      this.allImagesDataSource.imageUrlAndInfos[index].imageUrl = reader.result;
-    }, false);
-    if (this.imgsOriginUrl[index]) {
-      reader.readAsDataURL(this.imgsOriginUrl[index]);
-      reader.readAsDataURL(this.allImagesDataSource.imageUrlAndInfos[index].imageUrl);
-    }
-  }
-
-
-  routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number) => {
+  routeToOffload = (dataSource: IImageUrlAndInfos, rowIndex: number, imgOrig: any) => {
     this.carouselImage = dataSource;
-    scrollTo(0, 0);
+    this.carouselImage.imageUrl = imgOrig;
     this.rowIndex = rowIndex;
     this.showCarousel = true;
   }
   carouselNextItem = () => {
     this.rowIndex >= this.allImagesDataSource.imageUrlAndInfos.length - 1 ? this.rowIndex = 0 : this.rowIndex++;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
+    this.carouselImage.imageUrl = this.imgsOriginUrl[this.rowIndex];
   }
   carouselPrevItem = () => {
     this.rowIndex < 1 ? this.rowIndex = this.allImagesDataSource.imageUrlAndInfos.length - 1 : this.rowIndex--;
     this.carouselImage = this.allImagesDataSource.imageUrlAndInfos[this.rowIndex];
+    this.carouselImage.imageUrl = this.imgsOriginUrl[this.rowIndex];
   }
   carouselCancelClicked = () => {
     this.showCarousel = false;

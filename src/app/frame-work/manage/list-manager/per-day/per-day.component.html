@@ -2,7 +2,7 @@
     <div class="left_side">
     </div>
     <div class="left_side">
-        <i (click)="toPrePage()" class="tooltip _circle_border p_icons pi pi-arrow-left">
+        <i (click)="listManagerService.routeToReading()" class="tooltip _circle_border p_icons pi pi-arrow-left">
             <div class="tooltip_text_right">بازگشت به درحال قرائت</div>
         </i>
     </div>
@@ -15,32 +15,36 @@
             <div class="input_2" [ngClass]="{'double_size':mainDatas.icon}" *ngFor="let mainDatas of _selectMainDatas">
                 <div class="_key">{{mainDatas.header}}</div>
                 <input [readOnly]="mainDatas.readonly" class="_value" name="{{mainDatas.field}}"
-                    [(ngModel)]="dataSource[mainDatas.field]">
+                    [(ngModel)]="closeTabService.saveDataForLMPD[mainDatas.field]">
             </div>
         </div>
         <div class="check_boxes">
-            <mat-checkbox [disabled]="true" name="hasPreNumber" [(ngModel)]="dataSource.hasPreNumber">رقم قبلی
+            <mat-checkbox [disabled]="true" name="hasPreNumber"
+                [(ngModel)]="closeTabService.saveDataForLMPD.hasPreNumber">رقم قبلی
             </mat-checkbox>
 
-            <mat-checkbox [disabled]="true" name="displayBillId" [(ngModel)]="dataSource.displayBillId">شناسه قبض
+            <mat-checkbox [disabled]="true" name="displayBillId"
+                [(ngModel)]="closeTabService.saveDataForLMPD.displayBillId">شناسه قبض
             </mat-checkbox>
 
-            <mat-checkbox [disabled]="true" name="displayRadif" [(ngModel)]="dataSource.displayRadif">ش.پرونده
+            <mat-checkbox [disabled]="true" name="displayRadif"
+                [(ngModel)]="closeTabService.saveDataForLMPD.displayRadif">ش.پرونده
             </mat-checkbox>
 
-            <mat-checkbox [disabled]="true" name="isBazdid" [(ngModel)]="dataSource.isBazdid">بازدید
+            <mat-checkbox [disabled]="true" name="isBazdid"
+                [(ngModel)]="closeTabService.saveDataForLMPD.isBazdid">بازدید
             </mat-checkbox>
 
-            <mat-checkbox [disabled]="true" name="isRoosta" [(ngModel)]="dataSource.isRoosta">روستا
+            <mat-checkbox [disabled]="true" name="isRoosta" [(ngModel)]="closeTabService.saveDataForLMPD.isRoosta">روستا
             </mat-checkbox>
         </div>
     </form>
 
 </section>
 
-<h1 class="title">اطلاعات روزانه قرائت</h1>
+<h1 class="title mt-s">اطلاعات روزانه قرائت</h1>
 <section>
-    <main *ngFor="let history of offLoadPerDayHistory" class="card_wrapper">
+    <main *ngFor="let history of closeTabService.saveDataForLMPD.offLoadPerDayHistory" class="card_wrapper">
         <div class="card__content" *ngFor="let item of _selectCols">
             <div class="input_2">
                 <div class="_key">{{item.header}}</div>
@@ -48,7 +52,7 @@
                     [(ngModel)]="history[item.field]">
             </div>
         </div>
-        <br><br>
+
         <div class="disable_grid_temp">
             <button class="btn_1 d_rtl" (click)="routeToLMPDXY(history.day)">
                 مشاهده روی نقشه

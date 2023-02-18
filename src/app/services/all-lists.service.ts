@@ -5,7 +5,8 @@ export interface IOnOffLoadNessessities {
   listNumber: string,
   trackNumber: number,
   groupId?: string,
-  zoneId?: number
+  zoneId?: number,
+  zoneTitle?: string
 }
 @Injectable({
   providedIn: 'root'
@@ -15,19 +16,30 @@ export class AllListsService {
   allLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,
-    trackNumber: null
+    trackNumber: null,
+    zoneTitle: ''
   };
   modifyLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,
-    trackNumber: null
+    trackNumber: null,
+    zoneTitle: '',
   };
   generalModifyLists_pageSign: IOnOffLoadNessessities = {
     GUid: null,
     listNumber: null,
     groupId: '',
     zoneId: null,
+    zoneTitle: '',
     trackNumber: null
+  };
+  generalModifyListsGrouped_pageSign: IOnOffLoadNessessities = {
+    GUid: null,
+    listNumber: null,
+    groupId: '',
+    zoneId: null,
+    trackNumber: null,
+    zoneTitle: ''
   };
 
 }

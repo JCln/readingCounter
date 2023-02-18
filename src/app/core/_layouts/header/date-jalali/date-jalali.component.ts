@@ -18,13 +18,18 @@ export class DateJalaliComponent implements AfterViewInit {
   constructor(private dateJalaliService: DateJalaliService) {
   }
 
-  sendDateJal = ($event) => {
-    this.dateJalEvent.emit($event.inputElementValue);
+  sendDateJal = ($event, hasFirstVal?: boolean) => {
+    if (hasFirstVal) {
+      this.dateJalEvent.emit(this.dateObject);
+    }
+    else {
+      this.dateJalEvent.emit($event.inputElementValue);
+    }
   }
   ngAfterViewInit(): void {
     if (!this.dateObject || this.dateObject.length === 0) {
       this.dateObject = this.dateJalaliService.getCurrentDate();
-      return;
+      this.sendDateJal('', true);
     }
   }
 }

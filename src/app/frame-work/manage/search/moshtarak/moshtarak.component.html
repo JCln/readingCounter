@@ -15,18 +15,21 @@
             <div class="input_2">
                 <div class="_key">ناحیه</div>
                 <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="searchService.searchReqMosh.zoneId"
-                    placeholder="انتخاب مورد" [style]="{'max-width': '9rem','width':'100%'}" optionValue="id"
+                    placeholder="انتخاب مورد" [style]="{'max-width':'8rem', 'min-width': '8rem','width':'100%'}" optionValue="id"
                     optionLabel="title" filter="true">
                 </p-dropdown>
             </div>
-            <input class="input_1" type="number" placeholder="{{_searchByInfo}} را وارد نمایید " name="counterNumber"
+            <input class="input_1" placeholder="{{_searchByInfo}} را وارد نمایید " name="counterNumber"
                 [(ngModel)]="searchService.searchReqMosh.item" autofocus>
 
             <div class="check_boxes">
-                <mat-checkbox name="similar" [(ngModel)]="searchService.searchReqMosh.similar">جستجوی موارد مشابه
+                <mat-checkbox name="similar" [(ngModel)]="searchService.searchReqMosh.similar">جستجو موارد مشابه
+                </mat-checkbox>
+                <mat-checkbox *ngIf="!listManagerService.denyTracking()" name="showAll"
+                    [(ngModel)]="searchService.searchReqMosh.showAll">نمایش همه
                 </mat-checkbox>
             </div>
-            <button type="submit" class="tooltip btn_2_o">
+            <button type="submit" class="tooltip btn_1">
                 <i class="pi pi-search"></i>
                 جستجو
             </button>
@@ -34,15 +37,9 @@
     </form>
 </main>
 
-<app-prime-table  
-[dataSource]="dataSource"    
-[_outputFileName]="'searchMosh'" 
-[_checkUpName]="'search_moshtarak'"
-[_selectedColumnsToRemember]="'selectedListManagerMosh'" 
-[_numberOfExtraColumns]="[1,2,3]"
-[_sessionName]="'moshtarak-session'"
-(refreshedTable)="refreshTable()"
-(showedPictures)="getReadingReportTitles($event)"
-(showedInMapSingle)="openMapDialog($event)"
->
+<app-prime-table [dataSource]="closeTabService.saveDataForSearchMoshtarakin" [_outputFileName]="'searchMosh'" [_checkUpName]="'allComponent'"
+    [_selectedColumnsToRemember]="'selectedListManagerMosh'" [_numberOfExtraColumns]="[1,2,3,4]"
+    [_sessionName]="'moshtarak-session'" (refreshedTable)="refreshTable()"
+    (showedPictures)="getReadingReportTitles($event)" (showedInMapSingle)="openMapDialog($event)"
+    (openedBriefKardexDialog)="openBriefKardexDialog($event)">
 </app-prime-table>

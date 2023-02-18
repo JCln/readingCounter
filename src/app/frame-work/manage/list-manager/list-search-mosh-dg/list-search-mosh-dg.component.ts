@@ -8,8 +8,6 @@ import { Converter } from 'src/app/classes/converter';
 import { Search } from 'src/app/classes/search';
 
 import { MapDgComponent } from '../all/map-dg/map-dg.component';
-import { BriefKardexComponent } from '../brief-kardex/brief-kardex.component';
-import { ListSearchMoshWoumComponent } from './list-search-mosh-woum/list-search-mosh-woum.component';
 
 @Component({
   selector: 'app-list-search-mosh-dg',
@@ -19,11 +17,11 @@ import { ListSearchMoshWoumComponent } from './list-search-mosh-woum/list-search
 export class ListSearchMoshDgComponent implements OnInit {
   dataSource: IOnOffLoadFlat[] = [];
   counterStateDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   karbariDictionaryCode: IDictionaryManager[] = [];
   qotrDictionary: IDictionaryManager[] = [];
   counterStateByCodeDictionary: IDictionaryManager[] = [];
   zoneDictionary: IDictionaryManager[] = [];
+  deleteDictionary: IDictionaryManager[] = [];
   searchType: Search[];
 
   constructor(
@@ -42,26 +40,36 @@ export class ListSearchMoshDgComponent implements OnInit {
     this.connectToServer();
   }
   converts = async () => {
+    this.deleteDictionary = this.listManagerService.getDeleteDictionary();
     this.zoneDictionary = await this.listManagerService.getLMAllZoneDictionary();
-    this.counterStateDictionary = await this.listManagerService.getCounterStateDictionary();
-    this.karbariDictionary = await this.listManagerService.getKarbariDictionary();
     this.karbariDictionaryCode = await this.listManagerService.getKarbariDictionaryCode();
     this.qotrDictionary = await this.listManagerService.getQotrDictionary();
-    if (this.listManagerService.searchReqMoshDialog.zoneId) {
-      this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
-      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-      Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
-    }
+    this.counterStateByCodeDictionary = await this.listManagerService.getCounterStateByCodeDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
+    this.counterStateDictionary = await this.listManagerService.getCounterStateByZoneIdDictionary(this.listManagerService.searchReqMoshDialog.zoneId);
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    Converter.convertIdToTitle(this.dataSource, this.karbariDictionary, 'karbariCode');
+
+    this.dataSource =
+      Converter.convertIdsToTitles(
+        this.dataSource,
+        {
+          zoneDictionary: this.zoneDictionary,
+          deleteDictionary: this.deleteDictionary,
+          counterStateDictionary: this.counterStateDictionary,
+          counterStateByCodeDictionary: this.counterStateByCodeDictionary,
+          karbariDictionaryCode: this.karbariDictionaryCode,
+          qotrDictionary: this.qotrDictionary,
+        },
+        {
+          zoneId: 'zoneId',
+          hazf: 'hazf',
+          counterStateId: 'counterStateId',
+          preCounterStateCode: 'preCounterStateCode',
+          possibleKarbariCode: 'possibleKarbariCode',
+          qotrCode: 'qotrCode'
+        })
     Converter.convertIdToTitle(this.dataSource, this.karbariDictionaryCode, 'karbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.qotrDictionary, 'qotrCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateDictionary, 'counterStateId');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'counterStateCode');
-    Converter.convertIdToTitle(this.dataSource, this.counterStateByCodeDictionary, 'preCounterStateCode');
 
-    this.listManagerService.setDynamicPartRanges(this.dataSource);
+    // this.listManagerService.setDynamicPartRanges(this.dataSource);
   }
   connectToServer = async () => {
     if (!this.listManagerService.verificationMosh(this.listManagerService.searchReqMoshDialog))
@@ -86,35 +94,8 @@ export class ListSearchMoshDgComponent implements OnInit {
 
     });
   }
-  openWOUMDialog = (dataSource: any) => {
-    this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-      data: dataSource,
-      rtl: true,
-      width: '80%'
-    })
-    this.ref.onClose.subscribe(async res => {
-      if (res)
-        console.log(res);
-
-    });
-  }
-  openBriefKardexDialog = (dataSource: any) => {
-    this.ref = this.dialogService.open(BriefKardexComponent, {
-      data: {
-        radif: dataSource.radif,
-        zoneId: dataSource.zoneId
-      },
-      rtl: true,
-      width: '90%'
-    })
-    this.ref.onClose.subscribe((res: any) => {
-      if (res)
-        console.log(res);
-    });
-  }
   refreshTable = () => {
     this.connectToServer();
   }
-
 
 }

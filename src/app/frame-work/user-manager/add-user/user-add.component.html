@@ -7,22 +7,23 @@
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="provinceItemsData">
-        <form *ngIf="provinceItemsData" [formGroup]="provinceItemsData">
+    <mat-step [stepControl]="closeTabService.saveDataForAddUsers.provinceItems">
+        <form *ngIf="closeTabService.saveDataForAddUsers.provinceItems"
+            [formGroup]="closeTabService.saveDataForAddUsers.provinceItems">
             <ng-template matStepLabel>دسترسی به ناحیه</ng-template>
-            <app-select-zone [provinceItemsData]="provinceItemsData"></app-select-zone>
+            <app-select-zone [provinceItemsData]="closeTabService.saveDataForAddUsers.provinceItems"></app-select-zone>
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="userAppItems">
-        <ng-template *ngIf="userAppItems" matStepLabel>سطح دسترسی به خدمات</ng-template>
-        <app-select-action [userAddData]="userAppItems"></app-select-action>
+    <mat-step [stepControl]="closeTabService.saveDataForAddUsers.appItems">
+        <ng-template *ngIf="closeTabService.saveDataForAddUsers.appItems" matStepLabel>سطح دسترسی به خدمات</ng-template>
+        <app-select-action [userAddData]="closeTabService.saveDataForAddUsers.appItems"></app-select-action>
     </mat-step>
 
-    <mat-step [stepControl]="roleItemsData">
-        <form *ngIf="roleItemsData" formGroup="roleItemsData">
+    <mat-step [stepControl]="closeTabService.saveDataForAddUsers.roleItems">
+        <form *ngIf="closeTabService.saveDataForAddUsers.roleItems" formGroup="roleItemsData">
             <ng-template matStepLabel>گروه دسترسی</ng-template>
-            <app-select-roles [roleItems]="roleItemsData"></app-select-roles>
+            <app-select-roles [roleItems]="closeTabService.saveDataForAddUsers.roleItems"></app-select-roles>
         </form>
     </mat-step>
 

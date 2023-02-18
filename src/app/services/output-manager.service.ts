@@ -2,7 +2,6 @@ import 'jspdf-autotable';
 
 import { Injectable } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOutputManager } from 'interfaces/imanage';
 import { IObjectIteratation } from 'interfaces/ioverall-config';
 import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
@@ -15,36 +14,12 @@ import { UtilsService } from './utils.service';
   providedIn: 'root'
 })
 export class OutputManagerService {
-  dbfOutput: IOutputManager = {
-    zoneId: 0,
-    fromDate: null,
-    toDate: null
-  };
 
   constructor(
     private utilsService: UtilsService
   ) {
   }
 
-  get getDBFOutPut(): IOutputManager {
-    return this.dbfOutput;
-  }
-
-  checkVertification = (dataSource: IOutputManager): boolean => {
-    if (MathS.isNullTextValidation(dataSource.fromDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
-      return false;
-    }
-    if (MathS.isNullTextValidation(dataSource.toDate)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
-      return false;
-    }
-    if (MathS.isNull(dataSource.zoneId)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return false;
-    }
-    return true;
-  }
   // Exports
   downloadFile(data: any, type?: string) {
     if (type) {
@@ -62,16 +37,19 @@ export class OutputManagerService {
       FileSaver.saveAs(blob, fileName);
     })
   }
-  getValidatedTableData = (dataSource: any[], _selectCols: IObjectIteratation[]): any => {
-    var colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
-    var validColNames = [];
-    var validHeaders = [];
-    var firstItem = dataSource[0];
-    var keys = Object.keys(firstItem);
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
-      for (var j = 0; j < colnames.length; j++) {
-        var colName = colnames[j].name;
+  getValidatedTableData = (dataSource: any[], _selectCols: any[]): any => {
+    const colnames = _selectCols.map(c => ({ name: c.field, header: c.header, sel: c.isSelected }));
+    const validColNames = [];
+    const validHeaders = [];
+    const firstItem = dataSource[0];
+
+    const keys = Object.keys(firstItem);
+    for (let j = 0; j < colnames.length; j++) {
+      const colName = colnames[j].name;
+
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+
         if (key === colName && colnames[j].sel) {
           validColNames.push(colName);
           validHeaders.push(colnames[j].header);
@@ -79,11 +57,12 @@ export class OutputManagerService {
       }
     }
 
-    var newData = dataSource.map(function (currentelement) {
-      var newElement = {};
-      for (var i = 0; i < validColNames.length; i++) {
-        var key = validColNames[i];
-        var value = currentelement[validColNames[i]];
+    const newData = dataSource.map(function (currentelement) {
+      const newElement = {};
+      for (let i = 0; i < validColNames.length; i++) {
+        const key = validColNames[i];
+        let value = currentelement[validColNames[i]];
+        
         newElement[key] = value != undefined && value != null ? value : '';
       }
       return Object.values(newElement);

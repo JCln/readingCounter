@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IMessage } from 'interfaces/inon-manage';
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
+import { ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { EnvService } from 'services/env.service';
+import { InteractionService } from 'services/interaction.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ILatestReads } from 'src/app/interfaces/imoment';
 
 import { JwtService } from '../auth/jwt.service';
 import { SnackWrapperService } from './snack-wrapper.service';
@@ -17,7 +20,9 @@ export class SignalRService {
   constructor(
     private envService: EnvService,
     private jwtService: JwtService,
-    private snackBarService: SnackWrapperService
+    private snackBarService: SnackWrapperService,
+    private interactionService: InteractionService,
+    private interfaceManagerService: InterfaceManagerService
   ) { }
 
   public startConnection = () => {
@@ -25,7 +30,8 @@ export class SignalRService {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(this.envService.API_URL + ENInterfaces.signalRStartConnection, authToken)
       .withAutomaticReconnect()
-      .configureLogging(signalR.LogLevel.Information)
+      // .configureLogging(signalR.LogLevel.Information)
+      // .configureLogging(signalR.LogLevel.Debug)
       .build();
     this.hubConnection
       .start()
@@ -33,10 +39,11 @@ export class SignalRService {
       .catch(err => console.log('Error while starting connection: ' + err));
 
     this.receiveMessage();
-    this.broadcastMessage();
-    //   connection.onclose(async () => {
-    //     await start();
-    // });
+    this.receiveTextWithTimer();
+    this.ReceiveDirectMessage();
+    this.receiveImageWithCaptionMessage();
+    this.receiveVideoWithCaptionMessage();
+    this.momentAddReadingRow();
   }
   public disconnectConnection = () => {
     this.hubConnection.stop();
@@ -44,8 +51,14 @@ export class SignalRService {
   sendSimpleMessage = () => {
     this.hubConnection.send(ENInterfaces.signalRSendMessage, 'username', 'test');
   }
-  sendBroadcastMessage = (method: ENInterfaces, data: IMessage) => {
-    this.hubConnection.send(method, data.time, data.title, data.message, data.color);
+  sendBroadcastMessage = (method: ENInterfaces, val: IMessage) => {
+    const a = { seconds: val.seconds, title: val.title, text: val.message, color: val.color };
+    return new Promise(() => {
+      this.interfaceManagerService.POSTBODY(method, a).toPromise();
+    });
+  }
+  getConnectionStatus = (): any => {
+    return this.hubConnection.state;
   }
   reconnectManualy = async () => {
     try {
@@ -55,17 +68,80 @@ export class SignalRService {
       console.log(err);
     }
   }
+  /* TODO:
+  Implement Call server our Methods
+*/
   private receiveMessage = () => {
     this.hubConnection.on(ENInterfaces.signalRReceiveMessage, (user: string, message: string) => {
       this.snackBarService.openSnackBarSignal(user + '   ' + message, ENSnackBarTimes.tenMili);
     });
   }
-  private broadcastMessage = () => {
-    this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
-      this.snackBarService.openSnackBarSignal(title + '\n' + message, time, color);
+  private receiveTextWithTimer = () => {
+    this.hubConnection.on(ENInterfaces.receiveTextWithTimer, (a: IMessage) => {
+      this.snackBarService.openSnackBarSignal(a.title + '\n' + a.text, a.seconds, a.color);
     });
   }
-  getConnectionStatus = (): any => {
-    return this.hubConnection.state;
+  private ReceiveDirectMessage = () => {
+    this.hubConnection.on(ENInterfaces.ReceiveDirectMessage, (a: any) => {
+      const custom = {
+        severity: a.color,
+        summary: a.title,
+        detail: a.text,
+        sticky: true,
+        icon: 'pi pi-envelope',
+        key: 'text'
+      }
+      this.snackBarService.openToastSignal(custom);
+    });
+  }
+  private receiveImageWithCaptionMessage = () => {
+    this.hubConnection.on(ENInterfaces.ReceiveImageWithCaption, (a: any) => {
+      const custom = {
+        severity: 'info',
+        summary: 'تصویری از',
+        detail: '',
+        sticky: true,
+        icon: 'pi pi-image',
+        key: 'imageOrVideo',
+        fileRepositoryId: a.fileRepositoryId,
+        sender: a.sender,
+        caption: a.caption,
+        clickName: 'openImgDialog'
+      }
+      this.snackBarService.openToastSignal(custom);
+    });
+  }
+  private receiveVideoWithCaptionMessage = () => {
+    this.hubConnection.on(ENInterfaces.ReceiveVideoWithCaption, (a: any) => {
+      const custom = {
+        severity: 'info',
+        summary: 'ویدیویی از',
+        detail: '',
+        sticky: true,
+        icon: 'pi pi-video',
+        key: 'imageOrVideo',
+        fileRepositoryId: a.fileRepositoryId,
+        sender: a.sender,
+        caption: a.caption,
+        clickName: 'openVideoDialog'
+      }
+      this.snackBarService.openToastSignal(custom);
+    });
+  }
+
+  private momentAddReadingRow = () => {
+    this.hubConnection.on(ENInterfaces.signalRMomentSystemAddReadingRow, (r: ILatestReads) => {
+      this.interactionService.startLoading(r);
+    })
   }
 }
+// To Send Data to Server ACross WebSocket
+  // sendBroadcastMessage = (method: ENInterfaces, data: IMessage) => {
+  //   this.hubConnection.send(method, data.time, data.title, data.message, data.color);
+  // }
+
+  // private broadcastMessage = () => {
+  //   this.hubConnection.on(ENInterfaces.signalRBroadcastMessage, (time: number, title: string, message: string, color: ENSnackBarColors) => {
+  //     this.snackBarService.openSnackBarSignal(title + '\n' + message, time, color);
+  //   });
+  // }

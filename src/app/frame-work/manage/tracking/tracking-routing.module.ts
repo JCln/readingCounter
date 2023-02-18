@@ -6,9 +6,10 @@ const routes: Routes = [
   { path: 'loaded', loadChildren: () => import('./loaded/loaded.module').then(loaded => loaded.LoadedModule) },
   { path: 'reading', loadChildren: () => import('./reading/reading.module').then(reading => reading.ReadingModule) },
   { path: 'offloaded', loadChildren: () => import('./offloaded/offloaded.module').then(offloaded => offloaded.OffloadedModule) },
+  { path: 'offloadedG', loadChildren: () => import('./offloaded-group/offloaded-group.module').then(offloadedGrouped => offloadedGrouped.OffloadedGroupModule) },
   { path: 'finished', loadChildren: () => import('./finished/finished.module').then(finished => finished.FinishedModule) },
   { path: 'latest', loadChildren: () => import('./last-states/last-states.module').then(lastStates => lastStates.LastStatesModule) },
-  { path: 'woui/:isForbidden/:UUID', loadChildren: () => import('./wuoi/woui.module').then(waterOfficerUploadedInfo => waterOfficerUploadedInfo.AbDanUploadedInfoModule) }
+  { path: 'userSummary', loadChildren: () => import('./user-karkard-summary/user-karkard-summary.module').then(userKarkardSummary => userKarkardSummary.UserKarkardSummaryModule) }
 ];
 
 @NgModule({

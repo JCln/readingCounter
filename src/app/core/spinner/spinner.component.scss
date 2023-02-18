@@ -1,4 +1,8 @@
-@import "mixins.scss";
+.d_flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .spinner {
   position: fixed;
@@ -18,7 +22,7 @@
     position: absolute;
     left: auto;
     bottom: auto;
-    height: 5rem;
+    height: var(--font_5);
     width: .8rem;
   }
 
@@ -34,10 +38,20 @@
 
 }
 
+.pending_spinner {
+  position: fixed;
+  // filter: blur(4px);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  transform-origin: center;
+}
 
 .loader {
   position: relative;
-  height: 1rem;
+  height: var(--font_xs);
   width: 2rem;
   display: block;
   z-index: 10;
@@ -56,4 +70,17 @@
   100% {
     transform: rotate(0deg);
   }
+}
+
+._cancel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+  color: var(--primary_3);
+  transform: translateX(50%) translateY(7rem);
+  background: inherit;
+  border-radius: 15px;
+  right: 50%;
+  cursor: pointer;
 }

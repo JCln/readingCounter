@@ -1,0 +1,83 @@
+<section [hidden]="toolsService._isCollapsedImageAttrDetails">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+            <section class="content">
+                <div class="input_2" [hidden]="!zoneDictionary.length">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="toolsService.imgResultDetails.zoneId" placeholder="انتخاب مورد"
+                            [style]="{minWidth: '10rem',width:'100%'}" optionValue="id" optionLabel="title"
+                            filter="true">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="input_2" *ngIf="imageAttrAllDictionary.length">
+                    <div class="_key">توصیف تصویر</div>
+                    <p-multiSelect [maxSelectedLabels]="2" [options]="imageAttrAllDictionary" name="imgAttr"
+                        [(ngModel)]="toolsService.imgResultDetails.imageAttributionIds" optionLabel="title"
+                        optionValue="id" selectedItemsLabel="{0} مورد انتخاب شده" [style]="{minWidth: '200px'}"
+                        placeholder="انتخاب مورد" [filter]="true" showClear="true">
+                    </p-multiSelect>
+                </div>
+                <div class="input_2">
+                    <div class="_key">از تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="toolsService.receiveFromDateJalaliImgResult($event)"
+                            [dateObject]="toolsService.imgResultDetails.fromDate">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="input_2">
+                    <div class="_key">تا تاریخ</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate"
+                            (dateJalEvent)="toolsService.receiveToDateJalaliImgResult($event)"
+                            [dateObject]="toolsService.imgResultDetails.toDate">
+                        </app-date-jalali>
+                    </div>
+                </div>
+
+            </section>
+        </section>
+        <footer class="center_footer">
+            <button type="submit" class="btn_1">
+                مشاهده
+                <i class="pi pi-image"></i>
+            </button>
+        </footer>
+    </form>
+</section>
+
+<main *ngIf="allImagesDataSource" style="position: relative;">
+
+    <div class="content">
+        <div *ngFor="let item of allImagesDataSource.imageUrlAndInfos; index as ri" class="_images">
+
+            <div *ngIf="imgsOriginUrl[ri]" class="__img_bound_real">
+                <img src="{{imgsOriginUrl[ri]}}" onerror="this.onerror=null; this.src='assets/imgs/soundvid/2.png'"
+                    alt="تصویر" loading="lazy" (click)="routeToOffload(item , ri, imgsOriginUrl[ri])">
+                <div class="__hiddens" *ngIf="item.onOffLoadId">
+                    <p>اش:{{item.eshterak}}</p>
+                    <p>{{item.zoneTitle}}</p>
+                    <p>{{item.firstName}}{{item.sureName}}</p>
+                    <p>ش.پر:{{item.radif}}</p>
+                    <p>ش.پ:{{item.trackNumber}}</p>
+                    <p>رقم فعلی:{{item.counterNumber}}</p>
+                    <p>{{item.imageDescription}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-img-result-carousel *ngIf="showCarousel" [dataSource]="carouselImage" (cancelClicked)="carouselCancelClicked()"
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
+        <app-img-result-details-carousel></app-img-result-details-carousel>
+
+    </app-img-result-carousel>
+
+    <div class="not_found_header" *ngIf="!allImagesDataSource.imageCount">
+        <h2>فاقد تصویر</h2>
+    </div>
+</main>

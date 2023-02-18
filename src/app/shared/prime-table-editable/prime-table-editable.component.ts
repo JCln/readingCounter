@@ -1,9 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { PrimeNGConfig } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactorySharedPrime } from 'src/app/classes/factory';
 
@@ -14,37 +18,18 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
 })
 export class PrimeTableEditableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
+  onRowEditing: any;
 
-  @Input() dataSource: any[] = [];
-  @Input() _selectCols: any = [];
-  @Input() _selectedColumns: any[];
-  @Input() _outputFileName: string;
-  @Input() _rowsPerPage: number[] = [10, 100, 1000, 5000];
-  @Input() _numberOfExtraColumns: number[];
-  @Input() _sessionName: string;
   @Input() _sortBy: string;
-  @Input() _rowsNumbers = 10;
-  @Input() _selectedColumnsToRemember: string;
-  @Input() _backToPreviousText: string;
-  @Input() _captionEnabled: boolean = true;
-  @Input() _sortField: string = '';
-  @Input() _sortOrder: string = '';
-  @Input() _outputEnabled: boolean = true;
-  @Input() _backToPreviousEnabled: boolean = false;
-  @Input() _checkUpName: string = '';
-  @Input() _multiSelectEnable: boolean = true;
+  @Input() _sortOrder: number = 1;
   @Input() _isInRowEditing: boolean = false;
   @Input() _dictionaryName: string = '';
   @Input() _secondDictionaryName: string = '';
-  @Input() _isCustomSort: boolean = false;
-
-  @Input() _hasSaveColumns: boolean = true;
   @Input() newRow: object;
-  @Input() newRowLimit: number;
   @Input() dictionary = new EventEmitter<any>();
+  @Input() newRowLimit: number;
   @Input() secondDictionary = new EventEmitter<any>();
 
-  @Output() backedToPrevious = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
   @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() showedInMapSingle = new EventEmitter<any>();
@@ -60,6 +45,7 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   @Output() removedRow = new EventEmitter<any>();
   @Output() removedRowEditing = new EventEmitter<any>();
   @Output() openedAddDialog = new EventEmitter<any>();
+  @Output() openedBatchedAddDialog = new EventEmitter<any>();
   @Output() newedRowChangedStatus = new EventEmitter<any>();
   @Output() getedExcelSample = new EventEmitter<any>();
   @Output() openedAddExcelDialog = new EventEmitter<any>();
@@ -70,15 +56,29 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
     public columnManager: ColumnManager,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public config: PrimeNGConfig,
+    public dialogService: DialogService,
+    public profileService: ProfileService,
+    public authService: AuthService
   ) {
     super(
       browserStorageService,
       utilsService,
-      columnManager
+      columnManager,
+      config,
+      dialogService,
+      profileService,
+      authService
     );
   }
-
+  clickedDropDowns = (event: any, element: string, dataId: any) => {
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (this.dataSource[index].id === dataId) {
+        this.dataSource[index][element] = event.title;
+      }
+    }
+  }
   refreshTable() {
     this.refreshedTable.emit(true);
   }
@@ -86,12 +86,21 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
     this.openedBriefKardexDialog.emit(dataSource);
   }
   onRowEditInit = (dataSource: object) => {
+    this.onRowEditing = JSON.parse(JSON.stringify(dataSource));
+    console.log(this.onRowEditing);
     this.onRowEditedInit.emit(dataSource);
   }
   onRowEditSave = (dataSource: object, ri: number) => {
     this.onRowEditedSave.emit({ dataSource, ri });
   }
-  onRowEditCancel = (dataSource: object, ri: number) => {
+  onRowEditCancel = (dataSource: any, ri: number, dictionary: any) => {
+    for (let index = 0; index < this.dataSource.length; index++) {
+      if (dataSource.id === this.dataSource[index].id) {
+        this.dataSource[index][dictionary] = this.onRowEditing[dictionary];
+        if (this._secondDictionaryName !== '')
+          this.dataSource[index][this._secondDictionaryName] = this.onRowEditing[this._secondDictionaryName];
+      }
+    }
     this.onRowEditedCancel.emit({ dataSource, ri });
   }
   removeRow = (dataSource: object, ri: number) => {
@@ -103,10 +112,13 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   openAddDialog = () => {
     this.openedAddDialog.emit();
   }
+  openBatchAddDialog = () => {
+    this.openedBatchedAddDialog.emit();
+  }
   newRowChangedStatus = () => {
     this.newedRowChangedStatus.emit();
   }
-  onRowEditCancelRowEditing = (dataSource: object, ri: number) => {
+  onRowEditCancelRowEditing = (dataSource: object, ri: number, secondDictionaryName: any) => {
     this.onRowEditedCancelRowEditing.emit({ dataSource, ri });
   }
   getExcelSample = () => {
@@ -117,9 +129,6 @@ export class PrimeTableEditableComponent extends FactorySharedPrime {
   }
   routeToParent = () => {
     this.routedToParent.emit();
-  }
-  backToPrevious = () => {
-    this.backedToPrevious.emit(true);
   }
   filterEventTable(e: Table) {
     this.filteredEvent.emit(e.filteredValue);

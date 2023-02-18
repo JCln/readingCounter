@@ -36,7 +36,7 @@ export class DownloadManagerService {
   }
   downloadFile = (fileRepositoryId: string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETBLOB(ENInterfaces.downloadFileGET, fileRepositoryId).subscribe(res => {
+      this.interfaceManagerService.GETBlobById(ENInterfaces.downloadFileGET, fileRepositoryId).subscribe(res => {
         resolve(res)
       });
     })
@@ -52,7 +52,8 @@ export class DownloadManagerService {
   separateImageFiles = (): IOnOffLoad[] => {
     const a = [];
     this.dataSource.filter(item => {
-      if (item.extention === '.jpg') {
+      if (item.extention === '.jpg' || item.extention === '.jpeg'
+        || item.extention === '.JPG' || item.extention === '.JPEG') {
         a.push(item);
         this.overAllDetails.imageNumbers++;
       }
@@ -84,5 +85,12 @@ export class DownloadManagerService {
     this.dataSource = dataSource;
     this.backToDefaultValues();
     this.getOverAllSize();
+  }
+  downloadImg = (src: any) => {
+    const link = document.createElement('a');
+    link.href = src;
+    link.target = '_blank';
+    link.download = `${new Date().toLocaleDateString()}.jpg`;
+    link.click();
   }
 }

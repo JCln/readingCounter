@@ -6,7 +6,6 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { IDynamicExcelReq } from 'src/app/Interfaces/itools';
 
 @Component({
   selector: 'app-rr-excel-dynamic-viewer',
@@ -15,12 +14,11 @@ import { IDynamicExcelReq } from 'src/app/Interfaces/itools';
 })
 export class RrExcelDynamicViewerComponent extends FactoryONE {
 
-  dataSource: IDynamicExcelReq[] = [];
   _selectCols: any = [];
   _selectedColumns: any[];
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public readingReportManagerService: ReadingReportManagerService,
     private outputManagerService: OutputManagerService,
     private authService: AuthService
@@ -33,12 +31,8 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForToolsExcelViewer) {
-      this.dataSource = this.closeTabService.saveDataForToolsExcelViewer;
-    }
-    else {
-      this.dataSource = await this.readingReportManagerService.dataSourceGET(ENInterfaces.getToolsDynamicExcel);
-      this.closeTabService.saveDataForToolsExcelViewer = this.dataSource;
+    if (!this.closeTabService.saveDataForToolsExcelViewer) {
+      this.closeTabService.saveDataForToolsExcelViewer = await this.readingReportManagerService.dataSourceGET(ENInterfaces.getToolsDynamicExcel);
     }
   }
   downloadExcel = async (body) => {
@@ -49,8 +43,8 @@ export class RrExcelDynamicViewerComponent extends FactoryONE {
       buttonColor: 'rgb(246, 128, 56)'
     }
 
-    const temp = await this.readingReportManagerService.showResDialogDynamic(body.jsonInfo, options);
-    if (temp !== {}) {
+    const temp: object = await this.readingReportManagerService.showResDialogDynamic(body.jsonInfo, options);
+    if (temp) {
       const res = await this.readingReportManagerService.postExcel(body.url, temp);
       this.outputManagerService.downloadFile(res, '.xlsx');
     }

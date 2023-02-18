@@ -6,9 +6,9 @@
   direction: rtl;
   grid-template-columns: repeat(auto-fit, minmax(25rem, auto));
   align-items: center;
-  gap: 0.3rem;
+  gap: var(--font_03);
   overflow: auto;
-  margin-top: $font_05
+  margin-top: var(--font_05)
 }
 
 @include media_wrapper(780px, '.grid_half_width', grid-template-columns, 1fr 1fr);

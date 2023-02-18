@@ -5,6 +5,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { GlobalErrorHandlerService } from 'services/global-error-handler.service';
 
 import { InterceptorService } from '../auth/interceptor.service';
@@ -19,8 +22,8 @@ import { HfcComponent } from './_layouts/hfc/hfc.component';
 import { LayoutComponent } from './_layouts/layout/layout.component';
 import { AnonyHeaderComponent } from './anony-header/anony-header.component';
 import { ClockComponent } from './clock/clock.component';
+import { ColorPaletteComponent } from './color-palette/color-palette.component';
 import { CoreRoutingModule } from './core-routing.module';
-import { NetConnectionComponent } from './net-connection/net-connection.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { SmallSpinnerComponent } from './small-spinner/small-spinner.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
@@ -42,8 +45,8 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     SnackBarComponent,
     ClockComponent,
     AnnouceNotifComponent,
-    NetConnectionComponent,
-    SmallSpinnerComponent
+    SmallSpinnerComponent,
+    ColorPaletteComponent
   ]
   ,
   imports: [
@@ -54,7 +57,9 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     MatSnackBarModule,
     MatDialogModule,
     SharedThreeModule,
+
     BrowserAnimationsModule,
+    ProgressSpinnerModule,
     CoreRoutingModule
   ],
   exports: [
@@ -66,17 +71,19 @@ import { TabWrapperComponent } from './tab-wrapper/tab-wrapper.component';
     SnackBarComponent,
     ClockComponent,
     SharedThreeModule,
+    ProgressSpinnerModule,
     // components
     BrowserAnimationsModule,
     AnnouceNotifComponent,
-    NetConnectionComponent,
 
     CoreRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true },
-    { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
+    MessageService,
+    DialogService
   ]
 })
 export class CoreModule {

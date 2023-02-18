@@ -3,14 +3,14 @@
 ::ng-deep {
   .dp-picker-input {
     font-weight: 600;
-    font-size: 1.2rem !important;
+    font-size: var(--font_s) !important;
     border: none;
     border-radius: 15px;
     height: 30px;
-    width: 5.5rem !important;
+    width: var(--font_55) !important;
     outline: none;
     text-align: center;
-    padding: 1.1rem 0;
+    padding: var(--font_ss) 0;
     background: transparent;
     color: var(--primary_5) !important;
     cursor: pointer;
@@ -27,12 +27,12 @@
   }
 
   .dp-calendar-day {
-    font-size: 1.2rem;
+    font-size: var(--font_s);
     font-weight: 600;
   }
 
   .dp-nav-header-btn {
-    font-size: 1.1rem;
+    font-size: var(--font_ss);
     font-weight: bold;
   }
 
@@ -43,7 +43,7 @@
 
   .dp-calendar-nav-container-left,
   .dp-calendar-nav-container-right {
-    padding: 0 1rem !important;
+    padding: 0 var(--font_xs) !important;
   }
 
   .dp-nav-header-btn {
@@ -51,7 +51,7 @@
   }
 
   .dp-calendar-month {
-    font-size: 1rem !important;
+    font-size: var(--font_xs) !important;
     font-weight: 600;
   }
 

@@ -47,7 +47,8 @@ export class OffloadComponent implements OnChanges {
   ref: DynamicDialogRef;
 
   imageFiles: IOnOffLoad[] = [];
-  testLoadImage: any[] = [];
+  tempLoadedImgs: any[] = [];
+  originImages: string[] = [];
 
   modifyType: OffloadModify[];
   offloadItems: OffloadModify[];
@@ -65,7 +66,7 @@ export class OffloadComponent implements OnChanges {
     this.imageFiles = [];
     this.audioFiles = [];
     this.dataSource = [];
-    this.testLoadImage = [];
+    this.tempLoadedImgs = [];
 
     if (!this.onOffloadId)
       return;
@@ -82,7 +83,7 @@ export class OffloadComponent implements OnChanges {
     this.imageFiles.forEach((item, i) => {
       this.getExactImg(item.fileRepositoryId, i);
     })
-
+    this.originImages = this.tempLoadedImgs;
   }
   ngOnChanges(): void {
     this.classWrapper();
@@ -91,18 +92,7 @@ export class OffloadComponent implements OnChanges {
     this.offloadModifyReq.jalaliDay = $event;
   }
   getExactImg = async (id: string, index: number) => {
-    if (this.testLoadImage[index])
-      return;
-    const res = await this.downloadManagerService.downloadFile(id);
-
-    this.testLoadImage[index] = res;
-    let reader = new FileReader();
-    reader.addEventListener("load", () => {
-      this.testLoadImage[index] = reader.result;
-    }, false);
-    if (this.testLoadImage[index]) {
-      reader.readAsDataURL(this.testLoadImage[index]);
-    }
+    this.tempLoadedImgs[index] = this.trackingManagerService.getApiUrl() + '/' + ENInterfaces.downloadFileByUrl + '/' + id + '?access_token=' + this.trackingManagerService.getAuthToken();
   }
 
   /* AUDIO */

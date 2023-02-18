@@ -19,9 +19,9 @@ th {
 
 th.mat-header-cell {
   text-align: right;
-  padding: .2rem;
+  padding: var(--font_02);
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: var(--font_l);
   color: #002CA8;
 }
 
@@ -31,14 +31,14 @@ th.mat-header-cell {
   margin: auto;
   border-radius: $border_15;
   text-align: center;
-  padding: .2rem;
+  padding: var(--font_02);
   // max-width: 13rem;
-  font-size: $font_m;
+  font-size: var(--font_m);
 }
 
 td.mat-cell {
   padding: .87rem;
-  font-size: $font_m;
+  font-size: var(--font_m);
   color: var(--secondary_7);
   font-weight: 600;
 }
@@ -52,8 +52,8 @@ td.mat-cell {
 ._custom {
   color: var(--thirdy_1);
   border-radius: $border_50;
-  padding: $font_xs;
-  font-size: $font_l;
+  padding: var(--font_xs);
+  font-size: var(--font_l);
   cursor: pointer;
 }
 
@@ -63,8 +63,14 @@ td.mat-cell {
 }
 
 .add_new {
-  padding: $font_xs;
+  padding: var(--font_xs);
   direction: rtl;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  direction: rtl;
+  justify-content: flex-start;
 }
 
 .mat-dialog-actions,
@@ -72,20 +78,11 @@ td.mat-cell {
 td,
 th {
   font-family: $font_family;
-  font-size: $font_s;
+  font-size: var(--font_s);
 }
 
 .fa-trash-o {
   color: var(--red_600);
-}
-
-.mat-form-field {
-  display: flex;
-  justify-content: center;
-  text-align: right;
-  font-size: 14px;
-  width: 100%;
-  font-family: $font_family;
 }
 
 .filter {
@@ -106,11 +103,11 @@ th {
 
 .operation_btn {
   cursor: pointer;
-  margin: $font_xs;
-  padding: $font_xs;
+  margin: var(--font_xs);
+  padding: var(--font_xs);
   border-radius: 50%;
   border: 1.5px solid;
-  font-size: 1.3rem;
+  font-size: var(--font_m);
   height: 3rem;
   width: 3rem;
   display: grid;
@@ -160,7 +157,7 @@ td.mat-footer-cell:first-of-type {
   .mat-option-text {
     text-align: right;
     font-family: $font_family;
-    font-size: 1.2rem;
+    font-size: var(--font_s);
     font-weight: 600;
     overflow: hidden;
     flex-grow: 1;
@@ -171,7 +168,7 @@ td.mat-footer-cell:first-of-type {
 // paginator config ///////////////
 :host::ng-deep {
   .mat-paginator-outer-container {
-    font-size: 1.2rem;
+    font-size: var(--font_s);
     font-weight: 600;
     font-family: $font_family;
   }

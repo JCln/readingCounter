@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { retry } from 'rxjs/operators';
 
 import { EnvService } from './env.service';
 
@@ -12,24 +11,15 @@ export class MainService {
   constructor(private http: HttpClient, private environment: EnvService) { }
 
 
-  GET = (URL: string, base64?: string) => {
-    if (base64) {
-      this.http.get(this.environment.API_URL + '/' + URL + '/' + base64).pipe(
-        retry(1)
-      )
-    } else {
-      return this.http.get(this.environment.API_URL + '/' + URL).pipe(
-        retry(1), // retry failed request up to 1
-        // catchError(err => this.errorHandler.errorHandler(err))
-      )
-    }
+  GET = (URL: string) => {
+    return this.http.get(this.environment.API_URL + '/' + URL);
+    // .pipe(
+    // retry(1) retry failed request up to 1
+    // catchError(err => this.errorHandler.errorHandler(err))
+    // )    
   }
-  GETID = (ID: string, URL: string, base64?: string) => {
-    if (base64) {
-      this.http.get(this.environment.API_URL + '/' + URL + '/' + base64 + '/' + ID);
-    } else {
-      return this.http.get<any>(this.environment.API_URL + '/' + URL + '/' + ID);
-    }
+  GETID = (ID: string, URL: string) => {
+    return this.http.get<any>(this.environment.API_URL + '/' + URL + '/' + ID);
   }
   POSTBLOB = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body, { responseType: 'blob' as 'json' });
@@ -37,17 +27,14 @@ export class MainService {
   POSTBLOBObserve = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body, { responseType: 'blob' as 'json', observe: 'response' });
   }
-  GETBLOB = (URL: string, ID?: string) => {
-    if (ID)
-      return this.http.get(this.environment.API_URL + '/' + URL + '/' + ID, { responseType: 'blob' });
-    else
-      return this.http.get(this.environment.API_URL + '/' + URL, { responseType: 'blob' });
+  GETBLOB = (URL: string) => {
+    return this.http.get(this.environment.API_URL + '/' + URL, { responseType: 'blob' });
   }
-  POST = (URL: string, ID?: number) => {
-    if (ID)
-      return this.http.post(this.environment.API_URL + '/' + URL + '/' + ID, '');
-    else
-      return this.http.post(this.environment.API_URL + '/' + URL, '');
+  POSTById = (URL: string, ID: number) => {
+    return this.http.post(this.environment.API_URL + '/' + URL + '/' + ID, '');
+  }
+  POST = (URL: string) => {
+    return this.http.post(this.environment.API_URL + '/' + URL, '');
   }
   POSTARRAY = (URL: string, arr: any[]) => {
     return this.http.post(this.environment.API_URL + '/' + URL, arr);
@@ -61,11 +48,7 @@ export class MainService {
   POSTBODYProgress = (URL: string, body: object) => {
     return this.http.post(this.environment.API_URL + '/' + URL, body, { reportProgress: true, observe: 'events' });
   }
-  PUT = (URL: string, body: object): any => {
-  }
   DELETE = (URL: string, id: number) => {
-    return this.http.delete(this.environment.API_URL + '/' + URL + '/' + id).pipe(
-      retry(1)
-    );
+    return this.http.delete(this.environment.API_URL + '/' + URL + '/' + id);
   }
 }

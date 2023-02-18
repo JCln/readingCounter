@@ -76,7 +76,7 @@ export interface IAutomaticImport {
 }
 export interface IFragmentMaster {
     id?: string,
-    zoneId: number,
+    zoneId: number | string,
     zoneTempId?: number,
     routeTitle: string,
     fromEshterak: string,
@@ -113,6 +113,7 @@ export interface ICounterState {
     isMane: boolean,
     canNumberBeLessThanPre: boolean,
     isTavizi: boolean,
+    hasImage: boolean,
     shouldEnterNumber: boolean,
     isXarab: boolean,
     isFaqed: boolean,
@@ -174,7 +175,8 @@ export interface IReadingPeriodKind {
     moshtarakinId: number,
     readingPeriodKindId: number,
     zoneId: number | string,
-    clientOrder: number
+    clientOrder: number,
+    days: number
 }
 // ab baha formular manager
 export interface IAbBahaFormula {

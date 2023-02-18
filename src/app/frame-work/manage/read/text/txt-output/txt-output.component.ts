@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { ITextOutput } from 'interfaces/ireads-manager';
@@ -14,16 +14,12 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class TxtOutputComponent extends FactoryONE {
 
-  dataSource: ITextOutput[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: ITextOutput; } = {};
   newRowLimit: number = 1;
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {
     super();
@@ -34,18 +30,14 @@ export class TxtOutputComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTextOutput) {
-      this.dataSource = this.closeTabService.saveDataForTextOutput;
-    }
-    else {
-      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.textOutputGET);
-      this.closeTabService.saveDataForTextOutput = this.dataSource;
+    if (!this.closeTabService.saveDataForTextOutput) {
+      this.closeTabService.saveDataForTextOutput = await this.readManagerService.getDataSource(ENInterfaces.textOutputGET);
     }
     this.zoneDictionary = await this.readManagerService.getZoneDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForTextOutput, this.zoneDictionary, 'zoneId');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForTextOutput = this.closeTabService.saveDataForTextOutput.slice(0, index).concat(this.closeTabService.saveDataForTextOutput.slice(index + 1));
   removeRow = async (rowData: object) => {
     this.newRowLimit = 1;
     const a = await this.readManagerService.firstConfirmDialog();
@@ -60,7 +52,7 @@ export class TxtOutputComponent extends FactoryONE {
   onRowEditSave = async (dataSource: ITextOutput) => {
     this.newRowLimit = 1;
     if (!this.readManagerService.verification(dataSource)) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForTextOutput[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].zoneId !== 'object') {
@@ -78,15 +70,15 @@ export class TxtOutputComponent extends FactoryONE {
     else {
       await this.readManagerService.addOrEditAuths(ENInterfaces.textOutputEdit, dataSource['dataSource']);
     }
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForTextOutput, this.zoneDictionary, 'zoneId');
   }
   onRowEditCancel(dataSource: object) {
     this.newRowLimit = 1;
-    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
-    delete this.dataSource[dataSource['dataSource'].id];
+    this.closeTabService.saveDataForTextOutput[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+    Converter.convertIdToTitle(this.closeTabService.saveDataForTextOutput, this.zoneDictionary, 'zoneId');
+    delete this.closeTabService.saveDataForTextOutput[dataSource['dataSource'].id];
     if (dataSource['dataSource'].isNew)
-      this.dataSource.shift();
+      this.closeTabService.saveDataForTextOutput.shift();
     return;
   }
   newRow(): ITextOutput {
@@ -109,11 +101,5 @@ export class TxtOutputComponent extends FactoryONE {
       this.refreshTable();
     }
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

@@ -3,7 +3,7 @@
 .mat-dialog-content {
   grid-template-columns: 1fr 1fr;
   color: var(--secondary_7);
-  font-size: $font_s;
+  font-size: var(--font_s);
   text-align: right;
   direction: rtl;
 }

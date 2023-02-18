@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IListManagerPDHistory, IOffLoadPerDay } from 'interfaces/itrackings';
-import { EN_Routes } from 'interfaces/routes.enum';
-import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { DateJalaliService } from 'services/date-jalali.service';
 import { ListManagerService } from 'services/list-manager.service';
-import { UtilsService } from 'services/utils.service';
+import { PageSignsService } from 'services/page-signs.service';
 import { FactoryONE } from 'src/app/classes/factory';
 import { MathS } from 'src/app/classes/math-s';
 
@@ -18,72 +14,65 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./per-day.component.scss']
 })
 export class PerDayComponent extends FactoryONE {
-  trackNumber: string;
-
-  dataSource: IOffLoadPerDay;
-  offLoadPerDayHistory: IListManagerPDHistory[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
   _selectMainDatas: any[];
 
   constructor(
-    private closeTabService: CloseTabService,
-    private listManagerService: ListManagerService,
-    private utilsService: UtilsService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private dateJalaliService: DateJalaliService
+    public closeTabService: CloseTabService,
+    public listManagerService: ListManagerService,
+    private dateJalaliService: DateJalaliService,
+    private PageSignsService: PageSignsService
   ) {
     super();
-    this.getRouteParams();
   }
 
   routeToLMPDXY = (day: string) => {
-    this.utilsService.routeToByParams('wr', { trackNumber: this.dataSource.trackNumber, day: day, distance: this.dataSource.overalDistance });
+    this.listManagerService.routeToLMPDXY(this.closeTabService.saveDataForLMPD, day);
+  }
+  customizeSelectedColumns = (_selectCols: any) => {
+    return _selectCols.filter(items => {
+      if (items.isSelected)
+        return items
+    })
   }
   private insertSelectedColumns = () => {
-    this._selectMainDatas = this.listManagerService.columnSelectedLMPerDayPositions();
-    this._selectCols = this.listManagerService.columnSelectedLMPerDay();
-    this._selectedColumns = this.listManagerService.customizeSelectedColumns(this._selectCols);
-    this.dateJalaliService.sortByDate(this.offLoadPerDayHistory, 'day');
+    this._selectMainDatas = this.listManagerService.getLMPerDayPositions();
+    this._selectCols = this.listManagerService.getLMPerDay();
+    this._selectedColumns = this.customizeSelectedColumns(this._selectCols);
+    this.dateJalaliService.sortByDate(this.closeTabService.saveDataForLMPD.offLoadPerDayHistory, 'day');
   }
   private setGetRanges = () => {
-    this.dataSource.overalDuration = parseFloat(MathS.getRange(this.dataSource.overalDuration));
-    this.dataSource.overalDistance = parseFloat(MathS.getRange(this.dataSource.overalDistance));
+    this.closeTabService.saveDataForLMPD.overalDuration = parseFloat(MathS.getRange(this.closeTabService.saveDataForLMPD.overalDuration));
+    this.closeTabService.saveDataForLMPD.overalDistance = parseFloat(MathS.getRange(this.closeTabService.saveDataForLMPD.overalDistance));
   }
   private setDynamicPartRanges = () => {
-    this.offLoadPerDayHistory.forEach(item => {
+    this.closeTabService.saveDataForLMPD.offLoadPerDayHistory.forEach(item => {
       if (item.duration > 0)
         item.duration = parseFloat(MathS.getRange(item.duration))
       if (item.distance > 0)
         item.distance = parseFloat(MathS.getRange(item.distance))
     })
   }
-  nullSavedSource = () => this.closeTabService.saveDataForLMPD = null;
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
+    if (!this.PageSignsService.perday_pageSign.trackNumber) {
+      this.listManagerService.routeToReading();
     }
-    this.dataSource = await this.listManagerService.getLM(ENInterfaces.ListOffloadedPERDAY, parseInt(this.trackNumber));
-    this.offLoadPerDayHistory = this.dataSource.offLoadPerDayHistory;
+    else {
+      if (canRefresh) {
+        this.closeTabService.saveDataForLMPD = null;
+        this.closeTabService.saveDataForLMPDTrackNumber = null;
+      }
+      if (this.closeTabService.saveDataForLMPDTrackNumber != this.PageSignsService.perday_pageSign.trackNumber || !this.closeTabService.saveDataForLMPD) {
+        this.closeTabService.saveDataForLMPD = await this.listManagerService.getLM(ENInterfaces.ListOffloadedPERDAY, this.PageSignsService.perday_pageSign.trackNumber);
+        this.closeTabService.saveDataForLMPDTrackNumber = this.PageSignsService.perday_pageSign.trackNumber;
+      }
+      this.setGetRanges();
+      this.setDynamicPartRanges();
 
-    this.setGetRanges();
-    this.setDynamicPartRanges();
+      if (this.closeTabService.saveDataForLMPD)
+        this.insertSelectedColumns();
+    }
+  }
 
-    if (this.dataSource)
-      this.insertSelectedColumns();
-  }
-  private getRouteParams = () => {
-    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.trackNumber = this.route.snapshot.paramMap.get('trackNumber');
-        this.classWrapper();
-      })
-    )
-  }
-  toPrePage = () => this.router.navigate([EN_Routes.wrmtrackreading]);
-  refreshTable = () => {
-    return;
-  }
-  ngOnInit(): void { return; }
 }

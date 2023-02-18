@@ -2,7 +2,8 @@ export interface ISearchMoshReq {
     zoneId: number,
     searchBy: number,
     item: string,
-    similar: boolean
+    similar: boolean,
+    showAll: boolean
 }
 export interface ISearchMoshReqDialog {
     zoneId: number,
@@ -46,7 +47,10 @@ export interface ISearchProReportInput {
     counterStateIds: number[],
     masrafStates: number[],
     karbariCodes: number[],
-    fragmentMasterIds: string[]
+    fragmentMasterIds: string[],
+    showAll: boolean,
+    _selectedKindId: string,
+    searchByText: string,
 }
 export enum ENSearchs {
     simple = '_searchSimpleReq'

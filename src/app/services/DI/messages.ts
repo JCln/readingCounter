@@ -1,17 +1,24 @@
 import { EN_messages } from 'interfaces/enums.enum';
-import { IColor, IMessage, ITime } from 'interfaces/inon-manage';
+import { IColor, IMessage, ITime, IToastColor } from 'interfaces/inon-manage';
 import {
-    ENColorText,
     ENRandomNumbers,
     ENSnackBarColors,
     ENSnackBarColorsExact,
     ENSnackBarTimes,
+    ENToastColors,
 } from 'interfaces/ioverall-config';
 
+export enum ENColorText {
+    blue = 'آبی',
+    green = 'سبز',
+    orange = 'نارنجی',
+    red = 'قرمز',
+}
+
 export const broadcastMessages: IMessage[] = [
-    { title: EN_messages.broadTitle1, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage1, exactColor: ENSnackBarColorsExact.info, color: ENSnackBarColors.info, time: ENSnackBarTimes.twentyMili, canSave: true },
-    { title: EN_messages.broadTitle2, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage2, exactColor: ENSnackBarColorsExact.warn, color: ENSnackBarColors.warn, time: ENSnackBarTimes.twentyMili, canSave: true },
-    { title: EN_messages.broadTitle3, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage3, exactColor: ENSnackBarColorsExact.success, color: ENSnackBarColors.success, time: ENSnackBarTimes.twentyMili, canSave: true }
+    { title: EN_messages.broadTitle1, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage1, exactColor: ENSnackBarColorsExact.info, color: ENSnackBarColors.info, seconds: ENSnackBarTimes.twentyMili, canSave: true },
+    { title: EN_messages.broadTitle2, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage2, exactColor: ENSnackBarColorsExact.warn, color: ENSnackBarColors.warn, seconds: ENSnackBarTimes.twentyMili, canSave: true },
+    { title: EN_messages.broadTitle3, text: ENRandomNumbers.twenty, message: EN_messages.broadMessage3, exactColor: ENSnackBarColorsExact.success, color: ENSnackBarColors.success, seconds: ENSnackBarTimes.twentyMili, canSave: true }
 ]
 
 export const times: ITime[] = [
@@ -28,4 +35,10 @@ export const colors: IColor[] = [
     { text: ENColorText.green, value: ENSnackBarColors.success, isClicked: false, background: ENSnackBarColorsExact.success },
     { text: ENColorText.orange, value: ENSnackBarColors.warn, isClicked: false, background: ENSnackBarColorsExact.warn },
     { text: ENColorText.red, value: ENSnackBarColors.danger, isClicked: false, background: ENSnackBarColorsExact.danger }
+]
+export const toastColors: IToastColor[] = [
+    { text: ENColorText.blue, value: ENToastColors.info, isClicked: false, background: ENSnackBarColorsExact.info },
+    { text: ENColorText.green, value: ENToastColors.success, isClicked: false, background: ENSnackBarColorsExact.success },
+    { text: ENColorText.orange, value: ENToastColors.warn, isClicked: false, background: ENSnackBarColorsExact.warn },
+    { text: ENColorText.red, value: ENToastColors.error, isClicked: false, background: ENSnackBarColorsExact.danger }
 ]

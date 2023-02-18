@@ -1,7 +1,5 @@
 <app-prime-table-editable
-[dataSource]="dataSource"
-[_selectCols]="_selectCols"
-[_selectedColumns]="_selectedColumns"
+[dataSource]="closeTabService.saveDataForWaterFormula"
 [_outputFileName]="'abBaha'"
 [_numberOfExtraColumns]="[1, 2]"
 [_sessionName]="'water-session'"
@@ -14,6 +12,7 @@
 (getedExcelSample)="getExcelSample()"
 (refreshedTable)="refreshTable()"
 (openedAddDialog)="openAddDialog()"
+(openedBatchedAddDialog)="openBatchAddDialog()"
 (openedAddExcelDialog)="openAddExcelDialog()"
 (onRowEditedInit)="onRowEditInit($event)"
 (onRowEditedSave)="onRowEditSave($event)"

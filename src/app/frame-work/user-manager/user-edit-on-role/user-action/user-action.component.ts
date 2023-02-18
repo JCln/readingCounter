@@ -19,5 +19,12 @@ export class UserActionComponent {
       t.isSelected = completed
     });
   }
+  toggleSubItemsController(completed: boolean, subTask: any) {
+    subTask.controllerItems.forEach(t => {
+      t.actionItems.forEach(e => {
+        e.isSelected = completed
+      })
+    });
+  }
 
 }

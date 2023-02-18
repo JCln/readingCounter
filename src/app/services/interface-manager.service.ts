@@ -19,18 +19,20 @@ export class InterfaceManagerService {
   GETByQuoteTriple = (URL: string, zoneId: number, kindId: string | number) => {
     return this.mainService.GET(URL + `${zoneId}/${kindId}`);
   }
-  GETBLOB = (URL: string, fileRepositoryId?: string): Observable<any> => {
-    if (fileRepositoryId)
-      return this.mainService.GETBLOB(URL, fileRepositoryId);
+  GETBlobById = (URL: string, fileRepositoryId: string): Observable<any> => {
+    return this.mainService.GETBLOB(URL + '/' + fileRepositoryId);
+  }
+  GETBLOB = (URL: string): Observable<any> => {
     return this.mainService.GETBLOB(URL);
   }
-  GETID = (URL: string, uuid: string) => {
+  GETID = (URL: string, uuid: string): Observable<any> => {
     return this.mainService.GETID(uuid, URL);
   }
 
-  POST = (URL: string, id?: number) => {
-    if (id)
-      return this.mainService.POST(URL, id);
+  POSTById = (URL: string, id: number) => {
+    return this.mainService.POSTById(URL, id);
+  }
+  POST = (URL: string) => {
     return this.mainService.POST(URL);
   }
   POSTARRAYS = (URL: string, arr: any[]) => {

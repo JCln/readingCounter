@@ -1,0 +1,127 @@
+<main class="main">
+    <form #form="ngForm" (ngSubmit)="connectToServer()">
+        <section class="static_part">
+
+            <section class="content">
+                <div class="input_2" [hidden]="!zoneDictionary.length">
+                    <div class="_key">ناحیه</div>
+                    <div class="_value">
+                        <p-dropdown name="zones" [options]="zoneDictionary"
+                            [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.zoneId"
+                            placeholder="انتخاب مورد" [style]="{minWidth: '10rem','width':'100%'}" optionValue="id"
+                            optionLabel="title" filter="true" (onChange)="verificationACounterReaderId()">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <!-- when zone id and kind id get -->
+                <div class="input_2" [hidden]="!readingPeriodKindsDictionary.length">
+                    <div class="_key">نوع دوره</div>
+                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="kindId" name="kindId">
+                        <mat-option *ngFor="let truefalse of readingPeriodKindsDictionary" [value]="truefalse.id"
+                            (click)="verificationReadingPeriod()">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2 this" [hidden]="!readingPeriodDictionary.length">
+                    <div class="_key">دوره قرائت</div>
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.readingPeriodId"
+                        name="readingPeriodId">
+                        <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+
+
+                <div class="input_2 this" *ngIf="userCounterReader.length">
+                    <div class="_key">مامور</div>
+                    <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
+                        [options]="userCounterReader" name="counter-reader"
+                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.counterReaderId"
+                        optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                        placeholder="انتخاب مورد">
+                    </p-dropdown>
+                </div>
+                <div class="input_2">
+                    <div class="_key">سال</div>
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.year" name="year">
+                        <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
+                            {{truefalse.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input_2 double_size">
+                    <div class="_key">ش لیست</div>
+                    <input class="_value double_size" name="listNumber"
+                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.listNumber">
+                </div>
+                <div class="input_2 double_size">
+                    <div class="_key">توضیحات</div>
+                    <input class="_value" name="desc"
+                        [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.description">
+                </div>
+
+            </section>
+
+            <div class="check_boxes">
+                <mat-checkbox name="hasPreNumber"
+                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.hasPreNumber">
+                    شماره
+                    قبلی
+                </mat-checkbox>
+
+                <mat-checkbox name="billId"
+                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.displayBillId">
+                    نمایش شناسه
+                    قبض
+                </mat-checkbox>
+
+                <mat-checkbox name="displayRadif"
+                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.displayRadif">
+                    نمایش
+                    ش.پرونده
+                </mat-checkbox>
+                <mat-checkbox name="skipErrors"
+                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.skipErrors">
+                    نادیده گرفتن خطا
+                </mat-checkbox>
+
+                <i id="sampleExl" (click)="getExcelSample()"
+                    class="tooltip _circle_border _xlsx_download pi pi-download">
+                    <div class="tooltip_text">دانلود نمونه فایل Excel</div>
+                </i>
+            </div>
+        </section>
+        <section *ngIf="canShowEditButton" class="dynamic_content">
+            <div class="input_2 this" [hidden]="!_showAlalHesabPercent">
+                <div class="_key">درصد علی‌الحساب</div>
+                <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
+                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.alalHesabPercent">
+            </div>
+            <div class="input_2 this" [hidden]="!_showimagePercent">
+                <div class="_key">درصد تصویر</div>
+                <input class="_value" type="number" min="0" max="100" name="imagePercent"
+                    [(ngModel)]="closeTabService.saveDataForImportDataFileExcelReq.imagePercent">
+            </div>
+        </section>
+        <section>
+            <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="فایلی انتخاب نشده است">
+                <span class="pi pi-file-excel"></span>
+                فایل <small>Excel</small> انتخاب نمایید
+            </label>
+            <label *ngIf="choosenFileName" class="label_choose_file" for="files">
+                {{choosenFileName}}
+            </label>
+            <input #screenshotInput name="فایلی انتخاب کنید" class="btn_2 _choose_file hidden" type="file"
+                name="screenshot" (change)="onChange($event)" id="files">
+
+        </section>
+
+        <footer>
+            <button *ngIf="_canShowAddButton" type="submit" class="btn_1">صدور لیست</button>
+        </footer>
+    </form>
+</main>

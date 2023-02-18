@@ -1,0 +1,33 @@
+<section class="over_all">
+    <form #form="ngForm" (ngSubmit)="uploadFile(form)" class="content">
+        <h1 class="title">ارسال ویدیو</h1>
+        <div class="_desc">
+
+            <input class="input_1" type="text" placeholder="پانوشت" name="caption"
+                [(ngModel)]="messageService.toastVideoWithCaptionReq.caption">
+
+            <label *ngIf="!choosenFileName" class="btn_2 not_choosen_file" for="files" title="ویدیویی انتخاب نشده است">
+                <span class="icon_android pi pi-video"></span>
+                <small>ویدیویی</small> انتخاب نمایید
+            </label>
+            <label *ngIf="choosenFileName" class="label_choose_file" for="files">
+                {{choosenFileName}}
+            </label>
+            <input #screenshotInput name="ویدیویی انتخاب نمایید" class="btn_2 _choose_file hidden" type="file"
+                name="screenshot" (change)="onChange($event)" id="files">
+
+            <!-- porgress bar -->
+            <label for="progress"></label>
+            <progress *ngIf="progress > 0" id="progress" [value]="progress" min="0" max="100">{{progress}}</progress>
+
+            <div class="change_pass">
+                <button *ngIf="progress == 0" class="btn_1" type="submit">
+                    <div class="fa fa-upload"></div>
+                    ارسال
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+</section>

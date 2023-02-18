@@ -1,10 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ENSelectedColumnVariables } from 'interfaces/ioverall-config';
+import { PrimeNGConfig } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BrowserStorageService } from 'services/browser-storage.service';
+import { InteractionService } from 'services/interaction.service';
 import { OutputManagerService } from 'services/output-manager.service';
-import { SearchService } from 'services/search.service';
+import { ProfileService } from 'services/profile.service';
+import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 import { FactorySharedPrime } from 'src/app/classes/factory';
 
@@ -12,37 +17,20 @@ import { FactorySharedPrime } from 'src/app/classes/factory';
 @Component({
   selector: 'app-prime-table',
   templateUrl: './prime-table.component.html',
-  styleUrls: ['./prime-table.component.scss']
+  styleUrls: ['./prime-table.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush // commented => cause sideEffect to dictionary Wrapper response when data need to change after converted dictionary
 })
 export class PrimeTableComponent extends FactorySharedPrime {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
+  canShowTable: boolean = true;
 
-
-  @Input() dataSource: any[] = [];
-  @Input() _selectCols: any = [];
-  @Input() _selectedColumns: any[];
-  @Input() _outputFileName: string;
-  @Input() _rowsPerPage: number[] = [10, 100, 1000, 5000];
-  @Input() _rowsNumbers = 10;
-  @Input() _numberOfExtraColumns: number[];
-  @Input() _sessionName: string;
-  @Input() _selectedColumnsToRemember: string;
-  @Input() _backToPreviousText: string;
-  @Input() _captionEnabled: boolean = true;
-  @Input() _sortField: string = '';
-  @Input() _sortOrder: number = -1;
+  @Input() _sortOrder: number = 1;
   @Input() _sortMode: string = 'single';
-  @Input() _outputEnabled: boolean = true;
-  @Input() _backToPreviousEnabled: boolean = false;
-  @Input() _checkUpName: string = '';
-  @Input() _multiSelectEnable: boolean = true;
-  @Input() _allComponentIsModify: boolean = false;
-  @Input() _hasCollapsible: boolean = false;
-  @Input() _canShowButton: boolean = true;
+  @Input() _isSortable: boolean = true;
+  @Input() _hasCollapsible: boolean = false;  
   @Input() _isCollaped: boolean = false;
   @Input() _calculableSUM: boolean = false;
-  @Input() _isCustomSort: boolean = false;
-  @Input() _hasSaveColumns: boolean = true;
+  @Input() _hasAggregating: boolean = false;
 
   @Output() customedSort = new EventEmitter<any>();
   @Output() filteredEvent = new EventEmitter<any>();
@@ -55,7 +43,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() backedToImportedConfirmDialog = new EventEmitter<any>();
   @Output() routedToLMPayDay = new EventEmitter<any>();
   @Output() openedBriefKardexDialog = new EventEmitter<any>();
-  @Output() showedWOUIAsCarousel = new EventEmitter<any>();
   @Output() routedToLMAll = new EventEmitter<any>();
   @Output() routedToFollowUp = new EventEmitter<any>();
   @Output() showedMoreDetails = new EventEmitter<any>();
@@ -69,9 +56,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   @Output() backedToPrevious = new EventEmitter<any>();
   @Output() downloadedAPK = new EventEmitter<any>();
   @Output() clickedElmah = new EventEmitter<any>();
-  @Output() registeredAssess = new EventEmitter<any>();
   @Output() showedPictures = new EventEmitter<any>();
-  @Output() showSearchedOptionsDialog = new EventEmitter<any>();
   @Output() routedToOffload = new EventEmitter<any>();
   @Output() openedAddDialog = new EventEmitter<any>();
   @Output() routedToEditPage = new EventEmitter<any>();
@@ -89,17 +74,32 @@ export class PrimeTableComponent extends FactorySharedPrime {
   constructor(
     public outputManagerService: OutputManagerService,
     public browserStorageService: BrowserStorageService,
-    public searchService: SearchService,
     public columnManager: ColumnManager,
-    public utilsService: UtilsService
+    public utilsService: UtilsService,
+    public config: PrimeNGConfig,
+    public dialogService: DialogService,
+    public readingReportManagerService: ReadingReportManagerService,
+    public profileService: ProfileService,
+    public authService: AuthService,
+    public interactionService: InteractionService
   ) {
     super(
       browserStorageService,
       utilsService,
-      columnManager
+      columnManager,
+      config,
+      dialogService,
+      profileService,
+      authService
     );
   }
-
+  ngOnChanges(): void {
+    if (this.dataSource) {
+      this.restoreLatestColumnChanges();
+      this.filterCounterState();
+      this.doAggregate();
+    }
+  }
   refreshTable() {
     this.refreshedTable.emit(true);
   }
@@ -109,6 +109,9 @@ export class PrimeTableComponent extends FactorySharedPrime {
   forceOffload = (dataSource: object, ri: number) => {
     this.forcedOffload.emit({ dataSource, ri });
   }
+  customSort = (dataSource: any) => {
+    this.customedSort.emit(dataSource);
+  }
   backToImportedConfirmDialog = (dataSource: object, ri: number) => {
     this.backedToImportedConfirmDialog.emit({ dataSource, ri });
   }
@@ -117,9 +120,6 @@ export class PrimeTableComponent extends FactorySharedPrime {
   }
   openBriefKardexDialog = (dataSource: object) => {
     this.openedBriefKardexDialog.emit(dataSource);
-  }
-  showWOUIAsCarousel = (dataSource: any, ri: number) => {
-    this.showedWOUIAsCarousel.emit({ dataSource, ri });
   }
   routeToLMAll = (dataSource: object) => {
     this.routedToLMAll.emit(dataSource);
@@ -163,14 +163,8 @@ export class PrimeTableComponent extends FactorySharedPrime {
   connectToElmah = (dataSource: string) => {
     this.clickedElmah.emit(dataSource);
   }
-  registerAssessAdd = () => {
-    this.registeredAssess.emit();
-  }
   showPictures = ($event) => {
     this.showedPictures.emit($event);
-  }
-  showSearchOptionsDialog = () => {
-    this.showSearchedOptionsDialog.emit();
   }
   routeToOffload = (dataSource: object, ri: number) => {
     this.routedToOffload.emit({ dataSource, ri });
@@ -181,7 +175,7 @@ export class PrimeTableComponent extends FactorySharedPrime {
   routeToEditPage = (dataSource: string) => {
     this.routedToEditPage.emit(dataSource);
   }
-  routeToLoggs = (dataSource: string) => {
+  routeToLoggs = (dataSource: object) => {
     this.routedToLoggs.emit(dataSource);
   }
   showExactConfig = (dataSource: number) => {
@@ -217,17 +211,78 @@ export class PrimeTableComponent extends FactorySharedPrime {
   routeToBatch = (dataSource: object) => {
     this.routedToBatch.emit(dataSource);
   }
-  customSort = (dataSource: any) => {
-    this.customedSort.emit(dataSource);
-  }
   routeToSingle = (dataSource: object) => {
     this.routedToSingle.emit(dataSource);
   }
-  calcSums(): number {
-    let total: number = 0;
-    this.dataSource.map(item => {
-      total += item.itemQuantity
-    })
-    return total;
+  calcSums(param: string): number {
+    if (this.dataSource) {
+      let total: number = 0;
+      for (let index = 0; index < this.dataSource.length; index++) {
+        total += this.dataSource[index][param];
+      }
+      return total;
+    }
+  }
+  updateRowGroupMetaData(toAggregate: string) {
+    let tempRowGroupMeta = {};
+
+    if (this.dataSource) {
+      for (let i = 0; i < this.dataSource.length; i++) {
+
+        let rowData = this.dataSource[i][toAggregate];
+
+        if (i == 0) {
+          tempRowGroupMeta[rowData] = { index: 0, size: 1 };
+        }
+        else {
+          let previousRowData = this.dataSource[i - 1][toAggregate];
+          if (rowData === previousRowData)
+            tempRowGroupMeta[rowData].size++;
+          else
+            tempRowGroupMeta[rowData] = { index: i, size: 1 };
+        }
+      }
+    }
+    this.profileService._agg.rowGroupMetadata = tempRowGroupMeta;
+  }
+
+  doAggregate = () => {
+    const _agg = this.profileService._agg.flag;
+
+    if (_agg) {
+      this._sortField = this.profileService._agg.selectedAggregate;
+      this.updateRowGroupMetaData(this.profileService._agg.selectedAggregate);
+    }
+    else {
+      this.updateRowGroupMetaData('');
+    }
+  } 
+  doCustomSort = (event: any) => {
+    event.data.sort((data1, data2) => {
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
+
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+      return (event.order * result);
+    });
+  }
+  customSortFunction(event: any) {
+    this.doCustomSort(event);
+    this.doAggregate();
+  }
+  resetAggregation = () => {
+    this.profileService._agg.selectedAggregate = '';
+    this.doAggregate();
   }
 }

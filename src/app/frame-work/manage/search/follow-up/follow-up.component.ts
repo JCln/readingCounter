@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
 import { IObjectIteratation, ISearchInOrderTo } from 'interfaces/ioverall-config';
 import { IFollowUp, IFollowUpHistory } from 'interfaces/isearchs';
 import { IOffLoadPerDay } from 'interfaces/itrackings';
@@ -15,20 +16,19 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./follow-up.component.scss']
 })
 export class FollowUpComponent extends FactoryONE {
-  _isCollapsed: boolean = false;
-  trackNumber: number;
   shouldActive: boolean = false;
   _showDesc: IObjectIteratation[] = [];
   _defColumns: any[];
-  canShowGraph: boolean = false;
   showInOrderTo: ISearchInOrderTo[] = [
     {
       title: 'گراف',
-      isSelected: true
+      isSelected: true,
+      key:'Graph'
     },
     {
       title: 'جدول',
-      isSelected: false
+      isSelected: false,
+      key:'Table'
     }
   ]
   clonedProducts: { [s: string]: IFollowUpHistory; } = {};
@@ -39,9 +39,8 @@ export class FollowUpComponent extends FactoryONE {
 
 
   constructor(
-    private trackingManagerService: TrackingManagerService,
-    private closeTabService: CloseTabService,
-
+    public trackingManagerService: TrackingManagerService,
+    public closeTabService: CloseTabService,
     private authService: AuthService,
     private followUpService: FollowUpService
   ) {
@@ -49,8 +48,11 @@ export class FollowUpComponent extends FactoryONE {
     this.classWrapper();
   }
 
-  toPreStatus = (dataSource: IFollowUpHistory) => {
-    this.trackingManagerService.backToConfirmDialog(dataSource.id);
+  toPreStatus = async (dataSource: IFollowUpHistory) => {
+    const a = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_backToPrev, true, false);
+    if (a) {
+      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingPRE, dataSource.id, a);
+    }
   }
   private makeConfigs = async () => {
     this.changeHsty = this.dataSource.changeHistory;
@@ -58,12 +60,12 @@ export class FollowUpComponent extends FactoryONE {
     this.insertToDesc();
   }
   connectToServer = async () => {
-    if (this.trackingManagerService.verificationFollowUPTrackNumber(this.trackNumber)) {
-      this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.trackNumber);
+    if (this.trackingManagerService.verificationTrackNumber(this.closeTabService.saveDataForFollowUpReq.trackNumber)) {
+      this.dataSource = await this.trackingManagerService.getDataSourceByQuote(ENInterfaces.trackingFOLLOWUP, this.closeTabService.saveDataForFollowUpReq.trackNumber);
       if (this.trackingManagerService.isValidationNull(this.dataSource))
         return;
       this.closeTabService.saveDataForFollowUp = this.dataSource;
-      this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.trackNumber.toString());
+      this.dataSourceAUX = await this.trackingManagerService.getLMPD(this.closeTabService.saveDataForFollowUpReq.trackNumber.toString());
       this.closeTabService.saveDataForFollowUpAUX = this.dataSourceAUX;
       this.makeConfigs();
 
@@ -81,7 +83,7 @@ export class FollowUpComponent extends FactoryONE {
      * then data were saved     
      */
     if (this.followUpService.hasTrackNumber()) {
-      this.trackNumber = this.followUpService.getTrackNumber();
+      this.closeTabService.saveDataForFollowUpReq.trackNumber = this.followUpService.getTrackNumber();
       this.connectToServer();
       this.followUpService.setTrackNumber(null);
       return;
@@ -115,10 +117,10 @@ export class FollowUpComponent extends FactoryONE {
   insertToDesc = () => {
     if (this.dataSourceAUX) {
       this.trackingManagerService.setGetRanges(this.dataSourceAUX);
-      this._selectColumnsAUX = this.trackingManagerService.columnSelectedLMPerDayPositions();
+      this._selectColumnsAUX = this.trackingManagerService.getLMPerDayFollowUpPositions();
     }
-    this._showDesc = this.trackingManagerService.columnFollowUpView();
-    this._defColumns = this.trackingManagerService.columnDefColumns();
+    this._showDesc = this.trackingManagerService.getFollowUpView();
+    this._defColumns = this.trackingManagerService.getColumnDefColumns();
     this.clearUNUsables();
   }
   showInMap = () => {
@@ -126,6 +128,7 @@ export class FollowUpComponent extends FactoryONE {
   }
   routeToLMAll = (row: IFollowUpHistory) => {
     row.listNumber = this.dataSourceAUX.listNumber;
+    row.trackNumber = this.dataSourceAUX.trackNumber;
     this.trackingManagerService.routeToLMAll(row);
   }
   ngOnInit(): void { return; }

@@ -8,7 +8,11 @@
     <section class="auth_1" *ngFor="let item of userAddData" [ngSwitch]="item.title">
         <div *ngSwitchCase="switchCaseName">
             <section class="auth_2" *ngFor="let moduleIt of item.moduleItems">
-                <div class="separator text">{{moduleIt.title}}</div>
+                <div class="separator text">
+                    <mat-checkbox (change)="toggleSubItemsController($event.checked , moduleIt)">
+                    </mat-checkbox>
+                    {{moduleIt.title}}
+                </div>
 
                 <section class="auth_3" *ngFor="let controllerIt of moduleIt.controllerItems">
                     <mat-checkbox (change)="toggleSubItems($event.checked , controllerIt.actionItems)" class="text_btn">

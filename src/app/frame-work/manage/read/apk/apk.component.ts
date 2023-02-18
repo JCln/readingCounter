@@ -1,10 +1,13 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { IAPK } from 'interfaces/inon-manage';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
+import { EN_messages } from 'interfaces/enums.enum';
+import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ApkService } from 'services/apk.service';
 import { CloseTabService } from 'services/close-tab.service';
 import { OutputManagerService } from 'services/output-manager.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -17,8 +20,6 @@ export class ApkComponent extends FactoryONE {
   choosenFileName: string = '';
   fileNameAfterChoose: string = '';
   progress: number = 0;
-  _selectedColumns: any[];
-  _selectCols: any = [];
 
   uploadForm: any = {
     versionCode: null,
@@ -27,19 +28,17 @@ export class ApkComponent extends FactoryONE {
     file: File
   }
 
-  dataSource: IAPK[] = [];  
-
   constructor(
     private apkService: ApkService,
-    private closeTabService: CloseTabService,
-    private outputManagerService: OutputManagerService
+    public closeTabService: CloseTabService,
+    private outputManagerService: OutputManagerService,
+    private authService: AuthService
   ) {
     super();
   }
 
   downloadAPK = async () => {
     const a = await this.apkService.getlastAPK();
-    console.log(a);
     this.outputManagerService.downloadFile(a, '.apk');
   }
   onChange(event) {
@@ -70,7 +69,7 @@ export class ApkComponent extends FactoryONE {
           this.progress = Math.round(event.loaded / event.total * 100);
           break;
         case HttpEventType.Response:
-          this.apkService.showSuccessMessage(event.body.message);
+          this.apkService.showSuccessMessage(event.body.message, ENSnackBarColors.success);
           setTimeout(() => {
             this.progress = 0;
           }, 1500);
@@ -82,19 +81,28 @@ export class ApkComponent extends FactoryONE {
       this.closeTabService.saveDataForAPKManager = null;
 
     if (this.closeTabService.saveDataForAPKManager === null || !this.closeTabService.saveDataForAPKManager) {
-      this.dataSource = await this.apkService.getDataSource();
-      this.closeTabService.saveDataForAPKManager = this.dataSource;
+      this.closeTabService.saveDataForAPKManager = await this.apkService.getDataSource();
     }
-    else {
-      this.dataSource = this.closeTabService.saveDataForAPKManager;
-    }        
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
+  getUserRole = (): boolean => {
+    const jwtRole = this.authService.getAuthUser();
+    return jwtRole.roles.toString().includes('admin') ? true : false;
   }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  removeRow = async (dataSource: number) => {
+    if (this.getUserRole()) {
+
+      if (await this.apkService.firstConfirmDialog()) {
+        const a = await this.apkService.postById(ENInterfaces.APKRemove, dataSource['dataSource'].id);
+        if (a) {
+          this.apkService.showSuccessMessage(a.message, ENSnackBarColors.success);
+          this.refreshTable();
+        }
+      }
+
+    } else {
+      this.apkService.showSuccessMessage(EN_messages.access_denied, ENSnackBarColors.warn);
+    }
   }
+
 
 }

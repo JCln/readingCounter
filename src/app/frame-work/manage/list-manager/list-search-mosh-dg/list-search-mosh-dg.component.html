@@ -11,7 +11,7 @@
             <input class="input_1" type="number" placeholder="اشتراک را وارد نمایید " name="counterNumber"
                 [(ngModel)]="listManagerService.searchReqMoshDialog.item" autofocus>
 
-            <button type="submit" class="tooltip btn_2_o">
+            <button type="submit" class="tooltip btn_1">
                 <i class="pi pi-search"></i>
                 جستجو
             </button>
@@ -20,7 +20,7 @@
 </main>
 
 <app-prime-table *ngIf="dataSource.length" [dataSource]="dataSource" [_outputFileName]="'searchMoshDialog'"
-    [_checkUpName]="'search_moshtarak'" [_selectedColumnsToRemember]="'selectedListManagerMoshDialog'"
+    [_checkUpName]="'allComponent'" [_selectedColumnsToRemember]="'selectedListManagerMoshDialog'"
     [_numberOfExtraColumns]="[1,2,3]" (showedPictures)="listManagerService.getReadingReportTitles($event)"
-    (showedInMapSingle)="openMapDialog($event)" (refreshedTable)="refreshTable()" (showedWOUIAsCarousel)="openWOUMDialog($event)">
+    (showedInMapSingle)="openMapDialog($event)" (refreshedTable)="refreshTable()">
 </app-prime-table>

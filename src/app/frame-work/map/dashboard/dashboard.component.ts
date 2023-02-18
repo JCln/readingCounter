@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { DashboardService } from 'services/dashboard.service';
 import { InteractionService } from 'services/interaction.service';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
+import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 @Component({
   selector: 'app-dashboard',

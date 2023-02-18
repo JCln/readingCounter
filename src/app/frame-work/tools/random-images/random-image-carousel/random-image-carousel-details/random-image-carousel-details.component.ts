@@ -1,16 +1,17 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors, IDictionaryManager } from 'interfaces/ioverall-config';
+import { ProfileService } from 'services/profile.service';
 import { ToolsService } from 'services/tools.service';
 import { Converter } from 'src/app/classes/converter';
-import { ImageAttributionFile } from 'src/app/Interfaces/tools';
+import { ImageAttributionFile } from 'src/app/interfaces/tools';
 
 @Component({
   selector: 'app-random-image-carousel-details',
   templateUrl: './random-image-carousel-details.component.html',
   styleUrls: ['./random-image-carousel-details.component.scss']
 })
-export class RandomImageCarouselDetailsComponent implements OnChanges {
+export class RandomImageCarouselDetailsComponent implements OnChanges, AfterViewInit {
 
   @Input() fileRepositoryId: string;
   @Input() onOffLoadId: string;
@@ -21,10 +22,14 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
   @Input() sizeInByte: string;
   @Input() allImages: any;
   @Input() imageDescription: string;
+  @Input() zoneTitle: string;
+  @Input() trackNumber: number;
+  @Input() counterReaderName: string;
+  @Input() counterNumber: number;
+  @Input() counterStateTitle: string;
 
   degree: number = 0;
   dictionary: IDictionaryManager[] = [];
-  _isCollapsed: boolean = false;
   _addOrEdit: ImageAttributionFile = {
     imageAttributionIds: [],
     fileRepositoryId: '',
@@ -33,12 +38,13 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
 
 
   constructor(
-    private toolsService: ToolsService
+    public toolsService: ToolsService,
+    public profileService: ProfileService
   ) { }
 
   getImageAttributionFile = async () => {
     if (this.fileRepositoryId)
-      this.dictionary = (await this.toolsService.getDataSource(ENInterfaces.getImageAttributionAll, this.fileRepositoryId)).dictionary;
+      this.dictionary = (await this.toolsService.getDataSourceById(ENInterfaces.getImageAttributionAll, this.fileRepositoryId)).dictionary;
   }
   ngOnChanges(): void {
     this.getImageAttributionFile();
@@ -53,12 +59,6 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
       this.toolsService.showSnack(res.message, ENSnackBarColors.success);
 
   }
-  downloadImg = (src: string) => {
-    const link = document.createElement('a');
-    link.href = src;
-    link.download = `${new Date().toLocaleDateString()}.jpg`;
-    link.click();
-  }
   rotateRightImg = () => {
     const a = document.querySelector('.main-img') as HTMLElement;
     this.degree += 90;
@@ -68,5 +68,16 @@ export class RandomImageCarouselDetailsComponent implements OnChanges {
     const a = document.querySelector('.main-img') as HTMLElement;
     this.degree -= 90;
     a.style.transform = `rotate(${this.degree + 'deg'}`;
+  }
+  addStylesToImg = () => {
+    const a = this.profileService.getImg();
+    const img = document.querySelector('.main-img') as HTMLElement;
+
+    img.style.width = a.width;
+    img.style.height = a.height;
+    img.style.objectFit = a.objectFit;
+  }
+  ngAfterViewInit(): void {
+    this.addStylesToImg();
   }
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import {
@@ -14,44 +13,33 @@ import { IAutomaticImportAddEdit } from 'interfaces/ireads-manager';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { UtilsService } from 'services/utils.service';
+import { ColumnManager } from 'src/app/classes/column-manager';
 import { MathS } from 'src/app/classes/math-s';
 
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { IFragmentDetails, IFragmentMaster } from '../Interfaces/ireads-manager';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { IFragmentDetails, IFragmentMaster } from '../interfaces/ireads-manager';
+import { EN_Routes } from '../interfaces/routes.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FragmentManagerService {
-  fragmentMaster: IFragmentMaster;
   fragmentDetails: IFragmentDetails;
-
   zoneDictionary: IDictionaryManager[] = [];
+  fragmentDetails_pageSign = {
+    GUid: null
+  };
 
   columnSelectedFragmentMaster = (): IObjectIteratation[] => {
-    return [
-      { field: 'zoneId', header: 'ناحیه', isSelected: true, readonly: true },
-      { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
-      { field: 'isValidated', header: 'تایید شده', isSelected: true, readonly: true, isBoolean: true },
-    ];
+    return this.columnManager.columnSelectedMenus('_fragmentMaster');
   }
   columnSelectedFragmentDetails = (): IObjectIteratation[] => {
-    return [
-      { field: 'routeTitle', header: 'مسیر', isSelected: true, readonly: false },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: false, ltr: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: false, ltr: true },
-      { field: 'orderDigit', header: 'ترتیب', isSelected: true, readonly: true },
-      { field: 'orderPersian', header: 'عنوان ترتیب', isSelected: true, readonly: true }
-    ];
+    return this.columnManager.columnSelectedMenus('fragmentDetails');
   }
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
-    private dialog: MatDialog
+    private columnManager: ColumnManager
   ) { }
 
   getDataSourceByQuote = (method: ENInterfaces, id: string): Promise<any> => {
@@ -104,7 +92,10 @@ export class FragmentManagerService {
     return this.utilsService.getRouteBySplit('/');
   }
   routeToFragmentDetails = (route: string) => {
-    this.utilsService.routeToByParams(EN_Routes['wrmrnob/'], route);
+    this.fragmentDetails_pageSign.GUid = route;
+    console.log(route);
+
+    this.utilsService.routeToByUrl(EN_Routes.wrmrnobDetail);
   }
   routeToAutomaticImport = () => {
     this.utilsService.routeTo(EN_Routes.wrmrnobautoImport);
@@ -147,52 +138,52 @@ export class FragmentManagerService {
   /* VERIFICATION */
 
   firstConfirmDialog = (): Promise<any> => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
-  private masterValidation = (): boolean => {
-    if (!this.nullValidation(this.fragmentMaster.zoneId, EN_messages.insert_zone))
+  masterValidation = (body: IFragmentMaster): boolean => {
+    console.log(body);
+    if (MathS.isNull(body.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
       return false;
-    if (!this.nullValidation(this.fragmentMaster.fromEshterak, EN_messages.insert_fromEshterak))
+    }
+    if (MathS.isNull(body.fromEshterak)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromEshterak);
       return false;
-    if (!this.nullValidation(this.fragmentMaster.toEshterak, EN_messages.insert_ToEshterak))
+    }
+    if (MathS.isNull(body.toEshterak)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_ToEshterak);
       return false;
-    if (!this.nullValidation(this.fragmentMaster.routeTitle, EN_messages.insert_title_route))
+    }
+    if (MathS.isNull(body.routeTitle)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_title_route);
+      return false;
+    }
+    if (!this.NANValidation(body.fromEshterak, EN_messages.format_invalid_from_eshterak))
+      return false;
+    if (!this.NANValidation(body.fromEshterak, EN_messages.format_invalid_to_eshterak))
       return false;
 
-    if (!this.NANValidation(this.fragmentMaster.fromEshterak, EN_messages.format_invalid_from_eshterak))
-      return false;
-    if (!this.NANValidation(this.fragmentMaster.fromEshterak, EN_messages.format_invalid_to_eshterak))
-      return false;
-
-    if (!MathS.isSameLength(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
+    if (!MathS.isSameLength(body.fromEshterak, body.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.sameLength_eshterak);
       return false;
     }
 
-    if (!MathS.isFromLowerThanToByString(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak)) {
+    if (!MathS.isFromLowerThanToByString(body.fromEshterak, body.toEshterak)) {
       this.utilsService.snackBarMessageWarn(EN_messages.lessThan_eshterak);
       return false;
     }
 
-    if (!MathS.lengthControl(this.fragmentMaster.fromEshterak, this.fragmentMaster.toEshterak, 5, 15)) {
+    if (!MathS.lengthControl(body.fromEshterak, body.toEshterak, 5, 15)) {
       this.utilsService.snackBarMessageWarn(EN_messages.format_invalid_esterak);
       return false;
     }
+
     return true;
   }
   ValidationMasterNoMessage = (fragmentMaster: IFragmentMaster): boolean => {
@@ -324,10 +315,6 @@ export class FragmentManagerService {
     }
     return true;
   }
-  verificationMaster = (fragmentMaster: IFragmentMaster): boolean => {
-    this.fragmentMaster = fragmentMaster;
-    return this.masterValidation();
-  }
   verificationDetails = (fragmentDetails: IFragmentDetails): boolean => {
     this.fragmentDetails = fragmentDetails;
     return this.detailsValidation();
@@ -340,10 +327,6 @@ export class FragmentManagerService {
         a = item.id
     })
     return a;
-  }
-  setZoneDictionary = (zoneDic: IDictionaryManager[]) => {
-    if (!this.zoneDictionary)
-      this.zoneDictionary = zoneDic;
   }
   customizeSelectedColumns = (_selectCols: any) => {
     return _selectCols.filter(items => {

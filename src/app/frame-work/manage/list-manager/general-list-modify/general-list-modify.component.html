@@ -2,62 +2,51 @@
     <div class="overall-info">
         <div class="input_2">
             <div class="_key">ش.پیگیری</div>
-            <input [readOnly]="true" class="_value" name="trackNumber" [(ngModel)]="pageSignTrackNumber">
+            <input [readOnly]="true" class="_value" name="trackNumber"
+                [(ngModel)]="allListsService.generalModifyLists_pageSign.trackNumber">
         </div>
         <div class="input_2">
             <div class="_key">ش.لیست</div>
-            <input [readOnly]="true" class="_value" name="listNumber"
+            <input [readOnly]="true" class="_value _bigger_input" name="listNumber"
                 [(ngModel)]="allListsService.generalModifyLists_pageSign.listNumber">
+        </div>
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
+            <input [readOnly]="true" class="_value" name="zone"
+                [(ngModel)]="allListsService.generalModifyLists_pageSign.zoneTitle">
         </div>
     </div>
     <div class="radios">
-        <mat-radio-group [(ngModel)]="counterStateValue" class="radio_group" aria-labelledby="radio_group" name="counterState">
-            <mat-radio-button class="radio_button" [value]="-1" (change)="updateOnChangedCounterState($event)">
-                عدم قرائت
-            </mat-radio-button>
-            <mat-radio-button class="radio_button" *ngFor="let orderType of counterStateByZoneDictionary"
-                [value]="orderType.id" (change)="updateOnChangedCounterState($event)">
-                {{orderType.title}}
-            </mat-radio-button>
-        </mat-radio-group>
+        <div *ngFor="let orderType of counterStateForModifyDictionary" [ngClass]="{'under_zero': orderType.id < 0}">
+            <div class="p-field-radiobutton">
+                <p-radioButton name="orderByDate" [value]="orderType.id"
+                    [(ngModel)]="listManagerService.counterStateValue" [inputId]="orderType.id"
+                    (onClick)="updateOnChangedCounterState(orderType.id)">
+                </p-radioButton>
+                <label [for]="orderType.id">{{orderType.title}}</label>
+            </div>
+        </div>
     </div>
 </section>
 
 <main style="position: relative; ">
-    <app-prime-table-editable 
-    [hidden]="showCarousel" 
-    [dataSource]="dataSource"     
-    [_checkUpName]="'generalListModify'" 
-    [_outputFileName]="'generalListModify'"
-    [_sessionName]="'generalListModify'"
-    [_selectedColumnsToRemember]="'selectedGeneralModify'" 
-    [_dictionaryName]="'counterStateId'"
-    [dictionary]="counterStateByZoneDictionary" 
-    [_secondDictionaryName]="'modifyType'"
-    [secondDictionary]="modifyType" 
-    [_numberOfExtraColumns]="[1,2,3,4,5,6]" 
-    [_backToPreviousEnabled]=true 
-    [_backToPreviousText]="'بازگشت به صفحه قبلی'"
-    [_isInRowEditing]="true"
-    (receivedDateJalali)="receiveTableDate($event)"
-    (dropDownChanges)="dataSource['counterStateId']" 
-    (customedSort)="listManagerService.customSort($event)" 
-    (refreshedTable)="refreshTable()"
-    (backedToPrevious)="toPrePage()" 
-    (filteredEvent)="filteredTableEvent($event)"    
-    (showedPictures)="getReadingReportTitles($event)"
-    (showedInMapSingle)="openMapDialog($event)" 
-    (showedWOUIAsCarousel)="doShowCarousel($event)"
-    (openedMoshtarakinDialog)="openMoshtarakinDialog($event)"
-    (onRowEditedInit)="onRowEditInit($event)"
-    (onRowEditedSave)="onRowEditSave($event)" 
-    (openedBriefKardexDialog)="openBriefKardexDialog($event)"
-    (onRowEditedCancelRowEditing)="onRowEditCancel($event)">
+    <app-prime-table-editable [hidden]="showCarousel" [dataSource]="closeTabService.saveDataForLMGeneralModify"
+        [_checkUpName]="'generalListModify'" [_outputFileName]="'generalListModify'"
+        [_sessionName]="'generalListModify'" [_selectedColumnsToRemember]="'selectedGeneralModify'"
+        [_dictionaryName]="'counterStateId'" [dictionary]="counterStateByZoneDictionary"
+        [_secondDictionaryName]="'modifyType'" [secondDictionary]="modifyType" [_numberOfExtraColumns]="[1,2,3,4,5,6]"
+        [_backToPreviousEnabled]=true [_backToPreviousText]="'بازگشت به صفحه قبلی'" [_isInRowEditing]="true"
+        (receivedDateJalali)="receiveTableDate($event)"
+        (dropDownChanges)="closeTabService.saveDataForLMGeneralModify['counterStateId']"
+        (customedSort)="listManagerService.customSort($event)" (refreshedTable)="refreshTable()"
+        (filteredEvent)="filteredTableEvent($event)" (showedPictures)="getReadingReportTitles($event)"
+        (showedInMapSingle)="openMapDialog($event)" (showedWOUIAsCarousel)="doShowCarousel($event.dataSource)"
+        (openedMoshtarakinDialog)="openMoshtarakinDialog($event)" (onRowEditedInit)="onRowEditInit($event)"
+        (onRowEditedSave)="onRowEditSave($event)" (openedBriefKardexDialog)="openBriefKardexDialog($event)"
+        (onRowEditedCancelRowEditing)="onRowEditCancel($event)" (getedExcelSample)="getExcel()">
     </app-prime-table-editable>
 
-    <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource"
-        (cancelClicked)="carouselCancelClicked()" (prevClicked)="carouselPrevItem()"
-        (nextClicked)="carouselNextItem()">
-        <app-woum></app-woum>
+    <app-carousel-woum *ngIf="showCarousel" [dataSource]="carouselDataSource" (cancelClicked)="carouselCancelClicked()"
+        (prevClicked)="carouselPrevItem()" (nextClicked)="carouselNextItem()">
     </app-carousel-woum>
 </main>

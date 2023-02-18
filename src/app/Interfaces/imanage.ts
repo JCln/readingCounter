@@ -1,4 +1,4 @@
-import { ENClientServerErrors } from './ioverall-config';
+import { IDictionaryManager } from './ioverall-config';
 
 export interface IForbiddenManager {
     gisAccuracy: string,
@@ -27,37 +27,21 @@ export interface IMostReportInput {
     reportCode: number,
     zoneIds: [
         number
-    ]
-}
-export enum ENManageServers {
-    serverDelete = 'serverDelete',
-    linkToHangfire = 'linkToHangfire',
-    linkToHealthCheck = 'linkToHealthCheck',
-    resetApp = 'resetApp'
-}
-export interface IManageServerErrors {
-    name: string,
-    errorType: ENClientServerErrors
-}
-export interface IManageServerErrorsRes {
-    errorId: string,
-    message: string,
-    statusCode: number,
-    username: string
-}
-export interface IManageServer {
-    name: string;
-    icon: string;
-    background: string;
-    color?: string;
-    clickFunction?: ENManageServers;
+    ],
+    beginFromImported?: boolean,
+    fragmentMasterIds?: string[],
+    isCollapsed?: boolean
 }
 export interface IBriefKardex {
-    kardexItemType: number;
-    jalaliDay: string;
-    description: string;
-    counterStateTitle: string;
-    counterNumber: number;
+    item: string,
+    registerDate: string,
+    preDate: string,
+    currentDate: string,
+    preNumber: number,
+    currentNumber: number,
+    preDebt: number,
+    amount: number,
+    counterStateTitle: string
 }
 export interface IOnOffLoadFlat {
     id: string,
@@ -95,7 +79,8 @@ export interface IOnOffLoadFlat {
     errorDescription: string,
     zoneId: number | string,
     counterNumber: number,
-    counterStateId: number,
+    counterStateId: any,
+    tempCounterState: IDictionaryManager;
     counterStateCode: number,
     possibleAddress: string,
     possibleCounterSerial: string,
@@ -125,7 +110,15 @@ export interface IOnOffLoadFlat {
     excludedForBazdid: boolean,
     masrafStateId: number,
     description: string,
-    isSelected?: boolean
+    isSelected?: boolean,
+    zoneTitle?: string,
+    readingReportTitles: string,
+    mobiles: string,
+    balance: number,
+    modifyType?: any//for general list modify
+    modify?: any//for general group list modify,
+    isResponseHasError?: boolean// to make alert in the table
+    editedErrorDescription?: string// to make alert in the table
 }
 export interface IOutputManager {
     zoneId: number,

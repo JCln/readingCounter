@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Imap } from 'interfaces/imap';
+import { ENRandomNumbers } from 'interfaces/ioverall-config';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EnvService } from 'services/env.service';
 import { MapService } from 'services/map.service';
@@ -14,8 +14,6 @@ declare let L;
 export class MapDgComponent implements OnInit {
   private layerGroup = new L.FeatureGroup();
   private map: L.Map;
-
-  private mapItems: Imap[];
 
   constructor(
     public ref: DynamicDialogRef,
@@ -37,7 +35,7 @@ export class MapDgComponent implements OnInit {
     this.flyToDes(items.y, items.x, 12);
     L.circleMarker([items.y, items.x], { weight: 4, radius: 3, color: '#116fff' }).addTo(this.layerGroup)
       .bindPopup(
-        `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${'ش.پ :' + items.trackNumber}`
+        `${items.firstName} <br>` + `${items.sureName} <br> ${items.eshterak} <br> ${items.trackNumber ? 'ش.پ :' + items.trackNumber : ''}`
       );
   }
   private simpleMarkSingleLocation = (x: string, y: string) => {
@@ -48,33 +46,23 @@ export class MapDgComponent implements OnInit {
       "لایه ها": this.layerGroup
     };
   }
-
   initMap = () => {
     this.map = L.map('map', {
       center: this.envService.mapCenter,
-      zoom: 15,
-      minZoom: 4,
-      layers: [this.mapService.initMapColor(), this.layerGroup]
+      zoom: ENRandomNumbers.fifteen,
+      minZoom: ENRandomNumbers.four,
+      maxZoom: ENRandomNumbers.eighteen,
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
     });
 
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
   }
-  private getMapItems = () => {
-    this.mapItems = this.mapService.getMapItems();
-  }
   ngOnInit(): void {
-    this.getMapItems();
     this.initMap();
-
-    console.log(this.config.data);
     const x = this.config.data.x;
     const y = this.config.data.y;
-
     this.simpleMarkSingleLocation(x, y);
   }
-  // async save() {  
-  //   this.ref.close();
-  // }
   close() {
     this.ref.close();
   }

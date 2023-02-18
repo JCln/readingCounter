@@ -1,22 +1,23 @@
 <main class="main">
     <form #form="ngForm" (ngSubmit)="connectToServer()">
         <section class="order_by">
-            <h2>صدور بر اساس :</h2>
-            <mat-radio-group aria-labelledby="radio_group" [(ngModel)]="searchService._isOrderByDate"
-                name="_isOrderByDate">
-                <mat-radio-button class="radio_button" *ngFor="let orderType of searchService.searchInOrderTo"
-                    [value]="orderType.isSelected">
-                    {{orderType.title}}
-                </mat-radio-button>
-            </mat-radio-group>
+            <h2>جستجو بر اساس :</h2>
+            <div *ngFor="let orderType of searchService.utilsService.getSearchInOrderTo">
+                <div class="p-field-radiobutton">
+                    <p-radioButton name="orderByDate" [value]="orderType.isSelected"
+                        [(ngModel)]="searchService._isOrderByDate" [inputId]="orderType.key">
+                    </p-radioButton>
+                    <label [for]="orderType.key">{{orderType.title}}</label>
+                </div>
+            </div>
         </section>
         <hr>
         <section class="content">
             <div class="input_2">
                 <div class="_key">ناحیه</div>
                 <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="searchService._searchSimpleReq.zoneId"
-                    placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id" optionLabel="title"
-                    filter="true">
+                    placeholder="انتخاب مورد" [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id"
+                    optionLabel="title" filter="true">
                 </p-dropdown>
             </div>
 
@@ -68,17 +69,16 @@
             </div>
         </section>
 
-        <button type="submit" class="tooltip btn_2_o">
+        <button type="submit" class="tooltip btn_1">
             <i class="pi pi-search"></i>
             جستجو
         </button>
     </form>
 </main>
 
-<app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-    [_outputFileName]="'simpleSearch'" [_checkUpName]="'simpleSearch'"
-    [_selectedColumnsToRemember]="'selectedSearchManagerSimple'" [_numberOfExtraColumns]="[1,2,3,4]"
-    [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"
+<app-prime-table [dataSource]="closeTabService.saveDataForSearchSimple" [_outputFileName]="'simpleSearch'"
+    [_checkUpName]="'simpleSearch'" [_selectedColumnsToRemember]="'selectedSearchManagerSimple'"
+    [_numberOfExtraColumns]="[1,2,3,4]" [_sessionName]="'simpleSearch-session'" (refreshedTable)="refreshTable()"
     (routedToLMAll)="searchService.routeToLMAll($event)" (routedToLMPayDay)="searchService.routeToLMPayDay($event)"
     (routedToFollowUp)="searchService.routeToFollowUp($event)" (showedInMap)="searchService.showInMap($event)">
 </app-prime-table>

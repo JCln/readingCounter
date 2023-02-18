@@ -1,0 +1,18 @@
+<app-prime-table 
+    [dataSource]="closeTabService.saveDataForTrackOffloadedGroup" 
+    [_outputFileName]="'offloadedGroup'"
+    [_checkUpName]="'offloadedGroup'"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3]: [1,2,3,4]"
+    [_calculableSUM]=true
+    [_hasAggregating]= true
+    [_isCustomSort]=true
+    [_selectedColumnsToRemember]="'selectedTrackOffloadedGroup'"
+    [_sessionName]="'offloaded-group'"
+    (refreshedTable)="refreshTable()"
+    (customedSort)="trackingManagerService.customSort($event)"
+    (downloadedOutputSingle)="downloadOutputSingle($event)"            
+    (routedToOffloadGeneralModify)="routeToOffloadGeneralGroupModify($event)"        
+    (backedToImportedConfirmDialog)="backToReading($event)"
+    (routedToLMAll)="routeToAssessPre($event)"        
+ > 
+</app-prime-table>

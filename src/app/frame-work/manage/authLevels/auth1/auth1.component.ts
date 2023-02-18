@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevels } from 'interfaces/iauth-levels';
@@ -16,15 +16,11 @@ import { Auth1AddDgComponent } from './auth1-add-dg/auth1-add-dg.component';
 })
 export class Auth1Component extends FactoryONE {
 
-  dataSource: IAuthLevels[] = [];
-
   clonedProducts: { [s: string]: IAuthLevels; } = {};
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private dialog: MatDialog,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private authsManagerService: AuthsManagerService
   ) {
     super();
@@ -44,15 +40,11 @@ export class Auth1Component extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForAppLevel1) {
-      this.dataSource = this.closeTabService.saveDataForAppLevel1;
+    if (!this.closeTabService.saveDataForAppLevel1) {
+      this.closeTabService.saveDataForAppLevel1 = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel1GET);
     }
-    else {
-      this.dataSource = await this.authsManagerService.getAuth1DataSource();
-      this.closeTabService.saveDataForAppLevel1 = this.dataSource;
-    }    
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel1 = this.closeTabService.saveDataForAppLevel1.slice(0, index).concat(this.closeTabService.saveDataForAppLevel1.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog();
     if (a) {
@@ -65,17 +57,10 @@ export class Auth1Component extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.authsManagerService.verification(dataSource['dataSource'])) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForAppLevel1[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel1EDIT, dataSource['dataSource']);
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

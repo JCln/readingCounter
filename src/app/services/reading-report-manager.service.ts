@@ -5,20 +5,25 @@ import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENRandomNumbers, ENSelectedColumnVariables, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportGISReq, IReadingReportReq, IReadingReportTraverseDifferentialReq } from 'interfaces/ireports';
+import { ENRandomNumbers, ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import {
+    IReadingReportGISReq,
+    IReadingReportReq,
+    IReadingReportTraverseDifferentialReq,
+    IUserKarkardInput,
+} from 'interfaces/ireports';
 import { ENReadingReports } from 'interfaces/reading-reports';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
 import {
-  ConfirmDialogExcelViewComponent,
+    ConfirmDialogExcelViewComponent,
 } from '../frame-work/reports/rr-excel-dynamic-viewer/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 import { ConfirmDialogCheckboxComponent } from '../shared/confirm-dialog-checkbox/confirm-dialog-checkbox.component';
 import { JwtService } from './../auth/jwt.service';
 import { EnvService } from './env.service';
@@ -30,6 +35,22 @@ import { EnvService } from './env.service';
 export class ReadingReportManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENReadingReports = ENReadingReports;
+  trackNumberAllImages: number;
+  isCollapsedPrfm: boolean = false;
+  isCollapsedDH: boolean = false;
+  isCollapsedLocked: boolean = false;
+  isCollapsedPreNumberShown: boolean = false;
+  isCollapsedOffKarkard: boolean = false;
+  isCollapsedMaster: boolean = false;
+  isCollapsedDaily: boolean = false;
+  isCollapsedKarkard: boolean = false;
+  isCollapsedTrv: boolean = false;
+  isCollapsedImgAttrAnlz: boolean = false;
+  isCollapsedTrvCh: boolean = false;
+  isCollapsedDetails: boolean = false;
+  isCollapsedUserKarkard: boolean = false;
+  _isOrderByDate: boolean = false;
+  _isCollapsedAllImgs: boolean = true;
 
   masterReq: IReadingReportReq = {
     fromDate: '',
@@ -37,7 +58,8 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear(),
+    _selectedAggregate: ''// Default group by
   };
   imgAttrResultReq: IReadingReportReq = {
     fromDate: '',
@@ -45,15 +67,22 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   };
   imgAttrAnalyzeReq: IReadingReportReq = {
+    zoneId: null,
     fromDate: '',
     toDate: '',
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
+  };
+  userKarkardReq: IUserKarkardInput = {
+    fromDate: '',
+    toDate: '',
+    zoneId: null,
+    statusId: 0
   };
   detailsReq: IReadingReportReq = {
     zoneId: 0,
@@ -62,7 +91,8 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
   }
   disposalhoursReq: IReadingReportReq = {
     zoneId: 0,
@@ -71,7 +101,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   karkardReq: IReadingReportReq = {
     zoneId: 0,
@@ -80,7 +110,8 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
   }
   lockedReq: IReadingReportReq = {
     zoneId: 0,
@@ -89,7 +120,7 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
   preNumberShownReq: IReadingReportReq = {
     zoneId: 0,
@@ -98,7 +129,18 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
+  }
+  rrFragmentKarkardReq: IReadingReportReq = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    isCollapsed: false,
+    fragmentMasterIds: []
   }
   karkardOffloadReq: IReadingReportReq = {
     zoneId: 0,
@@ -107,7 +149,8 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
   }
   karkardDailyReq: IReadingReportReq = {
     zoneId: 0,
@@ -116,7 +159,9 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    beginFromImported: true,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
   }
   gisReq: IReadingReportGISReq = {
     zoneId: 0,
@@ -128,7 +173,8 @@ export class ReadingReportManagerService {
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: [],
     isCluster: true
   }
   anlzPrfmReq: IMostReportInput = {
@@ -138,17 +184,31 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     zoneIds: [0]
+  }
+  offKarkardAllStatesReq: IMostReportInput = {
+    zoneId: 0,
+    fromDate: '',
+    toDate: '',
+    counterReaderId: '',
+    readingPeriodId: null,
+    reportCode: 0,
+    year: this.utilsService.getFirstYear(),
+    zoneIds: [0],
+    beginFromImported: false,
+    fragmentMasterIds: [],
+    isCollapsed: false
   }
   trvchReq: IReadingReportTraverseDifferentialReq = {
     zoneId: 0,
     fromDate: '',
     toDate: '',
     readingPeriodId: null,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     traverseType: 0,
-    zoneIds: null
+    zoneIds: null,
+    fragmentMasterIds: []
   }
   traverseReq: IReadingReportReq = {
     zoneId: 0,
@@ -157,7 +217,8 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear(),
+    fragmentMasterIds: []
   }
   inStateReq: IReadingReportReq = {
     zoneId: 0,
@@ -166,10 +227,59 @@ export class ReadingReportManagerService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401
+    year: this.utilsService.getFirstYear()
   }
-  /* GET*/
 
+  showGisInOrderTo: any[] = [
+    {
+      id: 'isCounterState',
+      title: 'وضعیت کنتور',
+      isSelected: true,
+      key: 'A'
+    },
+    {
+      id: 'isForbidden',
+      title: 'غیر مجاز',
+      isSelected: false,
+      key: 'B'
+    },
+    {
+      id: 'isAhadChange',
+      title: 'تغییر آحاد',
+      isSelected: false,
+      key: 'C'
+    },
+    {
+      id: 'isKarbariChange',
+      title: 'تغییر کاربری',
+      isSelected: false,
+      key: 'D'
+    }
+  ]
+  _orderByGIS: string = 'isCounterState';
+  /* GET*/
+  getSearchInOrderTo = (): ISearchInOrderTo[] => {
+    if (this.profileService.getLocalValue()) {
+      this._isOrderByDate = false;
+      return this.utilsService.getSearchInOrderToReverse;
+    }
+    else {
+      this._isOrderByDate = true;
+      return this.utilsService.getSearchInOrderTo;
+    }
+  }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
+  }
+  getApiUrl = (): string => {
+    return this.envService.API_URL;
+  }
+  getAuthToken = (): string => {
+    return this.jwtService.getAuthorizationToken();
+  }
   receiveFromDateJalali = (variable: ENReadingReports, $event: string) => {
     this[variable].fromDate = $event;
   }
@@ -180,13 +290,14 @@ export class ReadingReportManagerService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private dialog: MatDialog,
     private _location: Location,
     private router: Router,
     private envService: EnvService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private profileService: ProfileService
   ) { }
 
   // CALL APIs
@@ -200,7 +311,7 @@ export class ReadingReportManagerService {
   }
   postDataSource = (method: ENInterfaces, id: any): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(method, id).subscribe((res) => {
+      this.interfaceManagerService.POSTById(method, id).subscribe((res) => {
         resolve(res)
       })
     });
@@ -228,6 +339,9 @@ export class ReadingReportManagerService {
       })
     });
   }
+  getDeleteDictionary = (): any[] => {
+    return this.utilsService.getDeleteDictionary();
+  }
   getReadingPeriodDictionary = (kindId: string): Promise<any> => {
     return this.dictionaryWrapperService.getReadingPeriodDictionary(kindId);
   }
@@ -240,8 +354,11 @@ export class ReadingReportManagerService {
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
-  getKarbariDictionary = (): Promise<any> => {
-    return this.dictionaryWrapperService.getKarbariDictionary();
+  getFragmentMasterByZoneDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getFragmentMasterByZoneIdDictionary(zoneId);
+  }
+  getTrackingStatesDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getTrackingStatesDictionary();
   }
   getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
@@ -267,6 +384,12 @@ export class ReadingReportManagerService {
     if (dataSource.hasOwnProperty('zoneId')) {
       if (MathS.isNull(dataSource['zoneId'])) {
         this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
+    }
+    if (dataSource.hasOwnProperty('statusId')) {
+      if (MathS.isNull(dataSource['statusId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_statusId);
         return false;
       }
     }
@@ -311,6 +434,11 @@ export class ReadingReportManagerService {
     return true;
   }
   private periodValidationGIS = (readingReportGISReq: IReadingReportGISReq): boolean => {
+    if (readingReportGISReq.hasOwnProperty('zoneId'))
+      if (MathS.isNull(readingReportGISReq['zoneId'])) {
+        this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+        return false;
+      }
     if (readingReportGISReq.isForbidden === true) {
       this.utilsService.snackBarMessageWarn(EN_messages.allowed_forbiddenByDate);
       return false;
@@ -325,15 +453,20 @@ export class ReadingReportManagerService {
   }
 
   // VerificationS 
-  verificationRRShared = (readingReportReq: any, isValidateByDate: boolean): boolean => {
+  verificationUserKarkard = (readingReportReq: IUserKarkardInput): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
+    return this.datesValidation(readingReportReq);
+  }
+  verificationRRShared = (readingReportReq: IReadingReportReq, isValidateByDate: boolean): boolean => {
+    readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
+    readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
+    return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
   verificationRRTraverseDifferential = (readingReportReq: IReadingReportTraverseDifferentialReq, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
+    return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
   verificationRRDisposalHours = (readingReportReq: IReadingReportReq): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
@@ -343,12 +476,12 @@ export class ReadingReportManagerService {
   verificationRRGIS = (readingReportGISReq: IReadingReportGISReq, isValidateByDate: boolean): boolean => {
     readingReportGISReq.fromDate = Converter.persianToEngNumbers(readingReportGISReq.fromDate);
     readingReportGISReq.toDate = Converter.persianToEngNumbers(readingReportGISReq.toDate);
-    return isValidateByDate ? this.datesValidation(readingReportGISReq) : this.periodValidationGIS(readingReportGISReq)
+    return isValidateByDate ? (readingReportGISReq.readingPeriodId = null, this.datesValidation(readingReportGISReq)) : this.periodValidationGIS(readingReportGISReq)
   }
   verificationRRAnalyzePerformance = (readingReportReq: IMostReportInput, isValidateByDate: boolean): boolean => {
     readingReportReq.fromDate = Converter.persianToEngNumbers(readingReportReq.fromDate);
     readingReportReq.toDate = Converter.persianToEngNumbers(readingReportReq.toDate);
-    return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
+    return isValidateByDate ? (readingReportReq.readingPeriodId = null, this.datesValidation(readingReportReq)) : this.periodValidations(readingReportReq)
   }
 
   // 
@@ -366,13 +499,13 @@ export class ReadingReportManagerService {
     this.utilsService.routeTo(route);
   }
   linkToStimulsoftAdd = () => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkAdd + this.getAuthToken(), '_blank');
   }
   linkToStimulsoftEdit = (body: any) => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLinkEdit + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
   }
   linkToStimulsoftView = (body: any) => {
-    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.jwtService.getAuthorizationToken(), '_blank');
+    window.open(this.envService.API_URL + ENInterfaces.dynamicReportManagerDisplayLink + '/' + body.id + `/?access_token=` + this.getAuthToken(), '_blank');
   }
   routeToByObject = (router: string, val: object) => {
     this.router.navigate([router, val]);
@@ -385,7 +518,7 @@ export class ReadingReportManagerService {
   }
   postById = (method: ENInterfaces, id: number): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
         resolve(res);
       })
     });
@@ -396,7 +529,7 @@ export class ReadingReportManagerService {
       const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             data: res,
             title: title
@@ -435,22 +568,13 @@ export class ReadingReportManagerService {
     });
   }
   firstConfirmDialogRemove = () => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(async desc => {
-        if (desc) {
-          resolve(true);
-        }
-      })
-    })
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
 
   snackEmptyValue = () => {

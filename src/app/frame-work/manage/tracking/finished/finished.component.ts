@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
@@ -10,30 +9,23 @@ import { TrackingManagerService } from 'services/tracking-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
 
-import { ConfirmTextDialogComponent } from '../confirm-text-dialog/confirm-text-dialog.component';
-
 @Component({
   selector: 'app-finished',
   templateUrl: './finished.component.html',
   styleUrls: ['./finished.component.scss']
 })
 export class FinishedComponent extends FactoryONE {
-  dataSource: ITracking[] = [];
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
-
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    private dialog: MatDialog,
     public outputManagerService: OutputManagerService,
     private envService: EnvService
   ) {
     super();
   }
 
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForTrackFinished = this.closeTabService.saveDataForTrackFinished.slice(0, index).concat(this.closeTabService.saveDataForTrackFinished.slice(index + 1));
   private rowToOffloaded = async (row: string, desc: string, rowIndex: number) => {
     await this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToOFFLOADED, row, desc);
     this.refetchTable(rowIndex);
@@ -44,30 +36,15 @@ export class FinishedComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTrackFinished) {
-      this.dataSource = this.closeTabService.saveDataForTrackFinished;
-    }
-    else {
-      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingFINISHED);
-      this.closeTabService.saveDataForTrackFinished = this.dataSource;
+    if (!this.closeTabService.saveDataForTrackFinished) {
+      this.closeTabService.saveDataForTrackFinished = await this.trackingManagerService.getDataSource(ENInterfaces.trackingFINISHED);
     }
   }
-  backToImportedConfirmDialog = (rowDataAndIndex: object) => {
-    const title = EN_messages.reason_toOffloaded;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: true,
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.rowToOffloaded(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
-        }
-      })
-    })
+  backToImportedConfirmDialog = async (rowDataAndIndex: object) => {
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.reason_toOffloaded, true, false);
+    if (desc) {
+      this.rowToOffloaded(rowDataAndIndex['dataSource'], desc, rowDataAndIndex['ri']);
+    }
   }
   reDownloadOutputSingle = async (row: ITracking) => {
     if (this.envService.hasNextBazdid) {
@@ -83,13 +60,6 @@ export class FinishedComponent extends FactoryONE {
     if (hasbazdid) {
       this.outputManagerService.downloadFile(await this.trackingManagerService.downloadOutputSingleWithENV(ENInterfaces.OutputDELAYED, row, hasbazdid));
     }
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IReadingPeriodKind } from 'interfaces/ireads-manager';
@@ -14,16 +14,11 @@ import { RpkmAddDgComponent } from './rpkm-add-dg/rpkm-add-dg.component';
   styleUrls: ['./reading-period-kind.component.scss']
 })
 export class ReadingPeriodKindComponent extends FactoryONE {
-  dataSource: IReadingPeriodKind[] = [];
-
   clonedProducts: { [s: string]: IReadingPeriodKind; } = {};
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private dialog: MatDialog,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {
     super();
@@ -33,7 +28,7 @@ export class ReadingPeriodKindComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(RpkmAddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
       });
       dialogRef.afterClosed().subscribe(async result => {
         if (result)
@@ -46,15 +41,11 @@ export class ReadingPeriodKindComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForReadingPeriodKindManager) {
-      this.dataSource = this.closeTabService.saveDataForReadingPeriodKindManager;
-    }
-    else {
-      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.readingPeriodKindAll);
-      this.closeTabService.saveDataForReadingPeriodKindManager = this.dataSource;
+    if (!this.closeTabService.saveDataForReadingPeriodKindManager) {
+      this.closeTabService.saveDataForReadingPeriodKindManager = await this.readManagerService.getDataSource(ENInterfaces.readingPeriodKindAll);
     }
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForReadingPeriodKindManager = this.closeTabService.saveDataForReadingPeriodKindManager.slice(0, index).concat(this.closeTabService.saveDataForReadingPeriodKindManager.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
@@ -67,16 +58,10 @@ export class ReadingPeriodKindComponent extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.readManagerService.verification(dataSource['dataSource'])) {
-      this.dataSource['ri'] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForReadingPeriodKindManager['ri'] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.readingPeriodKindEdit, dataSource['dataSource']);
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

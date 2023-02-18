@@ -1,12 +1,13 @@
-<h2>گروه دسترسی</h2>
-
-<mat-radio-group class="radio_group role_items" aria-labelledby="radio_group" [(ngModel)]="selectedRole"
-    name="_orderBy">
-    <mat-radio-button class="radio_button" *ngFor="let orderType of roleItems" [value]="orderType.id"
-        (change)="changeRadio($event)">
-        {{orderType.title}}
-    </mat-radio-button>
-</mat-radio-group>
+<section class="order_by">
+    <div *ngFor="let orderType of roleItems">
+        <div class="p-field-radiobutton">
+            <p-radioButton name="orderByDate" [value]="orderType.id" [(ngModel)]="selectedRole" [inputId]="orderType.id"
+                (change)="changeRadio(orderType.id)">
+            </p-radioButton>
+            <label [for]="orderType.id">{{orderType.title}}</label>
+        </div>
+    </div>
+</section>
 
 <div class="accept">
     <button class="btn_2" matStepperNext>

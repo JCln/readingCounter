@@ -18,21 +18,17 @@ export class SidebarItemsService {
   getLatestItems = (): Observable<any> => {
     return this.tabItemsSource.asObservable();
   }
-  getSideBarItems = (): Promise<ISidebarItems> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceServiceManager.GET(ENInterfaces.getSideBar).toPromise().then((res: any) => {
-          this.tabItemsSource.next(res.items);
-          this.tabItemsSource.next(this.getTestSideTest());
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
   getTestSideTest = () => {
     return sidebarItemsTest.addStaticSubRoutes;
+  }
+  getSideBarItems = (): Promise<ISidebarItems> => {
+    return new Promise((resolve) => {
+      this.interfaceServiceManager.GET(ENInterfaces.getSideBar).toPromise().then((res: any) => {
+        this.tabItemsSource.next(res.items);
+        this.tabItemsSource.next(this.getTestSideTest());
+        resolve(res);
+      })
+    });
   }
 
 }

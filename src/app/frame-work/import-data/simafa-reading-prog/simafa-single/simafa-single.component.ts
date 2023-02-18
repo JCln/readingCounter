@@ -5,8 +5,8 @@ import { EN_messages } from 'interfaces/enums.enum';
 import { IReadingConfigDefault } from 'interfaces/iimports';
 import { IImportDataResponse, IImportSimafaSingleReq, IReadingProgramRes } from 'interfaces/import-data';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
-import { CloseTabService } from 'services/close-tab.service';
 import { ImportDynamicService } from 'services/import-dynamic.service';
+import { UtilsService } from 'services/utils.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -26,7 +26,7 @@ export class SimafaSingleComponent extends FactoryONE {
     displayRadif: false,
     counterReaderId: '',
     readingPeriodId: null,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     readingProgramId: ''
   }
   _showAlalHesabPercent: boolean = false;
@@ -37,7 +37,7 @@ export class SimafaSingleComponent extends FactoryONE {
 
   constructor(
     public importDynamicService: ImportDynamicService,
-    private closeTabService: CloseTabService,
+    private utilsService: UtilsService,
     private route: ActivatedRoute
   ) {
     super();
@@ -55,7 +55,7 @@ export class SimafaSingleComponent extends FactoryONE {
     const validation = this.importDynamicService.checkSimafaSingleVertification(this.simafaSingleReq);
     if (!validation)
       return;
-    const a = await this.importDynamicService.postImportSimafa(ENInterfaces.postSimafaSingle, this.simafaSingleReq);
+    const a = await this.importDynamicService.postBodyServer(ENInterfaces.postSimafaSingle, this.simafaSingleReq);
     if (a) {
 
       this.importDynamicService.showResDialog(a, false, EN_messages.importDynamic_created);
@@ -83,7 +83,5 @@ export class SimafaSingleComponent extends FactoryONE {
     this.simafaSingleReq.displayRadif = rcd.displayRadif;
     this.simafaSingleReq.imagePercent = rcd.defaultImagePercent;
     this.simafaSingleReq.alalHesabPercent = rcd.defaultAlalHesab;
-    console.log(this.simafaSingleReq);
-
   }
 }

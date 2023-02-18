@@ -1,6 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
+import { ToastModule } from 'primeng/toast';
 
 import { DateJalaliComponent } from '../core/_layouts/header/date-jalali/date-jalali.component';
 import { TimeJalaliComponent } from '../core/_layouts/header/time-jalali/time-jalali.component';
@@ -13,6 +14,7 @@ import { TimeJalaliComponent } from '../core/_layouts/header/time-jalali/time-ja
     ],
     imports: [
         FormsModule,
+        ToastModule,
         DpDatePickerModule
     ],
     exports: [
@@ -20,6 +22,7 @@ import { TimeJalaliComponent } from '../core/_layouts/header/time-jalali/time-ja
         DateJalaliComponent,
         DpDatePickerModule,
         FormsModule,
+        ToastModule,
     ]
 })
 export class SharedThreeModule {

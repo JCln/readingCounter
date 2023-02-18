@@ -3,13 +3,11 @@ import '../../../node_modules/leaflet.markercluster/dist/leaflet.markercluster.j
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { ENLocalStorageNames } from 'interfaces/ioverall-config';
+import { ENLocalStorageNames, ENRandomNumbers } from 'interfaces/ioverall-config';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { EnvService } from 'services/env.service';
 import { ListManagerService } from 'services/list-manager.service';
 
-import { ENRandomNumbers } from './../Interfaces/ioverall-config';
-import { map } from './DI/map';
 
 declare let L;
 
@@ -34,10 +32,6 @@ L.Marker.prototype.options.icon = defaultIcon;
 export class MapService {
   private map: L.Map;
 
-  streets = L.tileLayer(this.envService.OSMmapBoxUrl);
-  streetsDark = L.tileLayer(this.envService.OSMDarkmapBoxUrl);
-  satellite = L.tileLayer(this.envService.SATELLITEMapBoxUrl + this.envService.SATELLITEMapAccessToken);
-
   constructor(
     private listManagerService: ListManagerService,
     private browserStorageService: BrowserStorageService,
@@ -45,54 +39,17 @@ export class MapService {
     private envService: EnvService
   ) { }
 
-  getMapItems = () => {
-    return map;
-  }
-  getBaseMap = (): object => {
-    if (this.canUseMultiMapColors()) {
-      return this.getDarkUrls();
-    }
-    else {
-      return this.getLightUrls();
-    }
-  }
-  private lastSelectedMapColor = (): boolean => {
-    if (this.canUseMultiMapColors()) {
-      return this.getFromLocalMapColorMode();
-    }
-    return false;
-  }
-  initMapColor = (): any => {
-    if (this.lastSelectedMapColor()) {
-      return this.getDarkStreetsUrl();
-    }
-    return this.getLightStreetsUrl();
-  }
-
-  getDarkStreetsUrl = (): any => {
-    return L.tileLayer(this.envService.OSMDarkmapBoxUrl);
-  }
-  getLightStreetsUrl = (): any => {
-    return L.tileLayer(this.envService.OSMmapBoxUrl);
-  }
-  getDarkUrls = (): object => {
-    return {
-      "OSMDark": this.streetsDark,
-      "OSM": this.streets,
-      "Satellite": this.satellite,
-    }
+  getFirstItemUrl = (): any => {
+    return L.tileLayer(this.envService.mapUrls[0].url);
   }
   getLightUrls = (): object => {
-    return {
-      "OSM": this.streets,
-      "Satellite": this.satellite,
-    }
+    return (this.getMapUrls().reduce((obj, item) => (obj[item.title] = L.tileLayer(item.url), obj), {}));
   }
-  canUseMultiMapColors = (): boolean => {
-    if (this.envService.hasDarkOSMMap) {
-      return true;
-    }
-    return false;
+  getMapUrls = (): any[] => {
+    return this.envService.mapUrls;
+  }
+  getBaseMap = (): object => {
+    return this.getLightUrls();
   }
   addMarkerCluster = (map: L.Map, latlng: any) => {
     const markers = L.markerClusterGroup();
@@ -121,14 +78,6 @@ export class MapService {
     if (a === null || a === 'undefined') {
       this.saveToLocalStorage(ENLocalStorageNames.mapAnimationStartFrom, ENRandomNumbers.twoHundred);
       return ENRandomNumbers.twoHundred;
-    }
-    return a;
-  }
-  getFromLocalMapColorMode = (): boolean => {
-    const a = this.browserStorageService.get(ENLocalStorageNames.isDarkModeMap);
-    if (a === null || a === 'undefined') {
-      this.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, false);
-      return false;
     }
     return a;
   }

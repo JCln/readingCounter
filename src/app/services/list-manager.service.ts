@@ -2,13 +2,22 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { IOnOffLoadFlat } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
-import { ENRandomNumbers, ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import {
+  ENRandomNumbers,
+  ENSelectedColumnVariables,
+  IDictionaryManager,
+  IObjectIteratation,
+  IResponses,
+} from 'interfaces/ioverall-config';
+import { IOffLoadPerDay } from 'interfaces/itrackings';
+import { EN_Routes } from 'interfaces/routes.enum';
 import { ISearchMoshReqDialog } from 'interfaces/search';
 import { SortEvent } from 'primeng/api/sortevent';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
@@ -23,38 +32,8 @@ import { UtilsService } from './utils.service';
 export class ListManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ref: DynamicDialogRef;
+  counterStateValue: number;
 
-  columnSelectedLMPerDay = (): IObjectIteratation[] => {
-    return [
-      { field: 'day', header: 'روز', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true, ltr: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true, ltr: true },
-      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
-      { field: 'fromTime', header: 'از ساعت', isSelected: true, readonly: true },
-      { field: 'toTime', header: 'تا ساعت', isSelected: true, readonly: true },
-      { field: 'duration', header: 'مدت(h)', isSelected: true, readonly: true },
-      { field: 'distance', header: 'مسافت', isSelected: true, readonly: true },
-      { field: 'maneCount', header: 'تعداد مانع', isSelected: false, readonly: true },
-      { field: 'manePercent', header: 'درصد مانع', isSelected: false, readonly: true },
-      { field: 'xarabFaqedCount', header: 'تعداد فاقد/خراب', isSelected: false, readonly: true },
-      { field: 'xarabFaqedPercent', header: 'درصد فاقد/خراب', isSelected: false, readonly: true }
-    ];
-  }
-  columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
-    return [
-      { field: 'trackNumber', header: 'ش پیگیری', isSelected: true, readonly: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
-      { field: 'counterReaders', header: 'مامور(ها)', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2;' },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: true, readonly: true },
-      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
-      { field: 'overalCount', header: 'تعداد کل', isSelected: true, readonly: true },
-      { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
-      { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
-      { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true }
-    ];
-  }
   searchReqMoshDialog: ISearchMoshReqDialog = {
     // searchBy: 1  => eshterak
     zoneId: null,
@@ -62,33 +41,45 @@ export class ListManagerService {
     item: null,
     similar: false
   }
-
-  // getSearchTypes = (): Search[] => {
-  //   return [
-  //     Search.eshterak,
-  //     Search.radif,
-  //     Search.readCode,
-  //     Search.billId,
-  //   ]
-  // }
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService,
     private utilsService: UtilsService,
     private dialog: MatDialog,
+    private authService: AuthService,
+    private columnManager: ColumnManager
   ) { }
 
-  getLMAllZoneDictionary = () => {
-    return this.dictionaryWrapperService.getZoneDictionary();
+  routeToLMPDXY = (dataSource: IOffLoadPerDay, day: string) => {
+    this.utilsService.routeToByParams(EN_Routes.wr, { trackNumber: dataSource.trackNumber, day: day, distance: dataSource.overalDistance });
   }
-  getKarbariDictionaryCode = () => {
-    return this.dictionaryWrapperService.getkarbariCodeDictionary();
+  routeToReading = () => {
+    this.utilsService.routeToByUrl(EN_Routes.wrmtrackreading);
   }
-  getKarbariDictionary = () => {
-    return this.dictionaryWrapperService.getKarbariDictionary();
+  routeToOffloaded = () => {
+    this.utilsService.routeToByUrl(EN_Routes.wrmtrackoffloaded);
   }
-  getQotrDictionary = () => {
-    return this.dictionaryWrapperService.getQotrDictionary();
+  denyTracking = (): boolean => {
+    const jwtRole = this.authService.getAuthUser();
+    return jwtRole.roles.toString().includes('denytracking') ? true : false;
+  }
+  getLMPerDay = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('lMPerDay');
+  }
+  getLMPerDayPositions = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('lMPerDayPositions');
+  }
+  getDeleteDictionary = (): any[] => {
+    return this.utilsService.getDeleteDictionary();
+  }
+  getLMAllZoneDictionary = async (): Promise<any> => {
+    return await this.dictionaryWrapperService.getZoneDictionary();
+  }
+  getKarbariDictionaryCode = async (): Promise<any> => {
+    return await this.dictionaryWrapperService.getkarbariCodeDictionary();
+  }
+  getQotrDictionary = async (): Promise<any> => {
+    return await this.dictionaryWrapperService.getQotrDictionary();
   }
   getCounterStateDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateDictionary();
@@ -99,9 +90,18 @@ export class ListManagerService {
   getCounterStateByZoneIdDictionary = (zoneId: number): Promise<any> => {
     return this.dictionaryWrapperService.getCounterStateByZoneIdDictionary(zoneId);
   }
+  getCounterStateByCodeShowAllDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByCodeShowAllDictionary(zoneId);
+  }
+  getCounterStateByZoneShowAllDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateByZoneShowAllDictionary(zoneId);
+  }
+  getCounterStateForModifyDictionary = (zoneId: number): Promise<any> => {
+    return this.dictionaryWrapperService.getCounterStateForModifyDictionary(zoneId);
+  }
   getLM = (method: ENInterfaces | string, trackNumber: number | string): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.GETByQuote(method, trackNumber).subscribe(res => {
+      this.interfaceManagerService.GETByQuote(method, trackNumber).toPromise().then(res => {
         resolve(res);
       })
     })
@@ -115,7 +115,21 @@ export class ListManagerService {
   }
   postById = (method: ENInterfaces, id?: number): Promise<any> => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(method, id).toPromise().then(res => {
+      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
+  getExcel = (method: ENInterfaces, groupId: string): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETBlobById(method, groupId).toPromise().then(res => {
+        resolve(res);
+      })
+    });
+  }
+  postArrays = (method: ENInterfaces, array: any[]): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTARRAYS(method, array).toPromise().then(res => {
         resolve(res);
       })
     });
@@ -128,29 +142,24 @@ export class ListManagerService {
     });
   }
   /*OTHER */
-  setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
-    dataSource.forEach(item => {
-      if (item.newRate > 0)
-        item.newRate = parseFloat(MathS.getRange(item.newRate))
-      item.preAverage = +MathS.getRange(item.preAverage);
-      item.x = MathS.getRange(item.x);
-      item.y = MathS.getRange(item.y);
-      item.gisAccuracy = MathS.getRange(item.gisAccuracy);
-    })
-  }
-  customizeSelectedColumns = (_selectCols: any[]) => {
-    return _selectCols.filter(items => {
-      if (items.isSelected)
-        return items
-    })
-  }
+  // setDynamicPartRanges = (dataSource: IOnOffLoadFlat[]) => {
+  //   console.log('do nothing for now');
+    // dataSource.forEach(item => {
+    //   if (item.newRate > 0)
+    //     item.newRate = parseFloat(MathS.getRange(item.newRate))
+    //   item.preAverage = +MathS.getRange(item.preAverage);
+    //   item.x = MathS.getRange(item.x);
+    //   item.y = MathS.getRange(item.y);
+    //   item.gisAccuracy = MathS.getRange(item.gisAccuracy);
+    // })
+  // }
   showResDialog = (res: any[], disableClose: boolean, title: string): Promise<any> => {
     // disable close mean when dynamic count show decision should make
     return new Promise((resolve) => {
       const dialogRef = this.dialog.open(ConfirmDialogCheckboxComponent,
         {
           disableClose: disableClose,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             data: res,
             title: title
@@ -214,6 +223,13 @@ export class ListManagerService {
       OffloadModify.callAnnounce,
       OffloadModify.wrongReading,
       OffloadModify.bazresi
+    ]
+  }
+  getOffloadModifyTypeSimple = (): IDictionaryManager[] => {
+    return [
+      { id: OffloadModify.callAnnounce.id, title: OffloadModify.callAnnounce.title, isSelected: false },
+      { id: OffloadModify.wrongReading.id, title: OffloadModify.wrongReading.title, isSelected: false },
+      { id: OffloadModify.bazresi.id, title: OffloadModify.bazresi.title, isSelected: false },
     ]
   }
   offloadModifyValidation = (object: IOffloadModifyReq): boolean => {

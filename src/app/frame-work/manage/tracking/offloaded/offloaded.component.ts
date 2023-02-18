@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ITracking } from 'interfaces/itrackings';
@@ -9,6 +8,7 @@ import { OutputManagerService } from 'services/output-manager.service';
 import { TrackingManagerService } from 'services/tracking-manager.service';
 import { Converter } from 'src/app/classes/converter';
 import { FactoryONE } from 'src/app/classes/factory';
+import { MathS } from 'src/app/classes/math-s';
 
 @Component({
   selector: 'app-offloaded',
@@ -17,41 +17,35 @@ import { FactoryONE } from 'src/app/classes/factory';
 })
 export class OffloadedComponent extends FactoryONE {
 
-
-  dataSource: ITracking[] = [];
-  
   constructor(
 
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public trackingManagerService: TrackingManagerService,
-    public outputManagerService: OutputManagerService,
-    public route: ActivatedRoute,
+    public outputManagerService: OutputManagerService,    
     private envService: EnvService
   ) {
     super();
   }
 
   nullSavedSource = () => this.closeTabService.saveDataForTrackOffloaded = null;
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
   classWrapper = async (canRefresh?: boolean) => {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForTrackOffloaded) {
-      this.dataSource = this.closeTabService.saveDataForTrackOffloaded;
-    }
-    else {
-      this.dataSource = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
-      this.closeTabService.saveDataForTrackOffloaded = this.dataSource;
+    if (!this.closeTabService.saveDataForTrackOffloaded) {
+      this.closeTabService.saveDataForTrackOffloaded = await this.trackingManagerService.getDataSource(ENInterfaces.trackingOFFLOADED);
     }
   }
   downloadOutputSingle = async (row: ITracking) => {
-    if (this.envService.hasNextBazdid) {
-      this.hasNextBazdid(row);
-      return;
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.downloadPermit, false, false);
+    if (desc) {
+      if (this.envService.hasNextBazdid) {
+        this.hasNextBazdid(row);
+        return;
+      }
+      const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputSINGLE, row);
+      this.outputManagerService.downloadFile(a);
     }
-    const a = await this.trackingManagerService.downloadOutputWithoutDESC(ENInterfaces.OutputSINGLE, row);
-    this.outputManagerService.downloadFile(a);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadModify(dataSource);
@@ -59,9 +53,21 @@ export class OffloadedComponent extends FactoryONE {
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
     this.trackingManagerService.routeToOffloadGeneralModify(dataSource);
   }
+  routeToAssessPre = (dataSource: ITracking) => {
+    if (MathS.isNull(dataSource.listNumber)) {
+      this.trackingManagerService.showWarnMessage(EN_messages.no_listNumberExist);
+    }
+    else {
+      this.closeTabService.saveDataForAssessPreReq.zoneId = dataSource.zoneId;
+      this.closeTabService.saveDataForAssessPreReq.listNumber = dataSource.listNumber;
+      this.trackingManagerService.routeToAssessPre();
+    }
+  }
+
   backToReading = async (rowDataAndIndex: object) => {
-    if (await this.trackingManagerService.TESTbackToConfirmDialog(rowDataAndIndex['dataSource'], EN_messages.toReading)) {
-      this.refetchTable(rowDataAndIndex['ri']);
+    const desc = await this.trackingManagerService.firstConfirmDialog(EN_messages.toReading, true, false);
+    if (desc) {
+      this.trackingManagerService.migrateOrRemoveTask(ENInterfaces.trackingToREADING, rowDataAndIndex['dataSource'], desc);
       this.refreshTable();
     }
   }

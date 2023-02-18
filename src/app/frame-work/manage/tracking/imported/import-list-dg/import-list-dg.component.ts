@@ -28,7 +28,7 @@ export class ImportListDgComponent implements OnInit {
   counterWrapper = async () => {
     this.allCounterReaders = await this.dictionaryWrapperService.getUserCounterReaderDictionary(this.config.data.zoneId);
     this.dataSource = this.config.data;
-    this._selectedDatas = this.trackingManagerService.columnSelectedImportedList();
+    this._selectedDatas = this.trackingManagerService.getImportedListDetails();
     this.cdr.detectChanges();
   }
   ngOnInit(): void {

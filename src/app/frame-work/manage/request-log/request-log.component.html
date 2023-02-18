@@ -1,0 +1,44 @@
+<main class="main">
+    <section>
+        <form #form="ngForm" (ngSubmit)="verification()">
+            <section class="content">
+                <div class="input_2">
+                    <div class="_key">از</div>
+                    <div class="_value">
+                        <app-date-jalali name="fromDate" (dateJalEvent)="receiveFromDateJalali($event)"
+                            [dateObject]="closeTabService.saveDataForRequestLogReq.jalaliDay">
+                        </app-date-jalali>
+                    </div>
+                </div>
+                <div class="t_input_2">
+                    <div class="t_key">از زمان</div>
+                    <input class="t_value" name="fromTimeM" min="1" max="60" maxlength="2"
+                        [(ngModel)]="closeTabService.saveDataForRequestLogReq.fromTimeM">
+                    <div class="_colon">:</div>
+                    <input class="t_value" name="fromTimeH" min="1" max="24" maxlength="2"
+                        [(ngModel)]="closeTabService.saveDataForRequestLogReq.fromTimeH">
+                </div>
+                <div class="t_input_2">
+                    <div class="t_key">تا زمان</div>
+                    <input class="t_value" name="toTimeM" min="1" max="60" maxlength="2"
+                        [(ngModel)]="closeTabService.saveDataForRequestLogReq.toTimeM">
+                    <div class="_colon">:</div>
+                    <input class="t_value" name="toTimeH" min="1" max="24" maxlength="2"
+                        [(ngModel)]="closeTabService.saveDataForRequestLogReq.toTimeH">
+                </div>
+                <button type="submit" class="btn_1">
+                    <i class="pi pi-list"></i>
+                    مشاهده لیست
+                </button>
+
+            </section>
+        </form>
+    </section>
+
+    <section>
+        <app-prime-table [dataSource]="closeTabService.saveDataForRequestLog" [_outputFileName]="'requestLog'" [_checkUpName]="'requestlog'"
+            [_selectedColumnsToRemember]="'selectedRRRequestLog'" (refreshedTable)="refreshTable()">
+        </app-prime-table>
+    </section>
+
+</main>

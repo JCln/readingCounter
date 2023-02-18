@@ -1,13 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
-import { ISearchSimpleOutput } from 'interfaces/search';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { CloseTabService } from 'services/close-tab.service';
 import { SearchService } from 'services/search.service';
 import { Converter } from 'src/app/classes/converter';
 import { MathS } from 'src/app/classes/math-s';
-
 
 @Component({
   selector: 'app-simple',
@@ -15,12 +13,7 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./simple.component.scss']
 })
 export class SimpleComponent implements OnInit, OnDestroy {
-  dataSource: ISearchSimpleOutput[] = [];
   _years: ITitleValue[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   subscription: Subscription[] = [];
 
   zoneDictionary: IDictionaryManager[] = [];
@@ -29,22 +22,21 @@ export class SimpleComponent implements OnInit, OnDestroy {
   _selectedKindId: string = '';
 
   constructor(
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public searchService: SearchService
   ) {
   }
 
   converts = async () => {
-    Converter.convertIdToTitle(this.dataSource, this.zoneDictionary, 'zoneId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForSearchSimple, this.zoneDictionary, 'zoneId');
   }
   connectToServer = async () => {
-    this.dataSource = [];
+    this.closeTabService.saveDataForSearchSimple = [];
     if (!this.searchService.verificationSimpleSearch(this.searchService._searchSimpleReq))
       return;
-    this.dataSource = await this.searchService.doSearch(ENInterfaces.ListSearchSimple, this.searchService._searchSimpleReq);
-    if (this.dataSource.length) {
+    this.closeTabService.saveDataForSearchSimple = await this.searchService.doSearch(ENInterfaces.ListSearchSimple, this.searchService._searchSimpleReq);
+    if (this.closeTabService.saveDataForSearchSimple.length) {
       this.converts();
-      this.closeTabService.saveDataForSearchSimple = this.dataSource;
     }
   }
   nullSavedSource = () => this.closeTabService.saveDataForSearchSimple = null;
@@ -53,13 +45,13 @@ export class SimpleComponent implements OnInit, OnDestroy {
       this.nullSavedSource();
     }
     if (!MathS.isNull(this.closeTabService.saveDataForSearchSimple)) {
-      this.dataSource = this.closeTabService.saveDataForSearchSimple;
       this.converts();
     }
 
     this.receiveYear();
     this.readingPeriodKindDictionary = await this.searchService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.searchService.getZoneDictionary();
+    this.searchService.getSearchInOrderTo();
   }
   ngOnInit() {
     this.classWrapper();
@@ -68,13 +60,6 @@ export class SimpleComponent implements OnInit, OnDestroy {
     //  for purpose of refresh any time even without new event emiteds
     // we use subscription and not use take or takeUntil
     this.subscription.forEach(subscription => subscription.unsubscribe());
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   refreshTable = () => {
     this.connectToServer();

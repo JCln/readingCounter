@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -16,19 +16,12 @@ import { ProvinceAddDgComponent } from './province-add-dg/province-add-dg.compon
   styleUrls: ['./province.component.scss']
 })
 export class ProvinceComponent extends FactoryONE {
-  dataSource: IProvinceManager[] = [];
-
-
   countryDictionary: IDictionaryManager[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
   clonedProducts: { [s: string]: IProvinceManager; } = {};
 
   constructor(
     private dialog: MatDialog,
-     
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     private sectorsManagerService: SectorsManagerService
   ) {
     super();
@@ -39,7 +32,7 @@ export class ProvinceComponent extends FactoryONE {
       const dialogRef = this.dialog.open(ProvinceAddDgComponent,
         {
           disableClose: true,
-          minWidth: '19rem',
+          minWidth: '65vw',
           data: {
             di: this.countryDictionary
           }
@@ -56,23 +49,14 @@ export class ProvinceComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForProvince) {
-      this.dataSource = this.closeTabService.saveDataForProvince;
-    }
-    else {
-      this.dataSource = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ProvinceGET);
-      this.closeTabService.saveDataForProvince = this.dataSource;
+    if (!this.closeTabService.saveDataForProvince) {
+      this.closeTabService.saveDataForProvince = await this.sectorsManagerService.getSectorsDataSource(ENInterfaces.ProvinceGET);
     }
     this.countryDictionary = await this.sectorsManagerService.getCountryDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
-    this.insertSelectedColumns();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
   }
-  insertSelectedColumns = () => {
-    this._selectCols = this.sectorsManagerService.columnProvince();
-    this._selectedColumns = this.sectorsManagerService.customizeSelectedColumns(this._selectCols);
-  }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForProvince = this.closeTabService.saveDataForProvince.slice(0, index).concat(this.closeTabService.saveDataForProvince.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.sectorsManagerService.firstConfirmDialog();
     if (a) {
@@ -85,7 +69,7 @@ export class ProvinceComponent extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.sectorsManagerService.verification(dataSource['dataSource'])) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForProvince[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].countryId !== 'object') {
@@ -99,18 +83,12 @@ export class ProvinceComponent extends FactoryONE {
 
     await this.sectorsManagerService.addOrEditCountry(ENInterfaces.ProvinceEDIT, dataSource['dataSource']);
 
-    Converter.convertIdToTitle(this.dataSource, this.countryDictionary, 'countryId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForProvince, this.countryDictionary, 'countryId');
   }
   onRowEditCancel() {
-    // this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
-    // delete this.dataSource[dataSource['dataSource'].id];
+    // this.closeTabService.saveDataForProvince[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+    // delete this.closeTabService.saveDataForProvince[dataSource['dataSource'].id];
     // return;
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

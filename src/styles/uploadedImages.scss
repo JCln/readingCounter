@@ -1,32 +1,30 @@
 .control_wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 23rem));
+  grid-template-rows: 1fr 11rem;
   direction: rtl;
-  justify-content: center;
-  gap: 1rem;
+  gap: var(--font_05);
 }
 
 .content {
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
   text-align: center;
-  padding: $font_2 0;
+  padding: var(--font_xs) 0;
   border-radius: $border_15;
-  min-height: 30rem;
 }
 
 ._main_audio {
   display: grid;
   direction: rtl;
-  gap: .2rem;
+  gap: var(--font_02);
 }
 
 ._main_img {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 18rem));
   justify-content: center;
   direction: rtl;
-  gap: .2rem;
+  gap: var(--font_02);
 }
 
 .img_wrapper {
@@ -44,21 +42,21 @@
 }
 
 .__img_bound {
-  height: 9.5rem;
-  width: 9.5rem;
-  padding: $font_05;
+  // height: 17rem;
+  // width: 17rem;
+  padding: var(--font_05);
   margin: auto;
 }
 
 .title {
   color: var(--primary_3);
   text-align: center;
-  margin: 0 0 $font_xs;
-  font-size: 1.6rem;
+  margin: 0 0 var(--font_xs);
+  font-size: var(--font_l2);
 }
 
 ._img_title {
-  margin: 0 auto $font_2;
+  margin: 0 auto var(--font_2);
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
@@ -67,10 +65,10 @@
 
 .overall-info {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 14rem));
-  gap: .5rem;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 11rem));
+  gap: var(--font_03);
   direction: rtl;
-  margin-bottom: $font_xs;
+  margin-bottom: var(--font_xs);
 
   @media (min-width: 550px) {
     justify-content: center;
@@ -88,20 +86,20 @@ button {
 
 .__img_counter {
   position: absolute;
-  top: -$font_s;
-  right: $font_05;
+  top: calc(-1* var(--font_s));
+  right: var(--font_05);
   background-color: var(--primary_4);
   color: var(--white);
-  width: 1.5rem;
-  height: 1.5rem;
+  width: var(--font_l);
+  height: var(--font_l);
   border-radius: $border_5;
   font-weight: 600;
 }
 
 i {
   border-radius: $border_50;
-  padding: $font_s;
-  font-size: $font_m;
+  padding: var(--font_s);
+  font-size: var(--font_m);
   border: 1px solid var(--thirdy_1);
   color: var(--thirdy_1);
   cursor: pointer;
@@ -118,7 +116,7 @@ img {
 }
 
 hr {
-  margin-bottom: $font_xs;
+  margin-bottom: var(--font_xs);
 }
 
 .not_found_header {

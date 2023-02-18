@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormulasService } from 'services/formulas.service';
@@ -8,7 +8,7 @@ import { FormulasService } from 'services/formulas.service';
   templateUrl: './add-excel-file.component.html',
   styleUrls: ['./add-excel-file.component.scss']
 })
-export class AddExcelFileComponent implements OnInit {
+export class AddExcelFileComponent {
   @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
   choosenFileName: string = '';
 
@@ -23,8 +23,6 @@ export class AddExcelFileComponent implements OnInit {
     private formulasService: FormulasService
   ) { }
 
-  ngOnInit(): void {
-  }
   onChange(event) {
     const a = document.getElementById('files') as any;
     this.choosenFileName = a.files.item(0).name;

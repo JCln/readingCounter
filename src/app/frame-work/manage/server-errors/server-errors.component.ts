@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IManageServerErrorsRes } from 'interfaces/imanage';
+import { CloseTabService } from 'services/close-tab.service';
 import { ManageServerService } from 'services/manage-server.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
@@ -11,20 +11,21 @@ import { FactoryONE } from 'src/app/classes/factory';
 export class ServerErrorsComponent extends FactoryONE {
   // important that selectedErrors default value should be []
   selectedErrors: any[] = [];
-  dataSource: IManageServerErrorsRes[] = [];
-
+  
   constructor(
-    public manageServerService: ManageServerService
+    public manageServerService: ManageServerService,
+    public closeTabService: CloseTabService
   ) {
     super();
   }
 
-  classWrapper = async (canRefresh?: boolean) => {
-    this.connectToServer();
-  }
-  ngOnInit(): void { }
   connectToServer = async () => {
-    this.dataSource = await this.manageServerService.postArray(this.selectedErrors);
+    this.closeTabService.saveDataForServerErrors = await this.manageServerService.postArray(this.selectedErrors);
+  }
+  classWrapper = async (canRefresh?: boolean) => {
+    if (!this.closeTabService.saveDataForServerErrors) {
+      this.connectToServer();
+    }
   }
   linkToElmah = (body: string) => {
     this.manageServerService.linkToElmah(body);

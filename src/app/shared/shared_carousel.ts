@@ -1,25 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { GalleriaModule } from 'primeng/galleria';
 
 import { CarouselWoumComponent } from './carousel-woum/carousel-woum.component';
 import { WoumComponent } from './carousel-woum/woum/woum.component';
+import { ShowImgDgComponent } from './show-img-dg/show-img-dg.component';
 
 
 @NgModule({
     declarations: [
         CarouselWoumComponent,
-        WoumComponent
+        WoumComponent,
+        ShowImgDgComponent
     ],
     imports: [
         FormsModule,
-        CommonModule
+        CommonModule,
+        GalleriaModule
     ],
     exports: [
         CarouselWoumComponent,
         WoumComponent,
+        ShowImgDgComponent,
         CommonModule,
         FormsModule,
+        GalleriaModule
     ]
 })
 export class SharedCarouselModule {

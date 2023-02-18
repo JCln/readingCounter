@@ -1,6 +1,6 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { ENHubMessages, ENThemeColor } from 'interfaces/ioverall-config';
+import { ENHubMessages } from 'interfaces/ioverall-config';
+import { ENThemeColor } from 'interfaces/istyles';
 import { SignalRService } from 'services/signal-r.service';
 import { ThemeService } from 'services/theme.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -8,18 +8,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  animations: [
-    trigger('openClose', [
-      state('closeSubItems', style({
-        display: 'none'
-      })),
-      state('openSubItems', style({
-        display: 'inline'
-      })),
-      transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
-    ])
-  ]
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements AfterContentInit, OnChanges {
   ENHubMessages = ENHubMessages;

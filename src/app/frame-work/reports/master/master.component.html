@@ -1,20 +1,11 @@
 <main class="main">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="readingReportManagerService.isCollapsedMaster">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
-                <section class="order_by">
-                    <h2>صدور بر اساس :</h2>
-                    <mat-radio-group class="radio_group" aria-labelledby="radio_group" [(ngModel)]="_isOrderByDate"
-                        name="_isOrderByDate">
-                        <mat-radio-button class="radio_button" *ngFor="let orderType of searchInOrderTo"
-                            [value]="orderType.isSelected">
-                            {{orderType.title}}
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </section>
+                <app-sort-according-to></app-sort-according-to>
                 <hr>
                 <section class="content">
-                    <div class="input_2" [hidden]="_isOrderByDate">
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">نوع دوره</div>
                         <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
                             <mat-option (click)="getReadingPeriod()"
@@ -23,24 +14,26 @@
                             </mat-option>
                         </mat-select>
                     </div>
-                    <div class="input_2" [hidden]="!readingPeriodDictionary.length || _isOrderByDate">
+                    <div class="input_2"
+                        [hidden]="!readingPeriodDictionary.length || readingReportManagerService._isOrderByDate">
                         <div class="_key">دوره قرائت</div>
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.readingPeriodId"
-                            name="readingPeriodId">
+                        <mat-select placeholder="انتخاب مورد"
+                            [(ngModel)]="readingReportManagerService.masterReq.readingPeriodId" name="readingPeriodId">
                             <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                                 {{truefalse.title}}
                             </mat-option>
                         </mat-select>
                     </div>
-                    <div class="input_2" [hidden]="_isOrderByDate">
+                    <div class="input_2" [hidden]="readingReportManagerService._isOrderByDate">
                         <div class="_key">سال</div>
-                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportReq.year" name="year">
+                        <mat-select placeholder="انتخاب مورد" [(ngModel)]="readingReportManagerService.masterReq.year"
+                            name="year">
                             <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
                                 {{truefalse.title}}
                             </mat-option>
                         </mat-select>
                     </div>
-                    <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
@@ -49,7 +42,7 @@
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="input_2" [hidden]="!readingReportManagerService._isOrderByDate">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
@@ -67,8 +60,11 @@
             </section>
         </form>
     </section>
-    <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-        [_outputFileName]="'master'" [_selectedColumnsToRemember]="'selectedRRMaster'" [_hasCollapsible]=true
-        [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+    <app-prime-table *ngIf="canShowTable" [dataSource]="closeTabService.saveDataForRRMaster"
+        [_outputFileName]="'master'" [_selectedColumnsToRemember]="'selectedRRMaster'" [_calculableSUM]=true
+        [_hasCollapsible]=true [_isCustomSort]=true [_hasAggregating]=true (customedSort)="customSort($event)"
+        [_isCollaped]="readingReportManagerService.isCollapsedMaster"
+        (collapsed)="readingReportManagerService.isCollapsedMaster = !readingReportManagerService.isCollapsedMaster"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>

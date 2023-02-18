@@ -1,20 +1,30 @@
-<section>
+<h2 class="title">دریافت فایل تکست</h2>
 
-    <h1 class="title">دریافت فایل تکست</h1>
+<form #form="ngForm" (ngSubmit)="downloadTextFile()">
+    <section>
 
-
-    <form #form="ngForm" (ngSubmit)="downloadTextFile()" class="content">
-        <div class="_desc">
-            <input class="input_1" type="text" placeholder="نام کاربری" name="userName" [(ngModel)]="userName">
-
-            <div class="change_pass">
-                <button class="btn_2" type="submit">
-                    <div class="fa fa-download"></div>
-                    دریافت
-                </button>
-            </div>
+        <span class="input_2">
+            <div class="_key">ناحیه</div>
+            <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="zone" #zoneId [options]="zoneDictionary"
+                [(ngModel)]="offlineModeService.loadForm.zoneId" optionLabel="title" [filter]="true" filterBy="title"
+                optionValue="id" [showClear]="true" placeholder="انتخاب مورد" (onChange)="getCounterReader()">
+            </p-dropdown>
+        </span>
+        <div class="input_2 this">
+            <div class="_key">مامور</div>
+            <p-dropdown [style]="{minWidth: '10rem', width: '100%'}" name="counterreader" #counterreader
+                [options]="userCounterReaderDictionary" [(ngModel)]="offlineModeService.loadForm.counterReaderId"
+                optionLabel="title" [filter]="true" filterBy="title" optionValue="id" [showClear]="true"
+                placeholder="انتخاب مورد">
+            </p-dropdown>
         </div>
 
-    </form>
+        <div class="change_pass">
+            <button class="btn_1" type="submit">
+                <div class="fa fa-download"></div>
+                دریافت
+            </button>
+        </div>
 
-</section>
+    </section>
+</form>

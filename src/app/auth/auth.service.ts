@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { EN_messages } from 'interfaces/enums.enum';
+import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthTokenType, IAuthUser, ICredentials } from 'interfaces/iauth-guard-permission';
-import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 import { CloseTabService } from 'services/close-tab.service';
 import { DictionaryWrapperService } from 'services/dictionary-wrapper.service';
-import { MainService } from 'services/main.service';
+import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SignalRService } from 'services/signal-r.service';
 import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { EN_Routes } from '../interfaces/routes.enum';
 import { JwtService } from './jwt.service';
 
 @Injectable({
@@ -19,7 +18,7 @@ import { JwtService } from './jwt.service';
 export class AuthService {
 
   constructor(
-    private mainService: MainService,
+    private interfaceManagerService: InterfaceManagerService,
     private jwtService: JwtService,
     private utilsService: UtilsService,
     private closeTabService: CloseTabService,
@@ -31,11 +30,11 @@ export class AuthService {
     return this.jwtService.getRefreshToken();
   }
   refreshToken = (): Observable<any> => {
-    return this.mainService.POSTBODY('V1/Account/Refresh', { 'refreshToken': this.getRefreshToken() })
+    return this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountRefresh, { 'refreshToken': this.getRefreshToken() })
   }
   logging = (userData: ICredentials) => {
     const returnUrl = this.utilsService.getRouteParams('returnUrl');
-    this.mainService.POSTBODY('v1/account/login', userData).subscribe((res: IAuthTokenType) => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountLogin, userData).toPromise().then((res: IAuthTokenType) => {
       this.saveTolStorage(res);
       this.routeToReturnUrl(returnUrl);
     })
@@ -47,9 +46,9 @@ export class AuthService {
     this.clearAllSavedData();
     this.clearDictionaries();
     this.signalRService.disconnectConnection();
-    this.mainService.POSTBODY('V1/Account/Logout', { refreshToken }).subscribe(() => {
+    this.interfaceManagerService.POSTBODY(ENInterfaces.AuthsAccountLogout, { refreshToken }).toPromise().then(() => {
       this.jwtService.removeAuthLocalStorage();
-      this.utilsService.routeTo('/login');
+      this.utilsService.routeTo(EN_Routes.login);
     })
   }
   saveTolStorage = (token: IAuthTokenType) => {
@@ -79,15 +78,6 @@ export class AuthService {
       displayName: decodedToken["DisplayName"],
       roles: roles
     });
-  }
-  noAccessMessage = (errorMessage?: string) => {
-    if (MathS.isNull(errorMessage))
-      this.utilsService.snackBarMessageWarn(EN_messages.access_denied);
-    else
-      this.utilsService.snackBarMessageWarn(errorMessage);
-  }
-  goOutInMessage = () => {
-    this.utilsService.snackBarMessage(EN_messages.accedd_denied_relogin, ENSnackBarTimes.tenMili, ENSnackBarColors.danger);
   }
 
 }

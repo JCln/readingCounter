@@ -2,12 +2,12 @@ $border_15: 10px;
 
 .input_1 {
   min-width: 19rem;
-  height: 3rem;
+  height: var(--font_3);
   background: var(--white);
-  padding: 0 1rem;
-  margin: .25rem 0;
+  padding: 0 var(--font_xs);
+  margin: var(--font_025) 0;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: var(--font_s);
   color: var(--primary_4);
   border-radius: 2rem;
   font-weight: 600;
@@ -26,24 +26,27 @@ $border_15: 10px;
   color: var(--secondary_3);
   display: flex;
   align-items: center;
-  margin: .25rem 0;
-  height: 3rem;
+  margin: var(--font_025) 0;
+  height: var(--font_3);
+  border: 1px solid var(--secondary_3_spec);
+  border-radius: $border_7;
 }
 
 ._key {
   color: var(--primary_4);
   text-align: left;
-  padding-right: .5rem;
+  padding-right: var(--font_05);
   display: flex;
   align-items: center;
-  margin: auto;
   white-space: nowrap;
+  min-width: var(--font_3);
+  text-align: center;
+  // margin: auto;
 }
 
 ._value {
   border-radius: inherit;
   margin: .2em;
-  max-width: 52%;
   width: 100%;
   flex: 1;
   text-align: center;
@@ -55,9 +58,27 @@ $border_15: 10px;
 ._value {
   display: grid;
   align-items: center;
-  height: 2.6rem;
+  height: var(--font_26);
   min-height: 85%;
-  font-size: $font_s;
+  font-size: var(--font_s);
   font-weight: 600;
-  height: 2.6rem;
+}
+
+.this {
+  border: 2px dotted var(--orange_600);
+  animation: pulse-new-button 500ms;
+}
+
+@keyframes pulse-new-button {
+  0% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: 0px 0px 3px 0px var(--orange_600);
+  }
+
+  100% {
+    box-shadow: 0px 0px 5px 1px var(--orange_600);
+  }
 }

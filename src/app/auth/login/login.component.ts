@@ -2,14 +2,15 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ICredentials } from 'interfaces/iauth-guard-permission';
-import { ENLoginVersion, IDictionaryManager } from 'interfaces/ioverall-config';
+import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { BrowserSupportService } from 'services/browser-support.service';
 import { infoVersion } from 'services/DI/info-version';
 import { UtilsService } from 'services/utils.service';
 import { Converter } from 'src/app/classes/converter';
 import { MathS } from 'src/app/classes/math-s';
 
-import { AuthService } from './../auth.service';
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -34,8 +35,7 @@ import { AuthService } from './../auth.service';
   ]
 })
 export class LoginComponent {
-  versionNumber = ENLoginVersion.version;
-  userData: ICredentials = { username: '', password: '' };
+  userData: ICredentials = { username: '', password: '', appVersion: this.utilsService.getAppVersion() };
   showVersionInfo: boolean = false;
   infoVersionItems: IDictionaryManager[] = [];
 
@@ -50,16 +50,18 @@ export class LoginComponent {
     this.userData.username = Converter.persianToEngNumbers(this.userData.username);
   }
   logging = () => {
-    if (!this.browserSupportService.isValidBrowserVersion()) {
+    if (this.browserSupportService.isValidBrowserVersion()) {
+      this.convertNumbers();
+      if (MathS.isNull(this.userData.password) || MathS.isNull(this.userData.username)) {
+        this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
+      }
+      else {
+        this.authService.logging(this.userData);
+      }
+    }
+    else {
       this.utilsService.snackBarMessageWarn(EN_messages.browserSupport_alarm);
-      return;
     }
-    this.convertNumbers();
-    if (MathS.isNull(this.userData.password) || MathS.isNull(this.userData.username)) {
-      this.utilsService.snackBarMessageWarn(EN_messages.userPass_empty);
-      return;
-    }
-    this.authService.logging(this.userData);
   }
   getVersionInfos = () => {
     this.infoVersionItems = infoVersion.getInfoItems();

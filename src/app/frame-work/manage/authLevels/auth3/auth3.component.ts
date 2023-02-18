@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IAuthLevel3 } from 'interfaces/iauth-levels';
@@ -18,16 +18,12 @@ import { Auth3AddDgComponent } from './auth3-add-dg/auth3-add-dg.component';
 })
 export class Auth3Component extends FactoryONE {
 
-  dataSource: IAuthLevel3[] = [];
-
   authLevel2Dictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IAuthLevel3; } = {};
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
 
   constructor(
     private dialog: MatDialog,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public authsManagerService: AuthsManagerService
   ) {
     super();
@@ -37,7 +33,7 @@ export class Auth3Component extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(Auth3AddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           di: this.authLevel2Dictionary
         }
@@ -53,18 +49,14 @@ export class Auth3Component extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForAppLevel3) {
-      this.dataSource = this.closeTabService.saveDataForAppLevel3;
+    if (!this.closeTabService.saveDataForAppLevel3) {
+      this.closeTabService.saveDataForAppLevel3 = await this.authsManagerService.getAPIDataSource(ENInterfaces.AuthLevel3GET);
     }
-    else {
-      this.dataSource = await this.authsManagerService.getAuth3DataSource();
-      this.closeTabService.saveDataForAppLevel3 = this.dataSource;
-    }
-    this.authLevel2Dictionary = await this.authsManagerService.getAuthLevel2Dictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
+    this.authLevel2Dictionary = await this.authsManagerService.getAuthLevel2Dictionary();
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'authLevel2Id');
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForAppLevel3 = this.closeTabService.saveDataForAppLevel3.slice(0, index).concat(this.closeTabService.saveDataForAppLevel3.slice(index + 1));
   removeRow = async (rowDataAndIndex: object) => {
     const a = await this.authsManagerService.firstConfirmDialog();
     if (a) {
@@ -77,7 +69,7 @@ export class Auth3Component extends FactoryONE {
   }
   onRowEditSave = async (dataSource: object) => {
     if (!this.authsManagerService.verification(dataSource)) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForAppLevel3[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].authLevel2Id !== 'object') {
@@ -89,20 +81,13 @@ export class Auth3Component extends FactoryONE {
       dataSource['dataSource'].authLevel2Id = dataSource['dataSource'].authLevel2Id['id'];
     }
     await this.authsManagerService.addOrEditAuths(ENInterfaces.AuthLevel3EDIT, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'authLevel2Id');
   }
   onRowEditCancel() {
-    Converter.convertIdToTitle(this.dataSource, this.authLevel2Dictionary, 'authLevel2Id');
-    // this.dataSource[index] = this.clonedProducts[dataSource.id];
-    // delete this.dataSource[dataSource.id];
+    Converter.convertIdToTitle(this.closeTabService.saveDataForAppLevel3, this.authLevel2Dictionary, 'authLevel2Id');
+    // this.closeTabService.saveDataForAppLevel3[index] = this.clonedProducts[dataSource.id];
+    // delete this.closeTabService.saveDataForAppLevel3[dataSource.id];
     // return;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
 
 }

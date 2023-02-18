@@ -1,0 +1,46 @@
+.overall-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 14rem));
+  gap: var(--font_025);
+  direction: rtl;
+
+  @media (min-width: 550px) {
+    justify-content: center;
+  }
+
+  ._bigger_input {
+    min-width: 11rem;
+  }
+
+  ._value {
+    border: none;
+  }
+}
+
+.radios {
+  background: var(--white);
+  border-radius: 10px 10px 0 0;
+  padding: 0 var(--font_02);
+  display: flex;
+  flex-wrap: wrap;
+  direction: rtl;
+  gap: var(--font_xxs);
+}
+
+.under_zero {
+  border-radius: $border_15;
+  background-color: var(--secondary_1);
+  padding: 0 var(--font_02);
+}
+
+.p-field-radiobutton {
+  display: flex;
+  align-items: center;
+  margin-left: var(--font_xs);
+
+  label {
+    font-size: var(--font_s);
+    color: var(--primary_3);
+    font-weight: 600;
+  }
+}

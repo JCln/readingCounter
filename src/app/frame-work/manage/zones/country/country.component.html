@@ -1,14 +1,13 @@
 <app-prime-table-editable     
-    [_selectCols]="_selectCols" 
-    [_selectedColumns]="selectedColumns"
-    [dataSource]="dataSource" 
+    [dataSource]="closeTabService.saveDataForCountry" 
     [_checkUpName]="'country'"
+    [_outputFileName]="'country'"
     [_multiSelectEnable]=false
     [_outputEnabled]= false    
     [_numberOfExtraColumns]="[1, 2]"
     (refreshedTable)="refreshTable()"
     (openedAddDialog)="openAddDialog()"
-    (dropDownChanges)="dataSource['countryId']"
+    (dropDownChanges)="closeTabService.saveDataForCountry['countryId']"
     (removedRow)="removeRow($event)"
     (onRowEditedCancel)="onRowEditCancel()"
     (onRowEditedInit)="onRowEditInit($event)"

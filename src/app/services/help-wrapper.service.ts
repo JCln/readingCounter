@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { EN_Routes } from 'interfaces/routes.enum';
 
 import { AddNewComponent } from '../frame-work/manage/add-new/add-new.component';
-import { EN_Routes } from '../Interfaces/routes.enum';
 
 export interface IHelpWrapper {
   title: string,
@@ -37,7 +37,7 @@ export class HelpWrapperService {
       return {
         title: 'مشاهده نقشه',
         messageOne: '1-	امکان استفاده از دو لایه ظاهری2-	پرینت نقشه بصورت عمودی و افقی3-	بزرگ و کوچک کردن نقشه4-	بارگذاری مجدد نقشه درصورت خطا در نمایش احتمالی5-	مکان یابی6-	حذف تمامی لایه ها',
-        imgOne: 'assets/imgs/help/wr1.PNG'
+        imgOne: 'assets/imgs/help/wr1.jpg'
       }
     if (currentRoute === EN_Routes.wrdb)
       return {
@@ -46,7 +46,7 @@ export class HelpWrapperService {
         messageThree: 'عملکرد فرایند قرائت، در دو نمودار رادار و میله‌ای قابل مشاهده و بررسی هستند.',
         messageTwo: 'قسمت کارکرد، مربوط به اطلاعات قرائت به تفکیک روز، هفته، ماه و سال میباشد. ',
       }
-    else if (currentRoute === EN_Routes.wrmuedit || currentRoute === EN_Routes.wrmuall)
+    else if (currentRoute === EN_Routes.wrmuall)
       return {
         title: 'مشاهده و ویرایش کاربران',
         messageOne: 'این بخش شامل قسمت های مشاهده همه کاربران و افزودن کاربر جدید می‌باشد.',
@@ -85,7 +85,14 @@ export class HelpWrapperService {
         messageTwo: 'برای افزودن یک ناحیه، پس از کلیک برروی گزینه افزودن مطابق تصویر و کامل کردن مقادیر خواسته شده، ناحیه ای ایجاد میشود، نکته حائز اهمیت مقدار منطقه است که یکی از مقادیر موجود در مناطق خودگردان است.',
         messageThree: 'امکان جستجو، ویرایش، حذف و افزودن مطابق تصویر می‌باشد.',
       }
-    else if (currentRoute === EN_Routes.wrmrkar || currentRoute === EN_Routes.wrmrrcd || currentRoute === EN_Routes.wrmrcs || currentRoute === EN_Routes.wrmrrpk || currentRoute === EN_Routes.wrmrrp || currentRoute === EN_Routes.wrmrqtr)
+    else if (
+      currentRoute === EN_Routes.wrmrkar ||
+      currentRoute === EN_Routes.wrmrrcd ||
+      currentRoute === EN_Routes.wrmrcs ||
+      currentRoute === EN_Routes.wrmrrpk ||
+      currentRoute === EN_Routes.wrmrrp ||
+      currentRoute === EN_Routes.wrmrrpt
+    )
       return {
         title: 'مدیریت قرائت',
         messageOne: 'برای مشاهده، شخصی سازی و کنترل بخش های مدیریت قرائت درنظر گرفته شده است. این قسمت شامل کنترل بخش های کاربری، تنظیمات پیش فرض، وضعیت کنتور و ... است.',
@@ -96,6 +103,21 @@ export class HelpWrapperService {
       return {
         title: 'مدیریت apk',
         messageOne: 'این بخش به دو قسمت نسخه های گذشته و جدید تقسیم میشود. درصورتی که نیاز به استفاده از apk قبلی بود برروی دانلود فایل کلیک نمایید. برای ایجاد نسخه جدید با وارد کردن نام، کد و فایل نسخه به ایجاد نسخه جدید اقدام نمود. ',
+      }
+    else if (currentRoute === EN_Routes.wrmrqtr)
+      return {
+        title: 'قطر کنتور',
+        messageOne: 'این بخش جهت مدیریت قطر انشعاب درنظر گرفته شده است',
+      }
+    else if (currentRoute === EN_Routes.wrmrimgattr)
+      return {
+        title: 'توصیف تصاویر',
+        messageOne: 'جهت اصلاح تصاویر در سایر بخش ها، علت اصلاح تصویر در این بخش تعریف می‌شود.',
+      }
+    else if (currentRoute === EN_Routes.wrmrtxtout)
+      return {
+        title: 'تکست خروجی',
+        messageOne: 'مدیریت چیدمان فایل تکست خروجی جهت ادغام با نرم افزار امور مشترکین استفاده می‌شود. ',
       }
     else if (currentRoute === EN_Routes.wrimpimd)
       return {
@@ -109,9 +131,9 @@ export class HelpWrapperService {
     else if (currentRoute === EN_Routes.wrmdbf)
       return {
         title: 'دانلود خروجی',
-        messageOne: 'برای دریافت فایل های متعدد(dbf) از این بخش میتوان اقدام کرد',
+        messageOne: 'این بخش برای دریافت فایل های متعدد(dbf) طراحی شده است',
         imgOne: 'assets/imgs/help/dbf/dbf.JPG',
-        messageTwo: 'کافی است پس از وارد کردن مقادیر، فایل بارگیری را دریافت نمایید.',
+        messageTwo: 'کافی است پس از وارد کردن مقادیر، برروی دانلود فایل کلیک نمایید.',
       }
     else if (currentRoute === EN_Routes.wrmfbn || currentRoute === EN_Routes.wrmfbnres)
       return {
@@ -119,6 +141,12 @@ export class HelpWrapperService {
         messageOne: 'کل اطلاعات غیرمجاز در این بخش ثبت میشود. ',
         messageTwo: 'اطلاعاتی که توسط مامورین قرائت ثبت شده قابل پیگیری می باشد.',
         messageThree: 'همچنین درصورتی که عکسی ارسال شده باشد با کلیک برروی آیکن مربوطه قابل مشاهده است.',
+      }
+    if (currentRoute === EN_Routes.wrmlpd)
+      return {
+        title: 'مامور/ها',
+        messageOne: 'جزئیات بیشتر یک لیست درحال قرائت توسط مامور از جمله اطلاعات قرائت و اطلاعات مکانی قابل مشاهده است.',
+        messageTwo: 'درصورت نیاز به مشاهده موقعیت مکانی مامور و اشتراک های ثبت شده برروی نقشه نیز برروی مشاهده برروی نقشه کلیک نمایید.',
       }
     else if (currentRoute === EN_Routes.wrmsfwu || currentRoute.includes(EN_Routes['wrmsfwu/']))
       return {
@@ -144,7 +172,8 @@ export class HelpWrapperService {
       return {
         title: 'تنظیمات کاربری',
         messageOne: 'مشخصات کاربری شما در این قسمت قابل مشاهده است، درصورت نیاز به تغییر گذرواژه با وارد کردن گذرواژه فعلی و گذرواژه مدنظر نسبت به تغییر آن اقدام نمایید.',
-        messageTwo: 'توجه شود که اگر گذرواژه شما قبلا بازنشانی شده باشد، گذرواژه،شماره موبایل شما خواهد بود. ',
+        messageTwo: 'توجه شود که اگر گذرواژه شما قبلا بازنشانی شده باشد، گذرواژه، شماره موبایل شما خواهد بود. ',
+        messageThree: 'سایر تنظیمات جهت ذخیره تغییرات کاربران در مراجعات بعدی به برنامه درنظر گرفته شده است',
       }
     else if (currentRoute === EN_Routes.wrmtrackreading)
       return {
@@ -168,10 +197,37 @@ export class HelpWrapperService {
         messageTwo: 'برگشت به صادر شده:  با ارائه دلیل، قابل انجام است',
         messageThree: 'حذف مسیر:  با ارائه دلیل قابل انجام است.',
       }
+    else if (currentRoute === EN_Routes.wrflashlr)
+      return {
+        title: 'آخرین قرائت ماموران',
+        messageOne: 'اشتراک درحال قرائت برروی نقشه و با جزئیات بیشتر در جدول بطور لحظه‌ای قابل مشاهده است .',
+      }
+    else if (currentRoute === EN_Routes.realtimeMessage)
+      return {
+        title: 'پیام به کاربران آنلاین',
+        messageOne: 'میتوان با تنظیمات زیر پیامی به کاربران ارسال کرد. متن پیشفرضی درنظر گرفته شده که با کلیک روی دکمه استفاده قابل ویرایش نیز می باشد.',
+      }
     else if (currentRoute === EN_Routes.wrpolicies)
       return {
         title: 'تنظیمات امنیتی',
-        messageOne: 'موارد امنیتی مانند حداقل تعداد گذرواژه را تنظیم کنید.',
+        messageOne: 'موارد امنیتی مانند حداقل تعداد گذرواژه را تنظیم نمایید.',
+      }
+    else if (currentRoute === EN_Routes.userKarkardSummary)
+      return {
+        title: 'کاربر خلاصه عملکرد',
+        messageOne: 'امکان نمایش عملکرد کاربر براساس تعداد مطابق با عملیات کارتابل وجود دارد. مثلا ماموری در بازه زمانی دو روز دوبار بارگیری و دوبار بارگذاری کرده است.',
+      }
+    else if (currentRoute === EN_Routes.userOnlines)
+      return {
+        title: 'کاربران آنلاین',
+        messageOne: 'مشاهده کاربرانی که درحال حاضر به سامانه متصل هستند.',
+        messageTwo: 'زمان به معنای آخرین ورود کاربران تاکنون است.',
+      }
+    else if (currentRoute === EN_Routes.wrSettingsWaterMark)
+      return {
+        title: 'واتر مارک',
+        messageOne: 'جزئیات واترمارک بر روی تصویر(عکس گرفته شده) قابل ویرایش است',
+        messageTwo: 'توجه نمایید که فاصله از چپ و بالا بطور تقریبی نمایش داده میشود',
       }
   }
   /* DYNAMIC ROUTES */
@@ -181,12 +237,6 @@ export class HelpWrapperService {
         title: 'پیگیری درحال قرائت',
         messageOne: 'اشتراک های درحال قرائت با نقطه مشخص شده اند. با کلیک بروی هرکدام اطلاعات اشتراک مشخص میشود.',
         messageTwo: ' درصورت نیاز به مشاهده مسیر طی شده(اشتراک های ثبت شده) برروی زمان نمایش کلیک نمایید. زمان مشاهده براساس میلی ثانیه "ms" است.',
-      }
-    if (currentRoute.includes(EN_Routes['wrmlpd/']))
-      return {
-        title: 'مامور/ها',
-        messageOne: 'جزئیات بیشتر یک لیست درحال قرائت توسط مامور از جمله اطلاعات قرائت و اطلاعات مکانی قابل مشاهده است.',
-        messageTwo: 'درصورت نیاز به مشاهده موقعیت مکانی مامور و اشتراک های ثبت شده برروی نقشه نیز برروی مشاهده برروی نقشه کلیک نمایید.',
       }
     else if (currentRoute.includes(EN_Routes.wrmrformula))
       return {
@@ -229,7 +279,7 @@ export class HelpWrapperService {
         messageOne: 'کلیه اطلاعات قرائت شده (تخلیه شده) توسط مامور قرائت در این قسمت قابل مشاهده و اصلاح می باشد. برای اصلاح بروی آیکن اصلاح کلیک تا به صفحه اصلاح منتقل شوید',
         imgOne: 'assets/imgs/help/offloadmodify/allmodify.JPG',
       }
-    else if (currentRoute.includes(EN_Routes.wrmlallfalse) || currentRoute.includes(EN_Routes.wrmtrackwouifalse))
+    else if (currentRoute.includes(EN_Routes.wrmlallfalse))
       return {
         title: 'لیست قرائت',
         messageOne: ' لیست قرائت مامور در این قسمت قابل مشاهده می باشد. درصورتی که عکس(ها) و یا صوتی گرفته شده باشد با کلیک برروی "بررسی عکس/صوت" قابل بررسی می باشد.',
@@ -240,14 +290,50 @@ export class HelpWrapperService {
         title: 'جستجوی تجمیعی',
         messageOne: 'لیست قرائت جستجو شده در این قسمت قابل مشاهده می باشد. درصورتی که عکس(ها) و یا صوتی گرفته شده باشد با کلیک برروی "بررسی عکس/صوت" قابل بررسی می باشد.',
       }
+    else if (currentRoute === EN_Routes.rptskarkardDaily)
+      return {
+        title: 'گزارش لیست مامور',
+        messageOne: 'اشتراک های قرائت شده را با جزئیات نمایش میدهد. تیک نمایش همه برای نمایش لیست پس از قرائت است و توسط مامور بارگذاری انجام شده است.',
+      }
+    else if (currentRoute === EN_Routes.wrofflinetxtout)
+      return {
+        title: 'بارگذاری اطلاعات مامور',
+        messageOne: 'کلیه اطلاعاتی که توسط مامور ثبت شده و در فرآیند ارسال با مشکل مواجه شده ارسال نمایید(لیست میتواند تصویر، صوت، غیرمجاز یا هر داده دیگری نیز باشد)',
+      }
+    else if (currentRoute === EN_Routes.offlineLoad)
+      return {
+        title: 'بارگیری اطلاعات مامور',
+        messageOne: 'ماموری که در دریافت لیست صادر شده با مشکل مواجه شده باشد، فایلی که در این قسمت دریافت میکند را به گوشی خود منتقل و فرایند قرائت را انجام میدهد',
+      }
+    else if (currentRoute === EN_Routes.wrrptsmamKarkardAllStates)
+      return {
+        title: 'همه وضعیت های قرائت شده',
+        messageOne: 'گزارشی از کلیه وضعیت های قابل ثبت توسط مامور را ارائه میکند. انتخاب نوبتی اختیاری است.',
+      }
+    else if (currentRoute === EN_Routes.serverOSInfo)
+      return {
+        title: 'اطلاعات سرور در حال استفاده',
+        messageOne: 'زمان فعالیت: از آخرین زمانی که خاموش یا ریست شده است تا کنون محاسبه میشود',
+        messageTwo: 'زمان: زمان فعلی سرور است'
+      }
+    else if (currentRoute === EN_Routes.downloadAI)
+      return {
+        title: 'دانلود روزانه',
+        messageOne: 'دانلود کل تصاویر گرفته شده در یک روز',
+      }
+    else if (currentRoute === EN_Routes.uploadSingle)
+      return {
+        title: 'آپلود تکی',
+        messageOne: 'برای اضافه کردن تصویر به شماره اشتراک قابل استفاده است'
+      }
     else if (currentRoute.includes(EN_Routes.wrrptsexmdetails)
       || currentRoute.includes(EN_Routes.wrrptsmamtrv)
       || currentRoute.includes(EN_Routes.wrrptsmamtrvch)
       || currentRoute.includes(EN_Routes.wrrptsmamkarkard)
-      || currentRoute.includes(EN_Routes.wrrptsexmkarkardDaily)
       || currentRoute.includes(EN_Routes.wrrptsmamdh)
       || currentRoute.includes(EN_Routes.wrrptsexmmaster)
       || currentRoute.includes(EN_Routes.wrrptsexmdetails)
+      || currentRoute.includes(EN_Routes.wrmdmacranlz)
       || currentRoute.includes(EN_Routes.wrrptsmamoffkarkard))
       return {
         title: 'گزارشات',
@@ -275,8 +361,9 @@ export class HelpWrapperService {
         title: 'نوبتی',
         messageOne: 'اطلاعات کلی نوبتی در این بخش قابل مشاهده است',
         imgOne: 'assets/imgs/help/fragment/nob2.JPG',
-        messageTwo: 'با ورود به بخش مدیریت مسیر ها، امکان ایجاد مسیر/ها برای بازه‌/ها اشتراکی وجود دارد.',
-        messageThree: 'امکان افزودن، ویرایش، مشاهده جزئیات و حذف هر مورد نیز وجود دارد. ستون تایید شده به معنای تایید تمامی زیر مجوعه ها در یک مسیر است. درصورتی که مشکلی در ایجاد و ویرایش وجود داشته باشد سیستم بطور خودکار  پیامی برای اصلاح موارد لازم نمایش خواهد داد. ',
+        messageTwo: 'با ورود به بخش مدیریت مسیر ها، امکان ایجاد مسیر/ها برای بازه‌/ها اشتراکی وجود دارد. امکان افزودن، ویرایش، مشاهده جزئیات و حذف هر مورد نیز وجود دارد. ستون تایید شده به معنای تایید تمامی زیر مجوعه ها در یک مسیر است. درصورتی که مشکلی در ایجاد و ویرایش وجود داشته باشد سیستم بطور خودکار  پیامی برای اصلاح موارد لازم نمایش خواهد داد.',
+        imgTwo: 'assets/imgs/help/fragment/autoImport.JPG',
+        messageThree: 'با کلیک برروی صدور لیست خودکار، از این پس برنامه بطور خودکار لیست صادر می‌کند. به این منظور تنها نیاز به تنظیم اولیه اطلاعات مطابق شکل وجود دارد.',
       }
     else if (currentRoute.includes(EN_Routes.wrmtrack))
       return {
@@ -324,7 +411,7 @@ export class HelpWrapperService {
     this.messageToShow.messageThree = currentVal.messageThree;
 
     this.dialog.open(AddNewComponent, {
-      minWidth: '19rem',
+      minWidth: '65vw',
       data: currentVal
     });
   }

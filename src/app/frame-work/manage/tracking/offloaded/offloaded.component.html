@@ -1,18 +1,19 @@
-<app-prime-table *ngIf="route.children.length === 0"     
-    [dataSource]="dataSource" 
+<app-prime-table
+    [dataSource]="closeTabService.saveDataForTrackOffloaded" 
     [_outputFileName]="'offloaded'"
     [_checkUpName]="'offloaded'"
-    [_sortField]="'insertDateJalali'"    
-    [_numberOfExtraColumns]="[1, 2, 3 , 4]"
+    [_numberOfExtraColumns]="trackingManagerService.denyTracking() ? [1,2,3,4]: [1,2,3,4,5]"
     [_calculableSUM]=true
+    [_hasAggregating] = true
+    [_isCustomSort]=true
     [_selectedColumnsToRemember]="'selectedTrackOffloaded'"
     [_sessionName]="'offloaded-session'"
     (refreshedTable)="refreshTable()"
+    (customedSort)="trackingManagerService.customSort($event)"
     (downloadedOutputSingle)="downloadOutputSingle($event)"        
     (routeedToOffloadModify)="routeToOffloadModify($event)"        
     (routedToOffloadGeneralModify)="routeToOffloadGeneralModify($event)"        
-    (backedToReading)="backToReading($event)"        
+    (backedToReading)="backToReading($event)"
+    (routedToLMAll)="routeToAssessPre($event)"        
  > 
 </app-prime-table>
-
-<router-outlet></router-outlet>

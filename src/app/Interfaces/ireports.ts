@@ -35,7 +35,56 @@ export interface IReadingReportReq {
     counterReaderId: string,
     readingPeriodId: number,
     reportCode: number,
-    year: number
+    year: number,
+    _selectedAggregate?: string,
+    beginFromImported?: boolean,
+    isCollapsed?: boolean,
+    fragmentMasterIds?: string[]
+}
+export interface IKarkardAllStatesDto {
+    offloadDayalali: string,
+    fromEshterak: string,
+    toEshterak: string,
+    counterReaderName: string,
+    duration: number,
+    overalCount: number,
+    zoneTitle: string,
+    trackNumber: number,
+    counterStateAndCounts: [
+        {
+            counterStateTitle: string,
+            count: number
+        }
+    ]
+}
+export interface IUserKarkardInput {
+    zoneId: number,
+    fromDate: string,
+    toDate: string,
+    statusId: number,
+}
+export interface IUserKarkard {
+    userId: string,
+    userDisplayName: string,
+    zoneId: number,
+    zoneTitle: string,
+    trackNumber: number,
+    fromEshterak: string,
+    toEshterak: string,
+    counterReaderName: string,
+    insertDateJalali: string,
+    insertDateTime: string,
+    isBazdid: boolean,
+    year: number,
+    isRoosta: boolean,
+    overallQuantity: number,
+    itemQuantity: number,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    description: string
 }
 export interface IReadingReportGISReq {
     zoneId: number,
@@ -48,7 +97,8 @@ export interface IReadingReportGISReq {
     year: number,
     fromDate: string,
     toDate: string,
-    isCluster: boolean
+    isCluster: boolean,
+    fragmentMasterIds?: string[]
 }
 export interface IReadingReportGISResponse {
     x: string,
@@ -182,7 +232,8 @@ export interface IReadingReportTraverseDifferentialReq {
     traverseType: number,
     zoneIds: [
         number
-    ]
+    ],
+    fragmentMasterIds: []
 }
 export interface IRRChartResWrapper {
     dayJalali: string,
@@ -207,13 +258,22 @@ export interface IImageUrlAndInfos {
     sureName: string,
     imageDescription: string,
     sizeInByte: number,
-    imageUrl?: any
+    zoneTitle: string,
+    counterReaderName: string,
+    counterNumber: number,
+    counterStateTitle: string,
+    trackNumber: number,
+    imageUrl?: any,
+    imageAttrTitle?: string,
+    operatorName: string
 }
 export interface IImageUrlInfoWrapper {
     trackNumber: number,
     itemCount: number,
     imageCount: number,
     distinctImageCount: number,
+    zoneTitle: string,
+    counterReaderName: string,
     imageUrlAndInfos: IImageUrlAndInfos[]
 }
 export interface IDynamicReportsRes {

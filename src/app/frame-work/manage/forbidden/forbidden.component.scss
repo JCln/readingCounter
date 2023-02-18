@@ -3,18 +3,22 @@
 @import 'input.scss';
 @import '_mat.scss';
 
-form {
-  display: grid;
+
+main {
   direction: rtl;
-  justify-content: center;
-  margin: auto;
-  position: relative;
-  padding: $font_xs;
-  width: 18rem;
   background: var(--secondary_1);
-  border-radius: $border_15;
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
-  margin-bottom: $font_xs;
+  padding: var(--font_05);
+  border-radius: $border_15;
+  border: 1px solid var(--primary_2);
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 16rem));
+  gap: var(--font_05);
+  justify-content: center;
+  align-items: center;
 }
 
 .input_2 {
@@ -22,15 +26,9 @@ form {
   width: 15rem;
 }
 
-.btn_1 {
-  margin-top: $font_2;
-  color: var(--white);
-  background-color: var(--orange_500);
-}
-
 ._key,
 ._value {
-  font-size: $font_m;
+  font-size: var(--font_m);
   font-weight: 800;
 }
 
@@ -52,26 +50,8 @@ input {
   border: none;
 }
 
-::ng-deep {
-  .mat-select-panel .mat-option {
-    font-size: 1.2rem;
-    line-height: 3em;
-    height: 3em;
-    text-align: right;
-    font-family: $font_family;
-    font-weight: 600;
-  }
-
-  .mat-option-text {
-    font-size: $font_s;
-    font-weight: 600;
-    color: var(--primary_6);
-  }
-
-}
-
 ._collapsable {
   position: absolute;
-  left: .2rem;
+  left: var(--font_02);
   top: 0;
 }

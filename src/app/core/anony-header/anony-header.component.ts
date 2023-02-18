@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { EnvService } from 'services/env.service';
 import { ThemeService } from 'services/theme.service';
@@ -6,18 +5,7 @@ import { ThemeService } from 'services/theme.service';
 @Component({
   selector: 'app-anony-header',
   templateUrl: './anony-header.component.html',
-  styleUrls: ['./anony-header.component.scss'],
-  animations: [
-    trigger('openClose', [
-      state('closeSubItems', style({
-        display: 'none'
-      })),
-      state('openSubItems', style({
-        display: 'inline'
-      })),
-      transition('closeSubItems<=>openSubItems', animate('250ms ease-in-out'))
-    ])
-  ]
+  styleUrls: ['./anony-header.component.scss']
 })
 export class AnonyHeaderComponent {
   provinceName: string;

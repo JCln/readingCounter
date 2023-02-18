@@ -2,17 +2,18 @@ import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOnOffLoadFlat } from 'interfaces/imanage';
+import { PrimeNGConfig } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BrowserStorageService } from 'services/browser-storage.service';
 import { ListManagerService } from 'services/list-manager.service';
+import { ProfileService } from 'services/profile.service';
 import { UtilsService } from 'services/utils.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ColumnManager } from 'src/app/classes/column-manager';
 
 import { MapDgComponent } from '../frame-work/manage/list-manager/all/map-dg/map-dg.component';
-import {
-    ListSearchMoshWoumComponent,
-} from '../frame-work/manage/list-manager/list-search-mosh-dg/list-search-mosh-woum/list-search-mosh-woum.component';
+import { ListSearchMoshWoumComponent } from '../shared/list-search-mosh-woum/list-search-mosh-woum.component';
 import { MathS } from './math-s';
 
 @Component({
@@ -28,10 +29,6 @@ export abstract class FactoryONE implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         //  for purpose of refresh any time even without new event emiteds
         // we use subscription and not use take or takeUntil
-        /** UPDATE: 
-         * TODO: REMOVE subscription because another perfect way
-         * implemented on lastest merge
-         */
         this.subscription.forEach(subscription => subscription.unsubscribe());
     }
     ngOnInit(): void {
@@ -48,17 +45,43 @@ export abstract class FactoryONE implements OnInit, OnDestroy {
 export class FactorySharedPrime implements OnChanges {
 
     _showSavedColumnButton: boolean;
+    _reOrderableTable: boolean;
+    _reSizebleTable: boolean;
+    tempOriginDataSource: any[] = [];
+    ref: DynamicDialogRef;
+
     @Input() dataSource: any[] = [];
     @Input() _selectCols: any = [];
     @Input() _selectedColumns: any[];
     @Input() _outputFileName: string;
+    @Input() _rowsPerPage: number[] = [10, 100, 1000, 5000];
     @Input() _tooltipText: string;
+    @Input() _numberOfExtraColumns: number[];
+    @Input() _sessionName: string;
+    @Input() _rowsNumbers = 10;
+    @Input() _selectedColumnsToRemember: string;
+    @Input() _backToPreviousText: string;
+    @Input() _captionEnabled: boolean = true;
+    @Input() _sortField: string = '';
+    @Input() _outputEnabled: boolean = true;
+    @Input() _backToPreviousEnabled: boolean = false;
+    @Input() _checkUpName: string = '';
+    @Input() _multiSelectEnable: boolean = true;
+    @Input() _isCustomSort: boolean = false;
+    @Input() _hasSaveColumns: boolean = true;
 
     constructor(
         public browserStorageService: BrowserStorageService,
         public utilsService: UtilsService,
         public columnManager: ColumnManager,
-    ) { }
+        public config: PrimeNGConfig,
+        public dialogService: DialogService,
+        public profileService: ProfileService,
+        public authService: AuthService
+    ) {
+        this.setTraslateToPrimeNgTable();
+        this.getResizReOrderable();
+    }
 
     @Input() get selectedColumns(): any[] {
         return this._selectedColumns;
@@ -67,7 +90,25 @@ export class FactorySharedPrime implements OnChanges {
         //restore original order
         this._selectedColumns = this._selectCols.filter(col => val.includes(col));
     }
-
+    filterCounterState = () => {
+        // if OnOffloadComponent rendering
+        if (this._checkUpName == 'allComponent') {
+            let temp: any[] = [];
+            // should be false on initial(_primeNGHeaderCheckbox) because filter on DataSource happen
+            if (this.columnManager._primeNGHeaderCheckbox) {
+                this.tempOriginDataSource = JSON.parse(JSON.stringify(this.dataSource));
+                for (let index = 0; index < this.dataSource.length; index++) {
+                    if (this.dataSource[index].counterStateId !== null)
+                        temp.push(this.dataSource[index]);
+                }
+                this.dataSource = temp;
+            }
+            else {
+                if (!MathS.isNull(this.tempOriginDataSource))
+                    this.dataSource = this.tempOriginDataSource;
+            }
+        }
+    }
     saveColumns() {
         let newArray: any[] = [];
         for (let i = 0; i < this._selectCols.length; i++) {
@@ -87,7 +128,7 @@ export class FactorySharedPrime implements OnChanges {
         if (!this.browserStorageService.isExists(this._outputFileName))
             this._showSavedColumnButton = true;
     }
-    ngOnChanges(): void {
+    restoreLatestColumnChanges = () => {
         if (!MathS.isNull(this._outputFileName)) {
 
             if (this.browserStorageService.isExists(this._outputFileName)) {
@@ -101,17 +142,75 @@ export class FactorySharedPrime implements OnChanges {
             this._selectedColumns = this.columnManager.customizeSelectedColumns(this._selectCols);
         }
     }
-
     resetSavedColumns = () => {
         if (!MathS.isNull(this._outputFileName)) {
             if (this.browserStorageService.isExists(this._outputFileName)) {
                 this.browserStorageService.removeLocal(this._outputFileName);
                 this._showSavedColumnButton = true;
                 this.utilsService.snackBarMessageSuccess(EN_messages.tableResetSaved);
+            } else {
+                this.utilsService.snackBarMessageSuccess(EN_messages.tableDefaultColumnOrder);
             }
         }
         else
             this.utilsService.snackBarMessageWarn(EN_messages.done);
+    }
+    ngOnChanges(): void {
+        this.restoreLatestColumnChanges();
+        this.filterCounterState();
+    }
+    setTraslateToPrimeNgTable = () => {
+        this.config.setTranslation({
+            'accept': 'تایید',
+            'reject': 'بازگشت',
+            'startsWith': ' شروع با',
+            'contains': 'شامل باشد',
+            'notContains': ' شامل نباشد',
+            'endsWith': ' پایان با',
+            'equals': 'برابر',
+            'notEquals': 'نا برابر',
+            'lt': ' کمتر از',
+            'lte': 'کمتر یا برابر',
+            'gt': 'بزرگتر',
+            'gte': 'بزرگتر یا برابر',
+            'is': 'باشد',
+            'isNot': 'نباشد',
+            'before': 'قبل',
+            'after': 'بعد',
+            'clear': 'پاک کردن',
+            'apply': 'تایید',
+            'matchAll': 'مطابقت با همه',
+            'matchAny': ' مطابقت',
+            'addRule': 'جستجو براساس',
+            'removeRule': 'حذف جستجو',
+            'choose': ' انتخاب',
+            'upload': 'ارسال',
+            'cancel': 'بازگشت'
+        });
+    }
+    doShowCarousel = (dataSource: any, _isNotForbidden?: boolean) => {
+        this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
+            data: { _data: dataSource, _isNotForbidden: _isNotForbidden },
+            rtl: true,
+            width: '80%',
+        })
+        this.ref.onClose.subscribe(async res => {
+            if (res)
+                console.log(res);
+
+        });
+    }
+    doShowCarouselForbidden = (dataSource: any) => {
+        // To make imageWrapper config Dialog for forbidden
+        this.doShowCarousel(dataSource, false);
+    }
+    getResizReOrderable = () => {
+        this._reSizebleTable = this.profileService.getLocalResizable();
+        this._reOrderableTable = this.profileService.getLocalReOrderable();
+    }
+    denyTracking = (): boolean => {
+        const jwtRole = this.authService.getAuthUser();
+        return jwtRole.roles.toString().includes('denytracking') ? true : false;
     }
 
 }
@@ -150,9 +249,10 @@ export abstract class AllListsFactory implements OnInit, OnDestroy {
     filteredTableEvent = (e: any) => {
         this.filterableDataSource = e;
     }
-    doShowCarousel = (dataSource: any) => {     
+    doShowCarousel = (dataSource: any) => {
         this.ref = this.dialogService.open(ListSearchMoshWoumComponent, {
-            data: dataSource,
+
+            data: { _data: dataSource, _isNotForbidden: true },
             rtl: true,
             width: '80%'
         })

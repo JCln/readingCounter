@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
 
+import { ColumnManager } from '../classes/column-manager';
 import { MathS } from '../classes/math-s';
-import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { ICounterState, IImageAttribution, ITextOutput } from '../Interfaces/ireads-manager';
+import { ICounterState, IImageAttribution, ITextOutput } from '../interfaces/ireads-manager';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
 import { SectionsService } from './sections.service';
@@ -23,9 +22,12 @@ export class ReadManagerService {
     private dictionaryWrapperService: DictionaryWrapperService,
     private sectionsService: SectionsService,
     private utilsService: UtilsService,
-    private dialog: MatDialog
+    private columnManager: ColumnManager
   ) { }
 
+  columnSelectedMenuDefault = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('counterStateDto');
+  }
   /* API CALLS */
   getProvinceDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getProvinceDictionary();
@@ -33,31 +35,26 @@ export class ReadManagerService {
   getZoneDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getZoneDictionary();
   }
+  getImageAttrAllDictionary = (): Promise<any> => {
+    return this.dictionaryWrapperService.getImageAttrAllDictionary();
+  }
   getReadingPeriodKindDictionary = (): Promise<any> => {
     return this.dictionaryWrapperService.getPeriodKindDictionary();
   }
   getDataSource = (method: ENInterfaces): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(method).subscribe(res => {
-          resolve(res);
-        })
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe(res => {
+        resolve(res);
       })
-    } catch (error) {
-      console.error(error);
-    }
+    })
   }
   postTextOutputDATA = (method: ENInterfaces, body: object): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
-          this.utilsService.snackBarMessageSuccess(res.message);
-          resolve(res);
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
+        this.utilsService.snackBarMessageSuccess(res.message);
+        resolve(res);
+      })
+    });
   }
   /* VERIFICATION & VALIDATION */
   counterStateVertification = (dataSource: ICounterState): boolean => {
@@ -125,26 +122,17 @@ export class ReadManagerService {
     });
   }
   firstConfirmDialog = (): Promise<any> => {
-    const title = EN_messages.confirm_remove;
-    return new Promise((resolve) => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: false,
-          isDelete: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          resolve(desc);
-        }
-      })
-    })
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
   }
   deleteSingleRow = (place: ENInterfaces, id: number) => {
     return new Promise((resolve) => {
-      this.interfaceManagerService.POST(place, id).subscribe((res: IResponses) => {
+      this.interfaceManagerService.POSTById(place, id).subscribe((res: IResponses) => {
         this.utilsService.snackBarMessageSuccess(res.message);
         resolve(true);
       })
@@ -164,18 +152,5 @@ export class ReadManagerService {
         return items
     })
   }
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
 
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
-  }
 }

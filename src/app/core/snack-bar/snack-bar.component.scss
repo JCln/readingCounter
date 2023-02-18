@@ -1,9 +1,10 @@
 @import 'variable.scss';
+@import 'button.scss';
 
 ::ng-deep {
   .mat-simple-snackbar {
     font-family: $font_family;
-    font-size: $font_s;
+    font-size: var(--font_s);
     font-weight: 600;
     color: var(--fix_gray_light);
   }
@@ -12,7 +13,7 @@
     position: absolute;
     font-weight: 600;
     color: var(--fix_gray_light);
-    font-size: $font_xs;
+    font-size: var(--font_xs);
     font-family: $font_family;
     max-height: 36px;
     min-width: 0;
@@ -25,7 +26,7 @@
   }
 
   .snack_warn {
-    background-color: var(--orange_500);
+    background-color: var(--fix_orange);
   }
 
   .snack_success {
@@ -39,4 +40,30 @@
   .newline {
     white-space: pre-wrap;
   }
+
+  // toast  
+  .p-toast .p-toast-message .p-toast-message-content {
+    padding: var(--font_05);
+  }
+
+}
+
+section {
+  direction: rtl;
+}
+
+._custom_toast {
+  font-family: $font_family;
+  justify-content: center;
+  margin: 0 var(--font_s);
+  flex: 1;
+}
+
+._icon {
+  font-size: var(--font_26);
+}
+
+.btn_2_o {
+  height: var(--font_22);
+  width: var(--font_5);
 }

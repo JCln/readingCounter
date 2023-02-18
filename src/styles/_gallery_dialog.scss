@@ -1,0 +1,126 @@
+.insert_track {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  direction: rtl;
+  margin: auto;
+  padding: 2rem;
+  background: var(--secondary_1);
+  border-radius: $border_15;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+}
+
+.input_1 {
+  text-align: center;
+  border-color: var(--primary_4);
+
+  @media (max-width:550px) {
+    min-width: 17rem;
+  }
+}
+
+.content {
+  display: grid;
+  direction: rtl;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 15rem));
+  justify-content: center;
+  gap: var(--font_05);
+  margin-top: var(--font_xs);
+  background: var(--secondary_1);
+}
+
+._images {
+  border-radius: $border_15;
+  box-shadow: 0px 2px 3px 1px var(--secondary_4);
+  border: 2px solid var(--thirdy_1);
+  cursor: pointer;
+
+  .__img_bound {
+    padding: var(--font_3)
+  }
+
+  .__img_bound_real {
+    padding: var(--font_025);
+    position: relative;
+
+    .__hiddens {
+      position: absolute;
+      visibility: hidden;
+      width: 0%;
+      right: 0;
+      border-radius: $border_7;
+      top: 0;
+      bottom: 0;
+      background-color: var(--white);
+      opacity: .8;
+      border-left: 2px solid var(--primary_3);
+      padding: var(--font_025);
+      transition: width ease-in-out 150ms;
+
+      p {
+        color: var(--primary_3);
+        font-size: var(--font_m);
+        padding-right: var(--font_xxs);
+      }
+    }
+
+    &:hover {
+      .__hiddens {
+        width: 55%;
+        visibility: visible;
+      }
+    }
+
+  }
+
+  img {
+    max-height: 20rem;
+    border-radius: $border_15;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    box-shadow: 0px 0px 1px 2px var(--thirdy_1);
+  }
+
+
+}
+
+._descriptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  direction: rtl;
+  gap: var(--font_05);
+}
+
+.input_2 {
+  direction: rtl;
+}
+
+._value {
+  border: none;
+}
+
+.btn_1 {
+  max-width: 16rem;
+}
+
+._container {
+  position: relative;
+  margin: auto var(--font_3);
+}
+
+.center_footer {
+  text-align: center;
+  margin-top: var(--font_xs);
+}
+
+.not_found_header {
+  text-align: center;
+  color: var(--primary_4);
+  font-size: var(--font_m);
+  background: var(--white);
+  border-radius: 100vmax;
+}

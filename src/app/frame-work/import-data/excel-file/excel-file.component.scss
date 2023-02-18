@@ -1,0 +1,132 @@
+@import 'primeNG';
+@import 'input.scss';
+@import 'button.scss';
+@import '_mat.scss';
+@import 'tooltip.scss';
+@import 'choose-files.scss';
+
+.main {
+  direction: rtl;
+  background: var(--secondary_1);
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+  padding: var(--font_s);
+  border-radius: $border_15;
+  min-height: 35rem;
+}
+
+section.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
+  gap: var(--font_05);
+  align-items: center;
+}
+
+.date_section {
+  margin: var(--font_05) 0;
+}
+
+section.dynamic_content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 10rem));
+  gap: var(--font_05);
+  align-items: center;
+  border: .15rem solid var(--thirdy_3);
+  box-shadow: 1px 1px 3px 1px var(--thirdy_3);
+  border-radius: $border_15;
+  padding: var(--font_xxs);
+  margin: var(--font_xs) 0;
+}
+
+.static_part {
+  background: var(--white);
+  border: .15rem solid var(--secondary_2);
+  border-radius: $border_15;
+  padding: var(--font_xxs);
+}
+
+.check_boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 12rem));
+  align-items: center;
+  gap: var(--font_05);
+}
+
+._key,
+._value {
+  font-size: var(--font_m);
+  font-weight: 800;
+}
+
+._value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  border: none;
+  color: var(--primary_5);
+  text-align: center;
+  width: 100%;
+}
+
+h2 {
+  color: var(--secondary_6);
+  margin-left: var(--font_5);
+}
+
+footer {
+  margin-top: var(--font_2);
+  text-align: center;
+
+  button {
+    margin: var(--font_01) 0;
+  }
+}
+
+.order_by {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+hr {
+  margin: 0 auto;
+  background-color: var(--primary_5);
+  height: var(--font_02);
+  margin-bottom: var(--font_xxs);
+}
+
+
+[hidden] {
+  display: none;
+}
+
+.icon_android,
+small {
+  color: var(--green_500);
+  margin: 0 .4rem;
+}
+
+.__custom {
+  height: var(--font_25);
+  border: 1px solid var(--primary_2);
+  width: auto;
+  color: var(--primary_2);
+  min-width: 4rem;
+}
+
+span,
+small {
+  color: var(--green_500);
+  margin: 0 .4rem;
+}
+
+span {
+  font-size: var(--font_25);
+}
+
+.double_size {
+  grid-column: auto/ span 2;
+
+  @media (max-width:550px) {
+    grid-column: auto;
+  }
+}

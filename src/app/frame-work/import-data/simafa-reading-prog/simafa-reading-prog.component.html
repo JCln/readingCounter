@@ -4,14 +4,16 @@
             <section class="content">
                 <div class="input_2">
                     <div class="_key">ناحیه</div>
-                    <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="importSimafaReadingProgram.zoneId"
-                        placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id" optionLabel="title"
+                    <p-dropdown name="zones" [options]="zoneDictionary"
+                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.zoneId" placeholder="انتخاب مورد"
+                        [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
                         filter="true">
                     </p-dropdown>
                 </div>
                 <div class="input_2">
                     <div class="_key">نوع دوره</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="_selectedKindId" name="_selectedKindId">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.kindId" name="_selectedKindId">
                         <mat-option (click)="getReadingPeriod()" *ngFor="let truefalse of readingPeriodKindsDictionary"
                             [value]="truefalse.id">
                             {{truefalse.title}}
@@ -20,7 +22,8 @@
                 </div>
                 <div class="input_2" [hidden]="!readingPeriodDictionary.length">
                     <div class="_key">دوره قرائت</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importSimafaReadingProgram.readingPeriodId"
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.readingPeriodId"
                         name="readingPeriodId">
                         <mat-option *ngFor="let truefalse of readingPeriodDictionary" [value]="truefalse.id">
                             {{truefalse.title}}
@@ -29,13 +32,14 @@
                 </div>
                 <div class="input_2">
                     <div class="_key">سال</div>
-                    <mat-select placeholder="انتخاب مورد" [(ngModel)]="importSimafaReadingProgram.year" name="year">
+                    <mat-select placeholder="انتخاب مورد"
+                        [(ngModel)]="closeTabService.importSimafaReadingProgramReq.year" name="year">
                         <mat-option *ngFor="let truefalse of _years" [value]="truefalse.value">
                             {{truefalse.title}}
                         </mat-option>
                     </mat-select>
                 </div>
-                <button type="submit" class="btn_2_o">
+                <button type="submit" class="btn_1">
                     مشاهده
                     <i class="pi pi-list"></i>
                 </button>
@@ -45,8 +49,9 @@
     </form>
 </main>
 
-<app-prime-table *ngIf="route.children.length === 0" [dataSource]="dataSource" [_outputFileName]="'simafaReadingProgram'"
-    [_checkUpName]="'simafa-readingProg'" [_selectedColumnsToRemember]="'selectedSimafaReadingProgram'"
+<app-prime-table *ngIf="route.children.length === 0" [dataSource]="closeTabService.saveDataForSimafaReadingPrograms"
+    [_outputFileName]="'simafaReadingProgram'" [_checkUpName]="'simafa-readingProg'"
+    [_sessionName]="'simafardpg-session'" [_selectedColumnsToRemember]="'selectedSimafaReadingProgram'"
     [_numberOfExtraColumns]="[1, 2]" (refreshedTable)="refreshTable()" (routedToBatch)="routeToBatch($event)"
     (routedToSingle)="routeToSingle($event)">
 </app-prime-table>

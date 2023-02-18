@@ -22,6 +22,21 @@ export interface IBatchImportDataResponse {
     fragmentDetailId: string,
     listNumber: string
 }
+export interface IFileExcelReq {
+    zoneId: number,
+    year: number,
+    alalHesabPercent: number,
+    imagePercent: number,
+    hasPreNumber: boolean,
+    displayBillId: boolean,
+    displayRadif: boolean,
+    counterReaderId: string;
+    readingPeriodId: string;
+    listNumber: string;
+    skipErrors: boolean;
+    description: string;
+    file: any
+}
 export interface IImportDataResponse {
     trackNumber: number,
     count: number,
@@ -45,7 +60,12 @@ export interface IImportSimafaBatchReq {
     displayBillId: boolean,
     displayRadif: boolean,
     year: number,
-    readingPeriodId: number
+    readingPeriodId?: number,
+    canContinue?: boolean,
+    fromEshterak?: string,
+    id?: string,
+    listNumber?: string,
+    toEshterak?: string,
 }
 export interface IImportSimafaSingleReq {
     counterReaderId: string,
@@ -62,7 +82,8 @@ export interface IImportSimafaSingleReq {
 export interface IImportSimafaReadingProgramsReq {
     readingPeriodId: number,
     year: number,
-    zoneId: number
+    zoneId: number,
+    kindId?: string
 }
 export interface IImportErrors {
     eshterak: string,
@@ -71,7 +92,7 @@ export interface IImportErrors {
     radif: number,
     errorDescriptoin: string,
     hasError: true,
-    warningCount: number
+    warningCount?: number
 }
 export interface IReadingProgramRes {
     id: string,

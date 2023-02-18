@@ -1,26 +1,39 @@
+export interface IENV {
+    headerProvinceTitle: string,
+    API_URL: string,
+    mapUrls: { title: string, url: string }[],
+    hasNextBazdid: boolean,
+    reSizableTable: boolean,
+    reOrderableTable: boolean,
+    mapCenter: [number, number],
+    browserVersions: IBrowserVersions,
+    years: { title: string, value: number }[],
+    getDeleteDictionary: { id: number, title: string }[],
+    hasCanclableSpinner: boolean,
+    timeout: number,
+    defaultAggregateTracks: boolean,
+    version: string,
+}
 export enum ENURLs {
     DEFAULT = 'https://37.191.92.157/kontoriNew',
     ESF = 'https://37.191.92.157/kontoriNew',
     TEH_ZONE4 = 'http://81.12.106.167:8081/kontoriNew',
     TEH_SE = 'http://46.209.181.2:9098/kontoriNew',
     TEH_SE_LOCAL = 'http://172.28.5.40/kontoriNew',
-    KERMANSHAH = 'http://46.225.241.211:25123/kontoriNew'
+    KERMANSHAH = 'http://46.225.241.211:25123/kontoriNew',
+    REY = 'http://85.133.190.221:4121/kontoriNew',
+    TSW = 'http://81.90.148.25:880/kontoriNew',
+    TEH1 = 'http://217.146.220.33:50012/kontoriNew',
+
 }
 export enum ENOSMUrls {
     DEFAULT = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    ESF = 'http://172.18.12.242/osm_tiles/{z}/{x}/{y}.png',
+    ESF_LOCAL = 'http://172.18.12.242/osm_tiles/{z}/{x}/{y}.png',
     TEH_ZONE4 = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     TEH_SE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     TEH_SE_LOCAL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    KERMANSHAH = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-}
-export enum ENOSMUrlsDark {
-    DEFAULT = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-    ESF = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-    TEH_ZONE4 = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-    TEH_SE = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-    TEH_SE_LOCAL = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-    KERMANSHAH = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+    KERMANSHAH = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    REY = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 }
 export enum ENSatteliteAccessToken {
     DEFAULT = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
@@ -28,7 +41,8 @@ export enum ENSatteliteAccessToken {
     TEH_ZONE4 = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
     TEH_SE = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
     TEH_SE_LOCAL = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
-    KERMANSHAH = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token='
+    KERMANSHAH = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
+    REY = 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=',
 }
 export enum ENSatelliteToken {
     DEFAULT = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
@@ -36,7 +50,8 @@ export enum ENSatelliteToken {
     TEH_ZONE4 = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
     TEH_SE = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
     TEH_SE_LOCAL = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
-    KERMANSHAH = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg'
+    KERMANSHAH = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
+    REY = 'pk.eyJ1IjoiYmFiYWsxMDAxIiwiYSI6ImNrZmh4MGdpMzBwY2kycW1zZDQyMnppeDAifQ.8mflOcV96Qf3DGSYcn3zbg',
 }
 export enum ENActivateProvinceTitle {
     DEFAULT = '',
@@ -45,7 +60,10 @@ export enum ENActivateProvinceTitle {
     TEH_ZONE4 = 'منطقه 4 تهران',
     TEH_SE = 'جنوب شرقی تهران',
     TEH_SE_LOCAL = 'جنوب شرقی تهران',
-    KERMANSHAH = 'کرمانشاه'
+    KERMANSHAH = 'کرمانشاه',
+    REY = 'منطقه 6 تهران',
+    TSW = 'جنوب غربی تهران',
+    TEH1 = 'منطقه 1 تهران'
 }
 export interface IENV_BROWSER_SETUP {
     alert: number,
@@ -67,17 +85,6 @@ export interface IBrowserVersions {
         safari: IENV_BROWSER_SETUP,
     }
 }
-export interface IENV {
-    headerProvinceTitle: string,
-    API_URL: string,
-    OSMmapBoxUrl: string,
-    OSMDarkmapBoxUrl: string,
-    SATELLITEMapBoxUrl: string,
-    SATELLITEMapAccessToken: string,
-    hasNextBazdid: boolean,
-    mapCenter: [number, number],
-    browserVersions: IBrowserVersions
-}
 export class ENMapCenter {
     static readonly DEFAULT = new ENMapCenter([32.669, 51.664]);
     static readonly ESF = new ENMapCenter([32.669, 51.664]);
@@ -86,8 +93,115 @@ export class ENMapCenter {
     static readonly TEH_SE = new ENMapCenter([35.656051, 51.315435]);
     static readonly TEH_SE_LOCAL = new ENMapCenter([35.656051, 51.315435]);
     static readonly KERMANSHAH = new ENMapCenter([34.3277, 47.0778]);
+    static readonly REY = new ENMapCenter([35.5770, 51.4625]);
+    static readonly TSW = new ENMapCenter([35.5770, 51.4625]);
 
     private constructor(public readonly value: [number, number]) {
+    }
+}
+export class timeout {
+    // static time = 18000;
+    static time = 2000;
+}
+export class version {
+    static readonly version = 'build: 0.0.0';
+}
+export class ENMapUrls {
+    static readonly DEFAULT = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.DEFAULT }, { title: 'sattelite', url: ENSatteliteAccessToken.DEFAULT + ENSatelliteToken.DEFAULT }]);
+    static readonly ESF = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.ESF_LOCAL }]);
+    static readonly TEH = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE }]);
+    static readonly TEH_ZONE4 = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_ZONE4 }]);
+    static readonly TEH_SE = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE }]);
+    static readonly TEH_SE_LOCAL = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.TEH_SE_LOCAL }]);
+    static readonly KERMANSHAH = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.KERMANSHAH }]);
+    static readonly REY = new ENMapUrls([{ title: 'OSM', url: ENOSMUrls.REY }]);
+
+    private constructor(public readonly value: { title: string, url: string }[]) {
+    }
+}
+export class ENYears {
+    static readonly DEFAULT = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly ESF = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly TEH = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly TEH_ZONE4 = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly TEH_SE = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly TEH_SE_LOCAL = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+    static readonly KERMANSHAH = new ENYears([
+        { title: '1401', value: 1401 },
+        { title: '1400', value: 1400 },
+        { title: '1399', value: 1399 },
+        { title: '1398', value: 1398 },
+        { title: '1397', value: 1397 },
+        { title: '1396', value: 1396 },
+        { title: '1395', value: 1395 },
+        { title: '1402', value: 1402 }
+    ]);
+
+    private constructor(public readonly value: { title: string, value: number }[]) {
+    }
+}
+export class getDeleteDictionary {
+    static readonly DEFAULT = new getDeleteDictionary([
+        { id: 0, title: 'حذف دائم' },
+        { id: 2, title: 'حذف موقت' },
+        { id: 3, title: 'حذف موقت' },
+        { id: 5, title: 'حذف موقت' }
+    ]);
+    private constructor(public readonly value: { id: number, title: string }[]) {
     }
 }
 export class ENHasNextBazdid {
@@ -98,18 +212,37 @@ export class ENHasNextBazdid {
     static readonly TEH_SE = new ENHasNextBazdid(true);
     static readonly TEH_SE_LOCAL = new ENHasNextBazdid(true);
     static readonly KERMANSHAH = new ENHasNextBazdid(false);
+    static readonly REY = new ENHasNextBazdid(false);
 
     private constructor(public readonly value: boolean) {
     }
 }
-export class ENHasDarkOSMMap {
-    static readonly DEFAULT = new ENHasDarkOSMMap(true);
-    static readonly ESF = new ENHasDarkOSMMap(false);
-    static readonly TEH = new ENHasDarkOSMMap(false);
-    static readonly TEH_ZONE4 = new ENHasDarkOSMMap(false);
-    static readonly TEH_SE = new ENHasDarkOSMMap(false);
-    static readonly TEH_SE_LOCAL = new ENHasDarkOSMMap(false);
-    static readonly KERMANSHAH = new ENHasDarkOSMMap(false);
+export class resizableTable {
+    static readonly DEFAULT = new resizableTable(false);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class reorderableTable {
+    static readonly DEFAULT = new reorderableTable(false);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class defaultAggregateTracks {
+    static readonly DEFAULT = new defaultAggregateTracks(true);
+
+    private constructor(public readonly value: boolean) {
+    }
+}
+export class ENHasCanclableSpinner {
+    static readonly DEFAULT = new ENHasCanclableSpinner(true);
+    static readonly ESF = new ENHasCanclableSpinner(false);
+    static readonly TEH = new ENHasCanclableSpinner(false);
+    static readonly TEH_ZONE4 = new ENHasCanclableSpinner(false);
+    static readonly TEH_SE = new ENHasCanclableSpinner(false);
+    static readonly TEH_SE_LOCAL = new ENHasCanclableSpinner(false);
+    static readonly KERMANSHAH = new ENHasCanclableSpinner(false);
 
     private constructor(public readonly value: boolean) {
     }

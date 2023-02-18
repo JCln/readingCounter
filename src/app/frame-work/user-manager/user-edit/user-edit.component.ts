@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { appItems, IRoleItems, IUserInfo } from 'interfaces/iuser-manager';
-import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
-import { InterfaceManagerService } from 'services/interface-manager.service';
-import { UserEditManagerService } from 'services/user-edit-manager.service';
+import { UsersAllService } from 'services/users-all.service';
 import { FactoryONE } from 'src/app/classes/factory';
 
 @Component({
@@ -14,54 +9,35 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent extends FactoryONE {
-  UUid: string = '';
-  personalizeInfo: IUserInfo;
-  provinceItemsData: any;
-  dataSource: any;
- 
-
-  addUserData: appItems[] = [];
-  // add role config
-  roleItemsData: IRoleItems[] = [];
-  // 
 
   constructor(
-    private editUserManagerService: UserEditManagerService,
-    private interfaceManagerService: InterfaceManagerService,
-    private route: ActivatedRoute,
-    private router: Router,
-     
-    private closeTabService: CloseTabService
+    private usersAllService: UsersAllService,
+    public closeTabService: CloseTabService
+
   ) {
     super();
-    this.detectRouteChange();
   }
   connectToServer = () => {
-    this.editUserManagerService.userEditA(this.UUid, this.dataSource);
+    this.usersAllService.userEditA(this.usersAllService.userEdit_pageSign.GUid, this.closeTabService.saveDataForEditUsers);
   }
-  nullSavedSource = () => this.closeTabService.saveDataForEditUsers = null;
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
+    if (!this.usersAllService.userEdit_pageSign.GUid) {
+      this.usersAllService.routeToUsersAll();
     }
-    this.interfaceManagerService.GETID(ENInterfaces.userEDIT, this.UUid).subscribe((res: any) => {
-      if (res) {
-        this.dataSource = res;
-        this.closeTabService.saveDataForEditUsers = res;
-        this.roleItemsData = this.dataSource.roleItems;
-        this.addUserData = this.dataSource.appItems;
-        this.provinceItemsData = this.dataSource.provinceItems;
-        this.personalizeInfo = this.dataSource.userInfo;
+    else {
+      if (canRefresh) {
+        this.closeTabService.saveDataForEditUsers = null;
+        this.closeTabService.saveDataForEditUsersGUID = '';
       }
-    })
-  }
-  detectRouteChange = () => {
-    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.UUid = this.route.snapshot.paramMap.get('id');
-        this.classWrapper();
-      })
-    )
+      if (
+        !this.closeTabService.saveDataForEditUsers ||
+        this.closeTabService.saveDataForEditUsersGUID !== this.usersAllService.userEdit_pageSign.GUid
+      ) {
+        this.closeTabService.saveDataForEditUsers = await this.usersAllService.getUserInfoByGUID(this.usersAllService.userEdit_pageSign.GUid);
+        this.closeTabService.saveDataForEditUsersGUID = this.usersAllService.userEdit_pageSign.GUid;
+      }
+
+    }
   }
 
 }

@@ -29,28 +29,28 @@ export class RdAddDgComponent {
       isOnQeraatCode: false,
       displayBillId: false,
       displayRadif: false,
-      logicalOrder: [0],
+      logicalOrder: [],
       zoneId: data.zoneId,
-      defaultAlalHesab: [0],
-      maxAlalHesab: [0],
-      minAlalHesab: [0],
-      defaultImagePercent: [0],
-      maxImagePercent: [0],
-      minImagePercent: [0],
-      lowConstBoundMaskooni: [0],
-      lowPercentBoundMaskooni: [0],
-      highConstBoundMaskooni: [0],
-      highPercentBoundMaskooni: [0],
-      lowConstBoundSaxt: [0],
-      lowPercentBoundSaxt: [0],
-      highConstBoundSaxt: [0],
-      highPercentBoundSaxt: [0],
-      lowConstZarfiatBound: [0],
-      lowPercentZarfiatBound: [0],
-      highConstZarfiatBound: [0],
-      highPercentZarfiatBound: [0],
-      lowPercentRateBoundNonMaskooni: [0],
-      highPercentRateBoundNonMaskooni: [0],
+      defaultAlalHesab: [],
+      maxAlalHesab: [],
+      minAlalHesab: [],
+      defaultImagePercent: [],
+      maxImagePercent: [],
+      minImagePercent: [],
+      lowConstBoundMaskooni: [],
+      lowPercentBoundMaskooni: [],
+      highConstBoundMaskooni: [],
+      highPercentBoundMaskooni: [],
+      lowConstBoundSaxt: [],
+      lowPercentBoundSaxt: [],
+      highConstBoundSaxt: [],
+      highPercentBoundSaxt: [],
+      lowConstZarfiatBound: [],
+      lowPercentZarfiatBound: [],
+      highConstZarfiatBound: [],
+      highPercentZarfiatBound: [],
+      lowPercentRateBoundNonMaskooni: [],
+      highPercentRateBoundNonMaskooni: [],
     })
   }
   private percentValidate = (): boolean => {
@@ -104,16 +104,17 @@ export class RdAddDgComponent {
   async save() {
     if (!this.percentValidate()) {
       this.utilsService.snackBarMessageWarn(EN_messages.highLow100);
-      return;
     }
-    if (!this.zoneValidate()) {
+    else if (!this.zoneValidate()) {
       this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
-      return;
     }
-    if (!await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigADD, this.form.value))
-      return;
+    else {
+      const a = await this.readManagerService.addOrEditAuths(ENInterfaces.ReadingConfigADD, this.form.value)
+      if (a) {
+        this.dialogRef.close(this.form.value);
+      }
+    }
 
-    this.dialogRef.close(this.form.value);
   }
   close() {
     this.dialogRef.close();

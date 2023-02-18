@@ -1,6 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ENLoginVersion } from 'interfaces/ioverall-config';
 import { SidebarItemsService } from 'services/DI/sidebar-items.service';
 
 
@@ -11,8 +10,8 @@ import { SidebarItemsService } from 'services/DI/sidebar-items.service';
   animations: [
     trigger('openClose', [
       state('closeSubItems', style({
-        minHeight: '3.3rem',
-        height: '3.3rem',
+        minHeight: 'var(--font_33)',
+        height: 'var(--font_33)',
       })),
       state('openSubItems', style({
         minHeight: '8rem',
@@ -23,7 +22,6 @@ import { SidebarItemsService } from 'services/DI/sidebar-items.service';
   ]
 })
 export class SideBarComponent implements OnInit {
-  versionNumber = ENLoginVersion.version;
   @Input() sid_isSmall: boolean;
   @Output() sidebarEvent = new EventEmitter<boolean>();
   smallScreen: boolean = false;

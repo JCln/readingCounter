@@ -5,12 +5,12 @@
             <section class="_inputs">
                 <div class="input__icons">
                     <input type="text" class="input_1" placeholder="نام کاربری" title="لطفا نام کاربری را وارد نمایید"
-                        minlength="3" maxlength="13" name="username" [(ngModel)]="userData.username" autofocus required>
+                        minlength="1" maxlength="20" name="username" [(ngModel)]="userData.username" autofocus required>
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="input__icons">
                     <input type="password" class="input_1" placeholder="گذرواژه" title="لطفا گذرواژه را وارد نمایید"
-                        minlength="3" maxlength="13" name="password" [(ngModel)]="userData.password" required>
+                        minlength="1" maxlength="20" name="password" [(ngModel)]="userData.password" required>
                     <i class="fa fa-lock"></i>
                 </div>
             </section>
@@ -26,7 +26,7 @@
                     {{item.title}}
                 </div>
             </section>
-            <div class="version">{{versionNumber}} نسخه نرم افزار</div>
+            <div class="version">{{userData.appVersion}} نسخه نرم افزار</div>
         </section>
     </main>
 </section>

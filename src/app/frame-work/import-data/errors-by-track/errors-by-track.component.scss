@@ -1,0 +1,35 @@
+@import 'variable';
+@import 'input';
+@import 'button';
+
+.insert_track {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  direction: rtl;
+  margin: auto;
+  padding: 2rem;
+  background: var(--secondary_1);
+  border-radius: $border_15;
+  box-shadow: 1px 1px 8px 4px var(--secondary_4);
+}
+
+
+.btn_1 {
+  max-width: 16rem;
+}
+
+input {
+  color: var(--secondary_5);
+  margin: 0 auto;
+  box-shadow: 1px 1px 8px 1px var(--secondary_4);
+  text-align: center;
+}
+
+._value {
+  border: 0;
+  border-radius: $border_7;
+  min-width: fit-content;
+  width: 100%;
+}

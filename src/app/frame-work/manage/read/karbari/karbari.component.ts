@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
@@ -17,16 +17,12 @@ import { KarbariAddDgComponent } from './karbari-add-dg/karbari-add-dg.component
 })
 export class KarbariComponent extends FactoryONE {
 
-  dataSource: IKarbari[] = [];
   provinceDictionary: IDictionaryManager[] = [];
   clonedProducts: { [s: string]: IKarbari; } = {};
 
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   constructor(
     private dialog: MatDialog,
-    private closeTabService: CloseTabService,
+    public closeTabService: CloseTabService,
     public readManagerService: ReadManagerService
   ) {
     super();
@@ -36,7 +32,7 @@ export class KarbariComponent extends FactoryONE {
     return new Promise(() => {
       const dialogRef = this.dialog.open(KarbariAddDgComponent, {
         disableClose: true,
-        minWidth: '19rem',
+        minWidth: '65vw',
         data: {
           di: this.provinceDictionary
         }
@@ -52,18 +48,14 @@ export class KarbariComponent extends FactoryONE {
     if (canRefresh) {
       this.nullSavedSource();
     }
-    if (this.closeTabService.saveDataForKarbari) {
-      this.dataSource = this.closeTabService.saveDataForKarbari;
-    }
-    else {
-      this.dataSource = await this.readManagerService.getDataSource(ENInterfaces.KarbariAll);
-      this.closeTabService.saveDataForKarbari = this.dataSource;
+    if (!this.closeTabService.saveDataForKarbari) {
+      this.closeTabService.saveDataForKarbari = await this.readManagerService.getDataSource(ENInterfaces.KarbariAll);
     }
     this.provinceDictionary = await this.readManagerService.getProvinceDictionary();
 
-    Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');   
-  } 
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+    Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'provinceId');
+  }
+  refetchTable = (index: number) => this.closeTabService.saveDataForKarbari = this.closeTabService.saveDataForKarbari.slice(0, index).concat(this.closeTabService.saveDataForKarbari.slice(index + 1));
   removeRow = async (rowData: object) => {
     const a = await this.readManagerService.firstConfirmDialog();
     if (a) {
@@ -76,7 +68,7 @@ export class KarbariComponent extends FactoryONE {
   }
   onRowEditSave = async (dataSource: IKarbari) => {
     if (!this.readManagerService.verification(dataSource)) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForKarbari[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].id];
       return;
     }
     if (typeof dataSource['dataSource'].provinceId !== 'object') {
@@ -88,13 +80,7 @@ export class KarbariComponent extends FactoryONE {
       dataSource['dataSource'].provinceId = dataSource['dataSource'].provinceId['id'];
     }
     await this.readManagerService.addOrEditAuths(ENInterfaces.KarbariEdit, dataSource['dataSource']);
-    Converter.convertIdToTitle(this.dataSource, this.provinceDictionary, 'provinceId');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForKarbari, this.provinceDictionary, 'provinceId');
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

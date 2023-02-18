@@ -5,6 +5,7 @@ import { ENSnackBarColors, ENSnackBarTimes } from 'interfaces/ioverall-config';
 import { Observable } from 'rxjs/internal/Observable';
 import { InterfaceManagerService } from 'services/interface-manager.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { UtilsService } from 'services/utils.service';
 
 import { MathS } from '../classes/math-s';
 
@@ -17,7 +18,8 @@ export class ApkService {
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
-    private snackWrapperService: SnackWrapperService
+    private snackWrapperService: SnackWrapperService,
+    private utilsService: UtilsService    
   ) { }
 
   getDataSource = (): any => {
@@ -75,11 +77,19 @@ export class ApkService {
     return true;
   }
   checkVertitication = (filesList: FileList, data: any): boolean => {
+    // ToDo: insert to values, not working perfectly unless
     this.fileForm = filesList;
     this.desc = data;
     if (!this.vertification())
       return false;
     return true;
+  }
+  postById = (method: ENInterfaces, id: number): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTById(method, id).toPromise().then(res => {
+        resolve(res);
+      })
+    });
   }
   postTicket = (): Observable<any> => {
     const formData: FormData = new FormData();
@@ -91,7 +101,17 @@ export class ApkService {
 
     return this.interfaceManagerService.POSTBODYPROGRESS(ENInterfaces.APKUpload, formData);
   }
-  showSuccessMessage = (message: string) => {
-    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.sevenMili, ENSnackBarColors.success);
+  showSuccessMessage = (message: string, color: ENSnackBarColors) => {
+    this.snackWrapperService.openSnackBar(message, ENSnackBarTimes.sevenMili, color);
   }
+  firstConfirmDialog = (): Promise<any> => {
+    const a = {
+      messageTitle: EN_messages.confirm_remove,
+      minWidth: '19rem',
+      isInput: false,
+      isDelete: true
+    }
+    return this.utilsService.firstConfirmDialog(a);
+  }
+
 }

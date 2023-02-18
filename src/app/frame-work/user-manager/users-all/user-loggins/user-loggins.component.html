@@ -1,3 +1,17 @@
+<section>
+    <div class="overall-info">
+        <div class="input_2">
+            <div class="_key">نام نمایش</div>
+            <input [readOnly]="true" class="_value" name="trackNumber" [(ngModel)]="userLogginsService.userLoggins_pageSign.displayName">
+        </div>
+        <div class="input_2">
+            <div class="_key">نام کاربری</div>
+            <input [readOnly]="true" class="_value" name="listNumber"
+                [(ngModel)]="userLogginsService.userLoggins_pageSign.userName">
+        </div>
+    </div>
+</section>
+
 <app-prime-table     
     [dataSource]="dataSource"
     [_outputFileName]="'userLogs'"
@@ -8,7 +22,7 @@
     [_sortField]="'loginDateTime'"
     [_backToPreviousText]="'بازگشت به مدیریت کاربران'"
     (refreshedTable)="refreshTable()"    
-    (backedToPrevious)="backToPrevious()"
+    (backedToPrevious)="userLogginsService.backToUserAll()"
     > 
 </app-prime-table>
 <!-- [_sortOrder]=-1 -->

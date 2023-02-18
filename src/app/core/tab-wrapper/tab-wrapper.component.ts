@@ -60,10 +60,6 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     })
   }
   findDynamicRouteStatus = (): ITabWrapperDetectDynamicRoute => {
-    if (this.getCurrentDynamicRoute(EN_Routes['wrmlpd/']))
-      return {
-        _title: 'اطلاعات روزانه', _dynamicRoute: EN_Routes['wrmlpd/']
-      }
     if (this.getCurrentDynamicRoute(EN_Routes.wrmlallfalse))
       return {
         _title: 'لیست', _dynamicRoute: EN_Routes.wrmlallfalse
@@ -72,29 +68,9 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
       return {
         _title: 'لیست', _dynamicRoute: EN_Routes.wrmlalltrue
       }
-    if (this.getCurrentDynamicRoute(EN_Routes['wrmuedit/']))
-      return {
-        _title: 'ویرایش', _dynamicRoute: EN_Routes['wrmuedit/']
-      }
     if (this.getCurrentDynamicRoute(EN_Routes['wrmsfwu/']))
       return {
         _title: 'پیگیری', _dynamicRoute: EN_Routes['wrmsfwu/']
-      }
-    if (this.getCurrentDynamicRoute(EN_Routes.wrmuallloggins))
-      return {
-        _title: 'ورود', _dynamicRoute: EN_Routes.wrmuallloggins
-      }
-    if (this.getCurrentDynamicRoute(EN_Routes['wrmrnob/']))
-      return {
-        _title: 'نوبتی', _dynamicRoute: EN_Routes['wrmrnob/']
-      }
-    if (this.getCurrentDynamicRoute(EN_Routes.wrmtrackwouifalse))
-      return {
-        _title: 'صوت/تصویر', _dynamicRoute: EN_Routes.wrmtrackwouifalse
-      }
-    if (this.getCurrentDynamicRoute(EN_Routes.wrmtrackwouitrue))
-      return {
-        _title: 'غیر مجاز', _dynamicRoute: EN_Routes.wrmtrackwouitrue
       }
     if (this.getCurrentDynamicRoute(EN_Routes['wrmtrackoffloadedoffloadMfy/']))
       return {
@@ -127,7 +103,7 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
 
     if (MathS.isNull(this.DoesTabsHaveThisRouteNow())) {
       this.closeTabService.tabs.push(a);
-      this.reFetchPageTitle();
+      // this.reFetchPageTitle();
     }
     this.reFetchPageTitle();
   }
@@ -143,13 +119,14 @@ export class TabWrapperComponent implements OnInit, OnDestroy {
     if (currentRouteFound) {
       if (this.DoesTabsHaveThisRouteNow()) {
         this.reFetchPageTitle();
-        return;
       }
-      this.closeTabService.tabs.push(currentRouteFound);
-      this.reFetchPageTitle();
-    }
-    else
+      else {
+        this.closeTabService.tabs.push(currentRouteFound);
+        this.reFetchPageTitle();
+      }
+    } else {
       this.dynamicRouteValidation();
+    }
     this.reFetchPageTitle();
   }
   getTabWrapper = async () => {

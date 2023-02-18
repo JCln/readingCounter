@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
-import { Imap } from 'interfaces/imap.js';
 import { ENLocalStorageNames, ENRandomNumbers, ITHV } from 'interfaces/ioverall-config';
 import { IReadingReportGISReq, IReadingReportGISResponse } from 'interfaces/ireports';
 import { IListManagerPDXY } from 'interfaces/itrackings';
@@ -14,8 +13,8 @@ import { MapService } from 'services/map.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { UtilsService } from 'services/utils.service';
 import { MathS } from 'src/app/classes/math-s';
-import { IGisXYResponse } from 'src/app/Interfaces/idashboard-map';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
+import { IGisXYResponse } from 'src/app/interfaces/idashboard-map';
+import { EN_Routes } from 'src/app/interfaces/routes.enum';
 
 
 declare let L;
@@ -62,7 +61,6 @@ L.Marker.prototype.options.icon = simpleIcon;
 export class MapComponent implements OnInit, OnDestroy {
   extraDataSourceRes: IReadingReportGISResponse[] = [];
   private map: L.Map;
-  private mapItems: Imap[];
   private layerGroup = new L.FeatureGroup();
   private markersDataSourceXY: IListManagerPDXY[] = [];
 
@@ -70,8 +68,11 @@ export class MapComponent implements OnInit, OnDestroy {
   isShowMap: boolean = true;
   canShowOptionsButton: boolean = false;
   isShowMapConfig: boolean = false;
+  _isCluster: boolean;
+  _isSingle: boolean;
+  _currentColorMode: boolean;
   subscription: Subscription[] = [];
-
+  _isOrderInAsc: boolean = false;
   _selectedOrderId: number = 0;
 
   orderGroup: ITHV[] = [
@@ -86,13 +87,10 @@ export class MapComponent implements OnInit, OnDestroy {
       value: 1
     }
   ]
-  _isOrderInAsc: boolean = false;
+
   onShowCounterReader = {
     trackNumber: '', day: '', distance: null, isPerday: null
   }
-  _isCluster: boolean;
-  _isSingle: boolean;
-  _currentColorMode: boolean;
 
   constructor(
     public mapService: MapService,
@@ -104,9 +102,6 @@ export class MapComponent implements OnInit, OnDestroy {
     private dateJalaliService: DateJalaliService
   ) { }
 
-  private getMapItems = () => {
-    this.mapItems = this.mapService.getMapItems();
-  }
   private getOverlays = () => {
     return {
       "لایه ها": this.layerGroup
@@ -114,14 +109,12 @@ export class MapComponent implements OnInit, OnDestroy {
   }
   initMap = () => {
     // only one of base layers should be added to the map at instantiation
-    //   OSM = this.mapItems[0];
-    // SATELLITE = this.mapItems[1];
-
     this.map = L.map('map', {
       center: this.envService.mapCenter,
-      zoom: 15,
-      minZoom: 4,
-      layers: [this.mapService.initMapColor(), this.layerGroup]
+      zoom: ENRandomNumbers.fifteen,
+      minZoom: ENRandomNumbers.four,
+      maxZoom: ENRandomNumbers.eighteen,
+      layers: [this.mapService.getFirstItemUrl(), this.layerGroup]
     });
 
     L.control.layers(this.mapService.getBaseMap(), this.getOverlays()).addTo(this.map);
@@ -170,7 +163,7 @@ export class MapComponent implements OnInit, OnDestroy {
       year: parseInt(this.route.snapshot.paramMap.get('year')),
       fromDate: this.route.snapshot.paramMap.get('fromDate'),
       toDate: this.route.snapshot.paramMap.get('toDate'),
-      isCluster: this.route.snapshot.paramMap.get('isCluster') === 'true' ? true : false,
+      isCluster: this.route.snapshot.paramMap.get('isCluster') === 'true' ? true : false
     }
   }
   private classWrapperCluster = async () => {
@@ -228,30 +221,32 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit(): void {
-    this.getMapItems();
+    // this.getMapItems();
     this.initMap();
     this.getRouteParams();
     this.mapService.serviceInstantiate(this.map);
     this.mapService.addButtonsToLeaflet();
     this.removeLayerButtonLeaflet();
     this.myLocationButtonLeaflet();
-    this.toggleMapView();
+    // this.toggleMapView();
   }
   private flyToDes = (lat: number, lag: number, zoom: number) => {
-    if (lat === 0 || lag === 0)
-      return;
-    lat = parseFloat(lat.toString().substring(0, 6));
-    lag = parseFloat(lag.toString().substring(0, 6));
+    if (lat != 0 || lag != 0) {
 
-    this.map.flyTo([(lat), (lag)], zoom);
+      lat = parseFloat(lat.toString().substring(0, 6));
+      lag = parseFloat(lag.toString().substring(0, 6));
+
+      this.map.flyTo([(lat), (lag)], zoom);
+    }
   }
   private panToDes = (lat: number, lag: number) => {
-    if (lat === 0 || lag === 0)
-      return;
-    lat = parseFloat(lat.toString().substring(0, 6));
-    lag = parseFloat(lag.toString().substring(0, 6));
+    if (lat != 0 || lag != 0) {
 
-    this.map.panTo([(lat), (lag)]);
+      lat = parseFloat(lat.toString().substring(0, 6));
+      lag = parseFloat(lag.toString().substring(0, 6));
+
+      this.map.panTo([(lat), (lag)]);
+    }
   }
   ngOnDestroy(): void {
     //  for purpose of refresh any time even without new event emiteds
@@ -263,7 +258,7 @@ export class MapComponent implements OnInit, OnDestroy {
     xyData.map((items, i) => {
       setTimeout(() => {
         this[method](parseFloat(items.y), parseFloat(items.x), items);
-        this.panToDes(parseFloat(items.y), parseFloat(items.x));
+        this.panToDes(items.y, items.x);
       }, i * delay);
     })
   }
@@ -290,6 +285,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.layerGroup.addLayer(markers);
   }
   showCounterReadersLocations = (dataSource: IGisXYResponse[]) => {
+    this.utilsService.routeTo(EN_Routes.wr);
     this.removeAllLayers();
     this.markingOnMapNClusterNDelay('markWithoutClusterColorized', dataSource);
   }
@@ -326,10 +322,10 @@ export class MapComponent implements OnInit, OnDestroy {
   showDashboard = (isShowMap: boolean) => {
     this.isShowMap = isShowMap;
     if (isShowMap) {
-      this.router.navigate(['../wr']);
+      this.utilsService.routeTo(EN_Routes.wr);
     }
     else {
-      this.router.navigate([EN_Routes.wrdb]);
+      this.utilsService.routeTo(EN_Routes.wrdb);
     }
     this.changeRouteDetected();
   }
@@ -368,7 +364,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private markWithoutClusterColorized = (lat: number, lng: number, items) => {
     if (lat === 0)
       return;
-    L.circleMarker([lat, lng], { weight: 5, radius: 4, color: MathS.getRandomColors(1) }).addTo(this.layerGroup)
+    L.marker([lat, lng]).addTo(this.layerGroup)
       .bindPopup(
         `${items.info1} <br>` + `${items.info2} <br> ${items.info3}`
       );
@@ -404,22 +400,6 @@ export class MapComponent implements OnInit, OnDestroy {
       this.map.on('locationfound', this.findMyLocationLeaflet);
       this.map.on('locationerror', this.onLocationError);
     }, 'مکان من').addTo(this.map);
-  }
-  toggleMapView = () => {
-    if (this.mapService.canUseMultiMapColors()) {
-      L.easyButton('pi pi-moon', () => {
-        this._currentColorMode = !this._currentColorMode;
-        if (this._currentColorMode) {
-          this.map.removeLayer(this.mapService.getLightStreetsUrl());
-          this.map.addLayer(this.mapService.getDarkStreetsUrl());
-        }
-        else {
-          this.map.removeLayer(this.mapService.getDarkStreetsUrl());
-          this.map.addLayer(this.mapService.getLightStreetsUrl());
-        }
-        this.mapService.saveToLocalStorage(ENLocalStorageNames.isDarkModeMap, this._currentColorMode);
-      }, this._currentColorMode ? 'پس‌زمینه تیره' : 'پس‌زمینه روشن').addTo(this.map);
-    }
   }
 
 }

@@ -7,6 +7,14 @@ export interface IUserManager {
     displayName: string;
     isActive: boolean;
     isLocked: boolean;
+    defaultZoneTitle: string;
+    deviceId: string;
+}
+export interface IUserLogginInfo {
+    GUid: string,
+    userCode: number,
+    userName: string,
+    displayName: string,
 }
 export interface IUserEditManager {
     provinceItems: [
@@ -80,6 +88,11 @@ export interface IUserEditManager {
         isActive: boolean,
         deviceId: string
     }
+}
+export interface IUserOnlines {
+    displayName: string,
+    defaultZoneTitle: string,
+    connectDateTime: string
 }
 export interface IRoleManager {
     id?: number;
@@ -278,15 +291,7 @@ export interface ISearchUsersManager {
     selectedActions: string[]
 }
 //
-// my info (profile)
-export interface IProfile {
-    firstName: string,
-    sureName: string,
-    username: string,
-    email: string,
-    displayName: string,
-    userCode: number
-}
+
 export interface IUserLoggins {
     id: string,
     userId: string,
@@ -303,6 +308,18 @@ export interface IUserLoggins {
     osPlatform: string,
     osShortTitle: string,
     userAgent: string,
-    wrongPassword: string
+    wrongPassword: string,
+    appVersion: string,
 }
-//
+export interface IUserKarkardSummary {
+    zoneTitle: string,
+    userDisplayName: string,
+    overalCount: number,
+    trackingStages: [
+        {
+            id: number,
+            title: string,
+            count: number
+        }
+    ]
+}

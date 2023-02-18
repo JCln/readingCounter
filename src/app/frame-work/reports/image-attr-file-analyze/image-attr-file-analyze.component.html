@@ -1,5 +1,5 @@
 <main class="main">
-    <section [hidden]="isCollapsed">
+    <section [hidden]="readingReportManagerService.isCollapsedImgAttrAnlz">
         <form #form="ngForm" (ngSubmit)="verification()">
             <section class="static_part">
 
@@ -8,10 +8,11 @@
                         <div class="_key">ناحیه</div>
                         <p-dropdown name="zones" [options]="zoneDictionary"
                             [(ngModel)]="readingReportManagerService.imgAttrAnalyzeReq.zoneId" placeholder="انتخاب مورد"
-                            [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
+                            [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id" optionLabel="title"
+                            filter="true">
                         </p-dropdown>
                     </div>
-                    <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="input_2">
                         <div class="_key">از</div>
                         <div class="_value">
                             <app-date-jalali name="fromDate"
@@ -20,7 +21,7 @@
                             </app-date-jalali>
                         </div>
                     </div>
-                    <div class="input_2" [hidden]="!_isOrderByDate">
+                    <div class="input_2">
                         <div class="_key">تا</div>
                         <div class="_value">
                             <app-date-jalali name="toDate"
@@ -40,16 +41,17 @@
         </form>
     </section>
 
-    <app-prime-table [_selectCols]="_selectCols" [_selectedColumns]="selectedColumns" [dataSource]="dataSource"
-        [_outputFileName]="'_imageAttrAnalyze'" [_checkUpName]="'_imageAttrAnalyze'"
-        [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'" [_hasCollapsible]=true [_isCollaped]="isCollapsed"
-        (collapsed)="isCollapsed = !isCollapsed" (refreshedTable)="refreshTable()">
+    <app-prime-table [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [_outputFileName]="'_imageAttrAnalyze'"
+        [_checkUpName]="'_imageAttrAnalyze'" [_selectedColumnsToRemember]="'selectedImageAttrAnalyze'"
+        [_hasCollapsible]=true [_isCollaped]="readingReportManagerService.isCollapsedImgAttrAnlz"
+        (collapsed)="readingReportManagerService.isCollapsedImgAttrAnlz = !readingReportManagerService.isCollapsedImgAttrAnlz"
+        (refreshedTable)="refreshTable()">
     </app-prime-table>
 </main>
 
-<section class="_charts" *ngIf="dataSource[0]">
-    <app-pie-img-attr-anlz [dataSource]="dataSource" [chartColors]="chartColors">
+<section class="_charts" *ngIf="closeTabService.saveDataForImageAttrAnalyze[0]">
+    <app-pie-img-attr-anlz [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [chartColors]="chartColors">
     </app-pie-img-attr-anlz>
-    <app-bar-img-attr-anlz [dataSource]="dataSource" [chartColors]="chartColors">
+    <app-bar-img-attr-anlz [dataSource]="closeTabService.saveDataForImageAttrAnalyze" [chartColors]="chartColors">
     </app-bar-img-attr-anlz>
 </section>

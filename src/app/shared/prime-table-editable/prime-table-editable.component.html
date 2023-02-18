@@ -3,13 +3,14 @@
     [rowsPerPageOptions]="_rowsPerPage" dir="rtl" styleClass="p-datatable-responsive" [responsive]="true"
     stateStorage="session" (onFilter)="filterEventTable($event)" [customSort]="_isCustomSort"
     (sortFunction)="customSort($event)" [stateKey]="_sessionName" [sortField]="_sortField" [sortOrder]="_sortOrder"
-    editMode="row" dataKey="id" #dtable>
+    editMode="row" dataKey="id" [resizableColumns]=_reSizebleTable [reorderableColumns]=_reOrderableTable #dtable>
 
     <ng-template pTemplate="caption" *ngIf="_captionEnabled">
-        <p-multiSelect *ngIf="_multiSelectEnable" [options]="_selectCols" [(ngModel)]="selectedColumns"
-            optionLabel="header"
+        <p-multiSelect [maxSelectedLabels]="2" *ngIf="_multiSelectEnable" [options]="_selectCols"
+            [(ngModel)]="selectedColumns" optionLabel="header"
             (ngModelChange)="columnManager.setColumnsChanges(ENSelectedColumnVariables[_selectedColumnsToRemember] ,$event)"
-            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها">
+            selectedItemsLabel="{0} ستون انتخاب شده" [style]="{minWidth: '200px'}" placeholder="ستون ها" [filter]="true"
+            showClear="true">
         </p-multiSelect>
 
         <div class="header_icons_wrap">
@@ -18,6 +19,10 @@
                     (click)="openAddDialog()" class="tooltip _circle_border p_icons fa fa-plus">
                     <div class="tooltip_text">افزودن موردی</div>
                 </i>
+                <!-- <i *ngIf="_checkUpName == 'abBaha' " (click)="openBatchAddDialog()"
+                    class="tooltip _circle_border p_icons fa fa-plus">
+                    <div class="tooltip_text">افزودن دسته ای</div>
+                </i> -->
                 <i *ngIf="_isInRowEditing && _checkUpName !== 'generalListModify'" appAddRow [table]="dtable"
                     [newRow]="newRow" [newRowLimit]="newRowLimit" (click)="newRowChangedStatus()"
                     class="tooltip _circle_border p_icons fa fa-plus">
@@ -40,7 +45,11 @@
                 </i>
                 <i *ngIf="_outputEnabled && (_outputFileName == 'abBaha' || _outputFileName == 'Budget' || _outputFileName == 'tabsare3')"
                     (click)="getExcelSample()" class="tooltip _circle_border _xlsx_download pi pi-download">
-                    <div class="tooltip_text">دانلود نمونه فایلExcel</div>
+                    <div class="tooltip_text">دانلود نمونه فایل Excel</div>
+                </i>
+                <i *ngIf="_checkUpName == 'generalListModify'" (click)="getExcelSample()"
+                    class="tooltip _circle_border _xlsx_download pi pi-download">
+                    <div class="tooltip_text">دریافت فایل Excel</div>
                 </i>
                 <i *ngIf="_hasSaveColumns" (click)="saveColumns()"
                     class="tooltip fa_icons _circle_border p_icons _save_columns fa fa-save">
@@ -53,7 +62,7 @@
             </div>
             <div class="left_side">
                 <i (click)="refreshTable()" class="tooltip _circle_border p_icons pi pi-refresh">
-                    <div class="tooltip_text">بارگیری مجدد جدول</div>
+                    <div class="tooltip_text_right">بارگیری مجدد جدول</div>
                 </i>
                 <i *ngIf="_checkUpName == 'abBaha' || _checkUpName == 'Budget'|| _checkUpName == 'tabsare3'"
                     (click)="openAddExcelDialog()" class="tooltip _circle_border p_icons pi pi-cloud-upload _xlsx">
@@ -68,19 +77,19 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" pSortableColumn="{{col.field}}">
+            <th pResizableColumn *ngFor="let col of columns" pSortableColumn="{{col.field}}">
                 <p-sortIcon field="{{col.field}}"></p-sortIcon>
                 {{col.header}}
             </th>
-            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th pResizableColumn style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
         <tr>
-            <th *ngFor="let col of columns">
+            <th pResizableColumn *ngFor="let col of columns">
                 <p-columnFilter *ngIf="!col?.isBoolean" matchMode="contains" type="text" field="{{col.field}}">
                 </p-columnFilter>
                 <p-columnFilter *ngIf="col?.isBoolean" type="boolean" field="{{col.field}}"></p-columnFilter>
             </th>
-            <th style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
+            <th pResizableColumn style="width: 2.5rem" *ngFor="let item of _numberOfExtraColumns"></th>
         </tr>
     </ng-template>
 
@@ -96,9 +105,11 @@
                         <p-cellEditor>
                             <ng-template pTemplate="input">
                                 <p-dropdown name="{{_dictionaryName}}" [options]="dictionary"
-                                    [(ngModel)]="dataSource[_dictionaryName]" placeholder="انتخاب مورد"
+                                    [(ngModel)]="dataSource[_dictionaryName]" [placeholder]="dataSource[col.field]"
                                     [style]="{'width':'100%'}" [ngClass]="{'p-dropdown-editable': true}"
-                                    optionLabel="title">
+                                    optionLabel="title"
+                                    (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
+                                    [filter]="true" [showClear]="true">
                                 </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -111,8 +122,10 @@
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <p-dropdown [options]="secondDictionary" [(ngModel)]="dataSource[col.field]"
-                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}"
-                                        [ngClass]="{'p-dropdown-editable': true}" optionLabel="title">
+                                        [placeholder]="dataSource[col.field]" [style]="{'width':'100%'}"
+                                        [ngClass]="{'p-dropdown-editable': true}" optionLabel="title"
+                                        (onChange)="clickedDropDowns(dataSource[col.field], col.field , dataSource.id)"
+                                        [filter]="true">
                                     </p-dropdown>
                                 </ng-template>
                                 <ng-template pTemplate="output">
@@ -126,7 +139,8 @@
                     <ng-container *ngIf="col.isBoolean; else elseTemplate">
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <mat-checkbox [disabled]="col.readonly" [ngClass]="{'mat-checkbox-editable': true}"
+                                <mat-checkbox [disabled]="col.readonly"
+                                    [ngClass]="{'mat-checkbox-editable': !col.readonly}"
                                     [(ngModel)]="dataSource[col.field]"></mat-checkbox>
                             </ng-template>
                             <ng-template pTemplate="output">
@@ -146,7 +160,7 @@
                             <i *ngIf="dataSource[col.field] === 2" class="tooltip pi pi-arrow-up">
                                 <div class="tooltip_text">بالا</div>
                             </i>
-                            <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">0
+                            <i *ngIf="dataSource[col.field] === 3" class="tooltip _empty">صفر
                                 <div class="tooltip_text">صفر</div>
                             </i>
                             <i *ngIf="dataSource[col.field] === 4" class="tooltip _mark">!
@@ -165,7 +179,8 @@
                             <ng-container *ngIf="col.field == 'offloadDateJalali'; else editableForm">
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">
-                                        <app-date-jalali name="date" (dateJalEvent)="receiveDateJalali($event , ri)"
+                                        <app-date-jalali [ngClass]="{'date-editable': !col.readonly}" name="date"
+                                            (dateJalEvent)="receiveDateJalali($event , ri)"
                                             [dateObject]="dataSource[col.field]">
                                         </app-date-jalali>
                                     </ng-template>
@@ -177,7 +192,21 @@
                         </ng-template>
 
                         <ng-template #editableForm>
-                            <ng-container>
+                            <ng-container *ngIf="col.enableTooltip; else simpleText">
+
+                                <div class="tooltip" *ngIf="col.enableTooltip">
+                                    {{dataSource[col.field] && dataSource[col.field].length > 0 ?
+                                    dataSource[col.field].toString().split(' ')[0]
+                                    : ''}}
+                                    <div class="tooltip_text">
+                                        {{dataSource[col.field]}}
+                                    </div>
+                                </div>
+                                <div *ngIf="!col.enableTooltip">
+                                    {{dataSource[col.field]}}
+                                </div>
+                            </ng-container>
+                            <ng-template #simpleText>
                                 <p-cellEditor>
                                     <ng-template pTemplate="input">
                                         <input pInputText [type]="col.isNumber ? 'number': 'text'"
@@ -187,7 +216,8 @@
                                         {{dataSource[col.field]}}
                                     </ng-template>
                                 </p-cellEditor>
-                            </ng-container>
+                            </ng-template>
+
                         </ng-template>
                     </ng-template>
                 </ng-template>
@@ -212,7 +242,7 @@
             </td>
             <td *ngIf="_checkUpName == 'generalListModify'" (click)="showWOUIAsCarousel(dataSource,ri)">
                 <span class="ui-column-title">بررسی عکس/صوت</span>
-                <i class="tooltip p_icons fas fa-camera">
+                <i class="tooltip p_icons fas fa-camera" [ngClass]="{'_haveimage':dataSource.imageCount}">
                     <div class="tooltip_text_right">بررسی عکس/صوت</div>
                 </i>
             </td>
@@ -220,6 +250,27 @@
                 <span class="ui-column-title">نمایش گزارش بازرسی</span>
                 <i (click)="showPictures(dataSource.id)" class="tooltip p_icons pi pi-chart-bar">
                     <div class="tooltip_text_right">نمایش گزارش بازرسی</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'fragmentMaster'">
+                <span class="ui-column-title">مدیریت مسیرها</span>
+                <i *ngIf="!editing" (click)="customSort(dataSource.id)" class="tooltip p_icons pi pi-info">
+                    <div class="tooltip_text_right">مدیریت مسیرها</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'fragmentMaster'">
+                <span class="ui-column-title">صدور لیست خودکار</span>
+                <i *ngIf="!editing" (click)="showPictures(dataSource)" class="tooltip p_icons pi pi-directions-alt">
+                    <div class="tooltip_text">صدور لیست خودکار</div>
+                </i>
+            </td>
+            <td *ngIf="_checkUpName == 'fragmentMaster'">
+                <span class="ui-column-title">تایید نوبتی</span>
+                <i *ngIf="!editing" class="tooltip p_icons"
+                    [ngClass]="dataSource.isValidated ? 'pi pi-check-circle' : 'pi pi-info-circle'"
+                    (click)="showInMapSingle(dataSource)">
+                    <div class="tooltip_text_right">{{dataSource.isValidated ? 'نوبتی تایید شده': 'تایید نوبتی'}}
+                    </div>
                 </i>
             </td>
             <td>
@@ -230,11 +281,12 @@
                 </i>
                 <i *ngIf="editing" pSaveEditableRow (click)="onRowEditSave(dataSource, ri)" class="_save pi pi-check">
                 </i>
-                <i *ngIf="editing && !_isInRowEditing" pCancelEditableRow (click)="onRowEditCancel(dataSource.id, ri)"
-                    class="_cancel pi pi-times">
+                <i *ngIf="editing && !_isInRowEditing" pCancelEditableRow
+                    (click)="onRowEditCancel(dataSource, ri,_dictionaryName)" class="_cancel pi pi-times">
                 </i>
                 <i *ngIf="editing && _isInRowEditing" pCancelEditableRow
-                    (click)="onRowEditCancelRowEditing(dataSource, ri)" class="_cancel pi pi-times">
+                    (click)="onRowEditCancelRowEditing(dataSource, ri,_secondDictionaryName)"
+                    class="_cancel pi pi-times">
                 </i>
             </td>
             <td *ngIf="_checkUpName != 'generalListModify'">

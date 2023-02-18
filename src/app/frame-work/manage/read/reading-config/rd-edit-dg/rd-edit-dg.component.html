@@ -1,117 +1,106 @@
 <h2 mat-dialog-title>ویرایش تنظیمات</h2>
 
 <form [formGroup]="form" dir="rtl" (ngSubmit)="save()">
-    <mat-dialog-content>
-
-        <mat-form-field appearance="fill">
-            <mat-label>ناحیه</mat-label>
+    <main class="_contents">
+        <div class="input_2">
+            <div class="_key">ناحیه</div>
             <mat-select placeholder="انتخاب مورد" [(value)]="selected" name="zoneId">
                 <mat-option *ngFor="let truefalse of data.di" [value]="truefalse.title">
                     {{truefalse.title}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>علی‌الحساب</mat-label>
-            <input matInput type="number" formControlName="defaultAlalHesab" placeholder="علی‌الحساب">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>علی‌الحساب بیشینه</mat-label>
-            <input matInput type="number" formControlName="maxAlalHesab" placeholder="علی‌الحساب بیشینه">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>علی‌الحساب کمینه</mat-label>
-            <input matInput type="number" formControlName="minAlalHesab" placeholder="علی‌الحساب کمینه">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>درصد تصویر</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="defaultImagePercent"
-                placeholder="درصد تصویر">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>بیشینه تصویر</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="maxImagePercent"
-                placeholder="بیشینه تصویر">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>کمینه تصویر</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="minImagePercent" placeholder="کمینه تصویر">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>ثابت مسکونی</mat-label>
-            <input matInput type="number" formControlName="lowConstBoundMaskooni" placeholder="ثابت مسکونی">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>درصد مسکونی</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="lowPercentBoundMaskooni"
-                placeholder="درصد مسکونی">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>بیشینه مسکونی</mat-label>
-            <input matInput type="number" formControlName="highConstBoundMaskooni" placeholder="بیشینه مسکونی">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>درصد مسکونی</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="highPercentBoundMaskooni"
-                placeholder="درصد مسکونی">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>ثابت ساخت</mat-label>
-            <input matInput type="number" formControlName="lowConstBoundSaxt" placeholder="ثابت ساخت">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>درصد ساخت</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="lowPercentBoundSaxt"
-                placeholder="درصد ساخت">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>بیشینه محدوده</mat-label>
-            <input matInput type="number" formControlName="highConstBoundSaxt" placeholder="بیشینه محدوده">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>درصد محدوده</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="highPercentBoundSaxt"
-                placeholder="درصد محدوده">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>ظرفیت کمینه</mat-label>
-            <input matInput type="number" formControlName="lowConstZarfiatBound" placeholder="ظرفیت کمینه">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>درصد ظرفیت</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="lowPercentZarfiatBound"
-                placeholder="درصد ظرفیت">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>بیشینه ظرفیت</mat-label>
-            <input matInput type="number" formControlName="highConstZarfiatBound" placeholder="بیشینه ظرفیت">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>بیشنه درصد ظرفیت</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="highPercentZarfiatBound"
-                placeholder="بیشنه درصد ظرفیت">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>مسکونی درصد ..</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="lowPercentRateBoundNonMaskooni"
-                placeholder="مسکونی درصد ..">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>درصد مسکونی بیشنه</mat-label>
-            <input matInput type="number" min="0" max="100" formControlName="highPercentRateBoundNonMaskooni"
-                placeholder="درصد مسکونی بیشنه">
-        </mat-form-field>
+        </div>
+        <div class="input_2">
+            <div class="_key">علی‌الحساب پیشفرض</div>
+            <input class="_value" type="number" formControlName="defaultAlalHesab">
+        </div>
+        <div class="input_2">
+            <div class="_key">علی‌الحساب بیشینه %</div>
+            <input class="_value" type="number" formControlName="maxAlalHesab">
+        </div>
+        <div class="input_2">
+            <div class="_key">علی‌الحساب کمینه %</div>
+            <input class="_value" type="number" formControlName="minAlalHesab">
+        </div>
+        <div class="input_2">
+            <div class="_key">تصویر پیشفرض %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="defaultImagePercent">
+        </div>
+        <div class="input_2">
+            <div class="_key">تصویر بیشینه %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="maxImagePercent">
+        </div>
+        <div class="input_2">
+            <div class="_key">تصویر کمینه %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="minImagePercent">
+        </div>
+        <div class="input_2">
+            <div class="_key">ثابت مسکونی پایین</div>
+            <input class="_value" type="number" formControlName="lowConstBoundMaskooni">
+        </div>
+        <div class="input_2">
+            <div class="_key">میانگین مسکونی پایین %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="lowPercentBoundMaskooni">
+        </div>
+        <div class="input_2">
+            <div class="_key">ثابت مسکونی بالا</div>
+            <input class="_value" type="number" formControlName="highConstBoundMaskooni">
+        </div>
+        <div class="input_2">
+            <div class="_key">میانگین مسکونی بالا %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="highPercentBoundMaskooni">
+        </div>
+        <div class="input_2">
+            <div class="_key">ثابت ساخت پایین</div>
+            <input class="_value" type="number" formControlName="lowConstBoundSaxt">
+        </div>
+        <div class="input_2">
+            <div class="_key">میانگین ساخت پایین %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="lowPercentBoundSaxt">
+        </div>
+        <div class="input_2">
+            <div class="_key">ثابت ساخت بالا</div>
+            <input class="_value" type="number" formControlName="highConstBoundSaxt">
+        </div>
+        <div class="input_2">
+            <div class="_key">میانگین ساخت بالا %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="highPercentBoundSaxt">
+        </div>
+        <div class="input_2">
+            <div class="_key">ثابت تجاری پایین</div>
+            <input class="_value" type="number" formControlName="lowConstZarfiatBound">
+        </div>
+        <div class="input_2">
+            <div class="_key">میانگین تجاری پایین %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="lowPercentZarfiatBound">
+        </div>
+        <div class="input_2">
+            <div class="_key">ثابت تجاری بالا</div>
+            <input class="_value" type="number" formControlName="highConstZarfiatBound">
+        </div>
+        <div class="input_2">
+            <div class="_key">میانگین تجاری بالا %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="highPercentZarfiatBound">
+        </div>
+        <div class="input_2">
+            <div class="_key">میانگین غیرمسکونی پایین %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="lowPercentRateBoundNonMaskooni">
+        </div>
+        <div class="input_2">
+            <div class="_key">میانگین غیرمسکونی بالا %</div>
+            <input class="_value" type="number" min="0" max="100" formControlName="highPercentRateBoundNonMaskooni">
+        </div>
 
         <mat-checkbox formControlName="defaultHasPreNumber">شماره قبلی</mat-checkbox>
         <mat-checkbox formControlName="isOnQeraatCode">کد قرائت</mat-checkbox>
         <mat-checkbox formControlName="displayBillId">نمایش قبض</mat-checkbox>
         <mat-checkbox formControlName="displayRadif">نمایش ش.پرونده</mat-checkbox>
 
-    </mat-dialog-content>
+    </main>
 
     <mat-dialog-actions>
-        <button class="btn_2 _custom" type="submit">ذخیره</button>
         <button class="btn_2" (click)="close()" type="button">بازگشت</button>
+        <button class="btn_2 _custom" type="submit">ذخیره</button>
         <!--[mat-dialog-close]="form"-->
     </mat-dialog-actions>
 </form>

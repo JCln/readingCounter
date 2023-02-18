@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportTraverse } from 'interfaces/ireports';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { Converter } from 'src/app/classes/converter';
@@ -13,35 +12,17 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./traverse.component.scss']
 })
 export class TraverseComponent extends FactoryONE {
-  isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
-  karbariDictionary: IDictionaryManager[] = [];
   karbariByCodeDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
 
-  dataSource: IReadingReportTraverse[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -52,12 +33,15 @@ export class TraverseComponent extends FactoryONE {
       this.nullSavedSource();
       this.verification();
     }
-    if (this.closeTabService.saveDataForRRTraverse) {
-      this.dataSource = this.closeTabService.saveDataForRRTraverse;
-    }
+    this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.getFragmentByZone();
     this.receiveYear();
+  }
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.traverseReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.traverseReq.zoneId);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -66,24 +50,15 @@ export class TraverseComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportManagerService.traverseReq.readingPeriodId = null, this.readingReportManagerService.traverseReq.year = 0) : (this.readingReportManagerService.traverseReq.fromDate = '', this.readingReportManagerService.traverseReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.traverseReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.traverseReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverse, this.readingReportManagerService.traverseReq);
-    this.karbariDictionary = await this.readingReportManagerService.getKarbariDictionary();
+    this.closeTabService.saveDataForRRTraverse = await this.readingReportManagerService.portRRTest(ENInterfaces.ListTraverse, this.readingReportManagerService.traverseReq);
     this.karbariByCodeDictionary = await this.readingReportManagerService.getKarbariDictionaryCode();
-    Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'possibleKarbariCode');
-    Converter.convertIdToTitle(this.dataSource, this.karbariByCodeDictionary, 'karbariCode');
-    this.closeTabService.saveDataForRRTraverse = this.dataSource;
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverse, this.karbariByCodeDictionary, 'possibleKarbariCode');
+    Converter.convertIdToTitle(this.closeTabService.saveDataForRRTraverse, this.karbariByCodeDictionary, 'karbariCode');
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
-  }
+
 }

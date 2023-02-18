@@ -1,4 +1,8 @@
 export enum ENInterfaces {
+    AuthsAccountRefresh = 'V1/Account/Refresh',
+    AuthsAccountLogin = 'V1/account/login',
+    AuthsAccountLogout = 'V1/Account/Logout',
+
     AuthLevel4GET = 'V1/AuthLevel4/all',
     AuthLevel4DICTIONARY = 'V1/AuthLevel4/Dictionary',
     AuthLevel4REMOVE = 'V1/AuthLevel4/Remove',
@@ -62,6 +66,7 @@ export enum ENInterfaces {
     downloadFileGET = 'V1/Download/File',
     downloadFileInfo = 'V1/Download/File/info',
     downloadFileForbidden = 'V1/Download/File/forbidden',
+    downloadFileByUrl = `V1/Download/File/ByUrl`,
 
     ReadingConfigALL = 'V1/ReadingConfigDefault/All',
     ReadingConfigGET = 'V1/ReadingConfigDefault/Get',
@@ -111,6 +116,8 @@ export enum ENInterfaces {
     unlockUser = 'V1/User/Unlock',
     userACTIVATE = 'V1/User/Activate',
     userDEACTIVATE = 'V1/User/Deactivate',
+    userOnlines = 'V1/User/Onlines',
+    postUserKarkardSummary = 'V1/Tracking/UserKarkardSummary',
 
     fragmentMASTERALL = 'V1/Fragment/Master/All',
     fragmentMASTERREMOVE = 'V1/Fragment/Master/Remove',
@@ -131,6 +138,7 @@ export enum ENInterfaces {
     automaticImportRemove = 'V1/AutomaticImport/Remove',
 
     OutputDBF = 'V1/Output/Dbf',
+    OutputDBFEqamatBagh = 'V1/Output/Dbf1',
     OutputSINGLE = 'V1/Output/single',
     OutputDELAYED = 'V1/Output/Delayed',
     forbidden = 'V1/Forbidden/ByParam',
@@ -147,6 +155,8 @@ export enum ENInterfaces {
     trackingToREADING = 'V1/Tracking/ToReading',
     trackingToOFFLOADED = 'V1/Tracking/ToOffloaded',
     trackingToOFFLOADEDGeneralModify = 'V1/List/OffLoaded/AllInGroup/',
+    trackingToOffloadedGroupModifyBatch = 'V1/OffLoad/ModifyBatch',
+    GeneralModifyAllExcelInGroup = 'V1/List/OffLoaded/AllExcelInGroup',
     trackingPRE = 'V1/Tracking/Pre',
     trackingBriefKardex = 'V1/AbBahaReport',
     trackingFinishReadiED = 'V1/Tracking/FinishReading',
@@ -157,6 +167,8 @@ export enum ENInterfaces {
     ImageAttributionAnalyze = 'V1/ImageAttributionFile/Analyze',
     trackingPostOffloadModify = 'V1/OffLoad/Modify',
     trackingEditState = 'V1/Tracking/EditState',
+    trackingStatesDictionary = 'V1/Tracking/States/Dictionary',
+    trackingUserKarkard = 'V1/Tracking/UserKarkard',
 
     ListSearchMoshtarak = 'V1/List/Search/Moshtarak',
     ListSearchPro = 'V1/List/Search/Pro',
@@ -167,6 +179,7 @@ export enum ENInterfaces {
     ListTraverseDifferentialDictionary = 'V1/List/TraverseDifferential/Dictionary',
     ListOFFKarkard = 'V1/List/Offloaded/Karkard',
     ListKarkardOffloaded = 'V1/List/Offloaded/KarkardOffloaded',
+    ListKarkardByFragment = 'V1/List/Offloaded/KarkardByFragment',
     ListKarkardChart = 'V1/List/Offloaded/KarkardChart',
     ListTraverseDifferntialChart = 'V1/List/Offloaded/TraverseDifferntialChart',
     ListOffloadedPERDAY = `V1/List/OffLoaded/PerDay/`,
@@ -179,7 +192,8 @@ export enum ENInterfaces {
     ListDispersalHours = 'V1/List/Offloaded/DispersalHours',
     ListDispersalChart = 'V1/List/Offloaded/DispersalChart',
     ListAllImages = `V1/List/OffLoaded/AllImages/`,
-    downloadFileAllImages = '/V1/Download/File/AllImages?access_token=',
+    downloadFileAllImages = 'V1/Download/File/AllImages?access_token=',
+    downloadFileAllImagesTWO = 'V1/Download/File/AllImages2?access_token=',
     ListRRLocked = 'V1/List/Offloaded/Locked',
     ListRRPreNumberShown = 'V1/List/Offloaded/PreNumberShown',
 
@@ -197,7 +211,7 @@ export enum ENInterfaces {
     readingPeriodKindRemove = 'V1/readingPeriodKind/Remove',
 
     KarbariAll = 'V1/Karbari/All',
-    KarbariDictionary = 'V1/Karbari/Dictionary',
+    // KarbariDictionary = 'V1/Karbari/Dictionary',
     KarbariDictionaryCode = 'V1/Karbari/DictionaryCode',
     KarbariRemove = 'V1/Karbari/Remove',
     KarbariEdit = 'V1/Karbari/Edit',
@@ -205,7 +219,16 @@ export enum ENInterfaces {
     rrInStatePost = 'V1/List/Offloaded/InState',
 
     signalRStartConnection = '/notifyHub',
-    signalRBroadcastMessage = 'broadcast',
+    // signalRBroadcastMessage = 'broadcast',
+    signalRBroadcastMessage = 'V1/NotifyManager/Broadcast/TextWithTimer',
+    signalRNotifDirectImage = 'V1/NotifyManager/Direct/Image',
+    signalRNotifDirectVideo = 'V1/NotifyManager/Direct/Video',
+    signalRNotifDirectText = 'V1/NotifyManager/Direct/Text',
+    signalRMomentSystemAddReadingRow = 'AddReadingRow',
+    receiveTextWithTimer = 'receiveTextWithTimer',
+    ReceiveImageWithCaption = 'ReceiveImageWithCaption',
+    ReceiveVideoWithCaption = 'ReceiveVideoWithCaption',
+    ReceiveDirectMessage = 'receiveDirectMessage',
     signalRSendMessage = 'sendMessage',
     signalRReceiveMessage = 'receiveMessage',
 
@@ -215,6 +238,9 @@ export enum ENInterfaces {
     serverManagerHealthCheck = '/healthchecks-ui',
     serverManagerErrorsElmah = '/elmah/detail/',
     serverManagerResetApp = 'V1/Server/ResetApp',
+    serverManagerDrivesInfo = 'V1/Server/DrivesInfo',
+    serverManagerRequestLog = 'V1/RequestLog/List',
+    serverManagerOSInfo = 'V1/Server/OsInfo',
 
     dynamicReportManagerAll = 'V1/DynamicReport/All',
     dynamicReportManagerRemove = 'V1/DynamicReport/Remove/',
@@ -226,6 +252,7 @@ export enum ENInterfaces {
     counterStateDictionary = 'V1/CounterState/Dictionary',
     counterStateDictionaryByZoneId = `V1/CounterState/DictionaryByZoneId/`,
     counterStateDictionaryByCode = `V1/CounterState/DictionaryByCode/`,
+    counterStateDictionaryForModify = `V1/CounterState/DictionaryForModify/`,
     counterStateGridFriendly = 'V1/CounterState/GridFriendly',
     counterStateRemove = 'V1/CounterState/Remove',
     counterStateEdit = 'V1/CounterState/Edit',
@@ -253,7 +280,9 @@ export enum ENInterfaces {
     APKPreList = 'V1/APK/PreList',
     APKLast = 'V1/APK/Last',
     APKUpload = 'V1/APK/Upload',
+    APKRemove = `V1/Apk/Remove`,
     offloadManual = 'V1/Manual/OffLoad',
+    fileUploadSingle = 'V1/Upload/Single',
     loadManual = `V1/Load/Manual`,
 
     QotrAll = 'V1/Qotr/All',
@@ -270,9 +299,13 @@ export enum ENInterfaces {
     getSideBar = 'V1/User/SideBar',
     changePassword = 'V1/Account/ChangePassword',
     getMyProfile = 'V1/Account/MyInfo',
-    chat = '/V1/Chat/Index?accessToken=',
+    getWaterMarkConfig = 'V1/WaterMark/Get',
+    postWaterMarkConfig = 'V1/WaterMark/AddOrEdit',
+    chat = 'V1/Chat/Index?accessToken=',
+    settingsLicense = 'V1/ApiSettings/License',
 
     postImportData = 'V1/Import/Dynamic',
+    postImportErrorsByTrackNumber = 'V1/Import/ImportErrorsByTrackNumber',
     postImportDynamicCount = 'V1/Import/DynamicCount',
     getImportErrros = 'V1/Import/ImportErrors',
     postSimafaReadingProgram = 'V1/Import/Simafa/ReadingPrograms',
@@ -281,7 +314,12 @@ export enum ENInterfaces {
     postSimafaAssessPre = 'V1/Import/Simafa/AssessPre',
     postSimafaAssessAdd = 'V1/Import/Simafa/AssessAdd',
 
+    getImportDataFileExcelSample = 'V1/Import/File/ExcelSample',
+    postImportDataFileExcel = 'V1/Import/File/Excel',
+
     postToolsRandomImages = 'V1/List/OffLoaded/RandomImages',
+    postImgAttrResultDetails = 'V1/ImageAttributionFile/ResultDetails',
+    postImgAttrResultDetailsGridBased = 'V1/ImageAttributionFile/ResultDetailsGridBased',
     getImageAttributionAll = `V1/ImageAttributionFile/All`,
     getImageAttributionAddOrEdit = 'V1/ImageAttributionFile/AddOrEdit',
 
@@ -299,6 +337,8 @@ export enum ENInterfaces {
     getDashboardShownReadings = 'V1/List/Dashboard/ShownReadings/Timed',
     getDashboardKarkardTimed = 'V1/List/Dashboard/Karkard/Timed',
     getDashboardMediaTimed = 'V1/List/Dashboard/Media/Timed',
+    getLatestOnOffloadId = 'V1/List/Latest/OnOffLoadId',
+    postKarkardAllStates = 'V1/List/Offloaded/KarkardAllStates',
     getDashboardNotReader = 'V1/Tracking/Dashboard/Tracking/NotReader',
     getDashboardReadingReportTimed = 'V1/ReadingReport/Dashboard/Timed',
     getDashboardReadTimed = 'V1/List/Dashboard/Read/Timed',

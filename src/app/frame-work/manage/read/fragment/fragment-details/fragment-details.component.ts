@@ -1,14 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { IDictionaryManager } from 'interfaces/ioverall-config';
 import { IFragmentDetails } from 'interfaces/ireads-manager';
 import { Table } from 'primeng/table';
-import { filter } from 'rxjs/internal/operators/filter';
 import { CloseTabService } from 'services/close-tab.service';
 import { FragmentManagerService } from 'services/fragment-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
-import { EN_Routes } from 'src/app/Interfaces/routes.enum';
 
 
 @Component({
@@ -20,50 +17,57 @@ export class FragmentDetailsComponent extends FactoryONE {
   table: Table;
   newRowLimit: number = 1;
 
-  dataSource: IFragmentDetails[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   _selectCols: any[] = [];
   _selectedColumns: any[];
-  _masterId: string = '';
   clonedProducts: { [s: string]: IFragmentDetails; } = {};
 
   constructor(
-    private closeTabService: CloseTabService,
-    public fragmentManagerService: FragmentManagerService,
-    private router: Router
+    public closeTabService: CloseTabService,
+    public fragmentManagerService: FragmentManagerService
   ) {
     super();
-    this.getRouteParams();
   }
 
-  nullSavedSource = () => this.closeTabService.saveDataForFragmentNOBDetails = null;
+  nullSavedSource = () => {
+    this.closeTabService.saveDataForFragmentNOBDetails = null;
+    this.closeTabService.fragmentNOBDetailsGUID = null;
+  }
   classWrapper = async (canRefresh?: boolean) => {
-    if (canRefresh) {
-      this.nullSavedSource();
+    console.log(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
+    if (!this.fragmentManagerService.fragmentDetails_pageSign.GUid) {
+      this.fragmentManagerService.routeToFragmentMaster();
     }
-    this.dataSource = await this.fragmentManagerService.getFragmentDetails(this._masterId);
-    this.closeTabService.saveDataForFragmentNOBDetails = this.dataSource;
-    this.defaultAddStatus();
-    this.insertSelectedColumns();
+
+    else {
+      console.log(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
+      if (canRefresh) {
+        this.nullSavedSource();
+      }
+      console.log(this.closeTabService.fragmentNOBDetailsGUID);
+
+      if (
+        this.closeTabService.fragmentNOBDetailsGUID != this.fragmentManagerService.fragmentDetails_pageSign.GUid ||
+        !this.closeTabService.saveDataForFragmentNOBDetails
+      ) {
+        this.closeTabService.saveDataForFragmentNOBDetails = await this.fragmentManagerService.getFragmentDetails(this.fragmentManagerService.fragmentDetails_pageSign.GUid);
+        this.closeTabService.fragmentNOBDetailsGUID = this.fragmentManagerService.fragmentDetails_pageSign.GUid;
+      }
+      this.defaultAddStatus();
+      this.insertSelectedColumns();
+    }
   }
   defaultAddStatus = () => this.newRowLimit = 1;
   insertSelectedColumns = () => {
     this._selectCols = this.fragmentManagerService.columnSelectedFragmentDetails();
     this._selectedColumns = this.fragmentManagerService.customizeSelectedColumns(this._selectCols);
   }
-  private getRouteParams = () => {
-    this.subscription.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      this._masterId = this.fragmentManagerService.getRouteParams();
-      this.classWrapper();
-    })
-    )
-  }
   testChangedValue() {
     this.newRowLimit = 2;
   }
-  refetchTable = (index: number) => this.dataSource = this.dataSource.slice(0, index).concat(this.dataSource.slice(index + 1));
+  refetchTable = (index: number) => this.closeTabService.saveDataForFragmentNOBDetails = this.closeTabService.saveDataForFragmentNOBDetails.slice(0, index).concat(this.closeTabService.saveDataForFragmentNOBDetails.slice(index + 1));
   newRow(): IFragmentDetails {
-    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this._masterId, isNew: true };
+    return { routeTitle: '', fromEshterak: '', toEshterak: '', fragmentMasterId: this.fragmentManagerService.fragmentDetails_pageSign.GUid, isNew: true };
   }
   onRowEditInit(dataSource: IFragmentDetails) {
     // this.insertSelectedColumns();
@@ -71,10 +75,10 @@ export class FragmentDetailsComponent extends FactoryONE {
   }
   onRowEditCancel(dataSource: object) {
     this.newRowLimit = 1;
-    this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
-    delete this.dataSource[dataSource['dataSource'].id];
+    this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+    delete this.closeTabService.saveDataForFragmentNOBDetails[dataSource['dataSource'].id];
     if (dataSource['dataSource'].isNew)
-      this.dataSource.shift();
+      this.closeTabService.saveDataForFragmentNOBDetails.shift();
     return;
   }
   removeRow = async (dataSource: object) => {
@@ -86,8 +90,8 @@ export class FragmentDetailsComponent extends FactoryONE {
     if (!confirmed) return;
     const a = await this.fragmentManagerService.postBody(ENInterfaces.fragmentDETAILSREMOVE, dataSource['dataSource']);
     if (a) {
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
-      delete this.dataSource[dataSource['dataSource'].id];
+      this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+      delete this.closeTabService.saveDataForFragmentNOBDetails[dataSource['dataSource'].id];
       this.refetchTable(dataSource['ri']);
     }
   }
@@ -95,10 +99,10 @@ export class FragmentDetailsComponent extends FactoryONE {
     this.newRowLimit = 1;
     if (!this.fragmentManagerService.verificationDetails(dataSource['dataSource'])) {
       if (dataSource['dataSource'].isNew) {
-        this.dataSource.shift();
+        this.closeTabService.saveDataForFragmentNOBDetails.shift();
         return;
       }
-      this.dataSource[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
+      this.closeTabService.saveDataForFragmentNOBDetails[dataSource['ri']] = this.clonedProducts[dataSource['dataSource'].fragmentMasterId];
       return;
     }
     if (!dataSource['dataSource'].id) {
@@ -122,6 +126,5 @@ export class FragmentDetailsComponent extends FactoryONE {
     //restore original order
     this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
-  routeToParent = () => this.router.navigate([EN_Routes.wrmrnob]);
-  ngOnInit(): void { return; }
+
 }

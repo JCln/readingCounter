@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { ENSnackBarColors } from 'interfaces/ioverall-config';
 import { ToolsService } from 'services/tools.service';
-import { ENAcceptVerb, IAcceptVerb, IJsonInfo, IParamSendType } from 'src/app/Interfaces/itools';
+import { ENAcceptVerb, IAcceptVerb, IJsonInfo, IParamSendType } from 'src/app/interfaces/itools';
 
 
 @Component({

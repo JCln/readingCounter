@@ -1,15 +1,7 @@
 $border_5: 5px;
+$border_7: 7px;
 $border_15: 15px;
 $border_50: 50%;
-
-$font_05: 0.5rem;
-$font_xxs: 0.87rem;
-$font_xs: 1rem;
-$font_s: 1.2rem;
-$font_m: 1.3rem;
-$font_l: 1.5rem;
-$font_2: 2rem;
-$font_3: 3rem;
 
 $font_family: BLotus,
 "Blotus",
@@ -25,16 +17,20 @@ hr {
 
 .hr_1 {
   width: 70%;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--font_l);
   height: .4rem;
   border-radius: 30px;
+}
+
+.font_family {
+  font-family: $font_family;
 }
 
 .hr_2 {
   opacity: .7;
   width: 70%;
-  margin: 2.5rem auto;
-  height: .2rem;
+  margin: var(--font_25) auto;
+  height: var(--font_02);
   border-radius: 30px;
 }
 
@@ -53,10 +49,12 @@ a:active {
   outline: none;
 }
 
-::ng-deep {
+:host ::ng-deep,
+::ng-deep,
+:host {
   .mat-select-placeholder {
     color: var(--secondary_8);
-    font-size: 1rem;
+    font-size: var(--font_ss);
   }
 
   .mat-checkbox-checked.mat-accent.mat-checkbox-disabled .mat-checkbox-background,
@@ -69,74 +67,77 @@ a:active {
     color: var(--primary_7);
   }
 
-  :host ::ng-deep {
-    .p-datatable-responsive .p-datatable-tbody>tr>td .p-column-title {
-      display: none;
-    }
-
-    .p-dropdown .p-dropdown-label {
-      font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .p-dropdown {
-      height: 2.8rem;
-      border-radius: 10px;
-      background: var(--white);
-    }
-
-    .p-dropdown-panel .p-dropdown-header {
-      background: var(--secondary_3);
-      color: var(--secondary_8);
-    }
-
-    .p-dropdown-panel .p-dropdown-items .p-dropdown-item,
-    .p-dropdown .p-dropdown-label.p-placeholder,
-    .p-multiselect .p-multiselect-label.p-placeholder,
-    .p-multiselect-label,
-    .p-multiselect-items {
-      font-family: BLotus, "Blotus", tahoma, Sans-Serif !important;
-      font-size: 1.2rem;
-      font-weight: 600 !important;
-      background: var(--secondary_3);
-      color: var(--secondary_8);
-    }
-
-    .p-dropdown .p-dropdown-label.p-placeholder {
-      font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .p-dropdown.p-dropdown-clearable .p-dropdown-label {
-      padding-right: 0.25rem;
-      font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .p-dropdown-item {
-      font-family: BLotus, "Blotus", tahoma, Sans-Serif;
-      font-weight: 600;
-    }
-
-    .p-dropdown-panel .p-dropdown-items {
-      background: var(--secondary_1);
-    }
-
-    .p-dropdown .p-dropdown-clear-icon {
-      right: 0.357rem;
-    }
-
-    .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
-      background: var(--secondary_1);
-      color: var(--secondary_8);
-    }
-
+  .p-datatable-responsive .p-datatable-tbody>tr>td .p-column-title {
+    display: none;
   }
 
+  .p-dropdown .p-dropdown-label {
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-size: var(--font_s);
+    font-weight: 600;
+  }
+
+  .p-dropdown {
+    height: var(--font_28);
+    border-radius: 10px;
+    background: var(--white);
+  }
+
+  .p-dropdown-panel .p-dropdown-header {
+    background: var(--secondary_3);
+    color: var(--secondary_8);
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item,
+  .p-dropdown .p-dropdown-label.p-placeholder,
+  .p-multiselect .p-multiselect-label.p-placeholder,
+  .p-multiselect-label,
+  .p-multiselect-items {
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif !important;
+    font-size: var(--font_s);
+    font-weight: 600 !important;
+    background: var(--secondary_3);
+    color: var(--secondary_8);
+  }
+
+  .p-dropdown .p-dropdown-label.p-placeholder {
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-size: var(--font_s);
+    font-weight: 600;
+  }
+
+  .p-dropdown.p-dropdown-clearable .p-dropdown-label {
+    padding-right: var(--font_025);
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-size: var(--font_ss);
+    font-weight: 600;
+  }
+
+  .p-dropdown-item {
+    font-family: BLotus, "Blotus", tahoma, Sans-Serif;
+    font-weight: 600;
+  }
+
+  .p-dropdown-panel .p-dropdown-items {
+    background: var(--secondary_1);
+  }
+
+  .p-dropdown .p-dropdown-clear-icon {
+    right: 0.357rem;
+  }
+
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+    background: var(--secondary_1);
+    color: var(--secondary_8);
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    direction: rtl;
+    justify-content: flex-start;
+  }
 }
+
 
 .coloring_border {
   border: 1.5px dashed var(--orange_600);
@@ -157,7 +158,7 @@ a:active {
 ._xlsx_download {
   background: var(--green_500);
   color: var(--white);
-  font-size: $font_m;
+  font-size: var(--font_m);
 }
 
 ._csv {
@@ -173,19 +174,24 @@ a:active {
   color: var(--white) !important;
 }
 
+._custom {
+  background: var(--primary_4);
+  color: var(--secondary_1);
+}
+
 // 
 /* BACK ARROW ICON */
 .p_icons {
   color: var(--thirdy_1);
-  font-size: $font_m;
+  font-size: var(--font_m);
   cursor: pointer;
 }
 
 ._circle_border {
   display: grid !important;
   place-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: var(--font_25);
+  height: var(--font_25);
   border-radius: 50%;
   border: 1.5px solid;
   cursor: pointer;

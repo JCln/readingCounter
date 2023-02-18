@@ -1,0 +1,18 @@
+<app-collapsable [_isReversed]="true"
+    [_isCollapsed]=closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed
+    (_clicked)=" closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed = !closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed">
+</app-collapsable>
+<form #form="ngForm" *ngIf="closeTabService.saveDataForImportErrorsByTrackNumberReq._isCollapsed" class="insert_track"
+    (ngSubmit)="connectToServer()">
+    <div class="input_2">
+        <div class="_key">شماره پیگیری</div>
+        <input class="_value" type="number" name="trackNumber"
+            [(ngModel)]="closeTabService.saveDataForImportErrorsByTrackNumberReq.trackNumber" autofocus>
+    </div>
+    <button type="submit" class="btn_1">مشاهده</button>
+</form>
+
+<app-prime-table [dataSource]="closeTabService.saveDataForImportErrorsByTrackNumber"
+    [_outputFileName]="'errorsByTrackNumber'" [_selectedColumnsToRemember]="'selectedErrorsByTrackNumber'"
+    (refreshedTable)="refreshTable()">
+</app-prime-table>

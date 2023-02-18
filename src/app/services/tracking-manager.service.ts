@@ -1,22 +1,27 @@
-import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IOutputManager } from 'interfaces/imanage';
 import { IOffloadModifyReq } from 'interfaces/inon-manage';
 import { ENSelectedColumnVariables, IObjectIteratation, IResponses } from 'interfaces/ioverall-config';
+import { EN_Routes } from 'interfaces/routes.enum';
+import { SortEvent } from 'primeng/api/sortevent';
 import { InterfaceManagerService } from 'services/interface-manager.service';
+import { ProfileService } from 'services/profile.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { JwtService } from 'src/app/auth/jwt.service';
+import { ColumnManager } from 'src/app/classes/column-manager';
 import { Converter } from 'src/app/classes/converter';
 
 import { MathS } from '../classes/math-s';
 import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
-import { IEditTracking, IOffLoadPerDay, ITracking } from '../Interfaces/itrackings';
-import { EN_Routes } from '../Interfaces/routes.enum';
+import { IEditTracking, IOffLoadPerDay, ITracking } from '../interfaces/itrackings';
 import { OffloadModify } from './../classes/offload-modify-type';
 import { AllListsService } from './all-lists.service';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
+import { EnvService } from './env.service';
+import { PageSignsService } from './page-signs.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -25,68 +30,26 @@ import { UtilsService } from './utils.service';
 export class TrackingManagerService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
 
-  columnDefColumns = (): IObjectIteratation[] => [
-    { field: 'insertDateJalali', header: 'تاریخ ثبت', isSelected: true },
-    { field: 'userDisplayName', header: 'نام کاربر', isSelected: true },
-    { field: 'counterReaderName', header: 'مامور', isSelected: true },
-    { field: 'trackStatusTitle', header: 'وضعیت', isSelected: true },
-    { field: 'seen', header: 'دیده شده', isSelected: true, isBoolean: true },
-    // { field: 'inserterCode', header: 'کد کاربر', isSelected: false },    
-    // { field: 'hasDetails', header: 'جزئیات' },
-  ]
-  columnFollowUpView = (): IObjectIteratation[] => {
-    return [
-      { field: 'trackNumber', header: 'شماره پیگیری ', isSelected: true, readonly: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
-      { field: 'zoneTitle', header: 'ناحیه ', isSelected: true, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک ', isSelected: true, readonly: true },
-      { field: 'toEshterak', header: 'تا اشتراک ', isSelected: true, readonly: true },
-      { field: 'fromDate', header: 'از ', isSelected: true, readonly: true },
-      { field: 'toDate', header: 'تا ', isSelected: true, readonly: true },
-      { field: 'overallQuantity', header: 'کل تعداد ', isSelected: true, readonly: true },
-      { field: 'itemQuantity', header: 'تعداد ', isSelected: true, readonly: true },
-      { field: 'readingPeriodTitle', header: 'دوره قرائت ', isSelected: true, readonly: true },
-      { field: 'year', header: 'سال', isSelected: true, readonly: true }
-    ];
-  }
+  dbfOutput: IOutputManager = {
+    zoneId: 0,
+    fromDate: null,
+    toDate: null
+  };
+  dbfOutputEqamatBagh = {
+    zoneId: 0
+  };
 
-  columnSelectedImportedList = (): IObjectIteratation[] => {
-    return [
-      { field: 'isBazdid', header: 'بازدید', isSelected: false, readonly: true, isBoolean: true },
-      { field: 'isRoosta', header: 'روستایی', isSelected: false, readonly: true, isBoolean: true },
-      { field: 'counterReaderName', header: 'مامور فعلی', isSelected: true, readonly: true },
-      { field: 'newCounterReaderName', header: 'مامور جدید', isSelected: false, isSelectOption: true, readonly: false, borderize: true },
-      { field: 'trackNumber', header: 'ش پیگیری', isSelected: false, readonly: true },
-      { field: 'listNumber', header: 'ش لیست', isSelected: false, readonly: true },
-      { field: 'insertDateJalali', header: 'تاریخ', isSelected: false, readonly: true },
-      { field: 'zoneTitle', header: 'ناحیه', isSelected: false, readonly: true },
-      // { field: 'year', header: 'سال', isSelected: false, readonly: true },
-      { field: 'fromEshterak', header: 'از اشتراک', isSelected: false, readonly: true, ltr: true },
-      { field: 'toEshterak', header: 'تا اشتراک', isSelected: false, readonly: true, ltr: true },
-      { field: 'fromDate', header: 'از', isSelected: false, readonly: true },
-      { field: 'toDate', header: 'تا', isSelected: false, readonly: true },
-      { field: 'itemQuantity', header: 'تعداد', isSelected: false, readonly: true },
-      { field: 'alalHesabPercent', header: 'درصد علی‌الحساب', isSelected: true, readonly: false, borderize: true },
-      { field: 'imagePercent', header: 'درصد تصویر', isSelected: true, readonly: false, borderize: true },
-      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: false, isBoolean: true },
-      { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: false, isBoolean: true },
-      { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, isBoolean: true },
-    ];
+  getColumnDefColumns = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('defColumns');
   }
-  columnSelectedLMPerDayPositions = (): IObjectIteratation[] => {
-    return [
-      { field: 'counterReaders', header: 'مامور', isSelected: true, readonly: true, icon: 'grid-column: auto/ span 2' },
-      { field: 'readCount', header: 'قرائت شده', isSelected: true, readonly: true },
-      { field: 'overalDistance', header: 'مسافت کل(m)', isSelected: true, readonly: true },
-      { field: 'overalDuration', header: 'زمان کل(h)', isSelected: true, readonly: true },
-      { field: 'maneCount', header: 'تعداد مانع', isSelected: true, readonly: true },
-      { field: 'manePercent', header: 'درصد مانع', isSelected: true, readonly: true },
-      { field: 'hasPreNumber', header: 'رقم قبلی', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'displayBillId', header: 'نمایش شناسه قبض', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'displayRadif', header: 'نمایش ش.پرونده', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'isBazdid', header: 'بازدید', isSelected: true, readonly: true, isBoolean: true },
-      { field: 'isRoosta', header: 'روستا', isSelected: true, readonly: true, isBoolean: true }
-    ];
+  getFollowUpView = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('followUpView');
+  }
+  getImportedListDetails = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('importedListDetails');
+  }
+  getLMPerDayFollowUpPositions = (): IObjectIteratation[] => {
+    return this.columnManager.columnSelectedMenus('LMPerDayFollowUpPositions');
   }
   getOffloadModifyType = (): OffloadModify[] => {
     return [
@@ -108,38 +71,53 @@ export class TrackingManagerService {
       OffloadModify.others
     ]
   }
+  get getDBFOutPut(): IOutputManager {
+    return this.dbfOutput;
+  }
 
   constructor(
     private interfaceManagerService: InterfaceManagerService,
     private utilsService: UtilsService,
     private dictionaryWrapperService: DictionaryWrapperService,
-    private _location: Location,
     private dialog: MatDialog,
     private allListsService: AllListsService,
-    private router: Router
+    private envService: EnvService,
+    private jwtService: JwtService,
+    private columnManager: ColumnManager,
+    private pageSignsService: PageSignsService,
+    private profileService: ProfileService,
+    private authService: AuthService
   ) { }
 
-  getDataSource = (method: ENInterfaces): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GET(method).subscribe(res => {
-          resolve(res);
-        });
-      });
-    } catch (error) {
-      console.error(error);
+  firstConfirmDialog = (message: EN_messages, isInput: boolean, isDelete: boolean): Promise<any> => {
+    const a = {
+      messageTitle: message,
+      minWidth: '19rem',
+      isInput: isInput,
+      isDelete: isDelete
     }
+    return this.utilsService.firstConfirmDialog(a);
+  }
+  getApiUrl = (): string => {
+    return this.envService.API_URL;
+  }
+  getAuthToken = (): string => {
+    return this.jwtService.getAuthorizationToken();
+  }
+
+  getDataSource = (method: ENInterfaces): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GET(method).subscribe(res => {
+        resolve(res);
+      });
+    });
   }
   getDataSourceByQuote = (method: ENInterfaces, insertedInput: number | string): Promise<any> => {
-    try {
-      return new Promise((resolve) => {
-        this.interfaceManagerService.GETByQuote(method, insertedInput).subscribe(res => {
-          resolve(res)
-        })
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    return new Promise((resolve) => {
+      this.interfaceManagerService.GETByQuote(method, insertedInput).subscribe(res => {
+        resolve(res)
+      })
+    });
   }
   postEditingTrack = (rowData: IEditTracking) => {
     this.interfaceManagerService.POSTBODY(ENInterfaces.trackingEDIT, this.selectSpecialParameters(rowData)).subscribe((res: IResponses) => {
@@ -153,6 +131,13 @@ export class TrackingManagerService {
         resolve(res);
       })
     })
+  }
+  postBody = (method: ENInterfaces, body: object): Promise<any> => {
+    return new Promise(resolve => {
+      this.interfaceManagerService.POSTBODY(method, body).toPromise().then((res: IResponses) => {
+        resolve(res);
+      })
+    });
   }
   migrateOrRemoveTask = (method: ENInterfaces, trackNumber: string, desc: string): Promise<any> => {
     return new Promise((resolve) => {
@@ -187,15 +172,23 @@ export class TrackingManagerService {
       })
     });
   }
+  downloadOutputDBFEqamatBagh = (method: ENInterfaces, dbfData: any): Promise<any> => {
+    return new Promise((resolve) => {
+      this.interfaceManagerService.POSTBLOB(method, dbfData).toPromise().then(res => {
+        resolve(res);
+      }).catch(() => {
+        this.utilsService.snackBarMessageFailed(EN_messages.server_noDataFounded);
+      })
+    });
+  }
   downloadOutputWithoutDESC = (method: ENInterfaces, single: ITracking): Promise<any> => {
     const a: any = {
       trackingId: single.id
     }
     return new Promise((resolve) => {
-      this.interfaceManagerService.POSTBLOBOBSERVE(method, a).subscribe(res => {
+      this.interfaceManagerService.POSTBLOBOBSERVE(method, a).toPromise().then(res => {
         resolve(res);
       })
-
     });
   }
   downloadOutputSingleWithENV = (method: ENInterfaces, single: ITracking, inputData: string): Promise<any> => {
@@ -209,43 +202,8 @@ export class TrackingManagerService {
       })
     })
   }
-  // 
   successSnackMessage = (message: string) => {
     this.utilsService.snackBarMessageSuccess(message);
-  }
-  backToConfirmDialog = (trackNumber: string) => {
-    const title = EN_messages.reason_backToPrev;
-    return new Promise(() => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: title,
-          isInput: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.migrateOrRemoveTask(ENInterfaces.trackingPRE, trackNumber, desc);
-        }
-      })
-    })
-  }
-  TESTbackToConfirmDialog = (trackNumber: string, message: EN_messages): Promise<any> => {
-    return new Promise(resolve => {
-      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
-        minWidth: '19rem',
-        data: {
-          title: message,
-          isInput: true
-        }
-      });
-      dialogRef.afterClosed().subscribe(desc => {
-        if (desc) {
-          this.migrateOrRemoveTask(ENInterfaces.trackingToREADING, trackNumber, desc);
-          resolve(true);
-        }
-      })
-    })
   }
   hasNextBazdidConfirmDialog = (message: EN_messages): Promise<any> => {
     return new Promise(resolve => {
@@ -302,13 +260,64 @@ export class TrackingManagerService {
     })
     return a;
   }
+  customizeSelectedColumns = (_selectCols: any) => {
+    return _selectCols.filter(items => {
+      if (items.isSelected)
+        return items
+    })
+  }
+  customSort(event: SortEvent) {
+    event.data.sort((data1, data2) => {
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
 
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+      return (event.order * result);
+    });
+  }
   /*VALIDATION */
-  private showWarnMessage = (message: string) => this.utilsService.snackBarMessageWarn(message);
+  showWarnMessage = (message: string) => this.utilsService.snackBarMessageWarn(message);
   isValidationNull = (elem: any): boolean => {
     if (MathS.isNull(elem))
       return true;
     return false;
+  }
+  denyTracking = (): boolean => {
+    const jwtRole = this.authService.getAuthUser();
+    return jwtRole.roles.toString().includes('denytracking') ? true : false;
+  }
+  checkVertificationDBF = (dataSource: IOutputManager): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource.fromDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(dataSource.toDate)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+    return true;
+  }
+  checkVertificationDBFEqamatBagh = (dataSource: any): boolean => {
+    if (MathS.isNull(dataSource.zoneId)) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    return true;
   }
   private offloadModifyValidation = (object: IOffloadModifyReq): boolean => {
     if (this.isValidationNull(object.id)) {
@@ -353,56 +362,78 @@ export class TrackingManagerService {
   verificationOffloadModify = (object: IOffloadModifyReq): boolean => {
     return this.offloadModifyValidation(object);
   }
-  verificationFollowUPTrackNumber = (id: number): boolean => {
+  verificationTrackNumber = (id: number): boolean => {
     return this.followUPValidation(id);
-  }
-  /* OTHER */
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
   }
   routeToLMPDXY = (trackNumber: number, day: string, distance: number, isPerday: boolean) => {
     this.utilsService.routeToByParams('wr', { trackNumber: trackNumber, day: day, distance: distance, isPerday: isPerday });
   }
+  routeToLMPayDay = (row: ITracking) => {
+    this.pageSignsService.perday_pageSign.trackNumber = row.trackNumber;
+    this.utilsService.routeToByUrl(EN_Routes.wrmlpd);
+  }
   routeToLMAll = (row: any) => {
     this.allListsService.allLists_pageSign.GUid = row.id;
     this.allListsService.allLists_pageSign.listNumber = row.listNumber;
-    this.router.navigate([EN_Routes.wrmlallfalse]);
+    this.allListsService.allLists_pageSign.trackNumber = row.trackNumber;
+    this.allListsService.allLists_pageSign.zoneTitle = row.zoneTitle;
+    this.utilsService.routeTo(EN_Routes.wrmlallfalse);
   }
   routeToOffloadModify = (dataSource: ITracking) => {
     this.allListsService.modifyLists_pageSign.GUid = dataSource.id;
     this.allListsService.modifyLists_pageSign.listNumber = dataSource.listNumber;
-    this.router.navigate([EN_Routes.wrmlalltrue]);
+    this.allListsService.modifyLists_pageSign.trackNumber = dataSource.trackNumber;
+    this.allListsService.modifyLists_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.utilsService.routeTo(EN_Routes.wrmlalltrue);
   }
   routeToOffloadGeneralModify = (dataSource: ITracking) => {
     this.allListsService.generalModifyLists_pageSign.GUid = dataSource.id;
     this.allListsService.generalModifyLists_pageSign.listNumber = dataSource.listNumber;
     this.allListsService.generalModifyLists_pageSign.groupId = dataSource.groupId;
     this.allListsService.generalModifyLists_pageSign.zoneId = dataSource.zoneId;
-    this.router.navigate([EN_Routes.wrmlGeneralModify]);
+    this.allListsService.generalModifyLists_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.allListsService.generalModifyLists_pageSign.trackNumber = dataSource.trackNumber;
+    this.utilsService.routeTo(EN_Routes.wrmlGeneralModify);
+  }
+  routeToAssessPre = () => {
+    this.utilsService.routeTo(EN_Routes.wrimpassesspre);
+  }
+  routeToOffloadGeneralModifyGrouped = (dataSource: ITracking) => {
+    this.allListsService.generalModifyListsGrouped_pageSign.GUid = dataSource.id;
+    this.allListsService.generalModifyListsGrouped_pageSign.listNumber = dataSource.listNumber;
+    this.allListsService.generalModifyListsGrouped_pageSign.groupId = dataSource.groupId;
+    this.allListsService.generalModifyListsGrouped_pageSign.zoneId = dataSource.zoneId;
+    this.allListsService.generalModifyListsGrouped_pageSign.zoneTitle = dataSource.zoneTitle;
+    this.allListsService.generalModifyListsGrouped_pageSign.trackNumber = dataSource.trackNumber;
+    this.utilsService.routeTo(EN_Routes.wrmlGeneralGModify);
   }
   routeTo = (route: string, UUID: string) => {
     this.utilsService.routeToByParams(route, UUID);
   }
-  backToPreviousPage = () => {
-    this._location.back();
-  }
-  backToParent = () => {
-    this.utilsService.routeTo(EN_Routes.wrmsfwu);
-  }
   setGetRanges = (dataSource: IOffLoadPerDay) => {
     dataSource.overalDuration = parseFloat(MathS.getRange(dataSource.overalDuration));
     dataSource.overalDistance = parseFloat(MathS.getRange(dataSource.overalDistance));
+  }
+  userKarkardValidation = (dataSource: object): boolean => {
+    if (MathS.isNull(dataSource['zoneId'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_zone);
+      return false;
+    }
+    if (MathS.isNull(dataSource['fromDate'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_fromDate);
+      return false;
+    }
+    if (MathS.isNull(dataSource['toDate'])) {
+      this.utilsService.snackBarMessageWarn(EN_messages.insert_toDate);
+      return false;
+    }
+    return true;
+  }
+  getLocalResizable = (): boolean => {
+    return this.profileService.getLocalResizable();
+  }
+  getLocalReOrderable = (): boolean => {
+    return this.profileService.getLocalReOrderable();
   }
 
 }

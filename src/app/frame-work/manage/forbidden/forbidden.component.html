@@ -1,42 +1,42 @@
-<section [hidden]="isCollapsed">
+<main [hidden]="forbiddenService._isCollapsedForbidden">
     <form #form="ngForm" (ngSubmit)="verification()">
-        <div class="input_2">
-            <div class="_key">ناحیه</div>
-            <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="forbiddenService.forbiddenReq.zoneId"
-                placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id" optionLabel="title" filter="true">
-            </p-dropdown>
-        </div>
-        <div class="input_2">
-            <div class="_key">از</div>
-            <div class="_value">
-                <app-date-jalali name="fromDate"
-                    (dateJalEvent)="forbiddenService.receiveFromDateJalali(forbiddenService.ENForbidden.forbidden, $event)"
-                    [dateObject]="forbiddenService.forbiddenReq.fromDate">
-                </app-date-jalali>
+        <section class="content">
+
+            <div class="input_2">
+                <div class="_key">ناحیه</div>
+                <p-dropdown name="zones" [options]="zoneDictionary" [(ngModel)]="forbiddenService.forbiddenReq.zoneId"
+                    placeholder="انتخاب مورد" [style]="{'minWidth': '10rem','width':'100%'}" optionValue="id"
+                    optionLabel="title" filter="true">
+                </p-dropdown>
             </div>
-        </div>
-        <div class="input_2">
-            <div class="_key">تا</div>
-            <div class="_value">
-                <app-date-jalali name="toDate"
-                    (dateJalEvent)="forbiddenService.receiveToDateJalali(forbiddenService.ENForbidden.forbidden, $event)"
-                    [dateObject]="forbiddenService.forbiddenReq.toDate">
-                </app-date-jalali>
+            <div class="input_2">
+                <div class="_key">از</div>
+                <div class="_value">
+                    <app-date-jalali name="fromDate" (dateJalEvent)="forbiddenService.receiveFromDateJalali($event)"
+                        [dateObject]="forbiddenService.forbiddenReq.fromDate">
+                    </app-date-jalali>
+                </div>
             </div>
-        </div>
-        <footer>
+            <div class="input_2">
+                <div class="_key">تا</div>
+                <div class="_value">
+                    <app-date-jalali name="toDate" (dateJalEvent)="forbiddenService.receiveToDateJalali($event)"
+                        [dateObject]="forbiddenService.forbiddenReq.toDate">
+                    </app-date-jalali>
+                </div>
+            </div>
             <button type="submit" class="btn_1">
                 مشاهده لیست
                 <i class="pi pi-list"></i>
             </button>
-        </footer>
-
+        </section>
     </form>
-</section>
+</main>
 
-<app-prime-table *ngIf="dataSource" [dataSource]="dataSource" [_outputFileName]="'forbidden'"
-    [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]" [_selectedColumnsToRemember]="'selectedForbidden'"
-    [_hasCollapsible]=true [_isCollaped]="isCollapsed" (collapsed)="isCollapsed = !isCollapsed"
-    (refreshedTable)="refreshTable()" (showedPictures)="showPictures($event)"
-    (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
+<app-prime-table *ngIf="closeTabService.saveDataForFNB" [dataSource]="closeTabService.saveDataForFNB"
+    [_outputFileName]="'forbidden'" [_checkUpName]="'forbidden'" [_numberOfExtraColumns]="[1,2]"
+    [_selectedColumnsToRemember]="'selectedForbidden'" [_hasCollapsible]=true
+    [_isCollaped]="forbiddenService._isCollapsedForbidden"
+    (collapsed)="forbiddenService._isCollapsedForbidden = !forbiddenService._isCollapsedForbidden"
+    (refreshedTable)="refreshTable()" (showedInMapSingle)="forbiddenService.showInMapSingle($event)">
 </app-prime-table>

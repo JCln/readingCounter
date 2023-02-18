@@ -3,13 +3,14 @@ import { ENDataMining } from 'interfaces/data-mining';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
 import { EN_messages } from 'interfaces/enums.enum';
 import { IMostReportInput } from 'interfaces/imanage';
-import { ENSelectedColumnVariables, IObjectIteratation, ITitleValue } from 'interfaces/ioverall-config';
+import { ENSelectedColumnVariables, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
 import { IReadingReportReq } from 'interfaces/ireports';
 
 import { Converter } from '../classes/converter';
 import { MathS } from '../classes/math-s';
 import { DictionaryWrapperService } from './dictionary-wrapper.service';
 import { InterfaceManagerService } from './interface-manager.service';
+import { ProfileService } from './profile.service';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -18,6 +19,7 @@ import { UtilsService } from './utils.service';
 export class DataMiningAnalysesService {
   ENSelectedColumnVariables = ENSelectedColumnVariables;
   ENDataMining = ENDataMining;
+  isCollapsedCranlz: boolean = false;
 
   dataMiningReq: IMostReportInput = {
     zoneId: 0,
@@ -26,15 +28,28 @@ export class DataMiningAnalysesService {
     counterReaderId: '',
     readingPeriodId: null,
     reportCode: 0,
-    year: 1401,
+    year: this.utilsService.getFirstYear(),
     zoneIds: null
   }
   constructor(
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
+    private profileService: ProfileService,
     private interfaceManagerService: InterfaceManagerService,
     private dictionaryWrapperService: DictionaryWrapperService
   ) { }
 
+  _isOrderByDate: boolean = false;
+  /* GET*/
+  getSearchInOrderTo = (): ISearchInOrderTo[] => {
+    if (this.profileService.getLocalValue()) {
+      this._isOrderByDate = false;
+      return this.utilsService.getSearchInOrderToReverse;
+    }
+    else {
+      this._isOrderByDate = true;
+      return this.utilsService.getSearchInOrderTo;
+    }
+  }
   /*COLUMNS */
   receiveFromDateJalali = (variable: ENDataMining, $event: string) => {
     this[variable].fromDate = $event;
@@ -108,19 +123,5 @@ export class DataMiningAnalysesService {
     return isValidateByDate ? this.datesValidation(readingReportReq) : this.periodValidations(readingReportReq)
   }
 
-  setColumnsChanges = (variableName: string, newValues: IObjectIteratation[]) => {
-    // convert all items to false
-    this[variableName].forEach(old => {
-      old.isSelected = false;
-    })
-
-    // merge new values
-    this[variableName].find(old => {
-      newValues.find(newVals => {
-        if (newVals.field == old.field)
-          old.isSelected = true;
-      })
-    })
-  }
 
 }

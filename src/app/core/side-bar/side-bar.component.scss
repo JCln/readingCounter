@@ -29,9 +29,9 @@ nav {
 }
 
 .title {
-  font-size: $font_xs;
+  font-size: var(--font_xs);
   font-weight: 600;
-  color: var(--primary_7);
+  color: var(--sidebar_4);
 }
 
 /* ***** */
@@ -39,8 +39,8 @@ nav {
   position: relative;
   right: 0;
   list-style-type: none;
-  padding: $font_xs 0;
-  margin-left: .2rem;
+  padding: var(--font_xs) 0;
+  margin-left: var(--font_02);
   margin-top: 0;
   height: 90vh;
   overflow-y: auto;
@@ -50,7 +50,7 @@ nav {
   scrollbar-width: none;
 
   @media (max-width: 550px) {
-    margin-top: 1rem;
+    margin-top: var(--font_xs);
   }
 }
 
@@ -60,12 +60,12 @@ ul::-webkit-scrollbar {
 }
 
 .ul li {
-  background: var(--secondary_4);
-  margin-left: .2rem;
-  margin-bottom: 0.2rem;
-  padding: $font_05 0.1rem;
-  border-radius: $font_2 0 0 $font_2;
-  border: 1px solid;
+  background: var(--sidebar_3);
+  margin-left: var(--font_02);
+  margin-bottom: var(--font_02);
+  padding: var(--font_05) var(--font_01);
+  border-radius: var(--font_2) 0 0 var(--font_2);
+  border: 1px solid var(--sidebar_3);
   cursor: pointer;
 }
 
@@ -74,9 +74,9 @@ ul::-webkit-scrollbar {
   direction: rtl;
 
   .btn {
-    font-size: $font_m;
+    font-size: var(--font_m);
     font-weight: 600;
-    color: var(--primary_7);
+    color: var(--sidebar_4);
 
     .on_show {
       display: flex;
@@ -96,32 +96,32 @@ ul::-webkit-scrollbar {
 
 .sub_item_1,
 .sub_item_2 {
-  background: var(--secondary_1);
-  border: 1px solid var(--primary_5);
-  padding: $font_05 $font_xs $font_05 0.87rem;
-  margin: 0.13rem 0.2rem;
+  background: var(--sidebar_2);
+  border: 1px solid var(--sidebar_1);
+  padding: var(--font_05) var(--font_xs) var(--font_05) var(--font_xxs);
+  margin: 0.13rem var(--font_02);
   text-align: right;
 
   height: auto;
   border-radius: $border_15;
   overflow: visible;
 
-  color: var(--primary_5);
-  font-size: 1.1rem;
+  color: var(--sidebar_1);
+  font-size: var(--font_ss);
   font-weight: 600;
   outline: none;
 
   &:hover,
   &:focus {
     background: linear-gradient(to left, var(--primary_3), rgba(255, 0, 0, 0));
-    color: var(--white);
+    color: var(--sidebar_5);
   }
 }
 
 .active {
   background: linear-gradient(to left, rgba(255, 0, 0, 0), var(--primary_3));
-  color: var(--primary_7);
-  border: 1px solid var(--secondary_4);
+  color: var(--sidebar_4);
+  border: 1px solid var(--sidebar_3);
 }
 
 .ul_items {
@@ -133,7 +133,7 @@ ul::-webkit-scrollbar {
 .ul::after {
   content: '';
   position: absolute;
-  background: var(--secondary_1);
+  background: var(--sidebar_back2);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
   top: 0;
   bottom: 0;
@@ -147,7 +147,7 @@ ul::-webkit-scrollbar {
 .ul::before {
   content: '';
   position: absolute;
-  background: var(--primary_5);
+  background: var(--sidebar_back1);
   clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
   top: 0;
   bottom: 0;
@@ -163,14 +163,14 @@ ul::-webkit-scrollbar {
 .btn_2 {
   position: relative;
   cursor: pointer;
-  border-radius: $font_2 0 0 $font_2;
-  background: var(--secondary_4);
-  margin-bottom: 0.25rem;
-  padding: $font_xxs $font_05;
+  border-radius: var(--font_2) 0 0 var(--font_2);
+  background: var(--sidebar_3);
+  margin-bottom: var(--font_025);
+  padding: var(--font_xxs) var(--font_05);
   border: 1px solid;
 
   @media (max-width: 550px) {
-    margin-bottom: .1rem;
+    margin-bottom: var(--font_01);
   }
 }
 
@@ -187,31 +187,31 @@ ul::-webkit-scrollbar {
     width: 15rem;
     right: 3.4rem;
     background: var(--secondary_3);
-    padding: $font_05;
+    padding: var(--font_05);
     border-radius: $border_15;
     height: 13rem;
     z-index: 4;
     bottom: 0;
-    box-shadow: -3px 0px 3px 0px var(--primary_5);
+    box-shadow: -3px 0px 3px 0px var(--sidebar_1);
     overflow-y: auto;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
 
     h3 {
-      font-size: $font_m;
+      font-size: var(--font_m);
       font-weight: 600;
-      color: var(--primary_7);
+      color: var(--sidebar_4);
       text-align: center;
-      color: var(--primary_7);
+      color: var(--sidebar_4);
     }
 
     & a {
       display: block;
-      padding-right: .3rem;
-      margin-bottom: .3rem;
+      padding-right: var(--font_03);
+      margin-bottom: var(--font_03);
       color: var(--secondary_6);
-      font-size: $font_m;
+      font-size: var(--font_m);
       font-weight: 600;
       border-radius: $border_15;
     }
@@ -226,7 +226,7 @@ ul::-webkit-scrollbar {
 
   .li_2 {
     h3 {
-      color: var(--primary_5);
+      color: var(--sidebar_1);
     }
   }
 
@@ -253,6 +253,14 @@ ul::-webkit-scrollbar {
         top: -7rem;
       }
     }
+
+    ::after {
+      content: '';
+      right: 2.4rem;
+      position: absolute;
+      width: 4rem;
+      min-height: 3rem;
+    }
   }
 
   @media (max-width: 550px) {
@@ -262,7 +270,7 @@ ul::-webkit-scrollbar {
     right: 0;
     background: #F2F3F4;
     border-left: 2px solid gray;
-    padding: 1rem 0 0 .5rem;
+    padding: var(--font_xs) 0 0 var(--font_05);
     border-radius: 15px;
   }
 }
@@ -272,10 +280,10 @@ i.icons {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0.2rem 0 .3rem;
-  font-size: $font_l;
+  margin: 0 var(--font_02) 0 var(--font_03);
+  font-size: var(--font_l);
   width: 1.87rem;
-  color: var(--primary_5);
+  color: var(--sidebar_1);
 }
 
 @keyframes toggle_side {
@@ -305,7 +313,7 @@ i.icons {
 .pi-angle-up {
   transform: rotate(0);
   transition: transform ease-in-out 150ms;
-  color: var(--primary_5);
+  color: var(--sidebar_1);
 }
 
 //

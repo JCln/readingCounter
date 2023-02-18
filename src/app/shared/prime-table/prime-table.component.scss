@@ -1,4 +1,6 @@
 @import 'primeNG';
+@import 'button';
+@import 'input';
 @import 'tooltip.scss';
 
 /* for users all */
@@ -9,16 +11,17 @@
 
 .more_configs {
   opacity: 0;
+  gap: var(--font_02);
   visibility: hidden;
   position: absolute;
   display: flex;
   justify-content: space-around;
   left: 2rem;
-  top: -3rem;
+  top: calc(-1 * var(--font_3));
   z-index: 100;
   background: var(--white);
-  margin: $font_xs;
-  padding: $font_xs 0.2rem;
+  margin: var(--font_xs);
+  padding: var(--font_xs) var(--font_02);
   text-align: center;
   border-radius: $border_15;
   box-shadow: 0px 2px 3px 1px var(--thirdy_3);
@@ -27,14 +30,14 @@
     content: '';
     position: absolute;
     top: 0;
-    left: -1.5rem;
-    height: 5rem;
+    left: calc(-1 * var(--font_l));
+    height: var(--font_5);
     width: 12rem;
   }
 }
 
 .bbr {
-  padding: $font_05;
+  padding: var(--font_05);
   background-color: #3686c933;
   border-radius: $border_50;
 
@@ -67,4 +70,35 @@
   outline: none;
   border: none;
   color: inherit;
+}
+
+._haveimage {
+  color: var(--pink_500);
+}
+
+._anything {
+  background: var(--primary_3) !important;
+  color: var(--white) !important;
+  min-width: 12rem;
+  border-radius: $border_5;
+  display: inline-flex;
+  font-size: var(--font_s);
+
+  td {
+    border: 0 !important;
+  }
+}
+
+section.content {
+  display: flex;
+  align-items: center;
+  direction: rtl;
+  gap: 1rem;
+  height: 2rem;
+  background: var(--thirdy_2);
+  border-radius: $border_7;
+
+  .icon_reset {
+    cursor: pointer;
+  }
 }

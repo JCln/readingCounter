@@ -5,7 +5,7 @@ import { UsersAllComponent } from './users-all.component';
 
 const routes: Routes = [
   { path: '', component: UsersAllComponent },
-  { path: 'loggins/:UUID', loadChildren: () => import('./user-loggins/user-loggins.module').then(userLoggins => userLoggins.UserLogginsModule) }
+  { path: 'loggins', loadChildren: () => import('./user-loggins/user-loggins.module').then(userLoggins => userLoggins.UserLogginsModule) }
 ];
 
 @NgModule({

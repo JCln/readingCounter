@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISnackBar, ISnackBarSignal } from 'interfaces/ioverall-config';
+import { MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ProfileService } from 'services/profile.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
+import { MathS } from 'src/app/classes/math-s';
+import { ShowImgDgComponent } from 'src/app/shared/show-img-dg/show-img-dg.component';
+import { ShowVideoDgComponent } from 'src/app/shared/show-video-dg/show-video-dg.component';
+
 
 @Component({
   selector: 'app-snack-bar',
@@ -9,31 +16,37 @@ import { SnackWrapperService } from 'services/snack-wrapper.service';
   styleUrls: ['./snack-bar.component.scss']
 })
 export class SnackBarComponent implements OnInit {
+  ref: DynamicDialogRef;
 
-  constructor(private _snackBar: MatSnackBar, private snackWrapperService: SnackWrapperService) { }
+  constructor(
+    private _snackBar: MatSnackBar,
+    private snackWrapperService: SnackWrapperService,
+    private messageService: MessageService,
+    public dialogService: DialogService,
+    public profileService: ProfileService
+  ) { }
 
   openSnackBar(snack: ISnackBar) {
-    if (snack.message === '')
-      return;
-    this._snackBar.open(snack.message, '', {
-      duration: snack.duration,
-      horizontalPosition: 'start',
-      verticalPosition: 'bottom',
-      direction: 'rtl',
-      panelClass: [snack.backColor]
-    });
+    if (!MathS.isNull(snack.message)) {
+      this._snackBar.open(snack.message, '', {
+        duration: snack.duration,
+        horizontalPosition: 'start',
+        verticalPosition: 'bottom',
+        direction: 'rtl',
+        panelClass: [snack.backColor]
+      });
+    }
   }
   openSnackBarSignal(snack: ISnackBarSignal) {
-    if (snack.message === '')
-      return;
-    this._snackBar.open(snack.message, 'x', {
-      duration: snack.duration,
-      horizontalPosition: 'start',
-      verticalPosition: 'top',
-      direction: 'rtl',
-
-      panelClass: [snack.backColor, 'newline']
-    });
+    if (!MathS.isNull(snack.message)) {
+      this._snackBar.open(snack.message, 'x', {
+        duration: snack.duration,
+        horizontalPosition: 'start',
+        verticalPosition: 'top',
+        direction: 'rtl',
+        panelClass: [snack.backColor, 'newline']
+      });
+    }
   }
   snackSignal = () => {
     this.snackWrapperService.snackStatusSignal.subscribe(res => {
@@ -49,9 +62,56 @@ export class SnackBarComponent implements OnInit {
       }
     })
   }
+  toast = () => {
+    this.snackWrapperService.toastStatusSignal.subscribe((res) => {
+      if (res) {
+        this.messageService.add(res);
+      }
+    })
+  }
   ngOnInit(): void {
     this.snackSimple();
     this.snackSignal();
+    this.toast();
+  }
+  openImgDialog = (body: object) => {
+    this.ref = this.dialogService.open(ShowImgDgComponent, {
+      data: { body },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
+  openVideoDialog = (body: object) => {
+    this.ref = this.dialogService.open(ShowVideoDgComponent, {
+      data: { body },
+      rtl: true,
+      width: '80%',
+    })
+    this.ref.onClose.subscribe(async res => {
+      if (res)
+        console.log(res);
+
+    });
+  }
+  openNotifyType = (message: any) => {
+    console.log(message.clickName);
+
+    switch (message.clickName) {
+      case 'openVideoDialog':
+        this.openVideoDialog(message);
+        break;
+      case 'openImgDialog':
+        this.openImgDialog(message);
+        break;
+
+      default:
+        break;
+    }
   }
 
 }

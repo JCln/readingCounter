@@ -1,7 +1,1 @@
 @import 'shared_dialog.scss';
-
-.mat-dialog-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8rem, auto));
-  gap: .5rem;
-}

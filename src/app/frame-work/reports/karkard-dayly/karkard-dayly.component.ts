@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportKarkard } from 'interfaces/ireports';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -14,34 +13,17 @@ import { MathS } from 'src/app/classes/math-s';
   styleUrls: ['./karkard-dayly.component.scss']
 })
 export class KarkardDaylyComponent extends FactoryONE {
-  isCollapsed: boolean = false;
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  _isOrderByDate: boolean = true;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   zoneDictionary: IDictionaryManager[] = [];
   karbariDictionary: IDictionaryManager[] = [];
+  fragmentByZoneDictionary: IDictionaryManager[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
 
-  dataSource: IReadingReportKarkard[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -52,12 +34,17 @@ export class KarkardDaylyComponent extends FactoryONE {
       this.verification();
     }
     if (this.closeTabService.saveDataForRRkarkardDaily) {
-      this.dataSource = this.closeTabService.saveDataForRRkarkardDaily;
       this.setGetRanges();
     }
+    this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.zoneDictionary = await this.readingReportManagerService.getZoneDictionary();
+    this.getFragmentByZone()
     this.receiveYear();
+  }
+  getFragmentByZone = async () => {
+    if (this.readingReportManagerService.karkardDailyReq.zoneId)
+      this.fragmentByZoneDictionary = await this.readingReportManagerService.getFragmentMasterByZoneDictionary(this.readingReportManagerService.karkardDailyReq.zoneId);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -66,26 +53,17 @@ export class KarkardDaylyComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportManagerService.karkardDailyReq.readingPeriodId = null, this.readingReportManagerService.karkardDailyReq.year = 0) : (this.readingReportManagerService.karkardDailyReq.fromDate = '', this.readingReportManagerService.karkardDailyReq.toDate = '');
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardDailyReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.karkardDailyReq, this.readingReportManagerService._isOrderByDate);
     if (temp)
       this.connectToServer();
   }
 
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.readingReportManagerService.karkardDailyReq);
+    this.closeTabService.saveDataForRRkarkardDaily = await this.readingReportManagerService.portRRTest(ENInterfaces.ListKarkardDaily, this.readingReportManagerService.karkardDailyReq);
     this.setGetRanges();
-    this.closeTabService.saveDataForRRkarkardDaily = this.dataSource;
-  }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
   }
   private setGetRanges = () => {
-    this.dataSource.forEach(item => {
+    this.closeTabService.saveDataForRRkarkardDaily.forEach(item => {
       item.duration = parseFloat(MathS.getRange(item.duration));
     })
   }

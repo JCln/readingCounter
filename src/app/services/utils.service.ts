@@ -1,8 +1,20 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ENSnackBarColors, ENSnackBarTimes, ITitleValue } from 'interfaces/ioverall-config';
+import { ENSnackBarColors, ENSnackBarTimes, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
+import { EnvService } from 'services/env.service';
 import { SnackWrapperService } from 'services/snack-wrapper.service';
 
+import { ConfirmTextDialogComponent } from '../frame-work/manage/tracking/confirm-text-dialog/confirm-text-dialog.component';
+
+export interface IDialogMessage {
+  messageTitle: string,
+  messageTitleTwo?: string,
+  minWidth: string,
+  isInput: boolean,
+  isDelete: boolean,
+  doesNotReturnButton?: boolean
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -12,28 +24,48 @@ export class UtilsService {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private envService: EnvService,
+    private dialog: MatDialog,
     private snackWrapperService: SnackWrapperService
   ) { }
 
   getYears = (): ITitleValue[] => {
-    return [
-      { title: '1401', value: 1401 },
-      { title: '1400', value: 1400 },
-      { title: '1399', value: 1399 },
-      { title: '1398', value: 1398 },
-      { title: '1397', value: 1397 },
-      { title: '1396', value: 1396 },
-      { title: '1395', value: 1395 },
-      { title: '1402', value: 1402 }
-    ];
+    return this.envService.years;
   }
-  getQuantity = (): ITitleValue[] => {
-    return [
-      { title: '10', value: 10 },
-      { title: '20', value: 20 },
-      { title: '30', value: 30 }
-    ];
+  getAppVersion = (): string => {
+    return this.envService.version;
   }
+  // should use getFirstYear function for Recognizing and performance
+  getFirstYear = (): number => {
+    return this.envService.years[0].value;
+  }
+  getDeleteDictionary = (): any[] => {
+    return this.envService.getDeleteDictionary;
+  }
+  getSearchInOrderTo: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: true,
+      key: 'Date'
+    },
+    {
+      title: 'دوره',
+      isSelected: false,
+      key: 'period'
+    }
+  ]
+  getSearchInOrderToReverse: ISearchInOrderTo[] = [
+    {
+      title: 'تاریخ',
+      isSelected: false,
+      key: 'Date'
+    },
+    {
+      title: 'دوره',
+      isSelected: true,
+      key: 'period'
+    }
+  ]
 
   // snack bar
   snackBarMessageSuccess = (message: string) => {
@@ -48,7 +80,26 @@ export class UtilsService {
   snackBarMessage = (message: string, time: ENSnackBarTimes, color: ENSnackBarColors) => {
     this.snackWrapperService.openSnackBar(message, time, color);
   }
-
+  firstConfirmDialog = (config: IDialogMessage): Promise<any> => {
+    config.doesNotReturnButton = config.doesNotReturnButton == false ? false : true
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(ConfirmTextDialogComponent, {
+        minWidth: config.minWidth,
+        data: {
+          title: config.messageTitle,
+          title2: config.messageTitleTwo,
+          isInput: config.isInput,
+          isDelete: config.isDelete,
+          doesNotReturnButton: config.doesNotReturnButton
+        }
+      });
+      dialogRef.afterClosed().subscribe(desc => {
+        if (desc) {
+          resolve(desc);
+        }
+      })
+    })
+  }
   // routing
   routeToByUrl = (router: string) => {
     this.router.navigateByUrl(router);
@@ -68,11 +119,5 @@ export class UtilsService {
   getRouteBySplit = (spliter: string): string => {
     return this.router.url.split(spliter).pop();
   }
-  //   
-  /* STORAGE CONFIGS*/
-  // cleanColumnStorage = (key: string) => {
-  //   this.browserStorageService.removeSession(key);
-  // }
-  /**/
 
 }

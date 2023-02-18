@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InteractionService } from 'services/interaction.service';
+import { ProfileService } from 'services/profile.service';
 import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 
 @Component({
@@ -8,12 +10,36 @@ import { SpinnerWrapperService } from 'services/spinner-wrapper.service';
 })
 export class SpinnerComponent implements OnInit {
   notification: boolean = false;
+  networkReq: boolean = false;
+  _hasSpinner: boolean = false;
 
-  constructor(private spinnerWrapper: SpinnerWrapperService) { }
+  constructor(
+    private spinnerWrapper: SpinnerWrapperService,
+    private profileService: ProfileService,
+    private interactionService: InteractionService
+  ) { }
 
   ngOnInit(): void {
-    this.spinnerWrapper.loadingStatus$.subscribe(res =>
-      this.notification = res
+    this.spinnerJob();
+  }
+  spinnerJob = () => {
+    this.spinnerWrapper.loadingStatus$.subscribe((res: any) => {
+      this._hasSpinner = this.profileService.getHasCanclableSpinner() ? true : false;
+
+      if (res.isNetwork) {
+        this.networkReq = res.value;
+        this.notification = false;
+      }
+      else {
+        this.notification = res.value;
+        this.networkReq = false;
+      }
+    }
     )
+  }
+  cancelMe = () => {
+    this.spinnerWrapper.stopPending();
+    this.notification = false;
+    this.networkReq = false;
   }
 }

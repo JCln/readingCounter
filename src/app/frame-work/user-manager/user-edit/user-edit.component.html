@@ -1,29 +1,30 @@
 <mat-horizontal-stepper #stepper>
 
-    <mat-step [stepControl]="personalizeInfo">
-        <form *ngIf="personalizeInfo">
+    <mat-step [stepControl]="closeTabService.saveDataForEditUsers.userInfo">
+        <form *ngIf="closeTabService.saveDataForEditUsers.userInfo">
             <ng-template matStepLabel>مشخصات کاربر</ng-template>
-            <app-user-inputs [editInfo]="personalizeInfo" style="direction: rtl;"></app-user-inputs>
+            <app-user-inputs [editInfo]="closeTabService.saveDataForEditUsers.userInfo"
+                style="direction: rtl;"></app-user-inputs>
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="provinceItemsData">
-        <form *ngIf="provinceItemsData">
+    <mat-step [stepControl]="closeTabService.saveDataForEditUsers.provinceItems">
+        <form *ngIf="closeTabService.saveDataForEditUsers.provinceItems">
             <ng-template matStepLabel>دسترسی به ناحیه</ng-template>
-            <app-select-zone [provinceItemsData]="provinceItemsData"></app-select-zone>
+            <app-select-zone [provinceItemsData]="closeTabService.saveDataForEditUsers.provinceItems"></app-select-zone>
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="addUserData">
+    <mat-step [stepControl]="closeTabService.saveDataForEditUsers.appItems">
         <ng-template matStepLabel>سطح دسترسی به خدمات</ng-template>
-        <app-select-action [userAddData]="addUserData"></app-select-action>
+        <app-select-action [userAddData]="closeTabService.saveDataForEditUsers.appItems"></app-select-action>
     </mat-step>
 
     <mat-step>
         <ng-template matStepLabel>گروه دسترسی</ng-template>
         <h2>گروه دسترسی</h2>
         <section class="role_items">
-            <div class="roles" *ngFor="let roleItems of roleItemsData">
+            <div class="roles" *ngFor="let roleItems of closeTabService.saveDataForEditUsers.roleItems">
                 <mat-checkbox [(ngModel)]="roleItems.isSelected" name="roleItems.title">
                     {{roleItems.title}}
                 </mat-checkbox>

@@ -1,6 +1,7 @@
 @import 'variable';
 @import 'button.scss';
 @import 'input.scss';
+@import 'choose-files.scss';
 
 .container {
   direction: rtl;
@@ -10,79 +11,30 @@
   background: var(--secondary_1);
   box-shadow: 1px 1px 8px 4px var(--secondary_4);
   text-align: center;
-  padding: $font_xs 0;
+  padding: var(--font_xs) 0;
   justify-content: space-around;
   border-radius: $border_15;
   min-height: 25rem;
 }
 
 ._desc {
-  margin: $font_xs 0;
-  width: 90%;
+  margin: var(--font_xs) auto;
   border-radius: $border_15;
-}
-
-.title {
-  color: var(--primary_2);
-  text-align: center;
-  margin: $font_xs $font_05;
-  font-size: 1.6rem;
-}
-
-.change_pass {
-
-  button {
-    background: var(--primary_2);
-    margin: $font_2 auto;
-    color: var(--white);
-    width: 100%;
-  }
-}
-
-input {
-  color: var(--secondary_5);
-  margin: 0 auto;
-  box-shadow: 1px 1px 8px 1px var(--secondary_4);
 }
 
 .input_1 {
   margin: 0 auto;
-  width: 19rem;
-  text-align: center;
-}
-
-._choose_file {
   width: 100%;
-  border: 2px solid var(--primary_2);
-  color: var(--primary_2);
+  max-width: 19rem;
   text-align: center;
-  border-radius: 100vmax;
-  margin-bottom: 1rem;
 }
 
 .__custom {
-  height: 2.5rem;
+  height: var(--font_25);
   border: 1px solid var(--primary_2);
   width: auto;
   color: var(--primary_2);
   min-width: 4rem;
-}
-
-.not_choosen_file {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  white-space: nowrap;
-  width: 100%;
-  padding: .5rem;
-  background-color: var(--white);
-  color: var(--secondary_6);
-  font-size: 1.3rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 1px 1px 2px 0px var(--secondary_4);
-  border: 1px solid var(--secondary_5);
 }
 
 span,
@@ -92,32 +44,5 @@ small {
 }
 
 span {
-  font-size: 2.5rem;
-}
-
-.label_choose_file {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  white-space: nowrap;
-  overflow: hidden;
-  padding: .5rem;
-  width: 100%;
-  max-width: 19rem;
-  background-color: var(--white);
-  color: var(--secondary_6);
-  text-align: center;
-  border-radius: $border_15;
-  font-size: 1.3rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 1px 1px 2px 0px var(--secondary_4);
-  border: 1px solid;
-}
-
-input[type="file"] {
-  // display: none;
-  position: absolute;
-  left: -99999rem;
+  font-size: var(--font_25);
 }

@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ENInterfaces } from 'interfaces/en-interfaces.enum';
-import { IDictionaryManager, ISearchInOrderTo, ITitleValue } from 'interfaces/ioverall-config';
-import { IReadingReportMaster, IReadingReportReq } from 'interfaces/ireports';
+import { IDictionaryManager, ITitleValue } from 'interfaces/ioverall-config';
+import { SortEvent } from 'primeng/api';
 import { CloseTabService } from 'services/close-tab.service';
 import { ReadingReportManagerService } from 'services/reading-report-manager.service';
 import { FactoryONE } from 'src/app/classes/factory';
@@ -12,41 +12,21 @@ import { FactoryONE } from 'src/app/classes/factory';
   styleUrls: ['./master.component.scss']
 })
 export class MasterComponent extends FactoryONE {
-  isCollapsed: boolean = false;
-  readingReportReq: IReadingReportReq = {
-    fromDate: '',
-    toDate: '',
-    counterReaderId: '',
-    readingPeriodId: null,
-    reportCode: 0,
-    year: 1401
-  }
-  searchInOrderTo: ISearchInOrderTo[] = [
-    {
-      title: 'تاریخ',
-      isSelected: true
-    },
-    {
-      title: 'دوره',
-      isSelected: false
-    }
-  ]
-  dataSource: IReadingReportMaster[] = [];
-
-  _selectCols: any[] = [];
-  _selectedColumns: any[];
-
-  _isOrderByDate: boolean = true;
+  rowGroupMetadata: any;
   _selectedKindId: string = '';
   _years: ITitleValue[] = [];
   readingPeriodKindDictionary: IDictionaryManager[] = [];
   readingPeriodDictionary: IDictionaryManager[] = [];
-
+  aggregateOptions = [
+    { field: 'zoneTitle', header: 'ناحیه' },
+    { field: 'reportTitle', header: 'عنوان گزارش' },
+    { field: 'itemCount', header: 'تعداد' },
+  ];
+  canShowTable: boolean = true;
 
   constructor(
     public readingReportManagerService: ReadingReportManagerService,
-
-    private closeTabService: CloseTabService
+    public closeTabService: CloseTabService
   ) {
     super();
   }
@@ -56,14 +36,11 @@ export class MasterComponent extends FactoryONE {
       this.closeTabService.saveDataForRRMaster = null;
       this.verification();
     }
-    this.readingReportReq = this.readingReportManagerService.masterReq;
-    // console.log(this.readingReportReq);
 
-    if (this.closeTabService.saveDataForRRMaster) {
-      this.dataSource = this.closeTabService.saveDataForRRMaster;
-    }
+    this.readingReportManagerService.getSearchInOrderTo();
     this.readingPeriodKindDictionary = await this.readingReportManagerService.getReadingPeriodKindDictionary();
     this.receiveYear();
+    // this.refreshTableAfterGrouping(this.closeTabService.offloadedGroupReq._selectedAggregate);
   }
   receiveYear = () => {
     this._years = this.readingReportManagerService.getYears();
@@ -72,22 +49,33 @@ export class MasterComponent extends FactoryONE {
     this.readingPeriodDictionary = await this.readingReportManagerService.getReadingPeriodDictionary(this._selectedKindId);
   }
   verification = async () => {
-    this._isOrderByDate ? (this.readingReportReq.readingPeriodId = null, this.readingReportReq.year = 0) : (this.readingReportReq.fromDate = '', this.readingReportReq.toDate = '')
-    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportReq, this._isOrderByDate);
+    const temp = this.readingReportManagerService.verificationRRShared(this.readingReportManagerService.masterReq, this.readingReportManagerService._isOrderByDate);
     if (temp) {
       this.connectToServer();
     }
   }
 
   connectToServer = async () => {
-    this.dataSource = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportReq);
-    this.closeTabService.saveDataForRRMaster = this.dataSource;
+    this.closeTabService.saveDataForRRMaster = await this.readingReportManagerService.portRRTest(ENInterfaces.ReadingReportMasterWithParam, this.readingReportManagerService.masterReq);
   }
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this._selectCols.filter(col => val.includes(col));
+  customSort(event: SortEvent) {
+    event.data.sort((data1, data2) => {
+      let value1 = data1[event.field];
+      let value2 = data2[event.field];
+      let result = null;
+
+      if (value1 == null && value2 != null)
+        result = -1;
+      else if (value1 != null && value2 == null)
+        result = 1;
+      else if (value1 == null && value2 == null)
+        result = 0;
+      else if (typeof value1 === 'string' && typeof value2 === 'string')
+        result = value1.localeCompare(value2);
+      else
+        result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+      return (event.order * result);
+    });
   }
 }
