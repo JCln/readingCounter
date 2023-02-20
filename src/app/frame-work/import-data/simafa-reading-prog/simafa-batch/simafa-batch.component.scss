@@ -45,7 +45,7 @@ section.dynamic_content {
 
 .check_boxes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 14rem));
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 9rem));
   gap: var(--font_05);
 }
 

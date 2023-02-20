@@ -14,12 +14,12 @@
                     </mat-select>
                 </div>
 
-                <div class="input_2 this">
+                <div class="input_2">
                     <div class="_key">درصد علی‌الحساب</div>
                     <input class="_value" min="0" max="100" type="number" name="alalHesabPercent"
                         [(ngModel)]="allImportsService.allImports_batch.alalHesabPercent">
                 </div>
-                <div class="input_2 this">
+                <div class="input_2">
                     <div class="_key">درصد تصویر</div>
                     <input class="_value" min="0" max="100" type="number" name="imagePercent"
                         [(ngModel)]="allImportsService.allImports_batch.imagePercent">
@@ -91,8 +91,8 @@
                                 <div *ngIf="!dataSource.counterReaderName">
                                     <p-dropdown name="counterReaderId" [options]="userCounterReaderDictionary"
                                         [(ngModel)]="allImportsService.allImports_batch.routeAndReaderIds[ri].counterReaderId"
-                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}"
-                                        optionValue="id" optionLabel="title" [filter]="true" [showClear]="true">
+                                        placeholder="انتخاب مورد" [style]="{'width':'100%'}" optionValue="id"
+                                        optionLabel="title" [filter]="true" [showClear]="true">
                                     </p-dropdown>
                                 </div>
                             </ng-container>

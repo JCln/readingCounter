@@ -13,7 +13,7 @@
 
 section.content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 11rem));
   gap: var(--font_05);
   align-items: center;
 }

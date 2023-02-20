@@ -24,7 +24,7 @@
   display: flex;
   flex-wrap: wrap;
   direction: rtl;
-  gap: var(--font_xxs);
+  gap: var(--font_05);
 }
 
 .under_zero {
@@ -36,7 +36,8 @@
 .p-field-radiobutton {
   display: flex;
   align-items: center;
-  margin-left: var(--font_xs);
+  /*has collision with primeNG margin left so should implement important */
+  margin-left: var(--font_xs) !important;
 
   label {
     font-size: var(--font_s);
